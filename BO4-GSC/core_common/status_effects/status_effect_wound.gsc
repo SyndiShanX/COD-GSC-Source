@@ -34,8 +34,7 @@ wound_apply(var_756fda07, weapon, applicant) {
 
   var_da1d7911 = [];
   var_da1d7911[0] = {
-    #name: "cleanse_buff",
-    #var_b861a047: undefined
+    #name: "cleanse_buff", #var_b861a047: undefined
   };
 
   if(self.owner.health > 0) {

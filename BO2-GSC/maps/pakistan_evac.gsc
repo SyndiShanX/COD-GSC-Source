@@ -159,7 +159,7 @@ player_enters_hanger() {
   level.vh_player_soct thread kill_boost_if_active();
   level.vh_player_soct showpart("tag_gunner_turret1");
   s_align = getstruct("chinese_standoff", "targetname");
-  v_player_soct_start_pos = getstartorigin(s_align.origin, (0, 0, 0), % v_pakistan_9_4_standoff_approach_soct1);
+  v_player_soct_start_pos = getstartorigin(s_align.origin, (0, 0, 0), %v_pakistan_9_4_standoff_approach_soct1);
   level.vh_player_soct setvehgoalpos(v_player_soct_start_pos, 0, 0);
   level.vh_player_soct setneargoalnotifydist(768);
   level.vh_player_soct thread lerp_vehicle_speed(level.vh_player_soct getspeedmph(), 119, 6);
@@ -215,7 +215,7 @@ player_enters_hanger() {
     scene_wait("standoff_approach_burned_player");
     level thread burned_dialog("sect_there_s_our_evac_sit_0", "harp_finally_0");
     s_align = getstruct("chinese_standoff", "targetname");
-    v_harper_idle_pos = getstartorigin(s_align.origin, (0, 0, 0), % ch_pakistan_9_4_standoff_burned_idle_harper);
+    v_harper_idle_pos = getstartorigin(s_align.origin, (0, 0, 0), %ch_pakistan_9_4_standoff_burned_idle_harper);
     str_harper_exit_scene = "harper_burned_walk";
   } else {
     n_lerp_time = 0.1;
@@ -239,7 +239,7 @@ player_enters_hanger() {
     scene_wait("standoff_approach_not_burned_harper");
     level thread burned_dialog("sect_there_s_our_evac_sit_0", undefined);
     s_align = getstruct("chinese_standoff", "targetname");
-    v_harper_idle_pos = getstartorigin(s_align.origin, (0, 0, 0), % ch_pakistan_9_4_standoff_idle_harper);
+    v_harper_idle_pos = getstartorigin(s_align.origin, (0, 0, 0), %ch_pakistan_9_4_standoff_idle_harper);
     str_harper_exit_scene = "harper_standoff_idle_not_burned";
   }
 

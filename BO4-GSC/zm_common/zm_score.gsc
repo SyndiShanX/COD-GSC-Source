@@ -237,8 +237,7 @@ player_add_points(event, mod, hit_location, e_target, zombie_team, damage_weapon
 
   if(event === "rebuild_board") {
     level notify(#"rebuild_board", {
-      #player: self,
-      #points: player_points
+      #player: self, #points: player_points
     });
   }
 
@@ -433,8 +432,7 @@ add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "", var_e6e6150
   self zm_stats::function_301c4be2("boas_scoreEarned", n_points_to_add_to_currency);
   self zm_stats::function_c0c6ab19(#"zearned", n_points_to_add_to_currency, 1);
   level notify(#"earned_points", {
-    #player: self,
-    #points: points
+    #player: self, #points: points
   });
   level thread zm_hero_weapon::function_3fe4a02e(self, points, str_awarded_by);
   self contracts::increment_zm_contract(#"contract_zm_points", n_points_to_add_to_currency, # "zstandard");
@@ -449,8 +447,7 @@ add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "", var_e6e6150
   }
 
   self notify(#"earned_points", {
-    #n_points: points,
-    #str_awarded_by: str_awarded_by
+    #n_points: points, #str_awarded_by: str_awarded_by
   });
 }
 
@@ -479,8 +476,7 @@ minus_to_player_score(points, b_forced = 0) {
   self incrementplayerstat("scoreSpent", points);
   self zm_stats::function_301c4be2("boas_scoreSpent", points);
   level notify(#"spent_points", {
-    #player: self,
-    #points: points
+    #player: self, #points: points
   });
   self notify(#"spent_points", {
     #points: points

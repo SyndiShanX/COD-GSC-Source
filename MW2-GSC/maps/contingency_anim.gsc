@@ -81,11 +81,7 @@ generic_human() {
   level.scr_anim["generic"]["tear_gas_guy2"] = % contingency_teargas_2;
   level.scr_anim["generic"]["tear_gas_guy3"] = % contingency_teargas_3;
 
-  //FRAME 29 "attach rocket"
-  //FRAME 47 "fire rocket"
-  //FRAME 80 "drop rocket"
-
-  addNotetrack_customFunction("price", "price_land", ::price_land_fx);
+  //FRAME 29 "attach rocket"//FRAME 47 "fire rocket"//FRAME 80 "drop rocket"addNotetrack_customFunction("price", "price_land", ::price_land_fx);
   addNotetrack_customFunction("price", "price_land_settle", ::price_land_settle_fx);
   addNotetrack_customFunction("price", "price_slide_start", ::price_slide_fx);
   addNotetrack_customFunction("price", "price_slide_end", ::price_stop_slide_fx);

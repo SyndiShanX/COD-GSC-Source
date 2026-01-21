@@ -56,8 +56,7 @@ __init__() {
   }
 
   level.var_8eaf991c[level.var_8eaf991c.size] = {
-    #round: 1,
-    #limit: 2
+    #round: 1, #limit: 2
   };
 
   if(!isDefined(level.var_8eaf991c)) {
@@ -67,8 +66,7 @@ __init__() {
   }
 
   level.var_8eaf991c[level.var_8eaf991c.size] = {
-    #round: 10,
-    #limit: 4
+    #round: 10, #limit: 4
   };
   level.var_53c1f615 = [];
 
@@ -277,8 +275,7 @@ function_42a1dabd() {
   self ghost();
   self notsolid();
   var_ee3cfcfe = {
-    #origin: self.origin,
-    #angles: self.angles
+    #origin: self.origin, #angles: self.angles
   };
   var_ee3cfcfe thread scene::play(var_67f0b3a6, array(self));
   self.var_e0c4c154 = 0;
@@ -433,9 +430,7 @@ function_f78e62a8() {
   if(isDefined(var_51601537)) {
     self forceteleport(var_51601537.origin);
     return {
-      #origin: var_51601537.origin,
-      #angles: self.angles,
-      #tacpoint: var_51601537
+      #origin: var_51601537.origin, #angles: self.angles, #tacpoint: var_51601537
     };
   }
 }

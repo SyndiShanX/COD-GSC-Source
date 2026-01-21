@@ -26,7 +26,7 @@ main() {
   assert(isDefined(startNode));
   self OrientMode("face angle", startnode.angles[1]);
 
-  self setFlaggedAnimKnoballRestart("climbanim", climbAnim, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("climbanim", climbAnim, %body, 1, .1, 1);
 
   endnode = self getnegotiationendnode();
   assert(isDefined(endnode));

@@ -923,10 +923,10 @@ func_1F60(var_0, var_1) {
 }
 
 func_CC70(var_0, var_1) {
-  var_0 func_82AC( % addtive_head_anims, 1, 0.2);
+  var_0 func_82AC(%addtive_head_anims, 1, 0.2);
   var_0 func_82AC(var_1, 1, 0.2);
   wait(getanimlength(var_1));
-  var_0 clearanim( % addtive_head_anims, 0.2);
+  var_0 clearanim(%addtive_head_anims, 0.2);
   var_0 clearanim(var_1, 0.2);
 }
 

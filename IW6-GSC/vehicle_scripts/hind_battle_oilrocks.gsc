@@ -15,7 +15,7 @@ main(var_0, var_1, var_2, var_3) {
   maps\_vehicle::build_template("hind_battle", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_battle_hind_no_mg", "vehicle_battle_hind_destroyed_anim");
-  maps\_vehicle::build_drive( % battle_hind_spinning_rotor, undefined, 0);
+  maps\_vehicle::build_drive(%battle_hind_spinning_rotor, undefined, 0);
   maps\_vehicle::build_treadfx(var_2, "default", "fx/treadfx/heli_dust_default", 0);
   maps\_vehicle::build_life(3000, 2800, 3100);
   maps\_vehicle::build_team("axis");
@@ -52,9 +52,9 @@ init_local() {
 }
 
 set_death_anim_scene(var_0) {
-  similar_deaths( % battle_hind_explode_a, "battle_hind_explode_singleV1");
-  similar_deaths( % battle_hind_explode_b, "battle_hind_explode_singleV2");
-  similar_deaths( % battle_hind_explode_d, "battle_hind_explode_singleV4");
+  similar_deaths(%battle_hind_explode_a, "battle_hind_explode_singleV1");
+  similar_deaths(%battle_hind_explode_b, "battle_hind_explode_singleV2");
+  similar_deaths(%battle_hind_explode_d, "battle_hind_explode_singleV4");
   maps\_vehicle::build_deathanim(["battle_hind_explode_singleV1", "battle_hind_explode_singleV2", "battle_hind_explode_singleV4"]);
 }
 

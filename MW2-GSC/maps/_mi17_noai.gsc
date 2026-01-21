@@ -29,7 +29,7 @@ main(model, type, no_death) {
     assertex(no_death, "No_death must be undefined or true");
   }
 
-  build_drive( % mi17_heli_rotors, undefined, 0);
+  build_drive(%mi17_heli_rotors, undefined, 0);
   build_deathfx("explosions/grenadeexp_default", "tag_engine_left", "mi17_helicopter_hit", undefined, undefined, undefined, 0.2, true);
   build_deathfx("explosions/grenadeexp_default", "tag_engine_right", "mi17_helicopter_hit", undefined, undefined, undefined, 0.5, true);
 
@@ -66,10 +66,7 @@ and these lines in your CSV:
 include,vehicle_mi17_woodland_mi17_noai
 sound,vehicle_mi17,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi17_woodland"
-default:"vehicletype" "mi17_noai"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi17_woodland"default:"vehicletype" "mi17_noai"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_mi17_woodland_fly_noai (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -80,10 +77,7 @@ and these lines in your CSV:
 include,vehicle_mi17_woodland_fly_mi17_noai
 sound,vehicle_mi17,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi17_woodland_fly"
-default:"vehicletype" "mi17_noai"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi17_woodland_fly"default:"vehicletype" "mi17_noai"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_mi17_woodland_fly_cheap_noai (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -94,7 +88,5 @@ and these lines in your CSV:
 include,vehicle_mi17_woodland_fly_cheap_mi17_noai
 sound,vehicle_mi17,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi17_woodland_fly_cheap"
-default:"vehicletype" "mi17_noai"
-default:"script_team" "axis"
+defaultmdl="vehicle_mi17_woodland_fly_cheap"default:"vehicletype" "mi17_noai"default:"script_team" "axis"
 */

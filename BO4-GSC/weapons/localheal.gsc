@@ -292,9 +292,7 @@ do_gadget(slot, weapon) {
     }
 
     if(!var_671e9ac0 && isDefined(level.var_ac6052e9) && isDefined(level.playgadgetsuccess)) {
-      var_9194a036 = [
-        [level.var_ac6052e9]
-      ]("localHealSuccessLineCount", 0) * 25;
+      var_9194a036 = [[level.var_ac6052e9]]("localHealSuccessLineCount", 0) * 25;
 
       if(var_f3a994b7 > (isDefined(var_9194a036) ? var_9194a036 : 0)) {
         player thread[[level.playgadgetsuccess]](weapon, undefined, undefined, friendly);

@@ -280,9 +280,7 @@ hit_player() {
   CHARGE_HIT_DIST = 140;
 
   foreach(player in level.players) {
-    if(distanceSquared(self.origin, player.origin) < CHARGE_HIT_DIST * CHARGE_HIT_DIST &&
-      might_hit_enemy(player)
-    ) {
+    if(distanceSquared(self.origin, player.origin) < CHARGE_HIT_DIST * CHARGE_HIT_DIST && might_hit_enemy(player)) {
       self maps\mp\agents\alien\_alien_melee::melee_DoDamage(player, "charge");
       player player_fly_back(ALIEN_ELITE_CHARGE_IMPULSE, vectorNormalize(player.origin - self.origin));
       return true;
@@ -351,17 +349,13 @@ being_charged() {
 }
 
 get_charge_start_index() {
-  animWeights = [40,
-    30,
-    30
+  animWeights = [40, 30, 30
   ];
   return get_weighted_index("charge_attack_start", animWeights);
 }
 
 get_hit_geo_index() {
-  animWeights = [15,
-    25,
-    60
+  animWeights = [15, 25, 60
   ];
   return get_weighted_index("charge_hit_geo", animWeights);
 }

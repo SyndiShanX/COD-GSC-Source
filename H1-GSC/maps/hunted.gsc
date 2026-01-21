@@ -689,19 +689,19 @@ crash_wakeup() {
 
 crash_wakeup_preh1() {
   var_0 = getent("start_animent", "targetname");
-  var_1 = getstartorigin(var_0.origin, var_0.angles, % hunted_opening_player);
-  var_2 = getstartangles(var_0.origin, var_0.angles, % hunted_opening_player);
+  var_1 = getstartorigin(var_0.origin, var_0.angles, %hunted_opening_player);
+  var_2 = getstartangles(var_0.origin, var_0.angles, %hunted_opening_player);
   var_3 = playerview_spawn(var_1, var_2);
   level.player setorigin(var_1);
   level.player setplayerangles(var_2);
   level.player playerlinktoabsolute(var_3, "tag_player");
-  var_3 setflaggedanimrestart("viewanim", % hunted_opening_player_idle);
+  var_3 setflaggedanimrestart("viewanim", %hunted_opening_player_idle);
   level thread crash_player_sound();
   common_scripts\utility::flag_wait("wakeup_start");
-  var_3 clearanim( % hunted_opening_player_idle, 0);
-  var_3 setflaggedanimrestart("viewanim", % hunted_opening_player);
+  var_3 clearanim(%hunted_opening_player_idle, 0);
+  var_3 setflaggedanimrestart("viewanim", %hunted_opening_player);
   var_3 animscripts\shared::donotetracks("viewanim");
-  var_3 clearanim( % hunted_opening_player, 0);
+  var_3 clearanim(%hunted_opening_player, 0);
   level.player unlink();
   var_3 delete();
   common_scripts\utility::flag_set("wakeup_done");
@@ -1943,8 +1943,8 @@ door_pusher() {
 
 field_basement_door() {
   var_0 = getent("basement_animent", "targetname");
-  var_1 = getstartorigin(var_0.origin, var_0.angles, % hunted_open_basement_door_kick_door);
-  var_2 = getstartangles(var_0.origin, var_0.angles, % hunted_open_basement_door_kick_door);
+  var_1 = getstartorigin(var_0.origin, var_0.angles, %hunted_open_basement_door_kick_door);
+  var_2 = getstartangles(var_0.origin, var_0.angles, %hunted_open_basement_door_kick_door);
   self.angles = var_2;
   self.origin = var_1;
   self useanimtree(#animtree);
@@ -1953,8 +1953,8 @@ field_basement_door() {
   var_0 maps\_anim::anim_first_frame_solo(self, "door_kick_door");
   common_scripts\utility::flag_wait("basement_door_open");
   thread field_basement_door_sound();
-  self setflaggedanim("door_anim", % hunted_open_basement_door_kick_door);
-  var_3 = getanimlength( % hunted_open_basement_door_kick_door);
+  self setflaggedanim("door_anim", %hunted_open_basement_door_kick_door);
+  var_3 = getanimlength(%hunted_open_basement_door_kick_door);
   wait(var_3 - 1);
   var_4 = getent(self.target, "targetname");
   var_4 connectpaths();
@@ -4109,12 +4109,12 @@ delete_dude() {
 helicopter_open_door() {
   wait 0.5;
   self useanimtree(#animtree);
-  self setanim( % mi17_heli_idle, 1, 1);
+  self setanim(%mi17_heli_idle, 1, 1);
 }
 
 helicopter_close_door() {
   if(isDefined(self))
-    self clearanim( % mi17_heli_idle, 1);
+    self clearanim(%mi17_heli_idle, 1);
 }
 
 expand_goalradius_ongoal() {

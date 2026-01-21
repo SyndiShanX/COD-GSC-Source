@@ -246,7 +246,7 @@ f35_health_regen_start() {
 #using_animtree("vehicles");
 
 save_restored_function() {
-  level.f35 clearanim( % root, 0);
+  level.f35 clearanim(%root, 0);
   level.f35 _restore_f35_health();
   level.f35 _restore_f35_hud();
 
@@ -1717,10 +1717,10 @@ f35_interior_damage_anims() {
   self waittill("f35_destroy_panels");
   self useanimtree(#animtree);
   self anim_single(self, "f35_panels_break", "fxanim_props");
-  n_loop_time = getanimlength( % fxanim_la_cockpit_panels_loop_anim);
+  n_loop_time = getanimlength(%fxanim_la_cockpit_panels_loop_anim);
 
   while(!flag("eject_sequence_started")) {
-    self setanimknoball( % fxanim_la_cockpit_panels_loop_anim, % root, 1, n_loop_time, 1);
+    self setanimknoball(%fxanim_la_cockpit_panels_loop_anim, %root, 1, n_loop_time, 1);
     wait(n_loop_time);
   }
 }

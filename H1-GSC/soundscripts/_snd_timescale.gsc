@@ -21,7 +21,7 @@ snd_load_timescale_presets() {
   level._snd.timescale = spawnStruct();
   var_0 = [];
   var_0[var_0.size] = "soundtables\sp_defaults.csv";
-  var_0[var_0.size] = "soundtables\" + level.script + ".csv ";
+  var_0[var_0.size] = "soundtables\" + level.script + ".csv";
   level._snd.timescale.presets = soundscripts\_snd::snd_parse_soundtables("Timescale", var_0, 3, "timescale_names", "zone_names;reverb_names;filter_names;occlusion_names;timescale_names;dynamic_ambience_names;components;loop_defs;whizby_preset_names;mix_names;healthfx_params");
 }
 

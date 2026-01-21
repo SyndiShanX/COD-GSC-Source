@@ -79,7 +79,7 @@ player_piano_starts() {
   level notify("piano_play");
   level setclientfield("mansion_piano_play", 1);
   level setclientfield("saloon_piano_play", 1);
-  wait(getanimlength( % fxanim_gp_piano_old_anim));
+  wait(getanimlength(%fxanim_gp_piano_old_anim));
 
   iprintln("player piano song done");
 
@@ -106,7 +106,7 @@ spawn_and_animate_ghost_pianist() {
   e_temp setclientfield("ghost_fx", 3);
   e_temp setModel("c_zom_zombie_buried_ghost_woman_fb");
   e_temp useanimtree(#animtree);
-  e_temp setanim( % ai_zombie_ghost_playing_piano);
+  e_temp setanim(%ai_zombie_ghost_playing_piano);
   e_temp setclientfield("sndGhostAudio", 1);
 
   iprintln("ghost piano player spawned");

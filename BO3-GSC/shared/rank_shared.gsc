@@ -178,9 +178,7 @@ function getscoreinfovalue(type) {
   if(isDefined(level.scoreinfo[type])) {
     n_score = level.scoreinfo[type]["value"];
     if(isDefined(level.scoremodifiercallback) && isDefined(n_score)) {
-      n_score = [
-        [level.scoremodifiercallback]
-      ](type, n_score);
+      n_score = [[level.scoremodifiercallback]](type, n_score);
     }
     return n_score;
   }
@@ -190,9 +188,7 @@ function getscoreinfoxp(type) {
   if(isDefined(level.scoreinfo[type])) {
     n_xp = level.scoreinfo[type]["xp"];
     if(isDefined(level.xpmodifiercallback) && isDefined(n_xp)) {
-      n_xp = [
-        [level.xpmodifiercallback]
-      ](type, n_xp);
+      n_xp = [[level.xpmodifiercallback]](type, n_xp);
     }
     return n_xp;
   }

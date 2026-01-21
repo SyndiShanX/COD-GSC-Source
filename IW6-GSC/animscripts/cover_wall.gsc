@@ -13,7 +13,7 @@ init_animset_cover_wall() {
   var_0["add_aim_right"] = % covercrouch_aim6_add;
   var_0["straight_level"] = % covercrouch_aim5;
   var_0["hide_idle"] = % covercrouch_hide_idle;
-  var_0["hide_idle_twitch"] = animscripts\utility::array( % covercrouch_twitch_1, % covercrouch_twitch_2, % covercrouch_twitch_3, % covercrouch_twitch_4);
+  var_0["hide_idle_twitch"] = animscripts\utility::array(%covercrouch_twitch_1, %covercrouch_twitch_2, %covercrouch_twitch_3, %covercrouch_twitch_4);
   var_0["hide_idle_flinch"] = animscripts\utility::array();
   var_0["hide_2_crouch"] = % covercrouch_hide_2_aim;
   var_0["hide_2_stand"] = % covercrouch_hide_2_stand;
@@ -39,12 +39,12 @@ init_animset_cover_wall() {
   var_0["burst4"] = % exposed_shoot_burst4;
   var_0["burst5"] = % exposed_shoot_burst5;
   var_0["burst6"] = % exposed_shoot_burst6;
-  var_0["blind_fire"] = animscripts\utility::array( % covercrouch_blindfire_1, % covercrouch_blindfire_2, % covercrouch_blindfire_3, % covercrouch_blindfire_4);
+  var_0["blind_fire"] = animscripts\utility::array(%covercrouch_blindfire_1, %covercrouch_blindfire_2, %covercrouch_blindfire_3, %covercrouch_blindfire_4);
   var_0["reload"] = % covercrouch_reload_hide;
-  var_0["grenade_safe"] = animscripts\utility::array( % covercrouch_grenadea, % covercrouch_grenadeb);
-  var_0["grenade_exposed"] = animscripts\utility::array( % covercrouch_grenadea, % covercrouch_grenadeb);
-  var_0["exposed_idle"] = animscripts\utility::array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
-  var_0["look"] = animscripts\utility::array( % covercrouch_hide_look);
+  var_0["grenade_safe"] = animscripts\utility::array(%covercrouch_grenadea, %covercrouch_grenadeb);
+  var_0["grenade_exposed"] = animscripts\utility::array(%covercrouch_grenadea, %covercrouch_grenadeb);
+  var_0["exposed_idle"] = animscripts\utility::array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
+  var_0["look"] = animscripts\utility::array(%covercrouch_hide_look);
   anim.archetypes["soldier"]["cover_crouch"] = var_0;
   var_0 = [];
   var_0["add_aim_up"] = % coverstandaim_aim8_add;
@@ -53,8 +53,8 @@ init_animset_cover_wall() {
   var_0["add_aim_right"] = % coverstandaim_aim6_add;
   var_0["straight_level"] = % coverstandaim_aim5;
   var_0["hide_idle"] = % coverstand_hide_idle;
-  var_0["hide_idle_twitch"] = animscripts\utility::array( % coverstand_hide_idle_twitch01, % coverstand_hide_idle_twitch02, % coverstand_hide_idle_twitch03, % coverstand_hide_idle_twitch04, % coverstand_hide_idle_twitch05);
-  var_0["hide_idle_flinch"] = animscripts\utility::array( % coverstand_react01, % coverstand_react02, % coverstand_react03, % coverstand_react04);
+  var_0["hide_idle_twitch"] = animscripts\utility::array(%coverstand_hide_idle_twitch01, %coverstand_hide_idle_twitch02, %coverstand_hide_idle_twitch03, %coverstand_hide_idle_twitch04, %coverstand_hide_idle_twitch05);
+  var_0["hide_idle_flinch"] = animscripts\utility::array(%coverstand_react01, %coverstand_react02, %coverstand_react03, %coverstand_react04);
   var_0["hide_2_stand"] = % coverstand_hide_2_aim;
   var_0["stand_2_hide"] = % coverstand_aim_2_hide;
   var_0["hide_2_over"] = % coverstand_2_coverstandaim;
@@ -65,18 +65,18 @@ init_animset_cover_wall() {
   var_0["semi3"] = % coverstandaim_fire;
   var_0["semi4"] = % coverstandaim_fire;
   var_0["semi5"] = % coverstandaim_fire;
-  var_0["single"] = animscripts\utility::array( % coverstandaim_fire);
+  var_0["single"] = animscripts\utility::array(%coverstandaim_fire);
   var_0["burst2"] = % coverstandaim_autofire;
   var_0["burst3"] = % coverstandaim_autofire;
   var_0["burst4"] = % coverstandaim_autofire;
   var_0["burst5"] = % coverstandaim_autofire;
   var_0["burst6"] = % coverstandaim_autofire;
-  var_0["blind_fire"] = animscripts\utility::array( % coverstand_blindfire_1, % coverstand_blindfire_2);
+  var_0["blind_fire"] = animscripts\utility::array(%coverstand_blindfire_1, %coverstand_blindfire_2);
   var_0["reload"] = % coverstand_reloada;
-  var_0["look"] = animscripts\utility::array( % coverstand_look_quick, % coverstand_look_quick_v2);
-  var_0["grenade_safe"] = animscripts\utility::array( % coverstand_grenadea, % coverstand_grenadeb);
-  var_0["grenade_exposed"] = animscripts\utility::array( % coverstand_grenadea, % coverstand_grenadeb);
-  var_0["exposed_idle"] = animscripts\utility::array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
+  var_0["look"] = animscripts\utility::array(%coverstand_look_quick, %coverstand_look_quick_v2);
+  var_0["grenade_safe"] = animscripts\utility::array(%coverstand_grenadea, %coverstand_grenadeb);
+  var_0["grenade_exposed"] = animscripts\utility::array(%coverstand_grenadea, %coverstand_grenadeb);
+  var_0["exposed_idle"] = animscripts\utility::array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
   var_0["hide_to_look"] = % coverstand_look_moveup;
   var_0["look_idle"] = % coverstand_look_idle;
   var_0["look_to_hide"] = % coverstand_look_movedown;
@@ -126,7 +126,7 @@ cover_wall_think(var_0) {
   if(var_0 == "crouch" && self.a.pose == "stand") {
     var_3 = animscripts\utility::animarray("stand_2_hide");
     var_4 = getanimlength(var_3);
-    self setanimknoballrestart(var_3, % body, 1, 0.2, animscripts\combat_utility::fasteranimspeed());
+    self setanimknoballrestart(var_3, %body, 1, 0.2, animscripts\combat_utility::fasteranimspeed());
     thread animscripts\shared::movetonodeovertime(self.covernode, var_4);
     wait(var_4);
     self.a.covermode = "hide";
@@ -267,7 +267,7 @@ shootastold() {
     }
 
     shootuntilshootbehaviorchange_coverwall();
-    self clearanim( % add_fire, 0.2);
+    self clearanim(%add_fire, 0.2);
   }
 }
 
@@ -313,7 +313,7 @@ rambo() {
   self.changingcoverpos = 1;
   thread animscripts\shared::ramboaim(0);
   var_4 = animscripts\utility::animarraypickrandom(var_0);
-  self setflaggedanimknoballrestart("rambo", var_4, % body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("rambo", var_4, %body, 1, 0.2, 1);
   cover_playfacialanim(var_4);
   animscripts\shared::donotetracks("rambo");
   self notify("rambo_aim_end");
@@ -360,9 +360,9 @@ flinch() {
 
 playidleanimation(var_0, var_1) {
   if(var_1)
-    self setflaggedanimknoballrestart("idle", var_0, % body, 1, 0.25, 1);
+    self setflaggedanimknoballrestart("idle", var_0, %body, 1, 0.25, 1);
   else
-    self setflaggedanimknoball("idle", var_0, % body, 1, 0.25, 1);
+    self setflaggedanimknoball("idle", var_0, %body, 1, 0.25, 1);
 
   cover_playfacialanim(var_0);
   self.a.covermode = "hide";
@@ -384,7 +384,7 @@ look(var_0) {
   else
     var_1 = animscripts\utility::animarray("look_to_hide");
 
-  self setflaggedanimknoballrestart("looking_end", var_1, % body, 1, 0.1);
+  self setflaggedanimknoballrestart("looking_end", var_1, %body, 1, 0.1);
   cover_playfacialanim(var_1);
   animscripts\shared::donotetracks("looking_end");
   return 1;
@@ -395,7 +395,7 @@ peekout() {
     return 0;
 
   var_0 = animscripts\utility::animarray("hide_to_look");
-  self setflaggedanimknoball("looking_start", var_0, % body, 1, 0.2);
+  self setflaggedanimknoball("looking_start", var_0, %body, 1, 0.2);
   cover_playfacialanim(var_0);
   animscripts\shared::donotetracks("looking_start");
   return 1;
@@ -403,7 +403,7 @@ peekout() {
 
 fastlook() {
   var_0 = animscripts\utility::animarraypickrandom("look");
-  self setflaggedanimknoballrestart("look", var_0, % body, 1, 0.1);
+  self setflaggedanimknoballrestart("look", var_0, %body, 1, 0.1);
   cover_playfacialanim(var_0);
   animscripts\shared::donotetracks("look");
   return 1;
@@ -445,7 +445,7 @@ pop_up() {
   self notify("done_changing_cover_pos");
   setdefaultwallanimmode();
   var_4 = pop_up_and_hide_speed();
-  self setflaggedanimknoballrestart("pop_up", var_2, % body, 1, 0.1, var_4);
+  self setflaggedanimknoballrestart("pop_up", var_2, %body, 1, 0.1, var_4);
   thread donotetracksforpopup("pop_up");
 
   if(animhasnotetrack(var_2, "start_aim")) {
@@ -484,7 +484,7 @@ setup_additive_aim(var_0) {
   else
     var_1 = self.a.covermode;
 
-  self setanimknoball(animscripts\utility::animarray(var_1 + "_aim"), % body, 1, var_0);
+  self setanimknoball(animscripts\utility::animarray(var_1 + "_aim"), %body, 1, var_0);
 
   if(var_1 == "crouch") {
     self setanimlimited(animscripts\utility::lookupanim("cover_crouch", "add_aim_down"), 1, 0);
@@ -515,8 +515,8 @@ go_to_hide() {
   self notify("done_changing_cover_pos");
   animscripts\combat_utility::endaimidlethread();
   var_0 = pop_up_and_hide_speed();
-  self setflaggedanimknoball("go_to_hide", animscripts\utility::animarray(self.a.covermode + "_2_hide"), % body, 1, 0.2, var_0);
-  self clearanim( % exposed_modern, 0.2);
+  self setflaggedanimknoball("go_to_hide", animscripts\utility::animarray(self.a.covermode + "_2_hide"), %body, 1, 0.2, var_0);
+  self clearanim(%exposed_modern, 0.2);
   animscripts\shared::donotetracks("go_to_hide");
   self.a.covermode = "hide";
 
@@ -558,7 +558,7 @@ blindfire() {
 
   setdefaultwallanimmode();
   self.keepclaimednodeifvalid = 1;
-  self setflaggedanimknoballrestart("blindfire", animscripts\utility::animarraypickrandom("blind_fire"), % body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("blindfire", animscripts\utility::animarraypickrandom("blind_fire"), %body, 1, 0.2, 1);
   animscripts\shared::donotetracks("blindfire");
   self.keepclaimednodeifvalid = 0;
   return 1;
@@ -674,7 +674,7 @@ loophide(var_0) {
   if(!isDefined(var_0))
     var_0 = 0.1;
 
-  self setanimknoballrestart(animscripts\utility::animarray("hide_idle"), % body, 1, var_0);
+  self setanimknoballrestart(animscripts\utility::animarray("hide_idle"), %body, 1, var_0);
   self.a.covermode = "hide";
 }
 
@@ -762,5 +762,5 @@ cover_playfacialanim(var_0, var_1) {
 
 cover_clearfacialanim() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

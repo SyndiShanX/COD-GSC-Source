@@ -1199,8 +1199,7 @@ function_fff1ad7e(var_740b4e7b) {
 
   if(!foundplayer) {
     array::add(game.var_b2ee45db, {
-      #xuid: var_740b4e7b,
-      #weight: game.var_c7826a3f
+      #xuid: var_740b4e7b, #weight: game.var_c7826a3f
     }, 0);
   }
 }

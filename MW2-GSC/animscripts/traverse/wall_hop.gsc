@@ -21,7 +21,7 @@ main() {
 
 wall_hop_human() {
   if(randomint(100) < 30)
-    self advancedTraverse( % traverse_wallhop_3, 39.875);
+    self advancedTraverse(%traverse_wallhop_3, 39.875);
   else
-    self advancedTraverse( % traverse_wallhop, 39.875);
+    self advancedTraverse(%traverse_wallhop, 39.875);
 }

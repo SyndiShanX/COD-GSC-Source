@@ -189,8 +189,7 @@ moon_biodome_powerup_temptation(struct_array) {
   rotation = 0;
   temptation_array = array_randomize(temptation_array);
   while(isDefined(powerup)) {
-    if(temptation_array[temptation_index] == "fire_sale" &&
-      (level.zombie_vars["zombie_powerup_fire_sale_on"] == true || level.chest_moves == 0)) {
+    if(temptation_array[temptation_index] == "fire_sale" && (level.zombie_vars["zombie_powerup_fire_sale_on"] == true || level.chest_moves == 0)) {
       temptation_index++;
       if(temptation_index >= temptation_array.size) {
         temptation_index = 0;
@@ -322,8 +321,7 @@ moon_zombie_run_change(ent_poi) {
   if(!isDefined(curr_zone) && isDefined(self.zone_name)) {
     curr_zone = self.zone_name;
   }
-  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) &&
-    level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
+  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) && level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
     low_grav = 1;
   }
   if(self.animname == "zombie") {
@@ -378,8 +376,7 @@ moon_stop_running_to_catch() {
   self ent_flag_wait("pad_anim_change");
   low_grav = 0;
   curr_zone = self get_current_zone();
-  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) &&
-    level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
+  if(isDefined(curr_zone) && isDefined(level.zones[curr_zone].volumes[0].script_string) && level.zones[curr_zone].volumes[0].script_string == "lowgravity") {
     low_grav = 1;
   }
   anim_set = undefined;
@@ -388,25 +385,21 @@ moon_stop_running_to_catch() {
       if(low_grav) {
         if(self.has_legs) {
           var = RandomIntRange(1, level.num_anim[self.animname]["walk"] + 1);
-          anim_set = "walk_moon" +
-            var;
+          anim_set = "walk_moon" +  var;
           break;
         } else {
           var = RandomIntRange(1, level.num_anim[self.animname]["crawl"] + 1);
-          anim_set = "crawl_moon" +
-            var;
+          anim_set = "crawl_moon" +  var;
           break;
         }
       } else {
         if(self.has_legs) {
           var = RandomIntRange(1, 9);
-          anim_set = "walk" +
-            var;
+          anim_set = "walk" +  var;
           break;
         } else {
           var = RandomIntRange(1, 7);
-          anim_set = "crawl" +
-            var;
+          anim_set = "crawl" +  var;
           break;
         }
       }
@@ -414,25 +407,21 @@ moon_stop_running_to_catch() {
       if(low_grav) {
         if(self.has_legs) {
           var = RandomIntRange(1, level.num_anim[self.animname]["run"] + 1);
-          anim_set = "run_moon" +
-            var;
+          anim_set = "run_moon" +  var;
           break;
         } else {
           var = RandomIntRange(1, level.num_anim[self.animname]["crawl"] + 1);
-          anim_set = "crawl_moon" +
-            var;
+          anim_set = "crawl_moon" +  var;
           break;
         }
       } else {
         if(self.has_legs) {
           var = RandomIntRange(1, 7);
-          anim_set = "run" +
-            var;
+          anim_set = "run" +  var;
           break;
         } else {
           var = RandomIntRange(1, 3);
-          anim_set = "crawl_hand_" +
-            var;
+          anim_set = "crawl_hand_" +  var;
           break;
         }
       }
@@ -440,25 +429,21 @@ moon_stop_running_to_catch() {
       if(low_grav) {
         if(self.has_legs) {
           var = RandomIntRange(1, level.num_anim[self.animname]["sprint"] + 1);
-          anim_set = "sprint_moon" +
-            var;
+          anim_set = "sprint_moon" +  var;
           break;
         } else {
           var = RandomIntRange(1, level.num_anim[self.animname]["crawl"] + 1);
-          anim_set = "crawl_moon" +
-            var;
+          anim_set = "crawl_moon" +  var;
           break;
         }
       } else {
         if(self.has_legs) {
           var = RandomIntRange(1, 5);
-          anim_set = "sprint" +
-            var;
+          anim_set = "sprint" +  var;
           break;
         } else {
           var = RandomIntRange(1, 4);
-          anim_set = "crawl_sprint" +
-            var;
+          anim_set = "crawl_sprint" +  var;
           break;
         }
       }

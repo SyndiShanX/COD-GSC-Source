@@ -221,9 +221,7 @@ function_c5bf12a5(commander) {
     if(getrealtime() - commander.var_22765a25 > commander.var_b9dd2f) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.var_22765a25 = getrealtime();
       pixbeginevent("daemonControlZones");
       aiprofile_beginentry("daemonControlZones");
@@ -273,9 +271,7 @@ function_88ab5a6e(commander) {
     if(getrealtime() - commander.var_22765a25 > commander.var_b9dd2f) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.var_22765a25 = getrealtime();
       pixbeginevent("daemonDomFlags");
       aiprofile_beginentry("daemonDomFlags");
@@ -376,9 +372,7 @@ function_c111c0aa(commander) {
     if(getrealtime() - commander.var_22765a25 > commander.var_b9dd2f) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.var_22765a25 = getrealtime();
       pixbeginevent("daemonSdBombZones");
       aiprofile_beginentry("daemonSdBombZones");

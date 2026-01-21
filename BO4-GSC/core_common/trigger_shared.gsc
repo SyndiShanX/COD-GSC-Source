@@ -33,9 +33,7 @@ add_handler(var_60ffbed2, func_handler, func_init, var_114fa26c = 1) {
     }
 
     if(isfunctionptr(func_init)) {
-      [
-        [func_init]
-      ](var_60ffbed2);
+      [[func_init]](var_60ffbed2);
     }
   }
 }
@@ -461,8 +459,7 @@ _trigger_wait_think(s_tracker, e_entity) {
   s_tracker endon(#"trigger");
   e_other = _trigger_wait(e_entity);
   s_tracker notify(#"trigger", {
-    #activator: e_other,
-    #trigger: self
+    #activator: e_other, #trigger: self
   });
 }
 
@@ -726,9 +723,7 @@ function_thread(ent, on_enter_payload, on_exit_payload) {
 
   if(isDefined(ent)) {
     if(isDefined(on_exit_payload)) {
-      [
-        [on_exit_payload]
-      ](ent);
+      [[on_exit_payload]](ent);
     }
 
     remove_from_ent(ent, myentnum);

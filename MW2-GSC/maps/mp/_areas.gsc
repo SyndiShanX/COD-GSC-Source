@@ -7,14 +7,10 @@
 #include common_scripts\utility;
 
 /*QUAKED trigger_multiple_area (0.12 0.23 1.0)
-defaulttexture="trigger"
-"script_area" - A localized string that names the area. e.g. "MP_FLOWER_SHOP"
-Defines an area that the player is in.*/
+defaulttexture="trigger""script_area" - A localized string that names the area. e.g. "MP_FLOWER_SHOP"Defines an area that the player is in.*/
 
 /*QUAKED trigger_multiple_softlanding (0.12 0.23 1.0)
-defaulttexture="trigger"
-"script_type" - "car", "boxes", "trash"
-Defines a soft landing area.*/
+defaulttexture="trigger""script_type" - "car", "boxes", "trash"Defines a soft landing area.*/
 
 /*QUAKED script_vehicle_snowmobile_player_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -25,9 +21,7 @@ and these lines in your CSV:
 include,vehicle_snowmobile_snowmobile_player
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
-defaultmdl="vehicle_snowmobile"
-default:"vehicletype" "snowmobile_player_mp"
-*/
+defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile_player_mp"*/
 
 init() {
   level.softLandingTriggers = getEntArray("trigger_multiple_softlanding", "classname");

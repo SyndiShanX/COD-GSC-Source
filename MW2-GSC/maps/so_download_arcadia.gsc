@@ -272,7 +272,7 @@ so_fake_chopper_create_and_move(moveTime, destination) {
   chopper setModel(chopperModel[randomint(chopperModel.size)]);
 
   chopper useAnimTree(#animtree);
-  chopper setanim( % bh_rotors, 1, .2, 1);
+  chopper setanim(%bh_rotors, 1, .2, 1);
 
   chopper moveto(destination, moveTime, 0, 0);
   wait moveTime;
@@ -328,67 +328,48 @@ so_download_arcadia_intro_dialogue() {
 
   wait(1);
 
-  // "There are several ruggedized laptops in your AO that contain high-value information."
-  so_radio_dialogue("so_dwnld_hqr_laptops");
+  // "There are several ruggedized laptops in your AO that contain high-value information."so_radio_dialogue("so_dwnld_hqr_laptops");
 
-  // "Download the data from each of the laptops, then return to the Stryker for extraction."
-  so_radio_dialogue("so_dwnld_hqr_downloaddata");
+  // "Download the data from each of the laptops, then return to the Stryker for extraction."so_radio_dialogue("so_dwnld_hqr_downloaddata");
 
   flag_set("intro_dialogue_done");
   music_loop("so_download_arcadia_music", 328);
 }
 
 so_download_arcadia_anims() {
-  // "There are several ruggedized laptops in your AO that contain high-value information."
-  level.scr_radio["so_dwnld_hqr_laptops"] = "so_dwnld_hqr_laptops";
+  // "There are several ruggedized laptops in your AO that contain high-value information."level.scr_radio["so_dwnld_hqr_laptops"] = "so_dwnld_hqr_laptops";
 
-  // "Download the data from each of the laptops, then return to the Stryker for extraction."
-  level.scr_radio["so_dwnld_hqr_downloaddata"] = "so_dwnld_hqr_downloaddata";
+  // "Download the data from each of the laptops, then return to the Stryker for extraction."level.scr_radio["so_dwnld_hqr_downloaddata"] = "so_dwnld_hqr_downloaddata";
 
-  // "All Hunter units, Badger One will not engage targets without your explicit authorization."
-  level.scr_radio["so_dwnld_stk_explicitauth"] = "so_dwnld_stk_explicitauth";
+  // "All Hunter units, Badger One will not engage targets without your explicit authorization."level.scr_radio["so_dwnld_stk_explicitauth"] = "so_dwnld_stk_explicitauth";
 
-  // "Hunter Two-One, I repeat, Badger One is not authorized to engage targets that you haven't designated."
-  level.scr_radio["so_dwnld_stk_designated"] = "so_dwnld_stk_designated";
+  // "Hunter Two-One, I repeat, Badger One is not authorized to engage targets that you haven't designated."level.scr_radio["so_dwnld_stk_designated"] = "so_dwnld_stk_designated";
 
-  // "Hunter Two-One, we can't fire on enemies without your authorization!"
-  level.scr_radio["so_dwnld_stk_cantfire"] = "so_dwnld_stk_cantfire";
+  // "Hunter Two-One, we can't fire on enemies without your authorization!"level.scr_radio["so_dwnld_stk_cantfire"] = "so_dwnld_stk_cantfire";
 
-  // "Hunter Two-One, ten-plus foot-mobiles approaching from the east!"
-  level.scr_radio["so_dwnld_stk_tenfootmobiles"] = "so_dwnld_stk_tenfootmobiles";
+  // "Hunter Two-One, ten-plus foot-mobiles approaching from the east!"level.scr_radio["so_dwnld_stk_tenfootmobiles"] = "so_dwnld_stk_tenfootmobiles";
 
-  // "We've got activity to the west, they're coming from the light brown mansion!"
-  level.scr_radio["so_dwnld_stk_brownmansion"] = "so_dwnld_stk_brownmansion";
+  // "We've got activity to the west, they're coming from the light brown mansion!"level.scr_radio["so_dwnld_stk_brownmansion"] = "so_dwnld_stk_brownmansion";
 
-  // "Hostiles spotted across the street, they're moving to your position!"
-  level.scr_radio["so_dwnld_stk_acrossstreet"] = "so_dwnld_stk_acrossstreet";
+  // "Hostiles spotted across the street, they're moving to your position!"level.scr_radio["so_dwnld_stk_acrossstreet"] = "so_dwnld_stk_acrossstreet";
 
-  // "Hunter Two-One, you got movement right outside your location!"
-  level.scr_radio["so_dwnld_stk_gotmovement"] = "so_dwnld_stk_gotmovement";
+  // "Hunter Two-One, you got movement right outside your location!"level.scr_radio["so_dwnld_stk_gotmovement"] = "so_dwnld_stk_gotmovement";
 
-  // "Hunter Two-One, there are hostiles in the area that can wirelessly disrupt the data transfer."
-  level.scr_radio["so_dwnld_hqr_wirelesslydisrupt"] = "so_dwnld_hqr_wirelesslydisrupt";
+  // "Hunter Two-One, there are hostiles in the area that can wirelessly disrupt the data transfer."level.scr_radio["so_dwnld_hqr_wirelesslydisrupt"] = "so_dwnld_hqr_wirelesslydisrupt";
 
-  // "Hunter Two-One, the download has been interrupted! You'll have to restart the data transfer manually."
-  level.scr_radio["so_dwnld_hqr_restartmanually"] = "so_dwnld_hqr_restartmanually";
+  // "Hunter Two-One, the download has been interrupted! You'll have to restart the data transfer manually."level.scr_radio["so_dwnld_hqr_restartmanually"] = "so_dwnld_hqr_restartmanually";
 
-  // "Hunter Two-One, hostiles have interrupted the download! Get back there and manually resume the transfer!"
-  level.scr_radio["so_dwnld_hqr_getbackrestart"] = "so_dwnld_hqr_getbackrestart";
+  // "Hunter Two-One, hostiles have interrupted the download! Get back there and manually resume the transfer!"level.scr_radio["so_dwnld_hqr_getbackrestart"] = "so_dwnld_hqr_getbackrestart";
 
-  // "Good job, Hunter Two-One. Our intel indicates that there are two more laptops in the area - go find them and get their data."
-  level.scr_radio["so_dwnld_hqr_gofindthem"] = "so_dwnld_hqr_gofindthem";
+  // "Good job, Hunter Two-One. Our intel indicates that there are two more laptops in the area - go find them and get their data."level.scr_radio["so_dwnld_hqr_gofindthem"] = "so_dwnld_hqr_gofindthem";
 
-  // "Stay frosty, Hunter Two-One, there's one laptop left."
-  level.scr_radio["so_dwnld_hqr_onelaptop"] = "so_dwnld_hqr_onelaptop";
+  // "Stay frosty, Hunter Two-One, there's one laptop left."level.scr_radio["so_dwnld_hqr_onelaptop"] = "so_dwnld_hqr_onelaptop";
 
-  // "Nice work, Hunter Two-One. Now get back to the Stryker, we're pulling you out of the area."
-  level.scr_radio["so_dwnld_hqr_pullingyouout"] = "so_dwnld_hqr_pullingyouout";
+  // "Nice work, Hunter Two-One. Now get back to the Stryker, we're pulling you out of the area."level.scr_radio["so_dwnld_hqr_pullingyouout"] = "so_dwnld_hqr_pullingyouout";
 
-  // "Hunter Two-One, get back to the Stryker for extraction!"
-  level.scr_radio["so_dwnld_hqr_extraction"] = "so_dwnld_hqr_extraction";
+  // "Hunter Two-One, get back to the Stryker for extraction!"level.scr_radio["so_dwnld_hqr_extraction"] = "so_dwnld_hqr_extraction";
 
-  // "Hunter Two-One, return to the Stryker to complete your mission!"
-  level.scr_radio["so_dwnld_hqr_completemission"] = "so_dwnld_hqr_completemission";
+  // "Hunter Two-One, return to the Stryker to complete your mission!"level.scr_radio["so_dwnld_hqr_completemission"] = "so_dwnld_hqr_completemission";
 }
 
 so_mansion_pool() {

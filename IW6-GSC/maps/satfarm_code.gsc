@@ -2502,9 +2502,7 @@ launch_smoke(var_0) {
   if(!isDefined(var_0))
     var_0 = trace_to_forward(1000)["position"];
 
-  var_1 = [["tag_canister_left", 1000],
-    ["tag_canister_left", 0],
-    ["tag_canister_right", -1000]];
+  var_1 = [["tag_canister_left", 1000], ["tag_canister_left", 0], ["tag_canister_right", -1000]];
   var_2 = vectortoangles(var_0 - self getcentroid());
   var_2 = vectornormalize(anglestoright(var_2));
 
@@ -2805,8 +2803,8 @@ shoot_anim() {
   if(isDefined(level.playertank) && self == level.playertank && common_scripts\utility::flag("player_in_tank") && !common_scripts\utility::flag("ZOOM_ON"))
     playFXOnTag(common_scripts\utility::getfx("tank_muzzleflash"), self, "tag_flash");
 
-  self clearanim( % abrams_shoot_kick, 0);
-  self setanimrestart( % abrams_shoot_kick);
+  self clearanim(%abrams_shoot_kick, 0);
+  self setanimrestart(%abrams_shoot_kick);
   thread tank_play_traced_effect();
 }
 
@@ -2908,8 +2906,8 @@ fire_on_non_vehicle(var_0, var_1) {
     magicbullet("tankfire_straight_fast", self gettagorigin("tag_flash"), var_2.origin + var_1, level.player);
     playFXOnTag(common_scripts\utility::getfx("tank_muzzleflash"), self, "tag_flash");
     self joltbody(self.origin, 1000, 1, 0.5);
-    self clearanim( % abrams_shoot_kick, 0);
-    self setanimrestart( % abrams_shoot_kick);
+    self clearanim(%abrams_shoot_kick, 0);
+    self setanimrestart(%abrams_shoot_kick);
   }
 
   wait 1;
@@ -2932,8 +2930,8 @@ fire_now_on_vehicle(var_0, var_1) {
     magicbullet("tankfire_straight_fast", self gettagorigin("tag_flash"), var_0.origin + var_1);
     playFXOnTag(common_scripts\utility::getfx("tank_muzzleflash"), self, "tag_flash");
     self joltbody(self.origin, 1000, 1, 0.5);
-    self clearanim( % abrams_shoot_kick, 0);
-    self setanimrestart( % abrams_shoot_kick);
+    self clearanim(%abrams_shoot_kick, 0);
+    self setanimrestart(%abrams_shoot_kick);
   }
 
   wait 1;
@@ -4856,7 +4854,7 @@ crush_mobile_gaz() {
 crush_front_gaz() {
   var_0 = spawn("trigger_radius", self gettagorigin("tag_engine_left"), 16, 16, 128);
   var_0 waittill("trigger", var_1);
-  self setanim( % satfarm_bridge_gaz_crush_front_additive, 1);
+  self setanim(%satfarm_bridge_gaz_crush_front_additive, 1);
 
   if(var_1 == level.playertank) {
     if(!common_scripts\utility::flag("aud_exfil"))
@@ -4873,7 +4871,7 @@ crush_front_gaz() {
 crush_rear_gaz() {
   var_0 = spawn("trigger_radius", self gettagorigin("tag_guy_turret"), 16, 16, 128);
   var_0 waittill("trigger", var_1);
-  self setanim( % satfarm_bridge_gaz_crush_rear_additive, 1);
+  self setanim(%satfarm_bridge_gaz_crush_rear_additive, 1);
 
   if(var_1 == level.playertank) {
     if(!common_scripts\utility::flag("aud_exfil"))

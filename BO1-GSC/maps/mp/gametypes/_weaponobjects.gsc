@@ -1427,8 +1427,7 @@ resetReconModelVisibility(owner) {
   if(!isDefined(owner))
     return;
   for(i = 0; i < level.players.size; i++) {
-    if(!(level.players[i] HasPerk("specialty_detectexplosive")) &&
-      !(level.players[i] HasPerk("specialty_showenemyequipment"))) {
+    if(!(level.players[i] HasPerk("specialty_detectexplosive")) && !(level.players[i] HasPerk("specialty_showenemyequipment"))) {
       continue;
     }
     hasReconModel = false;

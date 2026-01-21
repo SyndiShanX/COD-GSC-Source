@@ -229,9 +229,7 @@ class cscenecompanion: csceneobject, csceneactor {
   }
 
   function _cleanup() {
-    if(![
-        [_o_scene]
-      ] - > has_next_shot(_str_shot) || _o_scene._str_mode === "single") {
+    if(![[_o_scene]] - > has_next_shot(_str_shot) || _o_scene._str_mode === "single") {
       _e thread scene::function_37592f67(_o_scene._e_root, _o_scene._s);
     }
   }

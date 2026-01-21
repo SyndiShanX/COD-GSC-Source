@@ -255,46 +255,32 @@ updateGameEvents() {
     return;
   if(level.teamBased) {
     if(level.everExisted["allies"] && !level.aliveCount["allies"] && level.everExisted["axis"] && !level.aliveCount["axis"] && !level.playerLives["allies"] && !level.playerLives["axis"]) {
-      [
-        [level.onDeadEvent]
-      ]("all");
+      [[level.onDeadEvent]]("all");
       return;
     }
     if(level.everExisted["allies"] && !level.aliveCount["allies"] && !level.playerLives["allies"]) {
-      [
-        [level.onDeadEvent]
-      ]("allies");
+      [[level.onDeadEvent]]("allies");
       return;
     }
     if(level.everExisted["axis"] && !level.aliveCount["axis"] && !level.playerLives["axis"]) {
-      [
-        [level.onDeadEvent]
-      ]("axis");
+      [[level.onDeadEvent]]("axis");
       return;
     }
     if(level.lastAliveCount["allies"] > 1 && level.aliveCount["allies"] == 1 && level.playerLives["allies"] == 1) {
-      [
-        [level.onOneLeftEvent]
-      ]("allies");
+      [[level.onOneLeftEvent]]("allies");
       return;
     }
     if(level.lastAliveCount["axis"] > 1 && level.aliveCount["axis"] == 1 && level.playerLives["axis"] == 1) {
-      [
-        [level.onOneLeftEvent]
-      ]("axis");
+      [[level.onOneLeftEvent]]("axis");
       return;
     }
   } else {
     if((!level.aliveCount["allies"] && !level.aliveCount["axis"]) && (!level.playerLives["allies"] && !level.playerLives["axis"]) && level.maxPlayerCount > 1) {
-      [
-        [level.onDeadEvent]
-      ]("all");
+      [[level.onDeadEvent]]("all");
       return;
     }
     if((level.aliveCount["allies"] + level.aliveCount["axis"] == 1) && (level.playerLives["allies"] + level.playerLives["axis"] == 1) && level.maxPlayerCount > 1) {
-      [
-        [level.onOneLeftEvent]
-      ]("all");
+      [[level.onOneLeftEvent]]("all");
       return;
     }
   }
@@ -708,9 +694,7 @@ endGame(winner, endReasonText) {
   }
   if(!isOneRound()) {
     if(isDefined(level.onRoundEndGame))
-      winner = [
-        [level.onRoundEndGame]
-      ](winner);
+      winner = [[level.onRoundEndGame]](winner);
     endReasonText = getEndReasonText();
   }
   setTopPlayerStats();

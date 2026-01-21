@@ -1858,9 +1858,7 @@ bot_control_heli_main_move_loop(var_0, var_1) {
   while(self[[level.bot_ks_funcs["isUsing"][var_0]]]()) {
     if(gettime() > self.next_goal_time && var_7 == "needs_new_goal") {
       var_12 = var_5;
-      var_5 = [
-        [level.bot_ks_funcs["heli_pick_node"][var_0]]
-      ](var_5);
+      var_5 = [[level.bot_ks_funcs["heli_pick_node"][var_0]]](var_5);
       var_6 = undefined;
 
       if(isDefined(var_5)) {

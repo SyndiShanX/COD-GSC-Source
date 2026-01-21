@@ -78,10 +78,7 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   self.previousPrimary = self GetCurrentWeapon();
   self.hadPistol = false;
   for(i = 0; i < self.previousweaponslist.size; i++) {
-    if(WeaponClass(self.previousweaponslist[i]) == "pistol" &&
-      self.previousweaponslist[i] != "knife_ballistic_mp" &&
-      !IsSubStr(self.previousweaponslist[i], "_auto_") &&
-      !IsSubStr(self.previousweaponslist[i], "dw_")) {
+    if(WeaponClass(self.previousweaponslist[i]) == "pistol" && self.previousweaponslist[i] != "knife_ballistic_mp" && !IsSubStr(self.previousweaponslist[i], "_auto_") && !IsSubStr(self.previousweaponslist[i], "dw_")) {
       self.laststandpistol = self.previousweaponslist[i];
       self.hadPistol = true;
     }
@@ -136,8 +133,7 @@ waittillGrenadeThrown() {
   }
 }
 mayDoLastStand(sWeapon, sMeansOfDeath, sHitLoc) {
-  if(sMeansOfDeath != "MOD_PISTOL_BULLET" &&
-    sMeansOfDeath != "MOD_RIFLE_BULLET") {
+  if(sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET") {
     return false;
   }
   if(level.laststandpistol == "none") {
@@ -303,10 +299,7 @@ revive_trigger_think() {
       if(can_revive(players[i])) {
         if(players[i] != self && !isDefined(players[i].revivetrigger)) {
           if((!isDefined(self.currentlyBeingRevived) || !self.currentlyBeingRevived) && !players[i].revivingTeammate) {
-            if(players[i].health > 0 &&
-              isDefined(self.revivetrigger) &&
-              players[i] istouching(self.revivetrigger) &&
-              players[i] useButtonPressed()) {
+            if(players[i].health > 0 && isDefined(self.revivetrigger) && players[i] istouching(self.revivetrigger) && players[i] useButtonPressed()) {
               players[i].revivingTeammate = true;
               players[i] thread cleanUpRevivingTeamate(self);
               gun = players[i] GetCurrentWeapon();

@@ -22,7 +22,7 @@ main(var_0, var_1, var_2) {
 #using_animtree("vehicles");
 
 main_common(var_0, var_1, var_2) {
-  maps\_vehicle::build_drive( % mi28_rotors, undefined, 0, 3.0);
+  maps\_vehicle::build_drive(%mi28_rotors, undefined, 0, 3.0);
   maps\_vehicle::build_deathquake(0.8, 1.6, 2048);
   maps\_vehicle::build_life(3000, 2800, 3100);
   maps\_vehicle::build_team("axis");
@@ -121,7 +121,7 @@ setanims() {
 }
 
 get_deathanims() {
-  var_0 = [ % aas_72x_seated_death_a_1, % aas_72x_seated_death_a_5, % aas_72x_seated_death_a_10, % aas_72x_seated_death_a_11, % aas_72x_seated_death_a_12];
+  var_0 = [ % aas_72x_seated_death_a_1, %aas_72x_seated_death_a_5, %aas_72x_seated_death_a_10, %aas_72x_seated_death_a_11, %aas_72x_seated_death_a_12];
   return common_scripts\utility::array_randomize(var_0);
 }
 
@@ -349,7 +349,7 @@ shooter_tracking() {
   self notify("stop tracking");
   self endon("stop tracking");
   var_0 = 0.2;
-  self clearanim( % root, var_0);
+  self clearanim(%root, var_0);
   self setanimknob(self.a.array["idle"], 1, 0);
   self setanimknoblimited(animscripts\utility::animarray("straight_level"), 1, var_0);
   self setanimknoblimited(animscripts\utility::animarray("add_aim_up"), 1, var_0);

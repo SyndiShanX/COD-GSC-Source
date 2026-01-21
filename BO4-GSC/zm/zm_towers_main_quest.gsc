@@ -222,12 +222,7 @@ function_ff02b202(b_skipped, var_19e802fa) {
 
 function_24479f38() {
   level.var_5cb7d214 = {
-    #n_wood: 0,
-    #var_e913cb3d: [],
-    #n_charcoal: 0,
-    #var_952cc98d: 0,
-    #var_cdbfd18f: 0,
-    #n_dung: 0
+    #n_wood: 0, #var_e913cb3d: [], #n_charcoal: 0, #var_952cc98d: 0, #var_cdbfd18f: 0, #n_dung: 0
   };
   level.var_5cb7d214.var_5170a4f8 = array("danu_basement_to_bottom_floor", "danu_bottom_floor_to_top_floor", "connect_starting_area_to_danu_hallway", "connect_danu_tower", "connect_danu_basement_to_danu_ra_tunnel", "connect_danu_ra_bridge");
   a_mdl_pieces = getEntArray("fertilizer_pieces", "script_noteworthy");
@@ -3466,8 +3461,7 @@ function_fa986cd(v_start, v_end, v_heading) {
 
   for(i = 0; i < a_v_points.size - 1; i++) {
     s_line = {
-      #v_from: a_v_points[i],
-      #v_to: a_v_points[i + 1]
+      #v_from: a_v_points[i], #v_to: a_v_points[i + 1]
     };
 
     if(!isDefined(a_s_lines)) {
@@ -3482,8 +3476,7 @@ function_fa986cd(v_start, v_end, v_heading) {
   }
 
   return {
-    #a_v_points: a_v_points,
-    #a_s_lines: a_s_lines
+    #a_v_points: a_v_points, #a_s_lines: a_s_lines
   };
 }
 
@@ -3512,9 +3505,7 @@ function_54922a21() {
       if(v_dist < 1600) {
         v_dir = vectornormalize(v_pos - e_player getEye());
         e_rune.t_trig notify(#"charge_hit", {
-          #position: v_pos,
-          #attacker: e_player,
-          #direction: v_dir
+          #position: v_pos, #attacker: e_player, #direction: v_dir
         });
       }
     }
@@ -3834,461 +3825,157 @@ function_faee09d2() {
   var_76ed7b30 = 9;
   var_3cb006b6 = 9.23077;
   level.var_34a4aede = array({
-    #time: 0,
-    #archetype: # "normal",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 1.5,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: var_617c504e * 2,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 3,
-    #archetype: # "plasma",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 3,
-    #archetype: # "plasma",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: var_617c504e * 4,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 4,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 2
-  }, {
-    #time: var_617c504e * 4,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: var_617c504e * 5,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 5,
-    #archetype: # "tiger",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 5,
-    #archetype: # "tiger",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: var_617c504e * 6,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 6,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: var_617c504e * 7,
-    #archetype: # "plasma",
-    #quantity: 1,
-    #lanes: array(1, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 7,
-    #archetype: # "plasma",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: var_617c504e * 7.5,
-    #archetype: # "plasma",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: var_617c504e * 7.5,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 8,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 8,
-    #archetype: # "tiger",
-    #quantity: 3,
-    #lanes: array(2),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 8,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: var_617c504e * 8,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: var_617c504e * 9,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 9,
-    #archetype: # "tiger",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: var_617c504e * 9,
-    #archetype: # "tiger",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 90 + var_76ed7b30,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 2,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 3,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 90 + var_76ed7b30 * 4,
-    #archetype: # "corrosive",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 4,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: 90 + var_76ed7b30 * 4,
-    #archetype: # "plasma",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 90 + var_76ed7b30 * 5,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 5,
-    #archetype: # "glad_m",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 5,
-    #archetype: # "glad_m",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 90 + var_76ed7b30 * 6,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 7,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 7,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: 90 + var_76ed7b30 * 7,
-    #archetype: # "corrosive",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 2
-  }, {
-    #time: 90 + var_76ed7b30 * 7,
-    #archetype: # "corrosive",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: 90 + var_76ed7b30 * 7,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 90 + var_76ed7b30 * 8,
-    #archetype: # "glad_m",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 90 + var_76ed7b30 * 9,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 9,
-    #archetype: # "glad_r",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 90 + var_76ed7b30 * 9,
-    #archetype: # "glad_r",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 2
-  }, {
-    #time: 90 + var_76ed7b30 * 9,
-    #archetype: # "glad_r",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: 180 + var_3cb006b6,
-    #archetype: # "tiger",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 2,
-    #archetype: # "tiger",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 2.5,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: 180 + var_3cb006b6 * 3,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 2
-  }, {
-    #time: 180 + var_3cb006b6 * 3,
-    #archetype: # "tiger",
-    #quantity: 2,
-    #lanes: array(1, 3),
-    #minplayers: 3
-  }, {
-    #time: 180 + var_3cb006b6 * 4,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 4,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 2
-  }, {
-    #time: 180 + var_3cb006b6 * 5,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 180 + var_3cb006b6 * 5,
-    #archetype: # "glad_m",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 5,
-    #archetype: # "glad_r",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 180 + var_3cb006b6 * 6,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 6,
-    #archetype: # "plasma",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 7,
-    #archetype: # "tiger",
-    #quantity: 2,
-    #lanes: array(1, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 7,
-    #archetype: # "normal",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: 180 + var_3cb006b6 * 8,
-    #archetype: # "tiger",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 8.5,
-    #archetype: # "tiger",
-    #quantity: 2,
-    #lanes: array(2),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 9,
-    #archetype: # "glad_m",
-    #quantity: 2,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 9,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 4
-  }, {
-    #time: 180 + var_3cb006b6 * 9,
-    #archetype: # "glad_m",
-    #quantity: 1,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
-  }, {
-    #time: 180 + var_3cb006b6 * 9,
-    #archetype: # "glad_r",
-    #quantity: 2,
-    #lanes: array(2),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 10,
-    #archetype: # "normal",
-    #quantity: 3,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 10,
-    #archetype: # "corrosive",
-    #quantity: 1,
-    #lanes: array(1, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 10,
-    #archetype: # "tiger",
-    #quantity: 3,
-    #lanes: array(2),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 10,
-    #archetype: # "glad_m",
-    #quantity: 2,
-    #lanes: array(2),
-    #minplayers: 2
-  }, {
-    #time: 180 + var_3cb006b6 * 10,
-    #archetype: # "glad_r",
-    #quantity: 2,
-    #lanes: array(1, 3),
-    #minplayers: 4
-  }, {
-    #time: 180 + var_3cb006b6 * 11,
-    #archetype: # "normal",
-    #quantity: 4,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 11,
-    #archetype: # "blight",
-    #quantity: 1,
-    #lanes: array(1),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 11,
-    #archetype: # "blight",
-    #quantity: 1,
-    #lanes: array(3),
-    #minplayers: 2
-  }, {
-    #time: 180 + var_3cb006b6 * 11.5,
-    #archetype: # "blight",
-    #quantity: 1,
-    #lanes: array(3),
-    #minplayers: 4
-  }, {
-    #time: 180 + var_3cb006b6 * 12,
-    #archetype: # "normal",
-    #quantity: 4,
-    #lanes: array(1, 2, 3),
-    #minplayers: 1
-  }, {
-    #time: 180 + var_3cb006b6 * 12.5,
-    #archetype: # "normal",
-    #quantity: 4,
-    #lanes: array(1, 2, 3),
-    #minplayers: 3
+    #time: 0, #archetype: # "normal", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 1.5, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: var_617c504e * 2, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 3, #archetype: # "plasma", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 3, #archetype: # "plasma", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: var_617c504e * 4, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 4, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 2
+  }, {
+    #time: var_617c504e * 4, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: var_617c504e * 5, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 5, #archetype: # "tiger", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 5, #archetype: # "tiger", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: var_617c504e * 6, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 6, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: var_617c504e * 7, #archetype: # "plasma", #quantity: 1, #lanes: array(1, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 7, #archetype: # "plasma", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: var_617c504e * 7.5, #archetype: # "plasma", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: var_617c504e * 7.5, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 8, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 8, #archetype: # "tiger", #quantity: 3, #lanes: array(2), #minplayers: 1
+  }, {
+    #time: var_617c504e * 8, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: var_617c504e * 8, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: var_617c504e * 9, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 9, #archetype: # "tiger", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: var_617c504e * 9, #archetype: # "tiger", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 90 + var_76ed7b30, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 2, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 3, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 90 + var_76ed7b30 * 4, #archetype: # "corrosive", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 4, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: 90 + var_76ed7b30 * 4, #archetype: # "plasma", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 90 + var_76ed7b30 * 5, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 5, #archetype: # "glad_m", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 5, #archetype: # "glad_m", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 90 + var_76ed7b30 * 6, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 7, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 7, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: 90 + var_76ed7b30 * 7, #archetype: # "corrosive", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 2
+  }, {
+    #time: 90 + var_76ed7b30 * 7, #archetype: # "corrosive", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: 90 + var_76ed7b30 * 7, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 90 + var_76ed7b30 * 8, #archetype: # "glad_m", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 90 + var_76ed7b30 * 9, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 9, #archetype: # "glad_r", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 90 + var_76ed7b30 * 9, #archetype: # "glad_r", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 2
+  }, {
+    #time: 90 + var_76ed7b30 * 9, #archetype: # "glad_r", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: 180 + var_3cb006b6, #archetype: # "tiger", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 2, #archetype: # "tiger", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 2.5, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: 180 + var_3cb006b6 * 3, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 2
+  }, {
+    #time: 180 + var_3cb006b6 * 3, #archetype: # "tiger", #quantity: 2, #lanes: array(1, 3), #minplayers: 3
+  }, {
+    #time: 180 + var_3cb006b6 * 4, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 4, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 2
+  }, {
+    #time: 180 + var_3cb006b6 * 5, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 180 + var_3cb006b6 * 5, #archetype: # "glad_m", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 5, #archetype: # "glad_r", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 180 + var_3cb006b6 * 6, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 6, #archetype: # "plasma", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 7, #archetype: # "tiger", #quantity: 2, #lanes: array(1, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 7, #archetype: # "normal", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: 180 + var_3cb006b6 * 8, #archetype: # "tiger", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 8.5, #archetype: # "tiger", #quantity: 2, #lanes: array(2), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 9, #archetype: # "glad_m", #quantity: 2, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 9, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 4
+  }, {
+    #time: 180 + var_3cb006b6 * 9, #archetype: # "glad_m", #quantity: 1, #lanes: array(1, 2, 3), #minplayers: 3
+  }, {
+    #time: 180 + var_3cb006b6 * 9, #archetype: # "glad_r", #quantity: 2, #lanes: array(2), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 10, #archetype: # "normal", #quantity: 3, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 10, #archetype: # "corrosive", #quantity: 1, #lanes: array(1, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 10, #archetype: # "tiger", #quantity: 3, #lanes: array(2), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 10, #archetype: # "glad_m", #quantity: 2, #lanes: array(2), #minplayers: 2
+  }, {
+    #time: 180 + var_3cb006b6 * 10, #archetype: # "glad_r", #quantity: 2, #lanes: array(1, 3), #minplayers: 4
+  }, {
+    #time: 180 + var_3cb006b6 * 11, #archetype: # "normal", #quantity: 4, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 11, #archetype: # "blight", #quantity: 1, #lanes: array(1), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 11, #archetype: # "blight", #quantity: 1, #lanes: array(3), #minplayers: 2
+  }, {
+    #time: 180 + var_3cb006b6 * 11.5, #archetype: # "blight", #quantity: 1, #lanes: array(3), #minplayers: 4
+  }, {
+    #time: 180 + var_3cb006b6 * 12, #archetype: # "normal", #quantity: 4, #lanes: array(1, 2, 3), #minplayers: 1
+  }, {
+    #time: 180 + var_3cb006b6 * 12.5, #archetype: # "normal", #quantity: 4, #lanes: array(1, 2, 3), #minplayers: 3
   });
 
   while(!level flag::get(#"hash_277d03629ade12e8")) {
@@ -4413,8 +4100,7 @@ defend_spawn(var_4bf95f4c) {
 
     if(isDefined(ai)) {
       level notify(#"trilane_debug", {
-        #ai: ai,
-        #spawn: var_6454115e
+        #ai: ai, #spawn: var_6454115e
       });
     }
 
@@ -4424,13 +4110,9 @@ defend_spawn(var_4bf95f4c) {
 function_aa67baee() {
   level endon(#"end_game");
   level.var_e7f6d6dd = array({
-    #time: 95,
-    #powerup: "full_ammo",
-    #delay: &function_c12ff921
+    #time: 95, #powerup: "full_ammo", #delay: &function_c12ff921
   }, {
-    #time: 185,
-    #powerup: "full_ammo",
-    #delay: &function_c12ff921
+    #time: 185, #powerup: "full_ammo", #delay: &function_c12ff921
   });
   s_loc = struct::get(#"hash_74b68c7b7af8e368");
 

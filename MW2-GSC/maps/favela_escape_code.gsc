@@ -49,68 +49,47 @@ triggered_hostile_bursts_setup() {
 triggered_hostile_burst_setup_lines() {
   lines = [];
 
-  // "You're going to pay for what you did to my brother, soldier! You hear me?"
-  lines[lines.size] = "favesc_pe1_youhearme";
+  // "You're going to pay for what you did to my brother, soldier! You hear me?"lines[lines.size] = "favesc_pe1_youhearme";
 
-  // "Eduardo, call the truck! And bring more grenades! We're going to flush them out of this building!"
-  lines[lines.size] = "favesc_pe2_callthetruck";
+  // "Eduardo, call the truck! And bring more grenades! We're going to flush them out of this building!"lines[lines.size] = "favesc_pe2_callthetruck";
 
-  // "We're going to kill you slowly for what you've done here. Do you hear me?"
-  lines[lines.size] = "favesc_pe3_killslowly";
+  // "We're going to kill you slowly for what you've done here. Do you hear me?"lines[lines.size] = "favesc_pe3_killslowly";
 
-  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"
-  lines[lines.size] = "favesc_pe3_cantstop";
+  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"lines[lines.size] = "favesc_pe3_cantstop";
 
-  // "There is nowhere for you to run!!! We will find you wherever you go!!"
-  lines[lines.size] = "favesc_pe4_wellfindyou";
+  // "There is nowhere for you to run!!! We will find you wherever you go!!"lines[lines.size] = "favesc_pe4_wellfindyou";
 
-  // "Heitor, set up the machine gun in the alley over on the next street, in case they go that way!!!"
-  lines[lines.size] = "favesc_pe3_mginalley";
+  // "Heitor, set up the machine gun in the alley over on the next street, in case they go that way!!!"lines[lines.size] = "favesc_pe3_mginalley";
 
-  // "Go after them!! Hurry!! Run them down!!"
-  lines[lines.size] = "favesc_pe3_afterthem";
+  // "Go after them!! Hurry!! Run them down!!"lines[lines.size] = "favesc_pe3_afterthem";
 
-  // "Block the exits from this area! Don't let them escape!!"
-  lines[lines.size] = "favesc_pe3_blockexits";
+  // "Block the exits from this area! Don't let them escape!!"lines[lines.size] = "favesc_pe3_blockexits";
 
-  // "Kill them!!! Kill them all!!! They deserve nothing less!!!"
-  lines[lines.size] = "favesc_pe4_killthemall";
+  // "Kill them!!! Kill them all!!! They deserve nothing less!!!"lines[lines.size] = "favesc_pe4_killthemall";
 
-  // "There is nowhere for you to run!!! We will find you wherever you go!!"
-  lines[lines.size] = "favesc_pe4_wellfindyou";
+  // "There is nowhere for you to run!!! We will find you wherever you go!!"lines[lines.size] = "favesc_pe4_wellfindyou";
 
-  // "Chase them!! Chase them!!!"
-  lines[lines.size] = "favesc_pe4_chasethem";
+  // "Chase them!! Chase them!!!"lines[lines.size] = "favesc_pe4_chasethem";
 
-  // "Hunt them down like animals!!!"
-  lines[lines.size] = "favesc_pe4_huntthem";
+  // "Hunt them down like animals!!!"lines[lines.size] = "favesc_pe4_huntthem";
 
-  // "I'm going to cut you apart, limb by limb!!!"
-  lines[lines.size] = "favesc_pe2_limbbylimb";
+  // "I'm going to cut you apart, limb by limb!!!"lines[lines.size] = "favesc_pe2_limbbylimb";
 
-  // "People like you killed my family!! Never again!!!"
-  lines[lines.size] = "favesc_pe4_neveragain";
+  // "People like you killed my family!! Never again!!!"lines[lines.size] = "favesc_pe4_neveragain";
 
-  // "The police have no honor, now they send mercenaries to oppress us!!!"
-  lines[lines.size] = "favesc_pe1_nohonor";
+  // "The police have no honor, now they send mercenaries to oppress us!!!"lines[lines.size] = "favesc_pe1_nohonor";
 
-  // "Don't just throw the grenades! Wait at least two seconds before you throw them!"
-  lines[lines.size] = "favesc_pe2_wait2seconds";
+  // "Don't just throw the grenades! Wait at least two seconds before you throw them!"lines[lines.size] = "favesc_pe2_wait2seconds";
 
-  // "If you capture them, keep them alive so we can use the machete!!!"
-  lines[lines.size] = "favesc_pe1_keepthemalive";
+  // "If you capture them, keep them alive so we can use the machete!!!"lines[lines.size] = "favesc_pe1_keepthemalive";
 
-  // "We need more bandages for the wounded!"
-  lines[lines.size] = "favesc_pe2_morebandages";
+  // "We need more bandages for the wounded!"lines[lines.size] = "favesc_pe2_morebandages";
 
-  // "I will avenge my brother!!"
-  lines[lines.size] = "favesc_pe1_avengemybrother";
+  // "I will avenge my brother!!"lines[lines.size] = "favesc_pe1_avengemybrother";
 
-  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"
-  lines[lines.size] = "favesc_pe3_cantstop";
+  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"lines[lines.size] = "favesc_pe3_cantstop";
 
-  // "You're all going to die up here for all the blood you've spilled!!!"
-  lines[lines.size] = "favesc_pe1_goingtodie";
+  // "You're all going to die up here for all the blood you've spilled!!!"lines[lines.size] = "favesc_pe1_goingtodie";
 
   lines = array_randomize(lines);
 
@@ -250,34 +229,25 @@ radiotower_runpath_dialogue() {
 
   flag_wait("introscreen_start_dialogue");
 
-  // "Sir, the militia's closin' in! Almost two hundred of 'em, front and back!"
-  level.hero1 dialogue("favesc_gst_closingin");
+  // "Sir, the militia's closin' in! Almost two hundred of 'em, front and back!"level.hero1 dialogue("favesc_gst_closingin");
 
-  // "We're gonna have to fight our way to the LZ! Let's go!"
-  level.sarge dialogue("favesc_cmt_fightourway");
+  // "We're gonna have to fight our way to the LZ! Let's go!"level.sarge dialogue("favesc_cmt_fightourway");
 
-  // "What about Rojas?"
-  level.hero1 dialogue("favesc_gst_whataboutrojas");
+  // "What about Rojas?"level.hero1 dialogue("favesc_gst_whataboutrojas");
 
-  // "Victim of a hostile takeover?"
-  level.sarge dialogue("favesc_cmt_takeover");
+  // "Victim of a hostile takeover?"level.sarge dialogue("favesc_cmt_takeover");
 
-  // "Works for me."
-  level.hero1 dialogue("favesc_gst_worksforme");
+  // "Works for me."level.hero1 dialogue("favesc_gst_worksforme");
 
   flag_wait(waitflag);
 
-  // "Nikolai! We're at the top of the favela surrounded by militia! Bring the chopper to the market, do you copy, over!"
-  level.sarge dialogue("favesc_cmt_surrounded");
+  // "Nikolai! We're at the top of the favela surrounded by militia! Bring the chopper to the market, do you copy, over!"level.sarge dialogue("favesc_cmt_surrounded");
 
-  // "Ok my friend, I am on the way!"
-  radio_dialogue("favesc_nkl_ontheway");
+  // "Ok my friend, I am on the way!"radio_dialogue("favesc_nkl_ontheway");
 
-  // "Everyone get ready! Lock and load! "
-  level.sarge dialogue("favesc_cmt_lockandload");
+  // "Everyone get ready! Lock and load! "level.sarge dialogue("favesc_cmt_lockandload");
 
-  // "Let's do this!!"
-  level.hero1 dialogue("favesc_gst_letsdothis");
+  // "Let's do this!!"level.hero1 dialogue("favesc_gst_letsdothis");
 
   flag_set("radiotower_runpath_dialogue_done");
 }
@@ -334,8 +304,7 @@ radiotower_runup_scout() {
   guy endon("death");
   guy.allowdeath = true;
 
-  // "Here they come!"
-  guy thread play_sound_on_entity("favesc_pe1_heretheycome");
+  // "Here they come!"guy thread play_sound_on_entity("favesc_pe1_heretheycome");
   spawner anim_generic(guy, anime);
 
   guy.goalradius = 64;
@@ -381,8 +350,7 @@ radiotower_doorkick_1() {
   thread door_kick_housespawn(spawners, door, kickRef);
 
   if(flag("radiotower_runpath_dialogue_done")) {
-    // "Militia comin' out of the shack on the left!"
-    level.hero1 delaythread(1, ::dialogue, "favesc_gst_shackonleft");
+    // "Militia comin' out of the shack on the left!"level.hero1 delaythread(1, ::dialogue, "favesc_gst_shackonleft");
   }
 
   // makes sure that dudes will go out the kicked door
@@ -720,11 +688,9 @@ radiotower_escape_dialogue() {
   thread radiotower_enemy_callout_rooftop();
   thread radiotower_enemy_callout_walljumpers_left();
 
-  // "Tangos at ground level dead ahead!!"
-  level.hero1 dialogue("favesc_gst_deadahead");
+  // "Tangos at ground level dead ahead!!"level.hero1 dialogue("favesc_gst_deadahead");
 
-  // "We've gotta get to the helicopter - head through the gate to the market! Move!"
-  level.sarge dialogue("favesc_cmt_thrugate");
+  // "We've gotta get to the helicopter - head through the gate to the market! Move!"level.sarge dialogue("favesc_cmt_thrugate");
 
   battlechatter_on("allies");
 
@@ -732,13 +698,11 @@ radiotower_escape_dialogue() {
 
   battlechatter_off("allies");
 
-  // "Technical comin' in from the south!!"
-  level.hero1 dialogue("favesc_gst_technical");
+  // "Technical comin' in from the south!!"level.hero1 dialogue("favesc_gst_technical");
 
   flag_wait("radiotower_escape_technical_2_arrival");
 
-  // "We got another technical! Take it out!!!"
-  level.sarge dialogue("favesc_cmt_technical");
+  // "We got another technical! Take it out!!!"level.sarge dialogue("favesc_cmt_technical");
 
   battlechatter_on("allies");
 }
@@ -759,8 +723,7 @@ radiotower_enemy_callout_rooftop() {
   }
   */
 
-  // "Contaaact!!! Foot-mobiles on the rooftops, closing in fast from the south!!!"
-  level.hero1 dialogue("favesc_gst_onrooftops");
+  // "Contaaact!!! Foot-mobiles on the rooftops, closing in fast from the south!!!"level.hero1 dialogue("favesc_gst_onrooftops");
 }
 
 radiotower_enemy_callout_walljumpers_left() {
@@ -770,8 +733,7 @@ radiotower_enemy_callout_walljumpers_left() {
 
   //flag_waitopen( "scripted_dialogue" );
 
-  // "Tangos moving in low from the southeast!"
-  level.sarge dialogue("favesc_cmt_lowfromse");
+  // "Tangos moving in low from the southeast!"level.sarge dialogue("favesc_cmt_lowfromse");
 }
 
 radiotower_enemies_retreat() {
@@ -822,11 +784,9 @@ radiotower_enemies_retreat() {
   enemies = array_removedead(enemies);
   thread array_call(enemies, ::SetGoalVolumeAuto, retreatVolume);
 
-  // "Head through that gate!!! Keep pushing to the evac point!!!"
-  level.sarge dialogue("favesc_cmt_thruthatgate");
+  // "Head through that gate!!! Keep pushing to the evac point!!!"level.sarge dialogue("favesc_cmt_thruthatgate");
 
-  // "Go! Go! Go!"
-  level.hero1 dialogue("favesc_gst_gogogo");
+  // "Go! Go! Go!"level.hero1 dialogue("favesc_gst_gogogo");
 
   flag_set("radiotower_escape_moveup");
 
@@ -853,18 +813,15 @@ street_dialogue() {
 
   flag_wait("vista1_dialogue_start");
 
-  // "Let's go, let's go!We've gotta push through these streets to the market!"
-  level.sarge dialogue("favesc_cmt_pushthrustreets");
+  // "Let's go, let's go!We've gotta push through these streets to the market!"level.sarge dialogue("favesc_cmt_pushthrustreets");
 
   flag_wait("multipath_dialogue_start");
 
-  // "Watch for flanking routes!"
-  level.sarge dialogue("favesc_cmt_flankingroutes");
+  // "Watch for flanking routes!"level.sarge dialogue("favesc_cmt_flankingroutes");
 
   flag_wait("almostatmarket_dialogue_start");
 
-  // "Keep moving!! We're almost at the market!"
-  level.sarge dialogue("favesc_cmt_almostatmarket");
+  // "Keep moving!! We're almost at the market!"level.sarge dialogue("favesc_cmt_almostatmarket");
 }
 
 street_dialogue_playerabove() {
@@ -872,15 +829,13 @@ street_dialogue_playerabove() {
 
   flag_wait("playerabove_dialogue_start");
 
-  // "Roach! Lay down some fire on the intersection!"
-  level.sarge dialogue("favesc_cmt_laydownfire");
+  // "Roach! Lay down some fire on the intersection!"level.sarge dialogue("favesc_cmt_laydownfire");
 }
 
 street_dialogue_leftalley() {
   flag_wait("leftalley_dialogue_start");
 
-  // "Heads up! Alley on the left!"
-  level.sarge thread dialogue("favesc_cmt_alleyonleft");
+  // "Heads up! Alley on the left!"level.sarge thread dialogue("favesc_cmt_alleyonleft");
 }
 
 vista1_door1_kick() {
@@ -925,8 +880,7 @@ vista1_wavingguy() {
 
   guy notify("wavingguy_activated");
 
-  // "Attaaaack!"
-  guy thread play_sound_on_entity("favesc_pe1_attack");
+  // "Attaaaack!"guy thread play_sound_on_entity("favesc_pe1_attack");
 
   // he waves them on
   animref anim_generic(guy, anime);
@@ -1151,8 +1105,7 @@ market_dialogue() {
 
   wait(2);
 
-  // "Squad! Split up and clear the market! Watch your sectors - these guys are everywhere!"
-  level.sarge dialogue("favesc_cmt_splitup");
+  // "Squad! Split up and clear the market! Watch your sectors - these guys are everywhere!"level.sarge dialogue("favesc_cmt_splitup");
 
   flag_set("market_introdialogue_done");
 }
@@ -1162,8 +1115,7 @@ market_dialogue_chaoticaboves() {
 
   flag_wait("market_introdialogue_done");
 
-  // "Contacts above us at 11 o'clock, firing blind!"
-  level.hero1 dialogue("favesc_gst_firingblind");
+  // "Contacts above us at 11 o'clock, firing blind!"level.hero1 dialogue("favesc_gst_firingblind");
 }
 
 market_dialogue_rightshack() {
@@ -1175,8 +1127,7 @@ market_dialogue_rightshack() {
     wait(2);
   }
 
-  // "Tango coming out of the shack on the right!!!"
-  level.sarge dialogue("favesc_cmt_shackonright");
+  // "Tango coming out of the shack on the right!!!"level.sarge dialogue("favesc_cmt_shackonright");
 }
 
 market_kill_extra_redshirts() {
@@ -1233,26 +1184,20 @@ market_evac_dialogue() {
 
   battlechatter_off("allies");
 
-  // "Nikolai! ETA 20 seconds! Be ready for immediate dustoff!"
-  level.sarge dialogue("favesc_cmt_immediatedustoff");
+  // "Nikolai! ETA 20 seconds! Be ready for immediate dustoff!"level.sarge dialogue("favesc_cmt_immediatedustoff");
 
-  // "That may not be fast enough! I see more militia closing in on the market!"
-  radio_dialogue("favesc_nkl_notfastenough");
+  // "That may not be fast enough! I see more militia closing in on the market!"radio_dialogue("favesc_nkl_notfastenough");
 
-  // "Pick up the pace! Let's go!"
-  level.sarge dialogue("favesc_cmt_pickuppace");
+  // "Pick up the pace! Let's go!"level.sarge dialogue("favesc_cmt_pickuppace");
 
   flag_wait("market_evac_chopper_incoming");
 
-  // "It's too hot! We will not survive this landing!"
-  radio_dialogue("favesc_nkl_toohot");
+  // "It's too hot! We will not survive this landing!"radio_dialogue("favesc_nkl_toohot");
 
   delaythread(2, ::favesc_waveoff_music);
-  // "Nikolai, wave off, wave off! We'll meet you at the secondary LZ instead! Go!"
-  level.sarge dialogue("favesc_cmt_waveoff");
+  // "Nikolai, wave off, wave off! We'll meet you at the secondary LZ instead! Go!"level.sarge dialogue("favesc_cmt_waveoff");
 
-  // "Very well, I will meet you there! Good luck!"
-  radio_dialogue("favesc_nkl_meetyouthere");
+  // "Very well, I will meet you there! Good luck!"radio_dialogue("favesc_nkl_meetyouthere");
 }
 
 spawn_chopper(spawngroup, followPath) {
@@ -1356,20 +1301,13 @@ market_evac_enemy_foreshadowing() {
   killflag = "market_evac_ambush_start";
 
   lines = [];
-  // "You're going to pay for what you did to my brother, soldier! You hear me?"
-  lines[lines.size] = "favesc_pe1_youhearme";
-  // "Eduardo, call the truck! And bring more grenades! We're going to flush them out of this building!"
-  lines[lines.size] = "favesc_pe2_callthetruck";
-  // "We're going to kill you slowly for what you've done here. Do you hear me?"
-  lines[lines.size] = "favesc_pe3_killslowly";
-  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"
-  lines[lines.size] = "favesc_pe3_cantstop";
-  // "They have a helicopter!! Bring more rockets!!! We can shoot it down!!"
-  lines[lines.size] = "favesc_pe2_morerockets";
-  // "There is nowhere for you to run!!! We will find you wherever you go!!"
-  lines[lines.size] = "favesc_pe4_wellfindyou";
-  // "If you capture them, keep them alive so we can use the machete!!!"
-  lines[lines.size] = "favesc_pe1_keepthemalive";
+  // "You're going to pay for what you did to my brother, soldier! You hear me?"lines[lines.size] = "favesc_pe1_youhearme";
+  // "Eduardo, call the truck! And bring more grenades! We're going to flush them out of this building!"lines[lines.size] = "favesc_pe2_callthetruck";
+  // "We're going to kill you slowly for what you've done here. Do you hear me?"lines[lines.size] = "favesc_pe3_killslowly";
+  // "Get on the roof of those buildings and go around them!! They can't stop all of us!!"lines[lines.size] = "favesc_pe3_cantstop";
+  // "They have a helicopter!! Bring more rockets!!! We can shoot it down!!"lines[lines.size] = "favesc_pe2_morerockets";
+  // "There is nowhere for you to run!!! We will find you wherever you go!!"lines[lines.size] = "favesc_pe4_wellfindyou";
+  // "If you capture them, keep them alive so we can use the machete!!!"lines[lines.size] = "favesc_pe1_keepthemalive";
 
   firstWaitMax = 3.5;
   lineWaitMin = 8;
@@ -1656,12 +1594,9 @@ market_evac_bugplayer() {
   level endon(stopflag);
 
   lines = [];
-  // "Roach! Get up here on the rooftops, let's go!"
-  lines[lines.size] = "favesc_cmt_getuphere";
-  // "Roach! Get over here and climb up to the rooftops!"
-  lines[lines.size] = "favesc_cmt_climbup";
-  // "Roach! You can climb up over here!"
-  lines[lines.size] = "favesc_cmt_climbuphere";
+  // "Roach! Get up here on the rooftops, let's go!"lines[lines.size] = "favesc_cmt_getuphere";
+  // "Roach! Get over here and climb up to the rooftops!"lines[lines.size] = "favesc_cmt_climbup";
+  // "Roach! You can climb up over here!"lines[lines.size] = "favesc_cmt_climbuphere";
 
   while(!flag(stopflag) && isDefined(level.sarge)) {
     lines = array_randomize(lines);
@@ -1737,29 +1672,21 @@ player_left_trigger_notify(trig) {
 // --- ROOF RUN ---
 // ----------------
 roofrun_dialogue() {
-  // "Let's go, let's go!!"
-  level.sarge dialogue("favesc_cmt_letsgoletsgo");
+  // "Let's go, let's go!!"level.sarge dialogue("favesc_cmt_letsgoletsgo");
 
-  // "My friend, from up here, it looks like the whole village is trying to kill you!"
-  radio_dialogue("favesc_nkl_wholevillage");
+  // "My friend, from up here, it looks like the whole village is trying to kill you!"radio_dialogue("favesc_nkl_wholevillage");
 
-  // "Tell me something I don't know! Just get ready to pick us up at the secondary RV!"
-  level.sarge dialogue("favesc_cmt_pickusup");
+  // "Tell me something I don't know! Just get ready to pick us up at the secondary RV!"level.sarge dialogue("favesc_cmt_pickusup");
 
   // DEPRECATED - not enough time to use this one
-  // "Ok, I will pick you up soon, keep going!"
-  //radio_dialogue( "favesc_nkl_keepgoing" );
+  // "Ok, I will pick you up soon, keep going!"//radio_dialogue( "favesc_nkl_keepgoing" );
 
-  // "We're running out of rooftop!!!"
-  level.hero1 dialogue("favesc_gst_runoutofroof");
+  // "We're running out of rooftop!!!"level.hero1 dialogue("favesc_gst_runoutofroof");
   // (add after this line so the scr_sound doesn't stomp on the scripted dialogue if the timing works out that way)
-  // "Unghh!"
-  level.scr_sound["freerunner"]["favela_escape_bigjump_ghost"] = "favesc_gst_jumpsfx";
+  // "Unghh!"level.scr_sound["freerunner"]["favela_escape_bigjump_ghost"] = "favesc_gst_jumpsfx";
 
-  // "We can make it! Go go go!"
-  level.sarge dialogue("favesc_cmt_makeitgogo");
-  // "Uraaa!"
-  level.scr_sound["freerunner"]["favela_escape_bigjump_soap"] = "favesc_cmt_jumpsfx";
+  // "We can make it! Go go go!"level.sarge dialogue("favesc_cmt_makeitgogo");
+  // "Uraaa!"level.scr_sound["freerunner"]["favela_escape_bigjump_soap"] = "favesc_cmt_jumpsfx";
 
   if(!flag("player_jump_watcher_stop") && !flag("player_fell_normally")) {
     thread roofrun_nag_dialogue();
@@ -1772,12 +1699,9 @@ roofrun_nag_dialogue() {
   level endon("player_jump_watcher_stop");
 
   nags = [];
-  // "C'mon Roach, we're almost at the chopper!"
-  nags[0] = "favesc_cmt_gettochopper";
-  // "Roach, what's the holdup, let's go!"
-  nags[1] = "favesc_cmt_whatsholdup";
-  // "We've got to get out of here, Roach, come on!"
-  nags[2] = "favesc_cmt_getoutta";
+  // "C'mon Roach, we're almost at the chopper!"nags[0] = "favesc_cmt_gettochopper";
+  // "Roach, what's the holdup, let's go!"nags[1] = "favesc_cmt_whatsholdup";
+  // "We've got to get out of here, Roach, come on!"nags[2] = "favesc_cmt_getoutta";
 
   nagIdx = 0;
   minWait = 10000;
@@ -2625,18 +2549,15 @@ bigjump_heartbeat(waitTime) {
 bigjump_dialogue(waitTime) {
   wait(5.5);
 
-  // "Roach!!! Roach!!! Wake up!!!"
-  radio_dialogue("favesc_cmt_wakeup");
+  // "Roach!!! Roach!!! Wake up!!!"radio_dialogue("favesc_cmt_wakeup");
 
   wait(0.5);
 
-  // "Roach! We can see them from the chopper! They're coming for you, dozens of 'em!!!"
-  radio_dialogue("favesc_gst_comingforyou");
+  // "Roach! We can see them from the chopper! They're coming for you, dozens of 'em!!!"radio_dialogue("favesc_gst_comingforyou");
 
   wait(0.5);
 
-  // "Roach! There's too many of them! Get the hell out of there and find a way to the rooftops! Move!"
-  thread radio_dialogue("favesc_cmt_toomany");
+  // "Roach! There's too many of them! Get the hell out of there and find a way to the rooftops! Move!"thread radio_dialogue("favesc_cmt_toomany");
 }
 
 bigjump_angrymob(waitTime) {
@@ -2942,8 +2863,7 @@ killTimer() {
 solorun_start_playerfail(timeout) {
   level endon("solorun_player_off_balcony");
 
-  // "Run for it!!! Get to the rooftops!!"
-  thread radio_dialogue("favesc_cmt_runforit");
+  // "Run for it!!! Get to the rooftops!!"thread radio_dialogue("favesc_cmt_runforit");
 
   xTest = -6074;
   zTest = 900;
@@ -3199,8 +3119,7 @@ solorun_slowmoving_gameskill_settings() {
 solorun_playerhurt_replacehint() {
   wait(1);
 
-  // "You are Hurt, Run For Your Life!"
-  level.strings["take_cover"].text = &"FAVELA_ESCAPE_SOLORUN_KEEP_MOVING";
+  // "You are Hurt, Run For Your Life!"level.strings["take_cover"].text = &"FAVELA_ESCAPE_SOLORUN_KEEP_MOVING";
 }
 
 solorun_player_progression_tracker() {
@@ -3291,8 +3210,7 @@ solorun_sprint_tracker() {
 }
 
 sprint_hint(flagstr) {
-  hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."
-  if(!level.console) {
+  hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC_ALT"; // "Press ^3[{+breath_sprint}]^7 while moving forward to sprint."if(!level.console) {
     change = false;
 
     // we want the sprint command to be the one that gets displayed on PC
@@ -3305,8 +3223,7 @@ sprint_hint(flagstr) {
     }
 
     if(change) {
-      hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."
-    }
+      hintstr = &"FAVELA_ESCAPE_HINT_SPRINT_PC"; //"Press ^3[{+sprint}]^7 while moving forward to sprint."}
   }
 
   fontsize = 1.6;
@@ -3417,8 +3334,7 @@ player_bullet_whizby_trig() {
   shotWaitMin = 0.07;
   shotWaitMax = 0.1;
 
-  // either target a bunch of spots (for random squibs),
-  //or just one spot that targets a line of spots (for ordered squibs)
+  // either target a bunch of spots (for random squibs), //or just one spot that targets a line of spots (for ordered squibs)
   squibs = GetStructArray(self.target, "targetname");
   if(squibs.size == 1) {
     squibs = get_targeted_line_array(squibs[0]);
@@ -3641,29 +3557,23 @@ solorun_dialogue(bugplayer) {
   }
 
   flag_wait(balconyflag);
-  // "Roach! I see you! Jump down to the rooftops and meet us south of your position! Go!"
-  radio_dialogue("favesc_cmt_meetussouth");
+  // "Roach! I see you! Jump down to the rooftops and meet us south of your position! Go!"radio_dialogue("favesc_cmt_meetussouth");
 
-  // "Gas is very low! I must leave in thirty seconds, ok?"
-  radio_dialogue("favesc_nkl_verylow");
+  // "Gas is very low! I must leave in thirty seconds, ok?"radio_dialogue("favesc_nkl_verylow");
 
   flag_set("solorun_timer_start");
 
-  // "Roach! We're running on fumes here! You got thirty seconds! Run!"
-  radio_dialogue("favesc_cmt_onfumes");
+  // "Roach! We're running on fumes here! You got thirty seconds! Run!"radio_dialogue("favesc_cmt_onfumes");
 
   // DEPRECATED maybe do this one if you're in the trigger for a while?
   //flag_wait( "solorun_dialogue_3" );
-  // "Head to the right!"
-  //radio_dialogue( "favesc_cmt_headtoright" );
+  // "Head to the right!"//radio_dialogue( "favesc_cmt_headtoright" );
 
   flag_wait("solorun_dialogue_4");
-  // "Left!!! Turn left and jump down!"
-  radio_dialogue("favesc_cmt_leftturnleft");
+  // "Left!!! Turn left and jump down!"radio_dialogue("favesc_cmt_leftturnleft");
 
   flag_wait("solorun_dialogue_5");
-  // "Come on!!!!"
-  radio_dialogue("favesc_cmt_comeon");
+  // "Come on!!!!"radio_dialogue("favesc_cmt_comeon");
 }
 
 solorun_dialogue_bugplayer_inside(ender) {
@@ -3672,13 +3582,11 @@ solorun_dialogue_bugplayer_inside(ender) {
 
   wait(5);
   //flag_wait( "solorun_dialogue_1" );
-  // "Roach, we're circling the area but I can't see you! You've got to get to the rooftops!"
-  radio_dialogue("favesc_cmt_circlingarea");
+  // "Roach, we're circling the area but I can't see you! You've got to get to the rooftops!"radio_dialogue("favesc_cmt_circlingarea");
 
   wait(15);
   //flag_wait( "solorun_dialogue_2" );
-  // "Roach, we're running low on fuel! Where the hell are you?!"
-  radio_dialogue("favesc_cmt_lowonfuel");
+  // "Roach, we're running low on fuel! Where the hell are you?!"radio_dialogue("favesc_cmt_lowonfuel");
 }
 
 solorun_chopperjump_killtrig() {
@@ -3958,24 +3866,20 @@ chopperjump_player_blend_to_anim(player_rig) {
 chopperjump_dialogue() {
   trigger_wait_targetname("chopperjump_dialogue_jumpforit");
 
-  // "Jump for it!!!"
-  level.sarge thread dialogue_queue("favesc_cmt_jump");
+  // "Jump for it!!!"level.sarge thread dialogue_queue("favesc_cmt_jump");
 
   flag_wait("chopperjump_player_jump");
   wait(2);
 
-  // "Nikolai! We got him! Get us outta here!"
-  radio_dialogue("favesc_cmt_gothim");
+  // "Nikolai! We got him! Get us outta here!"radio_dialogue("favesc_cmt_gothim");
 
   wait(1);
 
-  // "Where to, Captain?"
-  radio_dialogue("favesc_nkl_whereto");
+  // "Where to, Captain?"radio_dialogue("favesc_nkl_whereto");
 
   wait(0.4);
 
-  // "Just get us to the sub..."
-  radio_dialogue("favesc_cmt_tothesub");
+  // "Just get us to the sub..."radio_dialogue("favesc_cmt_tothesub");
 }
 
 // -----------------
@@ -4285,9 +4189,7 @@ curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
     node anim_first_frame_solo(guy, "pulldown");
 
     if(isDefined(specialWaitFunc)) {
-      [
-        [specialWaitFunc]
-      ](guy, node);
+      [[specialWaitFunc]](guy, node);
     } else {
       waittill_player_lookat(0.9, undefined, true, 5.0);
     }
@@ -5146,9 +5048,7 @@ airliner_flyby_audio(start, end, trig) {
     wait(0.05);
   }
 
-  wait(0.5); // delay before the "boom"
-
-  self thread play_sound_in_space(boom);
+  wait(0.5); // delay before the "boom"self thread play_sound_in_space(boom);
   self waittill("movedone");
   self stop_sound(loop);
 }

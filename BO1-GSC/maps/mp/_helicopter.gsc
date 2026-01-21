@@ -879,9 +879,7 @@ heli_damage_monitor(hardpointtype) {
       }
     } else
       self.damageTaken += damage;
-    if(self.damageTaken > self.maxhealth &&
-      !isDefined(self.xpGiven) &&
-      (!isDefined(self.owner) || attacker != self.owner)) {
+    if(self.damageTaken > self.maxhealth && !isDefined(self.xpGiven) && (!isDefined(self.owner) || attacker != self.owner)) {
       self.xpGiven = true;
       value = maps\mp\gametypes\_rank::getScoreInfoValue("helicopterkill");
       attacker thread maps\mp\gametypes\_rank::giveRankXP("helicopterkill", value);

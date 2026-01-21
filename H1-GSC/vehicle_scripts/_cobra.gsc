@@ -11,7 +11,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_cobra_helicopter", "vehicle_cobra_helicopter_fly");
   maps\_vehicle::build_deathmodel("vehicle_cobra_helicopter_fly", "vehicle_cobra_helicopter_fly");
-  maps\_vehicle::build_drive( % bh_rotors, undefined, 0, 3.0);
+  maps\_vehicle::build_drive(%bh_rotors, undefined, 0, 3.0);
   maps\_vehicle::build_deathfx("fx\explosions\large_vehicle_explosion", undefined, "explo_metal_rand");
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);

@@ -422,9 +422,7 @@ function_a79ea08b(einflictor, victim, idamage, weapon) {
       }
     }
 
-    if(isDefined(level.var_1aef539f) && [
-        [level.var_1aef539f]
-      ](victim, self)) {
+    if(isDefined(level.var_1aef539f) && [[level.var_1aef539f]](victim, self)) {
       var_1f0bdb8f = 1;
     }
 

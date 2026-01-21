@@ -358,9 +358,7 @@ function shutdownoncancelevent(placeable) {
         [[placeable.oncancel]](placeable);
       }
     } else if(isDefined(placeable.onshutdown)) {
-      [
-        [placeable.onshutdown]
-      ](placeable);
+      [[placeable.onshutdown]](placeable);
     }
     if(isDefined(placeable)) {
       if(isDefined(placeable.vehicle)) {

@@ -109,9 +109,7 @@ zombie_damage_failsafe() {
       if(!isDefined(self.enemy) || self.enemy hasperk("specialty_armorvest")) {
         continue;
       }
-      if(self istouching(self.enemy) &&
-        !self.enemy maps\_laststand::player_is_in_laststand() &&
-        isalive(self.enemy)) {
+      if(self istouching(self.enemy) && !self.enemy maps\_laststand::player_is_in_laststand() && isalive(self.enemy)) {
         if(distancesquared(old_org, self.origin) < (35 * 35)) {
           setsaveddvar("player_deathInvulnerableTime", 0);
           self.enemy DoDamage(self.enemy.health + 1000, self.enemy.origin, undefined, undefined, "riflebullet");
@@ -139,27 +137,18 @@ set_zombie_run_cycle() {
   switch (self.zombie_move_speed) {
     case "walk":
       var = randomintrange(1, 8);
-      self set_run_anim("walk" +
-        var);
-      self.run_combatanim = level.scr_anim["zombie"]["walk" +
-        var
-      ];
+      self set_run_anim("walk" + var);
+      self.run_combatanim = level.scr_anim["zombie"]["walk" + var];
       break;
     case "run":
       var = randomintrange(1, 6);
-      self set_run_anim("run" +
-        var);
-      self.run_combatanim = level.scr_anim["zombie"]["run" +
-        var
-      ];
+      self set_run_anim("run" + var);
+      self.run_combatanim = level.scr_anim["zombie"]["run" + var];
       break;
     case "sprint":
       var = randomintrange(1, 4);
-      self set_run_anim("sprint" +
-        var);
-      self.run_combatanim = level.scr_anim["zombie"]["sprint" +
-        var
-      ];
+      self set_run_anim("sprint" + var);
+      self.run_combatanim = level.scr_anim["zombie"]["sprint" + var];
       break;
   }
 }
@@ -194,9 +183,7 @@ zombie_think() {
     node = getclosest(origin, level.exterior_goals);
     self.entrance_nodes[0] = node;
     self zombie_history("zombie_think -> #1 entrance (script_forcegoal) origin = " + self.entrance_nodes[0].origin);
-  } else if((level.script == "nazi_zombie_sumpf" || level.script == "nazi_zombie_bridgetest" || level.script == "nazi_zombie_bridge_test" ||
-      level.script == "nazi_zombie_drawbridge" || level.script == "nazi_zombie_sluicegate" || level.script == "nazi_zombie_pendulum" || level.script == "nazi_zombie_zipline") &&
-    isDefined(self.script_string) && (self.script_string == "zombie_chaser" || self.script_string == "riser")) {
+  } else if((level.script == "nazi_zombie_sumpf" || level.script == "nazi_zombie_bridgetest" || level.script == "nazi_zombie_bridge_test" || level.script == "nazi_zombie_drawbridge" || level.script == "nazi_zombie_sluicegate" || level.script == "nazi_zombie_pendulum" || level.script == "nazi_zombie_zipline") && isDefined(self.script_string) && (self.script_string == "zombie_chaser" || self.script_string == "riser")) {
     self zombie_setup_attack_properties();
     if(isDefined(self.target)) {
       end_at_node = GetNode(self.target, "targetname");
@@ -446,16 +433,16 @@ should_attack_player_thru_boards() {
     self.old_origin = self.origin;
     if(self.attacking_spot_index == 0) {
       if(randomint(100) > 50) {
-        self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_l_out);
+        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out);
       } else {
-        self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_r_out);
+        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out);
       }
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 2) {
-      self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_r_out);
+      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out);
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 1) {
-      self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_l_out);
+      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out);
       self window_notetracks("window_melee");
     }
   } else {

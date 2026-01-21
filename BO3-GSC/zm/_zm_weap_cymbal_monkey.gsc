@@ -129,7 +129,7 @@ function watch_for_emp(model, actor) {
   wait(0.15);
   self.attract_to_origin = 0;
   self zm_utility::deactivate_zombie_point_of_interest();
-  model clearanim( % zombie_cymbal_monkey::o_monkey_bomb, 0);
+  model clearanim(%zombie_cymbal_monkey::o_monkey_bomb, 0);
   wait(1);
   self detonate();
   wait(1);
@@ -306,7 +306,7 @@ function player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, a
           model.angles = grenade.angles;
         }
         wait(0.1);
-        model animscripted("cymbal_monkey_anim", grenade.origin, grenade.angles, % zombie_cymbal_monkey::o_monkey_bomb);
+        model animscripted("cymbal_monkey_anim", grenade.origin, grenade.angles, %zombie_cymbal_monkey::o_monkey_bomb);
       }
       if(isDefined(clone)) {
         clone forceteleport(grenade.origin, grenade.angles);
@@ -447,17 +447,13 @@ function pulse_damage(e_owner, model) {
 function do_monkey_sound(model, info) {
   self.monk_scream_vox = 0;
   if(isDefined(level.grenade_safe_to_bounce)) {
-    if(![
-        [level.grenade_safe_to_bounce]
-      ](self.owner, level.weaponzmcymbalmonkey)) {
+    if(![[level.grenade_safe_to_bounce]](self.owner, level.weaponzmcymbalmonkey)) {
       self playSound("zmb_vox_monkey_scream");
       self.monk_scream_vox = 1;
     }
   }
   if(isDefined(level.monkey_song_override)) {
-    if([
-        [level.monkey_song_override]
-      ](self.owner, level.weaponzmcymbalmonkey)) {
+    if([[level.monkey_song_override]](self.owner, level.weaponzmcymbalmonkey)) {
       self playSound("zmb_vox_monkey_scream");
       self.monk_scream_vox = 1;
     }
@@ -489,7 +485,7 @@ function do_monkey_sound(model, info) {
     arrayremoveindex(level.cymbal_monkeys, monkey_index);
   }
   if(isDefined(model)) {
-    model clearanim( % zombie_cymbal_monkey::o_monkey_bomb, 0.2);
+    model clearanim(%zombie_cymbal_monkey::o_monkey_bomb, 0.2);
   }
   for(i = 0; i < info.sound_attractors.size; i++) {
     if(isDefined(info.sound_attractors[i])) {

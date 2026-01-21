@@ -14,11 +14,7 @@ shellshockOnDamage(cause, damage) {
   if(self maps\mp\_flashgrenades::isFlashbanged()) {
     return;
   }
-  if(cause == "MOD_EXPLOSIVE" ||
-    cause == "MOD_GRENADE" ||
-    cause == "MOD_GRENADE_SPLASH" ||
-    cause == "MOD_PROJECTILE" ||
-    cause == "MOD_PROJECTILE_SPLASH") {
+  if(cause == "MOD_EXPLOSIVE" || cause == "MOD_GRENADE" || cause == "MOD_GRENADE_SPLASH" || cause == "MOD_PROJECTILE" || cause == "MOD_PROJECTILE_SPLASH") {
     time = 0;
     if(damage >= 90)
       time = 4;

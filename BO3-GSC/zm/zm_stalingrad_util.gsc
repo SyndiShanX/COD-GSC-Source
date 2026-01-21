@@ -111,9 +111,7 @@ function function_2f621485(b_disable = 1) {
 function function_f8043960(var_57216c49, e_volume = undefined, var_50efb072 = 1, var_2f65a401 = undefined) {
   while(true) {
     level waittill("hash_fbd59317", e_player);
-    if(isDefined(var_2f65a401) && ![
-        [var_2f65a401]
-      ](e_player)) {
+    if(isDefined(var_2f65a401) && ![[var_2f65a401]](e_player)) {
       continue;
     }
     if(isDefined(e_volume) && !e_player istouching(e_volume)) {
@@ -632,9 +630,7 @@ function function_70e59bda(var_e41e673a, var_1d8ab289) {
     s_spawn_loc = var_1d8ab289;
   } else {
     if(isDefined(level.var_809d579e)) {
-      s_spawn_loc = [
-        [level.var_809d579e]
-      ](level.var_fda4b3f3);
+      s_spawn_loc = [[level.var_809d579e]](level.var_fda4b3f3);
     } else {
       s_spawn_loc = zm_ai_sentinel_drone::function_f9c9e7e0();
     }

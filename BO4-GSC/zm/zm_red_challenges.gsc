@@ -249,8 +249,7 @@ on_ai_killed(s_params) {
     if(is_challenge_active(12)) {
       if(zm_loadout::is_hero_weapon(weapon)) {
         level notify(#"kill_with_hero_weapon", {
-          #e_player: e_player,
-          #weapon: weapon
+          #e_player: e_player, #weapon: weapon
         });
       }
 
@@ -270,8 +269,7 @@ on_ai_killed(s_params) {
     if(is_challenge_active(9)) {
       if(isDefined(weapon) && weapon.inventorytype == # "offhand") {
         level notify(#"kill_with_equipment", {
-          #e_player: e_player,
-          #means_of_death: means_of_death
+          #e_player: e_player, #means_of_death: means_of_death
         });
       }
 

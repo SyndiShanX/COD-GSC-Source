@@ -250,9 +250,7 @@ function function_eebdfab2() {
 function function_7609fd9() {
   self waittill("death", e_attacker);
   if(function_c9adb887() == 0 && level.zombie_total == 0) {
-    if(!isDefined(level.zm_ai_round_over) || [
-        [level.zm_ai_round_over]
-      ]()) {
+    if(!isDefined(level.zm_ai_round_over) || [[level.zm_ai_round_over]]()) {
       level.last_ai_origin = self.origin;
       level notify("last_ai_down", self);
     }
@@ -262,9 +260,7 @@ function function_7609fd9() {
       e_attacker zm_score::player_add_points("death_spider");
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](e_attacker, self);
+      [[level.hero_power_update]](e_attacker, self);
     }
     e_attacker notify("player_killed_spider");
     e_attacker zm_stats::increment_client_stat("zspiders_killed");

@@ -235,9 +235,7 @@ addasapachehudtarget(var_0, var_1) {
 
 apache_sun_settings() {
   level.apache_sun_settings = [];
-  var_0 = [["sm_sunenable", 1.0],
-    ["sm_sunsamplesizenear", 2.8],
-    ["sm_sunShadowScale", 1]];
+  var_0 = [["sm_sunenable", 1.0], ["sm_sunsamplesizenear", 2.8], ["sm_sunShadowScale", 1]];
 
   foreach(var_2 in var_0) {
     level.apache_sun_settings[var_2[0]] = getdvarfloat(var_2[0]);

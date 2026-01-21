@@ -108,9 +108,7 @@ eggRegisterHit(damage, attacker, direction, point, type) {
 
   if(!(attacker eggHasCompletedForMap(getMapName()))) {
     attacker eggSetCompletedForMap(getMapName());
-  } else if(attacker eggAllFound() &&
-    attacker ch_getState(CONST_ALL_EGG_CHALLENGE) < 2
-  ) {
+  } else if(attacker eggAllFound() && attacker ch_getState(CONST_ALL_EGG_CHALLENGE) < 2) {
     attacker eggAwardPatch();
   }
 }
@@ -119,8 +117,7 @@ eggHasCompletedForMap(mapName) {
   eggState = self GetRankedPlayerDataReservedInt(CONST_EGG_ID);
 
   bitFlag = level.dlcAlienEggs[mapName];
-  if(isDefined(bitFlag) &&
-    (eggState &bitFlag) != 0) {
+  if(isDefined(bitFlag) && (eggState &bitFlag) != 0) {
     return true;
   }
 
@@ -144,9 +141,7 @@ eggSetCompletedForMap(mapName) {
     if(numCompleted < 4) {
       self maps\mp\gametypes\_hud_message::playerCardSplashNotify("dlc_eggFound_" + packNum, self, numCompleted);
     } else {
-      if(self eggAllFound() &&
-        ch_getState(CONST_ALL_EGG_CHALLENGE) < 2
-      ) {
+      if(self eggAllFound() && ch_getState(CONST_ALL_EGG_CHALLENGE) < 2) {
         self eggAwardPatch();
       } else {
         self maps\mp\gametypes\_hud_message::playerCardSplashNotify("dlc_eggAllFound_" + packNum, self);

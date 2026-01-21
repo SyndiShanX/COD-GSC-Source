@@ -252,9 +252,7 @@ watch_contract_debug(var_300afbc8) {
     function_33bab9aa();
 
     if(isDefined(var_300afbc8)) {
-      [
-        [var_300afbc8]
-      ]();
+      [[var_300afbc8]]();
     }
 
     profilestop();

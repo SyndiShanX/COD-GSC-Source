@@ -143,9 +143,7 @@ function dog_round_spawning() {
     players = getplayers();
     favorite_enemy = get_favorite_enemy();
     if(isDefined(level.dog_spawn_func)) {
-      spawn_loc = [
-        [level.dog_spawn_func]
-      ](level.dog_spawners, favorite_enemy);
+      spawn_loc = [[level.dog_spawn_func]](level.dog_spawners, favorite_enemy);
       ai = zombie_utility::spawn_zombie(level.dog_spawners[0]);
       if(isDefined(ai)) {
         ai.favoriteenemy = favorite_enemy;
@@ -444,9 +442,7 @@ function dog_death() {
       self.attacker zm_score::player_add_points(event, self.damagemod, self.damagelocation, 1);
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](self.attacker, self);
+      [[level.hero_power_update]](self.attacker, self);
     }
     if(randomintrange(0, 100) >= 80) {
       self.attacker zm_audio::create_and_play_dialog("kill", "hellhound");

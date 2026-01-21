@@ -1953,7 +1953,7 @@ map_change(var_0) {
 airduct_fan_large() {
   var_0 = getent("airduct_fan_large", "targetname");
   var_0 useanimtree(#animtree);
-  var_0 setanim( % icbm_turbofan176_spin, 1, 0.1, 1);
+  var_0 setanim(%icbm_turbofan176_spin, 1, 0.1, 1);
 }
 
 airduct_fan_medium() {
@@ -1963,7 +1963,7 @@ airduct_fan_medium() {
 
 medium_fans_think() {
   self useanimtree(#animtree);
-  self setanim( % icbm_turbofan64_spin, 1, 0.1, 1.5);
+  self setanim(%icbm_turbofan64_spin, 1, 0.1, 1.5);
 }
 
 airduct_fan_small() {
@@ -1973,7 +1973,7 @@ airduct_fan_small() {
 
 small_fans_think() {
   self useanimtree(#animtree);
-  self setanim( % icbm_turbofan50_spin, 1, 0.1, 1);
+  self setanim(%icbm_turbofan50_spin, 1, 0.1, 1);
 }
 
 redlights() {
@@ -1997,7 +1997,7 @@ redlight_spinner() {
 
 horizonal_spinners_think() {
   self useanimtree(#animtree);
-  self setanim( % launchfacility_b_emergencylight, 1, 0.1, 1.0);
+  self setanim(%launchfacility_b_emergencylight, 1, 0.1, 1.0);
 }
 
 wall_lights() {
@@ -2021,7 +2021,7 @@ wall_light_spinner() {
 
 vertical_spinners_think() {
   self useanimtree(#animtree);
-  self setanim( % launchfacility_b_emergencylight, 1, 0.1, 1.0);
+  self setanim(%launchfacility_b_emergencylight, 1, 0.1, 1.0);
 }
 
 music() {

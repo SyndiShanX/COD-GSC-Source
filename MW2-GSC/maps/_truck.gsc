@@ -36,7 +36,7 @@ main(model, type) {
   build_deathfx("fire/firelp_med_pm", "tag_fx_cab", "smallfire", undefined, undefined, true, 2.01, true);
   build_deathfx("fire/firelp_small_pm_a", "tag_engine_left", "smallfire", undefined, undefined, true, 2.01, true);
 
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
 
   build_treadfx();
   build_life(999, 500, 1500);
@@ -165,10 +165,7 @@ include,vehicle_opfor_truck_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_opfor_truck"
-default:"vehicletype" "truck"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_opfor_truck"default:"vehicletype" "truck"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_pickup_4door (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -180,10 +177,7 @@ include,vehicle_pickup_4door_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_pickup_4door"
-default:"vehicletype" "truck"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_pickup_4door"default:"vehicletype" "truck"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_pickup_roobars (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -195,10 +189,7 @@ include,vehicle_pickup_roobars_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_pickup_roobars"
-default:"vehicletype" "truck"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_pickup_roobars"default:"vehicletype" "truck"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_pickup_roobars_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -210,7 +201,5 @@ include,vehicle_pickup_roobars_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_pickup_roobars"
-default:"vehicletype" "truck_physics"
-default:"script_team" "allies"
+defaultmdl="vehicle_pickup_roobars"default:"vehicletype" "truck_physics"default:"script_team" "allies"
 */

@@ -1359,8 +1359,8 @@ func_11803() {
   thread func_F131();
   self orientmode("face point", scripts\engine\utility::random(getaiarray("axis")).origin);
   wait(0.25);
-  self clearanim( % body, 0.2);
-  self func_82EA("exposed_throw_seeker", % hm_grnd_org_exposed_seeker_throw01, 1, 0.2, lib_0C6A::func_6B9A());
+  self clearanim(%body, 0.2);
+  self func_82EA("exposed_throw_seeker", %hm_grnd_org_exposed_seeker_throw01, 1, 0.2, lib_0C6A::func_6B9A());
   var_0 = "exposed_throw_seeker";
   thread lib_0A1E::func_231F("soldier", var_0);
   var_1 = "seeker_grenade_folded";
@@ -1511,7 +1511,7 @@ func_EF56() {
 
   self.ignoreme = 1;
   var_0 = 0;
-  var_1 = getmovedelta( % hm_grnd_org_long_death_stand_trans_to_crawl, 0, 1);
+  var_1 = getmovedelta(%hm_grnd_org_long_death_stand_trans_to_crawl, 0, 1);
   var_2 = self gettweakablevalue(var_1);
   var_0 = self maymovetopoint(var_2);
   if(var_0) {
@@ -1582,7 +1582,7 @@ func_AFDF() {
 func_EF57() {
   self endon("executed");
   for(;;) {
-    var_0 = getmovedelta( % hm_grnd_org_long_death_crawl01, 0, 1);
+    var_0 = getmovedelta(%hm_grnd_org_long_death_crawl01, 0, 1);
     var_1 = self gettweakablevalue(var_0);
     self.var_3898 = self maymovetopoint(var_1);
     if(!self.var_3898) {
@@ -2056,7 +2056,7 @@ func_CF55(var_0) {
   var_0.var_D267 = scripts\sp\utility::func_10639("player_rig", var_0.origin);
   var_0 scripts\sp\anim::func_1EC3(var_0.var_D267, "antigrav_breach");
   var_0.var_D267 hide();
-  var_0.var_1FB8 = getanimlength( % europa_airlock_plr_grav_grenade_scene);
+  var_0.var_1FB8 = getanimlength(%europa_airlock_plr_grav_grenade_scene);
 }
 
 func_200E(var_0) {
@@ -2748,7 +2748,7 @@ func_AF01() {
   self.ignoreme = 1;
   self.objective_state = 0;
   thread scripts\sp\utility::func_B14F();
-  scripts\asm\asm::asm_setdemeanoranimoverride("combat", "move", % c6_grnd_red_walk_forward_ar);
+  scripts\asm\asm::asm_setdemeanoranimoverride("combat", "move", %c6_grnd_red_walk_forward_ar);
   scripts\sp\utility::func_F2DA(0);
   scripts\sp\utility::func_F3AF(0);
   scripts\sp\utility::func_16AE(self, "locker_c6s");
@@ -2986,8 +2986,8 @@ func_13508(var_0) {
 func_BEFD() {
   var_0 = getent("office_breach_door", "targetname");
   var_1 = scripts\engine\utility::getstruct("cutter_door_entry_scene", "targetname");
-  var_2 = getstartorigin(var_1.origin, var_1.angles, % europa_armory_seeker_door_fall);
-  var_3 = getstartangles(var_1.origin, var_1.angles, % europa_armory_seeker_door_fall);
+  var_2 = getstartorigin(var_1.origin, var_1.angles, %europa_armory_seeker_door_fall);
+  var_3 = getstartangles(var_1.origin, var_1.angles, %europa_armory_seeker_door_fall);
   var_1.var_59B2 = scripts\sp\utility::func_10639("tag_origin_mover", var_2, var_3);
   var_1.var_59B2.node = var_1 scripts\engine\utility::spawn_script_origin();
   var_1.var_5978 = var_0;

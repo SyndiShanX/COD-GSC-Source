@@ -67,10 +67,10 @@ initdoganimations() {
   precacheshader("h1_hud_tutorial_blur");
   precacheshader("h1_hud_tutorial_border");
   anim.notfirsttimedogs = 1;
-  anim.dogstoppingdistsq = lengthsquared(getmovedelta( % german_shepherd_run_stop, 0, 1) * 1.2);
-  anim.dogstartmovedist = length(getmovedelta( % german_shepherd_run_start, 0, 1));
+  anim.dogstoppingdistsq = lengthsquared(getmovedelta(%german_shepherd_run_stop, 0, 1) * 1.2);
+  anim.dogstartmovedist = length(getmovedelta(%german_shepherd_run_start, 0, 1));
   anim.dogattackplayerdist = 102;
-  var_0 = getstartorigin((0, 0, 0), (0, 0, 0), % german_shepherd_attack_ai_01_start_a);
+  var_0 = getstartorigin((0, 0, 0), (0, 0, 0), %german_shepherd_attack_ai_01_start_a);
   anim.dogattackaidist = length(var_0);
   anim.dogtraverseanims = [];
   anim.dogtraverseanims["wallhop"] = % german_shepherd_run_jump_40;

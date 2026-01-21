@@ -25,8 +25,7 @@ trigger_multiple_speed_think() {
 //hmmmmmmmm
 
 /*QUAKED trigger_multiple_speed (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger"
-Set the player vehicle maxspeed with script_speed.*/
+defaulttexture="trigger"Set the player vehicle maxspeed with script_speed.*/
 
 ZODIAC_TREADFX_MOVETIME = .2;
 ZODIAC_TREADFX_MOVETIMEFRACTION = 1 / (ZODIAC_TREADFX_MOVETIME + .05);

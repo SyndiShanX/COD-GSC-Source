@@ -775,8 +775,7 @@ class csceneobject: cscriptbundleobjectbase {
       }
 
       m_align = {
-        #origin: v_pos,
-        #angles: v_ang
+        #origin: v_pos, #angles: v_ang
       };
       return;
     }
@@ -785,8 +784,7 @@ class csceneobject: cscriptbundleobjectbase {
       v_pos = m_align.origin;
       v_ang = _e_array[clientnum].angles;
       m_align = {
-        #origin: v_pos,
-        #angles: v_ang
+        #origin: v_pos, #angles: v_ang
       };
     }
   }
@@ -930,9 +928,7 @@ class csceneobject: cscriptbundleobjectbase {
     restore_saved_ent(clientnum);
 
     if(!isDefined(_e_array[clientnum])) {
-      b_allows_multiple = [
-        [scene()]
-      ] - > allows_multiple();
+      b_allows_multiple = [[scene()]] - > allows_multiple();
       _e_array[clientnum] = scene::get_existing_ent(clientnum, _str_name);
 
       if(!isDefined(_e_array[clientnum]) && isDefined(_s.name) && !b_allows_multiple) {
@@ -962,9 +958,7 @@ class csceneobject: cscriptbundleobjectbase {
     }
 
     if(isDefined(_e_array[clientnum])) {
-      [
-        [_o_scene]
-      ] - > assign_ent(self, _e_array[clientnum], clientnum);
+      [[_o_scene]] - > assign_ent(self, _e_array[clientnum], clientnum);
       _prepare(clientnum);
     }
 
@@ -1003,9 +997,7 @@ class csceneobject: cscriptbundleobjectbase {
     }
 
     if(isDefined(var_690ec5fb)) {
-      a_scene_ents = [
-        [_o_scene]
-      ] - > get_ents();
+      a_scene_ents = [[_o_scene]] - > get_ents();
 
       if(isDefined(a_scene_ents[clientnum][var_690ec5fb])) {
         e_align = a_scene_ents[clientnum][var_690ec5fb];
@@ -1017,9 +1009,7 @@ class csceneobject: cscriptbundleobjectbase {
     }
 
     if(!isDefined(e_align)) {
-      e_align = [
-        [scene()]
-      ] - > get_align_ent(clientnum);
+      e_align = [[scene()]] - > get_align_ent(clientnum);
     }
 
     return e_align;

@@ -930,7 +930,7 @@ elias_street_dead_runners() {
   self.runanim = level.drone_anims["allies"]["stand"]["run_n_gun"];
   self.weaponsound = "drone_r5rgp_fire_npc";
   thread maps\homecoming_drones::drone_fire_randomly_loop();
-  self.deathanim = common_scripts\utility::random([ % stand_death_tumbleback, % stand_death_headshot_slowfall, % stand_death_shoulderback]);
+  self.deathanim = common_scripts\utility::random([ % stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback]);
   self waittill("goal");
   var_1 = ["j_head", "tag_weapon_chest", "j_SpineUpper", "J_SpineLower"];
   var_2 = common_scripts\utility::random(var_1);
@@ -1059,8 +1059,8 @@ elias_street_helicopter_flyover() {
   level endon("stop_street_flyovers");
   maps\homecoming_util::waittill_trigger("elias_street_flyover");
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("elias_street_unload_chopper");
-  var_0 setanim( % nh90_left_door_open);
-  var_0 setanim( % nh90_right_door_open);
+  var_0 setanim(%nh90_left_door_open);
+  var_0 setanim(%nh90_right_door_open);
   var_1 = getent("helicopter_check_volume", "targetname");
   var_2 = getEntArray("elias_street_flyover_choppers", "targetname");
 
@@ -1436,8 +1436,8 @@ elias_street_advancing_enemies() {
   var_1 common_scripts\utility::trigger_on();
   thread maps\homecoming_util::function_trigger_switch(var_0, var_1, ::elias_street_advancing_accuracy_high, ::elias_street_advancing_accuracy_low, "FLAG_stop_elias_street_ambient_retreaters");
   var_2 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("elias_street_enemy_heli_2");
-  var_2 setanim( % nh90_left_door_open);
-  var_2 setanim( % nh90_right_door_open);
+  var_2 setanim(%nh90_left_door_open);
+  var_2 setanim(%nh90_right_door_open);
   common_scripts\utility::flag_wait("FLAG_stop_elias_street_ambient_retreaters");
   maps\_spawner::killspawner(405);
   maps\_utility::array_delete(maps\homecoming_util::get_ai_array("elias_street_advancing_enemies"));

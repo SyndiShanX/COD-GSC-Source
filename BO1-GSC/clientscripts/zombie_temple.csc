@@ -663,16 +663,7 @@ register_zombie_types() {
 
 _init_magic_box() {
   level._custom_box_monitor = ::temple_box_monitor;
-  level._box_locations = array("waterfall_upper_chest",
-    "blender_chest",
-    "pressure_chest",
-    "bridge_chest",
-    "caves_water_chest",
-    "power_chest",
-    "caves1_chest",
-    "caves2_chest",
-    "caves3_chest"
-  );
+  level._box_locations = array("waterfall_upper_chest", "blender_chest", "pressure_chest", "bridge_chest", "caves_water_chest", "power_chest", "caves1_chest", "caves2_chest", "caves3_chest");
   OnPlayerConnect_Callback(::_init_indicators);
   level.cachedInfo = [];
   level.initialized = [];
@@ -1131,9 +1122,7 @@ waterfall_fog_trigger() {
       time = 2;
       max_fog_opacity = 0.590773;
       println("*** Client : changing to waterfall fog");
-      setVolFogForClient(who GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-        sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-        sun_stop_ang, time, max_fog_opacity);
+      setVolFogForClient(who GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
     }
   }
 }

@@ -71,8 +71,7 @@ corpsefind_wait() {
       corpse = level.corpsecount[i];
       dist = distance(corpse.origin, self.origin);
       corpse_in_front = self entity_is_in_front_of_me(corpse);
-      if(((dist < 400 && dist > 150) || corpse.fresh == 1) &&
-        !isDefined(level.corpsecount[i].marked) && (self cansee(corpse.seeme) || corpse_in_front == true)) {
+      if(((dist < 400 && dist > 150) || corpse.fresh == 1) && !isDefined(level.corpsecount[i].marked) && (self cansee(corpse.seeme) || corpse_in_front == true)) {
         self stopanimscripted();
         self notify("i_found_corpse");
         level.corpsecount[i].marked = true;

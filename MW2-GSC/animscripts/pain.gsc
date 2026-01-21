@@ -169,7 +169,7 @@ getDamageShieldPainAnim() {
   if(self.a.pose == "crouch")
     return % exposed_crouch_extendedpainA;
 
-  painArray = array( % stand_exposed_extendedpain_chest, % stand_exposed_extendedpain_head_2_crouch, % stand_exposed_extendedpain_hip_2_crouch);
+  painArray = array(%stand_exposed_extendedpain_chest, %stand_exposed_extendedpain_head_2_crouch, %stand_exposed_extendedpain_hip_2_crouch);
   return painArray[randomint(painArray.size)];
 }
 
@@ -395,10 +395,10 @@ playPainAnim(painAnim) {
   // rate = 1.5;
   rate = 1;
 
-  self setFlaggedAnimKnobAllRestart("painanim", painAnim, % body, 1, .1, rate);
+  self setFlaggedAnimKnobAllRestart("painanim", painAnim, %body, 1, .1, rate);
 
   if(self.a.pose == "prone")
-    self UpdateProne( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self UpdateProne(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
 
   if(animHasNotetrack(painAnim, "start_aim")) {
     self thread notifyStartAim("painanim");
@@ -486,17 +486,17 @@ specialPain(anim_special) {
       break;
 
     case "cover_right_stand_B":
-      DoPain( % corner_standR_pain_B_2_alert);
+      DoPain(%corner_standR_pain_B_2_alert);
       handled = true;
       break;
 
     case "cover_left_stand_A":
-      DoPain( % corner_standL_pain_A_2_alert);
+      DoPain(%corner_standL_pain_A_2_alert);
       handled = true;
       break;
 
     case "cover_left_stand_B":
-      DoPain( % corner_standL_pain_B_2_alert);
+      DoPain(%corner_standL_pain_B_2_alert);
       handled = true;
       break;
 
@@ -536,7 +536,7 @@ specialPain(anim_special) {
       break;
 
     case "cover_crouch_aim":
-      DoPain( % covercrouch_pain_aim_2_hide_01);
+      DoPain(%covercrouch_pain_aim_2_hide_01);
       handled = true;
       break;
 
@@ -648,9 +648,9 @@ crawlingPain() {
     return true;
   }
 
-  transAnims["prone"] = array( % dying_crawl_2_back);
-  transAnims["stand"] = array( % dying_stand_2_back_v1, % dying_stand_2_back_v2);
-  transAnims["crouch"] = array( % dying_crouch_2_back);
+  transAnims["prone"] = array(%dying_crawl_2_back);
+  transAnims["stand"] = array(%dying_stand_2_back_v1, %dying_stand_2_back_v2);
+  transAnims["crouch"] = array(%dying_crouch_2_back);
   self.a.crawlingPainTransAnim = transAnims[self.a.pose][randomint(transAnims[self.a.pose].size)];
 
   if(!isCrawlDeltaAllowed(self.a.crawlingPainTransAnim))
@@ -712,19 +712,19 @@ isCrawlDeltaAllowed(theanim) {
 
 initCrawlingPistolAnims() {
   self.a.array = [];
-  self.a.array["stand_2_crawl"] = array( % dying_stand_2_crawl_v1, % dying_stand_2_crawl_v2, % dying_stand_2_crawl_v3);
-  self.a.array["crouch_2_crawl"] = array( % dying_crouch_2_crawl);
+  self.a.array["stand_2_crawl"] = array(%dying_stand_2_crawl_v1, %dying_stand_2_crawl_v2, %dying_stand_2_crawl_v3);
+  self.a.array["crouch_2_crawl"] = array(%dying_crouch_2_crawl);
 
   self.a.array["crawl"] = % dying_crawl;
 
-  self.a.array["death"] = array( % dying_crawl_death_v1, % dying_crawl_death_v2);
+  self.a.array["death"] = array(%dying_crawl_death_v1, %dying_crawl_death_v2);
 
   self.a.array["back_idle"] = % dying_back_idle;
-  self.a.array["back_idle_twitch"] = array( % dying_back_twitch_A, % dying_back_twitch_B);
+  self.a.array["back_idle_twitch"] = array(%dying_back_twitch_A, %dying_back_twitch_B);
   self.a.array["back_crawl"] = % dying_crawl_back;
   self.a.array["back_fire"] = % dying_back_fire;
 
-  self.a.array["back_death"] = array( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3);
+  self.a.array["back_death"] = array(%dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3);
 
   if(isDefined(self.crawlingPainAnimOverrideFunc))
     [[self.crawlingPainAnimOverrideFunc]]();
@@ -748,7 +748,7 @@ crawlingPistol() {
 
   self thread crawling_stab_achievement();
 
-  self setAnimKnobAll( % dying, % body, 1, 0.1, 1);
+  self setAnimKnobAll(%dying, %body, 1, 0.1, 1);
 
   // dyingCrawl() returns false if we die without turning around
   if(!self dyingCrawl()) {
@@ -809,8 +809,8 @@ crawlingPistol() {
   }
 
   self notify("end_dying_crawl_back_aim");
-  self clearAnim( % dying_back_aim_4_wrapper, .3);
-  self clearAnim( % dying_back_aim_6_wrapper, .3);
+  self clearAnim(%dying_back_aim_4_wrapper, .3);
+  self clearAnim(%dying_back_aim_6_wrapper, .3);
 
   self.deathanim = animArrayPickRandom("back_death");
   self killWrapper();
@@ -962,8 +962,8 @@ dyingCrawlBackAim() {
     return;
   self.dyingCrawlAiming = true;
 
-  self setAnimLimited( % dying_back_aim_4, 1, 0);
-  self setAnimLimited( % dying_back_aim_6, 1, 0);
+  self setAnimLimited(%dying_back_aim_4, 1, 0);
+  self setAnimLimited(%dying_back_aim_6, 1, 0);
 
   prevyaw = 0;
 
@@ -980,14 +980,14 @@ dyingCrawlBackAim() {
       if(aimyaw < -45.0)
         aimyaw = -45.0;
       weight = aimyaw / -45.0;
-      self setAnim( % dying_back_aim_4_wrapper, weight, .05);
-      self setAnim( % dying_back_aim_6_wrapper, 0, .05);
+      self setAnim(%dying_back_aim_4_wrapper, weight, .05);
+      self setAnim(%dying_back_aim_6_wrapper, 0, .05);
     } else {
       if(aimyaw > 45.0)
         aimyaw = 45.0;
       weight = aimyaw / 45.0;
-      self setAnim( % dying_back_aim_6_wrapper, weight, .05);
-      self setAnim( % dying_back_aim_4_wrapper, 0, .05);
+      self setAnim(%dying_back_aim_6_wrapper, weight, .05);
+      self setAnim(%dying_back_aim_4_wrapper, 0, .05);
     }
 
     prevyaw = aimyaw;
@@ -1064,8 +1064,7 @@ preventPainForAShortTime(type) {
   // this increases the chances of the crawling pain succeeding.
   wait .75;
 
-  // important that we die the next time we get hit,
-  // instead of maybe going into pain and coming out and going into combat or something
+  // important that we die the next time we get hit, // instead of maybe going into pain and coming out and going into combat or something
   if(self.health > 1)
     self.health = 1;
 
@@ -1185,7 +1184,7 @@ CornerRightGrenadeDeath() {
 
   self.threatbias = -1000; // no need for AI to target me
 
-  self setFlaggedAnimKnobAllRestart("corner_grenade_pain", % corner_standR_death_grenade_hit, % body, 1, .1);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_pain", %corner_standR_death_grenade_hit, %body, 1, .1);
 
   //wait getAnimLength( %corner_standR_death_grenade_hit ) * 0.2;
   self waittillmatch("corner_grenade_pain", "dropgun");
@@ -1203,7 +1202,7 @@ CornerRightGrenadeDeath() {
 
   desiredDeathTime = gettime() + randomintrange(25000, 60000);
 
-  self setFlaggedAnimKnobAllRestart("corner_grenade_idle", % corner_standR_death_grenade_idle, % body, 1, .2);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_idle", %corner_standR_death_grenade_idle, %body, 1, .2);
 
   self thread watchEnemyVelocity();
   while(!enemyIsApproaching()) {
@@ -1215,7 +1214,7 @@ CornerRightGrenadeDeath() {
   }
 
   dropAnim = % corner_standR_death_grenade_slump;
-  self setFlaggedAnimKnobAllRestart("corner_grenade_release", dropAnim, % body, 1, .2);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_release", dropAnim, %body, 1, .2);
 
   dropTimeArray = getNotetrackTimes(dropAnim, "grenade_drop");
   assert(dropTimeArray.size == 1);
@@ -1306,12 +1305,12 @@ enemyIsApproaching() {
 }
 
 prematureCornerGrenadeDeath() {
-  deathArray = array( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3, % dying_back_death_v4);
+  deathArray = array(%dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3, %dying_back_death_v4);
   deathAnim = deathArray[randomint(deathArray.size)];
 
   self animscripts\death::PlayDeathSound();
 
-  self setFlaggedAnimKnobAllRestart("corner_grenade_die", deathAnim, % body, 1, .2);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_die", deathAnim, %body, 1, .2);
 
   velocity = getGrenadeDropVelocity();
   self CornerDeathReleaseGrenade(velocity, 3.0);
@@ -1373,7 +1372,7 @@ additive_pain(damage, attacker, direction_vec, point, type, modelName, tagName) 
     return;
   }
   self.doingAdditivePain = true;
-  painAnimArray = array( % pain_add_standing_belly, % pain_add_standing_left_arm, % pain_add_standing_right_arm);
+  painAnimArray = array(%pain_add_standing_belly, %pain_add_standing_left_arm, %pain_add_standing_right_arm);
 
   painAnim = % pain_add_standing_belly;
 
@@ -1388,12 +1387,12 @@ additive_pain(damage, attacker, direction_vec, point, type, modelName, tagName) 
   else
     painAnim = painAnimArray[randomint(painAnimArray.size)];
 
-  self setanimlimited( % add_pain, 1, 0.1, 1);
+  self setanimlimited(%add_pain, 1, 0.1, 1);
   self setanimlimited(painAnim, 1, 0, 1);
 
   wait 0.4;
 
   self clearanim(painAnim, 0.2);
-  self clearanim( % add_pain, 0.2);
+  self clearanim(%add_pain, 0.2);
   self.doingAdditivePain = undefined;
 }

@@ -38,8 +38,8 @@ func_5AD2() {
   var_5.angles = var_0.angles;
   self orientmode("face angle", var_0.angles[1]);
   var_6 = 1.63;
-  self clearanim( % body, 0.2);
-  self func_82E7("traverseAnim", % traverse_doublejump, 1, 0.2, 1);
+  self clearanim(%body, 0.2);
+  self func_82E7("traverseAnim", %traverse_doublejump, 1, 0.2, 1);
   childthread func_11629(var_5);
   thread scripts\anim\shared::donotetracks("traverseAnim", scripts\anim\traverse\shared::func_89F8);
   foreach(var_8 in var_2) {

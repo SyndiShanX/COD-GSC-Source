@@ -1142,8 +1142,7 @@ capturedobjective(capturetime, objective) {
   }
 
   self notify(#"capturedobjective", {
-    #capturetime: capturetime,
-    #var_eced93f5: objective
+    #capturetime: capturetime, #var_eced93f5: objective
   });
 }
 

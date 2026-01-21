@@ -9,7 +9,7 @@
 #using_animtree("generic_human");
 
 clear_animation(blend_time) {
-  self clearanim( % root, blend_time);
+  self clearanim(%root, blend_time);
 }
 
 enemy_animation_attack(type) {

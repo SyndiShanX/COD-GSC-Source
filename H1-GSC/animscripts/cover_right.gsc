@@ -9,16 +9,16 @@
 init_animset_cover_right() {
   var_0 = [];
   var_0["alert_idle"] = % corner_standr_alert_idle;
-  var_0["alert_idle_twitch"] = [ % corner_standr_alert_twitch01, % corner_standr_alert_twitch04, % corner_standr_alert_twitch05, % corner_standr_alert_twitch06, % corner_standr_alert_twitch07];
-  var_0["alert_idle_flinch"] = [ % corner_standr_flinch, % corner_standr_flinchb];
-  var_0["alert_to_A"] = [ % corner_standr_trans_alert_2_a, % corner_standr_trans_alert_2_a_v2];
-  var_0["alert_to_B"] = [ % corner_standr_trans_alert_2_b, % corner_standr_trans_alert_2_b_v2, % corner_standr_trans_alert_2_b_v3];
+  var_0["alert_idle_twitch"] = [ % corner_standr_alert_twitch01, %corner_standr_alert_twitch04, %corner_standr_alert_twitch05, %corner_standr_alert_twitch06, %corner_standr_alert_twitch07];
+  var_0["alert_idle_flinch"] = [ % corner_standr_flinch, %corner_standr_flinchb];
+  var_0["alert_to_A"] = [ % corner_standr_trans_alert_2_a, %corner_standr_trans_alert_2_a_v2];
+  var_0["alert_to_B"] = [ % corner_standr_trans_alert_2_b, %corner_standr_trans_alert_2_b_v2, %corner_standr_trans_alert_2_b_v3];
   var_0["A_to_alert"] = [ % corner_standr_trans_a_2_alert_v2];
   var_0["A_to_alert_reload"] = [];
-  var_0["A_to_B"] = [ % corner_standr_trans_a_2_b, % corner_standr_trans_a_2_b_v2];
-  var_0["B_to_alert"] = [ % corner_standr_trans_b_2_alert, % corner_standr_trans_b_2_alert_v2, % corner_standr_trans_b_2_alert_v3];
+  var_0["A_to_B"] = [ % corner_standr_trans_a_2_b, %corner_standr_trans_a_2_b_v2];
+  var_0["B_to_alert"] = [ % corner_standr_trans_b_2_alert, %corner_standr_trans_b_2_alert_v2, %corner_standr_trans_b_2_alert_v3];
   var_0["B_to_alert_reload"] = [ % corner_standr_reload_b_2_alert];
-  var_0["B_to_A"] = [ % corner_standr_trans_b_2_a, % corner_standr_trans_b_2_a_v2];
+  var_0["B_to_A"] = [ % corner_standr_trans_b_2_a, %corner_standr_trans_b_2_a_v2];
   var_0["lean_to_alert"] = [ % cornerstndr_lean_2_alert];
   var_0["alert_to_lean"] = [ % cornerstndr_alert_2_lean];
   var_0["look"] = % corner_standr_look;
@@ -26,7 +26,7 @@ init_animset_cover_right() {
   var_0["shotgun_reload"] = [ % shotgun_corner_standr_reload];
   var_0["grenade_exposed"] = % corner_standr_grenade_a;
   var_0["grenade_safe"] = % corner_standr_grenade_b;
-  var_0["blind_fire"] = [ % corner_standr_blindfire_v1, % corner_standr_blindfire_v2];
+  var_0["blind_fire"] = [ % corner_standr_blindfire_v1, %corner_standr_blindfire_v2];
   var_0["alert_to_look"] = % corner_standr_alert_2_look;
   var_0["look_to_alert"] = % corner_standr_look_2_alert;
   var_0["look_to_alert_fast"] = % corner_standr_look_2_alert_fast;
@@ -45,7 +45,7 @@ init_animset_cover_right() {
   anim.archetypes["soldier"]["cover_right_stand"] = var_0;
   var_0 = [];
   var_0["alert_idle"] = % cornercrr_alert_idle;
-  var_0["alert_idle_twitch"] = [ % cornercrr_alert_twitch_v1, % cornercrr_alert_twitch_v2, % cornercrr_alert_twitch_v3];
+  var_0["alert_idle_twitch"] = [ % cornercrr_alert_twitch_v1, %cornercrr_alert_twitch_v2, %cornercrr_alert_twitch_v3];
   var_0["alert_idle_flinch"] = [];
   var_0["alert_to_A"] = [ % cornercrr_trans_alert_2_a];
   var_0["alert_to_B"] = [ % cornercrr_trans_alert_2_b];
@@ -59,7 +59,7 @@ init_animset_cover_right() {
   var_0["B_to_A"] = [ % cornercrr_trans_b_2_a];
   var_0["lean_to_alert"] = [ % cornercrr_lean_2_alert];
   var_0["alert_to_lean"] = [ % cornercrr_alert_2_lean];
-  var_0["reload"] = [ % cornercrr_reloada, % cornercrr_reloadb];
+  var_0["reload"] = [ % cornercrr_reloada, %cornercrr_reloadb];
   var_0["shotgun_reload"] = [ % shotgun_cornercrr_reload_2knee];
   var_0["grenade_exposed"] = % cornercrr_grenadea;
   var_0["grenade_safe"] = % cornercrr_grenadea;

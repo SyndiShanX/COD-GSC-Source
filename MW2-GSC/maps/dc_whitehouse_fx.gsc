@@ -100,8 +100,7 @@ main() {
   level._effect["rain_1"] = loadfx("weather/rain_1_lite");
   level._effect["rain_0"] = loadfx("misc/blank");
 
-  thread rainInit("none"); // "none" "light" or "hard"	
-  thread playerWeather(); // make the actual rain effect generate around the player
+  thread rainInit("none"); // "none" "light" or "hard"thread playerWeather(); // make the actual rain effect generate around the player
 
   //enable this line for correct vision in createfx BESURE TO DISABLE
   //thread maps\_utility::vision_set_fog_changes( "dc_whitehouse_roof", 0 );

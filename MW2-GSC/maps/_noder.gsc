@@ -471,15 +471,11 @@ button_modifier() {
   while(1) {
     foreach(button, blah in level.button_modifier_func)
     if(self buttonpressed(button)) {
-      [
-        [level.button_modifier_func[button]]
-      ]();
+      [[level.button_modifier_func[button]]]();
       while(self buttonpressed(button))
         wait .05;
       assert(isDefined(level.button_modifier_release_func));
-      [
-        [level.button_modifier_release_func[button]]
-      ]();
+      [[level.button_modifier_release_func[button]]]();
       wait .05;
 
     }

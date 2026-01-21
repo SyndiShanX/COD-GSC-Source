@@ -129,12 +129,8 @@ function onstartgametype() {
   if(isDefined(game["overtime_round"])) {
     if(!isDefined(game["ball_game_score"])) {
       game["ball_game_score"] = [];
-      game["ball_game_score"]["allies"] = [
-        [level._getteamscore]
-      ]("allies");
-      game["ball_game_score"]["axis"] = [
-        [level._getteamscore]
-      ]("axis");
+      game["ball_game_score"]["allies"] = [[level._getteamscore]]("allies");
+      game["ball_game_score"]["axis"] = [[level._getteamscore]]("axis");
     }
     [[level._setteamscore]]("allies", 0);
     [[level._setteamscore]]("axis", 0);
@@ -399,9 +395,7 @@ function onendgame(winningteam) {
 function updateteamscorebyroundswon() {
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [
-        [level._setteamscore]
-      ](team, game["roundswon"][team]);
+      [[level._setteamscore]](team, game["roundswon"][team]);
     }
   }
 }
@@ -1396,12 +1390,8 @@ function ball_give_score(team, score) {
       if(game["ball_overtime_first_winner"] === team) {
         thread globallogic::endgame(team, game["strings"]["score_limit_reached"]);
       }
-      team_score = [
-        [level._getteamscore]
-      ](team);
-      other_team_score = [
-        [level._getteamscore]
-      ](util::getotherteam(team));
+      team_score = [[level._getteamscore]](team);
+      other_team_score = [[level._getteamscore]](util::getotherteam(team));
     }
   }
 }

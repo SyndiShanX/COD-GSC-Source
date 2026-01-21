@@ -54,9 +54,7 @@ func_E044(var_0, var_1) {
   foreach(var_4, var_3 in level.var_D928[var_1].var_D926) {
     if(scripts\engine\utility::array_contains(var_3, var_0)) {
       level.var_D928[var_1].var_D926[var_4] = ::scripts\engine\utility::array_remove(var_3, var_0);
-      [
-        [func_7966(var_1)]
-      ](var_0);
+      [[func_7966(var_1)]](var_0);
     }
   }
 }

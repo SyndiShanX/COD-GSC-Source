@@ -31,8 +31,7 @@ main() {
     SetDvar("sm_sunShadowScale", "0.55");
     SetDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.56" +
-      "");
+    SetDvar("sm_sunShadowScale", "0.56" + "");
     SetDvar("sm_sunsamplesizenear", ".22");
   } else {
     SetDvar("sm_sunShadowScale", "0.9");
@@ -454,13 +453,13 @@ update_machine() {
   go = 1;
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "center") {
-      anim_time = GetAnimLength( % mp_ca_beh_center_machine_idle);
+      anim_time = GetAnimLength(%mp_ca_beh_center_machine_idle);
       play_anim = "mp_ca_beh_center_machine_idle";
     } else if(self.script_noteworthy == "left") {
-      anim_time = GetAnimLength( % mp_ca_beh_engine_a_idle);
+      anim_time = GetAnimLength(%mp_ca_beh_engine_a_idle);
       play_anim = "mp_ca_beh_engine_a_idle";
     } else if(self.script_noteworthy == "right") {
-      anim_time = GetAnimLength( % mp_ca_beh_engine_b_idle);
+      anim_time = GetAnimLength(%mp_ca_beh_engine_b_idle);
       play_anim = "mp_ca_beh_engine_b_idle";
     }
 

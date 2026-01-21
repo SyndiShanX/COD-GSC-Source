@@ -1054,9 +1054,7 @@ function enemy_location_override(zombie, enemy) {
   if(isDefined(enemy.on_train) && enemy.on_train) {
     var_d3443466 = 0;
     if(isDefined(level.o_zod_train)) {
-      var_d3443466 = [
-        [level.o_zod_train]
-      ] - > function_3e62f527();
+      var_d3443466 = [[level.o_zod_train]] - > function_3e62f527();
     }
     if(!(isDefined(self.locked_in_train) && self.locked_in_train) && (!(isDefined(var_d3443466) && var_d3443466))) {
       touching = 0;

@@ -518,8 +518,7 @@ electrocute_zombie() {
 
     bhtnactionstartevent(self, "electrocute");
     self notify(#"bhtn_action_notify", {
-      #action: "electrocute"
-    });
+      #action: "electrocute"});
     wait randomfloat(1.25);
     self playSound(#"hash_5183b687ad8d715a");
   }
@@ -649,8 +648,7 @@ function_2853c44e(e_trap) {
 
   [[level.var_db63b33b]] - > waitinqueue(self);
   level notify(#"trap_kill", {
-    #e_victim: self,
-    #e_trap: e_trap
+    #e_victim: self, #e_trap: e_trap
   });
   level notify(#"hash_5e2619172b4487dd", {
     #n_count: 1

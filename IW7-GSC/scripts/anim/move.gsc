@@ -13,9 +13,7 @@ main() {
 
   if(isDefined(self.var_4C37)) {
     if(isDefined(self.var_4C37["move"])) {
-      [
-        [self.var_4C37["move"]]
-      ]();
+      [[self.var_4C37["move"]]]();
       return;
     }
   }
@@ -74,7 +72,7 @@ end_script() {
   self.var_4BE6 = undefined;
   self.var_BCC3 = undefined;
   scripts\anim\run::func_F843(0);
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
   self.facialidx = undefined;
 }
 
@@ -176,13 +174,13 @@ func_12ED4(var_0) {
 func_BCC5(var_0) {
   self endon("killanimscript");
   self endon("move_interrupt");
-  var_1 = self getscoreinfocategory( % walk_and_run_loops);
+  var_1 = self getscoreinfocategory(%walk_and_run_loops);
   self.a.var_E860 = randomint(10000);
   self.var_D8B7 = "none";
   self.var_D8B6 = "none";
   self.var_BCC2 = undefined;
   for(;;) {
-    var_2 = self getscoreinfocategory( % walk_and_run_loops);
+    var_2 = self getscoreinfocategory(%walk_and_run_loops);
     if(var_2 < var_1) {
       self.a.var_E860++;
     }
@@ -273,7 +271,7 @@ func_FEEB() {
     }
 
     scripts\anim\combat_utility::func_FEDF();
-    self clearanim( % exposed_aiming, 0.2);
+    self clearanim(%exposed_aiming, 0.2);
   }
 }
 
@@ -308,7 +306,7 @@ func_E2B4(var_0) {
   }
 
   self.var_932E = undefined;
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self orientmode("face default");
   self animmode("none", 0);
   self.print3d = 1;
@@ -464,7 +462,7 @@ func_C965() {
     var_1 = self.var_C975;
   }
 
-  self clearanim( % body, var_1);
+  self clearanim(%body, var_1);
   self.var_BCC2 = ::func_C964;
   self.var_932E = 1;
   var_1 = 0.05;
@@ -489,14 +487,14 @@ func_C965() {
 func_C964() {
   self.var_932E = undefined;
   self orientmode("face default");
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self animmode("none", 0);
 }
 
 func_580E() {
   self func_8250(1);
   self animmode("zonly_physics", 0);
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self func_82EA("dodgeAnim", self.var_4BE6, 1, 0.2, 1);
   scripts\anim\shared::donotetracks("dodgeAnim");
   self animmode("none", 0);
@@ -505,7 +503,7 @@ func_580E() {
     scripts\anim\shared::donotetracks("dodgeAnim");
   }
 
-  self clearanim( % civilian_dodge, 0.2);
+  self clearanim(%civilian_dodge, 0.2);
   self func_8250(0);
   self.var_4BE6 = undefined;
   self.var_BCC3 = undefined;
@@ -746,7 +744,7 @@ func_BCAD() {
 
   func_FA42(var_5, var_1, var_2);
   self animmode("zonly_physics", 0);
-  self clearanim( % body, var_6);
+  self clearanim(%body, var_6);
   var_7 = scripts\anim\utility::func_1F64("shuffle_start");
   var_8 = scripts\anim\utility::func_1F64("shuffle");
   var_9 = scripts\anim\utility::func_1F64("shuffle_end");
@@ -820,7 +818,7 @@ func_BCAD() {
 
 func_BCB0() {
   if(isDefined(self.var_10170)) {
-    self clearanim( % cover_shuffle, 0.2);
+    self clearanim(%cover_shuffle, 0.2);
     self.var_10170 = undefined;
     self animmode("none", 0);
     self orientmode("face default");
@@ -828,7 +826,7 @@ func_BCB0() {
   }
 
   wait(0.2);
-  self clearanim( % cover_shuffle, 0.2);
+  self clearanim(%cover_shuffle, 0.2);
 }
 
 func_BCB5(var_0, var_1, var_2) {
@@ -883,8 +881,8 @@ func_102E9(var_0, var_1) {
 
 func_BCF8(var_0, var_1) {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self func_82A5( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self func_82A5(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
   if(isDefined(self.var_E1B0) && gettime() - self.var_E1B0 < 100 && isDefined(self.var_E80D) && randomfloat(1) < self.a.reacttobulletchance) {
     scripts\anim\run::func_4C9A();
     return;

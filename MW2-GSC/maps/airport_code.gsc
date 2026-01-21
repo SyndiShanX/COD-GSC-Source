@@ -624,9 +624,7 @@ stair_top_terror() {
   flag_waitopen("lobby_to_stairs_flow");
   flag_wait("lobby_to_stairs_flow");
 
-  wait 11; // "lobby_cleanup"
-
-  org = GetEnt("upperdeck_terror", "targetname");
+  wait 11; // "lobby_cleanup"org = GetEnt("upperdeck_terror", "targetname");
   org playLoopSound("scn_airport_crowd_stairs_loop");
 
   flag_wait_or_timeout("stairs_top_open_fire", 16.5);
@@ -3564,7 +3562,7 @@ massacre_killers_saw(node) {
 
   self.ignoreall = true;
   //hack
-  self ClearAnim( % run_n_gun, 0.2);
+  self ClearAnim(%run_n_gun, 0.2);
   self.runNGunAnims["F"] = % casual_killer_walk_shoot_F_aimdown;
   wait .5;
 
@@ -4002,9 +4000,9 @@ aim_dir() {
   self.aim_weight = undefined;
   self.aim_time = undefined;
 
-  self SetAnimLimited( % casual_killer_walk_shoot_F, 1 - weight, time);
+  self SetAnimLimited(%casual_killer_walk_shoot_F, 1 - weight, time);
   self SetAnimLimited(anime, weight, time);
-  self SetFlaggedAnimKnob("runanim", % run_n_gun, 1, time);
+  self SetFlaggedAnimKnob("runanim", %run_n_gun, 1, time);
 
   while(1)
     wait 1;
@@ -4021,9 +4019,9 @@ aim_stop() {
     time = .25;
 
   //self ClearAnim( %run_n_gun, 0.2 );	
-  self SetAnimLimited( % casual_killer_walk_shoot_F, 1, time);
+  self SetAnimLimited(%casual_killer_walk_shoot_F, 1, time);
   self SetAnimLimited(anime, 0, time);
-  self SetFlaggedAnimKnob("runanim", % run_n_gun, 1, time);
+  self SetFlaggedAnimKnob("runanim", %run_n_gun, 1, time);
 
   wait time;
 }
@@ -5350,10 +5348,10 @@ tarmac_sec_node_stand_idle() {
   self.ref.angles = self.angles;
   self LinkTo(self.ref);
 
-  self ClearAnim( % body, 0.2);
+  self ClearAnim(%body, 0.2);
   self StopAnimScripted();
 
-  self SetFlaggedAnimKnobAllRestart("drone_anim", % pistol_stand_aim_5, % body, 1, 0.2, 1);
+  self SetFlaggedAnimKnobAllRestart("drone_anim", %pistol_stand_aim_5, %body, 1, 0.2, 1);
   //	self.ref thread anim_generic_loop( self, "pistol_stand_aim_5" );
 }
 
@@ -5400,7 +5398,7 @@ tarmac_sec_node_do_movement(node) {
 
   self tarmac_sec_node_goal(node);
 
-  self ClearAnim( % body, 0.2);
+  self ClearAnim(%body, 0.2);
   self StopAnimScripted();
 }
 
@@ -5410,10 +5408,10 @@ tarmac_sec_run_cycle(node) {
   self endon("goal");
   self.target_obj endon("death");
 
-  self ClearAnim( % body, 0.2);
+  self ClearAnim(%body, 0.2);
   self StopAnimScripted();
 
-  self SetFlaggedAnimKnobAllRestart("drone_anim", getanim_generic(self.run_anim), % body, 1, 0.2, self.moveplaybackrate * self.run_rate);
+  self SetFlaggedAnimKnobAllRestart("drone_anim", getanim_generic(self.run_anim), %body, 1, 0.2, self.moveplaybackrate * self.run_rate);
 
   angles = tarmac_sec_find_move_angles(node);
 
@@ -6370,13 +6368,13 @@ escape_mak_dialogue() {
 makarov_shoot_player() {
   self AnimMode("zonly_physics");
 
-  self ClearAnim( % root, 0.2);
-  self SetFlaggedAnimRestart("shoot_anim", % airport_ending_shoot_makarov, 1, 0, 1);
+  self ClearAnim(%root, 0.2);
+  self SetFlaggedAnimRestart("shoot_anim", %airport_ending_shoot_makarov, 1, 0, 1);
 
   self thread maps\_anim::start_notetrack_wait(self, "shoot_anim", "end_alt", "makarov");
   self animscripts\shared::DoNoteTracks("shoot_anim");
 
-  self ClearAnim( % airport_ending_makarov, 0.2);
+  self ClearAnim(%airport_ending_makarov, 0.2);
   self notify("done_shoot_player");
 }
 
@@ -7309,11 +7307,7 @@ friendly_fire_notpartofteam() {
 friendly_fire_is_attacking_check(_flag) {
   self endon("death");
   level endon("friendly_fire_warning");
-  //	"+melee"
-  //	"+melee_breath"
-  //	"-smoke"
-  //	"+smoke"
-  NotifyOnCommand("attack", "+frag");
+  //	"+melee"//	"+melee_breath"//	"-smoke"//	"+smoke"NotifyOnCommand("attack", "+frag");
   NotifyOnCommand("attack", "+attack");
 
   while(1) {
@@ -8263,15 +8257,15 @@ should_break_m203_hint(nothing) {
 #using_animtree("vehicles");
 van_opendoors() {
   self UseAnimTree(#animtree);
-  self SetAnim( % airport_ending_open_doors);
+  self SetAnim(%airport_ending_open_doors);
   sndent = GetEnt("escape_amb_door_snd", "targetname");
   sndent playSound("scn_ambulance_doors_open");
 }
 
 van_closedoors() {
   self UseAnimTree(#animtree);
-  self ClearAnim( % airport_ending_open_doors, .2);
-  self SetAnim( % airport_ending_close_doors);
+  self ClearAnim(%airport_ending_open_doors, .2);
+  self SetAnim(%airport_ending_close_doors);
   sndent = GetEnt("escape_amb_door_snd", "targetname");
 
   sndent delaycall(1, ::PlaySound, "scn_ambulance_doors_close");

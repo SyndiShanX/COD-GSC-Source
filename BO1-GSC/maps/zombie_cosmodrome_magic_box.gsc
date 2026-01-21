@@ -10,14 +10,7 @@
 magic_box_init() {
   level._cosmodrome_no_power = "n";
   level._cosmodrome_fire_sale = "f";
-  level._box_locations = array("start_chest",
-    "chest1",
-    "chest2",
-    "base_entry_chest",
-    "storage_area_chest",
-    "chest5",
-    "chest6",
-    "warehouse_lander_chest");
+  level._box_locations = array("start_chest", "chest1", "chest2", "base_entry_chest", "storage_area_chest", "chest5", "chest6", "warehouse_lander_chest");
   level thread magic_box_update();
   level thread cosmodrome_collision_fix();
   level thread cosmodrome_maintenance_respawn_fix();

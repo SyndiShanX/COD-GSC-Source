@@ -19,12 +19,7 @@ init() {
 init_escort(var_5a529222, var_edc20efd, var_d73e0c6e, var_544ae93d, var_db083d2c) {
   assert(isDefined(self.ai));
   self.ai.escort = {
-    #state: 2,
-    #var_5a529222: var_5a529222,
-    #var_edc20efd: var_edc20efd,
-    #var_d73e0c6e: var_d73e0c6e,
-    #var_544ae93d: var_544ae93d,
-    #var_db083d2c: var_db083d2c
+    #state: 2, #var_5a529222: var_5a529222, #var_edc20efd: var_edc20efd, #var_d73e0c6e: var_d73e0c6e, #var_544ae93d: var_544ae93d, #var_db083d2c: var_db083d2c
   };
 }
 

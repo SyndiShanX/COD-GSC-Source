@@ -436,11 +436,11 @@ wolf_face() {
   if(getdvarint("black_wolf", 0))
     self setModel("fullbody_wolf_b");
 
-  self setanimknobrestart( % nml_wolf_aggressive_face, 1, 0, 1);
+  self setanimknobrestart(%nml_wolf_aggressive_face, 1, 0, 1);
 }
 
 wolf_face_clear() {
-  self clearanim( % nml_wolf_aggressive_face, 0.5);
+  self clearanim(%nml_wolf_aggressive_face, 0.5);
 }
 
 wolf_init() {
@@ -1276,7 +1276,7 @@ init_hover() {
   var_0 = common_scripts\utility::get_target_ent("ghost_hover_lower");
   var_0 useanimtree(#animtree);
   wait 1;
-  var_0 setanim( % hovercraft_enemy_upper_fans, 1, 0, 0.025);
+  var_0 setanim(%hovercraft_enemy_upper_fans, 1, 0, 0.025);
 }
 
 mash_to_survive() {

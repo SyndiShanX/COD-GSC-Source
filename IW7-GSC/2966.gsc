@@ -790,7 +790,7 @@ func_F331(var_0, var_1) {
     return;
   }
   if(isDefined(self.var_412A)) {
-    self clearanim( % root, 0);
+    self clearanim(%root, 0);
   }
 
   if(isDefined(self)) {

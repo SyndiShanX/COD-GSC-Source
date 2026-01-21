@@ -10,15 +10,7 @@
 /*
 =============
 ///ScriptDocBegin
-"Name: rainHard( <transition> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: rainHard( <transition> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 rainHard(transition) {
@@ -35,15 +27,7 @@ rainHard(transition) {
 /*
 =============
 ///ScriptDocBegin
-"Name: rainMedium()"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: rainMedium()""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 rainMedium(transition) {
@@ -60,15 +44,7 @@ rainMedium(transition) {
 /*
 =============
 ///ScriptDocBegin
-"Name: rainLight( <transition> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: rainLight( <transition> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 rainLight(transition) {
@@ -85,15 +61,7 @@ rainLight(transition) {
 /*
 =============
 ///ScriptDocBegin
-"Name: rainNone( <transition> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: rainNone( <transition> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 rainNone(transition) {
@@ -110,15 +78,7 @@ rainNone(transition) {
 /*
 =============
 ///ScriptDocBegin
-"Name: rainInit( <lvl> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: rainInit( <lvl> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 rainInit(lvl) {

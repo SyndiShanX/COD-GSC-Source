@@ -18,7 +18,7 @@ main() {
   self traversemode("noclip");
   var_0 = self getnegotiationstartnode();
   self orientmode("face angle", var_0.angles[1]);
-  self setflaggedanimknoballrestart("jumpanim", % jump_across_72, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("jumpanim", %jump_across_72, %body, 1, 0.1, 1);
   self waittillmatch("jumpanim", "gravity on");
   self traversemode("gravity");
   animscripts\shared::donotetracks("jumpanim");

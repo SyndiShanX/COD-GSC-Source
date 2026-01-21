@@ -272,10 +272,10 @@ ps_guard_tunnel_patrol(var_0) {
   var_0 = getent("ps_guard_2_tunnel_node", "script_noteworthy");
   maps\_utility::delaythread(0.01, maps\_anim::anim_set_rate_single, self, "active_patrolwalk_v2", 0.75);
   var_0 thread maps\_anim::anim_single_solo(self, "active_patrolwalk_v2");
-  var_1 = self getanimtime( % active_patrolwalk_v2);
+  var_1 = self getanimtime(%active_patrolwalk_v2);
 
   while(var_1 < 0.94) {
-    var_1 = self getanimtime( % active_patrolwalk_v2);
+    var_1 = self getanimtime(%active_patrolwalk_v2);
     wait 0.05;
   }
 

@@ -16,7 +16,7 @@ main() {
   self func_83C4("noclip");
   var_0 = self getspectatepoint();
   self orientmode("face angle", var_0.angles[1]);
-  self func_82E4("jumpanim", % jump_across_72, % body, 1, 0.1, 1);
+  self func_82E4("jumpanim", %jump_across_72, %body, 1, 0.1, 1);
   self waittillmatch("gravity on", "jumpanim");
   self func_83C4("gravity");
   scripts\anim\shared::donotetracks("jumpanim");

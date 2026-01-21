@@ -12,7 +12,7 @@
 cover() {
   self endon("killanimscript");
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 
   if(self animscripts\utility::IsInCombat())
     situation = "idle_combat";
@@ -33,7 +33,7 @@ cover() {
   thread move_check();
 
   for(;;) {
-    self setflaggedanimknoball("idle", random(idle_array), % root, 1, 0.2, 1);
+    self setflaggedanimknoball("idle", random(idle_array), %root, 1, 0.2, 1);
     self waittillmatch("idle", "end");
   }
 }

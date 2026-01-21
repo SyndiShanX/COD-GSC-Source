@@ -101,9 +101,7 @@ function astrotargetservice(entity) {
       entity.ignore_player = [];
     }
     if(isDefined(level.no_target_override)) {
-      [
-        [level.no_target_override]
-      ](entity);
+      [[level.no_target_override]](entity);
     } else {
       entity setgoal(entity.origin);
     }

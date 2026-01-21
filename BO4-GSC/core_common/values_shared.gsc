@@ -156,8 +156,7 @@ _push_value(str_id, str_name, value) {
   }
 
   arrayinsert(self.values[str_name], {
-    #str_id: str_id,
-    #value: value
+    #str_id: str_id, #value: value
   }, 0);
 }
 

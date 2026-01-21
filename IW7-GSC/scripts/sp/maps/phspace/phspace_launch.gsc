@@ -227,13 +227,13 @@ func_89FE() {
   var_8["hvt"] = level.var_920F;
   var_8["handcuffs"] = var_6;
   var_9 = 0.6;
-  var_10 = getanimlength( % ph_aatis_tower_hvt_handoff_ally01);
+  var_10 = getanimlength(%ph_aatis_tower_hvt_handoff_ally01);
   var_7 thread scripts\sp\anim::func_1F2C(var_8, "hvt_handoff");
   wait 0.05;
-  level.var_920F func_82B0( % ph_aatis_tower_hvt_handoff_hvt, var_9);
-  var_3 func_82B0( % ph_aatis_tower_hvt_handoff_ally01, var_9);
-  var_4 func_82B0( % ph_aatis_tower_hvt_handoff_ally02, var_9);
-  var_5 func_82B0( % ph_aatis_tower_hvt_handoff_ally03, var_9);
+  level.var_920F func_82B0(%ph_aatis_tower_hvt_handoff_hvt, var_9);
+  var_3 func_82B0(%ph_aatis_tower_hvt_handoff_ally01, var_9);
+  var_4 func_82B0(%ph_aatis_tower_hvt_handoff_ally02, var_9);
+  var_5 func_82B0(%ph_aatis_tower_hvt_handoff_ally03, var_9);
   var_6 thread func_889A(var_9);
   wait(var_10 - var_10 * var_9 - 0.05);
   var_7 thread scripts\sp\anim::func_1EEA(var_3, "hvt_handoff_idle", "stop_handoff_idle");
@@ -246,7 +246,7 @@ func_89FE() {
 #using_animtree("script_model");
 
 func_889A(var_0) {
-  self func_82B0( % ph_aatis_tower_hvt_handoff_handcuffs, var_0);
+  self func_82B0(%ph_aatis_tower_hvt_handoff_handcuffs, var_0);
 }
 
 func_8A05() {
@@ -441,14 +441,14 @@ func_376C(var_0, var_1) {
   var_0 scripts\engine\utility::delaythread(var_2 - 10, ::func_D166);
   level.allies["eth3n"] thread func_674E();
   wait(var_2 - 0.05);
-  var_0 func_82B1( % ph_jackals_landing_jackal01, 0.0);
+  var_0 func_82B1(%ph_jackals_landing_jackal01, 0.0);
   wait 0.05;
   level.var_D127 func_0BDC::func_A167();
   level.var_D127.var_99F5.var_E526 = 0;
   level.var_D127 func_0BDC::func_104A6(1);
   scripts\engine\utility::flag_set("jackals_landed");
   func_0BDC::func_137CF();
-  var_0 func_82B1( % ph_jackals_landing_jackal01, 1.0);
+  var_0 func_82B1(%ph_jackals_landing_jackal01, 1.0);
 }
 
 func_D166() {
@@ -1245,7 +1245,7 @@ func_CFDF(var_0, var_1, var_2, var_3) {
 }
 
 func_D2D8() {
-  thread func_0BDC::func_A2B0( % jackal_pilot_launch_button, % jackal_vehicle_launch_button, 1.1, 0.5);
+  thread func_0BDC::func_A2B0(%jackal_pilot_launch_button, %jackal_vehicle_launch_button, 1.1, 0.5);
   wait 2.1;
   earthquake(0.25, 0.75, level.var_D127.origin, 5000);
   level.player playrumbleonentity("damage_light");
@@ -1289,7 +1289,7 @@ func_CF51(var_0) {
 }
 
 func_D352() {
-  func_0BDC::func_A2B0( % jackal_pilot_weapon_button, % jackal_vehicle_weapon_button);
+  func_0BDC::func_A2B0(%jackal_pilot_weapon_button, %jackal_vehicle_weapon_button);
   func_0BDC::func_A153(0);
 }
 

@@ -94,9 +94,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
       isshootingownclone = 1;
     }
     if(level.teambased && isplayer(eattacker) && self != eattacker && self.team == eattacker.pers["team"] && !isshootingownclone) {
-      friendlyfire = [
-        [level.figure_out_friendly_fire]
-      ](self);
+      friendlyfire = [[level.figure_out_friendly_fire]](self);
       if(friendlyfire == 0) {
         return;
       }

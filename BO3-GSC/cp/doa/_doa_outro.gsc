@@ -517,7 +517,7 @@ function function_7206982b() {
   self endon("hash_7206982b");
   while(true) {
     idleanim = self.animarray[randomint(self.animarray.size)];
-    self animscripted("zombieanim", self.origin, self.angles, idleanim, "normal", % generic::body, 1, 0.3, 0.3);
+    self animscripted("zombieanim", self.origin, self.angles, idleanim, "normal", %generic::body, 1, 0.3, 0.3);
     self waittillmatch("hash_24281fe0");
   }
 }
@@ -539,8 +539,8 @@ function function_78713841() {
 function function_b8de7628() {
   level endon("hash_448ca7a6");
   self endon("death");
-  var_2c143867 = array( % generic::ai_zombie_base_idle_ad_v1, % generic::ai_zombie_base_idle_au_v1, % generic::bo3_ai_zombie_attack_v1, % generic::bo3_ai_zombie_attack_v2, % generic::bo3_ai_zombie_attack_v3, % generic::bo3_ai_zombie_attack_v4, % generic::bo3_ai_zombie_attack_v6);
-  var_6ac65424 = array( % generic::ai_zombie_doa_cheer_v1, % generic::ai_zombie_doa_cheer_v2, % generic::ai_zombie_doa_cheer_v3);
+  var_2c143867 = array(%generic::ai_zombie_base_idle_ad_v1, %generic::ai_zombie_base_idle_au_v1, %generic::bo3_ai_zombie_attack_v1, %generic::bo3_ai_zombie_attack_v2, %generic::bo3_ai_zombie_attack_v3, %generic::bo3_ai_zombie_attack_v4, %generic::bo3_ai_zombie_attack_v6);
+  var_6ac65424 = array(%generic::ai_zombie_doa_cheer_v1, %generic::ai_zombie_doa_cheer_v2, %generic::ai_zombie_doa_cheer_v3);
   self.animarray = var_2c143867;
   self.var_b2f6b3b7 = "zombie_outro_mood_angry";
   while(true) {
@@ -615,7 +615,7 @@ function function_e4d4b80(animation) {
   self endon("hash_e4d4b80");
   self useanimtree($generic);
   while(true) {
-    self animscripted("podium", self.origin, self.angles, animation, "normal", % generic::body, 1, 0.5, 0.5);
+    self animscripted("podium", self.origin, self.angles, animation, "normal", %generic::body, 1, 0.5, 0.5);
     self waittillmatch("podium");
     self notify("animation_loop", animation, "end");
   }
@@ -638,7 +638,7 @@ function function_d040f4a6(podium) {
   playermodel.takedamage = 1;
   level.doa.var_c12009c9 = podium.var_53538eb0;
   offset = playermodel.origin + vectorscale((0, 0, 1), 90);
-  playermodel thread function_e4d4b80( % generic::ch_ram_05_02_block_nrc_vign_cheering_d_loop);
+  playermodel thread function_e4d4b80(%generic::ch_ram_05_02_block_nrc_vign_cheering_d_loop);
   wait(3);
   playermodel thread namespace_1a381543::function_90118d8c("zmb_end_1stplace_1");
   function_46882430(&"DOA_FIRST_PLACE", offset);
@@ -671,7 +671,7 @@ function function_1b6034b2(podium) {
   level endon("hash_448ca7a6");
   level waittill("hash_314666df");
   playermodel = podium.playermodel;
-  playermodel thread function_e4d4b80( % generic::ai_civ_base_cover_stn_pointidle);
+  playermodel thread function_e4d4b80(%generic::ai_civ_base_cover_stn_pointidle);
   offset = playermodel.origin + vectorscale((0, 0, 1), 90);
   wait(4);
   playermodel thread namespace_1a381543::function_90118d8c("zmb_end_2ndplace_1");
@@ -702,7 +702,7 @@ function function_87082601(podium) {
   level waittill("hash_314666df");
   playermodel = podium.playermodel;
   offset = playermodel.origin + vectorscale((0, 0, 1), 90);
-  playermodel thread function_e4d4b80( % generic::ai_civ_base_standidle_officer);
+  playermodel thread function_e4d4b80(%generic::ai_civ_base_standidle_officer);
   wait(5);
   playermodel thread namespace_1a381543::function_90118d8c("zmb_end_3rdplace_1");
   function_46882430(&"DOA_THIRD_PLACE", offset);
@@ -734,7 +734,7 @@ function function_b7bde10a(podium) {
   playermodel = podium.playermodel;
   right = anglestoright(playermodel.angles);
   offset = (playermodel.origin + vectorscale((0, 0, 1), 80)) + (30 * right);
-  playermodel thread function_e4d4b80( % generic::ch_new_06_01_chase_vign_sitting_civs_right_civ01_loop);
+  playermodel thread function_e4d4b80(%generic::ch_new_06_01_chase_vign_sitting_civs_right_civ01_loop);
   wait(6);
   playermodel thread namespace_1a381543::function_90118d8c("zmb_end_4thplace_1");
   function_46882430(&"DOA_LAST_PLACE", offset);

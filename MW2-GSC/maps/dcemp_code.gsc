@@ -824,7 +824,7 @@ emp_heli_crash_guys_fallout() {
 
   wait .05;
 
-  self setanimknoball(getanim_generic("fastrope_fall"), % body, 1, 0, rate);
+  self setanimknoball(getanim_generic("fastrope_fall"), %body, 1, 0, rate);
 
   wait time - .2;
 
@@ -3059,30 +3059,15 @@ dcemp_create_triggerfx() {
   end.radius = squared(end.node.radius);
 
   /*israinfx = false;
-  if( self.v[ "fxid" ] == "rain_noise_splashes" ||
-  	self.v[ "fxid" ] == "rain_splash_lite" ||
-   	self.v[ "fxid" ] == "cgo_ship_puddle_large" ||
-   	self.v[ "fxid" ] == "cgo_ship_puddle_small" ||
-   	self.v[ "fxid" ] == "rain_splash_lite_4x64" ||
-   	self.v[ "fxid" ] == "rain_splash_lite_4x128" ||
-   	self.v[ "fxid" ] == "rain_splash_lite_8x64" ||
-   	self.v[ "fxid" ] == "rain_splash_lite_8x128" ||
-   	self.v[ "fxid" ] == "rain_splash_lite_64x64" ||
-   	self.v[ "fxid" ] == "rain_splash_lite_128x128" )
+  if( self.v[ "fxid" ] == "rain_noise_splashes" || 	self.v[ "fxid" ] == "rain_splash_lite" || 	self.v[ "fxid" ] == "cgo_ship_puddle_large" || 	self.v[ "fxid" ] == "cgo_ship_puddle_small" || 	self.v[ "fxid" ] == "rain_splash_lite_4x64" || 	self.v[ "fxid" ] == "rain_splash_lite_4x128" || 	self.v[ "fxid" ] == "rain_splash_lite_8x64" || 	self.v[ "fxid" ] == "rain_splash_lite_8x128" || 	self.v[ "fxid" ] == "rain_splash_lite_64x64" || 	self.v[ "fxid" ] == "rain_splash_lite_128x128" )
    	israinfx = true;*/
 
   isissfx = false;
-  if(self.v["fxid"] == "dcemp_sun" ||
-    self.v["fxid"] == "space_nuke" ||
-    self.v["fxid"] == "space_nuke_shockwave" ||
-    self.v["fxid"] == "space_emp" ||
-    self.v["fxid"] == "space_explosion" ||
-    self.v["fxid"] == "space_explosion_small")
+  if(self.v["fxid"] == "dcemp_sun" || self.v["fxid"] == "space_nuke" || self.v["fxid"] == "space_nuke_shockwave" || self.v["fxid"] == "space_emp" || self.v["fxid"] == "space_explosion" || self.v["fxid"] == "space_explosion_small")
     isissfx = true;
 
   isendfx = false;
-  if(self.v["fxid"] == "carpetbomb" ||
-    self.v["fxid"] == "wire_spark")
+  if(self.v["fxid"] == "carpetbomb" || self.v["fxid"] == "wire_spark")
     isendfx = true;
 
   //INTRO FX
@@ -3139,25 +3124,25 @@ dcemp_lightningFlash(type) {
 }
 
 CornerStndR_aim() {
-  self setAnimlimited( % CornerStndR_lean_aim_5, 1, .2);
+  self setAnimlimited(%CornerStndR_lean_aim_5, 1, .2);
 
-  self setAnimLimited( % aim_6, .55, .2);
-  self setAnimKnobLimited( % CornerStndR_lean_aim_6, 1, .2);
+  self setAnimLimited(%aim_6, .55, .2);
+  self setAnimKnobLimited(%CornerStndR_lean_aim_6, 1, .2);
 
-  self setAnimLimited( % add_idle, 1, .2);
-  self setAnimKnobLimitedRestart( % CornerStndR_lean_idle, 1, .2);
+  self setAnimLimited(%add_idle, 1, .2);
+  self setAnimKnobLimitedRestart(%CornerStndR_lean_idle, 1, .2);
   //%CornerStndR_lean_auto
   self waittill("stop_custom_aim");
 }
 
 CornerCrR_aim() {
-  self setAnimlimited( % CornerCrR_lean_aim_5, 1, .2);
+  self setAnimlimited(%CornerCrR_lean_aim_5, 1, .2);
 
-  self setAnimLimited( % aim_6, .5, .2);
-  self setAnimKnobLimited( % CornerCrR_lean_aim_6, 1, .2);
+  self setAnimLimited(%aim_6, .5, .2);
+  self setAnimKnobLimited(%CornerCrR_lean_aim_6, 1, .2);
 
-  self setAnimLimited( % add_idle, 1, .2);
-  self setAnimKnobLimitedRestart( % CornerCrR_lean_idle, 1, .2);
+  self setAnimLimited(%add_idle, 1, .2);
+  self setAnimKnobLimitedRestart(%CornerCrR_lean_idle, 1, .2);
   //%CornerStndR_lean_auto
   self waittill("stop_custom_aim");
 }

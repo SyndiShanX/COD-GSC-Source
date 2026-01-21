@@ -121,16 +121,7 @@ function_cfca77a7(var_42de336c, id, condition_func, cooldown_time, intro_func, o
   }
 
   level.var_b175714d[id] = {
-    #condition: condition_func,
-    #intro_func: intro_func,
-    #outro_func: outro_func,
-    #var_accb1c92: var_accb1c92,
-    #var_44c5827d: var_44c5827d,
-    #var_99fca475: var_99fca475,
-    #cooldown_time: cooldown_time,
-    #var_ebaa8de9: 0,
-    #var_33e393a7: 0,
-    #var_2939a01a: []
+    #condition: condition_func, #intro_func: intro_func, #outro_func: outro_func, #var_accb1c92: var_accb1c92, #var_44c5827d: var_44c5827d, #var_99fca475: var_99fca475, #cooldown_time: cooldown_time, #var_ebaa8de9: 0, #var_33e393a7: 0, #var_2939a01a: []
   };
 
   if(isentity(var_42de336c)) {
@@ -351,8 +342,7 @@ transform(id, var_c2a69066, var_2cf708f4 = 1) {
   var_167b5341 = level.var_b175714d[id];
   function_4e679db4(id, var_167b5341);
   var_e236d061 = {
-    #id: id,
-    #var_1a90140: self
+    #id: id, #var_1a90140: self
   };
 
   if(!isDefined(level.var_ebccd551)) {
@@ -423,8 +413,7 @@ transform(id, var_c2a69066, var_2cf708f4 = 1) {
     }
   } else {
     script_origin = {
-      #origin: self.origin,
-      #angles: self.angles
+      #origin: self.origin, #angles: self.angles
     };
     self val::set(#"zm_transformation", "ignoreall");
     a_ents = undefined;
@@ -455,9 +444,7 @@ transform(id, var_c2a69066, var_2cf708f4 = 1) {
     }
 
     if(isDefined(var_167b5341.var_accb1c92)) {
-      [
-        [var_167b5341.var_accb1c92]
-      ](self, var_167b5341);
+      [[var_167b5341.var_accb1c92]](self, var_167b5341);
     } else {
       settingsbundle = self ai::function_9139c839();
 
@@ -529,9 +516,7 @@ transform(id, var_c2a69066, var_2cf708f4 = 1) {
   new_ai.var_e236d061 = undefined;
   arrayremovevalue(level.var_ebccd551, var_e236d061);
   level notify(#"transformation_complete", {
-    #new_ai: array(new_ai),
-    #id: id,
-    #data: var_e3920264
+    #new_ai: array(new_ai), #id: id, #data: var_e3920264
   });
 
   if(isDefined(var_c2a69066)) {
@@ -847,10 +832,7 @@ setup_status() {
   }
 
   level.var_deb567a8[level.var_deb567a8.size] = {
-    #title: var_e859a426,
-    #var_d189697d: var_af5fbf35,
-    #var_b99573ec: var_f4676cb4,
-    #var_735311f0: var_735311f0
+    #title: var_e859a426, #var_d189697d: var_af5fbf35, #var_b99573ec: var_f4676cb4, #var_735311f0: var_735311f0
   };
   i = 0;
 
@@ -877,11 +859,7 @@ setup_status() {
     }
 
     level.var_deb567a8[level.var_deb567a8.size] = {
-      #title: id_elem,
-      #var_d189697d: var_83db7237,
-      #var_b99573ec: var_82f71158,
-      #id: id,
-      #color: current_color
+      #title: id_elem, #var_d189697d: var_83db7237, #var_b99573ec: var_82f71158, #id: id, #color: current_color
     };
     i++;
   }

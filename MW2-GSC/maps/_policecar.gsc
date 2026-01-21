@@ -17,7 +17,7 @@ main(model, type) {
   build_deathmodel("vehicle_policecar_lapd_destructible", "vehicle_policecar_lapd_destroy");
   build_deathmodel("vehicle_policecar_russia_destructible", "vehicle_policecar_russia_destroy");
 
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
 
   build_treadfx();
   build_life(999, 500, 1500);
@@ -115,10 +115,7 @@ include,vehicle_policecar_lapd
 sound,vehicle_policecar_lapd,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_policecar_lapd_destructible"
-default:"vehicletype" "policecar"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_policecar_lapd_destructible"default:"vehicletype" "policecar"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_policecar_russia (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -130,7 +127,5 @@ include,vehicle_policecar_russia
 sound,vehicle_policecar_lapd,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_policecar_russia_destructible"
-default:"vehicletype" "policecar"
-default:"script_team" "axis"
+defaultmdl="vehicle_policecar_russia_destructible"default:"vehicletype" "policecar"default:"script_team" "axis"
 */

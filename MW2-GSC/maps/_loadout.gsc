@@ -317,9 +317,7 @@ give_loadout(character_selected) {
     weapon = "m14_scoped";
     weapon = "m4m203_acog";
     //weapon = "javelin";
-    // "m79"
-
-    //level.player giveWeapon( weapon );
+    // "m79"//level.player giveWeapon( weapon );
     level.player giveWeapon("beretta");
     level.player giveWeapon("m4m203_eotech");
     level.player giveWeapon("fraggrenade");
@@ -2664,12 +2662,7 @@ setup_character_menu()
 /*
 =============
 ///ScriptDocBegin
-"Name: coop_gamesetup_ac130()"
-"Summary: Opens difficulty menus for both co-op players and returns selected AC130 pilot (player entity). Must call precacheMenu("coop_setup"); precacheMenu("coop_setup2"); in level script."
-"Module: gameskill"
-"Example: 	ac130_pilot = coop_gamesetup_ac130();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: coop_gamesetup_ac130()""Summary: Opens difficulty menus for both co-op players and returns selected AC130 pilot (player entity). Must call precacheMenu("coop_setup"); precacheMenu("coop_setup2"); in level script.""Module: gameskill""Example: 	ac130_pilot = coop_gamesetup_ac130();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 coop_gamesetup_ac130() {
@@ -2794,7 +2787,7 @@ so_player_give_loadout(num) {
 
   if(isDefined(level.so_player_SetModelFunc[num])) {
     player setmodelfunc(level.so_player_SetModelFunc[num]);
-    player setanim( % code, 1, 0);
+    player setanim(%code, 1, 0);
   }
 
   weapons = getarraykeys(level.so_player_add_player_giveWeapon[num]);

@@ -23,7 +23,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathfx("fx\fire\firelp_med_pm", "tag_fx_tire_right_r", undefined, undefined, undefined, undefined, 2.7);
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");
-  maps\_vehicle::build_drive( % bm21_driving_idle_forward, % bm21_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%bm21_driving_idle_forward, %bm21_driving_idle_backward, 10);
   var_3 = var_2;
   maps\_vehicle::build_light(var_3, "headlight_bm21_left", "tag_headlight_left", "fx\misc\car_headlight_bm21", "headlights");
   maps\_vehicle::build_light(var_3, "headlight_bm21_right", "tag_headlight_right", "fx\misc\car_headlight_bm21", "headlights");

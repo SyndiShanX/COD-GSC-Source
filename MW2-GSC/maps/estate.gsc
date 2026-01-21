@@ -699,20 +699,15 @@ intro() {
 intro_dialogue() {
   flag_wait("slam_zoom_done");
 
-  //"Snipers in position."
-  radio_dialogue("est_snp1_inposition");
+  //"Snipers in position."radio_dialogue("est_snp1_inposition");
 
-  //"Strike team, go. Engage Makarov on sight."
-  level.ghost dialogue_queue("est_gst_engageonsight");
+  //"Strike team, go. Engage Makarov on sight."level.ghost dialogue_queue("est_gst_engageonsight");
 
-  //"Roger that."
-  radio_dialogue("est_sld1_rogerthat");
+  //"Roger that."radio_dialogue("est_sld1_rogerthat");
 
-  //"Copy."
-  radio_dialogue("est_sld2_solidcopy");
+  //"Copy."radio_dialogue("est_sld2_solidcopy");
 
-  //"Let's go, let's go!"
-  level.ghost dialogue_queue("est_gst_letsgoletsgo");
+  //"Let's go, let's go!"level.ghost dialogue_queue("est_gst_letsgoletsgo");
 }
 
 objectives() {
@@ -2224,8 +2219,7 @@ ending_moments() {
 
     SetSavedDvar("g_friendlyNameDist", 0);
 
-    //"NO!"
-    ghost delaythread(1, ::dialogue_queue, "est_gst_no"); //1.25 original
+    //"NO!"ghost delaythread(1, ::dialogue_queue, "est_gst_no"); //1.25 original
 
     if(flag("no_slow_mo")) {
       delaythread(1.5, ::ending_slowmo, 3);
@@ -2476,7 +2470,7 @@ ending_thunderone_manual_chainguns()
 	foreach ( turret in self.mgturret )
 	{
 		
-		baddudes = getaiarray( "axis" );
+		baddudes = getaiarray("axis" );
 		if( baddudes.size )
 		{
 			turret SetMode( "manual" );
@@ -2496,7 +2490,7 @@ ending_thunderone_manual_chainguns()
 	foreach ( turret in self.mgturret )
 	{
 		
-		baddudes = getaiarray( "axis" );
+		baddudes = getaiarray("axis" );
 		if( baddudes.size )
 		{
 			turret SetMode( "auto_ai" );

@@ -110,9 +110,7 @@ EMP_JamTeam(teamName) {
   level.teamEMPed[teamName] = false;
 
   foreach(player in level.players) {
-    if(player.team == teamName &&
-      !(player shouldPlayerBeAffectedByEMP())
-    ) {
+    if(player.team == teamName && !(player shouldPlayerBeAffectedByEMP())) {
       player removePerPlayerEMPEffects();
     }
   }
@@ -153,9 +151,7 @@ EMP_JamPlayers(owner) {
 
   level.empPlayer = undefined;
   foreach(player in level.players) {
-    if((!isDefined(owner) || player != owner) &&
-      !(player shouldPlayerBeAffectedByEMP())
-    ) {
+    if((!isDefined(owner) || player != owner) && !(player shouldPlayerBeAffectedByEMP())) {
       player removePerPlayerEMPEffects();
     }
   }

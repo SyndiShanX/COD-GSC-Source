@@ -558,15 +558,7 @@ add_vol_to_node(targ, max_col_progress, min_col_progress, right_offset, left_off
 /*
 =============
 ///ScriptDocBegin
-"Name: get_progression_between_points( <start> , <first_point> , <second_point> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: get_progression_between_points( <start> , <first_point> , <second_point> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 get_progression_between_points(start, first_point, second_point) {

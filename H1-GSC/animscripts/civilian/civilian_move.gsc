@@ -63,7 +63,7 @@ civilian_combathunchedmoveturn(var_0, var_1) {
       var_2 = % civilian_run_hunched_turnl45;
     else if(var_0 > -112.5) {
       var_2 = % civilian_run_hunched_turnl90;
-      var_3 = animscripts\utility::randomanimoftwo( % civilian_run_hunched_turnl90_slide, % civilian_run_hunched_turnl90_stumble);
+      var_3 = animscripts\utility::randomanimoftwo(%civilian_run_hunched_turnl90_slide, %civilian_run_hunched_turnl90_stumble);
     } else if(var_0 > -157.5)
       var_2 = % civilian_run_upright_turnl135;
     else
@@ -73,7 +73,7 @@ civilian_combathunchedmoveturn(var_0, var_1) {
       var_2 = % civilian_run_hunched_turnr45;
     else if(var_0 < 112.5) {
       var_2 = % civilian_run_hunched_turnr90;
-      var_3 = animscripts\utility::randomanimoftwo( % civilian_run_hunched_turnr90_slide, % civilian_run_hunched_turnr90_stumble);
+      var_3 = animscripts\utility::randomanimoftwo(%civilian_run_hunched_turnr90_slide, %civilian_run_hunched_turnr90_stumble);
     } else if(var_0 < 157.5)
       var_2 = % civilian_run_upright_turnr135;
     else

@@ -519,8 +519,7 @@ manage_spawners_nogoal(strSquadName, mincount, maxcount, ender, spawntime, spawn
     if(aSquad.size < mincount) {
       level notify(strSquadName + " min threshold reached");
       while(aSquad.size < maxcount) {
-        if(isDefined(squad_spawn[spawn_index].script_forcespawn) &&
-          squad_spawn[spawn_index].script_forcespawn) {
+        if(isDefined(squad_spawn[spawn_index].script_forcespawn) && squad_spawn[spawn_index].script_forcespawn) {
           spawned = squad_spawn[spawn_index] stalingradspawn();
         } else {
           spawned = squad_spawn[spawn_index] dospawn();

@@ -32,9 +32,7 @@ function_f468d9a5(spawnpoint) {
   vec = vectornormalize(vec);
   vec *= velocity;
   return {
-    #origin: hold_origin,
-    #angles: hold_angles,
-    #freefall: vec
+    #origin: hold_origin, #angles: hold_angles, #freefall: vec
   };
 }
 

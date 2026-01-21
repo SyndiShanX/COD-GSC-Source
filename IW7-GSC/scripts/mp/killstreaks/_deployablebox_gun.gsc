@@ -75,9 +75,7 @@ onusedeployable(var_0) {
   if(level.var_5226 == 0) {
     var_1 = level.boxsettings[var_0.boxtype];
     if(isDefined(level.var_5222)) {
-      [
-        [level.var_5222]
-      ](1);
+      [[level.var_5222]](1);
     } else {
       setviewmodeldepthoffield(self, var_1.minigunweapon);
     }

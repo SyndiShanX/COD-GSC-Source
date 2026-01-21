@@ -36,7 +36,7 @@ getNextFlashAnim() {
 
 flashBangAnim() {
   self endon("killanimscript");
-  self setflaggedanimknoball("flashed_anim", getNextFlashAnim(), % body);
+  self setflaggedanimknoball("flashed_anim", getNextFlashAnim(), %body);
   self animscripts\shared::DoNoteTracks("flashed_anim");
 }
 
@@ -51,7 +51,7 @@ main() {
   self animscripts\face::SayGenericDialogue("flashbang");
   self.allowdeath = true;
   if(isDefined(self.flashedanim))
-    self setanimknoball(self.flashedanim, % body);
+    self setanimknoball(self.flashedanim, %body);
   else
     self thread flashBangAnim();
   for(;;) {

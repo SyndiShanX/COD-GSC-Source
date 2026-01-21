@@ -2350,7 +2350,7 @@ bunker_trench_drones() {
 
     var_2 = var_0 maps\_utility::spawn_ai();
     wait(randomintrange(15, 25));
-    var_3 = [ % stand_death_tumbleback, % stand_death_headshot_slowfall, % stand_death_shoulderback];
+    var_3 = [ % stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback];
     var_2.deathanim = var_3[randomint(var_3.size)];
     var_2 dodamage(var_2.health + 10, var_2.origin);
     wait(randomintrange(4, 8));

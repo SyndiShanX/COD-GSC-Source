@@ -327,9 +327,7 @@ handleplayerfasttravel(player, var_12230d08) {
       continue;
     }
 
-    if(isDefined(level.var_1dbf5163) && ![
-        [level.var_1dbf5163]
-      ](player)) {
+    if(isDefined(level.var_1dbf5163) && ![[level.var_1dbf5163]](player)) {
       continue;
     }
 

@@ -396,15 +396,15 @@ changeaiming(spot, fullbody, transtime) {
 stopaiming(transtime) {
   assert(self.corneraiming);
   self.corneraiming = 0;
-  self clearanim( % add_fire, transtime);
+  self clearanim(%add_fire, transtime);
   animscripts\shared::setanimaimweight(0, transtime);
 }
 
 setaimingparams(spot, fullbody, transtime, start) {
   assert(isDefined(fullbody));
   self.spot = spot;
-  self setanimlimited( % exposed_modern, 1, transtime);
-  self setanimlimited( % exposed_aiming, 1, transtime);
+  self setanimlimited(%exposed_modern, 1, transtime);
+  self setanimlimited(%exposed_aiming, 1, transtime);
   animscripts\shared::setanimaimweight(1, 0);
   aimanimprefix = "";
 
@@ -496,7 +496,7 @@ stepout() {
     self.blockingpain = 1;
 
   animrate = stepoutandhidespeed();
-  self setflaggedanimknoballrestart("stepout", switchanim, % root, 1, 0.2, animrate);
+  self setflaggedanimknoballrestart("stepout", switchanim, %root, 1, 0.2, animrate);
   self thread donotetrackswithendon("stepout");
   hasstartaim = animhasnotetrack(switchanim, "start_aim");
 
@@ -521,8 +521,8 @@ stepout() {
     self.blockingpain = 0;
 
   self changeaiming(undefined, 1, 0.2);
-  self clearanim( % cover, 0.2);
-  self clearanim( % corner, 0.2);
+  self clearanim(%cover, 0.2);
+  self clearanim(%corner, 0.2);
   self.changingcoverpos = 0;
   self.coverposestablishedtime = gettime();
   self.pushable = 1;
@@ -612,7 +612,7 @@ rambostepout() {
   self.keepclaimednode = 1;
   self.keepclaimednodeifvalid = 1;
   self.isramboing = 1;
-  self setflaggedanimknoballrestart("rambo", ramboanim, % body, 1, 0);
+  self setflaggedanimknoballrestart("rambo", ramboanim, %body, 1, 0);
 
   if(canuseblindaiming("rambo") && animtype != "rambo_jam") {
     self thread startblindaiming(ramboanim, "rambo");
@@ -732,7 +732,7 @@ shootastold() {
 
       shootuntilshootbehaviorchange_corner(1);
       self flamethrower_stop_shoot();
-      self clearanim( % add_fire, 0.2);
+      self clearanim(%add_fire, 0.2);
     }
 
     domidpointcheck = self.a.cornermode != "lean" && self.a.cornermode != "over";
@@ -784,9 +784,9 @@ standidlethread() {
     return;
   }
   self.a.standidlethread = 1;
-  self setanim( % add_idle, 1, 0.2);
+  self setanim(%add_idle, 1, 0.2);
   standidlethreadinternal();
-  self clearanim( % add_idle, 0.2);
+  self clearanim(%add_idle, 0.2);
 }
 
 endstandidlethread() {
@@ -862,7 +862,7 @@ returntocover() {
   assert(animarrayanyexist(animname));
   switchanim = animarraypickrandom(animname);
   self stopaiming(0.3);
-  self clearanim( % add_fire, 0.2);
+  self clearanim(%add_fire, 0.2);
   reloading = 0;
 
   if(self.a.cornermode != "lean" && self.subclass == "regular" && animarrayanyexist(animname + "_reload") && randomfloat(100) < 75) {
@@ -890,7 +890,7 @@ returntocover() {
   self.changingcoverpos = 0;
   setanimspecial();
   self.keepclaimednode = 0;
-  self clearanim( % exposed_modern, 0.2);
+  self clearanim(%exposed_modern, 0.2);
 
   if(self.team == "allies")
     self.blockingpain = 0;
@@ -971,7 +971,7 @@ lookforenemy(looktime) {
   else
     lookanim = animarray("look_to_alert");
 
-  self setflaggedanimknoballrestart("looking_end", lookanim, % body, 1, 0.1, 1.0);
+  self setflaggedanimknoballrestart("looking_end", lookanim, %body, 1, 0.1, 1.0);
   animscripts\shared::donotetracks("looking_end");
   self animmode("zonly_physics");
   self.keepclaimednodeifvalid = 0;
@@ -1025,7 +1025,7 @@ peekout() {
     return false;
   }
 
-  self setflaggedanimknoball("looking_start", peekanim, % body, 1, 0.2, 1);
+  self setflaggedanimknoball("looking_start", peekanim, %body, 1, 0.2, 1);
   animscripts\shared::donotetracks("looking_start");
   return true;
 }
@@ -1049,7 +1049,7 @@ fastlook() {
     return false;
   }
 
-  self setflaggedanimknoballrestart("look", peekanim, % body, 1, 0.1);
+  self setflaggedanimknoballrestart("look", peekanim, %body, 1, 0.1);
   self animscripts\shared::donotetracks("look");
   return true;
 }
@@ -1142,9 +1142,9 @@ flinch() {
 
 playidleanimation(idleanim, needsrestart) {
   if(needsrestart)
-    self setflaggedanimknoballrestart("idle", idleanim, % body, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("idle", idleanim, %body, 1, 0.2, 1);
   else
-    self setflaggedanimknoball("idle", idleanim, % body, 1, 0.2, 1);
+    self setflaggedanimknoball("idle", idleanim, %body, 1, 0.2, 1);
 
   self animscripts\shared::donotetracks("idle");
 }
@@ -1153,7 +1153,7 @@ transitiontostance(stance) {
   if(self.a.pose == stance) {
     return;
   }
-  self setflaggedanimknoballrestart("changeStance", animarray("stance_change"), % body);
+  self setflaggedanimknoballrestart("changeStance", animarray("stance_change"), %body);
   self animscripts\shared::donotetracks("changeStance");
   assert(self.a.pose == stance);
   wait 0.2;
@@ -1168,7 +1168,7 @@ gotocover(coveranim, transtime, playtime) {
   assert(transtime <= playtime);
   setanimspecial();
   self thread animscripts\shared::movetooriginovertime(cornerorigin, transtime);
-  self setflaggedanimknoballrestart("coveranim", coveranim, % body, 1, transtime);
+  self setflaggedanimknoballrestart("coveranim", coveranim, %body, 1, transtime);
   self animscripts\shared::donotetracksfortime(playtime, "coveranim");
 
   while(absangleclamp180(self.angles[1] - desiredyaw) > 1)
@@ -1203,11 +1203,11 @@ runcombat() {
 
 resetweaponanims() {
   assert(self.a.pose == "stand" || self.a.pose == "crouch");
-  self clearanim( % aim_4, 0);
-  self clearanim( % aim_6, 0);
-  self clearanim( % aim_2, 0);
-  self clearanim( % aim_8, 0);
-  self clearanim( % exposed_aiming, 0);
+  self clearanim(%aim_4, 0);
+  self clearanim(%aim_6, 0);
+  self clearanim(%aim_2, 0);
+  self clearanim(%aim_8, 0);
+  self clearanim(%exposed_aiming, 0);
 }
 
 setcornerdirection(direction) {
@@ -1231,7 +1231,7 @@ switchsides() {
   if(forcecornermode == "left" || forcecornermode == "right")
     setcornerdirection(forcecornermode);
 
-  self clearanim( % exposed_aiming, 0.2);
+  self clearanim(%exposed_aiming, 0.2);
   self animscripts\anims::clearanimcache();
   self notify("dont_end_idle");
   wait 0.05;

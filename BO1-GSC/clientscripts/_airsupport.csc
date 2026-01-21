@@ -55,10 +55,7 @@ plane_position_updater(fake_ent, plane, flybySound, flybySoundLoop, lengthOfFlyb
 
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
-  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) +
-      ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) +
-      ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) /
-    (LineMagSqrd);
+  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) / (LineMagSqrd);
   if(t < 0.0) {
     return LineStart;
   } else if(t > 1.0) {

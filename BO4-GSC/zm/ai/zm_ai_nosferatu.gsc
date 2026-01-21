@@ -689,8 +689,7 @@ function_13b48cdd(var_c9528359, queryresult) {
       ai thread function_b2a2b29e();
       ai.favoriteenemy = zm_utility::get_closest_valid_player(ai.origin, []);
       point thread nosferatu_spawn_fx(ai, {
-        #origin: point.origin,
-        #angles: self.angles
+        #origin: point.origin, #angles: self.angles
       });
       wait 0.2;
     }

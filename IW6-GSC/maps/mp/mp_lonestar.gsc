@@ -153,8 +153,8 @@ quakes() {
 
   level.pre_quake_scriptables = [];
   level.quake_scriptables = [];
-  add_quake_scriptable("qauke_script_hanging_wire", GetAnimLength( % mp_lonestar_hanging_wire_earthquake), false);
-  add_quake_scriptable("qauke_script_telephone_wire", GetAnimLength( % mp_lonestar_earthquake_wire_shake), true);
+  add_quake_scriptable("qauke_script_hanging_wire", GetAnimLength(%mp_lonestar_hanging_wire_earthquake), false);
+  add_quake_scriptable("qauke_script_telephone_wire", GetAnimLength(%mp_lonestar_earthquake_wire_shake), true);
 
   level.quake_anim_funcs["police_car_hit_by_pole"] = [];
   level.quake_anim_funcs["police_car_hit_by_pole"][0] = ::quake_event_pole_fall_on_car;
@@ -608,7 +608,7 @@ quake_event_bats(quakeTime, start_node) {
   bat_model ScriptModelPlayAnimDeltaMotion("mp_lonestar_bat_effect_path");
   bat_sound_ent playLoopSound("mp_quake_bat_lp");
 
-  wait(GetAnimLength( % mp_lonestar_bat_effect_path));
+  wait(GetAnimLength(%mp_lonestar_bat_effect_path));
 
   bat_sound_ent Delete();
   bat_model Delete();
@@ -781,8 +781,8 @@ quake_event_pole_fall_on_car(quakeTime, ent) {
 
   animated_prop ScriptModelPlayAnimDeltaMotion("mp_lonestar_police_car_crush_pole");
 
-  car_swap = GetNotetrackTimes( % mp_lonestar_police_car_crush_pole, "car_swap");
-  anim_length = GetAnimLength( % mp_lonestar_police_car_crush_pole);
+  car_swap = GetNotetrackTimes(%mp_lonestar_police_car_crush_pole, "car_swap");
+  anim_length = GetAnimLength(%mp_lonestar_police_car_crush_pole);
 
   wait car_swap[0] * anim_length;
 

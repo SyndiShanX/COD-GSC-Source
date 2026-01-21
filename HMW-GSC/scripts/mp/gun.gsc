@@ -27,9 +27,7 @@ setguns_stub() {
 
   level.gun_guns = [];
 
-  ar_additional_attachments = ["none", "reflex", "silencerar", "acog"]; // TODO: add "gl"
-
-  shotgun_additional_attachments = ["none", "reflex", "foregrip"];
+  ar_additional_attachments = ["none", "reflex", "silencerar", "acog"]; // TODO: add "gl"shotgun_additional_attachments = ["none", "reflex", "foregrip"];
   shotgun_additional_attachments_akimbo = ["none", "fmj", "akimbo"];
 
   snipers_additional_attachments = ["none", "acog", "fmj", "silencersniper"];

@@ -14,18 +14,7 @@ init() {
     setArchive(true);
 }
 
-killcam(
-  attackerNum,
-  killcamentity,
-  killcamentityindex,
-  killcamentitystarttime,
-  sWeapon,
-  predelay,
-  offsetTime,
-  respawn,
-  maxtime,
-  perks,
-  attacker
+killcam(attackerNum, killcamentity, killcamentityindex, killcamentitystarttime, sWeapon, predelay, offsetTime, respawn, maxtime, perks, attacker
 ) {
   self endon("disconnect");
   self endon("spawned");

@@ -562,9 +562,7 @@ linkto() {
   switch (scripts\cp\cp_agent_utils::get_agent_type(self)) {
     case "gargoyle_boss":
     case "gargoyle":
-      var_0 = [
-        [level.var_1B6B["gargoyle"]["turn_in_place_anim_state"]]
-      ]();
+      var_0 = [[level.var_1B6B["gargoyle"]["turn_in_place_anim_state"]]]();
       break;
   }
 

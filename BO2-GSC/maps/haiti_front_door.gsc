@@ -183,7 +183,7 @@ laser_turret_think(str_cleanup) {
   self thread laser_turret_challenge();
 
   while(!(isDefined(self.captured) && self.captured)) {
-    self setflaggedanimknoballrestart("idle", random(level.scr_anim["laser_turret_scan"]), % root, 1, 0.2, 0.5);
+    self setflaggedanimknoballrestart("idle", random(level.scr_anim["laser_turret_scan"]), %root, 1, 0.2, 0.5);
     self waittillmatch("idle", "end");
   }
 }

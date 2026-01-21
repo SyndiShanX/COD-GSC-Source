@@ -315,9 +315,7 @@ _calculateallpathablegameobjects(planner, doppelbots, gameobjects) {
       aiprofile_endentry();
       pixendevent();
       waitframe(1);
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(planner);
+      [[level.strategic_command_throttle]] - > waitinqueue(planner);
       pixbeginevent(planner.name);
       aiprofile_beginentry(planner.name);
       planner.api = var_ce386d7a;
@@ -402,9 +400,7 @@ function_816f4052(planner, doppelbots, bundles) {
       aiprofile_endentry();
       pixendevent();
       waitframe(1);
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(planner);
+      [[level.strategic_command_throttle]] - > waitinqueue(planner);
       pixbeginevent(planner.name);
       aiprofile_beginentry(planner.name);
       planner.api = var_ce386d7a;
@@ -513,9 +509,7 @@ function_77cd4593(planner, doppelbots, components) {
       aiprofile_endentry();
       pixendevent();
       waitframe(1);
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(planner);
+      [[level.strategic_command_throttle]] - > waitinqueue(planner);
       pixbeginevent(planner.name);
       aiprofile_beginentry(planner.name);
       planner.api = var_ce386d7a;

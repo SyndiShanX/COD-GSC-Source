@@ -296,9 +296,7 @@ monitor_enemy_for_downed(enemy) {
 
 alien_test_loop() {
   movePosList = [
-    (-296, 448, -352),
-    (808, 300, -368),
-    (1320.6, 482.8, -320)
+    (-296, 448, -352), (808, 300, -368), (1320.6, 482.8, -320)
 
   ];
 
@@ -318,8 +316,7 @@ alien_test_loop() {
 
 alien_test_jump() {
   movePosList = [
-    (-203.3, -898, 151.03304),
-    (-1282.2, -669.1, -26.529)
+    (-203.3, -898, 151.03304), (-1282.2, -669.1, -26.529)
   ];
 
   wait(10);
@@ -541,9 +538,7 @@ alien_attack_sequence(enemy) {
       if(has_attack_abort_been_requested(self)) {
         return;
       }
-      attack_type = [
-        [level.alien_funcs[get_alien_type()]["approach"]]
-      ](enemy, attack);
+      attack_type = [[level.alien_funcs[get_alien_type()]["approach"]]](enemy, attack);
 
       alien_attack(enemy, attack_type);
 
@@ -895,9 +890,7 @@ should_i_attack(enemy) {
 
 should_i_retreat(enemy) {
   if(isDefined(level.dlc_alien_can_retreat_override_func)) {
-    if(![
-        [level.dlc_alien_can_retreat_override_func]
-      ](enemy))
+    if(![[level.dlc_alien_can_retreat_override_func]](enemy))
       return false;
   }
 
@@ -1524,8 +1517,7 @@ get_retreat_node_rated(enemy, filters, nodes) {
     rating = 0.0;
 
     if(height_Weight > 0.0) {
-      if((node_origin[2] - enemy.origin[2]) > min_height &&
-        (node_origin[2] - enemy.origin[2]) < max_height) {
+      if((node_origin[2] - enemy.origin[2]) > min_height && (node_origin[2] - enemy.origin[2]) < max_height) {
         rating += height_weight;
       }
     }
@@ -1719,8 +1711,7 @@ sneak_up_on(enemy) {
   while(true) {
     wait(1.0);
 
-    if(in_front_players() ||
-      distanceSquared(self.origin, enemy.origin) > ALIEN_LEAP_MELEE_DISTANCE_MAX * ALIEN_LEAP_MELEE_DISTANCE_MAX * ENEMY_GET_AWAY_SCALER) {
+    if(in_front_players() || distanceSquared(self.origin, enemy.origin) > ALIEN_LEAP_MELEE_DISTANCE_MAX * ALIEN_LEAP_MELEE_DISTANCE_MAX * ENEMY_GET_AWAY_SCALER) {
       self set_alien_movemode("run");
       break;
     }

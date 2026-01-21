@@ -332,9 +332,7 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
-      returnedNote = [
-        [notetracksFunc]
-      ](flagName, customFunction, debugIdentifier);
+      returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
       timetaken = GetTime() - time;
       if(timetaken < 0.05) {
         println(GetTime() + " " + debugIdentifier + " animscripts\zombie_shared::DoNoteTracksForever is trying to cause an infinite loop on anim " + flagName + ", returned " + returnedNote + ".");

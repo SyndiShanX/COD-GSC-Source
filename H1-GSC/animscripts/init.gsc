@@ -208,8 +208,8 @@ main() {
 handleikevent() {
   self endon("death");
   var_0 = -30;
-  self setanimlimited( % actor_ik_move_root, 0);
-  self setanimlimited( % stand_exposed_ik_add, 1);
+  self setanimlimited(%actor_ik_move_root, 0);
+  self setanimlimited(%stand_exposed_ik_add, 1);
   var_1 = 0;
 
   for(;;) {
@@ -217,7 +217,7 @@ handleikevent() {
 
     if(var_2 <= 0.01) {
       if(var_1 == 0) {
-        self setanimlimited( % actor_ik_move_root, 0);
+        self setanimlimited(%actor_ik_move_root, 0);
         var_1 = 1;
       }
 
@@ -298,10 +298,10 @@ handleikevent() {
 
     if(var_10 < 0) {
       var_25 = var_10 / var_0;
-      self setanimlimited( % actor_ik_move_root, var_25 * var_2);
+      self setanimlimited(%actor_ik_move_root, var_25 * var_2);
       var_1 = 0;
     } else if(var_1 == 0) {
-      self setanimlimited( % actor_ik_move_root, 0);
+      self setanimlimited(%actor_ik_move_root, 0);
       var_1 = 1;
     }
   }

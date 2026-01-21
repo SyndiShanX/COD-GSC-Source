@@ -47,8 +47,7 @@ init() {
   level.fx_airstrike_contrail = loadfx("smoke/jet_contrail");
 
   // airstrike danger area is the circle of radius artilleryDangerMaxRadius
-  // stretched by a factor of artilleryDangerOvalScale in the direction of the incoming airstrike,
-  // moved by artilleryDangerForwardPush * artilleryDangerMaxRadius in the same direction.
+  // stretched by a factor of artilleryDangerOvalScale in the direction of the incoming airstrike, // moved by artilleryDangerForwardPush * artilleryDangerMaxRadius in the same direction.
   // use scr_Airstrikedebug to visualize.
 
   level.dangerMaxRadius["stealth"] = 900;
@@ -366,15 +365,13 @@ airstrikeDamageEntsThread(sWeapon) {
       continue;
     }
     if(!ent.isPlayer || isAlive(ent.entity)) {
-      ent maps\mp\gametypes\_weapons::damageEnt(
-        ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
+      ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
         ent.damageOwner, // eAttacker = the player that is attacking
         ent.damage, // iDamage = the amount of damage to do
         "MOD_PROJECTILE_SPLASH", // sMeansOfDeath = string specifying the method of death (e.g. "MOD_PROJECTILE_SPLASH")
         sWeapon, // sWeapon = string specifying the weapon used (e.g. "claymore_mp")
         ent.pos, // damagepos = the position damage is coming from
-        vectornormalize(ent.damageCenter - ent.pos) // damagedir = the direction damage is moving in
-      );
+        vectornormalize(ent.damageCenter - ent.pos) // damagedir = the direction damage is moving in);
 
       level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex] = undefined;
 

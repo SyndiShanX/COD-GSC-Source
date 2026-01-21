@@ -410,8 +410,7 @@ melee_weapon_think(weapon, cost, flourish_fn, vo_dialog_id, flourish_weapon) {
         }
 
         level notify(#"weapon_bought", {
-          #player: player,
-          #weapon: weapon
+          #player: player, #weapon: weapon
         });
         player zm_score::minus_to_player_score(cost);
         player zm_stats::function_c0c6ab19(#"wallbuys", 1, 1);

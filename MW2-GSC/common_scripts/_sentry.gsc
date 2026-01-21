@@ -8,14 +8,10 @@
 #using_animtree("sentry_gun");
 
 /*QUAKED script_model_pickup_sentry_gun (1 0 0) (-32 -16 0) (32 16 24) ORIENT_LOD NO_SHADOWNO_STATIC_SHADOWS
-defaultmdl="sentry_gun_folded"
-default:"model" "sentry_gun_folded"
-*/
+defaultmdl="sentry_gun_folded"default:"model" "sentry_gun_folded"*/
 
 /*QUAKED script_model_pickup_sentry_minigun (1 0 0) (-32 -16 0) (32 16 24) ORIENT_LOD NO_SHADOWNO_STATIC_SHADOWS
-defaultmdl="sentry_minigun_folded"
-default:"model" "sentry_minigun_folded"
-*/
+defaultmdl="sentry_minigun_folded"default:"model" "sentry_minigun_folded"*/
 
 /*
 code support:
@@ -68,8 +64,7 @@ main() {
     precacheTurret("sentry_minigun_mp");
   }
 
-  // LANG_ENGLISH		Press and hold ^3&& 1^7 to move the turret."
-  precacheString(&"SENTRY_MOVE");
+  // LANG_ENGLISH		Press and hold ^3&& 1^7 to move the turret."precacheString(&"SENTRY_MOVE");
   // Press and hold ^3&& 1^7 to pick up the turret.
   precacheString(&"SENTRY_PICKUP");
   precacheString(&"SENTRY_PLACE");

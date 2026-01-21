@@ -404,9 +404,7 @@ func_8960() {
         continue;
       }
 
-      [
-        [var_10["catchup_function"]]
-      ]();
+      [[var_10["catchup_function"]]]();
     }
   }
 

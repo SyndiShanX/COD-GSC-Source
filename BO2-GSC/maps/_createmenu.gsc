@@ -224,9 +224,7 @@ menu_input() {
 
     if(isDefined(level.menu_sys[menu_name].children_func) && isDefined(level.menu_sys[menu_name].children_func[key])) {
       func = level.menu_sys[menu_name].children_func[key];
-      error_msg = [
-        [func]
-      ]();
+      error_msg = [[func]]();
 
       if(isDefined(error_msg)) {
         level thread selection_error(error_msg, level.menu_sys["current_menu"].options[key].x, level.menu_sys["current_menu"].options[key].y);

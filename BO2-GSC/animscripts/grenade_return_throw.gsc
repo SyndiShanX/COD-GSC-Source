@@ -65,7 +65,7 @@ main() {
   }
 
   assert(isDefined(throwanim));
-  self setflaggedanimknoballrestart("throwanim", throwanim, % body, 1, 0.3);
+  self setflaggedanimknoballrestart("throwanim", throwanim, %body, 1, 0.3);
   self thread handlepickupandthrow("throwanim", throwanim);
   self animscripts\shared::donotetracks("throwanim");
 }

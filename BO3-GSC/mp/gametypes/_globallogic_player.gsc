@@ -708,9 +708,7 @@ function callback_playerconnect() {
   } else {
     if(self.pers["team"] == "spectator") {
       self setclientscriptmainmenu(game["menu_start_menu"]);
-      [
-        [level.spawnspectator]
-      ]();
+      [[level.spawnspectator]]();
       self.sessionteam = "spectator";
       self.sessionstate = "spectator";
       self thread spectate_player_watcher();
@@ -718,9 +716,7 @@ function callback_playerconnect() {
       self.sessionteam = self.pers["team"];
       self.sessionstate = "dead";
       self globallogic_ui::updateobjectivetext();
-      [
-        [level.spawnspectator]
-      ]();
+      [[level.spawnspectator]]();
       if(globallogic_utils::isvalidclass(self.pers["class"]) || util::isprophuntgametype()) {
         if(!globallogic_utils::isvalidclass(self.pers["class"])) {
           self.pers["class"] = level.defaultclass;
@@ -1096,9 +1092,7 @@ function player_damage_figure_out_weapon(weapon, einflictor) {
   }
   if(isDefined(einflictor) && isDefined(einflictor.script_noteworthy)) {
     if(isDefined(level.overrideweaponfunc)) {
-      weapon = [
-        [level.overrideweaponfunc]
-      ](weapon, einflictor.script_noteworthy);
+      weapon = [[level.overrideweaponfunc]](weapon, einflictor.script_noteworthy);
     }
   }
   return weapon;

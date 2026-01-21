@@ -409,9 +409,7 @@ menu_input() {
     }
     if(isDefined(level.menu_sys[menu_name].children_func) && isDefined(level.menu_sys[menu_name].children_func[key])) {
       func = level.menu_sys[menu_name].children_func[key];
-      error_msg = [
-        [func]
-      ]();
+      error_msg = [[func]]();
       if(isDefined(error_msg)) {
         level thread selection_error(error_msg, level.menu_sys["current_menu"].options[key].x, level.menu_sys["current_menu"].options[key].y);
         continue;
@@ -487,9 +485,7 @@ list_menu(list, x, y, scale, func) {
     level notify("scroll_list");
     if(current_num != old_num) {
       old_num = current_num;
-      [
-        [func]
-      ](list[current_num]);
+      [[func]](list[current_num]);
     }
   }
   for(i = 0; i < hud_array.size; i++) {
@@ -2300,8 +2296,7 @@ save(model_array, filename, classname) {
     }
     file = OpenFile(level.fullpath_file, "write");
     assertex(file != -1, "File not writeable (maybe you should check it out): " + level.fullpath_file);
-    fprintln(file, "
-      for(i = 0; i < model_array.size; i++) {
+    fprintln(file, "for(i = 0; i < model_array.size; i++) {
         fprintln(file, "{");
         fprintln(file, "\"angles\" \"" + model_array[i].angles[0] + " " + model_array[i].angles[1] + " " + model_array[i].angles[2] + "\"");
         fprintln(file, "\"origin\" \"" + model_array[i].origin[0] + " " + model_array[i].origin[1] + " " + model_array[i].origin[2] + "\"");

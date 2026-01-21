@@ -284,9 +284,7 @@ setdefaultpgtoggles() {
 restorerkstagetoggles() {
   if(level.players.size == 1) {
     if(isDefined(level.solorkstagetoggles)) {
-      [
-        [level.solorkstagetoggles]
-      ]();
+      [[level.solorkstagetoggles]]();
       return;
     }
 

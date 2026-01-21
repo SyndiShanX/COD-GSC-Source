@@ -28,9 +28,7 @@ function_aefef9ae(entity) {
 
   if(isDefined(entity.var_506922ab)) {
     foreach(callback in entity.var_506922ab) {
-      [
-        [callback]
-      ](entity);
+      [[callback]](entity);
     }
   }
 }

@@ -810,17 +810,13 @@ function_6a24e58f() {
 
     if(getdvarint(#"hash_2aab28ebf600b8c7", -1) != -1) {
       var_168b7d5 = getdvarint(#"hash_2aab28ebf600b8c7", -1);
-      [
-        [level._setteamscore]
-      ](#"allies", var_168b7d5);
+      [[level._setteamscore]](#"allies", var_168b7d5);
       setdvar(#"hash_2aab28ebf600b8c7", -1);
     }
 
     if(getdvarint(#"hash_4874e2dd28221d6c", -1) != -1) {
       var_46c53e6e = getdvarint(#"hash_4874e2dd28221d6c", -1);
-      [
-        [level._setteamscore]
-      ](#"axis", var_46c53e6e);
+      [[level._setteamscore]](#"axis", var_46c53e6e);
       setdvar(#"hash_4874e2dd28221d6c", -1);
     }
 

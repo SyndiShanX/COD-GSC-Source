@@ -188,9 +188,7 @@ hintprintwait(var_0, var_1) {
   var_2 = var_0 * 20;
 
   for(var_3 = 0; var_3 < var_2; var_3++) {
-    if([
-        [var_1]
-      ]()) {
+    if([[var_1]]()) {
       break;
     }
 
@@ -817,13 +815,9 @@ dynamic_run_speed_proc(var_0, var_1, var_2, var_3, var_4) {
     var_19 = 0;
 
     if(isDefined(self.last_set_goalent))
-      var_19 = [
-        [level.drs_ahead_test]
-      ](self.last_set_goalent, var_1);
+      var_19 = [[level.drs_ahead_test]](self.last_set_goalent, var_1);
     else if(isDefined(self.last_set_goalnode))
-      var_19 = [
-        [level.drs_ahead_test]
-      ](self.last_set_goalnode, var_1);
+      var_19 = [[level.drs_ahead_test]](self.last_set_goalnode, var_1);
 
     if(isDefined(self.cqbwalking) && self.cqbwalking && !self.dontchangemoveplaybackrate)
       self.moveplaybackrate = 1;
@@ -1400,9 +1394,7 @@ comparesizesfx(var_0, var_1, var_2, var_3) {
   for(var_6 = 1; var_6 < var_5.size; var_6++) {
     var_7 = distance(var_1[var_5[var_6]].v["origin"], var_0);
 
-    if([
-        [var_3]
-      ](var_7, var_2)) {
+    if([[var_3]](var_7, var_2)) {
       continue;
     }
     var_2 = var_7;

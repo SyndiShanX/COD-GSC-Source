@@ -202,7 +202,7 @@ fireuntiloutofammo(fireanim, stoponanimationend, maxshots) {
     wait 0.05;
 
   self startshoot();
-  self setanim( % add_fire, 1, 0.1, 1);
+  self setanim(%add_fire, 1, 0.1, 1);
   rate = randomfloatrange(0.3, 2.0);
 
   if(self.shootstyle == "full" || self.shootstyle == "burst") {
@@ -225,7 +225,7 @@ fireuntiloutofammo(fireanim, stoponanimationend, maxshots) {
   self setflaggedanimknobrestart(animname, fireanim, 1, 0.2, rate);
   self updateplayersightaccuracy();
   fireuntiloutofammointernal(animname, fireanim, stoponanimationend, maxshots);
-  self clearanim( % add_fire, 0.2);
+  self clearanim(%add_fire, 0.2);
 }
 
 fireuntiloutofammointernal(animname, fireanim, stoponanimationend, maxshots) {
@@ -434,14 +434,14 @@ reload(thresholdfraction, optionalanimation) {
   self maps\_dds::dds_notify_reload(undefined, self.team == "allies");
 
   if(isDefined(optionalanimation)) {
-    self clearanim( % body, 0.1);
-    self setflaggedanimknoball("reloadanim", optionalanimation, % body, 1, 0.1, 1);
+    self clearanim(%body, 0.1);
+    self setflaggedanimknoball("reloadanim", optionalanimation, %body, 1, 0.1, 1);
     animscripts\shared::donotetracks("reloadanim");
     self animscripts\weaponlist::refillclip();
   } else {
     if(self.a.pose == "prone") {
-      self setflaggedanimknoball("reloadanim", animarraypickrandom("reload"), % body, 1, 0.1, 1);
-      self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+      self setflaggedanimknoball("reloadanim", animarraypickrandom("reload"), %body, 1, 0.1, 1);
+      self updateprone(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
     } else {
       println("Bad anim_pose in combat::Reload");
 
@@ -451,7 +451,7 @@ reload(thresholdfraction, optionalanimation) {
 
     animscripts\shared::donotetracks("reloadanim");
     animscripts\weaponlist::refillclip();
-    self clearanim( % upperbody, 0.1);
+    self clearanim(%upperbody, 0.1);
   }
 
   return 1;
@@ -936,7 +936,7 @@ dogrenadethrow(throw_anim, nextgrenadetimetouse, secondgrenadeofdouble) {
   self thread grenadedebug("Starting throw", 3);
 
   self notify("stop_aiming_at_enemy");
-  self setflaggedanimknoballrestart("throwanim", throw_anim, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("throwanim", throw_anim, %body, 1, 0.1, 1);
   self thread animscripts\shared::donotetracksforever("throwanim", "killanimscript");
   model = getweaponmodel(self.grenadeweapon);
   attachside = "none";
@@ -1027,8 +1027,8 @@ dogrenadethrow(throw_anim, nextgrenadetimetouse, secondgrenadeofdouble) {
   self.grenadeawareness = self.oldgrenawareness;
   self.oldgrenawareness = undefined;
   self waittillmatch("throwanim", "end");
-  self setanim( % exposed_modern, 1, 0.2);
-  self setanim( % exposed_aiming, 1);
+  self setanim(%exposed_modern, 1, 0.2);
+  self setanim(%exposed_aiming, 1);
   self clearanim(throw_anim, 0.2);
 }
 

@@ -589,14 +589,9 @@ missileGetBestTarget() {
 }
 
 missileIsGoodTarget(target) {
-  return (IsAlive(target) &&
-    target.team != self.owner.team &&
-    !(self isMissileTargeted(target)) &&
-    (IsPlayer(target) && !(target _hasPerk("specialty_blindeye")))
+  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (IsPlayer(target) && !(target _hasPerk("specialty_blindeye")))
 
-    &&
-    self missileTargetAngle(target) > 0.25
-  );
+    && self missileTargetAngle(target) > 0.25);
 }
 
 missileTargetAngle(target) {
@@ -1160,11 +1155,7 @@ a10_handleDamage() {
 
   config = level.planeConfigs[self.streakName];
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    config.maxHealth,
-    "helicopter", ::handleDeathDamage, ::modifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(config.maxHealth, "helicopter", ::handleDeathDamage, ::modifyDamage, true);
 }
 
 modifyDamage(attacker, weapon, type, damage) {

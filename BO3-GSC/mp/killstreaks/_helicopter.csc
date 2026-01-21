@@ -135,7 +135,7 @@ function heli_comlink_bootup_anim(localclientnum, oldval, newval, bnewent, binit
   self endon("entityshutdown");
   self endon("death");
   self setupanimtree();
-  self setanim( % mp_vehicles::veh_anim_future_heli_gearup_bay_open, 1, 0, 1);
+  self setanim(%mp_vehicles::veh_anim_future_heli_gearup_bay_open, 1, 0, 1);
 }
 
 function supplydrop_care_package_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -143,9 +143,9 @@ function supplydrop_care_package_state(localclientnum, oldval, newval, bnewent, 
   self endon("death");
   self setupanimtree();
   if(newval == 1) {
-    self setanim( % mp_vehicles::o_drone_supply_care_idle, 1, 0, 1);
+    self setanim(%mp_vehicles::o_drone_supply_care_idle, 1, 0, 1);
   } else {
-    self setanim( % mp_vehicles::o_drone_supply_care_drop, 1, 0, 0.3);
+    self setanim(%mp_vehicles::o_drone_supply_care_drop, 1, 0, 0.3);
   }
 }
 
@@ -154,9 +154,9 @@ function supplydrop_ai_tank_state(localclientnum, oldval, newval, bnewent, binit
   self endon("death");
   self setupanimtree();
   if(newval == 1) {
-    self setanim( % mp_vehicles::o_drone_supply_agr_idle, 1, 0, 1);
+    self setanim(%mp_vehicles::o_drone_supply_agr_idle, 1, 0, 1);
   } else {
-    self setanim( % mp_vehicles::o_drone_supply_agr_drop, 1, 0, 0.3);
+    self setanim(%mp_vehicles::o_drone_supply_agr_drop, 1, 0, 0.3);
   }
 }
 

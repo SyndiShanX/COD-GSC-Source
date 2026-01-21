@@ -98,7 +98,7 @@ setup_bigdog_anim_array(animtype, array) {
   array[animtype]["pain"]["stand"]["none"]["stun_recover_l_frontright"] = % ai_claw_mk2_stun_recover_l_gib_frontright_leg;
   array[animtype]["pain"]["stand"]["none"]["stun_recover_l_rearleft"] = % ai_claw_mk2_stun_recover_l_gib_rearleft_leg;
   array[animtype]["pain"]["stand"]["none"]["stun_recover_l_rearright"] = % ai_claw_mk2_stun_recover_l_gib_rearright_leg;
-  array[animtype]["pain"]["stand"]["none"]["stun_fall"] = array( % ai_claw_mk2_pain_frontlegs_hunkerdown, % ai_claw_mk2_pain_rearlegs_hunkerdown);
+  array[animtype]["pain"]["stand"]["none"]["stun_fall"] = array(%ai_claw_mk2_pain_frontlegs_hunkerdown, %ai_claw_mk2_pain_rearlegs_hunkerdown);
   array[animtype]["pain"]["stand"]["none"]["stun_fall_fl_rr"] = % ai_claw_mk2_pain_frontleft_rearright_hunkerdown;
   array[animtype]["pain"]["stand"]["none"]["stun_fall_frontlegs"] = % ai_claw_mk2_pain_frontlegs_hunkerdown;
   array[animtype]["pain"]["stand"]["none"]["stun_fall_fr_rl"] = % ai_claw_mk2_pain_frontright_rearleft_hunkerdown;

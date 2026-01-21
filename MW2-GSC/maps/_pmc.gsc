@@ -15,13 +15,10 @@ Players spawn at these locations in PMC games.*/
 Players spawn at these locations in defend PMC games, place near info_volumes with "defend_obj" targetnames.*/
 
 /*QUAKED info_volume_pmcDefend (0.12 0.23 1.0) ?
-defaulttexture="volume"
-Obj is to keep enemies out of this volume, place near defend player_starts and around pmc objective prefabs.*/
+defaulttexture="volume"Obj is to keep enemies out of this volume, place near defend player_starts and around pmc objective prefabs.*/
 
 /*QUAKED script_model_pickup_claymore (1 0 0) (-32 -16 0) (32 16 24) ORIENT_LOD NO_SHADOWNO_STATIC_SHADOWS
-defaultmdl="weapon_claymore"
-default:"model" "weapon_claymore"
-*/
+defaultmdl="weapon_claymore"default:"model" "weapon_claymore"*/
 
 DEFEND_ENEMY_BUILDUP_COUNT_FRACTION = 0.9;
 MIN_SPAWN_DISTANCE = 1024;
@@ -1144,15 +1141,7 @@ defend_think(fill_time) {
 
 show_remaining_enemy_count() {
   /*
-  	"default"
-  "bigfixed"
-  "smallfixed"
-  "objective"
-  "big"
-  "small"
-  "hudbig"
-  "hudsmall"
-  */
+  	"default""bigfixed""smallfixed""objective""big""small""hudbig""hudsmall"*/
 
   /*	level.pmc.hud.remainingEnemyCountHudElem = newHudElem();
   	level.pmc.hud.remainingEnemyCountHudElem.x = -10;

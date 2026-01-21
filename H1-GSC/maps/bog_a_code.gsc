@@ -2027,7 +2027,7 @@ cobra_crash() {
     var_1.angles = var_0.angles;
     var_1 setModel(var_0.model);
     var_1 useanimtree(#animtree);
-    var_1 animscripted("blah", var_1.origin, var_1.angles, % cobra_crash);
+    var_1 animscripted("blah", var_1.origin, var_1.angles, %cobra_crash);
     var_0 delete();
     playFXOnTag(common_scripts\utility::getfx("heli_aerial_explosion_large"), var_1, "tag_body");
     var_1 playSound("helicopter_hit");

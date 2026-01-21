@@ -1042,8 +1042,7 @@ market_evac() {
   level thread market_evac_chopper();
   level thread market_evac_enemy_foreshadowing();
 
-  // "There's Nikolai's Pave Low! Let's go!"
-  level.sarge delaythread(2, ::dialogue, "favesc_cmt_therespavelow");
+  // "There's Nikolai's Pave Low! Let's go!"level.sarge delaythread(2, ::dialogue, "favesc_cmt_therespavelow");
 
   thread market_evac_friends();
 
@@ -1170,8 +1169,7 @@ market_evac_escape() {
 
   thread market_evac_remove_helperclip();
 
-  // "Come on! We've got to get to the rooftops, this way!"
-  level.sarge thread dialogue("favesc_cmt_gettorooftops");
+  // "Come on! We've got to get to the rooftops, this way!"level.sarge thread dialogue("favesc_cmt_gettorooftops");
   delaythread(15, ::market_evac_bugplayer);
 
   //let player get close before friendlies climb

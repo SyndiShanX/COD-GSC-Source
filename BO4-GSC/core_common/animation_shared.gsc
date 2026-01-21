@@ -188,10 +188,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
 
   self.var_80c69db6 = "<dev string:xa7>";
   self.var_6c4bb19 = {
-    #animation: animation,
-    #v_origin_or_ent: v_origin_or_ent,
-    #v_angles_or_tag: v_angles_or_tag,
-    #var_f4b34dc1: var_f4b34dc1
+    #animation: animation, #v_origin_or_ent: v_origin_or_ent, #v_angles_or_tag: v_angles_or_tag, #var_f4b34dc1: var_f4b34dc1
   };
   level flagsys::clear("<dev string:xb0>");
 
@@ -206,8 +203,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
 
     if(getanimframecount(animation) > 1 || isanimlooping(animation)) {
       self waittillmatch({
-        #notetrack: "end"
-      }, animation);
+        #notetrack: "end"}, animation);
     } else {
       waitframe(1);
     }

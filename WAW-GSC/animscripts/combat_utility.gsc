@@ -156,7 +156,7 @@ FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   maps\_gameskill::resetMissTime();
   while(!aimedAtShootEntOrPos())
     wait .05;
-  self setAnim( % add_fire, 1, .1, 1);
+  self setAnim(%add_fire, 1, .1, 1);
   rate = randomfloatrange(0.3, 2.0);
   if(self.shootStyle == "full" || self.shootStyle == "burst") {
     rate = animscripts\weaponList::autoShootAnimRate();
@@ -175,7 +175,7 @@ FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   self setFlaggedAnimKnobRestart(animName, fireAnim, 1, .2, rate);
   self updatePlayerSightAccuracy();
   FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots);
-  self clearAnim( % add_fire, .2);
+  self clearAnim(%add_fire, .2);
 }
 
 FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
@@ -363,7 +363,7 @@ tryWeaponThrowDown() {
   tossrand = randomint(3) + 1;
   tossanim = undefined;
   assertmsg("these pistol anims don't exist yet");
-  self setFlaggedAnimKnobAllRestart("pistol pullout", tossanim, % body, 1, .1, 1);
+  self setFlaggedAnimKnobAllRestart("pistol pullout", tossanim, %body, 1, .1, 1);
   self waittill("pistol pullout", notetrack);
   weaponClass = "weapon_" + self.weapon;
   if(self.classname == "actor_axis_ramboguytest2") {
@@ -383,7 +383,7 @@ tryWeaponThrowDown() {
   self.a.combatrunanim = % combat_run_fast_pistol;
   self animscripts\weaponList::RefillClip();
   self waittillmatch("pistol pullout", "end");
-  self clearanim( % upperbody, .1);
+  self clearanim(%upperbody, .1);
   return true;
 }
 
@@ -400,7 +400,7 @@ putGunBackInHandOnKillAnimScriptRechamber() {
   self endon("weapon_rechamber_done");
   self endon("death");
   self waittill("killanimscript");
-  self clearanim( % rechamber, 0);
+  self clearanim(%rechamber, 0);
   animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
 }
 
@@ -414,14 +414,14 @@ Reload(thresholdFraction, optionalAnimation) {
   self.a.Alertness = "casual";
   self animscripts\battleChatter_ai::evaluateReloadEvent();
   if(isDefined(optionalAnimation)) {
-    self clearAnim( % body, .1);
-    self setFlaggedAnimKnobAll("reloadanim", optionalAnimation, % body, 1, .1, 1);
+    self clearAnim(%body, .1);
+    self setFlaggedAnimKnobAll("reloadanim", optionalAnimation, %body, 1, .1, 1);
     animscripts\shared::DoNoteTracks("reloadanim");
     self animscripts\weaponList::RefillClip();
   } else {
     if(self.a.pose == "prone") {
-      self setFlaggedAnimKnobAll("reloadanim", % reload_prone_rifle, % body, 1, .1, 1);
-      self UpdateProne( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+      self setFlaggedAnimKnobAll("reloadanim", %reload_prone_rifle, %body, 1, .1, 1);
+      self UpdateProne(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
     } else {
       println("Bad anim_pose in combat::Reload");
       wait 2;
@@ -429,7 +429,7 @@ Reload(thresholdFraction, optionalAnimation) {
     }
     animscripts\shared::DoNoteTracks("reloadanim");
     animscripts\weaponList::RefillClip();
-    self clearanim( % upperbody, .1);
+    self clearanim(%upperbody, .1);
   }
   return true;
 }
@@ -845,7 +845,7 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self thread grenadeDebug("Starting throw", 3);
   self animscripts\battleChatter_ai::evaluateAttackEvent("grenade");
   self notify("stop_aiming_at_enemy");
-  self SetFlaggedAnimKnobAllRestart("throwanim", throw_anim, % body, 1, 0.1, 1);
+  self SetFlaggedAnimKnobAllRestart("throwanim", throw_anim, %body, 1, 0.1, 1);
   self thread animscripts\shared::DoNoteTracksForever("throwanim", "killanimscript");
   model = getGrenadeModel();
   attachside = "none";
@@ -912,8 +912,8 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self.grenadeawareness = self.oldGrenAwareness;
   self.oldGrenAwareness = undefined;
   self waittillmatch("throwanim", "end");
-  self setanim( % exposed_modern, 1, .2);
-  self setanim( % exposed_aiming, 1);
+  self setanim(%exposed_modern, 1, .2);
+  self setanim(%exposed_aiming, 1);
   self clearanim(throw_anim, .2);
 }
 
@@ -1346,20 +1346,20 @@ Rechamber(optionalAnimation) {
     return false;
   self thread putGunBackInHandOnKillAnimScript();
   if(isDefined(optionalAnimation)) {
-    self setAnim( % rechamber);
+    self setAnim(%rechamber);
     self setFlaggedAnimKnobLimitedRestart("rechamberanim", optionalAnimation, 1, .2, 1);
     animscripts\shared::DoNoteTracks("rechamberanim");
   } else {
     if(self.a.pose == "prone") {
-      self setFlaggedAnimKnobAllRestart("reloadanim", % reload_prone_rifle, % body, 1, .1, 1);
-      self UpdateProne( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+      self setFlaggedAnimKnobAllRestart("reloadanim", %reload_prone_rifle, %body, 1, .1, 1);
+      self UpdateProne(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
     } else {
       println("Bad anim_pose in combat::Rechamber");
       wait 2;
       return;
     }
   }
-  self clearanim( % rechamber, 0.3);
+  self clearanim(%rechamber, 0.3);
   wait(0.3);
   return true;
 }

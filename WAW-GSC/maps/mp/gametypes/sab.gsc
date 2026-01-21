@@ -176,12 +176,7 @@ onOvertime() {
   for(index = 0; index < level.players.size; index++) {
     level.players[index] notify("force_spawn");
     level.players[index] thread maps\mp\gametypes\_hud_message::oldNotifyMessage(&"MP_SUDDEN_DEATH", &"MP_NO_RESPAWN", undefined, (1, 0, 0), "mp_last_stand");
-    level.players[index] setClientDvars("cg_deadChatWithDead", 1,
-      "cg_deadChatWithTeam", 0,
-      "cg_deadHearTeamLiving", 0,
-      "cg_deadHearAllLiving", 0,
-      "cg_everyoneHearsEveryone", 0,
-      "g_compassShowEnemies", 1);
+    level.players[index] setClientDvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0, "cg_everyoneHearsEveryone", 0, "g_compassShowEnemies", 1);
   }
   waitTime = 0;
   while(waitTime < 90) {
@@ -200,11 +195,7 @@ onDeadEvent(team) {
   }
   if(team == "all") {
     if(level.bombPlanted) {
-      [
-        [level._setTeamScore]
-      ](level.bombPlantedBy, [
-        [level._getTeamScore]
-      ](level.bombPlantedBy) + 1);
+      [[level._setTeamScore]](level.bombPlantedBy, [[level._getTeamScore]](level.bombPlantedBy) + 1);
       thread maps\mp\gametypes\_globallogic::endGame(level.bombPlantedBy, game["strings"][level.bombPlantedBy + "_mission_accomplished"]);
     } else {
       thread maps\mp\gametypes\_globallogic::endGame("tie", game["strings"]["tie"]);
@@ -231,12 +222,7 @@ onSpawnPlayerUnified() {
     hintMessage = maps\mp\gametypes\_globallogic::getObjectiveHintText(self.pers["team"]);
     if(isDefined(hintMessage))
       self thread maps\mp\gametypes\_hud_message::hintMessage(hintMessage);
-    self setClientDvars("cg_deadChatWithDead", 1,
-      "cg_deadChatWithTeam", 0,
-      "cg_deadHearTeamLiving", 0,
-      "cg_deadHearAllLiving", 0,
-      "cg_everyoneHearsEveryone", 0,
-      "g_compassShowEnemies", 1);
+    self setClientDvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0, "cg_everyoneHearsEveryone", 0, "g_compassShowEnemies", 1);
   }
   maps\mp\gametypes\_spawning::onSpawnPlayer_Unified();
 }
@@ -264,12 +250,7 @@ onSpawnPlayer() {
     hintMessage = maps\mp\gametypes\_globallogic::getObjectiveHintText(self.pers["team"]);
     if(isDefined(hintMessage))
       self thread maps\mp\gametypes\_hud_message::hintMessage(hintMessage);
-    self setClientDvars("cg_deadChatWithDead", 1,
-      "cg_deadChatWithTeam", 0,
-      "cg_deadHearTeamLiving", 0,
-      "cg_deadHearAllLiving", 0,
-      "cg_everyoneHearsEveryone", 0,
-      "g_compassShowEnemies", 1);
+    self setClientDvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0, "cg_everyoneHearsEveryone", 0, "g_compassShowEnemies", 1);
   }
   assert(isDefined(spawnpoint));
   self spawn(spawnpoint.origin, spawnpoint.angles);
@@ -599,8 +580,6 @@ onEndGame(winningTeam) {
     [[level._setTeamScore]](winningTeam, [[level._getTeamScore]](winningTeam) + 1);
 }
 
-sabPlayerSpawnGenerateInfluencers(
-  player_entity,
-  spawn_influencers) {
+sabPlayerSpawnGenerateInfluencers(player_entity, spawn_influencers) {
   return spawn_influencers;
 }

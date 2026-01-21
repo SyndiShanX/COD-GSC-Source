@@ -7,7 +7,7 @@
 
 init_animset_flashed() {
   var_0 = [];
-  var_0["flashed"] = [ % exposed_flashbang_v2, % exposed_flashbang_v4];
+  var_0["flashed"] = [ % exposed_flashbang_v2, %exposed_flashbang_v4];
   var_0["flashed"] = common_scripts\utility::array_randomize(var_0["flashed"]);
   anim.archetypes["soldier"]["flashed"] = var_0;
   anim.flashanimindex["soldier"] = 0;
@@ -31,7 +31,7 @@ getnextflashanim() {
 
 flashbanganim(var_0) {
   self endon("killanimscript");
-  self setflaggedanimknoball("flashed_anim", var_0, % body, 0.2, randomfloatrange(0.9, 1.1));
+  self setflaggedanimknoball("flashed_anim", var_0, %body, 0.2, randomfloatrange(0.9, 1.1));
   animscripts\shared::donotetracks("flashed_anim");
 }
 

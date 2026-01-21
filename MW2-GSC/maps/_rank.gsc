@@ -26,8 +26,7 @@ init() {
   precacheString(&"RANK_ROMANI");
   // II
   precacheString(&"RANK_ROMANII");
-  // +
-  precachestring(&"SCRIPT_PLUS");
+  // + precachestring(&"SCRIPT_PLUS");
   precacheshader("line_horizontal");
   precacheshader("line_vertical");
   precacheshader("gradient_fadein");
@@ -278,8 +277,7 @@ updatePlayerScore(type, value) {
 
   self.rankUpdateTotal += value;
 
-  // +
-  self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
+  // + self.hud_rankscroreupdate.label = &"SCRIPT_PLUS";
 
   self.hud_rankscroreupdate setValue(self.rankUpdateTotal);
   self.hud_rankscroreupdate.alpha = 0.65;

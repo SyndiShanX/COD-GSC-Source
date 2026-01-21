@@ -1045,8 +1045,8 @@ gasstation_bully_kick() {
   var_3 = [var_1, var_2];
   var_0 thread maps\_anim::anim_single(var_3, "bully_kick");
   wait 0.05;
-  var_1 setanimtime( % prague_bully_a_kick, 0.22);
-  var_2 setanimtime( % prague_bully_civ_kick, 0.24);
+  var_1 setanimtime(%prague_bully_a_kick, 0.22);
+  var_2 setanimtime(%prague_bully_civ_kick, 0.24);
   var_0 waittill("bully_kick");
   maps\deer_hunt_util::set_flag_if_not_set("bully_kick_complete");
 }
@@ -1142,7 +1142,7 @@ intro_scene() {
   level.dog.animname = "dog";
   var_2 = 3;
   var_3 = level.intro_ball maps\deer_hunt_util::get_anim_start_time(var_2, "intro1");
-  var_4 = var_2 / getanimlength( % dh_intro1_guy);
+  var_4 = var_2 / getanimlength(%dh_intro1_guy);
   var_5 = var_2 / getanimlength(level.dog maps\_utility::getanim("intro1"));
   common_scripts\utility::flag_wait("introscreen_complete");
   maps\_utility::delaythread(2, common_scripts\utility::flag_set, "intro_scene_complete");
@@ -1153,7 +1153,7 @@ intro_scene() {
     level.hesh thread maps\_utility::play_sound_on_entity("scn_deer_intro_hesh_mvmt");
     level.intro_ball thread maps\_utility::play_sound_on_entity("scn_deer_intro_ball_hits");
     level.dog thread maps\_utility::play_sound_on_entity("scn_deer_intro_dog_mvmt");
-    level.hesh setanimtime( % dh_intro1_guy, var_4);
+    level.hesh setanimtime(%dh_intro1_guy, var_4);
     level.dog setanimtime(level.dog maps\_utility::getanim("intro1"), var_5);
     level.intro_ball setanimtime(level.intro_ball maps\_utility::getanim("intro1"), var_3);
   } else
@@ -1253,7 +1253,7 @@ hesh_logic() {
       maps\_utility::clear_generic_run_anim();
       var_8 = getEntArray("shop_door_left", "targetname");
       var_9 = var_8[0];
-      var_10 = getanimlength( % hunted_open_barndoor_flathand);
+      var_10 = getanimlength(%hunted_open_barndoor_flathand);
 
       if(isDefined(var_8[1]))
         var_8[1] delete();
@@ -2868,7 +2868,7 @@ stop_crash_fx_in_array(var_0) {
 
 player_gets_in_matv() {
   var_0 = "tag_gunner";
-  var_1 = getstartorigin(level.matv gettagorigin("tag_gunner"), level.matv gettagangles("tag_gunner"), % dh_matv_getin_player);
+  var_1 = getstartorigin(level.matv gettagorigin("tag_gunner"), level.matv gettagangles("tag_gunner"), %dh_matv_getin_player);
   level.player_rig = maps\_utility::spawn_anim_model("player_rig", var_1);
   level.player_rig.angles = level.matv.angles;
   level.player_rig hide();
@@ -2896,7 +2896,7 @@ player_gets_in_matv() {
   level.player thread maps\_utility::play_sound_on_entity("scn_deer_jeep_start_drive");
   maps\_utility::delaythread(2.3, common_scripts\utility::play_sound_in_space, "scn_deer_truck_call_dog", (-18343, 15331, -486));
   maps\_utility::delaythread(2.3, common_scripts\utility::play_sound_in_space, "scn_deer_truck_dog_getin", (-18320, 15365, -486));
-  var_5 = getanimlength( % dh_matv_getin_player);
+  var_5 = getanimlength(%dh_matv_getin_player);
   level.matv thread maps\_anim::anim_single_solo(level.player_rig, "matv_player_getin", var_0);
   level.player common_scripts\utility::delaycall(0.5, ::playrumbleonentity, "damage_heavy");
   level.player common_scripts\utility::delaycall(0.95, ::playrumbleonentity, "damage_light");
@@ -3324,15 +3324,15 @@ lariver_bridge_rappel_enemies() {
   var_10 setModel("fastrope_80ft_ri");
   var_10 useanimtree(#animtree);
   var_10 linkto(var_7, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_11 = 0.5 / getanimlength( % bh_1_drop);
-  var_12 = 4 / getanimlength( % bh_rope_drop_ri);
-  var_9 animscripted("start_rappel", var_7.origin + var_5, var_6, % bh_1_drop);
-  var_10 animscripted("start_rappel", var_7.origin + var_4, var_7.angles, % bh_rope_drop_ri);
+  var_11 = 0.5 / getanimlength(%bh_1_drop);
+  var_12 = 4 / getanimlength(%bh_rope_drop_ri);
+  var_9 animscripted("start_rappel", var_7.origin + var_5, var_6, %bh_1_drop);
+  var_10 animscripted("start_rappel", var_7.origin + var_4, var_7.angles, %bh_rope_drop_ri);
   wait 0.05;
-  var_9 setanimtime( % bh_1_drop, var_12);
-  var_10 setanimtime( % bh_rope_drop_ri, var_11);
+  var_9 setanimtime(%bh_1_drop, var_12);
+  var_10 setanimtime(%bh_rope_drop_ri, var_11);
   wait 0.05;
-  var_10 setflaggedanim("single anim", % bh_rope_drop_ri, 1, 0, 2.8);
+  var_10 setflaggedanim("single anim", %bh_rope_drop_ri, 1, 0, 2.8);
   wait 4;
 
   if(isDefined(var_9)) {

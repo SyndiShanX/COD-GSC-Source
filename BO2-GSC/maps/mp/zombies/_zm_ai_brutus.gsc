@@ -490,9 +490,7 @@ get_brutus_spawn_pos_val(brutus_pos) {
     for(i = 0; i < interaction_types.size; i++) {
       int_type = interaction_types[i];
       interaction = interact_array[int_type];
-      interact_points = [
-        [interaction.get_func]
-      ](zone_name);
+      interact_points = [[interaction.get_func]](zone_name);
 
       for(j = 0; j < interact_points.size; j++) {
         if(interact_points[j][
@@ -1245,9 +1243,7 @@ get_closest_trap_for_brutus() {
   best_trap = undefined;
 
   for(i = 0; i < level.trap_triggers.size; i++) {
-    if(!level.trap_triggers[i][
-        [level.interaction_types["trap"].validity_func]
-      ]()) {
+    if(!level.trap_triggers[i][[level.interaction_types["trap"].validity_func]]()) {
       continue;
     }
     dist = distancesquared(self.origin, level.trap_triggers[i].origin);

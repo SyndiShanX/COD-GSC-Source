@@ -117,9 +117,7 @@ zombie_damage_failsafe() {
       if(!isDefined(self.enemy) || !IsPlayer(self.enemy) || self.enemy hasperk("specialty_armorvest")) {
         continue;
       }
-      if(self istouching(self.enemy) &&
-        !self.enemy maps\_laststand::player_is_in_laststand() &&
-        isalive(self.enemy)) {
+      if(self istouching(self.enemy) && !self.enemy maps\_laststand::player_is_in_laststand() && isalive(self.enemy)) {
         if(distancesquared(old_org, self.origin) < (60 * 60)) {
           setsaveddvar("player_deathInvulnerableTime", 0);
           self.enemy DoDamage(self.enemy.health + 1000, self.enemy.origin, undefined, undefined, "riflebullet");
@@ -146,27 +144,18 @@ set_zombie_run_cycle(new_move_speed) {
   switch (self.zombie_move_speed) {
     case "walk":
       var = randomintrange(1, 8);
-      self set_run_anim("walk" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["walk" +
-        var
-      ];
+      self set_run_anim("walk" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["walk" + var];
       break;
     case "run":
       var = randomintrange(1, 6);
-      self set_run_anim("run" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["run" +
-        var
-      ];
+      self set_run_anim("run" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["run" + var];
       break;
     case "sprint":
       var = randomintrange(1, 4);
-      self set_run_anim("sprint" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["sprint" +
-        var
-      ];
+      self set_run_anim("sprint" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["sprint" + var];
       break;
   }
 }
@@ -492,19 +481,19 @@ should_attack_player_thru_boards() {
     if(self.attacking_spot_index == 0) {
       if(randomInt(100) > 50) {
         self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-        self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
+        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
       } else {
         self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-        self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
+        self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
       }
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 2) {
       self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-      self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
+      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_r_out, "normal", undefined, 1, 0.3);
       self window_notetracks("window_melee");
     } else if(self.attacking_spot_index == 1) {
       self thread maps\_zombiemode_audio::do_zombies_playvocals("attack", self.animname);
-      self animscripted("window_melee", self.origin, self.angles, % ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
+      self animscripted("window_melee", self.origin, self.angles, %ai_zombie_window_attack_arm_l_out, "normal", undefined, 1, 0.3);
       self window_notetracks("window_melee");
     }
   } else {
@@ -1879,8 +1868,7 @@ zombie_death_event(zombie) {
     damagemod = zombie.damagemod;
     attacker = zombie.attacker;
     weapon = zombie.damageWeapon;
-    bbPrint("zombie_kills: round %d zombietype zombie damagetype %s damagelocation %s playername %s playerweapon %s playerx %f playery %f playerz %f zombiex %f zombiey %f zombiez %f",
-      level.round_number, damagemod, damageloc, attacker.playername, weapon, attacker.origin, zombie.origin);
+    bbPrint("zombie_kills: round %d zombietype zombie damagetype %s damagelocation %s playername %s playerweapon %s playerx %f playery %f playerz %f zombiex %f zombiey %f zombiez %f", level.round_number, damagemod, damageloc, attacker.playername, weapon, attacker.origin, zombie.origin);
   }
   level notify("zom_kill");
   level.total_zombies_killed++;
@@ -1914,10 +1902,8 @@ find_flesh() {
     same_enemy_count = 0;
     for(i = 0; i < near_zombies.size; i++) {
       if(isDefined(near_zombies[i]) && isalive(near_zombies[i])) {
-        if(isDefined(near_zombies[i].favoriteenemy) && isDefined(self.favoriteenemy) &&
-          near_zombies[i].favoriteenemy == self.favoriteenemy) {
-          if(distancesquared(near_zombies[i].origin, self.favoriteenemy.origin) < 225 * 225 &&
-            distancesquared(near_zombies[i].origin, self.origin) > 525 * 525) {
+        if(isDefined(near_zombies[i].favoriteenemy) && isDefined(self.favoriteenemy) && near_zombies[i].favoriteenemy == self.favoriteenemy) {
+          if(distancesquared(near_zombies[i].origin, self.favoriteenemy.origin) < 225 * 225 && distancesquared(near_zombies[i].origin, self.origin) > 525 * 525) {
             same_enemy_count++;
           }
         }

@@ -327,14 +327,14 @@ vehicle_anims() {
 
 tip_vehicle() {
   level.players_lvt UseAnimTree(#animtree);
-  level.players_lvt clearanim( % v_lvt4_peleliu1_the_ride_in, 0);
-  level.players_lvt setflaggedanim("tipping", % v_pel1_intro_LVT_explosion, 1, 0);
+  level.players_lvt clearanim(%v_lvt4_peleliu1_the_ride_in, 0);
+  level.players_lvt setflaggedanim("tipping", %v_pel1_intro_LVT_explosion, 1, 0);
   wait 2;
-  level.players_lvt clearanim( % v_pel1_intro_LVT_explosion, 0);
+  level.players_lvt clearanim(%v_pel1_intro_LVT_explosion, 0);
 }
 
 lvt_play_ride_in() {
-  self setflaggedanim("ride_in", % v_lvt4_peleliu1_the_ride_in, 1, 0);
+  self setflaggedanim("ride_in", %v_lvt4_peleliu1_the_ride_in, 1, 0);
 }
 
 #using_animtree("fakeshooters");

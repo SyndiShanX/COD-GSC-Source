@@ -211,8 +211,7 @@ blendDelete(blend) {
 }
 
 /*QUAKED trigger_multiple_fx_watersheeting (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger_fx"
-Activates the water sheeting effect covering the screen.
+defaulttexture="trigger_fx"Activates the water sheeting effect covering the screen.
 Set script_duration to specify the duration. defaults to 3 seconds.*/
 
 watersheeting(trigger) {

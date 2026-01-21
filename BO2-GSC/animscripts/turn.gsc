@@ -49,7 +49,7 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
   if(isDefined(turnanim)) {
     self animmode("gravity", 0);
     self orientmode("face angle", self.angles[1]);
-    self clearanim( % body, 0.2);
+    self clearanim(%body, 0.2);
     self setflaggedanimrestart("turn_anim", turnanim, 1, 0.2);
     self thread forceclearclientruntree(0.2);
     animstarttime = gettime();
@@ -137,7 +137,7 @@ forceclearclientruntree(blendtime) {
   self endon("killanimscript");
   self endon("death");
   wait 0.05;
-  self clearanim( % stand_and_crouch, blendtime - 0.05);
+  self clearanim(%stand_and_crouch, blendtime - 0.05);
 }
 
 turnblendout(animlength, animname, hasexitalign, overrideblendoutanim) {
@@ -152,7 +152,7 @@ turnblendout(animlength, animname, hasexitalign, overrideblendoutanim) {
     nextanim = overrideblendoutanim;
 
   self.a.movement = "run";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("run_anim", nextanim, 1, 0.2);
 
   if(!hasexitalign)

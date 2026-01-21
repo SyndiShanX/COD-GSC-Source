@@ -26,17 +26,17 @@ main() {
       return;
     }
     if(!isDefined(self.exposedSet) || self.exposedSet == 0)
-      self setFlaggedAnimKnobAllRestart("cowerstart", % exposed_squat_down_grenade_F, % body, 1, 0.2);
+      self setFlaggedAnimKnobAllRestart("cowerstart", %exposed_squat_down_grenade_F, %body, 1, 0.2);
     else
-      self setFlaggedAnimKnobAllRestart("cowerstart", % exposed2_squat_down_grenade_F, % body, 1, 0.2);
+      self setFlaggedAnimKnobAllRestart("cowerstart", %exposed2_squat_down_grenade_F, %body, 1, 0.2);
     self animscripts\shared::DoNoteTracks("cowerstart");
   }
   self.a.pose = "crouch";
   self.a.movement = "stop";
   if(!isDefined(self.exposedSet) || self.exposedSet == 0)
-    self setFlaggedAnimKnobAllRestart("cower", % exposed_squat_idle_grenade_F, % body, 1, 0.2);
+    self setFlaggedAnimKnobAllRestart("cower", %exposed_squat_idle_grenade_F, %body, 1, 0.2);
   else
-    self setFlaggedAnimKnobAllRestart("cower", % exposed2_squat_idle_grenade_F, % body, 1, 0.2);
+    self setFlaggedAnimKnobAllRestart("cower", %exposed2_squat_idle_grenade_F, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("cower");
   self waittill("never");
 }
@@ -60,7 +60,7 @@ TryDive(grenadeAngle) {
   diveToPos = self localToWorldCoords(moveBy);
   if(!self MayMoveToPoint(diveToPos))
     return false;
-  self setFlaggedAnimKnobAllRestart("cowerstart", diveAnim, % body, 1, 0.2);
+  self setFlaggedAnimKnobAllRestart("cowerstart", diveAnim, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("cowerstart");
   return true;
 }

@@ -1508,9 +1508,7 @@ auto_adust_zone_complete(var_0) {
       if(!player_attacker(var_1)) {
         return;
       }
-      [
-        [level.global_kill_func]
-      ](var_2, self.damagelocation, var_3);
+      [[level.global_kill_func]](var_2, self.damagelocation, var_3);
       aa_add_event("aa_player_kills", 1);
     }
 
@@ -1539,9 +1537,7 @@ auto_adust_zone_complete(var_0) {
         return 0;
       }
 
-      [
-        [level.global_damage_func_ads]
-      ](var_1, self.damagelocation, var_2);
+      [[level.global_damage_func_ads]](var_1, self.damagelocation, var_2);
       aa_add_event("aa_ads_damage_dealt", var_0);
       return 1;
     }

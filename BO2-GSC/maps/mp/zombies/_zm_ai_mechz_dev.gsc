@@ -296,7 +296,7 @@ mechz_force_flamethrower() {
       self setclientfield("mechz_fx", self.fx_field);
     } else {
       length = self getanimlengthfromasd("zm_flamethrower_aim_" + curr_aim_anim, 0);
-      self clearanim( % root, 0);
+      self clearanim(%root, 0);
       self scripted_behavior("zm_flamethrower_aim_" + curr_aim_anim, "flamethrower_anim");
       curr_timer = curr_timer + length;
     }
@@ -310,23 +310,23 @@ fake_launch_claw() {
   v_claw_angles = vectortoangles(self.origin - level.players[0].origin);
   self.fx_field = self.fx_field | 256;
   self setclientfield("mechz_fx", self.fx_field);
-  self.m_claw setanim( % ai_zombie_mech_grapple_arm_open_idle, 1, 0, 1);
+  self.m_claw setanim(%ai_zombie_mech_grapple_arm_open_idle, 1, 0, 1);
   self.m_claw unlink();
   self.m_claw.fx_ent = spawn("script_model", self.m_claw gettagorigin("tag_claw"));
   self.m_claw.fx_ent.angles = self.m_claw gettagangles("tag_claw");
   self.m_claw.fx_ent setModel("tag_origin");
   self.m_claw.fx_ent linkto(self.m_claw, "tag_claw");
   network_safe_play_fx_on_tag("mech_claw", 1, level._effect["mechz_claw"], self.m_claw.fx_ent, "tag_origin");
-  self.m_claw clearanim( % root, 0.2);
-  self.m_claw setanim( % ai_zombie_mech_grapple_arm_open_idle, 1, 0.2, 1);
+  self.m_claw clearanim(%root, 0.2);
+  self.m_claw setanim(%ai_zombie_mech_grapple_arm_open_idle, 1, 0.2, 1);
   offset = anglesToForward(self.angles);
   offset = vectornormalize(offset);
   target_pos = self.origin + offset * 500 + vectorscale((0, 0, 1), 36.0);
   n_time = 0.0833333;
   self.m_claw moveto(target_pos, n_time);
   self.m_claw waittill("movedone");
-  self.m_claw clearanim( % root, 0.2);
-  self.m_claw setanim( % ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
+  self.m_claw clearanim(%root, 0.2);
+  self.m_claw setanim(%ai_zombie_mech_grapple_arm_closed_idle, 1, 0.2, 1);
   wait 0.5;
   self.m_claw moveto(v_claw_origin, 0.5);
   self.m_claw waittill("movedone");
@@ -352,7 +352,7 @@ mechz_force_claw_attack() {
     self thread fake_launch_claw();
 
     while(isDefined(self.launching_claw) && self.launching_claw) {
-      self clearanim( % root, 0);
+      self clearanim(%root, 0);
       wait 0.05;
       self scripted_behavior("zm_grapple_aim_5", "grapple_anim");
     }

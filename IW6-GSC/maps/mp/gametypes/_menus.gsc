@@ -509,8 +509,7 @@ menuClass(response) {
     return;
   }
 
-  if((isDefined(self.pers["class"]) && self.pers["class"] == class) &&
-    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary)) {
+  if((isDefined(self.pers["class"]) && self.pers["class"] == class) && (isDefined(self.pers["primary"]) && self.pers["primary"] == primary)) {
     return;
   }
   if(self.sessionstate == "playing") {

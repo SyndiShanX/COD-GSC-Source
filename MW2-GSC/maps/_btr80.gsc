@@ -32,7 +32,7 @@ main(model, type) {
   build_light(model, "spotlight", "TAG_FRONT_LIGHT_RIGHT", "misc/spotlight_btr80", "spotlight", 0.2);
   build_light(model, "spotlight_turret", "TAG_TURRET_LIGHT", "misc/spotlight_btr80", "spotlight_turret", 0.0);
 
-  build_drive( % BTR80_movement, % BTR80_movement_backwards, 10);
+  build_drive(%BTR80_movement, %BTR80_movement_backwards, 10);
 
   if(issubstr(model, "_snow"))
     build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun_snow");
@@ -123,9 +123,7 @@ spotlight - lower spotlight
 spotlight_turret - spotlight on turret
 
 Example Light Group Usage:
-on vehicle nodes or vehicle: "script_vehicle_lights_on" "running spotlight"
-on vehicle node: "script_vehicle_lights_off" "spotlight"
-in script: vehicle lights_on( "spotlight" );
+on vehicle nodes or vehicle: "script_vehicle_lights_on" "running spotlight"on vehicle node: "script_vehicle_lights_off" "spotlight"in script: vehicle lights_on( "spotlight" );
 in script: vehicle lights_off( "spotlight" );
 
 put this in your GSC:
@@ -136,11 +134,7 @@ include,vehicle_btr80
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_btr80"
-default:"vehicletype" "btr80"
-default:"script_team" "axis"
-default:"script_vehicle_lights_on" "spotlight running"
-*/
+defaultmdl="vehicle_btr80"default:"vehicletype" "btr80"default:"script_team" "axis"default:"script_vehicle_lights_on" "spotlight running"*/
 
 /*QUAKED script_vehicle_btr80_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 Valid Light Groups:
@@ -150,9 +144,7 @@ spotlight - lower spotlight
 spotlight_turret - spotlight on turret
 
 Example Light Group Usage:
-on vehicle nodes or vehicle: "script_vehicle_lights_on" "running spotlight"
-on vehicle node: "script_vehicle_lights_off" "spotlight"
-in script: vehicle lights_on( "spotlight" );
+on vehicle nodes or vehicle: "script_vehicle_lights_on" "running spotlight"on vehicle node: "script_vehicle_lights_off" "spotlight"in script: vehicle lights_on( "spotlight" );
 in script: vehicle lights_off( "spotlight" );
 
 put this in your GSC:
@@ -163,11 +155,7 @@ include,vehicle_btr80_low
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_btr80_low"
-default:"vehicletype" "btr80"
-default:"script_team" "axis"
-default:"script_vehicle_lights_on" "spotlight running"
-*/
+defaultmdl="vehicle_btr80_low"default:"vehicletype" "btr80"default:"script_team" "axis"default:"script_vehicle_lights_on" "spotlight running"*/
 
 /*QUAKED script_vehicle_btr80_snow (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -179,10 +167,7 @@ include,vehicle_btr80_snow
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_btr80_snow"
-default:"vehicletype" "btr80"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_btr80_snow"default:"vehicletype" "btr80"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_btr80_snow_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -194,10 +179,7 @@ include,vehicle_btr80_snow
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_btr80_snow"
-default:"vehicletype" "btr80_physics"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_btr80_snow"default:"vehicletype" "btr80_physics"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_btr80_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -209,7 +191,5 @@ include,vehicle_btr80
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_btr80"
-default:"vehicletype" "btr80_physics"
-default:"script_team" "axis"
+defaultmdl="vehicle_btr80"default:"vehicletype" "btr80_physics"default:"script_team" "axis"
 */

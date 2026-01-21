@@ -277,8 +277,7 @@ AAA_sequence_player_crash_site() {
   level.m4 setModel("weapon_m4");
   level.m4 HidePart("TAG_THERMAL_SCOPE");
   level.m4 HidePart("TAG_FOREGRIP");
-  //weapon HidePart( "TAG_WEAPON"
-  level.m4 HidePart("TAG_ACOG_2");
+  //weapon HidePart( "TAG_WEAPON"level.m4 HidePart("TAG_ACOG_2");
   //weapon HidePart( "TAG_EOTECH" );
   level.m4 HidePart("TAG_HEARTBEAT");
   //weapon HidePart( "TAG_M203" );
@@ -1235,8 +1234,7 @@ notetrack_player_lowerhands(guy) {
 
 #using_animtree("player");
 crash_player_anims() {
-  //the animtree to use with the invisible model with animname "player_rig"
-  level.scr_animtree["player_rig"] = #animtree;
+  //the animtree to use with the invisible model with animname "player_rig"level.scr_animtree["player_rig"] = #animtree;
   //the invisible model with the animname "player_rig" that the anims will be played on
   level.scr_model["player_rig"] = "viewhands_player_us_army_bloody";
 

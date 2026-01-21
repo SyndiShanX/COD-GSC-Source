@@ -20,8 +20,7 @@ add_ai_spawn_function(func_spawn, ...) {
   }
 
   var_e45a16f3 = {
-    #func: func_spawn,
-    #params: vararg
+    #func: func_spawn, #params: vararg
   };
 
   if(!isDefined(level.var_71b23817)) {
@@ -60,8 +59,7 @@ add_archetype_spawn_function(str_archetype, func_spawn, ...) {
   }
 
   var_6d69c0bf = {
-    #func: func_spawn,
-    #params: vararg
+    #func: func_spawn, #params: vararg
   };
 
   if(!isDefined(level.var_c18b23c1[str_archetype])) {

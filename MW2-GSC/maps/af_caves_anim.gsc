@@ -304,382 +304,261 @@ kill_me(guy) {
 
 dialog() {
   // GENERAL
-  // "Make sure you're using a suppressed weapon, otherwise we're dead."
-  level.scr_radio["afcaves_pri_suppressedweapon"] = "afcaves_pri_suppressedweapon";
+  // "Make sure you're using a suppressed weapon, otherwise we're dead."level.scr_radio["afcaves_pri_suppressedweapon"] = "afcaves_pri_suppressedweapon";
 
   // INTRO
-  // "I'll wait for you at the exfil point. Three hours."
-  level.scr_radio["afcaves_nkl_waitforyou"] = "afcaves_nkl_waitforyou";
+  // "I'll wait for you at the exfil point. Three hours."level.scr_radio["afcaves_nkl_waitforyou"] = "afcaves_nkl_waitforyou";
 
-  // "Don't bother. This was a one-way flight, mate."
-  level.scr_radio["afcaves_pri_dontbother"] = "afcaves_pri_dontbother";
+  // "Don't bother. This was a one-way flight, mate."level.scr_radio["afcaves_pri_dontbother"] = "afcaves_pri_dontbother";
 
-  // "Then good luck, my friend."
-  level.scr_radio["afcaves_nkl_goodluck"] = "afcaves_nkl_goodluck";
+  // "Then good luck, my friend."level.scr_radio["afcaves_nkl_goodluck"] = "afcaves_nkl_goodluck";
 
-  // "Move out."
-  level.scr_radio["afcaves_pri_moveout"] = "afcaves_pri_moveout";
+  // "Move out."level.scr_radio["afcaves_pri_moveout"] = "afcaves_pri_moveout";
 
   // INTRO/HILLSIDE WIRETAP
-  // "This decryption code better be worth the price we paid..."
-  level.scr_radio["afcaves_pri_decryptioncode"] = "afcaves_pri_decryptioncode";
+  // "This decryption code better be worth the price we paid..."level.scr_radio["afcaves_pri_decryptioncode"] = "afcaves_pri_decryptioncode";
 
-  // "...(go) ahead Alpha?"
-  level.scr_radio["afcaves_schq_goahead"] = "afcaves_schq_goahead";
+  // "...(go) ahead Alpha?"level.scr_radio["afcaves_schq_goahead"] = "afcaves_schq_goahead";
 
-  // "Looks like Makarov's intel was solid. This is it."
-  level.scr_radio["afcaves_pri_intelwassolid"] = "afcaves_pri_intelwassolid";
+  // "Looks like Makarov's intel was solid. This is it."level.scr_radio["afcaves_pri_intelwassolid"] = "afcaves_pri_intelwassolid";
 
-  // "Riverbed all clear, over."
-  level.scr_radio["afcaves_sc1_riverbedclear"] = "afcaves_sc1_riverbedclear";
+  // "Riverbed all clear, over."level.scr_radio["afcaves_sc1_riverbedclear"] = "afcaves_sc1_riverbedclear";
 
-  // "Bravo?"
-  level.scr_radio["afcaves_schq_bravo"] = "afcaves_schq_bravo";
+  // "Bravo?"level.scr_radio["afcaves_schq_bravo"] = "afcaves_schq_bravo";
 
-  // "Catwalk all clear... visibility 100%, over."
-  level.scr_radio["afcaves_sc2_catwalkclear"] = "afcaves_sc2_catwalkclear";
+  // "Catwalk all clear... visibility 100%, over."level.scr_radio["afcaves_sc2_catwalkclear"] = "afcaves_sc2_catwalkclear";
 
-  // "Zulu?"
-  level.scr_radio["afcaves_schq_zulu"] = "afcaves_schq_zulu";
+  // "Zulu?"level.scr_radio["afcaves_schq_zulu"] = "afcaves_schq_zulu";
 
-  // "Sandstorm. Not much to see right now, over."
-  level.scr_radio["afcaves_sc3_sandstorm"] = "afcaves_sc3_sandstorm";
+  // "Sandstorm. Not much to see right now, over."level.scr_radio["afcaves_sc3_sandstorm"] = "afcaves_sc3_sandstorm";
 
-  // "...uh, we're starting our patrol east along the canyon, north side access road, over."
-  level.scr_radio["afcaves_sc1_startingpatrol"] = "afcaves_sc1_startingpatrol";
+  // "...uh, we're starting our patrol east along the canyon, north side access road, over."level.scr_radio["afcaves_sc1_startingpatrol"] = "afcaves_sc1_startingpatrol";
 
-  // "Copy that, Disciple Four.Finish your sweep and get back inside. Zulu team report's a heavy sandstorm on the way. Oxide out."
-  level.scr_radio["afcaves_schq_finishsweep"] = "afcaves_schq_finishsweep";
+  // "Copy that, Disciple Four.Finish your sweep and get back inside. Zulu team report's a heavy sandstorm on the way. Oxide out."level.scr_radio["afcaves_schq_finishsweep"] = "afcaves_schq_finishsweep";
 
   // ROAD PATROL
-  // "Hold up."
-  level.scr_radio["pri_holdup"] = "afcaves_pri_holdup2";
+  // "Hold up."level.scr_radio["pri_holdup"] = "afcaves_pri_holdup2";
 
-  // "Enemy patrol."
-  level.scr_radio["pri_enemypatrol"] = "afcaves_pri_enemypatrol2";
+  // "Enemy patrol."level.scr_radio["pri_enemypatrol"] = "afcaves_pri_enemypatrol2";
 
-  // "Hold your fire."
-  level.scr_radio["afcaves_pri_holdyourfire"] = "afcaves_pri_holdyourfire";
+  // "Hold your fire."level.scr_radio["afcaves_pri_holdyourfire"] = "afcaves_pri_holdyourfire";
 
-  // "Good, they're splitting up. Let them separate."
-  level.scr_radio["afcaves_pri_splittingup"] = "afcaves_pri_splittingup";
+  // "Good, they're splitting up. Let them separate."level.scr_radio["afcaves_pri_splittingup"] = "afcaves_pri_splittingup";
 
-  // "Wait for them to split up."
-  //level.scr_radio[ "afcaves_pri_splitup" ] = "afcaves_pri_splitup";
+  // "Wait for them to split up."//level.scr_radio[ "afcaves_pri_splitup" ] = "afcaves_pri_splitup";
 
-  // "Focus on the group on the right, directly beneath us. Let's take them out first."
-  level.scr_radio["afcaves_pri_grouponright"] = "afcaves_pri_grouponright";
+  // "Focus on the group on the right, directly beneath us. Let's take them out first."level.scr_radio["afcaves_pri_grouponright"] = "afcaves_pri_grouponright";
 
-  // "I'll take the two on the left."
-  level.scr_radio["afcaves_pri_twoonleft"] = "afcaves_pri_twoonleft";
+  // "I'll take the two on the left."level.scr_radio["afcaves_pri_twoonleft"] = "afcaves_pri_twoonleft";
 
-  // "On my mark."
-  level.scr_radio["afcaves_pri_onmymark"] = "afcaves_pri_onmymark";
+  // "On my mark."level.scr_radio["afcaves_pri_onmymark"] = "afcaves_pri_onmymark";
 
-  // "Three..."
-  level.scr_radio["afcaves_pri_three"] = "afcaves_pri_three";
+  // "Three..."level.scr_radio["afcaves_pri_three"] = "afcaves_pri_three";
 
-  // "Two..."
-  level.scr_radio["afcaves_pri_two"] = "afcaves_pri_two";
+  // "Two..."level.scr_radio["afcaves_pri_two"] = "afcaves_pri_two";
 
-  // "One..."
-  level.scr_radio["afcaves_pri_one"] = "afcaves_pri_one";
+  // "One..."level.scr_radio["afcaves_pri_one"] = "afcaves_pri_one";
 
-  // "Mark."
-  level.scr_radio["afcaves_pri_mark"] = "afcaves_pri_mark";
+  // "Mark."level.scr_radio["afcaves_pri_mark"] = "afcaves_pri_mark";
 
-  // "Just like old times."
-  level.scr_radio["afcaves_pri_justlikeoldtimes"] = "afcaves_pri_justlikeoldtimes";
+  // "Just like old times."level.scr_radio["afcaves_pri_justlikeoldtimes"] = "afcaves_pri_justlikeoldtimes";
 
-  // "Dog neutralized, I count five tangos down."
-  level.scr_radio["afcaves_pri_dogneutralized"] = "afcaves_pri_dogneutralized";
+  // "Dog neutralized, I count five tangos down."level.scr_radio["afcaves_pri_dogneutralized"] = "afcaves_pri_dogneutralized";
 
-  // "Close enough."
-  level.scr_radio["afcaves_pri_closeenough"] = "afcaves_pri_closeenough";
+  // "Close enough."level.scr_radio["afcaves_pri_closeenough"] = "afcaves_pri_closeenough";
 
-  // "We have to work together, Soap - stick to the plan next time."
-  level.scr_radio["afcaves_pri_sticktoplan"] = "afcaves_pri_sticktoplan";
+  // "We have to work together, Soap - stick to the plan next time."level.scr_radio["afcaves_pri_sticktoplan"] = "afcaves_pri_sticktoplan";
 
-  // "We've been spotted - take 'em out before they can radio back in!"
-  level.scr_radio["afcaves_pri_beenspotted"] = "afcaves_pri_beenspotted";
+  // "We've been spotted - take 'em out before they can radio back in!"level.scr_radio["afcaves_pri_beenspotted"] = "afcaves_pri_beenspotted";
 
-  // "Soap, these aren't your average muppets. No more mistakes, let's go."
-  level.scr_radio["afcaves_pri_nomistakes"] = "afcaves_pri_nomistakes";
+  // "Soap, these aren't your average muppets. No more mistakes, let's go."level.scr_radio["afcaves_pri_nomistakes"] = "afcaves_pri_nomistakes";
 
-  // "All right, we've got to take out the other group before they come back. Move."
-  level.scr_radio["afcaves_pri_beforecomeback"] = "afcaves_pri_beforecomeback";
+  // "All right, we've got to take out the other group before they come back. Move."level.scr_radio["afcaves_pri_beforecomeback"] = "afcaves_pri_beforecomeback";
 
-  // "Soap! Down here, let's go!"
-  level.scr_radio["afcaves_pri_downhere"] = "afcaves_pri_downhere";
+  // "Soap! Down here, let's go!"level.scr_radio["afcaves_pri_downhere"] = "afcaves_pri_downhere";
 
-  // "Move up! The other group's coming back!"
-  level.scr_radio["afcaves_pri_groupsback"] = "afcaves_pri_groupsback";
+  // "Move up! The other group's coming back!"level.scr_radio["afcaves_pri_groupsback"] = "afcaves_pri_groupsback";
 
-  // "Quickly, let's move up and take the others."
-  level.scr_radio["afcaves_pri_taketheothers"] = "afcaves_pri_taketheothers";
+  // "Quickly, let's move up and take the others."level.scr_radio["afcaves_pri_taketheothers"] = "afcaves_pri_taketheothers";
 
-  // "I'm in position - take the shot."
-  level.scr_radio["afcaves_pri_taketheshot"] = "afcaves_pri_taketheshot";
+  // "I'm in position - take the shot."level.scr_radio["afcaves_pri_taketheshot"] = "afcaves_pri_taketheshot";
 
-  // "Soap, they're coming back -I'm repositioning to get out of sight."
-  level.scr_radio["afcaves_pri_repositioning"] = "afcaves_pri_repositioning";
+  // "Soap, they're coming back -I'm repositioning to get out of sight."level.scr_radio["afcaves_pri_repositioning"] = "afcaves_pri_repositioning";
 
-  // "Soap, they're about to find the bodies! We need to take them out!"
-  level.scr_radio["afcaves_pri_findthebodies"] = "afcaves_pri_findthebodies";
+  // "Soap, they're about to find the bodies! We need to take them out!"level.scr_radio["afcaves_pri_findthebodies"] = "afcaves_pri_findthebodies";
 
-  // "I'm in position, ready to shoot."
-  level.scr_radio["afcaves_pri_readytoshoot"] = "afcaves_pri_readytoshoot";
+  // "I'm in position, ready to shoot."level.scr_radio["afcaves_pri_readytoshoot"] = "afcaves_pri_readytoshoot";
 
-  // "Soap, the second group found the bodies!Take 'em out before they radio in!"
-  level.scr_radio["afcaves_pri_foundbodies"] = "afcaves_pri_foundbodies";
+  // "Soap, the second group found the bodies!Take 'em out before they radio in!"level.scr_radio["afcaves_pri_foundbodies"] = "afcaves_pri_foundbodies";
 
-  // "We don't have much time before they find the bodies. Let's keep moving."
-  level.scr_radio["afcaves_pri_muchtime"] = "afcaves_pri_muchtime";
+  // "We don't have much time before they find the bodies. Let's keep moving."level.scr_radio["afcaves_pri_muchtime"] = "afcaves_pri_muchtime";
 
-  // "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge."
-  level.scr_radio["pri_thermalspike"] = "afcaves_pri_thermalspike";
+  // "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge."level.scr_radio["pri_thermalspike"] = "afcaves_pri_thermalspike";
 
   // POST ROAD-CLEARING WIRETAP
-  // "Disciple Four, Oxide. What's your status, over?"
-  level.scr_radio["afcaves_schq_d4whatsyourstatus"] = "afcaves_schq_d4whatsyourstatus";
+  // "Disciple Four, Oxide. What's your status, over?"level.scr_radio["afcaves_schq_d4whatsyourstatus"] = "afcaves_schq_d4whatsyourstatus";
 
-  // "Disciple Four, Oxide, do you copy, over?"
-  level.scr_radio["afcaves_schq_d4doyoucopy"] = "afcaves_schq_d4doyoucopy";
+  // "Disciple Four, Oxide, do you copy, over?"level.scr_radio["afcaves_schq_d4doyoucopy"] = "afcaves_schq_d4doyoucopy";
 
-  // "Hey, I'm not gettin' anything from Disciple Four at the north ridge road. Could be a bad transmitter."
-  level.scr_radio["afcaves_schq_badtransmitter"] = "afcaves_schq_badtransmitter";
+  // "Hey, I'm not gettin' anything from Disciple Four at the north ridge road. Could be a bad transmitter."level.scr_radio["afcaves_schq_badtransmitter"] = "afcaves_schq_badtransmitter";
 
-  // "Butcher Seven, Oxide. We've lost contact with Disciple Four."
-  level.scr_radio["afcaves_schq_lostcontact2"] = "afcaves_schq_lostcontact2";
+  // "Butcher Seven, Oxide. We've lost contact with Disciple Four."level.scr_radio["afcaves_schq_lostcontact2"] = "afcaves_schq_lostcontact2";
 
-  // "Probably just the sandstorm that's rollin' in or a bad transmitter."
-  level.scr_radio["afcaves_schq_badtransmitter2"] = "afcaves_schq_badtransmitter2";
+  // "Probably just the sandstorm that's rollin' in or a bad transmitter."level.scr_radio["afcaves_schq_badtransmitter2"] = "afcaves_schq_badtransmitter2";
 
-  // "Send a team to check it out, over."
-  level.scr_radio["afcaves_schq_sendateam2"] = "afcaves_schq_sendateam2";
+  // "Send a team to check it out, over."level.scr_radio["afcaves_schq_sendateam2"] = "afcaves_schq_sendateam2";
 
-  // "Roger that Oxide, I'll send Vinson and Lambert. Butcher Seven out."
-  level.scr_radio["afcaves_sc2_sendvinson"] = "afcaves_sc2_sendvinson";
+  // "Roger that Oxide, I'll send Vinson and Lambert. Butcher Seven out."level.scr_radio["afcaves_sc2_sendvinson"] = "afcaves_sc2_sendvinson";
 
   // RAPPEL SETUP
-  // Here we go - hook up here."
-  level.scr_radio["pri_hookup"] = "afcaves_pri_hookup";
+  // Here we go - hook up here."level.scr_radio["pri_hookup"] = "afcaves_pri_hookup";
 
-  // Price: "Soap, hook up."
-  level.scr_radio["pri_soaphookup"] = "afcaves_pri_soaphookup";
+  // Price: "Soap, hook up."level.scr_radio["pri_soaphookup"] = "afcaves_pri_soaphookup";
 
-  // Price: "Soap, what's the problem? Hook up to the railing."
-  level.scr_radio["pri_whatstheproblem"] = "afcaves_pri_whatstheproblem";
+  // Price: "Soap, what's the problem? Hook up to the railing."level.scr_radio["pri_whatstheproblem"] = "afcaves_pri_whatstheproblem";
 
-  // Price: "Soap, hook up, let's go."
-  level.scr_radio["pri_hookupletsgo"] = "afcaves_pri_hookupletsgo";
+  // Price: "Soap, hook up, let's go."level.scr_radio["pri_hookupletsgo"] = "afcaves_pri_hookupletsgo";
 
   // RAPPEL
-  // Price: "Go."
-  level.scr_radio["pri_go"] = "afcaves_pri_go";
+  // Price: "Go."level.scr_radio["pri_go"] = "afcaves_pri_go";
 
-  // Price: "Got two tangos down below."
-  level.scr_radio["pri_2inthechest"] = "afcaves_pri_2inthechest";
+  // Price: "Got two tangos down below."level.scr_radio["pri_2inthechest"] = "afcaves_pri_2inthechest";
 
   // BACKDOOR BARRACKS
-  // Price: "Let's go."
-  level.scr_radio["pri_letsgo"] = "afcaves_pri_letsgo";
+  // Price: "Let's go."level.scr_radio["pri_letsgo"] = "afcaves_pri_letsgo";
 
-  // "Tango up ahead. Do not engage."
-  level.scr_radio["afcaves_pri_tangoupahead"] = "afcaves_pri_tangoupahead";
+  // "Tango up ahead. Do not engage."level.scr_radio["afcaves_pri_tangoupahead"] = "afcaves_pri_tangoupahead";
 
-  // "Patrol coming our way - go left, quickly!"
-  level.scr_radio["afcaves_pri_patrolcoming"] = "afcaves_pri_patrolcoming";
+  // "Patrol coming our way - go left, quickly!"level.scr_radio["afcaves_pri_patrolcoming"] = "afcaves_pri_patrolcoming";
 
-  // "Let them pass."
-  level.scr_radio["afcaves_pri_letthempass"] = "afcaves_pri_letthempass";
+  // "Let them pass."level.scr_radio["afcaves_pri_letthempass"] = "afcaves_pri_letthempass";
 
-  // "Take out the guard having a smoke, or wait for him to move along."
-  level.scr_radio["afcaves_pri_havingasmoke"] = "afcaves_pri_havingasmoke";
+  // "Take out the guard having a smoke, or wait for him to move along."level.scr_radio["afcaves_pri_havingasmoke"] = "afcaves_pri_havingasmoke";
 
-  // Price: "Good night."
-  level.scr_radio["pri_goodnight"] = "afcaves_pri_goodnight";
+  // Price: "Good night."level.scr_radio["pri_goodnight"] = "afcaves_pri_goodnight";
 
-  // "Soap, that area's full of hostiles. We should keep to the left to avoid being spotted."
-  level.scr_radio["afcaves_pri_avoidbeingspotted"] = "afcaves_pri_avoidbeingspotted";
+  // "Soap, that area's full of hostiles. We should keep to the left to avoid being spotted."level.scr_radio["afcaves_pri_avoidbeingspotted"] = "afcaves_pri_avoidbeingspotted";
 
-  // "Move."
-  level.scr_radio["afcaves_pri_move2"] = "afcaves_pri_move2";
+  // "Move."level.scr_radio["afcaves_pri_move2"] = "afcaves_pri_move2";
 
-  // "Easy now."
-  level.scr_radio["afcaves_pri_easynow"] = "afcaves_pri_easynow";
+  // "Easy now."level.scr_radio["afcaves_pri_easynow"] = "afcaves_pri_easynow";
 
-  // "Two tangos in this corridor - hold your fire and stay to the left."
-  level.scr_radio["afcaves_pri_incorridor"] = "afcaves_pri_incorridor";
+  // "Two tangos in this corridor - hold your fire and stay to the left."level.scr_radio["afcaves_pri_incorridor"] = "afcaves_pri_incorridor";
 
-  // "Tangos on our six."
-  level.scr_radio["afcaves_pri_tangosonsix"] = "afcaves_pri_tangosonsix";
+  // "Tangos on our six."level.scr_radio["afcaves_pri_tangosonsix"] = "afcaves_pri_tangosonsix";
 
-  // "Soap, we've got two tangos with taclights coming down the stairs under that red light, dead ahead."
-  level.scr_radio["afcaves_pri_tangoswithtaclights"] = "afcaves_pri_tangoswithtaclights";
+  // "Soap, we've got two tangos with taclights coming down the stairs under that red light, dead ahead."level.scr_radio["afcaves_pri_tangoswithtaclights"] = "afcaves_pri_tangoswithtaclights";
 
-  // "I'll take the one on the right. On my mark."
-  level.scr_radio["afcaves_pri_takeoneright"] = "afcaves_pri_takeoneright";
+  // "I'll take the one on the right. On my mark."level.scr_radio["afcaves_pri_takeoneright"] = "afcaves_pri_takeoneright";
 
-  // "Impressive."
-  level.scr_radio["afcaves_pri_impressive"] = "afcaves_pri_impressive";
+  // "Impressive."level.scr_radio["afcaves_pri_impressive"] = "afcaves_pri_impressive";
 
-  // "Clear. Go."
-  level.scr_radio["afcaves_pri_cleargo"] = "afcaves_pri_cleargo";
+  // "Clear. Go."level.scr_radio["afcaves_pri_cleargo"] = "afcaves_pri_cleargo";
 
   // CAVE STEALTHBREAK
-  // "The guards know something's not right. Get out of sight and stay quiet."
-  level.scr_radio["afcaves_pri_guardsknow"] = "afcaves_pri_guardsknow";
+  // "The guards know something's not right. Get out of sight and stay quiet."level.scr_radio["afcaves_pri_guardsknow"] = "afcaves_pri_guardsknow";
 
-  // "They're onto us - go loud."
-  level.scr_radio["afcaves_pri_ontousgoloud"] = "afcaves_pri_ontousgoloud";
+  // "They're onto us - go loud."level.scr_radio["afcaves_pri_ontousgoloud"] = "afcaves_pri_ontousgoloud";
 
-  // "We're compromised - go loud."
-  level.scr_radio["afcaves_pri_compromisedgoloud"] = "afcaves_pri_compromisedgoloud";
+  // "We're compromised - go loud."level.scr_radio["afcaves_pri_compromisedgoloud"] = "afcaves_pri_compromisedgoloud";
 
-  // "Soap, where are you? Get back here!"
-  level.scr_radio["afcaves_pri_getbackhere"] = "afcaves_pri_getbackhere";
+  // "Soap, where are you? Get back here!"level.scr_radio["afcaves_pri_getbackhere"] = "afcaves_pri_getbackhere";
 
-  // "We got lucky that time."
-  level.scr_radio["afcaves_pri_gotlucky"] = "afcaves_pri_gotlucky";
+  // "We got lucky that time."level.scr_radio["afcaves_pri_gotlucky"] = "afcaves_pri_gotlucky";
 
-  // "That was close."
-  level.scr_radio["afcaves_pri_thatwasclose"] = "afcaves_pri_thatwasclose";
+  // "That was close."level.scr_radio["afcaves_pri_thatwasclose"] = "afcaves_pri_thatwasclose";
 
   // SHADOW COMPANY TALKING WHEN STEALTH SPOTTED
-  // "I see him, he's over here!"
-  level.scr_radio["afcaves_sc1_iseehim"] = "afcaves_sc1_iseehim";
+  // "I see him, he's over here!"level.scr_radio["afcaves_sc1_iseehim"] = "afcaves_sc1_iseehim";
 
-  // "Intruder spotted!"
-  level.scr_radio["afcaves_sc1_spotted"] = "afcaves_sc1_spotted";
+  // "Intruder spotted!"level.scr_radio["afcaves_sc1_spotted"] = "afcaves_sc1_spotted";
 
-  // "Hostile at my location!"
-  level.scr_radio["afcaves_sc1_hostilemyloc"] = "afcaves_sc1_hostilemyloc";
+  // "Hostile at my location!"level.scr_radio["afcaves_sc1_hostilemyloc"] = "afcaves_sc1_hostilemyloc";
 
   // CAVE WIRETAP
-  // "Disciple Five, Oxide. Gimme a sitrep over."
-  level.scr_radio["afcaves_schq_sitrep"] = "afcaves_schq_sitrep";
+  // "Disciple Five, Oxide. Gimme a sitrep over."level.scr_radio["afcaves_schq_sitrep"] = "afcaves_schq_sitrep";
 
-  // "Disciple Five, Oxide. Gimme a sitrep over. [second time]"
-  level.scr_radio["afcaves_schq_sitrepover"] = "afcaves_schq_sitrepover";
+  // "Disciple Five, Oxide. Gimme a sitrep over. [second time]"level.scr_radio["afcaves_schq_sitrepover"] = "afcaves_schq_sitrepover";
 
   // STEAM ROOM
-  // "Disciple Six, we've lost all contact with Disciple Five. Check it out over."
-  level.scr_radio["afcaves_schq_lostcontact"] = "afcaves_schq_lostcontact";
+  // "Disciple Six, we've lost all contact with Disciple Five. Check it out over."level.scr_radio["afcaves_schq_lostcontact"] = "afcaves_schq_lostcontact";
 
-  // "Roger that Oxide, we're on the catwalk, heading to the steam room. Standby."
-  level.scr_radio["afcaves_sc3_oncatwalk"] = "afcaves_sc3_oncatwalk";
+  // "Roger that Oxide, we're on the catwalk, heading to the steam room. Standby."level.scr_radio["afcaves_sc3_oncatwalk"] = "afcaves_sc3_oncatwalk";
 
-  // "Top of the staircase - he's mine."
-  level.scr_radio["afcaves_pri_topofstairs"] = "afcaves_pri_topofstairs";
+  // "Top of the staircase - he's mine."level.scr_radio["afcaves_pri_topofstairs"] = "afcaves_pri_topofstairs";
 
-  // "Never mind, then."
-  level.scr_radio["afcaves_pri_nevermind"] = "afcaves_pri_nevermind";
+  // "Never mind, then."level.scr_radio["afcaves_pri_nevermind"] = "afcaves_pri_nevermind";
 
-  // "Oxide, Disciple Six at the steam room. No sign of Five, over."
-  level.scr_radio["afcaves_sc3_atsteamroom"] = "afcaves_sc3_atsteamroom";
+  // "Oxide, Disciple Six at the steam room. No sign of Five, over."level.scr_radio["afcaves_sc3_atsteamroom"] = "afcaves_sc3_atsteamroom";
 
-  // "Disciple Six, assume possible enemy infiltration. Go dark, breach and clear."
-  level.scr_radio["afcaves_schq_godark"] = "afcaves_schq_godark";
+  // "Disciple Six, assume possible enemy infiltration. Go dark, breach and clear."level.scr_radio["afcaves_schq_godark"] = "afcaves_schq_godark";
 
-  // "Sounds like we're gonna meet 'em head on, Soap."
-  level.scr_radio["afcaves_pri_meetemheadon"] = "afcaves_pri_meetemheadon";
+  // "Sounds like we're gonna meet 'em head on, Soap."level.scr_radio["afcaves_pri_meetemheadon"] = "afcaves_pri_meetemheadon";
 
-  // "Here we go - get ready."
-  level.scr_radio["afcaves_pri_getready"] = "afcaves_pri_getready";
+  // "Here we go - get ready."level.scr_radio["afcaves_pri_getready"] = "afcaves_pri_getready";
 
-  // Shadow Company Leader: "Move in."
-  level.scr_radio["scl_movein"] = "afcaves_scl_movein";
+  // Shadow Company Leader: "Move in."level.scr_radio["scl_movein"] = "afcaves_scl_movein";
 
-  // "Door charge planted. Ready to breach."
-  level.scr_radio["afcaves_sc3_chargeplanted"] = "afcaves_sc3_chargeplanted";
+  // "Door charge planted. Ready to breach."level.scr_radio["afcaves_sc3_chargeplanted"] = "afcaves_sc3_chargeplanted";
 
-  // "Hit it."
-  level.scr_radio["afcaves_scl_hitit"] = "afcaves_scl_hitit";
+  // "Hit it."level.scr_radio["afcaves_scl_hitit"] = "afcaves_scl_hitit";
 
-  // "Breaching, breaching!"
-  level.scr_radio["afcaves_sc3_breaching"] = "afcaves_sc3_breaching";
+  // "Breaching, breaching!"level.scr_radio["afcaves_sc3_breaching"] = "afcaves_sc3_breaching";
 
-  // "Foxtrot element, sweep left."
-  level.scr_radio["afcaves_scl_foxtrotelement"] = "afcaves_scl_foxtrotelement";
+  // "Foxtrot element, sweep left."level.scr_radio["afcaves_scl_foxtrotelement"] = "afcaves_scl_foxtrotelement";
 
-  // "Search pattern Echo Charlie. Go."
-  level.scr_radio["afcaves_scl_patternecho"] = "afcaves_scl_patternecho";
+  // "Search pattern Echo Charlie. Go."level.scr_radio["afcaves_scl_patternecho"] = "afcaves_scl_patternecho";
 
-  // "Door area clear."
-  level.scr_radio["afcaves_sc3_areaclear"] = "afcaves_sc3_areaclear";
+  // "Door area clear."level.scr_radio["afcaves_sc3_areaclear"] = "afcaves_sc3_areaclear";
 
-  // "Check your corners."
-  level.scr_radio["afcaves_scl_checkcorners"] = "afcaves_scl_checkcorners";
+  // "Check your corners."level.scr_radio["afcaves_scl_checkcorners"] = "afcaves_scl_checkcorners";
 
-  // "They're here! Open fire!"
-  level.scr_radio["afcaves_scl_theyrehere"] = "afcaves_scl_theyrehere";
+  // "They're here! Open fire!"level.scr_radio["afcaves_scl_theyrehere"] = "afcaves_scl_theyrehere";
 
-  // "Stay frosty, hunt them down!"
-  level.scr_radio["afcaves_scl_huntthemdown"] = "afcaves_scl_huntthemdown";
+  // "Stay frosty, hunt them down!"level.scr_radio["afcaves_scl_huntthemdown"] = "afcaves_scl_huntthemdown";
 
-  // "Go loud! Open fire!"
-  level.scr_radio["afcaves_pri_goloud"] = "afcaves_pri_goloud";
+  // "Go loud! Open fire!"level.scr_radio["afcaves_pri_goloud"] = "afcaves_pri_goloud";
 
-  // "Disciple Nine, your rear guard just flatlined!"
-  level.scr_radio["afcaves_schq_flatlined"] = "afcaves_schq_flatlined";
+  // "Disciple Nine, your rear guard just flatlined!"level.scr_radio["afcaves_schq_flatlined"] = "afcaves_schq_flatlined";
 
-  // "Not possible. We just cleared that area. (snort) Nobody's that good Oxi-"
-  level.scr_radio["afcaves_sc3_notpossible"] = "afcaves_sc3_notpossible";
+  // "Not possible. We just cleared that area. (snort) Nobody's that good Oxi-"level.scr_radio["afcaves_sc3_notpossible"] = "afcaves_sc3_notpossible";
 
-  // "It's Price."
-  level.scr_radio["afcaves_shp_itsprice"] = "afcaves_shp_itsprice";
+  // "It's Price."level.scr_radio["afcaves_shp_itsprice"] = "afcaves_shp_itsprice";
 
-  // "Backup priority items and burn the rest. Fire teams - just delay 'em until we're ready to pull out."
-  level.scr_radio["afcaves_shp_burntherest"] = "afcaves_shp_burntherest";
+  // "Backup priority items and burn the rest. Fire teams - just delay 'em until we're ready to pull out."level.scr_radio["afcaves_shp_burntherest"] = "afcaves_shp_burntherest";
 
   //CAVERN
-  //* Price: "We gotta take out those sentry guns!"
-  //level.scr_radio[ "pri_takeoutsentry" ]				= "afcaves_pri_takeoutsentry";
+  //* Price: "We gotta take out those sentry guns!"//level.scr_radio[ "pri_takeoutsentry" ]				= "afcaves_pri_takeoutsentry";
 
-  //* Price: "I got a visual on Shepherd! He's getting away! Head for that door to the northwest! Go! Go!"
-  level.scr_radio["pri_gettingaway"] = "afcaves_pri_gettingaway";
+  //* Price: "I got a visual on Shepherd! He's getting away! Head for that door to the northwest! Go! Go!"level.scr_radio["pri_gettingaway"] = "afcaves_pri_gettingaway";
 
-  //* Shadow Company 2: "We're gonna tear you a new one MacTavish…"
-  //level.scr_radio[ "sc2_tearyou" ]					= "afcaves_sc2_tearyou";
+  //* Shadow Company 2: "We're gonna tear you a new one MacTavish…"//level.scr_radio[ "sc2_tearyou" ]					= "afcaves_sc2_tearyou";
 
-  //* Price: "Soap, get in position to breach!"
-  level.scr_radio["pri_positiontobreach"] = "afcaves_pri_positiontobreach";
+  //* Price: "Soap, get in position to breach!"level.scr_radio["pri_positiontobreach"] = "afcaves_pri_positiontobreach";
 
-  //* Price: "Do it."
-  level.scr_radio["pri_doit"] = "afcaves_pri_doit";
+  //* Price: "Do it."level.scr_radio["pri_doit"] = "afcaves_pri_doit";
 
   //AIRSTRIP
-  //* Shepherd: "Have your men stay with me."
-  level.scr_radio["shp_menstaywithme"] = "afcaves_shp_menstaywithme";
+  //* Shepherd: "Have your men stay with me."level.scr_radio["shp_menstaywithme"] = "afcaves_shp_menstaywithme";
 
-  //* Shepherd: "Leave two squads to cover the entrance."
-  level.scr_radio["shp_twosquads"] = "afcaves_shp_twosquads";
+  //* Shepherd: "Leave two squads to cover the entrance."level.scr_radio["shp_twosquads"] = "afcaves_shp_twosquads";
 
-  //* Lieutenant: "Yes sir!."
-  level.scr_radio["lnt_yessir3"] = "afcaves_lnt_yessir3";
+  //* Lieutenant: "Yes sir!."level.scr_radio["lnt_yessir3"] = "afcaves_lnt_yessir3";
 
-  //* Price: "There he is! He's gone into the tunnel to the southwest!"
-  level.scr_radio["pri_intothetunnel"] = "afcaves_pri_intothetunnel";
+  //* Price: "There he is! He's gone into the tunnel to the southwest!"level.scr_radio["pri_intothetunnel"] = "afcaves_pri_intothetunnel";
 
-  //* Shepherd: "Call in some air support!"
-  level.scr_radio["shp_airsupport"] = "afcaves_shp_airsupport";
+  //* Shepherd: "Call in some air support!"level.scr_radio["shp_airsupport"] = "afcaves_shp_airsupport";
 
-  //* Lieutenant: "Little Bird inbound now."
-  level.scr_radio["lnt_littlebirdinbound"] = "afcaves_lnt_littlebirdinbound";
+  //* Lieutenant: "Little Bird inbound now."level.scr_radio["lnt_littlebirdinbound"] = "afcaves_lnt_littlebirdinbound";
 
   //* Price: 	Heads up Soap! Helicopter coming in fast from the west!
   level.scr_radio["pri_gonnagetaway"] = "afcaves_pri_gonnagetaway";
 
-  //* Price: "Take out that helicopter!!"
-  level.scr_radio["pri_takeoutheli"] = "afcaves_pri_takeoutheli";
+  //* Price: "Take out that helicopter!!"level.scr_radio["pri_takeoutheli"] = "afcaves_pri_takeoutheli";
 
-  //* Price: "Soap, regroup on me! He went through this tunnel, let's go!"
-  level.scr_radio["pri_regrouponme"] = "afcaves_pri_regrouponme";
+  //* Price: "Soap, regroup on me! He went through this tunnel, let's go!"level.scr_radio["pri_regrouponme"] = "afcaves_pri_regrouponme";
 
-  //* Price: "Keep moving!"
-  level.scr_radio["pri_keepmoving"] = "afcaves_pri_keepmoving";
+  //* Price: "Keep moving!"level.scr_radio["pri_keepmoving"] = "afcaves_pri_keepmoving";
 
-  //* Price: "Move up!"
-  level.scr_radio["pri_moveup1"] = "afcaves_pri_moveup1";
+  //* Price: "Move up!"level.scr_radio["pri_moveup1"] = "afcaves_pri_moveup1";
 }

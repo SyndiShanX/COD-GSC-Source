@@ -65,13 +65,13 @@ main() {
 }
 
 MoveMainLoop() {
-  prevLoopTime = self getAnimTime( % walk_and_run_loops);
+  prevLoopTime = self getAnimTime(%walk_and_run_loops);
   self.a.runLoopCount = randomint(10000);
   moveMode = self.moveMode;
   if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 4096)
     moveMode = "walk";
   for(;;) {
-    loopTime = self getAnimTime( % walk_and_run_loops);
+    loopTime = self getAnimTime(%walk_and_run_loops);
     if(loopTime < prevLoopTime)
       self.a.runLoopCount++;
     prevLoopTime = loopTime;
@@ -131,7 +131,7 @@ shootWhileMoving() {
     self.a.array["semi3"] = % exposed_shoot_semi3;
     self.a.array["semi4"] = % exposed_shoot_semi4;
     self.a.array["semi5"] = % exposed_shoot_semi5;
-    self.a.array["single"] = array( % exposed_shoot_semi1);
+    self.a.array["single"] = array(%exposed_shoot_semi1);
   } else {
     self.a.array["fire"] = % exposed2_shoot_auto_v3;
     self.a.array["burst2"] = % exposed2_shoot_burst3;
@@ -143,10 +143,10 @@ shootWhileMoving() {
     self.a.array["semi3"] = % exposed2_shoot_semi3;
     self.a.array["semi4"] = % exposed2_shoot_semi4;
     self.a.array["semi5"] = % exposed2_shoot_semi5;
-    self.a.array["single"] = array( % exposed2_shoot_semi1);
+    self.a.array["single"] = array(%exposed2_shoot_semi1);
   }
   if(isDefined(self.weapon) && weaponClass(self.weapon) == "spread")
-    self.a.array["single"] = array( % shotgun_stand_fire_1A, % shotgun_stand_fire_1B);
+    self.a.array["single"] = array(%shotgun_stand_fire_1A, %shotgun_stand_fire_1B);
   while(1) {
     if(!self.bulletsInClip) {
       if(self isCQBWalking()) {
@@ -161,7 +161,7 @@ shootWhileMoving() {
       }
     }
     self shootUntilShootBehaviorChange();
-    self clearAnim( % exposed_aiming, 0.2);
+    self clearAnim(%exposed_aiming, 0.2);
   }
 }
 

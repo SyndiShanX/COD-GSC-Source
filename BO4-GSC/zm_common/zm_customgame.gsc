@@ -1976,668 +1976,447 @@ function_401f18e6() {
 
 function_a8e9a6c7() {
   return array({
-    #name: # "startround",
-    #default_val: 1
+    #name: # "startround", #default_val: 1
   }, {
-    #name: # "headshotsonly",
-    #default_val: 0
+    #name: # "headshotsonly", #default_val: 0
   }, {
-    #name: # "zmroundcap",
-    #default_val: 0
+    #name: # "zmroundcap", #default_val: 0
   }, {
-    #name: # "zmtimecap",
-    #default_val: 0
+    #name: # "zmtimecap", #default_val: 0
   }, {
-    #name: # "zmshowtimer",
-    #default_val: 0
+    #name: # "zmshowtimer", #default_val: 0
   }, {
-    #name: # "zmkillcap",
-    #default_val: 0
+    #name: # "zmkillcap", #default_val: 0
   }, {
-    #name: # "zmdoorstate",
-    #default_val: 1
+    #name: # "zmdoorstate", #default_val: 1
   }, {
-    #name: # "zmspecialroundsenabled",
-    #default_val: 1
+    #name: # "zmspecialroundsenabled", #default_val: 1
   }, {
-    #name: # "zmendonquest",
-    #default_val: 0
+    #name: # "zmendonquest", #default_val: 0
   }, {
-    #name: # "zmmysteryboxstate",
-    #default_val: 2
+    #name: # "zmmysteryboxstate", #default_val: 2
   }, {
-    #name: # "hash_5d65c0983698a539",
-    #default_val: 0
+    #name: # "hash_5d65c0983698a539", #default_val: 0
   }, {
-    #name: # "zmmysteryboxlimitmove",
-    #default_val: 0
+    #name: # "zmmysteryboxlimitmove", #default_val: 0
   }, {
-    #name: # "hash_23fe21eb92ffbc2c",
-    #default_val: 0
+    #name: # "hash_23fe21eb92ffbc2c", #default_val: 0
   }, {
-    #name: # "zmmysteryboxlimit",
-    #default_val: 0
+    #name: # "zmmysteryboxlimit", #default_val: 0
   }, {
-    #name: # "hash_751384283abde22c",
-    #default_val: 0
+    #name: # "hash_751384283abde22c", #default_val: 0
   }, {
-    #name: # "zmmysteryboxlimitround",
-    #default_val: 0
+    #name: # "zmmysteryboxlimitround", #default_val: 0
   }, {
-    #name: # "zmpowerstate",
-    #default_val: 1
+    #name: # "zmpowerstate", #default_val: 1
   }, {
-    #name: # "zmpowerdoorstate",
-    #default_val: 1
+    #name: # "zmpowerdoorstate", #default_val: 1
   }, {
-    #name: # "zmperksactive",
-    #default_val: 1
+    #name: # "zmperksactive", #default_val: 1
   }, {
-    #name: # "zmperksjuggernaut",
-    #default_val: 1
+    #name: # "zmperksjuggernaut", #default_val: 1
   }, {
-    #name: # "zmperksspeed",
-    #default_val: 1
+    #name: # "zmperksspeed", #default_val: 1
   }, {
-    #name: # "zmperksquickrevive",
-    #default_val: 1
+    #name: # "zmperksquickrevive", #default_val: 1
   }, {
-    #name: # "zmperkswidowswail",
-    #default_val: 1
+    #name: # "zmperkswidowswail", #default_val: 1
   }, {
-    #name: # "zmperksstaminup",
-    #default_val: 1
+    #name: # "zmperksstaminup", #default_val: 1
   }, {
-    #name: # "zmperksmulekick",
-    #default_val: 1
+    #name: # "zmperksmulekick", #default_val: 1
   }, {
-    #name: # "zmperkselectricburst",
-    #default_val: 1
+    #name: # "zmperkselectricburst", #default_val: 1
   }, {
-    #name: # "zmperksdeadshot",
-    #default_val: 1
+    #name: # "zmperksdeadshot", #default_val: 1
   }, {
-    #name: # "zmperkscooldown",
-    #default_val: 1
+    #name: # "zmperkscooldown", #default_val: 1
   }, {
-    #name: # "zmperksdyingwish",
-    #default_val: 1
+    #name: # "zmperksdyingwish", #default_val: 1
   }, {
-    #name: # "zmpapenabled",
-    #default_val: 1
+    #name: # "zmpapenabled", #default_val: 1
   }, {
-    #name: # "zmsuperpapenabled",
-    #default_val: 1
+    #name: # "zmsuperpapenabled", #default_val: 1
   }, {
-    #name: # "zmpowerupsactive",
-    #default_val: 1
+    #name: # "zmpowerupsactive", #default_val: 1
   }, {
-    #name: # "zmpowerupnuke",
-    #default_val: 1
+    #name: # "zmpowerupnuke", #default_val: 1
   }, {
-    #name: # "zmpowerupdouble",
-    #default_val: 1
+    #name: # "zmpowerupdouble", #default_val: 1
   }, {
-    #name: # "zmpowerupinstakill",
-    #default_val: 1
+    #name: # "zmpowerupinstakill", #default_val: 1
   }, {
-    #name: # "zmpowerupchaospoints",
-    #default_val: 1
+    #name: # "zmpowerupchaospoints", #default_val: 1
   }, {
-    #name: # "zmpowerupfiresale",
-    #default_val: 1
+    #name: # "zmpowerupfiresale", #default_val: 1
   }, {
-    #name: # "zmpowerupspecialweapon",
-    #default_val: 1
+    #name: # "zmpowerupspecialweapon", #default_val: 1
   }, {
-    #name: # "zmpowerupfreeperk",
-    #default_val: 1
+    #name: # "zmpowerupfreeperk", #default_val: 1
   }, {
-    #name: # "zmpowerupmaxammo",
-    #default_val: 1
+    #name: # "zmpowerupmaxammo", #default_val: 1
   }, {
-    #name: # "zmpowerupcarpenter",
-    #default_val: 1
+    #name: # "zmpowerupcarpenter", #default_val: 1
   }, {
-    #name: # "zmpowerupsislimitedround",
-    #default_val: 0
+    #name: # "zmpowerupsislimitedround", #default_val: 0
   }, {
-    #name: # "zmpowerupslimitround",
-    #default_val: 1
+    #name: # "zmpowerupslimitround", #default_val: 1
   }, {
-    #name: # "zmpowerupsharing",
-    #default_val: 1
+    #name: # "zmpowerupsharing", #default_val: 1
   }, {
-    #name: # "zmwallbuysenabled",
-    #default_val: 1
+    #name: # "zmwallbuysenabled", #default_val: 1
   }, {
-    #name: # "zmrandomwallbuys",
-    #default_val: 0
+    #name: # "zmrandomwallbuys", #default_val: 0
   }, {
-    #name: # "zmelixirsenabled",
-    #default_val: 1
+    #name: # "zmelixirsenabled", #default_val: 1
   }, {
-    #name: # "zmelixirscooldown",
-    #default_val: 1
+    #name: # "zmelixirscooldown", #default_val: 1
   }, {
-    #name: # "zmelixirsindividual",
-    #default_val: 1
+    #name: # "zmelixirsindividual", #default_val: 1
   }, {
-    #name: # "zmelixirsdurables",
-    #default_val: 1
+    #name: # "zmelixirsdurables", #default_val: 1
   }, {
-    #name: # "zmelixirscommon",
-    #default_val: 1
+    #name: # "zmelixirscommon", #default_val: 1
   }, {
-    #name: # "zmelixirsrare",
-    #default_val: 1
+    #name: # "zmelixirsrare", #default_val: 1
   }, {
-    #name: # "zmelixirslegendary",
-    #default_val: 1
+    #name: # "zmelixirslegendary", #default_val: 1
   }, {
-    #name: # "zmelixirsepic",
-    #default_val: 1
+    #name: # "zmelixirsepic", #default_val: 1
   }, {
-    #name: # "zmtalismansenabled",
-    #default_val: 1
+    #name: # "zmtalismansenabled", #default_val: 1
   }, {
-    #name: # "zmtalismansindividual",
-    #default_val: 1
+    #name: # "zmtalismansindividual", #default_val: 1
   }, {
-    #name: # "zmtalismanscommon",
-    #default_val: 1
+    #name: # "zmtalismanscommon", #default_val: 1
   }, {
-    #name: # "zmtalismansrare",
-    #default_val: 1
+    #name: # "zmtalismansrare", #default_val: 1
   }, {
-    #name: # "zmtalismanslegendary",
-    #default_val: 1
+    #name: # "zmtalismanslegendary", #default_val: 1
   }, {
-    #name: # "zmtalismansepic",
-    #default_val: 1
+    #name: # "zmtalismansepic", #default_val: 1
   }, {
-    #name: # "zmweaponspistol",
-    #default_val: 1
+    #name: # "zmweaponspistol", #default_val: 1
   }, {
-    #name: # "zmweaponsshotgun",
-    #default_val: 1
+    #name: # "zmweaponsshotgun", #default_val: 1
   }, {
-    #name: # "zmweaponssmg",
-    #default_val: 1
+    #name: # "zmweaponssmg", #default_val: 1
   }, {
-    #name: # "zmweaponsar",
-    #default_val: 1
+    #name: # "zmweaponsar", #default_val: 1
   }, {
-    #name: # "zmweaponstr",
-    #default_val: 1
+    #name: # "zmweaponstr", #default_val: 1
   }, {
-    #name: # "zmweaponslmg",
-    #default_val: 1
+    #name: # "zmweaponslmg", #default_val: 1
   }, {
-    #name: # "zmweaponssniper",
-    #default_val: 1
+    #name: # "zmweaponssniper", #default_val: 1
   }, {
-    #name: # "zmweaponsknife",
-    #default_val: 1
+    #name: # "zmweaponsknife", #default_val: 1
   }, {
-    #name: # "zmweaponsmelee",
-    #default_val: 1
+    #name: # "zmweaponsmelee", #default_val: 1
   }, {
-    #name: # "zmspecweaponisenabled",
-    #default_val: 1
+    #name: # "zmspecweaponisenabled", #default_val: 1
   }, {
-    #name: # "zmspecweaponchargerate",
-    #default_val: 1
+    #name: # "zmspecweaponchargerate", #default_val: 1
   }, {
-    #name: # "zmwonderweaponisenabled",
-    #default_val: 1
+    #name: # "zmwonderweaponisenabled", #default_val: 1
   }, {
-    #name: # "zmequipmentisenabled",
-    #default_val: 1
+    #name: # "zmequipmentisenabled", #default_val: 1
   }, {
-    #name: # "zmequipmentchargerate",
-    #default_val: 1
+    #name: # "zmequipmentchargerate", #default_val: 1
   }, {
-    #name: # "zmshieldisenabled",
-    #default_val: 1
+    #name: # "zmshieldisenabled", #default_val: 1
   }, {
-    #name: # "zmshielddurability",
-    #default_val: 1
+    #name: # "zmshielddurability", #default_val: 1
   }, {
-    #name: # "zmheadshotsonly",
-    #default_val: 0
+    #name: # "zmheadshotsonly", #default_val: 0
   }, {
-    #name: # "zmrunnerstate",
-    #default_val: 0
+    #name: # "zmrunnerstate", #default_val: 0
   }, {
-    #name: # "zmwalkerstate",
-    #default_val: 0
+    #name: # "zmwalkerstate", #default_val: 0
   }, {
-    #name: # "zmcrawlerstate",
-    #default_val: 1
+    #name: # "zmcrawlerstate", #default_val: 1
   }, {
-    #name: # "zmzombiespread",
-    #default_val: 1
+    #name: # "zmzombiespread", #default_val: 1
   }, {
-    #name: # "zmzombieminspeed",
-    #default_val: 0
+    #name: # "zmzombieminspeed", #default_val: 0
   }, {
-    #name: # "zmzombiemaxspeed",
-    #default_val: 3
+    #name: # "zmzombiemaxspeed", #default_val: 3
   }, {
-    #name: # "zmzombiedamagemult",
-    #default_val: 1
+    #name: # "zmzombiedamagemult", #default_val: 1
   }, {
-    #name: # "zmzombiehealthmult",
-    #default_val: 1
+    #name: # "zmzombiehealthmult", #default_val: 1
   }, {
-    #name: # "zmcrawlerdamagemult",
-    #default_val: 1
+    #name: # "zmcrawlerdamagemult", #default_val: 1
   }, {
-    #name: # "zmcrawlerhealthmult",
-    #default_val: 1
+    #name: # "zmcrawlerhealthmult", #default_val: 1
   }, {
-    #name: # "zmcrawleraggro",
-    #default_val: 1
+    #name: # "zmcrawleraggro", #default_val: 1
   }, {
-    #name: # "zmheavystate",
-    #default_val: 1
+    #name: # "zmheavystate", #default_val: 1
   }, {
-    #name: # "zmheavydamagemult",
-    #default_val: 1
+    #name: # "zmheavydamagemult", #default_val: 1
   }, {
-    #name: # "zmheavyhealthmult",
-    #default_val: 1
+    #name: # "zmheavyhealthmult", #default_val: 1
   }, {
-    #name: # "zmheavyaggro",
-    #default_val: 1
+    #name: # "zmheavyaggro", #default_val: 1
   }, {
-    #name: # "zmminibossstate",
-    #default_val: 1
+    #name: # "zmminibossstate", #default_val: 1
   }, {
-    #name: # "zmminibossdamagemult",
-    #default_val: 1
+    #name: # "zmminibossdamagemult", #default_val: 1
   }, {
-    #name: # "zmminibosshealthmult",
-    #default_val: 1
+    #name: # "zmminibosshealthmult", #default_val: 1
   }, {
-    #name: # "zmminibossaggro",
-    #default_val: 1
+    #name: # "zmminibossaggro", #default_val: 1
   }, {
-    #name: # "zmhealthstartingbars",
-    #default_val: 3
+    #name: # "zmhealthstartingbars", #default_val: 3
   }, {
-    #name: # "zmhealthregendelay",
-    #default_val: 1
+    #name: # "zmhealthregendelay", #default_val: 1
   }, {
-    #name: # "zmhealthregenrate",
-    #default_val: 2
+    #name: # "zmhealthregenrate", #default_val: 2
   }, {
-    #name: # "zmhealthonkill",
-    #default_val: 0
+    #name: # "zmhealthonkill", #default_val: 0
   }, {
-    #name: # "zmhealthdrain",
-    #default_val: 0
+    #name: # "zmhealthdrain", #default_val: 0
   }, {
-    #name: # "zmpointsfixed",
-    #default_val: 0
+    #name: # "zmpointsfixed", #default_val: 0
   }, {
-    #name: # "zmpointsstarting",
-    #default_val: 5
+    #name: # "zmpointsstarting", #default_val: 5
   }, {
-    #name: # "hash_5566698b97a6282e",
-    #default_val: 0
+    #name: # "hash_5566698b97a6282e", #default_val: 0
   }, {
-    #name: # "zmpointslosstype",
-    #default_val: 0
+    #name: # "zmpointslosstype", #default_val: 0
   }, {
-    #name: # "zmpointslosspercent",
-    #default_val: 1
+    #name: # "zmpointslosspercent", #default_val: 1
   }, {
-    #name: # "zmpointslossvalue",
-    #default_val: 100
+    #name: # "zmpointslossvalue", #default_val: 100
   }, {
-    #name: # "zmlaststandduration",
-    #default_val: 2
+    #name: # "zmlaststandduration", #default_val: 2
   }, {
-    #name: # "hash_12f776f6bc579bb4",
-    #default_val: 0
+    #name: # "hash_12f776f6bc579bb4", #default_val: 0
   }, {
-    #name: # "zmlimiteddownsamount",
-    #default_val: 0
+    #name: # "zmlimiteddownsamount", #default_val: 0
   }, {
-    #name: # "zmbarricadestate",
-    #default_val: 1
+    #name: # "zmbarricadestate", #default_val: 1
   }, {
-    #name: # "hash_3c5363541b97ca3e",
-    #default_val: 1
+    #name: # "hash_3c5363541b97ca3e", #default_val: 1
   }, {
-    #name: # "zmpowerupfrequency",
-    #default_val: 1
+    #name: # "zmpowerupfrequency", #default_val: 1
   }, {
-    #name: # "zmtalismanboxguaranteeboxonly",
-    #default_val: 1
+    #name: # "zmtalismanboxguaranteeboxonly", #default_val: 1
   }, {
-    #name: # "zmtalismanboxguaranteelmg",
-    #default_val: 1
+    #name: # "zmtalismanboxguaranteelmg", #default_val: 1
   }, {
-    #name: # "hash_61695e52556ff2d1",
-    #default_val: 1
+    #name: # "hash_61695e52556ff2d1", #default_val: 1
   }, {
-    #name: # "zmtalismancoagulant",
-    #default_val: 1
+    #name: # "zmtalismancoagulant", #default_val: 1
   }, {
-    #name: # "zmtalismanextraclaymore",
-    #default_val: 1
+    #name: # "zmtalismanextraclaymore", #default_val: 1
   }, {
-    #name: # "zmtalismanextrafrag",
-    #default_val: 1
+    #name: # "zmtalismanextrafrag", #default_val: 1
   }, {
-    #name: # "zmtalismanextraminiturret",
-    #default_val: 1
+    #name: # "zmtalismanextraminiturret", #default_val: 1
   }, {
-    #name: # "zmtalismanextramolotov",
-    #default_val: 1
+    #name: # "zmtalismanextramolotov", #default_val: 1
   }, {
-    #name: # "zmtalismanextrasemtex",
-    #default_val: 1
+    #name: # "zmtalismanextrasemtex", #default_val: 1
   }, {
-    #name: # "zmtalismanimpatient",
-    #default_val: 1
+    #name: # "zmtalismanimpatient", #default_val: 1
   }, {
-    #name: # "zmtalismanperkmodsingle",
-    #default_val: 1
+    #name: # "zmtalismanperkmodsingle", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent1",
-    #default_val: 1
+    #name: # "zmtalismanperkpermanent1", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent2",
-    #default_val: 1
+    #name: # "zmtalismanperkpermanent2", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent3",
-    #default_val: 1
+    #name: # "zmtalismanperkpermanent3", #default_val: 1
   }, {
-    #name: # "zmtalismanperkpermanent4",
-    #default_val: 1
+    #name: # "zmtalismanperkpermanent4", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost1",
-    #default_val: 1
+    #name: # "zmtalismanperkreducecost1", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost2",
-    #default_val: 1
+    #name: # "zmtalismanperkreducecost2", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost3",
-    #default_val: 1
+    #name: # "zmtalismanperkreducecost3", #default_val: 1
   }, {
-    #name: # "zmtalismanperkreducecost4",
-    #default_val: 1
+    #name: # "zmtalismanperkreducecost4", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart1",
-    #default_val: 1
+    #name: # "zmtalismanperkstart1", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart2",
-    #default_val: 1
+    #name: # "zmtalismanperkstart2", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart3",
-    #default_val: 1
+    #name: # "zmtalismanperkstart3", #default_val: 1
   }, {
-    #name: # "zmtalismanperkstart4",
-    #default_val: 1
+    #name: # "zmtalismanperkstart4", #default_val: 1
   }, {
-    #name: # "zmtalismanshielddurabilitylegendary",
-    #default_val: 1
+    #name: # "zmtalismanshielddurabilitylegendary", #default_val: 1
   }, {
-    #name: # "zmtalismanshielddurabilityrare",
-    #default_val: 1
+    #name: # "zmtalismanshielddurabilityrare", #default_val: 1
   }, {
-    #name: # "zmtalismanshieldprice",
-    #default_val: 1
+    #name: # "zmtalismanshieldprice", #default_val: 1
   }, {
-    #name: # "zmtalismanspecialstartlvl2",
-    #default_val: 1
+    #name: # "zmtalismanspecialstartlvl2", #default_val: 1
   }, {
-    #name: # "zmtalismanspecialstartlvl3",
-    #default_val: 1
+    #name: # "zmtalismanspecialstartlvl3", #default_val: 1
   }, {
-    #name: # "zmtalismanspecialxprate",
-    #default_val: 1
+    #name: # "zmtalismanspecialxprate", #default_val: 1
   }, {
-    #name: # "zmtalismanstartweaponar",
-    #default_val: 1
+    #name: # "zmtalismanstartweaponar", #default_val: 1
   }, {
-    #name: # "zmtalismanstartweaponlmg",
-    #default_val: 1
+    #name: # "zmtalismanstartweaponlmg", #default_val: 1
   }, {
-    #name: # "zmtalismanstartweaponsmg",
-    #default_val: 1
+    #name: # "zmtalismanstartweaponsmg", #default_val: 1
   }, {
-    #name: # "zmtalismanreducepapcost",
-    #default_val: 1
+    #name: # "zmtalismanreducepapcost", #default_val: 1
   }, {
-    #name: # "zmtalismansultra",
-    #default_val: 1
+    #name: # "zmtalismansultra", #default_val: 1
   }, {
-    #name: # "zmelixiralwaysdoneswiftly",
-    #default_val: 1
+    #name: # "zmelixiralwaysdoneswiftly", #default_val: 1
   }, {
-    #name: # "zmelixiranywherebuthere",
-    #default_val: 1
+    #name: # "zmelixiranywherebuthere", #default_val: 1
   }, {
-    #name: # "zmelixirarsenalaccelerator",
-    #default_val: 1
+    #name: # "zmelixirarsenalaccelerator", #default_val: 1
   }, {
-    #name: # "zmelixirdangerclosest",
-    #default_val: 1
+    #name: # "zmelixirdangerclosest", #default_val: 1
   }, {
-    #name: # "zmelixirinplainsight",
-    #default_val: 1
+    #name: # "zmelixirinplainsight", #default_val: 1
   }, {
-    #name: # "zmelixirnewtoniannegation",
-    #default_val: 1
+    #name: # "zmelixirnewtoniannegation", #default_val: 1
   }, {
-    #name: # "zmelixirnowyouseeme",
-    #default_val: 1
+    #name: # "zmelixirnowyouseeme", #default_val: 1
   }, {
-    #name: # "zmelixirstockoption",
-    #default_val: 1
+    #name: # "zmelixirstockoption", #default_val: 1
   }, {
-    #name: # "zmelixirboardgames",
-    #default_val: 1
+    #name: # "zmelixirboardgames", #default_val: 1
   }, {
-    #name: # "zmelixirburnedout",
-    #default_val: 1
+    #name: # "zmelixirburnedout", #default_val: 1
   }, {
-    #name: # "zmelixircrawlspace",
-    #default_val: 1
+    #name: # "zmelixircrawlspace", #default_val: 1
   }, {
-    #name: # "zmelixirpopshocks",
-    #default_val: 1
+    #name: # "zmelixirpopshocks", #default_val: 1
   }, {
-    #name: # "zmelixirtemporalgift",
-    #default_val: 1
+    #name: # "zmelixirtemporalgift", #default_val: 1
   }, {
-    #name: # "zmelixirpointdrops",
-    #default_val: 1
+    #name: # "zmelixirpointdrops", #default_val: 1
   }, {
-    #name: # "zmelixiralchemicalantithesis",
-    #default_val: 1
+    #name: # "zmelixiralchemicalantithesis", #default_val: 1
   }, {
-    #name: # "zmelixirswordflay",
-    #default_val: 1
+    #name: # "zmelixirswordflay", #default_val: 1
   }, {
-    #name: # "zmelixirdeadofnuclearwinter",
-    #default_val: 1
+    #name: # "zmelixirdeadofnuclearwinter", #default_val: 1
   }, {
-    #name: # "zmelixirlicensedcontractor",
-    #default_val: 1
+    #name: # "zmelixirlicensedcontractor", #default_val: 1
   }, {
-    #name: # "zmelixirundeadmanwalking",
-    #default_val: 1
+    #name: # "zmelixirundeadmanwalking", #default_val: 1
   }, {
-    #name: # "zmelixirwhoskeepingscore",
-    #default_val: 1
+    #name: # "zmelixirwhoskeepingscore", #default_val: 1
   }, {
-    #name: # "zmelixiraftertaste",
-    #default_val: 1
+    #name: # "zmelixiraftertaste", #default_val: 1
   }, {
-    #name: # "zmelixirextracredit",
-    #default_val: 1
+    #name: # "zmelixirextracredit", #default_val: 1
   }, {
-    #name: # "zmelixirkilljoy",
-    #default_val: 1
+    #name: # "zmelixirkilljoy", #default_val: 1
   }, {
-    #name: # "zmelixirsodafountain",
-    #default_val: 1
+    #name: # "zmelixirsodafountain", #default_val: 1
   }, {
-    #name: # "zmelixirctrlz",
-    #default_val: 1
+    #name: # "zmelixirctrlz", #default_val: 1
   }, {
-    #name: # "zmelixirfreefire",
-    #default_val: 1
+    #name: # "zmelixirfreefire", #default_val: 1
   }, {
-    #name: # "zmelixircacheback",
-    #default_val: 1
+    #name: # "zmelixircacheback", #default_val: 1
   }, {
-    #name: # "zmelixirimmolationliquidation",
-    #default_val: 1
+    #name: # "zmelixirimmolationliquidation", #default_val: 1
   }, {
-    #name: # "zmelixirphoenixup",
-    #default_val: 1
+    #name: # "zmelixirphoenixup", #default_val: 1
   }, {
-    #name: # "zmelixirpowerkeg",
-    #default_val: 1
+    #name: # "zmelixirpowerkeg", #default_val: 1
   }, {
-    #name: # "zmelixirblooddebt",
-    #default_val: 1
+    #name: # "zmelixirblooddebt", #default_val: 1
   }, {
-    #name: # "zmelixirneardeathexperience",
-    #default_val: 1
+    #name: # "zmelixirneardeathexperience", #default_val: 1
   }, {
-    #name: # "zmelixirperkaholic",
-    #default_val: 1
+    #name: # "zmelixirperkaholic", #default_val: 1
   }, {
-    #name: # "zmelixirwallpower",
-    #default_val: 1
+    #name: # "zmelixirwallpower", #default_val: 1
   }, {
-    #name: # "hash_429b520a87274afb",
-    #default_val: 0
+    #name: # "hash_429b520a87274afb", #default_val: 0
   }, {
-    #name: # "zmtrapsenabled",
-    #default_val: 1
+    #name: # "zmtrapsenabled", #default_val: 1
   }, {
-    #name: # "zmstartingweaponenabled",
-    #default_val: 1
+    #name: # "zmstartingweaponenabled", #default_val: 1
   }, {
-    #name: # "zmheavyspawnfreq",
-    #default_val: 1
+    #name: # "zmheavyspawnfreq", #default_val: 1
   }, {
-    #name: # "zmminibossspawnfreq",
-    #default_val: 1
+    #name: # "zmminibossspawnfreq", #default_val: 1
   }, {
-    #name: # "zmselfreviveamount",
-    #default_val: 0
+    #name: # "zmselfreviveamount", #default_val: 0
   }, {
-    #name: # "zmpopcornstate",
-    #default_val: 1
+    #name: # "zmpopcornstate", #default_val: 1
   }, {
-    #name: # "zmpopcorndamagemult",
-    #default_val: 1
+    #name: # "zmpopcorndamagemult", #default_val: 1
   }, {
-    #name: # "zmpopcornhealthmult",
-    #default_val: 1
+    #name: # "zmpopcornhealthmult", #default_val: 1
   }, {
-    #name: # "zmpopcornspawnfreq",
-    #default_val: 1
+    #name: # "zmpopcornspawnfreq", #default_val: 1
   }, {
-    #name: # "zmretainweapons",
-    #default_val: 1
+    #name: # "zmretainweapons", #default_val: 1
   }, {
-    #name: # "zmperkdecay",
-    #default_val: 1
+    #name: # "zmperkdecay", #default_val: 1
   }, {
-    #name: # "zmcraftingkeyline",
-    #default_val: 0
+    #name: # "zmcraftingkeyline", #default_val: 0
   }, {
-    #name: # "zmpointlossondown",
-    #default_val: 0
+    #name: # "zmpointlossondown", #default_val: 0
   }, {
-    #name: # "zmpointlossondeath",
-    #default_val: 0
+    #name: # "zmpointlossondeath", #default_val: 0
   }, {
-    #name: # "zmpointlossonteammatedeath",
-    #default_val: 0
+    #name: # "zmpointlossonteammatedeath", #default_val: 0
   }, {
-    #name: # "zmelixirantientrapment",
-    #default_val: 1
+    #name: # "zmelixirantientrapment", #default_val: 1
   }, {
-    #name: # "zmelixirequipmint",
-    #default_val: 1
+    #name: # "zmelixirequipmint", #default_val: 1
   }, {
-    #name: # "zmelixirheadscan",
-    #default_val: 1
+    #name: # "zmelixirheadscan", #default_val: 1
   }, {
-    #name: # "zmelixirjointheparty",
-    #default_val: 1
+    #name: # "zmelixirjointheparty", #default_val: 1
   }, {
-    #name: # "zmelixirnowherebutthere",
-    #default_val: 1
+    #name: # "zmelixirnowherebutthere", #default_val: 1
   }, {
-    #name: # "zmelixirphantomreload",
-    #default_val: 1
+    #name: # "zmelixirphantomreload", #default_val: 1
   }, {
-    #name: # "zmelixirshieldsup",
-    #default_val: 1
+    #name: # "zmelixirshieldsup", #default_val: 1
   }, {
-    #name: # "zmelixirwalltowall",
-    #default_val: 1
+    #name: # "zmelixirwalltowall", #default_val: 1
   }, {
-    #name: # "zmperksbandolier",
-    #default_val: 1
+    #name: # "zmperksbandolier", #default_val: 1
   }, {
-    #name: # "zmperksdeathperception",
-    #default_val: 1
+    #name: # "zmperksdeathperception", #default_val: 1
   }, {
-    #name: # "zmperksphdslider",
-    #default_val: 1
+    #name: # "zmperksphdslider", #default_val: 1
   }, {
-    #name: # "zmperkssecretsauce",
-    #default_val: 1
+    #name: # "zmperkssecretsauce", #default_val: 1
   }, {
-    #name: # "zmperksstonecold",
-    #default_val: 1
+    #name: # "zmperksstonecold", #default_val: 1
   }, {
-    #name: # "zmperkswolfprotector",
-    #default_val: 1
+    #name: # "zmperkswolfprotector", #default_val: 1
   }, {
-    #name: # "zmperksdeathdash",
-    #default_val: 1
+    #name: # "zmperksdeathdash", #default_val: 1
   }, {
-    #name: # "zmperksvictorious",
-    #default_val: 1
+    #name: # "zmperksvictorious", #default_val: 1
   }, {
-    #name: # "zmfriendlyfiretype",
-    #default_val: 0
+    #name: # "zmfriendlyfiretype", #default_val: 0
   }, {
-    #name: # "zmelixirconflagrationliquidation",
-    #default_val: 1
+    #name: # "zmelixirconflagrationliquidation", #default_val: 1
   }, {
-    #name: # "zmelixirperkup",
-    #default_val: 1
+    #name: # "zmelixirperkup", #default_val: 1
   }, {
-    #name: # "zmelixirrefreshmint",
-    #default_val: 1
+    #name: # "zmelixirrefreshmint", #default_val: 1
   }, {
-    #name: # "zmenhancedstate",
-    #default_val: 1
+    #name: # "zmenhancedstate", #default_val: 1
   }, {
-    #name: # "zmenhanceddamagemult",
-    #default_val: 1
+    #name: # "zmenhanceddamagemult", #default_val: 1
   }, {
-    #name: # "zmenhancedhealthmult",
-    #default_val: 1
+    #name: # "zmenhancedhealthmult", #default_val: 1
   }, {
-    #name: # "zmenhancedspawnfreq",
-    #default_val: 1
+    #name: # "zmenhancedspawnfreq", #default_val: 1
   });
 }
 
@@ -2766,868 +2545,436 @@ function_172decfc() {
 
 function_338abd6d() {
   return array({
-    #name: "<dev string:x8e>",
-    #default_val: 1,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x38c>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x39f>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x3ab>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x3bb>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x3cd>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x3da>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x3e6>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x3f4>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x400>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x40e>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x427>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x212>",
-    #default_val: 2,
-    #state: array("<dev string:x394>", "<dev string:x436>", "<dev string:x446>", "<dev string:x450>")
-  }, {
-    #name: "<dev string:x459>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x475>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x48d>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x4a5>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x4b9>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x4d6>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x4ef>",
-    #default_val: 1,
-    #state: array("<dev string:x4fe>", "<dev string:x446>", "<dev string:x507>")
-  }, {
-    #name: "<dev string:x50e>",
-    #default_val: 1,
-    #state: array("<dev string:x4fe>", "<dev string:x446>", "<dev string:x507>")
-  }, {
-    #name: "<dev string:x521>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x531>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x545>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x338>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x554>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x568>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x57a>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x58c>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x5a3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x34d>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x325>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x5b5>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x446>", "<dev string:x5c4>")
-  }, {
-    #name: "<dev string:x5d0>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x5e4>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x5f7>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x226>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x238>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x24d>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x264>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x607>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x278>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x620>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x28c>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x633>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x2a1>",
-    #default_val: 1,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x64e>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1fe>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x661>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x674>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x687>",
-    #default_val: 1,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x69b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x6b1>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x6c5>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x6d7>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x6e7>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x6fc>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x70c>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x721>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x739>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x74d>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x75f>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x776>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x788>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x79a>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x2e0>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x7ad>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x7bb>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x7c9>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x2ce>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x7d8>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x7e9>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x7fa>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x9b>",
-    #default_val: 1,
-    #state: array("<dev string:x812>", "<dev string:x446>", "<dev string:x819>")
-  }, {
-    #name: "<dev string:x820>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x83a>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x851>",
-    #default_val: 1,
-    #state: array("<dev string:x812>", "<dev string:x446>", "<dev string:x819>")
-  }, {
-    #name: "<dev string:x869>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x11c>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x88d>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x89f>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
-  }, {
-    #name: "<dev string:x8b6>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
-  }, {
-    #name: "<dev string:x8c6>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
-  }, {
-    #name: "<dev string:x8d7>",
-    #default_val: 1,
-    #state: array("<dev string:x8e8>", "<dev string:x8f0>", "<dev string:x8f9>")
-  }, {
-    #name: "<dev string:x171>",
-    #default_val: 0,
-    #state: array("<dev string:x901>", "<dev string:x908>", "<dev string:x90e>", "<dev string:x917>")
-  }, {
-    #name: "<dev string:x926>",
-    #default_val: 3,
-    #state: array("<dev string:x901>", "<dev string:x908>", "<dev string:x90e>", "<dev string:x917>")
-  }, {
-    #name: "<dev string:x939>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x310>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x94e>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x964>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x97a>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x98b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
-  }, {
-    #name: "<dev string:x99a>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x184>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x9ae>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x9bd>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
-  }, {
-    #name: "<dev string:x9cf>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x9e6>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x9fd>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x15a>",
-    #default_val: 3,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:xdc>",
-    #default_val: 1,
-    #state: array("<dev string:xa0f>", "<dev string:x8f0>", "<dev string:xa17>")
-  }, {
-    #name: "<dev string:xf1>",
-    #default_val: 2,
-    #state: array("<dev string:xa1e>", "<dev string:xa0f>", "<dev string:x8f0>", "<dev string:xa17>", "<dev string:xa28>")
-  }, {
-    #name: "<dev string:x2ff>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:xa2f>", "<dev string:x8f0>", "<dev string:xa37>")
-  }, {
-    #name: "<dev string:x2ef>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:xa2f>", "<dev string:x8f0>", "<dev string:xa37>")
-  }, {
-    #name: "<dev string:x1ee>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1db>",
-    #default_val: 5,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:xa3f>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x131>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:xa53>", "<dev string:xa60>")
-  }, {
-    #name: "<dev string:x144>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:xa68>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x2b8>",
-    #default_val: 2,
-    #state: array("<dev string:x394>", "<dev string:xa0f>", "<dev string:x8f0>", "<dev string:xa17>")
-  }, {
-    #name: "<dev string:xa7c>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x105>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:xa96>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xaa9>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xac0>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:xad5>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xaf5>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xb11>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xb30>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xb46>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xb60>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xb76>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xb92>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xbab>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xbc3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xbd9>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xbf3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xc0e>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xc29>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xc44>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xc5f>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xc7b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xc97>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xcb3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xccf>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xce6>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xcfd>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xd14>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xd2b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xd51>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xd72>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xd8a>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xda7>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xdc4>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xdde>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xdf8>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xe13>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xe2e>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xe48>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xe5b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xe77>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xe91>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xeae>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xec6>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xedd>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xef9>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xf0f>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xf25>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xf3a>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xf4e>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xf63>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xf77>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xf8e>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xfa3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xfc2>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xfd6>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xff4>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1011>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x102c>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1047>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x105c>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1072>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1084>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x109b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x10ab>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x10be>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x10d2>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x10f2>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1106>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1119>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x112d>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x114b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1160>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1174>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1187>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1198>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:xb4>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>", "<dev string:x11b2>")
-  }, {
-    #name: "<dev string:x1ae>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>", "<dev string:x11b2>")
-  }, {
-    #name: "<dev string:x11be>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x11d3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
-  }, {
-    #name: "<dev string:x11e4>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:x11fa>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
-  }, {
-    #name: "<dev string:xc7>",
-    #default_val: 1,
-    #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>", "<dev string:x11b2>")
-  }, {
-    #name: "<dev string:x1210>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1222>",
-    #default_val: 1,
-    #state: array("<dev string:x446>", "<dev string:xa1e>")
-  }, {
-    #name: "<dev string:x1230>",
-    #default_val: 0,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1244>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x1258>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x126d>",
-    #default_val: 0,
-    #state: array("<dev string:x37f>")
-  }, {
-    #name: "<dev string:x128a>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x12a3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x12b7>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x12ca>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x12e1>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x12fb>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1313>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1327>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x133c>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x134f>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1368>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x137b>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x1390>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x13a3>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x13ba>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
-  }, {
-    #name: "<dev string:x13cd>",
-    #default_val: 1,
-    #state: array("<dev string:x394>", "<dev string:x39a>")
+    #name: "<dev string:x8e>", #default_val: 1, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x38c>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x39f>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x3ab>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x3bb>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x3cd>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x3da>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x3e6>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x3f4>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x400>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x40e>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x427>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x212>", #default_val: 2, #state: array("<dev string:x394>", "<dev string:x436>", "<dev string:x446>", "<dev string:x450>")
+  }, {
+    #name: "<dev string:x459>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x475>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x48d>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x4a5>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x4b9>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x4d6>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x4ef>", #default_val: 1, #state: array("<dev string:x4fe>", "<dev string:x446>", "<dev string:x507>")
+  }, {
+    #name: "<dev string:x50e>", #default_val: 1, #state: array("<dev string:x4fe>", "<dev string:x446>", "<dev string:x507>")
+  }, {
+    #name: "<dev string:x521>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x531>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x545>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x338>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x554>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x568>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x57a>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x58c>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x5a3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x34d>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x325>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x5b5>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x446>", "<dev string:x5c4>")
+  }, {
+    #name: "<dev string:x5d0>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x5e4>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x5f7>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x226>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x238>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x24d>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x264>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x607>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x278>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x620>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x28c>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x633>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x2a1>", #default_val: 1, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x64e>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1fe>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x661>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x674>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x687>", #default_val: 1, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x69b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x6b1>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x6c5>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x6d7>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x6e7>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x6fc>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x70c>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x721>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x739>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x74d>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x75f>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x776>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x788>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x79a>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x2e0>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x7ad>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x7bb>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x7c9>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x2ce>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x7d8>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x7e9>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x7fa>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x9b>", #default_val: 1, #state: array("<dev string:x812>", "<dev string:x446>", "<dev string:x819>")
+  }, {
+    #name: "<dev string:x820>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x83a>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x851>", #default_val: 1, #state: array("<dev string:x812>", "<dev string:x446>", "<dev string:x819>")
+  }, {
+    #name: "<dev string:x869>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x11c>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x88d>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x89f>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
+  }, {
+    #name: "<dev string:x8b6>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
+  }, {
+    #name: "<dev string:x8c6>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
+  }, {
+    #name: "<dev string:x8d7>", #default_val: 1, #state: array("<dev string:x8e8>", "<dev string:x8f0>", "<dev string:x8f9>")
+  }, {
+    #name: "<dev string:x171>", #default_val: 0, #state: array("<dev string:x901>", "<dev string:x908>", "<dev string:x90e>", "<dev string:x917>")
+  }, {
+    #name: "<dev string:x926>", #default_val: 3, #state: array("<dev string:x901>", "<dev string:x908>", "<dev string:x90e>", "<dev string:x917>")
+  }, {
+    #name: "<dev string:x939>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x310>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x94e>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x964>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x97a>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x98b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
+  }, {
+    #name: "<dev string:x99a>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x184>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x9ae>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x9bd>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
+  }, {
+    #name: "<dev string:x9cf>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x9e6>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x9fd>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x15a>", #default_val: 3, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:xdc>", #default_val: 1, #state: array("<dev string:xa0f>", "<dev string:x8f0>", "<dev string:xa17>")
+  }, {
+    #name: "<dev string:xf1>", #default_val: 2, #state: array("<dev string:xa1e>", "<dev string:xa0f>", "<dev string:x8f0>", "<dev string:xa17>", "<dev string:xa28>")
+  }, {
+    #name: "<dev string:x2ff>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:xa2f>", "<dev string:x8f0>", "<dev string:xa37>")
+  }, {
+    #name: "<dev string:x2ef>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:xa2f>", "<dev string:x8f0>", "<dev string:xa37>")
+  }, {
+    #name: "<dev string:x1ee>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1db>", #default_val: 5, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:xa3f>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x131>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:xa53>", "<dev string:xa60>")
+  }, {
+    #name: "<dev string:x144>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:xa68>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x2b8>", #default_val: 2, #state: array("<dev string:x394>", "<dev string:xa0f>", "<dev string:x8f0>", "<dev string:xa17>")
+  }, {
+    #name: "<dev string:xa7c>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x105>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:xa96>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xaa9>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xac0>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:xad5>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xaf5>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xb11>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xb30>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xb46>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xb60>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xb76>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xb92>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xbab>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xbc3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xbd9>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xbf3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xc0e>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xc29>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xc44>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xc5f>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xc7b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xc97>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xcb3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xccf>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xce6>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xcfd>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xd14>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xd2b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xd51>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xd72>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xd8a>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xda7>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xdc4>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xdde>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xdf8>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xe13>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xe2e>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xe48>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xe5b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xe77>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xe91>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xeae>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xec6>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xedd>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xef9>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xf0f>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xf25>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xf3a>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xf4e>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xf63>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xf77>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xf8e>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xfa3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xfc2>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xfd6>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xff4>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1011>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x102c>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1047>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x105c>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1072>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1084>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x109b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x10ab>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x10be>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x10d2>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x10f2>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1106>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1119>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x112d>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x114b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1160>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1174>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1187>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1198>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:xb4>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>", "<dev string:x11b2>")
+  }, {
+    #name: "<dev string:x1ae>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>", "<dev string:x11b2>")
+  }, {
+    #name: "<dev string:x11be>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x11d3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>", "<dev string:x8af>")
+  }, {
+    #name: "<dev string:x11e4>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:x11fa>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>")
+  }, {
+    #name: "<dev string:xc7>", #default_val: 1, #state: array("<dev string:x87d>", "<dev string:x446>", "<dev string:x884>", "<dev string:x11b2>")
+  }, {
+    #name: "<dev string:x1210>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1222>", #default_val: 1, #state: array("<dev string:x446>", "<dev string:xa1e>")
+  }, {
+    #name: "<dev string:x1230>", #default_val: 0, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1244>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x1258>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x126d>", #default_val: 0, #state: array("<dev string:x37f>")
+  }, {
+    #name: "<dev string:x128a>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x12a3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x12b7>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x12ca>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x12e1>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x12fb>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1313>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1327>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x133c>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x134f>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1368>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x137b>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x1390>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x13a3>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x13ba>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
+  }, {
+    #name: "<dev string:x13cd>", #default_val: 1, #state: array("<dev string:x394>", "<dev string:x39a>")
   });
 }

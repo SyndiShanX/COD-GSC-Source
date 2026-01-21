@@ -89,14 +89,14 @@ InitRunNGun() {
     self notify("stop_move_anim_update");
     self.update_move_anim_type = undefined;
 
-    self clearanim( % combatrun_backward, 0.2);
-    self clearanim( % combatrun_right, 0.2);
-    self clearanim( % combatrun_left, 0.2);
+    self clearanim(%combatrun_backward, 0.2);
+    self clearanim(%combatrun_right, 0.2);
+    self clearanim(%combatrun_left, 0.2);
 
-    self clearanim( % w_aim_2, 0.2);
-    self clearanim( % w_aim_4, 0.2);
-    self clearanim( % w_aim_6, 0.2);
-    self clearanim( % w_aim_8, 0.2);
+    self clearanim(%w_aim_2, 0.2);
+    self clearanim(%w_aim_4, 0.2);
+    self clearanim(%w_aim_6, 0.2);
+    self clearanim(%w_aim_8, 0.2);
 
     self.runNGun = true;
   }
@@ -104,7 +104,7 @@ InitRunNGun() {
 
 StopRunNGun() {
   if(isDefined(self.runNGun)) {
-    self clearanim( % run_n_gun, 0.2);
+    self clearanim(%run_n_gun, 0.2);
     self.runNGun = undefined;
   }
 
@@ -128,7 +128,7 @@ RunNGun(validTarget) {
 
   if(!validTarget || (squared(enemyyaw) > maxRunNGunAngle * maxRunNGunAngle)) {
     // phase out run n gun
-    self clearAnim( % add_fire, 0);
+    self clearAnim(%add_fire, 0);
     if(squared(self.runNGunWeight) < runNGunIncrement * runNGunIncrement) {
       self.runNGunWeight = 0;
       self.runNGun = undefined;
@@ -176,7 +176,7 @@ RunNGun(validTarget) {
     }
   }
 
-  self setFlaggedAnimKnob("runanim", % run_n_gun, 1, 0.3, 0.8);
+  self setFlaggedAnimKnob("runanim", %run_n_gun, 1, 0.3, 0.8);
 
   self.a.allowedPartialReloadOnTheRunTime = gettime() + 500;
 
@@ -194,7 +194,7 @@ RunNGun_Backward() {
 
   InitRunNGun();
 
-  self setFlaggedAnimKnob("runanim", % combatwalk_B, 1, 0.3, 0.8);
+  self setFlaggedAnimKnob("runanim", %combatwalk_B, 1, 0.3, 0.8);
 
   if(isplayer(self.enemy))
     self updatePlayerSightAccuracy();
@@ -203,7 +203,7 @@ RunNGun_Backward() {
 
   self thread stopShootWhileMovingThreads();
 
-  self clearAnim( % combatwalk_B, 0.2);
+  self clearAnim(%combatwalk_B, 0.2);
 }
 
 ReactToBulletsInterruptCheck() {
@@ -344,7 +344,7 @@ MoveStandCombatNormal() {
 
   rate = GetMovePlaybackRate();
 
-  self setanimknob( % combatrun, 1.0, 0.5, rate);
+  self setanimknob(%combatrun, 1.0, 0.5, rate);
 
   decidedAnimation = false;
 
@@ -427,12 +427,12 @@ faceEnemyAimTracking() {
 
   self setDefaultAimLimits();
 
-  self setAnimLimited( % walk_aim_2);
-  self setAnimLimited( % walk_aim_4);
-  self setAnimLimited( % walk_aim_6);
-  self setAnimLimited( % walk_aim_8);
+  self setAnimLimited(%walk_aim_2);
+  self setAnimLimited(%walk_aim_4);
+  self setAnimLimited(%walk_aim_6);
+  self setAnimLimited(%walk_aim_8);
 
-  self animscripts\shared::trackLoop( % w_aim_2, % w_aim_4, % w_aim_6, % w_aim_8);
+  self animscripts\shared::trackLoop(%w_aim_2, %w_aim_4, %w_aim_6, %w_aim_8);
 }
 
 endFaceEnemyAimTracking() {
@@ -532,11 +532,11 @@ GetPredictedYawToEnemy(lookAheadTime) {
 MoveStandNoncombatNormal() {
   self endon("movemode");
 
-  self clearanim( % combatrun, 0.6);
+  self clearanim(%combatrun, 0.6);
 
   rate = GetMovePlaybackRate();
 
-  self setanimknoball( % combatrun, % body, 1, 0.2, rate);
+  self setanimknoball(%combatrun, %body, 1, 0.2, rate);
 
   if(self ShouldSprint())
     runAnim = GetSprintAnim();
@@ -559,7 +559,7 @@ MoveStandNoncombatNormal() {
 MoveCrouchRunOverride() {
   self endon("movemode");
 
-  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, % body, 1, 0.4, self.moveplaybackrate);
+  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, %body, 1, 0.4, self.moveplaybackrate);
   animscripts\shared::DoNoteTracks("runanim");
 }
 
@@ -571,9 +571,9 @@ MoveCrouchRunNormal() {
 
   self setanimknob(forward_anim, 1, 0.4);
 
-  self thread UpdateMoveAnimWeights("crouchrun", forward_anim, % crouch_fastwalk_B, % crouch_fastwalk_L, % crouch_fastwalk_R);
+  self thread UpdateMoveAnimWeights("crouchrun", forward_anim, %crouch_fastwalk_B, %crouch_fastwalk_L, %crouch_fastwalk_R);
 
-  self setflaggedanimknoball("runanim", % crouchrun, % body, 1, 0.2, self.moveplaybackrate);
+  self setflaggedanimknoball("runanim", %crouchrun, %body, 1, 0.2, self.moveplaybackrate);
 
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
@@ -637,7 +637,7 @@ ReloadStandRunInternal() {
 
   flagName = "reload_" + getUniqueFlagNameIndex();
 
-  self setFlaggedAnimKnobAllRestart(flagName, % run_lowready_reload, % body, 1, 0.25);
+  self setFlaggedAnimKnobAllRestart(flagName, %run_lowready_reload, %body, 1, 0.25);
 
   self.update_move_front_bias = true;
 
@@ -651,8 +651,8 @@ ReloadStandRunInternal() {
 runLoopIsNearBeginning() {
   // there are actually 3 loops (left foot, right foot) in one animation loop.
 
-  animfraction = self getAnimTime( % walk_and_run_loops);
-  loopLength = getAnimLength( % run_lowready_F) / 3.0;
+  animfraction = self getAnimTime(%walk_and_run_loops);
+  loopLength = getAnimLength(%run_lowready_F) / 3.0;
   animfraction *= 3.0;
   if(animfraction > 3)
     animfraction -= 2.0;
@@ -677,7 +677,7 @@ SetMoveNonForwardAnims(backAnim, leftAnim, rightAnim, rate) {
 }
 
 SetCombatStandMoveAnimWeights(moveAnimType) {
-  UpdateMoveAnimWeights(moveAnimType, % combatrun_forward, % combatrun_backward, % combatrun_left, % combatrun_right);
+  UpdateMoveAnimWeights(moveAnimType, %combatrun_forward, %combatrun_backward, %combatrun_left, %combatrun_right);
 }
 
 UpdateMoveAnimWeights(moveAnimType, frontAnim, backAnim, leftAnim, rightAnim) {
@@ -769,9 +769,9 @@ changeWeaponStandRun() {
     return false;
 
   if(wantShotgun)
-    shotgunSwitchStandRunInternal("shotgunPullout", % shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
+    shotgunSwitchStandRunInternal("shotgunPullout", %shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
   else
-    shotgunSwitchStandRunInternal("shotgunPutaway", % shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
+    shotgunSwitchStandRunInternal("shotgunPutaway", %shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
 
   self notify("switchEnded");
 
@@ -781,7 +781,7 @@ changeWeaponStandRun() {
 shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {
   self endon("movemode");
 
-  self setFlaggedAnimKnobAllRestart(flagName, switchAnim, % body, 1, 0.25);
+  self setFlaggedAnimKnobAllRestart(flagName, switchAnim, %body, 1, 0.25);
 
   self.update_move_front_bias = true;
 
@@ -797,8 +797,7 @@ shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTa
 
 interceptNotetracksForWeaponSwitch(notetrack) {
   if(notetrack == "gun_2_chest" || notetrack == "gun_2_back")
-    return true; // "don't do the default behavior for this notetrack"
-}
+    return true; // "don't do the default behavior for this notetrack"}
 
 watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {
   self endon("killanimscript");

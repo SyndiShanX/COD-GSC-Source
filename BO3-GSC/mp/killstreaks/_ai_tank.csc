@@ -49,15 +49,15 @@ function missile_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   }
   missiles_loaded = newval;
   if(newval == 2) {
-    self setanimrestart( % mp_vehicles::o_drone_tank_missile1_fire, 1, 0, 0.5);
+    self setanimrestart(%mp_vehicles::o_drone_tank_missile1_fire, 1, 0, 0.5);
   } else {
     if(newval == 1) {
-      self setanimrestart( % mp_vehicles::o_drone_tank_missile2_fire, 1, 0, 0.5);
+      self setanimrestart(%mp_vehicles::o_drone_tank_missile2_fire, 1, 0, 0.5);
     } else {
       if(newval == 0) {
-        self setanimrestart( % mp_vehicles::o_drone_tank_missile3_fire, 1, 0, 0.5);
+        self setanimrestart(%mp_vehicles::o_drone_tank_missile3_fire, 1, 0, 0.5);
       } else if(newval == 3) {
-        self setanimrestart( % mp_vehicles::o_drone_tank_missile_full_reload, 1, 0, 1);
+        self setanimrestart(%mp_vehicles::o_drone_tank_missile_full_reload, 1, 0, 1);
       }
     }
   }

@@ -16,7 +16,7 @@ main(model, type, no_death) {
   build_deathmodel("vehicle_blackhawk_low_thermal");
   build_deathmodel("vehicle_blackhawk_hero_sas_night");
 
-  build_drive( % bh_rotors, undefined, 0);
+  build_drive(%bh_rotors, undefined, 0);
 
   if(!isDefined(no_death)) {
     blackhawk_death_fx = [];
@@ -274,10 +274,7 @@ and these lines in your CSV:
 include,vehicle_blackhawk_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
-defaultmdl="vehicle_blackhawk"
-default:"vehicletype" "blackhawk"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_blackhawk"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_blackhawk_hero_sas_night (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -288,10 +285,7 @@ and these lines in your CSV:
 include,vehicle_blackhawk_hero_sas_night_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
-defaultmdl="vehicle_blackhawk_hero_sas_night"
-default:"vehicletype" "blackhawk"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_blackhawk_hero_sas_night"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_blackhawk_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -302,10 +296,7 @@ and these lines in your CSV:
 include,vehicle_blackhawk_low_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
-defaultmdl="vehicle_blackhawk_low"
-default:"vehicletype" "blackhawk"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_blackhawk_low"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_blackhawk_low_thermal (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -316,10 +307,7 @@ and these lines in your CSV:
 include,vehicle_blackhawk_low_thermal_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
-defaultmdl="vehicle_blackhawk_low_thermal"
-default:"vehicletype" "blackhawk"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_blackhawk_low_thermal"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_blackhawk_minigun_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -329,7 +317,5 @@ maps\_blackhawk_minigun::main( "vehicle_blackhawk_minigun_low" );
 and these lines in your CSV:
 include,vehicle_blackhawk_minigun_low_blackhawk_minigun
 
-defaultmdl="vehicle_blackhawk_minigun_low"
-default:"vehicletype" "blackhawk_minigun"
-default:"script_team" "allies"
+defaultmdl="vehicle_blackhawk_minigun_low"default:"vehicletype" "blackhawk_minigun"default:"script_team" "allies"
 */

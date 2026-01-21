@@ -17,7 +17,7 @@ main() {
   var_2.angles = var_1.angles;
   var_1 delete();
   var_3 = "vfx/moments/oil_rocks/vfx_bridge_coll_watersplash";
-  maps\_anim::create_anim_scene(#animtree, var_0, % oilrocks_bridge_explosion_a_anim, "oilrocks_bridgeA", "oilrocks_bridge_explosion_A");
+  maps\_anim::create_anim_scene(#animtree, var_0, %oilrocks_bridge_explosion_a_anim, "oilrocks_bridgeA", "oilrocks_bridge_explosion_A");
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_bridge_pc02", var_3, var_3, 60);
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_bridge_pc03", var_3, var_3, 60);
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_bridge_pc04", var_3, var_3, 60);
@@ -42,7 +42,7 @@ main() {
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_bridge_pc31", var_3, var_3, 60);
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_bridge_pc32", var_3, var_3, 60);
   maps\_anim::note_track_trace_to_efx("start", undefined, "tag_bridge_pc33", var_3, var_3, 60);
-  maps\_anim::create_anim_scene(#animtree, var_0, % oilrocks_bridge_explosion_b_anim, "oilrocks_bridgeB", "oilrocks_bridge_explosion_B");
+  maps\_anim::create_anim_scene(#animtree, var_0, %oilrocks_bridge_explosion_b_anim, "oilrocks_bridgeB", "oilrocks_bridge_explosion_B");
   level waittill("exploding_bridge_exploder");
   var_4 = [maps\_utility::spawn_anim_model("oilrocks_bridgeA", var_2.origin, var_2.angles), maps\_utility::spawn_anim_model("oilrocks_bridgeB", var_2.origin, var_2.angles)];
   var_2 maps\_anim::anim_single(var_4, var_0);

@@ -24,9 +24,9 @@ main() {
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
   self animscripts\traverse\shared::traversestartragdolldeath();
-  self setflaggedanimknoballrestart("climbanim", startanim, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("climbanim", startanim, %body, 1, 0.1, 1);
   self animscripts\shared::donotetracks("climbanim");
-  self setflaggedanimknoballrestart("climbanim", climbanim, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("climbanim", climbanim, %body, 1, 0.1, 1);
   endanimdelta = getmovedelta(endanim, 0, 1);
   endnode = self getnegotiationendnode();
   assert(isDefined(endnode));
@@ -37,7 +37,7 @@ main() {
 
   if(climbingtime > 0) {
     self animscripts\shared::donotetracksfortime(climbingtime, "climbanim");
-    self setflaggedanimknoballrestart("climbanim", endanim, % body, 1, 0.1, 1);
+    self setflaggedanimknoballrestart("climbanim", endanim, %body, 1, 0.1, 1);
     self animscripts\shared::donotetracks("climbanim");
   }
 
@@ -46,5 +46,5 @@ main() {
   self.a.movement = "run";
   self.a.pose = "crouch";
   self.a.alertness = "alert";
-  self setanimknoballrestart(animscripts\run::getcrouchrunanim(), % body, 1, 0.1, 1);
+  self setanimknoballrestart(animscripts\run::getcrouchrunanim(), %body, 1, 0.1, 1);
 }

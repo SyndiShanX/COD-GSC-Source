@@ -288,7 +288,7 @@ donodeexitanimation(var_0, var_1) {
     self animmode("zonly_physics", 0);
 
   self orientmode("face angle", self.angles[1]);
-  self setflaggedanimknoballrestart("coverexit", var_2, % body, 1, var_5, self.movetransitionrate);
+  self setflaggedanimknoballrestart("coverexit", var_2, %body, 1, var_5, self.movetransitionrate);
   animscripts\shared::donotetracks("coverexit");
   self.a.pose = "stand";
   self.a.movement = "run";
@@ -296,7 +296,7 @@ donodeexitanimation(var_0, var_1) {
   self orientmode("face motion");
   self animmode("none", 0);
   finishcoverexitnotetracks("coverexit");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self orientmode("face default");
   self animmode("normal", 0);
 }
@@ -351,7 +351,7 @@ custommovetransition() {
   if(!isDefined(var_1))
     var_1 = 0.2;
 
-  self clearanim( % root, var_1);
+  self clearanim(%root, var_1);
   self orientmode("face default");
   self animmode("none", 0);
 }

@@ -298,8 +298,7 @@ orienttonormal(normal) {
   return plant_angle;
 }
 
-array_levelthread(ents, process,
-  var, excluders) {
+array_levelthread(ents, process, var, excluders) {
   exclude = [];
 
   for(i = 0; i < ents.size; i++)
@@ -317,8 +316,7 @@ array_levelthread(ents, process,
   for(i = 0; i < ents.size; i++) {
     if(!exclude[i]) {
       if(isDefined(var)) {
-        level thread[[process]](ents[i],
-          var);
+        level thread[[process]](ents[i], var);
         continue;
       }
 
@@ -1484,9 +1482,7 @@ comparesizesfx(org, array, dist, comparefunc) {
   for(i = 1; i < keys.size; i++) {
     newdistsqr = distancesquared(array[keys[i]].v["origin"], org);
 
-    if([
-        [comparefunc]
-      ](newdistsqr, distsqr)) {
+    if([[comparefunc]](newdistsqr, distsqr)) {
       continue;
     }
     distsqr = newdistsqr;
@@ -1531,9 +1527,7 @@ comparesizes(org, array, dist, comparefunc) {
     }
     newdistsqr = distancesquared(array[keys[i]].origin, org);
 
-    if([
-        [comparefunc]
-      ](newdistsqr, distsqr)) {
+    if([[comparefunc]](newdistsqr, distsqr)) {
       continue;
     }
     distsqr = newdistsqr;
@@ -1788,9 +1782,7 @@ waslastround() {
     return true;
 
   if(isDefined(level.shouldplayovertimeround)) {
-    if([
-        [level.shouldplayovertimeround]
-      ]()) {
+    if([[level.shouldplayovertimeround]]()) {
       level.nextroundisovertime = 1;
       return false;
     } else if(isDefined(game["overtime_round"]))

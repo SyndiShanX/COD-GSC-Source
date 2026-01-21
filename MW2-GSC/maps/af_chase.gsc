@@ -627,13 +627,7 @@ dialog_radio() {
 
   level.player radio_dialogue("afchase_shp_observe");
 
-  //"afchase_shp_uavsupport"
-  //"afchase_shp_dangerclose"
-  //"afchase_shp_clearedhot"
-  //"afchase_shp_takeem"
-  //"afchase_shp_tryagain"
-
-  flag_wait("exit_caves");
+  //"afchase_shp_uavsupport"//"afchase_shp_dangerclose"//"afchase_shp_clearedhot"//"afchase_shp_takeem"//"afchase_shp_tryagain"flag_wait("exit_caves");
 
   wait 4;
   level.player radio_dialogue("afchase_shp_uavsupport");

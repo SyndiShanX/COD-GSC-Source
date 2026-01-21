@@ -1107,9 +1107,7 @@ display_custom_nameplate(var_0, var_1, var_2) {
       break;
     }
 
-    if([
-        [var_0]
-      ]()) {
+    if([[var_0]]()) {
       if(!isDefined(var_5))
         var_5 = create_nameplate_hud(var_3, var_4);
     } else if(isDefined(var_5))

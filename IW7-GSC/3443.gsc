@@ -30,9 +30,7 @@ bot_killstreak_setup() {
     bot_register_killstreak_func("directional_uav", ::bot_killstreak_simple_use);
 
     if(isDefined(level.mapcustombotkillstreakfunc)) {
-      [
-        [level.mapcustombotkillstreakfunc]
-      ]();
+      [[level.mapcustombotkillstreakfunc]]();
     }
   }
 

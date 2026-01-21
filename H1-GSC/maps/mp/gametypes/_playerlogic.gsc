@@ -105,9 +105,7 @@ mayspawn(var_0) {
         return 0;
     }
 
-    if(isDefined(level.disablespawningforplayerfunc) && [
-        [level.disablespawningforplayerfunc]
-      ](self))
+    if(isDefined(level.disablespawningforplayerfunc) && [[level.disablespawningforplayerfunc]](self))
       return 0;
   }
 

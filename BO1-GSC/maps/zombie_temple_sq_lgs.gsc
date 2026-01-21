@@ -63,9 +63,7 @@ first_damage() {
   self endon("first_damage_done");
   while(1) {
     self waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" ||
-        dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" ||
-        dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       self.owner_ent notify("triggered");
       attacker thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest3", undefined, 1);
       return;

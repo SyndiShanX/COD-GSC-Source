@@ -737,9 +737,7 @@ function wasp_cleanup_failsafe() {
 function wasp_death() {
   self waittill("death", attacker);
   if(get_current_wasp_count() == 0 && level.zombie_total == 0) {
-    if(!isDefined(level.zm_ai_round_over) || [
-        [level.zm_ai_round_over]
-      ]()) {
+    if(!isDefined(level.zm_ai_round_over) || [[level.zm_ai_round_over]]()) {
       level.last_ai_origin = self.origin;
       level notify("last_ai_down", self);
     }
@@ -750,9 +748,7 @@ function wasp_death() {
     }
     attacker zm_score::player_add_points("death_wasp", 70);
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](attacker, self);
+      [[level.hero_power_update]](attacker, self);
     }
     attacker zm_stats::increment_client_stat("zwasp_killed");
     attacker zm_stats::increment_player_stat("zwasp_killed");
@@ -815,9 +811,7 @@ function special_wasp_spawn(n_to_spawn = 1, spawn_point, n_radius = 32, n_half_h
       spawn_enemy = players[0];
     }
     if(isDefined(level.wasp_spawn_func)) {
-      spawn_point = [
-        [level.wasp_spawn_func]
-      ](spawn_enemy);
+      spawn_point = [[level.wasp_spawn_func]](spawn_enemy);
     }
     while(!isDefined(spawn_point)) {
       if(!isDefined(spawn_point)) {

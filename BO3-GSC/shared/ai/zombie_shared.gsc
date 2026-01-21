@@ -201,9 +201,7 @@ function handlenotetrack(note, flagname, customfunction, var1) {
   if(isai(self) && isDefined(anim.notetracks)) {
     notetrackfunc = anim.notetracks[note];
     if(isDefined(notetrackfunc)) {
-      return [
-        [notetrackfunc]
-      ](note, flagname);
+      return [[notetrackfunc]](note, flagname);
     }
   }
   switch (note) {
@@ -295,9 +293,7 @@ function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfun
     timetaken = gettime() - time;
     if(timetaken < 0.05) {
       time = gettime();
-      returnednote = [
-        [notetracksfunc]
-      ](flagname, customfunction, var1);
+      returnednote = [[notetracksfunc]](flagname, customfunction, var1);
       timetaken = gettime() - time;
       if(timetaken < 0.05) {
         println(((((gettime() + "") + flagname) + "") + returnednote) + "");

@@ -373,46 +373,32 @@ updateGameEvents() {
   }
   if(level.teamBased) {
     if(level.everExisted["allies"] && !level.aliveCount["allies"] && level.everExisted["axis"] && !level.aliveCount["axis"] && !level.playerLives["allies"] && !level.playerLives["axis"]) {
-      [
-        [level.onDeadEvent]
-      ]("all");
+      [[level.onDeadEvent]]("all");
       return;
     }
     if(level.everExisted["allies"] && !level.aliveCount["allies"] && !level.playerLives["allies"]) {
-      [
-        [level.onDeadEvent]
-      ]("allies");
+      [[level.onDeadEvent]]("allies");
       return;
     }
     if(level.everExisted["axis"] && !level.aliveCount["axis"] && !level.playerLives["axis"]) {
-      [
-        [level.onDeadEvent]
-      ]("axis");
+      [[level.onDeadEvent]]("axis");
       return;
     }
     if(level.lastAliveCount["allies"] > 1 && level.aliveCount["allies"] == 1 && level.playerLives["allies"] == 1) {
-      [
-        [level.onOneLeftEvent]
-      ]("allies");
+      [[level.onOneLeftEvent]]("allies");
       return;
     }
     if(level.lastAliveCount["axis"] > 1 && level.aliveCount["axis"] == 1 && level.playerLives["axis"] == 1) {
-      [
-        [level.onOneLeftEvent]
-      ]("axis");
+      [[level.onOneLeftEvent]]("axis");
       return;
     }
   } else {
     if((!level.aliveCount["allies"] && !level.aliveCount["axis"]) && (!level.playerLives["allies"] && !level.playerLives["axis"]) && level.maxPlayerCount > 1) {
-      [
-        [level.onDeadEvent]
-      ]("all");
+      [[level.onDeadEvent]]("all");
       return;
     }
     if((level.aliveCount["allies"] + level.aliveCount["axis"] == 1) && (level.playerLives["allies"] + level.playerLives["axis"] == 1) && level.maxPlayerCount > 1) {
-      [
-        [level.onOneLeftEvent]
-      ]("all");
+      [[level.onOneLeftEvent]]("all");
       return;
     }
   }
@@ -498,8 +484,7 @@ spawnPlayer() {
   self setClientDvar("killcam_title", "@MP_KILLCAM");
   self setDepthOfField(0, 0, 512, 512, 4, 0);
   {
-    if(isDefined(level.onSpawnPlayerUnified) &&
-      GetDvarInt("scr_disableunifiedspawning") == 0) {
+    if(isDefined(level.onSpawnPlayerUnified) && GetDvarInt("scr_disableunifiedspawning") == 0) {
       self[[level.onSpawnPlayerUnified]]();
     } else {
       self[[level.onSpawnPlayer]]();
@@ -925,43 +910,15 @@ endGame(winner, endReasonText) {
     if(level.players[index].cur_kill_streak > level.players[index].pers["best_kill_streak"])
       level.players[index].pers["best_kill_streak"] = level.players[index].cur_kill_streak;
     if(level.ps3) {
-      level.players[index] setClientDvars("ns_n", nemesis,
-        "ns_r", level.players[index].pers["nemesis_rank"],
-        "ns_ri", level.players[index].pers["nemesis_rankIcon"]);
-      level.players[index] setClientDvars("ns_x", level.players[index].pers["nemesis_xp"],
-        "ns_id", level.players[index].pers["nemesis_xuid"]);
-      level.players[index] setClientDvars("ns_k", level.players[index].pers["killed_players"][nemesis],
-        "ps_k", level.players[index].kills);
-      level.players[index] setClientDvars("ns_d", level.players[index].pers["killed_by"][nemesis],
-        "ps_n", level.players[index].name);
-      level.players[index] setClientDvars("ps_d", level.players[index].deaths,
-        "ps_h", level.players[index].headshots,
-        "ps_kds", spread);
-      level.players[index] setClientDvars("ps_st", level.players[index].pers["best_kill_streak"],
-        "ps_r", level.players[index].pers["uav_used"],
-        "ps_ac", level.players[index].pers["artillery_used"]);
-      level.players[index] setClientDvars("ps_dc", level.players[index].pers["dogs_used"],
-        "ps_ak", level.players[index].pers["artillery_kills"],
-        "ps_dk", level.players[index].pers["dog_kills"]);
+      level.players[index] setClientDvars("ns_n", nemesis, "ns_r", level.players[index].pers["nemesis_rank"], "ns_ri", level.players[index].pers["nemesis_rankIcon"]);
+      level.players[index] setClientDvars("ns_x", level.players[index].pers["nemesis_xp"], "ns_id", level.players[index].pers["nemesis_xuid"]);
+      level.players[index] setClientDvars("ns_k", level.players[index].pers["killed_players"][nemesis], "ps_k", level.players[index].kills);
+      level.players[index] setClientDvars("ns_d", level.players[index].pers["killed_by"][nemesis], "ps_n", level.players[index].name);
+      level.players[index] setClientDvars("ps_d", level.players[index].deaths, "ps_h", level.players[index].headshots, "ps_kds", spread);
+      level.players[index] setClientDvars("ps_st", level.players[index].pers["best_kill_streak"], "ps_r", level.players[index].pers["uav_used"], "ps_ac", level.players[index].pers["artillery_used"]);
+      level.players[index] setClientDvars("ps_dc", level.players[index].pers["dogs_used"], "ps_ak", level.players[index].pers["artillery_kills"], "ps_dk", level.players[index].pers["dog_kills"]);
     } else {
-      level.players[index] setClientDvars("ns_n", nemesis,
-        "ns_r", level.players[index].pers["nemesis_rank"],
-        "ns_ri", level.players[index].pers["nemesis_rankIcon"],
-        "ns_x", level.players[index].pers["nemesis_xp"],
-        "ns_id", level.players[index].pers["nemesis_xuid"],
-        "ns_k", level.players[index].pers["killed_players"][nemesis],
-        "ns_d", level.players[index].pers["killed_by"][nemesis],
-        "ps_n", level.players[index].name,
-        "ps_k", level.players[index].kills,
-        "ps_d", level.players[index].deaths,
-        "ps_h", level.players[index].headshots,
-        "ps_kds", spread,
-        "ps_st", level.players[index].pers["best_kill_streak"],
-        "ps_r", level.players[index].pers["uav_used"],
-        "ps_ac", level.players[index].pers["artillery_used"],
-        "ps_dc", level.players[index].pers["dogs_used"],
-        "ps_ak", level.players[index].pers["artillery_kills"],
-        "ps_dk", level.players[index].pers["dog_kills"]);
+      level.players[index] setClientDvars("ns_n", nemesis, "ns_r", level.players[index].pers["nemesis_rank"], "ns_ri", level.players[index].pers["nemesis_rankIcon"], "ns_x", level.players[index].pers["nemesis_xp"], "ns_id", level.players[index].pers["nemesis_xuid"], "ns_k", level.players[index].pers["killed_players"][nemesis], "ns_d", level.players[index].pers["killed_by"][nemesis], "ps_n", level.players[index].name, "ps_k", level.players[index].kills, "ps_d", level.players[index].deaths, "ps_h", level.players[index].headshots, "ps_kds", spread, "ps_st", level.players[index].pers["best_kill_streak"], "ps_r", level.players[index].pers["uav_used"], "ps_ac", level.players[index].pers["artillery_used"], "ps_dc", level.players[index].pers["dogs_used"], "ps_ak", level.players[index].pers["artillery_kills"], "ps_dk", level.players[index].pers["dog_kills"]);
     }
     recordPlayerStats(level.players[index], "highestKillStreak", level.players[index].pers["best_kill_streak"]);
     recordPlayerStats(level.players[index], "numUavCalled", level.players[index].pers["uav_used"]);
@@ -995,9 +952,7 @@ endGame(winner, endReasonText) {
           player thread[[level.onTeamOutcomeNotify]](winner, true, endReasonText);
         else
           player thread[[level.onOutcomeNotify]](winner, endReasonText);
-        player setClientDvars("ui_hud_hardcore", 1,
-          "cg_drawSpectatorMessages", 0,
-          "g_compassShowEnemies", 0);
+        player setClientDvars("ui_hud_hardcore", 1, "cg_drawSpectatorMessages", 0, "g_compassShowEnemies", 0);
       }
       if(level.teamBased && !(hitRoundLimit() || hitScoreLimit()))
         thread announceRoundWinner(winner, level.roundEndDelay / 4);
@@ -1105,9 +1060,7 @@ endGame(winner, endReasonText) {
       return;
     }
     if(isDefined(level.onRoundEndGame))
-      winner = [
-        [level.onRoundEndGame]
-      ](winner);
+      winner = [[level.onRoundEndGame]](winner);
     if(hitRoundLimit())
       endReasonText = game["strings"]["round_limit_reached"];
     else if(hitScoreLimit())
@@ -1134,9 +1087,7 @@ endGame(winner, endReasonText) {
       else if(!level.splitScreen)
         player playLocalSound(game["music"]["defeat"]);
     }
-    player setClientDvars("ui_hud_hardcore", 1,
-      "cg_drawSpectatorMessages", 0,
-      "g_compassShowEnemies", 0);
+    player setClientDvars("ui_hud_hardcore", 1, "cg_drawSpectatorMessages", 0, "g_compassShowEnemies", 0);
   }
   if(level.teamBased) {
     thread announceGameWinner(winner, level.postRoundTime / 2);
@@ -3175,43 +3126,19 @@ Callback_PlayerConnect() {
   lpselfnum = self getEntityNumber();
   lpGuid = self getGuid();
   logPrint("J;" + lpGuid + ";" + lpselfnum + ";" + self.name + "\n");
-  self setClientDvars("cg_drawSpectatorMessages", 1,
-    "ui_hud_hardcore", getDvar("ui_hud_hardcore"),
-    "player_sprintTime", getDvar("scr_player_sprinttime"),
-    "g_compassShowEnemies", getDvar("scr_game_forceradar"),
-    "ui_radar_client", getDvar("ui_radar_client"));
+  self setClientDvars("cg_drawSpectatorMessages", 1, "ui_hud_hardcore", getDvar("ui_hud_hardcore"), "player_sprintTime", getDvar("scr_player_sprinttime"), "g_compassShowEnemies", getDvar("scr_game_forceradar"), "ui_radar_client", getDvar("ui_radar_client"));
   if(level.hardcoreMode) {
-    self setClientDvars("cg_drawTalk", 3,
-      "cg_drawCrosshair", 0,
-      "cg_hudGrenadeIconMaxRangeFrag", 0);
+    self setClientDvars("cg_drawTalk", 3, "cg_drawCrosshair", 0, "cg_hudGrenadeIconMaxRangeFrag", 0);
   } else {
-    self setClientDvars("cg_drawCrosshair", 1,
-      "cg_hudGrenadeIconMaxRangeFrag", 250);
+    self setClientDvars("cg_drawCrosshair", 1, "cg_hudGrenadeIconMaxRangeFrag", 250);
   }
   if(level.splitScreen) {
-    self setClientDvars("cg_hudGrenadeIconHeight", "37.5",
-      "cg_hudGrenadeIconWidth", "37.5",
-      "cg_hudGrenadeIconOffset", "75",
-      "cg_hudGrenadePointerHeight", "18",
-      "cg_hudGrenadePointerWidth", "37.5",
-      "cg_hudGrenadePointerPivot", "18 40.5",
-      "cg_fovscale", "0.75");
+    self setClientDvars("cg_hudGrenadeIconHeight", "37.5", "cg_hudGrenadeIconWidth", "37.5", "cg_hudGrenadeIconOffset", "75", "cg_hudGrenadePointerHeight", "18", "cg_hudGrenadePointerWidth", "37.5", "cg_hudGrenadePointerPivot", "18 40.5", "cg_fovscale", "0.75");
   } else {
-    self setClientDvars("cg_hudGrenadeIconHeight", "25",
-      "cg_hudGrenadeIconWidth", "25",
-      "cg_hudGrenadeIconOffset", "50",
-      "cg_hudGrenadePointerHeight", "12",
-      "cg_hudGrenadePointerWidth", "25",
-      "cg_hudGrenadePointerPivot", "12 27",
-      "cg_fovscale", "1");
+    self setClientDvars("cg_hudGrenadeIconHeight", "25", "cg_hudGrenadeIconWidth", "25", "cg_hudGrenadeIconOffset", "50", "cg_hudGrenadePointerHeight", "12", "cg_hudGrenadePointerWidth", "25", "cg_hudGrenadePointerPivot", "12 27", "cg_fovscale", "1");
   }
   if(level.oldschool) {
-    self setClientDvars("ragdoll_explode_force", 60000,
-      "ragdoll_explode_upbias", 0.8,
-      "bg_fallDamageMinHeight", 256,
-      "bg_fallDamageMaxHeight", 512,
-      "player_sprintUnlimited", 1,
-      "player_clipSizeMultiplier", 2.0);
+    self setClientDvars("ragdoll_explode_force", 60000, "ragdoll_explode_upbias", 0.8, "bg_fallDamageMinHeight", 256, "bg_fallDamageMaxHeight", 512, "player_sprintUnlimited", 1, "player_clipSizeMultiplier", 2.0);
   }
   if(getdvarint("scr_hitloc_debug")) {
     for(i = 0; i < 6; i++) {
@@ -3260,24 +3187,7 @@ Callback_PlayerConnect() {
     self.pers["nemesis_xp"] = 0;
     self.pers["nemesis_xuid"] = "";
     self.pers["best_kill_streak"] = 0;
-    self setClientDvars("ns_n", "",
-      "ns_r", "0",
-      "ns_ri", "0",
-      "ns_x", "0",
-      "ns_k", "0",
-      "ns_d", "0",
-      "ns_id", "",
-      "ps_n", "",
-      "ps_h", "0",
-      "ps_k", "0",
-      "ps_d", "0",
-      "ps_kds", "0",
-      "ps_st", "0",
-      "ps_r", "0",
-      "ps_ac", "0",
-      "ps_ak", "0",
-      "ps_dc", "0",
-      "ps_dk", "0");
+    self setClientDvars("ns_n", "", "ns_r", "0", "ns_ri", "0", "ns_x", "0", "ns_k", "0", "ns_d", "0", "ns_id", "", "ps_n", "", "ps_h", "0", "ps_k", "0", "ps_d", "0", "ps_kds", "0", "ps_st", "0", "ps_r", "0", "ps_ac", "0", "ps_ak", "0", "ps_dc", "0", "ps_dk", "0");
   }
   self.leaderDialogQueue = [];
   self.leaderDialogActive = false;
@@ -3299,17 +3209,9 @@ Callback_PlayerConnect() {
   self.wasAliveAtMatchStart = false;
   self thread maps\mp\_flashgrenades::monitorFlash();
   if(level.numLives) {
-    self setClientDvars("cg_deadChatWithDead", "1",
-      "cg_deadChatWithTeam", "0",
-      "cg_deadHearTeamLiving", "0",
-      "cg_deadHearAllLiving", "0",
-      "cg_everyoneHearsEveryone", "0");
+    self setClientDvars("cg_deadChatWithDead", "1", "cg_deadChatWithTeam", "0", "cg_deadHearTeamLiving", "0", "cg_deadHearAllLiving", "0", "cg_everyoneHearsEveryone", "0");
   } else {
-    self setClientDvars("cg_deadChatWithDead", "0",
-      "cg_deadChatWithTeam", "1",
-      "cg_deadHearTeamLiving", "1",
-      "cg_deadHearAllLiving", "0",
-      "cg_everyoneHearsEveryone", "0");
+    self setClientDvars("cg_deadChatWithDead", "0", "cg_deadChatWithTeam", "1", "cg_deadHearTeamLiving", "1", "cg_deadHearAllLiving", "0", "cg_everyoneHearsEveryone", "0");
   }
   level.players[level.players.size] = self;
   if(level.splitscreen)
@@ -3320,8 +3222,7 @@ Callback_PlayerConnect() {
   if(game["state"] == "postgame") {
     self.pers["team"] = "spectator";
     self.team = "spectator";
-    self setClientDvars("ui_hud_hardcore", 1,
-      "cg_drawSpectatorMessages", 0);
+    self setClientDvars("ui_hud_hardcore", 1, "cg_drawSpectatorMessages", 0);
     [[level.spawnIntermission]]();
     self closeMenu();
     self closeInGameMenu();
@@ -3350,14 +3251,10 @@ Callback_PlayerConnect() {
     self updateObjectiveText();
     [[level.spawnSpectator]]();
     if(level.rankedMatch && level.console) {
-      [
-        [level.autoassign]
-      ]();
+      [[level.autoassign]]();
       self thread kickIfDontspawn();
     } else if(!level.teamBased && level.console) {
-      [
-        [level.autoassign]
-      ]();
+      [[level.autoassign]]();
     } else {
       self setclientdvar("g_scriptMainMenu", game["menu_team"]);
       self openMenu(game["menu_team"]);
@@ -3718,15 +3615,11 @@ Callback_VehicleRadiusDamage(eInflictor, eAttacker, iDamage, fInnerDamage, fOute
   }
 }
 
-Callback_PlayerSpawnGenerateInfluencers(
-  player_entity,
-  spawn_influencers) {
+Callback_PlayerSpawnGenerateInfluencers(player_entity, spawn_influencers) {
   return;
 }
 
-Callback_PlayerSpawnGenerateSpawnPointEntityBaseScore(
-  player_entity,
-  spawn_point_entity) {
+Callback_PlayerSpawnGenerateSpawnPointEntityBaseScore(player_entity, spawn_point_entity) {
   return 0.0;
 }
 
@@ -4513,16 +4406,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
   self.leaving_team = undefined;
   self thread[[level.onPlayerKilled]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   for(iCB = 0; iCB < level.onPlayerKilledExtraUnthreadedCBs.size; iCB++) {
-    self[[level.onPlayerKilledExtraUnthreadedCBs[iCB]]](
-      eInflictor,
-      attacker,
-      iDamage,
-      sMeansOfDeath,
-      sWeapon,
-      vDir,
-      sHitLoc,
-      psOffsetTime,
-      deathAnimDuration);
+    self[[level.onPlayerKilledExtraUnthreadedCBs[iCB]]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   }
   self.deathTime = getTime();
   self.wantSafeSpawn = false;

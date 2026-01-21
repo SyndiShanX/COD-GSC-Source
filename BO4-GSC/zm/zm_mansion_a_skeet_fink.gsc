@@ -183,9 +183,7 @@ function_abf0bf8c() {
     if(isplayer(s_waitresult.attacker) && !zm_loadout::is_offhand_weapon(s_waitresult.weapon)) {
       if(isDefined(s_waitresult.position) && distancesquared(s_waitresult.position, self.origin) < 100) {
         level.var_d5f74526 notify(#"hash_5a5c7c802e5f3037", {
-          #var_c8407ea2: self.script_int,
-          #var_740e1e0e: self.var_740e1e0e,
-          #attacker: s_waitresult.attacker
+          #var_c8407ea2: self.script_int, #var_740e1e0e: self.var_740e1e0e, #attacker: s_waitresult.attacker
         });
         self.var_740e1e0e ghost();
         wait 1;
@@ -319,16 +317,14 @@ function_6941c919() {
     if(isplayer(s_waitresult.attacker)) {
       if(w_base_weapon === level.w_bowie_knife) {
         level.var_d5f74526 notify(#"hash_15ccd1fdda38284a", {
-          #var_c8407ea2: self.script_int,
-          #attacker: s_waitresult.attacker
+          #var_c8407ea2: self.script_int, #attacker: s_waitresult.attacker
         });
         continue;
       }
 
       if(s_waitresult.weapon === w_shield && s_waitresult.mod === "MOD_MELEE") {
         level.var_d5f74526 notify(#"rune_bashed", {
-          #var_c8407ea2: self.script_int,
-          #attacker: s_waitresult.attacker
+          #var_c8407ea2: self.script_int, #attacker: s_waitresult.attacker
         });
       }
     }

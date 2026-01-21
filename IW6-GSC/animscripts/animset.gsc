@@ -69,7 +69,7 @@ init_animset_run_move() {
   anim.initanimset["sprint_short"] = % sprint1_loop;
   anim.initanimset["prone"] = % prone_crawl;
   anim.initanimset["straight"] = % run_lowready_f;
-  anim.initanimset["straight_twitch"] = [ % run_twitch_guncheck, % run_twitch_aim_straight, % run_twitch_aim_above, % run_twitch_lookbehind_a, % run_twitch_lookbehind_b];
+  anim.initanimset["straight_twitch"] = [ % run_twitch_guncheck, %run_twitch_aim_straight, %run_twitch_aim_above, %run_twitch_lookbehind_a, %run_twitch_lookbehind_b];
   anim.initanimset["move_f"] = % walk_forward;
   anim.initanimset["move_l"] = % walk_left;
   anim.initanimset["move_r"] = % walk_right;
@@ -82,7 +82,7 @@ init_animset_run_move() {
   anim.initanimset["stairs_up_in"] = % run_stairs_up_in;
   anim.initanimset["stairs_up_out"] = % run_stairs_up_out;
   anim.initanimset["stairs_down"] = % traverse_stair_run_down;
-  anim.initanimset["reload"] = [ % run_reload_a, % run_reload_b];
+  anim.initanimset["reload"] = [ % run_reload_a, %run_reload_b];
   anim.archetypes["soldier"]["run"] = anim.initanimset;
 }
 
@@ -120,7 +120,7 @@ init_animset_cqb_move() {
   anim.initanimset["sprint"] = % sprint_loop_distant;
   anim.initanimset["sprint_short"] = % sprint1_loop;
   anim.initanimset["straight"] = % run_cqb_f_search_v1;
-  anim.initanimset["straight_twitch"] = [ % cqb_run_twitch_a_iw6, % cqb_run_twitch_b_iw6, % cqb_run_twitch_c_iw6, % cqb_run_twitch_d_iw6];
+  anim.initanimset["straight_twitch"] = [ % cqb_run_twitch_a_iw6, %cqb_run_twitch_b_iw6, %cqb_run_twitch_c_iw6, %cqb_run_twitch_d_iw6];
   anim.initanimset["move_f"] = % cqb_walk_iw6;
   anim.initanimset["move_l"] = % walk_left;
   anim.initanimset["move_r"] = % walk_right;
@@ -136,7 +136,7 @@ init_animset_cqb_move() {
   anim.initanimset["stairs_down_out"] = % cqb_stairs_down_out_m;
   anim.initanimset["shotgun_pullout"] = % shotgun_cqbrun_pullout;
   anim.initanimset["shotgun_putaway"] = % shotgun_cqbrun_putaway;
-  anim.initanimset["reload"] = [ % cqb_run_reload_a_iw6, % cqb_run_reload_b_iw6];
+  anim.initanimset["reload"] = [ % cqb_run_reload_a_iw6, %cqb_run_reload_b_iw6];
   anim.archetypes["soldier"]["cqb"] = anim.initanimset;
 }
 
@@ -148,10 +148,10 @@ init_animset_pistol_stand() {
   anim.initanimset["add_aim_right"] = % pistol_stand_aim_6_add;
   anim.initanimset["straight_level"] = % pistol_stand_aim_5;
   anim.initanimset["fire"] = % pistol_stand_fire_a;
-  anim.initanimset["single"] = animscripts\utility::array( % pistol_stand_fire_a);
-  anim.initanimset["reload"] = animscripts\utility::array( % pistol_stand_reload_a);
+  anim.initanimset["single"] = animscripts\utility::array(%pistol_stand_fire_a);
+  anim.initanimset["reload"] = animscripts\utility::array(%pistol_stand_reload_a);
   anim.initanimset["reload_crouchhide"] = [];
-  anim.initanimset["exposed_idle"] = [ % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3];
+  anim.initanimset["exposed_idle"] = [ % exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3];
   set_animarray_standing_turns_pistol();
   anim.initanimset["add_turn_aim_up"] = % pistol_stand_aim_8_alt;
   anim.initanimset["add_turn_aim_down"] = % pistol_stand_aim_2_alt;
@@ -186,11 +186,11 @@ init_animset_shotgun_stand() {
   anim.initanimset["add_aim_right"] = % shotgun_aim_6;
   anim.initanimset["straight_level"] = % shotgun_aim_5;
   anim.initanimset["fire"] = % exposed_shoot_auto_v3;
-  anim.initanimset["single"] = [ % shotgun_stand_fire_1a, % shotgun_stand_fire_1b];
+  anim.initanimset["single"] = [ % shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
   set_animarray_burst_and_semi_fire_stand();
-  anim.initanimset["exposed_idle"] = [ % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3];
-  anim.initanimset["reload"] = [ % shotgun_stand_reload_a, % shotgun_stand_reload_b, % shotgun_stand_reload_c, % shotgun_stand_reload_c, % shotgun_stand_reload_c];
-  anim.initanimset["reload_crouchhide"] = [ % shotgun_stand_reload_a, % shotgun_stand_reload_b];
+  anim.initanimset["exposed_idle"] = [ % exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3];
+  anim.initanimset["reload"] = [ % shotgun_stand_reload_a, %shotgun_stand_reload_b, %shotgun_stand_reload_c, %shotgun_stand_reload_c, %shotgun_stand_reload_c];
+  anim.initanimset["reload_crouchhide"] = [ % shotgun_stand_reload_a, %shotgun_stand_reload_b];
   set_animarray_stance_change();
   set_animarray_standing_turns();
   set_animarray_add_turn_aims_stand();
@@ -207,7 +207,7 @@ init_animset_cqb_stand() {
   anim.initanimset["fire"] = % exposed_shoot_auto_v3;
   anim.initanimset["single"] = [ % exposed_shoot_semi1];
   set_animarray_burst_and_semi_fire_stand();
-  anim.initanimset["exposed_idle"] = [ % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3];
+  anim.initanimset["exposed_idle"] = [ % exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3];
   anim.initanimset["reload"] = [ % cqb_stand_reload_steady];
   anim.initanimset["reload_crouchhide"] = [ % cqb_stand_reload_knee];
   set_animarray_stance_change();
@@ -224,10 +224,10 @@ init_animset_heat_stand() {
   anim.initanimset["add_aim_right"] = % heat_stand_aim_6;
   anim.initanimset["straight_level"] = % heat_stand_aim_5;
   anim.initanimset["fire"] = % heat_stand_fire_auto;
-  anim.initanimset["single"] = animscripts\utility::array( % heat_stand_fire_single);
-  set_animarray_custom_burst_and_semi_fire_stand( % heat_stand_fire_burst);
-  anim.initanimset["exposed_idle"] = animscripts\utility::array( % heat_stand_idle, % heat_stand_scana, % heat_stand_scanb);
-  anim.initanimset["reload"] = animscripts\utility::array( % heat_exposed_reload);
+  anim.initanimset["single"] = animscripts\utility::array(%heat_stand_fire_single);
+  set_animarray_custom_burst_and_semi_fire_stand(%heat_stand_fire_burst);
+  anim.initanimset["exposed_idle"] = animscripts\utility::array(%heat_stand_idle, %heat_stand_scana, %heat_stand_scanb);
+  anim.initanimset["reload"] = animscripts\utility::array(%heat_exposed_reload);
   anim.initanimset["reload_crouchhide"] = animscripts\utility::array();
   set_animarray_stance_change();
   anim.initanimset["turn_left_45"] = % heat_stand_turn_l;
@@ -259,12 +259,12 @@ init_animset_default_stand() {
   anim.initanimset["straight_level"] = % exposed_aim_5;
   anim.initanimset["fire"] = % exposed_shoot_auto_v3;
   anim.initanimset["fire_corner"] = % exposed_shoot_auto_v2;
-  anim.initanimset["single"] = animscripts\utility::array( % exposed_shoot_semi1);
+  anim.initanimset["single"] = animscripts\utility::array(%exposed_shoot_semi1);
   set_animarray_burst_and_semi_fire_stand();
-  anim.initanimset["exposed_idle"] = animscripts\utility::array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
-  anim.initanimset["exposed_grenade"] = animscripts\utility::array( % exposed_grenadethrowb, % exposed_grenadethrowc);
-  anim.initanimset["reload"] = animscripts\utility::array( % exposed_reload);
-  anim.initanimset["reload_crouchhide"] = animscripts\utility::array( % exposed_reloadb);
+  anim.initanimset["exposed_idle"] = animscripts\utility::array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
+  anim.initanimset["exposed_grenade"] = animscripts\utility::array(%exposed_grenadethrowb, %exposed_grenadethrowc);
+  anim.initanimset["reload"] = animscripts\utility::array(%exposed_reload);
+  anim.initanimset["reload_crouchhide"] = animscripts\utility::array(%exposed_reloadb);
   set_animarray_stance_change();
   set_animarray_standing_turns();
   set_animarray_add_turn_aims_stand();
@@ -279,10 +279,10 @@ init_animset_default_crouch() {
   anim.initanimset["add_aim_right"] = % exposed_crouch_aim_6;
   anim.initanimset["straight_level"] = % exposed_crouch_aim_5;
   anim.initanimset["fire"] = % exposed_crouch_shoot_auto_v2;
-  anim.initanimset["single"] = animscripts\utility::array( % exposed_crouch_shoot_semi1);
+  anim.initanimset["single"] = animscripts\utility::array(%exposed_crouch_shoot_semi1);
   set_animarray_burst_and_semi_fire_crouch();
-  anim.initanimset["reload"] = animscripts\utility::array( % exposed_crouch_reload);
-  anim.initanimset["exposed_idle"] = animscripts\utility::array( % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3);
+  anim.initanimset["reload"] = animscripts\utility::array(%exposed_crouch_reload);
+  anim.initanimset["exposed_idle"] = animscripts\utility::array(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
   set_animarray_stance_change();
   set_animarray_crouching_turns();
   set_animarray_add_turn_aims_crouch();
@@ -317,7 +317,7 @@ init_animset_shotgun_crouch() {
   anim.initanimset["single"] = [ % shotgun_crouch_fire];
   set_animarray_burst_and_semi_fire_crouch();
   anim.initanimset["reload"] = [ % shotgun_crouch_reload];
-  anim.initanimset["exposed_idle"] = [ % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3];
+  anim.initanimset["exposed_idle"] = [ % exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3];
   set_animarray_stance_change();
   set_animarray_crouching_turns();
   set_animarray_add_turn_aims_crouch();
@@ -343,7 +343,7 @@ init_animset_default_prone() {
   anim.initanimset["semi3"] = % prone_fire_burst;
   anim.initanimset["semi4"] = % prone_fire_burst;
   anim.initanimset["semi5"] = % prone_fire_burst;
-  anim.initanimset["exposed_idle"] = [ % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3];
+  anim.initanimset["exposed_idle"] = [ % exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3];
   set_animarray_stance_change();
   anim.archetypes["soldier"]["default_prone"] = anim.initanimset;
 }
@@ -608,8 +608,8 @@ init_grenade_animations() {
   anim.initanimset["cower_squat_idle"] = % exposed_squat_idle_grenade_f;
   anim.initanimset["cower_dive_back"] = % exposed_dive_grenade_b;
   anim.initanimset["cower_dive_front"] = % exposed_dive_grenade_f;
-  anim.initanimset["return_throw_short"] = [ % grenade_return_running_throw_forward, % grenade_return_standing_throw_forward_1];
-  anim.initanimset["return_throw_long"] = [ % grenade_return_running_throw_forward, % grenade_return_standing_throw_overhand_forward];
+  anim.initanimset["return_throw_short"] = [ % grenade_return_running_throw_forward, %grenade_return_standing_throw_forward_1];
+  anim.initanimset["return_throw_long"] = [ % grenade_return_running_throw_forward, %grenade_return_standing_throw_overhand_forward];
   anim.initanimset["return_throw_default"] = [ % grenade_return_standing_throw_overhand_forward];
   anim.archetypes["soldier"]["grenade"] = anim.initanimset;
 }

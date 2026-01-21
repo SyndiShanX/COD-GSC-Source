@@ -232,9 +232,7 @@ createFxLogic() {
     if(GetDvar("createfx_map") == "") {
       SetDevDvar("createfx_map", get_template_level());
     } else if(GetDvar("createfx_map") == get_template_level()) {
-      [
-        [level.func_position_player]
-      ]();
+      [[level.func_position_player]]();
     }
 
     init_crosshair();
@@ -1305,12 +1303,9 @@ createFxLogic() {
         tab = "\t";
 
         cfxprintlnStart();
-        cfxprintln("
-            cfxprintln("#include common_scripts\\utility;"); cfxprintln("#include common_scripts\\_createfx;\n"); cfxprintln("");
+        cfxprintln("cfxprintln("#include common_scripts\\utility;"); cfxprintln("#include common_scripts\\_createfx;\n"); cfxprintln("");
 
-            cfxprintln("main()"); cfxprintln("{"); cfxprintln(tab + "
-
-              foreach(e in array) {
+            cfxprintln("main()"); cfxprintln("{"); cfxprintln(tab + "foreach(e in array) {
                 if(level.createfx_loopcounter > 16) {
                   level.createfx_loopcounter = 0;
                   wait .1;

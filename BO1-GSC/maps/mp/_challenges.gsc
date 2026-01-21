@@ -154,9 +154,7 @@ challengeKills(data, time) {
       player maps\mp\gametypes\_persistence::statAdd("KILLSTREAK_KILLS_COUNTER_U2", 1, false, weapon);
     }
   }
-  if(victim maps\mp\_flashgrenades::isFlashbanged() ||
-    (isDefined(victim.concussionEndTime) && victim.concussionEndTime > gettime()) ||
-    (isDefined(victim.inPoisonArea) && victim.inPoisonArea)) {
+  if(victim maps\mp\_flashgrenades::isFlashbanged() || (isDefined(victim.concussionEndTime) && victim.concussionEndTime > gettime()) || (isDefined(victim.inPoisonArea) && victim.inPoisonArea)) {
     player maps\mp\gametypes\_persistence::statAdd("KILLS_STUNNED_PLAYER", 1, false, weapon);
   }
   player notify("challenge_killed", victim);
@@ -191,8 +189,7 @@ challengeKills(data, time) {
       player maps\mp\gametypes\_persistence::statAdd("KILLS_COOKED", 1, false, weapon);
     }
   }
-  if((data.sMeansOfDeath != "MOD_GRENADE" && data.sMeansOfDeath != "MOD_GRENADE_SPLASH" && data.sMeansOfDeath != "MOD_GAS") ||
-    (weapon != "satchel_charge_mp" && weapon != "sticky_grenade_mp" && weapon != "explosive_bolt_mp" && weapon != "frag_grenade_mp" && weapon != "claymore_mp" && weapon != "tabun_gas_mp")) {
+  if((data.sMeansOfDeath != "MOD_GRENADE" && data.sMeansOfDeath != "MOD_GRENADE_SPLASH" && data.sMeansOfDeath != "MOD_GAS") || (weapon != "satchel_charge_mp" && weapon != "sticky_grenade_mp" && weapon != "explosive_bolt_mp" && weapon != "frag_grenade_mp" && weapon != "claymore_mp" && weapon != "tabun_gas_mp")) {
     if(data.attackerInLastStand) {} else if(data.attackerStance == "crouch") {
       player maps\mp\gametypes\_persistence::statAdd("BASIC_CROUCH_KILLS", 1, false, weapon);
     } else if(data.attackerStance == "prone") {
@@ -802,9 +799,7 @@ checkFinalKillcamKill(weapon, victim, meansOfDeath) {
     }
     break;
     case "knife_ballistic_mp": {
-      if(IsSubStr(meansOfDeath, "MOD_IMPACT") ||
-        IsSubStr(meansOfDeath, "MOD_HEAD_SHOT") ||
-        IsSubStr(meansOfDeath, "MOD_PISTOL_BULLET")) {
+      if(IsSubStr(meansOfDeath, "MOD_IMPACT") || IsSubStr(meansOfDeath, "MOD_HEAD_SHOT") || IsSubStr(meansOfDeath, "MOD_PISTOL_BULLET")) {
         player maps\mp\gametypes\_persistence::statAdd("FINAL_KILLCAM_BALLISTIC_KNIFE", 1, false, weapon);
       }
     }

@@ -223,8 +223,7 @@ getcratetypefordroptype(var_0) {
       if(isDefined(level.getrandomcratetypeforgamemode)) {
         return [
           }
-          [level.getrandomcratetypeforgamemode]
-      ](var_0);
+          [level.getrandomcratetypeforgamemode]](var_0);
 
       return getrandomcratetype(var_0);
   }

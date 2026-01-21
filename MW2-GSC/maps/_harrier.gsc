@@ -113,7 +113,5 @@ and these lines in your CSV:
 include,vehicle_harrier
 sound,vehicle_harrier,vehicle_standard,all_sp
 
-defaultmdl="vehicle_av8b_harrier_jet"
-default:"vehicletype" "harrier"
-default:"script_team" "allies"
+defaultmdl="vehicle_av8b_harrier_jet"default:"vehicletype" "harrier"default:"script_team" "allies"
 */

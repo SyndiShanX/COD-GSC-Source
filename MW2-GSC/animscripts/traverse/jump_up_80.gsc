@@ -20,7 +20,7 @@ main() {
   realHeight = startnode.traverse_height - startnode.origin[2];
   self thread teleportThread(realHeight - 80);
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("jump_up_80", anim.dogTraverseAnims["jump_up_80"], 1, 0.2, 1);
 
   self animscripts\shared::DoNoteTracks("jump_up_80");

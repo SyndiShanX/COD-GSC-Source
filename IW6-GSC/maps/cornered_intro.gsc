@@ -385,7 +385,7 @@ intro_rorke() {
   var_1 = undefined;
 
   if(getdvar("intro_mask") != "0")
-    self setanim( % cornered_level_intro_merrick_start_mask, 1, 0.1);
+    self setanim(%cornered_level_intro_merrick_start_mask, 1, 0.1);
 
   thread maps\cornered_audio::aud_intro("r_jump");
   thread rorke_jump_vision_change();
@@ -403,7 +403,7 @@ intro_rorke() {
   self waittillmatch("single anim", "end");
 
   if(getdvar("intro_mask") != "0") {
-    self clearanim( % cornered_level_intro_merrick_start_mask, 0);
+    self clearanim(%cornered_level_intro_merrick_start_mask, 0);
     thread maps\cornered_code::head_swap("head_keegan_cornered_xb");
   }
 

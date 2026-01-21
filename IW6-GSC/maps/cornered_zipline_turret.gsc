@@ -144,7 +144,7 @@ player_viewhands_zipline_launcher(var_0, var_1) {
   var_0.has_hands = 0;
   var_0 show_hands(var_1);
   var_0 thread handle_mounting(var_1);
-  var_0 setanim( % cornered_zipline_aim_idle_playerarms, 1, 0, 1);
+  var_0 setanim(%cornered_zipline_aim_idle_playerarms, 1, 0, 1);
 }
 
 handle_mounting(var_0) {

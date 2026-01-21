@@ -1907,8 +1907,7 @@ function_347698a5(localclientnum, networkid, var_2ccf7a1c) {
   function_1b42632a(localclientnum, clientdata, var_2ccf7a1c);
   endtime = getservertime(localclientnum, 1) + 60000;
   clientdata.var_ffc1c0e1[networkid] = {
-    #servertime: endtime,
-    #var_2ccf7a1c: var_2ccf7a1c
+    #servertime: endtime, #var_2ccf7a1c: var_2ccf7a1c
   };
   model = function_61f5d33a(localclientnum, clientdata, networkid);
 
@@ -1922,8 +1921,7 @@ function_d2f95c1a(localclientnum, vehicleentnum, var_2ccf7a1c) {
   function_1b42632a(localclientnum, clientdata, var_2ccf7a1c);
   endtime = getservertime(localclientnum, 1) + 60000;
   clientdata.var_baf65690[vehicleentnum] = {
-    #servertime: endtime,
-    #var_2ccf7a1c: var_2ccf7a1c
+    #servertime: endtime, #var_2ccf7a1c: var_2ccf7a1c
   };
   vehicle = getentbynum(localclientnum, vehicleentnum);
   function_d223645e(localclientnum, vehicle);

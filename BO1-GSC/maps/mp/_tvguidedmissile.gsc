@@ -320,8 +320,7 @@ outOfBoundsWatcher(missile) {
 }
 isMissileInsideHeightLockBackupCheck() {
   boundryPadding = 1000;
-  if(self.origin[0] > (level.spawnMins[0] - boundryPadding) && self.origin[0] < (level.spawnMaxs[0] + boundryPadding) &&
-    self.origin[1] > (level.spawnMins[1] - boundryPadding) && self.origin[1] < (level.spawnMaxs[1] + boundryPadding))
+  if(self.origin[0] > (level.spawnMins[0] - boundryPadding) && self.origin[0] < (level.spawnMaxs[0] + boundryPadding) && self.origin[1] > (level.spawnMins[1] - boundryPadding) && self.origin[1] < (level.spawnMaxs[1] + boundryPadding))
     return true;
   return false;
 }

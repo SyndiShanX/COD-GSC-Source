@@ -177,9 +177,7 @@ function private _fill_hazard_protection(str_name, e_ent, disable_ui) {
       self setcontrolleruimodelvalue(str_ui_model + ".ratio", n_frac);
     }
     if(isDefined(s_hazard.func_update)) {
-      [
-        [s_hazard.func_update]
-      ](n_frac, e_ent);
+      [[s_hazard.func_update]](n_frac, e_ent);
     }
     wait(0.05);
     if(self.var_6c3e78bb[str_name] == 1) {

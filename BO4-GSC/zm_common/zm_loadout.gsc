@@ -284,8 +284,7 @@ function_6519eea8(slot, weapon) {
 
   old_weapon = self function_8f85096(slot);
   self notify(#"hash_4078956b159dd0f3", {
-    #slot: slot,
-    #weapon: weapon
+    #slot: slot, #weapon: weapon
   });
   self notify("new_" + slot, {
     #weapon: weapon

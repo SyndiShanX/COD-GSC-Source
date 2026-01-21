@@ -1434,8 +1434,7 @@ get_human_player() {
 
   if(isDefined(players)) {
     for(index = 0; index < players.size; index++) {
-      if(isDefined(players[index]) && isDefined(players[index].connected) && players[index].connected &&
-        !IsAI(players[index]) && (!isDefined(result) || result.team == "spectator")) {
+      if(isDefined(players[index]) && isDefined(players[index].connected) && players[index].connected && !IsAI(players[index]) && (!isDefined(result) || result.team == "spectator")) {
         result = players[index];
       }
     }
@@ -1866,8 +1865,7 @@ bot_should_melee_level_damage_target(level_target) {
   Assert(level_target.bot_interaction_type == "damage");
 
   current_weapon = self GetCurrentWeapon();
-  should_melee_target = self bot_out_of_ammo() || self.hasRiotShieldEquipped || (isDefined(self.isJuggernautManiac) && self.isJuggernautManiac == true) ||
-    WeaponClass(current_weapon) == "grenade" || current_weapon == "iw6_knifeonly_mp" || current_weapon == "iw6_knifeonlyfast_mp";
+  should_melee_target = self bot_out_of_ammo() || self.hasRiotShieldEquipped || (isDefined(self.isJuggernautManiac) && self.isJuggernautManiac == true) || WeaponClass(current_weapon) == "grenade" || current_weapon == "iw6_knifeonly_mp" || current_weapon == "iw6_knifeonlyfast_mp";
 
   should_melee_target = should_melee_target || (GetDvarInt("bot_SimulateNoAmmo") == 1);
 
@@ -2030,9 +2028,7 @@ bot_crate_valid(crate) {
   }
 
   if(isDefined(crate.boxType)) {
-    if(isDefined(level.boxSettings[crate.boxType]) && ![
-        [level.boxSettings[crate.boxType].canUseCallback]
-      ]())
+    if(isDefined(level.boxSettings[crate.boxType]) && ![[level.boxSettings[crate.boxType].canUseCallback]]())
       return false;
 
     if(isDefined(crate.disabled_use_for) && isDefined(crate.disabled_use_for[self GetEntityNumber()]) && crate.disabled_use_for[self GetEntityNumber()])

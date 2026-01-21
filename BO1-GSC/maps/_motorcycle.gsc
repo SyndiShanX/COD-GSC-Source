@@ -97,11 +97,11 @@ ai_ride_and_shoot() {
           yawAimWeight = 1;
         }
         if(yawToEnemy < 0) {
-          self SetAnimLimited( % moto_aim_4, yawAimWeight, 0.05);
-          self SetAnimLimited( % moto_aim_6, 0, 0.05);
+          self SetAnimLimited(%moto_aim_4, yawAimWeight, 0.05);
+          self SetAnimLimited(%moto_aim_6, 0, 0.05);
         } else {
-          self SetAnimLimited( % moto_aim_6, yawAimWeight, 0.05);
-          self SetAnimLimited( % moto_aim_4, 0, 0.05);
+          self SetAnimLimited(%moto_aim_6, yawAimWeight, 0.05);
+          self SetAnimLimited(%moto_aim_4, 0, 0.05);
         }
         pitchAimWeight = abs(pitchToEnemy / self.max_bike_aim_pitch_angle);
         if(abs(pitchAimWeight) > 1) {
@@ -113,11 +113,11 @@ ai_ride_and_shoot() {
           pitchAimWeight = self.prevBikerPitchAimWeight + maxWeightChange * sign(aimDelta);
         }
         if(pitchToEnemy < 0) {
-          self SetAnimLimited( % moto_aim_2, pitchAimWeight, 0.05);
-          self SetAnimLimited( % moto_aim_8, 0, 0.05);
+          self SetAnimLimited(%moto_aim_2, pitchAimWeight, 0.05);
+          self SetAnimLimited(%moto_aim_8, 0, 0.05);
         } else {
-          self SetAnimLimited( % moto_aim_8, pitchAimWeight, 0.05);
-          self SetAnimLimited( % moto_aim_2, 0, 0.05);
+          self SetAnimLimited(%moto_aim_8, pitchAimWeight, 0.05);
+          self SetAnimLimited(%moto_aim_2, 0, 0.05);
         }
         self.prevBikerYawAimWeight = yawAimWeight;
         self.prevBikerPitchAimWeight = pitchAimWeight;
@@ -149,7 +149,7 @@ ai_ride_stop_riding() {
   self endon("death");
   self endon("start_ragdoll");
   self notify("stop_riding");
-  self ClearAnim( % root, 0);
+  self ClearAnim(%root, 0);
   self Unlink();
 }
 
@@ -159,7 +159,7 @@ ai_ride_and_shoot_linkto_bike() {
   tag_driver_angles = self.ridingvehicle GetTagAngles("tag_driver");
   self ForceTeleport(tag_driver_origin, tag_driver_angles);
   self LinkTo(self.ridingvehicle, "tag_driver");
-  self ClearAnim( % root, 0);
+  self ClearAnim(%root, 0);
 }
 
 ai_ride_and_shoot_aiming_on(sideAnimWeight) {
@@ -168,35 +168,35 @@ ai_ride_and_shoot_aiming_on(sideAnimWeight) {
   }
   if(sideAnimWeight < 0) {
     sideAnimWeight = abs(sideAnimWeight);
-    self SetAnimKnobLimited( % crew_bike_m72_aim_l_2, sideAnimWeight, 0);
-    self SetAnimKnobLimited( % crew_bike_m72_aim_l_4, sideAnimWeight, 0);
-    self SetAnimKnobLimited( % crew_bike_m72_aim_l_6, sideAnimWeight, 0);
-    self SetAnimKnobLimited( % crew_bike_m72_aim_l_8, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_l_2, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_l_4, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_l_6, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_l_8, sideAnimWeight, 0);
     if(sideAnimWeight > 0.5) {
-      self SetFlaggedAnimLimited("fireAnim", % crew_bike_m72_l_fire, sideAnimWeight, 0);
+      self SetFlaggedAnimLimited("fireAnim", %crew_bike_m72_l_fire, sideAnimWeight, 0);
     } else {
-      self SetAnimLimited( % crew_bike_m72_l_fire, sideAnimWeight, 0);
+      self SetAnimLimited(%crew_bike_m72_l_fire, sideAnimWeight, 0);
     }
   } else {
-    self SetAnimKnobLimited( % crew_bike_m72_aim_r_2, sideAnimWeight, 0);
-    self SetAnimKnobLimited( % crew_bike_m72_aim_r_4, sideAnimWeight, 0);
-    self SetAnimKnobLimited( % crew_bike_m72_aim_r_6, sideAnimWeight, 0);
-    self SetAnimKnobLimited( % crew_bike_m72_aim_r_8, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_r_2, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_r_4, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_r_6, sideAnimWeight, 0);
+    self SetAnimKnobLimited(%crew_bike_m72_aim_r_8, sideAnimWeight, 0);
     if(sideAnimWeight > 0.5) {
-      self SetFlaggedAnimLimited("fireAnim", % crew_bike_m72_r_fire, sideAnimWeight, 0);
+      self SetFlaggedAnimLimited("fireAnim", %crew_bike_m72_r_fire, sideAnimWeight, 0);
     } else {
-      self SetAnimLimited( % crew_bike_m72_r_fire, sideAnimWeight, 0);
+      self SetAnimLimited(%crew_bike_m72_r_fire, sideAnimWeight, 0);
     }
   }
-  self SetAnimLimited( % crew_bike_m72_aim_f_2, 1 - sideAnimWeight, 0);
-  self SetAnimLimited( % crew_bike_m72_aim_f_4, 1 - sideAnimWeight, 0);
-  self SetAnimLimited( % crew_bike_m72_aim_f_6, 1 - sideAnimWeight, 0);
-  self SetAnimLimited( % crew_bike_m72_aim_f_8, 1 - sideAnimWeight, 0);
+  self SetAnimLimited(%crew_bike_m72_aim_f_2, 1 - sideAnimWeight, 0);
+  self SetAnimLimited(%crew_bike_m72_aim_f_4, 1 - sideAnimWeight, 0);
+  self SetAnimLimited(%crew_bike_m72_aim_f_6, 1 - sideAnimWeight, 0);
+  self SetAnimLimited(%crew_bike_m72_aim_f_8, 1 - sideAnimWeight, 0);
   if(sideAnimWeight < 1) {
     if(sideAnimWeight < 0.5) {
-      self SetFlaggedAnimLimited("fireAnim", % crew_bike_m72_f_fire, 1 - sideAnimWeight, 0);
+      self SetFlaggedAnimLimited("fireAnim", %crew_bike_m72_f_fire, 1 - sideAnimWeight, 0);
     } else {
-      self SetAnimLimited( % crew_bike_m72_f_fire, 1 - sideAnimWeight, 0);
+      self SetAnimLimited(%crew_bike_m72_f_fire, 1 - sideAnimWeight, 0);
     }
   }
   self animscripts\weaponList::RefillClip();
@@ -210,7 +210,7 @@ ai_ride_and_shoot_idle() {
   self.bikerIsAiming = false;
   self.bikerIsArmed = false;
   rollAnimWeight = 0;
-  self SetAnim( % crew_bike_m72_drive_straight, 1 - rollAnimWeight, 0.2, 1);
+  self SetAnim(%crew_bike_m72_drive_straight, 1 - rollAnimWeight, 0.2, 1);
 }
 
 ai_ride_and_shoot_aim_idle(blendTime) {
@@ -235,13 +235,13 @@ ai_ride_and_shoot_aim_idle(blendTime) {
   }
   if(sideAnimWeight < 0) {
     sideAnimWeight = abs(sideAnimWeight);
-    self SetAnim( % crew_bike_m72_aim_l_5, sideAnimWeight, blendTime, 1);
-    self SetAnim( % crew_bike_m72_aim_r_5, 0, blendTime, 1);
+    self SetAnim(%crew_bike_m72_aim_l_5, sideAnimWeight, blendTime, 1);
+    self SetAnim(%crew_bike_m72_aim_r_5, 0, blendTime, 1);
   } else {
-    self SetAnim( % crew_bike_m72_aim_r_5, sideAnimWeight, blendTime, 1);
-    self SetAnim( % crew_bike_m72_aim_l_5, 0, blendTime, 1);
+    self SetAnim(%crew_bike_m72_aim_r_5, sideAnimWeight, blendTime, 1);
+    self SetAnim(%crew_bike_m72_aim_l_5, 0, blendTime, 1);
   }
-  self SetAnim( % crew_bike_m72_aim_f_5, 1 - sideAnimWeight, blendTime, 1);
+  self SetAnim(%crew_bike_m72_aim_f_5, 1 - sideAnimWeight, blendTime, 1);
 }
 
 ai_ride_and_shoot_lean() {
@@ -251,33 +251,33 @@ ai_ride_and_shoot_lean() {
   }
   if(self.bikerIsAiming) {
     if(self.ridingvehicle.angles[2] < 0) {
-      self SetAnim( % crew_bike_m72_lean_left_armed, rollAnimWeight, 0.2, 1);
-      self SetAnim( % crew_bike_m72_lean_right_armed, 0, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_left_armed, rollAnimWeight, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_right_armed, 0, 0.2, 1);
     } else {
-      self SetAnim( % crew_bike_m72_lean_left_armed, 0, 0.2, 1);
-      self SetAnim( % crew_bike_m72_lean_right_armed, rollAnimWeight, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_left_armed, 0, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_right_armed, rollAnimWeight, 0.2, 1);
     }
   } else {
     if(self.ridingvehicle.angles[2] < 0) {
-      self SetAnim( % crew_bike_m72_lean_left_unarmed, rollAnimWeight, 0.2, 1);
-      self SetAnim( % crew_bike_m72_lean_right_unarmed, 0, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_left_unarmed, rollAnimWeight, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_right_unarmed, 0, 0.2, 1);
     } else {
-      self SetAnim( % crew_bike_m72_lean_left_unarmed, 0, 0.2, 1);
-      self SetAnim( % crew_bike_m72_lean_right_unarmed, rollAnimWeight, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_left_unarmed, 0, 0.2, 1);
+      self SetAnim(%crew_bike_m72_lean_right_unarmed, rollAnimWeight, 0.2, 1);
     }
   }
   return rollAnimWeight;
 }
 
 ai_ride_and_shoot_gun_pullout() {
-  self SetFlaggedAnimKnobAllRestart("ride", % crew_bike_m72_aim_gun_pullot, % body, 1, 0.2, 1);
+  self SetFlaggedAnimKnobAllRestart("ride", %crew_bike_m72_aim_gun_pullot, %body, 1, 0.2, 1);
   self waittillmatch("ride", "end");
   self.prevSideAnimWeight = 99999;
   blendTime = 0.2;
   if(isDefined(self.shootEnt)) {
-    self ClearAnim( % crew_bike_m72_aim_gun_pullot, blendTime);
-    self ClearAnim( % crew_bike_m72_lean_left_unarmed, blendTime);
-    self ClearAnim( % crew_bike_m72_lean_right_unarmed, blendTime);
+    self ClearAnim(%crew_bike_m72_aim_gun_pullot, blendTime);
+    self ClearAnim(%crew_bike_m72_lean_left_unarmed, blendTime);
+    self ClearAnim(%crew_bike_m72_lean_right_unarmed, blendTime);
     self.bikerIsArmed = true;
     self.prevBikerYawAimWeight = 0;
     self.prevBikerPitchAimWeight = 0;
@@ -291,18 +291,18 @@ ai_ride_and_shoot_gun_pullout() {
 
 ai_ride_and_shoot_gun_putaway(aimForwardTime) {
   self notify("stopShooting");
-  self SetAnim( % moto_fire, 0, 0);
+  self SetAnim(%moto_fire, 0, 0);
   if(!isDefined(aimForwardTime)) {
     aimForwardTime = 0.3;
   }
-  self SetAnimLimited( % moto_aim_4, 0, aimForwardTime);
-  self SetAnimLimited( % moto_aim_6, 0, aimForwardTime);
+  self SetAnimLimited(%moto_aim_4, 0, aimForwardTime);
+  self SetAnimLimited(%moto_aim_6, 0, aimForwardTime);
   wait(aimForwardTime);
-  self SetFlaggedAnimKnobAllRestart("ride", % crew_bike_m72_aim_gun_putaway, % body, 1, 0.2, 1);
+  self SetFlaggedAnimKnobAllRestart("ride", %crew_bike_m72_aim_gun_putaway, %body, 1, 0.2, 1);
   self waittillmatch("ride", "end");
-  self ClearAnim( % crew_bike_m72_aim_gun_putaway, 0.2);
-  self ClearAnim( % crew_bike_m72_lean_left_armed, 0.2);
-  self ClearAnim( % crew_bike_m72_lean_right_armed, 0.2);
+  self ClearAnim(%crew_bike_m72_aim_gun_putaway, 0.2);
+  self ClearAnim(%crew_bike_m72_lean_left_armed, 0.2);
+  self ClearAnim(%crew_bike_m72_lean_right_armed, 0.2);
   self.bikerIsArmed = false;
   self ai_ride_and_shoot_idle();
 }
@@ -311,7 +311,7 @@ ai_ride_and_shoot_gun_shoot() {
   self endon("death");
   self endon("stopShooting");
   self endon("start_ragdoll");
-  self SetAnim( % moto_fire, 1, 0);
+  self SetAnim(%moto_fire, 1, 0);
   while(1) {
     self waittillmatch("fireAnim", "fire");
     self shootEnemyWrapper();
@@ -324,23 +324,23 @@ ai_ride_and_shoot_jump() {
   self endon("start_ragdoll");
   if(self.bikerIsArmed) {
     self notify("stopShooting");
-    self SetFlaggedAnimKnobAllRestart("jump", % crew_bike_m72_jump_start_armed, % body, 1, 0.2, 1);
+    self SetFlaggedAnimKnobAllRestart("jump", %crew_bike_m72_jump_start_armed, %body, 1, 0.2, 1);
     while(!self.bikerShouldLand) {
       wait(0.05);
     }
-    self SetFlaggedAnimKnobAllRestart("jump", % crew_bike_m72_jump_land_armed, % body, 1, 0.2, 1);
+    self SetFlaggedAnimKnobAllRestart("jump", %crew_bike_m72_jump_land_armed, %body, 1, 0.2, 1);
     self waittillmatch("jump", "end");
-    self ClearAnim( % crew_bike_m72_jump_land_armed, 0.2);
+    self ClearAnim(%crew_bike_m72_jump_land_armed, 0.2);
     self.prevSideAnimWeight = 99999;
     self thread ai_ride_and_shoot_gun_shoot();
   } else {
-    self SetFlaggedAnimKnobAllRestart("jump", % crew_bike_m72_jump_start_unarmed, % body, 1, 0.2, 1);
+    self SetFlaggedAnimKnobAllRestart("jump", %crew_bike_m72_jump_start_unarmed, %body, 1, 0.2, 1);
     while(!self.bikerShouldLand) {
       wait(0.05);
     }
-    self SetFlaggedAnimKnobAllRestart("jump", % crew_bike_m72_jump_land_unarmed, % body, 1, 0.2, 1);
+    self SetFlaggedAnimKnobAllRestart("jump", %crew_bike_m72_jump_land_unarmed, %body, 1, 0.2, 1);
     self waittillmatch("jump", "end");
-    self ClearAnim( % crew_bike_m72_jump_land_unarmed, 0.2);
+    self ClearAnim(%crew_bike_m72_jump_land_unarmed, 0.2);
   }
   self.bikerShouldJump = false;
   if(self.bikerIsArmed && isDefined(self.shootEnt)) {
@@ -366,18 +366,18 @@ ai_ride_and_shoot_watch_jump() {
 ai_ride_and_shoot_gun_blindfire() {
   self notify("stopShooting");
   if(!self.bikerIsArmed) {
-    self SetFlaggedAnimKnobAllRestart("ride", % crew_bike_m72_aim_gun_pullot, % body, 1, 0.2, 1);
+    self SetFlaggedAnimKnobAllRestart("ride", %crew_bike_m72_aim_gun_pullot, %body, 1, 0.2, 1);
     self waittillmatch("ride", "end");
     self.prevSideAnimWeight = 99999;
     blendTime = 0.2;
-    self ClearAnim( % crew_bike_m72_aim_gun_pullot, blendTime);
-    self ClearAnim( % crew_bike_m72_lean_left_unarmed, blendTime);
-    self ClearAnim( % crew_bike_m72_lean_right_unarmed, blendTime);
+    self ClearAnim(%crew_bike_m72_aim_gun_pullot, blendTime);
+    self ClearAnim(%crew_bike_m72_lean_left_unarmed, blendTime);
+    self ClearAnim(%crew_bike_m72_lean_right_unarmed, blendTime);
     self.bikerIsArmed = true;
   }
-  self SetFlaggedAnimKnobAllRestart("blindfire", % crew_bike_m72_blindfire, % body, 1, 0.2, 1);
+  self SetFlaggedAnimKnobAllRestart("blindfire", %crew_bike_m72_blindfire, %body, 1, 0.2, 1);
   self animscripts\shared::DoNotetracks("blindfire");
-  self ClearAnim( % crew_bike_m72_blindfire, 0.2);
+  self ClearAnim(%crew_bike_m72_blindfire, 0.2);
   self thread ai_ride_and_shoot_gun_shoot();
   self.prevSideAnimWeight = 99999;
 }
@@ -392,9 +392,7 @@ ai_ride_and_shoot_ragdoll_death() {
   self animscripts\shared::DropAllAIWeapons();
   velocity = anglesToForward(self.angles);
   assert(isDefined(level.ai_motorcycle_death_launch_vector));
-  velocity = (velocity[0] * level.ai_motorcycle_death_launch_vector[0],
-    velocity[1] * level.ai_motorcycle_death_launch_vector[1],
-    level.ai_motorcycle_death_launch_vector[2]);
+  velocity = (velocity[0] * level.ai_motorcycle_death_launch_vector[0], velocity[1] * level.ai_motorcycle_death_launch_vector[1], level.ai_motorcycle_death_launch_vector[2]);
   self Unlink();
   self StartRagdoll();
   self LaunchRagdoll(velocity);

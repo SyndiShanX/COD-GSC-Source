@@ -1243,8 +1243,7 @@ function_704b8e() {
   }
 
   level.var_f13364b4.a_n_codes[var_90f307ff] = {
-    #var_544c05c6: 1,
-    #var_d9d9d617: &function_5d874e07
+    #var_544c05c6: 1, #var_d9d9d617: &function_5d874e07
   };
 
   if(!isDefined(level.var_d7e5aaac)) {
@@ -1840,9 +1839,7 @@ function_9a022fbc(str_state) {
     }
 
     if(isDefined(lui_menu)) {
-      [
-        [lui_menu]
-      ] - > close(player);
+      [[lui_menu]] - > close(player);
     }
   }
 }

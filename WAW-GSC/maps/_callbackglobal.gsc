@@ -248,15 +248,7 @@ reset_clientdvars() {
     self[[level.reset_clientdvars]]();
     return;
   }
-  self SetClientDvars("compass", "1",
-    "hud_showStance", "1",
-    "cg_thirdPerson", "0",
-    "cg_fov", "65",
-    "cg_thirdPersonAngle", "0",
-    "ammoCounterHide", "0",
-    "miniscoreboardhide", "0",
-    "ui_hud_hardcore", "0",
-    "credits_active", "0");
+  self SetClientDvars("compass", "1", "hud_showStance", "1", "cg_thirdPerson", "0", "cg_fov", "65", "cg_thirdPersonAngle", "0", "ammoCounterHide", "0", "miniscoreboardhide", "0", "ui_hud_hardcore", "0", "credits_active", "0");
   self AllowSpectateTeam("allies", false);
   self AllowSpectateTeam("axis", false);
   self AllowSpectateTeam("freelook", false);
@@ -271,12 +263,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   if(isDefined(eAttacker) && isPlayer(eAttacker) && (!isDefined(level.friendlyexplosivedamage) || !level.friendlyexplosivedamage)) {
     if(self != eAttacker) {
       return;
-    } else if(sMeansOfDeath != "MOD_GRENADE_SPLASH" &&
-      sMeansOfDeath != "MOD_GRENADE" &&
-      sMeansOfDeath != "MOD_EXPLOSIVE" &&
-      sMeansOfDeath != "MOD_PROJECTILE" &&
-      sMeansOfDeath != "MOD_PROJECTILE_SPLASH" &&
-      sMeansOfDeath != "MOD_BURNED") {
+    } else if(sMeansOfDeath != "MOD_GRENADE_SPLASH" && sMeansOfDeath != "MOD_GRENADE" && sMeansOfDeath != "MOD_EXPLOSIVE" && sMeansOfDeath != "MOD_PROJECTILE" && sMeansOfDeath != "MOD_PROJECTILE_SPLASH" && sMeansOfDeath != "MOD_BURNED") {
       return;
     }
   }

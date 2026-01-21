@@ -17,7 +17,7 @@ main(model, type, no_death) {
 
   //build_deathmodel( "vehicle_blackhawk_minigun_hero" );
 
-  build_drive( % bh_rotors, undefined, 0);
+  build_drive(%bh_rotors, undefined, 0);
 
   if(!isDefined(no_death)) {
     blackhawk_death_fx = [];

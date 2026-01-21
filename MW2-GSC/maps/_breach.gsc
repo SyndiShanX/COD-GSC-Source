@@ -11,8 +11,7 @@ NOTE: Load \test\breach.d3dbsp to test all supported breaches
  -- -- -- -- -- -- -- -- -- -- -- -- --
 Currently supported breaches( sBreachType )
  -- -- -- -- -- -- -- -- -- -- -- -- --
-"explosive_breach_left"
-"shotgunhinges_breach_left":
+"explosive_breach_left""shotgunhinges_breach_left":
 "flash_breach_no_door_right":
 
  -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -31,8 +30,7 @@ How to use
 	maps\_breach::main();
 
 2 ) ROOM VOLUME: Create an info_volume that encompasses the room being assaulted.
-				( used to stun enemies during explosive breaches, determine where AI throws flash grenades,
-				and to detect when the room is cleared )
+				( used to stun enemies during explosive breaches, determine where AI throws flash grenades, and to detect when the room is cleared )
 
 3 ) DOOR: 		Have the room volume script_linkTo a door( script_model or script_brushmodel ) with an origin that
 				points in towards the interior of the room( all stacking / breaching anims play on this origin ).

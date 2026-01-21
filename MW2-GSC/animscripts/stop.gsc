@@ -59,7 +59,7 @@ main() {
       assertex(desiredPose == "crouch" || desiredPose == "stand", desiredPose);
 
       if(self.a.pose != desiredPose) {
-        self clearAnim( % root, 0.3);
+        self clearAnim(%root, 0.3);
         transitionedToIdle = false;
       }
       self SetPoseMovement(desiredPose, "stop");
@@ -91,7 +91,7 @@ specialIdleLoop() {
     self animmode("gravity");
     self orientmode("face current");
 
-    self clearAnim( % root, .2);
+    self clearAnim(%root, .2);
 
     while(1) {
       self setflaggedanimrestart("special_idle", idleAnimArray[randomint(idleAnimArray.size)], 1, 0.2, 1);
@@ -139,7 +139,7 @@ transitionToIdle(pose, idleSet) {
     // idles and transitions should have no tag origin movement
     //self animmode( "zonly_physics", false );
     idleAnim = anim.idleAnimTransition[pose]["in"];
-    self setFlaggedAnimKnobAllRestart("idle_transition", idleAnim, % body, 1, .2, self.animplaybackrate);
+    self setFlaggedAnimKnobAllRestart("idle_transition", idleAnim, %body, 1, .2, self.animplaybackrate);
     self animscripts\shared::DoNoteTracks("idle_transition");
     //self animmode( "normal", false );
   }
@@ -168,11 +168,11 @@ playIdle(pose, idleSet) {
     transTime = 0.5;
 
   if(isDefined(idleAddAnim)) {
-    self setAnimKnobAll(idleAnim, % body, 1, transTime, 1);
-    self setAnim( % add_idle);
-    self setFlaggedAnimKnobAllRestart("idle", idleAddAnim, % add_idle, 1, transTime, self.animplaybackrate);
+    self setAnimKnobAll(idleAnim, %body, 1, transTime, 1);
+    self setAnim(%add_idle);
+    self setFlaggedAnimKnobAllRestart("idle", idleAddAnim, %add_idle, 1, transTime, self.animplaybackrate);
   } else {
-    self setFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, transTime, self.animplaybackrate);
+    self setFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, transTime, self.animplaybackrate);
   }
 
   self animscripts\shared::DoNoteTracks("idle");
@@ -187,13 +187,13 @@ ProneStill() {
     assertex(isDefined(transAnim), self.a.pose);
     assert(animHasNotetrack(transAnim, "anim_pose = \"prone\""));
 
-    self setFlaggedAnimKnobAllRestart("trans", transAnim, % body, 1, .2, 1.0);
+    self setFlaggedAnimKnobAllRestart("trans", transAnim, %body, 1, .2, 1.0);
     animscripts\shared::DoNoteTracks("trans");
 
     assert(self.a.pose == "prone");
     self.a.movement = "stop";
 
-    self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
+    self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
 
     return; // in case we need to change our pose again for whatever reason
   }
@@ -212,10 +212,10 @@ ProneStill() {
     //twitches[ 6 ] = %prone_twitch_scan2;
 
     twitchAnim = twitches[randomint(twitches.size)];
-    self setFlaggedAnimKnobAll("prone_idle", twitchAnim, % exposed_modern, 1, 0.2);
+    self setFlaggedAnimKnobAll("prone_idle", twitchAnim, %exposed_modern, 1, 0.2);
   } else {
-    self setAnimKnobAll( % prone_aim_5, % exposed_modern, 1, 0.2);
-    self setFlaggedAnimKnob("prone_idle", % prone_idle, 1, 0.2); // ( additive idle on top )
+    self setAnimKnobAll(%prone_aim_5, %exposed_modern, 1, 0.2);
+    self setFlaggedAnimKnob("prone_idle", %prone_idle, 1, 0.2); // ( additive idle on top )
   }
   self waittillmatch("prone_idle", "end");
 

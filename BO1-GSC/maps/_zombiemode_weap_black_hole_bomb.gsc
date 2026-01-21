@@ -521,8 +521,7 @@ black_hole_bomb_throttle_anim_changes() {
     }
     array_zombies_allowed_to_switch = level._black_hole_bomb_zombies_anim_change;
     for(i = 0; i < array_zombies_allowed_to_switch.size; i++) {
-      if(isDefined(array_zombies_allowed_to_switch[i]) &&
-        IsAlive(array_zombies_allowed_to_switch[i])) {
+      if(isDefined(array_zombies_allowed_to_switch[i]) && IsAlive(array_zombies_allowed_to_switch[i])) {
         array_zombies_allowed_to_switch[i] ent_flag_set("bhb_anim_change");
       }
       if(i >= int_max_num_zombies_per_frame) {
@@ -588,8 +587,7 @@ black_hole_time_before_teleport(ent_player, str_endon) {
     chosen_spot = [[level._override_blackhole_destination_logic]](black_hole_teleport_structs, ent_player);
   } else {
     for(i = 0; i < black_hole_teleport_structs.size; i++) {
-      if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) &&
-        (ent_player get_current_zone() != black_hole_teleport_structs[i].script_string)) {
+      if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) && (ent_player get_current_zone() != black_hole_teleport_structs[i].script_string)) {
         chosen_spot = black_hole_teleport_structs[i];
         break;
       }

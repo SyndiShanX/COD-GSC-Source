@@ -21,7 +21,7 @@ main() {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
-  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, % body, 1, 0.15, 1);
+  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %body, 1, 0.15, 1);
   thread animscripts\shared::DoNoteTracksForever("traverse", "stop_traverse_notetracks");
   wait 1.5;
   angles = (0, startnode.angles[1], 0);
@@ -52,12 +52,12 @@ main() {
   if(isDefined(self.groundtype))
     self playSound("Land_" + self.groundtype);
   self notify("stop_traverse_notetracks");
-  self setFlaggedAnimKnoballRestart("traverse", landAnim, % body, 1, 0.15, 1);
+  self setFlaggedAnimKnoballRestart("traverse", landAnim, %body, 1, 0.15, 1);
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("traverse");
   self.a.movement = self.old_anim_movement;
   self.a.alertness = self.old_anim_alertness;
-  self setAnimKnobAllRestart(animscripts\run::GetRunAnim(), % body, 1, 0.2, 1);
+  self setAnimKnobAllRestart(animscripts\run::GetRunAnim(), %body, 1, 0.2, 1);
   thread animscripts\run::MakeRunSounds("killSoundThread");
 }
 

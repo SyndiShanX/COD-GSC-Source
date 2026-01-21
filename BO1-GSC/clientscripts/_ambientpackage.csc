@@ -484,9 +484,7 @@ updateActiveAmbientRoom() {
     }
     oldroom = level.ambientRooms[level.activeAmbientRoom];
     newroom = level.ambientRooms[newAmbientRoom];
-    if(isDefined(oldroom) && isDefined(newroom) &&
-      isDefined(oldroom.tone) && isDefined(newroom.tone) &&
-      oldroom.tone == newroom.tone) {
+    if(isDefined(oldroom) && isDefined(newroom) && isDefined(oldroom.tone) && isDefined(newroom.tone) && oldroom.tone == newroom.tone) {
       tmp = newroom.ent;
       newroom.ent = oldroom.ent;
       oldroom.ent = tmp;

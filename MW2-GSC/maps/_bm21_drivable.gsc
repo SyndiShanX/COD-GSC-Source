@@ -48,7 +48,7 @@ main(model, type) {
   build_light(model, "brakelight_troops_right", "tag_taillight_right", "misc/car_taillight_bm21", "brakelights");
   build_light(model, "brakelight_troops_left", "tag_taillight_left", "misc/car_taillight_bm21", "brakelights");
 
-  build_drive( % bm21_driving_idle_forward, % bm21_driving_idle_backward, 10);
+  build_drive(%bm21_driving_idle_forward, %bm21_driving_idle_backward, 10);
 }
 
 init_local() {
@@ -202,7 +202,5 @@ and these lines in your CSV:
 include,vehicle_bm21_drivable
 sound,vehicle_bm21,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bm21_mobile_bed"
-default:"vehicletype" "bm21_drivable"
-default:"script_team" "axis"
+defaultmdl="vehicle_bm21_mobile_bed"default:"vehicletype" "bm21_drivable"default:"script_team" "axis"
 */

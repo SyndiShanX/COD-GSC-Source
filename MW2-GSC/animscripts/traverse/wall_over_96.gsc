@@ -9,7 +9,7 @@
 
 main() {
   self.traverseDeath = 1;
-  self advancedTraverse2( % traverse90, 96);
+  self advancedTraverse2(%traverse90, 96);
 }
 
 advancedTraverse2(traverseAnim, normalHeight) {
@@ -29,7 +29,7 @@ advancedTraverse2(traverseAnim, normalHeight) {
 
   //	self thread teleportThread(realHeight - normalHeight);
 
-  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, % body, 1, 0.15, 1);
+  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %body, 1, 0.15, 1);
   timer = gettime();
   self thread animscripts\shared::DoNoteTracksForever("traverse", "no clear", ::handle_death);
   if(!animhasnotetrack(traverseAnim, "gravity on")) {
@@ -60,9 +60,9 @@ handle_death(note) {
   if(self.health == 1) {
     self.a.nodeath = true;
     if(self.traverseDeath > 1)
-      self setFlaggedAnimKnobAll("deathanim", % traverse90_end_death, % body, 1, .2, 1);
+      self setFlaggedAnimKnobAll("deathanim", %traverse90_end_death, %body, 1, .2, 1);
     else
-      self setFlaggedAnimKnobAll("deathanim", % traverse90_start_death, % body, 1, .2, 1);
+      self setFlaggedAnimKnobAll("deathanim", %traverse90_start_death, %body, 1, .2, 1);
 
     self animscripts\face::SayGenericDialogue("death");
   }

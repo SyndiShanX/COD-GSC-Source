@@ -202,7 +202,7 @@ director_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_boss_idle_a_coast, % ai_zombie_boss_idle_b_coast);
+  self.a.array["exposed_idle"] = array(%ai_zombie_boss_idle_a_coast, %ai_zombie_boss_idle_b_coast);
   self.a.array["straight_level"] = % ai_zombie_boss_idle_a_coast;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -557,7 +557,7 @@ director_custom_stumble() {
   director_print("custom stumble");
   stumble_anim = % ai_zombie_boss_stumble_coast;
   self thread director_stumble_watcher("stumble_anim");
-  self SetFlaggedAnimKnobAllRestart("stumble_anim", stumble_anim, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("stumble_anim", stumble_anim, %body, 1, .1, 1);
   animscripts\traverse\zombie_shared::wait_anim_length(stumble_anim, .02);
   self notify("stumble_done");
 }
@@ -1127,27 +1127,18 @@ zombie_speed_debuff() {
   switch (self.zombie_move_speed) {
     case "walk":
       var = randomintrange(1, 9);
-      self set_run_anim("walk" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["walk" +
-        var
-      ];
+      self set_run_anim("walk" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["walk" + var];
       break;
     case "run":
       var = randomintrange(1, 7);
-      self set_run_anim("run" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["run" +
-        var
-      ];
+      self set_run_anim("run" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["run" + var];
       break;
     case "sprint":
       var = randomintrange(1, 5);
-      self set_run_anim("sprint" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["sprint" +
-        var
-      ];
+      self set_run_anim("sprint" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["sprint" + var];
       break;
   }
   self.needs_run_update = true;
@@ -1195,7 +1186,7 @@ director_sprint2walk() {
   transition_anim = level.scr_anim["director_zombie"]["sprint2walk"];
   self thread director_sprint2walk_watcher("transition_anim");
   time = getAnimLength(transition_anim);
-  self SetFlaggedAnimKnobAllRestart("transition_anim", transition_anim, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("transition_anim", transition_anim, %body, 1, .1, 1);
   wait(time);
   self notify("transition_done");
 }
@@ -1216,7 +1207,7 @@ director_zombie_ground_hit() {
   self.ground_hit = true;
   self thread groundhit_watcher("groundhit_anim");
   groundhit_anim = % ai_zombie_boss_run_hitground_coast;
-  self SetFlaggedAnimKnobAllRestart("groundhit_anim", groundhit_anim, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("groundhit_anim", groundhit_anim, %body, 1, .1, 1);
   animscripts\traverse\zombie_shared::wait_anim_length(groundhit_anim, .02);
   self.ground_hit = false;
   self.nextGroundHit = GetTime() + level.director_ground_attack_delay;
@@ -1631,7 +1622,7 @@ director_delay_melee(time) {
 director_custom_idle() {
   self endon("death");
   idle_anim = % ai_zombie_boss_idle_b_coast;
-  self SetFlaggedAnimKnobAllRestart("idle_anim", idle_anim, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("idle_anim", idle_anim, %body, 1, .1, 1);
   wait(0.5);
 }
 
@@ -1747,7 +1738,7 @@ director_melee_anim(attack_anim) {
 }
 
 director_set_animarray_standing() {
-  self.a.array["exposed_idle"] = array( % ai_zombie_boss_idle_a_coast, % ai_zombie_boss_idle_b_coast);
+  self.a.array["exposed_idle"] = array(%ai_zombie_boss_idle_a_coast, %ai_zombie_boss_idle_b_coast);
   self.a.array["straight_level"] = % ai_zombie_boss_idle_a_coast;
   self.a.array["stand_2_crouch"] = % ai_zombie_boss_idle_a_coast;
 }
@@ -1779,7 +1770,7 @@ director_fling(pos) {
 director_custom_fling() {
   self endon("death");
   fling_anim = % ai_zombie_boss_flinger_flail_coast;
-  self SetFlaggedAnimKnobAllRestart("fling_anim", fling_anim, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("fling_anim", fling_anim, %body, 1, .1, 1);
   animscripts\traverse\zombie_shared::wait_anim_length(fling_anim, .02);
 }
 
@@ -1800,7 +1791,7 @@ director_animscripted(director_anim, director_notify, finish_anim) {
     }
     self.is_animscripted = true;
     time = getAnimLength(director_anim);
-    self animscripted(director_notify, self.origin, self.angles, director_anim, "normal", % body, 1, 0.1);
+    self animscripted(director_notify, self.origin, self.angles, director_anim, "normal", %body, 1, 0.1);
     wait(time);
     self.is_animscripted = undefined;
     self.finish_anim = undefined;

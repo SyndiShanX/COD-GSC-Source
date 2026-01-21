@@ -106,9 +106,7 @@ stopEmpJamSequence() {
 stopEmpJamSequenceImmediate() {
   self notify("emp_stop_effect");
 
-  if(isDefined(self.bIsPlayingJamEffects) ||
-    isDefined(self.player_static_value)
-  ) {
+  if(isDefined(self.bIsPlayingJamEffects) || isDefined(self.player_static_value)) {
     self.bIsPlayingJamEffects = undefined;
     self.player_static_value = 0;
 
@@ -160,10 +158,7 @@ staticFieldInit() {
 }
 
 staticFieldSetStrength(strengthVal) {
-  if(self.player_static_value != strengthVal &&
-    IsAlive(self) &&
-    !(self isEMPed())
-  ) {
+  if(self.player_static_value != strengthVal && IsAlive(self) && !(self isEMPed())) {
     self.player_static_value = strengthVal;
 
     switch (strengthVal) {

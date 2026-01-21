@@ -290,9 +290,7 @@ get_valid_powerup() {
   while(true) {
     str_powerup = get_next_powerup();
 
-    if(isDefined(level.zombie_powerups[str_powerup]) && [
-        [level.zombie_powerups[str_powerup].func_should_drop_with_regular_powerups]
-      ]()) {
+    if(isDefined(level.zombie_powerups[str_powerup]) && [[level.zombie_powerups[str_powerup].func_should_drop_with_regular_powerups]]()) {
       return str_powerup;
     }
   }
@@ -304,9 +302,7 @@ function_70bd1ec9() {
   }
 
   foreach(str_powerup in level.zombie_powerup_array) {
-    if(isDefined(level.zombie_powerups[str_powerup]) && [
-        [level.zombie_powerups[str_powerup].func_should_drop_with_regular_powerups]
-      ]()) {
+    if(isDefined(level.zombie_powerups[str_powerup]) && [[level.zombie_powerups[str_powerup].func_should_drop_with_regular_powerups]]()) {
       return true;
     }
   }
@@ -470,9 +466,7 @@ get_regular_random_powerup_name() {
   powerup_keys = array::randomize(powerup_keys);
 
   for(i = 0; i < powerup_keys.size; i++) {
-    if([
-        [level.zombie_powerups[powerup_keys[i]].func_should_drop_with_regular_powerups]
-      ]()) {
+    if([[level.zombie_powerups[powerup_keys[i]].func_should_drop_with_regular_powerups]]()) {
       return powerup_keys[i];
     }
   }
@@ -835,9 +829,7 @@ specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pickup_delay 
   }
 
   if(!var_73b4ca3f && str_rule != "" && isDefined(level.zombie_powerups[var_5a63971])) {
-    if(![
-        [level.zombie_powerups[var_5a63971].func_should_drop_with_regular_powerups]
-      ]()) {
+    if(![[level.zombie_powerups[var_5a63971].func_should_drop_with_regular_powerups]]()) {
       return;
     }
   }
@@ -1069,9 +1061,7 @@ powerup_grab(powerup_team) {
       grabbers = [];
       grabbers[0] = self.powerup_player;
     } else if(isDefined(level.var_9671faed)) {
-      grabbers = [
-        [level.var_9671faed]
-      ]();
+      grabbers = [[level.var_9671faed]]();
     } else {
       grabbers = getplayers();
     }
@@ -1324,9 +1314,7 @@ powerup_vo(type) {
   }
 
   if(isDefined(level.powerup_vo_available)) {
-    if(![
-        [level.powerup_vo_available]
-      ]()) {
+    if(![[level.powerup_vo_available]]()) {
       return;
     }
   }

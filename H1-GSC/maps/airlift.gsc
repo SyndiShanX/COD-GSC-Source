@@ -1708,7 +1708,7 @@ cobra_crash() {
   level.wingman.yawaccel = 100;
   level.wingman setmaxpitchroll(100, 200);
   level.wingman.animname = "wingman";
-  level.wingman setanim( % h1_cobra_crash);
+  level.wingman setanim(%h1_cobra_crash);
   level.wingman thread cobra_crash_rotate();
   level.wingman thread cobra_crash_fx();
   level.wingman thread cobra_crash_attached_fx();
@@ -2347,8 +2347,8 @@ cobrapilot_change_facial_anim(var_0, var_1) {
   var_2 = level.scr_anim[self.animname][var_0];
 
   for(;;) {
-    self setanimknoballrestart(var_2, % velinda_face, 1);
-    self setanimlimited( % velinda_face, 1);
+    self setanimknoballrestart(var_2, %velinda_face, 1);
+    self setanimlimited(%velinda_face, 1);
 
     if(!var_1) {
       break;
@@ -4197,7 +4197,7 @@ exploder_statue_old() {
 
 seaknight_liftoff_anim() {
   level.seaknight.animname = "seaknight";
-  level.seaknight setanim( % h1_ch46r_liftoff);
+  level.seaknight setanim(%h1_ch46r_liftoff);
 }
 
 seaknight_turret_test() {

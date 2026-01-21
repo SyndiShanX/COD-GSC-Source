@@ -595,13 +595,7 @@ end_of_game_summary_begin() {
   visionSetNaked("zombietron_afternoon_death", 0);
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setClientDvars(
-      "r_lightTweakSunLight", light,
-      "r_lightTweakSunColor", color,
-      "r_lightTweakSunDirection", dir,
-      "r_exposureTweak", 1,
-      "r_exposureValue", exposure
-    );
+    players[i] setClientDvars("r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure);
   }
   players = sort_by_score(GetPlayers());
   pads = [];
@@ -753,13 +747,7 @@ end_of_game_summary_end(lastArena, old_camera_angles, old_camera_offset) {
   angles = VectorToAngles(camera_center - spawn_origin);
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setClientDvars("player_topDownCamMode", 3,
-      "player_topDownCamCenterPos", camera_center,
-      "player_TopDownCamAngles", old_camera_angles,
-      "player_topDownCamOffset", old_camera_offset,
-      "cg_fov", 65,
-      "cl_scoreDraw", "1",
-      "hud_drawHUD", "1");
+    players[i] setClientDvars("player_topDownCamMode", 3, "player_topDownCamCenterPos", camera_center, "player_TopDownCamAngles", old_camera_angles, "player_topDownCamOffset", old_camera_offset, "cg_fov", 65, "cl_scoreDraw", "1", "hud_drawHUD", "1");
   }
   maps\createart\zombietron_art::setup_random_sun();
   maps\_zombietron_pickups::clear_all_pickups();

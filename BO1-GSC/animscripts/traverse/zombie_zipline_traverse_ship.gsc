@@ -11,9 +11,9 @@ main() {
     if(isDefined(level.scr_anim[self.animname]["zipline_traverse_ship"])) {
       zipline_traverse_ship(level.scr_anim[self.animname]["zipline_traverse_ship"]);
     } else if(self.has_legs == true) {
-      zipline_traverse_ship( % ai_zombie_zipline_traverse_ship);
+      zipline_traverse_ship(%ai_zombie_zipline_traverse_ship);
     } else {
-      zipline_traverse_ship( % ai_zombie_crawler_zipline_traverse_ship);
+      zipline_traverse_ship(%ai_zombie_crawler_zipline_traverse_ship);
     }
   }
 }

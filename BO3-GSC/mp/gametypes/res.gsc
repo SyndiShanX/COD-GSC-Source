@@ -521,9 +521,7 @@ function onuse(player, team) {
   } else {
     level.usestartspawns = 0;
     assert(team != "");
-    if([
-        [level.gettimelimit]
-      ]() > 0 && level.extratime) {
+    if([[level.gettimelimit]]() > 0 && level.extratime) {
       level.usingextratime = 1;
       if(!level.hardcoremode) {
         iprintln(&"MP_TIME_EXTENDED");

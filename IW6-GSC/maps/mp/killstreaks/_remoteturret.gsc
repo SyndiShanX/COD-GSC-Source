@@ -113,9 +113,7 @@ setCarryingTurret(turret, allowCancel) {
       }
       if(level.console) {
         killstreakWeapon = getKillstreakWeapon(level.turretSettings[turret.turretType].streakName);
-        if(isDefined(self.killstreakIndexWeapon) &&
-          killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) &&
-          !(self GetWeaponsListItems()).size) {
+        if(isDefined(self.killstreakIndexWeapon) && killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) && !(self GetWeaponsListItems()).size) {
           self _giveWeapon(killstreakWeapon, 0);
           self _setActionSlot(4, "weapon", killstreakWeapon);
         }
@@ -183,9 +181,7 @@ removeWeapons() {
 }
 
 restoreWeapons() {
-  if(!isDefined(self.restoreWeaponClipAmmo) ||
-    !isDefined(self.restoreWeaponStockAmmo) ||
-    !isDefined(self.weaponsToRestore)) {
+  if(!isDefined(self.restoreWeaponClipAmmo) || !isDefined(self.restoreWeaponStockAmmo) || !isDefined(self.weaponsToRestore)) {
     return;
   }
   altWeapons = [];
@@ -541,12 +537,7 @@ watchEnterAndExit() {
   owner = self.owner;
   while(true) {
     currentWeapon = owner GetCurrentWeapon();
-    if(isKillstreakWeapon(currentWeapon) &&
-      currentWeapon != level.turretSettings[self.turretType].weaponInfo &&
-      currentWeapon != level.turretSettings[self.turretType].laptopInfo &&
-      currentWeapon != level.turretSettings[self.turretType].remoteInfo &&
-      currentWeapon != "none" &&
-      (!owner isJuggernaut() || owner isUsingRemote())) {
+    if(isKillstreakWeapon(currentWeapon) && currentWeapon != level.turretSettings[self.turretType].weaponInfo && currentWeapon != level.turretSettings[self.turretType].laptopInfo && currentWeapon != level.turretSettings[self.turretType].remoteInfo && currentWeapon != "none" && (!owner isJuggernaut() || owner isUsingRemote())) {
       if(!isDefined(owner.enter_message_deleted) || !owner.enter_message_deleted) {
         owner.enter_message_deleted = true;
         owner clearLowerMessage("enter_remote_turret");
@@ -582,22 +573,13 @@ watchEnterAndExit() {
       continue;
     }
 
-    if(isDefined(owner.enter_message_deleted) &&
-      owner.enter_message_deleted &&
-      currentWeapon != "none") {
+    if(isDefined(owner.enter_message_deleted) && owner.enter_message_deleted && currentWeapon != "none") {
       owner setLowerMessage("enter_remote_turret", level.turretSettings[self.turretType].hintEnter, undefined, undefined, undefined, true, ENTER_MESSAGE_ALPHA, ENTER_MESSAGE_FADE_TIME, true);
       owner.enter_message_deleted = false;
     }
 
     timeUsed = 0;
-    while(owner UseButtonPressed() &&
-      !owner FragButtonPressed() &&
-      !isDefined(owner.throwingGrenade) &&
-      !owner SecondaryOffhandButtonPressed() &&
-      !owner IsUsingTurret() &&
-      owner IsOnGround() &&
-      !owner IsTouching(self.ownerTrigger) &&
-      (!isDefined(owner.empGrenaded) || !owner.empGrenaded)) {
+    while(owner UseButtonPressed() && !owner FragButtonPressed() && !isDefined(owner.throwingGrenade) && !owner SecondaryOffhandButtonPressed() && !owner IsUsingTurret() && owner IsOnGround() && !owner IsTouching(self.ownerTrigger) && (!isDefined(owner.empGrenaded) || !owner.empGrenaded)) {
       if(isDefined(owner.isCarrying) && owner.isCarrying) {
         break;
       }
@@ -661,12 +643,7 @@ turret_handlePickup(turret) {
   buttonTime = 0;
   while(true) {
     currentWeapon = self GetCurrentWeapon();
-    if((isKillstreakWeapon(currentWeapon) && currentWeapon != "killstreak_remote_turret_mp") &&
-      currentWeapon != level.turretSettings[turret.turretType].weaponInfo &&
-      currentWeapon != level.turretSettings[turret.turretType].laptopInfo &&
-      currentWeapon != level.turretSettings[turret.turretType].remoteInfo &&
-      currentWeapon != "none" &&
-      (!self isJuggernaut() || self isUsingRemote())) {
+    if((isKillstreakWeapon(currentWeapon) && currentWeapon != "killstreak_remote_turret_mp") && currentWeapon != level.turretSettings[turret.turretType].weaponInfo && currentWeapon != level.turretSettings[turret.turretType].laptopInfo && currentWeapon != level.turretSettings[turret.turretType].remoteInfo && currentWeapon != "none" && (!self isJuggernaut() || self isUsingRemote())) {
       if(!isDefined(self.pickup_message_deleted) || !self.pickup_message_deleted) {
         self.pickup_message_deleted = true;
         self clearLowerMessage("pickup_remote_turret");
@@ -684,13 +661,8 @@ turret_handlePickup(turret) {
       continue;
     }
 
-    if(isReallyAlive(self) &&
-      self IsTouching(turret.ownerTrigger) &&
-      !isDefined(turret.carriedBy) &&
-      self IsOnGround()) {
-      if(isDefined(self.pickup_message_deleted) &&
-        self.pickup_message_deleted &&
-        currentWeapon != "none") {
+    if(isReallyAlive(self) && self IsTouching(turret.ownerTrigger) && !isDefined(turret.carriedBy) && self IsOnGround()) {
+      if(isDefined(self.pickup_message_deleted) && self.pickup_message_deleted && currentWeapon != "none") {
         self setLowerMessage("pickup_remote_turret", level.turretSettings[turret.turretType].hintPickUp, undefined, undefined, undefined, undefined, undefined, undefined, true);
         self.pickup_message_deleted = false;
       }

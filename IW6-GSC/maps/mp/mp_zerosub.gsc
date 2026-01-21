@@ -466,13 +466,7 @@ getKillTarget() {
   randomIndex = 0;
 
   foreach(player in level.players) {
-    if(isDefined(player) &&
-      IsReallyAlive(player) &&
-      player.team != level.zerosub_killstreak_user.team &&
-      player isOutside() &&
-      !player isBeingHunted() &&
-      player.avoidKillstreakOnSpawnTimer <= 0 &&
-      !player maps\mp\killstreaks\_killstreaks::isUsingHeliSniper()) {
+    if(isDefined(player) && IsReallyAlive(player) && player.team != level.zerosub_killstreak_user.team && player isOutside() && !player isBeingHunted() && player.avoidKillstreakOnSpawnTimer <= 0 && !player maps\mp\killstreaks\_killstreaks::isUsingHeliSniper()) {
       killTargets[killTargets.size] = player;
     }
   }
@@ -677,9 +671,7 @@ delayPlayLoopScreenFX(effectType, intervalTime, delayTime) {
   wait(delayTime);
 
   while(true) {
-    if((!level.beastAllowedIndoors && self isOutside()) ||
-      (level.beastAllowedIndoors && self isOutside() && effectType == "snow") ||
-      (level.beastAllowedIndoors && effectType != "snow")) {
+    if((!level.beastAllowedIndoors && self isOutside()) || (level.beastAllowedIndoors && self isOutside() && effectType == "snow") || (level.beastAllowedIndoors && effectType != "snow")) {
       effect_ent = SpawnFXForClient(level.zerosub_fx[effectType]["screen"], self getEye(), self);
 
       if(isDefined(effect_ent)) {

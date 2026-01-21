@@ -196,16 +196,16 @@ dog_lower_camera(var_0) {
   if(!isDefined(var_0))
     var_0 = 0.75;
 
-  self setanim( % camera, 1, var_0, 1);
-  self setanimknob( % iw6_dog_camera_down_add, 1, var_0, 1);
+  self setanim(%camera, 1, var_0, 1);
+  self setanimknob(%iw6_dog_camera_down_add, 1, var_0, 1);
 }
 
 dog_raise_camera(var_0) {
   if(!isDefined(var_0))
     var_0 = 0.75;
 
-  self setanim( % camera, 1, var_0, 1);
-  self setanimknob( % iw6_dog_camera_up_add, 1, var_0, 1);
+  self setanim(%camera, 1, var_0, 1);
+  self setanimknob(%iw6_dog_camera_up_add, 1, var_0, 1);
 }
 
 dyn_sniff_enable(var_0, var_1) {
@@ -264,7 +264,7 @@ dog_bark(var_0) {
   if(!isDefined(var_0))
     var_0 = "anml_dog_bark_attention_npc";
 
-  self setanimrestart( % iw6_dog_attackidle_bark_add, 1, 0.1, 1);
+  self setanimrestart(%iw6_dog_attackidle_bark_add, 1, 0.1, 1);
   maps\_utility::play_sound_on_entity(var_0);
 }
 

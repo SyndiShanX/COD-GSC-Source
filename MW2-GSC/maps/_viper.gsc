@@ -10,7 +10,7 @@ main(model, type) {
   build_template("viper", model, type);
   build_localinit(::init_local);
   build_deathmodel("vehicle_viper_gunship");
-  build_drive( % bh_rotors, undefined, 0, 3.0);
+  build_drive(%bh_rotors, undefined, 0, 3.0);
 
   viper_death_fx = [];
   viper_death_fx["vehicle_viper_gunship"] = "explosions/large_vehicle_explosion";
@@ -100,7 +100,5 @@ and these lines in your CSV:
 include,vehicle_viper_gunship
 sound,vehicle_cobra,vehicle_standard,all_sp
 
-defaultmdl="vehicle_viper_gunship"
-default:"vehicletype" "viper"
-default:"script_team" "allies"
+defaultmdl="vehicle_viper_gunship"default:"vehicletype" "viper"default:"script_team" "allies"
 */

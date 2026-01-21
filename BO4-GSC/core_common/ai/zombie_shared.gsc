@@ -68,16 +68,11 @@ growling() {
 }
 
 registernotetracks() {
-  anim.notetracks[# "anim_pose = "
-    stand ""] = &notetrackposestand;
-  anim.notetracks[# "anim_pose = "
-    crouch ""] = &notetrackposecrouch;
-  anim.notetracks[# "anim_movement = "
-    stop ""] = &notetrackmovementstop;
-  anim.notetracks[# "anim_movement = "
-    walk ""] = &notetrackmovementwalk;
-  anim.notetracks[# "anim_movement = "
-    run ""] = &notetrackmovementrun;
+  anim.notetracks[# "anim_pose = "stand ""] = &notetrackposestand;
+  anim.notetracks[# "anim_pose = "crouch ""] = &notetrackposecrouch;
+  anim.notetracks[# "anim_movement = "stop ""] = &notetrackmovementstop;
+  anim.notetracks[# "anim_movement = "walk ""] = &notetrackmovementwalk;
+  anim.notetracks[# "anim_movement = "run ""] = &notetrackmovementrun;
   anim.notetracks[# "anim_alertness = causal"] = &notetrackalertnesscasual;
   anim.notetracks[# "anim_alertness = alert"] = &notetrackalertnessalert;
   anim.notetracks[# "gravity on"] = &notetrackgravity;
@@ -224,9 +219,7 @@ handlenotetrack(note, flagname, customfunction, var1) {
     notetrackfunc = anim.notetracks[note];
 
     if(isDefined(notetrackfunc)) {
-      return [
-        [notetrackfunc]
-      ](note, flagname);
+      return [[notetrackfunc]](note, flagname);
     }
   }
 
@@ -317,9 +310,7 @@ donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, va
 
     if(timetaken < 0.05) {
       time = gettime();
-      returnednote = [
-        [notetracksfunc]
-      ](flagname, customfunction, var1);
+      returnednote = [[notetracksfunc]](flagname, customfunction, var1);
       timetaken = gettime() - time;
 
       if(timetaken < 0.05) {

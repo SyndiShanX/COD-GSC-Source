@@ -179,12 +179,12 @@ animhasfacialoverride(var_0) {
 
 playfacialanim(var_0, var_1, var_2) {
   if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims) {
-    self clearanim( % head, 0.2);
+    self clearanim(%head, 0.2);
     return;
   }
 
   if(isDefined(var_0) && animhasfacialoverride(var_0)) {
-    self clearanim( % head, 0.2);
+    self clearanim(%head, 0.2);
     return;
   }
 

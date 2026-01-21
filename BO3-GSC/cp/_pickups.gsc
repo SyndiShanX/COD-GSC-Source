@@ -105,9 +105,7 @@ class cpickupitem: cbaseinteractable {
     self thread debug_despawn_timer();
     wait(m_n_despawn_wait);
     if(isDefined(m_custom_despawn_func)) {
-      [
-        [m_custom_despawn_func]
-      ]();
+      [[m_custom_despawn_func]]();
     } else {
       pickupitem_despawn();
     }

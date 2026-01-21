@@ -14,7 +14,7 @@ main(model, type) {
 
   build_radiusdamage((0, 0, 32), 300, 200, 100, false);
   build_deathfx("explosions/small_vehicle_explosion", undefined, "explo_metal_rand");
-  build_drive( % uaz_driving_idle_forward, % uaz_driving_idle_backward, 10);
+  build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
   build_deathquake(1, 1.6, 500);
 
   build_treadfx();

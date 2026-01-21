@@ -10,8 +10,7 @@
 	- each trigger_use targets the script_model of the documents
 	- add script call, example script call:
 	thread maps\_documents::main(1, "Capture the enemy documents", "documents_triggers");
-	The "objective_number" parameter is the number of this objective,
-	the "array_targetname" parameter is the target name of the trigger_use(s)
+	The "objective_number" parameter is the number of this objective, the "array_targetname" parameter is the target name of the trigger_use(s)
 	The "activate_notify" parameter is the notify the bombs wait for before becoming usable
 */
 

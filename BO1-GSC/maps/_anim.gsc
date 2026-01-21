@@ -272,13 +272,7 @@ notetrack_customfunction_exists(animname, notetrack, function, scene) {
   if(isDefined(level.scr_notetrack) && isDefined(level.scr_notetrack[animname])) {
     keys = GetArrayKeys(level.scr_notetrack[animname]);
     for(i = 0; i < keys.size; i++) {
-      if(isDefined(level.scr_notetrack[animname][keys[i]]) &&
-        isDefined(level.scr_notetrack[animname][keys[i]]["notetrack"]) &&
-        isDefined(level.scr_notetrack[animname][keys[i]]["scene"]) &&
-        isDefined(level.scr_notetrack[animname][keys[i]]["function"]) &&
-        level.scr_notetrack[animname][keys[i]]["notetrack"] == notetrack &&
-        level.scr_notetrack[animname][keys[i]]["scene"] == scene &&
-        level.scr_notetrack[animname][keys[i]]["function"] == function) {
+      if(isDefined(level.scr_notetrack[animname][keys[i]]) && isDefined(level.scr_notetrack[animname][keys[i]]["notetrack"]) && isDefined(level.scr_notetrack[animname][keys[i]]["scene"]) && isDefined(level.scr_notetrack[animname][keys[i]]["function"]) && level.scr_notetrack[animname][keys[i]]["notetrack"] == notetrack && level.scr_notetrack[animname][keys[i]]["scene"] == scene && level.scr_notetrack[animname][keys[i]]["function"] == function) {
         return true;
       }
     }
@@ -573,9 +567,7 @@ anim_loop_packet(guyPackets, scene, ender, animname_override) {
       } else {
         animname = guy.animname;
       }
-      if((isDefined(level.scr_face[animname])) &&
-        (isDefined(level.scr_face[animname][scene])) &&
-        (isDefined(level.scr_face[animname][scene][idleanim]))) {
+      if((isDefined(level.scr_face[animname])) && (isDefined(level.scr_face[animname][scene])) && (isDefined(level.scr_face[animname][scene][idleanim]))) {
         doFacialanim = true;
         facialAnim = level.scr_face[animname][scene][idleanim];
       }
@@ -588,17 +580,14 @@ anim_loop_packet(guyPackets, scene, ender, animname_override) {
         doDialogue = true;
         dialogue = level.scr_sound[animname][scene + "_pg"][idleanim];
       }
-      if(isDefined(level.scr_animSound[animname]) &&
-        isDefined(level.scr_animSound[animname][idleanim + scene])) {
+      if(isDefined(level.scr_animSound[animname]) && isDefined(level.scr_animSound[animname][idleanim + scene])) {
         guy playSound(level.scr_animSound[animname][idleanim + scene]);
       }
-      if((isDefined(level.scr_anim[animname])) &&
-        (isDefined(level.scr_anim[animname][scene]))) {
+      if((isDefined(level.scr_anim[animname])) && (isDefined(level.scr_anim[animname][scene]))) {
         doAnimation = true;
       }
       if(doAnimation) {
-        if(guy.classname == "script_vehicle" &&
-          (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
+        if(guy.classname == "script_vehicle" && (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
           guy.origin = org;
           guy.angles = angles;
           guy SetFlaggedAnimKnobRestart(anim_string, level.scr_anim[animname][scene][idleanim], 1, 0.2, 1);
@@ -715,8 +704,7 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
   } else {
     animname = guy.animname;
   }
-  if((isDefined(level.scr_face[animname])) &&
-    (isDefined(level.scr_face[animname][scene]))) {
+  if((isDefined(level.scr_face[animname])) && (isDefined(level.scr_face[animname][scene]))) {
     doFacialanim = true;
     facialAnim = level.scr_face[animname][scene];
   }
@@ -729,12 +717,10 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
     doDialogue = true;
     dialogue = level.scr_sound[animname][scene + "_pg"];
   }
-  if((isDefined(level.scr_look[animname])) &&
-    (isDefined(level.scr_look[animname][scene]))) {
+  if((isDefined(level.scr_look[animname])) && (isDefined(level.scr_look[animname][scene]))) {
     doLook = true;
   }
-  if(isDefined(level.scr_animSound[animname]) &&
-    isDefined(level.scr_animSound[animname][scene])) {
+  if(isDefined(level.scr_animSound[animname]) && isDefined(level.scr_animSound[animname][scene])) {
     guy playSound(level.scr_animSound[animname][scene]);
   }
   animation = guy get_anim(scene, animname_override);
@@ -747,8 +733,7 @@ anim_single_thread(guys, index, scene, org, angles, animname_override, aligned, 
       tracker.scriptedAnimationTime = animtime;
       tracker.scriptedAnimationIndex = index;
     }
-    if(guy.classname == "script_vehicle" &&
-      (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
+    if(guy.classname == "script_vehicle" && (!isDefined(guy.supportsAnimScripted) || !guy.supportsAnimScripted)) {
       veh_org = GetStartOrigin(org, angles, animation);
       veh_ang = GetStartAngles(org, angles, animation);
       guy.origin = veh_org;
@@ -1045,11 +1030,8 @@ notetrack_wait(guy, msg, scene, animname_override) {
           } else if(isDefined(scr_notetrack["delete model"])) {
             anim_removeModel(guy, scr_notetrack);
           }
-          if((isDefined(scr_notetrack["selftag"])) &&
-            (isDefined(scr_notetrack["effect"]))) {
-            playFXOnTag(
-              level._effect[scr_notetrack["effect"]], guy,
-              scr_notetrack["selftag"]);
+          if((isDefined(scr_notetrack["selftag"])) && (isDefined(scr_notetrack["effect"]))) {
+            playFXOnTag(level._effect[scr_notetrack["effect"]], guy, scr_notetrack["selftag"]);
           }
           if(isDefined(scr_notetrack["tag"]) && isDefined(scr_notetrack["effect"])) {
             playFXOnTag(level._effect[scr_notetrack["effect"]], tag_owner, scr_notetrack["tag"]);
@@ -1251,8 +1233,7 @@ begin_anim_reach(guy, tracker, startorg, disablearrivals, aligned) {
   guy._anim_old_disablearrivals = guy.disablearrivals;
   guy._anim_old_fixednode = guy.fixednode;
   goal = startorg;
-  if(vector_compare(self.origin, startorg) &&
-    isDefined(self.type) && GetSubStr(self.type, 0, 5) == "Cover") {
+  if(vector_compare(self.origin, startorg) && isDefined(self.type) && GetSubStr(self.type, 0, 5) == "Cover") {
     guy.a.coverIdleOnly = true;
     disablearrivals = false;
     goal = self;
@@ -1373,7 +1354,7 @@ anim_look(guy, scene, array) {
   guy setflaggedanimknobrestart("face_done_" + scene, array["left"], 1, 0.2, 1);
   thread clearFaceAnimOnAnimdone(guy, "face_done_" + scene, scene);
   guy SetAnimKnobRestart(array["right"], 1, 0.2, 1);
-  guy SetAnim( % scripted, 0.01, 0.3, 1);
+  guy SetAnim(%scripted, 0.01, 0.3, 1);
   closeToZero = 0.01;
   for(;;) {
     destYaw = guy GetYawToOrigin(level.player.origin);
@@ -1405,8 +1386,8 @@ anim_facialAnim(guy, scene, faceanim) {
   guy notify("newLookTarget");
   waittillframeend;
   closeToZero = 0.3;
-  guy SetAnim( % scripted_look_straight, 0, 0);
-  guy SetAnim( % scripted_look_straight, 1, 0.5);
+  guy SetAnim(%scripted_look_straight, 0, 0);
+  guy SetAnim(%scripted_look_straight, 1, 0.5);
   guy setflaggedanimknobrestart("face_done_" + scene, faceanim, 1, 0, 1);
   thread clearFaceAnimOnAnimdone(guy, "face_done_" + scene, scene);
 }
@@ -1427,7 +1408,7 @@ anim_facialFiller(msg, lookTarget) {
   }
   self set_talker_until_msg(msg);
   changeTime = 0.3;
-  self ClearAnim( % scripted_look_straight, changeTime);
+  self ClearAnim(%scripted_look_straight, changeTime);
 }
 
 set_talker_until_msg(msg, talkanim) {
@@ -1445,11 +1426,11 @@ talk_for_time(timer) {
     talkAnim = % generic_talker_axis;
   }
   self SetAnimKnobRestart(talkAnim, 1, 0, 1);
-  self SetAnim( % scripted_talking, 1, 0.1);
+  self SetAnim(%scripted_talking, 1, 0.1);
   wait(timer);
   changeTime = 0.3;
-  self ClearAnim( % scripted_talking, 0.1);
-  self ClearAnim( % scripted_look_straight, changeTime);
+  self ClearAnim(%scripted_talking, 0.1);
+  self ClearAnim(%scripted_look_straight, changeTime);
 }
 
 GetYawAngles(angles1, angles2) {
@@ -1515,12 +1496,12 @@ lookRecenter(msg) {
   self endon("newLookTarget");
   self endon("death");
   self waittill(msg);
-  self ClearAnim( % scripted_talking, 0.1);
-  self SetAnim( % generic_lookupright, 1, 0.3);
-  self SetAnim( % generic_lookupleft, 1, 0.3);
-  self SetAnim( % scripted_look_straight, 0.2, 0.1);
+  self ClearAnim(%scripted_talking, 0.1);
+  self SetAnim(%generic_lookupright, 1, 0.3);
+  self SetAnim(%generic_lookupleft, 1, 0.3);
+  self SetAnim(%scripted_look_straight, 0.2, 0.1);
   wait(0.2);
-  self ClearAnim( % scripted_look_straight, 0.2);
+  self ClearAnim(%scripted_look_straight, 0.2);
 }
 
 lookLine(org, msg) {
@@ -1555,7 +1536,7 @@ clearFaceAnimOnAnimdone(guy, msg, scene) {
   guy endon("death");
   guy waittillmatch(msg, "end");
   changeTime = 0.3;
-  guy ClearAnim( % scripted_look_straight, changeTime);
+  guy ClearAnim(%scripted_look_straight, changeTime);
 }
 
 anim_start_pos(ents, scene, tag) {

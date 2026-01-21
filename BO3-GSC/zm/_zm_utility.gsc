@@ -496,9 +496,7 @@ function generated_radius_attract_positions(forward, offset, num_positions, attr
     altforward = forward * attract_radius;
     rotated_forward = ((cos(i) * altforward[0]) - (sin(i) * altforward[1]), (sin(i) * altforward[0]) + (cos(i) * altforward[1]), altforward[2]);
     if(isDefined(level.poi_positioning_func)) {
-      pos = [
-        [level.poi_positioning_func]
-      ](self.origin, rotated_forward);
+      pos = [[level.poi_positioning_func]](self.origin, rotated_forward);
     } else {
       if(isDefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning) {
         pos = zm_server_throttle::server_safe_ground_trace("poi_trace", 10, (self.origin + rotated_forward) + vectorscale((0, 0, 1), 10));
@@ -724,9 +722,7 @@ function remove_poi_attractor(zombie_poi) {
 
 function array_check_for_dupes_using_compare(array, single, is_equal_fn) {
   for(i = 0; i < array.size; i++) {
-    if([
-        [is_equal_fn]
-      ](array[i], single)) {
+    if([[is_equal_fn]](array[i], single)) {
       return false;
     }
   }
@@ -971,12 +967,8 @@ function get_closest_valid_player(origin, ignore_player) {
   }
   if(!valid_player_found) {
     for(;;) {
-      player = [
-        [self.closest_player_override]
-      ](origin, players);
-      player = [
-        [level.closest_player_override]
-      ](origin, players);
+      player = [[self.closest_player_override]](origin, players);
+      player = [[level.closest_player_override]](origin, players);
       player = arraygetclosest(origin, players);
       aiprofile_endentry();
       return undefined;
@@ -3118,9 +3110,7 @@ function get_closest_index_to_entity(entity, array, dist, extra_check) {
   }
   index = undefined;
   for(i = 0; i < array.size; i++) {
-    if(isDefined(extra_check) && ![
-        [extra_check]
-      ](entity, array[i])) {
+    if(isDefined(extra_check) && ![[extra_check]](entity, array[i])) {
       continue;
     }
     newdistsq = distancesquared(array[i].origin, org);

@@ -50,14 +50,14 @@ doface(localclientnum) {
 
 buildface_player() {
   level.face_anim_tree = "multiplayer";
-  self setfaceroot( % head);
-  self buildfacestate("face_casual", 1, -1, 0, "basestate", % pf_casual_idle);
-  self buildfacestate("face_alert", 1, -1, 0, "basestate", % pf_alert_idle);
-  self buildfacestate("face_shoot", 1, 1, 1, "eventstate", % pf_firing);
-  self buildfacestate("face_shoot_single", 1, 1, 1, "eventstate", % pf_firing);
-  self buildfacestate("face_melee", 1, 2, 1, "eventstate", % pf_melee);
-  self buildfacestate("face_pain", 0, -1, 2, "eventstate", % pf_pain);
-  self buildfacestate("face_death", 0, -1, 2, "exitstate", % pf_death);
+  self setfaceroot(%head);
+  self buildfacestate("face_casual", 1, -1, 0, "basestate", %pf_casual_idle);
+  self buildfacestate("face_alert", 1, -1, 0, "basestate", %pf_alert_idle);
+  self buildfacestate("face_shoot", 1, 1, 1, "eventstate", %pf_firing);
+  self buildfacestate("face_shoot_single", 1, 1, 1, "eventstate", %pf_firing);
+  self buildfacestate("face_melee", 1, 2, 1, "eventstate", %pf_melee);
+  self buildfacestate("face_pain", 0, -1, 2, "eventstate", %pf_pain);
+  self buildfacestate("face_death", 0, -1, 2, "exitstate", %pf_death);
   self buildfacestate("face_advance", 0, -1, 3, "nullstate", undefined);
 }
 

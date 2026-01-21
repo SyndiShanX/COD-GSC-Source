@@ -265,19 +265,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
   var_41c4d474 = isplayer(attacker) && self == attacker;
   vattacker = isDefined(attacker) ? attacker : self;
   callbackparams = {
-    #victimorigin: self.origin,
-    #victimangles: self getplayerangles(),
-    #victimweapon: self.currentweapon,
-    #einflictor: einflictor,
-    #attacker: attacker,
-    #attackerorigin: vattacker.origin,
-    #attackerangles: isplayer(vattacker.origin) ? vattacker getplayerangles() : vattacker.angles,
-    #idamage: idamage,
-    #smeansofdeath: smeansofdeath,
-    #sweapon: weapon,
-    #vdir: vdir,
-    #shitloc: shitloc,
-    #matchtime: function_f8d53445()
+    #victimorigin: self.origin, #victimangles: self getplayerangles(), #victimweapon: self.currentweapon, #einflictor: einflictor, #attacker: attacker, #attackerorigin: vattacker.origin, #attackerangles: isplayer(vattacker.origin) ? vattacker getplayerangles() : vattacker.angles, #idamage: idamage, #smeansofdeath: smeansofdeath, #sweapon: weapon, #vdir: vdir, #shitloc: shitloc, #matchtime: function_f8d53445()
   };
   laststandparams = self.laststandparams;
   var_a1d415ee = self.var_a1d415ee;
@@ -310,16 +298,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
   }
 
   params = {
-    #einflictor: einflictor,
-    #eattacker: attacker,
-    #idamage: idamage,
-    #smeansofdeath: smeansofdeath,
-    #weapon: weapon,
-    #vdir: vdir,
-    #shitloc: shitloc,
-    #psoffsettime: psoffsettime,
-    #deathanimduration: deathanimduration,
-    #laststandparams: laststandparams
+    #einflictor: einflictor, #eattacker: attacker, #idamage: idamage, #smeansofdeath: smeansofdeath, #weapon: weapon, #vdir: vdir, #shitloc: shitloc, #psoffsettime: psoffsettime, #deathanimduration: deathanimduration, #laststandparams: laststandparams
   };
   self callback::callback(#"on_player_killed_with_params", params);
   self stopsounds();
@@ -623,9 +602,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
 
   if(isDefined(attacker) && isplayer(attacker) && !var_41c4d474 && !var_8efc9727) {
     attacker notify(#"killed_enemy_player", {
-      #victim: self,
-      #weapon: weapon,
-      #time: gettime()
+      #victim: self, #weapon: weapon, #time: gettime()
     });
     self thread challenges::playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shitloc, attackerstance, bledout);
   } else {
@@ -1532,10 +1509,7 @@ function_48a1200f(einflictor, attacker, weapon, lpattackteam) {
 
       if(sessionmodeismultiplayergame() && isDefined(player.currentweapon)) {
         function_92d1707f(#"hash_d1357992f4715f0", {
-          #gametime: function_f8d53445(),
-          #assistspawnid: getplayerspawnid(player),
-          #assistspecialist: function_b14806c6(player player_role::get(), currentsessionmode()),
-          #assistweapon: player.currentweapon.name
+          #gametime: function_f8d53445(), #assistspawnid: getplayerspawnid(player), #assistspecialist: function_b14806c6(player player_role::get(), currentsessionmode()), #assistweapon: player.currentweapon.name
         });
       }
 
@@ -2228,8 +2202,7 @@ function_e8decd0b(attacker, weapon, victim, einflictor, smeansofdeath) {
   if(isDefined(einflictor)) {
     bhtnactionstartevent(einflictor, "attack_kill");
     einflictor notify(#"bhtn_action_notify", {
-      #action: "attack_kill"
-    });
+      #action: "attack_kill"});
   }
 }
 

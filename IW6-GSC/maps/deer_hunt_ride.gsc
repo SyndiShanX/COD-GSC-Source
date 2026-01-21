@@ -88,7 +88,7 @@ food_truck() {
   var_1.animname = "generic";
   var_2 = var_1 thread maps\deer_hunt_util::spawn_model_and_linkto_me("accessories_sack_coffee_animated", "tag_inhand");
   var_0 thread maps\_anim::anim_loop_solo(var_1, "dh_food_server", "player_in_house");
-  var_3 = getanimlength( % dh_food_server);
+  var_3 = getanimlength(%dh_food_server);
 
   for(;;) {
     var_1 waittill("stop_sequencing_notetracks");
@@ -776,7 +776,7 @@ ending_scene() {
   foreach(var_8 in level.third_floor_actors)
   var_8.third_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "3rd_floor_end");
 
-  var_19 = getanimlength( % dh_ending_hesh_end_b);
+  var_19 = getanimlength(%dh_ending_hesh_end_b);
   wait(var_19 - 3);
   level_end();
 }

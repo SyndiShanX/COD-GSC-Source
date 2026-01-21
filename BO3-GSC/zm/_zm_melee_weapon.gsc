@@ -69,9 +69,7 @@ function init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballisti
   level.ballistic_upgraded_weapon[weapon] = ballistic_upgraded_weapon;
   if(!isDefined(level.zombie_weapons[weapon])) {
     if(isDefined(level.devgui_add_weapon)) {
-      [
-        [level.devgui_add_weapon]
-      ](weapon, "", weapon_name, cost);
+      [[level.devgui_add_weapon]](weapon, "", weapon_name, cost);
     }
   }
 }

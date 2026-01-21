@@ -415,14 +415,14 @@ noteTrackPoseCrouch(note, flagName) {
 }
 
 noteTrackPoseProne(note, flagName) {
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0);
   self.a.pose = "prone";
   self notify("entered_pose" + "prone");
 }
 
 noteTrackPoseCrawl(note, flagName) {
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0);
   self.a.pose = "prone";
   self notify("entered_pose" + "prone");
@@ -688,9 +688,7 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
-      returnedNote = [
-        [notetracksFunc]
-      ](flagName, customFunction, debugIdentifier);
+      returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
       timetaken = GetTime() - time;
       if(timetaken < 0.05) {
         println(GetTime() + " " + debugIdentifier + " animscripts\shared::DoNoteTracksForever is trying to cause an infinite loop on anim " + flagName + ", returned " + returnedNote + ".");
@@ -868,7 +866,7 @@ trackShootEntOrPos() {
   if(self is_zombie()) {
     return;
   }
-  trackLoop( % aim_2, % aim_4, % aim_6, % aim_8);
+  trackLoop(%aim_2, %aim_4, %aim_6, %aim_8);
 }
 
 trackLoop(aim2, aim4, aim6, aim8) {
@@ -1150,12 +1148,10 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
       if(self canSeeEnemy() && [[canStopCallback]]())
         return;
     }
-    if(self isSuppressedWrapper() && [
-        [canStopCallback]
-      ]()) {
+    if(self isSuppressedWrapper() && [[canStopCallback]]()) {
       return;
     }
-    self setAnimKnobAll(lookAnim, % body, 1, .1);
+    self setAnimKnobAll(lookAnim, %body, 1, .1);
     wait(0.1);
   }
 }
@@ -1163,7 +1159,7 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
 throwDownWeapon(swapAnim) {
   self endon("killanimscript");
   self animMode("angle deltas");
-  self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, % body, 1, .1, 1);
+  self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, %body, 1, .1, 1);
   note = "";
   while(note != "end") {
     self waittill("weapon swap", note);

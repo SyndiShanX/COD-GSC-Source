@@ -53,10 +53,7 @@ include,destructible_vehicle_small_hatch_blue_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatch_blue_destructible_mp"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_hatch_blue_destructible_mp"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_hatch_green_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -69,10 +66,7 @@ include,destructible_vehicle_small_hatch_green_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatch_green_destructible_mp"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_hatch_green_destructible_mp"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_hatch_turq_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -85,10 +79,7 @@ include,destructible_vehicle_small_hatch_turq_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatch_turq_destructible_mp"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_hatch_turq_destructible_mp"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_hatch_white_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -101,10 +92,7 @@ include,destructible_vehicle_small_hatch_white_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatch_white_destructible_mp"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_hatch_white_destructible_mp"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_hatchback_blue (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -115,10 +103,7 @@ and these lines in your CSV:
 include,vehicle_small_hatchback_blue_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatchback_blue"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_hatchback_blue"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_hatchback_green (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -129,10 +114,7 @@ and these lines in your CSV:
 include,vehicle_small_hatchback_green_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatchback_green"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_hatchback_green"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_hatchback_turq (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -143,10 +125,7 @@ and these lines in your CSV:
 include,vehicle_small_hatchback_turq_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatchback_turq"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_hatchback_turq"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_hatchback_white (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -157,7 +136,5 @@ and these lines in your CSV:
 include,vehicle_small_hatchback_white_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_hatchback_white"
-default:"vehicletype" "small_hatchback"
-default:"script_team" "allies"
+defaultmdl="vehicle_small_hatchback_white"default:"vehicletype" "small_hatchback"default:"script_team" "allies"
 */

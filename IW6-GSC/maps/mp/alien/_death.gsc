@@ -428,10 +428,7 @@ should_do_ragdoll(ent, deathAnim) {
 }
 
 blackBox_alienKilled(eAttacker) {
-  if(isPlayer(eAttacker) ||
-    (isDefined(eAttacker.pet) && (eAttacker.pet == 1) && isPlayer(eAttacker.petowner)) ||
-    (isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner))
-  ) {
+  if(isPlayer(eAttacker) || (isDefined(eAttacker.pet) && (eAttacker.pet == 1) && isPlayer(eAttacker.petowner)) || (isDefined(eAttacker.owner) && IsPlayer(eAttacker.owner))) {
     level.alienBBData["aliens_killed"]++;
   }
 
@@ -509,45 +506,12 @@ blackBox_alienKilled(eAttacker) {
     current_player_population = level.players.size;
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
-    IPrintLnBold("^8bbprint: alienkilled (1/2)\n" +
-      " attackerisagent=" + attacker_is_agent +
-      " attackeralivetime=" + attacker_alive_time +
-      " attackeragenttype=" + attacker_agent_type +
-      " attackername=" + attacker_name +
-      " attackerx=" + eAttacker.origin[0] +
-      " attackery=" + eAttacker.origin[1] +
-      " attackerz=" + eAttacker.origin[2] +
-      " victimalivetime=" + victim_alive_time);
+    IPrintLnBold("^8bbprint: alienkilled (1/2)\n" + " attackerisagent=" + attacker_is_agent + " attackeralivetime=" + attacker_alive_time + " attackeragenttype=" + attacker_agent_type + " attackername=" + attacker_name + " attackerx=" + eAttacker.origin[0] + " attackery=" + eAttacker.origin[1] + " attackerz=" + eAttacker.origin[2] + " victimalivetime=" + victim_alive_time);
 
-    IPrintLnBold("^8bbprint: alienkilled (2/2)\n" +
-      " victimspawnoriginx=" + victim_spawn_origin[0] +
-      " victimspawnoriginy=" + victim_spawn_origin[1] +
-      " victimspawnoriginz=" + victim_spawn_origin[2] +
-      " victimdistfromspawn=" + victim_dist_from_spawn +
-      " victimdamagedone=" + victim_damage_done +
-      " victimagenttype=" + victim_agent_type +
-      " currentenemypopulation=" + current_enemy_population +
-      " currentplayerpopulation=" + current_player_population);
+    IPrintLnBold("^8bbprint: alienkilled (2/2)\n" + " victimspawnoriginx=" + victim_spawn_origin[0] + " victimspawnoriginy=" + victim_spawn_origin[1] + " victimspawnoriginz=" + victim_spawn_origin[2] + " victimdistfromspawn=" + victim_dist_from_spawn + " victimdamagedone=" + victim_damage_done + " victimagenttype=" + victim_agent_type + " currentenemypopulation=" + current_enemy_population + " currentplayerpopulation=" + current_player_population);
   }
 
-  bbprint("alienkilled",
-    "attackerisagent %i attackeralivetime %f attackeragenttype %s attackername %s attackerx %f attackery %f attackerz %f victimalivetime %f victimspawnoriginx %f victimspawnoriginy %f victimspawnoriginz %f victimdistfromspawn %i victimdamagedone %i victimagenttype %s currentenemypopulation %i currentplayerpopulation %i ",
-    attacker_is_agent,
-    attacker_alive_time,
-    attacker_agent_type,
-    attacker_name,
-    eAttacker.origin[0],
-    eAttacker.origin[1],
-    eAttacker.origin[2],
-    victim_alive_time,
-    victim_spawn_origin[0],
-    victim_spawn_origin[1],
-    victim_spawn_origin[2],
-    victim_dist_from_spawn,
-    victim_damage_done,
-    victim_agent_type,
-    current_enemy_population,
-    current_player_population);
+  bbprint("alienkilled", "attackerisagent %i attackeralivetime %f attackeragenttype %s attackername %s attackerx %f attackery %f attackerz %f victimalivetime %f victimspawnoriginx %f victimspawnoriginy %f victimspawnoriginz %f victimdistfromspawn %i victimdamagedone %i victimagenttype %s currentenemypopulation %i currentplayerpopulation %i ", attacker_is_agent, attacker_alive_time, attacker_agent_type, attacker_name, eAttacker.origin[0], eAttacker.origin[1], eAttacker.origin[2], victim_alive_time, victim_spawn_origin[0], victim_spawn_origin[1], victim_spawn_origin[2], victim_dist_from_spawn, victim_damage_done, victim_agent_type, current_enemy_population, current_player_population);
 }
 
 KILL_TRIGGER_SPAWN_STRUCT_TARGET_NAME = "respawn_edge";

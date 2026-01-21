@@ -16,9 +16,7 @@ BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS = -3;
 BATTLEBUDDY_SPAWN_STATUS_BUDDY_DEAD = -4;
 
 init() {
-  if(level.teamBased &&
-    !isDefined(level.noBuddySpawns)
-  ) {
+  if(level.teamBased && !isDefined(level.noBuddySpawns)) {
     if(!isDefined(level.battleBuddyWaitList)) {
       level.battleBuddyWaitList = [];
     }
@@ -82,9 +80,7 @@ onBattleBuddyMenuSelection() {
       } else {
         self leaveBattleBuddySystem();
       }
-    } else if(channel == "team_select" &&
-      self.hasSpawned
-    ) {
+    } else if(channel == "team_select" && self.hasSpawned) {
       bbFlag = self wantsBattleBuddy();
 
       self leaveBattleBuddySystem();
@@ -163,8 +159,7 @@ waitForBuddySpawnTimer() {
   result = self checkBuddyspawn();
   if(result.status == BATTLEBUDDY_SPAWN_STATUS_OK) {
     self.battleBuddy SetClientOmnvar("ui_battlebuddy_status", "incoming");
-  } else if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT ||
-    result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
+  } else if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT || result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
     self.battleBuddy SetClientOmnvar("ui_battlebuddy_status", "err_combat");
   } else {
     self.battleBuddy SetClientOmnvar("ui_battlebuddy_status", "err_pos");
@@ -174,8 +169,7 @@ waitForBuddySpawnTimer() {
 
   result = self checkBuddyspawn();
   while(result.status != BATTLEBUDDY_SPAWN_STATUS_OK) {
-    if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT ||
-      result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
+    if(result.status == BATTLEBUDDY_SPAWN_STATUS_INCOMBAT || result.status == BATTLEBUDDY_SPAWN_STATUS_ENEMY_LOS) {
       self SetClientOmnvar("ui_battlebuddy_status", "wait_combat");
       self.battleBuddy SetClientOmnvar("ui_battlebuddy_status", "err_combat");
     } else if(result.status == BATTLEBUDDY_SPAWN_STATUS_BLOCKED) {
@@ -289,15 +283,11 @@ hasBattleBuddy() {
 }
 
 needsBattleBuddy() {
-  return (self wantsBattleBuddy() &&
-    !self hasBattleBuddy());
+  return (self wantsBattleBuddy() && !self hasBattleBuddy());
 }
 
 isValidBattleBuddy(otherPlayer) {
-  return (self != otherPlayer &&
-    self.team == otherPlayer.team &&
-    otherPlayer needsBattleBuddy()
-  );
+  return (self != otherPlayer && self.team == otherPlayer.team && otherPlayer needsBattleBuddy());
 }
 
 canBuddyspawn() {
@@ -327,9 +317,7 @@ addToBattleBuddyWaitList(player) {
 }
 
 removeFromBattleBuddyWaitList(player) {
-  if(isDefined(player.team) &&
-    isDefined(level.battleBuddyWaitList[player.team]) &&
-    player == level.battleBuddyWaitList[player.team]) {
+  if(isDefined(player.team) && isDefined(level.battleBuddyWaitList[player.team]) && player == level.battleBuddyWaitList[player.team]) {
     level.battleBuddyWaitList[player.team] = undefined;
   }
 }

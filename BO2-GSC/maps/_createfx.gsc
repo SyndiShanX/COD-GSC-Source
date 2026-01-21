@@ -1396,9 +1396,7 @@ generate_fx_log(type, autosave) {
 
     if(level.bscriptgened) {
       script_gen_dump_addline(level.cfx_server_scriptgendump, level.script + "_fx");
-      [
-        [level.cfx_func_script_gen_dump]
-      ]();
+      [[level.cfx_func_script_gen_dump]]();
     }
 
     cfxprintln(file, "}");

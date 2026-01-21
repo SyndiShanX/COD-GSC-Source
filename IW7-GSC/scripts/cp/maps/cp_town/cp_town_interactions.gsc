@@ -2308,33 +2308,21 @@ jukebox_use_func(var_0, var_1) {
 
   switch (var_0.script_parameters) {
     case "jukebox_icecream":
-      [
-        [var_3]
-      ]("pa_town_icecream_out");
-      [
-        [var_3]
-      ]("pa_town_icecream_in");
+      [[var_3]]("pa_town_icecream_out");
+      [[var_3]]("pa_town_icecream_in");
       break;
 
     case "jukebox_market":
-      [
-        [var_3]
-      ]("pa_town_market_in");
-      [
-        [var_3]
-      ]("pa_town_market_out");
+      [[var_3]]("pa_town_market_in");
+      [[var_3]]("pa_town_market_out");
       break;
 
     case "jukebox_campgrounds":
-      [
-        [var_3]
-      ]("pa_town_camper_out");
+      [[var_3]]("pa_town_camper_out");
       break;
 
     case "jukebox_motel":
-      [
-        [var_3]
-      ]("pa_town_motel_out");
+      [[var_3]]("pa_town_motel_out");
       break;
 
     default:

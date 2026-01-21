@@ -366,8 +366,7 @@ dialogue() {
   //Sgt. Macey	Overlord this is Hunter Two-One. We're screening west with no adjacent support, and friendly victors from RCT One are hauling ass past us, over.	
   level.scr_sound["generic"]["dcburn_mcy_haulingpastus"] = "dcburn_mcy_haulingpastus";
 
-  //Overlord HQ Radio Voice	 Roger. RCT One has already peeled off an LAV to provide suppression, over."
-  level.scr_radio["dcburn_hqr_humvee"] = "dcburn_hqr_humvee";
+  //Overlord HQ Radio Voice	 Roger. RCT One has already peeled off an LAV to provide suppression, over."level.scr_radio["dcburn_hqr_humvee"] = "dcburn_hqr_humvee";
 
   //Sgt. Macey	Copy that.	
   level.scr_radio["dcburn_mcy_copythat"] = "dcburn_mcy_copythat";

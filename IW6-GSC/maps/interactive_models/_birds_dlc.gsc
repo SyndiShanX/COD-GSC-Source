@@ -173,8 +173,7 @@ birds_setUpConnectedPerches(perchEnt, path) {
       pathNodes[0] = perch;
       pathNodes[1] = pathStart;
       for(node_num = 1;
-        (!isDefined(pathNodes[node_num].script_noteworthy)) ||
-        (pathNodes[node_num].script_noteworthy != "bird_perch"); node_num++) {
+        (!isDefined(pathNodes[node_num].script_noteworthy)) || (pathNodes[node_num].script_noteworthy != "bird_perch"); node_num++) {
         if(!isDefined(pathNodes[node_num].target)) {
           break;
         }
@@ -358,8 +357,7 @@ birds_fly(start_perch) {
             waitTime = undefined;
           else
             waitTime = RandomFloat(0.5);
-          self.birds[i] thread bird_fly(self, ("tag_bird" + i), info.bird_model["fly"], info.bird_model["idle"],
-            info.birdmodel_anims, ("land_" + i), waitTime);
+          self.birds[i] thread bird_fly(self, ("tag_bird" + i), info.bird_model["fly"], info.bird_model["idle"], info.birdmodel_anims, ("land_" + i), waitTime);
         }
       }
     }
@@ -943,7 +941,5 @@ angleSoftClamp(a, softLimit, scaler, hardLimit) {
 }
 
 anglesSoftClamp(a, softLimit, scaler, hardLimit) {
-  return (angleSoftClamp(a[0], softLimit, scaler, hardLimit),
-    angleSoftClamp(a[1], softLimit, scaler, hardLimit),
-    angleSoftClamp(a[2], softLimit, scaler, hardLimit));
+  return (angleSoftClamp(a[0], softLimit, scaler, hardLimit), angleSoftClamp(a[1], softLimit, scaler, hardLimit), angleSoftClamp(a[2], softLimit, scaler, hardLimit));
 }

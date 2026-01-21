@@ -14,7 +14,7 @@ main(model, type) {
   build_deathfx("explosions/large_vehicle_explosion", undefined, "car_explode", undefined, undefined, undefined, 0);
 
   build_radiusdamage((0, 0, 32), 300, 200, 100, false);
-  build_drive( % uaz_driving_idle_forward, % uaz_driving_idle_backward, 10);
+  build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
 
   build_deathquake(1, 1.6, 500);
   build_treadfx();
@@ -59,6 +59,5 @@ and these lines in your CSV:
 include,vehicle_russian_swat_van
 sound,vehicle_swat_van,vehicle_standard,all_sp
 
-defaultmdl="vehicle_russian_swat_van"
-default:"vehicletype" "swat_van"
+defaultmdl="vehicle_russian_swat_van"default:"vehicletype" "swat_van"
 */

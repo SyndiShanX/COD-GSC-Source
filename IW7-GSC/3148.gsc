@@ -144,11 +144,11 @@ func_1964(var_0) {
   var_5 = self func_8103(self.var_8C60);
   var_6 = self func_8103(self.var_8C63);
   var_7 = self func_8103(self.var_8C61);
-  var_8 = self func_8103( % lookat_left_right);
-  var_9 = self func_8103( % lookat_up_down);
-  var_10 = self func_8103( % lookat_head_base_partial);
-  var_11 = self func_8103( % head_gesture_look_partial);
-  var_12 = self func_8103( % lookat_head_adds);
+  var_8 = self func_8103(%lookat_left_right);
+  var_9 = self func_8103(%lookat_up_down);
+  var_10 = self func_8103(%lookat_head_base_partial);
+  var_11 = self func_8103(%head_gesture_look_partial);
+  var_12 = self func_8103(%lookat_head_adds);
   while(gettime() / 1000 - var_2 < var_0) {
     var_13 = gettime() / 1000 - var_2 / var_0;
     var_13 = func_10384(0, 1, var_13);
@@ -167,11 +167,11 @@ func_1964(var_0) {
     self func_82AC(self.var_8C60, var_10, 0.05);
     self func_82AC(self.var_8C63, var_11, 0.05);
     self func_82AC(self.var_8C61, var_12, 0.05);
-    self func_82AC( % lookat_left_right, var_13, 0.05);
-    self func_82AC( % lookat_up_down, var_14, 0.05);
-    self func_82AC( % lookat_head_base_partial, var_15, 0.05);
-    self func_82AC( % head_gesture_look_partial, var_16, 0.05);
-    self func_82AC( % lookat_head_adds, var_17, 0.05);
+    self func_82AC(%lookat_left_right, var_13, 0.05);
+    self func_82AC(%lookat_up_down, var_14, 0.05);
+    self func_82AC(%lookat_head_base_partial, var_15, 0.05);
+    self func_82AC(%head_gesture_look_partial, var_16, 0.05);
+    self func_82AC(%lookat_head_adds, var_17, 0.05);
     wait(0.05);
   }
 
@@ -180,13 +180,13 @@ func_1964(var_0) {
   self func_82AC(self.var_8C60, 0, 0.05);
   self func_82AC(self.var_8C63, 0, 0.05);
   self func_82AC(self.var_8C61, 0, 0.05);
-  self func_82AC( % lookat_left_right, 0, 0.05);
-  self func_82AC( % lookat_up_down, 0, 0.05);
-  self func_82AC( % lookat_head_base_partial, 0, 0.05);
-  self func_82AC( % head_gesture_look_partial, 0, 0.05);
-  self func_82AC( % lookat_head_adds, 0, 0.05);
-  self clearanim( % lookat_left_right, 0.05);
-  self clearanim( % lookat_up_down, 0.05);
+  self func_82AC(%lookat_left_right, 0, 0.05);
+  self func_82AC(%lookat_up_down, 0, 0.05);
+  self func_82AC(%lookat_head_base_partial, 0, 0.05);
+  self func_82AC(%head_gesture_look_partial, 0, 0.05);
+  self func_82AC(%lookat_head_adds, 0, 0.05);
+  self clearanim(%lookat_left_right, 0.05);
+  self clearanim(%lookat_up_down, 0.05);
   self.var_9BFC = undefined;
 }
 
@@ -200,13 +200,13 @@ func_194F(var_0) {
     var_1 = 0.25;
   }
 
-  self clearanim( % eyes_look_leftright, var_1);
-  self clearanim( % eyes_look_updown, var_1);
-  self clearanim( % eyes_lookat_base_partial, var_1);
-  self clearanim( % facial_gesture_look_partial, var_1);
-  self clearanim( % eyes_blink_base_partial, var_1);
-  self clearanim( % facial_gesture_blink_partial, var_1);
-  self clearanim( % eyes_blink, var_1);
+  self clearanim(%eyes_look_leftright, var_1);
+  self clearanim(%eyes_look_updown, var_1);
+  self clearanim(%eyes_lookat_base_partial, var_1);
+  self clearanim(%facial_gesture_look_partial, var_1);
+  self clearanim(%eyes_blink_base_partial, var_1);
+  self clearanim(%facial_gesture_blink_partial, var_1);
+  self clearanim(%eyes_blink, var_1);
   self.var_9BDC = undefined;
 }
 
@@ -224,11 +224,11 @@ func_195A(var_0) {
   self.var_2B6D = 1;
   self.var_2B80 = undefined;
   var_2 = gettime() / 1000;
-  var_3 = self func_8103( % lookat_left_right);
-  var_4 = self func_8103( % lookat_up_down);
-  var_5 = self func_8103( % lookat_head_base_partial);
-  var_6 = self func_8103( % head_gesture_look_partial);
-  var_7 = self func_8103( % lookat_head_adds);
+  var_3 = self func_8103(%lookat_left_right);
+  var_4 = self func_8103(%lookat_up_down);
+  var_5 = self func_8103(%lookat_head_base_partial);
+  var_6 = self func_8103(%head_gesture_look_partial);
+  var_7 = self func_8103(%lookat_head_adds);
   while(gettime() / 1000 - var_2 < var_1) {
     var_8 = gettime() / 1000 - var_2 / var_1;
     var_8 = func_10384(0, 1, var_8);
@@ -237,19 +237,19 @@ func_195A(var_0) {
     var_11 = func_AB7A(var_5, 0, var_8);
     var_12 = func_AB7A(var_6, 0, var_8);
     var_13 = func_AB7A(var_7, 0, var_8);
-    self func_82AC( % lookat_left_right, var_9, 0.05);
-    self func_82AC( % lookat_up_down, var_10, 0.05);
-    self func_82AC( % lookat_head_base_partial, var_11, 0.05);
-    self func_82AC( % head_gesture_look_partial, var_12, 0.05);
-    self func_82AC( % lookat_head_adds, var_13, 0.05);
+    self func_82AC(%lookat_left_right, var_9, 0.05);
+    self func_82AC(%lookat_up_down, var_10, 0.05);
+    self func_82AC(%lookat_head_base_partial, var_11, 0.05);
+    self func_82AC(%head_gesture_look_partial, var_12, 0.05);
+    self func_82AC(%lookat_head_adds, var_13, 0.05);
     wait(0.05);
   }
 
-  self func_82AC( % lookat_left_right, 0, 0.05);
-  self func_82AC( % lookat_up_down, 0, 0.05);
-  self func_82AC( % lookat_head_base_partial, 0, 0.05);
-  self func_82AC( % head_gesture_look_partial, 0, 0.05);
-  self func_82AC( % lookat_head_adds, 0, 0.05);
+  self func_82AC(%lookat_left_right, 0, 0.05);
+  self func_82AC(%lookat_up_down, 0, 0.05);
+  self func_82AC(%lookat_head_base_partial, 0, 0.05);
+  self func_82AC(%head_gesture_look_partial, 0, 0.05);
+  self func_82AC(%lookat_head_adds, 0, 0.05);
   self.var_2B6D = undefined;
 }
 
@@ -267,11 +267,11 @@ func_195B(var_0) {
   self.var_2B80 = 1;
   self.var_2B6D = undefined;
   var_2 = gettime() / 1000;
-  var_3 = self func_8103( % lookat_left_right);
-  var_4 = self func_8103( % lookat_up_down);
-  var_5 = self func_8103( % lookat_head_base_partial);
-  var_6 = self func_8103( % head_gesture_look_partial);
-  var_7 = self func_8103( % lookat_head_adds);
+  var_3 = self func_8103(%lookat_left_right);
+  var_4 = self func_8103(%lookat_up_down);
+  var_5 = self func_8103(%lookat_head_base_partial);
+  var_6 = self func_8103(%head_gesture_look_partial);
+  var_7 = self func_8103(%lookat_head_adds);
   while(gettime() / 1000 - var_2 < var_1) {
     var_8 = gettime() / 1000 - var_2 / var_1;
     var_8 = func_10384(0, 1, var_8);
@@ -280,19 +280,19 @@ func_195B(var_0) {
     var_11 = func_AB7A(var_5, 10, var_8);
     var_12 = func_AB7A(var_6, 10, var_8);
     var_13 = func_AB7A(var_7, 0, var_8);
-    self func_82AC( % lookat_left_right, var_9, 0.05);
-    self func_82AC( % lookat_up_down, var_10, 0.05);
-    self func_82AC( % lookat_head_base_partial, var_11, 0.05);
-    self func_82AC( % head_gesture_look_partial, var_12, 0.05);
-    self func_82AC( % lookat_head_adds, var_13, 0.05);
+    self func_82AC(%lookat_left_right, var_9, 0.05);
+    self func_82AC(%lookat_up_down, var_10, 0.05);
+    self func_82AC(%lookat_head_base_partial, var_11, 0.05);
+    self func_82AC(%head_gesture_look_partial, var_12, 0.05);
+    self func_82AC(%lookat_head_adds, var_13, 0.05);
     wait(0.05);
   }
 
-  self func_82AC( % lookat_left_right, 1, 0.05);
-  self func_82AC( % lookat_up_down, 1, 0.05);
-  self func_82AC( % lookat_head_base_partial, 10, 0.05);
-  self func_82AC( % head_gesture_look_partial, 10, 0.05);
-  self func_82AC( % lookat_head_adds, 1, 0.05);
+  self func_82AC(%lookat_left_right, 1, 0.05);
+  self func_82AC(%lookat_up_down, 1, 0.05);
+  self func_82AC(%lookat_head_base_partial, 10, 0.05);
+  self func_82AC(%head_gesture_look_partial, 10, 0.05);
+  self func_82AC(%lookat_head_adds, 1, 0.05);
   self.var_2B80 = undefined;
 }
 
@@ -338,7 +338,7 @@ func_1967(var_0) {
   self func_82AC(self.var_11A0E, 0, 0.05);
   self func_82AC(self.var_11A12, 0, 0.05);
   self func_82AC(self.var_11A0F, 0, 0.05);
-  self clearanim( % torso_tracking_anims, var_0);
+  self clearanim(%torso_tracking_anims, var_0);
   self.var_9CE9 = undefined;
 }
 
@@ -661,17 +661,17 @@ func_1163() {
     var_3 = func_10384(0, 10, var_1);
     var_4 = func_AB7A(0, 1, var_2);
     var_5 = func_AB7A(0, 10, var_2);
-    self func_82AC( % lookat_left_right, var_4, 0.2);
-    self func_82AC( % lookat_up_down, var_4, 0.2);
-    self func_82AC( % lookat_head_base_partial, var_5, 0.2);
-    self func_82AC( % head_gesture_look_partial, var_5, 0.2);
+    self func_82AC(%lookat_left_right, var_4, 0.2);
+    self func_82AC(%lookat_up_down, var_4, 0.2);
+    self func_82AC(%lookat_head_base_partial, var_5, 0.2);
+    self func_82AC(%head_gesture_look_partial, var_5, 0.2);
     wait(0.05);
   }
 
-  self func_82AC( % lookat_left_right, 1, 0.2);
-  self func_82AC( % lookat_up_down, 1, 0.2);
-  self func_82AC( % lookat_head_base_partial, 10, 0.2);
-  self func_82AC( % head_gesture_look_partial, 10, 0.2);
+  self func_82AC(%lookat_left_right, 1, 0.2);
+  self func_82AC(%lookat_up_down, 1, 0.2);
+  self func_82AC(%lookat_head_base_partial, 10, 0.2);
+  self func_82AC(%head_gesture_look_partial, 10, 0.2);
   wait(0.05);
   self.var_2B80 = undefined;
 }
@@ -680,7 +680,7 @@ func_1953() {
   self endon("gesture_stop");
   self endon("death");
   self endon("entitydeleted");
-  self func_82AC( % lookat_up_down, 1, self.var_2B71);
+  self func_82AC(%lookat_up_down, 1, self.var_2B71);
   self func_82AC(self.var_AFFA, 1, self.var_2B71);
   self func_82B0(self.var_AFFA, 0.5);
   var_0 = 0.5;
@@ -728,10 +728,10 @@ func_1161() {
   self endon("death");
   self endon("gesture_stop");
   self endon("entitydeleted");
-  self func_82AC( % lookat_head_adds, 1, 0.5);
+  self func_82AC(%lookat_head_adds, 1, 0.5);
   for(;;) {
-    self func_82AC( % shipcrib_gst_head_idle_01, 0.25, 0.5);
-    wait(getanimlength( % shipcrib_gst_head_idle_01) * randomfloatrange(1, 3));
+    self func_82AC(%shipcrib_gst_head_idle_01, 0.25, 0.5);
+    wait(getanimlength(%shipcrib_gst_head_idle_01) * randomfloatrange(1, 3));
   }
 }
 
@@ -740,9 +740,9 @@ func_194D() {
   self endon("death");
   self endon("eye_gesture_stop");
   self endon("entitydeleted");
-  self func_82AC( % eyes_lookat_base_partial, 10, self.var_6A55 * 2);
-  self func_82AC( % facial_gesture_look_partial, 10, self.var_6A55 * 2);
-  self func_82AC( % eyes_look_leftright, 1, self.var_6A55);
+  self func_82AC(%eyes_lookat_base_partial, 10, self.var_6A55 * 2);
+  self func_82AC(%facial_gesture_look_partial, 10, self.var_6A55 * 2);
+  self func_82AC(%eyes_look_leftright, 1, self.var_6A55);
   self func_82AC(self.var_6A5C, 1, self.var_6A55);
   self func_82B0(self.var_6A5C, 0.5);
   self func_82B1(self.var_6A5C, 0);
@@ -787,7 +787,7 @@ func_1950() {
   self endon("death");
   self endon("eye_gesture_stop");
   self endon("entitydeleted");
-  self func_82AC( % eyes_look_updown, 1, self.var_6A55);
+  self func_82AC(%eyes_look_updown, 1, self.var_6A55);
   self func_82AC(self.var_6A5F, 1, self.var_6A55);
   self func_82B0(self.var_6A5F, 0.5);
   var_0 = 0.5;
@@ -894,12 +894,12 @@ func_1165() {
     var_1 = gettime() / 1000 - var_0 / self.var_2B71;
     var_1 = func_10384(0, 1, var_1);
     var_2 = func_AB7A(0, 1, var_1);
-    self func_82AC( % torso_tracking_anims, var_2, 0.05);
+    self func_82AC(%torso_tracking_anims, var_2, 0.05);
     wait(0.05);
     waittillframeend;
   }
 
-  self func_82AC( % torso_tracking_anims, 1, 0.05);
+  self func_82AC(%torso_tracking_anims, 1, 0.05);
 }
 
 func_1948(var_0) {
@@ -909,9 +909,9 @@ func_1948(var_0) {
   func_1963();
   for(;;) {
     wait(randomfloatrange(var_0 * 0.5, var_0));
-    self clearanim( % facial_gesture_blink_1, 0);
+    self clearanim(%facial_gesture_blink_1, 0);
     wait(0.05);
-    self func_82AC( % facial_gesture_blink_1, 1, 0);
+    self func_82AC(%facial_gesture_blink_1, 1, 0);
     scripts\engine\utility::waitframe();
   }
 }
@@ -924,10 +924,10 @@ func_1963() {
     return;
   }
 
-  self func_82AC( % eyes_blink, 1, 0);
-  self clearanim( % facial_gesture_blink_1, 0);
+  self func_82AC(%eyes_blink, 1, 0);
+  self clearanim(%facial_gesture_blink_1, 0);
   wait(0.05);
-  self func_82AC( % facial_gesture_blink_1, 1, 0);
+  self func_82AC(%facial_gesture_blink_1, 1, 0);
 }
 
 func_195D(var_0) {
@@ -1034,7 +1034,7 @@ func_195D(var_0) {
     self func_82AC(self.var_D633, 1, 0.2, 0.85);
   }
 
-  var_19 = getanimlength( % prototype_gesture_point_center) * 0.85;
+  var_19 = getanimlength(%prototype_gesture_point_center) * 0.85;
   wait(var_19);
   self clearanim(self.var_77AD, 0.25);
   self func_82AC(self.var_778D, 1, 0.25);
@@ -1427,19 +1427,19 @@ func_1952() {
     var_4 = func_AB7A(0, 1, var_2);
     var_5 = func_AB7A(0, 5, var_2);
     var_6 = func_AB7A(0, 5, var_2);
-    self func_82AC( % lookat_left_right, var_3, 0.05);
+    self func_82AC(%lookat_left_right, var_3, 0.05);
     self func_82AC(self.var_AFF7, var_4, 0.05);
-    self func_82AC( % lookat_head_base_partial, var_5, 0.05);
-    self func_82AC( % head_gesture_look_partial, var_6, 0.05);
+    self func_82AC(%lookat_head_base_partial, var_5, 0.05);
+    self func_82AC(%head_gesture_look_partial, var_6, 0.05);
     self func_82B0(self.var_AFF7, 0.5);
     wait(0.05);
     waittillframeend;
   }
 
-  self func_82AC( % lookat_left_right, 1, 0.05);
+  self func_82AC(%lookat_left_right, 1, 0.05);
   self func_82AC(self.var_AFF7, 1, 0.05);
-  self func_82AC( % lookat_head_base_partial, 5, 0.05);
-  self func_82AC( % head_gesture_look_partial, 5, 0.05);
+  self func_82AC(%lookat_head_base_partial, 5, 0.05);
+  self func_82AC(%head_gesture_look_partial, 5, 0.05);
   var_7 = 0.5;
   for(;;) {
     if(!isDefined(self)) {
@@ -1478,7 +1478,7 @@ func_1954() {
   self endon("gesture_stop");
   self endon("death");
   self endon("entitydeleted");
-  self func_82AC( % lookat_up_down, 1, self.var_2B71);
+  self func_82AC(%lookat_up_down, 1, self.var_2B71);
   self func_82AC(self.var_AFFA, 1, self.var_2B71);
   self func_82B0(self.var_AFFA, 0.5);
   var_0 = 0.5;
@@ -1527,15 +1527,15 @@ func_1965(var_0) {
     var_1 = 0.25;
   }
 
-  self func_82AC( % lookat_left_right, 1, var_1 * 0.15);
-  self func_82AC( % lookat_up_down, 1, var_1 * 0.15);
-  self func_82AC( % lookat_head_base_partial, 1, var_1 * 0.15);
-  self func_82AC( % head_gesture_look_partial, 1, var_1 * 0.15);
+  self func_82AC(%lookat_left_right, 1, var_1 * 0.15);
+  self func_82AC(%lookat_up_down, 1, var_1 * 0.15);
+  self func_82AC(%lookat_head_base_partial, 1, var_1 * 0.15);
+  self func_82AC(%head_gesture_look_partial, 1, var_1 * 0.15);
   wait(var_1 * 0.15);
-  self clearanim( % lookat_left_right, var_1 * 0.85);
-  self clearanim( % lookat_up_down, var_1 * 0.85);
-  self clearanim( % lookat_head_base_partial, var_1 * 0.85);
-  self clearanim( % head_gesture_look_partial, var_1 * 0.85);
+  self clearanim(%lookat_left_right, var_1 * 0.85);
+  self clearanim(%lookat_up_down, var_1 * 0.85);
+  self clearanim(%lookat_head_base_partial, var_1 * 0.85);
+  self clearanim(%head_gesture_look_partial, var_1 * 0.85);
   self.var_9BFC = undefined;
 }
 
@@ -1597,7 +1597,7 @@ func_2B8A() {
   }
 
   var_6 = vectortoangles(level.player.origin - var_0.origin);
-  var_0 func_82A5(var_0.var_7540, % root, 1, 0.2);
+  var_0 func_82A5(var_0.var_7540, %root, 1, 0.2);
   if(isDefined(var_0.var_E512)) {
     var_0 func_82AC(var_0.var_E512, 0, 0.2);
   }
@@ -1770,7 +1770,7 @@ func_2B86() {
   }
 
   var_6 = vectortoangles(level.player.origin - var_0.origin);
-  var_0 func_82A5(var_0.var_7540, % root, 1, 0.2);
+  var_0 func_82A5(var_0.var_7540, %root, 1, 0.2);
   if(isDefined(var_0.var_E512)) {
     var_0 func_82AC(var_0.var_E512, 0, 0.2);
   }

@@ -6,65 +6,48 @@
 #include common_scripts\utility;
 #include maps\mp\_utility;
 
-point3d_distance_squared(
-  p0,
-  p1) {
+point3d_distance_squared(p0, p1) {
   return DistanceSquared(p0, p1);
 }
 
-point3d_distance(
-  p0,
-  p1) {
+point3d_distance(p0, p1) {
   result = Distance(p0, p1);
   return result;
 }
 
-point3d_translate(
-  point,
-  translation) {
+point3d_translate(point, translation) {
   result = point + translation;
   return result;
 }
 
-vector3d_magnitude_squared(
-  vector) {
+vector3d_magnitude_squared(vector) {
   return LengthSquared(vector);
 }
 
-vector3d_magnitude(
-  vector) {
+vector3d_magnitude(vector) {
   return Length(vector);
 }
 
-vector3d_normalize(
-  vector) {
+vector3d_normalize(vector) {
   result = VectorNormalize(vector);
   return result;
 }
 
-vector3d_scale(
-  vector,
-  scale) {
+vector3d_scale(vector, scale) {
   result = scale * vector;
   return result;
 }
 
-vector3d_from_points(
-  source,
-  dest) {
+vector3d_from_points(source, dest) {
   result = dest - source;
   return result;
 }
 
-vector3d_dot_product(
-  vector_a,
-  vector_b) {
+vector3d_dot_product(vector_a, vector_b) {
   return VectorDot(vector_a, vector_b);
 }
 
-vector3d_cross_product(
-  vector_a,
-  vector_b) {
+vector3d_cross_product(vector_a, vector_b) {
   i = (vector_a[1] * vector_b[2]) - (vector_a[2] * vector_b[1]);
   j = -1 * ((vector_a[0] * vector_b[2]) - (vector_a[2] * vector_b[0]));
   k = (vector_a[0] * vector_b[1]) - (vector_a[1] * vector_b[0]);
@@ -72,18 +55,14 @@ vector3d_cross_product(
   return result;
 }
 
-vector3d_angle_between(
-  vector_a,
-  vector_b) {
+vector3d_angle_between(vector_a, vector_b) {
   ab = vector3d_magnitude(vector_a) * vector3d_magnitude(vector_b);
   assertex((ab > 0.001), "zero-vector");
   result = Acos(vector3d_dot_product(vector_a, vector_b) / ab);
   return result;
 }
 
-vector3d_component_of_a_along_b(
-  vector_a,
-  vector_b) {
+vector3d_component_of_a_along_b(vector_a, vector_b) {
   b = vector3d_magnitude(vector_b);
   assertex((b > 0.001), "zero-vector");
   b_over_magnitude_b = vector3d_scale(vector_b, 1 / b);
@@ -91,26 +70,20 @@ vector3d_component_of_a_along_b(
   return result;
 }
 
-vector3d_is_zero(
-  vector) {
+vector3d_is_zero(vector) {
   return (vector3d_magnitude_squared(vector) < 0.00001);
 }
 
-vector3d_is_normalized(
-  vector) {
+vector3d_is_normalized(vector) {
   return (vector3d_magnitude_squared(vector) - 1 < 0.001);
 }
 
-vector3d_orthogonal(
-  vector_a,
-  vector_b) {
+vector3d_orthogonal(vector_a, vector_b) {
   dot_product = vector3d_dot_product(vector_a, vector_b);
   return dot_product < 0.001;
 }
 
-vector3d_parallel(
-  vector_a,
-  vector_b) {
+vector3d_parallel(vector_a, vector_b) {
   cross_product = vector3d_cross_product(vector_a, vector_b);
   return vector3d_is_zero(cross_product);
 }
@@ -136,10 +109,7 @@ matrix4x4_build_identity() {
   return matrix;
 }
 
-matrix4x4_build_translation(
-  translation_x,
-  translation_y,
-  translation_z) {
+matrix4x4_build_translation(translation_x, translation_y, translation_z) {
   matrix = matrix4x4_build_identity();
   matrix[03] = translation_x;
   matrix[07] = translation_y;
@@ -147,10 +117,7 @@ matrix4x4_build_translation(
   return matrix;
 }
 
-matrix4x4_build_scale(
-  scale_x,
-  scale_y,
-  scale_z) {
+matrix4x4_build_scale(scale_x, scale_y, scale_z) {
   matrix = matrix4x4_build_identity();
   matrix[00] = scale_x;
   matrix[05] = scale_y;
@@ -158,17 +125,12 @@ matrix4x4_build_scale(
   return matrix;
 }
 
-matrix4x4_build_rotation_from_forward_and_up(
-  forward,
-  up) {
+matrix4x4_build_rotation_from_forward_and_up(forward, up) {
   left = vector3d_cross_product(up, forward);
   return matrix4x4_build_rotation_from_axes(forward, up, left);
 }
 
-matrix4x4_build_rotation_from_axes(
-  forward,
-  up,
-  left) {
+matrix4x4_build_rotation_from_axes(forward, up, left) {
   result = [];
   result[00] = forward[0];
   result[01] = forward[1];
@@ -189,11 +151,7 @@ matrix4x4_build_rotation_from_axes(
   return result;
 }
 
-matrix4x4_build_from_rotation_and_translation(
-  forward,
-  up,
-  left,
-  translation) {
+matrix4x4_build_from_rotation_and_translation(forward, up, left, translation) {
   result = [];
   result[00] = forward[0];
   result[01] = forward[1];
@@ -214,9 +172,7 @@ matrix4x4_build_from_rotation_and_translation(
   return result;
 }
 
-matrix4x4_multiply(
-  matrix_a,
-  matrix_b) {
+matrix4x4_multiply(matrix_a, matrix_b) {
   result = [];
   result[00] = matrix_a[00] * matrix_b[00] + matrix_a[01] * matrix_b[04] + matrix_a[02] * matrix_b[08] + matrix_a[03] * matrix_b[12];
   result[01] = matrix_a[00] * matrix_b[01] + matrix_a[01] * matrix_b[05] + matrix_a[02] * matrix_b[09] + matrix_a[03] * matrix_b[13];
@@ -237,9 +193,7 @@ matrix4x4_multiply(
   return result;
 }
 
-matrix4x4_transform_vector3d(
-  vector,
-  matrix) {
+matrix4x4_transform_vector3d(vector, matrix) {
   x = vector[0] * matrix[00] + vector[1] * matrix[04] + vector[2] * matrix[08];
   y = vector[0] * matrix[01] + vector[1] * matrix[05] + vector[2] * matrix[09];
   z = vector[0] * matrix[02] + vector[1] * matrix[06] + vector[2] * matrix[10];
@@ -247,9 +201,7 @@ matrix4x4_transform_vector3d(
   return result;
 }
 
-matrix4x4_transform_point3d(
-  point,
-  matrix) {
+matrix4x4_transform_point3d(point, matrix) {
   x = point[0] * matrix[00] + point[1] * matrix[04] + point[2] * matrix[08] + matrix[03];
   y = point[0] * matrix[01] + point[1] * matrix[05] + point[2] * matrix[09] + matrix[07];
   z = point[0] * matrix[02] + point[1] * matrix[06] + point[2] * matrix[10] + matrix[11];
@@ -257,16 +209,11 @@ matrix4x4_transform_point3d(
   return result;
 }
 
-matrix4x4_transform_points3d(
-  points,
-  matrix) {
+matrix4x4_transform_points3d(points, matrix) {
   return Matrix4x4TransformPoints(matrix, points);
 }
 
-collision_test_point_in_sphere(
-  point,
-  sphere_origin,
-  sphere_radius) {
+collision_test_point_in_sphere(point, sphere_origin, sphere_radius) {
   assertex((sphere_radius > 0.001), "invalid sphere radius");
   collision = (0.0, 0.0, 0.0);
   dsquared = point3d_distance_squared(point, sphere_origin);
@@ -277,22 +224,14 @@ collision_test_point_in_sphere(
   return collision;
 }
 
-collision_test_points_in_sphere(
-  point_list_s,
-  sphere_origin,
-  sphere_radius) {
+collision_test_points_in_sphere(point_list_s, sphere_origin, sphere_radius) {
   assertex((sphere_radius > 0.001), "invalid sphere radius");
   collision_results_s = spawnStruct();
   collision_results_s.a = CollisionTestPointsInSphere(point_list_s.a, sphere_origin, 0.0 + sphere_radius);
   return collision_results_s;
 }
 
-collision_test_point_in_cylinder(
-  point,
-  cylinder_base,
-  cylinder_radius,
-  cylinder_height,
-  cylinder_height_unit_vector) {
+collision_test_point_in_cylinder(point, cylinder_base, cylinder_radius, cylinder_height, cylinder_height_unit_vector) {
   assertex((cylinder_radius > 0.001) && (cylinder_height > 0.001), "invalid cylinder geometry");
   assertex(vector3d_is_normalized(cylinder_height_unit_vector), "cylinder height vector must be unit vector");
   collision = (0.0, 0.0, 0.0);
@@ -313,31 +252,15 @@ collision_test_point_in_cylinder(
   return collision;
 }
 
-collision_test_points_in_cylinder(
-  point_list_s,
-  cylinder_base,
-  cylinder_radius,
-  cylinder_height,
-  cylinder_height_unit_vector) {
+collision_test_points_in_cylinder(point_list_s, cylinder_base, cylinder_radius, cylinder_height, cylinder_height_unit_vector) {
   assertex((cylinder_radius > 0.001) && (cylinder_height > 0.001), "invalid cylinder geometry");
   assertex(vector3d_is_normalized(cylinder_height_unit_vector), "cylinder height vector must be unit vector");
   collision_results_s = spawnStruct();
-  collision_results_s.a = CollisionTestPointsInCylinder(
-    point_list_s.a,
-    cylinder_base,
-    0.0 + cylinder_radius,
-    0.0 + cylinder_height,
-    cylinder_height_unit_vector);
+  collision_results_s.a = CollisionTestPointsInCylinder(point_list_s.a, cylinder_base, 0.0 + cylinder_radius, 0.0 + cylinder_height, cylinder_height_unit_vector);
   return collision_results_s;
 }
 
-collision_test_point_in_pill(
-  point,
-  cylinder_base,
-  cylinder_radius,
-  cylinder_height,
-  cylinder_height_unit_vector,
-  cylinder_radial_vector) {
+collision_test_point_in_pill(point, cylinder_base, cylinder_radius, cylinder_height, cylinder_height_unit_vector, cylinder_radial_vector) {
   collision = collision_test_point_in_sphere(point, cylinder_base, cylinder_radius);
   if(collision[0] < 1) {
     collision = collision_test_point_in_sphere(point, point3d_translate(cylinder_base, vector3d_scale(cylinder_height_unit_vector, cylinder_height)), cylinder_radius);
@@ -354,13 +277,7 @@ collision_test_point_in_pill(
   return collision;
 }
 
-collision_test_points_in_pill(
-  point_list_s,
-  cylinder_base,
-  cylinder_radius,
-  cylinder_height,
-  cylinder_height_unit_vector,
-  cylinder_radial_vector) {
+collision_test_points_in_pill(point_list_s, cylinder_base, cylinder_radius, cylinder_height, cylinder_height_unit_vector, cylinder_radial_vector) {
   collision_results_s = spawn_array_struct();
   cylinder_top = point3d_translate(cylinder_base, vector3d_scale(cylinder_height_unit_vector, cylinder_height));
   axis_midpoint = point3d_translate(cylinder_base, vector3d_scale(cylinder_height_unit_vector, cylinder_height * 0.5));
@@ -396,13 +313,7 @@ collision_test_points_in_pill(
   return collision_results_s;
 }
 
-collision_test_point_in_cone(
-  point,
-  cone_base,
-  cone_base_radius,
-  cone_height,
-  cone_height_unit_vector,
-  cone_radial_unit_vector) {
+collision_test_point_in_cone(point, cone_base, cone_base_radius, cone_height, cone_height_unit_vector, cone_radial_unit_vector) {
   assertex((cone_base_radius > 0.001) && (cone_height > 0.001), "invalid cone geometry");
   assertex(vector3d_is_normalized(cone_height_unit_vector), "cone height vector must be unit vector");
   assertex(vector3d_is_normalized(cone_radial_unit_vector), "cone radial vector must be unit vector");
@@ -433,13 +344,7 @@ collision_test_point_in_cone(
   return collision;
 }
 
-collision_test_points_in_cone(
-  point_list_s,
-  cone_base,
-  cone_base_radius,
-  cone_height,
-  cone_height_unit_vector,
-  cone_radial_unit_vector) {
+collision_test_points_in_cone(point_list_s, cone_base, cone_base_radius, cone_height, cone_height_unit_vector, cone_radial_unit_vector) {
   assertex((cone_base_radius > 0.001) && (cone_height > 0.001), "invalid cone geometry");
   assertex(vector3d_is_normalized(cone_height_unit_vector), "cone height vector must be unit vector");
   assertex(vector3d_is_normalized(cone_radial_unit_vector), "cone radial vector must be unit vector");
@@ -476,14 +381,7 @@ collision_test_points_in_cone(
   return collision_results_s;
 }
 
-collision_test_point_in_box(
-  point,
-  box_origin,
-  box_width,
-  box_height,
-  box_depth,
-  forward,
-  up) {
+collision_test_point_in_box(point, box_origin, box_width, box_height, box_depth, forward, up) {
   assertex((box_width > 0.001) && (box_height > 0.001) && (box_depth > 0.001), "invalid box geometry");
   collision = (0.0, 0.0, 0.0);
   bounding_sphere_radius = (box_width + box_height + box_depth) - Min(Min(box_width, box_height), box_depth);
@@ -508,14 +406,7 @@ collision_test_point_in_box(
   return collision;
 }
 
-collision_test_points_in_box(
-  point_list_s,
-  box_origin,
-  box_width,
-  box_height,
-  box_depth,
-  forward,
-  up) {
+collision_test_points_in_box(point_list_s, box_origin, box_width, box_height, box_depth, forward, up) {
   assertex((box_width > 0.001) && (box_height > 0.001) && (box_depth > 0.001), "invalid box geometry");
   collision_results_s = spawn_array_struct();
   bounding_sphere_radius = (box_width + box_height + box_depth) - Min(Min(box_width, box_height), box_depth);
@@ -547,19 +438,14 @@ collision_test_points_in_box(
   return collision_results_s;
 }
 
-draw_line(
-  p0,
-  p1,
-  rgb_color) {
+draw_line(p0, p1, rgb_color) {
   k_depth_test = false;
   k_draw_duration_server_frames = 1;
   Line(p0, p1, rgb_color, k_depth_test, k_draw_duration_server_frames);
   return;
 }
 
-draw_line_segments(
-  points,
-  rgb_color) {
+draw_line_segments(points, rgb_color) {
   k_depth_test = false;
   k_draw_duration_server_frames = 1;
   for(point_index = 1; point_index < points.size; point_index++) {
@@ -568,44 +454,26 @@ draw_line_segments(
   return;
 }
 
-draw_line_list(
-  points,
-  rgb_color) {
+draw_line_list(points, rgb_color) {
   k_depth_test = false;
   k_draw_duration_server_frames = 1;
   LineList(points, rgb_color, k_depth_test, k_draw_duration_server_frames);
   return;
 }
 
-draw_sphere(
-  sphere_origin,
-  sphere_radius,
-  forward,
-  up,
-  rgb_color) {
+draw_sphere(sphere_origin, sphere_radius, forward, up, rgb_color) {
   points = generate_sphere_points_list(sphere_origin, sphere_radius, forward, up);
   draw_line_list(points, rgb_color);
   return;
 }
 
-draw_cylinder(
-  cylinder_base,
-  cylinder_radius,
-  cylinder_height,
-  forward,
-  up,
-  rgb_color) {
+draw_cylinder(cylinder_base, cylinder_radius, cylinder_height, forward, up, rgb_color) {
   points = generate_cylinder_points_list(cylinder_base, cylinder_radius, cylinder_height, forward, up);
   draw_line_list(points, rgb_color);
   return;
 }
 
-draw_box(
-  centroid,
-  dimensions,
-  forward,
-  up,
-  rgb_color) {
+draw_box(centroid, dimensions, forward, up, rgb_color) {
   points = generate_box_points_lists(centroid, dimensions, forward, up);
   for(list_index = 0; list_index < points.size; list_index++) {
     draw_line_segments(points[list_index], rgb_color);
@@ -613,13 +481,7 @@ draw_box(
   return;
 }
 
-draw_pill(
-  pill_base,
-  pill_radius,
-  pill_height,
-  forward,
-  up,
-  rgb_color) {
+draw_pill(pill_base, pill_radius, pill_height, forward, up, rgb_color) {
   points = generate_pill_points_lists(pill_base, pill_radius, pill_height, forward, up);
   for(list_index = 0; list_index < points.size; list_index++) {
     draw_line_segments(points[list_index], rgb_color);
@@ -627,13 +489,7 @@ draw_pill(
   return;
 }
 
-draw_cone(
-  cone_base,
-  cone_radius,
-  cone_height,
-  forward,
-  up,
-  rgb_color) {
+draw_cone(cone_base, cone_radius, cone_height, forward, up, rgb_color) {
   points = generate_cone_points_lists(cone_base, cone_radius, cone_height, forward, up);
   for(list_index = 0; list_index < points.size; list_index++) {
     draw_line_segments(points[list_index], rgb_color);
@@ -645,11 +501,7 @@ get_debug_geometry_circular_segment_count() {
   return 16;
 }
 
-generate_sphere_points_list(
-  sphere_origin,
-  radius,
-  forward,
-  up) {
+generate_sphere_points_list(sphere_origin, radius, forward, up) {
   points = [];
   if(radius > 0.0) {
     k_segment_count = get_debug_geometry_circular_segment_count();
@@ -698,12 +550,7 @@ generate_sphere_points_list(
   return points;
 }
 
-generate_cylinder_points_list(
-  cylinder_base,
-  cylinder_radius,
-  cylinder_height,
-  forward,
-  up) {
+generate_cylinder_points_list(cylinder_base, cylinder_radius, cylinder_height, forward, up) {
   points = [];
   if(cylinder_radius > 0.0 && cylinder_height > 0.0) {
     k_segment_count = get_debug_geometry_circular_segment_count();
@@ -741,12 +588,7 @@ generate_cylinder_points_list(
   return points;
 }
 
-generate_pill_points_lists(
-  pill_base,
-  pill_radius,
-  pill_height,
-  forward,
-  up) {
+generate_pill_points_lists(pill_base, pill_radius, pill_height, forward, up) {
   points = [];
   if(pill_radius > 0.0 && pill_height > 0.0) {
     k_segment_count = get_debug_geometry_circular_segment_count();
@@ -825,12 +667,7 @@ generate_pill_points_lists(
   return points;
 }
 
-generate_cone_points_lists(
-  cone_base,
-  cone_radius,
-  cone_height,
-  forward,
-  up) {
+generate_cone_points_lists(cone_base, cone_radius, cone_height, forward, up) {
   points = [];
   if(cone_radius > 0 && cone_height > 0) {
     k_segment_count = get_debug_geometry_circular_segment_count();
@@ -859,11 +696,7 @@ generate_cone_points_lists(
   return points;
 }
 
-generate_box_points_lists(
-  centroid,
-  dimensions,
-  forward,
-  up) {
+generate_box_points_lists(centroid, dimensions, forward, up) {
   points = [];
   if(dimensions[0] > 0 && dimensions[1] > 0 && dimensions[2] > 0) {
     left = vector3d_cross_product(up, forward);

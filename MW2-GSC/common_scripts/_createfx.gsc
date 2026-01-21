@@ -125,8 +125,7 @@ createFxLogic() {
 
   SetDevDvar("fx", "nil");
 
-  // setup "crosshair"
-  crossHair = newHudElem();
+  // setup "crosshair"crossHair = newHudElem();
   crossHair.location = 0;
   crossHair.alignX = "center";
   crossHair.alignY = "middle";
@@ -260,8 +259,7 @@ createFxLogic() {
   for(;;) {
     changedSelectedEnts = false;
 
-    // calculate the "cursor"
-    right = anglestoright(level.player getplayerangles());
+    // calculate the "cursor"right = anglestoright(level.player getplayerangles());
     forward = anglesToForward(level.player getplayerangles());
     up = anglestoup(level.player getplayerangles());
     dot = 0.85;
@@ -444,9 +442,7 @@ createFxLogic() {
       update_selected_entities();
 
     if(!level.mp_createfx)
-      lastPlayerOrigin = [
-        [level.func_position_player_get]
-      ](lastPlayerOrigin);
+      lastPlayerOrigin = [[level.func_position_player_get]](lastPlayerOrigin);
 
     lastHighlightedEnt = highlightedEnt;
 

@@ -275,14 +275,7 @@ add_context_sensative_timeout(name1, name2, groupNum, timeoutDuration) {
 /*
  =============
 ///ScriptDocBegin
-"Name: play_sound_on_entity( <alias> )"
-"Summary: Play the specified sound alias on an entity at it's origin"
-"Module: Sound"
-"CallOn: An entity"
-"MandatoryArg: <alias> : Sound alias to play"
-"Example: level.player play_sound_on_entity( "breathing_better" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: play_sound_on_entity( <alias> )""Summary: Play the specified sound alias on an entity at it's origin""Module: Sound""CallOn: An entity""MandatoryArg: <alias> : Sound alias to play""Example: level.player play_sound_on_entity( "breathing_better" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 play_sound_on_entity(alias) {
@@ -300,15 +293,7 @@ within_fov(start_origin, start_angles, end_origin, fov) {
 /*
 =============
 ///ScriptDocBegin
-"Name: array_remove_nokeys( <ents> , <remover> )"
-"Summary: array_remove used on non keyed arrays doesn't flip the array "
-"Module: Utility"
-"CallOn: Level"
-"MandatoryArg: <ents>: array to remove from"
-"MandatoryArg: <remover>: thing to remove from the array"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: array_remove_nokeys( <ents> , <remover> )""Summary: array_remove used on non keyed arrays doesn't flip the array ""Module: Utility""CallOn: Level""MandatoryArg: <ents>: array to remove from""MandatoryArg: <remover>: thing to remove from the array""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -982,7 +967,7 @@ context_Sensative_Dialog_Guy_In_Sight() {
 context_Sensative_Dialog_Guy_In_Sight_Check() {
   prof_begin("AI_in_sight_check");
 
-  //enemies = getaiarray( "axis" );
+  //enemies = getaiarray("axis" );
   //replace with level of enemy team members?
   enemies = [];
 

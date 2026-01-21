@@ -467,8 +467,7 @@ is_weapon_upgraded(weaponname) {
   weaponname = ToLower(weaponname);
   ziw_keys = GetArrayKeys(level.zombie_weapons);
   for(i = 0; i < level.zombie_weapons.size; i++) {
-    if(isDefined(level.zombie_weapons[ziw_keys[i]].upgrade_name) &&
-      level.zombie_weapons[ziw_keys[i]].upgrade_name == weaponname) {
+    if(isDefined(level.zombie_weapons[ziw_keys[i]].upgrade_name) && level.zombie_weapons[ziw_keys[i]].upgrade_name == weaponname) {
       return true;
     }
   }
@@ -759,8 +758,7 @@ treasure_chest_think() {
           current_weapon = user GetCurrentWeapon();
         }
         if(grabber == user && is_player_valid(user) && !user is_drinking() && !is_placeable_mine(current_weapon) && !is_equipment(current_weapon) && "syrette_sp" != current_weapon) {
-          bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type magic_accept",
-            user.playername, user.score, level.team_pool[user.team_num].score, level.round_number, self.zombie_cost, self.chest_origin.weapon_string, self.origin);
+          bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type magic_accept", user.playername, user.score, level.team_pool[user.team_num].score, level.round_number, self.zombie_cost, self.chest_origin.weapon_string, self.origin);
           self notify("user_grabbed_weapon");
           user thread treasure_chest_give_weapon(self.chest_origin.weapon_string);
           break;
@@ -768,8 +766,7 @@ treasure_chest_think() {
           unacquire_weapon_toggle(self.chest_origin.weapon_string);
           self.timedOut = true;
           if(is_player_valid(user)) {
-            bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type magic_reject",
-              user.playername, user.score, level.team_pool[user.team_num].score, level.round_number, self.zombie_cost, self.chest_origin.weapon_string, self.origin);
+            bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type magic_reject", user.playername, user.score, level.team_pool[user.team_num].score, level.round_number, self.zombie_cost, self.chest_origin.weapon_string, self.origin);
           }
           break;
         }
@@ -809,8 +806,7 @@ decide_hide_show_chest_hint(endon_notify) {
   while(true) {
     players = get_players();
     for(i = 0; i < players.size; i++) {
-      if((isDefined(self.chest_user) && players[i] != self.chest_user) ||
-        !players[i] can_buy_weapon()) {
+      if((isDefined(self.chest_user) && players[i] != self.chest_user) || !players[i] can_buy_weapon()) {
         self SetInvisibleToPlayer(players[i], true);
       } else {
         self SetInvisibleToPlayer(players[i], false);
@@ -891,8 +887,7 @@ can_buy_weapon() {
 default_box_move_logic() {
   index = -1;
   for(i = 0; i < level.chests.size; i++) {
-    if(IsSubStr(level.chests[i].script_noteworthy, ("move" + (level.chest_moves + 1))) &&
-      i != level.chest_index) {
+    if(IsSubStr(level.chests[i].script_noteworthy, ("move" + (level.chest_moves + 1))) && i != level.chest_index) {
       index = i;
       break;
     }
@@ -1282,9 +1277,7 @@ treasure_chest_weapon_spawn(chest, player, respin) {
       chance_of_joker = -1;
     }
     if(isDefined(level._zombiemode_chest_joker_chance_mutator_func)) {
-      chance_of_joker = [
-        [level._zombiemode_chest_joker_chance_mutator_func]
-      ](chance_of_joker);
+      chance_of_joker = [[level._zombiemode_chest_joker_chance_mutator_func]](chance_of_joker);
     }
     if(chance_of_joker > random) {
       self.weapon_string = undefined;
@@ -1619,8 +1612,7 @@ weapon_spawn_think() {
           }
         }
         player maps\_zombiemode_score::minus_to_player_score(cost);
-        bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type weapon",
-          player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, cost, self.zombie_weapon_upgrade, self.origin);
+        bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type weapon", player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, cost, self.zombie_weapon_upgrade, self.origin);
         if(is_lethal_grenade(self.zombie_weapon_upgrade)) {
           player takeweapon(player get_player_lethal_grenade());
           player set_player_lethal_grenade(self.zombie_weapon_upgrade);
@@ -1662,8 +1654,7 @@ weapon_spawn_think() {
         }
         if(ammo_given) {
           player maps\_zombiemode_score::minus_to_player_score(ammo_cost);
-          bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type ammo",
-            player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, ammo_cost, self.zombie_weapon_upgrade, self.origin);
+          bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type ammo", player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, ammo_cost, self.zombie_weapon_upgrade, self.origin);
         }
       } else {
         play_sound_on_ent("no_purchase");

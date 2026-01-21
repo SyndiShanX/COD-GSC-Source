@@ -125,8 +125,7 @@ main() {
     before = 0;
     after = 0;
     for(i = 0; i < things_to_damage.size; i++) {
-      if(isDefined(things_to_damage[i]) && (things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02" ||
-          things_to_damage[i].model == "foliage_pacific_forest_shrubs03" || things_to_damage[i].model == "foliage_pacific_forest_shrubs01")) {
+      if(isDefined(things_to_damage[i]) && (things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02" || things_to_damage[i].model == "foliage_pacific_forest_shrubs03" || things_to_damage[i].model == "foliage_pacific_forest_shrubs01")) {
         before++;
         if(things > 0) {
           things_to_damage[i] delete();
@@ -1256,18 +1255,18 @@ event1_put_ai_on_lvt() {
   tag = "tag_passenger2";
   level.gibsworth = getent("gibsworth", "script_noteworthy");
   level.gibsworth linkto(level.players_lvt, tag);
-  level.gibsworth animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), % crew_lvt4_peleliu1_character2);
+  level.gibsworth animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), %crew_lvt4_peleliu1_character2);
   level.gibsworth thread event2_headshot();
   level.gibsworth thread lvt_dialog();
   tag = "tag_passenger3";
   level.sullivan linkto(level.players_lvt, tag);
-  level.sullivan animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), % crew_lvt4_peleliu1_character3);
+  level.sullivan animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), %crew_lvt4_peleliu1_character3);
   tag = "tag_passenger7";
   level.polo linkto(level.players_lvt, tag);
-  level.polo animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), % crew_lvt4_peleliu1_character7);
+  level.polo animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), %crew_lvt4_peleliu1_character7);
   tag = "tag_passenger6";
   level.sarge linkto(level.players_lvt, tag);
-  level.sarge animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), % crew_lvt4_peleliu1_character6);
+  level.sarge animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), %crew_lvt4_peleliu1_character6);
   guys = array_remove(guys, level.sarge);
   guys = array_remove(guys, level.polo);
   guys = array_remove(guys, level.sullivan);
@@ -1282,31 +1281,31 @@ event1_put_ai_on_lvt() {
       if(level.displaceredshirts && players.size >= 3) {
         tag = "tag_passenger5";
         guys[i] linkto(coop_displacements[1]);
-        guys[i] animscripted("lvt_ridein", coop_displacements[1].origin, coop_displacements[1].angles, % crouch_aim_straight);
+        guys[i] animscripted("lvt_ridein", coop_displacements[1].origin, coop_displacements[1].angles, %crouch_aim_straight);
       } else {
         tag = "tag_passenger5";
         guys[i] linkto(level.players_lvt, tag);
-        guys[i] animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), % crew_lvt4_peleliu1_character5);
+        guys[i] animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), %crew_lvt4_peleliu1_character5);
       }
     } else if(i == 1) {
       if(level.displaceredshirts && players.size == 4) {
         tag = "tag_passenger9";
         guys[i] linkto(coop_displacements[2]);
-        guys[i] animscripted("lvt_ridein", coop_displacements[2].origin, coop_displacements[2].angles, % crouch_aim_straight);
+        guys[i] animscripted("lvt_ridein", coop_displacements[2].origin, coop_displacements[2].angles, %crouch_aim_straight);
       } else {
         tag = "tag_passenger9";
         guys[i] linkto(level.players_lvt, tag);
-        guys[i] animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), % crew_lvt4_peleliu1_character9);
+        guys[i] animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), %crew_lvt4_peleliu1_character9);
       }
     } else if(i == 2) {
       if(level.displaceredshirts && players.size >= 2) {
         tag = "tag_passenger4";
         guys[i] linkto(coop_displacements[0]);
-        guys[i] animscripted("lvt_ridein", coop_displacements[0].origin, coop_displacements[0].angles, % crouch_aim_straight);
+        guys[i] animscripted("lvt_ridein", coop_displacements[0].origin, coop_displacements[0].angles, %crouch_aim_straight);
       } else {
         tag = "tag_passenger4";
         guys[i] linkto(level.players_lvt, tag);
-        guys[i] animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), % crew_lvt4_peleliu1_character4);
+        guys[i] animscripted("lvt_ridein", level.players_lvt gettagorigin(tag), level.players_lvt gettagangles(tag), %crew_lvt4_peleliu1_character4);
       }
     }
   }
@@ -1757,7 +1756,7 @@ event1_lvt_jeep_driver_dies() {
   ang = self.attached_jeep gettagangles("tag_driver");
   guy = spawn_fake_guy_lvt(org, ang, 1, "drone_jeep_rider", "drone_jeep_rider");
   guy linkto(self.attached_jeep, "tag_driver");
-  guy animscripted("single anim", org, ang, % ch_driver_peleliu1_jeep_destroyed);
+  guy animscripted("single anim", org, ang, %ch_driver_peleliu1_jeep_destroyed);
   self.attached_jeep.attached_guy = guy;
 }
 
@@ -2574,8 +2573,7 @@ event1_rocket_impact_think() {
   playsoundatposition("fake_rockets_L", (2036, -10207, -295.9));
   playsoundatposition("fake_rockets_R", (1036, -10207, -295.9));
   for(i = 0; i < things_to_damage.size; i++) {
-    if(isDefined(things_to_damage[i]) && (things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02" ||
-        things_to_damage[i].model == "foliage_pacific_forest_shrubs03" || things_to_damage[i].model == "foliage_pacific_forest_shrubs01")) {
+    if(isDefined(things_to_damage[i]) && (things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02" || things_to_damage[i].model == "foliage_pacific_forest_shrubs03" || things_to_damage[i].model == "foliage_pacific_forest_shrubs01")) {
       if(things_to_damage[i].model == "foliage_cod5_tree_maple_02_large" || things_to_damage[i].model == "foliage_pacific_palms01" || things_to_damage[i].model == "foliage_pacific_palms02") {
         stumps = [];
         stumps[0] = "foliage_pacific_snapped_palms01";
@@ -3975,19 +3973,19 @@ lvt_stop_and_unload(no_ramp_drop) {
   self waittill("unload");
   self setspeed(0, 10);
   self notify("stop float loop");
-  self clearanim( % v_lvt4_float_loop, 0);
+  self clearanim(%v_lvt4_float_loop, 0);
   wait 2;
   if(!isDefined(no_ramp_drop)) {
-    self setflaggedanim("drop_gate", % v_lvt4_open_ramp, 1, 0);
+    self setflaggedanim("drop_gate", %v_lvt4_open_ramp, 1, 0);
     self notify("drone_unload");
   }
   wait 8;
-  self clearanim( % v_lvt4_open_ramp, 0);
-  self setflaggedanim("open_gate", % v_lvt4_ramp_close, 1, 0);
+  self clearanim(%v_lvt4_open_ramp, 0);
+  self setflaggedanim("open_gate", %v_lvt4_ramp_close, 1, 0);
 }
 
 event1_stuck_lvt_anim() {
-  self setflaggedanim("lvt_stuck", % v_lvt4_stuck, 1, 0);
+  self setflaggedanim("lvt_stuck", %v_lvt4_stuck, 1, 0);
 }
 
 event1_lvt_jeep_rollout() {
@@ -4002,21 +4000,21 @@ event1_lvt_jeep_rollout() {
   colide linkto(self.attached_jeep, "tag_origin");
   getvehiclenode("jeep_rollout", "script_noteworthy") waittill("trigger", who);
   who setspeed(0, 25);
-  who clearanim( % v_lvt4_float_loop, 0);
+  who clearanim(%v_lvt4_float_loop, 0);
   getent("event1_jeep_blowup_trig", "targetname") waittill("trigger");
-  self.attached_jeep animscripted("jeep_unload", self.attached_jeep.origin, self.attached_jeep.angles, % v_willys_peleliu1_jeep_destroyed);
+  self.attached_jeep animscripted("jeep_unload", self.attached_jeep.origin, self.attached_jeep.angles, %v_willys_peleliu1_jeep_destroyed);
   self.attached_jeep unlink();
   self thread event1_lvt_jeep_driver_dies();
   wait 1.7;
   self notify("stop float loop");
-  self clearanim( % v_lvt4_float_loop, 0);
-  self setflaggedanim("lvt_stuck", % v_lvt4_peleliu1_jeep_destroyed, 1, 0);
+  self clearanim(%v_lvt4_float_loop, 0);
+  self setflaggedanim("lvt_stuck", %v_lvt4_peleliu1_jeep_destroyed, 1, 0);
   wait 0.4;
   playFXOnTag(level._effect["jeep_explode"], self.attached_jeep, "tag_origin");
   self.attached_jeep playSound("vehicle_explo");
   self thread lvt_fake_death(0);
-  self clearanim( % v_lvt4_peleliu1_jeep_destroyed, 0);
-  self setflaggedanim("fast_open_ramp", % v_lvt4_ramp_open, 1, 0);
+  self clearanim(%v_lvt4_peleliu1_jeep_destroyed, 0);
+  self setflaggedanim("fast_open_ramp", %v_lvt4_ramp_open, 1, 0);
   level waittill("remove floaters");
   self delete();
   colide delete();
@@ -4028,7 +4026,7 @@ event1_lst_door_open() {
   wait 11;
   lst = getent("player_lst", "targetname");
   lst UseAnimTree(#animtree);
-  lst animscripted("lst_door_open", lst.origin, lst.angles, % v_lst_open_doors);
+  lst animscripted("lst_door_open", lst.origin, lst.angles, %v_lst_open_doors);
   lst thread lst_door_sound_on_done();
   level notify("lst door opening");
   lst thread lst_door_fx();
@@ -4112,8 +4110,8 @@ lvt_fake_death(do_sink, do_exploding_guys) {
   }
   if(isDefined(do_sink) && do_sink) {
     self notify("stop float loop");
-    self clearanim( % v_lvt4_float_loop, 0);
-    self setflaggedanim("sinking", % v_lvt4_sinking);
+    self clearanim(%v_lvt4_float_loop, 0);
+    self setflaggedanim("sinking", %v_lvt4_sinking);
     self waittill("sinking");
     self notify("nodeath_thread");
     self notify("death");

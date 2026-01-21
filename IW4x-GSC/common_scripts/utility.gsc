@@ -291,11 +291,7 @@ waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string
 }
 
 waittill_any_return(string1, string2, string3, string4, string5) {
-  if((!isDefined(string1) || string1 != "death") &&
-    (!isDefined(string2) || string2 != "death") &&
-    (!isDefined(string3) || string3 != "death") &&
-    (!isDefined(string4) || string4 != "death") &&
-    (!isDefined(string5) || string5 != "death"))
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
   ent = spawnStruct();
@@ -321,11 +317,7 @@ waittill_any_return(string1, string2, string3, string4, string5) {
 }
 
 waittill_any_timeout(timeOut, string1, string2, string3, string4, string5) {
-  if((!isDefined(string1) || string1 != "death") &&
-    (!isDefined(string2) || string2 != "death") &&
-    (!isDefined(string3) || string3 != "death") &&
-    (!isDefined(string4) || string4 != "death") &&
-    (!isDefined(string5) || string5 != "death"))
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
   ent = spawnStruct();

@@ -142,7 +142,7 @@ river_intro() {
   setmusicstate("ANGOLA_CHOPPER_IN");
   level screen_fade_in();
   set_objective(level.obj_secure_the_barge);
-  timer = getanimlength( % ch_ang_05_01_rundown_intro_player);
+  timer = getanimlength(%ch_ang_05_01_rundown_intro_player);
   wait(timer - 9.85);
   vh_heli = getent("river_player_heli", "targetname");
   fake_fire_origin = getEntArray("fake_fire_origin", "targetname");
@@ -1574,7 +1574,7 @@ strella_guard_run() {
   strella_guard forceteleport(start_node.origin, start_node.angles);
   gaz66 = getent("strella_truck", "targetname");
   gaz66 useanimtree(#animtree);
-  gaz66 setanim( % v_ang_05_03_ghaz_cargo_open_cargo, 1, 0, 1);
+  gaz66 setanim(%v_ang_05_03_ghaz_cargo_open_cargo, 1, 0, 1);
 }
 
 clear_all_guards_on_medium_boat() {

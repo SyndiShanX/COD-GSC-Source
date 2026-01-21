@@ -33,8 +33,7 @@ gunner_think(turret) {
   ent.origin = turret.origin + vector_multiply(forward, 500);
 
   if(isDefined(self.last_enemy_sighting_position)) {
-    // jump to the enemy sight position so we start "on target"
-    ent.origin = self.last_enemy_sighting_position;
+    // jump to the enemy sight position so we start "on target"ent.origin = self.last_enemy_sighting_position;
   }
 
   turret setTargetEntity(ent);

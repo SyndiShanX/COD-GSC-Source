@@ -739,9 +739,7 @@ robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpo
         scoreevents::processscoreevent(#"escort_robot_disable", eattacker, undefined, undefined);
       }
 
-      [
-        [level.var_37d62931]
-      ](eattacker, 1);
+      [[level.var_37d62931]](eattacker, 1);
 
       if(isDefined(eattacker.pers[# "disables"])) {
         eattacker.pers[# "disables"]++;

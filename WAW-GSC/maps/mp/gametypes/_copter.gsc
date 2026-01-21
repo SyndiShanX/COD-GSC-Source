@@ -403,18 +403,7 @@ myMagicBullet(pos, dir) {
     damage = getdvarint("scr_copter_damage");
   trace = bulletTrace(pos, pos + vecscale(dir, 10000), true, undefined);
   if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
-    trace["entity"] thread[[level.callbackPlayerDamage]](
-      self,
-      self,
-      damage,
-      0,
-      "MOD_RIFLE_BULLET",
-      "copter",
-      self.origin,
-      dir,
-      "none",
-      0
-    );
+    trace["entity"] thread[[level.callbackPlayerDamage]](self, self, damage, 0, "MOD_RIFLE_BULLET", "copter", self.origin, dir, "none", 0);
   }
 }
 

@@ -212,7 +212,7 @@ registernotetracks() {
                               return;
                             }
 
-                            self give_run_perk(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+                            self give_run_perk(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
                             scripts\anim\utility::enterpronewrapper(1);
                             setpose("prone");
                             if(isDefined(self.a.func_8445)) {
@@ -228,7 +228,7 @@ registernotetracks() {
                               return;
                             }
 
-                            self give_run_perk(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+                            self give_run_perk(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
                             scripts\anim\utility::enterpronewrapper(1);
                             setpose("prone");
                             self.a.proneaiming = undefined;
@@ -242,7 +242,7 @@ registernotetracks() {
                             setpose("crouch");
                             self.a.onback = 1;
                             self.a.movement = "stop";
-                            self give_run_perk(-90, 90, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+                            self give_run_perk(-90, 90, %prone_legs_down, %exposed_aiming, %prone_legs_up);
                             scripts\anim\utility::enterpronewrapper(1);
                           }
 

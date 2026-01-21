@@ -259,7 +259,7 @@ stand_up_if_necessary() {
     var_0 = self.a.array["stance_change"];
 
     if(isDefined(var_0)) {
-      self setflaggedanimknoballrestart("stand_up", var_0, % root, 1);
+      self setflaggedanimknoballrestart("stand_up", var_0, %root, 1);
       animscripts\shared::donotetracks("stand_up");
     }
   }
@@ -271,7 +271,7 @@ patrol_resume_move_start_func() {
   self orientmode("face current");
   stand_up_if_necessary();
   var_0 = level.scr_anim["generic"]["patrol_radio_in_clear"];
-  self setflaggedanimknoballrestart("radio", var_0, % root, 1);
+  self setflaggedanimknoballrestart("radio", var_0, %root, 1);
   animscripts\shared::donotetracks("radio");
   turn_180_move_start_func();
 }
@@ -296,7 +296,7 @@ turn_180_move_start_func() {
     self orientmode("face current");
     stand_up_if_necessary();
     var_4 = level.scr_anim["generic"]["patrol_turn180"];
-    self setflaggedanimknoballrestart("move", var_4, % root, 1);
+    self setflaggedanimknoballrestart("move", var_4, %root, 1);
 
     if(animhasnotetrack(var_4, "code_move")) {
       animscripts\shared::donotetracks("move");

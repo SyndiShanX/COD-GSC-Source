@@ -280,19 +280,14 @@ setup_smashtv_loadout() {
 }
 
 IsExplosiveDamage(damage_mod) {
-  if(damage_mod == "MOD_GRENADE" ||
-    damage_mod == "MOD_GRENADE_SPLASH" ||
-    damage_mod == "MOD_PROJECTILE" ||
-    damage_mod == "MOD_PROJECTILE_SPLASH" ||
-    damage_mod == "MOD_EXPLOSIVE") {
+  if(damage_mod == "MOD_GRENADE" || damage_mod == "MOD_GRENADE_SPLASH" || damage_mod == "MOD_PROJECTILE" || damage_mod == "MOD_PROJECTILE_SPLASH" || damage_mod == "MOD_EXPLOSIVE") {
     return true;
   }
   return false;
 }
 
 is_tesla_damage(mod) {
-  return (isDefined(self.damageweapon) && (self.damageweapon == "tesla_gun_zt") &&
-    (mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH"));
+  return (isDefined(self.damageweapon) && (self.damageweapon == "tesla_gun_zt") && (mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH"));
 }
 
 string_to_float(string) {
@@ -318,8 +313,7 @@ set_zombie_var(var, value, is_float, column) {
     column = 1;
   }
   table = "mp/zombiemode_zt.csv";
-  table_value = TableLookUp(table, 0,
-    var, column);
+  table_value = TableLookUp(table, 0, var, column);
   if(isDefined(table_value) && table_value != "") {
     if(is_float) {
       value = float(table_value);

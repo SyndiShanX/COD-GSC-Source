@@ -316,17 +316,17 @@ getaimyawtopoint(var_0) {
 ramboaim(var_0) {
   self endon("killanimscript");
   ramboaiminternal(var_0);
-  self clearanim( % generic_aim_left, 0.5);
-  self clearanim( % generic_aim_right, 0.5);
+  self clearanim(%generic_aim_left, 0.5);
+  self clearanim(%generic_aim_right, 0.5);
 }
 
 ramboaiminternal(var_0) {
   self endon("rambo_aim_end");
   waittillframeend;
-  self clearanim( % generic_aim_left, 0.2);
-  self clearanim( % generic_aim_right, 0.2);
-  self setanimlimited( % generic_aim_45l, 1, 0.2);
-  self setanimlimited( % generic_aim_45r, 1, 0.2);
+  self clearanim(%generic_aim_left, 0.2);
+  self clearanim(%generic_aim_right, 0.2);
+  self setanimlimited(%generic_aim_45l, 1, 0.2);
+  self setanimlimited(%generic_aim_45r, 1, 0.2);
   var_1 = 0.2;
   var_2 = 0;
 
@@ -351,16 +351,16 @@ ramboaiminternal(var_0) {
       if(var_4 > 1)
         var_4 = 1;
 
-      self setanimlimited( % generic_aim_right, var_4, var_1);
-      self setanimlimited( % generic_aim_left, 0, var_1);
+      self setanimlimited(%generic_aim_right, var_4, var_1);
+      self setanimlimited(%generic_aim_left, 0, var_1);
     } else {
       var_4 = var_2 / 45;
 
       if(var_4 > 1)
         var_4 = 1;
 
-      self setanimlimited( % generic_aim_left, var_4, var_1);
-      self setanimlimited( % generic_aim_right, 0, var_1);
+      self setanimlimited(%generic_aim_left, var_4, var_1);
+      self setanimlimited(%generic_aim_right, 0, var_1);
     }
 
     wait(var_1);
@@ -544,12 +544,10 @@ playlookanimation(var_0, var_1, var_2) {
         return;
     }
 
-    if(animscripts\utility::issuppressedwrapper() && [
-        [var_2]
-      ]()) {
+    if(animscripts\utility::issuppressedwrapper() && [[var_2]]()) {
       return;
     }
-    self setanimknoball(var_0, % body, 1, 0.1);
+    self setanimknoball(var_0, %body, 1, 0.1);
     wait 0.1;
   }
 }

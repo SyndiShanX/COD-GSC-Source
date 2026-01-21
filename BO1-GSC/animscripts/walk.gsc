@@ -37,14 +37,9 @@ MoveWalk() {
 
 DoWalkAnim(walkAnim) {
   self endon("movemode");
-  self SetFlaggedAnimKnobAll("walkanim", walkAnim, % body, 1, 1.2, 1);
+  self SetFlaggedAnimKnobAll("walkanim", walkAnim, %body, 1, 1.2, 1);
   if(self.a.pose != "prone") {
-    self call_overloaded_func("animscripts\run", "UpdateRunWeightsOnce", %
-      combatrun_forward,
-      animArray("walk_b"),
-      animArray("walk_l"),
-      animArray("walk_r")
-    );
+    self call_overloaded_func("animscripts\run", "UpdateRunWeightsOnce", %combatrun_forward, animArray("walk_b"), animArray("walk_l"), animArray("walk_r"));
   }
   self animscripts\shared::DoNoteTracksForTime(0.2, "walkanim");
 }

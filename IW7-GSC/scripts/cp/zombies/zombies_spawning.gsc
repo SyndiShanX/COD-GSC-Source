@@ -884,9 +884,7 @@ update_kvp(var_0, var_1, var_2) {
 
   foreach(var_4 in level.spawn_struct_list) {
     if(var_4.origin == var_0) {
-      var_4 = [
-        [level.kvp_update_funcs[var_1]]
-      ](var_4, var_2);
+      var_4 = [[level.kvp_update_funcs[var_1]]](var_4, var_2);
       break;
     }
   }
@@ -1800,9 +1798,7 @@ func_FF98(var_0) {
     var_1 = undefined;
     var_2 = scripts\engine\utility::array_randomize_objects(level.var_1094E);
     foreach(var_6, var_4 in var_2) {
-      var_5 = [
-        [var_2[var_6]]
-      ]();
+      var_5 = [[var_2[var_6]]]();
       if(isDefined(var_5)) {
         return var_5;
       }
@@ -2781,9 +2777,7 @@ func_E81B() {
     wait(var_0);
     level thread scripts\cp\gametypes\zombie::replace_grenades_between_waves();
     if(isDefined(level.wave_complete_dialogues_func)) {
-      [
-        [level.wave_complete_dialogues_func]
-      ](level.wave_num);
+      [[level.wave_complete_dialogues_func]](level.wave_num);
     }
 
     var_9 = gettime() - level.var_13BDA / 1000;
@@ -3005,9 +2999,7 @@ func_E7F0(var_0) {
   var_2 = 0;
   if(isDefined(var_1)) {
     if(isDefined(level.event_funcs[var_1])) {
-      [
-        [level.event_funcs[var_1]]
-      ]();
+      [[level.event_funcs[var_1]]]();
     } else {
       var_2 = 1;
     }
@@ -3196,9 +3188,7 @@ func_310F() {
 func_135A3() {
   self endon("death");
   for(;;) {
-    if([
-        [level.active_volume_check]
-      ](self.origin)) {
+    if([[level.active_volume_check]](self.origin)) {
       self.entered_playspace = 1;
       if(isDefined(self.attack_spot)) {
         if(isDefined(self.attack_spot.var_C2D0) && self.attack_spot.var_C2D0 == self) {

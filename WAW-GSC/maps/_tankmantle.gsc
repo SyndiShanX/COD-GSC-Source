@@ -282,7 +282,7 @@ open_hatch(side) {
   if(!isDefined(hatch_anims[side])) {
     return;
   }
-  self SetFlaggedAnimKnobAllRestart("hatch_open", hatch_anims[side], % root, 1.0, 0.2, 1.0);
+  self SetFlaggedAnimKnobAllRestart("hatch_open", hatch_anims[side], %root, 1.0, 0.2, 1.0);
 }
 
 tank_mantle_stance_wrapper(state) {

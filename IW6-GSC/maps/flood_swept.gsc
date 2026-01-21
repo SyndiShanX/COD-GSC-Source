@@ -340,7 +340,7 @@ start_swept_control_old() {
   var_2 = common_scripts\utility::getstruct("vignette_sweptaway", "script_noteworthy");
   var_3 = maps\_utility::spawn_anim_model("player_rig", var_2.origin);
   var_3.angles = var_2.angles;
-  var_3 setanim( % flood_sweptaway_player_path, 1, 0);
+  var_3 setanim(%flood_sweptaway_player_path, 1, 0);
   var_4 = 35;
   var_5 = 15;
   level.player playerlinktodelta(var_3, "tag_player", 1, var_4, var_4, var_5, var_5);

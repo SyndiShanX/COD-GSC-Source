@@ -460,10 +460,7 @@ attempt_brutus_spawn(var_d8206b1d, str_zone_name, var_dde9ff11 = 0, var_68ffecfb
   }
 
   level notify(#"spawn_brutus", {
-    #n_spawn: var_d8206b1d,
-    #str_zone_name: str_zone_name,
-    #var_dde9ff11: var_dde9ff11,
-    #var_68ffecfb: var_68ffecfb
+    #n_spawn: var_d8206b1d, #str_zone_name: str_zone_name, #var_dde9ff11: var_dde9ff11, #var_68ffecfb: var_68ffecfb
   });
   return true;
 }
@@ -866,10 +863,7 @@ function_ba497d2d(e_brutus) {
 
   if(isDefined(e_brutus) && isalive(e_brutus)) {
     var_1a8c05ae = {
-      #n_health: e_brutus.health,
-      #var_37d3fab9: e_brutus.has_helmet,
-      #var_1e1ce722: e_brutus.var_21b0fc34,
-      #var_72275733: e_brutus.var_7f2b0069
+      #n_health: e_brutus.health, #var_37d3fab9: e_brutus.has_helmet, #var_1e1ce722: e_brutus.var_21b0fc34, #var_72275733: e_brutus.var_7f2b0069
     };
 
     if(!isDefined(level.var_f158b05c)) {

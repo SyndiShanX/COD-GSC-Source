@@ -149,9 +149,7 @@ say_dialog_func(func_pointer, str_vo_line, delay_after_func) {
   self endon("kill_pending_dialog");
 
   while(true) {
-    if([
-        [func_pointer]
-      ]()) {
+    if([[func_pointer]]()) {
       break;
     }
 
@@ -211,9 +209,7 @@ start_vo_nag_group_func(str_group, func_end_nag, vo_repeat_delay, start_delay, r
 
 _set_flag_when_func_true(str_flag_name, func_end_nag) {
   while(true) {
-    if([
-        [func_end_nag]
-      ]()) {
+    if([[func_end_nag]]()) {
       break;
     }
 

@@ -11,8 +11,8 @@ precache() {
   level.heli_anims["heli_flyby_01"] = "mp_warhawk_heli_flyby_01";
   level.heli_anims["heli_flyby_02"] = "mp_warhawk_heli_flyby_02";
   level.heli_anims_length = [];
-  level.heli_anims_length["heli_flyby_01"] = GetAnimLength( % mp_warhawk_heli_flyby_01);
-  level.heli_anims_length["heli_flyby_02"] = GetAnimLength( % mp_warhawk_heli_flyby_02);
+  level.heli_anims_length["heli_flyby_01"] = GetAnimLength(%mp_warhawk_heli_flyby_01);
+  level.heli_anims_length["heli_flyby_02"] = GetAnimLength(%mp_warhawk_heli_flyby_02);
 
   level.air_raid_active = false;
 

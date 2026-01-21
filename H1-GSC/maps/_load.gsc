@@ -808,9 +808,7 @@ handle_starts() {
       if(!isDefined(var_10["catchup_function"])) {
         continue;
       }
-      [
-        [var_10["catchup_function"]]
-      ]();
+      [[var_10["catchup_function"]]]();
     }
   }
 

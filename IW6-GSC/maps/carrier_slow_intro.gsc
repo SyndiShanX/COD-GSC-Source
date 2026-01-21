@@ -481,7 +481,7 @@ pharm_roller_shut() {
   var_2 thread maps\_anim::anim_single_solo(var_1, "pharm_shutter_close");
   thread maps\carrier_audio::aud_carr_pharmacy_shut();
   wait 0.7;
-  var_1 setanimtime( % favela_curtain_pull, 0.1);
+  var_1 setanimtime(%favela_curtain_pull, 0.1);
   wait 1.6;
   var_0 movez(-38, 0.7, 0.3);
   var_1 waittillmatch("single anim", "end");

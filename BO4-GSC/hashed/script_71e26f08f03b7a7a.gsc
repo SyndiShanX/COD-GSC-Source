@@ -60,8 +60,7 @@ function_f0297225(var_2ab9d3bd, replacementcount, var_3afaa57b) {
 
   var_37d0690b = level.var_2ead97d1[var_3afaa57b].size;
   level.var_2ead97d1[var_3afaa57b][var_37d0690b] = {
-    #replacement: var_2ab9d3bd,
-    #count: replacementcount
+    #replacement: var_2ab9d3bd, #count: replacementcount
   };
 }
 

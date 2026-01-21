@@ -616,13 +616,7 @@ addRatioMaxStockCombinedToAllWeapons(ratio_of_max) {
       continue;
     }
     if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon)) {
-      if(weapon != "iw6_alienminigun_mp" &&
-        weapon != "iw6_alienminigun1_mp" &&
-        weapon != "iw6_alienminigun2_mp" &&
-        weapon != "iw6_alienminigun3_mp" &&
-        weapon != "iw6_alienminigun4_mp" &&
-        WeaponType(weapon) != "riotshield"
-      ) {
+      if(weapon != "iw6_alienminigun_mp" && weapon != "iw6_alienminigun1_mp" && weapon != "iw6_alienminigun2_mp" && weapon != "iw6_alienminigun3_mp" && weapon != "iw6_alienminigun4_mp" && WeaponType(weapon) != "riotshield") {
         base_weapon = getRawBaseWeaponName(weapon);
 
         cur_stock = self GetWeaponAmmoStock(weapon);
@@ -641,12 +635,7 @@ addFullCombinedClipToAllWeapons() {
       continue;
     }
     if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon)) {
-      if(weapon != "iw6_alienminigun_mp" &&
-        weapon != "iw6_alienminigun1_mp" &&
-        weapon != "iw6_alienminigun2_mp" &&
-        weapon != "iw6_alienminigun3_mp" &&
-        weapon != "iw6_alienminigun4_mp" &&
-        WeaponType(weapon) != "riotshield") {
+      if(weapon != "iw6_alienminigun_mp" && weapon != "iw6_alienminigun1_mp" && weapon != "iw6_alienminigun2_mp" && weapon != "iw6_alienminigun3_mp" && weapon != "iw6_alienminigun4_mp" && WeaponType(weapon) != "riotshield") {
         base_weapon = getRawBaseWeaponName(weapon);
 
         clip_size = WeaponClipSize(weapon);
@@ -1171,13 +1160,7 @@ addRatioMaxStockToAllWeapons(ratio_of_max) {
       continue;
     }
     if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon)) {
-      if(weapon != "iw6_alienminigun_mp" &&
-        weapon != "iw6_alienminigun1_mp" &&
-        weapon != "iw6_alienminigun2_mp" &&
-        weapon != "iw6_alienminigun3_mp" &&
-        weapon != "iw6_alienminigun4_mp" &&
-        WeaponType(weapon) != "riotshield"
-      ) {
+      if(weapon != "iw6_alienminigun_mp" && weapon != "iw6_alienminigun1_mp" && weapon != "iw6_alienminigun2_mp" && weapon != "iw6_alienminigun3_mp" && weapon != "iw6_alienminigun4_mp" && WeaponType(weapon) != "riotshield") {
         base_weapon = getRawBaseWeaponName(weapon);
         if(self player_has_specialized_ammo(base_weapon)) {
           if(isDefined(self.stored_ammo[base_weapon])) {
@@ -1206,12 +1189,7 @@ addFullClipToAllWeapons(ammo_scalar) {
       continue;
     }
     if(maps\mp\gametypes\_weapons::isBulletWeapon(weapon)) {
-      if(weapon != "iw6_alienminigun_mp" &&
-        weapon != "iw6_alienminigun1_mp" &&
-        weapon != "iw6_alienminigun2_mp" &&
-        weapon != "iw6_alienminigun3_mp" &&
-        weapon != "iw6_alienminigun4_mp" &&
-        WeaponType(weapon) != "riotshield") {
+      if(weapon != "iw6_alienminigun_mp" && weapon != "iw6_alienminigun1_mp" && weapon != "iw6_alienminigun2_mp" && weapon != "iw6_alienminigun3_mp" && weapon != "iw6_alienminigun4_mp" && WeaponType(weapon) != "riotshield") {
         base_weapon = getRawBaseWeaponName(weapon);
         if(self player_has_specialized_ammo(base_weapon))
           continue;
@@ -1367,13 +1345,7 @@ fillLaunchers(boxent, extra_ammo) {
       }
       weapClass = weaponClass(weaponName);
       weapType = weaponInventoryType(weaponName);
-      if(weaponName != "iw6_alienmk32_mp" &&
-        weaponName != "iw6_alienmk321_mp" &&
-        weaponName != "iw6_alienmk322_mp" &&
-        weaponName != "iw6_alienmk323_mp" &&
-        weaponName != "iw6_alienmk324_mp" &&
-        weaponName != "aliensoflam_mp"
-      ) {
+      if(weaponName != "iw6_alienmk32_mp" && weaponName != "iw6_alienmk321_mp" && weaponName != "iw6_alienmk322_mp" && weaponName != "iw6_alienmk323_mp" && weaponName != "iw6_alienmk324_mp" && weaponName != "aliensoflam_mp") {
         if(weapClass == "rocketlauncher" || weapClass == "grenade") {
           if(weapType == "primary" || weapType == "altmode") {
             clipSize = WeaponClipSize(weaponName);

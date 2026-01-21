@@ -234,7 +234,7 @@ func_5BFD(var_0, var_1) {
   var_2 = level.player func_8473();
   var_1 unlink();
   var_1 func_0BDC::func_F2FF();
-  var_1 func_82B1( % weapon_drone_fly_init, 1);
+  var_1 func_82B1(%weapon_drone_fly_init, 1);
   var_1.var_FC28 = scripts\engine\utility::spawn_tag_origin();
   var_1.var_FC28 func_0BDC::func_F2FF();
   var_1 thread func_5C87();
@@ -245,8 +245,8 @@ func_5BFD(var_0, var_1) {
   var_6 = [0, 0];
   var_7 = 2500;
   var_8 = 375;
-  var_9 = [ % drone_move_f_overlay, % drone_move_b_overlay, % drone_move_l_overlay, % drone_move_r_overlay];
-  var_10 = [ % drone_acc_f_overlay, % drone_acc_b_overlay, % drone_acc_l_overlay, % drone_acc_r_overlay];
+  var_9 = [ % drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
+  var_10 = [ % drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
   var_11 = 4.4;
   var_12 = 1.5;
   var_13 = 3.0;
@@ -336,7 +336,7 @@ func_5BFC(var_0) {
 
   var_1 unlink();
   var_1 func_0BDC::func_F2FF();
-  var_1 func_82B1( % landing_drone_fly_init, 1);
+  var_1 func_82B1(%landing_drone_fly_init, 1);
   var_1 thread func_5C3E();
   var_1 thread func_5C95();
   var_3 = var_1.origin - var_2.origin;
@@ -347,8 +347,8 @@ func_5BFC(var_0) {
   var_7 = [0, 0];
   var_8 = 2500;
   var_9 = 375;
-  var_10 = [ % drone_move_f_overlay, % drone_move_b_overlay, % drone_move_l_overlay, % drone_move_r_overlay];
-  var_11 = [ % drone_acc_f_overlay, % drone_acc_b_overlay, % drone_acc_l_overlay, % drone_acc_r_overlay];
+  var_10 = [ % drone_move_f_overlay, %drone_move_b_overlay, %drone_move_l_overlay, %drone_move_r_overlay];
+  var_11 = [ % drone_acc_f_overlay, %drone_acc_b_overlay, %drone_acc_l_overlay, %drone_acc_r_overlay];
 
   if(!isDefined(var_0)) {
     var_12 = 2.4;
@@ -455,7 +455,7 @@ func_5BE2(var_0) {
   level.player playrumbleonentity("damage_heavy");
   level.player playSound("landing_drone_attach");
   self.var_102D1 stoploopsound("landing_drone_sled_lp");
-  self.var_102D1.var_5BD7 setanimknob( % landing_drone_fly_docked, 1, 0.2);
+  self.var_102D1.var_5BD7 setanimknob(%landing_drone_fly_docked, 1, 0.2);
   self.var_102D1.var_5BD7 func_0BDC::func_413B();
 
   if(!isDefined(var_0)) {
@@ -469,7 +469,7 @@ func_5BE2(var_0) {
 }
 
 func_5CA1(var_0) {
-  var_1 = getanimlength( % weapon_drone_arms_docked);
+  var_1 = getanimlength(%weapon_drone_arms_docked);
   thread func_67ED(var_1, var_0);
   thread func_6817(var_1, var_0);
   thread func_9319(var_1, 0);
@@ -508,7 +508,7 @@ func_68A0(var_0, var_1) {
   earthquake(0.3, 0.8, level.var_D127.origin, 5000);
   level.player playrumbleonentity("damage_heavy");
   level.player playSound("drone_attach");
-  self setanimknob( % weapon_drone_fly_docked, 1, 0);
+  self setanimknob(%weapon_drone_fly_docked, 1, 0);
 }
 
 func_685E() {
@@ -520,7 +520,7 @@ func_685E() {
 }
 
 func_685F(var_0) {
-  self setanimknob( % landing_drone_recovery);
+  self setanimknob(%landing_drone_recovery);
   wait(var_0);
   level.player playrumbleonentity("damage_light");
   earthquake(0.12, 0.35, level.var_D127.origin, 5000);
@@ -581,10 +581,10 @@ func_E095(var_0, var_1, var_2) {
 
   wait(var_0);
   var_3 = var_1 - var_0;
-  self give_attacker_kill_rewards( % weapon_drone_fly_init, 0, var_3);
-  self give_attacker_kill_rewards( % weapon_drone_fly_static, 1, var_3);
-  var_4 = self islegacyagent( % weapon_drone_fly_init);
-  self func_82B0( % weapon_drone_fly_static, var_4);
+  self give_attacker_kill_rewards(%weapon_drone_fly_init, 0, var_3);
+  self give_attacker_kill_rewards(%weapon_drone_fly_static, 1, var_3);
+  var_4 = self islegacyagent(%weapon_drone_fly_init);
+  self func_82B0(%weapon_drone_fly_static, var_4);
 }
 
 func_E04D(var_0, var_1, var_2) {
@@ -594,10 +594,10 @@ func_E04D(var_0, var_1, var_2) {
 
   wait(var_0);
   var_3 = var_1 - var_0;
-  self give_attacker_kill_rewards( % landing_drone_fly_init, 0, var_3);
-  self give_attacker_kill_rewards( % landing_drone_fly_static, 1, var_3, 1);
-  var_4 = self islegacyagent( % landing_drone_fly_init);
-  self func_82B0( % landing_drone_fly_static, var_4);
+  self give_attacker_kill_rewards(%landing_drone_fly_init, 0, var_3);
+  self give_attacker_kill_rewards(%landing_drone_fly_static, 1, var_3, 1);
+  var_4 = self islegacyagent(%landing_drone_fly_init);
+  self func_82B0(%landing_drone_fly_static, var_4);
 }
 
 func_5C4D(var_0, var_1, var_2, var_3, var_4) {
@@ -715,47 +715,47 @@ func_5C8D() {
 
 func_13C0C() {
   level endon("kill_old_drone");
-  self give_attacker_kill_rewards( % weapon_drone_fly_move_f, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_f_overlay, 0, 0);
-  self give_attacker_kill_rewards( % weapon_drone_fly_move_b, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_b_overlay, 0, 0);
-  self give_attacker_kill_rewards( % weapon_drone_fly_move_l, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_l_overlay, 0, 0);
-  self give_attacker_kill_rewards( % weapon_drone_fly_move_r, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_r_overlay, 0, 0);
-  self give_attacker_kill_rewards( % weapon_drone_fly_acc_f, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_f_overlay, 0, 0);
-  self give_attacker_kill_rewards( % weapon_drone_fly_acc_b, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_b_overlay, 0, 0);
-  self give_attacker_kill_rewards( % weapon_drone_fly_acc_l, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_l_overlay, 0, 0);
-  self give_attacker_kill_rewards( % weapon_drone_fly_acc_r, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_r_overlay, 0, 0);
-  self give_capture_credit( % weapon_drone_fly_init, 1, 0, 0);
-  self give_capture_credit( % weapon_drone_fly_static, 0, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_move_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_r_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%weapon_drone_fly_acc_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_r_overlay, 0, 0);
+  self give_capture_credit(%weapon_drone_fly_init, 1, 0, 0);
+  self give_capture_credit(%weapon_drone_fly_static, 0, 0, 0);
 }
 
 func_A7D5() {
-  self give_attacker_kill_rewards( % landing_drone_fly_move_f, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_f_overlay, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fly_move_b, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_b_overlay, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fly_move_l, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_l_overlay, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fly_move_r, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_move_r_overlay, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fly_acc_f, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_f_overlay, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fly_acc_b, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_b_overlay, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fly_acc_l, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_l_overlay, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fly_acc_r, 1, 0, 0);
-  self give_attacker_kill_rewards( % drone_acc_r_overlay, 0, 0);
-  self give_capture_credit( % landing_drone_fly_init, 1, 0, 0);
-  self give_capture_credit( % landing_drone_fly_static, 0, 0, 0);
-  self give_capture_credit( % landing_drone_fly_fail, 0, 0, 0);
-  self give_attacker_kill_rewards( % landing_drone_fail_overlay, 0, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_move_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_move_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_move_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_move_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_move_r_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_f, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_f_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_b, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_b_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_l, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_l_overlay, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fly_acc_r, 1, 0, 0);
+  self give_attacker_kill_rewards(%drone_acc_r_overlay, 0, 0);
+  self give_capture_credit(%landing_drone_fly_init, 1, 0, 0);
+  self give_capture_credit(%landing_drone_fly_static, 0, 0, 0);
+  self give_capture_credit(%landing_drone_fly_fail, 0, 0, 0);
+  self give_attacker_kill_rewards(%landing_drone_fail_overlay, 0, 0, 0);
 }
 
 func_B7EC(var_0) {
@@ -870,10 +870,10 @@ func_5C40(var_0) {
 
   if(isDefined(self.var_5C6B)) {
     self playSound("landing_drone_detach");
-    var_1 = getnotetracktimes( % machinery_landing_drone_recovery, "attach_drone");
-    var_1 = var_1[0] * getanimlength( % machinery_landing_drone_recovery);
+    var_1 = getnotetracktimes(%machinery_landing_drone_recovery, "attach_drone");
+    var_1 = var_1[0] * getanimlength(%machinery_landing_drone_recovery);
     self.var_102D1.var_5BD7 thread func_685F(var_1);
-    self.var_5C6B func_82B1( % machinery_landing_drone_recovery, 1.0);
+    self.var_5C6B func_82B1(%machinery_landing_drone_recovery, 1.0);
     wait(var_1);
     self.var_102D1.var_5BD7 linkto(self.var_5C6B, "j_arm_L");
   } else {

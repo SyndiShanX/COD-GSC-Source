@@ -451,13 +451,13 @@ ai_swim_pain() {
   if(self.a.movement == "run")
     var_0 = % swimming_pain_1;
   else
-    var_0 = common_scripts\utility::random([ % swimming_firing_pain_1, % swimming_firing_pain_2]);
+    var_0 = common_scripts\utility::random([ % swimming_firing_pain_1, %swimming_firing_pain_2]);
 
   var_1 = 1;
-  self setflaggedanimknoballrestart("painanim", var_0, % body, 1, 0.1, var_1);
+  self setflaggedanimknoballrestart("painanim", var_0, %body, 1, 0.1, var_1);
 
   if(self.a.pose == "prone")
-    self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self updateprone(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
 
   if(animhasnotetrack(var_0, "start_aim")) {
     thread animscripts\pain::notifystartaim("painanim");
@@ -492,7 +492,7 @@ ai_swim_death() {
     else if(animscripts\utility::damagelocationisany("head", "helmet"))
       self.deathanim = % swimming_firing_death_2;
     else
-      self.deathanim = common_scripts\utility::random([ % swimming_firing_death_1, % swimming_firing_death_2, % swimming_firing_death_3]);
+      self.deathanim = common_scripts\utility::random([ % swimming_firing_death_1, %swimming_firing_death_2, %swimming_firing_death_3]);
   }
 
   if(!isDefined(self.nodeathsound))

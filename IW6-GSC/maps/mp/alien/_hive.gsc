@@ -282,8 +282,7 @@ monitor_attackable_ent_damage(blocker_hive) {
     }
 
     if(!(isDefined(type) && type == "MOD_UNKNOWN") && !(isDefined(self.is_burning) && self.is_burning)) {
-      if((isDefined(attacker.has_incendiary_ammo) && attacker.has_incendiary_ammo) ||
-        (isDefined(weapon) && (weapon == "iw6_alienmk324_mp" || weapon == "iw6_alienminigun4_mp" || weapon == "iw6_alienmk323_mp"))) {
+      if((isDefined(attacker.has_incendiary_ammo) && attacker.has_incendiary_ammo) || (isDefined(weapon) && (weapon == "iw6_alienmk324_mp" || weapon == "iw6_alienminigun4_mp" || weapon == "iw6_alienmk323_mp"))) {
         self thread blocker_hive_burn(attacker);
       }
     }

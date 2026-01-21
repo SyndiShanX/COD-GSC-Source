@@ -155,7 +155,7 @@ thief_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_tech_idle_base, % ai_zombie_tech_idle_base);
+  self.a.array["exposed_idle"] = array(%ai_zombie_tech_idle_base, %ai_zombie_tech_idle_base);
   self.a.array["straight_level"] = % ai_zombie_tech_idle_base;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -782,7 +782,7 @@ thief_steal() {
   zombie_attack = % ai_zombie_tech_grab;
   self thread maps\_zombiemode_audio::do_zombies_playvocals("steal", self.animname);
   time = getAnimLength(zombie_attack);
-  self animscripted("meleeanim", self.origin, self.angles, zombie_attack, "normal", % body, 1);
+  self animscripted("meleeanim", self.origin, self.angles, zombie_attack, "normal", %body, 1);
   wait(time);
   if(flag("death_in_pre_game")) {
     flag_clear("death_in_pre_game");
@@ -1306,7 +1306,7 @@ thief_reaction() {
   zombie_taunt = level._zombie_board_taunt[self.animname][index];
   self thread maps\_zombiemode_audio::do_zombies_playvocals("anger", self.animname);
   time = getAnimLength(zombie_taunt) / 1.5;
-  self animscripted("reactanim", self.origin, self.angles, zombie_taunt, "normal", % body, 1.5);
+  self animscripted("reactanim", self.origin, self.angles, zombie_taunt, "normal", %body, 1.5);
   wait(time);
 }
 thief_freezegun_damage_response(player, amount) {

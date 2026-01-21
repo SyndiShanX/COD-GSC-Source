@@ -322,9 +322,7 @@ ring_quest_hint_func(var_0, var_1) {
 run_memory_release_quest(var_0) {
   var_1 = getquestfromid(var_0);
   for(;;) {
-    if([
-        [var_1]
-      ](var_0)) {
+    if([[var_1]](var_0)) {
       playsoundatpos(var_0.origin, "zmb_quest_complete");
       break;
     } else {
@@ -1504,7 +1502,7 @@ run_boots_quest(var_0) {
   var_8 show();
   var_3 show();
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
-  var_12 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+  var_12 = getanimlength(%iw7_cp_slasher_walk_forward_01);
   wait(var_12);
   var_3 delete();
   var_8 delete();
@@ -1556,7 +1554,7 @@ run_boots_quest(var_0) {
   var_8 show();
   var_3 show();
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
-  var_12 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+  var_12 = getanimlength(%iw7_cp_slasher_walk_forward_01);
   wait(var_12);
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
   wait(var_12 * 0.75);
@@ -1606,7 +1604,7 @@ run_boots_quest(var_0) {
   var_8 show();
   var_3 show();
   var_3 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_3.origin, var_3.angles);
-  var_12 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+  var_12 = getanimlength(%iw7_cp_slasher_walk_forward_01);
   wait(var_12 * 0.8);
   var_3 delete();
   var_8 delete();

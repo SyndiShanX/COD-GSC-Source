@@ -23,7 +23,7 @@ main() {
   self OrientMode("face angle", startnode.angles[1]);
   //crouch_jump_down_40
 
-  self setFlaggedAnimKnoballRestart("stepanim", % jump_across_72, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("stepanim", %jump_across_72, %body, 1, .1, 1);
   wait .15;
   //	self waittillmatch("stepanim", "gravity on");
   self traverseMode("gravity");

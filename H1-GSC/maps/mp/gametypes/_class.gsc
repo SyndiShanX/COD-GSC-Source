@@ -1214,12 +1214,8 @@ applyloadout() {
     }
 
     if(maps\mp\_utility::invirtuallobby() && isDefined(level.vl_cac_getfactionteam) && isDefined(level.vl_cac_getfactionenvironment)) {
-      var_7 = [
-        [level.vl_cac_getfactionteam]
-      ]();
-      var_8 = [
-        [level.vl_cac_getfactionenvironment]
-      ]();
+      var_7 = [[level.vl_cac_getfactionteam]]();
+      var_8 = [[level.vl_cac_getfactionenvironment]]();
       maps\mp\gametypes\_teams::applycostume(var_6, var_7, var_8);
     } else if(level.teambased)
       maps\mp\gametypes\_teams::applycostume();

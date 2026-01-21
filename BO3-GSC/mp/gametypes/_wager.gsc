@@ -721,9 +721,7 @@ function get_highest_weapon_usage(statname) {
   wagerweaponsused = getarraykeys(self.wagerweaponusage);
   for(i = 0; i < wagerweaponsused.size; i++) {
     weaponstats = self.wagerweaponusage[wagerweaponsused[i]];
-    if(!isDefined(weaponstats[statname]) || !getbaseweaponitemindex([
-        [level.get_base_weapon_param]
-      ](wagerweaponsused[i]))) {
+    if(!isDefined(weaponstats[statname]) || !getbaseweaponitemindex([[level.get_base_weapon_param]](wagerweaponsused[i]))) {
       continue;
       continue;
     }

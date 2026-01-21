@@ -87,10 +87,7 @@ start() {
 
 function_42907fd4() {
   self.bot.var_469cfe53 = {
-    #maxhealth: 100,
-    #distsq: 1000000,
-    #istarget: 0,
-    #isfavoriteenemy: 0
+    #maxhealth: 100, #distsq: 1000000, #istarget: 0, #isfavoriteenemy: 0
   };
 }
 
@@ -184,20 +181,14 @@ function_4a53ae1f() {
 
 function_fced7d8a(action, weapon, target) {
   self.bot.var_e6a1f475 = {
-    #action: action,
-    #weapon: weapon,
-    #target: target,
-    #forced: 1
+    #action: action, #weapon: weapon, #target: target, #forced: 1
   };
   self reset();
 }
 
 register_action(name, rankfunc, weightfunc, executefunc) {
   level.botactions[name] = {
-    #name: name,
-    #rankfunc: rankfunc,
-    #weightfunc: weightfunc,
-    #executefunc: executefunc
+    #name: name, #rankfunc: rankfunc, #weightfunc: weightfunc, #executefunc: executefunc
   };
 }
 
@@ -304,8 +295,7 @@ function_10723c01(weapon, var_3f4e87bd) {
 
   foreach(action in var_3f4e87bd) {
     actionparams = {
-      #action: action,
-      #weapon: weapon
+      #action: action, #weapon: weapon
     };
 
     actionparams.debug = [];

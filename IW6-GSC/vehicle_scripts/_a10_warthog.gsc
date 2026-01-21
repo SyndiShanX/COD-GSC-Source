@@ -55,7 +55,7 @@ set_vehicle_anims(var_0) {
 
 landing_gear_up() {
   self useanimtree(#animtree);
-  self setanim( % mig_landing_gear_up);
+  self setanim(%mig_landing_gear_up);
 }
 
 setanims() {

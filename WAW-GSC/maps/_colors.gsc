@@ -249,8 +249,7 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
     level.arrays_of_colorForced_ai[team][colors[i]] = array_removeDead(level.arrays_of_colorForced_ai[team][colors[i]]);
     level.lastColorForced[team][colors[i]] = level.currentColorForced[team][colors[i]];
     level.currentColorForced[team][colors[i]] = colorCodesByColorIndex[colors[i]];
-    assertEx(isDefined(level.arrays_of_colorCoded_nodes[team][level.currentColorForced[team][colors[i]]]),
-      "Trigger tried to set colorCode " + colors[i] + " but there are no nodes for " + team + " that use that color combo.");
+    assertEx(isDefined(level.arrays_of_colorCoded_nodes[team][level.currentColorForced[team][colors[i]]]), "Trigger tried to set colorCode " + colors[i] + " but there are no nodes for " + team + " that use that color combo.");
   }
   ai_array = [];
   for(i = 0; i < colorCodes.size; i++) {

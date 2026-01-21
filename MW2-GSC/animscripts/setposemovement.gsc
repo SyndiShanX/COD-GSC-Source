@@ -4,8 +4,7 @@
 ********************************************************/
 
 //================================================================================
-// SetPoseMovement - Sets the pose (stand, crouch, prone) and movement (run, walk,
-// crawl, stop) to the specified values.Accounts for all possible starting poses
+// SetPoseMovement - Sets the pose (stand, crouch, prone) and movement (run, walk, // crawl, stop) to the specified values.Accounts for all possible starting poses
 // and movements.
 //================================================================================
 
@@ -37,8 +36,7 @@ SetPoseMovement(desiredPose, desiredMovement) {
 
 InitPoseMovementFunctions() {
   // Make an array of movement and pose changing functions.
-  // Indices are: "desired movement", "desired pose"
-  anim.SetPoseMovementFnArray["stand"]["stop"] = ::BeginStandStop;
+  // Indices are: "desired movement", "desired pose"anim.SetPoseMovementFnArray["stand"]["stop"] = ::BeginStandStop;
   anim.SetPoseMovementFnArray["stand"]["walk"] = ::BeginStandWalk;
   anim.SetPoseMovementFnArray["stand"]["run"] = ::BeginStandRun;
 
@@ -471,7 +469,7 @@ PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
   if(isarray(transAnim))
     transAnim = transAnim[randomint(transAnim.size)];
 
-  self setflaggedanimknoball("blendTransition", transAnim, % body, 1, crossblendTime, 1);
+  self setflaggedanimknoball("blendTransition", transAnim, %body, 1, crossblendTime, 1);
 
   self animscripts\shared::DoNoteTracksForTime(crossblendTime / 2, "blendTransition");
 
@@ -517,8 +515,7 @@ StandRunToCrouch() {
 }
 
 PlayBlendTransitionStandRun(animname) {
-  // if we're blending into stand run from stop,
-  // we probably just did utility::initialize's clearAnim(body, .3)
+  // if we're blending into stand run from stop, // we probably just did utility::initialize's clearAnim(body, .3)
   // so we don't have to spend more than .3 seconds here.
   // (then we can do fun things like shooting or reloading.)
   transtime = 0.3;
@@ -557,7 +554,7 @@ BlendIntoStandRun() {
   self thread animscripts\run::SetCombatStandMoveAnimWeights("run");
 
   wait 0.05;
-  PlayBlendTransitionStandRun( % combatrun);
+  PlayBlendTransitionStandRun(%combatrun);
   return true;
 }
 
@@ -583,12 +580,12 @@ CrouchToStand() {
   }
 
   if(self usingSidearm()) {
-    PlayTransitionAnimation( % pistol_crouchaimstraight2stand, "stand", "stop", undefined, standSpeed);
+    PlayTransitionAnimation(%pistol_crouchaimstraight2stand, "stand", "stop", undefined, standSpeed);
   } else {
     // Decide which idle animation to do
     self randomizeIdleSet();
 
-    PlayTransitionAnimation( % crouch2stand, "stand", "stop", undefined, standSpeed);
+    PlayTransitionAnimation(%crouch2stand, "stand", "stop", undefined, standSpeed);
   }
 
 }
@@ -650,12 +647,12 @@ BlendIntoCrouchRun() {
   if(isDefined(self.crouchrun_combatanim)) {
     PlayBlendTransition(self.crouchrun_combatanim, 0.6, "crouch", "run");
   } else {
-    self setanimknob( % crouchrun, 1, 0.4, self.moveplaybackrate);
+    self setanimknob(%crouchrun, 1, 0.4, self.moveplaybackrate);
 
     self thread animscripts\run::UpdateMoveAnimWeights("crouchrun", moveAnim("crouch"), moveAnim("crouch_b"), moveAnim("crouch_l"), moveAnim("crouch_r"));
 
     wait 0.05;
-    PlayBlendTransition( % crouchrun, 0.4, "crouch", "run");
+    PlayBlendTransition(%crouchrun, 0.4, "crouch", "run");
   }
 }
 
@@ -666,7 +663,7 @@ ProneToCrouchRun() {
   self ExitProneWrapper(1.0); // make code stop lerping in the prone orientation to ground
   ProneLegsStraightTree(0.2);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
-  PlayTransitionAnimation( % prone_2_crouch, "crouch", "run", animscripts\run::GetCrouchRunAnim());
+  PlayTransitionAnimation(%prone_2_crouch, "crouch", "run", animscripts\run::GetCrouchRunAnim());
 }
 
 ProneToStandRun() {
@@ -681,16 +678,16 @@ ProneToCrouchWalk() {
 
 BlendIntoCrouchWalk() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self setanimknoball(self.crouchrun_combatanim, % body, 1, 0.4);
+    self setanimknoball(self.crouchrun_combatanim, %body, 1, 0.4);
     PlayBlendTransition(self.crouchrun_combatanim, 0.6, "crouch", "walk");
     self notify("BlendIntoCrouchWalk");
   } else {
-    self setanimknob( % crouchrun, 1, 0.4, self.moveplaybackrate);
+    self setanimknob(%crouchrun, 1, 0.4, self.moveplaybackrate);
 
     self thread animscripts\run::UpdateMoveAnimWeights("crouchrun", moveAnim("crouch"), moveAnim("crouch_b"), moveAnim("crouch_l"), moveAnim("crouch_r"));
 
     wait 0.05;
-    PlayBlendTransition( % crouchrun, 0.4, "crouch", "run");
+    PlayBlendTransition(%crouchrun, 0.4, "crouch", "run");
   }
 }
 
@@ -707,7 +704,7 @@ StandToCrouch() {
     self.fastCrouch = undefined;
   }
 
-  PlayTransitionAnimation( % exposed_stand_2_crouch, "crouch", "stop", undefined, crouchspeed);
+  PlayTransitionAnimation(%exposed_stand_2_crouch, "crouch", "stop", undefined, crouchspeed);
 }
 
 ProneToCrouch() {
@@ -720,7 +717,7 @@ ProneToCrouch() {
   self ExitProneWrapper(1.0); // make code stop lerping in the prone orientation to ground
   ProneLegsStraightTree(0.1);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
-  PlayTransitionAnimation( % prone_2_crouch, "crouch", "stop");
+  PlayTransitionAnimation(%prone_2_crouch, "crouch", "stop");
 
   // TODO: Find out if the above lines give the same functionality as below (notably the UpdateProne bit)
   //	self exitprone(1.0); // make code stop lerping in the prone orientation to ground
@@ -739,7 +736,7 @@ ProneToStand() {
   self ExitProneWrapper(1.0); // make code stop lerping in the prone orientation to ground
   ProneLegsStraightTree(0.1);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
-  PlayTransitionAnimation( % prone_2_stand, "stand", "stop");
+  PlayTransitionAnimation(%prone_2_stand, "stand", "stop");
 }
 
 ProneToStandWalk() {
@@ -760,7 +757,7 @@ ProneToProneMove(movement) {
   assertEX((movement == "walk" || movement == "run"), "SetPoseMovement::ProneToProneMove got bad parameter " + movement);
 
   ProneLegsStraightTree(0.1);
-  PlayTransitionAnimation( % prone_2_prone_crawl, "prone", movement, % prone_crawl);
+  PlayTransitionAnimation(%prone_2_prone_crawl, "prone", movement, %prone_crawl);
 
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
 }
@@ -775,7 +772,7 @@ ProneCrawlToProne() {
 
   ProneLegsStraightTree(0.1);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
-  PlayTransitionAnimation( % prone_crawl_2_prone, "prone", "stop");
+  PlayTransitionAnimation(%prone_crawl_2_prone, "prone", "stop");
 
   // TODO: Find out if the above lines give the same functionality as below (notably the UpdateProne bit)
   //	ProneLegsStraightTree(0.1);
@@ -791,12 +788,12 @@ CrouchToProne() {
   // guys who are walking and running, this is used for them too.
   //	assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToProne "+self.a.movement);
 
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0); // make code start lerping in the prone orientation to ground
 
   ProneLegsStraightTree(0.3);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
-  PlayTransitionAnimation( % crouch_2_prone, "prone", "stop");
+  PlayTransitionAnimation(%crouch_2_prone, "prone", "stop");
 
   // TODO: Find out if the above lines give the same functionality as below (notably the UpdateProne bit)
   //	self SetProneAnimNodes(-45, 45, %prone_legsdown, %prone_legsstraight, %prone_legsup);
@@ -827,12 +824,12 @@ StandToProne() {
   self endon("entered_pose" + "prone");
 
   proneTime = 0.5; // was 1
-  thread PlayTransitionAnimationThread_WithoutWaitSetStates( % stand_2_prone, "prone", "stop", undefined, proneTime);
+  thread PlayTransitionAnimationThread_WithoutWaitSetStates(%stand_2_prone, "prone", "stop", undefined, proneTime);
 
   self waittillmatch("transAnimDone2", "anim_pose = \"crouch\"");
   waittillframeend; // so that the one in donotetracks gets hit first
   // cause the next pose is prone
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(proneTime); // make code start lerping in the prone orientation to ground
   self.a.movement = "stop";
 
@@ -866,7 +863,7 @@ CrouchRunToProne() {
   assertEX((self.a.movement == "run" || self.a.movement == "walk"), "SetPoseMovement::CrouchRunToProne " + self.a.movement);
 
   pronetime = 0.5; // was 1
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(proneTime); // make code start lerping in the prone orientation to ground
 
   ProneLegsStraightTree(0.2);
@@ -882,7 +879,7 @@ CrouchRunToProne() {
     PlayTransitionAnimation(diveanim, "prone", "stop", undefined, pronetime);
   } else {
     //thread [[anim.println]]("Can't dive to prone.");
-    PlayTransitionAnimation( % crouch_2_prone_firing, "prone", "stop", undefined, pronetime);
+    PlayTransitionAnimation(%crouch_2_prone_firing, "prone", "stop", undefined, pronetime);
   }
 }
 
@@ -935,7 +932,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
 
   // Play the anim
   // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate)
-  self setflaggedanimknoballrestart("transAnimDone2", transAnim, % body, 1, .2, rate);
+  self setflaggedanimknoballrestart("transAnimDone2", transAnim, %body, 1, .2, rate);
   if(!isDefined(self.a.pose))
     self.pose = "undefined";
   if(!isDefined(self.a.movement))
@@ -944,8 +941,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
   /#debugIdentifier = self.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone2", undefined, debugIdentifier);
 
-  // In case we finished earlier than we expected (eg the animation was already playing before we started),
-  // set the variables and kill the other thread.
+  // In case we finished earlier than we expected (eg the animation was already playing before we started), // set the variables and kill the other thread.
   self notify("killtimerscript");
   self.a.pose = endPose;
   self notify("entered_pose" + endPose);
@@ -954,7 +950,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
 
   if(isDefined(finalAnim)) {
     // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate)
-    self setanimknoball(finalAnim, % body, 1, 0.3, rate); // Set the animation instantly
+    self setanimknoball(finalAnim, %body, 1, 0.3, rate); // Set the animation instantly
   }
 }
 
@@ -979,5 +975,5 @@ waitSetStates(timetowait, killmestring, endPose) {
 }
 
 ProneLegsStraightTree(blendtime) {
-  self setanimknoball( % prone_legsstraight, % body, 1, blendtime, 1);
+  self setanimknoball(%prone_legsstraight, %body, 1, blendtime, 1);
 }

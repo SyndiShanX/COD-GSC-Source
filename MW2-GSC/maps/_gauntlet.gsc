@@ -14,8 +14,8 @@ main(model, type) {
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("axis");
-  build_idle( % sa15_turret_scanloop);
-  build_idle( % sa15_radar_spinloop);
+  build_idle(%sa15_turret_scanloop);
+  build_idle(%sa15_radar_spinloop);
   //build_mainturret();
   //build_compassicon( "tank" );
   //build_frontarmor( .33 );// regens this much of the damage from attacks to the front
@@ -56,7 +56,5 @@ include,vehicle_gauntlet_gauntlet
 sound,vehicle_gauntlet,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_sa15_gauntlet"
-default:"vehicletype" "gauntlet"
-default:"script_team" "axis"
+defaultmdl="vehicle_sa15_gauntlet"default:"vehicletype" "gauntlet"default:"script_team" "axis"
 */

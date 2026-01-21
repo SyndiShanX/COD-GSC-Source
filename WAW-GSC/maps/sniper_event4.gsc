@@ -137,12 +137,7 @@ player_fires() {
   guys = getaiarray("axis");
   flag_set("player_fired_in_e4");
   for(i = 0; i < guys.size; i++) {
-    if((isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "officer2") ||
-      (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "vehicle_riders") ||
-      (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "officer_driver") ||
-      (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "bodyguard") ||
-      (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "officers_sniper") ||
-      (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "lead_bodyguard")) {
+    if((isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "officer2") || (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "vehicle_riders") || (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "officer_driver") || (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "bodyguard") || (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "officers_sniper") || (isDefined(guys[i].script_noteworthy) && guys[i].script_noteworthy == "lead_bodyguard")) {
       continue;
     } else {
       guys[i] solo_set_pacifist(false);
@@ -879,13 +874,7 @@ tank_on_friendlies() {
   nodes = getnodearray("e4_enemies_advance_nodes", "script_noteworthy");
   nodecounter = 0;
   for(i = 0; i < enemies.size; i++) {
-    if((isDefined(enemies[i].script_noteworthy) &&
-        enemies[i].script_noteworthy != "bodyguard" &&
-        enemies[i].script_noteworthy != "officer2" &&
-        enemies[i].script_noteworthy != "officer_driver" &&
-        enemies[i].script_noteworthy != "officers_sniper" &&
-        enemies[i].script_noteworthy != "lead_bodyguard") ||
-      !isDefined(enemies[i].script_noteworthy)) {
+    if((isDefined(enemies[i].script_noteworthy) && enemies[i].script_noteworthy != "bodyguard" && enemies[i].script_noteworthy != "officer2" && enemies[i].script_noteworthy != "officer_driver" && enemies[i].script_noteworthy != "officers_sniper" && enemies[i].script_noteworthy != "lead_bodyguard") || !isDefined(enemies[i].script_noteworthy)) {
       if(isDefined(nodes[nodecounter]))
         enemies[i] setgoalnode(nodes[nodecounter]);
       enemies[i] thread wait_and_kill(randomintrange(35, 50));
@@ -895,13 +884,7 @@ tank_on_friendlies() {
   wait 7;
   enemies = getaiarray("axis");
   for(i = 0; i < enemies.size; i++) {
-    if((isDefined(enemies[i].script_noteworthy) &&
-        enemies[i].script_noteworthy != "bodyguard" &&
-        enemies[i].script_noteworthy != "officer2" &&
-        enemies[i].script_noteworthy != "officer_driver" &&
-        enemies[i].script_noteworthy != "officers_sniper" &&
-        enemies[i].script_noteworthy != "lead_bodyguard") ||
-      !isDefined(enemies[i].script_noteworthy)) {
+    if((isDefined(enemies[i].script_noteworthy) && enemies[i].script_noteworthy != "bodyguard" && enemies[i].script_noteworthy != "officer2" && enemies[i].script_noteworthy != "officer_driver" && enemies[i].script_noteworthy != "officers_sniper" && enemies[i].script_noteworthy != "lead_bodyguard") || !isDefined(enemies[i].script_noteworthy)) {
       spot = getstructent("e4_fake_target", "targetname");
       enemies[i] setentitytarget(spot);
     }
@@ -912,13 +895,7 @@ tank_on_friendlies() {
   nodecounter = 0;
   enemies = getaiarray("axis");
   for(i = 0; i < enemies.size; i++) {
-    if((isDefined(enemies[i].script_noteworthy) &&
-        enemies[i].script_noteworthy != "bodyguard" &&
-        enemies[i].script_noteworthy != "officer2" &&
-        enemies[i].script_noteworthy != "officer_driver" &&
-        enemies[i].script_noteworthy != "officers_sniper" &&
-        enemies[i].script_noteworthy != "lead_bodyguard") ||
-      !isDefined(enemies[i].script_noteworthy)) {
+    if((isDefined(enemies[i].script_noteworthy) && enemies[i].script_noteworthy != "bodyguard" && enemies[i].script_noteworthy != "officer2" && enemies[i].script_noteworthy != "officer_driver" && enemies[i].script_noteworthy != "officers_sniper" && enemies[i].script_noteworthy != "lead_bodyguard") || !isDefined(enemies[i].script_noteworthy)) {
       if(isDefined(nodes[nodecounter])) {
         enemies[i] thread run_offscreen_anddie(nodes[nodecounter]);
         nodecounter++;
@@ -929,13 +906,7 @@ tank_on_friendlies() {
   nodes = getnodearray("e5_leftoverguys_streetnodes", "script_noteworthy");
   nodecounter = 0;
   for(i = 0; i < enemies.size; i++) {
-    if((isDefined(enemies[i].script_noteworthy) &&
-        enemies[i].script_noteworthy != "bodyguard" &&
-        enemies[i].script_noteworthy != "officer2" &&
-        enemies[i].script_noteworthy != "officer_driver" &&
-        enemies[i].script_noteworthy != "officers_sniper" &&
-        enemies[i].script_noteworthy != "lead_bodyguard") ||
-      !isDefined(enemies[i].script_noteworthy)) {
+    if((isDefined(enemies[i].script_noteworthy) && enemies[i].script_noteworthy != "bodyguard" && enemies[i].script_noteworthy != "officer2" && enemies[i].script_noteworthy != "officer_driver" && enemies[i].script_noteworthy != "officers_sniper" && enemies[i].script_noteworthy != "lead_bodyguard") || !isDefined(enemies[i].script_noteworthy)) {
       if(isDefined(nodes[nodecounter]) && !isDefined(enemies[i].death_assigned)) {
         enemies[i] setgoalnode(nodes[nodecounter]);
         nodecounter++;

@@ -118,8 +118,8 @@ run_chamber_exit(n_enum) {
   s_portal.angles = e_portal_frame gettagangles("fx_portal_jnt");
   s_portal.angles = (s_portal.angles[0], s_portal.angles[1] + 180, s_portal.angles[2]);
   str_fx = get_teleport_fx_from_enum(n_enum);
-  collapse_time = getanimlength( % fxanim_zom_tomb_portal_collapse_anim);
-  open_time = getanimlength( % fxanim_zom_tomb_portal_open_anim);
+  collapse_time = getanimlength(%fxanim_zom_tomb_portal_collapse_anim);
+  open_time = getanimlength(%fxanim_zom_tomb_portal_open_anim);
   flag_wait("start_zombie_round_logic");
 
   while(true) {
@@ -138,11 +138,11 @@ run_chamber_exit(n_enum) {
       e_player maps\mp\zombies\_zm_score::minus_to_player_score(level.teleport_cost);
 
     e_portal_frame playLoopSound("zmb_teleporter_loop_pre", 1);
-    e_portal_frame setanim( % fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
+    e_portal_frame setanim(%fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
     flag_set(str_building_flag);
     e_portal_frame thread whirlwind_rumble_nearby_players(str_building_flag);
     wait(open_time);
-    e_portal_frame setanim( % fxanim_zom_tomb_portal_open_1frame_anim, 1.0, 0.1, 1);
+    e_portal_frame setanim(%fxanim_zom_tomb_portal_open_1frame_anim, 1.0, 0.1, 1);
     wait_network_frame();
     flag_clear(str_building_flag);
     e_fx = spawn("script_model", s_portal.origin);
@@ -153,7 +153,7 @@ run_chamber_exit(n_enum) {
     e_portal_frame playLoopSound("zmb_teleporter_loop_post", 1);
     s_portal thread teleporter_radius_think();
     wait 20.0;
-    e_portal_frame setanim( % fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
+    e_portal_frame setanim(%fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
     e_portal_frame stoploopsound(0.5);
     e_portal_frame playSound("zmb_teleporter_anim_collapse_pew");
     s_portal notify("teleporter_radius_stop");
@@ -176,20 +176,20 @@ run_chamber_entrance_teleporter() {
   flag_init("enable_teleporter_" + self.script_int);
   str_building_flag = "teleporter_building_" + self.script_int;
   flag_init(str_building_flag);
-  collapse_time = getanimlength( % fxanim_zom_tomb_portal_collapse_anim);
-  open_time = getanimlength( % fxanim_zom_tomb_portal_open_anim);
+  collapse_time = getanimlength(%fxanim_zom_tomb_portal_collapse_anim);
+  open_time = getanimlength(%fxanim_zom_tomb_portal_open_anim);
   flag_wait("start_zombie_round_logic");
-  e_model setanim( % fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
+  e_model setanim(%fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
   wait(collapse_time);
 
   while(true) {
     flag_wait("enable_teleporter_" + self.script_int);
     flag_set(str_building_flag);
     e_model thread whirlwind_rumble_nearby_players(str_building_flag);
-    e_model setanim( % fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
+    e_model setanim(%fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
     e_model playLoopSound("zmb_teleporter_loop_pre", 1);
     wait(open_time);
-    e_model setanim( % fxanim_zom_tomb_portal_open_1frame_anim, 1.0, 0.1, 1);
+    e_model setanim(%fxanim_zom_tomb_portal_open_1frame_anim, 1.0, 0.1, 1);
     wait_network_frame();
     e_fx = spawn("script_model", self.origin);
     e_fx.angles = self.angles;
@@ -210,7 +210,7 @@ run_chamber_entrance_teleporter() {
     e_fx setclientfield("element_glow_fx", 0);
     e_model stoploopsound(0.5);
     e_model playSound("zmb_teleporter_anim_collapse_pew");
-    e_model setanim( % fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
+    e_model setanim(%fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
     wait(collapse_time);
     e_fx delete();
   }

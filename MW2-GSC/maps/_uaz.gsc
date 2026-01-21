@@ -32,7 +32,7 @@ main(model, type, no_death) {
   }
 
   build_radiusdamage((0, 0, 32), 300, 200, 100, false);
-  build_drive( % uaz_driving_idle_forward, % uaz_driving_idle_backward, 10);
+  build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
   build_deathquake(1, 1.6, 500);
 
   build_treadfx();
@@ -149,10 +149,7 @@ and these lines in your CSV:
 include,vehicle_uaz_fabric_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_fabric"
-default:"vehicletype" "uaz"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_uaz_fabric"default:"vehicletype" "uaz"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_uaz_hardtop (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -163,10 +160,7 @@ and these lines in your CSV:
 include,vehicle_uaz_hardtop_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_hardtop"
-default:"vehicletype" "uaz"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_uaz_hardtop"default:"vehicletype" "uaz"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_uaz_hardtop_thermal (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -177,10 +171,7 @@ and these lines in your CSV:
 include,vehicle_uaz_hardtop_thermal_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_hardtop_thermal"
-default:"vehicletype" "uaz"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_uaz_hardtop_thermal"default:"vehicletype" "uaz"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_uaz_open (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -191,10 +182,7 @@ and these lines in your CSV:
 include,vehicle_uaz_open_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_open"
-default:"vehicletype" "uaz"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_uaz_open"default:"vehicletype" "uaz"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_uaz_open_for_ride (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -205,9 +193,7 @@ and these lines in your CSV:
 include,vehicle_uaz_open_for_ride_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_open_for_ride"
-default:"vehicletype" "uaz"
-*/
+defaultmdl="vehicle_uaz_open_for_ride"default:"vehicletype" "uaz"*/
 
 /*QUAKED script_vehicle_uaz_open_destructible (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -219,9 +205,7 @@ include,vehicle_uaz_open_destructible
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_open_destructible"
-default:"vehicletype" "uaz_physics"
-*/
+defaultmdl="vehicle_uaz_open_destructible"default:"vehicletype" "uaz_physics"*/
 
 /*QUAKED script_vehicle_uaz_hardtop_thermal (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -231,9 +215,7 @@ maps\_uaz_ac130::main( "vehicle_uaz_hardtop_thermal" );
 and these lines in your CSV:
 include,vehicle_uaz_hardtop_thermal_uaz_ac130
 
-defaultmdl="vehicle_uaz_hardtop_thermal"
-default:"vehicletype" "uaz_ac130"
-*/
+defaultmdl="vehicle_uaz_hardtop_thermal"default:"vehicletype" "uaz_ac130"*/
 
 // disabled the winter destructible. It doesn't have tags fr the guys.
 /*QUAKED script_vehicle_uaz_winter_destructible (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
@@ -246,9 +228,7 @@ include,vehicle_uaz_winter_destructible
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_winter_destructible"
-default:"vehicletype" "uaz"
-*/
+defaultmdl="vehicle_uaz_winter_destructible"default:"vehicletype" "uaz"*/
 
 /*QUAKED script_vehicle_uaz_winter_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -260,9 +240,7 @@ include,vehicle_uaz_winter_destructible
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_winter_destructible"
-default:"vehicletype" "uaz_physics"
-*/
+defaultmdl="vehicle_uaz_winter_destructible"default:"vehicletype" "uaz_physics"*/
 
 /*QUAKED script_vehicle_uaz_winter (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -273,9 +251,7 @@ and these lines in your CSV:
 include,vehicle_uaz_winter
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_winter"
-default:"vehicletype" "uaz"
-*/
+defaultmdl="vehicle_uaz_winter"default:"vehicletype" "uaz"*/
 
 /*QUAKED script_vehicle_uaz_light (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -286,9 +262,7 @@ and these lines in your CSV:
 include,vehicle_uaz_light
 sound,vehicle_uaz,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_light"
-default:"vehicletype" "uaz"
-*/
+defaultmdl="vehicle_uaz_light"default:"vehicletype" "uaz"*/
 
 /*QUAKED script_vehicle_uaz_open_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -300,10 +274,7 @@ include,vehicle_uaz_open_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_open"
-default:"vehicletype" "uaz_physics"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_uaz_open"default:"vehicletype" "uaz_physics"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_uaz_hardtop_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -315,7 +286,5 @@ include,vehicle_uaz_hardtop_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_uaz_hardtop"
-default:"vehicletype" "uaz_physics"
-default:"script_team" "axis"
+defaultmdl="vehicle_uaz_hardtop"default:"vehicletype" "uaz_physics"default:"script_team" "axis"
 */

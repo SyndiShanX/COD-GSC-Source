@@ -35,7 +35,7 @@ main(model, type) {
   build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx(hummer_death_fx[model], "tag_deathfx", "car_explode");
 
-  build_drive( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  build_drive(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("allies");
@@ -187,10 +187,7 @@ include,vehicle_hummer
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer"
-default:"vehicletype" "humvee"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer"default:"vehicletype" "humvee"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_nodoors (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -202,10 +199,7 @@ include,vehicle_hummer_nodoors
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer_no_doors"
-default:"vehicletype" "humvee"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer_no_doors"default:"vehicletype" "humvee"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_opentop (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -216,10 +210,7 @@ and these lines in your CSV:
 include,vehicle_hummer_opentop
 sound,vehicle_hummer,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer_opentop"
-default:"vehicletype" "humvee"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer_opentop"default:"vehicletype" "humvee"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_viewmodel (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -231,10 +222,7 @@ include,vehicle_hummer_viewmodel
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer_viewmodel"
-default:"vehicletype" "humvee"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer_viewmodel"default:"vehicletype" "humvee"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_viewmodel_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -246,10 +234,7 @@ include,vehicle_hummer_viewmodel
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer_viewmodel"
-default:"vehicletype" "hummer_physics"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer_viewmodel"default:"vehicletype" "hummer_physics"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_opentop_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -261,10 +246,7 @@ include,vehicle_hummer_opentop
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer_opentop"
-default:"vehicletype" "hummer_opentop_physics"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer_opentop"default:"vehicletype" "hummer_opentop_physics"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -276,7 +258,5 @@ include,vehicle_hummer
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer"
-default:"vehicletype" "hummer_physics"
-default:"script_team" "allies"
+defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_physics"default:"script_team" "allies"
 */

@@ -352,9 +352,7 @@ function codecallback_challengecomplete(rewardxp, maxval, row, tablenumber, chal
   params.challengeindex = challengeindex;
   if(sessionmodeiscampaigngame()) {
     if(isDefined(self.challenge_callback_cp)) {
-      [
-        [self.challenge_callback_cp]
-      ](rewardxp, maxval, row, tablenumber, challengetype, itemindex, challengeindex);
+      [[self.challenge_callback_cp]](rewardxp, maxval, row, tablenumber, challengetype, itemindex, challengeindex);
     }
     return;
   }

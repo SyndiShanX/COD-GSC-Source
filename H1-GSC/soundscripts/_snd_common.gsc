@@ -11,15 +11,7 @@ snd_common_init() {
   apply_common_globalmix();
   level.mute_device_active = 0;
   level.player.radiation_state = "radiation_none";
-  level._snd.context_overrides = [["mute", 0],
-    ["slomo", 0],
-    ["deathsdoor", 0],
-    ["underwater", 0],
-    ["diveboat", 0],
-    ["wpn_int_med", 0],
-    ["bullet_metal_vehicle", 0],
-    ["bullet_whizby_glass", 0],
-    ["finale_handgun", 0]];
+  level._snd.context_overrides = [["mute", 0], ["slomo", 0], ["deathsdoor", 0], ["underwater", 0], ["diveboat", 0], ["wpn_int_med", 0], ["bullet_metal_vehicle", 0], ["bullet_whizby_glass", 0], ["finale_handgun", 0]];
   soundsettimescalefactor("interface", 0);
   soundsettimescalefactor("notimescale", 0);
 
@@ -41,32 +33,10 @@ register_radio_squelches() {
 }
 
 create_common_envelop_arrays() {
-  level._snd.envs["explo_shake_over_distance"] = [[0.0, 1.0],
-    [0.25, 0.65],
-    [0.35, 0.5],
-    [0.75, 0.2],
-    [1.0, 0.1]];
-  level._snd.envs["veh_crash_intensity_to_pitch"] = [[0.0, 0.7],
-    [0.1, 0.7],
-    [0.5, 0.8],
-    [0.9, 1.0],
-    [1.0, 1.1]];
-  level._snd.envs["veh_crash_vel_to_lfe_vol"] = [[0.0, 0.0],
-    [200, 0.05],
-    [500, 0.25],
-    [850, 0.35],
-    [1000, 0.6]];
-  level._snd.envs["aud_mute_device_falloff"] = [[0.0, 1.0],
-    [0.1, 0.9],
-    [0.2, 0.88],
-    [0.3, 0.85],
-    [0.4, 0.82],
-    [0.5, 0.8],
-    [0.6, 0.65],
-    [0.7, 0.5],
-    [0.8, 0.35],
-    [0.9, 0.15],
-    [1.0, 0.0]];
+  level._snd.envs["explo_shake_over_distance"] = [[0.0, 1.0], [0.25, 0.65], [0.35, 0.5], [0.75, 0.2], [1.0, 0.1]];
+  level._snd.envs["veh_crash_intensity_to_pitch"] = [[0.0, 0.7], [0.1, 0.7], [0.5, 0.8], [0.9, 1.0], [1.0, 1.1]];
+  level._snd.envs["veh_crash_vel_to_lfe_vol"] = [[0.0, 0.0], [200, 0.05], [500, 0.25], [850, 0.35], [1000, 0.6]];
+  level._snd.envs["aud_mute_device_falloff"] = [[0.0, 1.0], [0.1, 0.9], [0.2, 0.88], [0.3, 0.85], [0.4, 0.82], [0.5, 0.8], [0.6, 0.65], [0.7, 0.5], [0.8, 0.35], [0.9, 0.15], [1.0, 0.0]];
 }
 
 apply_common_globalmix() {
@@ -76,35 +46,9 @@ apply_common_globalmix() {
 
 init_ambient_explosion_arrays() {
   if(level.currentgen)
-    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_04", 0.17],
-      ["exp_generic_explo_shot_07", 0.11],
-      ["exp_generic_explo_shot_10", 0.22],
-      ["exp_generic_explo_shot_12", 0.15],
-      ["exp_generic_explo_shot_13", 0.08],
-      ["exp_generic_explo_shot_20", 0.15],
-      ["exp_generic_explo_shot_22", 0.25]];
+    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_04", 0.17], ["exp_generic_explo_shot_07", 0.11], ["exp_generic_explo_shot_10", 0.22], ["exp_generic_explo_shot_12", 0.15], ["exp_generic_explo_shot_13", 0.08], ["exp_generic_explo_shot_20", 0.15], ["exp_generic_explo_shot_22", 0.25]];
   else
-    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_01", 0.13],
-      ["exp_generic_explo_shot_02", 0.25],
-      ["exp_generic_explo_shot_03", 0.12],
-      ["exp_generic_explo_shot_04", 0.17],
-      ["exp_generic_explo_shot_05", 0.16],
-      ["exp_generic_explo_shot_06", 0.14],
-      ["exp_generic_explo_shot_07", 0.11],
-      ["exp_generic_explo_shot_08", 0.21],
-      ["exp_generic_explo_shot_09", 0.16],
-      ["exp_generic_explo_shot_10", 0.22],
-      ["exp_generic_explo_shot_11", 0.13],
-      ["exp_generic_explo_shot_12", 0.15],
-      ["exp_generic_explo_shot_13", 0.08],
-      ["exp_generic_explo_shot_14", 0.16],
-      ["exp_generic_explo_shot_16", 0.2],
-      ["exp_generic_explo_shot_17", 0.1],
-      ["exp_generic_explo_shot_18", 0.08],
-      ["exp_generic_explo_shot_19", 0.12],
-      ["exp_generic_explo_shot_20", 0.15],
-      ["exp_generic_explo_shot_21", 0.15],
-      ["exp_generic_explo_shot_22", 0.25]];
+    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_01", 0.13], ["exp_generic_explo_shot_02", 0.25], ["exp_generic_explo_shot_03", 0.12], ["exp_generic_explo_shot_04", 0.17], ["exp_generic_explo_shot_05", 0.16], ["exp_generic_explo_shot_06", 0.14], ["exp_generic_explo_shot_07", 0.11], ["exp_generic_explo_shot_08", 0.21], ["exp_generic_explo_shot_09", 0.16], ["exp_generic_explo_shot_10", 0.22], ["exp_generic_explo_shot_11", 0.13], ["exp_generic_explo_shot_12", 0.15], ["exp_generic_explo_shot_13", 0.08], ["exp_generic_explo_shot_14", 0.16], ["exp_generic_explo_shot_16", 0.2], ["exp_generic_explo_shot_17", 0.1], ["exp_generic_explo_shot_18", 0.08], ["exp_generic_explo_shot_19", 0.12], ["exp_generic_explo_shot_20", 0.15], ["exp_generic_explo_shot_21", 0.15], ["exp_generic_explo_shot_22", 0.25]];
 }
 
 init_impact_system_arrays() {

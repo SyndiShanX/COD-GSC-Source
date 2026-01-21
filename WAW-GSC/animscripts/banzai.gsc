@@ -153,7 +153,7 @@ move_banzai() {
   self OrientMode("face motion");
   animscripts\run::changeWeaponStandRun();
   if(self.a.pose != "stand") {
-    self ClearAnim( % root, 0.2);
+    self ClearAnim(%root, 0.2);
     if(self.a.pose == "prone") {
       self ExitProneWrapper(1);
     }
@@ -179,7 +179,7 @@ move_banzai() {
     move_anim = anim.banzai_run[runloopindex];
   }
   rate = self.moveplaybackrate;
-  self SetFlaggedAnimKnobAll("runanim", move_anim, % body, 1, 0.3, rate);
+  self SetFlaggedAnimKnobAll("runanim", move_anim, %body, 1, 0.3, rate);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
@@ -598,7 +598,7 @@ play_banzai_ai_attacker_anim(anim_to_play, blendTime) {
     return;
   }
   self thread lerp_to_tag_sync(self.syncedMeleeTarget, blendTime);
-  self clearanim( % root, blendTime);
+  self clearanim(%root, blendTime);
   self setflaggedanimknobrestart("banzai_ai_anim", anim_to_play, 1, blendTime, 1);
   self DoNoteTracksUntilInterrupted("banzai_ai_anim");
 }
@@ -613,7 +613,7 @@ play_banzai_ai_defender_anim(anim_to_play, blendTime) {
     return;
   }
   self thread banzai_ai_defender_link(self.syncedMeleeTarget, blendTime);
-  self clearanim( % root, blendTime);
+  self clearanim(%root, blendTime);
   self setflaggedanimknobrestart("banzai_ai_anim", anim_to_play, 1, blendTime, 1);
   self DoNoteTracksUntilInterrupted("banzai_ai_anim");
 }
@@ -1128,7 +1128,7 @@ do_start_synchronized_melee(attacker, player) {
     player.banzaiAttackedTooLate = false;
     thread record_early_attacks(attacker, player);
   }
-  attacker clearanim( % root, 0.1);
+  attacker clearanim(%root, 0.1);
   attacker clearpitchorient();
   attacker.syncedMeleeTarget = player;
   if(!isDefined(player.player_view)) {

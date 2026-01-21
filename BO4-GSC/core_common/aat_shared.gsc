@@ -228,9 +228,7 @@ aat_response(death, inflictor, attacker, damage, flags, mod, weapon, vpoint, vdi
   }
 
   if(isDefined(level.aat[name].validation_func)) {
-    if(![
-        [level.aat[name].validation_func]
-      ]()) {
+    if(![[level.aat[name].validation_func]]()) {
       return;
     }
   }

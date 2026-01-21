@@ -151,8 +151,7 @@ dds_clear_old_expired_events() {
     category = level.dds.categories[i];
     for(j = 0; j < level.dds.active_events[category.name].size; j++) {
       level.dds.active_events[category.name][j].duration -= level.dds.heartbeat;
-      if(level.dds.active_events[category.name][j].duration <= 0 ||
-        level.dds.active_events[category.name][j].clear_event_on_prob) {
+      if(level.dds.active_events[category.name][j].duration <= 0 || level.dds.active_events[category.name][j].clear_event_on_prob) {
         level.dds.active_events[category.name] = array_remove(level.dds.active_events[category.name], level.dds.active_events[category.name][j]);
       }
     }
@@ -164,8 +163,7 @@ dds_clear_old_expired_events_axis() {
     category = level.dds.categories_axis[i];
     for(j = 0; j < level.dds.active_events_axis[category.name].size; j++) {
       level.dds.active_events_axis[category.name][j].duration -= level.dds.heartbeat;
-      if(level.dds.active_events_axis[category.name][j].duration <= 0 ||
-        level.dds.active_events_axis[category.name][j].clear_event_on_prob) {
+      if(level.dds.active_events_axis[category.name][j].duration <= 0 || level.dds.active_events_axis[category.name][j].clear_event_on_prob) {
         level.dds.active_events_axis[category.name] = array_remove(level.dds.active_events_axis[category.name], level.dds.active_events_axis[category.name][j]);
       }
     }
@@ -309,9 +307,7 @@ dds_process_active_events() {
       continue;
     }
     if(level.dds.active_events[category.name].size != 0) {
-      level.dds.active_events[category.name] = [
-        [category.priority_sort]
-      ](level.dds.active_events[category.name]);
+      level.dds.active_events[category.name] = [[category.priority_sort]](level.dds.active_events[category.name]);
       for(j = 0; j < level.dds.active_events[category.name].size; j++) {
         if(randomFloat(1) >= category.probability) {
           level.dds.active_events[category.name][j].clear_event_on_prob = true;
@@ -320,8 +316,7 @@ dds_process_active_events() {
         if(level.dds.active_events[category.name][j].processed) {
           continue;
         }
-        if(dds_event_activate(level.dds.active_events[category.name][j], category.get_talker_func, category.speaker_distance,
-            category.rspns_cat_name, category.should_squelch)) {
+        if(dds_event_activate(level.dds.active_events[category.name][j], category.get_talker_func, category.speaker_distance, category.rspns_cat_name, category.should_squelch)) {
           if(!category.timeout_reset) {
             category.timeout = category.timeout_reset;
           } else {
@@ -361,9 +356,7 @@ dds_process_active_events_axis() {
       continue;
     }
     if(level.dds.active_events_axis[category.name].size != 0) {
-      level.dds.active_events_axis[category.name] = [
-        [category.priority_sort]
-      ](level.dds.active_events_axis[category.name]);
+      level.dds.active_events_axis[category.name] = [[category.priority_sort]](level.dds.active_events_axis[category.name]);
       for(j = 0; j < level.dds.active_events_axis[category.name].size; j++) {
         if(randomFloat(1) >= category.probability) {
           level.dds.active_events_axis[category.name][j].clear_event_on_prob = true;
@@ -372,8 +365,7 @@ dds_process_active_events_axis() {
         if(level.dds.active_events_axis[category.name][j].processed) {
           continue;
         }
-        if(dds_event_activate(level.dds.active_events_axis[category.name][j], category.get_talker_func, category.speaker_distance,
-            category.rspns_cat_name, false)) {
+        if(dds_event_activate(level.dds.active_events_axis[category.name][j], category.get_talker_func, category.speaker_distance, category.rspns_cat_name, false)) {
           if(!category.timeout_reset) {
             category.timeout = category.timeout_reset;
           } else {
@@ -612,8 +604,7 @@ get_landmark_qualifier(alias) {
 }
 
 get_event_override(alias) {
-  if(isDefined(level.dds.event_override_name) && (randomFloat(1) >= level.dds.event_override_probability) &&
-    SoundExists(alias + level.dds.event_override_name + "_00")) {
+  if(isDefined(level.dds.event_override_name) && (randomFloat(1) >= level.dds.event_override_probability) && SoundExists(alias + level.dds.event_override_name + "_00")) {
     return level.dds.event_override_name;
   }
   return undefined;
@@ -629,8 +620,7 @@ dds_find_infantry_threat(us, them) {
     for(i = 0; i < our_team.size; i++) {
       for(j = 0; j < other_team.size; j++) {
         if((other_team.size > 1) && (randomFloat(1) < .5)) {
-          if(other_team[j] canSee(our_team[i]) && (distance(other_team[j].origin, our_team[i].origin) < THRT_INF_NOTIFY_DISTANCE) &&
-            (distance(other_team[j].origin, player.origin) < THRT_INF_NOTIFY_DISTANCE)) {
+          if(other_team[j] canSee(our_team[i]) && (distance(other_team[j].origin, our_team[i].origin) < THRT_INF_NOTIFY_DISTANCE) && (distance(other_team[j].origin, player.origin) < THRT_INF_NOTIFY_DISTANCE)) {
             other_team[j] dds_notify("thrt", (them != "allies"));
             success = true;
             break;
@@ -980,8 +970,7 @@ dds_notify(category_name, isAlliesLine) {
 dds_notify_response(event, talker, phrase, rspns_cat_name) {
   event.category_response_name = rspns_cat_name;
   event.processed = false;
-  if((rspns_cat_name == "grenade_rspns") && isDefined(event.ent) && isDefined(event.ent.grenade) && isDefined(event.ent.grenade.originalowner) &&
-    (isDefined(event.ent.grenade.originalowner.team != event.ent_team)))
+  if((rspns_cat_name == "grenade_rspns") && isDefined(event.ent) && isDefined(event.ent.grenade) && isDefined(event.ent.grenade.originalowner) && (isDefined(event.ent.grenade.originalowner.team != event.ent_team)))
     return;
   if(!event.isAlliesLine) {
     dds_category = find_dds_category_by_name(level.dds.categories_axis, event.category_response_name);

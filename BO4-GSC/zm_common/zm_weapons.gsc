@@ -1109,8 +1109,7 @@ give_build_kit_weapon(weapon, var_51ec4e93, var_bd5d43c6, b_switch_weapon = 1) {
 
   if(is_weapon_upgraded(weapon)) {
     level notify(#"hash_6dead3931d3e708a", {
-      #player: self,
-      #weapon: weapon
+      #player: self, #weapon: weapon
     });
 
     if(!isDefined(n_camo)) {

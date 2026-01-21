@@ -281,7 +281,7 @@ func_10B63() {
     var_0 = self.a.var_2274["stance_change"];
 
     if(isDefined(var_0)) {
-      self func_82E4("stand_up", var_0, % root, 1);
+      self func_82E4("stand_up", var_0, %root, 1);
       scripts\anim\shared::donotetracks("stand_up");
     }
   }
@@ -293,7 +293,7 @@ func_C99B() {
   self orientmode("face current");
   func_10B63();
   var_0 = level.var_EC85["generic"]["patrol_radio_in_clear"];
-  self func_82E4("radio", var_0, % root, 1);
+  self func_82E4("radio", var_0, %root, 1);
   scripts\anim\shared::donotetracks("radio");
   func_12942();
 }
@@ -318,7 +318,7 @@ func_12942() {
     self orientmode("face current");
     func_10B63();
     var_4 = level.var_EC85["generic"]["patrol_turn180"];
-    self func_82E4("move", var_4, % root, 1);
+    self func_82E4("move", var_4, %root, 1);
 
     if(animhasnotetrack(var_4, "code_move")) {
       scripts\anim\shared::donotetracks("move");

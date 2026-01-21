@@ -6,20 +6,16 @@
 #include common_scripts\utility;
 
 /*QUAKED trigger_multiple_dyn_metal_detector (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Comments to be added.*/
+defaulttexture="flag"Comments to be added.*/
 
 /*QUAKED trigger_multiple_dyn_creaky_board (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Comments to be added.*/
+defaulttexture="flag"Comments to be added.*/
 
 /*QUAKED trigger_multiple_dyn_photo_copier (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Comments to be added.*/
+defaulttexture="flag"Comments to be added.*/
 
 /*QUAKED trigger_multiple_dyn_copier_no_light (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Comments to be added.*/
+defaulttexture="flag"Comments to be added.*/
 
 /*QUAKED trigger_radius_dyn_motion_light (0.12 0.23 1.0) (-16 -16 -16) (16 16 16)
 Comments to be added.*/
@@ -34,16 +30,13 @@ Comments to be added.*/
 Comments to be added.*/
 
 /*QUAKED trigger_multiple_dyn_motion_light (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Comments to be added.*/
+defaulttexture="flag"Comments to be added.*/
 
 /*QUAKED trigger_multiple_dyn_door (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Comments to be added.*/
+defaulttexture="flag"Comments to be added.*/
 
 /*QUAKED trigger_multiple_freefall (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Player free falling with animation and screaming of doom.*/
+defaulttexture="flag"Player free falling with animation and screaming of doom.*/
 
 // Crouch Speed 5.7-6.0
 // Run Speed 8.7-9.2
@@ -56,8 +49,7 @@ CONST_vending_machine_health = 400;
 CONST_soda_pop_time = 0.1; // seconds
 CONST_soda_count = 12; // number of soda per machine
 CONST_soda_launch_force = 1000; // soda shoot out force
-CONST_soda_random_factor = 0.15; // in percentage 0.2 = 20%
-CONST_soda_splash_dmg_scaler = 3; // splash damage multiplier
+CONST_soda_random_factor = 0.15; // in percentage 0.2 = 20%CONST_soda_splash_dmg_scaler = 3; // splash damage multiplier
 
 // Metal Detector
 CONST_alarm_tolerance = 0; // number of alarm sounds before silenced, 0 disables silencing
@@ -751,8 +743,7 @@ isInBound(ent, bounds) {
 }
 
 isInBound_single(var, v_min, v_max) {
-  if(var > v_min &&
-    var < v_max)
+  if(var > v_min && var < v_max)
     return true;
   return false;
 }
@@ -1245,8 +1236,7 @@ fan_blade_rotate(type) {
   wait randomfloatrange(0, 1);
 
   fan_angles = self.angles;
-  fan_vec = Vector_multiply(AnglesToRight(self.angles), 100); // assures normalized vector is length of "1"
-  fan_vec = VectorNormalize(fan_vec);
+  fan_vec = Vector_multiply(AnglesToRight(self.angles), 100); // assures normalized vector is length of "1"fan_vec = VectorNormalize(fan_vec);
 
   while(true) {
     dot_x = abs(vectorDot(fan_vec, (1, 0, 0)));

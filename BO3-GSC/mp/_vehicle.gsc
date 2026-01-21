@@ -76,9 +76,7 @@ function __init__() {
       level.veh_husk_models["t34_mp"] = "veh_t34_destroyed_mp";
     }
     if(isDefined(level.onaddvehiclehusks)) {
-      [
-        [level.onaddvehiclehusks]
-      ]();
+      [[level.onaddvehiclehusks]]();
     }
   }
   chopper_player_get_on_gun = % mp_vehicles::int_huey_gunner_on;
@@ -786,9 +784,7 @@ function vehicle_overturn_eject_occupants() {
   for(;;) {
     self waittill("veh_ejectoccupants");
     if(isDefined(level.onejectoccupants)) {
-      [
-        [level.onejectoccupants]
-      ]();
+      [[level.onejectoccupants]]();
     }
     wait(0.25);
   }

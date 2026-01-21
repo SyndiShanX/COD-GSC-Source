@@ -93,22 +93,12 @@ snd_technical_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_def();
   soundscripts\_audio_vehicle_manager::avm_end_state_group();
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_idle_vel2vol", [[0.0, 1.0],
-    [10.0, 0.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_idle_vel2pch", [[0.0, 1.0],
-    [10.0, 1.25]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_engine_vel2vol", [[0.0, 0.0],
-    [4.0, 0.1],
-    [10.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_engine_vel2pch", [[0.0, 0.8],
-    [4.0, 1.0],
-    [16.0, 1.1]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_treads_vel2vol", [[0.0, 0.0],
-    [4.0, 0.4],
-    [8.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_treads_vel2pch", [[0.0, 0.8],
-    [8.0, 1.0],
-    [16.0, 1.1]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_idle_vel2vol", [[0.0, 1.0], [10.0, 0.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_idle_vel2pch", [[0.0, 1.0], [10.0, 1.25]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_engine_vel2vol", [[0.0, 0.0], [4.0, 0.1], [10.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_engine_vel2pch", [[0.0, 0.8], [4.0, 1.0], [16.0, 1.1]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_treads_vel2vol", [[0.0, 0.0], [4.0, 0.4], [8.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("technical_treads_vel2pch", [[0.0, 0.8], [8.0, 1.0], [16.0, 1.1]]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 

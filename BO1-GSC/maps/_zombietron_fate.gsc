@@ -133,13 +133,7 @@ choose_fate_round() {
   exposure = "0.63";
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setClientDvars(
-      "r_lightTweakSunLight", light,
-      "r_lightTweakSunColor", color,
-      "r_lightTweakSunDirection", dir,
-      "r_exposureTweak", 1,
-      "r_exposureValue", exposure
-    );
+    players[i] setClientDvars("r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure);
   }
   fate_triggers[0] = GetEnt("fate_trigger1", "targetname");
   fate_triggers[1] = GetEnt("fate_trigger2", "targetname");

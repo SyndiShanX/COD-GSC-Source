@@ -20,8 +20,8 @@ low_wall_human() {
   traverseData["traverseToCoverAnim"] = % traverse40_2_cover;
   traverseData["coverType"] = "Cover Crouch";
   traverseData["traverseHeight"] = 40.0;
-  traverseData["interruptDeathAnim"][0] = array( % traverse40_death_start, % traverse40_death_start_2);
-  traverseData["interruptDeathAnim"][1] = array( % traverse40_death_end, % traverse40_death_end_2);
+  traverseData["interruptDeathAnim"][0] = array(%traverse40_death_start, %traverse40_death_start_2);
+  traverseData["interruptDeathAnim"][1] = array(%traverse40_death_end, %traverse40_death_end_2);
 
   DoTraverse(traverseData);
 }

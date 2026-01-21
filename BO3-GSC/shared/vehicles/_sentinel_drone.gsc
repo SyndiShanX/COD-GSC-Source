@@ -235,9 +235,7 @@ function private is_target_valid(target) {
     return false;
   }
   if(isDefined(level.is_valid_player_for_sentinel_drone)) {
-    if(![
-        [level.is_valid_player_for_sentinel_drone]
-      ](target)) {
+    if(![[level.is_valid_player_for_sentinel_drone]](target)) {
       return false;
     }
   }

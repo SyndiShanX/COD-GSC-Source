@@ -49,13 +49,7 @@ processLobbyScoreboards() {
 
   foreach(player in level.players) {
     // TODO: convert this to round stats
-    player setClientDvars(
-      "player_summary_xp", player.pers["summary"]["xp"],
-      "player_summary_score", player.pers["summary"]["score"],
-      "player_summary_challenge", player.pers["summary"]["challenge"],
-      "player_summary_match", player.pers["summary"]["match"],
-      "player_summary_misc", player.pers["summary"]["misc"]
-    );
+    player setClientDvars("player_summary_xp", player.pers["summary"]["xp"], "player_summary_score", player.pers["summary"]["score"], "player_summary_challenge", player.pers["summary"]["challenge"], "player_summary_match", player.pers["summary"]["match"], "player_summary_misc", player.pers["summary"]["misc"]);
   }
 }
 

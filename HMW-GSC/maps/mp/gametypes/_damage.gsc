@@ -1848,12 +1848,7 @@ callback_playerdamage_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
         maps\mp\gametypes\_gamelogic::setinflictorstat(var_0, var_1, var_6);
     }
 
-    if(issubstr(var_5, "MOD_IMPACT") &&
-      (var_6 == "m320_mp" ||
-        issubstr(var_6, "gl") ||
-        issubstr(var_6, "gp25") ||
-        var_6 == "h2_semtex_mp")
-    ) {
+    if(issubstr(var_5, "MOD_IMPACT") && (var_6 == "m320_mp" || issubstr(var_6, "gl") || issubstr(var_6, "gp25") || var_6 == "h2_semtex_mp")) {
       if(isplayer(var_1) && var_1 != self && var_1.team != self.team) {
         if(var_6 == "h2_semtex_mp" && isplayer(var_2)) {
           var_1 thread maps\mp\gametypes\_hud_message::stucksplashnotify(false); // attacker

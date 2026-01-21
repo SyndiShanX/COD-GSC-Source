@@ -287,9 +287,7 @@ function_c1c51837(e_player) {
     if(self.no_gib !== 1) {
       var_d3876bb9 = [ &gibserverutils::gibhead, &gibserverutils::gibleftarm, &gibserverutils::gibleftleg, &gibserverutils::giblegs, &gibserverutils::gibrightarm, &gibserverutils::gibrightleg, &gibserverutils::annihilate];
       var_d3876bb9 = array::randomize(var_d3876bb9);
-      [
-        [var_d3876bb9[0]]
-      ](self);
+      [[var_d3876bb9[0]]](self);
     }
 
     if(e_player.var_d675d730.n_kill_count > 10) {

@@ -1984,7 +1984,7 @@ monkey_update(player, origin) {
   monkey = spawn("script_model", origin);
   monkey setModel(level.monkey_model);
   monkey UseAnimTree(#animtree);
-  monkey SetAnim( % o_monkey_bomb);
+  monkey SetAnim(%o_monkey_bomb);
   monkey.angles = (0, randomInt(360), 0);
   playFXOnTag(level._effect["monkey_glow"], monkey, "origin_animate_jnt");
   level.active_monkeys[level.active_monkeys.size] = monkey;
@@ -2006,7 +2006,7 @@ monkey_update(player, origin) {
   PhysicsExplosionSphere(monkey.origin, level.zombie_vars["monkey_attract_dist"], level.zombie_vars["monkey_attract_dist"], 1);
   earthquake(0.3, 1.0, monkey.origin, 100);
   PlayRumbleOnPosition("artillery_rumble", origin);
-  monkey ClearAnim( % o_monkey_bomb, 0.2);
+  monkey ClearAnim(%o_monkey_bomb, 0.2);
   wait 0.2;
   monkey Delete();
 }
@@ -2044,11 +2044,11 @@ chicken_idle() {
 chicken_death_idle() {
   self endon("death");
   self UseAnimTree(#animtree);
-  time = getAnimLength( % a_chicken_react_up_down);
+  time = getAnimLength(%a_chicken_react_up_down);
   while(isDefined(self)) {
-    self SetAnim( % a_chicken_react_up_down);
+    self SetAnim(%a_chicken_react_up_down);
     wait time;
-    self ClearAnim( % a_chicken_react_up_down, 0);
+    self ClearAnim(%a_chicken_react_up_down, 0);
   }
 }
 
@@ -2056,17 +2056,17 @@ chicken_active_idle() {
   self endon("death");
   self endon("spinning_out");
   self UseAnimTree(#animtree);
-  time = getAnimLength( % a_chicken_react_to_front_notrans);
+  time = getAnimLength(%a_chicken_react_to_front_notrans);
   while(isDefined(self)) {
-    self SetAnim( % a_chicken_react_to_front_notrans);
+    self SetAnim(%a_chicken_react_to_front_notrans);
     wait time;
-    self ClearAnim( % a_chicken_react_to_front_notrans, 0);
+    self ClearAnim(%a_chicken_react_to_front_notrans, 0);
   }
 }
 
 fated_active_idle() {
   self UseAnimTree(#animtree);
-  self SetAnim( % fxanim_zombies_crow_fly_anim);
+  self SetAnim(%fxanim_zombies_crow_fly_anim);
 }
 
 delete_sound_ent(ent, wait_string) {

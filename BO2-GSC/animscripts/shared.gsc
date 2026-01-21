@@ -415,8 +415,7 @@ registernotetracks() {
     anim.notetracks["fire spray"] = ::notetrackfirespray;
     anim.notetracks["lookat = \"player\""] = ::notetracklookatplayer;
     anim.notetracks["headlookat = \"player\""] = ::notetrackheadlookatplayer;
-    anim.notetracks["lookat = \""
-      "] = ::notetrackclearlookat;
+    anim.notetracks["lookat = \"""] = ::notetrackclearlookat;
       anim.notetracks["hide"] = ::notetrackhide; anim.notetracks["show"] = ::notetrackshow;
     }
 
@@ -538,7 +537,7 @@ registernotetracks() {
 
     notetrackposeprone(note, flagname) {
       if(issentient(self)) {
-        self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+        self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
         self enterpronewrapper(1.0);
         self.a.pose = "prone";
         self notify("entered_pose" + "prone");
@@ -547,7 +546,7 @@ registernotetracks() {
 
     notetrackposecrawl(note, flagname) {
       if(issentient(self)) {
-        self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+        self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
         self enterpronewrapper(1.0);
         self.a.pose = "prone";
         self notify("entered_pose" + "prone");
@@ -895,9 +894,7 @@ registernotetracks() {
 
     donotetracksfortimeproc(donotetracksforeverfunc, time, flagname, customfunction, debugidentifier, ent) {
       ent endon("stop_notetracks");
-      [
-        [donotetracksforeverfunc]
-      ](flagname, undefined, customfunction, debugidentifier);
+      [[donotetracksforeverfunc]](flagname, undefined, customfunction, debugidentifier);
     }
 
     donotetracksfortimeendnotify(time) {
@@ -1019,7 +1016,7 @@ registernotetracks() {
     }
 
     trackshootentorpos() {
-      self animscripts\shared::setaiminganims( % aim_2, % aim_4, % aim_6, % aim_8);
+      self animscripts\shared::setaiminganims(%aim_2, %aim_4, %aim_6, %aim_8);
       self animscripts\shared::trackloopstart();
     }
 
@@ -1550,7 +1547,7 @@ registernotetracks() {
           ]()) {
           return;
         }
-        self setanimknoball(lookanim, % body, 1, 0.1);
+        self setanimknoball(lookanim, %body, 1, 0.1);
         wait 0.1;
       }
     }
@@ -1606,7 +1603,7 @@ registernotetracks() {
       self animscripts\debug::debugpushstate("throwdownWeapon");
 
       self animmode("angle deltas");
-      self setflaggedanimknoballrestart("weapon swap", swapanim, % body, 1, 0.1, 1);
+      self setflaggedanimknoballrestart("weapon swap", swapanim, %body, 1, 0.1, 1);
       note = "";
 
       while(note != "end") {
@@ -1781,19 +1778,19 @@ registernotetracks() {
       self animscripts\debug::debugpushstate("switchWeapons");
 
       self animmode("angle deltas");
-      self setflaggedanimknoballrestart("weapon swap", swapanim, % body, 1, 0.1, 1);
+      self setflaggedanimknoballrestart("weapon swap", swapanim, %body, 1, 0.1, 1);
       self donotetracks("weapon swap");
 
       if(getdvarint(#"_id_D2DF7981") == 2) {
         pulloutanim = getweaponpulloutanim();
 
         if(isDefined(swapanim)) {
-          self setflaggedanimknoballrestart("weapon swap", pulloutanim, % body, 1, 0.1, 1);
+          self setflaggedanimknoballrestart("weapon swap", pulloutanim, %body, 1, 0.1, 1);
           self donotetracks("weapon swap");
         }
       }
 
-      self clearanim( % weapon_switch, 0.2);
+      self clearanim(%weapon_switch, 0.2);
       self.a.weapon_switch_time = gettime();
       self.a.weapon_switch_for_distance_time = -1;
       self notify("weapon_switched");

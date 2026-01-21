@@ -210,7 +210,7 @@ startaiming() {
   self.leftaimlimit = -50;
   self.upaimlimit = 50;
   self.downaimlimit = -50;
-  self animscripts\shared::setaiminganims( % run_aim_2, % run_aim_4, % run_aim_6, % run_aim_8);
+  self animscripts\shared::setaiminganims(%run_aim_2, %run_aim_4, %run_aim_6, %run_aim_8);
   self animscripts\shared::trackloopstart();
 }
 
@@ -465,7 +465,7 @@ movecovertocover() {
     blendtime = 0.4;
 
   self animmode("zonly_physics", 0);
-  self clearanim( % body, blendtime);
+  self clearanim(%body, blendtime);
   startanim = movecovertocover_getshufflestartanim(shuffleleft, startnode, node);
   shuffleanim = movecovertocover_getshuffleloopanim(shuffleleft, startnode, node);
   endanim = movecovertocover_getshuffleendanim(shuffleleft, startnode, node);
@@ -541,13 +541,13 @@ movecovertocover() {
 
 movecovertocoverfinish() {
   if(isDefined(self.shufflemoveinterrupted)) {
-    self clearanim( % cover_shuffle, 0.2);
+    self clearanim(%cover_shuffle, 0.2);
     self.shufflemoveinterrupted = undefined;
     self animmode("none", 0);
     self orientmode("face default");
   } else {
     wait 0.2;
-    self clearanim( % cover_shuffle, 0.2);
+    self clearanim(%cover_shuffle, 0.2);
   }
 }
 

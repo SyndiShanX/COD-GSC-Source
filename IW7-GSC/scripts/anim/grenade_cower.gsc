@@ -37,13 +37,13 @@ main() {
       return;
     }
 
-    self func_82E4("cowerstart", scripts\anim\utility::func_B027("grenade", "cower_squat"), % body, 1, 0.2);
+    self func_82E4("cowerstart", scripts\anim\utility::func_B027("grenade", "cower_squat"), %body, 1, 0.2);
     scripts\anim\shared::donotetracks("cowerstart");
   }
 
   self.a.pose = "crouch";
   self.a.movement = "stop";
-  self func_82E4("cower", scripts\anim\utility::func_B027("grenade", "cower_squat_idle"), % body, 1, 0.2);
+  self func_82E4("cower", scripts\anim\utility::func_B027("grenade", "cower_squat_idle"), %body, 1, 0.2);
   scripts\anim\shared::donotetracks("cower");
   self waittill("never");
 }
@@ -75,7 +75,7 @@ func_12895(var_0) {
   }
 
   self.navtrace = 0;
-  self func_82E4("cowerstart", var_1, % body, 1, 0.2);
+  self func_82E4("cowerstart", var_1, %body, 1, 0.2);
   scripts\anim\shared::donotetracks("cowerstart");
   self.navtrace = 1;
   return 1;

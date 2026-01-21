@@ -52,14 +52,14 @@ main() {
   if(isDefined(self.custom_approachanimrate)) {
     rate = self.custom_approachanimrate;
   }
-  self clearAnim( % walk_and_run_loops, 0.3);
-  self setFlaggedAnimKnobAllRestart("coverArrival", arrivalAnim, % body, 1, 0.3, rate);
+  self clearAnim(%walk_and_run_loops, 0.3);
+  self setFlaggedAnimKnobAllRestart("coverArrival", arrivalAnim, %body, 1, 0.3, rate);
   self animscripts\shared::DoNoteTracks("coverArrival");
   if(isDefined(newstance))
     self.a.pose = newstance;
   self.a.movement = "stop";
   self.a.arrivalType = self.approachType;
-  self clearanim( % root, .3);
+  self clearanim(%root, .3);
 }
 
 getNodeStanceYawOffset(approachtype) {
@@ -71,14 +71,7 @@ getNodeStanceYawOffset(approachtype) {
 }
 
 canUseSawApproach(node) {
-  if(self.weapon != "saw" && self.weapon != "rpd" &&
-    self.weapon != "dp28" && self.weapon != "dp28_bipod" &&
-    self.weapon != "bren" && self.weapon != "bren_bipod" &&
-    self.weapon != "30cal" && self.weapon != "30cal_bipod" &&
-    self.weapon != "bar" && self.weapon != "bar_bipod" &&
-    self.weapon != "mg42" && self.weapon != "mg42_bipod" &&
-    self.weapon != "fg42" && self.weapon != "fg42_bipod" &&
-    self.weapon != "type99_lmg" && self.weapon != "type99_lmg_bipod")
+  if(self.weapon != "saw" && self.weapon != "rpd" && self.weapon != "dp28" && self.weapon != "dp28_bipod" && self.weapon != "bren" && self.weapon != "bren_bipod" && self.weapon != "30cal" && self.weapon != "30cal_bipod" && self.weapon != "bar" && self.weapon != "bar_bipod" && self.weapon != "mg42" && self.weapon != "mg42_bipod" && self.weapon != "fg42" && self.weapon != "fg42_bipod" && self.weapon != "type99_lmg" && self.weapon != "type99_lmg_bipod")
     return false;
   if(!isDefined(node.turretInfo))
     return false;
@@ -752,7 +745,7 @@ doCoverExitAnimation(exittype, approachNumber) {
   if(isDefined(self.custom_exitanimrate)) {
     rate = self.custom_exitanimrate;
   }
-  self setFlaggedAnimKnobAllRestart("coverexit", leaveAnim, % body, 1, transTime, rate);
+  self setFlaggedAnimKnobAllRestart("coverexit", leaveAnim, %body, 1, transTime, rate);
   blendOutDuration = 0.15;
   self thread coverexit_blend_out(leaveAnim, rate, blendOutDuration);
   hasExitAlign = animHasNotetrack(leaveAnim, "exit_align");
@@ -804,8 +797,8 @@ coverexit_blend_out(leaveAnim, playSpeed, blendOutTime) {
   playLength = GetAnimLength(leaveAnim) / playSpeed;
   timeTilBlendOut = playLength - blendOutTime;
   wait(timeTilBlendOut);
-  self ClearAnim( % root, blendOutTime);
-  self setAnimRestart( % run_lowready_F, 1, blendOutTime);
+  self ClearAnim(%root, blendOutTime);
+  self setAnimRestart(%run_lowready_F, 1, blendOutTime);
   wait(blendOutTime);
   self OrientMode("face motion");
   self thread faceEnemyOrMotionAfterABit();
@@ -974,7 +967,7 @@ DoMiniArrival(node) {
   transTime = 0.2;
   if(self.a.movement != "stop")
     transTime = animtime * 0.65;
-  self setAnimKnobAllRestart(arrivalAnim, % body, 1, transTime);
+  self setAnimKnobAllRestart(arrivalAnim, %body, 1, transTime);
   totalAnimDist = length(getMoveDelta(arrivalAnim, 0, 1));
   if(totalAnimDist <= 0)
     totalAnimDist = 0.5;

@@ -103,39 +103,15 @@ snd_blackhawk_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_def();
   soundscripts\_audio_vehicle_manager::avm_end_state_group();
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_engine_far_vel2vol", [[0, 1.0],
-    [10, 1.0],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_engine_close_vel2vol", [[0, 1.0],
-    [20, 1.0],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_engine_far_vel2pch", [[0, 0.9],
-    [10, 1.0],
-    [20, 1.1]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_start_rev_duck", [[0.0, 1.0],
-    [0.25, 1.0],
-    [0.3, 0.7],
-    [0.7, 1.0],
-    [1.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_start_rev_vel2vol", [[0.0, 0.0],
-    [3.0, 0.3],
-    [5.0, 0.7],
-    [8.0, 0.8],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_pass_by_duck_envelope", [[0.0, 1.0],
-    [0.15, 1.0],
-    [0.3, 0.5],
-    [0.5, 0.55],
-    [0.6, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_pass_by_vel2vol", [[0.0, 0.0],
-    [9.06, 0.0],
-    [15.1, 0.7],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_pass_by_vel2pch", [[0.0, 0.9],
-    [15.1, 1.0],
-    [150.0, 1.1]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_doppler2pch", [[0.0, 0.0],
-    [2.0, 2.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_engine_far_vel2vol", [[0, 1.0], [10, 1.0], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_engine_close_vel2vol", [[0, 1.0], [20, 1.0], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_engine_far_vel2pch", [[0, 0.9], [10, 1.0], [20, 1.1]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_start_rev_duck", [[0.0, 1.0], [0.25, 1.0], [0.3, 0.7], [0.7, 1.0], [1.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_start_rev_vel2vol", [[0.0, 0.0], [3.0, 0.3], [5.0, 0.7], [8.0, 0.8], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_pass_by_duck_envelope", [[0.0, 1.0], [0.15, 1.0], [0.3, 0.5], [0.5, 0.55], [0.6, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_pass_by_vel2vol", [[0.0, 0.0], [9.06, 0.0], [15.1, 0.7], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_pass_by_vel2pch", [[0.0, 0.9], [15.1, 1.0], [150.0, 1.1]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("blackhawk_doppler2pch", [[0.0, 0.0], [2.0, 2.0]]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 

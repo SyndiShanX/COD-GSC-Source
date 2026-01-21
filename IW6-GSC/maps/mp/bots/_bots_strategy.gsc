@@ -477,8 +477,7 @@ bot_defend_think(defendCenter, defendRadius, defense_type, optional_params) {
     } else {
       wait_time = RandomFloatRange(cur_min_goal_time, cur_max_goal_time);
       result = self waittill_any_timeout(wait_time, "node_relinquished", "goal_changed", "script_goal_changed", "defend_force_node_recalculation", "bad_path");
-      if((result == "node_relinquished" || result == "bad_path" || result == "goal_changed" || result == "script_goal_changed") &&
-        (self.cur_defend_stance == "crouch" || self.cur_defend_stance == "prone")) {
+      if((result == "node_relinquished" || result == "bad_path" || result == "goal_changed" || result == "script_goal_changed") && (self.cur_defend_stance == "crouch" || self.cur_defend_stance == "prone")) {
         self BotSetStance("none");
       }
     }
@@ -579,9 +578,7 @@ defense_cautious_approach() {
     self endon("defend_stop");
     self endon("started_bot_defend_think");
 
-    if(![
-        [level.bot_funcs["should_start_cautious_approach"]]
-      ](true)) {
+    if(![[level.bot_funcs["should_start_cautious_approach"]]](true)) {
       return;
     }
     original_script_goal = self BotGetScriptGoal();

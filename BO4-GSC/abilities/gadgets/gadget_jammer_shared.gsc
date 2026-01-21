@@ -206,8 +206,7 @@ function_e27c41b4(jammer, entity, attackingplayer) {
     function_1c430dad(entity, 1);
     function_58f8bf08(jammer, attackingplayer, undefined);
     entity callback::callback(#"hash_7140c3848cbefaa1", {
-      #attackingplayer: attackingplayer,
-      #jammer: jammer
+      #attackingplayer: attackingplayer, #jammer: jammer
     });
     return true;
   }

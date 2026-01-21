@@ -321,9 +321,7 @@ oafc_trigger_thread(tiles, set) {
 }
 
 reset_tiles() {
-  tile_models = array("p_ztem_glyphs_01_unlit", "p_ztem_glyphs_02_unlit", "p_ztem_glyphs_03_unlit", "p_ztem_glyphs_04_unlit",
-    "p_ztem_glyphs_05_unlit", "p_ztem_glyphs_06_unlit", "p_ztem_glyphs_07_unlit", "p_ztem_glyphs_08_unlit",
-    "p_ztem_glyphs_09_unlit", "p_ztem_glyphs_10_unlit", "p_ztem_glyphs_11_unlit", "p_ztem_glyphs_12_unlit");
+  tile_models = array("p_ztem_glyphs_01_unlit", "p_ztem_glyphs_02_unlit", "p_ztem_glyphs_03_unlit", "p_ztem_glyphs_04_unlit", "p_ztem_glyphs_05_unlit", "p_ztem_glyphs_06_unlit", "p_ztem_glyphs_07_unlit", "p_ztem_glyphs_08_unlit", "p_ztem_glyphs_09_unlit", "p_ztem_glyphs_10_unlit", "p_ztem_glyphs_11_unlit", "p_ztem_glyphs_12_unlit");
   level notify("reset_tiles");
   if(!isDefined(level._oafc_trigger1)) {
     level._oafc_trigger1 = spawn("trigger_radius", (0, 0, 0), 0, 22, 72);

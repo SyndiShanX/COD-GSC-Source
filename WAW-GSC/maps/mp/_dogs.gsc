@@ -746,8 +746,7 @@ dog_pick_node_final(nodes, team, enemies, useweights) {
 
 getBestWeightedNode(nodes, team, enemies) {
   maxSightTracedNodes = 3;
-  for(
-    try = 0;
+  for(try = 0;
     try <= maxSightTracedNodes;
     try ++) {
     bestnodes = [];
@@ -771,8 +770,7 @@ getBestWeightedNode(nodes, team, enemies) {
     if(bestnodes.size == 0)
       return undefined;
     bestnode = bestnodes[randomint(bestnodes.size)];
-    if(
-      try == maxSightTracedNodes)
+    if(try == maxSightTracedNodes)
       return bestnode;
     if(isDefined(bestnode.lastSightTraceTime) && bestnode.lastSightTraceTime == gettime())
       return bestnode;

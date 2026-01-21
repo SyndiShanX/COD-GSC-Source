@@ -22,14 +22,7 @@ __init__() {
 
 initialize() {
   level.infection = {
-    #perks: [],
-    #bodies: [],
-    #primary_weapon: undefined,
-    #offhand_weapon: undefined,
-    #team: # "none",
-    #platoon: # "invalid",
-    #var_c4b373ef: [],
-    #platoon_team: []
+    #perks: [], #bodies: [], #primary_weapon: undefined, #offhand_weapon: undefined, #team: # "none", #platoon: # "invalid", #var_c4b373ef: [], #platoon_team: []
   };
 }
 

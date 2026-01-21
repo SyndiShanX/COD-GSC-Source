@@ -874,13 +874,7 @@ zmbvoxadd(category, subcategory, suffix, percentage = 100, cooldown = 0, var_502
   }
 
   level.sndplayervox[category][subcategory] = {
-    #suffix: suffix,
-    #percentage: percentage,
-    #cooldown: cooldown,
-    #var_50219c90: var_50219c90,
-    #var_7aadcbd7: var_7aadcbd7,
-    #toself: toself,
-    #var_884fa3fe: var_884fa3fe
+    #suffix: suffix, #percentage: percentage, #cooldown: cooldown, #var_50219c90: var_50219c90, #var_7aadcbd7: var_7aadcbd7, #toself: toself, #var_884fa3fe: var_884fa3fe
   };
   level.votimer[subcategory] = 0;
 }
@@ -1208,9 +1202,7 @@ function_6191af93(str_category, var_39acfdda, var_6e8fc6db, var_60626fa8, var_2b
   }
 
   s_override = {
-    #str_category: var_6e8fc6db,
-    #var_39acfdda: var_60626fa8,
-    #chance: var_2bff7297
+    #str_category: var_6e8fc6db, #var_39acfdda: var_60626fa8, #chance: var_2bff7297
   };
   self.var_c13233ee[str_category][var_39acfdda] = s_override;
 }
@@ -2603,8 +2595,7 @@ zmbaivox_playelectrocution() {
     if(weapon.name === # "zombie_beast_lightning_dwl" || weapon.name === # "zombie_beast_lightning_dwl2" || weapon.name === # "zombie_beast_lightning_dwl3") {
       bhtnactionstartevent(self, "electrocute");
       self notify(#"bhtn_action_notify", {
-        #action: "electrocute"
-      });
+        #action: "electrocute"});
     }
   }
 }
@@ -2702,8 +2693,7 @@ zombie_behind_vox() {
           if(isDefined(zombs[i]) && isalive(zombs[i])) {
             bhtnactionstartevent(zombs[i], "behind");
             zombs[i] notify(#"bhtn_action_notify", {
-              #action: "behind"
-            });
+              #action: "behind"});
             played_sound = 1;
           }
 

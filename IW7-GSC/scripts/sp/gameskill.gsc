@@ -975,9 +975,7 @@ func_D3A9() {
 
     if(isDefined(var_8)) {
       waittillframeend;
-      [
-        [var_8]
-      ](var_6);
+      [[var_8]](var_6);
     }
   }
 }
@@ -1234,9 +1232,7 @@ func_D369(var_0) {
     }
 
     if(isDefined(level.var_7684)) {
-      [
-        [level.var_7684]
-      ]("breathing_hurt");
+      [[level.var_7684]]("breathing_hurt");
     } else {
       self playlocalsound("breathing_hurt");
     }

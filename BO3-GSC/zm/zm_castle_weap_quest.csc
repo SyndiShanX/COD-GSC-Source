@@ -272,7 +272,7 @@ function function_90c151e6(localclientnum, oldval, newval, bnewent, binitialsnap
   m_body useanimtree($zm_castle);
   m_body.origin = self.origin;
   m_body show();
-  m_body clearanim( % zm_castle::root, 0.1);
+  m_body clearanim(%zm_castle::root, 0.1);
   m_body setanimrestart(level.var_f41bc81e, 1, 0.2, 1);
   n_anim_time = getanimlength(level.var_f41bc81e) / 1;
 }
@@ -332,7 +332,7 @@ function function_939ae9de(var_e88629ec, localclientnum, direction, var_3c6f5c75
     self.var_bbb1ef87 = spawn(localclientnum, self gettagorigin("J_SpineLower"), "script_model");
     self.var_bbb1ef87 setModel("tag_origin");
   }
-  self clearanim( % zm_castle::root, 0.2);
+  self clearanim(%zm_castle::root, 0.2);
   self setanimrestart("ai_zm_dlc1_dragonhead_zombie_rise");
   var_1d199979 = var_e88629ec.origin - self.origin;
   var_6ea7737a = vectorscale(var_1d199979, 0.2);

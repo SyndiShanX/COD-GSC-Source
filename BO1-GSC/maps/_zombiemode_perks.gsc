@@ -292,11 +292,7 @@ vending_weapon_upgrade() {
     if("microwavegun_zm" == current_weapon) {
       current_weapon = "microwavegundw_zm";
     }
-    if(!player maps\_zombiemode_weapons::can_buy_weapon() ||
-      player maps\_laststand::player_is_in_laststand() ||
-      is_true(player.intermission) ||
-      player isThrowingGrenade() ||
-      player maps\_zombiemode_weapons::is_weapon_upgraded(current_weapon)) {
+    if(!player maps\_zombiemode_weapons::can_buy_weapon() || player maps\_laststand::player_is_in_laststand() || is_true(player.intermission) || player isThrowingGrenade() || player maps\_zombiemode_weapons::is_weapon_upgraded(current_weapon)) {
       wait(0.1);
       continue;
     }
@@ -699,8 +695,7 @@ vending_trigger_think() {
   perk = self.script_noteworthy;
   solo = false;
   flag_init("_start_zm_pistol_rank");
-  if(isDefined(perk) &&
-    (perk == "specialty_quickrevive" || perk == "specialty_quickrevive_upgrade")) {
+  if(isDefined(perk) && (perk == "specialty_quickrevive" || perk == "specialty_quickrevive_upgrade")) {
     flag_wait("all_players_connected");
     players = GetPlayers();
     if(players.size == 1) {
@@ -905,8 +900,7 @@ vending_trigger_think() {
     }
     player.perk_purchased = undefined;
     player give_perk(perk, true);
-    bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type perk",
-      player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, cost, perk, self.origin);
+    bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type perk", player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, cost, perk, self.origin);
   }
 }
 

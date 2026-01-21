@@ -63,6 +63,6 @@ cleanup_dial_anims() {
   if(isDefined(self)) {
     self notify("kill_dials");
     self.dial_vehicle = false;
-    self ClearAnim( % root, 0.2);
+    self ClearAnim(%root, 0.2);
   }
 }

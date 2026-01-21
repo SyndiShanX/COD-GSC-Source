@@ -333,38 +333,20 @@ class ctrap {
       o_trap.m_e_who = who;
       bb::logpurchaseevent(who, self, o_trap.m_n_cost, targetname, 0, "_trap", "_purchased");
       who zm_score::minus_to_player_score(o_trap.m_n_cost);
-      [
-        [o_trap]
-      ] - > strings_update_state();
-      [
-        [o_trap]
-      ] - > switch_update_state(self);
-      [
-        [o_trap]
-      ] - > trap_update_state();
+      [[o_trap]] - > strings_update_state();
+      [[o_trap]] - > switch_update_state(self);
+      [[o_trap]] - > trap_update_state();
       who thread zm_audio::create_and_play_dialog("trap", "start");
       wait(o_trap.m_n_duration_active);
       o_trap.m_n_state = 3;
-      [
-        [o_trap]
-      ] - > trap_update_state();
-      [
-        [o_trap]
-      ] - > switch_update_state(self);
-      [
-        [o_trap]
-      ] - > strings_update_state();
+      [[o_trap]] - > trap_update_state();
+      [[o_trap]] - > switch_update_state(self);
+      [[o_trap]] - > strings_update_state();
       wait(o_trap.m_n_duration_cooldown);
       o_trap.m_n_state = 1;
-      [
-        [o_trap]
-      ] - > strings_update_state();
-      [
-        [o_trap]
-      ] - > switch_update_state(self);
-      [
-        [o_trap]
-      ] - > trap_update_state();
+      [[o_trap]] - > strings_update_state();
+      [[o_trap]] - > switch_update_state(self);
+      [[o_trap]] - > trap_update_state();
     }
   }
 
@@ -459,15 +441,9 @@ function function_89303c72(var_f6caa7fd) {
   foreach(str_index in var_cdd779bd) {
     if(str_index != "pap") {
       level.a_o_trap_chain[str_index].m_n_state = 1;
-      [
-        [level.a_o_trap_chain[str_index]]
-      ] - > trap_update_state();
-      [
-        [level.a_o_trap_chain[str_index]]
-      ] - > switch_update_state(level.a_o_trap_chain[str_index].m_a_e_heart[0]);
-      [
-        [level.a_o_trap_chain[str_index]]
-      ] - > strings_update_state();
+      [[level.a_o_trap_chain[str_index]]] - > trap_update_state();
+      [[level.a_o_trap_chain[str_index]]] - > switch_update_state(level.a_o_trap_chain[str_index].m_a_e_heart[0]);
+      [[level.a_o_trap_chain[str_index]]] - > strings_update_state();
     }
   }
   level.a_o_trap_chain["pap"].m_n_state = 0;

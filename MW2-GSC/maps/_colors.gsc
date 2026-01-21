@@ -447,8 +447,7 @@ get_colorcodes_and_activate_trigger(color_team, team) {
 
 activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex) {
   // give spawners activated by this trigger a chance to spawn their AI
-  // removing this because for one thing people shouldn't use compound triggers, but if they do,
-  // the level.currentColorForced will get set, so any AI that spawn will still go to a colored node
+  // removing this because for one thing people shouldn't use compound triggers, but if they do, // the level.currentColorForced will get set, so any AI that spawn will still go to a colored node
   // even if it happens after this
   // 		waittillframeend;
 
@@ -470,8 +469,7 @@ activate_color_trigger_internal(colorCodes, colors, team, colorCodesByColorIndex
     // remove the dead from the color forced ai
     level.arrays_of_colorForced_ai[team][color] = array_removeDead(level.arrays_of_colorForced_ai[team][color]);
 
-    // set the last color forced so we can compare it with current when we tell guys to go to nodes,
-    // so they can prefer new nodes over old ones, so they move up
+    // set the last color forced so we can compare it with current when we tell guys to go to nodes, // so they can prefer new nodes over old ones, so they move up
     level.lastColorForced[team][color] = level.currentColorForced[team][color];
 
     // set the destination of the color forced spawners
@@ -1317,8 +1315,7 @@ colorNode_replace_on_death() {
     correct_colored_guy = getclosest(level.player.origin, correct_colored_friendlies);
     assertEx(correct_colored_guy.script_forceColor != color, "Tried to replace a " + color + " guy with a guy of the same color!");
 
-    // have to wait until the end of the frame because the guy may have just spawned and been given his forcecolor,
-    // and you cant give a guy forcecolor twice in one frame currently.		
+    // have to wait until the end of the frame because the guy may have just spawned and been given his forcecolor, // and you cant give a guy forcecolor twice in one frame currently.		
     waittillframeend;
     if(!isalive(correct_colored_guy)) {
       // if he died during the frame then try again!

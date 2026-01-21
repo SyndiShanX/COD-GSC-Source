@@ -266,9 +266,9 @@ keegan_turn_left_anims() {
     common_scripts\utility::waitframe();
     level.player_truck notify("stop_keegan_loop");
     level.truck_player_arms thread maps\_anim::anim_single_solo(level.truck_player_arms, "truck_lean_left");
-    level.player_truck setanim( % ehq_truck_enter_turn_left_truck);
+    level.player_truck setanim(%ehq_truck_enter_turn_left_truck);
     level.player_truck maps\_anim::anim_single_solo(self, "truck_turn_left", "tag_driver");
-    level.player_truck clearanim( % ehq_truck_enter_turn_left_truck, 0);
+    level.player_truck clearanim(%ehq_truck_enter_turn_left_truck, 0);
     level.player_truck thread maps\_anim::anim_loop_solo(self, "enter_truck_loop", "stop_keegan_loop", "tag_driver");
   }
 }
@@ -282,9 +282,9 @@ keegan_turn_right_anims() {
     level.player_truck notify("stop_keegan_loop");
     common_scripts\utility::waitframe();
     level.truck_player_arms thread maps\_anim::anim_single_solo(level.truck_player_arms, "truck_lean_right");
-    level.player_truck setanim( % ehq_truck_enter_turn_right_truck);
+    level.player_truck setanim(%ehq_truck_enter_turn_right_truck);
     level.player_truck maps\_anim::anim_single_solo(self, "truck_turn_right", "tag_driver");
-    level.player_truck clearanim( % ehq_truck_enter_turn_right_truck, 0);
+    level.player_truck clearanim(%ehq_truck_enter_turn_right_truck, 0);
     level.player_truck thread maps\_anim::anim_loop_solo(self, "enter_truck_loop", "stop_keegan_loop", "tag_driver");
   }
 }
@@ -307,9 +307,9 @@ keegan_turn_right_anims_rush() {
     level.player_truck notify("stop_keegan_loop");
     common_scripts\utility::waitframe();
     level.truck_player_arms thread maps\_anim::anim_single_solo(level.truck_player_arms, "truck_lean_right");
-    level.player_truck setanim( % ehq_truck_enter_turn_right_rush_truck);
+    level.player_truck setanim(%ehq_truck_enter_turn_right_rush_truck);
     level.player_truck maps\_anim::anim_single_solo(self, "truck_turn_right_rush", "tag_driver");
-    level.player_truck clearanim( % ehq_truck_enter_turn_right_rush_truck, 0);
+    level.player_truck clearanim(%ehq_truck_enter_turn_right_rush_truck, 0);
     level.player_truck thread maps\_anim::anim_loop_solo(self, "enter_truck_loop_rush", "stop_keegan_loop", "tag_driver");
   }
 }
@@ -323,9 +323,9 @@ keegan_turn_left_anims_rush() {
     level.player_truck notify("stop_keegan_loop");
     common_scripts\utility::waitframe();
     level.truck_player_arms thread maps\_anim::anim_single_solo(level.truck_player_arms, "truck_lean_left");
-    level.player_truck setanim( % ehq_truck_enter_turn_left_rush_truck);
+    level.player_truck setanim(%ehq_truck_enter_turn_left_rush_truck);
     level.player_truck maps\_anim::anim_single_solo(self, "truck_turn_left_rush", "tag_driver");
-    level.player_truck clearanim( % ehq_truck_enter_turn_left_rush_truck, 0);
+    level.player_truck clearanim(%ehq_truck_enter_turn_left_rush_truck, 0);
     level.player_truck thread maps\_anim::anim_loop_solo(self, "enter_truck_loop_rush", "stop_keegan_loop", "tag_driver");
   }
 }

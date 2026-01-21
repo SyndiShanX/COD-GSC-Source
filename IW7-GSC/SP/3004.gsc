@@ -84,7 +84,7 @@ init_location() {
   }
 
   self.var_101B2 = 0;
-  thread lib_0BBE::func_5EC8( % vh_dropship_thrusters_up, % vh_dropship_thrusters_down, ::func_12B58);
+  thread lib_0BBE::func_5EC8(%vh_dropship_thrusters_up, %vh_dropship_thrusters_down, ::func_12B58);
   self.var_4D94 = spawnStruct();
   if(issubstr(self.classname, "player")) {
     self attach("veh_mil_air_un_dropship_hero_interior_rig", "tag_connect");
@@ -147,9 +147,9 @@ init_location() {
 func_12B58(var_0) {
   if(self.var_101B2 && var_0 > 50) {
     scripts\sp\utility::func_65DD("side_thrusters_out");
-    self give_attacker_kill_rewards( % vh_dropship_front_thrusters_in);
-    scripts\engine\utility::delaycall(0.05, ::func_82B1, % vh_dropship_front_thrusters_in, 0.25);
-    self clearanim( % vh_dropship_front_thrusters_out, 0.05);
+    self give_attacker_kill_rewards(%vh_dropship_front_thrusters_in);
+    scripts\engine\utility::delaycall(0.05, ::func_82B1, %vh_dropship_front_thrusters_in, 0.25);
+    self clearanim(%vh_dropship_front_thrusters_out, 0.05);
     self.var_101B2 = 0;
     return;
   }
@@ -163,9 +163,9 @@ func_12B58(var_0) {
   }
 
   scripts\engine\utility::delaythread(1.5, scripts\sp\utility::func_65E1, "side_thrusters_out");
-  self give_attacker_kill_rewards( % vh_dropship_front_thrusters_out);
-  scripts\engine\utility::delaycall(0.05, ::func_82B1, % vh_dropship_front_thrusters_out, 0.25);
-  self clearanim( % vh_dropship_front_thrusters_in, 0.05);
+  self give_attacker_kill_rewards(%vh_dropship_front_thrusters_out);
+  scripts\engine\utility::delaycall(0.05, ::func_82B1, %vh_dropship_front_thrusters_out, 0.25);
+  self clearanim(%vh_dropship_front_thrusters_in, 0.05);
   self.var_101B2 = 1;
 }
 
@@ -214,10 +214,10 @@ func_5ECA() {
 
 func_5DC2() {
   scripts\sp\utility::func_65DD("dynamicThrusters");
-  self clearanim( % vh_dropship_thrusters_up, 0.05);
-  self clearanim( % vh_dropship_thrusters_down, 0.05);
-  self clearanim( % vh_dropship_front_thrusters_out, 0.05);
-  self clearanim( % vh_dropship_front_thrusters_in, 0.05);
+  self clearanim(%vh_dropship_thrusters_up, 0.05);
+  self clearanim(%vh_dropship_thrusters_down, 0.05);
+  self clearanim(%vh_dropship_front_thrusters_out, 0.05);
+  self clearanim(%vh_dropship_front_thrusters_in, 0.05);
 }
 
 func_E752(var_0) {

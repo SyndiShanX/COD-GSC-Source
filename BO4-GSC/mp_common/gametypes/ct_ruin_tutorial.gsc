@@ -1421,8 +1421,7 @@ function_356af630() {
     drone thread function_ca1c7fce("earn_the_hellstorm_objective");
     drone waittill(#"death");
     params = {
-      #eattacker: e_player,
-      #weapon: e_player.currentweapon
+      #eattacker: e_player, #weapon: e_player.currentweapon
     };
     drone function_1f212110(params);
     wait 5;
@@ -1704,9 +1703,7 @@ function_26de1390(s_loc) {
 
 function_cd74cce0(params) {
   level notify(#"grapple_failed", {
-    #player: self,
-    #var_57e7c4e: params.targetpos,
-    #str_reason: params.reason
+    #player: self, #var_57e7c4e: params.targetpos, #str_reason: params.reason
   });
 }
 

@@ -17,10 +17,7 @@ maps\_ucav::main( "vehicle_ucav" );
 and these lines in your CSV:
 include,vehicle_ucav
 
-defaultmdl="vehicle_ucav"
-default:"vehicletype" "ucav"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_ucav"default:"vehicletype" "ucav"default:"script_team" "allies"*/
 
 main(model, type) {
   build_template("ucav", model, type);

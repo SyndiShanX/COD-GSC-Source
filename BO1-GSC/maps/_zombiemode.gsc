@@ -95,9 +95,7 @@ main() {
   init_anims();
   if(isDefined(level.custom_ai_type)) {
     for(i = 0; i < level.custom_ai_type.size; i++) {
-      [
-        [level.custom_ai_type[i]]
-      ]();
+      [[level.custom_ai_type[i]]]();
     }
   }
   if(level.mutators["mutator_friendlyFire"]) {
@@ -230,21 +228,7 @@ track_players_ammo_count() {
         players[i].player_ammo_out = 0;
       }
       weap = players[i] getcurrentweapon();
-      if(!isDefined(weap) ||
-        weap == "none" ||
-        isSubStr(weap, "zombie_perk_bottle") ||
-        is_placeable_mine(weap) ||
-        is_equipment(weap) ||
-        weap == "syrette_sp" ||
-        weap == "zombie_knuckle_crack" ||
-        weap == "zombie_bowie_flourish" ||
-        weap == "zombie_sickle_flourish" ||
-        issubstr(weap, "knife_ballistic_") ||
-        (GetSubStr(weap, 0, 3) == "gl_") ||
-        weap == "humangun_zm" ||
-        weap == "humangun_upgraded_zm" ||
-        weap == "equip_gasmask_zm" ||
-        weap == "lower_equip_gasmask_zm") {
+      if(!isDefined(weap) || weap == "none" || isSubStr(weap, "zombie_perk_bottle") || is_placeable_mine(weap) || is_equipment(weap) || weap == "syrette_sp" || weap == "zombie_knuckle_crack" || weap == "zombie_bowie_flourish" || weap == "zombie_sickle_flourish" || issubstr(weap, "knife_ballistic_") || (GetSubStr(weap, 0, 3) == "gl_") || weap == "humangun_zm" || weap == "humangun_upgraded_zm" || weap == "equip_gasmask_zm" || weap == "lower_equip_gasmask_zm") {
         continue;
       }
       if(players[i] GetAmmoCount(weap) > 5) {
@@ -1015,21 +999,7 @@ onPlayerConnect() {
 }
 
 onPlayerConnect_clientDvars() {
-  self SetClientDvars("cg_deadChatWithDead", "1",
-    "cg_deadChatWithTeam", "1",
-    "cg_deadHearTeamLiving", "1",
-    "cg_deadHearAllLiving", "1",
-    "cg_everyoneHearsEveryone", "1",
-    "compass", "0",
-    "hud_showStance", "0",
-    "cg_thirdPerson", "0",
-    "cg_fov", "65",
-    "cg_thirdPersonAngle", "0",
-    "ammoCounterHide", "1",
-    "miniscoreboardhide", "1",
-    "cg_drawSpectatorMessages", "0",
-    "ui_hud_hardcore", "0",
-    "playerPushAmount", "1");
+  self SetClientDvars("cg_deadChatWithDead", "1", "cg_deadChatWithTeam", "1", "cg_deadHearTeamLiving", "1", "cg_deadHearAllLiving", "1", "cg_everyoneHearsEveryone", "1", "compass", "0", "hud_showStance", "0", "cg_thirdPerson", "0", "cg_fov", "65", "cg_thirdPersonAngle", "0", "ammoCounterHide", "1", "miniscoreboardhide", "1", "cg_drawSpectatorMessages", "0", "ui_hud_hardcore", "0", "playerPushAmount", "1");
   self SetDepthOfField(0, 0, 512, 4000, 4, 0);
   self setClientDvar("aim_lockon_pitch_strength", 0.0);
   if(!level.wii) {}
@@ -1062,9 +1032,7 @@ onPlayerSpawned() {
     self init_player_offhand_weapons();
     self enablehealthshield(false);
     self PlayerKnockback(false);
-    self SetClientDvars("cg_thirdPerson", "0",
-      "cg_fov", "65",
-      "cg_thirdPersonAngle", "0");
+    self SetClientDvars("cg_thirdPerson", "0", "cg_fov", "65", "cg_thirdPersonAngle", "0");
     self SetDepthOfField(0, 0, 512, 4000, 4, 0);
     self cameraactivate(false);
     self add_to_spectate_list();
@@ -1485,14 +1453,10 @@ spectator_toggle_3rd_person() {
 
 set_third_person(value) {
   if(value) {
-    self SetClientDvars("cg_thirdPerson", "1",
-      "cg_fov", "40",
-      "cg_thirdPersonAngle", "354");
+    self SetClientDvars("cg_thirdPerson", "1", "cg_fov", "40", "cg_thirdPersonAngle", "354");
     self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
   } else {
-    self SetClientDvars("cg_thirdPerson", "0",
-      "cg_fov", "65",
-      "cg_thirdPersonAngle", "0");
+    self SetClientDvars("cg_thirdPerson", "0", "cg_fov", "65", "cg_thirdPersonAngle", "0");
     self setDepthOfField(0, 0, 512, 4000, 4, 0);
   }
 }
@@ -2018,9 +1982,7 @@ round_spawning() {
           if(level.zones[keys[i]].is_occupied) {
             akeys = GetArrayKeys(level.zones[keys[i]].adjacent_zones);
             for(k = 0; k < akeys.size; k++) {
-              if(level.zones[akeys[k]].is_active &&
-                !level.zones[akeys[k]].is_occupied &&
-                level.zones[akeys[k]].dog_locations.size > 0) {
+              if(level.zones[akeys[k]].is_active && !level.zones[akeys[k]].is_occupied && level.zones[akeys[k]].dog_locations.size > 0) {
                 maps\_zombiemode_ai_dogs::special_dog_spawn(undefined, 1);
                 level.zombie_total--;
                 wait_network_frame();
@@ -2064,11 +2026,8 @@ zombie_speed_up() {
         break;
       } else {
         var = randomintrange(1, 4);
-        zombies[0] set_run_anim("sprint" +
-          var);
-        zombies[0].run_combatanim = level.scr_anim[zombies[0].animname]["sprint" +
-          var
-        ];
+        zombies[0] set_run_anim("sprint" + var);
+        zombies[0].run_combatanim = level.scr_anim[zombies[0].animname]["sprint" + var];
       }
     }
     wait(0.5);
@@ -2125,8 +2084,7 @@ round_start() {
   for(i = 0; i < players.size; i++) {
     players[i] giveweapon(players[i] get_player_lethal_grenade());
     players[i] setweaponammoclip(players[i] get_player_lethal_grenade(), 0);
-    players[i] SetClientDvars("ammoCounterHide", "0",
-      "miniscoreboardhide", "0");
+    players[i] SetClientDvars("ammoCounterHide", "0", "miniscoreboardhide", "0");
   }
   if(getDvarInt(#"scr_writeconfigstrings") == 1) {
     wait(5);
@@ -3001,8 +2959,7 @@ actor_killed_override(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
   }
   if(attacker.classname == "script_vehicle" && isDefined(attacker.owner))
     attacker = attacker.owner;
-  if(IsPlayer(level.monkey_bolt_holder) && sMeansOfDeath == "MOD_GRENADE_SPLASH" &&
-    (sWeapon == "crossbow_explosive_upgraded_zm" || sWeapon == "explosive_bolt_upgraded_zm")) {
+  if(IsPlayer(level.monkey_bolt_holder) && sMeansOfDeath == "MOD_GRENADE_SPLASH" && (sWeapon == "crossbow_explosive_upgraded_zm" || sWeapon == "explosive_bolt_upgraded_zm")) {
     level._bolt_on_back = level._bolt_on_back + 1;
   }
   if(isDefined(attacker) && isplayer(attacker)) {
@@ -3118,8 +3075,7 @@ end_game() {
   }
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] SetClientDvars("ammoCounterHide", "1",
-      "miniscoreboardhide", "1");
+    players[i] SetClientDvars("ammoCounterHide", "1", "miniscoreboardhide", "1");
   }
   destroy_chalk_hud();
   UploadStats();
@@ -3586,8 +3542,7 @@ intermission() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     setclientsysstate("levelNotify", "zi", players[i]);
-    players[i] SetClientDvars("cg_thirdPerson", "0",
-      "cg_fov", "65");
+    players[i] SetClientDvars("cg_thirdPerson", "0", "cg_fov", "65");
     players[i].health = 100;
     players[i] thread[[level.custom_intermission]]();
   }
@@ -3764,8 +3719,7 @@ crawler_round_tracker() {
       }
     } else if(flag("crawler_round")) {
       crawler_round_stop();
-      if(isDefined(level.next_dog_round) &&
-        level.next_dog_round == level.round_number) {
+      if(isDefined(level.next_dog_round) && level.next_dog_round == level.round_number) {
         level.round_spawn_func = sav_func;
       }
       level.crawler_round_count += 1;

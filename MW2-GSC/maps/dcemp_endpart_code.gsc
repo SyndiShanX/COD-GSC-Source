@@ -14,8 +14,7 @@ whitehouse_spotlight() {
   level endon("kill_spotlight");
   spotlight_origin = getstruct("whitehouse_spotlight", "targetname");
 
-  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight"); // "heli_spotlight"
-  spotlight.angles = spotlight_origin.angles;
+  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight"); // "heli_spotlight"spotlight.angles = spotlight_origin.angles;
   spotlight setModel("cod3mg42");
   spotlight SetTurretTeam("axis");
   spotlight setmode("manual");

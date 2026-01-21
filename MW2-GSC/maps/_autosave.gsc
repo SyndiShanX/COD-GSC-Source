@@ -103,9 +103,7 @@ autoSaveNameThink(trigger) {
   }
   trigger waittill("trigger");
   if(isDefined(level.customautosavecheck))
-    if(![
-        [level.customautosavecheck]
-      ]())
+    if(![[level.customautosavecheck]]())
       return;
   name = trigger.script_autosavename;
   maps\_utility::autosave_by_name(name);
@@ -338,9 +336,7 @@ tryAutoSave(filename, description, image, timeout, doStealthChecks, suppress_pri
 
 extra_autosave_checks_failed() {
   foreach(func in level._extra_autosave_checks) {
-    if(![
-        [func["func"]]
-      ]()) {
+    if(![[func["func"]]]()) {
       AutoSavePrint("autosave failed: " + func["msg"]);
       return true;
     }
@@ -370,9 +366,7 @@ autoSaveCheck(doPickyChecks, doStealthChecks) {
     doStealthChecks = false;
 
   if(doStealthChecks) {
-    if(![
-        [level.global_callbacks["_autosave_stealthcheck"]]
-      ]())
+    if(![[level.global_callbacks["_autosave_stealthcheck"]]]())
       return false;
   }
 

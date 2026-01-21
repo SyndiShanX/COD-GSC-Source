@@ -238,11 +238,7 @@ alienPlayerPainBreathingSound() {
 
 VERY_HURT_HEALTH = 0.55;
 shouldPlayPainBreathingSound() {
-  if(maps\mp\gametypes\aliens::isHealthRegenDisabled() ||
-    self isUsingRemote() ||
-    (isDefined(self.breathingStopTime) && gettime() < self.breathingStopTime) ||
-    self.health > self.maxhealth * self.healthRegenMaxPercent * VERY_HURT_HEALTH
-  )
+  if(maps\mp\gametypes\aliens::isHealthRegenDisabled() || self isUsingRemote() || (isDefined(self.breathingStopTime) && gettime() < self.breathingStopTime) || self.health > self.maxhealth * self.healthRegenMaxPercent * VERY_HURT_HEALTH)
     return false;
   else
     return true;
@@ -299,9 +295,7 @@ playVOForBombDetonate(hive) {
   }
 
   if(isDefined(level.should_play_next_hive_vo_func)) {
-    if(![
-        [level.should_play_next_hive_vo_func]
-      ]())
+    if(![[level.should_play_next_hive_vo_func]]())
       return;
   }
 

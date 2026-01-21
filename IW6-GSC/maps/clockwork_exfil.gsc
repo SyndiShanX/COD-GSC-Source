@@ -1826,10 +1826,10 @@ dog_bark() {
   var_0 = "anml_dog_bark";
 
   while(!common_scripts\utility::flag("spawn_jeeps")) {
-    self setanim( % iw6_dog_attackidle_bark_add, 1, 0.1, 1);
+    self setanim(%iw6_dog_attackidle_bark_add, 1, 0.1, 1);
     thread maps\_utility::play_sound_on_entity(var_0);
     wait(randomfloatrange(0.5, 1));
-    self clearanim( % iw6_dog_attackidle_bark_add, 0.1);
+    self clearanim(%iw6_dog_attackidle_bark_add, 0.1);
   }
 }
 

@@ -605,9 +605,7 @@ process_kill_rewards(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_6)) {
     scripts\cp\cp_persistence::record_player_kills(var_3, var_2, var_4, var_6);
     if(isDefined(level.loot_func) && isDefined(var_5)) {
-      [
-        [level.loot_func]
-      ](var_5, self.origin, var_0);
+      [[level.loot_func]](var_5, self.origin, var_0);
     }
   }
 }

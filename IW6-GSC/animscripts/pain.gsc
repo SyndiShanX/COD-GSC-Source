@@ -8,55 +8,55 @@
 init_animset_pain() {
   var_0 = [];
   var_0["damage_shield_crouch"] = % exposed_crouch_extendedpaina;
-  var_0["damage_shield_pain_array"] = [ % stand_exposed_extendedpain_chest, % stand_exposed_extendedpain_head_2_crouch, % stand_exposed_extendedpain_hip_2_crouch];
+  var_0["damage_shield_pain_array"] = [ % stand_exposed_extendedpain_chest, %stand_exposed_extendedpain_head_2_crouch, %stand_exposed_extendedpain_hip_2_crouch];
   var_0["back"] = % back_pain;
-  var_0["run_long"] = [ % run_pain_leg, % run_pain_shoulder, % run_pain_stomach_stumble, % run_pain_head, % run_pain_fallonknee_02, % run_pain_stomach, % run_pain_stumble, % run_pain_stomach_fast, % run_pain_leg_fast, % run_pain_fall];
-  var_0["run_medium"] = [ % run_pain_fallonknee_02, % run_pain_stomach, % run_pain_stumble, % run_pain_stomach_fast, % run_pain_leg_fast, % run_pain_fall];
-  var_0["run_short"] = [ % run_pain_fallonknee, % run_pain_fallonknee_03];
-  var_0["pistol_torso_upper"] = [ % pistol_stand_pain_chest, % pistol_stand_pain_rightshoulder, % pistol_stand_pain_leftshoulder];
-  var_0["pistol_torso_lower"] = [ % pistol_stand_pain_chest, % pistol_stand_pain_groin];
-  var_0["pistol_neck"] = [ % pistol_stand_pain_chest, % pistol_stand_pain_head];
+  var_0["run_long"] = [ % run_pain_leg, %run_pain_shoulder, %run_pain_stomach_stumble, %run_pain_head, %run_pain_fallonknee_02, %run_pain_stomach, %run_pain_stumble, %run_pain_stomach_fast, %run_pain_leg_fast, %run_pain_fall];
+  var_0["run_medium"] = [ % run_pain_fallonknee_02, %run_pain_stomach, %run_pain_stumble, %run_pain_stomach_fast, %run_pain_leg_fast, %run_pain_fall];
+  var_0["run_short"] = [ % run_pain_fallonknee, %run_pain_fallonknee_03];
+  var_0["pistol_torso_upper"] = [ % pistol_stand_pain_chest, %pistol_stand_pain_rightshoulder, %pistol_stand_pain_leftshoulder];
+  var_0["pistol_torso_lower"] = [ % pistol_stand_pain_chest, %pistol_stand_pain_groin];
+  var_0["pistol_neck"] = [ % pistol_stand_pain_chest, %pistol_stand_pain_head];
   var_0["pistol_head"] = [ % pistol_stand_pain_head];
   var_0["pistol_leg"] = [ % pistol_stand_pain_groin];
-  var_0["pistol_left_arm_upper"] = [ % pistol_stand_pain_chest, % pistol_stand_pain_leftshoulder];
-  var_0["pistol_right_arm_upper"] = [ % pistol_stand_pain_chest, % pistol_stand_pain_rightshoulder];
+  var_0["pistol_left_arm_upper"] = [ % pistol_stand_pain_chest, %pistol_stand_pain_leftshoulder];
+  var_0["pistol_right_arm_upper"] = [ % pistol_stand_pain_chest, %pistol_stand_pain_rightshoulder];
   var_0["pistol_left_arm_lower"] = [ % pistol_stand_pain_leftshoulder];
   var_0["pistol_right_arm_lower"] = [ % pistol_stand_pain_rightshoulder];
   var_0["pistol_default1"] = [ % pistol_stand_pain_chest];
   var_0["pistol_default2"] = [ % pistol_stand_pain_groin];
   var_0["torso_pistol"] = % pistol_stand_pain_chest;
-  var_0["torso_upper"] = [ % exposed_pain_face, % stand_exposed_extendedpain_neck];
-  var_0["torso_upper_extended"] = [ % stand_exposed_extendedpain_gut, % stand_exposed_extendedpain_stomach, % stand_exposed_extendedpain_head_2_crouch];
-  var_0["torso_lower"] = [ % exposed_pain_groin, % stand_exposed_extendedpain_hip];
-  var_0["torso_lower_extended"] = [ % stand_exposed_extendedpain_gut, % stand_exposed_extendedpain_stomach, % stand_exposed_extendedpain_hip_2_crouch, % stand_exposed_extendedpain_feet_2_crouch, % stand_exposed_extendedpain_stomach];
-  var_0["head"] = [ % exposed_pain_face, % stand_exposed_extendedpain_neck];
+  var_0["torso_upper"] = [ % exposed_pain_face, %stand_exposed_extendedpain_neck];
+  var_0["torso_upper_extended"] = [ % stand_exposed_extendedpain_gut, %stand_exposed_extendedpain_stomach, %stand_exposed_extendedpain_head_2_crouch];
+  var_0["torso_lower"] = [ % exposed_pain_groin, %stand_exposed_extendedpain_hip];
+  var_0["torso_lower_extended"] = [ % stand_exposed_extendedpain_gut, %stand_exposed_extendedpain_stomach, %stand_exposed_extendedpain_hip_2_crouch, %stand_exposed_extendedpain_feet_2_crouch, %stand_exposed_extendedpain_stomach];
+  var_0["head"] = [ % exposed_pain_face, %stand_exposed_extendedpain_neck];
   var_0["head_extended"] = [ % stand_exposed_extendedpain_head_2_crouch];
   var_0["right_arm"] = [ % exposed_pain_right_arm];
   var_0["right_arm_extended"] = [];
   var_0["left_arm"] = [ % stand_exposed_extendedpain_shoulderswing];
   var_0["left_arm_extended"] = [ % stand_exposed_extendedpain_shoulder_2_crouch];
-  var_0["leg"] = [ % exposed_pain_groin, % stand_exposed_extendedpain_hip];
-  var_0["leg_extended"] = [ % stand_exposed_extendedpain_hip_2_crouch, % stand_exposed_extendedpain_feet_2_crouch, % stand_exposed_extendedpain_stomach];
+  var_0["leg"] = [ % exposed_pain_groin, %stand_exposed_extendedpain_hip];
+  var_0["leg_extended"] = [ % stand_exposed_extendedpain_hip_2_crouch, %stand_exposed_extendedpain_feet_2_crouch, %stand_exposed_extendedpain_stomach];
   var_0["foot"] = [ % stand_exposed_extendedpain_thigh];
   var_0["foot_extended"] = [ % stand_exposed_extendedpain_feet_2_crouch];
-  var_0["default_long"] = [ % exposed_pain_2_crouch, % stand_extendedpainb];
-  var_0["default_short"] = [ % exposed_pain_right_arm, % exposed_pain_face, % exposed_pain_groin];
-  var_0["default_extended"] = [ % stand_extendedpainc, % stand_exposed_extendedpain_chest];
+  var_0["default_long"] = [ % exposed_pain_2_crouch, %stand_extendedpainb];
+  var_0["default_short"] = [ % exposed_pain_right_arm, %exposed_pain_face, %exposed_pain_groin];
+  var_0["default_extended"] = [ % stand_extendedpainc, %stand_exposed_extendedpain_chest];
   var_0["crouch_longdeath"] = [ % exposed_crouch_extendedpaina];
-  var_0["crouch_default"] = [ % exposed_crouch_pain_chest, % exposed_crouch_pain_headsnap, % exposed_crouch_pain_flinch];
+  var_0["crouch_default"] = [ % exposed_crouch_pain_chest, %exposed_crouch_pain_headsnap, %exposed_crouch_pain_flinch];
   var_0["crouch_left_arm"] = [ % exposed_crouch_pain_left_arm];
   var_0["crouch_right_arm"] = [ % exposed_crouch_pain_right_arm];
-  var_0["prone"] = [ % prone_reaction_a, % prone_reaction_b];
-  var_0["cover_left_stand"] = [ % corner_standl_painb, % corner_standl_painc, % corner_standl_paind, % corner_standl_paine];
+  var_0["prone"] = [ % prone_reaction_a, %prone_reaction_b];
+  var_0["cover_left_stand"] = [ % corner_standl_painb, %corner_standl_painc, %corner_standl_paind, %corner_standl_paine];
   var_0["cover_left_crouch"] = [ % cornercrl_painb];
-  var_0["cover_right_stand"] = [ % corner_standr_pain, % corner_standr_painb, % corner_standr_painc];
-  var_0["cover_right_crouch"] = [ % cornercrr_alert_paina, % cornercrr_alert_painc];
+  var_0["cover_right_stand"] = [ % corner_standr_pain, %corner_standr_painb, %corner_standr_painc];
+  var_0["cover_right_crouch"] = [ % cornercrr_alert_paina, %cornercrr_alert_painc];
   var_0["cover_right_stand_B"] = % corner_standr_pain_b_2_alert;
   var_0["cover_left_stand_A"] = % corner_standl_pain_a_2_alert;
   var_0["cover_left_stand_B"] = % corner_standl_pain_b_2_alert;
-  var_0["cover_crouch"] = [ % covercrouch_pain_right, % covercrouch_pain_front, % covercrouch_pain_left_3];
-  var_0["cover_stand"] = [ % coverstand_pain_groin, % coverstand_pain_leg];
-  var_0["cover_stand_aim"] = [ % coverstand_pain_aim_2_hide_01, % coverstand_pain_aim_2_hide_02];
+  var_0["cover_crouch"] = [ % covercrouch_pain_right, %covercrouch_pain_front, %covercrouch_pain_left_3];
+  var_0["cover_stand"] = [ % coverstand_pain_groin, %coverstand_pain_leg];
+  var_0["cover_stand_aim"] = [ % coverstand_pain_aim_2_hide_01, %coverstand_pain_aim_2_hide_02];
   var_0["cover_crouch_aim"] = [ % covercrouch_pain_aim_2_hide_01];
   var_0["saw_stand"] = % saw_gunner_pain;
   var_0["saw_crouch"] = % saw_gunner_lowwall_pain_02;
@@ -64,39 +64,34 @@ init_animset_pain() {
   anim.archetypes["soldier"]["pain"] = var_0;
   var_0 = [];
   var_0["prone_transition"] = [ % dying_crawl_2_back];
-  var_0["stand_transition"] = [ % dying_stand_2_back_v1, % dying_stand_2_back_v2];
+  var_0["stand_transition"] = [ % dying_stand_2_back_v1, %dying_stand_2_back_v2];
   var_0["crouch_transition"] = [ % dying_crouch_2_back];
   var_0["default_transition"] = % dying_crawl_2_back;
-  var_0["stand_2_crawl"] = [ % dying_stand_2_crawl_v1, % dying_stand_2_crawl_v2, % dying_stand_2_crawl_v3];
+  var_0["stand_2_crawl"] = [ % dying_stand_2_crawl_v1, %dying_stand_2_crawl_v2, %dying_stand_2_crawl_v3];
   var_0["crouch_2_crawl"] = [ % dying_crouch_2_crawl];
   var_0["crawl"] = % dying_crawl;
-  var_0["death"] = [ % dying_crawl_death_v1, % dying_crawl_death_v2];
+  var_0["death"] = [ % dying_crawl_death_v1, %dying_crawl_death_v2];
   var_0["back_idle"] = % dying_back_idle;
-  var_0["back_idle_twitch"] = [ % dying_back_twitch_a, % dying_back_twitch_b];
+  var_0["back_idle_twitch"] = [ % dying_back_twitch_a, %dying_back_twitch_b];
   var_0["back_crawl"] = % dying_crawl_back;
   var_0["back_fire"] = % dying_back_fire;
-  var_0["back_death"] = [ % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3];
+  var_0["back_death"] = [ % dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3];
   var_0["aim_4"] = % dying_back_aim_4;
   var_0["aim_6"] = % dying_back_aim_6;
   var_0["longdeath"] = [];
-  var_0["longdeath"]["gut_b"] = [[ % stand_2_longdeath_wander_gut, % longdeath_wander_gut, % longdeath_wander_gut_collapse, % longdeath_wander_gut_death],
-    [ % stand_2_longdeath_gut_wounded_b, % longdeath_gut_wounded_b_walk, % longdeath_gut_wounded_b_collapse],
-    [ % stand_2_longdeath_gut_b, % longdeath_gut_b_walk, % longdeath_gut_b_impact]];
-  var_0["longdeath"]["gut_l"] = [[ % stand_2_longdeath_gut_l, % longdeath_gut_l_walk, % longdeath_gut_l_impact]];
-  var_0["longdeath"]["gut_r"] = [[ % stand_2_longdeath_gut_r, % longdeath_gut_r_walk, % longdeath_gut_r_impact]];
-  var_0["longdeath"]["leg_b"] = [[ % stand_2_longdeath_wander_leg_1, % longdeath_wander_leg_1, % longdeath_wander_leg_collapse_1, % longdeath_wander_leg_death],
-    [ % stand_2_longdeath_wander_leg_2, % longdeath_wander_leg_2, % longdeath_wander_leg_collapse_2, % longdeath_wander_leg_death],
-    [ % stand_2_longdeath_leg_wounded_b_1, % longdeath_leg_wounded_b_walk_1, % longdeath_leg_wounded_b_collapse_1],
-    [ % stand_2_longdeath_leg_wounded_b_2, % longdeath_leg_wounded_b_walk_2, % longdeath_leg_wounded_b_collapse_2]];
+  var_0["longdeath"]["gut_b"] = [[ % stand_2_longdeath_wander_gut, %longdeath_wander_gut, %longdeath_wander_gut_collapse, %longdeath_wander_gut_death], [ % stand_2_longdeath_gut_wounded_b, %longdeath_gut_wounded_b_walk, %longdeath_gut_wounded_b_collapse], [ % stand_2_longdeath_gut_b, %longdeath_gut_b_walk, %longdeath_gut_b_impact]];
+  var_0["longdeath"]["gut_l"] = [[ % stand_2_longdeath_gut_l, %longdeath_gut_l_walk, %longdeath_gut_l_impact]];
+  var_0["longdeath"]["gut_r"] = [[ % stand_2_longdeath_gut_r, %longdeath_gut_r_walk, %longdeath_gut_r_impact]];
+  var_0["longdeath"]["leg_b"] = [[ % stand_2_longdeath_wander_leg_1, %longdeath_wander_leg_1, %longdeath_wander_leg_collapse_1, %longdeath_wander_leg_death], [ % stand_2_longdeath_wander_leg_2, %longdeath_wander_leg_2, %longdeath_wander_leg_collapse_2, %longdeath_wander_leg_death], [ % stand_2_longdeath_leg_wounded_b_1, %longdeath_leg_wounded_b_walk_1, %longdeath_leg_wounded_b_collapse_1], [ % stand_2_longdeath_leg_wounded_b_2, %longdeath_leg_wounded_b_walk_2, %longdeath_leg_wounded_b_collapse_2]];
   anim.archetypes["soldier"]["crawl_death"] = var_0;
   var_0 = [];
   var_0["pain"] = % corner_standr_death_grenade_hit;
   var_0["idle"] = % corner_standr_death_grenade_idle;
   var_0["release"] = % corner_standr_death_grenade_slump;
-  var_0["premature_death"] = [ % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3, % dying_back_death_v4];
+  var_0["premature_death"] = [ % dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3, %dying_back_death_v4];
   anim.archetypes["soldier"]["corner_grenade_death"] = var_0;
   var_0 = [];
-  var_0["default"] = [ % pain_add_standing_belly, % pain_add_standing_left_arm, % pain_add_standing_right_arm];
+  var_0["default"] = [ % pain_add_standing_belly, %pain_add_standing_left_arm, %pain_add_standing_right_arm];
   var_0["left_arm"] = % pain_add_standing_left_arm;
   var_0["right_arm"] = % pain_add_standing_right_arm;
   var_0["left_leg"] = % pain_add_standing_left_leg;
@@ -183,7 +178,7 @@ end_script() {
     self.allowpain = 1;
   }
 
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
   self.facialanimidx = undefined;
 }
 
@@ -409,10 +404,10 @@ getpronepainanim() {
 
 playpainanim(var_0) {
   var_1 = 1;
-  pain_setflaggedanimknoballrestart("painanim", var_0, % body, 1, 0.1, var_1);
+  pain_setflaggedanimknoballrestart("painanim", var_0, %body, 1, 0.1, var_1);
 
   if(self.a.pose == "prone")
-    self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self updateprone(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
 
   if(animhasnotetrack(var_0, "start_aim")) {
     thread notifystartaim("painanim");
@@ -677,7 +672,7 @@ crawlingpistol() {
   self setlookatentity();
   thread paindeathnotify();
   level notify("ai_crawling", self);
-  self setanimknoball( % dying, % body, 1, 0.1, 1);
+  self setanimknoball(%dying, %body, 1, 0.1, 1);
 
   if(isDefined(self.a.stumblingpainanimseq)) {
     stumblingpain();
@@ -747,8 +742,8 @@ crawlingpistol() {
   }
 
   self notify("end_dying_crawl_back_aim");
-  self clearanim( % dying_back_aim_4_wrapper, 0.3);
-  self clearanim( % dying_back_aim_6_wrapper, 0.3);
+  self clearanim(%dying_back_aim_4_wrapper, 0.3);
+  self clearanim(%dying_back_aim_6_wrapper, 0.3);
   var_5 = animscripts\utility::lookupanim("crawl_death", "back_death");
   self.deathanim = var_5[randomint(var_5.size)];
   killwrapper();
@@ -983,15 +978,15 @@ dyingcrawlbackaim() {
         var_1 = -45.0;
 
       var_3 = var_1 / -45.0;
-      self setanim( % dying_back_aim_4_wrapper, var_3, 0.05);
-      self setanim( % dying_back_aim_6_wrapper, 0, 0.05);
+      self setanim(%dying_back_aim_4_wrapper, var_3, 0.05);
+      self setanim(%dying_back_aim_6_wrapper, 0, 0.05);
     } else {
       if(var_1 > 45.0)
         var_1 = 45.0;
 
       var_3 = var_1 / 45.0;
-      self setanim( % dying_back_aim_6_wrapper, var_3, 0.05);
-      self setanim( % dying_back_aim_4_wrapper, 0, 0.05);
+      self setanim(%dying_back_aim_6_wrapper, var_3, 0.05);
+      self setanim(%dying_back_aim_4_wrapper, 0, 0.05);
     }
 
     var_0 = var_1;
@@ -1135,7 +1130,7 @@ cornerrightgrenadedeath() {
   thread preventpainforashorttime("corner_grenade");
   thread maps\_utility::set_battlechatter(0);
   self.threatbias = -1000;
-  pain_setflaggedanimknoballrestart("corner_grenade_pain", animscripts\utility::lookupanim("corner_grenade_death", "pain"), % body, 1, 0.1);
+  pain_setflaggedanimknoballrestart("corner_grenade_pain", animscripts\utility::lookupanim("corner_grenade_death", "pain"), %body, 1, 0.1);
   self waittillmatch("corner_grenade_pain", "dropgun");
   animscripts\shared::dropallaiweapons();
   self waittillmatch("corner_grenade_pain", "anim_pose = \"back\"");
@@ -1146,7 +1141,7 @@ cornerrightgrenadedeath() {
   self.deathfunction = ::prematurecornergrenadedeath;
   self waittillmatch("corner_grenade_pain", "end");
   var_1 = gettime() + randomintrange(25000, 60000);
-  pain_setflaggedanimknoballrestart("corner_grenade_idle", animscripts\utility::lookupanim("corner_grenade_death", "pain"), % body, 1, 0.2);
+  pain_setflaggedanimknoballrestart("corner_grenade_idle", animscripts\utility::lookupanim("corner_grenade_death", "pain"), %body, 1, 0.2);
   thread watchenemyvelocity();
 
   while(!enemyisapproaching()) {
@@ -1158,7 +1153,7 @@ cornerrightgrenadedeath() {
   }
 
   var_2 = animscripts\utility::lookupanim("corner_grenade_death", "release");
-  pain_setflaggedanimknoballrestart("corner_grenade_release", var_2, % body, 1, 0.2);
+  pain_setflaggedanimknoballrestart("corner_grenade_release", var_2, %body, 1, 0.2);
   var_3 = getnotetracktimes(var_2, "grenade_drop");
   var_4 = var_3[0] * getanimlength(var_2);
   wait(var_4 - 1.0);
@@ -1239,7 +1234,7 @@ prematurecornergrenadedeath() {
   var_0 = animscripts\utility::lookupanim("corner_grenade_death", "premature_death");
   var_1 = var_0[randomint(var_0.size)];
   animscripts\death::playdeathsound();
-  pain_setflaggedanimknoballrestart("corner_grenade_die", var_1, % body, 1, 0.2);
+  pain_setflaggedanimknoballrestart("corner_grenade_die", var_1, %body, 1, 0.2);
   var_2 = animscripts\combat_utility::getgrenadedropvelocity();
   cornerdeathreleasegrenade(var_2, 3.0);
   var_3 = getweaponmodel("fraggrenade");
@@ -1309,11 +1304,11 @@ additive_pain(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_7 = var_8[randomint(var_8.size)];
   }
 
-  self setanimlimited( % add_pain, 1, 0.1, 1);
+  self setanimlimited(%add_pain, 1, 0.1, 1);
   self setanimlimited(var_7, 1, 0, 1);
   wait 0.4;
   self clearanim(var_7, 0.2);
-  self clearanim( % add_pain, 0.2);
+  self clearanim(%add_pain, 0.2);
   self.doingadditivepain = undefined;
 }
 

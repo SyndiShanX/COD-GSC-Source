@@ -241,17 +241,11 @@ function_5829abe3(attacker, weapon, var_651b6171) {
   attacker challenges::function_24db0c33(weapon, var_651b6171);
 
   if(isDefined(level.iskillstreakweapon)) {
-    if([
-        [level.iskillstreakweapon]
-      ](weapon) || isDefined(weapon.statname) && [
-        [level.iskillstreakweapon]
-      ](getweapon(weapon.statname))) {
+    if([[level.iskillstreakweapon]](weapon) || isDefined(weapon.statname) && [[level.iskillstreakweapon]](getweapon(weapon.statname))) {
       weaponiskillstreak = 1;
     }
 
-    if([
-        [level.iskillstreakweapon]
-      ](var_651b6171)) {
+    if([[level.iskillstreakweapon]](var_651b6171)) {
       destroyedkillstreak = 1;
     }
   }
@@ -280,9 +274,7 @@ function_a890cac2(attacker, owningteam, weapon, scoreevents, objectiveobj, var_1
 
   if(level.teambased && isDefined(owningteam) && attacker.team == owningteam) {
     if(isDefined(level.specweapons) && isDefined(level.specweapons[weapon.name]) && isDefined(level.specweapons[weapon.name].var_826b85e7)) {
-      [
-        [level.specweapons[weapon.name].var_826b85e7]
-      ](attacker, self, weapon, objectiveobj);
+      [[level.specweapons[weapon.name].var_826b85e7]](attacker, self, weapon, objectiveobj);
     }
 
     if(isDefined(scoreevents) && isDefined(scoreevents.var_867de225)) {
@@ -495,11 +487,7 @@ function_f7f7b14e(data) {
   }
 
   if(isDefined(weapon) && isDefined(level.iskillstreakweapon)) {
-    if([
-        [level.iskillstreakweapon]
-      ](weapon) || isDefined(weapon.statname) && [
-        [level.iskillstreakweapon]
-      ](getweapon(weapon.statname))) {
+    if([[level.iskillstreakweapon]](weapon) || isDefined(weapon.statname) && [[level.iskillstreakweapon]](getweapon(weapon.statname))) {
       weaponiskillstreak = 1;
     }
   }
@@ -656,9 +644,7 @@ updatemultikill(inflictor, meansofdeath, victim, attacker, scoreevents, weapon, 
   }
 
   if(isDefined(level.specweapons) && isDefined(level.specweapons[var_f801f37e.name]) && isDefined(level.specweapons[var_f801f37e.name].kill_callback)) {
-    if(![
-        [level.specweapons[var_f801f37e.name].kill_callback]
-      ](self, victim, weapon, attackerweapon, meansofdeath)) {
+    if(![[level.specweapons[var_f801f37e.name].kill_callback]](self, victim, weapon, attackerweapon, meansofdeath)) {
       return;
     }
   }

@@ -33,8 +33,7 @@ main() {
   }
   switch (level.script) {
     case "roadkill":
-      // "Team Player"
-      PreCacheString(&"ROADKILL_LINE_1");
+      // "Team Player"PreCacheString(&"ROADKILL_LINE_1");
       // Day 1 - 16:08:[{FAKE_INTRO_SECONDS:32}]
       PreCacheString(&"ROADKILL_LINE_2");
       // PFC Joseph Allen
@@ -46,8 +45,7 @@ main() {
       introscreen_delay();
       break;
     case "airport":
-      // "No Russian"
-      PreCacheString(&"AIRPORT_LINE1");
+      // "No Russian"PreCacheString(&"AIRPORT_LINE1");
       // Day 3, 08:40:[{FAKE_INTRO_SECONDS:32}]
       PreCacheString(&"AIRPORT_LINE2");
       // PFC Joseph Allen a.k.a. Alexei Borodin
@@ -59,24 +57,21 @@ main() {
       introscreen_delay();
       break;
     case "invasion":
-      // "Wolverines!"
-      PreCacheString(&"INVASION_LINE1");
+      // "Wolverines!"PreCacheString(&"INVASION_LINE1");
       // Day 4 - 17:45:[{FAKE_INTRO_SECONDS:32}]
       PreCacheString(&"INVASION_LINE2");
       // Pvt. James Ramirez
       PreCacheString(&"INVASION_LINE3");
       // 1st Bn., 75th Ranger Regiment
       PreCacheString(&"INVASION_LINE4");
-      // Wolverines!""
-      // Day 4 - 17:45:[{FAKE_INTRO_SECONDS:32}]
+      // Wolverines!""// Day 4 - 17:45:[{FAKE_INTRO_SECONDS:32}]
       // Pvt. James Ramirez
       // 1st Bn., 75th Ranger Regiment
       // Northeastern Virginia, U.S.A.
       //introscreen_delay(&"INVASION_LINE1", &"INVASION_LINE2", &"INVASION_LINE3", &"INVASION_LINE4", 2, 2, .5);
       break;
     case "oilrig":
-      // "The Only Easy Day...Was Yesterday"
-      PreCacheString(&"OILRIG_INTROSCREEN_LINE_1");
+      // "The Only Easy Day...Was Yesterday"PreCacheString(&"OILRIG_INTROSCREEN_LINE_1");
       // Day 5 - 05:47:[{FAKE_INTRO_SECONDS:12}]
       PreCacheString(&"OILRIG_INTROSCREEN_LINE_2");
       // Sgt. Gary 'Roach' Sanderson
@@ -88,8 +83,7 @@ main() {
       introscreen_delay();
       break;
     case "gulag":
-      // "The Gulag"
-      PreCacheString(&"GULAG_INTROSCREEN_1");
+      // "The Gulag"PreCacheString(&"GULAG_INTROSCREEN_1");
       // Day 5 - 07:42:[{FAKE_INTRO_SECONDS:17}]
       PreCacheString(&"GULAG_INTROSCREEN_2");
       // Sgt. Gary 'Roach' Sanderson
@@ -101,8 +95,7 @@ main() {
       introscreen_delay();
       break;
     case "dcburning":
-      // "Of Their Own Accord"
-      PreCacheString(&"DCBURNING_INTROSCREEN_1");
+      // "Of Their Own Accord"PreCacheString(&"DCBURNING_INTROSCREEN_1");
       // Day 5 - 18:34:[{FAKE_INTRO_SECONDS:33}]
       PreCacheString(&"DCBURNING_INTROSCREEN_2");
       // Pvt. James Ramirez
@@ -114,8 +107,7 @@ main() {
       introscreen_delay();
       break;
     case "trainer":
-      // "S.S.D.D."
-      PreCacheString(&"TRAINER_INTROSCREEN_LINE_1");
+      // "S.S.D.D."PreCacheString(&"TRAINER_INTROSCREEN_LINE_1");
       //Day 1 - 15:30:[{FAKE_INTRO_SECONDS:25}]
       PreCacheString(&"TRAINER_INTROSCREEN_LINE_2");
       // PFC Joseph Allen
@@ -127,8 +119,7 @@ main() {
       introscreen_delay();
       break;
     case "dcemp":
-      // "Second Sun"
-      PreCacheString(&"DCEMP_INTROSCREEN_1");
+      // "Second Sun"PreCacheString(&"DCEMP_INTROSCREEN_1");
       // Day 5 - 18:57:[{FAKE_INTRO_SECONDS:17}]
       PreCacheString(&"DCEMP_INTROSCREEN_2");
       // Pvt. James Ramirez
@@ -170,8 +161,7 @@ main() {
       introscreen_delay(&"KILLHOUSE_INTROSCREEN_LINE_1", &"KILLHOUSE_INTROSCREEN_LINE_3", &"KILLHOUSE_INTROSCREEN_LINE_4", &"KILLHOUSE_INTROSCREEN_LINE_5");
       break;
     case "favela":
-      // "Takedown"
-      PreCacheString(&"FAVELA_INTROSCREEN_LINE_1");
+      // "Takedown"PreCacheString(&"FAVELA_INTROSCREEN_LINE_1");
       // Day 4 - 15:08:[{FAKE_INTRO_SECONDS:16}]
       PreCacheString(&"FAVELA_INTROSCREEN_LINE_2");
       // Sgt. Gary 'Roach' Sanderson
@@ -209,12 +199,10 @@ main() {
       introscreen_delay();
       break;
     case "estate":
-      // "Loose Ends"
-      PreCacheString(&"ESTATE_INTROSCREEN_LINE_1");
+      // "Loose Ends"PreCacheString(&"ESTATE_INTROSCREEN_LINE_1");
       // Day 6 - [{FAKE_INTRO_TIME:15:36:07}]
       PreCacheString(&"ESTATE_INTROSCREEN_LINE_2");
-      // Sgt. Gary Roach" Sanderson"
-      PreCacheString(&"ESTATE_INTROSCREEN_LINE_3");
+      // Sgt. Gary Roach" Sanderson"PreCacheString(&"ESTATE_INTROSCREEN_LINE_3");
       // Task Force 141
       PreCacheString(&"ESTATE_INTROSCREEN_LINE_4");
       // Georgian-Russian Border
@@ -222,8 +210,7 @@ main() {
       introscreen_delay();
       break;
     case "boneyard":
-      // "The Enemy of My Enemy"
-      PreCacheString(&"BONEYARD_INTROSCREEN_LINE_1");
+      // "The Enemy of My Enemy"PreCacheString(&"BONEYARD_INTROSCREEN_LINE_1");
       // Day 6 - [{FAKE_INTRO_TIME:16:03:21}]
       PreCacheString(&"BONEYARD_INTROSCREEN_LINE_2");
       // Cpt. 'Soap' MacTavish
@@ -236,9 +223,7 @@ main() {
       break;
 
     case "af_caves":
-      // "Just Like Old Times"
-      PreCacheString(&"AF_CAVES_LINE1"); // "Just Like Old Times"
-      // Day 7 - 16:40:[{FAKE_INTRO_SECONDS:22}]
+      // "Just Like Old Times"PreCacheString(&"AF_CAVES_LINE1"); // "Just Like Old Times"// Day 7 - 16:40:[{FAKE_INTRO_SECONDS:22}]
       PreCacheString(&"AF_CAVES_LINE2"); // Day 7 – 16:40:xx
       // 'Soap' MacTavish
       PreCacheString(&"AF_CAVES_LINE3"); // 'Soap' MacTavish
@@ -248,8 +233,7 @@ main() {
       break;
 
     case "af_chase":
-      // "You Can't Win A War With A Bullet"
-      PreCacheString(&"AF_CHASE_INTROSCREEN_LINE1");
+      // "You Can't Win A War With A Bullet"PreCacheString(&"AF_CHASE_INTROSCREEN_LINE1");
       // Day 7 - 18:10:[{FAKE_INTRO_SECONDS:22}]
       PreCacheString(&"AF_CHASE_INTROSCREEN_LINE2");
       // 'Soap' MacTavish
@@ -294,8 +278,7 @@ contingency_black_screen_intro() {
   thread maps\_introscreen::introscreen_generic_black_fade_in(5.3, 1);
 
   lines = [];
-  // Contingency""
-  lines[lines.size] = &"CONTINGENCY_LINE1";
+  // Contingency""lines[lines.size] = &"CONTINGENCY_LINE1";
   // Day 4 - 16:35:[{FAKE_INTRO_SECONDS:32}]
   lines["date"] = &"CONTINGENCY_LINE2";
   // Sgt. Gary 'Roach' Sanderson
@@ -317,8 +300,7 @@ contingency_intro_text() {
   wait .2;
 
   lines = [];
-  // Contingency""
-  lines[lines.size] = &"CONTINGENCY_LINE1";
+  // Contingency""lines[lines.size] = &"CONTINGENCY_LINE1";
   // Day 4 - 16:35:[{FAKE_INTRO_SECONDS:32}]
   lines["date"] = &"CONTINGENCY_LINE2";
   // Sgt. Gary 'Roach' Sanderson
@@ -335,12 +317,10 @@ cliffhanger_intro_text() {
   wait 17;
 
   lines = [];
-  // Cliffhanger""
-  lines[lines.size] = &"CLIFFHANGER_LINE1";
+  // Cliffhanger""lines[lines.size] = &"CLIFFHANGER_LINE1";
   // Day 2 - 7:35:[{FAKE_INTRO_SECONDS:32}]
   lines["date"] = &"CLIFFHANGER_LINE2";
-  // Sgt. Gary Roach" Sanderson"
-  lines[lines.size] = &"CLIFFHANGER_LINE3";
+  // Sgt. Gary Roach" Sanderson"lines[lines.size] = &"CLIFFHANGER_LINE3";
   // Task Force 141
   lines[lines.size] = &"CLIFFHANGER_LINE4";
   // Tian Shan Range, Kazakhstan
@@ -732,8 +712,7 @@ arcadia_intro() {
 boneyard_intro() {
   lines = [];
   // 'The Enemy of My Enemy'
-  lines[lines.size] = &"BONEYARD_INTROSCREEN_LINE_1"; // "The Enemy Of My Enemy"
-  // Day 6 - 17:30:[{FAKE_INTRO_SECONDS:21}]
+  lines[lines.size] = &"BONEYARD_INTROSCREEN_LINE_1"; // "The Enemy Of My Enemy"// Day 6 - 17:30:[{FAKE_INTRO_SECONDS:21}]
   lines["date"] = &"BONEYARD_INTROSCREEN_LINE_2"; // Day 6 - 17:30:[ {FAKE_INTRO_SECONDS:41} ]
   // Cpt. 'Soap' MacTavish
   lines[lines.size] = &"BONEYARD_INTROSCREEN_LINE_3"; // Cpt. 'Soap' MacTavish
@@ -753,8 +732,7 @@ estate_intro() {
   lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_1"; // 'Loose Ends'
   // Day 6 - 14:45:[{FAKE_INTRO_SECONDS:07}]
   lines["date"] = &"ESTATE_INTROSCREEN_LINE_2"; // Day 6 - 14:30:[ {FAKE_INTRO_SECONDS:07} ]
-  // Sgt. Gary Roach" Sanderson"
-  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
+  // Sgt. Gary Roach" Sanderson"lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_3"; // Sgt. Gary 'Roach' Sanderson
   // Task Force 141
   lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_4"; // Task Force 141
   // Georgian-Russian Border
@@ -776,8 +754,7 @@ airport_intro() {
 
   lines = [];
 
-  // No Russian""
-  lines[lines.size] = &"AIRPORT_LINE1";
+  // No Russian""lines[lines.size] = &"AIRPORT_LINE1";
   // Day 3, 08:40:[{FAKE_INTRO_SECONDS:32}]
   lines["date"] = &"AIRPORT_LINE2";
   // PFC Joseph Allen a.k.a. Alexei Borodin
@@ -827,8 +804,7 @@ oilrig_intro2() {
 
   // The Only Easy Day...Was Yesterday
   lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_1";
-  // LANG_ENGLISH Day 3 - [{FAKE_INTRO_TIME:06:58:21}] hrs"
-  lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_2";
+  // LANG_ENGLISH Day 3 - [{FAKE_INTRO_TIME:06:58:21}] hrs"lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_2";
   // Sgt. Gary 'Roach' Sanderson
   lines[lines.size] = &"OILRIG_INTROSCREEN_LINE_3";
   // Task Force 141
@@ -855,17 +831,10 @@ estate_intro2() {
   lines = [];
 
   // 'Loose Ends'
-  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_1"; // "'Loose Ends'"
-  // Day 6 - 14:45:[{FAKE_INTRO_SECONDS:07}]
-  lines["date"] = &"ESTATE_INTROSCREEN_LINE_2"; // "Day 06 – 14:05:[{FAKE_INTRO_SECONDS:07}]"
-  // Sgt. Gary Roach" Sanderson"
-  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_3"; // "Sgt. Gary 'Roach' Sanderson"
-  // Task Force 141
-  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_4"; // "Task Force 141"
-  // Georgian-Russian Border
-  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_5"; // "Georgian-Russian Border"
-
-  introscreen_feed_lines(lines);
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_1"; // "'Loose Ends'"// Day 6 - 14:45:[{FAKE_INTRO_SECONDS:07}]
+  lines["date"] = &"ESTATE_INTROSCREEN_LINE_2"; // "Day 06 – 14:05:[{FAKE_INTRO_SECONDS:07}]"// Sgt. Gary Roach" Sanderson"lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_3"; // "Sgt. Gary 'Roach' Sanderson"// Task Force 141
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_4"; // "Task Force 141"// Georgian-Russian Border
+  lines[lines.size] = &"ESTATE_INTROSCREEN_LINE_5"; // "Georgian-Russian Border"introscreen_feed_lines(lines);
 }
 
 dcburning_intro() {
@@ -930,8 +899,7 @@ dcburning_intro() {
   lines = [];
   // 'Of Their Own Accord'
   lines[lines.size] = &"DCBURNING_INTROSCREEN_1";
-  // LANG_ENGLISH Day 5 - [{FAKE_INTRO_TIME:18:12:09}] hrs"
-  lines[lines.size] = &"DCBURNING_INTROSCREEN_2";
+  // LANG_ENGLISH Day 5 - [{FAKE_INTRO_TIME:18:12:09}] hrs"lines[lines.size] = &"DCBURNING_INTROSCREEN_2";
   // Pvt. James Ramirez
   lines[lines.size] = &"DCBURNING_INTROSCREEN_3";
   // 75th Ranger Regiment
@@ -1019,8 +987,7 @@ trainer_intro() {
   introblack.foreground = true;
   introblack SetShader("black", 640, 480);
   lines = [];
-  // "S.S.D.D."
-  lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_1";
+  // "S.S.D.D."lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_1";
   // Day 1 - 15:30:[{FAKE_INTRO_SECONDS:25}]
   lines[lines.size] = &"TRAINER_INTROSCREEN_LINE_2";
   // PFC Joseph Allen
@@ -1082,9 +1049,7 @@ af_caves_intro() {
   flag_wait("introscreen_feed_lines");
 
   lines = [];
-  // Just Like Old Times""
-  lines[lines.size] = &"AF_CAVES_LINE1"; // "Just Like Old Times"
-  // Day 7 - 16:40:[{FAKE_INTRO_SECONDS:22}]
+  // Just Like Old Times""lines[lines.size] = &"AF_CAVES_LINE1"; // "Just Like Old Times"// Day 7 - 16:40:[{FAKE_INTRO_SECONDS:22}]
   lines["date"] = &"AF_CAVES_LINE2"; // Day 7 – 16:40:
   // 'Soap' MacTavish
   lines[lines.size] = &"AF_CAVES_LINE3"; // 'Soap' MacTavish
@@ -1097,8 +1062,7 @@ af_caves_intro() {
 af_chase_intro() {
   lines = [];
 
-  // "You Can't Win A War With A Bullet"
-  lines[lines.size] = &"AF_CHASE_INTROSCREEN_LINE1";
+  // "You Can't Win A War With A Bullet"lines[lines.size] = &"AF_CHASE_INTROSCREEN_LINE1";
   // Day 7 - 18:10:[{FAKE_INTRO_SECONDS:22}]
   lines["date"] = &"AF_CHASE_INTROSCREEN_LINE2";
   // 'Soap' MacTavish
@@ -1187,8 +1151,7 @@ flying_intro() {
         //lines[ lines.size ] = &"ESTATE_INTROSCREEN_LINE_1";
         // Day 6 - 14:45:[{FAKE_INTRO_SECONDS:07}]
         //lines[ lines.size ] = &"ESTATE_INTROSCREEN_LINE_2";
-        // Sgt. Gary Roach" Sanderson"
-        //lines[ lines.size ] = &"ESTATE_INTROSCREEN_LINE_3";
+        // Sgt. Gary Roach" Sanderson"//lines[ lines.size ] = &"ESTATE_INTROSCREEN_LINE_3";
         // Task Force 141
         //lines[ lines.size ] = &"ESTATE_INTROSCREEN_LINE_4";
         // Georgian-Russian Border

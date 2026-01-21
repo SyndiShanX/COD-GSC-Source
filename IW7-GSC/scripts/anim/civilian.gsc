@@ -5,7 +5,7 @@
 
 cover() {
   self endon("killanimscript");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   scripts\anim\utility::func_12EB9();
   if(scripts\anim\utility::func_9E40()) {
     var_0 = "idle_combat";
@@ -28,7 +28,7 @@ cover() {
 
   thread func_BC1C();
   for(;;) {
-    self func_82E3("idle", scripts\engine\utility::random(var_1), % root, 1, 0.2, 1);
+    self func_82E3("idle", scripts\engine\utility::random(var_1), %root, 1, 0.2, 1);
     self waittillmatch("end", "idle");
   }
 }

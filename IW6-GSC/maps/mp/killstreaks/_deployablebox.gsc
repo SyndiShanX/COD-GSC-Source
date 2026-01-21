@@ -205,9 +205,7 @@ box_setActive(skipOwnerUse) {
   if(level.teamBased) {
     Objective_Team(curObjID, self.team);
     foreach(player in level.players) {
-      if(self.team == player.team &&
-        (!isDefined(boxConfig.canUseCallback) || player[[boxConfig.canUseCallback]](self))
-      ) {
+      if(self.team == player.team && (!isDefined(boxConfig.canUseCallback) || player[[boxConfig.canUseCallback]](self))) {
         self box_SetIcon(player, boxConfig.streakName, boxConfig.headIconOffset);
       }
     }
@@ -354,11 +352,7 @@ box_setInactive() {
 box_handleDamage() {
   boxConfig = level.boxSettings[self.boxType];
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    boxConfig.maxHealth,
-    boxConfig.damageFeedback, ::box_handleDeathDamage, ::box_ModifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(boxConfig.maxHealth, boxConfig.damageFeedback, ::box_handleDeathDamage, ::box_ModifyDamage, true);
 }
 
 box_ModifyDamage(attacker, weapon, type, damage) {
@@ -403,14 +397,7 @@ box_handleDeath() {
     if(isDefined(self.owner))
       owner = self.owner;
 
-    RadiusDamage(self.origin + (0, 0, boxConfig.headIconOffset),
-      boxConfig.deathDamageRadius,
-      boxConfig.deathDamageMax,
-      boxConfig.deathDamageMin,
-      owner,
-      "MOD_EXPLOSIVE",
-      boxConfig.deathWeaponInfo
-    );
+    RadiusDamage(self.origin + (0, 0, boxConfig.headIconOffset), boxConfig.deathDamageRadius, boxConfig.deathDamageMax, boxConfig.deathDamageMin, owner, "MOD_EXPLOSIVE", boxConfig.deathWeaponInfo);
   }
 
   self notify("deleting");
@@ -504,11 +491,7 @@ boxCaptureThink(player) {
 
   while(isDefined(self)) {
     self waittill("trigger", tiggerer);
-    if(
-      isDefined(level.boxSettings[self.boxType].noUseKillstreak) &&
-      level.boxSettings[self.boxType].noUseKillstreak &&
-      isKillstreakWeapon(player GetCurrentWeapon())
-    ) {
+    if(isDefined(level.boxSettings[self.boxType].noUseKillstreak) && level.boxSettings[self.boxType].noUseKillstreak && isKillstreakWeapon(player GetCurrentWeapon())) {
       continue;
     }
 
@@ -519,8 +502,7 @@ boxCaptureThink(player) {
 }
 
 isFriendlyToBox(box) {
-  return (level.teamBased &&
-    self.team == box.team);
+  return (level.teamBased && self.team == box.team);
 }
 
 box_timeOut() {
@@ -681,13 +663,5 @@ createBombSquadModel(streakName) {
 }
 
 isPlayerUsingBox(box) {
-  return (!level.gameEnded &&
-    isDefined(box) &&
-    isReallyAlive(self) && self UseButtonPressed() &&
-    !(self IsOnLadder()) &&
-    !(self MeleeButtonPressed()) &&
-    !(isDefined(self.throwingGrenade)) &&
-    box.curProgress < box.useTime &&
-    (!isDefined(self.teleporting) || !self.teleporting)
-  );
+  return (!level.gameEnded && isDefined(box) && isReallyAlive(self) && self UseButtonPressed() && !(self IsOnLadder()) && !(self MeleeButtonPressed()) && !(isDefined(self.throwingGrenade)) && box.curProgress < box.useTime && (!isDefined(self.teleporting) || !self.teleporting));
 }

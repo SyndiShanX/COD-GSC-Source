@@ -80,9 +80,9 @@ claw_animating() {
       anim_rate = clamp(anim_rate, 0.0, 3);
 
       if(angular_velocity[2] > 0)
-        self setanimknoball( % int_claw_turn_l, % root, 1, 0.2, anim_rate);
+        self setanimknoball(%int_claw_turn_l, %root, 1, 0.2, anim_rate);
       else
-        self setanimknoball( % int_claw_turn_r, % root, 1, 0.2, anim_rate);
+        self setanimknoball(%int_claw_turn_r, %root, 1, 0.2, anim_rate);
 
       self.current_anim_speed = level.idle;
       self.idle_end_time = 0;
@@ -90,9 +90,9 @@ claw_animating() {
       self.current_anim_speed = level.reverse;
       anim_rate = speed / level.claw_speeds[self.current_anim_speed];
       anim_rate = clamp(anim_rate, 0.0, 1.5);
-      self setanimknoball(level.claw_anims[level.reverse], % root, 1, 0.2, anim_rate);
+      self setanimknoball(level.claw_anims[level.reverse], %root, 1, 0.2, anim_rate);
     } else if(speed < 5)
-      self setanimknoball(level.claw_anims[self.current_anim_speed], % root, 1, 0.2, 0);
+      self setanimknoball(level.claw_anims[self.current_anim_speed], %root, 1, 0.2, 0);
     else {
       next_anim_delta = level.claw_speeds[self.current_anim_speed + 1] - level.claw_speeds[self.current_anim_speed];
       next_anim_speed = level.claw_speeds[self.current_anim_speed] + next_anim_delta * 0.6;
@@ -109,7 +109,7 @@ claw_animating() {
 
       anim_rate = speed / level.claw_speeds[self.current_anim_speed];
       anim_rate = clamp(anim_rate, 0.0, 1.5);
-      self setanimknoball(level.claw_anims[self.current_anim_speed], % root, 1, 0.2, anim_rate);
+      self setanimknoball(level.claw_anims[self.current_anim_speed], %root, 1, 0.2, anim_rate);
     }
 
     wait 0.05;
@@ -129,7 +129,7 @@ watch_for_fall() {
 
     if(!self.in_air) {
       self.in_air = 1;
-      self setanimknoball(level.claw_anims[level.jump][1], % root, 1, 0.1, 1);
+      self setanimknoball(level.claw_anims[level.jump][1], %root, 1, 0.1, 1);
       self waittill_notify_or_timeout("veh_landed", 1);
       self.in_air = 0;
     } else

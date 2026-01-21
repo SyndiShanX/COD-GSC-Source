@@ -114,40 +114,15 @@ snd_mi28_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_def();
   soundscripts\_audio_vehicle_manager::avm_end_state_group();
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_dist_towards_vel2vol", [[0, 1.0],
-    [10, 1.0],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_close_towards_vel2vol", [[0, 1.0],
-    [20, 1.0],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_dist_towards_vel2pch", [[0, 0.8],
-    [10, 1.0],
-    [20, 1.1]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_windup_duck", [[0.0, 1.0],
-    [0.25, 1.0],
-    [0.3, 0.7],
-    [0.7, 1.0],
-    [1.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_by_windup_vel2vol", [[0.0, 0.0],
-    [3.0, 0.3],
-    [5.0, 0.7],
-    [8.0, 0.8],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_flyby_duck_envelope", [[0.0, 1.0],
-    [0.15, 1.0],
-    [0.3, 0.5],
-    [0.5, 0.55],
-    [0.6, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_flyby_vel2vol", [[0.0, 0.0],
-    [16.08, 0.0],
-    [20.1, 0.5],
-    [40.2, 0.8],
-    [150.0, 1.0]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_flyby_vel2pch", [[0.0, 0.8],
-    [20.1, 1.0],
-    [150.0, 1.1]]);
-  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_doppler2pch", [[0.0, 0.0],
-    [2.0, 2.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_dist_towards_vel2vol", [[0, 1.0], [10, 1.0], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_close_towards_vel2vol", [[0, 1.0], [20, 1.0], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_dist_towards_vel2pch", [[0, 0.8], [10, 1.0], [20, 1.1]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_windup_duck", [[0.0, 1.0], [0.25, 1.0], [0.3, 0.7], [0.7, 1.0], [1.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_by_windup_vel2vol", [[0.0, 0.0], [3.0, 0.3], [5.0, 0.7], [8.0, 0.8], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_flyby_duck_envelope", [[0.0, 1.0], [0.15, 1.0], [0.3, 0.5], [0.5, 0.55], [0.6, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_flyby_vel2vol", [[0.0, 0.0], [16.08, 0.0], [20.1, 0.5], [40.2, 0.8], [150.0, 1.0]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_flyby_vel2pch", [[0.0, 0.8], [20.1, 1.0], [150.0, 1.1]]);
+  soundscripts\_audio_vehicle_manager::avm_add_envelope("mi28_doppler2pch", [[0.0, 0.0], [2.0, 2.0]]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 

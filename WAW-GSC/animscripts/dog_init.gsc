@@ -52,10 +52,10 @@ initDogAnimations() {
   }
   precacheShader("hud_dog_melee");
   anim.NotFirstTimeDogs = 1;
-  anim.dogStoppingDistSq = lengthSquared(getmovedelta( % german_shepherd_run_stop, 0, 1) * 1.2);
-  anim.dogStartMoveDist = length(getmovedelta( % german_shepherd_run_start, 0, 1));
+  anim.dogStoppingDistSq = lengthSquared(getmovedelta(%german_shepherd_run_stop, 0, 1) * 1.2);
+  anim.dogStartMoveDist = length(getmovedelta(%german_shepherd_run_start, 0, 1));
   anim.dogAttackPlayerDist = 102;
-  offset = getstartorigin((0, 0, 0), (0, 0, 0), % german_shepherd_attack_AI_01_start_a);
+  offset = getstartorigin((0, 0, 0), (0, 0, 0), %german_shepherd_attack_AI_01_start_a);
   anim.dogAttackAIDist = length(offset);
   anim.dogTraverseAnims = [];
   anim.dogTraverseAnims["wallhop"] = % german_shepherd_run_jump_40;

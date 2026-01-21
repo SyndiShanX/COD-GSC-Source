@@ -161,9 +161,7 @@ function zombiefindflesh(behaviortreeentity) {
       return;
     }
     if(isDefined(level.no_target_override)) {
-      [
-        [level.no_target_override]
-      ](behaviortreeentity);
+      [[level.no_target_override]](behaviortreeentity);
     } else {
       behaviortreeentity setgoal(behaviortreeentity.origin);
     }
@@ -270,9 +268,7 @@ function zombiefindfleshcode(behaviortreeentity) {
       return;
     }
     if(isDefined(level.no_target_override)) {
-      [
-        [level.no_target_override]
-      ](behaviortreeentity);
+      [[level.no_target_override]](behaviortreeentity);
     } else {
       behaviortreeentity setgoal(behaviortreeentity.origin);
     }
@@ -296,9 +292,7 @@ function zombiefindfleshcode(behaviortreeentity) {
       return;
     }
     if(isDefined(level.enemy_location_override_func)) {
-      goalpos = [
-        [level.enemy_location_override_func]
-      ](behaviortreeentity, behaviortreeentity.enemy);
+      goalpos = [[level.enemy_location_override_func]](behaviortreeentity, behaviortreeentity.enemy);
       if(isDefined(goalpos)) {
         behaviortreeentity setgoal(goalpos);
       } else {

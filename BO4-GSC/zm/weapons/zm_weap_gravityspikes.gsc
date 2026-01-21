@@ -408,8 +408,7 @@ electrocute_actor(ai_zombie) {
 
   bhtnactionstartevent(ai_zombie, "electrocute");
   ai_zombie notify(#"bhtn_action_notify", {
-    #action: "electrocute"
-  });
+    #action: "electrocute"});
 
   if(!isDefined(self.tesla_enemies_hit)) {
     self.tesla_enemies_hit = 1;
@@ -688,8 +687,7 @@ plant_gravity_trap(w_gravityspikes) {
 
   if(self isonground()) {
     var_aa0fedb0 = {
-      #position: self.origin + (0, 0, 32),
-      #entity: self getgroundent()
+      #position: self.origin + (0, 0, 32), #entity: self getgroundent()
     };
   } else {
     var_aa0fedb0 = util::function_97cf7eb0(self.origin, 1000, length((0, 0, 32)));
@@ -796,9 +794,7 @@ create_gravity_trap_spikes_in_ground(a_s_spawn_pos) {
     self.mdl_gravity_trap_spikes[i] clientfield::set("gravity_trap_spike_spark", 1);
 
     if(isDefined(level.symbols_quest_comp)) {
-      [
-        [level.symbols_quest_comp]
-      ](self.mdl_gravity_trap_spikes[i]);
+      [[level.symbols_quest_comp]](self.mdl_gravity_trap_spikes[i]);
     }
   }
 }
@@ -936,9 +932,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
       self.var_5bf7575e = undefined;
       self ai::clear_stun();
     } else if(isalive(self) && !(isDefined(self.var_42d5176d) && self.var_42d5176d) && isDefined(player.b_gravity_trap_spikes_in_ground) && player.b_gravity_trap_spikes_in_ground) {
-      [
-        [level.ai_gravity_throttle]
-      ] - > waitinqueue(self);
+      [[level.ai_gravity_throttle]] - > waitinqueue(self);
       self dodamage(self.maxhealth * 0.1, self.origin, player, player, "torso_upper", "MOD_ELECTROCUTED", 0, w_gravityspikes);
       self thread track_lifted_for_ragdoll_count();
       self.var_42d5176d = 1;
@@ -982,18 +976,14 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
 
   if(self.zm_ai_category === # "boss") {
     if(isalive(self) && isDefined(self.b_melee_kill) && self.b_melee_kill && !(isDefined(self.var_5bf7575e) && self.var_5bf7575e) && !(isDefined(player.b_gravity_trap_spikes_in_ground) && player.b_gravity_trap_spikes_in_ground)) {
-      [
-        [level.ai_gravity_throttle]
-      ] - > waitinqueue(self);
+      [[level.ai_gravity_throttle]] - > waitinqueue(self);
       self dodamage(self.maxhealth * 0.05, self.origin, player, player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
       self.var_5bf7575e = 1;
       self.b_melee_kill = undefined;
       wait 1;
       self.var_5bf7575e = undefined;
     } else if(isalive(self) && !(isDefined(self.var_42d5176d) && self.var_42d5176d) && isDefined(player.b_gravity_trap_spikes_in_ground) && player.b_gravity_trap_spikes_in_ground) {
-      [
-        [level.ai_gravity_throttle]
-      ] - > waitinqueue(self);
+      [[level.ai_gravity_throttle]] - > waitinqueue(self);
       self dodamage(self.maxhealth * 0.05, self.origin, player, player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
       self.var_42d5176d = 1;
       self waittill(#"death", # "gravity_trap_complete");

@@ -153,12 +153,10 @@ is_packroom_clear() {
   } else if(flag("thief_round")) {
     zombies = GetAIArray("axis");
     for(i = 0; i < zombies.size; i++) {
-      if(isDefined(zombies[i].animname) && zombies[i].animname == "thief_zombie" &&
-        zombies[i] IsTouching(pack_room_trig)) {
+      if(isDefined(zombies[i].animname) && zombies[i].animname == "thief_zombie" && zombies[i] IsTouching(pack_room_trig)) {
         return false;
       }
-      if(isDefined(zombies[i].animname) && zombies[i].animname == "thief_zombie" &&
-        zombies[i] IsTouching(pack_door_slam)) {
+      if(isDefined(zombies[i].animname) && zombies[i].animname == "thief_zombie" && zombies[i] IsTouching(pack_door_slam)) {
         return false;
       }
     }
@@ -342,13 +340,11 @@ find_portal_destination(orig_trig) {
   } else {
     dest_trig = RandomIntRange(0, level.portal_trig.size);
     assertex(isDefined(level.portal_trig[dest_trig].script_noteworthy), "portals need a script_noteworthy");
-    if(level.portal_trig[dest_trig] == orig_trig || level.portal_trig[dest_trig].script_noteworthy == "conference_level2" ||
-      !level.zones[level.portal_trig[dest_trig].script_noteworthy].is_enabled) {
+    if(level.portal_trig[dest_trig] == orig_trig || level.portal_trig[dest_trig].script_noteworthy == "conference_level2" || !level.zones[level.portal_trig[dest_trig].script_noteworthy].is_enabled) {
       portals = level.portal_trig;
       for(i = 0; i < level.portal_trig.size; i++) {
         level.portal_trig[i].index = i;
-        if(level.portal_trig[i] == orig_trig || level.portal_trig[i].script_noteworthy == "conference_level2" ||
-          !level.zones[level.portal_trig[i].script_noteworthy].is_enabled) {
+        if(level.portal_trig[i] == orig_trig || level.portal_trig[i].script_noteworthy == "conference_level2" || !level.zones[level.portal_trig[i].script_noteworthy].is_enabled) {
           portals = array_remove(portals, level.portal_trig[i]);
         }
       }
@@ -477,8 +473,7 @@ enable_zone_portals_init() {
 
 enable_zone_portals() {
   self waittill("trigger", user);
-  if((user maps\_laststand::player_is_in_laststand() || is_player_valid(user)) &&
-    isDefined(self.script_noteworthy)) {
+  if((user maps\_laststand::player_is_in_laststand() || is_player_valid(user)) && isDefined(self.script_noteworthy)) {
     level thread maps\_zombiemode_zone_manager::enable_zone(self.script_noteworthy);
   }
 }
@@ -500,8 +495,7 @@ no_zombie_left_behind(portal_trig, targeted_player) {
     for(i = 0; i < zombies.size; i++) {
       if(isDefined(zombies[i].animname) && zombies[i].animname == "thief_zombie") {
         continue;
-      } else if(isDefined(self.script_noteworthy) && self.script_noteworthy == "conference_level2" && !level.zones["conference_level2"].is_occupied &&
-        isDefined(zombies[i].favoriteenemy) && zombies[i].favoriteenemy == targeted_player) {
+      } else if(isDefined(self.script_noteworthy) && self.script_noteworthy == "conference_level2" && !level.zones["conference_level2"].is_occupied && isDefined(zombies[i].favoriteenemy) && zombies[i].favoriteenemy == targeted_player) {
         zombies[i].teleporting = true;
         zombies[i] thread zombie_through_portal(portal_enter, portal_trig, targeted_player);
       } else if(Distance(zombies[i].origin, portal_enter.origin) < 500 && isDefined(zombies[i].favoriteenemy) && zombies[i].favoriteenemy == targeted_player) {

@@ -34,15 +34,12 @@ __init__() {
   }
 
   level.tripwire = {
-    #wires: [],
-    #localclients: []
+    #wires: [], #localclients: []
   };
 
   for(i = 0; i < getmaxlocalclients(); i++) {
     level.tripwire.localclients[i] = {
-      #beams: [],
-      #previs: 0,
-      #model: undefined
+      #beams: [], #previs: 0, #model: undefined
     };
   }
 }

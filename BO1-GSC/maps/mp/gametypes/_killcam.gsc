@@ -31,19 +31,7 @@ postRoundFinalKillcam() {
   maps\mp\gametypes\_globallogic::resetOutcomeForAllPlayers();
   finalKillcamWaiter();
 }
-startFinalKillcam(
-  attackerNum,
-  targetNum,
-  killcamentity,
-  killcamentityindex,
-  killcamentitystarttime,
-  sWeapon,
-  deathTime,
-  deathTimeOffset,
-  offsetTime,
-  perks,
-  killstreaks,
-  attacker
+startFinalKillcam(attackerNum, targetNum, killcamentity, killcamentityindex, killcamentitystarttime, sWeapon, deathTime, deathTimeOffset, offsetTime, perks, killstreaks, attacker
 ) {
   if(!level.finalkillcam)
     return;
@@ -85,21 +73,7 @@ areAnyPlayersWatchingTheKillcam() {
   }
   return false;
 }
-killcam(
-  attackerNum,
-  targetNum,
-  killcamentity,
-  killcamentityindex,
-  killcamentitystarttime,
-  sWeapon,
-  deathTime,
-  deathTimeOffset,
-  offsetTime,
-  respawn,
-  maxtime,
-  perks,
-  killstreaks,
-  attacker
+killcam(attackerNum, targetNum, killcamentity, killcamentityindex, killcamentitystarttime, sWeapon, deathTime, deathTimeOffset, offsetTime, respawn, maxtime, perks, killstreaks, attacker
 ) {
   self endon("disconnect");
   self endon("spawned");

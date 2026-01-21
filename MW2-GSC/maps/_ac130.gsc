@@ -702,7 +702,7 @@ ac130_move_in() {
   thread context_Sensative_Dialog_Play_Random_Group_Sound("plane", "rolling_in", true);
 
   level.ac130 useAnimTree(#animtree);
-  level.ac130 setflaggedanim("ac130_move_in", % ac130_move_in, 1.0, 0.2, 0.1);
+  level.ac130 setflaggedanim("ac130_move_in", %ac130_move_in, 1.0, 0.2, 0.1);
   level.ac130 waittillmatch("ac130_move_in", "end");
 
   level.ac130_moving_in = undefined;
@@ -715,7 +715,7 @@ ac130_move_out() {
   level.ac130_moving_in = undefined;
 
   level.ac130 useAnimTree(#animtree);
-  level.ac130 setflaggedanim("ac130_move_out", % ac130_move_out, 1.0, 0.2, 0.3);
+  level.ac130 setflaggedanim("ac130_move_out", %ac130_move_out, 1.0, 0.2, 0.3);
   level.ac130 waittillmatch("ac130_move_out", "end");
 
   level.ac130_moving_out = undefined;

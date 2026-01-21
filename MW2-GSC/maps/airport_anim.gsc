@@ -753,8 +753,8 @@ makarov_aim_player(guy) {
   self endon("death");
   self endon("done_shoot_player");
 
-  self setAnimLimited( % airport_ending_aim4_makarov, 1, 0);
-  self setAnimLimited( % airport_ending_aim6_makarov, 1, 0);
+  self setAnimLimited(%airport_ending_aim4_makarov, 1, 0);
+  self setAnimLimited(%airport_ending_aim6_makarov, 1, 0);
 
   while(1) {
     angleYaw = VectorToAngles(level.player.origin - self.origin)[1];
@@ -769,8 +769,8 @@ makarov_aim_player(guy) {
     else if(angleYaw > 0)
       rightWeight = angleYaw / 60;
 
-    self setAnimLimited( % airport_ending_aim_left, leftWeight, 0.2);
-    self setAnimLimited( % airport_ending_aim_right, rightWeight, 0.2);
+    self setAnimLimited(%airport_ending_aim_left, leftWeight, 0.2);
+    self setAnimLimited(%airport_ending_aim_right, rightWeight, 0.2);
 
     wait 0.05;
   }

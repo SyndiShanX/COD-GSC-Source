@@ -700,10 +700,7 @@ spawn_think_action(targetname) {
   if(self.type == "human")
     assertEx(self.pathEnemyLookAhead == 0 && self.pathEnemyFightDist == 0, "Tried to change pathenemyFightDist or pathenemyLookAhead on an AI before running spawn_failed on guy with export " + self.export);
   set_default_pathenemy_settings();
-  self.heavy_machine_gunner = IsSubStr(self.classname, "mgportable") ||
-    IsSubStr(self.classname, "30cal") ||
-    IsSubStr(self.classname, "mg42") ||
-    IsSubStr(self.classname, "dp28");
+  self.heavy_machine_gunner = IsSubStr(self.classname, "mgportable") || IsSubStr(self.classname, "30cal") || IsSubStr(self.classname, "mg42") || IsSubStr(self.classname, "dp28");
   maps\_gameskill::grenadeAwareness();
   if(isDefined(self.script_bcdialog)) {
     self set_battlechatter(self.script_bcdialog);

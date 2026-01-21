@@ -27,10 +27,10 @@ set_vehicle_anims(positions) {
   positions[2].vehicle_getoutanim_clear = 0;
   positions[3].vehicle_getoutanim = % v_mi8_hip_backdoor_open;
   positions[3].vehicle_getoutanim_clear = 0;
-  positions[1].delay = getanimlength( % v_mi8_hip_backdoor_open) - 1.7;
-  positions[2].delay = getanimlength( % v_mi8_hip_backdoor_open) - 1.7;
-  positions[3].delay = getanimlength( % v_mi8_hip_backdoor_open) - 1.7;
-  positions[4].delay = getanimlength( % v_mi8_hip_backdoor_open) - 1.7;
+  positions[1].delay = getanimlength(%v_mi8_hip_backdoor_open) - 1.7;
+  positions[2].delay = getanimlength(%v_mi8_hip_backdoor_open) - 1.7;
+  positions[3].delay = getanimlength(%v_mi8_hip_backdoor_open) - 1.7;
+  positions[4].delay = getanimlength(%v_mi8_hip_backdoor_open) - 1.7;
   return positions;
 }
 

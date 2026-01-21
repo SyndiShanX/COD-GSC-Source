@@ -25,9 +25,9 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathmodel("vehicle_little_bird_bench");
 
   if(issubstr(var_2, "kva") || issubstr(var_2, "atlas") || issubstr(var_2, "sentinel"))
-    maps\_vehicle::build_drive( % mil_helicopter_littlebird_ai_rotors, undefined, 0, 3.0);
+    maps\_vehicle::build_drive(%mil_helicopter_littlebird_ai_rotors, undefined, 0, 3.0);
   else
-    maps\_vehicle::build_drive( % mi28_rotors, undefined, 0, 3.0);
+    maps\_vehicle::build_drive(%mi28_rotors, undefined, 0, 3.0);
 
   maps\_vehicle::build_deathfx("fx\explosions\helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, 1);
   maps\_vehicle::build_deathfx("vfx\trail\trail_fire_smoke_l", "tag_engine", "littlebird_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1);

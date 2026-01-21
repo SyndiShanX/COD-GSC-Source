@@ -99,15 +99,7 @@ include_weapons() {
 
 init_theater_box_indicator() {
   level._custom_box_monitor = ::theater_box_monitor;
-  level._box_locations = array("start_chest_loc",
-    "foyer_chest_loc",
-    "crematorium_chest_loc",
-    "alleyway_chest_loc",
-    "control_chest_loc",
-    "stage_chest_loc",
-    "dressing_chest_loc",
-    "dining_chest_loc",
-    "theater_chest_loc");
+  level._box_locations = array("start_chest_loc", "foyer_chest_loc", "crematorium_chest_loc", "alleyway_chest_loc", "control_chest_loc", "stage_chest_loc", "dressing_chest_loc", "dining_chest_loc", "theater_chest_loc");
   OnPlayerConnect_Callback(::init_board_lights);
 }
 

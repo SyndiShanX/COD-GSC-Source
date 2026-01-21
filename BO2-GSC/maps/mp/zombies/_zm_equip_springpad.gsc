@@ -250,9 +250,9 @@ springpad_animate(weapon, armed) {
   self endon("equip_springpad_zm_taken");
   weapon endon("death");
   weapon useanimtree(#animtree);
-  f_animlength = getanimlength( % o_zombie_buildable_tramplesteam_reset_zombie);
-  r_animlength = getanimlength( % o_zombie_buildable_tramplesteam_reset);
-  l_animlength = getanimlength( % o_zombie_buildable_tramplesteam_launch);
+  f_animlength = getanimlength(%o_zombie_buildable_tramplesteam_reset_zombie);
+  r_animlength = getanimlength(%o_zombie_buildable_tramplesteam_reset);
+  l_animlength = getanimlength(%o_zombie_buildable_tramplesteam_launch);
   weapon thread springpad_audio();
   prearmed = 0;
 
@@ -264,11 +264,11 @@ springpad_animate(weapon, armed) {
   while(isDefined(weapon)) {
     if(!prearmed) {
       if(fast_reset) {
-        weapon setanim( % o_zombie_buildable_tramplesteam_reset_zombie);
+        weapon setanim(%o_zombie_buildable_tramplesteam_reset_zombie);
         weapon thread playspringpadresetaudio(f_animlength);
         wait(f_animlength);
       } else {
-        weapon setanim( % o_zombie_buildable_tramplesteam_reset);
+        weapon setanim(%o_zombie_buildable_tramplesteam_reset);
         weapon thread playspringpadresetaudio(r_animlength);
         wait(r_animlength);
       }
@@ -280,13 +280,13 @@ springpad_animate(weapon, armed) {
     fast_reset = 0;
 
     if(isDefined(weapon)) {
-      weapon setanim( % o_zombie_buildable_tramplesteam_compressed_idle);
+      weapon setanim(%o_zombie_buildable_tramplesteam_compressed_idle);
       weapon waittill("fling", fast);
       fast_reset = fast;
     }
 
     if(isDefined(weapon)) {
-      weapon setanim( % o_zombie_buildable_tramplesteam_launch);
+      weapon setanim(%o_zombie_buildable_tramplesteam_launch);
       wait(l_animlength);
     }
   }

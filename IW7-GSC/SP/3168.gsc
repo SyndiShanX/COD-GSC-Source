@@ -802,7 +802,7 @@ hide() {
   }
 
   if(self.a.pose == "stand") {
-    var_1 = [ % hm_grnd_red_exposed_death_neck_falls_8_ar, % hm_grnd_red_exposed_death_neck_falls_4_ar];
+    var_1 = [ % hm_grnd_red_exposed_death_neck_falls_8_ar, %hm_grnd_red_exposed_death_neck_falls_4_ar];
     var_0 = scripts\engine\utility::random(var_1);
   } else if(self.a.pose == "crouch") {
     var_0 = % cornercrr_alert_death_neck;

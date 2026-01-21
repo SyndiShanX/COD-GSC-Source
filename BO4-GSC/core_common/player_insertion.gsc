@@ -45,10 +45,7 @@ __init__() {
 
   for(index = 0; index < var_3bc28449; index++) {
     insertion = {
-      #index: index,
-      #allowed: 1,
-      #spawnpoints: var_1194a9a5,
-      #players: []
+      #index: index, #allowed: 1, #spawnpoints: var_1194a9a5, #players: []
     };
     level.insertions[level.insertions.size] = insertion;
     callback::on_finalize_initialization(&on_finalize_initialization, insertion);
@@ -147,8 +144,7 @@ function_d53a8c5b(insertion, fly_over_point, var_59526dd5, offset) {
   direction = vectornormalize(direction);
   var_7c712437 = fly_over_point + anglestoright(var_872f085f) * offset;
   var_1d83d08d = {
-    #start: var_7c712437 + direction * -150000,
-    #end: var_7c712437 + direction * 150000
+    #start: var_7c712437 + direction * -150000, #end: var_7c712437 + direction * 150000
   };
   result = function_3ca86964(var_1d83d08d);
   midpoint = (result.start + result.end) / 2;
@@ -1488,28 +1484,14 @@ function_e04b0ea8(insertion, start_point, var_872f085f, var_37362e08, var_f69b66
 
 function_43cc81fc() {
   s_formation = {
-    #var_c85ebc15: 0,
-    #var_f5cff63: [],
-    #var_86cb4eb8: [],
-    #hoverparams: [],
-    #var_86255b48: [],
-    #var_84f704f: 0,
-    #alignment: "center"
-  };
+    #var_c85ebc15: 0, #var_f5cff63: [], #var_86cb4eb8: [], #hoverparams: [], #var_86255b48: [], #var_84f704f: 0, #alignment: "center"};
   return s_formation;
 }
 
 function_d9dfa25() {
   a_formations = [];
   s_formation = {
-    #var_c85ebc15: 5,
-    #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"),
-    #var_86cb4eb8: array((2750, -550, 0), (2000, -1200, 0), (1500, 750, 0), (500, 1500, 0), (-900, -700, 0)),
-    #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)),
-    #var_86255b48: array(2, 2, 2, 2, 2),
-    #var_84f704f: 4,
-    #alignment: "left"
-  };
+    #var_c85ebc15: 5, #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"), #var_86cb4eb8: array((2750, -550, 0), (2000, -1200, 0), (1500, 750, 0), (500, 1500, 0), (-900, -700, 0)), #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)), #var_86255b48: array(2, 2, 2, 2, 2), #var_84f704f: 4, #alignment: "left"};
 
   if(!isDefined(a_formations)) {
     a_formations = [];
@@ -1519,14 +1501,7 @@ function_d9dfa25() {
 
   a_formations[a_formations.size] = s_formation;
   s_formation = {
-    #var_c85ebc15: 5,
-    #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"),
-    #var_86cb4eb8: array((2750, 550, 0), (2000, 1200, 0), (1500, -750, 0), (500, -1500, 0), (-900, 700, 0)),
-    #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)),
-    #var_86255b48: array(2, 2, 2, 2, 2),
-    #var_84f704f: 4,
-    #alignment: "right"
-  };
+    #var_c85ebc15: 5, #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"), #var_86cb4eb8: array((2750, 550, 0), (2000, 1200, 0), (1500, -750, 0), (500, -1500, 0), (-900, 700, 0)), #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)), #var_86255b48: array(2, 2, 2, 2, 2), #var_84f704f: 4, #alignment: "right"};
 
   if(!isDefined(a_formations)) {
     a_formations = [];
@@ -1536,14 +1511,7 @@ function_d9dfa25() {
 
   a_formations[a_formations.size] = s_formation;
   s_formation = {
-    #var_c85ebc15: 5,
-    #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"),
-    #var_86cb4eb8: array((2750, -900, 0), (2000, 100, 0), (1250, 1100, 0), (500, 2100, 0), (-900, -700, 0)),
-    #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)),
-    #var_86255b48: array(2, 2, 2, 2, 2),
-    #var_84f704f: 4,
-    #alignment: "left"
-  };
+    #var_c85ebc15: 5, #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"), #var_86cb4eb8: array((2750, -900, 0), (2000, 100, 0), (1250, 1100, 0), (500, 2100, 0), (-900, -700, 0)), #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)), #var_86255b48: array(2, 2, 2, 2, 2), #var_84f704f: 4, #alignment: "left"};
 
   if(!isDefined(a_formations)) {
     a_formations = [];
@@ -1553,14 +1521,7 @@ function_d9dfa25() {
 
   a_formations[a_formations.size] = s_formation;
   s_formation = {
-    #var_c85ebc15: 5,
-    #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"),
-    #var_86cb4eb8: array((2750, 900, 0), (2000, -100, 0), (1500, -1100, 0), (500, -2100, 0), (-900, 700, 0)),
-    #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)),
-    #var_86255b48: array(2, 2, 2, 2, 2),
-    #var_84f704f: 4,
-    #alignment: "right"
-  };
+    #var_c85ebc15: 5, #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner", "chinook_spawner"), #var_86cb4eb8: array((2750, 900, 0), (2000, -100, 0), (1500, -1100, 0), (500, -2100, 0), (-900, 700, 0)), #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192), (0, 24, 128)), #var_86255b48: array(2, 2, 2, 2, 2), #var_84f704f: 4, #alignment: "right"};
 
   if(!isDefined(a_formations)) {
     a_formations = [];
@@ -1581,10 +1542,7 @@ function_d9dfa25() {
   var_86cb4eb8[# "left"] = array((1200, -2300, 0), (-200, -2300, 0), (-1600, -2300, 0), (-3000, -2300, 0));
   var_86cb4eb8[# "right"] = array((1200, 2300, 0), (-200, 2300, 0), (-1600, 2300, 0), (-3000, 2300, 0));
   var_5637e595 = {
-    #var_c85ebc15: 4,
-    #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner"),
-    #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192)),
-    #var_86255b48: array(2, 2, 2, 2)
+    #var_c85ebc15: 4, #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner"), #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192)), #var_86255b48: array(2, 2, 2, 2)
   };
   s_formation = array::random(a_formations);
   s_formation.var_c85ebc15 += var_5637e595.var_c85ebc15;
@@ -2209,18 +2167,10 @@ function_c71552d0(insertion, fadeouttime, blacktime, fadeintime, rumble) {
 
   foreach(player in insertion.players) {
     if(isDefined(player)) {
-      [
-        [lui_menu]
-      ] - > open(player);
-      [
-        [lui_menu]
-      ] - > set_startalpha(player, 0);
-      [
-        [lui_menu]
-      ] - > set_endalpha(player, 1);
-      [
-        [lui_menu]
-      ] - > set_fadeovertime(player, int(fadeouttime * 1000));
+      [[lui_menu]] - > open(player);
+      [[lui_menu]] - > set_startalpha(player, 0);
+      [[lui_menu]] - > set_endalpha(player, 1);
+      [[lui_menu]] - > set_fadeovertime(player, int(fadeouttime * 1000));
     }
   }
 

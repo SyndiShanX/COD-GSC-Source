@@ -1491,8 +1491,7 @@ bot_monitor_enemy_camp_spots(validateFunc) {
         level.enemy_camp_spots[participant.team] = participant BotPredictEnemyCampSpots(true);
 
         if(isDefined(level.enemy_camp_spots[participant.team])) {
-          if(!isDefined(level.enemy_camp_assassin_goal[participant.team]) ||
-            !array_contains(level.enemy_camp_spots[participant.team], level.enemy_camp_assassin_goal[participant.team]))
+          if(!isDefined(level.enemy_camp_assassin_goal[participant.team]) || !array_contains(level.enemy_camp_spots[participant.team], level.enemy_camp_assassin_goal[participant.team]))
             level.enemy_camp_assassin_goal[participant.team] = random(level.enemy_camp_spots[participant.team]);
 
           if(isDefined(level.enemy_camp_assassin_goal[participant.team])) {

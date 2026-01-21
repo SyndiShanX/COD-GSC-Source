@@ -192,9 +192,7 @@ function boxstub_update_prompt(player) {
     return false;
   }
   if(isDefined(level.func_magicbox_update_prompt_use_override)) {
-    if([
-        [level.func_magicbox_update_prompt_use_override]
-      ]()) {
+    if([[level.func_magicbox_update_prompt_use_override]]()) {
       return false;
     }
   }
@@ -203,9 +201,7 @@ function boxstub_update_prompt(player) {
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = self.stub.trigger_target.grab_weapon;
     self setcursorhint(cursor_hint, cursor_hint_weapon);
-    if(isDefined(level.magic_box_check_equipment) && [
-        [level.magic_box_check_equipment]
-      ](cursor_hint_weapon)) {
+    if(isDefined(level.magic_box_check_equipment) && [[level.magic_box_check_equipment]](cursor_hint_weapon)) {
       self.hint_string = &"ZOMBIE_TRADE_EQUIP_FILL";
     } else {
       self.hint_string = &"ZOMBIE_TRADE_WEAPON_FILL";
@@ -764,9 +760,7 @@ function treasure_chest_canplayerreceiveweapon(player, weapon, pap_triggers) {
     return 0;
   }
   if(isDefined(level.custom_magic_box_selection_logic)) {
-    if(![
-        [level.custom_magic_box_selection_logic]
-      ](weapon, player, pap_triggers)) {
+    if(![[level.custom_magic_box_selection_logic]](weapon, player, pap_triggers)) {
       return 0;
     }
   }
@@ -937,9 +931,7 @@ function treasure_chest_should_move(chest, player) {
       chance_of_joker = -1;
     }
     if(isDefined(level._zombiemode_chest_joker_chance_override_func)) {
-      chance_of_joker = [
-        [level._zombiemode_chest_joker_chance_override_func]
-      ](chance_of_joker);
+      chance_of_joker = [[level._zombiemode_chest_joker_chance_override_func]](chance_of_joker);
     }
     if(chance_of_joker > random) {
       return true;

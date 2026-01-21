@@ -351,7 +351,7 @@ convoy_vehicle_think_van(node_or_string) {
 
   n_acceleration = 15;
   flag_wait("player_flying");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   t_debris_trigger = get_ent("player_inside_debris_cloud_trigger", "targetname", 1);
 
   while(level.player istouching(t_debris_trigger))

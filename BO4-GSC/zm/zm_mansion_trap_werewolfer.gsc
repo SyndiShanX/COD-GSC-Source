@@ -192,8 +192,7 @@ ai_damage(e_trap) {
 
     bhtnactionstartevent(self, "electrocute");
     self notify(#"bhtn_action_notify", {
-      #action: "electrocute"
-    });
+      #action: "electrocute"});
     wait randomfloat(1.25);
     self function_a3059f6(e_trap);
   } else {
@@ -221,8 +220,7 @@ function_a3059f6(e_trap) {
 
   if(self.health < n_damage) {
     level notify(#"trap_kill", {
-      #victim: self,
-      #e_trap: e_trap
+      #victim: self, #e_trap: e_trap
     });
 
     if(self.archetype === # "werewolf" && isDefined(e_trap.activated_by_player)) {

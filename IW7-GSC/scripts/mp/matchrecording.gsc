@@ -223,8 +223,7 @@ matchrecording_logeventmsg(var_0, var_1, var_2) {
     if(!isDefined(var_2)) {
       var_2 = "";
     } else {
-      var_2 = " \" + var_2 + "\
-      ";
+      var_2 = " \" + var_2 + "\";
     }
   }
 
@@ -240,8 +239,7 @@ matchrecording_logeventplayername(var_0, var_1, var_2) {
   matchrecording_inceventlinecount();
   var_3 = matchrecording_teammap(var_1);
   var_4 = matchrecording_eventcharmap("PLAYER_NAME");
-  var_5 = "|" + var_0 + " " + var_3 + " " + var_4 + " " + "\" + var_2 + "\
-  ";
+  var_5 = "|" + var_0 + " " + var_3 + " " + var_4 + " " + "\" + var_2 + "\";
   level.matchrecevents[level.matchrecevents.size - 1] = level.matchrecevents[level.matchrecevents.size - 1] + var_5;
 }
 

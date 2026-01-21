@@ -262,9 +262,7 @@ show_exploder_models_proc(num) {
     exploders = level.createFXexploders[num];
     if(isDefined(exploders)) {
       foreach(ent in exploders) {
-        if(!exploder_model_starts_hidden(ent.model) &&
-          !exploder_model_is_damaged_model(ent.model) &&
-          !exploder_model_is_chunk(ent.model)) {
+        if(!exploder_model_starts_hidden(ent.model) && !exploder_model_is_damaged_model(ent.model) && !exploder_model_is_chunk(ent.model)) {
           ent.model Show();
         }
 

@@ -220,8 +220,7 @@ getWeaponClass(weapon) {
 }
 processKillsChallengeForWeapon(weaponName, player, challengeClassName) {
   for(weaponNum = 0; weaponNum < 64; weaponNum++) {
-    if(isDefined(level.tbl_weaponIDs[weaponNum]) &&
-      isStrStart(weaponName, level.tbl_weaponIDs[weaponNum]["reference"])) {
+    if(isDefined(level.tbl_weaponIDs[weaponNum]) && isStrStart(weaponName, level.tbl_weaponIDs[weaponNum]["reference"])) {
       player processChallenge("ch_" + challengeClassName + "_" + level.tbl_weaponIDs[weaponNum]["reference"] + "_", 1, weaponNum, challengeClassName);
       return;
     }

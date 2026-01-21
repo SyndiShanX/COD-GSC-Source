@@ -325,8 +325,7 @@ door_activate(time, open) {
     return;
   }
   self.door_moving = 1;
-  if((isDefined(self.script_noteworthy) && self.script_noteworthy == "clip") ||
-    (isDefined(self.script_string) && self.script_string == "clip")) {
+  if((isDefined(self.script_noteworthy) && self.script_noteworthy == "clip") || (isDefined(self.script_string) && self.script_string == "clip")) {
     return;
   }
   if(isDefined(self.script_sound)) {
@@ -639,8 +638,7 @@ blocker_init() {
     if(isDefined(targets[j].script_parameters)) {
       if(targets[j].script_parameters == "grate") {
         if(isDefined(targets[j].script_noteworthy)) {
-          if(targets[j].script_noteworthy == "2" || targets[j].script_noteworthy == "3" || targets[j].script_noteworthy == "4" ||
-            targets[j].script_noteworthy == "5" || targets[j].script_noteworthy == "6") {
+          if(targets[j].script_noteworthy == "2" || targets[j].script_noteworthy == "3" || targets[j].script_noteworthy == "4" || targets[j].script_noteworthy == "5" || targets[j].script_noteworthy == "6") {
             targets[j] hide();
           }
         }
@@ -1846,9 +1844,7 @@ quantum_bomb_open_nearest_door_result(position) {
     if(distanceSquared(zombie_doors[i].origin, position) < range_squared) {
       self thread maps\_zombiemode_audio::create_and_play_dialog("kill", "quant_good");
       zombie_doors[i] notify("trigger", self, true);
-      [
-        [level.quantum_bomb_play_area_effect_func]
-      ](position);
+      [[level.quantum_bomb_play_area_effect_func]](position);
       return;
     }
   }
@@ -1857,9 +1853,7 @@ quantum_bomb_open_nearest_door_result(position) {
     if(distanceSquared(zombie_airlock_doors[i].origin, position) < range_squared) {
       self thread maps\_zombiemode_audio::create_and_play_dialog("kill", "quant_good");
       zombie_airlock_doors[i] notify("trigger", self, true);
-      [
-        [level.quantum_bomb_play_area_effect_func]
-      ](position);
+      [[level.quantum_bomb_play_area_effect_func]](position);
       return;
     }
   }
@@ -1868,9 +1862,7 @@ quantum_bomb_open_nearest_door_result(position) {
     if(distanceSquared(zombie_debris[i].origin, position) < range_squared) {
       self thread maps\_zombiemode_audio::create_and_play_dialog("kill", "quant_good");
       zombie_debris[i] notify("trigger", self, true);
-      [
-        [level.quantum_bomb_play_area_effect_func]
-      ](position);
+      [[level.quantum_bomb_play_area_effect_func]](position);
       return;
     }
   }

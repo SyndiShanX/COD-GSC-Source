@@ -108,12 +108,10 @@ global_inits() {
   //PC Prone Key Config Handling - there are three different bindable controls for going prone on PC		
 
   //"toggleprone" (press prone once, stays prone)
-  //Msg: "Press^3 [{toggleprone}] ^7to evade the landmine!"
-  add_hint_string("mineavoid_hint_toggle", &"ESTATE_LEARN_PRONE_TOGGLE", ::should_break_mineavoid_hint);
+  //Msg: "Press^3 [{toggleprone}] ^7to evade the landmine!"add_hint_string("mineavoid_hint_toggle", &"ESTATE_LEARN_PRONE_TOGGLE", ::should_break_mineavoid_hint);
 
   //"+prone" (press and hold to go prone, gets up as soon as key is released)
-  //Msg: "Press and hold down^3 [{+prone}] ^7to evade the landmine!"
-  add_hint_string("mineavoid_hint_holddown", &"ESTATE_LEARN_PRONE_HOLDDOWN", ::should_break_mineavoid_hint);
+  //Msg: "Press and hold down^3 [{+prone}] ^7to evade the landmine!"add_hint_string("mineavoid_hint_holddown", &"ESTATE_LEARN_PRONE_HOLDDOWN", ::should_break_mineavoid_hint);
 
   // This last one works for console automatically
   // Press and hold^3 [{+stance}] ^7to evade the landmine!
@@ -865,8 +863,7 @@ bouncing_betty_activate() {
 
   wait 0.35;
 
-  //"AMBUUUSH!!!"
-  level.ghost dialogue_queue("est_gst_ambush");
+  //"AMBUUUSH!!!"level.ghost dialogue_queue("est_gst_ambush");
 
   wait 1;
 
@@ -883,18 +880,15 @@ bouncing_betty_hintprint() {
 
     if(is_command_bound("toggleprone")) {
       //"toggleprone" (press prone once, stays prone)
-      //Msg: "Press^3 [{toggleprone}] ^7to evade the landmine!"
-      level.player thread display_hint("mineavoid_hint_toggle");
+      //Msg: "Press^3 [{toggleprone}] ^7to evade the landmine!"level.player thread display_hint("mineavoid_hint_toggle");
     } else
     if(is_command_bound("+prone")) {
       //"+prone" (press and hold to go prone, gets up as soon as key is released)
-      //Msg: "Press and hold down^3 [{+prone}] ^7to evade the landmine!"
-      level.player thread display_hint("mineavoid_hint_holddown");
+      //Msg: "Press and hold down^3 [{+prone}] ^7to evade the landmine!"level.player thread display_hint("mineavoid_hint_holddown");
     } else
     if(is_command_bound("+stance")) {
       //"+stance" (press and hold to go prone)
-      //Msg: "Press and hold^3 [{+stance}] ^7to evade the landmine!"
-      level.player thread display_hint("mineavoid_hint");
+      //Msg: "Press and hold^3 [{+stance}] ^7to evade the landmine!"level.player thread display_hint("mineavoid_hint");
     }
   }
 }
@@ -1068,12 +1062,10 @@ bouncing_betty_deathquote() {
     //PC Prone Control Handling
 
     if(is_command_bound("toggleprone")) {
-      //"Press ^3[{toggleprone}]^7 to evade them."
-      textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2_TOGGLE");
+      //"Press ^3[{toggleprone}]^7 to evade them."textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2_TOGGLE");
     } else
     if(is_command_bound("+prone")) {
-      //"Press and hold down ^3[{+prone}]^7 to evade them."
-      textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2_HOLDDOWN");
+      //"Press and hold down ^3[{+prone}]^7 to evade them."textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2_HOLDDOWN");
     } else
     if(is_command_bound("+stance")) {
       textOverlay2 setText(&"ESTATE_REMIND_PRONE_LINE2");
@@ -1184,15 +1176,13 @@ bouncing_betty_shellshock() {
 
   wait 3;
 
-  //"AMBUUUSH!!!"
-  level.ozone dialogue_queue("est_tf1_ambush");
+  //"AMBUUUSH!!!"level.ozone dialogue_queue("est_tf1_ambush");
 
   flag_set("start_ambush_music");
 
   wait 2;
 
-  //"AMBUUUSH!!!"
-  level.scarecrow dialogue_queue("est_tf2_ambush");
+  //"AMBUUUSH!!!"level.scarecrow dialogue_queue("est_tf2_ambush");
 
   wait 1;
 
@@ -1689,16 +1679,14 @@ house_normalguy_accuracy() {
 // EXTERIOR BREACH SPECIFIC EXTRA GUY SPAWNS
 //*************************************************
 
-//These only spawn under very specific circumstances where it would be plausible,
-//taking into consideration where the player and friendlies may already have gone.
+//These only spawn under very specific circumstances where it would be plausible, //taking into consideration where the player and friendlies may already have gone.
 //They are controlled by triggering by script_flag_set trigs in the main_house prefab
 //They are unilaterally canceled when the armory gets breached because being able to
 //see into every room complicates the spawn plausibility situation.
 
 //trigger for diningroom spawners "breach0_diningroom_spawntrig": these guys emerge from the dining room and rush into the kitchen
 
-//0. (DONE) make sure the triggers only work for the correct breachnum with a script_flag_true "breaching_number_0"
-//1. (DONE) run tally on extraguys' script_battleplan
+//0. (DONE) make sure the triggers only work for the correct breachnum with a script_flag_true "breaching_number_0"//1. (DONE) run tally on extraguys' script_battleplan
 //			- add to floorpops (floorpop ++ 1 time per spawner here for theoretical presence)
 //2. (DONE) run spawnfuncs on extraguys (ends if 3 runs)
 //			- when spawned, add to floorpops (floorpop ++ 1 time here)
@@ -2910,7 +2898,7 @@ defense_schedule_control() {
   //tally up the total enemies in the package
 
   //enemies = [];
-  //enemies = getaiarray( "axis" );
+  //enemies = getaiarray("axis" );
   level.enemyTotalPop = 0;
 
   badsave_volume = getent("no_autosave_in_basement", "targetname");
@@ -3448,7 +3436,7 @@ birchfield_leftflank_routing() {
 
   self endon("death");
 
-  //nodes = getnodearray( "birchfield_smokeassault_1a", "targetname" );
+  //nodes = getnodearray("birchfield_smokeassault_1a", "targetname" );
 
   nodeLoiterTime = randomfloatrange(0.5, 2);
   nodeInitRadius = 256;
@@ -4041,13 +4029,11 @@ defense_helidrop_rider_settings(heliName) {
 
 /
 
-core_spawn(spawnerName, spawnFunction,
-  var) {
+core_spawn(spawnerName, spawnFunction, var) {
   if(!isDefined(var)) {
     array_spawn_function_targetname(spawnerName, spawnFunction);
   } else {
-    array_spawn_function_targetname(spawnerName, spawnFunction,
-      var);
+    array_spawn_function_targetname(spawnerName, spawnFunction, var);
   }
 
   spawners = [];
@@ -4161,8 +4147,7 @@ roaming_nodecluster_nav(nodes, nodeLoiterTime, nodeInitRadius, nodeEndRadius, no
 
   //setup in map: make a set of starting nodes
   //draw an imaginary line to the end destination from the general starting area
-  //set up multiple nodes at significantly different positions as 'clusters',
-  //each cluster is one side of the line only, clusters sequentially alternate sides of the line
+  //set up multiple nodes at significantly different positions as 'clusters', //each cluster is one side of the line only, clusters sequentially alternate sides of the line
 
   //randomly pick one of the starting nodes
   //use nodecluster encroachment loop with adjustable closure rate settings
@@ -4728,7 +4713,7 @@ download_progress() {
     if( level.currentfiles > 1200 )
     {
     	thread ending_moments();
-    	badguys = getaiarray( "axis" );
+    	badguys = getaiarray("axis" );
     	foreach( guy in badguys )
     	{
     		guy kill();

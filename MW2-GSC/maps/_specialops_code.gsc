@@ -823,8 +823,7 @@ specialops_mission_over_stats(was_success) {
     assertex(isDefined(level.specOpsSettings), "Special Op levels are not yet initialized in _endmission.gsc and we are already trying to save level difficulty completed data.");
 
     // specOpsString is a string of something like '0123412324200323404...' ranging from 0 to 4, for special ops we need range of 0 to 3.
-    // string size can not count higher then number of levels or we will have 100%+
-    string_size = specOpsString.size;
+    // string size can not count higher then number of levels or we will have 100%+ string_size = specOpsString.size;
     if(string_size > level.specOpsSettings.levels.size)
       string_size = level.specOpsSettings.levels.size;
 

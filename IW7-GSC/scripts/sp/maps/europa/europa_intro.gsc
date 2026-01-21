@@ -465,8 +465,8 @@ func_CF62() {
 }
 
 func_9500() {
-  level.var_D267 give_attacker_kill_rewards( % europa_dropship_intro_plr_halo_jump_lr, 1, 0, 0);
-  level.var_D267 func_82B0( % europa_dropship_intro_plr_halo_jump_lr, 0.5);
+  level.var_D267 give_attacker_kill_rewards(%europa_dropship_intro_plr_halo_jump_lr, 1, 0, 0);
+  level.var_D267 func_82B0(%europa_dropship_intro_plr_halo_jump_lr, 0.5);
 }
 
 func_CFDC() {
@@ -634,8 +634,8 @@ func_CFE3(var_0, var_1, var_2) {
   var_3 = 0.7;
   var_4 = 1;
   var_5 = 0.2;
-  level.var_D267 childthread func_CFE2( % europa_dropship_intro_plr_halo_jump_fb, var_1, var_3, var_4, var_5, 0);
-  level.var_D267 childthread func_CFE2( % europa_dropship_intro_plr_halo_jump_lr, var_0, var_3, var_4, var_5, 1);
+  level.var_D267 childthread func_CFE2(%europa_dropship_intro_plr_halo_jump_fb, var_1, var_3, var_4, var_5, 0);
+  level.var_D267 childthread func_CFE2(%europa_dropship_intro_plr_halo_jump_lr, var_0, var_3, var_4, var_5, 1);
 }
 
 func_CFE2(var_0, var_1, var_2, var_3, var_4, var_5) {

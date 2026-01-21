@@ -378,9 +378,7 @@ function get_favorite_enemy() {
     if(!zm_utility::is_player_valid(e_target)) {
       continue;
     }
-    if(isDefined(level.var_3fded92e) && ![
-        [level.var_3fded92e]
-      ](e_target)) {
+    if(isDefined(level.var_3fded92e) && ![[level.var_3fded92e]](e_target)) {
       continue;
     }
     if(!isDefined(e_least_hunted)) {
@@ -468,9 +466,7 @@ function function_f8080b7() {
   self waittill("death", attacker);
   self thread zombie_utility::zombie_eye_glow_stop();
   if(function_a1d75eeb() == 0 && level.zombie_total == 0) {
-    if(!isDefined(level.zm_ai_round_over) || [
-        [level.zm_ai_round_over]
-      ]()) {
+    if(!isDefined(level.zm_ai_round_over) || [[level.zm_ai_round_over]]()) {
       level.var_6a6f912a = self.origin;
       level notify("last_ai_down", self);
     }
@@ -480,9 +476,7 @@ function function_f8080b7() {
       attacker zm_score::player_add_points("death_raz", self.damagemod, self.damagelocation);
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](attacker, self);
+      [[level.hero_power_update]](attacker, self);
     }
     attacker zm_audio::create_and_play_dialog("kill", "raz");
     attacker zm_stats::increment_client_stat("zraz_killed");

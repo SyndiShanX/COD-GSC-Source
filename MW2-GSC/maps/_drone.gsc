@@ -185,15 +185,15 @@ drone_death_thread() {
 
 // non-blocking loop animation used for idle/movement
 drone_play_looping_anim(droneAnim, rate) {
-  self ClearAnim( % body, 0.2);
+  self ClearAnim(%body, 0.2);
   self StopAnimScripted();
 
-  self SetFlaggedAnimKnobAllRestart("drone_anim", droneAnim, % body, 1, 0.2, rate);
+  self SetFlaggedAnimKnobAllRestart("drone_anim", droneAnim, %body, 1, 0.2, rate);
 }
 
 //blocking/scripted animation (when we're not moving)
 drone_play_scripted_anim(droneAnim, deathplant) {
-  self clearAnim( % body, 0.2);
+  self clearAnim(%body, 0.2);
   self stopAnimScripted();
 
   mode = "normal";
@@ -210,13 +210,7 @@ drone_play_scripted_anim(droneAnim, deathplant) {
 /*
 =============
 ///ScriptDocBegin
-"Name: drone_drop_real_weapon_on_death()"
-"Summary: Call this on a drone to have him drop a real weapon that can be picked up by the player"
-"Module: Utility"
-"CallOn: A spawned drone"
-"Example: myDrone thread drone_drop_real_weapon_on_death()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: drone_drop_real_weapon_on_death()""Summary: Call this on a drone to have him drop a real weapon that can be picked up by the player""Module: Utility""CallOn: A spawned drone""Example: myDrone thread drone_drop_real_weapon_on_death()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 drone_drop_real_weapon_on_death() {
@@ -715,8 +709,7 @@ drone_move() {
 
 getPathArray(firstTargetName, initialPoint) {
   //#########################################################################################################
-  //	make an array of all the points along the spline starting with the characters current position,
-  //	then starting with the point with the passed in targetname
+  //	make an array of all the points along the spline starting with the characters current position, //	then starting with the point with the passed in targetname
   //
   //	information stored in array:
   //

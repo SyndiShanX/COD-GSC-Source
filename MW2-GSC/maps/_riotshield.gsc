@@ -41,13 +41,7 @@ subclass_riotshield() {
 /*
 =============
 ///ScriptDocBegin
-"Name: riotshield_sprint_on()"
-"Summary: Turn on sprint for riotshield AI"
-"Module: AI"
-"CallOn: An AI"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: riotshield_sprint_on()""Summary: Turn on sprint for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 riotshield_sprint_on() {
@@ -57,13 +51,7 @@ riotshield_sprint_on() {
 /*
 =============
 ///ScriptDocBegin
-"Name: riotshield_fastwalk_on()"
-"Summary: Turn on fast walking ( while still facing a givin direction ) for riotshield AI"
-"Module: AI"
-"CallOn: An AI"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: riotshield_fastwalk_on()""Summary: Turn on fast walking ( while still facing a givin direction ) for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 riotshield_fastwalk_on() {
@@ -73,13 +61,7 @@ riotshield_fastwalk_on() {
 /*
 =============
 ///ScriptDocBegin
-"Name: riotshield_sprint_off()"
-"Summary: Turn off sprint for riotshield AI"
-"Module: AI"
-"CallOn: An AI"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: riotshield_sprint_off()""Summary: Turn off sprint for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 riotshield_sprint_off() {
@@ -89,13 +71,7 @@ riotshield_sprint_off() {
 /*
 =============
 ///ScriptDocBegin
-"Name: riotshield_fastwalk_off()"
-"Summary: Turn off fast walking for riotshield AI"
-"Module: AI"
-"CallOn: An AI"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: riotshield_fastwalk_off()""Summary: Turn off fast walking for riotshield AI""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 riotshield_fastwalk_off() {
@@ -105,13 +81,7 @@ riotshield_fastwalk_off() {
 /*
 =============
 ///ScriptDocBegin
-"Name: riotshield_flee()"
-"Summary: Drop shield and run away to cover"
-"Module: AI"
-"CallOn: An AI"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: riotshield_flee()""Summary: Drop shield and run away to cover""Module: AI""CallOn: An AI""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 riotshield_flee() {
@@ -137,13 +107,7 @@ riotshield_flee() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_create( <ai_array> )"
-"Summary: Create an AI group from an array of AI"
-"Module: AI"
-"CallOn: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_create( <ai_array> )""Summary: Create an AI group from an array of AI""Module: AI""CallOn: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_create(ai_array, forward, spacing) {
@@ -173,13 +137,7 @@ group_create(ai_array, forward, spacing) {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_initialize_formation( <forward>, <spacing> )"
-"Summary: Create an AI group from an array of AI"
-"Module: AI"
-"CallOn: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_initialize_formation( <forward>, <spacing> )""Summary: Create an AI group from an array of AI""Module: AI""CallOn: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_initialize_formation(forward, spacing) {
@@ -226,13 +184,7 @@ group_resort_on_deaths() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_sort_by_closest_match( <forward> )"
-"Summary: "
-"Module: AI"
-"CallOn: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_sort_by_closest_match( <forward> )""Summary: ""Module: AI""CallOn: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_sort_by_closest_match(dir) {
@@ -305,13 +257,7 @@ group_left_corner(center, offset) {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_move( <group_center>, <forward> )"
-"Summary: Move an AI group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_move( <group_center>, <forward> )""Summary: Move an AI group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_move(group_center, dir) {
@@ -409,13 +355,7 @@ check_group_facing_forward() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_sprint_on()"
-"Summary: Turn sprint on for a riotshield group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_sprint_on()""Summary: Turn sprint on for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_sprint_on() {
@@ -427,13 +367,7 @@ group_sprint_on() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_fastwalk_on()"
-"Summary: Turn fast walk on for a riotshield group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_fastwalk_on()""Summary: Turn fast walk on for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_fastwalk_on() {
@@ -445,13 +379,7 @@ group_fastwalk_on() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_sprint_off()"
-"Summary: Turn sprint off for a riotshield group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_sprint_off()""Summary: Turn sprint off for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_sprint_off() {
@@ -463,13 +391,7 @@ group_sprint_off() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_fastwalk_off()"
-"Summary: Turn fast walk off for a riotshield group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_fastwalk_off()""Summary: Turn fast walk off for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_fastwalk_off() {
@@ -481,13 +403,7 @@ group_fastwalk_off() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_lock_angles( <dir> )"
-"Summary: Lock angles for a riotshield group. This function waits for the AI to turntable small angle changes"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_lock_angles( <dir> )""Summary: Lock angles for a riotshield group. This function waits for the AI to turntable small angle changes""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_lock_angles(dir) {
@@ -511,13 +427,7 @@ group_lock_angles(dir) {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_unlock_angles()"
-"Summary: Unlock angles for a riotshield group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_unlock_angles()""Summary: Unlock angles for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_unlock_angles() {
@@ -533,13 +443,7 @@ group_unlock_angles() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_free_combat()"
-"Summary: Turn on free combat mode for a riotshield group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: group_free_combat()""Summary: Turn on free combat mode for a riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 group_free_combat() {
@@ -558,12 +462,7 @@ group_free_combat() {
 /*
 =============
 ///ScriptDocBegin
-"Name: group_center()"
-"Summary: Calculate the center position of the riotshield group"
-"Module: AI"
-"CallOn: AI group"
-"Example: "
-"SPMP: singleplayer"
+"Name: group_center()""Summary: Calculate the center position of the riotshield group""Module: AI""CallOn: AI group""Example: ""SPMP: singleplayer"
 ///ScriptDocEnd
 =============
 */

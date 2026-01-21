@@ -28,9 +28,7 @@ main() {
   }
   if(isDefined(self.custom_animscript)) {
     if(isDefined(self.custom_animscript["combat"])) {
-      [
-        [self.custom_animscript["combat"]]
-      ]();
+      [[self.custom_animscript["combat"]]]();
       return;
     }
   }
@@ -81,7 +79,7 @@ dofriendlyfirereaction() {
       var_0 = animscripts\utility::lookupanim("combat", "surprise_stop");
 
     resetanimmode();
-    self setflaggedanimknoballrestart("react", var_0, % animscript_root, 1, 0.2, self.animplaybackrate);
+    self setflaggedanimknoballrestart("react", var_0, %animscript_root, 1, 0.2, self.animplaybackrate);
     combat_playfacialanim(var_0, "run");
     animscripts\shared::donotetracks("react");
   }
@@ -93,10 +91,10 @@ transitionfromcoverstand() {
     var_1 = undefined;
 
     if(self.prevscript == "cover_right") {
-      var_0 = [ % corner_standr_alert_idle, % corner_standr_alert_twitch01, % corner_standr_alert_twitch04, % corner_standr_alert_twitch05, % corner_standr_alert_twitch06, % corner_standr_alert_twitch07];
+      var_0 = [ % corner_standr_alert_idle, %corner_standr_alert_twitch01, %corner_standr_alert_twitch04, %corner_standr_alert_twitch05, %corner_standr_alert_twitch06, %corner_standr_alert_twitch07];
       var_1 = "trans_from_corner_standr";
     } else if(self.prevscript == "cover_left") {
-      var_0 = [ % corner_standl_alert_idle, % corner_standl_alert_twitch01, % corner_standl_alert_twitch03, % corner_standl_alert_twitch04, % corner_standl_alert_twitch06, % corner_standl_alert_twitch07];
+      var_0 = [ % corner_standl_alert_idle, %corner_standl_alert_twitch01, %corner_standl_alert_twitch03, %corner_standl_alert_twitch04, %corner_standl_alert_twitch06, %corner_standl_alert_twitch07];
       var_1 = "trans_from_corner_standl";
     }
 
@@ -114,7 +112,7 @@ transitionfromcoverstand() {
         resetanimmode();
         self orientmode("face current");
         var_6 = animscripts\utility::lookupanim("combat", var_1);
-        self setflaggedanimknoballrestart("transition", var_6, % animscript_root, 1, 0.2, 1);
+        self setflaggedanimknoballrestart("transition", var_6, %animscript_root, 1, 0.2, 1);
         animscripts\shared::donotetracks("transition");
       }
     }
@@ -129,7 +127,7 @@ transitionfrompronemove() {
     if(self.prevscript == "move") {
       self animmode("angle deltas", 0);
       self orientmode("face current");
-      self setflaggedanimknoballrestart("transition", % h1_crawl_2_prone, % animscript_root, 1, 0.4, 1);
+      self setflaggedanimknoballrestart("transition", %h1_crawl_2_prone, %animscript_root, 1, 0.4, 1);
       animscripts\shared::donotetracks("transition");
       resetanimmode();
     }
@@ -149,13 +147,13 @@ transitiontocombat() {
         resetanimmode();
         self orientmode("face current");
         var_0 = animscripts\utility::lookupanim("combat", "trans_from_crouch_r");
-        self setflaggedanimknoballrestart("transition", var_0, % animscript_root, 1, 0.2, 1);
+        self setflaggedanimknoballrestart("transition", var_0, %animscript_root, 1, 0.2, 1);
         wait(getanimlength(var_0));
       } else if(self.prevscript == "cover_left") {
         resetanimmode();
         self orientmode("face current");
         var_0 = animscripts\utility::lookupanim("combat", "trans_from_crouch_l");
-        self setflaggedanimknoballrestart("transition", var_0, % animscript_root, 1, 0.2, 1);
+        self setflaggedanimknoballrestart("transition", var_0, %animscript_root, 1, 0.2, 1);
         wait(getanimlength(var_0));
       }
     }
@@ -176,7 +174,7 @@ transitiontocombat() {
     else
       var_0 = animscripts\utility::lookupanim("combat", "trans_to_combat");
 
-    self setflaggedanimknoballrestart("transition", var_0, % animscript_root, 1, 0.2, 1.2 * self.animplaybackrate);
+    self setflaggedanimknoballrestart("transition", var_0, %animscript_root, 1, 0.2, 1.2 * self.animplaybackrate);
     combat_playfacialanim(var_0, "run");
     animscripts\shared::donotetracks("transition");
   }
@@ -200,7 +198,7 @@ setup() {
   set_aim_and_turn_limits();
   thread stopshortly();
   self.previouspitchdelta = 0.0;
-  self clearanim( % animscript_root, 0.2);
+  self clearanim(%animscript_root, 0.2);
   var_0 = 0.2;
 
   if(isDefined(self.aimsetupblendtime))
@@ -280,7 +278,7 @@ exposedcombatstopusingrpgcheck(var_0) {
     else
       animscripts\shared::throwdownweapon(animscripts\utility::lookupanim("combat", "drop_rpg_crouch"));
 
-    self clearanim( % animscript_root, 0.2);
+    self clearanim(%animscript_root, 0.2);
     animscripts\combat_utility::endfireandanimidlethread();
     setup_anim_array();
     animscripts\combat_utility::startfireandaimidlethread();
@@ -721,12 +719,12 @@ doturn(var_0, var_1) {
   else
     self animmode("angle deltas", 0);
 
-  self setanimknoball( % exposed_aiming, % body, 1, var_4);
+  self setanimknoball(%exposed_aiming, %body, 1, var_4);
 
   if(!isDefined(self.turntomatchnode))
     turningaimingon(var_4);
 
-  self setanimlimited( % turn, 1, var_4);
+  self setanimlimited(%turn, 1, var_4);
 
   if(isDefined(self.heat))
     var_3 = min(1.0, var_3);
@@ -741,16 +739,16 @@ doturn(var_0, var_1) {
     thread shootwhileturning();
 
   doturnnotetracks();
-  self setanimlimited( % turn, 0, 0.2);
+  self setanimlimited(%turn, 0, 0.2);
 
   if(!isDefined(self.turntomatchnode))
     turningaimingoff(0.2);
 
   if(!isDefined(self.turntomatchnode)) {
-    self clearanim( % turn, 0.2);
-    self setanimknob( % exposed_aiming, 1, 0.2, 1);
+    self clearanim(%turn, 0.2);
+    self setanimknob(%exposed_aiming, 1, 0.2, 1);
   } else
-    self clearanim( % exposed_modern, 0.3);
+    self clearanim(%exposed_modern, 0.3);
 
   if(isDefined(self.turnlastresort)) {
     self.turnlastresort = undefined;
@@ -780,15 +778,15 @@ makesureturnworks() {
 
 turningaimingon(var_0) {
   self setanimlimited(animscripts\utility::animarray("straight_level"), 0, var_0);
-  self setanim( % add_idle, 0, var_0);
+  self setanim(%add_idle, 0, var_0);
 
   if(!animscripts\utility::weapon_pump_action_shotgun())
-    self clearanim( % add_fire, 0.2);
+    self clearanim(%add_fire, 0.2);
 }
 
 turningaimingoff(var_0) {
   self setanimlimited(animscripts\utility::animarray("straight_level"), 1, var_0);
-  self setanim( % add_idle, 1, var_0);
+  self setanim(%add_idle, 1, var_0);
 }
 
 shootwhileturning() {
@@ -799,7 +797,7 @@ shootwhileturning() {
     return;
   }
   animscripts\combat_utility::shootuntilshootbehaviorchange();
-  self clearanim( % add_fire, 0.2);
+  self clearanim(%add_fire, 0.2);
 }
 
 shootuntilneedtoturn() {
@@ -877,12 +875,12 @@ tryexposedthrowgrenade(var_0, var_1) {
       }
 
       if(var_5.size > 0) {
-        self setanim( % exposed_aiming, 0, 0.1);
+        self setanim(%exposed_aiming, 0, 0.1);
         combat_clearfacialanim();
         self animmode("zonly_physics");
         animscripts\track::setanimaimweight(0, 0);
         var_2 = animscripts\combat_utility::trygrenade(var_0, var_5[randomint(var_5.size)]);
-        self setanim( % exposed_aiming, 1, 0.1);
+        self setanim(%exposed_aiming, 1, 0.1);
         combat_playfacialanim(undefined, "aim");
 
         if(var_2)
@@ -913,7 +911,7 @@ transitionto(var_0) {
   if(!isDefined(var_2)) {
     return;
   }
-  self clearanim( % animscript_root, 0.3);
+  self clearanim(%animscript_root, 0.3);
   animscripts\combat_utility::endfireandanimidlethread();
 
   if(var_0 == "stand")
@@ -923,7 +921,7 @@ transitionto(var_0) {
 
   if(!animhasnotetrack(var_2, "anim_pose = \"" + var_0 + "\"")) {}
 
-  self setflaggedanimknoballrestart("trans", var_2, % body, 1, 0.2, var_3);
+  self setflaggedanimknoballrestart("trans", var_2, %body, 1, 0.2, var_3);
   combat_playfacialanim(var_2, "run");
   var_4 = getanimlength(var_2) / var_3;
   var_5 = var_4 - 0.3;
@@ -1003,7 +1001,7 @@ exposedreload(var_0) {
     if(self.finishedreload)
       animscripts\weaponlist::refillclip();
 
-    self clearanim( % reload, 0.2);
+    self clearanim(%reload, 0.2);
     self.keepclaimednode = 0;
     self notify("stop_trying_to_melee");
     self.a.exposedreloading = 0;
@@ -1028,7 +1026,7 @@ doreloadanim(var_0, var_1) {
     var_2 = 1.2;
 
   var_3 = "reload_" + animscripts\combat_utility::getuniqueflagnameindex();
-  self clearanim( % animscript_root, 0.2);
+  self clearanim(%animscript_root, 0.2);
   self setflaggedanimrestart(var_3, var_0, 1, 0.2, var_2);
   combat_playfacialanim(var_0, "run");
   thread notifyonstartaim("abort_reload", var_3);
@@ -1094,7 +1092,7 @@ switchtosidearm(var_0) {
   thread removeswapanimonkillanimscript("switched_to_sidearm");
   animscripts\combat_utility::endfireandanimidlethread();
   self.swapanim = var_0;
-  self setflaggedanimknoballrestart("weapon swap", var_0, % body, 1, 0.2, animscripts\combat_utility::fasteranimspeed());
+  self setflaggedanimknoballrestart("weapon swap", var_0, %body, 1, 0.2, animscripts\combat_utility::fasteranimspeed());
   combat_playfacialanim(var_0, "run");
   donotetrackspostcallbackwithendon("weapon swap", ::handlepickup, "end_weapon_swap");
   self clearanim(self.swapanim, 0.2);
@@ -1143,7 +1141,7 @@ switchtolastweapon(var_0, var_1) {
   thread removeswapanimonkillanimscript("switched_to_lastweapon");
   animscripts\combat_utility::endfireandanimidlethread();
   self.swapanim = var_0;
-  self setflaggedanimknoballrestart("weapon swap", var_0, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("weapon swap", var_0, %body, 1, 0.1, 1);
   combat_playfacialanim(var_0, "run");
 
   if(isDefined(var_1))
@@ -1187,7 +1185,7 @@ rpgdeath() {
   else
     var_0 = animscripts\utility::lookupanim("combat", "rpg_death_stagger");
 
-  self setflaggedanimknoball("deathanim", var_0, % animscript_root, 1, 0.05, 1);
+  self setflaggedanimknoball("deathanim", var_0, %animscript_root, 1, 0.05, 1);
   combat_playfacialanim(var_0, "death");
   animscripts\shared::donotetracks("deathanim");
   animscripts\shared::dropallaiweapons();
@@ -1319,5 +1317,5 @@ combat_playfacialanim(var_0, var_1) {
 
 combat_clearfacialanim() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

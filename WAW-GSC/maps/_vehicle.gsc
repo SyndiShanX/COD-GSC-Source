@@ -195,19 +195,7 @@ path_detour_script_origin(detournode) {
 }
 
 crash_detour_check(detourpath) {
-  return (
-    isDefined(detourpath.script_crashtype) &&
-    (
-      isDefined(self.deaddriver) ||
-      self.health <= 0 ||
-      detourpath.script_crashtype == "forced" ||
-      (level.vclogin_vehicles)
-    ) &&
-    (
-      !isDefined(detourpath.derailed) ||
-      (isDefined(detourpath.script_crashtype) && detourpath.script_crashtype == "plane")
-    )
-  );
+  return (isDefined(detourpath.script_crashtype) && (isDefined(self.deaddriver) || self.health <= 0 || detourpath.script_crashtype == "forced" || (level.vclogin_vehicles)) && (!isDefined(detourpath.derailed) || (isDefined(detourpath.script_crashtype) && detourpath.script_crashtype == "plane")));
 }
 
 crash_derailed_check(detourpath) {
@@ -458,9 +446,7 @@ path_array_setup(pathpoint) {
     pathpoints[arraycount] = pathpoint;
     arraycount++;
     if(isDefined(pathpoint.target))
-      pathpoint = [
-        [get_func]
-      ](pathpoint.target);
+      pathpoint = [[get_func]](pathpoint.target);
     else
       break;
   }
@@ -1303,17 +1289,7 @@ kill_damage(type) {
 }
 
 vehicle_is_tank() {
-  return self.vehicletype == "sherman" ||
-    self.vehicletype == "panzer4" ||
-    self.vehicletype == "type97" ||
-    self.vehicletype == "t34" ||
-    self.vehicletype == "see2_panzeriv" ||
-    self.vehicletype == "see2_tiger" ||
-    self.vehicletype == "see2_ot34" ||
-    self.vehicletype == "see2_t34" ||
-    self.vehicletype == "see2_panther" ||
-    self.vehicletype == "tiger" ||
-    self.vehicletype == "see2_physics_t34";
+  return self.vehicletype == "sherman" || self.vehicletype == "panzer4" || self.vehicletype == "type97" || self.vehicletype == "t34" || self.vehicletype == "see2_panzeriv" || self.vehicletype == "see2_tiger" || self.vehicletype == "see2_ot34" || self.vehicletype == "see2_t34" || self.vehicletype == "see2_panther" || self.vehicletype == "tiger" || self.vehicletype == "see2_physics_t34";
 }
 
 kill() {
@@ -1401,12 +1377,7 @@ kill() {
     }
     if(!isDefined(self.destructibledef)) {
       if(isDefined(level.vehicle_death_earthquake[type])) {
-        earthquake(
-          level.vehicle_death_earthquake[type].scale,
-          level.vehicle_death_earthquake[type].duration,
-          self.origin,
-          level.vehicle_death_earthquake[type].radius
-        );
+        earthquake(level.vehicle_death_earthquake[type].scale, level.vehicle_death_earthquake[type].duration, self.origin, level.vehicle_death_earthquake[type].radius);
       }
       thread kill_damage(type);
       if(isDefined(level.vehicle_deathmodel[model])) {
@@ -1522,7 +1493,7 @@ set_death_model(sModel, fDelay) {
     return;
   eModel = get_dummy();
   if(isDefined(self.clear_anims_on_death))
-    eModel clearanim( % root, 0);
+    eModel clearanim(%root, 0);
   if(isDefined(self))
     eModel setModel(sModel);
 }
@@ -1763,12 +1734,7 @@ build_deathfx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDela
     bOverride = false;
   assertEx(isDefined(effect), "Failed to build death effect because there is no effect specified for the model used for that vehicle.");
   type = level.vttype;
-  if(
-    isDefined(level.vehicle_death_fx_override) &&
-    isDefined(level.vehicle_death_fx_override[type]) &&
-    level.vehicle_death_fx_override[type] &&
-    !bOverride
-  )
+  if(isDefined(level.vehicle_death_fx_override) && isDefined(level.vehicle_death_fx_override[type]) && level.vehicle_death_fx_override[type] && !bOverride)
     return;
   if(!isDefined(level.vehicle_death_fx[type]))
     level.vehicle_death_fx[type] = [];
@@ -1782,11 +1748,7 @@ get_script_modelvehicles() {
     return level.modelvehicles;
   level.modelvehicles = [];
   for(i = 0; i < models.size; i++) {
-    if(isDefined(models[i].targetname) &&
-      (models[i].targetname == "destructible" ||
-        models[i].targetname == "zpu" ||
-        models[i].targetname == "exploder")
-    )
+    if(isDefined(models[i].targetname) && (models[i].targetname == "destructible" || models[i].targetname == "zpu" || models[i].targetname == "exploder"))
       continue;
     if(isDefined(models[i].script_noteworthy) && models[i].script_noteworthy == "notvehicle")
       continue;
@@ -2172,12 +2134,7 @@ node_trigger_process() {
     if(!isDefined(level.flag[self.script_flag_wait]))
       flag_init(self.script_flag_wait);
   }
-  if(
-    isDefined(self.script_VehicleSpawngroup) ||
-    isDefined(self.script_VehicleStartMove) ||
-    isDefined(self.script_gatetrigger) ||
-    isDefined(self.script_Vehiclegroupdelete)
-  )
+  if(isDefined(self.script_VehicleSpawngroup) || isDefined(self.script_VehicleStartMove) || isDefined(self.script_gatetrigger) || isDefined(self.script_Vehiclegroupdelete))
     processtrigger = true;
   if(processtrigger)
     add_proccess_trigger(self);
@@ -2607,14 +2564,7 @@ friendlyfire_shield() {
   attacker = undefined;
   while(self.health > 0) {
     self waittill("damage", amount, attacker, direction_vec, point, type, modelName, tagName);
-    if(
-      (!isDefined(attacker) && self.script_team != "neutral") ||
-      is_godmode() ||
-      attacker_isonmyteam(attacker) ||
-      attacker_troop_isonmyteam(attacker) ||
-      isDestructible() ||
-      bulletshielded(type)
-    )
+    if((!isDefined(attacker) && self.script_team != "neutral") || is_godmode() || attacker_isonmyteam(attacker) || attacker_troop_isonmyteam(attacker) || isDestructible() || bulletshielded(type))
       self.health = self.currenthealth;
     else if(self has_frontarmor()) {
       self regen_front_armor(attacker, amount);
@@ -3445,9 +3395,7 @@ lights_on_internal(group) {
   level.lastlighttime = gettime();
   if(!isDefined(group))
     group = "all";
-  if(!isDefined(level.vehicle_lights_group[self.model]) ||
-    !isDefined(level.vehicle_lights_group[self.model][group])
-  )
+  if(!isDefined(level.vehicle_lights_group[self.model]) || !isDefined(level.vehicle_lights_group[self.model][group]))
     return;
   thread lights_delayfxforframe();
   if(!isDefined(self.lights))
@@ -3804,8 +3752,7 @@ generate_colmaps_vehicles() {
   for(i = 0; i < keys1.size; i++) {
     keys2 = getarraykeys(level.vehicleInitThread[keys1[i]]);
     for(j = 0; j < keys2.size; j++) {
-      if(!isDefined(hascol[keys1[i]]) ||
-        !isDefined(hascol[keys1[i]][keys2[j]])) {
+      if(!isDefined(hascol[keys1[i]]) || !isDefined(hascol[keys1[i]][keys2[j]])) {
         dump = true;
         needscol[keys1[i]][keys2[j]] = true;
       }
@@ -3857,9 +3804,7 @@ get_deletegroups(script_vehiclegroupdelete) {
   deletegroups = [];
   vehicles = getEntArray("script_vehicle", "classname");
   for(i = 0; i < vehicles.size; i++) {
-    if(!isDefined(vehicles[i].script_vehiclegroupdelete) ||
-      vehicles[i].script_vehiclegroupdelete != script_vehiclegroupdelete
-    )
+    if(!isDefined(vehicles[i].script_vehiclegroupdelete) || vehicles[i].script_vehiclegroupdelete != script_vehiclegroupdelete)
       continue;
     deletegroups[deletegroups.size] = vehicles[i];
   }
@@ -4001,11 +3946,7 @@ vehicle_dump() {
     if(isDefined(vehicles[i].script_vehiclestartmove))
       fileprint_map_keypairprint("script_vehiclestartmove", vehicles[i].script_vehiclestartmove);
     fileprint_map_entity_end();
-    if(
-      !isDefined(vehicles[i].spawner_id) ||
-      !isDefined(level.vehicle_spawners) ||
-      !isDefined(level.vehicle_spawners[vehicles[i].spawner_id])
-    )
+    if(!isDefined(vehicles[i].spawner_id) || !isDefined(level.vehicle_spawners) || !isDefined(level.vehicle_spawners[vehicles[i].spawner_id]))
       continue;
     fileprint_map_entity_start();
     fileprint_map_keypairprint("classname", "script_struct");

@@ -133,24 +133,19 @@ download_obj_dialogue() {
   downloadsLeft = level.downloads.size - level.downloadsComplete;
 
   if(downloadsLeft == 2) {
-    // "Good job, Hunter Two-One. Our intel indicates that there are two more laptops in the area - go find them and get their data."
-    so_radio_dialogue("so_dwnld_hqr_gofindthem");
+    // "Good job, Hunter Two-One. Our intel indicates that there are two more laptops in the area - go find them and get their data."so_radio_dialogue("so_dwnld_hqr_gofindthem");
     return;
   } else if(downloadsLeft == 1) {
-    // "Stay frosty, Hunter Two-One, there's one laptop left."
-    so_radio_dialogue("so_dwnld_hqr_onelaptop");
+    // "Stay frosty, Hunter Two-One, there's one laptop left."so_radio_dialogue("so_dwnld_hqr_onelaptop");
     return;
   } else if(downloadsLeft == 0) {
-    // "Nice work, Hunter Two-One. Now get back to the Stryker, we're pulling you out of the area."
-    so_radio_dialogue("so_dwnld_hqr_pullingyouout");
+    // "Nice work, Hunter Two-One. Now get back to the Stryker, we're pulling you out of the area."so_radio_dialogue("so_dwnld_hqr_pullingyouout");
 
     bugWaitTime = 30;
 
     aliases = [];
-    // "Hunter Two-One, get back to the Stryker for extraction!"
-    aliases[0] = "so_dwnld_hqr_extraction";
-    // "Hunter Two-One, return to the Stryker to complete your mission!"
-    aliases[1] = "so_dwnld_hqr_completemission";
+    // "Hunter Two-One, get back to the Stryker for extraction!"aliases[0] = "so_dwnld_hqr_extraction";
+    // "Hunter Two-One, return to the Stryker to complete your mission!"aliases[1] = "so_dwnld_hqr_completemission";
 
     level endon("stryker_extraction_done");
 
@@ -181,8 +176,7 @@ download_files() {
   if(!flag("first_download_started")) {
     flag_set("first_download_started");
 
-    // "Hunter Two-One, there are hostiles in the area that can wirelessly disrupt the data transfer."
-    thread so_radio_dialogue("so_dwnld_hqr_wirelesslydisrupt");
+    // "Hunter Two-One, there are hostiles in the area that can wirelessly disrupt the data transfer."thread so_radio_dialogue("so_dwnld_hqr_wirelesslydisrupt");
   }
 
   self.downloading = true;
@@ -243,11 +237,9 @@ download_interrupt_dialogue() {
 
   lines = [];
 
-  // "Hunter Two-One, the download has been interrupted! You'll have to restart the data transfer manually."
-  lines[0] = "so_dwnld_hqr_restartmanually";
+  // "Hunter Two-One, the download has been interrupted! You'll have to restart the data transfer manually."lines[0] = "so_dwnld_hqr_restartmanually";
 
-  // "Hunter Two-One, hostiles have interrupted the download! Get back there and manually resume the transfer!"
-  lines[1] = "so_dwnld_hqr_getbackrestart";
+  // "Hunter Two-One, hostiles have interrupted the download! Get back there and manually resume the transfer!"lines[1] = "so_dwnld_hqr_getbackrestart";
 
   if(!isDefined(level.interruptLineIndex) || (level.interruptLineIndex >= lines.size)) {
     level.interruptLineIndex = 0;
@@ -490,23 +482,19 @@ download_enemies_attack_dialogue() {
 
   switch (self.script_parameters) {
     case "download_1_charger":
-      // "Hunter Two-One, ten-plus foot-mobiles approaching from the east!"
-      alias = "so_dwnld_stk_tenfootmobiles";
+      // "Hunter Two-One, ten-plus foot-mobiles approaching from the east!"alias = "so_dwnld_stk_tenfootmobiles";
       break;
 
     case "download_2_charger":
-      // "We've got activity to the west, they're coming from the light brown mansion!"
-      alias = "so_dwnld_stk_brownmansion";
+      // "We've got activity to the west, they're coming from the light brown mansion!"alias = "so_dwnld_stk_brownmansion";
       break;
 
     case "download_3_charger":
-      // "Hostiles spotted across the street, they're moving to your position!"
-      alias = "so_dwnld_stk_acrossstreet";
+      // "Hostiles spotted across the street, they're moving to your position!"alias = "so_dwnld_stk_acrossstreet";
 
       waitTime = 10;
 
-      // "Hunter Two-One, you got movement right outside your location!"
-      alias2 = "so_dwnld_stk_gotmovement";
+      // "Hunter Two-One, you got movement right outside your location!"alias2 = "so_dwnld_stk_gotmovement";
 
       break;
   }
@@ -766,8 +754,7 @@ stryker_so_download_arcadia_laser_reminder_dialogue() {
 
   self thread stryker_laser_reminder_dialog_prethink();
 
-  // "All Hunter units, Badger One will not engage targets without your explicit authorization."
-  so_radio_dialogue("so_dwnld_stk_explicitauth");
+  // "All Hunter units, Badger One will not engage targets without your explicit authorization."so_radio_dialogue("so_dwnld_stk_explicitauth");
 
   self thread so_laser_hint_print();
   //	self thread maps\arcadia_code::laser_hint_print();
@@ -786,8 +773,7 @@ stryker_so_download_arcadia_laser_reminder_dialogue() {
     wait(5);
   }
 
-  // "Hunter Two-One, I repeat, Badger One is not authorized to engage targets that you haven't designated."
-  so_radio_dialogue("so_dwnld_stk_designated");
+  // "Hunter Two-One, I repeat, Badger One is not authorized to engage targets that you haven't designated."so_radio_dialogue("so_dwnld_stk_designated");
 
   wait(45);
 
@@ -795,8 +781,7 @@ stryker_so_download_arcadia_laser_reminder_dialogue() {
     wait(5);
   }
 
-  // "Hunter Two-One, we can't fire on enemies without your authorization!"
-  so_radio_dialogue("so_dwnld_stk_cantfire");
+  // "Hunter Two-One, we can't fire on enemies without your authorization!"so_radio_dialogue("so_dwnld_stk_cantfire");
 }
 
 so_laser_hint_print() {

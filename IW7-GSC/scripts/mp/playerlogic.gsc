@@ -766,9 +766,7 @@ spawnplayer(var_0) {
     }
 
     if(isDefined(level.matchrecording_logevent)) {
-      [
-        [level.matchrecording_logevent]
-      ](self.clientid, self.team, "SPAWN", self.spawnpos[0], self.spawnpos[1], self.spawntime);
+      [[level.matchrecording_logevent]](self.clientid, self.team, "SPAWN", self.spawnpos[0], self.spawnpos[1], self.spawntime);
     }
 
     if(!isai(self)) {
@@ -1893,9 +1891,7 @@ callback_playerconnect() {
     }
 
     if(var_0 && isDefined(level.matchrecording_logeventplayername)) {
-      [
-        [level.matchrecording_logeventplayername]
-      ](self.clientid, self.team, self.name);
+      [[level.matchrecording_logeventplayername]](self.clientid, self.team, self.name);
     }
   }
 

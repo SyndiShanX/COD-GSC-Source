@@ -21,25 +21,17 @@ function_8240e8b4() {
 
     self.tracking.current_crumb = (self.tracking.current_crumb + 1) % 20;
     self.tracking.breadcrumbs[self.tracking.current_crumb] = {
-      #point: self.origin,
-      #time: level.time
+      #point: self.origin, #time: level.time
     };
   }
 }
 
 init_tracking(window) {
   self.tracking = {
-    #breadcrumbs: [],
-    #current_crumb: 0,
-    #var_712fc53e: 0,
-    #velocity: (0, 0, 0),
-    #speed: 0,
-    #window: window,
-    #time_step: int(window * 1000) / 20
+    #breadcrumbs: [], #current_crumb: 0, #var_712fc53e: 0, #velocity: (0, 0, 0), #speed: 0, #window: window, #time_step: int(window * 1000) / 20
   };
   crumb = {
-    #point: self.origin,
-    #time: level.time
+    #point: self.origin, #time: level.time
   };
 
   if(!isDefined(self.tracking.breadcrumbs)) {

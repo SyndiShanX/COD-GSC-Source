@@ -616,16 +616,13 @@ intro_player_catch_movement() {
 intro_dialogue() {
   flag_wait("intro_dialogue_start");
 
-  // "I'll wait for you at the exfil point. Three hours."
-  radio_dialogue("afcaves_nkl_waitforyou");
+  // "I'll wait for you at the exfil point. Three hours."radio_dialogue("afcaves_nkl_waitforyou");
 
-  // "Don't bother. This was a one-way flight, mate."
-  radio_dialogue("afcaves_pri_dontbother");
+  // "Don't bother. This was a one-way flight, mate."radio_dialogue("afcaves_pri_dontbother");
 
   thread intro_sandstorm_and_fadein_flag();
 
-  // "Then good luck, my friend."
-  radio_dialogue("afcaves_nkl_goodluck");
+  // "Then good luck, my friend."radio_dialogue("afcaves_nkl_goodluck");
 
   flag_set("price_rise_up");
 
@@ -637,8 +634,7 @@ intro_dialogue() {
   flag_set("introscreen_feed_lines_done");
 
   if(!flag("intro_player_moved")) {
-    // "Move out."
-    radio_dialogue("afcaves_pri_moveout");
+    // "Move out."radio_dialogue("afcaves_pri_moveout");
   }
 }
 
@@ -947,8 +943,7 @@ road_price_hillside_nag()
 		if( flag( "player_at_overlook" ) )
 			break;
 			
-		//Price: "Soap, over here."
-		radio_dialogue( "pri_overhere" );
+		//Price: "Soap, over here."radio_dialogue( "pri_overhere" );
 	}
 }
 */
@@ -963,20 +958,16 @@ road_price_hillside_dialogue() {
   level endon("hillside_dialogue_stop");
 
   flag_wait("price_goto_hillside");
-  //Price: "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge"
-  radio_dialogue("pri_thermalspike");
+  //Price: "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge"radio_dialogue("pri_thermalspike");
 
   //flag_wait( "price_at_hillside" );
   flag_wait("player_at_overlook");
 
-  // "Hold up."
-  radio_dialogue("pri_holdup");
+  // "Hold up."radio_dialogue("pri_holdup");
 
-  // "Enemy patrol."
-  radio_dialogue("pri_enemypatrol");
+  // "Enemy patrol."radio_dialogue("pri_enemypatrol");
 
-  // "Hold your fire."
-  radio_dialogue("afcaves_pri_holdyourfire");
+  // "Hold your fire."radio_dialogue("afcaves_pri_holdyourfire");
 
   // Looks like Makarov's intel was solid. This is it.
   radio_dialogue("afcaves_pri_intelwassolid");
@@ -986,13 +977,11 @@ road_price_hillside_dialogue() {
 
   wait(3.5);
 
-  // "Good, they're splitting up. Let them separate."
-  radio_dialogue("afcaves_pri_splittingup");
+  // "Good, they're splitting up. Let them separate."radio_dialogue("afcaves_pri_splittingup");
 
   wait(1.5);
 
-  // "This decryption code better be worth the price we paid..."
-  radio_dialogue("afcaves_pri_decryptioncode");
+  // "This decryption code better be worth the price we paid..."radio_dialogue("afcaves_pri_decryptioncode");
 
   flag_set("price_hillside_dialogue_done");
 }
@@ -1013,36 +1002,28 @@ road_enemy_wiretap_dialogue() {
   flag_wait("price_hillside_dialogue_done");
 
   wiretap_dialogue_wait();
-  // "...(go) ahead Alpha?"
-  radio_dialogue("afcaves_schq_goahead");
+  // "...(go) ahead Alpha?"radio_dialogue("afcaves_schq_goahead");
 
   wiretap_dialogue_wait();
-  // "Riverbed all clear, over."
-  radio_dialogue("afcaves_sc1_riverbedclear");
+  // "Riverbed all clear, over."radio_dialogue("afcaves_sc1_riverbedclear");
 
   wiretap_dialogue_wait();
-  // "Bravo?"
-  radio_dialogue("afcaves_schq_bravo");
+  // "Bravo?"radio_dialogue("afcaves_schq_bravo");
 
   //wiretap_dialogue_wait();
-  // "Catwalk all clear... visibility 100%, over."
-  //radio_dialogue( "afcaves_sc2_catwalkclear" );/
+  // "Catwalk all clear... visibility 100%, over."//radio_dialogue( "afcaves_sc2_catwalkclear" );/
 
   wiretap_dialogue_wait();
-  // "Sandstorm. Not much to see right now, over."
-  radio_dialogue("afcaves_sc3_sandstorm");
+  // "Sandstorm. Not much to see right now, over."radio_dialogue("afcaves_sc3_sandstorm");
 
   wiretap_dialogue_wait();
-  // "Zulu?"
-  radio_dialogue("afcaves_schq_zulu");
+  // "Zulu?"radio_dialogue("afcaves_schq_zulu");
 
   wiretap_dialogue_wait();
-  // "...uh, we're starting our patrol east along the canyon, north side access road, over."
-  radio_dialogue("afcaves_sc1_startingpatrol");
+  // "...uh, we're starting our patrol east along the canyon, north side access road, over."radio_dialogue("afcaves_sc1_startingpatrol");
 
   //wiretap_dialogue_wait();
-  // "Copy that, Disciple Four.Finish your sweep and get back inside. Zulu team report's a heavy sandstorm on the way. Oxide out."
-  //radio_dialogue( "afcaves_schq_finishsweep" );
+  // "Copy that, Disciple Four.Finish your sweep and get back inside. Zulu team report's a heavy sandstorm on the way. Oxide out."//radio_dialogue( "afcaves_schq_finishsweep" );
 
   flag_set("road_enemy_wiretap_dialogue_done");
 }
@@ -1141,10 +1122,8 @@ road_stealthbreak_price_dialogue() {
   level endon("road_patrol_humans_cleared");
 
   lines = [];
-  // "They're onto us - go loud."
-  lines[0] = "afcaves_pri_ontousgoloud";
-  // "We're compromised - go loud."
-  lines[1] = "afcaves_pri_compromisedgoloud";
+  // "They're onto us - go loud."lines[0] = "afcaves_pri_ontousgoloud";
+  // "We're compromised - go loud."lines[1] = "afcaves_pri_compromisedgoloud";
 
   while(!flag("road_patrol_cleared")) {
     flag_wait("_stealth_spotted");
@@ -1443,23 +1422,19 @@ road_group1_countdown_kill() {
   if(!flag("road_player_broke_stealth")) {
     // player didn't shoot when Price said to
     if(playerTimedOut) {
-      // "We have to work together, Soap - stick to the plan next time."
-      radio_dialogue("afcaves_pri_sticktoplan");
+      // "We have to work together, Soap - stick to the plan next time."radio_dialogue("afcaves_pri_sticktoplan");
     }
     // player kinda messed up and shot a different guy than Price said
     else if(!level.playerShotCorrectVictim) {
-      // "Close enough."
-      radio_dialogue("afcaves_pri_closeenough");
+      // "Close enough."radio_dialogue("afcaves_pri_closeenough");
     }
     // player got his, plus the dog
     else if(playerKilledDog) {
-      // "Just like old times."
-      radio_dialogue("afcaves_pri_justlikeoldtimes");
+      // "Just like old times."radio_dialogue("afcaves_pri_justlikeoldtimes");
     }
     // player just got his, price got the dog
     else {
-      // "Dog neutralized, I count five tangos down."
-      radio_dialogue("afcaves_pri_dogneutralized");
+      // "Dog neutralized, I count five tangos down."radio_dialogue("afcaves_pri_dogneutralized");
     }
 
     flag_set("road_group1_killed_without_stealthbreak");
@@ -1494,26 +1469,19 @@ road_group1_countdown_kill_dialogue() {
 
   flag_set("stealth_kill_dialogue_running");
 
-  // "Focus on the group on the right, directly beneath us. Let's take them out first."
-  radio_dialogue("afcaves_pri_grouponright");
+  // "Focus on the group on the right, directly beneath us. Let's take them out first."radio_dialogue("afcaves_pri_grouponright");
 
-  // "I'll take the two on the left."
-  radio_dialogue("afcaves_pri_twoonleft");
+  // "I'll take the two on the left."radio_dialogue("afcaves_pri_twoonleft");
 
-  // "On my mark."
-  radio_dialogue("afcaves_pri_onmymark");
+  // "On my mark."radio_dialogue("afcaves_pri_onmymark");
 
-  // "Three..."
-  radio_dialogue("afcaves_pri_three");
+  // "Three..."radio_dialogue("afcaves_pri_three");
 
-  // "Two..."
-  radio_dialogue("afcaves_pri_two");
+  // "Two..."radio_dialogue("afcaves_pri_two");
 
-  // "One..."
-  radio_dialogue("afcaves_pri_one");
+  // "One..."radio_dialogue("afcaves_pri_one");
 
-  // "Mark."
-  radio_dialogue("afcaves_pri_mark");
+  // "Mark."radio_dialogue("afcaves_pri_mark");
 
   flag_clear("stealth_kill_dialogue_running");
 
@@ -1552,8 +1520,7 @@ road_price_group2_warnings() {
   level endon("road_group2_alerted");
 
   flag_wait("road_group2_lastchance");
-  // "Soap, they're about to find the bodies! We need to take them out!"
-  radio_dialogue("afcaves_pri_findthebodies");
+  // "Soap, they're about to find the bodies! We need to take them out!"radio_dialogue("afcaves_pri_findthebodies");
 }
 
 road_moveup_to_kill_group2() {
@@ -1579,8 +1546,7 @@ road_moveup_to_kill_group2() {
     wait(0.5); // human reaction time
 
     if(!flag("road_patrol_group2") && !flag("road_group2_alerted")) {
-      // "All right, we've got to take out the other group before they come back. Move."
-      thread radio_dialogue("afcaves_pri_beforecomeback");
+      // "All right, we've got to take out the other group before they come back. Move."thread radio_dialogue("afcaves_pri_beforecomeback");
     }
   }
 
@@ -1627,8 +1593,7 @@ road_moveup_to_kill_group2() {
   level.price AllowedStances("stand", "crouch", "prone");
 
   if(!flag("road_group2_alerted")) {
-    // "Quickly, let's move up and take the others."
-    thread radio_dialogue("afcaves_pri_taketheothers");
+    // "Quickly, let's move up and take the others."thread radio_dialogue("afcaves_pri_taketheothers");
   }
 
   level.price disable_ai_color();
@@ -1698,8 +1663,7 @@ road_group2_coop_kill() {
   }
   ASSERT(alive.size == 3);
 
-  // "I'm in position - take the shot."
-  thread radio_dialogue("afcaves_pri_taketheshot");
+  // "I'm in position - take the shot."thread radio_dialogue("afcaves_pri_taketheshot");
 
   thread road_group2_price_shoot_with_player(group2);
 
@@ -1722,8 +1686,7 @@ road_group2_coop_kill() {
   msg = level waittill_any_return("price_repositioned", "road_group2_alerted");
 
   if(msg == "price_repositioned") {
-    // "I'm in position, ready to shoot."
-    thread radio_dialogue("afcaves_pri_readytoshoot");
+    // "I'm in position, ready to shoot."thread radio_dialogue("afcaves_pri_readytoshoot");
 
     // wait to shoot again
     thread road_group2_price_shoot_with_player(group2);
@@ -1734,13 +1697,11 @@ road_group2_coop_kill() {
 
   //flag_wait( "road_group2_lastchance" );
 
-  // "Soap, they're about to find the bodies! We need to take them out!"
-  //radio_dialogue( "afcaves_pri_findthebodies" );
+  // "Soap, they're about to find the bodies! We need to take them out!"//radio_dialogue( "afcaves_pri_findthebodies" );
 }
 
 road_group2_price_reposition() {
-  // "Soap, they're coming back -I'm repositioning to get out of sight."
-  thread radio_dialogue("afcaves_pri_repositioning");
+  // "Soap, they're coming back -I'm repositioning to get out of sight."thread radio_dialogue("afcaves_pri_repositioning");
 
   level.price.goalradius = 96;
 
@@ -1819,13 +1780,11 @@ road_clear() {
   wait(1.25); // human reaction time
 
   if(!flag("road_player_broke_stealth") || (flag("road_player_broke_stealth") && flag("road_group1_killed_without_stealthbreak"))) {
-    // "We don't have much time before they find the bodies. Let's keep moving."
-    thread radio_dialogue("afcaves_pri_muchtime");
+    // "We don't have much time before they find the bodies. Let's keep moving."thread radio_dialogue("afcaves_pri_muchtime");
   } else {
     // don't chastize for group2 stealthbreak because that encounter is pretty easy if player breaks stealth
     if(!flag("road_group1_killed_without_stealthbreak")) {
-      // "Soap, these aren't your average muppets. No more mistakes, let's go."
-      radio_dialogue("afcaves_pri_nomistakes");
+      // "Soap, these aren't your average muppets. No more mistakes, let's go."radio_dialogue("afcaves_pri_nomistakes");
     }
   }
 
@@ -1839,8 +1798,7 @@ road_clear() {
 road_price_sees_thermalspike() {
   flag_wait("price_dialogue_thermalspike"); // flag triggered by price or player which ever hits it first
 
-  //Price: "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge"
-  radio_dialogue("pri_thermalspike");
+  //Price: "Soap, I'm picking up a thermal spike up ahead. The cave must be somewhere over the edge"radio_dialogue("pri_thermalspike");
 }
 
 // ---------------------
@@ -2102,30 +2060,24 @@ rappel_dialogue() {
 
   flavorbursts_off("axis");
 
-  //Price: "Here we go - hook up here."
-  radio_dialogue("pri_hookup");
+  //Price: "Here we go - hook up here."radio_dialogue("pri_hookup");
 
-  // "Disciple Four, Oxide. What's your status, over?"
-  thread radio_dialogue("afcaves_schq_d4whatsyourstatus");
+  // "Disciple Four, Oxide. What's your status, over?"thread radio_dialogue("afcaves_schq_d4whatsyourstatus");
 
   flag_wait("player_hooking_up");
 
-  // "Disciple Four, Oxide, do you copy, over?"
-  thread radio_dialogue("afcaves_schq_d4doyoucopy");
+  // "Disciple Four, Oxide, do you copy, over?"thread radio_dialogue("afcaves_schq_d4doyoucopy");
 
   wait 5.5;
   thread autosave_by_name("rappeling");
 
-  //Price: "Go."
-  radio_dialogue_overlap("pri_go");
+  //Price: "Go."radio_dialogue_overlap("pri_go");
 
-  // "Hey, I'm not gettin' anything from Disciple Four at the north ridge road. Could be a bad transmitter."
-  thread radio_dialogue("afcaves_schq_badtransmitter");
+  // "Hey, I'm not gettin' anything from Disciple Four at the north ridge road. Could be a bad transmitter."thread radio_dialogue("afcaves_schq_badtransmitter");
 
   level.price thread play_sound_on_entity("scn_afcaves_rappel_start_npc");
   wait 5.3;
-  //Price: "Got two tangos down below."
-  radio_dialogue("pri_2inthechest");
+  //Price: "Got two tangos down below."radio_dialogue("pri_2inthechest");
 
   flag_wait("rappel_end");
 
@@ -2137,8 +2089,7 @@ rappel_dialogue() {
   }
 
   if(!flag("player_killing_guard")) {
-    //Price: "Do it."
-    radio_dialogue("pri_doit");
+    //Price: "Do it."radio_dialogue("pri_doit");
   }
 }
 
@@ -2152,24 +2103,21 @@ rappel_price_hookup_nag() {
       break;
     }
 
-    //* Price: "Soap, hook up."
-    radio_dialogue("pri_soaphookup");
+    //* Price: "Soap, hook up."radio_dialogue("pri_soaphookup");
 
     wait(randomintrange(20, 30));
     if(flag("player_hooking_up")) {
       break;
     }
 
-    //* Price: "Soap, what's the problem? Hook up to the railing."
-    radio_dialogue("pri_whatstheproblem");
+    //* Price: "Soap, what's the problem? Hook up to the railing."radio_dialogue("pri_whatstheproblem");
 
     wait(randomintrange(20, 30));
     if(flag("player_hooking_up")) {
       break;
     }
 
-    //* Price: "Soap, hook up, let's go."
-    radio_dialogue("pri_hookupletsgo");
+    //* Price: "Soap, hook up, let's go."radio_dialogue("pri_hookupletsgo");
   }
 }
 
@@ -2410,8 +2358,7 @@ barracks_action() {
 
   thread barracks_rightside_warning();
 
-  //Price: "Let's go."
-  thread radio_dialogue("pri_letsgo");
+  //Price: "Let's go."thread radio_dialogue("pri_letsgo");
   flag_set("barracks_follow_price");
 
   thread autosave_stealth();
@@ -2430,8 +2377,7 @@ barracks_action() {
 
   // first guy walking by
   thread activate_trigger_with_targetname("spawn_patroller_guy1");
-  // "Tango up ahead. Do not engage."
-  thread radio_dialogue("afcaves_pri_tangoupahead");
+  // "Tango up ahead. Do not engage."thread radio_dialogue("afcaves_pri_tangoupahead");
 
   // wait for the first patroller to get to his idle spot, or die, before spawning the other group
   flag_wait_any("backdoor_firstpatroller_idlespot_reached", "backdoor_firstpatroller_deathflag");
@@ -2446,8 +2392,7 @@ barracks_action() {
     wait(1);
   }
 
-  // "Patrol coming our way - go left, quickly!"
-  thread radio_dialogue("afcaves_pri_patrolcoming");
+  // "Patrol coming our way - go left, quickly!"thread radio_dialogue("afcaves_pri_patrolcoming");
 
   thread price_goto_node("node_barracks_price_biggroup_spotted");
 
@@ -2456,8 +2401,7 @@ barracks_action() {
     biggroupSpawners = getEntArray("barracks_biggroup", "targetname");
     array_thread(biggroupSpawners, ::add_spawn_function, ::alert_heard_scream);
 
-    // "The guards know something's not right. Get out of sight and stay quiet."
-    thread radio_dialogue("afcaves_pri_guardsknow");
+    // "The guards know something's not right. Get out of sight and stay quiet."thread radio_dialogue("afcaves_pri_guardsknow");
   }
 
   thread activate_trigger_with_targetname("trig_barracks_biggroup_spawn");
@@ -2475,8 +2419,7 @@ barracks_action() {
   flag_set("barracks_biggroup_passingby");
 
   if(!flag("backdoor_firstpatroller_deathflag")) {
-    // "Let them pass."
-    radio_dialogue("afcaves_pri_letthempass");
+    // "Let them pass."radio_dialogue("afcaves_pri_letthempass");
     thread barracks_biggroup_wiretap_dialogue();
   }
 
@@ -2493,8 +2436,7 @@ barracks_action() {
 
     level.barracks_firstpatroller.health = 5;
 
-    // "Take out the guard having a smoke, or wait for him to move along."
-    thread radio_dialogue("afcaves_pri_havingasmoke");
+    // "Take out the guard having a smoke, or wait for him to move along."thread radio_dialogue("afcaves_pri_havingasmoke");
   }
 
   msg = flag_wait_any_return("backdoor_firstpatroller_deathflag", "backdoor_firstpatroller_left_idle_area");
@@ -2503,8 +2445,7 @@ barracks_action() {
   barracks_waittill_stealth_normal();
 
   if(firstPatrollerWasAround && msg == "backdoor_firstpatroller_deathflag") {
-    // "Good night."
-    radio_dialogue_stop();
+    // "Good night."radio_dialogue_stop();
     wait(0.35);
     thread radio_dialogue("pri_goodnight");
     wait(1); // non superhuman reaction time before moving
@@ -2514,8 +2455,7 @@ barracks_action() {
 
   SetSavedDvar("aim_aimAssistRangeScale", "1");
 
-  //Price: "Let's go."
-  thread radio_dialogue("pri_letsgo");
+  //Price: "Let's go."thread radio_dialogue("pri_letsgo");
 
   thread barracks_nearleft_dialogue();
 
@@ -2537,8 +2477,7 @@ barracks_action() {
   flag_wait("player_near_price_shuffle_start");
 
   if(Distance(level.player.origin, level.price.origin) <= 256) {
-    // "Easy now."
-    delaythread(0.5, ::radio_dialogue, "afcaves_pri_easynow");
+    // "Easy now."delaythread(0.5, ::radio_dialogue, "afcaves_pri_easynow");
   }
 
   // make sure the player hasn't run way ahead, otherwise the flag has already been set and
@@ -2610,8 +2549,7 @@ alert_heard_scream() {
 
 barracks_waittill_stealth_normal() {
   if(!stealth_is_everything_normal()) {
-    // "The guards know something's not right. Get out of sight and stay quiet."
-    thread radio_dialogue("afcaves_pri_guardsknow");
+    // "The guards know something's not right. Get out of sight and stay quiet."thread radio_dialogue("afcaves_pri_guardsknow");
 
     while(!stealth_is_everything_normal()) {
       wait(0.05);
@@ -2625,8 +2563,7 @@ barracks_nearleft_dialogue() {
 
   flag_wait("price_dialogue_stayleft");
 
-  // "Two tangos in this corridor - hold your fire and stay to the left."
-  radio_dialogue("afcaves_pri_incorridor");
+  // "Two tangos in this corridor - hold your fire and stay to the left."radio_dialogue("afcaves_pri_incorridor");
 
   thread barracks_wiretap_dialogue();
 }
@@ -2653,8 +2590,7 @@ barracks_rightside_warning() {
       continue;
     }
 
-    // "Soap, that area's full of hostiles. We should keep to the left to avoid being spotted."
-    radio_dialogue("afcaves_pri_avoidbeingspotted");
+    // "Soap, that area's full of hostiles. We should keep to the left to avoid being spotted."radio_dialogue("afcaves_pri_avoidbeingspotted");
     break;
   }
 }
@@ -2702,26 +2638,22 @@ barracks_nearleft_patrollers_watchsix() {
   level endon("steamroom_start");
   level endon("barracks_player_near_stair_shooting_spot");
 
-  // the first flag gets set when the patrollers hit a node on their patrol path,
-  //the second flag gets set whenever the player is touching a trigger
+  // the first flag gets set when the patrollers hit a node on their patrol path, //the second flag gets set whenever the player is touching a trigger
   flag_wait_all("barracks_nearleft_patroller_comingback", "barracks_player_farleft_back_area");
 
-  // "Tangos on our six."
-  radio_dialogue("afcaves_pri_tangosonsix");
+  // "Tangos on our six."radio_dialogue("afcaves_pri_tangosonsix");
 }
 
 barracks_wiretap_dialogue() {
   flavorbursts_off("axis");
 
   if(!flag("nearleft_guys_turnaround")) {
-    // "Disciple Five, Oxide. Gimme a sitrep over."
-    radio_dialogue("afcaves_schq_sitrep");
+    // "Disciple Five, Oxide. Gimme a sitrep over."radio_dialogue("afcaves_schq_sitrep");
     wait(2);
   }
 
   if(!flag("nearleft_guys_turnaround")) {
-    // "Disciple Five, Oxide. Gimme a sitrep over. [second time]"
-    radio_dialogue("afcaves_schq_sitrepover");
+    // "Disciple Five, Oxide. Gimme a sitrep over. [second time]"radio_dialogue("afcaves_schq_sitrepover");
   }
 
   flag_wait("barracks_stairguys_countdown_kill_done");
@@ -2804,13 +2736,11 @@ barracks_stair_guys_coop_kill() {
   if(!flag("barracks_stairguys_countdown_kill_aborted")) {
     // player killed them both
     if(level.player.stealthkills == 2) {
-      // "Impressive."
-      radio_dialogue("afcaves_pri_impressive");
+      // "Impressive."radio_dialogue("afcaves_pri_impressive");
     }
     // player kinda messed up and shot a different guy than Price said
     else if(!level.playerShotCorrectVictim) {
-      // "Close enough."
-      radio_dialogue("afcaves_pri_closeenough");
+      // "Close enough."radio_dialogue("afcaves_pri_closeenough");
 
       sayMove = true;
     }
@@ -2819,11 +2749,9 @@ barracks_stair_guys_coop_kill() {
   }
 
   if(sayMove) {
-    // "Move."
-    thread radio_dialogue("afcaves_pri_move2");
+    // "Move."thread radio_dialogue("afcaves_pri_move2");
   } else {
-    // "Clear. Go."
-    thread radio_dialogue("afcaves_pri_cleargo");
+    // "Clear. Go."thread radio_dialogue("afcaves_pri_cleargo");
   }
 
   price_be_stealthy();
@@ -2873,23 +2801,17 @@ barracks_stair_guys_coop_kill_countdown_dialogue() {
   level endon("player_shot_someone_on_stairs");
   level endon("barracks_stairguys_countdown_aborted");
 
-  // "Soap, we've got two tangos with taclights coming down the stairs under that red light, dead ahead. We've got to take 'em out before they find us."
-  radio_dialogue("afcaves_pri_tangoswithtaclights");
+  // "Soap, we've got two tangos with taclights coming down the stairs under that red light, dead ahead. We've got to take 'em out before they find us."radio_dialogue("afcaves_pri_tangoswithtaclights");
 
-  // "I'll take the one on the right. On my mark."
-  radio_dialogue("afcaves_pri_takeoneright");
+  // "I'll take the one on the right. On my mark."radio_dialogue("afcaves_pri_takeoneright");
 
-  // "Three..."
-  radio_dialogue("afcaves_pri_three");
+  // "Three..."radio_dialogue("afcaves_pri_three");
 
-  // "Two..."
-  radio_dialogue("afcaves_pri_two");
+  // "Two..."radio_dialogue("afcaves_pri_two");
 
-  // "One..."
-  radio_dialogue("afcaves_pri_one");
+  // "One..."radio_dialogue("afcaves_pri_one");
 
-  // "Mark."
-  radio_dialogue("afcaves_pri_mark");
+  // "Mark."radio_dialogue("afcaves_pri_mark");
 
   wait(0.5); // lets the player shoot before we set the flag
   flag_set("barracks_stairguys_countdown_dialogue_done");
@@ -2923,20 +2845,15 @@ barracks_biggroup_wiretap_dialogue() {
 
   flavorbursts_off("axis");
 
-  // "Butcher Seven, Oxide. We've lost contact with Disciple Four uh...probably just the sandstorm that's rollin' in or a bad transmitter. Send a team to check it out, over."
-  //radio_dialogue( "afcaves_schq_sendateam" );
+  // "Butcher Seven, Oxide. We've lost contact with Disciple Four uh...probably just the sandstorm that's rollin' in or a bad transmitter. Send a team to check it out, over."//radio_dialogue( "afcaves_schq_sendateam" );
 
-  // "Butcher Seven, Oxide. We've lost contact with Disciple Four."
-  radio_dialogue("afcaves_schq_lostcontact2");
+  // "Butcher Seven, Oxide. We've lost contact with Disciple Four."radio_dialogue("afcaves_schq_lostcontact2");
 
-  // "Probably just the sandstorm that's rollin' in or a bad transmitter."
-  radio_dialogue("afcaves_schq_badtransmitter2");
+  // "Probably just the sandstorm that's rollin' in or a bad transmitter."radio_dialogue("afcaves_schq_badtransmitter2");
 
-  // "Send a team to check it out, over."
-  radio_dialogue("afcaves_schq_sendateam2");
+  // "Send a team to check it out, over."radio_dialogue("afcaves_schq_sendateam2");
 
-  // "Roger that Oxide, I'll send Vinson and Lambert. Butcher Seven out."
-  radio_dialogue("afcaves_sc2_sendvinson");
+  // "Roger that Oxide, I'll send Vinson and Lambert. Butcher Seven out."radio_dialogue("afcaves_sc2_sendvinson");
 
   flavorbursts_on("axis");
 }
@@ -3029,8 +2946,7 @@ barracks_stealthbreak_action() {
 
   flag_set("barracks_stealthbreak_survived");
 
-  // "Keep moving."
-  radio_dialogue("pri_keepmoving");
+  // "Keep moving."radio_dialogue("pri_keepmoving");
 
   spot = GetEnt("steamroom_price", "targetname");
   level.price notify("price_goto_node");
@@ -3082,8 +2998,7 @@ barracks_stealthbreak_abandoned_price_watcher() {
 
     if(!playerWarned) {
       // warn player
-      // "Soap, where are you? Get back here!"
-      radio_dialogue("afcaves_pri_getbackhere");
+      // "Soap, where are you? Get back here!"radio_dialogue("afcaves_pri_getbackhere");
       playerWarned = true;
     }
 
@@ -3180,16 +3095,12 @@ barracks_stealthbreak_dialogue() {
   level.player endon("death");
 
   broken = [];
-  // "They're onto us - go loud."
-  broken[0] = "afcaves_pri_ontousgoloud";
-  // "We're compromised - go loud."
-  broken[1] = "afcaves_pri_compromisedgoloud";
+  // "They're onto us - go loud."broken[0] = "afcaves_pri_ontousgoloud";
+  // "We're compromised - go loud."broken[1] = "afcaves_pri_compromisedgoloud";
 
   recover = [];
-  // "We got lucky that time."
-  recover[0] = "afcaves_pri_gotlucky";
-  // "That was close."
-  recover[1] = "afcaves_pri_thatwasclose";
+  // "We got lucky that time."recover[0] = "afcaves_pri_gotlucky";
+  // "That was close."recover[1] = "afcaves_pri_thatwasclose";
 
   while(!flag("steamroom_start")) {
     flag_wait("_stealth_spotted");
@@ -3209,12 +3120,9 @@ barracks_stealthbreak_dialogue() {
 
 barracks_stealthbreak_enemy_dialogue() {
   lines = [];
-  // "I see him, he's over here!"
-  lines[0] = "afcaves_sc1_iseehim";
-  // "Intruder spotted!"
-  lines[1] = "afcaves_sc1_spotted";
-  // "Hostile at my location!"
-  lines[2] = "afcaves_sc1_hostilemyloc";
+  // "I see him, he's over here!"lines[0] = "afcaves_sc1_iseehim";
+  // "Intruder spotted!"lines[1] = "afcaves_sc1_spotted";
+  // "Hostile at my location!"lines[2] = "afcaves_sc1_hostilemyloc";
 
   radio_dialogue_stop();
 
@@ -3628,8 +3536,7 @@ steamroom_price_knifekill() {
     return;
   }
 
-  // "Top of the staircase - he's mine."
-  thread radio_dialogue("afcaves_pri_topofstairs");
+  // "Top of the staircase - he's mine."thread radio_dialogue("afcaves_pri_topofstairs");
 
   guard.ignoreall = false;
   guard.allowDeath = true;
@@ -3723,8 +3630,7 @@ steamroom_price_knifekill_foley() {
 }
 
 steamroom_price_knifekill_aborted_dialogue() {
-  // "Never mind, then."
-  thread radio_dialogue("afcaves_pri_nevermind");
+  // "Never mind, then."thread radio_dialogue("afcaves_pri_nevermind");
 }
 
 steamroom_price_knifekill_guard_handle_death_during_walkup(animref) {
@@ -3961,46 +3867,37 @@ steamroom_price_knifekill_bloodfx(stabWaitTime) {
 // --- END KNIFE KILL SEQUENCE --
 
 steamroom_dialogue() {
-  // "Disciple Six, we've lost all contact with Disciple Five. Check it out over."
-  radio_dialogue("afcaves_schq_lostcontact");
+  // "Disciple Six, we've lost all contact with Disciple Five. Check it out over."radio_dialogue("afcaves_schq_lostcontact");
 
   if(!flag("steamroom_entrance")) {
-    // "Roger that Oxide, we're on the catwalk, heading to the steam room. Standby."
-    radio_dialogue("afcaves_sc3_oncatwalk");
+    // "Roger that Oxide, we're on the catwalk, heading to the steam room. Standby."radio_dialogue("afcaves_sc3_oncatwalk");
   }
 
   flag_wait("steamroom_entrance");
 
-  // "Oxide, Disciple Six at the steam room. No sign of Five, over."
-  //radio_dialogue( "afcaves_sc3_atsteamroom" );
+  // "Oxide, Disciple Six at the steam room. No sign of Five, over."//radio_dialogue( "afcaves_sc3_atsteamroom" );
 
-  // "Sounds like we're gonna meet 'em head on, Soap."
-  //radio_dialogue( "afcaves_pri_meetemheadon" );
+  // "Sounds like we're gonna meet 'em head on, Soap."//radio_dialogue( "afcaves_pri_meetemheadon" );
 
   if(!flag("steamroom_price_moveup_1")) {
-    // "Disciple Six, go dark, breach and clear."
-    radio_dialogue("afcaves_schq_godark");
+    // "Disciple Six, go dark, breach and clear."radio_dialogue("afcaves_schq_godark");
 
-    // "Here we go - get ready."
-    thread radio_dialogue("afcaves_pri_getready");
+    // "Here we go - get ready."thread radio_dialogue("afcaves_pri_getready");
   }
 
   flag_set("steamroom_going_dark");
 
   if(!flag("steamroom_price_moveup_2")) {
-    // "Door charge planted. Ready to breach."
-    radio_dialogue("afcaves_sc3_chargeplanted");
+    // "Door charge planted. Ready to breach."radio_dialogue("afcaves_sc3_chargeplanted");
   }
 }
 
 steamroom_blow_door() {
   flag_set("steamroom_door_preblow");
 
-  // "Hit it."
-  radio_dialogue("afcaves_scl_hitit");
+  // "Hit it."radio_dialogue("afcaves_scl_hitit");
 
-  // "Breaching, breaching!"
-  thread radio_dialogue("afcaves_sc3_breaching");
+  // "Breaching, breaching!"thread radio_dialogue("afcaves_sc3_breaching");
   wait(0.8);
 
   exploder(200);
@@ -4030,29 +3927,24 @@ steamroom_blow_door() {
 
 steamroom_ambush_finish_dialogue() {
   if(!flag("steamroom_exit")) {
-    // "Move."
-    radio_dialogue("afcaves_pri_move2");
+    // "Move."radio_dialogue("afcaves_pri_move2");
   }
 
   if(!flag("steamroom_exit")) {
-    // "Disciple Nine, your rear guard just flatlined!"
-    radio_dialogue("afcaves_schq_flatlined");
+    // "Disciple Nine, your rear guard just flatlined!"radio_dialogue("afcaves_schq_flatlined");
   }
 
   if(!flag("steamroom_exit")) {
-    // "Not possible. We just cleared that area. (snort) Nobody's that good Oxi-"
-    thread radio_dialogue("afcaves_sc3_notpossible");
+    // "Not possible. We just cleared that area. (snort) Nobody's that good Oxi-"thread radio_dialogue("afcaves_sc3_notpossible");
 
     wait(2.75); // the next line needs to cut this one off a bit to sound right
 
-    // "It's Price."
-    radio_dialogue_overlap("afcaves_shp_itsprice");
+    // "It's Price."radio_dialogue_overlap("afcaves_shp_itsprice");
   }
 
   // don't play if we're close to where we have to give the next objective
   if(flag("player_awayfrom_steamroom_exit")) {
-    // "Backup priority items and burn the rest. Fire teams - just delay 'em until we're ready to pull out."
-    radio_dialogue("afcaves_shp_burntherest");
+    // "Backup priority items and burn the rest. Fire teams - just delay 'em until we're ready to pull out."radio_dialogue("afcaves_shp_burntherest");
   }
 
   flag_set("steamroom_ambush_finish_dialogue_ended");
@@ -4090,8 +3982,7 @@ steamroom_price_start_ambush() {
   }
   */
 
-  // "Go loud! Open fire!"
-  thread radio_dialogue("afcaves_pri_goloud");
+  // "Go loud! Open fire!"thread radio_dialogue("afcaves_pri_goloud");
 
   flag_set("steamroom_ambush_started");
 }
@@ -4153,32 +4044,25 @@ steamroom_patroller_group2_wait() {
 steamroom_patrollers_pre_ambush_dialogue() {
   level endon("steamroom_ambush_started");
 
-  // "Move in."
-  radio_dialogue("scl_movein");
+  // "Move in."radio_dialogue("scl_movein");
 
-  // "Foxtrot element, sweep left."
-  radio_dialogue("afcaves_scl_foxtrotelement");
+  // "Foxtrot element, sweep left."radio_dialogue("afcaves_scl_foxtrotelement");
 
-  // "Search pattern Echo Charlie. Go."
-  radio_dialogue("afcaves_scl_patternecho");
+  // "Search pattern Echo Charlie. Go."radio_dialogue("afcaves_scl_patternecho");
 
-  // "Door area clear."
-  radio_dialogue("afcaves_sc3_areaclear");
+  // "Door area clear."radio_dialogue("afcaves_sc3_areaclear");
 
-  // "Check your corners."
-  radio_dialogue("afcaves_scl_checkcorners");
+  // "Check your corners."radio_dialogue("afcaves_scl_checkcorners");
 }
 
 steamroom_patrollers_post_ambush_dialogue() {
   level endon("steamroom_patrollers_group2_deathflag");
 
-  // "They're here! Open fire!"
-  radio_dialogue("afcaves_scl_theyrehere");
+  // "They're here! Open fire!"radio_dialogue("afcaves_scl_theyrehere");
 
   wait(5);
 
-  // "Stay frosty, hunt them down!"
-  radio_dialogue("afcaves_scl_huntthemdown");
+  // "Stay frosty, hunt them down!"radio_dialogue("afcaves_scl_huntthemdown");
 }
 
 steamroom_patroller_think() {

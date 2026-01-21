@@ -591,12 +591,7 @@ function_2b2ed159(entity, attackingplayer) {
 
   if(isDefined(targetname) && isDefined(playernum)) {
     var_6c52b424 = {
-      #life_id: attackingplayer getmatchrecordlifeindex(),
-      #var_a9451146: attackingplayer.var_c48b30ab,
-      #content_targeted: targetname,
-      #var_e7f6239c: playernum,
-      #duration: var_46df240b,
-      #hack_success: 1
+      #life_id: attackingplayer getmatchrecordlifeindex(), #var_a9451146: attackingplayer.var_c48b30ab, #content_targeted: targetname, #var_e7f6239c: playernum, #duration: var_46df240b, #hack_success: 1
     };
     function_92d1707f(#"hash_3c946cbb149411ad", var_6c52b424);
   }

@@ -42,7 +42,7 @@ main() {
 }
 
 MoveMainLoop() {
-  prevLoopTime = self getAnimTime( % walk_and_run_loops);
+  prevLoopTime = self getAnimTime(%walk_and_run_loops);
   self.a.runLoopCount = randomInt(10000);
   moveMode = self.moveMode;
   if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 4096) {
@@ -51,7 +51,7 @@ MoveMainLoop() {
   self.needs_run_update = true;
   self sideStepInit();
   for(;;) {
-    loopTime = self getAnimTime( % walk_and_run_loops);
+    loopTime = self getAnimTime(%walk_and_run_loops);
     if(loopTime < prevLoopTime) {
       self.a.runLoopCount++;
     }
@@ -81,9 +81,9 @@ sideStepInit() {
     level.FORWARD_MIN_REACTION_DIST_SQ = 120 * 120;
     level.FORWARD_MAX_REACTION_DIST_SQ = 2400 * 2400;
     level.sideStepAnims = [];
-    level.sideStepAnims["step_left"] = array( % ai_zombie_spets_sidestep_left_a, % ai_zombie_spets_sidestep_left_b);
-    level.sideStepAnims["step_right"] = array( % ai_zombie_spets_sidestep_right_a, % ai_zombie_spets_sidestep_right_b);
-    level.sideStepAnims["roll_forward"] = array( % ai_zombie_spets_roll_a, % ai_zombie_spets_roll_b, % ai_zombie_spets_roll_c);
+    level.sideStepAnims["step_left"] = array(%ai_zombie_spets_sidestep_left_a, %ai_zombie_spets_sidestep_left_b);
+    level.sideStepAnims["step_right"] = array(%ai_zombie_spets_sidestep_right_a, %ai_zombie_spets_sidestep_right_b);
+    level.sideStepAnims["roll_forward"] = array(%ai_zombie_spets_roll_a, %ai_zombie_spets_roll_b, %ai_zombie_spets_roll_c);
   }
 }
 
@@ -249,7 +249,7 @@ playSideStepAnim(stepAnim, sideStepType) {
   if(isDefined(self.sideStepFunc)) {
     self thread[[self.sideStepFunc]]("stepAnim", stepAnim);
   }
-  self ClearAnim( % body, runBlendOutTime);
+  self ClearAnim(%body, runBlendOutTime);
   self SetFlaggedAnimRestart("stepAnim", stepAnim, 1, runBlendOutTime, self.moveplaybackrate);
   animStartTime = GetTime();
   animLength = GetAnimLength(stepAnim);
@@ -319,8 +319,8 @@ sideStepBlendOut(animLength, animName, hasExitAlign) {
   if(!hasExitAlign) {
     self notify(animName, "exit_align");
   }
-  self ClearAnim( % exposed_modern, 0);
-  self SetFlaggedAnimKnobAllRestart("run_anim", animscripts\zombie_run::GetRunAnim(), % body, 1, runBlendInTime, self.moveplaybackrate);
+  self ClearAnim(%exposed_modern, 0);
+  self SetFlaggedAnimKnobAllRestart("run_anim", animscripts\zombie_run::GetRunAnim(), %body, 1, runBlendInTime, self.moveplaybackrate);
 }
 
 restorePainOnKillanimscript() {

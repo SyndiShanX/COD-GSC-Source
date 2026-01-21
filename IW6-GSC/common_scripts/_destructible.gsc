@@ -95,8 +95,7 @@ find_destructibles() {
   dots = [];
 
   foreach(struct in level.struct)
-  if(isDefined(struct.script_noteworthy) &&
-    struct.script_noteworthy == "destructible_dot")
+  if(isDefined(struct.script_noteworthy) && struct.script_noteworthy == "destructible_dot")
     dots[dots.size] = struct;
 
   vehicles = getEntArray("destructible_vehicle", "targetname");
@@ -126,9 +125,7 @@ setup_destructible_dots(dots) {
     if(isDefined(level.destructible_type[destructibleInfo].destructible_dots)) {
       return;
     }
-    if(isDefined(dot.script_parameters) &&
-      IsSubStr(dot.script_parameters, "destructible_type") &&
-      IsSubStr(dot.script_parameters, self.destructible_type)) {
+    if(isDefined(dot.script_parameters) && IsSubStr(dot.script_parameters, "destructible_type") && IsSubStr(dot.script_parameters, self.destructible_type)) {
       if(DistanceSquared(self.origin, dot.origin) < 1) {
         triggers = getEntArray(dot.target, "targetname");
         level.destructible_type[destructibleInfo].destructible_dots = [];
@@ -1315,8 +1312,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
     if((isDefined(level.destructible_type[self.destructibleInfo].parts[partIndex][stateIndex].v["grenadeImpactDeath"])) && (damageType == "impact"))
       damage = 100000000;
 
-    if(isDefined(level.destructible_type[self.destructibleInfo].parts[partIndex][stateIndex].v["damage_threshold"]) &&
-      level.destructible_type[self.destructibleInfo].parts[partIndex][stateIndex].v["damage_threshold"] > damage)
+    if(isDefined(level.destructible_type[self.destructibleInfo].parts[partIndex][stateIndex].v["damage_threshold"]) && level.destructible_type[self.destructibleInfo].parts[partIndex][stateIndex].v["damage_threshold"] > damage)
       damage = 0;
 
     savedHealth = self.destructible_parts[partIndex].v["health"];
@@ -1640,8 +1636,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
       }
     }
 
-    if(isDefined(level.destructible_type[self.destructibleInfo].parts[partIndex][actionStateIndex].v) &&
-      isDefined(level.destructible_type[self.destructibleInfo].parts[partIndex][actionStateIndex].v["functionNotify"])) {
+    if(isDefined(level.destructible_type[self.destructibleInfo].parts[partIndex][actionStateIndex].v) && isDefined(level.destructible_type[self.destructibleInfo].parts[partIndex][actionStateIndex].v["functionNotify"])) {
       self notify(level.destructible_type[self.destructibleInfo].parts[partIndex][actionStateIndex].v["functionNotify"]);
     }
 
@@ -1839,15 +1834,11 @@ isAttackerValid(partIndex, stateIndex, attacker) {
       return true;
   } else
   if(sType == "no_ai" && isDefined(level.isAIfunc)) {
-    if(![
-        [level.isAIfunc]
-      ](attacker))
+    if(![[level.isAIfunc]](attacker))
       return true;
   } else
   if(sType == "ai_only" && isDefined(level.isAIfunc)) {
-    if([
-        [level.isAIfunc]
-      ](attacker))
+    if([[level.isAIfunc]](attacker))
       return true;
   } else {
     AssertMsg("Invalid attacker rules on destructible vehicle. Valid types are: ai_only, no_ai, player_only, no_player");
@@ -3210,8 +3201,7 @@ buildDOT_damage(minDamage, maxDamage, falloff, damageFlag, meansOfDeath, weapon)
 
   tickIndex = self.ticks.size - 1;
 
-  AssertEx(isDefined(self.ticks[tickIndex]) &&
-    isDefined(self.ticks[tickIndex].statements), "Must call buildDOT_startLoop first");
+  AssertEx(isDefined(self.ticks[tickIndex]) && isDefined(self.ticks[tickIndex].statements), "Must call buildDOT_startLoop first");
 
   if(!isDefined(self.ticks[tickIndex].statements["actions"]))
     self.ticks[tickIndex].statements["actions"] = [];
@@ -3229,8 +3219,7 @@ buildDOT_wait(time) {
 
   tickIndex = self.ticks.size - 1;
 
-  AssertEx(isDefined(self.ticks[tickIndex]) &&
-    isDefined(self.ticks[tickIndex].statements), "Must call buildDOT_startLoop first");
+  AssertEx(isDefined(self.ticks[tickIndex]) && isDefined(self.ticks[tickIndex].statements), "Must call buildDOT_startLoop first");
 
   if(!isDefined(self.ticks[tickIndex].statements["actions"]))
     self.ticks[tickIndex].statements["actions"] = [];
@@ -3259,10 +3248,7 @@ onEnterDOT_buildFunc(idx, trigger) {
   entNum = undefined;
   statements = trigger.ticks[idx].statements;
 
-  if(!isDefined(statements) ||
-    !isDefined(statements["vars"]) ||
-    !isDefined(statements["vars"]["count"]) ||
-    !isDefined(statements["actions"])) {
+  if(!isDefined(statements) || !isDefined(statements["vars"]) || !isDefined(statements["vars"]["count"]) || !isDefined(statements["actions"])) {
     return;
   }
   count = statements["vars"]["count"];
@@ -3300,18 +3286,7 @@ doBuildDOT_damage(idx, trigger, vars) {
   meansOfDeath = vars[4];
   weapon = vars[5];
 
-  self thread[[level.callbackPlayerDamage]](
-    trigger,
-    trigger,
-    maxDamage,
-    damageFlag,
-    meansOfDeath,
-    weapon,
-    trigger.origin,
-    (0, 0, 0) - trigger.origin,
-    "none",
-    0
-  );
+  self thread[[level.callbackPlayerDamage]](trigger, trigger, maxDamage, damageFlag, meansOfDeath, weapon, trigger.origin, (0, 0, 0) - trigger.origin, "none", 0);
 }
 
 doBuildDOT_wait(idx, trigger, vars) {
@@ -3545,8 +3520,7 @@ onExitDOT_poisonDamagePlayer(idx, trigger) {
 
   if(isDefined(overlays)) {
     foreach(i, _ in overlays) {
-      if(isDefined(overlays[i]) &&
-        isDefined(overlays[i][entNum])) {
+      if(isDefined(overlays[i]) && isDefined(overlays[i][entNum])) {
         overlays[i][entNum] thread doDOT_fadeOutBlackOut(0.1, 0);
       }
     }
@@ -3562,8 +3536,7 @@ onDeathDOT_poisonDamagePlayer() {
 
     if(isDefined(overlays)) {
       foreach(i, _ in overlays) {
-        if(isDefined(overlays[i]) &&
-          isDefined(overlays[i][entNum])) {
+        if(isDefined(overlays[i]) && isDefined(overlays[i][entNum])) {
           overlays[i][entNum] thread doDOT_fadeOutBlackOutAndDestroy();
         }
       }
@@ -3573,18 +3546,7 @@ onDeathDOT_poisonDamagePlayer() {
 
 doDOT_poisonDamage(trigger, damage) {
   if(isSP()) {} else {
-    self thread[[level.callbackPlayerDamage]](
-      trigger,
-      trigger,
-      damage,
-      0,
-      "MOD_SUICIDE",
-      "claymore_mp",
-      trigger.origin,
-      (0, 0, 0) - trigger.origin,
-      "none",
-      0
-    );
+    self thread[[level.callbackPlayerDamage]](trigger, trigger, damage, 0, "MOD_SUICIDE", "claymore_mp", trigger.origin, (0, 0, 0) - trigger.origin, "none", 0);
   }
 }
 

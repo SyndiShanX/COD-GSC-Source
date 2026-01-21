@@ -107,14 +107,14 @@ meleeBiteAttackPlayer(player) {
       level.lastDogMeleePlayerTime = getTime();
       if(use_low_attack()) {
         self animMode("angle deltas");
-        self ClearAnim( % root, 0.1);
+        self ClearAnim(%root, 0.1);
         self SetAnimRestart(anim.dogAnims[self.animSet].move["run_attack_low"], 1.0, 0.2, 1.0);
         doMeleeAfterWait(0.1);
         self animscripts\zombie_shared::DoNoteTracksForTime(1.4, "done");
         self animMode("gravity");
       } else {
         attack_time = 1.2 + randomfloat(0.4);
-        self ClearAnim( % root, 0.1);
+        self ClearAnim(%root, 0.1);
         self SetFlaggedAnimRestart("meleeanim", anim.dogAnims[self.animSet].attack["run_attack"], 1.0, 0.2, 1.0);
         self animscripts\zombie_shared::DoNoteTracksForTime(attack_time, "meleeanim", ::handleMeleeBiteAttackNoteTracks);
       }
@@ -146,8 +146,7 @@ dog_cant_kill_in_one_hit(player) {
   }
   if(getTime() - level.lastDogMeleePlayerTime > 8000)
     level.dogMeleePlayerCounter = 0;
-  return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
-    player.health > 25;
+  return level.dogMeleePlayerCounter < level.dog_hits_before_kill && player.health > 25;
 }
 
 shouldWaitInCombatIdle() {
@@ -161,7 +160,7 @@ setNextDogAttackAllowTime(time) {
 
 combatIdle() {
   self OrientMode("face enemy");
-  self ClearAnim( % root, 0.1);
+  self ClearAnim(%root, 0.1);
   self AnimMode("zonly_physics");
   keys = GetArrayKeys(anim.dogAnims[self.animSet].combatIdle);
   idleAnim = anim.dogAnims[self.animSet].combatIdle[random(keys)];

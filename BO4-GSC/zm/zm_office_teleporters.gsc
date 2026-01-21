@@ -234,8 +234,7 @@ teleport_player(user) {
   user notify(#"teleporting");
   self notify(#"portal_used");
   level notify(#"portal_used", {
-    #s_portal: self,
-    #player: user
+    #s_portal: self, #player: user
   });
   user.teleporting = 1;
   user clientfield::increment_to_player("teleporter_transition", 1);

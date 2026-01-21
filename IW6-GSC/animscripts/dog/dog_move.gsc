@@ -58,12 +58,12 @@ continuemovement() {
   setupmovement();
   self animmode("none");
   self orientmode("face motion");
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   setmoveanim(self.movemode, self.stairsstate, 1);
 }
 
 continuedrivenmovement() {
-  self clearanim( % body, 0.5);
+  self clearanim(%body, 0.5);
   self.drivenmovemode = getdesireddrivenmovemode("walk");
   setdrivenanim(self.drivenmovemode, 1);
   thread waitfordrivenchange();
@@ -71,7 +71,7 @@ continuedrivenmovement() {
 }
 
 startturntoangle(var_0, var_1) {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   animscripts\dog\dog_stop::turntoangle(var_0, var_1);
 }
 
@@ -162,7 +162,7 @@ startmove() {
   if(animscripts\dog\dog_stop::getdefaultidlestate() != "attackidle")
     var_17 = 0.4;
 
-  self setflaggedanimknoballrestart("dog_start_move", var_7, % body, 1, var_17, self.moveplaybackrate);
+  self setflaggedanimknoballrestart("dog_start_move", var_7, %body, 1, var_17, self.moveplaybackrate);
   thread startmove_updateangle(var_7, var_13, var_15);
   animscripts\shared::donotetracks("dog_start_move");
   self notify("end_startmove_updateangle");
@@ -195,7 +195,7 @@ startmove_updateangle(var_0, var_1, var_2) {
 startdrivenmovement() {
   var_0 = getdogmoveanim("run_start");
   var_1 = var_0[4];
-  self setflaggedanimknoballrestart("dog_start_move", var_1, % body);
+  self setflaggedanimknoballrestart("dog_start_move", var_1, %body);
   animscripts\shared::donotetracks("dog_start_move");
 }
 
@@ -233,7 +233,7 @@ waitforrunwalkslopechange() {
 
   for(;;) {
     if(var_0 != self.movemode || var_1 != self.stairsstate || hasmovementtypechanged(var_4) || hasoverrideanimchanged(var_2, var_3)) {
-      self clearanim( % dog_move, 0.2);
+      self clearanim(%dog_move, 0.2);
 
       if(isDefined(self.script_nostairs))
         setmoveanim(self.movemode, "none", 1);
@@ -335,12 +335,12 @@ dosharpturn(var_0, var_1) {
 
   self.prevturnrate = self.turnrate;
   self.turnrate = var_12;
-  self clearanim( % dog_move, 0.1);
+  self clearanim(%dog_move, 0.1);
   self animmode("zonly_physics", 0);
   self orientmode("face angle", angleclamp180(var_3[1] - var_10));
-  self setflaggedanimknoballrestart("dog_sharp_turn", var_7, % body, 1, 0.2, self.moveplaybackrate);
+  self setflaggedanimknoballrestart("dog_sharp_turn", var_7, %body, 1, 0.2, self.moveplaybackrate);
   animscripts\shared::donotetracks("dog_sharp_turn");
-  self clearanim( % dog_move_turn, 0.2);
+  self clearanim(%dog_move_turn, 0.2);
   self.turnrate = self.prevturnrate;
   self.prevturnrate = undefined;
   self notify("dogmove_endwait_sharpturnduringsharpturn");
@@ -625,16 +625,16 @@ getstopdata() {
 
 playmoveanim(var_0, var_1, var_2, var_3) {
   if(var_1)
-    self setflaggedanimknoballrestart("dog_move", var_0, % dog_move, 1, var_2, var_3);
+    self setflaggedanimknoballrestart("dog_move", var_0, %dog_move, 1, var_2, var_3);
   else
-    self setflaggedanimknoball("dog_move", var_0, % dog_move, 1, var_2, var_3);
+    self setflaggedanimknoball("dog_move", var_0, %dog_move, 1, var_2, var_3);
 }
 
 playmoveanimknob(var_0, var_1, var_2, var_3) {
   if(var_1)
-    self setflaggedanimknoballrestart("dog_move", var_0, % dog_move, 1, var_2, var_3);
+    self setflaggedanimknoballrestart("dog_move", var_0, %dog_move, 1, var_2, var_3);
   else
-    self setflaggedanimknoball("dog_move", var_0, % dog_move, 1, var_2, var_3);
+    self setflaggedanimknoball("dog_move", var_0, %dog_move, 1, var_2, var_3);
 }
 
 setmoveanim(var_0, var_1, var_2) {
@@ -644,7 +644,7 @@ setmoveanim(var_0, var_1, var_2) {
   self.bfirstmoveanim = undefined;
 
   if(var_0 == "walk") {
-    self setanimknob( % dog_walk, 1);
+    self setanimknob(%dog_walk, 1);
 
     if(isDefined(self.walk_overrideanim))
       var_6 = self.walk_overrideanim;
@@ -657,22 +657,22 @@ setmoveanim(var_0, var_1, var_2) {
     self.moveanimtype = "walk";
   } else if(var_0 == "run") {
     if(var_1 == "up") {
-      self setanimknob( % dog_slope, 1);
+      self setanimknob(%dog_slope, 1);
       var_6 = getdogmoveanim("run_up");
       playmoveanimknob(var_6, var_3, 0.5, self.moveplaybackrate * self.moveratemultiplier);
       self.moveanimtype = "run";
     } else if(var_1 == "down") {
-      self setanimknob( % dog_slope, 1);
+      self setanimknob(%dog_slope, 1);
       var_6 = getdogmoveanim("run_down");
       playmoveanimknob(var_6, var_3, 0.5, self.moveplaybackrate * self.moveratemultiplier);
       self.moveanimtype = "run";
     } else if(isDefined(self.sprint) && self.sprint) {
-      self setanimknob( % dog_run, 1);
+      self setanimknob(%dog_run, 1);
       var_6 = getdogmoveanim("sprint");
       playmoveanim(var_6, var_3, 0.3, self.moveplaybackrate * self.moveratemultiplier);
       self.moveanimtype = "sprint";
     } else {
-      self setanimknob( % dog_run, 1);
+      self setanimknob(%dog_run, 1);
       self.moveanimtype = "run";
       var_7 = isDefined(self.movementtype);
       var_8 = 0.3;
@@ -785,7 +785,7 @@ getdesireddrivenmovemode(var_0) {
 setdrivenanim(var_0, var_1, var_2) {
   self.bfirstmoveanim = undefined;
   var_3 = 0.5;
-  self clearanim( % dog_move, var_3);
+  self clearanim(%dog_move, var_3);
 
   if(!isDefined(var_2))
     var_2 = 1;

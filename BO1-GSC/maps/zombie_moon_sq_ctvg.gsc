@@ -43,9 +43,7 @@ plates() {
   trig = spawn("trigger_damage", ((plates[0].origin + plates[1].origin) / 2) - (0, 0, 100), 0, 64, 120);
   while(1) {
     trig waittill("damage", amount, attacker, direction, point, dmg_type, modelName, tagName);
-    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" ||
-        dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" ||
-        dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
+    if(isplayer(attacker) && (dmg_type == "MOD_PROJECTILE" || dmg_type == "MOD_PROJECTILE_SPLASH" || dmg_type == "MOD_EXPLOSIVE" || dmg_type == "MOD_EXPLOSIVE_SPLASH" || dmg_type == "MOD_GRENADE" || dmg_type == "MOD_GRENADE_SPLASH")) {
       attacker thread maps\_zombiemode_audio::create_and_play_dialog("eggs", "quest5", undefined, randomintrange(0, 2), true);
       break;
     }
@@ -269,21 +267,7 @@ speak_charge_lines(lines) {
 }
 
 charge_init() {
-  level._charge_stages = array(build_charge_stage(1, array("rictofen", "vox_plr_3_quest_step5_12")),
-    build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_13",
-      "rictofen", "vox_plr_3_quest_step5_14")),
-    build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_15",
-      "maxis", "vox_xcomp_quest_step5_16",
-      "rictofen", "vox_plr_3_quest_step5_17")),
-    build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_18",
-      "rictofen", "vox_plr_3_quest_step5_19")),
-    build_charge_stage(15, array("maxis", "vox_xcomp_quest_step5_20",
-      "rictofen", "vox_plr_3_quest_step5_21",
-      "maxis", "vox_xcomp_quest_step5_22",
-      "rictofen", "vox_plr_3_quest_step5_23")),
-    build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_24",
-      "rictofen", "vox_plr_3_quest_step5_25",
-      "computer", "vox_mcomp_quest_step5_26")));
+  level._charge_stages = array(build_charge_stage(1, array("rictofen", "vox_plr_3_quest_step5_12")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_13", "rictofen", "vox_plr_3_quest_step5_14")), build_charge_stage(15, array("computer", "vox_mcomp_quest_step5_15", "maxis", "vox_xcomp_quest_step5_16", "rictofen", "vox_plr_3_quest_step5_17")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_18", "rictofen", "vox_plr_3_quest_step5_19")), build_charge_stage(15, array("maxis", "vox_xcomp_quest_step5_20", "rictofen", "vox_plr_3_quest_step5_21", "maxis", "vox_xcomp_quest_step5_22", "rictofen", "vox_plr_3_quest_step5_23")), build_charge_stage(10, array("maxis", "vox_xcomp_quest_step5_24", "rictofen", "vox_plr_3_quest_step5_25", "computer", "vox_mcomp_quest_step5_26")));
   sound_struct = getstruct("sq_charge_terminal", "targetname");
   level._charge_sound_ent = spawn("script_origin", sound_struct.origin);
   level._charge_terminal = getEnt("sq_ctvg_terminal", "targetname");

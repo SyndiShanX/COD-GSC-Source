@@ -128,7 +128,7 @@ animate_drone(str_type, b_wait_for_loop) {
     if(!(!isDefined(anim_current) && !isDefined(anim_last) || isDefined(anim_current) && isDefined(anim_last) && anim_current == anim_last)) {
       anim_last = anim_current;
       n_length = getanimlength(anim_current);
-      self clearanim( % root, n_blend);
+      self clearanim(%root, n_blend);
       self setflaggedanim("current_anim", anim_current, 1, n_blend, 1);
       n_blend = 0;
     }

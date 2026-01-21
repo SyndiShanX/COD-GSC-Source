@@ -161,13 +161,7 @@ specialops_remove_unused() {
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_triggered_start( <challenge_id_start> )"
-"Summary: Waits until the specified trigger is triggered, and then sets the flag which is used to kick off challenges."
-"Module: Utility"
-"MandatoryArg: <challenge_id_start>: Name of the flag *and* trigger that is used to start off the challenge."
-"Example: enable_triggered_start( "challenge_start" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_triggered_start( <challenge_id_start> )""Summary: Waits until the specified trigger is triggered, and then sets the flag which is used to kick off challenges.""Module: Utility""MandatoryArg: <challenge_id_start>: Name of the flag *and* trigger that is used to start off the challenge.""Example: enable_triggered_start( "challenge_start" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 enable_triggered_start(challenge_id_start) {
@@ -183,15 +177,7 @@ enable_triggered_start(challenge_id_start) {
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_triggered_complete( <challenge_id> , <challenge_id_complete> , <touch_style> )"
-"Summary: Waits for all players in the game to be touching the trigger, then sets the challenge complete flag."
-"MandatoryArg: <challenge_id>: Name of the trigger all players need to be touching. A matching flag will be set to true to enable any additional needed entities."
-"MandatoryArg: <challenge_id_complete>: Flag to set once all players are touching the trigger."
-"OptionalArg: <touch_style>: Method of touching to test. "all" = all players must be touching at the same time. "any" = all players must have touched it at some point, but don't need to currently. "freeze" = when a player touches the trigger freeze them and wait for the others."
-"Module: Utility"
-"Example: enable_triggered_complete( "challenge_trigger", "challenge_complete", "freeze" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_triggered_complete( <challenge_id> , <challenge_id_complete> , <touch_style> )""Summary: Waits for all players in the game to be touching the trigger, then sets the challenge complete flag.""MandatoryArg: <challenge_id>: Name of the trigger all players need to be touching. A matching flag will be set to true to enable any additional needed entities.""MandatoryArg: <challenge_id_complete>: Flag to set once all players are touching the trigger.""OptionalArg: <touch_style>: Method of touching to test. "all" = all players must be touching at the same time. "any" = all players must have touched it at some point, but don't need to currently. "freeze" = when a player touches the trigger freeze them and wait for the others.""Module: Utility""Example: enable_triggered_complete( "challenge_trigger", "challenge_complete", "freeze" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 enable_triggered_complete(challenge_id, challenge_id_complete, touch_style) {
@@ -225,14 +211,7 @@ enable_triggered_complete(challenge_id, challenge_id_complete, touch_style) {
 /*
 =============
 ///ScriptDocBegin
-"Name: fade_challenge_in( <wait_time>, <doDialogue> )"
-"Summary: Simple fade in for use at the start of challenges without anything special for their intro."
-"Module: Utility"
-"OptionalArg: <wait_time>: If defined will wait on black for specified time."
-"OptionalArg: <doDialogue>: Sets whether the 'ready up' dialogue will play after fading the screen up."
-"Example: fade_challenge_in();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: fade_challenge_in( <wait_time>, <doDialogue> )""Summary: Simple fade in for use at the start of challenges without anything special for their intro.""Module: Utility""OptionalArg: <wait_time>: If defined will wait on black for specified time.""OptionalArg: <doDialogue>: Sets whether the 'ready up' dialogue will play after fading the screen up.""Example: fade_challenge_in();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 fade_challenge_in(wait_time, doDialogue) {
@@ -257,13 +236,7 @@ fade_challenge_in(wait_time, doDialogue) {
 /*
 =============
 ///ScriptDocBegin
-"Name: fade_challenge_out( <challenge_id> )"
-"Summary: Freezes players, fades out music, fades out the scene, and if requested posts an end of game summary."
-"Module: Utility"
-"OptionalArg: <challenge_id>: Flag to wait to be set before completing the challenge."
-"Example: fade_challenge_out( true, "challenge_complete" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: fade_challenge_out( <challenge_id> )""Summary: Freezes players, fades out music, fades out the scene, and if requested posts an end of game summary.""Module: Utility""OptionalArg: <challenge_id>: Flag to wait to be set before completing the challenge.""Example: fade_challenge_out( true, "challenge_complete" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 fade_challenge_out(challenge_id, skipDialog) {
@@ -287,16 +260,7 @@ fade_challenge_out(challenge_id, skipDialog) {
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_countdown_timer( <time_wait>, <set_start_time>, <message>, <timer_draw_delay> )"
-"Summary: Creates a timer on the screen that countsdown and marks the start of the challenge time when the timer has expired."
-"Module: Utility"
-"MandatoryArg: <time_wait>: The amount of time to count down from and wait."
-"OptionalArg: <set_start_time>: If true, then will set level.challenge_start_time once the timer completes."
-"OptionalArg: <message>: Optional message to display."
-"OptionalArg: <timer_draw_delay>: When set, will pause for this long before drawing the timer after the message."
-"Example: enable_start_countdown( 10 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_countdown_timer( <time_wait>, <set_start_time>, <message>, <timer_draw_delay> )""Summary: Creates a timer on the screen that countsdown and marks the start of the challenge time when the timer has expired.""Module: Utility""MandatoryArg: <time_wait>: The amount of time to count down from and wait.""OptionalArg: <set_start_time>: If true, then will set level.challenge_start_time once the timer completes.""OptionalArg: <message>: Optional message to display.""OptionalArg: <timer_draw_delay>: When set, will pause for this long before drawing the timer after the message.""Example: enable_start_countdown( 10 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 enable_countdown_timer(time_wait, set_start_time, message, timer_draw_delay) {
@@ -343,15 +307,7 @@ show_countdown_timer_time(time_wait, delay) {
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_challenge_timer( <start_flag> , <passed_flag> , <message> )"
-"Summary: Will put up an on screen timer that counts down if level.challenge_time_limit is set, otherwise counts up from 0:00.0."
-"Module: Utility"
-"MandatoryArg: <start_flag>: Flag that the script will wait for before starting the timer."
-"MandatoryArg: <passed_flag>: Flag that the script will wait for to determine challenge success and stop the timer."
-"OptionalArg: <message>: Custom message you want displayed in front of the timer."
-"Example: enable_challenge_timer( "player_reached_start", "player_reached_end", "Time remaining: " );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_challenge_timer( <start_flag> , <passed_flag> , <message> )""Summary: Will put up an on screen timer that counts down if level.challenge_time_limit is set, otherwise counts up from 0:00.0.""Module: Utility""MandatoryArg: <start_flag>: Flag that the script will wait for before starting the timer.""MandatoryArg: <passed_flag>: Flag that the script will wait for to determine challenge success and stop the timer.""OptionalArg: <message>: Custom message you want displayed in front of the timer.""Example: enable_challenge_timer( "player_reached_start", "player_reached_end", "Time remaining: " );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 enable_challenge_timer(start_flag, passed_flag, message) {
@@ -383,12 +339,7 @@ enable_challenge_timer(start_flag, passed_flag, message) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_wait_for_players_ready( <so_wait_for_players_ready> )"
-"Summary: Waits until both players have indicated they are ready to begin the mission. Only for online co-op matches since they can't pause."
-"Module: Utility"
-"Example: so_wait_for_players_ready();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_wait_for_players_ready( <so_wait_for_players_ready> )""Summary: Waits until both players have indicated they are ready to begin the mission. Only for online co-op matches since they can't pause.""Module: Utility""Example: so_wait_for_players_ready();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_wait_for_players_ready() {
@@ -475,13 +426,7 @@ so_wait_for_player_ready_cleanup(hold_time) {
 /*
 =============
 ///ScriptDocBegin
-"Name: attacker_is_p1( <attacker> )"
-"Summary: Returns true if the attacker was player 1."
-"Module: Utility"
-"MandatoryArg: <attacker>: Entity to test against player 1."
-"Example: credit_player_1 = attacker_is_p1( attacker );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: attacker_is_p1( <attacker> )""Summary: Returns true if the attacker was player 1.""Module: Utility""MandatoryArg: <attacker>: Entity to test against player 1.""Example: credit_player_1 = attacker_is_p1( attacker );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 attacker_is_p1(attacker) {
@@ -494,13 +439,7 @@ attacker_is_p1(attacker) {
 /*
 =============
 ///ScriptDocBegin
-"Name: attacker_is_p2( <attacker> )"
-"Summary: Returns true if the attacker was player 2 in a co-op game."
-"Module: Utility"
-"MandatoryArg: <attacker>: Entity to test against player 2."
-"Example: credit_player_2 = attacker_is_p2( attacker );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: attacker_is_p2( <attacker> )""Summary: Returns true if the attacker was player 2 in a co-op game.""Module: Utility""MandatoryArg: <attacker>: Entity to test against player 2.""Example: credit_player_2 = attacker_is_p2( attacker );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 attacker_is_p2(attacker) {
@@ -516,12 +455,7 @@ attacker_is_p2(attacker) {
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_escape_warning( <enable_escape_warning> )"
-"Summary: Waits for the flag 'player_trying_to_escape' to be set, then displays a hint to any players touching a trigger with script_noteworthy matching 'player_trying_to_escape'. Removes the hint when no longer touching the trigger. Does not currently support more than one potential exit point"
-"Module: Utility"
-"Example: enable_escape_warning()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_escape_warning( <enable_escape_warning> )""Summary: Waits for the flag 'player_trying_to_escape' to be set, then displays a hint to any players touching a trigger with script_noteworthy matching 'player_trying_to_escape'. Removes the hint when no longer touching the trigger. Does not currently support more than one potential exit point""Module: Utility""Example: enable_escape_warning()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 enable_escape_warning() {
@@ -553,11 +487,7 @@ enable_escape_warning() {
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_escape_failure( <enable_escape_failure> )"
-"Summary: Waits for the flag 'player_has_escaped' to be set, and when hit displays the deadquote indicating mission failure and ends the mission."
-"Example: enable_escape_failure()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_escape_failure( <enable_escape_failure> )""Summary: Waits for the flag 'player_has_escaped' to be set, and when hit displays the deadquote indicating mission failure and ends the mission.""Example: enable_escape_failure()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 enable_escape_failure() {
@@ -574,13 +504,7 @@ enable_escape_failure() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_delete_all_by_type( <function pointer 1>, <function pointer 2>, ... , <function pointer 5> )"
-"Summary: Run this in first frame. Deletes level entities that do not have the key 'script_specialops 1', that are defined by function pointer passed in. This function can delete 5 types of entities at once."
-"Module: Utility"
-"MandatoryArg: <function pointer 1> These functions passed in must return a boolean. Example type_vehicle() will return isSubStr( self.code_classname, "script_vehicle" );"
-"Example: so_delete_all_by_type( ::type_spawn_trigger, ::type_vehicle, ::type_spawners );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_delete_all_by_type( <function pointer 1>, <function pointer 2>, ... , <function pointer 5> )""Summary: Run this in first frame. Deletes level entities that do not have the key 'script_specialops 1', that are defined by function pointer passed in. This function can delete 5 types of entities at once.""Module: Utility""MandatoryArg: <function pointer 1> These functions passed in must return a boolean. Example type_vehicle() will return isSubStr( self.code_classname, "script_vehicle" );""Example: so_delete_all_by_type( ::type_spawn_trigger, ::type_vehicle, ::type_spawners );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 // type definition function is called on the entity, it must return boolean without sleep
@@ -714,11 +638,7 @@ type_goalvolume() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_delete_all_spawntriggers()"
-"Summary: Deletes all spawn triggers without the key 'script_specialops 1'."
-"Example: so_delete_all_spawntriggers();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_delete_all_spawntriggers()""Summary: Deletes all spawn triggers without the key 'script_specialops 1'.""Example: so_delete_all_spawntriggers();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_delete_all_spawntriggers() {
@@ -728,11 +648,7 @@ so_delete_all_spawntriggers() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_delete_all_triggers()"
-"Summary: Deletes all triggers without the key 'script_specialops 1'."
-"Example: so_delete_all_triggers();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_delete_all_triggers()""Summary: Deletes all triggers without the key 'script_specialops 1'.""Example: so_delete_all_triggers();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_delete_all_triggers() {
@@ -742,11 +658,7 @@ so_delete_all_triggers() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_delete_all_vehicles()"
-"Summary: Deletes all script vehicles without the key 'script_specialops 1'."
-"Example: so_delete_all_vehicles();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_delete_all_vehicles()""Summary: Deletes all script vehicles without the key 'script_specialops 1'.""Example: so_delete_all_vehicles();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_delete_all_vehicles() {
@@ -756,11 +668,7 @@ so_delete_all_vehicles() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_delete_all_spawners()"
-"Summary: Deletes all spawners without the key 'script_specialops 1'."
-"Example: so_delete_all_spawners();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_delete_all_spawners()""Summary: Deletes all spawners without the key 'script_specialops 1'.""Example: so_delete_all_spawners();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_delete_all_spawners() {
@@ -778,13 +686,7 @@ so_delete_breach_ents() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_force_deadquote( <quote> )"
-"Summary: Utility function to easily force the game to use a specific Special Ops deadquote."
-"Module: Utility"
-"MandatoryArg: <quote>: Message you want displayed on the Mission Failed summary."
-"Example: so_force_deadquote(&"SPECIAL_OPS_YOU_SUCK" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_force_deadquote( <quote> )""Summary: Utility function to easily force the game to use a specific Special Ops deadquote.""Module: Utility""MandatoryArg: <quote>: Message you want displayed on the Mission Failed summary.""Example: so_force_deadquote(&"SPECIAL_OPS_YOU_SUCK" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_force_deadquote(quote, icon_dvar) {
@@ -800,13 +702,7 @@ so_force_deadquote(quote, icon_dvar) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_force_deadquote_array( <quotes> )"
-"Summary: Utility function to easily force the game to use a specific list of Special Ops deadquotes."
-"Module: Utility"
-"MandatoryArg: <quotes>: Messages you want displayed on the Mission Failed summary."
-"Example: so_include_deadquote_array( special_quotes );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_force_deadquote_array(<quotes> )""Summary: Utility function to easily force the game to use a specific list of Special Ops deadquotes.""Module: Utility""MandatoryArg: <quotes>: Messages you want displayed on the Mission Failed summary.""Example: so_include_deadquote_array(special_quotes );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_force_deadquote_array(quotes, icon_dvar) {
@@ -821,13 +717,7 @@ so_force_deadquote_array(quotes, icon_dvar) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_include_deadquote_array( <quotes> )"
-"Summary: Utility function to easily add new custom deadquotes to Special Ops deadquotes Merges with any existing ones."
-"Module: Utility"
-"MandatoryArg: <quotes>: Messages you want added to the list being displayed on the Mission Failed summary."
-"Example: so_include_deadquote_array( special_quotes );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_include_deadquote_array(<quotes> )""Summary: Utility function to easily add new custom deadquotes to Special Ops deadquotes Merges with any existing ones.""Module: Utility""MandatoryArg: <quotes>: Messages you want added to the list being displayed on the Mission Failed summary.""Example: so_include_deadquote_array(special_quotes );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_include_deadquote_array(quotes) {
@@ -841,17 +731,7 @@ so_include_deadquote_array(quotes) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_create_hud_item( <yLine>, <xOffset> , <message>, <player> )"
-"Summary: Useful for creating the hud items that line up on the right side of the screen for typical Special Ops information."
-"Module: Hud"
-"OptionalArg: <yLine>: Line # to draw the element on. Start with 0 meaning top of the screen in split screen within the safe area."
-"OptionalArg: <xOffset>: Offset for the X position."
-"OptionalArg: <message>: Optional message to apply to the hudelem.label."
-"OptionalArg: <player>: If a player is passed in, it will create a ClientHudElem for that player specifically."
-"OptionalArg: <always_draw>: If true, then will not add itself to the list of hud elements to be toggled on and off with the dpad."
-"Example: so_create_hud_item( 1, 0, &"SPECIAL_OPS_TIME_NULL", level.player2 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_create_hud_item( <yLine>, <xOffset> , <message>, <player> )""Summary: Useful for creating the hud items that line up on the right side of the screen for typical Special Ops information.""Module: Hud""OptionalArg: <yLine>: Line # to draw the element on. Start with 0 meaning top of the screen in split screen within the safe area.""OptionalArg: <xOffset>: Offset for the X position.""OptionalArg: <message>: Optional message to apply to the hudelem.label.""OptionalArg: <player>: If a player is passed in, it will create a ClientHudElem for that player specifically.""OptionalArg: <always_draw>: If true, then will not add itself to the list of hud elements to be toggled on and off with the dpad.""Example: so_create_hud_item( 1, 0, &"SPECIAL_OPS_TIME_NULL", level.player2 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_create_hud_item(yLine, xOffset, message, player, always_draw) {
@@ -900,14 +780,7 @@ so_create_hud_item(yLine, xOffset, message, player, always_draw) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_create( <new_value> )"
-"Summary: Pulses the hud item and updates the label to the new value. Should always try to use the so_hud_pulse_<type> functions instead."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When set to a value, will be set on the .label parameter of the hud element."
-"Example: hudelem thread so_hud_pulse_create( 0 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_create( <new_value> )""Summary: Pulses the hud item and updates the label to the new value. Should always try to use the so_hud_pulse_<type> functions instead.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When set to a value, will be set on the .label parameter of the hud element.""Example: hudelem thread so_hud_pulse_create( 0 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_create(new_value) {
@@ -934,14 +807,7 @@ so_hud_pulse_create(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_stop( <new_value> )"
-"Summary: Call to take whatever current status a hud element pulse is in, and return it to normal."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When start_immediately, will pass this through to be applied to the hud element's label."
-"Example: hudelem thread so_hud_pulse_stop();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_stop( <new_value> )""Summary: Call to take whatever current status a hud element pulse is in, and return it to normal.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When start_immediately, will pass this through to be applied to the hud element's label.""Example: hudelem thread so_hud_pulse_stop();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_stop(new_value) {
@@ -962,14 +828,7 @@ so_hud_pulse_stop(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_default( <new_value> )"
-"Summary: Pulses the hud element, and sets the default color for that type of pulse."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When defined, will be set as the label of the new hud element."
-"Example: hudelem so_hud_pulse_default( enemy_count );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_default( <new_value> )""Summary: Pulses the hud element, and sets the default color for that type of pulse.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When defined, will be set as the label of the new hud element.""Example: hudelem so_hud_pulse_default( enemy_count );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_default(new_value) {
@@ -982,14 +841,7 @@ so_hud_pulse_default(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_close( <new_value> )"
-"Summary: Pulse loops the hud element, and sets the default color for that type of pulse."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When defined, will be set as the label of the new hud element."
-"Example: hudelem so_hud_pulse_close( enemy_count );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_close( <new_value> )""Summary: Pulse loops the hud element, and sets the default color for that type of pulse.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When defined, will be set as the label of the new hud element.""Example: hudelem so_hud_pulse_close( enemy_count );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_close(new_value) {
@@ -1002,14 +854,7 @@ so_hud_pulse_close(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_success( <new_value> )"
-"Summary: Pulses the hud element, and sets the default color for that type of pulse."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When defined, will be set as the label of the new hud element."
-"Example: hudelem so_hud_pulse_success( enemy_count );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_success( <new_value> )""Summary: Pulses the hud element, and sets the default color for that type of pulse.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When defined, will be set as the label of the new hud element.""Example: hudelem so_hud_pulse_success( enemy_count );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_success(new_value) {
@@ -1022,14 +867,7 @@ so_hud_pulse_success(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_warning( <new_value> )"
-"Summary: Pulses the hud element, and sets the default color for that type of pulse."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When defined, will be set as the label of the new hud element."
-"Example: hudelem so_hud_pulse_warning( enemy_count );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_warning( <new_value> )""Summary: Pulses the hud element, and sets the default color for that type of pulse.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When defined, will be set as the label of the new hud element.""Example: hudelem so_hud_pulse_warning( enemy_count );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_warning(new_value) {
@@ -1042,14 +880,7 @@ so_hud_pulse_warning(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_alarm( <new_value> )"
-"Summary: Pulse loops the hud element, and sets the default color for that type of pulse."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When defined, will be set as the label of the new hud element."
-"Example: hudelem so_hud_pulse_alarm( enemy_count );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_alarm( <new_value> )""Summary: Pulse loops the hud element, and sets the default color for that type of pulse.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When defined, will be set as the label of the new hud element.""Example: hudelem so_hud_pulse_alarm( enemy_count );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_alarm(new_value) {
@@ -1062,14 +893,7 @@ so_hud_pulse_alarm(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_pulse_failure( <new_value> )"
-"Summary: Pulses the hud element, and sets the default color for that type of pulse."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <new_value>: When defined, will be set as the label of the new hud element."
-"Example: hudelem so_hud_pulse_failure( enemy_count );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_pulse_failure( <new_value> )""Summary: Pulses the hud element, and sets the default color for that type of pulse.""Module: Hud""CallOn: A hud element""OptionalArg: <new_value>: When defined, will be set as the label of the new hud element.""Example: hudelem so_hud_pulse_failure( enemy_count );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_pulse_failure(new_value) {
@@ -1082,13 +906,7 @@ so_hud_pulse_failure(new_value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_hud_ypos( <so_hud_ypos> )"
-"Summary: Returns the default value for SO HUD element Y positions. This is generally the split between the Text and the Value. When used allows simple adjustment of the hud to move it around in all SOs rather than hand updating each hud element."
-"Module: Hud"
-"CallOn: A hud element"
-"Example: so_create_hud_item( 1, so_hud_ypos(), &"SPECIAL_OPS_TIME_NULL", level.player2 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_hud_ypos( <so_hud_ypos> )""Summary: Returns the default value for SO HUD element Y positions. This is generally the split between the Text and the Value. When used allows simple adjustment of the hud to move it around in all SOs rather than hand updating each hud element.""Module: Hud""CallOn: A hud element""Example: so_create_hud_item( 1, so_hud_ypos(), &"SPECIAL_OPS_TIME_NULL", level.player2 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_hud_ypos() {
@@ -1098,15 +916,7 @@ so_hud_ypos() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_remove_hud_item( <destroy_immediately> )"
-"Summary: Default behavior for removing an SO HUD item. Pulses out by default, but can be told to be removed immediately."
-"Module: Hud"
-"CallOn: A hud element"
-"OptionalArg: <destroy_immediately>: When set to true, will just remove the item immediately."
-"OptionalArg: <decay_immediately>: When set to true, will do the decay visuals immediately rather than holding for a moment."
-"Example: hudelem so_remove_hud_item();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_remove_hud_item( <destroy_immediately> )""Summary: Default behavior for removing an SO HUD item. Pulses out by default, but can be told to be removed immediately.""Module: Hud""CallOn: A hud element""OptionalArg: <destroy_immediately>: When set to true, will just remove the item immediately.""OptionalArg: <decay_immediately>: When set to true, will do the decay visuals immediately rather than holding for a moment.""Example: hudelem so_remove_hud_item();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_remove_hud_item(destroy_immediately, decay_immediately) {
@@ -1133,14 +943,7 @@ so_remove_hud_item(destroy_immediately, decay_immediately) {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_hud_white( <new_alpha> )"
-"Summary: Sets properties on a hud element to be a standard white color."
-"Module: Hud"
-"OptionalArg: <new_alpha>: Alpha to optionally set the hud element to."
-"CallOn: A hud element"
-"Example: hudelem set_hud_white();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_hud_white( <new_alpha> )""Summary: Sets properties on a hud element to be a standard white color.""Module: Hud""OptionalArg: <new_alpha>: Alpha to optionally set the hud element to.""CallOn: A hud element""Example: hudelem set_hud_white();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 set_hud_white(new_alpha) {
@@ -1156,14 +959,7 @@ set_hud_white(new_alpha) {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_hud_blue( <new_alpha> )"
-"Summary: Sets properties on a hud element to be a standard blue color."
-"Module: Hud"
-"OptionalArg: <new_alpha>: Alpha to optionally set the hud element to."
-"CallOn: A hud element"
-"Example: hudelem set_hud_blue();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_hud_blue( <new_alpha> )""Summary: Sets properties on a hud element to be a standard blue color.""Module: Hud""OptionalArg: <new_alpha>: Alpha to optionally set the hud element to.""CallOn: A hud element""Example: hudelem set_hud_blue();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 set_hud_blue(new_alpha) {
@@ -1179,14 +975,7 @@ set_hud_blue(new_alpha) {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_hud_green( <new_alpha> )"
-"Summary: Sets properties on a hud element to be a standard green color."
-"Module: Hud"
-"OptionalArg: <new_alpha>: Alpha to optionally set the hud element to."
-"CallOn: A hud element"
-"Example: hudelem set_hud_green();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_hud_green( <new_alpha> )""Summary: Sets properties on a hud element to be a standard green color.""Module: Hud""OptionalArg: <new_alpha>: Alpha to optionally set the hud element to.""CallOn: A hud element""Example: hudelem set_hud_green();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 set_hud_green(new_alpha) {
@@ -1202,14 +991,7 @@ set_hud_green(new_alpha) {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_hud_yellow( <new_alpha> )"
-"Summary: Sets properties on a hud element to be a standard yellow color."
-"Module: Hud"
-"OptionalArg: <new_alpha>: Alpha to optionally set the hud element to."
-"CallOn: A hud element"
-"Example: hudelem set_hud_yellow();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_hud_yellow( <new_alpha> )""Summary: Sets properties on a hud element to be a standard yellow color.""Module: Hud""OptionalArg: <new_alpha>: Alpha to optionally set the hud element to.""CallOn: A hud element""Example: hudelem set_hud_yellow();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 set_hud_yellow(new_alpha) {
@@ -1225,14 +1007,7 @@ set_hud_yellow(new_alpha) {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_hud_red( <new_alpha> )"
-"Summary: Sets properties on a hud element to be a standard red color."
-"Module: Hud"
-"OptionalArg: <new_alpha>: Alpha to optionally set the hud element to."
-"CallOn: A hud element"
-"Example: hudelem set_hud_red();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_hud_red( <new_alpha> )""Summary: Sets properties on a hud element to be a standard red color.""Module: Hud""OptionalArg: <new_alpha>: Alpha to optionally set the hud element to.""CallOn: A hud element""Example: hudelem set_hud_red();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 set_hud_red(new_alpha) {
@@ -1248,14 +1023,7 @@ set_hud_red(new_alpha) {
 /*
 =============
 ///ScriptDocBegin
-"Name: info_hud_wait_for_player( <info_hud_wait_for_player> )"
-"Summary: When run on a player, waits for them to press the appropriate key and sends a notify that will allow certain hud elements to become visible for a while before fading them back out."
-"Module: Hud"
-"CallOn: A player"
-"OptionalArg: <endon_notify>: If a value is passed in, will create a level endon( endon_notify ) to terminate the function."
-"Example: level.player info_hud_wait_for_player( "special_op_complete" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: info_hud_wait_for_player( <info_hud_wait_for_player> )""Summary: When run on a player, waits for them to press the appropriate key and sends a notify that will allow certain hud elements to become visible for a while before fading them back out.""Module: Hud""CallOn: A player""OptionalArg: <endon_notify>: If a value is passed in, will create a level endon( endon_notify ) to terminate the function.""Example: level.player info_hud_wait_for_player( "special_op_complete" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 info_hud_wait_for_player(endon_notify) {
@@ -1326,15 +1094,7 @@ info_hud_start_state() {
 /*
 =============
 ///ScriptDocBegin
-"Name: info_hud_handle_fade( <hudelem>, <endon_notify> )"
-"Summary: When called on a player and a hudelement is passed in, it will wait for the notifies from info_hud_wait_for_player() and fade the item in or out as needed."
-"Module: Hud"
-"CallOn: A player"
-"MandatoryArg: <hudelem>: Hud element to fade in and out."
-"OptionalArg: <endon_notify>: If a value is passed in, will create a level endon( endon_notify ) to terminate the function."
-"Example: level.player info_hud_handle_fad( timer_hud, "special_op_complete" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: info_hud_handle_fade( <hudelem>, <endon_notify> )""Summary: When called on a player and a hudelement is passed in, it will wait for the notifies from info_hud_wait_for_player() and fade the item in or out as needed.""Module: Hud""CallOn: A player""MandatoryArg: <hudelem>: Hud element to fade in and out.""OptionalArg: <endon_notify>: If a value is passed in, will create a level endon( endon_notify ) to terminate the function.""Example: level.player info_hud_handle_fad( timer_hud, "special_op_complete" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 info_hud_handle_fade(hudelem, endon_notify) {
@@ -1375,13 +1135,7 @@ info_hud_update_alpha(hudelem) {
 /*
 =============
 ///ScriptDocBegin
-"Name: info_hud_decrement_timer( <time> )"
-"Summary: Modifies the global challenge timer to subract the specified time from the current time."
-"Module: Hud"
-"MandatoryArg: <time>: The amount to subtract from the global time."
-"Example: info_hud_decrement_timer( level.so_missed_target_deduction )"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: info_hud_decrement_timer( <time> )""Summary: Modifies the global challenge timer to subract the specified time from the current time.""Module: Hud""MandatoryArg: <time>: The amount to subtract from the global time.""Example: info_hud_decrement_timer( level.so_missed_target_deduction )""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 info_hud_decrement_timer(time) {
@@ -1432,13 +1186,7 @@ info_hud_decrement_timer(time) {
 /*
 =============
 ///ScriptDocBegin
-"Name: is_dvar_character_switcher( <dvar> )"
-"Summary: Tests the specified dvar to see whether the player positions have switched (for vehicle SOs)."
-"Module: Utility"
-"MandatoryArg: <dvar>: The dvar to test."
-"Example: is_dvar_character_switcher( "specops_character_switched" )"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: is_dvar_character_switcher( <dvar> )""Summary: Tests the specified dvar to see whether the player positions have switched (for vehicle SOs).""Module: Utility""MandatoryArg: <dvar>: The dvar to test.""Example: is_dvar_character_switcher( "specops_character_switched" )""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 is_dvar_character_switcher(dvar) {
@@ -1555,13 +1303,7 @@ so_dialog_mission_success() {
 /*
 =============
 ///ScriptDocBegin
-"Name: so_dialog_mission_failed( <sound_alias> )"
-"Summary: Used to safely play a piece of dialog on mission failure without worry of getting duplicates. Whichever one is called first wins."
-"Module: Utility"
-"MandatoryArg: <sound_alias>: The sound alias in level.scr_radio"
-"Example: so_dialog_mission_failed( "what_are_you_stupid" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: so_dialog_mission_failed( <sound_alias> )""Summary: Used to safely play a piece of dialog on mission failure without worry of getting duplicates. Whichever one is called first wins.""Module: Utility""MandatoryArg: <sound_alias>: The sound alias in level.scr_radio""Example: so_dialog_mission_failed( "what_are_you_stupid" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 so_dialog_mission_failed(sound_alias) {

@@ -491,9 +491,7 @@ do_monkey_sound(info) {
   self.monk_scream_vox = 0;
 
   if(isDefined(level.grenade_safe_to_bounce)) {
-    if(![
-        [level.grenade_safe_to_bounce]
-      ](self.owner, level.weaponzmcymbalmonkey)) {
+    if(![[level.grenade_safe_to_bounce]](self.owner, level.weaponzmcymbalmonkey)) {
       self playSound(#"zmb_vox_monkey_scream");
       self.monk_scream_vox = 1;
     }

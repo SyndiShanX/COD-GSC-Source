@@ -40,8 +40,7 @@ main() {
 }
 
 find_attackable_enemy_at_node(nodeToCheck) {
-  if((self maps\mp\alien\_utility::get_alien_type() == "spitter") ||
-    (self maps\mp\alien\_utility::get_alien_type() == "seeder"))
+  if((self maps\mp\alien\_utility::get_alien_type() == "spitter") || (self maps\mp\alien\_utility::get_alien_type() == "seeder"))
     return undefined;
 
   CLOSE_PLAYER_DIST_SQ = 128 * 128;

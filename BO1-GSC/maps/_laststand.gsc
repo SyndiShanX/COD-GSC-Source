@@ -97,18 +97,7 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
 }
 
 laststand_allowed(sWeapon, sMeansOfDeath, sHitLoc) {
-  if(getDvar(#"zombiemode") != "1" &&
-    sMeansOfDeath != "MOD_PISTOL_BULLET" &&
-    sMeansOfDeath != "MOD_RIFLE_BULLET" &&
-    sMeansOfDeath != "MOD_HEAD_SHOT" &&
-    sMeansOfDeath != "MOD_MELEE" &&
-    sMeansOfDeath != "MOD_BAYONET" &&
-    sMeansOfDeath != "MOD_GRENADE" &&
-    sMeansOfDeath != "MOD_GRENADE_SPLASH" &&
-    sMeansOfDeath != "MOD_PROJECTILE" &&
-    sMeansOfDeath != "MOD_PROJECTILE_SPLASH" &&
-    sMeansOfDeath != "MOD_EXPLOSIVE" &&
-    sMeansOfDeath != "MOD_BURNED") {
+  if(getDvar(#"zombiemode") != "1" && sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET" && sMeansOfDeath != "MOD_HEAD_SHOT" && sMeansOfDeath != "MOD_MELEE" && sMeansOfDeath != "MOD_BAYONET" && sMeansOfDeath != "MOD_GRENADE" && sMeansOfDeath != "MOD_GRENADE_SPLASH" && sMeansOfDeath != "MOD_PROJECTILE" && sMeansOfDeath != "MOD_PROJECTILE_SPLASH" && sMeansOfDeath != "MOD_EXPLOSIVE" && sMeansOfDeath != "MOD_BURNED") {
     return false;
   }
   if(level.laststandpistol == "none") {
@@ -325,9 +314,7 @@ can_revive(revivee) {
       return false;
     }
     if(isDefined(level.can_revive)) {
-      return [
-        [level.can_revive]
-      ](revivee);
+      return [[level.can_revive]](revivee);
     }
   }
   return true;

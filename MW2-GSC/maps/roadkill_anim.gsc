@@ -425,10 +425,7 @@ roadkill_dialogue() {
   Copy that hunter 2-1.
   	
   Upstairs:
-  "I'm cutting through history class."
-  "Roger that."
-  	
-  */
+  "I'm cutting through history class.""Roger that."*/
 
   /*
   removed:
@@ -528,15 +525,13 @@ roadkill_dialogue() {
   level.scr_sound["generic"]["roadkill_fly_bridgecomplete"] = "roadkill_fly_bridgecomplete";
   level.scr_face["generic"]["roadkill_fly_bridgecomplete"] = % roadkill_fly_bridgecomplete;
 
-  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white,
-  // twelve story apartment building occupied by hostile forces, over!
+  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white, // twelve story apartment building occupied by hostile forces, over!
   level.scr_sound["generic"]["roadkill_cpd_airstrike"] = "roadkill_cpd_airstrike";
 
   // Hunter 2-1, this is Warlord, solid copy, uh, I have Devil 1-1, flight of two F-15s, on the line, standby for relay.	
   level.scr_radio["roadkill_auc_ontheline"] = "roadkill_auc_ontheline";
 
-  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes,
-  // holding at three-Sierra, northwest, holding area Knife, carrying two JDAMs and two HARMs, over.	
+  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes, // holding at three-Sierra, northwest, holding area Knife, carrying two JDAMs and two HARMs, over.	
   level.scr_radio["roadkill_fp1_devil11"] = "roadkill_fp1_devil11";
 
   // Devil 1-1, this is Hunter 2-1, solid copy on check-in, standby.	

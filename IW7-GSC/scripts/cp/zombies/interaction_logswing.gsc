@@ -30,7 +30,7 @@ use_logswing_trap(var_0, var_1) {
 
   var_7 = getent("logswing_trap", "targetname");
   var_7 thread log_swing_trap_sfx();
-  var_8 = getanimlength( % iw7_cp_log_swing);
+  var_8 = getanimlength(%iw7_cp_log_swing);
   var_7 scriptmodelplayanimdeltamotion("IW7_cp_log_swing", 1);
   var_0.trap_kills = 0;
   var_7 thread kill_zombies(var_2, var_1, var_0);

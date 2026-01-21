@@ -7,13 +7,11 @@
 
 /*###################################################
 		CREATES BREAKABLE WOOD
-		1) Each trigger_damage has a targetname of "wood_splinter"
-		2) Each trigger_damage targets the script_brushmodel of the pieces of wood to break
+		1) Each trigger_damage has a targetname of "wood_splinter"2) Each trigger_damage targets the script_brushmodel of the pieces of wood to break
 		3) Each piece of wood to break targets the script_brushmodels of the broken pieces that will show when it's broken
 		4) Give the trigger_damage a 'script_noteworthy' to wait for a notify to be given before the wood can break
 			example: 'script_noteworthy' of 'wood_time' will wait for 'level notify ("wood_time");' before pieces are breakable
-		5) Exec this script at the start of your level - "maps\_wood::main();"
-###################################################*/
+		5) Exec this script at the start of your level - "maps\_wood::main();"###################################################*/
 
 main() {
   maps\_utility::precache("woodgib_medium");

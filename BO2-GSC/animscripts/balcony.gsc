@@ -215,7 +215,7 @@ dobalcony() {
   if(isDefined(animation)) {
     self.a.nodeath = 1;
     self animmode("noclip");
-    self setflaggedanimknoball("balcony", animation, % body, 1, 0.1, 1);
+    self setflaggedanimknoball("balcony", animation, %body, 1, 0.1, 1);
     self animscripts\shared::donotetracks("balcony");
   }
 }

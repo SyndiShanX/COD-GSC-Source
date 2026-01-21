@@ -2744,15 +2744,7 @@ pel2_friendly_fire_shield() {
   attacker = undefined;
   while(self.health > 0) {
     self waittill("damage", amount, attacker, direction_vec, point, type, modelName, tagName);
-    if(
-      (!isDefined(attacker) && self.script_team != "neutral") ||
-      maps\_vehicle::is_godmode() ||
-      maps\_vehicle::attacker_isonmyteam(attacker) ||
-      maps\_vehicle::attacker_troop_isonmyteam(attacker) ||
-      maps\_vehicle::isDestructible() ||
-      maps\_vehicle::bulletshielded(type) ||
-      invulnerable_against_this_attacker(attacker)
-    ) {
+    if((!isDefined(attacker) && self.script_team != "neutral") || maps\_vehicle::is_godmode() || maps\_vehicle::attacker_isonmyteam(attacker) || maps\_vehicle::attacker_troop_isonmyteam(attacker) || maps\_vehicle::isDestructible() || maps\_vehicle::bulletshielded(type) || invulnerable_against_this_attacker(attacker)) {
       self.health = 20000;
     } else {
       self.health = self.currenthealth;

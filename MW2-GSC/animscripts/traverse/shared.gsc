@@ -27,8 +27,8 @@ advancedTraverse(traverseAnim, normalHeight) {
 
   blendTime = 0.15;
 
-  self clearAnim( % body, blendTime);
-  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, % root, 1, blendTime, 1);
+  self clearAnim(%body, blendTime);
+  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %root, 1, blendTime, 1);
 
   gravityToBlendTime = 0.2;
   endBlendTime = 0.2;
@@ -138,7 +138,7 @@ DoTraverse(traverseData) {
   }
   self.traverseAnim = traverseAnim;
   self.traverseAnimRoot = % body;
-  self setFlaggedAnimKnoballRestart("traverseAnim", traverseAnim, % body, 1, .2, 1);
+  self setFlaggedAnimKnoballRestart("traverseAnim", traverseAnim, %body, 1, .2, 1);
 
   self.traverseDeathIndex = 0;
   self.traverseDeathAnim = traverseData["interruptDeathAnim"];
@@ -256,7 +256,7 @@ dog_wall_and_window_hop(traverseName, height) {
   realHeight = startnode.traverse_height - startnode.origin[2];
   self thread teleportThread(realHeight - height);
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("dog_traverse", anim.dogTraverseAnims[traverseName], 1, 0.2, 1);
 
   self animscripts\shared::DoNoteTracks("dog_traverse");
@@ -278,7 +278,7 @@ dog_jump_down(frames, rate) {
   self.traverseAnimRoot = % root;
   self thread teleportThreadEx(40.0 - height, 0.1, frames, rate);
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("traverseAnim", self.traverseAnim, 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverseAnim");
 
@@ -300,7 +300,7 @@ dog_jump_up(height, frames) {
 
   self thread teleportThreadEx(height - 40.0, 0.2, frames);
 
-  self clearanim( % root, 0.25);
+  self clearanim(%root, 0.25);
   self setflaggedanimrestart("traverseAnim", anim.dogTraverseAnims["jump_up_40"], 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverseAnim");
 

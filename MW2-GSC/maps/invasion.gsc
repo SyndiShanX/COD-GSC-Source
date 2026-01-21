@@ -256,8 +256,8 @@ main() {
 
   thread paradrops_ambient();
 
-  //array_thread( getvehiclenodearray( "start_drop", "script_noteworthy" ), ::plane_start_drop );
-  //array_thread( getvehiclenodearray( "stop_drop", "script_noteworthy" ), ::plane_stop_drop );
+  //array_thread( getvehiclenodearray("start_drop", "script_noteworthy" ), ::plane_start_drop );
+  //array_thread( getvehiclenodearray("stop_drop", "script_noteworthy" ), ::plane_stop_drop );
 
   level.uav = spawn_vehicle_from_targetname_and_drive("uav");
   level.uav playLoopSound("uav_engine_loop");
@@ -1366,8 +1366,8 @@ handler_crash_to_roof() {
     wait 1;
   //while( level.truck_group_enemies_count_deaths < 14 )
   //	wait 1;
-  //e = getaiarray( "allies" );
-  //f = getaiarray( "axis" );
+  //e = getaiarray("allies" );
+  //f = getaiarray("axis" );
   //println( "enemies " + e.size );
   //println( "friendlies " + f.size );
   autosave_by_name("trucks_to_north");
@@ -2510,7 +2510,7 @@ fire_stinger_at_uav() {
 
   wait 2;
 
-  //enemies = getaiarray( "axis" );
+  //enemies = getaiarray("axis" );
   //stinger_source = get_closest_to_player_view( enemies );
   //	if( !isDefined( stinger_source ) )
   //		continue;
@@ -3259,14 +3259,14 @@ dialog_handle_predator_infantry_kills() {
 //friendlies_stop_ignoring_when_flag( msg )
 //{
 //	flag_wait( msg );
-//	friendlies = getaiarray( "allies" );
+//	friendlies = getaiarray("allies" );
 //	foreach( friend in friendlies )
 //		friend.ignoreall = false;
 //}
 //
 //friendlies_start_ignoreall()
 //{
-//	friendlies = getaiarray( "allies" );
+//	friendlies = getaiarray("allies" );
 //	foreach( friend in friendlies )
 //		friend.ignoreall = true;
 //}
@@ -4867,7 +4867,7 @@ one_bmp_from_south() {
   bmp vehicle_setspeed(0, 15, 15);
 
   bmp bmp_fires_at_nates();
-  //array_thread( getvehiclenodearray( "new_target", "script_noteworthy" ), ::new_target_think );
+  //array_thread( getvehiclenodearray("new_target", "script_noteworthy" ), ::new_target_think );
 
   bmp vehicle_setspeed(10, 3, 3);
 
@@ -5275,8 +5275,7 @@ setup_hunter_enemies() {
 }
 
 predator_death_func() {
-  if(isDefined(self.damageMod) && self.damageMod == "MOD_PROJECTILE_SPLASH" &&
-    isDefined(self.lastAttacker) && isDefined(self.lastAttacker.fired_hellfire_missile))
+  if(isDefined(self.damageMod) && self.damageMod == "MOD_PROJECTILE_SPLASH" && isDefined(self.lastAttacker) && isDefined(self.lastAttacker.fired_hellfire_missile))
     self.skipDeathAnim = true;
 
   return false;

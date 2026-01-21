@@ -21,11 +21,7 @@ __init__() {
 register_character_unlock(unlock_name, unlock_stat, item, var_f27097cc, ...) {
   assert(vararg.size > 0, "<dev string:x38>");
   var_9ba1646c = {
-    #var_2b469a7d: unlock_stat,
-    #required_item: item,
-    #var_3845495: [],
-    #var_849d923d: var_f27097cc,
-    #activation_func: undefined
+    #var_2b469a7d: unlock_stat, #required_item: item, #var_3845495: [], #var_849d923d: var_f27097cc, #activation_func: undefined
   };
 
   for(i = 0; i < vararg.size; i++) {
@@ -84,9 +80,7 @@ function_c67a5089() {
 
     var_9ba1646c = level.var_7d8da246[unlock_name];
 
-    if(isDefined(var_9ba1646c.var_849d923d) && [
-        [var_9ba1646c.var_849d923d]
-      ]()) {
+    if(isDefined(var_9ba1646c.var_849d923d) && [[var_9ba1646c.var_849d923d]]()) {
       if(!isDefined(var_743d50f5)) {
         var_743d50f5 = [];
       } else if(!isarray(var_743d50f5)) {

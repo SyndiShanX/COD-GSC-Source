@@ -260,9 +260,7 @@ function onroundendgame(winningteam) {
   if(isDefined(game["overtime_round"])) {
     foreach(team in level.teams) {
       score = game["roundswon"][team];
-      [
-        [level._setteamscore]
-      ](team, score);
+      [[level._setteamscore]](team, score);
     }
     return winningteam;
   }

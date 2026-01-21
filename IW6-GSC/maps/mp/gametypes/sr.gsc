@@ -244,11 +244,7 @@ shouldSpawnTags(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   if(level.teamBased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team)
     return false;
 
-  if(
-    isDefined(attacker) &&
-    !isDefined(attacker.team) &&
-    (attacker.classname == "trigger_hurt" || attacker.classname == "worldspawn")
-  )
+  if(isDefined(attacker) && !isDefined(attacker.team) && (attacker.classname == "trigger_hurt" || attacker.classname == "worldspawn"))
     return false;
 
   return true;

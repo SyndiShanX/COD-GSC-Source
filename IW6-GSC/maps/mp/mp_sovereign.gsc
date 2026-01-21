@@ -110,10 +110,10 @@ walkway_collapse() {
 
   waitframe();
 
-  collapse_top_length = GetAnimLength( % mp_sovereign_walkway_collapse_top);
-  collapse_bottom_length = GetAnimLength( % mp_sovereign_walkway_collapse_bottom);
+  collapse_top_length = GetAnimLength(%mp_sovereign_walkway_collapse_top);
+  collapse_bottom_length = GetAnimLength(%mp_sovereign_walkway_collapse_bottom);
 
-  swap_time = GetNotetrackTimes( % mp_sovereign_walkway_collapse_top, "bottom_anim_begin")[0];
+  swap_time = GetNotetrackTimes(%mp_sovereign_walkway_collapse_top, "bottom_anim_begin")[0];
   swap_time *= collapse_top_length;
 
   walkway_trigger_damage = GetEnt("walkway_trigger_damage", "targetname");
@@ -147,9 +147,9 @@ walkway_collapse() {
   walkway_destroyed walkway_collapse_hide();
 
   walkway_tank_fx = [];
-  hose1_start_notetracks = GetNotetrackTimes( % mp_sovereign_walkway_collapse_top, "hose1_start");
-  hose2_start_notetracks = GetNotetrackTimes( % mp_sovereign_walkway_collapse_top, "hose2_start");
-  hose3_start_notetracks = GetNotetrackTimes( % mp_sovereign_walkway_collapse_top, "hose3_start");
+  hose1_start_notetracks = GetNotetrackTimes(%mp_sovereign_walkway_collapse_top, "hose1_start");
+  hose2_start_notetracks = GetNotetrackTimes(%mp_sovereign_walkway_collapse_top, "hose2_start");
+  hose3_start_notetracks = GetNotetrackTimes(%mp_sovereign_walkway_collapse_top, "hose3_start");
 
   if(hose1_start_notetracks.size > 0) {
     hose1_start = hose1_start_notetracks[0] * collapse_top_length;
@@ -374,7 +374,7 @@ malfunctioning_crane() {
   arm = GetEnt("malfunctioning_crane_arm", "targetname");
   arm_clip = GetEnt("malfunctioning_crane_arm_clip", "targetname");
 
-  anim_length = GetAnimLength( % mp_sovereign_malfunctioning_crane_arm);
+  anim_length = GetAnimLength(%mp_sovereign_malfunctioning_crane_arm);
 
   if(!isDefined(arm)) {
     return;

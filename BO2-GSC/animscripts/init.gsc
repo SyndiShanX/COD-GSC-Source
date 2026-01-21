@@ -131,7 +131,7 @@ main() {
   self.downaimlimit = -45;
   self.walk = 0;
   self.sprint = 0;
-  self animscripts\shared::setaiminganims( % aim_2, % aim_4, % aim_6, % aim_8);
+  self animscripts\shared::setaiminganims(%aim_2, %aim_4, %aim_6, %aim_8);
   self thread animscripts\shared::trackloop();
   self.a.magicreloadwhenreachenemy = 0;
   self.a.flamepaintime = 0;

@@ -454,18 +454,7 @@ setupMineCartFrontTrigger(frontTrigger) {
           damageCallback = maps\mp\agents\_agent_common::CodeCallback_AgentDamaged;
         }
 
-        otherPlayer thread[[damageCallback]](
-          inflictor,
-          attacker,
-          damageVal,
-          0,
-          "MOD_EXPLOSIVE",
-          "iw6_minecart_mp",
-          self.origin,
-          damageDirection,
-          "none",
-          0
-        );
+        otherPlayer thread[[damageCallback]](inflictor, attacker, damageVal, 0, "MOD_EXPLOSIVE", "iw6_minecart_mp", self.origin, damageDirection, "none", 0);
 
         wait(.2);
       }
@@ -507,10 +496,7 @@ waitForRiderExit(insideTrigger) {
 
   while(self.playersInCart.size > 0) {
     foreach(index, player in self.playersInCart) {
-      if(!isDefined(player) ||
-        !isReallyAlive(player) ||
-        !player IsTouching(insideTrigger)
-      ) {
+      if(!isDefined(player) || !isReallyAlive(player) || !player IsTouching(insideTrigger)) {
         self.playersInCart[index] = undefined;
       }
     }
@@ -529,10 +515,7 @@ mineCartSetupSparks() {
 CONST_SPARK_SPEED_LIMIT = 20;
 CONST_SPARK_FREQUENCY = 3500;
 mineCartPlaySparksOnSpeedChange(targetSpeed) {
-  if(isDefined(targetSpeed) &&
-    GetTime() > self.sparkTimeStamp &&
-    abs(targetSpeed - self.lastSpeed) > CONST_SPARK_SPEED_LIMIT
-  ) {
+  if(isDefined(targetSpeed) && GetTime() > self.sparkTimeStamp && abs(targetSpeed - self.lastSpeed) > CONST_SPARK_SPEED_LIMIT) {
     self.lastSpeed = targetSpeed;
     self.sparkTimeStamp = GetTime() + CONST_SPARK_FREQUENCY;
 
@@ -600,14 +583,7 @@ customCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault",
-    CONST_KILLSTREAK_NAME,
-    CONST_CRATE_WEIGHT,
-    maps\mp\killstreaks\_airdrop::killstreakCrateThink,
-    maps\mp\killstreaks\_airdrop::get_friendly_crate_model(),
-    maps\mp\killstreaks\_airdrop::get_enemy_crate_model(),
-    CONST_KILLSTREAK_PICKUP
-  );
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", CONST_KILLSTREAK_NAME, CONST_CRATE_WEIGHT, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), CONST_KILLSTREAK_PICKUP);
   level thread watchForCrateUse();
 }
 

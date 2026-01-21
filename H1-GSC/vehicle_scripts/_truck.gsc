@@ -17,7 +17,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathfx("fx\fire\firelp_small_pm_a", "tag_fx_tire_right_r", "smallfire", undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx("fx\fire\firelp_med_pm", "tag_fx_cab", "smallfire", undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx("fx\fire\firelp_small_pm_a", "tag_engine_left", "smallfire", undefined, undefined, 1, 0);
-  maps\_vehicle::build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");

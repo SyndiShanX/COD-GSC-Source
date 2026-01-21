@@ -67,9 +67,7 @@ avoidCarePackages(spawnPoint) {
 
 avoidGrenades(spawnPoint) {
   foreach(grenade in level.grenades) {
-    if(!isDefined(grenade) ||
-      !(grenade isExplosiveDangerousToPlayer(spawnPoint))
-    ) {
+    if(!isDefined(grenade) || !(grenade isExplosiveDangerousToPlayer(spawnPoint))) {
       continue;
     }
 
@@ -88,9 +86,7 @@ avoidMines(spawnPoint) {
     explosiveArray = array_combine(explosiveArray, level.traps);
 
   foreach(explosive in explosiveArray) {
-    if(!isDefined(explosive) ||
-      !(explosive isExplosiveDangerousToPlayer(spawnPoint))
-    ) {
+    if(!isDefined(explosive) || !(explosive isExplosiveDangerousToPlayer(spawnPoint))) {
       continue;
     }
 
@@ -103,10 +99,7 @@ avoidMines(spawnPoint) {
 }
 
 isExplosiveDangerousToPlayer(player) {
-  if(!level.teamBased ||
-    level.friendlyfire ||
-    !isDefined(player.team)
-  ) {
+  if(!level.teamBased || level.friendlyfire || !isDefined(player.team)) {
     return true;
   } else {
     explosiveTeam = undefined;

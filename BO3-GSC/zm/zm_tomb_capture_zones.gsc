@@ -1700,7 +1700,7 @@ function generator_state_turn_off() {
 }
 
 function generator_turns_off_after_anim() {
-  wait(getanimlength( % generic::p7_fxanim_zm_ori_generator_end_anim));
+  wait(getanimlength(%generic::p7_fxanim_zm_ori_generator_end_anim));
   self generator_state_off();
 }
 
@@ -1713,7 +1713,7 @@ function can_start_generator_power_up_anim() {
     self.n_time_started_generator = 0;
   }
   if(!isDefined(self.n_time_start_anim)) {
-    self.n_time_start_anim = getanimlength( % generic::p7_fxanim_zm_ori_generator_start_anim);
+    self.n_time_start_anim = getanimlength(%generic::p7_fxanim_zm_ori_generator_start_anim);
   }
   return self.n_current_progress > self.n_last_progress && ((gettime() - self.n_time_started_generator) * 0.001) > self.n_time_start_anim;
 }
@@ -1880,9 +1880,7 @@ function magic_box_stub_update_prompt(player) {
     cursor_hint = "HINT_WEAPON";
     cursor_hint_weapon = self.stub.trigger_target.grab_weapon;
     self setcursorhint(cursor_hint, cursor_hint_weapon);
-    if(isDefined(level.magic_box_check_equipment) && [
-        [level.magic_box_check_equipment]
-      ](cursor_hint_weapon)) {
+    if(isDefined(level.magic_box_check_equipment) && [[level.magic_box_check_equipment]](cursor_hint_weapon)) {
       self.hint_string = &"ZOMBIE_TRADE_EQUIP_FILL";
     } else {
       self.hint_string = &"ZOMBIE_TRADE_WEAPON_FILL";

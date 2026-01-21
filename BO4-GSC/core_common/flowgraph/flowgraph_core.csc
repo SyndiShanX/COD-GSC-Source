@@ -237,8 +237,7 @@ mychanges_watcher() {
   level waittill(#"flowgraph_mychanges");
   get_graph_def(self.def.name, 1);
   self.target run({
-    #localclientnum: self.localclientnum,
-    #flowgraph_asset: self.def.name
+    #localclientnum: self.localclientnum, #flowgraph_asset: self.def.name
   });
 }
 

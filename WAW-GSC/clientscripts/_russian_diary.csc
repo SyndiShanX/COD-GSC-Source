@@ -84,14 +84,10 @@ diary_award_think() {
   println("*** Client: ber2 event is " + event2);
   event3 = GetPersistentProfileVar(level.diary_event_see1);
   println("*** Client: see1 event is " + event3);
-  if(event1 == level.diary_outcome_good &&
-    event2 == level.diary_outcome_good &&
-    event3 == level.diary_outcome_good) {
+  if(event1 == level.diary_outcome_good && event2 == level.diary_outcome_good && event3 == level.diary_outcome_good) {
     alignment = level.diary_outcome_good;
   }
-  if(event1 == level.diary_outcome_evil &&
-    event2 == level.diary_outcome_evil &&
-    event3 == level.diary_outcome_evil) {
+  if(event1 == level.diary_outcome_evil && event2 == level.diary_outcome_evil && event3 == level.diary_outcome_evil) {
     alignment = level.diary_outcome_evil;
   }
   if(getlocalplayers().size > 1) {

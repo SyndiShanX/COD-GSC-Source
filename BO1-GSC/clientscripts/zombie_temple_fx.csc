@@ -166,9 +166,7 @@ dog_start_monitor() {
     sun_stop_ang = 0;
     time = 7;
     max_fog_opacity = 0.65;
-    setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);
+    setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
 
@@ -194,9 +192,7 @@ dog_stop_monitor() {
     sun_stop_ang = 99;
     time = 3;
     max_fog_opacity = 0.734468;
-    setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);;
+    setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);;
   }
 }
 
@@ -219,9 +215,7 @@ eclipse_fog_on() {
   sun_stop_ang = 88.2474;
   time = 0;
   max_fog_opacity = 0.593122;
-  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
 }
 
 cave_fog_on() {
@@ -244,9 +238,7 @@ cave_fog_on() {
   sun_stop_ang = 37.3192;
   time = 5;
   max_fog_opacity = 0.369586;
-  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   SetDvar("r_exposureTweak", "1");
   SetDvar("r_exposureValue", "1.15");
 }
@@ -271,9 +263,7 @@ cave_fog_off() {
   sun_stop_ang = 94.7812;
   time = 5;
   max_fog_opacity = 0.604413;
-  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   SetDvar("r_exposureTweak", "1");
   SetDvar("r_exposureValue", "1.1");
 }

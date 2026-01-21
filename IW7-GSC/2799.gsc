@@ -440,9 +440,7 @@ getmuzzlepos(var_0, var_1, var_2) {
 
   if(scripts\mp\spawnlogic::shoulduseprecomputedlos() && !scripts\mp\spawnlogic::isttlosdataavailable()) {
     if(isDefined(level.matchrecording_logeventmsg)) {
-      [
-        [level.matchrecording_logeventmsg]
-      ]("LOG_GENERIC_MESSAGE", gettime(), "ERROR: TTLOS System disabled! Could not access visDistData");
+      [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "ERROR: TTLOS System disabled! Could not access visDistData");
     }
 
     if(!isDefined(level.var_8C28)) {

@@ -568,9 +568,7 @@ generated_radius_attract_positions(forward, offset, num_positions, attract_radiu
     rotated_forward = (cos(i) * altforward[0] - sin(i) * altforward[1], sin(i) * altforward[0] + cos(i) * altforward[1], altforward[2]);
 
     if(isDefined(level.poi_positioning_func))
-      pos = [
-        [level.poi_positioning_func]
-      ](self.origin, rotated_forward);
+      pos = [[level.poi_positioning_func]](self.origin, rotated_forward);
     else if(isDefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning)
       pos = maps\mp\zombies\_zm_server_throttle::server_safe_ground_trace("poi_trace", 10, self.origin + rotated_forward + vectorscale((0, 0, 1), 10.0));
     else
@@ -766,9 +764,7 @@ remove_poi_attractor(zombie_poi) {
 
 array_check_for_dupes_using_compare(array, single, is_equal_fn) {
   for(i = 0; i < array.size; i++) {
-    if([
-        [is_equal_fn]
-      ](array[i], single))
+    if([[is_equal_fn]](array[i], single))
       return false;
   }
 
@@ -1036,13 +1032,9 @@ get_closest_valid_player(origin, ignore_player) {
 
   while(!valid_player_found) {
     if(isDefined(self.closest_player_override))
-      player = [
-        [self.closest_player_override]
-      ](origin, players);
+      player = [[self.closest_player_override]](origin, players);
     else if(isDefined(level.closest_player_override))
-      player = [
-        [level.closest_player_override]
-      ](origin, players);
+      player = [[level.closest_player_override]](origin, players);
     else if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)
       player = get_closest_player_using_paths(origin, players);
     else
@@ -2087,8 +2079,7 @@ set_zombie_var(var, value, is_float, column, is_team_based) {
     column = 1;
 
   table = "mp/zombiemode.csv";
-  table_value = tablelookup(table, 0,
-    var, column);
+  table_value = tablelookup(table, 0, var, column);
 
   if(isDefined(table_value) && table_value != "") {
     if(is_float)
@@ -3709,9 +3700,7 @@ get_closest_index_to_entity(entity, array, dist, extra_check) {
   index = undefined;
 
   for(i = 0; i < array.size; i++) {
-    if(isDefined(extra_check) && ![
-        [extra_check]
-      ](entity, array[i])) {
+    if(isDefined(extra_check) && ![[extra_check]](entity, array[i])) {
       continue;
     }
     newdistsq = distancesquared(array[i].origin, org);

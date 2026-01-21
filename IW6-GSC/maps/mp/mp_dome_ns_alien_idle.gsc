@@ -115,9 +115,7 @@ UpdateAngle() {
 }
 
 ShouldAttackIdle() {
-  return isDefined(self.enemy) &&
-    maps\mp\_utility::IsReallyAlive(self.enemy) &&
-    distanceSquared(self.origin, self.enemy.origin) < 1000000;
+  return isDefined(self.enemy) && maps\mp\_utility::IsReallyAlive(self.enemy) && distanceSquared(self.origin, self.enemy.origin) < 1000000;
 }
 
 GetTurnAnimState(angleDiff) {

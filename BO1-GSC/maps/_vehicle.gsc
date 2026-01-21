@@ -205,19 +205,7 @@ path_detour_script_origin(detournode) {
 }
 
 crash_detour_check(detourpath) {
-  return (
-    isDefined(detourpath.script_crashtype) &&
-    (
-      isDefined(self.deaddriver) ||
-      self.health <= 0 ||
-      detourpath.script_crashtype == "forced" ||
-      (level.vclogin_vehicles)
-    ) &&
-    (
-      !isDefined(detourpath.derailed) ||
-      (isDefined(detourpath.script_crashtype) && detourpath.script_crashtype == "plane")
-    )
-  );
+  return (isDefined(detourpath.script_crashtype) && (isDefined(self.deaddriver) || self.health <= 0 || detourpath.script_crashtype == "forced" || (level.vclogin_vehicles)) && (!isDefined(detourpath.derailed) || (isDefined(detourpath.script_crashtype) && detourpath.script_crashtype == "plane")));
 }
 
 crash_derailed_check(detourpath) {
@@ -1520,12 +1508,7 @@ kill() {
       thread[[level.vehicle_death_thread[type]]]();
     }
     if(isDefined(self.deathquakescale) && self.deathquakescale > 0) {
-      Earthquake(
-        self.deathquakescale,
-        self.deathquakeduration,
-        self.origin,
-        self.deathquakeradius
-      );
+      Earthquake(self.deathquakescale, self.deathquakeduration, self.origin, self.deathquakeradius);
     }
     thread kill_damage();
     if(!isDefined(self.destructibledef)) {
@@ -1666,7 +1649,7 @@ set_death_model(sModel, fDelay) {
     return;
   }
   eModel = get_dummy();
-  eModel clearanim( % root, 0);
+  eModel clearanim(%root, 0);
   if(isDefined(self)) {
     eModel setModel(sModel);
     eModel SetVehicleAttachments(1);
@@ -1894,10 +1877,7 @@ get_script_modelvehicles() {
   }
   level.modelvehicles = [];
   for(i = 0; i < models.size; i++) {
-    if(isDefined(models[i].targetname) &&
-      (models[i].targetname == "destructible" ||
-        models[i].targetname == "zpu" ||
-        models[i].targetname == "exploder")) {
+    if(isDefined(models[i].targetname) && (models[i].targetname == "destructible" || models[i].targetname == "zpu" || models[i].targetname == "exploder")) {
       continue;
     }
     if(isDefined(models[i].script_noteworthy) && models[i].script_noteworthy == "notvehicle") {
@@ -2213,10 +2193,7 @@ node_trigger_process() {
       flag_init(self.script_flag_wait);
     }
   }
-  if(isDefined(self.script_VehicleSpawngroup) ||
-    isDefined(self.script_VehicleStartMove) ||
-    isDefined(self.script_gatetrigger) ||
-    isDefined(self.script_Vehiclegroupdelete)) {
+  if(isDefined(self.script_VehicleSpawngroup) || isDefined(self.script_VehicleStartMove) || isDefined(self.script_gatetrigger) || isDefined(self.script_Vehiclegroupdelete)) {
     processtrigger = true;
   }
   if(processtrigger) {
@@ -2857,13 +2834,7 @@ friendlyfire_shield_callback(attacker, amount, type) {
   if(!isDefined(self.friendlyfire_shield) || !self.friendlyfire_shield) {
     return false;
   }
-  if(
-    (!isDefined(attacker) && self.vteam != "neutral") ||
-    attacker_isonmyteam(attacker) ||
-    attacker_troop_isonmyteam(attacker) ||
-    isDestructible() ||
-    bulletshielded(type)
-  ) {
+  if((!isDefined(attacker) && self.vteam != "neutral") || attacker_isonmyteam(attacker) || attacker_troop_isonmyteam(attacker) || isDestructible() || bulletshielded(type)) {
     return true;
   }
   return false;

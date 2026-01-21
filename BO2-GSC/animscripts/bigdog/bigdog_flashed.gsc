@@ -12,7 +12,7 @@ main() {
   self endon("killanimscript");
   self endon("stop_flashbang_effect");
   wait(randomfloatrange(0, 0.4));
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   duration = self startflashbanged() * 0.001;
 
   if(duration > 2 && randomint(100) > 60)

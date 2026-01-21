@@ -1339,10 +1339,10 @@ switch_from_creepwalk_to_cqb() {
 
 play_move_transition() {
   self.moveloopoverridefunc = undefined;
-  self clearanim( % body, 0.2);
-  self setflaggedanimknoballrestart("creepwalk_transition", self.deerhunttransitionanim, % body);
+  self clearanim(%body, 0.2);
+  self setflaggedanimknoballrestart("creepwalk_transition", self.deerhunttransitionanim, %body);
   animscripts\shared::donotetracks("creepwalk_transition");
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self.deerhunttransitionanim = undefined;
 }
 

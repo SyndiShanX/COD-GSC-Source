@@ -91,8 +91,7 @@ temple_create_spawner_list(zkeys) {
       if(zone.is_occupied) {
         for(x = 0; x < level.monkey_zombie_spawners.size; x++) {
           spawner = level.monkey_zombie_spawners[x];
-          if(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy == zoneName &&
-            isDefined(zone.barriers) && zone.barriers.size > 0) {
+          if(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy == zoneName && isDefined(zone.barriers) && zone.barriers.size > 0) {
             level.monkey_spawns[level.monkey_spawns.size] = spawner;
           }
         }
@@ -212,11 +211,8 @@ zombie_speed_up_temple() {
     if(zombies.size == 1 && is_true(zombies[0].has_legs)) {
       if(!zombies[0] maps\zombie_temple_traps::zombie_on_mud()) {
         var = randomintrange(1, 4);
-        zombies[0] set_run_anim("sprint" +
-          var);
-        zombies[0].run_combatanim = level.scr_anim[zombies[0].animname]["sprint" +
-          var
-        ];
+        zombies[0] set_run_anim("sprint" + var);
+        zombies[0].run_combatanim = level.scr_anim[zombies[0].animname]["sprint" + var];
         zombies[0].zombie_move_speed = "sprint";
       }
     }

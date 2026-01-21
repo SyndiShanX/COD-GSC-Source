@@ -1515,9 +1515,9 @@ func_BBDD(var_0, var_1, var_2, var_3) {
     var_0 = 0;
   }
 
-  var_4 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, % jackal_pilot_mount_02_starboard);
-  var_5 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, % jackal_vehicle_mount_02_starboard);
-  var_6 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, % jackal_vehicle_assault_motion_idle);
+  var_4 = scripts\engine\utility::ter_op(isDefined(var_1), var_1, %jackal_pilot_mount_02_starboard);
+  var_5 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, %jackal_vehicle_mount_02_starboard);
+  var_6 = scripts\engine\utility::ter_op(isDefined(var_2), var_2, %jackal_vehicle_assault_motion_idle);
   func_BBE2();
   self func_8491("hover");
   wait 0.05;
@@ -1687,7 +1687,7 @@ func_BBC8(var_0, var_1, var_2, var_3) {
   wait(var_2 - var_4);
   self give_attacker_kill_rewards(var_0, 0, 0.2);
   self give_attacker_kill_rewards(var_1, 0, 0.2);
-  self give_attacker_kill_rewards( % jackal_motion_idle_p, 1, 0.0);
+  self give_attacker_kill_rewards(%jackal_motion_idle_p, 1, 0.0);
   func_0BDC::func_A2DE(0);
   wait 0.05;
   self notify("mount_anims_complete");
@@ -1769,7 +1769,7 @@ func_BBD9() {
 }
 
 func_BBDA() {
-  self clearanim( % root, 0.0);
+  self clearanim(%root, 0.0);
   scripts\engine\utility::delaythread(0.1, func_0BDC::func_A334);
   func_F919(1);
   level.player func_818A();
@@ -2049,7 +2049,7 @@ func_5685() {
   func_107A1();
   level.player getweaponweight(self.var_AD34, "tag_origin", 0);
   wait 0.05;
-  func_5681( % jackal_pilot_dismount_01_port, % jackal_vehicle_dismount_01_port);
+  func_5681(%jackal_pilot_dismount_01_port, %jackal_vehicle_dismount_01_port);
   func_569D();
   return "landed_mode";
 }
@@ -2066,7 +2066,7 @@ func_56A6() {
   wait 0.05;
   level.player getweightedchanceroll(self.var_AD34, "tag_player", 1, 20, 20, 5, 5, 1);
   level.player giveplayerscore(1, 2.2, 0.6);
-  func_5682( % jackal_pilot_zg_dismount_01, % jackal_vehicle_zg_dismount_01);
+  func_5682(%jackal_pilot_zg_dismount_01, %jackal_vehicle_zg_dismount_01);
   func_569D();
   level notify("dismount_anim_ended");
   return "hover";
@@ -2116,7 +2116,7 @@ func_5684() {
   wait 0.05;
   level.player getweightedchanceroll(self.var_AD34, "tag_origin", 1, 40, 40, 20, 15, 1);
   level.player giveplayerscore(1, 2.2, 0.6);
-  func_5681( % jackal_pilot_dismount_01_port, % jackal_vehicle_dismount_01_port, "player_dismount");
+  func_5681(%jackal_pilot_dismount_01_port, %jackal_vehicle_dismount_01_port, "player_dismount");
   func_569D();
   return "landed_mode";
 }
@@ -3086,7 +3086,7 @@ func_3ACB() {
       var_1 thread scripts\sp\lights::func_AB83(var_1.script_intensity_01, 1);
     }
 
-    var_8 give_attacker_kill_rewards( % claxon_spin_loop);
+    var_8 give_attacker_kill_rewards(%claxon_spin_loop);
   }
 }
 
@@ -3481,8 +3481,8 @@ func_5BEA() {
 #using_animtree("vehicles");
 
 func_5BFA() {
-  self.var_102D1.var_5BD7 give_attacker_kill_rewards( % landing_drone_fail_overlay, 1);
-  self.var_102D1.var_5BD7 give_attacker_kill_rewards( % landing_drone_fly_fail, 1, 1);
+  self.var_102D1.var_5BD7 give_attacker_kill_rewards(%landing_drone_fail_overlay, 1);
+  self.var_102D1.var_5BD7 give_attacker_kill_rewards(%landing_drone_fly_fail, 1, 1);
   wait 1;
   self.var_102D1.var_5BD7 notify("notify_drone_reset");
   self.var_102D1.var_5BD7.active = 0;
@@ -3701,7 +3701,7 @@ func_D17A(var_0) {
   }
 
   if(!isDefined(var_0)) {
-    thread func_0BDC::func_A2B0( % jackal_pilot_runway_prep, % jackal_vehicle_runway_prep, 1.1, 0.5);
+    thread func_0BDC::func_A2B0(%jackal_pilot_runway_prep, %jackal_vehicle_runway_prep, 1.1, 0.5);
   }
 
   wait 2.5;

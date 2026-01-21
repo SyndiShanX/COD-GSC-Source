@@ -1192,8 +1192,8 @@ func_8E05() {
   level.player blendlinktoplayerviewmotion(0.25, 0);
   level.var_10964.helmet show();
   level.var_10964.helmet glinton(#animtree);
-  level.var_10964.helmet clearanim( % vm_gesture_visor_up_visor, 0);
-  level.var_10964.helmet give_attacker_kill_rewards( % vm_gesture_visor_down_visor);
+  level.var_10964.helmet clearanim(%vm_gesture_visor_up_visor, 0);
+  level.var_10964.helmet give_attacker_kill_rewards(%vm_gesture_visor_down_visor);
   thread lib_0E4B::func_8DE2();
   level.player playSound("plr_helmet_visor_on");
   level.player scripts\engine\utility::delaycall(0.65, ::setclienttriggeraudiozonepartialwithfade, "helmet_on_visor_down", 0.2, "mix", "filter");
@@ -1201,7 +1201,7 @@ func_8E05() {
   level.player scripts\engine\utility::delaycall(2.8, ::playsound, "plr_helmet_short_boot_up_lr");
   level.player scripts\engine\utility::delaycall(3.15, ::clearclienttriggeraudiozone, 0.2);
   level.player forceplaygestureviewmodel("ges_visor_down", undefined, undefined, undefined, 1);
-  wait(getanimlength( % vm_gesture_visor_down_visor));
+  wait(getanimlength(%vm_gesture_visor_down_visor));
   func_F3FF(1);
   level.var_10964.var_8E1B = 0;
   level.player blendlinktoplayerviewmotion(0.25, 1);

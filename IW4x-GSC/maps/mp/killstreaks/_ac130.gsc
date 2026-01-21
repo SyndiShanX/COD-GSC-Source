@@ -953,7 +953,7 @@ context_Sensative_Dialog_Guy_In_Sight() {
 context_Sensative_Dialog_Guy_In_Sight_Check() {
   prof_begin("AI_in_sight_check");
 
-  //enemies = getaiarray( "axis" );
+  //enemies = getaiarray("axis" );
   //replace with level of enemy team members?
   enemies = [];
 

@@ -224,7 +224,7 @@ stand_up_if_necessary() {
   if(self.a.pose == "crouch" && isDefined(self.a.array)) {
     standUpAnim = self.a.array["stance_change"];
     if(isDefined(standUpAnim)) {
-      self SetFlaggedAnimKnobAllRestart("stand_up", standUpAnim, % root, 1);
+      self SetFlaggedAnimKnobAllRestart("stand_up", standUpAnim, %root, 1);
       self animscripts\shared::DoNoteTracks("stand_up");
     }
   }
@@ -240,7 +240,7 @@ patrol_resume_move_start_func() {
 
   radioAnim = level.scr_anim["generic"]["patrol_radio_in_clear"];
 
-  self SetFlaggedAnimKnobAllRestart("radio", radioAnim, % root, 1);
+  self SetFlaggedAnimKnobAllRestart("radio", radioAnim, %root, 1);
   self animscripts\shared::DoNoteTracks("radio");
 
   turn_180_move_start_func();
@@ -272,7 +272,7 @@ turn_180_move_start_func() {
 
     turnAnim = level.scr_anim["generic"]["patrol_turn180"];
 
-    self SetFlaggedAnimKnobAllRestart("move", turnAnim, % root, 1);
+    self SetFlaggedAnimKnobAllRestart("move", turnAnim, %root, 1);
 
     if(animHasNotetrack(turnAnim, "code_move")) {
       self animscripts\shared::DoNoteTracks("move"); // return on code_move

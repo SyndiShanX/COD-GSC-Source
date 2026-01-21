@@ -1804,8 +1804,7 @@ function_6487b2c7() {
   if(isDefined(level.var_e1a1f65c)) {
     level.var_e1a1f65c.leavenexttime = 1;
     level.var_e1a1f65c notify(#"noteworthy", {
-      #noteworthy: "strafe_leave"
-    });
+      #noteworthy: "strafe_leave"});
   }
 }
 

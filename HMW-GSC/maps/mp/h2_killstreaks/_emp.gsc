@@ -99,8 +99,7 @@ EMP_JamTeam(teamName, duration, delay) {
   wait(0.1);
 
   // resetting the vision set to the same thing won't normally have an effect.
-  // however, if the client receives the previous visionset change in the same packet as this one,
-  // this will force them to lerp from the bright one to the normal one.
+  // however, if the client receives the previous visionset change in the same packet as this one, // this will force them to lerp from the bright one to the normal one.
   _visionsetnaked("coup_sunblind", 0);
   _visionsetnaked("", 3.0);
 
@@ -159,8 +158,7 @@ EMP_JamPlayers(owner, duration, delay) {
   wait(0.1);
 
   // resetting the vision set to the same thing won't normally have an effect.
-  // however, if the client receives the previous visionset change in the same packet as this one,
-  // this will force them to lerp from the bright one to the normal one.
+  // however, if the client receives the previous visionset change in the same packet as this one, // this will force them to lerp from the bright one to the normal one.
   _visionsetnaked("coup_sunblind", 0);
   _visionsetnaked("", 3.0);
 

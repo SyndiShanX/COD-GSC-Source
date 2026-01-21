@@ -241,9 +241,7 @@ Moon_Exterior_Fog_Change(Ent_Player) {
   sun_stop_ang = 55;
   time = 0;
   max_fog_opacity = 0.95;
-  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   sunlight = 8;
   sundirection = (-16.28, 56.06, 0);
   suncolor = (0.655, 0.768, 0.817);
@@ -283,9 +281,7 @@ moon_interior_fog_change(ent_player) {
   sun_stop_ang = 55;
   time = 0;
   max_fog_opacity = 0.95;
-  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   sunlight = 8;
   sundirection = (-16.28, 56.06, 0);
   suncolor = (0.655, 0.768, 0.817);
@@ -325,9 +321,7 @@ moon_biodome_fog_change(ent_player) {
   sun_stop_ang = 44.4323;
   time = 0;
   max_fog_opacity = 0.836437;
-  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   sunlight = 1.13;
   sundirection = (-33.34, -38.56, 0);
   SetSavedDvar("r_lightTweakSunLight", sunlight);
@@ -371,9 +365,7 @@ moon_tunnels_fog_change(ent_player) {
   sun_stop_ang = 0;
   time = 0;
   max_fog_opacity = 0.22;
-  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   if(!isDefined(ent_player._previous_vision)) {
     ent_player._previous_vision = "zmt";
   }
@@ -417,9 +409,7 @@ moon_nml_fog_change(ent_player) {
   new_vision = "zmh";
   ent_player clientscripts\zombie_moon_fx::moon_vision_set(ent_player._previous_vision, new_vision, local_clientnum, self.script_int);
   ent_player._previous_vision = "zmh";
-  setVolFogForClient(local_clientnum, start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFogForClient(local_clientnum, start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   setClientDvar("r_lightTweakSunLight", sunlight);
   setClientDvar("r_lightTweakSunColor", suncolor);
   setClientDvar("r_lightTweakSunDirection", sundirection);

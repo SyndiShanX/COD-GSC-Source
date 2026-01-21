@@ -7,13 +7,10 @@
 #include maps\_utility;
 
 // This script automaticly plays a users specified oneshot effect on all prefabs that have the
-// specified "script_struct" and "targetname" It also excepts angles from the "script_struct"
-// but will set a default angle of ( 0, 0, 0 ) if none is defined.
+// specified "script_struct" and "targetname" It also excepts angles from the "script_struct"// but will set a default angle of ( 0, 0, 0 ) if none is defined.
 //
 // example of the syntax:
-// global_FX( "targetname", "fxIDname", "fxFile", "delay"
-
-main() {
+// global_FX( "targetname", "fxIDname", "fxFile", "delay"main() {
   if(!isDefined(level.global_fx))
     level.global_fx = [];
 

@@ -41,7 +41,7 @@ moveinit() {
 movemainloop() {
   self animscripts\debug::debugpushstate("MoveMainLoop");
 
-  prevlooptime = self getanimtime( % walk_loops);
+  prevlooptime = self getanimtime(%walk_loops);
   self.a.runloopcount = randomint(10000);
 
   for(;;) {
@@ -50,7 +50,7 @@ movemainloop() {
       return;
     }
 
-    looptime = self getanimtime( % walk_loops);
+    looptime = self getanimtime(%walk_loops);
 
     if(looptime < prevlooptime)
       self.a.runloopcount++;

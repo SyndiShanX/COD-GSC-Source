@@ -17,10 +17,7 @@ include,vehicle_suburban_minigun_viewmodel
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,weapon_minigun,vehicle_standard,all_sp
 
-defaultmdl="vehicle_suburban_minigun_viewmodel"
-default:"vehicletype" "suburban_minigun"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_suburban_minigun_viewmodel"default:"vehicletype" "suburban_minigun"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_suburban_minigun_technical (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -32,10 +29,7 @@ include,vehicle_suburban_minigun_technical
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,weapon_minigun,vehicle_standard,all_sp
 
-defaultmdl="vehicle_suburban_technical"
-default:"vehicletype" "suburban_minigun"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_suburban_technical"default:"vehicletype" "suburban_minigun"default:"script_team" "allies"*/
 
 main(model, type) {
   build_template("suburban_minigun", model, type);
@@ -46,7 +40,7 @@ main(model, type) {
   build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx("explosions/vehicle_explosion_suburban_minigun", "TAG_DEATH_FX", "explo_metal_rand");
 
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   build_treadfx();
   //build_life( 100 );
   build_life(3000, 500, 3000);

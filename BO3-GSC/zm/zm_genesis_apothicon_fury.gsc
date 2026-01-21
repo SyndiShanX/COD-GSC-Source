@@ -214,9 +214,7 @@ function function_1dcdd145() {
       self.attacker zm_score::player_add_points("death", self.damagemod, self.damagelocation, undefined, self.team, self.damageweapon);
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](self.attacker, self);
+      [[level.hero_power_update]](self.attacker, self);
     }
   }
 }

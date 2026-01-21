@@ -960,7 +960,7 @@ container_body_animations() {
 
 clear_lighting_for_cod() {
   level clientnotify("default_fog_bank");
-  anim_time = getanimlength( % ch_ang_06_02_find_woods_part2_hudson);
+  anim_time = getanimlength(%ch_ang_06_02_find_woods_part2_hudson);
   wait(anim_time - 2);
   clientnotify("clear_lighting_entities");
 }
@@ -1155,7 +1155,7 @@ hind_falling_animation() {
   level.river_hind.angles = (0, 0, 0);
   level thread run_scene("hind_crash_on_shore");
   level.river_hind vehicle_toggle_sounds(0);
-  time = getanimlength( % fxanim_angola_hind_crash_veh_anim);
+  time = getanimlength(%fxanim_angola_hind_crash_veh_anim);
   wait(time - 5);
   level notify("fxanim_hind_crash_start");
   clientnotify("stop_tow_futz");

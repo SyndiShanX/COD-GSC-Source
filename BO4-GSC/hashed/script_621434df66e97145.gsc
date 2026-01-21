@@ -174,8 +174,7 @@ function_79eec899() {
     if(isDefined(e_who)) {
       zm_utility::play_sound_at_pos("purchase", e_who.origin);
       level notify(#"trap_activated", {
-        #trap_activator: e_who,
-        #trap: self
+        #trap_activator: e_who, #trap: self
       });
     }
 
@@ -391,8 +390,7 @@ function_64fa1b6a() {
     if(isDefined(e_who)) {
       zm_utility::play_sound_at_pos("purchase", e_who.origin);
       level notify(#"trap_activated", {
-        #trap_activator: e_who,
-        #trap: self
+        #trap_activator: e_who, #trap: self
       });
     }
 
@@ -612,8 +610,7 @@ function_7fffc105() {
     if(isDefined(e_who)) {
       zm_utility::play_sound_at_pos("purchase", e_who.origin);
       level notify(#"trap_activated", {
-        #trap_activator: e_who,
-        #trap: self
+        #trap_activator: e_who, #trap: self
       });
     }
 

@@ -46,7 +46,7 @@ function bouncingbetty_state_change(localclientnum, oldval, newval, bnewent, bin
 function bouncingbetty_deploying(localclientnum) {
   self endon("entityshutdown");
   self useanimtree($bouncing_betty);
-  self setanim( % bouncing_betty::o_spider_mine_deploy, 1, 0, 1);
+  self setanim(%bouncing_betty::o_spider_mine_deploy, 1, 0, 1);
 }
 
 function bouncingbetty_detonating(localclientnum) {
@@ -56,7 +56,7 @@ function bouncingbetty_detonating(localclientnum) {
   playFX(localclientnum, level._effect["fx_betty_launch_dust"], self.origin, up, forward);
   self playSound(localclientnum, "wpn_betty_jump");
   self useanimtree($bouncing_betty);
-  self setanim( % bouncing_betty::o_spider_mine_detonate, 1, 0, 1);
+  self setanim(%bouncing_betty::o_spider_mine_detonate, 1, 0, 1);
   self thread watchforexplosionnotetracks(localclientnum, up, forward);
 }
 

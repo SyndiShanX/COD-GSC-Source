@@ -374,9 +374,9 @@ sole_cleanup(m_sole) {
   self endon("death");
   self endon("giant_robot_stop");
   wait_network_frame();
-  m_sole clearanim( % root, 0.0);
+  m_sole clearanim(%root, 0.0);
   wait_network_frame();
-  m_sole setanim( % ai_zombie_giant_robot_hatch_close, 1, 0.2, 1);
+  m_sole setanim(%ai_zombie_giant_robot_hatch_close, 1, 0.2, 1);
 }
 
 giant_robot_foot_waittill_sole_shot(m_sole) {
@@ -397,12 +397,12 @@ giant_robot_foot_waittill_sole_shot(m_sole) {
   m_sole.health = 99999;
   level.gr_foot_hatch_closed[self.giant_robot_id] = 0;
   level setclientfield("play_foot_open_fx_robot_" + self.giant_robot_id, n_foot);
-  m_sole clearanim( % ai_zombie_giant_robot_hatch_close, 1);
-  m_sole setanim( % ai_zombie_giant_robot_hatch_open, 1, 0.2, 1);
-  n_time = getanimlength( % ai_zombie_giant_robot_hatch_open);
+  m_sole clearanim(%ai_zombie_giant_robot_hatch_close, 1);
+  m_sole setanim(%ai_zombie_giant_robot_hatch_open, 1, 0.2, 1);
+  n_time = getanimlength(%ai_zombie_giant_robot_hatch_open);
   wait(n_time);
-  m_sole clearanim( % ai_zombie_giant_robot_hatch_open, 1);
-  m_sole setanim( % ai_zombie_giant_robot_hatch_open_idle, 1, 0.2, 1);
+  m_sole clearanim(%ai_zombie_giant_robot_hatch_open, 1);
+  m_sole setanim(%ai_zombie_giant_robot_hatch_open_idle, 1, 0.2, 1);
 }
 
 giant_robot_close_head_entrance(foot_side) {
@@ -412,9 +412,9 @@ giant_robot_close_head_entrance(foot_side) {
   m_sole = getent("target_sole_" + self.giant_robot_id, "targetname");
 
   if(isDefined(m_sole)) {
-    m_sole clearanim( % ai_zombie_giant_robot_hatch_open, 1);
-    m_sole clearanim( % ai_zombie_giant_robot_hatch_open_idle, 1);
-    m_sole setanim( % ai_zombie_giant_robot_hatch_close, 1, 0.2, 1);
+    m_sole clearanim(%ai_zombie_giant_robot_hatch_open, 1);
+    m_sole clearanim(%ai_zombie_giant_robot_hatch_open_idle, 1);
+    m_sole setanim(%ai_zombie_giant_robot_hatch_close, 1, 0.2, 1);
   }
 
   if(isDefined(foot_side)) {

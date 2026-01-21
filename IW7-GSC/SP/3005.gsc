@@ -70,7 +70,7 @@ init_location() {
     thread lib_0BBE::func_774C();
   }
 
-  thread lib_0BBE::func_5EC8( % vh_dropship_sdf_thrusters_up, % vh_dropship_sdf_thrusters_down);
+  thread lib_0BBE::func_5EC8(%vh_dropship_sdf_thrusters_up, %vh_dropship_sdf_thrusters_down);
   if(!issubstr(self.classname, "c6")) {
     self attach("veh_mil_air_ca_dropship_personnel", "tag_connect");
   }

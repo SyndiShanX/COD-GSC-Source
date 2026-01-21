@@ -62,7 +62,7 @@ atv_loop_driver() {
   var_1 = [];
   var_1["left2right"] = getanimlength(animscripts\utility::animarray("left2right"));
   var_1["right2left"] = getanimlength(animscripts\utility::animarray("right2left"));
-  self setanimknoball( % atv_turn, % body, 1, 0);
+  self setanimknoball(%atv_turn, %body, 1, 0);
   self setanim(animscripts\utility::animarray("drive"), 1, 0);
   self setanimknob(animscripts\utility::animarray(var_0), 1, 0);
   self setanimtime(animscripts\utility::animarray(var_0), 0.5);
@@ -102,7 +102,7 @@ atv_loop_driver_shooting() {
   self endon("killanimscript");
   var_0 = 0.05;
   var_1 = 0;
-  self setanimknoball( % atv_aiming, % body, 1, 0);
+  self setanimknoball(%atv_aiming, %body, 1, 0);
   self setanimknob(animscripts\utility::animarray("idle"), 1, 0);
 
   for(;;) {
@@ -200,7 +200,7 @@ atv_handle_events(var_0) {
 
 atv_start_shooting() {
   self notify("want_shoot_while_driving");
-  self setanim( % atv_add_fire, 1, 0.2);
+  self setanim(%atv_add_fire, 1, 0.2);
 
   if(isDefined(self.shoot_while_driving_thread)) {
     return;
@@ -216,7 +216,7 @@ atv_stop_shooting() {
   wait 0.05;
   self notify("end_shoot_while_driving");
   self.shoot_while_driving_thread = undefined;
-  self clearanim( % atv_add_fire, 0.2);
+  self clearanim(%atv_add_fire, 0.2);
 }
 
 atv_decide_shoot() {
@@ -321,19 +321,19 @@ atv_reload_internal() {
   self endon("atv_event_occurred");
   self.stop_aiming_for_reload = 1;
   self waittill("start_blending_reload");
-  self setanim( % atv_aiming, 0, 0.25);
+  self setanim(%atv_aiming, 0, 0.25);
   self setflaggedanimrestart("gun_down", animscripts\utility::animarray("gun_down"), 1, 0.25);
   animscripts\shared::donotetracks("gun_down");
   self clearanim(animscripts\utility::animarray("gun_down"), 0);
-  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::animarray("reload"), % body, 1, 0.25);
+  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::animarray("reload"), %body, 1, 0.25);
   animscripts\shared::donotetracks("reload_anim");
-  self clearanim( % atv_reload, 0.2);
+  self clearanim(%atv_reload, 0.2);
   self setflaggedanimrestart("gun_up", animscripts\utility::animarray("gun_up"), 1, 0.25);
   self.gun_up_for_reload = 1;
   animscripts\shared::donotetracks("gun_up", ::atv_waitfor_start_aim);
   self.stop_aiming_for_reload = undefined;
-  self clearanim( % atv_reload, 0.1);
-  self setanim( % atv_aiming, 1, 0.1);
+  self clearanim(%atv_reload, 0.1);
+  self setanim(%atv_aiming, 1, 0.1);
 
   if(isDefined(self.gun_up_for_reload)) {
     self.gun_up_for_reload = undefined;
@@ -402,8 +402,8 @@ atv_trackshootentorpos_driver() {
     var_2 = var_3;
     var_11 = min(max(0 - var_3, 0), 90) / 90 * self.a.aimweight;
     var_12 = min(max(var_3, 0), 90) / 90 * self.a.aimweight;
-    self setanimlimited( % atv_aim_4, var_11, var_0);
-    self setanimlimited( % atv_aim_6, var_12, var_0);
+    self setanimlimited(%atv_aim_4, var_11, var_0);
+    self setanimlimited(%atv_aim_6, var_12, var_0);
     wait 0.05;
   }
 }

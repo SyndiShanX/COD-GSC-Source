@@ -244,7 +244,7 @@ zombie_faller_do_fall() {
   }
   self.in_the_ceiling = false;
   self traverseMode("gravity");
-  self SetAnimKnobAllRestart(animscripts\zombie_run::GetRunAnim(), % body, 1, 0.2, 1);
+  self SetAnimKnobAllRestart(animscripts\zombie_run::GetRunAnim(), %body, 1, 0.2, 1);
   self.no_powerups = false;
   self notify("zombie_custom_think_done", spot.script_noteworthy);
 }

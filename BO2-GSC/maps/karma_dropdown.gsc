@@ -178,7 +178,7 @@ ambush_guy_head_init() {
 salazar_vent_wait() {
   s_align = getstruct("align_spiderbot_gear", "targetname");
   self set_goalradius(8);
-  self setgoalpos(getstartorigin(s_align.origin, s_align.angles, % ch_karma_4_1_hotel_room_enter_harper), getstartangles(s_align.origin, s_align.angles, % ch_karma_4_1_hotel_room_enter_harper));
+  self setgoalpos(getstartorigin(s_align.origin, s_align.angles, %ch_karma_4_1_hotel_room_enter_harper), getstartangles(s_align.origin, s_align.angles, %ch_karma_4_1_hotel_room_enter_harper));
   self waittill("goal");
   flag_wait("salazar_goto_vent");
   level.ai_salazar set_blend_in_out_times(0.2);

@@ -866,8 +866,7 @@ death_jolt(type, point, dir) {
   if(isDefined(self.death_anim)) {
     self animscripted("death_anim", self.origin, self.angles, self.death_anim, "normal", "root", 1, 0);
     self waittillmatch({
-      #notetrack: "end"
-    }, # "death_anim");
+      #notetrack: "end"}, # "death_anim");
     return;
   }
 

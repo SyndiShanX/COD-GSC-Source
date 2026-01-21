@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("apache", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_apache_iw6", "vehicle_apache_iw6_destroyed_anim");
-  maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%bh_rotors, undefined, 0);
   maps\_vehicle::build_deathfx("fx/explosions/helicopter_explosion_secondary_small", "tag_engine_left", "apache_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, 1, undefined);
   maps\_vehicle::build_deathfx("fx/fire/fire_smoke_trail_L", "tag_engine_left", "apache_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1, undefined);
   maps\_vehicle::build_deathfx("fx/explosions/helicopter_explosion_secondary_small", "tag_engine_left", "apache_helicopter_secondary_exp", undefined, undefined, undefined, 2.5, 1, undefined);
@@ -33,9 +33,9 @@ main(var_0, var_1, var_2) {
 }
 
 set_death_anim_scene(var_0) {
-  similar_deaths( % apache_iw6_explode_a, "apache_explode_V1");
-  similar_deaths( % apache_iw6_explode_b, "apache_explode_V2");
-  similar_deaths( % apache_iw6_explode_c, "apache_explode_V3");
+  similar_deaths(%apache_iw6_explode_a, "apache_explode_V1");
+  similar_deaths(%apache_iw6_explode_b, "apache_explode_V2");
+  similar_deaths(%apache_iw6_explode_c, "apache_explode_V3");
   maps\_vehicle::build_deathanim(["apache_explode_V1", "apache_explode_V2", "apache_explode_V3"]);
 }
 

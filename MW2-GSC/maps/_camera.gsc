@@ -23,6 +23,5 @@ maps\_camera::main( "vehicle_camera" );
 and these lines in your CSV:
 include,vehicle_camera_camera
 
-defaultmdl="vehicle_camera"
-default:"vehicletype" "camera"
+defaultmdl="vehicle_camera"default:"vehicletype" "camera"
 */

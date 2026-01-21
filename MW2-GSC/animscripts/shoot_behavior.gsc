@@ -17,11 +17,7 @@
 //shootPos - a vector. aim/shoot towards this if shootEnt isn't defined. if not defined, stop shooting entirely and return to cover if possible.
 //		Whenever shootEnt is defined, shootPos will be defined as its getShootAtPos().
 //shootStyle - how to shoot.
-//"full" (unload on the target),
-//"burst" (occasional groups of shots),
-//"semi" (occasianal single shots),
-//"single" (occasional single shots),
-//"none" (don't shoot, just aim).
+//"full" (unload on the target), //"burst" (occasional groups of shots), //"semi" (occasianal single shots), //"single" (occasional single shots), //"none" (don't shoot, just aim).
 // This thread will also notify "return_to_cover" and set self.shouldReturnToCover = true if it's a good idea to do so.
 // Notify "stop_deciding_how_to_shoot" to end this thread if no longer trying to shoot.
 
@@ -35,9 +31,7 @@ decideWhatAndHowToShoot(objective) {
 
   maps\_gameskill::resetMissTime();
   self.shootObjective = objective;
-  // self.shootObjective is always "normal", "suppress", or "ambush"
-
-  self.shootEnt = undefined;
+  // self.shootObjective is always "normal", "suppress", or "ambush"self.shootEnt = undefined;
   self.shootPos = undefined;
   self.shootStyle = "none";
   self.fastBurst = false;
@@ -49,8 +43,7 @@ decideWhatAndHowToShoot(objective) {
   atCover = isDefined(self.coverNode) && self.coverNode.type != "Cover Prone" && self.coverNode.type != "Conceal Prone";
 
   if(atCover) {
-    // it's not safe to do some things until the next frame,
-    // such as canSuppressEnemy(), which may change the state of
+    // it's not safe to do some things until the next frame, // such as canSuppressEnemy(), which may change the state of
     // self.goodShootPos, which will screw up cover_behavior::main
     // when this is called but then stopped immediately.
     wait .05;

@@ -483,15 +483,8 @@ mariachiCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType(
-    "airdrop_assault",
-    "juggernaut_death_mariachi",
-    DEATH_MARIACHI_WEIGHT,
-    maps\mp\killstreaks\_airdrop::juggernautCrateThink,
-    maps\mp\killstreaks\_airdrop::get_friendly_juggernaut_crate_model(),
-    maps\mp\killstreaks\_airdrop::get_enemy_juggernaut_crate_model(), &
-    "MP_ZULU_JUGGERNAUT_DEATH_PICKUP"
-  );
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "juggernaut_death_mariachi", DEATH_MARIACHI_WEIGHT, maps\mp\killstreaks\_airdrop::juggernautCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_juggernaut_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_juggernaut_crate_model(), &
+    "MP_ZULU_JUGGERNAUT_DEATH_PICKUP");
 
   level thread watch_for_death_mariachi_crate();
 }

@@ -78,9 +78,7 @@ function_127fb8f3(turret, attackingplayer) {
     }
 
     if(isDefined(level.var_1794f85f)) {
-      [
-        [level.var_1794f85f]
-      ](attackingplayer, "disrupted_sentry");
+      [[level.var_1794f85f]](attackingplayer, "disrupted_sentry");
     }
 
     turret clientfield::set("enemyvehicle", 0);
@@ -102,9 +100,7 @@ function_bff5c062(turret, attackingplayer) {
 
   if(turret.classname == "script_vehicle") {
     if(isDefined(level.var_f1edf93f)) {
-      _station_up_to_detention_center_triggers = int([
-        [level.var_f1edf93f]
-      ]() * 1000);
+      _station_up_to_detention_center_triggers = int([[level.var_f1edf93f]]() * 1000);
 
       if(isDefined(_station_up_to_detention_center_triggers) ? _station_up_to_detention_center_triggers : 0) {
         turret notify(#"cancel_timeout");
@@ -113,9 +109,7 @@ function_bff5c062(turret, attackingplayer) {
     }
 
     if(isDefined(level.var_fc1bbaef)) {
-      [
-        [level.var_fc1bbaef]
-      ](turret);
+      [[level.var_fc1bbaef]](turret);
     }
 
     turret.spawninfluencers = [];

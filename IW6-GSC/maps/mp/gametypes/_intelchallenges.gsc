@@ -400,22 +400,15 @@ intelFoundshotKillsChallenge(challengeReference) {
   while(numKills < numKillsTarget) {
     self waittill("got_a_kill", victim, weapon, meansOfDeath);
 
-    if(meansOfDeath == "MOD_MELEE" &&
-      !maps\mp\gametypes\_weapons::isKnifeOnly(weapon) &&
-      !maps\mp\gametypes\_weapons::isRiotShield(weapon)
-    ) {
+    if(meansOfDeath == "MOD_MELEE" && !maps\mp\gametypes\_weapons::isKnifeOnly(weapon) && !maps\mp\gametypes\_weapons::isRiotShield(weapon)) {
       continue;
     }
-    if(maps\mp\gametypes\_weapons::isOffhandWeapon(weapon) ||
-      isKillstreakWeapon(weapon) ||
-      isEnvironmentWeapon(weapon)
-    ) {
+    if(maps\mp\gametypes\_weapons::isOffhandWeapon(weapon) || isKillstreakWeapon(weapon) || isEnvironmentWeapon(weapon)) {
       continue;
     }
     weapon = weaponMap(weapon);
 
-    if(weapon != self.pers["primaryWeapon"] &&
-      weapon != self.pers["secondaryWeapon"]) {
+    if(weapon != self.pers["primaryWeapon"] && weapon != self.pers["secondaryWeapon"]) {
       numKills++;
       updateIntelProgress = numKillsTarget - numKills;
       playerUpdateIntelProgress(updateIntelProgress);

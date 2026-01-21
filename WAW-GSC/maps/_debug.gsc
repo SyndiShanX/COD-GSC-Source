@@ -44,12 +44,7 @@ debugchains() {
   fnodenum = 0;
   fnodes = [];
   for(i = 0; i < nodes.size; i++) {
-    if((!(nodes[i].spawnflags & 2)) &&
-      (
-        ((isDefined(nodes[i].target)) && ((getnodearray(nodes[i].target, "targetname")).size > 0)) ||
-        ((isDefined(nodes[i].targetname)) && ((getnodearray(nodes[i].targetname, "target")).size > 0))
-      )
-    ) {
+    if((!(nodes[i].spawnflags & 2)) && (((isDefined(nodes[i].target)) && ((getnodearray(nodes[i].target, "targetname")).size > 0)) || ((isDefined(nodes[i].targetname)) && ((getnodearray(nodes[i].targetname, "target")).size > 0)))) {
       fnodes[fnodenum] = nodes[i];
       fnodenum++;
     }
@@ -712,11 +707,7 @@ debug_reflection_buttons() {
     lastoffset = offset;
     if(getdebugdvar("replay_debug") == "1")
       println("File: _debug.gsc. Function: debug_reflection_buttons() - INNER LOOP END\n");
-    line(level.debug_reflectionobject.origin,
-      getreflectionorigin(level.debug_reflectionobject.origin),
-      (1, 0, 0),
-      true,
-      1);
+    line(level.debug_reflectionobject.origin, getreflectionorigin(level.debug_reflectionobject.origin), (1, 0, 0), true, 1);
     wait .05;
     level.debug_reflectionobject linkto(players[0]);
   }
@@ -1928,8 +1919,7 @@ print_aliases_to_file(file) {
 
     fprintln(file, "main()");
     fprintln(file, "{");
-    fprintln(file, tab + "
-      fprintln(file, tab + "thread init_animsounds();"); fprintln(file, "}"); fprintln(file, ""); fprintln(file, "init_animsounds()"); fprintln(file, "{"); fprintln(file, tab + "waittillframeend;"); animnames = getarraykeys(level.animSound_aliases);
+    fprintln(file, tab + "fprintln(file, tab + "thread init_animsounds();"); fprintln(file, "}"); fprintln(file, ""); fprintln(file, "init_animsounds()"); fprintln(file, "{"); fprintln(file, tab + "waittillframeend;"); animnames = getarraykeys(level.animSound_aliases);
       for(i = 0; i < animnames.size; i++) {
         animes = getarraykeys(level.animSound_aliases[animnames[i]]);
         for(p = 0; p < animes.size; p++) {
@@ -2434,8 +2424,7 @@ print_aliases_to_file(file) {
             engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
             engageDistMax = level.weaponEngageDistValues.engageDistMax;
             if((traceDist >= engageDistMin) && (traceDist <= engageDistMax)) {
-              if((traceDist >= (engageDistOptimal - engageDistMulligan)) &&
-                (traceDist <= (engageDistOptimal + engageDistMulligan))) {
+              if((traceDist >= (engageDistOptimal - engageDistMulligan)) &&  (traceDist <= (engageDistOptimal + engageDistMulligan))) {
                 hudObjArray engagedist_hud_changetext("optimal", tracedist);
                 hudobj_changecolor(hudObjArray, level.green);
               } else {
@@ -2523,8 +2512,7 @@ print_aliases_to_file(file) {
                 engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
                 engageDistMax = level.weaponEngageDistValues.engageDistMax;
                 if((dist >= engageDistMin) && (dist <= engageDistMax)) {
-                  if((dist >= (engageDistOptimal - engageDistMulligan)) &&
-                    (dist <= (engageDistOptimal + engageDistMulligan))) {
+                  if((dist >= (engageDistOptimal - engageDistMulligan)) &&      (dist <= (engageDistOptimal + engageDistMulligan))) {
                     drawColor = level.green;
                     drawString = "RAD";
                   } else {

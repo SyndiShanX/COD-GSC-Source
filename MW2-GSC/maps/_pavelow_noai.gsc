@@ -28,7 +28,7 @@ main(model, type) {
 
   build_team("allies");
 
-  build_drive( % bh_rotors, undefined, 0);
+  build_drive(%bh_rotors, undefined, 0);
 
   build_light(model, "cockpit_red_cargo02", "tag_light_cargo02", "misc/aircraft_light_cockpit_red", "interior", 0.0);
   build_light(model, "cockpit_blue_cockpit01", "tag_light_cockpit01", "misc/aircraft_light_cockpit_blue", "interior", 0.1);
@@ -55,7 +55,5 @@ and these lines in your CSV:
 include,vehicle_pavelow_noai
 sound,vehicle_pavelow,vehicle_standard,all_sp
 
-defaultmdl="vehicle_pavelow"
-default:"vehicletype" "pavelow_noai"
-default:"script_team" "allies"
+defaultmdl="vehicle_pavelow"default:"vehicletype" "pavelow_noai"default:"script_team" "allies"
 */

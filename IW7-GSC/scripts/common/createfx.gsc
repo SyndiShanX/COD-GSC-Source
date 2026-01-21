@@ -1936,403 +1936,400 @@ cfxprintln(var_0) {
 }
 
 cfxprintlnend(var_0, var_1, var_2) {
-    var_3 = 1;
+  var_3 = 1;
 
-    if(var_1 != "" || var_0) {
-      var_3 = 0;
+  if(var_1 != "" || var_0) {
+    var_3 = 0;
+  }
+
+  if(scripts\engine\utility::issp()) {
+    var_4 = scripts\engine\utility::get_template_script_MAYBE() + var_1 + "_" + var_2 + ".gsc";
+
+    if(var_0) {
+      var_4 = "backup_" + var_2 + ".gsc";
     }
+  } else {
+    var_4 = scripts\engine\utility::get_template_script_MAYBE() + var_1 + "_" + var_2 + ".gsc";
 
-    if(scripts\engine\utility::issp()) {
-      var_4 = scripts\engine\utility::get_template_script_MAYBE() + var_1 + "_" + var_2 + ".gsc";
-
-      if(var_0) {
-        var_4 = "backup_" + var_2 + ".gsc";
-      }
-    } else {
-      var_4 = scripts\engine\utility::get_template_script_MAYBE() + var_1 + "_" + var_2 + ".gsc";
-
-      if(var_0) {
-        var_4 = "backup.gsc";
-      }
+    if(var_0) {
+      var_4 = "backup.gsc";
     }
+  }
 
-    var_5 = scripts\engine\utility::get_template_script_MAYBE();
-    var_6 = get_raw_or_devraw_subdir();
-    var_7 = get_gamemode_subdir();
-    scripts\engine\utility::fileprint_launcher_end_file("\share\" + var_6 + "\
-      scripts\" + var_7 + "\
-      maps\" + var_5 + "\
-      gen\" + var_4, var_3);
+  var_5 = scripts\engine\utility::get_template_script_MAYBE();
+  var_6 = get_raw_or_devraw_subdir();
+  var_7 = get_gamemode_subdir();
+  scripts\engine\utility::fileprint_launcher_end_file("\share\" + var_6 + "\scripts\" + var_7 + "\maps\" + var_5 + "\gen\" + var_4, var_3);
+}
+
+get_raw_or_devraw_subdir() {
+  if(isDefined(level.createfx_devraw_map) && level.createfx_devraw_map) {
+    return "devraw";
+  } else {
+    return "raw";
+  }
+}
+
+get_gamemode_subdir() {
+  if(scripts\engine\utility::iscp()) {
+    return "cp";
+  } else if(scripts\engine\utility::issp()) {
+    return "sp";
+  } else {
+    return "mp";
+  }
+}
+
+process_button_held_and_clicked() {
+  add_button("mouse1");
+  add_button("BUTTON_RSHLDR");
+  add_button("BUTTON_LSHLDR");
+  add_button("BUTTON_RSTICK");
+  add_button("BUTTON_LSTICK");
+  add_button("BUTTON_A");
+  add_button("BUTTON_B");
+  add_button("BUTTON_X");
+  add_button("BUTTON_Y");
+  add_button("DPAD_UP");
+  add_button("DPAD_LEFT");
+  add_button("DPAD_RIGHT");
+  add_button("DPAD_DOWN");
+  add_kb_button("shift");
+  add_kb_button("ctrl");
+  add_kb_button("escape");
+  add_kb_button("F1");
+  add_kb_button("F5");
+  add_kb_button("F4");
+  add_kb_button("F2");
+  add_kb_button("a");
+  add_kb_button("e");
+  add_kb_button("g");
+  add_kb_button("c");
+  add_kb_button("h");
+  add_kb_button("i");
+  add_kb_button("k");
+  add_kb_button("l");
+  add_kb_button("m");
+  add_kb_button("p");
+  add_kb_button("r");
+  add_kb_button("s");
+  add_kb_button("u");
+  add_kb_button("v");
+  add_kb_button("x");
+  add_kb_button("z");
+  add_kb_button("del");
+  add_kb_button("end");
+  add_kb_button("tab");
+  add_kb_button("ins");
+  add_kb_button("add");
+  add_kb_button("space");
+  add_kb_button("enter");
+  add_kb_button("1");
+  add_kb_button("2");
+  add_kb_button("3");
+  add_kb_button("4");
+  add_kb_button("5");
+  add_kb_button("6");
+  add_kb_button("7");
+  add_kb_button("8");
+  add_kb_button("9");
+  add_kb_button("0");
+  add_kb_button("-");
+  add_kb_button("=");
+  add_kb_button(",");
+  add_kb_button(".");
+  add_kb_button("[");
+  add_kb_button("]");
+  add_kb_button("leftarrow");
+  add_kb_button("rightarrow");
+  add_kb_button("uparrow");
+  add_kb_button("downarrow");
+}
+
+locked(var_0) {
+  if(isDefined(level._createfx.lockedlist[var_0])) {
+    return 0;
+  }
+
+  return kb_locked(var_0);
+}
+
+kb_locked(var_0) {
+  return level.createfx_inputlocked && isDefined(level.button_is_kb[var_0]);
+}
+
+add_button(var_0) {
+  if(locked(var_0)) {
+    return;
+  }
+  if(!isDefined(level.buttonisheld[var_0])) {
+    if(level.player buttonpressed(var_0)) {
+      level.buttonisheld[var_0] = 1;
+      level.buttonclick[var_0] = 1;
     }
+  } else if(!level.player buttonpressed(var_0)) {
+    level.buttonisheld[var_0] = undefined;
+  }
+}
 
-    get_raw_or_devraw_subdir() {
-      if(isDefined(level.createfx_devraw_map) && level.createfx_devraw_map) {
-        return "devraw";
-      } else {
-        return "raw";
-      }
-    }
+add_kb_button(var_0) {
+  level.button_is_kb[var_0] = 1;
+  add_button(var_0);
+}
 
-    get_gamemode_subdir() {
-      if(scripts\engine\utility::iscp()) {
-        return "cp";
-      } else if(scripts\engine\utility::issp()) {
-        return "sp";
-      } else {
-        return "mp";
-      }
-    }
+buttondown(var_0, var_1) {
+  return buttonpressed_internal(var_0) || buttonpressed_internal(var_1);
+}
 
-    process_button_held_and_clicked() {
-      add_button("mouse1");
-      add_button("BUTTON_RSHLDR");
-      add_button("BUTTON_LSHLDR");
-      add_button("BUTTON_RSTICK");
-      add_button("BUTTON_LSTICK");
-      add_button("BUTTON_A");
-      add_button("BUTTON_B");
-      add_button("BUTTON_X");
-      add_button("BUTTON_Y");
-      add_button("DPAD_UP");
-      add_button("DPAD_LEFT");
-      add_button("DPAD_RIGHT");
-      add_button("DPAD_DOWN");
-      add_kb_button("shift");
-      add_kb_button("ctrl");
-      add_kb_button("escape");
-      add_kb_button("F1");
-      add_kb_button("F5");
-      add_kb_button("F4");
-      add_kb_button("F2");
-      add_kb_button("a");
-      add_kb_button("e");
-      add_kb_button("g");
-      add_kb_button("c");
-      add_kb_button("h");
-      add_kb_button("i");
-      add_kb_button("k");
-      add_kb_button("l");
-      add_kb_button("m");
-      add_kb_button("p");
-      add_kb_button("r");
-      add_kb_button("s");
-      add_kb_button("u");
-      add_kb_button("v");
-      add_kb_button("x");
-      add_kb_button("z");
-      add_kb_button("del");
-      add_kb_button("end");
-      add_kb_button("tab");
-      add_kb_button("ins");
-      add_kb_button("add");
-      add_kb_button("space");
-      add_kb_button("enter");
-      add_kb_button("1");
-      add_kb_button("2");
-      add_kb_button("3");
-      add_kb_button("4");
-      add_kb_button("5");
-      add_kb_button("6");
-      add_kb_button("7");
-      add_kb_button("8");
-      add_kb_button("9");
-      add_kb_button("0");
-      add_kb_button("-");
-      add_kb_button("=");
-      add_kb_button(",");
-      add_kb_button(".");
-      add_kb_button("[");
-      add_kb_button("]");
-      add_kb_button("leftarrow");
-      add_kb_button("rightarrow");
-      add_kb_button("uparrow");
-      add_kb_button("downarrow");
-    }
+buttonpressed_internal(var_0) {
+  if(!isDefined(var_0)) {
+    return 0;
+  }
 
-    locked(var_0) {
-      if(isDefined(level._createfx.lockedlist[var_0])) {
-        return 0;
-      }
+  if(kb_locked(var_0)) {
+    return 0;
+  }
 
-      return kb_locked(var_0);
-    }
+  return level.player buttonpressed(var_0);
+}
 
-    kb_locked(var_0) {
-      return level.createfx_inputlocked && isDefined(level.button_is_kb[var_0]);
-    }
-
-    add_button(var_0) {
-      if(locked(var_0)) {
-        return;
-      }
-      if(!isDefined(level.buttonisheld[var_0])) {
-        if(level.player buttonpressed(var_0)) {
-          level.buttonisheld[var_0] = 1;
-          level.buttonclick[var_0] = 1;
-        }
-      } else if(!level.player buttonpressed(var_0)) {
-        level.buttonisheld[var_0] = undefined;
-      }
-    }
-
-    add_kb_button(var_0) {
-      level.button_is_kb[var_0] = 1;
-      add_button(var_0);
-    }
-
-    buttondown(var_0, var_1) {
-      return buttonpressed_internal(var_0) || buttonpressed_internal(var_1);
-    }
-
-    buttonpressed_internal(var_0) {
-      if(!isDefined(var_0)) {
-        return 0;
-      }
-
-      if(kb_locked(var_0)) {
-        return 0;
-      }
-
-      return level.player buttonpressed(var_0);
-    }
-
-    button_is_held(var_0, var_1) {
-      if(isDefined(var_1)) {
-        if(isDefined(level.buttonisheld[var_1])) {
-          return 1;
-        }
-      }
-
-      return isDefined(level.buttonisheld[var_0]);
-    }
-
-    button_is_clicked(var_0, var_1) {
-      if(isDefined(var_1)) {
-        if(isDefined(level.buttonclick[var_1])) {
-          return 1;
-        }
-      }
-
-      return isDefined(level.buttonclick[var_0]);
-    }
-
-    init_huds() {
-      level._createfx.hudelems = [];
-      level._createfx.hudelem_count = 30;
-
-      if(level.mp_createfx) {
-        level._createfx.hudelem_count = 16;
-      }
-
-      var_0 = [];
-      var_1 = [];
-      var_0[0] = 0;
-      var_1[0] = 0;
-      var_0[1] = 1;
-      var_1[1] = 1;
-      var_0[2] = -2;
-      var_1[2] = 1;
-      var_0[3] = 1;
-      var_1[3] = -1;
-      var_0[4] = -2;
-      var_1[4] = -1;
-      level.cleartextmarker = newhudelem();
-      level.cleartextmarker.alpha = 0;
-      level.cleartextmarker.archived = 0;
-
-      for(var_2 = 0; var_2 < level._createfx.hudelem_count; var_2++) {
-        var_3 = [];
-
-        for(var_4 = 0; var_4 < 1; var_4++) {
-          var_5 = newhudelem();
-          var_5.alignx = "left";
-          var_5.archived = 0;
-          var_5.location = 0;
-          var_5.foreground = 1;
-          var_5.fontscale = 1.4;
-          var_5.sort = 20 - var_4;
-          var_5.alpha = 1;
-          var_5.x = 0 + var_0[var_4];
-          var_5.y = 60 + var_1[var_4] + var_2 * 15;
-
-          if(var_4 > 0) {
-            var_5.color = (0, 0, 0);
-          }
-
-          var_3[var_3.size] = var_5;
-        }
-
-        level._createfx.hudelems[var_2] = var_3;
-      }
-
-      var_6 = newhudelem();
-      var_6.archived = 0;
-      var_6.alignx = "center";
-      var_6.location = 0;
-      var_6.foreground = 1;
-      var_6.fontscale = 1.4;
-      var_6.sort = 20;
-      var_6.alpha = 1;
-      var_6.x = 320;
-      var_6.y = 40;
-      level.createfx_centerprint = var_6;
-    }
-
-    init_crosshair() {
-      var_0 = newhudelem();
-      var_0.archived = 0;
-      var_0.location = 0;
-      var_0.alignx = "center";
-      var_0.aligny = "middle";
-      var_0.foreground = 1;
-      var_0.fontscale = 1;
-      var_0.sort = 20;
-      var_0.alpha = 1;
-      var_0.x = 320;
-      var_0.y = 233;
-    }
-
-    clear_fx_hudelements() {
-      level.cleartextmarker clearalltextafterhudelem();
-
-      for(var_0 = 0; var_0 < level._createfx.hudelem_count; var_0++) {
-        for(var_1 = 0; var_1 < 1; var_1++) {}
-      }
-
-      level.fxhudelements = 0;
-    }
-
-    set_fx_hudelement(var_0) {
-      for(var_1 = 0; var_1 < 1; var_1++) {}
-
-      level.fxhudelements++;
-    }
-
-    init_tool_hud() {
-      if(!isDefined(level._createfx.tool_hudelems)) {
-        level._createfx.tool_hudelems = [];
-      }
-
-      if(!isDefined(level._createfx.tool_hud_visible)) {
-        level._createfx.tool_hud_visible = 1;
-      }
-
-      if(!isDefined(level._createfx.tool_hud)) {
-        level._createfx.tool_hud = "";
-      }
-    }
-
-    new_tool_hud(var_0) {
-      foreach(var_3, var_2 in level._createfx.tool_hudelems) {
-        if(isDefined(var_2.value_hudelem)) {
-          var_2.value_hudelem destroy();
-        }
-
-        var_2 destroy();
-        level._createfx.tool_hudelems[var_3] = undefined;
-      }
-
-      level._createfx.tool_hud = var_0;
-    }
-
-    current_mode_hud(var_0) {
-      return level._createfx.tool_hud == var_0;
-    }
-
-    clear_tool_hud() {
-      new_tool_hud("");
-    }
-
-    new_tool_hudelem(var_0) {
-      var_1 = newhudelem();
-      var_1.archived = 0;
-      var_1.alignx = "left";
-      var_1.location = 0;
-      var_1.foreground = 1;
-      var_1.fontscale = 1.2;
-      var_1.alpha = 1;
-      var_1.x = 0;
-      var_1.y = 320 + var_0 * 15;
-      return var_1;
-    }
-
-    get_tool_hudelem(var_0) {
-      if(isDefined(level._createfx.tool_hudelems[var_0])) {
-        return level._createfx.tool_hudelems[var_0];
-      }
-
-      return undefined;
-    }
-
-    set_tool_hudelem(var_0, var_1) {
-      if(level.mp_createfx) {
-        return;
-      }
-      var_2 = get_tool_hudelem(var_0);
-
-      if(!isDefined(var_2)) {
-        var_2 = new_tool_hudelem(level._createfx.tool_hudelems.size);
-        level._createfx.tool_hudelems[var_0] = var_2;
-        var_2.text = var_0;
-      }
-
-      if(isDefined(var_1)) {
-        if(isDefined(var_2.value_hudelem)) {
-          var_3 = var_2.value_hudelem;
-        } else {
-          var_3 = new_tool_hudelem(level._createfx.tool_hudelems.size);
-          var_3.x = var_3.x + 100;
-          var_3.y = var_2.y;
-          var_2.value_hudelem = var_3;
-        }
-
-        if(isDefined(var_3.text) && var_3.text == var_1) {
-          return;
-        }
-        var_3.text = var_1;
-      }
-    }
-
-    select_by_substring() {
-      var_0 = getdvar("select_by_substring");
-
-      if(var_0 == "") {
-        return 0;
-      }
-
-      setdvar("select_by_substring", "");
-      var_1 = [];
-
-      foreach(var_4, var_3 in level.createfxent) {
-        if(issubstr(var_3.v["fxid"], var_0)) {
-          var_1[var_1.size] = var_4;
-        }
-      }
-
-      if(var_1.size == 0) {
-        return 0;
-      }
-
-      deselect_all_ents();
-      select_index_array(var_1);
-
-      foreach(var_6 in var_1) {
-        var_3 = level.createfxent[var_6];
-        select_entity(var_6, var_3);
-      }
-
+button_is_held(var_0, var_1) {
+  if(isDefined(var_1)) {
+    if(isDefined(level.buttonisheld[var_1])) {
       return 1;
     }
+  }
 
-    select_index_array(var_0) {
-      foreach(var_2 in var_0) {
-        var_3 = level.createfxent[var_2];
-        select_entity(var_2, var_3);
+  return isDefined(level.buttonisheld[var_0]);
+}
+
+button_is_clicked(var_0, var_1) {
+  if(isDefined(var_1)) {
+    if(isDefined(level.buttonclick[var_1])) {
+      return 1;
+    }
+  }
+
+  return isDefined(level.buttonclick[var_0]);
+}
+
+init_huds() {
+  level._createfx.hudelems = [];
+  level._createfx.hudelem_count = 30;
+
+  if(level.mp_createfx) {
+    level._createfx.hudelem_count = 16;
+  }
+
+  var_0 = [];
+  var_1 = [];
+  var_0[0] = 0;
+  var_1[0] = 0;
+  var_0[1] = 1;
+  var_1[1] = 1;
+  var_0[2] = -2;
+  var_1[2] = 1;
+  var_0[3] = 1;
+  var_1[3] = -1;
+  var_0[4] = -2;
+  var_1[4] = -1;
+  level.cleartextmarker = newhudelem();
+  level.cleartextmarker.alpha = 0;
+  level.cleartextmarker.archived = 0;
+
+  for(var_2 = 0; var_2 < level._createfx.hudelem_count; var_2++) {
+    var_3 = [];
+
+    for(var_4 = 0; var_4 < 1; var_4++) {
+      var_5 = newhudelem();
+      var_5.alignx = "left";
+      var_5.archived = 0;
+      var_5.location = 0;
+      var_5.foreground = 1;
+      var_5.fontscale = 1.4;
+      var_5.sort = 20 - var_4;
+      var_5.alpha = 1;
+      var_5.x = 0 + var_0[var_4];
+      var_5.y = 60 + var_1[var_4] + var_2 * 15;
+
+      if(var_4 > 0) {
+        var_5.color = (0, 0, 0);
       }
+
+      var_3[var_3.size] = var_5;
     }
 
-    deselect_all_ents() {
-      foreach(var_2, var_1 in level._createfx.selected_fx_ents) {
-        deselect_entity(var_2, var_1);
-      }
+    level._createfx.hudelems[var_2] = var_3;
+  }
+
+  var_6 = newhudelem();
+  var_6.archived = 0;
+  var_6.alignx = "center";
+  var_6.location = 0;
+  var_6.foreground = 1;
+  var_6.fontscale = 1.4;
+  var_6.sort = 20;
+  var_6.alpha = 1;
+  var_6.x = 320;
+  var_6.y = 40;
+  level.createfx_centerprint = var_6;
+}
+
+init_crosshair() {
+  var_0 = newhudelem();
+  var_0.archived = 0;
+  var_0.location = 0;
+  var_0.alignx = "center";
+  var_0.aligny = "middle";
+  var_0.foreground = 1;
+  var_0.fontscale = 1;
+  var_0.sort = 20;
+  var_0.alpha = 1;
+  var_0.x = 320;
+  var_0.y = 233;
+}
+
+clear_fx_hudelements() {
+  level.cleartextmarker clearalltextafterhudelem();
+
+  for(var_0 = 0; var_0 < level._createfx.hudelem_count; var_0++) {
+    for(var_1 = 0; var_1 < 1; var_1++) {}
+  }
+
+  level.fxhudelements = 0;
+}
+
+set_fx_hudelement(var_0) {
+  for(var_1 = 0; var_1 < 1; var_1++) {}
+
+  level.fxhudelements++;
+}
+
+init_tool_hud() {
+  if(!isDefined(level._createfx.tool_hudelems)) {
+    level._createfx.tool_hudelems = [];
+  }
+
+  if(!isDefined(level._createfx.tool_hud_visible)) {
+    level._createfx.tool_hud_visible = 1;
+  }
+
+  if(!isDefined(level._createfx.tool_hud)) {
+    level._createfx.tool_hud = "";
+  }
+}
+
+new_tool_hud(var_0) {
+  foreach(var_3, var_2 in level._createfx.tool_hudelems) {
+    if(isDefined(var_2.value_hudelem)) {
+      var_2.value_hudelem destroy();
     }
+
+    var_2 destroy();
+    level._createfx.tool_hudelems[var_3] = undefined;
+  }
+
+  level._createfx.tool_hud = var_0;
+}
+
+current_mode_hud(var_0) {
+  return level._createfx.tool_hud == var_0;
+}
+
+clear_tool_hud() {
+  new_tool_hud("");
+}
+
+new_tool_hudelem(var_0) {
+  var_1 = newhudelem();
+  var_1.archived = 0;
+  var_1.alignx = "left";
+  var_1.location = 0;
+  var_1.foreground = 1;
+  var_1.fontscale = 1.2;
+  var_1.alpha = 1;
+  var_1.x = 0;
+  var_1.y = 320 + var_0 * 15;
+  return var_1;
+}
+
+get_tool_hudelem(var_0) {
+  if(isDefined(level._createfx.tool_hudelems[var_0])) {
+    return level._createfx.tool_hudelems[var_0];
+  }
+
+  return undefined;
+}
+
+set_tool_hudelem(var_0, var_1) {
+  if(level.mp_createfx) {
+    return;
+  }
+  var_2 = get_tool_hudelem(var_0);
+
+  if(!isDefined(var_2)) {
+    var_2 = new_tool_hudelem(level._createfx.tool_hudelems.size);
+    level._createfx.tool_hudelems[var_0] = var_2;
+    var_2.text = var_0;
+  }
+
+  if(isDefined(var_1)) {
+    if(isDefined(var_2.value_hudelem)) {
+      var_3 = var_2.value_hudelem;
+    } else {
+      var_3 = new_tool_hudelem(level._createfx.tool_hudelems.size);
+      var_3.x = var_3.x + 100;
+      var_3.y = var_2.y;
+      var_2.value_hudelem = var_3;
+    }
+
+    if(isDefined(var_3.text) && var_3.text == var_1) {
+      return;
+    }
+    var_3.text = var_1;
+  }
+}
+
+select_by_substring() {
+  var_0 = getdvar("select_by_substring");
+
+  if(var_0 == "") {
+    return 0;
+  }
+
+  setdvar("select_by_substring", "");
+  var_1 = [];
+
+  foreach(var_4, var_3 in level.createfxent) {
+    if(issubstr(var_3.v["fxid"], var_0)) {
+      var_1[var_1.size] = var_4;
+    }
+  }
+
+  if(var_1.size == 0) {
+    return 0;
+  }
+
+  deselect_all_ents();
+  select_index_array(var_1);
+
+  foreach(var_6 in var_1) {
+    var_3 = level.createfxent[var_6];
+    select_entity(var_6, var_3);
+  }
+
+  return 1;
+}
+
+select_index_array(var_0) {
+  foreach(var_2 in var_0) {
+    var_3 = level.createfxent[var_2];
+    select_entity(var_2, var_3);
+  }
+}
+
+deselect_all_ents() {
+  foreach(var_2, var_1 in level._createfx.selected_fx_ents) {
+    deselect_entity(var_2, var_1);
+  }
+}

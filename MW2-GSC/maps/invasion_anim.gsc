@@ -33,9 +33,7 @@ Driver --> tag_driver
 - invasion_humvee_exit_v1_passenger_idle
 - invasion_humvee_exit_v1_passenger_react
 
-"explosion_react1" "explosion_react2"
-
-- invasion_humvee_exit_v2_driver_idle
+"explosion_react1" "explosion_react2"- invasion_humvee_exit_v2_driver_idle
 - invasion_humvee_exit_v2_driver_react
 - invasion_humvee_exit_v2_guy0_idle
 - invasion_humvee_exit_v2_guy0_react

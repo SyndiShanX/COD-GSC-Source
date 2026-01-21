@@ -47,7 +47,7 @@ quad_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_quad_idle, % ai_zombie_quad_idle_2);
+  self.a.array["exposed_idle"] = array(%ai_zombie_quad_idle, %ai_zombie_quad_idle_2);
   self.a.array["straight_level"] = % ai_zombie_quad_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -297,7 +297,7 @@ quad_finish_leap() {
 
 quad_stop_leap() {
   self endon("death");
-  self SetFlaggedAnimKnobAllRestart("attack", % ai_zombie_quad_attack_leap_loop_out, % body, 1, .1, self.moveplaybackrate);
+  self SetFlaggedAnimKnobAllRestart("attack", %ai_zombie_quad_attack_leap_loop_out, %body, 1, .1, self.moveplaybackrate);
   self animscripts\zombie_shared::DoNoteTracks("attack");
   self quad_finish_leap();
 }
@@ -316,11 +316,11 @@ quad_leap_attack() {
   self.goalradius = 4;
   self animMode("nogravity");
   self notify("stop_coll");
-  self SetFlaggedAnimKnobAllRestart("attack", % ai_zombie_quad_attack_leap_loop, % body, 1, .1, self.moveplaybackrate);
-  time = getAnimLength( % ai_zombie_quad_attack_leap_loop);
+  self SetFlaggedAnimKnobAllRestart("attack", %ai_zombie_quad_attack_leap_loop, %body, 1, .1, self.moveplaybackrate);
+  time = getAnimLength(%ai_zombie_quad_attack_leap_loop);
   wait time;
-  self SetFlaggedAnimKnobAllRestart("attack", % ai_zombie_quad_attack_leap_attack, % body, 1, .1, self.moveplaybackrate);
-  time = getAnimLength( % ai_zombie_quad_attack_leap_attack);
+  self SetFlaggedAnimKnobAllRestart("attack", %ai_zombie_quad_attack_leap_attack, %body, 1, .1, self.moveplaybackrate);
+  time = getAnimLength(%ai_zombie_quad_attack_leap_attack);
   wait time;
   self OrientMode("face enemy");
   wait 1;

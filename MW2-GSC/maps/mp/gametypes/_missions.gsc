@@ -1063,8 +1063,7 @@ ch_kills(data, time) {
     if(player _hasPerk("specialty_bulletdamage"))
       player processChallenge("ch_stoppingpower_pro");
 
-    if(player _hasPerk("specialty_pistoldeath") && isDefined(player.inLastStand) && player.inLastStand && !level.dieHardMode &&
-      (!isDefined(player.inFinalStand) || !player.inFinalStand) && (!isDefined(player.inC4Death) || !player.inC4Death)) {
+    if(player _hasPerk("specialty_pistoldeath") && isDefined(player.inLastStand) && player.inLastStand && !level.dieHardMode && (!isDefined(player.inFinalStand) || !player.inFinalStand) && (!isDefined(player.inC4Death) || !player.inC4Death)) {
       if(isDefined(data.modifiers["revenge"]))
         player processChallenge("ch_robinhood");
 
@@ -1246,46 +1245,11 @@ ch_roundwin(data) {
 /*
 char *modNames[MOD_NUM] =
 {
-	"MOD_UNKNOWN",
-	"MOD_PISTOL_BULLET",
-	"MOD_RIFLE_BULLET",
-	"MOD_GRENADE",
-	"MOD_GRENADE_SPLASH",
-	"MOD_PROJECTILE",
-	"MOD_PROJECTILE_SPLASH",
-	"MOD_MELEE",
-	"MOD_HEAD_SHOT",
-	"MOD_CRUSH",
-	"MOD_TELEFRAG",
-	"MOD_FALLING",
-	"MOD_SUICIDE",
-	"MOD_TRIGGER_HURT",
-	"MOD_EXPLOSIVE",
-	"MOD_IMPACT",
-};
+	"MOD_UNKNOWN", "MOD_PISTOL_BULLET", "MOD_RIFLE_BULLET", "MOD_GRENADE", "MOD_GRENADE_SPLASH", "MOD_PROJECTILE", "MOD_PROJECTILE_SPLASH", "MOD_MELEE", "MOD_HEAD_SHOT", "MOD_CRUSH", "MOD_TELEFRAG", "MOD_FALLING", "MOD_SUICIDE", "MOD_TRIGGER_HURT", "MOD_EXPLOSIVE", "MOD_IMPACT", };
 
 static const char *g_HitLocNames[] =
 {
-	"none",
-	"helmet",
-	"head",
-	"neck",
-	"torso_upper",
-	"torso_lower",
-	"right_arm_upper",
-	"left_arm_upper",
-	"right_arm_lower",
-	"left_arm_lower",
-	"right_hand",
-	"left_hand",
-	"right_leg_upper",
-	"left_leg_upper",
-	"right_leg_lower",
-	"left_leg_lower",
-	"right_foot",
-	"left_foot",
-	"gun",
-};
+	"none", "helmet", "head", "neck", "torso_upper", "torso_lower", "right_arm_upper", "left_arm_upper", "right_arm_lower", "left_arm_lower", "right_hand", "left_hand", "right_leg_upper", "left_leg_upper", "right_leg_lower", "left_leg_lower", "right_foot", "left_foot", "gun", };
 
 */
 

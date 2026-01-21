@@ -55,9 +55,9 @@ MeleeCombat() {
     self thread EyesAtEnemy();
     self OrientMode("face current");
     if(self maps\_bayonet::has_bayonet() && randomInt(100) < 0) {
-      self SetFlaggedAnimKnobAllRestart("meleeanim", animArray("bayonet"), % body, 1, .2, 1);
+      self SetFlaggedAnimKnobAllRestart("meleeanim", animArray("bayonet"), %body, 1, .2, 1);
     } else {
-      self SetFlaggedAnimKnobAllRestart("meleeanim", animArray("melee"), % body, 1, .2, 1);
+      self SetFlaggedAnimKnobAllRestart("meleeanim", animArray("melee"), %body, 1, .2, 1);
     }
     while(1) {
       self waittill("meleeanim", note);
@@ -290,7 +290,7 @@ PrepareToMelee(first_time) {
     isBatonGuard = isDefined(self.baton_guard) && self.baton_guard;
     isRegularAi = self.animType != "spetsnaz" && !isBatonGuard;
     if(first_time || isRegularAi) {
-      self SetFlaggedAnimKnobAll("readyanim", animArray("stand_2_melee"), % body, 1, .3, 1);
+      self SetFlaggedAnimKnobAll("readyanim", animArray("stand_2_melee"), %body, 1, .3, 1);
       self animscripts\shared::DoNoteTracks("readyanim");
     }
     return true;
@@ -311,7 +311,7 @@ PrepareToMelee(first_time) {
   raiseGunStartTime = 0;
   predictedEnemyDistSqAfterRaiseGun = undefined;
   runAnim = animscripts\run::GetRunAnim();
-  self SetFlaggedAnimKnobAll("chargeanim", runAnim, % body, 1, .3, 1);
+  self SetFlaggedAnimKnobAll("chargeanim", runAnim, %body, 1, .3, 1);
   raisingGun = false;
   while(1) {
     meleeDebugPrint("PrepareToMelee loop" + randomInt(100));
@@ -319,14 +319,14 @@ PrepareToMelee(first_time) {
     willBeWithinRangeWhenGunIsRaised = (isDefined(predictedEnemyDistSqAfterRaiseGun) && predictedEnemyDistSqAfterRaiseGun <= shouldRaiseGunDistSq);
     if(!raisingGun) {
       if(willBeWithinRangeWhenGunIsRaised) {
-        self SetFlaggedAnimKnobAllRestart("chargeanim", runToMeleeAnim, % body, 1, .2, 1);
+        self SetFlaggedAnimKnobAllRestart("chargeanim", runToMeleeAnim, %body, 1, .2, 1);
         raiseGunStartTime = time;
         raisingGun = true;
       }
     } else {
       withinRangeNow = self.enemyDistanceSq <= shouldRaiseGunDistSq;
       if(time - raiseGunStartTime >= raiseGunFinishDuration || (!willBeWithinRangeWhenGunIsRaised && !withinRangeNow)) {
-        self SetFlaggedAnimKnobAll("chargeanim", runAnim, % body, 1, .3, 1);
+        self SetFlaggedAnimKnobAll("chargeanim", runAnim, %body, 1, .3, 1);
         raisingGun = false;
       }
     }
@@ -363,7 +363,7 @@ AiVsAiMeleeCombat() {
   self endon("killanimscript");
   self melee_notify_wrapper();
   self OrientMode("face enemy");
-  self ClearAnim( % root, 0.3);
+  self ClearAnim(%root, 0.3);
   IWin = (randomInt(10) < 8);
   if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     IWin = true;
@@ -396,7 +396,7 @@ AiVsAiMeleeCombat() {
 
 AiVsAiMeleeCharge(desiredDistSqrd) {
   giveUpTime = GetTime() + 2500;
-  self SetAnimKnobAll(animscripts\run::GetRunAnim(), % body, 1, 0.2);
+  self SetAnimKnobAll(animscripts\run::GetRunAnim(), %body, 1, 0.2);
   while(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && GetTime() < giveUpTime) {
     wait .05;
   }
@@ -413,7 +413,7 @@ AiVsAiMeleeAnim(myAnim) {
   partnerDir = self.meleePartner.origin - self.origin;
   self OrientMode("face angle", VectorToAngles(partnerDir)[1]);
   self AnimMode("zonly_physics");
-  self SetFlaggedAnimKnobAllRestart("meleeAnim", myAnim, % body, 1, 0.2);
+  self SetFlaggedAnimKnobAllRestart("meleeAnim", myAnim, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("meleeAnim");
   self notify("end_melee");
 }

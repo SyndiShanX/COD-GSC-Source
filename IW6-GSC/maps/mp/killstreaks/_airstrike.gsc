@@ -317,15 +317,7 @@ airstrikeDamageEntsThread(sWeapon) {
       continue;
     }
     if(!ent.isPlayer || isAlive(ent.entity)) {
-      ent maps\mp\gametypes\_weapons::damageEnt(
-        ent.eInflictor,
-        ent.damageOwner,
-        ent.damage,
-        "MOD_PROJECTILE_SPLASH",
-        sWeapon,
-        ent.pos,
-        vectornormalize(ent.damageCenter - ent.pos)
-      );
+      ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", sWeapon, ent.pos, vectornormalize(ent.damageCenter - ent.pos));
 
       level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex] = undefined;
 

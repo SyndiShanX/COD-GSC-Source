@@ -1560,10 +1560,7 @@ function_94335f4a(var_1aa5a6d6) {
       }
 
       level.var_ad5d54b[n_tier] = {
-        #var_e226ec4f: var_e226ec4f,
-        #var_ad971622: var_ad971622,
-        #n_xp: n_xp,
-        #var_1f2bdb95: var_1f2bdb95
+        #var_e226ec4f: var_e226ec4f, #var_ad971622: var_ad971622, #n_xp: n_xp, #var_1f2bdb95: var_1f2bdb95
       };
     }
   }
@@ -1666,10 +1663,7 @@ function_e8c496dd(var_d479261a) {
 
       if(isDefined(var_341c004b)) {
         level.s_daily_calling_task = {
-          #var_e226ec4f: taskinfo.dailytarget,
-          #var_ad971622: taskinfo.callingtask,
-          #n_xp: task.xp,
-          #var_de86e878: var_341c004b
+          #var_e226ec4f: taskinfo.dailytarget, #var_ad971622: taskinfo.callingtask, #n_xp: task.xp, #var_de86e878: var_341c004b
         };
       }
     }

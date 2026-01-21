@@ -1118,9 +1118,7 @@ function_ed819a97(var_a2b4b991) {
       if(isDefined(s_spawn_type.variant)) {
         var_2f2d7675 = isDefined(s_spawn_type.var_34ceb858) ? s_spawn_type.var_34ceb858 : 0;
         var_40b0c36 = {
-          #var_2f2d7675: var_2f2d7675,
-          #var_a33f2319: [],
-          #name: s_spawn_type.variant
+          #var_2f2d7675: var_2f2d7675, #var_a33f2319: [], #name: s_spawn_type.variant
         };
         var_c165240a[s_spawn_type.variant] = var_40b0c36;
       }

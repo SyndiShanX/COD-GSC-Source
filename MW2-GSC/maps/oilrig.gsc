@@ -761,49 +761,41 @@ submarine_rumble() {
 
 dialogue_underwater() {
   wait(8);
-  //"Sub Command: USS Indiana actual to drydock shelter. We have a go."
-  radio_dialogue("oilrig_sbc_drydock");
+  //"Sub Command: USS Indiana actual to drydock shelter. We have a go."radio_dialogue("oilrig_sbc_drydock");
 
   wait(2);
-  //"Sub Officer: DDS hangar flooded. Full pressure."
-  radio_dialogue("oilrig_sbo_fullpressure");
+  //"Sub Officer: DDS hangar flooded. Full pressure."radio_dialogue("oilrig_sbo_fullpressure");
 
-  //"Sub Command: Begin deployment."
-  radio_dialogue("oilrig_sbc_deployment");
+  //"Sub Command: Begin deployment."radio_dialogue("oilrig_sbc_deployment");
 
   flag_set("open_dds_door");
   wait(10);
 
-  //"Sub Officer: Team one SDV is away."
-  radio_dialogue("oilrig_sbo_tm1away");
+  //"Sub Officer: Team one SDV is away."radio_dialogue("oilrig_sbo_tm1away");
 
   wait(5);
 
-  //"Sub Officer: Hotel-Six bearing zero-one-niner."
-  radio_dialogue("oilrig_sbo_zerooneniner");
+  //"Sub Officer: Hotel-Six bearing zero-one-niner."radio_dialogue("oilrig_sbo_zerooneniner");
 
   //level.player playlocalsound( "submarine_driveby" );
 
   flag_wait("sdv_01_passing");
   //wait( 8 );
 
-  //"Sub Command: USS Dallas deploying team two. RV at the objective."
-  radio_dialogue("oilrig_sbc_ussdallas");
+  //"Sub Command: USS Dallas deploying team two. RV at the objective."radio_dialogue("oilrig_sbc_ussdallas");
 
   wait(3);
   flag_set("player_approaching_oilrig_legs");
   flag_set("start_underwater_heli");
   wait(3);
 
-  //"Sub Officer: Hotel-Six depth 20 meters."
-  radio_dialogue("oilrig_sbo_depth20");
+  //"Sub Officer: Hotel-Six depth 20 meters."radio_dialogue("oilrig_sbo_depth20");
 
   flag_wait("sdv_02_arriving");
   flag_set("start_surface_sequences");
   //wait( 12 );
 
-  //"Sub Command: Team two at the objective."
-  radio_dialogue("oilrig_sbc_tm2objective");
+  //"Sub Command: Team two at the objective."radio_dialogue("oilrig_sbc_tm2objective");
 
   wait(3);
   //***Command 	The sooner we get the hostages, the sooner we can send reinforcements to take care of the SAM sites, over."	oilrig_sbc_sooner	Friendly breaching dialogue (all radio headset)	
@@ -1757,8 +1749,7 @@ dialogue_rig_to_first_breach() {
   //SEAL LEADER (radio): Two hostiles down in section 1-alpha. Moving up to section 2.
   radio_dialogue("oilrig_nsl_sect1alpha");
 
-  //"Sub Command: Roger that, Hotel Six."
-  radio_dialogue("oilrig_sbc_rogerhtlsix");
+  //"Sub Command: Roger that, Hotel Six."radio_dialogue("oilrig_sbc_rogerhtlsix");
 
   flag_set("obj_hostages_secure_given");
 
@@ -1770,13 +1761,11 @@ dialogue_rig_to_first_breach() {
 
   wait(2);
 
-  //"Ghost: We're clear."
-  radio_dialogue("oilrig_roomclear_ghost_03");
+  //"Ghost: We're clear."radio_dialogue("oilrig_roomclear_ghost_03");
 
   flag_wait("player_at_lower_breach");
 
-  //"Sub Command: Civilian hostages hostages at your position, watch your fire."
-  radio_dialogue("oilrig_sbc_civilhostages");
+  //"Sub Command: Civilian hostages hostages at your position, watch your fire."radio_dialogue("oilrig_sbc_civilhostages");
 
   //SEAL COMMANDER (radio): Roger that. Team one moving to breach.
   radio_dialogue("oilrig_nsl_tm1tobreach");
@@ -1785,20 +1774,16 @@ dialogue_rig_to_first_breach() {
 
   flag_wait("lower_room_cleared");
 
-  //"Ghost: Clear."
-  radio_dialogue("oilrig_roomclear_ghost_05");
+  //"Ghost: Clear."radio_dialogue("oilrig_roomclear_ghost_05");
 
   //MacTavish	6	31	We're clear.	
   radio_dialogue("oilrig_nsl_wereclear");
 
   iRand = randomint(2);
 
-  //"Seal Leader: Precious cargo secured in section 2-echo."
-  //"Seal Leader: Hostages secure in section 2-echo."
-  radio_dialogue("oilrig_hostsec_0" + iRand);
+  //"Seal Leader: Precious cargo secured in section 2-echo."//"Seal Leader: Hostages secure in section 2-echo."radio_dialogue("oilrig_hostsec_0" + iRand);
 
-  //"Sub Command: Roger that Hotel Six, Team 2 will secure and evac, continue your search topside."
-  radio_dialogue("oilrig_sbc_secandevac");
+  //"Sub Command: Roger that Hotel Six, Team 2 will secure and evac, continue your search topside."radio_dialogue("oilrig_sbc_secandevac");
 
   //Cpt. MacTavishOk, move upstairs. Control - we're advancing to deck two.
   radio_dialogue("oilrig_deck2_movenag_start");
@@ -1843,8 +1828,7 @@ dialogue_railing() {
 
   if(!flag("railing_patroller_dead")) {
     flag_set("player_dealing_with_rail");
-    //"Navy Seal 1: Got a visual by the railing."
-    radio_dialogue("oilrig_ns1_visbyrailing");
+    //"Navy Seal 1: Got a visual by the railing."radio_dialogue("oilrig_ns1_visbyrailing");
     flag_clear("player_dealing_with_rail");
   }
 
@@ -2110,11 +2094,9 @@ dialogue_to_deck1() {
   level endon("player_at_door_to_deck1");
   flag_wait("player_approaching_deck1");
 
-  //"Sub Command: Enemy helo patroling the perimeter. Keep a low profile, Hotel Six."
-  radio_dialogue("oilrig_sbc_lowprofile");
+  //"Sub Command: Enemy helo patroling the perimeter. Keep a low profile, Hotel Six."radio_dialogue("oilrig_sbc_lowprofile");
 
-  //"Seal Leader: Roger that."
-  radio_dialogue("oilrig_nsl_rogerthat");
+  //"Seal Leader: Roger that."radio_dialogue("oilrig_nsl_rogerthat");
 }
 
 dialogue_heli_patrol_deck_1() {
@@ -2132,10 +2114,7 @@ dialogue_heli_patrol_deck_1() {
 
   level endon("player_at_last_breach_building");
 
-  //"Seal Leader: Ok, move."
-  //"Seal Leader: Move."
-  //"Seal Leader: All clear, move up."
-  if(!flag("player_at_last_breach_building"))
+  //"Seal Leader: Ok, move."//"Seal Leader: Move."//"Seal Leader: All clear, move up."if(!flag("player_at_last_breach_building"))
     dialogue_random_heli_all_clear();
 }
 
@@ -2186,11 +2165,9 @@ dialogue_last_hostages() {
   //thread autosave_by_name( "deck1_breach" );
   thread autosave_tactical();
 
-  //"Sub Command: Hotel Six, The remaining hostages are at your position."
-  radio_dialogue("oilrig_sbc_hostatposition");
+  //"Sub Command: Hotel Six, The remaining hostages are at your position."radio_dialogue("oilrig_sbc_hostatposition");
 
-  //"Seal Leader: Copy that."
-  level.teamleader dialogue_execute("oilrig_nsl_copythat");
+  //"Seal Leader: Copy that."level.teamleader dialogue_execute("oilrig_nsl_copythat");
 
   wait(4);
   thread dialogue_breach_nag(200);
@@ -2230,7 +2207,7 @@ ambush_sequence() {
   eFriendlyC4Org = getfarthest(level.player.origin, aFriendlyC4Orgs);
   eC4Node = getfarthest(level.player.origin, aC4Nodes);
 
-  //level.hostageNodes = getnodearray( "node_hostage_scaffolding", "targetname" );
+  //level.hostageNodes = getnodearray("node_hostage_scaffolding", "targetname" );
   //thread hostage_evac( volume_ambush_room, "upper_room_cleared" );
 
   /*-----------------------
@@ -2273,14 +2250,12 @@ ambush_sequence() {
 
   flag_set("obj_hostages_secure_complete");
 
-  //"Ghost: Clear."
-  radio_dialogue("oilrig_roomclear_ghost_05");
+  //"Ghost: Clear."radio_dialogue("oilrig_roomclear_ghost_05");
 
   //MacTavish	6	33	Clear.	
   radio_dialogue("oilrig_nsl_clear");
 
-  //"Seal Leader: Control, all hostages in stronghold secured..."
-  level.teamleader dialogue_execute("oilrig_nsl_strongholdsec");
+  //"Seal Leader: Control, all hostages in stronghold secured..."level.teamleader dialogue_execute("oilrig_nsl_strongholdsec");
 
   level.teamleader cqb_walk("off");
   level.teamleader ClearEnemy();
@@ -2295,14 +2270,12 @@ ambush_sequence() {
   //ENEMY RADIO: (In German) Maerhoffer, come in. Please respond. (In accented English) Maerhoffer, are you there? Pleae respond. We're sending a team down.
   radio play_sound_on_entity("oilrig_enc_maerhoffer");
 
-  //"Navy Seal 1: Sir, I think we're going to have company..."
-  radio_dialogue("oilrig_ns1_havecompany");
+  //"Navy Seal 1: Sir, I think we're going to have company..."radio_dialogue("oilrig_ns1_havecompany");
 
   /*-----------------------
   GLOWING C4 ON BODIES
   -------------------------*/
-  //"Seal Leader: Alright. Get some C4 on those bodies. We're going loud."
-  level.teamleader thread dialogue_execute("oilrig_nsl_goingloud");
+  //"Seal Leader: Alright. Get some C4 on those bodies. We're going loud."level.teamleader thread dialogue_execute("oilrig_nsl_goingloud");
 
   //ENEMY RADIO: (In German) Team 5 this is central, come in. (In accented English) Team 5, this is command, please respond. We're sending a team down to your position.
   radio delaythread(5, ::play_sound_on_entity, "oilrig_enc_team5");
@@ -2343,14 +2316,12 @@ ambush_sequence() {
 
   thread autosave_by_name("c4_planted");
 
-  //"Navy Seal 2: C4 placed, sir."
-  thread c4_ambush_hints();
+  //"Navy Seal 2: C4 placed, sir."thread c4_ambush_hints();
   radio_dialogue("oilrig_ns2_c4placed");
   triggersEnable("colornodes_ambush_setup", "script_noteworthy", true);
   activate_trigger_with_noteworthy("colornodes_ambush_setup");
 
-  //"Seal Leader: Get to an elevated position. We'll ambush them when they discover the bodies."
-  thread radio_dialogue("oilrig_nsl_ambushthem");
+  //"Seal Leader: Get to an elevated position. We'll ambush them when they discover the bodies."thread radio_dialogue("oilrig_nsl_ambushthem");
   flag_set("obj_ambush_given");
 
   thread ambush_nag();
@@ -2626,8 +2597,7 @@ ambush_nag() {
   eTrig endon("trigger");
   wait(randomintrange(14, 18));
 
-  //"Seal Leader: We've got to set up an ambush. Get to an elevated position and wait."
-  thread radio_dialogue("oilrig_nsl_elevatedposwait");
+  //"Seal Leader: We've got to set up an ambush. Get to an elevated position and wait."thread radio_dialogue("oilrig_nsl_elevatedposwait");
 }
 
 teamleader_ambush_think() {
@@ -2674,18 +2644,15 @@ c4_nag(volume_ambush_room) {
   -------------------------*/
   wait(randomintrange(4, 6));
 
-  //"Seal Leader: Get C4 on those bodies ASAP. We don't have much time."
-  radio_dialogue("oilrig_nsl_donthavetime");
+  //"Seal Leader: Get C4 on those bodies ASAP. We don't have much time."radio_dialogue("oilrig_nsl_donthavetime");
 
   wait(randomintrange(4, 6));
 
-  //"Seal Leader: Plant C4 on the bodies. The patrol will be here any minute."
-  radio_dialogue("oilrig_nsl_plantc4");
+  //"Seal Leader: Plant C4 on the bodies. The patrol will be here any minute."radio_dialogue("oilrig_nsl_plantc4");
 
   wait(randomintrange(4, 6));
 
-  //"Seal Leader: Get C4 on those bodies ASAP. We don't have much time."
-  radio_dialogue("oilrig_nsl_donthavetime");
+  //"Seal Leader: Get C4 on those bodies ASAP. We don't have much time."radio_dialogue("oilrig_nsl_donthavetime");
 
   wait(4);
 
@@ -2967,12 +2934,10 @@ ambush_dialogue() {
   flag_wait("ambush_enemies_approaching");
 
   wait(.5);
-  //"Seal Leader: There's the patrol. Hold fire until they find the bodies."
-  radio_dialogue("oilrig_nsl_holdfire");
+  //"Seal Leader: There's the patrol. Hold fire until they find the bodies."radio_dialogue("oilrig_nsl_holdfire");
 
   flag_wait("ambush_gate_opened");
-  //"Seal Leader: Standby..."
-  radio_dialogue("oilrig_nsl_standby1");
+  //"Seal Leader: Standby..."radio_dialogue("oilrig_nsl_standby1");
 
   wait(1);
 
@@ -2984,8 +2949,7 @@ ambush_dialogue() {
 
   wait(2);
 
-  //"Seal Leader: Standby..."
-  radio_dialogue("oilrig_nsl_standby2");
+  //"Seal Leader: Standby..."radio_dialogue("oilrig_nsl_standby2");
 
   thread dialogue_random_pmc(org);
 
@@ -2996,8 +2960,7 @@ ambush_dialogue() {
   thread enemy_discovers_body_dialogue();
 
   wait(1);
-  //"Seal Leader: Do it."
-  radio_dialogue("oilrig_nsl_doit");
+  //"Seal Leader: Do it."radio_dialogue("oilrig_nsl_doit");
 
   flag_set("ambush_enemies_alerted");
 }
@@ -3089,8 +3052,7 @@ helicopter_dialogue() {
 
   thread autosave_by_name("ambush_been_triggered");
 
-  //"Seal Leader: Control, this is Hotel Six, all hostages secured, but our cover is blown."
-  radio_dialogue("oilrig_nsl_coverblown");
+  //"Seal Leader: Control, this is Hotel Six, all hostages secured, but our cover is blown."radio_dialogue("oilrig_nsl_coverblown");
 
   //"Sub Command: Copy that, intel still indicates hostages and possible explosives on the top deck.
   radio_dialogue("oilrig_sbc_possibleexpl");
@@ -3098,8 +3060,7 @@ helicopter_dialogue() {
   //Sub Command Your team needs to secure that location before we can send in reinforcements to handle the SAM sites, over.	
   radio_dialogue("oilrig_sbc_secthatloc");
 
-  //"Seal Leader: Roger that. Will call in for exfil at LZ bravo."
-  radio_dialogue("oilrig_nsl_callforexfil");
+  //"Seal Leader: Roger that. Will call in for exfil at LZ bravo."radio_dialogue("oilrig_nsl_callforexfil");
 
   flag_set("obj_explosives_locate_given");
 
@@ -3116,8 +3077,7 @@ helicopter_dialogue() {
 
   wait(3);
   battlechatter_on("allies");
-  //"Seal Leader: Move."
-  wait(3);
+  //"Seal Leader: Move."wait(3);
   radio_dialogue("oilrig_nsl_move2");
 }
 
@@ -3139,8 +3099,7 @@ helicopter_dialogue() {
 //	activate_trigger_with_noteworthy( "colornodes_heli_deck1" );
 //	triggersEnable( "colornodes_deck1_postbreach", "script_noteworthy", true );
 //
-//	//"Seal Leader: Move."
-//	radio_dialogue( "oilrig_nsl_move2" );
+//	//"Seal Leader: Move."//	radio_dialogue( "oilrig_nsl_move2" );
 //	
 //	thread heli_kill_nag( attack_heli, "heli_ambush_shot_down" );
 //	
@@ -3263,11 +3222,9 @@ dialogue_deck2() {
   thread autosave_by_name("deck2_start");
 
   wait(randomfloatrange(1, 2));
-  //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."
-  radio_dialogue("oilrig_sbc_gettolz");
+  //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."radio_dialogue("oilrig_sbc_gettolz");
 
-  //"Seal Leader: Copy that. We're working on it. out."
-  thread radio_dialogue("oilrig_nsl_copythat2");
+  //"Seal Leader: Copy that. We're working on it. out."thread radio_dialogue("oilrig_nsl_copythat2");
 
   flag_set("zodiacs_evaced");
 
@@ -3831,8 +3788,7 @@ dialogue_escape() {
   battlechatter_off("axis");
   wait(.5);
 
-  //"Ghost: Clear."
-  radio_dialogue("oilrig_roomclear_ghost_05");
+  //"Ghost: Clear."radio_dialogue("oilrig_roomclear_ghost_05");
 
   //MacTavish	6	32	Room clear.	
   radio_dialogue("oilrig_nsl_roomclear");
@@ -4363,9 +4319,7 @@ obj_c4_ambush_plant() {
   //objective_state( objective_number, "active" );
 
   objective_state(objective_number, "current");
-  //"empty", "active", "invisible", "done", "current" and "failed"
-
-  // Plant C4 on the dead bodies ( && 1 remaining )
+  //"empty", "active", "invisible", "done", "current" and "failed"// Plant C4 on the dead bodies ( && 1 remaining )
   //Objective_String( objective_number, &"OILRIG_OBJ_C4_AMBUSH_PLANT", level.C4locations.size );
   Objective_String(objective_number, &"OILRIG_OBJ_C4_AMBUSH_PLANT");
   objective_current(objective_number);
@@ -5012,11 +4966,7 @@ timeout_func(time) {
 }
 
 dialogue_random_heliwarning_stealth() {
-  //"Navy Seal 1: Helo approaching. Get down."
-  //"Navy Seal 2: Enemy helo. Get down."
-  //"Navy Seal 1: Chopper inbound, keep low."
-  //"Seal Leader: Enemy helo, get out of sight."
-  iRand = randomint(4);
+  //"Navy Seal 1: Helo approaching. Get down."//"Navy Seal 2: Enemy helo. Get down."//"Navy Seal 1: Chopper inbound, keep low."//"Seal Leader: Enemy helo, get out of sight."iRand = randomint(4);
   radio_dialogue("oilrig_heloapproach_0" + iRand);
 }
 
@@ -5072,10 +5022,7 @@ dialogue_breach_nag(iBreachGroup) {
     }
 
     //SEAL COMMANDER (radio): Get a frame charge on the door. We'll hit the room from both sides.
-    //"Seal Leader: Get into position."
-    //"Seal Leader: Blow the doors. We'll hit them from both sides."
-    //"Seal Leader: Get a charge on the door. We'll breach from both sides."
-    radio_dialogue("breach_nag_0" + iNagNumber);
+    //"Seal Leader: Get into position."//"Seal Leader: Blow the doors. We'll hit them from both sides."//"Seal Leader: Get a charge on the door. We'll breach from both sides."radio_dialogue("breach_nag_0" + iNagNumber);
 
     iNagNumber++;
     if(iNagNumber > 3)

@@ -420,8 +420,8 @@ spawn_a_zombie(max_zombies, spawner_zone_name, wait_delay) {
     if(is_true(level.mp_side_step)) {
       ai.shouldSideStepFunc = ::nml_shouldSideStep;
       ai.sideStepAnims = [];
-      ai.sideStepAnims["step_left"] = array( % ai_zombie_MP_sidestep_left_a, % ai_zombie_MP_sidestep_left_b);
-      ai.sideStepAnims["step_right"] = array( % ai_zombie_MP_sidestep_right_a, % ai_zombie_MP_sidestep_right_b);
+      ai.sideStepAnims["step_left"] = array(%ai_zombie_MP_sidestep_left_a, %ai_zombie_MP_sidestep_left_b);
+      ai.sideStepAnims["step_right"] = array(%ai_zombie_MP_sidestep_right_a, %ai_zombie_MP_sidestep_right_b);
     }
   }
   wait(wait_delay);
@@ -494,9 +494,7 @@ get_vending_ents(vending_name, perk_script_string, nml_pos, nml_radius) {
     for(j = 0; j < ents.size; j++) {
       ent = ents[j];
       if(isDefined(ent.script_string) && (ent.script_string == perk_script_string)) {
-        if((abs(nml_pos[0] - ent.origin[0]) < nml_radius) &&
-          (abs(nml_pos[1] - ent.origin[1]) < nml_radius) &&
-          (abs(nml_pos[2] - ent.origin[2]) < nml_radius)) {
+        if((abs(nml_pos[0] - ent.origin[0]) < nml_radius) && (abs(nml_pos[1] - ent.origin[1]) < nml_radius) && (abs(nml_pos[2] - ent.origin[2]) < nml_radius)) {
           ent_array[ent_array.size] = ent;
         }
       }
@@ -650,8 +648,8 @@ nml_ramp_up_zombies() {
         if(is_true(level.mp_side_step)) {
           zombies[i].shouldSideStepFunc = ::nml_shouldSideStep;
           zombies[i].sideStepAnims = [];
-          zombies[i].sideStepAnims["step_left"] = array( % ai_zombie_MP_sidestep_left_a, % ai_zombie_MP_sidestep_left_b);
-          zombies[i].sideStepAnims["step_right"] = array( % ai_zombie_MP_sidestep_right_a, % ai_zombie_MP_sidestep_right_b);
+          zombies[i].sideStepAnims["step_left"] = array(%ai_zombie_MP_sidestep_left_a, %ai_zombie_MP_sidestep_left_b);
+          zombies[i].sideStepAnims["step_right"] = array(%ai_zombie_MP_sidestep_right_a, %ai_zombie_MP_sidestep_right_b);
         }
       }
       level thread nml_dog_health_increase();

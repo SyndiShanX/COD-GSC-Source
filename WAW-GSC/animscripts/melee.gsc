@@ -73,12 +73,12 @@ MeleeCombat() {
       }
       self animscripts\face::SaySpecificDialogue(undefined, "attack_vocals", 1);
       zombie_attack = pick_zombie_melee_anim(self);
-      self setflaggedanimknoballrestart("meleeanim", zombie_attack, % body, 1, .2, 1);
+      self setflaggedanimknoballrestart("meleeanim", zombie_attack, %body, 1, .2, 1);
       level.numZombsMeleeThisFrame++;
     } else if(self maps\_bayonet::has_bayonet() && RandomInt(100) < 0) {
-      self setflaggedanimknoballrestart("meleeanim", % ai_bayonet_stab_melee, % body, 1, .2, 1);
+      self setflaggedanimknoballrestart("meleeanim", %ai_bayonet_stab_melee, %body, 1, .2, 1);
     } else {
-      self setflaggedanimknoballrestart("meleeanim", % melee_1, % body, 1, .2, 1);
+      self setflaggedanimknoballrestart("meleeanim", %melee_1, %body, 1, .2, 1);
     }
     while(1) {
       self waittill("meleeanim", note);
@@ -261,26 +261,26 @@ PrepareToMelee() {
   if(!CanMeleeAnyRange())
     return false;
   if(self.enemyDistanceSq <= anim.meleeRangeSq) {
-    self SetFlaggedAnimKnobAll("readyanim", % stand_2_melee_1, % body, 1, .3, 1);
+    self SetFlaggedAnimKnobAll("readyanim", %stand_2_melee_1, %body, 1, .3, 1);
     self animscripts\shared::DoNoteTracks("readyanim");
     return true;
   }
   self PlayMeleeSound();
   prevEnemyPos = self.enemy.origin;
   sampleTime = 0.1;
-  raiseGunAnimTravelDist = length(getmovedelta( % run_2_melee_charge, 0, 1));
+  raiseGunAnimTravelDist = length(getmovedelta(%run_2_melee_charge, 0, 1));
   meleeAnimTravelDist = 32;
   shouldRaiseGunDist = anim.meleeRange * 0.75 + meleeAnimTravelDist + raiseGunAnimTravelDist;
   shouldRaiseGunDistSq = shouldRaiseGunDist * shouldRaiseGunDist;
   shouldMeleeDist = anim.meleeRange + meleeAnimTravelDist;
   shouldMeleeDistSq = shouldMeleeDist * shouldMeleeDist;
-  raiseGunFullDuration = getanimlength( % run_2_melee_charge) * 1000;
+  raiseGunFullDuration = getanimlength(%run_2_melee_charge) * 1000;
   raiseGunFinishDuration = raiseGunFullDuration - 100;
   raiseGunPredictDuration = raiseGunFullDuration - 200;
   raiseGunStartTime = 0;
   predictedEnemyDistSqAfterRaiseGun = undefined;
   runAnim = % run_lowready_F;
-  self SetFlaggedAnimKnobAll("chargeanim", runAnim, % body, 1, .3, 1);
+  self SetFlaggedAnimKnobAll("chargeanim", runAnim, %body, 1, .3, 1);
   raisingGun = false;
   while(1) {
     MeleeDebugPrint("PrepareToMelee loop" + randomint(100));
@@ -288,14 +288,14 @@ PrepareToMelee() {
     willBeWithinRangeWhenGunIsRaised = (isDefined(predictedEnemyDistSqAfterRaiseGun) && predictedEnemyDistSqAfterRaiseGun <= shouldRaiseGunDistSq);
     if(!raisingGun) {
       if(willBeWithinRangeWhenGunIsRaised) {
-        self SetFlaggedAnimKnobAllRestart("chargeanim", % run_2_melee_charge, % body, 1, .2, 1);
+        self SetFlaggedAnimKnobAllRestart("chargeanim", %run_2_melee_charge, %body, 1, .2, 1);
         raiseGunStartTime = time;
         raisingGun = true;
       }
     } else {
       withinRangeNow = self.enemyDistanceSq <= shouldRaiseGunDistSq;
       if(time - raiseGunStartTime >= raiseGunFinishDuration || (!willBeWithinRangeWhenGunIsRaised && !withinRangeNow)) {
-        self SetFlaggedAnimKnobAll("chargeanim", runAnim, % body, 1, .3, 1);
+        self SetFlaggedAnimKnobAll("chargeanim", runAnim, %body, 1, .3, 1);
         raisingGun = false;
       }
     }
@@ -330,7 +330,7 @@ AiVsAiMeleeCombat() {
   self endon("killanimscript");
   self notify("melee");
   self OrientMode("face enemy");
-  self ClearAnim( % root, 0.3);
+  self ClearAnim(%root, 0.3);
   IWin = (randomint(10) < 8);
   if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)
     IWin = true;
@@ -360,7 +360,7 @@ AiVsAiMeleeCombat() {
 
 AiVsAiMeleeCharge(desiredDistSqrd) {
   giveUpTime = gettime() + 2500;
-  self setAnimKnobAll( % run_lowready_F, % body, 1, 0.2);
+  self setAnimKnobAll(%run_lowready_F, %body, 1, 0.2);
   while(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && gettime() < giveUpTime) {
     wait .05;
   }
@@ -377,7 +377,7 @@ AiVsAiMeleeAnim(myAnim) {
   partnerDir = self.meleePartner.origin - self.origin;
   self orientMode("face angle", vectorToAngles(partnerDir)[1]);
   self animMode("zonly_physics");
-  self setFlaggedAnimKnobAllRestart("meleeAnim", myAnim, % body, 1, 0.2);
+  self setFlaggedAnimKnobAllRestart("meleeAnim", myAnim, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("meleeAnim");
   self notify("end_melee");
 }

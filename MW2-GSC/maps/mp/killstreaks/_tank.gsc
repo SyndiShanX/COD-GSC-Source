@@ -489,8 +489,7 @@ handleThreat(attacker) {
     targ[0] = attacker;
     self thread acquireTarget(targ);
   } else if(rand < 30) {
-    // all we know here is that it didnt hit the 70%
-    playFX(level.tankCover, self.origin);
+    // all we know here is that it didnt hit the 70% playFX(level.tankCover, self.origin);
     self thread setEvadeSpeed();
   } else {
     self fireWeapon();

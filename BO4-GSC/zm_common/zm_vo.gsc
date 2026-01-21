@@ -360,8 +360,7 @@ function_2b7b1675(var_3e24b5d5 = isDefined(level.var_3e24b5d5) ? level.var_3e24b
   }
 
   return {
-    #var_dbeb023e: var_cd5bda0c,
-    #var_1dc0a881: array(0, 0.5)
+    #var_dbeb023e: var_cd5bda0c, #var_1dc0a881: array(0, 0.5)
   };
 }
 

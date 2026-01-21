@@ -18,14 +18,10 @@ event_handler[gametype_init] main(eventstruct) {
 
 function_9c8b5737() {
   self.lightarmor = {
-    #amount: 0,
-    #max: 0,
-    #var_2274e560: 1,
-    #var_cdeeec29: 1
+    #amount: 0, #max: 0, #var_2274e560: 1, #var_cdeeec29: 1
   };
   self.var_59a874a7 = {
-    #var_2274e560: 1,
-    #var_cdeeec29: 1
+    #var_2274e560: 1, #var_cdeeec29: 1
   };
   self set_armor(0, 0, 0, 1, 0);
 }

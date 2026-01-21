@@ -26,7 +26,7 @@ main() {
   if(!isDefined(self.heat))
     thread abortapproachifthreatened();
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("coverArrival", var_1, 1, 0.2, self.movetransitionrate);
   animscripts\face::playfacialanim(var_1, "run");
   animscripts\shared::donotetracks("coverArrival", ::handlestartaim);
@@ -37,7 +37,7 @@ main() {
 
   self.a.movement = "stop";
   self.a.arrivaltype = self.approachtype;
-  self clearanim( % animscript_root, 0.2);
+  self clearanim(%animscript_root, 0.2);
   self.lastapproachaborttime = undefined;
 }
 
@@ -77,7 +77,7 @@ abortapproachifthreatened() {
       return;
     }
     if(isthreatenedbyenemy()) {
-      self clearanim( % animscript_root, 0.3);
+      self clearanim(%animscript_root, 0.3);
       self notify("abort_approach");
       self.lastapproachaborttime = gettime();
       return;
@@ -384,7 +384,7 @@ approachwaittillclose(var_0, var_1, var_2) {
 
     var_9 = self.moveplaybackrate;
 
-    if(level.script == "scoutsniper" && self getanimweight( % h1_sprint_loop) > 0.5)
+    if(level.script == "scoutsniper" && self getanimweight(%h1_sprint_loop) > 0.5)
       var_9 = var_9 * 1.25;
 
     var_10 = (var_4 - var_1) / (250 * var_9) - 0.1;
@@ -820,7 +820,7 @@ custommovetransitionfunc() {
   }
   self animmode("zonly_physics", 0);
   self orientmode("face current");
-  self setflaggedanimknoballrestart("move", self.startmovetransitionanim, % animscript_root, 1);
+  self setflaggedanimknoballrestart("move", self.startmovetransitionanim, %animscript_root, 1);
   animscripts\face::playfacialanim(self.startmovetransitionanim, "run");
 
   if(animhasnotetrack(self.startmovetransitionanim, "code_move")) {
@@ -842,7 +842,7 @@ customidletransitionfunc() {
   if(!isDefined(self.heat))
     thread abortapproachifthreatened();
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("coverArrival", var_1, 1, 0.2, self.movetransitionrate);
   animscripts\face::playfacialanim(var_1, "run");
   animscripts\shared::donotetracks("coverArrival", ::handlestartaim);
@@ -853,7 +853,7 @@ customidletransitionfunc() {
 
   self.a.movement = "stop";
   self.a.arrivaltype = self.approachtype;
-  self clearanim( % animscript_root, 0.3);
+  self clearanim(%animscript_root, 0.3);
   self.lastapproachaborttime = undefined;
 }
 

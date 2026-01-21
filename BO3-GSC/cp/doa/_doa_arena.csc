@@ -92,9 +92,7 @@ function init() {
     arena.var_dd94482c = (1 + 2) + 16;
     arena.var_ecf7ec70 = undefined;
     if(isDefined(level.var_2eda2d85)) {
-      [
-        [level.var_2eda2d85]
-      ](arena);
+      [[level.var_2eda2d85]](arena);
     }
     arena.exits = getEntArray(0, arena.name + "_doa_exit", "targetname");
     arena.startpoints["left"] = struct::get_array((arena.name + "_exit_start_") + "left");

@@ -22,11 +22,11 @@ building_fall_anim_rig() {
   level.fall_path_rig = var_3;
   var_2 thread maps\_anim::anim_single_solo(var_3, "cornered_building_fall_slide_player");
   var_2 thread maps\_anim::anim_single_solo(var_0, "cornered_building_fall_slide_player");
-  var_0 setanim( % cornered_building_fall_slide_player_l, 0.01, 0);
-  var_0 setanim( % cornered_building_fall_slide_player_r, 0.01, 0);
+  var_0 setanim(%cornered_building_fall_slide_player_l, 0.01, 0);
+  var_0 setanim(%cornered_building_fall_slide_player_r, 0.01, 0);
   var_2 thread maps\_anim::anim_single_solo(var_1, "cornered_building_fall_slide_player");
-  var_1 setanim( % cornered_building_fall_slide_player_viewleg_l, 0.01, 0);
-  var_1 setanim( % cornered_building_fall_slide_player_viewleg_r, 0.01, 0);
+  var_1 setanim(%cornered_building_fall_slide_player_viewleg_l, 0.01, 0);
+  var_1 setanim(%cornered_building_fall_slide_player_viewleg_r, 0.01, 0);
   thread input_monitor();
   thread player_play_anims(var_0, var_1);
 }
@@ -61,36 +61,36 @@ player_play_anims(var_0, var_1) {
 
   for(;;) {
     if(common_scripts\utility::flag("left_pressed")) {
-      var_0 setanim( % cornered_building_fall_slide_player_l, 1, var_2);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_l, 1, var_2);
+      var_0 setanim(%cornered_building_fall_slide_player_l, 1, var_2);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_l, 1, var_2);
       var_0 setanim(level.base_falling_hands_anim, 0.01, var_2);
       var_1 setanim(level.base_falling_legs_anim, 0.01, var_2);
-      var_0 setanim( % cornered_building_fall_slide_player_r, 0.01, var_3);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_r, 0.01, var_3);
+      var_0 setanim(%cornered_building_fall_slide_player_r, 0.01, var_3);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_r, 0.01, var_3);
       common_scripts\utility::flag_waitopen("left_pressed");
       var_0 setanim(level.base_falling_hands_anim, 1, var_3);
       var_1 setanim(level.base_falling_legs_anim, 1, var_3);
-      var_0 setanim( % cornered_building_fall_slide_player_l, 0.01, var_3);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_l, 0.01, var_3);
-      var_0 setanim( % cornered_building_fall_slide_player_r, 0.01, var_3);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_r, 0.01, var_3);
+      var_0 setanim(%cornered_building_fall_slide_player_l, 0.01, var_3);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_l, 0.01, var_3);
+      var_0 setanim(%cornered_building_fall_slide_player_r, 0.01, var_3);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_r, 0.01, var_3);
       continue;
     }
 
     if(common_scripts\utility::flag("right_pressed")) {
-      var_0 setanim( % cornered_building_fall_slide_player_r, 1, var_2);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_r, 1, var_2);
+      var_0 setanim(%cornered_building_fall_slide_player_r, 1, var_2);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_r, 1, var_2);
       var_0 setanim(level.base_falling_hands_anim, 0.01, var_2);
       var_1 setanim(level.base_falling_legs_anim, 0.01, var_2);
-      var_0 setanim( % cornered_building_fall_slide_player_l, 0.01, var_3);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_l, 0.01, var_3);
+      var_0 setanim(%cornered_building_fall_slide_player_l, 0.01, var_3);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_l, 0.01, var_3);
       common_scripts\utility::flag_waitopen("right_pressed");
       var_0 setanim(level.base_falling_hands_anim, 1, var_3);
       var_1 setanim(level.base_falling_legs_anim, 1, var_3);
-      var_0 setanim( % cornered_building_fall_slide_player_r, 0.01, var_3);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_r, 0.01, var_3);
-      var_0 setanim( % cornered_building_fall_slide_player_l, 0.01, var_3);
-      var_1 setanim( % cornered_building_fall_slide_player_viewleg_l, 0.01, var_3);
+      var_0 setanim(%cornered_building_fall_slide_player_r, 0.01, var_3);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_r, 0.01, var_3);
+      var_0 setanim(%cornered_building_fall_slide_player_l, 0.01, var_3);
+      var_1 setanim(%cornered_building_fall_slide_player_viewleg_l, 0.01, var_3);
       continue;
     }
 

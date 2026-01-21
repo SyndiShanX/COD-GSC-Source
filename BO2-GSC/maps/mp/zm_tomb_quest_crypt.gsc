@@ -68,7 +68,7 @@ chamber_disc_run() {
   self useanimtree(#animtree);
   n_wait = randomfloatrange(0.0, 5.0);
   wait(n_wait);
-  self setanim( % fxanim_zom_tomb_chamber_piece_anim);
+  self setanim(%fxanim_zom_tomb_chamber_piece_anim);
 }
 
 init_crypt_gems() {
@@ -289,20 +289,20 @@ chamber_disc_switch_spark() {
 chamber_disc_trigger_run(e_disc, e_lever, b_clockwise) {
   discs_to_rotate = array(e_disc);
   e_lever useanimtree(#animtree);
-  n_anim_time = getanimlength( % fxanim_zom_tomb_puzzle_lever_switch_anim);
+  n_anim_time = getanimlength(%fxanim_zom_tomb_puzzle_lever_switch_anim);
 
   while(true) {
     self waittill("trigger", e_triggerer);
 
     if(!flag("disc_rotation_active")) {
       flag_set("disc_rotation_active");
-      e_lever setanim( % fxanim_zom_tomb_puzzle_lever_switch_anim, 1.0, 0.0, 1.0);
+      e_lever setanim(%fxanim_zom_tomb_puzzle_lever_switch_anim, 1.0, 0.0, 1.0);
       e_lever playSound("zmb_crypt_lever");
       wait(n_anim_time * 0.5);
       e_lever thread chamber_disc_switch_spark();
       array_thread(discs_to_rotate, ::chamber_disc_rotate, b_clockwise);
       wait 1.0;
-      e_lever clearanim( % fxanim_zom_tomb_puzzle_lever_switch_anim, 0);
+      e_lever clearanim(%fxanim_zom_tomb_puzzle_lever_switch_anim, 0);
       flag_clear("disc_rotation_active");
       level notify("vo_try_puzzle_crypt", e_triggerer);
     }

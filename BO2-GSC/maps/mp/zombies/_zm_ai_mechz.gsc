@@ -734,7 +734,7 @@ mechz_stun(time) {
   while(curr_time < time) {
     self animscripted(self.origin, self.angles, "zm_stun");
     self maps\mp\animscripts\zm_shared::donotetracks("stun_anim");
-    self clearanim( % root, 0);
+    self clearanim(%root, 0);
     curr_time = curr_time + anim_time;
   }
 

@@ -22,8 +22,7 @@ main() {
   precachestring(&"SCRIPT_MISSION_SCORE");
   // ZERO DEATHS BONUS x2
   precachestring(&"SCRIPT_ZERO_DEATHS");
-  // +
-  precachestring(&"SCRIPT_PLUS");
+  // + precachestring(&"SCRIPT_PLUS");
   // TIME UP
   precachestring(&"SCRIPT_TIME_UP");
   // 1UP
@@ -1239,8 +1238,7 @@ pointPulse(amount) {
     hud_pointpulse.glowColor = (0, 0, 0);
     hud_pointpulse.glowAlpha = 0;
   } else {
-    // +
-    hud_pointpulse.label = &"SCRIPT_PLUS";
+    // + hud_pointpulse.label = &"SCRIPT_PLUS";
     hud_pointpulse.color = (1, 1, 1);
     hud_pointpulse.glowColor = level.color_cool_green_glow;
     hud_pointpulse.glowAlpha = 1;
@@ -1313,8 +1311,7 @@ arcadeMode_add_points_for_individual_kill(mod_array, mod, kills) {
   if( kills > 1 )
   {
   	// multi kills get a bonus depending on weapon
-  	thread arcadeMode_add_points( mod_array[ "origin" ], true, mod,
-  	base_points + base_points * kills * level.arcadeMode_weaponMultiplier[ mod_array[ "type" ] ] );
+  	thread arcadeMode_add_points( mod_array[ "origin" ], true, mod, base_points + base_points * kills * level.arcadeMode_weaponMultiplier[ mod_array[ "type" ] ] );
   	
   	if( gettime() > level.arcadeMode_last_multi_kill_sound )
   	{
@@ -1724,8 +1721,7 @@ arcadeMode_ends() {
     dvar = "s18";
 
     // we update the full score after each level and when they lose.
-    // this is good because if they lose power or something in the middle of the game,
-    // at least they keep what they had up to that point.
+    // this is good because if they lose power or something in the middle of the game, // at least they keep what they had up to that point.
 
     oldVal = getdvarint(dvar);
     if(combined_score > oldVal) {

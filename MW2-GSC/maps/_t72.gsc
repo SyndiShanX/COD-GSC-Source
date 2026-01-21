@@ -14,9 +14,8 @@ main(model, type) {
   build_deathmodel("vehicle_t72_tank_woodland", "vehicle_t72_tank_d_woodland_body", 3.7);
   build_deathmodel("vehicle_t72_tank_woodland_low", "vehicle_t72_tank_d_woodland_body", 3.7);
   build_shoot_shock("tankblast");
-  build_drive( % abrams_movement, % abrams_movement_backwards, 10);
-  //	build_deathfx( <type> , 			<effect> , 				<tag> , 				<sound> , 				<bEffectLooping> 		<delay> , 		<bSoundlooping> , 	<waitDelay> , <stayontag> , <notifyString> )"
-  //	build_deathfx( "explosions/grenadeexp_default",		 		"tag_engine_left", 		"explo_metal_rand",			undefined,			undefined,		undefined,		0);
+  build_drive(%abrams_movement, %abrams_movement_backwards, 10);
+  //	build_deathfx( <type> , 			<effect> , 				<tag> , 				<sound> , 				<bEffectLooping> 		<delay> , 		<bSoundlooping> , 	<waitDelay> , <stayontag> , <notifyString> )"//	build_deathfx( "explosions/grenadeexp_default",		 		"tag_engine_left", 		"explo_metal_rand",			undefined,			undefined,		undefined,		0);
   //	build_deathfx( "fire/firelp_large_pm",		 				"tag_engine_left", 		undefined,					undefined,			undefined,		undefined,		0);
   //	build_deathfx( "explosions/tank_ammo_breach",				"tag_deathfx",			undefined,					undefined,			undefined,		undefined,		0 );
   build_deathfx("explosions/vehicle_explosion_t72", "tag_deathfx", "exp_armor_vehicle", undefined, undefined, undefined, 0);
@@ -60,10 +59,7 @@ include,vehicle_t72_tank_t72
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_t72_tank"
-default:"vehicletype" "t72"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_t72_tank"default:"vehicletype" "t72"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_t72_tank_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -75,10 +71,7 @@ include,vehicle_t72_tank_low_t72
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_t72_tank_low"
-default:"vehicletype" "t72"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_t72_tank_low"default:"vehicletype" "t72"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_t72_tank_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -90,10 +83,7 @@ include,vehicle_t72_tank_woodland_t72
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_t72_tank_woodland"
-default:"vehicletype" "t72"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_t72_tank_woodland"default:"vehicletype" "t72"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_t72_tank_woodland_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -105,7 +95,5 @@ include,vehicle_t72_tank_woodland_low
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_t72_tank_woodland_low"
-default:"vehicletype" "t72"
-default:"script_team" "allies"
+defaultmdl="vehicle_t72_tank_woodland_low"default:"vehicletype" "t72"default:"script_team" "allies"
 */

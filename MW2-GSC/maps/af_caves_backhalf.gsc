@@ -2123,8 +2123,7 @@ obj_overlook_to_skylight() {
 }
 
 obj_breach() {
-  //"breach the control room"
-  flag_wait("obj_breach_given");
+  //"breach the control room"flag_wait("obj_breach_given");
 
   objective_number = 6;
 
@@ -2157,8 +2156,7 @@ obj_breach() {
 }
 
 obj_door_controls() {
-  //"override the door controls"
-  flag_wait("obj_door_controls_given");
+  //"override the door controls"flag_wait("obj_door_controls_given");
 
   objective_number = 7;
 
@@ -2175,8 +2173,7 @@ obj_door_controls() {
 }
 
 obj_escape() {
-  //"escape from the cave"
-  flag_wait("obj_escape_given");
+  //"escape from the cave"flag_wait("obj_escape_given");
 
   objective_number = 8;
 
@@ -2193,8 +2190,7 @@ obj_escape() {
 }
 
 obj_level_end() {
-  //"escape from the cave"
-  flag_wait("obj_level_end_given");
+  //"escape from the cave"flag_wait("obj_level_end_given");
 
   objective_number = 6;
 
@@ -2209,15 +2205,13 @@ obj_level_end() {
 }
 
 obj_hummer() {
-  //"mount the humvee turret"
-  flag_wait("obj_hummer_given");
+  //"mount the humvee turret"flag_wait("obj_hummer_given");
 
   flag_wait("obj_hummer_complete");
 }
 
 obj_hummer_gunner() {
-  //"eliminate all enemy resistance"
-  flag_wait("obj_hummer_gunner_given");
+  //"eliminate all enemy resistance"flag_wait("obj_hummer_gunner_given");
 
   flag_wait("obj_hummer_gunner_complete");
 }

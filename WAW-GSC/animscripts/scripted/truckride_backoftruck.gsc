@@ -66,7 +66,7 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     anim_semiautofire = % crouch_shoot;
     anim_boltfire = % crouch_shoot;
   }
-  self setanimknob( % shoot, 1, .15, 1);
+  self setanimknob(%shoot, 1, .15, 1);
   if(animscripts\weaponList::usingAutomaticWeapon()) {
     self animscripts\face::SetIdleFace(anim.autofireface);
     self setflaggedanimknob("animdone", anim_autofire, 1, .15, 0);
@@ -130,6 +130,6 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     quickTime = animscripts\weaponList::waitAfterShot();
     wait quickTime;
   }
-  self setanim( % shoot, 0.0, 0.2, 1);
+  self setanim(%shoot, 0.0, 0.2, 1);
   return 1;
 }

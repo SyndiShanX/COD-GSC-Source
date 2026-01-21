@@ -206,11 +206,11 @@ exploder_script_model_anims() {
 #using_animtree("vehicles");
 
 shoot_m1a1_anim() {
-  self clearanim( % abrams_shoot_kick, 0);
-  self setanimrestart( % abrams_shoot_kick);
+  self clearanim(%abrams_shoot_kick, 0);
+  self setanimrestart(%abrams_shoot_kick);
 }
 
 shoot_t72_anim() {
-  self clearanim( % t72_shoot_kick, 0);
-  self setanimrestart( % t72_shoot_kick);
+  self clearanim(%t72_shoot_kick, 0);
+  self setanimrestart(%t72_shoot_kick);
 }

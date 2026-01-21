@@ -15,9 +15,7 @@ mus_init() {
   level._audio.music.curr_cue_name = "";
   level._audio.music.prev_cue_name = "";
   level._audio.music.enable_auto_mix = 0;
-  level._audio.music.env_threat_to_vol = [[0.0, 0.5],
-    [0.9, 1.0],
-    [1.0, 1.0]];
+  level._audio.music.env_threat_to_vol = [[0.0, 0.5], [0.9, 1.0], [1.0, 1.0]];
   thread musx_monitor_game_vars();
 }
 

@@ -539,8 +539,7 @@ drive_turning_anims(vehicle) {
       vehicle ClearAnim(vehicle getanim(oldAnim + "L"), 0);
       vehicle ClearAnim(vehicle getanim(oldAnim + "R"), 0);
 
-      // set the time on the new direction anim so it doesn't start animating from the beginning,
-      // since the previous anim probably wasn't at the end
+      // set the time on the new direction anim so it doesn't start animating from the beginning, // since the previous anim probably wasn't at the end
       vehicle SetAnimLimited(vehicle getanim(newAnim + "L"), 1, BLEND_TIME, estimatedAnimRate["L"]);
       vehicle SetAnimLimited(vehicle getanim(newAnim + "R"), 1, BLEND_TIME, estimatedAnimRate["R"]);
 

@@ -31,12 +31,7 @@ do_explosive_gib(iDamage, sMeansOfDeath, weapon, sHitLoc, vAttackerOrigin) {
     return false;
   if(weapon == "molotov_mp")
     return false;
-  if(sMeansOfDeath == "MOD_EXPLOSIVE" ||
-    sMeansOfDeath == "MOD_GRENADE" ||
-    sMeansOfDeath == "MOD_GRENADE_SPLASH" ||
-    sMeansOfDeath == "MOD_PROJECTILE" ||
-    sMeansOfDeath == "MOD_PROJECTILE_SPLASH" ||
-    sMeansOfDeath == "MOD_SUICIDE") {
+  if(sMeansOfDeath == "MOD_EXPLOSIVE" || sMeansOfDeath == "MOD_GRENADE" || sMeansOfDeath == "MOD_GRENADE_SPLASH" || sMeansOfDeath == "MOD_PROJECTILE" || sMeansOfDeath == "MOD_PROJECTILE_SPLASH" || sMeansOfDeath == "MOD_SUICIDE") {
     if(iDamage >= self.maxhealth) {
       return true;
     }

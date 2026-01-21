@@ -171,9 +171,7 @@ function riotshield_melee_juke(weapon) {
     shield_damage = 0;
     enemies = riotshield_get_juke_enemies_in_range();
     if(isDefined(level.riotshield_melee_juke_callback) && isfunctionptr(level.riotshield_melee_juke_callback)) {
-      [
-        [level.riotshield_melee_juke_callback]
-      ](enemies);
+      [[level.riotshield_melee_juke_callback]](enemies);
     }
     foreach(zombie in enemies) {
       self playSound("zmb_rocketshield_imp");

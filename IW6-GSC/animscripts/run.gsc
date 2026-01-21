@@ -101,20 +101,20 @@ initrunngun() {
   if(!isDefined(self.runngun)) {
     self notify("stop_move_anim_update");
     self.update_move_anim_type = undefined;
-    self clearanim( % combatrun_backward, 0.2);
-    self clearanim( % combatrun_right, 0.2);
-    self clearanim( % combatrun_left, 0.2);
-    self clearanim( % w_aim_2, 0.2);
-    self clearanim( % w_aim_4, 0.2);
-    self clearanim( % w_aim_6, 0.2);
-    self clearanim( % w_aim_8, 0.2);
+    self clearanim(%combatrun_backward, 0.2);
+    self clearanim(%combatrun_right, 0.2);
+    self clearanim(%combatrun_left, 0.2);
+    self clearanim(%w_aim_2, 0.2);
+    self clearanim(%w_aim_4, 0.2);
+    self clearanim(%w_aim_6, 0.2);
+    self clearanim(%w_aim_8, 0.2);
     self.runngun = 1;
   }
 }
 
 stoprunngun() {
   if(isDefined(self.runngun)) {
-    self clearanim( % run_n_gun, 0.2);
+    self clearanim(%run_n_gun, 0.2);
     self.runngun = undefined;
   }
 
@@ -136,7 +136,7 @@ runngun(var_0) {
   var_6 = self.runngunincrement;
 
   if(!var_0 || squared(var_1) > var_4 * var_4) {
-    self clearanim( % add_fire, 0);
+    self clearanim(%add_fire, 0);
 
     if(squared(self.runngunweight) < var_6 * var_6) {
       self.runngunweight = 0;
@@ -182,7 +182,7 @@ runngun(var_0) {
     }
   }
 
-  self setflaggedanimknob("runanim", % run_n_gun, 1, 0.3, 0.8);
+  self setflaggedanimknob("runanim", %run_n_gun, 1, 0.3, 0.8);
   run_playfacialanim(undefined);
   self.a.allowedpartialreloadontheruntime = gettime() + 500;
 
@@ -323,7 +323,7 @@ getmoveplaybackrate() {
 
 standrun_combatnormal() {
   var_0 = getmoveplaybackrate();
-  self setanimknob( % combatrun, 1.0, 0.5, var_0);
+  self setanimknob(%combatrun, 1.0, 0.5, var_0);
   var_1 = 0;
   var_2 = isDefined(self.requestreacttobullet) && gettime() - self.requestreacttobullet < 100;
 
@@ -373,7 +373,7 @@ standrun_combatnormal() {
     if(move_checkstairstransition()) {
       return;
     }
-    self clearanim( % stair_transitions, 0.1);
+    self clearanim(%stair_transitions, 0.1);
 
     if(shouldsprintforvariation())
       var_4 = animscripts\utility::getmoveanim("sprint_short");
@@ -439,7 +439,7 @@ faceenemyaimtracking() {
     }
   }
 
-  animscripts\track::trackloop( % w_aim_2, % w_aim_4, % w_aim_6, % w_aim_8, var_0);
+  animscripts\track::trackloop(%w_aim_2, %w_aim_4, %w_aim_6, %w_aim_8, var_0);
 }
 
 endfaceenemyaimtracking() {
@@ -595,7 +595,7 @@ move_checkstairstransition() {
 
   self notify("stop_move_anim_update");
   self.update_move_anim_type = undefined;
-  self setflaggedanimknoballrestart("runanim", var_1, % body, 1, 0.1, self.moveplaybackrate);
+  self setflaggedanimknoballrestart("runanim", var_1, %body, 1, 0.1, self.moveplaybackrate);
   run_playfacialanim(var_1);
   animscripts\shared::donotetracks("runanim");
   return 1;
@@ -603,14 +603,14 @@ move_checkstairstransition() {
 
 standrun_noncombatnormal() {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
+  self clearanim(%combatrun, 0.6);
   var_0 = getmoveplaybackrate();
 
   if(move_checkstairstransition()) {
     return;
   }
-  self clearanim( % stair_transitions, 0.1);
-  self setanimknoball( % combatrun, % body, 1, 0.2, var_0);
+  self clearanim(%stair_transitions, 0.1);
+  self setanimknoball(%combatrun, %body, 1, 0.2, var_0);
 
   if(shouldsprint())
     var_1 = getsprintanim();
@@ -639,7 +639,7 @@ standrun_noncombatnormal() {
 
 crouchrun_runoverride() {
   self endon("movemode");
-  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, % body, 1, 0.4, self.moveplaybackrate);
+  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, %body, 1, 0.4, self.moveplaybackrate);
   run_playfacialanim(self.crouchrun_combatanim);
   animscripts\shared::donotetracks("runanim");
 }
@@ -649,7 +649,7 @@ crouchrun_runnormal() {
   var_0 = getcrouchrunanim();
   self setanimknob(var_0, 1, 0.4);
   thread updatemoveanimweights("crouchrun", var_0, animscripts\utility::lookupanim("run", "crouch_b"), animscripts\utility::lookupanim("run", "crouch_l"), animscripts\utility::lookupanim("run", "crouch_r"));
-  self setflaggedanimknoball("runanim", % crouchrun, % body, 1, 0.2, self.moveplaybackrate);
+  self setflaggedanimknoball("runanim", %crouchrun, %body, 1, 0.2, self.moveplaybackrate);
   run_playfacialanim(undefined);
   animscripts\notetracks::donotetracksfortime(0.2, "runanim");
 }
@@ -709,7 +709,7 @@ standrun_reloadinternal() {
   if(isarray(var_1))
     var_1 = var_1[randomint(var_1.size)];
 
-  self setflaggedanimknoballrestart(var_0, var_1, % body, 1, 0.25);
+  self setflaggedanimknoballrestart(var_0, var_1, %body, 1, 0.25);
   run_playfacialanim(var_1);
   self.update_move_front_bias = 1;
   setmovenonforwardanims(animscripts\utility::getmoveanim("move_b"), animscripts\utility::getmoveanim("move_l"), animscripts\utility::getmoveanim("move_r"));
@@ -719,7 +719,7 @@ standrun_reloadinternal() {
 }
 
 runloopisnearbeginning() {
-  var_0 = self getanimtime( % walk_and_run_loops);
+  var_0 = self getanimtime(%walk_and_run_loops);
   var_1 = getanimlength(animscripts\utility::lookupanim("run", "straight")) / 3.0;
   var_0 = var_0 * 3.0;
 
@@ -747,7 +747,7 @@ setmovenonforwardanims(var_0, var_1, var_2, var_3) {
 }
 
 setcombatstandmoveanimweights(var_0) {
-  updatemoveanimweights(var_0, % combatrun_forward, % combatrun_backward, % combatrun_left, % combatrun_right);
+  updatemoveanimweights(var_0, %combatrun_forward, %combatrun_backward, %combatrun_left, %combatrun_right);
 }
 
 updatemoveanimweights(var_0, var_1, var_2, var_3, var_4) {
@@ -841,7 +841,7 @@ standrun_checkchangeweapon() {
 
 shotgunswitchstandruninternal(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("movemode");
-  self setflaggedanimknoballrestart(var_0, var_1, % body, 1, 0.25);
+  self setflaggedanimknoballrestart(var_0, var_1, %body, 1, 0.25);
   run_playfacialanim(var_1);
   self.update_move_front_bias = 1;
   setmovenonforwardanims(animscripts\utility::getmoveanim("move_b"), animscripts\utility::getmoveanim("move_l"), animscripts\utility::getmoveanim("move_r"));
@@ -881,5 +881,5 @@ run_playfacialanim(var_0) {
 
 run_clearfacialanim() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

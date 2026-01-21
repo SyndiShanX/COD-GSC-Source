@@ -78,7 +78,7 @@ func_103CA() {
   var_1 = [];
   var_1["left2right"] = getanimlength(scripts\anim\utility::func_1F64("left2right"));
   var_1["right2left"] = getanimlength(scripts\anim\utility::func_1F64("right2left"));
-  self func_82A5( % sm_turn, % body, 1, 0);
+  self func_82A5(%sm_turn, %body, 1, 0);
   self give_attacker_kill_rewards(scripts\anim\utility::func_1F64("drive"), 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64(var_0), 1, 0);
   self func_82B0(scripts\anim\utility::func_1F64(var_0), 0.5);
@@ -114,11 +114,11 @@ func_103CA() {
 func_103CC() {
   self endon("death");
   self endon("killanimscript");
-  self func_82A5(scripts\anim\utility::func_1F64("hide"), % body, 1, 0);
+  self func_82A5(scripts\anim\utility::func_1F64("hide"), %body, 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64("drive"), 1, 0);
   for(;;) {
     var_0 = scripts\sp\vehicle_code::func_12E33(self.var_E500);
-    self func_82AC( % sm_lean, abs(var_0), 0.05);
+    self func_82AC(%sm_lean, abs(var_0), 0.05);
     if(var_0 >= 0) {
       self func_82A9(scripts\anim\utility::func_1F64("lean_right"), 1, 0.05);
     } else {
@@ -134,7 +134,7 @@ func_103CB() {
   self endon("killanimscript");
   var_0 = 0.05;
   var_1 = 0;
-  self func_82A5( % sm_aiming, % body, 1, 0);
+  self func_82A5(%sm_aiming, %body, 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64("idle"), 1, 0);
   for(;;) {
     if(self.var_4B71 != "none") {
@@ -173,7 +173,7 @@ func_103CD() {
   self endon("death");
   self endon("killanimscript");
   var_0 = 0.05;
-  self func_82A5( % sm_aiming, % body, 1, 0);
+  self func_82A5(%sm_aiming, %body, 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64("idle"), 1, 0);
   for(;;) {
     if(self.var_4B71 != "none") {
@@ -275,7 +275,7 @@ func_103C9(var_0) {
 
 func_103D7() {
   self notify("want_shoot_while_driving");
-  self give_attacker_kill_rewards( % sm_add_fire, 1, 0.2);
+  self give_attacker_kill_rewards(%sm_add_fire, 1, 0.2);
   if(isDefined(self.var_FE91)) {
     return;
   }
@@ -291,7 +291,7 @@ func_103D8() {
   wait(0.05);
   self notify("end_shoot_while_driving");
   self.var_FE91 = undefined;
-  self clearanim( % sm_add_fire, 0.2);
+  self clearanim(%sm_add_fire, 0.2);
 }
 
 func_103C3() {
@@ -397,19 +397,19 @@ func_103D2() {
   self endon("snowmobile_event_occurred");
   self.var_10FB2 = 1;
   self waittill("start_blending_reload");
-  self give_attacker_kill_rewards( % sm_aiming, 0, 0.25);
+  self give_attacker_kill_rewards(%sm_aiming, 0, 0.25);
   self func_82EA("gun_down", scripts\anim\utility::func_1F64("gun_down"), 1, 0.25);
   scripts\anim\shared::donotetracks("gun_down");
   self clearanim(scripts\anim\utility::func_1F64("gun_down"), 0);
-  self func_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), % body, 1, 0.25);
+  self func_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), %body, 1, 0.25);
   scripts\anim\shared::donotetracks("reload_anim");
-  self clearanim( % sm_reload, 0.2);
+  self clearanim(%sm_reload, 0.2);
   self func_82EA("gun_up", scripts\anim\utility::func_1F64("gun_up"), 1, 0.25);
   self.var_86EC = 1;
   scripts\anim\shared::donotetracks("gun_up", ::func_103DC);
   self.var_10FB2 = undefined;
-  self clearanim( % sm_reload, 0.1);
-  self give_attacker_kill_rewards( % sm_aiming, 1, 0.1);
+  self clearanim(%sm_reload, 0.1);
+  self give_attacker_kill_rewards(%sm_aiming, 1, 0.1);
   if(isDefined(self.var_86EC)) {
     self.var_86EC = undefined;
     scripts\anim\shared::donotetracks("gun_up", ::func_103DB);
@@ -480,8 +480,8 @@ func_103D9() {
     var_2 = var_3;
     var_11 = min(max(var_3, 0), 90) / 90 * self.a.var_1A4B;
     var_12 = min(max(0 - var_3, 0), 90) / 90 * self.a.var_1A4B;
-    self func_82AC( % sm_aim_4, var_11, var_0);
-    self func_82AC( % sm_aim_6, var_12, var_0);
+    self func_82AC(%sm_aim_4, var_11, var_0);
+    self func_82AC(%sm_aim_6, var_12, var_0);
     wait(0.05);
   }
 }
@@ -554,11 +554,11 @@ func_103DA() {
     var_12 = max(90 - abs(var_7), 0) / 90 * self.a.var_1A4B;
     var_13 = min(max(0 - var_7, 0), 90) / 90 * self.a.var_1A4B;
     var_14 = max(-90 - var_7, 0) / 90 * self.a.var_1A4B;
-    self func_82AC( % sm_aim_1, var_10, var_0);
-    self func_82AC( % sm_aim_4_delta, var_11, var_0);
-    self func_82AC( % sm_aim_5_delta, var_12, var_0);
-    self func_82AC( % sm_aim_6_delta, var_13, var_0);
-    self func_82AC( % sm_aim_3, var_14, var_0);
+    self func_82AC(%sm_aim_1, var_10, var_0);
+    self func_82AC(%sm_aim_4_delta, var_11, var_0);
+    self func_82AC(%sm_aim_5_delta, var_12, var_0);
+    self func_82AC(%sm_aim_6_delta, var_13, var_0);
+    self func_82AC(%sm_aim_3, var_14, var_0);
     wait(0.05);
   }
 }

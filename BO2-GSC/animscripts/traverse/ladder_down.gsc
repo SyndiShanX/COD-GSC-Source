@@ -24,10 +24,10 @@ main() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
-  self setflaggedanimknoballrestart("climbanim", animarray("ladder_climbon", "move"), % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("climbanim", animarray("ladder_climbon", "move"), %body, 1, 0.1, 1);
   self animscripts\shared::donotetracks("climbanim");
   climbanim = animarray("ladder_climbdown", "move");
-  self setflaggedanimknoballrestart("climbanim", climbanim, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("climbanim", climbanim, %body, 1, 0.1, 1);
   cycledelta = getmovedelta(climbanim, 0, 1);
   climbrate = cycledelta[2] / getanimlength(climbanim);
   climbingtime = (endpos[2] - self.origin[2]) / climbrate;

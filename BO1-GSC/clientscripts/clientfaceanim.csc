@@ -38,14 +38,14 @@ doFace(localClientNum) {
 #using_animtree("multiplayer");
 doFace_player(localClientNum) {
   level.face_anim_tree = "multiplayer";
-  self setFaceRoot( % head);
-  self buildFaceState("face_casual", true, -1, 0, "basestate", % pf_casual_idle);
-  self buildFaceState("face_alert", true, -1, 0, "basestate", % pf_alert_idle);
-  self buildFaceState("face_shoot", true, 1, 1, "eventstate", % pf_firing);
-  self buildFaceState("face_shoot_single", true, 1, 1, "eventstate", % pf_firing);
-  self buildFaceState("face_melee", true, 2, 1, "eventstate", % pf_melee);
-  self buildFaceState("face_pain", false, -1, 2, "eventstate", % pf_pain);
-  self buildFaceState("face_death", false, -1, 2, "exitstate", % pf_death);
+  self setFaceRoot(%head);
+  self buildFaceState("face_casual", true, -1, 0, "basestate", %pf_casual_idle);
+  self buildFaceState("face_alert", true, -1, 0, "basestate", %pf_alert_idle);
+  self buildFaceState("face_shoot", true, 1, 1, "eventstate", %pf_firing);
+  self buildFaceState("face_shoot_single", true, 1, 1, "eventstate", %pf_firing);
+  self buildFaceState("face_melee", true, 2, 1, "eventstate", %pf_melee);
+  self buildFaceState("face_pain", false, -1, 2, "eventstate", %pf_pain);
+  self buildFaceState("face_death", false, -1, 2, "exitstate", %pf_death);
   self buildFaceState("face_advance", false, -1, 3, "nullstate", undefined);
   PrintLn("Starting Client Face Anims");
   self thread processFaceEvents(localClientNum);

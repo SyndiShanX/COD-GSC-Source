@@ -233,16 +233,12 @@ assignawards() {
     var_7 = level.awards[var_8].var2;
 
     if(isDefined(var_6) && isDefined(var_7)) {
-      [
-        [var_5]
-      ](var_8, var_6, var_7);
+      [[var_5]](var_8, var_6, var_7);
       continue;
     }
 
     if(isDefined(var_6)) {
-      [
-        [var_5]
-      ](var_8, var_6);
+      [[var_5]](var_8, var_6);
       continue;
     }
 

@@ -462,8 +462,7 @@ playscriptedmeleeanimations() {
   self thread processinterrupteddeath();
   opponent thread processinterrupteddeath();
   self waittillmatch({
-    #notetrack: "end"
-  }, # "aivsaimeleewinner");
+    #notetrack: "end"}, # "aivsaimeleewinner");
   self.fixedlinkyawonly = 0;
   aiutility::cleanupchargemeleeattack(self);
 

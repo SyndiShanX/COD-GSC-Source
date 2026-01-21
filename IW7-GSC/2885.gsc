@@ -22,9 +22,7 @@ func_B23E() {
     scripts\engine\utility::delaythread(0.05, scripts\engine\utility::flag_set, "introscreen_complete");
   } else {
     if(isDefined(level.var_9AF3.var_4C88)) {
-      [
-        [level.var_9AF3.var_4C88]
-      ]();
+      [[level.var_9AF3.var_4C88]]();
       return;
     }
 

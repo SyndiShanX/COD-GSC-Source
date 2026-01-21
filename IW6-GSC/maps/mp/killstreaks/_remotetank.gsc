@@ -146,9 +146,7 @@ removeWeapons() {
 }
 
 restoreWeapons() {
-  if(!isDefined(self.restoreWeaponClipAmmo) ||
-    !isDefined(self.restoreWeaponStockAmmo) ||
-    !isDefined(self.weaponsToRestore)) {
+  if(!isDefined(self.restoreWeaponClipAmmo) || !isDefined(self.restoreWeaponStockAmmo) || !isDefined(self.weaponsToRestore)) {
     return;
   }
   altWeapons = [];
@@ -251,9 +249,7 @@ setCarryingTank(tankForPlayer, allowCancel) {
       }
       if(level.console) {
         killstreakWeapon = getKillstreakWeapon(level.tankSettings[tankForPlayer.tankType].streakName);
-        if(isDefined(self.killstreakIndexWeapon) &&
-          killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) &&
-          !(self GetWeaponsListItems()).size) {
+        if(isDefined(self.killstreakIndexWeapon) && killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) && !(self GetWeaponsListItems()).size) {
           self _giveWeapon(killstreakWeapon, 0);
           self _setActionSlot(4, "weapon", killstreakWeapon);
         }
@@ -932,9 +928,7 @@ tank_turret_handleDamage() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    if(isDefined(self.specialDamageCallback) &&
-      isDefined(self.tank) &&
-      (!IsExplosiveDamageMOD(meansOfDeath) || (isDefined(weapon) && IsExplosiveDamageMOD(meansOfDeath) && (weapon == "stealth_bomb_mp" || weapon == "artillery_mp"))))
+    if(isDefined(self.specialDamageCallback) && isDefined(self.tank) && (!IsExplosiveDamageMOD(meansOfDeath) || (isDefined(weapon) && IsExplosiveDamageMOD(meansOfDeath) && (weapon == "stealth_bomb_mp" || weapon == "artillery_mp"))))
       self.tank[[self.specialDamageCallback]](undefined, attacker, damage, iDFlags, meansOfDeath, weapon, point, direction_vec, undefined, undefined, modelName, partName);
   }
 }

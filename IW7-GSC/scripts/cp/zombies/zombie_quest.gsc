@@ -27,9 +27,7 @@ start_quest_line(var_0) {
     level.var_13F1B[var_0] = var_4;
     [[var_3.init_func]]();
     if(func_FF37(var_0, var_4)) {
-      [
-        [var_3.var_DB5D]
-      ]();
+      [[var_3.var_DB5D]]();
     }
 
     [[var_3.var_446D]]();
@@ -66,20 +64,14 @@ add_devgui_entries(var_0, var_1, var_2, var_3) {
 
   if(level.script == "cp_town") {
     if(var_1 == 0) {
-      var_4 = "devgui_cmd \"Town:5\Quests\" + var_2 + " - " + var_0 + "\
-      Step " + var_1 + 1 + " - " + var_3 + "\
-      0 - Complete This Step\" \"set scr_complete_quest_step " + var_0 + "_" + var_1 + "\" \n";
+      var_4 = "devgui_cmd \"Town:5\Quests\" + var_2 + " - " + var_0 + "\Step " + var_1 + 1 + " - " + var_3 + "\0 - Complete This Step\" \"set scr_complete_quest_step " + var_0 + "_" + var_1 + "\" \n";
       addentrytodevgui(var_4);
       return;
     }
 
-    var_4 = "devgui_cmd \"Town:5\Quests\" + var_3 + " - " + var_1 + "\
-    Step " + var_2 + 1 + " - " + var_4 + "\
-    0 - Jump To This Step\" \"set scr_complete_quest_step " + var_1 + "_" + var_2 - 1 + "\" \n";
+    var_4 = "devgui_cmd \"Town:5\Quests\" + var_3 + " - " + var_1 + "\Step " + var_2 + 1 + " - " + var_4 + "\0 - Jump To This Step\" \"set scr_complete_quest_step " + var_1 + "_" + var_2 - 1 + "\" \n";
     addentrytodevgui(var_4);
-    var_4 = "devgui_cmd \"Town:5\Quests\" + var_2 + " - " + var_0 + "\
-    Step " + var_1 + 1 + " - " + var_3 + "\
-    1 - Complete This Step\" \"set scr_complete_quest_step " + var_0 + "_" + var_1 + "\" \n";
+    var_4 = "devgui_cmd \"Town:5\Quests\" + var_2 + " - " + var_0 + "\Step " + var_1 + 1 + " - " + var_3 + "\1 - Complete This Step\" \"set scr_complete_quest_step " + var_0 + "_" + var_1 + "\" \n";
     addentrytodevgui(var_4);
   }
 }

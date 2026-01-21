@@ -14,7 +14,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");
-  maps\_vehicle::build_drive( % sniper_escape_ch46_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%sniper_escape_ch46_rotors, undefined, 0);
   maps\_vehicle::build_light(var_2, "cockpit_red_cargo_1", "tag_fx_light_cargo02", "vfx\lights\airlift\seaknight_light_back_red", "back", 0.0);
   maps\_vehicle::build_light(var_2, "cockpit_L_godray1", "tag_fx_L_window_1", "vfx\lights\airlift\seaknight_godray", "interior", 0.0);
   maps\_vehicle::build_light(var_2, "cockpit_L_godray2", "tag_fx_L_window_2", "vfx\lights\airlift\seaknight_godray", "interior", 0.0);

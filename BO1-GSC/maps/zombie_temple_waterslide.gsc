@@ -284,8 +284,7 @@ slide_anim_change_throttle() {
     }
     array_zombies_allowed_to_switch = level.zombies_slide_anim_change;
     for(i = 0; i < array_zombies_allowed_to_switch.size; i++) {
-      if(isDefined(array_zombies_allowed_to_switch[i]) &&
-        IsAlive(array_zombies_allowed_to_switch[i])) {
+      if(isDefined(array_zombies_allowed_to_switch[i]) && IsAlive(array_zombies_allowed_to_switch[i])) {
         array_zombies_allowed_to_switch[i] ent_flag_set("slide_anim_change");
       }
       if(i >= int_max_num_zombies_per_frame) {

@@ -524,9 +524,7 @@ clifftop. Play this on an infinite loop, ten seconds silence between repeats.
 
 2. cliffhanger_stealth_busted - kicks in when stealth is broken, play on a
 loop, three seconds between repeats. Fade it out over five seconds once stealth
-is restored, and go back to looping "cliffhanger_stealth"
-
-3. cliffhanger_satellite - when the player passes a trigger situated after the
+is restored, and go back to looping "cliffhanger_stealth"3. cliffhanger_satellite - when the player passes a trigger situated after the
 first hangar (just past the windows looking at the welders), fade out any
 currently playing music over five seconds. Then play this track off a trigger
 in the doorway of the satellite hangar, once.
@@ -536,8 +534,7 @@ seconds, three seconds before the hangar door shadows open. Then start this
 track exactly when the hangar door shadows start to part. Stop this track when
 the first explosion goes off.
 
-5. cliffhanger_escape - play this as soon as slow motion ends at the hangar,
-Price should shout "Let's go!" as soon as this track is started.
+5. cliffhanger_escape - play this as soon as slow motion ends at the hangar, Price should shout "Let's go!" as soon as this track is started.
 
 */
 
@@ -1048,8 +1045,8 @@ clifftop_aim_thread()
 
 	guy.ref_node.origin = guy.origin;
 
-	ai1 = get_living_ai_array( "patrollers_1", "script_noteworthy" );
-	ai2 = get_living_ai_array( "patrollers_2", "script_noteworthy" );
+	ai1 = get_living_ai_array("patrollers_1", "script_noteworthy" );
+	ai2 = get_living_ai_array("patrollers_2", "script_noteworthy" );
 
 	if( ai1.size )
 	{
@@ -2720,10 +2717,7 @@ dialog_unsilenced_weapons() {
   while(1) {
     wait 1;
     weap = level.player GetCurrentWeapon();
-    if((weap != level.motiontrackergun_off) &&
-      (weap != level.motiontrackergun_on) &&
-      (weap != level.silenced_sidearm) &&
-      (weap != "none")) // ladders etc
+    if((weap != level.motiontrackergun_off) && (weap != level.motiontrackergun_on) && (weap != level.silenced_sidearm) && (weap != "none")) // ladders etc
       break;
   }
 
@@ -2754,8 +2748,7 @@ dialog_unsilenced_weapons() {
 }
 
 dialog_pretty_sneaky() {
-  //No kills, no alerts. Impressive Soap."
-  level endon("player_killed_someone");
+  //No kills, no alerts. Impressive Soap."level endon("player_killed_someone");
   level endon("_stealth_spotted");
   level endon("someone_became_alert");
   flag_wait("base_c4_planted");
@@ -4240,8 +4233,7 @@ price_talks_about_compromised() {
   level.petrov = GetEnt("petrov_org", "targetname");
   level.petrov.animname = "price";
 
-  // "Soap, I've been compromised! Keep a low profile and hold your fire."
-  level.price dialogue_queue("compromised");
+  // "Soap, I've been compromised! Keep a low profile and hold your fire."level.price dialogue_queue("compromised");
 
   // "This is major petrov! Come out with your hands up!
   level.petrov dialogue_queue("petrov");
@@ -4256,8 +4248,7 @@ price_talks_about_compromised() {
   petrov_optional_encouragement_lines();
 
   if(flag("player_can_see_capture")) {
-    // "You have five seconds to comply!"
-    level.petrov dialogue_queue("fiveseconds");
+    // "You have five seconds to comply!"level.petrov dialogue_queue("fiveseconds");
   }
 
   thread price_tells_you_plan_b();

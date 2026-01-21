@@ -30,13 +30,13 @@ main() {
   self setup_cover_prone();
   self.coverNode = self.node;
   self OrientMode("face angle", self.coverNode.angles[1]);
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
   if(self.a.pose != "prone")
     self transitionTo("prone");
   else
     self EnterProneWrapper(0);
   self thread idleThread();
-  self setAnimKnobAll( % prone_aim_5, % body, 1, 0.1, 1);
+  self setAnimKnobAll(%prone_aim_5, %body, 1, 0.1, 1);
   self OrientMode("face angle", self.coverNode.angles[1]);
   self animmode("zonly_physics");
   self proneCombatMainLoop();
@@ -55,7 +55,7 @@ idleThread() {
 }
 
 UpdateProneWrapper(time) {
-  self UpdateProne( % prone_legs_up, % prone_legs_down, 1, time, 1);
+  self UpdateProne(%prone_legs_up, %prone_legs_down, 1, time, 1);
 }
 
 proneCombatMainLoop() {
@@ -99,7 +99,7 @@ proneCombatMainLoop() {
     if(aimedAtShootEntOrPos() && gettime() >= nextShootTime) {
       shootUntilShootBehaviorChange();
       self flamethrower_stop_shoot();
-      self clearAnim( % add_fire, .2);
+      self clearAnim(%add_fire, .2);
       continue;
     }
     wait(0.05);
@@ -122,17 +122,17 @@ setup_cover_prone() {
   anim_array["semi3"] = % prone_fire_burst;
   anim_array["semi4"] = % prone_fire_burst;
   anim_array["semi5"] = % prone_fire_burst;
-  anim_array["single"] = array( % prone_fire_1);
+  anim_array["single"] = array(%prone_fire_1);
   anim_array["burst2"] = % prone_fire_burst;
   anim_array["burst3"] = % prone_fire_burst;
   anim_array["burst4"] = % prone_fire_burst;
   anim_array["burst5"] = % prone_fire_burst;
   anim_array["burst6"] = % prone_fire_burst;
   anim_array["reload"] = % prone_reload;
-  anim_array["look"] = array( % prone_twitch_look, % prone_twitch_lookfast, % prone_twitch_lookup);
-  anim_array["grenade_safe"] = array( % prone_grenade_A, % prone_grenade_A);
-  anim_array["grenade_exposed"] = array( % prone_grenade_A, % prone_grenade_A);
-  anim_array["prone_idle"] = array( % prone_idle);
+  anim_array["look"] = array(%prone_twitch_look, %prone_twitch_lookfast, %prone_twitch_lookup);
+  anim_array["grenade_safe"] = array(%prone_grenade_A, %prone_grenade_A);
+  anim_array["grenade_exposed"] = array(%prone_grenade_A, %prone_grenade_A);
+  anim_array["prone_idle"] = array(%prone_idle);
   anim_array["hide_to_look"] = % coverstand_look_moveup;
   anim_array["look_idle"] = % coverstand_look_idle;
   anim_array["look_to_hide"] = % coverstand_look_movedown;
@@ -189,7 +189,7 @@ transitionTo(newPose) {
   if(newPose == self.a.pose) {
     return;
   }
-  self clearanim( % root, .3);
+  self clearanim(%root, .3);
   self notify("kill_idle_thread");
   if(shouldFireWhileChangingPose())
     transAnim = animArray(self.a.pose + "_2_" + newPose + "_firing");
@@ -198,10 +198,10 @@ transitionTo(newPose) {
   if(newPose == "prone") {
     assert(animHasNotetrack(transAnim, "anim_pose = \"prone\""));
   }
-  self setFlaggedAnimKnobAllRestart("trans", transAnim, % body, 1, .2, 1.0);
+  self setFlaggedAnimKnobAllRestart("trans", transAnim, %body, 1, .2, 1.0);
   animscripts\shared::DoNoteTracks("trans");
   assert(self.a.pose == newPose);
-  self setAnimKnobAllRestart(animarray("straight_level"), % body, 1, .25);
+  self setAnimKnobAllRestart(animarray("straight_level"), %body, 1, .25);
   setupAim(.25);
 }
 
@@ -211,16 +211,16 @@ finishNoteTracks(animname) {
 }
 
 setupAim(transTime) {
-  self setAnimKnobAll( % prone_aim_5, % body, 1, transTime);
-  self setAnimLimited( % prone_aim_2_add, 1, transTime);
-  self setAnimLimited( % prone_aim_4_add, 1, transTime);
-  self setAnimLimited( % prone_aim_6_add, 1, transTime);
-  self setAnimLimited( % prone_aim_8_add, 1, transTime);
+  self setAnimKnobAll(%prone_aim_5, %body, 1, transTime);
+  self setAnimLimited(%prone_aim_2_add, 1, transTime);
+  self setAnimLimited(%prone_aim_4_add, 1, transTime);
+  self setAnimLimited(%prone_aim_6_add, 1, transTime);
+  self setAnimLimited(%prone_aim_8_add, 1, transTime);
 }
 
 proneTo(newPose, rate) {
   assert(self.a.pose == "prone");
-  self clearanim( % root, .3);
+  self clearanim(%root, .3);
   transAnim = undefined;
   if(shouldFireWhileChangingPose()) {
     if(newPose == "crouch")
@@ -237,7 +237,7 @@ proneTo(newPose, rate) {
   if(!isDefined(rate))
     rate = 1;
   self ExitProneWrapper(getAnimLength(transAnim) / 2);
-  self setFlaggedAnimKnobAllRestart("trans", transAnim, % body, 1, .2, rate);
+  self setFlaggedAnimKnobAllRestart("trans", transAnim, %body, 1, .2, rate);
   animscripts\shared::DoNoteTracks("trans");
   self clearAnim(transAnim, 0.1);
   assert(self.a.pose == newPose);

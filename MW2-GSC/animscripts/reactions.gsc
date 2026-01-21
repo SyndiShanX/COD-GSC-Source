@@ -24,10 +24,10 @@ initReactionAnims() {
   anim.lastRunningReactAnim = 0;
 
   anim.coverReactions = [];
-  anim.coverReactions["cover_stand"] = array( % stand_cover_reaction_A, % stand_cover_reaction_B);
-  anim.coverReactions["cover_crouch"] = array( % crouch_cover_reaction_A, % crouch_cover_reaction_B);
-  anim.coverReactions["cover_left"] = array( % CornerStndL_react_A);
-  anim.coverReactions["cover_right"] = array( % CornerStndR_react_A);
+  anim.coverReactions["cover_stand"] = array(%stand_cover_reaction_A, %stand_cover_reaction_B);
+  anim.coverReactions["cover_crouch"] = array(%crouch_cover_reaction_A, %crouch_cover_reaction_B);
+  anim.coverReactions["cover_left"] = array(%CornerStndL_react_A);
+  anim.coverReactions["cover_right"] = array(%CornerStndR_react_A);
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -161,7 +161,7 @@ bulletWhizbyReaction() {
 
   // react and go to prone
   if(enemyNear || cointoss()) {
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
 
     reactAnim = [];
     reactAnim[0] = % exposed_idle_reactA;
@@ -179,12 +179,12 @@ bulletWhizbyReaction() {
     self setFlaggedAnimKnobRestart("reactanim", reaction, 1, 0.1, 1);
     self animscripts\shared::DoNoteTracksForTime(waitTime, "reactanim");
 
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
 
     if(!enemyNear && self.stairsState == "none") {
       rate = 1 + randomfloat(0.2);
 
-      diveAnim = randomAnimOfTwo( % exposed_dive_grenade_B, % exposed_dive_grenade_F);
+      diveAnim = randomAnimOfTwo(%exposed_dive_grenade_B, %exposed_dive_grenade_F);
 
       self setFlaggedAnimKnobRestart("dive", diveAnim, 1, 0.1, rate);
       self animscripts\shared::DoNoteTracks("dive");
@@ -196,8 +196,8 @@ bulletWhizbyReaction() {
     rate = 1.2 + randomfloat(0.3);
 
     if(self.a.pose == "stand") {
-      self clearanim( % root, 0.1);
-      self setFlaggedAnimKnobRestart("crouch", % exposed_stand_2_crouch, 1, 0.1, rate);
+      self clearanim(%root, 0.1);
+      self setFlaggedAnimKnobRestart("crouch", %exposed_stand_2_crouch, 1, 0.1, rate);
       self animscripts\shared::DoNoteTracks("crouch");
     }
 
@@ -209,24 +209,24 @@ bulletWhizbyReaction() {
       dirToEnemy = forward;
 
     if(vectordot(dirToEnemy, forward) > 0) {
-      twitchAnim = randomAnimOfTwo( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
+      twitchAnim = randomAnimOfTwo(%exposed_crouch_idle_twitch_v2, %exposed_crouch_idle_twitch_v3);
 
-      self clearanim( % root, 0.1);
+      self clearanim(%root, 0.1);
       self setFlaggedAnimKnobRestart("twitch", twitchAnim, 1, 0.1, 1);
       self animscripts\shared::DoNoteTracks("twitch");
 
       //if( cointoss() )
       //	self handsignal( "go" );
     } else {
-      turnAnim = randomAnimOfTwo( % exposed_crouch_turn_180_left, % exposed_crouch_turn_180_right);
+      turnAnim = randomAnimOfTwo(%exposed_crouch_turn_180_left, %exposed_crouch_turn_180_right);
 
-      self clearanim( % root, 0.1);
+      self clearanim(%root, 0.1);
       self setFlaggedAnimKnobRestart("turn", turnAnim, 1, 0.1, 1);
       self animscripts\shared::DoNoteTracks("turn");
     }
   }
 
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self.whizbyEnemy = undefined;
   self animmode("normal");
   self orientmode("face default");
@@ -310,25 +310,25 @@ getNewEnemyReactionAnim() {
 }
 
 stealthNewEnemyReactAnim() {
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 
   if(randomint(4) < 3) {
     self orientmode("face enemy");
-    self setFlaggedAnimKnobRestart("reactanim", % exposed_idle_reactB, 1, 0.2, 1);
-    time = getAnimLength( % exposed_idle_reactB);
+    self setFlaggedAnimKnobRestart("reactanim", %exposed_idle_reactB, 1, 0.2, 1);
+    time = getAnimLength(%exposed_idle_reactB);
     self animscripts\shared::DoNoteTracksForTime(time * 0.8, "reactanim");
 
     self orientmode("face current");
   } else {
     self orientmode("face enemy");
-    self setFlaggedAnimKnobRestart("reactanim", % exposed_backpedal, 1, 0.2, 1);
-    time = getAnimLength( % exposed_backpedal);
+    self setFlaggedAnimKnobRestart("reactanim", %exposed_backpedal, 1, 0.2, 1);
+    time = getAnimLength(%exposed_backpedal);
     self animscripts\shared::DoNoteTracksForTime(time * 0.8, "reactanim");
 
     self orientmode("face current");
 
-    self clearanim( % root, 0.2);
-    self setFlaggedAnimKnobRestart("reactanim", % exposed_backpedal_v2, 1, 0.2, 1);
+    self clearanim(%root, 0.2);
+    self setFlaggedAnimKnobRestart("reactanim", %exposed_backpedal_v2, 1, 0.2, 1);
     self animscripts\shared::DoNoteTracks("reactanim");
   }
 }
@@ -345,7 +345,7 @@ newEnemyReactionAnim() {
   } else {
     reactAnim = self getNewEnemyReactionAnim();
 
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
     self setFlaggedAnimKnobRestart("reactanim", reactAnim, 1, 0.2, 1);
     self animscripts\shared::DoNoteTracks("reactanim");
   }

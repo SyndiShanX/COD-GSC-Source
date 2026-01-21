@@ -95,9 +95,7 @@ autosavenamethink(var_0) {
   var_0 delete();
 
   if(isDefined(level.customautosavecheck)) {
-    if(![
-        [level.customautosavecheck]
-      ]())
+    if(![[level.customautosavecheck]]())
       return;
   }
 
@@ -306,9 +304,7 @@ tryautosave(var_0, var_1, var_2, var_3, var_4, var_5) {
 
 extra_autosave_checks_failed() {
   foreach(var_1 in level._extra_autosave_checks) {
-    if(![
-        [var_1["func"]]
-      ]()) {
+    if(![[var_1["func"]]]()) {
       autosaveprint("autosave failed: " + var_1["msg"]);
       return 1;
     }
@@ -338,9 +334,7 @@ autosavecheck(var_0, var_1) {
     var_1 = 0;
 
   if(var_1) {
-    if(![
-        [level.global_callbacks["_autosave_stealthcheck"]]
-      ]())
+    if(![[level.global_callbacks["_autosave_stealthcheck"]]]())
       return 0;
   }
 

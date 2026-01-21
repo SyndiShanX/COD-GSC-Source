@@ -545,8 +545,7 @@ drive_shooting_update_anims(vehicle) {
   vehicle waittillmatch("pullout_anim", "attach_gun");
   vehicle Attach(level.zodiac_gunModel, "tag_weapon_left");
 
-  //"viewmodel_miniUZI"
-  vehicle HidePart("TAG_ACOG_2", level.zodiac_gunModel);
+  //"viewmodel_miniUZI"vehicle HidePart("TAG_ACOG_2", level.zodiac_gunModel);
   vehicle HidePart("TAG_RAIL", level.zodiac_gunModel);
   vehicle HidePart("TAG_RED_DOT", level.zodiac_gunModel);
   vehicle HidePart("TAG_EOTECH", level.zodiac_gunModel);

@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("hind_battle", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(vehicle_scripts\hind_battle_oilrocks::init_local);
   maps\_vehicle::build_deathmodel("vehicle_battle_hind", "vehicle_battle_hind_destroyed_anim");
-  maps\_vehicle::build_drive( % battle_hind_spinning_rotor, undefined, 0);
+  maps\_vehicle::build_drive(%battle_hind_spinning_rotor, undefined, 0);
   maps\_vehicle::build_treadfx(var_2, "default", "fx/treadfx/heli_dust_default", 0);
   maps\_vehicle::build_life(3000, 2800, 3100);
   maps\_vehicle::build_team("axis");

@@ -391,7 +391,7 @@ player_becomes_pilot_model(chopper) {
   chopper.pilotModel useAnimTree(#animtree);
 
   while(isDefined(chopper)) {
-    chopper.pilotModel setFlaggedAnim("pilot_idle_anim", % cobra_copilot_idle);
+    chopper.pilotModel setFlaggedAnim("pilot_idle_anim", %cobra_copilot_idle);
     chopper.pilotModel waittillmatch("pilot_idle_anim", "end");
   }
 }
@@ -405,7 +405,7 @@ startRotors() {
   rate_time = 0.2;
 
   while(isDefined(self)) {
-    self setFlaggedAnim("rotor_anim", % bh_rotors, 1.0, 0.1, rate);
+    self setFlaggedAnim("rotor_anim", %bh_rotors, 1.0, 0.1, rate);
     if(startUp) {
       wait rate_time;
       rate += rate_inc;
@@ -2280,9 +2280,9 @@ gunner_lookAtTarget(eTarget) {
 
     blendAmount = self gunner_getBlendNumber(eTarget);
 
-    self setanim( % cobra_copilot_idle_l, blendAmount[0], blendTime);
-    self setanim( % cobra_copilot_idle, blendAmount[1], blendTime);
-    self setanim( % cobra_copilot_idle_r, blendAmount[2], blendTime);
+    self setanim(%cobra_copilot_idle_l, blendAmount[0], blendTime);
+    self setanim(%cobra_copilot_idle, blendAmount[1], blendTime);
+    self setanim(%cobra_copilot_idle_r, blendAmount[2], blendTime);
 
     if(!isDefined(eTarget)) {
       self.lookingAtTarget = undefined;

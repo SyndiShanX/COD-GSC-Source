@@ -493,9 +493,7 @@ function function_2d8cb175(name, origin, amount = 1, launch = 0, ondeath = 0, sc
         radius = 120;
       }
       origin = spot.origin + (randomintrange(radius * -1, radius), randomintrange(radius * -1, radius), 32);
-      items[items.size] = [
-        [pickup.var_74f5c76]
-      ](pickup, origin, launch, ondeath, scale, timeout, wobble, glow);
+      items[items.size] = [[pickup.var_74f5c76]](pickup, origin, launch, ondeath, scale, timeout, wobble, glow);
       origin = undefined;
       continue;
     }
@@ -532,9 +530,7 @@ function spawnubertreasure(spawn_point, amount, radius = 85, launch = 0, ondeath
       var_4f0bcadb = level.doa.pickups.var_3e3b7a53[randomint(level.doa.pickups.var_3e3b7a53.size)];
     }
     if(isDefined(var_4f0bcadb)) {
-      item = [
-        [var_4f0bcadb.var_74f5c76]
-      ](var_4f0bcadb, origin, launch, ondeath, scale, shouldtimeout, var_71b8054b, var_5278d8d7);
+      item = [[var_4f0bcadb.var_74f5c76]](var_4f0bcadb, origin, launch, ondeath, scale, shouldtimeout, var_71b8054b, var_5278d8d7);
       if(isDefined(item)) {
         items[items.size] = item;
       }
@@ -771,9 +767,7 @@ function spawnspecificitem(pickup, origin, amount = 1, timeout = 1, radius, rota
         }
       }
       origin = spot.origin + (randomintrange(radius * -1, radius), randomintrange(radius * -1, radius), 32);
-      items[items.size] = [
-        [pickup.var_74f5c76]
-      ](pickup, origin, timeout, rotate, angle);
+      items[items.size] = [[pickup.var_74f5c76]](pickup, origin, timeout, rotate, angle);
       origin = undefined;
       continue;
     }
@@ -1532,9 +1526,7 @@ function pickuptimeout() {
       break;
     }
     if(isDefined(self.var_71bbb00a)) {
-      [
-        [self.var_71bbb00a]
-      ](i % 2);
+      [[self.var_71bbb00a]](i % 2);
     } else {
       if(i % 2) {
         self function_32110b7d();

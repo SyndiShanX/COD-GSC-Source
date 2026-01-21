@@ -245,37 +245,37 @@ seaknight_anims() {
 
 seaknight_turret_anim_init() {
   self useanimtree(#animtree);
-  self setanim( % ch46_doors_close);
+  self setanim(%ch46_doors_close);
 }
 
 seaknight_turret_anim_idle() {
   self useanimtree(#animtree);
-  self setanim( % ch46_turret_idle);
+  self setanim(%ch46_turret_idle);
 }
 
 seaknight_turret_anim() {
   self endon("death");
   self endon("turret_fire");
   self useanimtree(#animtree);
-  self setanimknobrestart( % ch46_turret_fire, 1, 0, 1);
+  self setanimknobrestart(%ch46_turret_fire, 1, 0, 1);
 }
 
 seaknight_turret_anim_intro() {
   self endon("death");
   self useanimtree(#animtree);
-  self setanim( % h1_airlift_intro_turret);
+  self setanim(%h1_airlift_intro_turret);
 }
 
 seaknight_open_doors() {
   self useanimtree(#animtree);
   self playSound("seaknight_door_open");
-  self setanimknobrestart( % ch46_doors_open, 1, 0, 1);
+  self setanimknobrestart(%ch46_doors_open, 1, 0, 1);
 }
 
 seaknight_close_doors() {
   self useanimtree(#animtree);
   self playSound("seaknight_door_close");
-  self setanimknobrestart( % ch46_doors_close, 1, 0, 1);
+  self setanimknobrestart(%ch46_doors_close, 1, 0, 1);
 }
 
 #using_animtree("animated_props");

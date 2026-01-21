@@ -65,19 +65,16 @@ modify_battlechatter_times() {
   anim.eventActionMinWait["order"]["self"] *= MULT; // 8000;
   anim.eventActionMinWait["order"]["squad"] *= MULT; // 10000;
 
-  // "reloading!" / "grenade out!"
-  anim.eventActionMinWait["inform"]["self"] *= MULT; // 6000;
+  // "reloading!" / "grenade out!"anim.eventActionMinWait["inform"]["self"] *= MULT; // 6000;
   anim.eventActionMinWait["inform"]["squad"] *= MULT; // 8000;
 
   // specific categories of the above
   anim.eventTypeMinWait["inform"]["reloading"] *= MULT; // 20000;
   anim.eventTypeMinWait["inform"]["killfirm"] *= MULT; // 15000;
 
-  // "Man down!"
-  anim.eventTypeMinWait["reaction"]["casualty"] *= MULT; // 14000;
+  // "Man down!"anim.eventTypeMinWait["reaction"]["casualty"] *= MULT; // 14000;
 
-  // this is the one that I think might make a big difference as long as these enemies have "hostile bursts"
-  anim.eventTypeMinWait["reaction"]["taunt"] *= MULT; // 30000;
+  // this is the one that I think might make a big difference as long as these enemies have "hostile bursts"anim.eventTypeMinWait["reaction"]["taunt"] *= MULT; // 30000;
 }
 
 adjustAccuracy() {

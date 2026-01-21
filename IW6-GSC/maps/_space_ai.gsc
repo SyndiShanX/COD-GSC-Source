@@ -474,7 +474,7 @@ init_space_anims() {
   var_0["cover_corner_r"] = [];
   var_0["cover_corner_r"]["straight_level"] = % space_fire;
   var_0["cover_corner_r"]["alert_idle"] = % space_cover_r1_loop;
-  var_0["cover_corner_r"]["alert_idle_twitch"] = [ % space_cover_r1_twitch_right, % space_cover_r1_twitch_up, % space_cover_r1_twitch_back, % space_cover_r1_twitch_down, % space_cover_r1_twitch_left];
+  var_0["cover_corner_r"]["alert_idle_twitch"] = [ % space_cover_r1_twitch_right, %space_cover_r1_twitch_up, %space_cover_r1_twitch_back, %space_cover_r1_twitch_down, %space_cover_r1_twitch_left];
   var_0["cover_corner_r"]["alert_to_A"] = [ % space_cover_r1_full_expose];
   var_0["cover_corner_r"]["alert_to_B"] = [ % space_cover_r1_full_expose];
   var_0["cover_corner_r"]["A_to_alert"] = [ % space_cover_r1_full_hide];
@@ -507,7 +507,7 @@ init_space_anims() {
   var_0["cover_corner_l"] = [];
   var_0["cover_corner_l"]["straight_level"] = % space_fire;
   var_0["cover_corner_l"]["alert_idle"] = % space_cover_l1_idle;
-  var_0["cover_corner_l"]["alert_idle_twitch"] = [ % space_cover_l1_twitch_right, % space_cover_l1_twitch_left, % space_cover_l1_twitch_down, % space_cover_l1_twitch_up, % space_cover_l1_twitch_back];
+  var_0["cover_corner_l"]["alert_idle_twitch"] = [ % space_cover_l1_twitch_right, %space_cover_l1_twitch_left, %space_cover_l1_twitch_down, %space_cover_l1_twitch_up, %space_cover_l1_twitch_back];
   var_0["cover_corner_l"]["alert_to_A"] = [ % space_cover_l1_full_expose];
   var_0["cover_corner_l"]["alert_to_B"] = [ % space_cover_l1_full_expose];
   var_0["cover_corner_l"]["A_to_alert"] = [ % space_cover_l1_full_hide];
@@ -540,7 +540,7 @@ init_space_anims() {
   var_0["cover_u"] = [];
   var_0["cover_u"]["straight_level"] = % space_fire;
   var_0["cover_u"]["alert_idle"] = % space_cover_u1_idle;
-  var_0["cover_u"]["alert_idle_twitch"] = [ % space_cover_u1_twitch_right, % space_cover_u1_twitch_up, % space_cover_u1_twitch_back, % space_cover_u1_twitch_down, % space_cover_u1_twitch_left];
+  var_0["cover_u"]["alert_idle_twitch"] = [ % space_cover_u1_twitch_right, %space_cover_u1_twitch_up, %space_cover_u1_twitch_back, %space_cover_u1_twitch_down, %space_cover_u1_twitch_left];
   var_0["cover_u"]["alert_to_A"] = [ % space_cover_u1_full_expose];
   var_0["cover_u"]["alert_to_B"] = [ % space_cover_u1_full_expose];
   var_0["cover_u"]["A_to_alert"] = [ % space_cover_u1_full_hide];
@@ -666,17 +666,17 @@ ai_space_pain() {
     if(distance2dsquared(self.origin, self.goalpos) > var_0 && var_1 > 0.5)
       var_2 = % space_pain_1;
     else
-      var_2 = common_scripts\utility::random([ % space_firing_pain_1, % space_firing_pain_2]);
+      var_2 = common_scripts\utility::random([ % space_firing_pain_1, %space_firing_pain_2]);
 
     self orientmode("face motion");
   } else
-    var_2 = common_scripts\utility::random([ % space_firing_pain_1, % space_firing_pain_2]);
+    var_2 = common_scripts\utility::random([ % space_firing_pain_1, %space_firing_pain_2]);
 
   var_3 = 1;
-  self setflaggedanimknoballrestart("painanim", var_2, % body, 1, 0.1, var_3);
+  self setflaggedanimknoballrestart("painanim", var_2, %body, 1, 0.1, var_3);
 
   if(self.a.pose == "prone")
-    self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self updateprone(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
 
   if(animhasnotetrack(var_2, "start_aim")) {
     thread animscripts\pain::notifystartaim("painanim");
@@ -729,7 +729,7 @@ ai_space_death() {
     else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot"))
       self.deathanim = % space_firing_death_3;
     else
-      self.deathanim = common_scripts\utility::random([ % space_firing_death_1, % space_firing_death_2, % space_firing_death_3]);
+      self.deathanim = common_scripts\utility::random([ % space_firing_death_1, %space_firing_death_2, %space_firing_death_3]);
   }
 
   if(!isDefined(self.nodeathsound) && !isDefined(self.diequietly))

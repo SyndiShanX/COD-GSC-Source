@@ -7,7 +7,7 @@
 
 main() {
   self.traversedeath = 1;
-  advancedtraverse2( % traverse90, 96);
+  advancedtraverse2(%traverse90, 96);
 }
 
 advancedtraverse2(var_0, var_1) {
@@ -19,7 +19,7 @@ advancedtraverse2(var_0, var_1) {
   var_2 = self getnegotiationstartnode();
   self orientmode("face angle", var_2.angles[1]);
   var_3 = var_2.traverse_height - var_2.origin[2];
-  self setflaggedanimknoballrestart("traverse", var_0, % body, 1, 0.15, 1);
+  self setflaggedanimknoballrestart("traverse", var_0, %body, 1, 0.15, 1);
   var_4 = gettime();
   thread animscripts\notetracks::donotetracksforever("traverse", "no clear", ::handle_death);
 
@@ -50,9 +50,9 @@ handle_death(var_0) {
     self.a.nodeath = 1;
 
     if(self.traversedeath > 1)
-      self setflaggedanimknoball("deathanim", % traverse90_end_death, % body, 1, 0.2, 1);
+      self setflaggedanimknoball("deathanim", %traverse90_end_death, %body, 1, 0.2, 1);
     else
-      self setflaggedanimknoball("deathanim", % traverse90_start_death, % body, 1, 0.2, 1);
+      self setflaggedanimknoball("deathanim", %traverse90_start_death, %body, 1, 0.2, 1);
 
     animscripts\face::saygenericdialogue("death");
   }

@@ -1476,7 +1476,7 @@ vehicle_80s_sedan1(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 150, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_80s_sedan1_" + color + "_destroyed", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
@@ -1486,16 +1486,16 @@ vehicle_80s_sedan1(color) {
   destructible_part(tag, "vehicle_80s_sedan1_" + color + "_trunk", undefined, undefined, undefined, undefined, 1.0);
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_80s_sedan1_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_80s_sedan1_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 2.3);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", undefined, undefined, undefined, undefined, undefined, 1.0);
@@ -1600,23 +1600,23 @@ vehicle_80s_hatch1(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 150, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_80s_hatch1_" + color + "_destroyed", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
   destructible_part(tag, "vehicle_80s_hatch1_" + color + "_hood", 800, undefined, undefined, undefined, 1.0, 1.5);
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_80s_hatch1_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_80s_hatch1_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", undefined, undefined, undefined, undefined, undefined, 1.0);
@@ -1717,23 +1717,23 @@ vehicle_80s_hatch2(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 150, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_80s_hatch2_" + color + "_destroyed", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
   destructible_part(tag, "vehicle_80s_hatch2_" + color + "_hood", 800, undefined, undefined, undefined, 1.0, 1.5);
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_80s_hatch2_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_80s_hatch2_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", undefined, undefined, undefined, undefined, undefined, 1.0);
@@ -1834,23 +1834,23 @@ vehicle_80s_wagon1(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 150, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_80s_wagon1_" + color + "_destroyed", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
   destructible_part(tag, "vehicle_80s_wagon1_" + color + "_hood", 800, undefined, undefined, undefined, 1.0, 1.5);
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_80s_wagon1_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_80s_wagon1_" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", undefined, undefined, undefined, undefined, undefined, 1.0);
@@ -1967,23 +1967,23 @@ vehicle_small_hatch(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 150, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_small_hatch_" + color + "_destroyed", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
   destructible_part(tag, "vehicle_small_hatch_" + color + "_hood", 800, undefined, undefined, undefined, 1.0, 1.5);
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", "vehicle_small_hatch_" + color + "_door_LF", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -2084,23 +2084,23 @@ vehicle_pickup(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 210, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_pickup_destroyed", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
   destructible_part(tag, "vehicle_pickup_hood", 800, undefined, undefined, undefined, 1.0, 2.5);
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", "vehicle_pickup_door_LF", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -2201,20 +2201,20 @@ vehicle_hummer(destructibleType) {
   destructible_fx("tag_deathfx", "explosions/vehicle_explosion_hummer", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 210, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_hummer_destroyed", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Front )
   tag = "tag_glass_front";
@@ -2272,20 +2272,20 @@ vehicle_bm21(destructibleType, destroyedModel) {
   destructible_fx("tag_deathfx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 210, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, destroyedModel, undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Front )
   tag = "tag_glass_front";
@@ -2337,20 +2337,20 @@ vehicle_moving_truck(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/vehicle_explosion_medium", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 210, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_moving_truck_dst", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Front )
   tag = "tag_glass_front";
@@ -2399,26 +2399,26 @@ vehicle_luxurysedan(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 210, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_luxurysedan_2008" + color + "_destroy", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
   destructible_part(tag, "vehicle_luxurysedan_2008" + color + "_hood", 800, undefined, undefined, undefined, 1.0, 2.5);
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_luxurysedan_2008" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("left_wheel_02_jnt", "vehicle_luxurysedan_2008" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("right_wheel_01_jnt", "vehicle_luxurysedan_2008" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("right_wheel_02_jnt", "vehicle_luxurysedan_2008" + color + "_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   // Doors
@@ -2516,7 +2516,7 @@ vehicle_mig29_landed(destructibleType) {
   destructible_fx("TAG_FX", "explosions/vehicle_explosion_mig29", false);
   destructible_sound("car_explode");
   destructible_explode(8000, 10000, 512, 512, 50, 300, undefined, undefined, 0.4, 1000);
-  destructible_anim( % vehicle_mig29_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_mig29_destroy");
+  destructible_anim(%vehicle_mig29_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_mig29_destroy");
   destructible_state(undefined, "vehicle_mig29_v2_dest", undefined, 32, "splash");
 
   destructible_part("TAG_COCKPIT", "vehicle_mig29_dest_cockpit", 40, undefined, undefined, undefined, undefined, 1.0);
@@ -2637,20 +2637,20 @@ vehicle_subcompact(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 150, 250, 50, 300, undefined, 0, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_subcompact_" + color + "_destroyed", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_subcompact_wheel_lf", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_subcompact_wheel_lf", 20, undefined, undefined, "no_melee", undefined, 2.3);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_back", "vehicle_subcompact_" + color + "_door_LB", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -2737,23 +2737,23 @@ vehicle_van(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_van_" + color + "_destroyed", undefined, 32, "no_melee");
   // Hood
   tag = "tag_hood";
   destructible_part(tag, "vehicle_van_" + color + "_hood", undefined, undefined, undefined, undefined, 1.0, 2.5);
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_van_wheel_lf", 20, undefined, undefined, "no_melee", undefined, 2.3);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_van_wheel_lf", 20, undefined, undefined, "no_melee", undefined, 2.3);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_right_back", "vehicle_van_" + color + "_door_RB", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -2854,23 +2854,23 @@ vehicle_suburban(destructibleType, color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 300, 300, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_suburban_destroyed" + color, undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("right_wheel_01_jnt", "vehicle_suburban_wheel_rf", 20, undefined, undefined, "no_melee", undefined, 2.3);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("left_wheel_02_jnt", "vehicle_suburban_wheel_rf", 20, undefined, undefined, "no_melee", undefined, 2.3);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("right_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   // Doors
@@ -3022,7 +3022,7 @@ destructible_gaspump(destructibleType) {
   destructible_healthdrain(12, 0.2, 210, "allies");
   destructible_sound("gaspump01_flareup_med");
   destructible_loopfx("tag_fx", "fire/gas_pump_fire_handle", 0.05);
-  destructible_anim( % gaspump01_hose, #animtree, "setanimknob", undefined, undefined, "gaspump01_hose");
+  destructible_anim(%gaspump01_hose, #animtree, "setanimknob", undefined, undefined, "gaspump01_hose");
   destructible_state(undefined, undefined, 400, undefined, 5, "no_melee");
   destructible_fx("tag_death_fx", "explosions/gas_pump_exp", false);
   destructible_sound("gaspump01_explode");
@@ -3144,20 +3144,20 @@ vehicle_coupe(color) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 150, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_coupe_" + color + "_destroyed", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", undefined, 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_coupe_wheel_lf", 20, undefined, undefined, "no_melee", undefined, 2.3);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", "vehicle_coupe_" + color + "_door_LF", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -3244,20 +3244,20 @@ vehicle_uaz_winter(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_uaz_winter_destroy", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee", undefined, 1.0);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_uaz_wheel_RF_d", 20, undefined, undefined, "no_melee", undefined, 10.0);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_uaz_wheel_RF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Front )
   tag = "tag_glass_front";
@@ -3354,20 +3354,20 @@ vehicle_uaz_fabric(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_uaz_fabric_dsr", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_uaz_wheel_RF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_uaz_wheel_RF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Front )
   tag = "tag_glass_front";
@@ -3450,20 +3450,20 @@ vehicle_uaz_hardtop(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_uaz_hardtop_dsr", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_uaz_wheel_RF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_uaz_wheel_RF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Front )
   tag = "tag_glass_front";
@@ -3560,20 +3560,20 @@ vehicle_uaz_open(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_uaz_open_dsr", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_uaz_wheel_LF_d", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim", true);
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Front )
   tag = "tag_glass_front";
@@ -3670,20 +3670,20 @@ vehicle_policecar(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode_police");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_policecar_lapd_destroy", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_policecar_lapd_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_policecar_lapd_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_policecar_lapd_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_policecar_lapd_wheel_LF", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", "vehicle_policecar_lapd_door_LF", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -3777,20 +3777,20 @@ vehicle_policecar_russia(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode_police");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_policecar_russia_destroy", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_policecar_russia_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("left_wheel_02_jnt", "vehicle_policecar_russia_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_01_jnt", "vehicle_policecar_russia_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_part("right_wheel_02_jnt", "vehicle_policecar_russia_wheel_LF", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Doors
   destructible_part("tag_door_left_front", "vehicle_policecar_russia_door_LF", undefined, undefined, undefined, undefined, 1.0, 1.0);
@@ -3890,23 +3890,23 @@ vehicle_taxi(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "vehicle_taxi_yellow_destroy", undefined, 32, "no_melee");
   // Tires
   destructible_part("left_wheel_01_jnt", "vehicle_taxi_wheel_LF", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("left_wheel_02_jnt", "vehicle_taxi_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_LB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("right_wheel_01_jnt", "vehicle_taxi_wheel_LF", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   destructible_part("right_wheel_02_jnt", "vehicle_taxi_wheel_LF", 20, undefined, undefined, "no_melee");
-  destructible_anim( % vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RB, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   destructible_car_alarm();
   // Glass ( Front )
@@ -4004,12 +4004,12 @@ t5_vehicle_ultimate_jeep_pristine(destructibleType) {
   destructible_fx("tag_death_fx", "explosions/small_vehicle_explosion", false);
   destructible_sound("car_explode");
   destructible_explode(4000, 5000, 200, 250, 50, 300, undefined, undefined, 0.3, 500);
-  destructible_anim( % vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
+  destructible_anim(%vehicle_80s_sedan1_destroy, #animtree, "setanimknob", undefined, undefined, "vehicle_80s_sedan1_destroy");
   destructible_state(undefined, "t5_veh_ultimate_jeep_d", undefined, 32, "no_melee");
 
   // Tires
   destructible_part("right_wheel_01_jnt", "t5_vehicle_ultimate_jeep_wheel_rf", 20, undefined, undefined, "no_melee", undefined, 1.7);
-  destructible_anim( % vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
+  destructible_anim(%vehicle_80s_sedan1_flattire_RF, #animtree, "setanim");
   destructible_sound("veh_tire_deflate", "bullet");
   // Glass ( Left Front )
   tag = "tag_glass_left_front";

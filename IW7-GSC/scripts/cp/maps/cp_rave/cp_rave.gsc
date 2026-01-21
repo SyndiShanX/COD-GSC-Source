@@ -531,7 +531,7 @@ wait_for_player_approach(var_0) {
     }
 
     var_4 scriptmodelplayanimdeltamotionfrompos("IW7_cp_slasher_walk_forward_01", var_4.origin, var_4.angles);
-    var_10 = getanimlength( % iw7_cp_slasher_walk_forward_01);
+    var_10 = getanimlength(%iw7_cp_slasher_walk_forward_01);
     wait(var_10);
     var_4 delete();
   }
@@ -5432,7 +5432,7 @@ survivor_logic() {
   level.survivor = spawn("script_model", var_0.origin);
   level.survivor.angles = var_0.angles;
   level.survivor setModel("zmb_world_k_smith");
-  var_1 = [ % iw7_cp_survivor_cabin_idle_01, % iw7_cp_survivor_cabin_idle_02];
+  var_1 = [ % iw7_cp_survivor_cabin_idle_01, %iw7_cp_survivor_cabin_idle_02];
   var_2 = ["IW7_cp_survivor_cabin_idle_01", "IW7_cp_survivor_cabin_idle_02"];
   var_3 = 0;
   for(;;) {

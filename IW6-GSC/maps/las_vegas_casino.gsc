@@ -1674,18 +1674,8 @@ init_kitchen_cart_plates() {
   foreach(var_2 in var_0)
   var_2 delete();
 
-  var_4 = [["a", "b", "c", "d"],
-    ["d", "e"]];
-  var_4 = [["tag_plates_level2_1", "small", -1],
-    ["tag_plates_level2_3", "large", 1.0],
-    ["tag_plates_level3_1", "small", -1],
-    ["tag_plates_level4_2", "small", -1],
-    ["tag_plates_level4_3", "large", 1.1],
-    ["tag_plates_level5_2", "small", -1],
-    ["tag_plates_level5_3", "large", -1],
-    ["tag_plates_level6_2", "small", -1],
-    ["tag_plates_level7_1", "large", -1],
-    ["tag_plates_level7_2", "large", 2.75]];
+  var_4 = [["a", "b", "c", "d"], ["d", "e"]];
+  var_4 = [["tag_plates_level2_1", "small", -1], ["tag_plates_level2_3", "large", 1.0], ["tag_plates_level3_1", "small", -1], ["tag_plates_level4_2", "small", -1], ["tag_plates_level4_3", "large", 1.1], ["tag_plates_level5_2", "small", -1], ["tag_plates_level5_3", "large", -1], ["tag_plates_level6_2", "small", -1], ["tag_plates_level7_1", "large", -1], ["tag_plates_level7_2", "large", 2.75]];
   var_0 = [];
 
   foreach(var_6 in var_4) {

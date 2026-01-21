@@ -17,7 +17,7 @@ main(var_0, var_1, var_2, var_3) {
   var_4["vehicle_mi24p_hind_woodland"] = "fx\explosions\helicopter_explosion_hind_woodland";
   var_4["vehicle_mi24p_hind_woodland_opened_door"] = "fx\explosions\helicopter_explosion_hind_woodland";
   var_4["vehicle_mi24p_hind_chernobyl"] = "fx\explosions\helicopter_explosion_hind_woodland";
-  maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%bh_rotors, undefined, 0);
   maps\_vehicle::build_deathfx("fx\explosions\grenadeexp_default", "tag_engine_left", "hind_helicopter_hit", undefined, undefined, undefined, 0.2, 1, undefined);
   maps\_vehicle::build_deathfx("fx\explosions\grenadeexp_default", "tail_rotor_jnt", "hind_helicopter_secondary_exp", undefined, undefined, undefined, 0.5, 1, undefined);
   maps\_vehicle::build_deathfx("fx\fire\fire_smoke_trail_L", "tail_rotor_jnt", "hind_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1, undefined);

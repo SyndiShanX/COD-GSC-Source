@@ -332,9 +332,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
       var_15 = "l";
     }
 
-    bbprint("gamemp_death", "@"
-      playerid % i x % f y % f z % f gun_orientx % f gun_orienty % f gun_orientz % f weapon % s mean_of_death % s attackerid % i action % i server_death_id % i victim_life_index % d attacker_life_index % d victim_team % s attacker_team % s attacker_pos_x % f attacker_pos_y % f attacker_pos_z % f attacker_gun_orientx % f attacker_gun_orienty % f attacker_gun_orientz % f victim_weapon % s ",self.analyticslog.playerid,self.origin[0],self.origin[1],self.origin[2],var_3[0],var_3[1],var_3[2],var_2,scripts\engine\utility::ter_op(isDefined(var_1),var_1,"
-      None "),var_4,buildkilldeathactionvalue(),var_14,self.lifeid,var_12,var_15,var_11,var_5,var_6,var_7,var_8,var_9,var_10,self.primaryweapon);
+    bbprint("gamemp_death", "@"playerid % i x % f y % f z % f gun_orientx % f gun_orienty % f gun_orientz % f weapon % s mean_of_death % s attackerid % i action % i server_death_id % i victim_life_index % d attacker_life_index % d victim_team % s attacker_team % s attacker_pos_x % f attacker_pos_y % f attacker_pos_z % f attacker_gun_orientx % f attacker_gun_orienty % f attacker_gun_orientz % f victim_weapon % s ",self.analyticslog.playerid,self.origin[0],self.origin[1],self.origin[2],var_3[0],var_3[1],var_3[2],var_2,scripts\engine\utility::ter_op(isDefined(var_1),var_1,"None "),var_4,buildkilldeathactionvalue(),var_14,self.lifeid,var_12,var_15,var_11,var_5,var_6,var_7,var_8,var_9,var_10,self.primaryweapon);
       if(isDefined(var_1) && isexplosivedamagemod(var_1)) {
         logevent_explosion(scripts\engine\utility::ter_op(isDefined(var_2), var_2, "generic"), self.origin, var_0, 1);
       }
@@ -601,8 +599,7 @@ logevent_playerdeath(var_0, var_1, var_2) {
           var_2 = var_2 + 1;
         }
 
-        bbprint("analytics_match_player_index_init", "@"
-          player1_index % d player1_xuid % s player2_index % d player2_xuid % s player3_index % d player3_xuid % s player4_index % d player4_xuid % s player5_index % d player5_xuid % s player6_index % d player6_xuid % s player7_index % d player7_xuid % s player8_index % d player8_xuid % s player9_index % d player9_xuid % s player10_index % d player10_xuid % s player11_index % d player11_xuid % s player12_index % d player12_xuid % s ",var_0[0],var_1[0],var_0[1],var_1[1],var_0[2],var_1[2],var_0[3],var_1[3],var_0[4],var_1[4],var_0[5],var_1[5],var_0[6],var_1[6],var_0[7],var_1[7],var_0[8],var_1[8],var_0[9],var_1[9],var_0[10],var_1[10],var_0[11],var_1[11]);
+        bbprint("analytics_match_player_index_init", "@"player1_index % d player1_xuid % s player2_index % d player2_xuid % s player3_index % d player3_xuid % s player4_index % d player4_xuid % s player5_index % d player5_xuid % s player6_index % d player6_xuid % s player7_index % d player7_xuid % s player8_index % d player8_xuid % s player9_index % d player9_xuid % s player10_index % d player10_xuid % s player11_index % d player11_xuid % s player12_index % d player12_xuid % s ",var_0[0],var_1[0],var_0[1],var_1[1],var_0[2],var_1[2],var_0[3],var_1[3],var_0[4],var_1[4],var_0[5],var_1[5],var_0[6],var_1[6],var_0[7],var_1[7],var_0[8],var_1[8],var_0[9],var_1[9],var_0[10],var_1[10],var_0[11],var_1[11]);
         }
 
         analyticsspawnlogenabled() {

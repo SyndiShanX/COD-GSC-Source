@@ -65,25 +65,19 @@ function_b540b576() {
   var_51ba7b4a = array(#"hash_79fe2d0224018f5c");
   var_68e586cf = array(#"hash_2b4e25f8eaed9341");
   level.var_5849269a[0] = {
-    #in_inventory: 0,
-    #vo_line: var_1c8e90b4
+    #in_inventory: 0, #vo_line: var_1c8e90b4
   };
   level.var_5849269a[1] = {
-    #in_inventory: 0,
-    #vo_line: var_ab6a16ff
+    #in_inventory: 0, #vo_line: var_ab6a16ff
   };
   level.var_5849269a[2] = {
-    #in_inventory: 0,
-    #vo_line: var_e6c1fe70,
-    #var_46db68fd: 1
+    #in_inventory: 0, #vo_line: var_e6c1fe70, #var_46db68fd: 1
   };
   level.var_5849269a[3] = {
-    #in_inventory: 0,
-    #vo_line: var_51ba7b4a
+    #in_inventory: 0, #vo_line: var_51ba7b4a
   };
   level.var_5849269a[4] = {
-    #in_inventory: 0,
-    #vo_line: var_68e586cf
+    #in_inventory: 0, #vo_line: var_68e586cf
   };
   level.var_e046b238 = struct::get(#"hash_5201d44a6f57e32a");
   level.var_94b00cff = spawn("script_model", level.var_e046b238.origin);

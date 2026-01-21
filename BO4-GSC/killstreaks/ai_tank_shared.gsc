@@ -95,9 +95,7 @@ init_shared(bundlename) {
 
     if(!isDefined(level.var_950314f5)) {
       level.var_950314f5 = new throttle();
-      [
-        [level.var_950314f5]
-      ] - > initialize(1, 0.5);
+      [[level.var_950314f5]] - > initialize(1, 0.5);
     }
   }
 
@@ -1478,9 +1476,7 @@ state_combat_update(params) {
     cansee = 0;
 
     if(isDefined(level.var_6cfbe5a)) {
-      [
-        [level.var_6cfbe5a]
-      ] - > waitinqueue(self);
+      [[level.var_6cfbe5a]] - > waitinqueue(self);
     }
 
     if(isDefined(self.enemy)) {
@@ -1831,9 +1827,7 @@ tank_damage_think() {
 
       self.health = 0;
       self notify(#"death", {
-        #attacker: attacker,
-        #mod: mod,
-        #weapon: weapon
+        #attacker: attacker, #mod: mod, #weapon: weapon
       });
       return;
     }

@@ -700,11 +700,7 @@ log_debug_event(str_event, data1, data2, data3) {
   }
 
   s_event = {
-    #str_event: str_event,
-    #n_time: float(gettime()) / 1000,
-    #data1: data1,
-    #data2: data2,
-    #data3: data3
+    #str_event: str_event, #n_time: float(gettime()) / 1000, #data1: data1, #data2: data2, #data3: data3
   };
 
   if(!isDefined(level.var_df9f1a00)) {

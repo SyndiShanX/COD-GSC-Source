@@ -698,9 +698,7 @@ function players_reached_rounds_counter_watcher() {
 function init_custom_ai_type() {
   if(isDefined(level.custom_ai_type)) {
     for(i = 0; i < level.custom_ai_type.size; i++) {
-      [
-        [level.custom_ai_type[i]]
-      ]();
+      [[level.custom_ai_type[i]]]();
     }
   }
 }
@@ -2523,12 +2521,8 @@ function get_zombie_count_for_round(n_round, n_player_count) {
 
 function run_custom_ai_spawn_checks() {
   foreach(s in level.custom_ai_spawn_check_funcs) {
-    if([
-        [s.func_check]
-      ]()) {
-      a_spawners = [
-        [s.func_get_spawners]
-      ]();
+    if([[s.func_check]]()) {
+      a_spawners = [[s.func_get_spawners]]();
       level.zombie_spawners = arraycombine(level.zombie_spawners, a_spawners, 0, 0);
       if(isDefined(level.use_multiple_spawns) && level.use_multiple_spawns) {
         foreach(sp in a_spawners) {
@@ -2565,9 +2559,7 @@ function run_custom_ai_spawn_checks() {
       }
     }
     if(isDefined(s.func_get_locations)) {
-      a_locations = [
-        [s.func_get_locations]
-      ]();
+      a_locations = [[s.func_get_locations]]();
       foreach(s_loc in a_locations) {
         arrayremovevalue(level.zm_loc_types["zombie_location"], s_loc);
       }
@@ -2799,9 +2791,7 @@ function round_think(restart = 0) {
   level endon("end_round_think");
   if(!(isDefined(restart) && restart)) {
     if(isDefined(level.initial_round_wait_func)) {
-      [
-        [level.initial_round_wait_func]
-      ]();
+      [[level.initial_round_wait_func]]();
     }
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
       players = getplayers();
@@ -2824,9 +2814,7 @@ function round_think(restart = 0) {
     level.pro_tips_start_time = gettime();
     level.zombie_last_run_time = gettime();
     if(isDefined(level.zombie_round_change_custom)) {
-      [
-        [level.zombie_round_change_custom]
-      ]();
+      [[level.zombie_round_change_custom]]();
     } else {
       if(!(isDefined(level.sndmusicspecialround) && level.sndmusicspecialround)) {
         if(isDefined(level.sndgotoroundoccurred) && level.sndgotoroundoccurred) {
@@ -2870,9 +2858,7 @@ function round_think(restart = 0) {
       players[index] recordroundstartstats();
     }
     if(isDefined(level.round_start_custom_func)) {
-      [
-        [level.round_start_custom_func]
-      ]();
+      [[level.round_start_custom_func]]();
     }
     [[level.round_wait_func]]();
     level.first_round = 0;
@@ -2880,9 +2866,7 @@ function round_think(restart = 0) {
     bb::logroundevent("end_of_round");
     uploadstats();
     if(isDefined(level.round_end_custom_logic)) {
-      [
-        [level.round_end_custom_logic]
-      ]();
+      [[level.round_end_custom_logic]]();
     }
     players = getplayers();
     if(isDefined(level.no_end_game_check) && level.no_end_game_check) {
@@ -2929,9 +2913,7 @@ function round_think(restart = 0) {
       }
     }
     if(isDefined(level.check_quickrevive_hotjoin)) {
-      [
-        [level.check_quickrevive_hotjoin]
-      ]();
+      [[level.check_quickrevive_hotjoin]]();
     }
     level.round_number = get_round_number();
     level round_over();
@@ -3483,9 +3465,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
     return finaldamage;
   }
   if(players.size == 1 && level flag::get("solo_game")) {
-    if(isDefined(level.no_end_game_check) && level.no_end_game_check || (isDefined(level.check_end_solo_game_override) && [
-        [level.check_end_solo_game_override]
-      ]())) {
+    if(isDefined(level.no_end_game_check) && level.no_end_game_check || (isDefined(level.check_end_solo_game_override) && [[level.check_end_solo_game_override]]())) {
       return finaldamage;
     }
     if(self.lives == 0 || !self hasperk("specialty_quickrevive")) {
@@ -4377,9 +4357,7 @@ function default_find_exit_point() {
   while(true) {
     b_passed_override = 1;
     if(isDefined(level.default_find_exit_position_override)) {
-      b_passed_override = [
-        [level.default_find_exit_position_override]
-      ]();
+      b_passed_override = [[level.default_find_exit_position_override]]();
     }
     if(!level flag::get("wait_and_revive") && b_passed_override) {
       break;

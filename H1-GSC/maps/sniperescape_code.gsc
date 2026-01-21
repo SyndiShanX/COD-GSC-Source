@@ -1975,7 +1975,7 @@ player_picks_up_price() {
   wait 0.1;
   thread h1_pricecarry_pickup_dof_generic();
   level.price maps\_headtracking::head_tracking_end(0, 1);
-  level.price clearanim( % wounded_aim, 0);
+  level.price clearanim(%wounded_aim, 0);
   var_7 = var_2 gettagorigin("tag_player");
   var_8 = bulletTrace(var_7 + (0, 0, 32), var_7, 0, undefined);
 

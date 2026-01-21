@@ -727,9 +727,7 @@ func_D3A3() {
     }
 
     if(isDefined(level.var_7684)) {
-      [
-        [level.var_7684]
-      ]("breathing_hurt");
+      [[level.var_7684]]("breathing_hurt");
     } else {
       self playlocalsound("breathing_hurt");
     }

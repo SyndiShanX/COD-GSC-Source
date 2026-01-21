@@ -489,11 +489,7 @@ playerChangeWeaponWaiter() {
   self notify("supply_drop_marker_done");
 }
 isSupplyDropWeapon(weapon) {
-  if(weapon == "supplystation_mp" ||
-    weapon == "supplydrop_mp" ||
-    weapon == "turret_drop_mp" ||
-    weapon == "tow_turret_drop_mp" ||
-    weapon == "m220_tow_drop_mp") {
+  if(weapon == "supplystation_mp" || weapon == "supplydrop_mp" || weapon == "turret_drop_mp" || weapon == "tow_turret_drop_mp" || weapon == "m220_tow_drop_mp") {
     return true;
   }
   return false;
@@ -803,9 +799,7 @@ dropCrate(origin, angle, weaponname, owner, team, killcamEnt) {
   while(1) {
     crate waittill("captured", player);
     player giveCrateItem(crate);
-    if(player HasPerk("specialty_disarmexplosive") &&
-      owner != player &&
-      ((level.teambased && team != player.team) || !level.teambased)) {
+    if(player HasPerk("specialty_disarmexplosive") && owner != player && ((level.teambased && team != player.team) || !level.teambased)) {
       spawn_explosive_crate(crate.origin, crate.angles, weaponname, owner, team, player);
       crate crateDelete(false);
     } else {
@@ -1143,10 +1137,7 @@ personalUseBar(object) {
   self endon("disconnect");
   self.useBar = createSecondaryProgressBar();
   self.useBarText = createSecondaryProgressBarText();
-  if(self HasPerk("specialty_disarmexplosive") &&
-    object.owner != self &&
-    !isDefined(object.hacker) &&
-    ((level.teambased && object.owner.team != self.team) || !level.teambased)) {
+  if(self HasPerk("specialty_disarmexplosive") && object.owner != self && !isDefined(object.hacker) && ((level.teambased && object.owner.team != self.team) || !level.teambased)) {
     self.useBarText setText(&"KILLSTREAK_HACKING_CRATE");
     self PlayLocalSound("evt_hacker_hacking");
   } else {
@@ -1332,8 +1323,7 @@ SAMTurretWatcher(destination) {
     if(Distance(destination, self.origin) < SAM_TURRET_AQUIRE_DIST) {
       break;
     }
-    if(self.origin[0] > level.spawnMins[0] && self.origin[0] < level.spawnMaxs[0] &&
-      self.origin[1] > level.spawnMins[1] && self.origin[1] < level.spawnMaxs[1]) {
+    if(self.origin[0] > level.spawnMins[0] && self.origin[0] < level.spawnMaxs[0] && self.origin[1] > level.spawnMins[1] && self.origin[1] < level.spawnMaxs[1]) {
       break;
     }
     wait(0.1);

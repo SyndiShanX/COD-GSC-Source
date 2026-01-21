@@ -452,7 +452,7 @@ func_4921(var_0, var_1, var_2) {
     var_5 setanimknob(var_4, 1, 0.2);
   }
 
-  var_5 give_attacker_kill_rewards( % jackal_motion_idle_ai, 1, 0);
+  var_5 give_attacker_kill_rewards(%jackal_motion_idle_ai, 1, 0);
   var_5 lib_0C24::func_10A49();
   var_5 lib_0C20::func_11132();
   var_5.var_284B = 0;

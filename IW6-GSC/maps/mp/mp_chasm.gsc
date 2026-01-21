@@ -30,8 +30,7 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  if(level.gametype == "sd" ||
-    level.gameType == "sr") {
+  if(level.gametype == "sd" || level.gameType == "sr") {
     level.srKillCamOverridePosition = [];
     level.srKillCamOverridePosition["_b"] = (384, 278, 1716);
   }

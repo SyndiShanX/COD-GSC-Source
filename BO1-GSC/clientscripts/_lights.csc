@@ -111,9 +111,7 @@ play_light_fx(light_struct, fx) {
         atr = AnglesToRight(self.light_models[0].angles);
         atu = AnglesToUp(self.light_models[0].angles);
         o = self.script_light_fx_offset;
-        off = ((atf[0] * o[0]) + (atf[1] * o[0]) + (atf[2] * o[0]),
-          (atr[0] * o[1]) + (atr[1] * o[1]) + (atr[2] * o[1]),
-          (atu[0] * o[2]) + (atu[1] * o[2]) + (atu[2] * o[2]));
+        off = ((atf[0] * o[0]) + (atf[1] * o[0]) + (atf[2] * o[0]), (atr[0] * o[1]) + (atr[1] * o[1]) + (atr[2] * o[1]), (atu[0] * o[2]) + (atu[1] * o[2]) + (atu[2] * o[2]));
       }
     } else {
       if(isDefined(self.script_light_fx_offset)) {

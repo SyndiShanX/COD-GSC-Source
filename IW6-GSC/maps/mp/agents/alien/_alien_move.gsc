@@ -716,9 +716,7 @@ doStartMoveAnim(animState) {
 }
 
 canDoStartMove() {
-  if(!isDefined(self.traverseComplete) &&
-    !isDefined(self.skipStartMove) &&
-    (!isDefined(self.disableExits) || self.disableExits == false)) {
+  if(!isDefined(self.traverseComplete) && !isDefined(self.skipStartMove) && (!isDefined(self.disableExits) || self.disableExits == false)) {
     return true;
   } else {
     return false;

@@ -1015,12 +1015,8 @@ updatedomscores() {
 
     if(warningscore && !playednearendvo) {
       winningteam = undefined;
-      alliesroundscore = [
-        [level._getteamscore]
-      ](#"allies") - alliesroundstartscore;
-      axisroundscore = [
-        [level._getteamscore]
-      ](#"axis") - axisroundstartscore;
+      alliesroundscore = [[level._getteamscore]](#"allies") - alliesroundstartscore;
+      axisroundscore = [[level._getteamscore]](#"axis") - axisroundstartscore;
 
       if(alliesroundscore >= warningscore) {
         winningteam = # "allies";
@@ -1142,11 +1138,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
 
   if(isDefined(weapon) && isDefined(level.iskillstreakweapon)) {
-    if([
-        [level.iskillstreakweapon]
-      ](weapon) || isDefined(weapon.statname) && [
-        [level.iskillstreakweapon]
-      ](getweapon(weapon.statname))) {
+    if([[level.iskillstreakweapon]](weapon) || isDefined(weapon.statname) && [[level.iskillstreakweapon]](getweapon(weapon.statname))) {
       weaponiskillstreak = 1;
     }
   }
@@ -1870,12 +1862,7 @@ function_1609a882(var_c1e98979) {
     }
 
     var_93746b40 = {
-      #gametime: function_f8d53445(),
-      #round: game.roundsplayed,
-      #label: domflag gameobjects::get_label(),
-      #firstcapture: domflag.firstcapture,
-      #var_afd986ce: isDefined(averagetime) ? averagetime : 0,
-      #var_a248f0a8: domflag.var_a248f0a8
+      #gametime: function_f8d53445(), #round: game.roundsplayed, #label: domflag gameobjects::get_label(), #firstcapture: domflag.firstcapture, #var_afd986ce: isDefined(averagetime) ? averagetime : 0, #var_a248f0a8: domflag.var_a248f0a8
     };
     function_92d1707f(#"hash_4b747d11b8ad1b23", var_93746b40);
   }

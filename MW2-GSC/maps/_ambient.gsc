@@ -124,15 +124,7 @@ ambientVolume() {
 /*
 =============
 ///ScriptDocBegin
-"Name: create_ambient_event( <track> , <min_time> , <max_time> )"
-"Summary: Create an ambient event system. It plays random ambient sounds."
-"Module: Ambient"
-"MandatoryArg: <track>: What to name it"
-"MandatoryArg: <min_time>: The minimum time between sounds"
-"MandatoryArg: <track>: The max time between sounds"
-"Example: event = create_ambient_event( "dcburning_bunker1", 5.0, 15.0 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: create_ambient_event( <track> , <min_time> , <max_time> )""Summary: Create an ambient event system. It plays random ambient sounds.""Module: Ambient""MandatoryArg: <track>: What to name it""MandatoryArg: <min_time>: The minimum time between sounds""MandatoryArg: <track>: The max time between sounds""Example: event = create_ambient_event( "dcburning_bunker1", 5.0, 15.0 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 create_ambient_event(track, min_time, max_time) {
@@ -162,15 +154,7 @@ assert_event_has_aliases() {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_to_ambient_event( <name> , <weight> )"
-"Summary: Add a sound alias to an ambient event system."
-"Module: Ambient"
-"CallOn: An ambient event system (spawnstruct)"
-"MandatoryArg: <name>: The sound alias"
-"MandatoryArg: <weight>: How often to play relative to other aliases in the system"
-"Example: event add_to_ambient_event( "elm_quake_sub_rumble", 1.0 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_to_ambient_event( <name> , <weight> )""Summary: Add a sound alias to an ambient event system.""Module: Ambient""CallOn: An ambient event system (spawnstruct)""MandatoryArg: <name>: The sound alias""MandatoryArg: <weight>: How often to play relative to other aliases in the system""Example: event add_to_ambient_event( "elm_quake_sub_rumble", 1.0 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_to_ambient_event(name, weight) {
@@ -181,15 +165,7 @@ add_to_ambient_event(name, weight) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_to_ambient_event_no_block( <name> , <weight> )"
-"Summary: Add a sound alias to an ambient event system. This sound will not block other ambiences from playing after it."
-"Module: Ambient"
-"CallOn: An ambient event system (spawnstruct)"
-"MandatoryArg: <name>: The sound alias"
-"MandatoryArg: <weight>: How often to play relative to other aliases in the system"
-"Example: event add_to_ambient_event( "elm_quake_sub_rumble", 1.0 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_to_ambient_event_no_block( <name> , <weight> )""Summary: Add a sound alias to an ambient event system. This sound will not block other ambiences from playing after it.""Module: Ambient""CallOn: An ambient event system (spawnstruct)""MandatoryArg: <name>: The sound alias""MandatoryArg: <weight>: How often to play relative to other aliases in the system""Example: event add_to_ambient_event( "elm_quake_sub_rumble", 1.0 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_to_ambient_event_no_block(name, weight) {
@@ -200,14 +176,7 @@ add_to_ambient_event_no_block(name, weight) {
 /*
 =============
 ///ScriptDocBegin
-"Name: map_to_reverb_eq( <eqReverb> )"
-"Summary: Map an ambient event system to reverb or eq tracks. So when the ambient event is activated, appropriate reverb and eq get activated too."
-"Module: Ambient"
-"CallOn: An ambient event system (spawnstruct)"
-"MandatoryArg: <eqReverb>: The eq/reverb type to map to. For example exterior, bunker, alley, etc."
-"Example: event map_to_reverb_eq( "bunker" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: map_to_reverb_eq( <eqReverb> )""Summary: Map an ambient event system to reverb or eq tracks. So when the ambient event is activated, appropriate reverb and eq get activated too.""Module: Ambient""CallOn: An ambient event system (spawnstruct)""MandatoryArg: <eqReverb>: The eq/reverb type to map to. For example exterior, bunker, alley, etc.""Example: event map_to_reverb_eq( "bunker" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 map_to_reverb_eq(eqReverb) {
@@ -291,13 +260,7 @@ use_reverb_settings(track) {
 /*
 =============
 ///ScriptDocBegin
-"Name: map_exterior_to_reverb_eq( <reverb_eq> )"
-"Summary: Reverb and EQ will use this setting when "exterior" ambience is triggered."
-"Module: Ambient"
-"MandatoryArg: <reverb_eq>: The reverb/eq that exterior gets mapped to."
-"Example: map_exterior_to_reverb_eq( "snow_base" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: map_exterior_to_reverb_eq( <reverb_eq> )""Summary: Reverb and EQ will use this setting when "exterior" ambience is triggered.""Module: Ambient""MandatoryArg: <reverb_eq>: The reverb/eq that exterior gets mapped to.""Example: map_exterior_to_reverb_eq( "snow_base" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 map_exterior_to_reverb_eq(reverb_eq) {
@@ -333,14 +296,7 @@ setup_new_eq_settings(track, eqIndex) {
 /*
 =============
 ///ScriptDocBegin
-"Name: blend_to_eq_track( <eqIndex> , <time> )"
-"Summary: Blends from one EQ track to another. NOTE that when you play this command, it will blend from zero to 100% on the track you select. If you were already on this track, this may sound weird."
-"Module: Ambience"
-"MandatoryArg: <eqIndex>: Which of the two EQ tracks to blend to, main or mix (level.eq_main_track, level.eq_mix_track)"
-"OptionalArg: <time>: How much time to blend over."
-"Example: thread maps\_ambient::blend_to_eq_track( level.eq_mix_track, 2 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: blend_to_eq_track( <eqIndex> , <time> )""Summary: Blends from one EQ track to another. NOTE that when you play this command, it will blend from zero to 100% on the track you select. If you were already on this track, this may sound weird.""Module: Ambience""MandatoryArg: <eqIndex>: Which of the two EQ tracks to blend to, main or mix (level.eq_main_track, level.eq_mix_track)""OptionalArg: <time>: How much time to blend over.""Example: thread maps\_ambient::blend_to_eq_track( level.eq_mix_track, 2 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 blend_to_eq_track(eqIndex, time) {
@@ -359,14 +315,7 @@ blend_to_eq_track(eqIndex, time) {
 /*
 =============
 ///ScriptDocBegin
-"Name: use_eq_settings( <track> , <eqIndex> )"
-"Summary: Enable EQ track settings on one of the two EQ channels."
-"Module: Ambience"
-"MandatoryArg: <track>: The EQ tracks ettings from _equilizer.gsc"
-"MandatoryArg: <eqIndex>: You must select either the main track or the mix track, preferably using level.eq_main_track or level.eq_mix_track. See ::blend_to_eq_track."
-"Example: thread maps\_ambient::use_eq_settings( "gulag_cavein", level.eq_mix_track );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: use_eq_settings( <track> , <eqIndex> )""Summary: Enable EQ track settings on one of the two EQ channels.""Module: Ambience""MandatoryArg: <track>: The EQ tracks ettings from _equilizer.gsc""MandatoryArg: <eqIndex>: You must select either the main track or the mix track, preferably using level.eq_main_track or level.eq_mix_track. See ::blend_to_eq_track.""Example: thread maps\_ambient::use_eq_settings( "gulag_cavein", level.eq_mix_track );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 use_eq_settings(track, eqIndex) {
@@ -583,9 +532,7 @@ ambient_trigger() {
     }
 
     // when you leave the trigger set it to whichever point it was closest too
-    // or to the inner_ambience( usually "exterior" ) if self.targetname == "ambient_exit"
-
-    if(progress > cap)
+    // or to the inner_ambience( usually "exterior" ) if self.targetname == "ambient_exit"if(progress > cap)
       progress = 1;
     else
       progress = 0;

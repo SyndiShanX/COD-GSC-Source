@@ -545,9 +545,7 @@ function bombs() {
     bombzone.useweapon = getweapon("briefcase_bomb");
     bombzone.visuals[0].killcament = spawn("script_model", bombzone.visuals[0].origin + vectorscale((0, 0, 1), 128));
     if(isDefined(level.bomb_zone_fixup)) {
-      [
-        [level.bomb_zone_fixup]
-      ](bombzone);
+      [[level.bomb_zone_fixup]](bombzone);
     }
     for(i = 0; i < visuals.size; i++) {
       if(isDefined(visuals[i].script_exploder)) {
@@ -851,9 +849,7 @@ function bombplanted(destroyedobj, player) {
     enemyteam = util::getotherteam(team);
     thread globallogic_audio::set_music_on_team("DEM_WE_SCORE", team, 5);
     thread globallogic_audio::set_music_on_team("DEM_THEY_SCORE", enemyteam, 5);
-    if([
-        [level.gettimelimit]
-      ]() > 0) {
+    if([[level.gettimelimit]]() > 0) {
       level.usingextratime = 1;
     }
     destroyedobj spawning::remove_influencer(destroyedobj.spawninfluencer);

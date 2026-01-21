@@ -638,8 +638,7 @@ remove_oldest() {
     }
 
     self notify(#"oldest_killstreak_removed", {
-      #type: self.pers[# "killstreaks"][0],
-      #id: self.pers[# "killstreak_unique_id"][0]
+      #type: self.pers[# "killstreaks"][0], #id: self.pers[# "killstreak_unique_id"][0]
     });
     self remove_used_killstreak(self.pers[# "killstreaks"][0], self.pers[# "killstreak_unique_id"][0], 0);
   }
@@ -1153,9 +1152,7 @@ remove_when_done(killstreak, haskillstreakbeenused, isfrominventory) {
 
     if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
       var_ad8ae78f = {
-        #gametime: function_f8d53445(),
-        #killstreak: killstreak,
-        #activatedby: getplayerspawnid(self)
+        #gametime: function_f8d53445(), #killstreak: killstreak, #activatedby: getplayerspawnid(self)
       };
       function_92d1707f(#"hash_1aa07f199266e0c7", var_ad8ae78f);
 
@@ -1657,8 +1654,7 @@ trigger_killstreak(killstreaktype, isfrominventory) {
         self.pers[level.killstreaks[killstreaktype].usagekey]++;
         self notify(#"killstreak_used", killstreaktype);
         self notify(#"killstreak_done", {
-          #is_successful: 1,
-          #kstype: killstreaktype
+          #is_successful: 1, #kstype: killstreaktype
         });
         self.usingkillstreakfrominventory = undefined;
       }
@@ -1670,8 +1666,7 @@ trigger_killstreak(killstreaktype, isfrominventory) {
   if(isDefined(self)) {
     self.usingkillstreakfrominventory = undefined;
     self notify(#"killstreak_done", {
-      #is_successful: 0,
-      #kstype: killstreaktype
+      #is_successful: 0, #kstype: killstreaktype
     });
   }
 
@@ -2117,9 +2112,7 @@ monitordamage(killstreak_ref, max_health, destroyed_callback, low_health, low_he
     }
 
     if(isDefined(self.killstreakdamagemodifier)) {
-      damage = [
-        [self.killstreakdamagemodifier]
-      ](damage, attacker, direction, point, type, tagname, modelname, partname, weapon, flags, inflictor, chargelevel);
+      damage = [[self.killstreakdamagemodifier]](damage, attacker, direction, point, type, tagname, modelname, partname, weapon, flags, inflictor, chargelevel);
 
       if(damage <= 0) {
         continue;
@@ -2685,15 +2678,7 @@ destroyentities(entities, attacker, team, weapon, radius) {
 
     if(distancesquared(entity.origin, attacker.origin) < radiussq) {
       entity notify(#"damage", {
-        #amount: damage,
-        #attacker: attacker,
-        #direction: direction_vec,
-        #position: point,
-        #mod: meansofdeath,
-        #tag_name: tagname,
-        #model_name: modelname,
-        #part_name: partname,
-        #weapon: weapon
+        #amount: damage, #attacker: attacker, #direction: direction_vec, #position: point, #mod: meansofdeath, #tag_name: tagname, #model_name: modelname, #part_name: partname, #weapon: weapon
       });
     }
   }

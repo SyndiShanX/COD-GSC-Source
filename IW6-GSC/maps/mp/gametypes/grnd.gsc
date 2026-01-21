@@ -391,8 +391,7 @@ cycleZones() {
     }
 
     if(isDefined(hitEntity)
-
-    ) {
+) {
       level.grnd_zone LinkTo(hitEntity);
     } else if(level.grnd_zone IsLinked()) {
       level.grnd_zone Unlink();
@@ -568,10 +567,7 @@ randomDrops() {
   while(true) {
     owner = getBestPlayer();
     numIncomingVehicles = 1;
-    if(isDefined(owner) &&
-      currentActiveVehicleCount() < maxVehiclesAllowed() &&
-      level.fauxVehicleCount + numIncomingVehicles < maxVehiclesAllowed() &&
-      level.numDropCrates < 8) {
+    if(isDefined(owner) && currentActiveVehicleCount() < maxVehiclesAllowed() && level.fauxVehicleCount + numIncomingVehicles < maxVehiclesAllowed() && level.numDropCrates < 8) {
       owner thread maps\mp\gametypes\_rank::xpEventPopup("earned_care_package");
       owner thread maps\mp\gametypes\_hud_message::SplashNotifyUrgent("callout_earned_carepackage");
       owner thread leaderDialog(level.otherTeam[owner.team] + "_enemy_airdrop_assault_inbound", level.otherTeam[owner.team]);

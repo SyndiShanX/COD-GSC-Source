@@ -2771,9 +2771,7 @@ function function_2868b6f4(b_pause = 1, var_c7f6657d = &function_3d1cdcf3, var_4
   if(b_pause) {
     level thread function_bbbebba6();
     if(isDefined(var_c7f6657d) && (isDefined(var_455239a2) && var_455239a2)) {
-      [
-        [var_c7f6657d]
-      ]();
+      [[var_c7f6657d]]();
     }
   } else {
     level notify("hash_e8e96c72");
@@ -3111,9 +3109,7 @@ function function_a1f6ef06(str_devgui_path, str_dvar, n_value, func, n_base_valu
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
-      [
-        [func]
-      ](n_dvar);
+      [[func]](n_dvar);
       setdvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();

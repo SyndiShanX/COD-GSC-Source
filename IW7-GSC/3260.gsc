@@ -782,9 +782,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isonhumanteam(self)) {
     enemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     if(isDefined(level.onzombiekilledfunc)) {
-      [
-        [level.onzombiekilledfunc]
-      ](var_1, var_4);
+      [[level.onzombiekilledfunc]](var_1, var_4);
     }
   }
 
@@ -1078,9 +1076,7 @@ process_kill_rewards(var_0, var_1, var_2, var_3, var_4, var_5) {
   }
 
   if(isDefined(level.zombie_killed_loot_func)) {
-    if([
-        [level.zombie_killed_loot_func]
-      ](var_6, self.origin, var_1)) {
+    if([[level.zombie_killed_loot_func]](var_6, self.origin, var_1)) {
       return;
     }
   }

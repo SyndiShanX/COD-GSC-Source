@@ -677,16 +677,7 @@ reset_specialty_slots(class_num) {
 }
 blackboxClassChoice(primary, secondary, grenades, specialgrenades, equipment) {
   spawnid = getplayerspawnid(self);
-  bbPrint("mploadouts: spawnid %d body %s head %s primary %s secondary %s grenade %s special %s equipment %s",
-    spawnid,
-    self.cac_body_type,
-    self.cac_head_type,
-    primary,
-    secondary,
-    grenades,
-    specialgrenades,
-    equipment
-  );
+  bbPrint("mploadouts: spawnid %d body %s head %s primary %s secondary %s grenade %s special %s equipment %s", spawnid, self.cac_body_type, self.cac_head_type, primary, secondary, grenades, specialgrenades, equipment);
   for(i = 0; i < self.killstreak.size; i++) {
     bbPrint("mpkillstreaks: spawnid %d name %s", spawnid, self.killstreak[i]);
   }

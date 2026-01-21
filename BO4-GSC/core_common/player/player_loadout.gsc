@@ -29,11 +29,7 @@ function_c67222df() {
 
 init_loadout_slot(slot_index) {
   self.pers[# "loadout"].slots[slot_index] = {
-    #slot: slot_index,
-    #weapon: level.weaponnone,
-    #var_4cfdfa9b: level.weaponnone,
-    #count: 0,
-    #killed: 0
+    #slot: slot_index, #weapon: level.weaponnone, #var_4cfdfa9b: level.weaponnone, #count: 0, #killed: 0
   };
 }
 

@@ -22,9 +22,7 @@ main(var_0) {
     if(isDefined(self.var_C2) && isDefined(self.var_C2.var_71C6)) {
       var_4 = gettime();
       thread func_6335();
-      [
-        [self.var_C2.var_71C6]
-      ]();
+      [[self.var_C2.var_71C6]]();
       if(gettime() == var_4) {
         self notify("dont_end_idle");
       }
@@ -40,9 +38,7 @@ main(var_0) {
     if(isDefined(var_0.var_B24A)) {
       var_4 = gettime();
       thread func_6335();
-      [
-        [var_0.var_B24A]
-      ]();
+      [[var_0.var_B24A]]();
       if(gettime() == var_4) {
         self notify("dont_end_idle");
       }
@@ -127,7 +123,7 @@ end_script(var_0) {
     self.var_B600 = undefined;
   }
 
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
   self.facialidx = undefined;
 }
 
@@ -652,9 +648,7 @@ func_18D4() {
 
 func_128B1(var_0) {
   if(isDefined(var_0.var_BD1C)) {
-    if([
-        [var_0.var_BD1C]
-      ]()) {
+    if([[var_0.var_BD1C]]()) {
       return 1;
     }
   }

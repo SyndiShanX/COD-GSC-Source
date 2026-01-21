@@ -182,9 +182,7 @@ function_b7fcffdd(placeable) {
     }
 
     if(isDefined(level.var_69959686)) {
-      [
-        [level.var_69959686]
-      ](placeable.weapon);
+      [[level.var_69959686]](placeable.weapon);
     }
 
     if(isDefined(self.var_7a3f3edf) && self.var_7a3f3edf && isDefined(self.var_b8878ba9) && isDefined(self.var_b8878ba9)) {
@@ -259,9 +257,7 @@ waitforplaceabletobebuilt(player) {
   buildlength = int(placeable.buildtime * 1000);
 
   if(isDefined(placeable.buildstartedfunc)) {
-    if(![
-        [placeable.buildstartedfunc]
-      ](placeable, player)) {
+    if(![[placeable.buildstartedfunc]](placeable, player)) {
       return 0;
     }
   }
@@ -277,9 +273,7 @@ waitforplaceabletobebuilt(player) {
     }
 
     if(isDefined(placeable.buildprogressfunc)) {
-      [
-        [placeable.buildprogressfunc]
-      ](placeable, player, (gettime() - starttime) / buildlength);
+      [[placeable.buildprogressfunc]](placeable, player, (gettime() - starttime) / buildlength);
     }
 
     waitframe(1);
@@ -647,9 +641,7 @@ shutdownoncancelevent(placeable) {
 
   if(isDefined(placeable.weapon) && placeable.weapon.deployable) {
     if(isDefined(level.var_69959686)) {
-      [
-        [level.var_69959686]
-      ](placeable.weapon);
+      [[level.var_69959686]](placeable.weapon);
     }
 
     if(isDefined(self.var_7a3f3edf) && self.var_7a3f3edf && isDefined(player.var_b8878ba9) && isDefined(player.var_b8878ba9)) {
@@ -668,9 +660,7 @@ shutdownoncancelevent(placeable) {
     if(placeable.cancelable) {
       player oncancel(placeable);
     } else if(isDefined(placeable.onshutdown)) {
-      [
-        [placeable.onshutdown]
-      ](placeable);
+      [[placeable.onshutdown]](placeable);
     }
 
     if(isDefined(placeable)) {

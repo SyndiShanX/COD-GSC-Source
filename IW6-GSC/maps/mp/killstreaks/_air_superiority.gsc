@@ -46,9 +46,7 @@ onUse(lifeId, streakName) {
   assert(isDefined(self));
 
   otherTeam = getOtherTeam(self.team);
-  if((level.teamBased && level.teamAirDenied[otherTeam]) ||
-    (!level.teamBased && isDefined(level.airDeniedPlayer) && level.airDeniedPlayer == self)
-  ) {
+  if((level.teamBased && level.teamAirDenied[otherTeam]) || (!level.teamBased && isDefined(level.airDeniedPlayer) && level.airDeniedPlayer == self)) {
     self IPrintLnBold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return false;
   } else {
@@ -96,13 +94,7 @@ doOneFlyby(streakName, lifeId, targetPos, dir, flyHeight) {
 
   flightPath = maps\mp\killstreaks\_plane::getFlightPath(targetPos, dir, config.halfDistance, true, flyHeight, config.speed, -0.5 * config.halfDistance, streakName);
 
-  level thread maps\mp\killstreaks\_plane::doFlyby(lifeId, self, lifeId,
-    flightPath["startPoint"] + (0, 0, randomInt(config.heightRange)),
-    flightPath["endPoint"] + (0, 0, randomInt(config.heightRange)),
-    flightPath["attackTime"],
-    flightPath["flyTime"],
-    dir,
-    streakName);
+  level thread maps\mp\killstreaks\_plane::doFlyby(lifeId, self, lifeId, flightPath["startPoint"] + (0, 0, randomInt(config.heightRange)), flightPath["endPoint"] + (0, 0, randomInt(config.heightRange)), flightPath["attackTime"], flightPath["flyTime"], dir, streakName);
 }
 
 attackEnemyAircraft(pathEnd, flyTime, beginAttackTime, owner, streakName) {
@@ -117,9 +109,7 @@ attackEnemyAircraft(pathEnd, flyTime, beginAttackTime, owner, streakName) {
   numVolleys = config.numMissileVolleys;
   targetIndex = targets.size - 1;
 
-  while(targetIndex >= 0 &&
-    numVolleys > 0
-  ) {
+  while(targetIndex >= 0 && numVolleys > 0) {
     target = targets[targetIndex];
     if(isDefined(target) && IsAlive(target)) {
       self fireAtTarget(target);
@@ -163,9 +153,7 @@ findAllTargets(attacker, attackerTeam) {
 
   findTargetsOfType(attacker, victimTeam, isEnemyFunc, level.heli_pilot, wrapper);
   if(isDefined(level.lbSniper)) {
-    if([
-        [isEnemyFunc]
-      ](attacker, victimTeam, level.lbSniper)) {
+    if([[isEnemyFunc]](attacker, victimTeam, level.lbSniper)) {
       wrapper.targets[wrapper.targets.size] = level.lbSniper;
     }
   }

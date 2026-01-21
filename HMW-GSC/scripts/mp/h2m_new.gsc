@@ -20,9 +20,7 @@ matchstarttimerwaitforplayers_stub() {
 
   //waitforplayers(level.prematchperiod); // TODO: do we need? hmmm
 
-  if(maps\mp\_utility::getmapname() != "trainer" &&
-    level.prematchperiodend > 0 &&
-    !isDefined(level.hostmigrationtimer))
+  if(maps\mp\_utility::getmapname() != "trainer" && level.prematchperiodend > 0 && !isDefined(level.hostmigrationtimer))
     maps\mp\gametypes\_gamelogic::matchstarttimer(level.prematchperiodend);
   else
     setomnvar("ui_match_countdown_title", 0);

@@ -67,27 +67,27 @@ main() {
 
   thread debugDescent();
 
-  animLength = GetAnimLength( % mp_descent_light01_fall);
+  animLength = GetAnimLength(%mp_descent_light01_fall);
   animateScriptableProps("animated_model_descent_light01", animLength);
-  animLength = GetAnimLength( % mp_descent_light02_fall);
+  animLength = GetAnimLength(%mp_descent_light02_fall);
   animateScriptableProps("animated_model_descent_light02", animLength);
-  animLength = GetAnimLength( % mp_descent_light03_fall);
+  animLength = GetAnimLength(%mp_descent_light03_fall);
   animateScriptableProps("animated_model_descent_light03", animLength);
-  animLength = GetAnimLength( % mp_descent_light04_fall);
+  animLength = GetAnimLength(%mp_descent_light04_fall);
   animateScriptableProps("animated_model_descent_light04", animLength);
-  animLength = GetAnimLength( % mp_descent_phone01_fall);
+  animLength = GetAnimLength(%mp_descent_phone01_fall);
   animateScriptableProps("animated_model_descent_phone01", animLength);
-  animLength = GetAnimLength( % mp_descent_phone02_fall);
+  animLength = GetAnimLength(%mp_descent_phone02_fall);
   animateScriptableProps("animated_model_descent_phone02", animLength);
-  animLength = GetAnimLength( % mp_descent_microwave_fall);
+  animLength = GetAnimLength(%mp_descent_microwave_fall);
   animateScriptableProps("animated_model_descent_microwave", animLength);
-  animLength = GetAnimLength( % mp_descent_tv01_fall);
+  animLength = GetAnimLength(%mp_descent_tv01_fall);
   animateScriptableProps("animated_model_descent_tv01", animLength);
 
-  animLength = GetAnimLength( % mp_descent_whiteboard_fall);
+  animLength = GetAnimLength(%mp_descent_whiteboard_fall);
   animateScriptableProps("animated_model_descent_whiteboard", animLength);
   animateScriptableProps("animated_model_descent_bulletinboard", animLength);
-  animLength = GetAnimLength( % mp_descent_kitchen_fall);
+  animLength = GetAnimLength(%mp_descent_kitchen_fall);
   animateScriptableProps("animated_model_descent_kitchen", animLength);
 
   level setupBuildingCollapse();

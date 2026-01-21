@@ -207,8 +207,7 @@ function_f6cd912d(var_ef21400 = 0) {
     if(isDefined(var_af83ca3)) {
       var_a630f8a4 = level.var_45827161[var_af83ca3];
       s_special_round = {
-        #n_round: var_af83ca3,
-        #archetypes: isDefined(var_a630f8a4.var_d7d3cd31) ? var_a630f8a4.var_d7d3cd31 : var_a630f8a4.var_a51dd114
+        #n_round: var_af83ca3, #archetypes: isDefined(var_a630f8a4.var_d7d3cd31) ? var_a630f8a4.var_d7d3cd31 : var_a630f8a4.var_a51dd114
       };
       return s_special_round;
     }
@@ -347,11 +346,9 @@ register_archetype(str_archetype, var_c48a6bb7, func_round_spawn, var_9a8e4fdb, 
 
 __init__() {
   level.var_b7a8520a = array({
-    #var_101fc930: array(0.75, 0.25),
-    #var_fadd1539: array(2, 2)
+    #var_101fc930: array(0.75, 0.25), #var_fadd1539: array(2, 2)
   }, {
-    #var_101fc930: array(0.25, 0.25, 0.25, 0.25),
-    #var_fadd1539: array(1, 1, 1, 1)
+    #var_101fc930: array(0.25, 0.25, 0.25, 0.25), #var_fadd1539: array(1, 1, 1, 1)
   });
   level.var_5d2cd3b1 = [];
   level.var_89fda7e = [];
@@ -418,9 +415,7 @@ function_4990741c() {
 
     if(var_a6559064 > level.var_fb9b5925 && isDefined(level.var_c1a3937d[var_a6559064])) {
       var_75b393f9 = level.var_819e7dfd[level.var_c1a3937d[var_a6559064]];
-      var_79976254 = [
-        [var_75b393f9.var_ef500cb7]
-      ]();
+      var_79976254 = [[var_75b393f9.var_ef500cb7]]();
 
       if(!(isDefined(var_79976254) && var_79976254) && isDefined(var_75b393f9.var_8988f7a0)) {
         var_9e2294d7 = level.var_819e7dfd[var_75b393f9.var_8988f7a0];
@@ -460,9 +455,7 @@ function_3d5b3f85(str_archetype) {
   level.var_c1a3937d[var_31b155cf] = str_archetype;
 
   var_e5aaf7f4 = {
-    #str_archetype: str_archetype,
-    #n_spawn: var_31b155cf,
-    #b_spawned: 0
+    #str_archetype: str_archetype, #n_spawn: var_31b155cf, #b_spawned: 0
   };
 
   if(!isDefined(level.var_50cfb6c2[0])) {
@@ -652,9 +645,7 @@ function_979b03db(var_a630f8a4) {
     assert(isDefined(var_75b393f9.var_87ed2709), "<dev string:x136>" + str_archetype);
 
     if(level.zombie_total > 0) {
-      ai = [
-        [var_75b393f9.var_87ed2709]
-      ]();
+      ai = [[var_75b393f9.var_87ed2709]]();
     }
 
     if(isDefined(ai)) {
@@ -1005,9 +996,7 @@ function_d7864087(var_dbce0c44) {
         level.var_c1a3937d[n_spawn] = str_archetype;
 
         var_e5aaf7f4 = {
-          #str_archetype: str_archetype,
-          #n_spawn: n_spawn,
-          #b_spawned: 0
+          #str_archetype: str_archetype, #n_spawn: n_spawn, #b_spawned: 0
         };
 
         if(!isDefined(level.var_50cfb6c2[i])) {

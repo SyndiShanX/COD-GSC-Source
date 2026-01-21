@@ -222,14 +222,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
 
         attacker maps\mp\gametypes\_persistence::statSetChild("round", "sguardWave", attacker.assists);
       }
-    } else if((sMeansOfDeath == "MOD_PISTOL_BULLET") ||
-      (sMeansOfDeath == "MOD_RIFLE_BULLET") ||
-      (sMeansOfDeath == "MOD_HEAD_SHOT") ||
-      (sMeansOfDeath == "MOD_PROJECTILE") || (sMeansOfDeath == "MOD_PROJECTILE_SPLASH") ||
-      (sMeansOfDeath == "MOD_IMPACT") ||
-      (sMeansOfDeath == "MOD_GRENADE") || (sMeansOfDeath == "MOD_GRENADE_SPLASH") ||
-      (sMeansOfDeath == "MOD_MELEE" && isMeleeWeapon)
-    ) {
+    } else if((sMeansOfDeath == "MOD_PISTOL_BULLET") || (sMeansOfDeath == "MOD_RIFLE_BULLET") || (sMeansOfDeath == "MOD_HEAD_SHOT") || (sMeansOfDeath == "MOD_PROJECTILE") || (sMeansOfDeath == "MOD_PROJECTILE_SPLASH") || (sMeansOfDeath == "MOD_IMPACT") || (sMeansOfDeath == "MOD_GRENADE") || (sMeansOfDeath == "MOD_GRENADE_SPLASH") || (sMeansOfDeath == "MOD_MELEE" && isMeleeWeapon)) {
       if(sWeapon != attacker.primaryWeapon && !attacker isValidThrowingKnifeKill(sWeapon)) {
         return;
       }
@@ -472,8 +465,7 @@ getRandomWeaponFromCategory(categoryName) {
       data = weaponList[index];
 
       baseWeapon = getBaseWeaponName(data["weapon"]);
-      if(!isDefined(level.selectedWeapons[baseWeapon]) ||
-        loopCount > weaponList.size) {
+      if(!isDefined(level.selectedWeapons[baseWeapon]) || loopCount > weaponList.size) {
         level.selectedWeapons[baseWeapon] = true;
         newWeapon = data["weapon"];
         break;
@@ -576,8 +568,7 @@ isValidThrowingKnifeKill(killWeapon) {
 onPlayerScore(event, player, victim) {
   score = 0;
 
-  if(event == "gained_gun_score" ||
-    event == "dropped_gun_score") {
+  if(event == "gained_gun_score" || event == "dropped_gun_score") {
     score = maps\mp\gametypes\_rank::getScoreInfoValue(event);
     Assert(isDefined(score));
   }

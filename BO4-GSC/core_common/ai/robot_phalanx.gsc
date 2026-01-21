@@ -121,9 +121,7 @@ class robotphalanx {
   }
 
   function private _updatephalanxthread(phalanx) {
-    while([
-        [phalanx]
-      ] - > _updatephalanx()) {
+    while([[phalanx]] - > _updatephalanx()) {
       wait 1;
     }
   }

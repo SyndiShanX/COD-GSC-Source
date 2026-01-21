@@ -236,12 +236,7 @@ waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string
 }
 
 waittill_any_return(string1, string2, string3, string4, string5, string6) {
-  if((!isDefined(string1) || string1 != "death") &&
-    (!isDefined(string2) || string2 != "death") &&
-    (!isDefined(string3) || string3 != "death") &&
-    (!isDefined(string4) || string4 != "death") &&
-    (!isDefined(string5) || string5 != "death") &&
-    (!isDefined(string6) || string6 != "death"))
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death"))
     self endon("death");
 
   ent = spawnStruct();
@@ -356,12 +351,7 @@ waittill_any_in_array_or_timeout_no_endon_death(string_array, timeOut) {
 }
 
 waittill_any_timeout(timeOut, string1, string2, string3, string4, string5, string6) {
-  if((!isDefined(string1) || string1 != "death") &&
-    (!isDefined(string2) || string2 != "death") &&
-    (!isDefined(string3) || string3 != "death") &&
-    (!isDefined(string4) || string4 != "death") &&
-    (!isDefined(string5) || string5 != "death") &&
-    (!isDefined(string6) || string6 != "death"))
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death") && (!isDefined(string6) || string6 != "death"))
     self endon("death");
 
   ent = spawnStruct();
@@ -2595,9 +2585,7 @@ array_sort_with_func(array, compare_func) {
   for(j = 1; j < array.size; j++) {
     key = array[j];
     for(i = j - 1;
-      (i >= 0) && ![
-        [compare_func]
-      ](array[i], key); i--) {
+      (i >= 0) && ![[compare_func]](array[i], key); i--) {
       array[i + 1] = array[i];
     }
     array[i + 1] = key;

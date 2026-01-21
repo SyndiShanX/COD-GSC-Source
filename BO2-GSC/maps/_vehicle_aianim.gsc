@@ -576,9 +576,7 @@ guy_handle(guy, pos) {
   while(true) {
     self waittill("groupedanimevent", other);
 
-    if(isDefined(level.vehicle_aianimcheck[other]) && ![
-        [level.vehicle_aianimcheck[other]]
-      ](guy, pos)) {
+    if(isDefined(level.vehicle_aianimcheck[other]) && ![[level.vehicle_aianimcheck[other]]](guy, pos)) {
       continue;
     }
     if(isDefined(self.groupedanim_pos)) {
@@ -1757,7 +1755,7 @@ guy_man_gunner_turret() {
         wait 0.1;
     }
 
-    self clearanim( % root, 0.05);
+    self clearanim(%root, 0.05);
     firing = self.vehicle isgunnerfiring(animpos.vehiclegunner - 1);
     baseanim = isDefined(animpos.fire) && firing ? animpos.fire : animpos.idle;
     upanim = isDefined(animpos.fireup) && firing ? animpos.fireup : animpos.aimup;

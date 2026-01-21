@@ -234,9 +234,7 @@ box_setActive(skipOwnerUse) {
 
   self.objIdFriendly = curObjID;
 
-  if((!isDefined(skipOwnerUse) || !skipOwnerUse) && isDefined(boxConfig.onuseCallback) &&
-    (!isDefined(boxconfig.canUseCallback) || (self.owner[[boxConfig.canUseCallback]]()))
-  ) {
+  if((!isDefined(skipOwnerUse) || !skipOwnerUse) && isDefined(boxConfig.onuseCallback) && (!isDefined(boxconfig.canUseCallback) || (self.owner[[boxConfig.canUseCallback]]()))) {
     if(isReallyAlive(self.owner))
       self.owner[[boxConfig.onUseCallback]](self);
   }
@@ -244,9 +242,7 @@ box_setActive(skipOwnerUse) {
   if(level.teamBased) {
     Objective_Team(curObjID, self.team);
     foreach(player in level.players) {
-      if(self.team == player.team &&
-        (!isDefined(boxConfig.canUseCallback) || player[[boxConfig.canUseCallback]](self))
-      ) {
+      if(self.team == player.team && (!isDefined(boxConfig.canUseCallback) || player[[boxConfig.canUseCallback]](self))) {
         self box_SetIcon(player, boxConfig.streakName, boxConfig.headIconOffset);
       }
     }
@@ -379,11 +375,7 @@ box_setInactive() {
 box_handleDamage() {
   boxConfig = level.boxSettings[self.boxType];
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    boxConfig.maxHealth,
-    boxConfig.damageFeedback, ::boxModifyDamage, ::boxHandleDeathDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(boxConfig.maxHealth, boxConfig.damageFeedback, ::boxModifyDamage, ::boxHandleDeathDamage, true);
 }
 
 boxModifyDamage(attacker, weapon, type, damage) {
@@ -422,14 +414,7 @@ box_handleDeath() {
     if(isDefined(self.owner))
       owner = self.owner;
 
-    RadiusDamage(self.origin + (0, 0, boxConfig.headIconOffset),
-      boxConfig.deathDamageRadius,
-      boxConfig.deathDamageMax,
-      boxConfig.deathDamageMin,
-      owner,
-      "MOD_EXPLOSIVE",
-      boxConfig.deathWeaponInfo
-    );
+    RadiusDamage(self.origin + (0, 0, boxConfig.headIconOffset), boxConfig.deathDamageRadius, boxConfig.deathDamageMax, boxConfig.deathDamageMin, owner, "MOD_EXPLOSIVE", boxConfig.deathWeaponInfo);
   }
 
   wait(0.1);
@@ -562,17 +547,14 @@ boxCaptureThink(player) {
       }
     }
 
-    if(tiggerer == player &&
-      self useHoldThink(player, level.boxSettings[self.boxType].useTime)
-    ) {
+    if(tiggerer == player && self useHoldThink(player, level.boxSettings[self.boxType].useTime)) {
       self notify("captured", player);
     }
   }
 }
 
 isFriendlyToBox(box) {
-  return (level.teamBased &&
-    self.team == box.team);
+  return (level.teamBased && self.team == box.team);
 }
 
 box_timeOut() {

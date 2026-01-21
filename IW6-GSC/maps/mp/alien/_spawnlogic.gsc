@@ -1479,10 +1479,7 @@ spawn_alien_meteoroid(alien_type, count, respawn, spm, lasting_time) {
 
   spawn_meteoroid_aliens(impact_node, alien_type, count, respawn, spm, lasting_time);
 
-  if(flag_exist("hives_cleared") &&
-    flag("hives_cleared") &&
-    isDefined(impact_node.script_noteworthy) &&
-    impact_node.script_noteworthy == "escape_blocker_meteor") {
+  if(flag_exist("hives_cleared") && flag("hives_cleared") && isDefined(impact_node.script_noteworthy) && impact_node.script_noteworthy == "escape_blocker_meteor") {
     total_delay = CONST_ESCAPE_BLOCKER_METEOR_DELAY;
     lightning_strikes = 3;
 

@@ -15,9 +15,7 @@ maps\_motorcycle::main( "vehicle_motorcycle_01" );
 and these lines in your CSV:
 include,vehicle_motorcycle
 
-defaultmdl="vehicle_motorcycle_01"
-default:"vehicletype" "motorcycle"
-*/
+defaultmdl="vehicle_motorcycle_01"default:"vehicletype" "motorcycle"*/
 
 /*QUAKED script_vehicle_motorcycle_02 (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -27,9 +25,7 @@ maps\_motorcycle::main( "vehicle_motorcycle_02" );
 and these lines in your CSV:
 include,vehicle_motorcycle
 
-defaultmdl="vehicle_motorcycle_02"
-default:"vehicletype" "motorcycle"
-*/
+defaultmdl="vehicle_motorcycle_02"default:"vehicletype" "motorcycle"*/
 
 main(model, type) {
   build_template("motorcycle", model, type);

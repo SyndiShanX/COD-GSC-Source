@@ -40,10 +40,10 @@ set_vehicle_anims(positions) {
   positions[3].vehicle_getoutanim_clear = 0;
   positions[2].vehicle_getoutsound = "osprey_door_open";
   positions[2].vehicle_getinsound = "osprey_door_close";
-  positions[1].delay = getanimlength( % v_vtol_doors_open) - 1.7;
-  positions[2].delay = getanimlength( % v_vtol_doors_open) - 1.7;
-  positions[3].delay = getanimlength( % v_vtol_doors_open) - 1.7;
-  positions[4].delay = getanimlength( % v_vtol_doors_open) - 1.7;
+  positions[1].delay = getanimlength(%v_vtol_doors_open) - 1.7;
+  positions[2].delay = getanimlength(%v_vtol_doors_open) - 1.7;
+  positions[3].delay = getanimlength(%v_vtol_doors_open) - 1.7;
+  positions[4].delay = getanimlength(%v_vtol_doors_open) - 1.7;
   anim_for_client_script = % veh_anim_v78_vtol_engine_left;
   anim_for_client_script = % veh_anim_v78_vtol_engine_right;
   return positions;
@@ -150,7 +150,7 @@ precache_extra_models() {
 #using_animtree("vehicles");
 
 open_hatch() {
-  self setanim( % v_vtol_doors_open, 1, 0.1, 1);
+  self setanim(%v_vtol_doors_open, 1, 0.1, 1);
 }
 
 close_hatch(close_time) {
@@ -160,34 +160,34 @@ close_hatch(close_time) {
   self endon("death");
 
   if(!isDefined(close_time)) {
-    self setanim( % v_vtol_doors_open, 1, 0.1, 0);
-    self setanimtime( % v_vtol_doors_open, 0);
+    self setanim(%v_vtol_doors_open, 1, 0.1, 0);
+    self setanimtime(%v_vtol_doors_open, 0);
   } else {
     max_close_time = close_time;
 
     while(close_time > 0) {
       t = close_time / max_close_time;
-      self setanimtime( % v_vtol_doors_open, t);
+      self setanimtime(%v_vtol_doors_open, t);
       close_time = close_time - 0.05;
       wait 0.05;
     }
 
-    self setanimtime( % v_vtol_doors_open, 0);
-    self setanim( % v_vtol_doors_open, 1, 0.1, 0);
+    self setanimtime(%v_vtol_doors_open, 0);
+    self setanim(%v_vtol_doors_open, 1, 0.1, 0);
   }
 }
 
 raise_gear() {
-  self setanim( % v_vtol_gear_up, 1, 0.1, 1);
+  self setanim(%v_vtol_gear_up, 1, 0.1, 1);
 }
 
 lower_gear() {
-  self setanim( % v_vtol_gear_down, 1, 0.1, 1);
+  self setanim(%v_vtol_gear_down, 1, 0.1, 1);
 }
 
 waittill_unloaded() {
   self endon("death");
   self waittill("unloaded");
-  self clearanim( % v_vtol_hover_idle, 0.1);
+  self clearanim(%v_vtol_hover_idle, 0.1);
   self thread close_hatch(1);
 }

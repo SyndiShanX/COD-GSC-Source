@@ -585,23 +585,23 @@ intro_sneakup_tableguys() {
 #using_animtree("generic_human");
 
 stand2run180r() {
-  animscripts\exit_node::donodeexitanimation_impl( % stand_2_run_180r);
+  animscripts\exit_node::donodeexitanimation_impl(%stand_2_run_180r);
 }
 
 cornerright_exitforwards() {
-  animscripts\exit_node::donodeexitanimation_impl( % corner_standr_trans_cqb_out_8);
+  animscripts\exit_node::donodeexitanimation_impl(%corner_standr_trans_cqb_out_8);
 }
 
 dashsniper_exit() {
-  animscripts\exit_node::donodeexitanimation_impl( % corner_standr_trans_out_4);
+  animscripts\exit_node::donodeexitanimation_impl(%corner_standr_trans_out_4);
 }
 
 cargo_exit() {
-  animscripts\exit_node::donodeexitanimation_impl( % corner_standr_trans_cqb_out_9);
+  animscripts\exit_node::donodeexitanimation_impl(%corner_standr_trans_cqb_out_9);
 }
 
 center_exit() {
-  animscripts\exit_node::donodeexitanimation_impl( % corner_standr_trans_cqb_out_9);
+  animscripts\exit_node::donodeexitanimation_impl(%corner_standr_trans_cqb_out_9);
 }
 
 clearpathturnanimblendtime() {
@@ -3016,7 +3016,7 @@ cargo_handle_defend1_flag() {
   var_0 = getent("cargo_defend1_node", "targetname");
   var_0 waittill("trigger");
   common_scripts\utility::flag_set("cargo_enemy_ready_to_defend1");
-  var_1 = getanimlength( % patrol_bored_idle_smoke);
+  var_1 = getanimlength(%patrol_bored_idle_smoke);
   wait(var_1 - 1.25);
   common_scripts\utility::flag_clear("cargo_enemy_ready_to_defend1");
   common_scripts\utility::flag_set("cargo_enemy_defend_moment_past");
@@ -3109,7 +3109,7 @@ cargo_attack1() {
   var_1 = spawn("script_origin", var_0.origin);
   var_1.angles = var_0.angles;
   var_1 maps\_anim::anim_reach_and_arrive_facing_anim_solo(self, "cargo_attack_1", "exposed_crouch_crouchwalk", undefined, "generic");
-  animscripts\setposemovement::playtransitionanimation( % exposed_crouch_2_stand, "stand", "stop", undefined, 1.5);
+  animscripts\setposemovement::playtransitionanimation(%exposed_crouch_2_stand, "stand", "stop", undefined, 1.5);
   thread cargo_attack1_commit(var_1, var_0);
   var_1 waittill("cargo_attack_1");
 }
@@ -4517,7 +4517,7 @@ graveyard_hind_detect_damage() {
   self.body = var_0;
   self hide();
   var_0 useanimtree(#animtree);
-  var_0 setanim( % bh_rotors);
+  var_0 setanim(%bh_rotors);
   thread graveyard_hind_kill_body(var_0);
   var_0 setCanDamage(1);
   var_0 waittill("damage");
@@ -4546,7 +4546,7 @@ dash_hind_detect_damage() {
   var_0 hide();
   self.body = var_0;
   var_0 useanimtree(#animtree);
-  var_0 setanim( % bh_rotors);
+  var_0 setanim(%bh_rotors);
   thread graveyard_hind_kill_body(var_0);
   var_0 setCanDamage(1);
   var_0 waittill("damage");

@@ -210,7 +210,7 @@ crawlingpistol() {
   self.a.special = "none";
   self thread paindeathnotify();
   self.issniper = 0;
-  self setanimknoball( % dying, % body, 1, 0.1, 1);
+  self setanimknoball(%dying, %body, 1, 0.1, 1);
 
   if(!self dyingcrawl()) {
     return;
@@ -279,8 +279,8 @@ crawlingpistol() {
   }
 
   self notify("end_dying_crawl_back_aim");
-  self clearanim( % dying_back_aim_4_wrapper, 0.3);
-  self clearanim( % dying_back_aim_6_wrapper, 0.3);
+  self clearanim(%dying_back_aim_4_wrapper, 0.3);
+  self clearanim(%dying_back_aim_6_wrapper, 0.3);
   self.a.nodeath = 1;
   deathanim = animarraypickrandom("back_death");
   self setflaggedanimknobrestart("back_death", deathanim, 1, 0.1, 1.0);
@@ -410,15 +410,15 @@ dyingcrawlbackaim() {
         aimyaw = -45.0;
 
       weight = aimyaw / -45.0;
-      self setanim( % dying_back_aim_4_wrapper, weight, 0.05);
-      self setanim( % dying_back_aim_6_wrapper, 0, 0.05);
+      self setanim(%dying_back_aim_4_wrapper, weight, 0.05);
+      self setanim(%dying_back_aim_6_wrapper, 0, 0.05);
     } else {
       if(aimyaw > 45.0)
         aimyaw = 45.0;
 
       weight = aimyaw / 45.0;
-      self setanim( % dying_back_aim_6_wrapper, weight, 0.05);
-      self setanim( % dying_back_aim_4_wrapper, 0, 0.05);
+      self setanim(%dying_back_aim_6_wrapper, weight, 0.05);
+      self setanim(%dying_back_aim_4_wrapper, 0, 0.05);
     }
 
     prevyaw = aimyaw;
@@ -750,11 +750,11 @@ dopainfromarray(painanims, rate, usestopaimnotetrack) {
 painstopaiming() {
   self endon("killanimscript");
   self waittillmatch("painanim", "stop_aim");
-  self clearanim( % aim_4, 0.1);
-  self clearanim( % aim_6, 0.1);
-  self clearanim( % aim_2, 0.1);
-  self clearanim( % aim_8, 0.1);
-  self clearanim( % exposed_aiming, 0.1);
+  self clearanim(%aim_4, 0.1);
+  self clearanim(%aim_6, 0.1);
+  self clearanim(%aim_2, 0.1);
+  self clearanim(%aim_8, 0.1);
+  self clearanim(%exposed_aiming, 0.1);
 }
 
 getpainanim() {
@@ -1060,10 +1060,10 @@ playpainanim(painanim) {
   else
     rate = self.animplaybackrate;
 
-  self setflaggedanimknoballrestart("painanim", painanim, % body, 1, 0.1, rate);
+  self setflaggedanimknoballrestart("painanim", painanim, %body, 1, 0.1, rate);
 
   if(self.a.pose == "prone")
-    self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self updateprone(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
 
   if(animhasnotetrack(painanim, "start_aim")) {
     self thread notifystartaim("painanim");
@@ -1088,7 +1088,7 @@ runpainblendout(painanim, rate) {
     recordenttext("Pain - " + self getentitynumber() + " + blending out from pain to run ", self, level.color_debug["yellow"], "Animscript");
 
   nextanim = animscripts\run::getrunanim();
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("run_anim", nextanim, 1, 0.2);
 }
 
@@ -1132,7 +1132,7 @@ additive_pain() {
     return;
   }
   self.doingadditivepain = 1;
-  painanimarray = array( % pain_add_standing_belly, % pain_add_standing_left_arm, % pain_add_standing_right_arm);
+  painanimarray = array(%pain_add_standing_belly, %pain_add_standing_left_arm, %pain_add_standing_right_arm);
   painanim = % pain_add_standing_belly;
 
   if(self damagelocationisany("left_arm_lower", "left_arm_upper", "left_hand"))
@@ -1147,11 +1147,11 @@ additive_pain() {
   else
     painanim = painanimarray[randomint(painanimarray.size)];
 
-  self setanimlimited( % juggernaut_pain, 1, 0.1, 1);
+  self setanimlimited(%juggernaut_pain, 1, 0.1, 1);
   self setanimlimited(painanim, 1, 0, 1);
   wait 0.4;
   self clearanim(painanim, 0.2);
-  self clearanim( % juggernaut_pain, 0.2);
+  self clearanim(%juggernaut_pain, 0.2);
   self.doingadditivepain = undefined;
 }
 

@@ -432,7 +432,7 @@ player_door_kick() {
   e_clip_linkto = getent("player_blocker_door_clip_2", "targetname");
   e_clip_linkto linkto(e_door);
   level waittill("slums_noriega_pistol_started");
-  anim_length = getanimlength( % ch_pan_05_01_noriega_pistol_mason);
+  anim_length = getanimlength(%ch_pan_05_01_noriega_pistol_mason);
   wait(anim_length - 4);
   trigger_wait("trig_player_kick_door");
   level thread fxanim_reconstruct("overlook_building_explode");
@@ -796,7 +796,7 @@ e_02_apache_attack() {
 
   foreach(e_drone in a_pdf) {
     if(isDefined(e_drone)) {
-      e_drone thread drone_dodeath( % ai_death_collapse_in_place, "remove_drone_corpses");
+      e_drone thread drone_dodeath(%ai_death_collapse_in_place, "remove_drone_corpses");
       wait(randomfloatrange(0.5, 1.0));
     }
   }
@@ -1494,9 +1494,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
     }
 
     if(!isDefined(node.script_waittill) || node.script_waittill != "none") {
-      [
-        [set_goal_func_quits]
-      ](node);
+      [[set_goal_func_quits]](node);
       self waittill("goal");
     }
 

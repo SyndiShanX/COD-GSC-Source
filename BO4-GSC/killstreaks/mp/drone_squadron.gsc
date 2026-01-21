@@ -62,8 +62,7 @@ calcspawnorigin(origin, angles) {
     dir = vectornormalize(origin - var_109e505c[0].origin);
     angles = vectortoangles(dir);
     return {
-      #origin: var_109e505c[0].origin,
-      #angles: angles
+      #origin: var_109e505c[0].origin, #angles: angles
     };
   }
 
@@ -161,8 +160,7 @@ calcspawnorigin(origin, angles) {
       recordsphere(spawnloc, 5, (0, 0, 1), "<dev string:x70>");
 
       return {
-        #origin: spawnloc,
-        #angles: vectortoangles(dir * -1)
+        #origin: spawnloc, #angles: vectortoangles(dir * -1)
       };
     }
   }
@@ -537,8 +535,7 @@ function_89609eb8(origin, angles) {
     dir = vectornormalize(origin - var_109e505c[0].origin);
     angles = vectortoangles(dir);
     return {
-      #origin: var_109e505c[0].origin,
-      #angles: angles
+      #origin: var_109e505c[0].origin, #angles: angles
     };
   }
 
@@ -570,8 +567,7 @@ function_89609eb8(origin, angles) {
       recordsphere(spawnloc, 5, (0, 0, 1), "<dev string:x70>");
 
       return {
-        #origin: spawnloc,
-        #angles: (0, 0, 0)
+        #origin: spawnloc, #angles: (0, 0, 0)
       };
     }
   }

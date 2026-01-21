@@ -159,7 +159,7 @@ moveswim_noncombat_exit() {
 #using_animtree("generic_human");
 
 moveswim_combat_enter() {
-  self setanimknob( % combatrun, 1.0, 0.5, self.moveplaybackrate);
+  self setanimknob(%combatrun, 1.0, 0.5, self.moveplaybackrate);
 
   if(self.swim.movestate != "combat_forward")
     moveswim_combat_move_set("combat_forward");
@@ -206,10 +206,10 @@ moveswim_combat_strafe_enter() {
 }
 
 moveswim_combat_strafe_exit() {
-  self clearanim( % combatrun_forward, 0.2);
-  self clearanim( % combatrun_backward, 0.2);
-  self clearanim( % combatrun_left, 0.2);
-  self clearanim( % combatrun_right, 0.2);
+  self clearanim(%combatrun_forward, 0.2);
+  self clearanim(%combatrun_backward, 0.2);
+  self clearanim(%combatrun_left, 0.2);
+  self clearanim(%combatrun_right, 0.2);
 
   if(animscripts\utility::isspaceai())
     self.turnrate = 0.16;
@@ -239,19 +239,19 @@ swim_track_forward_enter() {
 }
 
 swim_track_forward_exit() {
-  self clearanim( % aim_2, 0.2);
-  self clearanim( % aim_4, 0.2);
-  self clearanim( % aim_6, 0.2);
-  self clearanim( % aim_8, 0.2);
+  self clearanim(%aim_2, 0.2);
+  self clearanim(%aim_4, 0.2);
+  self clearanim(%aim_6, 0.2);
+  self clearanim(%aim_8, 0.2);
 }
 
 swim_track_strafe_enter() {}
 
 swim_track_strafe_exit() {
-  self clearanim( % w_aim_4, 0.2);
-  self clearanim( % w_aim_6, 0.2);
-  self clearanim( % w_aim_8, 0.2);
-  self clearanim( % w_aim_2, 0.2);
+  self clearanim(%w_aim_4, 0.2);
+  self clearanim(%w_aim_6, 0.2);
+  self clearanim(%w_aim_8, 0.2);
+  self clearanim(%w_aim_2, 0.2);
 }
 
 moveswim_track_combat() {
@@ -267,7 +267,7 @@ moveswim_track_combat() {
       self.leftaimlimit = -90;
     }
 
-    animscripts\track::trackloop( % w_aim_2, % w_aim_4, % w_aim_6, % w_aim_8);
+    animscripts\track::trackloop(%w_aim_2, %w_aim_4, %w_aim_6, %w_aim_8);
   }
 }
 
@@ -361,7 +361,7 @@ swim_movebegin() {
   self orientmode("face angle 3d", self.angles);
 
   if(isDefined(var_1) && !animscripts\utility::isspaceai()) {
-    self setflaggedanimknoballrestart("startturn", var_1, % body, 1, 0.3, var_10 * self.moveplaybackrate);
+    self setflaggedanimknoballrestart("startturn", var_1, %body, 1, 0.3, var_10 * self.moveplaybackrate);
     animscripts\shared::donotetracks("startturn");
     var_11 = 0.5;
   } else if(isDefined(var_1) && animscripts\utility::isspaceai()) {
@@ -371,7 +371,7 @@ swim_movebegin() {
     self.prevturnrate = 0.16;
     self.turnrate = 5.0;
     var_11 = 0.1;
-    self setflaggedanimknoballrestart("startturn", var_1, % body, 1, var_11, var_10 * self.moveplaybackrate);
+    self setflaggedanimknoballrestart("startturn", var_1, %body, 1, var_11, var_10 * self.moveplaybackrate);
     animscripts\shared::donotetracks("startturn");
     var_11 = 0.5;
     self.turnrate = 0.16;
@@ -409,7 +409,7 @@ swim_movebegin() {
   self.prevturnrate = self.turnrate;
   self.turnrate = var_17;
   self orientmode("face direction", var_6);
-  self setflaggedanimknoballrestart("startmove", var_2, % body, 1, var_11, var_10 * self.moveplaybackrate);
+  self setflaggedanimknoballrestart("startmove", var_2, %body, 1, var_11, var_10 * self.moveplaybackrate);
   animscripts\shared::donotetracks("startmove");
   self.turnrate = self.prevturnrate;
   self.prevturnrate = undefined;
@@ -446,10 +446,10 @@ swim_setleananims() {
 }
 
 swim_clearleananims() {
-  self clearanim( % add_turn_l, 0.2);
-  self clearanim( % add_turn_r, 0.2);
-  self clearanim( % add_turn_u, 0.2);
-  self clearanim( % add_turn_d, 0.2);
+  self clearanim(%add_turn_l, 0.2);
+  self clearanim(%add_turn_r, 0.2);
+  self clearanim(%add_turn_u, 0.2);
+  self clearanim(%add_turn_d, 0.2);
   self.prevleanfracyaw = undefined;
   self.prevleanfracpitch = undefined;
 }
@@ -808,7 +808,7 @@ swim_coverarrival_main() {
     thread space_arrival_turnrate_delay();
   }
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("coverArrival", var_1, 1, var_2, self.movetransitionrate);
   animscripts\shared::donotetracks("coverArrival", ::swim_handlestartcoveraim);
 
@@ -824,7 +824,7 @@ swim_coverarrival_main() {
     self.prevturnrate = undefined;
   }
 
-  self clearanim( % animscript_root, 0.3);
+  self clearanim(%animscript_root, 0.3);
   self.lastapproachaborttime = undefined;
   self.swim.arrivalanim = undefined;
 
@@ -1092,10 +1092,10 @@ swim_getstrafeblendtime() {
 
 swim_setstrafeweights(var_0, var_1, var_2, var_3) {
   var_4 = swim_getstrafeblendtime();
-  self setanim( % combatrun_forward, var_0, var_4, 1, 1);
-  self setanim( % combatrun_backward, var_1, var_4, 1, 1);
-  self setanim( % combatrun_left, var_2, var_4, 1, 1);
-  self setanim( % combatrun_right, var_3, var_4, 1, 1);
+  self setanim(%combatrun_forward, var_0, var_4, 1, 1);
+  self setanim(%combatrun_backward, var_1, var_4, 1, 1);
+  self setanim(%combatrun_left, var_2, var_4, 1, 1);
+  self setanim(%combatrun_right, var_3, var_4, 1, 1);
 
   if(var_0 > 0)
     return "front";
@@ -1168,10 +1168,10 @@ swim_updatestrafeaimanim() {
 }
 
 swim_setstrafeaimweights(var_0, var_1, var_2, var_3) {
-  self setanim( % w_aim_4, var_2, 0.2, 1, 1);
-  self setanim( % w_aim_6, var_3, 0.2, 1, 1);
-  self setanim( % w_aim_8, var_0, 0.2, 1, 1);
-  self setanim( % w_aim_2, var_1, 0.2, 1, 1);
+  self setanim(%w_aim_4, var_2, 0.2, 1, 1);
+  self setanim(%w_aim_6, var_3, 0.2, 1, 1);
+  self setanim(%w_aim_8, var_0, 0.2, 1, 1);
+  self setanim(%w_aim_2, var_1, 0.2, 1, 1);
 }
 
 swim_pathchange_getturnanim(var_0, var_1) {
@@ -1213,14 +1213,14 @@ swim_updateleananim() {
     if(self.prevleanfracyaw <= 0 && var_0 < 0.075)
       var_0 = 0;
 
-    self setanim( % add_turn_l, var_0, 0.2, 1, 1);
-    self setanim( % add_turn_r, 0.0, 0.2, 1, 1);
+    self setanim(%add_turn_l, var_0, 0.2, 1, 1);
+    self setanim(%add_turn_r, 0.0, 0.2, 1, 1);
   } else {
     if(self.prevleanfracyaw >= 0 && var_0 > -0.075)
       var_0 = 0;
 
-    self setanim( % add_turn_l, 0, 0.2, 1, 1);
-    self setanim( % add_turn_r, 0 - var_0, 0.2, 1, 1);
+    self setanim(%add_turn_l, 0, 0.2, 1, 1);
+    self setanim(%add_turn_r, 0 - var_0, 0.2, 1, 1);
   }
 
   self.prevleanfracyaw = var_0;
@@ -1230,14 +1230,14 @@ swim_updateleananim() {
     if(self.prevleanfracpitch <= 0 && var_0 < 0.075)
       var_0 = 0;
 
-    self setanim( % add_turn_d, var_0, 0.2, 1, 1);
-    self setanim( % add_turn_u, 0.0, 0.2, 1, 1);
+    self setanim(%add_turn_d, var_0, 0.2, 1, 1);
+    self setanim(%add_turn_u, 0.0, 0.2, 1, 1);
   } else {
     if(self.prevleanfracpitch >= 0 && var_0 > -0.075)
       var_0 = 0;
 
-    self setanim( % add_turn_d, 0, 0.2, 1, 1);
-    self setanim( % add_turn_u, 0 - var_0, 0.2, 1, 1);
+    self setanim(%add_turn_d, 0, 0.2, 1, 1);
+    self setanim(%add_turn_u, 0 - var_0, 0.2, 1, 1);
   }
 
   self.prevleanfracpitch = var_0;

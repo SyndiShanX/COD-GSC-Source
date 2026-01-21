@@ -27,8 +27,8 @@ function turret_init_anim(localclientnum, oldval, newval, bnewent, binitialsnap,
     return;
   }
   self useanimtree($mp_autoturret);
-  self setanimrestart( % mp_autoturret::o_turret_sentry_close, 1, 0, 1);
-  self setanimtime( % mp_autoturret::o_turret_sentry_close, 1);
+  self setanimrestart(%mp_autoturret::o_turret_sentry_close, 1, 0, 1);
+  self setanimtime(%mp_autoturret::o_turret_sentry_close, 1);
 }
 
 function turret_open(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -36,7 +36,7 @@ function turret_open(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     return;
   }
   self useanimtree($mp_autoturret);
-  self setanimrestart( % mp_autoturret::o_turret_sentry_deploy, 1, 0, 1);
+  self setanimrestart(%mp_autoturret::o_turret_sentry_deploy, 1, 0, 1);
 }
 
 function turret_close_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -44,5 +44,5 @@ function turret_close_anim(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
   self useanimtree($mp_autoturret);
-  self setanimrestart( % mp_autoturret::o_turret_sentry_close, 1, 0, 1);
+  self setanimrestart(%mp_autoturret::o_turret_sentry_close, 1, 0, 1);
 }

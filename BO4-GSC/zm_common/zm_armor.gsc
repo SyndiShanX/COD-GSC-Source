@@ -166,8 +166,7 @@ damage(n_damage, mod_type, e_attacker) {
   }
 
   self notify(#"damage_armor", {
-    #mod: mod_type,
-    #attacker: e_attacker
+    #mod: mod_type, #attacker: e_attacker
   });
   return 0;
 }

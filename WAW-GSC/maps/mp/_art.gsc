@@ -70,12 +70,7 @@ setfogsliders() {
   blue = fogall[2];
   halfplane = GetDvar("g_fogHalfDistReadOnly");
   nearplane = GetDvar("g_fogStartDistReadOnly");
-  if(!isDefined(red) ||
-    !isDefined(green) ||
-    !isDefined(blue) ||
-    !isDefined(halfplane) ||
-    !isDefined(halfplane)
-  ) {
+  if(!isDefined(red) || !isDefined(green) || !isDefined(blue) || !isDefined(halfplane) || !isDefined(halfplane)) {
     red = 1;
     green = 1;
     blue = 1;
@@ -188,8 +183,7 @@ dumpsettings() {
     if(file == -1) {
       dump = false;
     }
-    artfxprintln(file, "
-        artfxprintln(file, "main()"); artfxprintln(file, "{"); artfxprintln(file, ""); artfxprintln(file, "\tlevel.tweakfile = true; "); artfxprintln(file, " "); artfxprintln(file, ""); artfxprintln(file, "\t
+    artfxprintln(file, "artfxprintln(file, "main()"); artfxprintln(file, "{"); artfxprintln(file, ""); artfxprintln(file, "\tlevel.tweakfile = true; "); artfxprintln(file, " "); artfxprintln(file, ""); artfxprintln(file, "\t
           artfxprintln(file, ""); artfxprintln(file, "\tSetDvar( \"scr_fog_exp_halfplane\"" + ", " + "\"" + level.fogexphalfplane + "\"" + " ); "); artfxprintln(file, "\tSetDvar( \"scr_fog_exp_halfheight\"" + ", " + "\"" + level.fogexphalfheight + "\"" + " ); "); artfxprintln(file, "\tSetDvar( \"scr_fog_nearplane\"" + ", " + "\"" + level.fognearplane + "\"" + " ); "); artfxprintln(file, "\tSetDvar( \"scr_fog_red\"" + ", " + "\"" + level.fogred + "\"" + " ); "); artfxprintln(file, "\tSetDvar( \"scr_fog_green\"" + ", " + "\"" + level.foggreen + "\"" + " ); "); artfxprintln(file, "\tSetDvar( \"scr_fog_blue\"" + ", " + "\"" + level.fogblue + "\"" + " ); "); artfxprintln(file, "\tSetDvar( \"scr_fog_baseheight\"" + ", " + "\"" + level.fogbaseheight + "\"" + " ); "); artfxprintln(file, "");
           if(!GetDvarint("scr_fog_disable")) {
             artfxprintln(file, "\tsetVolFog( " + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogexphalfheight + ", " + level.fogbaseheight + ", " + level.fogred + ", " + level.foggreen + ", " + level.fogblue + ", 0 ); ");
@@ -311,11 +305,7 @@ dumpsettings() {
             }
             level.debug_reflectionobject.origin = self getEye() + (VectorScale(anglesToForward(self GetPlayerAngles()), offset));
             lastoffset = offset;
-            line(level.debug_reflectionobject.origin,
-              getreflectionorigin(level.debug_reflectionobject.origin),
-              (1, 0, 0),
-              true,
-              1);
+            line(level.debug_reflectionobject.origin, getreflectionorigin(level.debug_reflectionobject.origin), (1, 0, 0), true, 1);
             wait(0.05);
           }
         }

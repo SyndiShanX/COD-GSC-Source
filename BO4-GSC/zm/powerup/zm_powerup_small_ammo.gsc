@@ -43,9 +43,7 @@ function_81558cdf(player) {
 
 function_d7d24283(e_powerup, player) {
   if(isDefined(level.check_player_is_ready_for_ammo)) {
-    if([
-        [level.check_player_is_ready_for_ammo]
-      ](player) == 0) {
+    if([[level.check_player_is_ready_for_ammo]](player) == 0) {
       return;
     }
   }

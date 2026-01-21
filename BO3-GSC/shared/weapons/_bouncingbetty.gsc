@@ -155,7 +155,7 @@ function spawnminemover() {
   self util::waittillnotmoving();
   self clientfield::set("bouncingbetty_state", 2);
   self useanimtree($bouncing_betty);
-  self setanim( % bouncing_betty::o_spider_mine_deploy, 1, 0, 1);
+  self setanim(%bouncing_betty::o_spider_mine_deploy, 1, 0, 1);
   minemover = spawn("script_model", self.origin);
   minemover.angles = self.angles;
   minemover setModel("tag_origin");

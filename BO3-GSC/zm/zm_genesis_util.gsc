@@ -413,9 +413,7 @@ function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_valu
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
-      [
-        [func]
-      ](n_dvar);
+      [[func]](n_dvar);
       setdvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();
@@ -863,9 +861,7 @@ function function_15e7a0c8(var_7b429b7d, var_6908e64b, var_4162ae69) {
     s_unitrigger_stub waittill("trigger", e_who);
     var_a97dcbff = e_who flag::get("holding_gateworm");
     if(isDefined(var_6908e64b)) {
-      var_a97dcbff = [
-        [var_6908e64b]
-      ](e_who);
+      var_a97dcbff = [[var_6908e64b]](e_who);
     }
     if(var_a97dcbff) {
       level flag::set(var_7b429b7d);

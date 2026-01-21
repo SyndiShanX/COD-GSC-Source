@@ -529,9 +529,7 @@ function merge(left, right, less_than) {
   li = 0;
   ri = 0;
   while(li < left.size && ri < right.size) {
-    if([
-        [less_than]
-      ](left[li], right[ri])) {
+    if([[less_than]](left[li], right[ri])) {
       result[result.size] = left[li];
       li++;
     } else {

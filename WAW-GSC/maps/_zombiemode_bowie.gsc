@@ -66,8 +66,7 @@ bowie_think() {
           self.first_time_triggered = true;
         }
         player maps\_zombiemode_score::minus_to_player_score(cost);
-        bbPrint("zombie_uses: playername %s playerscore %d round %d cost %d name %s x %f y %f z %f type weapon",
-          player.playername, player.score, level.round_number, cost, "bowie_knife", self.origin);
+        bbPrint("zombie_uses: playername %s playerscore %d round %d cost %d name %s x %f y %f z %f type weapon", player.playername, player.score, level.round_number, cost, "bowie_knife", self.origin);
         player give_bowie();
       } else {
         play_sound_on_ent("no_purchase");

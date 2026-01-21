@@ -14,8 +14,8 @@
 // This function now also does any initialization for the scripts that needs to happen
 // at the beginning of every main script.
 initAnimTree(animscript) {
-  self clearAnim( % body, 0.3);
-  self setAnim( % body, 1, 0); // The %body node should always have weight 1.
+  self clearAnim(%body, 0.3);
+  self setAnim(%body, 1, 0); // The %body node should always have weight 1.
 
   if(animscript != "pain" && animscript != "death")
     self.a.special = "none";
@@ -43,9 +43,9 @@ UpdateAnimPose() {
       self ExitProneWrapper(0.5);
 
     if(self.desired_anim_pose == "prone") {
-      self SetProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+      self SetProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
       self EnterProneWrapper(0.5);
-      self setAnimKnobAll( % prone_aim_5, % body, 1, 0.1, 1);
+      self setAnimKnobAll(%prone_aim_5, %body, 1, 0.1, 1);
     }
   }
 
@@ -80,7 +80,7 @@ initialize(animscript) {
 
   // TODO: proper handing when animations exist
   if(animscript != "combat" && animscript != "pain" && animscript != "death" && usingSidearm()) {
-    self animscripts\combat::switchToLastWeapon( % pistol_stand_switch, true);
+    self animscripts\combat::switchToLastWeapon(%pistol_stand_switch, true);
     //self animscripts\shared::placeWeaponOn( self.primaryweapon, "right" );
   }
 
@@ -119,8 +119,7 @@ checkGrenadeInHand(animscript) {
   // ensure no grenade left in hand
   self endon("killanimscript");
 
-  // pain and death animscripts don't execute script between notifying killanimscript and starting the next animscript,
-  // so the grenade cleanup thread might still be waiting to run.
+  // pain and death animscripts don't execute script between notifying killanimscript and starting the next animscript, // so the grenade cleanup thread might still be waiting to run.
   if(animscript == "pain" || animscript == "death") {
     wait .05;
     waittillframeend;
@@ -189,11 +188,7 @@ GetEnemyEyePos() {
     self.a.lastEnemyPos = self.enemy getShootAtPos();
     self.a.lastEnemyTime = gettime();
     return self.a.lastEnemyPos;
-  } else if(
-    (isDefined(self.a.lastEnemyTime)) &&
-    (isDefined(self.a.lastEnemyPos)) &&
-    (self.a.lastEnemyTime + 3000 < gettime())
-  ) {
+  } else if((isDefined(self.a.lastEnemyTime)) && (isDefined(self.a.lastEnemyPos)) && (self.a.lastEnemyTime + 3000 < gettime())) {
     return self.a.lastEnemyPos;
   } else {
     // Return a point in front of you.Note that the distance to this point is significant, because
@@ -556,8 +551,7 @@ AbsAngleClamp180(angle) {
   return abs(AngleClamp180(angle));
 }
 
-// Returns an array of 4 weights( 2 of which are guaranteed to be 0 ), which should be applied to forward,
-// right, back and left animations to get the angle specified.
+// Returns an array of 4 weights( 2 of which are guaranteed to be 0 ), which should be applied to forward, // right, back and left animations to get the angle specified.
 //front
 /// -- -- | -- -- \
 // / 180 \
@@ -639,7 +633,7 @@ playAnim(animation) {
   if(isDefined(animation)) {
     // self thread drawString( animation );	// Doesn't work for animations, only strings.
     println("NOW PLAYING: ", animation);
-    self setFlaggedAnimKnobAllRestart("playAnim", animation, % root, 1, .1, 1);
+    self setFlaggedAnimKnobAllRestart("playAnim", animation, %root, 1, .1, 1);
     timeToWait = getanimlength(animation);
     timeToWait = (3 * timeToWait) + 1; // So looping animations play through 3 times.
     self thread NotifyAfterTime("time is up", "time is up", timeToWait);
@@ -955,13 +949,7 @@ setEnv(env) {
 /*
 =============
 ///ScriptDocBegin
-"Name: PersonalColdBreath()"
-"Summary: Makes cold breath effect play on an AI"
-"Module: AI"
-"CallOn: An AI"
-"Example: level.price thread PersonalColdBreath()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: PersonalColdBreath()""Summary: Makes cold breath effect play on an AI""Module: AI""CallOn: An AI""Example: level.price thread PersonalColdBreath()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 PersonalColdBreath() {
@@ -991,13 +979,7 @@ PersonalColdBreath() {
 /*
 =============
 ///ScriptDocBegin
-"Name: PersonalColdBreathStop()"
-"Summary: Stops cold breath effect playing on an AI"
-"Module: AI"
-"CallOn: An AI"
-"Example: level.price thread PersonalColdBreathStop()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: PersonalColdBreathStop()""Summary: Stops cold breath effect playing on an AI""Module: AI""CallOn: An AI""Example: level.price thread PersonalColdBreathStop()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 PersonalColdBreathStop() {
@@ -1321,11 +1303,7 @@ needRecalculateSuppressSpot() {
   // we need to recalculate the suppress spot
   // if we've moved or if we saw our enemy in a different place than when we
   // last calculated it
-  return (
-    !isDefined(self.lastEnemySightPosOld) ||
-    self.lastEnemySightPosOld != self.lastEnemySightPos ||
-    distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024 // 1024 = 32 * 32
-  );
+  return (!isDefined(self.lastEnemySightPosOld) || self.lastEnemySightPosOld != self.lastEnemySightPos || distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024 // 1024 = 32 * 32);
 }
 
 findGoodSuppressSpot(startOffset) {
@@ -1769,26 +1747,7 @@ getAnimEndPos(theanim) {
 
 damageLocationIsAny(a, b, c, d, e, f, g, h, i, j, k, ovr) {
   /* possibile self.damageLocation's:
-  		"torso_upper"
-  		"torso_lower"
-  		"helmet"
-  		"head"
-  		"neck"
-  		"left_arm_upper"
-  		"left_arm_lower"
-  		"left_hand"
-  		"right_arm_upper"
-  		"right_arm_lower"
-  		"right_hand"
-  		"gun"
-  		"none"
-  		"left_leg_upper"
-  		"left_leg_lower"
-  		"left_foot"
-  		"right_leg_upper"
-  		"right_leg_lower"
-  		"right_foot"
-  	 */
+  		"torso_upper""torso_lower""helmet""head""neck""left_arm_upper""left_arm_lower""left_hand""right_arm_upper""right_arm_lower""right_hand""gun""none""left_leg_upper""left_leg_lower""left_foot""right_leg_upper""right_leg_lower""right_foot"*/
 
   if(!isDefined(a)) return false;
   if(self.damageLocation == a) return true;

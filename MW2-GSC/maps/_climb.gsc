@@ -2104,8 +2104,7 @@ calculate_additive(ent) {
   //steps = ent.additive_models[ additive_type ].size;
   steps = 40;
   for(i = 0; i < steps; i++) {
-    additive_weight = i / steps * extra_boost * anims[additive_type + "_strength"]; // "additive_in_strength / additive_out_strength"
-    weights[i] = additive_weight;
+    additive_weight = i / steps * extra_boost * anims[additive_type + "_strength"]; // "additive_in_strength / additive_out_strength"weights[i] = additive_weight;
     weight_type[i] = additive_type;
 
     hits thread calculate_add_penetration(ent, i, additive_weight, additive_type);
@@ -2113,8 +2112,7 @@ calculate_additive(ent) {
 
   additive_type = "additive_out";
   for(i = 0; i < steps; i++) {
-    additive_weight = i / steps * extra_boost * anims[additive_type + "_strength"]; // "additive_in_strength / additive_out_strength"
-    index = i + steps;
+    additive_weight = i / steps * extra_boost * anims[additive_type + "_strength"]; // "additive_in_strength / additive_out_strength"index = i + steps;
     weights[index] = additive_weight;
     weight_type[index] = additive_type;
 
@@ -3965,8 +3963,7 @@ start_climb_hint(ent) {
   } else {
     wait(2);
   }
-  // "right_icepick", "left_icepick"
-  display_hint(ent.globals.current_arm + "_icepick");
+  // "right_icepick", "left_icepick"display_hint(ent.globals.current_arm + "_icepick");
 }
 
 should_stop_hanging_left_icepick_hint() {

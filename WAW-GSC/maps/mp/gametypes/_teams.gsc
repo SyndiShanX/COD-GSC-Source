@@ -498,39 +498,25 @@ playerModelForWeapon(weapon) {
   }
   switch (weaponClass) {
     case "weapon_smg":
-      [
-        [game[self.pers["team"] + "_model"]["SPECOPS"]]
-      ]();
+      [[game[self.pers["team"] + "_model"]["SPECOPS"]]]();
       break;
     case "weapon_assault":
-      [
-        [game[self.pers["team"] + "_model"]["ASSAULT"]]
-      ]();
+      [[game[self.pers["team"] + "_model"]["ASSAULT"]]]();
       break;
     case "weapon_sniper":
-      [
-        [game[self.pers["team"] + "_model"]["SNIPER"]]
-      ]();
+      [[game[self.pers["team"] + "_model"]["SNIPER"]]]();
       break;
     case "weapon_shotgun":
-      [
-        [game[self.pers["team"] + "_model"]["RECON"]]
-      ]();
+      [[game[self.pers["team"] + "_model"]["RECON"]]]();
       break;
     case "weapon_lmg":
-      [
-        [game[self.pers["team"] + "_model"]["SUPPORT"]]
-      ]();
+      [[game[self.pers["team"] + "_model"]["SUPPORT"]]]();
       break;
     case "weapon_hmg":
-      [
-        [game[self.pers["team"] + "_model"]["SUPPORT"]]
-      ]();
+      [[game[self.pers["team"] + "_model"]["SUPPORT"]]]();
       break;
     default:
-      [
-        [game[self.pers["team"] + "_model"]["ASSAULT"]]
-      ]();
+      [[game[self.pers["team"] + "_model"]["ASSAULT"]]]();
       break;
   }
 }

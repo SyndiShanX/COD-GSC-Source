@@ -305,8 +305,7 @@ stop_chasing_the_sky(ent_poi) {
   self endon("stop_chasing_the_sky");
   while(is_true(self._pad_follow)) {
     flesh = get_closest_valid_player(self.origin);
-    if(isDefined(flesh) && Distance2D(flesh.origin, self.origin) < 10 * 10 &&
-      isDefined(self.favoriteenemy) && flesh != self.favoriteenemy) {
+    if(isDefined(flesh) && Distance2D(flesh.origin, self.origin) < 10 * 10 && isDefined(self.favoriteenemy) && flesh != self.favoriteenemy) {
       self add_poi_to_ignore_list(ent_poi);
       return;
     }

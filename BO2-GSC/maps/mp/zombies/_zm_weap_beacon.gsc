@@ -341,10 +341,10 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
 }
 
 weapon_beacon_anims() {
-  n_time = getanimlength( % o_zombie_dlc4_homing_deploy);
-  self setanim( % o_zombie_dlc4_homing_deploy);
+  n_time = getanimlength(%o_zombie_dlc4_homing_deploy);
+  self setanim(%o_zombie_dlc4_homing_deploy);
   wait(n_time);
-  self setanim( % o_zombie_dlc4_homing_spin);
+  self setanim(%o_zombie_dlc4_homing_spin);
 }
 
 grenade_stolen_by_sam(ent_grenade, ent_model, ent_actor) {
@@ -413,9 +413,7 @@ do_beacon_sound(model, info) {
   self.monk_scream_vox = 0;
 
   if(isDefined(level.grenade_safe_to_bounce)) {
-    if(![
-        [level.grenade_safe_to_bounce]
-      ](self.owner, "beacon_zm"))
+    if(![[level.grenade_safe_to_bounce]](self.owner, "beacon_zm"))
       self.monk_scream_vox = 1;
   }
 

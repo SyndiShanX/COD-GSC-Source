@@ -198,9 +198,7 @@ system_init(state_functions) {
 system_init_state_functions(state_functions) {
   custom_state_functions = false;
   if(isDefined(state_functions)) {
-    if(isDefined(state_functions["hidden"]) &&
-      isDefined(state_functions["alert"]) &&
-      isDefined(state_functions["spotted"])) {
+    if(isDefined(state_functions["hidden"]) && isDefined(state_functions["alert"]) && isDefined(state_functions["spotted"])) {
       custom_state_functions = true;
     } else {
       assertmsg("you sent _stealth_behavior::main( <option_state_function_array> ) a variable but it was invalid.The variable needs to be an array of 3 indicies with values 'hidden', 'alert' and 'spotted'.These indicies must be function pointers to the system functions you wish to handle those 3 states.");

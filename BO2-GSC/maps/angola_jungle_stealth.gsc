@@ -349,7 +349,7 @@ hudsun_approaches_child_solider_encounter() {
   level thread run_scene_and_delete("hudson_child_soldier_intro_move_to_cover");
   self waittill("goal");
   trigger_use("color_hudson_waiting_for_house_move_trigger");
-  time = getanimlength( % ch_ang_07_02_hiding_spot_hault_hudson);
+  time = getanimlength(%ch_ang_07_02_hiding_spot_hault_hudson);
   flag_wait_or_timeout("hudson_child_soldier_intro_move_to_cover_done", time);
 
   if(!flag("watch_1st_child_soldier_encounter_started"))

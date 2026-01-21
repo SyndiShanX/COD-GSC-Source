@@ -63,7 +63,7 @@ killplayer() {
 knock_down_player_coop(var_0, var_1) {
   var_0.dog_downed_player = 1;
   var_2 = dog_vs_player_anim_rate();
-  self setflaggedanimknobrestart("meleeanim", % german_shepherd_player_getoff, 1, 0.1, var_2);
+  self setflaggedanimknobrestart("meleeanim", %german_shepherd_player_getoff, 1, 0.1, var_2);
   var_0.player_view notify("pvd_melee_interrupted");
   var_0.player_view notify("pvd_melee_done");
   var_0.player_view playerview_endsequence(var_0);
@@ -126,7 +126,7 @@ dog_deathquote(var_0) {
 }
 
 attackmiss() {
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   var_0 = % german_shepherd_attack_player_miss_b;
 
   if(isDefined(self.enemy)) {
@@ -273,14 +273,14 @@ handlemeleefinishattacknotetracks(var_0) {
         level.dog_melee_timing_array = common_scripts\utility::array_randomize(level.dog_melee_timing_array);
       }
 
-      self setflaggedanimlimited("meleeanim", % german_shepherd_attack_player, 1, 0.2, var_3);
-      self setflaggedanimlimited("meleeanim", % german_shepherd_attack_player_late, 1, 0.2, var_3);
+      self setflaggedanimlimited("meleeanim", %german_shepherd_attack_player, 1, 0.2, var_3);
+      self setflaggedanimlimited("meleeanim", %german_shepherd_attack_player_late, 1, 0.2, var_3);
       self.meleeingplayer.player_view playerview_playknockdownanimlimited(var_3);
       break;
     case "dog_lunge":
       thread set_melee_timer();
       var_3 = dog_vs_player_anim_rate();
-      self setflaggedanim("meleeanim", % german_shepherd_attack_player, 1, 0.2, var_3);
+      self setflaggedanim("meleeanim", %german_shepherd_attack_player, 1, 0.2, var_3);
       self.meleeingplayer.player_view playerview_playknockdownanim(var_3);
       break;
     case "dogbite_damage":
@@ -359,14 +359,14 @@ meleebiteattackplayer() {
     self animmode("zonly_physics");
     self.safetochangescript = 0;
     prepareattackplayer();
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
     self clearpitchorient();
     self.meleeingplayer setnextdogattackallowtime(500);
 
     if(dog_cant_kill_in_one_hit()) {
       self.meleeingplayer.lastdogmeleeplayertime = gettime();
       self.meleeingplayer.dogmeleeplayercounter++;
-      self setflaggedanimrestart("meleeanim", % german_shepherd_run_attack_b, 1, 0.2, 1);
+      self setflaggedanimrestart("meleeanim", %german_shepherd_run_attack_b, 1, 0.2, 1);
       animscripts\shared::donotetracks("meleeanim", ::handlemeleebiteattacknotetracks);
     } else {
       thread dog_melee_death();
@@ -374,10 +374,10 @@ meleebiteattackplayer() {
       self.meleeingplayer.laststand = 0;
       self.meleeingplayer.achieve_downed_kills = undefined;
       thread clear_player_attacked_by_dog_on_death();
-      self setflaggedanimrestart("meleeanim", % german_shepherd_attack_player, 1, 0.2, 1);
-      self setflaggedanimrestart("meleeanim", % german_shepherd_attack_player_late, 1, 0, 1);
-      self setanimlimited( % attack_player, 1, 0, 1);
-      self setanimlimited( % attack_player_late, 0.01, 0, 1);
+      self setflaggedanimrestart("meleeanim", %german_shepherd_attack_player, 1, 0.2, 1);
+      self setflaggedanimrestart("meleeanim", %german_shepherd_attack_player_late, 1, 0, 1);
+      self setanimlimited(%attack_player, 1, 0, 1);
+      self setanimlimited(%attack_player_late, 0.01, 0, 1);
       animscripts\shared::donotetracks("meleeanim", ::handlemeleefinishattacknotetracks);
       self notify("dog_no_longer_melee_able");
       self setCanDamage(1);
@@ -497,7 +497,7 @@ meleestrugglevsai() {
 
 combatidle() {
   self orientmode("face enemy");
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self animmode("zonly_physics");
   var_0 = [];
   var_0[0] = % german_shepherd_attackidle_b;
@@ -851,7 +851,7 @@ dog_melee_death() {
             self.meleeingplayer.player_view.necksnapped = 1;
             maps\_utility::ent_flag_set("neck_snapped");
             self notify("melee_stop");
-            self setflaggedanimknobrestart("dog_death_anim", % german_shepherd_player_neck_snap, 1, 0.2, 1);
+            self setflaggedanimknobrestart("dog_death_anim", %german_shepherd_player_neck_snap, 1, 0.2, 1);
             thread dog_delayed_allow_damage();
             self setCanDamage(0);
             maps\_utility::giveachievement_wrapper("DOWN_BOY_DOWN");
@@ -869,8 +869,8 @@ dog_melee_death() {
           } else {
             self.meleeingplayer set_melee_early(var_1);
             self.meleeingplayer.player_view playerview_knockdownlate();
-            self setanimlimited( % attack_player, 0.01, 0.2, 1);
-            self setanimlimited( % attack_player_late, 1, 0.2, 1);
+            self setanimlimited(%attack_player, 0.01, 0.2, 1);
+            self setanimlimited(%attack_player_late, 1, 0.2, 1);
 
             if(is_hyena()) {
               level.dog_death_quote = &"NEW_HYENA_DEATH_TOO_LATE_ALT";
@@ -899,7 +899,7 @@ dog_melee_death() {
 
           level.dog_death_type = "soon";
           var_3 = dog_vs_player_anim_rate();
-          self setflaggedanimknobrestart("meleeanim", % german_shepherd_player_neck_miss, 1, 0.2, var_3);
+          self setflaggedanimknobrestart("meleeanim", %german_shepherd_player_neck_miss, 1, 0.2, var_3);
           self.meleeingplayer.player_view playerview_playmissanim(var_3);
           return;
         }
@@ -1024,7 +1024,7 @@ meleestrugglevsdog_interruptedcheck() {
     if(!isDefined(var_0[self.meleeseq])) {
       return;
     }
-    self clearanim( % melee_dog, 0.1);
+    self clearanim(%melee_dog, 0.1);
     self setflaggedanimrestart("getupanim", var_0[self.meleeseq], 1, 0.1, 1);
     animscripts\shared::donotetracks("getupanim");
   }
@@ -1087,10 +1087,10 @@ playerview_knockdownanim(var_0) {
   var_1 = var_0.meleeingplayer;
   self.dog = var_0;
   thread playerview_checkinterrupted(var_1);
-  self setflaggedanimrestart("viewanim", % player_view_dog_knockdown);
-  self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_late);
-  self setanimlimited( % knockdown, 1, 0, 1);
-  self setanimlimited( % knockdown_late, 0.01, 0, 1);
+  self setflaggedanimrestart("viewanim", %player_view_dog_knockdown);
+  self setflaggedanimrestart("viewanim", %player_view_dog_knockdown_late);
+  self setanimlimited(%knockdown, 1, 0, 1);
+  self setanimlimited(%knockdown_late, 0.01, 0, 1);
   animscripts\shared::donotetracks("viewanim", ::handleplayerknockdownnotetracks);
   self dontinterpolate();
   self.dog = undefined;
@@ -1170,15 +1170,15 @@ playerview_endsequence(var_0) {
   var_0 showhud();
 
   if(isalive(var_0)) {
-    self clearanim( % player_view_dog_knockdown, 0.1);
+    self clearanim(%player_view_dog_knockdown, 0.1);
 
     if(isDefined(self.necksnapped))
-      self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_neck_snap, 1, 0.2, 1);
+      self setflaggedanimrestart("viewanim", %player_view_dog_knockdown_neck_snap, 1, 0.2, 1);
     else if(isDefined(var_0.dog_downed_player))
-      self setflaggedanimknobrestart("viewanim", % player_view_dog_knockdown_laststand, 1, 0.1, 1);
+      self setflaggedanimknobrestart("viewanim", %player_view_dog_knockdown_laststand, 1, 0.1, 1);
     else {
       thread savednotify(var_0);
-      self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_saved);
+      self setflaggedanimrestart("viewanim", %player_view_dog_knockdown_saved);
     }
 
     if(!isDefined(var_0.dog_downed_player)) {
@@ -1229,22 +1229,22 @@ playerview_show(var_0) {
 }
 
 playerview_playknockdownanimlimited(var_0) {
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown, 1, 0.2, var_0);
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown_late, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown_late, 1, 0.2, var_0);
 }
 
 playerview_playknockdownanim(var_0) {
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown, 1, 0.2, var_0);
-  self setflaggedanimlimited("viewanim", % player_view_dog_knockdown_late, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown, 1, 0.2, var_0);
+  self setflaggedanimlimited("viewanim", %player_view_dog_knockdown_late, 1, 0.2, var_0);
 }
 
 playerview_playmissanim(var_0) {
-  self setflaggedanimknobrestart("viewanim", % player_view_dog_knockdown_neck_miss, 1, 0.2, var_0);
+  self setflaggedanimknobrestart("viewanim", %player_view_dog_knockdown_neck_miss, 1, 0.2, var_0);
 }
 
 playerview_knockdownlate() {
-  self setanimlimited( % knockdown, 0.01, 0.2, 1);
-  self setanimlimited( % knockdown_late, 1, 0.2, 1);
+  self setanimlimited(%knockdown, 0.01, 0.2, 1);
+  self setanimlimited(%knockdown_late, 1, 0.2, 1);
 }
 
 dog_vs_player_anim_rate() {

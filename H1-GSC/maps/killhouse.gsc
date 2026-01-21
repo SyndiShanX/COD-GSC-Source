@@ -3863,8 +3863,8 @@ ai_patrol_think(var_0, var_1) {
     self.patrol_walk_anim = var_3;
     self.patrol_walk_twitch = var_3;
     var_4 = level.scr_anim["generic"]["runner_facial_" + var_2];
-    self setanimknoballrestart(var_4, % head, 1);
-    self setanimlimited( % head, 1);
+    self setanimknoballrestart(var_4, %head, 1);
+    self setanimlimited(%head, 1);
     maps\_utility::gun_remove();
     self.fixednode = 0;
     self.ignoresuppression = 1;
@@ -3887,8 +3887,8 @@ ai_specific_facial_anim(var_0, var_1) {
   waitframe();
 
   for(;;) {
-    self setanimknoballrestart(var_2, % head, 1);
-    self setanimlimited( % head, 1);
+    self setanimknoballrestart(var_2, %head, 1);
+    self setanimlimited(%head, 1);
     wait(getanimlength(var_2));
   }
 }

@@ -198,8 +198,7 @@ function_f118c57a(e_player) {
       }
 
       level notify(#"trap_activated", {
-        #trap_activator: e_who,
-        #trap: self
+        #trap_activator: e_who, #trap: self
       });
     }
 
@@ -385,8 +384,7 @@ electrocute_zombie(e_activator, e_volume) {
 
     bhtnactionstartevent(self, "electrocute");
     self notify(#"bhtn_action_notify", {
-      #action: "electrocute"
-    });
+      #action: "electrocute"});
     wait randomfloat(1.25);
     self playSound(#"hash_5183b687ad8d715a");
   }

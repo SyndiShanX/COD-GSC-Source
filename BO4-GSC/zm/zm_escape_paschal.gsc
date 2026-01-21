@@ -1961,8 +1961,7 @@ function_9e1e3766() {
     a_e_players = getplayers();
     a_e_players[0] zm_score::add_to_player_score(var_3270baa7[0].zombie_cost);
     var_3270baa7[0] notify(#"trigger", {
-      #activator: a_e_players[0],
-      #is_forced: 1
+      #activator: a_e_players[0], #is_forced: 1
     });
   }
 

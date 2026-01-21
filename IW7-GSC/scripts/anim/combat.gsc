@@ -12,9 +12,7 @@ main() {
 
   if(isDefined(self.var_4C37)) {
     if(isDefined(self.var_4C37["combat"])) {
-      [
-        [self.var_4C37["combat"]]
-      ]();
+      [[self.var_4C37["combat"]]]();
       return;
     }
   }
@@ -72,7 +70,7 @@ func_5859() {
     }
 
     func_E246();
-    self func_82E4("react", var_0, % root, 1, 0.2, self.animplaybackrate);
+    self func_82E4("react", var_0, %root, 1, 0.2, self.animplaybackrate);
     func_43E3(var_0, "run");
     scripts\anim\shared::donotetracks("react");
   }
@@ -90,7 +88,7 @@ transitiontocombat() {
   if(self.weaponstartammo == "stop" && !scripts\anim\utility::func_9D9B() && self.a.pose == "stand") {
     func_E246();
     var_0 = scripts\anim\utility::func_B027("combat", "trans_to_combat");
-    self func_82E4("transition", var_0, % root, 1, 0.2, 1.2 * self.animplaybackrate);
+    self func_82E4("transition", var_0, %root, 1, 0.2, 1.2 * self.animplaybackrate);
     func_43E3(var_0, "run");
     scripts\anim\shared::donotetracks("transition");
   }
@@ -121,7 +119,7 @@ func_F8A3() {
   func_F8BD();
   func_F296();
   thread func_1108A();
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   scripts\anim\combat_utility::func_FA8C(0.2);
   thread scripts\anim\combat_utility::func_1A3E();
   func_5123();
@@ -192,7 +190,7 @@ func_1109D() {
     scripts\anim\shared::func_1180E(scripts\anim\utility::func_B027("combat", "drop_rpg_crouch"));
   }
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   scripts\anim\combat_utility::func_631A();
   func_F8BD();
   scripts\anim\combat_utility::func_10D9A();
@@ -679,12 +677,12 @@ func_5AC8(var_0, var_1) {
     self animmode("angle deltas", 0);
   }
 
-  self func_82A5( % exposed_aiming, % body, 1, var_4);
+  self func_82A5(%exposed_aiming, %body, 1, var_4);
   if(!isDefined(self.var_129B3)) {
     func_129A1(var_4);
   }
 
-  self func_82AC( % turn, 1, var_4);
+  self func_82AC(%turn, 1, var_4);
   if(isDefined(self.heat)) {
     var_3 = min(1, var_3);
   } else if(isDefined(self.var_129B3)) {
@@ -699,16 +697,16 @@ func_5AC8(var_0, var_1) {
   }
 
   func_5AC9();
-  self func_82AC( % turn, 0, 0.2);
+  self func_82AC(%turn, 0, 0.2);
   if(!isDefined(self.var_129B3)) {
     func_129A0(0.2);
   }
 
   if(!isDefined(self.var_129B3)) {
-    self clearanim( % turn, 0.2);
-    self setanimknob( % exposed_aiming, 1, 0.2, 1);
+    self clearanim(%turn, 0.2);
+    self setanimknob(%exposed_aiming, 1, 0.2, 1);
   } else {
-    self clearanim( % exposed_modern, 0.3);
+    self clearanim(%exposed_modern, 0.3);
   }
 
   if(isDefined(self.var_129A5)) {
@@ -738,15 +736,15 @@ func_B2B2() {
 
 func_129A1(var_0) {
   self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 0, var_0);
-  self give_attacker_kill_rewards( % add_idle, 0, var_0);
+  self give_attacker_kill_rewards(%add_idle, 0, var_0);
   if(!scripts\anim\utility_common::weapon_pump_action_shotgun()) {
-    self clearanim( % add_fire, 0.2);
+    self clearanim(%add_fire, 0.2);
   }
 }
 
 func_129A0(var_0) {
   self func_82AC(scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
-  self give_attacker_kill_rewards( % add_idle, 1, var_0);
+  self give_attacker_kill_rewards(%add_idle, 1, var_0);
 }
 
 func_FEEC() {
@@ -757,7 +755,7 @@ func_FEEC() {
   }
 
   scripts\anim\combat_utility::func_FEDF();
-  self clearanim( % add_fire, 0.2);
+  self clearanim(%add_fire, 0.2);
 }
 
 func_FEDE() {
@@ -839,12 +837,12 @@ func_1289C(var_0, var_1) {
       }
 
       if(var_5.size > 0) {
-        self give_attacker_kill_rewards( % exposed_aiming, 0, 0.1);
+        self give_attacker_kill_rewards(%exposed_aiming, 0, 0.1);
         func_43D0();
         self animmode("zonly_physics");
         scripts\anim\track::func_F641(0, 0);
         var_2 = scripts\anim\combat_utility::func_128A0(var_0, var_5[randomint(var_5.size)]);
-        self give_attacker_kill_rewards( % exposed_aiming, 1, 0.1);
+        self give_attacker_kill_rewards(%exposed_aiming, 1, 0.1);
         func_43E3(undefined, "aim");
         if(var_2) {
           scripts\anim\track::func_F641(1, 0.5);
@@ -877,7 +875,7 @@ transitionto(var_0) {
       return;
     }
 
-    self clearanim( % root, 0.3);
+    self clearanim(%root, 0.3);
     scripts\anim\combat_utility::func_631A();
     if(var_0 == "stand") {
       var_3 = 2;
@@ -885,11 +883,10 @@ transitionto(var_0) {
       var_3 = 1.5;
     }
 
-    if(!animhasnotetrack(var_2, "anim_pose = \" + var_0 + "\
-        ")) {
+    if(!animhasnotetrack(var_2, "anim_pose = \" + var_0 + "\")) {
       }
 
-      self func_82E4("trans", var_2, % body, 1, 0.2, var_3); func_43E3(var_2, "run"); var_4 = getanimlength(var_2) / var_3; var_5 = var_4 - 0.3;
+      self func_82E4("trans", var_2, %body, 1, 0.2, var_3); func_43E3(var_2, "run"); var_4 = getanimlength(var_2) / var_3; var_5 = var_4 - 0.3;
       if(var_5 < 0.2) {
         var_5 = 0.2;
       }
@@ -960,7 +957,7 @@ transitionto(var_0) {
         scripts\anim\weaponlist::refillclip();
       }
 
-      self clearanim( % reload, 0.2);
+      self clearanim(%reload, 0.2);
       self.sendclientmatchdata = 0;
       self notify("stop_trying_to_melee");
       self.a.var_6A1A = 0;
@@ -981,7 +978,7 @@ transitionto(var_0) {
       }
 
       var_3 = "reload_" + scripts\anim\combat_utility::func_81EB();
-      self clearanim( % root, 0.2);
+      self clearanim(%root, 0.2);
       self func_82EA(var_3, var_0, 1, 0.2, var_2);
       func_43E3(var_0, "run");
       thread func_C16A("abort_reload", var_3);
@@ -1033,7 +1030,7 @@ transitionto(var_0) {
       thread scripts\anim\combat_utility::putgunbackinhandonkillanimscript();
       scripts\anim\combat_utility::func_631A();
       self.var_11317 = var_0;
-      self func_82E4("weapon swap", var_0, % body, 1, 0.2, scripts\anim\combat_utility::func_6B9A());
+      self func_82E4("weapon swap", var_0, %body, 1, 0.2, scripts\anim\combat_utility::func_6B9A());
       func_43E3(var_0, "run");
       donotetrackspostcallbackwithendon("weapon swap", ::func_89D2, "end_weapon_swap");
       self clearanim(self.var_11317, 0.2);
@@ -1079,7 +1076,7 @@ transitionto(var_0) {
 
       scripts\anim\combat_utility::func_631A();
       self.var_11317 = var_0;
-      self func_82E4("weapon swap", var_0, % body, 1, 0.1, 1);
+      self func_82E4("weapon swap", var_0, %body, 1, 0.1, 1);
       func_43E3(var_0, "run");
       if(isDefined(var_1)) {
         donotetrackspostcallbackwithendon("weapon swap", ::func_8984, "end_weapon_swap");
@@ -1135,7 +1132,7 @@ transitionto(var_0) {
         var_0 = scripts\anim\utility::func_B027("combat", "rpg_death_stagger");
       }
 
-      self func_82E3("deathanim", var_0, % root, 1, 0.05, 1);
+      self func_82E3("deathanim", var_0, %root, 1, 0.05, 1);
       func_43E3(var_0, "death");
       scripts\anim\shared::donotetracks("deathanim");
       scripts\anim\shared::func_5D1A();
@@ -1271,5 +1268,5 @@ transitionto(var_0) {
 
     func_43D0() {
       self.facialidx = undefined;
-      self clearanim( % head, 0.2);
+      self clearanim(%head, 0.2);
     }

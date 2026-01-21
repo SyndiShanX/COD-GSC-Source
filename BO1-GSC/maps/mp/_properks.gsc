@@ -103,12 +103,7 @@ proPerkkills(data, time) {
       attacker maps\mp\gametypes\_persistence::statAdd("PERKS_STEADY_AIM_KILL", 1, false);
   }
   if(attacker ownsAndUsingPerk("specialty_holdbreath")) {
-    if(maps\mp\gametypes\_weapons::isSideArm(data.sWeapon) ||
-      data.sWeapon == "m72_law_mp" ||
-      data.sWeapon == "rpg_mp" ||
-      data.sWeapon == "china_lake_mp" ||
-      data.sWeapon == "knife_ballistic_mp" ||
-      data.sWeapon == "explosive_bolt_mp") {
+    if(maps\mp\gametypes\_weapons::isSideArm(data.sWeapon) || data.sWeapon == "m72_law_mp" || data.sWeapon == "rpg_mp" || data.sWeapon == "china_lake_mp" || data.sWeapon == "knife_ballistic_mp" || data.sWeapon == "explosive_bolt_mp") {
       attacker maps\mp\gametypes\_persistence::statAdd("PERKS_SCOUT_SIDE_ARM_KILL", 1, false);
     }
   }

@@ -24,7 +24,7 @@ main() {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
-  self setFlaggedAnimKnoballRestart("diveanim", % fenceclimb, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("diveanim", %fenceclimb, %body, 1, .1, 1);
   //	self waittillmatch("diveanim", "gravity on");
   self animscripts\shared::DoNoteTracks("diveanim");
   self traverseMode("gravity");

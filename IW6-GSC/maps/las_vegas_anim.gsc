@@ -1123,10 +1123,10 @@ init_wounded_archetype() {
   var_0 = [];
   var_0["run"]["move_f"] = % vegas_baker_limp;
   var_0["run"]["straight"] = % vegas_baker_limp;
-  var_0["run"]["straight_twitch"] = [ % vegas_baker_limp_twitch_1, % vegas_baker_limp_twitch_2, % vegas_baker_limp_twitch_3];
-  var_0["idle"]["stand"][0] = [ % vegas_baker_stand_idle, % vegas_baker_stand_idle_twitch_1, % vegas_baker_stand_idle_twitch_2];
+  var_0["run"]["straight_twitch"] = [ % vegas_baker_limp_twitch_1, %vegas_baker_limp_twitch_2, %vegas_baker_limp_twitch_3];
+  var_0["idle"]["stand"][0] = [ % vegas_baker_stand_idle, %vegas_baker_stand_idle_twitch_1, %vegas_baker_stand_idle_twitch_2];
   var_0["idle_weights"]["stand"][0] = [1, 1, 1];
-  var_0["default_stand"]["exposed_idle"] = [ % vegas_baker_stand_idle, % vegas_baker_stand_idle_twitch_1, % vegas_baker_stand_idle_twitch_2];
+  var_0["default_stand"]["exposed_idle"] = [ % vegas_baker_stand_idle, %vegas_baker_stand_idle_twitch_1, %vegas_baker_stand_idle_twitch_2];
   var_1["right"][1] = % vegas_baker_pillar_stand_approach_1_r;
   var_1["right"][2] = % vegas_baker_pillar_stand_approach_2_r;
   var_1["right"][3] = % vegas_baker_pillar_stand_approach_3_r;

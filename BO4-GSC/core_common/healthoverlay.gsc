@@ -446,17 +446,7 @@ player_health_regen() {
   player.var_4d9b2bc3 = 1;
   player.breathingstoptime = -10000;
   player.var_dc77251f = {
-    #var_ba47a7a3: 0,
-    #time_now: 0,
-    #time_elapsed: 0,
-    #ratio: 0,
-    #var_ec8863bf: 0,
-    #var_e65dca8d: 0,
-    #var_215539de: 0,
-    #var_dae4d7ea: 0,
-    #old_health: player.health,
-    #var_7cb44c56: 0,
-    #var_d1e06a5f: gettime()
+    #var_ba47a7a3: 0, #time_now: 0, #time_elapsed: 0, #ratio: 0, #var_ec8863bf: 0, #var_e65dca8d: 0, #var_215539de: 0, #var_dae4d7ea: 0, #old_health: player.health, #var_7cb44c56: 0, #var_d1e06a5f: gettime()
   };
   player j_sticks_front1_end_le1();
 }

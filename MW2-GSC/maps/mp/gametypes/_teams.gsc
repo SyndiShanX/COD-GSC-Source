@@ -546,9 +546,7 @@ playerModelForWeapon(weapon, secondary) {
 
   switch (weaponClass) {
     case "weapon_smg":
-      [
-        [game[team + "_model"]["SMG"]]
-      ]();
+      [[game[team + "_model"]["SMG"]]]();
       break;
     case "weapon_assault":
       weaponClass = tablelookup("mp/statstable.csv", 4, secondary, 2);
@@ -564,19 +562,13 @@ playerModelForWeapon(weapon, secondary) {
         [[game[team + "_model"]["SNIPER"]]]();
       break;
     case "weapon_lmg":
-      [
-        [game[team + "_model"]["LMG"]]
-      ]();
+      [[game[team + "_model"]["LMG"]]]();
       break;
     case "weapon_riot":
-      [
-        [game[team + "_model"]["RIOT"]]
-      ]();
+      [[game[team + "_model"]["RIOT"]]]();
       break;
     default:
-      [
-        [game[team + "_model"]["ASSAULT"]]
-      ]();
+      [[game[team + "_model"]["ASSAULT"]]]();
       break;
   }
 }
@@ -770,9 +762,7 @@ getTeamFlagFX(teamRef) {
 }
 
 getTeamColor(teamRef) {
-  return ((stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_R_COL)),
-    stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_G_COL)),
-    stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_B_COL))));
+  return ((stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_R_COL)), stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_G_COL)), stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_B_COL))));
 }
 
 getTeamCrateModel(teamRef) {

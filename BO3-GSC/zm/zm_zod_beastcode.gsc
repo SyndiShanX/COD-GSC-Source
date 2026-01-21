@@ -68,9 +68,7 @@ class cbeastcode {
       if(!(isDefined([[o_beastcode]] - > get_keycode_device_state()) && [[o_beastcode]] - > get_keycode_device_state())) {
         continue;
       }
-      [
-        [o_beastcode]
-      ] - > interpret_trigger_event(player, n_index);
+      [[o_beastcode]] - > interpret_trigger_event(player, n_index);
     }
   }
 
@@ -81,9 +79,7 @@ class cbeastcode {
     str_old_hint = &"";
     a_s_input_button_tags = [[stub.o_keycode]] - > get_tags_from_input_device();
     while(true) {
-      n_state = [
-        [stub.o_keycode]
-      ] - > get_keycode_device_state();
+      n_state = [[stub.o_keycode]] - > get_keycode_device_state();
       switch (n_state) {
         case 2: {
           str_hint = &"ZM_ZOD_KEYCODE_TRYING";

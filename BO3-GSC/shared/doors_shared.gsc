@@ -497,9 +497,7 @@ function door_open_update(c_door) {
         }
       }
     } else if(b_manual_close) {
-      [
-        [c_door]
-      ] - > close();
+      [[c_door]] - > close();
     }
   }
 }
@@ -765,9 +763,7 @@ function unlock_all(b_do_open = 1) {
   foreach(s_inst in a_s_inst_list) {
     c_door = s_inst.c_door;
     if(isDefined(c_door)) {
-      [
-        [c_door]
-      ] - > unlock();
+      [[c_door]] - > unlock();
       if(b_do_open) {
         [[c_door]] - > open();
       }
@@ -779,9 +775,7 @@ function unlock(str_name, str_name_type = "targetname", b_do_open = 1) {
   a_s_inst_list = struct::get_array(str_name, str_name_type);
   foreach(s_inst in a_s_inst_list) {
     if(isDefined(s_inst.c_door)) {
-      [
-        [s_inst.c_door]
-      ] - > unlock();
+      [[s_inst.c_door]] - > unlock();
       if(b_do_open) {
         [[s_inst.c_door]] - > open();
       }

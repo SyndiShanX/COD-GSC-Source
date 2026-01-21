@@ -282,8 +282,7 @@ quantum_bomb_pack_or_unpack_current_weapon_result(position) {
       }
       ziw_keys = GetArrayKeys(level.zombie_weapons);
       for(weaponindex = 0; weaponindex < level.zombie_weapons.size; weaponindex++) {
-        if(isDefined(level.zombie_weapons[ziw_keys[weaponindex]].upgrade_name) &&
-          level.zombie_weapons[ziw_keys[weaponindex]].upgrade_name == weapon) {
+        if(isDefined(level.zombie_weapons[ziw_keys[weaponindex]].upgrade_name) && level.zombie_weapons[ziw_keys[weaponindex]].upgrade_name == weapon) {
           if(player == self) {
             self thread maps\_zombiemode_audio::create_and_play_dialog("kill", "quant_bad");
           }
@@ -378,8 +377,7 @@ quantum_bomb_teleport_player(player) {
     chosen_spot = [[level._override_blackhole_destination_logic]](black_hole_teleport_structs, player);
   } else {
     for(i = 0; i < black_hole_teleport_structs.size; i++) {
-      if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) &&
-        (player_current_zone != black_hole_teleport_structs[i].script_string)) {
+      if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) && (player_current_zone != black_hole_teleport_structs[i].script_string)) {
         chosen_spot = black_hole_teleport_structs[i];
         break;
       }

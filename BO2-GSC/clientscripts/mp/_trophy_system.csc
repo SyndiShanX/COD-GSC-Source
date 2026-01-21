@@ -100,12 +100,12 @@ trophy_state_change_recon(localclientnum, oldval, newval, bnewent, binitialsnap,
 trophy_deploy_anim(localclientnum, playfx) {
   self endon("entityshutdown");
   self useanimtree(#animtree);
-  self setanim( % o_trophy_deploy, 1.0, 0.0, 1.0);
+  self setanim(%o_trophy_deploy, 1.0, 0.0, 1.0);
 
   if(playfx)
     playFXOnTag(localclientnum, level._effect["fx_trophy_deploy_impact"], self, "tag_origin");
 
   wait 0.3;
   self useanimtree(#animtree);
-  self setanim( % o_trophy_spin, 1.0, 0.0, 1.4);
+  self setanim(%o_trophy_spin, 1.0, 0.0, 1.4);
 }

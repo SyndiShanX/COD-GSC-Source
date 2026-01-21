@@ -14,8 +14,8 @@ initAnimTree(animscript) {
   if(isValidEnemy(self.a.personImMeleeing)) {
     ImNotMeleeing(self.a.personImMeleeing);
   }
-  self ClearAnim( % body, 0.3);
-  self SetAnim( % body, 1, 0);
+  self ClearAnim(%body, 0.3);
+  self SetAnim(%body, 1, 0);
   if(animscript != "pain" && animscript != "death" && animscript != "react") {
     self.a.special = "none";
   }
@@ -26,7 +26,7 @@ initAnimTree(animscript) {
   self.a.aimweight_transframes = 0;
   self.a.aimweight_t = 0;
   self.a.isAiming = false;
-  self SetAnim( % shoot, 0, 0.2, 1);
+  self SetAnim(%shoot, 0, 0.2, 1);
   IsInCombat();
   assertEX(isDefined(animscript), "Animscript not specified in initAnimTree");
   self.a.prevScript = self.a.script;
@@ -43,9 +43,9 @@ UpdateAnimPose() {
       self ExitProneWrapper(0.5);
     }
     if(self.desired_anim_pose == "prone") {
-      self SetProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+      self SetProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
       self EnterProneWrapper(0.5);
-      self SetAnimKnobAll(animArray("straight_level", "combat"), % body, 1, 0.1, 1);
+      self SetAnimKnobAll(animArray("straight_level", "combat"), %body, 1, 0.1, 1);
     }
   }
   self.desired_anim_pose = undefined;
@@ -288,9 +288,7 @@ GetEnemyEyePos() {
     self.a.lastEnemyPos = self.enemy GetShootAtPos();
     self.a.lastEnemyTime = GetTime();
     return self.a.lastEnemyPos;
-  } else if(isDefined(self.a.lastEnemyTime) &&
-    isDefined(self.a.lastEnemyPos) &&
-    (self.a.lastEnemyTime + 3000) < GetTime()) {
+  } else if(isDefined(self.a.lastEnemyTime) && isDefined(self.a.lastEnemyPos) && (self.a.lastEnemyTime + 3000) < GetTime()) {
     return self.a.lastEnemyPos;
   } else {
     targetPos = self GetShootAtPos();
@@ -955,8 +953,7 @@ canSeeEnemy() {
   if(!isValidEnemy(self.enemy)) {
     return false;
   }
-  if((self canSee(self.enemy) && checkPitchVisibility(self getEye(), self.enemy GetShootAtPos())) ||
-    (isDefined(self.cansee_override) && self.cansee_override)) {
+  if((self canSee(self.enemy) && checkPitchVisibility(self getEye(), self.enemy GetShootAtPos())) || (isDefined(self.cansee_override) && self.cansee_override)) {
     self.goodShootPosValid = true;
     self.goodShootPos = GetEnemyEyePos();
     dontGiveUpOnSuppressionYet();
@@ -1178,11 +1175,7 @@ needRecalculateSuppressSpot() {
   if(self.goodShootPosValid && !self canSeeAndShootPoint(self.goodShootPos)) {
     return true;
   }
-  return (
-    !isDefined(self.lastEnemySightPosOld) ||
-    self.lastEnemySightPosOld != self.lastEnemySightPos ||
-    distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024
-  );
+  return (!isDefined(self.lastEnemySightPosOld) || self.lastEnemySightPosOld != self.lastEnemySightPos || distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024);
 }
 
 findGoodSuppressSpot(startOffset) {
@@ -1652,15 +1645,11 @@ get_skeleton() {
 }
 
 isBalconyNode(node) {
-  return ((isDefined(anim.balcony_node_types[node.type])) &&
-    (node has_spawnflag(level.SPAWNFLAG_PATH_BALCONY) || node has_spawnflag(level.SPAWNFLAG_PATH_BALCONY_NORAILING))
-  );
+  return ((isDefined(anim.balcony_node_types[node.type])) && (node has_spawnflag(level.SPAWNFLAG_PATH_BALCONY) || node has_spawnflag(level.SPAWNFLAG_PATH_BALCONY_NORAILING)));
 }
 
 isBalconyNodeNoRailing(node) {
-  return ((isBalconyNode(node)) &&
-    node has_spawnflag(level.SPAWNFLAG_PATH_BALCONY_NORAILING)
-  );
+  return ((isBalconyNode(node)) && node has_spawnflag(level.SPAWNFLAG_PATH_BALCONY_NORAILING));
 }
 
 do_ragdoll_death() {

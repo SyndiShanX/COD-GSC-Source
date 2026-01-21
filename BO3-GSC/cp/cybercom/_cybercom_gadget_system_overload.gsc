@@ -243,7 +243,7 @@ function system_overload(attacker, disabletimemsec, weapon = getweapon("gadget_s
   self thread function_53cfe88a();
   self orientmode("face default");
   self ai::set_behavior_attribute("robot_lights", 1);
-  self animscripted("shutdown_anim", self.origin, self.angles, ("ai_robot_base_" + type) + "_shutdown", "normal", % generic::root, 1, 0.2);
+  self animscripted("shutdown_anim", self.origin, self.angles, ("ai_robot_base_" + type) + "_shutdown", "normal", %generic::root, 1, 0.2);
   self thread cybercom::stopanimscriptedonnotify("damage_pain", "shutdown_anim", 1, attacker, weapon);
   self thread cybercom::stopanimscriptedonnotify("notify_melee_damage", "shutdown_anim", 1, attacker, weapon);
   self thread cybercom::stopanimscriptedonnotify("breakout_sysoverload_loop", "shutdown_anim", 0, attacker, weapon);

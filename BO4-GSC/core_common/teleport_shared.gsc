@@ -137,9 +137,7 @@ function_e6615993(kvp, var_dad37549) {
   }
 
   return {
-    #str_value: str_value,
-    #str_key: str_key,
-    #var_dad37549: var_dad37549
+    #str_value: str_value, #str_key: str_key, #var_dad37549: var_dad37549
   };
 }
 
@@ -192,9 +190,7 @@ function_166effac(kvp, var_dad37549) {
   }
 
   return {
-    #a_s_players: a_s_players,
-    #a_s_heroes: a_s_heroes,
-    #var_dad37549: var_20212d26.var_dad37549
+    #a_s_players: a_s_players, #a_s_heroes: a_s_heroes, #var_dad37549: var_20212d26.var_dad37549
   };
 }
 

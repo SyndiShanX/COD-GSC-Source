@@ -271,10 +271,10 @@ ai_zodiac_anims(animation) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  self ai_next_anim( % zodiac_rightside_wave);
-  self ai_next_anim( % zodiac_trans_R2L);
-  self ai_next_anim( % zodiac_leftside_wave);
-  self ai_next_anim( % zodiac_trans_L2R);
+  self ai_next_anim(%zodiac_rightside_wave);
+  self ai_next_anim(%zodiac_trans_R2L);
+  self ai_next_anim(%zodiac_leftside_wave);
+  self ai_next_anim(%zodiac_trans_L2R);
 }
 
 /************************************************************************************************************/
@@ -405,7 +405,7 @@ dcburning_dunn(animation) {
   self thread ai_current_anim_stop();
 
   //self thread dcburning_dunn_gun( animation );	
-  self ai_next_anim( % training_pit_open_case);
+  self ai_next_anim(%training_pit_open_case);
 
   //this is important - dont take this out...its to make up for
   //a sleight frame diference between drone and AI logic where in
@@ -443,7 +443,7 @@ dcburning_dunn_gun(animation) {
   self.anim_gun _setanim(self.anim_gun getanim(animation + "_gun"), 1, 0, self.anim_speed);
   self.anim_gun.current_anim = self.anim_gun getanim(animation + "_gun");
 
-  self.anim_gun ai_next_anim( % training_pit_open_case_gun);
+  self.anim_gun ai_next_anim(%training_pit_open_case_gun);
 }
 #using_animtree("generic_human");
 
@@ -456,7 +456,7 @@ dcburning_foley(animation) {
 
   //	self ai_next_anim( %training_intro_foley_turnaround_2 );
   //	self ai_next_anim( %training_intro_foley_idle_talk_1 );
-  self ai_next_anim( % training_intro_foley_end);
+  self ai_next_anim(%training_intro_foley_end);
 }
 
 /************************************************************************************************************/
@@ -559,7 +559,7 @@ airport_security_guard() {
   self endon("death");
   self endon("do_anim");
 
-  self ai_next_anim( % airport_security_guard_pillar_death_R);
+  self ai_next_anim(%airport_security_guard_pillar_death_R);
 }
 
 /************************************************************************************************************/
@@ -1198,9 +1198,9 @@ hostage_chair(animation) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  self ai_next_anim( % hostage_chair_twitch2);
-  self ai_next_anim( % hostage_chair_twitch);
-  self ai_next_anim( % hostage_chair_idle);
+  self ai_next_anim(%hostage_chair_twitch2);
+  self ai_next_anim(%hostage_chair_twitch);
+  self ai_next_anim(%hostage_chair_idle);
 }
 
 hostage_dive(animation) {
@@ -1209,12 +1209,12 @@ hostage_dive(animation) {
   self.current_anim = getanim_generic(animation);
   self thread ai_current_anim_stop();
 
-  self ai_next_anim( % hostage_chair_ground_idle);
+  self ai_next_anim(%hostage_chair_ground_idle);
   if(isai(self))
     self.a.pose = "prone";
-  self ai_next_anim( % hostage_chair_ground_idle);
-  self ai_next_anim( % hostage_chair_ground_idle);
-  self ai_next_anim( % hostage_chair_ground_idle);
+  self ai_next_anim(%hostage_chair_ground_idle);
+  self ai_next_anim(%hostage_chair_ground_idle);
+  self ai_next_anim(%hostage_chair_ground_idle);
 }
 
 /************************************************************************************************************/

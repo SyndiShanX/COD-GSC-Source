@@ -526,7 +526,7 @@ open_box(player, ut_stub, fp_reward_override, param1) {
   if(isDefined(player) && isDefined(player.s_lookat_stat))
     s_select_stat = player.s_lookat_stat;
 
-  m_box setanim( % o_zombie_dlc4_challenge_box_open);
+  m_box setanim(%o_zombie_dlc4_challenge_box_open);
   m_box delay_thread(0.75, ::setclientfield, "foot_print_box_glow", 1);
   wait 0.5;
 
@@ -536,7 +536,7 @@ open_box(player, ut_stub, fp_reward_override, param1) {
     ut_stub spawn_reward(player, s_select_stat);
 
   wait 1;
-  m_box setanim( % o_zombie_dlc4_challenge_box_close);
+  m_box setanim(%o_zombie_dlc4_challenge_box_close);
   m_box delay_thread(0.75, ::setclientfield, "foot_print_box_glow", 0);
   wait 2;
   ut_stub.b_busy = 0;

@@ -745,9 +745,7 @@ function moon_round_think_func(restart = 0) {
   level endon("end_round_think");
   if(!(isDefined(restart) && restart)) {
     if(isDefined(level.initial_round_wait_func)) {
-      [
-        [level.initial_round_wait_func]
-      ]();
+      [[level.initial_round_wait_func]]();
     }
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
       players = getplayers();
@@ -811,9 +809,7 @@ function moon_round_think_func(restart = 0) {
       players[index] zm::recordroundstartstats();
     }
     if(isDefined(level.round_start_custom_func)) {
-      [
-        [level.round_start_custom_func]
-      ]();
+      [[level.round_start_custom_func]]();
     }
     if(level flag::get("teleporter_used")) {
       level flag::clear("teleporter_used");
@@ -843,9 +839,7 @@ function moon_round_think_func(restart = 0) {
       }
     }
     if(isDefined(level.round_end_custom_logic)) {
-      [
-        [level.round_end_custom_logic]
-      ]();
+      [[level.round_end_custom_logic]]();
     }
     if(level flag::get("teleporter_used")) {
       if(level.prev_round_zombies != 0 && !level flag::get("enter_nml")) {
@@ -898,9 +892,7 @@ function moon_round_think_func(restart = 0) {
       }
     }
     if(isDefined(level.check_quickrevive_hotjoin)) {
-      [
-        [level.check_quickrevive_hotjoin]
-      ]();
+      [[level.check_quickrevive_hotjoin]]();
     }
     level zm::round_over();
     level notify("between_round_over");

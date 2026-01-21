@@ -186,14 +186,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
           attacker thread maps\mp\gametypes\_rank::giveRankXP("dropped_enemy_gun_rank");
         }
       }
-    } else if((sMeansOfDeath == "MOD_PISTOL_BULLET") ||
-      (sMeansOfDeath == "MOD_RIFLE_BULLET") ||
-      (sMeansOfDeath == "MOD_HEAD_SHOT") ||
-      (sMeansOfDeath == "MOD_PROJECTILE") || (sMeansOfDeath == "MOD_PROJECTILE_SPLASH") ||
-      (sMeansOfDeath == "MOD_IMPACT") ||
-      (sMeansOfDeath == "MOD_GRENADE") || (sMeansOfDeath == "MOD_GRENADE_SPLASH") ||
-      (sMeansOfDeath == "MOD_MELEE" && isMeleeWeapon)
-    ) {
+    } else if((sMeansOfDeath == "MOD_PISTOL_BULLET") || (sMeansOfDeath == "MOD_RIFLE_BULLET") || (sMeansOfDeath == "MOD_HEAD_SHOT") || (sMeansOfDeath == "MOD_PROJECTILE") || (sMeansOfDeath == "MOD_PROJECTILE_SPLASH") || (sMeansOfDeath == "MOD_IMPACT") || (sMeansOfDeath == "MOD_GRENADE") || (sMeansOfDeath == "MOD_GRENADE_SPLASH") || (sMeansOfDeath == "MOD_MELEE" && isMeleeWeapon)) {
       // Prevent sequential kills from counting by validating the primary weapon
       // Let throwing knife kills count even though they're not the primary weapon
       if(sWeapon != attacker.primaryWeapon) {
@@ -245,8 +238,7 @@ giveNextGun(doSetSpawnWeapon) {
 
   //	gain/drop scoring/messaging
   if(self.gunGamePrevGunIndex > self.gunGameGunIndex) {
-    //	we dropped :(
-    self thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DROPPED_GUN_RANK");
+    //	we dropped :(self thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DROPPED_GUN_RANK");
   } else if(self.gunGamePrevGunIndex < self.gunGameGunIndex) {
     //	we gained :)
     self thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_GAINED_GUN_RANK");

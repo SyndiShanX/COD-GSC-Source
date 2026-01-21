@@ -6,7 +6,7 @@
 #using_animtree("generic_human");
 
 clear_animation(var_0) {
-  self clearanim( % root, var_0);
+  self clearanim(%root, var_0);
 }
 
 enemy_animation_attack(var_0) {

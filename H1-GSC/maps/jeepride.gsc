@@ -1434,7 +1434,7 @@ force_position(var_0, var_1) {
     var_1 = (0, 0, 0);
 
   self dontinterpolate();
-  self animscripted("forcemove", var_0, (0, 88, 0), % dying_crawl);
+  self animscripted("forcemove", var_0, (0, 88, 0), %dying_crawl);
 }
 
 dying_crawl() {
@@ -1443,7 +1443,7 @@ dying_crawl() {
   animscripts\shared::placeweaponon(self.weapon, "none");
 
   for(;;) {
-    self animscripted("dieingcrawl", self.origin, (0, 88, 0), % dying_crawl);
+    self animscripted("dieingcrawl", self.origin, (0, 88, 0), %dying_crawl);
     self waittillmatch("dieingcrawl", "end");
   }
 }
@@ -2115,13 +2115,13 @@ rescue_guy_pos(var_0) {
   var_1.angles = var_0.angles;
   self linkto(var_1, "tag_origin", (0, 0, 0), (0, 0, 0));
   self allowedstances("stand");
-  self animscripted("animscripted", var_1.origin, var_1.angles, % crouch2stand);
+  self animscripted("animscripted", var_1.origin, var_1.angles, %crouch2stand);
   animscripts\shared::donotetracks("animscripted");
 }
 
 stand_up() {
   self allowedstances("stand");
-  self animscripted("animscripted", self.origin, self.angles, % crouch2stand);
+  self animscripted("animscripted", self.origin, self.angles, %crouch2stand);
   animscripts\shared::donotetracks("animscripted");
 }
 
@@ -2470,9 +2470,9 @@ shoot_loc(var_0) {
 
 price_bridge_crawl_anims(var_0) {
   var_0 maps\_anim::anim_single_solo(level.price, "wave_player_over");
-  level.price animscripted("animscripted", level.price.origin, level.price.angles, % stand2crouch_attack);
+  level.price animscripted("animscripted", level.price.origin, level.price.angles, %stand2crouch_attack);
   level.price waittillmatch("animscripted", "end");
-  level.price animscripted("animscripted", level.price.origin, level.price.angles, % crouch2stand);
+  level.price animscripted("animscripted", level.price.origin, level.price.angles, %crouch2stand);
   level.price waittillmatch("animscripted", "end");
 }
 

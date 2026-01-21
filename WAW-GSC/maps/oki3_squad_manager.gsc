@@ -66,8 +66,7 @@ manage_spawners(strSquadName, mincount, maxcount, ender, spawntime, spawnfunctio
       }
       squad_spawn = spawn_array(strSquadName);
       while(aSquad.size < maxcount) {
-        if(isDefined(squad_spawn[spawn_index].script_forcespawn) &&
-          squad_spawn[spawn_index].script_forcespawn) {
+        if(isDefined(squad_spawn[spawn_index].script_forcespawn) && squad_spawn[spawn_index].script_forcespawn) {
           spawned = squad_spawn[spawn_index] stalingradspawn();
         } else {
           spawned = squad_spawn[spawn_index] dospawn();

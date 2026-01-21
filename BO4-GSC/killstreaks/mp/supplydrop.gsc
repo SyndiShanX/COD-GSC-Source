@@ -646,9 +646,7 @@ markerupdatethread(context) {
     markermodel.origin = results[# "position"];
     tooclose = distancesquared(markermodel.origin, player.origin) < minrange * minrange;
 
-    if(results[# "normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [
-        [context.islocationgood]
-      ](markermodel.origin, context)) {
+    if(results[# "normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [[context.islocationgood]](markermodel.origin, context)) {
       player.markerposition = markermodel.origin;
       player clientfield::set_to_player("marker_state", 1);
     } else {
@@ -971,8 +969,7 @@ dropalltoground(origin, radius, stickyobjectradius) {
   weapons::drop_all_to_ground(origin, radius);
   dropcratestoground(origin, radius);
   level notify(#"drop_objects_to_ground", {
-    #position: origin,
-    #radius: stickyobjectradius
+    #position: origin, #radius: stickyobjectradius
   });
 }
 
@@ -1800,8 +1797,7 @@ crateusethink() {
     if(result) {
       scoreevents::givecratecapturemedal(self, player);
       self notify(#"captured", {
-        #player: player,
-        #is_remote_hack: 0
+        #player: player, #is_remote_hack: 0
       });
     }
   }
@@ -1837,8 +1833,7 @@ crateusethinkowner() {
 
     if(result && isDefined(player)) {
       self notify(#"captured", {
-        #player: player,
-        #is_remote_hack: 0
+        #player: player, #is_remote_hack: 0
       });
     }
   }
@@ -2109,9 +2104,7 @@ destroyhelicopter(var_fec7078b) {
   }
 
   self notify(#"hash_525537be2de4c159", {
-    #position: self.origin,
-    #direction: self.angles,
-    #owner: self.owner
+    #position: self.origin, #direction: self.angles, #owner: self.owner
   });
   lbexplode();
 }
@@ -2719,9 +2712,7 @@ helidelivercrate(origin, weapon, owner, team, killstreak_id, package_contents_id
   }
 
   chopper notify(#"drop_crate", {
-    #position: chopper.origin,
-    #direction: chopper.angles,
-    #owner: chopper.owner
+    #position: chopper.origin, #direction: chopper.angles, #owner: chopper.owner
   });
   chopper.droptime = gettime();
   chopper playSound(#"veh_supply_drop");
@@ -2789,9 +2780,7 @@ helidropcrate(killstreak, originalowner, offset, killcament, killstreak_id, pack
     helicopter clientfield::set("supplydrop_ai_tank_state", 1);
 
     if(isDefined(level.var_14151f16)) {
-      [
-        [level.var_14151f16]
-      ](crate, 0);
+      [[level.var_14151f16]](crate, 0);
     }
   }
 
@@ -2857,9 +2846,7 @@ helidestroyed() {
   self setspeed(25, 5);
   wait randomfloatrange(0.5, 1.5);
   self notify(#"hash_525537be2de4c159", {
-    #position: self.origin,
-    #direction: self.angles,
-    #owner: self.owner
+    #position: self.origin, #direction: self.angles, #owner: self.owner
   });
   lbexplode();
 }

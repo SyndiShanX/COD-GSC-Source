@@ -18,10 +18,7 @@ Objectives:
 
 Notes on progression:
 1. climb, jump, climb, spiderman, tarzan, climb to open field
-2. Price: "Cake, start the uplink."
-3. Cake: "Already on it. Let's hope these codes were worth what we paid."
-4. Price: "Soap, on me, let's go. Satellite time's not cheap."
-5. Cake: "Ok, I'm gettin' a good feed. 10 minutes on the clock starting now." (starting open field)
+2. Price: "Cake, start the uplink."3. Cake: "Already on it. Let's hope these codes were worth what we paid."4. Price: "Soap, on me, let's go. Satellite time's not cheap."5. Cake: "Ok, I'm gettin' a good feed. 10 minutes on the clock starting now." (starting open field)
 
 *****************************************************************************/
 
@@ -149,7 +146,7 @@ clifftop_main() {
   flag_set("delay_weapon_switch");
   player_weapons_init();
 
-  //array_thread( getnodearray( "clifftop_nodes", "script_noteworthy" ), ::clifftop_aim_thread );
+  //array_thread( getnodearray("clifftop_nodes", "script_noteworthy" ), ::clifftop_aim_thread );
   array_thread(getEntArray("patrollers_1_leftguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
   array_thread(getEntArray("patrollers_1_rightguy", "script_noteworthy"), ::add_spawn_function, ::clifftop_patroller1_logic);
 

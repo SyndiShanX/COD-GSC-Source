@@ -190,9 +190,7 @@ onMenuResponse() {
           break;
       }
     } // the only responses remain are change class events
-    else if(menu == game["menu_changeclass"] ||
-      (isDefined(game["menu_changeclass_defaults_splitscreen"]) && menu == game["menu_changeclass_defaults_splitscreen"]) ||
-      (isDefined(game["menu_changeclass_custom_splitscreen"]) && menu == game["menu_changeclass_custom_splitscreen"])) {
+    else if(menu == game["menu_changeclass"] || (isDefined(game["menu_changeclass_defaults_splitscreen"]) && menu == game["menu_changeclass_defaults_splitscreen"]) || (isDefined(game["menu_changeclass_custom_splitscreen"]) && menu == game["menu_changeclass_custom_splitscreen"])) {
       self closepopupMenu();
       self closeInGameMenu();
 
@@ -412,8 +410,7 @@ menuClass(response) {
     return;
   }
 
-  if((isDefined(self.pers["class"]) && self.pers["class"] == class) &&
-    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary)) {
+  if((isDefined(self.pers["class"]) && self.pers["class"] == class) && (isDefined(self.pers["primary"]) && self.pers["primary"] == primary)) {
     return;
   }
   if(self.sessionstate == "playing") {

@@ -250,7 +250,7 @@ sonic_zombie_spawn(animname_set) {
   spawn_anim = random(level._zombie_rise_anims["zombie"][1][speed]);
   time = getanimlength(spawn_anim);
   speedUp = 1.5;
-  self animscripted("sonic_spawn", self.origin, self.angles, spawn_anim, "normal", % root, speedUp);
+  self animscripted("sonic_spawn", self.origin, self.angles, spawn_anim, "normal", %root, speedUp);
   fxWait = 0.3;
   wait(fxWait);
   self playSound("zmb_vocals_sonic_scream");
@@ -263,9 +263,9 @@ sonic_zombie_spawn(animname_set) {
 
 _zombie_InitSideStep() {
   self.zombie_can_sidestep = true;
-  self.sideStepAnims["step_left"] = array( % ai_zombie_sonic_sidestep_left_a, % ai_zombie_sonic_sidestep_left_b);
-  self.sideStepAnims["step_right"] = array( % ai_zombie_sonic_sidestep_right_a, % ai_zombie_sonic_sidestep_right_b);
-  self.sideStepAnims["roll_forward"] = array( % ai_zombie_sonic_duck_a, % ai_zombie_sonic_duck_b, % ai_zombie_sonic_duck_c);
+  self.sideStepAnims["step_left"] = array(%ai_zombie_sonic_sidestep_left_a, %ai_zombie_sonic_sidestep_left_b);
+  self.sideStepAnims["step_right"] = array(%ai_zombie_sonic_sidestep_right_a, %ai_zombie_sonic_sidestep_right_b);
+  self.sideStepAnims["roll_forward"] = array(%ai_zombie_sonic_duck_a, %ai_zombie_sonic_duck_b, %ai_zombie_sonic_duck_c);
 }
 
 _zombie_death_watch() {
@@ -523,7 +523,7 @@ zombie_sonic_scream_death(attacker) {
     zombie_anim = % ai_zombie_taunts_9;
     time = getAnimLength(zombie_anim);
     self notify("stop_find_flesh");
-    self animscripted("zombie_react", self.origin, self.angles, zombie_anim, "normal", % body, 1, 0.2);
+    self animscripted("zombie_react", self.origin, self.angles, zombie_anim, "normal", %body, 1, 0.2);
     time = time * randomfloatrange(0.75, 1);
     wait(time);
   }

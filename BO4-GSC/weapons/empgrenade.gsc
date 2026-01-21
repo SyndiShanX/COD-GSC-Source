@@ -43,9 +43,7 @@ monitorempgrenade() {
     assert(isDefined(self.team));
 
     if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && !util::function_fbce7263(attacker.team, self.team) && attacker != self) {
-      friendlyfire = [
-        [level.figure_out_friendly_fire]
-      ](self, attacker);
+      friendlyfire = [[level.figure_out_friendly_fire]](self, attacker);
 
       if(friendlyfire == 0) {
         continue;

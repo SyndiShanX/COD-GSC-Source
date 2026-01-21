@@ -144,8 +144,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   e_grenade.mdl_anchor linkto(e_grenade);
   e_grenade.var_53ba8670 = 0;
   level notify(#"homunculus_thrown", {
-    #e_homunculus: e_grenade,
-    #e_player: self
+    #e_homunculus: e_grenade, #e_player: self
   });
 
   if(math::cointoss() && math::cointoss()) {

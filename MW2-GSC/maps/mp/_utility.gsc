@@ -50,19 +50,8 @@ loadModel(info)
 /*
 =============
 ///ScriptDocBegin
-"Name: delayThread( <delay>, <function>, <arg1>, <arg2>, <arg3>, <arg4> )"
-"Summary: Delaythread is cool! It saves you from having to write extra script for once off commands. Note you don’t have to thread it off. Delaythread is that smart!"
-"Module: Utility"
-"MandatoryArg: <delay> : The delay before the function occurs"
-"MandatoryArg: <delay> : The function to run."
-"OptionalArg: <arg1> : parameter 1 to pass to the process"
-"OptionalArg: <arg2> : parameter 2 to pass to the process"
-"OptionalArg: <arg3> : parameter 3 to pass to the process"
-"OptionalArg: <arg4> : parameter 4 to pass to the process"
-"OptionalArg: <arg5> : parameter 5 to pass to the process"
-"Example: delayThread( 3, ::flag_set, "player_can_rappel" );
-"SPMP: both"
-///ScriptDocEnd
+"Name: delayThread( <delay>, <function>, <arg1>, <arg2>, <arg3>, <arg4> )""Summary: Delaythread is cool! It saves you from having to write extra script for once off commands. Note you don’t have to thread it off. Delaythread is that smart!""Module: Utility""MandatoryArg: <delay> : The delay before the function occurs""MandatoryArg: <delay> : The function to run.""OptionalArg: <arg1> : parameter 1 to pass to the process""OptionalArg: <arg2> : parameter 2 to pass to the process""OptionalArg: <arg3> : parameter 3 to pass to the process""OptionalArg: <arg4> : parameter 4 to pass to the process""OptionalArg: <arg5> : parameter 5 to pass to the process""Example: delayThread( 3, ::flag_set, "player_can_rappel" );
+"SPMP: both"///ScriptDocEnd
 =============
 */
 delayThread(timer, func, param1, param2, param3, param4, param5) {

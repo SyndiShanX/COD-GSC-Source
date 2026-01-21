@@ -17,7 +17,7 @@ main() {
     thread func_1524();
   }
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self func_82EA("coverArrival", var_1, 1, 0.2, self.var_BD22);
   scripts\anim\face::playfacialanim(var_1, "run");
   scripts\anim\shared::donotetracks("coverArrival", ::func_89EA);
@@ -28,7 +28,7 @@ main() {
 
   self.a.movement = "stop";
   self.a.var_22F5 = self.var_20F2;
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   self.var_A93C = undefined;
 }
 
@@ -67,7 +67,7 @@ func_1524() {
     }
 
     if(func_9FA5()) {
-      self clearanim( % root, 0.3);
+      self clearanim(%root, 0.3);
       self notify("abort_approach");
       self.var_A93C = gettime();
       return;
@@ -690,7 +690,7 @@ custommovetransitionfunc() {
 
   self animmode("zonly_physics", 0);
   self orientmode("face current");
-  self func_82E4("move", self.var_10DCB, % root, 1);
+  self func_82E4("move", self.var_10DCB, %root, 1);
   scripts\anim\face::playfacialanim(self.var_10DCB, "run");
   if(animhasnotetrack(self.var_10DCB, "code_move")) {
     scripts\anim\shared::donotetracks("move");

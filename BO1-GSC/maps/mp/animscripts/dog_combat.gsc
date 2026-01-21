@@ -287,8 +287,7 @@ dog_cant_kill_in_one_hit(player) {
   }
   if(getTime() - level.lastDogMeleePlayerTime > 8000)
     level.dogMeleePlayerCounter = 0;
-  return level.dogMeleePlayerCounter < level.dog_hits_before_kill &&
-    player.health > 25;
+  return level.dogMeleePlayerCounter < level.dog_hits_before_kill && player.health > 25;
 }
 dog_melee_death(player) {
   self endon("killanimscript");

@@ -75,9 +75,7 @@ function nml_setup_round_spawner() {
   if(isDefined(level.round_number)) {
     if(level flag::get("between_rounds")) {
       level.nml_last_round = level.round_number + 1;
-      level.prev_round_zombies = [
-        [level.max_zombie_func]
-      ](level.zombie_vars["zombie_max_ai"]);
+      level.prev_round_zombies = [[level.max_zombie_func]](level.zombie_vars["zombie_max_ai"]);
     } else {
       level.nml_last_round = level.round_number;
     }

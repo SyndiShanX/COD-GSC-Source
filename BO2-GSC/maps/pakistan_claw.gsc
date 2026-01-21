@@ -132,10 +132,10 @@ setup_garage_doors() {
 
   m_right_path_train_car = getent("right_path_train_car", "targetname");
   m_right_path_train_car useanimtree(#animtree);
-  m_right_path_train_car setanim( % veh_anim_pak_train_boxcar_doors_open, 1, 0, 1);
+  m_right_path_train_car setanim(%veh_anim_pak_train_boxcar_doors_open, 1, 0, 1);
   m_train_door = getent("train_door", "targetname");
   m_train_door useanimtree(#animtree);
-  m_train_door setanim( % veh_anim_pak_train_boxcar_doors_open, 1, 0, 1);
+  m_train_door setanim(%veh_anim_pak_train_boxcar_doors_open, 1, 0, 1);
 }
 
 claw_event_spawn_funcs() {
@@ -2004,7 +2004,7 @@ waittill_zero_breachers() {
 claw_cleanup() {
   setsaveddvar("player_waterSpeedScale", 1.3);
   flag_wait("mount_soct_player_started");
-  anim_length = getanimlength( % p_pakistan_6_11_mount_soct_player);
+  anim_length = getanimlength(%p_pakistan_6_11_mount_soct_player);
   wait(anim_length - 1);
   screen_fade_out(0.5);
   wait 0.6;

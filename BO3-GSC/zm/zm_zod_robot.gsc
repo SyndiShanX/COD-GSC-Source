@@ -242,12 +242,8 @@ function spawn_robot(player, trig_stub, n_spawn_delay) {
   }
   level.ai_robot setCanDamage(1);
   if(isDefined(level.o_zod_train)) {
-    if([
-        [level.o_zod_train]
-      ] - > is_touching_train_volume(level.ai_robot)) {
-      level.ai_robot linkto([
-        [level.o_zod_train]
-      ] - > get_train_vehicle());
+    if([[level.o_zod_train]] - > is_touching_train_volume(level.ai_robot)) {
+      level.ai_robot linkto([[level.o_zod_train]] - > get_train_vehicle());
     }
   }
   level.ai_robot scene::play("cin_zod_robot_companion_exit_death");

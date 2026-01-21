@@ -77,8 +77,8 @@ function emp_turret_init(localclientnum, oldval, newval, bnewent, binitialsnap, 
     return;
   }
   self useanimtree($mp_emp_power_core);
-  self setanimrestart( % mp_emp_power_core::o_turret_emp_core_deploy, 1, 0, 0);
-  self setanimtime( % mp_emp_power_core::o_turret_emp_core_deploy, 0);
+  self setanimrestart(%mp_emp_power_core::o_turret_emp_core_deploy, 1, 0, 0);
+  self setanimtime(%mp_emp_power_core::o_turret_emp_core_deploy, 0);
 }
 
 function cleanup_fx_on_shutdown(localclientnum, handle) {
@@ -107,13 +107,13 @@ function emp_turret_deploy_start(localclientnum, oldval, newval, bnewent, biniti
 function emp_turret_deploy(localclientnum) {
   self endon("entityshutdown");
   self useanimtree($mp_emp_power_core);
-  self setanimrestart( % mp_emp_power_core::o_turret_emp_core_deploy, 1, 0, 1);
-  length = getanimlength( % mp_emp_power_core::o_turret_emp_core_deploy);
+  self setanimrestart(%mp_emp_power_core::o_turret_emp_core_deploy, 1, 0, 1);
+  length = getanimlength(%mp_emp_power_core::o_turret_emp_core_deploy);
   wait(length * 0.75);
   self useanimtree($mp_emp_power_core);
-  self setanim( % mp_emp_power_core::o_turret_emp_core_spin, 1);
+  self setanim(%mp_emp_power_core::o_turret_emp_core_spin, 1);
   self.fxhandle = playFXOnTag(localclientnum, "killstreaks/fx_emp_core", self, "tag_fx");
   self thread cleanup_fx_on_shutdown(localclientnum, self.fxhandle);
   wait(length * 0.25);
-  self setanim( % mp_emp_power_core::o_turret_emp_core_deploy, 0);
+  self setanim(%mp_emp_power_core::o_turret_emp_core_deploy, 0);
 }

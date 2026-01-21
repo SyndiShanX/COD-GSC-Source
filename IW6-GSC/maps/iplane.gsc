@@ -1179,7 +1179,7 @@ player_rotate_plane01() {
   level.player_rig unlink();
   level.player_rig hide();
   level.player_rig linkto(level.plane_core);
-  var_1 = getanimlength( % plane_player_fall);
+  var_1 = getanimlength(%plane_player_fall);
   level.player thread maps\_utility::play_sound_on_entity("scn_iplane_player_grab_bar");
   level.plane_core thread maps\_anim::anim_single_solo(level.player_rig, "player_fall", "tag_origin");
   stopallrumbles();
@@ -2009,8 +2009,8 @@ _sleeves_idle(var_0) {
   if(!isDefined(var_0))
     var_0 = 1.0;
 
-  self.sleeve_flap_l setanimknob( % player_sleeve_pose, 1.0, var_0, 1.0);
-  self.sleeve_flap_r setanimknob( % player_sleeve_pose, 1.0, var_0, 1.0);
+  self.sleeve_flap_l setanimknob(%player_sleeve_pose, 1.0, var_0, 1.0);
+  self.sleeve_flap_r setanimknob(%player_sleeve_pose, 1.0, var_0, 1.0);
 }
 
 _sleeves_flap_internal() {
@@ -2031,8 +2031,8 @@ _sleeves_flap_internal() {
       var_7 = 1;
     }
 
-    self.sleeve_flap_l setanimknob( % player_sleeve_flapping, 1.0, var_6, var_5);
-    self.sleeve_flap_r setanimknob( % player_sleeve_flapping, 1.0, var_6, var_5);
+    self.sleeve_flap_l setanimknob(%player_sleeve_flapping, 1.0, var_6, var_5);
+    self.sleeve_flap_r setanimknob(%player_sleeve_flapping, 1.0, var_6, var_5);
     var_9 = randomfloatrange(var_0, var_1);
 
     if(var_7)

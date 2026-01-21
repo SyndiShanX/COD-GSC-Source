@@ -99,9 +99,7 @@ jackal_hint_waittill_termination(var_0) {
       break;
     }
 
-    if([
-        [var_0.hint_terminator]
-      ](var_0)) {
+    if([[var_0.hint_terminator]](var_0)) {
       break;
     }
 

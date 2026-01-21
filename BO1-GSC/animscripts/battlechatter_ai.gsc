@@ -8,8 +8,7 @@
 #include animscripts\battlechatter;
 
 isHero() {
-  return self.npcID == "bar" ||
-    self.npcID == "lew";
+  return self.npcID == "bar" || self.npcID == "lew";
 }
 
 addToSystem(squadName) {}
@@ -125,9 +124,7 @@ aiDeathFriendly() {
   attacker = self.attacker;
   if(isDefined(self)) {
     for(i = 0; i < self.squad.members.size; i++) {
-      if(IsAlive(self.squad.members[i]) &&
-        self.squad.members[i] cansee(self) &&
-        distance(self.origin, self.squad.members[i].origin) < 500) {
+      if(IsAlive(self.squad.members[i]) && self.squad.members[i] cansee(self) && distance(self.origin, self.squad.members[i].origin) < 500) {
         self.squad.members[i].bcFriendDeathTime = GetTime();
       }
     }
@@ -139,10 +136,7 @@ aiDeathEnemy() {
   if(!IsAlive(attacker) || !IsSentient(attacker) || !isDefined(attacker.squad)) {
     return;
   }
-  if(isDefined(self.calledOut[attacker.squad.squadName]) &&
-    IsAlive(self.calledOut[attacker.squad.squadName].spotter) &&
-    self.calledOut[attacker.squad.squadName].spotter != attacker &&
-    GetTime() < self.calledOut[attacker.squad.squadName].expireTime) {
+  if(isDefined(self.calledOut[attacker.squad.squadName]) && IsAlive(self.calledOut[attacker.squad.squadName].spotter) && self.calledOut[attacker.squad.squadName].spotter != attacker && GetTime() < self.calledOut[attacker.squad.squadName].expireTime) {
     attacker.bcKillTime = GetTime();
   } else if(!IsPlayer(attacker)) {
     attacker.bcKillTime = GetTime();

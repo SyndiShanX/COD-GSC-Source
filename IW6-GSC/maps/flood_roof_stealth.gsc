@@ -781,7 +781,7 @@ create_hatchet() {
 #using_animtree("generic_human");
 
 give_hatchet(var_0) {
-  var_0 clearanim( % flood_stealthkill_01_ally1_face1, 0.2);
+  var_0 clearanim(%flood_stealthkill_01_ally1_face1, 0.2);
   common_scripts\utility::flag_set("hatchet_linked");
 
   if(!common_scripts\utility::flag("player_passed_table"))
@@ -886,13 +886,13 @@ stealth_kill_02_vision_hack() {
 }
 
 stealth_kill_01_facial(var_0) {
-  var_0 setanim( % flood_stealthkill_01_ally1_face1, 1, 0.2);
+  var_0 setanim(%flood_stealthkill_01_ally1_face1, 1, 0.2);
 }
 
 stealth_kill_01_facial_start(var_0) {
-  var_0 setanim( % flood_stealthkill_01_ally1_facestart, 1, 0.2);
+  var_0 setanim(%flood_stealthkill_01_ally1_facestart, 1, 0.2);
 }
 
 stealth_kill_01_opfor_facial(var_0) {
-  var_0 setanim( % flood_stealthkill_01_opfor3_face, 1, 0.2);
+  var_0 setanim(%flood_stealthkill_01_opfor3_face, 1, 0.2);
 }

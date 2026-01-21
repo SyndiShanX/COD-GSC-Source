@@ -499,8 +499,7 @@ replenishAmmo() {
     if(isKillstreakWeapon(weaponName)) {
       continue;
     } else if(WeaponInventoryType(weaponName) == "offhand") {
-      if((weaponName == self.loadoutPerkEquipment && self _hasPerk("specialty_extra_deadly")) ||
-        (weaponName == self.loadoutPerkOffhand && self _hasPerk("specialty_extra_equipment"))) {
+      if((weaponName == self.loadoutPerkEquipment && self _hasPerk("specialty_extra_deadly")) || (weaponName == self.loadoutPerkOffhand && self _hasPerk("specialty_extra_equipment"))) {
         self SetWeaponAmmoClip(weaponName, 2);
       } else {
         self SetWeaponAmmoClip(weaponName, 1);

@@ -187,9 +187,7 @@ createPortal(trigger, team) {
       game["blitzPortalLogIDs"] = [];
 
     if(!isDefined(game["blitzPortalLogIDs"][team]))
-      game["blitzPortalLogIDs"][team] = [
-        [level.matchRecording_generateID]
-      ]();
+      game["blitzPortalLogIDs"][team] = [[level.matchRecording_generateID]]();
 
     stateValue = ter_op(team == "allies", 0, 1);
 
@@ -943,8 +941,7 @@ checkScoreLimit() {
       level.finalKillCam_winner = self.team;
 
       otherteam = getOtherTeam(self.team);
-      if(scoreLimit >= BLITZ_SCORE_LIMIT &&
-        GetTeamScore(otherteam) == 0) {
+      if(scoreLimit >= BLITZ_SCORE_LIMIT && GetTeamScore(otherteam) == 0) {
         maps\mp\gametypes\_missions::processChallengeForTeam("ch_lockdown", self.team);
       }
     }

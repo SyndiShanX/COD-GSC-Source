@@ -320,15 +320,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
       thread maps\_spawner::trigger_spawner(triggers[i]);
     }
   }
-  trigger_types = array(
-    "trigger_multiple",
-    "trigger_once",
-    "trigger_use",
-    "trigger_use_touch",
-    "trigger_radius",
-    "trigger_lookat",
-    "trigger_damage"
-  );
+  trigger_types = array("trigger_multiple", "trigger_once", "trigger_use", "trigger_use_touch", "trigger_radius", "trigger_lookat", "trigger_damage");
   for(p = 0; p < trigger_types.size; p++) {
     triggertype = trigger_types[p];
     triggers = getEntArray(triggertype, "classname");

@@ -301,7 +301,7 @@ delete_models_on_zodiac() {
 #using_animtree("player");
 
 vo_zodiac_get_ready() {
-  anim_length = getanimlength( % p_pan_02_01_beach_approach_player);
+  anim_length = getanimlength(%p_pan_02_01_beach_approach_player);
   wait(anim_length - 12.5);
   level.mason thread say_dialog("reds_10_seconds_out_0", 0);
   wait 5;

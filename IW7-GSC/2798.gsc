@@ -1135,9 +1135,7 @@ func_D91D() {
 
   if(isDefined(level.matchrecording_logeventmsg)) {
     if(shoulduseprecomputedlos()) {
-      [
-        [level.matchrecording_logeventmsg]
-      ]("LOG_GENERIC_MESSAGE", gettime(), "Attempting to use TTLOS Spawning Data...");
+      [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "Attempting to use TTLOS Spawning Data...");
     } else {
       [
       }

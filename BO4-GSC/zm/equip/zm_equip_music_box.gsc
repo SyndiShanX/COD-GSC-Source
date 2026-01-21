@@ -125,9 +125,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
 
   foreach(e_zombie in a_zombies) {
     if(isalive(e_zombie)) {
-      [
-        [level.var_14160fb0]
-      ] - > waitinqueue(e_zombie);
+      [[level.var_14160fb0]] - > waitinqueue(e_zombie);
       e_zombie startragdoll(1);
       var_23ef51ef = vectornormalize(e_zombie getcentroid() - var_b7fc8c3e) * randomfloatrange(150, 250);
       e_zombie launchragdoll(var_23ef51ef + (0, 0, 32));

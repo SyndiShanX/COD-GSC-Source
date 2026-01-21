@@ -169,7 +169,7 @@ set_death_model(smodel, fdelay) {
   emodel = get_dummy();
 
   if(!isDefined(emodel.death_anim))
-    emodel clearanim( % root, 0);
+    emodel clearanim(%root, 0);
 
   emodel setModel(smodel);
   emodel setvehicleattachments(1);
@@ -828,7 +828,7 @@ death_jolt(type) {
   self joltbody(self.origin + (23, 33, 64), 3);
 
   if(isDefined(self.death_anim)) {
-    self animscripted("death_anim", self.origin, self.angles, self.death_anim, "normal", % root, 1, 0);
+    self animscripted("death_anim", self.origin, self.angles, self.death_anim, "normal", %root, 1, 0);
     self waittillmatch("death_anim", "end");
   } else if(!isDefined(self.destructibledef)) {
     if(self.isphysicsvehicle) {

@@ -213,9 +213,7 @@ func_13B36() {
     level.var_C2C8 playSound("mouse_click");
     if(isDefined(level.var_1622) && var_0) {
       level.var_1622 notify("select_button_pressed");
-      [
-        [level.var_1622.var_1577]
-      ]();
+      [[level.var_1622.var_1577]]();
       var_0 = 0;
     }
 

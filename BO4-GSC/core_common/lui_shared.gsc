@@ -295,9 +295,7 @@ _play_movie_for_player(str_movie, str_type, show_black_screen, b_looping, b_skip
     [[lui_menu]] - > set_additive(self, 0);
 
     if(issubstr(str_type, "additive")) {
-      [
-        [lui_menu]
-      ] - > set_additive(self, 1);
+      [[lui_menu]] - > set_additive(self, 1);
     }
 
     while(true) {
@@ -383,8 +381,7 @@ play_outro_movie(show_black_screen = 1) {
 
   level flagsys::clear("playing_outro_movie");
   level notify(#"movie_done", {
-    #type: "outro"
-  });
+    #type: "outro"});
 }
 
 function_1bc580af() {
@@ -531,9 +528,7 @@ _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_force_close_menu,
   } else {
     if(isDefined(get_luimenu(str_menu))) {
       lui_menu = get_luimenu(str_menu);
-      [
-        [lui_menu]
-      ] - > open(self);
+      [[lui_menu]] - > open(self);
     } else {
       lui_menu = self openluimenu(str_menu);
     }

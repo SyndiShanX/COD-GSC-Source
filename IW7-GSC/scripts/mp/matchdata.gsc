@@ -324,9 +324,7 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(isDefined(level.matchrecording_logevent)) {
       var_12 = gettime();
-      [
-        [level.matchrecording_logevent]
-      ](self.clientid, self.team, "DEATH", self.origin[0], self.origin[1], var_12);
+      [[level.matchrecording_logevent]](self.clientid, self.team, "DEATH", self.origin[0], self.origin[1], var_12);
       if(issubstr(tolower(var_3), "bullet") && isDefined(var_4) && !scripts\mp\utility::iskillstreakweapon(var_4)) {
         [[level.matchrecording_logevent]](var_1.clientid, var_1.team, "BULLET", var_1.origin[0], var_1.origin[1], var_12, undefined, self.origin[0], self.origin[1]);
       }

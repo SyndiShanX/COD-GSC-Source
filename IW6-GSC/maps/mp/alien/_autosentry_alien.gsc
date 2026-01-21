@@ -486,9 +486,7 @@ setCarryingSentry(sentryGun, allowCancel) {
       }
       if(level.console) {
         killstreakWeapon = getKillstreakWeapon(level.sentrySettings[sentryGun.sentryType].streakName);
-        if(isDefined(self.killstreakIndexWeapon) &&
-          killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) &&
-          !(self GetWeaponsListItems()).size) {
+        if(isDefined(self.killstreakIndexWeapon) && killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) && !(self GetWeaponsListItems()).size) {
           self _giveWeapon(killstreakWeapon, 0);
           self _setActionSlot(4, "weapon", killstreakWeapon);
         }
@@ -809,11 +807,7 @@ turret_handlePickup(turret) {
   }
   buttonTime = 0;
   for(;;) {
-    if(IsAlive(self) &&
-      self IsTouching(turret.ownerTrigger) &&
-      !isDefined(turret.inUseBy) &&
-      !isDefined(turret.carriedBy) &&
-      self IsOnGround() && !isDefined(turret.deleting)) {
+    if(IsAlive(self) && self IsTouching(turret.ownerTrigger) && !isDefined(turret.inUseBy) && !isDefined(turret.carriedBy) && self IsOnGround() && !isDefined(turret.deleting)) {
       if(self UseButtonPressed()) {
         buttonTime = 0;
         while(self UseButtonPressed()) {
@@ -860,11 +854,7 @@ turret_handlePickup_pc(turret) {
   }
   buttonTime = 0;
   for(;;) {
-    if(IsAlive(self) &&
-      self IsTouching(turret.ownerTrigger) &&
-      !isDefined(turret.inUseBy) &&
-      !isDefined(turret.carriedBy) &&
-      self IsOnGround() && !isDefined(turret.deleting)) {
+    if(IsAlive(self) && self IsTouching(turret.ownerTrigger) && !isDefined(turret.inUseBy) && !isDefined(turret.carriedBy) && self IsOnGround() && !isDefined(turret.deleting)) {
       if(self MeleeButtonPressed()) {
         buttonTime = 0;
         while(self MeleeButtonPressed()) {

@@ -461,12 +461,7 @@ loot_pickup_listener(item_owner, touch) {
       continue;
     }
 
-    if(getdvarint("debug_collectibles") == 1 &&
-      isLoot &&
-      isDefined(item_owner) &&
-      item_owner != owner &&
-      isplayer(item_owner) &&
-      isplayer(owner)) {
+    if(getdvarint("debug_collectibles") == 1 && isLoot && isDefined(item_owner) && item_owner != owner && isplayer(item_owner) && isplayer(owner)) {
       IPrintLn(owner.name + " took " + item_owner.name + "'s loot [" + self.item_ref + "]");
     }
 
@@ -565,10 +560,7 @@ collectibles_table_init(index_start, index_end) {
 }
 
 is_collectible_loot(item_ref) {
-  if(isDefined(level.collectibles) &&
-    isDefined(level.collectibles[item_ref]) &&
-    isDefined(level.collectibles[item_ref].isLoot)
-  ) {
+  if(isDefined(level.collectibles) && isDefined(level.collectibles[item_ref]) && isDefined(level.collectibles[item_ref].isLoot)) {
     return level.collectibles[item_ref].isLoot;
   } else {
     return (GetSubStr(item_ref, 0, 5) == "loot_");
@@ -576,10 +568,7 @@ is_collectible_loot(item_ref) {
 }
 
 is_collectible_weapon(item_ref) {
-  if(isDefined(level.collectibles) &&
-    isDefined(level.collectibles[item_ref]) &&
-    isDefined(level.collectibles[item_ref].isWeapon)
-  ) {
+  if(isDefined(level.collectibles) && isDefined(level.collectibles[item_ref]) && isDefined(level.collectibles[item_ref].isWeapon)) {
     return level.collectibles[item_ref].isWeapon;
   } else {
     return (GetSubStr(item_ref, 0, 7) == "weapon_");
@@ -587,10 +576,7 @@ is_collectible_weapon(item_ref) {
 }
 
 is_collectible_item(item_ref) {
-  if(isDefined(level.collectibles) &&
-    isDefined(level.collectibles[item_ref]) &&
-    isDefined(level.collectibles[item_ref].isItem)
-  ) {
+  if(isDefined(level.collectibles) && isDefined(level.collectibles[item_ref]) && isDefined(level.collectibles[item_ref].isItem)) {
     return level.collectibles[item_ref].isItem;
   } else {
     return (GetSubStr(item_ref, 0, 5) == "item_");
@@ -909,9 +895,7 @@ cangive_weapon(item) {
   }
 
   if(isDefined(level.custom_cangive_weapon_func)) {
-    if(![
-        [level.custom_cangive_weapon_func]
-      ](cur_weapons, currentweapon, currentweapon_class, max_primaries)) {
+    if(![[level.custom_cangive_weapon_func]](cur_weapons, currentweapon, currentweapon_class, max_primaries)) {
       self setLowerMessage("cant_buy", &"ALIEN_COLLECTIBLES_PLAYER_HAS_SPECIALWEAPON", 3);
       return false;
     }
@@ -1257,11 +1241,7 @@ fireCloudMonitor(attacker, duration, position) {
 
   while(fireTotalTime < duration) {
     foreach(agent in level.agentArray) {
-      if(isDefined(agent.isActive) &&
-        agent.isActive &&
-        isalive(agent) &&
-        (agent istouching(fireEffectArea)) &&
-        (!isDefined(agent.burning) || !agent.burning)) {
+      if(isDefined(agent.isActive) && agent.isActive && isalive(agent) && (agent istouching(fireEffectArea)) && (!isDefined(agent.burning) || !agent.burning)) {
         agent thread fire_cloud_burn_alien(fireCloudTickDamage, attacker, fireCloudLingerTime, fireEffectArea);
       }
     }

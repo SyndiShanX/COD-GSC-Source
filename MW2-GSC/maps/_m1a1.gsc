@@ -13,7 +13,7 @@ main(model, type) {
   build_localinit(::init_local);
   build_deathmodel("vehicle_m1a1_abrams", "vehicle_m1a1_abrams_dmg");
   build_shoot_shock("tankblast");
-  build_drive( % abrams_movement, % abrams_movement_backwards, 10);
+  build_drive(%abrams_movement, %abrams_movement_backwards, 10);
   build_exhaust("distortion/abrams_exhaust");
   build_deckdust("dust/abrams_desk_dust");
   build_deathfx("explosions/large_vehicle_explosion", undefined, "exp_armor_vehicle");
@@ -55,10 +55,7 @@ and these lines in your CSV:
 include,vehicle_m1a1_abrams_m1a1
 sound,vehicle_abrams,vehicle_standard,all_sp
 
-defaultmdl="vehicle_m1a1_abrams"
-default:"vehicletype" "m1a1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_m1a1_abrams"default:"vehicletype" "m1a1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_m1a1_abrams_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -69,7 +66,5 @@ and these lines in your CSV:
 include,vehicle_m1a1_abrams_m1a1_player
 sound,vehicle_abrams,vehicle_standard,all_sp
 
-defaultmdl="vehicle_m1a1_abrams"
-default:"vehicletype" "m1a1_player"
-default:"script_team" "allies"
+defaultmdl="vehicle_m1a1_abrams"default:"vehicletype" "m1a1_player"default:"script_team" "allies"
 */

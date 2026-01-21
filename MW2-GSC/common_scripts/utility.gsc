@@ -29,18 +29,7 @@ waittillend(msg) {
 /*
 =============
 ///ScriptDocBegin
-"Name: noself_func( <func> , <parm1> , <parm2> , <parm3> , <parm4> )"
-"Summary: Runs a function from level.func, if it exists. Stand alone, doesn't run on anything. Useful for common scripts where a code function may not exist in one codebase or the other."
-"Module: Utility"
-"CallOn: An entity"
-"MandatoryArg: <func>: String reference to level.func array."
-"OptionalArg: <parm1>: "
-"OptionalArg: <parm2>: "
-"OptionalArg: <parm3>: "
-"OptionalArg: <parm4>: "
-"Example: noself_func( "setsaveddvar", "r_spotlightbrightness", maxVal );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: noself_func( <func> , <parm1> , <parm2> , <parm3> , <parm4> )""Summary: Runs a function from level.func, if it exists. Stand alone, doesn't run on anything. Useful for common scripts where a code function may not exist in one codebase or the other.""Module: Utility""CallOn: An entity""MandatoryArg: <func>: String reference to level.func array.""OptionalArg: <parm1>: ""OptionalArg: <parm2>: ""OptionalArg: <parm3>: ""OptionalArg: <parm4>: ""Example: noself_func( "setsaveddvar", "r_spotlightbrightness", maxVal );""SPMP: both"///ScriptDocEnd
 =============
 */
 noself_func(func, parm1, parm2, parm3, parm4) {
@@ -73,18 +62,7 @@ noself_func(func, parm1, parm2, parm3, parm4) {
 /*
 =============
 ///ScriptDocBegin
-"Name: self_func( <func> , <parm1> , <parm2> , <parm3> , <parm4> )"
-"Summary: Runs a function from level.func, if it exists. Runs on whatever calls it. Useful for common scripts where a code function may not exist in one codebase or the other."
-"Module: Utility"
-"CallOn: An entity"
-"MandatoryArg: <func>: String reference to level.func array."
-"OptionalArg: <parm1>: "
-"OptionalArg: <parm2>: "
-"OptionalArg: <parm3>: "
-"OptionalArg: <parm4>: "
-"Example: level.player self_func( "some_player_function", 1, 2 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: self_func( <func> , <parm1> , <parm2> , <parm3> , <parm4> )""Summary: Runs a function from level.func, if it exists. Runs on whatever calls it. Useful for common scripts where a code function may not exist in one codebase or the other.""Module: Utility""CallOn: An entity""MandatoryArg: <func>: String reference to level.func array.""OptionalArg: <parm1>: ""OptionalArg: <parm2>: ""OptionalArg: <parm3>: ""OptionalArg: <parm4>: ""Example: level.player self_func( "some_player_function", 1, 2 );""SPMP: both"///ScriptDocEnd
 =============
 */
 self_func(func, parm1, parm2, parm3, parm4) {
@@ -115,14 +93,7 @@ self_func(func, parm1, parm2, parm3, parm4) {
 /*
 =============
 ///ScriptDocBegin
-"Name: randomvector( <num> )"
-"Summary: returns a random vector centered on <num>"
-"Module: Vector"
-"CallOn: Level"
-"MandatoryArg: <num>: "
-"Example: direction = randomvector( 1 )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: randomvector( <num> )""Summary: returns a random vector centered on <num>""Module: Vector""CallOn: Level""MandatoryArg: <num>: ""Example: direction = randomvector( 1 )""SPMP: both"///ScriptDocEnd
 =============
 */
 randomvector(num) {
@@ -132,15 +103,7 @@ randomvector(num) {
 /*
 =============
 ///ScriptDocBegin
-"Name: randomvectorrange( <num_min>, <num_max> )"
-"Summary: returns a random vector centered between <num_min> and <num_max>"
-"Module: Vector"
-"CallOn: Level"
-"MandatoryArg: <num_min>: "
-"MandatoryArg: <num_max>: "
-"Example: direction = randomvectorrange( 5, 10 )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: randomvectorrange( <num_min>, <num_max> )""Summary: returns a random vector centered between <num_min> and <num_max>""Module: Vector""CallOn: Level""MandatoryArg: <num_min>: ""MandatoryArg: <num_max>: ""Example: direction = randomvectorrange( 5, 10 )""SPMP: both"///ScriptDocEnd
 =============
 */
 randomvectorrange(num_min, num_max) {
@@ -250,13 +213,7 @@ set_all_exceptions(exceptionFunc) {
 /*
 =============
 ///ScriptDocBegin
-"Name: cointoss()"
-"Summary: 50/50 returns true"
-"Module: Utility"
-"CallOn: Level"
-"Example: if(cointoss())"
-"SPMP: both"
-///ScriptDocEnd
+"Name: cointoss()""Summary: 50/50 returns true""Module: Utility""CallOn: Level""Example: if(cointoss())""SPMP: both"///ScriptDocEnd
 =============
 */
 cointoss() {
@@ -366,25 +323,11 @@ waittill_multiple_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string
 /*
 =============
 ///ScriptDocBegin
-"Name: waittill_any_return( <string1> , <string2> , <string3> , <string4> , <string5> )"
-"Summary: Waits for any of several messages then returns what it was."
-"Module: Utility"
-"MandatoryArg: <string1>: A string to wait on"
-"MandatoryArg: <string2>: A string to wait on"
-"OptionalArg: <string3>: A string to wait on"
-"OptionalArg: <string4>: A string to wait on"
-"OptionalArg: <string5>: A string to wait on"
-"Example: msg = level.player waittill_any_return( "weapon_fired", "player_flash", "player_frag" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: waittill_any_return( <string1> , <string2> , <string3> , <string4> , <string5> )""Summary: Waits for any of several messages then returns what it was.""Module: Utility""MandatoryArg: <string1>: A string to wait on""MandatoryArg: <string2>: A string to wait on""OptionalArg: <string3>: A string to wait on""OptionalArg: <string4>: A string to wait on""OptionalArg: <string5>: A string to wait on""Example: msg = level.player waittill_any_return( "weapon_fired", "player_flash", "player_frag" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 waittill_any_return(string1, string2, string3, string4, string5) {
-  if((!isDefined(string1) || string1 != "death") &&
-    (!isDefined(string2) || string2 != "death") &&
-    (!isDefined(string3) || string3 != "death") &&
-    (!isDefined(string4) || string4 != "death") &&
-    (!isDefined(string5) || string5 != "death"))
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
   ent = spawnStruct();
@@ -412,23 +355,11 @@ waittill_any_return(string1, string2, string3, string4, string5) {
 /*
 =============
 ///ScriptDocBegin
-"Name: waittill_any_timeout( <timeOut> , <string1> , <string2> , <string3> , <string4> , <string5> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: waittill_any_timeout( <timeOut> , <string1> , <string2> , <string3> , <string4> , <string5> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 waittill_any_timeout(timeOut, string1, string2, string3, string4, string5) {
-  if((!isDefined(string1) || string1 != "death") &&
-    (!isDefined(string2) || string2 != "death") &&
-    (!isDefined(string3) || string3 != "death") &&
-    (!isDefined(string4) || string4 != "death") &&
-    (!isDefined(string5) || string5 != "death"))
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
   ent = spawnStruct();
@@ -465,15 +396,7 @@ _timeout(delay) {
 /*
 =============
 ///ScriptDocBegin
-"Name: waittill_any( <string1> , <string2> , <string3> , <string4> , <string5> , <string6> , <string7> , <string8> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <string1>: a notify on which the entity should wait"
-"OptionalArg: <string2> - <string8>: optional other notifies to wait for"
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: waittill_any( <string1> , <string2> , <string3> , <string4> , <string5> , <string6> , <string7> , <string8> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <string1>: a notify on which the entity should wait""OptionalArg: <string2> - <string8>: optional other notifies to wait for""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 waittill_any(string1, string2, string3, string4, string5, string6, string7, string8) {
@@ -531,13 +454,7 @@ waittill_any_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4, en
 /*
 =============
 ///ScriptDocBegin
-"Name: isFlashed()"
-"Summary: Returns true if the player or an AI is flashed"
-"Module: Utility"
-"CallOn: An AI"
-"Example: flashed = level.price isflashed();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: isFlashed()""Summary: Returns true if the player or an AI is flashed""Module: Utility""CallOn: An AI""Example: flashed = level.price isflashed();""SPMP: both"///ScriptDocEnd
 =============
 */
 isFlashed() {
@@ -550,13 +467,7 @@ isFlashed() {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_exist( <flagname> )"
-"Summary: checks to see if a flag exists"
-"Module: Flag"
-"MandatoryArg: <flagname> : name of the flag to check"
-"Example: if( flag_exist( "hq_cleared" ) );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_exist( <flagname> )""Summary: checks to see if a flag exists""Module: Flag""MandatoryArg: <flagname> : name of the flag to check""Example: if( flag_exist( "hq_cleared" ) );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_exist(message) {
@@ -566,14 +477,7 @@ flag_exist(message) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag( <flagname>, <entity> )"
-"Summary: Checks if the flag is set. Returns true or false."
-"Module: Flag"
-"MandatoryArg: <flagname> : name of the flag to check"
-"OptionalArg: <entity> : You can check the flag settings for a specific entity by passing the entity"
-"Example: if( flag( "hq_cleared" ) )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag( <flagname>, <entity> )""Summary: Checks if the flag is set. Returns true or false.""Module: Flag""MandatoryArg: <flagname> : name of the flag to check""OptionalArg: <entity> : You can check the flag settings for a specific entity by passing the entity""Example: if( flag( "hq_cleared" ) )""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -599,14 +503,7 @@ init_flags() {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_init( <flagname> )"
-"Summary: Initialize a flag to be used. All flags must be initialized before using flag_set or flag_wait"
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname> : name of the flag to create"
-"Example: flag_init( "hq_cleared" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_init( <flagname> )""Summary: Initialize a flag to be used. All flags must be initialized before using flag_set or flag_wait""Module: Flag""CallOn: ""MandatoryArg: <flagname> : name of the flag to create""Example: flag_init( "hq_cleared" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_init(message) {
@@ -649,14 +546,7 @@ issuffix(msg, suffix) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_set( <flagname>, <setter> )"
-"Summary: Sets the specified flag, all scripts using flag_wait will now continue."
-"Module: Flag"
-"MandatoryArg: <flagname> : name of the flag to set"
-"OptionalArg: <setter> : Pass an entity with the flag_set"
-"Example: flag_set( "hq_broiled" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_set( <flagname>, <setter> )""Summary: Sets the specified flag, all scripts using flag_wait will now continue.""Module: Flag""MandatoryArg: <flagname> : name of the flag to set""OptionalArg: <setter> : Pass an entity with the flag_set""Example: flag_set( "hq_broiled" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_set(message, setter) {
@@ -680,14 +570,7 @@ assign_unique_id() {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_wait( <flagname>, <entity> )"
-"Summary: Waits until the specified flag is set."
-"Module: Flag"
-"MandatoryArg: <flagname> : name of the flag to wait on"
-"OptionalArg: <entity> : You can wait until a flag is set for a specific entity"
-"Example: flag_wait( "hq_cleared" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_wait( <flagname>, <entity> )""Summary: Waits until the specified flag is set.""Module: Flag""MandatoryArg: <flagname> : name of the flag to wait on""OptionalArg: <entity> : You can wait until a flag is set for a specific entity""Example: flag_wait( "hq_cleared" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_wait(msg, entity) {
@@ -709,13 +592,7 @@ flag_wait(msg, entity) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_clear( <flagname>, <entity> )"
-"Summary: Clears the specified flag."
-"Module: Flag"
-"MandatoryArg: <flagname> : name of the flag to clear"
-"Example: flag_clear( "hq_cleared" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_clear( <flagname>, <entity> )""Summary: Clears the specified flag.""Module: Flag""MandatoryArg: <flagname> : name of the flag to clear""Example: flag_clear( "hq_cleared" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_clear(message) {
@@ -735,13 +612,7 @@ flag_clear(message) {
 /*
 =============
 ///ScriptDocBegin
-"Name: flag_waitopen( <flagname> )"
-"Summary: Waits for the flag to open"
-"Module: Flag"
-"MandatoryArg: <flagname>: The flag"
-"Example: flag_waitopen( "get_me_bagels" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_waitopen( <flagname> )""Summary: Waits for the flag to open""Module: Flag""MandatoryArg: <flagname>: The flag""Example: flag_waitopen( "get_me_bagels" );""SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -753,15 +624,7 @@ flag_waitopen(msg) {
 /*
 =============
 ///ScriptDocBegin
-"Name: waittill_either( <msg1> , <msg2> )"
-"Summary: Waits until either message, on self"
-"Module: Utility"
-"CallOn: An entity or the level"
-"MandatoryArg: <msg1>: First msg to wait on"
-"MandatoryArg: <msg2>: Second msg to wait on"
-"Example: level waittill_either( "yo", "no" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: waittill_either( <msg1> , <msg2> )""Summary: Waits until either message, on self""Module: Utility""CallOn: An entity or the level""MandatoryArg: <msg1>: First msg to wait on""MandatoryArg: <msg2>: Second msg to wait on""Example: level waittill_either( "yo", "no" );""SPMP: both"///ScriptDocEnd
 =============
 */
 waittill_either(msg1, msg2) {
@@ -772,18 +635,7 @@ waittill_either(msg1, msg2) {
 /*
  =============
 ///ScriptDocBegin
-"Name: array_thread( <entities> , <process> , <var1> , <var2> , <var3> )"
-"Summary: Threads the < process > function on every entity in the < entities > array. The entity will become "self" in the specified function."
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <entities> : array of entities to thread the process"
-"MandatoryArg: <process> : pointer to a script function"
-"OptionalArg: <var1> : parameter 1 to pass to the process"
-"OptionalArg: <var2> : parameter 2 to pass to the process"
-"OptionalArg: <var3> : parameter 3 to pass to the process"
-"Example: array_thread( array_of_guys, ::set_ignoreme, false );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_thread( <entities> , <process> , <var1> , <var2> , <var3> )""Summary: Threads the < process > function on every entity in the < entities > array. The entity will become "self" in the specified function.""Module: Array""CallOn: ""MandatoryArg: <entities> : array of entities to thread the process""MandatoryArg: <process> : pointer to a script function""OptionalArg: <var1> : parameter 1 to pass to the process""OptionalArg: <var2> : parameter 2 to pass to the process""OptionalArg: <var3> : parameter 3 to pass to the process""Example: array_thread( array_of_guys, ::set_ignoreme, false );""SPMP: both"///ScriptDocEnd
  =============
 */
 array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
@@ -849,18 +701,7 @@ array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, 
 /*
  =============
 ///ScriptDocBegin
-"Name: array_call( <entities> , <process> , <var1> , <var2> , <var3> )"
-"Summary: Runs the code < process > function on every entity in the < entities > array. The entity will become "self" in the specified function."
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <entities> : array of entities to thread the process"
-"MandatoryArg: <process> : pointer to a code function"
-"OptionalArg: <var1> : parameter 1 to pass to the process"
-"OptionalArg: <var2> : parameter 2 to pass to the process"
-"OptionalArg: <var3> : parameter 3 to pass to the process"
-"Example: array_call( array_of_guys, ::set_ignoreme, false );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_call( <entities> , <process> , <var1> , <var2> , <var3> )""Summary: Runs the code < process > function on every entity in the < entities > array. The entity will become "self" in the specified function.""Module: Array""CallOn: ""MandatoryArg: <entities> : array of entities to thread the process""MandatoryArg: <process> : pointer to a code function""OptionalArg: <var1> : parameter 1 to pass to the process""OptionalArg: <var2> : parameter 2 to pass to the process""OptionalArg: <var3> : parameter 3 to pass to the process""Example: array_call( array_of_guys, ::set_ignoreme, false );""SPMP: both"///ScriptDocEnd
  =============
 */
 array_call(entities, process, var1, var2, var3) {
@@ -892,15 +733,7 @@ array_call(entities, process, var1, var2, var3) {
 /*
 =============
 ///ScriptDocBegin
-"Name: array_thread4( <entities> , <process> , <var1> , <var2> , <var3> , <var4> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_thread4( <entities> , <process> , <var1> , <var2> , <var3> , <var4> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 array_thread4(entities, process, var1, var2, var3, var4) {
@@ -910,15 +743,7 @@ array_thread4(entities, process, var1, var2, var3, var4) {
 /*
 =============
 ///ScriptDocBegin
-"Name: array_thread5( <entities> , <process> , <var1> , <var2> , <var3> , <var4> , <var5> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_thread5( <entities> , <process> , <var1> , <var2> , <var3> , <var4> , <var5> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 array_thread5(entities, process, var1, var2, var3, var4, var5) {
@@ -928,14 +753,7 @@ array_thread5(entities, process, var1, var2, var3, var4, var5) {
 /*
 =============
 ///ScriptDocBegin
-"Name: remove_undefined_from_array()"
-"Summary: remove elements from an array that are undefined"
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <array>: array to clear out"
-"Example: level.trigger_flags[ msg ] = remove_undefined_from_array( level.trigger_flags[ msg ] );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: remove_undefined_from_array()""Summary: remove elements from an array that are undefined""Module: Array""CallOn: ""MandatoryArg: <array>: array to clear out""Example: level.trigger_flags[ msg ] = remove_undefined_from_array(level.trigger_flags[ msg ] );""SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -952,15 +770,7 @@ remove_undefined_from_array(array) {
 /*
  =============
 ///ScriptDocBegin
-"Name: trigger_on( <name>, <type> )"
-"Summary: Turns a trigger on. This only needs to be called if it was previously turned off"
-"Module: Trigger"
-"CallOn: A trigger"
-"OptionalArg: <name> : the name corrisponding to a targetname or script_noteworthy to grab the trigger internally"
-"OptionalArg: <type> : the type( targetname, or script_noteworthy ) corrisponding to a name to grab the trigger internally"
-"Example: trigger trigger_on(); -or- trigger_on( "base_trigger", "targetname" )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: trigger_on( <name>, <type> )""Summary: Turns a trigger on. This only needs to be called if it was previously turned off""Module: Trigger""CallOn: A trigger""OptionalArg: <name> : the name corrisponding to a targetname or script_noteworthy to grab the trigger internally""OptionalArg: <type> : the type( targetname, or script_noteworthy ) corrisponding to a name to grab the trigger internally""Example: trigger trigger_on(); -or- trigger_on( "base_trigger", "targetname" )""SPMP: both"///ScriptDocEnd
  =============
  */
 trigger_on(name, type) {
@@ -980,15 +790,7 @@ trigger_on_proc() {
 /*
  =============
 ///ScriptDocBegin
-"Name: trigger_off( <name>, <type> )"
-"Summary: Turns a trigger off so it can no longer be triggered."
-"Module: Trigger"
-"CallOn: A trigger"
-"OptionalArg: <name> : the name corrisponding to a targetname or script_noteworthy to grab the trigger internally"
-"OptionalArg: <type> : the type( targetname, or script_noteworthy ) corrisponding to a name to grab the trigger internally"
-"Example: trigger trigger_off();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: trigger_off( <name>, <type> )""Summary: Turns a trigger off so it can no longer be triggered.""Module: Trigger""CallOn: A trigger""OptionalArg: <name> : the name corrisponding to a targetname or script_noteworthy to grab the trigger internally""OptionalArg: <type> : the type( targetname, or script_noteworthy ) corrisponding to a name to grab the trigger internally""Example: trigger trigger_off();""SPMP: both"///ScriptDocEnd
  =============
  */
 trigger_off(name, type) {
@@ -1073,15 +875,8 @@ init_trigger_flags() {
 /*
 =============
 ///ScriptDocBegin
-"Name: getstruct( <name> , <type> )"
-"Summary: get a struct by target, targetname,script_noteworthy, or script_linkname types, must be called after maps\_load::main();"
-"Module: Struct"
-"CallOn: Level"
-"MandatoryArg: <name>: name of key"
-"MandatoryArg: <type>: key type"
-"Example: position = getstruct("waypoint1","targetname");
-"SPMP: both"
-///ScriptDocEnd
+"Name: getstruct( <name> , <type> )""Summary: get a struct by target, targetname,script_noteworthy, or script_linkname types, must be called after maps\_load::main();""Module: Struct""CallOn: Level""MandatoryArg: <name>: name of key""MandatoryArg: <type>: key type""Example: position = getstruct("waypoint1","targetname");
+"SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -1104,15 +899,7 @@ getstruct(name, type) {
 /*
  =============
 ///ScriptDocBegin
-"Name: getstructarray( <name> , <type )"
-"Summary: gets an array of script_structs"
-"Module: Array"
-"CallOn: An entity"
-"MandatoryArg: <name> : "
-"MandatoryArg: <type> : "
-"Example: fxemitters = getstructarray( "streetlights", "targetname" )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: getstructarray(<name> , <type )""Summary: gets an array of script_structs""Module: Array""CallOn: An entity""MandatoryArg: <name> : ""MandatoryArg: <type> : ""Example: fxemitters = getstructarray("streetlights", "targetname" )""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1173,15 +960,7 @@ fileprint_start(file) {
 /*
  =============
 ///ScriptDocBegin
-"Name: fileprint_map_start( <filename> )"
-"Summary: starts map export with the file trees\cod3\cod3\map_source\xenon_export\< filename > .map adds header / worldspawn entity to the map.Use this if you want to start a .map export."
-"Module: Fileprint"
-"CallOn: Level"
-"MandatoryArg: <param1> : "
-"OptionalArg: <param2> : "
-"Example: fileprint_map_start( filename );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_map_start( <filename> )""Summary: starts map export with the file trees\cod3\cod3\map_source\xenon_export\< filename > .map adds header / worldspawn entity to the map.Use this if you want to start a .map export.""Module: Fileprint""CallOn: Level""MandatoryArg: <param1> : ""OptionalArg: <param2> : ""Example: fileprint_map_start( filename );""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1212,15 +991,7 @@ fileprint_map_header(bInclude_blank_worldspawn) {
 /*
  =============
 ///ScriptDocBegin
-"Name: fileprint_map_keypairprint( <key1> , <key2> )"
-"Summary: prints a pair of keys to the current open map( by fileprint_map_start() )"
-"Module: Fileprint"
-"CallOn: Level"
-"MandatoryArg: <key1> : "
-"MandatoryArg: <key2> : "
-"Example: fileprint_map_keypairprint( "classname", "script_model" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_map_keypairprint( <key1> , <key2> )""Summary: prints a pair of keys to the current open map( by fileprint_map_start() )""Module: Fileprint""CallOn: Level""MandatoryArg: <key1> : ""MandatoryArg: <key2> : ""Example: fileprint_map_keypairprint( "classname", "script_model" );""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1231,13 +1002,7 @@ fileprint_map_keypairprint(key1, key2) {
 /*
  =============
 ///ScriptDocBegin
-"Name: fileprint_map_entity_start()"
-"Summary: prints entity number and opening bracket to currently opened file"
-"Module: Fileprint"
-"CallOn: Level"
-"Example: fileprint_map_entity_start();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_map_entity_start()""Summary: prints entity number and opening bracket to currently opened file""Module: Fileprint""CallOn: Level""Example: fileprint_map_entity_start();""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1253,13 +1018,7 @@ fileprint_map_entity_start() {
 /*
  =============
 ///ScriptDocBegin
-"Name: fileprint_map_entity_end()"
-"Summary: close brackets an entity, required for the next entity to begin"
-"Module: Fileprint"
-"CallOn: Level"
-"Example: fileprint_map_entity_end();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_map_entity_end()""Summary: close brackets an entity, required for the next entity to begin""Module: Fileprint""CallOn: Level""Example: fileprint_map_entity_end();""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1271,14 +1030,7 @@ fileprint_map_entity_end() {
 /*
  =============
 ///ScriptDocBegin
-"Name: fileprint_radiant_vec( <vector> )"
-"Summary: this converts a vector to a .map file readable format"
-"Module: Fileprint"
-"CallOn: An entity"
-"MandatoryArg: <vector> : "
-"Example: origin_string = fileprint_radiant_vec( vehicle.angles )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_radiant_vec( <vector> )""Summary: this converts a vector to a .map file readable format""Module: Fileprint""CallOn: An entity""MandatoryArg: <vector> : ""Example: origin_string = fileprint_radiant_vec( vehicle.angles )""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1290,15 +1042,7 @@ fileprint_radiant_vec(vector) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vector_multiply( <vec> , <dif> )"
-"Summary: multiply a vector"
-"Module: Vector"
-"CallOn: Level"
-"MandatoryArg: <vec>: vector to multiply"
-"MandatoryArg: <dif>: scale"
-"Example: vec = vector_multiply( vec, magnitude );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: vector_multiply( <vec> , <dif> )""Summary: multiply a vector""Module: Vector""CallOn: Level""MandatoryArg: <vec>: vector to multiply""MandatoryArg: <dif>: scale""Example: vec = vector_multiply( vec, magnitude );""SPMP: both"///ScriptDocEnd
 =============
 */
 vector_multiply(vec, dif) {
@@ -1309,15 +1053,7 @@ vector_multiply(vec, dif) {
 /*
  =============
 ///ScriptDocBegin
-"Name: array_remove( <ents> , <remover> )"
-"Summary: Returns < ents > array minus < remover > "
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <ents> : array to remove < remover > from"
-"MandatoryArg: <remover> : entity to remove from the array"
-"Example: ents = array_remove( ents, guy );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_remove( <ents> , <remover> )""Summary: Returns < ents > array minus < remover > ""Module: Array""CallOn: ""MandatoryArg: <ents> : array to remove < remover > from""MandatoryArg: <remover> : entity to remove from the array""Example: ents = array_remove( ents, guy );""SPMP: both"///ScriptDocEnd
  =============
  */
 array_remove(ents, remover) {
@@ -1333,15 +1069,7 @@ array_remove(ents, remover) {
 /*
 =============
 ///ScriptDocBegin
-"Name: array_remove_array( <ents> , <remover_array> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_remove_array(<ents> , <remover_array> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 array_remove_array(ents, remover_array) {
@@ -1354,14 +1082,7 @@ array_remove_array(ents, remover_array) {
 /*
  =============
 ///ScriptDocBegin
-"Name: array_removeUndefined( <array> )"
-"Summary: Returns a new array of < array > minus the undefined indicies"
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <array> : The array to search for undefined indicies in."
-"Example: ents = array_removeUndefined( ents );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_removeUndefined( <array> )""Summary: Returns a new array of < array > minus the undefined indicies""Module: Array""CallOn: ""MandatoryArg: <array> : The array to search for undefined indicies in.""Example: ents = array_removeUndefined( ents );""SPMP: both"///ScriptDocEnd
  =============
  */
 array_removeUndefined(array) {
@@ -1378,18 +1099,7 @@ array_removeUndefined(array) {
 /*
  =============
 ///ScriptDocBegin
-"Name: array_levelthread( <entities> , <process> , <var1> , <var2> , <var3> )"
-"Summary: Threads the < process > function for every entity in the < entities > array. The level calls the function and each entity of the array is passed as the first parameter to the process."
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <entities> : array of entities to thread the process"
-"MandatoryArg: <process> : pointer to a script function"
-"OptionalArg: <var1> : parameter 1 to pass to the process"
-"OptionalArg: <var2> : parameter 2 to pass to the process"
-"OptionalArg: <var3> : parameter 3 to pass to the process"
-"Example: array_levelthread( getEntArray( "palm", "targetname" ), ::palmTrees );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_levelthread( <entities> , <process> , <var1> , <var2> , <var3> )""Summary: Threads the < process > function for every entity in the < entities > array. The level calls the function and each entity of the array is passed as the first parameter to the process.""Module: Array""CallOn: ""MandatoryArg: <entities> : array of entities to thread the process""MandatoryArg: <process> : pointer to a script function""OptionalArg: <var1> : parameter 1 to pass to the process""OptionalArg: <var2> : parameter 2 to pass to the process""OptionalArg: <var3> : parameter 3 to pass to the process""Example: array_levelthread( getEntArray( "palm", "targetname" ), ::palmTrees );""SPMP: both"///ScriptDocEnd
  =============
  */
 array_levelthread(array, process, var1, var2, var3) {
@@ -1421,18 +1131,7 @@ array_levelthread(array, process, var1, var2, var3) {
 /*
  =============
 ///ScriptDocBegin
-"Name: array_levelcall( <entities> , <process> , <var1> , <var2> , <var3> )"
-"Summary: Calls the < process > function for every entity in the < entities > array. The level calls the function and each entity of the array is passed as the first parameter to the process."
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <entities> : array of entities to thread the process"
-"MandatoryArg: <process> : pointer to a code function"
-"OptionalArg: <var1> : parameter 1 to pass to the process"
-"OptionalArg: <var2> : parameter 2 to pass to the process"
-"OptionalArg: <var3> : parameter 3 to pass to the process"
-"Example: array_levelthread( array_of_trees, ::palmTrees );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_levelcall( <entities> , <process> , <var1> , <var2> , <var3> )""Summary: Calls the < process > function for every entity in the < entities > array. The level calls the function and each entity of the array is passed as the first parameter to the process.""Module: Array""CallOn: ""MandatoryArg: <entities> : array of entities to thread the process""MandatoryArg: <process> : pointer to a code function""OptionalArg: <var1> : parameter 1 to pass to the process""OptionalArg: <var2> : parameter 2 to pass to the process""OptionalArg: <var3> : parameter 3 to pass to the process""Example: array_levelthread( array_of_trees, ::palmTrees );""SPMP: both"///ScriptDocEnd
  =============
  */
 array_levelcall(array, process, var1, var2, var3) {
@@ -1464,15 +1163,7 @@ array_levelcall(array, process, var1, var2, var3) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_to_array( <array> , <ent> )"
-"Summary: Adds < ent > to < array > and returns the new array."
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <array> : The array to add < ent > to."
-"MandatoryArg: <ent> : The entity to be added."
-"Example: nodes = add_to_array( nodes, new_node );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: add_to_array(<array> , <ent> )""Summary: Adds < ent > to < array > and returns the new array.""Module: Array""CallOn: ""MandatoryArg: <array> : The array to add < ent > to.""MandatoryArg: <ent> : The entity to be added.""Example: nodes = add_to_array(nodes, new_node );""SPMP: both"///ScriptDocEnd
 =============
 */
 add_to_array(array, ent) {
@@ -1490,14 +1181,7 @@ add_to_array(array, ent) {
 /*
 =============
 ///ScriptDocBegin
-"Name: flag_assert( <msg> )"
-"Summary: Asserts that a flag is clear. Useful for proving an assumption of a flag's state"
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <msg>: flag name"
-"Example: flag_assert( "fairground_begins" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_assert( <msg> )""Summary: Asserts that a flag is clear. Useful for proving an assumption of a flag's state""Module: Entity""CallOn: An entity""MandatoryArg: <msg>: flag name""Example: flag_assert( "fairground_begins" );""SPMP: both"///ScriptDocEnd
 =============
 */
 flag_assert(msg) {
@@ -1507,15 +1191,7 @@ flag_assert(msg) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_wait_either( <flagname1> , <flagname2> )"
-"Summary: Waits until either of the the specified flags are set."
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname1> : name of one flag to wait on"
-"MandatoryArg: <flagname2> : name of the other flag to wait on"
-"Example: flag_wait( "hq_cleared", "hq_destroyed" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_wait_either( <flagname1> , <flagname2> )""Summary: Waits until either of the the specified flags are set.""Module: Flag""CallOn: ""MandatoryArg: <flagname1> : name of one flag to wait on""MandatoryArg: <flagname2> : name of the other flag to wait on""Example: flag_wait( "hq_cleared", "hq_destroyed" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_wait_either(flag1, flag2) {
@@ -1532,15 +1208,7 @@ flag_wait_either(flag1, flag2) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_wait_either_return( <flagname1> , <flagname2> )"
-"Summary: Waits until either of the the specified flags are set, and returns the first one it found."
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname1> : name of one flag to wait on"
-"MandatoryArg: <flagname2> : name of the other flag to wait on"
-"Example: flag_wait( "hq_cleared", "hq_destroyed" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_wait_either_return( <flagname1> , <flagname2> )""Summary: Waits until either of the the specified flags are set, and returns the first one it found.""Module: Flag""CallOn: ""MandatoryArg: <flagname1> : name of one flag to wait on""MandatoryArg: <flagname2> : name of the other flag to wait on""Example: flag_wait( "hq_cleared", "hq_destroyed" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_wait_either_return(flag1, flag2) {
@@ -1558,17 +1226,7 @@ flag_wait_either_return(flag1, flag2) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_wait_any( <flagname1> , <flagname2>, <flagname3> , <flagname4> , <flagname5> , <flagname6> )"
-"Summary: Waits until any of the the specified flags are set."
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname1> : name of a flag to wait on"
-"MandatoryArg: <flagname2> : name of a flag to wait on"
-"OptionalArg: <flagname3> : name of a flag to wait on"
-"OptionalArg: <flagname4> : name of a flag to wait on"
-"Example: flag_wait_any( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_wait_any( <flagname1> , <flagname2>, <flagname3> , <flagname4> , <flagname5> , <flagname6> )""Summary: Waits until any of the the specified flags are set.""Module: Flag""CallOn: ""MandatoryArg: <flagname1> : name of a flag to wait on""MandatoryArg: <flagname2> : name of a flag to wait on""OptionalArg: <flagname3> : name of a flag to wait on""OptionalArg: <flagname4> : name of a flag to wait on""Example: flag_wait_any( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_wait_any(flag1, flag2, flag3, flag4, flag5, flag6) {
@@ -1616,17 +1274,7 @@ flag_wait_any(flag1, flag2, flag3, flag4, flag5, flag6) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_wait_any_return( <flagname1> , <flagname2>, <flagname3> , <flagname4> , <flagname5> , <flagname6> )"
-"Summary: Waits until any of the the specified flags are set, and returns the first set flag that was found."
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname1> : name of a flag to wait on"
-"MandatoryArg: <flagname2> : name of a flag to wait on"
-"OptionalArg: <flagname3> : name of a flag to wait on"
-"OptionalArg: <flagname4> : name of a flag to wait on"
-"Example: returned = flag_wait_any_return( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_wait_any_return( <flagname1> , <flagname2>, <flagname3> , <flagname4> , <flagname5> , <flagname6> )""Summary: Waits until any of the the specified flags are set, and returns the first set flag that was found.""Module: Flag""CallOn: ""MandatoryArg: <flagname1> : name of a flag to wait on""MandatoryArg: <flagname2> : name of a flag to wait on""OptionalArg: <flagname3> : name of a flag to wait on""OptionalArg: <flagname4> : name of a flag to wait on""Example: returned = flag_wait_any_return( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_wait_any_return(flag1, flag2, flag3, flag4, flag5, flag6) {
@@ -1675,17 +1323,7 @@ flag_wait_any_return(flag1, flag2, flag3, flag4, flag5, flag6) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_wait_all( <flagname1> , <flagname2>, <flagname3> , <flagname4> )"
-"Summary: Waits until all of the the specified flags are set."
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname1> : name of a flag to wait on"
-"MandatoryArg: <flagname2> : name of a flag to wait on"
-"OptionalArg: <flagname3> : name of a flag to wait on"
-"OptionalArg: <flagname4> : name of a flag to wait on"
-"Example: flag_wait_any( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_wait_all( <flagname1> , <flagname2>, <flagname3> , <flagname4> )""Summary: Waits until all of the the specified flags are set.""Module: Flag""CallOn: ""MandatoryArg: <flagname1> : name of a flag to wait on""MandatoryArg: <flagname2> : name of a flag to wait on""OptionalArg: <flagname3> : name of a flag to wait on""OptionalArg: <flagname4> : name of a flag to wait on""Example: flag_wait_any( "hq_cleared", "hq_destroyed", "hq_overrun", "hq_skipped" );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_wait_all(flag1, flag2, flag3, flag4) {
@@ -1705,15 +1343,7 @@ flag_wait_all(flag1, flag2, flag3, flag4) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flag_wait_or_timeout( <flagname> , <timer> )"
-"Summary: Waits until either the flag gets set or the timer elapses."
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname1: Name of one flag to wait on"
-"MandatoryArg: <timer> : Amount of time to wait before continuing regardless of flag."
-"Example: flag_wait_or_timeout( "time_to_go", 3 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_wait_or_timeout( <flagname> , <timer> )""Summary: Waits until either the flag gets set or the timer elapses.""Module: Flag""CallOn: ""MandatoryArg: <flagname1: Name of one flag to wait on""MandatoryArg: <timer> : Amount of time to wait before continuing regardless of flag.""Example: flag_wait_or_timeout( "time_to_go", 3 );""SPMP: both"///ScriptDocEnd
  =============
  */
 flag_wait_or_timeout(flagname, timer) {
@@ -1738,15 +1368,7 @@ flag_wait_or_timeout(flagname, timer) {
 /*
 =============
 ///ScriptDocBegin
-"Name: flag_waitopen_or_timeout( <flagname> , <timer> )"
-"Summary: Waits until either the flag gets cleared or the timer elapses."
-"Module: Flag"
-"CallOn: "
-"MandatoryArg: <flagname1: Name of one flag to wait on"
-"MandatoryArg: <timer> : Amount of time to wait before continuing regardless of flag."
-"Example: flag_waitopen_or_timeout( "time_to_go", 3 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flag_waitopen_or_timeout( <flagname> , <timer> )""Summary: Waits until either the flag gets cleared or the timer elapses.""Module: Flag""CallOn: ""MandatoryArg: <flagname1: Name of one flag to wait on""MandatoryArg: <timer> : Amount of time to wait before continuing regardless of flag.""Example: flag_waitopen_or_timeout( "time_to_go", 3 );""SPMP: both"///ScriptDocEnd
 =============
 */
 flag_waitopen_or_timeout(flagname, timer) {
@@ -1772,18 +1394,7 @@ wait_for_flag_or_time_elapses(flagname, timer) {
 /*
  =============
 ///ScriptDocBegin
-"Name: delayCall( <delay> , <function> , <arg1> , <arg2> , <arg3> )"
-"Summary: delayCall is cool! It saves you from having to write extra script for once off commands. Note you don’t have to thread it off. delaycall is that smart!"
-"Module: Utility"
-"MandatoryArg: <delay> : The delay before the function occurs"
-"MandatoryArg: <function> : The function to run."
-"OptionalArg: <arg1> : parameter 1 to pass to the process"
-"OptionalArg: <arg2> : parameter 2 to pass to the process"
-"OptionalArg: <arg3> : parameter 3 to pass to the process"
-"OptionalArg: <arg4> : parameter 4 to pass to the process"
-"Example: delayCall( ::flag_set, "player_can_rappel", 3 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: delayCall( <delay> , <function> , <arg1> , <arg2> , <arg3> )""Summary: delayCall is cool! It saves you from having to write extra script for once off commands. Note you don’t have to thread it off. delaycall is that smart!""Module: Utility""MandatoryArg: <delay> : The delay before the function occurs""MandatoryArg: <function> : The function to run.""OptionalArg: <arg1> : parameter 1 to pass to the process""OptionalArg: <arg2> : parameter 2 to pass to the process""OptionalArg: <arg3> : parameter 3 to pass to the process""OptionalArg: <arg4> : parameter 4 to pass to the process""Example: delayCall( ::flag_set, "player_can_rappel", 3 );""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1815,18 +1426,7 @@ delayCall_proc(func, timer, param1, param2, param3, param4) {
 /*
  =============
 ///ScriptDocBegin
-"Name: noself_delayCall( <delay> , <function> , <arg1> , <arg2> , <arg3>, <arg4> )"
-"Summary: Calls a command with no self (some commands don't support having self)."
-"Module: Utility"
-"MandatoryArg: <delay> : The delay before the function occurs"
-"MandatoryArg: <function> : The function to run."
-"OptionalArg: <arg1> : parameter 1 to pass to the process"
-"OptionalArg: <arg2> : parameter 2 to pass to the process"
-"OptionalArg: <arg3> : parameter 3 to pass to the process"
-"OptionalArg: <arg4> : parameter 4 to pass to the process"
-"Example: noself_delayCall( ::setsaveddvar, "player_can_rappel", 1 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: noself_delayCall( <delay> , <function> , <arg1> , <arg2> , <arg3>, <arg4> )""Summary: Calls a command with no self (some commands don't support having self).""Module: Utility""MandatoryArg: <delay> : The delay before the function occurs""MandatoryArg: <function> : The function to run.""OptionalArg: <arg1> : parameter 1 to pass to the process""OptionalArg: <arg2> : parameter 2 to pass to the process""OptionalArg: <arg3> : parameter 3 to pass to the process""OptionalArg: <arg4> : parameter 4 to pass to the process""Example: noself_delayCall( ::setsaveddvar, "player_can_rappel", 1 );""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -1855,12 +1455,7 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
 /*
  =============
 ///ScriptDocBegin
-"Name: isSP()"
-"Summary: Returns false if the level name begins with mp_"
-"Module: Utility"
-"Example: if( isSP() );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: isSP()""Summary: Returns false if the level name begins with mp_""Module: Utility""Example: if( isSP() );""SPMP: both"///ScriptDocEnd
  =============
  */
 isSP() {
@@ -1873,15 +1468,7 @@ isSP() {
 /*
 =============
 ///ScriptDocBegin
-"Name: string_starts_with( <string>, <start> )"
-"Summary: Returns true if the first string begins with the first string"
-"Module: Utility"
-"CallOn:"
-"MandatoryArg: <string> String to check"
-"MandatoryArg: <start> Beginning of string to check"
-"Example: if( string_starts_with( "somestring", "somest" ) )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: string_starts_with( <string>, <start> )""Summary: Returns true if the first string begins with the first string""Module: Utility""CallOn:""MandatoryArg: <string> String to check""MandatoryArg: <start> Beginning of string to check""Example: if( string_starts_with( "somestring", "somest" ) )""SPMP: both"///ScriptDocEnd
 =============
 */
 string_starts_with(string, start) {
@@ -1917,19 +1504,7 @@ plot_points(plotpoints, r, g, b, timer) {
 /*
  =============
 ///ScriptDocBegin
-"Name: draw_line_for_time( <org1> , <org2> , <r> , <g> , <b> , <timer> )"
-"Summary: Draws a line from < org1 > to < org2 > in the specified color for the specified duration"
-"Module: Debug"
-"CallOn: "
-"MandatoryArg: <org1> : starting origin for the line"
-"MandatoryArg: <org2> : ending origin for the line"
-"MandatoryArg: <r> : red color value( 0 to 1 )"
-"MandatoryArg: <g> : green color value( 0 to 1 )"
-"MandatoryArg: <b> : blue color value( 0 to 1 )"
-"MandatoryArg: <timer> : time in seconds the line should last"
-"Example: thread draw_line_for_time( level.player.origin, vehicle.origin, 1, 0, 0, 10.0 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: draw_line_for_time( <org1> , <org2> , <r> , <g> , <b> , <timer> )""Summary: Draws a line from < org1 > to < org2 > in the specified color for the specified duration""Module: Debug""CallOn: ""MandatoryArg: <org1> : starting origin for the line""MandatoryArg: <org2> : ending origin for the line""MandatoryArg: <r> : red color value( 0 to 1 )""MandatoryArg: <g> : green color value( 0 to 1 )""MandatoryArg: <b> : blue color value( 0 to 1 )""MandatoryArg: <timer> : time in seconds the line should last""Example: thread draw_line_for_time( level.player.origin, vehicle.origin, 1, 0, 0, 10.0 );""SPMP: both"///ScriptDocEnd
  =============
  */
 draw_line_for_time(org1, org2, r, g, b, timer) {
@@ -1944,15 +1519,7 @@ draw_line_for_time(org1, org2, r, g, b, timer) {
 /*
  =============
 ///ScriptDocBegin
-"Name: array_combine( <array1> , <array2> )"
-"Summary: Combines the two arrays and returns the resulting array. This function doesn't care if it produces duplicates in the array."
-"Module: Array"
-"CallOn: "
-"MandatoryArg: <array1> : first array"
-"MandatoryArg: <array2> : second array"
-"Example: combinedArray = array_combine( array1, array2 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: array_combine( <array1> , <array2> )""Summary: Combines the two arrays and returns the resulting array. This function doesn't care if it produces duplicates in the array.""Module: Array""CallOn: ""MandatoryArg: <array1> : first array""MandatoryArg: <array2> : second array""Example: combinedArray = array_combine( array1, array2 );""SPMP: both"///ScriptDocEnd
  =============
  */
 array_combine(array1, array2) {
@@ -1969,14 +1536,7 @@ array_combine(array1, array2) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flat_angle( <angle> )"
-"Summary: Returns the specified angle as a flat angle.( 45, 90, 30 ) becomes( 0, 90, 30 ). Useful if you just need an angle around Y - axis."
-"Module: Vector"
-"CallOn: "
-"MandatoryArg: <angle> : angles to flatten"
-"Example: yaw = flat_angle( node.angles );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flat_angle( <angle> )""Summary: Returns the specified angle as a flat angle.( 45, 90, 30 ) becomes( 0, 90, 30 ). Useful if you just need an angle around Y - axis.""Module: Vector""CallOn: ""MandatoryArg: <angle> : angles to flatten""Example: yaw = flat_angle( node.angles );""SPMP: both"///ScriptDocEnd
  =============
  */
 flat_angle(angle) {
@@ -1987,14 +1547,7 @@ flat_angle(angle) {
 /*
  =============
 ///ScriptDocBegin
-"Name: flat_origin( <org> )"
-"Summary: Returns a flat origin of the specified origin. Moves Z corrdinate to 0.( x, y, z ) becomes( x, y, 0 )"
-"Module: Vector"
-"CallOn: "
-"MandatoryArg: <org> : origin to flatten"
-"Example: org = flat_origin( self.origin );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: flat_origin( <org> )""Summary: Returns a flat origin of the specified origin. Moves Z corrdinate to 0.( x, y, z ) becomes( x, y, 0 )""Module: Vector""CallOn: ""MandatoryArg: <org> : origin to flatten""Example: org = flat_origin( self.origin );""SPMP: both"///ScriptDocEnd
  =============
  */
 flat_origin(org) {
@@ -2005,17 +1558,7 @@ flat_origin(org) {
 /*
  =============
 ///ScriptDocBegin
-"Name: draw_arrow_time( <start> , <end> , <color> , <duration> )"
-"Summary: Draws an arrow pointing at < end > in the specified color for < duration > seconds."
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <start> : starting coordinate for the arrow"
-"MandatoryArg: <end> : ending coordinate for the arrow"
-"MandatoryArg: <color> :( r, g, b ) color array for the arrow"
-"MandatoryArg: <duration> : time in seconds to draw the arrow"
-"Example: thread draw_arrow_time( lasttarg.origin, targ.origin, ( 0, 0, 1 ), 5.0 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: draw_arrow_time( <start> , <end> , <color> , <duration> )""Summary: Draws an arrow pointing at < end > in the specified color for < duration > seconds.""Module: Entity""CallOn: An entity""MandatoryArg: <start> : starting coordinate for the arrow""MandatoryArg: <end> : ending coordinate for the arrow""MandatoryArg: <color> :( r, g, b ) color array for the arrow""MandatoryArg: <duration> : time in seconds to draw the arrow""Example: thread draw_arrow_time( lasttarg.origin, targ.origin, ( 0, 0, 1 ), 5.0 );""SPMP: both"///ScriptDocEnd
  =============
  */
 draw_arrow_time(start, end, color, duration) {
@@ -2051,13 +1594,7 @@ draw_arrow_time(start, end, color, duration) {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_linked_ents()"
-"Summary: Returns an array of entities that SELF is linked to"
-"Module: Utility"
-"CallOn: An entity that links to other entities"
-"Example: spawners = heli get_linked_ents()"
-"SPMP: both"
-///ScriptDocEnd
+"Name: get_linked_ents()""Summary: Returns an array of entities that SELF is linked to""Module: Utility""CallOn: An entity that links to other entities""Example: spawners = heli get_linked_ents()""SPMP: both"///ScriptDocEnd
 =============
 */
 get_linked_ents() {
@@ -2078,13 +1615,7 @@ get_linked_ents() {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_linked_ent()"
-"Summary: Returns a single entity that SELF is linked to"
-"Module: Utility"
-"CallOn: An entity that links to another entity"
-"Example: spawner = heli get_linked_ent()"
-"SPMP: both"
-///ScriptDocEnd
+"Name: get_linked_ent()""Summary: Returns a single entity that SELF is linked to""Module: Utility""CallOn: An entity that links to another entity""Example: spawner = heli get_linked_ent()""SPMP: both"///ScriptDocEnd
 =============
 */
 get_linked_ent() {
@@ -2097,15 +1628,7 @@ get_linked_ent() {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_links( <get_links> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: get_links( <get_links> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 get_links() {
@@ -2115,17 +1638,7 @@ get_links() {
 /*
 =============
 ///ScriptDocBegin
-"Name: run_thread_on_targetname( <msg> , <func> , <param1> , <param2> , <param3> )"
-"Summary: Runs the specified thread on any entity with that targetname"
-"Module: Utility"
-"MandatoryArg: <msg>: The targetname"
-"MandatoryArg: <func>: The function"
-"OptionalArg: <param1>: Optional argument"
-"OptionalArg: <param2>: Optional argument"
-"OptionalArg: <param3>: Optional argument"
-"Example: run_thread_on_targetname( "chopper_guys", ::add_spawn_function, ::chopper_guys_land );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: run_thread_on_targetname( <msg> , <func> , <param1> , <param2> , <param3> )""Summary: Runs the specified thread on any entity with that targetname""Module: Utility""MandatoryArg: <msg>: The targetname""MandatoryArg: <func>: The function""OptionalArg: <param1>: Optional argument""OptionalArg: <param2>: Optional argument""OptionalArg: <param3>: Optional argument""Example: run_thread_on_targetname( "chopper_guys", ::add_spawn_function, ::chopper_guys_land );""SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -2146,17 +1659,7 @@ run_thread_on_targetname(msg, func, param1, param2, param3) {
 /*
 =============
 ///ScriptDocBegin
-"Name: run_thread_on_noteworthy( <msg> , <func> , <param1> , <param2> , <param3> )"
-"Summary: Runs the specified thread on any entity with that noteworthy"
-"Module: Utility"
-"MandatoryArg: <msg>: The noteworthy"
-"MandatoryArg: <func>: The function"
-"OptionalArg: <param1>: Optional argument"
-"OptionalArg: <param2>: Optional argument"
-"OptionalArg: <param3>: Optional argument"
-"Example: run_thread_on_noteworthy( "chopper_guys", ::add_spawn_function, ::chopper_guys_land );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: run_thread_on_noteworthy( <msg> , <func> , <param1> , <param2> , <param3> )""Summary: Runs the specified thread on any entity with that noteworthy""Module: Utility""MandatoryArg: <msg>: The noteworthy""MandatoryArg: <func>: The function""OptionalArg: <param1>: Optional argument""OptionalArg: <param2>: Optional argument""OptionalArg: <param3>: Optional argument""Example: run_thread_on_noteworthy( "chopper_guys", ::add_spawn_function, ::chopper_guys_land );""SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -2177,16 +1680,7 @@ run_thread_on_noteworthy(msg, func, param1, param2, param3) {
 /*
  =============
 ///ScriptDocBegin
-"Name: draw_arrow( <start> , <end> , <color> )"
-"Summary: Draws an arrow pointing at < end > in the specified color for < duration > seconds."
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <start> : starting coordinate for the arrow"
-"MandatoryArg: <end> : ending coordinate for the arrow"
-"MandatoryArg: <color> :( r, g, b ) color array for the arrow"
-"Example: draw_arrow( lasttarg.origin, targ.origin, ( 0, 0, 1 ));"
-"SPMP: both"
-///ScriptDocEnd
+"Name: draw_arrow( <start> , <end> , <color> )""Summary: Draws an arrow pointing at < end > in the specified color for < duration > seconds.""Module: Entity""CallOn: An entity""MandatoryArg: <start> : starting coordinate for the arrow""MandatoryArg: <end> : ending coordinate for the arrow""MandatoryArg: <color> :( r, g, b ) color array for the arrow""Example: draw_arrow( lasttarg.origin, targ.origin, ( 0, 0, 1 ));""SPMP: both"///ScriptDocEnd
  =============
  */
 
@@ -2216,15 +1710,7 @@ draw_arrow(start, end, color) {
 /*
 =============
 ///ScriptDocBegin
-"Name: cap_value( value, minValue, maxValue )"
-"Summary: Caps a number value within a range"
-"Module: Utility"
-"MandatoryArg: <value>: the int or float to cap"
-"OptionalArg: <minValue>: minimum allowed value"
-"OptionalArg: <maxValue>: maximum allowed value"
-"Example: number = cap_value( number, 0.1, 2.0 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: cap_value( value, minValue, maxValue )""Summary: Caps a number value within a range""Module: Utility""MandatoryArg: <value>: the int or float to cap""OptionalArg: <minValue>: minimum allowed value""OptionalArg: <maxValue>: maximum allowed value""Example: number = cap_value( number, 0.1, 2.0 );""SPMP: both"///ScriptDocEnd
 =============
 */
 cap_value(value, minValue, maxValue) {
@@ -2248,13 +1734,7 @@ cap_value(value, minValue, maxValue) {
 /*
 =============
 ///ScriptDocBegin
-"Name: getfx( <fx> )"
-"Summary: Gets the associated level._effect"
-"Module: Utility"
-"MandatoryArg: <fx>: The effect"
-"Example: playfx ( getfx( "heli_dust_default" ), eOrgFx.origin + offset );	"
-"SPMP: both"
-///ScriptDocEnd
+"Name: getfx( <fx> )""Summary: Gets the associated level._effect""Module: Utility""MandatoryArg: <fx>: The effect""Example: playfx ( getfx( "heli_dust_default" ), eOrgFx.origin + offset );	""SPMP: both"///ScriptDocEnd
 =============
 */
 getfx(fx) {
@@ -2265,13 +1745,7 @@ getfx(fx) {
 /*
 =============
 ///ScriptDocBegin
-"Name: fxExists( <fx> )"
-"Summary: Returns whether or not an fx exists"
-"Module: Utility"
-"MandatoryArg: <fx>: The effect"
-"Example: if( fxExists( "blah" ) )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fxExists( <fx> )""Summary: Returns whether or not an fx exists""Module: Utility""MandatoryArg: <fx>: The effect""Example: if( fxExists( "blah" ) )""SPMP: both"///ScriptDocEnd
 =============
 */
 fxExists(fx) {
@@ -2298,15 +1772,7 @@ _loadfx(effect) {
 /*
 =============
 ///ScriptDocBegin
-"Name: getLastWeapon( <getLastWeapon> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: getLastWeapon( <getLastWeapon> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 getLastWeapon() {
@@ -2318,13 +1784,7 @@ getLastWeapon() {
 /*
 =============
 ///ScriptDocBegin
-"Name: PlayerUnlimitedAmmoThread()"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: PlayerUnlimitedAmmoThread()""Summary: ""Module: Entity""CallOn: An entity""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 PlayerUnlimitedAmmoThread() {
@@ -2437,14 +1897,7 @@ isOffhandWeaponEnabled() {
 /*
 =============
 ///ScriptDocBegin
-"Name: random( <array> )"
-"Summary: chose a random element of an array"
-"Module: Array"
-"CallOn: Level"
-"MandatoryArg: <param1>: "
-"Example: select_spot = random( array );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: random( <array> )""Summary: chose a random element of an array""Module: Array""CallOn: Level""MandatoryArg: <param1>: ""Example: select_spot = random( array );""SPMP: both"///ScriptDocEnd
 =============
 */
 random(array) {
@@ -2463,12 +1916,7 @@ random(array) {
 /*
 =============
 ///ScriptDocBegin
-"Name: spawn_tag_origin()"
-"Summary: Spawn a script model with tag_origin model"
-"Module: Utility"
-"Example: ent = spawn_tag_origin();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: spawn_tag_origin()""Summary: Spawn a script model with tag_origin model""Module: Utility""Example: ent = spawn_tag_origin();""SPMP: both"///ScriptDocEnd
 =============
 */
 spawn_tag_origin() {
@@ -2486,15 +1934,7 @@ spawn_tag_origin() {
 /*
 =============
 ///ScriptDocBegin
-"Name: waittill_notify_or_timeout( <msg> , <timer> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: waittill_notify_or_timeout( <msg> , <timer> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 waittill_notify_or_timeout(msg, timer) {
@@ -2505,13 +1945,7 @@ waittill_notify_or_timeout(msg, timer) {
 /*
 =============
 ///ScriptDocBegin
-"Name: fileprint_launcher_start_file()"
-"Summary: Tells Launcher to start storing text to a file. Use in conjunction with fileprint_launcher() and fileprint_launcher_end_file() to append to that file and then instruct launcher to write the file."
-"Module: Print"
-"CallOn: Level"
-"Example: fileprint_launcher_start_file();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_launcher_start_file()""Summary: Tells Launcher to start storing text to a file. Use in conjunction with fileprint_launcher() and fileprint_launcher_end_file() to append to that file and then instruct launcher to write the file.""Module: Print""CallOn: Level""Example: fileprint_launcher_start_file();""SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -2525,14 +1959,7 @@ fileprint_launcher_start_file() {
 /*
 =============
 ///ScriptDocBegin
-"Name: fileprint_launcher( <string> )"
-"Summary: Tell launcher to append text to current open file created by fileprint_launcher_start_file(), to be closed and written with fileprint_launcher_end_file() "
-"Module: Print"
-"CallOn: Level"
-"MandatoryArg: <param1>: "
-"Example: fileprint_launcher( "main()" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_launcher( <string> )""Summary: Tell launcher to append text to current open file created by fileprint_launcher_start_file(), to be closed and written with fileprint_launcher_end_file() ""Module: Print""CallOn: Level""MandatoryArg: <param1>: ""Example: fileprint_launcher( "main()" );""SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -2549,15 +1976,7 @@ fileprint_launcher(string) {
 /*
 =============
 ///ScriptDocBegin
-"Name: fileprint_launcher_end_file( <file_relative_to_game> , <bIsPerforceEnabled> )"
-"Summary: Tell launcher to write out Text that has been started and appended to using fileprint_launcher_start_file() and fileprint_launcher().you must end a file before you can start a new one."
-"Module: Print"
-"CallOn: Level"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: fileprint_launcher_end_file( "\\share\\raw\\maps\\createart\\" + level.script + "_art.gsc, true );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: fileprint_launcher_end_file( <file_relative_to_game> , <bIsPerforceEnabled> )""Summary: Tell launcher to write out Text that has been started and appended to using fileprint_launcher_start_file() and fileprint_launcher().you must end a file before you can start a new one.""Module: Print""CallOn: Level""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: fileprint_launcher_end_file( "\\share\\raw\\maps\\createart\\" + level.script + "_art.gsc, true );""SPMP: both"///ScriptDocEnd
 =============
 */
 
@@ -2603,15 +2022,7 @@ fileprint_launcher_end_file(file_relative_to_game, bIsPerforceEnabled) {
 /*
 =============
 ///ScriptDocBegin
-"Name: launcher_write_clipboard( <str> )"
-"Summary: send a string to your Connected PC's clipboard through launcher"
-"Module: Print"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: launcher_write_clipboard( Players_origin_string )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: launcher_write_clipboard( <str> )""Summary: send a string to your Connected PC's clipboard through launcher""Module: Print""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: launcher_write_clipboard( Players_origin_string )""SPMP: both"///ScriptDocEnd
 =============
 */
 launcher_write_clipboard(str) {
@@ -2622,13 +2033,7 @@ launcher_write_clipboard(str) {
 /*
 =============
 ///ScriptDocBegin
-"Name: isDestructible()"
-"Summary: returns true if self is a destructible"
-"Module: Entity"
-"CallOn: An entity"
-"Example: if( self isDestructible() )"
-"SPMP: both"
-///ScriptDocEnd
+"Name: isDestructible()""Summary: returns true if self is a destructible""Module: Entity""CallOn: An entity""Example: if( self isDestructible() )""SPMP: both"///ScriptDocEnd
 =============
 */
 isDestructible() {
@@ -2640,15 +2045,7 @@ isDestructible() {
 /*
 =============
 ///ScriptDocBegin
-"Name: pauseEffect( <pauseEffect> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: pauseEffect( <pauseEffect> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 pauseEffect() {
@@ -2658,13 +2055,7 @@ pauseEffect() {
 /*
 =============
 ///ScriptDocBegin
-"Name: activate_individual_exploder()"
-"Summary: Activates an individual exploder, rather than all the exploders of a given number"
-"Module: Utility"
-"CallOn: An exploder"
-"Example: exploder activate_individual_exploder();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: activate_individual_exploder()""Summary: Activates an individual exploder, rather than all the exploders of a given number""Module: Utility""CallOn: An exploder""Example: exploder activate_individual_exploder();""SPMP: both"///ScriptDocEnd
 =============
 */
 activate_individual_exploder() {
@@ -2816,13 +2207,7 @@ brush_throw() {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_target_ent( <target> )"
-"Summary: Returns whatever SINGLE ent is targetted, be it node, struct, or entity"
-"Module: Utility"
-"OptionalArg: <target>: Optional target override"
-"Example: node = guy get_target_ent();"
-"SPMP: both"
-///ScriptDocEnd
+"Name: get_target_ent( <target> )""Summary: Returns whatever SINGLE ent is targetted, be it node, struct, or entity""Module: Utility""OptionalArg: <target>: Optional target override""Example: node = guy get_target_ent();""SPMP: both"///ScriptDocEnd
 =============
 */
 get_target_ent(target) {
@@ -2946,15 +2331,7 @@ effect_loopsound() {
 /*
  =============
 ///ScriptDocBegin
-"Name: play_loopsound_in_space( <alias> , <origin> , <master> )"
-"Summary: Use the PlayLoopSound command at a position in space. Unrelated to caller."
-"Module: Sound"
-"CallOn: Level"
-"MandatoryArg: <alias> : Sound alias to play"
-"MandatoryArg: <origin> : Origin of the sound"
-"Example: play_loopsound_in_space( "siren", level.speaker.origin );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: play_loopsound_in_space( <alias> , <origin> , <master> )""Summary: Use the PlayLoopSound command at a position in space. Unrelated to caller.""Module: Sound""CallOn: Level""MandatoryArg: <alias> : Sound alias to play""MandatoryArg: <origin> : Origin of the sound""Example: play_loopsound_in_space( "siren", level.speaker.origin );""SPMP: both"///ScriptDocEnd
  =============
  */
 play_loopsound_in_space(alias, origin) {
@@ -2983,16 +2360,7 @@ effect_soundalias() {
 /*
  =============
 ///ScriptDocBegin
-"Name: play_sound_in_space( <alias> , <origin> , <master> )"
-"Summary: Play a sound at an origin, unrelated to caller"
-"Module: Sound"
-"CallOn: Level"
-"MandatoryArg: <alias> : Sound alias to play"
-"MandatoryArg: <origin> : Origin of the sound"
-"OptionalArg: <master> : Play this sound as a master sound. Defaults to false"
-"Example: play_sound_in_space( "siren", level.speaker.origin );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: play_sound_in_space( <alias> , <origin> , <master> )""Summary: Play a sound at an origin, unrelated to caller""Module: Sound""CallOn: Level""MandatoryArg: <alias> : Sound alias to play""MandatoryArg: <origin> : Origin of the sound""OptionalArg: <master> : Play this sound as a master sound. Defaults to false""Example: play_sound_in_space( "siren", level.speaker.origin );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 play_sound_in_space(alias, origin, master) {
@@ -3074,15 +2442,7 @@ fire_effect() {
 /*
 =============
 ///ScriptDocBegin
-"Name: loop_fx_sound( <alias> , <origin> , <ender> , <timeout> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: loop_fx_sound( <alias> , <origin> , <ender> , <timeout> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 loop_fx_sound(alias, origin, ender, timeout) {
@@ -3105,15 +2465,7 @@ loop_fx_sound(alias, origin, ender, timeout) {
 /*
 =============
 ///ScriptDocBegin
-"Name: loop_sound_delete( <ender> , <ent> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: loop_sound_delete( <ender> , <ent> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 loop_sound_delete(ender, ent) {
@@ -3137,15 +2489,7 @@ exploder_after_load(num) {
 /*
 =============
 ///ScriptDocBegin
-"Name: activate_exploder( <num> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: activate_exploder( <num> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 activate_exploder(num) {
@@ -3179,15 +2523,7 @@ activate_exploder(num) {
 /*
 =============
 ///ScriptDocBegin
-"Name: createLoopEffect( <fxid> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: createLoopEffect( <fxid> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 createLoopEffect(fxid) {
@@ -3199,15 +2535,7 @@ createLoopEffect(fxid) {
 /*
 =============
 ///ScriptDocBegin
-"Name: createOneshotEffect( <fxid> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: createOneshotEffect( <fxid> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 createOneshotEffect(fxid) {
@@ -3220,15 +2548,7 @@ createOneshotEffect(fxid) {
 /*
 =============
 ///ScriptDocBegin
-"Name: createExploder( <fxid> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: createExploder( <fxid> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 createExploder(fxid) {
@@ -3241,15 +2561,7 @@ createExploder(fxid) {
 /*
 =============
 ///ScriptDocBegin
-"Name: alphabetize( <array> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: both"
-///ScriptDocEnd
+"Name: alphabetize( <array> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: both"///ScriptDocEnd
 =============
 */
 alphabetize(array) {
@@ -3401,15 +2713,7 @@ alphabet_compare(a, b) {
 /*
 =============
 ///ScriptDocBegin
-"Name: play_loop_sound_on_entity( <alias> , <offset> )"
-"Summary: Play loop sound alias on an entity"
-"Module: Sound"
-"CallOn: An entity"
-"MandatoryArg: <alias> : Sound alias to loop"
-"OptionalArg: <offset> : Offset for sound origin relative to the world from the models origin."
-"Example: vehicle thread play_loop_sound_on_entity( "engine_belt_run" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: play_loop_sound_on_entity( <alias> , <offset> )""Summary: Play loop sound alias on an entity""Module: Sound""CallOn: An entity""MandatoryArg: <alias> : Sound alias to loop""OptionalArg: <offset> : Offset for sound origin relative to the world from the models origin.""Example: vehicle thread play_loop_sound_on_entity( "engine_belt_run" );""SPMP: both"///ScriptDocEnd
 =============
 */
 play_loop_sound_on_entity(alias, offset) {
@@ -3439,14 +2743,7 @@ play_loop_sound_on_entity(alias, offset) {
 /*
 =============
 ///ScriptDocBegin
-"Name: stop_loop_sound_on_entity( <alias> )"
-"Summary: Stop playing the the loop sound alias on an entity"
-"Module: Sound"
-"CallOn: An entity"
-"MandatoryArg: <alias> : Sound alias to stop looping"
-"Example: vehicle thread stop_loop_sound_on_entity( "engine_belt_run" );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: stop_loop_sound_on_entity( <alias> )""Summary: Stop playing the the loop sound alias on an entity""Module: Sound""CallOn: An entity""MandatoryArg: <alias> : Sound alias to stop looping""Example: vehicle thread stop_loop_sound_on_entity( "engine_belt_run" );""SPMP: both"///ScriptDocEnd
 =============
 */
 stop_loop_sound_on_entity(alias) {
@@ -3456,15 +2753,7 @@ stop_loop_sound_on_entity(alias) {
 /*
 =============
 ///ScriptDocBegin
-"Name: delete_on_death( <ent> )"
-"Summary: Delete the entity when "self" dies."
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: level.helicopter thread delete_on_death( someRandomScriptOriginThatISpawned );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: delete_on_death( <ent> )""Summary: Delete the entity when "self" dies.""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: level.helicopter thread delete_on_death( someRandomScriptOriginThatISpawned );""SPMP: both"///ScriptDocEnd
 =============
 */
 delete_on_death(ent) {
@@ -3486,13 +2775,7 @@ error(msg) {
 /*
 =============
 ///ScriptDocBegin
-"Name: exploder( <num> )"
-"Summary: Sets off the desired exploder"
-"Module: Utility"
-"MandatoryArg: <num>: The exploder number"
-"Example: exploder( 5 );"
-"SPMP: both"
-///ScriptDocEnd
+"Name: exploder( <num> )""Summary: Sets off the desired exploder""Module: Utility""MandatoryArg: <num>: The exploder number""Example: exploder( 5 );""SPMP: both"///ScriptDocEnd
 =============
 */
 exploder(num) {
@@ -3502,13 +2785,7 @@ exploder(num) {
 /*
 =============
 ///ScriptDocBegin
-"Name: create_dvar( <var> , <val> )"
-"Summary: Initialize a dvar with a given value"
-"Module: Utility"
-"MandatoryArg: <var>: Name of the dvar"
-"MandatoryArg: <val>: Default value"
-"Example: create_dvar( "fish", "on" );"
-"SPMP: singleplayer"
+"Name: create_dvar( <var> , <val> )""Summary: Initialize a dvar with a given value""Module: Utility""MandatoryArg: <var>: Name of the dvar""MandatoryArg: <val>: Default value""Example: create_dvar( "fish", "on" );""SPMP: singleplayer"
 ///ScriptDocEnd
 =============
 */

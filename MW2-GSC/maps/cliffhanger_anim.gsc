@@ -672,8 +672,7 @@ dialog() {
   // “Stay close and hug the wall! We’ll use the MiGs for cover and cross the tarmac to the southeast!”	
   level.scr_sound["price"]["hugthewall"] = "cliff_pri_hugthewall";
 
-  // "Alright, let's go!"
-  level.scr_sound["price"]["allright"] = "cliff_pri_allright";
+  // "Alright, let's go!"level.scr_sound["price"]["allright"] = "cliff_pri_allright";
 
   // “Head for that MiG, I’ll cover you!”	
   level.scr_sound["price"]["headformig"] = "cliff_pri_headformig";
@@ -696,8 +695,7 @@ dialog() {
   // “Snowmobiles! Take ‘em out!!”	
   level.scr_sound["price"]["snowmoibles"] = "cliff_pri_snowmoibles";
 
-  // "Soap, I've been compromised! Keep a low profile and hold your fire."
-  level.scr_sound["price"]["compromised"] = "cliff_pri_compromised";
+  // "Soap, I've been compromised! Keep a low profile and hold your fire."level.scr_sound["price"]["compromised"] = "cliff_pri_compromised";
 
   // "Soap, Go to plan b
   level.scr_sound["price"]["plan_b"] = "cliff_pri_goplanb";

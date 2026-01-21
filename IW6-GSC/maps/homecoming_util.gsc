@@ -1359,8 +1359,8 @@ model_to_vehicle() {
 
 nh90_doors_open() {
   self waittill("unloading");
-  self setanim( % nh90_left_door_open);
-  self setanim( % nh90_right_door_open);
+  self setanim(%nh90_left_door_open);
+  self setanim(%nh90_right_door_open);
 }
 
 create_default_targetent(var_0) {
@@ -2024,13 +2024,13 @@ heli_beach_lander_init() {
   if(parameters_check("instant_landing")) {
     self.currentnode = common_scripts\utility::getstruct(self.script_linkto, "script_linkname");
     self vehicle_teleport(self.currentnode.origin, self.currentnode.angles);
-    self setanimrestart( % nh90_landing_gear_down, 1, 1, 999);
+    self setanimrestart(%nh90_landing_gear_down, 1, 1, 999);
   } else {
     var_0 = common_scripts\utility::waittill_any_return("landing_gear", "reached_dynamic_path_end");
 
     if(var_0 == "landing_gear") {
       maps\_utility::ent_flag_set("landing_gear");
-      self setanimrestart( % nh90_landing_gear_down, 1, 1, 0.5);
+      self setanimrestart(%nh90_landing_gear_down, 1, 1, 0.5);
       self waittill("reached_dynamic_path_end");
     }
   }
@@ -2044,8 +2044,8 @@ heli_beach_lander_init() {
   self waittill("near_goal");
   maps\_utility::ent_flag_set("unload_started");
   self.fakehealthinvulnerability = 1;
-  common_scripts\utility::delaycall(randomfloatrange(0.1, 0.3), ::setanim, % nh90_left_door_open);
-  common_scripts\utility::delaycall(randomfloatrange(0.1, 0.3), ::setanim, % nh90_right_door_open);
+  common_scripts\utility::delaycall(randomfloatrange(0.1, 0.3), ::setanim, %nh90_left_door_open);
+  common_scripts\utility::delaycall(randomfloatrange(0.1, 0.3), ::setanim, %nh90_right_door_open);
   var_2 = 0;
   self.unloaded = 0;
   var_3 = var_1 common_scripts\utility::get_linked_ents();
@@ -2097,7 +2097,7 @@ heli_beach_lander_init() {
 heli_beach_lander_leave(var_0) {
   var_1 = var_0 maps\_utility::get_linked_structs();
   thread maps\_vehicle::vehicle_paths(var_1[0]);
-  self setanimrestart( % nh90_landing_gear_up, 1, 1, 0.3);
+  self setanimrestart(%nh90_landing_gear_up, 1, 1, 0.3);
   heli_enable_rocketdeath(0);
   self.fakehealth = 25;
   self.fakehealthinvulnerability = 1;
@@ -2560,7 +2560,7 @@ artemis_think(var_0) {
     var_0 = maps\_utility::get_linked_structs();
 
   var_1 = ["tag_flash_left", "tag_flash_right"];
-  var_2 = [ % artemis_fire_l, % artemis_fire_r];
+  var_2 = [ % artemis_fire_l, %artemis_fire_r];
   self.fireents = [];
 
   foreach(var_6, var_4 in var_1) {
@@ -2613,7 +2613,7 @@ artemis_fire() {
         var_3 playSound("weap_zpu_turret_fire");
 
       playFXOnTag(common_scripts\utility::getfx("artemis_muzzleflash"), self, var_3.tag);
-      self setanimknoballrestart(var_3.animation, % root);
+      self setanimknoballrestart(var_3.animation, %root);
 
       if(var_1 == var_0) {
         var_4 = anglesToForward(self gettagangles(var_3.tag));
@@ -2709,10 +2709,10 @@ hovercraft_init() {
 
 hovercraft_anim_logic() {
   self endon("hovercraft_delete");
-  self setanim( % hovercraft_rocking);
+  self setanim(%hovercraft_rocking);
   self waittill("hovercraft_reached_beach");
-  self clearanim( % hovercraft_rocking, 0.2);
-  self setanim( % hovercraft_enemy_upper_fans, 1, 0.2, 0.4);
+  self clearanim(%hovercraft_rocking, 0.2);
+  self setanim(%hovercraft_enemy_upper_fans, 1, 0.2, 0.4);
   var_0 = 1;
   var_1 = 12;
 
@@ -2722,14 +2722,14 @@ hovercraft_anim_logic() {
   }
 
   self.deflaterate = var_0;
-  self setanim( % lcac_deflate, 1.0, 0.2, var_0);
+  self setanim(%lcac_deflate, 1.0, 0.2, var_0);
   wait(var_1);
-  self setflaggedanim("anim", % lcac_deflate, 1, 0, 0);
+  self setflaggedanim("anim", %lcac_deflate, 1, 0, 0);
   maps\_utility::ent_flag_wait("hovercraft_unload_complete");
-  self setanim( % hovercraft_enemy_upper_fans, 1, 0.2, 1);
-  self setflaggedanim("anim", % lcac_deflate, 1, 1, 1);
+  self setanim(%hovercraft_enemy_upper_fans, 1, 0.2, 1);
+  self setflaggedanim("anim", %lcac_deflate, 1, 1, 1);
   self waittillmatch("anim", "end");
-  self setanim( % hovercraft_rocking);
+  self setanim(%hovercraft_rocking);
   maps\_utility::ent_flag_set("hovercraft_animations_done");
 }
 
@@ -3235,9 +3235,9 @@ hovercraft_set_unloaded() {
   if(!parameters_check("unloaded"))
     return 0;
 
-  self setanim( % lcac_deflate);
-  self setanimtime( % lcac_deflate, 0.5);
-  self setflaggedanim("single anim", % lcac_deflate, 1, 0, 0);
+  self setanim(%lcac_deflate);
+  self setanimtime(%lcac_deflate, 0.5);
+  self setflaggedanim("single anim", %lcac_deflate, 1, 0, 0);
   thread hovercraft_deploy_smoke();
   thread hovercraft_unloaded_leave();
   return 1;
@@ -3247,10 +3247,10 @@ hovercraft_unloaded_leave() {
   self endon("death");
   maps\_utility::ent_flag_wait("hovercraft_unload_complete");
   self notify("stop_deploying_smoke");
-  self setanim( % hovercraft_enemy_upper_fans, 1, 0.2, 1);
-  self setflaggedanim("anim", % lcac_deflate, 1, 1, 1);
+  self setanim(%hovercraft_enemy_upper_fans, 1, 0.2, 1);
+  self setflaggedanim("anim", %lcac_deflate, 1, 1, 1);
   self waittillmatch("anim", "end");
-  self setanim( % hovercraft_rocking);
+  self setanim(%hovercraft_rocking);
   maps\_utility::ent_flag_set("hovercraft_continue_path");
 }
 

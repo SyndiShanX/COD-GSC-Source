@@ -455,8 +455,7 @@ string_to_float(string) {
 
 set_zombie_var(var, value, div, is_float) {
   table = "mp/zombiemode.csv";
-  table_value = TableLookUp(table, 0,
-    var, 1);
+  table_value = TableLookUp(table, 0, var, 1);
   if(!isDefined(is_float)) {
     is_float = false;
   }

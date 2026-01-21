@@ -1006,8 +1006,7 @@ give(name) {
 
   assert(isDefined(level.bgb[name]), "<dev string:x6d0>" + name + "<dev string:x4c0>");
   self notify(#"bgb_update", {
-    #var_3aee8e4: name,
-    #var_826ddd38: self.bgb
+    #var_3aee8e4: name, #var_826ddd38: self.bgb
   });
   self notify("bgb_update_give_" + name);
   self.bgb = name;
@@ -1042,8 +1041,7 @@ take() {
 
   self bgb_clear_monitors_and_clientfields();
   self notify(#"bgb_update", {
-    #var_3aee8e4: # "none",
-    #var_826ddd38: self.bgb
+    #var_3aee8e4: # "none", #var_826ddd38: self.bgb
   });
   self notify("bgb_update_take_" + self.bgb);
   self.bgb = # "none";
@@ -1142,9 +1140,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     name = attacker get_enabled();
 
     if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
-      damage = [
-        [level.bgb[name].actor_damage_override_func]
-      ](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
+      damage = [[level.bgb[name].actor_damage_override_func]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
     }
   }
 
@@ -1160,9 +1156,7 @@ vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, 
     name = eattacker get_enabled();
 
     if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
-      idamage = [
-        [level.bgb[name].vehicle_damage_override_func]
-      ](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
+      idamage = [[level.bgb[name].vehicle_damage_override_func]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
     }
   }
 
@@ -1178,9 +1172,7 @@ actor_death_override(attacker) {
     name = attacker get_enabled();
 
     if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {
-      damage = [
-        [level.bgb[name].actor_death_override_func]
-      ](attacker);
+      damage = [[level.bgb[name].actor_death_override_func]](attacker);
     }
   }
 
@@ -1200,9 +1192,7 @@ lost_perk_override(perk) {
     name = keys[i];
 
     if(isDefined(level.bgb[name].lost_perk_override_func_always_run) && level.bgb[name].lost_perk_override_func_always_run && isDefined(level.bgb[name].lost_perk_override_func)) {
-      b_result = [
-        [level.bgb[name].lost_perk_override_func]
-      ](perk, self, undefined);
+      b_result = [[level.bgb[name].lost_perk_override_func]](perk, self, undefined);
 
       if(b_result) {
         return b_result;
@@ -1214,9 +1204,7 @@ lost_perk_override(perk) {
     name = player get_enabled();
 
     if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].lost_perk_override_func)) {
-      b_result = [
-        [level.bgb[name].lost_perk_override_func]
-      ](perk, self, player);
+      b_result = [[level.bgb[name].lost_perk_override_func]](perk, self, player);
 
       if(b_result) {
         return b_result;
@@ -1243,9 +1231,7 @@ add_to_player_score_override(n_points, str_awarded_by) {
     }
 
     if(isDefined(level.bgb[str_bgb].add_to_player_score_override_func_always_run) && level.bgb[str_bgb].add_to_player_score_override_func_always_run && isDefined(level.bgb[str_bgb].add_to_player_score_override_func)) {
-      n_points = [
-        [level.bgb[str_bgb].add_to_player_score_override_func]
-      ](n_points, str_awarded_by, 0);
+      n_points = [[level.bgb[str_bgb].add_to_player_score_override_func]](n_points, str_awarded_by, 0);
     }
   }
 

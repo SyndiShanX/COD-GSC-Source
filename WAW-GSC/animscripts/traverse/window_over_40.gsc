@@ -21,7 +21,7 @@ jump_through_window_human() {
   traverseData["traverseToCoverAnim"] = % traverse_window_M_2_stop;
   traverseData["coverType"] = "Cover Crouch";
   traverseData["traverseHeight"] = 36.0;
-  traverseData["interruptDeathAnim"][0] = array( % traverse_window_death_start);
-  traverseData["interruptDeathAnim"][1] = array( % traverse_window_death_end);
+  traverseData["interruptDeathAnim"][0] = array(%traverse_window_death_start);
+  traverseData["interruptDeathAnim"][1] = array(%traverse_window_death_end);
   DoTraverse(traverseData);
 }

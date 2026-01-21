@@ -66,8 +66,7 @@ start_map() {
   array_call(level.players, ::SetMoveSpeedScale, 1);
   level.playerspeed = undefined;
 
-  //"Sub Command: Civilian hostages hostages at your position, watch your fire."
-  delaythread(2, ::radio_dialogue, "oilrig_sbc_civilhostages");
+  //"Sub Command: Civilian hostages hostages at your position, watch your fire."delaythread(2, ::radio_dialogue, "oilrig_sbc_civilhostages");
 
   battlechatter_on("axis");
 
@@ -76,8 +75,7 @@ start_map() {
   -------------------------*/
   flag_wait("upper_room_cleared");
 
-  //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."
-  delaythread(2, ::radio_dialogue, "oilrig_sbc_gettolz");
+  //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."delaythread(2, ::radio_dialogue, "oilrig_sbc_gettolz");
 
   level.hostageNodes = getnodearray("node_hostage_scaffolding", "targetname");
   volume_ambush_room = getent("volume_ambush_room", "script_noteworthy");

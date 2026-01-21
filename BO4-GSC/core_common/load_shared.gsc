@@ -108,8 +108,7 @@ level_notify_listener() {
 
       if(toks.size == 3) {
         level notify(toks[0], {
-          #param1: toks[1],
-          #param2: toks[2]
+          #param1: toks[1], #param2: toks[2]
         });
       } else if(toks.size == 2) {
         level notify(toks[0], {

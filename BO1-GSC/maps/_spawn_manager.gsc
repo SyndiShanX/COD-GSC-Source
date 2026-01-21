@@ -170,21 +170,13 @@ spawn_manager_setup() {
 spawn_manager_can_spawn(spawnGroupSize) {
   totalFree = self.count - self.spawnCount;
   activeFree = self.sm_active_count - self.activeAI.size;
-  canSpawnGroup = (activeFree >= spawnGroupSize) &&
-    (totalFree >= spawnGroupSize) &&
-    (spawnGroupSize > 0);
+  canSpawnGroup = (activeFree >= spawnGroupSize) && (totalFree >= spawnGroupSize) && (spawnGroupSize > 0);
   globalFree = level.spawn_manager_max_ai - level.spawn_manager_active_ai;
   AssertEx(self.enable == flag("sm_" + self.sm_id + "_enabled"), "Spawn manager flags should not be set by the level script.");
   if(self.script_forcespawn == 0) {
-    return (totalFree > 0) &&
-      (activeFree > 0) &&
-      (globalFree > 0) &&
-      canSpawnGroup &&
-      self.enable;
+    return (totalFree > 0) && (activeFree > 0) && (globalFree > 0) && canSpawnGroup && self.enable;
   } else {
-    return (totalFree > 0) &&
-      (activeFree > 0) &&
-      self.enable;
+    return (totalFree > 0) && (activeFree > 0) && self.enable;
   }
 }
 
@@ -192,8 +184,7 @@ spawn_manager_spawn(maxDelay) {
   self endon("death");
   start = GetTime();
   for(;;) {
-    while(level.spawn_manager_frame_spawns >= level.spawn_manager_max_frame_spawn ||
-      level.spawn_manager_active_ai >= level.spawn_manager_max_ai) {
+    while(level.spawn_manager_frame_spawns >= level.spawn_manager_max_frame_spawn || level.spawn_manager_active_ai >= level.spawn_manager_max_ai) {
       level waittill("spawn_manager_throttle_reset");
     }
     ai = self spawn_ai();

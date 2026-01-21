@@ -159,7 +159,7 @@ moving_cover_opfor_death_tracker() {
   common_scripts\utility::flag_set("no_steam_on_death");
   self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
   maps\loki_util::jkuprint("HIT!!!");
-  self setanim( % space_pain_1, 1, 0.2);
+  self setanim(%space_pain_1, 1, 0.2);
 
   if(self.damagelocation != "neck") {
     wait 0.2;

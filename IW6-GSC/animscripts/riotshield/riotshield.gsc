@@ -56,7 +56,7 @@ init_riotshield_ai_anims() {
   animscripts\animset::registerarchetype("riotshield", var_0, 0);
   anim.arrivalendstance["riotshield"] = "crouch";
   anim.arrivalendstance["riotshield_crouch"] = "crouch";
-  animscripts\combat_utility::addgrenadethrowanimoffset( % riotshield_crouch_grenade_toss, (-3.20014, 1.7098, 55.6886));
+  animscripts\combat_utility::addgrenadethrowanimoffset(%riotshield_crouch_grenade_toss, (-3.20014, 1.7098, 55.6886));
 }
 
 notetrackdetachshield(var_0, var_1) {
@@ -140,7 +140,7 @@ riotshield_charge() {
   if(!animscripts\melee::melee_standard_updateandvalidatetarget())
     return 0;
 
-  var_0 = getmovedelta( % riotshield_basha_attack, 0, 1);
+  var_0 = getmovedelta(%riotshield_basha_attack, 0, 1);
   var_1 = lengthsquared(var_0);
 
   if(distancesquared(self.origin, self.melee.target.origin) < var_1)
@@ -156,7 +156,7 @@ riotshield_charge() {
 
     if(var_3) {
       self.a.pose = "stand";
-      self setflaggedanimknoball("chargeanim", % riotshield_sprint, % body, 1, 0.2, 1);
+      self setflaggedanimknoball("chargeanim", %riotshield_sprint, %body, 1, 0.2, 1);
       var_3 = 0;
     }
 
@@ -188,7 +188,7 @@ riotshield_melee_standard() {
 
     animscripts\battlechatter_ai::evaluatemeleeevent();
     self orientmode("face point", self.melee.target.origin);
-    self setflaggedanimknoballrestart("meleeanim", % riotshield_bash_vs_player, % body, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("meleeanim", %riotshield_bash_vs_player, %body, 1, 0.2, 1);
     self.melee.inprogress = 1;
 
     if(!animscripts\melee::melee_standard_playattackloop()) {
@@ -257,9 +257,9 @@ riotshield_startmovetransition() {
     if(isDefined(self.copgroup))
       var_1 = 2.5;
 
-    self setflaggedanimknoballrestart("startmove", var_0, % body, 1, 0.1, var_1);
+    self setflaggedanimknoballrestart("startmove", var_0, %body, 1, 0.1, var_1);
     animscripts\shared::donotetracks("startmove");
-    self clearanim( % riotshield_crouch2walk, 0.5);
+    self clearanim(%riotshield_crouch2walk, 0.5);
   }
 
   if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
@@ -274,14 +274,14 @@ riotshield_startmovetransition() {
 
 riotshield_endmovetransition() {
   if(self.prevscript == "move" && self.a.pose == "crouch") {
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
     var_0 = randomfloatrange(0.9, 1.1);
 
     if(isDefined(self.copgroup))
       var_0 = 2.5;
 
     self animmode("zonly_physics");
-    self setflaggedanimknoballrestart("endmove", % riotshield_walk2crouch_8, % body, 1, 0.2, var_0);
+    self setflaggedanimknoballrestart("endmove", %riotshield_walk2crouch_8, %body, 1, 0.2, var_0);
     animscripts\shared::donotetracks("endmove");
     self animmode("normal");
   }
@@ -327,13 +327,13 @@ riotshield_bullet_hit_shield_clear() {
   self endon("killanimscript");
   self endon("new_hit_react");
   self waittillmatch("hitreact", "end");
-  self clearanim( % riotshield_react, 0.1);
+  self clearanim(%riotshield_react, 0.1);
 }
 
 riotshield_grenadecower() {
   if(self.a.pose == "stand") {
-    self clearanim( % root, 0.2);
-    self setflaggedanimknoballrestart("trans", % riotshield_walk2crouch_8, % body, 1, 0.2, 1.2);
+    self clearanim(%root, 0.2);
+    self setflaggedanimknoballrestart("trans", %riotshield_walk2crouch_8, %body, 1, 0.2, 1.2);
     animscripts\shared::donotetracks("trans");
   }
 
@@ -367,8 +367,8 @@ riotshield_grenadecower() {
     }
   }
 
-  self setanimknoball( % riotshield_crouch_aim_5, % body, 1, 0.2, 1);
-  self setflaggedanimknoballrestart("grenadecower", % riotshield_crouch_idle_add, % add_idle, 1, 0.2, self.animplaybackrate);
+  self setanimknoball(%riotshield_crouch_aim_5, %body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("grenadecower", %riotshield_crouch_idle_add, %add_idle, 1, 0.2, self.animplaybackrate);
   animscripts\shared::donotetracks("grenadecower");
 }
 
@@ -384,7 +384,7 @@ riotshield_flashbang() {
     var_1[2] = % riotshield_crouch_grenade_flash3;
     var_1[3] = % riotshield_crouch_grenade_flash4;
     var_2 = var_1[randomint(var_1.size)];
-    self setflaggedanimknoballrestart("flashanim", var_2, % body, 1, 0.1, var_0);
+    self setflaggedanimknoballrestart("flashanim", var_2, %body, 1, 0.1, var_0);
     self.minpaindamage = 1000;
     animscripts\shared::donotetracks("flashanim");
   } else
@@ -412,10 +412,10 @@ riotshield_pain() {
       var_1[1] = % riotshield_crouch_grenade_blowbackl;
       var_1[2] = % riotshield_crouch_grenade_blowbackr;
       var_2 = var_1[randomint(var_1.size)];
-      self setflaggedanimknoballrestart("painanim", var_2, % body, 1, 0.2, var_0);
+      self setflaggedanimknoballrestart("painanim", var_2, %body, 1, 0.2, var_0);
       self.minpaindamage = 1000;
     } else
-      self setflaggedanimknoballrestart("painanim", % riotshield_crouch_pain, % body, 1, 0.2, var_0);
+      self setflaggedanimknoballrestart("painanim", %riotshield_crouch_pain, %body, 1, 0.2, var_0);
 
     animscripts\shared::donotetracks("painanim");
   } else
@@ -489,7 +489,7 @@ init_riotshield_animsets() {
   var_0["add_aim_right"] = % riotshield_crouch_aim_6;
   var_0["straight_level"] = % riotshield_crouch_aim_5;
   var_0["fire"] = % riotshield_crouch_fire_auto;
-  var_0["single"] = animscripts\utility::array( % riotshield_crouch_fire_single);
+  var_0["single"] = animscripts\utility::array(%riotshield_crouch_fire_single);
   var_0["burst2"] = % riotshield_crouch_fire_burst;
   var_0["burst3"] = % riotshield_crouch_fire_burst;
   var_0["burst4"] = % riotshield_crouch_fire_burst;
@@ -499,10 +499,10 @@ init_riotshield_animsets() {
   var_0["semi3"] = % riotshield_crouch_fire_burst;
   var_0["semi4"] = % riotshield_crouch_fire_burst;
   var_0["semi5"] = % riotshield_crouch_fire_burst;
-  var_0["exposed_idle"] = animscripts\utility::array( % riotshield_crouch_idle_add, % riotshield_crouch_twitch);
-  var_0["exposed_grenade"] = animscripts\utility::array( % riotshield_crouch_grenade_toss);
-  var_0["reload"] = animscripts\utility::array( % riotshield_crouch_reload);
-  var_0["reload_crouchhide"] = animscripts\utility::array( % riotshield_crouch_reload);
+  var_0["exposed_idle"] = animscripts\utility::array(%riotshield_crouch_idle_add, %riotshield_crouch_twitch);
+  var_0["exposed_grenade"] = animscripts\utility::array(%riotshield_crouch_grenade_toss);
+  var_0["reload"] = animscripts\utility::array(%riotshield_crouch_reload);
+  var_0["reload_crouchhide"] = animscripts\utility::array(%riotshield_crouch_reload);
   var_0["turn_left_45"] = % riotshield_crouch_lturn;
   var_0["turn_left_90"] = % riotshield_crouch_lturn;
   var_0["turn_left_135"] = % riotshield_crouch_lturn;
@@ -581,7 +581,7 @@ riotshield_flee_and_drop_shield() {
     var_0 = % riotshield_crouch2stand_shield_drop;
 
   var_1 = randomfloatrange(0.85, 1.1);
-  self setflaggedanimknoball("fleeanim", var_0, % root, 1, 0.1, var_1);
+  self setflaggedanimknoball("fleeanim", var_0, %root, 1, 0.1, var_1);
   animscripts\shared::donotetracks("fleeanim");
   self.maxfaceenemydist = 32;
   self.lockorientation = 0;

@@ -162,9 +162,7 @@ restockAmmoAura(config) {
     touchingPlayers = trigger GetIsTouchingEntities(level.players);
 
     foreach(player in touchingPlayers) {
-      if(isDefined(player) &&
-        !(self.owner IsEnemy(player)) &&
-        self shouldAddAmmo(player)) {
+      if(isDefined(player) && !(self.owner IsEnemy(player)) && self shouldAddAmmo(player)) {
         self addAmmo(player, config.ammoRestockTime);
       }
     }
@@ -174,8 +172,7 @@ restockAmmoAura(config) {
 }
 
 shouldAddAmmo(player) {
-  return (!isDefined(player.deployableGunNextAmmoTime) ||
-    GetTime() >= player.deployableGunNextAmmoTime);
+  return (!isDefined(player.deployableGunNextAmmoTime) || GetTime() >= player.deployableGunNextAmmoTime);
 }
 
 addAmmo(player, freq) {

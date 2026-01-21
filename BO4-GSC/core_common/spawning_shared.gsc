@@ -246,8 +246,7 @@ is_spawn_trapped(team) {
 function_e1a7c3d9(spawn_origin, spawn_angles) {
   self predictspawnpoint(spawn_origin, spawn_angles);
   self.predicted_spawn_point = {
-    #origin: spawn_origin,
-    #angles: spawn_angles
+    #origin: spawn_origin, #angles: spawn_angles
   };
 }
 
@@ -458,19 +457,12 @@ get_best_spawnpoint(point_team, influencer_team, player, predictedspawn, use_fal
     var_c1c41f09 = 0;
 
     if(isDefined(level.playerspawnedfromspawnbeacon)) {
-      var_c1c41f09 = [
-        [level.playerspawnedfromspawnbeacon]
-      ](player);
+      var_c1c41f09 = [[level.playerspawnedfromspawnbeacon]](player);
     }
 
     if(sessionmodeismultiplayergame()) {
       mpspawnpointsused = {
-        #reason: "point used",
-        #var_c734ddf2: getplayerspawnid(player),
-        #x: spawn_point[# "origin"][0],
-        #y: spawn_point[# "origin"][1],
-        #z: spawn_point[# "origin"][2],
-        #var_50641dd5: var_c1c41f09
+        #reason: "point used", #var_c734ddf2: getplayerspawnid(player), #x: spawn_point[# "origin"][0], #y: spawn_point[# "origin"][1], #z: spawn_point[# "origin"][2], #var_50641dd5: var_c1c41f09
       };
       function_92d1707f(#"hash_608dde355fff78f5", mpspawnpointsused);
     }
@@ -1010,9 +1002,7 @@ get_spawnpoint_final(spawnpoints, predictedspawn, isintermmissionspawn = 0) {
   }
 
   if(isDefined(self.lastspawnpoint) && self.lastspawnpoint.lastspawnpredicted && !predictedspawn && !isintermmissionspawn && (!isDefined(self.var_7007b746) || !self.var_7007b746)) {
-    if(![
-        [var_e627dced]
-      ](self.lastspawnpoint.origin)) {
+    if(![[var_e627dced]](self.lastspawnpoint.origin)) {
       bestspawnpoint = self.lastspawnpoint;
     }
   }
@@ -1033,9 +1023,7 @@ get_spawnpoint_final(spawnpoints, predictedspawn, isintermmissionspawn = 0) {
   }
 
   if(!isDefined(bestspawnpoint)) {
-    if(isDefined(self.lastspawnpoint) && ![
-        [var_e627dced]
-      ](self.lastspawnpoint.origin)) {
+    if(isDefined(self.lastspawnpoint) && ![[var_e627dced]](self.lastspawnpoint.origin)) {
       for(i = 0; i < spawnpoints.size; i++) {
         if(spawnpoints[i] == self.lastspawnpoint) {
           bestspawnpoint = spawnpoints[i];

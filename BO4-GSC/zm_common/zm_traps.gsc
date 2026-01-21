@@ -309,8 +309,7 @@ trap_activate(trap, who) {
     }
 
     level notify(#"trap_activated", {
-      #trap_activator: who,
-      #trap: trap
+      #trap_activator: who, #trap: trap
     });
   }
 
@@ -579,8 +578,7 @@ function_783361ed(e_trap) {
   self endon(#"disconnect");
   self.var_acc576f0 = 1;
   level notify(#"trap_downed_player", {
-    #e_victim: self,
-    #e_trap: e_trap
+    #e_victim: self, #e_trap: e_trap
   });
 
   while(isalive(self) && self laststand::player_is_in_laststand()) {
@@ -691,8 +689,7 @@ zombie_trap_death(e_trap, param) {
         self[[self.var_5475b4ad]](e_trap);
       } else {
         level notify(#"trap_kill", {
-          #e_victim: self,
-          #e_trap: e_trap
+          #e_victim: self, #e_trap: e_trap
         });
         self dodamage(self.health + 666, self.origin, e_trap);
       }
@@ -708,8 +705,7 @@ zombie_trap_death(e_trap, param) {
       }
 
       level notify(#"trap_kill", {
-        #e_victim: self,
-        #e_trap: e_trap
+        #e_victim: self, #e_trap: e_trap
       });
       self startragdoll();
       self launchragdoll(direction_vec);

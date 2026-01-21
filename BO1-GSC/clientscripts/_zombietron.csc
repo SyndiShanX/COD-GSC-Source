@@ -107,12 +107,7 @@ lightning(localClientNum, set, newEnt) {
     max_flash_time = 0.7;
     flash_wait_time_min = 0.05;
     flash_wait_time_max = 0.1;
-    level thread lighting_flash_cycle(intensity_low,
-      intensity_high,
-      min_flash_time,
-      max_flash_time,
-      flash_wait_time_min,
-      flash_wait_time_max);
+    level thread lighting_flash_cycle(intensity_low, intensity_high, min_flash_time, max_flash_time, flash_wait_time_min, flash_wait_time_max);
   }
 }
 

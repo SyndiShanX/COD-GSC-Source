@@ -92,8 +92,7 @@ electrocute_actor(ai) {
 
   bhtnactionstartevent(ai, "electrocute");
   ai notify(#"bhtn_action_notify", {
-    #action: "electrocute"
-  });
+    #action: "electrocute"});
 
   if(!isDefined(self.tesla_enemies_hit)) {
     self.tesla_enemies_hit = 1;

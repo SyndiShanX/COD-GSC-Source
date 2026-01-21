@@ -202,14 +202,10 @@ function callback_playerconnect() {
     self globallogic_ui::updateobjectivetext();
     [[level.spawnspectator]]();
     if(level.rankedmatch) {
-      [
-        [level.autoassign]
-      ](0);
+      [[level.autoassign]](0);
       self thread globallogic_spawn::kickifdontspawn();
     } else {
-      [
-        [level.autoassign]
-      ](0);
+      [[level.autoassign]](0);
     }
     if(self.pers["team"] == "spectator") {
       self.sessionteam = "spectator";
@@ -225,9 +221,7 @@ function callback_playerconnect() {
   } else {
     if(self.pers["team"] == "spectator") {
       self setclientscriptmainmenu(game["menu_start_menu"]);
-      [
-        [level.spawnspectator]
-      ]();
+      [[level.spawnspectator]]();
       self.sessionteam = "spectator";
       self.sessionstate = "spectator";
       self thread spectate_player_watcher();
@@ -235,9 +229,7 @@ function callback_playerconnect() {
       self.sessionteam = self.pers["team"];
       self.sessionstate = "dead";
       self globallogic_ui::updateobjectivetext();
-      [
-        [level.spawnspectator]
-      ]();
+      [[level.spawnspectator]]();
       if(globallogic_utils::isvalidclass(self.pers["class"])) {
         self thread[[level.spawnclient]]();
       } else {

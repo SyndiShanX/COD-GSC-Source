@@ -1871,7 +1871,7 @@ link_model_to_tag(str_model, str_tag) {
 
 open_suv_doors() {
   self useanimtree(#animtree);
-  self setanimknoball( % veh_anim_suv_doors_open, % root, 1, 0, 1);
+  self setanimknoball(%veh_anim_suv_doors_open, %root, 1, 0, 1);
 }
 
 data_glove_on(m_player_body, datapad_model) {

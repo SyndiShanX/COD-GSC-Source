@@ -292,16 +292,16 @@ rubber_band_kyra(var_0, var_1, var_2) {
   var_6 = getent("intro_hatch_door_blocker_org", "targetname");
 
   for(;;) {
-    var_7 = self getanimtime( % odin_intro_kyra);
+    var_7 = self getanimtime(%odin_intro_kyra);
     var_8 = level.player.origin[0] - level.ally.origin[0];
 
     if(var_4 == 1) {
       var_4 = 0;
 
       while(var_3 <= 2.5) {
-        var_7 = self getanimtime( % odin_intro_kyra);
+        var_7 = self getanimtime(%odin_intro_kyra);
         var_3 = var_3 + 0.02;
-        self setanimtime( % odin_intro_kyra, var_7);
+        self setanimtime(%odin_intro_kyra, var_7);
         maps\_anim::anim_set_rate_single(self, var_0, var_3);
         wait 0.05;
       }
@@ -329,12 +329,12 @@ rubber_band_kyra(var_0, var_1, var_2) {
     if(var_3 <= 0.25 && var_5 == 0) {
       var_11 = var_7;
       common_scripts\utility::flag_set("ally_should_nag");
-      level.ally setanim( % odin_intro_kyra_wait_idle, 1, 0.5, 1);
+      level.ally setanim(%odin_intro_kyra_wait_idle, 1, 0.5, 1);
       var_5 = 1;
     } else if(var_3 > 0) {
       level.ally notify("stop_idle_loop");
-      self setanim( % odin_intro_kyra, 1, 0.5);
-      level.ally setanim( % odin_intro_kyra_wait_idle, 0, 0.5, 1);
+      self setanim(%odin_intro_kyra, 1, 0.5);
+      level.ally setanim(%odin_intro_kyra_wait_idle, 0, 0.5, 1);
       maps\_anim::anim_set_rate_single(self, var_0, var_3);
       var_5 = 0;
     }

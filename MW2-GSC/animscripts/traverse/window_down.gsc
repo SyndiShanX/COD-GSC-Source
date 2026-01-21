@@ -25,7 +25,7 @@ main() {
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
 
-  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, % body, 1, 0.15, 1);
+  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %body, 1, 0.15, 1);
   thread animscripts\shared::DoNoteTracksForever("traverse", "stop_traverse_notetracks");
 
   // keeps the actor from sinking in to the ground or from levitating to some extent.
@@ -71,7 +71,7 @@ main() {
     self playSound("Land_" + self.groundtype);
 
   self notify("stop_traverse_notetracks");
-  self setFlaggedAnimKnoballRestart("traverse", landAnim, % body, 1, 0.15, 1);
+  self setFlaggedAnimKnoballRestart("traverse", landAnim, %body, 1, 0.15, 1);
   //	self waittillmatch("traverse", "gravity on");
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("traverse");

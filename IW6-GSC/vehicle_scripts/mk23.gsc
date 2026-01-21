@@ -10,7 +10,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_mk23_truck_iw6", "vehicle_mk23_truck_iw6");
   maps\_vehicle::build_unload_groups(::unload_groups);
-  maps\_vehicle::build_drive( % bm21_driving_idle_forward, % bm21_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%bm21_driving_idle_forward, %bm21_driving_idle_backward, 10);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_bulletshield(1);

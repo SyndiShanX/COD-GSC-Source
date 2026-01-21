@@ -75,8 +75,7 @@ onoutofboundschange(localclientnum, oldval, newval, bnewent, binitialsnap, field
   }
 
   self callback::entity_callback(#"oob", localclientnum, {
-    #old_val: oldval,
-    #new_val: newval
+    #old_val: oldval, #new_val: newval
   });
 
   if(newval > 0) {

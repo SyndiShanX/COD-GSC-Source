@@ -643,9 +643,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
       if(var_25 != "iw5_combatknife")
         var_24 = getweaponattachments(var_4);
 
-      if(!level.showingfinalkillcam &&
-        (isplayer(var_13) && !isbot(self) && !isagent(self)) &&
-        self maps\mp\_utility::_hasPerk("specialty_copycat")) {
+      if(!level.showingfinalkillcam && (isplayer(var_13) && !isbot(self) && !isagent(self)) && self maps\mp\_utility::_hasPerk("specialty_copycat")) {
         self setclientomnvar("ui_killcam_copycat", 1);
         thread waitcopycatkillcambutton(var_13);
       } else

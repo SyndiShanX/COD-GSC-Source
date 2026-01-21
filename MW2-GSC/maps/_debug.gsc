@@ -48,12 +48,7 @@ debugchains() {
 
   fnodes = [];
   for(i = 0; i < nodes.size; i++) {
-    if((!(nodes[i].spawnflags & 2)) &&
-      (
-        ((isDefined(nodes[i].target)) && ((GetNodeArray(nodes[i].target, "targetname")).size > 0)) ||
-        ((isDefined(nodes[i].targetname)) && ((GetNodeArray(nodes[i].targetname, "target")).size > 0))
-      )
-    ) {
+    if((!(nodes[i].spawnflags & 2)) && (((isDefined(nodes[i].target)) && ((GetNodeArray(nodes[i].target, "targetname")).size > 0)) || ((isDefined(nodes[i].targetname)) && ((GetNodeArray(nodes[i].targetname, "target")).size > 0)))) {
       fnodes[fnodenum] = nodes[i];
       fnodenum++;
     }
@@ -229,15 +224,7 @@ drawOrgForever(opcolor) {
 /*
 =============
 ///ScriptDocBegin
-"Name: drawArrowForever( <org> , <ang> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: drawArrowForever( <org> , <ang> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 drawArrowForever(org, ang) {
@@ -257,15 +244,7 @@ drawOriginForever() {
 /*
 =============
 ///ScriptDocBegin
-"Name: drawArrow( <org> , <ang> , <opcolor> , <drawtime> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: drawArrow( <org> , <ang> , <opcolor> , <drawtime> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 drawArrow(org, ang, opcolor, drawtime) {
@@ -304,15 +283,7 @@ drawArrow(org, ang, opcolor, drawtime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: drawForwardForever( <scale> , <color> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: drawForwardForever( <scale> , <color> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 drawForwardForever(scale, color) {
@@ -339,15 +310,7 @@ drawPlayerViewForever() {
 /*
 =============
 ///ScriptDocBegin
-"Name: drawTagForever( <tag> , <opcolor> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: drawTagForever( <tag> , <opcolor> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 drawTagForever(tag, opcolor) {

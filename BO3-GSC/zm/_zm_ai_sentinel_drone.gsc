@@ -787,9 +787,7 @@ function function_3b40bf32() {
 function function_d0769312() {
   self waittill("death", attacker);
   if(function_41375d48() == 0 && level.zombie_total <= 0) {
-    if(!isDefined(level.zm_ai_round_over) || [
-        [level.zm_ai_round_over]
-      ]()) {
+    if(!isDefined(level.zm_ai_round_over) || [[level.zm_ai_round_over]]()) {
       level.var_6a6f912a = self.origin;
       level notify("last_ai_down", self, attacker);
     }
@@ -799,9 +797,7 @@ function function_d0769312() {
       attacker zm_score::player_add_points("death_sentinel");
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](attacker, self);
+      [[level.hero_power_update]](attacker, self);
     }
     attacker zm_audio::create_and_play_dialog("kill", "sentinel");
     attacker zm_stats::increment_client_stat("zsentinel_killed");

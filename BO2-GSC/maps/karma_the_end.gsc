@@ -309,10 +309,10 @@ set_react_anim_time() {
     else if(n_step == 3)
       self setanimtime(self.anim_defalco_react, 0.5);
     else if(n_step == 4) {
-      self setflaggedanimknoball("defalco_react", self.anim_defalco_react, % root, 1, 0.3, 0.2);
+      self setflaggedanimknoball("defalco_react", self.anim_defalco_react, %root, 1, 0.3, 0.2);
       self setanimtime(self.anim_defalco_react, 0.7);
     } else if(n_step == 5) {
-      self setflaggedanimknoball("defalco_react", self.anim_defalco_react, % root, 1, 0.3, 1);
+      self setflaggedanimknoball("defalco_react", self.anim_defalco_react, %root, 1, 0.3, 1);
       self setanimtime(self.anim_defalco_react, 0.9);
     }
   }
@@ -393,7 +393,7 @@ escort_react() {
   if(n_dot_to_player < -0.3) {
     v_goal_angles = vectortoangles(v_to_player * -1);
     self thread lerp_position(undefined, v_goal_angles, 1);
-    self setflaggedanimknoball("defalco_react", self.anim_defalco_react, % root, 1, 0.3, 1);
+    self setflaggedanimknoball("defalco_react", self.anim_defalco_react, %root, 1, 0.3, 1);
     self thread set_react_anim_time();
     self waittillmatch("defalco_react", "end");
     self notify("stop_lerp_position");

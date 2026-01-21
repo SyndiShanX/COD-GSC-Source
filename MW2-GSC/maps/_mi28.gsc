@@ -12,7 +12,7 @@ main(model, type) {
   build_localinit(::init_local);
   build_deathmodel("vehicle_mi-28_flying");
   build_deathmodel("vehicle_mi-28_flying_low");
-  build_drive( % mi28_rotors, undefined, 0, 3.0);
+  build_drive(%mi28_rotors, undefined, 0, 3.0);
 
   //Bullet damage Crash and Burn, spins out of control and explodes when it reaches destination
   build_deathfx("explosions/helicopter_explosion_secondary_small", "tag_engine_left", "havoc_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, true);
@@ -104,10 +104,7 @@ and these lines in your CSV:
 include,vehicle_mi-28_flying_mi28
 sound,vehicle_havoc,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi-28_flying"
-default:"vehicletype" "mi28"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_mi-28_flying"default:"vehicletype" "mi28"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_mi-28_flying_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -118,7 +115,5 @@ and these lines in your CSV:
 include,vehicle_mi-28_flying_mi28_low
 sound,vehicle_havoc,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi-28_flying_low"
-default:"vehicletype" "mi28"
-default:"script_team" "allies"
+defaultmdl="vehicle_mi-28_flying_low"default:"vehicletype" "mi28"default:"script_team" "allies"
 */

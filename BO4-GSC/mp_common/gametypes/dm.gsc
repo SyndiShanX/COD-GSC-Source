@@ -82,9 +82,7 @@ onscoreclosemusic() {
     scorethreshold = scorelimit * 0.9;
 
     for(i = 0; i < level.players.size; i++) {
-      scorecheck = [
-        [level._getplayerscore]
-      ](level.players[i]);
+      scorecheck = [[level._getplayerscore]](level.players[i]);
 
       if(scorecheck >= scorethreshold) {
         return;

@@ -141,9 +141,7 @@ function onroundswitch() {
   game["switchedsides"] = !game["switchedsides"];
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [
-        [level._setteamscore]
-      ](team, game["roundswon"][team]);
+      [[level._setteamscore]](team, game["roundswon"][team]);
     }
   }
 }
@@ -151,9 +149,7 @@ function onroundswitch() {
 function onroundendgame(roundwinner) {
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [
-        [level._setteamscore]
-      ](team, game["roundswon"][team]);
+      [[level._setteamscore]](team, game["roundswon"][team]);
     }
     winner = globallogic::determineteamwinnerbygamestat("roundswon");
   } else {
@@ -172,9 +168,7 @@ function onscoreclosemusic() {
     topscore = 0;
     runnerupscore = 0;
     foreach(team in level.teams) {
-      score = [
-        [level._getteamscore]
-      ](team);
+      score = [[level._getteamscore]](team);
       if(score > topscore) {
         runnerupscore = topscore;
         topscore = score;

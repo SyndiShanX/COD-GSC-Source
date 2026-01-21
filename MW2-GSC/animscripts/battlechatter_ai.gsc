@@ -331,8 +331,7 @@ init_aiBattleChatter() {
 
   /*-------- ALLOWED THREAT CALLOUTS --------
   Here we set up the types of threat callouts that this AI is allowed to use.
-   - these should always match the values that index the anim.threatCallouts[] array,
-   which is set up in battlechatter::init_battleChatter()
+   - these should always match the values that index the anim.threatCallouts[] array, which is set up in battlechatter::init_battleChatter()
   ------------------------------------------*/
   self.allowedCallouts = [];
 
@@ -374,8 +373,7 @@ init_aiBattleChatter() {
     self.flavorbursts = false;
   }
 
-  // doesn't impact friendlyfire warnings normally played when battlechatter is on,
-  //just whether it plays when battlechatter is otherwise turned off
+  // doesn't impact friendlyfire warnings normally played when battlechatter is on, //just whether it plays when battlechatter is otherwise turned off
   if(level.friendlyfire_warnings) {
     self set_friendlyfire_warnings(true);
   } else {
@@ -1146,12 +1144,7 @@ custom_battlechatter_init_valid_phrases() {
   // when this list changes, update the documentation in
   //_utility::custom_battlechatter to reflect it!
   phrases = [];
-  phrases[phrases.size] = "order_move_combat"; // "Move move move!"
-  phrases[phrases.size] = "order_move_noncombat"; // "Move out."
-  phrases[phrases.size] = "order_action_coverme"; // "Covering fire!"
-  phrases[phrases.size] = "inform_reloading"; // "Reloading!"
-
-  level.customBCS_validPhrases = phrases;
+  phrases[phrases.size] = "order_move_combat"; // "Move move move!"phrases[phrases.size] = "order_move_noncombat"; // "Move out."phrases[phrases.size] = "order_action_coverme"; // "Covering fire!"phrases[phrases.size] = "inform_reloading"; // "Reloading!"level.customBCS_validPhrases = phrases;
 }
 
 custom_battlechatter_validate_phrase(string) {

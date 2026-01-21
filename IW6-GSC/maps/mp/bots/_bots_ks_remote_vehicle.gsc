@@ -156,8 +156,7 @@ bot_draw_debug_heli_nodes(nodes) {
             link_color = (0, 1, 1);
             if(draw_debug_heli_nodes_with_vanguard_info) {
               if(current_nodes[i].valid_for_vanguard && neighbor_node.valid_for_vanguard) {
-                if(!bot_vectors_are_equal(current_nodes[i].origin, current_nodes[i].vanguard_origin) ||
-                  !bot_vectors_are_equal(neighbor_node.origin, neighbor_node.vanguard_origin)) {
+                if(!bot_vectors_are_equal(current_nodes[i].origin, current_nodes[i].vanguard_origin) ||    !bot_vectors_are_equal(neighbor_node.origin, neighbor_node.vanguard_origin)) {
                   line(current_nodes[i].vanguard_origin, neighbor_node.vanguard_origin, link_color, 1.0, true);
                   link_color = (1, 0, 0);
                 }
@@ -1872,9 +1871,7 @@ bot_control_heli_main_move_loop(type, rides_on_mesh) {
   while(self[[level.bot_ks_funcs["isUsing"][type]]]()) {
     if(GetTime() > self.next_goal_time && state == "needs_new_goal") {
       prev_node = current_node;
-      current_node = [
-        [level.bot_ks_funcs["heli_pick_node"][type]]
-      ](current_node);
+      current_node = [[level.bot_ks_funcs["heli_pick_node"][type]]](current_node);
       current_target = undefined;
       if(isDefined(current_node)) {
         current_node_origin = [[level.bot_ks_funcs["heli_node_get_origin"][type]]](current_node);
@@ -1965,9 +1962,7 @@ get_random_outside_target() {
     target_loc = random_node.origin;
   } else {
     if(isDefined(level.teleportGetActiveNodesFunc))
-      all_nodes = [
-        [level.teleportGetActiveNodesFunc]
-      ]();
+      all_nodes = [[level.teleportGetActiveNodesFunc]]();
     else
       all_nodes = GetAllNodes();
     num_picked = 0;

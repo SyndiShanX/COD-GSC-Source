@@ -634,8 +634,7 @@ spawnPlayer(fauxSpawn) {
   //self logstring( "S " + self.origin[0] + " " + self.origin[1] + " " + self.origin[2] );
 
   // give "connected" handlers a chance to start
-  // many of these start onPlayerSpawned handlers which rely on the "spawned_player"
-  // notify which can happen on the same frame as the "connected" notify
+  // many of these start onPlayerSpawned handlers which rely on the "spawned_player"// notify which can happen on the same frame as the "connected" notify
   waittillframeend;
 
   self notify("spawned_player");
@@ -694,8 +693,7 @@ respawn_asSpectator(origin, angles) {
 in_spawnSpectator(origin, angles) {
   self setSpawnVariables();
 
-  // don't clear lower message if not actually a spectator,
-  // because it probably has important information like when we'll spawn
+  // don't clear lower message if not actually a spectator, // because it probably has important information like when we'll spawn
   if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator" && !level.gameEnded)
     self clearLowerMessage("spawn_info");
 
@@ -932,37 +930,18 @@ initClientDvars() {
     setDvar("cg_hudGrenadeIconMaxRangeFrag", 0);
   }
 
-  self setClientDvars("cg_drawSpectatorMessages", 1,
-    "g_compassShowEnemies", getDvar("scr_game_forceuav"),
-    "cg_scoreboardPingGraph", 1);
+  self setClientDvars("cg_drawSpectatorMessages", 1, "g_compassShowEnemies", getDvar("scr_game_forceuav"), "cg_scoreboardPingGraph", 1);
 
   if(level.splitScreen) {
-    self setClientDvars("cg_hudGrenadeIconHeight", "37.5",
-      "cg_hudGrenadeIconWidth", "37.5",
-      "cg_hudGrenadeIconOffset", "75",
-      "cg_hudGrenadePointerHeight", "18",
-      "cg_hudGrenadePointerWidth", "37.5",
-      "cg_hudGrenadePointerPivot", "18 40.5",
-      "cg_fovscale", "0.75");
+    self setClientDvars("cg_hudGrenadeIconHeight", "37.5", "cg_hudGrenadeIconWidth", "37.5", "cg_hudGrenadeIconOffset", "75", "cg_hudGrenadePointerHeight", "18", "cg_hudGrenadePointerWidth", "37.5", "cg_hudGrenadePointerPivot", "18 40.5", "cg_fovscale", "0.75");
   } else {
-    self setClientDvars("cg_hudGrenadeIconHeight", "25",
-      "cg_hudGrenadeIconWidth", "25",
-      "cg_hudGrenadeIconOffset", "50",
-      "cg_hudGrenadePointerHeight", "12",
-      "cg_hudGrenadePointerWidth", "25",
-      "cg_hudGrenadePointerPivot", "12 27");
+    self setClientDvars("cg_hudGrenadeIconHeight", "25", "cg_hudGrenadeIconWidth", "25", "cg_hudGrenadeIconOffset", "50", "cg_hudGrenadePointerHeight", "12", "cg_hudGrenadePointerWidth", "25", "cg_hudGrenadePointerPivot", "12 27");
   }
 
   if(getGametypeNumLives()) {
-    self setClientDvars("cg_deadChatWithDead", 1,
-      "cg_deadChatWithTeam", 0,
-      "cg_deadHearTeamLiving", 0,
-      "cg_deadHearAllLiving", 0);
+    self setClientDvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0);
   } else {
-    self setClientDvars("cg_deadChatWithDead", 0,
-      "cg_deadChatWithTeam", 1,
-      "cg_deadHearTeamLiving", 1,
-      "cg_deadHearAllLiving", 0);
+    self setClientDvars("cg_deadChatWithDead", 0, "cg_deadChatWithTeam", 1, "cg_deadHearTeamLiving", 1, "cg_deadHearAllLiving", 0);
   }
 
   if(level.teamBased)

@@ -20,10 +20,10 @@ set_vehicle_anims(positions) {
   positions[1].vehicle_getinanim_clear = 0;
   positions[1].vehicle_getoutsound = "pavelow_door_open";
   positions[1].vehicle_getinsound = "pavelow_door_close";
-  positions[1].delay = getanimlength( % v_crew_pavelow_doors_open) - 1.7;
-  positions[2].delay = getanimlength( % v_crew_pavelow_doors_open) - 1.7;
-  positions[3].delay = getanimlength( % v_crew_pavelow_doors_open) - 1.7;
-  positions[4].delay = getanimlength( % v_crew_pavelow_doors_open) - 1.7;
+  positions[1].delay = getanimlength(%v_crew_pavelow_doors_open) - 1.7;
+  positions[2].delay = getanimlength(%v_crew_pavelow_doors_open) - 1.7;
+  positions[3].delay = getanimlength(%v_crew_pavelow_doors_open) - 1.7;
+  positions[4].delay = getanimlength(%v_crew_pavelow_doors_open) - 1.7;
   return positions;
 }
 

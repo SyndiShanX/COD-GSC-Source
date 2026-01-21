@@ -10,7 +10,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_m1a2_abrams_iw6", "vehicle_m1a2_abrams_iw6_dmg", 0.25);
   maps\_vehicle::build_deathfx("vfx/gameplay/explosions/vehicle/vfx_big_tank_explosion", "tag_deathfx", "exp_armor_vehicle", undefined, undefined, undefined, 0, undefined, undefined, undefined, 10);
-  maps\_vehicle::build_drive( % abrams_movement, % abrams_movement_backwards, 10);
+  maps\_vehicle::build_drive(%abrams_movement, %abrams_movement_backwards, 10);
   maps\_vehicle::build_exhaust("fx/distortion/abrams_exhaust");
   maps\_vehicle::build_deckdust("fx/dust/abrams_deck_dust");
   maps\_vehicle::build_team("allies");

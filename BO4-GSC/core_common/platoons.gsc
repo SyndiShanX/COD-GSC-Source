@@ -13,9 +13,7 @@ autoexec __init__system__() {
 
 __init__() {
   level.platoon = {
-    #count: isDefined(getgametypesetting(#"platooncount")) ? getgametypesetting(#"platooncount") : 0,
-    #assignment: isDefined(getgametypesetting(#"platoonassignment")) ? getgametypesetting(#"platoonassignment") : 0,
-    #max_players: 0
+    #count: isDefined(getgametypesetting(#"platooncount")) ? getgametypesetting(#"platooncount") : 0, #assignment: isDefined(getgametypesetting(#"platoonassignment")) ? getgametypesetting(#"platoonassignment") : 0, #max_players: 0
   };
   level.platoon.max_players = function_bb1ab64b();
 
@@ -40,10 +38,7 @@ on_start_gametype() {
   for(var_aada11e0 = 1; var_aada11e0 <= level.platoon.count; var_aada11e0++) {
     platoon_name = "platoon_" + var_aada11e0;
     level.platoons[hash("platoon_" + var_aada11e0)] = {
-      #name: platoon_name,
-      #eliminated: 0,
-      #var_9dd75dad: 0,
-      #player_count: 0
+      #name: platoon_name, #eliminated: 0, #var_9dd75dad: 0, #player_count: 0
     };
   }
 }

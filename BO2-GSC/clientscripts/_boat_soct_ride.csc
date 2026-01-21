@@ -104,9 +104,9 @@ set_soct_boost(enable) {
     return;
   }
   if(enable == 1)
-    level.vh_player_soct.viewarms setanim( % int_boat_boost_press, 1, 0.1, 3);
+    level.vh_player_soct.viewarms setanim(%int_boat_boost_press, 1, 0.1, 3);
   else
-    level.vh_player_soct.viewarms clearanim( % int_boat_boost_press, 0.1);
+    level.vh_player_soct.viewarms clearanim(%int_boat_boost_press, 0.1);
 }
 
 #using_animtree("vehicles");
@@ -122,9 +122,9 @@ update_wheels_animation(localclientnum) {
       return;
     }
     self waittill("veh_inair");
-    self setanim( % v_soct_wheels_up, 1, 0.2, 1);
+    self setanim(%v_soct_wheels_up, 1, 0.2, 1);
     self waittill("veh_landed");
-    self clearanim( % v_soct_wheels_up, 0.5);
+    self clearanim(%v_soct_wheels_up, 0.5);
   }
 }
 

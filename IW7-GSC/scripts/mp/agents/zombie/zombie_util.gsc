@@ -842,9 +842,7 @@ shouldignoreent(var_0) {
   }
 
   if(isDefined(level.killingtimevalidationcheck)) {
-    if(![
-        [level.killingtimevalidationcheck]
-      ](self, var_0)) {
+    if(![[level.killingtimevalidationcheck]](self, var_0)) {
       return 0;
     }
   }
@@ -854,9 +852,7 @@ shouldignoreent(var_0) {
   }
 
   if(isDefined(level.var_1002D)) {
-    if([
-        [level.var_1002D]
-      ](var_0)) {
+    if([[level.var_1002D]](var_0)) {
       return 1;
     }
   }

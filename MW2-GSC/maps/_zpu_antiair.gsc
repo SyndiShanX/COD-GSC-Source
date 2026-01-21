@@ -58,9 +58,7 @@ maps\_zpu_antiair::main( "vehicle_zpu4" );
 and these lines in your CSV:
 include,vehicle_zpu4_zpu_antiair
 
-defaultmdl="vehicle_zpu4"
-default:"vehicletype" "zpu_antiair"
-*/
+defaultmdl="vehicle_zpu4"default:"vehicletype" "zpu_antiair"*/
 
 /*QUAKED script_vehicle_zpu4_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -70,6 +68,5 @@ maps\_zpu_antiair::main( "vehicle_zpu4_low" );
 and these lines in your CSV:
 include,vehicle_zpu4_low_zpu_antiair
 
-defaultmdl="vehicle_zpu4_low"
-default:"vehicletype" "zpu_antiair"
+defaultmdl="vehicle_zpu4_low"default:"vehicletype" "zpu_antiair"
 */

@@ -1342,24 +1342,7 @@ trigger_fog(trigger) {
       if(player istouching(trigger)) {
         if(!IsSplitscreen()) {
           if(dofog && (!isDefined(player.fog_trigger_current) || player.fog_trigger_current != trigger)) {
-            player SetVolFog(trigger.script_start_dist,
-              trigger.script_halfway_dist,
-              trigger.script_halfway_height,
-              trigger.script_base_height,
-              trigger.script_color[0],
-              trigger.script_color[1],
-              trigger.script_color[2],
-              trigger.script_color_scale,
-              trigger.script_sun_color[0],
-              trigger.script_sun_color[1],
-              trigger.script_sun_color[2],
-              trigger.script_sun_direction[0],
-              trigger.script_sun_direction[1],
-              trigger.script_sun_direction[2],
-              trigger.script_sun_start_ang,
-              trigger.script_sun_stop_ang,
-              trigger.script_transition_time,
-              trigger.script_max_fog_opacity);
+            player SetVolFog(trigger.script_start_dist, trigger.script_halfway_dist, trigger.script_halfway_height, trigger.script_base_height, trigger.script_color[0], trigger.script_color[1], trigger.script_color[2], trigger.script_color_scale, trigger.script_sun_color[0], trigger.script_sun_color[1], trigger.script_sun_color[2], trigger.script_sun_direction[0], trigger.script_sun_direction[1], trigger.script_sun_direction[2], trigger.script_sun_start_ang, trigger.script_sun_stop_ang, trigger.script_transition_time, trigger.script_max_fog_opacity);
           }
         }
         if((isDefined(trigger.script_vision) && isDefined(trigger.script_vision_time)) && (!isDefined(player.fog_trigger_current) || player.fog_trigger_current != trigger)) {

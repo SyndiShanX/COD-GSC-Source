@@ -209,7 +209,7 @@ chamber_rocks_think() {
     self setflaggedanim("tomb_fxanim", level.scr_anim["fxanim_props_dlc4"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
     self waittillmatch("tomb_fxanim", "end");
     self hide();
-    self clearanim( % root, 0);
+    self clearanim(%root, 0);
     self show();
     wait(randomfloatrange(10, 30));
   }

@@ -535,9 +535,7 @@ bombs() {
     bombzone.waypoint = var_69bc8821;
 
     if(isDefined(level.bomb_zone_fixup)) {
-      [
-        [level.bomb_zone_fixup]
-      ](bombzone);
+      [[level.bomb_zone_fixup]](bombzone);
     }
 
     if(!level.multibomb) {

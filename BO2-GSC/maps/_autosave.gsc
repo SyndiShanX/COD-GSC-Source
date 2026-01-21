@@ -102,9 +102,7 @@ autosave_name_think(trigger) {
   trigger trigger_wait();
 
   if(isDefined(level.customautosavecheck)) {
-    if(![
-        [level.customautosavecheck]
-      ]())
+    if(![[level.customautosavecheck]]())
       return;
   }
 

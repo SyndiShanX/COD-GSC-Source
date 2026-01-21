@@ -304,10 +304,7 @@ lbSupport_watchOwnerDamage() {
     self.owner waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
     if(isPlayer(attacker)) {
-      if(attacker != self.owner &&
-        Distance2D(attacker.origin, self.origin) <= self.targettingRadius &&
-        !attacker _hasPerk("specialty_blindeye") &&
-        !(level.hardcoreMode && level.teamBased && attacker.team == self.team)) {
+      if(attacker != self.owner && Distance2D(attacker.origin, self.origin) <= self.targettingRadius && !attacker _hasPerk("specialty_blindeye") && !(level.hardcoreMode && level.teamBased && attacker.team == self.team)) {
         self SetLookAtEnt(attacker);
         if(isDefined(self.mgTurretLeft))
           self.mgTurretLeft SetTargetEntity(attacker);
@@ -387,10 +384,7 @@ lbSupport_handleDamage() {
     modifiedDamage = damage;
 
     if(IsPlayer(attacker)) {
-      if(attacker != self.owner &&
-        Distance2D(attacker.origin, self.origin) <= self.targettingRadius &&
-        !attacker _hasPerk("specialty_blindeye") &&
-        !(level.hardcoreMode && level.teamBased && attacker.team == self.team)) {
+      if(attacker != self.owner && Distance2D(attacker.origin, self.origin) <= self.targettingRadius && !attacker _hasPerk("specialty_blindeye") && !(level.hardcoreMode && level.teamBased && attacker.team == self.team)) {
         self SetLookAtEnt(attacker);
         if(isDefined(self.mgTurretLeft))
           self.mgTurretLeft SetTargetEntity(attacker);
@@ -675,10 +669,7 @@ lbSupport_burstFireStart() {
 
     for(i = 0; i < numShots; i++) {
       targetEnt = self GetTurretTarget(false);
-      if(isDefined(targetEnt) &&
-        (!isDefined(targetEnt.spawntime) || (gettime() - targetEnt.spawntime) / 1000 > 5) &&
-        (isDefined(targetEnt.team) && targetEnt.team != "spectator") &&
-        isReallyAlive(targetEnt)) {
+      if(isDefined(targetEnt) && (!isDefined(targetEnt.spawntime) || (gettime() - targetEnt.spawntime) / 1000 > 5) && (isDefined(targetEnt.team) && targetEnt.team != "spectator") && isReallyAlive(targetEnt)) {
         self.vehicle SetLookAtEnt(targetEnt);
         self ShootTurret();
       }

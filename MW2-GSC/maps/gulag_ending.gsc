@@ -408,8 +408,7 @@ start_endshow() {
   }
 
   /*
-  gulag_end_animatic_player"
-  gulag_end_animatic_soldier"
+  gulag_end_animatic_player"gulag_end_animatic_soldier"
   gulag_end_animatic_price" ]
   gulag_end_animatic_soap" ][
   */

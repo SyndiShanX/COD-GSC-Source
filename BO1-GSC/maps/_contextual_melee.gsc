@@ -394,42 +394,21 @@ get_info_set(which_set, by_type) {
 }
 
 setup_info() {
-  add_melee_sequence("default", "garrote", "stand", "stand", % int_contextual_melee_garrote, %
-    ai_contextual_melee_garrote);
-  add_melee_sequence("default", "garrote", "stand", "sit", % int_contextual_melee_garrotesit, %
-    ai_contextual_melee_garrotesit_death, %
-    ai_contextual_melee_garrotesit_idle, %
-    ai_contextual_melee_garrotesit_deathpose);
-  add_melee_sequence("default", "necksnap", "stand", "stand", % int_contextual_melee_necksnap, %
-    ai_contextual_melee_necksnap);
-  add_melee_sequence("default", "neckstab", "stand", "stand", % int_contextual_melee_neckstab, %
-    ai_contextual_melee_neckstab);
-  add_melee_sequence("default", "neckstab", "stand", "crouch", % int_contextual_melee_neckstabcrouch, %
-    ai_contextual_melee_neckstabcrouch_death, %
-    ai_contextual_melee_neckstabcrouch_idle);
-  add_melee_sequence("quick", "garrote", "stand", "stand", % int_contextual_melee_garrote_quick, %
-    ai_contextual_melee_garrote_quick);
-  add_melee_sequence("quick", "garrote", "stand", "sit", % int_contextual_melee_garrotesit_quick, %
-    ai_contextual_melee_garrotesit_death_quick, %
-    ai_contextual_melee_garrotesit_idle, %
-    ai_contextual_melee_garrotesit_deathpose);
-  add_melee_sequence("quick", "necksnap", "stand", "stand", % int_contextual_melee_necksnap_quick, %
-    ai_contextual_melee_necksnap_quick);
-  add_melee_sequence("quick", "neckstab", "stand", "stand", % int_contextual_melee_neckstab_quick, %
-    ai_contextual_melee_neckstab_quick);
-  add_melee_sequence("quick", "neckstab", "stand", "crouch", % int_contextual_melee_neckstabcrouch_quick, %
-    ai_contextual_melee_neckstabcrouch_death_quick, %
-    ai_contextual_melee_neckstabcrouch_idle);
-  add_melee_sequence("quick", "neckstab", "crouch", "stand", % int_contextual_melee_crouch_neckstab_quick, %
-    ai_contextual_melee_crouch_neckstab_quick);
-  add_melee_sequence("quick", "kneekick", "stand", "stand", % int_contextual_melee_kneekick_quick, %
-    ai_contextual_melee_kneekick_quick);
-  add_melee_sequence("quick", "elbowhit", "stand", "stand", % int_contextual_melee_elbow_hit_quick, %
-    ai_contextual_melee_elbow_hit_quick);
-  add_melee_sequence("quick", "judochop", "stand", "stand", % int_contextual_melee_judochop_quick, %
-    ai_contextual_melee_judochop_quick);
-  add_melee_sequence("quick", "headpunch", "stand", "stand", % int_contextual_melee_headpunch_quick, %
-    ai_contextual_melee_headpunch_quick);
+  add_melee_sequence("default", "garrote", "stand", "stand", %int_contextual_melee_garrote, %ai_contextual_melee_garrote);
+  add_melee_sequence("default", "garrote", "stand", "sit", %int_contextual_melee_garrotesit, %ai_contextual_melee_garrotesit_death, %ai_contextual_melee_garrotesit_idle, %ai_contextual_melee_garrotesit_deathpose);
+  add_melee_sequence("default", "necksnap", "stand", "stand", %int_contextual_melee_necksnap, %ai_contextual_melee_necksnap);
+  add_melee_sequence("default", "neckstab", "stand", "stand", %int_contextual_melee_neckstab, %ai_contextual_melee_neckstab);
+  add_melee_sequence("default", "neckstab", "stand", "crouch", %int_contextual_melee_neckstabcrouch, %ai_contextual_melee_neckstabcrouch_death, %ai_contextual_melee_neckstabcrouch_idle);
+  add_melee_sequence("quick", "garrote", "stand", "stand", %int_contextual_melee_garrote_quick, %ai_contextual_melee_garrote_quick);
+  add_melee_sequence("quick", "garrote", "stand", "sit", %int_contextual_melee_garrotesit_quick, %ai_contextual_melee_garrotesit_death_quick, %ai_contextual_melee_garrotesit_idle, %ai_contextual_melee_garrotesit_deathpose);
+  add_melee_sequence("quick", "necksnap", "stand", "stand", %int_contextual_melee_necksnap_quick, %ai_contextual_melee_necksnap_quick);
+  add_melee_sequence("quick", "neckstab", "stand", "stand", %int_contextual_melee_neckstab_quick, %ai_contextual_melee_neckstab_quick);
+  add_melee_sequence("quick", "neckstab", "stand", "crouch", %int_contextual_melee_neckstabcrouch_quick, %ai_contextual_melee_neckstabcrouch_death_quick, %ai_contextual_melee_neckstabcrouch_idle);
+  add_melee_sequence("quick", "neckstab", "crouch", "stand", %int_contextual_melee_crouch_neckstab_quick, %ai_contextual_melee_crouch_neckstab_quick);
+  add_melee_sequence("quick", "kneekick", "stand", "stand", %int_contextual_melee_kneekick_quick, %ai_contextual_melee_kneekick_quick);
+  add_melee_sequence("quick", "elbowhit", "stand", "stand", %int_contextual_melee_elbow_hit_quick, %ai_contextual_melee_elbow_hit_quick);
+  add_melee_sequence("quick", "judochop", "stand", "stand", %int_contextual_melee_judochop_quick, %ai_contextual_melee_judochop_quick);
+  add_melee_sequence("quick", "headpunch", "stand", "stand", %int_contextual_melee_headpunch_quick, %ai_contextual_melee_headpunch_quick);
   level.scr_animtree["player_hands_contextual_melee"] = #animtree;
   level.scr_model["player_hands_contextual_melee"] = level.player_interactive_hands;
   level.scr_animtree["player_model_contextual_melee"] = #animtree;
@@ -562,12 +541,12 @@ setup_props() {
   add_melee_weapon("default", "neckstab", "stand", "crouch", "weapon_parabolic_knife");
   add_melee_weapon("quick", "neckstab", "stand", "stand", "weapon_parabolic_knife");
   add_melee_weapon("quick", "neckstab", "stand", "crouch", "weapon_parabolic_knife");
-  add_melee_weapon("default", "garrote", "stand", "stand", "t5_weapon_garrot_wire", % prop_contextual_melee_garrote_garrotewire);
-  add_melee_weapon("default", "garrote", "stand", "sit", "t5_weapon_garrot_wire", % prop_contextual_melee_garrotesit_garrotewire);
-  add_melee_weapon("quick", "garrote", "stand", "stand", "t5_weapon_garrot_wire", % prop_contextual_melee_garrote_garrotewire_quick);
-  add_melee_weapon("quick", "garrote", "stand", "sit", "t5_weapon_garrot_wire", % prop_contextual_melee_garrotesit_garrotewire_quick);
-  add_melee_prop_anim("default", "garrote", "stand", "sit", % prop_contextual_melee_garrotesit_chair);
-  add_melee_prop_anim("quick", "garrote", "stand", "sit", % prop_contextual_melee_garrotesit_chair_quick);
+  add_melee_weapon("default", "garrote", "stand", "stand", "t5_weapon_garrot_wire", %prop_contextual_melee_garrote_garrotewire);
+  add_melee_weapon("default", "garrote", "stand", "sit", "t5_weapon_garrot_wire", %prop_contextual_melee_garrotesit_garrotewire);
+  add_melee_weapon("quick", "garrote", "stand", "stand", "t5_weapon_garrot_wire", %prop_contextual_melee_garrote_garrotewire_quick);
+  add_melee_weapon("quick", "garrote", "stand", "sit", "t5_weapon_garrot_wire", %prop_contextual_melee_garrotesit_garrotewire_quick);
+  add_melee_prop_anim("default", "garrote", "stand", "sit", %prop_contextual_melee_garrotesit_chair);
+  add_melee_prop_anim("quick", "garrote", "stand", "sit", %prop_contextual_melee_garrotesit_chair_quick);
 }
 
 add_melee_weapon(set, type, player_context, ai_context, weapon_name, weapon_anim) {

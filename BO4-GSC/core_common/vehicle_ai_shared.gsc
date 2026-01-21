@@ -352,8 +352,7 @@ waittill_asm_terminated() {
   self endon(#"end_asm_terminated_thread");
   self waittill(#"asm_terminated");
   self notify(#"asm_complete", {
-    #substate: "__terminated__"
-  });
+    #substate: "__terminated__"});
 }
 
 waittill_asm_timeout(timeout) {
@@ -362,8 +361,7 @@ waittill_asm_timeout(timeout) {
   self endon(#"end_asm_timeout_thread");
   wait timeout;
   self notify(#"asm_complete", {
-    #substate: "__timeout__"
-  });
+    #substate: "__timeout__"});
 }
 
 waittill_asm_complete(substate_to_wait, timeout = 10) {
@@ -674,9 +672,7 @@ shared_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     minempdowntime = 0.8 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 0);
     maxempdowntime = 1.2 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 1);
     self notify(#"emped", {
-      #param0: randomfloatrange(minempdowntime, maxempdowntime),
-      #param1: eattacker,
-      #param2: einflictor
+      #param0: randomfloatrange(minempdowntime, maxempdowntime), #param1: eattacker, #param2: einflictor
     });
   }
 
@@ -1293,9 +1289,7 @@ defaultstate_off_exit(params) {
 
   if(isDefined(level.enable_thermal)) {
     if(self get_next_state() !== "death") {
-      [
-        [level.enable_thermal]
-      ]();
+      [[level.enable_thermal]]();
     }
   }
 

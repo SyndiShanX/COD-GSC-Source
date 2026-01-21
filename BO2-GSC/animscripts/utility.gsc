@@ -17,8 +17,8 @@
 #using_animtree("generic_human");
 
 initanimtree(animscript) {
-  self clearanim( % body, 0.3);
-  self setanim( % body, 1, 0);
+  self clearanim(%body, 0.3);
+  self setanim(%body, 1, 0);
 
   if(animscript != "pain" && animscript != "death" && animscript != "react")
     self.a.special = "none";
@@ -30,7 +30,7 @@ initanimtree(animscript) {
   self.a.aimweight_transframes = 0;
   self.a.aimweight_t = 0;
   self.a.isaiming = 0;
-  self setanim( % shoot, 0, 0.2, 1);
+  self setanim(%shoot, 0, 0.2, 1);
   isincombat();
   assert(isDefined(animscript), "Animscript not specified in initAnimTree");
   self.a.prevscript = self.a.script;
@@ -48,9 +48,9 @@ updateanimpose() {
       self exitpronewrapper(0.5);
 
     if(self.desired_anim_pose == "prone") {
-      self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+      self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
       self enterpronewrapper(0.5);
-      self setanimknoball(animarray("straight_level", "combat"), % body, 1, 0.1, 1);
+      self setanimknoball(animarray("straight_level", "combat"), %body, 1, 0.1, 1);
     }
   }
 

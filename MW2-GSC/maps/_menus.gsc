@@ -129,8 +129,7 @@ init() {
 
   action = setupAction(::loadMap, "ac130");
   description = spawnStruct();
-  // 30%
-  description.display = &"MENU_30";
+  // 30% description.display = &"MENU_30";
   description.xPos = 240;
   description.yPos = 100;
   // AC130

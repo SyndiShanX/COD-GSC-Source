@@ -22,8 +22,7 @@ main() {
   setSpecialLoadouts();
 
   level.teamBased = true;
-  // don't sit there waiting for both teams to contain players,
-  // as everyone starts a survivor
+  // don't sit there waiting for both teams to contain players, // as everyone starts a survivor
   level.prematchWaitForTeams = false;
   level.onPrecacheGameType = ::onPrecacheGameType;
   level.onStartGameType = ::onStartGameType;

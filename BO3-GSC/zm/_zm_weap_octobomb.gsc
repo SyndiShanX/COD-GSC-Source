@@ -225,9 +225,7 @@ function player_throw_octobomb(e_grenade, num_attractors, max_attract_dist, attr
   }
   if(b_valid_poi && e_grenade.navmesh_check) {
     if(isDefined(level.octobomb_attack_callback) && isfunctionptr(level.octobomb_attack_callback)) {
-      [
-        [level.octobomb_attack_callback]
-      ](e_grenade);
+      [[level.octobomb_attack_callback]](e_grenade);
     }
     e_grenade move_away_from_edges();
     e_grenade zm_utility::create_zombie_point_of_interest(max_attract_dist, num_attractors, 10000);
@@ -404,9 +402,7 @@ function do_tentacle_burst(e_player, is_upgraded) {
     }
     a_ai_potential_targets = zombie_utility::get_zombie_array();
     if(isDefined(level.octobomb_targets)) {
-      a_ai_potential_targets = [
-        [level.octobomb_targets]
-      ](a_ai_potential_targets);
+      a_ai_potential_targets = [[level.octobomb_targets]](a_ai_potential_targets);
     }
     a_ai_targets = arraysortclosest(a_ai_potential_targets, self.origin, a_ai_potential_targets.size, 0, 100);
     foreach(ai_target in a_ai_targets) {
@@ -482,9 +478,7 @@ function do_tentacle_grab(e_player, is_upgraded) {
     wait(n_wait_grab);
     a_ai_potential_targets = zombie_utility::get_zombie_array();
     if(isDefined(level.octobomb_targets)) {
-      a_ai_potential_targets = [
-        [level.octobomb_targets]
-      ](a_ai_potential_targets);
+      a_ai_potential_targets = [[level.octobomb_targets]](a_ai_potential_targets);
     }
     a_ai_targets = arraysort(a_ai_potential_targets, self.origin, 1, a_ai_potential_targets.size, 112);
     n_random_x = randomfloatrange(-5, 5);
@@ -734,9 +728,7 @@ function private setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_b
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
-      [
-        [func]
-      ](n_dvar);
+      [[func]](n_dvar);
       setdvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();

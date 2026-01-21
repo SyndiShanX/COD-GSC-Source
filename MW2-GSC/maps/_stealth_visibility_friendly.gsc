@@ -25,8 +25,7 @@ friendly_visibility_logic() {
 
   current_stance_func = self._stealth.logic.current_stance_func;
 
-  //for right now - we only do this for player...the system actually looks good doing it for player only,
-  //but maybe in the future we'll want to change this...if we do theres a bunch of evaluation stuff
+  //for right now - we only do this for player...the system actually looks good doing it for player only, //but maybe in the future we'll want to change this...if we do theres a bunch of evaluation stuff
   //based on stance in the _behavior script that will have to be changed.
   if(isPlayer(self))
     self thread player_movespeed_calc_loop();

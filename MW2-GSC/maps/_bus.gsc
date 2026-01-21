@@ -9,7 +9,7 @@
 main(model, type) {
   build_template("bus", model, type);
   build_localinit(::init_local);
-  build_drive( % bus_driving_idle_forward, % bus_driving_idle_backward, 10);
+  build_drive(%bus_driving_idle_forward, %bus_driving_idle_backward, 10);
   build_treadfx();
   build_life(999, 500, 1500);
 

@@ -620,9 +620,7 @@ function larry_the_limper() {
   while(true) {
     if(self.player_speed > 1) {
       var_e3e6bb68 = var_d0f99889[randomint(var_d0f99889.size)];
-      [
-        [var_e3e6bb68]
-      ]();
+      [[var_e3e6bb68]]();
       larry_the_limper_tweaktech();
       self playersetgroundreferenceent(self.var_ea4a62a);
       self limp_loop();

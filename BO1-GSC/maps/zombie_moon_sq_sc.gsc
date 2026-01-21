@@ -107,8 +107,7 @@ sam_reveal_richtofen_vox() {
 }
 
 room_sweeper() {
-  while(!is_player_valid(self) ||
-    (self UseButtonPressed() && self in_revive_trigger())) {
+  while(!is_player_valid(self) || (self UseButtonPressed() && self in_revive_trigger())) {
     wait(1.0);
   }
   level thread maps\_zombiemode_powerups::minigun_weapon_powerup(self, 90);

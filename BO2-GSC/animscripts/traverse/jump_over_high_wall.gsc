@@ -20,8 +20,8 @@ main() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
-  self clearanim( % stand_and_crouch, 0.1);
-  self setflaggedanimknoballrestart("diveanim", animarray("jump_over_high_wall", "move"), % body, 1, 0.1, 1);
+  self clearanim(%stand_and_crouch, 0.1);
+  self setflaggedanimknoballrestart("diveanim", animarray("jump_over_high_wall", "move"), %body, 1, 0.1, 1);
   self playSound("dive_wall");
   self waittillmatch("diveanim", "gravity on");
   self traversemode("nogravity");

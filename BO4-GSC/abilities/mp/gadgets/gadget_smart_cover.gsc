@@ -28,8 +28,7 @@ __init__() {
 onsmartcoverplaced(smartcover) {
   self battlechatter::function_bd715920(smartcover.weapon, undefined, smartcover.origin, smartcover);
   self callback::callback(#"hash_70eeb7d813f149b2", {
-    #owner: self,
-    #cover: smartcover.smartcover
+    #owner: self, #cover: smartcover.smartcover
   });
 }
 
@@ -45,8 +44,7 @@ function_a430cceb(attacker, weapon) {
   }
 
   self callback::callback(#"hash_15858698313c5f32", {
-    #owner: self.owner,
-    #cover: self
+    #owner: self.owner, #cover: self
   });
 }
 

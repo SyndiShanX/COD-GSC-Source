@@ -136,8 +136,7 @@ damage(trap) {
 
       bhtnactionstartevent(self, "electrocute");
       self notify(#"bhtn_action_notify", {
-        #action: "electrocute"
-      });
+        #action: "electrocute"});
       wait randomfloat(1.25);
       self playSound(#"hash_5183b687ad8d715a");
     }
@@ -149,8 +148,7 @@ damage(trap) {
   }
 
   level notify(#"trap_kill", {
-    #victim: self,
-    #trap: trap
+    #victim: self, #trap: trap
   });
   self dodamage(self.health + 666, self.origin, trap);
 }

@@ -88,8 +88,7 @@ placeSpawnPoints(spawnPointName) {
 
   for(index = 0; index < spawnPoints.size; index++) {
     spawnPoints[index] spawnPointInit();
-    // don't add this spawnpoint to level.spawnpoints,
-    // because it's an unimportant one that we don't want to do sight traces to
+    // don't add this spawnpoint to level.spawnpoints, // because it's an unimportant one that we don't want to do sight traces to
 
     spawnPoints[index].fakeclassname = spawnPointName;
     level.extraspawnpointsused[level.extraspawnpointsused.size] = spawnPoints[index];
@@ -280,8 +279,7 @@ getBestWeightedSpawnpoint(spawnpoints) {
 
   assert(spawnpoints.size > 0);
 
-  for(
-    try = 0;;
+  for(try = 0;;
     try ++) {
     bestspawnpoints = [];
     bestspawnpoints[0] = spawnpoints[0];
@@ -301,8 +299,7 @@ getBestWeightedSpawnpoint(spawnpoints) {
     assert(bestspawnpoints.size > 0);
     bestspawnpoint = bestspawnpoints[randomint(bestspawnpoints.size)];
 
-    if(
-      try >= maxSightTracedSpawnpoints) {
+    if(try >= maxSightTracedSpawnpoints) {
       println("Spawning " + self.name + " at spawnpoint " + bestspawnpoint.origin + " because the " + maxSightTracedSpawnpoints + " best spawnpoints failed last minute sight trace tests.");
       /# DumpSpawnData( spawnpoints, bestspawnpoint );
       return bestspawnpoint;
@@ -717,8 +714,7 @@ getSpawnpoint_DM(spawnpoints) {
       // if(wellDistancedAmount < 0) wellDistancedAmount = 0;
 
       // wellDistancedAmount is between -inf and 1, 1 being best (likely around 0 to 1)
-      // nearbyBadAmount is between 0 and inf,
-      // and it is very important that we get a bad weight if we have a high nearbyBadAmount.
+      // nearbyBadAmount is between 0 and inf, // and it is very important that we get a bad weight if we have a high nearbyBadAmount.
 
       spawnpoints[i].weight = wellDistancedAmount - nearbyBadAmount * 2 + randomfloat(.2);
     }
@@ -1072,8 +1068,7 @@ loopbotspawns() {
         killer = bots[randomint(bots.size)];
         victim = bots[randomint(bots.size)];
 
-        victim thread[[level.callbackPlayerDamage]](
-          killer, // eInflictor The entity that causes the damage.(e.g. a turret)
+        victim thread[[level.callbackPlayerDamage]](killer, // eInflictor The entity that causes the damage.(e.g. a turret)
           killer, // eAttacker The entity that is attacking.
           1000, // iDamage Integer specifying the amount of damage done
           0, // iDFlags Integer specifying flags that are to be applied to the damage
@@ -1082,8 +1077,7 @@ loopbotspawns() {
           (0, 0, 0), // vPoint The point the damage is from?
           (0, 0, 0), // vDir The direction of the damage
           "none", // sHitLoc The location of the hit
-          0 // psOffsetTime The time offset for the damage
-        );
+          0 // psOffsetTime The time offset for the damage);
       } else {
         numKills = getdvarint("scr_killbots");
         lastVictim = undefined;
@@ -1094,8 +1088,7 @@ loopbotspawns() {
           while(isDefined(lastVictim) && victim == lastVictim)
             victim = bots[randomint(bots.size)];
 
-          victim thread[[level.callbackPlayerDamage]](
-            killer, // eInflictor The entity that causes the damage.(e.g. a turret)
+          victim thread[[level.callbackPlayerDamage]](killer, // eInflictor The entity that causes the damage.(e.g. a turret)
             killer, // eAttacker The entity that is attacking.
             1000, // iDamage Integer specifying the amount of damage done
             0, // iDFlags Integer specifying flags that are to be applied to the damage
@@ -1104,8 +1097,7 @@ loopbotspawns() {
             (0, 0, 0), // vPoint The point the damage is from?
             (0, 0, 0), // vDir The direction of the damage
             "none", // sHitLoc The location of the hit
-            0 // psOffsetTime The time offset for the damage
-          );
+            0 // psOffsetTime The time offset for the damage);
 
           lastVictim = victim;
         }
@@ -1151,8 +1143,7 @@ spawnWeightDebug(spawnpoints, winner) {
         }
       }
 
-      // "bar graph"
-      height = 0;
+      // "bar graph"height = 0;
       if(spawnpoints[i].weight > -1000)
         height = (spawnpoints[i].weight + 1000) / 10;
 

@@ -108,20 +108,20 @@ func_98C6() {
   if(!isDefined(self.var_E873)) {
     self notify("stop_move_anim_update");
     self.var_12DEF = undefined;
-    self clearanim( % combatrun_backward, 0.2);
-    self clearanim( % combatrun_right, 0.2);
-    self clearanim( % combatrun_left, 0.2);
-    self clearanim( % w_aim_2, 0.2);
-    self clearanim( % w_aim_4, 0.2);
-    self clearanim( % w_aim_6, 0.2);
-    self clearanim( % w_aim_8, 0.2);
+    self clearanim(%combatrun_backward, 0.2);
+    self clearanim(%combatrun_right, 0.2);
+    self clearanim(%combatrun_left, 0.2);
+    self clearanim(%w_aim_2, 0.2);
+    self clearanim(%w_aim_4, 0.2);
+    self clearanim(%w_aim_6, 0.2);
+    self clearanim(%w_aim_8, 0.2);
     self.var_E873 = 1;
   }
 }
 
 func_11088() {
   if(isDefined(self.var_E873)) {
-    self clearanim( % run_n_gun, 0.2);
+    self clearanim(%run_n_gun, 0.2);
     self.var_E873 = undefined;
   }
 
@@ -142,7 +142,7 @@ func_E873(var_0) {
   var_5 = self.var_E878;
   var_6 = self.var_E876;
   if(!var_0 || squared(var_1) > var_4 * var_4) {
-    self clearanim( % add_fire, 0);
+    self clearanim(%add_fire, 0);
     if(squared(self.var_E879) < var_6 * var_6) {
       self.var_E879 = 0;
       self.var_E873 = undefined;
@@ -186,7 +186,7 @@ func_E873(var_0) {
     }
   }
 
-  self give_left_powers("runanim", % run_n_gun, 1, 0.3, 0.8);
+  self give_left_powers("runanim", %run_n_gun, 1, 0.3, 0.8);
   func_E80F(undefined);
   self.a.var_1C8D = gettime() + 500;
   if(var_0 && isplayer(self.enemy)) {
@@ -332,7 +332,7 @@ func_7FCF() {
 
 func_10B79() {
   var_0 = func_7FCF();
-  self setanimknob( % combatrun, 1, 0.5, var_0);
+  self setanimknob(%combatrun, 1, 0.5, var_0);
   var_1 = 0;
   var_2 = isDefined(self.var_E1B0) && gettime() - self.var_E1B0 < 100;
   if(var_2 && randomfloat(1) < self.a.reacttobulletchance) {
@@ -381,7 +381,7 @@ func_10B79() {
       return;
     }
 
-    self clearanim( % stair_transitions, 0.1);
+    self clearanim(%stair_transitions, 0.1);
     if(func_10087()) {
       var_4 = scripts\anim\utility::func_7FCC("sprint_short");
     } else {
@@ -455,7 +455,7 @@ func_6A6B() {
     }
   }
 
-  scripts\anim\track::func_11AF8( % w_aim_2, % w_aim_4, % w_aim_6, % w_aim_8, var_0);
+  scripts\anim\track::func_11AF8(%w_aim_2, %w_aim_4, %w_aim_6, %w_aim_8, var_0);
 }
 
 func_6318() {
@@ -617,7 +617,7 @@ func_BC1D() {
 
   self notify("stop_move_anim_update");
   self.var_12DEF = undefined;
-  self func_82E4("runanim", var_1, % body, 1, 0.1, self.moveplaybackrate);
+  self func_82E4("runanim", var_1, %body, 1, 0.1, self.moveplaybackrate);
   func_E80F(var_1);
   scripts\anim\shared::donotetracks("runanim");
   return 1;
@@ -625,14 +625,14 @@ func_BC1D() {
 
 func_10B7A() {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
+  self clearanim(%combatrun, 0.6);
   var_0 = func_7FCF();
   if(func_BC1D()) {
     return;
   }
 
-  self clearanim( % stair_transitions, 0.1);
-  self func_82A5( % combatrun, % body, 1, 0.2, var_0);
+  self clearanim(%stair_transitions, 0.1);
+  self func_82A5(%combatrun, %body, 1, 0.2, var_0);
   if(func_10086()) {
     var_1 = func_8150();
   } else {
@@ -662,7 +662,7 @@ func_10B7A() {
 
 func_4AA1() {
   self endon("movemode");
-  self func_82E3("runanim", self.var_4A9F, % body, 1, 0.4, self.moveplaybackrate);
+  self func_82E3("runanim", self.var_4A9F, %body, 1, 0.4, self.moveplaybackrate);
   func_E80F(self.var_4A9F);
   scripts\anim\shared::donotetracks("runanim");
 }
@@ -672,7 +672,7 @@ func_4AA0() {
   var_0 = func_7E47();
   self setanimknob(var_0, 1, 0.4);
   thread func_12ED3("crouchrun", var_0, scripts\anim\utility::func_B027("run", "crouch_b"), scripts\anim\utility::func_B027("run", "crouch_l"), scripts\anim\utility::func_B027("run", "crouch_r"));
-  self func_82E3("runanim", % crouchrun, % body, 1, 0.2, self.moveplaybackrate);
+  self func_82E3("runanim", %crouchrun, %body, 1, 0.2, self.moveplaybackrate);
   func_E80F(undefined);
   scripts\anim\notetracks::donotetracksfortime(0.2, "runanim");
 }
@@ -741,7 +741,7 @@ func_10B7B() {
     var_1 = var_1[randomint(var_1.size)];
   }
 
-  self func_82E4(var_0, var_1, % body, 1, 0.25);
+  self func_82E4(var_0, var_1, %body, 1, 0.25);
   func_E80F(var_1);
   self.var_12DF0 = 1;
   func_F7A9(scripts\anim\utility::func_7FCC("move_b"), scripts\anim\utility::func_7FCC("move_l"), scripts\anim\utility::func_7FCC("move_r"));
@@ -751,7 +751,7 @@ func_10B7B() {
 }
 
 func_E861() {
-  var_0 = self getscoreinfocategory( % walk_and_run_loops);
+  var_0 = self getscoreinfocategory(%walk_and_run_loops);
   var_1 = getanimlength(scripts\anim\utility::func_B027("run", "straight")) / 3;
   var_0 = var_0 * 3;
   if(var_0 > 3) {
@@ -782,7 +782,7 @@ func_F7A9(var_0, var_1, var_2, var_3) {
 }
 
 setcombatstandmoveanimweights(var_0) {
-  func_12ED3(var_0, % combatrun_forward, % combatrun_backward, % combatrun_left, % combatrun_right);
+  func_12ED3(var_0, %combatrun_forward, %combatrun_backward, %combatrun_left, %combatrun_right);
 }
 
 func_12ED3(var_0, var_1, var_2, var_3, var_4) {
@@ -886,7 +886,7 @@ func_10B77() {
 
 func_FF02(var_0, var_1, var_2, var_3, var_4, var_5) {
   self endon("movemode");
-  self func_82E4(var_0, var_1, % body, 1, 0.25);
+  self func_82E4(var_0, var_1, %body, 1, 0.25);
   func_E80F(var_1);
   self.var_12DF0 = 1;
   func_F7A9(scripts\anim\utility::func_7FCC("move_b"), scripts\anim\utility::func_7FCC("move_l"), scripts\anim\utility::func_7FCC("move_r"));
@@ -927,5 +927,5 @@ func_E80F(var_0) {
 
 func_E7E5() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

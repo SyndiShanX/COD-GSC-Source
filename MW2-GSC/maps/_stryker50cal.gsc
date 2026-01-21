@@ -11,7 +11,7 @@ main(model, type) {
   build_localinit(::init_local);
   build_deathmodel("vehicle_stryker_config2", "vehicle_stryker_config2_destroyed");
   build_deathfx("explosions/large_vehicle_explosion", undefined, "exp_armor_vehicle");
-  build_drive( % stryker_movement, % stryker_movement_backwards, 10);
+  build_drive(%stryker_movement, %stryker_movement_backwards, 10);
 
   build_treadfx();
   build_life(999, 500, 1500);
@@ -43,7 +43,5 @@ and these lines in your CSV:
 include,vehicle_stryker50cal
 sound,vehicle_stryker,vehicle_standard,all_sp
 
-defaultmdl="vehicle_stryker_config2"
-default:"vehicletype" "stryker50cal"
-default:"script_team" "allies"
+defaultmdl="vehicle_stryker_config2"default:"vehicletype" "stryker50cal"default:"script_team" "allies"
 */

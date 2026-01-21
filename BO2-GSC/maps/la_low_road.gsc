@@ -101,7 +101,7 @@ skipto_g20() {
   skipto_teleport("skipto_g20_group1", "squad");
   get_player_cougar();
   run_scene_and_delete("grouprappel_tbone");
-  level.veh_player_cougar setanimknob( % v_la_03_12_entercougar_cougar, 1, 0, 0);
+  level.veh_player_cougar setanimknob(%v_la_03_12_entercougar_cougar, 1, 0, 0);
   spawn_vehicles_from_targetname("low_road_vehicles");
   simple_spawn("g20_group1_ss");
   kill_spawnernum(101);
@@ -280,7 +280,7 @@ intro_scene() {
   level thread delay_police_car_damage();
   scene_wait("low_road_intro");
   wait_network_frame();
-  level.veh_player_cougar setanimknob( % v_la_03_12_entercougar_cougar, 1, 0, 0);
+  level.veh_player_cougar setanimknob(%v_la_03_12_entercougar_cougar, 1, 0, 0);
 }
 
 intro_cop1() {
@@ -1555,7 +1555,7 @@ g20_group_meetup() {
     level thread run_scene_and_delete("g20_group1_greet_harper");
     level delay_thread(0.5, ::run_scene_and_delete, "g20_group1_greet", 0.5);
     level.harper waittill("goal");
-    level.veh_player_cougar setanim( % v_la_03_12_entercougar_cougar, 1, 0, 1);
+    level.veh_player_cougar setanim(%v_la_03_12_entercougar_cougar, 1, 0, 1);
     scene_wait("g20_group1_greet_harper");
     level thread harper_set_friendly_fire();
     run_scene_and_delete("harper_wait_in_cougar");
@@ -1570,7 +1570,7 @@ harper_set_friendly_fire() {
 noharper_open_cougar_door() {
   if(flag("harper_dead")) {
     veh_player_cougar = get_player_cougar();
-    veh_player_cougar setanim( % v_la_03_12_entercougar_cougar, 1, 0, 1);
+    veh_player_cougar setanim(%v_la_03_12_entercougar_cougar, 1, 0, 1);
   }
 }
 

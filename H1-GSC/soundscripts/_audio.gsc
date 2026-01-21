@@ -1123,10 +1123,9 @@ set_damb_stringtable(var_0) {
 
 get_damb_stringtable() {
   if(!isDefined(level._audio.stringtables["damb"]))
-    return "soundtables\" + level.script + ".csv ";
+    return "soundtables\" + level.script + ".csv";
   else
-    return "soundtables\" + level._audio.stringtables["
-  damb "];
+    return "soundtables\" + level._audio.stringtables["damb "];
 }
 
 set_damb_component_stringtable(var_0) {
@@ -1135,10 +1134,9 @@ set_damb_component_stringtable(var_0) {
 
 get_damb_component_stringtable(var_0) {
   if(!isDefined(level._audio.stringtables["damb_comp"]))
-    return "soundtables\" + level.script + ".csv ";
+    return "soundtables\" + level.script + ".csv";
   else
-    return "soundtables\" + level._audio.stringtables["
-  damb_comp "];
+    return "soundtables\" + level._audio.stringtables["damb_comp "];
 }
 
 set_damb_loops_stringtable(var_0) {
@@ -1147,10 +1145,9 @@ set_damb_loops_stringtable(var_0) {
 
 get_damb_loops_stringtable(var_0) {
   if(!isDefined(level._audio.stringtables["damb_loops"]))
-    return "soundtables\" + level.script + ".csv ";
+    return "soundtables\" + level.script + ".csv";
   else
-    return "soundtables\" + level._audio.stringtables["
-  damb_loops "];
+    return "soundtables\" + level._audio.stringtables["damb_loops "];
 }
 
 set_reverb_stringtable(var_0) {
@@ -1159,10 +1156,9 @@ set_reverb_stringtable(var_0) {
 
 get_reverb_stringtable() {
   if(!isDefined(level._audio.stringtables["reverb"]))
-    return "soundtables\" + level.script + ".csv ";
+    return "soundtables\" + level.script + ".csv";
   else
-    return "soundtables\" + level._audio.stringtables["
-  reverb "];
+    return "soundtables\" + level._audio.stringtables["reverb "];
 }
 
 set_zone_stringtable(var_0) {
@@ -1171,10 +1167,9 @@ set_zone_stringtable(var_0) {
 
 get_zone_stringtable() {
   if(!isDefined(level._audio.stringtables["zone"]))
-    return "soundtables\" + level.script + ".csv ";
+    return "soundtables\" + level.script + ".csv";
   else
-    return "soundtables\" + level._audio.stringtables["
-  zone "];
+    return "soundtables\" + level._audio.stringtables["zone "];
 }
 
 aud_get_player_locamote_state() {

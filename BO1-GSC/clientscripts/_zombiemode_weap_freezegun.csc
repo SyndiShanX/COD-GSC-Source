@@ -251,20 +251,16 @@ freezegun_gib_override(type, locations) {
   for(i = 0; i < locations.size; i++) {
     switch (locations[i]) {
       case 0:
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_ARM) &&
-          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn1) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag1)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_ARM) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn1) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag1)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn1, level._gibbing_actor_models[self._gib_def].gibSpawnTag1, true, shatter);
         }
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_ARM) &&
-          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn2) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag2)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_ARM) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn2) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag2)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn2, level._gibbing_actor_models[self._gib_def].gibSpawnTag2, true, shatter);
         }
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_LEG) &&
-          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn3) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag3)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_RIGHT_LEG) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn3) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag3)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn3, level._gibbing_actor_models[self._gib_def].gibSpawnTag3, false, shatter);
         }
-        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_LEG) &&
-          isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn4) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag4)) {
+        if(!self clientscripts\_zombiemode::has_gibbed_piece(level._ZOMBIE_GIB_PIECE_INDEX_LEFT_LEG) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawn4) && isDefined(level._gibbing_actor_models[self._gib_def].gibSpawnTag4)) {
           self thread freezegun_do_gib(level._gibbing_actor_models[self._gib_def].gibSpawn4, level._gibbing_actor_models[self._gib_def].gibSpawnTag4, false, shatter);
         }
         self thread freezegun_do_gib_fx("J_SpineLower", shatter);

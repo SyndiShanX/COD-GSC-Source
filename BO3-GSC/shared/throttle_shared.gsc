@@ -56,9 +56,7 @@ class throttle {
 
   function private _updatethrottlethread(throttle) {
     while(isDefined(throttle)) {
-      [
-        [throttle]
-      ] - > _updatethrottle();
+      [[throttle]] - > _updatethrottle();
       wait(throttle.updaterate_);
     }
   }

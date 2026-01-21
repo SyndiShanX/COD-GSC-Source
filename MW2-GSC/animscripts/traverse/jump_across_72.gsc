@@ -22,7 +22,7 @@ main() {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
-  self setFlaggedAnimKnoballRestart("jumpanim", % jump_across_72, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("jumpanim", %jump_across_72, %body, 1, .1, 1);
   self waittillmatch("jumpanim", "gravity on");
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("jumpanim");

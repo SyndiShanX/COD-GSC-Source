@@ -299,8 +299,7 @@ medic_health_regen(dist_sqr) {
   do_dist_check = dist_sqr > 0.0;
   while(1) {
     foreach(player in level.players) {
-      if(isReallyAlive(player) &&
-        !isDefined(player.medic_regeneration)) {
+      if(isReallyAlive(player) && !isDefined(player.medic_regeneration)) {
         if(do_dist_check && DistanceSquared(self.origin, player.origin) > dist_sqr) {
           continue;
         }

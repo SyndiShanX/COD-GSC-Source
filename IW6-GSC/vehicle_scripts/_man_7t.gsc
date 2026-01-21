@@ -21,7 +21,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_unload_groups(::unload_groups);
   maps\_vehicle::build_light(var_2, "headlight_truck_left", "tag_headlight_left", "fx/misc/lighthaze", "headlights");
   maps\_vehicle::build_light(var_2, "headlight_truck_right", "tag_headlight_right", "fx/misc/lighthaze", "headlights");
-  maps\_vehicle::build_drive( % bm21_driving_idle_forward, % bm21_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%bm21_driving_idle_forward, %bm21_driving_idle_backward, 10);
 }
 
 set_vehicle_anims(var_0) {

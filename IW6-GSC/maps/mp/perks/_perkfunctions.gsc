@@ -953,11 +953,7 @@ deleteOnDeath(ent) {
 }
 
 GlowStickDamageListener(owner) {
-  self maps\mp\gametypes\_damage::monitorDamage(
-    100,
-    "tactical_insertion", ::GlowStickModifyDamage, ::GlowStickHandleDeathDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(100, "tactical_insertion", ::GlowStickModifyDamage, ::GlowStickHandleDeathDamage, true);
 }
 
 GlowStickModifyDamage(attacker, weapon, type, damage) {
@@ -1740,10 +1736,7 @@ BOOM_DURATION = 2000;
 
 boomTrackPlayers(targetPos) {
   foreach(player in level.players) {
-    if(self isEnemy(player) &&
-      IsAlive(player) &&
-      !player _hasPerk("specialty_gpsjammer") &&
-      (DistanceSquared(targetPos, player.origin) <= BOOM_DIST_SQ)) {
+    if(self isEnemy(player) && IsAlive(player) && !player _hasPerk("specialty_gpsjammer") && (DistanceSquared(targetPos, player.origin) <= BOOM_DIST_SQ)) {
       player.markedByBoomPerk[self getUniqueId()] = GetTime() + BOOM_DURATION;
     }
   }
@@ -2411,18 +2404,7 @@ setRevenge() {
   revengeParams.is3D = false;
   self.revengeParams = revengeParams;
 
-  self.lastKilledBy maps\mp\_entityheadIcons::setHeadIcon(
-    revengeParams.showTo,
-    revengeParams.icon,
-    revengeParams.offset,
-    revengeParams.width,
-    revengeParams.height,
-    revengeParams.archived,
-    revengeParams.delay,
-    revengeParams.constantSize,
-    revengeParams.pinToScreenEdge,
-    revengeParams.fadeOutPinnedIcon,
-    revengeParams.is3D);
+  self.lastKilledBy maps\mp\_entityheadIcons::setHeadIcon(revengeParams.showTo, revengeParams.icon, revengeParams.offset, revengeParams.width, revengeParams.height, revengeParams.archived, revengeParams.delay, revengeParams.constantSize, revengeParams.pinToScreenEdge, revengeParams.fadeOutPinnedIcon, revengeParams.is3D);
 
   self thread watchRevengeDeath();
   self thread watchRevengeKill();
@@ -2439,18 +2421,7 @@ watchRevengeDeath() {
 
   while(true) {
     lastKilledBy waittill("spawned_player");
-    lastKilledBy maps\mp\_entityheadIcons::setHeadIcon(
-      self.revengeParams.showTo,
-      self.revengeParams.icon,
-      self.revengeParams.offset,
-      self.revengeParams.width,
-      self.revengeParams.height,
-      self.revengeParams.archived,
-      self.revengeParams.delay,
-      self.revengeParams.constantSize,
-      self.revengeParams.pinToScreenEdge,
-      self.revengeParams.fadeOutPinnedIcon,
-      self.revengeParams.is3D);
+    lastKilledBy maps\mp\_entityheadIcons::setHeadIcon(self.revengeParams.showTo, self.revengeParams.icon, self.revengeParams.offset, self.revengeParams.width, self.revengeParams.height, self.revengeParams.archived, self.revengeParams.delay, self.revengeParams.constantSize, self.revengeParams.pinToScreenEdge, self.revengeParams.fadeOutPinnedIcon, self.revengeParams.is3D);
   }
 }
 

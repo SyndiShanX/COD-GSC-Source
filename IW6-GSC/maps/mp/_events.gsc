@@ -199,9 +199,7 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
 
       weaponClass = getWeaponClass(weapon);
 
-      if(weaponClass == "weapon_sniper" &&
-        meansOfDeath != "MOD_MELEE" &&
-        getTime() == victim.attackerData[self.guid].firstTimeDamaged) {
+      if(weaponClass == "weapon_sniper" && meansOfDeath != "MOD_MELEE" && getTime() == victim.attackerData[self.guid].firstTimeDamaged) {
         self.modifiers["oneshotkill"] = true;
         self thread maps\mp\gametypes\_rank::xpEventPopup("one_shot_kill");
       }
@@ -292,10 +290,7 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
 }
 
 isLongShot(attacker, weapon, meansOfDeath, attackerPosition, victim) {
-  if(isAlive(attacker) &&
-    !attacker isUsingRemote() &&
-    (meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_HEAD_SHOT") &&
-    !isKillstreakWeapon(weapon) && !isDefined(attacker.assistedSuicide)) {
+  if(isAlive(attacker) && !attacker isUsingRemote() && (meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_HEAD_SHOT") && !isKillstreakWeapon(weapon) && !isDefined(attacker.assistedSuicide)) {
     thisWeaponClass = getWeaponClass(weapon);
     switch (thisWeaponClass) {
       case "weapon_pistol":
@@ -334,10 +329,7 @@ isLongShot(attacker, weapon, meansOfDeath, attackerPosition, victim) {
 }
 
 isPointBlank(attacker, weapon, meansOfDeath, attackerPosition, victim) {
-  if(isAlive(attacker) &&
-    !attacker isUsingRemote() &&
-    (meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_HEAD_SHOT") &&
-    !isKillstreakWeapon(weapon) && !isDefined(attacker.assistedSuicide)) {
+  if(isAlive(attacker) && !attacker isUsingRemote() && (meansOfDeath == "MOD_RIFLE_BULLET" || meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_HEAD_SHOT") && !isKillstreakWeapon(weapon) && !isDefined(attacker.assistedSuicide)) {
     weapDistSq = 96 * 96;
     if(DistanceSquared(attackerPosition, victim.origin) < weapDistSq) {
       return true;

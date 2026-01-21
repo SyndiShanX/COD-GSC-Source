@@ -971,10 +971,7 @@ moon_zombie_death_response() {
     force_min = 60;
     force_max = 75;
     rag_z = 20;
-  } else if(self.damageweapon == "ithaca_zm" || self.damageweapon == "ithaca_upgraded_zm" ||
-    self.damageweapon == "rottweil72_zm" || self.damageweapon == "rottweil72_upgraded_zm" ||
-    self.damageweapon == "spas_zm" || self.damageweapon == "spas_upgraded_zm" ||
-    self.damageweapon == "hs10_zm" || self.damageweapon == "hs10_upgraded_zm") {
+  } else if(self.damageweapon == "ithaca_zm" || self.damageweapon == "ithaca_upgraded_zm" || self.damageweapon == "rottweil72_zm" || self.damageweapon == "rottweil72_upgraded_zm" || self.damageweapon == "spas_zm" || self.damageweapon == "spas_upgraded_zm" || self.damageweapon == "hs10_zm" || self.damageweapon == "hs10_upgraded_zm") {
     force_min = 100;
     force_max = 150;
   }
@@ -1334,10 +1331,7 @@ moon_speed_up() {
     self thread maps\zombie_moon_gravity::zombie_low_gravity_locomotion();
   } else {
     var = randomintrange(1, 4);
-    self set_run_anim("sprint" +
-      var);
-    self.run_combatanim = level.scr_anim[self.animname]["sprint" +
-      var
-    ];
+    self set_run_anim("sprint" + var);
+    self.run_combatanim = level.scr_anim[self.animname]["sprint" + var];
   }
 }

@@ -1931,9 +1931,9 @@ handle_trainer_anims() {
   self.desired_loop = "idle";
   var_0 = undefined;
   for(;;) {
-    var_1 = [ % iw7_cp_pam_lotus_idle_01, % iw7_cp_pam_lotus_idle_02, % iw7_cp_pam_lotus_idle_03];
+    var_1 = [ % iw7_cp_pam_lotus_idle_01, %iw7_cp_pam_lotus_idle_02, %iw7_cp_pam_lotus_idle_03];
     var_2 = ["IW7_cp_pam_lotus_idle_01", "IW7_cp_pam_lotus_idle_02", "IW7_cp_pam_lotus_idle_03"];
-    var_3 = [ % iw7_cp_pam_lotus_idle_04, % iw7_cp_pam_lotus_idle_05];
+    var_3 = [ % iw7_cp_pam_lotus_idle_04, %iw7_cp_pam_lotus_idle_05];
     var_4 = ["IW7_cp_pam_lotus_idle_04", "IW7_cp_pam_lotus_idle_05"];
     var_5 = scripts\engine\utility::random(var_2);
     var_6 = scripts\engine\utility::random(var_4);

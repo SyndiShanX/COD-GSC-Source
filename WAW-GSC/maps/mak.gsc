@@ -87,8 +87,8 @@ set_custom_approach() {
   if(!isDefined(anim.NotFirstTime)) {
     wait(0.1);
   }
-  add_custom_exposed_approach(0, % ch_makinraid_creepywalk_stop_center2);
-  add_custom_exposed_exit(0, % ch_makinraid_creepywalk_start_center2);
+  add_custom_exposed_approach(0, %ch_makinraid_creepywalk_stop_center2);
+  add_custom_exposed_exit(0, %ch_makinraid_creepywalk_start_center2);
 }
 
 add_custom_exposed_approach(index, approach_anim) {

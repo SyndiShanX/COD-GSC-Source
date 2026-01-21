@@ -593,13 +593,11 @@ func_D4C2(var_0, var_1, var_2) {
       }
     }
 
-    if(scripts\anim\utility_common::issuppressedwrapper() && [
-        [var_2]
-      ]()) {
+    if(scripts\anim\utility_common::issuppressedwrapper() && [[var_2]]()) {
       return;
     }
 
-    self func_82A5(var_0, % body, 1, 0.1);
+    self func_82A5(var_0, %body, 1, 0.1);
     wait(0.1);
   }
 }

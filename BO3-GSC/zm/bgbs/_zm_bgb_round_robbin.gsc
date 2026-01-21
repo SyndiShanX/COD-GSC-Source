@@ -34,9 +34,7 @@ function validation() {
     return false;
   }
   if(isDefined(level.var_35efa94c)) {
-    if(![
-        [level.var_35efa94c]
-      ]()) {
+    if(![[level.var_35efa94c]]()) {
       return false;
     }
   }

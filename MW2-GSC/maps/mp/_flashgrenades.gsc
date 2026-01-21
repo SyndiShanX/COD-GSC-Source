@@ -90,8 +90,7 @@ monitorFlash() {
 }
 
 applyFlash(duration, rumbleduration) {
-  // wait for the highest flash duration this frame,
-  // and apply it in the following frame
+  // wait for the highest flash duration this frame, // and apply it in the following frame
 
   if(!isDefined(self.flashDuration) || duration > self.flashDuration)
     self.flashDuration = duration;

@@ -31,9 +31,9 @@ step_up_human() {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
-  self setFlaggedAnimKnoballRestart("stepanim", % step_up_low_wall, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("stepanim", %step_up_low_wall, %body, 1, .1, 1);
   self waittillmatch("stepanim", "gravity on");
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("stepanim");
-  self setAnimKnobAllRestart(animscripts\run::GetCrouchRunAnim(), % body, 1, 0.1, 1);
+  self setAnimKnobAllRestart(animscripts\run::GetCrouchRunAnim(), %body, 1, 0.1, 1);
 }

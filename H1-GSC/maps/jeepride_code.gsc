@@ -413,10 +413,10 @@ set_animarray_standing() {
   self.a.array["add_aim_right"] = % rpg_stand_aim_6;
   self.a.array["fire"] = % rpg_stand_fire;
   self.a.array["straight_level"] = % rpg_stand_aim_5;
-  self.a.array["reload"] = animscripts\utility::array( % rpg_stand_reload);
+  self.a.array["reload"] = animscripts\utility::array(%rpg_stand_reload);
   self.a.array["reload_crouchhide"] = animscripts\utility::array();
-  self.a.array["exposed_idle"] = animscripts\utility::array( % rpg_stand_idle);
-  self.a.array["single"] = animscripts\utility::array( % exposed_shoot_semi1);
+  self.a.array["exposed_idle"] = animscripts\utility::array(%rpg_stand_idle);
+  self.a.array["single"] = animscripts\utility::array(%exposed_shoot_semi1);
   self.a.array["crouch_2_stand"] = % exposed_crouch_2_stand;
   self.a.array["crouch_2_prone"] = % crouch_2_prone;
   self.a.array["stand_2_crouch"] = % exposed_stand_2_crouch;
@@ -450,13 +450,13 @@ rpg_guy_animcustom_setup() {
   set_animarray_standing();
   self.a.movement = "stop";
   self.previouspitchdelta = 0.0;
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setanim(animscripts\utility::animarray("straight_level"));
-  self setanim( % add_idle);
-  self clearanim( % aim_4, 0.2);
-  self clearanim( % aim_6, 0.2);
-  self clearanim( % aim_2, 0.2);
-  self clearanim( % aim_8, 0.2);
+  self setanim(%add_idle);
+  self clearanim(%aim_4, 0.2);
+  self clearanim(%aim_6, 0.2);
+  self clearanim(%aim_2, 0.2);
+  self clearanim(%aim_8, 0.2);
   animscripts\combat_utility::setupaim(0.2);
   thread idlethread();
   self.a.meleestate = "aim";
@@ -517,7 +517,7 @@ trackshootentorpos() {
   self endon("killanimscript");
   self endon("death");
   self endon("kill_local_animcustoms");
-  animscripts\track::trackloop( % aim_2, % aim_4, % aim_6, % aim_8);
+  animscripts\track::trackloop(%aim_2, %aim_4, %aim_6, %aim_8);
 }
 
 suppress_animscripts() {
@@ -571,7 +571,7 @@ rpg_guy_animcustom() {
   self.shootent = self.enemy;
   self.shootpos = self.shootent.origin;
   level thread vehicle_dropflare(self.hindenemy, self.attractorent);
-  self clearanim( % add_fire, 0.2);
+  self clearanim(%add_fire, 0.2);
   wait(randomfloatrange(5, 9));
   self.shootent = undefined;
   self.shootpos = undefined;
@@ -2830,9 +2830,7 @@ path_array_setup_loc(var_0) {
     var_2++;
 
     if(isDefined(var_0.target)) {
-      var_0 = [
-        [var_1]
-      ](var_0.target);
+      var_0 = [[var_1]](var_0.target);
       continue;
     }
 
@@ -3052,7 +3050,7 @@ freeonend() {
   self endon("no_free_on_end");
   self waittill("reached_end_node");
   self freevehicle();
-  self clearanim( % root, 0.5);
+  self clearanim(%root, 0.5);
 
   if(isDefined(self.modeldummyon) && self.modeldummyon)
     self hide();

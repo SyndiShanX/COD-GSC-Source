@@ -26,7 +26,7 @@ main(model, type) {
 
   build_turret(turret, "tag_50cal", "weapon_m2_50cal_center", undefined, "auto_ai", 0.5, 20, -14);
 
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
 
   //	build_deathfx( effect, 									tag, 					sound, 				bEffectLooping, 	delay, 			bSoundlooping, waitDelay, stayontag, notifyString )
   build_deathfx("fire/firelp_med_pm", "tag_fx_tank", "smallfire", undefined, undefined, true, 0);
@@ -56,8 +56,7 @@ main(model, type) {
   build_death_badplace(.5, 3, 512, 700, "axis", "allies");
   build_death_jolt(2.9);
 
-  //"Name: build_radiusdamage( <offset> , <range> , <maxdamage> , <mindamage> , <bKillplayer> )"
-  build_radiusdamage((0, 0, 53), 512, 300, 20, true, 2.9);
+  //"Name: build_radiusdamage( <offset> , <range> , <maxdamage> , <mindamage> , <bKillplayer> )"build_radiusdamage((0, 0, 53), 512, 300, 20, true, 2.9);
 }
 
 set_vehicle_anims(positions) {
@@ -187,10 +186,7 @@ include,vehicle_pickup_technical_technical
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_pickup_technical"
-default:"vehicletype" "technical"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_pickup_technical"default:"vehicletype" "technical"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_pickup_technical_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -202,7 +198,5 @@ include,vehicle_pickup_technical_technical
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_pickup_technical"
-default:"vehicletype" "technical_physics"
-default:"script_team" "axis"
+defaultmdl="vehicle_pickup_technical"default:"vehicletype" "technical_physics"default:"script_team" "axis"
 */

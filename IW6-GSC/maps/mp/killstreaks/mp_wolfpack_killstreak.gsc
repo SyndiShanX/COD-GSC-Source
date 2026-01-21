@@ -298,11 +298,7 @@ UpdateMoveState() {
       else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16)
         bLastBadMeleeTarget = true;
     }
-    if(!isReallyAlive(self.enemy) ||
-      bLastBadMeleeTarget ||
-      self maps\mp\agents\dog\_dog_think::wantToAttackTargetButCant(true) ||
-      self maps\mp\agents\dog\_dog_think::DidPastPursuitFail(self.enemy)
-    ) {
+    if(!isReallyAlive(self.enemy) || bLastBadMeleeTarget || self maps\mp\agents\dog\_dog_think::wantToAttackTargetButCant(true) || self maps\mp\agents\dog\_dog_think::DidPastPursuitFail(self.enemy)) {
       self.moveState = "follow";
       bWantedPursuitButFollowInstead = true;
     }

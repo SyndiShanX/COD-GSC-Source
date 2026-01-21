@@ -12,8 +12,7 @@ preLoad() {
   PreCacheItem("turret_attackheli");
   PreCacheItem("missile_attackheli");
 
-  //spotlight effect for _attack_hei vehicles with script_spotlight set to "1"
-  attack_heli_fx();
+  //spotlight effect for _attack_hei vehicles with script_spotlight set to "1"attack_heli_fx();
   thread init();
   //maps\_mi28::main( "vehicle_mi-28_flying" );		//why is this here?
 }
@@ -80,13 +79,7 @@ init() {
 /*
 =============
 ///ScriptDocBegin
-"Name: start_attack_heli( <sTargetname> )"
-"Summary: Spawns an attack helicopter in PMC or singleplayer that will go to the closest path of helicopter nodes and harass the player. See wiki or PMC maps for details on setting up the heli and a network of nodes."
-"Module: Vehicle"
-"OptionalArg: <sTargetname>: Targetname value of the helicopter that will spawn. PMC does not require a targetname (uses 'kill_heli')"
-"Example: attack_heli = thread maps\_attack_heli::start_attack_heli();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: start_attack_heli( <sTargetname> )""Summary: Spawns an attack helicopter in PMC or singleplayer that will go to the closest path of helicopter nodes and harass the player. See wiki or PMC maps for details on setting up the heli and a network of nodes.""Module: Vehicle""OptionalArg: <sTargetname>: Targetname value of the helicopter that will spawn. PMC does not require a targetname (uses 'kill_heli')""Example: attack_heli = thread maps\_attack_heli::start_attack_heli();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 start_attack_heli(sTargetname) {
@@ -99,14 +92,7 @@ start_attack_heli(sTargetname) {
 /*
 =============
 ///ScriptDocBegin
-"Name: begin_attack_heli_behavior( <eHeli> )"
-"Summary: Makesa regularly spawned helicopter start using the AI logic in _attack_heli.gsc script (stalking the player and firing at him)"
-"Module: Vehicle"
-"MandatoryArg: <eHeli>: The helicopter entity"
-"OptionalArg: <heli_points>: Points for the Heli to use when checking for player proximity."
-"Example: eHeli = maps\_attack_heli::begin_attack_heli_behavior( eHeli );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: begin_attack_heli_behavior( <eHeli> )""Summary: Makesa regularly spawned helicopter start using the AI logic in _attack_heli.gsc script (stalking the player and firing at him)""Module: Vehicle""MandatoryArg: <eHeli>: The helicopter entity""OptionalArg: <heli_points>: Points for the Heli to use when checking for player proximity.""Example: eHeli = maps\_attack_heli::begin_attack_heli_behavior( eHeli );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 begin_attack_heli_behavior(eHeli, heli_points) {
@@ -139,8 +125,9 @@ begin_attack_heli_behavior(eHeli, heli_points) {
   eHeli EnableAimAssist();
   eHeli.startingOrigin = spawn("script_origin", eHeli.origin);
   eHeli thread delete_on_death(eHeli.startingOrigin);
-  if(!isDefined(eHeli.circling))
+  if(!isDefined(eHeli.circling)) {
     eHeli.circling = false;
+	}
   eHeli.allowShoot = true;
   eHeli.firingMissiles = false;
   eHeli.moving = true;
@@ -229,8 +216,9 @@ heli_default_target_setup() {
 }
 
 get_turrets() {
-  if(isDefined(self.turrets))
+  if(isDefined(self.turrets)) {
     return self.turrets;
+	}
 
   setup_miniguns();
   return self.turrets;
@@ -242,8 +230,9 @@ setup_miniguns() {
   self.turrettype = "miniguns";
   self.minigunsspinning = false;
   self.firingguns = false;
-  if(!isDefined(self.mgturret)) //in case the heli is taken out before has a chance to setup turrets
+  if(!isDefined(self.mgturret)) { //in case the heli is taken out before has a chance to setup turrets
     return;
+	}
 
   self.turrets = self.mgturret;
   array_thread(self.turrets, ::littlebird_turrets_think, self);
@@ -251,13 +240,15 @@ setup_miniguns() {
 
 heli_default_target_cleanup(eHeli) {
   eHeli waittill_either("death", "crash_done");
-  if(isDefined(self))
+  if(isDefined(self)) {
     self Delete();
+	}
 }
 
 start_circling_heli(heli_targetname, heli_points) {
-  if(!isDefined(heli_targetname))
+  if(!isDefined(heli_targetname)) {
     heli_targetname = "kill_heli";
+	}
   heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(heli_targetname);
   heli.startingOrigin = spawn("script_origin", heli.origin);
   heli thread delete_on_death(heli.startingOrigin);
@@ -281,10 +272,11 @@ kill_heli_logic(heli, heli_points) {
   }
 
   baseSpeed = undefined;
-  if(!isDefined(heli.script_airspeed))
+  if(!isDefined(heli.script_airspeed)) {
     baseSpeed = 40;
-  else
+	} else {
     baseSpeed = heli.script_airspeed;
+	}
 
   if(!isDefined(level.enemy_heli_killed))
     level.enemy_heli_killed = false;
@@ -987,16 +979,7 @@ turret_default_fire(eTarget, burstsize, fireTime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: turret_minigun_fire( <eTarget>, <burstsize>, <max_warmup_time> )"
-"Summary: Fires minigun turrets mounted on a vehicle (such as dual miniguns of the Littlebird). Will play appropriate spin up and spin down sounds"
-"Module: Vehicle"
-"MandatoryArg: <eTarget>: Target entity to fire at"
-"OptionalArg: <burstsize>: Length of time to fire the guns"
-"OptionalArg: <delay>: Delay between multiple missiles fired. Defaults to one second"
-"OptionalArg: <max_warmup_time>: Max random delay before it begins firing"
-"Example: eHeli thread maps\_attack_heli::turret_minigun_fire( eTarget, 10 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: turret_minigun_fire( <eTarget>, <burstsize>, <max_warmup_time> )""Summary: Fires minigun turrets mounted on a vehicle (such as dual miniguns of the Littlebird). Will play appropriate spin up and spin down sounds""Module: Vehicle""MandatoryArg: <eTarget>: Target entity to fire at""OptionalArg: <burstsize>: Length of time to fire the guns""OptionalArg: <delay>: Delay between multiple missiles fired. Defaults to one second""OptionalArg: <max_warmup_time>: Max random delay before it begins firing""Example: eHeli thread maps\_attack_heli::turret_minigun_fire( eTarget, 10 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 turret_minigun_fire(eTarget, burstsize, max_warmup_time) {
@@ -1309,21 +1292,16 @@ dialog_nags_heli(heli) {
     return;
   }
   commander_dialog("co_cf_cmd_heli_small_fire");
-  //"That heli is vulnerable to small arms fire."
-
-  if(!level.enemy_heli_attacking) {
+  //"That heli is vulnerable to small arms fire."if(!level.enemy_heli_attacking) {
     return;
   }
   commander_dialog("co_cf_cmd_rpg_stinger");
-  //"Otherwise look for an RPG or Stinger."
-
-  wait 30;
+  //"Otherwise look for an RPG or Stinger."wait 30;
 
   if(!level.enemy_heli_attacking)
     return;
   commander_dialog("co_cf_cmd_heli_wonders");
-  //"Charlie Four, an RPG or Stinger would do wonders against that heli."
-}
+  //"Charlie Four, an RPG or Stinger would do wonders against that heli."}
 
 commander_dialog(dialog_line) {
   while(level.commander_speaking)
@@ -1489,13 +1467,7 @@ attack_heli_cleanup() {
 /*
 =============
 ///ScriptDocBegin
-"Name: heli_default_missiles_on()"
-"Summary: Call this on a spawned heli to fire missiles at any nodes that are linked(with script_linkTo)"
-"OptionalArg: <customMissiles>: Pass in a custom missile name to use. Otherwise will default to missile_attackheli"
-"Module: Vehicle"
-"Example: self thread maps\_attack_heli::heli_default_missiles_on();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: heli_default_missiles_on()""Summary: Call this on a spawned heli to fire missiles at any nodes that are linked(with script_linkTo)""OptionalArg: <customMissiles>: Pass in a custom missile name to use. Otherwise will default to missile_attackheli""Module: Vehicle""Example: self thread maps\_attack_heli::heli_default_missiles_on();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 heli_default_missiles_on(customMissiles) {
@@ -1544,12 +1516,7 @@ heli_default_missiles_on(customMissiles) {
 /*
 =============
 ///ScriptDocBegin
-"Name: heli_default_missiles_off()"
-"Summary: Call this on a spawned heli to stop firing missiles at linked nodes"
-"Module: Vehicle"
-"Example: self thread maps\_attack_heli::heli_default_missiles_off();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: heli_default_missiles_off()""Summary: Call this on a spawned heli to stop firing missiles at linked nodes""Module: Vehicle""Example: self thread maps\_attack_heli::heli_default_missiles_off();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 heli_default_missiles_off() {
@@ -1559,14 +1526,7 @@ heli_default_missiles_off() {
 /*
 =============
 ///ScriptDocBegin
-"Name: heli_spotlight_on( <sTag>, <bUseAttackHeliBehavior> )"
-"Summary: Turns on a spotlight on a helicopter. The spotlight is not aimed anywhere unless you are using the AI in the _attack_heli script and setting bUseAttackHeliBehavior to true"
-"Module: Vehicle"
-"OptionalArg: <sTag>: Specify the tag where the spotlight will attach to (tag_barrel is the default so that any turret aiming logic will aim the spotlight as well)"
-"OptionalArg: <bUseAttackHeliBehavior>: Only set this to true if you are using the AI behavior in the _attack_heli script"
-"Example: attack_heli thread maps\_attack_heli::heli_spotlight_on();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: heli_spotlight_on( <sTag>, <bUseAttackHeliBehavior> )""Summary: Turns on a spotlight on a helicopter. The spotlight is not aimed anywhere unless you are using the AI in the _attack_heli script and setting bUseAttackHeliBehavior to true""Module: Vehicle""OptionalArg: <sTag>: Specify the tag where the spotlight will attach to (tag_barrel is the default so that any turret aiming logic will aim the spotlight as well)""OptionalArg: <bUseAttackHeliBehavior>: Only set this to true if you are using the AI behavior in the _attack_heli script""Example: attack_heli thread maps\_attack_heli::heli_spotlight_on();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 heli_spotlight_on(sTag, bUseAttackHeliBehavior) {
@@ -1595,12 +1555,7 @@ heli_spotlight_on(sTag, bUseAttackHeliBehavior) {
 /*
 =============
 ///ScriptDocBegin
-"Name: heli_spotlight_off()"
-"Summary: Turns off a spotlight on a helicopter that had it turned on with the heli_spotlight_on() function"
-"Module: Vehicle"
-"Example: eHeli thread maps\_attack_heli::heli_spotlight_off();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: heli_spotlight_off()""Summary: Turns off a spotlight on a helicopter that had it turned on with the heli_spotlight_on() function""Module: Vehicle""Example: eHeli thread maps\_attack_heli::heli_spotlight_off();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 heli_spotlight_off() {
@@ -1610,12 +1565,7 @@ heli_spotlight_off() {
 /*
 =============
 ///ScriptDocBegin
-"Name: heli_spotlight_random_targets_on()"
-"Summary: Aims the helicopter turret randomly in a sweeping motion in front of the heli. Must first turn on the spotlight effect with heli_spotlight_on()"
-"Module: Vehicle"
-"Example: eHeli thread maps\_attack_heli::heli_spotlight_random_targets_on();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: heli_spotlight_random_targets_on()""Summary: Aims the helicopter turret randomly in a sweeping motion in front of the heli. Must first turn on the spotlight effect with heli_spotlight_on()""Module: Vehicle""Example: eHeli thread maps\_attack_heli::heli_spotlight_random_targets_on();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 heli_spotlight_random_targets_on() {
@@ -1628,9 +1578,7 @@ heli_spotlight_random_targets_on() {
 
   if(!isDefined(self.left_ent))
     self thread heli_spotlight_think(); // spawns 2 more attached script_origins on the left and right and
-  //and randomly makes one of the three the heli's "self.targetdefault"
-
-  while(isDefined(self)) {
+  //and randomly makes one of the three the heli's "self.targetdefault"while(isDefined(self)) {
     wait(.05);
     self SetTurretTargetEnt(self.targetdefault, (0, 0, 0));
   }
@@ -1639,12 +1587,7 @@ heli_spotlight_random_targets_on() {
 /*
 =============
 ///ScriptDocBegin
-"Name: heli_spotlight_random_targets_off()"
-"Summary: Stopss the helicopter turret randomly aiming turret in a sweeping motion in front of the heli()"
-"Module: Vehicle"
-"Example: eHeli thread maps\_attack_heli::heli_spotlight_random_targets_off();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: heli_spotlight_random_targets_off()""Summary: Stopss the helicopter turret randomly aiming turret in a sweeping motion in front of the heli()""Module: Vehicle""Example: eHeli thread maps\_attack_heli::heli_spotlight_random_targets_off();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 heli_spotlight_random_targets_off() {
@@ -1654,16 +1597,7 @@ heli_spotlight_random_targets_off() {
 /*
 =============
 ///ScriptDocBegin
-"Name: heli_fire_missiles( <eTarget>, <iShots>, <delay> )"
-"Summary: Fires missiles from a helicopter at a target"
-"Module: Vehicle"
-"MandatoryArg: <eTarget>: Target entity to fire at"
-"OptionalArg: <iShots>: Number of missiles to fire 9default = 1)."
-"OptionalArg: <delay>: Delay between multiple missiles fired. Defaults to one second"
-"OptionalArg: <customMissiles>: Pass in a custom missile to use. Otherwise will default to missile_attackheli"
-"Example: eHeli thread maps\_attack_heli::heli_fire_missiles( eTarget, 2, .5 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: heli_fire_missiles( <eTarget>, <iShots>, <delay> )""Summary: Fires missiles from a helicopter at a target""Module: Vehicle""MandatoryArg: <eTarget>: Target entity to fire at""OptionalArg: <iShots>: Number of missiles to fire 9default = 1).""OptionalArg: <delay>: Delay between multiple missiles fired. Defaults to one second""OptionalArg: <customMissiles>: Pass in a custom missile to use. Otherwise will default to missile_attackheli""Example: eHeli thread maps\_attack_heli::heli_fire_missiles( eTarget, 2, .5 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 heli_fire_missiles(eTarget, iShots, delay, customMissiles) {

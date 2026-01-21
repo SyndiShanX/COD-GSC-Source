@@ -180,15 +180,13 @@ dumpsettings() {
     SetdevDvar("scr_art_dump", "0");
 
     fileprint_launcher_start_file();
-    fileprint_launcher("
-        fileprint_launcher("main()"); fileprint_launcher("{"); fileprint_launcher("\tlevel.tweakfile = true;");
+    fileprint_launcher("fileprint_launcher("main()"); fileprint_launcher("{"); fileprint_launcher("\tlevel.tweakfile = true;");
         if(isDefined(level.parse_fog_func))
           fileprint_launcher("\tlevel.parse_fog_func = maps\\createart\\" + level.script + "_fog::main;"); fileprint_launcher(""); fileprint_launcher("\tsetDevDvar( \"scr_fog_disable\"" + ", " + "\"" + GetDvarInt("scr_fog_disable") + "\"" + " );");
 
         if(!GetDvarInt("scr_fog_disable")) {
           if(level.sunFogEnabled)
-            fileprint_launcher("
-              else
+            fileprint_launcher("else
                 fileprint_launcher("
                 }
               fileprint_launcher("\tVisionSetNaked( \"" + level.script + "\", 0 );"); fileprint_launcher("}");
@@ -197,8 +195,7 @@ dumpsettings() {
               }
               if(isDefined(level.parse_fog_func)) {
                 fileprint_launcher_start_file();
-                fileprint_launcher("
-                  fileprint_launcher("main()"); fileprint_launcher("{"); common_scripts\_artCommon::print_fog_ents(true); fileprint_launcher("}");
+                fileprint_launcher("fileprint_launcher("main()"); fileprint_launcher("{"); common_scripts\_artCommon::print_fog_ents(true); fileprint_launcher("}");
                   if(!fileprint_launcher_end_file("\\share\\raw\\maps\\createart\\" + level.script + "_fog.gsc", true))
                     return;
                 }
@@ -375,75 +372,15 @@ dumpsettings() {
               set_fog_to_ent_values(ent, transition_time) {
                 if(isDefined(ent.sunFogEnabled) && ent.sunFogEnabled) {
                   if(!isPlayer(self)) {
-                    SetExpFog(
-                      ent.startDist,
-                      ent.halfwayDist,
-                      ent.red,
-                      ent.green,
-                      ent.blue,
-                      ent.HDRColorIntensity,
-                      ent.maxOpacity,
-                      transition_time,
-                      ent.sunRed,
-                      ent.sunGreen,
-                      ent.sunBlue,
-                      ent.HDRSunColorIntensity,
-                      ent.sunDir,
-                      ent.sunBeginFadeAngle,
-                      ent.sunEndFadeAngle,
-                      ent.normalFogScale,
-                      ent.skyFogIntensity,
-                      ent.skyFogMinAngle,
-                      ent.skyFogMaxAngle);
+                    SetExpFog(ent.startDist, ent.halfwayDist, ent.red, ent.green, ent.blue, ent.HDRColorIntensity, ent.maxOpacity, transition_time, ent.sunRed, ent.sunGreen, ent.sunBlue, ent.HDRSunColorIntensity, ent.sunDir, ent.sunBeginFadeAngle, ent.sunEndFadeAngle, ent.normalFogScale, ent.skyFogIntensity, ent.skyFogMinAngle, ent.skyFogMaxAngle);
                   } else {
-                    self PlayerSetExpFog(
-                      ent.startDist,
-                      ent.halfwayDist,
-                      ent.red,
-                      ent.green,
-                      ent.blue,
-                      ent.HDRColorIntensity,
-                      ent.maxOpacity,
-                      transition_time,
-                      ent.sunRed,
-                      ent.sunGreen,
-                      ent.sunBlue,
-                      ent.HDRSunColorIntensity,
-                      ent.sunDir,
-                      ent.sunBeginFadeAngle,
-                      ent.sunEndFadeAngle,
-                      ent.normalFogScale,
-                      ent.skyFogIntensity,
-                      ent.skyFogMinAngle,
-                      ent.skyFogMaxAngle);
+                    self PlayerSetExpFog(ent.startDist, ent.halfwayDist, ent.red, ent.green, ent.blue, ent.HDRColorIntensity, ent.maxOpacity, transition_time, ent.sunRed, ent.sunGreen, ent.sunBlue, ent.HDRSunColorIntensity, ent.sunDir, ent.sunBeginFadeAngle, ent.sunEndFadeAngle, ent.normalFogScale, ent.skyFogIntensity, ent.skyFogMinAngle, ent.skyFogMaxAngle);
                   }
                 } else {
                   if(!isPlayer(self)) {
-                    SetExpFog(
-                      ent.startDist,
-                      ent.halfwayDist,
-                      ent.red,
-                      ent.green,
-                      ent.blue,
-                      ent.HDRColorIntensity,
-                      ent.maxOpacity,
-                      transition_time,
-                      ent.skyFogIntensity,
-                      ent.skyFogMinAngle,
-                      ent.skyFogMaxAngle);
+                    SetExpFog(ent.startDist, ent.halfwayDist, ent.red, ent.green, ent.blue, ent.HDRColorIntensity, ent.maxOpacity, transition_time, ent.skyFogIntensity, ent.skyFogMinAngle, ent.skyFogMaxAngle);
                   } else {
-                    self PlayerSetExpFog(
-                      ent.startDist,
-                      ent.halfwayDist,
-                      ent.red,
-                      ent.green,
-                      ent.blue,
-                      ent.HDRColorIntensity,
-                      ent.maxOpacity,
-                      transition_time,
-                      ent.skyFogIntensity,
-                      ent.skyFogMinAngle,
-                      ent.skyFogMaxAngle);
+                    self PlayerSetExpFog(ent.startDist, ent.halfwayDist, ent.red, ent.green, ent.blue, ent.HDRColorIntensity, ent.maxOpacity, transition_time, ent.skyFogIntensity, ent.skyFogMinAngle, ent.skyFogMaxAngle);
                   }
                 }
               }

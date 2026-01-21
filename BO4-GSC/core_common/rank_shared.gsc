@@ -252,9 +252,7 @@ getscoreinfovalue(type) {
     n_score = isDefined(level.scoreinfo[type][# "sp"]) ? level.scoreinfo[type][# "sp"] : 0;
 
     if(isDefined(level.scoremodifiercallback) && isDefined(n_score)) {
-      n_score = [
-        [level.scoremodifiercallback]
-      ](type, n_score);
+      n_score = [[level.scoremodifiercallback]](type, n_score);
     }
 
     var_1eb7c454 = getdvarfloat(#"hash_eae9a8ee387705d", 1);
@@ -281,9 +279,7 @@ getscoreinfoposition(type) {
     n_pos = isDefined(level.scoreinfo[type][# "hash_7c1f7c7897445706"]) ? level.scoreinfo[type][# "hash_7c1f7c7897445706"] : 0;
 
     if(isDefined(level.scoremodifiercallback) && isDefined(n_pos)) {
-      n_resource = [
-        [level.scoremodifiercallback]
-      ](type, n_pos);
+      n_resource = [[level.scoremodifiercallback]](type, n_pos);
     }
 
     return n_pos;
@@ -299,9 +295,7 @@ getscoreinforesource(type) {
     n_resource = isDefined(level.scoreinfo[type][# "res"]) ? level.scoreinfo[type][# "res"] : 0;
 
     if(isDefined(level.resourcemodifiercallback) && isDefined(n_resource)) {
-      n_resource = [
-        [level.resourcemodifiercallback]
-      ](type, n_resource);
+      n_resource = [[level.resourcemodifiercallback]](type, n_resource);
     }
 
     return n_resource;
@@ -317,9 +311,7 @@ getscoreinfoxp(type) {
     n_xp = isDefined(level.scoreinfo[type][# "xp"]) ? level.scoreinfo[type][# "xp"] : 0;
 
     if(isDefined(level.xpmodifiercallback) && isDefined(n_xp)) {
-      n_xp = [
-        [level.xpmodifiercallback]
-      ](type, n_xp);
+      n_xp = [[level.xpmodifiercallback]](type, n_xp);
     }
 
     return n_xp;

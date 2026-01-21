@@ -821,9 +821,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
     if(!isDefined(loadoutKillstreak3) || (loadoutKillstreak3 == ""))
       loadoutKillstreak3 = "none";
 
-    if(!isValidKillstreak(loadoutKillstreak1, self.streakType) || (isCustomClass && !self isItemUnlocked(loadoutKillstreak1)) ||
-      !isValidKillstreak(loadoutKillstreak2, self.streakType) || (isCustomClass && !self isItemUnlocked(loadoutKillstreak2)) ||
-      !isValidKillstreak(loadoutKillstreak3, self.streakType) || (isCustomClass && !self isItemUnlocked(loadoutKillstreak3))) {
+    if(!isValidKillstreak(loadoutKillstreak1, self.streakType) || (isCustomClass && !self isItemUnlocked(loadoutKillstreak1)) || !isValidKillstreak(loadoutKillstreak2, self.streakType) || (isCustomClass && !self isItemUnlocked(loadoutKillstreak2)) || !isValidKillstreak(loadoutKillstreak3, self.streakType) || (isCustomClass && !self isItemUnlocked(loadoutKillstreak3))) {
       loadoutKillstreak1 = "none";
       loadoutKillstreak2 = "none";
       loadoutKillstreak3 = "none";
@@ -836,11 +834,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
 
   self setKillstreaks(loadoutKillstreak1, loadoutKillstreak2, loadoutKillstreak3);
 
-  if(!IsAgent(self) &&
-    (self hasChangedClass() || self.class == "callback") &&
-    !IsSubStr(self.class, "juggernaut") &&
-    !IsSubStr(self.lastClass, "juggernaut") &&
-    !IsSubStr(class, "juggernaut")) {
+  if(!IsAgent(self) && (self hasChangedClass() || self.class == "callback") && !IsSubStr(self.class, "juggernaut") && !IsSubStr(self.lastClass, "juggernaut") && !IsSubStr(class, "juggernaut")) {
     if(wasOnlyRound() || self.lastClass != "") {
       streakNames = [];
       streakIDs = [];
@@ -857,10 +851,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
 
       if(self_pers_killstreaks.size) {
         for(i = KILLSTREAK_SLOT_1; i < KILLSTREAK_SLOT_3 + 1; i++) {
-          if(isDefined(self_pers_killstreaks[i]) &&
-            isDefined(self_pers_killstreaks[i].streakName) &&
-            self_pers_killstreaks[i].available &&
-            !self_pers_killstreaks[i].isSpecialist) {
+          if(isDefined(self_pers_killstreaks[i]) && isDefined(self_pers_killstreaks[i].streakName) && self_pers_killstreaks[i].available && !self_pers_killstreaks[i].isSpecialist) {
             streakNames[inc] = self_pers_killstreaks[i].streakName;
             streakIDs[inc] = self_pers_killstreaks[i].kID;
             inc++;
@@ -969,11 +960,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
 
   shouldValidateAi = IsAI(self) && IsSquadsMode() && !self bot_israndom();
 
-  if(
-    !self isJuggernaut() &&
-    (!IsAI(self) || shouldValidateAi) &&
-    !isGameModeClass
-  ) {
+  if(!self isJuggernaut() && (!IsAI(self) || shouldValidateAi) && !isGameModeClass) {
     perkPointBonus = 0;
     if(loadoutEquipment == "specialty_null")
       perkPointBonus += 1;
@@ -2048,21 +2035,15 @@ isValidWeapon(refString, shouldAssert) {
 }
 
 isValidKillstreak(refString, streakType) {
-  validKS = isAssaultKillstreak(refString) ||
-    isSupportKillstreak(refString) ||
-    isSpecialistKillstreak(refString) ||
-    refString == "none";
+  validKS = isAssaultKillstreak(refString) || isSupportKillstreak(refString) || isSpecialistKillstreak(refString) || refString == "none";
 
   if(isDefined(streakType)) {
     if(streakType == "assault") {
-      validKS = isAssaultKillstreak(refString) ||
-        refString == "none";
+      validKS = isAssaultKillstreak(refString) || refString == "none";
     } else if(streakType == "support") {
-      validKS = isSupportKillstreak(refString) ||
-        refString == "none";
+      validKS = isSupportKillstreak(refString) || refString == "none";
     } else if(streakType == "specialist") {
-      validKS = isSpecialistKillstreak(refString) ||
-        refString == "none";
+      validKS = isSpecialistKillstreak(refString) || refString == "none";
     }
   }
 
@@ -2080,10 +2061,7 @@ hasChangedClass() {
   if((isDefined(self.lastClass) && self.lastClass != self.class) || !isDefined(self.lastClass))
     changedClass = true;
 
-  if(
-    level.gameType == "infect" &&
-    (!isDefined(self.last_infected_class) || self.last_infected_class != self.infected_class)
-  ) {
+  if(level.gameType == "infect" && (!isDefined(self.last_infected_class) || self.last_infected_class != self.infected_class)) {
     changedClass = true;
   }
 

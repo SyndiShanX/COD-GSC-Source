@@ -443,8 +443,7 @@ weapon_combo_event() {
 }
 
 bhb_combo_loc_check(grenade, model, info) {
-  if(isDefined(level.black_hold_bomb_target_trig) &&
-    grenade IsTouching(level.black_hold_bomb_target_trig)) {
+  if(isDefined(level.black_hold_bomb_target_trig) && grenade IsTouching(level.black_hold_bomb_target_trig)) {
     trig = spawn("trigger_damage", grenade.origin, 0, 15, 72);
     grenade thread wait_for_combo(trig);
   }
@@ -535,8 +534,7 @@ wait_for_gersh_vox() {
 }
 
 reward_wait() {
-  while(!is_player_valid(self) ||
-    (self UseButtonPressed() && self in_revive_trigger())) {
+  while(!is_player_valid(self) || (self UseButtonPressed() && self in_revive_trigger())) {
     wait(1.0);
   }
   level thread maps\_zombiemode_powerups::minigun_weapon_powerup(self, 90);

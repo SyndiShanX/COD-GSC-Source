@@ -28,16 +28,11 @@ main() {
 
   flag_set("coop_show_constant_icon");
 
-  // "Partner down"
-  precacheString(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
-  // "Bleeding out"
-  precacheString(&"SCRIPT_COOP_BLEEDING_OUT");
-  // "Reviving partner..."
-  precacheString(&"SCRIPT_COOP_REVIVING_PARTNER");
-  // "Being revived..."
-  precacheString(&"SCRIPT_COOP_REVIVING");
-  // "Hold ^3[{+usereload}]^7 to revive"
-  precacheString(&"SCRIPT_COOP_REVIVE");
+  // "Partner down"precacheString(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
+  // "Bleeding out"precacheString(&"SCRIPT_COOP_BLEEDING_OUT");
+  // "Reviving partner..."precacheString(&"SCRIPT_COOP_REVIVING_PARTNER");
+  // "Being revived..."precacheString(&"SCRIPT_COOP_REVIVING");
+  // "Hold ^3[{+usereload}]^7 to revive"precacheString(&"SCRIPT_COOP_REVIVE");
 
   precacheShader("hint_health");
   precacheShader("coop_player_location");
@@ -328,8 +323,7 @@ player_coop_create_use_target() {
   level.revive_ent setModel("tag_origin");
   level.revive_ent linkTo(self, "tag_origin");
   level.revive_ent makeUsable();
-  level.revive_ent setHintString(&"SCRIPT_COOP_REVIVE"); // LANG_ENGLISH		Hold ^3[{+usereload}]^7 to revive"
-}
+  level.revive_ent setHintString(&"SCRIPT_COOP_REVIVE"); // LANG_ENGLISH		Hold ^3[{+usereload}]^7 to revive"}
 
 player_coop_destroy_use_target() {
   foreach(player in level.players)
@@ -984,8 +978,7 @@ player_coop_set_original_attributes() {
   self.down_part2_proc_ran = undefined;
 
   // This is done like this because when a guy goes down, he forces the *other*
-  // person to turn on the health icon. Since only one guy can be down at a time,
-  // we can trust that we only need to reset on the other player.
+  // person to turn on the health icon. Since only one guy can be down at a time, // we can trust that we only need to reset on the other player.
   //	self CreateFriendlyHudIcon_Normal();
   other_player = get_other_player(self);
   other_player delaythread(0.1, ::CreateFriendlyHudIcon_Normal);

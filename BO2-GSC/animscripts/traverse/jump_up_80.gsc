@@ -18,7 +18,7 @@ main() {
   self orientmode("face angle", startnode.angles[1]);
   realheight = startnode.traverse_height - startnode.origin[2];
   self thread teleportthread(realheight - 80);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("jump_up_80", anim.dogtraverseanims["jump_up_80"], 1, 0.2, 1);
   self animscripts\shared::donotetracks("jump_up_80");
   self.traversecomplete = 1;

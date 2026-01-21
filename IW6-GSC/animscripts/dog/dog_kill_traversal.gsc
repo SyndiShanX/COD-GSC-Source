@@ -69,7 +69,7 @@ dog_traverse_kill(var_0) {
   self traversemode("noclip");
   self clearpitchorient();
   self setCanDamage(0);
-  self clearanim( % body, 0.1);
+  self clearanim(%body, 0.1);
   self setflaggedanimrestart("dog_traverse", level.scr_anim["generic"][var_0["traverseAnim"]][0], 1, 0.2, 1);
   animscripts\shared::donotetracks("dog_traverse");
   self unlink();
@@ -93,7 +93,7 @@ human_traverse_kill() {
   if(animscripts\utility::usingsidearm())
     animscripts\shared::placeweaponon(self.primaryweapon, "right");
 
-  self clearanim( % body, 0.1);
+  self clearanim(%body, 0.1);
   self setflaggedanimrestart("aianim", level.scr_anim["generic"][self.traversedata["traverseAnim"]][1], 1, 0.1, 1);
 
   if(isDefined(self.traversedata["linkMe"]))

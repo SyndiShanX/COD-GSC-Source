@@ -76,7 +76,7 @@ cansidestep() {
 
 shouldsidestep() {
   if(cansidestep()) {
-    runlooptime = self getanimtime( % walk_and_run_loops);
+    runlooptime = self getanimtime(%walk_and_run_loops);
 
     if(self.a.rusherhadsidestepevent)
       return "roll";
@@ -157,7 +157,7 @@ dosidestep() {
 playsidestepanim(stepanim, rushersidesteptype) {
   self animmode("gravity", 0);
   self orientmode("face angle", self.angles[1]);
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("stepAnim", stepanim, 1, 0.2, self.moveplaybackrate);
 
   if(rushersidesteptype == "step") {
@@ -249,8 +249,8 @@ sidestepblendout(animlength, animname, hasexitalign) {
   if(!hasexitalign)
     self notify(animname, "exit_align");
 
-  self clearanim( % exposed_modern, 0);
-  self setflaggedanimknoballrestart("run_anim", animarray("run_n_gun_f"), % body, 1, 0.0, self.moveplaybackrate);
+  self clearanim(%exposed_modern, 0);
+  self setflaggedanimknoballrestart("run_anim", animarray("run_n_gun_f"), %body, 1, 0.0, self.moveplaybackrate);
   self animscripts\run::aimingon();
 }
 
@@ -283,8 +283,8 @@ setruncycle() {
 }
 
 aimingon() {
-  self animscripts\shared::setaiminganims( % aim_2, % aim_4, % aim_6, % aim_8);
-  self setanim( % exposed_aiming, 1, 0);
+  self animscripts\shared::setaiminganims(%aim_2, %aim_4, %aim_6, %aim_8);
+  self setanim(%exposed_aiming, 1, 0);
   self setanimknoblimited(animarray("add_aim_up", "turn"), 1, 0.0);
   self setanimknoblimited(animarray("add_aim_down", "turn"), 1, 0.0);
   self setanimknoblimited(animarray("add_aim_left", "turn"), 1, 0.0);

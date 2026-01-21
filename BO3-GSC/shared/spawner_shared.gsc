@@ -1861,9 +1861,7 @@ function getscoreinfoxp(type) {
   if(isDefined(level.scoreinfo) && isDefined(level.scoreinfo[type])) {
     n_xp = level.scoreinfo[type][""];
     if(isDefined(level.xpmodifiercallback) && isDefined(n_xp)) {
-      n_xp = [
-        [level.xpmodifiercallback]
-      ](type, n_xp);
+      n_xp = [[level.xpmodifiercallback]](type, n_xp);
     }
     return n_xp;
   }

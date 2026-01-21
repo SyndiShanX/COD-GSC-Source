@@ -1145,9 +1145,7 @@ playerHurtcheck() {
 
     if(isDefined(mods[type])) {
       waittillframeend; // let the scripted grenade - specific stuff from _utility try first
-      [
-        [mods[type]]
-      ](point);
+      [[mods[type]]](point);
     }
   }
 }
@@ -1972,12 +1970,7 @@ healthOverlay_remove(overlay) {
 /*
 =============
 ///ScriptDocBegin
-"Name: resetSkill()"
-"Summary: Reset the gameskill settings, enabling you to change them."
-"Module: Gameskill"
-"Example: resetSkill();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: resetSkill()""Summary: Reset the gameskill settings, enabling you to change them.""Module: Gameskill""Example: resetSkill();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 resetSkill() {
@@ -2632,15 +2625,7 @@ bullet_attack(type) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_fractional_data_point( <name> , <frac> , <val> )"
-"Summary: Adds difficulty setting data for a specific system at a specified fraction. The in game difficulty will be blended between this and the other data points."
-"Module: gameskill"
-"MandatoryArg: <name>: The system being adjusted."
-"MandatoryArg: <frac>: Which fraction from 0 to 1 that this difficulty value exists at."
-"MandatoryArg: <val>: The value that this system should be set at when the difficulty is at the specified frac."
-"Example: 	add_fractional_data_point( "playerGrenadeRangeTime", 1.0, 7500 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_fractional_data_point( <name> , <frac> , <val> )""Summary: Adds difficulty setting data for a specific system at a specified fraction. The in game difficulty will be blended between this and the other data points.""Module: gameskill""MandatoryArg: <name>: The system being adjusted.""MandatoryArg: <frac>: Which fraction from 0 to 1 that this difficulty value exists at.""MandatoryArg: <val>: The value that this system should be set at when the difficulty is at the specified frac.""Example: 	add_fractional_data_point( "playerGrenadeRangeTime", 1.0, 7500 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_fractional_data_point(name, frac, val) {

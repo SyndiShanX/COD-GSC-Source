@@ -39,9 +39,7 @@ tryUseHeliSniper(lifeId, streakName) {
   if(isDefined(self.isJuggernautLevelCustom) && self.isJuggernautLevelCustom == true)
     return false;
 
-  else if(!isDefined(level.air_node_mesh) ||
-    !isDefined(closestStart) ||
-    !isDefined(closestNode)) {
+  else if(!isDefined(level.air_node_mesh) || !isDefined(closestStart) || !isDefined(closestNode)) {
     self iPrintLnBold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return false;
   }

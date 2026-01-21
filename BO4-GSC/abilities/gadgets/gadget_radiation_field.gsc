@@ -616,9 +616,7 @@ shutdown(var_fb096220) {
     buffer = 0;
 
     if(isDefined(level.var_ac6052e9)) {
-      buffer = [
-        [level.var_ac6052e9]
-      ]("playerExertBuffer", 0);
+      buffer = [[level.var_ac6052e9]]("playerExertBuffer", 0);
     }
 
     player thread[[level.heroplaydialog]]("exertRadiationSelfEnd", 30, buffer);

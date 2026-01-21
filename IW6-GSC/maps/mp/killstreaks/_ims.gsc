@@ -144,9 +144,7 @@ setCarryingIMS(imsForPlayer, allowCancel) {
       }
       if(level.console) {
         killstreakWeapon = getKillstreakWeapon(level.imsSettings[imsForPlayer.imsType].streakName);
-        if(isDefined(self.killstreakIndexWeapon) &&
-          killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) &&
-          !(self GetWeaponsListItems()).size) {
+        if(isDefined(self.killstreakIndexWeapon) && killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) && !(self GetWeaponsListItems()).size) {
           self _giveWeapon(killstreakWeapon, 0);
           self _setActionSlot(4, "weapon", killstreakWeapon);
         }
@@ -280,16 +278,11 @@ ims_moving_platform_death(data) {
 ims_handleDamage() {
   self endon("carried");
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    self.config.maxHealth,
-    "ims", ::ims_HandleDeathDamage, ::ims_ModifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(self.config.maxHealth, "ims", ::ims_HandleDeathDamage, ::ims_ModifyDamage, true);
 }
 
 ims_ModifyDamage(attacker, weapon, type, damage) {
-  if(self.hidden ||
-    weapon == "ims_projectile_mp") {
+  if(self.hidden || weapon == "ims_projectile_mp") {
     return -1;
   }
 
@@ -873,9 +866,7 @@ ims_attackTargets() {
     }
     self playSound("ims_trigger");
     if(is_aliens() && isDefined(level.ims_alien_grace_period_func) && isDefined(self.owner)) {
-      grace_period = [
-        [level.ims_alien_grace_period_func]
-      ](level.imsSettings[self.imsType].gracePeriod, self.owner);
+      grace_period = [[level.ims_alien_grace_period_func]](level.imsSettings[self.imsType].gracePeriod, self.owner);
       self maps\mp\gametypes\_weapons::explosiveTrigger(targetEnt, grace_period, "ims");
     } else
       self maps\mp\gametypes\_weapons::explosiveTrigger(targetEnt, level.imsSettings[self.imsType].gracePeriod, "ims");

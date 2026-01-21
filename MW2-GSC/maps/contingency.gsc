@@ -1201,7 +1201,7 @@ handle_defend_sub() {
   wait 1;
 
   //flee_pos = getstruct( "dock_enemies_flee", "targetname" ).origin;
-  //enemies = getaiarray( "axis" );
+  //enemies = getaiarray("axis" );
   //foreach( guy in enemies )
   //	guy thread enemies_flee( flee_pos );
 
@@ -1235,7 +1235,7 @@ handle_defend_sub() {
 //	friendlies = array_combine( friendlies, friendlies2 );
 //	
 //	//array_thread( friendlies, ::spawn_ai );
-//	friendly_starts = getstructarray( "sub_start_friendly", "targetname" );
+//	friendly_starts = getstructarray("sub_start_friendly", "targetname" );
 //	
 //	for( i = 0 ; i < friendlies.size ; i++ )
 //	{
@@ -1269,7 +1269,7 @@ handle_defend_sub() {
 //	
 //	disable_stealth_system();
 //	
-//	friendlies = getaiarray( "allies" );
+//	friendlies = getaiarray("allies" );
 //		foreach( g in friendlies )
 //			g thread turn_off_stealth_settings();
 //			
@@ -1299,7 +1299,7 @@ handle_defend_sub() {
 //	flag_wait( "friendlies_or_player_at_sub" );
 //	
 //	flee_pos = getstruct( "sub_obj_enemies_flee", "targetname" ).origin;
-//	enemies = getaiarray( "axis" );
+//	enemies = getaiarray("axis" );
 //	foreach( guy in enemies )
 //		guy thread enemies_flee( flee_pos );
 //	
@@ -1417,7 +1417,7 @@ handle_defend_sub() {
 //	//friendlies = array_combine( friendlies, friendlies2 );
 //	
 //	//array_thread( friendlies, ::spawn_ai );
-//	friendly_starts = getstructarray( "exit_sub_start_friendly", "targetname" );
+//	friendly_starts = getstructarray("exit_sub_start_friendly", "targetname" );
 //	
 //	for( i = 0 ; i < friendlies.size ; i++ )
 //	{
@@ -1451,7 +1451,7 @@ handle_defend_sub() {
 //	
 //	disable_stealth_system();
 //	
-//	friendlies = getaiarray( "allies" );
+//	friendlies = getaiarray("allies" );
 //		foreach( g in friendlies )
 //			g thread turn_off_stealth_settings();
 //			
@@ -1479,7 +1479,7 @@ handle_defend_sub() {
 //	flag_wait( "player_on_sub" );
 //	
 //	flee_pos = getstruct( "exit_sub_start_player", "targetname" ).origin;
-//	enemies = getaiarray( "axis" );
+//	enemies = getaiarray("axis" );
 //	foreach( guy in enemies )
 //		guy thread enemies_flee( flee_pos );
 //	
@@ -2620,7 +2620,7 @@ friendlies_shoot_at_truck_until_its_unloads() {
 //	
 //	if( !flag( "_stealth_spotted" ) )
 //	{
-//		enemies = getaiarray( "axis" );
+//		enemies = getaiarray("axis" );
 //		foreach( mf in enemies )
 //			mf delete();
 //	}
@@ -5543,7 +5543,7 @@ stealth_base() {
 //			if( isDefined( level.scr_anim[ "generic" ][ "DRS_run" ] ) )
 //			{
 //				if( IsArray( level.scr_anim[ "generic" ][ "DRS_run" ] ) )
-//					self set_generic_run_anim_array( "DRS_run" );
+//					self set_generic_run_anim_array("DRS_run" );
 //				else
 //					self set_generic_run_anim( "DRS_run" );
 //			}

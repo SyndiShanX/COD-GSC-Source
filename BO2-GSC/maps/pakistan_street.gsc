@@ -282,7 +282,7 @@ frogger_harper_movement() {
   level.harper disable_pain();
   level.harper disable_react();
   level.harper disable_ai_color();
-  level.harper set_cqb_run_anim( % ai_cqb_walk_f_water_light, % ai_cqb_walk_f_water_light, % ai_cqb_walk_f_water_light);
+  level.harper set_cqb_run_anim(%ai_cqb_walk_f_water_light, %ai_cqb_walk_f_water_light, %ai_cqb_walk_f_water_light);
   nd_path = getnode("harper_frogger_start", "targetname");
   level.harper setgoalnode(nd_path);
   ai_crosby = getent("crosby_ai", "targetname");
@@ -540,7 +540,7 @@ harper_run_to_gate() {
   level.harper.scale_speed_in_water = 0;
   level.harper.moveplaybackrate = 1.0;
   level.harper pakistan_move_mode("cqb_sprint");
-  level.harper set_cqb_run_anim( % ch_pakistan_3_3_hand_signals_run_harper, % ch_pakistan_3_3_hand_signals_run_harper, % ch_pakistan_3_3_hand_signals_run_harper);
+  level.harper set_cqb_run_anim(%ch_pakistan_3_3_hand_signals_run_harper, %ch_pakistan_3_3_hand_signals_run_harper, %ch_pakistan_3_3_hand_signals_run_harper);
   run_scene("bus_dam_harper_arrival");
   level thread maps\pakistan_anim::vo_call_to_gate();
   run_scene("bus_dam_harper_gate_idle");
@@ -1044,7 +1044,7 @@ debris_float() {
     wait 0.05;
     n_delta = n_delta + 0.05;
     self.float_anim_rate = clamp(lerpfloat(n_start_rate, 1, n_delta / 2), 0, 1);
-    self setanim( % o_pakistan_3_1_floating_debris, 1, 0, self.float_anim_rate);
+    self setanim(%o_pakistan_3_1_floating_debris, 1, 0, self.float_anim_rate);
   }
 }
 
@@ -1057,7 +1057,7 @@ debris_settle() {
     wait 0.05;
     n_delta = n_delta + 0.05;
     self.float_anim_rate = clamp(lerpfloat(n_start_rate, 0, n_delta / 2), 0, 1);
-    self setanim( % o_pakistan_3_1_floating_debris, 1, 0, self.float_anim_rate);
+    self setanim(%o_pakistan_3_1_floating_debris, 1, 0, self.float_anim_rate);
   }
 }
 
@@ -1194,7 +1194,7 @@ frogger_debris_pain_react() {
     anim_pain = self _get_best_frogger_pain_anim();
     e_temp = spawn("script_origin", self.origin);
     self linkto(e_temp);
-    self setflaggedanimknoballrestart("pain_anim", anim_pain, % body, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("pain_anim", anim_pain, %body, 1, 0.2, 1);
     self waittillmatch("pain_anim", "end");
 
     if(b_pain_enabled)

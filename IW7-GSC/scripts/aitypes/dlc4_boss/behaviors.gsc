@@ -720,9 +720,7 @@ pickrandomvalidaction(var_0) {
   var_2 = 0;
 
   foreach(var_4 in self.bossactions) {
-    if(cooldownfinished(var_4.name) && [
-        [var_4.canfunc]
-      ]()) {
+    if(cooldownfinished(var_4.name) && [[var_4.canfunc]]()) {
       var_1[var_1.size] = var_4;
       var_2 = var_2 + var_4.weight;
       continue;
@@ -739,9 +737,7 @@ pickrandomvalidaction(var_0) {
     var_6 = var_6 - var_4.weight;
 
     if(var_6 <= 0) {
-      [
-        [var_4.dofunc]
-      ](var_0);
+      [[var_4.dofunc]](var_0);
       resettimer(var_4.name, var_4.cooldowntime);
       return 1;
     }

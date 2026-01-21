@@ -283,9 +283,7 @@ onroundswitch() {
 
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [
-        [level._setteamscore]
-      ](team, game.stat[# "roundswon"][team]);
+      [[level._setteamscore]](team, game.stat[# "roundswon"][team]);
     }
   }
 }
@@ -366,9 +364,7 @@ onscoreclosemusic() {
     runnerupscore = 0;
 
     foreach(team in level.teams) {
-      score = [
-        [level._getteamscore]
-      ](team);
+      score = [[level._getteamscore]](team);
 
       if(score > topscore) {
         runnerupscore = topscore;
@@ -2494,9 +2490,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
   foreach(player in level.players) {
     if(player != attacker && player util::isprop() && isalive(player) && victim util::isprop()) {
       scoreevents::processscoreevent("prop_survived", player);
-      [
-        [level.var_37d62931]
-      ](player, 1);
+      [[level.var_37d62931]](player, 1);
       continue;
     }
 

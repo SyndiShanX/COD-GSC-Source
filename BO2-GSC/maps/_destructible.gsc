@@ -135,12 +135,12 @@ breakafter(time, damage, piece) {
 
 ceiling_fan_think() {
   self useanimtree(#animtree);
-  self setflaggedanimknobrestart("idle", % fxanim_gp_ceiling_fan_old_slow_anim, 1, 0.0, 1);
+  self setflaggedanimknobrestart("idle", %fxanim_gp_ceiling_fan_old_slow_anim, 1, 0.0, 1);
   self waittill("broken", destructible_event, attacker);
 
   if(destructible_event == "stop_idle") {
     self dodamage(5000, self.origin);
-    self setflaggedanimknobrestart("idle", % fxanim_gp_ceiling_fan_old_dest_anim, 1, 0.0, 1);
+    self setflaggedanimknobrestart("idle", %fxanim_gp_ceiling_fan_old_dest_anim, 1, 0.0, 1);
   }
 }
 
@@ -195,7 +195,7 @@ destructible_barrel_explosion(attacker, physics_explosion) {
 
 destructible_car_explosion(attacker) {
   self useanimtree(#animtree);
-  self setanim( % veh_car_destroy, 1.0, 0.0, 1.0);
+  self setanim(%veh_car_destroy, 1.0, 0.0, 1.0);
 
   if(self.classname != "script_vehicle") {
     self.destructiblecar = 1;

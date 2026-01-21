@@ -33,7 +33,7 @@ main(model, type) {
   build_deathfx("fire/firelp_med_pm", "tag_deathfx");
   build_deathfx("fire/firelp_med_pm", "tag_cargofire", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx(bmp_death_fx[model], undefined, "exp_armor_vehicle", undefined, undefined, undefined, 0);
-  build_drive( % bmp_movement, % bmp_movement_backwards, 10);
+  build_drive(%bmp_movement, %bmp_movement_backwards, 10);
 
   if(issubstr(model, "_low"))
     build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun_low");
@@ -112,10 +112,7 @@ include,vehicle_bmp_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp"default:"vehicletype" "bmp"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_winter_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -127,10 +124,7 @@ include,vehicle_bmp_winter
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_winter"
-default:"vehicletype" "bmp_physics"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp_winter"default:"vehicletype" "bmp_physics"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_winter (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -142,10 +136,7 @@ include,vehicle_bmp_winter
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_winter"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp_winter"default:"vehicletype" "bmp"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -157,10 +148,7 @@ include,vehicle_bmp_desert_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_desert"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp_desert"default:"vehicletype" "bmp"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -172,10 +160,7 @@ and these lines in your CSV:
 include,vehicle_bmp_low_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_low"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp_low"default:"vehicletype" "bmp"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_thermal (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -187,10 +172,7 @@ include,vehicle_bmp_thermal_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_thermal"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp_thermal"default:"vehicletype" "bmp"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -202,10 +184,7 @@ include,vehicle_bmp_woodland_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_woodland"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp_woodland"default:"vehicletype" "bmp"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_woodland_jeepride (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -217,10 +196,7 @@ include,vehicle_bmp_woodland_jeepride_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_woodland_jeepride"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_bmp_woodland_jeepride"default:"vehicletype" "bmp"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_bmp_woodland_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -232,7 +208,5 @@ include,vehicle_bmp_woodland_low_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bmp_woodland_low"
-default:"vehicletype" "bmp"
-default:"script_team" "axis"
+defaultmdl="vehicle_bmp_woodland_low"default:"vehicletype" "bmp"default:"script_team" "axis"
 */

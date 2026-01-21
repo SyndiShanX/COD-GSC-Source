@@ -13,7 +13,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathmodel("vehicle_t72_tank_low", "vehicle_t72_tank_d_body", 0.5);
   maps\_vehicle::build_deathmodel("vehicle_t72_tank_woodland", "vehicle_t72_tank_d_woodland_body", 0);
   maps\_vehicle::build_shoot_shock("tankblast");
-  maps\_vehicle::build_drive( % abrams_movement, % abrams_movement_backwards, 10);
+  maps\_vehicle::build_drive(%abrams_movement, %abrams_movement_backwards, 10);
   maps\_vehicle::build_deathfx("fx\explosions\vehicle_explosion_t72", "tag_deathfx", "exp_armor_vehicle", undefined, undefined, undefined, 0);
   maps\_vehicle::build_deathfx("fx\fire\firelp_large_pm", "tag_deathfx", "fire_metal_medium", undefined, undefined, 1, 0);
   maps\_vehicle::build_turret("t72_turret2", "tag_turret2", "vehicle_t72_tank_pkt_coaxial_mg");

@@ -639,12 +639,7 @@ actionnotify(var_0) {
         return;
       case "splash":
       case "killstreak_splash":
-        if(self.doingsplash[var_1].type != "splash" &&
-          self.doingsplash[var_1].type != "urgent_splash" &&
-          self.doingsplash[var_1].type != "killstreak_splash" &&
-          self.doingsplash[var_1].type != "challenge_splash" &&
-          self.doingsplash[var_1].type != "rankup_splash" &&
-          self.doingsplash[var_1].type != "promotion_splash") {
+        if(self.doingsplash[var_1].type != "splash" && self.doingsplash[var_1].type != "urgent_splash" && self.doingsplash[var_1].type != "killstreak_splash" && self.doingsplash[var_1].type != "challenge_splash" && self.doingsplash[var_1].type != "rankup_splash" && self.doingsplash[var_1].type != "promotion_splash") {
           self.notifytext.alpha = 0;
           self.notifytext2.alpha = 0;
           self.notifyicon.alpha = 0;

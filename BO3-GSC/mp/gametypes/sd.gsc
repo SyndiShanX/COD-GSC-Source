@@ -430,9 +430,7 @@ function bombs() {
     bombzone.useweapon = getweapon("briefcase_bomb");
     bombzone.visuals[0].killcament = spawn("script_model", bombzone.visuals[0].origin + vectorscale((0, 0, 1), 128));
     if(isDefined(level.bomb_zone_fixup)) {
-      [
-        [level.bomb_zone_fixup]
-      ](bombzone);
+      [[level.bomb_zone_fixup]](bombzone);
     }
     if(!level.multibomb) {
       bombzone.trigger setinvisibletoall();

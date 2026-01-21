@@ -108,9 +108,7 @@ init() {
   level.primaryProgressBarWidth = 120;
   level.primaryProgressBarTextY = -75;
   level.primaryProgressBarTextX = 0;
-  level.primaryProgressBarFontSize = .6; // 1.4 before font change from "objective"
-
-  level.teamProgressBarY = 32; // 205;
+  level.primaryProgressBarFontSize = .6; // 1.4 before font change from "objective"level.teamProgressBarY = 32; // 205;
   level.teamProgressBarHeight = 14;
   level.teamProgressBarWidth = 192;
   level.teamProgressBarTextY = 8; // 155;

@@ -37,9 +37,7 @@ createSquad(squadName, squadCreator) {
   squad = anim.squads[squadName];
   squad.squadName = squadName;
 
-  // SRS 10/17/08: added squad.team so we can still support custom-named squads,
-  //not just "axis" and "allies"
-  squad.team = getSquadTeam(squadCreator);
+  // SRS 10/17/08: added squad.team so we can still support custom-named squads, //not just "axis" and "allies"squad.team = getSquadTeam(squadCreator);
 
   squad.sightTime = 0;
   squad.origin = undefined;

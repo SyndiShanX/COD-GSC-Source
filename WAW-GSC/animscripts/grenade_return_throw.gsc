@@ -51,7 +51,7 @@ main() {
       throwAnim = % grenade_return_standing_throw_overhand_forward;
   }
   assert(isDefined(throwAnim));
-  self setFlaggedAnimKnoballRestart("throwanim", throwAnim, % body, 1, .3);
+  self setFlaggedAnimKnoballRestart("throwanim", throwAnim, %body, 1, .3);
   hasPickup = (animHasNotetrack(throwAnim, "grenade_left") || animHasNotetrack(throwAnim, "grenade_right"));
   if(hasPickup) {
     self animscripts\shared::placeWeaponOn(self.weapon, "left");

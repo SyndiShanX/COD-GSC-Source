@@ -540,9 +540,7 @@ doThreatCalloutResponse(soundAlias, location) {
       else
         playerMF = false;
 
-      if(isDefined(player.pers["voiceNum"]) && (voiceNum != player.pers["voiceNum"] || mf != playerMF) &&
-        DistanceSquared(pos, player.origin) <= CASUALTY_DISTANCE_LIMIT &&
-        !isSpeakerInRange(player)) {
+      if(isDefined(player.pers["voiceNum"]) && (voiceNum != player.pers["voiceNum"] || mf != playerMF) && DistanceSquared(pos, player.origin) <= CASUALTY_DISTANCE_LIMIT && !isSpeakerInRange(player)) {
         prefix = player.pers["voicePrefix"];
         echoAlias = prefix + "co_loc_" + location + "_echo";
         if(SoundExists(echoAlias) && cointoss())
@@ -626,10 +624,8 @@ canSay(soundType) {
   }
   limit = level.bcInfo["timeout"][soundType];
   time = GetTime() - level.bcInfo["last_say_time"][self_pers_team][soundType];
-  if(
-    limit < time
-
-  ) {
+  if(limit < time
+) {
     return true;
   }
   return false;
@@ -897,10 +893,7 @@ battleChatter_printDump(alias) {
     factionPrefix = maps\mp\gametypes\_teams::getTeamVoicePrefix(self.team);
     factionPrefix = GetSubStr(factionPrefix, 0, factionPrefix.size - 1);
 
-    dumpString = level.script + "," +
-      factionPrefix + "," +
-      self.pers["voiceNum"] + "," +
-      aliasType;
+    dumpString = level.script + "," + factionPrefix + "," + self.pers["voiceNum"] + "," + aliasType;
 
     battleChatter_printDumpLine(level.bcs_csv_dumpFile, dumpString, "bcs_csv_dumpFileWriting");
   } else if(dumpType == "txt") {

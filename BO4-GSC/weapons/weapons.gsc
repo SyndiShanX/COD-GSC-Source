@@ -965,9 +965,7 @@ begin_grenade_tracking() {
   }
 
   function_92d1707f(eventname, blackboxeventname, {
-    #gametime: gettime(),
-    #spawnid: getplayerspawnid(self),
-    #weaponname: weapon.name
+    #gametime: gettime(), #spawnid: getplayerspawnid(self), #weaponname: weapon.name
   });
   cookedtime = gettime() - starttime;
 

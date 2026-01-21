@@ -78,8 +78,8 @@ box_footprint_think() {
     self.n_souls_absorbed++;
 
     if(self.n_souls_absorbed == 1) {
-      self clearanim( % o_zombie_dlc4_challenge_box_close, 0);
-      self setanim( % o_zombie_dlc4_challenge_box_open);
+      self clearanim(%o_zombie_dlc4_challenge_box_close, 0);
+      self setanim(%o_zombie_dlc4_challenge_box_open);
       self delay_thread(1, ::setclientfield, "foot_print_box_glow", 1);
 
       if(isDefined(player) && !flag("vo_soul_box_intro_played"))
@@ -98,8 +98,8 @@ box_footprint_think() {
 
     if(self.n_souls_absorbed == n_souls_required) {
       wait 1;
-      self clearanim( % o_zombie_dlc4_challenge_box_open, 0);
-      self setanim( % o_zombie_dlc4_challenge_box_close);
+      self clearanim(%o_zombie_dlc4_challenge_box_open, 0);
+      self setanim(%o_zombie_dlc4_challenge_box_close);
     }
   }
 
@@ -147,8 +147,8 @@ watch_for_foot_stomp() {
 
   while(true) {
     self waittill("robot_foot_stomp");
-    self clearanim( % o_zombie_dlc4_challenge_box_open, 0);
-    self setanim( % o_zombie_dlc4_challenge_box_close);
+    self clearanim(%o_zombie_dlc4_challenge_box_open, 0);
+    self setanim(%o_zombie_dlc4_challenge_box_close);
     self setclientfield("foot_print_box_glow", 0);
     self.n_souls_absorbed = 0;
     wait 5;

@@ -107,9 +107,7 @@ function setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_base_valu
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
-      [
-        [func]
-      ](n_dvar);
+      [[func]](n_dvar);
       setdvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();

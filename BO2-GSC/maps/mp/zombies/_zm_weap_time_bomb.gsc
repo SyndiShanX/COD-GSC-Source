@@ -413,12 +413,8 @@ _time_bomb_saves_enemy_info(s_temp) {
   for(i = 0; i < a_enemies.size; i++) {
     s_data = spawnStruct();
 
-    if(!isDefined(level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_filter_func) || a_enemies[i][
-        [level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_filter_func]
-      ]()) {
-      a_enemies[i][
-        [level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_func]
-      ](s_data);
+    if(!isDefined(level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_filter_func) || a_enemies[i][[level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_filter_func]]()) {
+      a_enemies[i][[level._time_bomb.enemy_type[s_temp.round_type].enemy_data_save_func]](s_data);
       s_temp.enemies[s_temp.enemies.size] = s_data;
     }
   }
@@ -1566,9 +1562,7 @@ _get_time_bomb_round_type() {
   a_keys = getarraykeys(level._time_bomb.enemy_type);
 
   for(i = 0; i < a_keys.size; i++) {
-    if([
-        [level._time_bomb.enemy_type[a_keys[i]].conditions_for_round]
-      ]())
+    if([[level._time_bomb.enemy_type[a_keys[i]].conditions_for_round]]())
       a_round_type[a_round_type.size] = a_keys[i];
   }
 
@@ -1702,9 +1696,7 @@ set_actor_traverse_callbacks() {
     }
 
     if(isDefined(level.time_bomb_custom_actor_speedup_func))
-      actors[i][
-        [level.time_bomb_custom_actor_speedup_func]
-      ]();
+      actors[i][[level.time_bomb_custom_actor_speedup_func]]();
   }
 }
 

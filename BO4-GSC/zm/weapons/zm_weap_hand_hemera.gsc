@@ -576,9 +576,7 @@ function_3f079da() {
 
   if(isDefined(level.var_137b8e71)) {
     level notify(#"ww_hemera_hit", {
-      #player: self,
-      #e_entity: a_trace[# "entity"],
-      #v_position: a_trace[# "position"]
+      #player: self, #e_entity: a_trace[# "entity"], #v_position: a_trace[# "position"]
     });
   }
 

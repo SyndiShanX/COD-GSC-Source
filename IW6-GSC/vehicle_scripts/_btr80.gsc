@@ -24,7 +24,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_light(var_2, "brakelight_L", "TAG_REAR_LIGHT_LEFT", "fx/misc/car_brakelight_btr80", "brake", 0.0);
   maps\_vehicle::build_light(var_2, "spotlight", "TAG_FRONT_LIGHT_RIGHT", "fx/misc/spotlight_btr80", "spotlight", 0.2);
   maps\_vehicle::build_light(var_2, "spotlight_turret", "TAG_TURRET_LIGHT", "fx/misc/spotlight_btr80", "spotlight_turret", 0.0);
-  maps\_vehicle::build_drive( % btr80_movement, % btr80_movement_backwards, 10);
+  maps\_vehicle::build_drive(%btr80_movement, %btr80_movement_backwards, 10);
 
   if(issubstr(var_0, "_snow"))
     maps\_vehicle::build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun_snow");

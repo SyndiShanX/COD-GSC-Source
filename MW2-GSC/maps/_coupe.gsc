@@ -15,7 +15,7 @@ main(model, type) {
   build_destructible("vehicle_coupe_gray_destructible", "vehicle_coupe_gray");
 
   build_radiusdamage((0, 0, 32), 300, 200, 100, false);
-  build_drive( % uaz_driving_idle_forward, % uaz_driving_idle_backward, 10);
+  build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
   build_deathquake(1, 1.6, 500);
 
   build_treadfx();
@@ -68,10 +68,7 @@ include,vehicle_coupe_gray
 sound,vehicle_coupe,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_coupe_gray_destructible"
-default:"vehicletype" "coupe"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_coupe_gray_destructible"default:"vehicletype" "coupe"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_coupe_gold (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -83,7 +80,5 @@ include,vehicle_coupe_gold
 sound,vehicle_coupe,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_coupe_gold_destructible"
-default:"vehicletype" "coupe"
-default:"script_team" "allies"
+defaultmdl="vehicle_coupe_gold_destructible"default:"vehicletype" "coupe"default:"script_team" "allies"
 */

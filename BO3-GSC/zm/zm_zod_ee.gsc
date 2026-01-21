@@ -625,9 +625,7 @@ function function_729859d0() {
     level thread function_378c2b96();
     if(level flag::get("ee_final_boss_beam_active") === 0) {
       level thread function_c898ab1();
-      var_7f207012 = [
-        [level.o_zod_train]
-      ] - > get_players_on_train();
+      var_7f207012 = [[level.o_zod_train]] - > get_players_on_train();
       foreach(var_813273c3 in var_7f207012) {
         var_813273c3 thread zm_zod_util::set_rumble_to_player(6, 1);
       }
@@ -1819,9 +1817,7 @@ function function_83bdd16b() {
     spawn_point = undefined;
     favorite_enemy = function_6b57b2d3();
     if(isDefined(level.raps_spawn_func)) {
-      spawn_point = [
-        [level.raps_spawn_func]
-      ](favorite_enemy);
+      spawn_point = [[level.raps_spawn_func]](favorite_enemy);
     } else {
       spawn_point = zm_ai_raps::calculate_spawn_position(favorite_enemy);
     }

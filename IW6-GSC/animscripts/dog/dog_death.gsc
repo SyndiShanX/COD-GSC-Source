@@ -39,7 +39,7 @@ main() {
   if(isDefined(self.enemy) && isDefined(self.enemy.syncedmeleetarget) && self.enemy.syncedmeleetarget == self)
     self.enemy.syncedmeleetarget = undefined;
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   var_2 = getdogdeathanim("front");
 
   if(isDefined(self.deathanim))
@@ -67,6 +67,6 @@ getdogdeathanim(var_0) {
 
 initdogarchetype_death() {
   var_0 = [];
-  var_0["front"] = [ % iw6_dog_death_4, % iw6_dog_death_6];
+  var_0["front"] = [ % iw6_dog_death_4, %iw6_dog_death_6];
   anim.archetypes["dog"]["death"] = var_0;
 }

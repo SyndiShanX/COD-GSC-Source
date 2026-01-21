@@ -188,8 +188,7 @@ getSpawnPoint() {
 }
 
 onNormalDeath(victim, attacker, lifeId) {
-  if(isDefined(victim.cranked) &&
-    attacker isEnemy(victim)) {
+  if(isDefined(victim.cranked) && attacker isEnemy(victim)) {
     attacker maps\mp\gametypes\_missions::processChallenge("ch_cranky");
   }
 

@@ -420,7 +420,7 @@ noteTrackPoseCrouch(note, flagName) {
 
 noteTrackPoseProne(note, flagName) {
   if(IsSentient(self)) {
-    self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+    self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
     self EnterProneWrapper(1.0);
     self.a.pose = "prone";
     self notify("entered_pose" + "prone");
@@ -429,7 +429,7 @@ noteTrackPoseProne(note, flagName) {
 
 noteTrackPoseCrawl(note, flagName) {
   if(IsSentient(self)) {
-    self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+    self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
     self EnterProneWrapper(1.0);
     self.a.pose = "prone";
     self notify("entered_pose" + "prone");
@@ -756,9 +756,7 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
-      returnedNote = [
-        [notetracksFunc]
-      ](flagName, customFunction, debugIdentifier);
+      returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
       timetaken = GetTime() - time;
       if(timetaken < 0.05) {
         println(GetTime() + " " + debugIdentifier + " animscripts\shared::DoNoteTracksForever is trying to cause an infinite loop on anim " + flagName + ", returned " + returnedNote + ".");
@@ -936,7 +934,7 @@ getAimYawToPoint(point) {
 }
 
 trackShootEntOrPos() {
-  self animscripts\shared::setAimingAnims( % aim_2, % aim_4, % aim_6, % aim_8);
+  self animscripts\shared::setAimingAnims(%aim_2, %aim_4, %aim_6, %aim_8);
   self animscripts\shared::trackLoopStart();
 }
 
@@ -1341,12 +1339,10 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
         return;
       }
     }
-    if(self isSuppressedWrapper() && [
-        [canStopCallback]
-      ]()) {
+    if(self isSuppressedWrapper() && [[canStopCallback]]()) {
       return;
     }
-    self SetAnimKnobAll(lookAnim, % body, 1, .1);
+    self SetAnimKnobAll(lookAnim, %body, 1, .1);
     wait(0.1);
   }
 }
@@ -1394,7 +1390,7 @@ throwDownWeapon() {
     return;
   }
   self AnimMode("angle deltas");
-  self SetFlaggedAnimKnobAllRestart("weapon swap", swapAnim, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("weapon swap", swapAnim, %body, 1, .1, 1);
   note = "";
   while(note != "end") {
     self waittill("weapon swap", note);
@@ -1547,16 +1543,16 @@ switchWeapons() {
     return;
   }
   self animMode("angle deltas");
-  self SetFlaggedAnimKnobAllRestart("weapon swap", swapAnim, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("weapon swap", swapAnim, %body, 1, .1, 1);
   self DoNoteTracks("weapon swap");
   if(GetDvarInt(#"aiQuadrantSwitch") == 2) {
     pulloutAnim = getWeaponPulloutAnim();
     if(isDefined(swapAnim)) {
-      self SetFlaggedAnimKnobAllRestart("weapon swap", pulloutAnim, % body, 1, .1, 1);
+      self SetFlaggedAnimKnobAllRestart("weapon swap", pulloutAnim, %body, 1, .1, 1);
       self DoNoteTracks("weapon swap");
     }
   }
-  self ClearAnim( % weapon_switch, 0.2);
+  self ClearAnim(%weapon_switch, 0.2);
   self.a.weapon_switch_time = gettime();
   self.a.weapon_switch_for_distance_time = -1;
   self notify("weapon_switched");

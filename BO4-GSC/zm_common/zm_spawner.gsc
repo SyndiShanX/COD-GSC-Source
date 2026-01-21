@@ -56,9 +56,7 @@ init() {
 
   if(isDefined(level.ignore_spawner_func)) {
     for(i = 0; i < level.zombie_spawners.size; i++) {
-      ignore = [
-        [level.ignore_spawner_func]
-      ](level.zombie_spawners[i]);
+      ignore = [[level.ignore_spawner_func]](level.zombie_spawners[i]);
 
       if(ignore) {
         arrayremovevalue(level.zombie_spawners, level.zombie_spawners[i]);
@@ -498,8 +496,7 @@ do_a_taunt() {
   if(freq >= randomint(100)) {
     bhtnactionstartevent(self, "taunt");
     self notify(#"bhtn_action_notify", {
-      #action: "taunt"
-    });
+      #action: "taunt"});
     tauntstate = "zm_taunt";
 
     if(isDefined(self.first_node.zbarrier) && self.first_node.zbarrier getzbarriertauntanimstate() != "") {
@@ -564,8 +561,7 @@ should_attack_player_thru_boards() {
 
   bhtnactionstartevent(self, "attack");
   self notify(#"bhtn_action_notify", {
-    #action: "attack"
-  });
+    #action: "attack"});
   self animscripted("window_melee_anim", self.origin, self.angles, "ai_zombie_window_attack_arm_l_out");
   self window_notetracks("window_melee_anim");
   return true;
@@ -1225,8 +1221,7 @@ zombie_death_event(zombie) {
   if(isDefined(attacker) && isplayer(attacker) && attacker player_can_score_from_zombies()) {
     if(isDefined(zombie.script_parameters)) {
       attacker notify(#"zombie_death_params", {
-        #params: zombie.script_parameters,
-        #var_3ef38c68: isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area
+        #params: zombie.script_parameters, #var_3ef38c68: isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area
       });
     }
 
@@ -1335,8 +1330,7 @@ zombie_death_event(zombie) {
 
   bhtnactionstartevent(zombie, "death");
   self notify(#"bhtn_action_notify", {
-    #action: "death"
-  });
+    #action: "death"});
   zombie thread zombie_utility::zombie_eye_glow_stop();
 
   if(isactor(zombie)) {
@@ -1438,10 +1432,7 @@ function_dce9f1a6(spots) {
 
   foreach(player in players) {
     var_1cb510f7[player getentitynumber()] = {
-      #player: player,
-      #count: 0,
-      #valid: zombie_utility::is_player_valid(player, 1, 1),
-      #zone: player zm_utility::get_current_zone(1)
+      #player: player, #count: 0, #valid: zombie_utility::is_player_valid(player, 1, 1), #zone: player zm_utility::get_current_zone(1)
     };
   }
 
@@ -1579,8 +1570,7 @@ function_dce9f1a6(spots) {
   }
 
   return {
-    #spot: array::random(a_candidates),
-    #player: player
+    #spot: array::random(a_candidates), #player: player
   };
 }
 

@@ -308,15 +308,7 @@ doFlameDamage() {
       wait(0.25);
     }
   }
-  self maps\mp\gametypes\_weapons::damageEnt(
-    self.eInflictor,
-    self.damageOwner,
-    self.damage,
-    "MOD_BURNED",
-    "napalm_mp",
-    self.pos,
-    vectornormalize(self.damageCenter - self.pos)
-  );
+  self maps\mp\gametypes\_weapons::damageEnt(self.eInflictor, self.damageOwner, self.damage, "MOD_BURNED", "napalm_mp", self.pos, vectornormalize(self.damageCenter - self.pos));
 }
 napalmDamageEntsThread() {
   self notify("napalmDamageEntsThread");

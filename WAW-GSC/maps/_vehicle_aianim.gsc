@@ -398,9 +398,7 @@ guy_handle(guy, pos) {
   guy endon("jumpedout");
   while(1) {
     self waittill("groupedanimevent", other);
-    if(isDefined(level.vehicle_aianimcheck[other]) && ![
-        [level.vehicle_aianimcheck[other]]
-      ](guy, pos))
+    if(isDefined(level.vehicle_aianimcheck[other]) && ![[level.vehicle_aianimcheck[other]]](guy, pos))
       continue;
     if(isDefined(self.groupedanim_pos)) {
       if(pos != self.groupedanim_pos)
@@ -892,9 +890,7 @@ guy_unload(guy, pos) {
   bNoanimUnload = false;
   if(isDefined(animpos.bNoanimUnload))
     bNoanimUnload = true;
-  else if(!isDefined(animpos.getout) ||
-    (!isDefined(self.script_unloadmgguy) && (isDefined(animpos.bIsgunner) && animpos.bIsgunner)) ||
-    isDefined(self.script_keepdriver) && pos == 0) {
+  else if(!isDefined(animpos.getout) || (!isDefined(self.script_unloadmgguy) && (isDefined(animpos.bIsgunner) && animpos.bIsgunner)) || isDefined(self.script_keepdriver) && pos == 0) {
     self thread guy_idle(guy, pos);
     return;
   }

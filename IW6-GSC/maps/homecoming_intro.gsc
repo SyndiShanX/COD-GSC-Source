@@ -129,8 +129,8 @@ intro_player_nh90() {
   var_1 thread maps\_utility::play_sound_on_entity("scn_homecoming_heli_landing");
   var_1 thread maps\homecoming_util::delete_on_flag("TRIGFLAG_player_up_bunker_stairs");
   var_1 notify("kill_treads_forever");
-  var_1 setanim( % nh90_right_door_open, 1, 1, 10);
-  var_1 setanimrestart( % nh90_landing_gear_down, 1, 1, 10);
+  var_1 setanim(%nh90_right_door_open, 1, 1, 10);
+  var_1 setanimrestart(%nh90_landing_gear_down, 1, 1, 10);
   level.intro_player_nh90 = var_1;
   level.dog = maps\homecoming_util::dog_spawn();
   var_2 = common_scripts\utility::getstructarray("intro_nh90_hero_spots", "targetname");
@@ -1028,8 +1028,8 @@ intro_bunker_turrets_fire(var_0) {
 intro_medic_osprey() {
   var_0 = maps\_vehicle::spawn_vehicle_from_targetname("intro_medic_osprey");
   var_0 notify("stop_kicking_up_dust");
-  var_0 setanimrestart( % v22_osprey_wings_up, 1, 0.2, 10);
-  var_0 setanimrestart( % v22_osprey_hatch_down, 1, 0.2, 10);
+  var_0 setanimrestart(%v22_osprey_wings_up, 1, 0.2, 10);
+  var_0 setanimrestart(%v22_osprey_hatch_down, 1, 0.2, 10);
 }
 
 intro_runners() {

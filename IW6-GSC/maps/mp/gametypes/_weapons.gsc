@@ -77,8 +77,7 @@ init() {
 
       if(getDvar("scr_dump_weapon_assets") != "") {
         printLn("");
-        printLn("
-          printLn("weapon,mp/" + weapon_name + "_mp");
+        printLn("printLn("weapon,mp/" + weapon_name + "_mp");
         }
 
         attachmentNames = [];
@@ -121,9 +120,7 @@ init() {
         }
 
         if(getDvar("scr_dump_weapon_assets") != "" && attachmentCombos.size)
-          println("
-
-            foreach(combo in attachmentCombos) {
+          println("foreach(combo in attachmentCombos) {
               if(getDvar("scr_dump_weapon_assets") != "")
                 println("weapon,mp/" + weapon_name + "_" + combo + "_mp");
 
@@ -577,11 +574,7 @@ init() {
         if(isDefined(weaponOld) && weaponOld != "none") {
           weaponOld = getBaseWeaponName(weaponOld);
           perkRemove = weaponPerkMap(weaponOld);
-          if(isDefined(perkRemove) &&
-            (!isDefined(perkAdd) || perkRemove != perkAdd) &&
-            self _hasPerk(perkRemove) &&
-            (!isDefined(perksIgnore) || !array_contains(perksIgnore, perkRemove))
-          ) {
+          if(isDefined(perkRemove) && (!isDefined(perkAdd) || perkRemove != perkAdd) && self _hasPerk(perkRemove) && (!isDefined(perksIgnore) || !array_contains(perksIgnore, perkRemove))) {
             self _unsetPerk(perkRemove);
           }
         }
@@ -802,11 +795,7 @@ init() {
 
         result = false;
 
-        if(IsSubStr(weapon, "l115a3scope") ||
-          IsSubStr(weapon, "l115a3vzscope") ||
-          IsSubStr(weapon, "usrscope") ||
-          IsSubStr(weapon, "usrvzscope")
-        ) {
+        if(IsSubStr(weapon, "l115a3scope") || IsSubStr(weapon, "l115a3vzscope") || IsSubStr(weapon, "usrscope") || IsSubStr(weapon, "usrvzscope")) {
           result = true;
         }
         return result;
@@ -1951,10 +1940,7 @@ init() {
       }
 
       movingPlatformDetonate(data) {
-        if(!isDefined(data.lastTouchedPlatform) ||
-          !isDefined(data.lastTouchedPlatform.destroyExplosiveOnCollision) ||
-          data.lastTouchedPlatform.destroyExplosiveOnCollision
-        ) {
+        if(!isDefined(data.lastTouchedPlatform) || !isDefined(data.lastTouchedPlatform.destroyExplosiveOnCollision) || data.lastTouchedPlatform.destroyExplosiveOnCollision) {
           self notify("detonateExplosive");
         }
       }
@@ -3020,8 +3006,7 @@ init() {
       empCanDamage(ent, pos, radiusSq, doLOS, startRadius) {
         entpos = ent.origin;
         distSq = DistanceSquared(pos, entpos);
-        return (distSq < radiusSq &&
-          (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, ent)));
+        return (distSq < radiusSq && (!doLOS || weaponDamageTracePassed(pos, entpos, startRadius, ent)));
       }
 
       weaponDamageTracePassed(from, to, startRadius, ent) {
@@ -3056,18 +3041,7 @@ init() {
       damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
         if(self.isPlayer) {
           self.damageOrigin = damagepos;
-          self.entity thread[[level.callbackPlayerDamage]](
-            eInflictor,
-            eAttacker,
-            iDamage,
-            0,
-            sMeansOfDeath,
-            sWeapon,
-            damagepos,
-            damagedir,
-            "none",
-            0
-          );
+          self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0);
         } else {
           if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp" || sWeapon == "stealth_bomb_mp" || sWeapon == "alienclaymore_mp")) {
             return;
@@ -3270,8 +3244,7 @@ init() {
       }
 
       isRocketLauncher(weapName) {
-        return (weapName == "iw6_panzerfaust3_mp" ||
-          weapName == "iw6_maaws_mp");
+        return (weapName == "iw6_panzerfaust3_mp" || weapName == "iw6_maaws_mp");
       }
 
       updateSavedLastWeapon() {

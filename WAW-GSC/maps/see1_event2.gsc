@@ -599,11 +599,7 @@ pacing_planes(plane_id) {
   plane_trigger = getent(plane_id, "targetname");
   plane_trigger waittill("trigger");
   start_node = getvehiclenode(plane_id, "script_noteworthy");
-  plane = spawnvehicle("vehicle_rus_airplane_il2",
-    "plane",
-    "stuka",
-    start_node.origin,
-    start_node.angles);
+  plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
   plane attachPath(start_node);
   plane startpath();
   plane playSound("fly_by2");
@@ -1184,8 +1180,7 @@ ev2_tank_loop_fire(init_delay, end_msg, init_target) {
           continue_search = false;
           continue;
         }
-        if((self.see1_tank_current_target istouching(wheat_field_triggers[0])) == false &&
-          (self.see1_tank_current_target istouching(wheat_field_triggers[1])) == false) {
+        if((self.see1_tank_current_target istouching(wheat_field_triggers[0])) == false && (self.see1_tank_current_target istouching(wheat_field_triggers[1])) == false) {
           continue_search = false;
           continue;
         }

@@ -72,7 +72,7 @@ init_riotshield_AI_anims() {
   anim.arrivalEndStance["riotshield"] = "crouch";
   anim.arrivalEndStance["riotshield_crouch"] = "crouch";
 
-  addGrenadeThrowAnimOffset( % riotshield_crouch_grenade_toss, (-3.20014, 1.7098, 55.6886));
+  addGrenadeThrowAnimOffset(%riotshield_crouch_grenade_toss, (-3.20014, 1.7098, 55.6886));
 }
 
 noteTrackDetachShield(note, flagName) {
@@ -167,7 +167,7 @@ riotshield_charge() {
     return false;
 
   // get from animation
-  delta = getMoveDelta( % riotshield_bashA_attack, 0, 1);
+  delta = getMoveDelta(%riotshield_bashA_attack, 0, 1);
   rangeSq = lengthSquared(delta);
 
   if(distanceSquared(self.origin, self.melee.target.origin) < rangeSq)
@@ -188,7 +188,7 @@ riotshield_charge() {
 
     if(firstTry) {
       self.a.pose = "stand";
-      self SetFlaggedAnimKnobAll("chargeanim", % riotshield_sprint, % body, 1, .2, 1);
+      self SetFlaggedAnimKnobAll("chargeanim", %riotshield_sprint, %body, 1, .2, 1);
       firstTry = false;
     }
 
@@ -228,7 +228,7 @@ riotshield_melee_standard() {
     self animscripts\battleChatter_ai::evaluateMeleeEvent();
 
     self orientMode("face point", self.melee.target.origin);
-    self setflaggedanimknoballrestart("meleeanim", % riotshield_bash_vs_player, % body, 1, .2, 1);
+    self setflaggedanimknoballrestart("meleeanim", %riotshield_bash_vs_player, %body, 1, .2, 1);
 
     self.melee.inProgress = true;
 
@@ -307,9 +307,9 @@ riotshield_startMoveTransition() {
       transAnim = % riotshield_crouch2walk;
 
     rate = randomfloatrange(0.9, 1.1);
-    self setFlaggedAnimKnobAllRestart("startmove", transAnim, % body, 1, .1, rate);
+    self setFlaggedAnimKnobAllRestart("startmove", transAnim, %body, 1, .1, rate);
     self animscripts\shared::DoNoteTracks("startmove");
-    self clearanim( % riotshield_crouch2walk, 0.5);
+    self clearanim(%riotshield_crouch2walk, 0.5);
   }
 
   if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
@@ -325,11 +325,11 @@ riotshield_startMoveTransition() {
 
 riotshield_endMoveTransition() {
   if(self.prevScript == "move" && self.a.pose == "crouch") {
-    self clearAnim( % root, .2);
+    self clearAnim(%root, .2);
 
     rate = randomfloatrange(0.9, 1.1);
     self animmode("zonly_physics");
-    self setFlaggedAnimKnobAllRestart("endmove", % riotshield_walk2crouch_8, % body, 1, .2, rate);
+    self setFlaggedAnimKnobAllRestart("endmove", %riotshield_walk2crouch_8, %body, 1, .2, rate);
     self animscripts\shared::DoNoteTracks("endmove");
     self animMode("normal");
   }
@@ -376,13 +376,13 @@ riotshield_bullet_hit_shield_clear() {
   self endon("new_hit_react");
 
   self waittillmatch("hitreact", "end");
-  self clearanim( % riotshield_react, 0.1);
+  self clearanim(%riotshield_react, 0.1);
 }
 
 riotshield_grenadeCower() {
   if(self.a.pose == "stand") {
-    self clearanim( % root, .2);
-    self setFlaggedAnimKnobAllRestart("trans", % riotshield_walk2crouch_8, % body, 1, .2, 1.2);
+    self clearanim(%root, .2);
+    self setFlaggedAnimKnobAllRestart("trans", %riotshield_walk2crouch_8, %body, 1, .2, 1.2);
     self animscripts\shared::DoNoteTracks("trans");
   }
 
@@ -415,8 +415,8 @@ riotshield_grenadeCower() {
     }
   }
 
-  self setAnimKnobAll( % riotshield_crouch_aim_5, % body, 1, 0.2, 1);
-  self setFlaggedAnimKnobAllRestart("grenadecower", % riotshield_crouch_idle_add, % add_idle, 1, 0.2, self.animplaybackrate);
+  self setAnimKnobAll(%riotshield_crouch_aim_5, %body, 1, 0.2, 1);
+  self setFlaggedAnimKnobAllRestart("grenadecower", %riotshield_crouch_idle_add, %add_idle, 1, 0.2, self.animplaybackrate);
   self animscripts\shared::DoNoteTracks("grenadecower");
 }
 
@@ -434,7 +434,7 @@ riotshield_flashbang() {
     flashArray[3] = % riotshield_crouch_grenade_flash4;
     flashAnim = flashArray[randomint(flashArray.size)];
 
-    self setFlaggedAnimKnobAllRestart("flashanim", flashAnim, % body, 1, .1, rate);
+    self setFlaggedAnimKnobAllRestart("flashanim", flashAnim, %body, 1, .1, rate);
     self.minPainDamage = 1000;
   }
 
@@ -460,10 +460,10 @@ riotshield_pain() {
       painArray[2] = % riotshield_crouch_grenade_blowbackR;
       painAnim = painArray[randomint(painArray.size)];
 
-      self setFlaggedAnimKnobAllRestart("painanim", painAnim, % body, 1, .2, rate);
+      self setFlaggedAnimKnobAllRestart("painanim", painAnim, %body, 1, .2, rate);
       self.minPainDamage = 1000;
     } else {
-      self setFlaggedAnimKnobAllRestart("painanim", % riotshield_crouch_pain, % body, 1, .2, rate);
+      self setFlaggedAnimKnobAllRestart("painanim", %riotshield_crouch_pain, %body, 1, .2, rate);
     }
   }
 
@@ -548,7 +548,7 @@ init_riotshield_animsets() {
   animset["straight_level"] = % riotshield_crouch_aim_5;
 
   animset["fire"] = % riotshield_crouch_fire_auto;
-  animset["single"] = array( % riotshield_crouch_fire_single);
+  animset["single"] = array(%riotshield_crouch_fire_single);
 
   // remove this burst, semi nonsense soon
   animset["burst2"] = % riotshield_crouch_fire_burst;
@@ -561,11 +561,11 @@ init_riotshield_animsets() {
   animset["semi4"] = % riotshield_crouch_fire_burst;
   animset["semi5"] = % riotshield_crouch_fire_burst;
 
-  animset["exposed_idle"] = array( % riotshield_crouch_idle_add, % riotshield_crouch_twitch);
-  animset["exposed_grenade"] = array( % riotshield_crouch_grenade_toss);
+  animset["exposed_idle"] = array(%riotshield_crouch_idle_add, %riotshield_crouch_twitch);
+  animset["exposed_grenade"] = array(%riotshield_crouch_grenade_toss);
 
-  animset["reload"] = array( % riotshield_crouch_reload);
-  animset["reload_crouchhide"] = array( % riotshield_crouch_reload);
+  animset["reload"] = array(%riotshield_crouch_reload);
+  animset["reload_crouchhide"] = array(%riotshield_crouch_reload);
 
   animset["turn_left_45"] = % riotshield_crouch_Lturn;
   animset["turn_left_90"] = % riotshield_crouch_Lturn;
@@ -659,7 +659,7 @@ riotshield_flee_and_drop_shield() {
     fleeAnim = % riotshield_crouch2stand_shield_drop;
 
   rate = randomFloatRange(0.85, 1.1);
-  self SetFlaggedAnimKnobAll("fleeanim", fleeAnim, % root, 1, .1, rate);
+  self SetFlaggedAnimKnobAll("fleeanim", fleeAnim, %root, 1, .1, rate);
   self animscripts\shared::DoNoteTracks("fleeanim"); // return on code_move
 
   self.maxFaceEnemyDist = 32;

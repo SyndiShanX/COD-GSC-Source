@@ -49,16 +49,7 @@ endonRemoveAnimActive(endonString, guyPackets) {
 /*
  =============
 ///ScriptDocBegin
-"Name: anim_first_frame( <guys> , <scene> , <tag> )"
-"Summary: Puts the animating models or AI or vehicles into the first frame of the animated scene. The animation is played relative to the entity that calls the scene"
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <array of things that animate> : An array of AI or vehicles or script_models, mixed or homogenous."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ]."
-"OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_first_frame( guys, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_first_frame( <guys> , <scene> , <tag> )""Summary: Puts the animating models or AI or vehicles into the first frame of the animated scene. The animation is played relative to the entity that calls the scene""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <array of things that animate> : An array of AI or vehicles or script_models, mixed or homogenous.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ].""OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_first_frame( guys, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 
@@ -73,16 +64,7 @@ anim_first_frame(guys, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_first_frame( <guy> , <scene> , <tag> )"
-"Summary: Puts the animating model or AI or vehicle into the first frame of the animated scene. The animation is played relative to the entity that calls the scene"
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that animates> : An AI or vehicle or script_model."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ]."
-"OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_generic_first_frame( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_first_frame( <guy> , <scene> , <tag> )""Summary: Puts the animating model or AI or vehicle into the first frame of the animated scene. The animation is played relative to the entity that calls the scene""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that animates> : An AI or vehicle or script_model.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ].""OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_generic_first_frame( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -97,16 +79,7 @@ anim_generic_first_frame(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic( <guy>, <scene> , <optional tag to animate relative to> )"
-"Summary: Makes an AI play a generic anim. The calling ent notifies itself the name of the animation scene when it completes."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI, model, or vehicle."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_generic( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic( <guy>, <scene> , <optional tag to animate relative to> )""Summary: Makes an AI play a generic anim. The calling ent notifies itself the name of the animation scene when it completes.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI, model, or vehicle.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_generic( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -119,16 +92,7 @@ anim_generic(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_gravity( <guy>, <scene> , <optional tag to animate relative to> )"
-"Summary: Makes an AI play a generic anim with gravity (so he'll self aline to any floor even if the animation doesnt). The calling ent notifies itself the name of the animation scene when it completes."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI, model, or vehicle."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_generic( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_gravity( <guy>, <scene> , <optional tag to animate relative to> )""Summary: Makes an AI play a generic anim with gravity (so he'll self aline to any floor even if the animation doesnt). The calling ent notifies itself the name of the animation scene when it completes.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI, model, or vehicle.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_generic( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_generic_gravity(guy, anime, tag) {
@@ -144,16 +108,7 @@ anim_generic_gravity(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_run( <guy>, <scene> , <optional tag to animate relative to> )"
-"Summary: Works like anim_generic but makes the anim blend out early so it can go into a run without pausing."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI, model, or vehicle."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_generic( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_run( <guy>, <scene> , <optional tag to animate relative to> )""Summary: Works like anim_generic but makes the anim blend out early so it can go into a run without pausing.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI, model, or vehicle.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_generic( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -166,16 +121,7 @@ anim_generic_run(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_reach( <guys>, <scene> , <optional tag to animate relative to> )"
-"Summary: Makes an AI move to the position to start an animation. The calling ent notifies itself the name of the animation scene when it completes."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI that will move."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_reach( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_reach( <guys>, <scene> , <optional tag to animate relative to> )""Summary: Makes an AI move to the position to start an animation. The calling ent notifies itself the name of the animation scene when it completes.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI that will move.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_reach( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -188,16 +134,7 @@ anim_generic_reach(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_reach_and_arrive( <guys>, <scene> , <optional tag to animate relative to> )"
-"Summary: Makes an AI move to the position to start an animation, with arrivals. The calling ent notifies itself the name of the animation scene when it completes."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI that will move."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_reach_and_arrive( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_reach_and_arrive( <guys>, <scene> , <optional tag to animate relative to> )""Summary: Makes an AI move to the position to start an animation, with arrivals. The calling ent notifies itself the name of the animation scene when it completes.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI that will move.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_reach_and_arrive( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -210,16 +147,7 @@ anim_generic_reach_and_arrive(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_and_plant( <guys>, <scene> , <optional tag to animate relative to> )"
-"Summary: Makes an AI move to the position to start an animation, with arrivals, and plants the point to the ground so you can do an animmode gravity after the reach. The calling ent notifies itself the name of the animation scene when it completes."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI that will move."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_reach_and_plant( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_and_plant( <guys>, <scene> , <optional tag to animate relative to> )""Summary: Makes an AI move to the position to start an animation, with arrivals, and plants the point to the ground so you can do an animmode gravity after the reach. The calling ent notifies itself the name of the animation scene when it completes.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI that will move.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_reach_and_plant( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -230,16 +158,7 @@ anim_reach_and_plant(guys, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_and_plant_and_arrive( <guys>, <scene> , <optional tag to animate relative to> )"
-"Summary: Makes an AI move to the position to start an animation, with arrivals, and plants the point to the ground so you can do an animmode gravity after the reach. The calling ent notifies itself the name of the animation scene when it completes."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI that will move."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_reach_and_plant( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_and_plant_and_arrive( <guys>, <scene> , <optional tag to animate relative to> )""Summary: Makes an AI move to the position to start an animation, with arrivals, and plants the point to the ground so you can do an animmode gravity after the reach. The calling ent notifies itself the name of the animation scene when it completes.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI that will move.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_reach_and_plant( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -250,17 +169,7 @@ anim_reach_and_plant_and_arrive(guys, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_loop( <guy>, <scene> , <optional ender notify> , <optional tag to animate relative to> )"
-"Summary: Makes an AI play a generic looping anim. The calling ent notifies itself the name of the animation scene when it completes."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <thing that will animate> AI, model, or vehicle."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ]."
-"OptionalArg: <optional ender notify> : Ends the loop on notify."
-"OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_generic_loop( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_loop( <guy>, <scene> , <optional ender notify> , <optional tag to animate relative to> )""Summary: Makes an AI play a generic looping anim. The calling ent notifies itself the name of the animation scene when it completes.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <thing that will animate> AI, model, or vehicle.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ generic ][ anime ].""OptionalArg: <optional ender notify> : Ends the loop on notify.""OptionalArg: <optional tag to animate relative to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_generic_loop( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -278,17 +187,7 @@ anim_generic_loop(guy, anime, ender, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_custom_animmode( <guys>, <animmode> , <scene> , <tag> )"
-"Summary: Makes an AI play an anim using a specific animmode."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <array of things that animate> : An array of AI."
-"MandatoryArg: <animmode> : The preferred animmode."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ]."
-"OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_custom_animmode( guys, "gravity", "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_custom_animmode( <guys>, <animmode> , <scene> , <tag> )""Summary: Makes an AI play an anim using a specific animmode.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <array of things that animate> : An array of AI.""MandatoryArg: <animmode> : The preferred animmode.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ].""OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_custom_animmode( guys, "gravity", "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -315,17 +214,7 @@ anim_custom_animmode(guys, custom_animmode, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_custom_animmode_loop( <guys>, <animmode> , <scene> , <tag> )"
-"Summary: Makes an AI play an anim using a specific animmode."
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <array of things that animate> : An array of AI."
-"MandatoryArg: <animmode> : The preferred animmode."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ]."
-"OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to."
-"Example: node anim_custom_animmode( guys, "gravity", "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_custom_animmode_loop( <guys>, <animmode> , <scene> , <tag> )""Summary: Makes an AI play an anim using a specific animmode.""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <array of things that animate> : An array of AI.""MandatoryArg: <animmode> : The preferred animmode.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ].""OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entities are attached to.""Example: node anim_custom_animmode( guys, "gravity", "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -352,18 +241,7 @@ wait_until_anim_finishes(anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_custom_animmode( <guy> , <custom_animmode> , <anime> , <tag> , <thread_func> )"
-"Summary: Runs a custom animmode on a level.scr_anim["generic"]anim."
-"Module: _Anim"
-"CallOn: An ai"
-"MandatoryArg: <guy>: The guy that animates "
-"MandatoryArg: <custom_animmode>: The animmode "
-"MandatoryArg: <anime>: The anim scene"
-"OptionalArg: <tag>: An optional tag that the guy should already be linked to"
-"OptionalArg: <thread_func>: An optional function to run in a thread when the custom animation starts"
-"Example: anim_generic_custom_animmode( guy, custom_animmode, anime, tag );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_custom_animmode( <guy> , <custom_animmode> , <anime> , <tag> , <thread_func> )""Summary: Runs a custom animmode on a level.scr_anim["generic"]anim.""Module: _Anim""CallOn: An ai""MandatoryArg: <guy>: The guy that animates ""MandatoryArg: <custom_animmode>: The animmode ""MandatoryArg: <anime>: The anim scene""OptionalArg: <tag>: An optional tag that the guy should already be linked to""OptionalArg: <thread_func>: An optional function to run in a thread when the custom animation starts""Example: anim_generic_custom_animmode( guy, custom_animmode, anime, tag );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -380,18 +258,7 @@ anim_generic_custom_animmode(guy, custom_animmode, anime, tag, thread_func) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_custom_animmode_loop( <guy> , <custom_animmode> , <anime> , <tag> , <thread_func> )"
-"Summary: Runs a custom animmode on a level.scr_anim["generic"]anim."
-"Module: _Anim"
-"CallOn: An ai"
-"MandatoryArg: <guy>: The guy that animates "
-"MandatoryArg: <custom_animmode>: The animmode "
-"MandatoryArg: <anime>: The anim scene"
-"OptionalArg: <tag>: An optional tag that the guy should already be linked to"
-"OptionalArg: <thread_func>: An optional function to run in a thread when the custom animation starts"
-"Example: anim_generic_custom_animmode( guy, custom_animmode, anime, tag );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_custom_animmode_loop( <guy> , <custom_animmode> , <anime> , <tag> , <thread_func> )""Summary: Runs a custom animmode on a level.scr_anim["generic"]anim.""Module: _Anim""CallOn: An ai""MandatoryArg: <guy>: The guy that animates ""MandatoryArg: <custom_animmode>: The animmode ""MandatoryArg: <anime>: The anim scene""OptionalArg: <tag>: An optional tag that the guy should already be linked to""OptionalArg: <thread_func>: An optional function to run in a thread when the custom animation starts""Example: anim_generic_custom_animmode( guy, custom_animmode, anime, tag );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -408,15 +275,7 @@ anim_generic_custom_animmode_loop(guy, custom_animmode, anime, tag, thread_func)
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_custom_animmode_solo( <guy> , <custom_animmode> , <anime> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_custom_animmode_solo( <guy> , <custom_animmode> , <anime> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_custom_animmode_solo(guy, custom_animmode, anime, tag) {
@@ -428,16 +287,7 @@ anim_custom_animmode_solo(guy, custom_animmode, anime, tag) {
 /*
  =============
 ///ScriptDocBegin
-"Name: anim_first_frame_solo( <guy> , <scene> , <tag> )"
-"Summary: Puts the animating model or AI or vehicle into the first frame of the animated scene. The animation is played relative to the entity that calls the scene"
-"Module: _Anim"
-"CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc."
-"MandatoryArg: <a single thing that animates> : An AI or vehicle or script_model that can animate."
-"MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ]."
-"OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entity is attached to."
-"Example: node anim_first_frame_solo( guy, "rappel_sequence" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_first_frame_solo( <guy> , <scene> , <tag> )""Summary: Puts the animating model or AI or vehicle into the first frame of the animated scene. The animation is played relative to the entity that calls the scene""Module: _Anim""CallOn: The root entity that is the point of relativity for the scene, be it node, ai, vehicle, etc.""MandatoryArg: <a single thing that animates> : An AI or vehicle or script_model that can animate.""MandatoryArg: <name of animation scene> : The anime in level.scr_anim[ animname ][ anime ].""OptionalArg: <optional tag to attach to> : A tag that the root entity has that the animating entity is attached to.""Example: node anim_first_frame_solo( guy, "rappel_sequence" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 
@@ -554,16 +404,7 @@ anim_custom_animmode_on_guy(guy, custom_animmode, anime, org, angles, animname_o
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_loop( <guys> , <anime> , <ender> , <tag> )"
-"Summary: An array of actors or script_models do a looping animation in sync to an optional tag or model. "
-"Module: _Anim"
-"CallOn: An entity or node that will be the root of the animation"
-"MandatoryArg: <guys>: Array of entities that will animate "
-"MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file "
-"OptionalArg: <ender>: The loops will stop reoccurring if this is notified to the root entity."
-"OptionalArg: <tag>: An optional tag that the scene is relative to"
-"Example: node thread anim_loop( guys, "wounded_idle" );"
-///ScriptDocEnd
+"Name: anim_loop( <guys> , <anime> , <ender> , <tag> )""Summary: An array of actors or script_models do a looping animation in sync to an optional tag or model. ""Module: _Anim""CallOn: An entity or node that will be the root of the animation""MandatoryArg: <guys>: Array of entities that will animate ""MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file ""OptionalArg: <ender>: The loops will stop reoccurring if this is notified to the root entity.""OptionalArg: <tag>: An optional tag that the scene is relative to""Example: node thread anim_loop( guys, "wounded_idle" );"///ScriptDocEnd
 =============
 */
 anim_loop(guys, anime, ender, tag) {
@@ -663,22 +504,17 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
       else
         animname = guy.animname;
 
-      if((isDefined(level.scr_face[animname])) &&
-        (isDefined(level.scr_face[animname][anime])) &&
-        (isDefined(level.scr_face[animname][anime][idleanim]))) {
+      if((isDefined(level.scr_face[animname])) && (isDefined(level.scr_face[animname][anime])) && (isDefined(level.scr_face[animname][anime][idleanim]))) {
         doFacialanim = true;
         facialAnim = level.scr_face[animname][anime][idleanim];
       }
 
-      if((isDefined(level.scr_sound[animname])) &&
-        (isDefined(level.scr_sound[animname][anime])) &&
-        (isDefined(level.scr_sound[animname][anime][idleanim]))) {
+      if((isDefined(level.scr_sound[animname])) && (isDefined(level.scr_sound[animname][anime])) && (isDefined(level.scr_sound[animname][anime][idleanim]))) {
         doDialogue = true;
         dialogue = level.scr_sound[animname][anime][idleanim];
       }
 
-      if(isDefined(level.scr_animSound[animname]) &&
-        isDefined(level.scr_animSound[animname][idleanim + anime])) {
+      if(isDefined(level.scr_animSound[animname]) && isDefined(level.scr_animSound[animname][idleanim + anime])) {
         guy playSound(level.scr_animSound[animname][idleanim + anime]);
       }
       /*
@@ -695,13 +531,10 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
       }
       // 			guy thread animsound_start_tracker( anime );
 
-      if((isDefined(level.scr_anim[animname])) &&
-        (isDefined(level.scr_anim[animname][anime])) &&
-        (!isAI(guy) || !guy doingLongDeath()))
+      if((isDefined(level.scr_anim[animname])) && (isDefined(level.scr_anim[animname][anime])) && (!isAI(guy) || !guy doingLongDeath()))
         doAnimation = true;
 
-      if((isDefined(level.scr_text[animname])) &&
-        (isDefined(level.scr_text[animname][anime])))
+      if((isDefined(level.scr_text[animname])) && (isDefined(level.scr_text[animname][anime])))
         doText = true;
 
       if(doAnimation) {
@@ -806,18 +639,7 @@ anim_single_failsafe(guys, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_single( <guys> , <anime> , <tag>, <anim_end_time> )"
-"Summary: An array of actors or script_models do an animation in sync to an optional tag or model. Returns after the longest animation completes."
-"Module: _Anim"
-"CallOn: An entity or node that will be the root of the animation"
-"MandatoryArg: <guys>: Array of entities that will animate "
-"MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file "
-"OptionalArg: <tag>: An optional tag that the scene is relative to"
-"OptionalArg: <anim_end_time>: The amount of time to end the animation early"
-"OptionalArg: <animname_override>: Overrides the animname of the guys animating"
-"Example: node thread anim_single( guys, "wounded_pickup" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_single( <guys> , <anime> , <tag>, <anim_end_time> )""Summary: An array of actors or script_models do an animation in sync to an optional tag or model. Returns after the longest animation completes.""Module: _Anim""CallOn: An entity or node that will be the root of the animation""MandatoryArg: <guys>: Array of entities that will animate ""MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file ""OptionalArg: <tag>: An optional tag that the scene is relative to""OptionalArg: <anim_end_time>: The amount of time to end the animation early""OptionalArg: <animname_override>: Overrides the animname of the guys animating""Example: node thread anim_single( guys, "wounded_pickup" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_single(guys, anime, tag, anim_end_time, animname_override) {
@@ -829,16 +651,7 @@ anim_single(guys, anime, tag, anim_end_time, animname_override) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_single_run( <guys> , <anime> , <tag> )"
-"Summary: Works like anim_single but the anim blends out early so it can blend into a run"
-"Module: _Anim"
-"CallOn: An entity or node that will be the root of the animation"
-"MandatoryArg: <guys>: Array of entities that will animate "
-"MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file "
-"OptionalArg: <tag>: An optional tag that the scene is relative to"
-"Example: node thread anim_single( guys, "wounded_pickup" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_single_run( <guys> , <anime> , <tag> )""Summary: Works like anim_single but the anim blends out early so it can blend into a run""Module: _Anim""CallOn: An entity or node that will be the root of the animation""MandatoryArg: <guys>: Array of entities that will animate ""MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file ""OptionalArg: <tag>: An optional tag that the scene is relative to""Example: node thread anim_single( guys, "wounded_pickup" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_single_run(guys, anime, tag, animname_override) {
@@ -888,26 +701,21 @@ anim_single_internal(guys, anime, tag, anim_end_time, animname_override) {
 
     guy assert_existance_of_anim(anime, animname);
 
-    if((isDefined(level.scr_face[animname])) &&
-      (isDefined(level.scr_face[animname][anime]))) {
+    if((isDefined(level.scr_face[animname])) && (isDefined(level.scr_face[animname][anime]))) {
       doFacialanim = true;
       facialAnim = level.scr_face[animname][anime];
       scriptedFaceAnim = facialAnim;
     }
 
-    if((isDefined(level.scr_sound[animname])) &&
-      (isDefined(level.scr_sound[animname][anime]))) {
+    if((isDefined(level.scr_sound[animname])) && (isDefined(level.scr_sound[animname][anime]))) {
       doDialogue = true;
       dialogue = level.scr_sound[animname][anime];
     }
 
-    if((isDefined(level.scr_anim[animname])) &&
-      (isDefined(level.scr_anim[animname][anime])) &&
-      (!isAI(guy) || !guy doingLongDeath()))
+    if((isDefined(level.scr_anim[animname])) && (isDefined(level.scr_anim[animname][anime])) && (!isAI(guy) || !guy doingLongDeath()))
       doAnimation = true;
 
-    if(isDefined(level.scr_animSound[animname]) &&
-      isDefined(level.scr_animSound[animname][anime])) {
+    if(isDefined(level.scr_animSound[animname]) && isDefined(level.scr_animSound[animname][anime])) {
       guy playSound(level.scr_animSound[animname][anime]);
     }
 
@@ -915,8 +723,7 @@ anim_single_internal(guys, anime, tag, anim_end_time, animname_override) {
       guy thread animsound_start_tracker(anime, animname);
     }
 
-    if((isDefined(level.scr_text[animname])) &&
-      (isDefined(level.scr_text[animname][anime])))
+    if((isDefined(level.scr_text[animname])) && (isDefined(level.scr_text[animname][anime])))
       doText = true;
 
     if(doAnimation) {
@@ -1329,8 +1136,7 @@ anim_handle_notetrack(scr_notetrack, guy, dialogue_array, tag_owner) {
   if(isDefined(scr_notetrack["delete model"]))
     anim_removeModel(guy, scr_notetrack);
 
-  if((isDefined(scr_notetrack["selftag"])) &&
-    (isDefined(scr_notetrack["effect"]))) {
+  if((isDefined(scr_notetrack["selftag"])) && (isDefined(scr_notetrack["effect"]))) {
     playFXOnTag(level._effect[scr_notetrack["effect"]], guy, scr_notetrack["selftag"]);
   }
 
@@ -1459,15 +1265,7 @@ anim_weight(animname, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_and_idle( <guy> , <anime> , <anime_idle> , <ender> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_and_idle( <guy> , <anime> , <anime_idle> , <ender> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach_and_idle(guys, anime, anime_idle, ender, tag) {
@@ -1521,17 +1319,7 @@ get_anim_position(tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_together( <guys> , <anime> , <tag> , <animname_override> )"
-"Summary: Makes AI reach their anim start points at the same time by adjusting moveplaybackrate"
-"Module: Anim"
-"CallOn: The scene root"
-"MandatoryArg: <guys>: The ai"
-"MandatoryArg: <anime>: The scene"
-"OptionalArg: <tag>: Optional tag for the root scene"
-"OptionalArg: <animname_override>: Optional animname override"
-"Example: node anim_reach_together( guys, "scene" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_together( <guys> , <anime> , <tag> , <animname_override> )""Summary: Makes AI reach their anim start points at the same time by adjusting moveplaybackrate""Module: Anim""CallOn: The scene root""MandatoryArg: <guys>: The ai""MandatoryArg: <anime>: The scene""OptionalArg: <tag>: Optional tag for the root scene""OptionalArg: <animname_override>: Optional animname override""Example: node anim_reach_together( guys, "scene" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach_together(guys, anime, tag, animname_override) {
@@ -1597,15 +1385,7 @@ modify_moveplaybackrate_together(ai) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach( <guys> , <anime> , <tag> , <animname_override> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach( <guys> , <anime> , <tag> , <animname_override> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach(guys, anime, tag, animname_override) {
@@ -1683,15 +1463,7 @@ anim_reach_with_funcs(guys, anime, tag, animname_override, start_func, end_func,
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_teleport( <guy> , <anime> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_teleport( <guy> , <anime> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_teleport(guys, anime, tag) {
@@ -1746,15 +1518,7 @@ anim_spawn_model(model, animname, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_spawn_tag_model( <model> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_spawn_tag_model( <model> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_spawn_tag_model(model, tag) {
@@ -1769,15 +1533,7 @@ anim_spawn_tag_model(model, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_link_tag_model( <model> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_link_tag_model( <model> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_link_tag_model(model, tag) {
@@ -1791,15 +1547,7 @@ anim_link_tag_model(model, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_spawner_teleport( <guys> , <anime> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_spawner_teleport( <guys> , <anime> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_spawner_teleport(guys, anime, tag) {
@@ -1882,15 +1630,7 @@ anim_changes_pushplayer(value) {
 /*
 =============
 ///ScriptDocBegin
-"Name: reach_with_arrivals_begin( <startorg> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: reach_with_arrivals_begin( <startorg> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 reach_with_arrivals_begin(startorg) {
@@ -1902,15 +1642,7 @@ reach_with_arrivals_begin(startorg) {
 /*
 =============
 ///ScriptDocBegin
-"Name: reach_with_planting( <startorg> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: reach_with_planting( <startorg> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 reach_with_planting(startorg) {
@@ -1926,15 +1658,7 @@ reach_with_planting(startorg) {
 /*
 =============
 ///ScriptDocBegin
-"Name: reach_with_planting_and_arrivals( <startorg> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: reach_with_planting_and_arrivals( <startorg> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 reach_with_planting_and_arrivals(startorg) {
@@ -1969,15 +1693,7 @@ looping_anim_ender(guy, ender) {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_animtree( <guy> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: get_animtree( <guy> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 get_animtree(guys) {
@@ -1988,15 +1704,7 @@ get_animtree(guys) {
 /*
 =============
 ///ScriptDocBegin
-"Name: SetAnimTree( <SetAnimTree> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: SetAnimTree( <SetAnimTree> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 SetAnimTree() {
@@ -2006,18 +1714,7 @@ SetAnimTree() {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_single_solo( <guy> , <anime> , <tag>, <anim_end_time>, <animname_override> )"
-"Summary: Do an anim on a guy from level.scr_anim[ animname ][ anime ]"
-"Module: _Anim"
-"CallOn: The base for an animation scene, such as a node"
-"MandatoryArg: <guy>: Guy that animates"
-"MandatoryArg: <anime>: Animation scene Scene"
-"OptionalArg: <tag>: A tag to animate relative to"
-"OptionalArg: <anim_end_time>: The amount of time to end the animation early"
-"OptionalArg: <animname_override>: Overrides the animname of the guys animating"
-"Example: level.price anim_single_solo( level.price, "whip_it_good" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_single_solo( <guy> , <anime> , <tag>, <anim_end_time>, <animname_override> )""Summary: Do an anim on a guy from level.scr_anim[ animname ][ anime ]""Module: _Anim""CallOn: The base for an animation scene, such as a node""MandatoryArg: <guy>: Guy that animates""MandatoryArg: <anime>: Animation scene Scene""OptionalArg: <tag>: A tag to animate relative to""OptionalArg: <anim_end_time>: The amount of time to end the animation early""OptionalArg: <animname_override>: Overrides the animname of the guys animating""Example: level.price anim_single_solo( level.price, "whip_it_good" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_single_solo(guy, anime, tag, anim_end_time, animname_override) {
@@ -2032,16 +1729,7 @@ anim_single_solo(guy, anime, tag, anim_end_time, animname_override) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_single_solo_run( <guy> , <anime> , <tag> )"
-"Summary: Do an anim on a guy from level.scr_anim[ animname ][ anime ] and end the anim early so he goes into a run smoothly."
-"Module: _Anim"
-"CallOn: The base for an animation scene, such as a node"
-"MandatoryArg: <guy>: Guy that animates"
-"MandatoryArg: <anime>: Animation scene Scene"
-"OptionalArg: <tag>: A tag to animate relative to"
-"Example: level.price anim_single_solo_run( level.price, "whip_it_good" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_single_solo_run( <guy> , <anime> , <tag> )""Summary: Do an anim on a guy from level.scr_anim[ animname ][ anime ] and end the anim early so he goes into a run smoothly.""Module: _Anim""CallOn: The base for an animation scene, such as a node""MandatoryArg: <guy>: Guy that animates""MandatoryArg: <anime>: Animation scene Scene""OptionalArg: <tag>: A tag to animate relative to""Example: level.price anim_single_solo_run( level.price, "whip_it_good" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_single_solo_run(guy, anime, tag) {
@@ -2053,16 +1741,7 @@ anim_single_solo_run(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_single_run_solo( <guy> , <anime> , <tag> )"
-"Summary: Like anim_single_solo except the anim blends out early so it can blend into a run."
-"Module: _Anim"
-"CallOn: The base for an animation scene, such as a node"
-"MandatoryArg: <guy>: Guy that animates"
-"MandatoryArg: <anime>: Animation scene Scene"
-"OptionalArg: <tag>: A tag to animate relative to"
-"Example: level.price anim_single_solo( level.price, "whip_it_good" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_single_run_solo( <guy> , <anime> , <tag> )""Summary: Like anim_single_solo except the anim blends out early so it can blend into a run.""Module: _Anim""CallOn: The base for an animation scene, such as a node""MandatoryArg: <guy>: Guy that animates""MandatoryArg: <anime>: Animation scene Scene""OptionalArg: <tag>: A tag to animate relative to""Example: level.price anim_single_solo( level.price, "whip_it_good" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_single_run_solo(guy, anime, tag, anim_end_time) {
@@ -2075,15 +1754,7 @@ anim_single_run_solo(guy, anime, tag, anim_end_time) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_and_idle_solo( <guy> , <anime> , <anime_idle> , <ender> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_and_idle_solo( <guy> , <anime> , <anime_idle> , <ender> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach_and_idle_solo(guy, anime, anime_idle, ender, tag) {
@@ -2096,15 +1767,7 @@ anim_reach_and_idle_solo(guy, anime, anime_idle, ender, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_solo( <guy> , <anime> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_solo( <guy> , <anime> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach_solo(guy, anime, tag) {
@@ -2117,17 +1780,7 @@ anim_reach_solo(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_and_approach_solo( <guy> , <anime> , <tag> , <arrival_type> )"
-"Summary: Make one AI run to an animation offset with an arrival"
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <guy>: Guy that animates"
-"MandatoryArg: <anime>: Animation scene Scene"
-"OptionalArg: <tag>: A tag to animate relative to"
-"OptionalArg: <arrival_type>: If start of the scripted animation matches a cover node pose, set this to do an arrival. Possible values 'Cover Right', 'Cover Left', 'Cover Stand', 'Cover Crouch'"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_and_approach_solo( <guy> , <anime> , <tag> , <arrival_type> )""Summary: Make one AI run to an animation offset with an arrival""Module: Entity""CallOn: An entity""MandatoryArg: <guy>: Guy that animates""MandatoryArg: <anime>: Animation scene Scene""OptionalArg: <tag>: A tag to animate relative to""OptionalArg: <arrival_type>: If start of the scripted animation matches a cover node pose, set this to do an arrival. Possible values 'Cover Right', 'Cover Left', 'Cover Stand', 'Cover Crouch'""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach_and_approach_solo(guy, anime, tag, arrival_type) {
@@ -2140,16 +1793,7 @@ anim_reach_and_approach_solo(guy, anime, tag, arrival_type) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_and_approach_node_solo( <guy> , <anime> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <guy>: Guy that animates"
-"MandatoryArg: <anime>: Animation scene Scene"
-"OptionalArg: <tag>: A tag to animate relative to"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_and_approach_node_solo( <guy> , <anime> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <guy>: Guy that animates""MandatoryArg: <anime>: Animation scene Scene""OptionalArg: <tag>: A tag to animate relative to""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach_and_approach_node_solo(guy, anime, tag) {
@@ -2175,17 +1819,7 @@ anim_reach_and_approach_node_solo(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_reach_and_approach( <guys> , <anime> , <tag> , <arrival_type> )"
-"Summary: Make a group of AI run to an animation offset with an arrival"
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <guy>: Guys that animate"
-"MandatoryArg: <anime>: Animation scene Scene"
-"OptionalArg: <tag>: A tag to animate relative to"
-"OptionalArg: <arrival_type>: If start of the scripted animation matches a cover node pose, set this to do an arrival. Possible values 'Cover Right', 'Cover Left', 'Cover Stand', 'Cover Crouch'"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_reach_and_approach( <guys> , <anime> , <tag> , <arrival_type> )""Summary: Make a group of AI run to an animation offset with an arrival""Module: Entity""CallOn: An entity""MandatoryArg: <guy>: Guys that animate""MandatoryArg: <anime>: Animation scene Scene""OptionalArg: <tag>: A tag to animate relative to""OptionalArg: <arrival_type>: If start of the scripted animation matches a cover node pose, set this to do an arrival. Possible values 'Cover Right', 'Cover Left', 'Cover Stand', 'Cover Crouch'""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_reach_and_approach(guys, anime, tag, arrival_type) {
@@ -2197,16 +1831,7 @@ anim_reach_and_approach(guys, anime, tag, arrival_type) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_loop_solo( <guy> , <anime> , <ender> , <tag> )"
-"Summary: An actor or script_model does a looping animation in sync to an optional tag or model. "
-"Module: _Anim"
-"CallOn: An entity or node that will be the root of the animation"
-"MandatoryArg: <guy>: Entity that will animate "
-"MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file "
-"OptionalArg: <ender>: The loops will stop reoccurring if this is notified to the root entity."
-"OptionalArg: <tag>: An optional tag that the scene is relative to"
-"Example: node thread anim_loop_solo( guy, "wounded_idle" );"
-///ScriptDocEnd
+"Name: anim_loop_solo( <guy> , <anime> , <ender> , <tag> )""Summary: An actor or script_model does a looping animation in sync to an optional tag or model. ""Module: _Anim""CallOn: An entity or node that will be the root of the animation""MandatoryArg: <guy>: Entity that will animate ""MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file ""OptionalArg: <ender>: The loops will stop reoccurring if this is notified to the root entity.""OptionalArg: <tag>: An optional tag that the scene is relative to""Example: node thread anim_loop_solo( guy, "wounded_idle" );"///ScriptDocEnd
 =============
 */
 
@@ -2221,15 +1846,7 @@ anim_loop_solo(guy, anime, ender, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_teleport_solo( <guy> , <anime> , <tag> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_teleport_solo( <guy> , <anime> , <tag> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_teleport_solo(guy, anime, tag) {
@@ -2242,15 +1859,7 @@ anim_teleport_solo(guy, anime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_animation( <animname> , <anime> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_animation( <animname> , <anime> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_animation(animname, anime) {
@@ -2273,15 +1882,7 @@ add_animation(animname, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_single_queue( <guy> , <anime> , <tag> , <anim_end_time> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_single_queue( <guy> , <anime> , <tag> , <anim_end_time> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_single_queue(guy, anime, tag, anim_end_time) {
@@ -2302,18 +1903,7 @@ anim_single_queue(guy, anime, tag, anim_end_time) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_generic_queue( <guy> , <anime> , <tag> , <anim_end_time>, <timeout> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <guy>: guy to animate"
-"MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file "
-"OptionalArg: <tag>: An optional tag that the scene is relative to"
-"OptionalArg: <anim_end_time>: The amount of time to end the animation early"
-"OptionalArg: <timeout>: optional timeout to forget the radio dialogue if it's been in the queue for longer than this many seconds"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_generic_queue( <guy> , <anime> , <tag> , <anim_end_time>, <timeout> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <guy>: guy to animate""MandatoryArg: <anime>: The animation scene as defined in the map_anim.gsc file ""OptionalArg: <tag>: An optional tag that the scene is relative to""OptionalArg: <anim_end_time>: The amount of time to end the animation early""OptionalArg: <timeout>: optional timeout to forget the radio dialogue if it's been in the queue for longer than this many seconds""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_generic_queue(guy, anime, tag, anim_end_time, timeout) {
@@ -2338,15 +1928,7 @@ anim_generic_queue(guy, anime, tag, anim_end_time, timeout) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_dontPushPlayer( <guy> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_dontPushPlayer( <guy> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_dontPushPlayer(guys) {
@@ -2358,15 +1940,7 @@ anim_dontPushPlayer(guys) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_pushPlayer( <guy> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_pushPlayer( <guy> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_pushPlayer(guys) {
@@ -2378,16 +1952,7 @@ anim_pushPlayer(guys) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_dialogue( <animname> , <notetrack> , <scene> , <soundalias> )"
-"Summary: Makes a dialogue sound play on a certain notetrack. If you put multiple dialogue notetracks in an anim, it will play them in the order you do addNotetrack."
-"Module: _Anim"
-"MandatoryArg: <animname>: The animname of the character, or generic. "
-"MandatoryArg: <notetrack>: The notetrack in the anim, usual dialog. "
-"MandatoryArg: <scene>: The scene the sound plays in. "
-"MandatoryArg: <soundalias>: The soundalias. "
-"Example: addNotetrack_dialogue( "price", "dialog", "wounded_begins", "sniperescape_mcm_choppergetback" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_dialogue( <animname> , <notetrack> , <scene> , <soundalias> )""Summary: Makes a dialogue sound play on a certain notetrack. If you put multiple dialogue notetracks in an anim, it will play them in the order you do addNotetrack.""Module: _Anim""MandatoryArg: <animname>: The animname of the character, or generic. ""MandatoryArg: <notetrack>: The notetrack in the anim, usual dialog. ""MandatoryArg: <scene>: The scene the sound plays in. ""MandatoryArg: <soundalias>: The soundalias. ""Example: addNotetrack_dialogue( "price", "dialog", "wounded_begins", "sniperescape_mcm_choppergetback" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_dialogue(animname, notetrack, anime, soundalias) {
@@ -2427,16 +1992,7 @@ add_notetrack_array(animname, notetrack, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_sound( <animname> , <notetrack> , <scene> , <soundalias> )"
-"Summary: Makes a sound play on a certain notetrack. "
-"Module: _Anim"
-"MandatoryArg: <animname>: The animname of the character, or generic. "
-"MandatoryArg: <notetrack>: The notetrack in the anim, usual dialog. "
-"MandatoryArg: <scene>: The scene the sound plays in. "
-"MandatoryArg: <soundalias>: The soundalias. "
-"Example: addNotetrack_sound( "price", "dialog", "wounded_begins", "sniperescape_mcm_choppergetback" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_sound( <animname> , <notetrack> , <scene> , <soundalias> )""Summary: Makes a sound play on a certain notetrack. ""Module: _Anim""MandatoryArg: <animname>: The animname of the character, or generic. ""MandatoryArg: <notetrack>: The notetrack in the anim, usual dialog. ""MandatoryArg: <scene>: The scene the sound plays in. ""MandatoryArg: <soundalias>: The soundalias. ""Example: addNotetrack_sound( "price", "dialog", "wounded_begins", "sniperescape_mcm_choppergetback" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_sound(animname, notetrack, anime, soundalias) {
@@ -2466,15 +2022,7 @@ addOnStart_animSound(animname, anime, soundalias) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_animSound( <animname> , <anime> , <notetrack> , <soundalias> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_animSound( <animname> , <anime> , <notetrack> , <soundalias> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_animSound(animname, anime, notetrack, soundalias) {
@@ -2493,18 +2041,7 @@ addNotetrack_animSound(animname, anime, notetrack, soundalias) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_attach( <animname> , <notetrack> , <model> , <tag> , <anime> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <animname>: "
-"MandatoryArg: <notetrack>: "
-"MandatoryArg: <model>: "
-"MandatoryArg: <tag>: "
-"MandatoryArg: <anime>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_attach( <animname> , <notetrack> , <model> , <tag> , <anime> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <animname>: ""MandatoryArg: <notetrack>: ""MandatoryArg: <model>: ""MandatoryArg: <tag>: ""MandatoryArg: <anime>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_attach(animname, notetrack, model, tag, anime) {
@@ -2523,15 +2060,7 @@ addNotetrack_attach(animname, notetrack, model, tag, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_detach( <animname> , <notetrack> , <model> , <tag> , <anime> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_detach( <animname> , <notetrack> , <model> , <tag> , <anime> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_detach(animname, notetrack, model, tag, anime) {
@@ -2550,16 +2079,7 @@ addNotetrack_detach(animname, notetrack, model, tag, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_customFunction( <animname>, <notetrack> , <function> , <anime> )"
-"Summary: Makes the function run when this notetrack is hit. The SELF of the function is the scene base, the PARM of the function is the guy that hit the notetrack."
-"Module: _Anim"
-"MandatoryArg: <animname>: Animname of the scene "
-"MandatoryArg: <notetrack>: Duh"
-"MandatoryArg: <function>: Duh part 2 "
-"OptionalArg: <anime>: The scene. If left blank, will occur on all scenes."
-"Example: 	addNotetrack_customFunction( "zpu_gun", "fire_1", ::zpu_shoot1 ); "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_customFunction( <animname>, <notetrack> , <function> , <anime> )""Summary: Makes the function run when this notetrack is hit. The SELF of the function is the scene base, the PARM of the function is the guy that hit the notetrack.""Module: _Anim""MandatoryArg: <animname>: Animname of the scene ""MandatoryArg: <notetrack>: Duh""MandatoryArg: <function>: Duh part 2 ""OptionalArg: <anime>: The scene. If left blank, will occur on all scenes.""Example: 	addNotetrack_customFunction( "zpu_gun", "fire_1", ::zpu_shoot1 ); ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_customFunction(animname, notetrack, function, anime) {
@@ -2582,15 +2102,7 @@ addNotetrack_customFunction(animname, notetrack, function, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_flag( <animname> , <notetrack> , <theFlag> , <anime> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_flag( <animname> , <notetrack> , <theFlag> , <anime> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_flag(animname, notetrack, theFlag, anime) {
@@ -2611,15 +2123,7 @@ addNotetrack_flag(animname, notetrack, theFlag, anime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: addNotetrack_flag_clear( <animname> , <notetrack> , <theFlag> , <anime> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: addNotetrack_flag_clear( <animname> , <notetrack> , <theFlag> , <anime> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 addNotetrack_flag_clear(animname, notetrack, theFlag, anime) {
@@ -2650,7 +2154,7 @@ anim_facialAnim(guy, anime, faceanim) {
 
   waittillframeend; // in case another facial animation just ended, so its clear doesnt overwrite us
 
-  guy SetAnim( % scripted_talking, 5, 0.2);
+  guy SetAnim(%scripted_talking, 5, 0.2);
   guy SetFlaggedAnimKnobRestart("face_done_" + anime, faceanim, 1, 0, 1);
   thread force_face_anim_to_play(guy, anime, faceanim);
 
@@ -2663,7 +2167,7 @@ force_face_anim_to_play(guy, anime, faceanim) {
   self endon(anime);
 
   for(;;) {
-    guy SetAnim( % scripted_talking, 5, 0.4);
+    guy SetAnim(%scripted_talking, 5, 0.4);
     guy SetFlaggedAnimKnobLimited("face_done_" + anime, faceanim, 1, 0, 1);
     wait(0.05);
   }
@@ -2700,12 +2204,12 @@ anim_facialFiller(msg, lookTarget) {
 
   Assert(IsAlive(self)); // or else we shouldn't start talking!
   self SetAnimKnobLimitedRestart(talkAnim, 1, 0, 1);
-  self SetAnim( % scripted_talking, 5, 0.4);
+  self SetAnim(%scripted_talking, 5, 0.4);
 
   self set_talker_until_msg(msg, talkanim);
 
   changeTime = 0.3;
-  self ClearAnim( % scripted_talking, 0.2);
+  self ClearAnim(%scripted_talking, 0.2);
 }
 
 set_talker_until_msg(msg, talkanim) {
@@ -2714,7 +2218,7 @@ set_talker_until_msg(msg, talkanim) {
     wait(0.2);
 
     self SetAnimKnobLimited(talkAnim, 1, 0, 1);
-    self SetAnim( % scripted_talking, 5, 0.4);
+    self SetAnim(%scripted_talking, 5, 0.4);
   }
 }
 
@@ -2725,11 +2229,11 @@ talk_for_time(timer) {
     talkAnim = % generic_talker_axis;
 
   self SetAnimKnobLimitedRestart(talkAnim, 1, 0, 1);
-  self SetAnim( % scripted_talking, 5, 0.4);
+  self SetAnim(%scripted_talking, 5, 0.4);
 
   wait(timer);
   changeTime = 0.3;
-  self ClearAnim( % scripted_talking, 0.2);
+  self ClearAnim(%scripted_talking, 0.2);
 }
 
 GetYawAngles(angles1, angles2) {
@@ -2786,7 +2290,7 @@ clearFaceAnimOnAnimdone(guy, msg, anime) {
   // 	self waittill( anime );
   guy waittillmatch(msg, "end");
   changeTime = 0.3;
-  guy ClearAnim( % scripted_talking, 0.2);
+  guy ClearAnim(%scripted_talking, 0.2);
 }
 
 anim_start_pos(guyArray, anime, tag) {
@@ -2865,15 +2369,7 @@ add_to_animsound() {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_set_rate_single( <guy> , <anime> , <rate> )"
-"Summary: Sets the rate that guy is playing an animation"
-"Module: _Anim"
-"MandatoryArg: <guys>: Stuff that is doing anim_single, anim_generic, or anim_single_solo"
-"MandatoryArg: <anime>: The scene being played"
-"MandatoryArg: <rate>: The rate to change to"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_set_rate_single( <guy> , <anime> , <rate> )""Summary: Sets the rate that guy is playing an animation""Module: _Anim""MandatoryArg: <guys>: Stuff that is doing anim_single, anim_generic, or anim_single_solo""MandatoryArg: <anime>: The scene being played""MandatoryArg: <rate>: The rate to change to""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2884,15 +2380,7 @@ anim_set_rate_single(guy, anime, rate) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_set_rate( <guys> , <anime> , <rate> )"
-"Summary: Sets the rate that guys are playing an animation"
-"Module: _Anim"
-"MandatoryArg: <guys>: Stuff that is doing anim_single, anim_generic, or anim_single_solo"
-"MandatoryArg: <anime>: The scene being played"
-"MandatoryArg: <rate>: The rate to change to"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_set_rate( <guys> , <anime> , <rate> )""Summary: Sets the rate that guys are playing an animation""Module: _Anim""MandatoryArg: <guys>: Stuff that is doing anim_single, anim_generic, or anim_single_solo""MandatoryArg: <anime>: The scene being played""MandatoryArg: <rate>: The rate to change to""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_set_rate(guys, anime, rate) {
@@ -2912,16 +2400,7 @@ anim_set_rate_internal(anime, rate, animname_override) {
 /*
 =============
 ///ScriptDocBegin
-"Name: anim_set_time( <guys> , <anime> , <time> )"
-"Summary: Sets the current time of an anim, but should be done at least 0.05 seconds after the anim is calle"
-"Module: _Anim"
-"CallOn: Array of guys animating"
-"MandatoryArg: <guys>: Guys animating"
-"MandatoryArg: <amime>: Scene name"
-"MandatoryArg: <time>: Time to set to"
-"Example: delayThread( 0.05, ::anim_set_time, guy_and_door, "fire_3", 1.0 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: anim_set_time( <guys> , <anime> , <time> )""Summary: Sets the current time of an anim, but should be done at least 0.05 seconds after the anim is calle""Module: _Anim""CallOn: Array of guys animating""MandatoryArg: <guys>: Guys animating""MandatoryArg: <amime>: Scene name""MandatoryArg: <time>: Time to set to""Example: delayThread( 0.05, ::anim_set_time, guy_and_door, "fire_3", 1.0 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 anim_set_time(guys, anime, time) {
@@ -2953,14 +2432,7 @@ last_anim_time_check() {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_custom_move_start_transition( <guy> , <anime> )"
-"Summary: Sets a custom move start transition. Resets after move starts"
-"Module: _Anim"
-"CallOn: Guy that animates"
-"MandatoryArg: <guy>: Guy that animates"
-"MandatoryArg: <amime>: Scene name"
-"Example: set_custom_move_start_transition( level.price, special_exit );"
-"SPMP: singleplayer"
+"Name: set_custom_move_start_transition( <guy> , <anime> )""Summary: Sets a custom move start transition. Resets after move starts""Module: _Anim""CallOn: Guy that animates""MandatoryArg: <guy>: Guy that animates""MandatoryArg: <amime>: Scene name""Example: set_custom_move_start_transition( level.price, special_exit );""SPMP: singleplayer"
 ///ScriptDocEnd
 =============
 */

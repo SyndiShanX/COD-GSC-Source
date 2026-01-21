@@ -194,9 +194,7 @@ boxstub_update_prompt(player) {
   self.hint_parm1 = undefined;
 
   if(isDefined(self.stub.trigger_target.grab_weapon_hint) && self.stub.trigger_target.grab_weapon_hint) {
-    if(isDefined(level.magic_box_check_equipment) && [
-        [level.magic_box_check_equipment]
-      ](self.stub.trigger_target.grab_weapon_name))
+    if(isDefined(level.magic_box_check_equipment) && [[level.magic_box_check_equipment]](self.stub.trigger_target.grab_weapon_name))
       self.hint_string = &"ZOMBIE_TRADE_EQUIP";
     else
       self.hint_string = &"ZOMBIE_TRADE_WEAPON";
@@ -793,9 +791,7 @@ treasure_chest_canplayerreceiveweapon(player, weapon, pap_triggers) {
     return 0;
 
   if(isDefined(level.custom_magic_box_selection_logic)) {
-    if(![
-        [level.custom_magic_box_selection_logic]
-      ](weapon, player, pap_triggers))
+    if(![[level.custom_magic_box_selection_logic]](weapon, player, pap_triggers))
       return 0;
   }
 
@@ -1041,9 +1037,7 @@ treasure_chest_weapon_spawn(chest, player, respin) {
       chance_of_joker = -1;
 
     if(isDefined(level._zombiemode_chest_joker_chance_override_func))
-      chance_of_joker = [
-        [level._zombiemode_chest_joker_chance_override_func]
-      ](chance_of_joker);
+      chance_of_joker = [[level._zombiemode_chest_joker_chance_override_func]](chance_of_joker);
 
     if(chance_of_joker > random) {
       self.weapon_string = undefined;

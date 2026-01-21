@@ -1770,7 +1770,7 @@ anim_look(guy, scene, array) {
   guy setflaggedanimknobrestart("face_done_" + scene, array["left"], 1, 0.2, 1);
   thread clearfaceanimonanimdone(guy, "face_done_" + scene, scene);
   guy setanimknobrestart(array["right"], 1, 0.2, 1);
-  guy setanim( % scripted, 0.01, 0.3, 1);
+  guy setanim(%scripted, 0.01, 0.3, 1);
 
   for(;;) {
     destyaw = guy getyawtoorigin(level.player.origin);
@@ -1803,8 +1803,8 @@ anim_facialanim(guy, scene, faceanim) {
   self endon(scene);
   guy notify("newLookTarget");
   waittillframeend;
-  guy setanim( % scripted_look_straight, 0, 0);
-  guy setanim( % scripted_look_straight, 1, 0.5);
+  guy setanim(%scripted_look_straight, 0, 0);
+  guy setanim(%scripted_look_straight, 1, 0.5);
   guy setflaggedanimknobrestart("face_done_" + scene, faceanim, 1, 0, 1);
   thread clearfaceanimonanimdone(guy, "face_done_" + scene, scene);
 }
@@ -1826,7 +1826,7 @@ anim_facialfiller(msg, looktarget) {
 
   self set_talker_until_msg(msg);
   changetime = 0.3;
-  self clearanim( % scripted_look_straight, changetime);
+  self clearanim(%scripted_look_straight, changetime);
 }
 
 set_talker_until_msg(msg, talkanim) {
@@ -1846,10 +1846,10 @@ talk_for_time(timer) {
     talkanim = % generic_talker_axis;
 
   self setanimknobrestart(talkanim, 1, 0, 1);
-  self setanim( % scripted_talking, 1, 0.1);
+  self setanim(%scripted_talking, 1, 0.1);
   wait(timer);
-  self clearanim( % scripted_talking, 0.1);
-  self clearanim( % scripted_look_straight, 0.3);
+  self clearanim(%scripted_talking, 0.1);
+  self clearanim(%scripted_look_straight, 0.3);
 }
 
 getyawangles(angles1, angles2) {
@@ -1921,12 +1921,12 @@ lookrecenter(msg) {
   self endon("newLookTarget");
   self endon("death");
   self waittill(msg);
-  self clearanim( % scripted_talking, 0.1);
-  self setanim( % generic_lookupright, 1, 0.3);
-  self setanim( % generic_lookupleft, 1, 0.3);
-  self setanim( % scripted_look_straight, 0.2, 0.1);
+  self clearanim(%scripted_talking, 0.1);
+  self setanim(%generic_lookupright, 1, 0.3);
+  self setanim(%generic_lookupleft, 1, 0.3);
+  self setanim(%scripted_look_straight, 0.2, 0.1);
   wait 0.2;
-  self clearanim( % scripted_look_straight, 0.2);
+  self clearanim(%scripted_look_straight, 0.2);
 }
 
 lookline(org, msg) {
@@ -1962,7 +1962,7 @@ delayeddialogue(scene, doanimation, dialogue, animationname) {
 clearfaceanimonanimdone(guy, msg, scene) {
   guy endon("death");
   guy waittillmatch(msg, "end");
-  guy clearanim( % scripted_look_straight, 0.3);
+  guy clearanim(%scripted_look_straight, 0.3);
 }
 
 anim_start_pos(ents, scene, tag) {

@@ -1578,8 +1578,7 @@ player_ride_vehicle() {
    Use ( tag_seat_rb_hide ).
   	
   To attach glowing seat to regular:
-   Attach ( tag_seat_rb , from vehicle_hummer_seat_rb_obj) to (
-  tag_seat_rb_attach )
+   Attach ( tag_seat_rb , from vehicle_hummer_seat_rb_obj) to (tag_seat_rb_attach )
   */
   //self Attach( chairModel, "tag_seat_rb_attach" );
 
@@ -2958,9 +2957,7 @@ ambush_house_spawner_think() {
 
 friendlies_traverse_school() {
   for(i = 1; i <= 20; i++) {
-    // "roadkill_school_1", "roadkill_school_2", "roadkill_school_3",
-    // "roadkill_school_4", "roadkill_school_5", "roadkill_school_6"
-    msg = "roadkill_school_" + i;
+    // "roadkill_school_1", "roadkill_school_2", "roadkill_school_3", // "roadkill_school_4", "roadkill_school_5", "roadkill_school_6"msg = "roadkill_school_" + i;
     trigger = GetEnt(msg, "targetname");
     if(flag_exist(msg)) {
       flag_wait(msg);
@@ -3398,8 +3395,7 @@ airstrike_call_in_dialogue() {
     return;
   }
   wait(0.74);
-  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white,
-  // twelve story apartment building occupied by hostile forces, over!
+  // Warlord, Warlord, this is Hunter 2-1, requesting air strike at grid 2-5-2, 1-7-1! Target is a white, // twelve story apartment building occupied by hostile forces, over!
 
   //	Warlord, Warlord, this is
   //
@@ -3410,8 +3406,7 @@ airstrike_call_in_dialogue() {
 
   wait(0.9);
 
-  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes,
-  // holding at three-Sierra, northwest, holding area Knife, carrying two JDAMs and two HARMs, over.	
+  // Hunter 2-1 this is Devil 1-1, flight of two F-15s, time on station, one-five mikes, // holding at three-Sierra, northwest, holding area Knife, carrying two JDAMs and two HARMs, over.	
   radio_line("roadkill_fp1_devil11");
 
   // Devil 1-1, this is Hunter 2-1, solid copy on check-in, standby.	

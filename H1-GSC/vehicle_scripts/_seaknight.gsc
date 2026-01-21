@@ -15,7 +15,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");
   maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
-  maps\_vehicle::build_drive( % sniper_escape_ch46_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%sniper_escape_ch46_rotors, undefined, 0);
   maps\_vehicle::build_unload_groups(::unload_groups);
   maps\_vehicle::build_light(var_2, "cockpit_red_cargo02", "tag_light_cargo02", "fx\misc\aircraft_light_cockpit_red", "interior", 0.0);
   maps\_vehicle::build_light(var_2, "cockpit_blue_cockpit01", "tag_light_cockpit01", "fx\misc\aircraft_light_cockpit_blue", "interior", 0.1);
@@ -41,10 +41,10 @@ set_vehicle_anims(var_0) {
   var_0[1].vehicle_getinanim_clear = 0;
   var_0[1].vehicle_getoutsound = "seaknight_door_open";
   var_0[1].vehicle_getinsound = "seaknight_door_close";
-  var_0[1].delay = getanimlength( % ch46_doors_open) - 1.7;
-  var_0[2].delay = getanimlength( % ch46_doors_open) - 1.7;
-  var_0[3].delay = getanimlength( % ch46_doors_open) - 1.7;
-  var_0[4].delay = getanimlength( % ch46_doors_open) - 1.7;
+  var_0[1].delay = getanimlength(%ch46_doors_open) - 1.7;
+  var_0[2].delay = getanimlength(%ch46_doors_open) - 1.7;
+  var_0[3].delay = getanimlength(%ch46_doors_open) - 1.7;
+  var_0[4].delay = getanimlength(%ch46_doors_open) - 1.7;
   return var_0;
 }
 

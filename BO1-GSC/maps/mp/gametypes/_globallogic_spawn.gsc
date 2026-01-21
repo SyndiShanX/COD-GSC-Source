@@ -120,8 +120,7 @@ spawnPlayer() {
     self setClientDvar("cg_fov", "65");
   {
     pixbeginevent("onSpawnPlayer");
-    if(isDefined(level.onSpawnPlayerUnified) &&
-      GetDvarInt(#"scr_disableunifiedspawning") == 0) {
+    if(isDefined(level.onSpawnPlayerUnified) && GetDvarInt(#"scr_disableunifiedspawning") == 0) {
       self[[level.onSpawnPlayerUnified]]();
     } else {
       self[[level.onSpawnPlayer]]();

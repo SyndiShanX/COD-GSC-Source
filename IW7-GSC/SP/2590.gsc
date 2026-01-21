@@ -387,9 +387,7 @@ func_2322(var_0, var_1, var_2, var_3) {
 
     var_5 = undefined;
     foreach(var_7 in var_4) {
-      var_8 = [
-        [var_2]
-      ](var_1, var_7, var_3);
+      var_8 = [[var_2]](var_1, var_7, var_3);
       if(isDefined(var_8) && var_8) {
         continue;
       }

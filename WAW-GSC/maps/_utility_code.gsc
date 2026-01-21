@@ -213,9 +213,7 @@ HintPrintWait(length, breakfunc) {
   }
   timer = length * 20;
   for(i = 0; i < timer; i++) {
-    if([
-        [breakfunc]
-      ]()) {
+    if([[breakfunc]]()) {
       break;
     }
     wait(0.05);

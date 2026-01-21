@@ -226,8 +226,7 @@ function_ace6c248(var_89ae88b4) {
 
   if(!isDefined(self.var_8e45c356[var_89ae88b4])) {
     self.var_8e45c356[var_89ae88b4] = {
-      #exiting: 1,
-      #endtime: 0
+      #exiting: 1, #endtime: 0
     };
   }
 

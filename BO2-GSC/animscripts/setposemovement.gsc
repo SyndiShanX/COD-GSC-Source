@@ -495,7 +495,7 @@ playblendtransition(transanim, crossblendtime, endpose, endmovement, endaiming) 
   self animscripts\debug::debugpushstate("PlayBlendTransition: " + endpose + " - " + endmovement);
 
   endtime = gettime() + crossblendtime * 1000;
-  self setanimknoball(transanim, % body, 1, crossblendtime, 1);
+  self setanimknoball(transanim, %body, 1, crossblendtime, 1);
   wait(crossblendtime / 2);
   self.a.pose = endpose;
   self.a.movement = endmovement;
@@ -583,8 +583,8 @@ blendintostandrun() {
       }
     }
 
-    self clearanim( % walk_and_run_loops, 0.2);
-    self setanimknob( % combatrun, 1.0, 0.5, self.moveplaybackrate);
+    self clearanim(%walk_and_run_loops, 0.2);
+    self setanimknob(%combatrun, 1.0, 0.5, self.moveplaybackrate);
     self setanimknoblimited(animarray(runanimname), 1, runanimtranstime, 1);
 
     if(shouldshootwhilemoving && self.a.pose == "stand")
@@ -630,7 +630,7 @@ crouchtostand() {
     playtransitionanimation(animarray("crouch_2_stand"), "stand", "stop", standspeed);
   }
 
-  self clearanim( % shoot, 0);
+  self clearanim(%shoot, 0);
 }
 
 crouchtocrouchwalk() {
@@ -678,13 +678,13 @@ crouchtostandrun() {
 
 blendintocrouchrun() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self setanimknoball(self.crouchrun_combatanim, % body, 1, 0.4);
+    self setanimknoball(self.crouchrun_combatanim, %body, 1, 0.4);
     playblendtransition(self.crouchrun_combatanim, 0.6, "crouch", "run", 0);
     self notify("BlendIntoCrouchRun");
   } else {
     self setanimknob(animscripts\run::getcrouchrunanim(), 1, 0.4);
-    self thread animscripts\run::updaterunweights("BlendIntoCrouchRun", % combatrun_forward, animarray("combat_run_b"), animarray("combat_run_l"), animarray("combat_run_r"));
-    playblendtransition( % combatrun, 0.6, "crouch", "run", 0);
+    self thread animscripts\run::updaterunweights("BlendIntoCrouchRun", %combatrun_forward, animarray("combat_run_b"), animarray("combat_run_l"), animarray("combat_run_r"));
+    playblendtransition(%combatrun, 0.6, "crouch", "run", 0);
     self notify("BlendIntoCrouchRun");
   }
 }
@@ -709,7 +709,7 @@ pronetocrouchwalk() {
 
 blendintocrouchwalk() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self setanimknoball(self.crouchrun_combatanim, % body, 1, 0.4);
+    self setanimknoball(self.crouchrun_combatanim, %body, 1, 0.4);
     playblendtransition(self.crouchrun_combatanim, 0.6, "crouch", "walk", 0);
     self notify("BlendIntoCrouchWalk");
   } else
@@ -728,7 +728,7 @@ standtocrouch() {
   }
 
   playtransitionanimation(animarray("stand_2_crouch"), "crouch", "stop", 1, undefined, crouchspeed);
-  self clearanim( % shoot, 0);
+  self clearanim(%shoot, 0);
 }
 
 pronetocrouch() {
@@ -771,16 +771,16 @@ pronecrawltoprone() {
   assert(self.a.movement == "walk" || self.a.movement == "run", "SetPoseMovement::ProneCrawlToProne " + self.a.movement);
   self animscripts\cover_prone::updatepronewrapper(0.1);
   playtransitionanimation(animarray("crawl_2_aim"), "prone", "stop", 1);
-  self clearanim( % exposed_modern, 0.2);
+  self clearanim(%exposed_modern, 0.2);
 }
 
 crouchtoprone() {
   assert(self.a.pose == "crouch", "SetPoseMovement::CrouchToProne " + self.a.pose);
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self enterpronewrapper(1.0);
   self animscripts\cover_prone::updatepronewrapper(0.1);
   playtransitionanimation(animarray("crouch_2_prone"), "prone", "stop", 1);
-  self clearanim( % exposed_modern, 0.2);
+  self clearanim(%exposed_modern, 0.2);
 }
 
 crouchtopronewalk() {
@@ -799,11 +799,11 @@ standtoprone() {
   thread playtransitionanimationthread_withoutwaitsetstates(transanim, "prone", "stop", 0.5);
   self waittillmatch("transAnimDone2", "anim_pose = \"prone\"");
   waittillframeend;
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self enterpronewrapper(0.5);
   self.a.movement = "stop";
   self waittillmatch("transAnimDone2", "end");
-  self clearanim( % exposed_modern, 0.2);
+  self clearanim(%exposed_modern, 0.2);
 }
 
 standtopronewalk() {
@@ -819,7 +819,7 @@ standtopronerun() {
 crouchruntoprone() {
   assert(self.a.pose == "crouch" || self.a.pose == "stand", "SetPoseMovement::CrouchRunToProne " + self.a.pose);
   assert(self.a.movement == "run" || self.a.movement == "walk", "SetPoseMovement::CrouchRunToProne " + self.a.movement);
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self enterpronewrapper(0.5);
   self animscripts\cover_prone::updatepronewrapper(0.1);
   rundirection = animscripts\utility::getquadrant(self getmotionangle());
@@ -876,7 +876,7 @@ playtransitionanimationfunc(transanim, endpose, endmovement, endaiming, finalani
   if(waitsetstatesenabled)
     self thread waitsetstates(getanimlength(transanim) / 2.0, "killtimerscript", endpose);
 
-  self setflaggedanimknoballrestart("transAnimDone2", transanim, % body, 1, 0.2, rate);
+  self setflaggedanimknoballrestart("transAnimDone2", transanim, %body, 1, 0.2, rate);
 
   if(!isDefined(self.a.pose))
     self.pose = "undefined";
@@ -895,7 +895,7 @@ playtransitionanimationfunc(transanim, endpose, endmovement, endaiming, finalani
   self.a.movement = endmovement;
 
   if(isDefined(finalanim))
-    self setanimknoball(finalanim, % body, 1, 0.3, rate);
+    self setanimknoball(finalanim, %body, 1, 0.3, rate);
 }
 
 waitsetstates(timetowait, killmestring, endpose) {
@@ -932,7 +932,7 @@ transitiontotacticalwalk(newpose) {
   if(!animhasnotetrack(transanim, "anim_pose = \"" + newpose + "\""))
     println("error: ^2 missing notetrack to set pose!", transanim);
 
-  self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.3, rate);
+  self setflaggedanimknoballrestart("trans", transanim, %body, 1, 0.3, rate);
   transtime = getanimlength(transanim) / rate;
   playtime = transtime - 0.2;
 
@@ -941,7 +941,7 @@ transitiontotacticalwalk(newpose) {
 
   self animscripts\shared::donotetracksfortime(playtime, "trans");
   self orientmode("face default");
-  self clearanim( % exposed_modern, 0.2);
+  self clearanim(%exposed_modern, 0.2);
   self.a.pose = newpose;
 
   self animscripts\debug::debugpopstate("transitionTo: " + newpose);

@@ -228,9 +228,7 @@ function_4ec678fe(entity) {
 
   monkeybomb = entity.var_722a34a3;
   level notify(#"hash_79c0225ea09cd215", {
-    #brutus: self,
-    #var_cee6bd0b: monkeybomb.origin,
-    #var_569d804d: monkeybomb.angles
+    #brutus: self, #var_cee6bd0b: monkeybomb.origin, #var_569d804d: monkeybomb.angles
   });
 
   if(isDefined(monkeybomb.damagearea)) {

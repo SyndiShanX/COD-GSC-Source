@@ -331,8 +331,7 @@ script_gen_dump() {
     else
       file = 0;
     assertex(file != -1, "File not writeable( check it and and restart the map ): " + filename);
-    script_gen_dumpprintln(file, "
-      script_gen_dumpprintln(file, "main()"); script_gen_dumpprintln(file, "{"); script_gen_dumpprintln(file, ""); script_gen_dumpprintln(file, "\tlevel.script_gen_dump = [];"); script_gen_dumpprintln(file, ""); signatures = getarraykeys(level.script_gen_dump);
+    script_gen_dumpprintln(file, "script_gen_dumpprintln(file, "main()"); script_gen_dumpprintln(file, "{"); script_gen_dumpprintln(file, ""); script_gen_dumpprintln(file, "\tlevel.script_gen_dump = [];"); script_gen_dumpprintln(file, ""); signatures = getarraykeys(level.script_gen_dump);
       for(i = 0; i < signatures.size; i++)
         if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
           script_gen_dumpprintln(file, "\t" + level.script_gen_dump[signatures[i]]);

@@ -363,16 +363,12 @@ updategameevents() {
     }
 
     if(!level.alivecount["allies"] && !level.alivecount["axis"] && (!level.livescount["allies"] && !level.livescount["axis"]))
-      return [
-        [level.ondeadevent]
-      ]("all");
+      return [[level.ondeadevent]]("all");
 
     var_9 = maps\mp\_utility::getpotentiallivingplayers();
 
     if(var_9.size == 1)
-      return [
-        [level.ononeleftevent]
-      ]("all");
+      return [[level.ononeleftevent]]("all");
   }
 }
 

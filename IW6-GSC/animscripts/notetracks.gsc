@@ -293,7 +293,7 @@ notetrackposeprone(var_0, var_1) {
   if(!issentient(self)) {
     return;
   }
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::enterpronewrapper(1.0);
   setpose("prone");
 
@@ -307,7 +307,7 @@ notetrackposecrawl(var_0, var_1) {
   if(!issentient(self)) {
     return;
   }
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::enterpronewrapper(1.0);
   setpose("prone");
   self.a.proneaiming = undefined;
@@ -320,7 +320,7 @@ notetrackposeback(var_0, var_1) {
   setpose("crouch");
   self.a.onback = 1;
   self.a.movement = "stop";
-  self setproneanimnodes(-90, 90, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-90, 90, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::enterpronewrapper(1.0);
 }
 
@@ -815,9 +815,7 @@ donotetracksforeverproc(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 < 0.05) {
       var_5 = gettime();
-      var_6 = [
-        [var_0]
-      ](var_1, var_3, var_4);
+      var_6 = [[var_0]](var_1, var_3, var_4);
       var_7 = gettime() - var_5;
 
       if(var_7 < 0.05)
@@ -889,9 +887,7 @@ playfootstep(var_0, var_1) {
       return;
     }
 
-    if(![
-        [anim.optionalstepeffectsmallfunction]
-      ](var_3, var_2))
+    if(![[anim.optionalstepeffectsmallfunction]](var_3, var_2))
       playfootstepeffect(var_3, var_2);
   }
 }

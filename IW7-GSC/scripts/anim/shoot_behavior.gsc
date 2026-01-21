@@ -65,9 +65,7 @@ func_4F69(var_0) {
     }
 
     if(isDefined(self.a.var_1096D)) {
-      [
-        [self.a.var_1096D]
-      ]();
+      [[self.a.var_1096D]]();
     }
 
     if(func_3DFB(var_2, self.var_FE9E) || !isDefined(self.var_FE9E) && func_3DFB(var_3, self.var_FECF) || func_3DFB(var_4, self.var_FED7)) {

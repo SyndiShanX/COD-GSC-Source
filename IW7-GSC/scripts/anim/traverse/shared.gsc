@@ -15,8 +15,8 @@ func_18D1(var_0, var_1) {
   var_3 = var_2.var_126D4 - var_2.origin[2];
   thread func_11661(var_3 - var_1);
   var_4 = 0.15;
-  self clearanim( % body, var_4);
-  self func_82E4("traverse", var_0, % root, 1, var_4, 1);
+  self clearanim(%body, var_4);
+  self func_82E4("traverse", var_0, %root, 1, var_4, 1);
   var_5 = 0.2;
   var_6 = 0.2;
   thread scripts\anim\notetracks::donotetracksforever("traverse", "no clear");
@@ -316,7 +316,7 @@ func_586D(var_0, var_1, var_2) {
   self.var_126DB = level.var_58C7[var_0];
   self.var_126EB = var_3;
   self.var_126E4 = self func_8145();
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self func_82EA("dog_traverse", self.var_126DB, 1, 0.2, 1);
   self.var_BCA6 = "land";
   scripts\anim\notetracks::donotetracksintercept("dog_traverse", ::func_5864);
@@ -349,7 +349,7 @@ func_5867(var_0, var_1, var_2, var_3) {
   }
 
   self.var_BCA6 = "land";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self func_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
   if(!var_3) {
     scripts\anim\shared::donotetracks("traverseAnim");
@@ -386,7 +386,7 @@ func_5868(var_0, var_1, var_2, var_3) {
   }
 
   self.var_BCA6 = "land";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self func_82EA("traverseAnim", self.var_126DB, 1, 0.2, 1);
   if(!var_3) {
     scripts\anim\shared::donotetracks("traverseAnim");
@@ -414,7 +414,7 @@ func_5869(var_0, var_1) {
   var_3 = var_2.var_126D4 - var_2.origin[2];
   thread func_11661(var_3 - var_1);
   self.var_BCA6 = "land";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self func_82E4("dog_traverse", level.var_58C7[var_0], 1, 0.2, 1);
   scripts\anim\shared::donotetracks("dog_traverse");
   self.var_BCA6 = undefined;

@@ -450,9 +450,7 @@ function callback_playerconnect() {
   } else {
     if(self.pers["team"] == "spectator") {
       self setclientscriptmainmenu(game["menu_start_menu"]);
-      [
-        [level.spawnspectator]
-      ]();
+      [[level.spawnspectator]]();
       self.sessionteam = "spectator";
       self.sessionstate = "spectator";
       self thread spectate_player_watcher();
@@ -460,9 +458,7 @@ function callback_playerconnect() {
       self.sessionteam = self.pers["team"];
       self.sessionstate = "dead";
       self globallogic_ui::updateobjectivetext();
-      [
-        [level.spawnspectator]
-      ]();
+      [[level.spawnspectator]]();
       if(globallogic_utils::isvalidclass(self.pers["class"])) {
         self thread[[level.spawnclient]]();
       } else {
@@ -836,9 +832,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
       smeansofdeath = "MOD_FALLING";
     }
     if(isDefined(level.overrideweaponfunc)) {
-      weapon = [
-        [level.overrideweaponfunc]
-      ](weapon, einflictor.script_noteworthy);
+      weapon = [[level.overrideweaponfunc]](weapon, einflictor.script_noteworthy);
     }
   }
   if(globallogic_utils::isheadshot(weapon, shitloc, smeansofdeath, einflictor) && isplayer(eattacker)) {

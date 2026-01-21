@@ -1641,9 +1641,7 @@ wasonlyround() {
     return 1;
 
   if(isDefined(level.overridewasonlyround)) {
-    if([
-        [level.overridewasonlyround]
-      ]())
+    if([[level.overridewasonlyround]]())
       return 1;
   }
 

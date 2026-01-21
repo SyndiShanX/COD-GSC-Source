@@ -281,9 +281,7 @@ changeSecondaryGrenadeType(weapname) {
   self thread deleteTriggerWhenPickedUp(trig);
   while(1) {
     trig waittill("trigger", player);
-    if(player getWeaponAmmoTotal(level.weapons["smoke"]) == 0 &&
-      player getWeaponAmmoTotal(level.weapons["flash"]) == 0 &&
-      player getWeaponAmmoTotal(level.weapons["concussion"]) == 0) {
+    if(player getWeaponAmmoTotal(level.weapons["smoke"]) == 0 && player getWeaponAmmoTotal(level.weapons["flash"]) == 0 && player getWeaponAmmoTotal(level.weapons["concussion"]) == 0) {
       player setOffhandSecondaryClass(offhandClass);
     }
   }

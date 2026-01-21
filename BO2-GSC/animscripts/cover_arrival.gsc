@@ -34,7 +34,7 @@ main() {
     return;
   }
   assert(isDefined(self.approachanim), "Arrival anim not defined (" + self.animtype + " - exit_" + self.approachtype + " - " + self.approachnumber + ")");
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   self setflaggedanimknobrestart("coverArrival", self.approachanim, 1, 0.3, 1);
   self animscripts\shared::donotetracks("coverArrival");
   self maps\_dds::dds_threat_notify(self.team != "allies");
@@ -44,7 +44,7 @@ main() {
 
   self.a.movement = "stop";
   self.a.arrivaltype = self.approachtype;
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
 
   self animscripts\debug::debugpopstate("Cover Arrival");
 }
@@ -1008,7 +1008,7 @@ docoverexitanimation(exittype, approachnumber) {
 
   self animmode("zonly_physics", 0);
   self orientmode("face angle", self.angles[1]);
-  self setflaggedanimknoballrestart("coverexit", leaveanim, % body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("coverexit", leaveanim, %body, 1, 0.2, 1);
   animstarttime = gettime();
   hasexitalign = animhasnotetrack(leaveanim, "exit_align");
 
@@ -1075,7 +1075,7 @@ docoverexitanimation(exittype, approachnumber) {
   if(timeleft > 0)
     wait(timeleft);
 
-  self clearanim( % root, 0.15);
+  self clearanim(%root, 0.15);
   self orientmode("face default");
   self animmode("normal", 0);
 

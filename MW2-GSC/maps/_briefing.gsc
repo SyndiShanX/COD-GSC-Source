@@ -33,8 +33,7 @@ main() {
     wait 0.05;
     player gotothelevel(false);
   } else {
-    // Press &&BUTTON_SELECTCHOICE" to Skip."
-    precacheString(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
+    // Press &&BUTTON_SELECTCHOICE" to Skip."precacheString(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
     for(i = 0; i < level.slide.size; i++)
       if(isDefined(level.slide[i]["image"]))
         precacheshader(level.slide[i]["image"]);
@@ -97,8 +96,7 @@ start(fFadeTime) {
   level.FiretoSkip.horzAlign = "center";
   level.FiretoSkip.vertAlign = "fullscreen";
   level.FiretoSkip.foreground = true;
-  // Press &&BUTTON_SELECTCHOICE" to Skip."
-  level.FiretoSkip settext(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
+  // Press &&BUTTON_SELECTCHOICE" to Skip."level.FiretoSkip settext(&"SCRIPT_PLATFORM_FIRE_TO_SKIP");
   level.FiretoSkip.alpha = 0.0;
 
   thread fadeInFireToSkip();

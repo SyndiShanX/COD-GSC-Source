@@ -1221,8 +1221,7 @@ doFinalKillcam() {
   timeGameEnded = level.finalKillCam_timeGameEnded[winner];
   sMeansOfDeath = level.finalKillCam_sMeansOfDeath[winner];
 
-  if(!isDefined(victim) ||
-    !isDefined(attacker)) {
+  if(!isDefined(victim) || !isDefined(attacker)) {
     level.showingFinalKillcam = false;
     level notify("final_killcam_done");
     return;
@@ -1458,12 +1457,7 @@ giveRecentShieldXP() {
 }
 
 updateInflictorStat(eInflictor, eAttacker, sWeapon) {
-  if(
-    !isDefined(eInflictor) ||
-    !isDefined(eInflictor.alreadyHit) ||
-    !eInflictor.alreadyHit ||
-    !isSingleHitWeapon(sWeapon)
-  ) {
+  if(!isDefined(eInflictor) || !isDefined(eInflictor.alreadyHit) || !eInflictor.alreadyHit || !isSingleHitWeapon(sWeapon)) {
     self maps\mp\gametypes\_gamelogic::setInflictorStat(eInflictor, eAttacker, sWeapon);
   }
 
@@ -1477,8 +1471,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
 
   gametype = GetDvar("g_gametype");
 
-  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_CRUSH" &&
-    isDefined(eInflictor) && isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle")
+  if(isDefined(sMeansOfDeath) && sMeansOfDeath == "MOD_CRUSH" && isDefined(eInflictor) && isDefined(eInflictor.classname) && eInflictor.classname == "script_vehicle")
     return "crushed";
 
   if(!isReallyAlive(victim))
@@ -1527,9 +1520,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
   attackerIsNPC = isDefined(eAttacker) && !isDefined(eAttacker.gunner) && (eAttacker.classname == "script_vehicle" || eAttacker.classname == "misc_turret" || eAttacker.classname == "script_model");
   attackerIsHittingTeammate = attackerIsHittingTeam(victim, eAttacker);
 
-  attackerIsInflictorVictim = isDefined(eAttacker) && isDefined(eInflictor) && isDefined(victim) &&
-    IsPlayer(eAttacker) && (eAttacker == eInflictor) && (eAttacker == victim) &&
-    !isDefined(eInflictor.poison);
+  attackerIsInflictorVictim = isDefined(eAttacker) && isDefined(eInflictor) && isDefined(victim) && IsPlayer(eAttacker) && (eAttacker == eInflictor) && (eAttacker == victim) && !isDefined(eInflictor.poison);
 
   if(attackerIsInflictorVictim)
     return "attackerIsInflictorVictim";

@@ -262,7 +262,7 @@ reviver_revive(revive_anim, revive_point) {
   self.ignoreme = true;
   resetReviveSequenceTimer();
   bleeder SetFlaggedAnimKnob("being_revived", getBleederReviveAnim(), 1, 0.1, 1);
-  self AnimScripted("revive", bleeder.origin, bleeder.angles, revive_anim, "normal", % body, 1);
+  self AnimScripted("revive", bleeder.origin, bleeder.angles, revive_anim, "normal", %body, 1);
   self animscripts\shared::DoNoteTracks("revive", ::handleReviverNotetracks);
   self notify("revive_complete");
   self revive_getup_process();
@@ -274,13 +274,13 @@ revive_getup_process() {
 }
 
 bleeder_getup() {
-  self SetFlaggedAnimKnobAllRestart("bleeder_get_up", getBleederGetUpAnim(), % body, 1, 0.1, 1.0);
+  self SetFlaggedAnimKnobAllRestart("bleeder_get_up", getBleederGetUpAnim(), %body, 1, 0.1, 1.0);
   self animscripts\shared::DoNoteTracks("bleeder_get_up");
   self free_bleeder();
 }
 
 reviver_getup() {
-  self SetFlaggedAnimKnobAllRestart("reviver_get_up", getReviverGetUpAnim(), % body, 1, 0.1, 1.0);
+  self SetFlaggedAnimKnobAllRestart("reviver_get_up", getReviverGetUpAnim(), %body, 1, 0.1, 1.0);
   self animscripts\shared::DoNoteTracks("reviver_get_up");
   self free_reviver("revive_complete");
 }
@@ -298,7 +298,7 @@ fall_down_to_bleed() {
   self endon("revived");
   self endon("being_revived");
   self endon("killanimscript");
-  self SetAnimKnobAll( % revive, % body, 1, 0.1, 1);
+  self SetAnimKnobAll(%revive, %body, 1, 0.1, 1);
   transAnim = getTransitionAnim();
   self.a.falling = true;
   self SetFlaggedAnimKnob("fall_transition", transAnim, 1, 0.1, 1.5);
@@ -311,7 +311,7 @@ fall_down_to_bleed() {
 }
 
 play_bleed_loop() {
-  self SetFlaggedAnimKnobAllRestart("bleeding", getBleedLoopAnim(), % body, 1, 0.1, 1.0);
+  self SetFlaggedAnimKnobAllRestart("bleeding", getBleedLoopAnim(), %body, 1, 0.1, 1.0);
 }
 
 handleBleederNotetracks(anim_name) {

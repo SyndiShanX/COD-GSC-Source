@@ -360,10 +360,7 @@ ambient_cloudburst_fx(endonString) {
   while(1) {
     numBursts = RandomIntRange(burstsMin, burstsMax);
     for(i = 0; i < numBursts; i++) {
-      offsetVec = self.origin +
-        (RandomIntRange((offsetX * -1), offsetX),
-          RandomIntRange((offsetY * -1), offsetY),
-          RandomIntRange((offsetZ * -1), offsetZ));
+      offsetVec = self.origin + (RandomIntRange((offsetX * -1), offsetX), RandomIntRange((offsetY * -1), offsetY), RandomIntRange((offsetZ * -1), offsetZ));
       playFX(level._effect["cloudburst"], self.origin + offsetVec);
       wait(RandomFloatRange(burstWaitMin, burstWaitMax));
     }

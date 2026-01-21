@@ -82,7 +82,7 @@ snd_load_filter_presets() {
   level._snd.filters = spawnStruct();
   var_0 = [];
   var_0[var_0.size] = "soundtables\sp_defaults.csv";
-  var_0[var_0.size] = "soundtables\" + level.script + ".csv ";
+  var_0[var_0.size] = "soundtables\" + level.script + ".csv";
   level._snd.filters.presets = soundscripts\_snd::snd_parse_soundtables("Filter", var_0, 6, "filter_names", "zone_names;reverb_names;filter_names;occlusion_names;timescale_names;dynamic_ambience_names;components;loop_defs;whizby_preset_names;mix_names;healthfx_params");
 }
 
@@ -213,7 +213,7 @@ snd_load_occlusion_presets() {
   level._snd.occlusion = spawnStruct();
   var_0 = [];
   var_0[var_0.size] = "soundtables\sp_defaults.csv";
-  var_0[var_0.size] = "soundtables\" + level.script + ".csv ";
+  var_0[var_0.size] = "soundtables\" + level.script + ".csv";
   level._snd.occlusion.presets = soundscripts\_snd::snd_parse_soundtables("Filter", var_0, 6, "occlusion_names", "zone_names;reverb_names;filter_names;occlusion_names;timescale_names;dynamic_ambience_names;components;loop_defs;whizby_preset_names;mix_names;healthfx_params");
 }
 

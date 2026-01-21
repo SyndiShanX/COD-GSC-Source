@@ -18,8 +18,7 @@ whitehouse_spotlight_create(str_targetname, health) {
 
   spotlight_origin = getstruct(damage_ent.target, "targetname");
 
-  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight"); // "heli_spotlight"
-  spotlight.angles = spotlight_origin.angles;
+  spotlight = SpawnTurret("misc_turret", spotlight_origin.origin, "heli_spotlight"); // "heli_spotlight"spotlight.angles = spotlight_origin.angles;
   spotlight setModel("cod3mg42");
   spotlight SetTurretTeam("axis");
   spotlight setmode("manual");
@@ -130,8 +129,7 @@ manual_mg_init(delay) {
 
   self thread manual_mg_drone();
 
-  self setmode("auto_nonai"); //"manual", "manual_ai", "auto_nonai", "auto_ai", "sentry"
-  self setturretteam("axis");
+  self setmode("auto_nonai"); //"manual", "manual_ai", "auto_nonai", "auto_ai", "sentry"self setturretteam("axis");
   self setbottomarc(35);
   self setleftarc(90);
   self setrightarc(90);
@@ -954,7 +952,7 @@ tunnels_teleport()
 
 	// teleport ai
 	volume = getent( "tunnels_teleport_volume", "targetname" );
-	dest_arr = getstructarray( "tunnels_teleport_struct", "targetname" );
+	dest_arr = getstructarray("tunnels_teleport_struct", "targetname" );
 	index = 0;
 
 	angles_rotation = target_ent.angles - start_ent.angles;

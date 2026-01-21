@@ -640,23 +640,13 @@ onEndGame(winningTeam) {
   }
 }
 
-kothPlayerSpawnGenerateInfluencers(
-  player_entity,
-  spawn_influencers) {
+kothPlayerSpawnGenerateInfluencers(player_entity, spawn_influencers) {
   if(isDefined(level.radio.gameobject)) {
     koth_objective_influencer_score = level.spawnsystem.koth_objective_influencer_score;
     koth_objective_influencer_score_curve = level.spawnsystem.koth_objective_influencer_score_curve;
     koth_objective_influencer_radius = level.spawnsystem.koth_objective_influencer_radius;
     hq_origin = level.radio.gameobject.curOrigin;
-    spawn_influencers.a[spawn_influencers.a.size] = create_sphere_influencer(
-      "game_mode",
-      (1.0, 0.0, 0.0),
-      (0.0, 0.0, 1.0),
-      hq_origin,
-      koth_objective_influencer_score,
-      koth_objective_influencer_score_curve,
-      koth_objective_influencer_radius
-    );
+    spawn_influencers.a[spawn_influencers.a.size] = create_sphere_influencer("game_mode", (1.0, 0.0, 0.0), (0.0, 0.0, 1.0), hq_origin, koth_objective_influencer_score, koth_objective_influencer_score_curve, koth_objective_influencer_radius);
   }
   return spawn_influencers;
 }
@@ -665,12 +655,7 @@ createRadioSpawnInfluencer() {
   koth_objective_influencer_score = level.spawnsystem.koth_objective_influencer_score;
   koth_objective_influencer_score_curve = level.spawnsystem.koth_objective_influencer_score_curve;
   koth_objective_influencer_radius = level.spawnsystem.koth_objective_influencer_radius;
-  self.spawn_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    self.gameobject.curOrigin,
-    koth_objective_influencer_radius,
-    koth_objective_influencer_score,
-    0,
-    maps\mp\gametypes\_spawning::get_score_curve_index(koth_objective_influencer_score_curve));
+  self.spawn_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, self.gameobject.curOrigin, koth_objective_influencer_radius, koth_objective_influencer_score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(koth_objective_influencer_score_curve));
   self enable_radio_spawn_influencer(false);
 }
 

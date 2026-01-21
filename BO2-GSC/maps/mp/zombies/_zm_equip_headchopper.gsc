@@ -323,9 +323,9 @@ init_animtree() {
 
 init_anim_slice_times() {
   level.headchopper_slice_times = [];
-  slice_times = getnotetracktimes( % o_zmb_chopper_slice_slow, "slice");
-  retract_times = getnotetracktimes( % o_zmb_chopper_slice_slow, "retract");
-  animlength = getanimlength( % o_zmb_chopper_slice_slow);
+  slice_times = getnotetracktimes(%o_zmb_chopper_slice_slow, "slice");
+  retract_times = getnotetracktimes(%o_zmb_chopper_slice_slow, "retract");
+  animlength = getanimlength(%o_zmb_chopper_slice_slow);
 
   foreach(frac in slice_times)
   level.headchopper_slice_times[level.headchopper_slice_times.size] = animlength * frac;
@@ -340,8 +340,8 @@ headchopper_animate(weapon, armed) {
   self endon("equip_headchopper_zm_taken");
   weapon endon("death");
   weapon useanimtree(#animtree);
-  f_animlength = getanimlength( % o_zmb_chopper_slice_fast);
-  s_animlength = getanimlength( % o_zmb_chopper_slice_slow);
+  f_animlength = getanimlength(%o_zmb_chopper_slice_fast);
+  s_animlength = getanimlength(%o_zmb_chopper_slice_slow);
   weapon thread headchopper_audio();
   prearmed = 0;
 
@@ -366,13 +366,13 @@ headchopper_animate(weapon, armed) {
       if(isDefined(zombies_only) && zombies_only) {
         weapon thread watch_notetracks_slicing();
         weapon playSound("zmb_headchopper_swing");
-        weapon setanim( % o_zmb_chopper_slice_slow);
+        weapon setanim(%o_zmb_chopper_slice_slow);
         wait(s_animlength);
-        weapon clearanim( % o_zmb_chopper_slice_slow, 0.2);
+        weapon clearanim(%o_zmb_chopper_slice_slow, 0.2);
       } else {
-        weapon setanim( % o_zmb_chopper_slice_fast);
+        weapon setanim(%o_zmb_chopper_slice_fast);
         wait(f_animlength);
-        weapon clearanim( % o_zmb_chopper_slice_fast, 0.2);
+        weapon clearanim(%o_zmb_chopper_slice_fast, 0.2);
       }
 
       weapon notify("end");

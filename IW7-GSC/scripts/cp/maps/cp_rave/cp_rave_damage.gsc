@@ -649,9 +649,7 @@ cp_rave_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   if(!scripts\cp\agents\gametype_zombie::isonhumanteam(self)) {
     scripts\cp\agents\gametype_zombie::enemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     if(isDefined(level.onzombiekilledfunc)) {
-      [
-        [level.onzombiekilledfunc]
-      ](var_1, var_4);
+      [[level.onzombiekilledfunc]](var_1, var_4);
     }
   }
 

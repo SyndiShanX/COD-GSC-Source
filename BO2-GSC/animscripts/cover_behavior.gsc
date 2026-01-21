@@ -54,9 +54,7 @@ main(behaviorcallbacks) {
     if(isDefined(behaviorcallbacks.mainloopstart)) {
       starttime = gettime();
       self thread endidleatframeend();
-      [
-        [behaviorcallbacks.mainloopstart]
-      ]();
+      [[behaviorcallbacks.mainloopstart]]();
 
       if(gettime() == starttime)
         self notify("dont_end_idle");

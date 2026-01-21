@@ -974,8 +974,7 @@ robotbecomecrawler(entity) {
   entity.crawlerlifetime = gettime() + randomintrange(10000, 20000);
   bhtnactionstartevent(entity, "rbCrawler");
   entity notify(#"bhtn_action_notify", {
-    #action: "rbCrawler"
-  });
+    #action: "rbCrawler"});
 }
 
 robotshouldbecomecrawler(entity) {
@@ -1977,8 +1976,7 @@ robotjukeinitialize(entity) {
   entity clearpath();
   bhtnactionstartevent(entity, "rbJuke");
   entity notify(#"bhtn_action_notify", {
-    #action: "rbJuke"
-  });
+    #action: "rbJuke"});
   jukeinfo = spawnStruct();
   jukeinfo.origin = entity.origin;
   jukeinfo.entity = entity;

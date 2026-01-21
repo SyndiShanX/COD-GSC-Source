@@ -690,9 +690,7 @@ function function_a6c926fc(holdtime) {
 function function_5af67667(var_7dd30d23, var_b4ca654f = 0) {
   if(level flag::get("doa_game_is_completed") || (!(isDefined(var_b4ca654f) && var_b4ca654f) && level.doa.arenas[var_7dd30d23].var_63b4dab3)) {
     if(isDefined(level.doa.var_5ddb204f)) {
-      [
-        [level.doa.var_5ddb204f]
-      ]();
+      [[level.doa.var_5ddb204f]]();
     }
     var_7dd30d23 = 0;
     level.doa.var_da96f13c++;

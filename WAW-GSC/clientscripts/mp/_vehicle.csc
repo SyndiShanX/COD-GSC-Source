@@ -183,8 +183,7 @@ treadget(vehicle, side) {
 
 vehicle_watch_damage(localClientNum) {
   self endon("entityshutdown");
-  if(!isDefined(level.tread_damage_fx) || !isDefined(level.tread_damage_fx[self.vehicletype]) ||
-    !isDefined(level.tread_grind_fx) || !isDefined(level.tread_grind_fx[self.vehicletype])) {
+  if(!isDefined(level.tread_damage_fx) || !isDefined(level.tread_damage_fx[self.vehicletype]) || !isDefined(level.tread_grind_fx) || !isDefined(level.tread_grind_fx[self.vehicletype])) {
     return;
   }
   keepWatchingLeftTread = true;

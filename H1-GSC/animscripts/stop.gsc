@@ -8,9 +8,9 @@
 
 init_animset_idle() {
   var_0 = [];
-  var_0["stand"][0] = [ % casual_stand_idle, % casual_stand_idle_twitch, % casual_stand_idle_twitchb];
-  var_0["stand_combat"][0] = [ % cqb_stand_idle, % cqb_stand_twitch];
-  var_0["stand_cqb"][0] = [ % cqb_stand_idle, % cqb_stand_twitch];
+  var_0["stand"][0] = [ % casual_stand_idle, %casual_stand_idle_twitch, %casual_stand_idle_twitchb];
+  var_0["stand_combat"][0] = [ % cqb_stand_idle, %cqb_stand_twitch];
+  var_0["stand_cqb"][0] = [ % cqb_stand_idle, %cqb_stand_twitch];
   var_0["crouch"][0] = [ % casual_crouch_idle];
   var_0["crouch_combat"][0] = [ % exposed_crouch_aim_5];
   var_1 = [];
@@ -40,9 +40,7 @@ main() {
   }
   if(isDefined(self.custom_animscript)) {
     if(isDefined(self.custom_animscript["stop"])) {
-      [
-        [self.custom_animscript["stop"]]
-      ]();
+      [[self.custom_animscript["stop"]]]();
       return;
     }
   }
@@ -72,7 +70,7 @@ main() {
     var_1 = animscripts\exit_node::getexitnode();
 
     if(isDefined(var_1)) {
-      self setflaggedanimknoballrestart("idle", self.customidleanimset["stand"], % body, 1, 0.5, self.animplaybackrate);
+      self setflaggedanimknoballrestart("idle", self.customidleanimset["stand"], %body, 1, 0.5, self.animplaybackrate);
       turntoangle(var_1.angles[1]);
     } else
       self orientmode("face angle", self.angles[1]);
@@ -88,7 +86,7 @@ main() {
     }
 
     if(self.a.pose != var_2) {
-      self clearanim( % animscript_root, 0.3);
+      self clearanim(%animscript_root, 0.3);
       var_0 = 0;
     }
 
@@ -154,7 +152,7 @@ specialidleloop() {
   var_0 = self.specialidleanim;
   self animmode("gravity");
   self orientmode("face current");
-  self clearanim( % animscript_root, 0.2);
+  self clearanim(%animscript_root, 0.2);
 
   if(var_0.size == 0) {
     return;
@@ -229,7 +227,7 @@ transitiontoidle(var_0, var_1) {
 
   if(isDefined(var_3[var_0])) {
     var_4 = var_3[var_0];
-    self setflaggedanimknoballrestart("idle_transition", var_4, % body, 1, 0.2, self.animplaybackrate);
+    self setflaggedanimknoballrestart("idle_transition", var_4, %body, 1, 0.2, self.animplaybackrate);
     animscripts\shared::donotetracks("idle_transition");
   }
 }
@@ -288,11 +286,11 @@ playidle(var_0, var_1) {
     var_11 = 0.5;
 
   if(isDefined(var_3)) {
-    self setanimknoball(var_4, % body, 1, var_11, 1);
-    self setanim( % add_idle);
-    self setflaggedanimknoballrestart("idle", var_3, % add_idle, 1, var_11, self.animplaybackrate);
+    self setanimknoball(var_4, %body, 1, var_11, 1);
+    self setanim(%add_idle);
+    self setflaggedanimknoballrestart("idle", var_3, %add_idle, 1, var_11, self.animplaybackrate);
   } else
-    self setflaggedanimknoballrestart("idle", var_4, % body, 1, var_11, self.animplaybackrate);
+    self setflaggedanimknoballrestart("idle", var_4, %body, 1, var_11, self.animplaybackrate);
 
   animscripts\shared::donotetracks("idle");
 }
@@ -319,14 +317,14 @@ pronestill() {
   }
 
   if(isDefined(var_1)) {
-    self setflaggedanimknoballrestart("trans", var_1, % body, 1, 0.2, 1.0);
+    self setflaggedanimknoballrestart("trans", var_1, %body, 1, 0.2, 1.0);
 
     if(isDefined(var_2))
       self setanimtime(var_1, var_2);
 
     animscripts\shared::donotetracks("trans");
     self.a.movement = "stop";
-    self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
+    self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
     return;
   }
 
@@ -335,9 +333,9 @@ pronestill() {
   if(randomint(10) < 3) {
     var_4 = animscripts\utility::lookupanim("cover_prone", "twitch");
     var_5 = var_4[randomint(var_4.size)];
-    self setflaggedanimknoball("prone_idle", var_5, % exposed_modern, 1, 0.2);
+    self setflaggedanimknoball("prone_idle", var_5, %exposed_modern, 1, 0.2);
   } else {
-    self setanimknoball(animscripts\utility::lookupanim("cover_prone", "straight_level"), % exposed_modern, 1, 0.2);
+    self setanimknoball(animscripts\utility::lookupanim("cover_prone", "straight_level"), %exposed_modern, 1, 0.2);
     self setflaggedanimknob("prone_idle", animscripts\utility::lookupanim("cover_prone", "exposed_idle")[0], 1, 0.2);
   }
 

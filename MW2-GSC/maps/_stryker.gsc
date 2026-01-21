@@ -18,7 +18,7 @@ main(model, type, no_destroyed) {
     build_deathfx("explosions/large_vehicle_explosion", undefined, "exp_armor_vehicle");
   }
 
-  build_drive( % stryker_movement, % stryker_movement_backwards, 10);
+  build_drive(%stryker_movement, %stryker_movement_backwards, 10);
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("allies");
@@ -80,10 +80,7 @@ and these lines in your CSV:
 include,vehicle_stryker
 sound,vehicle_stryker,vehicle_standard,all_sp
 
-defaultmdl="vehicle_stryker"
-default:"vehicletype" "stryker"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_stryker"default:"vehicletype" "stryker"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_stryker_nophysics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -94,10 +91,7 @@ and these lines in your CSV:
 include,vehicle_stryker
 sound,vehicle_stryker,vehicle_standard,all_sp
 
-defaultmdl="vehicle_stryker"
-default:"vehicletype" "stryker_nophysics"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_stryker"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_stryker_desert_nophysics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -108,10 +102,7 @@ and these lines in your CSV:
 include,vehicle_stryker_desert
 sound,vehicle_stryker,vehicle_standard,all_sp
 
-defaultmdl="vehicle_stryker_desert"
-default:"vehicletype" "stryker_nophysics"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_stryker_desert_nophysics_nodestroyed (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -122,10 +113,7 @@ and these lines in your CSV:
 include,vehicle_stryker_desert_nodestroyed
 sound,vehicle_stryker,vehicle_standard,all_sp
 
-defaultmdl="vehicle_stryker_desert"
-default:"vehicletype" "stryker_nophysics"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_stryker_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -136,10 +124,7 @@ and these lines in your CSV:
 include,vehicle_stryker_desert
 sound,vehicle_stryker,vehicle_standard,all_sp
 
-defaultmdl="vehicle_stryker_desert"
-default:"vehicletype" "stryker"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_stryker_desert_nodestroyed (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -150,7 +135,5 @@ and these lines in your CSV:
 include,vehicle_stryker_desert_nodestroyed
 sound,vehicle_stryker,vehicle_standard,all_sp
 
-defaultmdl="vehicle_stryker_desert"
-default:"vehicletype" "stryker"
-default:"script_team" "allies"
+defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker"default:"script_team" "allies"
 */

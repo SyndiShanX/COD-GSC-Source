@@ -251,8 +251,7 @@ function_2bdb235d() {
 function_2bdff7e1(entity, stub, node) {
   var_5bd89846 = groundtrace(node.origin + (0, 0, 8), node.origin + (0, 0, -100000), 0, entity)[# "position"];
   var_66694b96 = {
-    #origin: var_5bd89846,
-    #angles: node.angles
+    #origin: var_5bd89846, #angles: node.angles
   };
 
   if(!(isDefined(stub.var_7c2f9a8b) && stub.var_7c2f9a8b)) {
@@ -1014,9 +1013,7 @@ function_78eae22a(entity, stub, reason, ...) {
     }
 
     entity.var_d187874c[entity.var_d187874c.size] = {
-      #stub: stub,
-      #reason: reason,
-      #args: vararg
+      #stub: stub, #reason: reason, #args: vararg
     };
   }
 }

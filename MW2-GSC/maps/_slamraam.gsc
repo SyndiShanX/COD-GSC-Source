@@ -43,7 +43,5 @@ maps\_slamraam::main( "vehicle_slamraam" );
 and these lines in your CSV:
 include,vehicle_slamraam_slamraam
 
-defaultmdl="vehicle_slamraam"
-default:"vehicletype" "slamraam"
-default:"script_team" "allies"
+defaultmdl="vehicle_slamraam"default:"vehicletype" "slamraam"default:"script_team" "allies"
 */

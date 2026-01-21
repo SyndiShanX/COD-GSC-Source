@@ -72,8 +72,8 @@ destructisolarpanelsinit(var_0, var_1, var_2) {
 destructsolarpanels(var_0, var_1, var_2, var_3, var_4) {
   wait(var_1 * 8 + var_2);
   var_0 useanimtree(#animtree);
-  var_0 setanim( % odin_sat_solar_panel_wiggle2);
-  wait(getanimlength( % odin_sat_solar_panel_wiggle2));
+  var_0 setanim(%odin_sat_solar_panel_wiggle2);
+  wait(getanimlength(%odin_sat_solar_panel_wiggle2));
 
   if(var_4) {}
 

@@ -430,14 +430,10 @@ apply_iw4_costumes() {
 
   switch (weaponClass) {
     case "weapon_smg":
-      [
-        [game[self.team + "_model"]["SMG"]]
-      ]();
+      [[game[self.team + "_model"]["SMG"]]]();
       break;
     case "weapon_assault":
-      [
-        [game[self.team + "_model"]["ASSAULT"]]
-      ]();
+      [[game[self.team + "_model"]["ASSAULT"]]]();
       break;
     case "weapon_sniper":
       if(self.team == "allies")
@@ -447,9 +443,7 @@ apply_iw4_costumes() {
       break;
     case "weapon_lmg":
     case "weapon_heavy":
-      [
-        [game[self.team + "_model"]["LMG"]]
-      ]();
+      [[game[self.team + "_model"]["LMG"]]]();
       break;
     default:
       // print ("[WARNING] weaponClass '" + weaponClass + "' does not match any valid types.");
@@ -470,14 +464,10 @@ randomBotCostume() {
 
   switch (chosen_weapon_class) {
     case "weapon_smg":
-      [
-        [game[self.team + "_model"]["SMG"]]
-      ]();
+      [[game[self.team + "_model"]["SMG"]]]();
       break;
     case "weapon_assault":
-      [
-        [game[self.team + "_model"]["ASSAULT"]]
-      ]();
+      [[game[self.team + "_model"]["ASSAULT"]]]();
       break;
     case "weapon_sniper":
       if(self.team == "allies")
@@ -487,9 +477,7 @@ randomBotCostume() {
       break;
     case "weapon_lmg":
     case "weapon_heavy":
-      [
-        [game[self.team + "_model"]["LMG"]]
-      ]();
+      [[game[self.team + "_model"]["LMG"]]]();
       break;
     default:
       break;

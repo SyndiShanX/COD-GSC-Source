@@ -78,9 +78,7 @@ autosave_think(trigger) {
 autosave_name_think(trigger) {
   trigger waittill("trigger", ent);
   if(isDefined(level.customautosavecheck)) {
-    if(![
-        [level.customautosavecheck]
-      ]()) {
+    if(![[level.customautosavecheck]]()) {
       return;
     }
   }

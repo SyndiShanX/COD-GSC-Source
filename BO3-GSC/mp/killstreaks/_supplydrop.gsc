@@ -626,9 +626,7 @@ function markerupdatethread(context) {
     results = physicstrace(player getEye(), player getEye() + forwardvector, (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), player, mask);
     markermodel.origin = results["position"];
     tooclose = distancesquared(markermodel.origin, player.origin) < (minrange * minrange);
-    if(results["normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [
-        [context.islocationgood]
-      ](markermodel.origin, context)) {
+    if(results["normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [[context.islocationgood]](markermodel.origin, context)) {
       player.markerposition = markermodel.origin;
       player clientfield::set_to_player("marker_state", 1);
     } else {

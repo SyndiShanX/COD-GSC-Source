@@ -515,9 +515,7 @@ func_3974(var_0, var_1) {
     scripts\engine\utility::delaycall(var_10, ::playsound, "capital_ship_explo_jackal_debris");
 
     if(isDefined(level.var_A056) && isDefined(var_1) && var_1) {
-      [
-        [level.var_A056.var_3A02]
-      ](var_0, var_6, var_7, var_8, var_2, var_3);
+      [[level.var_A056.var_3A02]](var_0, var_6, var_7, var_8, var_2, var_3);
     }
   }
 }

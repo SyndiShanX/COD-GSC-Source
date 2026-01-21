@@ -15,7 +15,7 @@
 
 flashbanganim() {
   self endon("killanimscript");
-  self setflaggedanimknoball("flashed_anim", animarraypickrandom("flashed"), % body, 1, 0.2, randomfloatrange(0.6, 0.8));
+  self setflaggedanimknoball("flashed_anim", animarraypickrandom("flashed"), %body, 1, 0.2, randomfloatrange(0.6, 0.8));
   self animscripts\shared::donotetracks("flashed_anim");
 }
 
@@ -32,7 +32,7 @@ main() {
   self.allowdeath = 1;
 
   if(isDefined(self.flashedanim))
-    self setanimknoball(self.flashedanim, % body);
+    self setanimknoball(self.flashedanim, %body);
   else
     self thread flashbanganim();
 

@@ -129,15 +129,15 @@ moverun() {
 #using_animtree("generic_human");
 
 movestandcombatoverride() {
-  self clearanim( % combatrun, 0.6);
-  self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
   self setflaggedanimknob("runanim", self.run_combatanim, 1, 0.5, self.moveplaybackrate);
   donotetracksnoshootstandcombat("runanim");
 }
 
 movestandcombatnormal() {
-  self clearanim( % walk_and_run_loops, 0.2);
-  self setanimknob( % combatrun, 1.0, 0.5, self.moveplaybackrate);
+  self clearanim(%walk_and_run_loops, 0.2);
+  self setanimknob(%combatrun, 1.0, 0.5, self.moveplaybackrate);
   shouldsprint = shouldfullsprint();
   decidedanimation = 0;
   mayshootwhilemoving = animscripts\move::mayshootwhilemoving();
@@ -312,7 +312,7 @@ tacticalwalkforwardtobackwardtransition() {
       runanimname = "tactical_walk";
       self.a.turnangle = yawtoenemy * sign(anglediff);
       self animscripts\turn::doturn(transitionanim, animarray(runanimname + "_b"), -180, 1);
-      self animscripts\shared::setaiminganims( % run_aim_2, % run_aim_4, % run_aim_6, % run_aim_8);
+      self animscripts\shared::setaiminganims(%run_aim_2, %run_aim_4, %run_aim_6, %run_aim_8);
       runshootwhilemovingthreads();
       self animscripts\shared::trackloopstart();
       self orientmode("face default");
@@ -413,7 +413,7 @@ runngunforwardtobackwardtransition() {
     self.a.turnangle = yawtoenemy * sign(anglediff);
     self animscripts\turn::doturn(transitionanim, animarray(runanimname + "_b"), -180, 1);
     self orientmode("face angle", self.angles[1]);
-    self animscripts\shared::setaiminganims( % run_aim_2, % run_aim_4, % run_aim_6, % run_aim_8);
+    self animscripts\shared::setaiminganims(%run_aim_2, %run_aim_4, %run_aim_6, %run_aim_8);
     runshootwhilemovingthreads();
     self animscripts\shared::trackloopstart();
   }
@@ -432,11 +432,11 @@ runngunbackward() {
 }
 
 stoprunngun() {
-  self clearanim( % run_n_gun_f, 0.3);
-  self clearanim( % run_n_gun_r, 0.3);
-  self clearanim( % run_n_gun_l, 0.3);
-  self clearanim( % ai_run_n_gun_l_120, 0.3);
-  self clearanim( % ai_run_n_gun_l_120, 0.3);
+  self clearanim(%run_n_gun_f, 0.3);
+  self clearanim(%run_n_gun_r, 0.3);
+  self clearanim(%run_n_gun_l, 0.3);
+  self clearanim(%ai_run_n_gun_l_120, 0.3);
+  self clearanim(%ai_run_n_gun_l_120, 0.3);
   aimingoff(0.3);
 }
 
@@ -451,18 +451,18 @@ combatrun() {
 
 movestandnoncombatnormal() {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self setanimknoball( % combatrun, % body, 1, 0.2, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setanimknoball(%combatrun, %body, 1, 0.2, self.moveplaybackrate);
   prerunanim = getrunanim();
   self setflaggedanimknob("runanim", prerunanim, 1, 0.3, self.moveplaybackrate);
-  self thread updaterunanimweightsthread("NonCombat", % combatrun_forward, animarray("combat_run_b"), animarray("combat_run_l"), animarray("combat_run_r"));
+  self thread updaterunanimweightsthread("NonCombat", %combatrun_forward, animarray("combat_run_b"), animarray("combat_run_l"), animarray("combat_run_r"));
   donotetracksnoshootstandcombat("runanim");
 }
 
 movestandnoncombatoverride() {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self setflaggedanimknoball("runanim", self.run_noncombatanim, % body, 1, 0.3, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setflaggedanimknoball("runanim", self.run_noncombatanim, %body, 1, 0.3, self.moveplaybackrate);
   donotetracksnoshootstandcombat("runanim");
 }
 
@@ -530,7 +530,7 @@ reloadstandrun() {
 }
 
 runloopisnearbeginning() {
-  animfraction = self getanimtime( % walk_and_run_loops);
+  animfraction = self getanimtime(%walk_and_run_loops);
   looplength = getanimlength(animscripts\run::getrunanim()) / 3.0;
   animfraction = animfraction * 3.0;
 
@@ -565,7 +565,7 @@ reloadstandruninternal() {
     reloadanim = animarraypickrandom("reload");
 
   assert(isDefined(reloadanim));
-  self setflaggedanimknoballrestart(flagname, reloadanim, % body, 1, 0.25);
+  self setflaggedanimknoballrestart(flagname, reloadanim, %body, 1, 0.25);
   animscripts\shared::donotetracks(flagname);
   self animscripts\shared::trackloopstart();
 }
@@ -581,17 +581,17 @@ aimingon(aimanimname, aimlimit) {
     if(issubstr(aimanimname, "tactical"))
       ispistoltacticalwalkaim = 1;
     else {
-      self clearanim( % tactical_walk_pistol_aim2, 0);
-      self clearanim( % tactical_walk_pistol_aim4, 0);
-      self clearanim( % tactical_walk_pistol_aim6, 0);
-      self clearanim( % tactical_walk_pistol_aim8, 0);
+      self clearanim(%tactical_walk_pistol_aim2, 0);
+      self clearanim(%tactical_walk_pistol_aim4, 0);
+      self clearanim(%tactical_walk_pistol_aim6, 0);
+      self clearanim(%tactical_walk_pistol_aim8, 0);
     }
   }
 
   if(ispistoltacticalwalkaim)
-    self animscripts\shared::setaiminganims( % tactical_walk_pistol_aim2, % tactical_walk_pistol_aim4, % tactical_walk_pistol_aim6, % tactical_walk_pistol_aim8);
+    self animscripts\shared::setaiminganims(%tactical_walk_pistol_aim2, %tactical_walk_pistol_aim4, %tactical_walk_pistol_aim6, %tactical_walk_pistol_aim8);
   else
-    self animscripts\shared::setaiminganims( % run_aim_2, % run_aim_4, % run_aim_6, % run_aim_8);
+    self animscripts\shared::setaiminganims(%run_aim_2, %run_aim_4, %run_aim_6, %run_aim_8);
 
   if(!isDefined(aimlimit))
     aimlimit = 50;
@@ -716,13 +716,13 @@ updaterunweights(notifystring, frontanim, backanim, leftanim, rightanim) {
 
 movecrouchrunoverride() {
   self endon("movemode");
-  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, % body, 1, 0.4, self.moveplaybackrate);
+  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, %body, 1, 0.4, self.moveplaybackrate);
   animscripts\shared::donotetracksfortime(0.2, "runanim");
 }
 
 movecrouchrunnormal() {
-  self clearanim( % walk_and_run_loops, 0.2);
-  self setanimknob( % combatrun, 1.0, 0.5, self.moveplaybackrate);
+  self clearanim(%walk_and_run_loops, 0.2);
+  self setanimknob(%combatrun, 1.0, 0.5, self.moveplaybackrate);
   aimingoff();
   self orientmode("face motion");
 

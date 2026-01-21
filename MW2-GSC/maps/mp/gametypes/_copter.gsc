@@ -331,8 +331,7 @@ copterAI() {
 }
 
 // determines the best position to go to within descendEnt
-// from where a target is visible. if no such positions,
-// returns undefined.
+// from where a target is visible. if no such positions, // returns undefined.
 determineBestPos(targets, descendEnt, startorigin) {
   targetpos = descendEnt.targetEnt.origin;
   circleradius = distance(targetpos, descendEnt.origin);
@@ -362,8 +361,7 @@ determineBestPos(targets, descendEnt, startorigin) {
 }
 // determines the best entity out of descendEnts to go to
 // in order to get at one of targets.
-// result["descendEnt"] is the winning entity,
-// result["position"] is the position to go to.
+// result["descendEnt"] is the winning entity, // result["position"] is the position to go to.
 determineBestEnt(targets, descendEnts, startorigin) {
   result = [];
 
@@ -497,8 +495,7 @@ myMagicBullet(pos, dir) {
   trace = bulletTrace(pos, pos + vecscale(dir, 10000), true, undefined);
   if(isDefined(trace["entity"]) && isplayer(trace["entity"]) && isalive(trace["entity"])) {
     // hurt entity shot at
-    trace["entity"] thread[[level.callbackPlayerDamage]](
-      self, // eInflictor The entity that causes the damage.(e.g. a turret)
+    trace["entity"] thread[[level.callbackPlayerDamage]](self, // eInflictor The entity that causes the damage.(e.g. a turret)
       self, // eAttacker The entity that is attacking.
       damage, // iDamage Integer specifying the amount of damage done
       0, // iDFlags Integer specifying flags that are to be applied to the damage
@@ -507,8 +504,7 @@ myMagicBullet(pos, dir) {
       self.origin, // vPoint The point the damage is from?
       dir, // vDir The direction of the damage
       "none", // sHitLoc The location of the hit
-      0 // psOffsetTime The time offset for the damage
-    );
+      0 // psOffsetTime The time offset for the damage);
   }
   //line(pos, trace["position"], (1,1,1));
 }

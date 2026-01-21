@@ -113,8 +113,8 @@ function run_chamber_exit(n_enum) {
   s_portal.origin = e_portal_frame gettagorigin("fx_portal_jnt");
   s_portal.angles = e_portal_frame gettagangles("fx_portal_jnt");
   str_fx = zm_tomb_utility::get_teleport_fx_from_enum(n_enum);
-  collapse_time = getanimlength( % generic::p7_fxanim_zm_ori_portal_collapse_anim);
-  open_time = getanimlength( % generic::p7_fxanim_zm_ori_portal_open_anim);
+  collapse_time = getanimlength(%generic::p7_fxanim_zm_ori_portal_collapse_anim);
+  open_time = getanimlength(%generic::p7_fxanim_zm_ori_portal_open_anim);
   var_ff7119bc = undefined;
   switch (s_portal.targetname) {
     case "portal_exit_fire": {
@@ -188,8 +188,8 @@ function run_chamber_entrance_teleporter() {
   level flag::init("enable_teleporter_" + self.script_int);
   str_building_flag = "teleporter_building_" + self.script_int;
   level flag::init(str_building_flag);
-  collapse_time = getanimlength( % generic::p7_fxanim_zm_ori_portal_collapse_anim);
-  open_time = getanimlength( % generic::p7_fxanim_zm_ori_portal_open_anim);
+  collapse_time = getanimlength(%generic::p7_fxanim_zm_ori_portal_collapse_anim);
+  open_time = getanimlength(%generic::p7_fxanim_zm_ori_portal_open_anim);
   level flag::wait_till("start_zombie_round_logic");
   e_model thread scene::play("p7_fxanim_zm_ori_portal_collapse_bundle", e_model);
   wait(collapse_time);

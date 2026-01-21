@@ -24,8 +24,8 @@ zombie_jump_up() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
-  self clearanim( % stand_and_crouch, 0.1);
-  self setFlaggedAnimKnoballRestart("diveanim", % ai_zombie_jump_up, % body, 1, .1, 1);
+  self clearanim(%stand_and_crouch, 0.1);
+  self setFlaggedAnimKnoballRestart("diveanim", %ai_zombie_jump_up, %body, 1, .1, 1);
   self playSound("dive_wall");
   self waittillmatch("diveanim", "gravity on");
   self traverseMode("nogravity");

@@ -15,8 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   level.oow = {
-    #height_min: -2147483647,
-    #height_max: 2147483647
+    #height_min: -2147483647, #height_max: 2147483647
   };
   callback::on_game_playing(&on_game_playing);
 }

@@ -797,7 +797,7 @@ handle_finale_shakes_and_rumbles(var_0) {
   var_1 = 0;
 
   for(;;) {
-    var_2 = var_0 getanimtime( % odin_satellite_end_explosion_02_player);
+    var_2 = var_0 getanimtime(%odin_satellite_end_explosion_02_player);
 
     if(var_2 >= 0 && var_2 < 0.25) {
       var_3 = randomfloatrange(1, 5);

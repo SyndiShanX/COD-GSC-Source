@@ -24,6 +24,6 @@ function facialdialoguehandler(localclientnum, oldvalue, newvalue, bnewent, bini
   if(newvalue) {
     self.facialdialogueactive = 1;
   } else if(isDefined(self.facialdialogueactive) && self.facialdialogueactive) {
-    self clearanim( % generic::faces, 0);
+    self clearanim(%generic::faces, 0);
   }
 }

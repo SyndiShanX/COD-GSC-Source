@@ -578,8 +578,7 @@ function_180bae11() {
   if(isDefined(level.var_21343c57)) {
     var_ec8dc708 = bulletTrace(var_2ed6f142, v_end, 0, self);
     level notify(#"ww_ouranos_hit", {
-      #player: self,
-      #e_entity: var_ec8dc708[# "entity"]
+      #player: self, #e_entity: var_ec8dc708[# "entity"]
     });
   }
 

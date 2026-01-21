@@ -128,8 +128,7 @@ player_grenade_check() {
   while(1) {
     //this one hit's as soon as the button is pressed - that's why we want
     //to set the flag here and not after the grenade has left the hand
-    //with "grenade fire"
-    self waittill("grenade_pullback");
+    //with "grenade fire"self waittill("grenade_pullback");
     flag_set("_stealth_player_nade");
 
     self waittill("grenade_fire", grenade);

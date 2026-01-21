@@ -104,7 +104,7 @@ main() {
   thread maps\_mortar::bunker_style_mortar();
   thread maps\_mortar::bog_style_mortar();
   array_thread(getEntArray("animated_vehicle", "script_noteworthy"), ::vehicle_animated_think);
-  // --> moved to dc_crashsite.gsc |||||array_thread( getvehiclenodearray( "plane_sound", "script_noteworthy" ), maps\_mig29::plane_sound_node );
+  // --> moved to dc_crashsite.gsc |||||array_thread( getvehiclenodearray("plane_sound", "script_noteworthy" ), maps\_mig29::plane_sound_node );
   array_thread(getvehiclenodearray("plane_bomb", "script_noteworthy"), maps\_mig29::plane_bomb_cluster);
 
   /*-----------------------
@@ -620,7 +620,7 @@ AAA_sequence_bunker_to_commerce() {
   foreach(spawner in spawners) {
     friendlies_commerce_street[friendlies_commerce_street.size] = spawner spawn_ai(true);
   }
-  //wall_death_nodes = getnodearray( "wall_death_nodes", "script_noteworthy" );
+  //wall_death_nodes = getnodearray("wall_death_nodes", "script_noteworthy" );
   array_thread(friendlies_commerce_street, ::try_to_magic_bullet_shield);
   //array_thread( friendlies_commerce_street,::AI_try_to_hang_and_die_near_player, wall_death_nodes );
 
@@ -1516,8 +1516,7 @@ dialogue_trenches() {
   //Sgt. Macey	Overlord this is Hunter Two-One. We're screening west with no adjacent support, and friendly victors from RCT One are hauling ass past us, over.	
   level.teamleader dialogue_execute("dcburn_mcy_haulingpastus");
 
-  //Overlord HQ Radio Voice: Roger. RCT One has already peeled off an LAV to provide suppression, over."
-  thread radio_dialogue("dcburn_hqr_humvee");
+  //Overlord HQ Radio Voice: Roger. RCT One has already peeled off an LAV to provide suppression, over."thread radio_dialogue("dcburn_hqr_humvee");
 
   wait(3);
   flag_set("bradley_can_start_firing");
@@ -2124,7 +2123,7 @@ spotlight_preferred_targets() {
 
   while(isDefined(self)) {
     wait(randomfloatrange(2, 4));
-    //		aAI = getaiarray( "axis" );
+    //		aAI = getaiarray("axis" );
     //		if( aAI.size == 0 )
     //			continue;
     //		guy = getClosest( level.player.origin, aAI );
@@ -3290,8 +3289,7 @@ player_fails_if_abandons_crowsnest() {
   level endon("player_getting_on_minigun");
   flag_wait("player_abandoning_crowsnest");
 
-  //"Mission Failed.\nThe evac site was destroyed."
-  setDvar("ui_deadquote", &"DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
+  //"Mission Failed.\nThe evac site was destroyed."setDvar("ui_deadquote", &"DCBURNING_MISSIONFAIL_CROWSNEST_SNIPE");
   level notify("mission failed");
   maps\_utility::missionFailedWrapper();
 }
@@ -6491,8 +6489,7 @@ obj_commerce_defend_snipe() {
 //	obj_position = getstruct( "obj_commerce_defend_snipe", "targetname" );
 //	objective_add( objective_number, "invisible", &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", obj_position.origin );
 //	objective_state( objective_number, "current" );
-//	//"empty", "active", "invisible", "done", "current" and "failed"
-//	Objective_String( objective_number, &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE" );
+//	//"empty", "active", "invisible", "done", "current" and "failed"//	Objective_String( objective_number, &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE" );
 //	objective_current( objective_number );
 //
 //	flag_wait( "obj_commerce_defend_snipe_complete" );
@@ -6504,7 +6501,7 @@ obj_commerce_defend_snipe_enemies_think() {
   level endon("obj_commerce_defend_snipe_complete");
   self waittill("death");
   level.lasttimePlayerKilledEnemy = getTime();
-  //level.evacSiteEnemies = remove_dead_from_array( level.evacSiteEnemies );
+  //level.evacSiteEnemies = remove_dead_from_array(level.evacSiteEnemies );
   level.snipeEnemies = (level.snipeEnemies - 1);
   //Objective_String( 3, &"DCBURNING_OBJ_COMMERCE_DEFEND_SNIPE", level.evacSiteEnemies.size );
 

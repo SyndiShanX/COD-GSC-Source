@@ -67,16 +67,16 @@ data_glove_on(str_scene) {
 setup_anim() {
   if(level.script == "yemen") {
     add_scene("lockbreaker_perk", "lockbreaker_case");
-    add_player_anim("player_body", % int_specialty_yemen_lockbreaker, 1);
-    add_prop_anim("lockbreaker_dongle", % o_specialty_yemen_lockbreaker_dongle, "t6_wpn_hacking_dongle_prop", 1);
-    add_prop_anim("lockbreaker_camosuit", % o_specialty_yemen_lockbreaker_camosuit, "p6_intruder_perk_pickup", 1);
-    add_prop_anim("lockbreaker_case", % o_specialty_yemen_lockbreaker_crate);
+    add_player_anim("player_body", %int_specialty_yemen_lockbreaker, 1);
+    add_prop_anim("lockbreaker_dongle", %o_specialty_yemen_lockbreaker_dongle, "t6_wpn_hacking_dongle_prop", 1);
+    add_prop_anim("lockbreaker_camosuit", %o_specialty_yemen_lockbreaker_camosuit, "p6_intruder_perk_pickup", 1);
+    add_prop_anim("lockbreaker_case", %o_specialty_yemen_lockbreaker_crate);
   } else if(level.script == "monsoon") {
     add_scene("lockbreaker_perk", "lockbreaker_case");
-    add_player_anim("player_body", % int_specialty_monsoon_lockbreaker, 1);
-    add_prop_anim("lockbreaker_dongle", % o_specialty_monsoon_lockbreaker_dongle, "t6_wpn_hacking_dongle_prop", 1);
-    add_prop_anim("lockbreaker_camosuit", % o_specialty_monsoon_lockbreaker_camosuit, "p6_intruder_perk_pickup", 1);
-    add_prop_anim("lockbreaker_case", % o_specialty_monsoon_lockbreaker_crate);
+    add_player_anim("player_body", %int_specialty_monsoon_lockbreaker, 1);
+    add_prop_anim("lockbreaker_dongle", %o_specialty_monsoon_lockbreaker_dongle, "t6_wpn_hacking_dongle_prop", 1);
+    add_prop_anim("lockbreaker_camosuit", %o_specialty_monsoon_lockbreaker_camosuit, "p6_intruder_perk_pickup", 1);
+    add_prop_anim("lockbreaker_case", %o_specialty_monsoon_lockbreaker_crate);
   }
 
   precache_assets();

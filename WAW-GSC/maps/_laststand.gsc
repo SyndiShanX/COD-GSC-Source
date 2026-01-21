@@ -95,17 +95,7 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
 }
 
 laststand_allowed(sWeapon, sMeansOfDeath, sHitLoc) {
-  if(sMeansOfDeath != "MOD_PISTOL_BULLET" &&
-    sMeansOfDeath != "MOD_RIFLE_BULLET" &&
-    sMeansOfDeath != "MOD_HEAD_SHOT" &&
-    sMeansOfDeath != "MOD_MELEE" &&
-    sMeansOfDeath != "MOD_BAYONET" &&
-    sMeansOfDeath != "MOD_GRENADE" &&
-    sMeansOfDeath != "MOD_GRENADE_SPLASH" &&
-    sMeansOfDeath != "MOD_PROJECTILE" &&
-    sMeansOfDeath != "MOD_PROJECTILE_SPLASH" &&
-    sMeansOfDeath != "MOD_EXPLOSIVE" &&
-    sMeansOfDeath != "MOD_BURNED") {
+  if(sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET" && sMeansOfDeath != "MOD_HEAD_SHOT" && sMeansOfDeath != "MOD_MELEE" && sMeansOfDeath != "MOD_BAYONET" && sMeansOfDeath != "MOD_GRENADE" && sMeansOfDeath != "MOD_GRENADE_SPLASH" && sMeansOfDeath != "MOD_PROJECTILE" && sMeansOfDeath != "MOD_PROJECTILE_SPLASH" && sMeansOfDeath != "MOD_EXPLOSIVE" && sMeansOfDeath != "MOD_BURNED") {
     return false;
   }
   if(level.laststandpistol == "none") {
@@ -289,8 +279,7 @@ revive_trigger_think() {
         is_sumpf = 1;
         d = self depthinwater();
       }
-      if(players[i] can_revive(self) ||
-        (is_sumpf == 1 && d > 20)) {
+      if(players[i] can_revive(self) || (is_sumpf == 1 && d > 20)) {
         self.revivetrigger setHintString(&"GAME_BUTTON_TO_REVIVE_PLAYER");
         break;
       }

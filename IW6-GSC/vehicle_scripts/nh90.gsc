@@ -8,7 +8,7 @@
 main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("nh90", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
-  maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%bh_rotors, undefined, 0);
   var_3 = [];
   var_3["vehicle_nh90"] = "vfx/gameplay/explosions/vfx_exp_silenthawk_end";
   var_3["vehicle_nh90_no_lod"] = "vfx/gameplay/explosions/vfx_exp_silenthawk_end";

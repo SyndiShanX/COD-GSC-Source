@@ -141,10 +141,7 @@ update_deathflag(deathflag) {
 }
 
 outdoor_think(trigger) {
-  assert(trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_AXIS) ||
-    trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_ALLIES) ||
-    trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_NEUTRAL),
-    "trigger_outdoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
+  assert(trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_AXIS) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_ALLIES) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_NEUTRAL), "trigger_outdoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
   trigger endon("death");
   for(;;) {
     trigger waittill("trigger", guy);
@@ -158,10 +155,7 @@ outdoor_think(trigger) {
 }
 
 indoor_think(trigger) {
-  assert(trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_AXIS) ||
-    trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_ALLIES) ||
-    trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_NEUTRAL),
-    "trigger_indoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
+  assert(trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_AXIS) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_ALLIES) || trigger has_spawnflag(level.SPAWNFLAG_TRIGGER_AI_NEUTRAL), "trigger_indoor at " + trigger.origin + " is not set up to trigger AI! Check one of the AI checkboxes on the trigger.");
   trigger endon("death");
   for(;;) {
     trigger waittill("trigger", guy);

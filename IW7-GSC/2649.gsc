@@ -428,9 +428,7 @@ func_9C64(var_0, var_1, var_2) {
   }
 
   if(isDefined(level.guidedinteractionexclusion)) {
-    if(![
-        [level.guidedinteractionexclusion]
-      ](var_1, var_0, var_3))
+    if(![[level.guidedinteractionexclusion]](var_1, var_0, var_3))
       return 0;
   }
 

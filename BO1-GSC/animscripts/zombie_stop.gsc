@@ -21,7 +21,7 @@ main() {
     desiredPose = getDesiredIdlePose();
     assertex(desiredPose == "crouch" || desiredPose == "stand", desiredPose);
     if(self.a.pose != desiredPose) {
-      self ClearAnim( % root, 0.3);
+      self ClearAnim(%root, 0.3);
       transitionedToIdle = false;
     }
     self SetPoseMovement(desiredPose, "stop");
@@ -71,7 +71,7 @@ transitionToIdle(pose, idleSet) {
   if(isDefined(anim.idleAnimTransition[pose])) {
     assert(isDefined(anim.idleAnimTransition[pose]["in"]));
     idleAnim = anim.idleAnimTransition[pose]["in"];
-    self SetFlaggedAnimKnobAllRestart("idle_transition", idleAnim, % body, 1, 0.2, self.animplaybackrate);
+    self SetFlaggedAnimKnobAllRestart("idle_transition", idleAnim, %body, 1, 0.2, self.animplaybackrate);
     self animscripts\zombie_shared::DoNoteTracks("idle_transition");
   }
 }
@@ -91,7 +91,7 @@ playIdle(pose, idleSet) {
   }
   idleAnim = anim_array(idleArray[idleSet], weightArray[idleSet]);
   transTime = 0.2;
-  self SetFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, transTime, self.animplaybackrate);
+  self SetFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, transTime, self.animplaybackrate);
   self animscripts\zombie_shared::DoNoteTracks("idle");
 }
 

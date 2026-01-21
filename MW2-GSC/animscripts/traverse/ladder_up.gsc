@@ -25,7 +25,7 @@ main() {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
-  self setFlaggedAnimKnoballRestart("climbanim", climbAnim, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("climbanim", climbAnim, %body, 1, .1, 1);
 
   endAnimDelta = GetMoveDelta(endAnim, 0, 1);
 
@@ -42,7 +42,7 @@ main() {
     self.allowpain = true;
     self animscripts\shared::DoNoteTracksForTime(climbingTime, "climbanim");
     //	println ("elapsed ", (gettime() - timer) * 0.001);
-    self setFlaggedAnimKnoballRestart("climbanim", endAnim, % body, 1, .1, 1);
+    self setFlaggedAnimKnoballRestart("climbanim", endAnim, %body, 1, .1, 1);
     self animscripts\shared::DoNoteTracks("climbanim");
   }
 

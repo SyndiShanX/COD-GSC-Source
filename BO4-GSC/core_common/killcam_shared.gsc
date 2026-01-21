@@ -139,17 +139,7 @@ function_eb3deeec(spectatorclient, targetentityindex, killcam_entity_info, weapo
   }
 
   player.var_e59bd911 = {
-    #spectatorclient: spectatorclient,
-    #weapon: weapon,
-    #meansofdeath: meansofdeath,
-    #deathtime: deathtime,
-    #deathtimeoffset: deathtimeoffset,
-    #offsettime: offsettime,
-    #killcam_entity_info: killcam_entity_info,
-    #targetentityindex: targetentityindex,
-    #perks: perks,
-    #killstreaks: killstreaks,
-    #attacker: attacker
+    #spectatorclient: spectatorclient, #weapon: weapon, #meansofdeath: meansofdeath, #deathtime: deathtime, #deathtimeoffset: deathtimeoffset, #offsettime: offsettime, #killcam_entity_info: killcam_entity_info, #targetentityindex: targetentityindex, #perks: perks, #killstreaks: killstreaks, #attacker: attacker
   };
 }
 

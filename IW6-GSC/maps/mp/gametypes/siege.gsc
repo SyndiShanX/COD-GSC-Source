@@ -892,9 +892,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   victim = self;
 
   foreach(trigger in victim.touchTriggers) {
-    if(trigger != level.flags[0] &&
-      trigger != level.flags[1] &&
-      trigger != level.flags[2]) {
+    if(trigger != level.flags[0] && trigger != level.flags[1] && trigger != level.flags[2]) {
       continue;
     }
     ownerTeam = trigger.useObj.ownerTeam;
@@ -926,9 +924,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   }
 
   foreach(trigger in attacker.touchTriggers) {
-    if(trigger != level.flags[0] &&
-      trigger != level.flags[1] &&
-      trigger != level.flags[2]) {
+    if(trigger != level.flags[0] && trigger != level.flags[1] && trigger != level.flags[2]) {
       continue;
     }
     ownerTeam = trigger.useObj.ownerTeam;

@@ -231,11 +231,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
   var_376742ed = 1;
 
   if(isDefined(weapon) && isDefined(level.iskillstreakweapon)) {
-    if([
-        [level.iskillstreakweapon]
-      ](weapon) || isDefined(weapon.statname) && [
-        [level.iskillstreakweapon]
-      ](getweapon(weapon.statname))) {
+    if([[level.iskillstreakweapon]](weapon) || isDefined(weapon.statname) && [[level.iskillstreakweapon]](getweapon(weapon.statname))) {
       var_376742ed = 0;
     }
   }

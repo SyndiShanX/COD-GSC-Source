@@ -11,68 +11,47 @@
 #include maps\so_chopper_invasion;
 
 init_dialogue() {
-  // "Gunslinger One  to ground, primary LZ is too hot! We've got ten-plus hostiles in our immediate AO and cannot remain on the ground, over!"
-  level.scr_radio["lift_off"] = "so_chop_inv_hp1_lz2hot";
+  // "Gunslinger One  to ground, primary LZ is too hot! We've got ten-plus hostiles in our immediate AO and cannot remain on the ground, over!"level.scr_radio["lift_off"] = "so_chop_inv_hp1_lz2hot";
 
-  // "Ground forces, we're going to link up at the secondary extraction point. Head for the roof of Nate's Sports Bar, to the East."
-  level.scr_radio["objective"] = "so_chop_inv_hp1_enghost";
+  // "Ground forces, we're going to link up at the secondary extraction point. Head for the roof of Nate's Sports Bar, to the East."level.scr_radio["objective"] = "so_chop_inv_hp1_enghost";
 
-  // "Gunner, you are cleared to engage hostiles. Watch out for friendlies on the ground, over."
-  level.scr_radio["objective2"] = "so_chop_inv_hp1_gunner";
+  // "Gunner, you are cleared to engage hostiles. Watch out for friendlies on the ground, over."level.scr_radio["objective2"] = "so_chop_inv_hp1_gunner";
 
-  // "Gunslinger-One to ground forces, find some cover! We are tracking a platoon-sized group of hostiles behind that barricade at the end of the street, over!"
-  level.scr_radio["drive_by"] = "so_chop_inv_hp1_findcover";
+  // "Gunslinger-One to ground forces, find some cover! We are tracking a platoon-sized group of hostiles behind that barricade at the end of the street, over!"level.scr_radio["drive_by"] = "so_chop_inv_hp1_findcover";
 
-  // "Danger close ground forces, we're comin' in hot! Gunner, you are cleared to engage hostiles by the barricade."
-  level.scr_radio["start_drive_by"] = "so_chop_inv_hp1_by_barricade";
+  // "Danger close ground forces, we're comin' in hot! Gunner, you are cleared to engage hostiles by the barricade."level.scr_radio["start_drive_by"] = "so_chop_inv_hp1_by_barricade";
 
-  // "Good effect on target, Gunner - whoa, hang on!"
-  level.scr_radio["evade_rpgs"] = "so_chop_inv_hp1_goodeffect";
+  // "Good effect on target, Gunner - whoa, hang on!"level.scr_radio["evade_rpgs"] = "so_chop_inv_hp1_goodeffect";
 
-  // "Ground forces be advised, we've got RPGs in the area, over.  We’re coming back around for a strafing run here in a second."
-  level.scr_radio["evade_extra"] = "so_chop_inv_hp1_rpgs";
+  // "Ground forces be advised, we've got RPGs in the area, over.  We’re coming back around for a strafing run here in a second."level.scr_radio["evade_extra"] = "so_chop_inv_hp1_rpgs";
 
-  // "Gunslinger-One to ground, we are starting our strafing run, over. Gunner, light 'em up."
-  level.scr_radio["drive_by_payback"] = "so_chop_inv_hp1_lightemup";
+  // "Gunslinger-One to ground, we are starting our strafing run, over. Gunner, light 'em up."level.scr_radio["drive_by_payback"] = "so_chop_inv_hp1_lightemup";
 
-  // "Guns guns guns!"
-  level.scr_radio["drive_by_guns_guns_guns"] = "so_chop_inv_hp1_guns";
+  // "Guns guns guns!"level.scr_radio["drive_by_guns_guns_guns"] = "so_chop_inv_hp1_guns";
 
-  // "Gunslinger-One to ground, repositioning to your location, over."
-  level.scr_radio["back_to_squad"] = "so_chop_inv_hp1_reposition";
+  // "Gunslinger-One to ground, repositioning to your location, over."level.scr_radio["back_to_squad"] = "so_chop_inv_hp1_reposition";
 
-  // "Gunslinger-One to ground, be advised, we are tracking a convoy of enemy trucks movin' in from the southeast, recommend you let us handle those, over."
-  level.scr_radio["convoy"] = "so_chop_inv_hp1_ba_trucks";
+  // "Gunslinger-One to ground, be advised, we are tracking a convoy of enemy trucks movin' in from the southeast, recommend you let us handle those, over."level.scr_radio["convoy"] = "so_chop_inv_hp1_ba_trucks";
 
-  // "Gunslinger-One to ground, we see you! Maintain your location on the roof, we're en route!"
-  level.scr_radio["on_the_roof"] = "so_chop_inv_hp1_weseeyou";
+  // "Gunslinger-One to ground, we see you! Maintain your location on the roof, we're en route!"level.scr_radio["on_the_roof"] = "so_chop_inv_hp1_weseeyou";
 
-  // "Ground forces, let's go let's go! We are at the roof and ready to link up for extraction!"
-  level.scr_radio["end_reminder_1"] = "so_chop_inv_hp1_letsgo";
+  // "Ground forces, let's go let's go! We are at the roof and ready to link up for extraction!"level.scr_radio["end_reminder_1"] = "so_chop_inv_hp1_letsgo";
 
-  // "Ground forces, pick up the pace, we're sitting ducks up here!"
-  level.scr_radio["end_reminder_2"] = "so_chop_inv_hp1_pace";
+  // "Ground forces, pick up the pace, we're sitting ducks up here!"level.scr_radio["end_reminder_2"] = "so_chop_inv_hp1_pace";
 
-  // "Jump! You'll make it!"
-  level.scr_radio["jump"] = "so_chop_inv_hp1_jump";
+  // "Jump! You'll make it!"level.scr_radio["jump"] = "so_chop_inv_hp1_jump";
 
-  // "Ground forces, link up on the roof of Nate's Sports Bar!"
-  level.scr_radio["objective_reminder_1"] = "so_chop_inv_hp1_linkup";
+  // "Ground forces, link up on the roof of Nate's Sports Bar!"level.scr_radio["objective_reminder_1"] = "so_chop_inv_hp1_linkup";
 
-  // "Gunslinger One to ground, meet us up on the roof of Nate's Sports Bar!"
-  level.scr_radio["objective_reminder_2"] = "so_chop_inv_hp1_meetus";
+  // "Gunslinger One to ground, meet us up on the roof of Nate's Sports Bar!"level.scr_radio["objective_reminder_2"] = "so_chop_inv_hp1_meetus";
 
-  // "Ground forces, get to the roof of Nate's Sports Bar!"
-  level.scr_radio["objective_reminder_3"] = "so_chop_inv_hp1_gettoroof";
+  // "Ground forces, get to the roof of Nate's Sports Bar!"level.scr_radio["objective_reminder_3"] = "so_chop_inv_hp1_gettoroof";
 
-  // "Gunner, watch your fire - that's a friendly!"
-  level.scr_radio["friendlyfire_1"] = "so_chop_inv_hp1_friendly_01";
+  // "Gunner, watch your fire - that's a friendly!"level.scr_radio["friendlyfire_1"] = "so_chop_inv_hp1_friendly_01";
 
-  // "Gunner, that is friendly fire! Check your aim!"
-  level.scr_radio["friendlyfire_2"] = "so_chop_inv_hp1_friendly_02";
+  // "Gunner, that is friendly fire! Check your aim!"level.scr_radio["friendlyfire_2"] = "so_chop_inv_hp1_friendly_02";
 
-  // "That's a friendly down there, Gunner! Focus up!"
-  level.scr_radio["friendlyfire_3"] = "so_chop_inv_hp1_friendly_03";
+  // "That's a friendly down there, Gunner! Focus up!"level.scr_radio["friendlyfire_3"] = "so_chop_inv_hp1_friendly_03";
 }
 
 so_chopper_invasion_fx() {
@@ -994,9 +973,7 @@ chopper_follow_path(path_targetname, follow_player_when_done, dialog, safe_fligh
     going_to_start = false;
 
     if(isDefined(path_point.script_noteworthy)) {
-      [
-        [level.chopper_funcs[path_point.script_noteworthy]]
-      ]();
+      [[level.chopper_funcs[path_point.script_noteworthy]]]();
     }
 
     path_point script_delay();

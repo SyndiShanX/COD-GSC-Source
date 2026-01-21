@@ -243,9 +243,7 @@ function_2d1eb0ec(intpayload) {
     }
 
     if(self.var_1e13a12 >= var_23c35f9c) {
-      self.calloutspamtimeout = time + int((isDefined(level.var_ac6052e9) ? [
-        [level.var_ac6052e9]
-      ]("calloutSpamTimeout", 0) : 0) * 1000);
+      self.calloutspamtimeout = time + int((isDefined(level.var_ac6052e9) ? [[level.var_ac6052e9]]("calloutSpamTimeout", 0) : 0) * 1000);
     }
 
     weapon = self getcurrentweapon();

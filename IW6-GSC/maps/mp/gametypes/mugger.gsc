@@ -902,10 +902,7 @@ mugger_jackpot_drop() {
   while(true) {
     owner = level.players[0];
     numIncomingVehicles = 1;
-    if(isDefined(owner) &&
-      currentActiveVehicleCount() < maxVehiclesAllowed() &&
-      level.fauxVehicleCount + numIncomingVehicles < maxVehiclesAllowed() &&
-      level.numDropCrates < 8) {
+    if(isDefined(owner) && currentActiveVehicleCount() < maxVehiclesAllowed() && level.fauxVehicleCount + numIncomingVehicles < maxVehiclesAllowed() && level.numDropCrates < 8) {
       foreach(player in level.players) {
         player thread maps\mp\gametypes\_hud_message::SplashNotify("mugger_jackpot_incoming");
       }

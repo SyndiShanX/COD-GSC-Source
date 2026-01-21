@@ -13,7 +13,7 @@ main(model, type) {
   build_deathmodel("vehicle_cobra_helicopter_low");
   build_deathmodel("vehicle_cobra_helicopter_fly");
   build_deathmodel("vehicle_cobra_helicopter_fly_low");
-  build_drive( % bh_rotors, undefined, 0, 3.0);
+  build_drive(%bh_rotors, undefined, 0, 3.0);
 
   cobra_death_fx = [];
   cobra_death_fx["vehicle_cobra_helicopter"] = "explosions/large_vehicle_explosion";
@@ -104,10 +104,7 @@ and these lines in your CSV:
 include,vehicle_cobra_helicopter_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
-defaultmdl="vehicle_cobra_helicopter"
-default:"vehicletype" "cobra"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_cobra_helicopter"default:"vehicletype" "cobra"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_cobra_helicopter_fly (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -118,10 +115,7 @@ and these lines in your CSV:
 include,vehicle_cobra_helicopter_fly_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
-defaultmdl="vehicle_cobra_helicopter_fly"
-default:"vehicletype" "cobra"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_cobra_helicopter_fly"default:"vehicletype" "cobra"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_cobra_helicopter_fly_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -132,10 +126,7 @@ and these lines in your CSV:
 include,vehicle_cobra_helicopter_fly_low_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
-defaultmdl="vehicle_cobra_helicopter_fly_low"
-default:"vehicletype" "cobra"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_cobra_helicopter_fly_low"default:"vehicletype" "cobra"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_cobra_helicopter_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -146,7 +137,5 @@ and these lines in your CSV:
 include,vehicle_cobra_helicopter_low_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
-defaultmdl="vehicle_cobra_helicopter_low"
-default:"vehicletype" "cobra"
-default:"script_team" "allies"
+defaultmdl="vehicle_cobra_helicopter_low"default:"vehicletype" "cobra"default:"script_team" "allies"
 */

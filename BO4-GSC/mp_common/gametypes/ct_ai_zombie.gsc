@@ -914,9 +914,7 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
 
     if(isDefined(self.missinglegs) && self.missinglegs && self.health > 0) {
       level notify(#"crawler_created", {
-        #zombie: self,
-        #player: attacker,
-        #weapon: weapon
+        #zombie: self, #player: attacker, #weapon: weapon
       });
       self allowedstances("crouch");
       self setphysparams(15, 0, 24);

@@ -244,9 +244,7 @@ watchSelectButtonPress() {
 
     if(isDefined(level.active_button) && button_reset) {
       level.active_button notify("select_button_pressed");
-      [
-        [level.active_button.action_func]
-      ]();
+      [[level.active_button.action_func]]();
       button_reset = false;
     }
 

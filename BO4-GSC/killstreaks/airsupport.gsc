@@ -1211,8 +1211,7 @@ function_deb91ef4() {
 
       if(response == "player_location") {
         self notify(#"confirm_location", {
-          #position: self.origin,
-          #yaw: 0
+          #position: self.origin, #yaw: 0
         });
         return;
       }
@@ -1227,8 +1226,7 @@ function_deb91ef4() {
       foreach(point in level.var_51368c39) {
         if(point.objectiveid == objid) {
           self notify(#"confirm_location", {
-            #position: point.origin,
-            #yaw: point.yaw
+            #position: point.origin, #yaw: point.yaw
           });
           return;
         }
@@ -1238,8 +1236,7 @@ function_deb91ef4() {
 
       if(isDefined(objpos)) {
         self notify(#"confirm_location", {
-          #position: objpos,
-          #yaw: 0
+          #position: objpos, #yaw: 0
         });
         return;
       }

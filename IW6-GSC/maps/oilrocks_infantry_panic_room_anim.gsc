@@ -23,10 +23,10 @@ humans() {
   level.scr_anim["keegan"]["pre_breach_set"][0] = % coverstand_hide_idle_wave02;
   var_0 = "keegan";
   var_1 = "dude_door_kick";
-  maps\_anim::create_anim_scene(#animtree, var_1, % doorkick_2_cqbrun, var_0);
+  maps\_anim::create_anim_scene(#animtree, var_1, %doorkick_2_cqbrun, var_0);
   maps\_anim::addnotetrack_customfunction(var_0, "kick", ::doors_swingopen, var_1);
   var_1 = "keegan_jumps_out_window";
-  maps\_anim::create_anim_scene(#animtree, var_1, % oilrocks_ending_friendly, var_0);
+  maps\_anim::create_anim_scene(#animtree, var_1, %oilrocks_ending_friendly, var_0);
 }
 
 doors_swingopen(var_0) {
@@ -49,7 +49,7 @@ rotate_door_to_struct_ref(var_0) {
 #using_animtree("vehicles");
 
 vehicles() {
-  maps\_anim::create_anim_scene(#animtree, "choppers_fly_in", % oilrocks_ending_apache_1, "apache_1");
-  maps\_anim::create_anim_scene(#animtree, "choppers_fly_in", % oilrocks_ending_apache_2, "apache_2");
-  maps\_anim::create_anim_scene(#animtree, "choppers_fly_in", % oilrocks_ending_silenthawk, "silenthawk");
+  maps\_anim::create_anim_scene(#animtree, "choppers_fly_in", %oilrocks_ending_apache_1, "apache_1");
+  maps\_anim::create_anim_scene(#animtree, "choppers_fly_in", %oilrocks_ending_apache_2, "apache_2");
+  maps\_anim::create_anim_scene(#animtree, "choppers_fly_in", %oilrocks_ending_silenthawk, "silenthawk");
 }

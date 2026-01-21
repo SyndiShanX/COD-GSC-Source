@@ -589,8 +589,7 @@ multikillevent(var_0, var_1, var_2, var_3) {
 
   if(common_scripts\utility::string_starts_with(var_5, "iw5_"))
     var_6 = getsubstr(var_5, 4);
-  else if(common_scripts\utility::string_starts_with(var_5, "h1_") ||
-    common_scripts\utility::string_starts_with(var_5, "h2_"))
+  else if(common_scripts\utility::string_starts_with(var_5, "h1_") || common_scripts\utility::string_starts_with(var_5, "h2_"))
     var_6 = getsubstr(var_5, 3);
 
   switch (var_1) {

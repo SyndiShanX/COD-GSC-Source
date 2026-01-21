@@ -44,7 +44,7 @@ main() {
 sea_animate() {
   self.animname = "sea";
   self useanimtree(#animtree);
-  self setanim( % cargoship_water);
+  self setanim(%cargoship_water);
 }
 
 sea_logic() {

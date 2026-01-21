@@ -282,11 +282,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
 
     if(self.a.faceWaitForResult == "notify") {
       // Play the face.
-      PlayFaceThread(self.faceWaiting[thisEntryNum]["facialanim"],
-        self.faceWaiting[thisEntryNum]["soundAlias"],
-        self.faceWaiting[thisEntryNum]["importance"],
-        self.faceWaiting[thisEntryNum]["notifyString"]
-      );
+      PlayFaceThread(self.faceWaiting[thisEntryNum]["facialanim"], self.faceWaiting[thisEntryNum]["soundAlias"], self.faceWaiting[thisEntryNum]["importance"], self.faceWaiting[thisEntryNum]["notifyString"]);
     } else // ie We timed out.
     {
       if(isDefined(notifyString)) {
@@ -373,10 +369,7 @@ PlayFaceThread(facialanim, soundAlias, importance, notifyString, waitOrNot, time
       //("Choosing next face.List is:");
       for(i = 0; i < self.faceWaiting.size; i++) {
         /*
-        println]](" ",i," ",	(self.faceWaiting[i]["facialanim"]),", ",
-        							(self.faceWaiting[i]["soundAlias"]),", ",
-        							(self.faceWaiting[i]["importance"]),", ",
-        							(self.faceWaiting[i]["notifyString"])
+        println]](" ",i," ",	(self.faceWaiting[i]["facialanim"]),", ", (self.faceWaiting[i]["soundAlias"]),", ", (self.faceWaiting[i]["importance"]),", ", (self.faceWaiting[i]["notifyString"])
         							);
         */
         if(self.faceWaiting[i]["importance"] > maxImportance) {

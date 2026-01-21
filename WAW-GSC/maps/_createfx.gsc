@@ -741,11 +741,9 @@ generate_client_fx_log(autosave) {
       iprintlnbold("^1FILE NOT WRITEABLE (maybe you need to check it out?) " + filename + " -- Aborting Generation...");
       return;
     }
-    cfxprintln(file, "
-        cfxprintln(file, "main()"); cfxprintln(file, "{");
+    cfxprintln(file, "cfxprintln(file, "main()"); cfxprintln(file, "{");
         if(!autosave)
-          println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.csc *** "); cfxprintln(file, "
-          for(i = 0; i < level.createFXent.size; i++) {
+          println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.csc *** "); cfxprintln(file, "for(i = 0; i < level.createFXent.size; i++) {
             if(file != -1)
               wait .05;
             e = level.createFXent[i];
@@ -800,8 +798,7 @@ generate_client_fx_log(autosave) {
             filename = "createfx/backup.gsc";
           file = openfile(filename, "write");
           assertex(file != -1, "File not writeable (maybe you should check it out): " + filename);
-          cfxprintln(file, "
-              cfxprintln(file, "main()"); cfxprintln(file, "{"); limit = 0.1;
+          cfxprintln(file, "cfxprintln(file, "main()"); cfxprintln(file, "{"); limit = 0.1;
               for(p = 0; p < level.createFXent.size; p++) {
                 ent = level.createFXent[p];
                 origin = [];
@@ -818,8 +815,7 @@ generate_client_fx_log(autosave) {
                 ent.v["angles"] = (angles[0], angles[1], angles[2]);
               }
               if(!autosave)
-                println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.gsc *** "); cfxprintln(file, "
-                for(i = 0; i < level.createFXent.size; i++) {
+                println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.gsc *** "); cfxprintln(file, "for(i = 0; i < level.createFXent.size; i++) {
                   if(file != -1) {
                     wait .05;
                   }

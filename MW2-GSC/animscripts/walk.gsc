@@ -49,8 +49,8 @@ MoveWalk() {
 
 DoWalkAnimOverride(walkAnim) {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self.walk_overrideanim)) {
     if(isDefined(self.walk_override_weights))
@@ -91,15 +91,15 @@ DoWalkAnim(walkAnim) {
     if(isDefined(self.enemy)) {
       self thread animscripts\cqb::CQBTracking();
       // (we don't use %body because that would reset the aiming knobs)
-      self setFlaggedAnimKnobAll("walkanim", animscripts\cqb::DetermineCQBAnim(), % walk_and_run_loops, 1, 1, rate, true);
+      self setFlaggedAnimKnobAll("walkanim", animscripts\cqb::DetermineCQBAnim(), %walk_and_run_loops, 1, 1, rate, true);
     } else {
-      self setFlaggedAnimKnobAll("walkanim", walkAnim, % body, 1, 1, rate, true);
+      self setFlaggedAnimKnobAll("walkanim", walkAnim, %body, 1, 1, rate, true);
     }
 
     self animscripts\run::SetMoveNonForwardAnims(moveAnim("move_b"), moveAnim("move_l"), moveAnim("move_r"));
     self thread animscripts\run::SetCombatStandMoveAnimWeights("walk");
   } else {
-    self setFlaggedAnimKnobAll("walkanim", walkAnim, % body, 1, 1, rate, true);
+    self setFlaggedAnimKnobAll("walkanim", walkAnim, %body, 1, 1, rate, true);
 
     self animscripts\run::SetMoveNonForwardAnims(moveAnim("move_b"), moveAnim("move_l"), moveAnim("move_r"));
     self thread animscripts\run::SetCombatStandMoveAnimWeights("walk");

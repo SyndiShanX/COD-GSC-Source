@@ -1656,18 +1656,14 @@ eq_trigger(trigger) {
     trigger waittill("trigger");
     ai = GetAiArray("allies");
     for(i = 0; i < ai.size; i++) {
-      ai[i][
-        [level.set_eq_func[ai[i] IsTouching(targ)]]
-      ]();
+      ai[i][[level.set_eq_func[ai[i] IsTouching(targ)]]]();
     }
     while(any_player_IsTouching(trigger)) {
       wait(0.05);
     }
     ai = GetAiArray("allies");
     for(i = 0; i < ai.size; i++) {
-      ai[i][
-        [level.set_eq_func[false]]
-      ]();
+      ai[i][[level.set_eq_func[false]]]();
     }
   }
 }
@@ -1985,8 +1981,7 @@ script_gen_dump() {
       file = 0;
     }
     assertex(file != -1, "File not writeable( check it and and restart the map ): " + filename);
-    script_gen_dumpprintln(file, "
-      script_gen_dumpprintln(file, "main()"); script_gen_dumpprintln(file, "{"); script_gen_dumpprintln(file, ""); script_gen_dumpprintln(file, "\tlevel.script_gen_dump = []; "); script_gen_dumpprintln(file, ""); signatures = GetArrayKeys(level.script_gen_dump);
+    script_gen_dumpprintln(file, "script_gen_dumpprintln(file, "main()"); script_gen_dumpprintln(file, "{"); script_gen_dumpprintln(file, ""); script_gen_dumpprintln(file, "\tlevel.script_gen_dump = []; "); script_gen_dumpprintln(file, ""); signatures = GetArrayKeys(level.script_gen_dump);
       for(i = 0; i < signatures.size; i++) {
         if(!IsSubStr(level.script_gen_dump[signatures[i]], "nowrite")) {
           script_gen_dumpprintln(file, "\t" + level.script_gen_dump[signatures[i]]);
@@ -2393,10 +2388,7 @@ script_gen_dump() {
           if(player istouching(trigger)) {
             if(!IsSplitscreen()) {
               if(dofog && (!isDefined(player.fog_trigger_current) || player.fog_trigger_current != trigger)) {
-                player SetVolFog(trigger.script_start_dist, trigger.script_halfway_dist,
-                  trigger.script_halfway_height, trigger.script_base_height,
-                  trigger.script_color[0], trigger.script_color[1], trigger.script_color[2],
-                  trigger.script_transition_time);
+                player SetVolFog(trigger.script_start_dist, trigger.script_halfway_dist, trigger.script_halfway_height, trigger.script_base_height, trigger.script_color[0], trigger.script_color[1], trigger.script_color[2], trigger.script_transition_time);
               }
             }
             if((isDefined(trigger.script_vision) && isDefined(trigger.script_vision_time)) && (!isDefined(player.fog_trigger_current) || player.fog_trigger_current != trigger)) {
@@ -2532,9 +2524,7 @@ script_gen_dump() {
       if(!issuffix(msg, "aa_")) {
         return;
       }
-      [
-        [level.sp_stat_tracking_func]
-      ](msg);
+      [[level.sp_stat_tracking_func]](msg);
     }
     precache_script_models() {
       if(!isDefined(level.scr_model)) {

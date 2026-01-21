@@ -122,8 +122,7 @@ function_270aecf7() {
     if(isDefined(e_who)) {
       zm_utility::play_sound_at_pos("purchase", e_who.origin);
       level notify(#"trap_activated", {
-        #trap_activator: e_who,
-        #trap: self
+        #trap_activator: e_who, #trap: self
       });
       level.s_freeze_trap.e_volume.activated_by_player = e_who;
     }
@@ -204,8 +203,7 @@ function_92f341d0(e_activator, e_volume) {
     }
 
     level notify(#"trap_kill", {
-      #victim: self,
-      #trap: e_volume
+      #victim: self, #trap: e_volume
     });
     self dodamage(self.health + 1000, e_volume.origin, e_volume);
   }

@@ -2021,7 +2021,7 @@ addnotetrack_notify(var_0, var_1, var_2, var_3) {
 disabledefaultfacialanims(var_0) {
   if(!isDefined(var_0) || var_0) {
     self.bdisabledefaultfacialanims = 1;
-    self clearanim( % head, 0.2);
+    self clearanim(%head, 0.2);
     self.facialidx = undefined;
   } else
     self.bdisabledefaultfacialanims = undefined;
@@ -2034,7 +2034,7 @@ anim_facialanim(var_0, var_1, var_2) {
   var_0 notify("newLookTarget");
   waittillframeend;
   disabledefaultfacialanims();
-  var_0 setanim( % scripted_talking, 5, 0.2);
+  var_0 setanim(%scripted_talking, 5, 0.2);
   var_0 setflaggedanimknobrestart("face_done_" + var_1, var_2, 1, 0, 1);
   thread force_face_anim_to_play(var_0, var_1, var_2);
   thread clearfaceanimonanimdone(var_0, "face_done_" + var_1, var_1);
@@ -2047,7 +2047,7 @@ force_face_anim_to_play(var_0, var_1, var_2) {
 
   for(;;) {
     disabledefaultfacialanims();
-    var_0 setanim( % scripted_talking, 5, 0.4);
+    var_0 setanim(%scripted_talking, 5, 0.4);
     var_0 setflaggedanimknoblimited("face_done_" + var_1, var_2, 1, 0, 1);
     wait 0.05;
   }
@@ -2073,11 +2073,11 @@ anim_facialfiller(var_0, var_1) {
     var_3 = % generic_talker_axis;
 
   self setanimknoblimitedrestart(var_3, 1, 0, 1);
-  self setanim( % scripted_talking, 5, 0.4);
+  self setanim(%scripted_talking, 5, 0.4);
   disabledefaultfacialanims();
   set_talker_until_msg(var_0, var_3);
   var_2 = 0.3;
-  self clearanim( % scripted_talking, 0.2);
+  self clearanim(%scripted_talking, 0.2);
   disabledefaultfacialanims(0);
 }
 
@@ -2087,7 +2087,7 @@ set_talker_until_msg(var_0, var_1) {
   for(;;) {
     wait 0.2;
     self setanimknoblimited(var_1, 1, 0, 1);
-    self setanim( % scripted_talking, 5, 0.4);
+    self setanim(%scripted_talking, 5, 0.4);
     disabledefaultfacialanims();
   }
 }
@@ -2100,11 +2100,11 @@ talk_for_time(var_0) {
     var_1 = % generic_talker_axis;
 
   self setanimknoblimitedrestart(var_1, 1, 0, 1);
-  self setanim( % scripted_talking, 5, 0.4);
+  self setanim(%scripted_talking, 5, 0.4);
   disabledefaultfacialanims();
   wait(var_0);
   var_2 = 0.3;
-  self clearanim( % scripted_talking, 0.2);
+  self clearanim(%scripted_talking, 0.2);
   disabledefaultfacialanims(0);
 }
 
@@ -2160,7 +2160,7 @@ clearfaceanimonanimdone(var_0, var_1, var_2) {
   var_0 endon("death");
   var_0 waittillmatch(var_1, "end");
   var_3 = 0.3;
-  var_0 clearanim( % scripted_talking, 0.2);
+  var_0 clearanim(%scripted_talking, 0.2);
   disabledefaultfacialanims(0);
 }
 

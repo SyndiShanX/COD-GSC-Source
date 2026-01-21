@@ -1611,7 +1611,7 @@ anim_loop_blend(guy, anime, tag, ender, entity, blend_time) {
       doAnimation = true;
     }
     if(doAnimation) {
-      guy SetFlaggedAnimKnobAllRestart(anim_string, level.scr_anim[animname][anime][idleanim], % body, 1, blend_time, 1);
+      guy SetFlaggedAnimKnobAllRestart(anim_string, level.scr_anim[animname][anime][idleanim], %body, 1, blend_time, 1);
       animtime = getanimlength(level.scr_anim[animname][anime][idleanim]);
       self thread start_notetrack_wait(guy, anim_string, anime, animname);
       self thread animscriptDoNoteTracksThread(guy, anim_string, anime);

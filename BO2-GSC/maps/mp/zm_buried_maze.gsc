@@ -29,12 +29,8 @@ maze_precache() {
 maze_nodes_link_unlink_internal(func_ptr, bignorechangeonmigrate) {
   for(i = 0; i < self.blocked_nodes.size; i++) {
     for(j = 0; j < self.blocked_nodes[i].connected_nodes.size; j++) {
-      [
-        [func_ptr]
-      ](self.blocked_nodes[i], self.blocked_nodes[i].connected_nodes[j], bignorechangeonmigrate);
-      [
-        [func_ptr]
-      ](self.blocked_nodes[i].connected_nodes[j], self.blocked_nodes[i], bignorechangeonmigrate);
+      [[func_ptr]](self.blocked_nodes[i], self.blocked_nodes[i].connected_nodes[j], bignorechangeonmigrate);
+      [[func_ptr]](self.blocked_nodes[i].connected_nodes[j], self.blocked_nodes[i], bignorechangeonmigrate);
     }
   }
 }

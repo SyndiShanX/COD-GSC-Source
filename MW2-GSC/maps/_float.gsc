@@ -7,8 +7,7 @@
 
 //range = the height range to bob up and down
 //freq = how often the objects bob up and down per time freq of 1 would mean it would bomb up in 1 sec and down the next. freq of .5 would mean it would bob up once every 2 sec and down the next 2
-//wavelength = the size of the waves caused by the "ripple"
-//rotation = the amount the object rotates off its center as it bobs
+//wavelength = the size of the waves caused by the "ripple"//rotation = the amount the object rotates off its center as it bobs
 //origin = the origin of the ripple...if you want it to look like waves - should be kept far away from the objects.
 #include common_scripts\utility;
 

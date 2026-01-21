@@ -1116,8 +1116,7 @@ save_all() {
     fullpath_file = level.path + level.script + "_cam.gsc";
     file = OpenFile(fullpath_file, "write");
     assertex(file != -1, "File not writeable (maybe you should check it out): " + fullpath_file);
-    fprintln(file, "
-        fprintln(file, "
+    fprintln(file, "fprintln(file, "
           tab = ""; fprintln(file, "main()"); fprintln(file, "{"); fprintln(file, tab + "shots();"); fprintln(file, tab + "scenes();"); fprintln(file, "}"); save_shots(file); save_scenes(file); saved = CloseFile(file); assertex(saved == 1, "File not saved (see above message?): " + fullpath_file);
           if(!saved) {
             return "Save FAILED!";
@@ -1134,10 +1133,8 @@ save_all() {
           shot_names = GetArrayKeys(level.cam_shots);
           for(i = 0; i < shot_names.size; i++) {
             track = level.cam_shots[shot_names[i]].cam_track;
-            fprintln(file, tab + "
-                fprintln(file, tab + "
-                  fprintln(file, tab + "
-                    fprintln(file, tab + "track_array = [];");
+            fprintln(file, tab + "fprintln(file, tab + "
+                  fprintln(file, tab + "fprintln(file, tab + "track_array = [];");
                     for(j = 0; j < track.cpoints.size; j++) {
                       fprintln(file, tab + "num = track_array.size;");
                       fprintln(file, tab + "track_array[num] = " + cp_string + track.cpoints[j].origin + " );");
@@ -1147,8 +1144,7 @@ save_all() {
                       }
                       fprintln(file, "");
                     }
-                    fprintln(file, ""); target = level.cam_shots[shot_names[i]].cam_target; fprintln(file, tab + "
-                      fprintln(file, tab + "target_array = [];");
+                    fprintln(file, ""); target = level.cam_shots[shot_names[i]].cam_target; fprintln(file, tab + "fprintln(file, tab + "target_array = [];");
                       for(j = 0; j < target.cpoints.size; j++) {
                         fprintln(file, tab + "num = target_array.size;");
                         fprintln(file, tab + "target_array[num] = " + cp_string + target.cpoints[j].origin + " );");
@@ -1170,8 +1166,7 @@ save_all() {
                     fprintln(file, "{");
                     scene_names = GetArrayKeys(level.cam_scenes);
                     for(i = 0; i < scene_names.size; i++) {
-                      fprintln(file, tab + "
-                        fprintln(file, tab + "
+                      fprintln(file, tab + "fprintln(file, tab + "
                           fprintln(file, tab + "shots = [];"); shots = level.cam_scenes[scene_names[i]].shots;
                           for(j = 0; j < shots.size; j++) {
                             fprintln(file, tab + "shots[" + j + "] = " + "\"" + shots[j] + "\";");

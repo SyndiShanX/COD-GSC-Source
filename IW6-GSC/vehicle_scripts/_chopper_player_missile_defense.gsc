@@ -27,10 +27,10 @@ _fx() {
 #using_animtree("vehicles");
 
 evad_anims() {
-  maps\_anim::create_anim_scene(#animtree, "apache_evade_right", % apache_break_r, "generic");
-  maps\_anim::create_anim_scene(#animtree, "apache_evade_left", % apache_break_l, "generic");
-  maps\_anim::create_anim_scene(#animtree, "battlehind_evade_right", % battlehind_break_r, "generic");
-  maps\_anim::create_anim_scene(#animtree, "battlehind_evade_left", % battlehind_break_l, "generic");
+  maps\_anim::create_anim_scene(#animtree, "apache_evade_right", %apache_break_r, "generic");
+  maps\_anim::create_anim_scene(#animtree, "apache_evade_left", %apache_break_l, "generic");
+  maps\_anim::create_anim_scene(#animtree, "battlehind_evade_right", %battlehind_break_r, "generic");
+  maps\_anim::create_anim_scene(#animtree, "battlehind_evade_left", %battlehind_break_l, "generic");
 }
 
 #using_animtree("script_model");

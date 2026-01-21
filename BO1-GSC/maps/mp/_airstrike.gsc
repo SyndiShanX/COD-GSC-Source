@@ -224,15 +224,7 @@ airstrikeDamageEntsThread(sWeapon) {
     if(!isDefined(ent.entity))
       continue;
     if((!ent.isPlayer && !ent.isActor) || isAlive(ent.entity)) {
-      ent maps\mp\gametypes\_weapons::damageEnt(
-        ent.eInflictor,
-        ent.damageOwner,
-        ent.damage,
-        "MOD_EXPLOSIVE",
-        sWeapon,
-        ent.pos,
-        vectornormalize(ent.damageCenter - ent.pos)
-      );
+      ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_EXPLOSIVE", sWeapon, ent.pos, vectornormalize(ent.damageCenter - ent.pos));
       level.airstrikeDamagedEnts[level.airstrikeDamagedEntsIndex] = undefined;
       if(ent.isPlayer || ent.isActor)
         wait(0.05);

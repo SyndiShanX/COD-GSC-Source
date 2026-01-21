@@ -1688,9 +1688,7 @@ tank_move_with_player(goSpeed, accel, decel, ender) {
     foundOne = false;
     for(i = 0; i < players.size; i++) {
       tankOrgAdjusted = (self.origin[0], players[i].origin[1], self.origin[2]);
-      if(
-        (Distance2D(players[i].origin, tankOrgAdjusted) < movedist) ||
-        (players[i].origin[0] < self.origin[0])) {
+      if((Distance2D(players[i].origin, tankOrgAdjusted) < movedist) || (players[i].origin[0] < self.origin[0])) {
         foundOne = true;
         break;
       }
@@ -2295,10 +2293,7 @@ building_collapse_street_executions() {
   array_thread(level.friends, ::clear_force_color);
   killers = [];
   for(i = 0; i < level.friends.size; i++) {
-    if(isDefined(level.friends[i]) &&
-      IsAlive(level.friends[i]) &&
-      (level.friends[i] != level.sarge) &&
-      (level.friends[i] != level.hero1)) {
+    if(isDefined(level.friends[i]) && IsAlive(level.friends[i]) && (level.friends[i] != level.sarge) && (level.friends[i] != level.hero1)) {
       killers[killers.size] = level.friends[i];
     }
   }
@@ -2995,8 +2990,7 @@ metrogate_axis_deathwatcher(guys) {
     }
     wait(0.05);
   }
-  if(isDefined(guy) && isDefined(guy.damagemod) &&
-    (guy.damagemod == "MOD_BURNED" || guy.damagemod == "MOD_GRENADE_SPLASH")) {
+  if(isDefined(guy) && isDefined(guy.damagemod) && (guy.damagemod == "MOD_BURNED" || guy.damagemod == "MOD_GRENADE_SPLASH")) {
     flag_set("molotovs_throw");
   } else {
     flag_set("molotovs_cancel");

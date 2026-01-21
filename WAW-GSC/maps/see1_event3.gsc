@@ -321,8 +321,7 @@ wait_for_opel_death(opel) {
   opel.health = 99999;
   while(1) {
     opel waittill("damage", amount, attacker, direction_vec, point, type);
-    if(type == "MOD_PROJECTILE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_EXPLOSIVE" ||
-      type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH") {
+    if(type == "MOD_PROJECTILE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_EXPLOSIVE" || type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH") {
       opel dodamage(opel.health + 25, (0, 180, 48));
       opel notify("death");
       playFX(level._effect["tank_smoke_column"], opel.origin);
@@ -941,11 +940,7 @@ ev3_end_tank_1() {
 
 ev3_retreat_plane(node_name, bomb_drop_start, msg) {
   start_node = getvehiclenode(node_name, "targetname");
-  plane = spawnvehicle("vehicle_rus_airplane_il2",
-    "plane",
-    "stuka",
-    start_node.origin,
-    start_node.angles);
+  plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
   plane attachPath(start_node);
   plane startpath();
   plane.script_numbombs = 6;
@@ -1121,7 +1116,7 @@ check_for_helath_state() {
 force_reaction_anim_truck(end_msg) {
   level endon(end_msg);
   self endon("death");
-  animlength = getanimlength( % crew_truck_guy1_drive_reaction);
+  animlength = getanimlength(%crew_truck_guy1_drive_reaction);
   time = animlength * 1000;
   while(1) {
     self notify("groupedanimevent", "drive_reaction");

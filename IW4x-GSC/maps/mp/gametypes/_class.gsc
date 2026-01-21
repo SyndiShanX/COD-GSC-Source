@@ -663,8 +663,7 @@ trackRiotShield() {
     self waittill("weapon_change", newWeapon);
 
     if(newWeapon == "riotshield_mp") {
-      // defensive check in case we somehow get an extra "weapon_change"
-      if(self.hasRiotShieldEquipped) {
+      // defensive check in case we somehow get an extra "weapon_change"if(self.hasRiotShieldEquipped) {
         continue;
       }
       if(self.hasRiotShield)

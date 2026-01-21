@@ -29,7 +29,7 @@ main() {
   if(!isDefined(self.heat))
     self thread abortApproachIfThreatened();
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setFlaggedAnimRestart("coverArrival", arrivalAnim, 1, 0.2, self.moveTransitionRate);
   self animscripts\shared::DoNoteTracks("coverArrival", ::handleStartAim);
 
@@ -45,7 +45,7 @@ main() {
 
   // we rely on cover to start doing something else with animations very soon.
   // in the meantime, we don't want any of our parent nodes lying around with positive weights.
-  self clearanim( % root, .3);
+  self clearanim(%root, .3);
 
   self.lastApproachAbortTime = undefined;
 }
@@ -88,7 +88,7 @@ abortApproachIfThreatened() {
       return;
     }
     if(isThreatenedByEnemy()) {
-      self clearanim( % root, .3);
+      self clearanim(%root, .3);
       self notify("abort_approach");
       self.lastApproachAbortTime = getTime();
       return;
@@ -281,8 +281,7 @@ getApproachPoint(node, approachtype) {
     approachPoint = (node.turretInfo.origin[0], node.turretInfo.origin[1], node.origin[2]);
     forward = anglesToForward((0, node.turretInfo.angles[1], 0));
     right = anglesToRight((0, node.turretInfo.angles[1], 0));
-    approachPoint = approachPoint + vector_multiply(forward, -32.545) - vector_multiply(right, 6.899); // -41.343 would work better for the first number if that weren't too far from the node =(
-  } else if(approachType == "crouch_saw") {
+    approachPoint = approachPoint + vector_multiply(forward, -32.545) - vector_multiply(right, 6.899); // -41.343 would work better for the first number if that weren't too far from the node =(} else if(approachType == "crouch_saw") {
     approachPoint = (node.turretInfo.origin[0], node.turretInfo.origin[1], node.origin[2]);
     forward = anglesToForward((0, node.turretInfo.angles[1], 0));
     right = anglesToRight((0, node.turretInfo.angles[1], 0));
@@ -596,8 +595,7 @@ CheckArrivalEnterPositions(approachpoint, approachYaw, approachtype, approach_di
     }
 
     if(!level.newArrivals || !arrivalFromFront) {
-      // if AI is less than twice the distance from the node than the beginning of the approach animation,
-      // make sure the angle we'll turn when we start the animation is small.
+      // if AI is less than twice the distance from the node than the beginning of the approach animation, // make sure the angle we'll turn when we start the animation is small.
       selfToAnimStart = vectorNormalize(self.coverEnterPos - self.origin);
 
       requiredYaw = approachYaw - anim.coverTransAngles[approachType][resultobj.approachNumber];
@@ -921,8 +919,7 @@ startMoveTransitionConditions(exittype, exitNode) {
     return false;
   }
 
-  // since we transition directly into a standing run anyway,
-  // we might as well just use the standing exits when crouching too
+  // since we transition directly into a standing run anyway, // we might as well just use the standing exits when crouching too
   if(exittype == "exposed" || isDefined(self.heat)) {
     if(self.a.pose != "stand" && self.a.pose != "crouch") {
       /# debug_arrival( "exposed exit aborted because anim_pose is not \"stand\" or \"crouch\"" );
@@ -983,7 +980,7 @@ customMoveTransitionFunc() {
   self animmode("zonly_physics", false);
   self orientmode("face current");
 
-  self SetFlaggedAnimKnobAllRestart("move", self.startMoveTransitionAnim, % root, 1);
+  self SetFlaggedAnimKnobAllRestart("move", self.startMoveTransitionAnim, %root, 1);
 
   if(animHasNotetrack(self.startMoveTransitionAnim, "code_move")) {
     self animscripts\shared::DoNoteTracks("move"); // return on code_move
@@ -1028,7 +1025,7 @@ startMoveTransition() {
     if(!isDefined(self.permanentCustomMoveTransition))
       self.startMoveTransitionAnim = undefined;
 
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
     self orientmode("face default");
     self animmode("none", false);
 
@@ -1156,13 +1153,11 @@ doCoverExitAnimation(exittype, approachNumber) {
 
   self animMode("zonly_physics", false);
   self OrientMode("face angle", self.angles[1]);
-  self setFlaggedAnimKnobAllRestart("coverexit", leaveAnim, % body, 1, transTime, self.moveTransitionRate);
+  self setFlaggedAnimKnobAllRestart("coverexit", leaveAnim, %body, 1, transTime, self.moveTransitionRate);
 
   assert(animHasNotetrack(leaveAnim, "code_move"));
 
-  self animscripts\shared::DoNoteTracks("coverexit"); // until "code_move"
-
-  self.a.pose = "stand";
+  self animscripts\shared::DoNoteTracks("coverexit"); // until "code_move"self.a.pose = "stand";
   self.a.movement = "run";
 
   self.ignorePathChange = undefined;
@@ -1173,7 +1168,7 @@ doCoverExitAnimation(exittype, approachNumber) {
 
   // need to clear everything above leaveAnim
   //self clearanim( leaveAnim, 0.2 );
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 
   self OrientMode("face default");
   //self thread faceEnemyOrMotionAfterABit();

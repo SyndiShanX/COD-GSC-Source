@@ -776,9 +776,7 @@ getTeamFlagFX(teamRef) {
 }
 
 getTeamColor(teamRef) {
-  return ((stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_R_COL)),
-    stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_G_COL)),
-    stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_B_COL))));
+  return ((stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_R_COL)), stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_G_COL)), stringToFloat(tableLookup("mp/factionTable.csv", FACTION_REF_COL, game[teamRef], FACTION_COLOR_B_COL))));
 }
 
 getTeamCrateModel(teamRef) {

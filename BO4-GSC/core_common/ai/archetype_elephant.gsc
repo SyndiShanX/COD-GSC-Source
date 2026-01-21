@@ -592,9 +592,7 @@ function_978a4592(elephant, rider) {
       rider.ai.attacking = 0;
       wait randomintrange(1, 2);
     } else if(isDefined(level.var_5feff7d0)) {
-      var_c3f91959 = [
-        [level.var_5feff7d0]
-      ](elephant, rider);
+      var_c3f91959 = [[level.var_5feff7d0]](elephant, rider);
 
       if(isDefined(var_c3f91959)) {
         rider.ai.attacking = 1;

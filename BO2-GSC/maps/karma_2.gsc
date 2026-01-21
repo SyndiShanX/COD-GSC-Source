@@ -313,10 +313,10 @@ global_neutral_settings() {
   self pushplayer(0);
   self.pathenemyfightdist = 0;
   self.usecombatscriptatcover = 1;
-  a_cower_anims = array( % ai_civ_cower_idle_01, % ai_civ_cower_idle_02, % ai_civ_cower_idle_03, % ai_civ_cower_idle_04, % ai_civ_cower_idle_05);
+  a_cower_anims = array(%ai_civ_cower_idle_01, %ai_civ_cower_idle_02, %ai_civ_cower_idle_03, %ai_civ_cower_idle_04, %ai_civ_cower_idle_05);
   self animscripts\anims::setidleanimoverride(random(a_cower_anims));
   self.anim_array[self.animtype]["combat"]["stand"]["none"]["straight_level"] = % ai_civ_m_idle_stand_cower_01_aim;
-  self.anim_array[self.animtype]["combat"]["stand"]["none"]["exposed_idle"] = array( % ai_civ_m_idle_stand_cower_01_additive);
+  self.anim_array[self.animtype]["combat"]["stand"]["none"]["exposed_idle"] = array(%ai_civ_m_idle_stand_cower_01_additive);
   self.anim_array[self.animtype]["move"]["stand"]["none"]["tactical_walk_f"] = % civilian_run_hunched_a;
   self.anim_array[self.animtype]["move"]["stand"]["none"]["tactical_walk_r"] = % civilian_run_hunched_a;
   self.anim_array[self.animtype]["move"]["stand"]["none"]["tactical_walk_l"] = % civilian_run_hunched_a;

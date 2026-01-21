@@ -53,7 +53,7 @@ func_A3B5(var_0) {
   self setanimknob(var_2.var_BBB5, 1.0, var_3);
   wait(var_3);
   self setanimknob(var_2.var_92CC, 1.0, 0.2);
-  self give_attacker_kill_rewards( % jackal_motion_idle_ai, 1, 0);
+  self give_attacker_kill_rewards(%jackal_motion_idle_ai, 1, 0);
   wait 4;
 }
 

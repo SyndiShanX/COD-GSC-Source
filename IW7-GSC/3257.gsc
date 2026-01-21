@@ -227,9 +227,7 @@ onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
   if(!isonhumanteam(self)) {
     enemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     if(isDefined(level.onzombiekilledfunc)) {
-      [
-        [level.onzombiekilledfunc]
-      ](var_1, var_4);
+      [[level.onzombiekilledfunc]](var_1, var_4);
     }
   }
 
@@ -287,17 +285,13 @@ process_kill_rewards(var_0, var_1, var_2, var_3, var_4) {
       return;
     }
 
-    if(scripts\cp\utility::coop_mode_has("pillage") && scripts\engine\utility::istrue([
-        [level.pillage_item_drop_func]
-      ](var_5, self.origin, var_0))) {
+    if(scripts\cp\utility::coop_mode_has("pillage") && scripts\engine\utility::istrue([[level.pillage_item_drop_func]](var_5, self.origin, var_0))) {
       level.last_drop_time = gettime();
       return;
     }
 
     if(scripts\cp\utility::coop_mode_has("loot") && isDefined(level.loot_func)) {
-      [
-        [level.loot_func]
-      ](var_5, self.origin, var_0);
+      [[level.loot_func]](var_5, self.origin, var_0);
       return;
     }
   }

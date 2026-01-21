@@ -287,8 +287,8 @@ random_player_wall_push(var_0, var_1) {
 
     if(var_6 == 1 && var_9[0] > 0.4 && level.timecheck > 1 && level.bmovingstraight == 1) {
       var_1 show();
-      var_1 setanimrestart( % viewmodel_space_l_arm_sidepush, 1, 0, var_11);
-      var_1 setanimtime( % viewmodel_space_l_arm_sidepush, 0.25);
+      var_1 setanimrestart(%viewmodel_space_l_arm_sidepush, 1, 0, var_11);
+      var_1 setanimtime(%viewmodel_space_l_arm_sidepush, 0.25);
       common_scripts\utility::flag_set("wall_push_tweak_player");
 
       if(level.script == "odin" || level.script == "prologue")
@@ -349,8 +349,8 @@ random_player_wall_pushdownup(var_0, var_1) {
 
     if(var_6 == 1 && var_9[0] > 0.4 && level.timecheck > 1 && level.bmovingstraight == 1) {
       var_1 show();
-      var_1 setanimrestart( % viewmodel_space_l_arm_downpush, 1, 0, var_11);
-      var_1 setanimtime( % viewmodel_space_l_arm_downpush, 0.25);
+      var_1 setanimrestart(%viewmodel_space_l_arm_downpush, 1, 0, var_11);
+      var_1 setanimtime(%viewmodel_space_l_arm_downpush, 0.25);
       common_scripts\utility::flag_set("wall_push_tweak_player");
 
       if(level.script == "odin" || level.script == "prologue")

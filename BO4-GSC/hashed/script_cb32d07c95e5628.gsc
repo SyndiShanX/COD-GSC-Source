@@ -261,10 +261,7 @@ _spawn_item(point, row, stashitem = 0) {
     if(isDefined(vehicle)) {
       level.item_vehicles[level.item_vehicles.size] = vehicle;
       level.var_8819644a[level.var_8819644a.size] = {
-        #origin: vehicle.origin,
-        #vehicletype: vehicle.vehicletype,
-        #vehicle: vehicle,
-        #used: 0
+        #origin: vehicle.origin, #vehicletype: vehicle.vehicletype, #vehicle: vehicle, #used: 0
       };
 
       if(isairborne(vehicle)) {

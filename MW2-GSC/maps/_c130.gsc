@@ -17,10 +17,7 @@ maps\_c130::main( "vehicle_ac130_low" );
 and these lines in your CSV:
 include,vehicle_c130
 
-defaultmdl="vehicle_ac130_low"
-default:"vehicletype" "c130"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_ac130_low"default:"vehicletype" "c130"default:"script_team" "allies"*/
 
 main(model, type) {
   build_template("c130", model, type);

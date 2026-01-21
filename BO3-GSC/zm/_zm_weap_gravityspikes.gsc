@@ -538,9 +538,7 @@ function create_gravity_trap_spikes_in_ground(a_v_spawn_pos) {
     self.mdl_gravity_trap_spikes[i] thread gravity_spike_planted_play();
     self.mdl_gravity_trap_spikes[i] clientfield::set("gravity_trap_spike_spark", 1);
     if(isDefined(level.gravity_trap_spike_watcher)) {
-      [
-        [level.gravity_trap_spike_watcher]
-      ](self.mdl_gravity_trap_spikes[i]);
+      [[level.gravity_trap_spike_watcher]](self.mdl_gravity_trap_spikes[i]);
     }
   }
 }

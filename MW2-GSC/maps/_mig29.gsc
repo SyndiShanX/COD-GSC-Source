@@ -63,7 +63,7 @@ set_vehicle_anims(positions) {
 
 landing_gear_up() {
   self UseAnimTree(#animtree);
-  self setanim( % mig_landing_gear_up);
+  self setanim(%mig_landing_gear_up);
 }
 
 #using_animtree("generic_human");
@@ -268,10 +268,7 @@ and these lines in your CSV:
 include,vehicle_mig29_mig29
 sound,vehicle_mig29,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mig29"
-default:"vehicletype" "mig29"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_mig29"default:"vehicletype" "mig29"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_mig29_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -282,10 +279,7 @@ and these lines in your CSV:
 include,vehicle_mig29_low
 sound,vehicle_mig29,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mig29_low"
-default:"vehicletype" "mig29"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_mig29_low"default:"vehicletype" "mig29"default:"script_team" "allies"*/
 
 // DISABLED av8b
 // this one is missing tags and junk.
@@ -299,10 +293,7 @@ and these lines in your CSV:
 include,vehicle_av8b_harrier_jet_mig29
 sound,vehicle_mig29,vehicle_standard,all_sp
 
-defaultmdl="vehicle_av8b_harrier_jet"
-default:"vehicletype" "mig29"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_av8b_harrier_jet"default:"vehicletype" "mig29"default:"script_team" "allies"*/
 
 // DISABLED desert version.. this one missing a bunch of junk too.
 
@@ -315,7 +306,5 @@ and these lines in your CSV:
 include,vehicle_mig29_desert_mig29
 sound,vehicle_mig29,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mig29_desert"
-default:"vehicletype" "mig29"
-default:"script_team" "allies"
+defaultmdl="vehicle_mig29_desert"default:"vehicletype" "mig29"default:"script_team" "allies"
 */

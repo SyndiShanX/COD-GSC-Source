@@ -97,7 +97,7 @@ spawnriotshieldcover(origin, angles) {
 
 riotshielddeployanim() {
   self useanimtree(#animtree);
-  self setanim( % o_riot_stand_deploy, 1.0, 0.0, 1.0);
+  self setanim(%o_riot_stand_deploy, 1.0, 0.0, 1.0);
   playFXOnTag(level._effect["riotshield_dust"], self, "tag_origin");
   wait 0.8;
   self.shieldlightfx = playFXOnTag(level._effect["riotshield_light"], self, "tag_fx");
@@ -196,9 +196,9 @@ watchdeployedriotshielddamage() {
     self useanimtree(#animtree);
 
     if(type == "MOD_MELEE")
-      self setanimknobrestart( % o_riot_stand_melee_front, 1.0, 0.0, 1.0);
+      self setanimknobrestart(%o_riot_stand_melee_front, 1.0, 0.0, 1.0);
     else
-      self setanimknobrestart( % o_riot_stand_shot, 1.0, 0.0, 1.0);
+      self setanimknobrestart(%o_riot_stand_shot, 1.0, 0.0, 1.0);
 
     if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
@@ -225,7 +225,7 @@ damagethendestroyriotshield() {
   self endon("death");
   self.owner.riotshieldretrievetrigger delete();
   self notsolid();
-  self setanimknoball( % o_riot_stand_destroyed, % root, 1.0, 0.0, 1.0);
+  self setanimknoball(%o_riot_stand_destroyed, %root, 1.0, 0.0, 1.0);
   wait(getdvarfloat(#"riotshield_destroyed_cleanup_time"));
   self.owner notify("destroy_riotshield");
 }

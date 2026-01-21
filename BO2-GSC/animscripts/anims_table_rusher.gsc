@@ -41,31 +41,31 @@ setup_default_rusher_anim_array() {
   assert(isDefined(self.rushertype), "Call this function after setting the rusherType on the AI");
 
   if(self.rushertype == "default" || self.rushertype == "semi") {
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_left_rh"] = array( % ai_spets_rusher_step_45l_2_run_01, % ai_spets_rusher_step_45l_2_run_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_left_lh"] = array( % ai_spets_rusher_step_45l_2_run_a_01, % ai_spets_rusher_step_45l_2_run_a_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_right_rh"] = array( % ai_spets_rusher_step_45r_2_run_01, % ai_spets_rusher_step_45r_2_run_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_right_lh"] = array( % ai_spets_rusher_step_45r_2_run_a_01, % ai_spets_rusher_step_45r_2_run_a_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_left_rh"] = array( % ai_spets_rusher_roll_45l_2_run_01, % ai_spets_rusher_roll_45l_2_run_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_left_lh"] = array( % ai_spets_rusher_roll_45l_2_run_a_01, % ai_spets_rusher_roll_45l_2_run_a_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_right_rh"] = array( % ai_spets_rusher_roll_45r_2_run_01, % ai_spets_rusher_roll_45r_2_run_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_right_lh"] = array( % ai_spets_rusher_roll_45r_2_run_a_01, % ai_spets_rusher_roll_45r_2_run_a_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_forward_rh"] = array( % ai_spets_rusher_roll_forward_01, % ai_spets_rusher_roll_forward_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_forward_lh"] = array( % ai_spets_rusher_roll_forward_01, % ai_spets_rusher_roll_forward_02);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["rusher_run_f_rh"] = array( % ai_spets_rusher_run_f_01, % ai_spets_rusher_run_f_02, % ai_spets_rusher_run_f_03);
-    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["rusher_run_f_lh"] = array( % ai_spets_rusher_run_f_a_01, % ai_spets_rusher_run_f_a_02, % ai_spets_rusher_run_f_a_03);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_left_rh"] = array(%ai_spets_rusher_step_45l_2_run_01, %ai_spets_rusher_step_45l_2_run_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_left_lh"] = array(%ai_spets_rusher_step_45l_2_run_a_01, %ai_spets_rusher_step_45l_2_run_a_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_right_rh"] = array(%ai_spets_rusher_step_45r_2_run_01, %ai_spets_rusher_step_45r_2_run_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["step_right_lh"] = array(%ai_spets_rusher_step_45r_2_run_a_01, %ai_spets_rusher_step_45r_2_run_a_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_left_rh"] = array(%ai_spets_rusher_roll_45l_2_run_01, %ai_spets_rusher_roll_45l_2_run_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_left_lh"] = array(%ai_spets_rusher_roll_45l_2_run_a_01, %ai_spets_rusher_roll_45l_2_run_a_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_right_rh"] = array(%ai_spets_rusher_roll_45r_2_run_01, %ai_spets_rusher_roll_45r_2_run_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_right_lh"] = array(%ai_spets_rusher_roll_45r_2_run_a_01, %ai_spets_rusher_roll_45r_2_run_a_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_forward_rh"] = array(%ai_spets_rusher_roll_forward_01, %ai_spets_rusher_roll_forward_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["roll_forward_lh"] = array(%ai_spets_rusher_roll_forward_01, %ai_spets_rusher_roll_forward_02);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["rusher_run_f_rh"] = array(%ai_spets_rusher_run_f_01, %ai_spets_rusher_run_f_02, %ai_spets_rusher_run_f_03);
+    self.anim_array[self.animtype]["move"]["stand"]["rifle"]["rusher_run_f_lh"] = array(%ai_spets_rusher_run_f_a_01, %ai_spets_rusher_run_f_a_02, %ai_spets_rusher_run_f_a_03);
   } else if(self.rushertype == "pistol") {
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_left_rh"] = array( % ai_spets_pistol_rusher_step_45l_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_left_lh"] = array( % ai_spets_pistol_rusher_step_45l_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_right_rh"] = array( % ai_spets_pistol_rusher_step_45r_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_right_lh"] = array( % ai_spets_pistol_rusher_step_45r_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_left_rh"] = array( % ai_spets_pistol_rusher_roll_45l_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_left_lh"] = array( % ai_spets_pistol_rusher_roll_45l_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_right_rh"] = array( % ai_spets_pistol_rusher_roll_45r_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_right_lh"] = array( % ai_spets_pistol_rusher_roll_45r_2_run_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_forward_rh"] = array( % ai_spets_pistol_rusher_roll_forward_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_forward_lh"] = array( % ai_spets_pistol_rusher_roll_forward_01);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["rusher_run_f_rh"] = array( % ai_pistol_rusher_run_f);
-    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["rusher_run_f_lh"] = array( % ai_pistol_rusher_run_f);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_left_rh"] = array(%ai_spets_pistol_rusher_step_45l_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_left_lh"] = array(%ai_spets_pistol_rusher_step_45l_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_right_rh"] = array(%ai_spets_pistol_rusher_step_45r_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["step_right_lh"] = array(%ai_spets_pistol_rusher_step_45r_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_left_rh"] = array(%ai_spets_pistol_rusher_roll_45l_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_left_lh"] = array(%ai_spets_pistol_rusher_roll_45l_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_right_rh"] = array(%ai_spets_pistol_rusher_roll_45r_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_right_lh"] = array(%ai_spets_pistol_rusher_roll_45r_2_run_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_forward_rh"] = array(%ai_spets_pistol_rusher_roll_forward_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["roll_forward_lh"] = array(%ai_spets_pistol_rusher_roll_forward_01);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["rusher_run_f_rh"] = array(%ai_pistol_rusher_run_f);
+    self.anim_array[self.animtype]["move"]["stand"]["pistol"]["rusher_run_f_lh"] = array(%ai_pistol_rusher_run_f);
   }
 }
 

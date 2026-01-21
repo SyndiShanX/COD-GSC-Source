@@ -498,9 +498,7 @@ function_a3010aae(ent, on_enter_payload, on_exit_payload) {
 
   if(isDefined(ent)) {
     if(isDefined(on_exit_payload)) {
-      [
-        [on_exit_payload]
-      ](ent);
+      [[on_exit_payload]](ent);
     }
 
     trigger::remove_from_ent(ent, myentnum);

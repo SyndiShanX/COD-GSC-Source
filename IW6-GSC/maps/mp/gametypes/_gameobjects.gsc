@@ -1253,8 +1253,7 @@ updateUIProgress(object, securing) {
 
       if(progress != 0)
         self SetClientOmnvar("ui_dom_progress", progress);
-    } else if((level.gameType == "sd" || level.gameType == "sr") &&
-      isDefined(object.id) && (object.id == "bomb_zone" || object.id == "defuse_object")) {
+    } else if((level.gameType == "sd" || level.gameType == "sr") && isDefined(object.id) && (object.id == "bomb_zone" || object.id == "defuse_object")) {
       if(securing) {
         if(!isDefined(self.ui_bomb_planting_defusing)) {
           idx = 0;

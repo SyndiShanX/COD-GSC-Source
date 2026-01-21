@@ -351,15 +351,7 @@ artilleryDamageEntsThread() {
       continue;
     }
     if(!ent.isPlayer || isAlive(ent.entity)) {
-      ent maps\mp\gametypes\_weapons::damageEnt(
-        ent.eInflictor,
-        ent.damageOwner,
-        ent.damage,
-        "MOD_PROJECTILE_SPLASH",
-        "artillery_mp",
-        ent.pos,
-        vectornormalize(ent.damageCenter - ent.pos)
-      );
+      ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, ent.damageOwner, ent.damage, "MOD_PROJECTILE_SPLASH", "artillery_mp", ent.pos, vectornormalize(ent.damageCenter - ent.pos));
       level.artilleryDamagedEnts[level.artilleryDamagedEntsIndex] = undefined;
       if(ent.isPlayer)
         wait(0.05);
@@ -608,10 +600,7 @@ getBestPlaneDirection(hitpos) {
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   result = spawnStruct();
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
-  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) +
-      ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) +
-      ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) /
-    (LineMagSqrd);
+  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) / (LineMagSqrd);
   result.t = t;
   start_x = LineStart[0] + t * (LineEnd[0] - LineStart[0]);
   start_y = LineStart[1] + t * (LineEnd[1] - LineStart[1]);

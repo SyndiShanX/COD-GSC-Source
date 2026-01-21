@@ -409,9 +409,7 @@ ghostexplosionradiusdamage(var_0, var_1, var_2) {
     }
 
     if(isDefined(level.process_player_gns_combo_func)) {
-      [
-        [level.process_player_gns_combo_func]
-      ](var_1, var_3);
+      [[level.process_player_gns_combo_func]](var_1, var_3);
       return;
     }
   }

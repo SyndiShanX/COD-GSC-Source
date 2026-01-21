@@ -410,9 +410,7 @@ func_9C64(var_0, var_1, var_2) {
   }
 
   if(isDefined(level.guidedinteractionexclusion)) {
-    if(![
-        [level.guidedinteractionexclusion]
-      ](var_1, var_0, var_3)) {
+    if(![[level.guidedinteractionexclusion]](var_1, var_0, var_3)) {
       return 0;
     }
   }
@@ -1419,9 +1417,7 @@ can_purchase_ammo(var_0) {
 interaction_post_activate_delay(var_0) {
   self endon("disconnect");
   if(isDefined(level.should_post_activate_delay_func)) {
-    if(![
-        [level.should_post_activate_delay_func]
-      ](var_0)) {
+    if(![[level.should_post_activate_delay_func]](var_0)) {
       return;
     }
   }

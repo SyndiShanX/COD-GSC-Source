@@ -505,13 +505,7 @@ updateDevSettings() {
 }
 
 testEndGameUpdate(promotion) {
-  self setClientDvars("ui_challenge_1_ref", "ch_marksman_ak47",
-    "ui_challenge_2_ref", "ch_ak47_gl",
-    "ui_challenge_3_ref", "ch_ak47_reflex",
-    "ui_challenge_4_ref", "ch_ak47_silencer",
-    "ui_challenge_5_ref", "ch_ak47_acog",
-    "ui_challenge_6_ref", "ch_ak47_fmj",
-    "ui_challenge_7_ref", "ch_ak47_mastery");
+  self setClientDvars("ui_challenge_1_ref", "ch_marksman_ak47", "ui_challenge_2_ref", "ch_ak47_gl", "ui_challenge_3_ref", "ch_ak47_reflex", "ui_challenge_4_ref", "ch_ak47_silencer", "ui_challenge_5_ref", "ch_ak47_acog", "ui_challenge_6_ref", "ch_ak47_fmj", "ui_challenge_7_ref", "ch_ak47_mastery");
 
   if(isDefined(promotion) && promotion)
     self setClientDvar("ui_promotion", 1);
@@ -577,8 +571,7 @@ xKillsY(attackerName, victimName) {
   if(!isAlive(attacker) || !isAlive(victim)) {
     return;
   }
-  victim thread[[level.callbackPlayerDamage]](
-    attacker, // eInflictor The entity that causes the damage.(e.g. a turret)
+  victim thread[[level.callbackPlayerDamage]](attacker, // eInflictor The entity that causes the damage.(e.g. a turret)
     attacker, // eAttacker The entity that is attacking.
     500, // iDamage Integer specifying the amount of damage done
     0, // iDFlags Integer specifying flags that are to be applied to the damage
@@ -587,8 +580,7 @@ xKillsY(attackerName, victimName) {
     (0, 0, 0), // vPoint The point the damage is from?
     (0, 0, 0), // vDir The direction of the damage
     "none", // sHitLoc The location of the hit
-    0 // psOffsetTime The time offset for the damage
-  );
+    0 // psOffsetTime The time offset for the damage);
 }
 
 updateMinimapSetting() {

@@ -10,8 +10,8 @@
 
 main() {
   self endon("killanimscript");
-  self clearanim( % root, 0.2);
-  self clearanim( % german_shepherd_run_stop, 0);
+  self clearanim(%root, 0.2);
+  self clearanim(%german_shepherd_run_stop, 0);
   self thread randomSoundDuringRunLoop();
   if(!isDefined(self.traverseComplete) && !isDefined(self.skipStartMove) && self.a.movement == "run") {
     self startMove();
@@ -21,17 +21,17 @@ main() {
   }
   self.traverseComplete = undefined;
   self.skipStartMove = undefined;
-  self clearanim( % german_shepherd_run_start, 0);
+  self clearanim(%german_shepherd_run_start, 0);
   if(self.a.movement == "run") {
     weights = undefined;
     weights = self getRunAnimWeights();
-    self setanimrestart( % german_shepherd_run, weights["center"], blendTime, 1);
-    self setanimrestart( % german_shepherd_run_lean_L, weights["left"], 0.1, 1);
-    self setanimrestart( % german_shepherd_run_lean_R, weights["right"], 0.1, 1);
-    self setflaggedanimknob("dog_run", % german_shepherd_run_knob, 1, blendTime, self.moveplaybackrate);
+    self setanimrestart(%german_shepherd_run, weights["center"], blendTime, 1);
+    self setanimrestart(%german_shepherd_run_lean_L, weights["left"], 0.1, 1);
+    self setanimrestart(%german_shepherd_run_lean_R, weights["right"], 0.1, 1);
+    self setflaggedanimknob("dog_run", %german_shepherd_run_knob, 1, blendTime, self.moveplaybackrate);
     animscripts\shared::DoNoteTracksForTime(0.1, "dog_run");
   } else {
-    self setflaggedanimrestart("dog_walk", % german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
+    self setflaggedanimrestart("dog_walk", %german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
   }
   while(1) {
     self moveLoop();
@@ -39,7 +39,7 @@ main() {
       if(self.disableArrivals == false)
         self thread stopMove();
       self waittill("run");
-      self clearanim( % german_shepherd_run_stop, 0.1);
+      self clearanim(%german_shepherd_run_stop, 0.1);
     }
   }
 }
@@ -54,16 +54,16 @@ moveLoop() {
       self.stopAnimDistSq = anim.dogStoppingDistSq;
     if(self.a.movement == "run") {
       weights = self getRunAnimWeights();
-      self clearanim( % german_shepherd_walk, 0.3);
-      self setanim( % german_shepherd_run, weights["center"], 0.2, 1);
-      self setanim( % german_shepherd_run_lean_L, weights["left"], 0.2, 1);
-      self setanim( % german_shepherd_run_lean_R, weights["right"], 0.2, 1);
-      self setflaggedanimknob("dog_run", % german_shepherd_run_knob, 1, 0.2, self.moveplaybackrate);
+      self clearanim(%german_shepherd_walk, 0.3);
+      self setanim(%german_shepherd_run, weights["center"], 0.2, 1);
+      self setanim(%german_shepherd_run_lean_L, weights["left"], 0.2, 1);
+      self setanim(%german_shepherd_run_lean_R, weights["right"], 0.2, 1);
+      self setflaggedanimknob("dog_run", %german_shepherd_run_knob, 1, 0.2, self.moveplaybackrate);
       animscripts\shared::DoNoteTracksForTime(0.2, "dog_run");
     } else {
       assert(self.a.movement == "walk");
-      self clearanim( % german_shepherd_run_knob, 0.3);
-      self setflaggedanim("dog_walk", % german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
+      self clearanim(%german_shepherd_run_knob, 0.3);
+      self setflaggedanim("dog_walk", %german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
       animscripts\shared::DoNoteTracksForTime(0.2, "dog_walk");
     }
   }
@@ -79,9 +79,9 @@ startMoveTrackLookAhead() {
 
 startMove() {
   {
-    self setanimrestart( % german_shepherd_run_start, 1, 0.2, 1);
+    self setanimrestart(%german_shepherd_run_start, 1, 0.2, 1);
   }
-  self setflaggedanimknobrestart("dog_prerun", % german_shepherd_run_start_knob, 1, 0.2, self.moveplaybackrate);
+  self setflaggedanimknobrestart("dog_prerun", %german_shepherd_run_start_knob, 1, 0.2, self.moveplaybackrate);
   self animscripts\shared::DoNoteTracks("dog_prerun");
   self animMode("none");
   self OrientMode("face motion");
@@ -90,8 +90,8 @@ startMove() {
 stopMove() {
   self endon("killanimscript");
   self endon("run");
-  self clearanim( % german_shepherd_run_knob, 0.1);
-  self setflaggedanimrestart("stop_anim", % german_shepherd_run_stop, 1, 0.2, 1);
+  self clearanim(%german_shepherd_run_knob, 0.1);
+  self setflaggedanimrestart("stop_anim", %german_shepherd_run_stop, 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("stop_anim");
 }
 

@@ -303,7 +303,7 @@ function chamber_disc_switch_spark() {
 function chamber_disc_trigger_run(e_disc, e_lever, b_clockwise) {
   discs_to_rotate = array(e_disc);
   e_lever useanimtree($generic);
-  n_anim_time = getanimlength( % generic::p7_fxanim_zm_ori_puzzle_switch_anim);
+  n_anim_time = getanimlength(%generic::p7_fxanim_zm_ori_puzzle_switch_anim);
   while(true) {
     self waittill("trigger", e_triggerer);
     if(!level flag::get("disc_rotation_active")) {

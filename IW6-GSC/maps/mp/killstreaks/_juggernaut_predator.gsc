@@ -298,15 +298,7 @@ customCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType(
-    "airdrop_assault",
-    CONST_JUGG_TYPE,
-    CONST_JUGG_CRATE_WEIGHT,
-    maps\mp\killstreaks\_airdrop::juggernautCrateThink,
-    maps\mp\killstreaks\_airdrop::get_friendly_juggernaut_crate_model(),
-    maps\mp\killstreaks\_airdrop::get_enemy_juggernaut_crate_model(),
-    CONST_JUGG_CRATE_STRING
-  );
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", CONST_JUGG_TYPE, CONST_JUGG_CRATE_WEIGHT, maps\mp\killstreaks\_airdrop::juggernautCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_juggernaut_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_juggernaut_crate_model(), CONST_JUGG_CRATE_STRING);
   level thread watch_for_jugg_crate();
 }
 
@@ -473,13 +465,9 @@ predatorCloakMovementMonitor() {
         self thread predatorUnsetCloaked(true);
       }
     } else {
-      if((isDefined(self.inWater) && self.inWater) ||
-        self isEMPed()
-      ) {
+      if((isDefined(self.inWater) && self.inWater) || self isEMPed()) {
         self.predCloakDeniedUntilTime = GetTime() + CONST_CLOAK_PENALTY_FORCED_OFF;
-      } else if(self IsOnGround() &&
-        !self IsMantling()
-      ) {
+      } else if(self IsOnGround() && !self IsMantling()) {
         speedSq = LengthSquared(self GetVelocity());
         curTime = GetTime();
 
@@ -512,10 +500,7 @@ predatorCloakWaitForInput() {
     if(GetTime() < self.cloakTimeStamp) {
       continue;
     }
-    if(self IsMantling() ||
-      self IsMeleeing() ||
-      self isEMPed()
-    ) {
+    if(self IsMantling() || self IsMeleeing() || self isEMPed()) {
       wait(0.05);
       continue;
     }
@@ -540,8 +525,7 @@ predatorCloakWaitForForceEnd() {
     self waittill("predator_force_uncloak");
 
     while(self IsMantling()
-
-    ) {
+) {
       wait 0.05;
     }
 
@@ -577,11 +561,7 @@ predatorCannonUpdate() {
     } else if(self.cannonState == CANNON_STATE_LOCKING) {
       target = self.cannonTarget;
 
-      if(isDefined(target) &&
-        isReallyAlive(target) &&
-        self WorldPointInReticle_Circle(target getEye(), CANNON_FOV, CANNON_TARGET_RADIUS_LOCKED) &&
-        !(self isEMPed())
-      ) {
+      if(isDefined(target) && isReallyAlive(target) && self WorldPointInReticle_Circle(target getEye(), CANNON_FOV, CANNON_TARGET_RADIUS_LOCKED) && !(self isEMPed())) {
         if(GetTime() >= self.cannonLockReadyTime) {
           self finalizeCannonLock(self.cannonTarget);
           self childthread waittillCannonFire(self.cannonTarget);
@@ -592,10 +572,7 @@ predatorCannonUpdate() {
 
       wait(0.05);
     } else if(self.cannonState == CANNON_STATE_LOCKED) {
-      if((!isDefined(self.cannonTarget) || !isReallyAlive(self.cannonTarget)) ||
-        Distance2DSquared(self.origin, self.cannonTarget.origin) > CANNON_MAX_RANGE_SQ ||
-        self isEMPed()
-      ) {
+      if((!isDefined(self.cannonTarget) || !isReallyAlive(self.cannonTarget)) || Distance2DSquared(self.origin, self.cannonTarget.origin) > CANNON_MAX_RANGE_SQ || self isEMPed()) {
         self resetCannonLock(true);
       }
 
@@ -615,16 +592,10 @@ findAllTargetsInReticle(cameraFOV, reticleRadius) {
   targetsInReticle = [];
   if(!(self isEMPed())) {
     foreach(participant in level.characters) {
-      if(isDefined(participant) &&
-        isReallyAlive(participant) &&
-        self isEnemy(participant) &&
-        !participant _hasPerk("specialty_blindeye") &&
-        Distance2DSquared(self.origin, participant.origin) <= CANNON_MAX_RANGE_SQ
-      ) {
+      if(isDefined(participant) && isReallyAlive(participant) && self isEnemy(participant) && !participant _hasPerk("specialty_blindeye") && Distance2DSquared(self.origin, participant.origin) <= CANNON_MAX_RANGE_SQ) {
         targetPoint = participant getEye();
 
-        if(self WorldPointInReticle_Circle(targetPoint, cameraFOV, reticleRadius) &&
-          SightTracePassed(self getEye(), targetPoint, false, undefined, undefined)) {
+        if(self WorldPointInReticle_Circle(targetPoint, cameraFOV, reticleRadius) && SightTracePassed(self getEye(), targetPoint, false, undefined, undefined)) {
           targetsInReticle[targetsInReticle.size] = participant;
         }
       }
@@ -765,9 +736,7 @@ predatorVisionToggle() {
   while(true) {
     self waittill("predator_vision");
 
-    if(!self IsThrowingGrenade() &&
-      !(self isEMPed())
-    ) {
+    if(!self IsThrowingGrenade() && !(self isEMPed())) {
       if(self.predatorVisionEnabled) {
         self predatorVisionDisable();
       } else {
@@ -809,10 +778,7 @@ predatorOutlinesOn() {
   self SetClientOmnvar("ui_predator_vision", true);
 
   foreach(character in level.characters) {
-    if(isReallyAlive(character) &&
-      character != self &&
-      (IsAgent(character) || character.sessionstate == "playing")
-    ) {
+    if(isReallyAlive(character) && character != self && (IsAgent(character) || character.sessionstate == "playing")) {
       outlineColor = CONST_OUTLINE_COLOR_FRIENDLY;
       if(self isEnemy(character)) {
         outlineColor = CONST_OUTLINE_COLOR_ENEMY;
@@ -1210,11 +1176,7 @@ predatorPainCry() {
   while(true) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
 
-    if(isDefined(attacker) &&
-      attacker != self &&
-      amount > 10 &&
-      self checkTimeStamp("painCry", 1000)
-    ) {
+    if(isDefined(attacker) && attacker != self && amount > 10 && self checkTimeStamp("painCry", 1000)) {
       self predatorPlayVo("scn_predator_plr_vocal_pain", "scn_predator_npc_vocal_pain");
     }
 

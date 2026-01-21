@@ -158,9 +158,7 @@ setCarryingSentry(sentryGun, allowCancel) {
       }
       if(level.console) {
         killstreakWeapon = getKillstreakWeapon(level.sentrySettings[sentryGun.sentryType].streakName);
-        if(isDefined(self.killstreakIndexWeapon) &&
-          killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) &&
-          !(self GetWeaponsListItems()).size) {
+        if(isDefined(self.killstreakIndexWeapon) && killstreakWeapon == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) && !(self GetWeaponsListItems()).size) {
           self _giveWeapon(killstreakWeapon, 0);
           self _setActionSlot(4, "weapon", killstreakWeapon);
         }
@@ -353,11 +351,7 @@ sentry_createBombSquadModel(sentryType) {
 
 sentry_handleDamage() {
   self endon("carried");
-  self maps\mp\gametypes\_damage::monitorDamage(
-    level.sentrySettings[self.sentryType].maxHealth,
-    "sentry", ::sentryHandleDeathDamage, ::sentryModifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(level.sentrySettings[self.sentryType].maxHealth, "sentry", ::sentryHandleDeathDamage, ::sentryModifyDamage, true);
 }
 
 sentryModifyDamage(attacker, weapon, type, damage) {
@@ -498,11 +492,7 @@ turret_handlePickup(turret) {
   }
   buttonTime = 0;
   for(;;) {
-    if(IsAlive(self) &&
-      self IsTouching(turret.ownerTrigger) &&
-      !isDefined(turret.inUseBy) &&
-      !isDefined(turret.carriedBy) &&
-      self IsOnGround()) {
+    if(IsAlive(self) && self IsTouching(turret.ownerTrigger) && !isDefined(turret.inUseBy) && !isDefined(turret.carriedBy) && self IsOnGround()) {
       if(self UseButtonPressed()) {
         if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
           continue;

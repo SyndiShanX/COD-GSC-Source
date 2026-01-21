@@ -70,7 +70,7 @@ do_friendly_fire_reaction() {
       return;
     }
     self animmode("zonly_physics");
-    self setFlaggedAnimKnobAllRestart("react", % surprise_stop_v1, % root, 1, 0.2, self.animplaybackrate);
+    self setFlaggedAnimKnobAllRestart("react", %surprise_stop_v1, %root, 1, 0.2, self.animplaybackrate);
     self animscripts\shared::DoNoteTracks("react");
   }
 }
@@ -84,7 +84,7 @@ transitionToCombat() {
   }
   if(self.prevScript == "stop" && !self isCQBWalking() && self.a.pose == "stand") {
     self animmode("zonly_physics");
-    self setFlaggedAnimKnobAllRestart("transition", % casual_stand_idle_trans_out, % root, 1, 0.2, 1.2 * self.animplaybackrate);
+    self setFlaggedAnimKnobAllRestart("transition", %casual_stand_idle_trans_out, %root, 1, 0.2, 1.2 * self.animplaybackrate);
     self animscripts\shared::DoNoteTracks("transition");
   }
 }
@@ -102,7 +102,7 @@ testGrenadeThrowAnimOffsets() {
 
     tag = "TAG_INHAND";
 
-    self setFlaggedAnimKnobAllRestart("grenadetest", throwAnim, % root, 1, 0, 1);
+    self setFlaggedAnimKnobAllRestart("grenadetest", throwAnim, %root, 1, 0, 1);
     for(;;) {
       self waittill("grenadetest", notetrack);
       if(notetrack == "grenade_left" || notetrack == "grenade_right")
@@ -157,7 +157,7 @@ setup() {
   self thread stopShortly();
   self.previousPitchDelta = 0.0;
 
-  self clearAnim( % root, .2);
+  self clearAnim(%root, .2);
 
   setupAim(.2);
 
@@ -212,11 +212,11 @@ exposedCombatStopUsingRPGCheck(distSqToShootPos) {
       transitionTo("crouch");
 
     if(self.a.pose == "stand")
-      animscripts\shared::throwDownWeapon( % RPG_stand_throw);
+      animscripts\shared::throwDownWeapon(%RPG_stand_throw);
     else
-      animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
+      animscripts\shared::throwDownWeapon(%RPG_crouch_throw);
 
-    self clearAnim( % root, 0.2);
+    self clearAnim(%root, 0.2);
 
     self endFireAndAnimIdleThread();
     self setup_anim_array();
@@ -237,13 +237,7 @@ exposedCombatCheckStance(distSqToShootPos) {
       return true;
   }
 
-  if(distSqToShootPos > sqr512 &&
-    self.a.pose != "crouch" &&
-    self isStanceAllowed("crouch") &&
-    !usingSidearm() &&
-    !isDefined(self.heat) &&
-    gettime() >= self.a.dontCrouchTime &&
-    lengthSquared(self.shootEntVelocity) < sqr100) {
+  if(distSqToShootPos > sqr512 && self.a.pose != "crouch" && self isStanceAllowed("crouch") && !usingSidearm() && !isDefined(self.heat) && gettime() >= self.a.dontCrouchTime && lengthSquared(self.shootEntVelocity) < sqr100) {
     if(!isDefined(self.shootPos) || sightTracePassed(self.origin + (0, 0, 36), self.shootPos, false, undefined)) {
       transitionTo("crouch");
       return true;
@@ -269,8 +263,7 @@ exposedCombatCheckReloadOrUsePistol(distSqToShootPos) {
   if(NeedToReload(0)) {
     // TODO: tweak prone exposed reloading to be considered safer
     // requiring self.weapon == self.primaryweapon because we dont want him to drop his shotgun and then, if wantshotgun = false, decide to pick up his rifle when he's done
-    if(!usingSidearm() && cointoss() && !usingRocketLauncher() && usingPrimary() &&
-      distSqToShootPos < pistolPullOutDistSq && self isStanceAllowed("stand")) {
+    if(!usingSidearm() && cointoss() && !usingRocketLauncher() && usingPrimary() && distSqToShootPos < pistolPullOutDistSq && self isStanceAllowed("stand")) {
       // we need to be standing to switch weapons
       if(self.a.pose != "stand") {
         transitionTo("stand");
@@ -291,7 +284,7 @@ exposedCombatCheckReloadOrUsePistol(distSqToShootPos) {
 exposedCombatCheckPutAwayPistol(distSqToShootPos) {
   if(usingSidearm() && self.a.pose == "stand" && !isDefined(self.forceSideArm))
     if((distSqToShootPos > pistolPutBackDistSq) || (self.combatMode == "ambush_nodes_only" && (!isDefined(self.enemy) || !self cansee(self.enemy))))
-      switchToLastWeapon( % pistol_stand_switch);
+      switchToLastWeapon(%pistol_stand_switch);
 }
 
 exposedCombatPositionAdjust() {
@@ -420,8 +413,7 @@ needToTurn() {
 
   yaw = self.angles[1] - VectorToYaw(point - self.origin);
 
-  // need to have fudge factor because the gun's origin is different than our origin,
-  // the closer our distance, the more we need to fudge.
+  // need to have fudge factor because the gun's origin is different than our origin, // the closer our distance, the more we need to fudge.
   distsq = distanceSquared(self.origin, point);
   if(distsq < 256 * 256) {
     dist = sqrt(distsq);
@@ -516,7 +508,7 @@ cantSeeEnemyBehavior() {
 
   if(givenUpOnEnemy && usingSidearm()) {
     // switch back to main weapon so we can reload it too before another enemy appears
-    switchToLastWeapon( % pistol_stand_switch);
+    switchToLastWeapon(%pistol_stand_switch);
     return true;
   }
 
@@ -728,12 +720,12 @@ doTurn(direction, amount) {
   else
     self animmode("angle deltas", false);
 
-  self setAnimKnobAll( % exposed_aiming, % body, 1, transTime);
+  self setAnimKnobAll(%exposed_aiming, %body, 1, transTime);
 
   if(!isDefined(self.turnToMatchNode))
     self TurningAimingOn(transTime);
 
-  self setAnimLimited( % turn, 1, transTime);
+  self setAnimLimited(%turn, 1, transTime);
 
   if(isDefined(self.heat))
     rate = min(1.0, rate); // TEMP 1.0, adjust animations first
@@ -748,16 +740,16 @@ doTurn(direction, amount) {
 
   doTurnNotetracks();
 
-  self setanimlimited( % turn, 0, .2);
+  self setanimlimited(%turn, 0, .2);
 
   if(!isDefined(self.turnToMatchNode))
     self TurningAimingOff(.2);
 
   if(!isDefined(self.turnToMatchNode)) {
-    self clearanim( % turn, .2);
-    self setanimknob( % exposed_aiming, 1, .2, 1);
+    self clearanim(%turn, .2);
+    self setanimknob(%exposed_aiming, 1, .2, 1);
   } else {
-    self clearanim( % exposed_modern, .3);
+    self clearanim(%exposed_modern, .3);
   }
 
   // if we didn't actually turn, code prevented us from doing so.
@@ -796,15 +788,15 @@ makeSureTurnWorks() {
 
 TurningAimingOn(transTime) {
   self setAnimLimited(animarray("straight_level"), 0, transTime);
-  self setAnim( % add_idle, 0, transTime);
+  self setAnim(%add_idle, 0, transTime);
 
   if(!weapon_pump_action_shotgun())
-    self clearAnim( % add_fire, .2);
+    self clearAnim(%add_fire, .2);
 }
 
 TurningAimingOff(transTime) {
   self setAnimLimited(animarray("straight_level"), 1, transTime);
-  self setAnim( % add_idle, 1, transTime);
+  self setAnim(%add_idle, 1, transTime);
 }
 
 shootWhileTurning() {
@@ -816,7 +808,7 @@ shootWhileTurning() {
   }
   shootUntilShootBehaviorChange();
 
-  self clearAnim( % add_fire, .2);
+  self clearAnim(%add_fire, .2);
 }
 
 shootUntilNeedToTurn() {
@@ -897,14 +889,14 @@ tryExposedThrowGrenade(throwAt, minDist) {
       }
 
       if(throwAnims.size > 0) {
-        self setanim( % exposed_aiming, 0, .1);
+        self setanim(%exposed_aiming, 0, .1);
         self animMode("zonly_physics");
 
         setAnimAimWeight(0, 0);
 
         threw = TryGrenade(throwAt, throwAnims[randomint(throwAnims.size)]);
 
-        self setanim( % exposed_aiming, 1, .1);
+        self setanim(%exposed_aiming, 1, .1);
 
         if(threw)
           setAnimAimWeight(1, .5); // ease into aiming
@@ -937,7 +929,7 @@ transitionTo(newPose) {
   if(!isDefined(transAnim)) {
     return;
   }
-  self clearanim( % root, .3);
+  self clearanim(%root, .3);
 
   self endFireAndAnimIdleThread();
 
@@ -950,7 +942,7 @@ transitionTo(newPose) {
     println("error: " + self.a.pose + "_2_" + newPose + " missing notetrack to set pose!");
   }
 
-  self setFlaggedAnimKnobAllRestart("trans", transanim, % body, 1, .2, rate);
+  self setFlaggedAnimKnobAllRestart("trans", transanim, %body, 1, .2, rate);
   transTime = getAnimLength(transanim) / rate;
   playTime = transTime - 0.3;
   if(playTime < 0.2)
@@ -1040,7 +1032,7 @@ exposedReload(threshold) {
     if(self.finishedReload)
       self animscripts\weaponList::RefillClip();
 
-    self clearanim( % reload, .2);
+    self clearanim(%reload, .2);
     self.keepClaimedNode = false;
 
     self notify("stop_trying_to_melee");
@@ -1069,7 +1061,7 @@ doReloadAnim(reloadAnim, stopWhenCanShoot) {
 
   flagName = "reload_" + getUniqueFlagNameIndex();
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart(flagName, reloadAnim, 1, .2, animRate);
   self thread notifyOnStartAim("abort_reload", flagName);
   self endon("start_aim");
@@ -1129,7 +1121,7 @@ tryUsingSidearm() {
   // TEMP no pistol crouch pullout yet
   self.a.pose = "stand";
 
-  switchToSidearm( % pistol_stand_pullout);
+  switchToSidearm(%pistol_stand_pullout);
 
   return true;
 }
@@ -1142,7 +1134,7 @@ switchToSidearm(swapAnim) {
   self endFireAndAnimIdleThread();
 
   self.swapAnim = swapAnim;
-  self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, % body, 1, .2, fasterAnimSpeed());
+  self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, %body, 1, .2, fasterAnimSpeed());
   self DoNoteTracksPostCallbackWithEndon("weapon swap", ::handlePickup, "end_weapon_swap");
   self clearAnim(self.swapAnim, 0.2);
 
@@ -1188,7 +1180,7 @@ switchToLastWeapon(swapAnim, cleanUp) {
   self endFireAndAnimIdleThread();
 
   self.swapAnim = swapAnim;
-  self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, % body, 1, .1, 1);
+  self setFlaggedAnimKnobAllRestart("weapon swap", swapAnim, %body, 1, .1, 1);
 
   if(isDefined(cleanUp))
     self DoNoteTracksPostCallbackWithEndon("weapon swap", ::handleCleanUpPutaway, "end_weapon_swap");
@@ -1226,9 +1218,9 @@ rpgDeath() {
     return false;
 
   if(randomFloat(1) > 0.5)
-    self SetFlaggedAnimKnobAll("deathanim", % RPG_stand_death, % root, 1, .05, 1);
+    self SetFlaggedAnimKnobAll("deathanim", %RPG_stand_death, %root, 1, .05, 1);
   else
-    self SetFlaggedAnimKnobAll("deathanim", % RPG_stand_death_stagger, % root, 1, .05, 1);
+    self SetFlaggedAnimKnobAll("deathanim", %RPG_stand_death_stagger, %root, 1, .05, 1);
 
   self animscripts\shared::DoNoteTracks("deathanim");
   self animscripts\shared::DropAllAIWeapons();

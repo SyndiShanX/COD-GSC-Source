@@ -30,7 +30,7 @@ main(model, type) {
   build_life(999, 500, 1500);
 
   build_team("allies");
-  build_drive( % bm21_driving_idle_forward, % bm21_driving_idle_backward, 10);
+  build_drive(%bm21_driving_idle_forward, %bm21_driving_idle_backward, 10);
 
   build_compassicon("automobile", false);
   build_light(model, "headlight_bm21_left", "tag_headlight_left", "misc/car_headlight_bm21", "headlights");
@@ -99,7 +99,5 @@ and these lines in your CSV:
 include,vehicle_bm21_mobile_bm21
 sound,vehicle_bm21,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bm21_mobile"
-default:"vehicletype" "bm21"
-default:"script_team" "allies"
+defaultmdl="vehicle_bm21_mobile"default:"vehicletype" "bm21"default:"script_team" "allies"
 */

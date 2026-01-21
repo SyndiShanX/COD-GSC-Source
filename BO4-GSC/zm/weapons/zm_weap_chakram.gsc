@@ -453,10 +453,7 @@ function_e3ad524a() {
 
         if(isDefined(level.var_2e32e0bb)) {
           level notify(#"hero_weapon_hit", {
-            #player: self,
-            #e_entity: a_trace[# "entity"],
-            #var_80e17549: self.currentweapon,
-            #v_position: a_trace[# "position"]
+            #player: self, #e_entity: a_trace[# "entity"], #var_80e17549: self.currentweapon, #v_position: a_trace[# "position"]
           });
         }
 
@@ -701,9 +698,7 @@ function_96835348(e_target) {
 
     if(isactor(e_target)) {
       e_target thread zm_hero_weapon::function_acee2761();
-      [
-        [level.var_893eb73f]
-      ] - > waitinqueue(e_target);
+      [[level.var_893eb73f]] - > waitinqueue(e_target);
     }
 
     weapon = undefined;

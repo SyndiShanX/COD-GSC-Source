@@ -280,8 +280,8 @@ gameplay_hijack() {
       }
     }
 
-    thread maps\ac130_code::do_hijack(level.getaway_vehicle_1, var_0[0], % ac130_carjack_door_1a, % ac130_carjack_door_others);
-    thread maps\ac130_code::do_hijack(level.getaway_vehicle_2, var_0[1], % ac130_carjack_door_1b, % ac130_carjack_door_others);
+    thread maps\ac130_code::do_hijack(level.getaway_vehicle_1, var_0[0], %ac130_carjack_door_1a, %ac130_carjack_door_others);
+    thread maps\ac130_code::do_hijack(level.getaway_vehicle_2, var_0[1], %ac130_carjack_door_1b, %ac130_carjack_door_others);
     common_scripts\utility::flag_set("friendlies_loading_vehicles");
     level.getaway_vehicle_1 thread maps\ac130_code::mission_fail_vehicle_death();
     level.getaway_vehicle_2 thread maps\ac130_code::mission_fail_vehicle_death();

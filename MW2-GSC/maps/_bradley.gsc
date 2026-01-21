@@ -50,10 +50,7 @@ include,vehicle_bradley_bradley
 sound,vehicle_bradley,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bradley"
-default:"vehicletype" "bradley"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_bradley"default:"vehicletype" "bradley"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_bradley_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -65,7 +62,5 @@ include,vehicle_bradley_bradley
 sound,vehicle_bradley,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bradley"
-default:"vehicletype" "bradley_physics"
-default:"script_team" "allies"
+defaultmdl="vehicle_bradley"default:"vehicletype" "bradley_physics"default:"script_team" "allies"
 */

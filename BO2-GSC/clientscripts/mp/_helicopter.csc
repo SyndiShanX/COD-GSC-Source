@@ -62,7 +62,7 @@ heli_comlink_bootup_anim(localclientnum, oldval, newval, bnewent, binitialsnap, 
   self endon("entityshutdown");
   self endon("death");
   self useanimtree(#animtree);
-  self setanim( % veh_anim_future_heli_gearup_bay_open, 1.0, 0.0, 1.0);
+  self setanim(%veh_anim_future_heli_gearup_bay_open, 1.0, 0.0, 1.0);
 }
 
 supplydrop_care_package_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -71,9 +71,9 @@ supplydrop_care_package_state(localclientnum, oldval, newval, bnewent, binitials
   self useanimtree(#animtree);
 
   if(newval == 1)
-    self setanim( % o_drone_supply_care_idle, 1.0, 0.0, 1.0);
+    self setanim(%o_drone_supply_care_idle, 1.0, 0.0, 1.0);
   else
-    self setanim( % o_drone_supply_care_drop, 1.0, 0.0, 0.3);
+    self setanim(%o_drone_supply_care_drop, 1.0, 0.0, 0.3);
 }
 
 supplydrop_ai_tank_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -82,9 +82,9 @@ supplydrop_ai_tank_state(localclientnum, oldval, newval, bnewent, binitialsnap, 
   self useanimtree(#animtree);
 
   if(newval == 1)
-    self setanim( % o_drone_supply_agr_idle, 1.0, 0.0, 1.0);
+    self setanim(%o_drone_supply_agr_idle, 1.0, 0.0, 1.0);
   else
-    self setanim( % o_drone_supply_agr_drop, 1.0, 0.0, 0.3);
+    self setanim(%o_drone_supply_agr_drop, 1.0, 0.0, 0.3);
 }
 
 warnmissilelocking(localclientnum, set) {

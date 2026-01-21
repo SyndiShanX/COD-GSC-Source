@@ -6,8 +6,8 @@
 #using_animtree("generic_human");
 
 initanimtree(var_0) {
-  self clearanim( % body, 0.3);
-  self setanim( % body, 1, 0);
+  self clearanim(%body, 0.3);
+  self setanim(%body, 1, 0);
 
   if(var_0 != "pain" && var_0 != "death")
     self.a.special = "none";
@@ -26,9 +26,9 @@ updateanimpose() {
       exitpronewrapper(0.5);
 
     if(self.desired_anim_pose == "prone") {
-      self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+      self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
       enterpronewrapper(0.5);
-      self setanimknoball(lookupanim("default_prone", "straight_level"), % body, 1, 0.1, 1);
+      self setanimknoball(lookupanim("default_prone", "straight_level"), %body, 1, 0.1, 1);
     }
   }
 
@@ -476,7 +476,7 @@ isinset(var_0, var_1) {
 
 playanim(var_0) {
   if(isDefined(var_0)) {
-    self setflaggedanimknoballrestart("playAnim", var_0, % root, 1, 0.1, 1);
+    self setflaggedanimknoballrestart("playAnim", var_0, %root, 1, 0.1, 1);
     var_1 = getanimlength(var_0);
     var_1 = 3 * var_1 + 1;
     thread notifyaftertime("time is up", "time is up", var_1);

@@ -22,7 +22,7 @@ func_7FE4() {
 
 func_6EC1(var_0) {
   self endon("killanimscript");
-  self func_82E3("flashed_anim", var_0, % body, 0.2, randomfloatrange(0.9, 1.1));
+  self func_82E3("flashed_anim", var_0, %body, 0.2, randomfloatrange(0.9, 1.1));
   scripts\anim\shared::donotetracks("flashed_anim");
 }
 

@@ -807,8 +807,7 @@ crafting_think() {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
     level notify(#"crafting_started", {
-      #unitrigger: self,
-      #activator: player
+      #unitrigger: self, #activator: player
     });
 
     if(isDefined(self.stub.var_90dfb0bf)) {
@@ -964,13 +963,10 @@ function_f37c4bb5(player) {
     }
 
     level notify(#"blueprint_completed", {
-      #blueprint: self.stub.blueprint,
-      #produced: self.stub.blueprint.var_54a97edd,
-      #player: player
+      #blueprint: self.stub.blueprint, #produced: self.stub.blueprint.var_54a97edd, #player: player
     });
     player notify(#"blueprint_completed", {
-      #blueprint: self.stub.blueprint,
-      #produced: self.stub.blueprint.var_54a97edd
+      #blueprint: self.stub.blueprint, #produced: self.stub.blueprint.var_54a97edd
     });
 
     if(self.stub.blueprint.postcraft === "persistent_buy" || self.stub.blueprint.postcraft === "buy_once_then_box" || self.stub.blueprint.postcraft === "spawn_as_ingredient") {

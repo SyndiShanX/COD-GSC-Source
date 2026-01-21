@@ -812,8 +812,7 @@ wait_for_player_to_take(player, weapon, packa_timer, var_a86430cb, var_9c076b6 =
         demo::bookmark(#"zm_player_grabbed_packapunch", gettime(), player);
         potm::bookmark(#"zm_player_grabbed_packapunch", gettime(), player);
         level notify(#"pap_taken", {
-          #var_5e879929: pap_machine,
-          #e_player: player
+          #var_5e879929: pap_machine, #e_player: player
         });
         pap_machine notify(#"pap_taken", {
           #e_player: player
@@ -937,8 +936,7 @@ wait_for_timeout(weapon, packa_timer, player, var_a86430cb, var_9c076b6 = 0, var
 
   wait n_timeout;
   level notify(#"pap_timeout", {
-    #var_5e879929: self,
-    #e_player: player
+    #var_5e879929: self, #e_player: player
   });
   self notify(#"pap_timeout", {
     #e_player: player

@@ -18,8 +18,7 @@ main() {
     level.hint_text_size = 1.2;
 
   setDvarIfUninitialized("trainer_debug", "0");
-  level.objectiveRegroup = 0; //used to determine if the string for the course objective is "regroup upstairs" or "run the course blah blah"
-  level.endingThreadStarted = false;
+  level.objectiveRegroup = 0; //used to determine if the string for the course objective is "regroup upstairs" or "run the course blah blah"level.endingThreadStarted = false;
   level.tryagain = false;
   level.translatordelay = 1.5;
   level.droneCallbackThread = ::AI_drone_think;
@@ -40,12 +39,7 @@ main() {
 
   level.bestPitTime = 29.05; //IW best time
   level.timeFail = 240; //anything higher than this will fail
-  level.timeEasy = 75; //anything above this number will choose "easy"
-  level.timeRegular = 43; //anything above this number but less than timeEast will choose "regular"
-  level.timeHard = 35; //anything above this number but less than timeRegular will choose "hard"
-  //veteran time.....			//anything below "timeHard" will choose "veteran"
-
-  level.maximumfriendliesalloweddead = 5; //if you kill more than 5 friendlies, you will fail
+  level.timeEasy = 75; //anything above this number will choose "easy"level.timeRegular = 43; //anything above this number but less than timeEast will choose "regular"level.timeHard = 35; //anything above this number but less than timeRegular will choose "hard"//veteran time.....			//anything below "timeHard" will choose "veteran"level.maximumfriendliesalloweddead = 5; //if you kill more than 5 friendlies, you will fail
   level.minimumenemiestokill = 18; //you have to kill at leat 18 enemies to pass
 
   level.timepenaltyForMissedEnemies = 2; //in seconds
@@ -556,8 +550,7 @@ firing_range_hip_and_ads() {
       pickup_rifle glow();
       pickup_rifle HidePart("TAG_THERMAL_SCOPE");
       //pickup_rifle HidePart( "TAG_FOREGRIP" );
-      //pickup_rifle HidePart( "TAG_WEAPON"
-      pickup_rifle HidePart("TAG_ACOG_2");
+      //pickup_rifle HidePart( "TAG_WEAPON"pickup_rifle HidePart("TAG_ACOG_2");
       pickup_rifle HidePart("TAG_EOTECH");
       pickup_rifle HidePart("TAG_HEARTBEAT");
       pickup_rifle HidePart("TAG_M203");
@@ -1086,8 +1079,7 @@ firing_range_timed_ads() {
 
     if(level.num_hit > 6) {
       if(level.num_hit_with_ads > 4) {
-        //PASS: Player hit more than 6 targets in the alotted time,
-        //at least 5 of which were in ADS
+        //PASS: Player hit more than 6 targets in the alotted time, //at least 5 of which were in ADS
         break;
       }
     }
@@ -1974,12 +1966,10 @@ course_loop_think() {
     } else {
       //			jump_off_trigger thread jumpoff_monitor();
       //
-      //			//"Replace any flash bangs you used."
-      //			level.price execDialog( "replaceflash" );
+      //			//"Replace any flash bangs you used."//			level.price execDialog( "replaceflash" );
       //			if( !( level.player getCurrentWeapon() == "mp5" ) )
       //			{
-      //				//"Equip your MP5."
-      //				level.price execDialog( "equipmp5" );
+      //				//"Equip your MP5."//				level.price execDialog( "equipmp5" );
       //			}
     }
 
@@ -2126,8 +2116,7 @@ course_loop_think() {
       thread flag_on_notify("sprinted");
 
       //player must sprint
-      if(level.xenon) // ghetto but PS3 requires "Press X" and 360 requires "Click X"
-        thread key_hint_till_flag_set("sprint", "player_course_end");
+      if(level.xenon) // ghetto but PS3 requires "Press X" and 360 requires "Click X"thread key_hint_till_flag_set("sprint", "player_course_end");
       else
         thread key_hint_till_flag_set("sprint_pc", "player_course_end");
 
@@ -3730,8 +3719,7 @@ init_precache() {
   precachestring(&"TRAINER_MISSED_ENEMY_PENALTY_NONE");
   precachestring(&"TRAINER_MISSED_ENEMY_PENALTY");
 
-  // Accuracy bonus:+
-  precachestring(&"TRAINER_ACCURACY_BONUS");
+  // Accuracy bonus:+ precachestring(&"TRAINER_ACCURACY_BONUS");
   // Cargoship Bridge
   precachestring(&"TRAINER_SHIP_LABEL");
   // Cargoship Deck
@@ -5149,8 +5137,7 @@ killTimer(best_time, deck) {
 
   //Enemies missed penalty	10.00 sec
   //Civilians killed penalty	20.00 sec
-  //Accuracy					37%
-  //Accuracy bonus			00.00 sec
+  //Accuracy					37% //Accuracy bonus			00.00 sec
 
   //Final Time				1:09:00
   //IW Best Time				
@@ -5209,8 +5196,7 @@ killTimer(best_time, deck) {
   level.HUDaccuracybonus.y = 130;
 
   if(level.bonus_time <= 0) {
-    //"Accuracy bonus: 0.0"
-    level.HUDaccuracybonus.label = &"TRAINER_ACCURACY_BONUS_ZERO";
+    //"Accuracy bonus: 0.0"level.HUDaccuracybonus.label = &"TRAINER_ACCURACY_BONUS_ZERO";
   } else {
     level.HUDaccuracybonus.label = &"TRAINER_ACCURACY_BONUS";
     level.HUDaccuracybonus setValue(level.bonus_time);

@@ -7,7 +7,7 @@ func_11B07() {
   self endon("killanimscript");
   self endon("stop tracking");
   self endon("melee");
-  func_11AF8( % aim_2, % aim_4, % aim_6, % aim_8);
+  func_11AF8(%aim_2, %aim_4, %aim_6, %aim_8);
 }
 
 func_11AF8(var_0, var_1, var_2, var_3, var_4) {

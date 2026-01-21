@@ -429,14 +429,10 @@ usedKillstreak(streakName, awardXp) {
 
 playEnemyDialog(streakName) {
   if(!is_aliens()) {
-    if(level.teamBased && streakName == "uplink" && [
-        [level.comExpFuncs["getRadarStrengthForTeam"]]
-      ](self.team) != 1)
+    if(level.teamBased && streakName == "uplink" && [[level.comExpFuncs["getRadarStrengthForTeam"]]](self.team) != 1)
       return false;
 
-    else if(!level.teamBased && streakName == "uplink" && [
-        [level.comExpFuncs["getRadarStrengthForPlayer"]]
-      ](self) != 2)
+    else if(!level.teamBased && streakName == "uplink" && [[level.comExpFuncs["getRadarStrengthForPlayer"]]](self) != 2)
       return false;
   }
 
@@ -488,9 +484,7 @@ updateKillstreaks(keepCurrent) {
   } else {
     for(i = KILLSTREAK_GIMME_SLOT; i < KILLSTREAK_SLOT_3 + 1; i++) {
       self_pers_killstreaks_i = self.pers["killstreaks"][i];
-      if(isDefined(self_pers_killstreaks_i) &&
-        isDefined(self_pers_killstreaks_i.streakName) &&
-        self_pers_killstreaks_i.available) {
+      if(isDefined(self_pers_killstreaks_i) && isDefined(self_pers_killstreaks_i.streakName) && self_pers_killstreaks_i.available) {
         highestStreakIndex = i;
       }
     }
@@ -505,9 +499,7 @@ updateKillstreaks(keepCurrent) {
     } else {
       for(i = KILLSTREAK_GIMME_SLOT; i < KILLSTREAK_SLOT_3 + 1; i++) {
         self_pers_killstreaks_i = self.pers["killstreaks"][i];
-        if(isDefined(self_pers_killstreaks_i) &&
-          isDefined(self_pers_killstreaks_i.streakName) &&
-          self_pers_killstreaks_i.available) {
+        if(isDefined(self_pers_killstreaks_i) && isDefined(self_pers_killstreaks_i.streakName) && self_pers_killstreaks_i.available) {
           killstreakWeapon = getKillstreakWeapon(self_pers_killstreaks_i.streakName);
           weaponsListItems = self GetWeaponsListItems();
           hasKillstreakWeapon = false;
@@ -570,9 +562,7 @@ updateSpecialistKillstreaks() {
   } else {
     for(i = KILLSTREAK_SLOT_1; i < KILLSTREAK_SLOT_3 + 1; i++) {
       self_pers_killstreaks_i = self.pers["killstreaks"][i];
-      if(isDefined(self_pers_killstreaks_i) &&
-        isDefined(self_pers_killstreaks_i.streakName) &&
-        self_pers_killstreaks_i.available) {
+      if(isDefined(self_pers_killstreaks_i) && isDefined(self_pers_killstreaks_i.streakName) && self_pers_killstreaks_i.available) {
         streakVal = getStreakCost(self_pers_killstreaks_i.streakName);
         if(streakVal > self.adrenaline) {
           self.pers["killstreaks"][i].available = false;
@@ -715,9 +705,7 @@ killstreakUseWaiter() {
 
     waittillframeend;
 
-    if(!isDefined(self.killstreakIndexWeapon) ||
-      !isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon]) ||
-      !isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName)) {
+    if(!isDefined(self.killstreakIndexWeapon) || !isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon]) || !isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName)) {
       continue;
     }
 
@@ -827,11 +815,7 @@ removeUnitializedKillstreakWeapon() {
 
   self waittill("weapon_change", weaponName);
 
-  weaponIsStreakInFocus = isDefined(self.killstreakIndexWeapon) &&
-    isDefined(self.pers["killstreaks"]) &&
-    isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon]) &&
-    isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) &&
-    weaponName == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName);
+  weaponIsStreakInFocus = isDefined(self.killstreakIndexWeapon) && isDefined(self.pers["killstreaks"]) && isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon]) && isDefined(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName) && weaponName == getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName);
 
   if(weaponIsStreakInFocus && !isDefined(self.KS_aboutToUse)) {
     self TakeWeapon(weaponName);
@@ -1243,8 +1227,7 @@ giveKillstreakWeapon(weapon) {
 }
 
 isHoldingWeapon(weapon) {
-  return (self GetCurrentWeapon() == weapon ||
-    (isDefined(self.changingWeapon) && self.changingWeapon == weapon));
+  return (self GetCurrentWeapon() == weapon || (isDefined(self.changingWeapon) && self.changingWeapon == weapon));
 }
 
 getStreakCost(streakName) {
@@ -1331,10 +1314,7 @@ giveOwnedKillstreakItem(skipDialog) {
     keepIndex = -1;
     highestCost = -1;
     for(i = KILLSTREAK_GIMME_SLOT; i < KILLSTREAK_SLOT_3 + 1; i++) {
-      if(isDefined(self_pers_killstreaks[i]) &&
-        isDefined(self_pers_killstreaks[i].streakName) &&
-        self_pers_killstreaks[i].available &&
-        getStreakCost(self_pers_killstreaks[i].streakName) > highestCost) {
+      if(isDefined(self_pers_killstreaks[i]) && isDefined(self_pers_killstreaks[i].streakName) && self_pers_killstreaks[i].available && getStreakCost(self_pers_killstreaks[i].streakName) > highestCost) {
         highestCost = 0;
         if(!self_pers_killstreaks[i].isGimme)
           highestCost = getStreakCost(self_pers_killstreaks[i].streakName);
@@ -1355,9 +1335,7 @@ giveOwnedKillstreakItem(skipDialog) {
     highestCost = -1;
 
     for(i = KILLSTREAK_GIMME_SLOT; i < KILLSTREAK_SLOT_3 + 1; i++) {
-      if(isDefined(self_pers_killstreaks[i]) &&
-        isDefined(self_pers_killstreaks[i].streakName) &&
-        self_pers_killstreaks[i].available) {
+      if(isDefined(self_pers_killstreaks[i]) && isDefined(self_pers_killstreaks[i].streakName) && self_pers_killstreaks[i].available) {
         killstreakWeapon = getKillstreakWeapon(self_pers_killstreaks[i].streakName);
         weaponsListItems = self GetWeaponsListItems();
         hasKillstreakWeapon = false;
@@ -1544,9 +1522,7 @@ giveSelectedKillstreakItem() {
 getKillstreakCount() {
   numAvailable = 0;
   for(i = KILLSTREAK_GIMME_SLOT; i < KILLSTREAK_SLOT_3 + 1; i++) {
-    if(isDefined(self.pers["killstreaks"][i]) &&
-      isDefined(self.pers["killstreaks"][i].streakName) &&
-      self.pers["killstreaks"][i].available) {
+    if(isDefined(self.pers["killstreaks"][i]) && isDefined(self.pers["killstreaks"][i].streakName) && self.pers["killstreaks"][i].available) {
       numAvailable++;
     }
   }
@@ -1598,12 +1574,7 @@ streakSelectUpTracker() {
     if(isDefined(self.showingTacticalSelections) && self.showingTacticalSelections) {
       continue;
     }
-    if(!self isMantling() &&
-      (!isDefined(self.changingWeapon) || (isDefined(self.changingWeapon) && self.changingWeapon == "none")) &&
-      (!isKillstreakWeapon(self GetCurrentWeapon()) || isMiniGun(self GetCurrentWeapon()) || self GetCurrentWeapon() == "venomxgun_mp" || (isKillstreakWeapon(self GetCurrentWeapon()) && self isJuggernaut())) &&
-      self.streakType != "specialist" &&
-      (!isDefined(self.isCarrying) || (isDefined(self.isCarrying) && self.isCarrying == false)) &&
-      (!isDefined(self.lastStreakUsed) || (isDefined(self.lastStreakUsed) && (GetTime() - self.lastStreakUsed) > 100))) {
+    if(!self isMantling() && (!isDefined(self.changingWeapon) || (isDefined(self.changingWeapon) && self.changingWeapon == "none")) && (!isKillstreakWeapon(self GetCurrentWeapon()) || isMiniGun(self GetCurrentWeapon()) || self GetCurrentWeapon() == "venomxgun_mp" || (isKillstreakWeapon(self GetCurrentWeapon()) && self isJuggernaut())) && self.streakType != "specialist" && (!isDefined(self.isCarrying) || (isDefined(self.isCarrying) && self.isCarrying == false)) && (!isDefined(self.lastStreakUsed) || (isDefined(self.lastStreakUsed) && (GetTime() - self.lastStreakUsed) > 100))) {
       self shuffleKillstreaksUp();
       self SetClientOmnvar("ui_killstreak_scroll", 1);
     }
@@ -1629,12 +1600,7 @@ streakSelectDownTracker() {
     if(isDefined(self.showingTacticalSelections) && self.showingTacticalSelections) {
       continue;
     }
-    if(!self isMantling() &&
-      (!isDefined(self.changingWeapon) || (isDefined(self.changingWeapon) && self.changingWeapon == "none")) &&
-      (!isKillstreakWeapon(self GetCurrentWeapon()) || isMiniGun(self GetCurrentWeapon()) || self GetCurrentWeapon() == "venomxgun_mp" || (isKillstreakWeapon(self GetCurrentWeapon()) && self isJuggernaut())) &&
-      self.streakType != "specialist" &&
-      (!isDefined(self.isCarrying) || (isDefined(self.isCarrying) && self.isCarrying == false)) &&
-      (!isDefined(self.lastStreakUsed) || (isDefined(self.lastStreakUsed) && (GetTime() - self.lastStreakUsed) > 100))) {
+    if(!self isMantling() && (!isDefined(self.changingWeapon) || (isDefined(self.changingWeapon) && self.changingWeapon == "none")) && (!isKillstreakWeapon(self GetCurrentWeapon()) || isMiniGun(self GetCurrentWeapon()) || self GetCurrentWeapon() == "venomxgun_mp" || (isKillstreakWeapon(self GetCurrentWeapon()) && self isJuggernaut())) && self.streakType != "specialist" && (!isDefined(self.isCarrying) || (isDefined(self.isCarrying) && self.isCarrying == false)) && (!isDefined(self.lastStreakUsed) || (isDefined(self.lastStreakUsed) && (GetTime() - self.lastStreakUsed) > 100))) {
       self shuffleKillstreaksDown();
       self SetClientOmnvar("ui_killstreak_scroll", 1);
     }
@@ -1901,11 +1867,7 @@ pc_watchStreakUse() {
         if(isDefined(self.killstreakIndexWeapon)) {
           killstreakWeapon = getKillstreakWeapon(self.pers["killstreaks"][self.killstreakIndexWeapon].streakName);
 
-          if(newWeapon == killstreakWeapon ||
-            newWeapon == "none" ||
-            (killstreakWeapon == "killstreak_uav_mp" && newWeapon == "killstreak_remote_uav_mp") ||
-            (killstreakWeapon == "killstreak_uav_mp" && newWeapon == "uav_remote_mp") ||
-            isAltToggle) {
+          if(newWeapon == killstreakWeapon || newWeapon == "none" || (killstreakWeapon == "killstreak_uav_mp" && newWeapon == "killstreak_remote_uav_mp") || (killstreakWeapon == "killstreak_uav_mp" && newWeapon == "uav_remote_mp") || isAltToggle) {
             continue;
           }
           break;

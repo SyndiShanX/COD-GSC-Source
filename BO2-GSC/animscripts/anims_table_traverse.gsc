@@ -24,10 +24,10 @@ setup_traversal_anim_array(animtype, array) {
   array[animtype]["move"]["stand"]["rifle"]["ladder_start"] = % ladder_climbon_bottom_walk;
   array[animtype]["move"]["stand"]["rifle"]["ladder_climb"] = % ladder_climbup;
   array[animtype]["move"]["stand"]["rifle"]["ladder_end"] = % ladder_climboff;
-  array[animtype]["move"]["stand"]["rifle"]["traverse_40_death_start"] = array( % traverse40_death_start, % traverse40_death_start_2);
-  array[animtype]["move"]["stand"]["rifle"]["traverse_40_death_end"] = array( % traverse40_death_end, % traverse40_death_end_2);
-  array[animtype]["move"]["stand"]["rifle"]["traverse_90_death_start"] = array( % traverse90_start_death);
-  array[animtype]["move"]["stand"]["rifle"]["traverse_90_death_end"] = array( % traverse90_end_death);
+  array[animtype]["move"]["stand"]["rifle"]["traverse_40_death_start"] = array(%traverse40_death_start, %traverse40_death_start_2);
+  array[animtype]["move"]["stand"]["rifle"]["traverse_40_death_end"] = array(%traverse40_death_end, %traverse40_death_end_2);
+  array[animtype]["move"]["stand"]["rifle"]["traverse_90_death_start"] = array(%traverse90_start_death);
+  array[animtype]["move"]["stand"]["rifle"]["traverse_90_death_end"] = array(%traverse90_end_death);
   array[animtype]["move"]["stand"]["rifle"]["mantle_on_36"] = % ai_mantle_on_36;
   array[animtype]["move"]["stand"]["rifle"]["mantle_on_40"] = % ai_mantle_on_40;
   array[animtype]["move"]["stand"]["rifle"]["mantle_on_48"] = % ai_mantle_on_48;
@@ -36,7 +36,7 @@ setup_traversal_anim_array(animtype, array) {
   array[animtype]["move"]["stand"]["rifle"]["mantle_over_36"] = % ai_mantle_over_36;
   array[animtype]["move"]["stand"]["rifle"]["mantle_over_40"] = % ai_mantle_over_40;
   array[animtype]["move"]["stand"]["rifle"]["mantle_over_40_to_cover"] = % traverse40_2_cover;
-  array[animtype]["move"]["stand"]["rifle"]["mantle_over_40_down_80"] = array( % ai_mantle_over_40_down_80, % ai_mantle_over_40_down_80_v2);
+  array[animtype]["move"]["stand"]["rifle"]["mantle_over_40_down_80"] = array(%ai_mantle_over_40_down_80, %ai_mantle_over_40_down_80_v2);
   array[animtype]["move"]["stand"]["rifle"]["mantle_over_96"] = % ai_mantle_over_96;
   array[animtype]["move"]["stand"]["rifle"]["mantle_window_36_run"] = % ai_mantle_window_36_run;
   array[animtype]["move"]["stand"]["rifle"]["mantle_window_36_stop"] = % ai_mantle_window_36_stop;

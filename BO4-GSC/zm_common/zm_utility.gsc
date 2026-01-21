@@ -702,9 +702,7 @@ generated_radius_attract_positions(forward, offset, num_positions, attract_radiu
     rotated_forward = (cos(i) * altforward[0] - sin(i) * altforward[1], sin(i) * altforward[0] + cos(i) * altforward[1], altforward[2]);
 
     if(isDefined(level.poi_positioning_func)) {
-      pos = [
-        [level.poi_positioning_func]
-      ](self.origin, rotated_forward);
+      pos = [[level.poi_positioning_func]](self.origin, rotated_forward);
     } else if(isDefined(level.use_alternate_poi_positioning) && level.use_alternate_poi_positioning) {
       pos = zm_server_throttle::server_safe_ground_trace("poi_trace", 10, self.origin + rotated_forward + (0, 0, 10));
     } else {
@@ -943,9 +941,7 @@ remove_poi_attractor(zombie_poi) {
 
 array_check_for_dupes_using_compare(array, single, is_equal_fn) {
   for(i = 0; i < array.size; i++) {
-    if([
-        [is_equal_fn]
-      ](array[i], single)) {
+    if([[is_equal_fn]](array[i], single)) {
       return false;
     }
   }
@@ -1304,8 +1300,7 @@ function_c52e1749(origin, players) {
 
       if(getdvarint(#"hash_4477ab37a00b1492", 1) == 1) {
         position_info = {
-          #player: player,
-          #origin: pos
+          #player: player, #origin: pos
         };
 
         if(!isDefined(var_448ee423)) {
@@ -2460,8 +2455,7 @@ get_current_zone(return_zone = 0) {
         self.cached_zone_name = self.cached_zone.name;
         self.cached_zone_volume = undefined;
         self notify(#"zone_change", {
-          #zone: self.cached_zone,
-          #zone_name: self.cached_zone_name
+          #zone: self.cached_zone, #zone_name: self.cached_zone_name
         });
       }
 
@@ -2483,8 +2477,7 @@ get_current_zone(return_zone = 0) {
             self.cached_zone_volume = i;
             self.var_3b65cdd7 = undefined;
             self notify(#"zone_change", {
-              #zone: zone,
-              #zone_name: zone.name
+              #zone: zone, #zone_name: zone.name
             });
           }
 
@@ -3260,9 +3253,7 @@ get_closest_index_to_entity(entity, array, dist, extra_check) {
   index = undefined;
 
   for(i = 0; i < array.size; i++) {
-    if(isDefined(extra_check) && ![
-        [extra_check]
-      ](entity, array[i])) {
+    if(isDefined(extra_check) && ![[extra_check]](entity, array[i])) {
       continue;
     }
 
@@ -4489,9 +4480,7 @@ function_25e3484e(v_pos, n_spacing = 400, var_3e807a14) {
   }
 
   if(isDefined(level.var_3e96c707)) {
-    if(![
-        [level.var_3e96c707]
-      ](v_pos)) {
+    if(![[level.var_3e96c707]](v_pos)) {
       return false;
     }
   }

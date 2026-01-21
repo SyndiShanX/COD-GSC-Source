@@ -601,7 +601,7 @@ player_camera_shake_loop(n_intensity, n_time, v_org, n_radius) {
 #using_animtree("player");
 
 cliff_swing_6_rumble() {
-  wait(getanimlength( % p_mon_01_01_cliffswing6_player) - 3);
+  wait(getanimlength(%p_mon_01_01_cliffswing6_player) - 3);
   level notify("cliff_swing_6_done");
 }
 

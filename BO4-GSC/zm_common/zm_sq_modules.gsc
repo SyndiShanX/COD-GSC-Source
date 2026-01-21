@@ -26,13 +26,7 @@ function_d8383812(id, version, var_a1261809, var_3f541f5f, var_9a323ebf, var_b8d
   }
 
   var_1d81ef2d = {
-    #id: id,
-    #capture_point: capture_point,
-    #origin: capture_point.origin,
-    #active: 0,
-    #var_62f0c1c: var_3f541f5f,
-    #var_32edfed: var_9a323ebf,
-    #var_b8d19839: var_b8d19839
+    #id: id, #capture_point: capture_point, #origin: capture_point.origin, #active: 0, #var_62f0c1c: var_3f541f5f, #var_32edfed: var_9a323ebf, #var_b8d19839: var_b8d19839
   };
   level.var_d2540500[id] = var_1d81ef2d;
   clientfield::register("actor", "sc_" + id, version, 1, "int");
@@ -77,12 +71,8 @@ function_88cb5e47(params) {
       continue;
     }
 
-    if([
-        [var_1d81ef2d.var_62f0c1c]
-      ](var_1d81ef2d.capture_point, self)) {
-      [
-        [var_1d81ef2d.var_32edfed]
-      ](var_1d81ef2d.capture_point, self);
+    if([[var_1d81ef2d.var_62f0c1c]](var_1d81ef2d.capture_point, self)) {
+      [[var_1d81ef2d.var_32edfed]](var_1d81ef2d.capture_point, self);
       self clientfield::set("sc_" + var_1d81ef2d.id, 1);
       break;
     }

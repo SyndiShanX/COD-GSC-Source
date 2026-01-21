@@ -539,24 +539,24 @@ get_perk_weapon_model(perk) {
 update_animation(animation) {
   switch (animation) {
     case "start":
-      self clearanim( % root, 0.2);
-      self setanim( % o_zombie_dlc4_vending_diesel_turn_on, 1, 0.2, 1);
+      self clearanim(%root, 0.2);
+      self setanim(%o_zombie_dlc4_vending_diesel_turn_on, 1, 0.2, 1);
       break;
     case "shut_down":
-      self clearanim( % root, 0.2);
-      self setanim( % o_zombie_dlc4_vending_diesel_turn_off, 1, 0.2, 1);
+      self clearanim(%root, 0.2);
+      self setanim(%o_zombie_dlc4_vending_diesel_turn_off, 1, 0.2, 1);
       break;
     case "in_use":
-      self clearanim( % root, 0.2);
-      self setanim( % o_zombie_dlc4_vending_diesel_ballspin_loop, 1, 0.2, 1);
+      self clearanim(%root, 0.2);
+      self setanim(%o_zombie_dlc4_vending_diesel_ballspin_loop, 1, 0.2, 1);
       break;
     case "idle":
-      self clearanim( % root, 0.2);
-      self setanim( % o_zombie_dlc4_vending_diesel_on_idle, 1, 0.2, 1);
+      self clearanim(%root, 0.2);
+      self setanim(%o_zombie_dlc4_vending_diesel_on_idle, 1, 0.2, 1);
       break;
     default:
-      self clearanim( % root, 0.2);
-      self setanim( % o_zombie_dlc4_vending_diesel_on_idle, 1, 0.2, 1);
+      self clearanim(%root, 0.2);
+      self setanim(%o_zombie_dlc4_vending_diesel_on_idle, 1, 0.2, 1);
       break;
   }
 }

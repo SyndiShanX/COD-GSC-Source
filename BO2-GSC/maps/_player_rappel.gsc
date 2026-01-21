@@ -642,7 +642,7 @@ _rappel_landing() {
     self notify("_rappel_safe_landing");
     self disableweapons();
     self reset_near_plane();
-    self.body clearanim( % root, 0.2);
+    self.body clearanim(%root, 0.2);
     self.body maps\_anim::anim_single(self.body, self._rappel.anims.land);
     self unlink();
     self.body hide();
@@ -715,7 +715,7 @@ _rappel_descend() {
 _rappel_charge_loop_starter(str_charge_loop_anim, n_charge_time_full) {
   self endon("_rappel_jump_start");
   self waittill("_rappel_start_charge_loop");
-  self.body setanimknoball(str_charge_loop_anim, % root, 1, n_charge_time_full, 1);
+  self.body setanimknoball(str_charge_loop_anim, %root, 1, n_charge_time_full, 1);
 }
 
 _rappel_jump(n_charge_time) {
@@ -734,7 +734,7 @@ _rappel_jump(n_charge_time) {
   }
 
   self thread _rappel_fall(v_velocity);
-  self.body clearanim( % root, 1);
+  self.body clearanim(%root, 1);
   str_push_anim = level.scr_anim[self._rappel.anims.body_model][self._rappel.anims.push];
   str_idle_loop_anim = level.scr_anim[self._rappel.anims.body_model][self._rappel.anims.idle_loop][0];
   n_anim_time_push = getanimlength(str_push_anim);
@@ -745,7 +745,7 @@ _rappel_jump(n_charge_time) {
     if(n_counter < n_anim_time_push)
       n_counter = n_counter + 0.05;
     else {
-      self.body setanimknoball(str_idle_loop_anim, % root, 1, n_anim_time_push, 1);
+      self.body setanimknoball(str_idle_loop_anim, %root, 1, n_anim_time_push, 1);
       break;
     }
 
@@ -856,14 +856,14 @@ _rappel_do_falling_death() {
   str_fall_death_splat = level.scr_anim[self._rappel.anims.body_model][self._rappel.anims.fall_splat];
   n_anim_length = getanimlength(str_fall_death);
   str_deadquote = self._rappel.strings.death_string;
-  self.body setanimknoball(str_fall_death, % root, 1, 0.2, 1);
+  self.body setanimknoball(str_fall_death, %root, 1, 0.2, 1);
   n_counter = 0;
 
   while(!self._rappel.status.on_ground) {
     if(n_counter < n_anim_length)
       n_counter = n_counter + 0.05;
     else
-      self.body setanimknoball(str_fall_death_loop, % root, 1, 0.2, 1);
+      self.body setanimknoball(str_fall_death_loop, %root, 1, 0.2, 1);
 
     wait 0.05;
   }
@@ -872,7 +872,7 @@ _rappel_do_falling_death() {
   v_offset = vectorscale((0, 0, 1), 10.0);
   self._rappel.ent moveto(v_ground_pos + v_offset, 0.05);
   n_fall_death_length = getanimlength(str_fall_death_splat);
-  self.body setanimknoball(str_fall_death_splat, % root, 1, 0, 1);
+  self.body setanimknoball(str_fall_death_splat, %root, 1, 0, 1);
   earthquake(1.0, 0.5, self.origin, 500);
   wait(n_fall_death_length);
   setdvar("ui_deadquote", str_deadquote);
@@ -955,7 +955,7 @@ _rappel_brake(n_charge_time) {
   str_brake_loop_anim = level.scr_anim[self._rappel.anims.body_model][self._rappel.anims.brake_loop][0];
   n_brake_anim_length = getanimlength(str_brake_anim);
   n_time_to_stop = n_frames_to_stop * 0.05;
-  self.body setanimknoball(str_brake_anim, % root, 1, 0, 1);
+  self.body setanimknoball(str_brake_anim, %root, 1, 0, 1);
   v_distance_traveled = (0, 0, 0);
 
   for(i = n_frames_to_stop; i > 0; i--) {
@@ -966,7 +966,7 @@ _rappel_brake(n_charge_time) {
     wait 0.05;
   }
 
-  self.body setanimknoball(str_brake_loop_anim, % root, 1, 0.5, 1);
+  self.body setanimknoball(str_brake_loop_anim, %root, 1, 0.5, 1);
   wait 0.5;
   self._rappel.status.is_descending = 0;
   self thread _rappel_brake_then_idle();

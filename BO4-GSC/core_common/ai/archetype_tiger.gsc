@@ -367,9 +367,7 @@ tigertargetservice(behaviortreeentity) {
 
   if(isDefined(behaviortreeentity.favoriteenemy)) {
     if(isDefined(level.enemy_location_override_func)) {
-      goalpos = [
-        [level.enemy_location_override_func]
-      ](behaviortreeentity, behaviortreeentity.favoriteenemy);
+      goalpos = [[level.enemy_location_override_func]](behaviortreeentity, behaviortreeentity.favoriteenemy);
 
       if(isDefined(goalpos)) {
         behaviortreeentity setgoal(goalpos);

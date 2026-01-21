@@ -1723,9 +1723,7 @@ allowboostjump(var_0, var_1, var_2, var_3) {
     }
 
     if(isDefined(var_1)) {
-      [
-        [var_1]
-      ](var_0);
+      [[var_1]](var_0);
     }
 
     if(isDefined(var_0.var_ED9E)) {
@@ -1763,9 +1761,7 @@ allowboostjump(var_0, var_1, var_2, var_3) {
 
     var_0 scripts\sp\utility::func_EF15();
     if(isDefined(self.var_D6EE)) {
-      [
-        [self.var_D6EE]
-      ]();
+      [[self.var_D6EE]]();
     }
 
     if(isDefined(var_0.script_delay_post)) {
@@ -1788,9 +1784,7 @@ allowboostjump(var_0, var_1, var_2, var_3) {
     }
 
     if(isDefined(var_3)) {
-      [
-        [var_3]
-      ](var_0);
+      [[var_3]](var_0);
     }
 
     if(isDefined(var_0.var_ED43) && var_0.var_ED43) {
@@ -1844,9 +1838,7 @@ ishighjumping(var_0, var_1, var_2) {
   if(!isDefined(var_0.var_ED5F)) {
     var_6 = anglesToForward(self.angles);
     if(isDefined(var_0.target)) {
-      var_7 = [
-        [var_1]
-      ](var_0.target);
+      var_7 = [[var_1]](var_0.target);
       if(var_7.size == 1) {
         var_6 = vectornormalize(var_7[0].origin - var_0.origin);
       } else if(isDefined(var_0.angles)) {

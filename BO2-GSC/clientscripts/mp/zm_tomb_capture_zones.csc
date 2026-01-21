@@ -53,8 +53,8 @@ set_generator_capture_progress(localclientnum, oldval, newval, bnewent, binitial
 }
 
 clear_fluid_column_anims() {
-  self clearanim( % fxanim_zom_tomb_generator_fluid_up_anim, 0);
-  self clearanim( % fxanim_zom_tomb_generator_fluid_down_anim, 0);
+  self clearanim(%fxanim_zom_tomb_generator_fluid_up_anim, 0);
+  self clearanim(%fxanim_zom_tomb_generator_fluid_down_anim, 0);
 }
 
 clear_pump_anims(b_skip_blend) {
@@ -66,21 +66,21 @@ clear_pump_anims(b_skip_blend) {
   if(b_skip_blend)
     n_blend_time = 0;
 
-  self clearanim( % fxanim_zom_tomb_generator_start_anim, n_blend_time);
-  self clearanim( % fxanim_zom_tomb_generator_up_idle_anim, n_blend_time);
-  self clearanim( % fxanim_zom_tomb_generator_down_idle_anim, n_blend_time);
-  self clearanim( % fxanim_zom_tomb_generator_end_anim, n_blend_time);
+  self clearanim(%fxanim_zom_tomb_generator_start_anim, n_blend_time);
+  self clearanim(%fxanim_zom_tomb_generator_up_idle_anim, n_blend_time);
+  self clearanim(%fxanim_zom_tomb_generator_down_idle_anim, n_blend_time);
+  self clearanim(%fxanim_zom_tomb_generator_end_anim, n_blend_time);
 }
 
 generator_set_progress(localclientnumber, oldval, newval) {
   if(newval == 1) {
-    self clearanim( % fxanim_zom_tomb_generator_fluid_rotate_down_anim, 0.2);
-    self setanim( % fxanim_zom_tomb_generator_fluid_rotate_up_anim, 1, 0.2, 1);
+    self clearanim(%fxanim_zom_tomb_generator_fluid_rotate_down_anim, 0.2);
+    self setanim(%fxanim_zom_tomb_generator_fluid_rotate_up_anim, 1, 0.2, 1);
   } else if(newval < oldval && oldval == 1) {
-    self clearanim( % fxanim_zom_tomb_generator_fluid_rotate_up_anim, 0.2);
-    self setanim( % fxanim_zom_tomb_generator_fluid_rotate_down_anim, 1, 0.2, 1);
-    wait(getanimlength( % fxanim_zom_tomb_generator_fluid_rotate_down_anim));
-    self clearanim( % fxanim_zom_tomb_generator_fluid_rotate_down_anim, 0.2);
+    self clearanim(%fxanim_zom_tomb_generator_fluid_rotate_up_anim, 0.2);
+    self setanim(%fxanim_zom_tomb_generator_fluid_rotate_down_anim, 1, 0.2, 1);
+    wait(getanimlength(%fxanim_zom_tomb_generator_fluid_rotate_down_anim));
+    self clearanim(%fxanim_zom_tomb_generator_fluid_rotate_down_anim, 0.2);
   }
 
   self set_fluid_height(newval);
@@ -95,8 +95,8 @@ set_fluid_height(newval, b_skip_blend) {
   if(b_skip_blend)
     n_blend_time = 0;
 
-  self setanim( % fxanim_zom_tomb_generator_fluid_up_anim, newval, n_blend_time, 1);
-  self setanim( % fxanim_zom_tomb_generator_fluid_down_anim, 1 - newval, n_blend_time, 1);
+  self setanim(%fxanim_zom_tomb_generator_fluid_up_anim, newval, n_blend_time, 1);
+  self setanim(%fxanim_zom_tomb_generator_fluid_down_anim, 1 - newval, n_blend_time, 1);
   self generator_sound_enable(newval);
 }
 
@@ -179,19 +179,19 @@ generator_state_off(localclientnumber, n_blend_time) {
 }
 
 generator_state_turn_on(localclientnumber, n_blend_time) {
-  self setanim( % fxanim_zom_tomb_generator_start_anim, 1, n_blend_time, 1);
+  self setanim(%fxanim_zom_tomb_generator_start_anim, 1, n_blend_time, 1);
   self generator_fx_enable(localclientnumber);
   self generator_offline_light_disable(localclientnumber);
 }
 
 generator_state_power_up(localclientnumber, n_blend_time) {
-  self setanim( % fxanim_zom_tomb_generator_up_idle_anim, 1, n_blend_time, 1);
+  self setanim(%fxanim_zom_tomb_generator_up_idle_anim, 1, n_blend_time, 1);
   self generator_fx_enable(localclientnumber);
   self generator_offline_light_disable(localclientnumber);
 }
 
 generator_state_power_down(localclientnumber, n_blend_time) {
-  self setanim( % fxanim_zom_tomb_generator_down_idle_anim, 1, n_blend_time, 1);
+  self setanim(%fxanim_zom_tomb_generator_down_idle_anim, 1, n_blend_time, 1);
 }
 
 generator_state_damaged(localclientnumber, n_blend_time) {
@@ -247,7 +247,7 @@ generator_delete_damage_fx(localclientnumber) {
 }
 
 generator_state_turn_off(localclientnumber, n_blend_time) {
-  self setanim( % fxanim_zom_tomb_generator_end_anim, 1, n_blend_time, 1);
+  self setanim(%fxanim_zom_tomb_generator_end_anim, 1, n_blend_time, 1);
   self generator_fx_disable(localclientnumber);
   self generator_offline_light_enable(localclientnumber);
 }
@@ -473,10 +473,10 @@ pap_ring_pulled_down_anim() {
   self notify("pap_ring_pulling_down");
   self endon("pap_ring_released");
   self clear_all_pap_ring_anims();
-  self setanim( % fxanim_zom_tomb_monolith_inductor_pull_anim, 1, 0.2);
-  waitrealtime(getanimlength( % fxanim_zom_tomb_monolith_inductor_pull_anim) - 0.2);
-  self clearanim( % fxanim_zom_tomb_monolith_inductor_pull_anim, 0.2);
-  self setanim( % fxanim_zom_tomb_monolith_inductor_pull_idle_anim, 1, 0.2);
+  self setanim(%fxanim_zom_tomb_monolith_inductor_pull_anim, 1, 0.2);
+  waitrealtime(getanimlength(%fxanim_zom_tomb_monolith_inductor_pull_anim) - 0.2);
+  self clearanim(%fxanim_zom_tomb_monolith_inductor_pull_anim, 0.2);
+  self setanim(%fxanim_zom_tomb_monolith_inductor_pull_idle_anim, 1, 0.2);
 }
 
 pap_ring_released_anim(oldval) {
@@ -485,12 +485,12 @@ pap_ring_released_anim(oldval) {
   self clear_all_pap_ring_anims();
 
   if(oldval) {
-    self setanim( % fxanim_zom_tomb_monolith_inductor_release_anim, 1, 0.2);
-    waitrealtime(getanimlength( % fxanim_zom_tomb_monolith_inductor_release_anim) - 0.2);
+    self setanim(%fxanim_zom_tomb_monolith_inductor_release_anim, 1, 0.2);
+    waitrealtime(getanimlength(%fxanim_zom_tomb_monolith_inductor_release_anim) - 0.2);
     self clear_all_pap_ring_anims();
   }
 
-  self setanim( % fxanim_zom_tomb_monolith_inductor_idle_anim, 1, 0.2);
+  self setanim(%fxanim_zom_tomb_monolith_inductor_idle_anim, 1, 0.2);
 }
 
 pap_monolith_ring_shake(localclientnumber, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -499,19 +499,19 @@ pap_monolith_ring_shake(localclientnumber, oldval, newval, bnewent, binitialsnap
 
   if(newval == 1) {
     m_ring clear_all_pap_ring_anims();
-    m_ring setanim( % fxanim_zom_tomb_monolith_inductor_shake_anim, 1, 0.2);
-    waitrealtime(getanimlength( % fxanim_zom_tomb_monolith_inductor_shake_anim) - 0.2);
-    m_ring clearanim( % fxanim_zom_tomb_monolith_inductor_shake_anim, 0.2);
-    m_ring setanim( % fxanim_zom_tomb_monolith_inductor_idle_anim, 1, 0.2);
+    m_ring setanim(%fxanim_zom_tomb_monolith_inductor_shake_anim, 1, 0.2);
+    waitrealtime(getanimlength(%fxanim_zom_tomb_monolith_inductor_shake_anim) - 0.2);
+    m_ring clearanim(%fxanim_zom_tomb_monolith_inductor_shake_anim, 0.2);
+    m_ring setanim(%fxanim_zom_tomb_monolith_inductor_idle_anim, 1, 0.2);
   }
 }
 
 clear_all_pap_ring_anims() {
-  self clearanim( % fxanim_zom_tomb_monolith_inductor_pull_anim, 0.2);
-  self clearanim( % fxanim_zom_tomb_monolith_inductor_pull_idle_anim, 0.2);
-  self clearanim( % fxanim_zom_tomb_monolith_inductor_release_anim, 0.2);
-  self clearanim( % fxanim_zom_tomb_monolith_inductor_shake_anim, 0.2);
-  self clearanim( % fxanim_zom_tomb_monolith_inductor_idle_anim, 0.2);
+  self clearanim(%fxanim_zom_tomb_monolith_inductor_pull_anim, 0.2);
+  self clearanim(%fxanim_zom_tomb_monolith_inductor_pull_idle_anim, 0.2);
+  self clearanim(%fxanim_zom_tomb_monolith_inductor_release_anim, 0.2);
+  self clearanim(%fxanim_zom_tomb_monolith_inductor_shake_anim, 0.2);
+  self clearanim(%fxanim_zom_tomb_monolith_inductor_idle_anim, 0.2);
 }
 
 lerp_glow_to_value(localclientnumber, n_value) {
@@ -641,13 +641,13 @@ capture_zombie_riser_fx() {
 }
 
 register_pack_a_punch_anim_sequence() {
-  add_pack_a_punch_progress_anims(0, undefined, % fxanim_zom_tomb_pack_return_pc1_anim);
-  add_pack_a_punch_progress_anims(1, % fxanim_zom_tomb_packapunch_pc1_anim, % fxanim_zom_tomb_pack_return_pc2_anim);
-  add_pack_a_punch_progress_anims(2, % fxanim_zom_tomb_packapunch_pc2_anim, % fxanim_zom_tomb_pack_return_pc3_anim);
-  add_pack_a_punch_progress_anims(3, % fxanim_zom_tomb_packapunch_pc3_anim, % fxanim_zom_tomb_pack_return_pc4_anim);
-  add_pack_a_punch_progress_anims(4, % fxanim_zom_tomb_packapunch_pc4_anim, % fxanim_zom_tomb_pack_return_pc5_anim);
-  add_pack_a_punch_progress_anims(5, % fxanim_zom_tomb_packapunch_pc5_anim, % fxanim_zom_tomb_pack_return_pc6_anim);
-  add_pack_a_punch_progress_anims(6, % fxanim_zom_tomb_packapunch_pc6_anim, undefined);
+  add_pack_a_punch_progress_anims(0, undefined, %fxanim_zom_tomb_pack_return_pc1_anim);
+  add_pack_a_punch_progress_anims(1, %fxanim_zom_tomb_packapunch_pc1_anim, %fxanim_zom_tomb_pack_return_pc2_anim);
+  add_pack_a_punch_progress_anims(2, %fxanim_zom_tomb_packapunch_pc2_anim, %fxanim_zom_tomb_pack_return_pc3_anim);
+  add_pack_a_punch_progress_anims(3, %fxanim_zom_tomb_packapunch_pc3_anim, %fxanim_zom_tomb_pack_return_pc4_anim);
+  add_pack_a_punch_progress_anims(4, %fxanim_zom_tomb_packapunch_pc4_anim, %fxanim_zom_tomb_pack_return_pc5_anim);
+  add_pack_a_punch_progress_anims(5, %fxanim_zom_tomb_packapunch_pc5_anim, %fxanim_zom_tomb_pack_return_pc6_anim);
+  add_pack_a_punch_progress_anims(6, %fxanim_zom_tomb_packapunch_pc6_anim, undefined);
 }
 
 play_pap_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

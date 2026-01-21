@@ -28,10 +28,10 @@ set_vehicle_anims(positions) {
   positions[1].vehicle_getoutsound = "pavelow_door_open";
   positions[1].vehicle_getinsound = "pavelow_door_close";
 
-  positions[1].delay = getanimlength( % ch46_doors_open) - 1.7;
-  positions[2].delay = getanimlength( % ch46_doors_open) - 1.7;
-  positions[3].delay = getanimlength( % ch46_doors_open) - 1.7;
-  positions[4].delay = getanimlength( % ch46_doors_open) - 1.7;
+  positions[1].delay = getanimlength(%ch46_doors_open) - 1.7;
+  positions[2].delay = getanimlength(%ch46_doors_open) - 1.7;
+  positions[3].delay = getanimlength(%ch46_doors_open) - 1.7;
+  positions[4].delay = getanimlength(%ch46_doors_open) - 1.7;
 
   return positions;
 }
@@ -113,7 +113,5 @@ and these lines in your CSV:
 include,vehicle_pavelow
 sound,vehicle_pavelow,vehicle_standard,all_sp
 
-defaultmdl="vehicle_pavelow"
-default:"vehicletype" "pavelow"
-default:"script_team" "allies"
+defaultmdl="vehicle_pavelow"default:"vehicletype" "pavelow"default:"script_team" "allies"
 */

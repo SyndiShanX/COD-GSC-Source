@@ -265,65 +265,45 @@ dialogue() {
   /*-----------------------
   UNDERWATER SEQUENCE
   -------------------------*/
-  //"Sub Command: USS Indiana actual to drydock shelter. We have a go."
-  level.scr_radio["oilrig_sbc_drydock"] = "oilrig_sbc_drydock";
+  //"Sub Command: USS Indiana actual to drydock shelter. We have a go."level.scr_radio["oilrig_sbc_drydock"] = "oilrig_sbc_drydock";
 
-  //"Sub Officer: Flooding DDS hangar."
-  //level.scr_radio[ "oilrig_sbo_flooding" ] = "oilrig_sbo_flooding";
+  //"Sub Officer: Flooding DDS hangar."//level.scr_radio[ "oilrig_sbo_flooding" ] = "oilrig_sbo_flooding";
 
-  //"Sub Officer: DDS hangar flooded. Full pressure."
-  level.scr_radio["oilrig_sbo_fullpressure"] = "oilrig_sbo_fullpressure";
+  //"Sub Officer: DDS hangar flooded. Full pressure."level.scr_radio["oilrig_sbo_fullpressure"] = "oilrig_sbo_fullpressure";
 
-  //"Sub Command: Begin deployment."
-  level.scr_radio["oilrig_sbc_deployment"] = "oilrig_sbc_deployment";
+  //"Sub Command: Begin deployment."level.scr_radio["oilrig_sbc_deployment"] = "oilrig_sbc_deployment";
 
-  //"Sub Officer: Opening DDS hatch, vehicle is in position."
-  //level.scr_radio[ "oilrig_sbo_vehicleposition" ] = "oilrig_sbo_vehicleposition";
+  //"Sub Officer: Opening DDS hatch, vehicle is in position."//level.scr_radio[ "oilrig_sbo_vehicleposition" ] = "oilrig_sbo_vehicleposition";
 
-  //"Sub Officer: Team one SDV is away."
-  level.scr_radio["oilrig_sbo_tm1away"] = "oilrig_sbo_tm1away";
+  //"Sub Officer: Team one SDV is away."level.scr_radio["oilrig_sbo_tm1away"] = "oilrig_sbo_tm1away";
 
-  //"Sub Command: Team two SDV en route to objective."
-  //level.scr_radio[ "oilrig_sbc_enroute" ] = "oilrig_sbc_enroute";
+  //"Sub Command: Team two SDV en route to objective."//level.scr_radio[ "oilrig_sbc_enroute" ] = "oilrig_sbc_enroute";
 
-  //"Sub Command: USS Dallas deploying team two. RV at the objective."
-  level.scr_radio["oilrig_sbc_ussdallas"] = "oilrig_sbc_ussdallas";
+  //"Sub Command: USS Dallas deploying team two. RV at the objective."level.scr_radio["oilrig_sbc_ussdallas"] = "oilrig_sbc_ussdallas";
 
-  //"Sub Command: USS Indiana proceeding to overlook. Good luck."
-  //level.scr_radio[ "oilrig_sbc_overlook" ] = "oilrig_sbc_overlook";
+  //"Sub Command: USS Indiana proceeding to overlook. Good luck."//level.scr_radio[ "oilrig_sbc_overlook" ] = "oilrig_sbc_overlook";
 
-  //"Sub Command: Team two at the objective."
-  level.scr_radio["oilrig_sbc_tm2objective"] = "oilrig_sbc_tm2objective";
+  //"Sub Command: Team two at the objective."level.scr_radio["oilrig_sbc_tm2objective"] = "oilrig_sbc_tm2objective";
 
-  //"Sub Command: Team one has reached the objective."
-  //level.scr_radio[ "oilrig_sbc_tm1objective" ] = "oilrig_sbc_tm1objective";
+  //"Sub Command: Team one has reached the objective."//level.scr_radio[ "oilrig_sbc_tm1objective" ] = "oilrig_sbc_tm1objective";
 
-  //"Sub Officer: Team one in position."
-  //level.scr_radio[ "oilrig_sbo_tm1position" ] = "oilrig_sbo_tm1position";
+  //"Sub Officer: Team one in position."//level.scr_radio[ "oilrig_sbo_tm1position" ] = "oilrig_sbo_tm1position";
 
-  //"Sub Officer: Team signals A-OK."
-  //level.scr_radio[ "oilrig_sbo_teamsignals" ] = "oilrig_sbo_teamsignals";
+  //"Sub Officer: Team signals A-OK."//level.scr_radio[ "oilrig_sbo_teamsignals" ] = "oilrig_sbo_teamsignals";
 
-  //"Sub Officer: Roger that."
-  //level.scr_radio[ "oilrig_sbo_rogerthat" ] = "oilrig_sbo_rogerthat";
+  //"Sub Officer: Roger that."//level.scr_radio[ "oilrig_sbo_rogerthat" ] = "oilrig_sbo_rogerthat";
 
-  //"Sub Officer: Hotel-Six bearing zero-one-niner."
-  level.scr_radio["oilrig_sbo_zerooneniner"] = "oilrig_sbo_zerooneniner";
+  //"Sub Officer: Hotel-Six bearing zero-one-niner."level.scr_radio["oilrig_sbo_zerooneniner"] = "oilrig_sbo_zerooneniner";
 
-  //"Sub Officer: Hotel-Six depth 26 meters."
-  level.scr_radio["oilrig_sbo_depth26"] = "oilrig_sbo_depth26";
+  //"Sub Officer: Hotel-Six depth 26 meters."level.scr_radio["oilrig_sbo_depth26"] = "oilrig_sbo_depth26";
 
-  //"Sub Officer: SDV approaching objective. 10 knots."
-  //level.scr_radio[ "oilrig_sbo_approaching" ] = "oilrig_sbo_approaching";
+  //"Sub Officer: SDV approaching objective. 10 knots."//level.scr_radio[ "oilrig_sbo_approaching" ] = "oilrig_sbo_approaching";
 
-  //"Sub Officer: Bearing zero-one-niner, 11 knots."
-  //level.scr_radio[ "oilrig_sbo_11knots" ] = "oilrig_sbo_11knots";
+  //"Sub Officer: Bearing zero-one-niner, 11 knots."//level.scr_radio[ "oilrig_sbo_11knots" ] = "oilrig_sbo_11knots";
 
-  //"Sub Officer: Hotel-Six depth 20 meters."
-  level.scr_radio["oilrig_sbo_depth20"] = "oilrig_sbo_depth20";
+  //"Sub Officer: Hotel-Six depth 20 meters."level.scr_radio["oilrig_sbo_depth20"] = "oilrig_sbo_depth20";
 
-  //"Sub Officer: Depth 10 meters."
-  //level.scr_radio[ "oilrig_sbo_depth10" ] = "oilrig_sbo_depth10";
+  //"Sub Officer: Depth 10 meters."//level.scr_radio[ "oilrig_sbo_depth10" ] = "oilrig_sbo_depth10";
 
   /*-----------------------
   INTRO GERMAN CONVERSATION
@@ -408,12 +388,10 @@ dialogue() {
   //SEAL LEADER (radio): Two hostiles down in section 1-alpha. Moving up to section 2.
   level.scr_radio["oilrig_nsl_sect1alpha"] = "oilrig_nsl_sect1alpha";
 
-  //"Sub Command: Roger that, Hotel Six."
-  //radio_dialogue( "oilrig_sbc_rogerhtlsix" );
+  //"Sub Command: Roger that, Hotel Six."//radio_dialogue( "oilrig_sbc_rogerhtlsix" );
   level.scr_radio["oilrig_sbc_rogerhtlsix"] = "oilrig_sbc_rogerhtlsix";
 
-  //"Navy Seal 1: Got a visual by the railing."
-  level.scr_radio["oilrig_ns1_visbyrailing"] = "oilrig_ns1_visbyrailing";
+  //"Navy Seal 1: Got a visual by the railing."level.scr_radio["oilrig_ns1_visbyrailing"] = "oilrig_ns1_visbyrailing";
 
   //SEAL LEADER (radio): Free to engage. Suppressed weapons only.
   level.scr_radio["oilrig_nsl_suppweapons"] = "oilrig_nsl_suppweapons";
@@ -440,8 +418,7 @@ dialogue() {
   BREACHING DIALOGUE
   -------------------------*/
 
-  //"Sub Command: Civilian hostages hostages at your position, watch your fire."
-  //radio_dialogue( "oilrig_sbc_civilhostages" );
+  //"Sub Command: Civilian hostages hostages at your position, watch your fire."//radio_dialogue( "oilrig_sbc_civilhostages" );
   level.scr_radio["oilrig_sbc_civilhostages"] = "oilrig_sbc_civilhostages";
 
   //SEAL COMMANDER (radio): Roger that. Team one moving to breach.
@@ -452,66 +429,51 @@ dialogue() {
   //radio_dialogue( "oilrig_nsl_framecharge" );
   level.scr_radio["oilrig_nsl_framecharge"] = "oilrig_nsl_framecharge";
 
-  //"Seal Leader: Get a charge on the door. We'll breach from both sides."
-  //radio_dialogue( "oilrig_nsl_chargeondoor" );
+  //"Seal Leader: Get a charge on the door. We'll breach from both sides."//radio_dialogue( "oilrig_nsl_chargeondoor" );
   level.scr_radio["oilrig_nsl_chargeondoor"] = "oilrig_nsl_chargeondoor";
 
-  //"Seal Leader: Blow the doors. We'll hit them from both sides."
-  //radio_dialogue( "oilrig_nsl_blowdoors" );
+  //"Seal Leader: Blow the doors. We'll hit them from both sides."//radio_dialogue( "oilrig_nsl_blowdoors" );
   level.scr_radio["oilrig_nsl_blowdoors"] = "oilrig_nsl_blowdoors";
 
-  //"Seal Leader: Get into position."
-  level.scr_radio["oilrig_nsl_intopostion"] = "oilrig_nsl_intopostion";
+  //"Seal Leader: Get into position."level.scr_radio["oilrig_nsl_intopostion"] = "oilrig_nsl_intopostion";
 
   //SEAL COMMANDER (radio): Get a frame charge on the door. We'll hit the room from both sides.
   //radio_dialogue( "oilrig_nsl_framecharge" );
   level.scr_radio["breach_nag_00"] = "oilrig_nsl_framecharge";
 
-  //"Seal Leader: Get a charge on the door. We'll breach from both sides."
-  //radio_dialogue( "oilrig_nsl_chargeondoor" );
+  //"Seal Leader: Get a charge on the door. We'll breach from both sides."//radio_dialogue( "oilrig_nsl_chargeondoor" );
   level.scr_radio["breach_nag_01"] = "oilrig_nsl_chargeondoor";
 
-  //"Seal Leader: Blow the doors. We'll hit them from both sides."
-  //radio_dialogue( "oilrig_nsl_blowdoors" );
+  //"Seal Leader: Blow the doors. We'll hit them from both sides."//radio_dialogue( "oilrig_nsl_blowdoors" );
   level.scr_radio["breach_nag_02"] = "oilrig_nsl_blowdoors";
 
-  //"Seal Leader: Get into position."
-  level.scr_radio["breach_nag_03"] = "oilrig_nsl_intopostion";
+  //"Seal Leader: Get into position."level.scr_radio["breach_nag_03"] = "oilrig_nsl_intopostion";
 
-  //"Navy Seal 1: In position."
-  //radio_dialogue( "oilrig_ns1_inposition" );
+  //"Navy Seal 1: In position."//radio_dialogue( "oilrig_ns1_inposition" );
   level.scr_radio["oilrig_ns1_inposition"] = "oilrig_ns1_inposition";
 
-  //"Navy Seal 2: In position."
-  //radio_dialogue( "oilrig_ns2_inposition" );
+  //"Navy Seal 2: In position."//radio_dialogue( "oilrig_ns2_inposition" );
   level.scr_radio["oilrig_ns2_inposition"] = "oilrig_ns2_inposition";
 
-  //"Navy Seal 1: Ready to breach."
-  //radio_dialogue( "oilrig_ns1_readybreach" );
+  //"Navy Seal 1: Ready to breach."//radio_dialogue( "oilrig_ns1_readybreach" );
   level.scr_radio["oilrig_ns1_readybreach"] = "oilrig_ns1_readybreach";
 
-  //"Navy Seal 2: Ready to breach."
-  //radio_dialogue( "oilrig_ns2_readybreach" );
+  //"Navy Seal 2: Ready to breach."//radio_dialogue( "oilrig_ns2_readybreach" );
   level.scr_radio["oilrig_ns2_readybreach"] = "oilrig_ns2_readybreach";
 
-  //"Navy Seal 1: In position to breach."
-  //radio_dialogue( "oilrig_ns1_inposbreach" );
+  //"Navy Seal 1: In position to breach."//radio_dialogue( "oilrig_ns1_inposbreach" );
   level.scr_radio["oilrig_ns1_inposbreach"] = "oilrig_ns1_inposbreach";
 
-  //"Navy Seal 2: In position to breach."
-  //radio_dialogue( "oilrig_ns2_inposbreach" );
+  //"Navy Seal 2: In position to breach."//radio_dialogue( "oilrig_ns2_inposbreach" );
   level.scr_radio["oilrig_ns2_inposbreach"] = "oilrig_ns2_inposbreach";
 
-  //"Navy Seal 1: Breaching."
-  //radio_dialogue( "oilrig_ns1_breaching" );
+  //"Navy Seal 1: Breaching."//radio_dialogue( "oilrig_ns1_breaching" );
   level.scr_radio["oilrig_ns1_breaching"] = "oilrig_ns1_breaching";
 
-  //"Navy Seal 2: Breaching."
-  //radio_dialogue( "oilrig_ns2_breaching" );
+  //"Navy Seal 2: Breaching."//radio_dialogue( "oilrig_ns2_breaching" );
   level.scr_radio["oilrig_ns2_breaching"] = "oilrig_ns2_breaching";
 
-  //"Navy Seal 1: Planting charge."
-  //radio_dialogue( "oilrig_ns1_plantingcharge" );
+  //"Navy Seal 1: Planting charge."//radio_dialogue( "oilrig_ns1_plantingcharge" );
   level.scr_radio["oilrig_ns1_plantingcharge"] = "oilrig_ns1_plantingcharge";
 
   //SEAL 2 (radio): planting charge
@@ -526,68 +488,52 @@ dialogue() {
   //radio_dialogue( "oilrig_ns2_plantfrmcharge" );
   level.scr_radio["oilrig_ns2_plantfrmcharge"] = "oilrig_ns2_plantfrmcharge";
 
-  //"Navy Seal 1: Watch your field of fire."
-  //radio_dialogue( "oilrig_ns1_watchfieldfire" );
+  //"Navy Seal 1: Watch your field of fire."//radio_dialogue( "oilrig_ns1_watchfieldfire" );
   level.scr_radio["oilrig_ns1_watchfieldfire"] = "oilrig_ns1_watchfieldfire";
 
-  //"Navy Seal 2: Check your targets. We've got civilians here."
-  //radio_dialogue( "oilrig_ns2_checktargets" );
+  //"Navy Seal 2: Check your targets. We've got civilians here."//radio_dialogue( "oilrig_ns2_checktargets" );
   level.scr_radio["oilrig_ns2_checktargets"] = "oilrig_ns2_checktargets";
 
-  //"Navy Seal 1: On my mark...go!"
-  //radio_dialogue( "oilrig_ns1_onmarkgo" );
+  //"Navy Seal 1: On my mark...go!"//radio_dialogue( "oilrig_ns1_onmarkgo" );
   level.scr_radio["oilrig_ns1_onmarkgo"] = "oilrig_ns1_onmarkgo";
 
-  //"Navy Seal 1: On my mark..."
-  //radio_dialogue( "oilrig_ns1_onmymark" );
+  //"Navy Seal 1: On my mark..."//radio_dialogue( "oilrig_ns1_onmymark" );
   level.scr_radio["oilrig_ns1_onmymark"] = "oilrig_ns1_onmymark";
 
-  //"Navy Seal 1: Go!"
-  //radio_dialogue( "oilrig_ns1_go" );
+  //"Navy Seal 1: Go!"//radio_dialogue( "oilrig_ns1_go" );
   level.scr_radio["oilrig_ns1_go"] = "oilrig_ns1_go";
 
-  //"Navy Seal 2: On my mark...go!"
-  //radio_dialogue( "oilrig_ns2_onmarkgo" );
+  //"Navy Seal 2: On my mark...go!"//radio_dialogue( "oilrig_ns2_onmarkgo" );
   level.scr_radio["oilrig_ns2_onmarkgo"] = "oilrig_ns2_onmarkgo";
 
-  //"Navy Seal 2: On my mark..."
-  //radio_dialogue( "oilrig_ns2_onmymark" );
+  //"Navy Seal 2: On my mark..."//radio_dialogue( "oilrig_ns2_onmymark" );
   level.scr_radio["oilrig_ns2_onmymark"] = "oilrig_ns2_onmymark";
 
-  //"Navy Seal 2: Go!"
-  //radio_dialogue( "oilrig_ns2_go" );
+  //"Navy Seal 2: Go!"//radio_dialogue( "oilrig_ns2_go" );
   level.scr_radio["oilrig_ns2_go"] = "oilrig_ns2_go";
 
-  //"Navy Seal 1: Breaching. Watch your fire."
-  //radio_dialogue( "oilrig_ns1_breachwatchfire" );
+  //"Navy Seal 1: Breaching. Watch your fire."//radio_dialogue( "oilrig_ns1_breachwatchfire" );
   level.scr_radio["oilrig_ns1_breachwatchfire"] = "oilrig_ns1_breachwatchfire";
 
-  //"Navy Seal 2: Breaching. Check your targets."
-  //radio_dialogue( "oilrig_ns2_breachchecktarg" );
+  //"Navy Seal 2: Breaching. Check your targets."//radio_dialogue( "oilrig_ns2_breachchecktarg" );
   level.scr_radio["oilrig_ns2_breachchecktarg"] = "oilrig_ns2_breachchecktarg";
 
-  //"Ghost: We're clear."
-  //radio_dialogue( "oilrig_ns1_wereclear" );
+  //"Ghost: We're clear."//radio_dialogue( "oilrig_ns1_wereclear" );
   level.scr_radio["oilrig_roomclear_ghost_00"] = "oilrig_ns1_wereclear";
 
-  //"Ghost: Room clear."
-  //radio_dialogue( "oilrig_ns1_roomclear" );
+  //"Ghost: Room clear."//radio_dialogue( "oilrig_ns1_roomclear" );
   level.scr_radio["oilrig_roomclear_ghost_01"] = "oilrig_ns1_roomclear";
 
-  //"Ghost: Clear."
-  //radio_dialogue( "oilrig_ns1_clear" );
+  //"Ghost: Clear."//radio_dialogue( "oilrig_ns1_clear" );
   level.scr_radio["oilrig_roomclear_ghost_02"] = "oilrig_ns1_clear";
 
-  //"Ghost: We're clear."
-  //radio_dialogue( "oilrig_ns2_wereclear" );
+  //"Ghost: We're clear."//radio_dialogue( "oilrig_ns2_wereclear" );
   level.scr_radio["oilrig_roomclear_ghost_03"] = "oilrig_ns2_wereclear";
 
-  //"Ghost: Room clear."
-  //radio_dialogue( "oilrig_ns2_roomclear" );
+  //"Ghost: Room clear."//radio_dialogue( "oilrig_ns2_roomclear" );
   level.scr_radio["oilrig_roomclear_ghost_04"] = "oilrig_ns2_roomclear";
 
-  //"Ghost: Clear."
-  level.scr_radio["oilrig_roomclear_ghost_05"] = "oilrig_ns2_clear";
+  //"Ghost: Clear."level.scr_radio["oilrig_roomclear_ghost_05"] = "oilrig_ns2_clear";
 
   //MacTavish	6	31	We're clear.	
   level.scr_radio["oilrig_nsl_wereclear"] = "oilrig_nsl_wereclear";
@@ -598,20 +544,16 @@ dialogue() {
   //MacTavish	6	33	Clear.	
   level.scr_radio["oilrig_nsl_clear"] = "oilrig_nsl_clear";
 
-  //"Seal Leader: Precious cargo secured in section 2-echo."
-  //radio_dialogue( "oilrig_nsl_preciouscargo" );
+  //"Seal Leader: Precious cargo secured in section 2-echo."//radio_dialogue( "oilrig_nsl_preciouscargo" );
   level.scr_radio["oilrig_hostsec_00"] = "oilrig_nsl_preciouscargo";
 
-  //"Seal Leader: Hostages secure in section 2-echo."
-  //radio_dialogue( "oilrig_nsl_hostsec" );
+  //"Seal Leader: Hostages secure in section 2-echo."//radio_dialogue( "oilrig_nsl_hostsec" );
   level.scr_radio["oilrig_hostsec_01"] = "oilrig_nsl_hostsec";
 
-  //"Seal Leader: Packages secured in section 2-echo."
-  //radio_dialogue( "oilrig_nsl_packsec" );
+  //"Seal Leader: Packages secured in section 2-echo."//radio_dialogue( "oilrig_nsl_packsec" );
   //level.scr_radio[ "oilrig_hostsec_02" ] = "oilrig_nsl_packsec";
 
-  //"Sub Command: Roger that Hotel Six, Team 2 will secure and evac, continue your search topside."
-  //radio_dialogue( "oilrig_sbc_secandevac" );
+  //"Sub Command: Roger that Hotel Six, Team 2 will secure and evac, continue your search topside."//radio_dialogue( "oilrig_sbc_secandevac" );
   level.scr_radio["oilrig_sbc_secandevac"] = "oilrig_sbc_secandevac";
 
   //HOSTAGE 1: Thank God you're here. They won't tell us what they want. Speak about 5 different languages between them.
@@ -658,73 +600,57 @@ dialogue() {
   /*-----------------------
   MOVING TO OUTER DECKS
   -------------------------*/
-  //"Sub Command: Enemy helo patroling the perimeter. Keep a low profile, Hotel Six."
-  //radio_dialogue( "oilrig_sbc_lowprofile" );
+  //"Sub Command: Enemy helo patroling the perimeter. Keep a low profile, Hotel Six."//radio_dialogue( "oilrig_sbc_lowprofile" );
   level.scr_radio["oilrig_sbc_lowprofile"] = "oilrig_sbc_lowprofile";
 
-  //"Seal Leader: Roger that."
-  //radio_dialogue( "oilrig_nsl_rogerthat" );
+  //"Seal Leader: Roger that."//radio_dialogue( "oilrig_nsl_rogerthat" );
   level.scr_radio["oilrig_nsl_rogerthat"] = "oilrig_nsl_rogerthat";
 
-  //"Navy Seal 1: Helo approaching. Get down."
-  //radio_dialogue( "oilrig_ns1_heloapproach" );
+  //"Navy Seal 1: Helo approaching. Get down."//radio_dialogue( "oilrig_ns1_heloapproach" );
   level.scr_radio["oilrig_heloapproach_00"] = "oilrig_ns1_heloapproach";
 
-  //"Navy Seal 2: Enemy helo. Get down."
-  //radio_dialogue( "oilrig_ns2_helogetdown" );
+  //"Navy Seal 2: Enemy helo. Get down."//radio_dialogue( "oilrig_ns2_helogetdown" );
   level.scr_radio["oilrig_heloapproach_01"] = "oilrig_ns2_helogetdown";
 
-  //"Navy Seal 1: Chopper inbound, keep low."
-  //radio_dialogue( "oilrig_ns1_chopperinbound" );
+  //"Navy Seal 1: Chopper inbound, keep low."//radio_dialogue( "oilrig_ns1_chopperinbound" );
   level.scr_radio["oilrig_heloapproach_02"] = "oilrig_ns1_chopperinbound";
 
-  //"Seal Leader: Enemy helo, get out of sight."
-  //radio_dialogue( "oilrig_nsl_getouttasight" );
+  //"Seal Leader: Enemy helo, get out of sight."//radio_dialogue( "oilrig_nsl_getouttasight" );
   level.scr_radio["oilrig_heloapproach_03"] = "oilrig_nsl_getouttasight";
 
-  //"Seal Leader: Ok, move."
-  //radio_dialogue( "oilrig_nsl_okmove" );
+  //"Seal Leader: Ok, move."//radio_dialogue( "oilrig_nsl_okmove" );
   level.scr_radio["dialogue_heli_all_clear_00"] = "oilrig_nsl_okmove";
 
-  //"Seal Leader: Move."
-  //radio_dialogue( "oilrig_nsl_move" );
+  //"Seal Leader: Move."//radio_dialogue( "oilrig_nsl_move" );
   level.scr_radio["dialogue_heli_all_clear_01"] = "oilrig_nsl_move";
 
-  //"Seal Leader: All clear, move up."
-  //radio_dialogue( "oilrig_nsl_allcealmove" );
+  //"Seal Leader: All clear, move up."//radio_dialogue( "oilrig_nsl_allcealmove" );
   level.scr_radio["dialogue_heli_all_clear_02"] = "oilrig_nsl_allclearmove";
 
-  //"Seal Leader: We've been spotted."
-  //radio_dialogue( "oilrig_nsl_beenspotted" );
+  //"Seal Leader: We've been spotted."//radio_dialogue( "oilrig_nsl_beenspotted" );
   level.scr_radio["dialogue_heli_spotted_00"] = "oilrig_nsl_beenspotted";
 
-  //"Seal Leader: We've been compromised."
-  //radio_dialogue( "oilrig_nsl_compsomised" );
+  //"Seal Leader: We've been compromised."//radio_dialogue( "oilrig_nsl_compsomised" );
   level.scr_radio["dialogue_heli_spotted_01"] = "oilrig_nsl_compsomised";
 
-  //"Seal Leader: We've been detected."
-  //radio_dialogue( "oilrig_nsl_detected" );
+  //"Seal Leader: We've been detected."//radio_dialogue( "oilrig_nsl_detected" );
   level.scr_radio["dialogue_heli_spotted_03"] = "oilrig_nsl_detected";
 
   /*-----------------------
   AMBUSH SEQUENCE
   -------------------------*/
 
-  //"Sub Command: Hotel Six, The remaining hostages are at your position."
-  level.scr_radio["oilrig_sbc_hostatposition"] = "oilrig_sbc_hostatposition";
+  //"Sub Command: Hotel Six, The remaining hostages are at your position."level.scr_radio["oilrig_sbc_hostatposition"] = "oilrig_sbc_hostatposition";
 
-  //"Seal Leader: Copy that."
-  //radio_dialogue( "oilrig_nsl_copythat" );
+  //"Seal Leader: Copy that."//radio_dialogue( "oilrig_nsl_copythat" );
   level.scr_sound["soap"]["oilrig_nsl_copythat"] = "oilrig_nsl_copythat";
   level.scr_face["soap"]["oilrig_nsl_copythat"] = % oilrig_nsl_copythat;
 
-  //"Seal Leader: Control, all hostages in stronghold secured..."
-  //radio_dialogue( "oilrig_nsl_strongholdsec" );
+  //"Seal Leader: Control, all hostages in stronghold secured..."//radio_dialogue( "oilrig_nsl_strongholdsec" );
   level.scr_sound["soap"]["oilrig_nsl_strongholdsec"] = "oilrig_nsl_strongholdsec";
   level.scr_face["soap"]["oilrig_nsl_strongholdsec"] = % oilrig_nsl_strongholdsec;
 
-  //"Navy Seal 1: Sir, I think we're going to have company..."
-  //radio_dialogue( "oilrig_ns1_havecompany" );
+  //"Navy Seal 1: Sir, I think we're going to have company..."//radio_dialogue( "oilrig_ns1_havecompany" );
   level.scr_radio["oilrig_ns1_havecompany"] = "oilrig_ns1_havecompany";
 
   //ENEMY RADIO: (In German) Maerhoffer, come in. Please respond. (In accented English) Maerhoffer, are you there? Pleae respond. We're sending a team down.
@@ -735,57 +661,45 @@ dialogue() {
   //radio_dialogue( "oilrig_enc_team5" );
   level.scr_radio["oilrig_enc_team5"] = "oilrig_enc_team5";
 
-  //"Seal Leader: Alright. Get some C4 on those bodies. We're going loud."
-  //radio_dialogue( "oilrig_nsl_goingloud" );
+  //"Seal Leader: Alright. Get some C4 on those bodies. We're going loud."//radio_dialogue( "oilrig_nsl_goingloud" );
   level.scr_sound["soap"]["oilrig_nsl_goingloud"] = "oilrig_nsl_goingloud";
   level.scr_face["soap"]["oilrig_nsl_goingloud"] = % oilrig_nsl_goingloud;
 
-  //"Seal Leader: Plant C4 on the bodies. The patrol will be here any minute."
-  //radio_dialogue( "oilrig_nsl_plantc4" );
+  //"Seal Leader: Plant C4 on the bodies. The patrol will be here any minute."//radio_dialogue( "oilrig_nsl_plantc4" );
   level.scr_radio["oilrig_nsl_plantc4"] = "oilrig_nsl_plantc4";
 
-  //"Seal Leader: Get C4 on those bodies ASAP. We don't have much time."
-  //radio_dialogue( "oilrig_nsl_donthavetime" );
+  //"Seal Leader: Get C4 on those bodies ASAP. We don't have much time."//radio_dialogue( "oilrig_nsl_donthavetime" );
   level.scr_radio["oilrig_nsl_donthavetime"] = "oilrig_nsl_donthavetime";
 
-  //"Navy Seal 1: Charges planted. They're in for a surprise when they find these bodies."
-  //radio_dialogue( "oilrig_ns1_forasurprise" );
+  //"Navy Seal 1: Charges planted. They're in for a surprise when they find these bodies."//radio_dialogue( "oilrig_ns1_forasurprise" );
   level.scr_radio["oilrig_ns1_forasurprise"] = "oilrig_ns1_forasurprise";
 
-  //"Navy Seal 2: C4 placed, sir."
-  //radio_dialogue( "oilrig_ns2_c4placed" );
+  //"Navy Seal 2: C4 placed, sir."//radio_dialogue( "oilrig_ns2_c4placed" );
   level.scr_radio["oilrig_ns2_c4placed"] = "oilrig_ns2_c4placed";
 
-  //"Seal Leader: Get to an elevated position. We'll ambush them when they discover the bodies."
-  //radio_dialogue( "oilrig_nsl_ambushthem" );
+  //"Seal Leader: Get to an elevated position. We'll ambush them when they discover the bodies."//radio_dialogue( "oilrig_nsl_ambushthem" );
   level.scr_radio["oilrig_nsl_ambushthem"] = "oilrig_nsl_ambushthem";
 
-  //"Seal Leader: We've got to set up an ambush. Get to an elevated position and wait."
-  //radio_dialogue( "oilrig_nsl_elevatedposwait" );
+  //"Seal Leader: We've got to set up an ambush. Get to an elevated position and wait."//radio_dialogue( "oilrig_nsl_elevatedposwait" );
   level.scr_radio["oilrig_nsl_elevatedposwait"] = "oilrig_nsl_elevatedposwait";
 
-  //"Seal Leader: There's the patrol. Hold fire until they find the bodies."
-  level.scr_radio["oilrig_nsl_holdfire"] = "oilrig_nsl_holdfire";
+  //"Seal Leader: There's the patrol. Hold fire until they find the bodies."level.scr_radio["oilrig_nsl_holdfire"] = "oilrig_nsl_holdfire";
 
-  //"Seal Leader: Standby..."
-  level.scr_radio["oilrig_nsl_standby1"] = "oilrig_nsl_standby1";
+  //"Seal Leader: Standby..."level.scr_radio["oilrig_nsl_standby1"] = "oilrig_nsl_standby1";
 
-  //"Seal Leader: Standby..."
-  level.scr_radio["oilrig_nsl_standby2"] = "oilrig_nsl_standby2";
+  //"Seal Leader: Standby..."level.scr_radio["oilrig_nsl_standby2"] = "oilrig_nsl_standby2";
 
   //MERC 3 (IN GERMAN): Alarm! We've got a man down! (IN ACCENTED ENGLISH) Sound the alarm! We've got men down!!!
   level.scr_radio["oilrig_mrc3_alarm"] = "oilrig_mrc3_alarm";
   //level.scr_sound[ "generic" ]["oilrig_mrc3_alarm"] = "oilrig_mrc3_alarm";
 
-  //"Seal Leader: Do it."
-  level.scr_radio["oilrig_nsl_doit"] = "oilrig_nsl_doit";
+  //"Seal Leader: Do it."level.scr_radio["oilrig_nsl_doit"] = "oilrig_nsl_doit";
 
   /*-----------------------
   BALLS OUT START
   -------------------------*/
 
-  //"Seal Leader: Control, this is Hotel Six, all hostages secured, but our cover is blown."
-  level.scr_radio["oilrig_nsl_coverblown"] = "oilrig_nsl_coverblown";
+  //"Seal Leader: Control, this is Hotel Six, all hostages secured, but our cover is blown."level.scr_radio["oilrig_nsl_coverblown"] = "oilrig_nsl_coverblown";
 
   //"Sub Command: Copy that, intel still indicates hostages and possible explosives on the top deck.
   //radio_dialogue( "oilrig_sbc_possibleexpl" );
@@ -794,15 +708,12 @@ dialogue() {
   //Sub Command	7	Your team needs to secure that location before we can send in reinforcements to handle the SAM sites, over.	
   level.scr_radio["oilrig_sbc_secthatloc"] = "oilrig_sbc_secthatloc";
 
-  //"Seal Leader: Roger that. Will call in for exfil at LZ bravo."
-  level.scr_radio["oilrig_nsl_callforexfil"] = "oilrig_nsl_callforexfil";
+  //"Seal Leader: Roger that. Will call in for exfil at LZ bravo."level.scr_radio["oilrig_nsl_callforexfil"] = "oilrig_nsl_callforexfil";
 
-  //"Seal Leader: Move up."
-  //radio_dialogue( "oilrig_nsl_moveup" );
+  //"Seal Leader: Move up."//radio_dialogue( "oilrig_nsl_moveup" );
   level.scr_radio["oilrig_nsl_moveup"] = "oilrig_nsl_moveup";
 
-  //"Seal Leader: Move."
-  //radio_dialogue( "oilrig_nsl_move2" );
+  //"Seal Leader: Move."//radio_dialogue( "oilrig_nsl_move2" );
   level.scr_radio["oilrig_nsl_move2"] = "oilrig_nsl_move2";
 
   //Cpt. MacTavish			CentCom needs us to take the top deck ASAP so they can send in the Marines. Move.	
@@ -811,12 +722,10 @@ dialogue() {
   /*-----------------------
   STAIRS TO DECK 2
   -------------------------*/
-  //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."
-  //radio_dialogue( "oilrig_sbc_gettolz" );
+  //"Sub Command: Hotel Six, hostages from lower decks are being extracted by Team 2. Proceed to the top deck ASAP to secure the rest, over."//radio_dialogue( "oilrig_sbc_gettolz" );
   level.scr_radio["oilrig_sbc_gettolz"] = "oilrig_sbc_gettolz";
 
-  //"Seal Leader: Copy that."
-  //radio_dialogue( "oilrig_nsl_copythat2" );
+  //"Seal Leader: Copy that."//radio_dialogue( "oilrig_nsl_copythat2" );
   level.scr_radio["oilrig_nsl_copythat2"] = "oilrig_nsl_copythat2";
 
   /*-----------------------
@@ -1134,8 +1043,7 @@ dialogue() {
 
 #using_animtree("player");
 player_anims() {
-  //the animtree to use with the invisible model with animname "player_rig"
-  level.scr_animtree["player_rig"] = #animtree;
+  //the animtree to use with the invisible model with animname "player_rig"level.scr_animtree["player_rig"] = #animtree;
   //the invisible model with the animname "player_rig" that the anims will be played on
   level.scr_model["player_rig"] = "viewhands_player_udt";
 

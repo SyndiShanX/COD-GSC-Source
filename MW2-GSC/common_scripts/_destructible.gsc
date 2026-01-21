@@ -477,13 +477,7 @@ add_key_to_destructible(key, val) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_keypairs_to_destructible( <array> )"
-"Summary: Goes through the array and adds each key/val to .v."
-"Module: Destructibles"
-"MandatoryArg: <array>: Array of keypairs."
-"Example: add_keypairs_to_destructible( array );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_keypairs_to_destructible( <array> )""Summary: Goes through the array and adds each key/val to .v.""Module: Destructibles""MandatoryArg: <array>: Array of keypairs.""Example: add_keypairs_to_destructible( array );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_keypairs_to_destructible(array) {
@@ -506,14 +500,7 @@ add_keypairs_to_destructible(array) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_array_to_destructible( <array_name> , <array> )"
-"Summary: Goes through the array and adds each key/val to .v."
-"Module: Destructibles"
-"MandatoryArg: <array_name>: Array of keypairs."
-"MandatoryArg: <array>: Array of keypairs."
-"Example: add_array_to_destructible( array );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_array_to_destructible( <array_name> , <array> )""Summary: Goes through the array and adds each key/val to .v.""Module: Destructibles""MandatoryArg: <array_name>: Array of keypairs.""MandatoryArg: <array>: Array of keypairs.""Example: add_array_to_destructible( array );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_array_to_destructible(array_name, array) {
@@ -1159,8 +1146,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
     damage = Int(abs(self.destructible_parts[partIndex].v["health"]));
 
     // Brent asks - why is this condition here?It'll never trigger given that abs() does the following:
-    // "fabs returns the absolute value of x.Absolute value is a number's distance from zero on the number line. The absolute value of -4 is 4; the absolute value of 4 is 4."
-    // It should probably be removed
+    // "fabs returns the absolute value of x.Absolute value is a number's distance from zero on the number line. The absolute value of -4 is 4; the absolute value of 4 is 4."// It should probably be removed
     if(damage < 0) {
       prof_end("_destructible");
       return;
@@ -1644,15 +1630,11 @@ isAttackerValid(partIndex, stateIndex, attacker) {
       return true;
   } else
   if(sType == "no_ai" && isDefined(level.isAIfunc)) {
-    if(![
-        [level.isAIfunc]
-      ](attacker))
+    if(![[level.isAIfunc]](attacker))
       return true;
   } else
   if(sType == "ai_only" && isDefined(level.isAIfunc)) {
-    if([
-        [level.isAIfunc]
-      ](attacker))
+    if([[level.isAIfunc]](attacker))
       return true;
   } else {
     AssertMsg("Invalid attacker rules on destructible vehicle. Valid types are: ai_only, no_ai, player_only, no_player");

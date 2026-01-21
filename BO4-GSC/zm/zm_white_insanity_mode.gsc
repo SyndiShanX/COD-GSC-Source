@@ -561,8 +561,7 @@ function_7cb78bcd() {
           if(!(isDefined(var_6620353d.has_been_opened) && var_6620353d.has_been_opened)) {
             a_e_players = getplayers();
             var_6620353d notify(#"trigger", {
-              #activator: a_e_players[0],
-              #is_forced: 1
+              #activator: a_e_players[0], #is_forced: 1
             });
           }
 

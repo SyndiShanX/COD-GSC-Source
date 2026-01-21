@@ -486,9 +486,7 @@ createfxlogic() {
       update_selected_entities();
 
     if(!level.mp_createfx)
-      var_0 = [
-        [level.func_position_player_get]
-      ](var_0);
+      var_0 = [[level.func_position_player_get]](var_0);
 
     var_1 = var_13;
 

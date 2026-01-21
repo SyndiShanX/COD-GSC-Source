@@ -701,7 +701,7 @@ spawn_survivor_on_boat() {
   level.boat_survivor = var_1;
   level.boat_survivor thread survivor_boat_nag();
   for(;;) {
-    var_2 = getanimlength( % iw7_cp_survivor_boat_idle);
+    var_2 = getanimlength(%iw7_cp_survivor_boat_idle);
     level.boat_survivor scriptmodelplayanim("IW7_cp_survivor_boat_idle", 1);
     wait(var_2);
   }
@@ -751,7 +751,7 @@ survivor_boat_ride() {
   level.boat_survivor thread survivor_boat_filler();
   wait(15);
   level notify("stop_boat_idle_anims");
-  var_3 = getanimlength( % iw7_cp_survivor_boat_idle);
+  var_3 = getanimlength(%iw7_cp_survivor_boat_idle);
   level.boat_survivor scriptmodelplayanim("IW7_cp_survivor_boat_idle", 1);
   wait(var_3 - 4.5);
   level.boat_vehicle vehicle_setspeed(0, 5);
@@ -761,7 +761,7 @@ survivor_boat_ride() {
   level thread ksmith_boat_vo();
   level.boat_survivor scriptmodelplayanimdeltamotionfrompos("IW7_cp_survivor_boat_fall", level.boat_survivor.origin, level.boat_survivor.angles, 1);
   level.boat_survivor playSound("scn_slashride_survivor_fall");
-  var_3 = getanimlength( % iw7_cp_survivor_boat_fall);
+  var_3 = getanimlength(%iw7_cp_survivor_boat_fall);
   wait(var_3 - 3.25);
   level.boat_survivor playSound("scn_slashride_survivor_splash");
   playFX(level._effect["boat_fall_splash"], level.boat_survivor.origin);

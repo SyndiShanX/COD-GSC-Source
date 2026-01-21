@@ -16,13 +16,13 @@ shouldCQB() {
 MoveCQB() {
   animscripts\run::changeWeaponStandRun();
   if(self.a.pose != "stand") {
-    self clearAnim( % root, 0.2);
+    self clearAnim(%root, 0.2);
     if(self.a.pose == "prone")
       self ExitProneWrapper(1);
     self.a.pose = "stand";
   }
   self.a.movement = self.moveMode;
-  self clearanim( % combatrun, 0.2);
+  self clearanim(%combatrun, 0.2);
   self thread CQBTracking();
   variation = getRandomIntFromSeed(self.a.runLoopCount, 2);
   if(variation == 0)
@@ -32,12 +32,12 @@ MoveCQB() {
   if(self.movemode == "walk")
     cqbWalkAnim = % walk_CQB_F;
   rate = self.moveplaybackrate;
-  self setFlaggedAnimKnobAll("runanim", cqbWalkAnim, % walk_and_run_loops, 1, 0.3, rate);
+  self setFlaggedAnimKnobAll("runanim", cqbWalkAnim, %walk_and_run_loops, 1, 0.3, rate);
   animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
-  self setanim( % combatrun_forward, animWeights["front"], 0.2, 1);
-  self setanim( % walk_backward, animWeights["back"], 0.2, 1);
-  self setanim( % walk_left, animWeights["left"], 0.2, 1);
-  self setanim( % walk_right, animWeights["right"], 0.2, 1);
+  self setanim(%combatrun_forward, animWeights["front"], 0.2, 1);
+  self setanim(%walk_backward, animWeights["back"], 0.2, 1);
+  self setanim(%walk_left, animWeights["left"], 0.2, 1);
+  self setanim(%walk_right, animWeights["right"], 0.2, 1);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
   self thread DontCQBTrackUnlessWeMoveCQBAgain();
 }
@@ -53,17 +53,17 @@ CQBTracking() {
   self.leftAimLimit = -45;
   self.upAimLimit = 45;
   self.downAimLimit = -45;
-  self setAnimLimited( % walk_aim_2);
-  self setAnimLimited( % walk_aim_4);
-  self setAnimLimited( % walk_aim_6);
-  self setAnimLimited( % walk_aim_8);
+  self setAnimLimited(%walk_aim_2);
+  self setAnimLimited(%walk_aim_4);
+  self setAnimLimited(%walk_aim_6);
+  self setAnimLimited(%walk_aim_8);
   self.shootEnt = undefined;
   self.shootPos = undefined;
   if(animscripts\move::MayShootWhileMoving()) {
     self thread CQBDecideWhatAndHowToShoot();
     self thread CQBShootWhileMoving();
   }
-  self trackLoop( % w_aim_2, % w_aim_4, % w_aim_6, % w_aim_8);
+  self trackLoop(%w_aim_2, %w_aim_4, %w_aim_6, %w_aim_8);
 }
 
 CQBDecideWhatAndHowToShoot() {

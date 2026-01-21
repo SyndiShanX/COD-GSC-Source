@@ -790,9 +790,7 @@ function missiletarget_handleincomingmissile(responsefunc, endon1, endon2, allow
     self waittill("stinger_fired_at_me", missile, weapon, attacker);
     _incomingmissile(missile, attacker);
     if(isDefined(responsefunc)) {
-      [
-        [responsefunc]
-      ](missile, attacker, weapon, endon1, endon2, allowdirectdamage);
+      [[responsefunc]](missile, attacker, weapon, endon1, endon2, allowdirectdamage);
     }
   }
 }

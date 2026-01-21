@@ -425,9 +425,7 @@ wait_to_be_revived(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
     var_0.reviveiconent = var_13;
 
     if(isDefined(level.wait_to_be_revived_func)) {
-      var_14 = [
-        [level.wait_to_be_revived_func]
-      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+      var_14 = [[level.wait_to_be_revived_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
 
       if(isDefined(var_14)) {
         return var_14;
@@ -547,9 +545,7 @@ record_revive_success(var_0, var_1) {
     var_1 thread scripts\cp\cp_hud_message::showsplash("revived", undefined, var_0);
 
     if(isDefined(level.revive_success_analytics_func)) {
-      [
-        [level.revive_success_analytics_func]
-      ](var_0);
+      [[level.revive_success_analytics_func]](var_0);
     }
   }
 }

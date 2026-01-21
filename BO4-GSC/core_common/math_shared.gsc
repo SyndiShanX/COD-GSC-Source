@@ -357,8 +357,7 @@ function_f16fbd66(var_17a1aca9, var_9522f5ec, var_e5dbc91e, var_815dce62, clamp)
   }
 
   pointstruct = {
-    #pointa: pointa,
-    #pointb: pointb
+    #pointa: pointa, #pointb: pointb
   };
   return pointstruct;
 }

@@ -118,10 +118,7 @@ move_sound_along_line() {
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   self endon("end line sound");
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
-  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) +
-      ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) +
-      ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) /
-    (LineMagSqrd);
+  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) / (LineMagSqrd);
   if(t < 0.0) {
     self.origin = LineStart;
   } else if(t > 1.0) {

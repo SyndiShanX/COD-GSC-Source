@@ -403,9 +403,7 @@ should_drop_crafting_item(var_0) {
   }
 
   if(isDefined(level.active_volume_check)) {
-    if(![
-        [level.active_volume_check]
-      ](var_0)) {
+    if(![[level.active_volume_check]](var_0)) {
       return 0;
     }
   }

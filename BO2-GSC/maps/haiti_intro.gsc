@@ -435,7 +435,7 @@ spawn_avoid_vtols() {
     vtol.angles = struct.angles;
     vtol setModel("veh_t6_air_v78_vtol");
     vtol useanimtree(#animtree);
-    vtol setanim( % v_vtol_flight_idle, 1, 0.1, 1);
+    vtol setanim(%v_vtol_flight_idle, 1, 0.1, 1);
     vtol playLoopSound("veh_amb_vtol_engine_low");
     vtol.targetname = struct.targetname;
     vtol.script_noteworthy = struct.script_noteworthy;
@@ -1334,7 +1334,7 @@ moving_cloud_delete(str_wait) {
 
 intro_jump_vtol_think() {
   self endon("death");
-  self setanim( % v_vtol_flight_idle, 1, 0.1, 1);
+  self setanim(%v_vtol_flight_idle, 1, 0.1, 1);
 }
 
 pregameplay_fx() {

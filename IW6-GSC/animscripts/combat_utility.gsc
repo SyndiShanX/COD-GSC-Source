@@ -159,7 +159,7 @@ getuniqueflagnameindex() {
 #using_animtree("generic_human");
 
 setupaim(var_0) {
-  self setanim( % exposed_aiming, 1, 0.2);
+  self setanim(%exposed_aiming, 1, 0.2);
   self setanimknoblimited(animscripts\utility::animarray("straight_level"), 1, var_0);
   self setanimknoblimited(animscripts\utility::animarray("add_aim_up"), 1, var_0);
   self setanimknoblimited(animscripts\utility::animarray("add_aim_down"), 1, var_0);
@@ -178,22 +178,22 @@ startfireandaimidlethread() {
 
 endfireandanimidlethread() {
   endaimidlethread();
-  self clearanim( % add_fire, 0.1);
+  self clearanim(%add_fire, 0.1);
   self notify("stop tracking");
 }
 
 showfirehideaimidle() {
   if(isDefined(self.a.aimidlethread))
-    self setanim( % add_idle, 0, 0.2);
+    self setanim(%add_idle, 0, 0.2);
 
-  self setanim( % add_fire, 1, 0.1);
+  self setanim(%add_fire, 1, 0.1);
 }
 
 hidefireshowaimidle() {
   if(isDefined(self.a.aimidlethread))
-    self setanim( % add_idle, 1, 0.2);
+    self setanim(%add_idle, 1, 0.2);
 
-  self setanim( % add_fire, 0, 0.1);
+  self setanim(%add_fire, 0, 0.1);
 }
 
 aimidlethread(var_0) {
@@ -205,7 +205,7 @@ aimidlethread(var_0) {
   }
   self.a.aimidlethread = 1;
   wait 0.1;
-  self setanimlimited( % add_idle, 1, 0.2);
+  self setanimlimited(%add_idle, 1, 0.2);
   var_1 = % add_idle;
   var_2 = 0;
 
@@ -231,13 +231,13 @@ aimidlethread(var_0) {
     var_2++;
   }
 
-  self clearanim( % add_idle, 0.1);
+  self clearanim(%add_idle, 0.1);
 }
 
 endaimidlethread() {
   self notify("end_aim_idle_thread");
   self.a.aimidlethread = undefined;
-  self clearanim( % add_idle, 0.1);
+  self clearanim(%add_idle, 0.1);
 }
 
 shotgunfirerate() {
@@ -472,14 +472,14 @@ reload(var_0, var_1) {
   animscripts\battlechatter::playbattlechatter();
 
   if(isDefined(var_1)) {
-    self setflaggedanimknoball("reloadanim", var_1, % body, 1, 0.1, 1);
+    self setflaggedanimknoball("reloadanim", var_1, %body, 1, 0.1, 1);
     animscripts\shared::donotetracks("reloadanim");
     animscripts\weaponlist::refillclip();
     self.a.needstorechamber = 0;
   } else {
     if(self.a.pose == "prone") {
-      self setflaggedanimknoball("reloadanim", % prone_reload, % body, 1, 0.1, 1);
-      self updateprone( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+      self setflaggedanimknoball("reloadanim", %prone_reload, %body, 1, 0.1, 1);
+      self updateprone(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
     } else {
       wait 2;
       return;
@@ -505,21 +505,21 @@ addgrenadethrowanimoffset(var_0, var_1) {
 }
 
 initgrenadethrowanims() {
-  addgrenadethrowanimoffset( % exposed_grenadethrowb, (41.5391, 7.28883, 72.2128));
-  addgrenadethrowanimoffset( % exposed_grenadethrowc, (34.8849, -4.77048, 74.0488));
-  addgrenadethrowanimoffset( % corner_standl_grenade_a, (41.605, 6.80107, 81.4785));
-  addgrenadethrowanimoffset( % corner_standl_grenade_b, (24.1585, -14.7221, 29.2992));
-  addgrenadethrowanimoffset( % cornercrl_grenadea, (25.8988, -10.2811, 30.4813));
-  addgrenadethrowanimoffset( % cornercrl_grenadeb, (24.688, 45.0702, 64.377));
-  addgrenadethrowanimoffset( % corner_standr_grenade_a, (37.1254, -32.7053, 76.5745));
-  addgrenadethrowanimoffset( % corner_standr_grenade_b, (19.356, 15.5341, 16.5036));
-  addgrenadethrowanimoffset( % cornercrr_grenadea, (39.8857, 5.92472, 24.5878));
-  addgrenadethrowanimoffset( % covercrouch_grenadea, (-1.6363, -0.693674, 60.1009));
-  addgrenadethrowanimoffset( % covercrouch_grenadeb, (-1.6363, -0.693674, 60.1009));
-  addgrenadethrowanimoffset( % coverstand_grenadea, (10.8573, 7.12614, 77.2356));
-  addgrenadethrowanimoffset( % coverstand_grenadeb, (19.1804, 5.68214, 73.2278));
-  addgrenadethrowanimoffset( % prone_grenade_a, (12.2859, -1.3019, 33.4307));
-  addgrenadethrowanimoffset( % cqb_stand_grenade_throw, (35.7494, 26.6052, 37.7086));
+  addgrenadethrowanimoffset(%exposed_grenadethrowb, (41.5391, 7.28883, 72.2128));
+  addgrenadethrowanimoffset(%exposed_grenadethrowc, (34.8849, -4.77048, 74.0488));
+  addgrenadethrowanimoffset(%corner_standl_grenade_a, (41.605, 6.80107, 81.4785));
+  addgrenadethrowanimoffset(%corner_standl_grenade_b, (24.1585, -14.7221, 29.2992));
+  addgrenadethrowanimoffset(%cornercrl_grenadea, (25.8988, -10.2811, 30.4813));
+  addgrenadethrowanimoffset(%cornercrl_grenadeb, (24.688, 45.0702, 64.377));
+  addgrenadethrowanimoffset(%corner_standr_grenade_a, (37.1254, -32.7053, 76.5745));
+  addgrenadethrowanimoffset(%corner_standr_grenade_b, (19.356, 15.5341, 16.5036));
+  addgrenadethrowanimoffset(%cornercrr_grenadea, (39.8857, 5.92472, 24.5878));
+  addgrenadethrowanimoffset(%covercrouch_grenadea, (-1.6363, -0.693674, 60.1009));
+  addgrenadethrowanimoffset(%covercrouch_grenadeb, (-1.6363, -0.693674, 60.1009));
+  addgrenadethrowanimoffset(%coverstand_grenadea, (10.8573, 7.12614, 77.2356));
+  addgrenadethrowanimoffset(%coverstand_grenadeb, (19.1804, 5.68214, 73.2278));
+  addgrenadethrowanimoffset(%prone_grenade_a, (12.2859, -1.3019, 33.4307));
+  addgrenadethrowanimoffset(%cqb_stand_grenade_throw, (35.7494, 26.6052, 37.7086));
 }
 
 getgrenadethrowoffset(var_0) {
@@ -831,7 +831,7 @@ dogrenadethrow(var_0, var_1, var_2, var_3) {
 
   animscripts\battlechatter_ai::evaluateattackevent(self.grenadeweapon);
   self notify("stop_aiming_at_enemy");
-  self setflaggedanimknoballrestart("throwanim", var_0, % body, fasteranimspeed(), 0.1, 1);
+  self setflaggedanimknoballrestart("throwanim", var_0, %body, fasteranimspeed(), 0.1, 1);
   thread animscripts\notetracks::donotetracksforever("throwanim", "killanimscript");
   var_4 = animscripts\utility::getgrenademodel();
   var_5 = "none";
@@ -884,8 +884,8 @@ dogrenadethrow(var_0, var_1, var_2, var_3) {
   self waittillmatch("throwanim", "end");
   self notify("done_grenade_throw");
   self notify("weapon_switch_done");
-  self setanim( % exposed_modern, 1, 0.2);
-  self setanim( % exposed_aiming, 1);
+  self setanim(%exposed_modern, 1, 0.2);
+  self setanim(%exposed_aiming, 1);
   self clearanim(var_0, 0.2);
 }
 

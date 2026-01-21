@@ -27,7 +27,7 @@ main() {
 }
 
 technical_pain() {
-  self setFlaggedAnimKnobAllRestart("painanim", % technical_turret_pain, % body, 1, .1, 1);
+  self setFlaggedAnimKnobAllRestart("painanim", %technical_turret_pain, %body, 1, .1, 1);
   self animscripts\shared::DoNoteTracks("painanim");
 }
 

@@ -567,7 +567,7 @@ savimbi_buffel_drop_mgl(savimbi) {
 
 savimbi_buffel_spawn_enemy(savimbi) {
   v_buffel = getent("savimbi_buffel", "targetname");
-  v_origin = getstartorigin(v_buffel gettagorigin("tag_rear_door_l"), v_buffel gettagangles("tag_rear_door_l"), % ch_ang_03_01_savimbi_joins_enemy);
+  v_origin = getstartorigin(v_buffel gettagorigin("tag_rear_door_l"), v_buffel gettagangles("tag_rear_door_l"), %ch_ang_03_01_savimbi_joins_enemy);
   playFX(getfx("mortar_savannah"), v_origin);
   playsoundatposition("exp_mortar", v_origin);
   ai_savimbi_enemy = simple_spawn_single("post_heli_enemy", undefined, undefined, undefined, undefined, undefined, undefined, 1);

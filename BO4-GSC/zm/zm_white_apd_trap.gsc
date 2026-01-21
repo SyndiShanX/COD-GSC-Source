@@ -156,8 +156,7 @@ function_65c804dc() {
     if(isDefined(e_who)) {
       zm_utility::play_sound_at_pos("purchase", e_who.origin);
       level notify(#"trap_activated", {
-        #trap_activator: e_who,
-        #trap: self
+        #trap_activator: e_who, #trap: self
       });
     }
 

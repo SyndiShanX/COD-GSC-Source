@@ -915,7 +915,7 @@ update_idle_anim() {
     self.idle_end_time = gettime() + getanimlength(idle_anim) * 1000;
     self.current_anim = idle_anim;
     self.rider_nextanimation = idle_ai_anim;
-    self setanimknoballrestart(idle_anim, % root, 1, 0.2, 1);
+    self setanimknoballrestart(idle_anim, %root, 1, 0.2, 1);
 
     if(isDefined(driver) && isDefined(driver.update_idle_anim))
       driver[[driver.update_idle_anim]](idle_struct, anim_index);
@@ -932,7 +932,7 @@ horse_rearback() {
   if(isDefined(driver) && isDefined(driver.update_rearback_anim))
     driver thread[[driver.update_rearback_anim]](self);
 
-  self setanimknoballrestart(level.horse_anims[level.rearback], % root, 1, 0.2, 1);
+  self setanimknoballrestart(level.horse_anims[level.rearback], %root, 1, 0.2, 1);
   len = getanimlength(level.horse_anims[level.rearback]);
   wait(len);
   self.idle_end_time = gettime();
@@ -941,7 +941,7 @@ horse_rearback() {
 
 play_horse_anim(animname) {
   self endon("death");
-  self setanimknoball(animname, % root, 1, 0.2, 1);
+  self setanimknoball(animname, %root, 1, 0.2, 1);
   wait(getanimlength(animname));
 }
 
@@ -1003,7 +1003,7 @@ horse_animating() {
       anim_rate = speed / level.horse_speeds[self.current_anim_speed];
       anim_rate = clamp(anim_rate, 0.5, 1.5);
       self.current_anim = level.horse_anims[level.reverse];
-      self setanimknoball(level.horse_anims[level.reverse], % root, 1, 0.2, anim_rate);
+      self setanimknoball(level.horse_anims[level.reverse], %root, 1, 0.2, anim_rate);
       driver = self get_driver();
 
       if(isDefined(driver) && isDefined(driver.update_reverse_anim))
@@ -1016,7 +1016,7 @@ horse_animating() {
         anim_index = 2;
 
       self.current_anim = level.horse_anims[level.idle][anim_index];
-      self setanimknoball(level.horse_anims[level.idle][anim_index], % root, 1, 0.2, anim_rate);
+      self setanimknoball(level.horse_anims[level.idle][anim_index], %root, 1, 0.2, anim_rate);
       driver = self get_driver();
 
       if(isDefined(driver) && isDefined(driver.update_turn_anim))
@@ -1132,7 +1132,7 @@ horse_death() {
     death_anim = self.death_anim;
 
   if(isDefined(death_anim)) {
-    self setflaggedanimknoball("horse_death", death_anim, % root, 1, 0.2, 1);
+    self setflaggedanimknoball("horse_death", death_anim, %root, 1, 0.2, 1);
     driver = self get_driver();
 
     if(isDefined(driver)) {
@@ -1590,9 +1590,9 @@ update_view_hands(no_left) {
 
 ready_horse() {
   if(is_true(level.horse_in_combat))
-    self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], % root, 1, 0.2, 0);
+    self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], %root, 1, 0.2, 0);
   else
-    self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], % root, 1, 0.2, 0);
+    self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], %root, 1, 0.2, 0);
 }
 
 horse_update_reigns(hide) {
@@ -1647,9 +1647,9 @@ mount(horse) {
   if(is_true(level.horse_in_combat))
     horse_mount_anim = level.horse_anims[10][self.side];
 
-  horse setflaggedanimknoballrestart("mount_horse", horse_mount_anim, % root, 1, 0, 1);
+  horse setflaggedanimknoballrestart("mount_horse", horse_mount_anim, %root, 1, 0, 1);
   horse thread horse_wait_for_reigns("mount_horse", 1);
-  self.body animscripted("mount", horse.origin, horse.angles, mount_anim, "normal", % root, 1, 0, 0.65);
+  self.body animscripted("mount", horse.origin, horse.angles, mount_anim, "normal", %root, 1, 0, 0.65);
   self.body show();
   self.body waittillmatch("mount", "end");
   self.body stopanimscripted();
@@ -1696,7 +1696,7 @@ dismount(horse) {
   else
     horse_dismount_anim = level.horse_anims[level.dismount][0];
 
-  horse setflaggedanimknoball("horse_dismount", horse_dismount_anim, % root, 1, 0.2, 1);
+  horse setflaggedanimknoball("horse_dismount", horse_dismount_anim, %root, 1, 0.2, 1);
   horse thread horse_wait_for_reigns("horse_dismount", 0);
 
   if(is_true(level.horse_in_combat)) {
@@ -1710,7 +1710,7 @@ dismount(horse) {
     player_dismount_anim = level.horse_player_anims[level.dismount][0];
 
   level.dismount_time = gettime();
-  self.body animscripted("dismount", horse.origin, horse.angles, player_dismount_anim, "normal", % root, 1, 0.2);
+  self.body animscripted("dismount", horse.origin, horse.angles, player_dismount_anim, "normal", %root, 1, 0.2);
   self.body waittillmatch("dismount", "unlink");
   self.body unlink();
   self.body waittillmatch("dismount", "end");
@@ -1724,7 +1724,7 @@ dismount(horse) {
   self.body.origin = self.origin;
   self.body.angles = self.angles;
   self.body linkto(self);
-  self.body clearanim( % root, 0);
+  self.body clearanim(%root, 0);
   horse solid();
   horse makevehicleusable();
   self.is_on_horse = 0;

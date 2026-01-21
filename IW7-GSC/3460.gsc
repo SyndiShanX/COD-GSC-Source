@@ -127,9 +127,7 @@ func_6CAA(var_0, var_1) {
   func_6CC8(var_0, var_4, var_3, level.heli_pilot, var_2);
 
   if(isDefined(level.lbsniper)) {
-    if([
-        [var_3]
-      ](var_0, var_4, level.lbsniper))
+    if([[var_3]](var_0, var_4, level.lbsniper))
       var_2.targets[var_2.targets.size] = level.lbsniper;
   }
 

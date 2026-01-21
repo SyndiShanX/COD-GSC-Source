@@ -37,9 +37,9 @@ function riotshield_deploy_anim(localclientnum, instant) {
   self util::waittill_dobj(localclientnum);
   self useanimtree($mp_riotshield);
   if(instant) {
-    self setanimtime( % mp_riotshield::o_riot_stand_deploy, 1);
+    self setanimtime(%mp_riotshield::o_riot_stand_deploy, 1);
   } else {
-    self setanim( % mp_riotshield::o_riot_stand_deploy, 1, 0, 1);
+    self setanim(%mp_riotshield::o_riot_stand_deploy, 1, 0, 1);
     playFXOnTag(localclientnum, level._effect["riotshield_dust"], self, "tag_origin");
   }
   if(!instant) {
@@ -54,9 +54,9 @@ function watch_riotshield_damage() {
     self waittill("damage", damage_loc, damage_type);
     self useanimtree($mp_riotshield);
     if(damage_type == "MOD_MELEE" || damage_type == "MOD_MELEE_WEAPON_BUTT" || damage_type == "MOD_MELEE_ASSASSINATE") {
-      self setanim( % mp_riotshield::o_riot_stand_melee_front, 1, 0, 1);
+      self setanim(%mp_riotshield::o_riot_stand_melee_front, 1, 0, 1);
     } else {
-      self setanim( % mp_riotshield::o_riot_stand_shot, 1, 0, 1);
+      self setanim(%mp_riotshield::o_riot_stand_shot, 1, 0, 1);
     }
   }
 }
@@ -69,7 +69,7 @@ function riotshield_destroy_anim(localclientnum) {
   wait(0.05);
   self playSound(localclientnum, "wpn_shield_destroy");
   self useanimtree($mp_riotshield);
-  self setanim( % mp_riotshield::o_riot_stand_destroyed, 1, 0, 1);
+  self setanim(%mp_riotshield::o_riot_stand_destroyed, 1, 0, 1);
   wait(1);
   self setforcenotsimple();
 }

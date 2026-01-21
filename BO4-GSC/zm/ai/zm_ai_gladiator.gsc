@@ -1045,18 +1045,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
         if(var_dd54fdb1.hitloc == "left_arm_lower" || var_dd54fdb1.hitloc == "right_arm_lower") {
           var_a7d0fdac = 1;
           self.damage_info = {
-            #inflictor: inflictor,
-            #attacker: attacker,
-            #damage: damage,
-            #idflags: idflags,
-            #meansofdeath: meansofdeath,
-            #weapon: weapon,
-            #point: point,
-            #dir: dir,
-            #hitloc: var_dd54fdb1.hitloc,
-            #offsettime: offsettime,
-            #boneindex: boneindex,
-            #modelindex: modelindex
+            #inflictor: inflictor, #attacker: attacker, #damage: damage, #idflags: idflags, #meansofdeath: meansofdeath, #weapon: weapon, #point: point, #dir: dir, #hitloc: var_dd54fdb1.hitloc, #offsettime: offsettime, #boneindex: boneindex, #modelindex: modelindex
           };
         }
 
@@ -1265,10 +1254,7 @@ function_88d65504(axe, var_7900b267, move_pos) {
   if(trace[# "fraction"] < 1) {
     hit_ent = trace[# "entity"];
     level notify(#"hash_435816ec8f13c19b", {
-      #var_f1445bd6: trace,
-      #ai_gladiator: self,
-      #mdl_axe: axe,
-      #hit_ent: hit_ent
+      #var_f1445bd6: trace, #ai_gladiator: self, #mdl_axe: axe, #hit_ent: hit_ent
     });
 
     if(isDefined(hit_ent)) {

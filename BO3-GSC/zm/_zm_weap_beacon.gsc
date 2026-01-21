@@ -306,11 +306,11 @@ function player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_
 }
 
 function weapon_beacon_anims() {
-  n_time = getanimlength( % zombie_beacon::o_zm_dlc5_zombie_homing_deploy);
-  self animscripted("beacon_deploy", self.origin, self.angles, % zombie_beacon::o_zm_dlc5_zombie_homing_deploy);
+  n_time = getanimlength(%zombie_beacon::o_zm_dlc5_zombie_homing_deploy);
+  self animscripted("beacon_deploy", self.origin, self.angles, %zombie_beacon::o_zm_dlc5_zombie_homing_deploy);
   wait(n_time);
   if(isDefined(self)) {
-    self animscripted("beacon_spin", self.origin, self.angles, % zombie_beacon::o_zm_dlc5_zombie_homing_spin);
+    self animscripted("beacon_spin", self.origin, self.angles, %zombie_beacon::o_zm_dlc5_zombie_homing_spin);
   }
 }
 
@@ -373,9 +373,7 @@ function beacon_cleanup(parent) {
 function do_beacon_sound(model, info) {
   self.monk_scream_vox = 0;
   if(isDefined(level.grenade_safe_to_bounce)) {
-    if(![
-        [level.grenade_safe_to_bounce]
-      ](self.owner, level.w_beacon)) {
+    if(![[level.grenade_safe_to_bounce]](self.owner, level.w_beacon)) {
       self.monk_scream_vox = 1;
     }
   }
@@ -751,9 +749,7 @@ function private setup_devgui_func(str_devgui_path, str_dvar, n_value, func, n_b
   while(true) {
     n_dvar = getdvarint(str_dvar);
     if(n_dvar > n_base_value) {
-      [
-        [func]
-      ](n_dvar);
+      [[func]](n_dvar);
       setdvar(str_dvar, n_base_value);
     }
     util::wait_network_frame();

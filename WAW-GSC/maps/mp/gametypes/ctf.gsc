@@ -760,16 +760,6 @@ createFlagSpawnInfluencer(entityTeam) {
   otherteam = getotherteam(entityTeam);
   team_mask = get_team_mask(entityTeam);
   other_team_mask = get_team_mask(otherteam);
-  self.spawn_influencer_friendly = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    self.trigger.origin,
-    ctf_friendly_base_influencer_radius,
-    ctf_friendly_base_influencer_score,
-    team_mask,
-    maps\mp\gametypes\_spawning::get_score_curve_index(ctf_friendly_base_influencer_score_curve));
-  self.spawn_influencer_enemy = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    self.trigger.origin,
-    ctf_enemy_base_influencer_radius,
-    ctf_enemy_base_influencer_score,
-    other_team_mask,
-    maps\mp\gametypes\_spawning::get_score_curve_index(ctf_enemy_base_influencer_score_curve));
+  self.spawn_influencer_friendly = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, self.trigger.origin, ctf_friendly_base_influencer_radius, ctf_friendly_base_influencer_score, team_mask, maps\mp\gametypes\_spawning::get_score_curve_index(ctf_friendly_base_influencer_score_curve));
+  self.spawn_influencer_enemy = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, self.trigger.origin, ctf_enemy_base_influencer_radius, ctf_enemy_base_influencer_score, other_team_mask, maps\mp\gametypes\_spawning::get_score_curve_index(ctf_enemy_base_influencer_score_curve));
 }

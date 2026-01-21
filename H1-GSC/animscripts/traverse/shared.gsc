@@ -18,8 +18,8 @@ advancedtraverse(var_0, var_1) {
   var_3 = var_2.traverse_height - var_2.origin[2];
   thread teleportthread(var_3 - var_1);
   var_4 = 0.15;
-  self clearanim( % body, var_4);
-  self setflaggedanimknoballrestart("traverse", var_0, % animscript_root, 1, var_4, 1);
+  self clearanim(%body, var_4);
+  self setflaggedanimknoballrestart("traverse", var_0, %animscript_root, 1, var_4, 1);
   var_5 = 0.2;
   var_6 = 0.2;
   thread animscripts\notetracks::donotetracksforever("traverse", "no clear");
@@ -440,7 +440,7 @@ dog_wall_and_window_hop(var_0, var_1, var_2) {
   self.traverseanim = anim.dogtraverseanims[var_0];
   self.traversestartnode = var_3;
   self.traverseendnode = self getnegotiationendnode();
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("dog_traverse", self.traverseanim, 1, 0.2, 1);
   self.moveanimtype = "land";
   animscripts\notetracks::donotetracksintercept("dog_traverse", ::dog_handle_traverse_notetracks);
@@ -473,7 +473,7 @@ dog_jump_down(var_0, var_1, var_2, var_3) {
   }
 
   self.moveanimtype = "land";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("traverseAnim", self.traverseanim, 1, 0.2, 1);
 
   if(!var_3)
@@ -509,7 +509,7 @@ dog_jump_up(var_0, var_1, var_2, var_3) {
     thread teleportthreadex(var_0 - 40.0, 0.2, var_1);
 
   self.moveanimtype = "land";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("traverseAnim", self.traverseanim, 1, 0.2, 1);
 
   if(!var_3)
@@ -537,7 +537,7 @@ dog_long_jump(var_0, var_1) {
   var_3 = var_2.traverse_height - var_2.origin[2];
   thread teleportthread(var_3 - var_1);
   self.moveanimtype = "land";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimknoballrestart("dog_traverse", anim.dogtraverseanims[var_0], 1, 0.2, 1);
   animscripts\shared::donotetracks("dog_traverse");
   self.moveanimtype = undefined;

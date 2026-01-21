@@ -209,9 +209,7 @@ getEnemyTargets(owner) {
   enemyTargets = [];
 
   foreach(player in level.participants) {
-    if(owner isEnemy(player) &&
-      !(player _hasPerk("specialty_blindeye"))
-    ) {
+    if(owner isEnemy(player) && !(player _hasPerk("specialty_blindeye"))) {
       enemyTargets[enemyTargets.size] = player;
     }
   }

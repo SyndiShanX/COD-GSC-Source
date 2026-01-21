@@ -63,9 +63,7 @@ main() {
   level thread detect_and_change_music_states();
   if(isDefined(level.custom_ai_type)) {
     for(i = 0; i < level.custom_ai_type.size; i++) {
-      [
-        [level.custom_ai_type[i]]
-      ]();
+      [[level.custom_ai_type[i]]]();
     }
   }
   initZombieLeaderboardData();
@@ -1231,23 +1229,7 @@ zombie_intro_screen(string1, string2, string3, string4, string5) {
 }
 
 onPlayerConnect_clientDvars() {
-  self SetClientDvars("cg_deadChatWithDead", "1",
-    "cg_deadChatWithTeam", "1",
-    "cg_deadHearTeamLiving", "1",
-    "cg_deadHearAllLiving", "1",
-    "cg_everyoneHearsEveryone", "1",
-    "compass", "0",
-    "hud_showStance", "0",
-    "ammoCounterHide", "1",
-    "miniscoreboardhide", "1",
-    "ui_hud_hardcore", "0",
-    "player_topDownCamMode", "3",
-    "ai_corpseCount", "14",
-    "waypointOffscreenPointerHeight", "30",
-    "waypointOffscreenPointerWidth", "70",
-    "cg_drawSpectatorMessages", "0",
-    "sm_sunSampleSizeNear", ".57",
-    "playerPushAmount", "1");
+  self SetClientDvars("cg_deadChatWithDead", "1", "cg_deadChatWithTeam", "1", "cg_deadHearTeamLiving", "1", "cg_deadHearAllLiving", "1", "cg_everyoneHearsEveryone", "1", "compass", "0", "hud_showStance", "0", "ammoCounterHide", "1", "miniscoreboardhide", "1", "ui_hud_hardcore", "0", "player_topDownCamMode", "3", "ai_corpseCount", "14", "waypointOffscreenPointerHeight", "30", "waypointOffscreenPointerWidth", "70", "cg_drawSpectatorMessages", "0", "sm_sunSampleSizeNear", ".57", "playerPushAmount", "1");
   self SetDepthOfField(0, 0, 512, 4000, 4, 0);
   self setClientDvars("aim_lockon_pitch_strength", 0.0, "player_topDownCamOffset", (0, -15, 650), "player_TopDownCamAngles", (75, 0, 0), "cg_fov", 65);
 }

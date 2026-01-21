@@ -32,7 +32,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_light(var_2, "taillight_truck_left", "tag_taillight_left", "fx/misc/car_taillight_bm21", "headlights");
   maps\_vehicle::build_light(var_2, "brakelight_troops_right", "tag_taillight_right", "fx/misc/car_taillight_bm21", "brakelights");
   maps\_vehicle::build_light(var_2, "brakelight_troops_left", "tag_taillight_left", "fx/misc/car_taillight_bm21", "brakelights");
-  maps\_vehicle::build_drive( % bm21_driving_idle_forward, % bm21_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%bm21_driving_idle_forward, %bm21_driving_idle_backward, 10);
 }
 
 set_vehicle_anims(var_0) {

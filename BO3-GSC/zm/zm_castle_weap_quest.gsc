@@ -91,7 +91,7 @@ function soul_catcher_state_manager() {
   level clientfield::set(self.script_parameters, 7);
   self waittill("first_zombie_killed_in_zone", e_player);
   level clientfield::set(self.script_parameters, 1);
-  anim_length = getanimlength( % zm_castle::rtrg_o_zm_dlc1_dragonhead_intro);
+  anim_length = getanimlength(%zm_castle::rtrg_o_zm_dlc1_dragonhead_intro);
   e_player thread zm_castle_vo::function_ad27f488(anim_length);
   wait(anim_length);
   while(!self.is_charged) {
@@ -171,12 +171,12 @@ function zombie_soul_catcher_death(einflictor, attacker, idamage, smeansofdeath,
   wait(n_anim_time);
   level clientfield::set(var_56269cbf.script_parameters, n_eating_anim);
   if(n_eating_anim == 3) {
-    var_a8b20b82 = (getanimlength( % zm_castle::rtrg_o_zm_dlc1_dragonhead_consume_pre_eat_f)) + (getanimlength( % zm_castle::rtrg_ai_zm_dlc1_dragonhead_consume_zombie_align_f));
+    var_a8b20b82 = (getanimlength(%zm_castle::rtrg_o_zm_dlc1_dragonhead_consume_pre_eat_f)) + (getanimlength(%zm_castle::rtrg_ai_zm_dlc1_dragonhead_consume_zombie_align_f));
   } else {
     if(n_eating_anim == 4) {
-      var_a8b20b82 = (getanimlength( % zm_castle::rtrg_o_zm_dlc1_dragonhead_consume_pre_eat_r)) + (getanimlength( % zm_castle::rtrg_ai_zm_dlc1_dragonhead_consume_zombie_align_r));
+      var_a8b20b82 = (getanimlength(%zm_castle::rtrg_o_zm_dlc1_dragonhead_consume_pre_eat_r)) + (getanimlength(%zm_castle::rtrg_ai_zm_dlc1_dragonhead_consume_zombie_align_r));
     } else {
-      var_a8b20b82 = (getanimlength( % zm_castle::rtrg_o_zm_dlc1_dragonhead_consume_pre_eat_l)) + (getanimlength( % zm_castle::rtrg_ai_zm_dlc1_dragonhead_consume_zombie_align_l));
+      var_a8b20b82 = (getanimlength(%zm_castle::rtrg_o_zm_dlc1_dragonhead_consume_pre_eat_l)) + (getanimlength(%zm_castle::rtrg_ai_zm_dlc1_dragonhead_consume_zombie_align_l));
     }
   }
   wait(var_a8b20b82 - 0.5);
@@ -211,7 +211,7 @@ function get_correct_model_array() {
 }
 
 function function_edf4b761() {
-  anim_length = getanimlength( % zm_castle::rtrg_o_zm_dlc1_dragonhead_intro);
+  anim_length = getanimlength(%zm_castle::rtrg_o_zm_dlc1_dragonhead_intro);
   wait(anim_length);
   self notify("hash_f77f4f21");
   self.is_eating = 0;

@@ -26,30 +26,19 @@ wall_hop_zombie() {
   if(self.has_legs) {
     switch (self.zombie_move_speed) {
       case "walk":
-        traverseData["traverseAnim"] = array( %
-          ai_zombie_traverse_v1, %
-          ai_zombie_traverse_v2
-        );
+        traverseData["traverseAnim"] = array(%ai_zombie_traverse_v1, %ai_zombie_traverse_v2);
         break;
       case "run":
-        traverseData["traverseAnim"] = array( %
-          ai_zombie_traverse_v5
-        );
+        traverseData["traverseAnim"] = array(%ai_zombie_traverse_v5);
         break;
       case "sprint":
-        traverseData["traverseAnim"] = array( %
-          ai_zombie_traverse_v6, %
-          ai_zombie_traverse_v7
-        );
+        traverseData["traverseAnim"] = array(%ai_zombie_traverse_v6, %ai_zombie_traverse_v7);
         break;
       default:
         assertmsg("Zombie move speed of '" + self.zombie_move_speed + "' is not supported for wall hop.");
     }
   } else {
-    traverseData["traverseAnim"] = array( %
-      ai_zombie_traverse_crawl_v1, %
-      ai_zombie_traverse_v4
-    );
+    traverseData["traverseAnim"] = array(%ai_zombie_traverse_crawl_v1, %ai_zombie_traverse_v4);
   }
   self DoTraverse(traverseData);
 }
@@ -57,14 +46,9 @@ wall_hop_zombie() {
 wall_hop_quad() {
   traverseData = [];
   if(self.has_legs) {
-    traverseData["traverseAnim"] = array( %
-      ai_zombie_traverse_v3
-    );
+    traverseData["traverseAnim"] = array(%ai_zombie_traverse_v3);
   } else {
-    traverseData["traverseAnim"] = array( %
-      ai_zombie_traverse_crawl_v1, %
-      ai_zombie_traverse_v4
-    );
+    traverseData["traverseAnim"] = array(%ai_zombie_traverse_crawl_v1, %ai_zombie_traverse_v4);
   }
   DoTraverse(traverseData);
 }

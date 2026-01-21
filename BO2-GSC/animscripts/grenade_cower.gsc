@@ -35,13 +35,13 @@ main() {
     if(isDefined(self.grenade) && trydive(grenadeangle)) {
       return;
     }
-    self setflaggedanimknoballrestart("cowerstart", animarray("cower_start"), % body, 1, 0.2);
+    self setflaggedanimknoballrestart("cowerstart", animarray("cower_start"), %body, 1, 0.2);
     self animscripts\shared::donotetracks("cowerstart");
   }
 
   self.a.pose = "crouch";
   self.a.movement = "stop";
-  self setflaggedanimknoballrestart("cower", animarray("cower_idle"), % body, 1, 0.2);
+  self setflaggedanimknoballrestart("cower", animarray("cower_idle"), %body, 1, 0.2);
   self animscripts\shared::donotetracks("cower");
   self waittill("never");
 }
@@ -60,7 +60,7 @@ trydive(grenadeangle) {
   if(!self maymovetopoint(divetopos))
     return false;
 
-  self setflaggedanimknoballrestart("cowerstart", diveanim, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("cowerstart", diveanim, %body, 1, 0.2);
   self animscripts\shared::donotetracks("cowerstart");
   return true;
 }

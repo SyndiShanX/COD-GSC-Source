@@ -80,7 +80,7 @@ MeleeCombat() {
     if(isDefined(self.melee_anim_func)) {
       self thread[[self.melee_anim_func]](zombie_attack);
     }
-    self SetFlaggedAnimKnobAllRestart("meleeanim", zombie_attack, % body, 1, .2, 1);
+    self SetFlaggedAnimKnobAllRestart("meleeanim", zombie_attack, %body, 1, .2, 1);
     while(1) {
       self waittill("meleeanim", note);
       if(note == "end") {
@@ -297,17 +297,14 @@ isMeleePathClear(vecToEnemy, enemyPoint) {
   }
   trace1 = bulletTrace(self.origin + (0, 0, 20), meleePoint + (0, 0, 20), true, self);
   trace2 = bulletTrace(self.origin + (0, 0, 72), meleePoint + (0, 0, 72), true, self);
-  if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 &&
-    isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
+  if(isDefined(trace1["fraction"]) && trace1["fraction"] == 1 && isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
     return true;
   }
-  if(isDefined(trace1["entity"]) && trace1["entity"] == self.enemy &&
-    isDefined(trace2["entity"]) && trace2["entity"] == self.enemy) {
+  if(isDefined(trace1["entity"]) && trace1["entity"] == self.enemy && isDefined(trace2["entity"]) && trace2["entity"] == self.enemy) {
     return true;
   }
   if(is_true(level.zombie_melee_in_water)) {
-    if(isDefined(trace1["surfacetype"]) && trace1["surfacetype"] == "water" &&
-      isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
+    if(isDefined(trace1["surfacetype"]) && trace1["surfacetype"] == "water" && isDefined(trace2["fraction"]) && trace2["fraction"] == 1) {
       return true;
     }
   }
@@ -329,7 +326,7 @@ AiVsAiMeleeCombat() {
   self endon("killanimscript");
   self melee_notify_wrapper();
   self OrientMode("face enemy");
-  self ClearAnim( % root, 0.3);
+  self ClearAnim(%root, 0.3);
   IWin = (randomInt(10) < 8);
   if(isDefined(self.magic_bullet_shield) && self.magic_bullet_shield) {
     IWin = true;
@@ -362,7 +359,7 @@ AiVsAiMeleeCombat() {
 
 AiVsAiMeleeCharge(desiredDistSqrd) {
   giveUpTime = GetTime() + 2500;
-  self SetAnimKnobAll(animscripts\zombie_run::GetRunAnim(), % body, 1, 0.2);
+  self SetAnimKnobAll(animscripts\zombie_run::GetRunAnim(), %body, 1, 0.2);
   while(distanceSquared(self.origin, self.enemy.origin) > desiredDistSqrd && GetTime() < giveUpTime) {
     wait .05;
   }
@@ -379,7 +376,7 @@ AiVsAiMeleeAnim(myAnim) {
   partnerDir = self.meleePartner.origin - self.origin;
   self OrientMode("face angle", VectorToAngles(partnerDir)[1]);
   self AnimMode("zonly_physics");
-  self SetFlaggedAnimKnobAllRestart("meleeAnim", myAnim, % body, 1, 0.2);
+  self SetFlaggedAnimKnobAllRestart("meleeAnim", myAnim, %body, 1, 0.2);
   self animscripts\zombie_shared::DoNoteTracks("meleeAnim");
   self notify("end_melee");
 }

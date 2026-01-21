@@ -328,7 +328,7 @@ Melee_StartMovement() {
 }
 
 Melee_StopMovement() {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self.melee.playingMovementAnim = undefined;
   self.a.movement = "stop";
   self orientMode("face default");
@@ -431,7 +431,7 @@ Melee_Standard_Main() {
     self animscripts\battleChatter_ai::evaluateMeleeEvent();
 
     self orientMode("face point", self.melee.target.origin);
-    self setflaggedanimknoballrestart("meleeanim", % melee_1, % body, 1, .2, 1);
+    self setflaggedanimknoballrestart("meleeanim", %melee_1, %body, 1, .2, 1);
     self.melee.inProgress = true;
 
     // If the attack loop returns false, we need to stop this melee
@@ -509,7 +509,7 @@ Melee_Standard_GetInPosition() {
 
   if(enemyDistanceSq <= MELEE_RANGE_SQ) {
     // just play a melee-from-standing transition
-    self SetFlaggedAnimKnobAll("readyanim", % stand_2_melee_1, % body, 1, .3, 1);
+    self SetFlaggedAnimKnobAll("readyanim", %stand_2_melee_1, %body, 1, .3, 1);
     self animscripts\shared::DoNoteTracks("readyanim");
     return true;
   }
@@ -520,7 +520,7 @@ Melee_Standard_GetInPosition() {
 
   sampleTime = 0.1;
 
-  raiseGunAnimTravelDist = length(getmovedelta( % run_2_melee_charge, 0, 1));
+  raiseGunAnimTravelDist = length(getmovedelta(%run_2_melee_charge, 0, 1));
   meleeAnimTravelDist = 32;
   shouldRaiseGunDist = MELEE_RANGE * 0.75 + meleeAnimTravelDist + raiseGunAnimTravelDist;
   shouldRaiseGunDistSq = shouldRaiseGunDist * shouldRaiseGunDist;
@@ -528,7 +528,7 @@ Melee_Standard_GetInPosition() {
   shouldMeleeDist = MELEE_RANGE + meleeAnimTravelDist;
   shouldMeleeDistSq = shouldMeleeDist * shouldMeleeDist;
 
-  raiseGunFullDuration = getanimlength( % run_2_melee_charge) * 1000;
+  raiseGunFullDuration = getanimlength(%run_2_melee_charge) * 1000;
   raiseGunFinishDuration = raiseGunFullDuration - 100;
   raiseGunPredictDuration = raiseGunFullDuration - 200;
   raiseGunStartTime = 0;
@@ -542,7 +542,7 @@ Melee_Standard_GetInPosition() {
   else
     self orientMode("face point", self.melee.target.origin);
 
-  self SetFlaggedAnimKnobAll("chargeanim", runAnim, % body, 1, .3, 1);
+  self SetFlaggedAnimKnobAll("chargeanim", runAnim, %body, 1, .3, 1);
   raisingGun = false;
 
   while(1) {
@@ -553,17 +553,16 @@ Melee_Standard_GetInPosition() {
     if(!raisingGun) {
       if(willBeWithinRangeWhenGunIsRaised) {
         Melee_StartMovement();
-        self SetFlaggedAnimKnobAllRestart("chargeanim", % run_2_melee_charge, % body, 1, .2, 1);
+        self SetFlaggedAnimKnobAllRestart("chargeanim", %run_2_melee_charge, %body, 1, .2, 1);
         raiseGunStartTime = time;
         raisingGun = true;
       }
     } else {
-      // if we *are* raising our gun, don't stop unless we're hopelessly out of range,
-      // or if we hit the end of the raise gun animation and didn't melee yet
+      // if we *are* raising our gun, don't stop unless we're hopelessly out of range, // or if we hit the end of the raise gun animation and didn't melee yet
       withinRangeNow = enemyDistanceSq <= shouldRaiseGunDistSq;
       if(time - raiseGunStartTime >= raiseGunFinishDuration || (!willBeWithinRangeWhenGunIsRaised && !withinRangeNow)) {
         Melee_StartMovement();
-        self SetFlaggedAnimKnobAll("chargeanim", runAnim, % body, 1, .3, 1);
+        self SetFlaggedAnimKnobAll("chargeanim", runAnim, %body, 1, .3, 1);
         raisingGun = false;
       }
     }
@@ -730,9 +729,7 @@ Melee_AIvsAI_Exposed_ChooseAnimationAndPosition() {
   exposedMelees = Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_BuildExposedList();
   for(i = 0; i < exposedMelees.size; i++) {
     // Test each melee move in order
-    if([
-        [exposedMelees[i]]
-      ](angleDiff)) {
+    if([[exposedMelees[i]]](angleDiff)) {
       assert(isDefined(self.melee.animName));
       assert(isDefined(target.melee.animName));
 
@@ -873,9 +870,7 @@ Melee_AIvsAI_ChooseAction() {
   assert(!isDefined(self.magic_bullet_shield) || !isDefined(self.melee.target.magic_bullet_shield));
 
   if(isDefined(self.specialMeleeChooseAction)) {
-    if(![
-        [self.specialMeleeChooseAction]
-      ]())
+    if(![[self.specialMeleeChooseAction]]())
       return false;
     self.melee.precisePositioning = true;
   } else if(isDefined(target.specialMeleeChooseAction)) {
@@ -1105,8 +1100,8 @@ Melee_AIvsAI_GetInPosition() {
     return false;
 
   Melee_StartMovement();
-  self clearanim( % body, 0.2);
-  self setAnimKnobAll(animscripts\run::GetRunAnim(), % body, 1, 0.2);
+  self clearanim(%body, 0.2);
+  self setAnimKnobAll(animscripts\run::GetRunAnim(), %body, 1, 0.2);
   self animMode("zonly_physics");
   self.keepClaimedNode = true;
 
@@ -1159,14 +1154,14 @@ Melee_AIvsAI_Execute() {
 
   // only have standing melees for now, set these with notetracks
   self.a.pose = "stand";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
 
   // Disable some interruptions if we're going to die, we don't want to break out of melee
   if(isDefined(self.melee.death))
     self Melee_DisableInterruptions();
 
   // Start the base animation, and loop over the note tracks until one of them tell us to stop	
-  self setFlaggedAnimKnobAllRestart("meleeAnim", self.melee.animName, % body, 1, 0.2);
+  self setFlaggedAnimKnobAllRestart("meleeAnim", self.melee.animName, %body, 1, 0.2);
   endNote = self animscripts\shared::DoNoteTracks("meleeAnim", ::Melee_HandleNoteTracks);
 
   // If the survival animation stopped us, play it now
@@ -1174,7 +1169,7 @@ Melee_AIvsAI_Execute() {
     // If we dropped our weapon but we got saved, restore it immediately
     Melee_DroppedWeaponRestore();
 
-    self setflaggedanimknoballrestart("meleeAnim", self.melee.surviveAnimName, % body, 1, 0.2);
+    self setflaggedanimknoballrestart("meleeAnim", self.melee.surviveAnimName, %body, 1, 0.2);
     endNote = self animscripts\shared::DoNoteTracks("meleeAnim", ::Melee_HandleNoteTracks);
   }
 

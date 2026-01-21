@@ -517,8 +517,7 @@ function_247597a(b_charged) {
 
   if(isDefined(level.var_4822b326)) {
     level notify(#"ww_charon_hit", {
-      #player: self,
-      #e_entity: a_trace[# "entity"]
+      #player: self, #e_entity: a_trace[# "entity"]
     });
   }
 

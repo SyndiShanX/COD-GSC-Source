@@ -69,9 +69,7 @@ function_89769800(params, unitrigger, b_start, var_c060d2c8) {
   }
 
   if(b_start) {
-    if(isDefined(params.var_deac51dd) && ![
-        [params.var_deac51dd]
-      ](self, unitrigger)) {
+    if(isDefined(params.var_deac51dd) && ![[params.var_deac51dd]](self, unitrigger)) {
       return false;
     }
   } else if(isDefined(params.var_5301f4f1) && ![[params.var_5301f4f1]](self, unitrigger)) {

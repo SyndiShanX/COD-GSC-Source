@@ -362,7 +362,7 @@ hide_beer_can() {
 #using_animtree("player");
 
 fade_out_house_end() {
-  anim_length = getanimlength( % ch_pan_01_07_gringos_player);
+  anim_length = getanimlength(%ch_pan_01_07_gringos_player);
   wait(anim_length - 2.1);
   level notify("hat_off");
   level thread screen_fade_out(2);
@@ -511,7 +511,7 @@ mcknight_close_the_door_argument_vo(guy) {
 
 gringo_spraypaint_vo() {
   level endon("player_outro_started");
-  time = getanimlength( % ch_pan_01_06_intro_backyard_leave_mason);
+  time = getanimlength(%ch_pan_01_06_intro_backyard_leave_mason);
   wait(time - 10);
   m_gringo_graffiti = getent("m_gringo_graffiti", "targetname");
   m_gringo_graffiti say_dialog("tee1_hurry_it_up_0", 3, 1);

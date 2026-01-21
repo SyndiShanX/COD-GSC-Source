@@ -30,95 +30,22 @@ build_skit_entry(character, vo) {
 init_skits() {
   if(!isDefined(level._skit_data)) {
     level._skit_data = [];
-    level._skit_data["tt1"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_1_0"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_1_1"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_1_2"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_1_3"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_1_4"));
-    level._skit_data["tt2"] = array(build_skit_entry("takeo", "vox_egg_skit_travel_2_0"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_2_1"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_2_2"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_2_3"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_2_4"));
-    level._skit_data["tt3"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_3_0"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_3_1"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_3_2"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_3_3"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_3_3a"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_3_4"));
-    level._skit_data["tt4a"] = array(build_skit_entry("takeo", "vox_egg_skit_travel_4a_0"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_4a_1"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_4a_2"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_4a_3"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_4a_4"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_4a_5"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_4a_6"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_4a_7"));
-    level._skit_data["tt4b"] = array(build_skit_entry("richtofen", "vox_egg_skit_travel_4b_0"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_4b_1"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_4b_2"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_4b_3"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_4b_4"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_4b_5"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_4b_6"));
-    level._skit_data["tt5"] = array(build_skit_entry("richtofen", "vox_egg_skit_travel_5_0"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_5_1"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_5_2"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_5_3"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_5_4"));
-    level._skit_data["tt6"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_6_0"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_6_1"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_6_2"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_6_3"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_6_4"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_6_5"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_6_6"));
-    level._skit_data["tt7a"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_7a_0"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_7a_1"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_7a_2"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_7a_3"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_7a_4"));
-    level._skit_data["tt7b"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_7b_0"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_7b_1"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_7b_2"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_7b_3"),
-      build_skit_entry("takeo", "vox_egg_skit_travel_7b_4"));
-    level._skit_data["tt8"] = array(build_skit_entry("richtofen", "vox_egg_skit_travel_8_0"),
-      build_skit_entry("dempsey", "vox_egg_skit_travel_8_1"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_8_2"),
-      build_skit_entry("nikolai", "vox_egg_skit_travel_8_3"),
-      build_skit_entry("richtofen", "vox_egg_skit_travel_8_4"));
-    level._skit_data["fail1"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_0_0"),
-      build_skit_entry("nikolai", "vox_egg_skit_fail_0_1"),
-      build_skit_entry("takeo", "vox_egg_skit_fail_0_2"),
-      build_skit_entry("richtofen", "vox_egg_skit_fail_0_3"));
-    level._skit_data["fail2"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_1_0"),
-      build_skit_entry("nikolai", "vox_egg_skit_fail_2_1"),
-      build_skit_entry("takeo", "vox_egg_skit_fail_3_2"),
-      build_skit_entry("richtofen", "vox_egg_skit_fail_4_3"));
-    level._skit_data["fail3"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_0_0"),
-      build_skit_entry("nikolai", "vox_egg_skit_fail_1_1"),
-      build_skit_entry("takeo", "vox_egg_skit_fail_2_2"),
-      build_skit_entry("richtofen", "vox_egg_skit_fail_3_3"));
-    level._skit_data["fail4"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_0_0"),
-      build_skit_entry("nikolai", "vox_egg_skit_fail_1_1"),
-      build_skit_entry("takeo", "vox_egg_skit_fail_2_2"),
-      build_skit_entry("richtofen", "vox_egg_skit_fail_3_3"));
-    level._skit_data["start0"] = array(build_skit_entry("dempsey", "vox_egg_skit_start_0_0"),
-      build_skit_entry("nikolai", "vox_egg_skit_start_0_1"),
-      build_skit_entry("takeo", "vox_egg_skit_start_0_2"),
-      build_skit_entry("richtofen", "vox_egg_skit_start_0_2a"),
-      build_skit_entry("nikolai", "vox_egg_skit_start_0_3"),
-      build_skit_entry("richtofen", "vox_egg_skit_start_0_4"),
-      build_skit_entry("richtofen", "vox_egg_skit_start_0_5"));
-    level._skit_data["start1"] = array(build_skit_entry("takeo", "vox_egg_skit_start_1_0"),
-      build_skit_entry("richtofen", "vox_egg_skit_start_1_1"),
-      build_skit_entry("nikolai", "vox_egg_skit_start_1_2"),
-      build_skit_entry("nikolai", "vox_egg_skit_start_1_3"),
-      build_skit_entry("takeo", "vox_egg_skit_start_1_4"),
-      build_skit_entry("nikolai", "vox_egg_skit_start_1_5"),
-      build_skit_entry("dempsey", "vox_egg_skit_start_1_6"),
-      build_skit_entry("dempsey", "vox_egg_skit_start_1_7"));
+    level._skit_data["tt1"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_1_0"), build_skit_entry("nikolai", "vox_egg_skit_travel_1_1"), build_skit_entry("takeo", "vox_egg_skit_travel_1_2"), build_skit_entry("richtofen", "vox_egg_skit_travel_1_3"), build_skit_entry("dempsey", "vox_egg_skit_travel_1_4"));
+    level._skit_data["tt2"] = array(build_skit_entry("takeo", "vox_egg_skit_travel_2_0"), build_skit_entry("nikolai", "vox_egg_skit_travel_2_1"), build_skit_entry("richtofen", "vox_egg_skit_travel_2_2"), build_skit_entry("dempsey", "vox_egg_skit_travel_2_3"), build_skit_entry("nikolai", "vox_egg_skit_travel_2_4"));
+    level._skit_data["tt3"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_3_0"), build_skit_entry("takeo", "vox_egg_skit_travel_3_1"), build_skit_entry("richtofen", "vox_egg_skit_travel_3_2"), build_skit_entry("nikolai", "vox_egg_skit_travel_3_3"), build_skit_entry("richtofen", "vox_egg_skit_travel_3_3a"), build_skit_entry("dempsey", "vox_egg_skit_travel_3_4"));
+    level._skit_data["tt4a"] = array(build_skit_entry("takeo", "vox_egg_skit_travel_4a_0"), build_skit_entry("dempsey", "vox_egg_skit_travel_4a_1"), build_skit_entry("richtofen", "vox_egg_skit_travel_4a_2"), build_skit_entry("nikolai", "vox_egg_skit_travel_4a_3"), build_skit_entry("dempsey", "vox_egg_skit_travel_4a_4"), build_skit_entry("dempsey", "vox_egg_skit_travel_4a_5"), build_skit_entry("dempsey", "vox_egg_skit_travel_4a_6"), build_skit_entry("richtofen", "vox_egg_skit_travel_4a_7"));
+    level._skit_data["tt4b"] = array(build_skit_entry("richtofen", "vox_egg_skit_travel_4b_0"), build_skit_entry("dempsey", "vox_egg_skit_travel_4b_1"), build_skit_entry("richtofen", "vox_egg_skit_travel_4b_2"), build_skit_entry("dempsey", "vox_egg_skit_travel_4b_3"), build_skit_entry("richtofen", "vox_egg_skit_travel_4b_4"), build_skit_entry("nikolai", "vox_egg_skit_travel_4b_5"), build_skit_entry("richtofen", "vox_egg_skit_travel_4b_6"));
+    level._skit_data["tt5"] = array(build_skit_entry("richtofen", "vox_egg_skit_travel_5_0"), build_skit_entry("takeo", "vox_egg_skit_travel_5_1"), build_skit_entry("dempsey", "vox_egg_skit_travel_5_2"), build_skit_entry("nikolai", "vox_egg_skit_travel_5_3"), build_skit_entry("richtofen", "vox_egg_skit_travel_5_4"));
+    level._skit_data["tt6"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_6_0"), build_skit_entry("richtofen", "vox_egg_skit_travel_6_1"), build_skit_entry("richtofen", "vox_egg_skit_travel_6_2"), build_skit_entry("nikolai", "vox_egg_skit_travel_6_3"), build_skit_entry("richtofen", "vox_egg_skit_travel_6_4"), build_skit_entry("takeo", "vox_egg_skit_travel_6_5"), build_skit_entry("takeo", "vox_egg_skit_travel_6_6"));
+    level._skit_data["tt7a"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_7a_0"), build_skit_entry("richtofen", "vox_egg_skit_travel_7a_1"), build_skit_entry("dempsey", "vox_egg_skit_travel_7a_2"), build_skit_entry("nikolai", "vox_egg_skit_travel_7a_3"), build_skit_entry("takeo", "vox_egg_skit_travel_7a_4"));
+    level._skit_data["tt7b"] = array(build_skit_entry("dempsey", "vox_egg_skit_travel_7b_0"), build_skit_entry("richtofen", "vox_egg_skit_travel_7b_1"), build_skit_entry("nikolai", "vox_egg_skit_travel_7b_2"), build_skit_entry("takeo", "vox_egg_skit_travel_7b_3"), build_skit_entry("takeo", "vox_egg_skit_travel_7b_4"));
+    level._skit_data["tt8"] = array(build_skit_entry("richtofen", "vox_egg_skit_travel_8_0"), build_skit_entry("dempsey", "vox_egg_skit_travel_8_1"), build_skit_entry("richtofen", "vox_egg_skit_travel_8_2"), build_skit_entry("nikolai", "vox_egg_skit_travel_8_3"), build_skit_entry("richtofen", "vox_egg_skit_travel_8_4"));
+    level._skit_data["fail1"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_0_0"), build_skit_entry("nikolai", "vox_egg_skit_fail_0_1"), build_skit_entry("takeo", "vox_egg_skit_fail_0_2"), build_skit_entry("richtofen", "vox_egg_skit_fail_0_3"));
+    level._skit_data["fail2"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_1_0"), build_skit_entry("nikolai", "vox_egg_skit_fail_2_1"), build_skit_entry("takeo", "vox_egg_skit_fail_3_2"), build_skit_entry("richtofen", "vox_egg_skit_fail_4_3"));
+    level._skit_data["fail3"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_0_0"), build_skit_entry("nikolai", "vox_egg_skit_fail_1_1"), build_skit_entry("takeo", "vox_egg_skit_fail_2_2"), build_skit_entry("richtofen", "vox_egg_skit_fail_3_3"));
+    level._skit_data["fail4"] = array(build_skit_entry("dempsey", "vox_egg_skit_fail_0_0"), build_skit_entry("nikolai", "vox_egg_skit_fail_1_1"), build_skit_entry("takeo", "vox_egg_skit_fail_2_2"), build_skit_entry("richtofen", "vox_egg_skit_fail_3_3"));
+    level._skit_data["start0"] = array(build_skit_entry("dempsey", "vox_egg_skit_start_0_0"), build_skit_entry("nikolai", "vox_egg_skit_start_0_1"), build_skit_entry("takeo", "vox_egg_skit_start_0_2"), build_skit_entry("richtofen", "vox_egg_skit_start_0_2a"), build_skit_entry("nikolai", "vox_egg_skit_start_0_3"), build_skit_entry("richtofen", "vox_egg_skit_start_0_4"), build_skit_entry("richtofen", "vox_egg_skit_start_0_5"));
+    level._skit_data["start1"] = array(build_skit_entry("takeo", "vox_egg_skit_start_1_0"), build_skit_entry("richtofen", "vox_egg_skit_start_1_1"), build_skit_entry("nikolai", "vox_egg_skit_start_1_2"), build_skit_entry("nikolai", "vox_egg_skit_start_1_3"), build_skit_entry("takeo", "vox_egg_skit_start_1_4"), build_skit_entry("nikolai", "vox_egg_skit_start_1_5"), build_skit_entry("dempsey", "vox_egg_skit_start_1_6"), build_skit_entry("dempsey", "vox_egg_skit_start_1_7"));
   }
 }
 

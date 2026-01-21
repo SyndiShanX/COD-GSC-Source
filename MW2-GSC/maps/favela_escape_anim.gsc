@@ -71,12 +71,9 @@ setup_anims() {
   level.scr_anim["freerunner"]["favela_escape_bigjump_ghost"] = % favela_escape_bigjump_ghost;
   level.scr_anim["freerunner"]["favela_escape_bigjump_faust"] = % favela_escape_bigjump_faust;
   // (added in script later, so that they don't stomp on scripted dialogue if the timing works out that way)
-  // "Uraaa!"
-  //level.scr_sound[ "freerunner" ][ "favela_escape_bigjump_soap" ] = "favesc_cmt_jumpsfx";
-  // "Unghh!"
-  //level.scr_sound[ "freerunner" ][ "favela_escape_bigjump_ghost" ] = "favesc_gst_jumpsfx";
-  // "Gahh!"
-  level.scr_sound["freerunner"]["favela_escape_bigjump_faust"] = "favesc_tf1_jumpsfx";
+  // "Uraaa!"//level.scr_sound[ "freerunner" ][ "favela_escape_bigjump_soap" ] = "favesc_cmt_jumpsfx";
+  // "Unghh!"//level.scr_sound[ "freerunner" ][ "favela_escape_bigjump_ghost" ] = "favesc_gst_jumpsfx";
+  // "Gahh!"level.scr_sound["freerunner"]["favela_escape_bigjump_faust"] = "favesc_tf1_jumpsfx";
 
   // angry mob anims
   level.scr_anim["generic"]["mobwalk_A"] = % mob_arc_A;
@@ -133,255 +130,176 @@ setup_anims() {
 
 setup_dialogue() {
   // -- INTRO PATH --
-  // "Sir, the militia's closin' in! Almost two hundred of 'em, front and back!"
-  level.scr_sound["hero1"]["favesc_gst_closingin"] = "favesc_gst_closingin";
+  // "Sir, the militia's closin' in! Almost two hundred of 'em, front and back!"level.scr_sound["hero1"]["favesc_gst_closingin"] = "favesc_gst_closingin";
 
-  // "We're gonna have to fight our way to the LZ! Let's go!"
-  level.scr_sound["sarge"]["favesc_cmt_fightourway"] = "favesc_cmt_fightourway";
+  // "We're gonna have to fight our way to the LZ! Let's go!"level.scr_sound["sarge"]["favesc_cmt_fightourway"] = "favesc_cmt_fightourway";
 
-  // "What about Rojas?"
-  level.scr_sound["hero1"]["favesc_gst_whataboutrojas"] = "favesc_gst_whataboutrojas";
+  // "What about Rojas?"level.scr_sound["hero1"]["favesc_gst_whataboutrojas"] = "favesc_gst_whataboutrojas";
 
-  // "Victim of a hostile takeover?"
-  level.scr_sound["sarge"]["favesc_cmt_takeover"] = "favesc_cmt_takeover";
+  // "Victim of a hostile takeover?"level.scr_sound["sarge"]["favesc_cmt_takeover"] = "favesc_cmt_takeover";
 
-  // "Works for me."
-  level.scr_sound["hero1"]["favesc_gst_worksforme"] = "favesc_gst_worksforme";
+  // "Works for me."level.scr_sound["hero1"]["favesc_gst_worksforme"] = "favesc_gst_worksforme";
 
-  // "Nikolai! We're at the top of the favela surrounded by militia! Bring the chopper to the market, do you copy, over!"
-  level.scr_sound["sarge"]["favesc_cmt_surrounded"] = "favesc_cmt_surrounded";
+  // "Nikolai! We're at the top of the favela surrounded by militia! Bring the chopper to the market, do you copy, over!"level.scr_sound["sarge"]["favesc_cmt_surrounded"] = "favesc_cmt_surrounded";
 
-  // "Ok my friend, I am on the way!"
-  level.scr_radio["favesc_nkl_ontheway"] = "favesc_nkl_ontheway";
+  // "Ok my friend, I am on the way!"level.scr_radio["favesc_nkl_ontheway"] = "favesc_nkl_ontheway";
 
-  // "Everyone get ready! Lock and load! "
-  level.scr_sound["sarge"]["favesc_cmt_lockandload"] = "favesc_cmt_lockandload";
+  // "Everyone get ready! Lock and load! "level.scr_sound["sarge"]["favesc_cmt_lockandload"] = "favesc_cmt_lockandload";
 
-  // "Let's do this!!"
-  level.scr_sound["hero1"]["favesc_gst_letsdothis"] = "favesc_gst_letsdothis";
+  // "Let's do this!!"level.scr_sound["hero1"]["favesc_gst_letsdothis"] = "favesc_gst_letsdothis";
 
   // -- ENEMY SPAWN CALLOUTS --
-  // "Contaaact!!! Foot-mobiles on the rooftops, closing in fast from the south!!!"
-  level.scr_sound["hero1"]["favesc_gst_onrooftops"] = "favesc_gst_onrooftops";
+  // "Contaaact!!! Foot-mobiles on the rooftops, closing in fast from the south!!!"level.scr_sound["hero1"]["favesc_gst_onrooftops"] = "favesc_gst_onrooftops";
 
-  // "Tangos at ground level dead ahead!!"
-  level.scr_sound["hero1"]["favesc_gst_deadahead"] = "favesc_gst_deadahead";
+  // "Tangos at ground level dead ahead!!"level.scr_sound["hero1"]["favesc_gst_deadahead"] = "favesc_gst_deadahead";
 
-  // "Militia comin' out of the shack on the left!"
-  level.scr_sound["hero1"]["favesc_gst_shackonleft"] = "favesc_gst_shackonleft";
+  // "Militia comin' out of the shack on the left!"level.scr_sound["hero1"]["favesc_gst_shackonleft"] = "favesc_gst_shackonleft";
 
-  // "More skinnies on the rooftops at 12 o'clock!!"
-  level.scr_sound["hero1"]["favesc_gst_skinnies"] = "favesc_gst_skinnies";
+  // "More skinnies on the rooftops at 12 o'clock!!"level.scr_sound["hero1"]["favesc_gst_skinnies"] = "favesc_gst_skinnies";
 
-  // "They're moving on our left flaank!!"
-  level.scr_sound["hero1"]["favesc_gst_leftflank"] = "favesc_gst_leftflank";
+  // "They're moving on our left flaank!!"level.scr_sound["hero1"]["favesc_gst_leftflank"] = "favesc_gst_leftflank";
 
-  // "Rooftops on our left! Shift fire!!"
-  level.scr_sound["sarge"]["favesc_cmt_shiftfire"] = "favesc_cmt_shiftfire";
+  // "Rooftops on our left! Shift fire!!"level.scr_sound["sarge"]["favesc_cmt_shiftfire"] = "favesc_cmt_shiftfire";
 
-  // "LEFT LEFT LEFT! In those wooden shacks!"
-  level.scr_sound["hero1"]["favesc_gst_leftleftleft"] = "favesc_gst_leftleftleft";
+  // "LEFT LEFT LEFT! In those wooden shacks!"level.scr_sound["hero1"]["favesc_gst_leftleftleft"] = "favesc_gst_leftleftleft";
 
-  // "RPGs to the east!!"
-  level.scr_sound["sarge"]["favesc_cmt_rpgseast"] = "favesc_cmt_rpgseast";
+  // "RPGs to the east!!"level.scr_sound["sarge"]["favesc_cmt_rpgseast"] = "favesc_cmt_rpgseast";
 
-  // "RPGs on the rooftops to the south!"
-  level.scr_sound["hero1"]["favesc_gst_tothesouth"] = "favesc_gst_tothesouth";
+  // "RPGs on the rooftops to the south!"level.scr_sound["hero1"]["favesc_gst_tothesouth"] = "favesc_gst_tothesouth";
 
-  // "Tangos moving in low from the southeast!"
-  level.scr_sound["sarge"]["favesc_cmt_lowfromse"] = "favesc_cmt_lowfromse";
+  // "Tangos moving in low from the southeast!"level.scr_sound["sarge"]["favesc_cmt_lowfromse"] = "favesc_cmt_lowfromse";
 
-  // "Bloody hell there's a lot of 'em!"
-  level.scr_sound["hero1"]["favesc_gst_alotofem"] = "favesc_gst_alotofem";
+  // "Bloody hell there's a lot of 'em!"level.scr_sound["hero1"]["favesc_gst_alotofem"] = "favesc_gst_alotofem";
 
-  // "We gotta move...!!!"
-  level.scr_sound["hero1"]["favesc_gst_gottamove"] = "favesc_gst_gottamove";
+  // "We gotta move...!!!"level.scr_sound["hero1"]["favesc_gst_gottamove"] = "favesc_gst_gottamove";
 
   // -- RADIOTOWER SCOUT YELLING --
-  // "Kill them!!! Kill them all!!! They deserve nothing less!!!"
-  level.scr_sound["generic"]["favesc_pe4_killthemall"] = "favesc_pe4_killthemall";
+  // "Kill them!!! Kill them all!!! They deserve nothing less!!!"level.scr_sound["generic"]["favesc_pe4_killthemall"] = "favesc_pe4_killthemall";
 
-  // "Here they come!"
-  level.scr_sound["generic"]["favesc_pe1_heretheycome"] = "favesc_pe1_heretheycome";
+  // "Here they come!"level.scr_sound["generic"]["favesc_pe1_heretheycome"] = "favesc_pe1_heretheycome";
 
-  // "Attaaaack!"
-  level.scr_sound["generic"]["favesc_pe1_attack"] = "favesc_pe1_attack";
+  // "Attaaaack!"level.scr_sound["generic"]["favesc_pe1_attack"] = "favesc_pe1_attack";
 
   // -- RADIOTOWER SPECIFIC --
-  // "Technical comin' in from the south!!"
-  level.scr_sound["hero1"]["favesc_gst_technical"] = "favesc_gst_technical";
+  // "Technical comin' in from the south!!"level.scr_sound["hero1"]["favesc_gst_technical"] = "favesc_gst_technical";
 
-  // "We got another technical! Take it out!!!"
-  level.scr_sound["sarge"]["favesc_cmt_technical"] = "favesc_cmt_technical";
+  // "We got another technical! Take it out!!!"level.scr_sound["sarge"]["favesc_cmt_technical"] = "favesc_cmt_technical";
 
-  // "Head through that gate!!! Keep pushing to the evac point!!!"
-  level.scr_sound["sarge"]["favesc_cmt_thruthatgate"] = "favesc_cmt_thruthatgate";
+  // "Head through that gate!!! Keep pushing to the evac point!!!"level.scr_sound["sarge"]["favesc_cmt_thruthatgate"] = "favesc_cmt_thruthatgate";
 
-  // "We've gotta get to the helicopter - head through the gate to the market! Move!"
-  level.scr_sound["sarge"]["favesc_cmt_thrugate"] = "favesc_cmt_thrugate";
+  // "We've gotta get to the helicopter - head through the gate to the market! Move!"level.scr_sound["sarge"]["favesc_cmt_thrugate"] = "favesc_cmt_thrugate";
 
-  // "Go! Go! Go!"
-  level.scr_sound["hero1"]["favesc_gst_gogogo"] = "favesc_gst_gogogo";
+  // "Go! Go! Go!"level.scr_sound["hero1"]["favesc_gst_gogogo"] = "favesc_gst_gogogo";
 
   // -- CHOPPER REVEAL --
-  // "Chopper inbound!"
-  level.scr_sound["hero1"]["favesc_gst_chopperinbound"] = "favesc_gst_chopperinbound";
+  // "Chopper inbound!"level.scr_sound["hero1"]["favesc_gst_chopperinbound"] = "favesc_gst_chopperinbound";
 
-  // "Nikolai, get out of here! You're gonna get hit by an RPG! We rendezvous at the market as planned!"
-  level.scr_sound["sarge"]["favesc_cmt_hitbyrpg"] = "favesc_cmt_hitbyrpg";
+  // "Nikolai, get out of here! You're gonna get hit by an RPG! We rendezvous at the market as planned!"level.scr_sound["sarge"]["favesc_cmt_hitbyrpg"] = "favesc_cmt_hitbyrpg";
 
-  // "Ok, ok, we do it your way. My gunner and I will give you covering fire from above, from a safer distance."
-  level.scr_radio["favesc_nkl_doityourway"] = "favesc_nkl_doityourway";
+  // "Ok, ok, we do it your way. My gunner and I will give you covering fire from above, from a safer distance."level.scr_radio["favesc_nkl_doityourway"] = "favesc_nkl_doityourway";
 
-  // "The market is not far from where you are, but I see many milita moving towards you."
-  level.scr_radio["favesc_nkl_manymilitia"] = "favesc_nkl_manymilitia";
+  // "The market is not far from where you are, but I see many milita moving towards you."level.scr_radio["favesc_nkl_manymilitia"] = "favesc_nkl_manymilitia";
 
-  // "Roger that Nikolai! And thanks! Out!"
-  level.scr_sound["sarge"]["favesc_cmt_rogerandthanks"] = "favesc_cmt_rogerandthanks";
+  // "Roger that Nikolai! And thanks! Out!"level.scr_sound["sarge"]["favesc_cmt_rogerandthanks"] = "favesc_cmt_rogerandthanks";
 
   // -- STREET COMBAT --
-  // "Let's go, let's go!We've gotta push through these streets to the market!"
-  level.scr_sound["sarge"]["favesc_cmt_pushthrustreets"] = "favesc_cmt_pushthrustreets";
+  // "Let's go, let's go!We've gotta push through these streets to the market!"level.scr_sound["sarge"]["favesc_cmt_pushthrustreets"] = "favesc_cmt_pushthrustreets";
 
-  // "Watch for flanking routes!"
-  level.scr_sound["sarge"]["favesc_cmt_flankingroutes"] = "favesc_cmt_flankingroutes";
+  // "Watch for flanking routes!"level.scr_sound["sarge"]["favesc_cmt_flankingroutes"] = "favesc_cmt_flankingroutes";
 
-  // "Roach! Lay down some fire on the intersection!"
-  level.scr_sound["sarge"]["favesc_cmt_laydownfire"] = "favesc_cmt_laydownfire";
+  // "Roach! Lay down some fire on the intersection!"level.scr_sound["sarge"]["favesc_cmt_laydownfire"] = "favesc_cmt_laydownfire";
 
-  // "Heads up! Alley on the left!"
-  level.scr_sound["sarge"]["favesc_cmt_alleyonleft"] = "favesc_cmt_alleyonleft";
+  // "Heads up! Alley on the left!"level.scr_sound["sarge"]["favesc_cmt_alleyonleft"] = "favesc_cmt_alleyonleft";
 
-  // "Keep moving!! We're almost at the market!"
-  level.scr_sound["sarge"]["favesc_cmt_almostatmarket"] = "favesc_cmt_almostatmarket";
+  // "Keep moving!! We're almost at the market!"level.scr_sound["sarge"]["favesc_cmt_almostatmarket"] = "favesc_cmt_almostatmarket";
 
   // -- MARKET COMBAT --
-  // "Not exactly the High Street shops, eh?"
-  level.scr_sound["hero1"]["favesc_gst_highstreet"] = "favesc_gst_highstreet";
+  // "Not exactly the High Street shops, eh?"level.scr_sound["hero1"]["favesc_gst_highstreet"] = "favesc_gst_highstreet";
 
-  // "Squad! Split up and clear the market! Watch your sectors - these guys are everywhere!"
-  level.scr_sound["sarge"]["favesc_cmt_splitup"] = "favesc_cmt_splitup";
+  // "Squad! Split up and clear the market! Watch your sectors - these guys are everywhere!"level.scr_sound["sarge"]["favesc_cmt_splitup"] = "favesc_cmt_splitup";
 
-  // "Contacts above us at 11 o'clock, firing blind!"
-  level.scr_sound["hero1"]["favesc_gst_firingblind"] = "favesc_gst_firingblind";
+  // "Contacts above us at 11 o'clock, firing blind!"level.scr_sound["hero1"]["favesc_gst_firingblind"] = "favesc_gst_firingblind";
 
-  // "Tango coming out of the shack on the right!!!"
-  level.scr_sound["sarge"]["favesc_cmt_shackonright"] = "favesc_cmt_shackonright";
+  // "Tango coming out of the shack on the right!!!"level.scr_sound["sarge"]["favesc_cmt_shackonright"] = "favesc_cmt_shackonright";
 
   // -- MARKET EVAC --
-  // "There's Nikolai's Pave Low! Let's go!"
-  level.scr_sound["sarge"]["favesc_cmt_therespavelow"] = "favesc_cmt_therespavelow";
+  // "There's Nikolai's Pave Low! Let's go!"level.scr_sound["sarge"]["favesc_cmt_therespavelow"] = "favesc_cmt_therespavelow";
 
-  // "Nikolai! ETA 20 seconds! Be ready for immediate dustoff!"
-  level.scr_sound["sarge"]["favesc_cmt_immediatedustoff"] = "favesc_cmt_immediatedustoff";
+  // "Nikolai! ETA 20 seconds! Be ready for immediate dustoff!"level.scr_sound["sarge"]["favesc_cmt_immediatedustoff"] = "favesc_cmt_immediatedustoff";
 
-  // "That may not be fast enough! I see more militia closing in on the market!"
-  level.scr_radio["favesc_nkl_notfastenough"] = "favesc_nkl_notfastenough";
+  // "That may not be fast enough! I see more militia closing in on the market!"level.scr_radio["favesc_nkl_notfastenough"] = "favesc_nkl_notfastenough";
 
-  // "Pick up the pace! Let's go!"
-  level.scr_sound["sarge"]["favesc_cmt_pickuppace"] = "favesc_cmt_pickuppace";
+  // "Pick up the pace! Let's go!"level.scr_sound["sarge"]["favesc_cmt_pickuppace"] = "favesc_cmt_pickuppace";
 
-  // "It's too hot! We will not survive this landing!"
-  level.scr_radio["favesc_nkl_toohot"] = "favesc_nkl_toohot";
+  // "It's too hot! We will not survive this landing!"level.scr_radio["favesc_nkl_toohot"] = "favesc_nkl_toohot";
 
-  // "Nikolai, wave off, wave off! We'll meet you at the secondary LZ instead! Go!"
-  level.scr_sound["sarge"]["favesc_cmt_waveoff"] = "favesc_cmt_waveoff";
+  // "Nikolai, wave off, wave off! We'll meet you at the secondary LZ instead! Go!"level.scr_sound["sarge"]["favesc_cmt_waveoff"] = "favesc_cmt_waveoff";
 
-  // "Very well, I will meet you there! Good luck!"
-  level.scr_radio["favesc_nkl_meetyouthere"] = "favesc_nkl_meetyouthere";
+  // "Very well, I will meet you there! Good luck!"level.scr_radio["favesc_nkl_meetyouthere"] = "favesc_nkl_meetyouthere";
 
-  // "Come on! We've got to get to the rooftops, this way!"
-  level.scr_sound["sarge"]["favesc_cmt_gettorooftops"] = "favesc_cmt_gettorooftops";
+  // "Come on! We've got to get to the rooftops, this way!"level.scr_sound["sarge"]["favesc_cmt_gettorooftops"] = "favesc_cmt_gettorooftops";
 
-  // "Roach! Get up here on the rooftops, let's go!"
-  level.scr_sound["sarge"]["favesc_cmt_getuphere"] = "favesc_cmt_getuphere";
+  // "Roach! Get up here on the rooftops, let's go!"level.scr_sound["sarge"]["favesc_cmt_getuphere"] = "favesc_cmt_getuphere";
 
-  // "Roach! Get over here and climb up to the rooftops!"
-  level.scr_sound["sarge"]["favesc_cmt_climbup"] = "favesc_cmt_climbup";
+  // "Roach! Get over here and climb up to the rooftops!"level.scr_sound["sarge"]["favesc_cmt_climbup"] = "favesc_cmt_climbup";
 
-  // "Roach! You can climb up over here!"
-  level.scr_sound["sarge"]["favesc_cmt_climbuphere"] = "favesc_cmt_climbuphere";
+  // "Roach! You can climb up over here!"level.scr_sound["sarge"]["favesc_cmt_climbuphere"] = "favesc_cmt_climbuphere";
 
   // -- ROOF RUN --
-  // "Let's go, let's go!!"
-  level.scr_sound["freerunner"]["favesc_cmt_letsgoletsgo"] = "favesc_cmt_letsgoletsgo";
+  // "Let's go, let's go!!"level.scr_sound["freerunner"]["favesc_cmt_letsgoletsgo"] = "favesc_cmt_letsgoletsgo";
 
-  // "My friend, from up here, it looks like the whole village is trying to kill you!"
-  level.scr_radio["favesc_nkl_wholevillage"] = "favesc_nkl_wholevillage";
+  // "My friend, from up here, it looks like the whole village is trying to kill you!"level.scr_radio["favesc_nkl_wholevillage"] = "favesc_nkl_wholevillage";
 
-  // "Tell me something I don't know! Just get ready to pick us up at the secondary RV!"
-  level.scr_sound["freerunner"]["favesc_cmt_pickusup"] = "favesc_cmt_pickusup";
+  // "Tell me something I don't know! Just get ready to pick us up at the secondary RV!"level.scr_sound["freerunner"]["favesc_cmt_pickusup"] = "favesc_cmt_pickusup";
   level.scr_face["freerunner"]["favesc_cmt_pickusup"] = % favela_escape_Soap_pickusup;
 
-  // "Ok, I will pick you up soon, keep going!"
-  level.scr_radio["favesc_nkl_keepgoing"] = "favesc_nkl_keepgoing";
+  // "Ok, I will pick you up soon, keep going!"level.scr_radio["favesc_nkl_keepgoing"] = "favesc_nkl_keepgoing";
 
-  // "We're running out of rooftop!!!"
-  level.scr_sound["freerunner"]["favesc_gst_runoutofroof"] = "favesc_gst_runoutofroof";
+  // "We're running out of rooftop!!!"level.scr_sound["freerunner"]["favesc_gst_runoutofroof"] = "favesc_gst_runoutofroof";
 
-  // "We can make it! Go go go!"
-  level.scr_sound["freerunner"]["favesc_cmt_makeitgogo"] = "favesc_cmt_makeitgogo";
+  // "We can make it! Go go go!"level.scr_sound["freerunner"]["favesc_cmt_makeitgogo"] = "favesc_cmt_makeitgogo";
   level.scr_face["freerunner"]["favesc_cmt_makeitgogo"] = % favela_escape_Soap_makeitgogo;
 
-  // "We've got to get out of here, Roach, come on!"
-  level.scr_sound["freerunner"]["favesc_cmt_getoutta"] = "favesc_cmt_getoutta";
+  // "We've got to get out of here, Roach, come on!"level.scr_sound["freerunner"]["favesc_cmt_getoutta"] = "favesc_cmt_getoutta";
 
-  // "C'mon Roach, we're almost at the chopper!"
-  level.scr_sound["freerunner"]["favesc_cmt_gettochopper"] = "favesc_cmt_gettochopper";
+  // "C'mon Roach, we're almost at the chopper!"level.scr_sound["freerunner"]["favesc_cmt_gettochopper"] = "favesc_cmt_gettochopper";
 
-  // "Roach, what's the holdup, let's go!"
-  level.scr_sound["freerunner"]["favesc_cmt_whatsholdup"] = "favesc_cmt_whatsholdup";
+  // "Roach, what's the holdup, let's go!"level.scr_sound["freerunner"]["favesc_cmt_whatsholdup"] = "favesc_cmt_whatsholdup";
 
   // -- PLAYER RECOVERY --
-  // "Roach!!! Roach!!! Wake up!!!"
-  level.scr_radio["favesc_cmt_wakeup"] = "favesc_cmt_wakeup";
+  // "Roach!!! Roach!!! Wake up!!!"level.scr_radio["favesc_cmt_wakeup"] = "favesc_cmt_wakeup";
 
-  // "Roach! We can see them from the chopper! They're coming for you, dozens of 'em!!!"
-  level.scr_radio["favesc_gst_comingforyou"] = "favesc_gst_comingforyou";
+  // "Roach! We can see them from the chopper! They're coming for you, dozens of 'em!!!"level.scr_radio["favesc_gst_comingforyou"] = "favesc_gst_comingforyou";
 
-  // "Roach! There's too many of them! Get the hell out of there and find a way to the rooftops! Move!"
-  level.scr_radio["favesc_cmt_toomany"] = "favesc_cmt_toomany";
+  // "Roach! There's too many of them! Get the hell out of there and find a way to the rooftops! Move!"level.scr_radio["favesc_cmt_toomany"] = "favesc_cmt_toomany";
 
-  // "Run for it!!! Get to the rooftops!!"
-  level.scr_radio["favesc_cmt_runforit"] = "favesc_cmt_runforit";
+  // "Run for it!!! Get to the rooftops!!"level.scr_radio["favesc_cmt_runforit"] = "favesc_cmt_runforit";
 
   // -- PLAYER SOLO RUN --
-  // "Roach, we're circling the area but I can't see you! You've got to get to the rooftops!"
-  level.scr_radio["favesc_cmt_circlingarea"] = "favesc_cmt_circlingarea";
+  // "Roach, we're circling the area but I can't see you! You've got to get to the rooftops!"level.scr_radio["favesc_cmt_circlingarea"] = "favesc_cmt_circlingarea";
 
-  // "Roach, we're running low on fuel! Where the hell are you?!"
-  level.scr_radio["favesc_cmt_lowonfuel"] = "favesc_cmt_lowonfuel";
+  // "Roach, we're running low on fuel! Where the hell are you?!"level.scr_radio["favesc_cmt_lowonfuel"] = "favesc_cmt_lowonfuel";
 
-  // "Roach! I see you! Jump down to the rooftops and meet us south of your position! Go!"
-  level.scr_radio["favesc_cmt_meetussouth"] = "favesc_cmt_meetussouth";
+  // "Roach! I see you! Jump down to the rooftops and meet us south of your position! Go!"level.scr_radio["favesc_cmt_meetussouth"] = "favesc_cmt_meetussouth";
 
-  // "Left!!! Turn left and jump down!"
-  level.scr_radio["favesc_cmt_leftturnleft"] = "favesc_cmt_leftturnleft";
+  // "Left!!! Turn left and jump down!"level.scr_radio["favesc_cmt_leftturnleft"] = "favesc_cmt_leftturnleft";
 
-  // "Head to the right!"
-  level.scr_radio["favesc_cmt_headtoright"] = "favesc_cmt_headtoright";
+  // "Head to the right!"level.scr_radio["favesc_cmt_headtoright"] = "favesc_cmt_headtoright";
 
-  // "Come on!!!!"
-  level.scr_radio["favesc_cmt_comeon"] = "favesc_cmt_comeon";
+  // "Come on!!!!"level.scr_radio["favesc_cmt_comeon"] = "favesc_cmt_comeon";
 
-  // "Gas is very low! I must leave in thirty seconds, ok?"
-  level.scr_radio["favesc_nkl_verylow"] = "favesc_nkl_verylow";
+  // "Gas is very low! I must leave in thirty seconds, ok?"level.scr_radio["favesc_nkl_verylow"] = "favesc_nkl_verylow";
 
-  // "Roach! We're running on fumes here! You got thirty seconds! Run!"
-  level.scr_radio["favesc_cmt_onfumes"] = "favesc_cmt_onfumes";
+  // "Roach! We're running on fumes here! You got thirty seconds! Run!"level.scr_radio["favesc_cmt_onfumes"] = "favesc_cmt_onfumes";
 
-  // "Jump for it!!!"
-  level.scr_sound["chopper_door_guy"]["favesc_cmt_jump"] = "favesc_cmt_jump";
+  // "Jump for it!!!"level.scr_sound["chopper_door_guy"]["favesc_cmt_jump"] = "favesc_cmt_jump";
   level.scr_face["chopper_door_guy"]["favesc_cmt_jump"] = % favela_escape_soap_cmt_jump;
 
-  // "Nikolai! We got him! Get us outta here!"
-  level.scr_radio["favesc_cmt_gothim"] = "favesc_cmt_gothim";
+  // "Nikolai! We got him! Get us outta here!"level.scr_radio["favesc_cmt_gothim"] = "favesc_cmt_gothim";
 
-  // "Where to, Captain?"
-  level.scr_radio["favesc_nkl_whereto"] = "favesc_nkl_whereto";
+  // "Where to, Captain?"level.scr_radio["favesc_nkl_whereto"] = "favesc_nkl_whereto";
 
-  // "Just get us to the sub..."
-  level.scr_radio["favesc_cmt_tothesub"] = "favesc_cmt_tothesub";
+  // "Just get us to the sub..."level.scr_radio["favesc_cmt_tothesub"] = "favesc_cmt_tothesub";
 }
 
 #using_animtree("player");

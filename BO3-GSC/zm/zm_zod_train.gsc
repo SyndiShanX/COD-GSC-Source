@@ -1516,13 +1516,9 @@ function remove_dead_zombie(e_attacker, str_means_of_death, weapon) {
   }
   if(isDefined(level.o_zod_train)) {
     if(isDefined(self) && self.locked_in_train) {
-      [
-        [level.o_zod_train]
-      ] - > remove_zombie_locked_in(self);
+      [[level.o_zod_train]] - > remove_zombie_locked_in(self);
     } else {
-      [
-        [level.o_zod_train]
-      ] - > locked_in_list_remove_undefined();
+      [[level.o_zod_train]] - > locked_in_list_remove_undefined();
     }
   }
 }

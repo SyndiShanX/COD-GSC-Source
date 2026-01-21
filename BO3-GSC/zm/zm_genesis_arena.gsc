@@ -1017,9 +1017,7 @@ function function_607249fd() {
   var_93107413 = 0;
   players = level.activeplayers;
   foreach(player in players) {
-    if([
-        [level.var_d90687be]
-      ] - > function_2a75673(player)) {
+    if([[level.var_d90687be]] - > function_2a75673(player)) {
       var_93107413 = var_93107413 + 1;
     }
   }
@@ -1040,9 +1038,7 @@ function function_48ffe1e9(var_87c8152d, var_eadfbdd4 = 0, var_e78a4f30 = 0, var
   }
   players = level.activeplayers;
   foreach(player in players) {
-    if([
-        [level.var_d90687be]
-      ] - > function_2a75673(player)) {
+    if([[level.var_d90687be]] - > function_2a75673(player)) {
       player thread function_d41481d2();
     }
   }
@@ -1060,9 +1056,7 @@ function function_48ffe1e9(var_87c8152d, var_eadfbdd4 = 0, var_e78a4f30 = 0, var
   level thread function_df89e25c();
   players = level.activeplayers;
   foreach(player in players) {
-    if([
-        [level.var_d90687be]
-      ] - > function_2a75673(player)) {
+    if([[level.var_d90687be]] - > function_2a75673(player)) {
       player thread function_e883aed0();
     }
   }
@@ -3662,9 +3656,7 @@ function function_adbf2990(trig_stub, player) {
     a_s_port_locs[a_s_port_locs.size] = s_point;
   }
   foreach(e_player in level.activeplayers) {
-    if([
-        [level.var_d90687be]
-      ] - > function_2a75673(e_player)) {
+    if([[level.var_d90687be]] - > function_2a75673(e_player)) {
       playFX(level._effect["portal_3p"], e_player.origin);
       e_player playlocalsound("zmb_teleporter_teleport_2d");
       playsoundatposition("zmb_teleporter_teleport_out", e_player.origin);
@@ -3707,9 +3699,7 @@ function function_6cc51202() {
   }
   a_players = arraycopy(level.activeplayers);
   foreach(e_player in a_players) {
-    if([
-        [level.var_d90687be]
-      ] - > function_2a75673(e_player)) {
+    if([[level.var_d90687be]] - > function_2a75673(e_player)) {
       playFX(level._effect["portal_3p"], e_player.origin);
       e_player playlocalsound("zmb_teleporter_teleport_2d");
       playsoundatposition("zmb_teleporter_teleport_out", e_player.origin);

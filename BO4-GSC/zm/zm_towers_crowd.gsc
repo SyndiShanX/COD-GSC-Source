@@ -928,8 +928,7 @@ function_acab98ce(var_82c32aa7, var_9c93ba8f, var_ac39950d = 0, str_event) {
   } else {
     self clientfield::set_to_player("snd_crowd_react", var_ee93032f);
     self notify(#"hash_722941ef1aaab69f", {
-      #var_ac39950d: var_ac39950d,
-      #str_event: str_event
+      #var_ac39950d: var_ac39950d, #str_event: str_event
     });
   }
 

@@ -250,9 +250,7 @@ challengekills(data, time) {
     player addplayerstat("kill_enemy_locking_on_with_chopper_gunner", 1);
 
   if(isDefined(level.iskillstreakweapon)) {
-    if([
-        [level.iskillstreakweapon]
-      ](data.sweapon))
+    if([[level.iskillstreakweapon]](data.sweapon))
       return;
   }
 

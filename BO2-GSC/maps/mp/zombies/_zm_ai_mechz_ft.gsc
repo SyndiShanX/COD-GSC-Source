@@ -418,7 +418,7 @@ mechz_do_flamethrower_attack(tank_sweep) {
   self thread mechz_stop_basic_find_flesh();
   self.ai_state = "flamethrower_attack";
   self setgoalpos(self.origin);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self.last_flamethrower_time = gettime();
   self thread mechz_kill_flamethrower_watcher();
 

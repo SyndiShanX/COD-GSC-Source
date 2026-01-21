@@ -133,9 +133,7 @@ function_bff5c062(smartcover, attackingplayer) {
     smartcover.smartcoverjammed = 0;
 
     if(isDefined(level.var_fc1bbaef)) {
-      [
-        [level.var_fc1bbaef]
-      ](smartcover);
+      [[level.var_fc1bbaef]](smartcover);
     }
 
     smartcover.smartcoverjammed = 0;

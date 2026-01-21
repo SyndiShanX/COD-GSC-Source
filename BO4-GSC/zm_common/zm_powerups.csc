@@ -100,8 +100,7 @@ include_zombie_powerup(powerup_name) {
 
 powerup_state_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self notify(#"powerup", {
-    #powerup: fieldname,
-    #state: newval
+    #powerup: fieldname, #state: newval
   });
 }
 

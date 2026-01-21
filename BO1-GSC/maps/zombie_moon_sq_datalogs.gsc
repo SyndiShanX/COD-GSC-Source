@@ -9,12 +9,7 @@
 #include maps\_zombiemode_sidequests;
 
 init() {
-  datalogs = array("vox_story_2_log_1",
-    "vox_story_2_log_2",
-    "vox_story_2_log_3",
-    "vox_story_2_log_4",
-    "vox_story_2_log_5",
-    "vox_story_2_log_6");
+  datalogs = array("vox_story_2_log_1", "vox_story_2_log_2", "vox_story_2_log_3", "vox_story_2_log_4", "vox_story_2_log_5", "vox_story_2_log_6");
   datalogs_delay = [];
   datalogs_delay["vox_story_2_log_1"] = 40;
   datalogs_delay["vox_story_2_log_2"] = 28;

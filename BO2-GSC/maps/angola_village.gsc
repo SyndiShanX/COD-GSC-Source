@@ -514,22 +514,22 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
           time = 0.0;
 
           if(n_facing_diff > back_right_threshold) {
-            level.m_player_rig setanimknoball( % int_meatshield_angola_player_backright_to_back, % root, 1, meatshield_blend, 1);
-            e_menendez setflaggedanimknoball("meatshield_transition", % ai_meatshield_angola_hostage_backright_to_back, % body);
-            time = getanimlength( % ai_meatshield_angola_hostage_backright_to_back);
+            level.m_player_rig setanimknoball(%int_meatshield_angola_player_backright_to_back, %root, 1, meatshield_blend, 1);
+            e_menendez setflaggedanimknoball("meatshield_transition", %ai_meatshield_angola_hostage_backright_to_back, %body);
+            time = getanimlength(%ai_meatshield_angola_hostage_backright_to_back);
           } else if(n_facing_diff > back_left_threshold) {
-            level.m_player_rig setanimknoball( % int_meatshield_angola_player_back_to_backleft, % root, 1, meatshield_blend, 1);
-            e_menendez setflaggedanimknoball("meatshield_transition", % ai_meatshield_angola_hostage_back_to_backleft, % body);
-            time = getanimlength( % ai_meatshield_angola_hostage_back_to_backleft);
+            level.m_player_rig setanimknoball(%int_meatshield_angola_player_back_to_backleft, %root, 1, meatshield_blend, 1);
+            e_menendez setflaggedanimknoball("meatshield_transition", %ai_meatshield_angola_hostage_back_to_backleft, %body);
+            time = getanimlength(%ai_meatshield_angola_hostage_back_to_backleft);
           }
         } else if(n_facing_diff < back_left_threshold) {
-          level.m_player_rig setanimknoball( % int_meatshield_angola_player_backleft_to_back, % root, 1, meatshield_blend, 1);
-          e_menendez setflaggedanimknoball("meatshield_transition", % ai_meatshield_angola_hostage_backleft_to_back, % body);
-          time = getanimlength( % ai_meatshield_angola_hostage_backleft_to_back);
+          level.m_player_rig setanimknoball(%int_meatshield_angola_player_backleft_to_back, %root, 1, meatshield_blend, 1);
+          e_menendez setflaggedanimknoball("meatshield_transition", %ai_meatshield_angola_hostage_backleft_to_back, %body);
+          time = getanimlength(%ai_meatshield_angola_hostage_backleft_to_back);
         } else if(n_facing_diff < back_right_threshold) {
-          level.m_player_rig setanimknoball( % int_meatshield_angola_player_back_to_backright, % root, 1, meatshield_blend, 1);
-          e_menendez setflaggedanimknoball("meatshield_transition", % ai_meatshield_angola_hostage_back_to_backright, % body);
-          time = getanimlength( % ai_meatshield_angola_hostage_back_to_backright);
+          level.m_player_rig setanimknoball(%int_meatshield_angola_player_back_to_backright, %root, 1, meatshield_blend, 1);
+          e_menendez setflaggedanimknoball("meatshield_transition", %ai_meatshield_angola_hostage_back_to_backright, %body);
+          time = getanimlength(%ai_meatshield_angola_hostage_back_to_backright);
         }
 
         if(time > 0.0) {
@@ -540,16 +540,16 @@ player_meatshield_move_and_rotate(e_menendez, player_speed) {
 
       if(n_facing_diff < back_left_threshold) {
         level.player notify("ms_rumble");
-        level.m_player_rig setanimknoball( % int_meatshield_angola_player_backleft, % root, 1, meatshield_blend, 1);
-        e_menendez setanimknoball( % ai_meatshield_angola_hostage_backleft, % body, 1, meatshield_blend, 1);
+        level.m_player_rig setanimknoball(%int_meatshield_angola_player_backleft, %root, 1, meatshield_blend, 1);
+        e_menendez setanimknoball(%ai_meatshield_angola_hostage_backleft, %body, 1, meatshield_blend, 1);
       } else if(n_facing_diff > back_right_threshold) {
         level.player notify("ms_rumble");
-        level.m_player_rig setanimknoball( % int_meatshield_angola_player_backright, % root, 1, meatshield_blend, 1);
-        e_menendez setanimknoball( % ai_meatshield_angola_hostage_backright, % body, 1, meatshield_blend, 1);
+        level.m_player_rig setanimknoball(%int_meatshield_angola_player_backright, %root, 1, meatshield_blend, 1);
+        e_menendez setanimknoball(%ai_meatshield_angola_hostage_backright, %body, 1, meatshield_blend, 1);
       } else {
         level.player notify("ms_rumble");
-        level.m_player_rig setanimknoball( % int_meatshield_angola_player_back, % root, 1, meatshield_blend, 1);
-        e_menendez setanimknoball( % ai_meatshield_angola_hostage_back, % body, 1, meatshield_blend, 1);
+        level.m_player_rig setanimknoball(%int_meatshield_angola_player_back, %root, 1, meatshield_blend, 1);
+        e_menendez setanimknoball(%ai_meatshield_angola_hostage_back, %body, 1, meatshield_blend, 1);
       }
     }
 

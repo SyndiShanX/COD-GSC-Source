@@ -522,13 +522,13 @@ bigdog_emp_anim() {
   if(!self.hunkereddown) {
     empanim = animscripts\bigdog\bigdog_pain::gethunkerdownpainanim();
     assert(isDefined(empanim));
-    self setflaggedanimknoballrestart("empAnim", empanim, % body, 1, 0.2, 1.0);
+    self setflaggedanimknoballrestart("empAnim", empanim, %body, 1, 0.2, 1.0);
     self animscripts\shared::donotetracks("empAnim");
     self.hunkereddown = 1;
   } else if(self.hunkereddown) {
     empanim = animscripts\bigdog\bigdog_pain::getflinchanim();
     assert(isDefined(empanim));
-    self setflaggedanimknoballrestart("empAnim", empanim, % body, 1, 0.2, 0.7);
+    self setflaggedanimknoballrestart("empAnim", empanim, %body, 1, 0.2, 0.7);
     self animscripts\shared::donotetracks("empAnim");
   }
 

@@ -1795,9 +1795,7 @@ func_1F74(var_0) {
       continue;
     }
 
-    if(isDefined(level.vehicle.var_1A02[var_0]) && ![
-        [level.vehicle.var_1A02[var_0]]
-      ](var_3, var_3.var_1321D)) {
+    if(isDefined(level.vehicle.var_1A02[var_0]) && ![[level.vehicle.var_1A02[var_0]]](var_3, var_3.var_1321D)) {
       continue;
     }
 

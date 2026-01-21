@@ -8,8 +8,8 @@
 
 main() {
   self endon("killanimscript");
-  self clearanim( % root, 0.2);
-  self clearanim( % german_shepherd_run_stop, 0);
+  self clearanim(%root, 0.2);
+  self clearanim(%german_shepherd_run_stop, 0);
 
   if(!isDefined(self.traversecomplete) && !isDefined(self.skipstartmove) && self.a.movement == "run" && (!isDefined(self.disableexits) || self.disableexits == 0))
     startmove();
@@ -21,13 +21,13 @@ main() {
   if(self.a.movement == "run") {
     var_0 = undefined;
     var_0 = getrunanimweights();
-    self setanimrestart( % german_shepherd_run, var_0["center"], 0.2, 1);
-    self setanimrestart( % german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
-    self setanimrestart( % german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
-    self setflaggedanimknob("dog_run", % german_shepherd_run_knob, 1, 0.2, self.moveplaybackrate);
+    self setanimrestart(%german_shepherd_run, var_0["center"], 0.2, 1);
+    self setanimrestart(%german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
+    self setanimrestart(%german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
+    self setflaggedanimknob("dog_run", %german_shepherd_run_knob, 1, 0.2, self.moveplaybackrate);
     animscripts\notetracks::donotetracksfortime(0.1, "dog_run");
   } else
-    self setflaggedanimrestart("dog_walk", % german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
+    self setflaggedanimrestart("dog_walk", %german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
 
   thread animscripts\dog\dog_stop::lookattarget("normal");
 
@@ -39,7 +39,7 @@ main() {
         thread stopmove();
 
       common_scripts\utility::waittill_any("run", "path_set");
-      self clearanim( % german_shepherd_run_stop, 0.1);
+      self clearanim(%german_shepherd_run_stop, 0.1);
     }
   }
 }
@@ -74,15 +74,15 @@ moveloopstep() {
 
   if(self.a.movement == "run") {
     var_0 = getrunanimweights();
-    self clearanim( % german_shepherd_walk, 0.3);
-    self setanim( % german_shepherd_run, var_0["center"], 0.2, 1);
-    self setanim( % german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
-    self setanim( % german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
-    self setflaggedanimknob("dog_run", % german_shepherd_run_knob, 1, 0.2, self.moveplaybackrate);
+    self clearanim(%german_shepherd_walk, 0.3);
+    self setanim(%german_shepherd_run, var_0["center"], 0.2, 1);
+    self setanim(%german_shepherd_run_lean_l, var_0["left"], 0.1, 1);
+    self setanim(%german_shepherd_run_lean_r, var_0["right"], 0.1, 1);
+    self setflaggedanimknob("dog_run", %german_shepherd_run_knob, 1, 0.2, self.moveplaybackrate);
     animscripts\notetracks::donotetracksfortime(0.2, "dog_run");
   } else {
-    self clearanim( % german_shepherd_run_knob, 0.3);
-    self setflaggedanim("dog_walk", % german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
+    self clearanim(%german_shepherd_run_knob, 0.3);
+    self setflaggedanim("dog_walk", %german_shepherd_walk, 1, 0.2, self.moveplaybackrate);
     animscripts\notetracks::donotetracksfortime(0.2, "dog_walk");
   }
 }
@@ -158,7 +158,7 @@ pathchange_dodogturnanim() {
     return;
   }
   self animmode("zonly_physics", 0);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self.moveloopcleanupfunc = ::pathchange_cleanupdogturnanim;
   self.ignorepathchange = 1;
   self setflaggedanimrestart("turnAnim", var_0, 1, 0.2, self.moveplaybackrate);
@@ -177,7 +177,7 @@ pathchange_dodogturnanim() {
 pathchange_cleanupdogturnanim() {
   self.ignorepathchange = undefined;
   self orientmode("face default");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self animmode("none", 0);
 }
 
@@ -247,8 +247,8 @@ playmovestartanim() {
 
       self setflaggedanimrestart("dog_turn", var_10, 1, 0.2, 1.0);
       animscripts\shared::donotetracks("dog_turn");
-      self clearanim( % german_shepherd_rotate_cw, 0.2);
-      self clearanim( % german_shepherd_rotate_ccw, 0.2);
+      self clearanim(%german_shepherd_rotate_cw, 0.2);
+      self clearanim(%german_shepherd_rotate_ccw, 0.2);
     }
 
     thread pathchangecheck2();
@@ -262,23 +262,23 @@ startmove() {
   if(isDefined(self.pathgoalpos)) {
     if(isDefined(self.pathgoalpos)) {
       playmovestartanim();
-      self clearanim( % root, 0.2);
+      self clearanim(%root, 0.2);
       return;
     }
   }
 
   self orientmode("face default");
-  self setflaggedanimknobrestart("dog_prerun", % german_shepherd_run_start, 1, 0.2, self.moveplaybackrate);
+  self setflaggedanimknobrestart("dog_prerun", %german_shepherd_run_start, 1, 0.2, self.moveplaybackrate);
   animscripts\shared::donotetracks("dog_prerun");
   self animmode("none", 0);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 }
 
 stopmove() {
   self endon("killanimscript");
   self endon("run");
-  self clearanim( % german_shepherd_run_knob, 0.1);
-  self setflaggedanimrestart("stop_anim", % german_shepherd_run_stop, 1, 0.2, 1);
+  self clearanim(%german_shepherd_run_knob, 0.1);
+  self setflaggedanimrestart("stop_anim", %german_shepherd_run_stop, 1, 0.2, 1);
   animscripts\shared::donotetracks("stop_anim");
 }
 

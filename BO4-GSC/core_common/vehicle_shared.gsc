@@ -498,9 +498,7 @@ paths(node) {
       }
 
       self notify(#"drop_bombs", {
-        #amount: amount,
-        #delay: delay,
-        #delay_trace: delaytrace
+        #amount: amount, #delay: delay, #delay_trace: delaytrace
       });
     }
 

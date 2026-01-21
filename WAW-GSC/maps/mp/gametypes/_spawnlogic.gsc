@@ -177,8 +177,7 @@ finalizeSpawnpointChoice(spawnpoint) {
 
 getBestWeightedSpawnpoint(spawnpoints) {
   maxSightTracedSpawnpoints = 3;
-  for(
-    try = 0;
+  for(try = 0;
     try <= maxSightTracedSpawnpoints;
     try ++) {
     bestspawnpoints = [];
@@ -202,8 +201,7 @@ getBestWeightedSpawnpoint(spawnpoints) {
     if(bestspawnpoints.size == 0)
       return undefined;
     bestspawnpoint = bestspawnpoints[randomint(bestspawnpoints.size)];
-    if(
-      try == maxSightTracedSpawnpoints)
+    if(try == maxSightTracedSpawnpoints)
       return bestspawnpoint;
     if(isDefined(bestspawnpoint.lastSightTraceTime) && bestspawnpoint.lastSightTraceTime == gettime())
       return bestspawnpoint;
@@ -900,18 +898,7 @@ loopbotspawns() {
       if(getdvarint("scr_killbots") == 1) {
         killer = bots[randomint(bots.size)];
         victim = bots[randomint(bots.size)];
-        victim thread[[level.callbackPlayerDamage]](
-          killer,
-          killer,
-          1000,
-          0,
-          "MOD_RIFLE_BULLET",
-          "none",
-          (0, 0, 0),
-          (0, 0, 0),
-          "none",
-          0
-        );
+        victim thread[[level.callbackPlayerDamage]](killer, killer, 1000, 0, "MOD_RIFLE_BULLET", "none", (0, 0, 0), (0, 0, 0), "none", 0);
       } else {
         numKills = getdvarint("scr_killbots");
         lastVictim = undefined;
@@ -920,18 +907,7 @@ loopbotspawns() {
           victim = bots[randomint(bots.size)];
           while(isDefined(lastVictim) && victim == lastVictim)
             victim = bots[randomint(bots.size)];
-          victim thread[[level.callbackPlayerDamage]](
-            killer,
-            killer,
-            1000,
-            0,
-            "MOD_RIFLE_BULLET",
-            "none",
-            (0, 0, 0),
-            (0, 0, 0),
-            "none",
-            0
-          );
+          victim thread[[level.callbackPlayerDamage]](killer, killer, 1000, 0, "MOD_RIFLE_BULLET", "none", (0, 0, 0), (0, 0, 0), "none", 0);
           lastVictim = victim;
         }
       }
@@ -1104,11 +1080,7 @@ updateDeathInfo() {
   time = getTime();
   for(i = 0; i < level.spawnlogic_deaths.size; i++) {
     deathInfo = level.spawnlogic_deaths[i];
-    if(time - deathInfo.time > 1000 * 90 ||
-      !isDefined(deathInfo.killer) ||
-      !isalive(deathInfo.killer) ||
-      (deathInfo.killer.pers["team"] != "axis" && deathInfo.killer.pers["team"] != "allies") ||
-      distance(deathInfo.killer.origin, deathInfo.killOrg) > 400) {
+    if(time - deathInfo.time > 1000 * 90 || !isDefined(deathInfo.killer) || !isalive(deathInfo.killer) || (deathInfo.killer.pers["team"] != "axis" && deathInfo.killer.pers["team"] != "allies") || distance(deathInfo.killer.origin, deathInfo.killOrg) > 400) {
       level.spawnlogic_deaths[i].remove = true;
     }
   }
@@ -1365,8 +1337,7 @@ avoidSpawnReuse(spawnpoints, teambased) {
   maxdistSq = 1024 * 1024;
   for(i = 0; i < spawnpoints.size; i++) {
     spawnpoint = spawnpoints[i];
-    if(!isDefined(spawnpoint.lastspawnedplayer) || !isDefined(spawnpoint.lastspawntime) ||
-      !isalive(spawnpoint.lastspawnedplayer)) {
+    if(!isDefined(spawnpoint.lastspawnedplayer) || !isDefined(spawnpoint.lastspawntime) || !isalive(spawnpoint.lastspawnedplayer)) {
       continue;
     }
     if(spawnpoint.lastspawnedplayer == self)

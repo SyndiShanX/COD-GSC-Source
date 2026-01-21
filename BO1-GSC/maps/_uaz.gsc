@@ -6,7 +6,7 @@
 #include maps\_vehicle;
 #using_animtree("vehicles");
 main() {
-  self build_drive( % uaz_driving_idle_forward, % uaz_driving_idle_backward, 10);
+  self build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
   build_aianims(::setanims, ::set_vehicle_anims);
 }
 

@@ -316,9 +316,7 @@ replenish_after_rounds() {
     level waittill(#"between_round_over");
 
     if(isDefined(level.var_9c6b209c)) {
-      [
-        [level.var_9c6b209c]
-      ]();
+      [[level.var_9c6b209c]]();
       continue;
     }
 

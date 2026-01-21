@@ -444,9 +444,7 @@ teleport_nuke(max_zombies, range) {
     if(!isDefined(zombies[i])) {
       continue;
     }
-    if(isDefined(zombies[i].animname) &&
-      (zombies[i].animname != "boss_zombie" && zombies[i].animname != "ape_zombie" && zombies[i].animname != "zombie_dog") &&
-      zombies[i].health < 5000) {
+    if(isDefined(zombies[i].animname) && (zombies[i].animname != "boss_zombie" && zombies[i].animname != "ape_zombie" && zombies[i].animname != "zombie_dog") && zombies[i].health < 5000) {
       zombies[i] maps\_zombiemode_spawner::zombie_head_gib();
     }
     zombies[i] dodamage(zombies[i].health + 100, zombies[i].origin);
@@ -649,8 +647,7 @@ theater_fly_me_to_the_moon() {
   self SetCursorHint("HINT_NOICON");
   while(isDefined(self)) {
     self waittill("trigger", who);
-    if(!isDefined(who._moon_jumps) ||
-      who._moon_jumps < 5) {
+    if(!isDefined(who._moon_jumps) || who._moon_jumps < 5) {
       wait(0.1);
       continue;
     }

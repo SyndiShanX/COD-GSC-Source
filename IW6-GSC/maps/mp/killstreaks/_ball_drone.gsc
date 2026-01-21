@@ -492,8 +492,7 @@ ballDrone_followPlayer() {
 
   while(true) {
     if(isDefined(self.owner) && IsAlive(self.owner)) {
-      if(self.owner.origin != previousOrigin &&
-        DistanceSquared(self.owner.origin, previousOrigin) > destRadiusSq) {
+      if(self.owner.origin != previousOrigin && DistanceSquared(self.owner.origin, previousOrigin) > destRadiusSq) {
         if(self.ballDroneType == "ball_drone_backup" || self.ballDroneType == "alien_ball_drone" || self.ballDroneType == "alien_ball_drone_1" || self.ballDroneType == "alien_ball_drone_2" || self.ballDroneType == "alien_ball_drone_3" || self.ballDroneType == "alien_ball_drone_4") {
           if(!isDefined(self.turret GetTurretTarget(false))) {
             previousOrigin = self.owner.origin;
@@ -711,11 +710,7 @@ ballDrone_leave() {
 }
 
 ballDrone_handleDamage() {
-  self maps\mp\gametypes\_damage::monitorDamage(
-    self.maxHealth,
-    "ball_drone", ::handleDeathDamage, ::modifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(self.maxHealth, "ball_drone", ::handleDeathDamage, ::modifyDamage, true);
 }
 
 ballDrone_backup_handleDamage() {
@@ -727,11 +722,7 @@ ballDrone_backup_handleDamage() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    self maps\mp\gametypes\_damage::monitorDamageOneShot(
-      damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon,
-      "ball_drone", ::handleDeathDamage, ::modifyDamage,
-      true
-    );
+    self maps\mp\gametypes\_damage::monitorDamageOneShot(damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon, "ball_drone", ::handleDeathDamage, ::modifyDamage, true);
   }
 }
 
@@ -746,11 +737,7 @@ ballDrone_backup_turret_handleDamage() {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
     if(isDefined(self.parent)) {
-      self.parent maps\mp\gametypes\_damage::monitorDamageOneShot(
-        damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon,
-        "ball_drone", ::handleDeathDamage, ::modifyDamage,
-        true
-      );
+      self.parent maps\mp\gametypes\_damage::monitorDamageOneShot(damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon, "ball_drone", ::handleDeathDamage, ::modifyDamage, true);
     }
   }
 }
@@ -896,9 +883,7 @@ ballDrone_attackTargets() {
   while(true) {
     self waittill("turretstatechange");
 
-    if(self IsFiringTurret() &&
-      (isDefined(self.vehicle.stunned) && !self.vehicle.stunned) &&
-      (isDefined(self.vehicle.inactive) && !self.vehicle.inactive)) {
+    if(self IsFiringTurret() && (isDefined(self.vehicle.stunned) && !self.vehicle.stunned) && (isDefined(self.vehicle.inactive) && !self.vehicle.inactive)) {
       self LaserOn();
       self doLockOn(level.ballDroneSettings[self.vehicle.ballDroneType].lockonTime);
       self thread ballDrone_burstFireStart();

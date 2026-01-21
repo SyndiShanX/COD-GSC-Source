@@ -59,7 +59,7 @@ func_255D() {
   var_1 = [];
   var_1["left2right"] = getanimlength(scripts\anim\utility::func_1F64("left2right"));
   var_1["right2left"] = getanimlength(scripts\anim\utility::func_1F64("right2left"));
-  self func_82A5( % atv_turn, % body, 1, 0);
+  self func_82A5(%atv_turn, %body, 1, 0);
   self give_attacker_kill_rewards(scripts\anim\utility::func_1F64("drive"), 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64(var_0), 1, 0);
   self func_82B0(scripts\anim\utility::func_1F64(var_0), 0.5);
@@ -97,7 +97,7 @@ func_255E() {
   self endon("killanimscript");
   var_0 = 0.05;
   var_1 = 0;
-  self func_82A5( % atv_aiming, % body, 1, 0);
+  self func_82A5(%atv_aiming, %body, 1, 0);
   self setanimknob(scripts\anim\utility::func_1F64("idle"), 1, 0);
   for(;;) {
     if(self.var_4B71 != "none") {
@@ -193,7 +193,7 @@ func_255C(var_0) {
 
 func_2568() {
   self notify("want_shoot_while_driving");
-  self give_attacker_kill_rewards( % atv_add_fire, 1, 0.2);
+  self give_attacker_kill_rewards(%atv_add_fire, 1, 0.2);
   if(isDefined(self.var_FE91)) {
     return;
   }
@@ -209,7 +209,7 @@ func_2569() {
   wait(0.05);
   self notify("end_shoot_while_driving");
   self.var_FE91 = undefined;
-  self clearanim( % atv_add_fire, 0.2);
+  self clearanim(%atv_add_fire, 0.2);
 }
 
 func_2556() {
@@ -315,19 +315,19 @@ func_2561() {
   self endon("atv_event_occurred");
   self.var_10FB2 = 1;
   self waittill("start_blending_reload");
-  self give_attacker_kill_rewards( % atv_aiming, 0, 0.25);
+  self give_attacker_kill_rewards(%atv_aiming, 0, 0.25);
   self func_82EA("gun_down", scripts\anim\utility::func_1F64("gun_down"), 1, 0.25);
   scripts\anim\shared::donotetracks("gun_down");
   self clearanim(scripts\anim\utility::func_1F64("gun_down"), 0);
-  self func_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), % body, 1, 0.25);
+  self func_82E4("reload_anim", scripts\anim\utility::func_1F64("reload"), %body, 1, 0.25);
   scripts\anim\shared::donotetracks("reload_anim");
-  self clearanim( % atv_reload, 0.2);
+  self clearanim(%atv_reload, 0.2);
   self func_82EA("gun_up", scripts\anim\utility::func_1F64("gun_up"), 1, 0.25);
   self.var_86EC = 1;
   scripts\anim\shared::donotetracks("gun_up", ::func_256E);
   self.var_10FB2 = undefined;
-  self clearanim( % atv_reload, 0.1);
-  self give_attacker_kill_rewards( % atv_aiming, 1, 0.1);
+  self clearanim(%atv_reload, 0.1);
+  self give_attacker_kill_rewards(%atv_aiming, 1, 0.1);
   if(isDefined(self.var_86EC)) {
     self.var_86EC = undefined;
     scripts\anim\shared::donotetracks("gun_up", ::func_256D);
@@ -398,8 +398,8 @@ func_256A() {
     var_2 = var_3;
     var_11 = min(max(0 - var_3, 0), 90) / 90 * self.a.var_1A4B;
     var_12 = min(max(var_3, 0), 90) / 90 * self.a.var_1A4B;
-    self func_82AC( % atv_aim_4, var_11, var_0);
-    self func_82AC( % atv_aim_6, var_12, var_0);
+    self func_82AC(%atv_aim_4, var_11, var_0);
+    self func_82AC(%atv_aim_6, var_12, var_0);
     wait(0.05);
   }
 }

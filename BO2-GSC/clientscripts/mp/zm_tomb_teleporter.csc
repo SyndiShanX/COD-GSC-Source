@@ -35,11 +35,11 @@ teleporter_door_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval) {
     if(!first_time_run)
-      self clearanim( % fxanim_zom_tomb_portal_collapse_anim, 0);
+      self clearanim(%fxanim_zom_tomb_portal_collapse_anim, 0);
 
-    self setanim( % fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
+    self setanim(%fxanim_zom_tomb_portal_open_anim, 1.0, 0.1, 1);
   } else {
-    self clearanim( % fxanim_zom_tomb_portal_open_anim, 0);
-    self setanim( % fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
+    self clearanim(%fxanim_zom_tomb_portal_open_anim, 0);
+    self setanim(%fxanim_zom_tomb_portal_collapse_anim, 1.0, 0.1, 1);
   }
 }

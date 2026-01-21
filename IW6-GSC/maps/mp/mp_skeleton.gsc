@@ -122,11 +122,7 @@ portcullis_watch() {
 
   while(1) {
     intact_gate waittill("damage", damage, attacker, direction_vec, impact_loc, damage_type);
-    if(damage_type == "MOD_EXPLOSIVE" ||
-      damage_type == "MOD_GRENADE_SPLASH" ||
-      damage_type == "MOD_PROJECTILE" ||
-      damage_type == "MOD_GRENADE"
-    ) {
+    if(damage_type == "MOD_EXPLOSIVE" || damage_type == "MOD_GRENADE_SPLASH" || damage_type == "MOD_PROJECTILE" || damage_type == "MOD_GRENADE") {
       playFX(getfx("vfx_gate_explode"), impact_loc, direction_vec);
 
       break;

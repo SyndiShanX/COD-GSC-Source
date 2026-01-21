@@ -17,11 +17,7 @@ shellshockOnDamage(cause, damage) {
   if(self maps\mp\_flashgrenades::isFlashbanged()) {
     return;
   }
-  if(cause == "MOD_EXPLOSIVE" ||
-    cause == "MOD_GRENADE" ||
-    cause == "MOD_GRENADE_SPLASH" ||
-    cause == "MOD_PROJECTILE" ||
-    cause == "MOD_PROJECTILE_SPLASH") {
+  if(cause == "MOD_EXPLOSIVE" || cause == "MOD_GRENADE" || cause == "MOD_GRENADE_SPLASH" || cause == "MOD_PROJECTILE" || cause == "MOD_PROJECTILE_SPLASH") {
     if(damage > 10) {
       if(isDefined(self.shellShockReduction) && self.shellShockReduction)
         self shellshock("frag_grenade_mp", self.shellShockReduction);

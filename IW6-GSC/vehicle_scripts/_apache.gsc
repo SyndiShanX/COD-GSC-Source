@@ -19,7 +19,7 @@ main(var_0, var_1, var_2) {
   var_4["script_vehicle_apache"] = "fx/explosions/aerial_explosion_apache_mp";
   var_4["script_vehicle_apache_dark"] = "fx/explosions/aerial_explosion_apache_dark_mp";
   var_4["script_vehicle_apache_mg"] = "fx/explosions/aerial_explosion_apache_mp";
-  maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%bh_rotors, undefined, 0);
   var_5 = var_3[var_0];
   maps\_vehicle::build_deathfx("fx/explosions/helicopter_explosion_secondary_small", "tag_engine_left", "apache_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, 1, undefined);
   maps\_vehicle::build_deathfx("fx/fire/fire_smoke_trail_L", "tag_engine_left", "apache_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1, undefined);

@@ -54,7 +54,7 @@ dotraversegravity(var_0) {
 
   self.traverseanim = var_3;
   self.traverseanimroot = % body;
-  self setflaggedanimknoballrestart("traverseAnim", var_3, % body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("traverseAnim", var_3, %body, 1, 0.2, 1);
   self.traversedeathindex = 0;
   self.traversedeathanim = var_0["interruptDeathAnim"];
   animscripts\shared::donotetracks("traverseAnim", ::handletraversenotetracksgravity);

@@ -55,9 +55,7 @@ get_rounds_played() {
 
 function_f435f4dd() {
   if(isDefined(level.shouldplayovertimeround)) {
-    if([
-        [level.shouldplayovertimeround]
-      ]()) {
+    if([[level.shouldplayovertimeround]]()) {
       level.nextroundisovertime = 1;
       return;
     }

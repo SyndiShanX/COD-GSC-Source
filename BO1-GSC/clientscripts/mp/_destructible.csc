@@ -20,7 +20,7 @@ destructible_car_animate(localClientNum, set) {
     return;
   }
   self UseAnimTree(#animtree);
-  self SetAnim( % veh_car_destroy, 1.0, 0.0, 1.0);
+  self SetAnim(%veh_car_destroy, 1.0, 0.0, 1.0);
 }
 #using_animtree("fxanim_props");
 destructible_init(localClientNum) {
@@ -29,8 +29,7 @@ destructible_init(localClientNum) {
     return;
   }
   for(i = 0; i < destructibles.size; i++) {
-    if(destructibles[i].destructibledef == "fxanim_gp_ceiling_fan_modern_mod_MP" ||
-      destructibles[i].destructibledef == "fxanim_gp_ceiling_fan_old_mod_MP") {
+    if(destructibles[i].destructibledef == "fxanim_gp_ceiling_fan_modern_mod_MP" || destructibles[i].destructibledef == "fxanim_gp_ceiling_fan_old_mod_MP") {
       destructibles[i] thread destructible_ceiling_fan_think(localClientNum);
     }
   }
@@ -39,12 +38,12 @@ destructible_ceiling_fan_think(localClientNum) {
   self waittill_dobj(localClientNum);
   speed = RandomFloatRange(0.5, 1);
   self UseAnimTree(#animtree);
-  self SetAnim( % fxanim_gp_ceiling_fan_old_slow_anim, 1.0, 0.0, speed);
+  self SetAnim(%fxanim_gp_ceiling_fan_old_slow_anim, 1.0, 0.0, speed);
   for(;;) {
     self waittill("broken", event);
     if(event == "stop_idle") {
-      self ClearAnim( % fxanim_gp_ceiling_fan_old_slow_anim, 0.0);
-      self SetAnim( % fxanim_gp_ceiling_fan_old_dest_anim, 1.0, 0.0, speed);
+      self ClearAnim(%fxanim_gp_ceiling_fan_old_slow_anim, 0.0);
+      self SetAnim(%fxanim_gp_ceiling_fan_old_dest_anim, 1.0, 0.0, speed);
       return;
     }
   }

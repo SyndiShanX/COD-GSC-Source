@@ -80,9 +80,7 @@ donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, va
 
     if(timetaken < 0.05) {
       time = gettime();
-      returnednote = [
-        [notetracksfunc]
-      ](flagname, customfunction, var1);
+      returnednote = [[notetracksfunc]](flagname, customfunction, var1);
       timetaken = gettime() - time;
 
       if(timetaken < 0.05) {

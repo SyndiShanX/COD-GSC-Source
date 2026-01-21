@@ -11,12 +11,7 @@ debugchains() {
   fnodenum = 0;
   fnodes = [];
   for(i = 0; i < nodes.size; i++) {
-    if((!(nodes[i] has_spawnflag(level.SPAWNFLAG_PATH_NOT_CHAIN))) &&
-      (
-        ((isDefined(nodes[i].target)) && ((getnodearray(nodes[i].target, "targetname")).size > 0)) ||
-        ((isDefined(nodes[i].targetname)) && ((getnodearray(nodes[i].targetname, "target")).size > 0))
-      )
-    ) {
+    if((!(nodes[i] has_spawnflag(level.SPAWNFLAG_PATH_NOT_CHAIN))) && (((isDefined(nodes[i].target)) && ((getnodearray(nodes[i].target, "targetname")).size > 0)) || ((isDefined(nodes[i].targetname)) && ((getnodearray(nodes[i].targetname, "target")).size > 0)))) {
       fnodes[fnodenum] = nodes[i];
       fnodenum++;
     }
@@ -1530,8 +1525,7 @@ debug_realtime_engage_dist() {
         engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
         engageDistMax = level.weaponEngageDistValues.engageDistMax;
         if((traceDist >= engageDistMin) && (traceDist <= engageDistMax)) {
-          if((traceDist >= (engageDistOptimal - engageDistMulligan)) &&
-            (traceDist <= (engageDistOptimal + engageDistMulligan))) {
+          if((traceDist >= (engageDistOptimal - engageDistMulligan)) && (traceDist <= (engageDistOptimal + engageDistMulligan))) {
             hudObjArray engagedist_hud_changetext("optimal", tracedist);
             hudobj_changecolor(hudObjArray, level.green);
           } else {
@@ -1622,8 +1616,7 @@ debug_ai_engage_dist() {
             engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
             engageDistMax = level.weaponEngageDistValues.engageDistMax;
             if((dist >= engageDistMin) && (dist <= engageDistMax)) {
-              if((dist >= (engageDistOptimal - engageDistMulligan)) &&
-                (dist <= (engageDistOptimal + engageDistMulligan))) {
+              if((dist >= (engageDistOptimal - engageDistMulligan)) && (dist <= (engageDistOptimal + engageDistMulligan))) {
                 drawColor = level.green;
                 drawString = "RAD";
               } else {

@@ -128,8 +128,7 @@ moon_rb_dist_think() {
     rotation_offset = level._osc_rbs_totalrot * scale;
     for(i = 0; i < level._osc_rbs.size; i++) {
       level._osc_rbs[i].cover.angles = level._osc_rbs[i].cover_close - rotation_offset;
-      if(level._osc_rbs[i].cover.angles == level._osc_rbs[i].cover_close &&
-        level._lid_close_sound == 0) {
+      if(level._osc_rbs[i].cover.angles == level._osc_rbs[i].cover_close && level._lid_close_sound == 0) {
         level._lid_close_sound = 1;
         level._osc_rbs[i].cover thread rb_cover_sound();
       }

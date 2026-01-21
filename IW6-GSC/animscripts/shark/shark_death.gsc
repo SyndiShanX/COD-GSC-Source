@@ -6,7 +6,7 @@
 #using_animtree("animals");
 
 main() {
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   var_0 = spawn("script_model", self.origin);
   var_0.angles = self.angles;
   var_0 setModel(self.model);

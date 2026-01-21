@@ -25,7 +25,7 @@ main() {
   if(!isDefined(self.heat))
     thread abortapproachifthreatened();
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("coverArrival", var_1, 1, 0.2, self.movetransitionrate);
   animscripts\face::playfacialanim(var_1, "run");
   animscripts\shared::donotetracks("coverArrival", ::handlestartaim);
@@ -36,7 +36,7 @@ main() {
 
   self.a.movement = "stop";
   self.a.arrivaltype = self.approachtype;
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   self.lastapproachaborttime = undefined;
 }
 
@@ -73,7 +73,7 @@ abortapproachifthreatened() {
       return;
     }
     if(isthreatenedbyenemy()) {
-      self clearanim( % root, 0.3);
+      self clearanim(%root, 0.3);
       self notify("abort_approach");
       self.lastapproachaborttime = gettime();
       return;
@@ -674,7 +674,7 @@ custommovetransitionfunc() {
   }
   self animmode("zonly_physics", 0);
   self orientmode("face current");
-  self setflaggedanimknoballrestart("move", self.startmovetransitionanim, % root, 1);
+  self setflaggedanimknoballrestart("move", self.startmovetransitionanim, %root, 1);
   animscripts\face::playfacialanim(self.startmovetransitionanim, "run");
 
   if(animhasnotetrack(self.startmovetransitionanim, "code_move")) {

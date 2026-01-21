@@ -33,9 +33,9 @@ handle_rider_death() {
 #using_animtree("vehicles");
 
 set_death_anim_scene(var_0) {
-  similar_deaths( % aas_72x_explode_a, "aas_72x_explode_A");
-  similar_deaths( % aas_72x_explode_b, "aas_72x_explode_B");
-  similar_deaths( % aas_72x_explode_c, "aas_72x_explode_C");
+  similar_deaths(%aas_72x_explode_a, "aas_72x_explode_A");
+  similar_deaths(%aas_72x_explode_b, "aas_72x_explode_B");
+  similar_deaths(%aas_72x_explode_c, "aas_72x_explode_C");
   maps\_vehicle::build_deathanim(["aas_72x_explode_B", "aas_72x_explode_C"]);
 }
 

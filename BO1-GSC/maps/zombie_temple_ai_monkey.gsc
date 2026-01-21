@@ -357,7 +357,7 @@ _monkey_DestroyBoards(barrier, chunk, location) {
   self Teleport(location, self.angles);
   perk_attack_anim = % ai_zombie_monkey_attack_perks_front;
   time = getAnimLength(perk_attack_anim);
-  self animscripted("perk_attack_anim", location, self.angles, perk_attack_anim, "normal", % body, 1, 0.2);
+  self animscripted("perk_attack_anim", location, self.angles, perk_attack_anim, "normal", %body, 1, 0.2);
   self thread maps\_zombiemode_ai_monkey::play_attack_impacts(time);
   playFX(level._effect["wood_chunk_destory"], chunk.origin);
   if(chunk.script_noteworthy == "4" || chunk.script_noteworthy == "6") {
@@ -963,9 +963,7 @@ manage_ambient_monkeys(max_monkeys) {
 }
 
 zone_is_active(zone_name) {
-  if(!isDefined(level.zones) ||
-    !isDefined(level.zones[zone_name]) ||
-    !level.zones[zone_name].is_active) {
+  if(!isDefined(level.zones) || !isDefined(level.zones[zone_name]) || !level.zones[zone_name].is_active) {
     return false;
   }
   return true;

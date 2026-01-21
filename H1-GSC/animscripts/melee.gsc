@@ -261,7 +261,7 @@ melee_startmovement() {
 }
 
 melee_stopmovement() {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self.melee.playingmovementanim = undefined;
   self.a.movement = "stop";
   self orientmode("face default");
@@ -345,7 +345,7 @@ melee_standard_main() {
     animscripts\battlechatter_ai::evaluatemeleeevent();
     self orientmode("face point", self.melee.target.origin);
     var_0 = animscripts\utility::lookupanim("melee", "standard");
-    self setflaggedanimknoballrestart("meleeanim", var_0, % body, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("meleeanim", var_0, %body, 1, 0.2, 1);
     melee_playfacialanim(var_0);
     self.melee.inprogress = 1;
 
@@ -408,7 +408,7 @@ melee_standard_getinposition() {
 
   if(var_0 <= 4096) {
     var_1 = animscripts\utility::lookupanim("melee", "standard_stand_to_melee");
-    self setflaggedanimknoball("readyanim", var_1, % body, 1, 0.3, 1);
+    self setflaggedanimknoball("readyanim", var_1, %body, 1, 0.3, 1);
     melee_playfacialanim(var_1);
     animscripts\shared::donotetracks("readyanim");
     return 1;
@@ -436,7 +436,7 @@ melee_standard_getinposition() {
   else
     self orientmode("face point", self.melee.target.origin);
 
-  self setflaggedanimknoball("chargeanim", var_16, % body, 1, 0.2, 1);
+  self setflaggedanimknoball("chargeanim", var_16, %body, 1, 0.2, 1);
   melee_playfacialanim(var_16);
   var_17 = 0;
 
@@ -447,7 +447,7 @@ melee_standard_getinposition() {
     if(!var_17) {
       if(var_19) {
         melee_startmovement();
-        self setflaggedanimknoballrestart("chargeanim", var_4, % body, 1, 0.1, 1);
+        self setflaggedanimknoballrestart("chargeanim", var_4, %body, 1, 0.1, 1);
         melee_playfacialanim(var_4);
         var_14 = var_18;
         var_17 = 1;
@@ -457,7 +457,7 @@ melee_standard_getinposition() {
 
       if(var_18 - var_14 >= var_12 || !var_19 && !var_20) {
         melee_startmovement();
-        self setflaggedanimknoball("chargeanim", var_16, % body, 1, 0.3, 1);
+        self setflaggedanimknoball("chargeanim", var_16, %body, 1, 0.3, 1);
         melee_playfacialanim(var_16);
         var_17 = 0;
       }
@@ -624,9 +624,7 @@ melee_aivsai_exposed_chooseanimationandposition() {
   var_3 = melee_aivsai_exposed_chooseanimationandposition_buildexposedlist();
 
   for(var_4 = 0; var_4 < var_3.size; var_4++) {
-    if([
-        [var_3[var_4]]
-      ](var_2)) {
+    if([[var_3[var_4]]](var_2)) {
       self.melee.startangles = (0, var_1[1], 0);
       self.melee.startpos = getstartorigin(var_0.origin, var_0.angles, self.melee.animname);
 
@@ -745,9 +743,7 @@ melee_aivsai_chooseaction() {
     return 0;
 
   if(isDefined(self.specialmeleechooseaction)) {
-    if(![
-        [self.specialmeleechooseaction]
-      ]())
+    if(![[self.specialmeleechooseaction]]())
       return 0;
 
     self.melee.precisepositioning = 1;
@@ -907,8 +903,8 @@ melee_aivsai_getinposition() {
     return 0;
 
   melee_startmovement();
-  self clearanim( % body, 0.2);
-  self setanimknoball(animscripts\run::getrunanim(), % body, 1, 0.2);
+  self clearanim(%body, 0.2);
+  self setanimknoball(animscripts\run::getrunanim(), %body, 1, 0.2);
   self animmode("zonly_physics");
   self.keepclaimednode = 1;
   var_0 = gettime() + 1500;
@@ -942,18 +938,18 @@ melee_aivsai_execute() {
     self orientmode("face current");
 
   self.a.pose = "stand";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
 
   if(isDefined(self.melee.death))
     melee_disableinterruptions();
 
-  self setflaggedanimknoballrestart("meleeAnim", self.melee.animname, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("meleeAnim", self.melee.animname, %body, 1, 0.2);
   melee_playfacialanim(self.melee.animname);
   var_0 = animscripts\shared::donotetracks("meleeAnim", ::melee_handlenotetracks);
 
   if(var_0 == "melee_death" && (isDefined(self.melee.survive) || isDefined(self.magic_bullet_shield) && self.magic_bullet_shield)) {
     melee_droppedweaponrestore();
-    self setflaggedanimknoballrestart("meleeAnim", self.melee.surviveanimname, % body, 1, 0.2);
+    self setflaggedanimknoballrestart("meleeAnim", self.melee.surviveanimname, %body, 1, 0.2);
     melee_playfacialanim(self.melee.surviveanimname);
     var_0 = animscripts\shared::donotetracks("meleeAnim", ::melee_handlenotetracks);
   }
@@ -1224,5 +1220,5 @@ melee_playfacialanim(var_0) {
 
 melee_clearfacialanim() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

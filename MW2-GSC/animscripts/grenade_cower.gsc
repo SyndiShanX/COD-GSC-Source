@@ -36,13 +36,13 @@ main() {
     if(isDefined(self.grenade) && TryDive(grenadeAngle)) {
       return;
     }
-    self setFlaggedAnimKnobAllRestart("cowerstart", % exposed_squat_down_grenade_F, % body, 1, 0.2);
+    self setFlaggedAnimKnobAllRestart("cowerstart", %exposed_squat_down_grenade_F, %body, 1, 0.2);
     self animscripts\shared::DoNoteTracks("cowerstart");
   }
   self.a.pose = "crouch";
   self.a.movement = "stop";
 
-  self setFlaggedAnimKnobAllRestart("cower", % exposed_squat_idle_grenade_F, % body, 1, 0.2);
+  self setFlaggedAnimKnobAllRestart("cower", %exposed_squat_idle_grenade_F, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("cower");
 
   self waittill("never");
@@ -68,8 +68,7 @@ TryDive(grenadeAngle) {
     diveAnim = % exposed_dive_grenade_F;
   }
 
-  // when the dives are split into a dive, idle, and get up,
-  // maybe we can get a better point to do the moveto check with
+  // when the dives are split into a dive, idle, and get up, // maybe we can get a better point to do the moveto check with
   moveBy = getMoveDelta(diveAnim, 0, 0.5);
   diveToPos = self localToWorldCoords(moveBy);
 
@@ -78,7 +77,7 @@ TryDive(grenadeAngle) {
 
   self.safeToChangeScript = false;
 
-  self setFlaggedAnimKnobAllRestart("cowerstart", diveAnim, % body, 1, 0.2);
+  self setFlaggedAnimKnobAllRestart("cowerstart", diveAnim, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("cowerstart");
 
   self.safeToChangeScript = true;

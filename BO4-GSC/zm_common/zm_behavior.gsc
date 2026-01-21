@@ -343,9 +343,7 @@ zombiefindflesh(behaviortreeentity) {
   behaviortreeentity.zombie_poi = zombie_poi;
 
   if(isDefined(zombie_poi) && isDefined(level.var_4e4950d1)) {
-    if(![
-        [level.var_4e4950d1]
-      ](behaviortreeentity.zombie_poi)) {
+    if(![[level.var_4e4950d1]](behaviortreeentity.zombie_poi)) {
       behaviortreeentity.zombie_poi = undefined;
     }
   }
@@ -391,9 +389,7 @@ zombiefindflesh(behaviortreeentity) {
     }
 
     if(isDefined(level.no_target_override)) {
-      [
-        [level.no_target_override]
-      ](behaviortreeentity);
+      [[level.no_target_override]](behaviortreeentity);
       return;
     }
 
@@ -451,9 +447,7 @@ zombiefindflesh(behaviortreeentity) {
     behaviortreeentity val::reset(#"attack_properties", "ignoreall");
 
     if(isDefined(level.enemy_location_override_func)) {
-      goalpos = [
-        [level.enemy_location_override_func]
-      ](behaviortreeentity, behaviortreeentity.favoriteenemy);
+      goalpos = [[level.enemy_location_override_func]](behaviortreeentity, behaviortreeentity.favoriteenemy);
 
       if(isDefined(goalpos)) {
         behaviortreeentity setgoal(goalpos);
@@ -519,9 +513,7 @@ zombiefindfleshcode(behaviortreeentity) {
     }
 
     if(isDefined(level.no_target_override)) {
-      [
-        [level.no_target_override]
-      ](behaviortreeentity);
+      [[level.no_target_override]](behaviortreeentity);
     } else {
       behaviortreeentity setgoal(behaviortreeentity.origin);
     }
@@ -552,9 +544,7 @@ zombiefindfleshcode(behaviortreeentity) {
     }
 
     if(isDefined(level.enemy_location_override_func)) {
-      goalpos = [
-        [level.enemy_location_override_func]
-      ](behaviortreeentity, behaviortreeentity.enemy);
+      goalpos = [[level.enemy_location_override_func]](behaviortreeentity, behaviortreeentity.enemy);
 
       if(isDefined(goalpos)) {
         behaviortreeentity setgoal(goalpos);
@@ -1593,8 +1583,7 @@ notetrackboardtear(animationentity) {
   if(isDefined(animationentity.chunk)) {
     animationentity.first_node.zbarrier setzbarrierpiecestate(animationentity.chunk, "opening");
     level notify(#"zombie_board_tear", {
-      #ai_zombie: animationentity,
-      #s_board: animationentity.first_node
+      #ai_zombie: animationentity, #s_board: animationentity.first_node
     });
   }
 }

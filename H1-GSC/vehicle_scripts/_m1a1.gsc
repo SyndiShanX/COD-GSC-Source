@@ -11,7 +11,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_m1a1_abrams", "vehicle_m1a1_abrams_dmg");
   maps\_vehicle::build_shoot_shock("tankblast");
-  maps\_vehicle::build_drive( % abrams_movement, % abrams_movement_backwards, 10);
+  maps\_vehicle::build_drive(%abrams_movement, %abrams_movement_backwards, 10);
   maps\_vehicle::build_exhaust("fx\distortion\abrams_exhaust");
   maps\_vehicle::build_deckdust("fx\dust\abrams_deck_dust");
   maps\_vehicle::build_treadfx();

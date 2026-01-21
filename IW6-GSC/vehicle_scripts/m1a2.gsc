@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("m1a2", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_m1a2_abrams_iw6", "vehicle_m1a2_abrams_iw6_dmg");
-  maps\_vehicle::build_drive( % m1a2_abrams_driving_idle_forward, % m1a2_abrams_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%m1a2_abrams_driving_idle_forward, %m1a2_abrams_driving_idle_backward, 10);
   maps\_vehicle::build_exhaust("fx/distortion/abrams_exhaust");
   maps\_vehicle::build_deckdust("fx/dust/abrams_deck_dust");
   maps\_vehicle::build_treadfx();

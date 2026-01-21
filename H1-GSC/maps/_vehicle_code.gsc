@@ -1889,7 +1889,7 @@ set_death_model(var_0, var_1) {
   var_2 = _get_dummy();
 
   if(isDefined(self.clear_anims_on_death))
-    var_2 clearanim( % root, 0);
+    var_2 clearanim(%root, 0);
 
   if(isDefined(self))
     var_2 setModel(var_0);
@@ -5176,7 +5176,7 @@ kill_deathanim_play(var_0, var_1) {
   self useanimtree(#animtree);
 
   if(var_1.clear_anims)
-    self clearanim( % root, var_1.clear_anims_time);
+    self clearanim(%root, var_1.clear_anims_time);
 
   var_5 = _get_dummy();
   var_5 setanim(var_0, 1, 0, 1);

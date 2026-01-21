@@ -242,10 +242,7 @@ SOLO_CONST_MAX_SCORE_COMPLETE_CHALLENGE = 1500;
 CONST_DEFAULT_CHALLENGE_COMPONENT_NAME = "challenge";
 
 init_challenge_score_component() {
-  register_encounter_score_component(CONST_NAME_REF_CHALLENGE, ::init_challenge_score,
-    undefined, ::reset_player_challenge_performance, ::calculate_challenge_score,
-    CONST_UI_STRING_INDEX_CHALLENGE,
-    CONST_NAME_REF_EOG_HIVE);
+  register_encounter_score_component(CONST_NAME_REF_CHALLENGE, ::init_challenge_score, undefined, ::reset_player_challenge_performance, ::calculate_challenge_score, CONST_UI_STRING_INDEX_CHALLENGE, CONST_NAME_REF_EOG_HIVE);
 }
 
 init_challenge_score(score_component_struct) {
@@ -281,10 +278,7 @@ SOLO_CONST_DRILL_DAMAGE_LIMIT = 1200;
 CONST_DEFAULT_DRILL_COMPONENT_NAME = "drill";
 
 init_drill_score_component() {
-  register_encounter_score_component(CONST_NAME_REF_DRILL, ::init_drill_score, ::reset_team_drill_performance,
-    undefined, ::calculate_drill_protection_score,
-    CONST_UI_STRING_INDEX_DRILL_PROTECT,
-    CONST_NAME_REF_EOG_HIVE);
+  register_encounter_score_component(CONST_NAME_REF_DRILL, ::init_drill_score, ::reset_team_drill_performance, undefined, ::calculate_drill_protection_score, CONST_UI_STRING_INDEX_DRILL_PROTECT, CONST_NAME_REF_EOG_HIVE);
 }
 
 init_drill_score(score_component_struct) {
@@ -332,9 +326,7 @@ COOP_CONST_PENALTY_PER_DOWN = 200;
 CONST_DEFAULT_TEAM_COMPONENT_NAME = "team";
 
 init_teamwork_score_component() {
-  register_encounter_score_component(CONST_NAME_REF_TEAM, ::init_teamwork_score, ::reset_team_score_performance, ::reset_player_teamwork_score_performance, ::calculate_teamwork_score,
-    CONST_UI_STRING_INDEX_TEAMWORK,
-    CONST_NAME_REF_EOG_HIVE);
+  register_encounter_score_component(CONST_NAME_REF_TEAM, ::init_teamwork_score, ::reset_team_score_performance, ::reset_player_teamwork_score_performance, ::calculate_teamwork_score, CONST_UI_STRING_INDEX_TEAMWORK, CONST_NAME_REF_EOG_HIVE);
 }
 
 init_teamwork_score(score_component_struct) {
@@ -398,9 +390,7 @@ COOP_CONST_MAX_BLOCKER_SCORE_REVIVE_TEAMMATE = 1000;
 COOP_CONST_MAX_BLOCKER_SCORE_DAMAGE_DONE = 2500;
 
 init_blocker_hive_teamwork_score_component() {
-  register_encounter_score_component(CONST_NAME_REF_TEAM_BLK, ::init_blocker_teamwork_score, ::reset_team_score_performance, ::reset_player_teamwork_score_performance, ::calculate_teamwork_score,
-    CONST_UI_STRING_INDEX_TEAMWORK,
-    CONST_NAME_REF_EOG_HIVE);
+  register_encounter_score_component(CONST_NAME_REF_TEAM_BLK, ::init_blocker_teamwork_score, ::reset_team_score_performance, ::reset_player_teamwork_score_performance, ::calculate_teamwork_score, CONST_UI_STRING_INDEX_TEAMWORK, CONST_NAME_REF_EOG_HIVE);
 }
 
 init_blocker_teamwork_score(score_component_struct) {
@@ -424,10 +414,7 @@ CONST_PLAYER_DAMAGE_LIMIT = 500;
 CONST_DEFAULT_PERSONAL_COMPONENT_NAME = "personal";
 
 init_personal_score_component() {
-  register_encounter_score_component(CONST_NAME_REF_PERSONAL, ::init_personal_score,
-    undefined, ::reset_player_personal_score_performance, ::calculate_personal_skill_score,
-    CONST_UI_STRING_INDEX_PERSONAL_SKILL,
-    CONST_NAME_REF_EOG_HIVE);
+  register_encounter_score_component(CONST_NAME_REF_PERSONAL, ::init_personal_score, undefined, ::reset_player_personal_score_performance, ::calculate_personal_skill_score, CONST_UI_STRING_INDEX_PERSONAL_SKILL, CONST_NAME_REF_EOG_HIVE);
 }
 
 init_personal_score(score_component_struct) {
@@ -482,10 +469,7 @@ SOLO_CONST_MAX_BLOCKER_SCORE_DAMAGE_TAKEN = 5500;
 SOLO_CONST_MAX_BLOCKER_SCORE_ACCURACY = 4500;
 
 init_blocker_hive_personal_score_component() {
-  register_encounter_score_component(CONST_NAME_REF_PERSONAL_BLK, ::init_blocker_personal_score,
-    undefined, ::reset_player_personal_score_performance, ::calculate_personal_skill_score,
-    CONST_UI_STRING_INDEX_PERSONAL_SKILL,
-    CONST_NAME_REF_EOG_HIVE);
+  register_encounter_score_component(CONST_NAME_REF_PERSONAL_BLK, ::init_blocker_personal_score, undefined, ::reset_player_personal_score_performance, ::calculate_personal_skill_score, CONST_UI_STRING_INDEX_PERSONAL_SKILL, CONST_NAME_REF_EOG_HIVE);
 }
 
 init_blocker_personal_score(score_component_struct) {
@@ -505,11 +489,7 @@ CONST_MAX_ESCAPE_SCORE = 15000;
 CONST_ESCAPE_BASE_BONUS = 15000;
 
 init_escape_score_component() {
-  register_encounter_score_component(CONST_NAME_REF_ESCAPE, ::init_escape_score,
-    undefined,
-    undefined, ::calculate_escape_score,
-    CONST_UI_STRING_INDEX_ESCAPE,
-    CONST_NAME_REF_EOG_ESCAPE);
+  register_encounter_score_component(CONST_NAME_REF_ESCAPE, ::init_escape_score, undefined, undefined, ::calculate_escape_score, CONST_UI_STRING_INDEX_ESCAPE, CONST_NAME_REF_EOG_ESCAPE);
 }
 
 init_escape_score(score_component_struct) {
@@ -703,9 +683,7 @@ giveKillReward(attacker, amount, size, sHitloc) {
 
   if(common_scripts\utility::flag_exist("cortex_started") && common_scripts\utility::flag("cortex_started")) {
     if(isDefined(level.add_cortex_charge_func)) {
-      [
-        [level.add_cortex_charge_func]
-      ](amount);
+      [[level.add_cortex_charge_func]](amount);
     }
   }
 }

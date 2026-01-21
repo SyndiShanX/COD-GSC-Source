@@ -10,7 +10,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_m800_apc", "vehicle_m800_apc_destroyed");
   maps\_vehicle::build_deathfx("vfx/gameplay/explosions/vfx_exp_m800_dest", undefined, "explo_metal_rand");
-  maps\_vehicle::build_drive( % m880_launcher_idle_driving_idle_forward, % m880_launcher_idle_driving_idle_forward, 10);
+  maps\_vehicle::build_drive(%m880_launcher_idle_driving_idle_forward, %m880_launcher_idle_driving_idle_forward, 10);
   maps\_vehicle::build_turret("m800_turret", "tag_turret", "vehicle_m800_apc_turret", undefined, "auto_nonai", undefined, 0);
   maps\_vehicle::build_radiusdamage((0, 0, 53), 512, 300, 20, 0);
   maps\_vehicle::build_treadfx(var_2);

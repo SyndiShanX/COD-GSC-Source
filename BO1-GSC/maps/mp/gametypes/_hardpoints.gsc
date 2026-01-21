@@ -36,14 +36,7 @@ init() {
   maps\mp\gametypes\_killstreak_weapons::init();
   level thread onPlayerConnect();
 }
-registerKillstreak(killstreakType,
-  killstreakWeapon,
-  killstreakMenuName,
-  killstreakUsageKey,
-  killstreakUseFunction,
-  killstreakDelayStreak,
-  weaponHoldAllowed,
-  killstreakStatsName
+registerKillstreak(killstreakType, killstreakWeapon, killstreakMenuName, killstreakUsageKey, killstreakUseFunction, killstreakDelayStreak, weaponHoldAllowed, killstreakStatsName
 ) {
   AssertEx(isDefined(killstreakType), "Can not register a killstreak without a valid type name.");
   AssertEx(!isDefined(level.killstreaks[killstreakType]), "Killstreak " + killstreakType + " already registered");
@@ -86,13 +79,7 @@ registerKillstreakStrings(killstreakType, receivedText, notUsableText, inboundTe
   if(isDefined(level.killstreaks[killstreakType].inboundNearPlayerText))
     precacheString(level.killstreaks[killstreakType].inboundNearPlayerText);
 }
-registerKillstreakDialog(killstreakType,
-  receivedDialog,
-  friendlyStartDialog,
-  friendlyEndDialog,
-  enemyStartDialog,
-  enemyEndDialog,
-  dialog
+registerKillstreakDialog(killstreakType, receivedDialog, friendlyStartDialog, friendlyEndDialog, enemyStartDialog, enemyEndDialog, dialog
 ) {
   AssertEx(isDefined(killstreakType), "Can not register a killstreak without a valid type name.");
   AssertEx(isDefined(level.killstreaks[killstreakType]), "Killstreak needs to be registered before calling registerKillstreakDialog.");
@@ -281,8 +268,7 @@ giveKillstreakInternal(killstreakType, do_not_update_death_count, noXP) {
 addKillstreakToQueue(menuName, streakCount, hardpointType, noNotify) {
   killstreakTableNumber = -1;
   for(killstreakTableNumber = level.killStreakBaseValue; killstreakTableNumber < (level.killStreakBaseValue + level.totalkillStreaks + 1); killstreakTableNumber++) {
-    if(!isDefined(level.tbl_KillStreakData[killstreakTableNumber]) ||
-      !isDefined(level.tbl_KillStreakData[killstreakTableNumber]["reference"])) {
+    if(!isDefined(level.tbl_KillStreakData[killstreakTableNumber]) || !isDefined(level.tbl_KillStreakData[killstreakTableNumber]["reference"])) {
       continue;
     }
     if(menuName == level.tbl_KillStreakData[killstreakTableNumber]["reference"]) {

@@ -4,8 +4,7 @@
 ********************************************************/
 
 /*QUAKED actor_team3_dog (0.0 1.0 0.25) (-16 -16 0) (16 16 72) SPAWNER FORCESPAWN UNDELETABLE PERFECTENEMYINFO DONTSHAREENEMYINFO
-defaultmdl="german_sheperd_dog"
-"count" -- max AI to ever spawn from this spawner
+defaultmdl="german_sheperd_dog""count" -- max AI to ever spawn from this spawner
 SPAWNER -- makes this a spawner instead of a guy
 FORCESPAWN -- will try to delete an AI if spawning fails from too many AI
 UNDELETABLE -- this AI (or AI spawned from here) cannot be deleted to make room for FORCESPAWN guys

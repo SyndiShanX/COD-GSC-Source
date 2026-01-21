@@ -9,7 +9,7 @@
 #using_animtree("zombie_dog");
 main() {
   self endon("killanimscript");
-  self ClearAnim( % root, 0.2);
+  self ClearAnim(%root, 0.2);
   self ClearAnim(anim.dogAnims[self.animSet].move["run_stop"], 0);
   if(!isDefined(self.traverseComplete) && !isDefined(self.skipStartMove) && self.a.movement == "run") {
     self startMove();

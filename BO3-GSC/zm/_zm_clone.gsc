@@ -91,24 +91,24 @@ function clone_mover_animate(animtype) {
   self useanimtree($zm_ally);
   switch (animtype) {
     case "laststand": {
-      self setanim( % zm_ally::pb_laststand_idle);
+      self setanim(%zm_ally::pb_laststand_idle);
       break;
     }
     case "afterlife": {
-      self setanim( % zm_ally::pb_afterlife_laststand_idle);
+      self setanim(%zm_ally::pb_afterlife_laststand_idle);
       break;
     }
     case "chair": {
-      self setanim( % zm_ally::ai_actor_elec_chair_idle);
+      self setanim(%zm_ally::ai_actor_elec_chair_idle);
       break;
     }
     case "falling": {
-      self setanim( % zm_ally::pb_falling_loop);
+      self setanim(%zm_ally::pb_falling_loop);
       break;
     }
     case "idle":
     default: {
-      self setanim( % zm_ally::pb_stand_alert);
+      self setanim(%zm_ally::pb_stand_alert);
       break;
     }
   }

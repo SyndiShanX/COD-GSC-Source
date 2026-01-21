@@ -133,9 +133,7 @@ medal_kills(data, time) {
       }
     }
   }
-  if(IsSubStr(data.sMeansOfDeath, "MOD_IMPACT") ||
-    IsSubStr(data.sMeansOfDeath, "MOD_HEAD_SHOT") ||
-    IsSubStr(data.sMeansOfDeath, "MOD_PISTOL_BULLET")) {
+  if(IsSubStr(data.sMeansOfDeath, "MOD_IMPACT") || IsSubStr(data.sMeansOfDeath, "MOD_HEAD_SHOT") || IsSubStr(data.sMeansOfDeath, "MOD_PISTOL_BULLET")) {
     if(data.sWeapon == "knife_ballistic_mp") {
       level.globalSkewered++;
       attacker processMedal("MEDAL_SKEWER", data.sWeapon);

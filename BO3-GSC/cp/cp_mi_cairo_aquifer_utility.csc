@@ -451,9 +451,9 @@ function function_c289f3ee(localclientnum, oldval, newval, bnewent, binitialsnap
   self setanim(anims[newval], 1, 0, 1);
   self setanim(anims[!newval], 0, 0, 1);
   if(newval == 0) {
-    self setanim( % generic::v_aqu_vtol_engine_idle, 1, 0, 1);
+    self setanim(%generic::v_aqu_vtol_engine_idle, 1, 0, 1);
   } else {
-    self setanim( % generic::v_aqu_vtol_engine_idle, 0, 0, 1);
+    self setanim(%generic::v_aqu_vtol_engine_idle, 0, 0, 1);
   }
 }
 
@@ -938,8 +938,8 @@ function vtol_spawned(localclientnum) {
   self.no_highlight = 1;
   self thread function_c0623e13(localclientnum);
   self useanimtree($generic);
-  self setanim( % generic::v_aqu_vtol_engine_hover, 1, 0, 1);
-  self setanim( % generic::v_aqu_vtol_engine_idle, 1, 0, 1);
+  self setanim(%generic::v_aqu_vtol_engine_hover, 1, 0, 1);
+  self setanim(%generic::v_aqu_vtol_engine_idle, 1, 0, 1);
 }
 
 function function_d996daca(localclientnum) {

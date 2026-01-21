@@ -356,7 +356,7 @@ civ_stop_callback() {
     self animscripts\utility::setlookatentity(level.player);
     self orientmode("face point", level.player.origin);
     anim_bump = level.scr_anim[self.script_string][self.anim_set]["bump"];
-    self setflaggedanimknoballrestart("bump", anim_bump, % root);
+    self setflaggedanimknoballrestart("bump", anim_bump, %root);
     self animscripts\shared::donotetracks("bump");
     self thread civ_bumped();
   }

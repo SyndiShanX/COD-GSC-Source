@@ -317,30 +317,19 @@ function_ac06ab3a() {
   var_51ba7b4a = array(#"hash_1a1854072d6b2453");
   var_68e586cf = array(#"hash_39204e32adbe7694");
   level.var_ea514bc4[0] = {
-    #var_8a821e1e: 0,
-    #in_inventory: 0,
-    #vo_line: var_1c8e90b4
+    #var_8a821e1e: 0, #in_inventory: 0, #vo_line: var_1c8e90b4
   };
   level.var_ea514bc4[1] = {
-    #var_8a821e1e: 1,
-    #in_inventory: 0,
-    #vo_line: var_ab6a16ff
+    #var_8a821e1e: 1, #in_inventory: 0, #vo_line: var_ab6a16ff
   };
   level.var_ea514bc4[2] = {
-    #var_8a821e1e: 2,
-    #in_inventory: 0,
-    #vo_line: var_e6c1fe70,
-    #var_46db68fd: 1
+    #var_8a821e1e: 2, #in_inventory: 0, #vo_line: var_e6c1fe70, #var_46db68fd: 1
   };
   level.var_ea514bc4[3] = {
-    #var_8a821e1e: 3,
-    #in_inventory: 0,
-    #vo_line: var_51ba7b4a
+    #var_8a821e1e: 3, #in_inventory: 0, #vo_line: var_51ba7b4a
   };
   level.var_ea514bc4[4] = {
-    #var_8a821e1e: 4,
-    #in_inventory: 0,
-    #vo_line: var_68e586cf
+    #var_8a821e1e: 4, #in_inventory: 0, #vo_line: var_68e586cf
   };
   level.var_804a56e3 = 0;
   level.var_ba07f1de = zm_hms_util::function_bffcedde("white_audio_reel", "targetname", "script_int");

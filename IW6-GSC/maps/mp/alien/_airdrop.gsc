@@ -1251,9 +1251,7 @@ heli_loop(loop_num, counter_clockwise, loop_center_func, self_endon_msg, loop_sp
     rotated_vec = RotateVector(radius_vec, (0, angular_shift, 0));
     angular_shift += angular_interval;
     if(angular_shift >= 360) {
-      loop_center = [
-        [loop_center_func]
-      ]();
+      loop_center = [[loop_center_func]]();
       angular_shift = 0;
       loop_num--;
     }
@@ -1647,8 +1645,7 @@ show_drill_hint() {
       if(DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self)
         self setLowerMessage("hive_drill_hint", &"ALIENS_BLOCKER_HIVE_DRILL_HINT");
 
-      while(is_blocker_alive() &&
-        (DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self)) {
+      while(is_blocker_alive() && (DistanceSquared(self.origin, level.current_blocker_hive.origin) < distance_check && isDefined(level.drill_carrier) && level.drill_carrier == self)) {
         wait(.25);
       }
       self clearLowerMessage("hive_drill_hint");

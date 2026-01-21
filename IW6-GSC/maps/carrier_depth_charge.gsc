@@ -140,7 +140,7 @@ depth_charge_use() {
 
   level.defend_zodiac_osprey = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("defend_zodiac_osprey");
   level.defend_zodiac_osprey useanimtree(#animtree);
-  level.defend_zodiac_osprey setanim( % v22_osprey_flying_idle);
+  level.defend_zodiac_osprey setanim(%v22_osprey_flying_idle);
   level.defend_zodiac_osprey.godmode = 1;
   level.defend_zodiac_osprey setmaxpitchroll(3, 18);
   level.depth_charge_default_pitch = 30;

@@ -907,8 +907,7 @@ class cdoor {
 
     m_e_door.script_objective = s_door_instance.script_objective;
     var_85f2454d = {
-      #origin: m_e_door.origin,
-      #angles: m_e_door.angles
+      #origin: m_e_door.origin, #angles: m_e_door.angles
     };
     m_e_door thread doors::function_fa74d5cd(self);
 
@@ -1354,9 +1353,7 @@ door_open_update(c_door) {
     }
 
     if(b_manual_close) {
-      [
-        [c_door]
-      ] - > close();
+      [[c_door]] - > close();
     }
   }
 }
@@ -1448,8 +1445,7 @@ function_dc98f943(c_door) {
 
   target_set(e_door);
   level notify(#"hash_9db88375ef038b", {
-    #c_door: c_door,
-    #player: waitresult.player
+    #c_door: c_door, #player: waitresult.player
   });
   e_door val::set(#"hash_25bedd86747e41e1", "takedamage", 1);
   e_door val::set(#"hash_25bedd86747e41e1", "allowdeath", 1);
@@ -1624,9 +1620,7 @@ unlock(str_value, str_key = "targetname", b_do_open = 1) {
     [[self.c_door]] - > unlock();
 
     if(b_do_open) {
-      [
-        [self.c_door]
-      ] - > open();
+      [[self.c_door]] - > open();
     }
 
     return;
@@ -1636,9 +1630,7 @@ unlock(str_value, str_key = "targetname", b_do_open = 1) {
 
   foreach(e_door in a_e_doors) {
     if(isDefined(e_door.c_door)) {
-      [
-        [e_door.c_door]
-      ] - > unlock();
+      [[e_door.c_door]] - > unlock();
 
       if(b_do_open) {
         [[e_door.c_door]] - > open();
@@ -1654,9 +1646,7 @@ unlock_all(b_do_open = 1) {
 lock(str_value, str_key = "targetname", b_do_close = 1) {
   if(isDefined(self.c_door)) {
     if(b_do_close) {
-      [
-        [self.c_door]
-      ] - > close();
+      [[self.c_door]] - > close();
     }
 
     [[self.c_door]] - > lock();
@@ -1671,9 +1661,7 @@ lock(str_value, str_key = "targetname", b_do_close = 1) {
         [[e_door.c_door]] - > close();
       }
 
-      [
-        [e_door.c_door]
-      ] - > lock();
+      [[e_door.c_door]] - > lock();
     }
   }
 }
@@ -1692,9 +1680,7 @@ open(str_value, str_key = "targetname") {
 
   foreach(e_door in a_e_doors) {
     if(isDefined(e_door.c_door)) {
-      [
-        [e_door.c_door]
-      ] - > open();
+      [[e_door.c_door]] - > open();
     }
   }
 }
@@ -1713,9 +1699,7 @@ close(str_value, str_key = "targetname") {
 
   foreach(e_door in a_e_doors) {
     if(isDefined(e_door.c_door)) {
-      [
-        [e_door.c_door]
-      ] - > close();
+      [[e_door.c_door]] - > close();
     }
   }
 }

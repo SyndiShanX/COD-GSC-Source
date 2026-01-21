@@ -622,8 +622,7 @@ event_handler[player_disconnect] codecallback_playerdisconnect(eventstruct) {
 
 function_f3f9788a(itemtype, percentchance) {
   level.var_19e75cfb[level.var_19e75cfb.size] = {
-    #type: itemtype,
-    #chance: max(min(percentchance, 1), 0)
+    #type: itemtype, #chance: max(min(percentchance, 1), 0)
   };
 }
 
@@ -1070,8 +1069,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
   }
 
   params = {
-    #item: dropitem,
-    #deathstash: deathstash
+    #item: dropitem, #deathstash: deathstash
   };
 
   if(isplayer(self)) {

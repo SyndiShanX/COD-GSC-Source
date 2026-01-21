@@ -385,7 +385,7 @@ func_1266B(var_0, var_1, var_2) {
   func_E53E("passive");
   if(var_1) {
     func_E53E("active");
-    var_3 = getanimlength( % vr_unfold_left);
+    var_3 = getanimlength(%vr_unfold_left);
     wait(var_3);
     func_E53E("passive");
   }
@@ -1744,7 +1744,7 @@ func_10FB6() {
   foreach(var_1 in level.var_13563.var_E546) {
     var_1 stopsounds();
     var_1 givescorefortrophyblocks();
-    var_1 clearanim( % root, 0);
+    var_1 clearanim(%root, 0);
   }
 
   foreach(var_4 in level.var_13563.var_E546[1].var_466A) {
@@ -1762,14 +1762,14 @@ func_10FB6() {
   foreach(var_12 in level.var_13563.var_12B98) {
     var_12 stopsounds();
     var_12 givescorefortrophyblocks();
-    var_12 clearanim( % root, 0);
+    var_12 clearanim(%root, 0);
   }
 
   foreach(var_15 in level.var_13563.var_4D95) {
     if(isDefined(var_15.var_A645)) {
       var_15.var_A645 stopsounds();
       var_15.var_A645 givescorefortrophyblocks();
-      var_15.var_A645 clearanim( % root, 0);
+      var_15.var_A645 clearanim(%root, 0);
       var_15.var_A645 scripts\sp\utility::func_65DD("killcounter_animating");
     }
   }

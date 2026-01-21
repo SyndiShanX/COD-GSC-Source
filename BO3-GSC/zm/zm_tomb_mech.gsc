@@ -698,9 +698,7 @@ function mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath,
     self.explosive_dmg_taken = self.explosive_dmg_taken + final_damage;
     self mechzserverutils::mechz_track_faceplate_damage(final_damage);
     if(isDefined(level.mechz_explosive_damage_reaction_callback)) {
-      [
-        [level.mechz_explosive_damage_reaction_callback]
-      ]();
+      [[level.mechz_explosive_damage_reaction_callback]]();
     }
     attacker mechzserverutils::show_hit_marker();
   } else {

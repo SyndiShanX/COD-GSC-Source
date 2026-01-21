@@ -94,9 +94,7 @@ main(behaviorCallbacks) {
       startTime = gettime();
       self thread endIdleAtFrameEnd();
 
-      [
-        [behaviorCallbacks.mainLoopStart]
-      ]();
+      [[behaviorCallbacks.mainLoopStart]]();
 
       if(gettime() == startTime)
         self notify("dont_end_idle");
@@ -418,8 +416,7 @@ callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
   assert(isDefined(val) && (val == true || val == false));
 
   // behaviorCallbacks must return true if and only if they let time pass.
-  // (it is also important that they only let time pass if they did what they were supposed to do,
-  //but that's not so easy to enforce.)
+  // (it is also important that they only let time pass if they did what they were supposed to do, //but that's not so easy to enforce.)
   if(val)
     assert(gettime() != starttime);
   else
@@ -704,9 +701,7 @@ resetSeekOutEnemyTime() {
 }
 
 // these next functions are "look for better cover" functions.
-// they don't always need to cause the actor to leave the node immediately,
-// but if they keep being called over and over they need to become more and more likely to do so,
-// as this indicates that new cover is strongly needed.
+// they don't always need to cause the actor to leave the node immediately, // but if they keep being called over and over they need to become more and more likely to do so, // as this indicates that new cover is strongly needed.
 cantFindAnythingToDo() {
   return advanceOnHidingEnemy();
 }
@@ -729,17 +724,14 @@ advanceOnHidingEnemy() {
     }
   }
 
-  // maybe at this point we could look for someone who's suppressing our enemy,
-  // and if someone is, we can say "cover me!" and have them say "i got you covered" or something.
+  // maybe at this point we could look for someone who's suppressing our enemy, // and if someone is, we can say "cover me!" and have them say "i got you covered" or something.
 
   return foundBetterCover;
 }
 
 tryToGetOutOfDangerousSituation(behaviorCallbacks) {
   if(isDefined(behaviorCallbacks.moveToNearByCover)) {
-    if([
-        [behaviorCallbacks.moveToNearByCover]
-      ]())
+    if([[behaviorCallbacks.moveToNearByCover]]())
       return true;
   }
 
@@ -782,13 +774,13 @@ turnToMatchNodeDirection(nodeAngleOffset) {
         self orientmode("face current");
 
       rate = 1.5;
-      noteTime = getNotetrackTimes( % exposed_stand_2_crouch, "anim_pose = \"crouch\"")[0];
+      noteTime = getNotetrackTimes(%exposed_stand_2_crouch, "anim_pose = \"crouch\"")[0];
       noteTime = min(1, noteTime * 1.1);
-      time = noteTime * getAnimLength( % exposed_stand_2_crouch) / rate;
+      time = noteTime * getAnimLength(%exposed_stand_2_crouch) / rate;
 
-      self setflaggedanimknoballrestart("crouchanim", % exposed_stand_2_crouch, % body, 1, .2, rate);
+      self setflaggedanimknoballrestart("crouchanim", %exposed_stand_2_crouch, %body, 1, .2, rate);
       self animscripts\shared::DoNoteTracksForTime(time, "crouchanim");
-      self clearanim( % body, 0.2);
+      self clearanim(%body, 0.2);
     }
 
     self orientmode("face angle", self.angles[1]);

@@ -181,9 +181,7 @@ markerupdatethread(context) {
     waterheight = getwaterheight(markermodel.origin);
     inwater = markermodel.origin[2] < waterheight;
 
-    if(isDefined(var_6aa266d6) && !tooclose && !inwater && isDefined(context.islocationgood) && [
-        [context.islocationgood]
-      ](markermodel.origin, context)) {
+    if(isDefined(var_6aa266d6) && !tooclose && !inwater && isDefined(context.islocationgood) && [[context.islocationgood]](markermodel.origin, context)) {
       player.markerposition = markermodel.origin;
       player clientfield::set_to_player("marker_state", 1);
       player function_bf191832(1, markermodel.origin, markermodel.angles);

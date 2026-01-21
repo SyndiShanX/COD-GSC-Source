@@ -13,7 +13,7 @@ initAnimTree(animscript) {
   if(isValidEnemy(self.a.personImMeleeing)) {
     ImNotMeleeing(self.a.personImMeleeing);
   }
-  self ClearAnim( % body, 0.2);
+  self ClearAnim(%body, 0.2);
   if(animscript != "pain" && animscript != "death") {
     self.a.special = "none";
   }
@@ -463,7 +463,7 @@ IsInSet(input, set) {
 playAnim(animation) {
   if(isDefined(animation)) {
     println("NOW PLAYING: ", animation);
-    self SetFlaggedAnimKnobAllRestart("playAnim", animation, % root, 1, .2, 1);
+    self SetFlaggedAnimKnobAllRestart("playAnim", animation, %root, 1, .2, 1);
     timeToWait = getanimlength(animation);
     timeToWait = (3 * timeToWait) + 1;
     self thread NotifyAfterTime("time is up", "time is up", timeToWait);

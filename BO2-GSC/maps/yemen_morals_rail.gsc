@@ -220,7 +220,7 @@ player_vtol_go_on_rail() {
 #using_animtree("player");
 
 spawn_reinforcements() {
-  wait(getanimlength( % p_yemen_05_05_mason_intro_hpr_lives_mason) - 10);
+  wait(getanimlength(%p_yemen_05_05_mason_intro_hpr_lives_mason) - 10);
   trigger_use("trig_drone_control_allies");
 }
 

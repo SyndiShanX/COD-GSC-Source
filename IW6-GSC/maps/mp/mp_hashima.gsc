@@ -361,8 +361,8 @@ coal_car_init() {
   coal_car.collision_origin = coal_car_collision_origin;
   waitframe();
 
-  level.start_to_end_length = GetAnimLength( % mp_hashima_coal_cart_move_1);
-  level.end_to_start_length = GetAnimLength( % mp_hashima_coal_cart_move_2);
+  level.start_to_end_length = GetAnimLength(%mp_hashima_coal_cart_move_1);
+  level.end_to_start_length = GetAnimLength(%mp_hashima_coal_cart_move_2);
 
   coal_car ScriptModelPlayAnimDeltaMotion("mp_hashima_coal_cart_start_idle");
   coal_car.collision_origin ScriptModelPlayAnimDeltaMotion("mp_hashima_coal_cart_start_idle_origin_scripted");

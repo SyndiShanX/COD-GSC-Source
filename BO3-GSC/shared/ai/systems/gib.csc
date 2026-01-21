@@ -312,9 +312,7 @@ function _gibpiece(localclientnum, entity, gibmodel, gibtag, gibfx, gibdir) {
 function private _handlegibcallbacks(localclientnum, entity, gibflag) {
   if(isDefined(entity._gibcallbacks) && isDefined(entity._gibcallbacks[gibflag])) {
     foreach(callback in entity._gibcallbacks[gibflag]) {
-      [
-        [callback]
-      ](localclientnum, entity, gibflag);
+      [[callback]](localclientnum, entity, gibflag);
     }
   }
 }

@@ -394,7 +394,7 @@ BeginProneRun() {
 
 PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement, endAiming) {
   endTime = GetTime() + crossblendTime * 1000;
-  self SetAnimKnobAll(transAnim, % body, 1, crossblendTime, 1);
+  self SetAnimKnobAll(transAnim, %body, 1, crossblendTime, 1);
   wait crossblendTime / 2;
   self.a.pose = endPose;
   self.a.movement = endMovement;
@@ -475,24 +475,11 @@ BlendIntoStandRun() {
     }
     self SetAnimKnobLimited(animArray(runAnimName), 1, runAnimTransTime, 1);
     if(shouldShootWhileMoving && self.a.pose == "stand") {
-      self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoStandRun",
-        forwardRunAnim,
-        animArray("run_n_gun_b")
-      );
+      self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoStandRun", forwardRunAnim, animArray("run_n_gun_b"));
     } else if(useLeans && self.isfacingmotion) {
-      self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoStandRun",
-        forwardRunAnim,
-        animArray("combat_run_b"),
-        animArray("combat_run_lean_l"),
-        animArray("combat_run_lean_r")
-      );
+      self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoStandRun", forwardRunAnim, animArray("combat_run_b"), animArray("combat_run_lean_l"), animArray("combat_run_lean_r"));
     } else {
-      self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoStandRun",
-        forwardRunAnim,
-        animArray("combat_run_b"),
-        animArray("combat_run_l"),
-        animArray("combat_run_r")
-      );
+      self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoStandRun", forwardRunAnim, animArray("combat_run_b"), animArray("combat_run_l"), animArray("combat_run_r"));
     }
     PlayBlendTransitionStandRun(transitionAnimParent);
   }
@@ -524,7 +511,7 @@ CrouchToStand() {
     self randomizeIdleSet();
     PlayTransitionAnimation(animArray("crouch_2_stand"), "stand", "stop", standSpeed);
   }
-  self ClearAnim( % shoot, 0);
+  self ClearAnim(%shoot, 0);
 }
 
 CrouchToCrouchWalk() {
@@ -572,18 +559,13 @@ CrouchToStandRun() {
 
 BlendIntoCrouchRun() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self SetAnimKnobAll(self.crouchrun_combatanim, % body, 1, 0.4);
+    self SetAnimKnobAll(self.crouchrun_combatanim, %body, 1, 0.4);
     PlayBlendTransition(self.crouchrun_combatanim, 0.6, "crouch", "run", 0);
     self notify("BlendIntoCrouchRun");
   } else {
     self setanimknob(call_overloaded_func("animscripts\run", "GetCrouchRunAnim"), 1, 0.4);
-    self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoCrouchRun", %
-      combatrun_forward,
-      animArray("combat_run_b"),
-      animArray("combat_run_l"),
-      animArray("combat_run_r")
-    );
-    PlayBlendTransition( % combatrun, 0.6, "crouch", "run", 0);
+    self thread call_overloaded_func("animscripts\run", "UpdateRunWeights", "BlendIntoCrouchRun", %combatrun_forward, animArray("combat_run_b"), animArray("combat_run_l"), animArray("combat_run_r"));
+    PlayBlendTransition(%combatrun, 0.6, "crouch", "run", 0);
     self notify("BlendIntoCrouchRun");
   }
 }
@@ -609,7 +591,7 @@ ProneToCrouchWalk() {
 
 BlendIntoCrouchWalk() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self SetAnimKnobAll(self.crouchrun_combatanim, % body, 1, 0.4);
+    self SetAnimKnobAll(self.crouchrun_combatanim, %body, 1, 0.4);
     PlayBlendTransition(self.crouchrun_combatanim, 0.6, "crouch", "walk", 0);
     self notify("BlendIntoCrouchWalk");
   } else {
@@ -627,11 +609,11 @@ StandToCrouch() {
     self.fastCrouch = undefined;
   }
   if(self is_zombie()) {
-    self ClearAnim( % shoot, 0);
+    self ClearAnim(%shoot, 0);
     return;
   }
   PlayTransitionAnimation(animArray("stand_2_crouch"), "crouch", "stop", 1, undefined, crouchspeed);
-  self ClearAnim( % shoot, 0);
+  self ClearAnim(%shoot, 0);
 }
 
 ProneToCrouch() {
@@ -678,17 +660,17 @@ ProneCrawlToProne() {
   ProneLegsStraightTree(0.1);
   self call_overloaded_func("animscripts\cover_prone", "UpdateProneWrapper", 0.1);
   PlayTransitionAnimation(animArray("crawl_2_aim"), "prone", "stop", 1);
-  self ClearAnim( % exposed_modern, 0.2);
+  self ClearAnim(%exposed_modern, 0.2);
 }
 
 CrouchToProne() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToProne " + self.a.pose);
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0);
   ProneLegsStraightTree(0.3);
   self call_overloaded_func("animscripts\cover_prone", "UpdateProneWrapper", 0.1);
   PlayTransitionAnimation(animArray("crouch_2_prone"), "prone", "stop", 1);
-  self ClearAnim( % exposed_modern, 0.2);
+  self ClearAnim(%exposed_modern, 0.2);
 }
 
 CrouchToProneWalk() {
@@ -708,11 +690,11 @@ StandToProne() {
   thread PlayTransitionAnimationThread_WithoutWaitSetStates(transAnim, "prone", "stop", proneTime);
   self waittillmatch("transAnimDone2", "anim_pose = \"prone\"");
   waittillframeend;
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(proneTime);
   self.a.movement = "stop";
   self waittillmatch("transAnimDone2", "end");
-  self ClearAnim( % exposed_modern, 0.2);
+  self ClearAnim(%exposed_modern, 0.2);
 }
 
 StandToProneWalk() {
@@ -729,7 +711,7 @@ CrouchRunToProne() {
   assertEX((self.a.pose == "crouch") || (self.a.pose == "stand"), "SetPoseMovement::CrouchRunToProne " + self.a.pose);
   assertEX((self.a.movement == "run" || self.a.movement == "walk"), "SetPoseMovement::CrouchRunToProne " + self.a.movement);
   pronetime = 0.5;
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(proneTime);
   ProneLegsStraightTree(0.2);
   self call_overloaded_func("animscripts\cover_prone", "UpdateProneWrapper", 0.1);
@@ -770,7 +752,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAni
   if(waitSetStatesEnabled) {
     self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
   }
-  self SetFlaggedAnimKnobAllRestart("transAnimDone2", transAnim, % body, 1, .2, rate);
+  self SetFlaggedAnimKnobAllRestart("transAnimDone2", transAnim, %body, 1, .2, rate);
   if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
   }
@@ -789,7 +771,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAni
     self.a.alertness = "casual";
   }
   if(isDefined(finalAnim)) {
-    self SetAnimKnobAll(finalAnim, % body, 1, 0.3, rate);
+    self SetAnimKnobAll(finalAnim, %body, 1, 0.3, rate);
   }
 }
 

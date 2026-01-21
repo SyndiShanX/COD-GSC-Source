@@ -98,8 +98,7 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
   }
 
   forceRespawn = GetDvarInt("scr_player_forcerespawn");
-  if(timeUntilRespawn && !level.gameEnded || (isDefined(self) && isDefined(self.battleBuddy) && !level.gameEnded) ||
-    forceRespawn == false && !level.gameEnded) {
+  if(timeUntilRespawn && !level.gameEnded || (isDefined(self) && isDefined(self.battleBuddy) && !level.gameEnded) || forceRespawn == false && !level.gameEnded) {
     self SetClientOmnvar("ui_killcam_text", "skip");
   } else if(!level.gameEnded) {
     self SetClientOmnvar("ui_killcam_text", "respawn");

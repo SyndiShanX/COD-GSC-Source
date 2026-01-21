@@ -102,8 +102,8 @@ func_1348D(var_0, var_1) {
   }
 
   level.player blendlinktoplayerviewmotion(0.25, 0);
-  level.player.helmet clearanim( % vm_gesture_visor_down_visor, 0);
-  level.player.helmet give_attacker_kill_rewards( % vm_gesture_visor_up_visor);
+  level.player.helmet clearanim(%vm_gesture_visor_down_visor, 0);
+  level.player.helmet give_attacker_kill_rewards(%vm_gesture_visor_up_visor);
   if(!var_0) {
     if(self == level.player) {
       level.player playSound("plr_helmet_visor_pull_up_w_air_lr");
@@ -115,9 +115,9 @@ func_1348D(var_0, var_1) {
     }
 
     level.player forceplaygestureviewmodel(var_2, undefined, undefined, undefined, 1);
-    wait(getanimlength( % vm_gesture_visor_up_visor));
+    wait(getanimlength(%vm_gesture_visor_up_visor));
   } else {
-    level.player.helmet func_82B0( % vm_gesture_visor_up_visor, 1);
+    level.player.helmet func_82B0(%vm_gesture_visor_up_visor, 1);
   }
 
   if(!var_0) {
@@ -174,8 +174,8 @@ func_13485(var_0, var_1, var_2) {
   }
 
   level.player blendlinktoplayerviewmotion(0.25, 0);
-  level.player.helmet clearanim( % vm_gesture_visor_up_visor, 0);
-  level.player.helmet give_attacker_kill_rewards( % vm_gesture_visor_down_visor);
+  level.player.helmet clearanim(%vm_gesture_visor_up_visor, 0);
+  level.player.helmet give_attacker_kill_rewards(%vm_gesture_visor_down_visor);
   if(!var_0) {
     var_3 = "ges_visor_down";
     if(isDefined(var_1)) {
@@ -185,11 +185,11 @@ func_13485(var_0, var_1, var_2) {
     if(self == level.player) {}
 
     level.player forceplaygestureviewmodel(var_3, undefined, undefined, undefined, 1);
-    wait(getanimlength( % vm_gesture_visor_down_visor));
+    wait(getanimlength(%vm_gesture_visor_down_visor));
   } else {
     if(self == level.player) {}
 
-    level.player.helmet func_82B0( % vm_gesture_visor_down_visor, 1);
+    level.player.helmet func_82B0(%vm_gesture_visor_down_visor, 1);
   }
 
   if(!var_0) {

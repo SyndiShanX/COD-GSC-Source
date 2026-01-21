@@ -29,8 +29,8 @@ main() {
     }
   }
   changeTime = 0.3;
-  self ClearAnim( % scripted_look_straight, changeTime);
-  self ClearAnim( % scripted_talking, changeTime);
+  self ClearAnim(%scripted_look_straight, changeTime);
+  self ClearAnim(%scripted_talking, changeTime);
   animscripts\utility::initialize("death");
   self notify("never look at anything again");
   removeSelfFrom_SquadLastSeenEnemyPos(self.origin);
@@ -46,7 +46,7 @@ main() {
   } else if(explosiveDamage && randomInt(2) == 0) {
     self helmetPop();
   }
-  self ClearAnim( % root, 0.3);
+  self ClearAnim(%root, 0.3);
   playDeathSound();
   if(explosiveDamage && play_explosion_death()) {
     return;
@@ -178,9 +178,9 @@ play_death_anim(deathAnim) {
     return;
   } else {
     if(isDefined(self.animTranslationScale) && self.animTranslationScale > 0) {
-      self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1, 1.0 / self.animTranslationScale);
+      self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, %body, 1, .1, 1.0 / self.animTranslationScale);
     } else {
-      self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
+      self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, %body, 1, .1);
     }
   }
   self thread do_gib();
@@ -1117,7 +1117,7 @@ do_extended_death(deathSeq) {
   self thread do_gib();
   self SetPlayerCollision(false);
   self thread death_anim_short_circuit();
-  self setFlaggedAnimKnobAllRestart("deathhitanim", deathSeq[0], % body, 1, .1);
+  self setFlaggedAnimKnobAllRestart("deathhitanim", deathSeq[0], %body, 1, .1);
   self animscripts\shared::DoNoteTracks("deathhitanim");
   self notify("stop_death_anim_short_circuit");
   self thread end_extended_death(deathSeq);
@@ -1129,7 +1129,7 @@ do_extended_death(deathSeq) {
 end_extended_death(deathSeq) {
   assert(isDefined(deathSeq[2]));
   self waittill_any("damage_afterdeath", "ending_extended_death");
-  self setFlaggedAnimKnobAllRestart("deathdieanim", deathSeq[2], % body, 1, .1);
+  self setFlaggedAnimKnobAllRestart("deathdieanim", deathSeq[2], %body, 1, .1);
   self animscripts\shared::DoNoteTracks("deathdieanim");
   self notify("extended_death_ended");
 }
@@ -1139,7 +1139,7 @@ extended_death_loop(deathSeq, numLoops) {
   assert(isDefined(deathSeq[1]));
   animLength = GetAnimLength(deathSeq[1]);
   for(i = 0; i < numLoops; i++) {
-    self setFlaggedAnimKnobAllRestart("deathloopanim", deathSeq[1], % body, 1, .1);
+    self setFlaggedAnimKnobAllRestart("deathloopanim", deathSeq[1], %body, 1, .1);
     self animscripts\shared::DoNoteTracks("deathloopanim");
   }
   self notify("ending_extended_death");
@@ -1243,10 +1243,7 @@ bayonet_death_fx(side) {
   } else {}
   wait 0.2;
   if(isDefined(level._effect)) {
-    if(!isDefined(level._effect["character_bayonet_blood_front"]) ||
-      !isDefined(level._effect["character_bayonet_blood_back"]) ||
-      !isDefined(level._effect["character_bayonet_blood_left"]) ||
-      !isDefined(level._effect["character_bayonet_blood_right"])) {
+    if(!isDefined(level._effect["character_bayonet_blood_front"]) || !isDefined(level._effect["character_bayonet_blood_back"]) || !isDefined(level._effect["character_bayonet_blood_left"]) || !isDefined(level._effect["character_bayonet_blood_right"])) {
       println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_bayonet_blood_out\"], please set it in your levelname_fx.gsc.");
       println("^3\"impacts/fx_flesh_bayonet_fatal_fr\" and ");
       println("^3\"impacts/fx_flesh_bayonet_fatal_bk\" and ");
@@ -1559,13 +1556,13 @@ playCustomDeathAnim() {
     self animscripts\shared::DropAllAIWeapons();
   }
   self thread do_gib();
-  self SetFlaggedAnimKnobAll("deathanim", self.deathanim, % root, 1, .05, 1);
+  self SetFlaggedAnimKnobAll("deathanim", self.deathanim, %root, 1, .05, 1);
   if(!animHasNotetrack(self.deathanim, "start_ragdoll")) {
     self thread waitForRagdoll(getanimlength(self.deathanim) * 0.35);
   }
   self animscripts\shared::DoNoteTracks("deathanim");
   if(isDefined(self.deathanimloop)) {
-    self SetFlaggedAnimKnobAll("deathanim", self.deathanimloop, % root, 1, .05, 1);
+    self SetFlaggedAnimKnobAll("deathanim", self.deathanimloop, %root, 1, .05, 1);
     for(;;) {
       self animscripts\shared::DoNoteTracks("deathanim");
     }
@@ -1582,9 +1579,7 @@ playDeathSound() {
       }
     }
   } else {
-    if(self.damageLocation == "helmet" && isDefined(self.hatModel) &&
-      ModelHasPhysPreset(self.hatModel) &&
-      issubstr(self.hatmodel, "helm")) {
+    if(self.damageLocation == "helmet" && isDefined(self.hatModel) && ModelHasPhysPreset(self.hatModel) && issubstr(self.hatmodel, "helm")) {
       self playSound("prj_bullet_impact_headshot_helmet");
     } else {
       self playSound("prj_bullet_impact_headshot");

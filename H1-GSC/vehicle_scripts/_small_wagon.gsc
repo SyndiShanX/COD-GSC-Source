@@ -17,7 +17,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_destructible("vehicle_small_wagon_blue_destructible", "vehicle_small_wagon_blue");
   maps\_vehicle::build_destructible("vehicle_small_wagon_green_destructible", "vehicle_small_wagon_green");
   maps\_vehicle::build_destructible("vehicle_small_wagon_turq_destructible", "vehicle_small_wagon_turq");
-  maps\_vehicle::build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");

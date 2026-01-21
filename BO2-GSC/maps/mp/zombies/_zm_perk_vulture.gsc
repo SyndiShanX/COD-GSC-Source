@@ -1063,9 +1063,7 @@ zombie_goes_to_exit_location() {
     b_passed_override = 1;
 
     if(isDefined(level.default_find_exit_position_override))
-      b_passed_override = [
-        [level.default_find_exit_position_override]
-      ]();
+      b_passed_override = [[level.default_find_exit_position_override]]();
 
     if(!flag("wait_and_revive") && b_passed_override) {
       break;

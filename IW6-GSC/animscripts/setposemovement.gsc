@@ -385,7 +385,7 @@ playblendtransition(var_0, var_1, var_2, var_3) {
   if(isarray(var_0))
     var_0 = var_0[randomint(var_0.size)];
 
-  self setflaggedanimknoball("blendTransition", var_0, % body, 1, var_1, 1);
+  self setflaggedanimknoball("blendTransition", var_0, %body, 1, var_1, 1);
   animscripts\notetracks::donotetracksfortime(var_1 / 2, "blendTransition");
   self.a.pose = var_2;
   self.a.movement = var_3;
@@ -455,7 +455,7 @@ blendintostandrun() {
   animscripts\run::setmovenonforwardanims(animscripts\utility::getmoveanim("move_b"), animscripts\utility::getmoveanim("move_l"), animscripts\utility::getmoveanim("move_r"), self.sidesteprate);
   thread animscripts\run::setcombatstandmoveanimweights("run");
   wait 0.05;
-  playblendtransitionstandrun( % combatrun);
+  playblendtransitionstandrun(%combatrun);
   return 1;
 }
 
@@ -479,10 +479,10 @@ crouchtostand() {
   }
 
   if(animscripts\utility::usingsidearm())
-    playtransitionanimation( % pistol_crouchaimstraight2stand, "stand", "stop", undefined, var_0);
+    playtransitionanimation(%pistol_crouchaimstraight2stand, "stand", "stop", undefined, var_0);
   else {
     animscripts\utility::randomizeidleset();
-    playtransitionanimation( % crouch2stand, "stand", "stop", undefined, var_0);
+    playtransitionanimation(%crouch2stand, "stand", "stop", undefined, var_0);
   }
 }
 
@@ -525,10 +525,10 @@ blendintocrouchrun() {
   if(isDefined(self.crouchrun_combatanim))
     playblendtransition(self.crouchrun_combatanim, 0.6, "crouch", "run");
   else {
-    self setanimknob( % crouchrun, 1, 0.4, self.moveplaybackrate);
+    self setanimknob(%crouchrun, 1, 0.4, self.moveplaybackrate);
     thread animscripts\run::updatemoveanimweights("crouchrun", animscripts\utility::getmoveanim("crouch"), animscripts\utility::getmoveanim("crouch_b"), animscripts\utility::getmoveanim("crouch_l"), animscripts\utility::getmoveanim("crouch_r"));
     wait 0.05;
-    playblendtransition( % crouchrun, 0.4, "crouch", "run");
+    playblendtransition(%crouchrun, 0.4, "crouch", "run");
   }
 }
 
@@ -537,7 +537,7 @@ pronetocrouchrun() {
   animscripts\utility::exitpronewrapper(1.0);
   pronelegsstraighttree(0.2);
   animscripts\cover_prone::updatepronewrapper(0.1);
-  playtransitionanimation( % prone_2_crouch, "crouch", "run", animscripts\run::getcrouchrunanim());
+  playtransitionanimation(%prone_2_crouch, "crouch", "run", animscripts\run::getcrouchrunanim());
 }
 
 pronetostandrun() {
@@ -552,14 +552,14 @@ pronetocrouchwalk() {
 
 blendintocrouchwalk() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self setanimknoball(self.crouchrun_combatanim, % body, 1, 0.4);
+    self setanimknoball(self.crouchrun_combatanim, %body, 1, 0.4);
     playblendtransition(self.crouchrun_combatanim, 0.6, "crouch", "walk");
     self notify("BlendIntoCrouchWalk");
   } else {
-    self setanimknob( % crouchrun, 1, 0.4, self.moveplaybackrate);
+    self setanimknob(%crouchrun, 1, 0.4, self.moveplaybackrate);
     thread animscripts\run::updatemoveanimweights("crouchrun", animscripts\utility::getmoveanim("crouch"), animscripts\utility::getmoveanim("crouch_b"), animscripts\utility::getmoveanim("crouch_l"), animscripts\utility::getmoveanim("crouch_r"));
     wait 0.05;
-    playblendtransition( % crouchrun, 0.4, "crouch", "run");
+    playblendtransition(%crouchrun, 0.4, "crouch", "run");
   }
 }
 
@@ -572,7 +572,7 @@ standtocrouch() {
     self.fastcrouch = undefined;
   }
 
-  playtransitionanimation( % exposed_stand_2_crouch, "crouch", "stop", undefined, var_0);
+  playtransitionanimation(%exposed_stand_2_crouch, "crouch", "stop", undefined, var_0);
 }
 
 pronetocrouch() {
@@ -581,7 +581,7 @@ pronetocrouch() {
   animscripts\utility::exitpronewrapper(1.0);
   pronelegsstraighttree(0.1);
   animscripts\cover_prone::updatepronewrapper(0.1);
-  playtransitionanimation( % prone_2_crouch, "crouch", "stop");
+  playtransitionanimation(%prone_2_crouch, "crouch", "stop");
 }
 
 pronetostand() {
@@ -589,7 +589,7 @@ pronetostand() {
   animscripts\utility::exitpronewrapper(1.0);
   pronelegsstraighttree(0.1);
   animscripts\cover_prone::updatepronewrapper(0.1);
-  playtransitionanimation( % prone_2_stand, "stand", "stop");
+  playtransitionanimation(%prone_2_stand, "stand", "stop");
 }
 
 pronetostandwalk() {
@@ -600,7 +600,7 @@ pronetostandwalk() {
 
 pronetopronemove(var_0) {
   pronelegsstraighttree(0.1);
-  playtransitionanimation( % prone_2_prone_crawl, "prone", var_0, % prone_crawl);
+  playtransitionanimation(%prone_2_prone_crawl, "prone", var_0, %prone_crawl);
   animscripts\cover_prone::updatepronewrapper(0.1);
 }
 
@@ -611,15 +611,15 @@ pronetopronerun() {
 pronecrawltoprone() {
   pronelegsstraighttree(0.1);
   animscripts\cover_prone::updatepronewrapper(0.1);
-  playtransitionanimation( % prone_crawl_2_prone, "prone", "stop");
+  playtransitionanimation(%prone_crawl_2_prone, "prone", "stop");
 }
 
 crouchtoprone() {
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::enterpronewrapper(1.0);
   pronelegsstraighttree(0.3);
   animscripts\cover_prone::updatepronewrapper(0.1);
-  playtransitionanimation( % crouch_2_prone, "prone", "stop");
+  playtransitionanimation(%crouch_2_prone, "prone", "stop");
 }
 
 crouchtopronewalk() {
@@ -635,16 +635,16 @@ crouchtopronerun() {
 standtoprone() {
   self endon("entered_poseprone");
   var_0 = 0.5;
-  thread playtransitionanimationthread_withoutwaitsetstates( % stand_2_prone, "prone", "stop", undefined, var_0);
+  thread playtransitionanimationthread_withoutwaitsetstates(%stand_2_prone, "prone", "stop", undefined, var_0);
   self waittillmatch("transAnimDone2", "anim_pose = \"crouch\"");
   waittillframeend;
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::enterpronewrapper(var_0);
   self.a.movement = "stop";
   animscripts\cover_prone::updatepronewrapper(0.1);
   self waittillmatch("transAnimDone2", "end");
   pronelegsstraighttree(0.2);
-  self setanim( % prone_aim_idle, 1, 0.1);
+  self setanim(%prone_aim_idle, 1, 0.1);
 }
 
 standtopronewalk() {
@@ -659,7 +659,7 @@ standtopronerun() {
 
 crouchruntoprone() {
   var_0 = 0.5;
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   animscripts\utility::enterpronewrapper(var_0);
   pronelegsstraighttree(0.2);
   animscripts\cover_prone::updatepronewrapper(0.1);
@@ -671,7 +671,7 @@ crouchruntoprone() {
   if(self maymovetopoint(var_4))
     playtransitionanimation(var_2, "prone", "stop", undefined, var_0);
   else
-    playtransitionanimation( % crouch_2_prone_firing, "prone", "stop", undefined, var_0);
+    playtransitionanimation(%crouch_2_prone_firing, "prone", "stop", undefined, var_0);
 }
 
 crouchruntopronewalk() {
@@ -701,7 +701,7 @@ playtransitionanimationfunc(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_5)
     thread waitsetstates(getanimlength(var_0) / 2.0, "killtimerscript", var_1);
 
-  self setflaggedanimknoballrestart("transAnimDone2", var_0, % body, 1, 0.2, var_4);
+  self setflaggedanimknoballrestart("transAnimDone2", var_0, %body, 1, 0.2, var_4);
 
   if(!isDefined(self.a.pose))
     self.pose = "undefined";
@@ -717,7 +717,7 @@ playtransitionanimationfunc(var_0, var_1, var_2, var_3, var_4, var_5) {
   self.a.movement = var_2;
 
   if(isDefined(var_3))
-    self setanimknoball(var_3, % body, 1, 0.3, var_4);
+    self setanimknoball(var_3, %body, 1, 0.3, var_4);
 }
 
 waitsetstates(var_0, var_1, var_2) {
@@ -737,5 +737,5 @@ waitsetstates(var_0, var_1, var_2) {
 }
 
 pronelegsstraighttree(var_0) {
-  self setanimknoball( % prone_legsstraight, % body, 1, var_0, 1);
+  self setanimknoball(%prone_legsstraight, %body, 1, var_0, 1);
 }

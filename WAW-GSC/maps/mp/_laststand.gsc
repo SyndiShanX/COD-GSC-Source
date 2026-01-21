@@ -133,8 +133,7 @@ waittillGrenadeThrown() {
 }
 
 mayDoLastStand(sWeapon, sMeansOfDeath, sHitLoc) {
-  if(sMeansOfDeath != "MOD_PISTOL_BULLET" &&
-    sMeansOfDeath != "MOD_RIFLE_BULLET") {
+  if(sMeansOfDeath != "MOD_PISTOL_BULLET" && sMeansOfDeath != "MOD_RIFLE_BULLET") {
     return false;
   }
   if(level.laststandpistol == "none") {
@@ -270,10 +269,7 @@ revive_trigger_think() {
         if(players[i] != self && !isDefined(players[i].revivetrigger)) {
           if((!isDefined(self.currentlyBeingRevived) || !self.currentlyBeingRevived) && !players[i].revivingTeammate) {
             players[i] thread cleanUpRevivingTeamate(self);
-            if(players[i].health > 0 &&
-              isDefined(self.revivetrigger) &&
-              players[i] istouching(self.revivetrigger) &&
-              players[i] useButtonPressed()) {
+            if(players[i].health > 0 && isDefined(self.revivetrigger) && players[i] istouching(self.revivetrigger) && players[i] useButtonPressed()) {
               players[i].revivingTeammate = true;
               gun = players[i] GetCurrentWeapon();
               if(gun == "syrette_mp") {

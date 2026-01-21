@@ -762,9 +762,7 @@ update_kvp(var_0, var_1, var_2) {
 
   foreach(var_4 in level.spawn_struct_list) {
     if(var_4.origin == var_0) {
-      var_4 = [
-        [level.kvp_update_funcs[var_1]]
-      ](var_4, var_2);
+      var_4 = [[level.kvp_update_funcs[var_1]]](var_4, var_2);
       break;
     }
   }

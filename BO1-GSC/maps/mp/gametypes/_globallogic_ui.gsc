@@ -373,8 +373,7 @@ menuClass(response) {
     self beginClassChoice();
     return;
   }
-  if((isDefined(self.pers["class"]) && self.pers["class"] == class) &&
-    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary))
+  if((isDefined(self.pers["class"]) && self.pers["class"] == class) && (isDefined(self.pers["primary"]) && self.pers["primary"] == primary))
     return;
   self notify("changed_class");
   self maps\mp\gametypes\_gametype_variants::OnPlayerClassChange();

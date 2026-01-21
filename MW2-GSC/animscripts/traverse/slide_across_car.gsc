@@ -21,7 +21,7 @@ slide_across_car_human() {
   traverseData["traverseToCoverAnim"] = % slide_across_car_2_cover;
   traverseData["coverType"] = "Cover Crouch";
   traverseData["traverseHeight"] = 38.0;
-  traverseData["interruptDeathAnim"][0] = array( % slide_across_car_death);
+  traverseData["interruptDeathAnim"][0] = array(%slide_across_car_death);
   traverseData["traverseSound"] = "npc_car_slide_hood";
   traverseData["traverseToCoverSound"] = "npc_car_slide_cover";
 
@@ -39,14 +39,14 @@ slide_across_car_dog() {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
 
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self setflaggedanimrestart("traverse", anim.dogTraverseAnims["jump_up_40"], 1, 0.1, 1);
   self animscripts\shared::DoNoteTracks("traverse");
 
   // TEMP, can't hear jump over sounds
   self thread play_sound_in_space("anml_dog_bark", self gettagorigin("tag_eye"));
 
-  self clearanim( % root, 0);
+  self clearanim(%root, 0);
   self setflaggedanimrestart("traverse", anim.dogTraverseAnims["jump_down_40"], 1, 0, 1);
   self animscripts\shared::DoNoteTracks("traverse");
 

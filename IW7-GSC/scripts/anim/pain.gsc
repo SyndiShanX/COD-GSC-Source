@@ -269,9 +269,9 @@ func_80A0() {
 
 func_D4EE(var_0) {
   var_1 = 1;
-  func_C86D("painanim", var_0, % body, 1, 0.1, var_1);
+  func_C86D("painanim", var_0, %body, 1, 0.1, var_1);
   if(self.a.pose == "prone") {
-    self func_83CF( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self func_83CF(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
   }
 
   if(animhasnotetrack(var_0, "start_aim")) {
@@ -564,7 +564,7 @@ func_4877() {
   self func_8306();
   thread func_C874();
   level notify("ai_crawling", self);
-  self func_82A5( % dying, % body, 1, 0.1, 1);
+  self func_82A5(%dying, %body, 1, 0.1, 1);
   if(isDefined(self.a.var_11188)) {
     func_11185();
     self.a.var_11188 = undefined;
@@ -629,8 +629,8 @@ func_4877() {
   }
 
   self notify("end_dying_crawl_back_aim");
-  self clearanim( % dying_back_aim_4_wrapper, 0.3);
-  self clearanim( % dying_back_aim_6_wrapper, 0.3);
+  self clearanim(%dying_back_aim_4_wrapper, 0.3);
+  self clearanim(%dying_back_aim_6_wrapper, 0.3);
   var_5 = scripts\anim\utility::func_B027("crawl_death", "back_death");
   self.var_4E2A = var_5[randomint(var_5.size)];
   func_A6CE();
@@ -867,16 +867,16 @@ func_5F73() {
       }
 
       var_3 = var_1 / -45;
-      self give_attacker_kill_rewards( % dying_back_aim_4_wrapper, var_3, 0.05);
-      self give_attacker_kill_rewards( % dying_back_aim_6_wrapper, 0, 0.05);
+      self give_attacker_kill_rewards(%dying_back_aim_4_wrapper, var_3, 0.05);
+      self give_attacker_kill_rewards(%dying_back_aim_6_wrapper, 0, 0.05);
     } else {
       if(var_1 > 45) {
         var_1 = 45;
       }
 
       var_3 = var_1 / 45;
-      self give_attacker_kill_rewards( % dying_back_aim_6_wrapper, var_3, 0.05);
-      self give_attacker_kill_rewards( % dying_back_aim_4_wrapper, 0, 0.05);
+      self give_attacker_kill_rewards(%dying_back_aim_6_wrapper, var_3, 0.05);
+      self give_attacker_kill_rewards(%dying_back_aim_4_wrapper, 0, 0.05);
     }
 
     var_0 = var_1;
@@ -1032,12 +1032,11 @@ func_4669() {
     thread func_D899("corner_grenade");
     thread scripts\sp\utility::func_F2DA(0);
     self.var_33F = -1000;
-    func_C86D("corner_grenade_pain", scripts\anim\utility::func_B027("corner_grenade_death", "pain"), % body, 1, 0.1);
+    func_C86D("corner_grenade_pain", scripts\anim\utility::func_B027("corner_grenade_death", "pain"), %body, 1, 0.1);
     self waittillmatch("dropgun", "corner_grenade_pain");
     scripts\anim\shared::func_5D1A();
-    self waittillmatch("anim_pose = \"back\","
-      corner_grenade_pain ");
-      scripts\anim\notetracks::notetrackposeback(); self waittillmatch("grenade_left", "corner_grenade_pain"); var_0 = getweaponmodel("fraggrenade"); self attach(var_0, "tag_inhand"); self.var_4E46 = ::func_D850; self waittillmatch("end", "corner_grenade_pain"); var_1 = gettime() + randomintrange(25000, -5536); func_C86D("corner_grenade_idle", scripts\anim\utility::func_B027("corner_grenade_death", "pain"), % body, 1, 0.2); thread func_13A17();
+    self waittillmatch("anim_pose = \"back\","corner_grenade_pain");
+      scripts\anim\notetracks::notetrackposeback(); self waittillmatch("grenade_left", "corner_grenade_pain"); var_0 = getweaponmodel("fraggrenade"); self attach(var_0, "tag_inhand"); self.var_4E46 = ::func_D850; self waittillmatch("end", "corner_grenade_pain"); var_1 = gettime() + randomintrange(25000, -5536); func_C86D("corner_grenade_idle", scripts\anim\utility::func_B027("corner_grenade_death", "pain"), %body, 1, 0.2); thread func_13A17();
       while(!func_6560()) {
         if(gettime() >= var_1) {
           break;
@@ -1046,7 +1045,7 @@ func_4669() {
         scripts\anim\notetracks::donotetracksfortime(0.1, "corner_grenade_idle");
       }
 
-      var_2 = scripts\anim\utility::func_B027("corner_grenade_death", "release"); func_C86D("corner_grenade_release", var_2, % body, 1, 0.2); var_3 = getnotetracktimes(var_2, "grenade_drop"); var_4 = var_3[0] * getanimlength(var_2); wait(var_4 - 1); scripts\anim\death::playdeathsound(); wait(0.7); self.var_4E46 = ::waittillhelisdead; var_5 = (0, 0, 30) - anglestoright(self.angles) * 70; func_4663(var_5, randomfloatrange(2, 3)); wait(0.05); self detach(var_0, "tag_inhand"); thread func_A678();
+      var_2 = scripts\anim\utility::func_B027("corner_grenade_death", "release"); func_C86D("corner_grenade_release", var_2, %body, 1, 0.2); var_3 = getnotetracktimes(var_2, "grenade_drop"); var_4 = var_3[0] * getanimlength(var_2); wait(var_4 - 1); scripts\anim\death::playdeathsound(); wait(0.7); self.var_4E46 = ::waittillhelisdead; var_5 = (0, 0, 30) - anglestoright(self.angles) * 70; func_4663(var_5, randomfloatrange(2, 3)); wait(0.05); self detach(var_0, "tag_inhand"); thread func_A678();
     }
 
     func_4663(var_0, var_1) {
@@ -1122,7 +1121,7 @@ func_4669() {
       var_0 = scripts\anim\utility::func_B027("corner_grenade_death", "premature_death");
       var_1 = var_0[randomint(var_0.size)];
       scripts\anim\death::playdeathsound();
-      func_C86D("corner_grenade_die", var_1, % body, 1, 0.2);
+      func_C86D("corner_grenade_die", var_1, %body, 1, 0.2);
       var_2 = scripts\anim\combat_utility::func_7EE3();
       func_4663(var_2, 3);
       var_3 = getweaponmodel("fraggrenade");
@@ -1194,11 +1193,11 @@ func_4669() {
         var_7 = var_8[randomint(var_8.size)];
       }
 
-      self func_82AC( % add_pain, 1, 0.1, 1);
+      self func_82AC(%add_pain, 1, 0.1, 1);
       self func_82AC(var_7, 1, 0, 1);
       wait(0.4);
       self clearanim(var_7, 0.2);
-      self clearanim( % add_pain, 0.2);
+      self clearanim(%add_pain, 0.2);
       self.var_58D6 = undefined;
     }
 

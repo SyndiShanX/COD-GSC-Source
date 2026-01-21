@@ -644,9 +644,7 @@ function set_drop_offset(height) {
 
 function set_dropped() {
   if(isDefined(self.setdropped)) {
-    if([
-        [self.setdropped]
-      ]()) {
+    if([[self.setdropped]]()) {
       return;
     }
   }
@@ -1063,9 +1061,7 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
     if(!self can_interact_with(player)) {
       continue;
     }
-    if(isDefined(self.caninteractwithplayer) && ![
-        [self.caninteractwithplayer]
-      ](player)) {
+    if(isDefined(self.caninteractwithplayer) && ![[self.caninteractwithplayer]](player)) {
       continue;
     }
     if(!player isonground() || player iswallrunning()) {
@@ -1320,9 +1316,7 @@ function prox_trigger_think() {
     if(self is_excluded(player)) {
       continue;
     }
-    if(isDefined(self.canuseobject) && ![
-        [self.canuseobject]
-      ](player)) {
+    if(isDefined(self.canuseobject) && ![[self.canuseobject]](player)) {
       continue;
     }
     if(self can_interact_with(player) && self.claimteam == "none") {

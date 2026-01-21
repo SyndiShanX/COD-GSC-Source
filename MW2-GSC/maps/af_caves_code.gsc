@@ -171,8 +171,7 @@ player_unsuppressed_weapon_warning() {
 
   flag_set("unsuppressed_weapon_warning_played");
 
-  // "Make sure you're using a suppressed weapon, otherwise we're dead."
-  radio_dialogue("afcaves_pri_suppressedweapon");
+  // "Make sure you're using a suppressed weapon, otherwise we're dead."radio_dialogue("afcaves_pri_suppressedweapon");
 }
 
 player_falling_kill_trigger() {
@@ -413,7 +412,7 @@ scripted_covercrouch_shuffle_left() {
   shuffleDist = Length(GetMoveDelta(shuffleAnim, 0, 1));
   endDist = Length(GetMoveDelta(endAnim, 0, 1));
 
-  self ClearAnim( % body, blendTime);
+  self ClearAnim(%body, blendTime);
 
   self AnimMode("zonly_physics", false);
 
@@ -479,7 +478,7 @@ scripted_covercrouch_shuffle_left() {
   self SafeTeleport(node.origin);
   self AnimMode("normal");
 
-  self ClearAnim( % cover_shuffle, 0.2);
+  self ClearAnim(%cover_shuffle, 0.2);
 
   self.shuffleMoveInterrupted = undefined;
   self AnimMode("none", false);

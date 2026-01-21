@@ -138,15 +138,8 @@ swampCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType(
-    "airdrop_assault",
-    "juggernaut_swamp_slasher",
-    SWAMP_SLASHER_WEIGHT,
-    maps\mp\killstreaks\_airdrop::juggernautCrateThink,
-    maps\mp\killstreaks\_airdrop::get_friendly_juggernaut_crate_model(),
-    maps\mp\killstreaks\_airdrop::get_enemy_juggernaut_crate_model(), &
-    "MP_SWAMP_JUGGERNAUT_SWAMP_SLASHER_PICKUP"
-  );
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", "juggernaut_swamp_slasher", SWAMP_SLASHER_WEIGHT, maps\mp\killstreaks\_airdrop::juggernautCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_juggernaut_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_juggernaut_crate_model(), &
+    "MP_SWAMP_JUGGERNAUT_SWAMP_SLASHER_PICKUP");
   level thread watch_for_swamp_slasher_crate();
 }
 

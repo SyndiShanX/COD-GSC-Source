@@ -68,12 +68,12 @@ function trophy_state_change_recon(localclientnum, oldval, newval, bnewent, bini
 function trophy_rolling_anim(localclientnum) {
   self endon("entityshutdown");
   self useanimtree($mp_trophy_system);
-  self setanim( % mp_trophy_system::o_trophy_deploy, 1);
+  self setanim(%mp_trophy_system::o_trophy_deploy, 1);
 }
 
 function trophy_stationary_anim(localclientnum) {
   self endon("entityshutdown");
   self useanimtree($mp_trophy_system);
-  self setanim( % mp_trophy_system::o_trophy_deploy, 0);
-  self setanim( % mp_trophy_system::o_trophy_spin, 1);
+  self setanim(%mp_trophy_system::o_trophy_deploy, 0);
+  self setanim(%mp_trophy_system::o_trophy_spin, 1);
 }

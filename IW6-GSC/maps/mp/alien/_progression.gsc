@@ -120,21 +120,10 @@ player_watch_upgrade_internal(resource, type) {
         hivename = level.current_hive_name;
 
       if(GetDvarInt("alien_bbprint_debug") > 0) {
-        IPrintLnBold("^8bbprint: aliencombatresourceupgraded \n" +
-          " cyclenum=" + cyclenum +
-          " hivename=" + hivename +
-          " resource=" + resource.ref +
-          " resourcelevel=" + rank +
-          " ownername=" + playername);
+        IPrintLnBold("^8bbprint: aliencombatresourceupgraded \n" + " cyclenum=" + cyclenum + " hivename=" + hivename + " resource=" + resource.ref + " resourcelevel=" + rank + " ownername=" + playername);
       }
 
-      bbprint("aliencombatresourceupgraded",
-        "cyclenum %i hivename %s resource %s resourcelevel %s ownername %s ",
-        cyclenum,
-        hivename,
-        resource.ref,
-        rank,
-        playername);
+      bbprint("aliencombatresourceupgraded", "cyclenum %i hivename %s resource %s resourcelevel %s ownername %s ", cyclenum, hivename, resource.ref, rank, playername);
 
     }
   }
@@ -325,21 +314,10 @@ player_use(resource, rank) {
       hivename = level.current_hive_name;
 
     if(GetDvarInt("alien_bbprint_debug") > 0) {
-      IPrintLnBold("^8bbprint: aliencombatresourceused \n" +
-        " cyclenum=" + cyclenum +
-        " hivename=" + hivename +
-        " resource=" + resource.ref +
-        " resourcelevel=" + rank +
-        " ownername=" + playername);
+      IPrintLnBold("^8bbprint: aliencombatresourceused \n" + " cyclenum=" + cyclenum + " hivename=" + hivename + " resource=" + resource.ref + " resourcelevel=" + rank + " ownername=" + playername);
     }
 
-    bbprint("aliencombatresourceused",
-      "cyclenum %i hivename %s resource %s resourcelevel %s ownername %s ",
-      cyclenum,
-      hivename,
-      resource.ref,
-      rank,
-      playername);
+    bbprint("aliencombatresourceused", "cyclenum %i hivename %s resource %s resourcelevel %s ownername %s ", cyclenum, hivename, resource.ref, rank, playername);
 
     self notify("action_finish_used");
     self notify("player_action_slot_restart");

@@ -11,7 +11,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_pickup_technical", "vehicle_pickup_technical_destroyed", 3);
   maps\_vehicle::build_turret("50cal_turret_technical", "tag_50cal", "weapon_pickup_technical_mg50cal", undefined, undefined, 2.9);
-  maps\_vehicle::build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   maps\_vehicle::build_deathfx("fx\fire\firelp_med_pm", "tag_fx_tank", "smallfire", undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx("fx\explosions\ammo_cookoff", "tag_fx_bed", undefined, undefined, undefined, undefined, 0.5);
   maps\_vehicle::build_deathfx("fx\explosions\Vehicle_Explosion_Pickuptruck", "tag_deathfx", "car_explode", undefined, undefined, undefined, 2.9);

@@ -36,9 +36,7 @@ function_840acc1c(event, handlerfunc, priority = 0, var_c10e92a2 = undefined) {
   assert(!isDefined(var_c10e92a2) || isfunctionptr(var_c10e92a2), "<dev string:xab>");
   assert(!isDefined(level.var_a95b39fd[event]), "<dev string:xdf>" + event);
   handler = {
-    #handlerfunc: handlerfunc,
-    #priority: priority,
-    #var_c10e92a2: var_c10e92a2
+    #handlerfunc: handlerfunc, #priority: priority, #var_c10e92a2: var_c10e92a2
   };
   level.var_a95b39fd[event] = handler;
 }

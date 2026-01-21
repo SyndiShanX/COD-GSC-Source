@@ -259,8 +259,7 @@ DropWeaponWrapper(weapon, position) {
   if(issubstr(tolower(actualDroppedWeapon), "rpg"))
     actualDroppedWeapon = "rpg_player";
 
-  // unless we're already in the process of dropping more than one weapon,
-  // this will not actually create the weapon until the next frame, so it can get the tag's velocity.
+  // unless we're already in the process of dropping more than one weapon, // this will not actually create the weapon until the next frame, so it can get the tag's velocity.
   self DropWeapon(actualDroppedWeapon, position, 0);
 
   // So we want to wait a bit before detaching the model.
@@ -517,7 +516,7 @@ noteTrackPoseProne(note, flagName) {
   if(!issentient(self)) {
     return;
   }
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0); // make code start lerping in the prone orientation to ground
   setPose("prone");
 
@@ -531,7 +530,7 @@ noteTrackPoseCrawl(note, flagName) {
   if(!issentient(self)) {
     return;
   }
-  self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0); // make code start lerping in the prone orientation to ground
   setPose("prone");
   self.a.proneAiming = undefined;
@@ -545,7 +544,7 @@ noteTrackPoseBack(note, flagName) {
   self.a.onback = true;
   self.a.movement = "stop";
 
-  self setProneAnimNodes(-90, 90, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+  self setProneAnimNodes(-90, 90, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0); // make code start lerping in the prone orientation to ground
 }
 
@@ -776,8 +775,7 @@ HandleNoteTrack(note, flagName, customFunction) {
   }
 }
 
-// DoNoteTracks waits for and responds to standard noteTracks on the animation, returning when it gets an "end" or a "finish"
-// For level scripts, a pointer to a custom function should be passed as the second argument, which handles notetracks not
+// DoNoteTracks waits for and responds to standard noteTracks on the animation, returning when it gets an "end" or a "finish"// For level scripts, a pointer to a custom function should be passed as the second argument, which handles notetracks not
 // already handled by the generic function. This call should take the form DoNoteTracks(flagName, ::customFunction);
 // The custom function will be called for each notetrack not recognized, and will pass the notetrack name. Note that this
 // function could be called multiple times for a single animation.
@@ -871,9 +869,7 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, de
     if(timetaken < 0.05) {
       time = GetTime();
       //prof_begin( "notetracksFunc" );
-      returnedNote = [
-        [notetracksFunc]
-      ](flagName, customFunction, debugIdentifier);
+      returnedNote = [[notetracksFunc]](flagName, customFunction, debugIdentifier);
       //prof_end( "notetracksFunc" );
       timetaken = GetTime() - time;
       if(timetaken < 0.05) {
@@ -1138,8 +1134,7 @@ getShootFromPos() {
 getAimYawToPoint(point) {
   yaw = GetYawToSpot(point);
 
-  // need to have fudge factor because the gun's origin is different than our origin,
-  // the closer our distance, the more we need to fudge.
+  // need to have fudge factor because the gun's origin is different than our origin, // the closer our distance, the more we need to fudge.
   dist = distance(self.origin, point);
   if(dist > 3) {
     angleFudge = asin(-3 / dist);
@@ -1158,7 +1153,7 @@ trackShootEntOrPos() {
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "trackShootEntOrPos";
 
-  trackLoop( % aim_2, % aim_4, % aim_6, % aim_8);
+  trackLoop(%aim_2, %aim_4, %aim_6, %aim_8);
 }
 
 // max change in angle in 1 frame
@@ -1408,8 +1403,8 @@ ramboAim(baseYaw) {
 
   ramboAimInternal(baseYaw);
 
-  self clearAnim( % generic_aim_left, 0.5);
-  self clearAnim( % generic_aim_right, 0.5);
+  self clearAnim(%generic_aim_left, 0.5);
+  self clearAnim(%generic_aim_right, 0.5);
 }
 
 ramboAimInternal(baseYaw) {
@@ -1417,11 +1412,11 @@ ramboAimInternal(baseYaw) {
 
   waittillframeend; // in case a previous ramboAim call is still doing its clearanims
 
-  self clearAnim( % generic_aim_left, 0.2);
-  self clearAnim( % generic_aim_right, 0.2);
+  self clearAnim(%generic_aim_left, 0.2);
+  self clearAnim(%generic_aim_right, 0.2);
 
-  self setAnimLimited( % generic_aim_45l, 1, 0.2);
-  self setAnimLimited( % generic_aim_45r, 1, 0.2);
+  self setAnimLimited(%generic_aim_45l, 1, 0.2);
+  self setAnimLimited(%generic_aim_45r, 1, 0.2);
 
   interval = 0.2;
 
@@ -1446,15 +1441,15 @@ ramboAimInternal(baseYaw) {
       if(weight > 1)
         weight = 1;
 
-      self setAnimLimited( % generic_aim_right, weight, interval);
-      self setAnimLimited( % generic_aim_left, 0, interval);
+      self setAnimLimited(%generic_aim_right, weight, interval);
+      self setAnimLimited(%generic_aim_left, 0, interval);
     } else {
       weight = yaw / 45;
       if(weight > 1)
         weight = 1;
 
-      self setAnimLimited( % generic_aim_left, weight, interval);
-      self setAnimLimited( % generic_aim_right, 0, interval);
+      self setAnimLimited(%generic_aim_left, weight, interval);
+      self setAnimLimited(%generic_aim_right, 0, interval);
     }
 
     wait interval;
@@ -1672,12 +1667,10 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
       if(self canSeeEnemy() && [[canStopCallback]]())
         return;
     }
-    if(self isSuppressedWrapper() && [
-        [canStopCallback]
-      ]()) {
+    if(self isSuppressedWrapper() && [[canStopCallback]]()) {
       return;
     }
-    self setAnimKnobAll(lookAnim, % body, 1, .1);
+    self setAnimKnobAll(lookAnim, %body, 1, .1);
     wait(0.1);
   }
 }

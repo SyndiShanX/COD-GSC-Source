@@ -192,13 +192,7 @@ class class_7da27482 {
 
   function function_e599283f() {
     return {
-      #xuid: _xuid,
-      #charactermode: _i_mode,
-      #charactertype: var_1d73bad9,
-      #characterhead: var_db113baf,
-      #outfit: var_cf55444c,
-      #warpaintoutfit: var_cfe86a3e,
-      #outfititems: var_f5c0467b
+      #xuid: _xuid, #charactermode: _i_mode, #charactertype: var_1d73bad9, #characterhead: var_db113baf, #outfit: var_cf55444c, #warpaintoutfit: var_cfe86a3e, #outfititems: var_f5c0467b
     };
   }
 
@@ -743,11 +737,7 @@ class class_7da27482 {
 
   function function_62dd99d6(model) {
     render_options = function_aa478513({
-      #mode: _i_mode,
-      #characterindex: var_1d73bad9,
-      #outfitindex: var_cf55444c,
-      #warpaintoutfitindex: var_cfe86a3e,
-      #outfitoptions: var_f5c0467b
+      #mode: _i_mode, #characterindex: var_1d73bad9, #outfitindex: var_cf55444c, #warpaintoutfitindex: var_cfe86a3e, #outfitoptions: var_f5c0467b
     });
     model setbodyrenderoptionspacked(render_options);
   }
@@ -888,9 +878,7 @@ class class_7da27482 {
 
   function private function_b020b858(model_name, lod = -1, mip = -1) {
     index = array::find(var_506d3c33, {
-      #model: model_name,
-      #lod: lod,
-      #mip: mip
+      #model: model_name, #lod: lod, #mip: mip
     }, &function_1a57b132);
 
     if(isDefined(index)) {
@@ -905,9 +893,7 @@ class class_7da27482 {
 
   function private function_c358189(model_name, lod = -1, mip = -1) {
     index = array::find(var_506d3c33, {
-      #model: model_name,
-      #lod: lod,
-      #mip: mip
+      #model: model_name, #lod: lod, #mip: mip
     }, &function_1a57b132);
     assert(isDefined(index));
 
@@ -920,9 +906,7 @@ class class_7da27482 {
 
   function private force_stream_model(model_name, lod = -1, mip = -1) {
     array::add(var_506d3c33, {
-      #model: model_name,
-      #lod: lod,
-      #mip: mip
+      #model: model_name, #lod: lod, #mip: mip
     });
     character_customization::function_221a94ac(model_name, lod, mip);
   }
@@ -948,12 +932,10 @@ class class_7da27482 {
     if(gesture_index == -1) {
       if(#"female" === getherogender(var_1d73bad9, _i_mode)) {
         return {
-          #animation: # "pb_rifle_fem_stand_spray_fb"
-        };
+          #animation: # "pb_rifle_fem_stand_spray_fb"};
       } else {
         return {
-          #animation: # "pb_rifle_male_stand_spray_fb"
-        };
+          #animation: # "pb_rifle_male_stand_spray_fb"};
       }
     }
 
@@ -1130,9 +1112,7 @@ class class_7da27482 {
 
   function private function_c39fbf91() {
     foreach(callback in var_180f1c7d) {
-      [
-        [callback]
-      ](var_f141235b, self);
+      [[callback]](var_f141235b, self);
     }
   }
 
@@ -1149,9 +1129,7 @@ function_6bca50af(fn, character_index, outfit_index, var_e1daa8d9, mode) {
     model = [[fn]](character_index, outfit_index, 0, mode);
 
     if(!isDefined(model)) {
-      model = [
-        [fn]
-      ](character_index, 0, 0, mode);
+      model = [[fn]](character_index, 0, 0, mode);
     }
   }
 
@@ -1364,12 +1342,7 @@ function_7474681d(local_client_num, session_mode, character_index) {
   }
 
   return {
-    #charactermode: session_mode,
-    #charactertype: character_index,
-    #characterhead: getequippedheadindexforhero(local_client_num, session_mode),
-    #outfit: outfit_index,
-    #warpaintoutfit: var_17b172ca,
-    #outfititems: outfit_items
+    #charactermode: session_mode, #charactertype: character_index, #characterhead: getequippedheadindexforhero(local_client_num, session_mode), #outfit: outfit_index, #warpaintoutfit: var_17b172ca, #outfititems: outfit_items
   };
 }
 
@@ -1381,12 +1354,7 @@ function_3f5625f1(mode, character_index = 1) {
   }
 
   return {
-    #charactermode: mode,
-    #charactertype: character_index,
-    #characterhead: 0,
-    #outfit: 0,
-    #warpaintoutfit: 0,
-    #outfititems: outfit_items
+    #charactermode: mode, #charactertype: character_index, #characterhead: 0, #outfit: 0, #warpaintoutfit: 0, #outfititems: outfit_items
   };
 }
 
@@ -1669,12 +1637,8 @@ update_model_rotation_for_right_stick(localclientnum, var_d0b01271, endonevent) 
   while(true) {
     data_lcn = [[var_d0b01271]] - > function_690c9509();
 
-    if(localclientnum == data_lcn && localclientactive(data_lcn) && ![
-        [var_d0b01271]
-      ] - > function_4a271da1()) {
-      model = [
-        [var_d0b01271]
-      ] - > function_217b10ed();
+    if(localclientnum == data_lcn && localclientactive(data_lcn) && ![[var_d0b01271]] - > function_4a271da1()) {
+      model = [[var_d0b01271]] - > function_217b10ed();
 
       if(isDefined(model)) {
         pos = getcontrollerposition(data_lcn);
@@ -1713,9 +1677,7 @@ setup_static_character_customization_target(localclientnum) {
 
 setup_character_extracam_struct(xcam, subxcam, model_animation) {
   newstruct = {
-    #xcam: xcam,
-    #subxcam: subxcam,
-    #anim_name: model_animation
+    #xcam: xcam, #subxcam: subxcam, #anim_name: model_animation
   };
   return newstruct;
 }
@@ -1739,10 +1701,7 @@ setup_character_extracam_settings(localclientnum, var_d0b01271, extracam_data_st
   assert(isDefined(camera_ent));
   camera_ent playextracamxcam(extracam_data_struct.xcam, 0, extracam_data_struct.subxcam);
   params = {
-    #anim_name: extracam_data_struct.anim_name,
-    #extracam_data: extracam_data_struct,
-    #sessionmode: extracam_data_struct.sessionmode,
-    #hide_helmet: isDefined(extracam_data_struct.hidehelmet) && extracam_data_struct.hidehelmet
+    #anim_name: extracam_data_struct.anim_name, #extracam_data: extracam_data_struct, #sessionmode: extracam_data_struct.sessionmode, #hide_helmet: isDefined(extracam_data_struct.hidehelmet) && extracam_data_struct.hidehelmet
   };
   [[var_d0b01271]] - > function_79f89fb6(extracam_data_struct.sessionmode === 2);
   [[var_d0b01271]] - > set_alt_render_mode(0);
@@ -1755,15 +1714,11 @@ setup_character_extracam_settings(localclientnum, var_d0b01271, extracam_data_st
     [[var_d0b01271]] - > function_77e3be08();
 
     if(isDefined(extracam_data_struct.var_d3927004) && isDefined(extracam_data_struct.var_eb3dfef8)) {
-      [
-        [var_d0b01271]
-      ] - > set_character_outfit_item(extracam_data_struct.var_eb3dfef8, extracam_data_struct.var_d3927004);
+      [[var_d0b01271]] - > set_character_outfit_item(extracam_data_struct.var_eb3dfef8, extracam_data_struct.var_d3927004);
     }
 
     if(isDefined(extracam_data_struct.useheadindex)) {
-      [
-        [var_d0b01271]
-      ] - > set_character_head(extracam_data_struct.useheadindex);
+      [[var_d0b01271]] - > set_character_head(extracam_data_struct.useheadindex);
     }
   }
 

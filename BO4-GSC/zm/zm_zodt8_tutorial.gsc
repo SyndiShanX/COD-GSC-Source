@@ -293,8 +293,7 @@ open_door(str_door_name) {
 
   foreach(zombie_door in a_e_zombie_doors) {
     zombie_door notify(#"trigger", {
-      #activator: zombie_door,
-      #is_forced: 1
+      #activator: zombie_door, #is_forced: 1
     });
 
     if(str_door_name == "library_boat_deck_door") {

@@ -428,7 +428,7 @@ meleestrugglevsdog_interruptedcheck() {
     if(!isDefined(var_0[self.meleeseq])) {
       return;
     }
-    self clearanim( % melee_dog, 0.1);
+    self clearanim(%melee_dog, 0.1);
     self setflaggedanimrestart("getupanim", var_0[self.meleeseq], 1, 0.1, 1);
     animscripts\shared::donotetracks("getupanim");
   }

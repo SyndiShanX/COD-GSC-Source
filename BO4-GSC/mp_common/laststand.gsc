@@ -87,8 +87,7 @@ function_eb8c0e47(callbackfunc) {
 
 function_414115a0(time, health) {
   tier = {
-    #time: time,
-    #health: health
+    #time: time, #health: health
   };
   level.var_e86679bd[level.var_e86679bd.size] = tier;
 }
@@ -194,21 +193,11 @@ function_c025efba(prompt, var_a1258c6b) {
 
 function_5de626dc(var_a1258c6b) {
   foreach(prompt in level.mp_revive_prompt) {
-    if(![
-        [prompt]
-      ] - > function_7bfd10e6(self)) {
-      [
-        [prompt]
-      ] - > open(self);
-      [
-        [prompt]
-      ] - > set_health(self, 1);
-      [
-        [prompt]
-      ] - > set_reviveprogress(self, 0);
-      [
-        [prompt]
-      ] - > set_clientnum(self, var_a1258c6b getentitynumber());
+    if(![[prompt]] - > function_7bfd10e6(self)) {
+      [[prompt]] - > open(self);
+      [[prompt]] - > set_health(self, 1);
+      [[prompt]] - > set_reviveprogress(self, 0);
+      [[prompt]] - > set_clientnum(self, var_a1258c6b getentitynumber());
       self thread function_263a2944(prompt, var_a1258c6b);
       self thread function_c025efba(prompt, var_a1258c6b);
       break;
@@ -419,9 +408,7 @@ function playerlaststand(einflictor, attacker, idamage, smeansofdeath, weapon, v
     }
 
     if(isDefined(level.var_dcc41ae)) {
-      [
-        [level.var_dcc41ae]
-      ](attacker, self, einflictor, weapon, smeansofdeath);
+      [[level.var_dcc41ae]](attacker, self, einflictor, weapon, smeansofdeath);
     }
   }
 
@@ -565,16 +552,7 @@ laststand_bleedout_damage() {
       self.var_1cc38de0 = 1;
       vattacker = isDefined(waitresult.eattacker) ? waitresult.eattacker : self;
       self.var_a1d415ee = {
-        #einflictor: waitresult.einflictor,
-        #attacker: waitresult.eattacker,
-        #attackerorigin: vattacker.origin,
-        #attackerangles: isplayer(vattacker) ? vattacker getplayerangles() : vattacker.angles,
-        #idamage: waitresult.idamage,
-        #smeansofdeath: waitresult.smeansofdeath,
-        #sweapon: waitresult.weapon,
-        #vdir: waitresult.vdir,
-        #shitloc: waitresult.shitloc,
-        #matchtime: function_f8d53445()
+        #einflictor: waitresult.einflictor, #attacker: waitresult.eattacker, #attackerorigin: vattacker.origin, #attackerangles: isplayer(vattacker) ? vattacker getplayerangles() : vattacker.angles, #idamage: waitresult.idamage, #smeansofdeath: waitresult.smeansofdeath, #sweapon: waitresult.weapon, #vdir: waitresult.vdir, #shitloc: waitresult.shitloc, #matchtime: function_f8d53445()
       };
       self notify(#"update_bleedout");
     }
@@ -1164,9 +1142,7 @@ revive_do_revive(playerbeingrevived) {
     playerbeingrevived.revivetrigger.beingrevived = 0;
 
     if(isDefined(revived) && revived && isDefined(level.var_f80fdd3f)) {
-      [
-        [level.var_f80fdd3f]
-      ](playerbeingrevived, self);
+      [[level.var_f80fdd3f]](playerbeingrevived, self);
     }
   }
 
@@ -1361,15 +1337,7 @@ function_ecdd4b27() {
   }
 
   self.var_d75a6ff5 = {
-    #player_xuid: int(self getxuid(1)),
-    #start_time: gettime(),
-    #end_time: 0,
-    #damage: 0,
-    #death: 0,
-    #bleed_out: 0,
-    #var_d10f3b9a: 0,
-    #var_d733f8d7: 0,
-    #var_35b89428: 0
+    #player_xuid: int(self getxuid(1)), #start_time: gettime(), #end_time: 0, #damage: 0, #death: 0, #bleed_out: 0, #var_d10f3b9a: 0, #var_d733f8d7: 0, #var_35b89428: 0
   };
 }
 

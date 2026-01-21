@@ -13,8 +13,7 @@ main(turret) {
 
   animscripts\utility::initialize("technical");
 
-  // when we ran our postscriptfunc we may have decided to stop using our turret,
-  // in which case it's gone now
+  // when we ran our postscriptfunc we may have decided to stop using our turret, // in which case it's gone now
   if(!isDefined(turret)) {
     return;
   }
@@ -214,8 +213,8 @@ preplacedPostScriptFunc(animscript) {
 #using_animtree("generic_human");
 
 DoShoot(turret) {
-  self setAnim( % additive_saw_idle, 0, .1);
-  self setAnim( % additive_saw_fire, 1, .1);
+  self setAnim(%additive_saw_idle, 0, .1);
+  self setAnim(%additive_saw_fire, 1, .1);
 
   //turret turretDoShootAnims();
 
@@ -223,8 +222,8 @@ DoShoot(turret) {
 }
 
 DoAim(turret) {
-  self setAnim( % additive_saw_idle, 1, .1);
-  self setAnim( % additive_saw_fire, 0, .1);
+  self setAnim(%additive_saw_idle, 1, .1);
+  self setAnim(%additive_saw_fire, 0, .1);
 
   //turret turretDoAimAnims();
 }
@@ -244,13 +243,13 @@ TurretDoShoot(turret) {
 }
 
 turretDoShootAnims() {
-  self setAnim( % additive_saw_idle, 0, .1);
-  self setAnim( % additive_saw_fire, 1, .1);
+  self setAnim(%additive_saw_idle, 0, .1);
+  self setAnim(%additive_saw_fire, 1, .1);
 }
 
 turretDoAimAnims() {
-  self setAnim( % additive_saw_idle, 1, .1);
-  self setAnim( % additive_saw_fire, 0, .1);
+  self setAnim(%additive_saw_idle, 1, .1);
+  self setAnim(%additive_saw_fire, 0, .1);
 }
 
 //==================

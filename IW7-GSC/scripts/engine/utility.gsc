@@ -2800,9 +2800,7 @@ array_sort_with_func(var_0, var_1) {
   for(var_2 = 1; var_2 < var_0.size; var_2++) {
     var_3 = var_0[var_2];
 
-    for(var_4 = var_2 - 1; var_4 >= 0 && ![
-        [var_1]
-      ](var_0[var_4], var_3); var_4--)
+    for(var_4 = var_2 - 1; var_4 >= 0 && ![[var_1]](var_0[var_4], var_3); var_4--)
       var_0[var_4 + 1] = var_0[var_4];
 
     var_0[var_4 + 1] = var_3;

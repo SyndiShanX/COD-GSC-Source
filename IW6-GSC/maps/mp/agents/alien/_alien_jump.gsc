@@ -94,16 +94,9 @@ JumpInternal(startPos, startAngles, endPos, endAngles, nextPos, jumpCBs, scripta
   self PlaySoundOnMovingEnt(get_jump_SFX_alias());
 
   if(AnimHasNotetrack(beginAnim, "start_teleport")) {
-    self PlayAnimNAtRateUntilNotetrack(jumpAnimStates.launchAnimState,
-      jumpAnimStates.launchAnimEntry,
-      jumpAnimStates.playbackRate,
-      "jump_launch",
-      "start_teleport");
+    self PlayAnimNAtRateUntilNotetrack(jumpAnimStates.launchAnimState, jumpAnimStates.launchAnimEntry, jumpAnimStates.playbackRate, "jump_launch", "start_teleport");
   } else {
-    self PlayAnimNAtRateForTime(jumpAnimStates.launchAnimState,
-      jumpAnimStates.launchAnimEntry,
-      jumpAnimStates.playabackRate,
-      0.5 * GetAnimLength(beginAnim) / jumpAnimStates.playbackRate);
+    self PlayAnimNAtRateForTime(jumpAnimStates.launchAnimState, jumpAnimStates.launchAnimEntry, jumpAnimStates.playabackRate, 0.5 * GetAnimLength(beginAnim) / jumpAnimStates.playbackRate);
   }
 
   startTime = gettime();
@@ -124,10 +117,7 @@ JumpInternal(startPos, startAngles, endPos, endAngles, nextPos, jumpCBs, scripta
   loopTime = t - beginTime - endLandTime;
 
   if(loopTime > 0) {
-    self PlayAnimNAtRateForTime(jumpAnimStates.inAirAnimState,
-      jumpAnimStates.inAirAnimEntry,
-      jumpAnimStates.playbackRate,
-      loopTime);
+    self PlayAnimNAtRateForTime(jumpAnimStates.inAirAnimState, jumpAnimStates.inAirAnimEntry, jumpAnimStates.playbackRate, loopTime);
   }
 
   if(isDefined(jumpCBs) && isDefined(jumpCBs.fnLandAnimStateChoice))
@@ -380,21 +370,18 @@ GetLaunchAnimEntry(jumpInfo, launchAnimState) {
   launchDirection = RotateVector(launchDirection, jumpInfo.startAngles);
 
   AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection), "Alien jump table has not been initialized");
-  AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection[launchAnimState]),
-    "Alien jump table has not been initialized for launch state " + launchAnimState);
+  AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection[launchAnimState]), "Alien jump table has not been initialized for launch state " + launchAnimState);
 
   launchEntryCount = self GetAnimEntryCount(launchAnimState);
   AssertEx(launchEntryCount > 0, "Alien launch state " + launchAnimState + " as no animations.");
 
   launchEntry = 0;
-  AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection[launchAnimState][launchEntry]),
-    "Alien launch entry " + launchEntry + " for state " + launchAnimState + " has no direction.");
+  AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection[launchAnimState][launchEntry]), "Alien launch entry " + launchEntry + " for state " + launchAnimState + " has no direction.");
 
   launchEntryDot = VectorDot(level.alienAnimData.jumpLaunchDirection[launchAnimState][launchEntry], launchDirection);
 
   for(nextLaunchEntry = 1; nextLaunchEntry < launchEntryCount; nextLaunchEntry++) {
-    AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection[launchAnimState][nextLaunchEntry]),
-      "Alien launch entry " + nextLaunchEntry + " for state " + launchAnimState + " has no direction.");
+    AssertEx(isDefined(level.alienAnimData.jumpLaunchDirection[launchAnimState][nextLaunchEntry]), "Alien launch entry " + nextLaunchEntry + " for state " + launchAnimState + " has no direction.");
 
     nextLaunchEntryDot = VectorDot(level.alienAnimData.jumpLaunchDirection[launchAnimState][nextLaunchEntry], launchDirection);
     if(nextLaunchEntryDot > launchEntryDot) {
@@ -412,10 +399,8 @@ GetInAirAnimState(jumpInfo, launchAnimState, landAnimState) {
 
 GetInAirAnimEntry(jumpInfo, launchAnimState, landAnimState) {
   AssertEx(isDefined(level.alienAnimData.inAirAnimEntry), "Alien in air table has not been initialized");
-  AssertEx(isDefined(level.alienAnimData.inAirAnimEntry[launchAnimState]),
-    "Alien in air table has not been initialized for launch state " + launchAnimState);
-  AssertEx(isDefined(level.alienAnimData.inAirAnimEntry[launchAnimState][landAnimState]),
-    "Alien in air table has not been initialized for launch state " + launchAnimState + " and land anim state " + landAnimState);
+  AssertEx(isDefined(level.alienAnimData.inAirAnimEntry[launchAnimState]), "Alien in air table has not been initialized for launch state " + launchAnimState);
+  AssertEx(isDefined(level.alienAnimData.inAirAnimEntry[launchAnimState][landAnimState]), "Alien in air table has not been initialized for launch state " + launchAnimState + " and land anim state " + landAnimState);
 
   return level.alienAnimData.inAirAnimEntry[launchAnimState][landAnimState];
 }

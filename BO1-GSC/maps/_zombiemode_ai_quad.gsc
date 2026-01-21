@@ -80,7 +80,7 @@ quad_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_quad_idle, % ai_zombie_quad_idle_2);
+  self.a.array["exposed_idle"] = array(%ai_zombie_quad_idle, %ai_zombie_quad_idle_2);
   self.a.array["straight_level"] = % ai_zombie_quad_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -347,7 +347,7 @@ quad_finish_leap() {
 
 quad_stop_leap() {
   self endon("death");
-  self SetFlaggedAnimKnobAllRestart("attack", % ai_zombie_quad_attack_leap_loop_out, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("attack", %ai_zombie_quad_attack_leap_loop_out, %body, 1, .1, 1);
   self animscripts\zombie_shared::DoNoteTracks("attack");
   self quad_finish_leap();
 }
@@ -367,13 +367,13 @@ quad_leap_attack() {
   self animMode("nogravity");
   leap_in = % ai_zombie_quad_attack_leap_loop_in;
   delta = GetMoveDelta(leap_in, 0, 1);
-  self SetFlaggedAnimKnobAllRestart("attack", % ai_zombie_quad_attack_leap_loop_in, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("attack", %ai_zombie_quad_attack_leap_loop_in, %body, 1, .1, 1);
   animscripts\traverse\zombie_shared::wait_anim_length(leap_in, .02);
   use_loop = false;
   if(use_loop) {
     leap_loop = % ai_zombie_quad_attack_leap_loop;
     self thread trackCollision();
-    self SetFlaggedAnimKnobAllRestart("attack", leap_loop, % body, 1, .1, 1);
+    self SetFlaggedAnimKnobAllRestart("attack", leap_loop, %body, 1, .1, 1);
     delta = GetMoveDelta(leap_loop, 0, 1);
     anim_dist = length(delta);
     anim_time = getanimlength(leap_loop);
@@ -393,7 +393,7 @@ quad_leap_attack() {
     }
   }
   delta = GetMoveDelta(leap_out, 0, 1);
-  self SetFlaggedAnimKnobAllRestart("attack", leap_out, % body, 1, .1, 1);
+  self SetFlaggedAnimKnobAllRestart("attack", leap_out, %body, 1, .1, 1);
   while(1) {
     self waittill("attack", note);
     if(note == "end") {

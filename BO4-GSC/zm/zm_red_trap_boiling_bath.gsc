@@ -94,8 +94,7 @@ trap_damage(t_trap) {
 
   if(n_damage >= self.health) {
     level notify(#"trap_kill", {
-      #e_victim: self,
-      #e_trap: t_trap
+      #e_victim: self, #e_trap: t_trap
     });
 
     if(self.archetype === # "zombie") {

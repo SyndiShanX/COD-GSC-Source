@@ -1765,9 +1765,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
   }
 
   if(getplayers().size == 1 && level flag::get("solo_game")) {
-    if(isDefined(level.var_fb697fca) && [
-        [level.var_fb697fca]
-      ]()) {
+    if(isDefined(level.var_fb697fca) && [[level.var_fb697fca]]()) {
       return finaldamage;
     } else {
       self.intermission = 1;

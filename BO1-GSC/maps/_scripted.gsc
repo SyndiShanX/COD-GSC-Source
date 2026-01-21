@@ -130,8 +130,7 @@ idle_anim(node, notifyname, character, bitflags) {
     self.goalradius = oldradius;
   }
   while(isalive(self)) {
-    self animscripted("scriptedanimdone", node.origin, node.angles,
-      level.scr_anim[notifyname][character]["idle"][randomInt(level.scr_anim[notifyname][character]["idle"].size)]);
+    self animscripted("scriptedanimdone", node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][randomInt(level.scr_anim[notifyname][character]["idle"].size)]);
     self waittillmatch("scriptedanimdone", "end");
   }
 }

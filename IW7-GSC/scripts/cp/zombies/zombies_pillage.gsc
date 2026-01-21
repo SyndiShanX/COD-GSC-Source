@@ -796,9 +796,7 @@ func_1287B(var_0) {
   self.itempicked = var_1;
   level.transactionid = randomint(100);
   if(isDefined(level.var_1287A)) {
-    if(![
-        [level.var_1287A]
-      ]()) {
+    if(![[level.var_1287A]]()) {
       return;
     }
   }

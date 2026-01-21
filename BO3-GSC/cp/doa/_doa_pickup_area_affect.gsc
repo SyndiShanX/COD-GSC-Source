@@ -230,7 +230,7 @@ function function_159bb1dd(player, origin) {
   monkey thread namespace_eaa992c::function_285a2999(namespace_831a4a7c::function_e7e0aa7f(player.entnum));
   def = doa_pickups::function_bac08508(11);
   monkey useanimtree($zombie_cymbal_monkey);
-  monkey animscripted("anim", monkey.origin, monkey.angles, % zombie_cymbal_monkey::o_monkey_bomb);
+  monkey animscripted("anim", monkey.origin, monkey.angles, %zombie_cymbal_monkey::o_monkey_bomb);
   monkey.angles = (0, randomint(360), 0);
   monkey makesentient();
   monkey.threatbias = 0;

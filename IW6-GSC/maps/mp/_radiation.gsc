@@ -180,18 +180,7 @@ blackout() {
 }
 
 doRadiationDamage(iDamage) {
-  self thread[[level.callbackPlayerDamage]](
-    self,
-    self,
-    iDamage,
-    0,
-    "MOD_SUICIDE",
-    "claymore_mp",
-    self.origin,
-    (0, 0, 0) - self.origin,
-    "none",
-    0
-  );
+  self thread[[level.callbackPlayerDamage]](self, self, iDamage, 0, "MOD_SUICIDE", "claymore_mp", self.origin, (0, 0, 0) - self.origin, "none", 0);
 }
 
 fadeinBlackOut(duration, alpha) {

@@ -56,16 +56,8 @@ watchEntsInDeepWater_ks(trigUnderWater, waterDeleteZ) {
     wait(0.05);
 
     foreach(character in level.characters) {
-      if(isDefined(character) &&
-        IsAlive(character) &&
-        IsAI(character) &&
-        character.origin[2] <= waterDeleteZ - CONST_SENTRY_AND_AGENT_OFFSET &&
-        character IsTouching(trigUnderWater)
-      ) {
-        if(IsAgent(character) &&
-          isDefined(character.agent_type) &&
-          character.agent_type == "dog"
-        ) {
+      if(isDefined(character) && IsAlive(character) && IsAI(character) && character.origin[2] <= waterDeleteZ - CONST_SENTRY_AND_AGENT_OFFSET && character IsTouching(trigUnderWater)) {
+        if(IsAgent(character) && isDefined(character.agent_type) && character.agent_type == "dog") {
           if(!isDefined(character.spawnTime) || (GetTime() - character.spawnTime) > 2000) {
             character[[character maps\mp\agents\_agent_utility::agentFunc("on_damaged")]](level, undefined, Int(ceil(character.maxhealth * 0.08)), 0, "MOD_CRUSH", "none", (0, 0, 0), (0, 0, 0), "none", 0);
           }

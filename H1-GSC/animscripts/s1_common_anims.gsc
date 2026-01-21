@@ -235,8 +235,8 @@ init_s1_animset_cover_wall() {
   var_0["add_aim_right"] = % s1_covercrouch_aim6_add;
   var_0["straight_level"] = % s1_covercrouch_aim5;
   var_0["hide_idle"] = % s1_covercrouch_hide_idle;
-  var_0["hide_idle_twitch"] = animscripts\utility::array( % s1_covercrouch_twitch_1, % s1_covercrouch_twitch_2, % s1_covercrouch_twitch_3, % s1_covercrouch_twitch_4, % s1_covercrouch_twitch_5);
-  var_0["hide_idle_flinch"] = animscripts\utility::array( % s1_covercrouch_explosion_1, % s1_covercrouch_explosion_2, % s1_covercrouch_explosion_3);
+  var_0["hide_idle_twitch"] = animscripts\utility::array(%s1_covercrouch_twitch_1, %s1_covercrouch_twitch_2, %s1_covercrouch_twitch_3, %s1_covercrouch_twitch_4, %s1_covercrouch_twitch_5);
+  var_0["hide_idle_flinch"] = animscripts\utility::array(%s1_covercrouch_explosion_1, %s1_covercrouch_explosion_2, %s1_covercrouch_explosion_3);
   var_0["hide_2_crouch"] = % s1_covercrouch_hide_2_aim;
   var_0["hide_2_stand"] = % s1_covercrouch_hide_2_stand;
   var_0["hide_2_lean"] = % s1_covercrouch_hide_2_lean;
@@ -261,12 +261,12 @@ init_s1_animset_cover_wall() {
   var_0["burst4"] = % s1_exposed_shoot_burst4;
   var_0["burst5"] = % s1_exposed_shoot_burst5;
   var_0["burst6"] = % s1_exposed_shoot_burst6;
-  var_0["blind_fire"] = animscripts\utility::array( % s1_covercrouch_blindfire_1, % s1_covercrouch_blindfire_2, % s1_covercrouch_blindfire_3, % s1_covercrouch_blindfire_4);
+  var_0["blind_fire"] = animscripts\utility::array(%s1_covercrouch_blindfire_1, %s1_covercrouch_blindfire_2, %s1_covercrouch_blindfire_3, %s1_covercrouch_blindfire_4);
   var_0["reload"] = % s1_covercrouch_reload_hide;
-  var_0["grenade_safe"] = animscripts\utility::array( % s1_covercrouch_grenadea);
-  var_0["grenade_exposed"] = animscripts\utility::array( % s1_covercrouch_grenadea);
-  var_0["exposed_idle"] = animscripts\utility::array( % s1_exposed_idle_alert_v1, % s1_exposed_idle_alert_v2, % s1_exposed_idle_alert_v3);
-  var_0["look"] = animscripts\utility::array( % s1_covercrouch_hide_look);
+  var_0["grenade_safe"] = animscripts\utility::array(%s1_covercrouch_grenadea);
+  var_0["grenade_exposed"] = animscripts\utility::array(%s1_covercrouch_grenadea);
+  var_0["exposed_idle"] = animscripts\utility::array(%s1_exposed_idle_alert_v1, %s1_exposed_idle_alert_v2, %s1_exposed_idle_alert_v3);
+  var_0["look"] = animscripts\utility::array(%s1_covercrouch_hide_look);
   anim.archetypes["s1_soldier"]["cover_crouch"] = var_0;
   var_0 = [];
   var_0["add_aim_up"] = % s1_coverstandaim_aim8_add;
@@ -275,8 +275,8 @@ init_s1_animset_cover_wall() {
   var_0["add_aim_right"] = % s1_coverstandaim_aim6_add;
   var_0["straight_level"] = % s1_coverstand_aim_5;
   var_0["hide_idle"] = % s1_coverstand_hide_idle;
-  var_0["hide_idle_twitch"] = animscripts\utility::array( % s1_coverstand_hide_idle_twitch01, % s1_coverstand_hide_idle_twitch02, % s1_coverstand_hide_idle_twitch03, % s1_coverstand_hide_idle_twitch04, % s1_coverstand_hide_idle_twitch05);
-  var_0["hide_idle_flinch"] = animscripts\utility::array( % s1_coverstand_react01, % s1_coverstand_react02, % s1_coverstand_react03, % s1_coverstand_react04);
+  var_0["hide_idle_twitch"] = animscripts\utility::array(%s1_coverstand_hide_idle_twitch01, %s1_coverstand_hide_idle_twitch02, %s1_coverstand_hide_idle_twitch03, %s1_coverstand_hide_idle_twitch04, %s1_coverstand_hide_idle_twitch05);
+  var_0["hide_idle_flinch"] = animscripts\utility::array(%s1_coverstand_react01, %s1_coverstand_react02, %s1_coverstand_react03, %s1_coverstand_react04);
   var_0["hide_2_stand"] = % s1_coverstand_hide_2_aim;
   var_0["stand_2_hide"] = % s1_coverstand_aim_2_hide;
   var_0["hide_2_stand_tall"] = % coverstand_hide_2_aim;
@@ -291,18 +291,18 @@ init_s1_animset_cover_wall() {
   var_0["semi3"] = % s1_coverstandaim_fire;
   var_0["semi4"] = % s1_coverstandaim_fire;
   var_0["semi5"] = % s1_coverstandaim_fire;
-  var_0["single"] = animscripts\utility::array( % s1_coverstandaim_fire);
+  var_0["single"] = animscripts\utility::array(%s1_coverstandaim_fire);
   var_0["burst2"] = % s1_coverstandaim_autofire;
   var_0["burst3"] = % s1_coverstandaim_autofire;
   var_0["burst4"] = % s1_coverstandaim_autofire;
   var_0["burst5"] = % s1_coverstandaim_autofire;
   var_0["burst6"] = % s1_coverstandaim_autofire;
-  var_0["blind_fire"] = animscripts\utility::array( % s1_coverstand_blindfire_1, % s1_coverstand_blindfire_2);
+  var_0["blind_fire"] = animscripts\utility::array(%s1_coverstand_blindfire_1, %s1_coverstand_blindfire_2);
   var_0["reload"] = % s1_coverstand_reloada;
-  var_0["look"] = animscripts\utility::array( % s1_coverstand_look_quick, % s1_coverstand_look_quick_v2);
-  var_0["grenade_safe"] = animscripts\utility::array( % s1_coverstand_grenadea, % s1_coverstand_grenadeb);
-  var_0["grenade_exposed"] = animscripts\utility::array( % s1_coverstand_grenadea, % s1_coverstand_grenadeb);
-  var_0["exposed_idle"] = animscripts\utility::array( % s1_exposed_idle_alert_v1, % s1_exposed_idle_alert_v2, % s1_exposed_idle_alert_v3);
+  var_0["look"] = animscripts\utility::array(%s1_coverstand_look_quick, %s1_coverstand_look_quick_v2);
+  var_0["grenade_safe"] = animscripts\utility::array(%s1_coverstand_grenadea, %s1_coverstand_grenadeb);
+  var_0["grenade_exposed"] = animscripts\utility::array(%s1_coverstand_grenadea, %s1_coverstand_grenadeb);
+  var_0["exposed_idle"] = animscripts\utility::array(%s1_exposed_idle_alert_v1, %s1_exposed_idle_alert_v2, %s1_exposed_idle_alert_v3);
   var_0["hide_to_look"] = % s1_coverstand_look_moveup;
   var_0["look_idle"] = % s1_coverstand_look_idle;
   var_0["look_to_hide"] = % s1_coverstand_look_movedown;
@@ -364,12 +364,12 @@ init_s1_animset_default_stand() {
   anim.initanimset["straight_level"] = % s1_exposed_aim_5;
   anim.initanimset["fire"] = % s1_exposed_shoot_auto_v3;
   anim.initanimset["fire_corner"] = % s1_exposed_shoot_auto_v2;
-  anim.initanimset["single"] = animscripts\utility::array( % s1_exposed_shoot_semi1);
+  anim.initanimset["single"] = animscripts\utility::array(%s1_exposed_shoot_semi1);
   set_s1_animarray_burst_and_semi_fire_stand();
-  anim.initanimset["exposed_idle"] = [ % s1_exposed_idle_alert_v1, % s1_exposed_idle_alert_v2, % s1_exposed_idle_alert_v3, % s1_exposed_idle_alert_v4, % s1_exposed_idle_alert_v5];
-  anim.initanimset["exposed_grenade"] = [ % s1_exposed_grenadethrowb, % s1_exposed_grenadethrowc];
-  anim.initanimset["reload"] = [ % s1_exposed_reload, % s1_exposed_reloadc];
-  anim.initanimset["reload_crouchhide"] = animscripts\utility::array( % s1_exposed_reloadb);
+  anim.initanimset["exposed_idle"] = [ % s1_exposed_idle_alert_v1, %s1_exposed_idle_alert_v2, %s1_exposed_idle_alert_v3, %s1_exposed_idle_alert_v4, %s1_exposed_idle_alert_v5];
+  anim.initanimset["exposed_grenade"] = [ % s1_exposed_grenadethrowb, %s1_exposed_grenadethrowc];
+  anim.initanimset["reload"] = [ % s1_exposed_reload, %s1_exposed_reloadc];
+  anim.initanimset["reload_crouchhide"] = animscripts\utility::array(%s1_exposed_reloadb);
   set_s1_animarray_stance_change();
   set_s1_animarray_standing_turns();
   set_s1_animarray_add_turn_aims_stand();
@@ -379,27 +379,27 @@ init_s1_animset_default_stand() {
 init_s1_animset_cover_right() {
   var_0 = [];
   var_0["alert_idle"] = % s1_corner_standr_alert_idle;
-  var_0["alert_idle_twitch"] = [ % s1_corner_standr_alert_twitch01, % s1_corner_standr_alert_twitch02, % s1_corner_standr_alert_twitch04, % s1_corner_standr_alert_twitch05, % s1_corner_standr_alert_twitch06, % s1_corner_standr_alert_twitch07];
-  var_0["alert_idle_flinch"] = [ % s1_corner_standr_flinch, % s1_corner_standr_flinchb];
+  var_0["alert_idle_twitch"] = [ % s1_corner_standr_alert_twitch01, %s1_corner_standr_alert_twitch02, %s1_corner_standr_alert_twitch04, %s1_corner_standr_alert_twitch05, %s1_corner_standr_alert_twitch06, %s1_corner_standr_alert_twitch07];
+  var_0["alert_idle_flinch"] = [ % s1_corner_standr_flinch, %s1_corner_standr_flinchb];
   var_0["alert_to_C"] = % s1_corner_standr_trans_alert_2_c;
   var_0["B_to_C"] = % s1_corner_standr_trans_b_2_c;
   var_0["C_to_alert"] = % s1_corner_standr_trans_c_2_alert;
   var_0["C_to_B"] = % s1_corner_standr_trans_c_2_b;
-  var_0["alert_to_A"] = [ % s1_corner_standr_trans_alert_2_a, % s1_corner_standr_trans_alert_2_a_v2];
-  var_0["alert_to_B"] = [ % s1_corner_standr_trans_alert_2_b, % s1_corner_standr_trans_alert_2_b_v2, % s1_corner_standr_trans_alert_2_b_v3];
+  var_0["alert_to_A"] = [ % s1_corner_standr_trans_alert_2_a, %s1_corner_standr_trans_alert_2_a_v2];
+  var_0["alert_to_B"] = [ % s1_corner_standr_trans_alert_2_b, %s1_corner_standr_trans_alert_2_b_v2, %s1_corner_standr_trans_alert_2_b_v3];
   var_0["A_to_alert"] = [ % s1_corner_standr_trans_a_2_alert_v2];
   var_0["A_to_alert_reload"] = [];
-  var_0["A_to_B"] = [ % s1_corner_standr_trans_a_2_b, % s1_corner_standr_trans_a_2_b_v2];
-  var_0["B_to_alert"] = [ % s1_corner_standr_trans_b_2_alert, % s1_corner_standr_trans_b_2_alert_v2, % s1_corner_standr_trans_b_2_alert_v3];
+  var_0["A_to_B"] = [ % s1_corner_standr_trans_a_2_b, %s1_corner_standr_trans_a_2_b_v2];
+  var_0["B_to_alert"] = [ % s1_corner_standr_trans_b_2_alert, %s1_corner_standr_trans_b_2_alert_v2, %s1_corner_standr_trans_b_2_alert_v3];
   var_0["B_to_alert_reload"] = [ % s1_corner_standr_reload_b_2_alert];
-  var_0["B_to_A"] = [ % s1_corner_standr_trans_b_2_a, % s1_corner_standr_trans_b_2_a_v2];
+  var_0["B_to_A"] = [ % s1_corner_standr_trans_b_2_a, %s1_corner_standr_trans_b_2_a_v2];
   var_0["lean_to_alert"] = [ % s1_cornerstndr_lean_2_alert];
   var_0["alert_to_lean"] = [ % s1_cornerstndr_alert_2_lean];
   var_0["look"] = % s1_corner_standr_look;
   var_0["reload"] = [ % s1_corner_standr_reload_v1];
   var_0["grenade_exposed"] = % s1_corner_standr_grenade_a;
   var_0["grenade_safe"] = % s1_corner_standr_grenade_b;
-  var_0["blind_fire"] = [ % s1_corner_standr_blindfire_v1, % s1_corner_standr_blindfire_v2];
+  var_0["blind_fire"] = [ % s1_corner_standr_blindfire_v1, %s1_corner_standr_blindfire_v2];
   var_0["alert_to_look"] = % s1_corner_standr_alert_2_look;
   var_0["look_to_alert"] = % s1_corner_standr_look_2_alert;
   var_0["look_to_alert_fast"] = % s1_corner_standr_look_2_alert_fast;
@@ -418,7 +418,7 @@ init_s1_animset_cover_right() {
   anim.archetypes["s1_soldier"]["cover_right_stand"] = var_0;
   var_0 = [];
   var_0["alert_idle"] = % s1_cornercrr_alert_idle;
-  var_0["alert_idle_twitch"] = [ % s1_cornercrr_alert_twitch_v1, % s1_cornercrr_alert_twitch_v2, % s1_cornercrr_alert_twitch_v3];
+  var_0["alert_idle_twitch"] = [ % s1_cornercrr_alert_twitch_v1, %s1_cornercrr_alert_twitch_v2, %s1_cornercrr_alert_twitch_v3];
   var_0["alert_idle_flinch"] = [];
   var_0["alert_to_A"] = [ % s1_cornercrr_trans_alert_2_a];
   var_0["alert_to_B"] = [ % s1_cornercrr_trans_alert_2_b];
@@ -430,7 +430,7 @@ init_s1_animset_cover_right() {
   var_0["B_to_A"] = [ % s1_cornercrr_trans_b_2_a];
   var_0["lean_to_alert"] = [ % s1_cornercrr_lean_2_alert];
   var_0["alert_to_lean"] = [ % s1_cornercrr_alert_2_lean];
-  var_0["reload"] = [ % s1_cornercrr_reloada, % s1_cornercrr_reloadb];
+  var_0["reload"] = [ % s1_cornercrr_reloada, %s1_cornercrr_reloadb];
   var_0["grenade_exposed"] = % s1_cornercrr_grenadea;
   var_0["grenade_safe"] = % s1_cornercrr_grenadea;
   var_0["alert_to_over"] = [ % s1_cornercrr_alert_2_over];
@@ -459,13 +459,13 @@ init_s1_animset_cover_right() {
 init_s1_animset_cover_left() {
   var_0 = [];
   var_0["alert_idle"] = % s1_corner_standl_alert_idle;
-  var_0["alert_idle_twitch"] = [ % s1_corner_standl_alert_twitch01, % s1_corner_standl_alert_twitch02, % s1_corner_standl_alert_twitch03, % s1_corner_standl_alert_twitch04, % s1_corner_standl_alert_twitch05, % s1_corner_standl_alert_twitch06, % s1_corner_standl_alert_twitch07];
+  var_0["alert_idle_twitch"] = [ % s1_corner_standl_alert_twitch01, %s1_corner_standl_alert_twitch02, %s1_corner_standl_alert_twitch03, %s1_corner_standl_alert_twitch04, %s1_corner_standl_alert_twitch05, %s1_corner_standl_alert_twitch06, %s1_corner_standl_alert_twitch07];
   var_0["alert_idle_flinch"] = [ % s1_corner_standl_flinch];
   var_0["alert_to_C"] = % s1_corner_standl_trans_alert_2_c;
   var_0["B_to_C"] = % s1_corner_standl_trans_b_2_c;
   var_0["C_to_alert"] = % s1_corner_standl_trans_c_2_alert;
   var_0["C_to_B"] = % s1_corner_standl_trans_c_2_b;
-  var_0["alert_to_A"] = [ % s1_corner_standl_trans_alert_2_a, % s1_corner_standl_trans_alert_2_a_v2];
+  var_0["alert_to_A"] = [ % s1_corner_standl_trans_alert_2_a, %s1_corner_standl_trans_alert_2_a_v2];
   var_0["alert_to_B"] = [ % s1_corner_standl_trans_alert_2_b_v2];
   var_0["A_to_alert"] = [ % s1_corner_standl_trans_a_2_alert_v2];
   var_0["A_to_alert_reload"] = [];
@@ -479,7 +479,7 @@ init_s1_animset_cover_left() {
   var_0["reload"] = [ % s1_corner_standl_reload_v1];
   var_0["grenade_exposed"] = % s1_corner_standl_grenade_a;
   var_0["grenade_safe"] = % s1_corner_standl_grenade_b;
-  var_0["blind_fire"] = [ % s1_corner_standl_blindfire_v1, % s1_corner_standl_blindfire_v2];
+  var_0["blind_fire"] = [ % s1_corner_standl_blindfire_v1, %s1_corner_standl_blindfire_v2];
   var_0["alert_to_look"] = % s1_corner_standl_alert_2_look;
   var_0["look_to_alert"] = % s1_corner_standl_look_2_alert;
   var_0["look_to_alert_fast"] = % s1_corner_standl_look_2_alert_fast_v1;
@@ -511,7 +511,7 @@ init_s1_animset_cover_left() {
   var_0["lean_to_alert"] = [ % s1_cornercrl_lean_2_alert];
   var_0["alert_to_lean"] = [ % s1_cornercrl_alert_2_lean];
   var_0["look"] = % s1_cornercrl_look_fast;
-  var_0["reload"] = [ % s1_cornercrl_reloada, % s1_cornercrl_reloadb];
+  var_0["reload"] = [ % s1_cornercrl_reloada, %s1_cornercrl_reloadb];
   var_0["grenade_safe"] = % s1_cornercrl_grenadea;
   var_0["grenade_exposed"] = % s1_cornercrl_grenadeb;
   var_0["alert_to_over"] = [ % s1_cornercrl_alert_2_over];
@@ -551,10 +551,10 @@ init_s1_animset_default_crouch() {
   anim.initanimset = [];
   set_s1_animarray_crouch_aim();
   anim.initanimset["fire"] = % s1_exposed_crouch_shoot_auto_v2;
-  anim.initanimset["single"] = animscripts\utility::array( % s1_exposed_crouch_shoot_semi1);
+  anim.initanimset["single"] = animscripts\utility::array(%s1_exposed_crouch_shoot_semi1);
   set_s1_animarray_burst_and_semi_fire_crouch();
-  anim.initanimset["reload"] = animscripts\utility::array( % s1_exposed_crouch_reload);
-  anim.initanimset["exposed_idle"] = animscripts\utility::array( % s1_exposed_crouch_idle_alert_v1, % s1_exposed_crouch_idle_alert_v2, % s1_exposed_crouch_idle_alert_v3);
+  anim.initanimset["reload"] = animscripts\utility::array(%s1_exposed_crouch_reload);
+  anim.initanimset["exposed_idle"] = animscripts\utility::array(%s1_exposed_crouch_idle_alert_v1, %s1_exposed_crouch_idle_alert_v2, %s1_exposed_crouch_idle_alert_v3);
   set_s1_animarray_stance_change();
   set_s1_animarray_crouching_turns();
   set_s1_animarray_add_turn_aims_crouch();
@@ -565,10 +565,10 @@ init_s1_animset_smg_crouch() {
   anim.initanimset = [];
   set_s1_animarray_crouch_aim();
   anim.initanimset["fire"] = % s1_exposed_crouch_shoot_auto_v2;
-  anim.initanimset["single"] = animscripts\utility::array( % s1_exposed_crouch_shoot_semi1);
+  anim.initanimset["single"] = animscripts\utility::array(%s1_exposed_crouch_shoot_semi1);
   set_s1_animarray_burst_and_semi_fire_crouch();
-  anim.initanimset["reload"] = animscripts\utility::array( % s1_exposed_crouch_reload);
-  anim.initanimset["exposed_idle"] = animscripts\utility::array( % s1_exposed_crouch_idle_alert_v1, % s1_exposed_crouch_idle_alert_v2, % s1_exposed_crouch_idle_alert_v3);
+  anim.initanimset["reload"] = animscripts\utility::array(%s1_exposed_crouch_reload);
+  anim.initanimset["exposed_idle"] = animscripts\utility::array(%s1_exposed_crouch_idle_alert_v1, %s1_exposed_crouch_idle_alert_v2, %s1_exposed_crouch_idle_alert_v3);
   set_s1_animarray_stance_change_smg();
   set_s1_animarray_crouching_turns();
   set_s1_animarray_add_turn_aims_crouch();
@@ -630,11 +630,11 @@ init_s1_animset_cqb_stand() {
   anim.initanimset["add_aim_right"] = % s1_exposed_aim_6;
   anim.initanimset["straight_level"] = % s1_exposed_aim_5;
   anim.initanimset["fire"] = % s1_exposed_shoot_auto_v2;
-  anim.initanimset["single"] = animscripts\utility::array( % s1_exposed_shoot_semi1);
+  anim.initanimset["single"] = animscripts\utility::array(%s1_exposed_shoot_semi1);
   set_s1_animarray_burst_and_semi_fire_stand();
-  anim.initanimset["exposed_idle"] = [ % s1_exposed_idle_alert_v5, % s1_exposed_idle_alert_v4, % s1_exposed_idle_alert_v1, % s1_exposed_idle_alert_v2, % s1_exposed_idle_alert_v3];
-  anim.initanimset["reload"] = [ % s1_exposed_reload, % s1_exposed_reloadc];
-  anim.initanimset["reload_crouchhide"] = animscripts\utility::array( % s1_exposed_reloadb);
+  anim.initanimset["exposed_idle"] = [ % s1_exposed_idle_alert_v5, %s1_exposed_idle_alert_v4, %s1_exposed_idle_alert_v1, %s1_exposed_idle_alert_v2, %s1_exposed_idle_alert_v3];
+  anim.initanimset["reload"] = [ % s1_exposed_reload, %s1_exposed_reloadc];
+  anim.initanimset["reload_crouchhide"] = animscripts\utility::array(%s1_exposed_reloadb);
   set_s1_animarray_stance_change();
   set_s1_animarray_standing_turns();
   set_s1_animarray_add_turn_aims_stand();
@@ -678,17 +678,17 @@ set_s1_animarray_add_turn_aims_stand() {
 
 init_s1_animset_death() {
   var_0 = [];
-  var_0["running_forward"] = [ % s1_run_death_facedown, % s1_run_death_roll, % s1_run_death_fallonback, % run_death_flop];
+  var_0["running_forward"] = [ % s1_run_death_facedown, %s1_run_death_roll, %s1_run_death_fallonback, %run_death_flop];
   var_0["running_forward_f"] = [ % s1_run_death_fallonback];
-  var_0["cover_stand"] = [ % s1_coverstand_death_left, % s1_coverstand_death_right];
-  var_0["dying_crawl_crouch"] = [ % s1_dying_back_death_v2, % s1_dying_back_death_v3, % s1_dying_back_death_v4];
-  var_0["stand_lower_body"] = [ % s1_exposed_death_groin, % s1_stand_death_leg];
-  var_0["stand_lower_body_extended"] = [ % s1_exposed_death_groin, % stand_death_guts];
-  var_0["stand_head"] = [ % s1_exposed_death_headtwist, % s1_exposed_death_flop];
+  var_0["cover_stand"] = [ % s1_coverstand_death_left, %s1_coverstand_death_right];
+  var_0["dying_crawl_crouch"] = [ % s1_dying_back_death_v2, %s1_dying_back_death_v3, %s1_dying_back_death_v4];
+  var_0["stand_lower_body"] = [ % s1_exposed_death_groin, %s1_stand_death_leg];
+  var_0["stand_lower_body_extended"] = [ % s1_exposed_death_groin, %stand_death_guts];
+  var_0["stand_head"] = [ % s1_exposed_death_headtwist, %s1_exposed_death_flop];
   var_0["stand_neck"] = [ % s1_exposed_death_neckgrab];
   var_0["stand_back"] = [ % s1_exposed_death_falltoknees_02];
-  var_0["stand_default"] = [ % s1_exposed_death_02, % s1_exposed_death_nerve];
-  var_0["stand_default_firing"] = [ % s1_exposed_death_firing_02, % s1_exposed_death_firing];
+  var_0["stand_default"] = [ % s1_exposed_death_02, %s1_exposed_death_nerve];
+  var_0["stand_default_firing"] = [ % s1_exposed_death_firing_02, %s1_exposed_death_firing];
   var_0["stand_backup_default"] = % s1_exposed_death;
   anim.archetypes["s1_soldier"]["death"] = var_0;
 }
@@ -706,24 +706,24 @@ init_s1_animset_combat() {
 
 init_s1_animset_pain() {
   var_0 = [];
-  var_0["run_long"] = [ % s1_run_pain_leg, % s1_run_pain_shoulder, % s1_run_pain_stomach_stumble, % s1_run_pain_head, % s1_run_pain_fallonknee_02, % s1_run_pain_stomach, % s1_run_pain_stumble, % s1_run_pain_stomach_fast, % s1_run_pain_leg_fast, % s1_run_pain_fall];
-  var_0["run_medium"] = [ % s1_run_pain_fallonknee_02, % s1_run_pain_stomach, % s1_run_pain_stumble, % s1_run_pain_stomach_fast, % s1_run_pain_leg_fast, % s1_run_pain_fall];
-  var_0["run_short"] = [ % s1_run_pain_fallonknee, % s1_run_pain_fallonknee_03];
-  var_0["cover_left_stand"] = [ % s1_corner_standl_painb, % s1_corner_standl_painc, % s1_corner_standl_paind, % s1_corner_standl_paine];
-  var_0["cover_right_crouch"] = [ % s1_cornercrr_alert_paina, % s1_cornercrr_alert_painb, % s1_cornercrr_alert_painc];
+  var_0["run_long"] = [ % s1_run_pain_leg, %s1_run_pain_shoulder, %s1_run_pain_stomach_stumble, %s1_run_pain_head, %s1_run_pain_fallonknee_02, %s1_run_pain_stomach, %s1_run_pain_stumble, %s1_run_pain_stomach_fast, %s1_run_pain_leg_fast, %s1_run_pain_fall];
+  var_0["run_medium"] = [ % s1_run_pain_fallonknee_02, %s1_run_pain_stomach, %s1_run_pain_stumble, %s1_run_pain_stomach_fast, %s1_run_pain_leg_fast, %s1_run_pain_fall];
+  var_0["run_short"] = [ % s1_run_pain_fallonknee, %s1_run_pain_fallonknee_03];
+  var_0["cover_left_stand"] = [ % s1_corner_standl_painb, %s1_corner_standl_painc, %s1_corner_standl_paind, %s1_corner_standl_paine];
+  var_0["cover_right_crouch"] = [ % s1_cornercrr_alert_paina, %s1_cornercrr_alert_painb, %s1_cornercrr_alert_painc];
   var_0["cover_right_stand_B"] = % s1_corner_standr_pain_b_2_alert;
   var_0["cover_left_stand_A"] = % s1_corner_standl_pain_a_2_alert;
   var_0["cover_left_stand_B"] = % s1_corner_standl_pain_b_2_alert;
   anim.archetypes["s1_soldier"]["pain"] = var_0;
   var_0 = [];
   var_0["prone_transition"] = [ % s1_dying_crawl_2_back];
-  var_0["stand_transition"] = [ % s1_dying_stand_2_back_v1, % s1_dying_stand_2_back_v2];
+  var_0["stand_transition"] = [ % s1_dying_stand_2_back_v1, %s1_dying_stand_2_back_v2];
   var_0["crouch_transition"] = [ % s1_dying_crouch_2_back];
   var_0["default_transition"] = % s1_dying_crawl_2_back;
-  var_0["stand_2_crawl"] = [ % s1_dying_stand_2_crawl_v1, % s1_dying_stand_2_crawl_v2, % s1_dying_stand_2_crawl_v3];
+  var_0["stand_2_crawl"] = [ % s1_dying_stand_2_crawl_v1, %s1_dying_stand_2_crawl_v2, %s1_dying_stand_2_crawl_v3];
   var_0["crouch_2_crawl"] = [ % s1_dying_crouch_2_crawl];
   var_0["crawl"] = % s1_dying_crawl;
-  var_0["death"] = [ % s1_dying_crawl_death_v1, % s1_dying_crawl_death_v2];
+  var_0["death"] = [ % s1_dying_crawl_death_v1, %s1_dying_crawl_death_v2];
   var_0["back_idle"] = % s1_dying_back_idle;
   var_0["back_crawl"] = % s1_dying_crawl_back;
   var_0["back_fire"] = % s1_dying_back_fire;
@@ -732,7 +732,7 @@ init_s1_animset_pain() {
   var_0["aim_6"] = % s1_dying_back_aim_6;
   anim.archetypes["s1_soldier"]["crawl_death"] = var_0;
   var_0 = [];
-  var_0["premature_death"] = [ % s1_dying_back_death_v1, % s1_dying_back_death_v2, % s1_dying_back_death_v3, % s1_dying_back_death_v4];
+  var_0["premature_death"] = [ % s1_dying_back_death_v1, %s1_dying_back_death_v2, %s1_dying_back_death_v3, %s1_dying_back_death_v4];
   anim.archetypes["s1_soldier"]["corner_grenade_death"] = var_0;
 }
 
@@ -740,7 +740,7 @@ init_s1_animset_default_move() {
   var_0 = [];
   var_0["fire"] = % s1_exposed_shoot_auto_v3;
   var_0["single"] = [ % s1_exposed_shoot_semi1];
-  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, % shotgun_stand_fire_1b];
+  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
   var_0["burst2"] = % s1_exposed_shoot_burst3;
   var_0["burst3"] = % s1_exposed_shoot_burst3;
   var_0["burst4"] = % s1_exposed_shoot_burst4;
@@ -777,9 +777,9 @@ init_s1_animset_default_move() {
 
 init_s1_animset_idle() {
   var_0 = [];
-  var_0["stand"][0] = [ % s1_casual_stand_idle, % s1_casual_stand_idle_twitch, % s1_casual_stand_idle_twitchb];
-  var_0["stand"][1] = [ % s1_casual_stand_idle_twitch, % s1_casual_stand_idle_twitch, % s1_casual_stand_v2_twitch_talk, % s1_casual_stand_v2_twitch_talk];
-  var_0["stand_cqb"][0] = [ % cqb_stand_idle, % cqb_stand_twitch];
+  var_0["stand"][0] = [ % s1_casual_stand_idle, %s1_casual_stand_idle_twitch, %s1_casual_stand_idle_twitchb];
+  var_0["stand"][1] = [ % s1_casual_stand_idle_twitch, %s1_casual_stand_idle_twitch, %s1_casual_stand_v2_twitch_talk, %s1_casual_stand_v2_twitch_talk];
+  var_0["stand_cqb"][0] = [ % cqb_stand_idle, %cqb_stand_twitch];
   var_0["crouch"][0] = [ % casual_crouch_idle];
   anim.archetypes["s1_soldier"]["idle"] = var_0;
   var_0 = [];

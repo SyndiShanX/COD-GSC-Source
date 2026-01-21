@@ -64,7 +64,5 @@ and these lines in your CSV:
 include,vehicle_antonov
 sound,vehicle_antonov,vehicle_standard,all_sp
 
-defaultmdl="vehicle_antonov_fly"
-default:"vehicletype" "antonov"
-default:"script_team" "allies"
+defaultmdl="vehicle_antonov_fly"default:"vehicletype" "antonov"default:"script_team" "allies"
 */

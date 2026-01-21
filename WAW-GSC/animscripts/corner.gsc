@@ -244,15 +244,15 @@ ChangeAiming(spot, fullbody, transtime) {
 StopAiming(transtime) {
   assert(self.cornerAiming);
   self.cornerAiming = false;
-  self clearAnim( % add_fire, transtime);
+  self clearAnim(%add_fire, transtime);
   animscripts\shared::setAnimAimWeight(0, transtime);
 }
 
 SetAimingParams(spot, fullbody, transTime, lean) {
   assert(isDefined(fullbody));
   self.spot = spot;
-  self setanimlimited( % exposed_modern, 1, transTime);
-  self setanimlimited( % exposed_aiming, 1, transTime);
+  self setanimlimited(%exposed_modern, 1, transTime);
+  self setanimlimited(%exposed_aiming, 1, transTime);
   animscripts\shared::setAnimAimWeight(1, transTime);
   if(lean) {
     self setAnimLimited(animArray("lean_aim_straight"), 1, transTime);
@@ -311,7 +311,7 @@ stepOut() {
   self.keepClaimedNodeInGoal = true;
   self.changingCoverPos = true;
   self notify("done_changing_cover_pos");
-  self setFlaggedAnimKnobAllRestart("stepout", switchanim, % root, 1, .2, 1.0);
+  self setFlaggedAnimKnobAllRestart("stepout", switchanim, %root, 1, .2, 1.0);
   self thread DoNoteTracksWithEndon("stepout");
   hasStartAim = animHasNotetrack(switchanim, "start_aim");
   if(hasStartAim) {
@@ -328,8 +328,8 @@ stepOut() {
   if(hasStartAim)
     self waittillmatch("stepout", "end");
   self ChangeAiming(undefined, true, 0.2);
-  self clearAnim( % cover, 0.2);
-  self clearAnim( % corner, 0.2);
+  self clearAnim(%cover, 0.2);
+  self clearAnim(%corner, 0.2);
   self.changingCoverPos = false;
   self.coverPosEstablishedTime = gettime();
   return true;
@@ -343,9 +343,9 @@ stepOutAndShootEnemy() {
     distSqToShootPos = lengthsquared(self.origin - self.shootPos);
     if(weaponAnims() == "rocketlauncher" && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.a.pose == "stand")
-        animscripts\shared::throwDownWeapon( % RPG_stand_throw);
+        animscripts\shared::throwDownWeapon(%RPG_stand_throw);
       else
-        animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
+        animscripts\shared::throwDownWeapon(%RPG_crouch_throw);
       self thread runCombat();
       return;
     }
@@ -403,7 +403,7 @@ shootAsTold() {
         }
       }
       self flamethrower_stop_shoot();
-      self clearAnim( % add_fire, .2);
+      self clearAnim(%add_fire, .2);
     }
     if(self canReturnToCover(self.a.cornerMode != "lean")) {
       break;
@@ -451,9 +451,9 @@ standIdleThread() {
   if(isDefined(self.a.standIdleThread))
     return;
   self.a.standIdleThread = true;
-  self setAnim( % add_idle, 1, .2);
+  self setAnim(%add_idle, 1, .2);
   standIdleThreadInternal();
-  self clearAnim( % add_idle, .2);
+  self clearAnim(%add_idle, .2);
 }
 
 endStandIdleThread() {
@@ -529,7 +529,7 @@ returnToCover() {
   assert(animArrayAnyExist(animname));
   switchanim = animArrayPickRandom(animname);
   self StopAiming(.3);
-  self clearAnim( % add_fire, .2);
+  self clearAnim(%add_fire, .2);
   reloading = false;
   if(self.a.cornerMode != "lean" && suppressed && animArrayAnyExist(animname + "_reload") && randomfloat(100) < 75) {
     switchanim = animArrayPickRandom(animname + "_reload");
@@ -537,7 +537,7 @@ returnToCover() {
     reloading = true;
   }
   self setanimlimited(animarray("straight_level"), 0, .1);
-  self setFlaggedAnimKnobAllRestart("hide", switchanim, % body, 1, .1, rate);
+  self setFlaggedAnimKnobAllRestart("hide", switchanim, %body, 1, .1, rate);
   self animscripts\shared::DoNoteTracks("hide");
   self.a.alertness = "alert";
   if(reloading)
@@ -566,7 +566,7 @@ blindfire() {
     return false;
   self animMode("zonly_physics");
   self.keepClaimedNodeInGoal = true;
-  self setFlaggedAnimKnobAllRestart("blindfire", animArrayPickRandom("blind_fire"), % body, 1, 0, 1);
+  self setFlaggedAnimKnobAllRestart("blindfire", animArrayPickRandom("blind_fire"), %body, 1, 0, 1);
   self animscripts\shared::DoNoteTracks("blindfire");
   self.keepClaimedNodeInGoal = false;
   return true;
@@ -623,7 +623,7 @@ lookForEnemy(lookTime) {
     lookanim = animArray("look_to_alert_fast");
   else
     lookanim = animArray("look_to_alert");
-  self setflaggedanimknoballrestart("looking_end", lookanim, % body, 1, .1, 1.0);
+  self setflaggedanimknoballrestart("looking_end", lookanim, %body, 1, .1, 1.0);
   animscripts\shared::DoNoteTracks("looking_end");
   self animMode("zonly_physics");
   self.keepClaimedNodeInGoal = false;
@@ -634,7 +634,7 @@ peekOut() {
   peekanim = animArray("alert_to_look");
   if(!self mayMoveToPoint(getAnimEndPos(peekanim)))
     return false;
-  self setflaggedanimknobAll("looking_start", peekanim, % body, 1, .2, 1);
+  self setflaggedanimknobAll("looking_start", peekanim, %body, 1, .2, 1);
   animscripts\shared::DoNoteTracks("looking_start");
   return true;
 }
@@ -711,9 +711,9 @@ flinch() {
 
 playIdleAnimation(idleAnim, needsRestart) {
   if(needsRestart)
-    self setFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, .1, 1);
+    self setFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, .1, 1);
   else
-    self setFlaggedAnimKnobAll("idle", idleAnim, % body, 1, .1, 1);
+    self setFlaggedAnimKnobAll("idle", idleAnim, %body, 1, .1, 1);
   self animscripts\shared::DoNoteTracks("idle");
 }
 
@@ -732,7 +732,7 @@ transitionToStance(stance) {
     set_anim_array(stance);
     return;
   }
-  self setFlaggedAnimKnobAllRestart("changeStance", animarray("stance_change"), % body);
+  self setFlaggedAnimKnobAllRestart("changeStance", animarray("stance_change"), %body);
   set_anim_array(stance);
   self animscripts\shared::DoNoteTracks("changeStance");
   assert(self.a.pose == stance);
@@ -747,7 +747,7 @@ GoToCover(coveranim, transTime, playTime) {
   self animMode("normal");
   assert(transTime <= playTime);
   self thread animscripts\shared::moveToOriginOverTime(cornerOrigin, transTime);
-  self setFlaggedAnimKnobAllRestart("coveranim", coveranim, % body, 1, transTime);
+  self setFlaggedAnimKnobAllRestart("coveranim", coveranim, %body, 1, transTime);
   self animscripts\shared::DoNoteTracksForTime(playTime, "coveranim");
   while(AbsAngleClamp180(self.angles[1] - desiredYaw) > 1) {
     self animscripts\shared::DoNoteTracksForTime(0.1, "coveranim");
@@ -816,7 +816,7 @@ set_standing_animarray_aiming() {
       self.a.array["burst4"] = % exposed_shoot_burst4;
       self.a.array["burst5"] = % exposed_shoot_burst5;
       self.a.array["burst6"] = % exposed_shoot_burst6;
-      self.a.array["single"] = array( % exposed_shoot_semi1);
+      self.a.array["single"] = array(%exposed_shoot_semi1);
     } else {
       self.a.array["fire"] = % exposed2_shoot_auto_v2;
       self.a.array["semi2"] = % exposed2_shoot_semi2;
@@ -828,15 +828,15 @@ set_standing_animarray_aiming() {
       self.a.array["burst4"] = % exposed2_shoot_burst4;
       self.a.array["burst5"] = % exposed2_shoot_burst5;
       self.a.array["burst6"] = % exposed2_shoot_burst6;
-      self.a.array["single"] = array( % exposed2_shoot_semi1);
+      self.a.array["single"] = array(%exposed2_shoot_semi1);
     }
     if(self usingShotgun())
-      self.a.array["single"] = array( % shotgun_stand_fire_1A);
+      self.a.array["single"] = array(%shotgun_stand_fire_1A);
   }
   if(!isDefined(self.exposedSet) || self.exposedSet == 0)
-    self.a.array["exposed_idle"] = array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
+    self.a.array["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
   else
-    self.a.array["exposed_idle"] = array( % exposed2_idle_alert_v1, % exposed2_idle_alert_v2, % exposed2_idle_alert_v3);
+    self.a.array["exposed_idle"] = array(%exposed2_idle_alert_v1, %exposed2_idle_alert_v2, %exposed2_idle_alert_v3);
   if(self usingBoltActionWeapon()) {
     if(self.a.cornerMode == "lean") {
       self.a.array["rechamber"] = self.a.array["lean_rechamber"];
@@ -868,15 +868,15 @@ set_crouching_animarray_aiming() {
   self.a.array["semi4"] = % exposed_crouch_shoot_semi4;
   self.a.array["semi5"] = % exposed_crouch_shoot_semi5;
   if(self usingShotgun())
-    self.a.array["single"] = array( % shotgun_crouch_fire);
+    self.a.array["single"] = array(%shotgun_crouch_fire);
   else
-    self.a.array["single"] = array( % exposed_crouch_shoot_semi1);
+    self.a.array["single"] = array(%exposed_crouch_shoot_semi1);
   self.a.array["burst2"] = % exposed_crouch_shoot_burst3;
   self.a.array["burst3"] = % exposed_crouch_shoot_burst3;
   self.a.array["burst4"] = % exposed_crouch_shoot_burst4;
   self.a.array["burst5"] = % exposed_crouch_shoot_burst5;
   self.a.array["burst6"] = % exposed_crouch_shoot_burst6;
-  self.a.array["exposed_idle"] = array( % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3);
+  self.a.array["exposed_idle"] = array(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
   if(self usingBoltActionWeapon()) {
     self.a.array["rechamber"] = % exposed_crouch_rechamber_v1;
   }

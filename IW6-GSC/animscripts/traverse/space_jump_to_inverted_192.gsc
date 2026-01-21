@@ -13,7 +13,7 @@ main() {
   var_0 = self getnegotiationstartnode();
   self.turnrate = 2000;
   self orientmode("face angle 3d", var_0.angles);
-  self clearanim( % root, 0);
-  self setflaggedanimknoballrestart("3dtraverseAnim", % space_traversal_jump_180_u, % root, 1, 0.1, 1);
+  self clearanim(%root, 0);
+  self setflaggedanimknoballrestart("3dtraverseAnim", %space_traversal_jump_180_u, %root, 1, 0.1, 1);
   animscripts\shared::donotetracks("3dtraverseAnim");
 }

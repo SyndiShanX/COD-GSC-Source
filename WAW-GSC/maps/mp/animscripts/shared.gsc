@@ -70,9 +70,7 @@ DoNoteTracksForeverProc(notetracksFunc, flagName, killString, customFunction, va
     timetaken = GetTime() - time;
     if(timetaken < 0.05) {
       time = GetTime();
-      returnedNote = [
-        [notetracksFunc]
-      ](flagName, customFunction, var1);
+      returnedNote = [[notetracksFunc]](flagName, customFunction, var1);
       timetaken = GetTime() - time;
       if(timetaken < 0.05) {
         println(GetTime() + " animscripts\shared::DoNoteTracksForever is trying to cause an infinite loop on anim " + flagName + ", returned " + returnedNote + ".");

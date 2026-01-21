@@ -250,10 +250,7 @@ startVanguard(vanguard, streakName, lifeId) {
 }
 
 vanguard_moving_platform_death(data) {
-  if(!isDefined(data.lastTouchedPlatform.destroyDroneOnCollision) ||
-    data.lastTouchedPlatform.destroyDroneOnCollision ||
-    !isDefined(self.spawnGracePeriod) ||
-    GetTime() > self.spawnGracePeriod) {
+  if(!isDefined(data.lastTouchedPlatform.destroyDroneOnCollision) || data.lastTouchedPlatform.destroyDroneOnCollision || !isDefined(self.spawnGracePeriod) || GetTime() > self.spawnGracePeriod) {
     self thread handleDeathDamage(undefined, undefined, undefined, undefined);
   } else {
     wait(1.0);
@@ -921,11 +918,7 @@ vanguard_handleDamage() {
   while(true) {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
-    self maps\mp\gametypes\_damage::monitorDamageOneShot(
-      damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon,
-      "remote_uav", ::handleDeathDamage, ::modifyDamage,
-      true
-    );
+    self maps\mp\gametypes\_damage::monitorDamageOneShot(damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon, "remote_uav", ::handleDeathDamage, ::modifyDamage, true);
   }
 }
 
@@ -940,11 +933,7 @@ vanguard_turret_handleDamage() {
     self waittill("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
 
     if(isDefined(self.parent)) {
-      self.parent maps\mp\gametypes\_damage::monitorDamageOneShot(
-        damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon,
-        "remote_uav", ::handleDeathDamage, ::modifyDamage,
-        true
-      );
+      self.parent maps\mp\gametypes\_damage::monitorDamageOneShot(damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon, "remote_uav", ::handleDeathDamage, ::modifyDamage, true);
     }
   }
 }

@@ -300,9 +300,7 @@ determineteamwinnerbyteamscore() {
     winner = compareteambyteamscore(winner, teamkeys[teamindex], previous_winner_score);
 
     if(winner != "tie") {
-      previous_winner_score = [
-        [level._getteamscore]
-      ](winner);
+      previous_winner_score = [[level._getteamscore]](winner);
     }
   }
 
@@ -411,9 +409,7 @@ checkforanyteamforfeit() {
 dospawnqueueupdates() {
   foreach(team, _ in level.teams) {
     if(level.spawnqueuemodified[team]) {
-      [
-        [level.onalivecountchange]
-      ](team);
+      [[level.onalivecountchange]](team);
     }
   }
 }
@@ -447,9 +443,7 @@ alldeadteamcount() {
 dodeadeventupdates() {
   if(level.teambased) {
     if(areallteamsdead()) {
-      [
-        [level.ondeadevent]
-      ]("all");
+      [[level.ondeadevent]]("all");
       return true;
     }
 
@@ -782,9 +776,7 @@ endgame(winner, endreasontext) {
 
   if(!util::isoneround()) {
     if(isDefined(level.onroundendgame)) {
-      winner = [
-        [level.onroundendgame]
-      ](winner);
+      winner = [[level.onroundendgame]](winner);
     }
 
     endreasontext = getendreasontext();

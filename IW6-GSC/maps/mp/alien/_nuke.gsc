@@ -167,26 +167,7 @@ fog_nuke(transition_time) {
   }
   ent = level.nuke_fog_setting;
 
-  SetExpFog(
-    ent.startDist,
-    ent.halfwayDist,
-    ent.red,
-    ent.green,
-    ent.blue,
-    ent.HDRColorIntensity,
-    ent.maxOpacity,
-    transition_time,
-    ent.sunRed,
-    ent.sunGreen,
-    ent.sunBlue,
-    ent.HDRSunColorIntensity,
-    ent.sunDir,
-    ent.sunBeginFadeAngle,
-    ent.sunEndFadeAngle,
-    ent.normalFogScale,
-    ent.skyFogIntensity,
-    ent.skyFogMinAngle,
-    ent.skyFogMaxAngle);
+  SetExpFog(ent.startDist, ent.halfwayDist, ent.red, ent.green, ent.blue, ent.HDRColorIntensity, ent.maxOpacity, transition_time, ent.sunRed, ent.sunGreen, ent.sunBlue, ent.HDRSunColorIntensity, ent.sunDir, ent.sunBeginFadeAngle, ent.sunEndFadeAngle, ent.normalFogScale, ent.skyFogIntensity, ent.skyFogMinAngle, ent.skyFogMaxAngle);
 }
 
 restore_fog(transition_time) {
@@ -195,26 +176,7 @@ restore_fog(transition_time) {
   }
   ent = level.restore_fog_setting;
 
-  SetExpFog(
-    ent.startDist,
-    ent.halfwayDist,
-    ent.red,
-    ent.green,
-    ent.blue,
-    ent.HDRColorIntensity,
-    ent.maxOpacity,
-    transition_time,
-    ent.sunRed,
-    ent.sunGreen,
-    ent.sunBlue,
-    ent.HDRSunColorIntensity,
-    ent.sunDir,
-    ent.sunBeginFadeAngle,
-    ent.sunEndFadeAngle,
-    ent.normalFogScale,
-    ent.skyFogIntensity,
-    ent.skyFogMinAngle,
-    ent.skyFogMaxAngle);
+  SetExpFog(ent.startDist, ent.halfwayDist, ent.red, ent.green, ent.blue, ent.HDRColorIntensity, ent.maxOpacity, transition_time, ent.sunRed, ent.sunGreen, ent.sunBlue, ent.HDRSunColorIntensity, ent.sunDir, ent.sunBeginFadeAngle, ent.sunEndFadeAngle, ent.normalFogScale, ent.skyFogIntensity, ent.skyFogMinAngle, ent.skyFogMaxAngle);
 }
 
 nukeEarthquake() {

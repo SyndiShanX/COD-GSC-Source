@@ -908,11 +908,7 @@ function giveteamscore(event, team, player, victim) {
 
   if(sessionmodeismultiplayergame()) {
     mpteamscores = {
-      #gametime: function_f8d53445(),
-      #event: event,
-      #team: team,
-      #diff: newscore - teamscore,
-      #score: newscore
+      #gametime: function_f8d53445(), #event: event, #team: team, #diff: newscore - teamscore, #score: newscore
     };
     function_92d1707f(#"hash_48d5ef92d24477d2", mpteamscores);
   }
@@ -933,10 +929,7 @@ giveteamscoreforobjective_delaypostprocessing(team, score) {
 
   if(sessionmodeismultiplayergame()) {
     mpteamobjscores = {
-      #gametime: function_f8d53445(),
-      #team: team,
-      #diff: newscore - teamscore,
-      #score: newscore
+      #gametime: function_f8d53445(), #team: team, #diff: newscore - teamscore, #score: newscore
     };
     function_92d1707f(#"hash_22921c2c027fa389", mpteamobjscores);
   }
@@ -968,10 +961,7 @@ giveteamscoreforobjective(team, score) {
 
   if(sessionmodeismultiplayergame()) {
     mpteamobjscores = {
-      #gametime: function_f8d53445(),
-      #team: team,
-      #diff: newscore - teamscore,
-      #score: newscore
+      #gametime: function_f8d53445(), #team: team, #diff: newscore - teamscore, #score: newscore
     };
     function_92d1707f(#"hash_22921c2c027fa389", mpteamobjscores);
   }
@@ -1641,9 +1631,7 @@ givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
     }
 
     if(isDefined(level.var_c8453874)) {
-      [
-        [level.var_c8453874]
-      ](self, evictim, laststandparams);
+      [[level.var_c8453874]](self, evictim, laststandparams);
     }
   }
 
@@ -1830,10 +1818,7 @@ processkillstreakassists(attacker, inflictor, weapon) {
   }
 
   params = {
-    #players: [],
-    #attacker: attacker,
-    #inflictor: inflictor,
-    #weapon: weapon
+    #players: [], #attacker: attacker, #inflictor: inflictor, #weapon: weapon
   };
 
   foreach(player in level.players) {
@@ -1864,9 +1849,7 @@ processkillstreakassists(attacker, inflictor, weapon) {
 updateteamscorebyroundswon() {
   if(level.scoreroundwinbased) {
     foreach(team, _ in level.teams) {
-      [
-        [level._setteamscore]
-      ](team, game.stat[# "roundswon"][team]);
+      [[level._setteamscore]](team, game.stat[# "roundswon"][team]);
     }
   }
 }
@@ -1874,8 +1857,7 @@ updateteamscorebyroundswon() {
 function_e7b4c25c(nemesis_name, value, nemesis_rank, var_15574043, nemesis_xp, nemesis_xuid) {
   if(!isDefined(self.pers[# "nemesis_tracking"][nemesis_name])) {
     self.pers[# "nemesis_tracking"][nemesis_name] = {
-      #name: nemesis_name,
-      #value: 0
+      #name: nemesis_name, #value: 0
     };
   }
 

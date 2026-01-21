@@ -89,10 +89,7 @@ and these lines in your CSV:
 include,vehicle_zodiac
 sound,vehicle_zodiac,vehicle_standard,all_sp
 
-defaultmdl="vehicle_zodiac"
-default:"vehicletype" "zodiac"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_zodiac"default:"vehicletype" "zodiac"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_zodiac_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -103,7 +100,5 @@ and these lines in your CSV:
 include,vehicle_zodiac
 sound,vehicle_zodiac,vehicle_standard,all_sp
 
-defaultmdl="vehicle_zodiac"
-default:"vehicletype" "zodiac_physics"
-default:"script_team" "allies"
+defaultmdl="vehicle_zodiac"default:"vehicletype" "zodiac_physics"default:"script_team" "allies"
 */

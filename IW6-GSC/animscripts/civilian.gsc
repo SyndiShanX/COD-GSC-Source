@@ -7,7 +7,7 @@
 
 cover() {
   self endon("killanimscript");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   animscripts\utility::updateisincombattimer();
 
   if(animscripts\utility::isincombat())
@@ -30,7 +30,7 @@ cover() {
   thread move_check();
 
   for(;;) {
-    self setflaggedanimknoball("idle", common_scripts\utility::random(var_1), % root, 1, 0.2, 1);
+    self setflaggedanimknoball("idle", common_scripts\utility::random(var_1), %root, 1, 0.2, 1);
     self waittillmatch("idle", "end");
   }
 }

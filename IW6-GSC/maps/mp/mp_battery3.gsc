@@ -145,11 +145,7 @@ volcanoWaitForUse(volcanoSourceName) {
     volcanoSounds[2] = "volcano_eruption_fourth";
 
     for(i = 0; i < 3; i++) {
-      smallDebrisCfg maps\mp\killstreaks\_mortarstrike::mortar_fire(smallDebrisCfg.launchDelayMin, smallDebrisCfg.launchDelayMax,
-        smallDebrisCfg.launchAirTimeMin, smallDebrisCfg.launchAirTimeMax,
-        smallDebrisCfg.strikeDuration,
-        owner
-      );
+      smallDebrisCfg maps\mp\killstreaks\_mortarstrike::mortar_fire(smallDebrisCfg.launchDelayMin, smallDebrisCfg.launchDelayMax, smallDebrisCfg.launchAirTimeMin, smallDebrisCfg.launchAirTimeMax, smallDebrisCfg.strikeDuration, owner);
       PlaySoundAtPos(volcanoSource.origin, volcanoSounds[i]);
       exploder(1);
       Earthquake(0.3, 2.0, level.mapCenter, VOLCANO_RUMBLE_RADIUS);
@@ -285,9 +281,9 @@ templeCollapse() {
 
   animLength = 7.5;
   if((level.ps3) || (level.xenon)) {
-    animLength = GetAnimLength( % mp_ruins_td_01_cg_anim);
+    animLength = GetAnimLength(%mp_ruins_td_01_cg_anim);
   } else {
-    animLength = GetAnimLength( % mp_ruins_temple_debris_01_anim);
+    animLength = GetAnimLength(%mp_ruins_temple_debris_01_anim);
   }
 
   foreach(animModel in self.animModels) {

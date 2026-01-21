@@ -1097,8 +1097,7 @@ getRegenData(regenData) {
 }
 
 isHealthRegenDisabled() {
-  return ((isDefined(level.healthRegenDisabled) && level.healthRegenDisabled) ||
-    (isDefined(self.healthRegenDisabled) && self.healthRegenDisabled));
+  return ((isDefined(level.healthRegenDisabled) && level.healthRegenDisabled) || (isDefined(self.healthRegenDisabled) && self.healthRegenDisabled));
 }
 
 resetUIDvarsOnspawn() {}
@@ -1725,21 +1724,10 @@ blackBox_EndGame_Score() {
   total_xp = self maps\mp\alien\_persistence::get_player_session_xp();
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
-    IPrintLnBold("^8bbprint: alienfinalscore\n" +
-      " playername=" + player_name +
-      " cyclenum=" + cyclenum +
-      " hivename=" + hive_name +
-      " playerfinalscore=" + final_score +
-      " playerxpearned=" + total_xp);
+    IPrintLnBold("^8bbprint: alienfinalscore\n" + " playername=" + player_name + " cyclenum=" + cyclenum + " hivename=" + hive_name + " playerfinalscore=" + final_score + " playerxpearned=" + total_xp);
   }
 
-  bbprint("alienfinalscore",
-    "playername %s cyclenum %i hivename %s playerfinalscore %i playerxpearned %i ",
-    player_name,
-    cyclenum,
-    hive_name,
-    final_score,
-    total_xp);
+  bbprint("alienfinalscore", "playername %s cyclenum %i hivename %s playerfinalscore %i playerxpearned %i ", player_name, cyclenum, hive_name, final_score, total_xp);
 }
 
 blackBox_EndGame(endcondition, playtime) {
@@ -1783,46 +1771,12 @@ blackBox_EndGame(endcondition, playtime) {
   if(GetDvarInt("alien_bbprint_debug") > 0) {
     playerranks = player0rank + " " + player1rank + " " + player2rank + " " + player3rank;
 
-    IPrintLnBold("^8bbprint: alienendgame (1/2)\n" +
-      " endcondition=" + endcondition +
-      " playerranks=" + playerranks +
-      " playtime=" + playtime +
-      " hivescleared=" + hivescleared +
-      " hivename=" + hivename +
-      " timesdowned=" + timesdowned +
-      " timesdied=" + timesdied);
+    IPrintLnBold("^8bbprint: alienendgame (1/2)\n" + " endcondition=" + endcondition + " playerranks=" + playerranks + " playtime=" + playtime + " hivescleared=" + hivescleared + " hivename=" + hivename + " timesdowned=" + timesdowned + " timesdied=" + timesdied);
 
-    IPrintLnBold("^8bbprint: alienendgame (2/2)\n" +
-      " timesdrillstuck=" + timesdrillstuck +
-      " alienskilled=" + alienskilled +
-      " teamitemdeployed=" + teamitemdeployed +
-      " teamitemused=" + teamitemused +
-      " bulletsshot=" + bulletsshot +
-      " damagetaken=" + damagetaken +
-      " damagedone=" + damagedone +
-      " trapsused=" + trapsused);
+    IPrintLnBold("^8bbprint: alienendgame (2/2)\n" + " timesdrillstuck=" + timesdrillstuck + " alienskilled=" + alienskilled + " teamitemdeployed=" + teamitemdeployed + " teamitemused=" + teamitemused + " bulletsshot=" + bulletsshot + " damagetaken=" + damagetaken + " damagedone=" + damagedone + " trapsused=" + trapsused);
   }
 
-  bbprint("alienendgame",
-    "endcondition %s player0rank %i player1rank %i player2rank %i player3rank %i playtime %f hivescleared %i hivename %s timesdowned %i timesdied %i timesdrillstuck %i alienskilled %i teamitemused %i teamitemdeployed %i bulletsshot %i damagedone %i damagetaken %i trapsused %i ",
-    endcondition,
-    player0rank,
-    player1rank,
-    player2rank,
-    player3rank,
-    playtime,
-    hivescleared,
-    hivename,
-    timesdowned,
-    timesdied,
-    timesdrillstuck,
-    alienskilled,
-    teamitemdeployed,
-    teamitemused,
-    bulletsshot,
-    damagetaken,
-    damagedone,
-    trapsused);
+  bbprint("alienendgame", "endcondition %s player0rank %i player1rank %i player2rank %i player3rank %i playtime %f hivescleared %i hivename %s timesdowned %i timesdied %i timesdrillstuck %i alienskilled %i teamitemused %i teamitemdeployed %i bulletsshot %i damagedone %i damagetaken %i trapsused %i ", endcondition, player0rank, player1rank, player2rank, player3rank, playtime, hivescleared, hivename, timesdowned, timesdied, timesdrillstuck, alienskilled, teamitemdeployed, teamitemused, bulletsshot, damagetaken, damagedone, trapsused);
 
   foreach(player in level.players) {
     player SetCoopPlayerData("alienSession", "team_shots", level.alienBBData["bullets_shot"]);
@@ -1855,41 +1809,12 @@ blackBox_EndGame(endcondition, playtime) {
     player_bbprint_ref = "alienendgame_player" + player_ent_number;
 
     if(GetDvarInt("alien_bbprint_debug") > 0) {
-      IPrintLnBold("^8bbprint: " + player_bbprint_ref + " (1/2)\n" +
-        " playername=" + player_name +
-        " playerplaytime=" + player_play_time +
-        " playerkills=" + player_kills +
-        " playerscore=" + player_score +
-        " playerassists=" + player_assists +
-        " playerrevives=" + player_revives +
-        " playerdrillrestarts=" + player_drill_restarts);
+      IPrintLnBold("^8bbprint: " + player_bbprint_ref + " (1/2)\n" + " playername=" + player_name + " playerplaytime=" + player_play_time + " playerkills=" + player_kills + " playerscore=" + player_score + " playerassists=" + player_assists + " playerrevives=" + player_revives + " playerdrillrestarts=" + player_drill_restarts);
 
-      IPrintLnBold("^8bbprint: " + player_bbprint_ref + " (2/2)\n" +
-        " playerdeaths=" + player_deaths +
-        " playerhives=" + player_hives +
-        " playertraps=" + player_traps +
-        " playertotalcurrency=" + player_currency_total +
-        " playercurrencyspent=" + player_currency_spent +
-        " playerdeployables=" + player_deployables +
-        " playerdeployablesused=" + player_deployables_used);
+      IPrintLnBold("^8bbprint: " + player_bbprint_ref + " (2/2)\n" + " playerdeaths=" + player_deaths + " playerhives=" + player_hives + " playertraps=" + player_traps + " playertotalcurrency=" + player_currency_total + " playercurrencyspent=" + player_currency_spent + " playerdeployables=" + player_deployables + " playerdeployablesused=" + player_deployables_used);
     }
 
-    bbprint(player_bbprint_ref,
-      "playername %s playerplaytime %f playerkills %i playerscore %i playerassists %i playerrevives %i playerdrillrestarts %i playerdeaths %i playerhives %i playertraps %i playertotalcurrency %i playercurrencyspent %i playerdeployables %i playerdeployablesused %i ",
-      player_name,
-      player_play_time,
-      player_kills,
-      player_score,
-      player_assists,
-      player_revives,
-      player_drill_restarts,
-      player_deaths,
-      player_hives,
-      player_traps,
-      player_currency_total,
-      player_currency_spent,
-      player_deployables,
-      player_deployables_used);
+    bbprint(player_bbprint_ref, "playername %s playerplaytime %f playerkills %i playerscore %i playerassists %i playerrevives %i playerdrillrestarts %i playerdeaths %i playerhives %i playertraps %i playertotalcurrency %i playercurrencyspent %i playerdeployables %i playerdeployablesused %i ", player_name, player_play_time, player_kills, player_score, player_assists, player_revives, player_drill_restarts, player_deaths, player_hives, player_traps, player_currency_total, player_currency_spent, player_deployables, player_deployables_used);
 
   }
 }
@@ -1973,9 +1898,7 @@ alien_customprematchperiod() {
 
     wait(level.prematchPeriod - 3);
     if(isDefined(level.postIntroscreenFunc)) {
-      [
-        [level.postIntroscreenFunc]
-      ]();
+      [[level.postIntroscreenFunc]]();
     }
 
     level notify("introscreen_over");
@@ -2109,9 +2032,7 @@ run_encounters() {
       [[encounter_info.pre_encounter_func]]();
 
     if(should_skip_encounter(start_point_enable, encounter_index, start_point_index)) {
-      [
-        [encounter_info.skip_func]
-      ]();
+      [[encounter_info.skip_func]]();
 
       if(isDefined(encounter_info.skill_point))
         inc_starting_skill_point(encounter_info.skill_point);
@@ -2119,9 +2040,7 @@ run_encounters() {
       if(is_true(encounter_info.go_next_area))
         inc_current_area_index();
     } else {
-      [
-        [encounter_info.func]
-      ]();
+      [[encounter_info.func]]();
 
       if(!is_hardcore_mode()) {
         if(isDefined(encounter_info.skill_point))

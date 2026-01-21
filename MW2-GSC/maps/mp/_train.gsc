@@ -337,15 +337,13 @@ train_kills_players(train_cars, distance_between_cars) {
       ent.damageOwner = self;
       ent.eInflictor = self;
 
-      ent maps\mp\gametypes\_weapons::damageEnt(
-        ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
+      ent maps\mp\gametypes\_weapons::damageEnt(ent.eInflictor, // eInflictor = the entity that causes the damage (e.g. a claymore)
         ent.damageOwner, // eAttacker = the player that is attacking
         ent.damage, // iDamage = the amount of damage to do
         "MOD_PROJECTILE_SPLASH", // sMeansOfDeath = string specifying the method of death (e.g. "MOD_PROJECTILE_SPLASH")
         "train_mp", // sWeapon = string specifying the weapon used (e.g. "claymore_mp")
         ent.pos, // damagepos = the position damage is coming from
-        vectornormalize(ent.damageCenter - ent.pos) // damagedir = the direction damage is moving in
-      );
+        vectornormalize(ent.damageCenter - ent.pos) // damagedir = the direction damage is moving in);
     }
 
     wait(0.05);

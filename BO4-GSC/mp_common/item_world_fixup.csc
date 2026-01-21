@@ -122,8 +122,7 @@ add_spawn_point(origin, targetname, angles = (0, 0, 0)) {
 
   var_3cc38ddd = level.var_1d777960[targetname].size;
   level.var_1d777960[targetname][var_3cc38ddd] = {
-    #origin: origin,
-    #angles: angles
+    #origin: origin, #angles: angles
   };
 }
 
@@ -143,8 +142,7 @@ function_e70fa91c(var_cf456610, var_2ab9d3bd, var_6647c284 = -1) {
 
   replacementcount = level.var_93c59949[var_cf456610].size;
   level.var_93c59949[var_cf456610][replacementcount] = {
-    #replacement: var_2ab9d3bd,
-    #count: var_6647c284
+    #replacement: var_2ab9d3bd, #count: var_6647c284
   };
 }
 
@@ -164,9 +162,7 @@ function_2749fcc3(var_89b7987e, var_cf456610, var_2ab9d3bd, var_6647c284 = 1) {
 
   replacementcount = level.var_93c59949[var_cf456610].size;
   level.var_93c59949[var_cf456610][replacementcount] = {
-    #replacement: var_2ab9d3bd,
-    #count: var_6647c284,
-    #var_52a66db0: var_89b7987e
+    #replacement: var_2ab9d3bd, #count: var_6647c284, #var_52a66db0: var_89b7987e
   };
 }
 

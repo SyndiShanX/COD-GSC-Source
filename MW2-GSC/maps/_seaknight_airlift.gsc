@@ -18,7 +18,7 @@ main(model, type) {
   build_life(999, 500, 1500);
 
   build_team("allies");
-  build_drive( % sniper_escape_ch46_rotors, undefined, 0);
+  build_drive(%sniper_escape_ch46_rotors, undefined, 0);
 
   build_light(model, "cockpit_red_cargo02", "tag_light_cargo02", "misc/aircraft_light_cockpit_red", "interior", 0.0);
   build_light(model, "cockpit_blue_cockpit01", "tag_light_cockpit01", "misc/aircraft_light_cockpit_blue", "interior", 0.1);

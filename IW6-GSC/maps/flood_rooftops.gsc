@@ -1617,7 +1617,7 @@ debrisbridge_kill_enemies_top(var_0, var_1) {
       }
 
       var_1 useanimtree(#animtree);
-      var_1 setanimknobrestart( % vehicle_80s_sedan1_destroy, 1.0, 0.1, 1);
+      var_1 setanimknobrestart(%vehicle_80s_sedan1_destroy, 1.0, 0.1, 1);
     } else
       var_1 setscriptablepartstate(0, 5, 0);
   }

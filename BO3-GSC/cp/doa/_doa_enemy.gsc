@@ -944,7 +944,7 @@ function function_53055b45() {
 }
 
 function function_ab6f6263() {
-  var_2c143867 = array( % generic::ai_zombie_base_idle_ad_v1, % generic::ai_zombie_base_idle_au_v1, % generic::bo3_ai_zombie_attack_v1, % generic::bo3_ai_zombie_attack_v2, % generic::bo3_ai_zombie_attack_v3, % generic::bo3_ai_zombie_attack_v4, % generic::bo3_ai_zombie_attack_v6);
+  var_2c143867 = array(%generic::ai_zombie_base_idle_ad_v1, %generic::ai_zombie_base_idle_au_v1, %generic::bo3_ai_zombie_attack_v1, %generic::bo3_ai_zombie_attack_v2, %generic::bo3_ai_zombie_attack_v3, %generic::bo3_ai_zombie_attack_v4, %generic::bo3_ai_zombie_attack_v6);
   self endon("death");
   self notify("hash_ab6f6263");
   self endon("hash_ab6f6263");
@@ -958,7 +958,7 @@ function function_ab6f6263() {
     self.var_58acb0e3 = 1;
     if(isDefined(self.var_96437a17) && self.var_96437a17 && (!(isDefined(self.rising) && self.rising))) {
       idleanim = var_2c143867[randomint(var_2c143867.size)];
-      self animscripted("zombieanim", self.origin, self.angles, idleanim, "normal", % generic::body, 1, 0.3, 0.3);
+      self animscripted("zombieanim", self.origin, self.angles, idleanim, "normal", %generic::body, 1, 0.3, 0.3);
       self waittillmatch("hash_24281fe0");
     } else {
       self setgoal(self.origin, 0);

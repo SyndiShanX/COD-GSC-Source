@@ -21,9 +21,7 @@ init() {
 
 destructible_think() {
   self endon("death");
-  if(self.destructibledef == "fxanim_gp_ceiling_fan_old_mod" ||
-    self.destructibledef == "fxanim_gp_ceiling_fan_modern_mod" ||
-    self.destructibledef == "fxanim_airconditioner_mod") {
+  if(self.destructibledef == "fxanim_gp_ceiling_fan_old_mod" || self.destructibledef == "fxanim_gp_ceiling_fan_modern_mod" || self.destructibledef == "fxanim_airconditioner_mod") {
     self thread ceiling_fan_think();
     return;
   }
@@ -115,11 +113,11 @@ breakAfter(time, damage, piece) {
 
 ceiling_fan_think() {
   self UseAnimTree(#animtree);
-  self SetFlaggedAnimKnobRestart("idle", % fxanim_gp_ceiling_fan_old_slow_anim, 1, 0.0, 1);
+  self SetFlaggedAnimKnobRestart("idle", %fxanim_gp_ceiling_fan_old_slow_anim, 1, 0.0, 1);
   self waittill("broken", destructible_event, attacker);
   if(destructible_event == "stop_idle") {
     self DoDamage(5000, self.origin);
-    self SetFlaggedAnimKnobRestart("idle", % fxanim_gp_ceiling_fan_old_dest_anim, 1, 0.0, 1);
+    self SetFlaggedAnimKnobRestart("idle", %fxanim_gp_ceiling_fan_old_dest_anim, 1, 0.0, 1);
   }
 }
 
@@ -170,7 +168,7 @@ destructible_barrel_explosion(attacker, physics_explosion) {
 #using_animtree("vehicles");
 destructible_car_explosion(attacker) {
   self UseAnimTree(#animtree);
-  self SetAnim( % veh_car_destroy, 1.0, 0.0, 1.0);
+  self SetAnim(%veh_car_destroy, 1.0, 0.0, 1.0);
   if(self.classname != "script_vehicle") {
     self.destructiblecar = true;
     self RadiusDamage(self.origin, 250, 500, 80, attacker, "MOD_EXPLOSIVE");

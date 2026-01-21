@@ -335,10 +335,10 @@ uaz_overrides() {
 
 override_roto_anim() {
   self endon("death");
-  var_0 = getanimlength( % mi28_rotors_add);
+  var_0 = getanimlength(%mi28_rotors_add);
 
   for(;;) {
-    self setanim( % mi28_rotors_add, 1, 0.2, 1);
+    self setanim(%mi28_rotors_add, 1, 0.2, 1);
     wait(var_0);
   }
 }

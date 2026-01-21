@@ -248,11 +248,7 @@ opening_russian_corpse() {
 }
 
 test_tanks() {
-  tank = spawnvehicle("vehicle_rus_tracked_t34",
-    "tank",
-    "t34",
-    (2800, -6613, -666),
-    (0, 0, 0));
+  tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", (2800, -6613, -666), (0, 0, 0));
   level.ev2_tank_3_can_mount = true;
   level thread maps\see1_event2::pacing_get_on_tank_3b(tank);
 }
@@ -893,11 +889,7 @@ play_puddle_fx(tank_origin, target_origin) {
 
 opening_tank_1() {
   start_node_1 = getvehiclenode("opening_tank_1_start", "targetname");
-  tank1 = spawnvehicle("vehicle_rus_tracked_t34",
-    "tank1",
-    "t34",
-    start_node_1.origin,
-    start_node_1.angles);
+  tank1 = spawnvehicle("vehicle_rus_tracked_t34", "tank1", "t34", start_node_1.origin, start_node_1.angles);
   tank1.vehicletype = "t34";
   vehicle_init(tank1);
   tank1 attachPath(start_node_1);
@@ -924,11 +916,7 @@ opening_tank_1() {
 
 opening_tank_2() {
   start_node_2 = getvehiclenode("opening_tank_2_start", "targetname");
-  tank2 = spawnvehicle("vehicle_rus_tracked_t34",
-    "tank2",
-    "t34",
-    start_node_2.origin,
-    start_node_2.angles);
+  tank2 = spawnvehicle("vehicle_rus_tracked_t34", "tank2", "t34", start_node_2.origin, start_node_2.angles);
   tank2.vehicletype = "t34";
   vehicle_init(tank2);
   tank2 attachPath(start_node_2);
@@ -997,11 +985,7 @@ opening_spawn_more_tanks() {
 }
 
 opening_spawn_move_tank(start_node) {
-  tank = spawnvehicle("vehicle_rus_tracked_t34",
-    "tank",
-    "t34",
-    start_node.origin,
-    start_node.angles);
+  tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
   tank attachPath(start_node);
   tank.health = 100000;
   tank startpath();
@@ -1288,11 +1272,7 @@ opening_plane_flash() {
   wait(2);
   level thread opening_flashes();
   start_node = getvehiclenode("opening_plane_start", "targetname");
-  plane = spawnvehicle("vehicle_rus_airplane_il2",
-    "plane",
-    "stuka",
-    start_node.origin,
-    start_node.angles);
+  plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
   plane attachPath(start_node);
   plane startpath();
   plane playSound("fly_by");

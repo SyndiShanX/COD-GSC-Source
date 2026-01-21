@@ -465,8 +465,6 @@ debug_circle(origin, radius, color, time) {}
 debug_sphere(origin, radius, color, alpha, time) {}
 debug_cylinder(origin, radius, height, color, mustRenderHeight, time) {}
 getPointOnLine(startPoint, endPoint, ratio) {
-  nextPoint = (startPoint[0] + ((endPoint[0] - startPoint[0]) * ratio),
-    startPoint[1] + ((endPoint[1] - startPoint[1]) * ratio),
-    startPoint[2] + ((endPoint[2] - startPoint[2]) * ratio));
+  nextPoint = (startPoint[0] + ((endPoint[0] - startPoint[0]) * ratio), startPoint[1] + ((endPoint[1] - startPoint[1]) * ratio), startPoint[2] + ((endPoint[2] - startPoint[2]) * ratio));
   return nextPoint;
 }

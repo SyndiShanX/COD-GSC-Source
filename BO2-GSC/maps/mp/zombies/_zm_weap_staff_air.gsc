@@ -410,9 +410,7 @@ staff_air_death_event() {
     self thread maps\mp\zombies\_zm_audio::do_zombies_playvocals("death", self.animname);
     self thread zombie_eye_glow_stop();
 
-    if(isDefined(level.ragdoll_limit_check) && ![
-        [level.ragdoll_limit_check]
-      ]())
+    if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]())
       level thread staff_air_gib(self);
     else {
       self startragdoll();

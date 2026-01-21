@@ -255,7 +255,7 @@ sidequest_logic_1() {
   clientnotify("start_fireball_dragon_b");
   wait 0.1;
   clientnotify("fxanim_dragon_b_start");
-  wait(getanimlength( % fxanim_zom_highrise_dragon_b_anim));
+  wait(getanimlength(%fxanim_zom_highrise_dragon_b_anim));
   exploder(1002);
   level thread vo_richtofen_punch_tower();
 }
@@ -269,7 +269,7 @@ sidequest_logic_2() {
   clientnotify("start_fireball_dragon_a");
   wait 0.1;
   clientnotify("fxanim_dragon_a_start");
-  wait(getanimlength( % fxanim_zom_highrise_dragon_a_anim));
+  wait(getanimlength(%fxanim_zom_highrise_dragon_a_anim));
   exploder(902);
   flag_set("sq_branch_complete");
   flag_set("sq_max_tower_complete");

@@ -183,8 +183,7 @@ player_napalm_radius_overlay_fade() {
   prevFrac = 0.0;
   while(1) {
     frac = 0.0;
-    if(!isDefined(level.napalm_zombie) || isDefined(level.napalm_zombie.wet) && level.napalm_zombie.wet ||
-      player_can_see_napalm(level.napalm_zombie)) {
+    if(!isDefined(level.napalm_zombie) || isDefined(level.napalm_zombie.wet) && level.napalm_zombie.wet || player_can_see_napalm(level.napalm_zombie)) {
       frac = 0.0;
     } else {
       dist_to_napalm = distancesquared(self.origin, level.napalm_zombie.origin);

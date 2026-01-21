@@ -1509,7 +1509,7 @@ init_gunboats() {
   level.vttype = "gunboat";
   level.vtmodel = "vehicle_gun_boat_iw6";
   level.vtclassname = "script_vehicle_gunboat";
-  maps\_vehicle::build_drive( % carrier_rappel_defend_gun_boat_moving, % carrier_rappel_defend_gun_boat_moving, 17);
+  maps\_vehicle::build_drive(%carrier_rappel_defend_gun_boat_moving, %carrier_rappel_defend_gun_boat_moving, 17);
 }
 
 spawn_gunboat(var_0, var_1) {

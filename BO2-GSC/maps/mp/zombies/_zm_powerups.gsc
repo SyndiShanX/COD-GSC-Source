@@ -298,9 +298,7 @@ get_valid_powerup() {
   powerup = get_next_powerup();
 
   while(true) {
-    if(![
-        [level.zombie_powerups[powerup].func_should_drop_with_regular_powerups]
-      ]()) {
+    if(![[level.zombie_powerups[powerup].func_should_drop_with_regular_powerups]]()) {
       powerup = get_next_powerup();
       continue;
     }
@@ -537,9 +535,7 @@ quantum_bomb_random_powerup_result(position) {
       }
 
       self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("kill", "quant_good");
-      [
-        [level.quantum_bomb_play_player_effect_at_position_func]
-      ](position);
+      [[level.quantum_bomb_play_player_effect_at_position_func]](position);
       level specific_powerup_drop(keys[index], position);
       return;
     } else
@@ -558,9 +554,7 @@ quantum_bomb_random_zombie_grab_powerup_result(position) {
 
     if(level.zombie_powerups[keys[index]].zombie_grabbable) {
       self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("kill", "quant_bad");
-      [
-        [level.quantum_bomb_play_player_effect_at_position_func]
-      ](position);
+      [[level.quantum_bomb_play_player_effect_at_position_func]](position);
       level specific_powerup_drop(keys[index], position);
       return;
     } else
@@ -1159,9 +1153,7 @@ powerup_vo(type) {
   self endon("disconnect");
 
   if(isDefined(level.powerup_vo_available)) {
-    if(![
-        [level.powerup_vo_available]
-      ]())
+    if(![[level.powerup_vo_available]]())
       return;
   }
 
@@ -1604,9 +1596,7 @@ toggle_fire_sale_on() {
   }
   if(level.zombie_vars["zombie_powerup_fire_sale_on"]) {
     for(i = 0; i < level.chests.size; i++) {
-      show_firesale_box = level.chests[i][
-        [level._zombiemode_check_firesale_loc_valid_func]
-      ]();
+      show_firesale_box = level.chests[i][[level._zombiemode_check_firesale_loc_valid_func]]();
 
       if(show_firesale_box) {
         level.chests[i].zombie_cost = 10;
@@ -1626,9 +1616,7 @@ toggle_fire_sale_on() {
     waittillframeend;
 
     for(i = 0; i < level.chests.size; i++) {
-      show_firesale_box = level.chests[i][
-        [level._zombiemode_check_firesale_loc_valid_func]
-      ]();
+      show_firesale_box = level.chests[i][[level._zombiemode_check_firesale_loc_valid_func]]();
 
       if(show_firesale_box) {
         if(level.chest_index != i && isDefined(level.chests[i].was_temp)) {

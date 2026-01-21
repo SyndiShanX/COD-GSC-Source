@@ -32,12 +32,9 @@ main(allowed) {
   return;
 }
 
-entity_is_allowed(
-  entity,
-  allowed_game_modes) {
+entity_is_allowed(entity, allowed_game_modes) {
   allowed = true;
-  if(isDefined(entity.script_gameobjectname) &&
-    entity.script_gameobjectname != "[all_modes]") {
+  if(isDefined(entity.script_gameobjectname) && entity.script_gameobjectname != "[all_modes]") {
     allowed = false;
     gameobjectnames = strtok(entity.script_gameobjectname, " ");
     for(i = 0; i < allowed_game_modes.size && !allowed; i++) {
@@ -49,8 +46,7 @@ entity_is_allowed(
   return allowed;
 }
 
-filter_script_vehicles_from_vehicle_descriptors(
-  allowed_game_modes) {
+filter_script_vehicles_from_vehicle_descriptors(allowed_game_modes) {
   vehicle_descriptors = getEntArray("vehicle_descriptor", "targetname");
   script_vehicles = getEntArray("script_vehicle", "classname");
   vehicles_to_remove = [];

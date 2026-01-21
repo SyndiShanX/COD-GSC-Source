@@ -33,18 +33,7 @@ init() {
 
 setup_destructibles() {
   if(isDefined(self.destructibledef)) {
-    if(
-      self.destructibledef == "dest_audi_mp" ||
-      self.destructibledef == "dest_beetle_mp" ||
-      self.destructibledef == "dest_bmwmotorcycle_mp" ||
-      self.destructibledef == "dest_horch1a_mp" ||
-      self.destructibledef == "dest_mercedesw136_mp" ||
-      self.destructibledef == "dest_opel_blitz_mp" ||
-      self.destructibledef == "dest_peleliu_generator_mobile_mp" ||
-      self.destructibledef == "dest_ptboat_mp" ||
-      self.destructibledef == "dest_type94truck_mp" ||
-      self.destructibledef == "dest_type94truckcamo_mp" ||
-      self.destructibledef == "dest_type95scoutcar_mp") {
+    if(self.destructibledef == "dest_audi_mp" || self.destructibledef == "dest_beetle_mp" || self.destructibledef == "dest_bmwmotorcycle_mp" || self.destructibledef == "dest_horch1a_mp" || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_opel_blitz_mp" || self.destructibledef == "dest_peleliu_generator_mobile_mp" || self.destructibledef == "dest_ptboat_mp" || self.destructibledef == "dest_type94truck_mp" || self.destructibledef == "dest_type94truckcamo_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
       self thread destructibles_think();
     }
   }
@@ -88,19 +77,10 @@ destructibles_think() {
 }
 
 playDestructibleBattleChatter() {
-  if(
-    self.destructibledef == "dest_audi_mp" ||
-    self.destructibledef == "dest_beetle_mp" ||
-    self.destructibledef == "dest_horch1a_mp" ||
-    self.destructibledef == "dest_mercedesw136_mp" ||
-    self.destructibledef == "dest_type95scoutcar_mp") {
+  if(self.destructibledef == "dest_audi_mp" || self.destructibledef == "dest_beetle_mp" || self.destructibledef == "dest_horch1a_mp" || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
     level thread maps\mp\gametypes\_battlechatter_mp::onPlayerNearExplodable(self, "car");
     return;
-  } else if(
-    self.destructibledef == "dest_opel_blitz_mp" ||
-    self.destructibledef == "dest_ptboat_mp" ||
-    self.destructibledef == "dest_type94truckcamo_mp" ||
-    self.destructibledef == "dest_type94truck_mp") {
+  } else if(self.destructibledef == "dest_opel_blitz_mp" || self.destructibledef == "dest_ptboat_mp" || self.destructibledef == "dest_type94truckcamo_mp" || self.destructibledef == "dest_type94truck_mp") {
     level thread maps\mp\gametypes\_battlechatter_mp::onPlayerNearExplodable(self, "truck");
     return;
   }
@@ -108,24 +88,13 @@ playDestructibleBattleChatter() {
 
 destructible_vehicle_play_explosion_sound() {
   if(isDefined(self.destructibleDef)) {
-    if(
-      self.destructibledef == "dest_bmwmotorcycle_mp" ||
-      self.destructibledef == "dest_peleliu_generator_mobile_mp") {
+    if(self.destructibledef == "dest_bmwmotorcycle_mp" || self.destructibledef == "dest_peleliu_generator_mobile_mp") {
       self playSound("car_explo_small");
       return;
-    } else if(
-      self.destructibledef == "dest_audi_mp" ||
-      self.destructibledef == "dest_beetle_mp" ||
-      self.destructibledef == "dest_horch1a_mp" ||
-      self.destructibledef == "dest_mercedesw136_mp" ||
-      self.destructibledef == "dest_type95scoutcar_mp") {
+    } else if(self.destructibledef == "dest_audi_mp" || self.destructibledef == "dest_beetle_mp" || self.destructibledef == "dest_horch1a_mp" || self.destructibledef == "dest_mercedesw136_mp" || self.destructibledef == "dest_type95scoutcar_mp") {
       self playSound("car_explo_med");
       return;
-    } else if(
-      self.destructibledef == "dest_opel_blitz_mp" ||
-      self.destructibledef == "dest_ptboat_mp" ||
-      self.destructibledef == "dest_type94truckcamo_mp" ||
-      self.destructibledef == "dest_type94truck_mp") {
+    } else if(self.destructibledef == "dest_opel_blitz_mp" || self.destructibledef == "dest_ptboat_mp" || self.destructibledef == "dest_type94truckcamo_mp" || self.destructibledef == "dest_type94truck_mp") {
       self playSound("car_explo_large");
       return;
     }
@@ -144,8 +113,7 @@ printHealth() {
 destructible_vehicle_damage_to_death() {
   self.destructible_type = "vehicle_mp";
   offset = (0, 0, 1);
-  if(self.destructibledef == "dest_bmwmotorcycle_mp" ||
-    self.destructibledef == "dest_peleliu_generator_mobile_mp") {
+  if(self.destructibledef == "dest_bmwmotorcycle_mp" || self.destructibledef == "dest_peleliu_generator_mobile_mp") {
     radiusDamage(self.origin, 128, 400, 25);
     self dodamage(20000, self.origin + offset, self.damageOwner);
   } else {

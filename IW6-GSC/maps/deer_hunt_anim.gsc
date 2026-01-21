@@ -247,7 +247,7 @@ rebar_rotate() {
 #using_animtree("vehicles");
 
 vehicles_anim() {
-  custom_hind_death( % battle_hind_explode_c, "battle_hind_explode_singleV3");
+  custom_hind_death(%battle_hind_explode_c, "battle_hind_explode_singleV3");
 }
 
 custom_hind_death(var_0, var_1) {

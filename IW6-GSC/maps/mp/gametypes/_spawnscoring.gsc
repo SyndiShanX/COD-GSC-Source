@@ -207,9 +207,7 @@ isPlayerInCombat(player, bUseLessStrictHealthCheck) {
   }
 
   if(isDefined(bUseLessStrictHealthCheck) && bUseLessStrictHealthCheck) {
-    if(player.health < player.maxhealth &&
-      (!isDefined(player.lastDamagedTime) || GetTime() < player.lastDamagedTime + DAMAGE_COOLDOWN)
-    ) {
+    if(player.health < player.maxhealth && (!isDefined(player.lastDamagedTime) || GetTime() < player.lastDamagedTime + DAMAGE_COOLDOWN)) {
       debugCombatCheck(player, "RecentDamage");
       return true;
     }
@@ -265,17 +263,7 @@ findBuddyPathNode(buddy, playerHeight, cosAngle) {
       dot = VectorDot(buddyDir, directionToNode);
 
       if(getMapName() == "mp_fahrenheit") {
-        if(buddyNode.origin == (1778.9, 171.6, 716) ||
-          buddyNode.origin == (1772.1, 271.4, 716) ||
-          buddyNode.origin == (1657.2, 259.6, 716) ||
-          buddyNode.origin == (1633.7, 333.9, 716) ||
-          buddyNode.origin == (1634.4, 415.7, 716) ||
-          buddyNode.origin == (1537.3, 419.3, 716) ||
-          buddyNode.origin == (1410.9, 420.8, 716) ||
-          buddyNode.origin == (1315.6, 416.6, 716) ||
-          buddyNode.origin == (1079.4, 414.6, 716) ||
-          buddyNode.origin == (982.9, 421.8, 716) ||
-          buddyNode.origin == (896.9, 423.8, 716))
+        if(buddyNode.origin == (1778.9, 171.6, 716) || buddyNode.origin == (1772.1, 271.4, 716) || buddyNode.origin == (1657.2, 259.6, 716) || buddyNode.origin == (1633.7, 333.9, 716) || buddyNode.origin == (1634.4, 415.7, 716) || buddyNode.origin == (1537.3, 419.3, 716) || buddyNode.origin == (1410.9, 420.8, 716) || buddyNode.origin == (1315.6, 416.6, 716) || buddyNode.origin == (1079.4, 414.6, 716) || buddyNode.origin == (982.9, 421.8, 716) || buddyNode.origin == (896.9, 423.8, 716))
           continue;
       }
 

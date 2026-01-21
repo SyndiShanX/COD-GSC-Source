@@ -22,7 +22,7 @@ main() {
   if(isDefined(self.moveplaybackrate))
     var_3 = self.moveplaybackrate;
 
-  self setflaggedanimknoballrestart("climbanim", var_0, % body, 1, 0.1, var_3);
+  self setflaggedanimknoballrestart("climbanim", var_0, %body, 1, 0.1, var_3);
   var_4 = getmovedelta(var_1, 0, 1);
   var_5 = self getnegotiationendnode();
   var_6 = var_5.origin - var_4 + (0, 0, 1);
@@ -33,7 +33,7 @@ main() {
   if(var_9 > 0) {
     self.allowpain = 1;
     animscripts\notetracks::donotetracksfortime(var_9, "climbanim");
-    self setflaggedanimknoballrestart("climbanim", var_1, % body, 1, 0.1, var_3);
+    self setflaggedanimknoballrestart("climbanim", var_1, %body, 1, 0.1, var_3);
     animscripts\shared::donotetracks("climbanim");
   }
 

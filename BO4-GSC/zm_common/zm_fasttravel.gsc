@@ -968,8 +968,7 @@ function_a78584c0(var_6c365dbf) {
   self allowcrouch(1);
   self allowprone(1);
   self notify(#"fasttravel_over", {
-    #str_type: # "vortex"
-  });
+    #str_type: # "vortex"});
 }
 
 function_9ff6bcf6(var_c34665fc) {

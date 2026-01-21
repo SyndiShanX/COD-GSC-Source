@@ -1859,9 +1859,7 @@ function monitordamage(killstreak_ref, max_health, destroyed_callback, low_healt
       continue;
     }
     if(isDefined(self.killstreakdamagemodifier)) {
-      damage = [
-        [self.killstreakdamagemodifier]
-      ](damage, attacker, direction, point, type, tagname, modelname, partname, weapon, flags, inflictor, chargelevel);
+      damage = [[self.killstreakdamagemodifier]](damage, attacker, direction, point, type, tagname, modelname, partname, weapon, flags, inflictor, chargelevel);
       if(damage <= 0) {
         continue;
       }

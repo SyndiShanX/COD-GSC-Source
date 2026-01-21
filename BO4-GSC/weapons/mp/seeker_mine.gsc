@@ -155,9 +155,7 @@ function_bff5c062(var_c75e900a, attackingplayer) {
     var_c75e900a vehicle_ai::set_state("seek");
 
     if(isDefined(level.var_f1edf93f)) {
-      var_eb79e7c3 = [
-        [level.var_f1edf93f]
-      ]();
+      var_eb79e7c3 = [[level.var_f1edf93f]]();
       var_c75e900a.var_672e0d51 = gettime() + int(var_eb79e7c3 * 1000);
     }
 

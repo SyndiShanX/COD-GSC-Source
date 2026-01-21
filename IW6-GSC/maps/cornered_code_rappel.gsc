@@ -217,7 +217,7 @@ cnd_delay_rope_link() {
 }
 
 cnd_plyr_rope_set_idle() {
-  level.cnd_rappel_player_rope setanim( % cnd_rappel_idle_rope_player, 1, 0, 1);
+  level.cnd_rappel_player_rope setanim(%cnd_rappel_idle_rope_player, 1, 0, 1);
 }
 
 cnd_plyr_rpl_legs_setup(var_0, var_1) {
@@ -317,7 +317,7 @@ cnd_plyr_rpl_setup_globals(var_0, var_1, var_2) {
   var_0.wind_last_state = "calm";
   var_0.wind_pushing_player = 0;
   var_0.player_anim_origin = cnd_get_plyr_anim_origin();
-  var_0.player_anim_origin setanim( % rappel_player_look_center, 1.0, 0, 1);
+  var_0.player_anim_origin setanim(%rappel_player_look_center, 1.0, 0, 1);
   var_0.player_anim_origin thread watch_footstep_notetrack();
 
   if(var_2 == "rope_ref_stealth")
@@ -736,8 +736,8 @@ cnd_rpl_handle_jumping_toward_allies(var_0) {
 }
 
 cnd_rpl_do_stop_sway(var_0, var_1) {
-  var_2 = var_0.player_anim_origin getanimweight( % rappel_player_stop_l) > 0;
-  var_3 = var_0.player_anim_origin getanimweight( % rappel_player_stop_r) > 0;
+  var_2 = var_0.player_anim_origin getanimweight(%rappel_player_stop_l) > 0;
+  var_3 = var_0.player_anim_origin getanimweight(%rappel_player_stop_r) > 0;
   var_4 = var_2 || var_3;
   var_5 = abs(var_0.down_move_strength) > 0.2 || abs(var_0.right_move_strength) > 0.2;
 
@@ -766,8 +766,8 @@ cnd_rpl_do_stop_sway(var_0, var_1) {
     var_7 = 0.2;
     var_0.player_anim_origin setanimrestart(var_6, 1.0, var_7, 1.0);
 
-    if(var_0.player_anim_origin getanimweight( % rappel_player_wind_push) > 0)
-      var_0.player_anim_origin clearanim( % rappel_player_wind_push, var_7);
+    if(var_0.player_anim_origin getanimweight(%rappel_player_wind_push) > 0)
+      var_0.player_anim_origin clearanim(%rappel_player_wind_push, var_7);
 
     var_0.clearing_sways = undefined;
   }
@@ -821,11 +821,11 @@ cnd_rpl_do_wind(var_0, var_1) {
     var_0.player_anim_origin setanimrestart(var_7, 1.0, var_8, 1.0);
     var_0.player_anim_origin playrumbleonentity("light_in_out_2s");
 
-    if(var_0.player_anim_origin getanimweight( % rappel_player_stop_l) > 0)
-      var_0.player_anim_origin clearanim( % rappel_player_stop_l, var_8);
+    if(var_0.player_anim_origin getanimweight(%rappel_player_stop_l) > 0)
+      var_0.player_anim_origin clearanim(%rappel_player_stop_l, var_8);
 
-    if(var_0.player_anim_origin getanimweight( % rappel_player_stop_r) > 0)
-      var_0.player_anim_origin clearanim( % rappel_player_stop_r, var_8);
+    if(var_0.player_anim_origin getanimweight(%rappel_player_stop_r) > 0)
+      var_0.player_anim_origin clearanim(%rappel_player_stop_r, var_8);
   } else if(var_0.wind_pushing_player && var_0.wind_strength >= 1 && var_0.wind_state == "steady") {
     var_0.wind_random_next_time = gettime() + var_6 * 1000;
     var_0.wind_strength = 1;
@@ -866,12 +866,12 @@ cnd_rpl_do_rope(var_0, var_1) {
   var_7 = var_0.wind_state == "up" || var_0.wind_state == "down" || var_0.wind_state == "steady" || var_0.wind_state == "strong";
   var_8 = var_0.wind_state == "up" && var_0.wind_last_state != "up";
   var_9 = var_0.wind_state == "calm";
-  var_10 = var_0.wind_state == "stop" && level.cnd_rappel_player_rope getanimweight( % cnd_rappel_wind_shake_rope_player) > 0;
+  var_10 = var_0.wind_state == "stop" && level.cnd_rappel_player_rope getanimweight(%cnd_rappel_wind_shake_rope_player) > 0;
   var_11 = 0.06;
-  var_12 = level.cnd_rappel_player_rope getanimtime( % cnd_rappel_lag_r_rope_player);
-  var_13 = level.cnd_rappel_player_rope getanimtime( % cnd_rappel_lag_l_rope_player);
-  var_14 = level.cnd_rappel_player_rope getanimtime( % cnd_rappel_shake_rope_player);
-  var_15 = level.cnd_rappel_player_rope getanimtime( % cnd_rappel_jump_shake_rope_player);
+  var_12 = level.cnd_rappel_player_rope getanimtime(%cnd_rappel_lag_r_rope_player);
+  var_13 = level.cnd_rappel_player_rope getanimtime(%cnd_rappel_lag_l_rope_player);
+  var_14 = level.cnd_rappel_player_rope getanimtime(%cnd_rappel_shake_rope_player);
+  var_15 = level.cnd_rappel_player_rope getanimtime(%cnd_rappel_jump_shake_rope_player);
   var_16 = var_12 > 0 && var_12 < 1;
   var_17 = var_13 > 0 && var_13 < 1;
   var_18 = var_14 > 0 && var_14 < 1;
@@ -880,23 +880,23 @@ cnd_rpl_do_rope(var_0, var_1) {
 
   if(var_5) {
     if(var_0.stop_anim_direction == "left")
-      level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_lag_l_rope_player, 1, 0.2, 1);
+      level.cnd_rappel_player_rope setanimknobrestart(%cnd_rappel_lag_l_rope_player, 1, 0.2, 1);
     else
-      level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_lag_r_rope_player, 1, 0.2, 1);
+      level.cnd_rappel_player_rope setanimknobrestart(%cnd_rappel_lag_r_rope_player, 1, 0.2, 1);
   } else if(var_6)
-    level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_shake_rope_player, 1, 0.2, 1);
+    level.cnd_rappel_player_rope setanimknobrestart(%cnd_rappel_shake_rope_player, 1, 0.2, 1);
   else {
     if(var_20) {
       return;
     }
     if(var_8)
-      level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
+      level.cnd_rappel_player_rope setanimknob(%cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
     else if(var_7)
-      level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
+      level.cnd_rappel_player_rope setanimknob(%cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
     else if(var_10)
-      level.cnd_rappel_player_rope setanimknob( % cnd_rappel_idle_rope_player_add, 1.0, 0.2, 1.0);
+      level.cnd_rappel_player_rope setanimknob(%cnd_rappel_idle_rope_player_add, 1.0, 0.2, 1.0);
     else if(var_9)
-      level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_11);
+      level.cnd_rappel_player_rope setanimknob(%cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_11);
     else {}
   }
 }
@@ -2037,9 +2037,9 @@ rappel_rope_additive_jump_animations(var_0, var_1) {
   if(var_0.rappel_type == "inverted") {
     return;
   }
-  level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_idle_rope_player_add, 1.0, 0.5, 1.0);
+  level.cnd_rappel_player_rope setanimknobrestart(%cnd_rappel_idle_rope_player_add, 1.0, 0.5, 1.0);
   wait(var_1 - 0.3);
-  level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_jump_shake_rope_player, 1, 0, 1);
+  level.cnd_rappel_player_rope setanimknobrestart(%cnd_rappel_jump_shake_rope_player, 1, 0, 1);
 }
 
 rappel_rope_animate_rotate(var_0, var_1, var_2, var_3) {

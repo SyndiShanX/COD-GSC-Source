@@ -620,7 +620,7 @@ ghostidleloop(var_0, var_1) {
   level endon("entangler_removed_" + var_1.name);
   for(;;) {
     var_0 scriptmodelplayanim("IW7_cp_zom_ghost_trapped_idle", 1);
-    var_2 = getanimlength( % iw7_cp_zom_ghost_trapped_idle);
+    var_2 = getanimlength(%iw7_cp_zom_ghost_trapped_idle);
     wait(var_2);
   }
 }
@@ -1002,9 +1002,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
   if(isplayer(var_1)) {
     if(isDefined(level.on_zombie_killed_quests_func)) {
-      [
-        [level.on_zombie_killed_quests_func]
-      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+      [[level.on_zombie_killed_quests_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     }
 
     if(isDefined(var_4) && var_4 == "iw7_knife_zm_cleaver") {
@@ -1025,9 +1023,7 @@ cp_final_onzombiekilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
   if(!scripts\cp\agents\gametype_zombie::isonhumanteam(self)) {
     scripts\cp\agents\gametype_zombie::enemykilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8);
     if(isDefined(level.onzombiekilledfunc)) {
-      [
-        [level.onzombiekilledfunc]
-      ](var_1, var_4);
+      [[level.onzombiekilledfunc]](var_1, var_4);
     }
   }
 

@@ -396,14 +396,7 @@ updateCinematicDoF() {
 
   self.curDoF = (self.dof["farStart"] - self.dof["nearEnd"]) / 2;
 
-  self SetDepthOfField(
-    self.dof["nearStart"],
-    self.dof["nearEnd"],
-    self.dof["farStart"],
-    self.dof["farEnd"],
-    self.dof["nearBlur"],
-    self.dof["farBlur"]
-  );
+  self SetDepthOfField(self.dof["nearStart"], self.dof["nearEnd"], self.dof["farStart"], self.dof["farEnd"], self.dof["nearBlur"], self.dof["farBlur"]);
 }
 
 updateDoF() {
@@ -559,14 +552,7 @@ setDoFTarget(adsFrac, nearStart, nearEnd, farStart, farEnd, nearBlur, farBlur) {
     lerpDoFValue("farBlur", farBlur, adsFrac);
   }
 
-  self SetDepthOfField(
-    self.dof["nearStart"],
-    self.dof["nearEnd"],
-    self.dof["farStart"],
-    self.dof["farEnd"],
-    self.dof["nearBlur"],
-    self.dof["farBlur"]
-  );
+  self SetDepthOfField(self.dof["nearStart"], self.dof["nearEnd"], self.dof["farStart"], self.dof["farEnd"], self.dof["nearBlur"], self.dof["farBlur"]);
 }
 
 changeDoFValue(valueName, targetValue, maxChange) {
@@ -616,23 +602,9 @@ setdefaultdepthoffield() {
   Assert(IsPlayer(self));
 
   if(isDefined(self.dofDefault)) {
-    self SetDepthOfField(
-      self.dofDefault["nearStart"],
-      self.dofDefault["nearEnd"],
-      self.dofDefault["farStart"],
-      self.dofDefault["farEnd"],
-      self.dofDefault["nearBlur"],
-      self.dofDefault["farBlur"]
-    );
+    self SetDepthOfField(self.dofDefault["nearStart"], self.dofDefault["nearEnd"], self.dofDefault["farStart"], self.dofDefault["farEnd"], self.dofDefault["nearBlur"], self.dofDefault["farBlur"]);
   } else {
-    self SetDepthOfField(
-      level.dofDefault["nearStart"],
-      level.dofDefault["nearEnd"],
-      level.dofDefault["farStart"],
-      level.dofDefault["farEnd"],
-      level.dofDefault["nearBlur"],
-      level.dofDefault["farBlur"]
-    );
+    self SetDepthOfField(level.dofDefault["nearStart"], level.dofDefault["nearEnd"], level.dofDefault["farStart"], level.dofDefault["farEnd"], level.dofDefault["nearBlur"], level.dofDefault["farBlur"]);
   }
 }
 

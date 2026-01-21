@@ -225,7 +225,6 @@ gotLoot() {
   baseChance = level.lootBaseChance;
   idealLootTime = level.lootIdealTime;
   maxLootChance = 0.50; // 50%
-
   chanceMod = min(self.timeSinceLastLoot / idealLootTime, 1);
   chanceMod = chanceMod * chanceMod;
 
@@ -247,8 +246,7 @@ getLootName(tier) {
   if(!isDefined(self.droppedLootNames))
     self.droppedLootNames = [];
 
-  for(
-    try = 0;
+  for(try = 0;
     try < 10;
     try ++) {
     lootName = self GetRandomLoot(tier);

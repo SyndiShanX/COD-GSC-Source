@@ -68,10 +68,8 @@ refillExplosiveWeapons() {
 
   if(isDefined(weaponList)) {
     foreach(weaponName in weaponList) {
-      if(maps\mp\gametypes\_weapons::isGrenade(weaponName) ||
-        maps\mp\gametypes\_weapons::isOffhandWeapon(weaponName)
-
-      ) {
+      if(maps\mp\gametypes\_weapons::isGrenade(weaponName) || maps\mp\gametypes\_weapons::isOffhandWeapon(weaponName)
+) {
         self GiveStartAmmo(weaponName);
       }
     }

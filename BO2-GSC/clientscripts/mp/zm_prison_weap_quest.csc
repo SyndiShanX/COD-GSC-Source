@@ -171,12 +171,12 @@ wolfhead_idle() {
   }
 
   while(true) {
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
     random_idle_anim = random(level.wolf_head_idle_anims);
     n_anim_length = getanimlength(random_idle_anim);
     self setanim(random_idle_anim, 1.0, 0.2, 1.0);
     wait(n_anim_length);
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
     random_twitch_anim = random(level.wolf_head_twitch_anims);
     n_anim_length = getanimlength(random_twitch_anim);
     self setanim(random_twitch_anim, 1.0, 0.2, 1.0);
@@ -247,7 +247,7 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   m_body useanimtree(#animtree);
   m_body.origin = self.origin - vectorscale((0, 0, 1), 1000.0);
   m_body show();
-  m_body clearanim( % root, 0.1);
+  m_body clearanim(%root, 0.1);
   m_body setanimrestart(level.fake_body_death_anim, 1, 0.2, 10);
   anim_time = getanimlength(level.fake_body_death_anim) / 10;
   wait 0.1;
@@ -277,7 +277,7 @@ wolfhead_pre_eat_aligned(body, localclientnum, direction) {
 
   iprintlnbold("Eating Zombie on the: " + direction);
 
-  m_wolf clearanim( % root, 0.1);
+  m_wolf clearanim(%root, 0.1);
   m_wolf setanimrestart(level.wolfhead_pre_eat_anims[direction], 1, 0.2, 1);
   m_body unlink();
   m_body show();
@@ -290,8 +290,8 @@ body_moveto_wolf(m_wolf, localclientnum) {
     self.m_soul_fx_player setModel("tag_origin");
   }
 
-  self clearanim( % root, 0.1);
-  self setanimrestart( % ai_zombie_dreamcatch_rise, 1, 0.2, 1);
+  self clearanim(%root, 0.1);
+  self setanimrestart(%ai_zombie_dreamcatch_rise, 1, 0.2, 1);
   vec_dir = m_wolf.origin - self.origin;
   vec_dir_scaled = vectorscale(vec_dir, 0.2);
   self.m_soul_fx_player.angles = vectortoangles(vec_dir);
@@ -300,8 +300,8 @@ body_moveto_wolf(m_wolf, localclientnum) {
   self playSound(0, "evt_soulsuck_body");
   self moveto(self.origin + vec_dir_scaled, 1.5, 1.5);
   self waittill("movedone");
-  self clearanim( % root, 0.1);
-  self setanimrestart( % ai_zombie_dreamcatch_shrink_a, 1, 0.2, 1);
+  self clearanim(%root, 0.1);
+  self setanimrestart(%ai_zombie_dreamcatch_shrink_a, 1, 0.2, 1);
   zombie_move_offset = anglesToForward(m_wolf.angles) * 36 + anglestoup(m_wolf.angles) * 0;
   self moveto(m_wolf.origin + zombie_move_offset, 0.5, 0.5);
   self waittill("movedone");
@@ -327,8 +327,8 @@ wolfhead_eat_aligned(body, localclientnum, direction) {
   body.origin = self gettagorigin("tag_mouth_fx");
   body.angles = self gettagangles("tag_mouth_fx");
   body linkto(self, "tag_mouth_fx", (0, 0, 0), (0, 0, 0));
-  self clearanim( % root, 0.1);
-  body clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
+  body clearanim(%root, 0.1);
   n_anim_length = getanimlength(level.wolfhead_eat_anims[direction]);
   self playSound(0, "evt_wolfhead_eat");
   self thread play_blood_fx_on_bite(localclientnum);
@@ -350,7 +350,7 @@ play_blood_fx_on_bite(localclientnum) {
 }
 
 wolfhead_depart(localclientnum, rune) {
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self setanimrestart(level.wolfhead_outtro_anim, 1.0, 0.2, 1.0);
   rune_forward = anglesToForward(rune.angles + vectorscale((0, 1, 0), 90.0));
   rune_up = anglestoup(rune.angles);

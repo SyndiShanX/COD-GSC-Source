@@ -170,14 +170,7 @@ onPlayerConnect() {
 
     player.postGamePromotion = false;
     if(!isDefined(player.pers["postGameChallenges"])) {
-      player setClientDvars("ui_challenge_1_ref", "",
-        "ui_challenge_2_ref", "",
-        "ui_challenge_3_ref", "",
-        "ui_challenge_4_ref", "",
-        "ui_challenge_5_ref", "",
-        "ui_challenge_6_ref", "",
-        "ui_challenge_7_ref", ""
-      );
+      player setClientDvars("ui_challenge_1_ref", "", "ui_challenge_2_ref", "", "ui_challenge_3_ref", "", "ui_challenge_4_ref", "", "ui_challenge_5_ref", "", "ui_challenge_6_ref", "", "ui_challenge_7_ref", "");
     }
 
     player setClientDvar("ui_promotion", 0);

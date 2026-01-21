@@ -957,13 +957,7 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
 }
 
 is_arc_death(eInflictor, eAttacker, attacker_defined, attacker_is_player, inflictor_defined, inflictor_is_player) {
-  return (attacker_defined &&
-    attacker_is_player &&
-    inflictor_defined &&
-    !inflictor_is_player &&
-    isDefined(eAttacker.stun_struct) &&
-    isDefined(eAttacker.stun_struct.attack_bolt) &&
-    eInflictor == eAttacker.stun_struct.attack_bolt);
+  return (attacker_defined && attacker_is_player && inflictor_defined && !inflictor_is_player && isDefined(eAttacker.stun_struct) && isDefined(eAttacker.stun_struct.attack_bolt) && eInflictor == eAttacker.stun_struct.attack_bolt);
 }
 
 update_alien_damage_challenge(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, alien) {

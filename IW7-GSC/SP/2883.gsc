@@ -831,7 +831,7 @@ func_CD4F(var_0, var_1) {
 }
 
 func_4179() {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
 }
 
 func_9C3D(var_0, var_1) {
@@ -1270,14 +1270,14 @@ func_9A11() {
         if(var_10 >= 90 && !var_25 && !scripts\sp\utility::func_65DB("playing_interaction")) {
           var_25 = 1;
           func_10C47(self.var_B004["reacquire_right"]);
-          self clearanim( % body, 0.25);
+          self clearanim(%body, 0.25);
           self func_82EA(var_1, self.var_B004["reacquire_right"], 1, 0.25);
           wait(clamp(getanimlength(self.var_B004["reacquire_right"]) - 0.25, 0, 100));
           self clearanim(self.var_B004["reacquire_right"], 0.25);
         } else if(var_10 < -90 && !var_25 && !scripts\sp\utility::func_65DB("playing_interaction")) {
           var_25 = 1;
           func_10C47(self.var_B004["reacquire_left"]);
-          self clearanim( % body, 0.25);
+          self clearanim(%body, 0.25);
           self func_82EA(var_1, self.var_B004["reacquire_left"], 1, 0.25);
           wait(clamp(getanimlength(self.var_B004["reacquire_left"]) - 0.25, 0, 100));
           self clearanim(self.var_B004["reacquire_left"], 0.25);
@@ -1552,20 +1552,20 @@ func_9A35() {
         if(isarray(var_14[0])) {
           func_10C47();
           if(self.var_1F25 >= var_14[0].size - 1) {
-            self func_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
+            self func_82E3(var_1, self.var_B004["end_idle"], %body, 1, var_6, 1);
           } else {
-            self func_82E3(var_1, var_0, % body, 1, var_6, 1);
+            self func_82E3(var_1, var_0, %body, 1, var_6, 1);
           }
         } else {
-          self func_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
+          self func_82E3(var_1, self.var_B004["end_idle"], %body, 1, var_6, 1);
         }
       } else {
         func_10C47();
-        self func_82E3(var_1, self.var_B004["end_idle"], % body, 1, var_6, 1);
+        self func_82E3(var_1, self.var_B004["end_idle"], %body, 1, var_6, 1);
       }
     } else {
       func_10C47();
-      self func_82E3(var_1, var_0, % body, 1, var_6, 1);
+      self func_82E3(var_1, var_0, %body, 1, var_6, 1);
     }
 
     self.var_1F25 = self.var_1F25 + 1;
@@ -1916,7 +1916,7 @@ func_9842() {
   self func_82AC(self.var_B004["interaction_blend_parent"], 1, 0.2);
   var_1 = func_7A4C();
   self clearanim(var_1, 0.2);
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
   func_10C47(self.var_B004["fwd_anim"]);
   self func_82E8("single anim", self.var_B004["fwd_anim"], 0.005, 0.05);
   self func_82AC(self.var_B004["right_anim"], 0.005, 0.05);
@@ -1944,12 +1944,12 @@ func_CD4E(var_0) {
       var_1 = self.var_B004["end_idle"];
       func_10C47(var_1);
       self func_82B0(var_1, 0);
-      self func_82E3("single anim", var_1, % body, 1, var_0, 1);
+      self func_82E3("single anim", var_1, %body, 1, var_0, 1);
     } else {
       var_1 = func_7A4C();
       func_10C47(var_1);
       self func_82B0(var_1, 0);
-      self func_82E3("single anim", var_1, % body, 1, var_0, 1);
+      self func_82E3("single anim", var_1, %body, 1, var_0, 1);
     }
 
     wait(getanimlength(var_1));
@@ -2841,11 +2841,11 @@ func_43DB() {
   }
 
   func_10C47(var_8);
-  self func_82AC( % cover, 0, 0.25, 1);
-  self func_82E3("vo", var_8, % body, 1, 0.25, 1);
+  self func_82AC(%cover, 0, 0.25, 1);
+  self func_82E3("vo", var_8, %body, 1, 0.25, 1);
   wait(getanimlength(var_8));
-  self clearanim( % scripted, 0.25);
-  self func_82AC( % cover, 1, 0.25, 1);
+  self clearanim(%scripted, 0.25);
+  self func_82AC(%cover, 1, 0.25, 1);
   self.var_9C84 = 0;
   wait(0.25);
   self notify("interaction_done");

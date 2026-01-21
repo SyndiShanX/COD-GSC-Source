@@ -547,14 +547,14 @@ skyline_crash_start(ent) {
   clientnotify("sccs");
 
   if(!flag("harper_dead")) {
-    level.veh_player_cougar setanim( % v_la_04_04_crash_cougar_tag_player, 1, 0, 1);
+    level.veh_player_cougar setanim(%v_la_04_04_crash_cougar_tag_player, 1, 0, 1);
     level.player thread priority_dialog("shit_009", 1.5);
     kill_all_pending_dialog();
     run_scene_and_delete("cougar_crash");
   } else {
     level.player queue_dialog("ande_on_your_right_0");
     wait 1;
-    level.veh_player_cougar setanim( % v_la_04_04_crash_cougar_tag_player, 1, 0, 1);
+    level.veh_player_cougar setanim(%v_la_04_04_crash_cougar_tag_player, 1, 0, 1);
     level.player thread priority_dialog("shit_009", 0.5);
     kill_all_pending_dialog();
     wait 1.3;

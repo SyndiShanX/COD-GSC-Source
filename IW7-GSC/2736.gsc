@@ -805,9 +805,7 @@ carryobject_overridemovingplatformdeath(var_0) {
 
 setdropped(var_0) {
   if(isDefined(self.setdropped)) {
-    if([
-        [self.setdropped]
-      ]())
+    if([[self.setdropped]]())
       return;
   }
 

@@ -214,8 +214,7 @@ bot_set_loadout_class() {
       if(isDefined(self.override_class_function)) {
         self.bot_class = [
           }
-          [self.override_class_function]
-      ]();
+          [self.override_class_function]]();
       else {
         self.bot_class = scripts\mp\bots\bots_personality::bot_setup_callback_class();
       }
@@ -1653,9 +1652,7 @@ bot_crate_valid(var_0) {
   }
 
   if(isDefined(var_0.boxtype)) {
-    if(isDefined(level.boxsettings[var_0.boxtype]) && ![
-        [level.boxsettings[var_0.boxtype].canusecallback]
-      ]())
+    if(isDefined(level.boxsettings[var_0.boxtype]) && ![[level.boxsettings[var_0.boxtype].canusecallback]]())
       return 0;
 
     if(isDefined(var_0.disabled_use_for) && isDefined(var_0.disabled_use_for[self getentitynumber()]) && var_0.disabled_use_for[self getentitynumber()]) {

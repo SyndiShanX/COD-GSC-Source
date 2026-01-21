@@ -103,9 +103,7 @@ givekillreward(var_0, var_1, var_2, var_3) {
 
   if(scripts\engine\utility::flag_exist("cortex_started") && scripts\engine\utility::flag("cortex_started")) {
     if(isDefined(level.add_cortex_charge_func)) {
-      [
-        [level.add_cortex_charge_func]
-      ](var_1);
+      [[level.add_cortex_charge_func]](var_1);
     }
   }
 }

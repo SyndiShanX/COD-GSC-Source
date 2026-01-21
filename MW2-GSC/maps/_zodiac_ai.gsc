@@ -18,11 +18,11 @@ main() {
   anim.boatanims["left"].aim.left = % zodiac_rightside_aim4;
   anim.boatanims["left"].aim.center = % zodiac_rightside_aim5;
   anim.boatanims["left"].aim.right = % zodiac_rightside_aim6;
-  anim.boatanims["left"].reload = array( % zodiac_rightside_reload);
+  anim.boatanims["left"].reload = array(%zodiac_rightside_reload);
   anim.boatanims["left"].leftAimLimit = -49;
   anim.boatanims["left"].rightAimLimit = 48;
   anim.boatanims["left"].idle = % zodiac_rightside_idle;
-  anim.boatanims["left"].twitch = array( % zodiac_rightside_shift, % zodiac_rightside_react);
+  anim.boatanims["left"].twitch = array(%zodiac_rightside_shift, %zodiac_rightside_react);
 
   anim.boatanims["right"] = spawnStruct();
   anim.boatanims["right"].base = % zodiac_aim_right;
@@ -31,9 +31,9 @@ main() {
   anim.boatanims["right"].aim.left = % zodiac_leftside_aim4;
   anim.boatanims["right"].aim.center = % zodiac_leftside_aim5;
   anim.boatanims["right"].aim.right = % zodiac_leftside_aim6;
-  anim.boatanims["right"].reload = array( % zodiac_leftside_reload, % zodiac_leftside_reloadB);
+  anim.boatanims["right"].reload = array(%zodiac_leftside_reload, %zodiac_leftside_reloadB);
   anim.boatanims["right"].idle = % zodiac_leftside_idle;
-  anim.boatanims["right"].twitch = array( % zodiac_leftside_duck);
+  anim.boatanims["right"].twitch = array(%zodiac_leftside_duck);
   anim.boatanims["right"].leftAimLimit = -51;
   anim.boatanims["right"].rightAimLimit = 51;
 }
@@ -101,13 +101,13 @@ think() {
       transanim = anim.boatanims[self.a.boat_pose].trans;
       self.a.boat_pose = newPose;
       ent_flag_set("transitioning_positions");
-      self setFlaggedAnimKnobAllRestart("trans", transanim, % body, 1, 0.2);
+      self setFlaggedAnimKnobAllRestart("trans", transanim, %body, 1, 0.2);
       self animscripts\shared::DoNoteTracksForTime(getAnimLength(transanim) - 0.3, "trans");
       self.a.last_boat_pose_switch = gettime();
       ent_flag_clear("transitioning_positions");
 
       theanim = anim.boatanims[self.a.boat_pose].aim.center;
-      self setAnimKnobAllRestart(theanim, % body, 1, 0.2);
+      self setAnimKnobAllRestart(theanim, %body, 1, 0.2);
       self notify("boat_pose_change");
 
       self.a.boatAimYaw = 0;
@@ -169,7 +169,7 @@ boatReload() {
 
   self.a.wantBoatReloadTime = undefined;
 
-  self setFlaggedAnimKnobAllRestart("reload", reloadanim, % body, 1, 0.2);
+  self setFlaggedAnimKnobAllRestart("reload", reloadanim, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("reload");
 
   self animscripts\weaponList::RefillClip();
@@ -188,7 +188,7 @@ disableBoatIdle() {
   self notify("end_boat_idle");
   self.a.boatIdle = undefined;
 
-  self clearAnim( % zodiac_idle, 0.2);
+  self clearAnim(%zodiac_idle, 0.2);
 }
 
 enableBoatIdle() {
@@ -232,7 +232,7 @@ doBoatTwitch() {
     twitchAnim = twitches[randomint(twitches.size)];
   }
 
-  self setFlaggedAnimKnobAllRestart("twitch", twitchAnim, % body, 1, 0.2);
+  self setFlaggedAnimKnobAllRestart("twitch", twitchAnim, %body, 1, 0.2);
   self animscripts\shared::DoNoteTracks("twitch");
 
   self.a.lastBoatTwitchAnim = twitchAnim;
@@ -351,7 +351,7 @@ updateBoatAim() {
     self setAnimKnob(anims.aim.center, 1 - frac, 0.1);
     self setAnim(anims.aim.right, frac, 0.1);
   }
-  self setAnimKnobAll(anims.base, % zodiac_actions, 1, 0.2);
+  self setAnimKnobAll(anims.base, %zodiac_actions, 1, 0.2);
 
   self.a.boatAimYaw = aimYaw;
 }
@@ -465,7 +465,7 @@ setup_anim_array_boat() {
   self.a.array["fire"] = % exposed_shoot_auto_v3;
 
   if(self.a.boat_pose == "left") {
-    self.a.array["single"] = array( % zodiac_rightside_fire_single);
+    self.a.array["single"] = array(%zodiac_rightside_fire_single);
     self.a.array["burst2"] = % zodiac_rightside_fire_burst;
     self.a.array["burst3"] = % zodiac_rightside_fire_burst;
     self.a.array["burst4"] = % zodiac_rightside_fire_burst;
@@ -477,7 +477,7 @@ setup_anim_array_boat() {
     self.a.array["semi5"] = % zodiac_rightside_fire_burst;
     self.a.array["semi6"] = % zodiac_rightside_fire_burst;
   } else {
-    self.a.array["single"] = array( % zodiac_leftside_fire_single);
+    self.a.array["single"] = array(%zodiac_leftside_fire_single);
     self.a.array["burst2"] = % zodiac_leftside_fire_burst;
     self.a.array["burst3"] = % zodiac_leftside_fire_burst;
     self.a.array["burst4"] = % zodiac_leftside_fire_burst;

@@ -1763,13 +1763,13 @@ player_plant_network_intruder(poi) {
 ai_intruder_plant() {
   self endon("death");
   self.a.deathforceragdoll = 1;
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   network_intruder = spawn("script_model", self.origin);
   network_intruder.team = self.team;
   network_intruder setModel(level.rts.intrudermodel);
   self thread ai_intruder_plant_cleanup(network_intruder);
   self.a.movement = "stop";
-  self setflaggedanimknobrestart("plantAnim", % ai_plant_claymore, 1, 0.2, 1);
+  self setflaggedanimknobrestart("plantAnim", %ai_plant_claymore, 1, 0.2, 1);
   self animscripts\shared::donotetracks("plantAnim", ::ai_intruder_handle_notetracks, undefined, network_intruder);
   self.a.deathforceragdoll = 0;
   self findbestcovernode();

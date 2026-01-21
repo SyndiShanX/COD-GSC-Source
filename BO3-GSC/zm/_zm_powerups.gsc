@@ -304,9 +304,7 @@ function get_regular_random_powerup_name() {
   powerup_keys = getarraykeys(level.zombie_powerups);
   powerup_keys = array::randomize(powerup_keys);
   for(i = 0; i < powerup_keys.size; i++) {
-    if([
-        [level.zombie_powerups[powerup_keys[i]].func_should_drop_with_regular_powerups]
-      ]()) {
+    if([[level.zombie_powerups[powerup_keys[i]].func_should_drop_with_regular_powerups]]()) {
       return powerup_keys[i];
     }
   }
@@ -777,9 +775,7 @@ function powerup_vo(type) {
     return;
   }
   if(isDefined(level.powerup_vo_available)) {
-    if(![
-        [level.powerup_vo_available]
-      ]()) {
+    if(![[level.powerup_vo_available]]()) {
       return;
     }
   }

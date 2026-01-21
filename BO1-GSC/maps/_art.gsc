@@ -52,11 +52,7 @@ setfogsliders() {
   blue = fogall[2];
   halfplane = getDvar(#"g_fogHalfDistReadOnly");
   nearplane = getDvar(#"g_fogStartDistReadOnly");
-  if(!isDefined(red) ||
-    !isDefined(green) ||
-    !isDefined(blue) ||
-    !isDefined(halfplane)
-  ) {
+  if(!isDefined(red) || !isDefined(green) || !isDefined(blue) || !isDefined(halfplane)) {
     red = 1;
     green = 1;
     blue = 1;
@@ -110,12 +106,5 @@ setdefaultdepthoffield() {
   if(isDefined(level.do_not_use_dof)) {
     return;
   }
-  self setDepthOfField(
-    level.dofDefault["nearStart"],
-    level.dofDefault["nearEnd"],
-    level.dofDefault["farStart"],
-    level.dofDefault["farEnd"],
-    level.dofDefault["nearBlur"],
-    level.dofDefault["farBlur"]
-  );
+  self setDepthOfField(level.dofDefault["nearStart"], level.dofDefault["nearEnd"], level.dofDefault["farStart"], level.dofDefault["farEnd"], level.dofDefault["nearBlur"], level.dofDefault["farBlur"]);
 }

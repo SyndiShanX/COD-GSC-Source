@@ -17,8 +17,7 @@ autoexec __init__system__() {
 
 __init__() {
   level.renderoverridebundle = {
-    #local_clients: [],
-    #var_383fe4d6: []
+    #local_clients: [], #var_383fe4d6: []
   };
   callback::on_localclient_connect(&function_d7ae6bbb);
   function_f72f089c(#"hash_ebb37dab2ee0ae3", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", &function_6803f977);
@@ -66,12 +65,7 @@ function_f72f089c(var_166900a8, bundle, validity_func, var_35a2c593, default_bun
 
   assert(!function_25996839(var_166900a8, bundle, validity_func, var_35a2c593));
   level.renderoverridebundle.var_383fe4d6[var_166900a8] = {
-    #bundle: bundle,
-    #validity_func: validity_func,
-    #var_35a2c593: var_35a2c593,
-    #var_1a5b7293: 0,
-    #default_bundle: default_bundle,
-    #force_kill: force_kill
+    #bundle: bundle, #validity_func: validity_func, #var_35a2c593: var_35a2c593, #var_1a5b7293: 0, #default_bundle: default_bundle, #force_kill: force_kill
   };
 }
 

@@ -199,9 +199,7 @@ handlenotetrack(note, flagname, customfunction, var1) {
     notetrackfunc = anim.notetracks[note];
 
     if(isDefined(notetrackfunc))
-      return [
-        [notetrackfunc]
-      ](note, flagname);
+      return [[notetrackfunc]](note, flagname);
   }
 
   switch (note) {
@@ -290,9 +288,7 @@ donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, va
 
     if(timetaken < 0.05) {
       time = gettime();
-      returnednote = [
-        [notetracksfunc]
-      ](flagname, customfunction, var1);
+      returnednote = [[notetracksfunc]](flagname, customfunction, var1);
       timetaken = gettime() - time;
 
       if(timetaken < 0.05) {

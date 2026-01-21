@@ -106,9 +106,7 @@ func_9022(var_0, var_1) {
   for(;;) {
     self.var_6AB8 = 1;
 
-    if(isDefined(level.var_8FE4) && [
-        [level.var_8FE4]
-      ]() || var_1.var_4B7A != var_0) {
+    if(isDefined(level.var_8FE4) && [[level.var_8FE4]]() || var_1.var_4B7A != var_0) {
       break;
     }
     wait 0.05;
@@ -1140,9 +1138,7 @@ func_4461(var_0, var_1, var_2, var_3) {
   for(var_6 = 1; var_6 < var_5.size; var_6++) {
     var_7 = distance(var_1[var_5[var_6]].v["origin"], var_0);
 
-    if([
-        [var_3]
-      ](var_7, var_2)) {
+    if([[var_3]](var_7, var_2)) {
       continue;
     }
     var_2 = var_7;

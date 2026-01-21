@@ -53,9 +53,7 @@ init() {
 
   if(isDefined(level.ignore_spawner_func)) {
     for(i = 0; i < level.zombie_spawners.size; i++) {
-      ignore = [
-        [level.ignore_spawner_func]
-      ](level.zombie_spawners[i]);
+      ignore = [[level.ignore_spawner_func]](level.zombie_spawners[i]);
 
       if(ignore)
         arrayremovevalue(level.zombie_spawners, level.zombie_spawners[i]);
@@ -2089,9 +2087,7 @@ zombie_pathing() {
   }
 
   if(players.size > 1) {
-    if(isDefined(level._should_skip_ignore_player_logic) && [
-        [level._should_skip_ignore_player_logic]
-      ]()) {
+    if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
       self.zombie_path_timer = 0;
       return;
     }

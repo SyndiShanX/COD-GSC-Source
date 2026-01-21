@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("m880_launcher", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel(var_0, var_0);
-  maps\_vehicle::build_drive( % m880_launcher_idle_driving_idle_forward, % m880_launcher_idle_driving_idle_forward, 10);
+  maps\_vehicle::build_drive(%m880_launcher_idle_driving_idle_forward, %m880_launcher_idle_driving_idle_forward, 10);
   maps\_vehicle::build_deathfx("fx/explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);

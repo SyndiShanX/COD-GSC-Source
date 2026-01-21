@@ -21,7 +21,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_unload_groups(::unload_groups);
   maps\_vehicle::build_deathfx("fx/fire/firelp_med_pm", "TAG_PASSENGER", "fire_metal_medium", undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx(var_3[var_0], "tag_death_fx", "car_explode");
-  maps\_vehicle::build_drive( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   maps\_vehicle::build_treadfx(var_2, "default", "fx/treadfx/tread_dust_default");
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");

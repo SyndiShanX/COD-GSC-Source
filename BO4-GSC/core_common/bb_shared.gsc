@@ -50,11 +50,7 @@ commit_weapon_data(spawnid, currentweapon, time0) {
   }
 
   event_data = {
-    #spawnid: spawnid,
-    #name: currentweapon.name,
-    #duration: time1 - time0,
-    #shots: self._bbdata[# "shots"],
-    #hits: self._bbdata[# "hits"]
+    #spawnid: spawnid, #name: currentweapon.name, #duration: time1 - time0, #shots: self._bbdata[# "shots"], #hits: self._bbdata[# "hits"]
   };
   function_92d1707f(eventname, blackboxeventname, event_data);
   self._bbdata[# "shots"] = 0;
@@ -80,18 +76,14 @@ function_a7ba460f(reason) {
 function_afcc007d(name, clientnum, xuid) {
   var_bd8c7087 = int(xuid);
   function_92d1707f(#"hash_3e5070f3289e386c", {
-    #name: name,
-    #clientnum: clientnum,
-    #xuid: var_bd8c7087
+    #name: name, #clientnum: clientnum, #xuid: var_bd8c7087
   });
 }
 
 function_e0dfa262(name, clientnum, xuid) {
   var_bd8c7087 = int(xuid);
   function_92d1707f(#"hash_557aae9aaddeac22", {
-    #name: name,
-    #clientnum: clientnum,
-    #xuid: var_bd8c7087
+    #name: name, #clientnum: clientnum, #xuid: var_bd8c7087
   });
 }
 

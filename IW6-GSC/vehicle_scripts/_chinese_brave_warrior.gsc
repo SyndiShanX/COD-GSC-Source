@@ -18,7 +18,7 @@ main(var_0, var_1, var_2) {
   level._effect["gazsmfire"] = loadfx("fx/fire/firelp_med_pm");
   maps\_vehicle::build_deathfx("fx/fire/firelp_med_pm", "tag_driver", "fire_metal_medium", undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx("fx/explosions/vehicle_explosion_hummer_nodoors", "tag_body", "clkw_scn_ice_chase_expl", undefined, undefined, undefined, undefined);
-  maps\_vehicle::build_drive( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_team("allies");

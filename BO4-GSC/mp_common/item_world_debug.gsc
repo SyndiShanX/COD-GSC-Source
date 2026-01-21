@@ -212,10 +212,7 @@ function_938d798a() {
     }
 
     var_7099d03[var_7099d03.size] = {
-      #origin: v_origin,
-      #stand: v_stand,
-      #var_e45e8f33: var_e45e8f33,
-      #var_d8aec942: var_d8aec942
+      #origin: v_origin, #stand: v_stand, #var_e45e8f33: var_e45e8f33, #var_d8aec942: var_d8aec942
     };
   }
 

@@ -500,9 +500,7 @@ state_combat_update(params) {
       continue;
     }
 
-    if(isDefined(self.owner) && isDefined(level.var_fdf0dff2) && ![
-        [level.var_fdf0dff2]
-      ](self.owner)) {
+    if(isDefined(self.owner) && isDefined(level.var_fdf0dff2) && ![[level.var_fdf0dff2]](self.owner)) {
       wait 1;
       continue;
     }
@@ -543,9 +541,7 @@ function_9bbb40ab(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
       minempdowntime = 0.8 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 0);
       maxempdowntime = 1.2 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 1);
       self notify(#"emped", {
-        #param0: randomfloatrange(minempdowntime, maxempdowntime),
-        #param1: eattacker,
-        #param2: einflictor
+        #param0: randomfloatrange(minempdowntime, maxempdowntime), #param1: eattacker, #param2: einflictor
       });
     }
   }

@@ -59,22 +59,22 @@ main() {
 
 intro() {
   add_scene("intro_anim_loop", "pakistan_intro_2", 0, 0, 1, 0);
-  add_actor_anim("harper", % ch_pakistan_1_1_market_intro_loop_harper, 0, 1, 0, 1, undefined);
-  add_actor_anim("salazar", % ch_pakistan_1_1_market_intro_loop_salazar, 0, 1, 0, 1, undefined);
-  add_player_anim("player_body", % p_pakistan_1_1_market_intro_loop_player_1stperson, 1);
-  add_actor_anim("mason_fullbody", % p_pakistan_1_1_market_intro_loop_player_3rdperson, 1, 0, 1, 1);
+  add_actor_anim("harper", %ch_pakistan_1_1_market_intro_loop_harper, 0, 1, 0, 1, undefined);
+  add_actor_anim("salazar", %ch_pakistan_1_1_market_intro_loop_salazar, 0, 1, 0, 1, undefined);
+  add_player_anim("player_body", %p_pakistan_1_1_market_intro_loop_player_1stperson, 1);
+  add_actor_anim("mason_fullbody", %p_pakistan_1_1_market_intro_loop_player_3rdperson, 1, 0, 1, 1);
   add_scene("intro_anim", "pakistan_intro_2");
-  add_actor_anim("harper", % ch_pakistan_1_1_market_intro_harper, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_1_1_market_intro_harper, 0, 1, 0, 1, undefined);
   add_notetrack_custom_function("harper", "kick", maps\pakistan_market::intro_harper_kick_rumble);
-  add_actor_anim("salazar", % ch_pakistan_1_1_market_intro_salazar, 0, 1, 0, 1, undefined);
-  add_player_anim("player_body", % p_pakistan_1_1_market_intro_player_1stperson, 1, undefined, undefined, 0, 1, 20, 20, 50, 30, 1, 1, 1, 0);
+  add_actor_anim("salazar", %ch_pakistan_1_1_market_intro_salazar, 0, 1, 0, 1, undefined);
+  add_player_anim("player_body", %p_pakistan_1_1_market_intro_player_1stperson, 1, undefined, undefined, 0, 1, 20, 20, 50, 30, 1, 1, 1, 0);
   add_notetrack_custom_function("player_body", "persp_switch", maps\pakistan_market::_intro_extra_cam);
   add_notetrack_custom_function("player_body", "grenade_explosion", maps\pakistan_market::market_doors_explosion);
   add_notetrack_custom_function("player_body", "start", maps\pakistan_market::intro_player_scene_logic);
-  add_actor_anim("mason_fullbody", % p_pakistan_1_1_market_intro_player_3rdperson, 1, 0, 1, 1);
-  add_prop_anim("market_doors", % o_pakistan_1_1_market_intro_doors, undefined, 1);
+  add_actor_anim("mason_fullbody", %p_pakistan_1_1_market_intro_player_3rdperson, 1, 0, 1, 1);
+  add_prop_anim("market_doors", %o_pakistan_1_1_market_intro_doors, undefined, 1);
   add_scene("intro_anim_claw", "pakistan_intro_2");
-  add_actor_anim("claw_1", % v_pakistan_1_1_market_intro_claw, 0, 0, 0, 1, undefined);
+  add_actor_anim("claw_1", %v_pakistan_1_1_market_intro_claw, 0, 0, 0, 1, undefined);
   add_notetrack_custom_function("claw_1", "start", maps\pakistan_market::_intro_claw_turret_control);
   add_notetrack_custom_function("claw_1", "spin_up", maps\pakistan_market::_intro_claw_turret_spin);
   add_notetrack_custom_function("claw_1", "start_fire", maps\pakistan_market::_intro_claw_turret_fire);
@@ -84,10 +84,10 @@ intro() {
   addnotetrack_fxontag("claw_1", "intro_anim_claw", "fx_getup", "claw_bootup_leg", "jnt_r_l_balljoint");
   addnotetrack_exploder("claw_1", "fx_getup", 103, "intro_anim_claw");
   add_scene("intro_anim_enemy", "pakistan_intro_2");
-  add_actor_anim("enemy1", % ch_pakistan_1_1_market_intro_enemy1);
-  add_actor_anim("enemy2", % ch_pakistan_1_1_market_intro_enemy2);
-  add_actor_anim("enemy3", % ch_pakistan_1_1_market_intro_enemy3);
-  add_actor_anim("enemy4", % ch_pakistan_1_1_market_intro_enemy4);
+  add_actor_anim("enemy1", %ch_pakistan_1_1_market_intro_enemy1);
+  add_actor_anim("enemy2", %ch_pakistan_1_1_market_intro_enemy2);
+  add_actor_anim("enemy3", %ch_pakistan_1_1_market_intro_enemy3);
+  add_actor_anim("enemy4", %ch_pakistan_1_1_market_intro_enemy4);
 }
 
 claw_rumble(claw) {
@@ -108,9 +108,9 @@ _plant_flamethrower_dongle(e_player_body) {
 
 claw_grenade_launch() {
   add_scene("claw_grenade_launch", "pakistan_market", 1, 0, 0, 0);
-  add_actor_anim("claw_grenade_guy", % ch_pakistan_1_5_grenade_launch_guy_01, 0, 1, 0, 1, undefined);
+  add_actor_anim("claw_grenade_guy", %ch_pakistan_1_5_grenade_launch_guy_01, 0, 1, 0, 1, undefined);
   add_notetrack_custom_function("claw_grenade_guy", "hit_pillar", ::claw_grenade_launch_pillar_hit);
-  add_actor_anim("claw_2", % v_pakistan_1_5_grenade_launch_claw, 0, 0, 0, 1, undefined);
+  add_actor_anim("claw_2", %v_pakistan_1_5_grenade_launch_claw, 0, 0, 0, 1, undefined);
   add_notetrack_custom_function("claw_2", "grenade_launch", maps\pakistan_market::_claw_launches_grenade_at_guy);
 }
 
@@ -139,9 +139,9 @@ shelving_physics_explosion(e_shelf) {
 
 car_corner_crash() {
   add_scene("car_corner_crash_loop", "car_corner_crash_vehicle", 0, 0, 1, 0);
-  add_prop_anim("car_corner_crash_vehicle", % fxanim_pak_car_corner_veh_loop_anim, undefined, 0, 0);
+  add_prop_anim("car_corner_crash_vehicle", %fxanim_pak_car_corner_veh_loop_anim, undefined, 0, 0);
   add_scene("car_corner_crash", undefined, 0, 0, 0, 1);
-  add_prop_anim("car_corner_crash_vehicle", % fxanim_pak_car_corner_veh_crash_anim, undefined, 0, 0);
+  add_prop_anim("car_corner_crash_vehicle", %fxanim_pak_car_corner_veh_crash_anim, undefined, 0, 0);
   add_notetrack_custom_function("car_corner_crash_vehicle", "start", maps\pakistan_street::car_corner_crash_think);
 }
 
@@ -149,11 +149,11 @@ car_corner_crash() {
 
 car_smash() {
   add_scene("car_smash", "car_smash_car", 0, 0, 0, 0);
-  add_prop_anim("car_smash_car", % fxanim_pak_market_car_crash_car_anim, undefined, 0, 0, undefined, undefined);
+  add_prop_anim("car_smash_car", %fxanim_pak_market_car_crash_car_anim, undefined, 0, 0, undefined, undefined);
   add_notetrack_custom_function("car_smash_car", "exploder 10150 #car_smash", ::_car_smashes_into_market, 0);
   add_scene("car_smash_guys", "pakistan_market", 0, 0, 0, 0);
-  add_cheap_actor_model_anim("car_smash_guy_1", % ch_pakistan_1_5_car_smash_guy01, undefined, 0, undefined, undefined, "pakistan_isi_assualt_guy");
-  add_cheap_actor_model_anim("car_smash_guy_2", % ch_pakistan_1_5_car_smash_guy02, undefined, 0, undefined, undefined, "pakistan_isi_assualt_guy");
+  add_cheap_actor_model_anim("car_smash_guy_1", %ch_pakistan_1_5_car_smash_guy01, undefined, 0, undefined, undefined, "pakistan_isi_assualt_guy");
+  add_cheap_actor_model_anim("car_smash_guy_2", %ch_pakistan_1_5_car_smash_guy02, undefined, 0, undefined, undefined, "pakistan_isi_assualt_guy");
 }
 
 #using_animtree("animated_props");
@@ -161,9 +161,9 @@ car_smash() {
 
 car_smash_car_idle() {
   add_scene("car_smash_car_idle", "car_smash_car", 0, 0, 1, 0);
-  add_prop_anim("car_smash_car", % fxanim_pak_market_car_crash_idle_anim, undefined, 0, 0, undefined, undefined);
+  add_prop_anim("car_smash_car", %fxanim_pak_market_car_crash_idle_anim, undefined, 0, 0, undefined, undefined);
   add_scene("car_smash_ai_idle", "pakistan_market", 0, 0, 1, 0);
-  add_cheap_actor_model_anim("car_smash_guy_1", % ch_pakistan_1_5_car_smash_death_guy01, undefined, 0, undefined, undefined, "pakistan_isi_assualt_guy");
+  add_cheap_actor_model_anim("car_smash_guy_1", %ch_pakistan_1_5_car_smash_death_guy01, undefined, 0, undefined, undefined, "pakistan_isi_assualt_guy");
 }
 
 #using_animtree("animated_props");
@@ -171,7 +171,7 @@ car_smash_car_idle() {
 
 bus_smash() {
   add_scene("bus_smash", "pakistan_market", 0, 0, 0, 1);
-  add_prop_anim("car_smash_bus", % fxanim_pak_market_bus_crash_bus_anim, undefined, 0, 0, undefined, undefined);
+  add_prop_anim("car_smash_bus", %fxanim_pak_market_bus_crash_bus_anim, undefined, 0, 0, undefined, undefined);
   add_notetrack_custom_function("car_smash_bus", "bus_impact", ::bus_smash_bus_impact, 0);
   add_notetrack_custom_function("car_smash_bus", "car_hit", maps\pakistan_market::bus_smash_car_hit, 0);
   add_notetrack_custom_function("car_smash_bus", "shelf_01_destroy", ::bus_smash_shelf_fall_1, 0);
@@ -179,9 +179,9 @@ bus_smash() {
   add_notetrack_custom_function("car_smash_bus", "shelf_03_destroy", ::bus_smash_shelf_fall_3, 0);
   add_notetrack_custom_function("car_smash_bus", "shelf_04_destroy", ::bus_smash_shelf_fall_4, 0);
   add_scene("bus_smash_damage", "car_smash_car", 0, 0, 0, 0);
-  add_prop_anim("car_smash_car", % fxanim_pak_market_bus_crash_car_anim, undefined, 0, 0, undefined, undefined);
+  add_prop_anim("car_smash_car", %fxanim_pak_market_bus_crash_car_anim, undefined, 0, 0, undefined, undefined);
   add_scene("bus_smash_damage_ai", "pakistan_market", 0, 0, 0, 0);
-  add_cheap_actor_model_anim("car_smash_guy_1", % ch_pakistan_1_5_bus_smash_guy01, undefined, 1, undefined, undefined, "pakistan_isi_assualt_guy");
+  add_cheap_actor_model_anim("car_smash_guy_1", %ch_pakistan_1_5_bus_smash_guy01, undefined, 1, undefined, undefined, "pakistan_isi_assualt_guy");
 }
 
 bus_smash_shelf_fall_1(e_bus) {
@@ -227,17 +227,17 @@ _shatter_market_window() {
 
 brute_force_arrive() {
   add_scene("brute_force_arrive", "brute_force", 1, 0, 0, 0);
-  add_actor_anim("salazar", % ch_pakistan_1_6_brute_force_arrive_salazar, 0, 1, 0, 1, undefined);
+  add_actor_anim("salazar", %ch_pakistan_1_6_brute_force_arrive_salazar, 0, 1, 0, 1, undefined);
 }
 
 brute_force_idle() {
   add_scene("brute_force_idle", "brute_force", 0, 0, 1);
-  add_actor_anim("salazar", % ch_pakistan_1_6_brute_force_idle_salazar, 0, 1, 0, 1, undefined);
+  add_actor_anim("salazar", %ch_pakistan_1_6_brute_force_idle_salazar, 0, 1, 0, 1, undefined);
 }
 
 brute_force_exit() {
   add_scene("brute_force_exit", "brute_force", 1, 0, 0, 0);
-  add_actor_anim("salazar", % ch_pakistan_1_6_brute_force_exit_salazar, 0, 1, 0, 1, undefined);
+  add_actor_anim("salazar", %ch_pakistan_1_6_brute_force_exit_salazar, 0, 1, 0, 1, undefined);
 }
 
 #using_animtree("bigdog");
@@ -247,16 +247,16 @@ brute_force_exit() {
 
 brute_force_unlock() {
   add_scene("brute_force_unlock", "brute_force", 0, 0, 0, 0);
-  add_actor_anim("salazar", % ch_pakistan_1_6_brute_force_salazar, 0, 1, 0, 1, undefined);
-  add_actor_anim("claw_1", % v_pakistan_1_6_brute_force_claw01, 0, 0, 0, 1, undefined);
-  add_actor_anim("claw_2", % v_pakistan_1_6_brute_force_claw02, 0, 0, 0, 1, undefined);
-  add_prop_anim("brute_force_door", % o_pakistan_1_6_brute_force_gate, undefined, 0, 0);
+  add_actor_anim("salazar", %ch_pakistan_1_6_brute_force_salazar, 0, 1, 0, 1, undefined);
+  add_actor_anim("claw_1", %v_pakistan_1_6_brute_force_claw01, 0, 0, 0, 1, undefined);
+  add_actor_anim("claw_2", %v_pakistan_1_6_brute_force_claw02, 0, 0, 0, 1, undefined);
+  add_prop_anim("brute_force_door", %o_pakistan_1_6_brute_force_gate, undefined, 0, 0);
   add_notetrack_custom_function("brute_force_door", "start", ::crosby_enter_elevator_room);
   add_notetrack_custom_function("brute_force_door", "start", ::force_harper_to_frogger_start);
   add_scene("brute_force_unlock_player", "brute_force", 0, 0, 0, 0);
-  add_player_anim("player_body", % p_pakistan_1_6_brute_force_player, 1);
-  add_prop_anim("brute_force_prop", % o_specialty_pakistan_brute_force_jaws, "t6_wpn_jaws_of_life_prop", 1, 0);
-  add_prop_anim("brute_force_box", % o_specialty_pakistan_brute_force_fusebox);
+  add_player_anim("player_body", %p_pakistan_1_6_brute_force_player, 1);
+  add_prop_anim("brute_force_prop", %o_specialty_pakistan_brute_force_jaws, "t6_wpn_jaws_of_life_prop", 1, 0);
+  add_prop_anim("brute_force_box", %o_specialty_pakistan_brute_force_fusebox);
 }
 
 #using_animtree("generic_human");
@@ -265,13 +265,13 @@ brute_force_unlock() {
 
 brute_force_bypass() {
   add_scene("brute_force_bypass_salazar", "align_noaccess_perk", 1, 0, 0, 0);
-  add_actor_anim("salazar", % ch_pakistan_1_6_brute_force_noaccess_soldier, 0, 1, 0, 1, undefined);
+  add_actor_anim("salazar", %ch_pakistan_1_6_brute_force_noaccess_soldier, 0, 1, 0, 1, undefined);
   add_scene("brute_force_bypass_brutus", "align_noaccess_perk", 1, 0, 0, 0);
-  add_actor_anim("claw_1", % v_pakistan_1_6_brute_force_noaccess_claw, 0, 0, 0, 1, undefined);
+  add_actor_anim("claw_1", %v_pakistan_1_6_brute_force_noaccess_claw, 0, 0, 0, 1, undefined);
   add_scene("brute_force_bypass_maximus", "align_noaccess_perk", 1, 0, 0, 0);
-  add_actor_anim("claw_2", % v_pakistan_1_6_brute_force_noaccess_claw, 0, 0, 0, 1, undefined);
+  add_actor_anim("claw_2", %v_pakistan_1_6_brute_force_noaccess_claw, 0, 0, 0, 1, undefined);
   add_scene("brute_force_bypass_crosby", "align_noaccess_perk", 1, 0, 0, 0);
-  add_actor_anim("crosby", % ch_pakistan_1_6_brute_force_noaccess_soldier, 0, 1, 0, 1, undefined);
+  add_actor_anim("crosby", %ch_pakistan_1_6_brute_force_noaccess_soldier, 0, 1, 0, 1, undefined);
 }
 
 #using_animtree("animated_props");
@@ -290,10 +290,10 @@ frogger_ai_entries() {
   bm_door_1 rotateyaw(-90, 1);
   bm_door_2 rotateyaw(90, 1);
   add_scene("frogger_door_kick_1", "frogger_door_kick_1", 0, 0, 0, 0);
-  add_actor_anim("frogger_door_kick_1_guy", % ai_doorbreach_kick, 0, 1, 0, 0, undefined);
+  add_actor_anim("frogger_door_kick_1_guy", %ai_doorbreach_kick, 0, 1, 0, 0, undefined);
   add_notetrack_custom_function("frogger_door_kick_1_guy", "door_open", ::frogger_door_kick_1_func, 0);
   add_scene("frogger_door_kick_2", "frogger_door_kick_2", 0, 0, 0, 0);
-  add_actor_anim("frogger_door_kick_2_guy", % ai_doorbreach_kick, 0, 1, 0, 0, undefined);
+  add_actor_anim("frogger_door_kick_2_guy", %ai_doorbreach_kick, 0, 1, 0, 0, undefined);
   add_notetrack_custom_function("frogger_door_kick_2_guy", "door_open", ::frogger_door_kick_2_func, 0);
 }
 
@@ -325,59 +325,59 @@ frogger_door_kick_2_func(ai_guy) {
 
 bus_dam_anims() {
   add_scene("bus_dam_start", "bus_dam_bus", 0, 0, 0, 1);
-  add_prop_anim("dam_bus", % fxanim_pak_bus_dam_enter_bus_anim, undefined, 0, 0, undefined, undefined);
+  add_prop_anim("dam_bus", %fxanim_pak_bus_dam_enter_bus_anim, undefined, 0, 0, undefined, undefined);
   add_notetrack_custom_function("dam_bus", "1st_hit_start", ::bus_first_impact, 0);
   add_notetrack_custom_function("dam_bus", "2nd_hit_start", ::bus_second_impact, 0);
   add_notetrack_custom_function("dam_bus", "wedge_balc_start", ::bus_wedge_balcony, 0);
   add_notetrack_custom_function("dam_bus", "wedge_wall_start", ::bus_wedge_wall, 0);
   add_notetrack_fx_on_tag("dam_bus", undefined, "civ_bus_headlights", "tag_origin");
   add_scene("bus_dam_runners", "bus_dam", 0, 0, 0, 0);
-  add_actor_anim("bus_runner_1", % ch_pakistan_2_3_bus_dam_enemy01, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_1", %ch_pakistan_2_3_bus_dam_enemy01, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
   add_notetrack_custom_function("bus_runner_1", "start_bus", maps\pakistan_street::start_bus, 0);
-  add_actor_anim("bus_runner_2", % ch_pakistan_2_3_bus_dam_enemy02, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
-  add_actor_anim("bus_runner_3", % ch_pakistan_2_3_bus_dam_enemy03, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
-  add_actor_anim("bus_runner_4", % ch_pakistan_2_3_bus_dam_enemy04, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
-  add_actor_anim("bus_runner_5", % ch_pakistan_2_3_bus_dam_enemy05, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
-  add_actor_anim("bus_runner_6", % ch_pakistan_2_3_bus_dam_enemy06, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
-  add_actor_anim("bus_runner_7", % ch_pakistan_2_3_bus_dam_enemy07, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
-  add_actor_anim("bus_runner_8", % ch_pakistan_2_3_bus_dam_enemy08, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_2", %ch_pakistan_2_3_bus_dam_enemy02, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_3", %ch_pakistan_2_3_bus_dam_enemy03, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_4", %ch_pakistan_2_3_bus_dam_enemy04, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_5", %ch_pakistan_2_3_bus_dam_enemy05, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_6", %ch_pakistan_2_3_bus_dam_enemy06, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_7", %ch_pakistan_2_3_bus_dam_enemy07, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
+  add_actor_anim("bus_runner_8", %ch_pakistan_2_3_bus_dam_enemy08, 0, 1, 1, 0, undefined, "pakistan_isi_assualt_guy");
   level.scr_anim["generic"]["bus_wave_death_1"] = % ch_pakistan_2_3_bus_dam_enemy09;
   level.scr_anim["generic"]["bus_wave_death_2"] = % ch_pakistan_2_3_bus_dam_enemy10;
   add_scene("bus_dam_idle", "bus_dam_bus", 0, 0, 1, 0);
-  add_prop_anim("dam_bus", % fxanim_pak_bus_dam_idle_bus_anim, undefined, 0, 0, undefined, undefined);
+  add_prop_anim("dam_bus", %fxanim_pak_bus_dam_idle_bus_anim, undefined, 0, 0, undefined, undefined);
   add_scene("bus_dam_exit", "bus_dam_bus", 0, 0, 0, 0);
-  add_prop_anim("dam_bus", % fxanim_pak_bus_dam_exit_bus_anim, undefined, 0, 0, undefined, undefined);
+  add_prop_anim("dam_bus", %fxanim_pak_bus_dam_exit_bus_anim, undefined, 0, 0, undefined, undefined);
   add_notetrack_custom_function("dam_bus", "break_balc_start", ::bus_break_balcony, 0);
   add_notetrack_custom_function("dam_bus", "break_wall_start", ::bus_break_wall, 0);
   add_notetrack_stop_exploder("dam_bus", "exploder 10187 #dam_break", 10178);
   add_scene("bus_dam_wave_push", "bus_dam_temp", 0, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_2_3_bus_dam_pushed_harper, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_2_3_bus_dam_pushed_harper, 0, 1, 0, 1, undefined);
   add_scene("bus_dam_harper_arrival", "bus_dam_temp", 1, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_2_3_bus_dam_arrival_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_2_3_bus_dam_arrival_harper, 0, 0, 0, 1, undefined);
   add_notetrack_flag("harper", "vox#harp_section_1", "allow_gate_push");
   add_scene("bus_dam_harper_gate_idle", "bus_dam_temp", 0, 0, 1, 0);
-  add_actor_anim("harper", % ch_pakistan_2_3_bus_dam_pushed_idle_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_2_3_bus_dam_pushed_idle_harper, 0, 0, 0, 1, undefined);
   add_scene("bus_dam_wave_push_player", undefined, 0, 0, 0, 1);
-  add_player_anim("player_body", % p_pakistan_2_3_bus_dam_pushed_player, 1);
+  add_player_anim("player_body", %p_pakistan_2_3_bus_dam_pushed_player, 1);
   add_scene("bus_dam_gate_push_setup", "bus_dam_temp", 0, 0, 0, 0);
-  add_player_anim("player_body", % p_pakistan_2_3_gate_push_setup_player, 0);
+  add_player_anim("player_body", %p_pakistan_2_3_gate_push_setup_player, 0);
   add_notetrack_flag("player_body", "start_harper", "harper_to_gate");
   add_scene("bus_dam_gate_push_setup_harper", "bus_dam_temp", 0, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_2_3_gate_push_setup_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_2_3_gate_push_setup_harper, 0, 0, 0, 1, undefined);
   add_scene("bus_dam_gate_push_test", "bus_dam_temp", 0, 0, 0, 0);
-  add_player_anim("player_body", % p_pakistan_2_3_gate_push_player, 0, undefined, undefined, 1, 1, 30, 30, 80, 40, 1, 1, 1, 0);
-  add_actor_anim("harper", % ch_pakistan_2_3_gate_push_harper, 0, 0, 0, 1, undefined);
-  add_prop_anim("bus_dam_door_left", % o_pakistan_2_3_gate_push_left_door, undefined, 0, 1);
-  add_prop_anim("bus_dam_door_right", % o_pakistan_2_3_gate_push_right_door, undefined, 0, 1);
+  add_player_anim("player_body", %p_pakistan_2_3_gate_push_player, 0, undefined, undefined, 1, 1, 30, 30, 80, 40, 1, 1, 1, 0);
+  add_actor_anim("harper", %ch_pakistan_2_3_gate_push_harper, 0, 0, 0, 1, undefined);
+  add_prop_anim("bus_dam_door_left", %o_pakistan_2_3_gate_push_left_door, undefined, 0, 1);
+  add_prop_anim("bus_dam_door_right", %o_pakistan_2_3_gate_push_right_door, undefined, 0, 1);
   add_scene("bus_dam_gate_success", "bus_dam_temp", 0, 0, 0, 0);
-  add_player_anim("player_body", % p_pakistan_2_3_gate_push_success_player, 1);
-  add_prop_anim("bus_dam_door_left", % o_pakistan_2_3_gate_push_success_left_door, undefined, 0, 1);
-  add_prop_anim("bus_dam_door_right", % o_pakistan_2_3_gate_push_success_right_door, undefined, 0, 1);
+  add_player_anim("player_body", %p_pakistan_2_3_gate_push_success_player, 1);
+  add_prop_anim("bus_dam_door_left", %o_pakistan_2_3_gate_push_success_left_door, undefined, 0, 1);
+  add_prop_anim("bus_dam_door_right", %o_pakistan_2_3_gate_push_success_right_door, undefined, 0, 1);
   add_scene("bus_dam_gate_success_harper", "bus_dam_temp");
-  add_actor_anim("harper", % ch_pakistan_2_3_gate_push_success_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_2_3_gate_push_success_harper, 0, 0, 0, 1, undefined);
   add_scene("bus_dam_gate_failure", "bus_dam_temp", 0, 0, 0, 0);
-  add_player_anim("player_body", % p_pakistan_2_3_gate_push_failure_player, 1);
-  add_actor_anim("harper", % ch_pakistan_2_3_gate_push_failure_harper, 0, 0, 0, 1, undefined);
+  add_player_anim("player_body", %p_pakistan_2_3_gate_push_failure_player, 1);
+  add_actor_anim("harper", %ch_pakistan_2_3_gate_push_failure_harper, 0, 0, 0, 1, undefined);
 }
 
 bus_first_impact(e_bus) {
@@ -416,32 +416,32 @@ bus_break_wall(e_bus) {
 
 slum_alley_initial() {
   add_scene("slum_alley_initial", "pakistan_alley", 0, 0, 0, 0);
-  add_prop_anim("alley_rat_2", % ch_pakistan_3_1_slum_alley_rat02, "sewer_rat", 1, 0);
-  add_prop_anim("alley_dog_1", % ch_pakistan_3_1_slum_alley_dog01, "german_shepherd", 1, 0);
+  add_prop_anim("alley_rat_2", %ch_pakistan_3_1_slum_alley_rat02, "sewer_rat", 1, 0);
+  add_prop_anim("alley_dog_1", %ch_pakistan_3_1_slum_alley_dog01, "german_shepherd", 1, 0);
   add_scene("alley_harper", "pakistan_alley", 1);
-  add_actor_anim("harper", % ch_pakistan_3_1_alley_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_1_alley_harper, 0, 0, 0, 1, undefined);
 }
 
 #using_animtree("animated_props");
 
 slum_alley_corner() {
   add_scene("slum_alley_corner", "pakistan_alley", 0, 0, 0, 0);
-  add_prop_anim("alley_rat_3", % ch_pakistan_3_1_slum_alley_rat03, "sewer_rat", 1, 0);
+  add_prop_anim("alley_rat_3", %ch_pakistan_3_1_slum_alley_rat03, "sewer_rat", 1, 0);
 }
 
 slum_alley_dog() {
   add_scene("slum_alley_dog_rummage", undefined, 0, 0, 1);
-  add_prop_anim("alley_dog_2", % german_shepherd_attackidle, "german_shepherd", 0, 0);
+  add_prop_anim("alley_dog_2", %german_shepherd_attackidle, "german_shepherd", 0, 0);
   add_scene("slum_alley_dog_transition", "pakistan_alley", 0, 0, 0, 0);
-  add_prop_anim("alley_dog_2", % ch_pakistan_3_1_slum_alley_dog02_transition, "german_shepherd", 0, 0);
+  add_prop_anim("alley_dog_2", %ch_pakistan_3_1_slum_alley_dog02_transition, "german_shepherd", 0, 0);
   add_scene("slum_alley_dog_growl", "pakistan_alley", 0, 0, 1, 0);
-  add_prop_anim("alley_dog_2", % ch_pakistan_3_1_slum_alley_dog02_growl_loop, "german_shepherd", 0, 0);
+  add_prop_anim("alley_dog_2", %ch_pakistan_3_1_slum_alley_dog02_growl_loop, "german_shepherd", 0, 0);
   add_scene("slum_alley_dog_growl_loop", undefined, 0, 0, 1);
-  add_prop_anim("alley_dog_2", % german_shepherd_attackidle_growl, "german_shepherd", 0, 0);
+  add_prop_anim("alley_dog_2", %german_shepherd_attackidle_growl, "german_shepherd", 0, 0);
   add_scene("slum_alley_dog_bark_loop", undefined, 0, 0, 1);
-  add_prop_anim("alley_dog_2", % german_shepherd_attackidle_bark, "german_shepherd", 0, 0);
+  add_prop_anim("alley_dog_2", %german_shepherd_attackidle_bark, "german_shepherd", 0, 0);
   add_scene("slum_alley_dog_exit", "pakistan_alley", 0, 0, 0, 0);
-  add_prop_anim("alley_dog_2", % ch_pakistan_3_1_slum_alley_dog02_run_away, "german_shepherd", 1, 0);
+  add_prop_anim("alley_dog_2", %ch_pakistan_3_1_slum_alley_dog02_run_away, "german_shepherd", 1, 0);
 }
 
 #using_animtree("generic_human");
@@ -449,19 +449,19 @@ slum_alley_dog() {
 
 alley_civilians() {
   add_scene("alley_civilian_1", "pakistan_alley", 0, 0, 1, 0);
-  add_actor_anim("alley_civilian_1", % ch_pakistan_3_1_ambient_civilians_civ01_loop, 1, 0, 0, 0, undefined);
+  add_actor_anim("alley_civilian_1", %ch_pakistan_3_1_ambient_civilians_civ01_loop, 1, 0, 0, 0, undefined);
   add_scene("alley_civilian_2", "pakistan_alley", 0, 0, 1, 0);
-  add_actor_anim("alley_civilian_2", % ch_pakistan_3_1_ambient_civilians_civ02_loop, 1, 0, 0, 0, undefined);
+  add_actor_anim("alley_civilian_2", %ch_pakistan_3_1_ambient_civilians_civ02_loop, 1, 0, 0, 0, undefined);
   add_scene("alley_civilian_1_react", "pakistan_alley", 0, 0, 0, 0);
-  add_actor_anim("alley_civilian_1", % ch_pakistan_3_1_ambient_civilians_civ01, 1, 0, 0, 0, undefined);
+  add_actor_anim("alley_civilian_1", %ch_pakistan_3_1_ambient_civilians_civ01, 1, 0, 0, 0, undefined);
   add_scene("alley_civilian_2_react", "pakistan_alley", 0, 0, 0, 0);
-  add_actor_anim("alley_civilian_2", % ch_pakistan_3_1_ambient_civilians_civ02, 1, 0, 0, 0, undefined);
+  add_actor_anim("alley_civilian_2", %ch_pakistan_3_1_ambient_civilians_civ02, 1, 0, 0, 0, undefined);
   add_scene("alley_civilian_3", "pakistan_alley", 0, 0, 1, 0);
-  add_actor_anim("alley_civilian_3", % ch_pakistan_3_1_ambient_civilians_civ03, 1, 0, 0, 0, undefined);
+  add_actor_anim("alley_civilian_3", %ch_pakistan_3_1_ambient_civilians_civ03, 1, 0, 0, 0, undefined);
   add_scene("alley_civilian_door_react", "pakistan_alley", 0, 0, 0, 0);
-  add_actor_anim("alley_civilian_4", % ch_pakistan_3_1_ambient_civilians_civ04, 1, 0, 1, 0, undefined);
-  add_actor_anim("alley_civilian_5", % ch_pakistan_3_1_ambient_civilians_civ05, 1, 0, 1, 0, undefined);
-  add_prop_anim("pakistan_alley_door", % o_pakistan_3_1_ambient_civilians_door);
+  add_actor_anim("alley_civilian_4", %ch_pakistan_3_1_ambient_civilians_civ04, 1, 0, 1, 0, undefined);
+  add_actor_anim("alley_civilian_5", %ch_pakistan_3_1_ambient_civilians_civ05, 1, 0, 1, 0, undefined);
+  add_prop_anim("pakistan_alley_door", %o_pakistan_3_1_ambient_civilians_door);
 }
 
 #using_animtree("player");
@@ -469,96 +469,96 @@ alley_civilians() {
 
 corpse_alley() {
   add_scene("corpse_alley_player", "pakistan_alley_exit", 0, 0, 0, 0);
-  add_player_anim("player_body", % p_pakistan_3_1_corpse_alley_player_jump, 1);
+  add_player_anim("player_body", %p_pakistan_3_1_corpse_alley_player_jump, 1);
   add_notetrack_custom_function("player_body", "start", maps\pakistan_anthem_approach::corpse_alley_player_jump_rumble);
   add_scene("corpse_alley_harper", "pakistan_alley_exit", 0, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_3_1_corpse_alley_harper, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_1_corpse_alley_harper, 0, 1, 0, 1, undefined);
   add_scene("corpse_alley_wait_harper", "pakistan_alley_exit", 0, 0, 1, 0);
-  add_actor_anim("harper", % ch_pakistan_3_1_corpse_alley_wait_harper, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_1_corpse_alley_wait_harper, 0, 1, 0, 1, undefined);
   add_scene("corpse_alley_exit_harper", "pakistan_alley_exit", 0, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_3_1_corpse_alley_exit_harper, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_1_corpse_alley_exit_harper, 0, 1, 0, 1, undefined);
   add_scene("corpse_alley_runner", "pakistan_alley_exit", 0, 0, 0, 0);
-  add_actor_anim("corpse_alley_runner", % ch_pakistan_3_1_corpse_alley_civilian, 1, 0, 0, 1, undefined);
+  add_actor_anim("corpse_alley_runner", %ch_pakistan_3_1_corpse_alley_civilian, 1, 0, 0, 1, undefined);
   add_notetrack_custom_function("corpse_alley_runner", "get_detected", maps\pakistan_anthem_approach::civ_get_detected);
 }
 
 stealth() {
   add_scene("hand_signals_a", "harper_stealth_node_1", 1);
-  add_actor_anim("harper", % ch_pakistan_3_3_hand_signals_a_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_3_hand_signals_a_harper, 0, 0, 0, 1, undefined);
   add_scene("hand_signals_b", "harper_stealth_node_2", 1);
-  add_actor_anim("harper", % ch_pakistan_3_3_hand_signals_b_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_3_hand_signals_b_harper, 0, 0, 0, 1, undefined);
   add_scene("hand_signals_c", "harper_stealth_node_4", 1);
-  add_actor_anim("harper", % ch_pakistan_3_3_hand_signals_c_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_3_hand_signals_c_harper, 0, 0, 0, 1, undefined);
   add_scene("hand_signals_d", "harper_stealth_node_5", 1);
-  add_actor_anim("harper", % ch_pakistan_3_3_hand_signals_d_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_3_hand_signals_d_harper, 0, 0, 0, 1, undefined);
   add_scene("hand_signals_e", "harper_stealth_node_6", 1);
-  add_actor_anim("harper", % ch_pakistan_3_3_hand_signals_e_harper, 0, 0, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_3_hand_signals_e_harper, 0, 0, 0, 1, undefined);
 }
 
 stealth_corpses() {
   a_str_corpses = array("c_pak_civ_male_corpse1_fb", "c_pak_civ_male_corpse2_fb");
   add_scene("death_pose_1", "death_pose_1_align");
-  add_actor_model_anim("death_pose_1", % ch_gen_m_floor_armdown_legspread_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_1", %ch_gen_m_floor_armdown_legspread_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_2", "death_pose_2_align");
-  add_actor_model_anim("death_pose_2", % ch_gen_m_wall_legspread_armdown_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_2", %ch_gen_m_wall_legspread_armdown_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_3", "death_pose_3_align");
-  add_actor_model_anim("death_pose_3", % ch_gen_m_floor_armdown_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_3", %ch_gen_m_floor_armdown_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_4", "death_pose_4_align");
-  add_actor_model_anim("death_pose_4", % ch_gen_m_armover_onrightside_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_4", %ch_gen_m_armover_onrightside_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_5", "death_pose_5_align");
-  add_actor_model_anim("death_pose_5", % ch_gen_m_vehicle_armup_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_5", %ch_gen_m_vehicle_armup_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_6", "death_pose_6_align");
-  add_actor_model_anim("death_pose_6", % ch_gen_m_floor_armsopen_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_6", %ch_gen_m_floor_armsopen_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_7", "death_pose_7_align");
-  add_actor_model_anim("death_pose_7", % ch_gen_m_floor_armspread_legaskew_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_7", %ch_gen_m_floor_armspread_legaskew_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_8", "death_pose_8_align");
-  add_actor_model_anim("death_pose_8", % ch_gen_m_floor_armspreadwide_legspread_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_8", %ch_gen_m_floor_armspreadwide_legspread_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_9", "death_pose_9_align");
-  add_actor_model_anim("death_pose_9", % ch_gen_m_floor_armstomach_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_9", %ch_gen_m_floor_armstomach_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_10", "death_pose_10_align");
-  add_actor_model_anim("death_pose_10", % ch_gen_m_floor_armup_legaskew_onfront_faceleft_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_10", %ch_gen_m_floor_armup_legaskew_onfront_faceleft_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_11", "death_pose_11_align");
-  add_actor_model_anim("death_pose_11", % ch_gen_m_floor_armup_legaskew_onfront_faceright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_11", %ch_gen_m_floor_armup_legaskew_onfront_faceright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_12", "death_pose_12_align");
-  add_actor_model_anim("death_pose_12", % ch_gen_m_floor_armup_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_12", %ch_gen_m_floor_armup_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_13", "death_pose_13_align");
-  add_actor_model_anim("death_pose_13", % ch_gen_m_ledge_armhanging_facedown_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_13", %ch_gen_m_ledge_armhanging_facedown_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_14", "death_pose_14_align");
-  add_actor_model_anim("death_pose_14", % ch_gen_m_ledge_armhanging_faceright_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_14", %ch_gen_m_ledge_armhanging_faceright_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_15", "death_pose_15_align");
-  add_actor_model_anim("death_pose_15", % ch_gen_m_ledge_armspread_faceleft_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_15", %ch_gen_m_ledge_armspread_faceleft_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_16", "death_pose_16_align");
-  add_actor_model_anim("death_pose_16", % ch_gen_m_ledge_armspread_faceright_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_16", %ch_gen_m_ledge_armspread_faceright_onfront_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_17", "death_pose_17_align");
-  add_actor_model_anim("death_pose_17", % ch_gen_m_vehicle_armup_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_17", %ch_gen_m_vehicle_armup_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_18", "death_pose_18_align");
-  add_actor_model_anim("death_pose_18", % ch_gen_m_vehicle_armdown_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_18", %ch_gen_m_vehicle_armdown_leanright_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_19", "death_pose_19_align");
-  add_actor_model_anim("death_pose_19", % ch_gen_f_floor_onback_armup_legcurled_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_19", %ch_gen_f_floor_onback_armup_legcurled_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
   add_scene("death_pose_20", "death_pose_20_align");
-  add_actor_model_anim("death_pose_20", % ch_gen_m_floor_armspread_legaskew_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
+  add_actor_model_anim("death_pose_20", %ch_gen_m_floor_armspread_legaskew_onback_deathpose, random(a_str_corpses), 1, undefined, undefined, undefined, 0);
 }
 
 fallen_building() {
   add_scene("sideways_building_harper_climb", "pakistan_bank", 1, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_3_2_fallen_building_harper_climb, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_2_fallen_building_harper_climb, 0, 1, 0, 1, undefined);
   add_scene("sideways_building_harper_idle_1", "pakistan_bank", 0, 0, 1, 0);
-  add_actor_anim("harper", % ch_pakistan_3_2_fallen_building_harper_idle, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_2_fallen_building_harper_idle, 0, 1, 0, 1, undefined);
   add_scene("sideways_building_harper_move", "pakistan_bank", 0, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_3_2_fallen_building_harper_move, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_2_fallen_building_harper_move, 0, 1, 0, 1, undefined);
   add_scene("sideways_building_harper_idle_2", "pakistan_bank", 0, 0, 1, 0);
-  add_actor_anim("harper", % ch_pakistan_3_2_fallen_building_harper_idle02, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_2_fallen_building_harper_idle02, 0, 1, 0, 1, undefined);
   add_scene("sideways_building_harper_exit", "pakistan_bank", 0, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_3_2_fallen_building_harper_exit, 0, 1, 0, 1, undefined);
+  add_actor_anim("harper", %ch_pakistan_3_2_fallen_building_harper_exit, 0, 1, 0, 1, undefined);
 }
 
 #using_animtree("animated_props");
 
 sewer_entry() {
   add_scene("sewer_entry", "align_sewer_entrance", 1, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_3_5_sewer_entry_harper, 0, 1, 0, 1, undefined);
-  add_prop_anim("sewer_entry_device", % o_pakistan_3_5_sewer_entry_lockbreaker, undefined, 1, 0);
-  add_prop_anim("sewer_entry_gate", % o_pakistan_3_5_sewer_entry_sewer_gate, undefined, 0, 0);
+  add_actor_anim("harper", %ch_pakistan_3_5_sewer_entry_harper, 0, 1, 0, 1, undefined);
+  add_prop_anim("sewer_entry_device", %o_pakistan_3_5_sewer_entry_lockbreaker, undefined, 1, 0);
+  add_prop_anim("sewer_entry_gate", %o_pakistan_3_5_sewer_entry_sewer_gate, undefined, 0, 0);
 }
 
 #using_animtree("player");
@@ -567,21 +567,21 @@ sewer_entry() {
 
 intruder_perk() {
   add_scene("perk_intruder_unlock", "intruder_perk_door", 0, 0, 0, 0);
-  add_player_anim("player_body", % int_specialty_pakistan_intruder, 1, 0, "tag_origin");
-  add_prop_anim("intruder_device", % o_specialty_pakistan_intruder_cutter, undefined, 1, 0, undefined, "tag_origin");
+  add_player_anim("player_body", %int_specialty_pakistan_intruder, 1, 0, "tag_origin");
+  add_prop_anim("intruder_device", %o_specialty_pakistan_intruder_cutter, undefined, 1, 0, undefined, "tag_origin");
   add_notetrack_fx_on_tag("intruder_device", "zap_start", "cutter_spark", "tag_fx");
   add_notetrack_fx_on_tag("intruder_device", "zap_end", "cutter_on", "tag_fx");
-  add_prop_anim("intruder_perk_door", % o_specialty_pakistan_intruder_door, undefined, 0, 0, undefined, "tag_origin");
+  add_prop_anim("intruder_perk_door", %o_specialty_pakistan_intruder_door, undefined, 0, 0, undefined, "tag_origin");
   add_notetrack_level_notify("intruder_perk_door", "lock_hit_ground", "fxanim_rat_room_start");
   add_scene("perk_intruder_guy1", undefined, 0, 0, 1);
-  add_actor_anim("intruder_guy1", % casual_stand_v2_idle, 0, 1, 0, 0);
+  add_actor_anim("intruder_guy1", %casual_stand_v2_idle, 0, 1, 0, 0);
   add_scene("perk_intruder_guy2", undefined, 0, 0, 1);
-  add_actor_anim("intruder_guy2", % casual_stand_v2_twitch_talk, 0, 1, 0, 0);
+  add_actor_anim("intruder_guy2", %casual_stand_v2_twitch_talk, 0, 1, 0, 0);
 }
 
 sewer_slide() {
   add_scene("sewer_slide", "sewer_slide", 1, 0, 0, 0);
-  add_actor_anim("harper", % ch_pakistan_3_5_sewer_slide_harper, 0, 1, 0, 1);
+  add_actor_anim("harper", %ch_pakistan_3_5_sewer_slide_harper, 0, 1, 0, 1);
 }
 
 #using_animtree("player");
@@ -589,8 +589,8 @@ sewer_slide() {
 
 sewer_exit() {
   add_scene("sewer_exit", "pakistan_sewer_exit_temp", 0, 0, 0, 0);
-  add_player_anim("player_body", % p_pakistan_3_5_manhole_cover_player, 0);
-  add_prop_anim("sewer_exit_cover", % o_pakistan_3_5_manhole_cover_manhole, undefined, 0, 1);
+  add_player_anim("player_body", %p_pakistan_3_5_manhole_cover_player, 0);
+  add_prop_anim("sewer_exit_cover", %o_pakistan_3_5_manhole_cover_manhole, undefined, 0, 1);
 }
 
 vo_market_enter() {

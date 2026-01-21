@@ -277,7 +277,7 @@ loadGuy(ent, node) {
 
   animscripts\shared::placeWeaponOn(self.weapon, "none");
   self attach("prop_mortar", "TAG_WEAPON_LEFT");
-  self setanimknob( % mortar_closed_setup, 1, 0, 1);
+  self setanimknob(%mortar_closed_setup, 1, 0, 1);
   setupAnim[0] = % mortar_loadguy_setup;
   setupString[0] = "setup_straight";
   setupAnim[1] = % mortar_loadguy_setup_left;
@@ -305,7 +305,7 @@ loadGuy(ent, node) {
   self waittillmatch("single anim", "open_mortar");
   if(soundexists("weapon_setup"))
     thread play_sound_in_space("weapon_setup");
-  self setanimknob( % mortar_open_setup, 1, 0, 1);
+  self setanimknob(%mortar_open_setup, 1, 0, 1);
   node waittill(setupString[index]);
 
   mortar = spawn("script_model", (0, 0, 0));

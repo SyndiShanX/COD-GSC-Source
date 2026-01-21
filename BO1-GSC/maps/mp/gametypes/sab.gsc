@@ -194,11 +194,7 @@ onDeadEvent(team) {
     return;
   if(team == "all") {
     if(level.bombPlanted) {
-      [
-        [level._setTeamScore]
-      ](level.bombPlantedBy, [
-        [level._getTeamScore]
-      ](level.bombPlantedBy) + 1);
+      [[level._setTeamScore]](level.bombPlantedBy, [[level._getTeamScore]](level.bombPlantedBy) + 1);
       thread maps\mp\gametypes\_globallogic::endGame(level.bombPlantedBy, game["strings"][level.bombPlantedBy + "_mission_accomplished"]);
     } else {
       thread maps\mp\gametypes\_globallogic::endGame("tie", game["strings"]["tie"]);

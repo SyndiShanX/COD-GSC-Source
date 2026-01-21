@@ -29,9 +29,9 @@ step_up_human() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
-  self setflaggedanimknoballrestart("stepanim", animarray("step_up", "move"), % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("stepanim", animarray("step_up", "move"), %body, 1, 0.1, 1);
   self waittillmatch("stepanim", "gravity on");
   self traversemode("gravity");
   self animscripts\shared::donotetracks("stepanim");
-  self setanimknoballrestart(animscripts\run::getcrouchrunanim(), % body, 1, 0.1, 1);
+  self setanimknoballrestart(animscripts\run::getcrouchrunanim(), %body, 1, 0.1, 1);
 }

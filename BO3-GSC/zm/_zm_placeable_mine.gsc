@@ -273,9 +273,7 @@ function private replenish_after_rounds() {
   while(true) {
     level waittill("between_round_over");
     if(isDefined(level.func_custom_placeable_mine_round_replenish)) {
-      [
-        [level.func_custom_placeable_mine_round_replenish]
-      ]();
+      [[level.func_custom_placeable_mine_round_replenish]]();
       continue;
     }
     if(!level flag::exists("teleporter_used") || !level flag::get("teleporter_used")) {

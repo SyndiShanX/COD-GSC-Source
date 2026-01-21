@@ -233,8 +233,7 @@ uaz_steer() {
       forward_to_c130 = anglesToForward(angles_to_c130);
       straight_to_c130_goal = self.origin + forward_to_c130 * lookahead;
 
-      // blend in control over time, so we dont oversteer early on,
-      // we blend a value from 0 to 1 over blend_in_control_time seconds.
+      // blend in control over time, so we dont oversteer early on, // we blend a value from 0 to 1 over blend_in_control_time seconds.
       difference = gettime() - start_time;
       difference /= blend_in_control_time;
       difference = clamp(difference, 0, 1);
@@ -910,8 +909,7 @@ ride_uaz_player_launch() {
   enablePlayerWeapons(false);
   level.player.rig unlink();
   level.player.rig RotateVelocity((300, 300, 300), 10);
-  level.player.rig MoveGravity(
-    throw, 1);
+  level.player.rig MoveGravity(throw, 1);
   level.player.rig hide();
 }
 
@@ -1200,10 +1198,7 @@ react_to_player() {
 
     self waittill("waittill_stack", msg);
 
-    if(
-      (msg == "bulletwhizby" && self.waittill_stack.a == level.player) ||
-      (msg == "damage" && self.waittill_stack.b == level.player)
-    ) {
+    if((msg == "bulletwhizby" && self.waittill_stack.a == level.player) || (msg == "damage" && self.waittill_stack.b == level.player)) {
       break;
     }
   }

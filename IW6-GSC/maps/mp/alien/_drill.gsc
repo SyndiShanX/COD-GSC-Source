@@ -1338,9 +1338,7 @@ watchBombStuck(owner) {
   }
 
   if(isDefined(level.watch_bomb_stuck_override)) {
-    if([
-        [level.watch_bomb_stuck_override]
-      ](owner))
+    if([[level.watch_bomb_stuck_override]](owner))
       return;
   }
 
@@ -1570,31 +1568,10 @@ drill_generic_BBPrint(BBprint_string, player) {
     healthratio = (level.drill.health - CONST_HEALTH_INVULNERABLE) / level.drill_health_hardcore;
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
-    IPrintLnBold("^8bbprint: " + BBprint_string + "\n" +
-      " cyclenum=" + cyclenum +
-      " hivename=" + hivename +
-      " playtime=" + playtime +
-      " drillhealth=" + healthratio +
-      " repairer=" + planter +
-      " repairerperk0=" + planterperk0 +
-      " repairerperk1=" + planterperk1 +
-      " repairerperk0level=" + planterperk0level +
-      " repairerperk1level=" + planterperk1level +
-      " playernum=" + playernum);
+    IPrintLnBold("^8bbprint: " + BBprint_string + "\n" + " cyclenum=" + cyclenum + " hivename=" + hivename + " playtime=" + playtime + " drillhealth=" + healthratio + " repairer=" + planter + " repairerperk0=" + planterperk0 + " repairerperk1=" + planterperk1 + " repairerperk0level=" + planterperk0level + " repairerperk1level=" + planterperk1level + " playernum=" + playernum);
   }
 
-  bbprint(BBprint_string,
-    "cyclenum %i hivename %s playtime %f drillhealth %f repairer %s repairerperk0 %s repairerperk1 %s repairerperk0level %s repairerperk1level %s playernum %i ",
-    cyclenum,
-    hivename,
-    playtime,
-    healthratio,
-    planter,
-    planterperk0,
-    planterperk1,
-    planterperk0level,
-    planterperk1level,
-    playernum);
+  bbprint(BBprint_string, "cyclenum %i hivename %s playtime %f drillhealth %f repairer %s repairerperk0 %s repairerperk1 %s repairerperk0level %s repairerperk1level %s playernum %i ", cyclenum, hivename, playtime, healthratio, planter, planterperk0, planterperk1, planterperk0level, planterperk1level, playernum);
 }
 
 check_for_player_near_hive_with_drill() {

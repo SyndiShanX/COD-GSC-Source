@@ -174,8 +174,7 @@ updateBar(barFrac, rateOfChange) {
     updateBarScale(barFrac, rateOfChange);
 }
 
-updateBarScale(barFrac, rateOfChange) // rateOfChange is optional and is in "(entire bar lengths) per second"
-{
+updateBarScale(barFrac, rateOfChange) // rateOfChange is optional and is in "(entire bar lengths) per second"{
   barWidth = int(self.width * barFrac + 0.5); // (+ 0.5 rounds)
 
   if(!barWidth)
@@ -186,8 +185,7 @@ updateBarScale(barFrac, rateOfChange) // rateOfChange is optional and is in "(en
 
   assertEx(barWidth <= self.width, "barWidth <= self.width: " + barWidth + " <= " + self.width + " - barFrac was " + barFrac);
 
-  //if barWidth is bigger than self.width then we are drawing more than 100%
-  if(isDefined(rateOfChange) && barWidth < self.width) {
+  //if barWidth is bigger than self.width then we are drawing more than 100% if(isDefined(rateOfChange) && barWidth < self.width) {
     if(rateOfChange > 0) {
       //printLn( "scaling from: " + barWidth + " to " + self.width + " at " + ((1 - barFrac) / rateOfChange) );
       assertex(((1 - barFrac) / rateOfChange) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);

@@ -41,21 +41,17 @@ watch_predicted_player_changes(localclientnum) {
     if(nonpredicted_local_player !== level.demolocalclients[localclientnum].nonpredicted_local_player) {
       level notify(#"demo_nplplayer_change", localclientnum);
       level notify("demo_nplplayer_change" + localclientnum, {
-        #old_player: level.demolocalclients[localclientnum].nonpredicted_local_player,
-        #new_player: nonpredicted_local_player
+        #old_player: level.demolocalclients[localclientnum].nonpredicted_local_player, #new_player: nonpredicted_local_player
       });
       level.demolocalclients[localclientnum].nonpredicted_local_player = nonpredicted_local_player;
     }
 
     if(predicted_local_player !== level.demolocalclients[localclientnum].predicted_local_player) {
       level notify(#"demo_plplayer_change", {
-        #localclientnum: localclientnum,
-        #old_player: level.demolocalclients[localclientnum].predicted_local_player,
-        #new_player: predicted_local_player
+        #localclientnum: localclientnum, #old_player: level.demolocalclients[localclientnum].predicted_local_player, #new_player: predicted_local_player
       });
       level notify("demo_plplayer_change" + localclientnum, {
-        #old_player: level.demolocalclients[localclientnum].predicted_local_player,
-        #new_player: predicted_local_player
+        #old_player: level.demolocalclients[localclientnum].predicted_local_player, #new_player: predicted_local_player
       });
       level.demolocalclients[localclientnum].predicted_local_player = predicted_local_player;
     }

@@ -1,9 +1,7 @@
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 #include common_scripts\utility;
-#define SENTRY_MODE_ON "sentry"
-#define SENTRY_MODE_OFF "sentry_offline"
-#define SENTRY_TIME_OUT 90.0
+#define SENTRY_MODE_ON "sentry"#define SENTRY_MODE_OFF "sentry_offline"#define SENTRY_TIME_OUT 90.0
 #define SENTRY_SPINUP_TIME .05
 #define SENTRY_OVERHEAT_TIME 8.0
 #define SENTRY_FX_TIME 1

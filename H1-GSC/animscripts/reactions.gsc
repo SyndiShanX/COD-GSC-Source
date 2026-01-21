@@ -14,10 +14,10 @@ main() {
 
 init_animset_reactions() {
   var_0 = [];
-  var_0["cover_stand"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
-  var_0["cover_crouch"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
-  var_0["cover_left"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
-  var_0["cover_right"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
+  var_0["cover_stand"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_crouch"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_left"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_right"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
   anim.archetypes["soldier"]["cover_reactions"] = var_0;
   var_0 = [];
   var_0[0] = % run_wizby_a;
@@ -53,7 +53,7 @@ bulletwhizbyreaction() {
   self orientmode("face current");
 
   if(isDefined(self.disable_crouch_whizby_react) || var_1 || common_scripts\utility::cointoss()) {
-    self clearanim( % animscript_root, 0.1);
+    self clearanim(%animscript_root, 0.1);
     var_2 = [];
 
     if(animscripts\utility::usingsmg()) {
@@ -77,11 +77,11 @@ bulletwhizbyreaction() {
 
     self setflaggedanimknobrestart("reactanim", var_3, 1, 0.1, 1);
     animscripts\notetracks::donotetracksfortime(var_4, "reactanim");
-    self clearanim( % animscript_root, 0.1);
+    self clearanim(%animscript_root, 0.1);
 
     if(!var_1 && self.stairsstate == "none" && !isDefined(self.disable_dive_whizby_react)) {
       var_5 = 1 + randomfloat(0.2);
-      var_6 = animscripts\utility::randomanimoftwo( % exposed_dive_grenade_b, % exposed_dive_grenade_f);
+      var_6 = animscripts\utility::randomanimoftwo(%exposed_dive_grenade_b, %exposed_dive_grenade_f);
       self setflaggedanimknobrestart("dive", var_6, 1, 0.1, var_5);
       animscripts\shared::donotetracks("dive");
     }
@@ -90,8 +90,8 @@ bulletwhizbyreaction() {
     var_5 = 1.2 + randomfloat(0.3);
 
     if(self.a.pose == "stand") {
-      self clearanim( % animscript_root, 0.1);
-      self setflaggedanimknobrestart("crouch", % exposed_stand_2_crouch, 1, 0.1, var_5);
+      self clearanim(%animscript_root, 0.1);
+      self setflaggedanimknobrestart("crouch", %exposed_stand_2_crouch, 1, 0.1, var_5);
       animscripts\shared::donotetracks("crouch");
     }
 
@@ -103,19 +103,19 @@ bulletwhizbyreaction() {
       var_8 = var_7;
 
     if(vectordot(var_8, var_7) > 0) {
-      var_9 = animscripts\utility::randomanimoftwo( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
-      self clearanim( % animscript_root, 0.1);
+      var_9 = animscripts\utility::randomanimoftwo(%exposed_crouch_idle_twitch_v2, %exposed_crouch_idle_twitch_v3);
+      self clearanim(%animscript_root, 0.1);
       self setflaggedanimknobrestart("twitch", var_9, 1, 0.1, 1);
       animscripts\shared::donotetracks("twitch");
     } else {
-      var_10 = animscripts\utility::randomanimoftwo( % exposed_crouch_turn_180_left, % exposed_crouch_turn_180_right);
-      self clearanim( % animscript_root, 0.1);
+      var_10 = animscripts\utility::randomanimoftwo(%exposed_crouch_turn_180_left, %exposed_crouch_turn_180_right);
+      self clearanim(%animscript_root, 0.1);
       self setflaggedanimknobrestart("turn", var_10, 1, 0.1, 1);
       animscripts\shared::donotetracks("turn");
     }
   }
 
-  self clearanim( % animscript_root, 0.1);
+  self clearanim(%animscript_root, 0.1);
   self.whizbyenemy = undefined;
   self animmode("normal");
   self orientmode("face default");
@@ -211,7 +211,7 @@ getnewenemyreactionanim() {
 }
 
 stealthnewenemyreactanim() {
-  self clearanim( % animscript_root, 0.2);
+  self clearanim(%animscript_root, 0.2);
 
   if(randomint(4) < 3) {
     self orientmode("face enemy");
@@ -238,7 +238,7 @@ stealthnewenemyreactanim() {
     var_1 = getanimlength(var_2);
     animscripts\notetracks::donotetracksfortime(var_1 * 0.8, "reactanim");
     self orientmode("face current");
-    self clearanim( % animscript_root, 0.2);
+    self clearanim(%animscript_root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_3, 1, 0.2, 1);
     animscripts\shared::donotetracks("reactanim");
   }
@@ -255,7 +255,7 @@ newenemyreactionanim() {
     stealthnewenemyreactanim();
   else {
     var_0 = getnewenemyreactionanim();
-    self clearanim( % animscript_root, 0.2);
+    self clearanim(%animscript_root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
     animscripts\shared::donotetracks("reactanim");
   }

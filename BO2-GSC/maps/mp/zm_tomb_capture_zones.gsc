@@ -1663,7 +1663,7 @@ generator_state_turn_off() {
 }
 
 generator_turns_off_after_anim() {
-  wait(getanimlength( % fxanim_zom_tomb_generator_end_anim));
+  wait(getanimlength(%fxanim_zom_tomb_generator_end_anim));
   self generator_state_off();
 }
 
@@ -1676,7 +1676,7 @@ can_start_generator_power_up_anim() {
     self.n_time_started_generator = 0;
 
   if(!isDefined(self.n_time_start_anim))
-    self.n_time_start_anim = getanimlength( % fxanim_zom_tomb_generator_start_anim);
+    self.n_time_start_anim = getanimlength(%fxanim_zom_tomb_generator_start_anim);
 
   return self.n_current_progress > self.n_last_progress && (gettime() - self.n_time_started_generator) * 0.001 > self.n_time_start_anim;
 }

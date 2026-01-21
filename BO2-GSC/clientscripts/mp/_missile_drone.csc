@@ -22,7 +22,7 @@ missile_drone_projectile_animate_cb(localclientnum, oldval, newval, bnewent, bin
   wait 0.1;
   self waittill_dobj(localclientnum);
   self useanimtree(#animtree);
-  self setanim( % o_drone_hunter_launch, 1.0, 0.0, 1.0);
+  self setanim(%o_drone_hunter_launch, 1.0, 0.0, 1.0);
 }
 
 missile_drone_projectile_active_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

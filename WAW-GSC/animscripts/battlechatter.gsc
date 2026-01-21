@@ -430,9 +430,7 @@ addPhraseToHistory(phrase) {
 
 isDupePhrase(phrase, threshold) {
   for(i = 0; i < level.bcHistoryCount; i++) {
-    if(isDefined(level.bcHistoryPhrases[i]) &&
-      samePhrase(level.bcHistoryPhrases[i], phrase) &&
-      gettime() - level.bcHistoryTimes[i] < threshold) {
+    if(isDefined(level.bcHistoryPhrases[i]) && samePhrase(level.bcHistoryPhrases[i], phrase) && gettime() - level.bcHistoryTimes[i] < threshold) {
       if(getdvar("debug_bclotsoprint") == "on")
         println("BC DEBUG history skip time " + gettime() + " " + level.bcHistoryTimes[i] + " " + (gettime() - level.bcHistoryTimes[i]));
       return true;
@@ -497,9 +495,7 @@ isExposed() {
   node = self bcGetClaimedNode();
   if(!isDefined(node))
     return (true);
-  if((node.type[0] == "C") &&
-    (node.type[1] == "o") &&
-    (node.type[2] == "v")) {
+  if((node.type[0] == "C") && (node.type[1] == "o") && (node.type[2] == "v")) {
     return (false);
   }
   return (true);
@@ -509,9 +505,7 @@ isClaimedNodeCover() {
   node = self bcGetClaimedNode();
   if(!isDefined(node))
     return (false);
-  if((node.type[0] == "C") &&
-    (node.type[1] == "o") &&
-    (node.type[2] == "v")) {
+  if((node.type[0] == "C") && (node.type[1] == "o") && (node.type[2] == "v")) {
     return (true);
   }
   return (false);
@@ -532,9 +526,7 @@ isNodeCover() {
   node = self.node;
   if(!isDefined(node))
     return (false);
-  if((node.type[0] == "C") &&
-    (node.type[1] == "o") &&
-    (node.type[2] == "v")) {
+  if((node.type[0] == "C") && (node.type[1] == "o") && (node.type[2] == "v")) {
     return (true);
   }
   return (false);
@@ -810,21 +802,13 @@ bcCanSay(eventAction, eventType, priority, modifier) {
   assert(isDefined(eventAction));
   assert(isDefined(eventType));
   isGrenade = false;
-  if(isDefined(eventAction) && eventAction == "inform" &&
-    isDefined(eventType) && eventType == "incoming" &&
-    isDefined(modifier) && modifier == "grenade"
-  ) {
+  if(isDefined(eventAction) && eventAction == "inform" && isDefined(eventType) && eventType == "incoming" && isDefined(modifier) && modifier == "grenade") {
     isGrenade = true;
   }
-  if(isDefined(eventAction) && eventAction == "inform" &&
-    isDefined(eventType) && eventType == "attack" &&
-    isDefined(modifier) && modifier == "grenade"
-  ) {
+  if(isDefined(eventAction) && eventAction == "inform" && isDefined(eventType) && eventType == "attack" && isDefined(modifier) && modifier == "grenade") {
     isGrenade = true;
   }
-  if(isDefined(eventAction) && eventAction == "threat" &&
-    isDefined(eventType) && eventType == "bansai"
-  ) {
+  if(isDefined(eventAction) && eventAction == "threat" && isDefined(eventType) && eventType == "bansai") {
     isGrenade = true;
   }
   if(isplayer(self)) {
@@ -993,8 +977,7 @@ getThreat(team, threats, threatDistance, callCount) {
     }
     for(p = 0; p < players.size; p++) {
       d = distance(threats[i].origin, players[p].origin);
-      if(d < closest &&
-        (callCount == 0 || threats[i].bcCallCount[team] < callCount)) {
+      if(d < closest && (callCount == 0 || threats[i].bcCallCount[team] < callCount)) {
         closest = d;
         threat = threats[i];
         threat.bcthreatplayer = players[p];
@@ -1144,12 +1127,7 @@ isBanzai(player) {
 }
 
 isAHero() {
-  return self.npcID == "sul" ||
-    self.npcID == "roe" ||
-    self.npcID == "pol" ||
-    self.npcID == "rez" ||
-    self.npcID == "che" ||
-    self.npcID == "com";
+  return self.npcID == "sul" || self.npcID == "roe" || self.npcID == "pol" || self.npcID == "rez" || self.npcID == "che" || self.npcID == "com";
 }
 
 isInfantry(player) {
@@ -1231,10 +1209,7 @@ doReload(otherteam, talker, yellat) {
 
 tryReload(team, otherteam) {
   for(i = 0; i < team.size; i++) {
-    if(isDefined(team[i].bcReloadTime) &&
-      (gettime() - team[i].bcReloadTime) < 2000 &&
-      team[i] bcCanSay("order", "action")
-    ) {
+    if(isDefined(team[i].bcReloadTime) && (gettime() - team[i].bcReloadTime) < 2000 && team[i] bcCanSay("order", "action")) {
       thread doReload(otherteam, team[i], findGuyToYellAt(team, team[i]));
       return true;
     }
@@ -1260,18 +1235,13 @@ doOrder(talker, yellat, type, modifier) {
 
 tryOrder(team) {
   for(i = 0; i < team.size; i++) {
-    if(isDefined(team[i].bcOrderTime) &&
-      (gettime() - team[i].bcOrderTime) > 2000
-    ) {
+    if(isDefined(team[i].bcOrderTime) && (gettime() - team[i].bcOrderTime) > 2000) {
       team[i].bcOrderTime = undefined;
       team[i].bcOrderType = undefined;
       team[i].bcOrderModifier = undefined;
       continue;
     }
-    if(isDefined(team[i].bcOrderTime) &&
-      (gettime() - team[i].bcOrderTime) < 2000 &&
-      team[i] bcCanSay("order", team[i].bcOrderType)
-    ) {
+    if(isDefined(team[i].bcOrderTime) && (gettime() - team[i].bcOrderTime) < 2000 && team[i] bcCanSay("order", team[i].bcOrderType)) {
       thread doOrder(team[i], findGuyToYellAt(team, team[i]), team[i].bcOrderType, team[i].bcOrderModifier);
       return true;
     }

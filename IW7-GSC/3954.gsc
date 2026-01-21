@@ -1120,9 +1120,7 @@ func_13F55() {
     }
 
     if(isDefined(level.movemodefunc[self.agent_type])) {
-      var_2 = [
-        [level.movemodefunc[self.agent_type]]
-      ](var_0);
+      var_2 = [[level.movemodefunc[self.agent_type]]](var_0);
 
       if(isDefined(var_2)) {
         self.movemode = var_2;
@@ -1136,8 +1134,7 @@ func_13F55() {
       if(isDefined(level.var_BCE5[self.agent_type])) {
         self.moveratescale = [
           }
-          [level.var_BCE5[self.agent_type]]
-      ]();
+          [level.var_BCE5[self.agent_type]]]();
       else {
         self.moveratescale = 1;
       }
@@ -1145,8 +1142,7 @@ func_13F55() {
       if(isDefined(level.var_C082[self.agent_type])) {
         self.var_C081 = [
           }
-          [level.var_C082[self.agent_type]]
-      ]();
+          [level.var_C082[self.agent_type]]]();
       else {
         self.var_C081 = 1;
       }
@@ -1154,8 +1150,7 @@ func_13F55() {
       if(isDefined(level.var_126E9[self.agent_type])) {
         self.traverseratescale = [
           }
-          [level.var_126E9[self.agent_type]]
-      ]();
+          [level.var_126E9[self.agent_type]]]();
       else {
         self.traverseratescale = 1;
       }
@@ -1460,9 +1455,7 @@ func_C4BD(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   var_15 = self;
 
   if(isDefined(self.has_backpack) && isDefined(level.should_drop_pillage)) {
-    if([
-        [level.should_drop_pillage]
-      ](var_1, self.origin))
+    if([[level.should_drop_pillage]](var_1, self.origin))
       self setscriptablepartstate("backpack", "hide", 1);
   }
 

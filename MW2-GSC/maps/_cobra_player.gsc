@@ -50,10 +50,7 @@ and these lines in your CSV:
 include,vehicle_cobra_helicopter_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
-defaultmdl="vehicle_cobra_helicopter"
-default:"vehicletype" "cobra_player"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_cobra_helicopter"default:"vehicletype" "cobra_player"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_cobra_helicopter_fly_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -64,7 +61,5 @@ and these lines in your CSV:
 include,vehicle_cobra_helicopter_fly_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
-defaultmdl="vehicle_cobra_helicopter_fly"
-default:"vehicletype" "cobra_player"
-default:"script_team" "allies"
+defaultmdl="vehicle_cobra_helicopter_fly"default:"vehicletype" "cobra_player"default:"script_team" "allies"
 */

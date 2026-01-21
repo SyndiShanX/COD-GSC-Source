@@ -490,13 +490,7 @@ bombs() {
     dem_enemy_base_influencer_score_curve = level.spawnsystem.dem_enemy_base_influencer_score_curve;
     dem_enemy_base_influencer_radius = level.spawnsystem.dem_enemy_base_influencer_radius;
     team_mask = maps\mp\gametypes\_spawning::get_team_mask(game["attackers"]);
-    bombZone.spawnInfluencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-      trigger.origin,
-      dem_enemy_base_influencer_radius,
-      dem_enemy_base_influencer_score,
-      team_mask,
-      "dem_enemy_base,r,s",
-      maps\mp\gametypes\_spawning::get_score_curve_index(dem_enemy_base_influencer_score_curve));
+    bombZone.spawnInfluencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, trigger.origin, dem_enemy_base_influencer_radius, dem_enemy_base_influencer_score, team_mask, "dem_enemy_base,r,s", maps\mp\gametypes\_spawning::get_score_curve_index(dem_enemy_base_influencer_score_curve));
   }
   for(index = 0; index < level.bombZones.size; index++) {
     array = [];

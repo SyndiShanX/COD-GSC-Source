@@ -323,7 +323,7 @@ horse_death_nicaragua() {
     death_anim = self.death_anim;
 
   if(isDefined(death_anim)) {
-    self setflaggedanimknoball("horse_death", death_anim, % root, 1, 0.2, 1);
+    self setflaggedanimknoball("horse_death", death_anim, %root, 1, 0.2, 1);
     self animscripts\shared::donotetracks("horse_death", ::handle_horse_death_fx);
     self waittillmatch("horse_death", "stop");
 

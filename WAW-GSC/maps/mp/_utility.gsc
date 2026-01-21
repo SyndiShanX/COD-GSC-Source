@@ -85,9 +85,7 @@ spawn_array_struct() {
   return s;
 }
 
-append_array_struct(
-  dst_s,
-  src_s) {
+append_array_struct(dst_s, src_s) {
   for(i = 0; i < src_s.a.size; i++) {
     dst_s.a[dst_s.a.size] = src_s.a[i];
   }
@@ -283,8 +281,7 @@ orientToNormal(normal) {
   return plant_angle;
 }
 
-array_levelthread(ents, process,
-  var, excluders) {
+array_levelthread(ents, process, var, excluders) {
   exclude = [];
   for(i = 0; i < ents.size; i++)
     exclude[i] = false;
@@ -297,8 +294,7 @@ array_levelthread(ents, process,
   for(i = 0; i < ents.size; i++) {
     if(!exclude[i]) {
       if(isDefined(var))
-        level thread[[process]](ents[i],
-          var);
+        level thread[[process]](ents[i], var);
       else
         level thread[[process]](ents[i]);
     }
@@ -349,9 +345,7 @@ IsBulletImpactMOD(sMeansOfDeath) {
 
 get_team_alive_players_s(teamName) {
   teamPlayers_s = spawn_array_struct();
-  if(isDefined(teamName) &&
-    isDefined(level.alivePlayers) &&
-    isDefined(level.alivePlayers[teamName])) {
+  if(isDefined(teamName) && isDefined(level.alivePlayers) && isDefined(level.alivePlayers[teamName])) {
     for(i = 0; i < level.alivePlayers[teamName].size; i++) {
       teamPlayers_s.a[teamPlayers_s.a.size] = level.alivePlayers[teamName][i];
     }
@@ -656,10 +650,7 @@ activate_exploder(num) {
       ent thread exploder_damage();
     if(isDefined(ent.v["earthquake"])) {
       eq = ent.v["earthquake"];
-      earthquake(level.earthquake[eq]["magnitude"],
-        level.earthquake[eq]["duration"],
-        ent.v["origin"],
-        level.earthquake[eq]["radius"]);
+      earthquake(level.earthquake[eq]["magnitude"], level.earthquake[eq]["duration"], ent.v["origin"], level.earthquake[eq]["radius"]);
     }
     if(ent.v["exploder_type"] == "exploder")
       ent thread brush_show();
@@ -1084,9 +1075,7 @@ compareSizesFx(org, array, dist, compareFunc) {
   distSqr = DistanceSquared(struct.v["origin"], org);
   for(i = 1; i < keys.size; i++) {
     newdistSqr = DistanceSquared(array[keys[i]].v["origin"], org);
-    if([
-        [compareFunc]
-      ](newdistSqr, distSqr))
+    if([[compareFunc]](newdistSqr, distSqr))
       continue;
     distSqr = newdistSqr;
     struct = array[keys[i]];
@@ -1115,9 +1104,7 @@ compareSizes(org, array, dist, compareFunc) {
   distSqr = DistanceSquared(ent.origin, org);
   for(i = 1; i < keys.size; i++) {
     newdistSqr = DistanceSquared(array[keys[i]].origin, org);
-    if([
-        [compareFunc]
-      ](newdistSqr, distSqr))
+    if([[compareFunc]](newdistSqr, distSqr))
       continue;
     distSqr = newdistSqr;
     ent = array[keys[i]];

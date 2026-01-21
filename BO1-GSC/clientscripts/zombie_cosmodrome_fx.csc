@@ -49,9 +49,7 @@ level_fog_init() {
   sun_stop_ang = 113.6;
   time = 0;
   max_fog_opacity = 1;
-  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
 }
 
 precache_scripted_fx() {

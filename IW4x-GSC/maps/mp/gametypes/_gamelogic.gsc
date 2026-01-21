@@ -265,23 +265,17 @@ updateGameEvents() {
 
     // if both allies and axis were alive and now they are both dead in the same instance
     if(!level.aliveCount["allies"] && !level.aliveCount["axis"] && !livesCount["allies"] && !livesCount["axis"]) {
-      return [
-        [level.onDeadEvent]
-      ]("all");
+      return [[level.onDeadEvent]]("all");
     }
 
     // if allies were alive and now they are not
     if(!level.aliveCount["allies"] && !livesCount["allies"]) {
-      return [
-        [level.onDeadEvent]
-      ]("allies");
+      return [[level.onDeadEvent]]("allies");
     }
 
     // if axis were alive and now they are not
     if(!level.aliveCount["axis"] && !livesCount["axis"]) {
-      return [
-        [level.onDeadEvent]
-      ]("axis");
+      return [[level.onDeadEvent]]("axis");
     }
 
     // one ally left
@@ -302,17 +296,13 @@ updateGameEvents() {
   } else {
     // everyone is dead
     if((!level.aliveCount["allies"] && !level.aliveCount["axis"]) && (!level.livesCount["allies"] && !level.livesCount["axis"])) {
-      return [
-        [level.onDeadEvent]
-      ]("all");
+      return [[level.onDeadEvent]]("all");
     }
 
     livePlayers = getPotentialLivingPlayers();
 
     if(livePlayers.size == 1) {
-      return [
-        [level.onOneLeftEvent]
-      ]("all");
+      return [[level.onOneLeftEvent]]("all");
     }
   }
 }
@@ -831,9 +821,7 @@ matchStartTimer(type, duration) {
   matchStartText.foreground = false;
   matchStartText.hidewheninmenu = true;
 
-  matchStartText setText(game["strings"][type]); // "match begins in:"
-
-  matchStartTimer = createServerFontString("hudbig", 1);
+  matchStartText setText(game["strings"][type]); // "match begins in:"matchStartTimer = createServerFontString("hudbig", 1);
   matchStartTimer setPoint("CENTER", "CENTER", 0, 0);
   matchStartTimer.sort = 1001;
   matchStartTimer.color = (1, 1, 0);
@@ -1653,8 +1641,7 @@ endGameOvertime(winner, endReasonText) {
     player freeGameplayHudElems();
 
     player setClientDvars("cg_everyoneHearsEveryone", 1);
-    player setClientDvars("cg_drawSpectatorMessages", 0,
-      "g_compassShowEnemies", 0);
+    player setClientDvars("cg_drawSpectatorMessages", 0, "g_compassShowEnemies", 0);
 
     if(player.pers["team"] == "spectator")
       player thread maps\mp\gametypes\_playerlogic::spawnIntermission();
@@ -1695,8 +1682,7 @@ endGameHalfTime() {
     player freeGameplayHudElems();
 
     player setClientDvars("cg_everyoneHearsEveryone", 1);
-    player setClientDvars("cg_drawSpectatorMessages", 0,
-      "g_compassShowEnemies", 0);
+    player setClientDvars("cg_drawSpectatorMessages", 0, "g_compassShowEnemies", 0);
 
     if(player.pers["team"] == "spectator")
       player thread maps\mp\gametypes\_playerlogic::spawnIntermission();
@@ -1786,8 +1772,7 @@ endGame(winner, endReasonText, nukeDetonated) {
     player freeGameplayHudElems();
 
     player setClientDvars("cg_everyoneHearsEveryone", 1);
-    player setClientDvars("cg_drawSpectatorMessages", 0,
-      "g_compassShowEnemies", 0);
+    player setClientDvars("cg_drawSpectatorMessages", 0, "g_compassShowEnemies", 0);
 
     if(player.pers["team"] == "spectator")
       player thread maps\mp\gametypes\_playerlogic::spawnIntermission();

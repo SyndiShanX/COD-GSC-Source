@@ -421,8 +421,7 @@ friendlies_traverse_gulag_exterior() {
   activate_trigger_with_targetname("friendlies_leave_courtyard");
 
   for(i = 1; i <= 5; i++) {
-    // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"
-    msg = "ext_progress_" + i;
+    // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"msg = "ext_progress_" + i;
     trigger = GetEnt(msg, "targetname");
     if(flag_exist(msg))
       flag_wait(msg);
@@ -447,8 +446,7 @@ friendlies_traverse_showers() {
   level endon("leaving_bathroom_vol2");
 
   for(i = 1; i <= 5; i++) {
-    // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"
-    msg = "bathroom_int" + i;
+    // "ext_progress_1", "ext_progress_2", "ext_progress_3", "ext_progress_4"msg = "bathroom_int" + i;
     trigger = GetEnt(msg, "targetname");
     flag_wait(msg);
     volume = trigger get_color_volume_from_trigger();
@@ -1943,8 +1941,7 @@ door_logic() {
   buzz_sound_org = self.origin + right * 128 + forward * -64 + (0, 0, 32);
 
   for(;;) {
-    // "open_cell_door_weapons"
-    flag_wait("open_" + self.targetname);
+    // "open_cell_door_weapons"flag_wait("open_" + self.targetname);
 
     //		Print3d( buzz_sound_org, "buzz", (1,1,0), 1, 1, 40 );
     thread play_sound_in_space("scn_gulag_jail_door_buzzer", buzz_sound_org);
@@ -3317,7 +3314,7 @@ wait_until_player_breaches_bathroom() {
 }
 
 cellblock_spawn_lots_of_grenades() {
-  //	armory_grenade_spawners = getstructarray( "armory_grenade_spawner", "targetname" );
+  //	armory_grenade_spawners = getstructarray("armory_grenade_spawner", "targetname" );
   //	array_thread( armory_grenade_spawners, ::armory_grenade_think );
   ai = GetAIArray("axis");
   array_thread(ai, ::throw_crazy_grenades);
@@ -4678,8 +4675,7 @@ friendly_clears_cell_trigger() {
 
   thread radio_dialogue(callout);
 
-  // other says "CLEAR!"
-  level.nvg_hall_flags[myFlag]--;
+  // other says "CLEAR!"level.nvg_hall_flags[myFlag]--;
   if(!level.nvg_hall_flags[myFlag]) {
     // if both sides are cleared, we can move up now
     // nvg_moveup1, nvg_moveup2, nvg_moveup3, nvg_moveup4

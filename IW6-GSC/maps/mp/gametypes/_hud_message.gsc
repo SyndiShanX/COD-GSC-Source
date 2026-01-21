@@ -543,12 +543,7 @@ actionNotify(actionData) {
         return;
       case "killstreak_splash":
       case "splash":
-        if(self.doingSplash[slot].type != "splash" &&
-          self.doingSplash[slot].type != "urgent_splash" &&
-          self.doingSplash[slot].type != "killstreak_splash" &&
-          self.doingSplash[slot].type != "challenge_splash" &&
-          self.doingSplash[slot].type != "promotion_splash" &&
-          self.doingSplash[slot].type != "intel_splash") {
+        if(self.doingSplash[slot].type != "splash" && self.doingSplash[slot].type != "urgent_splash" && self.doingSplash[slot].type != "killstreak_splash" && self.doingSplash[slot].type != "challenge_splash" && self.doingSplash[slot].type != "promotion_splash" && self.doingSplash[slot].type != "intel_splash") {
           self.notifyText.alpha = 0;
           self.notifyText2.alpha = 0;
           self.notifyIcon.alpha = 0;
@@ -940,15 +935,11 @@ outcomeNotify(winner, endReasonText) {
   thirdPlace = players[2];
 
   tied = false;
-  if(isDefined(firstPlace) &&
-    self.score == firstPlace.score &&
-    self.deaths == firstPlace.deaths) {
+  if(isDefined(firstPlace) && self.score == firstPlace.score && self.deaths == firstPlace.deaths) {
     if(self != firstPlace)
       tied = true;
     else {
-      if(isDefined(secondPlace) &&
-        secondPlace.score == firstPlace.score &&
-        secondPlace.deaths == firstPlace.deaths) {
+      if(isDefined(secondPlace) && secondPlace.score == firstPlace.score && secondPlace.deaths == firstPlace.deaths) {
         tied = true;
       }
     }

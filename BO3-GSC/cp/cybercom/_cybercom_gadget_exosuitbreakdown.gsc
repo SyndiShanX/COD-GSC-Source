@@ -243,12 +243,12 @@ function private _exo_breakdown(attacker) {
   type = self cybercom::function_5e3d3aa();
   variant = attacker cybercom::getanimationvariant((base + "_") + type);
   self orientmode("face default");
-  self animscripted("exo_intro_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_suit_overload_react_intro") + variant, "normal", % generic::body, 1, 0.2);
+  self animscripted("exo_intro_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_suit_overload_react_intro") + variant, "normal", %generic::body, 1, 0.2);
   self thread cybercom::stopanimscriptedonnotify("damage_pain", "exo_intro_anim", 1, attacker, weapon);
   self thread cybercom::stopanimscriptedonnotify("notify_melee_damage", "exo_intro_anim", 1, attacker, weapon);
   self waittillmatch("exo_intro_anim");
   function_58831b5a(loops, attacker, weapon, variant, base, type);
-  self animscripted("exo_outro_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_suit_overload_react_outro") + variant, "normal", % generic::body, 1, 0.2);
+  self animscripted("exo_outro_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_suit_overload_react_outro") + variant, "normal", %generic::body, 1, 0.2);
   self thread cybercom::stopanimscriptedonnotify("damage_pain", "exo_outro_anim", 1, attacker, weapon);
   self thread cybercom::stopanimscriptedonnotify("notify_melee_damage", "exo_outro_anim", 1, attacker, weapon);
   self waittillmatch("exo_outro_anim");
@@ -267,7 +267,7 @@ function function_58831b5a(loops, attacker, weapon, variant, base, type) {
 
 function function_e01b8059(attacker, weapon, variant, base, type) {
   self endon("death");
-  self animscripted("exo_loop_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_suit_overload_react_loop") + variant, "normal", % generic::body, 1, 0.2);
+  self animscripted("exo_loop_anim", self.origin, self.angles, (((("ai_" + base) + "_") + type) + "_exposed_suit_overload_react_loop") + variant, "normal", %generic::body, 1, 0.2);
   self thread cybercom::stopanimscriptedonnotify("damage_pain", "exo_loop_anim", 1, attacker, weapon);
   self thread cybercom::stopanimscriptedonnotify("breakout_exo_loop", "exo_loop_anim", 0, attacker, weapon);
   self waittillmatch("exo_loop_anim");

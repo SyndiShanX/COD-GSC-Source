@@ -665,8 +665,7 @@ isInBound(ent, bounds) {
 }
 
 isInBound_single(var, v_min, v_max) {
-  if(var > v_min &&
-    var < v_max)
+  if(var > v_min && var < v_max)
     return true;
   return false;
 }

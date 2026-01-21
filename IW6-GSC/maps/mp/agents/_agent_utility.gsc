@@ -317,16 +317,5 @@ killAgent(agent) {
 }
 
 killDog() {
-  self[[self agentFunc("on_damaged")]](
-    level,
-    undefined,
-    self.health + 1,
-    0,
-    "MOD_CRUSH",
-    "none",
-    (0, 0, 0),
-    (0, 0, 0),
-    "none",
-    0
-  );
+  self[[self agentFunc("on_damaged")]](level, undefined, self.health + 1, 0, "MOD_CRUSH", "none", (0, 0, 0), (0, 0, 0), "none", 0);
 }

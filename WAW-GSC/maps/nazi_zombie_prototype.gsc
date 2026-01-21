@@ -95,17 +95,11 @@ in_bad_zone_watcher() {
       array_check = no_prone_zones.size;
     }
     for(i = 0; i < array_check; i++) {
-      if(isDefined(no_prone_and_crouch_zones[i]) &&
-        self is_within_volume(no_prone_and_crouch_zones[i]["min"][0], no_prone_and_crouch_zones[i]["max"][0],
-          no_prone_and_crouch_zones[i]["min"][1], no_prone_and_crouch_zones[i]["max"][1],
-          no_prone_and_crouch_zones[i]["min"][2], no_prone_and_crouch_zones[i]["max"][2])) {
+      if(isDefined(no_prone_and_crouch_zones[i]) && self is_within_volume(no_prone_and_crouch_zones[i]["min"][0], no_prone_and_crouch_zones[i]["max"][0], no_prone_and_crouch_zones[i]["min"][1], no_prone_and_crouch_zones[i]["max"][1], no_prone_and_crouch_zones[i]["min"][2], no_prone_and_crouch_zones[i]["max"][2])) {
         self allowprone(false);
         self allowcrouch(false);
         break;
-      } else if(isDefined(no_prone_zones[i]) &&
-        self is_within_volume(no_prone_zones[i]["min"][0], no_prone_zones[i]["max"][0],
-          no_prone_zones[i]["min"][1], no_prone_zones[i]["max"][1],
-          no_prone_zones[i]["min"][2], no_prone_zones[i]["max"][2])) {
+      } else if(isDefined(no_prone_zones[i]) && self is_within_volume(no_prone_zones[i]["min"][0], no_prone_zones[i]["max"][0], no_prone_zones[i]["min"][1], no_prone_zones[i]["max"][1], no_prone_zones[i]["min"][2], no_prone_zones[i]["max"][2])) {
         self allowprone(false);
         break;
       } else {
@@ -233,9 +227,7 @@ out_of_bounds_watcher() {
     array_check = outside_of_map.size;
     kill_player = true;
     for(i = 0; i < array_check; i++) {
-      if(self is_within_volume(outside_of_map[i]["min"][0], outside_of_map[i]["max"][0],
-          outside_of_map[i]["min"][1], outside_of_map[i]["max"][1],
-          outside_of_map[i]["min"][2], outside_of_map[i]["max"][2])) {
+      if(self is_within_volume(outside_of_map[i]["min"][0], outside_of_map[i]["max"][0], outside_of_map[i]["min"][1], outside_of_map[i]["max"][1], outside_of_map[i]["min"][2], outside_of_map[i]["max"][2])) {
         kill_player = false;
       }
     }

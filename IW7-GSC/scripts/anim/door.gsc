@@ -55,7 +55,7 @@ func_5817(var_0) {
   self.var_B7B5 = gettime() + 100000;
   self notify("move_interrupt");
   self.var_12DEF = undefined;
-  self clearanim( % combatrun, 0.2);
+  self clearanim(%combatrun, 0.2);
   self.a.movement = "stop";
   self waittill("done_grenade_throw");
   self orientmode("face default");

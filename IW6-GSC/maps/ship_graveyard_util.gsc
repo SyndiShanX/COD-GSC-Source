@@ -1492,7 +1492,7 @@ shark_think() {
     var_0 = self.script_moveplaybackrate;
 
   self.animname = "shark";
-  self setanim( % shark_swim_f, 1, randomfloatrange(0, 0.5), var_0);
+  self setanim(%shark_swim_f, 1, randomfloatrange(0, 0.5), var_0);
   var_1 = common_scripts\utility::get_target_ent();
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "real_shark") {

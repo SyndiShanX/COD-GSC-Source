@@ -10,7 +10,7 @@ main(model, type, no_death) {
   build_localinit(::init_local);
   build_deathmodel("vehicle_ambulance_russian");
   build_radiusdamage((0, 0, 32), 300, 200, 100, false);
-  build_drive( % uaz_driving_idle_forward, % uaz_driving_idle_backward, 10);
+  build_drive(%uaz_driving_idle_forward, %uaz_driving_idle_backward, 10);
   build_deathquake(1, 1.6, 500);
   build_treadfx();
   build_life(999, 500, 1500);
@@ -50,6 +50,5 @@ and these lines in your CSV:
 include,vehicle_ambulance_russian
 sound,vehicle_ambulance,vehicle_standard,all_sp
 
-defaultmdl="vehicle_ambulance_russian"
-default:"vehicletype" "ambulance"
+defaultmdl="vehicle_ambulance_russian"default:"vehicletype" "ambulance"
 */

@@ -268,7 +268,7 @@ camera_restraint_for_pop() {
 #using_animtree("player");
 
 camera_tween() {
-  wait(getanimlength( % p_yemen_05_01_shoot_vtol_player) - 0.25);
+  wait(getanimlength(%p_yemen_05_01_shoot_vtol_player) - 0.25);
   level.player startcameratween(0.5);
 }
 
@@ -552,7 +552,7 @@ morals_choice_outcome() {
       }
     }
 
-    wait(getanimlength( % p_yemen_05_04_shoot_harper_player) - 2);
+    wait(getanimlength(%p_yemen_05_04_shoot_harper_player) - 2);
     screen_fade_out(0.5);
     wait 1;
     thread play_harper_blood_pool_fx();
@@ -571,7 +571,7 @@ morals_choice_outcome() {
       level thread run_scene_and_delete("morals_shoot_menendez_defalco");
 
     thread play_muzzle_flash_shoot_menendez();
-    wait(getanimlength( % p_yemen_05_04_shoot_menendez_player) - 1);
+    wait(getanimlength(%p_yemen_05_04_shoot_menendez_player) - 1);
     screen_fade_out(0.0);
     wait 1;
     level.player giveachievement_wrapper("SP_STORY_HARPER_LIVES");

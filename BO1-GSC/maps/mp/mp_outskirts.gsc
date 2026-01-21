@@ -69,13 +69,7 @@ door_think() {
   open = true;
   self door_fx_exploder(self.fx_green);
   while(1) {
-    level waittill_any_ents(self.use_triggers[0], "trigger",
-      self.use_triggers[1], "trigger",
-      self.use_triggers[2], "trigger",
-      self.use_triggers[3], "trigger",
-      self.use_triggers[4], "trigger",
-      self.use_triggers[5], "trigger",
-      self.use_triggers[6], "trigger");
+    level waittill_any_ents(self.use_triggers[0], "trigger", self.use_triggers[1], "trigger", self.use_triggers[2], "trigger", self.use_triggers[3], "trigger", self.use_triggers[4], "trigger", self.use_triggers[5], "trigger", self.use_triggers[6], "trigger");
     array_func(self.use_triggers, ::trigger_off);
     array_func(self.switch_models, ::door_set_switch_model, "p_stk_rolldoor_switch_on_red");
     self door_fx_exploder(self.fx_red);

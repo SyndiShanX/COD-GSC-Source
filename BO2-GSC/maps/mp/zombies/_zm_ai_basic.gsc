@@ -46,9 +46,7 @@ find_flesh() {
 
     if(!isDefined(self.ignore_player) || players.size == 1)
       self.ignore_player = [];
-    else if(!isDefined(level._should_skip_ignore_player_logic) || ![
-        [level._should_skip_ignore_player_logic]
-      ]()) {
+    else if(!isDefined(level._should_skip_ignore_player_logic) || ![[level._should_skip_ignore_player_logic]]()) {
       i = 0;
 
       while(i < self.ignore_player.size) {
@@ -87,9 +85,7 @@ find_flesh() {
       continue;
     }
 
-    if(!isDefined(level.check_for_alternate_poi) || ![
-        [level.check_for_alternate_poi]
-      ]()) {
+    if(!isDefined(level.check_for_alternate_poi) || ![[level.check_for_alternate_poi]]()) {
       self.enemyoverride = zombie_poi;
       self.favoriteenemy = player;
     }
@@ -112,9 +108,7 @@ find_flesh() {
     self thread attractors_generated_listener();
 
     if(isDefined(level._zombie_path_timer_override))
-      self.zombie_path_timer = [
-        [level._zombie_path_timer_override]
-      ]();
+      self.zombie_path_timer = [[level._zombie_path_timer_override]]();
     else
       self.zombie_path_timer = gettime() + randomfloatrange(1, 3) * 1000;
 

@@ -114,9 +114,7 @@ collectible_wait_for_pickup() {
     } else {
       self.trigger setHintString("");
     }
-    if(IsAlive(player) &&
-      player_is_looking_at &&
-      player Use_button_held()) {
+    if(IsAlive(player) && player_is_looking_at && player Use_button_held()) {
       playsoundatposition("uin_aar_unlock_loud", (0, 0, 0));
       break;
     }

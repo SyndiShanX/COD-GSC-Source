@@ -188,12 +188,10 @@ beacon_spawned(watcher, owner) {
   }
 
   owner notify(#"hash_31be1f8b27209ad0", {
-    #player: owner,
-    #beacon: self
+    #player: owner, #beacon: self
   });
   level notify(#"hash_31be1f8b27209ad0", {
-    #player: owner,
-    #beacon: self
+    #player: owner, #beacon: self
   });
 
   if(!owner deployable::location_valid()) {

@@ -84,9 +84,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
 
   self.var_80c69db6 = "<dev string:xd2>";
   self.var_6c4bb19 = {
-    #animation: animation,
-    #v_origin_or_ent: v_origin_or_ent,
-    #v_angles_or_tag: v_angles_or_tag
+    #animation: animation, #v_origin_or_ent: v_origin_or_ent, #v_angles_or_tag: v_angles_or_tag
   };
   level flagsys::clear("<dev string:xdb>");
 
@@ -108,8 +106,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
 waittill_end() {
   level endon(#"demo_jump");
   self waittillmatch({
-    #notetrack: "end"
-  }, # "_anim_notify_");
+    #notetrack: "end"}, # "_anim_notify_");
 }
 
 _get_align_ent(e_align) {

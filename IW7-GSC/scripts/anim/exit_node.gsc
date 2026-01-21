@@ -301,7 +301,7 @@ func_5926(var_0, var_1) {
   }
 
   self orientmode("face angle", self.angles[1]);
-  self func_82E4("coverexit", var_2, % body, 1, var_5, self.var_BD22);
+  self func_82E4("coverexit", var_2, %body, 1, var_5, self.var_BD22);
   scripts\anim\shared::donotetracks("coverexit");
   self.a.pose = "stand";
   self.a.movement = "run";
@@ -309,7 +309,7 @@ func_5926(var_0, var_1) {
   self orientmode("face motion");
   self animmode("none", 0);
   func_6CD5("coverexit");
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self orientmode("face default");
   self animmode("normal", 0);
 }
@@ -368,7 +368,7 @@ custommovetransition() {
     var_1 = 0.2;
   }
 
-  self clearanim( % root, var_1);
+  self clearanim(%root, var_1);
   self orientmode("face default");
   self animmode("none", 0);
 }

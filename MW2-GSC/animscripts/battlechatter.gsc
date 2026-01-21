@@ -245,8 +245,7 @@ init_battleChatter() {
 
   init_flavorbursts();
 
-  // doesn't impact friendlyfire warnings normally played when battlechatter is on,
-  //just whether it plays when battlechatter is otherwise turned off
+  // doesn't impact friendlyfire warnings normally played when battlechatter is on, //just whether it plays when battlechatter is otherwise turned off
   if(!isDefined(level.friendlyfire_warnings)) {
     level.friendlyfire_warnings = false;
   }
@@ -260,8 +259,7 @@ init_battleChatter() {
   anim.eventTypeMinWait["custom"] = [];
   anim.eventTypeMinWait["direction"] = [];
 
-  // If you want to tweak how often battlechatter messages happen,
-  // this is place to do it.
+  // If you want to tweak how often battlechatter messages happen, // this is place to do it.
   // A priority of 1 will force an event to be added to the queue, and
   // will make it override pre-existing events of the same type.
 
@@ -418,8 +416,7 @@ init_battleChatter() {
   }
 
   /*----------- THREAT CALLOUT CHANCES -----------
-  - anim.threatCallouts[] is indexed by the types of possible threat callouts for this AI,
-  and holds %chance weights that help determine if that the AI will
+  - anim.threatCallouts[] is indexed by the types of possible threat callouts for this AI, and holds %chance weights that help determine if that the AI will
   try to use that type of threat callout to alert players to a threat.
   	
   - These are matched against the values of self.allowedCallouts[] for each AI, to determine
@@ -455,35 +452,21 @@ init_battleChatter() {
   anim.threatCallouts = [];
 
   // RPG/exposed
-  anim.threatCallouts["rpg"] = 100; // "RPG!"
-  anim.threatCallouts["exposed"] = 25; // "Got a tango in the open!"
-
-  // "obvious" callouts
+  anim.threatCallouts["rpg"] = 100; // "RPG!"anim.threatCallouts["exposed"] = 25; // "Got a tango in the open!"// "obvious" callouts
   anim.threatCallouts["player_obvious"] = 40; // "Player! Light 'em up!"( for 12 o'clock threats )
 
   // player-relative callouts
-  anim.threatCallouts["player_yourclock"] = 30; // "Player! Contact at your 10 o'clock!"
-  anim.threatCallouts["player_contact_clock"] = 25; // "Player! Contact at 10 o'clock!"
-  anim.threatCallouts["player_target_clock"] = 25; // "Player! Target, 10 o'clock!"
-  anim.threatCallouts["player_cardinal"] = 20; // "Player! Contact, northwest!"
-
-  // "catch-all" callouts
-  anim.threatCallouts["ai_yourclock"] = 25; // "Peas! Contact at your 10 o'clock!"
-  anim.threatCallouts["ai_contact_clock"] = 20;
+  anim.threatCallouts["player_yourclock"] = 30; // "Player! Contact at your 10 o'clock!"anim.threatCallouts["player_contact_clock"] = 25; // "Player! Contact at 10 o'clock!"anim.threatCallouts["player_target_clock"] = 25; // "Player! Target, 10 o'clock!"anim.threatCallouts["player_cardinal"] = 20; // "Player! Contact, northwest!"// "catch-all" callouts
+  anim.threatCallouts["ai_yourclock"] = 25; // "Peas! Contact at your 10 o'clock!"anim.threatCallouts["ai_contact_clock"] = 20;
   anim.threatCallouts["ai_target_clock"] = 20;
   anim.threatCallouts["ai_cardinal"] = 10;
 
   /* DEPRECATED
   // object (aka landmark) callouts
-  anim.threatCallouts[ "player_object_yourclock" ]	= 100;// "Player! Movement by the dumpster at your 10 o'clock!"
-  anim.threatCallouts[ "player_object_clock" ]		= 100;// "Player! Movement by the dumpster at 10 o'clock!"
-  anim.threatCallouts[ "ai_object_yourclock" ]		= 95;// "Peas! Movement by the dumpster at your 10 o'clock!"
-  */
+  anim.threatCallouts[ "player_object_yourclock" ]	= 100;// "Player! Movement by the dumpster at your 10 o'clock!"anim.threatCallouts[ "player_object_clock" ]		= 100;// "Player! Movement by the dumpster at 10 o'clock!"anim.threatCallouts[ "ai_object_yourclock" ]		= 95;// "Peas! Movement by the dumpster at your 10 o'clock!"*/
 
   // location callouts
-  anim.threatCallouts["player_location"] = 95; // ( Player - relative ) "Contact! 2nd floor window on the left!"
-  anim.threatCallouts["ai_location"] = 100; // ( AI - relative ) "Contact! 2nd floor window on the left!"
-  anim.threatCallouts["generic_location"] = 90;
+  anim.threatCallouts["player_location"] = 95; // ( Player - relative ) "Contact! 2nd floor window on the left!"anim.threatCallouts["ai_location"] = 100; // ( AI - relative ) "Contact! 2nd floor window on the left!"anim.threatCallouts["generic_location"] = 90;
 
   anim.lastTeamThreatCallout = [];
   anim.lastTeamThreatCalloutTime = [];
@@ -549,8 +532,7 @@ bcs_setup_flavorburst_toggle_array() {
 init_flavorbursts() {
   // flavor burst transmission aliases
   // update these as new transmissions are recorded
-  // (format of the fbt aliases is "FB_US_7_11",
-  //where the first number is what you put below)
+  // (format of the fbt aliases is "FB_US_7_11", //where the first number is what you put below)
   anim.flavorbursts["american"] = [];
   numBursts = 41;
 
@@ -1129,8 +1111,7 @@ threatInfantry(threat, forceDetail) {
         relativeGuy = level.player;
       }
       // for axis, make it relative to a responder if we have one
-      else if(isDefined(callout.responder) &&
-        RandomInt(100) < anim.eventChance["response"]["callout"]) {
+      else if(isDefined(callout.responder) && RandomInt(100) < anim.eventChance["response"]["callout"]) {
         relativeGuy = callout.responder;
       }
 
@@ -1157,8 +1138,7 @@ threatInfantry(threat, forceDetail) {
         relativeGuy = level.player;
       }
       // for axis, make it relative to a responder if we have one
-      else if(isDefined(callout.responder) &&
-        RandomInt(100) < anim.eventChance["response"]["callout"]) {
+      else if(isDefined(callout.responder) && RandomInt(100) < anim.eventChance["response"]["callout"]) {
         relativeGuy = callout.responder;
       }
 
@@ -1379,9 +1359,7 @@ getThreatInfantryCalloutType(threat) {
   // player-relatives: can the player see the threat?
   if(threatInFrontArc && self canSayPlayerName()) {
     // guys right in front of you either get "obvious" callouts or nothing
-    if(playerClockDirection == "11" ||
-      playerClockDirection == "12" ||
-      playerClockDirection == "1") {
+    if(playerClockDirection == "11" || playerClockDirection == "12" || playerClockDirection == "1") {
       if(playerCanSeeThreat) {
         self addPossibleThreatCallout("player_obvious");
       }
@@ -1770,8 +1748,7 @@ responseThreatExposed(respondTo, modifier) {
   }
 
   chatPhrase = self createChatPhrase();
-  // these aliases look different from regular responses,
-  //so construct them using addThreatExposedAlias()
+  // these aliases look different from regular responses, //so construct them using addThreatExposedAlias()
   chatPhrase addThreatExposedAlias(modifier);
   chatPhrase.lookTarget = respondTo;
   chatPhrase.master = true;
@@ -2387,10 +2364,7 @@ isFiltered(strAction) {
 }
 
 isValidEvent(strAction) {
-  if(!self.squad.isMemberSaying[strAction] &&
-    !anim.isTeamSaying[self.team][strAction] &&
-    GetTime() < self.chatQueue[strAction].expireTime &&
-    GetTime() > self.squad.nextSayTimes[strAction]) {
+  if(!self.squad.isMemberSaying[strAction] && !anim.isTeamSaying[self.team][strAction] && GetTime() < self.chatQueue[strAction].expireTime && GetTime() > self.squad.nextSayTimes[strAction]) {
     // redundant?
     if(!typeLimited(strAction, self.chatQueue[strAction].eventType))
       return (true);
@@ -2484,10 +2458,7 @@ isOfficer() {
   if(!isDefined(fullRank))
     return false;
 
-  if(fullRank == "sergeant" ||
-    fullRank == "lieutenant" ||
-    fullRank == "captain" ||
-    fullRank == "sergeant") {
+  if(fullRank == "sergeant" || fullRank == "lieutenant" || fullRank == "captain" || fullRank == "sergeant") {
     return true;
   }
 
@@ -2521,8 +2492,7 @@ getName() {
     return (undefined);
   }
 
-  // check to see if this is a name with two parts, like "Sgt. Peas" or "Agent Smith"
-  tokens = StrTok(name, " ");
+  // check to see if this is a name with two parts, like "Sgt. Peas" or "Agent Smith"tokens = StrTok(name, " ");
   if(tokens.size < 2) {
     return (name);
   }
@@ -2581,10 +2551,7 @@ getResponder(distMin, distMax, eventType) {
       continue;
     }
 
-    if(Distance(self.origin, soldiers[i].origin) > distMin &&
-      Distance(self.origin, soldiers[i].origin) < distMax &&
-      !self isUsingSameVoice(soldiers[i]) &&
-      soldiers[i] canSay(eventType)) {
+    if(Distance(self.origin, soldiers[i].origin) > distMin && Distance(self.origin, soldiers[i].origin) < distMax && !self isUsingSameVoice(soldiers[i]) && soldiers[i] canSay(eventType)) {
       responder = soldiers[i];
 
       //prioritize for guys whose names we know how to say
@@ -2833,8 +2800,7 @@ getDirectionCompass(vOrigin, vPoint) {
   return (direction);
 }
 
-// takes a getDirectionFacingClock value and, if it's in the "front arc" (10-2 on the clock face),
-//will return it normalized to 10, 12, or 2.Otherwise, returns undefined.
+// takes a getDirectionFacingClock value and, if it's in the "front arc" (10-2 on the clock face), //will return it normalized to 10, 12, or 2.Otherwise, returns undefined.
 getFrontArcClockDirection(direction) {
   AssertEx(isDefined(direction));
 
@@ -2851,8 +2817,7 @@ getFrontArcClockDirection(direction) {
   return faDirection;
 }
 
-// gets a clock direction from a "viewer" to a "target"
-getDirectionFacingClock(viewerAngles, viewerOrigin, targetOrigin) {
+// gets a clock direction from a "viewer" to a "target"getDirectionFacingClock(viewerAngles, viewerOrigin, targetOrigin) {
   forward = anglesToForward(viewerAngles);
   vFacing = VectorNormalize(forward);
   anglesToFacing = VectorToAngles(vFacing);
@@ -3132,8 +3097,7 @@ addThreatCalloutQA_NextLine(respondTo, prevLine, location) {
   return true;
 }
 
-// takes a soundalias that ends with "_report" and returns a variant of it that ends with "_echo"
-createEchoAlias(reportAlias, respondTo) {
+// takes a soundalias that ends with "_report" and returns a variant of it that ends with "_echo"createEchoAlias(reportAlias, respondTo) {
   reportSuffix = "_report";
   echoSuffix = "_echo";
 
@@ -3375,13 +3339,7 @@ pointInFov(origin) {
 entInFrontArc(ent) {
   direction = getDirectionFacingClock(self.angles, self.origin, ent.origin);
 
-  if(direction == "9" ||
-    direction == "10" ||
-    direction == "11" ||
-    direction == "12" ||
-    direction == "1" ||
-    direction == "2" ||
-    direction == "3") {
+  if(direction == "9" || direction == "10" || direction == "11" || direction == "12" || direction == "1" || direction == "2" || direction == "3") {
     return true;
   }
 
@@ -3466,8 +3424,7 @@ squadFlavorBurstTransmissions() {
           }
         }
 
-        // if we can't find a new burster of the same nationality,
-        //quit this transmission
+        // if we can't find a new burster of the same nationality, //quit this transmission
         if(!isDefined(burster) || burster.voice != nationality) {
           break;
         }
@@ -3499,12 +3456,7 @@ squadCanBurst(squad) {
 canDoFlavorBurst() {
   canDo = false;
 
-  if(!IsPlayer(self) &&
-    IsAlive(self) &&
-    self.classname != "actor_enemy_dog" &&
-    level.flavorbursts[self.team] &&
-    self voiceCanBurst() &&
-    self.flavorbursts) {
+  if(!IsPlayer(self) && IsAlive(self) && self.classname != "actor_enemy_dog" && level.flavorbursts[self.team] && self voiceCanBurst() && self.flavorbursts) {
     canDo = true;
   }
 
@@ -3802,10 +3754,7 @@ battleChatter_printDump(aliases, descriptor) {
     foreach(alias in aliases) {
       aliasType = getAliasTypeFromSoundalias(alias);
 
-      dumpString = level.script + "," +
-        self.countryID + "," +
-        self.npcID + "," +
-        aliasType;
+      dumpString = level.script + "," + self.countryID + "," + self.npcID + "," + aliasType;
 
       battleChatter_printDumpLine(level.bcs_csv_dumpFile, dumpString, "bcs_csv_dumpFileWriting");
     }

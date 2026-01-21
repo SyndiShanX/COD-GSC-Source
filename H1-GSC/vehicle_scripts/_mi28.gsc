@@ -10,7 +10,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("mi28", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_mi-28_flying");
-  maps\_vehicle::build_drive( % mi28_rotors, undefined, 0, 3.0);
+  maps\_vehicle::build_drive(%mi28_rotors, undefined, 0, 3.0);
   maps\_vehicle::build_deathfx("fx\fire\fire_smoke_trail_L", "main_rotor_jnt", "havoc_helicopter_dying_loop", 1, 0.05, 1, 0.5, 1, undefined);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);

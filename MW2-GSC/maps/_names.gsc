@@ -482,8 +482,7 @@ get_name_for_nationality(nationality) {
     fullname = lastname; // TF141 soldiers just get a callsign
     self.airank = "private";
   } else if(nationality == "secretservice") {
-    fullname = "Agent " + lastname; // Secret Service guys are all "Agents"
-    self.airank = "private";
+    fullname = "Agent " + lastname; // Secret Service guys are all "Agents"self.airank = "private";
   } else if(rank > 5) {
     fullname = "Pvt. " + lastname;
     self.airank = "private";

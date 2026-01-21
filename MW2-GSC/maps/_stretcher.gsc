@@ -485,7 +485,7 @@ stop_stretcher_anim_loop(animation) {
 }
 
 stop_anim_loop(animation) {
-  self clearanim( % root, 0);
+  self clearanim(%root, 0);
 }
 
 #using_animtree("generic_human");
@@ -554,7 +554,7 @@ freeze(ai) {
   ai hide();
   ai linkto(self);
   while(true) {
-    ai animscripted("frozen", ai.origin, ai.angles, % standunarmed_idle_loop);
+    ai animscripted("frozen", ai.origin, ai.angles, %standunarmed_idle_loop);
     ai waittillmatch("frozen", "end");
 
   }

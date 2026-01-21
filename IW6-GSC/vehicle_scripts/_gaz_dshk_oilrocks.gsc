@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("gaz_tigr_turret_oilrocks", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_unload_groups(::unload_groups);
-  maps\_vehicle::build_drive( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("axis");
   maps\_vehicle::build_aianims(::setanims_turret, ::set_vehicle_anims);
@@ -91,10 +91,10 @@ build_gaz_death(var_0) {
 
 set_death_anim_scene() {
   var_0 = "exp_armor_vehicle";
-  death_a( % gaz_tigr_explode_a, "gaz_explode_singleV1", var_0);
-  death_b( % gaz_tigr_explode_b, "gaz_explode_singleV2", var_0);
-  death_c( % gaz_tigr_explode_c, "gaz_explode_singleV3", var_0);
-  death_d( % gaz_tigr_explode_d, "gaz_explode_singleV4", var_0);
+  death_a(%gaz_tigr_explode_a, "gaz_explode_singleV1", var_0);
+  death_b(%gaz_tigr_explode_b, "gaz_explode_singleV2", var_0);
+  death_c(%gaz_tigr_explode_c, "gaz_explode_singleV3", var_0);
+  death_d(%gaz_tigr_explode_d, "gaz_explode_singleV4", var_0);
   maps\_vehicle::build_deathanim(["gaz_explode_singleV1", "gaz_explode_singleV2", "gaz_explode_singleV3", "gaz_explode_singleV4"]);
 }
 

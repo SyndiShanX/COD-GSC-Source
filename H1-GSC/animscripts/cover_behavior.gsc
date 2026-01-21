@@ -24,9 +24,7 @@ main(var_0) {
     if(isDefined(self.cover) && isDefined(self.cover.fnoverlord)) {
       var_4 = gettime();
       thread endidleatframeend();
-      [
-        [self.cover.fnoverlord]
-      ]();
+      [[self.cover.fnoverlord]]();
 
       if(gettime() == var_4)
         self notify("dont_end_idle");
@@ -113,7 +111,7 @@ end_script(var_0) {
     self.meleecoverchargemintime = undefined;
   }
 
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
   self.facialidx = undefined;
 }
 
@@ -684,9 +682,9 @@ turntomatchnodedirection(var_0) {
       var_5 = getnotetracktimes(var_4, "anim_pose = \"crouch\"")[0];
       var_5 = min(1, var_5 * 1.1);
       var_6 = var_5 * getanimlength(var_4) / var_3;
-      self setflaggedanimknoballrestart("crouchanim", var_4, % body, 1, 0.2, var_3);
+      self setflaggedanimknoballrestart("crouchanim", var_4, %body, 1, 0.2, var_3);
       animscripts\notetracks::donotetracksfortime(var_6, "crouchanim");
-      self clearanim( % body, 0.2);
+      self clearanim(%body, 0.2);
     }
 
     if(animscripts\utility::isspaceai()) {

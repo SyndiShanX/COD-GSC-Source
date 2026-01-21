@@ -19,14 +19,14 @@ setup_cqb_anim_array() {
   if(!isDefined(self.anim_array))
     self.anim_array = [];
 
-  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["exposed_idle"] = array( % cqb_stand_exposed_idle);
+  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["exposed_idle"] = array(%cqb_stand_exposed_idle);
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["straight_level"] = % cqb_stand_aim5;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["add_aim_up"] = % cqb_stand_aim8;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["add_aim_down"] = % cqb_stand_aim2;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["add_aim_left"] = % cqb_stand_aim4;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["add_aim_right"] = % cqb_stand_aim6;
-  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload"] = array( % cqb_stand_reload_steady);
-  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload_crouchhide"] = array( % cqb_stand_reload_knee);
+  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload"] = array(%cqb_stand_reload_steady);
+  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload_crouchhide"] = array(%cqb_stand_reload_knee);
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["turn_left_45"] = % ai_cqb_exposed_turn_l_45;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["turn_left_90"] = % ai_cqb_exposed_turn_l_90;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["turn_left_135"] = % ai_cqb_exposed_turn_l_135;
@@ -79,17 +79,17 @@ clear_cqb_run_anim() {
 }
 
 setup_default_cqb_anim_array(animtype, array) {
-  array[animtype]["stop"]["stand"]["rifle"]["idle_cqb"] = array(array( % cqb_stand_idle, % cqb_stand_idle, % cqb_stand_twitch));
+  array[animtype]["stop"]["stand"]["rifle"]["idle_cqb"] = array(array(%cqb_stand_idle, %cqb_stand_idle, %cqb_stand_twitch));
   array[animtype]["move"]["stand"]["rifle"]["cqb_reload_walk"] = % ai_cqb_walk_f_reload;
   array[animtype]["move"]["stand"]["rifle"]["cqb_reload_run"] = % ai_cqb_run_f_reload;
   array[animtype]["move"]["stand"]["rifle"]["run_f_to_bR_cqb"] = % ai_cqb_run_f_2_b_right;
   array[animtype]["move"]["stand"]["rifle"]["run_f_to_bL_cqb"] = % ai_cqb_run_f_2_b_left;
   array[animtype]["move"]["stand"]["rifle"]["cqb_sprint_f"] = % ai_cqb_sprint;
-  array[animtype]["move"]["stand"]["rifle"]["cqb_walk_f"] = array( % walk_cqb_f, % walk_cqb_f_search_v1, % walk_cqb_f_search_v2);
+  array[animtype]["move"]["stand"]["rifle"]["cqb_walk_f"] = array(%walk_cqb_f, %walk_cqb_f_search_v1, %walk_cqb_f_search_v2);
   array[animtype]["move"]["stand"]["rifle"]["cqb_walk_r"] = % walk_left;
   array[animtype]["move"]["stand"]["rifle"]["cqb_walk_l"] = % walk_right;
   array[animtype]["move"]["stand"]["rifle"]["cqb_walk_b"] = % walk_backward;
-  array[animtype]["move"]["stand"]["rifle"]["cqb_run_f"] = array( % run_cqb_f_search_v1);
+  array[animtype]["move"]["stand"]["rifle"]["cqb_run_f"] = array(%run_cqb_f_search_v1);
   array[animtype]["move"]["stand"]["rifle"]["cqb_run_r"] = % walk_left;
   array[animtype]["move"]["stand"]["rifle"]["cqb_run_l"] = % walk_right;
   array[animtype]["move"]["stand"]["rifle"]["cqb_run_b"] = % walk_backward;

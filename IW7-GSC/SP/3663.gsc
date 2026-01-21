@@ -280,18 +280,18 @@ func_13E97() {
     if(var_0[0] >= 0) {
       var_3 = var_0[0];
       var_3 = var_3 * var_3;
-      self.var_13E97 clearanim( % space_playerbody_idle_b, var_1);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_f, var_3, var_1);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_3, var_1);
+      self.var_13E97 clearanim(%space_playerbody_idle_b, var_1);
+      self.var_13E97 give_attacker_kill_rewards(%space_playerbody_idle_f, var_3, var_1);
+      self.var_13E97 give_attacker_kill_rewards(%space_playerbody_idle, 1 - var_3, var_1);
     } else {
       var_3 = abs(var_0[0]);
       var_3 = var_3 * var_3;
       var_4 = func_EBAB();
       var_5 = max(var_2, var_4);
       var_3 = var_4 * var_3;
-      self.var_13E97 clearanim( % space_playerbody_idle_f, var_1 * var_5);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_b, var_3, var_1 * var_5);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle, 1 - var_3, var_1 * var_5);
+      self.var_13E97 clearanim(%space_playerbody_idle_f, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards(%space_playerbody_idle_b, var_3, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards(%space_playerbody_idle, 1 - var_3, var_1 * var_5);
     }
 
     if(var_0[1] >= 0) {
@@ -300,16 +300,16 @@ func_13E97() {
       var_4 = func_EBAB();
       var_5 = max(var_2, var_4);
       var_3 = var_4 * var_3;
-      self.var_13E97 clearanim( % space_playerbody_idle_r, var_1 * var_5);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_l, var_3, var_1 * var_5);
+      self.var_13E97 clearanim(%space_playerbody_idle_r, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards(%space_playerbody_idle_l, var_3, var_1 * var_5);
     } else {
       var_3 = abs(var_0[1]);
       var_3 = var_3 * var_3;
       var_4 = func_EBAB();
       var_5 = max(var_2, var_4);
       var_3 = var_4 * var_3;
-      self.var_13E97 clearanim( % space_playerbody_idle_l, var_1 * var_5);
-      self.var_13E97 give_attacker_kill_rewards( % space_playerbody_idle_r, var_3, var_1 * var_5);
+      self.var_13E97 clearanim(%space_playerbody_idle_l, var_1 * var_5);
+      self.var_13E97 give_attacker_kill_rewards(%space_playerbody_idle_r, var_3, var_1 * var_5);
     }
 
     scripts\engine\utility::waitframe();

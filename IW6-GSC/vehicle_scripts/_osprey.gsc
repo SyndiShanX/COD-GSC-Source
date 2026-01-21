@@ -22,7 +22,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");
   maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
-  maps\_vehicle::build_drive( % v22_osprey_props, undefined, 0);
+  maps\_vehicle::build_drive(%v22_osprey_props, undefined, 0);
   maps\_vehicle::build_unload_groups(::unload_groups);
   var_3 = randomfloatrange(0, 1);
   maps\_vehicle::build_light(var_2, "cockpit_red_cargo02", "tag_light_cargo02", "fx/misc/aircraft_light_cockpit_red", "interior", 0.0);
@@ -63,9 +63,9 @@ land_structs_think(var_0) {
 
     if(!var_0) {
       var_3 notify("stop_kicking_up_dust");
-      var_3 clearanim( % v22_osprey_hatch_down, 0.2);
+      var_3 clearanim(%v22_osprey_hatch_down, 0.2);
       wait 0.2;
-      var_3 setanimrestart( % v22_osprey_hatch_up);
+      var_3 setanimrestart(%v22_osprey_hatch_up);
       continue;
     }
 
@@ -88,7 +88,7 @@ init_local() {
 
 wings_up() {
   self useanimtree(#animtree);
-  self setanim( % v22_osprey_wings_up);
+  self setanim(%v22_osprey_wings_up);
 }
 
 set_vehicle_anims(var_0) {
@@ -98,10 +98,10 @@ set_vehicle_anims(var_0) {
   var_0[1].vehicle_getinanim_clear = 0;
   var_0[1].vehicle_getoutsound = "osprey_door_open";
   var_0[1].vehicle_getinsound = "osprey_door_close";
-  var_0[1].delay = getanimlength( % v22_osprey_hatch_down) - 1.7;
-  var_0[2].delay = getanimlength( % v22_osprey_hatch_down) - 1.7;
-  var_0[3].delay = getanimlength( % v22_osprey_hatch_down) - 1.7;
-  var_0[4].delay = getanimlength( % v22_osprey_hatch_down) - 1.7;
+  var_0[1].delay = getanimlength(%v22_osprey_hatch_down) - 1.7;
+  var_0[2].delay = getanimlength(%v22_osprey_hatch_down) - 1.7;
+  var_0[3].delay = getanimlength(%v22_osprey_hatch_down) - 1.7;
+  var_0[4].delay = getanimlength(%v22_osprey_hatch_down) - 1.7;
   return var_0;
 }
 

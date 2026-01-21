@@ -188,20 +188,7 @@ jeepride_intro_start() {
 }
 
 start_scripted_sfx_node() {
-  var_0 = [["auto1593", "scn_start_jeep_honk_crash", undefined, undefined, undefined],
-    ["auto1585", "scn_start_car_honk_crash", undefined, undefined, undefined],
-    ["sideswipe_bmp_accelerate_01", "scn_sideswipe_bmp_accelerate_01", undefined, "bmp_accelerate_mix", undefined],
-    ["auto1721", "scn_bmp_accelerate_01", undefined, "bmp_accelerate_mix", undefined],
-    ["auto1746", "scn_bmp_accelerate_02", undefined, undefined, "bmp_accelerate_mix"],
-    ["auto63", undefined, undefined, "first_hind_mix", undefined],
-    ["auto3651", undefined, undefined, "tanker_explode_mix", undefined],
-    ["auto3740", undefined, undefined, undefined, "tanker_explode_mix"],
-    ["auto72", undefined, undefined, "car_passby_mix", undefined],
-    ["auto2379", undefined, undefined, undefined, "car_passby_mix"],
-    ["auto2637", undefined, undefined, undefined, "first_hind_mix"],
-    ["auto4115", "scn_uaz_convoy_arrival_01", undefined, undefined, undefined],
-    ["auto4059", "scn_uaz_convoy_arrival_02", undefined, undefined, undefined],
-    ["auto4088", "scn_uaz_convoy_arrival_03", undefined, undefined, undefined]];
+  var_0 = [["auto1593", "scn_start_jeep_honk_crash", undefined, undefined, undefined], ["auto1585", "scn_start_car_honk_crash", undefined, undefined, undefined], ["sideswipe_bmp_accelerate_01", "scn_sideswipe_bmp_accelerate_01", undefined, "bmp_accelerate_mix", undefined], ["auto1721", "scn_bmp_accelerate_01", undefined, "bmp_accelerate_mix", undefined], ["auto1746", "scn_bmp_accelerate_02", undefined, undefined, "bmp_accelerate_mix"], ["auto63", undefined, undefined, "first_hind_mix", undefined], ["auto3651", undefined, undefined, "tanker_explode_mix", undefined], ["auto3740", undefined, undefined, undefined, "tanker_explode_mix"], ["auto72", undefined, undefined, "car_passby_mix", undefined], ["auto2379", undefined, undefined, undefined, "car_passby_mix"], ["auto2637", undefined, undefined, undefined, "first_hind_mix"], ["auto4115", "scn_uaz_convoy_arrival_01", undefined, undefined, undefined], ["auto4059", "scn_uaz_convoy_arrival_02", undefined, undefined, undefined], ["auto4088", "scn_uaz_convoy_arrival_03", undefined, undefined, undefined]];
 
   foreach(var_2 in var_0)
   thread handle_scripted_sfx_node(var_2);

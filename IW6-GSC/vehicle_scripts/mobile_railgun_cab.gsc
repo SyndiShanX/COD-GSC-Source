@@ -8,7 +8,7 @@
 main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("mobile_railgun_cab", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
-  maps\_vehicle::build_drive( % mobile_railgun_cab_movement, % mobile_railgun_cab_movement, 25);
+  maps\_vehicle::build_drive(%mobile_railgun_cab_movement, %mobile_railgun_cab_movement, 25);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");

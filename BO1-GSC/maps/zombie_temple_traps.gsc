@@ -646,19 +646,13 @@ zombie_mud_move_slow() {
   switch (self.zombie_move_speed) {
     case "run":
       var = randomintrange(1, 9);
-      self set_run_anim("walk" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["walk" +
-        var
-      ];
+      self set_run_anim("walk" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["walk" + var];
       break;
     case "sprint":
       var = randomintrange(1, 7);
-      self set_run_anim("run" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["run" +
-        var
-      ];
+      self set_run_anim("run" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["run" + var];
       break;
   }
   self.needs_run_update = true;
@@ -668,19 +662,13 @@ zombie_mud_move_normal() {
   switch (self.zombie_move_speed) {
     case "run":
       var = randomintrange(1, 7);
-      self set_run_anim("run" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["run" +
-        var
-      ];
+      self set_run_anim("run" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["run" + var];
       break;
     case "sprint":
       var = randomintrange(1, 5);
-      self set_run_anim("sprint" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["sprint" +
-        var
-      ];
+      self set_run_anim("sprint" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["sprint" + var];
       break;
   }
   self.needs_run_update = true;
@@ -866,10 +854,7 @@ activate_walls(cell) {
   for(i = 0; i < cell.walls.size; i++) {
     wall = cell.walls[i];
     activateWall = true;
-    if((isDefined(previousSharedWall) && wall == previousSharedWall) ||
-      (isDefined(nextSharedWall) && wall == nextSharedWall) ||
-      (!isDefined(previous) && wall.adjacentCells.size == 1) ||
-      (!isDefined(next) && wall.adjacentCells.size == 1)) {
+    if((isDefined(previousSharedWall) && wall == previousSharedWall) || (isDefined(nextSharedWall) && wall == nextSharedWall) || (!isDefined(previous) && wall.adjacentCells.size == 1) || (!isDefined(next) && wall.adjacentCells.size == 1)) {
       activateWall = false;
     }
     wall thread maze_mover_active(activateWall);

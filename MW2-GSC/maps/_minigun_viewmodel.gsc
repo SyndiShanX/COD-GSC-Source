@@ -24,8 +24,8 @@ player_viewhands_minigun(turret) {
   turret useAnimTree(#animtree);
   turret.animname = "suburban_hands";
   turret attach("viewhands_player_us_army", "tag_player");
-  turret setAnim( % player_suburban_minigun_idle_L, 1, 0, 1);
-  turret setAnim( % player_suburban_minigun_idle_R, 1, 0, 1);
+  turret setAnim(%player_suburban_minigun_idle_L, 1, 0, 1);
+  turret setAnim(%player_suburban_minigun_idle_R, 1, 0, 1);
 
   turret thread player_viewhands_minigun_hand("LEFT");
   turret thread player_viewhands_minigun_hand("RIGHT");

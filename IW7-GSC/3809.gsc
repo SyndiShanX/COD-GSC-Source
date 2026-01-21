@@ -127,8 +127,8 @@ func_E3DA(var_0) {
       level.var_E35D.var_A2E8["b"].var_3FFB linkto(level.var_E35D.var_A2E8["b"]);
       break;
     case "airlock":
-      level.var_E35D.var_A2E8["a"].var_3FFD setanimknob( % shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0);
-      level.var_E35D.var_A2E8["b"].var_3FFD setanimknob( % shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0);
+      level.var_E35D.var_A2E8["a"].var_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0);
+      level.var_E35D.var_A2E8["b"].var_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0);
       level.var_E35D.var_A2E8["a"].var_3FFB unlink();
       level.var_E35D.var_A2E8["a"].var_3FFB.angles = level.var_E35D.var_A2E8["a"].var_3FFB.angles + (0, -90, 0);
       level.var_E35D.var_A2E8["a"].var_3FFB linkto(level.var_E35D.var_A2E8["a"]);
@@ -297,14 +297,14 @@ func_E3CE(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     level.var_E35D.var_A2E8[var_0].var_3FFD give_attacker_kill_rewards(level.var_EC85["crane"][var_3], 10, 0, 1 / var_1);
   } else if(var_0 == "a") {
-    var_1 = getanimlength( % shipcrib_crane_clamp_extended_rotate_cc) / 0.45;
+    var_1 = getanimlength(%shipcrib_crane_clamp_extended_rotate_cc) / 0.45;
     level.var_E35D.var_A2E8[var_0].var_3FFD playSound("scn_ship_titan_jackal_lower_plr_start_lr");
     level.var_E35D.var_A2E8[var_0].var_3FFD playLoopSound("scn_ship_titan_jackal_lower_plr_lp_lr");
-    level.var_E35D.var_A2E8[var_0].var_3FFD setanimknob( % shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0.45);
+    level.var_E35D.var_A2E8[var_0].var_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_cc, 10, 0, 0.45);
     level.var_E35D.var_A2E8[var_0].var_3FFD scripts\engine\utility::delaycall(var_1, ::stoploopsound);
     level.var_E35D.var_A2E8[var_0].var_3FFD scripts\engine\utility::delaycall(var_1, ::playsound, "scn_ship_titan_jackal_lower_plr_stop_lr");
   } else {
-    level.var_E35D.var_A2E8[var_0].var_3FFD setanimknob( % shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0.45);
+    level.var_E35D.var_A2E8[var_0].var_3FFD setanimknob(%shipcrib_crane_clamp_extended_rotate_c, 10, 0, 0.45);
   }
 }
 

@@ -16,10 +16,7 @@ and these lines in your CSV:
 include,vehicle_suburban_suburban
 sound,vehicle_suburban,vehicle_standard,all_sp
 
-defaultmdl="vehicle_suburban"
-default:"vehicletype" "suburban"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_suburban"default:"vehicletype" "suburban"default:"script_team" "allies"*/
 
 //
 
@@ -32,7 +29,7 @@ main(model, type) {
   build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx("explosions/vehicle_explosion_suburban", "TAG_DEATH_FX", "explo_metal_rand");
 
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   build_treadfx();
   //build_life( 100 );
   build_life(999, 500, 1500);

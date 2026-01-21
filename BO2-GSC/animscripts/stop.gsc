@@ -44,7 +44,7 @@ main() {
     desiredpose = getdesiredidlepose();
 
     if(self.a.pose != desiredpose) {
-      self clearanim( % root, 0.3);
+      self clearanim(%root, 0.3);
       transitionedtoidle = 0;
     }
 
@@ -126,7 +126,7 @@ transitiontoidle() {
   if(animarrayexist("idle_trans_in" + special)) {
     if(!weaponisgasweapon(self.weapon)) {
       idleanim = animarray("idle_trans_in" + special);
-      self setflaggedanimknoballrestart("idle_transition", idleanim, % body, 1, 0.3, self.animplaybackrate);
+      self setflaggedanimknoballrestart("idle_transition", idleanim, %body, 1, 0.3, self.animplaybackrate);
       self animscripts\shared::donotetracks("idle_transition");
     }
   }
@@ -172,7 +172,7 @@ playidle(pose, idleset) {
     transtime = 0.5;
 
   self orientmode("face angle", self.angles[1]);
-  self setflaggedanimknoballrestart("idle", idleanim, % body, 1, transtime, self.animplaybackrate);
+  self setflaggedanimknoballrestart("idle", idleanim, %body, 1, transtime, self.animplaybackrate);
   self animscripts\shared::donotetracks("idle");
 
   self animscripts\debug::debugpopstate("playIdle");
@@ -187,11 +187,11 @@ pronestill() {
     transanim = animarray(self.a.pose + "_2_prone");
     assert(isDefined(transanim), self.a.pose);
     assert(animhasnotetrack(transanim, "anim_pose = \"prone\""));
-    self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.2, 1.0);
+    self setflaggedanimknoballrestart("trans", transanim, %body, 1, 0.2, 1.0);
     animscripts\shared::donotetracks("trans");
     assert(self.a.pose == "prone");
     self.a.movement = "stop";
-    self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+    self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
 
     self animscripts\debug::debugpopstate("ProneStill");
 
@@ -200,7 +200,7 @@ pronestill() {
 
   if(0) {
     twitchanim = animarraypickrandom("twitch");
-    self setflaggedanimknoball("prone_idle", twitchanim, % prone_modern, 1, 0.2);
+    self setflaggedanimknoball("prone_idle", twitchanim, %prone_modern, 1, 0.2);
   } else {
     self setanim(animarray("straight_level"), 1, 0.2);
     self setflaggedanimknob("prone_idle", animarraypickrandom("idle")[0], 1, 0.2);

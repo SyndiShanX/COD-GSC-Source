@@ -1050,9 +1050,7 @@ default_zombie_prematch_func() {
 
     wait(var_0 - 3);
     if(isDefined(level.postintroscreenfunc)) {
-      [
-        [level.postintroscreenfunc]
-      ]();
+      [[level.postintroscreenfunc]]();
     }
 
     scripts\engine\utility::flag_set("introscreen_over");

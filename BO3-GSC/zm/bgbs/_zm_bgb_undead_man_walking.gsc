@@ -52,9 +52,7 @@ function function_b41dc007(b_walk = 1) {
   for(i = 0; i < a_ai.size; i++) {
     var_3812f8bd = 0;
     if(isDefined(level.var_9e59cb5b)) {
-      var_3812f8bd = [
-        [level.var_9e59cb5b]
-      ](a_ai[i]);
+      var_3812f8bd = [[level.var_9e59cb5b]](a_ai[i]);
     } else if(isalive(a_ai[i]) && a_ai[i].archetype === "zombie" && a_ai[i].team === level.zombie_team) {
       var_3812f8bd = 1;
     }

@@ -113,10 +113,7 @@ function_6cf4a466() {
 
   foreach(var_cc966c56 in array(#"axis", # "allies")) {
     level.var_6371e281[var_cc966c56] = {
-      #var_ba87ac95: [],
-      #var_f6fd19fc: [],
-      #var_4e490ff2: [],
-      #var_bde2b289: []
+      #var_ba87ac95: [], #var_f6fd19fc: [], #var_4e490ff2: [], #var_bde2b289: []
     };
     level.var_6371e281[var_cc966c56] flag::init("updating");
   }
@@ -133,10 +130,7 @@ set_team_objective(var_3c9f56bd, var_cc966c56, n_obj_id, n_widget, var_48d81699,
     s_objective = var_3c9f56bd;
   } else {
     s_objective = {
-      #str_identifier: var_3c9f56bd,
-      #n_obj_id: n_obj_id,
-      #n_widget: n_widget,
-      #s_radiant: self
+      #str_identifier: var_3c9f56bd, #n_obj_id: n_obj_id, #n_widget: n_widget, #s_radiant: self
     };
   }
 
@@ -1165,28 +1159,20 @@ mission_result(str_winning_team, var_db3d629e = # "hash_6ef5bcff7fb1d1ab", var_9
 
     if(str_winning_team == # "allies") {
       voiceparams = {
-        #team: # "allies",
-        #side: # "allies",
-        #targetname: level.mission_name
+        #team: # "allies", #side: # "allies", #targetname: level.mission_name
       };
       voiceevent("mssn_succ", undefined, voiceparams);
       voiceparams = {
-        #team: # "axis",
-        #side: # "axis",
-        #targetname: level.mission_name
+        #team: # "axis", #side: # "axis", #targetname: level.mission_name
       };
       voiceevent("mssn_fail", undefined, voiceparams);
     } else {
       voiceparams = {
-        #team: # "axis",
-        #side: # "axis",
-        #targetname: level.mission_name
+        #team: # "axis", #side: # "axis", #targetname: level.mission_name
       };
       voiceevent("mssn_succ", undefined, voiceparams);
       voiceparams = {
-        #team: # "allies",
-        #side: # "allies",
-        #targetname: level.mission_name
+        #team: # "allies", #side: # "allies", #targetname: level.mission_name
       };
       voiceevent("mssn_fail", undefined, voiceparams);
     }
@@ -1292,10 +1278,7 @@ function_e2f8b883(str_team, str_objective, var_e563ad04, e_player, var_2f3a056c 
   objective_add(n_obj_id, "invisible", undefined, str_objective);
   objective_setteam(n_obj_id, var_cc966c56);
   var_869753ec = {
-    #n_obj_id: n_obj_id,
-    #var_428fe2c1: 1,
-    #str_objective: str_objective,
-    #var_b1f5cba2: var_b1f5cba2
+    #n_obj_id: n_obj_id, #var_428fe2c1: 1, #str_objective: str_objective, #var_b1f5cba2: var_b1f5cba2
   };
 
   if(isDefined(var_e563ad04)) {

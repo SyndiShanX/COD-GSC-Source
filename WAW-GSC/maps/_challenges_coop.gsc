@@ -59,16 +59,7 @@ onPlayerConnect() {
     player.prestige = prestige;
     player.summary_xp = 0;
     player.summary_challenge = 0;
-    player setClientDvars("psn", player.playername,
-      "psx", "0",
-      "pss", "0",
-      "psc", "0",
-      "psk", "0",
-      "psd", "0",
-      "psr", "0",
-      "psh", "0",
-      "psa", "0",
-      "ui_lobbypopup", "summary");
+    player setClientDvars("psn", player.playername, "psx", "0", "pss", "0", "psc", "0", "psk", "0", "psd", "0", "psr", "0", "psh", "0", "psa", "0", "ui_lobbypopup", "summary");
     player updateChallenges();
     player updateMPChallenges();
     ch_reset_alive_challenges(player);

@@ -219,19 +219,10 @@ trap_BBprint(trap_type, owner, loc) {
     ownername = owner.name;
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
-    IPrintLnBold("^8bbprint: alientrap \n" +
-      " traptype=" + traptype +
-      " trapx,y,z=" + loc +
-      " ownername=" + ownername);
+    IPrintLnBold("^8bbprint: alientrap \n" + " traptype=" + traptype + " trapx,y,z=" + loc + " ownername=" + ownername);
   }
 
-  bbprint("alientrap",
-    "traptype %s trapx %f trapy %f trapz %f ownername %s ",
-    traptype,
-    trapx,
-    trapy,
-    trapz,
-    ownername);
+  bbprint("alientrap", "traptype %s trapx %f trapy %f trapz %f ownername %s ", traptype, trapx, trapy, trapz, ownername);
 }
 
 fire_trap_think() {
@@ -350,10 +341,7 @@ fire_trap_burn(fire_start_loc) {
   while(true) {
     self.burn_trig waittill("trigger", victim);
 
-    if(!isDefined(victim) ||
-      !isReallyAlive(victim) ||
-      (!isplayer(victim) && !IsAgent(victim)) ||
-      (isDefined(victim.burning) && victim.burning)) {
+    if(!isDefined(victim) || !isReallyAlive(victim) || (!isplayer(victim) && !IsAgent(victim)) || (isDefined(victim.burning) && victim.burning)) {
       continue;
     }
 

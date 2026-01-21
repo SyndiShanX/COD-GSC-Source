@@ -23,9 +23,9 @@ step_down_human() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
-  self setFlaggedAnimKnoballRestart("stepanim", % step_down_low_wall, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("stepanim", %step_down_low_wall, %body, 1, .1, 1);
   self waittillmatch("stepanim", "gravity on");
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("stepanim");
-  self setAnimKnobAllRestart( % crouch_fastwalk_F, % body, 1, 0.1, 1);
+  self setAnimKnobAllRestart(%crouch_fastwalk_F, %body, 1, 0.1, 1);
 }

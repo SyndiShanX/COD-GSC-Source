@@ -324,9 +324,7 @@ _disbandsquads(commander) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderDisbandSquads");
       aiprofile_beginentry("commanderDisbandSquads");
@@ -369,9 +367,7 @@ _evaluatefitness(commander, squad) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderEvaluateSquads");
       aiprofile_beginentry("commanderEvaluateSquads");
@@ -398,9 +394,7 @@ _evaluatesquads(commander) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderEvaluateSquads");
       aiprofile_beginentry("commanderEvaluateSquads");
@@ -506,9 +500,7 @@ function_f9d38682(commander) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderOrphanBotCount");
       aiprofile_beginentry("commanderOrphanBotCount");
@@ -565,9 +557,7 @@ _plan(commander, &blackboard) {
     var_547a067e = 1;
 
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
     }
   }
@@ -671,9 +661,7 @@ function_ac4ff936(commander, &blackboard) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderReclaimTargets");
       aiprofile_beginentry("commanderReclaimTargets");
@@ -707,9 +695,7 @@ function_60f42acc(commander) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderReclaimSquads");
       aiprofile_beginentry("commanderReclaimSquads");
@@ -740,9 +726,7 @@ function_60f42acc(commander) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderReclaimSquads");
       aiprofile_beginentry("commanderReclaimSquads");
@@ -768,9 +752,7 @@ function_60f42acc(commander) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderReclaimSquads");
       aiprofile_beginentry("commanderReclaimSquads");
@@ -795,9 +777,7 @@ function_60f42acc(commander) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderReclaimSquads");
       aiprofile_beginentry("commanderReclaimSquads");
@@ -840,9 +820,7 @@ function_d8b8afde(commander, &blackboard) {
     if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
       aiprofile_endentry();
       pixendevent();
-      [
-        [level.strategic_command_throttle]
-      ] - > waitinqueue(commander);
+      [[level.strategic_command_throttle]] - > waitinqueue(commander);
       commander.strategizestarttime = getrealtime();
       pixbeginevent("commanderSortTargetList");
       aiprofile_beginentry("commanderSortTargetList");

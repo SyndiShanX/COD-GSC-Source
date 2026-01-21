@@ -2011,7 +2011,7 @@ spawn_ghost_round_presentation_ghost() {
 
   wait 0.5;
   ghost useanimtree(#animtree);
-  ghost setanim( % ai_zombie_ghost_idle);
+  ghost setanim(%ai_zombie_ghost_idle);
   ghost.script_mover = spawn("script_origin", ghost.origin);
   ghost.script_mover.angles = ghost.angles;
   ghost linkto(ghost.script_mover);

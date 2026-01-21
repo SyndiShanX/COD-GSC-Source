@@ -109,7 +109,7 @@ soul_catcher_state_manager() {
     level.soul_catcher_clip[self.script_noteworthy] setvisibletoall();
 
   level setclientfield(self.script_parameters, 1);
-  anim_length = getanimlength( % o_zombie_dreamcatcher_intro);
+  anim_length = getanimlength(%o_zombie_dreamcatcher_intro);
   wait(anim_length);
 
   while(!self.is_charged) {
@@ -118,7 +118,7 @@ soul_catcher_state_manager() {
   }
 
   level setclientfield(self.script_parameters, 6);
-  anim_length = getanimlength( % o_zombie_dreamcatcher_outtro);
+  anim_length = getanimlength(%o_zombie_dreamcatcher_outtro);
   wait(anim_length);
 
   if(isDefined(level.soul_catcher_clip[self.script_noteworthy]))
@@ -146,7 +146,7 @@ grief_soul_catcher_state_manager() {
       level.soul_catcher_clip[self.script_noteworthy] setvisibletoall();
 
     level setclientfield(self.script_parameters, 1);
-    anim_length = getanimlength( % o_zombie_dreamcatcher_intro);
+    anim_length = getanimlength(%o_zombie_dreamcatcher_intro);
     wait(anim_length);
 
     while(!self.is_charged) {
@@ -155,7 +155,7 @@ grief_soul_catcher_state_manager() {
     }
 
     level setclientfield(self.script_parameters, 6);
-    anim_length = getanimlength( % o_zombie_dreamcatcher_outtro);
+    anim_length = getanimlength(%o_zombie_dreamcatcher_outtro);
     wait(anim_length);
 
     if(isDefined(level.soul_catcher_clip[self.script_noteworthy]))
@@ -267,11 +267,11 @@ zombie_soul_catcher_death() {
   level setclientfield(self.my_soul_catcher.script_parameters, n_eating_anim);
 
   if(n_eating_anim == 3)
-    total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_f);
+    total_wait_time = 3.0 + getanimlength(%ai_zombie_dreamcatcher_wallconsume_align_f);
   else if(n_eating_anim == 4)
-    total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_r);
+    total_wait_time = 3.0 + getanimlength(%ai_zombie_dreamcatcher_wallconsume_align_r);
   else
-    total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_l);
+    total_wait_time = 3.0 + getanimlength(%ai_zombie_dreamcatcher_wallconsume_align_l);
 
   wait(total_wait_time - 0.5);
   self.my_soul_catcher.souls_received++;
@@ -304,7 +304,7 @@ get_correct_model_array() {
 }
 
 notify_wolf_intro_anim_complete() {
-  anim_length = getanimlength( % o_zombie_dreamcatcher_intro);
+  anim_length = getanimlength(%o_zombie_dreamcatcher_intro);
   wait(anim_length);
   self notify("wolf_intro_anim_complete");
 }

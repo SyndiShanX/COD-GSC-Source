@@ -140,8 +140,7 @@ isSpeakerInRange(player) {
 
   distSq = 1000 * 1000;
 
-  // to prevent player switch to spectator after throwing a granade causing damage to someone and result in attacker.pers["team"] = "spectator"
-  if(isDefined(player) && isDefined(player.pers["team"]) && player.pers["team"] != "spectator") {
+  // to prevent player switch to spectator after throwing a granade causing damage to someone and result in attacker.pers["team"] = "spectator"if(isDefined(player) && isDefined(player.pers["team"]) && player.pers["team"] != "spectator") {
     for(index = 0; index < level.speakers[player.pers["team"]].size; index++) {
       teammate = level.speakers[player.pers["team"]][index];
       if(teammate == player)

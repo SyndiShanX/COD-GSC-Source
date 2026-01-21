@@ -1134,26 +1134,26 @@ func_A2DE(var_0, var_1, var_2, var_3) {
   self func_848F(var_0);
 
   if(var_0 && !var_2) {
-    self clearanim( % jackal_thrust_p, var_1);
-    self clearanim( % jackal_motion_idle_p, var_1);
-    self clearanim( % root, var_1);
-    self clearanim( % jackal_assault_lhand_fb_range_p, var_1);
-    self clearanim( % jackal_assault_lhand_lr_range_p, var_1);
-    self clearanim( % jackal_assault_rhand_fb_range_p, var_1);
-    self clearanim( % jackal_assault_rhand_lr_range_p, var_1);
-    self clearanim( % jackal_strike_lhand_fb_range_p, var_1);
-    self clearanim( % jackal_strike_lhand_lr_range_p, var_1);
-    self clearanim( % jackal_strike_rhand_fb_range_p, var_1);
-    self clearanim( % jackal_strike_rhand_lr_range_p, var_1);
+    self clearanim(%jackal_thrust_p, var_1);
+    self clearanim(%jackal_motion_idle_p, var_1);
+    self clearanim(%root, var_1);
+    self clearanim(%jackal_assault_lhand_fb_range_p, var_1);
+    self clearanim(%jackal_assault_lhand_lr_range_p, var_1);
+    self clearanim(%jackal_assault_rhand_fb_range_p, var_1);
+    self clearanim(%jackal_assault_rhand_lr_range_p, var_1);
+    self clearanim(%jackal_strike_lhand_fb_range_p, var_1);
+    self clearanim(%jackal_strike_lhand_lr_range_p, var_1);
+    self clearanim(%jackal_strike_rhand_fb_range_p, var_1);
+    self clearanim(%jackal_strike_rhand_lr_range_p, var_1);
   }
 
   if(var_0 && !var_3) {
-    self clearanim( % jackal_weapon_switch_p, var_1);
-    self clearanim( % jackal_weapon_drop_p, var_1);
-    self clearanim( % jackal_vehicle_weap_primary_fire_l_p, var_1);
-    self clearanim( % jackal_vehicle_weap_primary_fire_r_p, var_1);
-    self clearanim( % jackal_vehicle_weap_secondary_fire_l_p, var_1);
-    self clearanim( % jackal_vehicle_weap_secondary_fire_r_p, var_1);
+    self clearanim(%jackal_weapon_switch_p, var_1);
+    self clearanim(%jackal_weapon_drop_p, var_1);
+    self clearanim(%jackal_vehicle_weap_primary_fire_l_p, var_1);
+    self clearanim(%jackal_vehicle_weap_primary_fire_r_p, var_1);
+    self clearanim(%jackal_vehicle_weap_secondary_fire_l_p, var_1);
+    self clearanim(%jackal_vehicle_weap_secondary_fire_r_p, var_1);
   }
 }
 

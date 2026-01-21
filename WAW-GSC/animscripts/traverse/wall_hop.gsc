@@ -21,9 +21,9 @@ main() {
 
 wall_hop_human() {
   if(RandomInt(100) < 30) {
-    self advancedTraverse( % traverse_wallhop_3, 39.875);
+    self advancedTraverse(%traverse_wallhop_3, 39.875);
   } else {
-    self advancedTraverse( % traverse_wallhop, 39.875);
+    self advancedTraverse(%traverse_wallhop, 39.875);
   }
 }
 
@@ -32,37 +32,25 @@ wall_hop_zombie() {
   if(self.has_legs) {
     switch (self.zombie_move_speed) {
       case "walk":
-        anims = array( %
-          ai_zombie_traverse_v1, %
-          ai_zombie_traverse_v2, %
-          ai_zombie_traverse_v3
-        );
+        anims = array(%ai_zombie_traverse_v1, %ai_zombie_traverse_v2, %ai_zombie_traverse_v3);
         break;
       case "run":
-        anims = array( %
-          ai_zombie_traverse_v5
-        );
+        anims = array(%ai_zombie_traverse_v5);
         break;
       case "sprint":
-        anims = array( %
-          ai_zombie_traverse_v6, %
-          ai_zombie_traverse_v7
-        );
+        anims = array(%ai_zombie_traverse_v6, %ai_zombie_traverse_v7);
         break;
       default:
         assertmsg("Zombie move speed of '" + self.zombie_move_speed + "' is not supported for wall hop.");
     }
   } else {
-    anims = array( %
-      ai_zombie_traverse_crawl_v1, %
-      ai_zombie_traverse_v4
-    );
+    anims = array(%ai_zombie_traverse_crawl_v1, %ai_zombie_traverse_v4);
   }
   if(isDefined(level.round_number) && level.round_number < 10) {
     if(self.has_legs) {
-      anims = array( % ai_zombie_traverse_v1, % ai_zombie_traverse_v2);
+      anims = array(%ai_zombie_traverse_v1, %ai_zombie_traverse_v2);
     } else {
-      anims = array( % ai_zombie_traverse_crawl_v1);
+      anims = array(%ai_zombie_traverse_crawl_v1);
     }
   }
   self advancedTraverse(random(anims), 39.875);

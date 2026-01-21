@@ -434,39 +434,12 @@ update_loadout_for_everyone() {
         cyclenum = level.current_cycle_num;
 
       if(GetDvarInt("alien_bbprint_debug") > 0) {
-        IPrintLnBold("^8bbprint: alienplayerloadout (1/2)\n" +
-          " playername=" + playername +
-          " playerrank=" + playerrank +
-          " playerxp=" + playerxp +
-          " playerprestige=" + playerprestige +
-          " playerescaped=" + playerescaped +
-          " connecttime=" + connecttime +
-          " cyclenum=" + cyclenum);
+        IPrintLnBold("^8bbprint: alienplayerloadout (1/2)\n" + " playername=" + playername + " playerrank=" + playerrank + " playerxp=" + playerxp + " playerprestige=" + playerprestige + " playerescaped=" + playerescaped + " connecttime=" + connecttime + " cyclenum=" + cyclenum);
 
-        IPrintLnBold("^8bbprint: alienplayerloadout (2/2)\n" +
-          " perk0=" + perk_0 +
-          " perk1=" + perk_1 +
-          " dpadup=" + dpad_up +
-          " dpaddown=" + dpad_down +
-          " dpadleft=" + dpad_left +
-          " dpadright=" + dpad_right);
+        IPrintLnBold("^8bbprint: alienplayerloadout (2/2)\n" + " perk0=" + perk_0 + " perk1=" + perk_1 + " dpadup=" + dpad_up + " dpaddown=" + dpad_down + " dpadleft=" + dpad_left + " dpadright=" + dpad_right);
       }
 
-      bbprint("alienplayerloadout",
-        "playername %s playerrank %i playerxp %i playerprestige %i playerescaped %i connecttime %i cyclenum %i perk0 %s perk1 %s dpadup %s dpaddown %s dpadleft %s dpadright %s ",
-        playername,
-        playerrank,
-        playerxp,
-        playerprestige,
-        playerescaped,
-        connecttime,
-        cyclenum,
-        perk_0,
-        perk_1,
-        dpad_up,
-        dpad_down,
-        dpad_left,
-        dpad_right);
+      bbprint("alienplayerloadout", "playername %s playerrank %i playerxp %i playerprestige %i playerescaped %i connecttime %i cyclenum %i perk0 %s perk1 %s dpadup %s dpaddown %s dpadleft %s dpadright %s ", playername, playerrank, playerxp, playerprestige, playerescaped, connecttime, cyclenum, perk_0, perk_1, dpad_up, dpad_down, dpad_left, dpad_right);
     }
   }
 }
@@ -1419,21 +1392,10 @@ deployablebox_used_track(boxEnt) {
     username = self.name;
 
   if(GetDvarInt("alien_bbprint_debug") > 0) {
-    IPrintLnBold("^8bbprint: aliendeployableused \n" +
-      " itemname=" + itemname +
-      " itemlevel=" + boxEnt.upgrade_rank +
-      " itemx,y,z=" + boxEnt.origin +
-      " username=" + username);
+    IPrintLnBold("^8bbprint: aliendeployableused \n" + " itemname=" + itemname + " itemlevel=" + boxEnt.upgrade_rank + " itemx,y,z=" + boxEnt.origin + " username=" + username);
   }
 
-  bbprint("aliendeployableused",
-    "itemname %s itemlevel %i itemx %f itemy %f itemz %f username %s ",
-    boxEnt.boxType,
-    boxEnt.upgrade_rank,
-    boxEnt.origin[0],
-    boxEnt.origin[1],
-    boxEnt.origin[2],
-    username);
+  bbprint("aliendeployableused", "itemname %s itemlevel %i itemx %f itemy %f itemz %f username %s ", boxEnt.boxType, boxEnt.upgrade_rank, boxEnt.origin[0], boxEnt.origin[1], boxEnt.origin[2], username);
 }
 
 get_player_ref() {

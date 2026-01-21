@@ -129,9 +129,7 @@ class csceneobject: cscriptbundleobjectbase {
 
   function _spawn(clientnum, b_hide = 1) {
     if(!isDefined(_e_array[clientnum])) {
-      b_allows_multiple = [
-        [scene()]
-      ] - > allows_multiple();
+      b_allows_multiple = [[scene()]] - > allows_multiple();
       if(cscriptbundleobjectbase::error(b_allows_multiple && (isDefined(_s.nospawn) && _s.nospawn), "Scene that allow multiple instances must be allowed to spawn (uncheck 'Do Not Spawn').")) {
         return;
       }
@@ -176,9 +174,7 @@ class csceneobject: cscriptbundleobjectbase {
   }
 
   function _assign_unique_name() {
-    if([
-        [scene()]
-      ] - > allows_multiple()) {
+    if([[scene()]] - > allows_multiple()) {
       if(isDefined(_s.name)) {
         _str_name = (_s.name + "_gen") + level.scene_object_id;
       } else {
@@ -201,9 +197,7 @@ class csceneobject: cscriptbundleobjectbase {
   function get_align_ent(clientnum) {
     e_align = undefined;
     if(isDefined(_s.aligntarget)) {
-      a_scene_ents = [
-        [_o_bundle]
-      ] - > get_ents();
+      a_scene_ents = [[_o_bundle]] - > get_ents();
       if(isDefined(a_scene_ents[clientnum][_s.aligntarget])) {
         e_align = a_scene_ents[clientnum][_s.aligntarget];
       } else {
@@ -212,9 +206,7 @@ class csceneobject: cscriptbundleobjectbase {
       cscriptbundleobjectbase::error(!isDefined(e_align), ("Align target '" + (isDefined(_s.aligntarget) ? "" + _s.aligntarget : "")) + "' doesn't exist for scene object.");
     }
     if(!isDefined(e_align)) {
-      e_align = [
-        [scene()]
-      ] - > get_align_ent(clientnum);
+      e_align = [[scene()]] - > get_align_ent(clientnum);
     }
     return e_align;
   }
@@ -1366,9 +1358,7 @@ function stop(arg1, arg2, arg3, b_cancel, b_no_assert = 0) {
 function _stop_instance(b_clear = 0, str_scenedef, b_cancel = 0) {
   if(isDefined(self.scenes)) {
     foreach(o_scene in arraycopy(self.scenes)) {
-      str_scene_name = [
-        [o_scene]
-      ] - > get_name();
+      str_scene_name = [[o_scene]] - > get_name();
       if(!isDefined(str_scenedef) || str_scene_name == str_scenedef) {
         thread[[o_scene]] - > stop(b_clear, b_cancel);
       }

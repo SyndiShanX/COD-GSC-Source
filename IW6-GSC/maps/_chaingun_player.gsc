@@ -126,10 +126,10 @@ handle_dismount() {
     self notify("player_dismount");
     maps\_anim::setanimtree();
     var_0 = self gettagangles("tag_ground");
-    var_1 = getanimlength( % chaingun_getoff_gun);
+    var_1 = getanimlength(%chaingun_getoff_gun);
     var_2 = maps\_utility::getanim("chaingun_hands_getoff");
     var_3 = maps\_utility::getanim("turret_gun_getoff");
-    self clearanim( % root, 0);
+    self clearanim(%root, 0);
     self setanim(var_2, 1, 0, 1);
     self setanim(var_3, 1, 0, 1);
     wait(var_1);
@@ -187,10 +187,10 @@ player_use_chaingun_with_viewmodel(var_0, var_1, var_2) {
   maps\_anim::anim_first_frame_solo(var_0, "turret_gun_geton");
   var_1 playerlinktoblend(var_0.player_rig, "tag_origin", 0.3, 0.1, 0.1);
   wait 0.2;
-  var_3 = getanimlength( % chaingun_geton_gun);
+  var_3 = getanimlength(%chaingun_geton_gun);
   var_4 = var_0.player_rig maps\_utility::getanim("chaingun_hands_geton");
   var_5 = maps\_utility::getanim("turret_gun_geton");
-  var_0 clearanim( % root, 0);
+  var_0 clearanim(%root, 0);
   var_0 setanim(var_5, 1, 0, 1);
   thread notifyaftertime("geton_anim_finished", "time is up", var_3);
   wait 0.1;

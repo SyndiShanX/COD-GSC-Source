@@ -36,33 +36,19 @@ __init__() {
 
   level.var_9cddbf4e = [];
   level.var_9cddbf4e[# "p8_fxanim_wz_supply_stash_01_mod"] = {
-    #open_sound: # "hash_3462cfb200a2367",
-    #var_b9492c6: # "hash_32f9ba3b1da75ed5"
-  };
+    #open_sound: # "hash_3462cfb200a2367", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[# "p8_fxanim_wz_supply_stash_04_mod"] = {
-    #open_sound: # "hash_3462cfb200a2367",
-    #var_b9492c6: # "hash_32f9ba3b1da75ed5"
-  };
+    #open_sound: # "hash_3462cfb200a2367", #var_b9492c6: # "hash_32f9ba3b1da75ed5"};
   level.var_9cddbf4e[# "p8_fxanim_wz_death_stash_mod"] = {
-    #open_sound: # "hash_5e8b0f6cade25ff6",
-    #var_b9492c6: # "hash_70fb2ee1b706a28a"
-  };
+    #open_sound: # "hash_5e8b0f6cade25ff6", #var_b9492c6: # "hash_70fb2ee1b706a28a"};
   level.var_9cddbf4e[# "hash_1dcbe8021fb16344"] = {
-    #open_sound: # "hash_56b5b65c141f4629",
-    #var_b9492c6: # "hash_6fcb29cae6678d93"
-  };
+    #open_sound: # "hash_56b5b65c141f4629", #var_b9492c6: # "hash_6fcb29cae6678d93"};
   level.var_9cddbf4e[# "p8_fxanim_wz_supply_stash_ammo_mod"] = {
-    #open_sound: # "hash_f743d336f8b7764",
-    #var_b9492c6: # "hash_3e62bcbd6460ff44"
-  };
+    #open_sound: # "hash_f743d336f8b7764", #var_b9492c6: # "hash_3e62bcbd6460ff44"};
   level.var_9cddbf4e[# "hash_574076754776e003"] = {
-    #open_sound: # "hash_36e23ce3e5f7e4c0",
-    #var_b9492c6: # "hash_22f426a8593609e8"
-  };
+    #open_sound: # "hash_36e23ce3e5f7e4c0", #var_b9492c6: # "hash_22f426a8593609e8"};
   level.var_9cddbf4e[# "wpn_t7_drop_box_wz"] = {
-    #open_sound: # "hash_613f8a1669f8b231",
-    #var_b9492c6: # "hash_2b751d50426093db"
-  };
+    #open_sound: # "hash_613f8a1669f8b231", #var_b9492c6: # "hash_2b751d50426093db"};
   callback::on_connect(&_on_player_connect);
   callback::on_spawned(&_on_player_spawned);
   callback::on_disconnect(&_on_player_disconnect);
@@ -1162,8 +1148,7 @@ function_a54d07e6(item, activator) {
         function_b516210b(isDefined(stashes[0].var_15d44120) ? stashes[0].var_15d44120 : stashes[0].model, stashes[0].origin, activator);
         setdynentstate(stashes[0], 1);
         params = {
-          #activator: activator,
-          #state: state
+          #activator: activator, #state: state
         };
         stashes[0] callback::callback(#"on_stash_open", params);
       } else if(state == 1) {
@@ -1221,8 +1206,7 @@ function_a54d07e6(item, activator) {
       if(stash.var_bad13452 == 0) {
         function_b516210b(stash.model, stash.origin, activator);
         params = {
-          #activator: activator,
-          #state: state
+          #activator: activator, #state: state
         };
         stash callback::callback(#"on_stash_open", params);
 
@@ -1699,9 +1683,7 @@ function_de2018e3(item, player, slotid = undefined) {
 
       if(var_c5781c22 != var_d72b1a4b) {
         var_fceba0ce = {
-          #item: item,
-          #count: var_8cd447d8,
-          #player: player
+          #item: item, #count: var_8cd447d8, #player: player
         };
         self callback::callback(#"on_item_pickup", var_fceba0ce);
       }
@@ -1812,12 +1794,7 @@ function_1a46c8ae(player, var_a1ca235e, var_3d1f9df4, var_7089b458, var_381f3b39
   }
 
   data = {
-    #game_time: function_f8d53445(),
-    #player_xuid: isDefined(player) ? int(player getxuid(1)) : 0,
-    #dropped_item: isDefined(var_a1ca235e) ? hash(var_a1ca235e.name) : 0,
-    #var_5b8ff5e9: isDefined(var_3d1f9df4) ? var_3d1f9df4 : 0,
-    #var_6789038: isDefined(var_7089b458) ? hash(var_7089b458.name) : 0,
-    #var_d1f97c0f: isDefined(var_381f3b39) ? var_381f3b39 : 0
+    #game_time: function_f8d53445(), #player_xuid: isDefined(player) ? int(player getxuid(1)) : 0, #dropped_item: isDefined(var_a1ca235e) ? hash(var_a1ca235e.name) : 0, #var_5b8ff5e9: isDefined(var_3d1f9df4) ? var_3d1f9df4 : 0, #var_6789038: isDefined(var_7089b458) ? hash(var_7089b458.name) : 0, #var_d1f97c0f: isDefined(var_381f3b39) ? var_381f3b39 : 0
   };
 
   if(isDefined(var_a1ca235e)) {

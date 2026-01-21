@@ -681,9 +681,7 @@ func_AFDA(var_0) {
 
   if(isDefined(level.matchrecording_logevent)) {
     if(isDefined(level.matchrecording_generateid) && !isDefined(var_0.logid)) {
-      var_0.logid = [
-        [level.matchrecording_generateid]
-      ]();
+      var_0.logid = [[level.matchrecording_generateid]]();
     }
 
     if(isDefined(var_0.logid)) {
@@ -1125,9 +1123,7 @@ func_D91D() {
 
   if(isDefined(level.matchrecording_logeventmsg)) {
     if(shoulduseprecomputedlos()) {
-      [
-        [level.matchrecording_logeventmsg]
-      ]("LOG_GENERIC_MESSAGE", gettime(), "Attempting to use TTLOS Spawning Data...");
+      [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "Attempting to use TTLOS Spawning Data...");
       return;
     }
 

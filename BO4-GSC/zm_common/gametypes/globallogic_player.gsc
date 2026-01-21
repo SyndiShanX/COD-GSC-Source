@@ -241,14 +241,10 @@ callback_playerconnect() {
     [[level.spawnspectator]]();
 
     if(level.rankedmatch) {
-      [
-        [level.autoassign]
-      ](0);
+      [[level.autoassign]](0);
       self thread globallogic_spawn::kickifdontspawn();
     } else {
-      [
-        [level.autoassign]
-      ](0);
+      [[level.autoassign]](0);
     }
 
     if(self.pers[# "team"] == "spectator") {

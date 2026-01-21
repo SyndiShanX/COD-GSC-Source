@@ -556,8 +556,7 @@ function_5ad19000(e_trap) {
 
   [[level.var_db63b33b]] - > waitinqueue(self);
   level notify(#"trap_kill", {
-    #e_victim: self,
-    #e_trap: e_trap
+    #e_victim: self, #e_trap: e_trap
   });
 
   if(isDefined(e_trap.activated_by_player) && isplayer(e_trap.activated_by_player)) {

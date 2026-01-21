@@ -605,8 +605,7 @@ function_560ecf29(owner) {
 
   if(isDefined(closest)) {
     return {
-      #origin: closest,
-      #angles: owner.angles
+      #origin: closest, #angles: owner.angles
     };
   }
 

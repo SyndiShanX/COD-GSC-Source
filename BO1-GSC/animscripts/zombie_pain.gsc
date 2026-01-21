@@ -99,7 +99,7 @@ getPainAnim() {
 }
 
 get_flamethrower_pain() {
-  painArray = array( % ai_flame_wounded_stand_a, % ai_flame_wounded_stand_b, % ai_flame_wounded_stand_c, % ai_flame_wounded_stand_d);
+  painArray = array(%ai_flame_wounded_stand_a, %ai_flame_wounded_stand_b, %ai_flame_wounded_stand_c, %ai_flame_wounded_stand_d);
   tagArray = array("J_Elbow_RI", "J_Wrist_LE", "J_Wrist_RI", "J_Head");
   painArray = removeBlockedAnims(painArray);
   if(!painArray.size) {
@@ -117,7 +117,7 @@ get_flamethrower_pain() {
 }
 
 get_flamethrower_crouch_pain() {
-  painArray = array( % ai_flame_wounded_crouch_a, % ai_flame_wounded_crouch_b, % ai_flame_wounded_crouch_c, % ai_flame_wounded_crouch_d);
+  painArray = array(%ai_flame_wounded_crouch_a, %ai_flame_wounded_crouch_b, %ai_flame_wounded_crouch_c, %ai_flame_wounded_crouch_d);
   tagArray = array("J_Elbow_LE", "J_Wrist_LE", "J_Wrist_RI", "J_Head");
   painArray = removeBlockedAnims(painArray);
   if(!painArray.size) {
@@ -135,7 +135,7 @@ get_flamethrower_crouch_pain() {
 }
 
 getRunningForwardPainAnim() {
-  painArray = array( % run_pain_fallonknee, % run_pain_fallonknee_02, % run_pain_fallonknee_03, % run_pain_stomach, % run_pain_stumble);
+  painArray = array(%run_pain_fallonknee, %run_pain_fallonknee_02, %run_pain_fallonknee_03, %run_pain_stomach, %run_pain_stumble);
   painArray = removeBlockedAnims(painArray);
   if(!painArray.size) {
     self.a.movement = "stop";
@@ -220,7 +220,7 @@ playPainAnim(painAnim) {
   } else {
     rate = self.animPlayBackRate;
   }
-  self SetFlaggedAnimKnobAllRestart("painanim", painAnim, % body, 1, .1, rate);
+  self SetFlaggedAnimKnobAllRestart("painanim", painAnim, %body, 1, .1, rate);
   self animscripts\zombie_shared::DoNoteTracks("painanim");
 }
 
@@ -260,7 +260,7 @@ playThundergunPainAnim() {
     fallAnim = random(level._zombie_knockdowns[self.animname]["back"]);
     getupAnim = random(level._zombie_getups[self.animname]["belly"]["early"]);
   }
-  self SetFlaggedAnimKnobAllRestart("painanim", fallAnim, % body, 1, .2, self.animPlayBackRate);
+  self SetFlaggedAnimKnobAllRestart("painanim", fallAnim, %body, 1, .2, self.animPlayBackRate);
   self animscripts\zombie_shared::DoNoteTracks("painanim", self.thundergun_handle_pain_notetracks);
   if(!isDefined(self) || !IsAlive(self) || !self.has_legs || (isDefined(self.marked_for_death) && self.marked_for_death)) {
     return;
@@ -268,7 +268,7 @@ playThundergunPainAnim() {
   if(getupAnim == % ai_zombie_thundergun_getup_quick_a && (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm")) {
     return;
   }
-  self SetFlaggedAnimKnobAllRestart("painanim", getupAnim, % body, 1, .2, self.animPlayBackRate);
+  self SetFlaggedAnimKnobAllRestart("painanim", getupAnim, %body, 1, .2, self.animPlayBackRate);
   self animscripts\zombie_shared::DoNoteTracks("painanim");
 }
 

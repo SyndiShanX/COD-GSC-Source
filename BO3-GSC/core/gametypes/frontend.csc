@@ -237,9 +237,7 @@ class cmegachewfactory {
       } else {
         str_model = get_random_model_name_to_attach_to_carousel();
       }
-      [
-        [m_a_o_megachewcarousels[n_vat_index]]
-      ] - > update_model_on_carousel_tag(n_ball_index, str_model);
+      [[m_a_o_megachewcarousels[n_vat_index]]] - > update_model_on_carousel_tag(n_ball_index, str_model);
       mdl_carousel waittillmatch("_anim_notify_");
     }
   }
@@ -700,9 +698,7 @@ class cmegachewfactory {
       }
     }
     for(i = 0; i < 3; i++) {
-      [
-        [m_a_o_megachewcarousels[i]]
-      ] - > detach_all_models_from_carousel();
+      [[m_a_o_megachewcarousels[i]]] - > detach_all_models_from_carousel();
     }
   }
 
@@ -723,12 +719,8 @@ class cmegachewfactory {
     m_a_vat_contents[2] = vat_2;
     if(!success || "" == vat_0 || "" == vat_1 || "" == vat_2) {
       set_megachew_factory_anim_state(localclientnum, 3);
-      [
-        [m_o_megachewcounter]
-      ] - > set_blinking(localclientnum, 0);
-      [
-        [m_o_megachewcounter]
-      ] - > update_number_display(localclientnum);
+      [[m_o_megachewcounter]] - > set_blinking(localclientnum, 0);
+      [[m_o_megachewcounter]] - > update_number_display(localclientnum);
     } else {
       get_megachew_factory_results();
       for(i = 0; i < 3; i++) {
@@ -754,12 +746,8 @@ class cmegachewfactory {
         setuimodelvalue(m_a_uimodel_megachew[i], str_item_name);
       }
       hide_show_results(localclientnum);
-      [
-        [m_o_megachewcounter]
-      ] - > set_blinking(localclientnum, 0);
-      [
-        [m_o_megachewcounter]
-      ] - > update_number_display(localclientnum);
+      [[m_o_megachewcounter]] - > set_blinking(localclientnum, 0);
+      [[m_o_megachewcounter]] - > update_number_display(localclientnum);
       set_megachew_factory_anim_state(localclientnum, 2);
       wait(0.125);
       exploder::exploder("zm_gumball_pipe");
@@ -783,9 +771,7 @@ class cmegachewfactory {
   function update_token_display_counter(localclientnum, b_update_visual_counter = 0) {
     [[m_o_megachewcounter]] - > set_number(localclientnum, m_n_tokens_remaining);
     if(b_update_visual_counter) {
-      [
-        [m_o_megachewcounter]
-      ] - > update_number_display(localclientnum);
+      [[m_o_megachewcounter]] - > update_number_display(localclientnum);
     }
   }
 
@@ -875,9 +861,7 @@ class cmegachewfactory {
     }
     if(!isDefined(m_o_megachewbuttons)) {
       m_o_megachewbuttons = new cmegachewbuttons();
-      [
-        [m_o_megachewbuttons]
-      ] - > init(localclientnum);
+      [[m_o_megachewbuttons]] - > init(localclientnum);
     }
     vialdisplaymodel = getuimodel(getglobaluimodel(), "MegaChewFactoryVialDisplay");
     m_n_tokens_remaining = getuimodelvalue(vialdisplaymodel);
@@ -886,9 +870,7 @@ class cmegachewfactory {
     }
     if(!isDefined(m_o_megachewcounter)) {
       m_o_megachewcounter = new cmegachewcounter();
-      [
-        [m_o_megachewcounter]
-      ] - > init(localclientnum, m_n_tokens_remaining);
+      [[m_o_megachewcounter]] - > init(localclientnum, m_n_tokens_remaining);
     }
     for(i = 1; i <= 3; i++) {
       str_megachew_factory_door_flag = ("megachew_factory_door_" + i) + "_anim_done";

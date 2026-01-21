@@ -148,8 +148,7 @@ keepPositioned(owner, offset) {
   }
 }
 
-setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
-{
+setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"{
   if(!level.teamBased) {
     return;
   }
@@ -189,8 +188,7 @@ setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
   self thread destroyHeadIconsOnDeath();
 }
 
-setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"
-{
+setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"{
   if(level.teamBased) {
     return;
   }

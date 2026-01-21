@@ -86,7 +86,7 @@ ape_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_simianaut_idle, % ai_zombie_simianaut_idle);
+  self.a.array["exposed_idle"] = array(%ai_zombie_simianaut_idle, %ai_zombie_simianaut_idle);
   self.a.array["straight_level"] = % ai_zombie_simianaut_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -315,8 +315,8 @@ ape_think() {
   Earthquake(0.5, 0.75, spawnOrigin, 1000);
   PlayRumbleOnPosition("explosion_generic", spawnOrigin);
   playsoundatposition("zmb_ape_spawn", spawnOrigin);
-  time = getAnimLength( % ai_zombie_simianaut_chest_beat);
-  self SetFlaggedAnimKnobAllRestart("chestbeat_anim", % ai_zombie_simianaut_chest_beat, % body, 1, .1, 1);
+  time = getAnimLength(%ai_zombie_simianaut_chest_beat);
+  self SetFlaggedAnimKnobAllRestart("chestbeat_anim", %ai_zombie_simianaut_chest_beat, %body, 1, .1, 1);
   time = time / 2.0;
   self maps\_zombietron_utility::waittill_notify_timeout("damage", time);
   self.ignoreall = false;
@@ -334,10 +334,10 @@ ape_think() {
       if(randomInt(100) < specialAttackChance) {
         self notify("stop_find_flesh");
         self notify("killanimscript");
-        time = getAnimLength( % ai_zombie_simianaut_taunt);
-        self SetFlaggedAnimKnobAllRestart("chestbeat_anim", % ai_zombie_simianaut_taunt, % body, 1, .1, 1);
+        time = getAnimLength(%ai_zombie_simianaut_taunt);
+        self SetFlaggedAnimKnobAllRestart("chestbeat_anim", %ai_zombie_simianaut_taunt, %body, 1, .1, 1);
         wait time;
-        self ClearAnim( % ai_zombie_simianaut_taunt, 0.2);
+        self ClearAnim(%ai_zombie_simianaut_taunt, 0.2);
         self playSound("zmb_speed_boost_activate");
         Earthquake(0.5, 0.75, self.origin, 1000);
         PlayRumbleOnPosition("explosion_generic", self.origin);
@@ -359,11 +359,11 @@ ape_think() {
       if(randomInt(100) < specialAttackChance) {
         self notify("stop_find_flesh");
         self notify("killanimscript");
-        time = getAnimLength( % ai_zombie_simianaut_chest_beat);
-        self SetFlaggedAnimKnobAllRestart("chestbeat_anim", % ai_zombie_simianaut_chest_beat, % body, 1, .1, 1);
+        time = getAnimLength(%ai_zombie_simianaut_chest_beat);
+        self SetFlaggedAnimKnobAllRestart("chestbeat_anim", %ai_zombie_simianaut_chest_beat, %body, 1, .1, 1);
         time = time / 2.0;
         wait time;
-        self ClearAnim( % ai_zombie_simianaut_chest_beat, 0.2);
+        self ClearAnim(%ai_zombie_simianaut_chest_beat, 0.2);
         Earthquake(0.5, 0.75, self.origin, 1000);
         PlayRumbleOnPosition("explosion_generic", self.origin);
         self playSound("evt_turret_takeoff");
@@ -381,11 +381,11 @@ ape_think() {
         self notify("killanimscript");
         trigger Delete();
         self thread maps\_zombietron_spawner::find_flesh();
-        time = getAnimLength( % ai_zombie_simianaut_chest_beat);
-        self SetFlaggedAnimKnobAllRestart("chestbeat_anim", % ai_zombie_simianaut_chest_beat, % body, 1, .1, 1);
+        time = getAnimLength(%ai_zombie_simianaut_chest_beat);
+        self SetFlaggedAnimKnobAllRestart("chestbeat_anim", %ai_zombie_simianaut_chest_beat, %body, 1, .1, 1);
         time = time / 2.0;
         wait time;
-        self ClearAnim( % ai_zombie_simianaut_chest_beat, 0.2);
+        self ClearAnim(%ai_zombie_simianaut_chest_beat, 0.2);
         self thread animscripts\zombie_move::moveAgain();
         continue;
       }

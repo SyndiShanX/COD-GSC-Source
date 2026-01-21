@@ -313,9 +313,7 @@ function vending_trigger_think() {
     if(isint(level._custom_perks[perk].cost)) {
       cost = level._custom_perks[perk].cost;
     } else {
-      cost = [
-        [level._custom_perks[perk].cost]
-      ]();
+      cost = [[level._custom_perks[perk].cost]]();
     }
   }
   self.cost = cost;

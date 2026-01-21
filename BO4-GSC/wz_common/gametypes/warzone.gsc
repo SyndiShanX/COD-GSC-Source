@@ -261,9 +261,7 @@ function_c2a75696() {
 
 function private function_75189494(var_c6ce2627, playercount, var_404397c4) {
   data = {
-    #var_19b5b856: var_c6ce2627,
-    #var_f388074a: playercount,
-    #var_4a2854ac: var_404397c4
+    #var_19b5b856: var_c6ce2627, #var_f388074a: playercount, #var_4a2854ac: var_404397c4
   };
   function_92d1707f(#"hash_7bcd081bd6940681", data);
 }
@@ -817,9 +815,7 @@ function_f1394038() {
   foreach(team, _ in level.teams) {
     if(teams::function_9dd75dad(team) && !(isDefined(level.var_606becce[team]) && level.var_606becce[team]) && !isDefined(level.var_eed7c027[team])) {
       players = getplayers(team);
-      team_score = [
-        [level._getteamscore]
-      ](team);
+      team_score = [[level._getteamscore]](team);
       team_kills = function_7e309c84(team, players);
       damage_done = function_3915e148(team, players);
 
@@ -830,12 +826,7 @@ function_f1394038() {
       }
 
       var_17616452[var_17616452.size] = {
-        #team: team,
-        #players: players,
-        #last_alive: undefined,
-        #kills: team_kills,
-        #damage: damage_done,
-        #score: team_score
+        #team: team, #players: players, #last_alive: undefined, #kills: team_kills, #damage: damage_done, #score: team_score
       };
     }
   }
@@ -933,11 +924,7 @@ function_c7eae573() {
       team_kills = function_7e309c84(team, players);
       damage_done = function_3915e148(team, players);
       var_d72df62[var_d72df62.size] = {
-        #team: team,
-        #players: players,
-        #last_alive: last_alive,
-        #kills: team_kills,
-        #damage: damage_done
+        #team: team, #players: players, #last_alive: last_alive, #kills: team_kills, #damage: damage_done
       };
     }
   }
@@ -1464,9 +1451,7 @@ function_47851c07() {
 
 function_de15dc32(killed_player, disconnected_player) {
   player_count = {
-    #total: 0,
-    #alive: 0,
-    #alive_platoons: []
+    #total: 0, #alive: 0, #alive_platoons: []
   };
   var_77cfc33d = game.state == "pregame" || function_47851c07();
 
@@ -1791,20 +1776,13 @@ function_1e150a0b(player) {
 function_293cd859(ent) {
   if(isplayer(ent)) {
     data = {
-      #pos_x: ent.origin[0],
-      #pos_y: ent.origin[1],
-      #pos_z: ent.origin[2],
-      #type: # "player"
-    };
+      #pos_x: ent.origin[0], #pos_y: ent.origin[1], #pos_z: ent.origin[2], #type: # "player"};
     function_92d1707f(#"hash_5820ed7a498888c4", data);
     return;
   }
 
   data = {
-    #pos_x: ent.origin[0],
-    #pos_y: ent.origin[1],
-    #pos_z: ent.origin[2],
-    #type: ent.model
+    #pos_x: ent.origin[0], #pos_y: ent.origin[1], #pos_z: ent.origin[2], #type: ent.model
   };
   function_92d1707f(#"hash_5820ed7a498888c4", data);
 }

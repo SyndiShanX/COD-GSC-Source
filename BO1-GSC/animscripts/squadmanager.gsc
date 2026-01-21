@@ -337,10 +337,7 @@ updateCombat() {
     }
   }
   for(i = 0; i < self.members.size; i++) {
-    if(isDefined(self.members[i].enemy) &&
-      isDefined(self.members[i].enemy.squad) &&
-      isDefined(self.members[i].enemy.squad.squadName) &&
-      self.members[i].combatTime > 0) {
+    if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && isDefined(self.members[i].enemy.squad.squadName) && self.members[i].combatTime > 0) {
       if(isDefined(self.squadList[self.members[i].enemy.squad.squadName])) {
         self.squadList[self.members[i].enemy.squad.squadName].isInContact = true;
       }

@@ -10,7 +10,7 @@ movecqb() {
   cqb_checkchangeweapon();
 
   if(self.a.pose != "stand") {
-    self clearanim( % animscript_root, 0.2);
+    self clearanim(%animscript_root, 0.2);
 
     if(self.a.pose == "prone")
       animscripts\utility::exitpronewrapper(1);
@@ -20,7 +20,7 @@ movecqb() {
 
   self.a.movement = self.movemode;
   cqbtracking();
-  self clearanim( % h1_stairs, 0.1);
+  self clearanim(%h1_stairs, 0.1);
 
   if(cqb_checkreload()) {
     return;
@@ -120,7 +120,7 @@ cqb_reloadinternal() {
     var_1 = var_1[randomint(var_1.size)];
 
   thread cqb_scaleforslowdown(var_1, getanimlength(var_1));
-  self setflaggedanimknoballrestart(var_0, var_1, % body, 1, 0.25, self.moveplaybackrate * self.cqb_slowdown_scale);
+  self setflaggedanimknoballrestart(var_0, var_1, %body, 1, 0.25, self.moveplaybackrate * self.cqb_slowdown_scale);
   cqb_playfacialanim(var_1);
   animscripts\run::setmovenonforwardanims(animscripts\utility::lookupanim("cqb", "move_b"), animscripts\utility::lookupanim("cqb", "move_l"), animscripts\utility::lookupanim("cqb", "move_r"));
   thread animscripts\run::setcombatstandmoveanimweights("cqb");
@@ -223,7 +223,7 @@ cqb_playfacialanim(var_0) {
 
 cqb_clearfacialanim() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }
 
 cqb_scaleforslowdown(var_0, var_1) {

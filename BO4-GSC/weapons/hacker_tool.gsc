@@ -92,8 +92,7 @@ watchhackertoolfired() {
       if(isentityhackablecarepackage(hackertooltarget)) {
         scoreevents::givecratecapturemedal(hackertooltarget, self);
         hackertooltarget notify(#"captured", {
-          #player: self,
-          #is_remote_hack: 1
+          #player: self, #is_remote_hack: 1
         });
 
         if(isDefined(hackertooltarget.owner) && isplayer(hackertooltarget.owner) && hackertooltarget.owner.team != self.team) {
@@ -101,8 +100,7 @@ watchhackertoolfired() {
         }
       } else if(isentityhackableweaponobject(hackertooltarget) && isDefined(hackertooltarget.hackertrigger)) {
         hackertooltarget.hackertrigger notify(#"trigger", {
-          #activator: self,
-          #dropped_item: 1
+          #activator: self, #dropped_item: 1
         });
         hackertooltarget.previouslyhacked = 1;
         self.throwinggrenade = 0;
@@ -282,8 +280,7 @@ hackertooltargetloop(weapon) {
       heatseekingmissile::setfriendlyflags(weapon, self.hackertooltarget);
       thread heatseekingmissile::looplocallocksound(game.locked_on_sound, 0.75);
       self notify(#"hacker_tool_fired", {
-        #target: self.hackertooltarget,
-        #weapon: weapon
+        #target: self.hackertooltarget, #weapon: weapon
       });
       return;
     }

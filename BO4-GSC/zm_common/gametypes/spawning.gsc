@@ -432,11 +432,7 @@ get_best_spawnpoint(point_team, influencer_team, player, predictedspawn) {
 
   if(!predictedspawn) {
     var_48eba3a3 = {
-      #reason: "point used",
-      #var_c734ddf2: getplayerspawnid(player),
-      #x: spawn_point[# "origin"][0],
-      #y: spawn_point[# "origin"][1],
-      #z: spawn_point[# "origin"][2]
+      #reason: "point used", #var_c734ddf2: getplayerspawnid(player), #x: spawn_point[# "origin"][0], #y: spawn_point[# "origin"][1], #z: spawn_point[# "origin"][2]
     };
     function_92d1707f(#"hash_263d9506f7e11fdd", var_48eba3a3);
   }

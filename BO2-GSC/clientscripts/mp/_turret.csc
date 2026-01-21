@@ -49,7 +49,7 @@ microwave_open_anim(localclientnum, set) {
     return;
   }
   self useanimtree(#animtree);
-  self setanim( % o_hpm_open, 1.0, 0.0, 1.0);
+  self setanim(%o_hpm_open, 1.0, 0.0, 1.0);
 }
 
 microwave_close_anim(localclientnum, set) {
@@ -57,10 +57,10 @@ microwave_close_anim(localclientnum, set) {
     return;
   }
   self useanimtree(#animtree);
-  self setanim( % o_hpm_close, 1.0, 0.0, 1.0);
+  self setanim(%o_hpm_close, 1.0, 0.0, 1.0);
 }
 
 microwave_destroy_anim(localclientnum, set) {
   self useanimtree(#animtree);
-  self setanim( % o_hpm_destroyed, 1.0, 0.0, 1.0);
+  self setanim(%o_hpm_destroyed, 1.0, 0.0, 1.0);
 }

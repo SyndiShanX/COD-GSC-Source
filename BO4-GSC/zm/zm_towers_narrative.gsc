@@ -87,8 +87,7 @@ function_58c9a8b3(var_c1146e81 = 0) {
 
   if(isDefined(self.script_notify)) {
     level notify(self.script_notify, {
-      #e_player: e_player,
-      #v_origin: self.origin
+      #e_player: e_player, #v_origin: self.origin
     });
   }
 

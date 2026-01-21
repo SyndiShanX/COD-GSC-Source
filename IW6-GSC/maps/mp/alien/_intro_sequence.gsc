@@ -83,7 +83,7 @@ alien_town_intro(player) {
 
   helibrush thread wait_to_delete();
 
-  wait(GetAnimLength( % alien_town_intro_drill));
+  wait(GetAnimLength(%alien_town_intro_drill));
 
   drill_model ScriptModelClearAnim();
   drill_model Delete();
@@ -91,7 +91,7 @@ alien_town_intro(player) {
   level thread mp_alien_town_intro_drill_setup();
 
   level thread kill_heli(heli);
-  wait(GetAnimLength( % alien_town_intro_chopper));
+  wait(GetAnimLength(%alien_town_intro_chopper));
 
   pilot_model ScriptModelClearAnim();
   pilot_head ScriptModelClearAnim();
@@ -159,7 +159,7 @@ sfx_intro_heli_takeoff(heli) {
 }
 
 sfx_intro_heli_drop_drill(drill) {
-  wait(GetAnimLength( % alien_town_intro_drill) - 0.5);
+  wait(GetAnimLength(%alien_town_intro_drill) - 0.5);
 
   drill playSound("alien_heli_drill_drop");
 }

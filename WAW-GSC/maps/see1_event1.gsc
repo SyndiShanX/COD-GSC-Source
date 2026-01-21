@@ -286,44 +286,28 @@ ev1_right_side_tank_battle() {
   start_trigger = getent("ev1_tank_battle", "targetname");
   start_trigger waittill("trigger");
   start_node_1 = getvehiclenode("ev1_tank_1_start", "targetname");
-  tank1 = spawnvehicle("vehicle_rus_tracked_t34",
-    "tank1",
-    "t34",
-    start_node_1.origin,
-    start_node_1.angles);
+  tank1 = spawnvehicle("vehicle_rus_tracked_t34", "tank1", "t34", start_node_1.origin, start_node_1.angles);
   tank1.vehicletype = "t34";
   vehicle_init(tank1);
   tank1 maps\_vehicle::mgoff();
   tank1 attachPath(start_node_1);
   tank1.health = 100000;
   start_node_2 = getvehiclenode("ev1_tank_2_start", "targetname");
-  tank2 = spawnvehicle("vehicle_rus_tracked_t34",
-    "tank2",
-    "t34",
-    start_node_2.origin,
-    start_node_2.angles);
+  tank2 = spawnvehicle("vehicle_rus_tracked_t34", "tank2", "t34", start_node_2.origin, start_node_2.angles);
   tank2.vehicletype = "t34";
   vehicle_init(tank2);
   tank2 maps\_vehicle::mgoff();
   tank2 attachPath(start_node_2);
   tank2.health = 100000;
   start_node_3 = getvehiclenode("ev1_tank_3_start", "targetname");
-  tank3 = spawnvehicle("vehicle_ger_tracked_king_tiger",
-    "tank3",
-    "tiger",
-    start_node_3.origin,
-    start_node_3.angles);
+  tank3 = spawnvehicle("vehicle_ger_tracked_king_tiger", "tank3", "tiger", start_node_3.origin, start_node_3.angles);
   tank3.vehicletype = "tiger";
   vehicle_init(tank3);
   tank3 maps\_vehicle::mgoff();
   tank3 attachPath(start_node_3);
   tank3.health = 100000;
   start_node_4 = getvehiclenode("ev1_tank_4_start", "targetname");
-  tank4 = spawnvehicle("vehicle_ger_tracked_king_tiger",
-    "tank4",
-    "tiger",
-    start_node_4.origin,
-    start_node_4.angles);
+  tank4 = spawnvehicle("vehicle_ger_tracked_king_tiger", "tank4", "tiger", start_node_4.origin, start_node_4.angles);
   tank4.vehicletype = "tiger";
   vehicle_init(tank4);
   tank4 maps\_vehicle::mgoff();
@@ -413,7 +397,7 @@ ev1_trench_right_blow_up_guy_think() {
 anim_open_hatch(tank) {
   tank.animname = "t34";
   tank UseAnimTree(#animtree);
-  tank setflaggedanim("anim", % v_seelow1_tank_hatch_open, 1, 0.1, 1);
+  tank setflaggedanim("anim", %v_seelow1_tank_hatch_open, 1, 0.1, 1);
 }
 
 #using_animtree("generic_human");
@@ -532,11 +516,7 @@ ev1_plane_bomb_r() {
 
 ev1_bombing_plane(node_name) {
   start_node = getvehiclenode(node_name, "targetname");
-  plane = spawnvehicle("vehicle_rus_airplane_il2",
-    "plane",
-    "stuka",
-    start_node.origin,
-    start_node.angles);
+  plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
   plane attachPath(start_node);
   plane startpath();
   plane.script_numbombs = 3;
@@ -548,11 +528,7 @@ ev1_bombing_plane(node_name) {
 ev1_bombing_planes(node_name) {
   start_node_array = getvehiclenodearray(node_name, "targetname");
   for(i = 0; i < start_node_array.size; i++) {
-    plane = spawnvehicle("vehicle_rus_airplane_il2",
-      "plane",
-      "stuka",
-      start_node_array[i].origin,
-      start_node_array[i].angles);
+    plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node_array[i].origin, start_node_array[i].angles);
     plane attachPath(start_node_array[i]);
     plane startpath();
     plane.script_numbombs = 3;

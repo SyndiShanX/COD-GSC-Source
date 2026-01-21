@@ -10,7 +10,7 @@ init_zodiacs() {
   level.vtmodel = "vehicle_zodiac_boat_fed_iw6";
   level.vtclassname = "script_vehicle_zodiac_iw6";
   maps\_vehicle::build_aianims(maps\carrier_anim::set_zodiac_override_anims, vehicle_scripts\_zodiac::set_vehicle_anims);
-  maps\_vehicle::build_drive( % carrier_rappel_defend_zodiac_moving, % carrier_rappel_defend_zodiac_moving, 20);
+  maps\_vehicle::build_drive(%carrier_rappel_defend_zodiac_moving, %carrier_rappel_defend_zodiac_moving, 20);
   zodiac_aianimthread_setup();
   level.max_zodiacs = 30;
 }
@@ -151,7 +151,7 @@ zodiac_setup(var_0) {
   if(!maps\carrier_code::eval(var_0))
     thread zodiac_safe_remove();
 
-  var_1 = getanimlength( % carrier_rappel_defend_zodiac_moving);
+  var_1 = getanimlength(%carrier_rappel_defend_zodiac_moving);
   wait(randomfloat(var_1 - var_1 / 4));
 
   if(!maps\carrier_code::eval(self.is_rappelling))
@@ -712,7 +712,7 @@ zodiac_death() {
   }
 
   self notify("suspend_drive_anims");
-  self setanimknoball(level.scr_anim["zodiac"]["carrier_rappel_defend_zodiac_death_parked"], % root);
+  self setanimknoball(level.scr_anim["zodiac"]["carrier_rappel_defend_zodiac_death_parked"], %root);
   var_0 = 0.75;
   self setanimtime(level.scr_anim["zodiac"]["carrier_rappel_defend_zodiac_death_parked"], var_0);
   wait 0.2;

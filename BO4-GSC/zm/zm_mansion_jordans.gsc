@@ -587,8 +587,7 @@ function_4c925e67() {
     if(isplayer(s_waitresult.activator) && isDefined(level.var_3a4aa2ab) && level.var_3a4aa2ab) {
       var_a690f86 = self.stub.related_parent;
       level notify(#"hash_df5cf4747eb1cf1", {
-        #var_9ea53c54: var_a690f86.script_int,
-        #activator: s_waitresult.activator
+        #var_9ea53c54: var_a690f86.script_int, #activator: s_waitresult.activator
       });
     }
   }

@@ -40,9 +40,9 @@ setup() {
   }
   self thread stopShortly();
   self.previousPitchDelta = 0.0;
-  self ClearAnim( % root, .2);
+  self ClearAnim(%root, .2);
   self SetAnim(animarray("straight_level"));
-  self SetAnim( % add_idle);
+  self SetAnim(%add_idle);
   if(!isDefined(self.no_idle)) {
     self thread idleThread();
   }
@@ -57,20 +57,20 @@ stopShortly() {
 
 set_animarray_standing() {
   self.a.array = [];
-  self.a.array["exposed_idle"] = array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
+  self.a.array["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
   self.a.array["crouch_2_stand"] = % exposed_crouch_2_stand;
   self.a.array["stand_2_crouch"] = % exposed_stand_2_crouch;
   if(self.animname == "quad_zombie") {
-    self.a.array["exposed_idle"] = array( % ai_zombie_quad_idle, % ai_zombie_quad_idle_2);
+    self.a.array["exposed_idle"] = array(%ai_zombie_quad_idle, %ai_zombie_quad_idle_2);
     self.a.array["straight_level"] = % ai_zombie_quad_idle;
     self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
   } else
   if(self.animname == "boss_zombie") {
-    self.a.array["exposed_idle"] = array( % ai_zombie_boss_idle_a, % ai_zombie_boss_idle_b, % ai_zombie_boss_idle_confused);
+    self.a.array["exposed_idle"] = array(%ai_zombie_boss_idle_a, %ai_zombie_boss_idle_b, %ai_zombie_boss_idle_confused);
     self.a.array["straight_level"] = % ai_zombie_boss_idle_a;
     self.a.array["stand_2_crouch"] = % ai_zombie_boss_idle_a;
   } else {
-    self.a.array["exposed_idle"] = array( % ai_zombie_idle_v1);
+    self.a.array["exposed_idle"] = array(%ai_zombie_idle_v1);
     self.a.array["straight_level"] = % ai_zombie_idle_base;
     self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
   }
@@ -81,10 +81,10 @@ set_animarray_standing() {
 
 set_animarray_crouching() {
   self.a.array = [];
-  self.a.array["exposed_idle"] = array( % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3);
+  self.a.array["exposed_idle"] = array(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
   self.a.array["crouch_2_stand"] = % exposed_crouch_2_stand;
   self.a.array["stand_2_crouch"] = % exposed_stand_2_crouch;
-  self.a.array["exposed_idle"] = array( % ai_zombie_idle_crawl);
+  self.a.array["exposed_idle"] = array(%ai_zombie_idle_crawl);
   self.a.array["straight_level"] = % ai_zombie_idle_crawl_base;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_left_2_crawl;
 }

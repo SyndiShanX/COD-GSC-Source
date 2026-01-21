@@ -57,8 +57,7 @@ watchKillstreakWeaponDelay() {
       wait(0.5);
       continue;
     }
-    if(level.killstreakRoundDelay >= (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000) &&
-      maps\mp\gametypes\_hardpoints::isDelayableKillstreak(newWeapon) && isHeldKillstreakWeapon(newWeapon)) {
+    if(level.killstreakRoundDelay >= (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000) && maps\mp\gametypes\_hardpoints::isDelayableKillstreak(newWeapon) && isHeldKillstreakWeapon(newWeapon)) {
       timeLeft = Int(level.killstreakRoundDelay - (maps\mp\gametypes\_globallogic_utils::getTimePassed() / 1000));
       if(!timeLeft)
         timeLeft = 1;

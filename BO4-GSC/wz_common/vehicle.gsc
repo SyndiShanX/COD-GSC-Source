@@ -232,9 +232,7 @@ function_ed173e0b() {
 function_b8c069cc(notifyhash) {
   if(notifyhash == # "emped_vehicle") {
     if(isDefined(self) && isDefined(level.var_fc1bbaef)) {
-      [
-        [level.var_fc1bbaef]
-      ](self);
+      [[level.var_fc1bbaef]](self);
     }
   }
 }
@@ -259,8 +257,7 @@ is_staircase_up(attackingplayer = undefined, jammer = undefined) {
 
   if(isplayer(attackingplayer)) {
     level callback::callback(#"vehicle_emped", {
-      #attacker: attackingplayer,
-      #vehicle: self
+      #attacker: attackingplayer, #vehicle: self
     });
   }
 
@@ -546,28 +543,7 @@ function_3054737a(vehicle) {
   }
 
   vehicle.session = {
-    #vehicle: vehicle.vehicletype,
-    #var_2dbaf8ca: vehicle.origin[0],
-    #var_1ff15d37: vehicle.origin[1],
-    #var_16f7d5d0: vehicle.origin[0],
-    #var_4ba3155: vehicle.origin[1],
-    #var_c87538d9: vehicle.trackingindex,
-    #start_time: gettime(),
-    #end_time: 0,
-    #start_health: vehicle.health,
-    #end_health: vehicle.health,
-    #first_player: int(self getxuid(1)),
-    #var_efe98761: 1,
-    #var_309ad81f: 0,
-    #var_5ba0df6e: 0,
-    #var_770fd50d: 0,
-    #var_33f48e5a: 0,
-    #var_ecd1fe60: 0,
-    #vehicle_kills: 0,
-    #var_ffb0c509: 0,
-    #var_45bf3627: 0,
-    #raw\russian\sound\vox\scripted\isa\vox_isa_encourage_lost_01.SN65.xenon.snd: 0,
-    #passenger_kills: 0
+    #vehicle: vehicle.vehicletype, #var_2dbaf8ca: vehicle.origin[0], #var_1ff15d37: vehicle.origin[1], #var_16f7d5d0: vehicle.origin[0], #var_4ba3155: vehicle.origin[1], #var_c87538d9: vehicle.trackingindex, #start_time: gettime(), #end_time: 0, #start_health: vehicle.health, #end_health: vehicle.health, #first_player: int(self getxuid(1)), #var_efe98761: 1, #var_309ad81f: 0, #var_5ba0df6e: 0, #var_770fd50d: 0, #var_33f48e5a: 0, #var_ecd1fe60: 0, #vehicle_kills: 0, #var_ffb0c509: 0, #var_45bf3627: 0, #raw\russian\sound\vox\scripted\isa\vox_isa_encourage_lost_01.SN65.xenon.snd: 0, #passenger_kills: 0
   };
 }
 
@@ -2402,9 +2378,7 @@ function_365e033d(params) {
 
   if(isDefined(level.enable_thermal)) {
     if(self vehicle_ai::get_next_state() !== "death") {
-      [
-        [level.enable_thermal]
-      ]();
+      [[level.enable_thermal]]();
     }
   }
 
@@ -2951,9 +2925,7 @@ function_32607cfc(vehicle) {
 heli_emp_done(params) {
   if(isDefined(self)) {
     if(isDefined(level.var_fc1bbaef)) {
-      [
-        [level.var_fc1bbaef]
-      ](self);
+      [[level.var_fc1bbaef]](self);
     }
 
     self.abnormal_status.emped = 0;
@@ -3028,9 +3000,7 @@ function_4e74bed7(params) {
 function_9e6e374a(params) {
   if(isDefined(self)) {
     if(isDefined(level.var_fc1bbaef)) {
-      [
-        [level.var_fc1bbaef]
-      ](self);
+      [[level.var_fc1bbaef]](self);
     }
 
     self clientfield::set("stunned", 0);
@@ -3038,9 +3008,7 @@ function_9e6e374a(params) {
     self vehicle::toggle_emp_fx(0);
 
     if(isDefined(level.var_fc1bbaef)) {
-      [
-        [level.var_fc1bbaef]
-      ](self);
+      [[level.var_fc1bbaef]](self);
     }
 
     self.abnormal_status.emped = 0;

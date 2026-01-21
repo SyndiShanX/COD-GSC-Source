@@ -8,7 +8,7 @@
 
 setup_smg_anim_array(animtype, array) {
   assert(isDefined(array) && isarray(array));
-  array[animtype]["combat"]["stand"]["smg"]["exposed_idle"] = array( % smg_stand_exposed_idle_alert, % smg_stand_exposed_idle_alert_v2, % smg_stand_exposed_idle_alert_v3);
+  array[animtype]["combat"]["stand"]["smg"]["exposed_idle"] = array(%smg_stand_exposed_idle_alert, %smg_stand_exposed_idle_alert_v2, %smg_stand_exposed_idle_alert_v3);
   array[animtype]["combat"]["stand"]["smg"]["straight_level"] = % smg_stand_exposed_aim_5;
   array[animtype]["combat"]["stand"]["smg"]["add_aim_up"] = % smg_stand_exposed_aim_8;
   array[animtype]["combat"]["stand"]["smg"]["add_aim_down"] = % smg_stand_exposed_aim_2;

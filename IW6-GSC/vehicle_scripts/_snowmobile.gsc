@@ -189,23 +189,23 @@ listen_collision() {
 do_steering() {
   self endon("death");
   wait 0.05;
-  self setanimknoball( % snowmobile, % root, 1, 0);
-  self setanimlimited( % sm_turn, 1, 0);
+  self setanimknoball(%snowmobile, %root, 1, 0);
+  self setanimlimited(%sm_turn, 1, 0);
 
   for(;;) {
     maps\_vehicle_code::update_steering(self);
 
     if(self.steering_enable) {
       if(self.steering >= 0) {
-        self setanimknoblimited( % snowmobile_vehicle_lean_r_delta, 1, 0, 0);
-        self setanimtime( % snowmobile_vehicle_lean_r_delta, self.steering);
+        self setanimknoblimited(%snowmobile_vehicle_lean_r_delta, 1, 0, 0);
+        self setanimtime(%snowmobile_vehicle_lean_r_delta, self.steering);
       } else {
-        self setanimknoblimited( % snowmobile_vehicle_lean_l_delta, 1, 0, 0);
-        self setanimtime( % snowmobile_vehicle_lean_l_delta, abs(self.steering));
+        self setanimknoblimited(%snowmobile_vehicle_lean_l_delta, 1, 0, 0);
+        self setanimtime(%snowmobile_vehicle_lean_l_delta, abs(self.steering));
       }
     } else {
-      self clearanim( % snowmobile_vehicle_lean_r_delta, 0);
-      self clearanim( % snowmobile_vehicle_lean_l_delta, 0);
+      self clearanim(%snowmobile_vehicle_lean_r_delta, 0);
+      self clearanim(%snowmobile_vehicle_lean_l_delta, 0);
     }
 
     wait 0.05;

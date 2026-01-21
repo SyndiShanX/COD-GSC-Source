@@ -258,12 +258,8 @@ function_236a944e(localclientnum) {
   team = function_c4dfe16e(localclientnum);
 
   foreach(character in level.draftcharacters[localclientnum][team]) {
-    if([
-        [character]
-      ] - > function_82e05d64().showmodel) {
-      [
-        [character]
-      ] - > show_model();
+    if([[character]] - > function_82e05d64().showmodel) {
+      [[character]] - > show_model();
     }
   }
 }
@@ -284,9 +280,7 @@ function_b139ecfb(localclientnum) {
     var_2d0192e5 = [[character]] - > function_82e05d64();
 
     if(var_2d0192e5.islocalclient && var_2d0192e5.showmodel) {
-      [
-        [character]
-      ] - > show_model();
+      [[character]] - > show_model();
       continue;
     }
 
@@ -301,9 +295,7 @@ function_1cf2437c(localclientnum, draftcharacter, oldcharacterindex, newcharacte
 
   if([[draftcharacter]] - > function_82e05d64().localclientnum === localclientnum && isDefined([[draftcharacter]] - > function_82e05d64().selectedcharacterdata) && player_role::is_valid([[draftcharacter]] - > function_82e05d64().selectedcharacterdata.charactertype)) {
     if(isDefined(level.var_aefa616f) && level.var_aefa616f && dialog_shared::dialog_chance("characterSelectMaldivesChance")) {
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().player dialog_shared::play_dialog("maldivesCharacterSelectOverride", localclientnum);
+      [[draftcharacter]] - > function_82e05d64().player dialog_shared::play_dialog("maldivesCharacterSelectOverride", localclientnum);
       return;
     }
 
@@ -432,38 +424,20 @@ function_2dfe152c(localclientnum, draftcharacter, oldweapon, newweapon) {}
 
 function_4ccc033d(localclientnum, draftcharacter) {
   if(isDefined([[draftcharacter]] - > function_82e05d64().primaryweapon)) {
-    if(!isDefined([
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon)) {
+    if(!isDefined([[draftcharacter]] - > function_82e05d64().activeweapon)) {
       return 1;
     }
 
     if(isDefined(level.var_ea696257) && level.var_ea696257) {
-      return ([
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon != getweapon(#"pistol_standard_t8"));
+      return ([[draftcharacter]] - > function_82e05d64().activeweapon != getweapon(#"pistol_standard_t8"));
     } else if(isDefined(level.var_8eef5741) && level.var_8eef5741) {
-      return ([
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon != level.var_bf82f6b0);
+      return ([[draftcharacter]] - > function_82e05d64().activeweapon != level.var_bf82f6b0);
     } else if(isDefined(level.isgungame) && level.isgungame) {
-      return ([
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon != getweapon(#"pistol_fullauto_t8"));
+      return ([[draftcharacter]] - > function_82e05d64().activeweapon != getweapon(#"pistol_fullauto_t8"));
     } else if(isDefined(level.var_207a1c9a) && level.var_207a1c9a) {
-      return ([
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon != getweapon(#"crossbow_special_t8"));
+      return ([[draftcharacter]] - > function_82e05d64().activeweapon != getweapon(#"crossbow_special_t8"));
     } else {
-      newprimary = [
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon != [
-        [draftcharacter]
-      ] - > function_82e05d64().primaryweapon || [
-        [draftcharacter]
-      ] - > function_82e05d64().var_b8f20727 !== [
-        [draftcharacter]
-      ] - > function_82e05d64().primaryweaponoptions;
+      newprimary = [[draftcharacter]] - > function_82e05d64().activeweapon != [[draftcharacter]] - > function_82e05d64().primaryweapon || [[draftcharacter]] - > function_82e05d64().var_b8f20727 !== [[draftcharacter]] - > function_82e05d64().primaryweaponoptions;
       return newprimary;
     }
   }
@@ -478,57 +452,23 @@ update_player_weapon(localclientnum, draftcharacter) {
     function_2dfe152c(localclientnum, draftcharacter, [[draftcharacter]] - > function_82e05d64().activeweapon, [[draftcharacter]] - > function_82e05d64().primaryweapon);
 
     if(isDefined(level.var_ea696257) && level.var_ea696257) {
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon = getweapon(#"pistol_standard_t8");
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().var_b8f20727 = 0;
+      [[draftcharacter]] - > function_82e05d64().activeweapon = getweapon(#"pistol_standard_t8");
+      [[draftcharacter]] - > function_82e05d64().var_b8f20727 = 0;
     } else if(isDefined(level.var_8eef5741) && level.var_8eef5741) {
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon = level.var_bf82f6b0;
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().var_b8f20727 = 0;
+      [[draftcharacter]] - > function_82e05d64().activeweapon = level.var_bf82f6b0;
+      [[draftcharacter]] - > function_82e05d64().var_b8f20727 = 0;
     } else if(isDefined(level.isgungame) && level.isgungame) {
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon = getweapon(#"pistol_fullauto_t8");
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().var_b8f20727 = 0;
+      [[draftcharacter]] - > function_82e05d64().activeweapon = getweapon(#"pistol_fullauto_t8");
+      [[draftcharacter]] - > function_82e05d64().var_b8f20727 = 0;
     } else if(isDefined(level.var_207a1c9a) && level.var_207a1c9a) {
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon = getweapon(#"special_crossbow_t8");
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().var_b8f20727 = 0;
-    } else if([
-        [draftcharacter]
-      ] - > function_82e05d64().primaryweapon == level.weaponnone) {
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon = [
-        [draftcharacter]
-      ] - > function_82e05d64().secondaryweapon;
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().var_b8f20727 = [
-        [draftcharacter]
-      ] - > function_82e05d64().secondaryweaponoptions;
+      [[draftcharacter]] - > function_82e05d64().activeweapon = getweapon(#"special_crossbow_t8");
+      [[draftcharacter]] - > function_82e05d64().var_b8f20727 = 0;
+    } else if([[draftcharacter]] - > function_82e05d64().primaryweapon == level.weaponnone) {
+      [[draftcharacter]] - > function_82e05d64().activeweapon = [[draftcharacter]] - > function_82e05d64().secondaryweapon;
+      [[draftcharacter]] - > function_82e05d64().var_b8f20727 = [[draftcharacter]] - > function_82e05d64().secondaryweaponoptions;
     } else {
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().activeweapon = [
-        [draftcharacter]
-      ] - > function_82e05d64().primaryweapon;
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().var_b8f20727 = [
-        [draftcharacter]
-      ] - > function_82e05d64().primaryweaponoptions;
+      [[draftcharacter]] - > function_82e05d64().activeweapon = [[draftcharacter]] - > function_82e05d64().primaryweapon;
+      [[draftcharacter]] - > function_82e05d64().var_b8f20727 = [[draftcharacter]] - > function_82e05d64().primaryweaponoptions;
     }
 
     [[draftcharacter]] - > function_82e05d64().params.activeweapon = [[draftcharacter]] - > function_82e05d64().activeweapon;
@@ -580,17 +520,9 @@ update_team(localclientnum, var_4123f2c1) {
       luaindex = i + 1;
       positionmodel = getuimodel(positiondraftclientsmodel, luaindex);
       clientnum = getuimodelvalue(getuimodel(positionmodel, "clientNum"));
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().islocalclient = getuimodelvalue(getuimodel(positionmodel, "isLocalClient"));
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().entnummodel = createuimodel(positionmodel, "entNum");
-      setuimodelvalue([
-        [draftcharacter]
-      ] - > function_82e05d64().entnummodel, [
-        [draftcharacter]
-      ] - > function_47cb6b19());
+      [[draftcharacter]] - > function_82e05d64().islocalclient = getuimodelvalue(getuimodel(positionmodel, "isLocalClient"));
+      [[draftcharacter]] - > function_82e05d64().entnummodel = createuimodel(positionmodel, "entNum");
+      setuimodelvalue([[draftcharacter]] - > function_82e05d64().entnummodel, [[draftcharacter]] - > function_47cb6b19());
 
       if(clientnum >= 0) {
         player = getentbynum(localclientnum, clientnum);
@@ -727,9 +659,7 @@ function_9e9e1117(localclientnum, draftcharacter) {
 function_20811f66(localclientnum) {
   foreach(team in getarraykeys(level.draftcharacters[localclientnum])) {
     foreach(char in level.draftcharacters[localclientnum][team]) {
-      [
-        [char]
-      ] - > delete_models();
+      [[char]] - > delete_models();
     }
 
     level.draftcharacters[localclientnum][team] = [];

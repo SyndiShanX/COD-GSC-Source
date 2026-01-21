@@ -44,8 +44,8 @@ movewalk() {
 
 dowalkanimoverride(var_0) {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
 
   if(isarray(self.walk_overrideanim)) {
     if(isDefined(self.walk_override_weights))
@@ -118,13 +118,13 @@ dowalkanim(var_0) {
 
       self setflaggedanimknoball("walkanim", animscripts\cqb::determinecqbanim(), var_2, 1, 1, var_1, 1);
     } else
-      self setflaggedanimknoball("walkanim", var_0, % body, 1, 1, var_1, 1);
+      self setflaggedanimknoball("walkanim", var_0, %body, 1, 1, var_1, 1);
 
     dowalkanim_initnonforwardanim();
   } else if(self.a.pose == "prone")
     self setflaggedanimknob("walkanim", animscripts\utility::getmoveanim("prone"), 1, 0.3, self.moveplaybackrate);
   else {
-    self setflaggedanimknoball("walkanim", var_0, % body, 1, 1, var_1, 1);
+    self setflaggedanimknoball("walkanim", var_0, %body, 1, 1, var_1, 1);
     dowalkanim_initnonforwardanim();
   }
 

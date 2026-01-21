@@ -32,8 +32,7 @@ main() {
     SetDvar("sm_sunShadowScale", "0.55");
     SetDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.56" +
-      "");
+    SetDvar("sm_sunShadowScale", "0.56" + "");
     SetDvar("sm_sunsamplesizenear", ".22");
   } else {
     SetDvar("sm_sunShadowScale", "0.9");

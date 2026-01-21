@@ -388,9 +388,7 @@ dds_process_active_events() {
     }
 
     if(level.dds.active_events[category.name].size != 0) {
-      level.dds.active_events[category.name] = [
-        [category.priority_sort]
-      ](level.dds.active_events[category.name]);
+      level.dds.active_events[category.name] = [[category.priority_sort]](level.dds.active_events[category.name]);
 
       for(j = 0; j < level.dds.active_events[category.name].size; j++) {
         if(randomfloat(1) >= category.probability) {
@@ -458,9 +456,7 @@ dds_process_active_events_axis() {
     }
 
     if(level.dds.active_events_axis[category.name].size != 0) {
-      level.dds.active_events_axis[category.name] = [
-        [category.priority_sort]
-      ](level.dds.active_events_axis[category.name]);
+      level.dds.active_events_axis[category.name] = [[category.priority_sort]](level.dds.active_events_axis[category.name]);
 
       for(j = 0; j < level.dds.active_events_axis[category.name].size; j++) {
         if(randomfloat(1) >= category.probability) {

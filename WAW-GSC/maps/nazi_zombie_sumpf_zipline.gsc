@@ -176,8 +176,7 @@ zipThink() {
     if(is_player_valid(who)) {
       if(who.score >= self.zombie_cost) {
         if(!level.zipinuse) {
-          if(isDefined(self.script_noteworthy) && self.script_noteworthy == "nonstatic" && who IsTouching(self.volume) ||
-            isDefined(self.script_noteworthy) && self.script_noteworthy == "static") {
+          if(isDefined(self.script_noteworthy) && self.script_noteworthy == "nonstatic" && who IsTouching(self.volume) || isDefined(self.script_noteworthy) && self.script_noteworthy == "static") {
             level.zipinuse = true;
             for(i = 0; i < zipBuyTrigger.size; i++) {
               if(isDefined(zipBuyTrigger[i].script_noteworthy) && zipBuyTrigger[i].script_noteworthy == "nonstatic") {

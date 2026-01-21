@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("y_8", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_deathmodel("vehicle_y_8");
-  maps\_vehicle::build_drive( % y8_gunship_props, undefined, 0);
+  maps\_vehicle::build_drive(%y8_gunship_props, undefined, 0);
   maps\_vehicle::build_deathfx("fx/explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_treadfx();

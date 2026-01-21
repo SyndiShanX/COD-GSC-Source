@@ -551,19 +551,7 @@ onPlayerConnect() {
 }
 
 onPlayerConnect_clientDvars() {
-  self SetClientDvars("cg_deadChatWithDead", "1",
-    "cg_deadChatWithTeam", "1",
-    "cg_deadHearTeamLiving", "1",
-    "cg_deadHearAllLiving", "1",
-    "cg_everyoneHearsEveryone", "1",
-    "compass", "0",
-    "hud_showStance", "0",
-    "cg_thirdPerson", "0",
-    "cg_fov", "65",
-    "cg_thirdPersonAngle", "0",
-    "ammoCounterHide", "0",
-    "miniscoreboardhide", "0",
-    "ui_hud_hardcore", "0");
+  self SetClientDvars("cg_deadChatWithDead", "1", "cg_deadChatWithTeam", "1", "cg_deadHearTeamLiving", "1", "cg_deadHearAllLiving", "1", "cg_everyoneHearsEveryone", "1", "compass", "0", "hud_showStance", "0", "cg_thirdPerson", "0", "cg_fov", "65", "cg_thirdPersonAngle", "0", "ammoCounterHide", "0", "miniscoreboardhide", "0", "ui_hud_hardcore", "0");
   self SetDepthOfField(0, 0, 512, 4000, 4, 0);
 }
 
@@ -576,9 +564,7 @@ onPlayerSpawned() {
   self endon("disconnect");
   for(;;) {
     self waittill("spawned_player");
-    self SetClientDvars("cg_thirdPerson", "0",
-      "cg_fov", "65",
-      "cg_thirdPersonAngle", "0");
+    self SetClientDvars("cg_thirdPerson", "0", "cg_fov", "65", "cg_thirdPersonAngle", "0");
     self SetDepthOfField(0, 0, 512, 4000, 4, 0);
     self add_to_spectate_list();
     if(isDefined(self.initialized)) {
@@ -679,14 +665,10 @@ spectator_toggle_3rd_person() {
 
 set_third_person(value) {
   if(value) {
-    self SetClientDvars("cg_thirdPerson", "1",
-      "cg_fov", "40",
-      "cg_thirdPersonAngle", "354");
+    self SetClientDvars("cg_thirdPerson", "1", "cg_fov", "40", "cg_thirdPersonAngle", "354");
     self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
   } else {
-    self SetClientDvars("cg_thirdPerson", "0",
-      "cg_fov", "65",
-      "cg_thirdPersonAngle", "0");
+    self SetClientDvars("cg_thirdPerson", "0", "cg_fov", "65", "cg_thirdPersonAngle", "0");
     self setDepthOfField(0, 0, 512, 4000, 4, 0);
   }
 }
@@ -872,11 +854,8 @@ round_spawning() {
     while(zombies.size > 0) {
       if(zombies.size == 1 && zombies[0].has_legs == true) {
         var = randomintrange(1, 4);
-        zombies[0] set_run_anim("sprint" +
-          var);
-        zombies[0].run_combatanim = level.scr_anim["zombie"]["sprint" +
-          var
-        ];
+        zombies[0] set_run_anim("sprint" + var);
+        zombies[0].run_combatanim = level.scr_anim["zombie"]["sprint" + var];
       }
       wait(0.5);
       zombies = getaiarray("axis");
@@ -1830,8 +1809,7 @@ intermission() {
   players = get_players();
   for(i = 0; i < players.size; i++) {
     setclientsysstate("levelNotify", "zi", players[i]);
-    players[i] SetClientDvars("cg_thirdPerson", "0",
-      "cg_fov", "65");
+    players[i] SetClientDvars("cg_thirdPerson", "0", "cg_fov", "65");
     players[i].health = 100;
     players[i] thread player_intermission();
   }

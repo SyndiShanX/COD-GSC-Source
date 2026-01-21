@@ -129,8 +129,7 @@ lose_tickets(team, tickets) {
 notify_tickets_updated(team, original_total) {
   if(original_total != game.stat[# "tickets"][team]) {
     level notify(#"tickets_updated", {
-      #team: team,
-      #total_tickets: game.stat[# "tickets"][team]
+      #team: team, #total_tickets: game.stat[# "tickets"][team]
     });
     low_ticket_threshold = 30;
     very_low_ticket_threshold = 10;
@@ -185,9 +184,7 @@ get_stage_tickets(team, stage) {
 
 notify_stage_tickets_updated(team, stage) {
   level notify(#"tickets_stage_updated", {
-    #team: team,
-    #zone_number: stage,
-    #total_tickets: game.stat[# "stagetickets"][team][stage]
+    #team: team, #zone_number: stage, #total_tickets: game.stat[# "stagetickets"][team][stage]
   });
 }
 

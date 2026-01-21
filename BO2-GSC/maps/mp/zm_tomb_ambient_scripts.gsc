@@ -94,12 +94,12 @@ vista_robot_pose() {
     if(!isDefined(a_robots[i].angles))
       a_robots[i].angles = (0, 0, 0);
 
-    v_origin = getstartorigin(a_robots[i].origin, a_robots[i].angles, % ai_zombie_giant_robot_vista);
-    v_angles = getstartangles(a_robots[i].origin, a_robots[i].angles, % ai_zombie_giant_robot_vista);
+    v_origin = getstartorigin(a_robots[i].origin, a_robots[i].angles, %ai_zombie_giant_robot_vista);
+    v_angles = getstartangles(a_robots[i].origin, a_robots[i].angles, %ai_zombie_giant_robot_vista);
     e_robot = spawn("script_model", v_origin);
     e_robot.angles = v_angles;
     e_robot setModel("veh_t6_dlc_zm_robot");
     e_robot useanimtree(#animtree);
-    e_robot setanim( % ai_zombie_giant_robot_vista, 1, 0, 1);
+    e_robot setanim(%ai_zombie_giant_robot_vista, 1, 0, 1);
   }
 }

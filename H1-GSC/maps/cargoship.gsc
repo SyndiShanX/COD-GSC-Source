@@ -331,22 +331,22 @@ initial_setup() {
   level.heli = level.fastrope_globals.helicopters[maps\mo_fastrope::fastrope_heliname(var_1)];
   level.heli.heightsea = 150;
   level.heli initial_setup_vehicle_override();
-  level.heli maps\mo_fastrope::fastrope_ropeanimload(undefined, undefined, "right", % h1_cargoship_blackhawk_opening_fastrope_80ft);
-  level.heli maps\mo_fastrope::fastrope_ropeanimload( % bh_rope_idle_le, % h1_cargoship_blackhawk_drop_fastrope_80ft, "left");
+  level.heli maps\mo_fastrope::fastrope_ropeanimload(undefined, undefined, "right", %h1_cargoship_blackhawk_opening_fastrope_80ft);
+  level.heli maps\mo_fastrope::fastrope_ropeanimload(%bh_rope_idle_le, %h1_cargoship_blackhawk_drop_fastrope_80ft, "left");
 
   if(level.jumpto != "start") {
-    level.heli maps\mo_fastrope::fastrope_override(1, undefined, % cs_bh_1_idle_start, % cs_bh_1_drop);
-    level.heli maps\mo_fastrope::fastrope_override(2, undefined, % cs_bh_2_idle_start, % cs_bh_2_drop);
+    level.heli maps\mo_fastrope::fastrope_override(1, undefined, %cs_bh_1_idle_start, %cs_bh_1_drop);
+    level.heli maps\mo_fastrope::fastrope_override(2, undefined, %cs_bh_2_idle_start, %cs_bh_2_drop);
   } else {
-    level.heli maps\mo_fastrope::fastrope_override(1, % cargoship_opening_position1);
-    level.heli maps\mo_fastrope::fastrope_override(2, % cargoship_opening_price);
+    level.heli maps\mo_fastrope::fastrope_override(1, %cargoship_opening_position1);
+    level.heli maps\mo_fastrope::fastrope_override(2, %cargoship_opening_price);
   }
 
-  level.heli maps\mo_fastrope::fastrope_override(4, undefined, % bh_idle_start_guy2, % bh_4_drop);
-  level.heli maps\mo_fastrope::fastrope_override(5, undefined, undefined, % bh_5_drop);
-  level.heli maps\mo_fastrope::fastrope_override(6, undefined, % bh_idle_start_guy1, % bh_6_drop);
-  level.heli maps\mo_fastrope::fastrope_override(9, undefined, % bh_crew_idle_guy1);
-  level.heli maps\mo_fastrope::fastrope_override(10, undefined, % bh_crew_idle_guy2);
+  level.heli maps\mo_fastrope::fastrope_override(4, undefined, %bh_idle_start_guy2, %bh_4_drop);
+  level.heli maps\mo_fastrope::fastrope_override(5, undefined, undefined, %bh_5_drop);
+  level.heli maps\mo_fastrope::fastrope_override(6, undefined, %bh_idle_start_guy1, %bh_6_drop);
+  level.heli maps\mo_fastrope::fastrope_override(9, undefined, %bh_crew_idle_guy1);
+  level.heli maps\mo_fastrope::fastrope_override(10, undefined, %bh_crew_idle_guy2);
   var_2 = getEntArray("deck_rain_filter", "targetname");
   common_scripts\utility::array_thread(var_2, ::filterzone);
   var_3 = getent("intro_spawners", "targetname");
@@ -478,7 +478,7 @@ intro_movie_hack() {
 
 initial_setup_vehicle_override() {
   var_0 = common_scripts\utility::getstruct("intro_ride_node", "targetname");
-  maps\mo_fastrope::fastrope_override_vehicle( % bh_cargo_path, var_0);
+  maps\mo_fastrope::fastrope_override_vehicle(%bh_cargo_path, var_0);
 }
 
 bridge_main() {
@@ -2770,7 +2770,7 @@ cargohold_catwalk_shuffle() {
 
   while(var_2 && !common_scripts\utility::flag("cargohold2_catwalk_end_" + self.script_noteworthy)) {
     self setanim(var_3, 1, 0.2, var_4);
-    self setanim( % exposed_aiming, 1);
+    self setanim(%exposed_aiming, 1);
     wait(var_1);
     var_0.origin = self.origin;
 
@@ -3184,8 +3184,8 @@ package_price() {
   common_scripts\utility::flag_wait("package_secure");
   var_1 notify("stop_loop_price_2nd");
   var_0 stopanimscripted();
-  var_0 setanimlimited( % price_mask_up, 1);
-  var_0 setanimlimited( % h1_cargoship_price_mask_outloop, 1);
+  var_0 setanimlimited(%price_mask_up, 1);
+  var_0 setanimlimited(%h1_cargoship_price_mask_outloop, 1);
 }
 
 package_open_doors(var_0) {
@@ -3384,7 +3384,7 @@ escape_main() {
   common_scripts\utility::flag_wait("escape_explosion");
   level.heroes3["price"] maps\_utility::delaythread(14, ::setheadmodel, "head_sas_ct_assault_price_mask_up_wrinkle");
   thread end_sinking_scenario_vfx();
-  level.heroes3["price"] setanimlimited( % price_mask_up, 0);
+  level.heroes3["price"] setanimlimited(%price_mask_up, 0);
   thread maps\cargoship_code::showgasmaskcracks();
   thread maps\cargoship_lighting::activate_emergency_lights();
   common_scripts\utility::array_thread(level.heroes3, maps\cargoship_code::escape_heroes2);
@@ -3418,7 +3418,7 @@ escape_main() {
   }
 
   wait 0.55;
-  level.heroes3["price"] setanimlimited( % price_mask_up, 1);
+  level.heroes3["price"] setanimlimited(%price_mask_up, 1);
   maps\cargoship_code::escape_sneakyslowplayer_underwaterfall();
   thread end_main();
 }
@@ -3529,7 +3529,7 @@ end_anim_thread() {
     thread maps\cargoship_code::escape_player_last_quake();
 
   thread end_heli_drift_anim_thread(var_0, var_2);
-  var_1 setanimlimited( % price_mask_up, 0);
+  var_1 setanimlimited(%price_mask_up, 0);
   common_scripts\utility::flag_wait("end_price_rescue_anim");
   common_scripts\utility::flag_wait("escape_price_start_rescue");
   var_2 maps\_anim::anim_generic(var_1, "rescue_price");
@@ -3657,7 +3657,7 @@ escape_seaknight() {
   var_4 linkto(level.seaknight.model, "tag_detach");
   level.seaknight.model thread maps\_anim::anim_loop_solo(var_4, "rescue", "tag_detach", "never_stop");
   level.seaknight.model useanimtree(#animtree);
-  level.seaknight.model setanim( % sniper_escape_ch46_rotors);
+  level.seaknight.model setanim(%sniper_escape_ch46_rotors);
   common_scripts\utility::flag_set("escape_seaknight_ready");
 }
 

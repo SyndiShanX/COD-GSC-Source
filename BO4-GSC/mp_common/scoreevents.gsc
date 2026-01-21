@@ -480,8 +480,7 @@ scoreeventplayerkill(data, time) {
           #gadget: victimheroability
         });
         attacker notify(#"hero_shutdown_gadget", {
-          #gadget: victimheroability,
-          #victim: victim
+          #gadget: victimheroability, #victim: victim
         });
       }
     }
@@ -573,8 +572,7 @@ scoreeventplayerkill(data, time) {
         #gadget: victimheroability
       });
       attacker notify(#"hero_shutdown_gadget", {
-        #gadget: victimheroability,
-        #victim: victim
+        #gadget: victimheroability, #victim: victim
       });
 
       switch (victimheroability.name) {
@@ -600,8 +598,7 @@ scoreeventplayerkill(data, time) {
         #gadget: victimheroability
       });
       attacker notify(#"hero_shutdown_gadget", {
-        #gadget: victimheroability,
-        #victim: victim
+        #gadget: victimheroability, #victim: victim
       });
       processscoreevent(#"kill_enemy_who_has_powerarmor", attacker, victim, weapon);
       attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
@@ -612,16 +609,14 @@ scoreeventplayerkill(data, time) {
         #weapon: data.victimweapon
       });
       attacker notify(#"heavy_shutdown_gadget", {
-        #weapon: data.victimweapon,
-        #victim: victim
+        #weapon: data.victimweapon, #victim: victim
       });
     } else if(isDefined(victim.heavyweapon) && isDefined(victimgadgetpower) && victimgadgetwasactivelastdamage === 1 && victimgadgetpower < 100) {
       attacker notify(#"heavy_shutdown", {
         #weapon: victim.heavyweapon
       });
       attacker notify(#"heavy_shutdown_gadget", {
-        #weapon: victim.heavyweapon,
-        #victim: victim
+        #weapon: victim.heavyweapon, #victim: victim
       });
     }
 

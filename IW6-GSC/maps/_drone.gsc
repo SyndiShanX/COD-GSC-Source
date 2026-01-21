@@ -164,16 +164,16 @@ drone_play_looping_anim(var_0, var_1) {
   if(isDefined(self.drone_loop_custom))
     self[[self.drone_loop_override]](var_0, var_1);
   else {
-    self clearanim( % body, 0.2);
+    self clearanim(%body, 0.2);
     self stopanimscripted();
-    self setflaggedanimknoballrestart("drone_anim", var_0, % body, 1, 0.2, var_1);
+    self setflaggedanimknoballrestart("drone_anim", var_0, %body, 1, 0.2, var_1);
     self.droneanim = var_0;
   }
 }
 
 drone_play_scripted_anim(var_0, var_1) {
   if(self.type == "human")
-    self clearanim( % body, 0.2);
+    self clearanim(%body, 0.2);
 
   self stopanimscripted();
   var_2 = "normal";
@@ -505,9 +505,7 @@ drone_move() {
     }
 
     if(isDefined(self.drone_move_callback)) {
-      var_2 = [
-        [self.drone_move_callback]
-      ]();
+      var_2 = [[self.drone_move_callback]]();
 
       if(isDefined(var_2)) {
         if(var_2.runanim != var_1) {

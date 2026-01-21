@@ -47,11 +47,11 @@ ally_rappel_stop_aiming() {
   self.rappel_reloading = undefined;
   maps\_utility::enable_pain();
   self.lastenemy = undefined;
-  self clearanim( % exposed_modern, 0.2);
-  self clearanim( % exposed_aiming, 0.2);
-  self clearanim( % rappel_aim, 0.2);
-  self clearanim( % rappel_fire, 0.2);
-  self clearanim( % rappel_idle, 0.2);
+  self clearanim(%exposed_modern, 0.2);
+  self clearanim(%exposed_aiming, 0.2);
+  self clearanim(%rappel_aim, 0.2);
+  self clearanim(%rappel_fire, 0.2);
+  self clearanim(%rappel_idle, 0.2);
   self.upaimlimit = 45;
   self.downaimlimit = -45;
   self.rightaimlimit = 45;
@@ -155,10 +155,10 @@ ally_calm_idle_internal() {
   var_1 = undefined;
 
   for(;;) {
-    self setanimknob( % rappel_aim, 1, 0.2, 1.0);
+    self setanimknob(%rappel_aim, 1, 0.2, 1.0);
     self setanimknob(var_0, 1, 0.2, 1.0);
     wait 0.1;
-    self setanim( % rappel_idle, 1, 0.2, 1.0);
+    self setanim(%rappel_idle, 1, 0.2, 1.0);
     var_2 = self.animname + "_idle";
     var_3 = aim_idle_get_random();
     self setflaggedanimknoblimitedrestart(var_2, var_3, 1, 0.2, 1.0);
@@ -192,7 +192,7 @@ ally_setup_aim(var_0) {
   var_1 = 1;
 
   if(var_1)
-    self setanimknob( % rappel_aim, 1, 0.2);
+    self setanimknob(%rappel_aim, 1, 0.2);
 
   self setanimknob(ally_rappel_get_aim_anim(5), 1, var_0);
   self setanimknob(ally_rappel_get_aim_anim(2), 1, var_0);
@@ -213,7 +213,7 @@ aim_idle_thread() {
   }
   self.rappel_aim_idle_thread = 1;
   wait 0.1;
-  self setanimlimited( % rappel_idle, 1, 0.2);
+  self setanimlimited(%rappel_idle, 1, 0.2);
   var_0 = 0;
 
   for(;;) {
@@ -224,7 +224,7 @@ aim_idle_thread() {
     var_0++;
   }
 
-  self clearanim( % rappel_idle, 0.1);
+  self clearanim(%rappel_idle, 0.1);
 }
 
 aim_idle_get_random() {
@@ -307,7 +307,7 @@ ally_rappel_get_enemy() {
 end_aim_idle_thread() {
   self notify("end_aim_idle_thread");
   self.rappel_aim_idle_thread = undefined;
-  self clearanim( % rappel_idle, 0.1);
+  self clearanim(%rappel_idle, 0.1);
 }
 
 custom_aim() {
@@ -414,7 +414,7 @@ trackloop_setanimweights(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 ally_reset_weights() {
-  self clearanim( % rappel_aim, 0.2);
+  self clearanim(%rappel_aim, 0.2);
 }
 
 ally_rappel_get_aim_yaw() {
@@ -763,22 +763,22 @@ start_fire_and_aim_idle_thread() {
 
 end_fire_and_anim_idle_thread() {
   end_aim_idle_thread();
-  self clearanim( % rappel_fire, 0.1);
+  self clearanim(%rappel_fire, 0.1);
   self notify("stop_rappel_aim_track");
 }
 
 show_fire_hide_aim_idle() {
   if(isDefined(self.rappel_aim_idle_thread))
-    self setanim( % rappel_idle, 0, 0.2);
+    self setanim(%rappel_idle, 0, 0.2);
 
-  self setanim( % rappel_fire, 1, 0.1);
+  self setanim(%rappel_fire, 1, 0.1);
 }
 
 hide_fire_show_aim_idle() {
   if(isDefined(self.rappel_aim_idle_thread))
-    self setanim( % rappel_idle, 1, 0.2);
+    self setanim(%rappel_idle, 1, 0.2);
 
-  self setanim( % rappel_fire, 0, 0.1);
+  self setanim(%rappel_fire, 0, 0.1);
 }
 
 ally_get_fire_animation() {
@@ -804,7 +804,7 @@ ally_rappel_reload() {
   if(self.finishedreload)
     animscripts\weaponlist::refillclip();
 
-  self clearanim( % cnd_rappel_fire_reload_1, 0.2);
+  self clearanim(%cnd_rappel_fire_reload_1, 0.2);
   self.keepclaimednode = 0;
   self.rappel_reloading = undefined;
   self notify("rappel_done_reloading");
@@ -822,7 +822,7 @@ ally_do_reload_anim(var_0) {
     var_1 = 1.2;
 
   var_2 = "reload_" + animscripts\combat_utility::getuniqueflagnameindex();
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart(var_2, var_0, 1, 0.2, var_1);
   animscripts\shared::donotetracks(var_2);
   self.finishedreload = 1;

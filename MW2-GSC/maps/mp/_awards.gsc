@@ -71,8 +71,7 @@ initAwards() {
   if(isDefined(level.initGametypeAwards))
     [[level.initGametypeAwards]]();
 
-  // flags generated from other stats, these are not awards,
-  // but are checked against for the assignment of some awards
+  // flags generated from other stats, these are not awards, // but are checked against for the assignment of some awards
   initAwardFlag("10kills", ::isAtleast, 10, "kills");
   initAwardFlag("1death", ::isAtleast, 1, "deaths");
   initAwardFlag("nodeaths", ::isAtMost, 0, "deaths");
@@ -401,9 +400,7 @@ assignAwards() {
     else if(isDefined(var1))
       [[process]](ref, var1);
     else
-      [
-        [process]
-      ](ref);
+      [[process]](ref);
   }
 
   // set multi-award winners

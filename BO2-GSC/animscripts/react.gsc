@@ -62,7 +62,7 @@ playreactanim(reactanim) {
     anim.lastreactiontime = gettime();
 
   self.a.pose = "stand";
-  self setflaggedanimknoballrestart("reactAnim", reactanim, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("reactAnim", reactanim, %body, 1, 0.1, 1);
 
   if(animhasnotetrack(reactanim, "start_aim")) {
     self thread notifystartaim("reactAnim");
@@ -77,7 +77,7 @@ reaction_blendout(reactanim) {
   time = getanimlength(reactanim);
   wait(time - 0.2);
   nextanim = animscripts\run::getrunanim();
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("run_anim", nextanim, 1, 0.2);
 }
 
@@ -285,7 +285,7 @@ newenemyreactionanim() {
   if(!isDefined(reactanim))
     return false;
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimknobrestart("reactanim", reactanim, 1, 0.2, 1);
   self animscripts\shared::donotetracks("reactanim");
   self notify("newEnemyReactionDone");

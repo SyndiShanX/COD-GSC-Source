@@ -2439,9 +2439,7 @@ play_ally_launcher_vignette(var_0, var_1, var_2, var_3, var_4) {
         continue;
       }
 
-      [
-        [var_2]
-      ](self, var_1.origin, var_1.angles);
+      [[var_2]](self, var_1.origin, var_1.angles);
     }
   }
 }

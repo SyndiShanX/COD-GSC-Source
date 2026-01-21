@@ -240,7 +240,7 @@ BeginCrouchRun() {
 
 PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
   endTime = GetTime() + crossblendTime * 1000;
-  self SetFlaggedAnimKnobAll("blendTransition", transAnim, % body, 1, crossblendTime, 1);
+  self SetFlaggedAnimKnobAll("blendTransition", transAnim, %body, 1, crossblendTime, 1);
   wait crossblendTime / 2;
   self.a.pose = endPose;
   self.a.movement = endMovement;
@@ -291,21 +291,11 @@ BlendIntoStandRun() {
       self SetAnimKnobLimited(animscripts\zombie_run::GetRunAnim(), 1, 0.2, 1);
       useLeans = GetDvarInt(#"ai_useLeanRunAnimations");
       if(useLeans && self.isfacingmotion) {
-        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %
-          combatrun_forward, %
-          run_lowready_B, %
-          ai_run_lowready_f_lean_l, %
-          ai_run_lowready_f_lean_r
-        );
+        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %combatrun_forward, %run_lowready_B, %ai_run_lowready_f_lean_l, %ai_run_lowready_f_lean_r);
       } else {
-        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %
-          combatrun_forward, %
-          run_lowready_B, %
-          run_lowready_L, %
-          run_lowready_R
-        );
+        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
       }
-      PlayBlendTransitionStandRun( % combatrun);
+      PlayBlendTransitionStandRun(%combatrun);
     }
   } else {
     if(isDefined(self.run_noncombatanim)) {
@@ -314,21 +304,11 @@ BlendIntoStandRun() {
       self SetAnimKnobLimited(animscripts\zombie_run::GetRunAnim(), 1, 0.2, 1);
       useLeans = GetDvarInt(#"ai_useLeanRunAnimations");
       if(useLeans && self.isfacingmotion) {
-        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %
-          combatrun_forward, %
-          run_lowready_B, %
-          ai_run_lowready_f_lean_l, %
-          ai_run_lowready_f_lean_r
-        );
+        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %combatrun_forward, %run_lowready_B, %ai_run_lowready_f_lean_l, %ai_run_lowready_f_lean_r);
       } else {
-        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %
-          combatrun_forward, %
-          run_lowready_B, %
-          run_lowready_L, %
-          run_lowready_R
-        );
+        self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoStandRun", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
       }
-      PlayBlendTransitionStandRun( % combatrun);
+      PlayBlendTransitionStandRun(%combatrun);
     }
   }
   self notify("BlendIntoStandRun");
@@ -354,7 +334,7 @@ CrouchToStand() {
     self.fastStand = undefined;
   }
   self randomizeIdleSet();
-  PlayTransitionAnimation( % crouch2stand, "stand", "stop", standSpeed);
+  PlayTransitionAnimation(%crouch2stand, "stand", "stop", standSpeed);
 }
 
 CrouchToCrouchWalk() {
@@ -402,29 +382,24 @@ CrouchToStandRun() {
 
 BlendIntoCrouchRun() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self SetAnimKnobAll(self.crouchrun_combatanim, % body, 1, 0.2);
+    self SetAnimKnobAll(self.crouchrun_combatanim, %body, 1, 0.2);
     PlayBlendTransition(self.crouchrun_combatanim, 0.2, "crouch", "run");
     self notify("BlendIntoCrouchRun");
   } else {
     self setanimknob(animscripts\zombie_run::GetCrouchRunAnim(), 1, 0.2);
-    self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoCrouchRun", %
-      crouch_fastwalk_F, %
-      crouch_fastwalk_B, %
-      crouch_fastwalk_L, %
-      crouch_fastwalk_R
-    );
-    PlayBlendTransition( % combatrun_forward, 0.2, "crouch", "run");
+    self thread animscripts\zombie_run::UpdateRunWeights("BlendIntoCrouchRun", %crouch_fastwalk_F, %crouch_fastwalk_B, %crouch_fastwalk_L, %crouch_fastwalk_R);
+    PlayBlendTransition(%combatrun_forward, 0.2, "crouch", "run");
     self notify("BlendIntoCrouchRun");
   }
 }
 
 BlendIntoCrouchWalk() {
   if(isDefined(self.crouchrun_combatanim)) {
-    self SetAnimKnobAll(self.crouchrun_combatanim, % body, 1, 0.2);
+    self SetAnimKnobAll(self.crouchrun_combatanim, %body, 1, 0.2);
     PlayBlendTransition(self.crouchrun_combatanim, 0.2, "crouch", "walk");
     self notify("BlendIntoCrouchWalk");
   } else {
-    PlayBlendTransition( % crouch_fastwalk_F, 0.2, "crouch", "walk");
+    PlayBlendTransition(%crouch_fastwalk_F, 0.2, "crouch", "walk");
   }
 }
 
@@ -440,11 +415,11 @@ StandToCrouch() {
   if(self is_zombie()) {
     return;
   }
-  PlayTransitionAnimation( % exposed_stand_2_crouch, "crouch", "stop", 1, undefined, crouchspeed);
+  PlayTransitionAnimation(%exposed_stand_2_crouch, "crouch", "stop", 1, undefined, crouchspeed);
 }
 
 PlayTransitionAnimation2(transAnim, endPose, endMovement, finalAnim) {
-  self SetFlaggedAnimKnobAll("transAnimDone1", transAnim, % body, 1, 0.2, 1);
+  self SetFlaggedAnimKnobAll("transAnimDone1", transAnim, %body, 1, 0.2, 1);
   if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
   }
@@ -457,7 +432,7 @@ PlayTransitionAnimation2(transAnim, endPose, endMovement, finalAnim) {
   self.a.movement = endMovement;
   self.a.alertness = "casual";
   if(isDefined(finalAnim)) {
-    self SetAnimKnobAll(finalAnim, % body, 1, 0.2, 1);
+    self SetAnimKnobAll(finalAnim, %body, 1, 0.2, 1);
   }
 }
 
@@ -477,7 +452,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
   if(waitSetStatesEnabled) {
     self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
   }
-  self SetFlaggedAnimKnobAllRestart("transAnimDone2", transAnim, % body, 1, .2, rate);
+  self SetFlaggedAnimKnobAllRestart("transAnimDone2", transAnim, %body, 1, .2, rate);
   if(!isDefined(self.a.pose)) {
     self.pose = "undefined";
   }
@@ -492,7 +467,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
   self.a.movement = endMovement;
   self.a.alertness = "casual";
   if(isDefined(finalAnim)) {
-    self SetAnimKnobAll(finalAnim, % body, 1, 0.2, rate);
+    self SetAnimKnobAll(finalAnim, %body, 1, 0.2, rate);
   }
 }
 

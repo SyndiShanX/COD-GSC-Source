@@ -12,8 +12,8 @@ initAnimTree(animscript) {
   if(isValidEnemy(self.a.personImMeleeing)) {
     ImNotMeleeing(self.a.personImMeleeing);
   }
-  self clearAnim( % body, 0.3);
-  self setAnim( % body, 1, 0);
+  self clearAnim(%body, 0.3);
+  self setAnim(%body, 1, 0);
   if(animscript != "pain" && animscript != "death")
     self.a.special = "none";
   self.missedSightChecks = 0;
@@ -22,7 +22,7 @@ initAnimTree(animscript) {
   self.a.aimweight_end = 1.0;
   self.a.aimweight_transframes = 0;
   self.a.aimweight_t = 0;
-  self setanim( % shoot, 0, 0.2, 1);
+  self setanim(%shoot, 0, 0.2, 1);
   IsInCombat();
   assertEX(isDefined(animscript), "Animscript not specified in initAnimTree");
   self.a.script = animscript;
@@ -35,9 +35,9 @@ UpdateAnimPose() {
     if(self.a.pose == "prone")
       self ExitProneWrapper(0.5);
     if(self.desired_anim_pose == "prone") {
-      self SetProneAnimNodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+      self SetProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
       self EnterProneWrapper(0.5);
-      self setAnimKnobAll( % prone_aim_5, % body, 1, 0.1, 1);
+      self setAnimKnobAll(%prone_aim_5, %body, 1, 0.1, 1);
     }
   }
   self.desired_anim_pose = undefined;
@@ -312,11 +312,7 @@ GetEnemyEyePos() {
     self.a.lastEnemyPos = self.enemy getShootAtPos();
     self.a.lastEnemyTime = gettime();
     return self.a.lastEnemyPos;
-  } else if(
-    (isDefined(self.a.lastEnemyTime)) &&
-    (isDefined(self.a.lastEnemyPos)) &&
-    (self.a.lastEnemyTime + 3000 < gettime())
-  ) {
+  } else if((isDefined(self.a.lastEnemyTime)) && (isDefined(self.a.lastEnemyPos)) && (self.a.lastEnemyTime + 3000 < gettime())) {
     return self.a.lastEnemyPos;
   } else {
     targetPos = self getShootAtPos();
@@ -785,7 +781,7 @@ IsInSet(input, set) {
 playAnim(animation) {
   if(isDefined(animation)) {
     println("NOW PLAYING: ", animation);
-    self setFlaggedAnimKnobAllRestart("playAnim", animation, % root, 1, .1, 1);
+    self setFlaggedAnimKnobAllRestart("playAnim", animation, %root, 1, .1, 1);
     timeToWait = getanimlength(animation);
     timeToWait = (3 * timeToWait) + 1;
     self thread NotifyAfterTime("time is up", "time is up", timeToWait);
@@ -1432,11 +1428,7 @@ canSeeAndShootPoint(point) {
 needRecalculateSuppressSpot() {
   if(self.goodShootPosValid && !self canSeeAndShootPoint(self.goodShootPos))
     return true;
-  return (
-    !isDefined(self.lastEnemySightPosOld) ||
-    self.lastEnemySightPosOld != self.lastEnemySightPos ||
-    distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024
-  );
+  return (!isDefined(self.lastEnemySightPosOld) || self.lastEnemySightPosOld != self.lastEnemySightPos || distanceSquared(self.lastEnemySightPosSelfOrigin, self.origin) > 1024);
 }
 
 findGoodSuppressSpot(startOffset) {

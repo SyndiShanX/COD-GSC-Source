@@ -18,7 +18,7 @@ main(var_0, var_1, var_2) {
   }
 
   maps\_vehicle::build_shoot_shock("tankblast");
-  maps\_vehicle::build_drive( % t90ms_driving_idle_forward, % t90ms_driving_idle_forward, 10);
+  maps\_vehicle::build_drive(%t90ms_driving_idle_forward, %t90ms_driving_idle_forward, 10);
 
   if(!issubstr(var_2, "sand"))
     maps\_vehicle::build_turret("t90_turret2", "tag_turret2", "vehicle_t90_PKT_Coaxial_MG");

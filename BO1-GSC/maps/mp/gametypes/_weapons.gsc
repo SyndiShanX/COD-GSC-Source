@@ -884,44 +884,13 @@ weaponDamageTrace(from, to, startRadius, ignore) {
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
   if(self.isPlayer) {
     self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](
-      eInflictor,
-      eAttacker,
-      iDamage,
-      0,
-      sMeansOfDeath,
-      sWeapon,
-      damagepos,
-      damagedir,
-      "none",
-      0
-    );
+    self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0);
   } else if(self.isactor) {
     self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackActorDamage]](
-      eInflictor,
-      eAttacker,
-      iDamage,
-      0,
-      sMeansOfDeath,
-      sWeapon,
-      damagepos,
-      damagedir,
-      "none",
-      0
-    );
+    self.entity thread[[level.callbackActorDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0);
   } else if(self.isADestructible) {
     self.damageOrigin = damagepos;
-    self.entity DoDamage(
-      iDamage,
-      damagepos,
-      eAttacker,
-      eInflictor,
-      0,
-      sMeansOfDeath,
-      0,
-      sWeapon
-    );
+    self.entity DoDamage(iDamage, damagepos, eAttacker, eInflictor, 0, sMeansOfDeath, 0, sWeapon);
   } else {
     if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp" || sWeapon == "airstrike_mp" || sWeapon == "napalm_mp"))
       return;
@@ -1095,9 +1064,7 @@ stow_on_back(current) {
       assertex(isDefined(temp_index_weapon), "Primary weapon list corrupted.");
       if(temp_index_weapon == current)
         continue;
-      if(isSubStr(current, "gl_") || isSubStr(temp_index_weapon, "gl_") ||
-        isSubStr(current, "mk_") || isSubStr(temp_index_weapon, "mk_") ||
-        isSubStr(current, "ft_") || isSubStr(temp_index_weapon, "ft_")) {
+      if(isSubStr(current, "gl_") || isSubStr(temp_index_weapon, "gl_") || isSubStr(current, "mk_") || isSubStr(temp_index_weapon, "mk_") || isSubStr(current, "ft_") || isSubStr(temp_index_weapon, "ft_")) {
         index_weapon_tok = strtok(temp_index_weapon, "_");
         current_tok = strtok(current, "_");
         for(i = 0; i < index_weapon_tok.size; i++) {

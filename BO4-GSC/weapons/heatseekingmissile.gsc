@@ -61,8 +61,7 @@ clearirtarget() {
 
 function_5e6cd0ab(weapon, attacker) {
   params = {
-    #weapon: weapon,
-    #attacker: attacker
+    #weapon: weapon, #attacker: attacker
   };
   self notify(#"missile_lock", params);
   self callback::callback(#"missile_lock", params);
@@ -70,9 +69,7 @@ function_5e6cd0ab(weapon, attacker) {
 
 function_a439ae56(missile, weapon, attacker) {
   params = {
-    #projectile: missile,
-    #weapon: weapon,
-    #attacker: attacker
+    #projectile: missile, #weapon: weapon, #attacker: attacker
   };
   self notify(#"stinger_fired_at_me", params);
   self callback::callback(#"hash_1a32e0fdeb70a76b", params);
@@ -920,9 +917,7 @@ setfriendlyflags(weapon, target) {
     }
 
     if(isDefined(level.callback_set_missiles_remaining)) {
-      self settargetedmissilesremaining(weapon, [
-        [level.callback_set_missiles_remaining]
-      ](weapon, target));
+      self settargetedmissilesremaining(weapon, [[level.callback_set_missiles_remaining]](weapon, target));
     }
   }
 }
@@ -1131,9 +1126,7 @@ missiletarget_handleincomingmissile(responsefunc, endon1, endon2, allowdirectdam
     _incomingmissile(waitresult.projectile, waitresult.attacker);
 
     if(isDefined(responsefunc)) {
-      [
-        [responsefunc]
-      ](waitresult.projectile, waitresult.attacker, waitresult.weapon, endon1, endon2, allowdirectdamage);
+      [[responsefunc]](waitresult.projectile, waitresult.attacker, waitresult.weapon, endon1, endon2, allowdirectdamage);
     }
   }
 }

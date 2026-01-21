@@ -65,7 +65,7 @@ do_turn_anim(stopped_anim, run_anim, wait_time, run_wait_time) {
     wait_time = run_wait_time;
   }
   anim_str = get_anim_string(do_anim);
-  self ClearAnim( % root, 0.2);
+  self ClearAnim(%root, 0.2);
   self ClearAnim(anim.dogAnims[self.animSet].move["run_stop"], 0.2);
   clear_turn_anims();
   debug_anim_print("dog_move::do_turn_anim() - Setting " + anim_str);

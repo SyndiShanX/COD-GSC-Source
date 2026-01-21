@@ -1470,8 +1470,7 @@ itemhacked(watcher, player) {
     #player: player
   });
   level notify(#"hacked", {
-    #target: self,
-    #player: player
+    #target: self, #player: player
   });
 
   if(isDefined(self.camerahead)) {
@@ -1484,9 +1483,7 @@ itemhacked(watcher, player) {
 
   if(isDefined(player) && player.sessionstate == "playing") {
     player notify(#"grenade_fire", {
-      #projectile: self,
-      #weapon: self.weapon,
-      #respawn_from_hack: 1
+      #projectile: self, #weapon: self.weapon, #respawn_from_hack: 1
     });
     return;
   }

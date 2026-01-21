@@ -14,7 +14,7 @@ main(model, type, no_death) {
 
   maps\_mi17_noai::main(model, vehicle_type, no_death); // set the stuff in _noai
 
-  build_drive( % mi17_heli_rotors, undefined, 0); // repeated for building anim csv's
+  build_drive(%mi17_heli_rotors, undefined, 0); // repeated for building anim csv's
 
   build_deathmodel("vehicle_mi17_woodland");
   build_deathmodel("vehicle_mi17_woodland_fly");
@@ -240,10 +240,7 @@ include,vehicle_mi17_woodland_mi17
 sound,vehicle_mi17,vehicle_standard,all_sp
 sound,item_fastrope,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi17_woodland"
-default:"vehicletype" "mi17"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi17_woodland"default:"vehicletype" "mi17"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_mi17_woodland_fly (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -255,10 +252,7 @@ include,vehicle_mi17_woodland_fly_mi17
 sound,vehicle_mi17,vehicle_standard,all_sp
 sound,item_fastrope,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi17_woodland_fly"
-default:"vehicletype" "mi17"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi17_woodland_fly"default:"vehicletype" "mi17"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_mi17_woodland_fly_cheap (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -270,7 +264,5 @@ include,vehicle_mi17_woodland_fly_cheap_mi17
 sound,vehicle_mi17,vehicle_standard,all_sp
 sound,item_fastrope,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi17_woodland_fly_cheap"
-default:"vehicletype" "mi17"
-default:"script_team" "axis"
+defaultmdl="vehicle_mi17_woodland_fly_cheap"default:"vehicletype" "mi17"default:"script_team" "axis"
 */

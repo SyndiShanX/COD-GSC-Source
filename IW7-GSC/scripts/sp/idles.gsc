@@ -22,7 +22,7 @@ func_CC7F(var_0, var_1) {
   }
 
   wait(0.1);
-  var_0 clearanim( % root, 0);
+  var_0 clearanim(%root, 0);
   if(isDefined(var_0.var_9B89)) {
     if(isDefined(var_1) && var_1) {
       thread func_DC82(var_0);
@@ -80,7 +80,7 @@ func_CC80(var_0, var_1, var_2) {
 }
 
 func_4179() {
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
 }
 
 func_DC81(var_0) {
@@ -128,9 +128,7 @@ func_DC81(var_0) {
 
     var_9 = undefined;
     if(isDefined(var_0.var_1ED4)) {
-      var_9 = [
-        [var_0.var_1ED4]
-      ]();
+      var_9 = [[var_0.var_1ED4]]();
     }
 
     var_10 = getanimlength(var_3);
@@ -374,9 +372,7 @@ func_DC82(var_0) {
 
     var_8 = undefined;
     if(isDefined(var_0.var_1ED4)) {
-      var_8 = [
-        [var_0.var_1ED4]
-      ]();
+      var_8 = [[var_0.var_1ED4]]();
     }
 
     var_9 = getanimlength(var_2);
@@ -411,9 +407,7 @@ func_DC83(var_0) {
     thread scripts\sp\anim::func_1FCA(var_6, "single anim");
     var_10 = undefined;
     if(isDefined(var_6.var_1ED4)) {
-      var_10 = [
-        [var_6.var_1ED4]
-      ]();
+      var_10 = [[var_6.var_1ED4]]();
     }
 
     var_6 animscripted("single anim", self.origin, self.angles, var_7, undefined, var_10, 0);

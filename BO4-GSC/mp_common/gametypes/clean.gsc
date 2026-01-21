@@ -690,9 +690,7 @@ function_95cbd646(player) {
     if(isDefined(player.pers[# "cleandenies"])) {
       player.pers[# "cleandenies"] += 1;
       player.cleandenies = player.pers[# "cleandenies"];
-      [
-        [level.var_37d62931]
-      ](player, 1);
+      [[level.var_37d62931]](player, 1);
     }
 
     player stats::function_bb7eedf0(#"cleandenies", 1);

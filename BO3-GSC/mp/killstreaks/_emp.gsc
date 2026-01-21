@@ -123,16 +123,16 @@ function deployempturret(emp) {
   player endon("joined_spectators");
   emp endon("death");
   emp.vehicle useanimtree($mp_emp_power_core);
-  emp.vehicle setanim( % mp_emp_power_core::o_turret_emp_core_deploy, 1);
-  length = getanimlength( % mp_emp_power_core::o_turret_emp_core_deploy);
+  emp.vehicle setanim(%mp_emp_power_core::o_turret_emp_core_deploy, 1);
+  length = getanimlength(%mp_emp_power_core::o_turret_emp_core_deploy);
   emp.vehicle clientfield::set("emp_turret_deploy", 1);
   wait(length * 0.75);
   emp.vehicle thread playempfx();
   emp.vehicle playSound("mpl_emp_turret_activate");
-  emp.vehicle setanim( % mp_emp_power_core::o_turret_emp_core_spin, 1);
+  emp.vehicle setanim(%mp_emp_power_core::o_turret_emp_core_spin, 1);
   player thread emp_jamenemies(emp, 0);
   wait(length * 0.25);
-  emp.vehicle clearanim( % mp_emp_power_core::o_turret_emp_core_deploy, 0);
+  emp.vehicle clearanim(%mp_emp_power_core::o_turret_emp_core_deploy, 0);
 }
 
 function hackedcallbackpre(hacker) {

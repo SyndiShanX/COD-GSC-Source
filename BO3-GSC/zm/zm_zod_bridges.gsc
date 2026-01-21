@@ -47,9 +47,9 @@ class cbridge {
   function bridge_connect(t_trigger_a, t_trigger_b) {
     util::waittill_any_ents_two(t_trigger_a, "trigger", t_trigger_b, "trigger");
     foreach(e_blocker in m_a_e_blockers) {
-      e_blocker setanim( % generic::p7_fxanim_zm_zod_gate_scissor_short_open_anim);
+      e_blocker setanim(%generic::p7_fxanim_zm_zod_gate_scissor_short_open_anim);
     }
-    m_e_walkway setanim( % generic::p7_fxanim_zm_zod_beast_bridge_open_anim);
+    m_e_walkway setanim(%generic::p7_fxanim_zm_zod_beast_bridge_open_anim);
     m_e_walkway setvisibletoall();
     m_e_pull_target setinvisibletoall();
     m_e_pull_target clientfield::set("bminteract", 0);

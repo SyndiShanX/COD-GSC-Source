@@ -216,11 +216,11 @@ fire_sacrifice_death_clone(e_sacrifice_volume) {
   clone = self spawn_zombie_clone();
 
   if(self.has_legs)
-    clone setanim( % ch_dazed_a_death, 1.0, 0.0, 1.0);
+    clone setanim(%ch_dazed_a_death, 1.0, 0.0, 1.0);
   else
-    clone setanim( % ai_zombie_crawl_death_v1, 1.0, 0.0, 1.0);
+    clone setanim(%ai_zombie_crawl_death_v1, 1.0, 0.0, 1.0);
 
-  n_anim_time = getanimlength( % ch_dazed_a_death);
+  n_anim_time = getanimlength(%ch_dazed_a_death);
   level.clone_list[level.clone_list.size] = clone;
   clone endon("death");
   wait(n_anim_time);

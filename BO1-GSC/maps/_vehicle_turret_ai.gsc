@@ -213,9 +213,7 @@ choose_target(turret_index, enemy_team) {
   } else {
     ai = getaiarray(enemy_team);
     if(isDefined(level.heli_attack_drone_targets_func)) {
-      ai = [
-        [level.heli_attack_drone_targets_func]
-      ](ai, enemy_team);
+      ai = [[level.heli_attack_drone_targets_func]](ai, enemy_team);
     }
     best_target = score_target(ai, turret_index);
     self.turret_ai_array[turret_index].target_ent = best_target;

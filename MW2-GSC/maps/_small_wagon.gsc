@@ -22,7 +22,7 @@ main(model, type) {
   //	build_destructible( "vehicle_small_wagon_green_destructible_mp", "vehicle_small_wagon_green" );
   //	build_destructible( "vehicle_small_wagon_turq_destructible_mp", "vehicle_small_wagon_turq" );
 
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("allies");
@@ -52,10 +52,7 @@ and these lines in your CSV:
 include,vehicle_small_wagon_blue_small_wagon
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_blue"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_wagon_blue"default:"vehicletype" "small_wagon"default:"script_team" "allies"*/
 
 /*DISABLED script_vehicle_small_wagon_blue_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -68,10 +65,7 @@ include,destructible_vehicle_small_wagon_blue_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_blue_destructible_mp"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_wagon_blue_destructible_mp"default:"vehicletype" "small_wagon"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_wagon_green (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -82,10 +76,7 @@ and these lines in your CSV:
 include,vehicle_small_wagon_green_small_wagon
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_green"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_wagon_green"default:"vehicletype" "small_wagon"default:"script_team" "allies"*/
 
 /*DISABLED script_vehicle_small_wagon_green_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -98,10 +89,7 @@ include,destructible_vehicle_small_wagon_green_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_green_destructible_mp"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_wagon_green_destructible_mp"default:"vehicletype" "small_wagon"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_wagon_turq (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -112,10 +100,7 @@ and these lines in your CSV:
 include,vehicle_small_wagon_turq_small_wagon
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_turq"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_wagon_turq"default:"vehicletype" "small_wagon"default:"script_team" "allies"*/
 
 /*DISABLED script_vehicle_small_wagon_turq_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -128,10 +113,7 @@ include,destructible_vehicle_small_wagon_turq_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_turq_destructible_mp"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_wagon_turq_destructible_mp"default:"vehicletype" "small_wagon"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_small_wagon_white (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -142,10 +124,7 @@ and these lines in your CSV:
 include,vehicle_small_wagon_white_small_wagon
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_white"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_small_wagon_white"default:"vehicletype" "small_wagon"default:"script_team" "allies"*/
 
 /*DISABLED script_vehicle_small_wagon_white_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -158,7 +137,5 @@ include,destructible_vehicle_small_wagon_white_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_small_wagon_white_destructible_mp"
-default:"vehicletype" "small_wagon"
-default:"script_team" "allies"
+defaultmdl="vehicle_small_wagon_white_destructible_mp"default:"vehicletype" "small_wagon"default:"script_team" "allies"
 */

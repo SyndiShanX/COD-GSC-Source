@@ -18,7 +18,7 @@ main() {
   else
     var_0 = getgrenadereturnanim();
 
-  self setflaggedanimknoballrestart("throwanim", var_0, % body, 1, 0.3);
+  self setflaggedanimknoballrestart("throwanim", var_0, %body, 1, 0.3);
   var_1 = animhasnotetrack(var_0, "grenade_left") || animhasnotetrack(var_0, "grenade_right");
 
   if(var_1) {

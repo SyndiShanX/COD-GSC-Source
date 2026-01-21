@@ -10,7 +10,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_unload_groups(::unload_groups);
   maps\_vehicle::build_aianims(::setanims_turret, ::set_vehicle_anims);
-  maps\_vehicle::build_drive( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   maps\_vehicle::build_treadfx("script_vehicle_iveco_lynx", "default", "vfx/gameplay/tread_fx/vfx_lynx_dust");
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("axis");

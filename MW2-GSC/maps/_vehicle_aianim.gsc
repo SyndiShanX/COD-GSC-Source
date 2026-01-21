@@ -1296,9 +1296,7 @@ guy_unload(guy, pos) {
   bNoanimUnload = false;
   if(isDefined(animpos.bNoanimUnload))
     bNoanimUnload = true;
-  else if(!isDefined(animpos.getout) ||
-    (!isDefined(self.script_unloadmgguy) && (isDefined(animpos.bIsgunner) && animpos.bIsgunner)) ||
-    isDefined(self.script_keepdriver) && pos == 0) {
+  else if(!isDefined(animpos.getout) || (!isDefined(self.script_unloadmgguy) && (isDefined(animpos.bIsgunner) && animpos.bIsgunner)) || isDefined(self.script_keepdriver) && pos == 0) {
     self thread guy_idle(guy, pos);
     return;
   }
@@ -2074,9 +2072,7 @@ animate_guys(other) {
     if(!isalive(guy)) {
       continue;
     }
-    if(isDefined(level.vehicle_aianimcheck[other]) && ![
-        [level.vehicle_aianimcheck[other]]
-      ](guy, guy.vehicle_position))
+    if(isDefined(level.vehicle_aianimcheck[other]) && ![[level.vehicle_aianimcheck[other]]](guy, guy.vehicle_position))
       continue; // ignore this if they have a check function and this anim doesn't exist
 
     if(isDefined(level.vehicle_aianimthread[other])) {

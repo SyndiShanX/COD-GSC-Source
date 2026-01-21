@@ -110,9 +110,7 @@ function_cd7ed6c5(var_a99ac828, startat, toplevel) {
 
   while(isDefined(var_a99ac828[startat])) {
     if(isDefined(level.zdraw.commands[var_a99ac828[startat]])) {
-      startat = [
-        [level.zdraw.commands[var_a99ac828[startat]]]
-      ](var_a99ac828, startat + 1);
+      startat = [[level.zdraw.commands[var_a99ac828[startat]]]](var_a99ac828, startat + 1);
       continue;
     }
 

@@ -300,7 +300,7 @@ death_monitor() {
   }
 
   if(func_FF6C(var_6, var_2, var_5)) {
-    var_12 = [ % jackal_death_01, % jackal_death_02, % jackal_death_03, % jackal_death_04];
+    var_12 = [ % jackal_death_01, %jackal_death_02, %jackal_death_03, %jackal_death_04];
     level.var_A8D7++;
 
     if(level.var_A8D7 >= var_12.size) {
@@ -314,10 +314,10 @@ death_monitor() {
     }
 
     var_14 = func_7819();
-    var_10 give_attacker_kill_rewards( % jackal_state_anims_ai);
-    var_10 give_attacker_kill_rewards( % jackal_ca_vehicle_strike_state_idle);
+    var_10 give_attacker_kill_rewards(%jackal_state_anims_ai);
+    var_10 give_attacker_kill_rewards(%jackal_ca_vehicle_strike_state_idle);
     var_10 thread func_4E6C();
-    var_10 give_attacker_kill_rewards( % jackal_death_overlay);
+    var_10 give_attacker_kill_rewards(%jackal_death_overlay);
     var_10 give_attacker_kill_rewards(var_13);
 
     if(isDefined(self.var_93D2)) {

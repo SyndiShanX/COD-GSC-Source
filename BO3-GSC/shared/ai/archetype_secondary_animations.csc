@@ -29,7 +29,7 @@ function private secondaryanimationsinit(localclientnum) {
 
 function private on_entity_spawn(localclientnum) {
   if(self hasdobj(localclientnum)) {
-    self clearanim( % generic::faces, 0);
+    self clearanim(%generic::faces, 0);
   }
   self._currentfacestate = "inactive";
 }

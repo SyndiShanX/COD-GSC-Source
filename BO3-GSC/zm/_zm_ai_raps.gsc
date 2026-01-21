@@ -502,9 +502,7 @@ function get_favorite_enemy() {
     if(!zm_utility::is_player_valid(e_target)) {
       continue;
     }
-    if(isDefined(level.is_player_accessible_to_raps) && ![
-        [level.is_player_accessible_to_raps]
-      ](e_target)) {
+    if(isDefined(level.is_player_accessible_to_raps) && ![[level.is_player_accessible_to_raps]](e_target)) {
       continue;
     }
     if(!isDefined(e_least_hunted)) {
@@ -604,9 +602,7 @@ function raps_timeout_after_xsec(timeout) {
 function raps_death() {
   self waittill("death", attacker);
   if(get_current_raps_count() == 0 && level.zombie_total == 0) {
-    if(!isDefined(level.zm_ai_round_over) || [
-        [level.zm_ai_round_over]
-      ]()) {
+    if(!isDefined(level.zm_ai_round_over) || [[level.zm_ai_round_over]]()) {
       level.last_ai_origin = self.origin;
       level notify("last_ai_down", self);
     }
@@ -616,9 +612,7 @@ function raps_death() {
       attacker zm_score::player_add_points("death_raps", 70);
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](attacker, self);
+      [[level.hero_power_update]](attacker, self);
     }
     if(randomintrange(0, 100) >= 80) {
       attacker zm_audio::create_and_play_dialog("kill", "hellhound");
@@ -685,9 +679,7 @@ function special_raps_spawn(n_to_spawn = 1, s_spawn_loc, fn_on_spawned) {
       continue;
     }
     if(isDefined(level.raps_spawn_func)) {
-      s_spawn_loc = [
-        [level.raps_spawn_func]
-      ](favorite_enemy);
+      s_spawn_loc = [[level.raps_spawn_func]](favorite_enemy);
     } else {
       s_spawn_loc = calculate_spawn_position(favorite_enemy);
     }

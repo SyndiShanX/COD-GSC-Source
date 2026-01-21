@@ -177,8 +177,7 @@ function_7c52f40() {
   self.var_e6c8672d = 1;
   self.grapple_tag = "tag_jaw";
   self.var_c8088bcb = {
-    #traces: [],
-    #timestamp: gettime()
+    #traces: [], #timestamp: gettime()
   };
   self.var_b2a80abc = gettime() + self ai::function_9139c839().var_f246f6de;
   self.var_acfc1c7c = &function_76c1f56f;
@@ -683,8 +682,7 @@ function_ac921de9(entity) {
 
     if(distancesquared(entity.var_81ce9fcd.origin, entity.origin) < var_e3df303a && bullettracepassed(var_2f706708, entity.var_81ce9fcd getcentroid(), 0, entity, entity.var_81ce9fcd, 0, 1)) {
       entity.var_81ce9fcd notify(#"hash_90cfd38343f41f2", {
-        #var_b736806d: entity,
-        #var_8413ff14: var_2f706708
+        #var_b736806d: entity, #var_8413ff14: var_2f706708
       });
     }
   }
@@ -1130,10 +1128,7 @@ function_96f5d05a(entity, var_4c0587b) {
   grapple_end.prone_2_run_roll = entity;
   grapple_start linkto(entity, "tag_jaw");
   entity.var_54c1950f = {
-    #beamstart: grapple_start,
-    #beamend: grapple_end,
-    #status: 0,
-    #ignore_ents: []
+    #beamstart: grapple_start, #beamend: grapple_end, #status: 0, #ignore_ents: []
   };
   thread zm_grappler::function_30a5f5c1(grapple_start, grapple_end);
   util::wait_network_frame();

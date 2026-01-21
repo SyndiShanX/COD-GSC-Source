@@ -187,8 +187,7 @@ blackout() {
 }
 
 doRadiationdamage(iDamage) {
-  self thread[[level.callbackPlayerDamage]](
-    self, // eInflictor The entity that causes the damage.( e.g. a turret )
+  self thread[[level.callbackPlayerDamage]](self, // eInflictor The entity that causes the damage.( e.g. a turret )
     self, // eAttacker The entity that is attacking.
     iDamage, // iDamage Integer specifying the amount of damage done
     0, // iDFlags Integer specifying flags that are to be applied to the damage
@@ -197,8 +196,7 @@ doRadiationdamage(iDamage) {
     self.origin, // vPoint The point the damage is from?
     (0, 0, 0) - self.origin, // vDir The direction of the damage
     "none", // sHitLoc The location of the hit
-    0 // psOffsetTime The time offset for the damage
-  );
+    0 // psOffsetTime The time offset for the damage);
 }
 
 fadeinBlackOut(duration, alpha) {

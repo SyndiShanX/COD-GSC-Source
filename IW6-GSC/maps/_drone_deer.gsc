@@ -55,7 +55,7 @@ deer_damage_fx() {
 }
 
 deer_drone_custom_idle() {
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self stopanimscripted();
   var_0 = undefined;
   var_1 = level.drone_anims["team3"]["stand"]["idle"];
@@ -66,13 +66,13 @@ deer_drone_custom_idle() {
   } else
     var_0 = var_1;
 
-  self setflaggedanimknoballrestart("drone_anim", var_0, % root, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("drone_anim", var_0, %root, 1, 0.2, 1);
   self.droneanim = var_1;
 }
 
 deer_drone_custom_loop(var_0, var_1) {
   wait(randomfloatrange(0.1, 0.35));
-  self clearanim( % deer, 0.2);
+  self clearanim(%deer, 0.2);
   self stopanimscripted();
   self setanimknob(var_0, 1, 0.2, var_1);
   self.droneanim = var_0;

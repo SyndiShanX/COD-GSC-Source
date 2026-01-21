@@ -176,7 +176,7 @@ dotraverse(traversedata) {
       self.a.movement = self.traversemovement;
 
     if(self.a.movement != "stop")
-      self setanimknoballrestart(animscripts\run::getrunanim(), % body, 1, 0.2, 1);
+      self setanimknoballrestart(animscripts\run::getrunanim(), %body, 1, 0.2, 1);
   }
 
   self animscripts\debug::debugpopstate("traverse");
@@ -192,7 +192,7 @@ dotraverse_animation() {
   if(!isarray(traverseanim))
     traverseanim = add_to_array(undefined, traverseanim);
 
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   played_trans_in = 0;
 
   if(isDefined(self.traverseanimtransin)) {
@@ -269,7 +269,7 @@ domaintraverse_animationaiming(animation, flag) {
     self.leftaimlimit = -50;
     self.upaimlimit = 50;
     self.downaimlimit = -50;
-    self animscripts\shared::setaiminganims( % traverse_aim_2, % traverse_aim_4, % traverse_aim_6, % traverse_aim_8);
+    self animscripts\shared::setaiminganims(%traverse_aim_2, %traverse_aim_4, %traverse_aim_6, %traverse_aim_8);
     self animscripts\shared::trackloopstart();
     self animscripts\weaponlist::refillclip();
     self.shoot_while_moving_thread = undefined;
@@ -417,7 +417,7 @@ posttraversedeathanim() {
     return;
   }
   deathanim = animscripts\death::get_death_anim();
-  self setflaggedanimknoballrestart("deathanim", deathanim, % body, 1, 0.1);
+  self setflaggedanimknoballrestart("deathanim", deathanim, %body, 1, 0.1);
 
   if(animhasnotetrack(deathanim, "death_neckgrab_spurt"))
     playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
@@ -438,7 +438,7 @@ dog_wall_and_window_hop(traversename, height) {
     self thread teleportthread(realheight - height);
   }
 
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("dog_traverse", anim.dogtraverseanims[traversename], 1, 0.2, 1);
   self animscripts\shared::donotetracks("dog_traverse");
   self.traversecomplete = 1;
@@ -451,7 +451,7 @@ dog_jump_down(height, frames) {
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
   self thread teleportthreadex(40.0 - height, 0.1, frames);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("traverse", anim.dogtraverseanims["jump_down_40"], 1, 0.2, 1);
   self animscripts\shared::donotetracks("traverse");
   self clearanim(anim.dogtraverseanims["jump_down_40"], 0);
@@ -466,7 +466,7 @@ dog_jump_up(height, frames) {
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
   self thread teleportthreadex(height - 40.0, 0.2, frames);
-  self clearanim( % root, 0.25);
+  self clearanim(%root, 0.25);
   self setflaggedanimrestart("traverse", anim.dogtraverseanims["jump_up_40"], 1, 0.2, 1);
   self animscripts\shared::donotetracks("traverse");
   self clearanim(anim.dogtraverseanims["jump_up_40"], 0);

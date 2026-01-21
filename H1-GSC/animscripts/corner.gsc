@@ -159,7 +159,7 @@ mainloopstart() {
 #using_animtree("generic_human");
 
 hasonekneeup() {
-  var_0 = [ % cornercrr_alert_painc, % cornercrr_alert_paina, % cornercrl_painb, % exposed_crouch_pain_headsnap, % exposed_crouch_pain_flinch, % exposed_crouch_pain_chest, % exposed_crouch_pain_left_arm, % exposed_crouch_pain_right_arm, % exposed_stand_2_crouch, % cornercrl_lean_2_alert, % run_2_crouch_f, % run_2_crouch_90l, % run_2_crouch_90r, % run_2_crouch_180l, % run_2_crouch_idle_1, % run_2_crouch_idle_3, % run_2_crouch_idle_7, % run_2_crouch_idle_9, % cornercrr_lean_2_alert, % cornercrl_reloada, % cornercrr_reload, % cornercrl_cqb_trans_in_1, % cornercrl_cqb_trans_in_2, % cornercrl_cqb_trans_in_3, % cornercrl_cqb_trans_in_4, % cornercrl_cqb_trans_in_6, % cornercrl_cqb_trans_in_7, % cornercrl_cqb_trans_in_8, % grenade_return_cornercrl_1knee_throw, % grenade_return_cornercrr_1knee_throw];
+  var_0 = [ % cornercrr_alert_painc, %cornercrr_alert_paina, %cornercrl_painb, %exposed_crouch_pain_headsnap, %exposed_crouch_pain_flinch, %exposed_crouch_pain_chest, %exposed_crouch_pain_left_arm, %exposed_crouch_pain_right_arm, %exposed_stand_2_crouch, %cornercrl_lean_2_alert, %run_2_crouch_f, %run_2_crouch_90l, %run_2_crouch_90r, %run_2_crouch_180l, %run_2_crouch_idle_1, %run_2_crouch_idle_3, %run_2_crouch_idle_7, %run_2_crouch_idle_9, %cornercrr_lean_2_alert, %cornercrl_reloada, %cornercrr_reload, %cornercrl_cqb_trans_in_1, %cornercrl_cqb_trans_in_2, %cornercrl_cqb_trans_in_3, %cornercrl_cqb_trans_in_4, %cornercrl_cqb_trans_in_6, %cornercrl_cqb_trans_in_7, %cornercrl_cqb_trans_in_8, %grenade_return_cornercrl_1knee_throw, %grenade_return_cornercrr_1knee_throw];
 
   foreach(var_2 in var_0) {
     if(self getanimweight(var_2) != 0.0)
@@ -173,8 +173,8 @@ shouldplayalerttransition(var_0) {
   if(!animscripts\utility::using_improved_transitions())
     return 0;
 
-  var_1 = [ % cornercrl_trans_a_2_alert, % cornercrr_trans_a_2_alert, % cornercrl_trans_b_2_alert, % cornercrr_trans_b_2_alert, % cornercrouchr_crouchidle_2_alert, % cornercrouchl_crouchidle_2_alert, % h1_cornercrr_alert_paina_2, % h1_cornercrr_alert_painb_2, % h1_cornercrr_alert_painc_2, % h1_cornercrl_painb_2, % h1_cornercrl_trans_2_2knees, % h1_cornercrouch_trans_2_2knee, % h1_cornercrr_alert_paina_2, % h1_cornercrr_alert_painb_2, % h1_cornercrr_alert_painc_2, % cornercrr_reloada, % cornercrr_reloadb, % cornercrl_reloadb];
-  var_2 = [ % walk_backward, % walk_left, % walk_right, % walk_forward];
+  var_1 = [ % cornercrl_trans_a_2_alert, %cornercrr_trans_a_2_alert, %cornercrl_trans_b_2_alert, %cornercrr_trans_b_2_alert, %cornercrouchr_crouchidle_2_alert, %cornercrouchl_crouchidle_2_alert, %h1_cornercrr_alert_paina_2, %h1_cornercrr_alert_painb_2, %h1_cornercrr_alert_painc_2, %h1_cornercrl_painb_2, %h1_cornercrl_trans_2_2knees, %h1_cornercrouch_trans_2_2knee, %h1_cornercrr_alert_paina_2, %h1_cornercrr_alert_painb_2, %h1_cornercrr_alert_painc_2, %cornercrr_reloada, %cornercrr_reloadb, %cornercrl_reloadb];
+  var_2 = [ % walk_backward, %walk_left, %walk_right, %walk_forward];
 
   foreach(var_4 in var_1) {
     if(var_0 getanimweight(var_4) != 0.0)
@@ -184,7 +184,7 @@ shouldplayalerttransition(var_0) {
   if(var_0 hasonekneeup())
     return 1;
 
-  if(var_0 getanimweight( % exposed_modern) != 0.0 && var_0 getanimweight( % exposed_aiming) != 0.0)
+  if(var_0 getanimweight(%exposed_modern) != 0.0 && var_0 getanimweight(%exposed_aiming) != 0.0)
     return 1;
 
   foreach(var_7 in var_2) {
@@ -449,17 +449,17 @@ changeaiming(var_0, var_1, var_2) {
 
 stopaiming(var_0) {
   self.corneraiming = 0;
-  self clearanim( % add_fire, var_0);
+  self clearanim(%add_fire, var_0);
   animscripts\track::setanimaimweight(0, var_0);
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }
 
 setaimingparams(var_0, var_1, var_2) {
   self.spot = var_0;
-  self setanimlimited( % exposed_modern, 1, var_2);
-  self setanimlimited( % exposed_aiming, 1, var_2);
-  self setanimlimited( % add_idle, 1, var_2);
+  self setanimlimited(%exposed_modern, 1, var_2);
+  self setanimlimited(%exposed_aiming, 1, var_2);
+  self setanimlimited(%add_idle, 1, var_2);
   animscripts\track::setanimaimweight(1, var_2);
   corner_playaimfacialanim(undefined);
   var_3 = undefined;
@@ -564,7 +564,7 @@ stepout() {
   self notify("done_changing_cover_pos");
   var_5 = stepoutandhidespeed();
   self.pushable = 0;
-  self setflaggedanimknoballrestart("stepout", var_3, % animscript_root, 1, 0.2, var_5);
+  self setflaggedanimknoballrestart("stepout", var_3, %animscript_root, 1, 0.2, var_5);
   corner_playcornerfacialanim(var_3);
   thread donotetrackswithendon("stepout");
   var_4 = animhasnotetrack(var_3, "start_aim");
@@ -589,8 +589,8 @@ stepout() {
   }
 
   changeaiming(undefined, 1, 0.2);
-  self clearanim( % cover, 0.1);
-  self clearanim( % corner, 0.1);
+  self clearanim(%cover, 0.1);
+  self clearanim(%corner, 0.1);
   self.changingcoverpos = 0;
   self.coverposestablishedtime = gettime();
   self.pushable = 1;
@@ -674,7 +674,7 @@ rambo() {
   self.a.prevattack = "rambo";
   self.changingcoverpos = 1;
   thread animscripts\shared::ramboaim(var_0);
-  self setflaggedanimknoballrestart("rambo", var_4, % body, 1, 0, 1);
+  self setflaggedanimknoballrestart("rambo", var_4, %body, 1, 0, 1);
   corner_playcornerfacialanim(var_4);
   animscripts\shared::donotetracks("rambo");
   self notify("rambo_aim_end");
@@ -724,7 +724,7 @@ shootastold() {
         }
       } else {
         shootuntilshootbehaviorchange_corner(1);
-        self clearanim( % add_fire, 0.2);
+        self clearanim(%add_fire, 0.2);
       }
     }
 
@@ -826,9 +826,9 @@ returntocover() {
   var_4 = stepoutandhidespeed();
 
   if(animscripts\utility::isspaceai())
-    self clearanim( % exposed_modern, 0.2);
+    self clearanim(%exposed_modern, 0.2);
   else
-    self clearanim( % body, 0.1);
+    self clearanim(%body, 0.1);
 
   self setflaggedanimrestart("hide", var_2, 1, 0.1, var_4);
   corner_playcornerfacialanim(var_2);
@@ -858,7 +858,7 @@ blindfire() {
   setdefaultcorneranimmode();
   self.keepclaimednodeifvalid = 1;
   var_0 = animscripts\utility::animarraypickrandom("blind_fire");
-  self setflaggedanimknoballrestart("blindfire", var_0, % body, 1, 0, 1);
+  self setflaggedanimknoballrestart("blindfire", var_0, %body, 1, 0, 1);
   corner_playcornerfacialanim(var_0);
   animscripts\shared::donotetracks("blindfire");
   self.keepclaimednodeifvalid = 0;
@@ -939,7 +939,7 @@ lookforenemy(var_0) {
   else
     var_1 = animscripts\utility::animarray("look_to_alert");
 
-  self setflaggedanimknoballrestart("looking_end", var_1, % body, 1, 0.1, 1.0);
+  self setflaggedanimknoballrestart("looking_end", var_1, %body, 1, 0.1, 1.0);
   corner_playcornerfacialanim(var_1);
   animscripts\shared::donotetracks("looking_end");
   setdefaultcorneranimmode();
@@ -986,7 +986,7 @@ peekout() {
   }
 
   var_0 = animscripts\utility::animarray("alert_to_look");
-  self setflaggedanimknoball("looking_start", var_0, % body, 1, 0.2, 1);
+  self setflaggedanimknoball("looking_start", var_0, %body, 1, 0.2, 1);
   corner_playcornerfacialanim(var_0);
   animscripts\shared::donotetracks("looking_start");
   return 1;
@@ -1113,9 +1113,9 @@ flinch() {
 
 playidleanimation(var_0, var_1) {
   if(var_1)
-    self setflaggedanimknoballrestart("idle", var_0, % body, 1, 0.1, 1);
+    self setflaggedanimknoballrestart("idle", var_0, %body, 1, 0.1, 1);
   else
-    self setflaggedanimknoball("idle", var_0, % body, 1, 0.1, 1);
+    self setflaggedanimknoball("idle", var_0, %body, 1, 0.1, 1);
 
   corner_playcornerfacialanim(var_0);
   animscripts\shared::donotetracks("idle");
@@ -1137,7 +1137,7 @@ transitiontostance(var_0) {
   }
 
   var_1 = animscripts\utility::animarray("stance_change");
-  self setflaggedanimknoballrestart("changeStance", var_1, % body);
+  self setflaggedanimknoballrestart("changeStance", var_1, %body);
   corner_playcornerfacialanim(var_1);
   set_anim_array(var_0);
   animscripts\shared::donotetracks("changeStance");
@@ -1159,7 +1159,7 @@ gotocover(var_0, var_1, var_2) {
   if(isDefined(var_4))
     thread animscripts\shared::movetonodeovertime(var_4, var_1);
 
-  self setflaggedanimknoballrestart("coveranim", var_0, % body, 1, var_1);
+  self setflaggedanimknoballrestart("coveranim", var_0, %body, 1, var_1);
   corner_playcornerfacialanim(var_0);
   animscripts\notetracks::donotetracksfortime(var_2, "coveranim");
 
@@ -1374,5 +1374,5 @@ corner_playaimfacialanim(var_0) {
 
 corner_clearfacialanim() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

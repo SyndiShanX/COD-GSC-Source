@@ -642,7 +642,7 @@ random_killspawner(trigger) {
   {
   	if( ( isDefined( spawners[ i ].script_random_killspawner ) ) && ( random_killspawner == spawners[ i ].script_random_killspawner ) )
   	{
-  		triggered_spawners = add_to_array( triggered_spawners, spawners[ i ] );
+  		triggered_spawners = add_to_array(triggered_spawners, spawners[ i ] );
   	}
   }
   	
@@ -2370,8 +2370,7 @@ newfallback_overmind(num, group) {
   fallback_ai = undefined;
   ai = getaiarray();
   for(i = 0; i < ai.size; i++) {
-    if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) ||
-      ((isDefined(ai[i].script_fallback_group)) && (isDefined(group)) && (ai[i].script_fallback_group == group)))
+    if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) || ((isDefined(ai[i].script_fallback_group)) && (isDefined(group)) && (ai[i].script_fallback_group == group)))
       fallback_ai = add_to_array(fallback_ai, ai[i]);
   }
   ai = undefined;
@@ -2470,8 +2469,7 @@ fallback_wait(num, group) {
   // 	total_fallbackers = 0;
   ai = getaiarray();
   for(i = 0; i < ai.size; i++) {
-    if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) ||
-      ((isDefined(ai[i].script_fallback_group)) && (isDefined(group)) && (ai[i].script_fallback_group == group)))
+    if(((isDefined(ai[i].script_fallback)) && (ai[i].script_fallback == num)) || ((isDefined(ai[i].script_fallback_group)) && (isDefined(group)) && (ai[i].script_fallback_group == group)))
       ai[i] thread fallback_ai_think(num);
   }
   ai = undefined;
@@ -2663,7 +2661,7 @@ friendly_wave_masterthread() {
   triggers = getEntArray("friendly_wave", "targetname");
   array_thread(triggers, ::set_spawncount, 0);
 
-  // friends = getaiarray( "allies" );
+  // friends = getaiarray("allies" );
   // array_thread( friends, ::friendlydeath_thread );
 
   if(!isDefined(level.maxfriendlies))

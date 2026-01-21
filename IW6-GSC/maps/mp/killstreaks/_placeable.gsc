@@ -108,8 +108,7 @@ onBeginCarrying(streakName, placeable, allowCancel) {
     if(!isDefined(placeable)) {
       self _enableWeapon();
       return true;
-    } else if((result == "cancelPlaceable" && allowCancel) ||
-      result == "force_cancel_placement") {
+    } else if((result == "cancelPlaceable" && allowCancel) || result == "force_cancel_placement") {
       placeable onCancel(streakName, result == "force_cancel_placement" && !isDefined(placeable.firstPlacement));
       return false;
     } else if(placeable.canBePlaced) {
@@ -276,9 +275,7 @@ updatePlacement(streakName, carrier) {
     carriedObj.origin = self.placementOrigin + placementOffset;
     carriedObj.angles = placement["angles"];
 
-    self.canBePlaced = carrier IsOnGround() &&
-      placement["result"] &&
-      (abs(self.placementOrigin[2] - carrier.origin[2]) < config.placementHeightTolerance);
+    self.canBePlaced = carrier IsOnGround() && placement["result"] && (abs(self.placementOrigin[2] - carrier.origin[2]) < config.placementHeightTolerance);
 
     if(isDefined(placement["entity"])) {
       self.moving_platform = placement["entity"];
@@ -327,11 +324,7 @@ handleDamage(streakName) {
 
   config = level.placeableConfigs[streakName];
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    config.maxHealth,
-    config.damageFeedback, ::handleDeathDamage, ::modifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(config.maxHealth, config.damageFeedback, ::handleDeathDamage, ::modifyDamage, true);
 }
 
 modifyDamage(attacker, weapon, type, damage) {
@@ -360,9 +353,7 @@ handleDeathDamage(attacker, weapon, type, damage) {
   config = self.config;
 
   notifyAttacker = self maps\mp\gametypes\_damage::onKillstreakKilled(attacker, weapon, type, damage, config.xpPopup, config.destroyedVO);
-  if(notifyAttacker &&
-    isDefined(config.onDestroyedDelegate)
-  ) {
+  if(notifyAttacker && isDefined(config.onDestroyedDelegate)) {
     self[[config.onDestroyedDelegate]](self.streakName, attacker, self.owner, type);
   }
 }

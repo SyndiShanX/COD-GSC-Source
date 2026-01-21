@@ -23,9 +23,7 @@ main(var_0) {
     if(isDefined(self.cover) && isDefined(self.cover.fnoverlord)) {
       var_4 = gettime();
       thread endidleatframeend();
-      [
-        [self.cover.fnoverlord]
-      ]();
+      [[self.cover.fnoverlord]]();
 
       if(gettime() == var_4)
         self notify("dont_end_idle");
@@ -41,9 +39,7 @@ main(var_0) {
     if(isDefined(var_0.mainloopstart)) {
       var_4 = gettime();
       thread endidleatframeend();
-      [
-        [var_0.mainloopstart]
-      ]();
+      [[var_0.mainloopstart]]();
 
       if(gettime() == var_4)
         self notify("dont_end_idle");
@@ -120,7 +116,7 @@ end_script(var_0) {
     self.meleecoverchargemintime = undefined;
   }
 
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
   self.facialidx = undefined;
 }
 
@@ -629,9 +625,7 @@ advanceonhidingenemy() {
 
 trytogetoutofdangeroussituation(var_0) {
   if(isDefined(var_0.movetonearbycover)) {
-    if([
-        [var_0.movetonearbycover]
-      ]())
+    if([[var_0.movetonearbycover]]())
       return 1;
   }
 
@@ -675,12 +669,12 @@ turntomatchnodedirection(var_0) {
         self orientmode("face current");
 
       var_3 = 1.5;
-      var_4 = getnotetracktimes( % exposed_stand_2_crouch, "anim_pose = \"crouch\"")[0];
+      var_4 = getnotetracktimes(%exposed_stand_2_crouch, "anim_pose = \"crouch\"")[0];
       var_4 = min(1, var_4 * 1.1);
-      var_5 = var_4 * getanimlength( % exposed_stand_2_crouch) / var_3;
-      self setflaggedanimknoballrestart("crouchanim", % exposed_stand_2_crouch, % body, 1, 0.2, var_3);
+      var_5 = var_4 * getanimlength(%exposed_stand_2_crouch) / var_3;
+      self setflaggedanimknoballrestart("crouchanim", %exposed_stand_2_crouch, %body, 1, 0.2, var_3);
       animscripts\notetracks::donotetracksfortime(var_5, "crouchanim");
-      self clearanim( % body, 0.2);
+      self clearanim(%body, 0.2);
     }
 
     if(animscripts\utility::isspaceai()) {

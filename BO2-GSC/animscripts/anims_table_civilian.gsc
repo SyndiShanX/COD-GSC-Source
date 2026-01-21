@@ -8,7 +8,7 @@
 #using_animtree("generic_human");
 
 setup_civilian_anim_array(animtype, array) {
-  civrunanims = array( % civilian_run_hunched_a, % civilian_run_hunched_b, % civilian_run_hunched_c, % civilian_run_upright);
+  civrunanims = array(%civilian_run_hunched_a, %civilian_run_hunched_b, %civilian_run_hunched_c, %civilian_run_upright);
   runanim = civrunanims[randomintrange(0, civrunanims.size)];
   self animscripts\anims::clearanimcache();
   assert(isDefined(array) && isarray(array));

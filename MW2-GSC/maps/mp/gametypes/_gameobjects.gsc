@@ -1661,8 +1661,7 @@ getUpdateTeams(relativeTeam) {
 }
 
 shouldShowCompassDueToRadar(team) {
-  // the only case we return true in this function is when the enemy has UAV,
-  // and an enemy visible on UAV is holding the object.
+  // the only case we return true in this function is when the enemy has UAV, // and an enemy visible on UAV is holding the object.
 
   if(!isDefined(self.carrier))
     return false;

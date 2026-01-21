@@ -6,7 +6,7 @@
 func_BCB1() {
   scripts\anim\run::func_10B77();
   if(self.a.pose != "stand") {
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
     if(self.a.pose == "prone") {
       scripts\anim\utility::exitpronewrapper(1);
     }
@@ -20,7 +20,7 @@ func_BCB1() {
     return;
   }
 
-  self clearanim( % stair_transitions, 0.2);
+  self clearanim(%stair_transitions, 0.2);
   if(scripts\anim\run::func_10B78()) {
     return;
   }
@@ -96,7 +96,7 @@ func_4790() {
     var_1 = var_1[randomint(var_1.size)];
   }
 
-  self func_82E4(var_0, var_1, % body, 1, 0.25);
+  self func_82E4(var_0, var_1, %body, 1, 0.25);
   func_478E(var_1);
   scripts\anim\run::func_F7A9(scripts\anim\utility::func_B027("cqb", "move_b"), scripts\anim\utility::func_B027("cqb", "move_l"), scripts\anim\utility::func_B027("cqb", "move_r"));
   thread scripts\anim\run::setcombatstandmoveanimweights("cqb");
@@ -212,5 +212,5 @@ func_478E(var_0) {
 
 func_4789() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

@@ -27,9 +27,7 @@ item_think() {
   while(true) {
     s_notify = self waittill(#"trigger_activated");
 
-    if(!isDefined(self.var_4bac8510) || [
-        [self.var_4bac8510]
-      ](s_notify.e_who)) {
+    if(!isDefined(self.var_4bac8510) || [[self.var_4bac8510]](s_notify.e_who)) {
       level thread[[self.var_b4a870af]](self, s_notify.e_who);
       self function_d6812b9d();
     }

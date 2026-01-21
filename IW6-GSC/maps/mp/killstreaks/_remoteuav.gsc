@@ -209,11 +209,7 @@ setCarryingRemoteUAV(carryRemoteUAV) {
       continue;
     }
 
-    if(isDefined(level.nukeIncoming) ||
-      self isEMPed() ||
-      exceededMaxRemoteUAVs(self.team) ||
-      currentActiveVehicleCount() >= maxVehiclesAllowed() ||
-      level.fauxVehicleCount >= maxVehiclesAllowed()) {
+    if(isDefined(level.nukeIncoming) || self isEMPed() || exceededMaxRemoteUAVs(self.team) || currentActiveVehicleCount() >= maxVehiclesAllowed() || level.fauxVehicleCount >= maxVehiclesAllowed()) {
       if(isDefined(level.nukeIncoming) || self isEMPed()) {
         self iPrintLnBold(&"KILLSTREAKS_UNAVAILABLE_FOR_N_WHEN_EMP", level.empTimeRemaining);
       } else {
@@ -235,11 +231,7 @@ setCarryingRemoteUAV(carryRemoteUAV) {
 }
 
 local_waittill_any_return(string1, string2, string3, string4, string5, string6) {
-  if((!isDefined(string1) || string1 != "death") &&
-    (!isDefined(string2) || string2 != "death") &&
-    (!isDefined(string3) || string3 != "death") &&
-    (!isDefined(string4) || string4 != "death") &&
-    (!isDefined(string5) || string5 != "death"))
+  if((!isDefined(string1) || string1 != "death") && (!isDefined(string2) || string2 != "death") && (!isDefined(string3) || string3 != "death") && (!isDefined(string4) || string4 != "death") && (!isDefined(string5) || string5 != "death"))
     self endon("death");
 
   ent = spawnStruct();
@@ -389,9 +381,7 @@ startRemoteUAV(lifeId, streakName, origin, angles) {
     return false;
   }
 
-  if(exceededMaxRemoteUAVs(self.team) ||
-    currentActiveVehicleCount() >= maxVehiclesAllowed() ||
-    level.fauxVehicleCount >= maxVehiclesAllowed()) {
+  if(exceededMaxRemoteUAVs(self.team) || currentActiveVehicleCount() >= maxVehiclesAllowed() || level.fauxVehicleCount >= maxVehiclesAllowed()) {
     self iPrintLnBold(&"KILLSTREAKS_TOO_MANY_VEHICLES");
     self notify("remoteuav_unlock");
     self takeWeapon("uav_remote_mp");
@@ -720,10 +710,7 @@ remoteUAV_trackEntities(remoteUAV, entities, targetPos) {
           remoteUAV.markedPlayers[id]["icon"] SetTargetEnt(entity);
       }
 
-      if((!isDefined(lockedTarget) || lockedTarget != entity) &&
-        (isDefined(remoteUAV.trace["entity"]) && remoteUAV.trace["entity"] == entity && !carried && !leaving) ||
-        (distance(entity.origin, targetPos) < UAV_REMOTE_AIM_ASSIST_RANGE * remoteUAV.trace["fraction"] && !spawnProtected && !carried && !leaving) ||
-        (!leaving && remoteUAV_canTargetUAV(remoteUAV, entity))) {
+      if((!isDefined(lockedTarget) || lockedTarget != entity) && (isDefined(remoteUAV.trace["entity"]) && remoteUAV.trace["entity"] == entity && !carried && !leaving) || (distance(entity.origin, targetPos) < UAV_REMOTE_AIM_ASSIST_RANGE * remoteUAV.trace["fraction"] && !spawnProtected && !carried && !leaving) || (!leaving && remoteUAV_canTargetUAV(remoteUAV, entity))) {
         trace = bulletTrace(remoteUAV.origin, entity.origin + (0, 0, 32), true, remoteUAV);
         if((isDefined(trace["entity"]) && trace["entity"] == entity) || trace["fraction"] == 1) {
           self playLocalSound("recondrone_lockon");
@@ -1345,11 +1332,7 @@ remoteUAV_watchHeliProximity() {
 remoteUAV_handleDamage() {
   selfendon("end_remote");
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    self.maxHealth,
-    "remote_uav", ::handleDeathDamage, ::modifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(self.maxHealth, "remote_uav", ::handleDeathDamage, ::modifyDamage, true);
 }
 
 modifyDamage(attacker, weapon, type, damage) {

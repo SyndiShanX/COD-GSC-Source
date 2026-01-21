@@ -32,13 +32,13 @@ missile_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   self useanimtree(#animtree);
 
   if(newval == 2)
-    self setanimrestart( % o_drone_tank_missile1_fire, 1.0, 0.0, 0.5);
+    self setanimrestart(%o_drone_tank_missile1_fire, 1.0, 0.0, 0.5);
   else if(newval == 1)
-    self setanimrestart( % o_drone_tank_missile2_fire, 1.0, 0.0, 0.5);
+    self setanimrestart(%o_drone_tank_missile2_fire, 1.0, 0.0, 0.5);
   else if(newval == 0)
-    self setanimrestart( % o_drone_tank_missile3_fire, 1.0, 0.0, 0.5);
+    self setanimrestart(%o_drone_tank_missile3_fire, 1.0, 0.0, 0.5);
   else if(newval == 4)
-    self setanimrestart( % o_drone_tank_missile_full_reload, 1.0, 0.0, 1.0);
+    self setanimrestart(%o_drone_tank_missile_full_reload, 1.0, 0.0, 1.0);
 }
 
 play_light_fx(localclientnum) {

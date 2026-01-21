@@ -1913,9 +1913,7 @@ func_F616(var_0, var_1) {
     var_5 = level.var_462E[var_4];
 
     if(isDefined(var_5) && isDefined(var_5.var_F3C3)) {
-      [
-        [var_5.var_F3C3]
-      ](var_0);
+      [[var_5.var_F3C3]](var_0);
     }
 
     var_0.var_1607 = scripts\engine\utility::array_add(var_0.var_1607, var_4);

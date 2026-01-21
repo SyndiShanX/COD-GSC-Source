@@ -322,7 +322,7 @@ donodeexitanimation(var_0, var_1) {
 #using_animtree("generic_human");
 
 donodeexitcleanupfunc() {
-  self clearanim( % animscript_root, 0.2);
+  self clearanim(%animscript_root, 0.2);
   self orientmode("face default");
   self animmode("normal", 0);
 }
@@ -339,7 +339,7 @@ donodeexitanimation_impl(var_0) {
   self orientmode("face angle", self.angles[1]);
   self.ignorepathchange = 1;
   animscripts\move::pathchange_ignoreearlyturns();
-  self setflaggedanimknoballrestart("coverexit", var_0, % body, 1, var_1, self.movetransitionrate);
+  self setflaggedanimknoballrestart("coverexit", var_0, %body, 1, var_1, self.movetransitionrate);
   childthread animscripts\stairs_utility::threadcheckstairstransition(var_0, 0, 0.1, ::donodeexitcleanupfunc);
   animscripts\shared::donotetracks("coverexit");
   self notify("StartListeningForCoverApproach");
@@ -357,7 +357,7 @@ donodeexitanimation_impl(var_0) {
   childthread animscripts\stairs_utility::threadcheckstairstransition(var_0, 0, 0.1);
   finishcoverexitnotetracks("coverexit", var_0);
   self notify("killThreadCheckStairsTransition");
-  self clearanim( % animscript_root, 0.2);
+  self clearanim(%animscript_root, 0.2);
   self orientmode("face default");
   self animmode("normal", 0);
 }
@@ -413,7 +413,7 @@ custommovetransition() {
   if(!isDefined(var_1))
     var_1 = 0.2;
 
-  self clearanim( % animscript_root, var_1);
+  self clearanim(%animscript_root, var_1);
   self orientmode("face default");
   self animmode("none", 0);
 }

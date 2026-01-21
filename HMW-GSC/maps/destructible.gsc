@@ -1226,14 +1226,10 @@ isAttackerValid(var_0, var_1, var_2) {
     if(isDefined(var_2.damageIsFromPlayer) && var_2.damageIsFromPlayer)
       return 1;
   } else if(var_3 == "no_ai" && isDefined(level.isAIfunc)) {
-    if(![
-        [level.isAIfunc]
-      ](var_2))
+    if(![[level.isAIfunc]](var_2))
       return 1;
   } else if(var_3 == "ai_only" && isDefined(level.isAIfunc)) {
-    if([
-        [level.isAIfunc]
-      ](var_2))
+    if([[level.isAIfunc]](var_2))
       return 1;
   } else {}
 

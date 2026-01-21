@@ -9,7 +9,7 @@ trackshootentorpos() {
   self endon("killanimscript");
   self endon("stop tracking");
   self endon("melee");
-  trackloop( % aim_2, % aim_4, % aim_6, % aim_8);
+  trackloop(%aim_2, %aim_4, %aim_6, %aim_8);
 }
 
 trackloop(var_0, var_1, var_2, var_3, var_4) {

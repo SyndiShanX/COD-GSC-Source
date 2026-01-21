@@ -501,9 +501,7 @@ moveitemtowardsplayer(var_0, var_1, var_2) {
     var_20 = clamp(var_1F[2], var_21, var_22);
     var_1F = (var_1F[0], var_1F[1], var_20);
     if(isDefined(var_1.entanglerangleupdate)) {
-      var_17 = [
-        [var_1.entanglerangleupdate]
-      ](var_0, var_1, var_7);
+      var_17 = [[var_1.entanglerangleupdate]](var_0, var_1, var_7);
       var_23 = vectortoangles(var_17 - var_7.origin);
     } else {
       var_23 = vectortoangles(var_0.origin - var_7.origin);

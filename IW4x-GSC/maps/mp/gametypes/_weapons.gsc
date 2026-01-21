@@ -1761,8 +1761,7 @@ weaponDamageTracePassed(from, to, startRadius, ent) {
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
   if(self.isPlayer) {
     self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](
-      eInflictor, // eInflictor The entity that causes the damage.( e.g. a turret )
+    self.entity thread[[level.callbackPlayerDamage]](eInflictor, // eInflictor The entity that causes the damage.( e.g. a turret )
       eAttacker, // eAttacker The entity that is attacking.
       iDamage, // iDamage Integer specifying the amount of damage done
       0, // iDFlags Integer specifying flags that are to be applied to the damage
@@ -1771,8 +1770,7 @@ damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, dam
       damagepos, // vPoint The point the damage is from?
       damagedir, // vDir The direction of the damage
       "none", // sHitLoc The location of the hit
-      0 // psOffsetTime The time offset for the damage
-    );
+      0 // psOffsetTime The time offset for the damage);
   } else {
     // destructable walls and such can only be damaged in certain ways.
     if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp") || sWeapon == "stealth_bomb_mp") {

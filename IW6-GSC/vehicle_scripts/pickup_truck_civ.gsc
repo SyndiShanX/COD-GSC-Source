@@ -12,7 +12,7 @@ main(var_0, var_1, var_2) {
 build_truck(var_0, var_1, var_2) {
   maps\_vehicle::build_template("truck", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
-  maps\_vehicle::build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");

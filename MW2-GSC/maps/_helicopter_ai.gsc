@@ -27,8 +27,7 @@ evasive_createManeuvers(vehicle, maneuverName) {
   forward			- units forward/back
   side			- units left/right
   up				- units up/down
-  goalYawMethod	- can be "average", "forward", or "none"
-  					none (default): always points towards the next point
+  goalYawMethod	- can be "average", "forward", or "none"none (default): always points towards the next point
   					average: finds an angle between the forward direction and the goal direction
   					forward: chopper will always face the direction it was originally moving
   */

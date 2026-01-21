@@ -56,29 +56,19 @@ __init__() {
   spawning::add_default_spawnlist("auto_normal");
   level.spawnentitytypes = [];
   array::add(level.spawnentitytypes, {
-    #team: "all",
-    #entityname: "mp_t8_spawn_point"
-  });
+    #team: "all", #entityname: "mp_t8_spawn_point"});
 
   if(level.gametype == # "dom") {
     array::add(level.spawnentitytypes, {
-      #team: # "allies",
-      #entityname: "mp_t8_spawn_point"
-    });
+      #team: # "allies", #entityname: "mp_t8_spawn_point"});
     array::add(level.spawnentitytypes, {
-      #team: # "axis",
-      #entityname: "mp_t8_spawn_point"
-    });
+      #team: # "axis", #entityname: "mp_t8_spawn_point"});
   }
 
   array::add(level.spawnentitytypes, {
-    #team: # "allies",
-    #entityname: "mp_t8_spawn_point_allies"
-  });
+    #team: # "allies", #entityname: "mp_t8_spawn_point_allies"});
   array::add(level.spawnentitytypes, {
-    #team: # "axis",
-    #entityname: "mp_t8_spawn_point_axis"
-  });
+    #team: # "axis", #entityname: "mp_t8_spawn_point_axis"});
   level.allspawnpoints = [];
   level.spawnpoints = [];
 }

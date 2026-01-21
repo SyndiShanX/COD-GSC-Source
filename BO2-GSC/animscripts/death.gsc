@@ -77,7 +77,7 @@ main() {
 
   deathhelmetpop();
   playdeathsound();
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
 
   if(play_machete_melee_gib_death_anim()) {
     return;
@@ -141,8 +141,8 @@ handledeathfunction() {
 }
 
 clearfaceanims() {
-  self clearanim( % scripted_look_straight, 0.3);
-  self clearanim( % scripted_talking, 0.3);
+  self clearanim(%scripted_look_straight, 0.3);
+  self clearanim(%scripted_talking, 0.3);
 }
 
 deathhelmetpop() {
@@ -242,7 +242,7 @@ playcustomdeathanim() {
     self animscripts\shared::dropallaiweapons();
 
   self thread do_gib();
-  self setflaggedanimknoball("deathanim", self.deathanim, % root, 1, 0.05, 1);
+  self setflaggedanimknoball("deathanim", self.deathanim, %root, 1, 0.05, 1);
 
   if(!animhasnotetrack(self.deathanim, "start_ragdoll"))
     self thread waitforragdoll(getanimlength(self.deathanim) * 0.9);
@@ -250,7 +250,7 @@ playcustomdeathanim() {
   self animscripts\shared::donotetracks("deathanim");
 
   if(isDefined(self.deathanimloop)) {
-    self setflaggedanimknoball("deathanim", self.deathanimloop, % root, 1, 0.05, 1);
+    self setflaggedanimknoball("deathanim", self.deathanimloop, %root, 1, 0.05, 1);
 
     for(;;)
       self animscripts\shared::donotetracks("deathanim");
@@ -1614,7 +1614,7 @@ do_extended_death(deathseq) {
 
   self setplayercollision(0);
   self thread death_anim_short_circuit();
-  self setflaggedanimknoballrestart("deathhitanim", deathseq[0], % body, 1, 0.1);
+  self setflaggedanimknoballrestart("deathhitanim", deathseq[0], %body, 1, 0.1);
   self animscripts\shared::donotetracks("deathhitanim");
   self notify("stop_death_anim_short_circuit");
 
@@ -1630,7 +1630,7 @@ do_extended_death(deathseq) {
 end_extended_death(deathseq) {
   assert(isDefined(deathseq[2]));
   self waittill_any("damage_afterdeath", "ending_extended_death");
-  self setflaggedanimknoballrestart("deathdieanim", deathseq[2], % body, 1, 0.1);
+  self setflaggedanimknoballrestart("deathdieanim", deathseq[2], %body, 1, 0.1);
   self animscripts\shared::donotetracks("deathdieanim");
   self notify("extended_death_ended");
 }
@@ -1641,7 +1641,7 @@ extended_death_loop(deathseq, numloops) {
   animlength = getanimlength(deathseq[1]);
 
   for(i = 0; i < numloops; i++) {
-    self setflaggedanimknoballrestart("deathloopanim", deathseq[1], % body, 1, 0.1);
+    self setflaggedanimknoballrestart("deathloopanim", deathseq[1], %body, 1, 0.1);
     self animscripts\shared::donotetracks("deathloopanim");
   }
 
@@ -1701,7 +1701,7 @@ play_death_anim(deathanim) {
     } else
       self thread death_anim_short_circuit(0.3);
 
-    self setflaggedanimknoballrestart("deathanim", deathanim, % body, 1, 0.1);
+    self setflaggedanimknoballrestart("deathanim", deathanim, %body, 1, 0.1);
   }
 
   self thread do_gib();

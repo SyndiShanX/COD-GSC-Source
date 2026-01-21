@@ -305,16 +305,7 @@ LGM_locking_think(targetVeh, player) {
   level thread LGM_locking_loopSound(player, "maaws_reticle_tracking", 1.5, "LGM_player_lockingDone");
   level thread LGM_locking_notifyOnTargetDeath(targetVeh, player);
 
-  player waittill_any(
-    "death",
-    "disconnect",
-    "LGM_player_endMonitorFire",
-    "LGM_player_newMissilesFired",
-    "LGM_player_targetLost",
-    "LGM_player_lockedOn",
-    "LGM_player_allMissilesDestroyed",
-    "LGM_player_targetDied"
-  );
+  player waittill_any("death", "disconnect", "LGM_player_endMonitorFire", "LGM_player_newMissilesFired", "LGM_player_targetLost", "LGM_player_lockedOn", "LGM_player_allMissilesDestroyed", "LGM_player_targetDied");
 
   if(isDefined(targetVeh)) {
     outlineDisable(outline, targetVeh);

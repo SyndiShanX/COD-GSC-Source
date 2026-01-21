@@ -295,7 +295,7 @@ fake_chopper_create_and_move(moveTime, destination) {
   chopper setModel(chopperModel[randomint(chopperModel.size)]);
 
   chopper useAnimTree(#animtree);
-  chopper setanim( % bh_rotors, 1, .2, 1);
+  chopper setanim(%bh_rotors, 1, .2, 1);
 
   // some play a sound effect
   if(randomint(2) == 0)

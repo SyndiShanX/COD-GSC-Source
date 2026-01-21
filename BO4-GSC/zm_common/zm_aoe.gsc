@@ -258,8 +258,7 @@ function_bea2e288(type) {
         damage = mapfloat(0, var_46f1b5eb.radius, var_46f1b5eb.damagemin, var_46f1b5eb.damagemax, dist);
         player dodamage(damage, aoe.entity.origin);
         player notify(#"aoe_damage", {
-          #str_source: aoe.type,
-          #origin: aoe.entity.origin
+          #str_source: aoe.type, #origin: aoe.entity.origin
         });
       }
     }

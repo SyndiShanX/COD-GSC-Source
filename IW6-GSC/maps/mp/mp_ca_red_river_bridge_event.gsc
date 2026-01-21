@@ -37,9 +37,9 @@ bridge_precache() {
 
 bridge_init() {
   self.bridge_anim_time = 0.0;
-  self.bridge_anim_time = max(self.bridge_anim_time, GetAnimLength( % mp_ca_red_river_bridge_01));
-  self.bridge_anim_time = max(self.bridge_anim_time, GetAnimLength( % mp_ca_red_river_bridge_02));
-  self.bridge_anim_time = max(self.bridge_anim_time, GetAnimLength( % mp_ca_red_river_bridge_03));
+  self.bridge_anim_time = max(self.bridge_anim_time, GetAnimLength(%mp_ca_red_river_bridge_01));
+  self.bridge_anim_time = max(self.bridge_anim_time, GetAnimLength(%mp_ca_red_river_bridge_02));
+  self.bridge_anim_time = max(self.bridge_anim_time, GetAnimLength(%mp_ca_red_river_bridge_03));
 
   self.bridge_wholeEnts = getEntArray("bridge_whole", "targetname");
   self.bridge_destroyedEnts = getEntArray("bridge_destroyed", "targetname");

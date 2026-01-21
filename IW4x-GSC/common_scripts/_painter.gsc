@@ -267,8 +267,7 @@ hud_init() {
   crossHair _settext(".");
   level.crosshair = crossHair;
 
-  // setup "crosshair"
-  crossHair = _newhudelem();
+  // setup "crosshair"crossHair = _newhudelem();
   crossHair.location = 0;
   crossHair.alignX = "center";
   crossHair.alignY = "bottom";

@@ -372,7 +372,7 @@ harper_knocked_down() {
 
 harper_get_knocked_down() {
   wait 7.5;
-  self setflaggedanimknoballrestart("knockedDown", % ai_stand_exposed_extendedpain_b, % body, 1, 0.1, 0.7);
+  self setflaggedanimknoballrestart("knockedDown", %ai_stand_exposed_extendedpain_b, %body, 1, 0.1, 0.7);
   self animscripts\shared::donotetracks("knockedDown");
 }
 

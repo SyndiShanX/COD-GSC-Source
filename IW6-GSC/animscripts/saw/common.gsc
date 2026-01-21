@@ -171,15 +171,15 @@ preplacedpostscriptfunc(var_0) {
 #using_animtree("generic_human");
 
 doshoot(var_0) {
-  self setanim( % additive_saw_idle, 0, 0.1);
-  self setanim( % additive_saw_fire, 1, 0.1);
+  self setanim(%additive_saw_idle, 0, 0.1);
+  self setanim(%additive_saw_fire, 1, 0.1);
   var_0 turretdoshootanims();
   turretdoshoot(var_0);
 }
 
 doaim(var_0) {
-  self setanim( % additive_saw_idle, 1, 0.1);
-  self setanim( % additive_saw_fire, 0, 0.1);
+  self setanim(%additive_saw_idle, 1, 0.1);
+  self setanim(%additive_saw_fire, 0, 0.1);
   var_0 turretdoaimanims();
 }
 
@@ -196,11 +196,11 @@ turretdoshoot(var_0) {
 #using_animtree("mg42");
 
 turretdoshootanims() {
-  self setanim( % additive_saw_idle, 0, 0.1);
-  self setanim( % additive_saw_fire, 1, 0.1);
+  self setanim(%additive_saw_idle, 0, 0.1);
+  self setanim(%additive_saw_fire, 1, 0.1);
 }
 
 turretdoaimanims() {
-  self setanim( % additive_saw_idle, 1, 0.1);
-  self setanim( % additive_saw_fire, 0, 0.1);
+  self setanim(%additive_saw_idle, 1, 0.1);
+  self setanim(%additive_saw_fire, 0, 0.1);
 }

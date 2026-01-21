@@ -354,13 +354,7 @@ buildBaseWeaponList() {
   for(weaponId = 0; weaponId <= max_weapon_num; weaponId++) {
     weapon_name = tablelookup("mp/statstable.csv", 0, weaponId, 4);
 
-    if(
-      weapon_name == "" ||
-      weapon_name == "uav" ||
-      weapon_name == "iw6_knifeonlyfast" ||
-      weapon_name == "laser_designator" ||
-      weapon_name == "iw6_pdwauto"
-    ) {
+    if(weapon_name == "" || weapon_name == "uav" || weapon_name == "iw6_knifeonlyfast" || weapon_name == "laser_designator" || weapon_name == "iw6_pdwauto") {
       continue;
     }
 

@@ -14,7 +14,7 @@ main() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
-  self setFlaggedAnimKnoballRestart("diveanim", % windowclimb, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("diveanim", %windowclimb, %body, 1, .1, 1);
   self waittillmatch("diveanim", "gravity on");
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("diveanim");
@@ -22,6 +22,6 @@ main() {
   self.a.alertness = "casual";
   while(self getGroundEntType() == "none")
     wait 0.05;
-  self setAnimKnobAllRestart(animscripts\run::GetCrouchRunAnim(), % body, 1, 0.1, 1);
+  self setAnimKnobAllRestart(animscripts\run::GetCrouchRunAnim(), %body, 1, 0.1, 1);
   thread animscripts\run::MakeRunSounds("killSoundThread");
 }

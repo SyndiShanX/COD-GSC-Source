@@ -2802,8 +2802,8 @@ set_custom_approach() {
   if(!isDefined(anim.NotFirstTime)) {
     wait(0.1);
   }
-  add_custom_exposed_approach(0, % run_2_crouch_F);
-  add_custom_exposed_exit(0, % crouch_2_runCQB);
+  add_custom_exposed_approach(0, %run_2_crouch_F);
+  add_custom_exposed_exit(0, %crouch_2_runCQB);
 }
 
 add_custom_exposed_approach(index, approach_anim) {

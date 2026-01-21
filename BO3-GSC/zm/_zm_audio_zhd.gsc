@@ -48,9 +48,7 @@ function snd_zhdegg_activate() {
   level function_513f51e1();
   while(true) {
     if(isDefined(level.var_61f315ab)) {
-      success = [
-        [level.var_61f315ab]
-      ]();
+      success = [[level.var_61f315ab]]();
     } else {
       success = level function_cf1b154();
     }

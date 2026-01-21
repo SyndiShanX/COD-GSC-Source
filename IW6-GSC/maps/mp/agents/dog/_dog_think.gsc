@@ -151,9 +151,7 @@ DidPastPursuitFail(enemy) {
 DidPastMeleeFail() {
   assert(isDefined(self.curMeleeTarget));
 
-  if(isDefined(self.lastMeleeFailedPos) && isDefined(self.lastMeleeFailedMyPos) &&
-    Distance2DSquared(self.curMeleeTarget.origin, self.lastMeleeFailedPos) < 4 &&
-    DistanceSquared(self.origin, self.lastMeleeFailedMyPos) < 50 * 50)
+  if(isDefined(self.lastMeleeFailedPos) && isDefined(self.lastMeleeFailedMyPos) && Distance2DSquared(self.curMeleeTarget.origin, self.lastMeleeFailedPos) < 4 && DistanceSquared(self.origin, self.lastMeleeFailedMyPos) < 50 * 50)
     return true;
 
   if(self WantToAttackTargetButCant(false))
@@ -375,9 +373,7 @@ WantToAttackTargetButCant(bCheckSight) {
   if(!isDefined(self.curMeleeTarget))
     return false;
 
-  return !self IsWithinAttackHeight(self.curMeleeTarget.origin) &&
-    Distance2DSquared(self.origin, self.curMeleeTarget.origin) < self.meleeRadiusSq * 0.75 * 0.75 &&
-    (!bCheckSight || self AgentCanSeeSentient(self.curMeleeTarget));
+  return !self IsWithinAttackHeight(self.curMeleeTarget.origin) && Distance2DSquared(self.origin, self.curMeleeTarget.origin) < self.meleeRadiusSq * 0.75 * 0.75 && (!bCheckSight || self AgentCanSeeSentient(self.curMeleeTarget));
 }
 
 readyToMeleeTarget() {

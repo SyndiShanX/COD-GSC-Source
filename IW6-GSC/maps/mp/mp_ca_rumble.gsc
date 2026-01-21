@@ -28,8 +28,7 @@ main() {
     SetDvar("sm_sunShadowScale", "0.55");
     SetDvar("sm_sunsamplesizenear", ".15");
   } else if(level.xenon) {
-    SetDvar("sm_sunShadowScale", "0.56" +
-      "");
+    SetDvar("sm_sunShadowScale", "0.56" + "");
     SetDvar("sm_sunsamplesizenear", ".22");
   } else {
     SetDvar("sm_sunShadowScale", "0.9");
@@ -458,13 +457,13 @@ update_fish() {
     self ScriptModelClearAnim();
     if(testInt == 0) {
       self ScriptModelPlayAnim("mp_ca_rumble_fish_swim_anim");
-      wait(GetAnimLength( % mp_ca_rumble_fish_swim_anim));
+      wait(GetAnimLength(%mp_ca_rumble_fish_swim_anim));
     } else if(testInt == 1) {
       self ScriptModelPlayAnim("mp_ca_rumble_fish_swim_anim_b");
-      wait(GetAnimLength( % mp_ca_rumble_fish_swim_anim_b));
+      wait(GetAnimLength(%mp_ca_rumble_fish_swim_anim_b));
     } else {
       self ScriptModelPlayAnim("mp_ca_rumble_fish_swim_anim_c");
-      wait(GetAnimLength( % mp_ca_rumble_fish_swim_anim_c));
+      wait(GetAnimLength(%mp_ca_rumble_fish_swim_anim_c));
     }
   }
 }

@@ -49,22 +49,22 @@ init_drone_anims() {
 
 harper_wakeup() {
   add_scene("harper_wakes_up", "anim_align_stadium_intersection");
-  add_actor_anim("harper", % ch_la_08_01_standup_harper);
+  add_actor_anim("harper", %ch_la_08_01_standup_harper);
 }
 
 #using_animtree("vehicles");
 
 anderson_f35_exit() {
   add_scene("anderson_f35_exit", "anim_align_stadium_intersection");
-  add_actor_anim("f35_pilot", % ch_la_08_01_save_anderson_anderson_fall, 1, 0, 0, 0);
-  add_vehicle_anim("f35", % v_la_08_01_save_anderson_f35);
+  add_actor_anim("f35_pilot", %ch_la_08_01_save_anderson_anderson_fall, 1, 0, 0, 0);
+  add_vehicle_anim("f35", %v_la_08_01_save_anderson_f35);
 }
 
 #using_animtree("generic_human");
 
 pilot_drag_setup() {
   add_scene("pilot_drag_setup", "anim_align_stadium_intersection", 0, 0, 1);
-  add_actor_anim("f35_pilot", % ch_la_08_01_save_anderson_anderson_loop, 1, 0, 0, 0);
+  add_actor_anim("f35_pilot", %ch_la_08_01_save_anderson_anderson_loop, 1, 0, 0, 0);
 }
 
 #using_animtree("vehicles");
@@ -77,7 +77,7 @@ pilot_drag_van_setup() {
   b_do_loop = 1;
   b_do_not_align = 0;
   add_scene(str_scene_name, str_align_targetname, b_do_reach, b_do_generic, b_do_loop, b_do_not_align);
-  add_vehicle_anim("convoy_van", % v_la_08_01_save_anderson_ambulance);
+  add_vehicle_anim("convoy_van", %v_la_08_01_save_anderson_ambulance);
 }
 
 #using_animtree("generic_human");
@@ -85,14 +85,14 @@ pilot_drag_van_setup() {
 
 pilot_drag() {
   add_scene("pilot_drag_harper", "anim_align_stadium_intersection", 1);
-  add_actor_anim("harper", % ch_la_08_01_save_anderson_harper);
+  add_actor_anim("harper", %ch_la_08_01_save_anderson_harper);
   add_scene("pilot_drag_harper_idle", "anim_align_stadium_intersection", 0, 0, 1);
-  add_actor_anim("harper", % ch_la_08_01_save_anderson_harper_loop);
+  add_actor_anim("harper", %ch_la_08_01_save_anderson_harper_loop);
   add_scene("pilot_drag", "anim_align_stadium_intersection");
-  add_actor_anim("f35_pilot", % ch_la_08_01_save_anderson_anderson, 1, 0, 0, 0);
-  add_actor_anim("intro_medic_1", % ch_la_08_01_save_anderson_driver1, 1, 0, 0, 0);
-  add_actor_anim("intro_medic_2", % ch_la_08_01_save_anderson_driver2, 1, 0, 0, 0);
-  add_vehicle_anim("convoy_van", % v_la_08_01_save_anderson_ambulance);
+  add_actor_anim("f35_pilot", %ch_la_08_01_save_anderson_anderson, 1, 0, 0, 0);
+  add_actor_anim("intro_medic_1", %ch_la_08_01_save_anderson_driver1, 1, 0, 0, 0);
+  add_actor_anim("intro_medic_2", %ch_la_08_01_save_anderson_driver2, 1, 0, 0, 0);
+  add_vehicle_anim("convoy_van", %v_la_08_01_save_anderson_ambulance);
 }
 
 pilot_drag_van_idle() {
@@ -131,7 +131,7 @@ f35_get_in() {
   n_bottom_arc = 30;
   b_use_tag_angles = 1;
   b_center_camera = 1;
-  add_player_anim("player_body", % ch_la_08_02_f35enter_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles, b_center_camera);
+  add_player_anim("player_body", %ch_la_08_02_f35enter_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles, b_center_camera);
   add_notetrack_custom_function("player_body", "helmet_on", ::player_puts_on_helmet);
   add_notetrack_custom_function("player_body", "dof_players_hand", maps\createart\la_2_art::enter_jet_players_hand);
   add_notetrack_custom_function("player_body", "dof_cockpit", maps\createart\la_2_art::enter_jet_cockpit);
@@ -141,9 +141,9 @@ f35_get_in() {
   b_is_simple_prop = 0;
   a_parts = undefined;
   str_tag = "tag_origin";
-  add_prop_anim("F35_helmet", % o_la_08_02_f35enter_helmet, str_model, b_do_delete, b_is_simple_prop, a_parts, str_tag);
+  add_prop_anim("F35_helmet", %o_la_08_02_f35enter_helmet, str_model, b_do_delete, b_is_simple_prop, a_parts, str_tag);
   add_scene("F35_get_in_vehicle", "anim_intro_jet_struct");
-  add_vehicle_anim("F35", % v_la_08_02_f35enter_f35, undefined, undefined, undefined, 1);
+  add_vehicle_anim("F35", %v_la_08_02_f35enter_f35, undefined, undefined, undefined, 1);
 }
 
 player_puts_on_helmet(e_player_body) {
@@ -205,11 +205,11 @@ f35_startup() {
   b_use_tag_angles = 1;
   b_auto_center = 1;
   add_scene("F35_startup", "F35");
-  add_player_anim("player_body", % ch_la_08_02_f35enter_startup_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles, b_auto_center);
+  add_player_anim("player_body", %ch_la_08_02_f35enter_startup_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles, b_auto_center);
   add_notetrack_custom_function("player_body", "touch_hud", maps\la_2_player_f35::f35_startup_console);
   add_notetrack_custom_function("player_body", "sndCanopyClose", ::sndcanopyclose);
   add_scene("F35_startup_vehicle", "anim_intro_jet_struct");
-  add_vehicle_anim("F35", % v_la_08_02_f35enter_startup_f35, undefined, undefined, undefined, 1);
+  add_vehicle_anim("F35", %v_la_08_02_f35enter_startup_f35, undefined, undefined, undefined, 1);
 }
 
 #using_animtree("generic_human");
@@ -233,7 +233,7 @@ f35_mode_switch() {
   b_use_tag_angles = 1;
   b_auto_center = 1;
   add_scene("F35_mode_switch", "F35");
-  add_player_anim("player_body", % ch_la_09_05_flightmode_switch_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles, b_auto_center);
+  add_player_anim("player_body", %ch_la_09_05_flightmode_switch_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles, b_auto_center);
   level.scr_model["player_body"] = level.player_interactive_model;
   level.scr_animtree["player_body"] = #animtree;
   level.scr_anim["player_body"]["F35_mode_switch"] = % ch_la_09_05_flightmode_switch_player;
@@ -249,9 +249,9 @@ notify_mode_switch(e_guy) {
 
 f35_eject() {
   add_scene("f35_eject_drone_intro");
-  add_vehicle_anim("eject_sequence_drone", % v_la_10_01_f35eject_drone_intro);
+  add_vehicle_anim("eject_sequence_drone", %v_la_10_01_f35eject_drone_intro);
   add_scene("F35_eject");
-  add_vehicle_anim("eject_sequence_drone", % v_la_10_01_f35eject_start_drone);
+  add_vehicle_anim("eject_sequence_drone", %v_la_10_01_f35eject_start_drone);
 }
 
 #using_animtree("player");
@@ -278,7 +278,7 @@ midair_collision() {
   n_top_arc = 30;
   n_bottom_arc = 30;
   b_use_tag_angles = 1;
-  add_player_anim("player_body", % ch_la_10_01_f35eject_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles);
+  add_player_anim("player_body", %ch_la_10_01_f35eject_player, b_do_delete, n_player_number, str_tag, b_do_delta, n_view_fraction, n_right_arc, n_left_arc, n_top_arc, n_bottom_arc, b_use_tag_angles);
   add_notetrack_custom_function("player_body", "eject", ::f35_eject_notetrack_eject);
   add_notetrack_custom_function("player_body", "eject", ::f35_eject_notify_start);
   add_notetrack_custom_function("player_body", "explosion", ::f35_eject_notetrack_explosion);
@@ -287,7 +287,7 @@ midair_collision() {
   add_notetrack_custom_function("player_body", "hit_ground", ::f35_eject_notetrack_hit_ground);
   add_notetrack_custom_function("player_body", "start_jets_animation", ::f35_eject_notetrack_start_jets);
   add_notetrack_custom_function("player_body", "body_impact", ::f35_eject_notetrack_body_impact);
-  add_vehicle_anim("F35", % v_la_10_01_f35eject_f35, 1, undefined, undefined, undefined, undefined, undefined, undefined, 0);
+  add_vehicle_anim("F35", %v_la_10_01_f35eject_f35, 1, undefined, undefined, undefined, undefined, undefined, undefined, 0);
   add_notetrack_custom_function("F35", "collide", ::midair_collision_notetrack);
   add_notetrack_custom_function("player_body", "dof_eject", maps\createart\la_2_art::crash_eject);
   add_notetrack_custom_function("player_body", "dof_chute", maps\createart\la_2_art::crash_chute);
@@ -299,11 +299,11 @@ midair_collision() {
   b_is_simple_prop = 0;
   a_parts = undefined;
   str_tag = undefined;
-  add_prop_anim("f35_eject_parachute", % o_la_10_01_f35eject_parachute, str_model, b_do_delete, b_is_simple_prop, a_parts, str_tag);
+  add_prop_anim("f35_eject_parachute", %o_la_10_01_f35eject_parachute, str_model, b_do_delete, b_is_simple_prop, a_parts, str_tag);
   add_scene("midair_collision_amb_jets", "anim_end_struct");
-  add_vehicle_anim("f35_2", % v_la_10_01_f35_2, 1, undefined, undefined, undefined, "plane_f35_player_vtol");
-  add_vehicle_anim("f35_3", % v_la_10_01_f35_3, 1, undefined, undefined, undefined, "plane_f35_player_vtol");
-  add_vehicle_anim("f35_4", % v_la_10_01_f35_4, 1, undefined, undefined, undefined, "plane_f35_player_vtol");
+  add_vehicle_anim("f35_2", %v_la_10_01_f35_2, 1, undefined, undefined, undefined, "plane_f35_player_vtol");
+  add_vehicle_anim("f35_3", %v_la_10_01_f35_3, 1, undefined, undefined, undefined, "plane_f35_player_vtol");
+  add_vehicle_anim("f35_4", %v_la_10_01_f35_4, 1, undefined, undefined, undefined, "plane_f35_player_vtol");
 }
 
 #using_animtree("generic_human");
@@ -317,32 +317,32 @@ midair_collision() {
 
 f35_outro() {
   add_scene("outro_hero", "anim_end_struct");
-  add_actor_anim("harper", % ch_la_10_02_promnight_harper, 1, 0, 0, 1);
-  add_player_anim("player_body", % ch_la_10_02_promnight_player, 0, 0, undefined, 0, 0, 30, 30, 30, 30, 1);
+  add_actor_anim("harper", %ch_la_10_02_promnight_harper, 1, 0, 0, 1);
+  add_player_anim("player_body", %ch_la_10_02_promnight_player, 0, 0, undefined, 0, 0, 30, 30, 30, 30, 1);
   add_notetrack_custom_function("player_body", "start_fadeout", ::level_end);
   add_notetrack_custom_function("player_body", "dof_convoy", maps\createart\la_2_art::outro_convoy);
   add_notetrack_custom_function("player_body", "dof_president", maps\createart\la_2_art::outro_harper);
   add_notetrack_custom_function("player_body", "dof_president", maps\createart\la_2_art::outro_president);
   add_notetrack_custom_function("player_body", "dof_door", maps\createart\la_2_art::outro_door);
-  add_vehicle_anim("convoy_potus_cougar", % v_la_10_02_promnight_cougar);
-  add_prop_anim("convoy_van_prop", % v_la_10_02_promnight_van, "veh_iw_civ_ambulance");
+  add_vehicle_anim("convoy_potus_cougar", %v_la_10_02_promnight_cougar);
+  add_prop_anim("convoy_van_prop", %v_la_10_02_promnight_van, "veh_iw_civ_ambulance");
   add_scene("outro_g20_1", "anim_end_struct");
-  add_vehicle_anim("convoy_g20_1", % v_la_10_02_promnight_cougar02);
+  add_vehicle_anim("convoy_g20_1", %v_la_10_02_promnight_cougar02);
   add_scene("outro_g20_2", "anim_end_struct");
-  add_vehicle_anim("convoy_g20_2", % v_la_10_02_promnight_cougar03);
+  add_vehicle_anim("convoy_g20_2", %v_la_10_02_promnight_cougar03);
   add_scene("outro_hero_noharper", "anim_end_struct");
-  add_actor_anim("sam", % ch_la_10_02_promnightsam_sam, 1, 0, 0, 1);
-  add_player_anim("player_body", % ch_la_10_02_promnightsam_player, 0, 0, undefined, 0, 0, 30, 30, 30, 30, 1);
+  add_actor_anim("sam", %ch_la_10_02_promnightsam_sam, 1, 0, 0, 1);
+  add_player_anim("player_body", %ch_la_10_02_promnightsam_player, 0, 0, undefined, 0, 0, 30, 30, 30, 30, 1);
   add_notetrack_custom_function("player_body", "start_fadeout", ::level_end);
   add_notetrack_custom_function("player_body", "dof_convoy", maps\createart\la_2_art::outro_convoy);
   add_notetrack_custom_function("player_body", "dof_president", maps\createart\la_2_art::outro_harper);
   add_notetrack_custom_function("player_body", "dof_president", maps\createart\la_2_art::outro_president);
   add_notetrack_custom_function("player_body", "dof_door", maps\createart\la_2_art::outro_door);
-  add_vehicle_anim("convoy_potus_cougar", % v_la_10_02_promnightsam_cougar);
+  add_vehicle_anim("convoy_potus_cougar", %v_la_10_02_promnightsam_cougar);
   add_scene("outro_g20_1_noharper", "anim_end_struct");
-  add_vehicle_anim("convoy_g20_1", % v_la_10_02_promnightsam_cougar02);
+  add_vehicle_anim("convoy_g20_1", %v_la_10_02_promnightsam_cougar02);
   add_scene("outro_g20_2_noharper", "anim_end_struct");
-  add_vehicle_anim("convoy_g20_2", % v_la_10_02_promnightsam_cougar03);
+  add_vehicle_anim("convoy_g20_2", %v_la_10_02_promnightsam_cougar03);
 }
 
 #using_animtree("generic_human");

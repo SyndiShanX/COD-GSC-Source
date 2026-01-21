@@ -42,7 +42,7 @@ getNextFlashAnim() {
 
 flashBangAnim(animation) {
   self endon("killanimscript");
-  self setflaggedanimknoball("flashed_anim", animation, % body, 0.2, randomFloatRange(0.9, 1.1));
+  self setflaggedanimknoball("flashed_anim", animation, %body, 0.2, randomFloatRange(0.9, 1.1));
   self animscripts\shared::DoNoteTracks("flashed_anim");
 }
 

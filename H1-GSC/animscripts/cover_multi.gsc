@@ -57,12 +57,10 @@ covermulti_think() {
   else if(var_6 < -12)
     var_8 = ["right", "over", "left"];
   else if(var_6 > 5) {
-    var_8 = [["left", "over"], "right"
-    ];
+    var_8 = [["left", "over"], "right"];
     var_7 = 15000;
   } else if(var_6 < -5) {
-    var_8 = [["right", "over"], "left"
-    ];
+    var_8 = [["right", "over"], "left"];
     var_7 = 15000;
   } else {
     var_8 = ["over", ["right", "left"]];
@@ -225,7 +223,7 @@ covermulti_dotransition(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_6)) {
     return;
   }
-  self setflaggedanimknoball("cover_multi_trans", var_6, % body, 1, 0.2, 1);
+  self setflaggedanimknoball("cover_multi_trans", var_6, %body, 1, 0.2, 1);
   animscripts\shared::donotetracks("cover_multi_trans");
 }
 

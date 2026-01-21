@@ -460,9 +460,7 @@ dog_death() {
     }
 
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](self.attacker, self, event);
+      [[level.hero_power_update]](self.attacker, self, event);
     }
 
     if(randomintrange(0, 100) >= 80) {
@@ -514,8 +512,7 @@ dog_death() {
 
   bhtnactionstartevent(self, "death");
   self notify(#"bhtn_action_notify", {
-    #action: "death"
-  });
+    #action: "death"});
 }
 
 dog_explode_fx(dog, origin) {
@@ -556,8 +553,7 @@ dog_behind_audio() {
   self waittill(#"dog_running", # "dog_combat");
   bhtnactionstartevent(self, "close");
   self notify(#"bhtn_action_notify", {
-    #action: "close"
-  });
+    #action: "close"});
   wait 3;
 
   while(true) {
@@ -570,8 +566,7 @@ dog_behind_audio() {
         if(abs(dogangle) > 90 && distance2d(self.origin, players[i].origin) > 100) {
           bhtnactionstartevent(self, "close");
           self notify(#"bhtn_action_notify", {
-            #action: "close"
-          });
+            #action: "close"});
           wait 3;
         }
       }
@@ -654,8 +649,7 @@ dog_stalk_audio() {
   while(true) {
     bhtnactionstartevent(self, "ambient");
     self notify(#"bhtn_action_notify", {
-      #action: "ambient"
-    });
+      #action: "ambient"});
     wait randomfloatrange(3, 6);
   }
 }

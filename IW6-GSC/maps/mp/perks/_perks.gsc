@@ -518,9 +518,7 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
       victim thread maps\mp\perks\_perkfunctions::setPainted(attacker);
     }
 
-    if(IsPlayer(attacker) &&
-      (attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest"))) {} else if(IsPlayer(attacker) &&
-      (attacker _hasPerk("specialty_bulletdamage") || attacker _hasPerk("specialty_moredamage"))) {
+    if(IsPlayer(attacker) && (attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest"))) {} else if(IsPlayer(attacker) && (attacker _hasPerk("specialty_bulletdamage") || attacker _hasPerk("specialty_moredamage"))) {
       damageAdd += damage * level.bulletDamageMod;
     } else if(victim _hasPerk("specialty_armorvest")) {
       damageAdd -= damage * level.armorVestMod;
@@ -547,9 +545,7 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
     }
 
     if(isPlayer(attacker)) {
-      if(attacker != victim &&
-        (attacker IsItemUnlocked("specialty_paint") && attacker _hasPerk("specialty_paint")) &&
-        !isKillstreakWeapon(sWeapon)) {
+      if(attacker != victim && (attacker IsItemUnlocked("specialty_paint") && attacker _hasPerk("specialty_paint")) && !isKillstreakWeapon(sWeapon)) {
         if(!victim isPainted())
           attacker maps\mp\gametypes\_missions::processChallenge("ch_paint_pro");
 
@@ -569,21 +565,13 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
       victim thread thermoDebuffWatcher();
     }
 
-    if(isPlayer(attacker) &&
-      weaponInheritsPerks(sWeapon) &&
-      (attacker _hasPerk("specialty_explosivedamage") && victim _hasPerk("_specialty_blastshield"))) {} else if(isPlayer(attacker) &&
-      weaponInheritsPerks(sWeapon) &&
-      !isKillstreakWeapon(sWeapon) &&
-      attacker _hasPerk("specialty_explosivedamage")) {
+    if(isPlayer(attacker) && weaponInheritsPerks(sWeapon) && (attacker _hasPerk("specialty_explosivedamage") && victim _hasPerk("_specialty_blastshield"))) {} else if(isPlayer(attacker) && weaponInheritsPerks(sWeapon) && !isKillstreakWeapon(sWeapon) && attacker _hasPerk("specialty_explosivedamage")) {
       damageAdd += damage * level.explosiveDamageMod;
-    } else if(victim _hasPerk("_specialty_blastshield") && !weaponIgnoresBlastShield(sWeapon) &&
-      (!isDefined(inflictor) || !isDefined(inflictor.stuckEnemyEntity) || inflictor.stuckEnemyEntity != victim)) {
+    } else if(victim _hasPerk("_specialty_blastshield") && !weaponIgnoresBlastShield(sWeapon) && (!isDefined(inflictor) || !isDefined(inflictor.stuckEnemyEntity) || inflictor.stuckEnemyEntity != victim)) {
       passedThroughDamage = int(damage * level.blastShieldMod);
 
-      if(maps\mp\gametypes\_weapons::isGrenade(sWeapon) ||
-        isWeaponAffectedByBlastShield(sWeapon)
-
-      ) {
+      if(maps\mp\gametypes\_weapons::isGrenade(sWeapon) || isWeaponAffectedByBlastShield(sWeapon)
+) {
         passedThroughDamage = clamp(passedThroughDamage, 0, level.blastShieldClamp);
       }
 
@@ -708,11 +696,7 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
         break;
       }
       default: {
-        if(sMeansOfDeath != "MOD_FALLING" &&
-          sMeansOfDeath != "MOD_MELEE" &&
-          !isHeadShot(sWeapon, sHitLoc, sMeansOfDeath, attacker) &&
-          !isFMJDamage(sWeapon, sMeansOfDeath, attacker)
-        ) {
+        if(sMeansOfDeath != "MOD_FALLING" && sMeansOfDeath != "MOD_MELEE" && !isHeadShot(sWeapon, sHitLoc, sMeansOfDeath, attacker) && !isFMJDamage(sWeapon, sMeansOfDeath, attacker)) {
           victim.lightArmorHP -= (damage + damageAdd);
           damage = 0;
           damageAdd = 0;

@@ -54,9 +54,7 @@ init() {
     }
 
     if(isDefined(level.zone_setups[level.zoneindex])) {
-      [
-        [level.zone_setups[level.zoneindex]]
-      ]();
+      [[level.zone_setups[level.zoneindex]]]();
     } else {
       function_c41ad9f9();
     }

@@ -52,8 +52,7 @@ fireController_minigun(turret) {
   isFiring = false;
   isSpinning = false;
 
-  // the weapon will need periodic operator "maintenance"
-  turret.secsOfFiringBeforeReload = 15; // secs
+  // the weapon will need periodic operator "maintenance"turret.secsOfFiringBeforeReload = 15; // secs
   turret.fireTime = 0;
 
   self DoAim(turret);

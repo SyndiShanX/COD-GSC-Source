@@ -18,10 +18,10 @@ moon_quad_prespawn() {
   self.no_gib = true;
   self.zombie_can_sidestep = true;
   self.zombie_can_forwardstep = true;
-  self.sideStepAnims["step_left"] = array( % ai_zombie_quad_phaseleft_long_a, % ai_zombie_quad_phaseleft_long_b, % ai_zombie_quad_phaseleft_short_a, % ai_zombie_quad_phaseleft_short_b);
-  self.sideStepAnims["step_right"] = array( % ai_zombie_quad_phaseright_long_a, % ai_zombie_quad_phaseright_long_b, % ai_zombie_quad_phaseright_short_a, % ai_zombie_quad_phaseright_short_b);
-  self.sideStepAnims["roll_forward"] = array( % ai_zombie_quad_phaseforward_long_a, % ai_zombie_quad_phaseforward_long_b, % ai_zombie_quad_phaseforward_short_a, % ai_zombie_quad_phaseforward_short_b);
-  self.sideStepAnims["phase_forward"] = array( % ai_zombie_quad_phaseforward_long_a, % ai_zombie_quad_phaseforward_long_b);
+  self.sideStepAnims["step_left"] = array(%ai_zombie_quad_phaseleft_long_a, %ai_zombie_quad_phaseleft_long_b, %ai_zombie_quad_phaseleft_short_a, %ai_zombie_quad_phaseleft_short_b);
+  self.sideStepAnims["step_right"] = array(%ai_zombie_quad_phaseright_long_a, %ai_zombie_quad_phaseright_long_b, %ai_zombie_quad_phaseright_short_a, %ai_zombie_quad_phaseright_short_b);
+  self.sideStepAnims["roll_forward"] = array(%ai_zombie_quad_phaseforward_long_a, %ai_zombie_quad_phaseforward_long_b, %ai_zombie_quad_phaseforward_short_a, %ai_zombie_quad_phaseforward_short_b);
+  self.sideStepAnims["phase_forward"] = array(%ai_zombie_quad_phaseforward_long_a, %ai_zombie_quad_phaseforward_long_b);
   self.sideStepFunc = ::moon_quad_sidestep;
   self.fastSprintFunc = ::moon_quad_fastSprint;
 }

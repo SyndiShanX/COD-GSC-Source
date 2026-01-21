@@ -217,9 +217,7 @@ function_af59b7a5(entity) {
 
   if(gettime() > entity.var_84f9cc2e && isDefined(entity.favoriteenemy) && isalive(entity.favoriteenemy)) {
     if(isDefined(level.enemy_location_override_func)) {
-      goalpos = [
-        [level.enemy_location_override_func]
-      ](entity, entity.favoriteenemy);
+      goalpos = [[level.enemy_location_override_func]](entity, entity.favoriteenemy);
 
       if(isDefined(goalpos)) {
         entity setgoal(goalpos);

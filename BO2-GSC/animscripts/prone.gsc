@@ -70,16 +70,16 @@ proneturningthread(threadtospawn, killmestring) {
           else if(amount > 0.99)
             amount = 0.99;
 
-          self setanimknob( % prone_straight, 1.0 - amount, 0.1, 1);
-          self setanim( % prone_right45, amount, 0.1, 1);
-          self setanim( % prone_left45, 0.01, 0.1, 1);
+          self setanimknob(%prone_straight, 1.0 - amount, 0.1, 1);
+          self setanim(%prone_right45, amount, 0.1, 1);
+          self setanim(%prone_left45, 0.01, 0.1, 1);
         }
 
         if(yawdelta > 45) {
           self notify("kill ProneTurningThread children");
-          self setflaggedanimknobrestart("turn anim", % prone_turn_right, 1, 0.1, 1);
+          self setflaggedanimknobrestart("turn anim", %prone_turn_right, 1, 0.1, 1);
           self animscripts\shared::donotetracks("turn anim");
-          self updateprone( % prone_shootfeet_straight45up, % prone_shootfeet_straight45down, 1, 0.1, 1);
+          self updateprone(%prone_shootfeet_straight45up, %prone_shootfeet_straight45down, 1, 0.1, 1);
 
           if(isDefined(threadtospawn))
             self thread[[threadtospawn]]("kill ProneTurningThread children");
@@ -93,16 +93,16 @@ proneturningthread(threadtospawn, killmestring) {
           else if(amount > 0.99)
             amount = 0.99;
 
-          self setanimknob( % prone_straight, 1.0 - amount, 0.1, 1);
-          self setanim( % prone_left45, amount, 0.1, 1);
-          self setanim( % prone_right45, 0.01, 0.1, 1);
+          self setanimknob(%prone_straight, 1.0 - amount, 0.1, 1);
+          self setanim(%prone_left45, amount, 0.1, 1);
+          self setanim(%prone_right45, 0.01, 0.1, 1);
         }
 
         if(yawdelta < -45) {
           self notify("kill ProneTurningThread children");
-          self setflaggedanimknobrestart("turn anim", % prone_turn_left, 1, 0.1, 1);
+          self setflaggedanimknobrestart("turn anim", %prone_turn_left, 1, 0.1, 1);
           self animscripts\shared::donotetracks("turn anim");
-          self updateprone( % prone_shootfeet_straight45up, % prone_shootfeet_straight45down, 1, 0.1, 1);
+          self updateprone(%prone_shootfeet_straight45up, %prone_shootfeet_straight45down, 1, 0.1, 1);
 
           if(isDefined(threadtospawn))
             self thread[[threadtospawn]]("kill ProneTurningThread children");
@@ -208,7 +208,7 @@ proneshootvolley() {
   self animscripts\face::setidleface(anim.aimface);
   self.a.usingproneleftandright = 1;
   self notify("Update prone aim");
-  self setanimknob( % prone, 1, 0.15, 1);
+  self setanimknob(%prone, 1, 0.15, 1);
   rand = randomfloat(1);
   self set3flaggedanimknobs("shootanim", shootanims, 1, 0.15, 0);
   wait(rand);

@@ -250,9 +250,7 @@ gib_on_blundergat_damage(refs, point, weaponname) {
   new_gib_ref = [];
 
   if(isDefined(level.no_gib_in_wolf_area)) {
-    if([
-        [level.no_gib_in_wolf_area]
-      ]())
+    if([[level.no_gib_in_wolf_area]]())
       return new_gib_ref;
   }
 

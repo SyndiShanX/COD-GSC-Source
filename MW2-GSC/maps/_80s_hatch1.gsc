@@ -18,7 +18,7 @@ main(model, type) {
   build_destructible("vehicle_80s_hatch1_tan_destructible_mp", "vehicle_80s_hatch1_tan");
   build_destructible("vehicle_80s_hatch1_yel_destructible_mp", "vehicle_80s_hatch1_yel");
 
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
 
   //	build_treadfx();
 
@@ -80,11 +80,7 @@ include,destructible_vehicle_80s_hatch1_brn_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_hatch1_brn_destructible_mp"
-default:"vehicletype" "80s_hatch1"
-default:"script_team" "allies"
-
-*/
+defaultmdl="vehicle_80s_hatch1_brn_destructible_mp"default:"vehicletype" "80s_hatch1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_hatch1_green_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -97,10 +93,7 @@ include,destructible_vehicle_80s_hatch1_green_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_hatch1_green_destructible_mp"
-default:"vehicletype" "80s_hatch1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_hatch1_green_destructible_mp"default:"vehicletype" "80s_hatch1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_hatch1_red_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -113,10 +106,7 @@ include,destructible_vehicle_80s_hatch1_red_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_hatch1_red_destructible_mp"
-default:"vehicletype" "80s_hatch1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_hatch1_red_destructible_mp"default:"vehicletype" "80s_hatch1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_hatch1_silv_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -129,10 +119,7 @@ include,destructible_vehicle_80s_hatch1_silv_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_hatch1_silv_destructible_mp"
-default:"vehicletype" "80s_hatch1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_hatch1_silv_destructible_mp"default:"vehicletype" "80s_hatch1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_hatch1_tan_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -145,10 +132,7 @@ include,destructible_vehicle_80s_hatch1_tan_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_hatch1_tan_destructible_mp"
-default:"vehicletype" "80s_hatch1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_hatch1_tan_destructible_mp"default:"vehicletype" "80s_hatch1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_hatch1_yel_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -161,7 +145,5 @@ include,destructible_vehicle_80s_hatch1_yel_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_hatch1_yel_destructible_mp"
-default:"vehicletype" "80s_hatch1"
-default:"script_team" "allies"
+defaultmdl="vehicle_80s_hatch1_yel_destructible_mp"default:"vehicletype" "80s_hatch1"default:"script_team" "allies"
 */

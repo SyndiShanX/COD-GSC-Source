@@ -189,7 +189,7 @@ func_973A(var_0, var_1) {
         case "drone_receiver":
           var_14 = scripts\engine\utility::array_add(var_14, var_6);
           var_6 glinton(#animtree);
-          var_6 give_attacker_kill_rewards( % machinery_landing_drone_recovery, 1, 0, 0);
+          var_6 give_attacker_kill_rewards(%machinery_landing_drone_recovery, 1, 0, 0);
           var_6 linkto(var_4);
           break;
         case "ret_hangar_door":
@@ -442,19 +442,19 @@ func_E403() {
 
 func_C5FE(var_0) {
   foreach(var_2 in self.var_747E[var_0]) {
-    var_2 setanimknob( % vh_mil_air_un_retribution_ftl_open);
+    var_2 setanimknob(%vh_mil_air_un_retribution_ftl_open);
     playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_00_panel_aggregate_a_startup" + var_2.var_101AD), var_2.var_7601, "tag_origin");
     playFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_02_panel_cool_charge_a_startup" + var_2.var_EB9C), var_2.var_7601, "tag_origin");
   }
 
-  var_4 = getanimlength( % vh_mil_air_un_retribution_ftl_open);
+  var_4 = getanimlength(%vh_mil_air_un_retribution_ftl_open);
   wait(var_4);
 }
 
 func_C5FF(var_0) {
   foreach(var_2 in self.var_747E[var_0]) {
-    var_2 setanimknob( % vh_mil_air_un_retribution_ftl_open);
-    var_2 func_82B0( % vh_mil_air_un_retribution_ftl_open, 1.0);
+    var_2 setanimknob(%vh_mil_air_un_retribution_ftl_open);
+    var_2 func_82B0(%vh_mil_air_un_retribution_ftl_open, 1.0);
   }
 }
 
@@ -464,12 +464,12 @@ func_747B(var_0) {
 
 func_4269(var_0) {
   foreach(var_2 in self.var_747E[var_0]) {
-    var_2 setanimknob( % vh_mil_air_un_retribution_ftl_open, 1, 0.2, -1);
+    var_2 setanimknob(%vh_mil_air_un_retribution_ftl_open, 1, 0.2, -1);
     stopFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_00_panel_aggregate_a_startup" + var_2.var_101AD), var_2.var_7601, "tag_origin");
     stopFXOnTag(scripts\engine\utility::getfx("vfx_veh_retr_ftl_02_panel_cool_charge_a_startup" + var_2.var_EB9C), var_2.var_7601, "tag_origin");
   }
 
-  var_4 = getanimlength( % vh_mil_air_un_retribution_ftl_open);
+  var_4 = getanimlength(%vh_mil_air_un_retribution_ftl_open);
   wait(var_4);
 }
 

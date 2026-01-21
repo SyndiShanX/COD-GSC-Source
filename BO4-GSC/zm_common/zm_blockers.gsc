@@ -312,8 +312,7 @@ function_5989dd12(a_doors) {
 
 force_open_door(e_activator) {
   self notify(#"trigger", {
-    #activator: e_activator,
-    #is_forced: 1
+    #activator: e_activator, #is_forced: 1
   });
 }
 
@@ -847,8 +846,7 @@ door_opened(cost, quick_close) {
   }
 
   level notify(#"door_opened", {
-    #e_player: self.purchaser,
-    #t_blocker: self
+    #e_player: self.purchaser, #t_blocker: self
   });
 
   if(isDefined(self.doors)) {
@@ -960,8 +958,7 @@ door_solid_thread() {
 
 door_solid_thread_anim() {
   self waittillmatch({
-    #notetrack: "end"
-  }, # "door_anim");
+    #notetrack: "end"}, # "door_anim");
   self.door_moving = undefined;
 
   while(true) {
@@ -1132,8 +1129,7 @@ debris_think() {
 
       zm_utility::play_sound_at_pos("purchase", self.origin);
       level notify(#"junk purchased", {
-        #e_player: who,
-        #t_blocker: self
+        #e_player: who, #t_blocker: self
       });
       move_ent = undefined;
       a_clip = [];
@@ -2050,8 +2046,7 @@ blocker_trigger_think() {
 
       player handle_post_board_repair_rewards(cost, self);
       level notify(#"board_repaired", {
-        #player: player,
-        #s_board: self
+        #player: player, #s_board: self
       });
 
       if(zm_utility::all_chunks_intact(self, self.barrier_chunks)) {
@@ -2761,9 +2756,7 @@ quantum_bomb_open_nearest_door_result(position) {
   for(i = 0; i < zombie_doors.size; i++) {
     if(distancesquared(zombie_doors[i].origin, position) < range_squared) {
       zombie_doors[i] force_open_door(self);
-      [
-        [level.var_e0769ff8]
-      ](position);
+      [[level.var_e0769ff8]](position);
       return;
     }
   }
@@ -2773,9 +2766,7 @@ quantum_bomb_open_nearest_door_result(position) {
   for(i = 0; i < zombie_airlock_doors.size; i++) {
     if(distancesquared(zombie_airlock_doors[i].origin, position) < range_squared) {
       zombie_airlock_doors[i] force_open_door(self);
-      [
-        [level.var_e0769ff8]
-      ](position);
+      [[level.var_e0769ff8]](position);
       return;
     }
   }
@@ -2785,9 +2776,7 @@ quantum_bomb_open_nearest_door_result(position) {
   for(i = 0; i < zombie_debris.size; i++) {
     if(distancesquared(zombie_debris[i].origin, position) < range_squared) {
       zombie_debris[i] force_open_door(self);
-      [
-        [level.var_e0769ff8]
-      ](position);
+      [[level.var_e0769ff8]](position);
       return;
     }
   }

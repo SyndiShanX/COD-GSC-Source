@@ -113,9 +113,7 @@ should_put_player_outline_on(var_0) {
   }
 
   if(isDefined(level.shouldplayeroutline)) {
-    if(![
-        [level.shouldplayeroutline]
-      ](self, var_0)) {
+    if(![[level.shouldplayeroutline]](self, var_0)) {
       return 0;
     }
   }

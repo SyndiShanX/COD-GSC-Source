@@ -122,18 +122,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   idamage = function_74a5d514(eattacker, idamage, smeansofdeath, weapon, shitloc);
   idamage = make_sure_damage_is_not_zero(idamage, idflags & 2048);
   params = {
-    #einflictor: einflictor,
-    #eattacker: eattacker,
-    #idamage: idamage,
-    #smeansofdeath: smeansofdeath,
-    #weapon: weapon,
-    #vdir: vdir,
-    #shitloc: shitloc,
-    #idflags: idflags,
-    #vpoint: vpoint,
-    #vdamageorigin: vdamageorigin,
-    #boneindex: boneindex,
-    #vsurfacenormal: vsurfacenormal
+    #einflictor: einflictor, #eattacker: eattacker, #idamage: idamage, #smeansofdeath: smeansofdeath, #weapon: weapon, #vdir: vdir, #shitloc: shitloc, #idflags: idflags, #vpoint: vpoint, #vdamageorigin: vdamageorigin, #boneindex: boneindex, #vsurfacenormal: vsurfacenormal
   };
   self callback::callback(#"on_player_damage", params);
 
@@ -245,8 +234,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   if(weapon.isemp && smeansofdeath == "MOD_GRENADE_SPLASH" && !isDefined(weapon.var_13600e25)) {
     if(!self hasperk(#"specialty_immuneemp")) {
       self notify(#"emp_grenaded", {
-        #attacker: eattacker,
-        #position: vpoint
+        #attacker: eattacker, #position: vpoint
       });
     }
   }
@@ -886,15 +874,13 @@ apply_damage_to_armor(einflictor, eattacker, idamage, idflags, smeansofdeath, we
 
   if(friendlyfire && !function_1727a023(ignore_round_start_friendly_fire, eattacker)) {
     return {
-      #idflags: idflags,
-      #idamage: idamage
+      #idflags: idflags, #idamage: idamage
     };
   }
 
   if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && einflictor.stucktoplayer == victim) {
     return {
-      #idflags: idflags,
-      #idamage: victim.health
+      #idflags: idflags, #idamage: victim.health
     };
   }
 
@@ -918,8 +904,7 @@ apply_damage_to_armor(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   }
 
   return {
-    #idflags: idflags,
-    #idamage: idamage
+    #idflags: idflags, #idamage: idamage
   };
 }
 
@@ -1303,9 +1288,7 @@ function_f4f77cfb(weapon, einflictor) {
 
   if(isDefined(einflictor) && isDefined(einflictor.script_noteworthy)) {
     if(isDefined(level.overrideweaponfunc)) {
-      weapon = [
-        [level.overrideweaponfunc]
-      ](weapon, einflictor.script_noteworthy);
+      weapon = [[level.overrideweaponfunc]](weapon, einflictor.script_noteworthy);
     }
   }
 

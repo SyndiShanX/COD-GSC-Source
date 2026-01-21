@@ -420,9 +420,7 @@ compareSizesFx(org, array, dist, compareFunc) {
   dist = distance(struct.v["origin"], org);
   for(i = 1; i < keys.size; i++) {
     newdist = distance(array[keys[i]].v["origin"], org);
-    if([
-        [compareFunc]
-      ](newDist, dist)) {
+    if([[compareFunc]](newDist, dist)) {
       continue;
     }
     dist = newdist;
@@ -453,9 +451,7 @@ compareSizes(org, array, dist, compareFunc) {
   dist = Distance(ent.origin, org);
   for(i = 1; i < keys.size; i++) {
     newdist = distance(array[keys[i]].origin, org);
-    if([
-        [compareFunc]
-      ](newDist, dist)) {
+    if([[compareFunc]](newDist, dist)) {
       continue;
     }
     dist = newdist;
@@ -3806,9 +3802,7 @@ display_hint(hint) {
     return;
   }
   if(isDefined(level.trigger_hint_func[hint])) {
-    if([
-        [level.trigger_hint_func[hint]]
-      ]()) {
+    if([[level.trigger_hint_func[hint]]]()) {
       return;
     }
     HintPrint(level.trigger_hint_string[hint], level.trigger_hint_func[hint]);

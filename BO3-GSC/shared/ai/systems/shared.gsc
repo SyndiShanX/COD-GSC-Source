@@ -333,9 +333,7 @@ function donotetracksforeverproc(notetracksfunc, flagname, killstring, customfun
     timetaken = gettime() - time;
     if(timetaken < 0.05) {
       time = gettime();
-      returnednote = [
-        [notetracksfunc]
-      ](flagname, customfunction, debugidentifier);
+      returnednote = [[notetracksfunc]](flagname, customfunction, debugidentifier);
       timetaken = gettime() - time;
       if(timetaken < 0.05) {
         println(((((((gettime() + "") + debugidentifier) + "") + flagname) + "") + returnednote) + "");

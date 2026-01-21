@@ -50,14 +50,7 @@ function_95a5b5c2(obj_type, label, team, origin, player) {
     var_cfad67d4 = ishash(team) ? team : hash(team);
     clientid = isDefined(player) && isDefined(player.clientid) ? player.clientid : -1;
     function_92d1707f(#"hash_d424efe4db1dff7", {
-      #gametime: function_f8d53445(),
-      #objtype: obj_type,
-      #label: label,
-      #team: var_cfad67d4,
-      #playerx: origin[0],
-      #playery: origin[1],
-      #playerz: origin[2],
-      #clientid: clientid
+      #gametime: function_f8d53445(), #objtype: obj_type, #label: label, #team: var_cfad67d4, #playerx: origin[0], #playery: origin[1], #playerz: origin[2], #clientid: clientid
     });
   }
 }
@@ -198,13 +191,7 @@ commit_spawn_data() {
 
   specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
   mpplayerlives = {
-    #gametime: function_f8d53445(),
-    #spawnid: getplayerspawnid(self),
-    #lifescore: self._bbdata[# "score"],
-    #lifemomentum: self._bbdata[# "momentum"],
-    #lifetime: gettime() - self._bbdata[# "spawntime"],
-    #name: self.name,
-    #specialist: specialistindex
+    #gametime: function_f8d53445(), #spawnid: getplayerspawnid(self), #lifescore: self._bbdata[# "score"], #lifemomentum: self._bbdata[# "momentum"], #lifetime: gettime() - self._bbdata[# "spawntime"], #name: self.name, #specialist: specialistindex
   };
   function_92d1707f(#"hash_6fc210ad5f081ce8", mpplayerlives);
   self function_6661621a();

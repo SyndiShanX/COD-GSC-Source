@@ -506,7 +506,7 @@ enemy_death_watcher() {
 ai_claymore_plant() {
   self endon("death");
   self.a.deathforceragdoll = 1;
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   claymore = spawn_model("weapon_claymore", self gettagorigin("tag_inhand"), self gettagangles("tag_inhand"));
   claymore linkto(self, "tag_inhand", (0, 0, 0), vectorscale((1, 0, 0), 90.0));
 
@@ -514,7 +514,7 @@ ai_claymore_plant() {
 
   self thread ai_claymore_plant_cleanup(claymore);
   self.a.movement = "stop";
-  self setflaggedanimknobrestart("plantAnim", % ai_plant_claymore, 1, 0.2, 1);
+  self setflaggedanimknobrestart("plantAnim", %ai_plant_claymore, 1, 0.2, 1);
   self animscripts\shared::donotetracks("plantAnim", ::ai_claymore_handle_notetracks);
   self.a.deathforceragdoll = 0;
   self findbestcovernode();
@@ -927,7 +927,7 @@ spawn_ai_package_cargo(transport) {
 chopper_unload_cargo(pkg_ref, team, squadid) {
   self endon("death");
   self waittill("unload");
-  self setflaggedanimrestart("door_open", % v_vtol_doors_open, 1, 0.2, 1);
+  self setflaggedanimrestart("door_open", %v_vtol_doors_open, 1, 0.2, 1);
   self waittillmatch("door_open", "end");
 
   if(issubstr(pkg_ref.ref, "quadrotor"))
@@ -976,10 +976,10 @@ chopper_unload_cargo_quad(pkg_ref, team, squadid, cb) {
   throwtags = [];
   throwtags[0] = "tag_weapon_right";
   throwtags[1] = "tag_weapon_left";
-  assert(animhasnotetrack( % ai_crew_vtol_quad_launch, "quad_launch"));
+  assert(animhasnotetrack(%ai_crew_vtol_quad_launch, "quad_launch"));
 
   for(i = 0; i < pkg_ref.units.size; i = i + 2) {
-    guy animscripted("throw", tagorigin, tagangles, % ai_crew_vtol_quad_launch);
+    guy animscripted("throw", tagorigin, tagangles, %ai_crew_vtol_quad_launch);
     guy waittillmatch("throw", "quad_launch");
     quads = [];
 
@@ -1043,7 +1043,7 @@ chopper_unload_cargo_metalstorm(pkg_ref, team, squadid) {
   asd linkto(animrig, "asd_attach_jnt");
   asd maps\_vehicle::godon();
   asd.ignoreme = 1;
-  animrig setflaggedanimrestart("drop", % fxanim_gp_vtol_drop_asd_drone_anim, 1, 0.2, 1);
+  animrig setflaggedanimrestart("drop", %fxanim_gp_vtol_drop_asd_drone_anim, 1, 0.2, 1);
   wait 0.5;
   asd show();
   animrig waittillmatch("drop", "drop_asd");
@@ -1089,7 +1089,7 @@ chopper_unload_cargo_claw(pkg_ref, team, squadid) {
     claw.animname = "dropoff_claw";
     claw.ai_ref = ai_ref;
     claw maps\_so_rts_squad::addaitosquad(squadid);
-    animrig setflaggedanimrestart("drop", % fxanim_gp_vtol_drop_claw_anim, 1, 0.2, 1);
+    animrig setflaggedanimrestart("drop", %fxanim_gp_vtol_drop_claw_anim, 1, 0.2, 1);
     animrig waittillmatch("drop", "drop_claw");
     claw unlink();
     claw thread maps\_anim::anim_single(claw, "claw_touchdown");

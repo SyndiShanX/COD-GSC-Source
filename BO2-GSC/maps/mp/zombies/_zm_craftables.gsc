@@ -854,9 +854,7 @@ piece_spawn_at(origin, angles, use_random_start) {
   self.model setModel(self.modelname);
 
   if(isDefined(level.equipment_safe_to_drop)) {
-    if(![
-        [level.equipment_safe_to_drop]
-      ](self.model)) {
+    if(![[level.equipment_safe_to_drop]](self.model)) {
       origin = self.start_origin;
       angles = self.start_angles;
       self.model.origin = origin;

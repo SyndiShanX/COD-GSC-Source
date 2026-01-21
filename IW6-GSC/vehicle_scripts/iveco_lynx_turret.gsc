@@ -10,7 +10,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_unload_groups(::unload_groups);
   maps\_vehicle::build_aianims(::setanims_turret, ::set_vehicle_anims);
-  maps\_vehicle::build_drive( % iveco_lynx_idle_driving_idle_forward, % iveco_lynx_idle_driving_idle_forward, 10);
+  maps\_vehicle::build_drive(%iveco_lynx_idle_driving_idle_forward, %iveco_lynx_idle_driving_idle_forward, 10);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("axis");

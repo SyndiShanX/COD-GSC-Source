@@ -56,9 +56,7 @@ idle() {
     node = [[getfunc]](self.target, "targetname");
 
     while(isDefined(node.target))
-      node = [
-        [getfunc]
-      ](node.target, "targetname");
+      node = [[getfunc]](node.target, "targetname");
   }
 
   anime = node.script_animation;

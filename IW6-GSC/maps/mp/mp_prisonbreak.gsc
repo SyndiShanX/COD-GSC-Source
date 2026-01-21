@@ -43,8 +43,7 @@ main() {
   game["attackers"] = "allies";
   game["defenders"] = "axis";
 
-  if(level.gametype == "sd" ||
-    level.gameType == "sr") {
+  if(level.gametype == "sd" || level.gameType == "sr") {
     level.srKillCamOverridePosition = [];
     level.srKillCamOverridePosition["_a"] = (-1158, 952, 1139);
 
@@ -640,7 +639,7 @@ tree_bridge_run() {
   self.tree maps\mp\_movers::notify_moving_platform_invalid();
   self.animated_prop ScriptModelPlayAnimDeltaMotion("mp_prisonbreak_tree_fall");
 
-  anim_length = GetAnimLength( % mp_prisonbreak_tree_fall);
+  anim_length = GetAnimLength(%mp_prisonbreak_tree_fall);
   fall_time = anim_length - 0.3;
 
   sound_origin = GetEnt("tree_impact_sound_origin", "targetname");
@@ -697,7 +696,7 @@ log_piles_precache() {
   level.log_visual_link_joints["ten_log_roll"] = "j_log_5";
 
   level.log_anim_lengths = [];
-  level.log_anim_lengths["ten_log_roll"] = GetAnimLength( % mp_prisonbreak_log_roll);
+  level.log_anim_lengths["ten_log_roll"] = GetAnimLength(%mp_prisonbreak_log_roll);
 
   level.log_anims = [];
   level.log_anims["ten_log_roll"] = "mp_prisonbreak_log_roll";

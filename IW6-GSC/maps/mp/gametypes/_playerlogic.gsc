@@ -1144,23 +1144,11 @@ removePlayerOnDisconnect() {
 
 initClientDvarsSplitScreenSpecific() {
   if(level.splitScreen || self IsSplitscreenPlayer()) {
-    self SetClientDvars("cg_hudGrenadeIconHeight", "37.5",
-      "cg_hudGrenadeIconWidth", "37.5",
-      "cg_hudGrenadeIconOffset", "75",
-      "cg_hudGrenadePointerHeight", "18",
-      "cg_hudGrenadePointerWidth", "37.5",
-      "cg_hudGrenadePointerPivot", "18 40.5",
-      "cg_fovscale", "0.75");
+    self SetClientDvars("cg_hudGrenadeIconHeight", "37.5", "cg_hudGrenadeIconWidth", "37.5", "cg_hudGrenadeIconOffset", "75", "cg_hudGrenadePointerHeight", "18", "cg_hudGrenadePointerWidth", "37.5", "cg_hudGrenadePointerPivot", "18 40.5", "cg_fovscale", "0.75");
 
     SetDvar("r_materialBloomHQScriptMasterEnable", 0);
   } else {
-    self SetClientDvars("cg_hudGrenadeIconHeight", "25",
-      "cg_hudGrenadeIconWidth", "25",
-      "cg_hudGrenadeIconOffset", "50",
-      "cg_hudGrenadePointerHeight", "12",
-      "cg_hudGrenadePointerWidth", "25",
-      "cg_hudGrenadePointerPivot", "12 27",
-      "cg_fovscale", "1");
+    self SetClientDvars("cg_hudGrenadeIconHeight", "25", "cg_hudGrenadeIconWidth", "25", "cg_hudGrenadeIconOffset", "50", "cg_hudGrenadePointerHeight", "12", "cg_hudGrenadePointerWidth", "25", "cg_hudGrenadePointerPivot", "12 27", "cg_fovscale", "1");
   }
 }
 
@@ -1182,21 +1170,14 @@ initClientDvars() {
   else
     setDvar("cg_drawFriendlyNamesAlways", 0);
 
-  self SetClientDvars("cg_drawSpectatorMessages", 1,
-    "cg_scoreboardPingGraph", 1);
+  self SetClientDvars("cg_drawSpectatorMessages", 1, "cg_scoreboardPingGraph", 1);
 
   self initClientDvarsSplitScreenSpecific();
 
   if(getGametypeNumLives()) {
-    self SetClientDvars("cg_deadChatWithDead", 1,
-      "cg_deadChatWithTeam", 0,
-      "cg_deadHearTeamLiving", 0,
-      "cg_deadHearAllLiving", 0);
+    self SetClientDvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0);
   } else {
-    self SetClientDvars("cg_deadChatWithDead", 0,
-      "cg_deadChatWithTeam", 1,
-      "cg_deadHearTeamLiving", 1,
-      "cg_deadHearAllLiving", 0);
+    self SetClientDvars("cg_deadChatWithDead", 0, "cg_deadChatWithTeam", 1, "cg_deadHearTeamLiving", 1, "cg_deadHearAllLiving", 0);
   }
 
   if(level.teamBased)

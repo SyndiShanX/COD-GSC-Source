@@ -24,7 +24,7 @@ main() {
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
   realheight = startnode.traverse_height - startnode.origin[2];
-  self setflaggedanimknoballrestart("traverse", traverseanim, % body, 1, 0.15, 1);
+  self setflaggedanimknoballrestart("traverse", traverseanim, %body, 1, 0.15, 1);
   thread animscripts\shared::donotetracksforever("traverse", "stop_traverse_notetracks");
   wait 1.5;
   angles = (0, startnode.angles[1], 0);
@@ -63,11 +63,11 @@ main() {
     self playSound("Land_" + self.groundtype);
 
   self notify("stop_traverse_notetracks");
-  self setflaggedanimknoballrestart("traverse", landanim, % body, 1, 0.15, 1);
+  self setflaggedanimknoballrestart("traverse", landanim, %body, 1, 0.15, 1);
   self traversemode("gravity");
   self animscripts\shared::donotetracks("traverse");
   self.a.movement = self.old_anim_movement;
-  self setanimknoballrestart(animscripts\run::getrunanim(), % body, 1, 0.2, 1);
+  self setanimknoballrestart(animscripts\run::getrunanim(), %body, 1, 0.2, 1);
 }
 
 printer(org) {

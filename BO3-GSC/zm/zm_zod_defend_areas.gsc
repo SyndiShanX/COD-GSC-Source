@@ -252,9 +252,7 @@ class careadefend {
         player.is_in_defend_area = undefined;
         self thread defend_failed_hud(player);
       }
-      [
-        [m_func_fail]
-      ](m_arg1);
+      [[m_func_fail]](m_arg1);
   }
 
   function defend_succeeded() {
@@ -277,9 +275,7 @@ class careadefend {
         self thread defend_succeeded_hud(player);
         player zm_score::add_to_player_score(500);
       }
-      [
-        [m_func_succeed]
-      ](m_arg1, m_a_players_involved);
+      [[m_func_succeed]](m_arg1, m_a_players_involved);
     self notify("area_defend_completed");
   }
 
@@ -467,9 +463,7 @@ class careadefend {
       m_n_state = 2;
       m_triggerer = e_triggerer;
       update_usetrigger_hintstring();
-      [
-        [m_func_start]
-      ](m_arg1, m_triggerer);
+      [[m_func_start]](m_arg1, m_triggerer);
       self thread progress_think();
       self thread monitor_defend_event_zombies();
       while(m_n_state != 1) {
@@ -501,9 +495,7 @@ class careadefend {
   function ritual_start_prompt_and_visibility(player) {
     b_is_visible = [[stub.o_defend_area]] - > ritual_start_visible_internal(player);
     if(b_is_visible) {
-      str_msg = [
-        [stub.o_defend_area]
-      ] - > ritual_start_message_internal(player);
+      str_msg = [[stub.o_defend_area]] - > ritual_start_message_internal(player);
       self sethintstring(str_msg);
       thread function_4e035595(player);
     } else {

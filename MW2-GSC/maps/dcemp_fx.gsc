@@ -160,8 +160,7 @@ main() {
   level._effect["rain_1"] = loadfx("weather/rain_1_lite");
   level._effect["rain_0"] = loadfx("misc/blank");
 
-  thread rainInit("none"); // "none" "light" or "hard"	
-  thread playerWeather(); // make the actual rain effect generate around the player
+  thread rainInit("none"); // "none" "light" or "hard"thread playerWeather(); // make the actual rain effect generate around the player
 
   thread footstep_fx();
 }

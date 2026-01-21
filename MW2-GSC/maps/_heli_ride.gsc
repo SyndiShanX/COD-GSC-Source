@@ -18,32 +18,20 @@
 STEPS TO GET GAGS_HELI_RIDE_IN_BLACKHAWK IN GAME:
 1) put this in your GSC before _load::main():
 	maps\_blackhawk::main( "vehicle_blackhawk" );
-2) create a helicopter path with a targetname "heli_ride_in"
-3) On the node that you wish to have the helicopter unload, add the keypair "script_unload" "1"
-4) call this function when you are ready to ride. dig into that function for all the available knobs.
+2) create a helicopter path with a targetname "heli_ride_in"3) On the node that you wish to have the helicopter unload, add the keypair "script_unload" "1"4) call this function when you are ready to ride. dig into that function for all the available knobs.
 	heli = maps\_heli_ride::ride_start();"	
 	
-default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"	
-default:"classname" "misc_prefab"
-default:"model" "prefabs\script_gags\heli_ride_in_blackhawk.map"
-
-*/
+default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"default:"classname" "misc_prefab"default:"model" "prefabs\script_gags\heli_ride_in_blackhawk.map"*/
 
 /*DISABLED gags_heli-ride-in_blackhawk_us (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
 STEPS TO GET GAGS_HELI_RIDE_IN_BLACKHAWK IN GAME:
 1) put this in your GSC before _load::main():
 	maps\_blackhawk::main( "vehicle_blackhawk" );
-2) create a helicopter path with a targetname "heli_ride_in"
-3) On the node that you wish to have the helicopter unload, add the keypair "script_unload" "1"
-4) call this function when you are ready to ride. dig into that function for all the available knobs.
+2) create a helicopter path with a targetname "heli_ride_in"3) On the node that you wish to have the helicopter unload, add the keypair "script_unload" "1"4) call this function when you are ready to ride. dig into that function for all the available knobs.
 	heli = maps\_heli_ride::ride_start();"	
 	
-default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"	
-default:"classname" "misc_prefab"
-default:"model" "prefabs\script_gags\heli_ride_in_blackhawk_us.map"
-
-*/
+default:"wikilink" "http://iwdocs.infinityward.net/ow.asp?GagsHeliRideInBlackhawk"default:"classname" "misc_prefab"default:"model" "prefabs\script_gags\heli_ride_in_blackhawk_us.map"*/
 
 //===========================================================================
 //== FRIENDLY CHOPPER RIDE-IN==

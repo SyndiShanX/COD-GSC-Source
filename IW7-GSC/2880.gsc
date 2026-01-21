@@ -25,7 +25,7 @@ func_CC7F(var_0, var_1) {
   }
 
   wait 0.1;
-  var_0 clearanim( % root, 0.0);
+  var_0 clearanim(%root, 0.0);
 
   if(isDefined(var_0.var_9B89)) {
     if(isDefined(var_1) && var_1) {
@@ -86,7 +86,7 @@ func_CC80(var_0, var_1, var_2) {
 }
 
 func_4179() {
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
 }
 
 func_DC81(var_0) {
@@ -254,8 +254,7 @@ func_DC84(var_0) {
       if(isDefined(var_7.var_1ED4)) {
         var_14 = [
           }
-          [var_7.var_1ED4]
-      ]();
+          [var_7.var_1ED4]]();
 
       var_15 = getanimlength(var_3);
       var_16 = randomintrange(1, 4);
@@ -480,8 +479,7 @@ func_DC83(var_0) {
       if(isDefined(var_6.var_1ED4)) {
         var_10 = [
           }
-          [var_6.var_1ED4]
-      ]();
+          [var_6.var_1ED4]]();
 
       var_16 = getanimlength(var_7);
       var_13 = var_16;
@@ -503,8 +501,7 @@ func_DC83(var_0) {
       if(isDefined(var_6.var_1ED4)) {
         var_10 = [
           }
-          [var_6.var_1ED4]
-      ]();
+          [var_6.var_1ED4]]();
 
       var_6 animscripted("single anim", self.origin, self.angles, var_20, undefined, var_10, 0.2);
       var_18 = getanimlength(var_20);

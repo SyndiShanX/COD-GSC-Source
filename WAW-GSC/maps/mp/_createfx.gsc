@@ -700,9 +700,7 @@ generate_client_fx_log(autosave) {
       filename = "mpclientcreatefx/" + level.script + "_fx.csc";
       file = openfile(filename, "write");
       assertex(file != -1, "File not writeable (maybe you should check it out): " + filename);
-      cfxprintln(file, "
-        cfxprintln(file, "main()"); cfxprintln(file, "{"); println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.csc *** "); cfxprintln(file, "
-          for(i = 0; i < level.createFXent.size; i++) {
+      cfxprintln(file, "cfxprintln(file, "main()"); cfxprintln(file, "{"); println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.csc *** "); cfxprintln(file, "for(i = 0; i < level.createFXent.size; i++) {
             if(file != -1)
               wait .05;
             e = level.createFXent[i];
@@ -748,11 +746,9 @@ generate_client_fx_log(autosave) {
             filename = "mpcreatefx/backup.gsc";
           file = openfile(filename, "write");
           assertex(file != -1, "File not writeable (maybe you should check it out): " + filename);
-          cfxprintln(file, "
-              cfxprintln(file, "main()"); cfxprintln(file, "{");
+          cfxprintln(file, "cfxprintln(file, "main()"); cfxprintln(file, "{");
               if(!autosave)
-                cfxprintln(file, "
-                  limit = 0.1;
+                cfxprintln(file, "limit = 0.1;
                   for(p = 0; p < level.createFXent.size; p++) {
                     ent = level.createFXent[p];
                     origin = [];

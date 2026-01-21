@@ -354,8 +354,7 @@ function_7e94450c() {
   e_brick clientfield::set("" + # "hash_23ba81a7c071845d", 0);
   t_damage delete();
   self notify(#"hash_6858bc0ef6a5b4b1", {
-    #e_player: e_player,
-    #var_2db8b01a: e_brick.scene_ents[# "prop 1"]
+    #e_player: e_player, #var_2db8b01a: e_brick.scene_ents[# "prop 1"]
   });
 }
 
@@ -369,8 +368,7 @@ function_5e0885f9() {
   self clientfield::set("" + # "hash_23ba81a7c071845d", 0);
   waitframe(1);
   self notify(#"hash_6858bc0ef6a5b4b1", {
-    #e_player: s_notify.attacker,
-    #var_2db8b01a: self
+    #e_player: s_notify.attacker, #var_2db8b01a: self
   });
 }
 
@@ -446,8 +444,7 @@ function_aaaf780e(var_87658653, t_damage) {
 
     if(isDefined(self) && self util::is_looking_at(v_lookat) && distance2d(var_87658653.origin, self.origin) < 100) {
       t_damage notify(#"damage", {
-        #mod: "MOD_MELEE",
-        #attacker: self
+        #mod: "MOD_MELEE", #attacker: self
       });
       return;
     }
@@ -864,8 +861,7 @@ on_player_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon,
       self function_41234931(1);
     } else if(self getcurrentweapon() === level.w_sprout) {
       self notify(#"seedling_dropped", {
-        #str_result: "dropped"
-      });
+        #str_result: "dropped"});
     } else if(self flag::get("carrying_light_energy")) {
       self notify(#"hash_3f0faacb0cc98a9", {
         #b_success: 0
@@ -3018,8 +3014,7 @@ function_41cb93cc(e_player) {
   s_quest.var_a1327d58 waittill(#"trigger_activated");
   e_player playSound("zmb_earth_seed_plant");
   e_player notify(#"seedling_dropped", {
-    #str_result: "planted"
-  });
+    #str_result: "planted"});
 }
 
 function_f4b436d5() {
@@ -3052,8 +3047,7 @@ function_9ef120d8() {
 
 function_3462981(s_params) {
   self notify(#"seedling_dropped", {
-    #str_result: "dropped"
-  });
+    #str_result: "dropped"});
 }
 
 function_3b0917e6(eventstruct) {
@@ -3066,8 +3060,7 @@ function_3b0917e6(eventstruct) {
   }
 
   self notify(#"seedling_dropped", {
-    #str_result: "loadout_changed"
-  });
+    #str_result: "loadout_changed"});
 }
 
 function_54da9fac() {
@@ -4607,9 +4600,7 @@ function_e3a8b066(str_hand) {
 
   if(isDefined(level.var_f9a57be7[level.var_65569374].t_damage)) {
     level.var_f9a57be7[level.var_65569374].t_damage notify(#"damage", {
-      #attacker: a_players[0],
-      #mod: "<dev string:x38>"
-    });
+      #attacker: a_players[0], #mod: "<dev string:x38>"});
   } else {
     level.var_f9a57be7[level.var_65569374] dodamage(10000, level.var_f9a57be7[level.var_65569374].origin, a_players[0]);
   }
@@ -4630,8 +4621,7 @@ function_e3a8b066(str_hand) {
 function_9dc3d269() {
   a_players = util::get_active_players();
   a_players[0] notify(#"hash_7fe6ca08732b8a1d", {
-    #b_success: 1,
-    #b_skipped: 1
+    #b_success: 1, #b_skipped: 1
   });
 }
 
@@ -4742,9 +4732,7 @@ function_681ce100() {
       }
 
       level notify(#"ww_gaia_hit", {
-        #player: a_players[0],
-        #e_entity: mdl_chaos,
-        #v_position: v_tag_pos
+        #player: a_players[0], #e_entity: mdl_chaos, #v_position: v_tag_pos
       });
       wait 0.25;
     }
@@ -4769,8 +4757,7 @@ function_9fe8bfeb() {
   s_quest = level.var_d225ea18[# "earth"];
   s_quest.var_8baa00ae = 2;
   a_players[0] notify(#"seedling_dropped", {
-    #str_result: "<dev string:x10f>"
-  });
+    #str_result: "<dev string:x10f>"});
 }
 
 function_dcfed198() {

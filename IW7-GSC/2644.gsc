@@ -80,9 +80,7 @@ init_player_score() {
 component_specific_init(var_0) {
   foreach(var_2 in level.encounter_score_components) {
     if(isDefined(var_2.player_init_func)) {
-      [
-        [var_2.player_init_func]
-      ](var_0);
+      [[var_2.player_init_func]](var_0);
     }
   }
 }
@@ -90,9 +88,7 @@ component_specific_init(var_0) {
 reset_player_encounter_performance(var_0) {
   foreach(var_2 in level.encounter_score_components) {
     if(isDefined(var_2.reset_player_performance_func)) {
-      [
-        [var_2.reset_player_performance_func]
-      ](var_0);
+      [[var_2.reset_player_performance_func]](var_0);
     }
   }
 }
@@ -106,9 +102,7 @@ reset_end_game_score() {
 reset_encounter_performance() {
   foreach(var_1 in level.encounter_score_components) {
     if(isDefined(var_1.reset_team_performance_func)) {
-      [
-        [var_1.reset_team_performance_func]
-      ](var_1);
+      [[var_1.reset_team_performance_func]](var_1);
     }
   }
 

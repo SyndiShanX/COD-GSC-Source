@@ -67,7 +67,7 @@ GetCrouchRunAnim() {
 
 ProneCrawl() {
   self.a.movement = "run";
-  self setflaggedanimknob("runanim", % prone_crawl, 1, .3, self.moveplaybackrate);
+  self setflaggedanimknob("runanim", %prone_crawl, 1, .3, self.moveplaybackrate);
   animscripts\shared::DoNoteTracksForTime(0.25, "runanim");
 }
 
@@ -76,18 +76,18 @@ DoNoteTracksNoShootStandCombat(animName) {
 }
 
 MoveStandCombatOverride() {
-  self clearanim( % combatrun, 0.6);
-  self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
   self setflaggedanimknob("runanim", self.run_combatanim, 1, 0.5);
   DoNoteTracksNoShootStandCombat("runanim");
 }
 
 MoveStandCombatNormal() {
-  self clearanim( % walk_and_run_loops, 0.2);
-  self setanimknob( % combatrun, 1.0, 0.5, self.moveplaybackrate);
+  self clearanim(%walk_and_run_loops, 0.2);
+  self setanimknob(%combatrun, 1.0, 0.5, self.moveplaybackrate);
   decidedAnimation = false;
   if(isDefined(self.sprint) && self.sprint) {
-    self setFlaggedAnimKnob("runanim", % sprint1_loop, 1, 0.5);
+    self setFlaggedAnimKnob("runanim", %sprint1_loop, 1, 0.5);
     decidedAnimation = true;
   } else if(animscripts\move::MayShootWhileMoving() && self.bulletsInClip > 0 && isValidEnemy(self.enemy)) {
     runShootWhileMovingThreads();
@@ -106,23 +106,23 @@ MoveStandCombatNormal() {
         } else {
           weight = enemyyaw / 60.0;
           assertex(weight >= 0 && weight <= 1, weight);
-          self setAnimLimited( % run_n_gun_F, 1.0 - weight, 0.2);
+          self setAnimLimited(%run_n_gun_F, 1.0 - weight, 0.2);
           self setAnimLimited(sideanim, weight, 0.2);
           self setAnimLimited(othersideanim, 0, 0.2);
         }
-        self setFlaggedAnimKnob("runanim", % run_n_gun, 1, 0.3, 0.8);
+        self setFlaggedAnimKnob("runanim", %run_n_gun, 1, 0.3, 0.8);
         self.a.allowedPartialReloadOnTheRunTime = gettime() + 500;
         if(isplayer(self.enemy))
           self updatePlayerSightAccuracy();
         decidedAnimation = true;
       } else if(CanShootWhileRunningBackward()) {
-        self setFlaggedAnimKnob("runanim", % run_n_gun_B, 1, 0.3);
+        self setFlaggedAnimKnob("runanim", %run_n_gun_B, 1, 0.3);
         if(isplayer(self.enemy))
           self updatePlayerSightAccuracy();
         DoNoteTracksNoShootStandCombat("runanim");
         self thread stopShootWhileMovingThreads();
         self notify("stopRunning");
-        self clearAnim( % run_n_gun_B, 0.2);
+        self clearAnim(%run_n_gun_B, 0.2);
         return;
       }
     }
@@ -131,12 +131,7 @@ MoveStandCombatNormal() {
     runAnim = GetRunAnim();
     self setFlaggedAnimKnob("runanim", runAnim, 1, 0.5);
   }
-  self UpdateRunWeightsOnce( %
-    combatrun_forward, %
-    run_lowready_B, %
-    run_lowready_L, %
-    run_lowready_R
-  );
+  self UpdateRunWeightsOnce(%combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
   DoNoteTracksNoShootStandCombat("runanim");
   self thread stopShootWhileMovingThreads();
   self notify("stopRunning");
@@ -213,28 +208,28 @@ GetPredictedYawToEnemy(lookAheadTime) {
 
 MoveStandNoncombatOverride() {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self setflaggedanimknoball("runanim", self.run_noncombatanim, % body, 1, 0.3, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setflaggedanimknoball("runanim", self.run_noncombatanim, %body, 1, 0.3, self.moveplaybackrate);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
 MoveStandNoncombatNormal() {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self setanimknoball( % combatrun, % body, 1, 0.2, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setanimknoball(%combatrun, %body, 1, 0.2, self.moveplaybackrate);
   prerunAnim = GetRunAnim();
   self setflaggedanimknob("runanim", prerunAnim, 1, 0.3);
   animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
-  self setanim( % combatrun_forward, animWeights["front"], 0.2, 1);
-  self setanim( % run_lowready_B, animWeights["back"], 0.2, 1);
-  self setanim( % run_lowready_L, animWeights["left"], 0.2, 1);
-  self setanim( % run_lowready_R, animWeights["right"], 0.2, 1);
+  self setanim(%combatrun_forward, animWeights["front"], 0.2, 1);
+  self setanim(%run_lowready_B, animWeights["back"], 0.2, 1);
+  self setanim(%run_lowready_L, animWeights["left"], 0.2, 1);
+  self setanim(%run_lowready_R, animWeights["right"], 0.2, 1);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
 MoveCrouchRunOverride() {
   self endon("movemode");
-  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, % body, 1, 0.4, self.moveplaybackrate);
+  self setflaggedanimknoball("runanim", self.crouchrun_combatanim, %body, 1, 0.4, self.moveplaybackrate);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
@@ -244,10 +239,10 @@ MoveCrouchRunNormal() {
   self setanimknob(forward_anim, 1, 0.4);
   animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
   self setanim(forward_anim, animWeights["front"], 0.2, 1);
-  self setanim( % crouch_fastwalk_B, animWeights["back"], 0.2, 1);
-  self setanim( % crouch_fastwalk_L, animWeights["left"], 0.2, 1);
-  self setanim( % crouch_fastwalk_R, animWeights["right"], 0.2, 1);
-  self setflaggedanimknoball("runanim", % crouchrun, % body, 1, 0.2, self.moveplaybackrate);
+  self setanim(%crouch_fastwalk_B, animWeights["back"], 0.2, 1);
+  self setanim(%crouch_fastwalk_L, animWeights["left"], 0.2, 1);
+  self setanim(%crouch_fastwalk_R, animWeights["right"], 0.2, 1);
+  self setflaggedanimknoball("runanim", %crouchrun, %body, 1, 0.2, self.moveplaybackrate);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
@@ -281,20 +276,14 @@ ReloadStandRun() {
 ReloadStandRunInternal() {
   self endon("movemode");
   flagName = "reload_" + getUniqueFlagNameIndex();
-  self setFlaggedAnimKnobAllRestart(flagName, % run_lowready_reload, % body, 1, 0.25);
-  self thread UpdateRunWeightsBiasForward(
-    "stopRunning", %
-    combatrun_forward, %
-    run_lowready_B, %
-    run_lowready_L, %
-    run_lowready_R
-  );
+  self setFlaggedAnimKnobAllRestart(flagName, %run_lowready_reload, %body, 1, 0.25);
+  self thread UpdateRunWeightsBiasForward("stopRunning", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
   animscripts\shared::DoNoteTracks(flagName);
 }
 
 runLoopIsNearBeginning() {
-  animfraction = self getAnimTime( % walk_and_run_loops);
-  loopLength = getAnimLength( % run_lowready_F) / 3.0;
+  animfraction = self getAnimTime(%walk_and_run_loops);
+  loopLength = getAnimLength(%run_lowready_F) / 3.0;
   animfraction *= 3.0;
   if(animfraction > 3)
     animfraction -= 2.0;
@@ -382,23 +371,17 @@ changeWeaponStandRun() {
   if(!runLoopIsNearBeginning())
     return false;
   if(wantShotgun)
-    shotgunSwitchStandRunInternal("shotgunPullout", % shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
+    shotgunSwitchStandRunInternal("shotgunPullout", %shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
   else
-    shotgunSwitchStandRunInternal("shotgunPutaway", % shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
+    shotgunSwitchStandRunInternal("shotgunPutaway", %shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
   self notify("switchEnded");
   return true;
 }
 
 shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {
   self endon("movemode");
-  self setFlaggedAnimKnobAllRestart(flagName, switchAnim, % body, 1, 0.25);
-  self thread animscripts\run::UpdateRunWeightsBiasForward(
-    "switchEnded", %
-    combatrun_forward, %
-    run_lowready_B, %
-    run_lowready_L, %
-    run_lowready_R
-  );
+  self setFlaggedAnimKnobAllRestart(flagName, switchAnim, %body, 1, 0.25);
+  self thread animscripts\run::UpdateRunWeightsBiasForward("switchEnded", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
   self thread watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack);
   animscripts\shared::DoNoteTracksForTimeIntercept(getAnimLength(switchAnim) - 0.25, flagName, ::interceptNotetracksForWeaponSwitch);
 }

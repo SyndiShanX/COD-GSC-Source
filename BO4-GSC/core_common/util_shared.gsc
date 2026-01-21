@@ -537,8 +537,7 @@ _timeout(delay) {
   self endon(#"die");
   wait delay;
   self notify(#"returned", {
-    #msg: "timeout"
-  });
+    #msg: "timeout"});
 }
 
 waittill_any_ents(ent1, string1, ent2, string2, ent3, string3, ent4, string4, ent5, string5, ent6, string6, ent7, string7) {
@@ -999,61 +998,46 @@ fileprint_radiant_vec(vector) {
 
 death_notify_wrapper(attacker, damagetype) {
   level notify(#"face", {
-    #face_notify: "death",
-    #entity: self
+    #face_notify: "death", #entity: self
   });
   self notify(#"death", {
-    #attacker: attacker,
-    #mod: damagetype
+    #attacker: attacker, #mod: damagetype
   });
 }
 
 damage_notify_wrapper(damage, attacker, direction_vec, point, type, modelname, tagname, partname, idflags) {
   level notify(#"face", {
-    #face_notify: "damage",
-    #entity: self
+    #face_notify: "damage", #entity: self
   });
   self notify(#"damage", {
-    #amount: damage,
-    #attacker: attacker,
-    #direction: direction_vec,
-    #position: point,
-    #mod: type,
-    #model_name: modelname,
-    #tag_name: tagname,
-    #part_name: partname,
-    #flags: idflags
+    #amount: damage, #attacker: attacker, #direction: direction_vec, #position: point, #mod: type, #model_name: modelname, #tag_name: tagname, #part_name: partname, #flags: idflags
   });
 }
 
 explode_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "explode",
-    #entity: self
+    #face_notify: "explode", #entity: self
   });
   self notify(#"explode");
 }
 
 alert_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "alert",
-    #entity: self
+    #face_notify: "alert", #entity: self
   });
   self notify(#"alert");
 }
 
 shoot_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "shoot",
-    #entity: self
+    #face_notify: "shoot", #entity: self
   });
   self notify(#"shoot");
 }
 
 melee_notify_wrapper() {
   level notify(#"face", {
-    #face_notify: "melee",
-    #entity: self
+    #face_notify: "melee", #entity: self
   });
   self notify(#"melee");
 }
@@ -2909,14 +2893,12 @@ function_97cf7eb0(v_start, n_max_dist = 5000, n_ground_offset = 0, e_ignore, b_i
 
   if(a_trace[# "surfacetype"] != "none") {
     return {
-      #position: a_trace[# "position"] + (0, 0, n_ground_offset),
-      #entity: a_trace[# "entity"]
+      #position: a_trace[# "position"] + (0, 0, n_ground_offset), #entity: a_trace[# "entity"]
     };
   }
 
   return {
-    #position: v_start,
-    #entity: a_trace[# "entity"]
+    #position: v_start, #entity: a_trace[# "entity"]
   };
 }
 
@@ -3959,8 +3941,7 @@ register_callback(str_kvp, func, ...) {
     }
 
     s_callback = {
-      #func: func,
-      #params: vararg
+      #func: func, #params: vararg
     };
     self.var_c18fbf49[var_a12e87bd] = s_callback;
     var_c747e345 = strtok(var_bcb861f, " ");

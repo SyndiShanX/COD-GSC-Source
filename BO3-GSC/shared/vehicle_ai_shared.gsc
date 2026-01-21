@@ -1129,9 +1129,7 @@ function defaultstate_off_exit(params) {
   }
   if(isDefined(level.enable_thermal)) {
     if(self get_next_state() !== "death") {
-      [
-        [level.enable_thermal]
-      ]();
+      [[level.enable_thermal]]();
     }
   }
   self vehicle::lights_on();

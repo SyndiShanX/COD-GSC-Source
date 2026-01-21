@@ -16,7 +16,7 @@ MoveCQB() {
 
   if(self.a.pose != "stand") {
     // (get rid of any prone or other stuff that might be going on)
-    self clearAnim( % root, 0.2);
+    self clearAnim(%root, 0.2);
     if(self.a.pose == "prone")
       self ExitProneWrapper(1);
     self.a.pose = "stand";
@@ -40,9 +40,9 @@ MoveCQB() {
     transTime = 0.1; // need to transition to stairs quickly
 
   // (we don't use %body because that would reset the aiming knobs)
-  self setFlaggedAnimKnobAll("runanim", cqbWalkAnim, % walk_and_run_loops, 1, transTime, rate, true);
+  self setFlaggedAnimKnobAll("runanim", cqbWalkAnim, %walk_and_run_loops, 1, transTime, rate, true);
 
-  self animscripts\run::SetMoveNonForwardAnims( % walk_backward, % walk_left, % walk_right);
+  self animscripts\run::SetMoveNonForwardAnims(%walk_backward, %walk_left, %walk_right);
   self thread animscripts\run::SetCombatStandMoveAnimWeights("cqb");
 
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");

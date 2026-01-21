@@ -104,9 +104,7 @@ getsquad(squadname) {
 
 thinksquad(squadname) {
   while(true) {
-    if([
-        [level._squads[squadname]]
-      ] - > think()) {
+    if([[level._squads[squadname]]] - > think()) {
       wait 0.5;
       continue;
     }
@@ -150,9 +148,7 @@ squadmemberthink() {
     }
 
     while(true) {
-      squadleader = [
-        [level._squads[self.squadname]]
-      ] - > getleader();
+      squadleader = [[level._squads[self.squadname]]] - > getleader();
 
       if(isDefined(squadleader) && !(isint(squadleader) && squadleader == 0)) {
         if(squadleader == self) {
@@ -223,9 +219,7 @@ issquadmember(ai) {
     squad = getsquad(ai.squadname);
 
     if(isDefined(squad)) {
-      return isinarray([
-        [squad]
-      ] - > getmembers(), ai);
+      return isinarray([[squad]] - > getmembers(), ai);
     }
   }
 
@@ -237,9 +231,7 @@ issquadleader(ai) {
     squad = getsquad(ai.squadname);
 
     if(isDefined(squad)) {
-      squadleader = [
-        [squad]
-      ] - > getleader();
+      squadleader = [[squad]] - > getleader();
       return (isDefined(squadleader) && squadleader == ai);
     }
   }
@@ -252,9 +244,7 @@ getsquadleader(ai) {
     squad = getsquad(ai.squadname);
 
     if(isDefined(squad)) {
-      return [
-        [squad]
-      ] - > getleader();
+      return [[squad]] - > getleader();
     }
   }
 

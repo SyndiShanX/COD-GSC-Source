@@ -85,12 +85,7 @@ setfogsliders() {
   blue = fogall[2];
   halfplane = getdvar("g_fogHalfDistReadOnly");
   nearplane = getdvar("g_fogStartDistReadOnly");
-  if(!isDefined(red) ||
-    !isDefined(green) ||
-    !isDefined(blue) ||
-    !isDefined(halfplane) ||
-    !isDefined(halfplane)
-  ) {
+  if(!isDefined(red) || !isDefined(green) || !isDefined(blue) || !isDefined(halfplane) || !isDefined(halfplane)) {
     red = 1;
     green = 1;
     blue = 1;
@@ -224,8 +219,7 @@ dumpsettings() {
     assertex(file != -1, "File not writeable (maybe you should check it out): " + filename);
     if(file == -1)
       dump = false;
-    artfxprintln(file, "
-        artfxprintln(file, "main()"); artfxprintln(file, "{"); artfxprintln(file, ""); artfxprintln(file, "\tlevel.tweakfile = true;"); artfxprintln(file, " "); artfxprintln(file, "\t
+    artfxprintln(file, "artfxprintln(file, "main()"); artfxprintln(file, "{"); artfxprintln(file, ""); artfxprintln(file, "\tlevel.tweakfile = true;"); artfxprintln(file, " "); artfxprintln(file, "\t
           artfxprintln(file, ""); artfxprintln(file, "\tsetdvar(\"scr_fog_exp_halfplane\"" + ", " + "\"" + level.fogexphalfplane + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"scr_fog_exp_halfheight\"" + ", " + "\"" + level.fogexphalfheight + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"scr_fog_nearplane\"" + ", " + "\"" + level.fognearplane + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"scr_fog_red\"" + ", " + "\"" + level.fogred + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"scr_fog_green\"" + ", " + "\"" + level.foggreen + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"scr_fog_blue\"" + ", " + "\"" + level.fogblue + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"scr_fog_baseheight\"" + ", " + "\"" + level.fogbaseheight + "\"" + ");"); artfxprintln(file, ""); artfxprintln(file, "\t
             artfxprintln(file, ""); artfxprintln(file, "\tlevel.dofDefault[\"nearStart\"] = " + getdvarint("scr_dof_nearStart") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"nearEnd\"] = " + getdvarint("scr_dof_nearEnd") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"farStart\"] = " + getdvarint("scr_dof_farStart") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"farEnd\"] = " + getdvarint("scr_dof_farEnd") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"nearBlur\"] = " + getdvarfloat("scr_dof_nearBlur") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"farBlur\"] = " + getdvarfloat("scr_dof_farBlur") + ";"); artfxprintln(file, ""); artfxprintln(file, "\tplayers = maps\\_utility::get_players();"); artfxprintln(file, "\tfor( i = 0; i < players.size; i++ )"); artfxprintln(file, "\t{"); artfxprintln(file, "\t\tplayers[i] maps\\_art::setdefaultdepthoffield();"); artfxprintln(file, "\t}"); artfxprintln(file, "");
             if(getdvar("r_glowUseTweaks") == "0")
@@ -428,14 +422,7 @@ dumpsettings() {
                   }
                 }
                 level.curDoF = (level.dof["farStart"] - level.dof["nearEnd"]) / 2;
-                players[i] setDepthOfField(
-                  level.dof["nearStart"],
-                  level.dof["nearEnd"],
-                  level.dof["farStart"],
-                  level.dof["farEnd"],
-                  level.dof["nearBlur"],
-                  level.dof["farBlur"]
-                );
+                players[i] setDepthOfField(level.dof["nearStart"], level.dof["nearEnd"], level.dof["farStart"], level.dof["farEnd"], level.dof["nearBlur"], level.dof["farBlur"]);
               }
             }
             updateDoF() {
@@ -508,14 +495,7 @@ dumpsettings() {
                 lerpDoFValue("nearBlur", nearBlur, adsFrac);
                 lerpDoFValue("farBlur", farBlur, adsFrac);
               }
-              players[player] setDepthOfField(
-                level.dof["nearStart"],
-                level.dof["nearEnd"],
-                level.dof["farStart"],
-                level.dof["farEnd"],
-                level.dof["nearBlur"],
-                level.dof["farBlur"]
-              );
+              players[player] setDepthOfField(level.dof["nearStart"], level.dof["nearEnd"], level.dof["farStart"], level.dof["farEnd"], level.dof["nearBlur"], level.dof["farBlur"]);
             }
             changeDoFValue(valueName, targetValue, maxChange) {
               if(level.dof[valueName] > targetValue) {
@@ -555,14 +535,7 @@ dumpsettings() {
               if(isDefined(level.do_not_use_dof)) {
                 return;
               }
-              self setDepthOfField(
-                level.dofDefault["nearStart"],
-                level.dofDefault["nearEnd"],
-                level.dofDefault["farStart"],
-                level.dofDefault["farEnd"],
-                level.dofDefault["nearBlur"],
-                level.dofDefault["farBlur"]
-              );
+              self setDepthOfField(level.dofDefault["nearStart"], level.dofDefault["nearEnd"], level.dofDefault["farStart"], level.dofDefault["farEnd"], level.dofDefault["nearBlur"], level.dofDefault["farBlur"]);
             }
             isDoFDefault() {
               if(level.dofDefault["nearStart"] != getDvarInt("scr_dof_nearStart"))

@@ -8,10 +8,10 @@
 
 main() {
   destructible_create("toy_wall_fan", "tag_swivel", 0, undefined, 32);
-  destructible_anim( % wall_fan_rotate, #animtree, "setanimknob", undefined, undefined, "wall_fan_rotate");
+  destructible_anim(%wall_fan_rotate, #animtree, "setanimknob", undefined, undefined, "wall_fan_rotate");
   destructible_loopsound("wall_fan_fanning");
   destructible_state("tag_wobble", "cs_wallfan1", 150);
-  destructible_anim( % wall_fan_stop, #animtree, "setanimknob", undefined, undefined, "wall_fan_wobble");
+  destructible_anim(%wall_fan_stop, #animtree, "setanimknob", undefined, undefined, "wall_fan_wobble");
   destructible_fx("tag_fx", "fx/explosions/wallfan_explosion_dmg");
   destructible_sound("wall_fan_sparks");
   destructible_state("tag_wobble", "cs_wallfan1", 150, undefined, "no_melee");

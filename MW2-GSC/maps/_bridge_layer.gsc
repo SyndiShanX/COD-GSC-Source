@@ -15,7 +15,7 @@ main(model, type) {
   build_localinit(::init_local);
 
   build_deathmodel("vehicle_bridge_layer", "vehicle_hummer_destroyed");
-  build_drive( % abrams_movement, % abrams_movement_backwards, 10);
+  build_drive(%abrams_movement, %abrams_movement_backwards, 10);
 
   build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx("explosions/vehicle_explosion_hummer", "tag_deathfx", "car_explode");
@@ -44,7 +44,5 @@ include,vehicle_bridge_layer
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_bridge_layer,vehicle_standard,all_sp
 
-defaultmdl="vehicle_bridge_layer"
-default:"vehicletype" "bridge_layer"
-default:"script_team" "allies"
+defaultmdl="vehicle_bridge_layer"default:"vehicletype" "bridge_layer"default:"script_team" "allies"
 */

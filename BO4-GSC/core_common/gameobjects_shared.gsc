@@ -94,9 +94,7 @@ class cinteractobj {
       foreach(e_player in var_fb20e730) {
         if(function_aa070e6f(e_player) && !isinarray(var_2854e7f7, e_player.team) && !e_player isinvehicle()) {
           voiceparams = {
-            #team: m_str_team,
-            #side: var_9c2f0815,
-            #targetname: e_object.var_f66cebb1
+            #team: m_str_team, #side: var_9c2f0815, #targetname: e_object.var_f66cebb1
           };
 
           if(isDefined(e_object.var_fa2dfcb4)) {
@@ -743,8 +741,7 @@ function_2e028a0e() {
 
       if(isDefined(s_lock.var_4cd30731)) {
         s_lock notify(#"hash_58b8542ed702b2a5", {
-          #var_36c9fd16: 1,
-          #player: self.mdl_gameobject.carrier
+          #var_36c9fd16: 1, #player: self.mdl_gameobject.carrier
         });
         s_lock.var_459e9174 = 1;
       }
@@ -1430,9 +1427,7 @@ set_dropped(var_e329a2fa) {
   }
 
   if(isDefined(self.setdropped)) {
-    if([
-        [self.setdropped]
-      ]()) {
+    if([[self.setdropped]]()) {
       return;
     }
   }
@@ -2257,8 +2252,7 @@ function_f4ccb04c(e_player, var_5098afd6 = 0) {
   mdl_gameobject = self function_fd4a5f2f();
   e_player.var_17bc9194 = 1;
   mdl_gameobject.trigger notify(#"trigger", {
-    #activator: e_player,
-    #forced: var_5098afd6
+    #activator: e_player, #forced: var_5098afd6
   });
 }
 

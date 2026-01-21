@@ -299,8 +299,8 @@ playUplinkAnimations(playOpenAnim) {
   self endon("carried");
 
   if(playOpenAnim) {
-    waitTime = GetNotetrackTimes( % Satcom_killStreak, "stop anim");
-    animLength = GetAnimLength( % Satcom_killStreak);
+    waitTime = GetNotetrackTimes(%Satcom_killStreak, "stop anim");
+    animLength = GetAnimLength(%Satcom_killStreak);
 
     self ScriptModelPlayAnim("Satcom_killStreak");
     if(isDefined(self.bombSquadModel)) {
@@ -358,10 +358,7 @@ getRadarStrengthForTeam(team) {
       currentRadarStrength++;
   }
 
-  if(currentRadarStrength == 0 &&
-    isDefined(level.heliSniperEyesOn) &&
-    level.heliSniperEyesOn.team == team
-  ) {
+  if(currentRadarStrength == 0 && isDefined(level.heliSniperEyesOn) && level.heliSniperEyesOn.team == team) {
     currentRadarStrength++;
   }
 

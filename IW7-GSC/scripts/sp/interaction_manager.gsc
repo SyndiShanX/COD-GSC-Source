@@ -766,7 +766,7 @@ func_CD25(var_0) {
       thread scripts\sp\utility::func_77B7("salute");
     }
   } else {
-    scripts\sp\utility::func_7790( % shipcrib_gst_head_salute_01);
+    scripts\sp\utility::func_7790(%shipcrib_gst_head_salute_01);
   }
 
   self.var_D4A4 = undefined;

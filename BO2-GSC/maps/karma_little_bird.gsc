@@ -1224,7 +1224,7 @@ show_geo_models_trigger() {
   flag_wait("close_sundeck_door");
   m_door = getent("security_gate", "targetname");
   m_door useanimtree(#animtree);
-  m_door clearanim( % root, 0);
+  m_door clearanim(%root, 0);
   stop_exploder(666);
   stop_exploder(10700);
   stop_exploder(10710);

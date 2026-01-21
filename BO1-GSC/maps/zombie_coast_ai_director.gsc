@@ -195,7 +195,7 @@ coast_director_water_rise(angles, origin) {
   self SetPlayerCollision(1);
   self playSound("zmb_director_exit_water");
   level notify("director_emerging_audio");
-  self animscripted("emerge_anim", self.origin, self.angles, emerge_anim, "normal", % body, 1, 0.1);
+  self animscripted("emerge_anim", self.origin, self.angles, emerge_anim, "normal", %body, 1, 0.1);
   wait(time);
   self.goalradius = 90;
   self.on_break = undefined;
@@ -270,7 +270,7 @@ coast_director_exit_level(exit, calm) {
   playsoundatposition("zmb_director_bubble_effect", exit.origin);
   self thread coast_director_exit_fx(time);
   self playSound("zmb_director_enter_water");
-  self animscripted("return_anim", self.origin, self.angles, return_anim, "normal", % body, 1, 0.1);
+  self animscripted("return_anim", self.origin, self.angles, return_anim, "normal", %body, 1, 0.1);
   wait(time);
   self OrientMode("face default");
   self SetPlayerCollision(0);
@@ -452,9 +452,7 @@ coast_director_failsafe() {
     } else {
       self.failsafe = 0;
     }
-    if(is_true(self.performing_activation) || is_true(self.finish_anim) || is_true(self.on_break) ||
-      is_true(self.is_traversing) || is_true(self.nuke_react) || is_true(self.leaving_level) ||
-      is_true(self.entering_level)) {
+    if(is_true(self.performing_activation) || is_true(self.finish_anim) || is_true(self.on_break) || is_true(self.is_traversing) || is_true(self.nuke_react) || is_true(self.leaving_level) || is_true(self.entering_level)) {
       wait(1);
       self.failsafe = 0;
       continue;

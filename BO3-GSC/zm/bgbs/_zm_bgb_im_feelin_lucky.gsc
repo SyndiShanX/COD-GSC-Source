@@ -32,9 +32,7 @@ function activation() {
     var_93eb638b = zm_powerups::specific_powerup_drop(zm_powerups::get_regular_random_powerup_name(), powerup_origin);
   } else {
     if(isDefined(level.var_2d0e5eb6)) {
-      str_powerup = [
-        [level.var_2d0e5eb6]
-      ]();
+      str_powerup = [[level.var_2d0e5eb6]]();
     } else {
       str_powerup = function_29a9b9b8();
     }

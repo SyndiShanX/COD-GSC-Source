@@ -118,8 +118,7 @@ applyloadout() {
   } else
     self setlethalweapon(var_0.equipment);
 
-  if(isDefined(var_0.equipment) && var_0.equipment != "specialty_null" &&
-    (is_perk_actually_weapon(var_0.equipment) && self hasweapon(var_0.equipment))) {
+  if(isDefined(var_0.equipment) && var_0.equipment != "specialty_null" && (is_perk_actually_weapon(var_0.equipment) && self hasweapon(var_0.equipment))) {
     self setweaponammoclip(var_0.equipment, weaponStartAmmo(var_0.equipment));
   } else
     giveoffhand(var_0.equipment);
@@ -205,12 +204,8 @@ applyloadout() {
     }
 
     if(maps\mp\_utility::invirtuallobby() && isDefined(level.vl_cac_getfactionteam) && isDefined(level.vl_cac_getfactionenvironment)) {
-      var_7 = [
-        [level.vl_cac_getfactionteam]
-      ]();
-      var_8 = [
-        [level.vl_cac_getfactionenvironment]
-      ]();
+      var_7 = [[level.vl_cac_getfactionteam]]();
+      var_8 = [[level.vl_cac_getfactionenvironment]]();
       maps\mp\gametypes\_teams::applycostume(var_6, var_7, var_8);
     } else if(level.teambased)
       maps\mp\gametypes\_teams::applycostume();

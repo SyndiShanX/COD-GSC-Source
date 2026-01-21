@@ -227,9 +227,7 @@ _executeplan(squad) {
 
   if(!isDefined(squad.actionstatus)) {
     if(isDefined(functions[# "initialize"])) {
-      squad.actionstatus = [
-        [functions[# "initialize"]]
-      ](squad.planner, action.params);
+      squad.actionstatus = [[functions[# "initialize"]]](squad.planner, action.params);
     } else {
       squad.actionstatus = 1;
     }
@@ -237,17 +235,13 @@ _executeplan(squad) {
 
   if(squad.actionstatus === 1 || squad.actionstatus === 3) {
     if(isDefined(functions[# "update"])) {
-      squad.actionstatus = [
-        [functions[# "update"]]
-      ](squad.planner, action.params);
+      squad.actionstatus = [[functions[# "update"]]](squad.planner, action.params);
     }
   }
 
   if(squad.actionstatus === 1) {
     if(isDefined(functions[# "terminate"])) {
-      squad.actionstatus = [
-        [functions[# "terminate"]]
-      ](squad.planner, action.params);
+      squad.actionstatus = [[functions[# "terminate"]]](squad.planner, action.params);
     }
   }
 }

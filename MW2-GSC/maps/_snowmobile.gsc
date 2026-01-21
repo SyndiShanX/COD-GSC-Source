@@ -177,23 +177,23 @@ do_steering() {
 
   wait(0.05);
 
-  self setanimknoball( % snowmobile, % root, 1, 0);
-  self setanimlimited( % sm_turn, 1, 0);
+  self setanimknoball(%snowmobile, %root, 1, 0);
+  self setanimlimited(%sm_turn, 1, 0);
 
   for(;;) {
     update_steering(self);
 
     if(self.steering_enable) {
       if(self.steering >= 0) {
-        self setanimknoblimited( % snowmobile_vehicle_lean_R_delta, 1, 0, 0);
-        self setanimtime( % snowmobile_vehicle_lean_R_delta, self.steering);
+        self setanimknoblimited(%snowmobile_vehicle_lean_R_delta, 1, 0, 0);
+        self setanimtime(%snowmobile_vehicle_lean_R_delta, self.steering);
       } else {
-        self setanimknoblimited( % snowmobile_vehicle_lean_L_delta, 1, 0, 0);
-        self setanimtime( % snowmobile_vehicle_lean_L_delta, abs(self.steering));
+        self setanimknoblimited(%snowmobile_vehicle_lean_L_delta, 1, 0, 0);
+        self setanimtime(%snowmobile_vehicle_lean_L_delta, abs(self.steering));
       }
     } else {
-      self clearanim( % snowmobile_vehicle_lean_R_delta, 0);
-      self clearanim( % snowmobile_vehicle_lean_L_delta, 0);
+      self clearanim(%snowmobile_vehicle_lean_R_delta, 0);
+      self clearanim(%snowmobile_vehicle_lean_L_delta, 0);
     }
 
     wait(0.05);
@@ -348,10 +348,7 @@ and these lines in your CSV:
 include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
-defaultmdl="vehicle_snowmobile"
-default:"vehicletype" "snowmobile"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_snowmobile_alt (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -362,10 +359,7 @@ and these lines in your CSV:
 include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
-defaultmdl="vehicle_snowmobile_alt"
-default:"vehicletype" "snowmobile"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_snowmobile_coop (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -376,10 +370,7 @@ and these lines in your CSV:
 include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
-defaultmdl="vehicle_snowmobile"
-default:"vehicletype" "snowmobile_player_coop"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile_player_coop"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_snowmobile_coop_alt (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -390,7 +381,5 @@ and these lines in your CSV:
 include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
-defaultmdl="vehicle_snowmobile_alt"
-default:"vehicletype" "snowmobile_player_coop"
-default:"script_team" "allies"
+defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile_player_coop"default:"script_team" "allies"
 */

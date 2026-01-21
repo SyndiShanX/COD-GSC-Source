@@ -123,9 +123,7 @@ function private function_f21a8d83(origin, radius, boundarydist) {
 function private function_5d11b2dc(entity) {
   if(isDefined(entity.favoriteenemy)) {
     if(isDefined(entity.favoriteenemy.on_train) && entity.favoriteenemy.on_train) {
-      var_d3443466 = [
-        [level.o_zod_train]
-      ] - > function_3e62f527();
+      var_d3443466 = [[level.o_zod_train]] - > function_3e62f527();
       if(isDefined(entity.locked_in_train) && entity.locked_in_train && (!(isDefined(var_d3443466) && var_d3443466))) {
         return false;
       }

@@ -1490,8 +1490,7 @@ revive_internal(reviver, b_track_stats, var_c0ab6a65 = 0) {
   }
 
   self notify(#"player_revived", {
-    #reviver: reviver,
-    #var_a4916eac: self.var_84280a99
+    #reviver: reviver, #var_a4916eac: self.var_84280a99
   });
   s_params = spawnStruct();
   s_params.e_revivee = self;

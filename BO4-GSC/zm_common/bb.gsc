@@ -56,9 +56,7 @@ logplayerevent(player, eventname) {
 
 logroundevent(eventname) {
   zmroundevents = {
-    #gametime: function_f8d53445(),
-    #roundnumber: level.round_number,
-    #eventname: eventname
+    #gametime: function_f8d53445(), #roundnumber: level.round_number, #eventname: eventname
   };
   function_92d1707f(#"hash_1f42d237e3407165", zmroundevents);
 

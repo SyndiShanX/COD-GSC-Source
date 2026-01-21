@@ -2307,12 +2307,12 @@ func_A24C(var_0) {
 #using_animtree("jackal");
 
 func_2CB6() {
-  self give_attacker_kill_rewards( % jackal_vehicle_fly_motion, 1, 0, 1.5);
-  self func_82B0( % jackal_vehicle_fly_motion, randomfloatrange(0, 1));
-  self give_attacker_kill_rewards( % jackal_extra_fly_motion_overlay, 0.0, 0);
-  self give_attacker_kill_rewards( % jackal_extra_fly_motion_overlay, 0.5, 2);
+  self give_attacker_kill_rewards(%jackal_vehicle_fly_motion, 1, 0, 1.5);
+  self func_82B0(%jackal_vehicle_fly_motion, randomfloatrange(0, 1));
+  self give_attacker_kill_rewards(%jackal_extra_fly_motion_overlay, 0.0, 0);
+  self give_attacker_kill_rewards(%jackal_extra_fly_motion_overlay, 0.5, 2);
   wait 3;
-  self give_attacker_kill_rewards( % jackal_extra_fly_motion_overlay, 0, 12);
+  self give_attacker_kill_rewards(%jackal_extra_fly_motion_overlay, 0, 12);
 }
 
 func_FA45() {

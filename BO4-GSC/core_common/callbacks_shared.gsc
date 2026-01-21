@@ -765,8 +765,7 @@ event_handler[vehicle_radiusdamage] codecallback_vehicleradiusdamage(eventstruct
 finishcustomtraversallistener() {
   self endon(#"death");
   self waittillmatch({
-    #notetrack: "end"
-  }, # "custom_traversal_anim_finished");
+    #notetrack: "end"}, # "custom_traversal_anim_finished");
   self finishtraversal();
   self unlink();
   self.usegoalanimweight = 0;
@@ -823,8 +822,7 @@ event_handler[ui_menuresponse] codecallback_menuresponse(eventstruct) {
 
   index = level.menuresponsequeue.size;
   level.menuresponsequeue[index] = {
-    #ent: self,
-    #eventstruct: eventstruct
+    #ent: self, #eventstruct: eventstruct
   };
   level notify(#"menuresponse_queue");
 }
@@ -937,8 +935,7 @@ abort_level() {
 
 event_handler[glass_smash] codecallback_glasssmash(eventstruct) {
   level notify(#"glass_smash", {
-    #position: eventstruct.position,
-    #direction: eventstruct.direction
+    #position: eventstruct.position, #direction: eventstruct.direction
   });
 }
 

@@ -492,9 +492,7 @@ function_80fe1cb6(a, b) {
 
 find(&array, ent, func_compare = &function_80fe1cb6) {
   for(i = 0; i < array.size; i++) {
-    if([
-        [func_compare]
-      ](array[i], ent)) {
+    if([[func_compare]](array[i], ent)) {
       return i;
     }
   }
@@ -588,13 +586,9 @@ merge(left, right, func_sort, param) {
     b_result = undefined;
 
     if(isDefined(param)) {
-      b_result = [
-        [func_sort]
-      ](left[li], right[ri], param);
+      b_result = [[func_sort]](left[li], right[ri], param);
     } else {
-      b_result = [
-        [func_sort]
-      ](left[li], right[ri]);
+      b_result = [[func_sort]](left[li], right[ri]);
     }
 
     if(b_result) {

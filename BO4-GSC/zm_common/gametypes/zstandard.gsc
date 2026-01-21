@@ -612,8 +612,7 @@ function_261d5f79(params, ai_killed) {
   }
 
   self notify(#"zm_arcade_kill", {
-    #ai_killed: ai_killed,
-    #params: params
+    #ai_killed: ai_killed, #params: params
   });
 }
 
@@ -1811,9 +1810,7 @@ function function_21669ebc(restart = 0) {
 
   if(!(isDefined(restart) && restart)) {
     if(isDefined(level.var_12e11406)) {
-      [
-        [level.var_12e11406]
-      ]();
+      [[level.var_12e11406]]();
     }
 
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
@@ -1838,9 +1835,7 @@ function function_21669ebc(restart = 0) {
 
     if(isDefined(level.var_fc735431)) {
       level thread zm_audio::function_4138a262();
-      [
-        [level.var_fc735431]
-      ]();
+      [[level.var_fc735431]]();
     } else {
       level thread zm_audio::function_4138a262();
       zm_round_logic::round_one_up();
@@ -1886,9 +1881,7 @@ function function_21669ebc(restart = 0) {
     }
 
     if(isDefined(level.round_start_custom_func)) {
-      [
-        [level.round_start_custom_func]
-      ]();
+      [[level.round_start_custom_func]]();
     }
 
     var_ecdf38f = isDefined(level.var_ecdf38f) ? level.var_ecdf38f : 15;
@@ -1920,9 +1913,7 @@ function function_21669ebc(restart = 0) {
     uploadstats();
 
     if(isDefined(level.round_end_custom_logic)) {
-      [
-        [level.round_end_custom_logic]
-      ]();
+      [[level.round_end_custom_logic]]();
     }
 
     if(zm_custom::function_901b751c(#"zmroundcap") == level.round_number && level.round_number != 0) {
@@ -2079,9 +2070,7 @@ function_f26f8251(str_archetype, n_player_count) {
     zm_utility::function_9b7bc715(str_archetype);
 
     if(isDefined(self.var_d58fab26)) {
-      [
-        [self.var_d58fab26]
-      ]();
+      [[self.var_d58fab26]]();
       continue;
     }
 

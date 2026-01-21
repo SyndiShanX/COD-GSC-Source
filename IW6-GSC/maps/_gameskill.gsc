@@ -777,9 +777,7 @@ playerhurtcheck() {
 
     if(isDefined(var_8)) {
       waittillframeend;
-      [
-        [var_8]
-      ](var_6);
+      [[var_8]](var_6);
     }
   }
 }

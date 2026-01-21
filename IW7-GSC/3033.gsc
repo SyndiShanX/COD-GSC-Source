@@ -2210,11 +2210,11 @@ func_1049A() {
   wait 0.05;
   func_0BDC::func_A208();
   func_0BDC::func_A2DE();
-  self give_attacker_kill_rewards( % jackal_vehicle_strike_state_idle, 1, 0);
-  self give_attacker_kill_rewards( % jackal_vehicle_weap_primary_raise, 1, 0);
-  self give_attacker_kill_rewards( % jackal_vehicle_weap_primary_drop, 0, 0);
-  self func_82B0( % jackal_vehicle_weap_primary_raise, 0);
-  self func_82B1( % jackal_vehicle_weap_primary_raise, 0);
+  self give_attacker_kill_rewards(%jackal_vehicle_strike_state_idle, 1, 0);
+  self give_attacker_kill_rewards(%jackal_vehicle_weap_primary_raise, 1, 0);
+  self give_attacker_kill_rewards(%jackal_vehicle_weap_primary_drop, 0, 0);
+  self func_82B0(%jackal_vehicle_weap_primary_raise, 0);
+  self func_82B1(%jackal_vehicle_weap_primary_raise, 0);
 
   if(!isDefined(self.var_6B4E)) {
     func_0BDC::func_6B4C("landed_mode");

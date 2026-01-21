@@ -710,10 +710,10 @@ init_hackable_turrets() {
     if(isDefined(trigs[i].script_noteworthy)) {
       hack_box = getent(trigs[i].script_noteworthy, "targetname");
       add_scene(hack_box.targetname, hack_box.targetname);
-      add_prop_anim(hack_box.targetname + "_panel", % o_specialty_blackout_intruder_panel, "p6_intruder_perk_box_panel");
+      add_prop_anim(hack_box.targetname + "_panel", %o_specialty_blackout_intruder_panel, "p6_intruder_perk_box_panel");
       add_scene(hack_box.targetname + "_player", hack_box.targetname);
-      add_player_anim("player_body", % int_specialty_blackout_intruder, 1);
-      add_prop_anim(hack_box.targetname + "_torch", % o_specialty_blackout_intruder_cutter, "t6_wpn_laser_cutter_prop", 1);
+      add_player_anim("player_body", %int_specialty_blackout_intruder, 1);
+      add_prop_anim(hack_box.targetname + "_torch", %o_specialty_blackout_intruder_cutter, "t6_wpn_laser_cutter_prop", 1);
       add_notetrack_custom_function("player_body", "start", ::data_glove_on);
       add_notetrack_fx_on_tag(hack_box.targetname + "_torch", "zap_start", "laser_cutter_sparking", "tag_fx");
       add_notetrack_fx_on_tag(hack_box.targetname + "_torch", "zap_end", "fx_laser_cutter_on", "tag_fx");

@@ -184,9 +184,7 @@ function_93a4f3c5(localclientnum, draftcharacter, characterselected = 0) {
   if(player_role::is_valid([[draftcharacter]] - > function_82e05d64().focusedcharacterindex)) {
     var_3f83e0ee = character_customization::function_7474681d(localclientnum, sessionmode, [[draftcharacter]] - > function_82e05d64().focusedcharacterindex);
 
-    if(!character_customization::function_aa5382ed([
-        [draftcharacter]
-      ] - > function_82e05d64().var_435f68bc, var_3f83e0ee)) {
+    if(!character_customization::function_aa5382ed([[draftcharacter]] - > function_82e05d64().var_435f68bc, var_3f83e0ee)) {
       return false;
     }
 
@@ -220,14 +218,8 @@ function_93a4f3c5(localclientnum, draftcharacter, characterselected = 0) {
     [[draftcharacter]] - > function_77e3be08();
     [[draftcharacter]] - > hide_model();
 
-    if(isDefined([
-        [draftcharacter]
-      ] - > function_82e05d64().visible) && [
-        [draftcharacter]
-      ] - > function_82e05d64().visible) {
-      [
-        [draftcharacter]
-      ] - > function_27945cb8(1);
+    if(isDefined([[draftcharacter]] - > function_82e05d64().visible) && [[draftcharacter]] - > function_82e05d64().visible) {
+      [[draftcharacter]] - > function_27945cb8(1);
     }
 
     return false;
@@ -326,15 +318,9 @@ update_team(localclientnum, characterselected = 0) {
       xuid = var_dde5862c[i];
       luaindex = var_d63ec5a3[i];
       draftclientmodel = getuimodel(var_e1d25028, luaindex);
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().xuid = xuid;
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().selectedcharacterdata = function_5add6d0c(xuid);
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().visible = getuimodelvalue(getuimodel(draftclientmodel, "visible"));
+      [[draftcharacter]] - > function_82e05d64().xuid = xuid;
+      [[draftcharacter]] - > function_82e05d64().selectedcharacterdata = function_5add6d0c(xuid);
+      [[draftcharacter]] - > function_82e05d64().visible = getuimodelvalue(getuimodel(draftclientmodel, "visible"));
       function_e1f85a64(draftcharacter, i, function_f701ad2a());
       focusedcharacterindex = undefined;
       isvalidxuid = xuid != 0;
@@ -351,9 +337,7 @@ update_team(localclientnum, characterselected = 0) {
         }
       }
 
-      [
-        [draftcharacter]
-      ] - > function_82e05d64().focusedcharacterindex = focusedcharacterindex;
+      [[draftcharacter]] - > function_82e05d64().focusedcharacterindex = focusedcharacterindex;
       function_71a9fb67(localclientnum, draftcharacter, isvalidxuid, characterselected);
     }
   }
@@ -393,30 +377,14 @@ setup_team(localclientnum) {
       model = util::spawn_model(localclientnum, "tag_origin", var_3ec3c6aa.origin, var_3ec3c6aa.angles);
       model.targetname = targetname + i;
       level.draftcharacters[i] = character_customization::function_dd295310(model, localclientnum, 0);
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().var_67f6171b = var_9b6e828a[i % var_9b6e828a.size];
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().var_fb564576 = i;
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().params = spawnStruct();
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().params.sessionmode = sessionmode;
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().params.scene_target = var_3ec3c6aa;
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().params.var_a34c858c = 1;
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().params.var_c76f3e47 = 1;
-      [
-        [level.draftcharacters[i]]
-      ] - > function_82e05d64().params.var_401d9a1 = 1;
+      [[level.draftcharacters[i]]] - > function_82e05d64().var_67f6171b = var_9b6e828a[i % var_9b6e828a.size];
+      [[level.draftcharacters[i]]] - > function_82e05d64().var_fb564576 = i;
+      [[level.draftcharacters[i]]] - > function_82e05d64().params = spawnStruct();
+      [[level.draftcharacters[i]]] - > function_82e05d64().params.sessionmode = sessionmode;
+      [[level.draftcharacters[i]]] - > function_82e05d64().params.scene_target = var_3ec3c6aa;
+      [[level.draftcharacters[i]]] - > function_82e05d64().params.var_a34c858c = 1;
+      [[level.draftcharacters[i]]] - > function_82e05d64().params.var_c76f3e47 = 1;
+      [[level.draftcharacters[i]]] - > function_82e05d64().params.var_401d9a1 = 1;
     }
   }
 }
@@ -467,9 +435,7 @@ function_4f269ca3(var_d0b01271) {
 
   if([[var_d0b01271]] - > is_visible()) {
     for(i = 0; i < 10; i++) {
-      gesture = [
-        [var_d0b01271]
-      ] - > get_gesture(gesture_index);
+      gesture = [[var_d0b01271]] - > get_gesture(gesture_index);
 
       if(isDefined(gesture) && isDefined(gesture.animation)) {
         var_bc8cfff8 = 1;
@@ -536,9 +502,7 @@ function_393e6d42() {
     }
 
     foreach(var_d0b01271 in level.draftcharacters) {
-      var_2d0192e5 = [
-        [var_d0b01271]
-      ] - > function_82e05d64();
+      var_2d0192e5 = [[var_d0b01271]] - > function_82e05d64();
 
       if(isDefined(var_2d0192e5) && isDefined(var_2d0192e5.xuid)) {
         xuid = xuidtostring(var_2d0192e5.xuid);

@@ -587,10 +587,7 @@ modifyDamage(attacker, weapon, type, damage) {
   if(isDefined(attacker)) {
     if(
 
-      (isDefined(self.owner) && attacker == self.owner && self.streakName == "heli_sniper") ||
-      (isDefined(attacker.class) && attacker.class == "worldspawn") ||
-      (attacker == self)
-    ) {
+      (isDefined(self.owner) && attacker == self.owner && self.streakName == "heli_sniper") || (isDefined(attacker.class) && attacker.class == "worldspawn") || (attacker == self)) {
       return -1;
     }
   }
@@ -637,12 +634,7 @@ heli_damage_monitor(type, shouldRumble) {
 
   self thread heli_health();
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    self.maxHealth,
-    "helicopter", ::handleDeathDamage, ::modifyDamage,
-    true,
-    shouldRumble
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(self.maxHealth, "helicopter", ::handleDeathDamage, ::modifyDamage, true, shouldRumble);
 }
 
 heli_watchEMPDamage() {
@@ -687,8 +679,7 @@ heli_health() {
   while(true) {
     self waittill("heli_damage_fx");
 
-    if(damageState > 0 &&
-      self.damageTaken >= self.maxHealth) {
+    if(damageState > 0 && self.damageTaken >= self.maxHealth) {
       damageState = 0;
       self setDamageStage(damageState);
 
@@ -697,15 +688,13 @@ heli_health() {
       self notify("death");
 
       break;
-    } else if(damageState > 1 &&
-      self.damageTaken >= (self.maxhealth * 0.66)) {
+    } else if(damageState > 1 && self.damageTaken >= (self.maxhealth * 0.66)) {
       damageState = 1;
       self setDamageStage(damageState);
       self.currentstate = "heavy smoke";
       stopFXOnTag(level.chopper_fx["damage"]["light_smoke"], self, config.engineVFXtag);
       playFXOnTag(level.chopper_fx["damage"]["heavy_smoke"], self, config.engineVFXtag);
-    } else if(damageState > 2 &&
-      self.damageTaken >= (self.maxhealth * 0.33)) {
+    } else if(damageState > 2 && self.damageTaken >= (self.maxhealth * 0.33)) {
       damageState = 2;
       self setDamageStage(damageState);
       self.currentstate = "light smoke";

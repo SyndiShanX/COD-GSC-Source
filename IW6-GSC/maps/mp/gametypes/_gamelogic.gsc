@@ -343,21 +343,15 @@ updateGameEvents() {
     }
 
     if(!level.aliveCount["allies"] && !level.aliveCount["axis"] && !livesCount["allies"] && !livesCount["axis"]) {
-      return [
-        [level.onDeadEvent]
-      ]("all");
+      return [[level.onDeadEvent]]("all");
     }
 
     if(!level.aliveCount["allies"] && !livesCount["allies"]) {
-      return [
-        [level.onDeadEvent]
-      ]("allies");
+      return [[level.onDeadEvent]]("allies");
     }
 
     if(!level.aliveCount["axis"] && !livesCount["axis"]) {
-      return [
-        [level.onDeadEvent]
-      ]("axis");
+      return [[level.onDeadEvent]]("axis");
     }
 
     one_ally_left = (level.aliveCount["allies"] == 1 && !livesCount["allies"]);
@@ -388,17 +382,13 @@ updateGameEvents() {
     }
   } else {
     if((!level.aliveCount["allies"] && !level.aliveCount["axis"]) && (!level.livesCount["allies"] && !level.livesCount["axis"])) {
-      return [
-        [level.onDeadEvent]
-      ]("all");
+      return [[level.onDeadEvent]]("all");
     }
 
     livePlayers = getPotentialLivingPlayers();
 
     if(livePlayers.size == 1) {
-      return [
-        [level.onOneLeftEvent]
-      ]("all");
+      return [[level.onOneLeftEvent]]("all");
     }
   }
 }
@@ -2527,11 +2517,7 @@ checkForPersonalBests() {
 isValidBestWeapon(baseName) {
   scriptClass = getWeaponClass(baseName);
 
-  return isDefined(baseName) &&
-    baseName != "" &&
-    !isKillstreakWeapon(baseName) &&
-    scriptClass != "killstreak" &&
-    scriptClass != "other";
+  return isDefined(baseName) && baseName != "" && !isKillstreakWeapon(baseName) && scriptClass != "killstreak" && scriptClass != "other";
 }
 
 checkForBestWeapon() {

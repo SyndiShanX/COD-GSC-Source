@@ -726,9 +726,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
       smeansofdeath = "MOD_FALLING";
 
     if(isDefined(level.overrideweaponfunc))
-      sweapon = [
-        [level.overrideweaponfunc]
-      ](sweapon, einflictor.script_noteworthy);
+      sweapon = [[level.overrideweaponfunc]](sweapon, einflictor.script_noteworthy);
   }
 
   if(maps\mp\gametypes\_globallogic_utils::isheadshot(sweapon, shitloc, smeansofdeath, einflictor) && isplayer(eattacker))

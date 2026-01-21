@@ -126,9 +126,7 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
   println("BA" + burst_area);
   while(1) {
     burst = RandomIntRange(burstMin, burstMax);
-    targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]),
-      (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]),
-      (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
+    targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]), (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]), (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
     target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
     for(i = 0; i < burst; i++) {
       target = target_org.origin;

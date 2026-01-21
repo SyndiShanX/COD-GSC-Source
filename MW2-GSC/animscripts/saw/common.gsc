@@ -10,8 +10,7 @@ main(turret) {
 
   animscripts\utility::initialize("saw");
 
-  // when we ran our postscriptfunc we may have decided to stop using our turret,
-  // in which case it's gone now
+  // when we ran our postscriptfunc we may have decided to stop using our turret, // in which case it's gone now
   if(!isDefined(turret)) {
     return;
   }
@@ -137,8 +136,7 @@ turretTimer(duration, turret) {
 stopUsingTurretWhenNodeLost() {
   self endon("killanimscript");
 
-  // sometimes someone else will come and steal our node. when that happens,
-  // we should leave so we don't try to use the same MG at once.
+  // sometimes someone else will come and steal our node. when that happens, // we should leave so we don't try to use the same MG at once.
   while(1) {
     if(!isDefined(self.node) || distancesquared(self.origin, self.node.origin) > 64 * 64)
       self stopUseTurret();
@@ -208,8 +206,8 @@ within_fov(start_origin, start_angles, end_origin, fov) {
 #using_animtree("generic_human");
 
 DoShoot(turret) {
-  self setAnim( % additive_saw_idle, 0, .1);
-  self setAnim( % additive_saw_fire, 1, .1);
+  self setAnim(%additive_saw_idle, 0, .1);
+  self setAnim(%additive_saw_fire, 1, .1);
 
   turret turretDoShootAnims();
 
@@ -217,8 +215,8 @@ DoShoot(turret) {
 }
 
 DoAim(turret) {
-  self setAnim( % additive_saw_idle, 1, .1);
-  self setAnim( % additive_saw_fire, 0, .1);
+  self setAnim(%additive_saw_idle, 1, .1);
+  self setAnim(%additive_saw_fire, 0, .1);
 
   turret turretDoAimAnims();
 }
@@ -237,11 +235,11 @@ TurretDoShoot(turret) {
 }
 
 turretDoShootAnims() {
-  self setAnim( % additive_saw_idle, 0, .1);
-  self setAnim( % additive_saw_fire, 1, .1);
+  self setAnim(%additive_saw_idle, 0, .1);
+  self setAnim(%additive_saw_fire, 1, .1);
 }
 
 turretDoAimAnims() {
-  self setAnim( % additive_saw_idle, 1, .1);
-  self setAnim( % additive_saw_fire, 0, .1);
+  self setAnim(%additive_saw_idle, 1, .1);
+  self setAnim(%additive_saw_fire, 0, .1);
 }

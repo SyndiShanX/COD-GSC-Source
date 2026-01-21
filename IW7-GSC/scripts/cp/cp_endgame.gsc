@@ -68,9 +68,7 @@ endgame(var_0, var_1) {
   var_11 = func_FF5E(var_1);
   if(isDefined(var_11)) {
     if(isDefined(level.var_ADDF)) {
-      [
-        [level.var_ADDF]
-      ](var_1);
+      [[level.var_ADDF]](var_1);
     }
 
     func_ADDE(var_11);

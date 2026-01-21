@@ -71,8 +71,7 @@ exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound,
   if(!isDefined(level._script_exploders))
     level._script_exploders = [];
   level._script_exploders[level._script_exploders.size] = fx;
-  maps\_createfx::createfx_showOrigin(fxid, fxPos, waittime, fxpos2, "exploderfx", fx, undefined, fireFx, fireFxDelay,
-    fireFxSound, fxSound, fxQuake, fxDamage, soundalias, repeat, delay_min, delay_max, damage_radius, fireFxTimeout);
+  maps\_createfx::createfx_showOrigin(fxid, fxPos, waittime, fxpos2, "exploderfx", fx, undefined, fireFx, fireFxDelay, fireFxSound, fxSound, fxQuake, fxDamage, soundalias, repeat, delay_min, delay_max, damage_radius, fireFxTimeout);
 }
 
 loopfx(fxId, fxPos, waittime, fxPos2, fxStart, fxStop, timeout) {

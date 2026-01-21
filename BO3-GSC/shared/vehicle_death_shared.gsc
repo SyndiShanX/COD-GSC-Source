@@ -27,9 +27,7 @@ function main() {
   while(isDefined(self)) {
     self waittill("death", attacker, damagefromunderneath, weapon, point, dir);
     if(isDefined(self.death_enter_cb)) {
-      [
-        [self.death_enter_cb]
-      ]();
+      [[self.death_enter_cb]]();
     }
     if(isDefined(self.script_deathflag)) {
       level flag::set(self.script_deathflag);
@@ -169,7 +167,7 @@ function set_death_model(smodel, fdelay) {
     return;
   }
   if(!isDefined(emodel.death_anim) && isDefined(emodel.animtree)) {
-    emodel clearanim( % generic::root, 0);
+    emodel clearanim(%generic::root, 0);
   }
   if(smodel != self.vehmodel) {
     emodel setModel(smodel);
@@ -683,7 +681,7 @@ function death_jolt(type) {
   }
   self joltbody(self.origin + (23, 33, 64), 3);
   if(isDefined(self.death_anim)) {
-    self animscripted("death_anim", self.origin, self.angles, self.death_anim, "normal", % generic::root, 1, 0);
+    self animscripted("death_anim", self.origin, self.angles, self.death_anim, "normal", %generic::root, 1, 0);
     self waittillmatch("death_anim");
   } else if(self.isphysicsvehicle) {
     num_launch_multiplier = 1;

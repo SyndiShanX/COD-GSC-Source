@@ -12,7 +12,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathfx("fx\explosions\large_vehicle_explosion", undefined, "explo_metal_rand");
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
-  maps\_vehicle::build_drive( % tanker_truck_driving_idle_forward, % tanker_truck_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%tanker_truck_driving_idle_forward, %tanker_truck_driving_idle_backward, 10);
   maps\_vehicle::build_team("allies");
   maps\_vehicle::build_aianims(::setanims, ::set_vehicle_anims);
 }

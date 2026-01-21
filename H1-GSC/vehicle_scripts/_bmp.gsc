@@ -27,7 +27,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathfx("fx\explosions\vehicle_explosion_bmp_fire", "tag_deathfx", "fire_metal_large", undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx("fx\misc\empty", "tag_cargofire", undefined, undefined, undefined, 1, 0);
   maps\_vehicle::build_deathfx(var_3[var_0], "tag_deathfx", "h1_exp_armor_vehicle", undefined, undefined, undefined, 0);
-  maps\_vehicle::build_drive( % bmp_movement, % bmp_movement_backwards, 10);
+  maps\_vehicle::build_drive(%bmp_movement, %bmp_movement_backwards, 10);
 
   if(issubstr(var_0, "_low"))
     maps\_vehicle::build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun_low");

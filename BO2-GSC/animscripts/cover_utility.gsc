@@ -53,7 +53,7 @@ blindfire() {
   self.a.cornermode = "blindfire";
   self.a.prevattack = self.a.cornermode;
   blindfireanim = animarraypickrandom(blindfiremode);
-  self setflaggedanimknoballrestart(blindfiremode, blindfireanim, % body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart(blindfiremode, blindfireanim, %body, 1, 0.2, 1);
   self animscripts\shared::updatelaserstatus(1, 1);
 
   if(canuseblindaiming(blindfiremode) && !aihasonlypistol()) {
@@ -86,7 +86,7 @@ canuseblindaiming(blindfiremode) {
 }
 
 startblindaiming(aimanim, type) {
-  self animscripts\shared::setaiminganims( % blind_aim_2, % blind_aim_4, % blind_aim_6, % blind_aim_8);
+  self animscripts\shared::setaiminganims(%blind_aim_2, %blind_aim_4, %blind_aim_6, %blind_aim_8);
   self animscripts\shared::setanimaimweight(1, 0);
 
   if(animhasnotetrack(aimanim, "start_aim"))
@@ -132,10 +132,10 @@ stopblindaiming(fireanim, animname) {
 
   self animscripts\shared::stoptracking();
   self animscripts\shared::setanimaimweight(0, 0);
-  self clearanim( % blind_aim_2, 0.2);
-  self clearanim( % blind_aim_4, 0.2);
-  self clearanim( % blind_aim_6, 0.2);
-  self clearanim( % blind_aim_8, 0.2);
+  self clearanim(%blind_aim_2, 0.2);
+  self clearanim(%blind_aim_4, 0.2);
+  self clearanim(%blind_aim_6, 0.2);
+  self clearanim(%blind_aim_8, 0.2);
 }
 
 canblindfire() {
@@ -213,9 +213,9 @@ turntomatchnodedirection(nodeangleoffset) {
       notetime = getnotetracktimes(standtocrouchanim, "anim_pose = \"crouch\"")[0];
       notetime = min(1, notetime * 1.1);
       time = notetime * getanimlength(standtocrouchanim) / 1.5;
-      self setflaggedanimknoballrestart("crouchanim", standtocrouchanim, % body, 1, 0.2, 1.5);
+      self setflaggedanimknoballrestart("crouchanim", standtocrouchanim, %body, 1, 0.2, 1.5);
       self donotetracksfortime(time, "crouchanim");
-      self clearanim( % body, 0.2);
+      self clearanim(%body, 0.2);
     }
 
     self orientmode("face angle", self.angles[1]);

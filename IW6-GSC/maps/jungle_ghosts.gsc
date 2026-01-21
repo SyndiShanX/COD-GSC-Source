@@ -72,7 +72,7 @@ main() {
   level.ignore_on_func = maps\jungle_ghosts_util::generic_ignore_on;
   level.ignore_off_func = maps\jungle_ghosts_util::generic_ignore_off;
   var_5 = [];
-  var_5["default_crouch"]["exposed_idle"] = [ % exposed_crouch_lookaround_1, % exposed_crouch_lookaround_2, % exposed_crouch_lookaround_3, % exposed_crouch_lookaround_4];
+  var_5["default_crouch"]["exposed_idle"] = [ % exposed_crouch_lookaround_1, %exposed_crouch_lookaround_2, %exposed_crouch_lookaround_3, %exposed_crouch_lookaround_4];
   maps\_utility::register_archetype("jungle_soldier", var_5);
   level.player setviewmodel("viewhands_gs_jungle_b");
   thread maps\jungle_ghosts_jungle::jungle_moving_foliage_settings();
@@ -635,8 +635,8 @@ crash_test_start() {
   var_2.pilot_corpse.origin = var_2.chopper gettagorigin("tag_driver");
   var_2.pilot_corpse.angles = var_2.chopper gettagangles("tag_driver");
   var_2.pilot_corpse linkto(var_2.chopper);
-  var_2.pilot_corpse setanimknob( % jungle_ghost_helicrash_pilot, 1, 0, 0);
-  var_2.pilot_corpse setanimtime( % jungle_ghost_helicrash_pilot, 1);
+  var_2.pilot_corpse setanimknob(%jungle_ghost_helicrash_pilot, 1, 0, 0);
+  var_2.pilot_corpse setanimtime(%jungle_ghost_helicrash_pilot, 1);
   var_2.actors = [var_2.pilot, var_2.pristine_crate, var_2.damaged_crate, var_2.chopper];
   var_2 thread maps\_anim::anim_loop(var_2.actors, "new_crash_idle");
   wait 5;

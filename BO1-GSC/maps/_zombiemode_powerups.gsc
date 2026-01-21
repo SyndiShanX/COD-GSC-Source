@@ -157,19 +157,16 @@ solo_powerup_hud_overlay() {
 solo_power_up_hud(Shader, PowerUp_Hud, X_Position, PowerUp_timer, PowerUp_Var) {
   self endon("disconnect");
   while(true) {
-    if(level.zombie_vars[PowerUp_timer] < 5 &&
-      (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
+    if(level.zombie_vars[PowerUp_timer] < 5 && (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
       wait(0.1);
       PowerUp_Hud.alpha = 0;
       wait(0.1);
-    } else if(level.zombie_vars[PowerUp_timer] < 10 &&
-      (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
+    } else if(level.zombie_vars[PowerUp_timer] < 10 && (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
       wait(0.2);
       PowerUp_Hud.alpha = 0;
       wait(0.18);
     }
-    if(level.zombie_vars[PowerUp_Var] == true &&
-      (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
+    if(level.zombie_vars[PowerUp_Var] == true && (isDefined(self._show_solo_hud) && self._show_solo_hud == true)) {
       PowerUp_Hud.x = X_Position;
       PowerUp_Hud.alpha = 1;
       PowerUp_Hud setshader(Shader, 32, 32);
@@ -209,9 +206,7 @@ get_valid_powerup() {
   while(1) {
     if(powerup == "carpenter" && get_num_window_destroyed() < 5) {
       powerup = get_next_powerup();
-    } else if(powerup == "fire_sale" &&
-      (level.zombie_vars["zombie_powerup_fire_sale_on"] == true ||
-        level.chest_moves < 1)) {
+    } else if(powerup == "fire_sale" && (level.zombie_vars["zombie_powerup_fire_sale_on"] == true || level.chest_moves < 1)) {
       powerup = get_next_powerup();
     } else if(powerup == "all_revive") {
       if(!maps\_laststand::player_num_in_laststand()) {
@@ -419,8 +414,7 @@ special_drop_setup() {
     powerup = get_valid_powerup();
   } else {
     powerup = level.zombie_special_drop_array[randomInt(level.zombie_special_drop_array.size)];
-    if(level.round_number > 15 &&
-      (randomInt(100) < (level.round_number - 15) * 5)) {
+    if(level.round_number > 15 && (randomInt(100) < (level.round_number - 15) * 5)) {
       powerup = "nothing";
     }
   }
@@ -435,8 +429,7 @@ special_drop_setup() {
     case "minigun":
       break;
     case "full_ammo":
-      if(level.round_number > 10 &&
-        (randomInt(100) < (level.round_number - 10) * 5)) {
+      if(level.round_number > 10 && (randomInt(100) < (level.round_number - 10) * 5)) {
         powerup = level.zombie_powerup_array[randomInt(level.zombie_powerup_array.size)];
       }
       break;

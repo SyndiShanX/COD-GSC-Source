@@ -180,7 +180,7 @@ getUniqueFlagNameIndex() {
 setupAim(transTime) {
   assert(isDefined(transTime));
 
-  self setAnim( % exposed_aiming, 1, .2);
+  self setAnim(%exposed_aiming, 1, .2);
   self setAnimKnobLimited(animarray("straight_level"), 1, transTime);
   self setAnimKnobLimited(animArray("add_aim_up"), 1, transTime);
   self setAnimKnobLimited(animArray("add_aim_down"), 1, transTime);
@@ -198,22 +198,22 @@ startFireAndAimIdleThread() {
 
 endFireAndAnimIdleThread() {
   endAimIdleThread();
-  self clearAnim( % add_fire, .1);
+  self clearAnim(%add_fire, .1);
   self notify("stop tracking");
 }
 
 showFireHideAimIdle() {
   if(isDefined(self.a.aimIdleThread))
-    self setAnim( % add_idle, 0, .2);
+    self setAnim(%add_idle, 0, .2);
 
-  self setAnim( % add_fire, 1, .1);
+  self setAnim(%add_fire, 1, .1);
 }
 
 hideFireShowAimIdle() {
   if(isDefined(self.a.aimIdleThread))
-    self setAnim( % add_idle, 1, .2);
+    self setAnim(%add_idle, 1, .2);
 
-  self setAnim( % add_fire, 0, .1);
+  self setAnim(%add_fire, 0, .1);
 }
 
 aimIdleThread(lean) {
@@ -228,7 +228,7 @@ aimIdleThread(lean) {
   wait 0.1;
 
   // this used to be setAnim, but it caused problems with turning on its parent nodes when they were supposed to be off (like during pistol pullout).
-  self setAnimLimited( % add_idle, 1, .2);
+  self setAnimLimited(%add_idle, 1, .2);
 
   for(i = 0;; i++) {
     flagname = "idle" + i;
@@ -243,13 +243,13 @@ aimIdleThread(lean) {
     self waittillmatch(flagname, "end");
   }
 
-  self clearAnim( % add_idle, .1);
+  self clearAnim(%add_idle, .1);
 }
 
 endAimIdleThread() {
   self notify("end_aim_idle_thread");
   self.a.aimIdleThread = undefined;
-  self clearAnim( % add_idle, .1);
+  self clearAnim(%add_idle, .1);
 }
 
 shotgunFireRate() {
@@ -451,9 +451,7 @@ showRocketWhenReloadIsDone() {
 }
 
 decrementBulletsInClip() {
-  // we allow this to happen even when bulletsinclip is zero,
-  // because sometimes we want to shoot even if we're out of ammo,
-  // like when we've already started a blind fire animation.
+  // we allow this to happen even when bulletsinclip is zero, // because sometimes we want to shoot even if we're out of ammo, // like when we've already started a blind fire animation.
   if(self.bulletsInClip)
     self.bulletsInClip--;
 }
@@ -535,14 +533,14 @@ Reload(thresholdFraction, optionalAnimation) {
   self animscripts\battleChatter::playBattleChatter();
 
   if(isDefined(optionalAnimation)) {
-    self setFlaggedAnimKnobAll("reloadanim", optionalAnimation, % body, 1, .1, 1);
+    self setFlaggedAnimKnobAll("reloadanim", optionalAnimation, %body, 1, .1, 1);
     animscripts\shared::DoNoteTracks("reloadanim");
     self animscripts\weaponList::RefillClip(); // This should be in the animation as a notetrack in theory.
     self.a.needsToRechamber = 0;
   } else {
     if(self.a.pose == "prone") {
-      self setFlaggedAnimKnobAll("reloadanim", % prone_reload, % body, 1, .1, 1);
-      self UpdateProne( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+      self setFlaggedAnimKnobAll("reloadanim", %prone_reload, %body, 1, .1, 1);
+      self UpdateProne(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
     } else {
       println("Bad anim_pose in combat::Reload");
       //prof_end( "Reload" );
@@ -573,21 +571,21 @@ addGrenadeThrowAnimOffset(throwAnim, offset) {
 
 initGrenadeThrowAnims() {
   // generated with scr_testgrenadethrows in combat.gsc	
-  addGrenadeThrowAnimOffset( % exposed_grenadethrowb, (41.5391, 7.28883, 72.2128));
-  addGrenadeThrowAnimOffset( % exposed_grenadethrowc, (34.8849, -4.77048, 74.0488));
-  addGrenadeThrowAnimOffset( % corner_standl_grenade_a, (41.605, 6.80107, 81.4785));
-  addGrenadeThrowAnimOffset( % corner_standl_grenade_b, (24.1585, -14.7221, 29.2992));
-  addGrenadeThrowAnimOffset( % cornercrl_grenadea, (25.8988, -10.2811, 30.4813));
-  addGrenadeThrowAnimOffset( % cornercrl_grenadeb, (24.688, 45.0702, 64.377));
-  addGrenadeThrowAnimOffset( % corner_standr_grenade_a, (37.1254, -32.7053, 76.5745));
-  addGrenadeThrowAnimOffset( % corner_standr_grenade_b, (19.356, 15.5341, 16.5036));
-  addGrenadeThrowAnimOffset( % cornercrr_grenadea, (39.8857, 5.92472, 24.5878));
-  addGrenadeThrowAnimOffset( % covercrouch_grenadea, (-1.6363, -0.693674, 60.1009));
-  addGrenadeThrowAnimOffset( % covercrouch_grenadeb, (-1.6363, -0.693674, 60.1009));
-  addGrenadeThrowAnimOffset( % coverstand_grenadea, (10.8573, 7.12614, 77.2356));
-  addGrenadeThrowAnimOffset( % coverstand_grenadeb, (19.1804, 5.68214, 73.2278));
-  addGrenadeThrowAnimOffset( % prone_grenade_a, (12.2859, -1.3019, 33.4307));
-  addGrenadeThrowAnimOffset( % CQB_stand_grenade_throw, (35.7494, 26.6052, 37.7086));
+  addGrenadeThrowAnimOffset(%exposed_grenadethrowb, (41.5391, 7.28883, 72.2128));
+  addGrenadeThrowAnimOffset(%exposed_grenadethrowc, (34.8849, -4.77048, 74.0488));
+  addGrenadeThrowAnimOffset(%corner_standl_grenade_a, (41.605, 6.80107, 81.4785));
+  addGrenadeThrowAnimOffset(%corner_standl_grenade_b, (24.1585, -14.7221, 29.2992));
+  addGrenadeThrowAnimOffset(%cornercrl_grenadea, (25.8988, -10.2811, 30.4813));
+  addGrenadeThrowAnimOffset(%cornercrl_grenadeb, (24.688, 45.0702, 64.377));
+  addGrenadeThrowAnimOffset(%corner_standr_grenade_a, (37.1254, -32.7053, 76.5745));
+  addGrenadeThrowAnimOffset(%corner_standr_grenade_b, (19.356, 15.5341, 16.5036));
+  addGrenadeThrowAnimOffset(%cornercrr_grenadea, (39.8857, 5.92472, 24.5878));
+  addGrenadeThrowAnimOffset(%covercrouch_grenadea, (-1.6363, -0.693674, 60.1009));
+  addGrenadeThrowAnimOffset(%covercrouch_grenadeb, (-1.6363, -0.693674, 60.1009));
+  addGrenadeThrowAnimOffset(%coverstand_grenadea, (10.8573, 7.12614, 77.2356));
+  addGrenadeThrowAnimOffset(%coverstand_grenadeb, (19.1804, 5.68214, 73.2278));
+  addGrenadeThrowAnimOffset(%prone_grenade_a, (12.2859, -1.3019, 33.4307));
+  addGrenadeThrowAnimOffset(%CQB_stand_grenade_throw, (35.7494, 26.6052, 37.7086));
 }
 
 getGrenadeThrowOffset(throwAnim) {
@@ -1129,7 +1127,7 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
 
   self animscripts\battleChatter_ai::evaluateAttackEvent(self.grenadeWeapon);
   self notify("stop_aiming_at_enemy");
-  self SetFlaggedAnimKnobAllRestart("throwanim", throw_anim, % body, fasterAnimSpeed(), 0.1, 1);
+  self SetFlaggedAnimKnobAllRestart("throwanim", throw_anim, %body, fasterAnimSpeed(), 0.1, 1);
 
   self thread animscripts\shared::DoNoteTracksForever("throwanim", "killanimscript");
 
@@ -1230,8 +1228,8 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
   // modern
 
   // TODO: why is this here? why are we assuming that the calling function wants these particular animnodes turned on?
-  self setanim( % exposed_modern, 1, .2);
-  self setanim( % exposed_aiming, 1);
+  self setanim(%exposed_modern, 1, .2);
+  self setanim(%exposed_aiming, 1);
   self clearanim(throw_anim, .2);
 }
 
@@ -1253,8 +1251,7 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
 
   grenade = self getGrenadeIThrew();
   if(!isDefined(grenade)) {
-    // the throw failed. maybe we died. =(
-    return;
+    // the throw failed. maybe we died. =(return;
   }
 
   setGrenadeTimer(activeGrenadeTimer, min(gettime() + 5000, nextGrenadeTimeToUse));
@@ -1478,9 +1475,7 @@ DebugFailedCoverUsage(node) {
   }
 }
 
-// this function seems okish,
-// but the idea behind FindReacquireNode() is that you call it once,
-// and then call GetReacquireNode() many times until it returns undefined.
+// this function seems okish, // but the idea behind FindReacquireNode() is that you call it once, // and then call GetReacquireNode() many times until it returns undefined.
 // if we're just taking the first node (the best), we might as well just be using
 // FindBestCoverNode().
 /*
@@ -1503,8 +1498,7 @@ shouldHelpAdvancingTeammate() {
     leadAttacker = level.lastAdvanceToEnemyAttacker[self.team];
     nearLeadAttacker = isDefined(leadAttacker) && distanceSquared(self.origin, leadAttacker.origin) < 256 * 256;
 
-    if((nearLeadAttacker || distanceSquared(self.origin, level.lastAdvanceToEnemySrc[self.team]) < 256 * 256) &&
-      (!isDefined(self.enemy) || distanceSquared(self.enemy.origin, level.lastAdvanceToEnemyDest[self.team]) < 512 * 512)) {
+    if((nearLeadAttacker || distanceSquared(self.origin, level.lastAdvanceToEnemySrc[self.team]) < 256 * 256) && (!isDefined(self.enemy) || distanceSquared(self.enemy.origin, level.lastAdvanceToEnemyDest[self.team]) < 512 * 512)) {
       return true;
     }
   }

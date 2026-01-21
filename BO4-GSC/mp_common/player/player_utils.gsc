@@ -73,14 +73,12 @@ function_14e61d05() {
 
 function_cf3aa03d(func, threaded = 1) {
   array::add(level.var_da2045d0, {
-    #callback: func,
-    #threaded: threaded
+    #callback: func, #threaded: threaded
   });
 }
 
 function_3c5cc656(func, threaded = 1) {
   array::add(level.var_fa66fada, {
-    #callback: func,
-    #threaded: threaded
+    #callback: func, #threaded: threaded
   });
 }

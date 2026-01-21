@@ -965,7 +965,7 @@ debug_jolt_vehs() {
 reaction_anims() {
   var_0 = [];
   var_0[0] = level.allies[1];
-  level.truck_player_arms setanim( % ehq_truck_drivein_hit_player, 0.9, 1, 1);
+  level.truck_player_arms setanim(%ehq_truck_drivein_hit_player, 0.9, 1, 1);
 }
 
 screen_shake_vehicles() {
@@ -1076,10 +1076,10 @@ sync_carry_walk_anims() {
   level.bishop endon("stop_anim");
 
   while(isDefined(self) && isDefined(level.bishop)) {
-    var_0 = self getanimtime( % wounded_carry_fastwalk_carrier);
+    var_0 = self getanimtime(%wounded_carry_fastwalk_carrier);
 
     if(isDefined(var_0) && var_0 > 0)
-      level.bishop setanimtime( % wounded_carry_fastwalk_wounded_relative, var_0);
+      level.bishop setanimtime(%wounded_carry_fastwalk_wounded_relative, var_0);
 
     wait 0.05;
   }

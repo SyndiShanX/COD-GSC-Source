@@ -26,9 +26,7 @@ debugDvar_Internal(dvar, action_func) {
 
   while(true) {
     if(GetDvar(dvar) != "off") {
-      [
-        [action_func]
-      ]();
+      [[action_func]]();
       wait(0.05);
       SetDvar(dvar, "off");
     }
@@ -750,9 +748,7 @@ debug_aliens_clear_all_intel(player) {
 debug_aliens_last_increase_cortex_charge() {
   if(common_scripts\utility::flag_exist("cortex_started") && common_scripts\utility::flag("cortex_started")) {
     if(isDefined(level.add_cortex_charge_func)) {
-      [
-        [level.add_cortex_charge_func]
-      ](1000);
+      [[level.add_cortex_charge_func]](1000);
     }
   }
 }

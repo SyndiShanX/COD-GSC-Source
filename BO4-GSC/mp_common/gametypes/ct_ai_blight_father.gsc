@@ -100,8 +100,7 @@ function_7c52f40() {
   self attach("c_t8_zmb_blightfather_eggsack1_both_noreveal");
   aiutility::addaioverridedamagecallback(self, &function_afce1cf);
   self.var_c8088bcb = {
-    #traces: [],
-    #timestamp: gettime()
+    #traces: [], #timestamp: gettime()
   };
   self.var_b2a80abc = gettime() + self ai::function_9139c839().var_f246f6de;
   self.ignorepathenemyfightdist = 1;
@@ -591,9 +590,7 @@ function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebc
   }
 
   return {
-    #damage_scale: var_b1c1c5cf,
-    #var_84ed9a13: var_84ed9a13,
-    #registerzombie_bgb_used_reinforce: registerzombie_bgb_used_reinforce
+    #damage_scale: var_b1c1c5cf, #var_84ed9a13: var_84ed9a13, #registerzombie_bgb_used_reinforce: registerzombie_bgb_used_reinforce
   };
 }
 

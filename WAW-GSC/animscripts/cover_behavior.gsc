@@ -45,9 +45,7 @@ main(behaviorCallbacks) {
     if(isDefined(behaviorCallbacks.mainLoopStart)) {
       startTime = gettime();
       self thread endIdleAtFrameEnd();
-      [
-        [behaviorCallbacks.mainLoopStart]
-      ]();
+      [[behaviorCallbacks.mainLoopStart]]();
       if(gettime() == startTime)
         self notify("dont_end_idle");
     }

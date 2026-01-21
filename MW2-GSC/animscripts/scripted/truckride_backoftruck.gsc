@@ -34,8 +34,7 @@ main() {
     // Nothing below will work if our gun is completely empty.
 
     Reload(0);
-    //	if( canShootstand && canStand &&
-    //	 ( !canShootCrouch || !canCrouch || ( dist < anim.standRangeSq )) )
+    //	if( canShootstand && canStand && //	 ( !canShootCrouch || !canCrouch || ( dist < anim.standRangeSq )) )
 
     if(nextaction == ("stand")) {
       timer = gettime() + randomint(2000) + 2000;

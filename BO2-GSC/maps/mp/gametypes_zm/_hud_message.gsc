@@ -525,9 +525,7 @@ teamoutcomenotify(winner, isround, endreasontext) {
     if(isround)
       teamscores[enemyteam] setvalue(getteamscore(enemyteam));
     else
-      teamscores[enemyteam][
-        [level.setmatchscorehudelemforteam]
-      ](enemyteam);
+      teamscores[enemyteam][[level.setmatchscorehudelemforteam]](enemyteam);
 
     teamscores[enemyteam].hidewheninmenu = 0;
     teamscores[enemyteam].archived = 0;

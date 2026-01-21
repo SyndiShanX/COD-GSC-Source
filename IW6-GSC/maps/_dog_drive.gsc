@@ -991,13 +991,13 @@ dog_jumpup_wait(var_0) {
 
 dog_drive_animscript(var_0) {
   var_0 useanimtree(#animtree);
-  var_0 setanimknoball( % german_shepherd_look_forward, % german_shepherd_look, 1, 0.3, 1);
-  var_0 setanimlimited( % german_shepherd_look, 1, 0.3, 1);
-  var_0 setanimlimited( % german_shepherd_look_left, 1, 0.3, 1);
-  var_0 setanimlimited( % german_shepherd_look_right, 1, 0.3, 1);
-  var_0 setanimlimited( % german_shepherd_stationaryrun, 1, 0.3, 1);
-  var_0 setanimlimited( % german_shepherd_stationaryrun_lean_l, 0, 0.3, 1);
-  var_0 setanimlimited( % german_shepherd_stationaryrun_lean_r, 0, 0.3, 1);
+  var_0 setanimknoball(%german_shepherd_look_forward, %german_shepherd_look, 1, 0.3, 1);
+  var_0 setanimlimited(%german_shepherd_look, 1, 0.3, 1);
+  var_0 setanimlimited(%german_shepherd_look_left, 1, 0.3, 1);
+  var_0 setanimlimited(%german_shepherd_look_right, 1, 0.3, 1);
+  var_0 setanimlimited(%german_shepherd_stationaryrun, 1, 0.3, 1);
+  var_0 setanimlimited(%german_shepherd_stationaryrun_lean_l, 0, 0.3, 1);
+  var_0 setanimlimited(%german_shepherd_stationaryrun_lean_r, 0, 0.3, 1);
   thread track_right_stick(var_0);
   thread track_left_stick(var_0);
 }
@@ -1009,11 +1009,11 @@ track_left_stick(var_0) {
 
     if(var_2 > 0) {
       var_3 = var_2;
-      var_0 setanim( % german_shepherd_runinplace, var_3, 0.2, var_3);
-      var_0 setanim( % german_shepherd_look, 0, 0.2, 1);
+      var_0 setanim(%german_shepherd_runinplace, var_3, 0.2, var_3);
+      var_0 setanim(%german_shepherd_look, 0, 0.2, 1);
     } else {
-      var_0 setanim( % german_shepherd_look, 1, 0.2, 1);
-      var_0 setanim( % german_shepherd_runinplace, 0, 0.2, 1);
+      var_0 setanim(%german_shepherd_look, 1, 0.2, 1);
+      var_0 setanim(%german_shepherd_runinplace, 0, 0.2, 1);
     }
 
     var_4 = self getnormalizedcameramovement();
@@ -1037,9 +1037,9 @@ track_left_stick(var_0) {
       var_6["center"] = 1;
     }
 
-    var_0 setanimlimited( % german_shepherd_stationaryrun, var_6["center"], 0.5, 1);
-    var_0 setanimlimited( % german_shepherd_stationaryrun_lean_l, var_6["left"], 0.5, 1);
-    var_0 setanimlimited( % german_shepherd_stationaryrun_lean_r, var_6["right"], 0.5, 1);
+    var_0 setanimlimited(%german_shepherd_stationaryrun, var_6["center"], 0.5, 1);
+    var_0 setanimlimited(%german_shepherd_stationaryrun_lean_l, var_6["left"], 0.5, 1);
+    var_0 setanimlimited(%german_shepherd_stationaryrun_lean_r, var_6["right"], 0.5, 1);
     wait 0.05;
   }
 }
@@ -1054,11 +1054,11 @@ track_right_stick(var_0) {
 
     if(var_2 < 0) {
       var_4 = -1 * var_2;
-      var_0 setanimlimited( % german_shepherd_look_4, var_4, 0.2, 1);
-      var_0 setanimlimited( % german_shepherd_look_6, 0, 0.2, 1);
+      var_0 setanimlimited(%german_shepherd_look_4, var_4, 0.2, 1);
+      var_0 setanimlimited(%german_shepherd_look_6, 0, 0.2, 1);
     } else {
-      var_0 setanimlimited( % german_shepherd_look_6, var_2, 0.2, 1);
-      var_0 setanimlimited( % german_shepherd_look_4, 0, 0.2, 1);
+      var_0 setanimlimited(%german_shepherd_look_6, var_2, 0.2, 1);
+      var_0 setanimlimited(%german_shepherd_look_4, 0, 0.2, 1);
     }
 
     wait 0.05;

@@ -122,9 +122,7 @@ onscoreclosemusic() {
     runnerupscore = 0;
 
     foreach(team, _ in level.teams) {
-      score = [
-        [level._getteamscore]
-      ](team);
+      score = [[level._getteamscore]](team);
 
       if(score > topscore) {
         runnerupscore = topscore;

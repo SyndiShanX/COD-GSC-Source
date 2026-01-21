@@ -201,9 +201,7 @@ class csceneplayer: csceneobject {
     flagsys::set(#"camera_playing");
 
     if(csceneobject::is_shared_player()) {
-      a_players = [
-        [_func_get]
-      ](_o_scene._str_team);
+      a_players = [[_func_get]](_o_scene._str_team);
 
       foreach(player in a_players) {
         _str_camera = animation_lookup(animation, player, 1);
@@ -321,9 +319,7 @@ class csceneplayer: csceneobject {
     player.scene_takedamage = undefined;
     player._scene_old_gun_removed = undefined;
 
-    if(![
-        [_o_scene]
-      ] - > has_next_shot(_str_shot) || _o_scene._str_mode === "single") {
+    if(![[_o_scene]] - > has_next_shot(_str_shot) || _o_scene._str_mode === "single") {
       player thread scene::scene_enable_player_stuff(_o_scene._s, _s, _o_scene._e_root);
       var_700fed0d = player getentitynumber() + 2;
       player util::delay_network_frames(var_700fed0d, "disconnect", &clientfield::set_to_player, "postfx_cateye", 0);
@@ -603,9 +599,7 @@ class csceneplayer: csceneobject {
     }
 
     if(s_waitresult._notify == "death") {
-      [
-        [_o_scene]
-      ] - > stop();
+      [[_o_scene]] - > stop();
     }
   }
 
@@ -1165,9 +1159,7 @@ class csceneplayer: csceneobject {
       player flagsys::set(#"cancel_mobile_armory");
       player closemenu("mobile_armory_loadout");
       params = {
-        #menu: "mobile_armory_loadout",
-        #response: "cancel",
-        #intpayload: 0
+        #menu: "mobile_armory_loadout", #response: "cancel", #intpayload: 0
       };
       player notify(#"menuresponse", params);
       player callback::callback(#"menu_response", params);
@@ -1230,9 +1222,7 @@ class csceneplayer: csceneobject {
       }
     }
 
-    if([
-        [_o_scene]
-      ] - > is_scene_shared() && (var_2bb59a6a || scene::function_46546b5c(_o_scene._str_name)) && !csceneobject::is_skipping_scene()) {
+    if([[_o_scene]] - > is_scene_shared() && (var_2bb59a6a || scene::function_46546b5c(_o_scene._str_name)) && !csceneobject::is_skipping_scene()) {
       player thread scene::function_a4ad0308(_o_scene);
 
       if(var_2bb59a6a && getdvarint(#"hash_44f3b54c25dfae3b", 0)) {
@@ -1327,9 +1317,7 @@ class csceneplayer: csceneobject {
     csceneobject::restore_saved_ent();
 
     if(!isDefined(_e)) {
-      foreach(ent in [
-        [_func_get]
-      ](_str_team)) {
+      foreach(ent in [[_func_get]](_str_team)) {
         if(!csceneobject::in_this_scene(ent)) {
           _e = ent;
           return;
@@ -1560,9 +1548,7 @@ class cscenesharedplayer: csceneplayer, csceneobject {
     do {
       b_playing = 0;
 
-      foreach(player in [
-        [_func_get_active]
-      ](_str_team)) {
+      foreach(player in [[_func_get_active]](_str_team)) {
         if(isDefined(player) && player flagsys::get(player_animation_notify)) {
           b_playing = 1;
           player flagsys::wait_till_clear(player_animation_notify);

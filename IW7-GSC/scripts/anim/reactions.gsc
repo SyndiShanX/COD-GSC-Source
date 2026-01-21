@@ -73,7 +73,7 @@ func_BF20() {
     func_10F51();
   } else {
     var_0 = func_7FE1();
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
     self func_82E7("reactanim", var_0, 1, 0.2, 1);
     scripts\anim\shared::donotetracks("reactanim");
   }

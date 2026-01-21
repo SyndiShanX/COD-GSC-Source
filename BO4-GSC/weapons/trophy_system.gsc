@@ -308,9 +308,7 @@ projectileexplode(projectile, trophy) {
   self challenges::trophy_defense(projposition, 512);
 
   if(isDefined(level.var_d3a438fb)) {
-    if([
-        [level.var_d3a438fb]
-      ](trophy)) {
+    if([[level.var_d3a438fb]](trophy)) {
       self stats::function_dad108fa(#"hash_707d06184cf09b50", 1);
     }
   }

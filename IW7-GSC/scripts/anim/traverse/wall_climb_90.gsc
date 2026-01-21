@@ -6,7 +6,7 @@
 main() {
   if(getdvarint("ai_iw7", 0) == 0) {
     self.var_126E1 = 1;
-    func_18D0( % traverse90, 90);
+    func_18D0(%traverse90, 90);
     return;
   }
 
@@ -23,7 +23,7 @@ func_18D0(var_0, var_1) {
   self orientmode("face angle", var_2.angles[1]);
   var_3 = var_2.var_126D4 - var_2.origin[2];
   thread scripts\anim\traverse\shared::func_11661(var_3 - var_1);
-  self func_82E4("traverse", var_0, % body, 1, 0.15, 1);
+  self func_82E4("traverse", var_0, %body, 1, 0.15, 1);
   var_4 = gettime();
   thread scripts\anim\notetracks::donotetracksforever("traverse", "no clear", ::func_88CE);
   if(!animhasnotetrack(var_0, "gravity on")) {
@@ -54,9 +54,9 @@ func_88CE(var_0) {
   if(self.health == 1) {
     self.a.nodeath = 1;
     if(self.var_126E1 > 1) {
-      self func_82E3("deathanim", % traverse90_end_death, % body, 1, 0.2, 1);
+      self func_82E3("deathanim", %traverse90_end_death, %body, 1, 0.2, 1);
     } else {
-      self func_82E3("deathanim", % traverse90_start_death, % body, 1, 0.2, 1);
+      self func_82E3("deathanim", %traverse90_start_death, %body, 1, 0.2, 1);
     }
 
     scripts\anim\face::saygenericdialogue("death");

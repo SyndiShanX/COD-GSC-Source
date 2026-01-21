@@ -738,8 +738,7 @@ create_slowmo_breaches_from_entities() {
     AssertEx(isDefined(index), "Breach door post at " + post.origin + " had no script_slowmo_breach");
     AssertEx(!isDefined(breaches[index]), "Breach door post at " + post.origin + " used script_slowmo_breach " + index + " which is already in use elsewhere in the level. Each breach must have its own script_slowmo_breach.");
 
-    // set up door type - default is "wood"
-    doorType = "wood";
+    // set up door type - default is "wood"doorType = "wood";
     if(isDefined(post.script_slowmo_breach_doortype)) {
       switch (post.script_slowmo_breach_doortype) {
         case "wood":
@@ -887,17 +886,7 @@ create_slowmo_breaches_from_entities() {
 /*
 =============
 ///ScriptDocBegin
-"Name: objective_breach( <obj> , <breach_index1> , <breach_index2> , <breach_index3> , <breach_index4> )"
-"Summary: Adds objective positions at the correct location and name for breaching"
-"Module: SlowMo Breach"
-"MandatoryArg: <obj>: The index for the objective"
-"OptionalArg: <breach_index1>: A breach to show the position for"
-"OptionalArg: <breach_index2>: A breach to show the position for"
-"OptionalArg: <breach_index3>: A breach to show the position for"
-"OptionalArg: <breach_index4>: A breach to show the position for"
-"Example: objective_breach( 2, breach_indices[ 0 ], breach_indices[ 1 ], breach_indices[ 2 ], breach_indices[ 3 ] );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: objective_breach( <obj> , <breach_index1> , <breach_index2> , <breach_index3> , <breach_index4> )""Summary: Adds objective positions at the correct location and name for breaching""Module: SlowMo Breach""MandatoryArg: <obj>: The index for the objective""OptionalArg: <breach_index1>: A breach to show the position for""OptionalArg: <breach_index2>: A breach to show the position for""OptionalArg: <breach_index3>: A breach to show the position for""OptionalArg: <breach_index4>: A breach to show the position for""Example: objective_breach( 2, breach_indices[ 0 ], breach_indices[ 1 ], breach_indices[ 2 ], breach_indices[ 3 ] );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 objective_breach(obj, breach_index1, breach_index2, breach_index3, breach_index4) {
@@ -3439,14 +3428,7 @@ anim_exists(sAnim) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_slowmo_breach_custom_function( <animation> , <function> )"
-"Summary: Adds a custom slowmo breach function for guys using a specific animation"
-"Module: SlowMo Breach"
-"MandatoryArg: <animation>: The animation the guy plays "
-"OptionalArg: <function>: The function to call on this guy"
-"Example: add_slowmo_breach_custom_function( "execution_onknees_soldier", ::_slomo_breach_pistol_guy );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_slowmo_breach_custom_function( <animation> , <function> )""Summary: Adds a custom slowmo breach function for guys using a specific animation""Module: SlowMo Breach""MandatoryArg: <animation>: The animation the guy plays ""OptionalArg: <function>: The function to call on this guy""Example: add_slowmo_breach_custom_function( "execution_onknees_soldier", ::_slomo_breach_pistol_guy );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_slowmo_breach_custom_function(animation, function) {
@@ -3457,13 +3439,7 @@ add_slowmo_breach_custom_function(animation, function) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_slowmo_breacher()"
-"Summary: Adds an AI to level.breachfriendlies so they will be considered as candidates to breach into rooms with multiple breach points"
-"Module: SlowMo Breach"
-"CallOn: Any friendly AI"
-"Example: level.price add_slowmo_breacher();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_slowmo_breacher()""Summary: Adds an AI to level.breachfriendlies so they will be considered as candidates to breach into rooms with multiple breach points""Module: SlowMo Breach""CallOn: Any friendly AI""Example: level.price add_slowmo_breacher();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_slowmo_breacher() {
@@ -3482,13 +3458,7 @@ add_slowmo_breacher() {
 /*
 =============
 ///ScriptDocBegin
-"Name: remove_slowmo_breacher()"
-"Summary: Removes an AI from level.breachfriendlies so they will not be considered as a candidate to breach into rooms with multiple breach points"
-"Module: SlowMo Breach"
-"CallOn: Any friendly AI"
-"Example: level.price remove_slowmo_breacher();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: remove_slowmo_breacher()""Summary: Removes an AI from level.breachfriendlies so they will not be considered as a candidate to breach into rooms with multiple breach points""Module: SlowMo Breach""CallOn: Any friendly AI""Example: level.price remove_slowmo_breacher();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 remove_slowmo_breacher() {

@@ -538,10 +538,10 @@ function function_f35264ff() {
   self notify("hash_3b22402e");
   self endon("hash_765cfe11");
   self function_4f226940();
-  self setanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 1, 0.2);
-  waitrealtime((getanimlength( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim)) - 0.2);
-  self clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 0.2);
-  self setanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_idle_anim, 1, 0.2);
+  self setanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 1, 0.2);
+  waitrealtime((getanimlength(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim)) - 0.2);
+  self clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 0.2);
+  self setanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_idle_anim, 1, 0.2);
   level.var_d7512031 = 1;
 }
 
@@ -550,11 +550,11 @@ function function_3f73ddc3(oldval) {
   self endon("hash_3b22402e");
   self function_4f226940();
   if(oldval) {
-    self setanim( % generic::p7_fxanim_zm_ori_monolith_inductor_release_anim, 1, 0.2);
-    waitrealtime((getanimlength( % generic::p7_fxanim_zm_ori_monolith_inductor_release_anim)) - 0.2);
+    self setanim(%generic::p7_fxanim_zm_ori_monolith_inductor_release_anim, 1, 0.2);
+    waitrealtime((getanimlength(%generic::p7_fxanim_zm_ori_monolith_inductor_release_anim)) - 0.2);
     self function_4f226940();
   }
-  self setanim( % generic::p7_fxanim_zm_ori_monolith_inductor_idle_anim, 1, 0.2);
+  self setanim(%generic::p7_fxanim_zm_ori_monolith_inductor_idle_anim, 1, 0.2);
   level.var_d7512031 = 0;
 }
 
@@ -563,14 +563,14 @@ function pap_monolith_ring_shake(localclientnumber, oldval, newval, bnewent, bin
   var_eb1b4657 endon("hash_3b22402e");
   if(newval == 1) {
     var_eb1b4657 function_4f226940();
-    var_eb1b4657 setanim( % generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim, 1, 0.2);
-    waitrealtime((getanimlength( % generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim)) - 0.2);
-    var_eb1b4657 clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim, 0.2);
+    var_eb1b4657 setanim(%generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim, 1, 0.2);
+    waitrealtime((getanimlength(%generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim)) - 0.2);
+    var_eb1b4657 clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim, 0.2);
     if(level.var_d7512031) {
-      var_eb1b4657 setanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 1, 0.2);
-      waitrealtime((getanimlength( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim)) - 0.2);
-      var_eb1b4657 clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 0.2);
-      var_eb1b4657 setanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_idle_anim, 1, 0.2);
+      var_eb1b4657 setanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 1, 0.2);
+      waitrealtime((getanimlength(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim)) - 0.2);
+      var_eb1b4657 clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 0.2);
+      var_eb1b4657 setanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_idle_anim, 1, 0.2);
     } else {
       var_eb1b4657 thread function_3f73ddc3(0);
     }
@@ -578,11 +578,11 @@ function pap_monolith_ring_shake(localclientnumber, oldval, newval, bnewent, bin
 }
 
 function function_4f226940() {
-  self clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 0.2);
-  self clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_pull_idle_anim, 0.2);
-  self clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_release_anim, 0.2);
-  self clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim, 0.2);
-  self clearanim( % generic::p7_fxanim_zm_ori_monolith_inductor_idle_anim, 0.2);
+  self clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_anim, 0.2);
+  self clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_pull_idle_anim, 0.2);
+  self clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_release_anim, 0.2);
+  self clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_shake_anim, 0.2);
+  self clearanim(%generic::p7_fxanim_zm_ori_monolith_inductor_idle_anim, 0.2);
 }
 
 function function_aab40f28(localclientnumber, n_value) {
@@ -697,13 +697,13 @@ function function_5f50cf29() {
 }
 
 function function_7cc68e33() {
-  function_6784d594(0, undefined, % generic::p7_fxanim_zm_ori_pack_return_pc1_anim);
-  function_6784d594(1, % generic::p7_fxanim_zm_ori_pack_pc1_anim, % generic::p7_fxanim_zm_ori_pack_return_pc2_anim);
-  function_6784d594(2, % generic::p7_fxanim_zm_ori_pack_pc2_anim, % generic::p7_fxanim_zm_ori_pack_return_pc3_anim);
-  function_6784d594(3, % generic::p7_fxanim_zm_ori_pack_pc3_anim, % generic::p7_fxanim_zm_ori_pack_return_pc4_anim);
-  function_6784d594(4, % generic::p7_fxanim_zm_ori_pack_pc4_anim, % generic::p7_fxanim_zm_ori_pack_return_pc5_anim);
-  function_6784d594(5, % generic::p7_fxanim_zm_ori_pack_pc5_anim, % generic::p7_fxanim_zm_ori_pack_return_pc6_anim);
-  function_6784d594(6, % generic::p7_fxanim_zm_ori_pack_pc6_anim, undefined);
+  function_6784d594(0, undefined, %generic::p7_fxanim_zm_ori_pack_return_pc1_anim);
+  function_6784d594(1, %generic::p7_fxanim_zm_ori_pack_pc1_anim, %generic::p7_fxanim_zm_ori_pack_return_pc2_anim);
+  function_6784d594(2, %generic::p7_fxanim_zm_ori_pack_pc2_anim, %generic::p7_fxanim_zm_ori_pack_return_pc3_anim);
+  function_6784d594(3, %generic::p7_fxanim_zm_ori_pack_pc3_anim, %generic::p7_fxanim_zm_ori_pack_return_pc4_anim);
+  function_6784d594(4, %generic::p7_fxanim_zm_ori_pack_pc4_anim, %generic::p7_fxanim_zm_ori_pack_return_pc5_anim);
+  function_6784d594(5, %generic::p7_fxanim_zm_ori_pack_pc5_anim, %generic::p7_fxanim_zm_ori_pack_return_pc6_anim);
+  function_6784d594(6, %generic::p7_fxanim_zm_ori_pack_pc6_anim, undefined);
 }
 
 function play_pap_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

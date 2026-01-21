@@ -382,9 +382,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
   }
 
   if(isDefined(eattacker) && (isplayer(eattacker) && eattacker.team == self.team) && (!isDefined(level.friendlyexplosivedamage) || !level.friendlyexplosivedamage)) {
-    if(!isDefined(level.is_friendly_fire_on) || ![
-        [level.is_friendly_fire_on]
-      ]()) {
+    if(!isDefined(level.is_friendly_fire_on) || ![[level.is_friendly_fire_on]]()) {
       if(self != eattacker) {
         println("Exiting - players can't hut each other.");
 

@@ -622,12 +622,9 @@ is_player_firing_during_boom() {
 
 stealth_condition_checker() {
   level endon("player_broke_stealth");
-  if((!flag("bombers_passing") && !flag("player_in_shop")) ||
-    (flag("outof_event1") && !flag("player_in_shop")) ||
-    (flag("outof_fountain") && (!flag("player_in_shop") && !flag("outof_event1")))) {
+  if((!flag("bombers_passing") && !flag("player_in_shop")) || (flag("outof_event1") && !flag("player_in_shop")) || (flag("outof_fountain") && (!flag("player_in_shop") && !flag("outof_event1")))) {
     level notify("player_broke_stealth", self);
-  } else if((!flag("bombers_passing") && flag("player_in_shop")) ||
-    (flag("outof_event1") && flag("player_in_shop"))) {
+  } else if((!flag("bombers_passing") && flag("player_in_shop")) || (flag("outof_event1") && flag("player_in_shop"))) {
     level notify("player_broke_stealth_inshop", self);
     level waittill("shop_area_clear");
   }
@@ -1315,14 +1312,11 @@ encourage_player_toshoot(lastwave) {
     return;
   }
   for(i = 0; i < guys.size; i++) {
-    if(isDefined(guys[i].script_noteworthy) &&
-      (guys[i].script_noteworthy == "by_tank_dude1" ||
-        guys[i].script_noteworthy == "by_tank_dude2")) {
+    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "by_tank_dude1" || guys[i].script_noteworthy == "by_tank_dude2")) {
       level thread ftn_chatter("straight");
       break;
     }
-    if(isDefined(guys[i].script_noteworthy) &&
-      (guys[i].script_noteworthy == "by_tank_dude3" || guys[i].script_noteworthy == "by_tank_dude4")) {
+    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "by_tank_dude3" || guys[i].script_noteworthy == "by_tank_dude4")) {
       if(cointoss()) {
         level thread ftn_chatter("moreleft");
       } else {
@@ -1330,8 +1324,7 @@ encourage_player_toshoot(lastwave) {
       }
       break;
     }
-    if(isDefined(guys[i].script_noteworthy) &&
-      (guys[i].script_noteworthy == "horchguy1" || guys[i].script_noteworthy == "horchguy2")) {
+    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "horchguy1" || guys[i].script_noteworthy == "horchguy2")) {
       if(cointoss()) {
         ftn_chatter("bystairs");
         ftn_chatter("aimright");

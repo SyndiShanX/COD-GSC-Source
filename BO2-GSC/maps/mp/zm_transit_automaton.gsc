@@ -100,7 +100,7 @@ automatonsetup() {
   self linkto(level.the_bus);
   self setmovingplatformenabled(1);
   self useanimtree(#animtree);
-  self setanim( % ai_zombie_bus_driver_idle);
+  self setanim(%ai_zombie_bus_driver_idle);
   self addasspeakernpc(1);
   level.vox zmbvoxinitspeaker("automaton", "vox_bus_", self);
   self thread automatondamagecallback();
@@ -317,20 +317,20 @@ automatonemp() {
       level.the_bus waittill("pre_power_off");
 
     level.automaton.disabled_by_emp = 1;
-    level.automaton setanim( % ai_zombie_bus_driver_emp_powerdown);
-    self thread sndplaydriveranimsnd( % ai_zombie_bus_driver_emp_powerdown);
+    level.automaton setanim(%ai_zombie_bus_driver_emp_powerdown);
+    self thread sndplaydriveranimsnd(%ai_zombie_bus_driver_emp_powerdown);
     level.automaton maps\mp\zombies\_zm_audio::create_and_play_dialog("inform", "emp_disable");
-    wait(getanimlength( % ai_zombie_bus_driver_emp_powerdown));
-    level.automaton setanim( % ai_zombie_bus_driver_emp_powerdown_idle);
+    wait(getanimlength(%ai_zombie_bus_driver_emp_powerdown));
+    level.automaton setanim(%ai_zombie_bus_driver_emp_powerdown_idle);
 
     if(isDefined(level.the_bus.pre_disabled_by_emp) && level.the_bus.pre_disabled_by_emp || isDefined(level.the_bus.disabled_by_emp) && level.the_bus.disabled_by_emp)
       level.the_bus waittill("power_on");
 
-    level.automaton setanim( % ai_zombie_bus_driver_emp_powerup);
-    self thread sndplaydriveranimsnd( % ai_zombie_bus_driver_emp_powerup);
-    wait(getanimlength( % ai_zombie_bus_driver_emp_powerup));
+    level.automaton setanim(%ai_zombie_bus_driver_emp_powerup);
+    self thread sndplaydriveranimsnd(%ai_zombie_bus_driver_emp_powerup);
+    wait(getanimlength(%ai_zombie_bus_driver_emp_powerup));
     level.automaton.disabled_by_emp = 0;
-    self setanim( % ai_zombie_bus_driver_idle);
+    self setanim(%ai_zombie_bus_driver_idle);
   }
 }
 

@@ -210,7 +210,7 @@ ape_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_simianaut_idle, % ai_zombie_simianaut_idle);
+  self.a.array["exposed_idle"] = array(%ai_zombie_simianaut_idle, %ai_zombie_simianaut_idle);
   self.a.array["straight_level"] = % ai_zombie_simianaut_idle;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -447,9 +447,7 @@ ape_stop_fog() {
   time = 3;
   max_fog_opacity = 1;
   clear_fog_threads();
-  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-    sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-    sun_stop_ang, time, max_fog_opacity);
+  setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
 }
 
 ape_round_tracker() {
@@ -795,8 +793,8 @@ ape_zombie_play_activate() {
   self endon("death");
   self endon("play_activate_done");
   self thread ape_zombie_damage_during_activate();
-  time = getAnimLength( % ai_zombie_simianaut_chest_beat);
-  self SetFlaggedAnimKnobAllRestart("chestbeat_anim", % ai_zombie_simianaut_chest_beat, % body, 1, .1, 1);
+  time = getAnimLength(%ai_zombie_simianaut_chest_beat);
+  self SetFlaggedAnimKnobAllRestart("chestbeat_anim", %ai_zombie_simianaut_chest_beat, %body, 1, .1, 1);
   time = time / 1.0;
   wait(time);
   self notify("play_activate_done");
@@ -846,13 +844,13 @@ ape_zombie_ground_hit() {
   }
   self.ground_hit = true;
   self thread groundhit_watcher("groundhit_anim");
-  self animscripted("groundhit_anim", self.origin, self.angles, % ai_zombie_simianaut_ground_pound);
-  animscripts\traverse\zombie_shared::wait_anim_length( % ai_zombie_simianaut_ground_pound, .02);
+  self animscripted("groundhit_anim", self.origin, self.angles, %ai_zombie_simianaut_ground_pound);
+  animscripts\traverse\zombie_shared::wait_anim_length(%ai_zombie_simianaut_ground_pound, .02);
   self.ground_hit = false;
   self.nextGroundHit = GetTime() + level.ape_ground_attack_delay;
   if(self.chest_beat) {
-    time = getAnimLength( % ai_zombie_simianaut_taunt);
-    self animscripted("taunt_anim", self.origin, self.angles, % ai_zombie_simianaut_taunt);
+    time = getAnimLength(%ai_zombie_simianaut_taunt);
+    self animscripted("taunt_anim", self.origin, self.angles, %ai_zombie_simianaut_taunt);
     wait(time);
     self.chest_beat = false;
   }
@@ -1094,8 +1092,8 @@ ape_thundergun_disintegrate(player) {
   self DoDamage(level.ape_thundergun_damage, player.origin, player);
   if(self.health > 0 && !flag("tgun_react")) {
     flag_set("tgun_react");
-    time = getAnimLength( % ai_zombie_simianaut_react_tgun);
-    self animscripted("tgunreact_anim", self.origin, self.angles, % ai_zombie_simianaut_react_tgun);
+    time = getAnimLength(%ai_zombie_simianaut_react_tgun);
+    self animscripted("tgunreact_anim", self.origin, self.angles, %ai_zombie_simianaut_react_tgun);
     wait(time);
     wait(2.5);
     flag_clear("tgun_react");
@@ -1173,8 +1171,8 @@ ape_nuke_damage(location) {
     damage = self.maxhealth * 0.5;
     self DoDamage(damage, self.origin);
     if(self.is_activated && self.health > 0) {
-      time = getAnimLength( % ai_zombie_simianaut_react_nuke);
-      self animscripted("nukereact_anim", self.origin, self.angles, % ai_zombie_simianaut_react_nuke);
+      time = getAnimLength(%ai_zombie_simianaut_react_nuke);
+      self animscripted("nukereact_anim", self.origin, self.angles, %ai_zombie_simianaut_react_nuke);
       wait(time);
     }
     self.is_activated = true;
@@ -1214,11 +1212,11 @@ ape_zombie_default_enter_level() {
 
 ape_zombie_knockdown() {
   self endon("death");
-  time = getAnimLength( % ai_zombie_thundergun_hit_forwardtoface);
-  self animscripted("down", self.origin, self.angles, % ai_zombie_thundergun_hit_forwardtoface, "normal", % body, 1);
+  time = getAnimLength(%ai_zombie_thundergun_hit_forwardtoface);
+  self animscripted("down", self.origin, self.angles, %ai_zombie_thundergun_hit_forwardtoface, "normal", %body, 1);
   wait(time);
-  time = getAnimLength( % ai_zombie_thundergun_getup_a);
-  self animscripted("up", self.origin, self.angles, % ai_zombie_thundergun_getup_a, "normal", % body, 1);
+  time = getAnimLength(%ai_zombie_thundergun_getup_a);
+  self animscripted("up", self.origin, self.angles, %ai_zombie_thundergun_getup_a, "normal", %body, 1);
   wait(time);
 }
 

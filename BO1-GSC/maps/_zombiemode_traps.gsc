@@ -40,8 +40,7 @@ trap_init() {
   self._trap_type = "";
   if(isDefined(self.script_noteworthy)) {
     self._trap_type = self.script_noteworthy;
-    if(isDefined(level._zombiemode_trap_activate_funcs) &&
-      isDefined(level._zombiemode_trap_activate_funcs[self._trap_type])) {
+    if(isDefined(level._zombiemode_trap_activate_funcs) && isDefined(level._zombiemode_trap_activate_funcs[self._trap_type])) {
       self._trap_activate_func = level._zombiemode_trap_activate_funcs[self._trap_type];
     } else {
       switch (self.script_noteworthy) {
@@ -59,8 +58,7 @@ trap_init() {
           self._trap_activate_func = ::trap_activate_fire;
       }
     }
-    if(isDefined(level._zombiemode_trap_use_funcs) &&
-      isDefined(level._zombiemode_trap_use_funcs[self._trap_type])) {
+    if(isDefined(level._zombiemode_trap_use_funcs) && isDefined(level._zombiemode_trap_use_funcs[self._trap_type])) {
       self._trap_use_func = level._zombiemode_trap_use_funcs[self._trap_type];
     } else {
       self._trap_use_func = ::trap_use_think;

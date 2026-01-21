@@ -137,7 +137,7 @@ func_81EB() {
 }
 
 func_FA8C(var_0) {
-  self give_attacker_kill_rewards( % exposed_aiming, 1, 0.2);
+  self give_attacker_kill_rewards(%exposed_aiming, 1, 0.2);
   if(scripts\engine\utility::actor_is3d()) {
     self func_82E5("exposed_aim", scripts\anim\utility::func_1F64("straight_level"), 1, var_0);
   } else {
@@ -161,24 +161,24 @@ func_10D9A() {
 
 func_631A() {
   func_6309();
-  self clearanim( % add_fire, 0.1);
+  self clearanim(%add_fire, 0.1);
   self notify("stop tracking");
 }
 
 func_10126() {
   if(isDefined(self.a.var_1A3E)) {
-    self give_attacker_kill_rewards( % add_idle, 0, 0.2);
+    self give_attacker_kill_rewards(%add_idle, 0, 0.2);
   }
 
-  self give_attacker_kill_rewards( % add_fire, 1, 0.1);
+  self give_attacker_kill_rewards(%add_fire, 1, 0.1);
 }
 
 func_8EBF() {
   if(isDefined(self.a.var_1A3E)) {
-    self give_attacker_kill_rewards( % add_idle, 1, 0.2);
+    self give_attacker_kill_rewards(%add_idle, 1, 0.2);
   }
 
-  self give_attacker_kill_rewards( % add_fire, 0, 0.1);
+  self give_attacker_kill_rewards(%add_fire, 0, 0.1);
 }
 
 func_1A3E(var_0) {
@@ -190,7 +190,7 @@ func_1A3E(var_0) {
 
   self.a.var_1A3E = 1;
   wait(0.1);
-  self func_82AC( % add_idle, 1, 0.2);
+  self func_82AC(%add_idle, 1, 0.2);
   var_1 = % add_idle;
   var_2 = 0;
   for(;;) {
@@ -215,13 +215,13 @@ func_1A3E(var_0) {
     var_2++;
   }
 
-  self clearanim( % add_idle, 0.1);
+  self clearanim(%add_idle, 0.1);
 }
 
 func_6309() {
   self notify("end_aim_idle_thread");
   self.a.var_1A3E = undefined;
-  self clearanim( % add_idle, 0.1);
+  self clearanim(%add_idle, 0.1);
 }
 
 func_FEFE() {
@@ -665,7 +665,7 @@ func_58BA(var_0, var_1, var_2, var_3) {
 
   scripts\anim\battlechatter_ai::func_67CF(self.grenadeweapon);
   self notify("stop_aiming_at_enemy");
-  self func_82E4("throwanim", var_0, % body, func_6B9A(), 0.1, 1);
+  self func_82E4("throwanim", var_0, %body, func_6B9A(), 0.1, 1);
   thread scripts\anim\notetracks::donotetracksforever("throwanim", "killanimscript");
   var_4 = scripts\anim\utility_common::getgrenademodel();
   var_5 = "none";
@@ -715,8 +715,8 @@ func_58BA(var_0, var_1, var_2, var_3) {
   self waittillmatch("end", "throwanim");
   self notify("done_grenade_throw");
   self notify("weapon_switch_done");
-  self give_attacker_kill_rewards( % exposed_modern, 1, 0.2);
-  self give_attacker_kill_rewards( % exposed_aiming, 1);
+  self give_attacker_kill_rewards(%exposed_modern, 1, 0.2);
+  self give_attacker_kill_rewards(%exposed_aiming, 1);
   self clearanim(var_0, 0.2);
 }
 

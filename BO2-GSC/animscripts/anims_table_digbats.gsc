@@ -9,11 +9,11 @@
 
 setup_digbat_anim_array(animtype, array) {
   assert(isDefined(array) && isarray(array));
-  array[animtype]["stop"]["stand"]["rifle"]["idle"] = array(array( % ai_digbat_casual_stand_idle, % ai_digbat_casual_stand_idle, % ai_digbat_casual_stand_idle_twitch, % ai_digbat_casual_stand_idle_twitchb), array( % ai_digbat_casual_stand_v2_idle, % ai_digbat_casual_stand_v2_twitch_shift));
+  array[animtype]["stop"]["stand"]["rifle"]["idle"] = array(array(%ai_digbat_casual_stand_idle, %ai_digbat_casual_stand_idle, %ai_digbat_casual_stand_idle_twitch, %ai_digbat_casual_stand_idle_twitchb), array(%ai_digbat_casual_stand_v2_idle, %ai_digbat_casual_stand_v2_twitch_shift));
   array[animtype]["combat"]["stand"]["rifle"]["idle_trans_out"] = % ai_digbat_casual_stand_idle_trans_in;
-  array[animtype]["combat"]["stand"]["rifle"]["exposed_idle"] = array( % ai_digbat_exposed_idle_alert_v2, % ai_digbat_exposed_idle_alert_v3);
+  array[animtype]["combat"]["stand"]["rifle"]["exposed_idle"] = array(%ai_digbat_exposed_idle_alert_v2, %ai_digbat_exposed_idle_alert_v3);
   array[animtype]["combat"]["stand"]["rifle"]["fire"] = % ai_digbat_exposed_shoot_auto_v3;
-  array[animtype]["combat"]["stand"]["rifle"]["single"] = array( % ai_digbat_exposed_shoot_semi2);
+  array[animtype]["combat"]["stand"]["rifle"]["single"] = array(%ai_digbat_exposed_shoot_semi2);
   array[animtype]["combat"]["stand"]["rifle"]["burst2"] = % ai_digbat_exposed_shoot_burst3;
   array[animtype]["combat"]["stand"]["rifle"]["burst3"] = % ai_digbat_exposed_shoot_burst3;
   array[animtype]["combat"]["stand"]["rifle"]["burst4"] = % ai_digbat_exposed_shoot_burst4;
@@ -23,9 +23,9 @@ setup_digbat_anim_array(animtype, array) {
   array[animtype]["combat"]["stand"]["rifle"]["semi3"] = % ai_digbat_exposed_shoot_semi3;
   array[animtype]["combat"]["stand"]["rifle"]["semi4"] = % ai_digbat_exposed_shoot_semi4;
   array[animtype]["combat"]["stand"]["rifle"]["semi5"] = % ai_digbat_exposed_shoot_semi5;
-  array[animtype]["combat"]["stand"]["rifle"]["exposed_rambo"] = array( % ai_digbat_stand_exposed_rambo_2, % ai_digbat_stand_exposed_rambo_3);
-  array[animtype]["combat"]["stand"]["rifle"]["reload"] = array( % ai_digbat_exposed_reload);
-  array[animtype]["combat"]["stand"]["rifle"]["reload_crouchhide"] = array( % ai_digbat_exposed_reload);
+  array[animtype]["combat"]["stand"]["rifle"]["exposed_rambo"] = array(%ai_digbat_stand_exposed_rambo_2, %ai_digbat_stand_exposed_rambo_3);
+  array[animtype]["combat"]["stand"]["rifle"]["reload"] = array(%ai_digbat_exposed_reload);
+  array[animtype]["combat"]["stand"]["rifle"]["reload_crouchhide"] = array(%ai_digbat_exposed_reload);
   array[animtype]["combat"]["stand"]["rifle"]["turn_left_45"] = % ai_digbat_exposed_tracking_turn45l;
   array[animtype]["combat"]["stand"]["rifle"]["turn_left_90"] = % ai_digbat_exposed_tracking_turn90l;
   array[animtype]["combat"]["stand"]["rifle"]["turn_left_135"] = % ai_digbat_exposed_tracking_turn135l;
@@ -73,7 +73,7 @@ setup_digbat_anim_array(animtype, array) {
   array[animtype]["move"]["stand"]["rifle"]["combat_run_r"] = % ai_digbat_run_lowready_r;
   array[animtype]["move"]["stand"]["rifle"]["combat_run_l"] = % ai_digbat_run_lowready_l;
   array[animtype]["move"]["stand"]["rifle"]["combat_run_b"] = % ai_digbat_run_lowready_b;
-  array[animtype]["move"]["stand"]["rifle"]["reload"] = array( % ai_digbat_run_twitch_1, % ai_digbat_run_twitch_2, % run_lowready_reload);
+  array[animtype]["move"]["stand"]["rifle"]["reload"] = array(%ai_digbat_run_twitch_1, %ai_digbat_run_twitch_2, %run_lowready_reload);
   return array;
 }
 
@@ -95,8 +95,8 @@ setup_melee_digbat_anim_array() {
   self.anim_array[self.animtype]["move"]["stand"]["none"]["combat_run_l"] = % ai_digbat_melee_run_f;
   self.anim_array[self.animtype]["move"]["stand"]["none"]["combat_run_b"] = % ai_digbat_melee_run_f;
   self.anim_array[self.animtype]["stop"]["stand"]["none"]["idle_trans_in"] = % ai_digbat_melee_casual_idle;
-  self.anim_array[self.animtype]["stop"]["stand"]["none"]["idle"] = array(array( % ai_digbat_melee_casual_idle));
-  self.anim_array[self.animtype]["combat"]["stand"]["none"]["exposed_idle"] = array( % ai_digbat_melee_idle);
+  self.anim_array[self.animtype]["stop"]["stand"]["none"]["idle"] = array(array(%ai_digbat_melee_casual_idle));
+  self.anim_array[self.animtype]["combat"]["stand"]["none"]["exposed_idle"] = array(%ai_digbat_melee_idle);
   self.anim_array[self.animtype]["combat"]["stand"]["none"]["straight_level"] = % ai_digbat_melee_fake_aim;
   self.anim_array[self.animtype]["move"]["stand"]["none"]["tactical_walk_f"] = % ai_digbat_melee_run_f;
   self.anim_array[self.animtype]["move"]["stand"]["none"]["start_stand_run_f"] = % ai_digbat_melee_run_f;
@@ -118,7 +118,7 @@ setup_melee_digbat_anim_array() {
   self.anim_array[self.animtype]["turn"]["stand"]["none"]["turn_f_r_180"] = % ai_digbat_melee_run_f_turn_180_r;
   self.anim_array[self.animtype]["turn"]["stand"]["none"]["turn_b_l_180"] = % ai_digbat_melee_run_f_turn_180_l;
   self.anim_array[self.animtype]["turn"]["stand"]["none"]["turn_b_r_180"] = % ai_digbat_melee_run_f_turn_180_r;
-  self.anim_array[self.animtype]["flashed"]["stand"]["none"]["flashed"] = array( % ai_digbat_melee_idle_pain_01, % ai_digbat_melee_idle_pain_02);
-  self.anim_array[self.animtype]["flashed"]["crouch"]["none"]["flashed"] = array( % ai_digbat_melee_idle_pain_01, % ai_digbat_melee_idle_pain_02);
-  self.anim_array[self.animtype]["flashed"]["prone"]["none"]["flashed"] = array( % ai_digbat_melee_idle_pain_01, % ai_digbat_melee_idle_pain_02);
+  self.anim_array[self.animtype]["flashed"]["stand"]["none"]["flashed"] = array(%ai_digbat_melee_idle_pain_01, %ai_digbat_melee_idle_pain_02);
+  self.anim_array[self.animtype]["flashed"]["crouch"]["none"]["flashed"] = array(%ai_digbat_melee_idle_pain_01, %ai_digbat_melee_idle_pain_02);
+  self.anim_array[self.animtype]["flashed"]["prone"]["none"]["flashed"] = array(%ai_digbat_melee_idle_pain_01, %ai_digbat_melee_idle_pain_02);
 }

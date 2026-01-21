@@ -443,14 +443,10 @@ updateDomScores() {
   while(!level.gameEnded) {
     numFlags = getTeamFlagCount("allies");
     if(numFlags)
-      [[level._setTeamScore]]("allies", [
-        [level._getTeamScore]
-      ]("allies") + numFlags);
+      [[level._setTeamScore]]("allies", [[level._getTeamScore]]("allies") + numFlags);
     numFlags = getTeamFlagCount("axis");
     if(numFlags)
-      [[level._setTeamScore]]("axis", [
-        [level._getTeamScore]
-      ]("axis") + numFlags);
+      [[level._setTeamScore]]("axis", [[level._getTeamScore]]("axis") + numFlags);
     level.endGameOnScoreLimit = true;
     maps\mp\gametypes\_globallogic::checkScoreLimit();
     level.endGameOnScoreLimit = false;
@@ -646,9 +642,7 @@ flagSetup() {
   }
 }
 
-domPlayerSpawnGenerateInfluencers(
-  player_entity,
-  spawn_influencers) {
+domPlayerSpawnGenerateInfluencers(player_entity, spawn_influencers) {
   dom_owned_outer_flag_influencer_score = level.spawnsystem.dom_owned_outer_flag_influencer_score;
   dom_owned_outer_flag_influencer_score_curve = level.spawnsystem.dom_owned_outer_flag_influencer_score_curve;
   dom_owned_outer_flag_influencer_radius = level.spawnsystem.dom_owned_outer_flag_influencer_radius;
@@ -696,15 +690,7 @@ domPlayerSpawnGenerateInfluencers(
       }
     }
     if(isDefined(score) && isDefined(score_curve) && isDefined(radius)) {
-      spawn_influencers.a[spawn_influencers.a.size] = create_sphere_influencer(
-        "game_mode",
-        anglesToForward(flag_entity.angles),
-        AnglesToUp(flag_entity.angles),
-        flag_entity GetOrigin(),
-        score,
-        score_curve,
-        radius
-      );
+      spawn_influencers.a[spawn_influencers.a.size] = create_sphere_influencer("game_mode", anglesToForward(flag_entity.angles), AnglesToUp(flag_entity.angles), flag_entity GetOrigin(), score, score_curve, radius);
     }
   }
   return spawn_influencers;
@@ -738,24 +724,9 @@ createFlagSpawnInfluencers() {
     score_curve = dom_owned_inner_flag_influencer_score_curve;
     radius = dom_owned_inner_flag_influencer_radius;
   }
-  self.owned_flag_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    self.trigger.origin,
-    dom_owned_outer_flag_influencer_radius,
-    dom_owned_outer_flag_influencer_score,
-    0,
-    maps\mp\gametypes\_spawning::get_score_curve_index(dom_owned_outer_flag_influencer_score_curve));
-  self.neutral_flag_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    self.trigger.origin,
-    radius,
-    score,
-    0,
-    maps\mp\gametypes\_spawning::get_score_curve_index(score_curve));
-  self.enemy_flag_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    self.trigger.origin,
-    dom_enemy_flag_influencer_radius,
-    dom_enemy_flag_influencer_score,
-    0,
-    maps\mp\gametypes\_spawning::get_score_curve_index(dom_enemy_flag_influencer_score_curve));
+  self.owned_flag_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, self.trigger.origin, dom_owned_outer_flag_influencer_radius, dom_owned_outer_flag_influencer_score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(dom_owned_outer_flag_influencer_score_curve));
+  self.neutral_flag_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, self.trigger.origin, radius, score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(score_curve));
+  self.enemy_flag_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, self.trigger.origin, dom_enemy_flag_influencer_radius, dom_enemy_flag_influencer_score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(dom_enemy_flag_influencer_score_curve));
   self update_spawn_influencers("neutral");
 }
 

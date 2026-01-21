@@ -441,14 +441,7 @@ defineChestWeapons() {
 
       pistolArray[pistolArray.size]["name"] = weaponName;
       pistolArray[pistolArray.size - 1]["weight"] = weaponWeight;
-    } else if(isDefined(weaponGroup) && selectableWeapon &&
-      (weapongroup == "weapon_shotgun" ||
-        weapongroup == "weapon_smg" ||
-        weapongroup == "weapon_assault" ||
-        weapongroup == "weapon_sniper" ||
-        weapongroup == "weapon_dmr" ||
-        weapongroup == "weapon_lmg" ||
-        weapongroup == "weapon_projectile")) {
+    } else if(isDefined(weaponGroup) && selectableWeapon && (weapongroup == "weapon_shotgun" || weapongroup == "weapon_smg" || weapongroup == "weapon_assault" || weapongroup == "weapon_sniper" || weapongroup == "weapon_dmr" || weapongroup == "weapon_lmg" || weapongroup == "weapon_projectile")) {
       weaponWeight = 0;
 
       switch (weaponGroup) {

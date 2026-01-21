@@ -423,8 +423,7 @@ play_vo(var_0, var_1) {
       if(isDefined(level.get_alias_2d_func)) {
         var_7 = [
           }
-          [level.get_alias_2d_func]
-      ](var_6, var_2, var_4);
+          [level.get_alias_2d_func]](var_6, var_2, var_4);
       else {
         var_7 = get_alias_2d_version(var_6, var_2, var_4);
       }

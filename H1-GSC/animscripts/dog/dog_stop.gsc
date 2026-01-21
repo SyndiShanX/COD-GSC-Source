@@ -8,19 +8,19 @@
 
 main() {
   self endon("killanimscript");
-  self clearanim( % root, 0.1);
-  self clearanim( % german_shepherd_idle, 0.2);
-  self clearanim( % german_shepherd_attackidle_knob, 0.2);
+  self clearanim(%root, 0.1);
+  self clearanim(%german_shepherd_idle, 0.2);
+  self clearanim(%german_shepherd_attackidle_knob, 0.2);
   thread lookattarget("attackIdle");
 
   for(;;) {
     if(shouldattackidle()) {
-      self clearanim( % german_shepherd_idle, 0.2);
+      self clearanim(%german_shepherd_idle, 0.2);
       randomattackidle();
     } else {
       self orientmode("face current");
-      self clearanim( % german_shepherd_attackidle_knob, 0.2);
-      self setflaggedanimrestart("dog_idle", % german_shepherd_idle, 1, 0.2, self.animplaybackrate);
+      self clearanim(%german_shepherd_attackidle_knob, 0.2);
+      self setflaggedanimrestart("dog_idle", %german_shepherd_idle, 1, 0.2, self.animplaybackrate);
     }
 
     animscripts\shared::donotetracks("dog_idle");
@@ -44,7 +44,7 @@ isfacingenemy(var_0) {
 }
 
 randomattackidle() {
-  self clearanim( % german_shepherd_attackidle_knob, 0.1);
+  self clearanim(%german_shepherd_attackidle_knob, 0.1);
 
   if(isfacingenemy(0.866))
     self orientmode("face angle", self.angles[1]);
@@ -67,8 +67,8 @@ randomattackidle() {
         animscripts\shared::donotetracks("dog_turn");
         self.turnrate = self.prevturnrate;
         self.prevturnrate = undefined;
-        self clearanim( % german_shepherd_rotate_cw, 0.2);
-        self clearanim( % german_shepherd_rotate_ccw, 0.2);
+        self clearanim(%german_shepherd_rotate_cw, 0.2);
+        self clearanim(%german_shepherd_rotate_ccw, 0.2);
       }
     }
 
@@ -76,7 +76,7 @@ randomattackidle() {
   }
 
   if(should_growl())
-    self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, 1);
+    self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_growl, 1, 0.2, 1);
   else {
     var_3 = 33;
     var_4 = 66;
@@ -94,14 +94,14 @@ randomattackidle() {
     var_5 = randomint(100);
 
     if(var_5 < var_3)
-      self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_b, 1, 0.2, self.animplaybackrate);
+      self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_b, 1, 0.2, self.animplaybackrate);
     else {
       if(var_5 < var_4) {
-        self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
+        self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
         return;
       }
 
-      self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, self.animplaybackrate);
+      self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_growl, 1, 0.2, self.animplaybackrate);
     }
   }
 }
@@ -123,10 +123,10 @@ should_growl() {
 lookattarget(var_0) {
   self endon("killanimscript");
   self endon("stop tracking");
-  self clearanim( % german_shepherd_look_2, 0);
-  self clearanim( % german_shepherd_look_4, 0);
-  self clearanim( % german_shepherd_look_6, 0);
-  self clearanim( % german_shepherd_look_8, 0);
+  self clearanim(%german_shepherd_look_2, 0);
+  self clearanim(%german_shepherd_look_4, 0);
+  self clearanim(%german_shepherd_look_6, 0);
+  self clearanim(%german_shepherd_look_8, 0);
   self setdefaultaimlimits();
   self.rightaimlimit = 90;
   self.leftaimlimit = -90;
@@ -135,5 +135,5 @@ lookattarget(var_0) {
   self setanimlimited(anim.doglookpose[var_0][6], 1, 0);
   self setanimlimited(anim.doglookpose[var_0][8], 1, 0);
   animscripts\track::setanimaimweight(1, 0.2);
-  animscripts\track::trackloop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
+  animscripts\track::trackloop(%german_shepherd_look_2, %german_shepherd_look_4, %german_shepherd_look_6, %german_shepherd_look_8);
 }

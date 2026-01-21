@@ -127,37 +127,7 @@ enter_GamemodeSpecificAction() {
   level thread maps\mp\alien\_music_and_dialog::playVOForDowned(self);
   maps\mp\alien\_gamescore::update_team_encounter_performance(maps\mp\alien\_gamescore::get_team_score_component_name(), "num_players_enter_laststand");
 
-  weapons_excluded = ["alienbomb_mp",
-    "killstreak_remote_uav_mp",
-    "mortar_detonator_mp",
-    "switchblade_laptop_mp",
-    "aliendeployable_crate_marker_mp",
-    "iw6_alienminigun_mp",
-    "iw6_alienminigun1_mp",
-    "iw6_alienminigun2_mp",
-    "iw6_alienminigun3_mp",
-    "iw6_alienminigun4_mp",
-    "iw6_alienmk32_mp",
-    "iw6_alienmk321_mp",
-    "iw6_alienmk322_mp",
-    "iw6_alienmk323_mp",
-    "iw6_alienmk324_mp",
-    "alienflare_mp",
-    "aliensemtex_mp",
-    "alienclaymore_mp",
-    "alientrophy_mp",
-    "alienbetty_mp",
-    "alienthrowingknife_mp",
-    "iw6_alienmaaws_mp",
-    "alienmortar_shell_mp",
-    "iw6_aliendlc21_mp",
-    "iw6_aliendlc22_mp",
-    "iw6_aliendlc31_mp",
-    "iw6_aliendlc32_mp",
-    "iw6_aliendlc33_mp",
-    "iw6_aliendlc43_mp",
-    "aliencortex_mp"
-  ];
+  weapons_excluded = ["alienbomb_mp", "killstreak_remote_uav_mp", "mortar_detonator_mp", "switchblade_laptop_mp", "aliendeployable_crate_marker_mp", "iw6_alienminigun_mp", "iw6_alienminigun1_mp", "iw6_alienminigun2_mp", "iw6_alienminigun3_mp", "iw6_alienminigun4_mp", "iw6_alienmk32_mp", "iw6_alienmk321_mp", "iw6_alienmk322_mp", "iw6_alienmk323_mp", "iw6_alienmk324_mp", "alienflare_mp", "aliensemtex_mp", "alienclaymore_mp", "alientrophy_mp", "alienbetty_mp", "alienthrowingknife_mp", "iw6_alienmaaws_mp", "alienmortar_shell_mp", "iw6_aliendlc21_mp", "iw6_aliendlc22_mp", "iw6_aliendlc31_mp", "iw6_aliendlc32_mp", "iw6_aliendlc33_mp", "iw6_aliendlc43_mp", "aliencortex_mp"];
 
   self store_weapons_status(weapons_excluded);
   self.lastWeapon = enter_GamemodeSpecificAction_GetCurrentWeapon(weapons_excluded);
@@ -192,20 +162,7 @@ exit_GamemodeSpecificAction() {
   self SetWeaponAmmoStock(self.laststand_pistol, self.laststand_ammo);
   self SetWeaponAmmoClip(self.laststand_pistol, self.laststand_clip_ammo);
 
-  inclusion_list = ["alienflare_mp",
-    "aliensemtex_mp",
-    "alienclaymore_mp",
-    "alientrophy_mp",
-    "alienbetty_mp",
-    "alienthrowingknife_mp",
-    "alienmortar_shell_mp",
-    "iw6_aliendlc21_mp",
-    "iw6_aliendlc22_mp",
-    "iw6_aliendlc31_mp",
-    "iw6_aliendlc32_mp",
-    "iw6_aliendlc43_mp",
-    "iw6_aliendlc33_mp"
-  ];
+  inclusion_list = ["alienflare_mp", "aliensemtex_mp", "alienclaymore_mp", "alientrophy_mp", "alienbetty_mp", "alienthrowingknife_mp", "alienmortar_shell_mp", "iw6_aliendlc21_mp", "iw6_aliendlc22_mp", "iw6_aliendlc31_mp", "iw6_aliendlc32_mp", "iw6_aliendlc43_mp", "iw6_aliendlc33_mp"];
 
   self restore_weapons_status(inclusion_list);
 
@@ -466,20 +423,7 @@ only_use_weapon(weapon) {
 
   pistol = self GetWeaponsListPrimaries()[0];
 
-  save_weapon_list = ["alienflare_mp",
-    "aliensemtex_mp",
-    "alienclaymore_mp",
-    "alientrophy_mp",
-    "alienbetty_mp",
-    "iw6_aliendlc43_mp",
-    "alienthrowingknife_mp",
-    "alienmortar_shell_mp",
-    "iw6_aliendlc21_mp",
-    "iw6_aliendlc22_mp",
-    "iw6_aliendlc31_mp",
-    "iw6_aliendlc32_mp",
-    "iw6_aliendlc33_mp"
-  ];
+  save_weapon_list = ["alienflare_mp", "aliensemtex_mp", "alienclaymore_mp", "alientrophy_mp", "alienbetty_mp", "iw6_aliendlc43_mp", "alienthrowingknife_mp", "alienmortar_shell_mp", "iw6_aliendlc21_mp", "iw6_aliendlc22_mp", "iw6_aliendlc31_mp", "iw6_aliendlc32_mp", "iw6_aliendlc33_mp"];
 
   can_use_pistol = can_use_pistol_during_last_stand(self);
 
@@ -806,33 +750,10 @@ blackBox_lastStand(attacker, iDamage) {
   if(GetDvarInt("alien_bbprint_debug") > 0) {
     attackerorigin = (attackerx, attackery, attackerz);
 
-    IPrintLnBold("^8bbprint: alienplayerlaststand \n" +
-      " cyclenum=" + cyclenum +
-      " hivename=" + hivename +
-      " attackerisagent=" + attacker_is_agent +
-      " attackeragenttype=" + attacker_agent_type +
-      " attackeralivetime=" + attacker_alive_time +
-      " attackerx,y,z=" + attackerorigin +
-      " victimx,y,z=" + self.origin +
-      " victimname=" + victimname +
-      " damage=" + iDamage);
+    IPrintLnBold("^8bbprint: alienplayerlaststand \n" + " cyclenum=" + cyclenum + " hivename=" + hivename + " attackerisagent=" + attacker_is_agent + " attackeragenttype=" + attacker_agent_type + " attackeralivetime=" + attacker_alive_time + " attackerx,y,z=" + attackerorigin + " victimx,y,z=" + self.origin + " victimname=" + victimname + " damage=" + iDamage);
   }
 
-  bbprint("alienplayerlaststand",
-    "cyclenum %i hivename %s attackerisagent %i attackeragenttype %s attackeralivetime %f attackerx %f attackery %f attackerz %f victimx %f victimy %f victimz %f victimname %s damage %i",
-    cyclenum,
-    hivename,
-    attacker_is_agent,
-    attacker_agent_type,
-    attacker_alive_time,
-    attackerx,
-    attackery,
-    attackerz,
-    self.origin[0],
-    self.origin[1],
-    self.origin[2],
-    victimname,
-    iDamage);
+  bbprint("alienplayerlaststand", "cyclenum %i hivename %s attackerisagent %i attackeragenttype %s attackeralivetime %f attackerx %f attackery %f attackerz %f victimx %f victimy %f victimz %f victimname %s damage %i", cyclenum, hivename, attacker_is_agent, attacker_agent_type, attacker_alive_time, attackerx, attackery, attackerz, self.origin[0], self.origin[1], self.origin[2], victimname, iDamage);
 }
 
 waittill_any_ents_or_timeout_return(timeout, ent1, string1, ent2, string2, ent3, string3, ent4, string4, ent5, string5, ent6, string6, ent7, string7) {

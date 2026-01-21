@@ -14,9 +14,7 @@ valid ai groups are:
 "left" - all left guys
 "right" - all right guys
 "passengers" - everybody that can unload
-"default"
-
-put this in your GSC:
+"default"put this in your GSC:
 maps\_littlebird::main( "vehicle_little_bird_armed" );
 
 and these lines in your CSV:
@@ -24,10 +22,7 @@ include,vehicle_littlebird_armed
 sound,vehicle_littlebird,vehicle_standard,all_sp
 include,_attack_heli
 
-defaultmdl="vehicle_little_bird_armed"
-default:"vehicletype" "littlebird"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_little_bird_armed"default:"vehicletype" "littlebird"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_littlebird_bench (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -36,19 +31,14 @@ valid ai groups are:
 "left" - all left guys
 "right" - all right guys
 "passengers" - everybody that can unload
-"default"
-
-put this in your GSC:
+"default"put this in your GSC:
 maps\_littlebird::main( "vehicle_little_bird_bench" );
 
 and these lines in your CSV:
 include,vehicle_littlebird_bench
 sound,vehicle_littlebird,vehicle_standard,all_sp
 
-defaultmdl="vehicle_little_bird_bench"
-default:"vehicletype" "littlebird"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_little_bird_bench"default:"vehicletype" "littlebird"default:"script_team" "axis"*/
 
 armed(model) {
   return model == "vehicle_little_bird_armed";
@@ -63,7 +53,7 @@ main(model, type) {
   build_localinit(::init_local);
   build_deathmodel("vehicle_little_bird_armed");
   build_deathmodel("vehicle_little_bird_bench");
-  build_drive( % mi28_rotors, undefined, 0, 3.0);
+  build_drive(%mi28_rotors, undefined, 0, 3.0);
 
   //Bullet damage Crash and Burn, spins out of control and explodes when it reaches destination
   build_deathfx("explosions/helicopter_explosion_secondary_small", "tag_engine", "littlebird_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, true);

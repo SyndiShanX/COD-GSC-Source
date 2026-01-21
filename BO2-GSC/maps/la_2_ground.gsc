@@ -2053,7 +2053,7 @@ waittill_player_near_convoy_and_f35_for_eject() {
 eject_move_align_struct(nd_start) {
   s_align = getstruct("align_eject_sequence", "targetname");
   n_speed = level.f35 getmaxspeed();
-  n_time = getanimlength( % v_la_10_01_f35eject_drone_intro) + 2;
+  n_time = getanimlength(%v_la_10_01_f35eject_drone_intro) + 2;
   n_eject_offset = n_speed * n_time;
   v_player_to_node = vectornormalize(nd_start.origin - level.f35.origin);
   v_start_point = nd_start.origin;
@@ -2180,8 +2180,8 @@ f38s_play_exhaust() {
 f35_eject_warp_plane_to_collision() {
   s_align = getstruct("anim_end_struct", "targetname");
   m_linkto = getent("eject_align_origin", "targetname");
-  v_start_origin = getstartorigin(s_align.origin, s_align.angles, % v_la_10_01_f35eject_f35);
-  v_start_angles = getstartangles(s_align.origin, s_align.angles, % v_la_10_01_f35eject_f35);
+  v_start_origin = getstartorigin(s_align.origin, s_align.angles, %v_la_10_01_f35eject_f35);
+  v_start_angles = getstartangles(s_align.origin, s_align.angles, %v_la_10_01_f35eject_f35);
   level.player thread fadetoblackforxsec(0, 0.05, 0.05, 0.4);
   m_linkto.origin = v_start_origin;
   m_linkto.angles = v_start_angles;

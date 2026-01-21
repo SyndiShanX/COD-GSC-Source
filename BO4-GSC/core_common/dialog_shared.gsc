@@ -439,8 +439,7 @@ playkillbattlechatter(attacker, weapon, victim, einflictor) {
 
   if(isDefined(einflictor)) {
     einflictor notify(#"bhtn_action_notify", {
-      #action: "attack_kill"
-    });
+      #action: "attack_kill"});
   }
 }
 

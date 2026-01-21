@@ -425,9 +425,7 @@ menu_input() {
     }
     if(isDefined(level.menu_sys[menu_name].children_func) && isDefined(level.menu_sys[menu_name].children_func[key])) {
       func = level.menu_sys[menu_name].children_func[key];
-      error_msg = [
-        [func]
-      ]();
+      error_msg = [[func]]();
       if(isDefined(error_msg)) {
         level thread selection_error(error_msg, level.menu_sys["current_menu"].options[key].x, level.menu_sys["current_menu"].options[key].y);
         continue;
@@ -495,9 +493,7 @@ list_menu(list, x, y, scale, func) {
     level notify("scroll_list");
     if(current_num != old_num) {
       old_num = current_num;
-      [
-        [func]
-      ](list[current_num]);
+      [[func]](list[current_num]);
     }
   }
   for(i = 0; i < hud_array.size; i++) {

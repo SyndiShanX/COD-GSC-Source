@@ -2567,7 +2567,7 @@ chase_player_knock_03(var_0) {
   level.player disableweapons();
   level.player hideviewmodel();
   level.knock_03_node thread maps\_anim::anim_single_solo(var_1, "factory_car_chase_player_knock_down_03");
-  var_3 = getanimlength( % factory_car_chase_player_knock_down_03) - 0.1;
+  var_3 = getanimlength(%factory_car_chase_player_knock_down_03) - 0.1;
   wait(var_3);
   level.player setorigin(level.knock_03_node.origin + (0, 0, 5));
   level.player unlink();

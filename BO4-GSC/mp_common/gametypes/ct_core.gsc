@@ -456,18 +456,10 @@ function_9a022fbc(str_state) {
 
   if(str_state == "open") {
     if(isDefined(lui_menu)) {
-      [
-        [lui_menu]
-      ] - > open(player);
-      [
-        [lui_menu]
-      ] - > set_startalpha(player, 1);
-      [
-        [lui_menu]
-      ] - > set_endalpha(player, 1);
-      [
-        [lui_menu]
-      ] - > set_fadeovertime(player, int(2000));
+      [[lui_menu]] - > open(player);
+      [[lui_menu]] - > set_startalpha(player, 1);
+      [[lui_menu]] - > set_endalpha(player, 1);
+      [[lui_menu]] - > set_fadeovertime(player, int(2000));
     }
 
     return;

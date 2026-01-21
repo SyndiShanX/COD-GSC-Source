@@ -288,9 +288,7 @@ function can_see(target, target_origin, player_origin, player_forward, distance)
 
 function is_valid_target(ent) {
   if(isDefined(ent) && isDefined(level.grapple_valid_target_check)) {
-    if(![
-        [level.grapple_valid_target_check]
-      ](ent)) {
+    if(![[level.grapple_valid_target_check]](ent)) {
       return 0;
     }
   }

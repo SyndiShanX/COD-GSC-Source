@@ -148,7 +148,7 @@ monkey_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_monkey_idle_01, % ai_zombie_monkey_idle_01);
+  self.a.array["exposed_idle"] = array(%ai_zombie_monkey_idle_01, %ai_zombie_monkey_idle_01);
   self.a.array["straight_level"] = % ai_zombie_monkey_idle_01;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -1060,7 +1060,7 @@ monkey_zombie_attack_perk() {
   self thread monkey_wait_to_drop();
   while(1) {
     monkey_pack_flash_perk(self.perk.script_noteworthy);
-    self animscripted("perk_attack_anim", self.attack.origin, self.attack.angles, perk_attack_anim, "normal", % body, 1, 0.2);
+    self animscripted("perk_attack_anim", self.attack.origin, self.attack.angles, perk_attack_anim, "normal", %body, 1, 0.2);
     self thread play_attack_impacts(time);
     if(self monkey_zombie_perk_damage(self.machine_damage)) {
       break;
@@ -1554,10 +1554,7 @@ monkey_zombie_bhb_watcher() {
   self endon("death");
   bhb_respond_dist_sq = 512 * 512;
   while(1) {
-    if(self.state == "default" ||
-      self.state == "ground_pound" || self.state == "ground_pound_taunt" ||
-      self.state == "grenade_reponse" || self.state == "bhb_response" ||
-      self.state == "attack_perk" || !self.dropped) {
+    if(self.state == "default" || self.state == "ground_pound" || self.state == "ground_pound_taunt" || self.state == "grenade_reponse" || self.state == "bhb_response" || self.state == "attack_perk" || !self.dropped) {
       wait_network_frame();
       continue;
     }

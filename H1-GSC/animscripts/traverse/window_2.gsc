@@ -10,7 +10,7 @@ main() {
   if(self.type == "dog")
     animscripts\traverse\shared::dog_wall_and_window_hop("wallhop", 40);
   else
-    advancedwindowtraverse( % windowclimb, 35);
+    advancedwindowtraverse(%windowclimb, 35);
 }
 
 advancedwindowtraverse(var_0, var_1) {

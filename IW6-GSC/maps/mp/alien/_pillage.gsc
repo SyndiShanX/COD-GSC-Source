@@ -1001,9 +1001,7 @@ try_to_give_player_explosives(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_explosive_override)) {
-    if(![
-        [level.try_to_give_player_explosive_override]
-      ]())
+    if(![[level.try_to_give_player_explosive_override]]())
       return;
   }
 
@@ -1054,9 +1052,7 @@ try_to_give_player_flares(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_flare_override)) {
-    if(![
-        [level.try_to_give_player_flare_override]
-      ]())
+    if(![[level.try_to_give_player_flare_override]]())
       return;
   }
 
@@ -1117,9 +1113,7 @@ try_to_give_player_trophy(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_trophy_override)) {
-    if(![
-        [level.try_to_give_player_trophy_override]
-      ]())
+    if(![[level.try_to_give_player_trophy_override]]())
       return;
   }
 
@@ -1172,9 +1166,7 @@ try_to_give_player_the_leash(pillage_spot) {
   ammo_count = pillage_spot.pillageinfo.ammo;
 
   if(isDefined(level.try_to_give_player_leash_override)) {
-    if(![
-        [level.try_to_give_player_leash_override]
-      ]())
+    if(![[level.try_to_give_player_leash_override]]())
       return;
   }
 
@@ -1422,14 +1414,7 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
   if(IsSubStr(baseweapon, "aliendlc23"))
     reticle = 0;
 
-  if(attachment1 != "thermal" &&
-    attachment1 != "thermalsmg" &&
-    attachment2 != "thermal" &&
-    attachment2 != "thermalsmg" &&
-    attachment3 != "thermal" &&
-    attachment3 != "thermalsmg" &&
-    attachment4 != "thermal" &&
-    attachment4 != "thermalsmg")
+  if(attachment1 != "thermal" && attachment1 != "thermalsmg" && attachment2 != "thermal" && attachment2 != "thermalsmg" && attachment3 != "thermal" && attachment3 != "thermalsmg" && attachment4 != "thermal" && attachment4 != "thermalsmg")
     newweapon = buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo, reticle);
   else
     newweapon = buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo);
@@ -1456,31 +1441,7 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
 }
 
 get_weapon_camo(baseweapon) {
-  if(IsSubStr(baseweapon, "alienfp6") ||
-    IsSubStr(baseweapon, "alienmts255") ||
-    IsSubStr(baseweapon, "aliendlc12") ||
-    IsSubStr(baseweapon, "aliendlc13") ||
-    IsSubStr(baseweapon, "aliendlc14") ||
-    IsSubStr(baseweapon, "aliendlc15") ||
-    IsSubStr(baseweapon, "alienameli") ||
-    IsSubStr(baseweapon, "alienk7") ||
-    IsSubStr(baseweapon, "alienmk14") ||
-    IsSubStr(baseweapon, "alienr5rgp") ||
-    IsSubStr(baseweapon, "alienusr") ||
-    IsSubStr(baseweapon, "alienuts15") ||
-    IsSubStr(baseweapon, "arkalienameli") ||
-    IsSubStr(baseweapon, "arkaliendlc15") ||
-    IsSubStr(baseweapon, "arkaliendlc23") ||
-    IsSubStr(baseweapon, "arkalienimbel") ||
-    IsSubStr(baseweapon, "arkalienk7") ||
-    IsSubStr(baseweapon, "arkalienkac") ||
-    IsSubStr(baseweapon, "arkalienmaul") ||
-    IsSubStr(baseweapon, "arkalienmk14") ||
-    IsSubStr(baseweapon, "arkalienr5rgp") ||
-    IsSubStr(baseweapon, "arkalienusr") ||
-    IsSubStr(baseweapon, "arkalienuts15") ||
-    IsSubStr(baseweapon, "arkalienvks") ||
-    IsSubStr(baseweapon, "aliendlc23"))
+  if(IsSubStr(baseweapon, "alienfp6") || IsSubStr(baseweapon, "alienmts255") || IsSubStr(baseweapon, "aliendlc12") || IsSubStr(baseweapon, "aliendlc13") || IsSubStr(baseweapon, "aliendlc14") || IsSubStr(baseweapon, "aliendlc15") || IsSubStr(baseweapon, "alienameli") || IsSubStr(baseweapon, "alienk7") || IsSubStr(baseweapon, "alienmk14") || IsSubStr(baseweapon, "alienr5rgp") || IsSubStr(baseweapon, "alienusr") || IsSubStr(baseweapon, "alienuts15") || IsSubStr(baseweapon, "arkalienameli") || IsSubStr(baseweapon, "arkaliendlc15") || IsSubStr(baseweapon, "arkaliendlc23") || IsSubStr(baseweapon, "arkalienimbel") || IsSubStr(baseweapon, "arkalienk7") || IsSubStr(baseweapon, "arkalienkac") || IsSubStr(baseweapon, "arkalienmaul") || IsSubStr(baseweapon, "arkalienmk14") || IsSubStr(baseweapon, "arkalienr5rgp") || IsSubStr(baseweapon, "arkalienusr") || IsSubStr(baseweapon, "arkalienuts15") || IsSubStr(baseweapon, "arkalienvks") || IsSubStr(baseweapon, "aliendlc23"))
     return 0;
   else
     return RandomIntRange(1, 10);

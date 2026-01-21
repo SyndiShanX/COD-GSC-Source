@@ -495,7 +495,7 @@ animate_meat(grenade) {
     altmodel useanimtree(#animtree);
     altmodel.angles = grenade.angles;
     altmodel linkto(grenade, "", (0, 0, 0), (0, 0, 0));
-    altmodel setanim( % o_zombie_head_idle_v1);
+    altmodel setanim(%o_zombie_head_idle_v1);
     grenade.altmodel = altmodel;
 
     while(isDefined(grenade))
@@ -1281,9 +1281,7 @@ meat_player_initial_spawn() {
       players[i]._meat_team = one;
 
     if(isDefined(level.custom_player_fake_death_cleanup))
-      players[i][
-        [level.custom_player_fake_death_cleanup]
-      ]();
+      players[i][[level.custom_player_fake_death_cleanup]]();
 
     players[i] setstance("stand");
 

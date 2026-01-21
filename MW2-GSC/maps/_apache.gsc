@@ -21,7 +21,7 @@ main(model, type) {
   apache_aerial_death_fx["vehicle_apache"] = "explosions/aerial_explosion_apache_mp";
   apache_aerial_death_fx["vehicle_apache_dark"] = "explosions/aerial_explosion_apache_dark_mp";
 
-  build_drive( % bh_rotors, undefined, 0);
+  build_drive(%bh_rotors, undefined, 0);
 
   //Bullet damage Crash and Burn, spins out of control and explodes when it reaches destination
   build_deathfx("explosions/helicopter_explosion_secondary_small", "tag_engine_left", "apache_helicopter_secondary_exp", undefined, undefined, undefined, 0.0, true);
@@ -74,10 +74,7 @@ and these lines in your CSV:
 include,vehicle_apache_apache
 sound,vehicle_apache,vehicle_standard,all_sp
 
-defaultmdl="vehicle_apache"
-default:"vehicletype" "apache"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_apache"default:"vehicletype" "apache"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_apache_dark (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -88,7 +85,5 @@ and these lines in your CSV:
 include,vehicle_apache_dark_apache
 sound,vehicle_apache,vehicle_standard,all_sp
 
-defaultmdl="vehicle_apache_dark"
-default:"vehicletype" "apache"
-default:"script_team" "allies"
+defaultmdl="vehicle_apache_dark"default:"vehicletype" "apache"default:"script_team" "allies"
 */

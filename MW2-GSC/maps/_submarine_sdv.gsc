@@ -29,7 +29,5 @@ and these lines in your CSV:
 include,vehicle_submarine_sdv_submarine_sdv
 sound,vehicle_submarine_sdv,vehicle_standard,all_sp
 
-defaultmdl="vehicle_submarine_sdv"
-default:"vehicletype" "submarine_sdv"
-default:"script_team" "allies"
+defaultmdl="vehicle_submarine_sdv"default:"vehicletype" "submarine_sdv"default:"script_team" "allies"
 */

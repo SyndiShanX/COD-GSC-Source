@@ -430,9 +430,7 @@ detonation_monitor() {
     try_detonate();
 
     if(isDefined(self.var_345c5167)) {
-      [
-        [self.var_345c5167]
-      ]();
+      [[self.var_345c5167]]();
       continue;
     }
 
@@ -733,9 +731,7 @@ function_ec8d8bbc(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     minempdowntime = 0.8 * self.settings.empdowntime;
     maxempdowntime = 1.2 * self.settings.empdowntime;
     self notify(#"emped", {
-      #param0: randomfloatrange(minempdowntime, maxempdowntime),
-      #param1: eattacker,
-      #pararm2: einflictor
+      #param0: randomfloatrange(minempdowntime, maxempdowntime), #param1: eattacker, #pararm2: einflictor
     });
   }
 

@@ -472,25 +472,25 @@ turbineanim(wait_for_end) {
   self.buildableturbine useanimtree(#animtree);
 
   if(isDefined(self.buildableturbine.dying) && self.buildableturbine.dying) {
-    animlength = getanimlength( % o_zombie_buildable_turbine_death);
-    self.buildableturbine setanim( % o_zombie_buildable_turbine_death);
+    animlength = getanimlength(%o_zombie_buildable_turbine_death);
+    self.buildableturbine setanim(%o_zombie_buildable_turbine_death);
   } else if(isDefined(self.turbine_emped) && self.turbine_emped) {
-    self.buildableturbine clearanim( % o_zombie_buildable_turbine_fullpower, 0);
+    self.buildableturbine clearanim(%o_zombie_buildable_turbine_fullpower, 0);
     return;
   } else {
     switch (self.turbine_power_level) {
       case 3:
       case 4:
-        animlength = getanimlength( % o_zombie_buildable_turbine_fullpower);
-        self.buildableturbine setanim( % o_zombie_buildable_turbine_fullpower);
+        animlength = getanimlength(%o_zombie_buildable_turbine_fullpower);
+        self.buildableturbine setanim(%o_zombie_buildable_turbine_fullpower);
         break;
       case 2:
-        animlength = getanimlength( % o_zombie_buildable_turbine_halfpower);
-        self.buildableturbine setanim( % o_zombie_buildable_turbine_halfpower);
+        animlength = getanimlength(%o_zombie_buildable_turbine_halfpower);
+        self.buildableturbine setanim(%o_zombie_buildable_turbine_halfpower);
         break;
       case 1:
-        animlength = getanimlength( % o_zombie_buildable_turbine_neardeath);
-        self.buildableturbine setanim( % o_zombie_buildable_turbine_neardeath);
+        animlength = getanimlength(%o_zombie_buildable_turbine_neardeath);
+        self.buildableturbine setanim(%o_zombie_buildable_turbine_neardeath);
         break;
     }
   }

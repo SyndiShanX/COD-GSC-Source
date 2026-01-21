@@ -33,18 +33,18 @@ precache() {
 
 turned_face_override_func() {
   level.face_anim_tree = "zombie_player";
-  self clientscripts\mp\zombies\_face_utility_zm::setfaceroot( % head);
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_casual", 1, -1, 0, "basestate", array( % pf_casual_idle));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_alert", 1, -1, 0, "basestate", array( % pf_alert_idle));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_shoot", 1, 1, 1, "eventstate", array( % pf_firing));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_shoot_single", 1, 1, 1, "eventstate", array( % pf_firing));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_melee", 1, 2, 1, "eventstate", array( % pf_melee));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_pain", 0, -1, 2, "eventstate", array( % pf_pain));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_death", 0, -1, 2, "exitstate", array( % pf_death));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_casual", 1, -1, 0, "basestate", array( % f_idle_zombie_v1, % f_idle_zombie_v2, % f_idle_zombie_v3, % f_idle_zombie_v4, % f_idle_zombie_v5));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_alert", 1, -1, 0, "basestate", array( % f_locomotion_zombie_v1, % f_locomotion_zombie_v2, % f_locomotion_zombie_v3, % f_locomotion_zombie_v4, % f_locomotion_zombie_v5));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_melee", 1, 2, 1, "eventstate", array( % f_attack_zombie_v1, % f_attack_zombie_v2, % f_attack_zombie_v3, % f_attack_zombie_v4, % f_attack_zombie_v5));
-  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_death", 0, -1, 2, "exitstate", array( % f_death_zombie_v1, % f_death_zombie_v2, % f_death_zombie_v3, % f_death_zombie_v4, % f_death_zombie_v5));
+  self clientscripts\mp\zombies\_face_utility_zm::setfaceroot(%head);
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_casual", 1, -1, 0, "basestate", array(%pf_casual_idle));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_alert", 1, -1, 0, "basestate", array(%pf_alert_idle));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_shoot", 1, 1, 1, "eventstate", array(%pf_firing));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_shoot_single", 1, 1, 1, "eventstate", array(%pf_firing));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_melee", 1, 2, 1, "eventstate", array(%pf_melee));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_pain", 0, -1, 2, "eventstate", array(%pf_pain));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_death", 0, -1, 2, "exitstate", array(%pf_death));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_casual", 1, -1, 0, "basestate", array(%f_idle_zombie_v1, %f_idle_zombie_v2, %f_idle_zombie_v3, %f_idle_zombie_v4, %f_idle_zombie_v5));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_alert", 1, -1, 0, "basestate", array(%f_locomotion_zombie_v1, %f_locomotion_zombie_v2, %f_locomotion_zombie_v3, %f_locomotion_zombie_v4, %f_locomotion_zombie_v5));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_melee", 1, 2, 1, "eventstate", array(%f_attack_zombie_v1, %f_attack_zombie_v2, %f_attack_zombie_v3, %f_attack_zombie_v4, %f_attack_zombie_v5));
+  self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_death", 0, -1, 2, "exitstate", array(%f_death_zombie_v1, %f_death_zombie_v2, %f_death_zombie_v3, %f_death_zombie_v4, %f_death_zombie_v5));
   self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("face_advance", 0, -1, 3, "nullstate", array());
   self clientscripts\mp\zombies\_face_utility_zm::buildfacestate("zombie_face_advance", 0, -1, 3, "nullstate", array());
 }

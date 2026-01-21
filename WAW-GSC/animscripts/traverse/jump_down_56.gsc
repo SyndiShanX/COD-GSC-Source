@@ -16,10 +16,10 @@ main() {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   self animscripts\traverse\shared::TraverseStartRagdollDeath();
-  self setFlaggedAnimKnoballRestart("stepanim", % jump_down_56, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("stepanim", %jump_down_56, %body, 1, .1, 1);
   self waittillmatch("stepanim", "gravity on");
   self traverseMode("gravity");
   self animscripts\traverse\shared::TraverseStopRagdollDeath();
   self animscripts\shared::DoNoteTracks("stepanim");
-  self setAnimKnobAllRestart( % crouch_fastwalk_F, % body, 1, 0.1, 1);
+  self setAnimKnobAllRestart(%crouch_fastwalk_F, %body, 1, 0.1, 1);
 }

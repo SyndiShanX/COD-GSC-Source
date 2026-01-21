@@ -675,8 +675,8 @@ trench_hovercraft_a10() {
 #using_animtree("vehicles");
 
 trench_hovercraft_over_moment() {
-  self setanimrestart( % hovercraft_enemy_lower_fans, 1, 1, 1);
-  self setanim( % hovercraft_enemy_upper_fans, 1, 0.2, 1);
+  self setanimrestart(%hovercraft_enemy_lower_fans, 1, 1, 1);
+  self setanim(%hovercraft_enemy_upper_fans, 1, 0.2, 1);
   var_0 = self.script_index;
   self waittill("startfx");
   setsaveddvar("ai_friendlysuppression", 0);

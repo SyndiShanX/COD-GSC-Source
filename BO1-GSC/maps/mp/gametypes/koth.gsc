@@ -674,13 +674,7 @@ createRadioSpawnInfluencer() {
   koth_objective_influencer_score = level.spawnsystem.koth_objective_influencer_score;
   koth_objective_influencer_score_curve = level.spawnsystem.koth_objective_influencer_score_curve;
   koth_objective_influencer_radius = level.spawnsystem.koth_objective_influencer_radius;
-  self.spawn_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    self.gameobject.curOrigin,
-    koth_objective_influencer_radius,
-    koth_objective_influencer_score,
-    0,
-    "koth_objective,r,s",
-    maps\mp\gametypes\_spawning::get_score_curve_index(koth_objective_influencer_score_curve));
+  self.spawn_influencer = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, self.gameobject.curOrigin, koth_objective_influencer_radius, koth_objective_influencer_score, 0, "koth_objective,r,s", maps\mp\gametypes\_spawning::get_score_curve_index(koth_objective_influencer_score_curve));
   self enable_radio_spawn_influencer(false);
 }
 enable_radio_spawn_influencer(enabled) {
@@ -700,20 +694,8 @@ enable_initial_spawn_influencers(duration) {
     mask1 = ss.iSPAWN_TEAMMASK_ALLIES;
     mask2 = ss.iSPAWN_TEAMMASK_AXIS;
   }
-  initial_spawn_influencers1 = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    initial_spawn_influencer_ents[0].origin,
-    ss.koth_initial_spawns_influencer_radius,
-    ss.koth_initial_spawns_influencer_score,
-    mask1,
-    "koth_objective,r,s",
-    maps\mp\gametypes\_spawning::get_score_curve_index(ss.koth_initial_spawns_influencer_score_curve));
-  initial_spawn_influencers2 = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    initial_spawn_influencer_ents[0].origin,
-    ss.koth_initial_spawns_influencer_radius,
-    ss.koth_initial_spawns_influencer_score,
-    mask1,
-    "koth_objective,r,s",
-    maps\mp\gametypes\_spawning::get_score_curve_index(ss.koth_initial_spawns_influencer_score_curve));
+  initial_spawn_influencers1 = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, initial_spawn_influencer_ents[0].origin, ss.koth_initial_spawns_influencer_radius, ss.koth_initial_spawns_influencer_score, mask1, "koth_objective,r,s", maps\mp\gametypes\_spawning::get_score_curve_index(ss.koth_initial_spawns_influencer_score_curve));
+  initial_spawn_influencers2 = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, initial_spawn_influencer_ents[0].origin, ss.koth_initial_spawns_influencer_radius, ss.koth_initial_spawns_influencer_score, mask1, "koth_objective,r,s", maps\mp\gametypes\_spawning::get_score_curve_index(ss.koth_initial_spawns_influencer_score_curve));
   wait duration;
   removeinfluencer(initial_spawn_influencers1);
   removeinfluencer(initial_spawn_influencers2);

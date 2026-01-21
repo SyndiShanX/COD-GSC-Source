@@ -240,8 +240,8 @@ crane_platform() {
       platform_model ScriptModelPlayAnim("mp_dome_ns_crane_cargo_01_gate");
       crane ScriptModelPlayAnimDeltaMotion("mp_dome_ns_crane_01");
 
-      anim_length = GetAnimLength( % mp_dome_ns_crane_cargo_01_gate);
-      percent = GetNotetrackTimes( % mp_dome_ns_crane_cargo_01_gate, "gate_open");
+      anim_length = GetAnimLength(%mp_dome_ns_crane_cargo_01_gate);
+      percent = GetNotetrackTimes(%mp_dome_ns_crane_cargo_01_gate, "gate_open");
       time = anim_length * percent[0];
 
     } else {
@@ -252,8 +252,8 @@ crane_platform() {
       platform_model ScriptModelPlayAnim("mp_dome_ns_crane_cargo_02_gate");
       crane ScriptModelPlayAnimDeltaMotion("mp_dome_ns_crane_02");
 
-      percent = GetNotetrackTimes( % mp_dome_ns_crane_cargo_02_gate, "gate_open");
-      anim_length = GetAnimLength( % mp_dome_ns_crane_cargo_02_gate);
+      percent = GetNotetrackTimes(%mp_dome_ns_crane_cargo_02_gate, "gate_open");
+      anim_length = GetAnimLength(%mp_dome_ns_crane_cargo_02_gate);
       time = anim_length * percent[0];
 
       side_blockerB Solid();
@@ -426,7 +426,7 @@ crane_available_check() {
   platform_model ScriptModelPlayAnim("mp_dome_ns_crane_cargo_drop1_gate");
   crane ScriptModelPlayAnimDeltaMotion("mp_dome_ns_crane_drop1");
 
-  anim_length = GetAnimLength( % mp_dome_ns_crane_drop1);
+  anim_length = GetAnimLength(%mp_dome_ns_crane_drop1);
   wait anim_length;
 
   while(level.crane_targets == 2) {
@@ -442,7 +442,7 @@ crane_available_check() {
   platform_model ScriptModelPlayAnim("mp_dome_ns_crane_cargo_drop2_gate");
   crane ScriptModelPlayAnimDeltaMotion("mp_dome_ns_crane_drop2");
 
-  anim_length = GetAnimLength( % mp_dome_ns_crane_drop2);
+  anim_length = GetAnimLength(%mp_dome_ns_crane_drop2);
   wait anim_length;
 
   while(level.crane_targets == 1) {
@@ -462,7 +462,7 @@ crane_available_check() {
   platform_debris setModel("mp_dns_crane_debris");
   platform_debris ScriptModelPlayAnimDeltaMotion("mp_dome_ns_crane_drop3_debris");
 
-  anim_length = GetAnimLength( % mp_dome_ns_crane_drop3);
+  anim_length = GetAnimLength(%mp_dome_ns_crane_drop3);
 
   wait anim_length - .8;
 

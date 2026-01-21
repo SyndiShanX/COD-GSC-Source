@@ -19,7 +19,7 @@ main(model, type) {
   build_destructible("vehicle_80s_wagon1_yel_destructible_mp", "vehicle_80s_wagon1_yel");
 
   build_compassicon("automobile", false);
-  build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
 
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   //	build_drive( %technical_driving_idle_forward, %technical_driving_idle_backward, 10 );
@@ -80,10 +80,7 @@ include,destructible_vehicle_80s_wagon1_brn_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_wagon1_brn_destructible_mp"
-default:"vehicletype" "80s_wagon1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_wagon1_brn_destructible_mp"default:"vehicletype" "80s_wagon1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_wagon1_green_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -96,10 +93,7 @@ include,destructible_vehicle_80s_wagon1_green_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_wagon1_green_destructible_mp"
-default:"vehicletype" "80s_wagon1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_wagon1_green_destructible_mp"default:"vehicletype" "80s_wagon1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_wagon1_red_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -112,10 +106,7 @@ include,destructible_vehicle_80s_wagon1_red_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_wagon1_red_destructible_mp"
-default:"vehicletype" "80s_wagon1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_wagon1_red_destructible_mp"default:"vehicletype" "80s_wagon1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_wagon1_silv_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -128,10 +119,7 @@ include,destructible_vehicle_80s_wagon1_silv_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_wagon1_silv_destructible_mp"
-default:"vehicletype" "80s_wagon1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_wagon1_silv_destructible_mp"default:"vehicletype" "80s_wagon1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_wagon1_tan_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -144,10 +132,7 @@ include,destructible_vehicle_80s_wagon1_tan_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_wagon1_tan_destructible_mp"
-default:"vehicletype" "80s_wagon1"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_80s_wagon1_tan_destructible_mp"default:"vehicletype" "80s_wagon1"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_80s_wagon1_yel_destructible_mp (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -160,7 +145,5 @@ include,destructible_vehicle_80s_wagon1_yel_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
-defaultmdl="vehicle_80s_wagon1_yel_destructible_mp"
-default:"vehicletype" "80s_wagon1"
-default:"script_team" "allies"
+defaultmdl="vehicle_80s_wagon1_yel_destructible_mp"default:"vehicletype" "80s_wagon1"default:"script_team" "allies"
 */

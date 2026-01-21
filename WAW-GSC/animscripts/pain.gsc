@@ -104,9 +104,9 @@ getPainAnim() {
 
 get_flamethrower_pain() {
   if(self usingGasWeapon()) {
-    painArray = array( % ai_flamethrower_wounded_stand_arm, % ai_flamethrower_wounded_stand_chest, % ai_flamethrower_wounded_stand_head, % ai_flamethrower_wounded_stand_leg);
+    painArray = array(%ai_flamethrower_wounded_stand_arm, %ai_flamethrower_wounded_stand_chest, %ai_flamethrower_wounded_stand_head, %ai_flamethrower_wounded_stand_leg);
   } else {
-    painArray = array( % ai_flame_wounded_stand_a, % ai_flame_wounded_stand_b, % ai_flame_wounded_stand_c, % ai_flame_wounded_stand_d);
+    painArray = array(%ai_flame_wounded_stand_a, %ai_flame_wounded_stand_b, %ai_flame_wounded_stand_c, %ai_flame_wounded_stand_d);
   }
   tagArray = array("J_Elbow_RI", "J_Wrist_LE", "J_Wrist_RI", "J_Head");
   painArray = removeBlockedAnims(painArray);
@@ -127,7 +127,7 @@ get_flamethrower_pain() {
 }
 
 get_flamethrower_crouch_pain() {
-  painArray = array( % ai_flame_wounded_crouch_a, % ai_flame_wounded_crouch_b, % ai_flame_wounded_crouch_c, % ai_flame_wounded_crouch_d);
+  painArray = array(%ai_flame_wounded_crouch_a, %ai_flame_wounded_crouch_b, %ai_flame_wounded_crouch_c, %ai_flame_wounded_crouch_d);
   tagArray = array("J_Elbow_LE", "J_Wrist_LE", "J_Wrist_RI", "J_Head");
   painArray = removeBlockedAnims(painArray);
   if(!painArray.size) {
@@ -147,7 +147,7 @@ get_flamethrower_crouch_pain() {
 }
 
 getRunningForwardPainAnim() {
-  painArray = array( % run_pain_fallonknee, % run_pain_fallonknee_02, % run_pain_fallonknee_03, % run_pain_stomach, % run_pain_stumble);
+  painArray = array(%run_pain_fallonknee, %run_pain_fallonknee_02, %run_pain_fallonknee_03, %run_pain_stomach, %run_pain_stumble);
   painArray = removeBlockedAnims(painArray);
   if(!painArray.size) {
     self.a.movement = "stop";
@@ -281,9 +281,9 @@ playPainAnim(painAnim) {
     rate = 1.5;
   else
     rate = self.animPlayBackRate;
-  self setFlaggedAnimKnobAllRestart("painanim", painAnim, % body, 1, .1, rate);
+  self setFlaggedAnimKnobAllRestart("painanim", painAnim, %body, 1, .1, rate);
   if(self.a.pose == "prone")
-    self UpdateProne( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+    self UpdateProne(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
   if(animHasNotetrack(painAnim, "start_aim")) {
     self thread notifyStartAim("painanim");
     self endon("start_aim");
@@ -472,16 +472,16 @@ PlayHitAnimation() {
       weight = 1;
     else
       weight = (self.damageTaken + 50.0) / 250;
-    self clearanim( % minor_pain, 0.1);
+    self clearanim(%minor_pain, 0.1);
     self setanim(frontAnim, animWeights["front"], 0.05, 1);
     self setanim(backAnim, animWeights["back"], 0.05, 1);
     self setanim(leftAnim, animWeights["left"], 0.05, 1);
     self setanim(rightAnim, animWeights["right"], 0.05, 1);
-    self setanim( % minor_pain, weight, (0.05 / weight), 1);
+    self setanim(%minor_pain, weight, (0.05 / weight), 1);
     wait 0.05;
     if(!isDefined(self))
       return;
-    self clearanim( % minor_pain, (0.2 / weight));
+    self clearanim(%minor_pain, (0.2 / weight));
     wait 0.2;
   }
 }
@@ -546,25 +546,25 @@ crawlingPistol() {
   self endon("kill_long_death");
   self endon("death");
   self.a.array = [];
-  self.a.array["stand_2_crawl"] = array( % dying_stand_2_crawl_v1, % dying_stand_2_crawl_v2, % dying_stand_2_crawl_v3);
-  self.a.array["crouch_2_crawl"] = array( % dying_crouch_2_crawl);
+  self.a.array["stand_2_crawl"] = array(%dying_stand_2_crawl_v1, %dying_stand_2_crawl_v2, %dying_stand_2_crawl_v3);
+  self.a.array["crouch_2_crawl"] = array(%dying_crouch_2_crawl);
   self.a.array["crawl"] = % dying_crawl;
-  self.a.array["death"] = array( % dying_crawl_death_v1, % dying_crawl_death_v2);
-  self.a.array["prone_2_back"] = array( % dying_crawl_2_back);
-  self.a.array["stand_2_back"] = array( % dying_stand_2_back_v1, % dying_stand_2_back_v2, % dying_stand_2_back_v3);
-  self.a.array["crouch_2_back"] = array( % dying_crouch_2_back);
+  self.a.array["death"] = array(%dying_crawl_death_v1, %dying_crawl_death_v2);
+  self.a.array["prone_2_back"] = array(%dying_crawl_2_back);
+  self.a.array["stand_2_back"] = array(%dying_stand_2_back_v1, %dying_stand_2_back_v2, %dying_stand_2_back_v3);
+  self.a.array["crouch_2_back"] = array(%dying_crouch_2_back);
   self.a.array["back_idle"] = % dying_back_idle;
-  self.a.array["back_idle_twitch"] = array( % dying_back_twitch_A, % dying_back_twitch_B);
+  self.a.array["back_idle_twitch"] = array(%dying_back_twitch_A, %dying_back_twitch_B);
   self.a.array["back_crawl"] = % dying_crawl_back;
   self.a.array["back_fire"] = % dying_back_fire;
-  self.a.array["back_death"] = array( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3);
+  self.a.array["back_death"] = array(%dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3);
   self thread preventPainForAShortTime("crawling");
   self.a.special = "none";
   self thread painDeathNotify();
   level notify("ai_crawling", self);
   self thread crawling_stab_achievement();
   self.isSniper = false;
-  self setAnimKnobAll( % dying, % body, 1, 0.1, 1);
+  self setAnimKnobAll(%dying, %body, 1, 0.1, 1);
   if(!self dyingCrawl()) {
     return;
   }
@@ -618,8 +618,8 @@ crawlingPistol() {
     }
   }
   self notify("end_dying_crawl_back_aim");
-  self clearAnim( % dying_back_aim_4_wrapper, .3);
-  self clearAnim( % dying_back_aim_6_wrapper, .3);
+  self clearAnim(%dying_back_aim_4_wrapper, .3);
+  self clearAnim(%dying_back_aim_6_wrapper, .3);
   self.a.nodeath = true;
   animscripts\death::play_death_anim(animArrayPickRandom("back_death"));
   self doDamage(self.health + 5, (0, 0, 0));
@@ -686,8 +686,8 @@ dyingCrawlBackAim() {
   if(isDefined(self.dyingCrawlAiming))
     return;
   self.dyingCrawlAiming = true;
-  self setAnimLimited( % dying_back_aim_4, 1, 0);
-  self setAnimLimited( % dying_back_aim_6, 1, 0);
+  self setAnimLimited(%dying_back_aim_4, 1, 0);
+  self setAnimLimited(%dying_back_aim_6, 1, 0);
   prevyaw = 0;
   while(1) {
     aimyaw = self getYawToEnemy();
@@ -699,14 +699,14 @@ dyingCrawlBackAim() {
       if(aimyaw < -45.0)
         aimyaw = -45.0;
       weight = aimyaw / -45.0;
-      self setAnim( % dying_back_aim_4_wrapper, weight, .05);
-      self setAnim( % dying_back_aim_6_wrapper, 0, .05);
+      self setAnim(%dying_back_aim_4_wrapper, weight, .05);
+      self setAnim(%dying_back_aim_6_wrapper, 0, .05);
     } else {
       if(aimyaw > 45.0)
         aimyaw = 45.0;
       weight = aimyaw / 45.0;
-      self setAnim( % dying_back_aim_6_wrapper, weight, .05);
-      self setAnim( % dying_back_aim_4_wrapper, 0, .05);
+      self setAnim(%dying_back_aim_6_wrapper, weight, .05);
+      self setAnim(%dying_back_aim_4_wrapper, 0, .05);
     }
     prevyaw = aimyaw;
     wait .05;
@@ -879,7 +879,7 @@ CornerRightGrenadeDeath() {
   self thread preventPainForAShortTime("corner_grenade");
   self thread maps\_utility::set_battlechatter(false);
   self.threatbias = -1000;
-  self setFlaggedAnimKnobAllRestart("corner_grenade_pain", % corner_standR_death_grenade_hit, % body, 1, .1);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_pain", %corner_standR_death_grenade_hit, %body, 1, .1);
   self waittillmatch("corner_grenade_pain", "dropgun");
   self animscripts\shared::DropAllAIWeapons();
   self waittillmatch("corner_grenade_pain", "anim_pose = \"back\"");
@@ -890,7 +890,7 @@ CornerRightGrenadeDeath() {
   self.deathFunction = ::prematureCornerGrenadeDeath;
   self waittillmatch("corner_grenade_pain", "end");
   desiredDeathTime = gettime() + randomintrange(25000, 60000);
-  self setFlaggedAnimKnobAllRestart("corner_grenade_idle", % corner_standR_death_grenade_idle, % body, 1, .2);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_idle", %corner_standR_death_grenade_idle, %body, 1, .2);
   self thread watchEnemyVelocity();
   while(!enemyIsApproaching()) {
     if(gettime() >= desiredDeathTime) {
@@ -899,7 +899,7 @@ CornerRightGrenadeDeath() {
     self animscripts\shared::DoNoteTracksForTime(0.1, "corner_grenade_idle");
   }
   dropAnim = % corner_standR_death_grenade_slump;
-  self setFlaggedAnimKnobAllRestart("corner_grenade_release", dropAnim, % body, 1, .2);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_release", dropAnim, %body, 1, .2);
   dropTimeArray = getNotetrackTimes(dropAnim, "grenade_drop");
   assert(dropTimeArray.size == 1);
   dropTime = dropTimeArray[0] * getAnimLength(dropAnim);
@@ -961,10 +961,10 @@ enemyIsApproaching() {
 }
 
 prematureCornerGrenadeDeath() {
-  deathArray = array( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3, % dying_back_death_v4);
+  deathArray = array(%dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3, %dying_back_death_v4);
   deathAnim = deathArray[randomint(deathArray.size)];
   self animscripts\death::PlayDeathSound();
-  self setFlaggedAnimKnobAllRestart("corner_grenade_die", deathAnim, % body, 1, .2);
+  self setFlaggedAnimKnobAllRestart("corner_grenade_die", deathAnim, %body, 1, .2);
   velocity = getGrenadeDropVelocity();
   self CornerDeathReleaseGrenade(velocity, 3.0);
   model = getWeaponModel("fraggrenade");

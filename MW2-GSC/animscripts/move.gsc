@@ -139,8 +139,7 @@ ChangeMoveMode(moveMode) {
     } else {
       self.a.moveAnimSet = anim.animsets.move[moveMode];
 
-      if((self.combatMode == "ambush" || self.combatMode == "ambush_nodes_only") &&
-        (isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > squared(100))) {
+      if((self.combatMode == "ambush" || self.combatMode == "ambush_nodes_only") && (isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) > squared(100))) {
         self.sideStepRate = 1;
         animscripts\animset::set_ambush_sidestep_anims();
       } else {
@@ -156,7 +155,7 @@ MoveMainLoopInternal(doWalkCheck) {
   self endon("killanimscript");
   self endon("move_interrupt");
 
-  prevLoopTime = self getAnimTime( % walk_and_run_loops);
+  prevLoopTime = self getAnimTime(%walk_and_run_loops);
   self.a.runLoopCount = randomint(10000); // integer that is incremented each time we complete a run loop
 
   self.prevMoveMode = "none";
@@ -165,7 +164,7 @@ MoveMainLoopInternal(doWalkCheck) {
 
   // if initial destination is closer than 64 walk to it.
   for(;;) {
-    loopTime = self getAnimTime( % walk_and_run_loops);
+    loopTime = self getAnimTime(%walk_and_run_loops);
     if(loopTime < prevLoopTime)
       self.a.runLoopCount++;
     prevLoopTime = loopTime;
@@ -230,17 +229,16 @@ MayShootWhileMoving() {
 shootWhileMoving() {
   self endon("killanimscript");
 
-  // it's possible for this to be called by CQB while it's already running from run.gsc,
-  // even though run.gsc will kill it on the next frame. We can't let it run twice at once.
+  // it's possible for this to be called by CQB while it's already running from run.gsc, // even though run.gsc will kill it on the next frame. We can't let it run twice at once.
   self notify("doing_shootWhileMoving");
   self endon("doing_shootWhileMoving");
 
   self.a.array["fire"] = % exposed_shoot_auto_v3;
 
   if(isDefined(self.weapon) && weapon_pump_action_shotgun())
-    self.a.array["single"] = array( % shotgun_stand_fire_1A, % shotgun_stand_fire_1B);
+    self.a.array["single"] = array(%shotgun_stand_fire_1A, %shotgun_stand_fire_1B);
   else
-    self.a.array["single"] = array( % exposed_shoot_semi1);
+    self.a.array["single"] = array(%exposed_shoot_semi1);
 
   self.a.array["burst2"] = % exposed_shoot_burst3;
   self.a.array["burst3"] = % exposed_shoot_burst3;
@@ -268,7 +266,7 @@ shootWhileMoving() {
 
     self shootUntilShootBehaviorChange();
     // can't clear %exposed_modern because there are transition animations within it that we might play when going to prone
-    self clearAnim( % exposed_aiming, 0.2);
+    self clearAnim(%exposed_aiming, 0.2);
   }
 }
 
@@ -309,7 +307,7 @@ restartMoveLoop(skipMoveTransition) {
 
   self.ignorePathChange = undefined;
 
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self OrientMode("face default");
   self animMode("none", false);
 
@@ -324,8 +322,7 @@ pathChangeCheck() {
   self.ignorePathChange = true; // this will be turned on / off in other threads at appropriate times
 
   while(1) {
-    // no other thread should end on "path_changed"
-    self waittill("path_changed", doingReacquire, newDir);
+    // no other thread should end on "path_changed"self waittill("path_changed", doingReacquire, newDir);
 
     // no need to check for doingReacquire since faceMotion should be a good check
 
@@ -476,7 +473,7 @@ pathChange_doTurnAnim() {
     return; // too late
 
   self animMode("zonly_physics", false);
-  self clearanim( % body, 0.1);
+  self clearanim(%body, 0.1);
 
   self.moveLoopCleanupFunc = ::pathChange_cleanupTurnAnim;
 
@@ -490,9 +487,7 @@ pathChange_doTurnAnim() {
   self OrientMode("face current");
 
   assert(animHasNotetrack(turnAnim, "code_move"));
-  self animscripts\shared::DoNoteTracks("turnAnim"); // until "code_move"
-
-  self.ignorePathChange = undefined;
+  self animscripts\shared::DoNoteTracks("turnAnim"); // until "code_move"self.ignorePathChange = undefined;
   self OrientMode("face motion"); // want to face motion, don't do l / r / b anims
   self animmode("none", false);
 
@@ -514,14 +509,14 @@ pathChange_cleanupTurnAnim() {
   self.ignorePathChange = undefined;
 
   self OrientMode("face default");
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self animMode("none", false);
 }
 
 dodgeMoveLoopOverride() {
   self pushplayer(true);
   self animMode("zonly_physics", false);
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
 
   self setflaggedanimrestart("dodgeAnim", self.currentDodgeAnim, 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("dodgeAnim");
@@ -532,7 +527,7 @@ dodgeMoveLoopOverride() {
   if(animHasNotetrack(self.currentDodgeAnim, "code_move"))
     self animscripts\shared::DoNoteTracks("dodgeAnim"); // return on code_move
 
-  self clearanim( % civilian_dodge, 0.2);
+  self clearanim(%civilian_dodge, 0.2);
 
   self pushplayer(false);
   self.currentDodgeAnim = undefined;
@@ -577,8 +572,7 @@ animDodgeObstacle() {
   self endon("move_interrupt");
 
   while(1) {
-    // no other thread should end on "path_changed"
-    self waittill("path_need_dodge", dodgeEnt, dodgeEntPos);
+    // no other thread should end on "path_changed"self waittill("path_need_dodge", dodgeEnt, dodgeEntPos);
 
     if(self animscripts\utility::IsInCombat()) {
       self.noDodgeMove = false;
@@ -819,7 +813,7 @@ moveCoverToCover() {
 
   self animMode("zonly_physics", false);
 
-  self clearanim( % body, blendTime);
+  self clearanim(%body, blendTime);
 
   startAnim = animarray("shuffle_start");
   shuffleAnim = animarray("shuffle");
@@ -904,7 +898,7 @@ moveCoverToCover() {
 
 moveCoverToCoverFinish() {
   if(isDefined(self.shuffleMoveInterrupted)) {
-    self clearanim( % cover_shuffle, 0.2);
+    self clearanim(%cover_shuffle, 0.2);
 
     self.shuffleMoveInterrupted = undefined;
     self animmode("none", false);
@@ -912,7 +906,7 @@ moveCoverToCoverFinish() {
   } else {
     wait 0.2; // don't clear animation, wait for cover script to take over
 
-    self clearanim( % cover_shuffle, 0.2);
+    self clearanim(%cover_shuffle, 0.2);
   }
 }
 
@@ -986,8 +980,8 @@ slideForTime(slideIncrement, slideFrames) {
 
 MoveStandMoveOverride(override_anim, weights) {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
-  self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+  self clearanim(%combatrun, 0.6);
+  self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
 
   if(isDefined(self.requestReactToBullet) && gettime() - self.requestReactToBullet < 100 && isDefined(self.run_overrideBulletReact) && randomFloat(1) < self.a.reactToBulletChance) {
     animscripts\run::CustomRunningReactToBullets();

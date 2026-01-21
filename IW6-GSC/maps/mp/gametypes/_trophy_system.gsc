@@ -21,8 +21,7 @@ trophyUsed(grenade) {
     return;
   }
 
-  if(self IsOnLadder() ||
-    !self IsOnGround()) {
+  if(self IsOnLadder() || !self IsOnGround()) {
     self restockTrophy(grenade.weapon_name);
     grenade delete();
     return;
@@ -37,9 +36,7 @@ trophyUsed(grenade) {
   grenade Hide();
 
   placement = self CanPlayerPlaceSentry(true, 12);
-  if(placement["result"] &&
-    is_normal_upright(AnglesToUp(placement["angles"]))
-  ) {
+  if(placement["result"] && is_normal_upright(AnglesToUp(placement["angles"]))) {
     grenade.origin = placement["origin"];
     grenade.angles = placement["angles"];
   } else {
@@ -203,9 +200,7 @@ trophyActive(owner) {
     level.missiles = [];
 
   for(;;) {
-    if(isDefined(self.disabled) ||
-      (level.grenades.size < 1 && level.missiles.size < 1)
-    ) {
+    if(isDefined(self.disabled) || (level.grenades.size < 1 && level.missiles.size < 1)) {
       wait(.05);
       continue;
     }
@@ -297,8 +292,7 @@ trophyActive(owner) {
 }
 
 trophy_grenadeIsKillstreakMissile(grenade) {
-  return ((isDefined(grenade.classname) && grenade.classname == "rocket") &&
-    (isDefined(grenade.type) && (grenade.type == "remote" || grenade.type == "remote_mortar")));
+  return ((isDefined(grenade.classname) && grenade.classname == "rocket") && (isDefined(grenade.type) && (grenade.type == "remote" || grenade.type == "remote_mortar")));
 }
 
 trophy_getProtectionDistance(grenade) {
@@ -349,11 +343,7 @@ projectileExplode(projectile, trophy) {
 }
 
 trophyDamage(owner) {
-  self maps\mp\gametypes\_damage::monitorDamage(
-    100,
-    "trophy", ::trophyHandleDeathDamage, ::trophyModifyDamage,
-    false
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(100, "trophy", ::trophyHandleDeathDamage, ::trophyModifyDamage, false);
 }
 
 trophyModifyDamage(attacker, weapon, type, damage) {
@@ -411,7 +401,7 @@ playAnimations() {
 
   self ScriptModelPlayAnim("trophy_system_deploy");
 
-  animLength = GetAnimLength( % trophy_system_deploy);
+  animLength = GetAnimLength(%trophy_system_deploy);
   wait(animLength);
 
   self ScriptModelPlayAnim("trophy_system_idle");

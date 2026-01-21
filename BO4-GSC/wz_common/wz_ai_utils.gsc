@@ -328,8 +328,7 @@ function_c9a1a3bd(spot_origin, spot_angles, anim_name, var_c2a69066) {
   self.is_digging = 1;
   self animscripted("dig_anim", self.origin, self.angles, anim_name, "normal");
   self waittillmatch({
-    #notetrack: "end"
-  }, # "dig_anim");
+    #notetrack: "end"}, # "dig_anim");
   self ghost();
   self notsolid();
   self clientfield::set("zombie_riser_fx", 0);
@@ -910,8 +909,7 @@ function_9758722(speed) {
 
 get_pathnode_path(pathnode) {
   path_struct = {
-    #path: array(pathnode),
-    #loops: 0
+    #path: array(pathnode), #loops: 0
   };
   var_592eaf7 = pathnode;
 
@@ -1059,16 +1057,14 @@ get_attackable_slot(entity) {
     if(isDefined(var_acdc8d71)) {
       strteleportst.entity = entity;
       entity.var_b238ef38 = {
-        #slot: strteleportst,
-        #position: var_acdc8d71
+        #slot: strteleportst, #position: var_acdc8d71
       };
       return true;
     }
   } else {
     strteleportst.entity = entity;
     entity.var_b238ef38 = {
-      #slot: strteleportst,
-      #position: strteleportst.origin
+      #slot: strteleportst, #position: strteleportst.origin
     };
     return true;
   }
@@ -1134,8 +1130,7 @@ function_bdb2b85b(entity, origin, angles, radius, num_spots, var_7a2632b5) {
       recordstar(var_3e98a413, (0, 1, 0));
 
       slots[slots.size] = {
-        #origin: var_3e98a413,
-        #on_navmesh: 1
+        #origin: var_3e98a413, #on_navmesh: 1
       };
     } else if(isDefined(var_c060661b)) {
       if(isDefined(var_7a2632b5)) {
@@ -1149,9 +1144,7 @@ function_bdb2b85b(entity, origin, angles, radius, num_spots, var_7a2632b5) {
       recordstar(var_c060661b, (1, 0.5, 0));
 
       slots[slots.size] = {
-        #origin: var_c060661b,
-        #on_navmesh: 0,
-        #var_acdc8d71: var_acdc8d71
+        #origin: var_c060661b, #on_navmesh: 0, #var_acdc8d71: var_acdc8d71
       };
     }
 

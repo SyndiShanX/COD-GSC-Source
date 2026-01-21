@@ -118,9 +118,7 @@ function_33d5b9a6(var_26b2b1bb, eattacker, arc_source, arc_source_origin, depth,
   }
 
   if(isDefined(arc_source) && isDefined(arc_source.var_69ea963)) {
-    if(![
-        [arc_source.var_69ea963]
-      ](target)) {
+    if(![[arc_source.var_69ea963]](target)) {
       return false;
     }
   }

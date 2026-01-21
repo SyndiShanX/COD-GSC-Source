@@ -564,9 +564,7 @@ first_consumables_used_watcher() {
 init_custom_ai_type() {
   if(isDefined(level.custom_ai_type)) {
     for(i = 0; i < level.custom_ai_type.size; i++) {
-      [
-        [level.custom_ai_type[i]]
-      ]();
+      [[level.custom_ai_type[i]]]();
     }
   }
 }

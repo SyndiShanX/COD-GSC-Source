@@ -72,12 +72,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
 
   if(!isDefined(level._ee[name])) {
     level._ee[name] = {
-      #name: name,
-      #completed: 0,
-      #steps: [],
-      #current_step: 0,
-      #started: 0,
-      #skip_to_step: -1
+      #name: name, #completed: 0, #steps: [], #current_step: 0, #started: 0, #skip_to_step: -1
     };
 
     if(getdvarint(#"zm_debug_ee", 0)) {
@@ -97,14 +92,7 @@ function register(name, step_name, var_e788cdd7, setup_func, cleanup_func, var_d
   }
 
   new_step = {
-    #name: step_name,
-    #ee: ee,
-    #var_e788cdd7: var_e788cdd7,
-    #setup_func: setup_func,
-    #cleanup_func: cleanup_func,
-    #started: 0,
-    #completed: 0,
-    #cleaned_up: 0
+    #name: step_name, #ee: ee, #var_e788cdd7: var_e788cdd7, #setup_func: setup_func, #cleanup_func: cleanup_func, #started: 0, #completed: 0, #cleaned_up: 0
   };
   previous_step = ee.steps[level._ee[name].steps.size - 1];
 

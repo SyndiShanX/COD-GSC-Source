@@ -297,10 +297,10 @@ generic_human_anims() {
   maps\_anim::addnotetrack_flag("generic", "line_5", "stack_line_5", "sw_loco_stackup");
   maps\_anim::addnotetrack_flag("generic", "line_6", "stack_line_6", "sw_loco_stackup");
   var_0 = [];
-  var_0["cover_right_stand"]["alert_idle_twitch"] = [ % corner_standr_alert_twitch02, % corner_standr_alert_twitch04, % corner_standr_alert_twitch06];
-  var_0["cover_left_stand"]["alert_idle_twitch"] = [ % corner_standl_alert_twitch01, % corner_standl_alert_twitch02, % corner_standl_alert_twitch03, % corner_standl_alert_twitch04, % corner_standl_alert_twitch05, % corner_standl_alert_twitch07];
-  var_0["cover_crouch"]["hide_idle_twitch"] = [ % covercrouch_twitch_1, % covercrouch_twitch_3, % covercrouch_twitch_4];
-  var_0["cover_stand"]["hide_idle_twitch"] = [ % coverstand_hide_idle_twitch02, % coverstand_hide_idle_twitch03, % coverstand_hide_idle_twitch05];
+  var_0["cover_right_stand"]["alert_idle_twitch"] = [ % corner_standr_alert_twitch02, %corner_standr_alert_twitch04, %corner_standr_alert_twitch06];
+  var_0["cover_left_stand"]["alert_idle_twitch"] = [ % corner_standl_alert_twitch01, %corner_standl_alert_twitch02, %corner_standl_alert_twitch03, %corner_standl_alert_twitch04, %corner_standl_alert_twitch05, %corner_standl_alert_twitch07];
+  var_0["cover_crouch"]["hide_idle_twitch"] = [ % covercrouch_twitch_1, %covercrouch_twitch_3, %covercrouch_twitch_4];
+  var_0["cover_stand"]["hide_idle_twitch"] = [ % coverstand_hide_idle_twitch02, %coverstand_hide_idle_twitch03, %coverstand_hide_idle_twitch05];
   maps\_utility::register_archetype("no_helmet", var_0);
 }
 

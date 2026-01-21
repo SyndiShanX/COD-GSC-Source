@@ -68,19 +68,19 @@ MoveStandCombatOverride() {
     wait(GetRunAnimUpdateFrequency());
     return;
   }
-  self ClearAnim( % combatrun, 0.2);
-  self SetAnimKnobAll( % combatrun, % body, 1, 0.2, self.moveplaybackrate);
+  self ClearAnim(%combatrun, 0.2);
+  self SetAnimKnobAll(%combatrun, %body, 1, 0.2, self.moveplaybackrate);
   self SetFlaggedAnimKnob("runanim", self.run_combatanim, 1, 0.2, self.moveplaybackrate);
   animscripts\zombie_shared::DoNoteTracksForTime(getRunAnimUpdateFrequency(), "runanim");
   self.needs_run_update = false;
 }
 
 MoveStandCombatNormal() {
-  self ClearAnim( % walk_and_run_loops, 0.2);
-  self setanimknob( % combatrun, 1.0, 0.2, self.moveplaybackrate);
+  self ClearAnim(%walk_and_run_loops, 0.2);
+  self setanimknob(%combatrun, 1.0, 0.2, self.moveplaybackrate);
   decidedAnimation = false;
   if(isDefined(self.sprint) && self.sprint) {
-    self SetFlaggedAnimKnob("runanim", % sprint1_loop, 1, 0.2, self.moveplaybackrate);
+    self SetFlaggedAnimKnob("runanim", %sprint1_loop, 1, 0.2, self.moveplaybackrate);
     decidedAnimation = true;
   }
   if(!decidedAnimation) {
@@ -89,19 +89,9 @@ MoveStandCombatNormal() {
   }
   useLeans = GetDvarInt(#"ai_useLeanRunAnimations");
   if(useLeans && self.isfacingmotion) {
-    self UpdateRunWeightsOnce( %
-      combatrun_forward, %
-      run_lowready_B, %
-      ai_run_lowready_f_lean_l, %
-      ai_run_lowready_f_lean_r
-    );
+    self UpdateRunWeightsOnce(%combatrun_forward, %run_lowready_B, %ai_run_lowready_f_lean_l, %ai_run_lowready_f_lean_r);
   } else {
-    self UpdateRunWeightsOnce( %
-      combatrun_forward, %
-      run_lowready_B, %
-      run_lowready_L, %
-      run_lowready_R
-    );
+    self UpdateRunWeightsOnce(%combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
   }
   animscripts\zombie_shared::DoNoteTracksForTime(getRunAnimUpdateFrequency(), "runanim");
   self notify("stopRunning");
@@ -113,33 +103,23 @@ MoveStandNoncombatOverride() {
     wait(GetRunAnimUpdateFrequency());
     return;
   }
-  self ClearAnim( % combatrun, 0.6);
-  self SetFlaggedAnimKnobAll("runanim", self.run_noncombatanim, % body, 1, 0.2, self.moveplaybackrate);
+  self ClearAnim(%combatrun, 0.6);
+  self SetFlaggedAnimKnobAll("runanim", self.run_noncombatanim, %body, 1, 0.2, self.moveplaybackrate);
   animscripts\zombie_shared::DoNoteTracksForTime(0.2, "runanim");
   self.needs_run_update = false;
 }
 
 MoveStandNoncombatNormal() {
   self endon("movemode");
-  self ClearAnim( % combatrun, 0.6);
-  self SetAnimKnobAll( % combatrun, % body, 1, 0.2, self.moveplaybackrate);
+  self ClearAnim(%combatrun, 0.6);
+  self SetAnimKnobAll(%combatrun, %body, 1, 0.2, self.moveplaybackrate);
   prerunAnim = GetRunAnim();
   self SetFlaggedAnimKnob("runanim", prerunAnim, 1, 0.2);
   useLeans = GetDvarInt(#"ai_useLeanRunAnimations");
   if(useLeans && self.isfacingmotion) {
-    self UpdateRunWeightsOnce( %
-      combatrun_forward, %
-      run_lowready_B, %
-      ai_run_lowready_f_lean_l, %
-      ai_run_lowready_f_lean_r
-    );
+    self UpdateRunWeightsOnce(%combatrun_forward, %run_lowready_B, %ai_run_lowready_f_lean_l, %ai_run_lowready_f_lean_r);
   } else {
-    self UpdateRunWeightsOnce( %
-      combatrun_forward, %
-      run_lowready_B, %
-      run_lowready_L, %
-      run_lowready_R
-    );
+    self UpdateRunWeightsOnce(%combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
   }
   animscripts\zombie_shared::DoNoteTracksForTime(getRunAnimUpdateFrequency(), "runanim");
 }
@@ -150,7 +130,7 @@ MoveCrouchRunOverride() {
     wait(GetRunAnimUpdateFrequency());
     return;
   }
-  self SetFlaggedAnimKnobAll("runanim", self.crouchrun_combatanim, % body, 1, 0.2, self.moveplaybackrate);
+  self SetFlaggedAnimKnobAll("runanim", self.crouchrun_combatanim, %body, 1, 0.2, self.moveplaybackrate);
   animscripts\zombie_shared::DoNoteTracksForTime(0.2, "runanim");
   self.needs_run_update = false;
 }
@@ -165,16 +145,16 @@ MoveCrouchRunNormal() {
   self setanimknob(forward_anim, 1, 0.2);
   animWeights = animscripts\zombie_utility::QuadrantAnimWeights(self getMotionAngle());
   self SetAnim(forward_anim, animWeights["front"], 0.2, 1);
-  self SetAnim( % crouch_fastwalk_B, animWeights["back"], 0.2, 1);
-  self SetAnim( % crouch_fastwalk_L, animWeights["left"], 0.2, 1);
-  self SetAnim( % crouch_fastwalk_R, animWeights["right"], 0.2, 1);
-  self SetFlaggedAnimKnobAll("runanim", % combatrun_forward, % body, 1, 0.2, self.moveplaybackrate);
+  self SetAnim(%crouch_fastwalk_B, animWeights["back"], 0.2, 1);
+  self SetAnim(%crouch_fastwalk_L, animWeights["left"], 0.2, 1);
+  self SetAnim(%crouch_fastwalk_R, animWeights["right"], 0.2, 1);
+  self SetFlaggedAnimKnobAll("runanim", %combatrun_forward, %body, 1, 0.2, self.moveplaybackrate);
   animscripts\zombie_shared::DoNoteTracksForTime(0.2, "runanim");
   self.needs_run_update = false;
 }
 
 runLoopIsNearBeginning() {
-  animfraction = self getAnimTime( % walk_and_run_loops);
+  animfraction = self getAnimTime(%walk_and_run_loops);
   loopLength = getAnimLength(animscripts\zombie_run::GetRunAnim()) / 3.0;
   animfraction *= 3.0;
   if(animfraction > 3) {

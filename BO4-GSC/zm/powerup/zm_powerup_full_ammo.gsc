@@ -44,9 +44,7 @@ grab_full_ammo(player) {
 
 function_dae1df4d(e_powerup, player) {
   if(isDefined(level.check_player_is_ready_for_ammo)) {
-    if([
-        [level.check_player_is_ready_for_ammo]
-      ](player) == 0) {
+    if([[level.check_player_is_ready_for_ammo]](player) == 0) {
       return;
     }
   }

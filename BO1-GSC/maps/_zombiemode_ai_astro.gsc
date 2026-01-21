@@ -102,7 +102,7 @@ astro_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_idle_v1_delta, % ai_zombie_idle_v1_delta);
+  self.a.array["exposed_idle"] = array(%ai_zombie_idle_v1_delta, %ai_zombie_idle_v1_delta);
   self.a.array["straight_level"] = % ai_zombie_idle_v1_delta;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }
@@ -302,7 +302,7 @@ astro_zombie_headbutt_think() {
       self thread astro_turn_player();
       headbutt_anim = % ai_zombie_astro_headbutt;
       time = getAnimLength(headbutt_anim);
-      self animscripted("headbutt_anim", self.origin, self.angles, headbutt_anim, "normal", % body, 1, 0.1);
+      self animscripted("headbutt_anim", self.origin, self.angles, headbutt_anim, "normal", %body, 1, 0.1);
       self.player_to_headbutt thread astro_restore_move_speed(time);
       wait(time);
       self.next_headbutt_time = GetTime() + level.astro_headbutt_delay;
@@ -391,7 +391,7 @@ astro_zombie_headbutt_release_watcher(animname) {
     player SetMoveSpeedScale(1);
     release_anim = % ai_zombie_astro_headbutt_release;
     time = getAnimLength(release_anim);
-    self animscripted("release_anim", self.origin, self.angles, release_anim, "normal", % body, 1, 0.1);
+    self animscripted("release_anim", self.origin, self.angles, release_anim, "normal", %body, 1, 0.1);
     wait(time);
   }
 }
@@ -455,8 +455,7 @@ astro_zombie_teleport_enemy() {
   for(i = 0; i < black_hole_teleport_structs.size; i++) {
     volume = level.zones[black_hole_teleport_structs[i].script_string].volumes[0];
     active_zone = check_point_in_active_zone(black_hole_teleport_structs[i].origin);
-    if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) &&
-      (player_current_zone != black_hole_teleport_structs[i].script_string)) {
+    if(check_point_in_active_zone(black_hole_teleport_structs[i].origin) && (player_current_zone != black_hole_teleport_structs[i].script_string)) {
       if(!flag("power_on") || volume.script_string == "lowgravity") {
         chosen_spot = black_hole_teleport_structs[i];
         break;

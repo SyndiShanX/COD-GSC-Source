@@ -379,9 +379,7 @@ nukeEmpJamTeam(teamName) {
   level.teamNukeEMPed[teamName] = false;
 
   foreach(player in level.players) {
-    if(player.team == teamName &&
-      !(player shouldPlayerBeAffectedByEMP())
-    ) {
+    if(player.team == teamName && !(player shouldPlayerBeAffectedByEMP())) {
       player removePerPlayerEMPEffects();
       player.nuked = undefined;
     }
@@ -417,9 +415,7 @@ nukeEmpJamPlayers(owner) {
 
   level.nukeInfo.player = undefined;
   foreach(player in level.players) {
-    if((!isDefined(owner) || player != owner) &&
-      !(player shouldPlayerBeAffectedByEMP())
-    ) {
+    if((!isDefined(owner) || player != owner) && !(player shouldPlayerBeAffectedByEMP())) {
       player removePerPlayerEMPEffects();
     }
   }

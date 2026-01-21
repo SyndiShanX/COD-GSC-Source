@@ -49,7 +49,7 @@ cover_wall_think(covertype) {
   if(covertype == "crouch" && self.a.pose == "stand") {
     transanim = animarray("stand_2_hide");
     time = getanimlength(transanim);
-    self setanimknoballrestart(transanim, % body, 1, 0.2);
+    self setanimknoballrestart(transanim, %body, 1, 0.2);
     self thread animscripts\shared::movetooriginovertime(self.covernode.origin, time);
     wait(time);
     self.a.covermode = "Hide";
@@ -57,7 +57,7 @@ cover_wall_think(covertype) {
     transanim = animarray("crouch_2_hide");
     time = getanimlength(transanim);
     self thread animscripts\shared::movetooriginovertime(self.covernode.origin, time);
-    self setflaggedanimknoballrestart("crouch_2_stand", transanim, % body, 1, 0.2);
+    self setflaggedanimknoballrestart("crouch_2_stand", transanim, %body, 1, 0.2);
     self animscripts\shared::donotetracks("crouch_2_stand");
     self.a.covermode = "Hide";
   } else {
@@ -208,7 +208,7 @@ shootastold() {
     self animscripts\debug::debugpopstate("shootAsTold");
 
     self flamethrower_stop_shoot();
-    self clearanim( % add_fire, 0.2);
+    self clearanim(%add_fire, 0.2);
   }
 }
 
@@ -261,9 +261,9 @@ flinch() {
 
 playidleanimation(idleanim, needsrestart) {
   if(needsrestart)
-    self setflaggedanimknoballrestart("idle", idleanim, % body, 1, 0.1, 1);
+    self setflaggedanimknoballrestart("idle", idleanim, %body, 1, 0.1, 1);
   else
-    self setflaggedanimknoball("idle", idleanim, % body, 1, 0.1, 1);
+    self setflaggedanimknoball("idle", idleanim, %body, 1, 0.1, 1);
 
   self.a.covermode = "Hide";
   self animscripts\shared::donotetracks("idle");
@@ -287,7 +287,7 @@ look(looktime) {
   else
     lookanim = animarray("look_to_hide");
 
-  self setflaggedanimknoballrestart("looking_end", lookanim, % body, 1, 0.1);
+  self setflaggedanimknoballrestart("looking_end", lookanim, %body, 1, 0.1);
   animscripts\shared::donotetracks("looking_end");
   return true;
 }
@@ -311,13 +311,13 @@ peekout() {
     return false;
   }
 
-  self setflaggedanimknoball("looking_start", animarray("hide_to_look"), % body, 1, 0.2);
+  self setflaggedanimknoball("looking_start", animarray("hide_to_look"), %body, 1, 0.2);
   animscripts\shared::donotetracks("looking_start");
   return true;
 }
 
 fastlook() {
-  self setflaggedanimknoballrestart("look", animarraypickrandom("look"), % body, 1, 0.1);
+  self setflaggedanimknoballrestart("look", animarraypickrandom("look"), %body, 1, 0.1);
   self animscripts\shared::donotetracks("look");
   return true;
 }
@@ -327,9 +327,9 @@ standidlethread() {
 
   if(!isDefined(self.a.standidlethread)) {
     self.a.standidlethread = 1;
-    self setanim( % add_idle, 1, 0.2);
+    self setanim(%add_idle, 1, 0.2);
     standidlethreadinternal();
-    self clearanim( % add_idle, 0.2);
+    self clearanim(%add_idle, 0.2);
   }
 }
 
@@ -389,7 +389,7 @@ pop_up() {
   self notify("done_changing_cover_pos");
   self animmode("zonly_physics");
   animrate = pop_up_and_hide_speed();
-  self setflaggedanimknoballrestart("pop_up", popupanim, % body, 1, 0.1, animrate);
+  self setflaggedanimknoballrestart("pop_up", popupanim, %body, 1, 0.1, animrate);
   self thread donotetracksforpopup("pop_up");
 
   if(animhasnotetrack(popupanim, "start_aim")) {
@@ -424,7 +424,7 @@ setup_additive_aim(transtime) {
   else
     aimcovermode = self.a.covermode;
 
-  self setanimknoball(animarray(aimcovermode + "_aim"), % body, 1, transtime);
+  self setanimknoball(animarray(aimcovermode + "_aim"), %body, 1, transtime);
   prefix = "";
 
   if(self.a.covermode == "over")
@@ -445,8 +445,8 @@ go_to_hide() {
   self notify("done_changing_cover_pos");
   self endstandidlethread();
   animrate = pop_up_and_hide_speed();
-  self setflaggedanimknoball("go_to_hide", animarray(self.a.covermode + "_2_hide"), % body, 1, 0.2, animrate);
-  self clearanim( % exposed_modern, 0.2);
+  self setflaggedanimknoball("go_to_hide", animarray(self.a.covermode + "_2_hide"), %body, 1, 0.2, animrate);
+  self clearanim(%exposed_modern, 0.2);
   self animscripts\shared::donotetracks("go_to_hide");
   self animscripts\shared::stoptracking();
   self.a.covermode = "Hide";
@@ -539,7 +539,7 @@ loophide(transtime) {
   if(!isDefined(transtime))
     transtime = 0.1;
 
-  self setanimknoballrestart(animarray("hide_idle"), % body, 1, transtime);
+  self setanimknoballrestart(animarray("hide_idle"), %body, 1, transtime);
   self.a.covermode = "Hide";
 }
 
@@ -668,7 +668,7 @@ rambostepout() {
   self.keepclaimednode = 1;
   self.keepclaimednodeifvalid = 1;
   self.isramboing = 1;
-  self setflaggedanimknoballrestart("rambo", ramboanim, % body, 1, 0);
+  self setflaggedanimknoballrestart("rambo", ramboanim, %body, 1, 0);
 
   if(canuseblindaiming("rambo") && animtype != "rambo_jam") {
     self thread startblindaiming(ramboanim, "rambo");

@@ -131,8 +131,7 @@ friendly_stance_handler_return_ai_sight(ai, stance) {
   vec2 = vectornormalize(self.origin - ai.origin); // this is the direction from him to us
 
   // comparing the dotproduct of the 2 will tell us if he's facing us and how much so..
-  // 0 will mean his direction is exactly perpendicular to us,
-  // 1 will mean he's facing directly at us
+  // 0 will mean his direction is exactly perpendicular to us, // 1 will mean he's facing directly at us
   // - 1 will mean he's facing directly away from us
   vecdot = vectordot(vec1, vec2);
 

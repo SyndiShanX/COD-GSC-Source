@@ -20,7 +20,7 @@ main(var_0, var_1, var_2) {
   var_4["vehicle_battle_hind_low"] = "fx/explosions/aerial_explosion_hind_chernobyl";
   var_4["vehicle_battle_hind_no_lod"] = "fx/explosions/aerial_explosion_hind_chernobyl";
   var_4["vehicle_battle_hind_alpha_rotors"] = "fx/explosions/aerial_explosion_hind_chernobyl";
-  maps\_vehicle::build_drive( % battle_hind_spinning_rotor, undefined, 0);
+  maps\_vehicle::build_drive(%battle_hind_spinning_rotor, undefined, 0);
   var_5 = var_3[var_0];
   maps\_vehicle::build_deathfx("fx/explosions/grenadeexp_default", "tag_engine_left", "hind_helicopter_hit", undefined, undefined, undefined, 0.2, 1, undefined);
   maps\_vehicle::build_deathfx("fx/explosions/grenadeexp_default", "tail_rotor_jnt", "hind_helicopter_secondary_exp", undefined, undefined, undefined, 0.5, 1, undefined);

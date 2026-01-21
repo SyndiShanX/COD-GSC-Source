@@ -59,7 +59,7 @@ beat_break(str_anim) {
   self.ignoreme = true;
   while(isDefined(self) && IsAlive(self)) {
     dance_anim = str_anim;
-    self SetFlaggedAnimKnobAllRestart("dance_anim", dance_anim, % body, 1, .1, 1);
+    self SetFlaggedAnimKnobAllRestart("dance_anim", dance_anim, %body, 1, .1, 1);
     animscripts\traverse\zombie_shared::wait_anim_length(dance_anim, .02);
   }
 }
@@ -200,37 +200,31 @@ knock_on_door() {
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
-          flag("mcs") && !flag("mm")) {
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && !flag("mm")) {
           level.egg_sound_ent stopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 7);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
-          flag("mcs") && flag("mm") && !flag("s_s")) {
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && !flag("s_s")) {
           level.egg_sound_ent stopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 8);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
-          flag("mcs") && flag("mm") && flag("s_s") && !flag("sdm")) {
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && flag("s_s") && !flag("sdm")) {
           level.egg_sound_ent stopLoopSound(1.5);
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, 13, 5, 14, undefined);
           level.egg_sound_ent playLoopSound("zmb_fantastical_worlds_loop", 1.5);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
-          flag("mcs") && flag("mm") && flag("s_s") && flag("sdm") &&
-          !flag("dmf")) {
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && flag("s_s") && flag("sdm") && !flag("dmf")) {
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 9);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") &&
-          flag("mcs") && flag("mm") && flag("s_s") && flag("dmf")) {
+        if(flag("ffd") && flag("hgd") && flag("bd") && flag("aca") && flag("mcs") && flag("mm") && flag("s_s") && flag("dmf")) {
           level.egg_sound_ent stopLoopSound(1.5);
           wait(1.0);
           continue;
@@ -254,14 +248,12 @@ knock_on_door() {
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") &&
-          flag("sdm") && !flag("dmf")) {
+        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") && flag("sdm") && !flag("dmf")) {
           level maps\zombie_coast_amb::play_characters_skits_etc(e_inflictor, knock_trig, undefined, undefined, undefined, 9);
           wait(1.0);
           continue;
         }
-        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") &&
-          flag("dmf")) {
+        if(flag("ffd") && flag("hgd") && flag("mcs") && flag("s_s") && flag("dmf")) {
           wait(1.0);
           continue;
           return;
@@ -1064,7 +1056,7 @@ coast_egg_sacrifice_spot_start() {
         light_mover setModel("tag_origin");
         who LinkTo(light_mover);
         who.animname = "dancer";
-        who thread beat_break( % ai_zombie_flinger_flail);
+        who thread beat_break(%ai_zombie_flinger_flail);
         light_mover thread watch_for_death(who);
         light_mover thread rotate_while_moving();
         who.ignoreme = true;
@@ -1224,7 +1216,7 @@ rising_watch(org_mover) {
     self.essance = self.essance - i_amount;
   }
   self notify("switch");
-  self thread beat_break( % ai_zombie_dying_back_idle);
+  self thread beat_break(%ai_zombie_dying_back_idle);
   self notify("lighthouse_owned");
   self._light_accept = true;
 }

@@ -387,8 +387,7 @@ function finalize_spawnpoint_choice(spawnpoint) {
 
 function get_best_weighted_spawnpoint(spawnpoints) {
   maxsighttracedspawnpoints = 3;
-  for(
-    try = 0;
+  for(try = 0;
     try <= maxsighttracedspawnpoints;
     try ++) {
     bestspawnpoints = [];
@@ -415,8 +414,7 @@ function get_best_weighted_spawnpoint(spawnpoints) {
       return undefined;
     }
     bestspawnpoint = bestspawnpoints[randomint(bestspawnpoints.size)];
-    if(
-      try == maxsighttracedspawnpoints) {
+    if(try == maxsighttracedspawnpoints) {
       return bestspawnpoint;
     }
     if(isDefined(bestspawnpoint.lastsighttracetime) && bestspawnpoint.lastsighttracetime == gettime()) {

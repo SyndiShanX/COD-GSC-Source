@@ -568,9 +568,7 @@ regen_health_internal(var_0) {
     process_stop_regen_health_action(var_0);
     var_0.should_shock_wave = 1;
     if(isDefined(level.greygetmeleedamagedfunc)) {
-      [
-        [level.greygetmeleedamagedfunc]
-      ](var_0.melee_attacker, var_0.alien_fuse_exposed);
+      [[level.greygetmeleedamagedfunc]](var_0.melee_attacker, var_0.alien_fuse_exposed);
     }
   }
 

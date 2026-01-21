@@ -295,11 +295,7 @@ hide_outcome() {
 
 function_d756b48a(var_c1e98979, winner_text, loser_text, var_94d579fc, var_1e8a2bef) {
   level.var_c3abe983[var_c1e98979] = {
-    #type: var_c1e98979,
-    #winner_text: winner_text,
-    #loser_text: loser_text,
-    #var_3818f815: var_94d579fc,
-    #var_aa3dbaf1: var_1e8a2bef
+    #type: var_c1e98979, #winner_text: winner_text, #loser_text: loser_text, #var_3818f815: var_94d579fc, #var_aa3dbaf1: var_1e8a2bef
   };
 }
 

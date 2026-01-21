@@ -266,29 +266,7 @@ reset_clientdvars() {
     self[[level.reset_clientdvars]]();
     return;
   }
-  self SetClientDvars("compass", "1",
-    "hud_showStance", "1",
-    "cg_thirdPerson", "0",
-    "cg_fov", "65",
-    "cg_cursorHints", "4",
-    "cg_thirdPersonAngle", "0",
-    "hud_showobjectives", "1",
-    "ammoCounterHide", "0",
-    "miniscoreboardhide", "0",
-    "ui_hud_hardcore", "0",
-    "credits_active", "0",
-    "hud_missionFailed", "0",
-    "cg_cameraUseTagCamera", "1",
-    "cg_drawCrosshair", "1",
-    "r_heroLightScale", "1 1 1",
-    "r_fog_disable", "0",
-    "r_dof_tweak", "0",
-    "player_sprintUnlimited", "0",
-    "r_bloomTweaks", "0",
-    "r_exposureTweak", "0",
-    "cg_aggressiveCullRadius", "0",
-    "sm_sunSampleSizeNear", "0.25"
-  );
+  self SetClientDvars("compass", "1", "hud_showStance", "1", "cg_thirdPerson", "0", "cg_fov", "65", "cg_cursorHints", "4", "cg_thirdPersonAngle", "0", "hud_showobjectives", "1", "ammoCounterHide", "0", "miniscoreboardhide", "0", "ui_hud_hardcore", "0", "credits_active", "0", "hud_missionFailed", "0", "cg_cameraUseTagCamera", "1", "cg_drawCrosshair", "1", "r_heroLightScale", "1 1 1", "r_fog_disable", "0", "r_dof_tweak", "0", "player_sprintUnlimited", "0", "r_bloomTweaks", "0", "r_exposureTweak", "0", "cg_aggressiveCullRadius", "0", "sm_sunSampleSizeNear", "0.25");
   self AllowSpectateTeam("allies", false);
   self AllowSpectateTeam("axis", false);
   self AllowSpectateTeam("freelook", false);
@@ -325,19 +303,11 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   }
   println("CB PD");
   if(isDefined(eAttacker) && ((isPlayer(eAttacker)) && (eAttacker.team == self.team)) && (!isDefined(level.friendlyexplosivedamage) || !level.friendlyexplosivedamage)) {
-    if(!isDefined(level.is_friendly_fire_on) || ![
-        [level.is_friendly_fire_on]
-      ]()) {
+    if(!isDefined(level.is_friendly_fire_on) || ![[level.is_friendly_fire_on]]()) {
       if(self != eAttacker) {
         println("Exiting - players can't hut each other.");
         return;
-      } else if(sMeansOfDeath != "MOD_GRENADE_SPLASH" &&
-        sMeansOfDeath != "MOD_GRENADE" &&
-        sMeansOfDeath != "MOD_EXPLOSIVE" &&
-        sMeansOfDeath != "MOD_PROJECTILE" &&
-        sMeansOfDeath != "MOD_PROJECTILE_SPLASH" &&
-        sMeansOfDeath != "MOD_BURNED" &&
-        sMeansOfDeath != "MOD_SUICIDE") {
+      } else if(sMeansOfDeath != "MOD_GRENADE_SPLASH" && sMeansOfDeath != "MOD_GRENADE" && sMeansOfDeath != "MOD_EXPLOSIVE" && sMeansOfDeath != "MOD_PROJECTILE" && sMeansOfDeath != "MOD_PROJECTILE_SPLASH" && sMeansOfDeath != "MOD_BURNED" && sMeansOfDeath != "MOD_SUICIDE") {
         println("Exiting - damage type verbotten.");
         return;
       }
@@ -357,9 +327,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   }
   self maps\_dds::update_player_damage(eAttacker);
   if(iDamage >= self.health) {
-    if((sMeansOfDeath == "MOD_CRUSH") &&
-      isDefined(eAttacker) && isDefined(eAttacker.classname) &&
-      (eAttacker.classname == "script_vehicle")) {
+    if((sMeansOfDeath == "MOD_CRUSH") && isDefined(eAttacker) && isDefined(eAttacker.classname) && (eAttacker.classname == "script_vehicle")) {
       SetDvar("ui_deadquote", "@SCRIPT_MOVING_VEHICLE_DEATH");
     }
   }
@@ -401,8 +369,7 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
   if(is_true(self.magic_bullet_shield) && !is_true(self.bulletcam_death)) {
     MIN_PAIN_INTERVAL = 500;
     t = GetTime();
-    if((t - self._mbs.last_pain_time > MIN_PAIN_INTERVAL) ||
-      (sMeansOfDeath == "MOD_EXPLOSIVE")) {
+    if((t - self._mbs.last_pain_time > MIN_PAIN_INTERVAL) || (sMeansOfDeath == "MOD_EXPLOSIVE")) {
       if(self.allowPain || is_true(self._mbs.allow_pain_old)) {
         enable_pain();
       }

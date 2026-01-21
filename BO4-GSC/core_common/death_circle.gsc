@@ -86,22 +86,7 @@ add_circle(var_3b9f4abf, mapwidth = 0, mapheight = 0, radius = 0, damage = 0, da
   waitsec *= level.var_326f5774;
   scalesec *= level.deathcircletimescale;
   circle = {
-    #var_3b9f4abf: var_3b9f4abf,
-    #mapwidth: mapwidth,
-    #mapheight: mapheight,
-    #origin: var_3b9f4abf,
-    #radius: radius,
-    #radiussq: radius * radius,
-    #damage: damage,
-    #damageinterval: damageinterval,
-    #waitsec: waitsec,
-    #scalesec: scalesec,
-    #var_227b1773: var_227b1773,
-    #var_42682706: var_42682706,
-    #var_83c673f5: var_83c673f5,
-    #var_55ad5e4: var_55ad5e4,
-    #var_c3bf31b: var_c3bf31b,
-    #var_18fa918d: var_18fa918d
+    #var_3b9f4abf: var_3b9f4abf, #mapwidth: mapwidth, #mapheight: mapheight, #origin: var_3b9f4abf, #radius: radius, #radiussq: radius * radius, #damage: damage, #damageinterval: damageinterval, #waitsec: waitsec, #scalesec: scalesec, #var_227b1773: var_227b1773, #var_42682706: var_42682706, #var_83c673f5: var_83c673f5, #var_55ad5e4: var_55ad5e4, #var_c3bf31b: var_c3bf31b, #var_18fa918d: var_18fa918d
   };
   level.deathcircles[level.deathcircles.size] = circle;
   level thread shuffle_circles();
@@ -491,9 +476,7 @@ start() {
     }
 
     if(isDefined(level.ontimelimit)) {
-      [
-        [level.ontimelimit]
-      ]();
+      [[level.ontimelimit]]();
     }
   }
 }
@@ -1105,10 +1088,7 @@ simulate(var_1baf9723) {
 
     for(c = 0; c < level.deathcircles.size; c++) {
       circle = {
-        #origin_x: level.deathcircles[c].origin[0],
-        #origin_y: level.deathcircles[c].origin[1],
-        #radius: level.deathcircles[c].radius,
-        #index: c
+        #origin_x: level.deathcircles[c].origin[0], #origin_y: level.deathcircles[c].origin[1], #radius: level.deathcircles[c].radius, #index: c
       };
 
       if(!isDefined(var_f3ca456b)) {

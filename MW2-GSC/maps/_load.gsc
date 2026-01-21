@@ -532,56 +532,43 @@ main() {
 }
 
 /*QUAKED trigger_multiple_spawn (1.0 0.5 0.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="spawner_trigger"
-Spawns whatever is targetted. Currently supports AI.*/
+defaulttexture="spawner_trigger"Spawns whatever is targetted. Currently supports AI.*/
 
 /*QUAKED trigger_multiple_spawn_reinforcement (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="spawner_trigger"
-Spawns whatever is targetted. When the targeted AI dies a reinforcement spawner will be spawned if the spawner targets another spawner. Currently supports AI.*/
+defaulttexture="spawner_trigger"Spawns whatever is targetted. When the targeted AI dies a reinforcement spawner will be spawned if the spawner targets another spawner. Currently supports AI.*/
 
 /*QUAKED trigger_use_flag_set (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
+defaulttexture="flag"Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
 
 /*QUAKED trigger_use_flag_clear (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
+defaulttexture="flag"Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
 
 /*QUAKED trigger_damage_doradius_damage (0.12 0.23 1.0) ? PISTOL_NO RIFLE_NO PROJ_NO EXPLOSION_NO SPLASH_NO MELEE_NO
-defaulttexture="trigger"
-Wait for trigger then do lots of damage at target spot. */
+defaulttexture="trigger"Wait for trigger then do lots of damage at target spot. */
 
 /*QUAKED trigger_multiple_doradius_damage (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN
-defaulttexture="trigger"
-Wait for trigger then do lots of damage at target spot. */
+defaulttexture="trigger"Wait for trigger then do lots of damage at target spot. */
 
 /*QUAKED trigger_damage_player_flag_set (0.12 0.23 1.0) ? PISTOL_NO RIFLE_NO PROJ_NO EXPLOSION_NO SPLASH_NO MELEE_NO
-defaulttexture="flag"
-Sets the script_flag when player does damage to the trigger. */
+defaulttexture="flag"Sets the script_flag when player does damage to the trigger. */
 
 /*QUAKED trigger_multiple_nobloodpool (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN
-defaulttexture="trigger_nobloodpool"
-When triggered the touching character will no longer spawn blood pools on death. When the character leaves the trigger the blood pool will be re-enabled after a short delay. */
+defaulttexture="trigger_nobloodpool"When triggered the touching character will no longer spawn blood pools on death. When the character leaves the trigger the blood pool will be re-enabled after a short delay. */
 
 /*QUAKED trigger_multiple_flag_set (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
+defaulttexture="flag"Sets the script_flag when triggered. The entity that triggered it is passed with the level notify and to the flag_wait.*/
 
 /*QUAKED trigger_multiple_flag_clear (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Clears the script_flag when triggered.*/
+defaulttexture="flag"Clears the script_flag when triggered.*/
 
 /*QUAKED trigger_multiple_flag_set_touching (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Sets the script_flag when touched and then clears the flag when no longer touched.*/
+defaulttexture="flag"Sets the script_flag when touched and then clears the flag when no longer touched.*/
 
 /*QUAKED trigger_multiple_flag_lookat (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-The trigger targets a script origin. When the trigger is touched and a player looks at the origin, the script_flag gets set. If there is no script_flag then any triggers targetted by the trigger_multiple_lookat get triggered. Change SCRIPT_DOT to change required dot product*/
+defaulttexture="flag"The trigger targets a script origin. When the trigger is touched and a player looks at the origin, the script_flag gets set. If there is no script_flag then any triggers targetted by the trigger_multiple_lookat get triggered. Change SCRIPT_DOT to change required dot product*/
 
 /*QUAKED trigger_multiple_flag_looking (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-The trigger targets a script origin. When the trigger is touched and a player looks at the origin, the script_flag gets set. Change SCRIPT_DOT to change required dot product.
+defaulttexture="flag"The trigger targets a script origin. When the trigger is touched and a player looks at the origin, the script_flag gets set. Change SCRIPT_DOT to change required dot product.
 
 When the player looks away from the script origin, the script_flag is cleared.
 
@@ -589,33 +576,27 @@ If there is no script_flag then any triggers targetted by the trigger_multiple_l
 */
 
 /*QUAKED trigger_multiple_no_prone (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL? ? ? TOUCH_ONCE
-defaulttexture="trigger_no_prone"
-*/
+defaulttexture="trigger_no_prone"*/
 
 /*QUAKED trigger_multiple_no_crouch_or_prone (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL? ? ? TOUCH_ONCE
-defaulttexture="trigger_no_crouch_or_prone"
-*/
+defaulttexture="trigger_no_crouch_or_prone"*/
 
 /*QUAKED trigger_multiple_autosave (1.0 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="autosave"
-Autosaves when the trigger is hit.
+defaulttexture="autosave"Autosaves when the trigger is hit.
 */
 
 /*QUAKED trigger_multiple_physics ( 0.0 0.63 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger"
-Activate a physics jolt at a specified origin.
+defaulttexture="trigger"Activate a physics jolt at a specified origin.
 Use script_parameters to set amount of jolt.
 */
 
 /*QUAKED trigger_multiple_visionset (1.0 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger_environment"
-Changes vision set to script_visionset. Script_delay specifies how long to spend on the transition.
+defaulttexture="trigger_environment"Changes vision set to script_visionset. Script_delay specifies how long to spend on the transition.
 If it can find a fogset with the same name, it will change that as well.
 */
 
 /*QUAKED trigger_multiple_slide (1.0 0.23 1.0) ?
-defaulttexture="trigger"
-Forces the player to slide.
+defaulttexture="trigger"Forces the player to slide.
 */
 
 /*QUAKED script_origin_mini (1.0 0.0 0.0) (-2 -2 -2) (2 2 2)*/
@@ -627,19 +608,14 @@ Forces the player to slide.
 /*QUAKED script_struct_small (0.9 0.3 0.0) (-2 -2 -2) (2 2 2)*/
 
 /*QUAKED trigger_multiple_fog (1.0 0.23 1.0) ?
-defaulttexture="trigger"
-Fog transition trigger.
-script_fogset_start="example_start_fog"
-script_fogset_end="example_end_fog"
-"example_start_fog" is made from maps\_utility::create_fog("example_start_fog")
+defaulttexture="trigger"Fog transition trigger.
+script_fogset_start="example_start_fog"script_fogset_end="example_end_fog""example_start_fog" is made from maps\_utility::create_fog("example_start_fog")
 
-Trigger must target a script_origin to define the entry side,
-this script_origin can target another optional script_origin to define exit side.
+Trigger must target a script_origin to define the entry side, this script_origin can target another optional script_origin to define exit side.
 */
 
 /*QUAKED trigger_multiple_ambient (1.0 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="ambient"
-.ambient determines the ambience for the trigger. Can be two values, like "interior exterior" and it will blend between them.
+defaulttexture="ambient".ambient determines the ambience for the trigger. Can be two values, like "interior exterior" and it will blend between them.
 For blending, needs a targetted origin to determine blend direction.
 
 Current sets are:
@@ -676,33 +652,27 @@ Target to a func_glass. When an entity touching this trigger sends a level notif
 */
 
 /*QUAKED trigger_multiple_glass_break (0 0.25 0.5) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE
-defaulttexture="trigger"
-Target to a func_glass. When an entity touching this trigger sends a level notify of "glass_break", the func_glass targeted by this trigger will break.
+defaulttexture="trigger"Target to a func_glass. When an entity touching this trigger sends a level notify of "glass_break", the func_glass targeted by this trigger will break.
 */
 
 /*QUAKED trigger_multiple_friendly_respawn (0 1 0.25) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="aitrig"
-Target a script origin. Replacement friendlies will spawn from the origin.
+defaulttexture="aitrig"Target a script origin. Replacement friendlies will spawn from the origin.
 */
 
 /*QUAKED trigger_multiple_friendly_stop_respawn (0.25 1 0.25) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="aitrig"
-Stops friendly respawning.
+defaulttexture="aitrig"Stops friendly respawning.
 */
 
 /*QUAKED trigger_multiple_friendly (0 1.0 0.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="aitrig"
-Assign color codes to this trigger to control friendlies.
+defaulttexture="aitrig"Assign color codes to this trigger to control friendlies.
 */
 
 /*QUAKED trigger_multiple_compass (0.2 0.9 0.7) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="trigger"
-Activates the compass map set in its script_parameters.
+defaulttexture="trigger"Activates the compass map set in its script_parameters.
 */
 
 /*QUAKED trigger_multiple_specialops_flag_set (0.12 0.23 1.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE
-defaulttexture="flag"
-Sets the script_flag after being triggered by all player in a specialops map. The last entity that triggered it is passed with the level notify and to the flag_wait.*/
+defaulttexture="flag"Sets the script_flag after being triggered by all player in a specialops map. The last entity that triggered it is passed with the level notify and to the flag_wait.*/
 
 get_load_trigger_classes() {
   trigger_classes = [];
@@ -1400,11 +1370,7 @@ playerDamageShellshock() {
   while(true) {
     level.player waittill("damage", damage, attacker, direction_vec, point, cause);
 
-    if(cause == "MOD_EXPLOSIVE" ||
-      cause == "MOD_GRENADE" ||
-      cause == "MOD_GRENADE_SPLASH" ||
-      cause == "MOD_PROJECTILE" ||
-      cause == "MOD_PROJECTILE_SPLASH") {
+    if(cause == "MOD_EXPLOSIVE" || cause == "MOD_GRENADE" || cause == "MOD_GRENADE_SPLASH" || cause == "MOD_PROJECTILE" || cause == "MOD_PROJECTILE_SPLASH") {
       time = 0;
 
       multiplier = level.player.maxhealth / 100;
@@ -2709,18 +2675,14 @@ eq_trigger(trigger) {
     trigger waittill("trigger");
     ai = GetAIArray("allies");
     for(i = 0; i < ai.size; i++) {
-      ai[i][
-        [level.set_eq_func[ai[i] IsTouching(targ)]]
-      ]();
+      ai[i][[level.set_eq_func[ai[i] IsTouching(targ)]]]();
     }
     while(level.player IsTouching(trigger))
       wait(0.05);
 
     ai = GetAIArray("allies");
     for(i = 0; i < ai.size; i++) {
-      ai[i][
-        [level.set_eq_func[false]]
-      ]();
+      ai[i][[level.set_eq_func[false]]]();
     }
   }
   /*
@@ -3705,32 +3667,9 @@ set_fog_progress(progress) {
     end_angle = self.start_sunEndFadeAngle * anti_progress + self.end_sunEndFadeAngle * progress;
     sun_fog_scale = self.start_sunFogScale * anti_progress + self.end_sunFogScale * progress;
 
-    SetExpFog(
-      startdist,
-      halfwaydist,
-      color[0],
-      color[1],
-      color[2],
-      opacity,
-      0.4,
-      sun_color[0],
-      sun_color[1],
-      sun_color[2],
-      sun_dir,
-      begin_angle,
-      end_angle,
-      sun_fog_scale
-    );
+    SetExpFog(startdist, halfwaydist, color[0], color[1], color[2], opacity, 0.4, sun_color[0], sun_color[1], sun_color[2], sun_dir, begin_angle, end_angle, sun_fog_scale);
   } else {
-    SetExpFog(
-      startdist,
-      halfwaydist,
-      color[0],
-      color[1],
-      color[2],
-      opacity,
-      0.4
-    );
+    SetExpFog(startdist, halfwaydist, color[0], color[1], color[2], opacity, 0.4);
   }
 }
 
@@ -3912,8 +3851,7 @@ arcademode_save() {
 }
 
 player_death_detection() {
-  // a dvar starts high then degrades over time whenever the player dies,
-  // checked from maps\_utility::player_died_recently()
+  // a dvar starts high then degrades over time whenever the player dies, // checked from maps\_utility::player_died_recently()
   SetDvar("player_died_recently", "0");
   thread player_died_recently_degrades();
 
@@ -4266,9 +4204,7 @@ loop_friendly_thermal_Reflector_Effect(player_id, onlyForThisPlayer) {
     else
       playFXOnTag(level.friendly_thermal_Reflector_Effect, self, "J_Spine4");
 
-    //"tag_reflector_arm_ri"
-
-    wait(0.2);
+    //"tag_reflector_arm_ri"wait(0.2);
   }
 }
 

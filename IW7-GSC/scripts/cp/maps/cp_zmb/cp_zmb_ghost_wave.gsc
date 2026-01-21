@@ -766,9 +766,7 @@ activate_moving_targets_default(var_0) {
 
   foreach(var_2 in level.moving_target_groups) {
     foreach(var_4 in var_2) {
-      [
-        [level.set_moving_target_color_func]
-      ](var_4, var_0);
+      [[level.set_moving_target_color_func]](var_4, var_0);
     }
   }
 }

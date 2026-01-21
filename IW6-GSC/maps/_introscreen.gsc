@@ -13,9 +13,7 @@ main() {
     maps\_utility::delaythread(0.05, common_scripts\utility::flag_set, "introscreen_complete");
   else {
     if(isDefined(level.introscreen.customfunc)) {
-      [
-        [level.introscreen.customfunc]
-      ]();
+      [[level.introscreen.customfunc]]();
       return;
     }
 

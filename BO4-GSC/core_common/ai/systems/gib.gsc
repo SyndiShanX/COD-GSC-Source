@@ -291,10 +291,7 @@ gibhat(entity) {
 gibhead(entity) {
   gibhat(entity);
   level notify(#"gib", {
-    #entity: entity,
-    #attacker: self.attacker,
-    #area: "head"
-  });
+    #entity: entity, #attacker: self.attacker, #area: "head"});
   return _gibextra(entity, 8);
 }
 
@@ -306,10 +303,7 @@ gibleftarm(entity) {
   if(_gibentity(entity, 32)) {
     destructserverutils::destructleftarmpieces(entity);
     level notify(#"gib", {
-      #entity: entity,
-      #attacker: self.attacker,
-      #area: "left_arm"
-    });
+      #entity: entity, #attacker: self.attacker, #area: "left_arm"});
     return true;
   }
 
@@ -325,10 +319,7 @@ gibrightarm(entity) {
     destructserverutils::destructrightarmpieces(entity);
     entity thread shared::dropaiweapon();
     level notify(#"gib", {
-      #entity: entity,
-      #attacker: self.attacker,
-      #area: "right_arm"
-    });
+      #entity: entity, #attacker: self.attacker, #area: "right_arm"});
     return true;
   }
 
@@ -339,10 +330,7 @@ gibleftleg(entity) {
   if(_gibentity(entity, 256)) {
     destructserverutils::destructleftlegpieces(entity);
     level notify(#"gib", {
-      #entity: entity,
-      #attacker: self.attacker,
-      #area: "left_leg"
-    });
+      #entity: entity, #attacker: self.attacker, #area: "left_leg"});
     return true;
   }
 
@@ -353,10 +341,7 @@ gibrightleg(entity) {
   if(_gibentity(entity, 128)) {
     destructserverutils::destructrightlegpieces(entity);
     level notify(#"gib", {
-      #entity: entity,
-      #attacker: self.attacker,
-      #area: "right_leg"
-    });
+      #entity: entity, #attacker: self.attacker, #area: "right_leg"});
     return true;
   }
 
@@ -368,10 +353,7 @@ giblegs(entity) {
     destructserverutils::destructrightlegpieces(entity);
     destructserverutils::destructleftlegpieces(entity);
     level notify(#"gib", {
-      #entity: entity,
-      #attacker: self.attacker,
-      #area: "both_legs"
-    });
+      #entity: entity, #attacker: self.attacker, #area: "both_legs"});
     return true;
   }
 

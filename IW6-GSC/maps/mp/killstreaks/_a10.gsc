@@ -73,9 +73,7 @@ onUse(lifeId, streakName) {
   if(isDefined(level.a10strafeActive)) {
     self IPrintLnBold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return false;
-  } else if(self isUsingRemote() ||
-    self isKillStreakDenied()
-  ) {
+  } else if(self isUsingRemote() || self isKillStreakDenied()) {
     return false;
   } else if(GetCSplineCount() < 2) {
     PrintLn("ERROR: need at least two CSpline paths for A10 strafing run. Please add them to your level.");
@@ -417,14 +415,9 @@ missileGetBestTarget() {
 }
 
 missileIsGoodTarget(target) {
-  return (IsAlive(target) &&
-    target.team != self.owner.team &&
-    !(self isMissileTargeted(target)) &&
-    (IsPlayer(target) && !(target _hasPerk("specialty_blindeye")))
+  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (IsPlayer(target) && !(target _hasPerk("specialty_blindeye")))
 
-    &&
-    self missileTargetAngle(target) > 0.25
-  );
+    && self missileTargetAngle(target) > 0.25);
 }
 
 missileTargetAngle(target) {
@@ -779,11 +772,7 @@ a10_handleDamage() {
 
   config = level.planeConfigs[self.streakName];
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    config.maxHealth,
-    "helicopter", ::handleDeathDamage, ::modifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(config.maxHealth, "helicopter", ::handleDeathDamage, ::modifyDamage, true);
 }
 
 modifyDamage(attacker, weapon, type, damage) {

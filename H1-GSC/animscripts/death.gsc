@@ -12,52 +12,49 @@ init_animset_death() {
   var_0["directed_energy_stand_front_legs"] = [ % stand_death_legs_front_a_dea];
   var_0["directed_energy_stand_front_default"] = [ % stand_death_torso_front_a_dea];
   var_0["directed_energy_stand_back_default"] = [ % stand_death_torso_back_a_dea];
-  var_0["strong_legs"] = [ % death_shotgun_legs, % death_stand_sniper_leg];
-  var_0["strong_torso_lower"] = [ % death_shotgun_legs, % death_stand_sniper_leg, % death_shotgun_back_v1, % exposed_death_blowback, % death_stand_sniper_chest1, % death_stand_sniper_chest2, % death_stand_sniper_spin1];
-  var_0["strong_default"] = [ % death_shotgun_legs, % death_stand_sniper_leg, % death_shotgun_back_v1, % exposed_death_blowback, % death_stand_sniper_chest1, % death_stand_sniper_chest2, % death_stand_sniper_spin1];
-  var_0["strong_right"] = [ % death_shotgun_spinl, % death_stand_sniper_spin1, % death_stand_sniper_chest1, % death_stand_sniper_chest2];
-  var_0["strong_left"] = [ % death_shotgun_spinr, % death_stand_sniper_spin2, % death_stand_sniper_chest1, % death_stand_sniper_chest2];
-  var_0["running_forward"] = [ % run_death_facedown, % run_death_roll, % run_death_fallonback, % run_death_flop];
+  var_0["strong_legs"] = [ % death_shotgun_legs, %death_stand_sniper_leg];
+  var_0["strong_torso_lower"] = [ % death_shotgun_legs, %death_stand_sniper_leg, %death_shotgun_back_v1, %exposed_death_blowback, %death_stand_sniper_chest1, %death_stand_sniper_chest2, %death_stand_sniper_spin1];
+  var_0["strong_default"] = [ % death_shotgun_legs, %death_stand_sniper_leg, %death_shotgun_back_v1, %exposed_death_blowback, %death_stand_sniper_chest1, %death_stand_sniper_chest2, %death_stand_sniper_spin1];
+  var_0["strong_right"] = [ % death_shotgun_spinl, %death_stand_sniper_spin1, %death_stand_sniper_chest1, %death_stand_sniper_chest2];
+  var_0["strong_left"] = [ % death_shotgun_spinr, %death_stand_sniper_spin2, %death_stand_sniper_chest1, %death_stand_sniper_chest2];
+  var_0["running_forward"] = [ % run_death_facedown, %run_death_roll, %run_death_fallonback, %run_death_flop];
   var_0["running_forward_f"] = [ % run_death_fallonback];
   var_0["stand_pistol_forward"] = [ % pistol_death_2];
   var_0["stand_pistol_front"] = [ % pistol_death_2];
-  var_0["stand_pistol_groin"] = [ % pistol_death_3, % pistol_death_3];
+  var_0["stand_pistol_groin"] = [ % pistol_death_3, %pistol_death_3];
   var_0["stand_pistol_torso_upper"] = [ % pistol_death_3];
   var_0["stand_pistol_upper_body"] = [ % pistol_death_4];
   var_0["stand_pistol_default"] = [ % pistol_death_1];
-  var_0["stand_pistol_torso_upper"] = [ % pistol_death_3, % pistol_death_1];
+  var_0["stand_pistol_torso_upper"] = [ % pistol_death_3, %pistol_death_1];
   var_0["stand_pistol_lower_body"] = [ % pistol_death_2];
-  var_0["cover_right_stand"] = [ % corner_standr_deatha, % corner_standr_deathb];
-  var_0["cover_right_crouch_head"] = [[ % h1_cornercrr_alert_death_neck_2],
-    [ % cornercrr_alert_death_slideout]];
-  var_0["cover_right_crouch_default"] = [[ % h1_cornercrr_alert_death_slideout_2, % h1_cornercrr_alert_death_fallout_2, % h1_cornercrr_alert_death_back_2],
-    [ % cornercrr_alert_death_slideout, % cornercrr_alert_death_back]];
-  var_0["cover_left_stand"] = [ % corner_standl_deatha, % corner_standl_deathb];
-  var_0["cover_left_crouch"] = [[ % h1_cornercrl_death_back_2, % h1_cornercrl_death_side_2],
-    [ % cornercrl_death_side, % cornercrl_death_back]];
-  var_0["cover_stand"] = [ % coverstand_death_left, % coverstand_death_right];
+  var_0["cover_right_stand"] = [ % corner_standr_deatha, %corner_standr_deathb];
+  var_0["cover_right_crouch_head"] = [[ % h1_cornercrr_alert_death_neck_2], [ % cornercrr_alert_death_slideout]];
+  var_0["cover_right_crouch_default"] = [[ % h1_cornercrr_alert_death_slideout_2, %h1_cornercrr_alert_death_fallout_2, %h1_cornercrr_alert_death_back_2], [ % cornercrr_alert_death_slideout, %cornercrr_alert_death_back]];
+  var_0["cover_left_stand"] = [ % corner_standl_deatha, %corner_standl_deathb];
+  var_0["cover_left_crouch"] = [[ % h1_cornercrl_death_back_2, %h1_cornercrl_death_side_2], [ % cornercrl_death_side, %cornercrl_death_back]];
+  var_0["cover_stand"] = [ % coverstand_death_left, %coverstand_death_right];
   var_0["cover_crouch_head"] = % covercrouch_death_1;
   var_0["cover_crouch_back"] = % covercrouch_death_3;
   var_0["cover_crouch_default"] = % covercrouch_death_2;
   var_0["saw_stand"] = [ % saw_gunner_death];
   var_0["saw_crouch"] = [ % saw_gunner_lowwall_death];
   var_0["saw_prone"] = [ % saw_gunner_prone_death];
-  var_0["dying_crawl_crouch"] = [ % dying_back_death_v2, % dying_back_death_v3, % dying_back_death_v4];
-  var_0["dying_crawl_prone"] = [ % dying_crawl_death_v1, % dying_crawl_death_v2];
-  var_0["stand_lower_body"] = [ % exposed_death_groin, % stand_death_leg];
-  var_0["stand_lower_body_extended"] = [ % stand_death_crotch, % stand_death_guts];
-  var_0["stand_head"] = [ % exposed_death_headshot, % exposed_death_flop];
+  var_0["dying_crawl_crouch"] = [ % dying_back_death_v2, %dying_back_death_v3, %dying_back_death_v4];
+  var_0["dying_crawl_prone"] = [ % dying_crawl_death_v1, %dying_crawl_death_v2];
+  var_0["stand_lower_body"] = [ % exposed_death_groin, %stand_death_leg];
+  var_0["stand_lower_body_extended"] = [ % stand_death_crotch, %stand_death_guts];
+  var_0["stand_head"] = [ % exposed_death_headshot, %exposed_death_flop];
   var_0["stand_neck"] = [ % exposed_death_neckgrab];
-  var_0["stand_left_shoulder"] = [ % exposed_death_twist, % stand_death_shoulder_spin, % stand_death_shoulderback];
-  var_0["stand_torso_upper"] = [ % stand_death_tumbleforward, % stand_death_stumbleforward];
+  var_0["stand_left_shoulder"] = [ % exposed_death_twist, %stand_death_shoulder_spin, %stand_death_shoulderback];
+  var_0["stand_torso_upper"] = [ % stand_death_tumbleforward, %stand_death_stumbleforward];
   var_0["stand_torso_upper_extended"] = [ % stand_death_fallside];
-  var_0["stand_front_head"] = [ % stand_death_face, % stand_death_headshot_slowfall];
+  var_0["stand_front_head"] = [ % stand_death_face, %stand_death_headshot_slowfall];
   var_0["stand_front_head_extended"] = [ % stand_death_head_straight_back];
   var_0["stand_front_torso"] = [ % stand_death_tumbleback];
   var_0["stand_front_torso_extended"] = [ % stand_death_chest_stunned];
-  var_0["stand_back"] = [ % exposed_death_falltoknees, % exposed_death_falltoknees_02];
-  var_0["stand_default"] = [ % exposed_death_02, % exposed_death_nerve];
-  var_0["stand_default_firing"] = [ % exposed_death_firing_02, % exposed_death_firing];
+  var_0["stand_back"] = [ % exposed_death_falltoknees, %exposed_death_falltoknees_02];
+  var_0["stand_default"] = [ % exposed_death_02, %exposed_death_nerve];
+  var_0["stand_default_firing"] = [ % exposed_death_firing_02, %exposed_death_firing];
   var_0["stand_backup_default"] = % exposed_death;
   var_0["crouch_head"] = [ % exposed_crouch_death_fetal];
   var_0["crouch_torso"] = [ % exposed_crouch_death_flip];
@@ -78,7 +75,7 @@ main() {
   self endon("killanimscript");
   self stopsounds();
   var_0 = 0.3;
-  self clearanim( % scripted_talking, var_0);
+  self clearanim(%scripted_talking, var_0);
   maps\_anim::disabledefaultfacialanims(0);
   self hudoutlinedisable();
 
@@ -119,7 +116,7 @@ main() {
   else if(var_2 && randomint(3) == 0)
     helmetpop();
 
-  self clearanim( % animscript_root, 0.3);
+  self clearanim(%animscript_root, 0.3);
 
   if(!animscripts\utility::damagelocationisany("head", "helmet") || (self.damagemod == "MOD_MELEE" || self.damagemod == "MOD_MELEE_ALT") && isDefined(self.attacker)) {
     if(self.diequietly) {} else
@@ -130,9 +127,7 @@ main() {
     return;
   }
   if(isDefined(self.specialdeathfunc)) {
-    if([
-        [self.specialdeathfunc]
-      ]())
+    if([[self.specialdeathfunc]]())
       return;
   }
 
@@ -255,7 +250,7 @@ playdeathanim(var_0, var_1) {
   if(!isDefined(self.nomeleedeathorient) || !self.nomeleedeathorient)
     orientmeleevictim();
 
-  self setflaggedanimknoballrestart("deathanim", var_0, % body, 1, 0.1);
+  self setflaggedanimknoballrestart("deathanim", var_0, %body, 1, 0.1);
   animscripts\face::playfacialanim(var_0, "death");
 
   if(isDefined(self.skipdeathanim)) {
@@ -970,7 +965,7 @@ getpronedeathanim() {
 }
 
 getbackdeathanim() {
-  var_0 = animscripts\utility::array( % dying_back_death_v1, % dying_back_death_v2, % dying_back_death_v3, % dying_back_death_v4);
+  var_0 = animscripts\utility::array(%dying_back_death_v1, %dying_back_death_v2, %dying_back_death_v3, %dying_back_death_v4);
   return var_0[randomint(var_0.size)];
 }
 
@@ -1003,37 +998,37 @@ playexplodedeathanim() {
 
   if(self.a.movement != "run") {
     if(self.damageyaw > 135 || self.damageyaw <= -135) {
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_b_v1);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_b_v2);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_b_v3);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_b_v4);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_b_v1);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_b_v2);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_b_v3);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_b_v4);
     } else if(self.damageyaw > 45 && self.damageyaw <= 135) {
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_l_v1);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_l_v2);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_l_v3);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_l_v1);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_l_v2);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_l_v3);
     } else if(self.damageyaw > -45 && self.damageyaw <= 45) {
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_f_v1);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_f_v2);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_f_v3);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_f_v4);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_f_v1);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_f_v2);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_f_v3);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_f_v4);
     } else {
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_r_v1);
-      var_0[var_0.size] = tryadddeathanim( % death_explosion_stand_r_v2);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_r_v1);
+      var_0[var_0.size] = tryadddeathanim(%death_explosion_stand_r_v2);
     }
   } else if(self.damageyaw > 135 || self.damageyaw <= -135) {
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_b_v1);
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_b_v2);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_b_v1);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_b_v2);
   } else if(self.damageyaw > 45 && self.damageyaw <= 135) {
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_l_v1);
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_l_v2);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_l_v1);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_l_v2);
   } else if(self.damageyaw > -45 && self.damageyaw <= 45) {
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_f_v1);
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_f_v2);
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_f_v3);
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_f_v4);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_f_v1);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_f_v2);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_f_v3);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_f_v4);
   } else {
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_r_v1);
-    var_0[var_0.size] = tryadddeathanim( % death_explosion_run_r_v2);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_r_v1);
+    var_0[var_0.size] = tryadddeathanim(%death_explosion_run_r_v2);
   }
 
   var_1 = var_0[randomint(var_0.size)];

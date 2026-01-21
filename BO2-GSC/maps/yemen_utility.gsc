@@ -172,8 +172,8 @@ terrorist_teamswitch_think() {
 terrorist_teamswitch_reaction() {
   self endon("death");
   self orientmode("face point", level.player.origin);
-  anim_reaction = array( % ai_exposed_backpedal, % ai_exposed_idle_react_b);
-  self clearanim( % root, 0.2);
+  anim_reaction = array(%ai_exposed_backpedal, %ai_exposed_idle_react_b);
+  self clearanim(%root, 0.2);
   self setflaggedanimknobrestart("reactanim", random(anim_reaction), 1, 0.2, 1);
   self animscripts\shared::donotetracks("reactanim");
 }

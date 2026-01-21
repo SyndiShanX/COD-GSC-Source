@@ -96,12 +96,7 @@ createextracamxcamdata(menu_name, localclientnum, extracam_index, target_name, x
   assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
   extracam_data = {
-    #menu_name: menu_name,
-    #extracam_index: extracam_index,
-    #target_name: target_name,
-    #xcam: xcam,
-    #sub_xcam: sub_xcam,
-    #xcam_frame: xcam_frame
+    #menu_name: menu_name, #extracam_index: extracam_index, #target_name: target_name, #xcam: xcam, #sub_xcam: sub_xcam, #xcam_frame: xcam_frame
   };
 
   if(!isDefined(menu_data.extra_cams)) {
@@ -117,8 +112,7 @@ createcustomextracamxcamdata(menu_name, localclientnum, extracam_index, camera_f
   assert(isDefined(level.client_menus[localclientnum][menu_name]));
   menu_data = level.client_menus[localclientnum][menu_name];
   extracam_data = {
-    #extracam_index: extracam_index,
-    #camera_function: camera_function
+    #extracam_index: extracam_index, #camera_function: camera_function
   };
 
   if(!isDefined(menu_data.extra_cams)) {
@@ -195,16 +189,7 @@ function_e41243c1(var_e953aca6) {
 createcameramenu(menu_name, localclientnum, target_name, xcam, sub_xcam, xcam_frame = undefined, var_1f199068 = undefined, var_2c679be0 = undefined, lerp_time = 0, lut_index = 0) {
   assert(!isDefined(level.client_menus[localclientnum][menu_name]));
   level.client_menus[localclientnum][menu_name] = {
-    #menu_name: menu_name,
-    #target_name: target_name,
-    #xcam: xcam,
-    #sub_xcam: sub_xcam,
-    #xcam_frame: xcam_frame,
-    #var_1f199068: function_e41243c1(var_1f199068),
-    #var_2c679be0: function_e41243c1(var_2c679be0),
-    #lerp_time: lerp_time,
-    #lut_index: lut_index,
-    #var_e57ed98b: []
+    #menu_name: menu_name, #target_name: target_name, #xcam: xcam, #sub_xcam: sub_xcam, #xcam_frame: xcam_frame, #var_1f199068: function_e41243c1(var_1f199068), #var_2c679be0: function_e41243c1(var_2c679be0), #lerp_time: lerp_time, #lut_index: lut_index, #var_e57ed98b: []
   };
   return level.client_menus[localclientnum][menu_name];
 }
@@ -212,24 +197,14 @@ createcameramenu(menu_name, localclientnum, target_name, xcam, sub_xcam, xcam_fr
 function_9d7ab167(menu_name, localclientnum, session_mode, target_name, xcam, sub_xcam, xcam_frame = undefined, lerp_time = 0, lut_index = 0) {
   assert(isDefined(level.client_menus[localclientnum][menu_name]));
   level.client_menus[localclientnum][menu_name].var_e57ed98b[session_mode] = {
-    #target_name: target_name,
-    #xcam: xcam,
-    #sub_xcam: sub_xcam,
-    #xcam_frame: xcam_frame,
-    #lerp_time: lerp_time,
-    #lut_index: lut_index
+    #target_name: target_name, #xcam: xcam, #sub_xcam: sub_xcam, #xcam_frame: xcam_frame, #lerp_time: lerp_time, #lut_index: lut_index
   };
 }
 
 createcustomcameramenu(menu_name, localclientnum, camera_function, has_state, var_1f199068 = undefined, var_2c679be0 = undefined, lut_index = 0) {
   assert(!isDefined(level.client_menus[localclientnum][menu_name]));
   level.client_menus[localclientnum][menu_name] = {
-    #menu_name: menu_name,
-    #camera_function: camera_function,
-    #has_state: has_state,
-    #var_1f199068: function_e41243c1(var_1f199068),
-    #var_2c679be0: function_e41243c1(var_2c679be0),
-    #lut_index: lut_index
+    #menu_name: menu_name, #camera_function: camera_function, #has_state: has_state, #var_1f199068: function_e41243c1(var_1f199068), #var_2c679be0: function_e41243c1(var_2c679be0), #lut_index: lut_index
   };
   return level.client_menus[localclientnum][menu_name];
 }
@@ -263,12 +238,8 @@ setup_menu(localclientnum, menu_data, previous_menu) {
     }
 
     if(isDefined(previous_menu_info.custom_character) && (!isDefined(new_menu) || previous_menu_info.custom_character !== new_menu.custom_character)) {
-      [
-        [previous_menu_info.custom_character]
-      ] - > hide_model();
-      [
-        [previous_menu_info.custom_character]
-      ] - > function_39a68bf2();
+      [[previous_menu_info.custom_character]] - > hide_model();
+      [[previous_menu_info.custom_character]] - > function_39a68bf2();
     }
 
     if(isDefined(previous_menu_info.exploders)) {
@@ -280,9 +251,7 @@ setup_menu(localclientnum, menu_data, previous_menu) {
 
   if(isDefined(new_menu)) {
     if(isDefined(new_menu.custom_character)) {
-      [
-        [new_menu.custom_character]
-      ] - > show_model();
+      [[new_menu.custom_character]] - > show_model();
     }
 
     if(isDefined(new_menu.exploders)) {

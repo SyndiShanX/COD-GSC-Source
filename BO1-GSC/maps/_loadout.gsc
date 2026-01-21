@@ -37,15 +37,7 @@ init_models_and_variables_loadout() {
       add_weapon("knife_zm");
     }
   } else {
-    if(level.script == "frontend" ||
-      level.script == "so_narrative1_frontend" ||
-      level.script == "so_narrative2_frontend" ||
-      level.script == "so_narrative3_frontend" ||
-      level.script == "so_narrative4_frontend" ||
-      level.script == "so_narrative5_frontend" ||
-      level.script == "so_narrative6_frontend" ||
-      level.script == "so_narrative0_frontend" ||
-      level.script == "outro") {} else if(level.script == "flashpoint") {
+    if(level.script == "frontend" || level.script == "so_narrative1_frontend" || level.script == "so_narrative2_frontend" || level.script == "so_narrative3_frontend" || level.script == "so_narrative4_frontend" || level.script == "so_narrative5_frontend" || level.script == "so_narrative6_frontend" || level.script == "so_narrative0_frontend" || level.script == "outro") {} else if(level.script == "flashpoint") {
       add_weapon("knife_karambit_sp");
     } else {
       add_weapon("knife_sp");
@@ -108,14 +100,7 @@ init_models_and_variables_loadout() {
     set_player_interactive_model("viewmodel_usa_cuban_casual_fullbody");
     level.campaign = "american";
     return;
-  } else if(level.script == "frontend" ||
-    level.script == "so_narrative1_frontend" ||
-    level.script == "so_narrative2_frontend" ||
-    level.script == "so_narrative3_frontend" ||
-    level.script == "so_narrative4_frontend" ||
-    level.script == "so_narrative5_frontend" ||
-    level.script == "so_narrative6_frontend" ||
-    level.script == "so_narrative0_frontend") {
+  } else if(level.script == "frontend" || level.script == "so_narrative1_frontend" || level.script == "so_narrative2_frontend" || level.script == "so_narrative3_frontend" || level.script == "so_narrative4_frontend" || level.script == "so_narrative5_frontend" || level.script == "so_narrative6_frontend" || level.script == "so_narrative0_frontend") {
     set_laststand_pistol("none");
     set_player_viewmodel("tag_origin");
     set_player_interactive_hands("tag_origin");

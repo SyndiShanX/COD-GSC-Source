@@ -134,9 +134,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     }
 
     if(level.teambased && isplayer(eattacker) && self != eattacker && !util::function_fbce7263(self.team, eattacker.pers[# "team"]) && !isshootingownclone) {
-      friendlyfire = [
-        [level.figure_out_friendly_fire]
-      ](self, eattacker);
+      friendlyfire = [[level.figure_out_friendly_fire]](self, eattacker);
 
       if(friendlyfire == 0) {
         return;

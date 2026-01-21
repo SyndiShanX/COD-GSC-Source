@@ -71,30 +71,21 @@ zombie_entered_water(trigger) {
 zombie_water_move_slow() {
   if(is_true(self.speed_buff)) {
     var = randomintrange(1, 5);
-    self set_run_anim("sprint" +
-      var);
-    self.run_combatanim = level.scr_anim[self.animname]["sprint" +
-      var
-    ];
+    self set_run_anim("sprint" + var);
+    self.run_combatanim = level.scr_anim[self.animname]["sprint" + var];
   } else {
     switch (self.zombie_move_speed) {
       case "walk":
         break;
       case "run":
         var = randomintrange(1, 9);
-        self set_run_anim("walk" +
-          var);
-        self.run_combatanim = level.scr_anim[self.animname]["walk" +
-          var
-        ];
+        self set_run_anim("walk" + var);
+        self.run_combatanim = level.scr_anim[self.animname]["walk" + var];
         break;
       case "sprint":
         var = randomintrange(1, 7);
-        self set_run_anim("run" +
-          var);
-        self.run_combatanim = level.scr_anim[self.animname]["run" +
-          var
-        ];
+        self set_run_anim("run" + var);
+        self.run_combatanim = level.scr_anim[self.animname]["run" + var];
         break;
     }
   }
@@ -144,27 +135,18 @@ zombie_water_move_normal() {
     switch (self.zombie_move_speed) {
       case "walk":
         var = randomintrange(1, 9);
-        self set_run_anim("walk" +
-          var);
-        self.run_combatanim = level.scr_anim[self.animname]["walk" +
-          var
-        ];
+        self set_run_anim("walk" + var);
+        self.run_combatanim = level.scr_anim[self.animname]["walk" + var];
         break;
       case "run":
         var = randomintrange(1, 7);
-        self set_run_anim("run" +
-          var);
-        self.run_combatanim = level.scr_anim[self.animname]["run" +
-          var
-        ];
+        self set_run_anim("run" + var);
+        self.run_combatanim = level.scr_anim[self.animname]["run" + var];
         break;
       case "sprint":
         var = randomintrange(1, 5);
-        self set_run_anim("sprint" +
-          var);
-        self.run_combatanim = level.scr_anim[self.animname]["sprint" +
-          var
-        ];
+        self set_run_anim("sprint" + var);
+        self.run_combatanim = level.scr_anim[self.animname]["sprint" + var];
         break;
     }
   }

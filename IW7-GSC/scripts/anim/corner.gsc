@@ -374,17 +374,17 @@ func_3C50(var_0, var_1, var_2) {
 
 func_1105C(var_0) {
   self.var_4662 = 0;
-  self clearanim( % add_fire, var_0);
+  self clearanim(%add_fire, var_0);
   scripts\anim\track::func_F641(0, var_0);
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }
 
 func_F637(var_0, var_1, var_2) {
   self.var_10A5A = var_0;
-  self func_82AC( % exposed_modern, 1, var_2);
-  self func_82AC( % exposed_aiming, 1, var_2);
-  self func_82AC( % add_idle, 1, var_2);
+  self func_82AC(%exposed_modern, 1, var_2);
+  self func_82AC(%exposed_aiming, 1, var_2);
+  self func_82AC(%add_idle, 1, var_2);
   scripts\anim\track::func_F641(1, var_2);
   func_465D(undefined);
   var_3 = undefined;
@@ -496,7 +496,7 @@ func_10F89() {
   self notify("done_changing_cover_pos");
   var_5 = func_10F8A();
   self.closefile = 0;
-  self func_82E4("stepout", var_3, % root, 1, 0.2, var_5);
+  self func_82E4("stepout", var_3, %root, 1, 0.2, var_5);
   func_465E(var_3);
   thread donotetrackswithendon("stepout");
   var_4 = animhasnotetrack(var_3, "start_aim");
@@ -521,8 +521,8 @@ func_10F89() {
   }
 
   func_3C50(undefined, 1, 0.2);
-  self clearanim( % cover, 0.1);
-  self clearanim( % corner, 0.1);
+  self clearanim(%cover, 0.1);
+  self clearanim(%corner, 0.1);
   self.var_3C60 = 0;
   self.var_4740 = gettime();
   self.closefile = 1;
@@ -608,7 +608,7 @@ func_DC57() {
   self.a.var_D892 = "rambo";
   self.var_3C60 = 1;
   thread scripts\anim\shared::func_DC59(var_0);
-  self func_82E4("rambo", var_4, % body, 1, 0, 1);
+  self func_82E4("rambo", var_4, %body, 1, 0, 1);
   func_465E(var_4);
   scripts\anim\shared::donotetracks("rambo");
   self notify("rambo_aim_end");
@@ -660,7 +660,7 @@ shootastold() {
       }
 
       func_FEE0(1);
-      self clearanim( % add_fire, 0.2);
+      self clearanim(%add_fire, 0.2);
     }
 
     if(canreturntocover(self.a.var_4667 != "lean")) {
@@ -757,9 +757,9 @@ func_E47A() {
 
   var_4 = func_10F8A();
   if(scripts\engine\utility::actor_is3d()) {
-    self clearanim( % exposed_modern, 0.2);
+    self clearanim(%exposed_modern, 0.2);
   } else {
-    self clearanim( % body, 0.1);
+    self clearanim(%body, 0.1);
   }
 
   self func_82EA("hide", var_2, 1, 0.1, var_4);
@@ -790,7 +790,7 @@ func_2B99() {
   func_F6B9();
   self.sendmatchdata = 1;
   var_0 = scripts\anim\utility::func_1F67("blind_fire");
-  self func_82E4("blindfire", var_0, % body, 1, 0, 1);
+  self func_82E4("blindfire", var_0, %body, 1, 0, 1);
   func_465E(var_0);
   scripts\anim\shared::donotetracks("blindfire");
   self.sendmatchdata = 0;
@@ -871,7 +871,7 @@ func_B01C(var_0) {
     var_1 = scripts\anim\utility::func_1F64("look_to_alert");
   }
 
-  self func_82E4("looking_end", var_1, % body, 1, 0.1, 1);
+  self func_82E4("looking_end", var_1, %body, 1, 0.1, 1);
   func_465E(var_1);
   scripts\anim\shared::donotetracks("looking_end");
   func_F6B9();
@@ -915,7 +915,7 @@ func_C9FC() {
   }
 
   var_0 = scripts\anim\utility::func_1F64("alert_to_look");
-  self func_82E3("looking_start", var_0, % body, 1, 0.2, 1);
+  self func_82E3("looking_start", var_0, %body, 1, 0.2, 1);
   func_465E(var_0);
   scripts\anim\shared::donotetracks("looking_start");
   return 1;
@@ -1012,9 +1012,9 @@ func_6F27() {
 
 func_D49E(var_0, var_1) {
   if(var_1) {
-    self func_82E4("idle", var_0, % body, 1, 0.1, 1);
+    self func_82E4("idle", var_0, %body, 1, 0.1, 1);
   } else {
-    self func_82E3("idle", var_0, % body, 1, 0.1, 1);
+    self func_82E3("idle", var_0, %body, 1, 0.1, 1);
   }
 
   func_465E(var_0);
@@ -1037,7 +1037,7 @@ transitiontostance(var_0) {
   }
 
   var_1 = scripts\anim\utility::func_1F64("stance_change");
-  self func_82E4("changeStance", var_1, % body);
+  self func_82E4("changeStance", var_1, %body);
   func_465E(var_1);
   func_F2AE(var_0);
   scripts\anim\shared::donotetracks("changeStance");
@@ -1059,7 +1059,7 @@ func_846D(var_0, var_1, var_2) {
     thread scripts\anim\shared::func_BD1D(var_4, var_1);
   }
 
-  self func_82E4("coveranim", var_0, % body, 1, var_1);
+  self func_82E4("coveranim", var_0, %body, 1, var_1);
   func_465E(var_0);
   scripts\anim\notetracks::donotetracksfortime(var_2, "coveranim");
   while(scripts\engine\utility::absangleclamp180(self.angles[1] - var_5) > 1) {
@@ -1228,5 +1228,5 @@ func_465D(var_0) {
 
 func_465B() {
   self.facialidx = undefined;
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
 }

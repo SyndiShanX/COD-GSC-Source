@@ -13,8 +13,8 @@ main() {
   self traversemode("noclip");
   var_0 = self getnegotiationstartnode();
   self orientmode("face angle", var_0.angles[1]);
-  self clearanim( % stand_and_crouch, 0.1);
-  self setflaggedanimknoballrestart("diveanim", % jump_over_high_wall, % body, 1, 0.1, 1);
+  self clearanim(%stand_and_crouch, 0.1);
+  self setflaggedanimknoballrestart("diveanim", %jump_over_high_wall, %body, 1, 0.1, 1);
   self playSound("dive_wall");
   self waittillmatch("diveanim", "gravity on");
   self traversemode("nogravity");

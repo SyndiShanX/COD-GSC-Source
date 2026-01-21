@@ -75,10 +75,7 @@ function_a19d7104(settingsbundle) {
     }
 
     level.var_532264f5[settingsbundle.name][var_e8d7c6d7.weaponid] = {
-      #var_c6cc6205: var_e8d7c6d7.damagescale,
-      #var_fff93f95: var_e8d7c6d7.weakpointdamagescale,
-      #var_8e22aa87: var_e8d7c6d7.instakilldamagescale,
-      #var_fac896db: var_e8d7c6d7.var_97b22faa
+      #var_c6cc6205: var_e8d7c6d7.damagescale, #var_fff93f95: var_e8d7c6d7.weakpointdamagescale, #var_8e22aa87: var_e8d7c6d7.instakilldamagescale, #var_fac896db: var_e8d7c6d7.var_97b22faa
     };
   }
 
@@ -133,8 +130,7 @@ function_594bb7bd(player) {
 
 get_pathnode_path(pathnode) {
   path_struct = {
-    #path: array(pathnode),
-    #loops: 0
+    #path: array(pathnode), #loops: 0
   };
   var_592eaf7 = pathnode;
 
@@ -341,10 +337,7 @@ function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebc
   }
 
   return {
-    #damage_scale: var_b1c1c5cf,
-    #var_84ed9a13: var_84ed9a13,
-    #registerzombie_bgb_used_reinforce: registerzombie_bgb_used_reinforce,
-    #var_201ce857: var_201ce857
+    #damage_scale: var_b1c1c5cf, #var_84ed9a13: var_84ed9a13, #registerzombie_bgb_used_reinforce: registerzombie_bgb_used_reinforce, #var_201ce857: var_201ce857
   };
 }
 

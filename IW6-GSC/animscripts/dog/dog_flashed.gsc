@@ -16,7 +16,7 @@ main() {
   self endon("killanimscript");
   self endon("stop_flashbang_effect");
   wait(randomfloatrange(0, 0.4));
-  self clearanim( % body, 0.1);
+  self clearanim(%body, 0.1);
   var_0 = maps\_utility::flashbanggettimeleftsec();
 
   if(var_0 > 2 && randomint(100) > 60)

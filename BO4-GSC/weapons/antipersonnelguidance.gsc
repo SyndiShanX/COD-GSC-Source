@@ -74,9 +74,7 @@ event_handler[missile_fire] function_dc710809(eventstruct) {
     foreach(target in self.multilocklist) {
       if(isDefined(target.aptarget) && target.aplockfinalized) {
         target.aptarget notify(#"stinger_fired_at_me", {
-          #projectile: missile,
-          #weapon: weapon,
-          #attacker: self
+          #projectile: missile, #weapon: weapon, #attacker: self
         });
       }
     }
@@ -170,8 +168,7 @@ aplockloop(weapon) {
           self weaponlockfinalize(target.aptarget, i);
           self thread seekersound(weapon.lockonseekerlockedsound, weapon.lockonseekerlockedsoundloops, target.apsoundid);
           target.aptarget notify(#"missile_lock", {
-            #attacker: self,
-            #weapon: weapon
+            #attacker: self, #weapon: weapon
           });
         }
       }

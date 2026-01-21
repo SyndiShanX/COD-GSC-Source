@@ -427,12 +427,7 @@ giveRankXP(type, value) {
       self.pers["summary"]["xp"] += value;
       break;
   }
-  self setClientDvars(
-    "ps_x", self.pers["summary"]["xp"],
-    "ps_s", self.pers["summary"]["score"],
-    "ps_c", self.pers["summary"]["challenge"],
-    "ps_m", self.pers["summary"]["match"]
-  );
+  self setClientDvars("ps_x", self.pers["summary"]["xp"], "ps_s", self.pers["summary"]["score"], "ps_c", self.pers["summary"]["challenge"], "ps_m", self.pers["summary"]["match"]);
   recordPlayerStats(self, "total_xp", self.pers["summary"]["xp"]);
 }
 

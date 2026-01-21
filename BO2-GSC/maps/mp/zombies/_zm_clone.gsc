@@ -106,20 +106,20 @@ clone_mover_animate(animtype) {
 
   switch (animtype) {
     case "laststand":
-      self setanim( % pb_laststand_idle);
+      self setanim(%pb_laststand_idle);
       break;
     case "afterlife":
-      self setanim( % pb_afterlife_laststand_idle);
+      self setanim(%pb_afterlife_laststand_idle);
       break;
     case "chair":
-      self setanim( % ai_actor_elec_chair_idle);
+      self setanim(%ai_actor_elec_chair_idle);
       break;
     case "falling":
-      self setanim( % pb_falling_loop);
+      self setanim(%pb_falling_loop);
       break;
     case "idle":
     default:
-      self setanim( % pb_stand_alert);
+      self setanim(%pb_stand_alert);
       break;
   }
 }

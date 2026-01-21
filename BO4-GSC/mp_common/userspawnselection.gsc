@@ -335,9 +335,7 @@ waitforspawnselection() {
     var_ff3ca6eb = 0;
 
     if(isDefined(level.var_2fa4efc2)) {
-      var_ff3ca6eb = [
-        [level.var_2fa4efc2]
-      ](waitresult);
+      var_ff3ca6eb = [[level.var_2fa4efc2]](waitresult);
     }
 
     if(menu == "SpawnSelect" && !var_ff3ca6eb) {

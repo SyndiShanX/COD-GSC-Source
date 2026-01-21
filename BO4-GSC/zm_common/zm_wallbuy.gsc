@@ -733,8 +733,7 @@ weapon_spawn_think() {
         }
 
         level notify(#"weapon_bought", {
-          #player: player,
-          #weapon: self.weapon
+          #player: player, #weapon: self.weapon
         });
         player zm_stats::increment_challenge_stat(#"survivalist_buy_wallbuy", undefined, 1);
         player zm_stats::increment_challenge_stat(#"hash_385398b8acbf8b4a", undefined, 1);

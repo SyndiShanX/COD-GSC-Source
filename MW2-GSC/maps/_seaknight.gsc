@@ -21,7 +21,7 @@ main(model, type) {
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
 
-  build_drive( % sniper_escape_ch46_rotors, undefined, 0);
+  build_drive(%sniper_escape_ch46_rotors, undefined, 0);
 
   build_unload_groups(::Unload_Groups);
 
@@ -51,10 +51,10 @@ set_vehicle_anims(positions) {
   positions[1].vehicle_getoutsound = "seaknight_door_open";
   positions[1].vehicle_getinsound = "seaknight_door_close";
 
-  positions[1].delay = getanimlength( % ch46_doors_open) - 1.7;
-  positions[2].delay = getanimlength( % ch46_doors_open) - 1.7;
-  positions[3].delay = getanimlength( % ch46_doors_open) - 1.7;
-  positions[4].delay = getanimlength( % ch46_doors_open) - 1.7;
+  positions[1].delay = getanimlength(%ch46_doors_open) - 1.7;
+  positions[2].delay = getanimlength(%ch46_doors_open) - 1.7;
+  positions[3].delay = getanimlength(%ch46_doors_open) - 1.7;
+  positions[4].delay = getanimlength(%ch46_doors_open) - 1.7;
 
   return positions;
 }
@@ -136,10 +136,7 @@ and these lines in your CSV:
 include,vehicle_ch46e_seaknight
 sound,vehicle_seaknight,vehicle_standard,all_sp
 
-defaultmdl="vehicle_ch46e"
-default:"vehicletype" "seaknight"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_ch46e"default:"vehicletype" "seaknight"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_ch46e_low (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -150,7 +147,5 @@ and these lines in your CSV:
 include,vehicle_ch46e_seaknight_low
 sound,vehicle_seaknight,vehicle_standard,all_sp
 
-defaultmdl="vehicle_ch46e_low"
-default:"vehicletype" "seaknight"
-default:"script_team" "allies"
+defaultmdl="vehicle_ch46e_low"default:"vehicletype" "seaknight"default:"script_team" "allies"
 */

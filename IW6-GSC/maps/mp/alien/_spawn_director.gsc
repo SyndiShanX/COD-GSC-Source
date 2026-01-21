@@ -626,9 +626,7 @@ sort_array(array, sort_func, beginning_index, pass_through_parameter_list) {
   for(i = beginning_index + 1; i < array.size; i++) {
     entry = array[i];
 
-    for(j = i - 1; j >= beginning_index && [
-        [sort_func]
-      ](array[j], entry, pass_through_parameter_list); j--)
+    for(j = i - 1; j >= beginning_index && [[sort_func]](array[j], entry, pass_through_parameter_list); j--)
       array[j + 1] = array[j];
 
     array[j + 1] = entry;
@@ -751,9 +749,7 @@ put_spawnLocations_into_cycle_data(spawnLocations, cycle_data) {
     validTypes = [];
 
     if(isDefined(level.adjust_spawnLocation_func))
-      location = [
-        [level.adjust_spawnLocation_func]
-      ](location);
+      location = [[level.adjust_spawnLocation_func]](location);
 
     if(isDefined(location.script_noteworthy))
       validTypes = strtok(cycle_data.spawn_node_info[location.script_noteworthy].validType, " ");

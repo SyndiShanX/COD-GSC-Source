@@ -960,13 +960,7 @@ weaponRankSplash(increments, delay) {
 }
 
 testEndGameUpdate(promotion) {
-  self setClientDvars("ui_challenge_1_ref", "ch_nosecrets",
-    "ui_challenge_2_ref", "ch_nosecrets_daily",
-    "ui_challenge_3_ref", "ch_nosecrets_weekly",
-    "ui_challenge_4_ref", "ch_uav",
-    "ui_challenge_5_ref", "ch_longersprint_ks",
-    "ui_challenge_6_ref", "ch_grenadekill",
-    "ui_challenge_7_ref", "ch_noboomforyou");
+  self setClientDvars("ui_challenge_1_ref", "ch_nosecrets", "ui_challenge_2_ref", "ch_nosecrets_daily", "ui_challenge_3_ref", "ch_nosecrets_weekly", "ui_challenge_4_ref", "ch_uav", "ui_challenge_5_ref", "ch_longersprint_ks", "ui_challenge_6_ref", "ch_grenadekill", "ui_challenge_7_ref", "ch_noboomforyou");
 
   if(isDefined(promotion) && promotion)
     self setClientDvar("ui_promotion", 1);
@@ -1032,18 +1026,7 @@ xKillsY(attackerName, victimName) {
   if(!isAlive(attacker) || !isAlive(victim)) {
     return;
   }
-  victim thread[[level.callbackPlayerDamage]](
-    attacker,
-    attacker,
-    500,
-    0,
-    "MOD_RIFLE_BULLET",
-    "scar_mp",
-    (0, 0, 0),
-    (0, 0, 0),
-    "none",
-    0
-  );
+  victim thread[[level.callbackPlayerDamage]](attacker, attacker, 500, 0, "MOD_RIFLE_BULLET", "scar_mp", (0, 0, 0), (0, 0, 0), "none", 0);
 }
 
 updateMinimapSetting() {
@@ -1351,18 +1334,7 @@ haveTestClientKillPlayer() {
   bot = getBot(notBot);
 
   if(isDefined(bot)) {
-    notBot thread[[level.callbackPlayerDamage]](
-      bot,
-      bot,
-      500,
-      0,
-      "MOD_RIFLE_BULLET",
-      bot.primaryweapon,
-      bot.origin,
-      (0, 0, 0),
-      "none",
-      0
-    );
+    notBot thread[[level.callbackPlayerDamage]](bot, bot, 500, 0, "MOD_RIFLE_BULLET", bot.primaryweapon, bot.origin, (0, 0, 0), "none", 0);
   }
 
   wait(1);
@@ -2158,18 +2130,7 @@ devHurtPlayer() {
   bot = getBot(notBot);
 
   if(isDefined(bot)) {
-    notBot thread[[level.callbackPlayerDamage]](
-      bot,
-      bot,
-      damageVal,
-      0,
-      "MOD_RIFLE_BULLET",
-      bot.primaryweapon,
-      bot.origin,
-      (0, 0, 0),
-      "none",
-      0
-    );
+    notBot thread[[level.callbackPlayerDamage]](bot, bot, damageVal, 0, "MOD_RIFLE_BULLET", bot.primaryweapon, bot.origin, (0, 0, 0), "none", 0);
   }
 
   SetDevDvar("scr_devhurtplayer", 0);

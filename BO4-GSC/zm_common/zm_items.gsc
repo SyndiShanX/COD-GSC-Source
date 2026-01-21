@@ -85,9 +85,7 @@ __main__() {
     var_b38ebe37 = a_items[0].item.var_ec2cbce2;
 
     if(isDefined(level.var_fd2e6f70)) {
-      a_items = [
-        [level.var_fd2e6f70]
-      ](a_items);
+      a_items = [[level.var_fd2e6f70]](a_items);
     } else {
       a_items = array::randomize(a_items);
     }
@@ -201,12 +199,10 @@ player_pick_up(player, w_item) {
   }
 
   level notify(#"component_collected", {
-    #component: w_item,
-    #holder: holder
+    #component: w_item, #holder: holder
   });
   player notify(#"component_collected", {
-    #component: w_item,
-    #holder: holder
+    #component: w_item, #holder: holder
   });
 
   if(isDefined(level.item_callbacks[w_item])) {
@@ -251,12 +247,10 @@ function_ab3bb6bf(holder, w_item) {
   }
 
   level notify(#"component_lost", {
-    #component: w_item,
-    #holder: holder
+    #component: w_item, #holder: holder
   });
   self notify(#"component_lost", {
-    #component: w_item,
-    #holder: holder
+    #component: w_item, #holder: holder
   });
 
   if(self hasweapon(w_item)) {

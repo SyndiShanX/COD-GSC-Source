@@ -17,7 +17,7 @@ main() {
 
   self func_83AC("voice_bchatter_1_3d");
   var_0 = 0.3;
-  self clearanim( % scripted_talking, var_0);
+  self clearanim(%scripted_talking, var_0);
   scripts\sp\anim::func_55C7(0);
   if(self.a.nodeath == 1) {
     return;
@@ -58,7 +58,7 @@ main() {
     func_8E17();
   }
 
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   if(!scripts\engine\utility::damagelocationisany("head", "helmet")) {
     if(self.var_EF) {} else {
       playdeathsound();
@@ -70,9 +70,7 @@ main() {
   }
 
   if(isDefined(self.var_10957)) {
-    if([
-        [self.var_10957]
-      ]()) {
+    if([[self.var_10957]]()) {
       return;
     }
   }
@@ -163,7 +161,7 @@ func_CF0E(var_0) {
   }
 
   func_C703();
-  self func_82E4("deathanim", var_0, % body, 1, 0.1);
+  self func_82E4("deathanim", var_0, %body, 1, 0.1);
   scripts\anim\face::playfacialanim(var_0, "death");
   if(isDefined(self.var_10265)) {
     if(!isDefined(self.noragdoll)) {

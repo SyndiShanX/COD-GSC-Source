@@ -304,13 +304,7 @@ find_cover(msg) {
   self FindCoverNode();
 }
 
-t34_move_and_blow_up(spawn_trigger_name,
-  start_node_name,
-  open_fire,
-  death_node_name,
-  artillery_origin_struct_name,
-  initial_wait_delay,
-  stop_wait_delay) {
+t34_move_and_blow_up(spawn_trigger_name, start_node_name, open_fire, death_node_name, artillery_origin_struct_name, initial_wait_delay, stop_wait_delay) {
   spawn_trigger = getent(spawn_trigger_name, "targetname");
   if(!isDefined(spawn_trigger)) {
     return;
@@ -320,11 +314,7 @@ t34_move_and_blow_up(spawn_trigger_name,
     return;
   }
   spawn_trigger waittill("trigger");
-  tank = spawnvehicle("vehicle_rus_tracked_t34",
-    "tank",
-    "t34",
-    start_node.origin,
-    start_node.angles);
+  tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
   tank attachPath(start_node);
   if(isDefined(open_fire)) {
     tank thread fire_loop_generic();

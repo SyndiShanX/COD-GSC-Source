@@ -141,8 +141,7 @@ initialize_vehicle_damage_effects_for_level() {
   return;
 }
 
-get_vehicle_name(
-  vehicle) {
+get_vehicle_name(vehicle) {
   name = "";
   if(isDefined(vehicle)) {
     if(isDefined(vehicle.vehicletype)) {
@@ -156,8 +155,7 @@ get_default_vehicle_name() {
   return "defaultvehicle_mp";
 }
 
-get_vehicle_name_key_for_damage_states(
-  vehicle) {
+get_vehicle_name_key_for_damage_states(vehicle) {
   vehicle_name = get_vehicle_name(vehicle);
   if(!isDefined(level.vehicles_damage_states[vehicle_name])) {
     vehicle_name = get_default_vehicle_name();
@@ -165,8 +163,7 @@ get_vehicle_name_key_for_damage_states(
   return vehicle_name;
 }
 
-get_vehicle_damage_state_index_from_health_percentage(
-  vehicle) {
+get_vehicle_damage_state_index_from_health_percentage(vehicle) {
   damage_state_index = -1;
   vehicle_name = get_vehicle_name_key_for_damage_states();
   for(test_index = 0; test_index < level.vehicles_damage_states[vehicle_name].size; test_index++) {
@@ -179,9 +176,7 @@ get_vehicle_damage_state_index_from_health_percentage(
   return damage_state_index;
 }
 
-update_damage_effects(
-  vehicle,
-  attacker) {
+update_damage_effects(vehicle, attacker) {
   if(vehicle.initial_state.health > 0) {
     previous_damage_state_index = get_vehicle_damage_state_index_from_health_percentage(vehicle);
     vehicle.current_health_percentage = vehicle.health / vehicle.initial_state.health;
@@ -202,10 +197,7 @@ update_damage_effects(
   return;
 }
 
-play_damage_state_effects(
-  vehicle,
-  start_damage_state_index,
-  end_damage_state_index) {
+play_damage_state_effects(vehicle, start_damage_state_index, end_damage_state_index) {
   vehicle_name = get_vehicle_name_key_for_damage_states(vehicle);
   for(damage_state_index = start_damage_state_index; damage_state_index <= end_damage_state_index; damage_state_index++) {
     for(effect_index = 0; effect_index < level.vehicles_damage_states[vehicle_name][damage_state_index].effect_array.size; effect_index++) {
@@ -406,8 +398,7 @@ cleanup_debug_print_t() {
   self endon("death");
   self endon("delete");
   while(1) {
-    if(isDefined(self.debug_message) &&
-      getdvarint("scr_veh_cleanupdebugprint") != 0) {
+    if(isDefined(self.debug_message) && getdvarint("scr_veh_cleanupdebugprint") != 0) {
       Print3d(self.origin + (0, 0, 150), self.debug_message, (0, 1, 0), 1, 1, 1);
     }
     wait 0.01;
@@ -460,9 +451,7 @@ wait_until_severely_damaged() {
     }
     self waittill("damage");
     health_percentage = self.health / self.initial_state.health;
-    if((health_percentage < level.k_severe_damage_health_percentage) ||
-      ((self GetTreadHealth(0)) <= 0.0) ||
-      ((self GetTreadHealth(1)) <= 0.0)) {
+    if((health_percentage < level.k_severe_damage_health_percentage) || ((self GetTreadHealth(0)) <= 0.0) || ((self GetTreadHealth(1)) <= 0.0)) {
       break;
     }
   }
@@ -534,8 +523,7 @@ do_dead_cleanup_wait(test_name) {
 cleanup(test_name, cleanup_dvar_name, cleanup_func) {
   keep_waiting = true;
   while(keep_waiting) {
-    cleanupEnabled = !isDefined(cleanup_dvar_name) ||
-      getdvarint(cleanup_dvar_name) != 0;
+    cleanupEnabled = !isDefined(cleanup_dvar_name) || getdvarint(cleanup_dvar_name) != 0;
     if(cleanupEnabled != 0) {
       self[[cleanup_func]]();
       break;
@@ -609,8 +597,7 @@ vehicle_ghost_entering_occupants_t() {
     while(1) {
       self waittill("enter_vehicle", player, seat);
       isDriver = seat == 0;
-      if(getdvarint("scr_veh_driversarehidden") != 0 &&
-        isDriver) {
+      if(getdvarint("scr_veh_driversarehidden") != 0 && isDriver) {
         player Ghost();
       } {
         occupants = self GetVehOccupants();
@@ -667,10 +654,7 @@ player_leave_vehicle_cleanup_t(vehicle) {
 }
 
 vehicle_is_tank() {
-  return self.vehicletype == "sherman_mp" ||
-    self.vehicletype == "panzer4_mp" ||
-    self.vehicletype == "type97_mp" ||
-    self.vehicletype == "t34_mp";
+  return self.vehicletype == "sherman_mp" || self.vehicletype == "panzer4_mp" || self.vehicletype == "type97_mp" || self.vehicletype == "t34_mp";
 }
 
 vehicle_record_initial_values() {
@@ -771,11 +755,9 @@ vehicle_transmute(attacker) {
   respawn_parameters.vehicletype = value_with_default(self.vehicletype, "");
   respawn_parameters.destructibledef = self.destructibledef;
   vehicleWasDestroyed = !isDefined(self.recycling);
-  if(vehicleWasDestroyed ||
-    vehicle_should_explode_on_cleanup()) {
+  if(vehicleWasDestroyed || vehicle_should_explode_on_cleanup()) {
     _spawn_explosion(deathOrigin);
-    if(vehicleWasDestroyed &&
-      getdvarint("scr_veh_explosion_doradiusdamage") != 0) {
+    if(vehicleWasDestroyed && getdvarint("scr_veh_explosion_doradiusdamage") != 0) {
       explosionRadius = getdvarint("scr_veh_explosion_radius");
       explosionMinDamage = getdvarint("scr_veh_explosion_mindamage");
       explosionMaxDamage = getdvarint("scr_veh_explosion_maxdamage");
@@ -785,8 +767,7 @@ vehicle_transmute(attacker) {
   }
   self notify("transmute");
   respawn_vehicle_now = true;
-  if(vehicleWasDestroyed &&
-    getdvarint("scr_veh_ondeath_createhusk") != 0) {
+  if(vehicleWasDestroyed && getdvarint("scr_veh_ondeath_createhusk") != 0) {
     if(getdvarint("scr_veh_ondeath_usevehicleashusk") != 0) {
       husk = self;
       self.is_husk = true;
@@ -818,20 +799,9 @@ respawn_vehicle(respawn_parameters) {
     iprintln("Vehicle can't respawn because MAX_VEHICLES has been reached and none of the vehicles could be cleaned up.");
   } else {
     if(isDefined(respawn_parameters.destructibledef)) {
-      vehicle = SpawnVehicle(
-        respawn_parameters.modelname,
-        respawn_parameters.targetname,
-        respawn_parameters.vehicletype,
-        respawn_parameters.origin,
-        respawn_parameters.angles,
-        respawn_parameters.destructibledef);
+      vehicle = SpawnVehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.destructibledef);
     } else {
-      vehicle = SpawnVehicle(
-        respawn_parameters.modelname,
-        respawn_parameters.targetname,
-        respawn_parameters.vehicletype,
-        respawn_parameters.origin,
-        respawn_parameters.angles);
+      vehicle = SpawnVehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles);
     }
     vehicle.vehicletype = respawn_parameters.vehicletype;
     vehicle.destructibledef = respawn_parameters.destructibledef;

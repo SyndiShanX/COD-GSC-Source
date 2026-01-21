@@ -453,9 +453,7 @@ friendly_compute_score(stance) {
 
   if(!isai(self) && isalive(self)) {
     if(self ent_flag("_stealth_in_foliage"))
-      score_range = [
-        [maps\_foliage_cover::calculate_foliage_cover]
-      ](stance);
+      score_range = [[maps\_foliage_cover::calculate_foliage_cover]](stance);
   }
 
   score_move = self._stealth.logic.movespeed_multiplier[detection_level][stance];

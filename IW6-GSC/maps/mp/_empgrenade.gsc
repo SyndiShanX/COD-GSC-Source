@@ -37,11 +37,7 @@ monitorEMPGrenade() {
   while(1) {
     self waittill("emp_damage", attacker, duration);
 
-    if(!IsAlive(self) ||
-      isDefined(self.usingRemote) ||
-      (self _hasPerk("specialty_empimmune")) ||
-      !isDefined(attacker)
-    ) {
+    if(!IsAlive(self) || isDefined(self.usingRemote) || (self _hasPerk("specialty_empimmune")) || !isDefined(attacker)) {
       continue;
     }
 
@@ -50,11 +46,7 @@ monitorEMPGrenade() {
 
     assert(isDefined(self.pers["team"]));
 
-    if(level.teamBased &&
-      attacker != self &&
-      isDefined(attacker.pers["team"]) &&
-      attacker.pers["team"] == self.pers["team"]
-    ) {
+    if(level.teamBased && attacker != self && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.pers["team"]) {
       if(level.friendlyfire == 0) {
         continue;
       } else if(level.friendlyfire == 1) {

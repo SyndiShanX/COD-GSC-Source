@@ -10,5 +10,5 @@ main() {
   if(isDefined(self.type) && self.type == "dog") {
     return;
   }
-  animscripts\traverse\shared::dovariablelengthtraverse(undefined, % ladder_climbup, % ladder_climboff, "noclip", "crouch", "run");
+  animscripts\traverse\shared::dovariablelengthtraverse(undefined, %ladder_climbup, %ladder_climboff, "noclip", "crouch", "run");
 }

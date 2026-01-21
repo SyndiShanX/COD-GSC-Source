@@ -9,8 +9,8 @@
 #using_animtree("bigdog");
 
 initanimtree(animscript) {
-  self clearanim( % body, 0.3);
-  self setanim( % body, 1, 0);
+  self clearanim(%body, 0.3);
+  self setanim(%body, 1, 0);
   assert(isDefined(animscript), "Animscript not specified in initAnimTree");
   self.a.prevscript = self.a.script;
   self.a.script = animscript;

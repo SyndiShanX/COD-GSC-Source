@@ -297,13 +297,7 @@ setup_random_sun() {
   }
   players = get_players();
   for(i = 0; i < players.size; i++) {
-    players[i] setClientDvars(
-      "r_lightTweakSunLight", light,
-      "r_lightTweakSunColor", color,
-      "r_lightTweakSunDirection", dir,
-      "r_exposureTweak", 1,
-      "r_exposureValue", exposure
-    );
+    players[i] setClientDvars("r_lightTweakSunLight", light, "r_lightTweakSunColor", color, "r_lightTweakSunDirection", dir, "r_exposureTweak", 1, "r_exposureValue", exposure);
   }
 }
 

@@ -59,7 +59,7 @@ player_handle_cymbal_monkey() {
       }
       if(isDefined(grenade)) {
         self achievement_notify("DLC3_ZOMBIE_USE_MONKEY");
-        model SetAnim( % o_monkey_bomb);
+        model SetAnim(%o_monkey_bomb);
         model thread monkey_cleanup(grenade);
         model unlink();
         model.origin = grenade.origin;
@@ -111,7 +111,7 @@ do_monkey_sound(model, player) {
   }
   wait(6.4);
   if(isDefined(model)) {
-    model ClearAnim( % o_monkey_bomb, 0.2);
+    model ClearAnim(%o_monkey_bomb, 0.2);
   }
   for(i = 0; i < self.sound_attractors.size; i++) {
     if(isDefined(self.sound_attractors[i])) {

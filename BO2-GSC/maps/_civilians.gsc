@@ -55,7 +55,7 @@ civilian_spawn_init() {
   self allowedstances("stand");
   self setup_civilian_attributes();
   self thread handle_civilian_sounds();
-  idleanims = array( % ai_civ_cower_idle_01, % ai_civ_cower_idle_02, % ai_civ_cower_idle_03, % ai_civ_cower_idle_04, % ai_civ_cower_idle_05);
+  idleanims = array(%ai_civ_cower_idle_01, %ai_civ_cower_idle_02, %ai_civ_cower_idle_03, %ai_civ_cower_idle_04, %ai_civ_cower_idle_05);
   self animscripts\anims::setidleanimoverride(random(idleanims));
 }
 

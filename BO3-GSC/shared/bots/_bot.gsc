@@ -932,9 +932,7 @@ function bot_devgui_think() {
   while(true) {
     wait(0.25);
     cmd = getdvarstring("", "");
-    if(!isDefined(level.botdevguicmd) || ![
-        [level.botdevguicmd]
-      ](cmd)) {
+    if(!isDefined(level.botdevguicmd) || ![[level.botdevguicmd]](cmd)) {
       host = util::gethostplayer();
       switch (cmd) {
         case "": {

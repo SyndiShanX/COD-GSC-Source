@@ -301,18 +301,7 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
   if(self.isPlayer) {
     self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](
-      eInflictor,
-      eAttacker,
-      iDamage,
-      0,
-      sMeansOfDeath,
-      sWeapon,
-      damagepos,
-      damagedir,
-      "none",
-      0
-    );
+    self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0);
   } else {
     if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp"))
       return;

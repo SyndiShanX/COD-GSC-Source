@@ -957,9 +957,7 @@ bombplanted(destroyedobj, player) {
     thread maps\mp\gametypes\_globallogic_audio::set_music_on_team("DEM_WE_SCORE", team, 0, 0, 5);
     thread maps\mp\gametypes\_globallogic_audio::set_music_on_team("DEM_THEY_SCORE", enemyteam, 0, 0, 5);
 
-    if([
-        [level.gettimelimit]
-      ]() > 0)
+    if([[level.gettimelimit]]() > 0)
       level.usingextratime = 1;
 
     removeinfluencer(destroyedobj.spawninfluencer);

@@ -69,7 +69,7 @@ projectile_spawn(localclientnum) {
   rocket = spawn(localclientnum, origin, "script_model");
   rocket setModel("veh_t6_drone_hunterkiller_viewmodel");
   rocket useanimtree(#animtree);
-  rocket setanim( % o_drone_hunter_launch, 1.0, 0.0, 1.0);
+  rocket setanim(%o_drone_hunter_launch, 1.0, 0.0, 1.0);
   rocket thread projectile_move_think(localclientnum, self, origin, end);
   rocket thread projectile_delete_think(localclientnum);
 }

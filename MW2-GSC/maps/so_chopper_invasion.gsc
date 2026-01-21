@@ -13,8 +13,7 @@
 main() {
   set_custom_gameskill_func(maps\_gameskill::solo_player_in_coop_gameskill_settings);
 
-  // special ops character selection using dvar "start"
-  level.specops_character_selector = "";
+  // special ops character selection using dvar "start"level.specops_character_selector = "";
 
   so_player_selection();
 

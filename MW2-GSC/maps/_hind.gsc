@@ -27,7 +27,7 @@ main(model, type) {
   hind_aerial_death_fx["vehicle_mi24p_hind_woodland_opened_door"] = "explosions/aerial_explosion_hind_woodland";
   hind_aerial_death_fx["vehicle_mi24p_hind_chernobyl"] = "explosions/aerial_explosion_hind_chernobyl";
 
-  build_drive( % bh_rotors, undefined, 0);
+  build_drive(%bh_rotors, undefined, 0);
 
   build_deathfx("explosions/grenadeexp_default", "tag_engine_left", "hind_helicopter_hit", undefined, undefined, undefined, 0.2, true);
   build_deathfx("explosions/grenadeexp_default", "tail_rotor_jnt", "hind_helicopter_secondary_exp", undefined, undefined, undefined, 0.5, true);
@@ -322,10 +322,7 @@ and these lines in your CSV:
 include,vehicle_mi24p_hind_desert_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi24p_hind_desert"
-default:"vehicletype" "hind"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi24p_hind_desert"default:"vehicletype" "hind"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_hind_desert (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -336,10 +333,7 @@ and these lines in your CSV:
 include,vehicle_mi24p_hind_desert_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi24p_hind_desert"
-default:"vehicletype" "hind"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi24p_hind_desert"default:"vehicletype" "hind"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_hind_chernobyl (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -350,10 +344,7 @@ and these lines in your CSV:
 include,vehicle_mi24p_hind_chernobyl
 sound,vehicle_hind,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi24p_hind_chernobyl"
-default:"vehicletype" "hind"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi24p_hind_chernobyl"default:"vehicletype" "hind"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_mi24p_hind_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -364,10 +355,7 @@ and these lines in your CSV:
 include,vehicle_mi24p_hind_woodland_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi24p_hind_woodland"
-default:"vehicletype" "hind"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi24p_hind_woodland"default:"vehicletype" "hind"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_hind_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -378,10 +366,7 @@ and these lines in your CSV:
 include,vehicle_mi24p_hind_woodland_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi24p_hind_woodland"
-default:"vehicletype" "hind"
-default:"script_team" "axis"
-*/
+defaultmdl="vehicle_mi24p_hind_woodland"default:"vehicletype" "hind"default:"script_team" "axis"*/
 
 /*QUAKED script_vehicle_mi24p_hind_woodland_opened_door (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -392,7 +377,5 @@ and these lines in your CSV:
 include,vehicle_mi24p_hind_woodland_opened_door_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
-defaultmdl="vehicle_mi24p_hind_woodland_opened_door"
-default:"vehicletype" "hind"
-default:"script_team" "axis"
+defaultmdl="vehicle_mi24p_hind_woodland_opened_door"default:"vehicletype" "hind"default:"script_team" "axis"
 */

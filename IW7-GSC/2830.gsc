@@ -190,9 +190,7 @@ func_268B(var_0) {
   var_0 delete();
 
   if(isDefined(level.var_4C7F)) {
-    if(![
-        [level.var_4C7F]
-      ]())
+    if(![[level.var_4C7F]]())
       return;
   }
 
@@ -478,9 +476,7 @@ waitfortransientloading(var_0) {
 
 func_6A43(var_0) {
   foreach(var_2 in level.var_2668.var_6A42) {
-    if(![
-        [var_2["func"]]
-      ]())
+    if(![[var_2["func"]]]())
       return 1;
   }
 
@@ -513,9 +509,7 @@ func_2685(var_0, var_1, var_2) {
   }
 
   if(var_1) {
-    if(![
-        [level.func_83D2["_autosave_stealthcheck"]]
-      ]())
+    if(![[level.func_83D2["_autosave_stealthcheck"]]]())
       return 0;
   }
 

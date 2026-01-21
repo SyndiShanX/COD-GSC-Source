@@ -436,9 +436,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     } else if(isDefined(node) && isDefined(node.script_forcegoal) && node.script_forcegoal) {
       self thread ai::force_goal(get_goal(self.target));
     } else {
-      [
-        [set_goal_func_quits]
-      ](node);
+      [[set_goal_func_quits]](node);
     }
 
     self waittill(#"goal");

@@ -457,19 +457,19 @@ drone_mortarDeath(direction) {
   self useAnimTree(#animtree);
   switch (direction) {
     case "up":
-      self thread drone_doDeath( % death_explosion_up10);
+      self thread drone_doDeath(%death_explosion_up10);
       break;
     case "forward":
-      self thread drone_doDeath( % death_explosion_forward13);
+      self thread drone_doDeath(%death_explosion_forward13);
       break;
     case "back":
-      self thread drone_doDeath( % death_explosion_back13);
+      self thread drone_doDeath(%death_explosion_back13);
       break;
     case "left":
-      self thread drone_doDeath( % death_explosion_left11);
+      self thread drone_doDeath(%death_explosion_left11);
       break;
     case "right":
-      self thread drone_doDeath( % death_explosion_right13);
+      self thread drone_doDeath(%death_explosion_right13);
       break;
   }
 }
@@ -489,8 +489,7 @@ drone_fakeDeath(instant) {
     if(!instant) {
       self setCanDamage(true);
       self waittill("damage", amount, attacker, direction_vec, damage_ori, type);
-      if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" ||
-        type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
+      if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
         self.damageweapon = "none";
         explosivedeath = true;
         explosion_ori = damage_ori;
@@ -830,19 +829,19 @@ ShooterRun(destinationPoint, event) {
         self.shootTarget = spawn("script_origin", shootPos);
         self thread ShooterShoot(self.shootTarget);
         self waittill("Stop shooting");
-        self clearanim( % combat_directions, 0);
-        self clearanim( % exposed_reload, 0);
+        self clearanim(%combat_directions, 0);
+        self clearanim(%exposed_reload, 0);
         break;
       case "cover_stand":
         self thread drone_cover(event);
         self waittill("drone out of cover");
-        self setFlaggedAnimKnob("cover_exit", % coverstand_trans_OUT_M, 1, .1, 1);
+        self setFlaggedAnimKnob("cover_exit", %coverstand_trans_OUT_M, 1, .1, 1);
         self waittillmatch("cover_exit", "end");
         break;
       case "cover_crouch":
         self thread drone_cover(event);
         self waittill("drone out of cover");
-        self setFlaggedAnimKnob("cover_exit", % covercrouch_run_out_M, 1, .1, 1);
+        self setFlaggedAnimKnob("cover_exit", %covercrouch_run_out_M, 1, .1, 1);
         self waittillmatch("cover_exit", "end");
         break;
       case "sniper_distance_walk":
@@ -992,7 +991,7 @@ ShooterShootThread(target) {
       for(i = 0; i < numAttached; i++) {
         attachName[i] = self getattachmodelname(i);
       }
-      self setflaggedanimknoballrestart("reloadanim", % exposed_reload, % root, 1, 0.4);
+      self setflaggedanimknoballrestart("reloadanim", %exposed_reload, %root, 1, 0.4);
       self.bulletsInClip = randomintrange(4, 8);
       self waittillmatch("reloadanim", "end");
     }
@@ -1100,7 +1099,7 @@ Set3FlaggedAnimKnobs(animFlag, animArray, pose, weight, blendTime, rate) {
   if(!isDefined(self)) {
     return;
   }
-  self setAnimKnob( % combat_directions, weight, blendTime, rate);
+  self setAnimKnob(%combat_directions, weight, blendTime, rate);
   self SetFlaggedAnimKnob(animFlag, level.drone_animArray[animArray][pose]["up"], 1, blendTime, 1);
   self SetAnimKnob(level.drone_animArray[animArray][pose]["straight"], 1, blendTime, 1);
   self SetAnimKnob(level.drone_animArray[animArray][pose]["down"], 1, blendTime, 1);
@@ -1110,7 +1109,7 @@ Set3FlaggedAnimKnobsRestart(animFlag, animArray, pose, weight, blendTime, rate) 
   if(!isDefined(self)) {
     return;
   }
-  self setAnimKnobRestart( % combat_directions, weight, blendTime, rate);
+  self setAnimKnobRestart(%combat_directions, weight, blendTime, rate);
   self SetFlaggedAnimKnobRestart(animFlag, level.drone_animArray[animArray][pose]["up"], 1, blendTime, 1);
   self SetAnimKnobRestart(level.drone_animArray[animArray][pose]["straight"], 1, blendTime, 1);
   self SetAnimKnobRestart(level.drone_animArray[animArray][pose]["down"], 1, blendTime, 1);
@@ -1119,11 +1118,11 @@ Set3FlaggedAnimKnobsRestart(animFlag, animArray, pose, weight, blendTime, rate) 
 applyBlend(offset) {
   if(offset < 0) {
     unstraightAnim = % combat_down;
-    self setanim( % combat_up, 0.01, 0, 1);
+    self setanim(%combat_up, 0.01, 0, 1);
     offset *= -1;
   } else {
     unstraightAnim = % combat_up;
-    self setanim( % combat_down, 0.01, 0, 1);
+    self setanim(%combat_down, 0.01, 0, 1);
   }
   if(offset > 1) {
     offset = 1;
@@ -1137,7 +1136,7 @@ applyBlend(offset) {
   }
   straight = 1 - unstraight;
   self setanim(unstraightAnim, unstraight, 0, 1);
-  self setanim( % combat_straight, straight, 0, 1);
+  self setanim(%combat_straight, straight, 0, 1);
 }
 
 aimAtTargetThread(target, stopString) {
@@ -1188,33 +1187,17 @@ drone_cover(type) {
   anim_array = [];
   if(type == "cover_stand") {
     anim_array["hide_idle"] = % coverstand_hide_idle;
-    anim_array["hide_idle_twitch"] = array( %
-      coverstand_hide_idle_twitch01, %
-      coverstand_hide_idle_twitch02, %
-      coverstand_hide_idle_twitch03, %
-      coverstand_hide_idle_twitch04, %
-      coverstand_hide_idle_twitch05
-    );
-    anim_array["hide_idle_flinch"] = array( %
-      coverstand_react01, %
-      coverstand_react02, %
-      coverstand_react03, %
-      coverstand_react04
-    );
+    anim_array["hide_idle_twitch"] = array(%coverstand_hide_idle_twitch01, %coverstand_hide_idle_twitch02, %coverstand_hide_idle_twitch03, %coverstand_hide_idle_twitch04, %coverstand_hide_idle_twitch05);
+    anim_array["hide_idle_flinch"] = array(%coverstand_react01, %coverstand_react02, %coverstand_react03, %coverstand_react04);
     self.a.array = anim_array;
-    self setFlaggedAnimKnobRestart("cover_approach", % coverstand_trans_IN_M, 1, .3, 1);
+    self setFlaggedAnimKnobRestart("cover_approach", %coverstand_trans_IN_M, 1, .3, 1);
     self waittillmatch("cover_approach", "end");
     self thread drone_cover_think();
   } else if(type == "cover_crouch") {
     anim_array["hide_idle"] = % covercrouch_hide_idle;
-    anim_array["hide_idle_twitch"] = array( %
-      covercrouch_twitch_1, %
-      covercrouch_twitch_2, %
-      covercrouch_twitch_3, %
-      covercrouch_twitch_4
-    );
+    anim_array["hide_idle_twitch"] = array(%covercrouch_twitch_1, %covercrouch_twitch_2, %covercrouch_twitch_3, %covercrouch_twitch_4);
     self.a.array = anim_array;
-    self setFlaggedAnimKnobRestart("cover_approach", % covercrouch_run_in_M, 1, .3, 1);
+    self setFlaggedAnimKnobRestart("cover_approach", %covercrouch_run_in_M, 1, .3, 1);
     self waittillmatch("cover_approach", "end");
     self thread drone_cover_think();
   }

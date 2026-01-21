@@ -106,9 +106,7 @@ function function_4282fd75(var_859cfb21, startat, var_37cd5424) {
   }
   while(isDefined(var_859cfb21[startat])) {
     if(isDefined(level.zdraw.commands[var_859cfb21[startat]])) {
-      startat = [
-        [level.zdraw.commands[var_859cfb21[startat]]]
-      ](var_859cfb21, startat + 1);
+      startat = [[level.zdraw.commands[var_859cfb21[startat]]]](var_859cfb21, startat + 1);
     } else {
       if(isDefined(var_37cd5424) && var_37cd5424) {
         function_c69caf7e("" + var_859cfb21[startat]);

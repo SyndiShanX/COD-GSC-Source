@@ -13,7 +13,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathmodel("vehicle_luxurysedan_test", "vehicle_luxurysedan_destroy");
   maps\_vehicle::build_deathmodel("vehicle_luxurysedan_viewmodel", "vehicle_luxurysedan_destroy");
   maps\_vehicle::build_deathfx("fx\explosions\large_vehicle_explosion", undefined, "explo_metal_rand");
-  maps\_vehicle::build_drive( % technical_driving_idle_forward, % technical_driving_idle_backward, 10);
+  maps\_vehicle::build_drive(%technical_driving_idle_forward, %technical_driving_idle_backward, 10);
   maps\_vehicle::build_treadfx();
   maps\_vehicle::build_life(999, 500, 1500);
   maps\_vehicle::build_team("allies");

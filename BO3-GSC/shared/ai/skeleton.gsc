@@ -246,12 +246,8 @@ function get_closest_valid_player(origin, ignore_player) {
   }
   if(!valid_player_found) {
     for(;;) {
-      player = [
-        [self.closest_player_override]
-      ](origin, players);
-      player = [
-        [level.closest_player_override]
-      ](origin, players);
+      player = [[self.closest_player_override]](origin, players);
+      player = [[level.closest_player_override]](origin, players);
       player = arraygetclosest(origin, players);
       return undefined;
       arrayremovevalue(players, player);

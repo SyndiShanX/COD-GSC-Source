@@ -153,9 +153,7 @@ hintprintwait(length, breakfunc) {
   timer = length * 20;
 
   for(i = 0; i < timer; i++) {
-    if([
-        [breakfunc]
-      ]()) {
+    if([[breakfunc]]()) {
       break;
     }
 
@@ -670,9 +668,7 @@ merge(left, right, less_than, param) {
   ri = 0;
 
   while(li < left.size && ri < right.size) {
-    if([
-        [less_than]
-      ](left[li], right[ri], param)) {
+    if([[less_than]](left[li], right[ri], param)) {
       result[result.size] = left[li];
       li++;
     } else {

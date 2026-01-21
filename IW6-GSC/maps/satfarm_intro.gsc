@@ -411,7 +411,7 @@ playertank_waits() {
   level.playertank maps\_utility::anim_stopanimscripted();
   level.player stoprumble("subtle_tank_rumble");
   level.playertank useanimtree(#animtree);
-  level.playertank setanim( % abrams_movement, 1, 0);
+  level.playertank setanim(%abrams_movement, 1, 0);
   wait 0.05;
   stopFXOnTag(level._effect["vfx_tank_landing_dust"], self, "tag_origin");
   level.player enableslowaim(0.5, 0.25);

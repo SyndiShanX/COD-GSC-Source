@@ -289,8 +289,7 @@ updateTeamPlacement() {
 
 initialDMScoreUpdate() {
   // the first time we call updateDMScores on a player, we have to send them the whole scoreboard.
-  // by calling updateDMScores on each player one at a time,
-  // we can avoid having to send the entire scoreboard to every single player
+  // by calling updateDMScores on each player one at a time, // we can avoid having to send the entire scoreboard to every single player
   // the first time someone kills someone else.
   wait .2;
   numSent = 0;

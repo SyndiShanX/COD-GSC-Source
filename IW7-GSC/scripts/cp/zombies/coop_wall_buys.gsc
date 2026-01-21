@@ -674,9 +674,7 @@ can_give_weapon(var_0) {
   }
 
   if(isDefined(level.var_4C40)) {
-    if(![
-        [level.var_4C40]
-      ](var_1, var_2, var_3, var_8)) {
+    if(![[level.var_4C40]](var_1, var_2, var_3, var_8)) {
       return 0;
     }
   }

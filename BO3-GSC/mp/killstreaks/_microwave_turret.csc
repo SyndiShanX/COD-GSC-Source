@@ -89,22 +89,22 @@ function microwave_init_anim(localclientnum, oldval, newval, bnewent, binitialsn
     return;
   }
   self useanimtree($mp_microwaveturret);
-  self setanimrestart( % mp_microwaveturret::o_turret_guardian_close, 1, 0, 1);
-  self setanimtime( % mp_microwaveturret::o_turret_guardian_close, 1);
+  self setanimrestart(%mp_microwaveturret::o_turret_guardian_close, 1, 0, 1);
+  self setanimtime(%mp_microwaveturret::o_turret_guardian_close, 1);
 }
 
 function microwave_open(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(!newval) {
     self useanimtree($mp_microwaveturret);
-    self setanim( % mp_microwaveturret::o_turret_guardian_open, 0);
-    self setanimrestart( % mp_microwaveturret::o_turret_guardian_close, 1, 0, 1);
+    self setanim(%mp_microwaveturret::o_turret_guardian_open, 0);
+    self setanimrestart(%mp_microwaveturret::o_turret_guardian_close, 1, 0, 1);
     self notify("beam_stop");
     self notify("sound_stop");
     return;
   }
   self useanimtree($mp_microwaveturret);
-  self setanim( % mp_microwaveturret::o_turret_guardian_close, 0);
-  self setanimrestart( % mp_microwaveturret::o_turret_guardian_open, 1, 0, 1);
+  self setanim(%mp_microwaveturret::o_turret_guardian_close, 0);
+  self setanimrestart(%mp_microwaveturret::o_turret_guardian_open, 1, 0, 1);
   self thread startmicrowavefx(localclientnum);
 }
 
@@ -113,7 +113,7 @@ function microwave_close_anim(localclientnum, oldval, newval, bnewent, binitials
     return;
   }
   self useanimtree($mp_microwaveturret);
-  self setanimrestart( % mp_microwaveturret::o_turret_guardian_close, 1, 0, 1);
+  self setanimrestart(%mp_microwaveturret::o_turret_guardian_close, 1, 0, 1);
 }
 
 function debug_trace(origin, trace) {

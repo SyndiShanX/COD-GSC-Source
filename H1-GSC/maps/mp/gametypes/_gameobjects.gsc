@@ -585,9 +585,7 @@ carryobject_overridemovingplatformdeath(var_0) {
 
 setdropped() {
   if(isDefined(self.setdropped)) {
-    if([
-        [self.setdropped]
-      ]())
+    if([[self.setdropped]]())
       return;
   }
 
@@ -1254,9 +1252,7 @@ proxtriggerthink() {
     if(isDefined(self.nextusetime) && self.nextusetime > gettime()) {
       continue;
     }
-    if(isDefined(self.canuseobject) && ![
-        [self.canuseobject]
-      ](var_1)) {
+    if(isDefined(self.canuseobject) && ![[self.canuseobject]](var_1)) {
       continue;
     }
     if(caninteractwith(var_1.pers["team"], var_1) && self.claimteam == "none") {

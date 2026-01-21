@@ -133,8 +133,7 @@ function_68cc8bce(params) {
   }
 
   turret.var_b79a8ac7 = {
-    #var_f019ea1a: 500,
-    #slots: slots
+    #var_f019ea1a: 500, #slots: slots
   };
   turret.var_ba721a2c = 20;
   level.attackables[level.attackables.size] = turret;
@@ -1230,10 +1229,7 @@ function_25b61968() {
 
 function_e732359c(position, var_4603c944, entity, ...) {
   level.var_ee6c4739[level.var_ee6c4739.size] = {
-    #position: position,
-    #radius: var_4603c944,
-    #entity: entity,
-    #params: vararg
+    #position: position, #radius: var_4603c944, #entity: entity, #params: vararg
   };
 }
 
@@ -1242,9 +1238,7 @@ function_83baeaf1(event) {
 
   foreach(ai in close_ai) {
     ai callback::callback(#"awareness_event", {
-      #entity: event.entity,
-      #position: event.position,
-      #params: event.params
+      #entity: event.entity, #position: event.position, #params: event.params
     });
   }
 }
@@ -1272,12 +1266,7 @@ register_state(name, enter, update, exit, target_update, debug_update) {
 
   assert(!isDefined(level.zombie_states[name]));
   level.zombie_states[name] = {
-    #name: name,
-    #enter_func: enter,
-    #update_func: update,
-    #exit_func: exit,
-    #target_func: target_update,
-    #debug_func: debug_update
+    #name: name, #enter_func: enter, #update_func: update, #exit_func: exit, #target_func: target_update, #debug_func: debug_update
   };
 }
 
@@ -1287,9 +1276,7 @@ set_state(entity, state_name) {
 
   if(isDefined(entity.current_state)) {
     if(isDefined(entity.current_state.exit_func)) {
-      [
-        [entity.current_state.exit_func]
-      ](entity);
+      [[entity.current_state.exit_func]](entity);
     }
 
     entity callback::callback(#"hash_540e54ba804a87b9");
@@ -1511,8 +1498,7 @@ function_5c293c05(entity) {
 
     if(isDefined(player.last_valid_position) && function_219b823c(entity, player)) {
       potential_targets[potential_targets.size] = {
-        #player: player,
-        #origin: player.last_valid_position
+        #player: player, #origin: player.last_valid_position
       };
       var_8d6705e8[var_8d6705e8.size] = player.last_valid_position;
     }
@@ -1613,9 +1599,7 @@ function_54fc0f3e() {
 
   while(true) {
     if(isDefined(self.current_state) && isDefined(self.current_state.update_func)) {
-      [
-        [self.current_state.update_func]
-      ](self);
+      [[self.current_state.update_func]](self);
     }
 
     if(isDefined(self.current_state) && getdvarint(#"hash_7c11c6eba2f88f9f", 0)) {
@@ -2753,9 +2737,7 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
 
     if(isDefined(self.missinglegs) && self.missinglegs && self.health > 0) {
       level notify(#"crawler_created", {
-        #zombie: self,
-        #player: attacker,
-        #weapon: weapon
+        #zombie: self, #player: attacker, #weapon: weapon
       });
       self allowedstances("crouch");
       self setphysparams(15, 0, 24);
@@ -3418,8 +3400,7 @@ function_d1675b11() {
           if(isDefined(zombs[i]) && isalive(zombs[i])) {
             bhtnactionstartevent(zombs[i], "behind");
             zombs[i] notify(#"bhtn_action_notify", {
-              #action: "behind"
-            });
+              #action: "behind"});
             played_sound = 1;
           }
 

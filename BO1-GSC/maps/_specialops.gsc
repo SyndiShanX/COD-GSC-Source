@@ -20,12 +20,9 @@ foreach(array, functor, unary_predicate, predicate_argument) {
   if(isDefined(functor)) {
     for(i = 0; i < array.size; i++) {
       if(isDefined(array[i])) {
-        if(!isDefined(unary_predicate) ||
-          (isDefined(unary_predicate) &&
-            ((isDefined(predicate_argument) && array[i][
+        if(!isDefined(unary_predicate) || (isDefined(unary_predicate) && ((isDefined(predicate_argument) && array[i][
                 [unary_predicate]
-              ](predicate_argument)) ||
-              (!isDefined(predicate_argument) && array[i][
+              ](predicate_argument)) || (!isDefined(predicate_argument) && array[i][
                 [unary_predicate]
               ]())))) {
           array[i][
@@ -38,10 +35,7 @@ foreach(array, functor, unary_predicate, predicate_argument) {
 }
 
 type_so() {
-  if(isDefined(self) &&
-    isDefined(self.classname) &&
-    isDefined(self.script_specialops) &&
-    (self.script_specialops == 1))
+  if(isDefined(self) && isDefined(self.classname) && isDefined(self.script_specialops) && (self.script_specialops == 1))
     return true;
   else
     return false;
@@ -172,9 +166,7 @@ delete_by_type(type_predicate) {
 }
 
 noteworthy_check(value) {
-  if(isDefined(self) &&
-    isDefined(self.script_noteworthy) &&
-    (self.script_noteworthy != value))
+  if(isDefined(self) && isDefined(self.script_noteworthy) && (self.script_noteworthy != value))
     return true;
   else
     return false;

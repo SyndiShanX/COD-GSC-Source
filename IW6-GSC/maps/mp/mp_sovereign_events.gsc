@@ -121,7 +121,7 @@ assembly_line_piece(collision_brush_bottom, collision_brush_top, collision_brush
     assembly_piece_collision ScriptModelPlayAnimDeltaMotion("mp_sovereign_assembly_line_front_piece_origin");
     assembly_piece_collision_top ScriptModelPlayAnimDeltaMotion("mp_sovereign_assembly_line_front_piece_origin_top");
 
-    fullAnimLength = GetAnimLength( % mp_sovereign_assembly_line_front_piece);
+    fullAnimLength = GetAnimLength(%mp_sovereign_assembly_line_front_piece);
     thread animate_arms(fullAnimLength);
     wait(fullAnimLength);
 
@@ -226,11 +226,11 @@ assembly_line_tank_part_damage_watch_end() {
 }
 
 animate_arms(fullAnimLength) {
-  front_station_01_times = GetNotetrackTimes( % mp_sovereign_assembly_line_front_piece, "front_station_01_start");
-  front_station_02_times = GetNotetrackTimes( % mp_sovereign_assembly_line_front_piece, "front_station_02_start");
-  front_station_03_times = GetNotetrackTimes( % mp_sovereign_assembly_line_front_piece, "front_station_03_start");
-  front_station_04_times = GetNotetrackTimes( % mp_sovereign_assembly_line_front_piece, "front_station_04_start");
-  front_station_05_times = GetNotetrackTimes( % mp_sovereign_assembly_line_front_piece, "front_station_05_start");
+  front_station_01_times = GetNotetrackTimes(%mp_sovereign_assembly_line_front_piece, "front_station_01_start");
+  front_station_02_times = GetNotetrackTimes(%mp_sovereign_assembly_line_front_piece, "front_station_02_start");
+  front_station_03_times = GetNotetrackTimes(%mp_sovereign_assembly_line_front_piece, "front_station_03_start");
+  front_station_04_times = GetNotetrackTimes(%mp_sovereign_assembly_line_front_piece, "front_station_04_start");
+  front_station_05_times = GetNotetrackTimes(%mp_sovereign_assembly_line_front_piece, "front_station_05_start");
 
   delayThread(front_station_01_times[0] * fullAnimLength, ::animate_front_station_01);
   delayThread(front_station_02_times[0] * fullAnimLength, ::animate_front_station_02);
@@ -281,9 +281,9 @@ kill_boxes(zone) {
 animate_front_station_01() {
   arm1a = GetScriptableArray("factory_assembly_line_front_station01_arm_a", "targetname")[0];
   arm1b = GetScriptableArray("factory_assembly_line_front_station01_arm_b", "targetname")[0];
-  level thread animate_front_station_and_return_to_idle(arm1a, % mp_sovereign_assembly_line_station01_arm_A);
-  level thread animate_front_station_and_return_to_idle(arm1b, % mp_sovereign_assembly_line_station01_arm_B);
-  level thread animate_front_station_01_watcher( % mp_sovereign_assembly_line_station01_arm_A);
+  level thread animate_front_station_and_return_to_idle(arm1a, %mp_sovereign_assembly_line_station01_arm_A);
+  level thread animate_front_station_and_return_to_idle(arm1b, %mp_sovereign_assembly_line_station01_arm_B);
+  level thread animate_front_station_01_watcher(%mp_sovereign_assembly_line_station01_arm_A);
 }
 
 animate_front_station_02() {
@@ -291,10 +291,10 @@ animate_front_station_02() {
   arm2b = GetScriptableArray("factory_assembly_line_front_station02_arm_b", "targetname")[0];
   arm2c = GetScriptableArray("factory_assembly_line_front_station02_arm_c", "targetname")[0];
   arm2d = GetScriptableArray("factory_assembly_line_front_station02_arm_d", "targetname")[0];
-  level thread animate_front_station_and_return_to_idle(arm2a, % mp_sovereign_assembly_line_station02_arm_A);
-  level thread animate_front_station_and_return_to_idle(arm2b, % mp_sovereign_assembly_line_station02_arm_B);
-  level thread animate_front_station_and_return_to_idle(arm2c, % mp_sovereign_assembly_line_station02_arm_C);
-  level thread animate_front_station_and_return_to_idle(arm2d, % mp_sovereign_assembly_line_station02_arm_D);
+  level thread animate_front_station_and_return_to_idle(arm2a, %mp_sovereign_assembly_line_station02_arm_A);
+  level thread animate_front_station_and_return_to_idle(arm2b, %mp_sovereign_assembly_line_station02_arm_B);
+  level thread animate_front_station_and_return_to_idle(arm2c, %mp_sovereign_assembly_line_station02_arm_C);
+  level thread animate_front_station_and_return_to_idle(arm2d, %mp_sovereign_assembly_line_station02_arm_D);
 }
 
 animate_front_station_03() {
@@ -302,28 +302,28 @@ animate_front_station_03() {
   arm3b = GetScriptableArray("factory_assembly_line_front_station03_arm_b", "targetname")[0];
   arm3c = GetScriptableArray("factory_assembly_line_front_station03_arm_c", "targetname")[0];
   arm3d = GetScriptableArray("factory_assembly_line_front_station03_arm_d", "targetname")[0];
-  level thread animate_front_station_and_return_to_idle(arm3a, % mp_sovereign_assembly_line_station03_arm_A);
-  level thread animate_front_station_and_return_to_idle(arm3b, % mp_sovereign_assembly_line_station03_arm_B);
-  level thread animate_front_station_and_return_to_idle(arm3c, % mp_sovereign_assembly_line_station03_arm_C);
-  level thread animate_front_station_and_return_to_idle(arm3d, % mp_sovereign_assembly_line_station03_arm_D);
+  level thread animate_front_station_and_return_to_idle(arm3a, %mp_sovereign_assembly_line_station03_arm_A);
+  level thread animate_front_station_and_return_to_idle(arm3b, %mp_sovereign_assembly_line_station03_arm_B);
+  level thread animate_front_station_and_return_to_idle(arm3c, %mp_sovereign_assembly_line_station03_arm_C);
+  level thread animate_front_station_and_return_to_idle(arm3d, %mp_sovereign_assembly_line_station03_arm_D);
 }
 
 animate_front_station_04() {
   arm4a = GetScriptableArray("factory_assembly_line_front_station04_arm_a", "targetname")[0];
   arm4b = GetScriptableArray("factory_assembly_line_front_station04_arm_b", "targetname")[0];
   arm4c = GetScriptableArray("factory_assembly_line_front_station04_arm_c", "targetname")[0];
-  level thread animate_front_station_and_return_to_idle(arm4a, % mp_sovereign_assembly_line_station04_arm_A);
-  level thread animate_front_station_and_return_to_idle(arm4b, % mp_sovereign_assembly_line_station04_arm_B);
-  level thread animate_front_station_and_return_to_idle(arm4c, % mp_sovereign_assembly_line_station04_arm_C);
+  level thread animate_front_station_and_return_to_idle(arm4a, %mp_sovereign_assembly_line_station04_arm_A);
+  level thread animate_front_station_and_return_to_idle(arm4b, %mp_sovereign_assembly_line_station04_arm_B);
+  level thread animate_front_station_and_return_to_idle(arm4c, %mp_sovereign_assembly_line_station04_arm_C);
 }
 
 animate_front_station_05() {
   arm5a = GetScriptableArray("factory_assembly_line_front_station05_arm_a", "targetname")[0];
   arm5b = GetScriptableArray("factory_assembly_line_front_station05_arm_b", "targetname")[0];
   arm5c = GetScriptableArray("factory_assembly_line_front_station05_arm_c", "targetname")[0];
-  level thread animate_front_station_and_return_to_idle(arm5a, % mp_sovereign_assembly_line_station05_arm_A);
-  level thread animate_front_station_and_return_to_idle(arm5b, % mp_sovereign_assembly_line_station05_arm_B);
-  level thread animate_front_station_and_return_to_idle(arm5c, % mp_sovereign_assembly_line_station05_arm_C);
+  level thread animate_front_station_and_return_to_idle(arm5a, %mp_sovereign_assembly_line_station05_arm_A);
+  level thread animate_front_station_and_return_to_idle(arm5b, %mp_sovereign_assembly_line_station05_arm_B);
+  level thread animate_front_station_and_return_to_idle(arm5c, %mp_sovereign_assembly_line_station05_arm_C);
 }
 
 halon_system() {

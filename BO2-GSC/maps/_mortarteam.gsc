@@ -228,8 +228,8 @@ player_nearby_reaction_animcustom() {
   self.ignoreall = 0;
   self.ignoreme = 0;
   self orientmode("face point", level.player.origin);
-  react_anim = random(array( % ai_exposed_backpedal, % ai_exposed_idle_react_b));
-  self clearanim( % root, 0.2);
+  react_anim = random(array(%ai_exposed_backpedal, %ai_exposed_idle_react_b));
+  self clearanim(%root, 0.2);
   self setflaggedanimknobrestart("react_anim", react_anim, 1, 0.2, 1);
   self animscripts\shared::donotetracks("react_anim");
 }

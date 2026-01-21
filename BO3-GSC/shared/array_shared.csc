@@ -573,13 +573,9 @@ function merge(left, right, func_sort, param) {
   while(li < left.size && ri < right.size) {
     b_result = undefined;
     if(isDefined(param)) {
-      b_result = [
-        [func_sort]
-      ](left[li], right[ri], param);
+      b_result = [[func_sort]](left[li], right[ri], param);
     } else {
-      b_result = [
-        [func_sort]
-      ](left[li], right[ri]);
+      b_result = [[func_sort]](left[li], right[ri]);
     }
     if(b_result) {
       result[result.size] = left[li];

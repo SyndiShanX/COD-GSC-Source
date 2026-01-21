@@ -657,9 +657,7 @@ use_dj_door(var_0, var_1) {
     }
 
     if(isDefined(level.use_dj_door_func)) {
-      [
-        [level.use_dj_door_func]
-      ](var_0, var_1);
+      [[level.use_dj_door_func]](var_0, var_1);
       var_1 playlocalsound("dj_turn_in");
       return;
     }
@@ -1664,7 +1662,7 @@ dj_interrupt_test() {
 dj_open_window() {
   level.dj.current_state = "open_window";
   turn_on_sign();
-  var_0 = getanimlength( % iw7_cp_zom_hoff_dj_window_open);
+  var_0 = getanimlength(%iw7_cp_zom_hoff_dj_window_open);
   level.dj scriptmodelplayanimdeltamotionfrompos("IW7_cp_zom_hoff_dj_window_open", level.active_dj_spot.origin, level.active_dj_spot.angles);
   level.active_dj_door movez(29, 0.75);
   wait(var_0 - 0.15);
@@ -1673,7 +1671,7 @@ dj_open_window() {
 dj_close_window() {
   level.dj.current_state = "close_window";
   turn_off_sign();
-  var_0 = getanimlength( % iw7_cp_zom_hoff_dj_window_close);
+  var_0 = getanimlength(%iw7_cp_zom_hoff_dj_window_close);
   level.dj scriptmodelplayanimdeltamotionfrompos("IW7_cp_zom_hoff_dj_window_close", level.active_dj_spot.origin, level.active_dj_spot.angles);
   wait(2.25);
   level.active_dj_door movez(-29, 0.75);
@@ -1683,7 +1681,7 @@ dj_close_window() {
 
 dj_idle() {
   level.dj.current_state = "idle";
-  var_0 = scripts\engine\utility::random([ % iw7_cp_zom_hoff_dj_desk_01, % iw7_cp_zom_hoff_dj_desk_02, % iw7_cp_zom_hoff_dj_desk_03, % iw7_cp_zom_hoff_dj_desk_04, % iw7_cp_zom_hoff_dj_desk_05, % iw7_cp_zom_hoff_dj_desk_06]);
+  var_0 = scripts\engine\utility::random([ % iw7_cp_zom_hoff_dj_desk_01, %iw7_cp_zom_hoff_dj_desk_02, %iw7_cp_zom_hoff_dj_desk_03, %iw7_cp_zom_hoff_dj_desk_04, %iw7_cp_zom_hoff_dj_desk_05, %iw7_cp_zom_hoff_dj_desk_06]);
   var_1 = % iw7_cp_zom_hoff_dj_idle_01;
   var_2 = var_1;
   if(randomint(100) > 80) {
@@ -1697,7 +1695,7 @@ dj_idle() {
 
 dj_approach_mic() {
   level.dj.current_state = "approach_mic";
-  var_0 = getanimlength( % iw7_cp_zom_hoff_dj_vo_06_enter);
+  var_0 = getanimlength(%iw7_cp_zom_hoff_dj_vo_06_enter);
   level.dj scriptmodelplayanimdeltamotionfrompos("IW7_cp_zom_hoff_dj_vo_06_enter", level.active_dj_spot.origin, level.active_dj_spot.angles);
   wait(var_0);
   level.dj notify("at_mic");
@@ -1706,7 +1704,7 @@ dj_approach_mic() {
 
 dj_exit_mic() {
   level.dj.current_state = "exit_mic";
-  var_0 = getanimlength( % iw7_cp_zom_hoff_dj_vo_06_exit);
+  var_0 = getanimlength(%iw7_cp_zom_hoff_dj_vo_06_exit);
   level.dj scriptmodelplayanimdeltamotionfrompos("IW7_cp_zom_hoff_dj_vo_06_exit", level.active_dj_spot.origin, level.active_dj_spot.angles);
   wait(var_0);
   set_dj_state("idle");
@@ -1714,7 +1712,7 @@ dj_exit_mic() {
 
 dj_mic_loop() {
   level.dj.current_state = "mic_loop";
-  var_0 = [ % iw7_cp_zom_hoff_dj_vo_06, % iw7_cp_zom_hoff_dj_vo_05, % iw7_cp_zom_hoff_dj_vo_04, % iw7_cp_zom_hoff_dj_vo_03, % iw7_cp_zom_hoff_dj_vo_02, % iw7_cp_zom_hoff_dj_vo_01];
+  var_0 = [ % iw7_cp_zom_hoff_dj_vo_06, %iw7_cp_zom_hoff_dj_vo_05, %iw7_cp_zom_hoff_dj_vo_04, %iw7_cp_zom_hoff_dj_vo_03, %iw7_cp_zom_hoff_dj_vo_02, %iw7_cp_zom_hoff_dj_vo_01];
   var_1 = ["IW7_cp_zom_hoff_dj_vo_05", "IW7_cp_zom_hoff_dj_vo_04", "IW7_cp_zom_hoff_dj_vo_03", "IW7_cp_zom_hoff_dj_vo_02", "IW7_cp_zom_hoff_dj_vo_01", "IW7_cp_zom_hoff_dj_vo_06"];
   var_2 = scripts\engine\utility::random(var_1);
   var_3 = undefined;

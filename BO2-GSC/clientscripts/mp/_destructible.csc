@@ -24,5 +24,5 @@ destructible_car_animate(localclientnum, set) {
     return;
   }
   self useanimtree(#animtree);
-  self setanim( % veh_car_destroy, 1.0, 0.0, 1.0);
+  self setanim(%veh_car_destroy, 1.0, 0.0, 1.0);
 }

@@ -268,7 +268,7 @@ harper_movement() {
   level.harper notify("stop_scale_speed_in_water");
   level.harper change_movemode("cqb_run");
   level.harper.moveplaybackrate = 1;
-  level.harper set_cqb_run_anim( % ch_pakistan_3_3_hand_signals_run_harper, % ch_pakistan_3_3_hand_signals_run_harper, % ch_pakistan_3_3_hand_signals_run_harper);
+  level.harper set_cqb_run_anim(%ch_pakistan_3_3_hand_signals_run_harper, %ch_pakistan_3_3_hand_signals_run_harper, %ch_pakistan_3_3_hand_signals_run_harper);
   level thread run_scene("corpse_alley_runner");
   run_scene("corpse_alley_harper");
   level thread run_scene("corpse_alley_exit_harper");

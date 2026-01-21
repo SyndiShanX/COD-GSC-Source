@@ -88,9 +88,7 @@ btstate_transitionstate(var_0, var_1) {
     var_3 = var_2.currentstate.name;
 
     if(isDefined(var_2.currentstate.fnend)) {
-      [
-        [var_2.currentstate.fnend]
-      ](var_0, var_1);
+      [[var_2.currentstate.fnend]](var_0, var_1);
     }
   }
 
@@ -227,9 +225,7 @@ asm_wait_state_tick(var_0) {
     btstate_endcurrentstate(var_0);
 
     if(isDefined(var_5)) {
-      [
-        [var_5]
-      ](var_0, var_4);
+      [[var_5]](var_0, var_4);
     }
   }
 

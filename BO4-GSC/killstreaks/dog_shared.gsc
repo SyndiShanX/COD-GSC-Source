@@ -148,8 +148,7 @@ function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
-        #angles: owner.angles
+        #origin: tacpoint.origin, #angles: owner.angles
       };
     }
   }
@@ -162,8 +161,7 @@ function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
-        #angles: owner.angles
+        #origin: tacpoint.origin, #angles: owner.angles
       };
     }
   }
@@ -176,8 +174,7 @@ function_fb11cc0f(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
-        #angles: owner.angles
+        #origin: tacpoint.origin, #angles: owner.angles
       };
     }
   }
@@ -186,8 +183,7 @@ function_fb11cc0f(owner) {
 
   if(isDefined(closest)) {
     return {
-      #origin: closest,
-      #angles: owner.angles
+      #origin: closest, #angles: owner.angles
     };
   }
 
@@ -389,8 +385,7 @@ function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
-        #angles: angles
+        #origin: tacpoint.origin, #angles: angles
       };
     }
   }
@@ -407,8 +402,7 @@ function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
-        #angles: angles
+        #origin: tacpoint.origin, #angles: angles
       };
     }
   }
@@ -418,14 +412,12 @@ function_e74b21de(owner) {
   if(isDefined(var_ead7a19) && var_ead7a19.size) {
     leavepoint = array::random(var_ead7a19);
     return {
-      #origin: leavepoint,
-      #angles: self.angles
+      #origin: leavepoint, #angles: self.angles
     };
   }
 
   return {
-    #origin: self.origin,
-    #angles: self.angles
+    #origin: self.origin, #angles: self.angles
   };
 }
 

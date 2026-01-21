@@ -70,7 +70,7 @@ hunkerdown() {
     playFX(anim._effect["bigdog_dust_cloud"], self.origin);
     animname = "hunker_down" + animsuffix();
     hunkeranim = animarray(animname, "stop");
-    self setflaggedanimknoballrestart("hunker", hunkeranim, % root, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("hunker", hunkeranim, %root, 1, 0.2, 1);
     self animscripts\shared::donotetracks("hunker");
     self clearanim(hunkeranim, 0.2);
     self.hunkereddown = 1;
@@ -88,7 +88,7 @@ hunkerup() {
     self animmode("zonly_physics", 0);
     animname = "hunker_up" + animsuffix();
     hunkeranim = animarray(animname, "stop");
-    self setflaggedanimknoballrestart("hunker", hunkeranim, % root, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("hunker", hunkeranim, %root, 1, 0.2, 1);
     self animscripts\shared::donotetracks("hunker");
     self clearanim(hunkeranim, 0.2);
     self.hunkereddown = 0;
@@ -144,7 +144,7 @@ turn(anglediff) {
   self animmode("zonly_physics", 0);
   animname = "hunker_up_turn";
   hunkeranim = animarray(animname, "stop");
-  self setflaggedanimknoballrestart("hunker", hunkeranim, % root, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("hunker", hunkeranim, %root, 1, 0.2, 1);
   self animscripts\shared::donotetracks("hunker");
 
   while(absanglediff > 0) {
@@ -157,7 +157,7 @@ turn(anglediff) {
   }
 
   self.hunkereddown = 0;
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 
   self animscripts\debug::debugpopstate();
 

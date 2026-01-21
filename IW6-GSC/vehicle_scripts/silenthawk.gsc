@@ -13,9 +13,9 @@ main(var_0, var_1, var_2) {
   var_4 = var_2 == "script_vehicle_silenthawk_open_lite";
 
   if(var_3)
-    maps\_vehicle::build_drive( % silenthawk_doors_open, undefined, 0);
+    maps\_vehicle::build_drive(%silenthawk_doors_open, undefined, 0);
   else
-    maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
+    maps\_vehicle::build_drive(%bh_rotors, undefined, 0);
 
   if(!var_4) {
     maps\_vehicle::build_deathfx("vfx/gameplay/explosions/vfx_exp_silenthawk_end", undefined, "blackhawk_helicopter_crash", undefined, undefined, undefined, -1, undefined, "stop_crash_loop_sound");

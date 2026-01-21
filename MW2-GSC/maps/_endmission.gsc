@@ -209,12 +209,10 @@ _nextmission(endgame) {
     if(level.missionSettings hasAchievement(levelIndex))
       maps\_utility::giveachievement_wrapper(level.missionSettings getAchievement(levelIndex));
 
-    if(level.missionSettings hasLevelVeteranAward(levelIndex) && getLevelCompleted(levelIndex) == 4 &&
-      level.missionSettings check_other_hasLevelVeteranAchievement(levelIndex))
+    if(level.missionSettings hasLevelVeteranAward(levelIndex) && getLevelCompleted(levelIndex) == 4 && level.missionSettings check_other_hasLevelVeteranAchievement(levelIndex))
       maps\_utility::giveachievement_wrapper(level.missionSettings getLevelVeteranAward(levelIndex));
 
-    if(level.missionSettings hasMissionHardenedAward() &&
-      level.missionSettings getLowestSkill() > 2)
+    if(level.missionSettings hasMissionHardenedAward() && level.missionSettings getLowestSkill() > 2)
       giveachievement_wrapper(level.missionSettings getHardenedAward());
 
     nextLevelIndex = level.missionSettings.levels.size;

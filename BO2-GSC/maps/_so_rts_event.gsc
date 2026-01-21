@@ -449,9 +449,7 @@ event_trigger(event) {
       return 1;
     case 4:
       assert(isDefined(event.data.param1), "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
-      return [
-        [event.data.param1]
-      ](event.dparam, event.data.param2, event.data.param3);
+      return [[event.data.param1]](event.dparam, event.data.param2, event.data.param3);
   }
 
   assert(0, "Unhandled event type");

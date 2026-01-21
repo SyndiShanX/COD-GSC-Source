@@ -75,9 +75,7 @@ func_E810() {
   scripts\engine\utility::flag_set("load_finished");
   if(isDefined(level.var_D6D8)) {
     foreach(var_1 in level.var_D6D8) {
-      [
-        [var_1]
-      ]();
+      [[var_1]]();
     }
   }
 }

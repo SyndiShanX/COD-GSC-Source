@@ -128,8 +128,7 @@ check_point_in_active_zone(origin) {
   one_valid_zone = false;
   for(i = 0; i < player_zones.size; i++) {
     if(scr_org isTouching(player_zones[i])) {
-      if(isDefined(level.zones[player_zones[i].targetname]) &&
-        isDefined(level.zones[player_zones[i].targetname].is_enabled)) {
+      if(isDefined(level.zones[player_zones[i].targetname]) && isDefined(level.zones[player_zones[i].targetname].is_enabled)) {
         one_valid_zone = true;
       }
     }
@@ -570,8 +569,7 @@ non_destroyed_bar_board_order(origin, chunks) {
     if(isDefined(chunks[i].script_team) && (chunks[i].script_team == "classic_boards")) {
       if(isDefined(chunks[i].script_parameters) && (chunks[i].script_parameters == "board")) {
         return get_closest_2d(origin, chunks);
-      } else if(isDefined(chunks[i].script_team) && chunks[i].script_team == "bar_board_variant1" || chunks[i].script_team == "bar_board_variant2" ||
-        chunks[i].script_team == "bar_board_variant4" || chunks[i].script_team == "bar_board_variant5") {
+      } else if(isDefined(chunks[i].script_team) && chunks[i].script_team == "bar_board_variant1" || chunks[i].script_team == "bar_board_variant2" || chunks[i].script_team == "bar_board_variant4" || chunks[i].script_team == "bar_board_variant5") {
         return undefined;
       }
     } else if(isDefined(chunks[i].script_team) && chunks[i].script_team == "new_barricade") {
@@ -1404,8 +1402,7 @@ set_zombie_var(var, value, is_float, column) {
     column = 1;
   }
   table = "mp/zombiemode.csv";
-  table_value = TableLookUp(table, 0,
-    var, column);
+  table_value = TableLookUp(table, 0, var, column);
   if(isDefined(table_value) && table_value != "") {
     if(is_float) {
       value = float(table_value);
@@ -1638,18 +1635,14 @@ remove_mod_from_methodofdeath(mod) {
   return modName;
 }
 
-set_fog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-  sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-  sun_stop_ang, fade_time, max_fog_opacity) {
+set_fog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, fade_time, max_fog_opacity) {
   self notify("stop_fog");
   self endon("disconnect");
   self endon("stop_fog");
   starting_height = self.origin[2];
   while(1) {
     height_offset = self.origin[2] - starting_height;
-    self setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, fade_time, max_fog_opacity);
+    self setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, fade_time, max_fog_opacity);
     wait(fade_time);
     fade_time = 1;
   }

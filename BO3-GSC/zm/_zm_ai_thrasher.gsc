@@ -676,9 +676,7 @@ function function_871a3bd5() {
       e_attacker zm_score::player_add_points("death_thrasher", self.damagemod, self.damagelocation, 1);
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](e_attacker, self);
+      [[level.hero_power_update]](e_attacker, self);
     }
     if(randomintrange(0, 100) >= 80) {
       e_attacker zm_audio::create_and_play_dialog("kill", "thrashers");

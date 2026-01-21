@@ -755,9 +755,9 @@ layering_logic(var_0, var_1) {
 
 enemy_struggle_mid_additives(var_0, var_1, var_2, var_3) {
   level endon("struggle_end");
-  var_0 setanimlimited( % odin_struggle_left_add, var_1, var_3, 1);
+  var_0 setanimlimited(%odin_struggle_left_add, var_1, var_3, 1);
   var_0 setanimlimited(level.scr_anim["odin_opfor"]["odin_hallway_weapon_struggle_left_opfor_add"], 1, var_3, 0.65);
-  var_0 setanimlimited( % odin_struggle_right_add, var_2, var_3, 1);
+  var_0 setanimlimited(%odin_struggle_right_add, var_2, var_3, 1);
   var_0 setanimlimited(level.scr_anim["odin_opfor"]["odin_hallway_weapon_struggle_right_opfor_add"], 1, var_3, 0.65);
 }
 
@@ -765,9 +765,9 @@ enemy_struggle_mid_additives(var_0, var_1, var_2, var_3) {
 
 player_struggle_mid_additives(var_0, var_1, var_2, var_3) {
   level endon("struggle_end");
-  var_0 setanimlimited( % odin_struggle_left_add, var_1, var_3, 1);
+  var_0 setanimlimited(%odin_struggle_left_add, var_1, var_3, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_left_player_add"], 1, var_3, 0.65);
-  var_0 setanimlimited( % odin_struggle_right_add, var_2, var_3, 1);
+  var_0 setanimlimited(%odin_struggle_right_add, var_2, var_3, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_right_player_add"], 1, var_3, 0.65);
 }
 
@@ -775,11 +775,11 @@ player_struggle_mid_additives(var_0, var_1, var_2, var_3) {
 
 enemy_struggle_anim_additives(var_0, var_1, var_2, var_3, var_4) {
   level endon("struggle_end");
-  var_0 setanimlimited( % odin_struggle_left, var_1, var_4, 1);
+  var_0 setanimlimited(%odin_struggle_left, var_1, var_4, 1);
   var_0 setanimlimited(level.scr_anim["odin_opfor"]["odin_hallway_weapon_struggle_left_opfor"], 1, var_4, 0.65);
-  var_0 setanimlimited( % odin_struggle_center, var_3, var_4, 1);
+  var_0 setanimlimited(%odin_struggle_center, var_3, var_4, 1);
   var_0 setanimlimited(level.scr_anim["odin_opfor"]["odin_hallway_weapon_struggle_center_opfor"], 1, var_4, 0.65);
-  var_0 setanimlimited( % odin_struggle_right, var_2, var_4, 1);
+  var_0 setanimlimited(%odin_struggle_right, var_2, var_4, 1);
   var_0 setanimlimited(level.scr_anim["odin_opfor"]["odin_hallway_weapon_struggle_right_opfor"], 1, var_4, 0.65);
 }
 
@@ -787,11 +787,11 @@ enemy_struggle_anim_additives(var_0, var_1, var_2, var_3, var_4) {
 
 player_struggle_anim_additives(var_0, var_1, var_2, var_3, var_4) {
   level endon("struggle_end");
-  var_0 setanimlimited( % odin_struggle_left, var_1, var_4, 1);
+  var_0 setanimlimited(%odin_struggle_left, var_1, var_4, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_left_player"], 1, var_4, 0.65);
-  var_0 setanimlimited( % odin_struggle_center, var_3, var_4, 1);
+  var_0 setanimlimited(%odin_struggle_center, var_3, var_4, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_center_player"], 1, var_4, 0.65);
-  var_0 setanimlimited( % odin_struggle_right, var_2, var_4, 1);
+  var_0 setanimlimited(%odin_struggle_right, var_2, var_4, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_right_player"], 1, var_4, 0.65);
 }
 
@@ -800,7 +800,7 @@ player_struggle_anim_additives(var_0, var_1, var_2, var_3, var_4) {
 enemy_struggle_anim(var_0, var_1, var_2) {
   level endon("struggle_end");
   var_0 setanim(level.scr_anim["odin_opfor"]["odin_hallway_weapon_struggle_range_opfor"], 1, var_1, var_2);
-  level.struggle_anim_prog = var_0 getanimtime( % odin_hallway_weapon_struggle_range_opfor);
+  level.struggle_anim_prog = var_0 getanimtime(%odin_hallway_weapon_struggle_range_opfor);
 }
 
 #using_animtree("player");
@@ -808,7 +808,7 @@ enemy_struggle_anim(var_0, var_1, var_2) {
 player_struggle_anim(var_0, var_1, var_2) {
   level endon("struggle_end");
   var_0 setanim(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_range_player"], 1, var_1, var_2);
-  level.struggle_anim_time = var_0 getanimtime( % odin_hallway_weapon_struggle_range_player);
+  level.struggle_anim_time = var_0 getanimtime(%odin_hallway_weapon_struggle_range_player);
 }
 
 space_shotgun_firing(var_0, var_1) {
@@ -975,7 +975,7 @@ player_wins_struggle(var_0, var_1, var_2) {
   var_4 hide();
   var_3 maps\_anim::anim_first_frame_solo(var_4, "odin_hall_escape_turn01_player");
   thread push_enemy_down(var_0);
-  var_1 setanimknob( % odin_hallway_weapon_struggle_shoot_player, 1, 0.05, 1);
+  var_1 setanimknob(%odin_hallway_weapon_struggle_shoot_player, 1, 0.05, 1);
   level.struggle_hinge rotateto((0, 270, 0), 1.25, 0, 1.25);
   wait 1.3;
   var_1 unlink();
@@ -1009,7 +1009,7 @@ push_enemy_down(var_0) {
   var_1.origin = var_0.origin;
   var_1.angles = var_0.angles;
   var_2 = getent("z_trans_hinge_a", "targetname");
-  var_0 setanimknob( % odin_spin_struggling_enemy_01, 1, 0.5, 0.75);
+  var_0 setanimknob(%odin_spin_struggling_enemy_01, 1, 0.5, 0.75);
   var_3 = common_scripts\utility::spawn_tag_origin();
   level.ally_ent_del[level.ally_ent_del.size] = var_3;
   var_4 = getent("struggle_rotate_hinge", "targetname");
@@ -1037,11 +1037,11 @@ push_enemy_down(var_0) {
 #using_animtree("player");
 
 end_layered_anims(var_0) {
-  var_0 setanimlimited( % odin_struggle_left, 0, 0.05, 1);
+  var_0 setanimlimited(%odin_struggle_left, 0, 0.05, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_left_player"], 0, 0.05, 65);
-  var_0 setanimlimited( % odin_struggle_center, 0, 0.05, 1);
+  var_0 setanimlimited(%odin_struggle_center, 0, 0.05, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_center_player"], 0, 0.05, 1);
-  var_0 setanimlimited( % odin_struggle_right, 0, 0.05, 1);
+  var_0 setanimlimited(%odin_struggle_right, 0, 0.05, 1);
   var_0 setanimlimited(level.scr_anim["player_rig"]["odin_hallway_weapon_struggle_right_player"], 0, 0.05, 1);
 }
 
@@ -1052,7 +1052,7 @@ move_dead_enemy(var_0) {
   var_2 = getent("z_trans_2_1_node", "targetname");
   wait 0.05;
   var_1.origin = var_2.origin - (0, -352, 0);
-  var_1 setanimknob( % odin_spin_struggling_enemy_01, 1, 0.02, 0.05);
+  var_1 setanimknob(%odin_spin_struggling_enemy_01, 1, 0.02, 0.05);
   level.ally_ent_del[level.ally_ent_del.size] = var_1;
   var_3 = common_scripts\utility::spawn_tag_origin();
   var_3.origin = var_0.origin;
@@ -1231,7 +1231,7 @@ z_trans_player(var_0) {
   var_14 = 0;
 
   while(var_13 == 0) {
-    var_15 = var_6 getanimtime( % odin_hallway_escape_turn02_player);
+    var_15 = var_6 getanimtime(%odin_hallway_escape_turn02_player);
     var_15 = maps\_utility::round_float(var_15, 2, 0);
 
     if(var_15 >= 0.0 && var_14 == 0) {

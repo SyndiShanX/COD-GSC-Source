@@ -275,9 +275,7 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   if(skipIntro) {
     flag_wait("all_players_connected");
     if(isDefined(level.custom_introscreen)) {
-      [
-        [level.custom_introscreen]
-      ](string1, string2, string3, string4, string5);
+      [[level.custom_introscreen]](string1, string2, string3, string4, string5);
       return;
     }
     waittillframeend;

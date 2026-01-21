@@ -64,13 +64,11 @@ main() {
 
   maps\mp\gametypes\_door::door_system_init("door_switch");
 
-  level thread generic_shootable_double_doors("left_gate", "left_gate", "j_prop_1", "right_gate", "j_prop_2", "lock", "gate_clip", "gate_trigger", "mp_frag_metal_door_closed_loop", "mp_frag_metal_door_open", "mp_frag_metal_door_open_out",
-    "mp_frag_metal_door_chain", "frag_gate_iron_open", undefined, undefined, "chain_gate_trigger_damage", "chain_broken", false, undefined);
+  level thread generic_shootable_double_doors("left_gate", "left_gate", "j_prop_1", "right_gate", "j_prop_2", "lock", "gate_clip", "gate_trigger", "mp_frag_metal_door_closed_loop", "mp_frag_metal_door_open", "mp_frag_metal_door_open_out", "mp_frag_metal_door_chain", "frag_gate_iron_open", undefined, undefined, "chain_gate_trigger_damage", "chain_broken", false, undefined);
   level thread bot_underground_trapped_watch();
   level thread bot_shootable_target_watch("gate_trigger", "near_gate_volume", "chain_broken");
 
-  level thread generic_shootable_double_doors("warehouse_door_right", "warehouse_door_right", "j_prop_1", "warehouse_door_left", "j_prop_2", "warehouse_door_lock", "warehouse_door_clip", "warehouse_door_trigger", undefined, "mp_frag_large_door_open", "mp_frag_large_door_open",
-    "mp_frag_large_door_chain_idle", "scn_breach_swingindoor_left", "scn_breach_swingindoor_right", "scn_breach_swingindoor_lock", "warehouse_trigger_damage", "warehouse_open", true, "warehouse_door_handle");
+  level thread generic_shootable_double_doors("warehouse_door_right", "warehouse_door_right", "j_prop_1", "warehouse_door_left", "j_prop_2", "warehouse_door_lock", "warehouse_door_clip", "warehouse_door_trigger", undefined, "mp_frag_large_door_open", "mp_frag_large_door_open", "mp_frag_large_door_chain_idle", "scn_breach_swingindoor_left", "scn_breach_swingindoor_right", "scn_breach_swingindoor_lock", "warehouse_trigger_damage", "warehouse_open", true, "warehouse_door_handle");
   level thread bot_shootable_target_watch("warehouse_door_trigger", "near_warehouse_volume", "warehouse_open");
 
   level thread shootable_ladder();
@@ -123,8 +121,7 @@ trigger_wait_damage(trigger, damage_notify) {
   self notify(damage_notify, amount, attacker, direction_vec, point, type);
 }
 
-generic_shootable_double_doors(anim_node_targetname, left_gate_targetname, left_gate_tag, right_gate_targetname, right_gate_tag, lock_targetname, gate_clip_targetname, gate_triggers_targetname,
-  closed_loop_anim, open_in_anim, open_out_anim, lock_idle_anim, open_sound_left, open_sound_right, open_sound_lock, damage_notify, open_flag, affect_pathing, extra_delete) {
+generic_shootable_double_doors(anim_node_targetname, left_gate_targetname, left_gate_tag, right_gate_targetname, right_gate_tag, lock_targetname, gate_clip_targetname, gate_triggers_targetname, closed_loop_anim, open_in_anim, open_out_anim, lock_idle_anim, open_sound_left, open_sound_right, open_sound_lock, damage_notify, open_flag, affect_pathing, extra_delete) {
   left_gate = GetEnt(left_gate_targetname, "targetname");
   right_gate = GetEnt(right_gate_targetname, "targetname");
   if(isDefined(lock_targetname)) {

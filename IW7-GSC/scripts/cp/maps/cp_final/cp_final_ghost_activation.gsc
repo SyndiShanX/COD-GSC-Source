@@ -1483,13 +1483,7 @@ set_up_controlling_struct() {
 }
 
 get_initial_queen_placement() {
-  var_0 = [["1", "4"],
-    ["3", "4"],
-    ["4", "4"],
-    ["5", "4"],
-    ["6", "4"],
-    ["7", "4"],
-    ["8", "4"]];
+  var_0 = [["1", "4"], ["3", "4"], ["4", "4"], ["5", "4"], ["6", "4"], ["7", "4"], ["8", "4"]];
   return scripts\engine\utility::random(var_0);
 }
 
@@ -1679,9 +1673,7 @@ place_paper_at(var_0, var_1) {
 select_first_piece_of_paper() {
   var_0 = spawnStruct();
   var_1 = ["cp_final_button_combo_paper_1a", "cp_final_button_combo_paper_2a", "cp_final_button_combo_paper_3a"];
-  var_2 = [["up_D_pad", "right_D_pad", "down_D_pad"],
-    ["down_D_pad", "up_D_pad", "right_D_pad"],
-    ["up_D_pad", "down_D_pad", "up_D_pad"]];
+  var_2 = [["up_D_pad", "right_D_pad", "down_D_pad"], ["down_D_pad", "up_D_pad", "right_D_pad"], ["up_D_pad", "down_D_pad", "up_D_pad"]];
   var_3 = randomint(var_1.size);
   var_0.model = var_1[var_3];
   var_0.button_combo = var_2[var_3];
@@ -1691,9 +1683,7 @@ select_first_piece_of_paper() {
 select_second_piece_of_paper() {
   var_0 = spawnStruct();
   var_1 = ["cp_final_button_combo_paper_1b", "cp_final_button_combo_paper_2b", "cp_final_button_combo_paper_3b"];
-  var_2 = [["right_D_pad", "right_D_pad", "down_D_pad"],
-    ["up_D_pad", "up_D_pad", "down_D_pad"],
-    ["down_D_pad", "down_D_pad", "right_D_pad"]];
+  var_2 = [["right_D_pad", "right_D_pad", "down_D_pad"], ["up_D_pad", "up_D_pad", "down_D_pad"], ["down_D_pad", "down_D_pad", "right_D_pad"]];
   var_3 = randomint(var_1.size);
   var_0.model = var_1[var_3];
   var_0.button_combo = var_2[var_3];
@@ -1703,9 +1693,7 @@ select_second_piece_of_paper() {
 select_third_piece_of_paper() {
   var_0 = spawnStruct();
   var_1 = ["cp_final_button_combo_paper_1c", "cp_final_button_combo_paper_2c", "cp_final_button_combo_paper_3c"];
-  var_2 = [["up_D_pad", "down_D_pad"],
-    ["right_D_pad", "up_D_pad"],
-    ["down_D_pad", "right_D_pad"]];
+  var_2 = [["up_D_pad", "down_D_pad"], ["right_D_pad", "up_D_pad"], ["down_D_pad", "right_D_pad"]];
   var_3 = randomint(var_1.size);
   var_0.model = var_1[var_3];
   var_0.button_combo = var_2[var_3];

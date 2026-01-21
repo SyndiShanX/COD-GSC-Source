@@ -298,35 +298,23 @@ set_zombie_run_cycle() {
   switch (self.zombie_move_speed) {
     case "crawl":
       var = randomintrange(1, 6);
-      self set_run_anim("crawl" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["crawl" +
-        var
-      ];
+      self set_run_anim("crawl" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["crawl" + var];
       break;
     case "walk":
       var = randomintrange(1, 8);
-      self set_run_anim("walk" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["walk" +
-        var
-      ];
+      self set_run_anim("walk" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["walk" + var];
       break;
     case "run":
       var = randomintrange(1, 6);
-      self set_run_anim("run" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["run" +
-        var
-      ];
+      self set_run_anim("run" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["run" + var];
       break;
     case "sprint":
       var = randomintrange(1, 4);
-      self set_run_anim("sprint" +
-        var);
-      self.run_combatanim = level.scr_anim[self.animname]["sprint" +
-        var
-      ];
+      self set_run_anim("sprint" + var);
+      self.run_combatanim = level.scr_anim[self.animname]["sprint" + var];
       break;
   }
 }
@@ -380,10 +368,8 @@ find_flesh() {
     same_enemy_count = 0;
     for(i = 0; i < near_zombies.size; i++) {
       if(isDefined(near_zombies[i]) && isalive(near_zombies[i])) {
-        if(isDefined(near_zombies[i].favoriteenemy) && isDefined(self.favoriteenemy) &&
-          near_zombies[i].favoriteenemy == self.favoriteenemy) {
-          if(distancesquared(near_zombies[i].origin, self.favoriteenemy.origin) < 225 * 225 &&
-            distancesquared(near_zombies[i].origin, self.origin) > 525 * 525) {
+        if(isDefined(near_zombies[i].favoriteenemy) && isDefined(self.favoriteenemy) && near_zombies[i].favoriteenemy == self.favoriteenemy) {
+          if(distancesquared(near_zombies[i].origin, self.favoriteenemy.origin) < 225 * 225 && distancesquared(near_zombies[i].origin, self.origin) > 525 * 525) {
             same_enemy_count++;
           }
         }
@@ -798,7 +784,7 @@ sergei_spawn_init() {
   self zombie_spawn_init();
 }
 sergei_anim_override() {
-  self.a.array["exposed_idle"] = array( % ai_sergei_stand_idle);
+  self.a.array["exposed_idle"] = array(%ai_sergei_stand_idle);
   self.a.array["straight_level"] = % ai_sergei_stand_idle;
   self.a.array["stand_2_crouch"] = % ai_sergei_stand_idle;
   self.a.array["turn_left_45"] = % ai_sergei_run_hunched_turnL45;
@@ -845,9 +831,9 @@ spawn_engineer_postCB() {
       playFXOnTag(level._effect["betty_explode"], self, "tag_origin");
       playRumbleOnPosition("explosion_generic", self.origin);
       if(RandomInt(100) < 35) {
-        time = getAnimLength( % ai_zombie_boss_enrage_start);
+        time = getAnimLength(%ai_zombie_boss_enrage_start);
         self playSound("zmb_boss_vox_hit");
-        self animscripted("groundhit_anim", self.origin, self.angles, % ai_zombie_boss_enrage_start, "normal", % body, 3);
+        self animscripted("groundhit_anim", self.origin, self.angles, %ai_zombie_boss_enrage_start, "normal", %body, 3);
         time = time / 4.0;
         wait(time);
       }

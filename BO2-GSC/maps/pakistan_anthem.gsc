@@ -200,8 +200,8 @@ vtol_spawn_func() {
   self lights_off();
   self vehicle_toggle_sounds(0);
   flag_wait("rooftop_meeting_defalco_started");
-  wait(getanimlength( % ch_pakistan_5_7_meeting_defalco) - 3);
-  self setanim( % v_vtol_doors_close, 1, 2.5, 1);
+  wait(getanimlength(%ch_pakistan_5_7_meeting_defalco) - 3);
+  self setanim(%v_vtol_doors_close, 1, 2.5, 1);
   wait 3;
   flag_set("osprey_away");
   vtol_ent delete();
@@ -782,7 +782,7 @@ drone_searchlight() {
 btr_entrance_lights() {
   vh_btr = get_model_or_models_from_scene("courtyard_btr_entrance", "anthem_cin_btr");
   vh_btr thread headlights_on();
-  anim_length = getanimlength( % v_pakistan_5_3_activity_below_btr_gate_entrance_btr);
+  anim_length = getanimlength(%v_pakistan_5_3_activity_below_btr_gate_entrance_btr);
   wait(anim_length);
 
   if(isDefined(vh_btr))

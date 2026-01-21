@@ -46,11 +46,7 @@ idle() {
     else if(isDefined(var_2))
       var_3 = common_scripts\utility::getstruct;
 
-    for(var_0 = [
-        [var_3]
-      ](self.target, "targetname"); isDefined(var_0.target); var_0 = [
-        [var_3]
-      ](var_0.target, "targetname")) {}
+    for(var_0 = [[var_3]](self.target, "targetname"); isDefined(var_0.target); var_0 = [[var_3]](var_0.target, "targetname")) {}
   }
 
   var_4 = var_0.script_animation;

@@ -183,11 +183,7 @@ handleDeath() {
 handleDamage() {
   selfendon("end_remote");
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    kPlaneHealth,
-    "helicopter", ::handleDeathDamage, ::modifyDamage,
-    true
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(kPlaneHealth, "helicopter", ::handleDeathDamage, ::modifyDamage, true);
 }
 
 modifyDamage(attacker, weapon, type, damage) {
@@ -243,10 +239,7 @@ getPlaneFlightPlan(distFromPlayer) {
   result.height = getPlaneFlyHeight();
 
   heightEnt = GetEnt("airstrikeheight", "targetname");
-  if(isDefined(heightEnt) &&
-    isDefined(heightEnt.script_noteworthy) &&
-    heightEnt.script_noteworthy == "fixedposition"
-  ) {
+  if(isDefined(heightEnt) && isDefined(heightEnt.script_noteworthy) && heightEnt.script_noteworthy == "fixedposition") {
     result.targetPos = heightEnt.origin;
     result.flightDir = anglesToForward(heightEnt.angles);
     if(RandomInt(2) == 0)

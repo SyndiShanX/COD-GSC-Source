@@ -10,15 +10,7 @@
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_casual_killer( <enable_casual_killer> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_casual_killer( <enable_casual_killer> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 enable_casual_killer() {
@@ -54,15 +46,7 @@ enable_casual_killer() {
 /*
 =============
 ///ScriptDocBegin
-"Name: disable_casual_killer( <disable_casual_killer> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: disable_casual_killer( <disable_casual_killer> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 disable_casual_killer() {
@@ -143,7 +127,7 @@ init_casual_killer_animsets() {
   animset["straight_level"] = % casual_killer_stand_aim5;
 
   animset["fire"] = % casual_killer_stand_auto;
-  animset["single"] = array( % casual_killer_stand_auto);
+  animset["single"] = array(%casual_killer_stand_auto);
 
   // remove this burst, semi nonsense soon
   animset["burst2"] = % casual_killer_stand_auto;
@@ -156,7 +140,7 @@ init_casual_killer_animsets() {
   animset["semi4"] = % casual_killer_stand_auto;
   animset["semi5"] = % casual_killer_stand_auto;
 
-  animset["exposed_idle"] = array( % casual_killer_stand_idle);
+  animset["exposed_idle"] = array(%casual_killer_stand_idle);
 
   self animscripts\animset::init_animset_complete_custom_stand(animset);
   self animscripts\animset::init_animset_complete_custom_crouch(animset);
@@ -254,7 +238,7 @@ casual_killer_startMoveTransition() {
   else
     startAnim = % casual_killer_walk_start;
 
-  self setFlaggedAnimKnobAllRestart("startmove", startAnim, % body, 1, .1, rate);
+  self setFlaggedAnimKnobAllRestart("startmove", startAnim, %body, 1, .1, rate);
   self animscripts\shared::DoNoteTracks("startmove");
 
   self OrientMode("face default");
@@ -289,7 +273,7 @@ set_casual_killer_run_n_gun(type) {
   if(!isDefined(type))
     type = "straight";
 
-  self clearanim( % run_n_gun, 0.2);
+  self clearanim(%run_n_gun, 0.2);
 
   switch (type) {
     case "straight":

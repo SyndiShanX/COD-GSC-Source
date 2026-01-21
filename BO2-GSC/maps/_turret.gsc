@@ -1506,31 +1506,31 @@ _get_turret_index_for_tag(str_tag) {
 
 _init_animations(ai_user, n_index) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(isDefined(ai_user) && ai_user.desired_anim_pose == "stand") {
-    self setanimknoblimitedrestart( % saw_gunner_idle_mg);
-    self setanimknoblimitedrestart( % saw_gunner_firing_mg_add);
+    self setanimknoblimitedrestart(%saw_gunner_idle_mg);
+    self setanimknoblimitedrestart(%saw_gunner_firing_mg_add);
   } else {
-    self setanimknoblimitedrestart( % saw_gunner_lowwall_idle_mg);
-    self setanimknoblimitedrestart( % saw_gunner_lowwall_firing_mg);
+    self setanimknoblimitedrestart(%saw_gunner_lowwall_idle_mg);
+    self setanimknoblimitedrestart(%saw_gunner_lowwall_firing_mg);
   }
 }
 
 _animate_idle(n_index) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(_user_check(n_index)) {
-    self setanim( % additive_idle, 1, 0.1);
-    self setanim( % additive_fire, 0, 0.1);
+    self setanim(%additive_idle, 1, 0.1);
+    self setanim(%additive_fire, 0, 0.1);
   }
 }
 
 _animate_fire(n_index) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(_user_check(n_index)) {
-    self setanim( % additive_idle, 0, 0.1);
-    self setanim( % additive_fire, 1, 0.1);
+    self setanim(%additive_idle, 0, 0.1);
+    self setanim(%additive_fire, 1, 0.1);
   }
 }
 
 _clear_animations(n_index) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {} else {
-    self setanim( % additive_idle, 0, 0.1);
-    self setanim( % additive_fire, 0, 0.1);
+    self setanim(%additive_idle, 0, 0.1);
+    self setanim(%additive_fire, 0, 0.1);
   }
 }

@@ -206,10 +206,7 @@ rocket_launch(rocket) {
 
 closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   LineMagSqrd = lengthsquared(LineEnd - LineStart);
-  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) +
-      ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) +
-      ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) /
-    (LineMagSqrd);
+  t = (((Point[0] - LineStart[0]) * (LineEnd[0] - LineStart[0])) + ((Point[1] - LineStart[1]) * (LineEnd[1] - LineStart[1])) + ((Point[2] - LineStart[2]) * (LineEnd[2] - LineStart[2]))) / (LineMagSqrd);
   if(t < 0.0) {
     return LineStart;
   } else if(t > 1.0) {
@@ -467,14 +464,7 @@ init_cosmodrome_box_screens() {
   level.magic_box_tv_north_pass = array("p_zom_monitor_csm_screen_topack");
   level.magic_box_tv_warehouse = array("p_zom_monitor_csm_screen_warehouse");
   level.magic_box_tv_random = array("p_zom_monitor_csm_screen_logo");
-  level._box_locations = array(level.magic_box_tv_start_1,
-    level.magic_box_tv_roof_connector,
-    level.magic_box_tv_centrifuge,
-    level.magic_box_tv_base_entry,
-    level.magic_box_tv_storage,
-    level.magic_box_tv_catwalks,
-    level.magic_box_tv_north_pass,
-    level.magic_box_tv_warehouse);
+  level._box_locations = array(level.magic_box_tv_start_1, level.magic_box_tv_roof_connector, level.magic_box_tv_centrifuge, level.magic_box_tv_base_entry, level.magic_box_tv_storage, level.magic_box_tv_catwalks, level.magic_box_tv_north_pass, level.magic_box_tv_warehouse);
   level._custom_box_monitor = ::cosmodrome_screen_switch;
 }
 
@@ -1532,9 +1522,7 @@ set_fog(fog_type) {
       sun_stop_ang = 113.6;
       time = 5;
       max_fog_opacity = 1;
-      setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-        sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-        sun_stop_ang, time, max_fog_opacity);
+      setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
       break;
     case "monkey":
       start_dist = 335.113;
@@ -1555,9 +1543,7 @@ set_fog(fog_type) {
       sun_stop_ang = 118.502;
       time = 3;
       max_fog_opacity = 0.999887;
-      setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-        sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-        sun_stop_ang, time, max_fog_opacity);
+      setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
       break;
     case "lander":
       start_dist = 767.866;
@@ -1578,9 +1564,7 @@ set_fog(fog_type) {
       sun_stop_ang = 62.865;
       time = 3;
       max_fog_opacity = 1;
-      setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-        sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-        sun_stop_ang, time, max_fog_opacity);
+      setVolFog(start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
       break;
   }
 }

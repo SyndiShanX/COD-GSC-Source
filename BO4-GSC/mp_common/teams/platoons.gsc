@@ -34,8 +34,7 @@ update_status() {
   }
 
   params = {
-    #var_1ab40902: [],
-    #var_42c20e77: []
+    #var_1ab40902: [], #var_42c20e77: []
   };
 
   foreach(var_b6173883, platoon in level.platoons) {

@@ -15,8 +15,7 @@ init() {
 init_leave(var_edc20efd) {
   assert(isDefined(self.ai));
   self.ai.leave = {
-    #state: 0,
-    #var_edc20efd: var_edc20efd
+    #state: 0, #var_edc20efd: var_edc20efd
   };
 }
 

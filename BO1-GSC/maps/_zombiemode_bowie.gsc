@@ -71,8 +71,7 @@ bowie_think(cost) {
           self.first_time_triggered = true;
         }
         player maps\_zombiemode_score::minus_to_player_score(cost);
-        bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type weapon",
-          player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, cost, "bowie_knife", self.origin);
+        bbPrint("zombie_uses: playername %s playerscore %d teamscore %d round %d cost %d name %s x %f y %f z %f type weapon", player.playername, player.score, level.team_pool[player.team_num].score, level.round_number, cost, "bowie_knife", self.origin);
         player maps\_zombiemode_weapons::check_collector_achievement("bowie_knife_zm");
         player give_bowie();
         if(player maps\_laststand::player_is_in_laststand() || is_true(player.intermission)) {

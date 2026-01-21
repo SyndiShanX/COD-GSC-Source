@@ -401,8 +401,7 @@ move_zombies_elevator(going_up) {
     if(isDefined(next_floor) && players[i].floor == next_floor) {
       num_next_floor++;
     }
-    if(isDefined(current_floor) && players[i].floor == current_floor && (players[i] maps\_laststand::player_is_in_laststand() ||
-        players[i].sessionstate == "spectator") && !players[i] IsTouching(check_trig)) {
+    if(isDefined(current_floor) && players[i].floor == current_floor && (players[i] maps\_laststand::player_is_in_laststand() || players[i].sessionstate == "spectator") && !players[i] IsTouching(check_trig)) {
       if(!isDefined(downed_player)) {
         downed_player = players[i];
       }
@@ -410,8 +409,7 @@ move_zombies_elevator(going_up) {
     }
   }
   wait_network_frame();
-  if(players.size > 1 && num_floor_laststand > 0 &&
-    num_in_elev == (num_current_floor - num_floor_laststand)) {
+  if(players.size > 1 && num_floor_laststand > 0 && num_in_elev == (num_current_floor - num_floor_laststand)) {
     downed_player thread laststand_elev_zombies_away(current_floor, next_floor);
     return;
   }

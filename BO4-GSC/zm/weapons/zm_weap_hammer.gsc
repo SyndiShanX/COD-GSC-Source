@@ -444,10 +444,7 @@ function_f911e261() {
   v_end = var_2ed6f142 + v_forward * 10000;
   a_trace = bulletTrace(var_2ed6f142, v_end, 0, self);
   level notify(#"hero_weapon_hit", {
-    #player: self,
-    #e_entity: a_trace[# "entity"],
-    #var_80e17549: self.currentweapon,
-    #v_position: a_trace[# "position"]
+    #player: self, #e_entity: a_trace[# "entity"], #var_80e17549: self.currentweapon, #v_position: a_trace[# "position"]
   });
 }
 

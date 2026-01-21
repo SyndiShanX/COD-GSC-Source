@@ -73,9 +73,7 @@ processscoreevent(event, player, victim, weapon, playersaffected) {
 
   if(isregisteredevent(event) && (!sessionmodeiszombiesgame() || level.onlinegame)) {
     if(isDefined(level.scoreongiveplayerscore)) {
-      scoregiven = [
-        [level.scoreongiveplayerscore]
-      ](event, player, victim, undefined, weapon, playersaffected);
+      scoregiven = [[level.scoreongiveplayerscore]](event, player, victim, undefined, weapon, playersaffected);
 
       if(scoregiven > 0) {
         player ability_power::power_gain_event_score(event, victim, scoregiven, weapon);
@@ -93,9 +91,7 @@ processscoreevent(event, player, victim, weapon, playersaffected) {
     xp_difficulty_multiplier = 1;
 
     if(isDefined(level.var_3426461d)) {
-      xp_difficulty_multiplier = [
-        [level.var_3426461d]
-      ]();
+      xp_difficulty_multiplier = [[level.var_3426461d]]();
     }
 
     player addrankxp(event, weapon, player.class_num, pickedup, isscoreevent, xp_difficulty_multiplier);

@@ -13,14 +13,14 @@ main() {
   destructible_fx("tag_swing_fx", "fx/misc/light_blowout_swinging_runner");
   destructible_lights_out(16);
   destructible_explode(20, 2000, 64, 64, 40, 80);
-  destructible_anim( % light_fluorescent_swing, #animtree, "setanimknob", undefined, 0, "light_fluorescent_swing");
+  destructible_anim(%light_fluorescent_swing, #animtree, "setanimknob", undefined, 0, "light_fluorescent_swing");
   destructible_sound("fluorescent_light_fall", undefined, 0);
   destructible_sound("fluorescent_light_bulb", undefined, 0);
 
-  destructible_anim( % light_fluorescent_swing_02, #animtree, "setanimknob", undefined, 1, "light_fluorescent_swing_02");
+  destructible_anim(%light_fluorescent_swing_02, #animtree, "setanimknob", undefined, 1, "light_fluorescent_swing_02");
   destructible_sound("fluorescent_light_fall", undefined, 1);
   destructible_sound("fluorescent_light_bulb", undefined, 1);
 
-  destructible_anim( % light_fluorescent_null, #animtree, "setanimknob", undefined, 2, "light_fluorescent_null");
+  destructible_anim(%light_fluorescent_null, #animtree, "setanimknob", undefined, 2, "light_fluorescent_null");
   destructible_state(undefined, "me_lightfluohang_double_destroyed", undefined, undefined, "no_melee");
 }

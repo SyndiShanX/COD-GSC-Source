@@ -41,9 +41,7 @@ function monitorempgrenade() {
     hurtattacker = 0;
     assert(isDefined(self.team));
     if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
-      friendlyfire = [
-        [level.figure_out_friendly_fire]
-      ](self);
+      friendlyfire = [[level.figure_out_friendly_fire]](self);
       if(friendlyfire == 0) {
         continue;
       } else {

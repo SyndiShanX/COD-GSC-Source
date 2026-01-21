@@ -25,8 +25,8 @@ advancedTraverse(traverseAnim, normalHeight) {
   if(isDefined(self.traverseplaybackrate)) {
     rate = self.traverseplaybackrate;
   }
-  self clearAnim( % body, blendTime);
-  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, % root, 1, blendTime, rate);
+  self clearAnim(%body, blendTime);
+  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %root, 1, blendTime, rate);
   gravityToBlendTime = 0.2;
   endBlendTime = 0.2;
   self thread animscripts\shared::DoNoteTracksForever("traverse", "no clear");
@@ -46,7 +46,7 @@ advancedTraverse(traverseAnim, normalHeight) {
   self.a.movement = self.old_anim_movement;
   self.a.alertness = self.old_anim_alertness;
   runAnim = animscripts\run::GetRunAnim();
-  self SetAnimKnobAllRestart(runAnim, % body, 1, endBlendTime, 1);
+  self SetAnimKnobAllRestart(runAnim, %body, 1, endBlendTime, 1);
   wait(endBlendTime);
   thread animscripts\run::MakeRunSounds("killSoundThread");
 }
@@ -121,7 +121,7 @@ DoTraverse(traverseData) {
     }
   }
   self.traverseAnim = traverseAnim;
-  self setFlaggedAnimKnoballRestart("traverseAnim", traverseAnim, % body, 1, .2, 1);
+  self setFlaggedAnimKnoballRestart("traverseAnim", traverseAnim, %body, 1, .2, 1);
   self.traverseDeathIndex = 0;
   self.traverseDeathAnim = traverseData["interruptDeathAnim"];
   self animscripts\shared::DoNoteTracks("traverseAnim", ::handleTraverseNotetracks);
@@ -136,7 +136,7 @@ DoTraverse(traverseData) {
   } else {
     self.a.movement = "run";
     self.a.alertness = "casual";
-    self setAnimKnobAllRestart(animscripts\run::GetRunAnim(), % body, 1, 0.0, 1);
+    self setAnimKnobAllRestart(animscripts\run::GetRunAnim(), %body, 1, 0.0, 1);
   }
 }
 
@@ -237,7 +237,7 @@ TraverseRagdollDeathSimple() {
   self animscripts\shared::DropAllAIWeapons();
   self startRagdoll();
   deathAnim = animscripts\death::get_death_anim();
-  self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
+  self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, %body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
     playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
@@ -290,7 +290,7 @@ postTraverseDeathAnim() {
     return;
   }
   deathAnim = animscripts\death::get_death_anim();
-  self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
+  self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, %body, 1, .1);
   if(animHasNoteTrack(deathAnim, "death_neckgrab_spurt")) {
     playFXOnTag(level._effects["death_neckgrab_spurt"], self, "j_neck");
   }
@@ -307,7 +307,7 @@ dog_wall_and_window_hop(traverseName, height) {
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
   self thread teleportThread(realHeight - height);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("dog_traverse", anim.dogAnims[self.animSet].traverse[traverseName], 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("dog_traverse");
   self.traverseComplete = true;
@@ -320,7 +320,7 @@ dog_jump_down(height, frames) {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   self thread teleportThreadEx(40.0 - height, 0.1, frames);
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setflaggedanimrestart("traverse", anim.dogAnims[self.animSet].traverse["jump_down_40"], 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverse");
   self clearanim(anim.dogAnims[self.animSet].traverse["jump_down_40"], 0);
@@ -335,7 +335,7 @@ dog_jump_up(height, frames) {
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
   self thread teleportThreadEx(height - 40.0, 0.2, frames);
-  self clearanim( % root, 0.25);
+  self clearanim(%root, 0.25);
   self setflaggedanimrestart("traverse", anim.dogAnims[self.animSet].traverse["jump_up_40"], 1, 0.2, 1);
   self animscripts\shared::DoNoteTracks("traverse");
   self clearanim(anim.dogAnims[self.animSet].traverse["jump_up_40"], 0);

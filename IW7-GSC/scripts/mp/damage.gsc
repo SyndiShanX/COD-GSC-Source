@@ -1516,9 +1516,7 @@ playerkilled_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, va
     var_5 = "MOD_HEAD_SHOT";
   } else if(!isDefined(var_2.nuked)) {
     if(isDefined(level.var_4C4A)) {
-      [
-        [level.var_4C4A]
-      ](var_2, var_5, var_0);
+      [[level.var_4C4A]](var_2, var_5, var_0);
     } else if(var_5 != "MOD_MELEE") {
       var_2 scripts\mp\utility::playdeathsound();
     }

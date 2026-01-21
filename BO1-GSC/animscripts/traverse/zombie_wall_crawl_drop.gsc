@@ -38,7 +38,7 @@ zombie_wall_crawl() {
   }
   self ZombieTraverseStartRagdollDeath();
   self.traverseAnim = traverseAnim;
-  self setFlaggedAnimKnoballRestart("traverseAnim", traverseAnim, % body, 1, .2, 1);
+  self setFlaggedAnimKnoballRestart("traverseAnim", traverseAnim, %body, 1, .2, 1);
   self.traverseDeathIndex = 0;
   self animscripts\zombie_shared::DoNoteTracks("traverseAnim", ::handleTraverseNotetracks);
   self.vertical_fall = true;
@@ -52,9 +52,9 @@ zombie_wall_crawl() {
   self.traverseDeathIndex = 0;
   self thread animscripts\zombie_shared::DoNoteTracks("traverseAnim", ::handleTraverseNotetracks);
   wait(time);
-  self setFlaggedAnimKnobRestart("dismountAnim", % ai_zombie_quad_wall_jump_off, 1, 0.00, 1.0);
+  self setFlaggedAnimKnobRestart("dismountAnim", %ai_zombie_quad_wall_jump_off, 1, 0.00, 1.0);
   self thread animscripts\zombie_shared::DoNoteTracks("dismountAnim", ::handleTraverseNotetracks);
-  wait(GetAnimLength( % ai_zombie_quad_wall_jump_off));
+  wait(GetAnimLength(%ai_zombie_quad_wall_jump_off));
   self ZombieTraverseStopRagdollDeath();
   if(!isAlive(self)) {
     return;
@@ -64,7 +64,7 @@ zombie_wall_crawl() {
   self.a.movement = "run";
   self.a.pose = "crouch";
   self.a.alertness = "alert";
-  self setAnimKnobAllRestart(animscripts\zombie_run::GetCrouchRunAnim(), % body, 1, 0.1, 1);
+  self setAnimKnobAllRestart(animscripts\zombie_run::GetCrouchRunAnim(), %body, 1, 0.1, 1);
   self.can_explode = true;
   self notify("quad_end_traverse_anim");
 }
@@ -108,7 +108,7 @@ play_blended_death(vertAnim, horzAnim) {
   horzWeight = 1 - vertWeight;
   self setAnimLimited(vertAnim, vertWeight, 0);
   self setAnimLimited(horzAnim, horzWeight, 0);
-  self setFlaggedAnimKnob("falling_death", % wall_death, 1);
+  self setFlaggedAnimKnob("falling_death", %wall_death, 1);
   self animscripts\zombie_shared::DoNotetracks("falling_death");
 }
 

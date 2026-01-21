@@ -1271,9 +1271,9 @@ event3_dialogue() {
   anim_single_solo(level.plane_a.radioop, "landry_oh_hell");
   anim_single_solo(level.plane_a.radioop, "landry_captain_harrington_distress_call");
   anim_single_solo(level.plane_a.radioop, "landry_theyve_called_for_air_support");
-  level.plane_a.radioop setflaggedanimknoballrestart("animscript faceanim", % ch_pby_distress_radio_face1, % facial, 1, .1, 1);
+  level.plane_a.radioop setflaggedanimknoballrestart("animscript faceanim", %ch_pby_distress_radio_face1, %facial, 1, .1, 1);
   anim_single_solo(level.plane_a.radioop, "landry_atleast_one_infantry");
-  level.plane_a.radioop setflaggedanimknoballrestart("animscript faceanim", % ch_pby_distress_radio_face2, % facial, 1, .1, 1);
+  level.plane_a.radioop setflaggedanimknoballrestart("animscript faceanim", %ch_pby_distress_radio_face2, %facial, 1, .1, 1);
   anim_single_solo(level.plane_a.pilot, "booth_okay_locke_seal");
   anim_single_solo(level.plane_a.pilot, "booth_lets_go_get_our_men");
   flag_clear("disable_random_dialogue");
@@ -2922,8 +2922,8 @@ event6() {
 event6_pontoons_up() {
   level waittill("finish the mission");
   wait(3);
-  level.plane_a SetFlaggedAnimKnobAllRestart("pby_pontoon_up", % v_pby_pontoon_up, % pby_pontoons, 1, 0.1, 1);
-  animation_time = getAnimLength( % v_pby_pontoon_up);
+  level.plane_a SetFlaggedAnimKnobAllRestart("pby_pontoon_up", %v_pby_pontoon_up, %pby_pontoons, 1, 0.1, 1);
+  animation_time = getAnimLength(%v_pby_pontoon_up);
   wait(animation_time);
   level.plane_a thread pby_veh_idle("fly_up", 0, true);
 }
@@ -7896,35 +7896,35 @@ pby_veh_idle(idle, delay_time, pontoons_up, hatch_open) {
   if(idle == "fly" || idle == "fly_up_open" || idle == "fly_up") {
     if(isDefined(pontoons_up) || idle == "fly_up_open" || idle == "fly_up") {
       if(isDefined(hatch_open) || idle == "fly_up_open") {
-        self SetFlaggedAnimKnob("idle_anim", % v_pby_fly_up_open, 1, 0, 1);
+        self SetFlaggedAnimKnob("idle_anim", %v_pby_fly_up_open, 1, 0, 1);
         self.current_idle = "fly_up_open";
         self.current_idle_anim = % v_pby_fly_up_open;
       } else {
-        self SetFlaggedAnimKnob("idle_anim", % v_pby_fly_up, 1, 0, 1);
+        self SetFlaggedAnimKnob("idle_anim", %v_pby_fly_up, 1, 0, 1);
         self.current_idle = "fly_up";
         self.current_idle_anim = % v_pby_fly_up;
       }
     } else {
-      self SetFlaggedAnimKnob("idle_anim", % v_pby_fly, 1, 0, 1);
+      self SetFlaggedAnimKnob("idle_anim", %v_pby_fly, 1, 0, 1);
       self.current_idle = "fly";
       self.current_idle_anim = % v_pby_fly;
     }
     return;
   }
   if(idle == "float") {
-    self SetFlaggedAnimKnob("idle_anim", % v_pby_float_blisters, 1, 0, 1);
+    self SetFlaggedAnimKnob("idle_anim", %v_pby_float_blisters, 1, 0, 1);
     self.current_idle = "float";
     self.current_idle_anim = % v_pby_float_blisters;
     return;
   }
   if(idle == "float_ai") {
-    self SetFlaggedAnimKnob("idle_anim", % v_pby_taxi_ai, 1, 0, 1);
+    self SetFlaggedAnimKnob("idle_anim", %v_pby_taxi_ai, 1, 0, 1);
     self.current_idle = "float_ai";
     self.current_idle_anim = % v_pby_taxi_ai;
     return;
   }
   if(idle == "float_static") {
-    self SetFlaggedAnimKnob("idle_anim", % v_pby_staticpose, 1, 0, 1);
+    self SetFlaggedAnimKnob("idle_anim", %v_pby_staticpose, 1, 0, 1);
     self.current_idle = "float_static";
     self.current_idle_anim = % v_pby_staticpose;
     return;
@@ -7979,13 +7979,13 @@ pby_veh_fire_guns() {
             return;
           }
         } else {
-          self SetFlaggedAnimKnobRestart("ammo_fire_right", % v_pby_blisterammo_right_fire, 1, 0.1, 1);
-          animation_time = getAnimLength( % v_pby_blisterammo_right_fire);
+          self SetFlaggedAnimKnobRestart("ammo_fire_right", %v_pby_blisterammo_right_fire, 1, 0.1, 1);
+          animation_time = getAnimLength(%v_pby_blisterammo_right_fire);
           wait(animation_time);
         }
       } else if(level.player.current_seat == "pby_leftgun" && level.player.in_transition == false && self IsGunnerFiring(1)) {
-        self SetFlaggedAnimKnobRestart("ammo_fire_left", % v_pby_blisterammo_left_fire, 1, 0.1, 1);
-        animation_time = getAnimLength( % v_pby_blisterammo_right_fire);
+        self SetFlaggedAnimKnobRestart("ammo_fire_left", %v_pby_blisterammo_left_fire, 1, 0.1, 1);
+        animation_time = getAnimLength(%v_pby_blisterammo_right_fire);
         wait(animation_time);
       } else if(level.player.current_seat == "pby_frontgun" && level.player.in_transition == false && self IsGunnerFiring(0)) {
         if(flag("pby_out_of_ammo")) {

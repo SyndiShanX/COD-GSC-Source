@@ -18,8 +18,7 @@ main() {
 
   set_custom_gameskill_func(maps\_gameskill::solo_player_in_coop_gameskill_settings);
 
-  // special ops character selection using dvar "start"
-  level.specops_character_selector = "";
+  // special ops character selection using dvar "start"level.specops_character_selector = "";
   if(IsSplitScreen() || (GetDvar("coop") == "1")) {
     level.specops_character_selector = getdvar("coop_start");
   }
@@ -255,9 +254,7 @@ move_hunters_to_new_goal(closest_goal) {
 
 move_deadlier_hunters_to_new_goal(closest_goal) {
   waittillframeend;
-  //Sent half the enemies to player, and the other half to set goal,
-
-  foreach(enemy in level.hunter_enemies) {
+  //Sent half the enemies to player, and the other half to set goal, foreach(enemy in level.hunter_enemies) {
     if(RandomInt(100) < CONST_specop_difficulty)
       enemy setgoalpos(closest_goal.origin);
     else

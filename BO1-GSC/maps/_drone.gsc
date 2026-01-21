@@ -509,7 +509,7 @@ trackShootEntOrPos(target) {
     drone.leftAimLimit = -60;
     drone.upAimLimit = 75;
     drone.downAimLimit = -75;
-    drone trackLoop( % exposed_aim_2, % exposed_aim_4, % exposed_aim_6, % exposed_aim_8);
+    drone trackLoop(%exposed_aim_2, %exposed_aim_4, %exposed_aim_6, %exposed_aim_8);
   }
 }
 

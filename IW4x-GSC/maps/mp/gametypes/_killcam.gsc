@@ -15,8 +15,7 @@ init() {
   level.killcam = maps\mp\gametypes\_tweakables::getTweakableValue("game", "allowkillcam");
 }
 
-killcam(
-  attackerNum, // entity number of the attacker
+killcam(attackerNum, // entity number of the attacker
   killcamentityindex, // entity number of the entity to view (grenade, airstrike, etc)
   killcamentitystarttime, // time at which the killcamentity came into being
   sWeapon, // killing weapon

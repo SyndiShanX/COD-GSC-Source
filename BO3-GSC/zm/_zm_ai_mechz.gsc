@@ -102,9 +102,7 @@ function private function_c28caf48(entity) {
       return false;
     }
     if(isDefined(level.no_target_override)) {
-      [
-        [level.no_target_override]
-      ](entity);
+      [[level.no_target_override]](entity);
     } else {
       entity setgoal(entity.origin);
     }
@@ -193,9 +191,7 @@ function function_b8e0ce15(e_player) {
 function spawn_mechz(s_location, flyin = 0) {
   if(isDefined(level.mechz_spawners[0])) {
     if(isDefined(level.var_7f2a926d)) {
-      [
-        [level.var_7f2a926d]
-      ]();
+      [[level.var_7f2a926d]]();
     }
     level.mechz_spawners[0].script_forcespawn = 1;
     ai = zombie_utility::spawn_zombie(level.mechz_spawners[0], "mechz", s_location);
@@ -419,9 +415,7 @@ function function_ef1ba7e5() {
       self.attacker zm_score::player_add_points(event, 1500);
     }
     if(isDefined(level.hero_power_update)) {
-      [
-        [level.hero_power_update]
-      ](self.attacker, self);
+      [[level.hero_power_update]](self.attacker, self);
     }
   }
 }

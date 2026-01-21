@@ -105,8 +105,7 @@ door_think() {
         continue;
       }
       self.doors[i].door_moving = 1;
-      if((isDefined(self.doors[i].script_noteworthy) && self.doors[i].script_noteworthy == "clip") ||
-        (isDefined(self.doors[i].script_string) && self.doors[i].script_string == "clip")) {
+      if((isDefined(self.doors[i].script_noteworthy) && self.doors[i].script_noteworthy == "clip") || (isDefined(self.doors[i].script_string) && self.doors[i].script_string == "clip")) {
         continue;
       }
       if(isDefined(self.doors[i].script_sound)) {

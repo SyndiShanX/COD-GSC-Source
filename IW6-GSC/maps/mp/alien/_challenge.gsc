@@ -114,14 +114,7 @@ get_valid_challenge() {
 }
 
 should_skip_challenge(challenge) {
-  is_weapon_challenge = (challenge.ref == "ar_only" ||
-    challenge.ref == "smg_only" ||
-    challenge.ref == "lmgs_only" ||
-    challenge.ref == "shotguns_only" ||
-    challenge.ref == "2_weapons_only" ||
-    challenge.ref == "semi_autos_only" ||
-    challenge.ref == "new_weapon" ||
-    challenge.ref == "snipers_only");
+  is_weapon_challenge = (challenge.ref == "ar_only" || challenge.ref == "smg_only" || challenge.ref == "lmgs_only" || challenge.ref == "shotguns_only" || challenge.ref == "2_weapons_only" || challenge.ref == "semi_autos_only" || challenge.ref == "new_weapon" || challenge.ref == "snipers_only");
 
   if(!is_weapon_challenge)
     return false;

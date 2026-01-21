@@ -37,9 +37,7 @@ deleteGenerator(generator, generatorType) {
   }
 
   foreach(player in level.players) {
-    if(isDefined(player) &&
-      isDefined(player.inGeneratorAOE)
-    ) {
+    if(isDefined(player) && isDefined(player.inGeneratorAOE)) {
       player.inGeneratorAOE[generatorType] = undefined;
     }
   }
@@ -185,11 +183,7 @@ watchDamage(owner, generatorType) {
   self.generatorType = generatorType;
   config = level.portableAOEgeneratorSettings[generatorType];
 
-  self maps\mp\gametypes\_damage::monitorDamage(
-    config.health,
-    config.damageFeedback, ::handleDeathDamage, ::modifyDamage,
-    false
-  );
+  self maps\mp\gametypes\_damage::monitorDamage(config.health, config.damageFeedback, ::handleDeathDamage, ::modifyDamage, false);
 }
 
 modifyDamage(attacker, weapon, type, damage) {
@@ -271,9 +265,7 @@ checkAllGeneratorsOfThisType(generatorType) {
     result = undefined;
     foreach(generator in generators) {
       if(isDefined(generator) && isReallyAlive(generator)) {
-        if((level.teamBased && matchesTargetTeam(generator.team, self.team, config.targetType)) ||
-          (!level.teamBased && matchesOwner(generator.owner, self, config.targetType))
-        ) {
+        if((level.teamBased && matchesTargetTeam(generator.team, self.team, config.targetType)) || (!level.teamBased && matchesOwner(generator.owner, self, config.targetType))) {
           distSq = DistanceSquared(generator.origin, self.origin);
           if(distSq < maxDistSq) {
             result = generator;
@@ -296,19 +288,11 @@ checkAllGeneratorsOfThisType(generatorType) {
 }
 
 matchesTargetTeam(myTeam, theirTeam, teamType) {
-  return (
-    (teamType == "all") ||
-    (teamType == "friendly" && myTeam == theirTeam) ||
-    (teamType == "enemy" && myTeam != theirTeam)
-  );
+  return ((teamType == "all") || (teamType == "friendly" && myTeam == theirTeam) || (teamType == "enemy" && myTeam != theirTeam));
 }
 
 matchesOwner(myOwner, player, teamType) {
-  return (
-    (teamType == "all") ||
-    (teamType == "friendly" && myOwner == player) ||
-    (teamType == "enemy" && myOwner != player)
-  );
+  return ((teamType == "all") || (teamType == "friendly" && myOwner == player) || (teamType == "enemy" && myOwner != player));
 }
 
 getID(generator) {

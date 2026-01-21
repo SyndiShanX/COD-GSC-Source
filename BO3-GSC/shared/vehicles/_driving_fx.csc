@@ -95,25 +95,17 @@ class vehiclewheelfx {
     }
     if(sliding) {
       skid_fx = vehicle driving_fx::get_wheel_fx("skid", surface);
-      [
-        [ground_fx["skid"]]
-      ] - > play(localclientnum, vehicle, skid_fx, tag_name);
+      [[ground_fx["skid"]]] - > play(localclientnum, vehicle, skid_fx, tag_name);
       vehicle.skidding = 1;
       rumble = 1;
     } else {
-      [
-        [ground_fx["skid"]]
-      ] - > stop(localclientnum);
+      [[ground_fx["skid"]]] - > stop(localclientnum);
     }
     if(speed_fraction > 0.1) {
       tread_fx = vehicle driving_fx::get_wheel_fx("tread", surface);
-      [
-        [ground_fx["tread"]]
-      ] - > play(localclientnum, vehicle, tread_fx, tag_name);
+      [[ground_fx["tread"]]] - > play(localclientnum, vehicle, tread_fx, tag_name);
     } else {
-      [
-        [ground_fx["tread"]]
-      ] - > stop(localclientnum);
+      [[ground_fx["tread"]]] - > stop(localclientnum);
     }
     if(rumble) {
       if(vehicle islocalclientdriver(localclientnum)) {
@@ -227,9 +219,7 @@ function play_driving_fx(localclientnum) {
     self.wheel_fx = [];
     for(i = 0; i < wheel_names.size; i++) {
       self.wheel_fx[i] = new vehiclewheelfx();
-      [
-        [self.wheel_fx[i]]
-      ] - > init(wheel_names[i], wheel_tag_names[i]);
+      [[self.wheel_fx[i]]] - > init(wheel_names[i], wheel_tag_names[i]);
     }
     self.camera_fx = [];
     self.camera_fx["speed"] = new vehicle_camera_fx();
@@ -246,9 +236,7 @@ function play_driving_fx(localclientnum) {
     speed_fraction = (max_speed > 0 ? abs(speed) / max_speed : 0);
     self.skidding = 0;
     for(i = 0; i < self.wheel_fx.size; i++) {
-      [
-        [self.wheel_fx[i]]
-      ] - > update(localclientnum, self, speed_fraction);
+      [[self.wheel_fx[i]]] - > update(localclientnum, self, speed_fraction);
     }
     wait(0.1);
   }

@@ -1178,8 +1178,8 @@ player_viewhands_minigun(var_0, var_1) {
 }
 
 set_idle() {
-  self setanim( % player_suburban_minigun_idle_l, 1, 0, 1);
-  self setanim( % player_suburban_minigun_idle_r, 1, 0, 1);
+  self setanim(%player_suburban_minigun_idle_l, 1, 0, 1);
+  self setanim(%player_suburban_minigun_idle_r, 1, 0, 1);
 }
 
 handle_mounting(var_0) {

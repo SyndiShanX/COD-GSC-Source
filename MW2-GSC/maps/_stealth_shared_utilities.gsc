@@ -110,15 +110,7 @@ ai_message_handler_hidden(function, plugin_override) {
 /*
 =============
 ///ScriptDocBegin
-"Name: ai_create_behavior_function( <name>, <key>, <function> )"
-"Summary: sets up a behavior function that an AI using the stealth system will call in a specific situation, by putting an entry in the AI's ._stealth.behavior.ai_functions array."
-"Module: Entity"
-"MandatoryArg: <name>: the general category, for example, 'threat', 'animation', or 'event' (among others)."
-"MandatoryArg: <key>: the specific subcategory, for example, 'heard_scream' or 'reset' (among others)."
-"MandatoryArg: <function>: the function to run when the stealth script looks for this behavior function."
-"Example: ai_create_behavior_function( "threat", "reset", ::cliffhanger_enemy_alert_level_reset );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: ai_create_behavior_function( <name>, <key>, <function> )""Summary: sets up a behavior function that an AI using the stealth system will call in a specific situation, by putting an entry in the AI's ._stealth.behavior.ai_functions array.""Module: Entity""MandatoryArg: <name>: the general category, for example, 'threat', 'animation', or 'event' (among others).""MandatoryArg: <key>: the specific subcategory, for example, 'heard_scream' or 'reset' (among others).""MandatoryArg: <function>: the function to run when the stealth script looks for this behavior function.""Example: ai_create_behavior_function( "threat", "reset", ::cliffhanger_enemy_alert_level_reset );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 ai_create_behavior_function(name, key, function) {
@@ -133,13 +125,7 @@ ai_get_behavior_function(name, key) {
 /*
 =============
 ///ScriptDocBegin
-"Name: ai_set_goback_override_function( <function> )"
-"Summary: sets up an "event" behavior function that an AI using the stealth system will call in a specific situation, by putting an entry in the AI's ._stealth.behavior.ai_functions[ "event" ] array.This function will be called between the AI forgetting about the threat, and the AI heading back to where he was patrolling previously."
-"Module: Entity"
-"MandatoryArg: <function>: the function to run when the AI forgets about an event, before he heads back to his previous patrol spot."
-"Example: ai_create_event_goback_override_function( ::cliffhanger_enemy_alert_level_reset );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: ai_set_goback_override_function( <function> )""Summary: sets up an "event" behavior function that an AI using the stealth system will call in a specific situation, by putting an entry in the AI's ._stealth.behavior.ai_functions[ "event" ] array.This function will be called between the AI forgetting about the threat, and the AI heading back to where he was patrolling previously.""Module: Entity""MandatoryArg: <function>: the function to run when the AI forgets about an event, before he heads back to his previous patrol spot.""Example: ai_create_event_goback_override_function( ::cliffhanger_enemy_alert_level_reset );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 ai_set_goback_override_function(function) {
@@ -434,10 +420,7 @@ enemy_get_nearby_pathnodes(origin, radius, min_radius) {
   if(!isDefined(min_radius))
     min_radius = 0;
 
-  if(isDefined(level._stealth.node_search.nodes_array) &&
-    distanceSquared(origin, level._stealth.node_search.origin) < 64 * 64 &&
-    radius == level._stealth.node_search.radius &&
-    min_radius == level._stealth.node_search.min_radius)
+  if(isDefined(level._stealth.node_search.nodes_array) && distanceSquared(origin, level._stealth.node_search.origin) < 64 * 64 && radius == level._stealth.node_search.radius && min_radius == level._stealth.node_search.min_radius)
     return level._stealth.node_search.nodes_array;
 
   level._stealth.node_search.origin = origin;

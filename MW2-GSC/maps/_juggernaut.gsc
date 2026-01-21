@@ -159,8 +159,8 @@ init_juggernaut_animsets() {
   self.walkDist = 500;
   self.walkDistFacingMotion = 500;
 
-  self set_move_animset("run", % Juggernaut_runF, % Juggernaut_sprint);
-  self set_move_animset("walk", % Juggernaut_walkF);
-  self set_move_animset("cqb", % Juggernaut_walkF);
-  self set_combat_stand_animset( % Juggernaut_stand_fire_burst, % Juggernaut_aim5, % Juggernaut_stand_idle, % Juggernaut_stand_reload);
+  self set_move_animset("run", %Juggernaut_runF, %Juggernaut_sprint);
+  self set_move_animset("walk", %Juggernaut_walkF);
+  self set_move_animset("cqb", %Juggernaut_walkF);
+  self set_combat_stand_animset(%Juggernaut_stand_fire_burst, %Juggernaut_aim5, %Juggernaut_stand_idle, %Juggernaut_stand_reload);
 }

@@ -49,10 +49,7 @@ and these lines in your CSV:
 include,vehicle_luxurysedan_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
-defaultmdl="vehicle_luxurysedan"
-default:"vehicletype" "luxurysedan"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_luxurysedan"default:"vehicletype" "luxurysedan"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_luxurysedan_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -63,10 +60,7 @@ and these lines in your CSV:
 include,vehicle_luxurysedan_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
-defaultmdl="vehicle_luxurysedan"
-default:"vehicletype" "luxurysedan_physics"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_luxurysedan"default:"vehicletype" "luxurysedan_physics"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_luxurysedan_test (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -77,10 +71,7 @@ and these lines in your CSV:
 include,vehicle_luxurysedan_test_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
-defaultmdl="vehicle_luxurysedan_test"
-default:"vehicletype" "luxurysedan"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_luxurysedan_test"default:"vehicletype" "luxurysedan"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_luxurysedan_viewmodel (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -91,7 +82,5 @@ and these lines in your CSV:
 include,vehicle_luxurysedan_viewmodel_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
-defaultmdl="vehicle_luxurysedan_2009_viewmodel"
-default:"vehicletype" "luxurysedan"
-default:"script_team" "allies"
+defaultmdl="vehicle_luxurysedan_2009_viewmodel"default:"vehicletype" "luxurysedan"default:"script_team" "allies"
 */

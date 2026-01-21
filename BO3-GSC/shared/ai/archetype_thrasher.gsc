@@ -345,11 +345,7 @@ function private thrashershouldteleport(entity) {
   }
   if(distancesquared(entity.origin, entity.favoriteenemy.origin) >= 1440000) {
     if(isDefined(entity.thrashershouldteleportcallback)) {
-      return [
-        [entity.thrashershouldteleportcallback]
-      ](entity.origin) && [
-        [entity.thrashershouldteleportcallback]
-      ](entity.favoriteenemy.origin);
+      return [[entity.thrashershouldteleportcallback]](entity.origin) && [[entity.thrashershouldteleportcallback]](entity.favoriteenemy.origin);
     }
     return 1;
   }
@@ -396,9 +392,7 @@ function private thrashershouldconsumezombie(entity) {
   }
   if(haspoppedpustule) {
     if(isDefined(entity.thrashercanconsumecallback)) {
-      return [
-        [entity.thrashercanconsumecallback]
-      ](entity);
+      return [[entity.thrashercanconsumecallback]](entity);
     }
   }
   return 0;
@@ -416,9 +410,7 @@ function private thrasherdeath(entity) {
 
 function private thrasherconsumezombie(entity) {
   if(isDefined(entity.thrasherconsumezombiecallback)) {
-    if([
-        [entity.thrasherconsumezombiecallback]
-      ](entity)) {
+    if([[entity.thrasherconsumezombiecallback]](entity)) {
       entity.thrasherconsumecount++;
       entity.thrasherlastconsume = gettime();
     }

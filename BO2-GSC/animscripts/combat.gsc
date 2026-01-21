@@ -57,7 +57,7 @@ transitiontocombat() {
   if(self.a.prevscript == "stop" && self.a.pose == "stand" && !(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) && !(isDefined(self.heat) && self.heat) && self.animtype == "default") {
     if(animarrayexist("idle_trans_out")) {
       self animmode("zonly_physics");
-      self setflaggedanimknoballrestart("transition", animarray("idle_trans_out"), % root, 1, 0.2, 1.2 * self.animplaybackrate);
+      self setflaggedanimknoballrestart("transition", animarray("idle_trans_out"), %root, 1, 0.2, 1.2 * self.animplaybackrate);
       self animscripts\shared::donotetracks("transition");
     }
   }
@@ -69,12 +69,12 @@ setup() {
 
   self set_aimturn_limits();
   self thread stopshortly();
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
   self setanim(animarray("straight_level"));
-  self clearanim( % aim_4, 0.2);
-  self clearanim( % aim_6, 0.2);
-  self clearanim( % aim_2, 0.2);
-  self clearanim( % aim_8, 0.2);
+  self clearanim(%aim_4, 0.2);
+  self clearanim(%aim_6, 0.2);
+  self clearanim(%aim_2, 0.2);
+  self clearanim(%aim_8, 0.2);
   setupaim(0.2);
   self thread idlethread();
 }
@@ -117,7 +117,7 @@ setupaim(transtime) {
 idlethread() {
   self endon("killanimscript");
   self endon("kill_idle_thread");
-  self setanim( % add_idle);
+  self setanim(%add_idle);
 
   for(;;) {
     idleanim = animarraypickrandom("exposed_idle");
@@ -193,7 +193,7 @@ exposedcombatmainloop() {
 
         self animscripts\debug::debugpopstate("exposedCombatShootUntilNeedToTurn");
 
-        self clearanim( % add_fire, 0.2);
+        self clearanim(%add_fire, 0.2);
       }
 
       continue;
@@ -239,7 +239,7 @@ exposedcombatrambo() {
     self animmode("gravity");
     ramboanim = animarraypickrandom("exposed_rambo");
     time = getanimlength(ramboanim);
-    self setflaggedanimknoballrestart("ramboAnim", ramboanim, % body, 1, 0.2, 1);
+    self setflaggedanimknoballrestart("ramboAnim", ramboanim, %body, 1, 0.2, 1);
     self animscripts\shared::donotetracksfortime(time - 0.2, "ramboAnim");
     self animmode("zonly_physics");
     self thread idlethread();
@@ -447,11 +447,11 @@ tryexposedthrowgrenade(throwat, mindist, forcethrow) {
         throwanims[throwanims.size] = animarray("grenade_throw_2");
 
       if(throwanims.size > 0) {
-        self setanim( % exposed_aiming, 0, 0.1);
+        self setanim(%exposed_aiming, 0, 0.1);
         self animmode("zonly_physics");
         setanimaimweight(0, 0);
         threw = trygrenade(throwat, throwanims[randomint(throwanims.size)], forcethrow);
-        self setanim( % exposed_aiming, 1, 0.1);
+        self setanim(%exposed_aiming, 1, 0.1);
 
         if(threw)
           setanimaimweight(1, 0.5);
@@ -772,12 +772,12 @@ end_script() {
 }
 
 resetweaponanims() {
-  self clearanim( % aim_4, 0);
-  self clearanim( % aim_6, 0);
-  self clearanim( % aim_2, 0);
-  self clearanim( % aim_8, 0);
-  self clearanim( % exposed_aiming, 0);
-  self setanimknoballrestart(animarray("straight_level"), % body, 1, 0.2);
+  self clearanim(%aim_4, 0);
+  self clearanim(%aim_6, 0);
+  self clearanim(%aim_2, 0);
+  self clearanim(%aim_8, 0);
+  self clearanim(%exposed_aiming, 0);
+  self setanimknoballrestart(animarray("straight_level"), %body, 1, 0.2);
   setupaim(0.2);
 }
 
@@ -806,11 +806,11 @@ switchtolastweapon(cleanup) {
   assert(self.lastweapon != self.sidearm);
   assert(self.lastweapon == self.primaryweapon || self.lastweapon == self.secondaryweapon);
   self notify("kill_idle_thread");
-  self clearanim( % add_idle, 0.2);
+  self clearanim(%add_idle, 0.2);
   self clearanim(animarray("straight_level", "combat"), 0.2);
   self orientmode("face current");
   self.swapanim = swapanim;
-  self setflaggedanimknoballrestart("weapon swap", swapanim, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("weapon swap", swapanim, %body, 1, 0.1, 1);
 
   if(isDefined(cleanup))
     self donotetrackspostcallbackwithendon("weapon swap", ::handleputawaycleanup, "end_weapon_swap");
@@ -842,7 +842,7 @@ handleputaway(notetrack) {
       self thread idlethread();
       self setanimlimited(animarray("straight_level", "combat"), 1, 0);
       setupaim(0);
-      self setanim( % exposed_aiming, 1, 0.2);
+      self setanim(%exposed_aiming, 1, 0.2);
     }
   }
 }
@@ -866,7 +866,7 @@ transitionto(newpose) {
   }
   self animscripts\debug::debugpushstate("transitionTo: " + newpose);
 
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   self notify("kill_idle_thread");
   transanim = animarray(self.a.pose + "_2_" + newpose, "combat");
 
@@ -878,9 +878,9 @@ transitionto(newpose) {
   if(!animhasnotetrack(transanim, "anim_pose = \"" + newpose + "\""))
     println("error: ^2Pain missing notetrack to set pose!", transanim);
 
-  self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.2, rate);
+  self setflaggedanimknoballrestart("trans", transanim, %body, 1, 0.2, rate);
   setupaim(0);
-  self setanim( % exposed_aiming, 1, 0);
+  self setanim(%exposed_aiming, 1, 0);
   transtime = getanimlength(transanim) / rate;
   playtime = transtime - 0.3;
 
@@ -891,9 +891,9 @@ transitionto(newpose) {
   self clearanim(transanim, 0.2);
   self.a.pose = newpose;
   self set_aimturn_limits();
-  self setanimknoballrestart(animarray("straight_level"), % body, 1, 0.25);
+  self setanimknoballrestart(animarray("straight_level"), %body, 1, 0.25);
   setupaim(0.25);
-  self setanim( % add_idle);
+  self setanim(%add_idle);
   self thread idlethread();
   self maps\_gameskill::didsomethingotherthanshooting();
 
@@ -979,8 +979,8 @@ exposedreload(threshold) {
       reloadanim = animarraypickrandom("reload");
 
     self thread keeptryingtomelee();
-    self setanim( % reload, 1, 0.2);
-    self clearanim( % add_fire, 0);
+    self setanim(%reload, 1, 0.2);
+    self clearanim(%add_fire, 0);
     self.a.finishedreload = 0;
     self animscripts\shared::updatelaserstatus(0);
     self doreloadanim(reloadanim, threshold > 0.05, 0);
@@ -991,9 +991,9 @@ exposedreload(threshold) {
       self animscripts\weaponlist::refillclip();
 
     self set_aimturn_limits();
-    self clearanim( % reload, 0.3);
-    self setanim( % exposed_aiming, 1, 0.2);
-    self setanim( % add_idle);
+    self clearanim(%reload, 0.3);
+    self setanim(%exposed_aiming, 1, 0.2);
+    self setanim(%add_idle);
     self.keepclaimednode = 0;
     self notify("stop_trying_to_melee");
     self.a.exposedreloading = 0;
@@ -1025,8 +1025,8 @@ doreloadanim(reloadanim, stopwhencanshoot, shouldkeepaiming) {
     if(animhasnotetrack(reloadanim, "stop_aim"))
       self waittillmatch(flagname, "stop_aim");
 
-    self setanim( % add_idle, 0, 0.1);
-    self setanim( % exposed_aiming, 0, 0.1);
+    self setanim(%add_idle, 0, 0.1);
+    self setanim(%exposed_aiming, 0, 0.1);
   }
 
   self thread notifyonstartaim("abort_reload", flagname);
@@ -1094,13 +1094,13 @@ switchtosidearm(swapanim) {
     self thread putgunbackinhandonkillanimscript();
 
   self notify("kill_idle_thread");
-  self clearanim( % add_idle, 0.2);
+  self clearanim(%add_idle, 0.2);
   self clearanim(animarray("straight_level"), 0.2);
   self orientmode("face current");
   self.a.switchtosidearmdone = 0;
   self.pistolswitchtime = gettime() + 9000 + randomint(3000);
   self.swapanim = swapanim;
-  self setflaggedanimknoballrestart("weapon swap", swapanim, % body, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("weapon swap", swapanim, %body, 1, 0.2, 1);
   self donotetrackspostcallbackwithendon("weapon swap", ::handlepickup, "end_weapon_swap");
   self clearanim(self.swapanim, 0);
   self animscripts\anims::clearanimcache();
@@ -1132,7 +1132,7 @@ handlepickup(notetrack) {
       self thread idlethread();
       self setanimlimited(animarray("straight_level"), 1, 0);
       setupaim(0);
-      self setanim( % exposed_aiming, 1, 0.2);
+      self setanim(%exposed_aiming, 1, 0.2);
     }
   }
 }
@@ -1248,7 +1248,7 @@ doturn(direction, amount) {
   else
     self animmode("angle deltas");
 
-  self setanimknoball( % exposed_aiming, % body, 1, transtime);
+  self setanimknoball(%exposed_aiming, %body, 1, transtime);
   shouldusestartstopaimnotetrack = animhasnotetrack(turnanim, "start_aim") && animhasnotetrack(turnanim, "stop_aim");
 
   if(!self.turntomatchnode && !keepaimingon45degturn)
@@ -1257,7 +1257,7 @@ doturn(direction, amount) {
   if(self.turntomatchnode)
     rate = 1.6;
 
-  self setanimlimited( % turn, 1, transtime);
+  self setanimlimited(%turn, 1, transtime);
   self setflaggedanimknoblimitedrestart("turn", turnanim, 1, 0, rate);
   self notify("turning");
 
@@ -1265,10 +1265,10 @@ doturn(direction, amount) {
     self thread turnstartaiming(turnanim, rate, shouldusestartstopaimnotetrack);
 
   doturnnotetracks();
-  self setanimlimited( % turn, 0, 0.2);
+  self setanimlimited(%turn, 0, 0.2);
   self turnsetupidle(transtime);
-  self clearanim( % turn, 0.2);
-  self setanimknob( % exposed_aiming, 1, 0.2, 1);
+  self clearanim(%turn, 0.2);
+  self setanimknob(%exposed_aiming, 1, 0.2, 1);
 
   if(isDefined(self.turnlastresort)) {
     self.turnlastresort = undefined;
@@ -1276,7 +1276,7 @@ doturn(direction, amount) {
   }
 
   if(!self usingshotgun())
-    self clearanim( % add_fire, 0.2);
+    self clearanim(%add_fire, 0.2);
 
   self notify("done turning");
 
@@ -1324,16 +1324,16 @@ turningaimingoff(turnanim, transtime, rate, shouldusestartstopaimnotetrack) {
 
   self stoptracking();
   self setanimlimited(animarray("straight_level", "combat"), 0, transtime);
-  self setanim( % aim_2, 0, transtime);
-  self setanim( % aim_4, 0, transtime);
-  self setanim( % aim_6, 0, transtime);
-  self setanim( % aim_8, 0, transtime);
-  self setanim( % add_idle, 0, transtime);
+  self setanim(%aim_2, 0, transtime);
+  self setanim(%aim_4, 0, transtime);
+  self setanim(%aim_6, 0, transtime);
+  self setanim(%aim_8, 0, transtime);
+  self setanim(%add_idle, 0, transtime);
 }
 
 turnsetupidle(transtime) {
   self setanimlimited(animarray("straight_level"), 1, transtime);
-  self setanim( % add_idle, 1, transtime);
+  self setanim(%add_idle, 1, transtime);
   trackloopstart();
 }
 

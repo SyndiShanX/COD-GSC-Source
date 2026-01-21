@@ -2021,11 +2021,7 @@ killShouldAddToKillstreak(weapon) {
 
   if(isDefined(level.killstreakWeildWeapons[weapon]) && isDefined(self.streakType) && self.streakType != "support") {
     for(i = KILLSTREAK_SLOT_1; i < KILLSTREAK_SLOT_3 + 1; i++) {
-      if(isDefined(self_pers_killstreaks[i]) &&
-        isDefined(self_pers_killstreaks[i].streakName) &&
-        self_pers_killstreaks[i].streakName == level.killstreakWeildWeapons[weapon] &&
-        isDefined(self_pers_killstreaks[i].lifeId) &&
-        self_pers_killstreaks[i].lifeId == self.pers["deaths"]) {
+      if(isDefined(self_pers_killstreaks[i]) && isDefined(self_pers_killstreaks[i].streakName) && self_pers_killstreaks[i].streakName == level.killstreakWeildWeapons[weapon] && isDefined(self_pers_killstreaks[i].lifeId) && self_pers_killstreaks[i].lifeId == self.pers["deaths"]) {
         return self streakShouldChain(level.killstreakWeildWeapons[weapon]);
       }
     }
@@ -3166,10 +3162,7 @@ weaponMap(weaponName) {
 }
 
 weaponHasIntegratedSilencer(baseWeapon) {
-  return (baseWeapon == "iw6_vks" ||
-    baseWeapon == "iw6_k7" ||
-    baseWeapon == "iw6_honeybadger"
-  );
+  return (baseWeapon == "iw6_vks" || baseWeapon == "iw6_k7" || baseWeapon == "iw6_honeybadger");
 }
 
 weaponIsFireTypeBurst(weaponName) {
@@ -3255,9 +3248,7 @@ touchingBadTrigger(optionalEnt) {
   foreach(trigger in killTriggers) {
     if(self isTouching(trigger)
 
-      &&
-      (level.mapName != "mp_mine" || trigger.dmg > 0)
-    )
+      && (level.mapName != "mp_mine" || trigger.dmg > 0))
       return true;
   }
 
@@ -3763,10 +3754,7 @@ allowClassChoice() {
 }
 
 showFakeLoadout() {
-  if(level.gameType == "sotf" ||
-    level.gameType == "sotf_ffa" ||
-    level.gametype == "gun" ||
-    level.gameType == "infect")
+  if(level.gameType == "sotf" || level.gameType == "sotf_ffa" || level.gametype == "gun" || level.gameType == "infect")
     return true;
 
   if(level.gameType == "horde" && !matchMakingGame() && IsSplitScreen())
@@ -4422,9 +4410,7 @@ isValidTeamTarget(attacker, victimTeam, target) {
 }
 
 isValidFFATarget(attacker, victimTeam, target) {
-  return (isDefined(target.owner) &&
-    (!isDefined(attacker) || target.owner != attacker)
-  );
+  return (isDefined(target.owner) && (!isDefined(attacker) || target.owner != attacker));
 }
 
 getHeliPilotMeshOffset() {
@@ -4630,10 +4616,7 @@ weaponIgnoresBlastShield(sWeapon) {
 }
 
 isWeaponAffectedByBlastShield(sWeapon) {
-  return (
-    sWeapon == "ims_projectile_mp" ||
-    sWeapon == "remote_tank_projectile_mp"
-  );
+  return (sWeapon == "ims_projectile_mp" || sWeapon == "remote_tank_projectile_mp");
 }
 
 restoreBaseVisionSet(fadeTime) {
@@ -4811,8 +4794,7 @@ isUsingDefaultClass(team, index) {
 canCustomJuggUseKillstreak(streakNameWeapon) {
   useKillstreak = true;
 
-  if((isDefined(self.isJuggernautLevelCustom) && self.isJuggernautLevelCustom) &&
-    (isDefined(self.canUseKillstreakCallback) && !self[[self.canUseKillstreakCallback]](streakNameWeapon)))
+  if((isDefined(self.isJuggernautLevelCustom) && self.isJuggernautLevelCustom) && (isDefined(self.canUseKillstreakCallback) && !self[[self.canUseKillstreakCallback]](streakNameWeapon)))
     useKillstreak = false;
 
   return useKillstreak;

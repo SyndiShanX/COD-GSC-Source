@@ -34,7 +34,7 @@ main() {
   assert(isDefined(startNode));
   self OrientMode("face angle", node.angles[1]);
 
-  self setFlaggedAnimKnoball("climbanim", climbAnim, % body, 1, .3, 1);
+  self setFlaggedAnimKnoball("climbanim", climbAnim, %body, 1, .3, 1);
 
   cycleDelta = GetMoveDelta(climbAnim, 0, 1);
   cycleDelta = (cycleDelta[0], cycleDelta[1], 0);

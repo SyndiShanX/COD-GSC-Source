@@ -32,13 +32,13 @@ main() {
     if(isDefined(self.grenade) && trydive(var_0)) {
       return;
     }
-    self setflaggedanimknoballrestart("cowerstart", animscripts\utility::lookupanim("grenade", "cower_squat"), % body, 1, 0.2);
+    self setflaggedanimknoballrestart("cowerstart", animscripts\utility::lookupanim("grenade", "cower_squat"), %body, 1, 0.2);
     animscripts\shared::donotetracks("cowerstart");
   }
 
   self.a.pose = "crouch";
   self.a.movement = "stop";
-  self setflaggedanimknoballrestart("cower", animscripts\utility::lookupanim("grenade", "cower_squat_idle"), % body, 1, 0.2);
+  self setflaggedanimknoballrestart("cower", animscripts\utility::lookupanim("grenade", "cower_squat_idle"), %body, 1, 0.2);
   animscripts\shared::donotetracks("cower");
   self waittill("never");
 }
@@ -68,7 +68,7 @@ trydive(var_0) {
     return 0;
 
   self.safetochangescript = 0;
-  self setflaggedanimknoballrestart("cowerstart", var_1, % body, 1, 0.2);
+  self setflaggedanimknoballrestart("cowerstart", var_1, %body, 1, 0.2);
   animscripts\shared::donotetracks("cowerstart");
   self.safetochangescript = 1;
   return 1;

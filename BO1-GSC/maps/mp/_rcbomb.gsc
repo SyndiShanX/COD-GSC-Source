@@ -90,12 +90,7 @@ spawnRCBomb(placement, team) {
   enemymodel = "t5_veh_rcbomb_axis";
   death_model = "t5_veh_rcbomb_allies";
   car = "rc_car_medium_mp";
-  vehicle = SpawnVehicle(
-    model,
-    "rcbomb",
-    car,
-    placement.origin,
-    placement.angles);
+  vehicle = SpawnVehicle(model, "rcbomb", car, placement.origin, placement.angles);
   vehicle MakeVehicleUnusable();
   vehicle.death_model = death_model;
   vehicle.allowFriendlyFireDamageOverride = ::RCCarAllowFriendlyFireDamage;

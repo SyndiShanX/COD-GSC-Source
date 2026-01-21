@@ -589,8 +589,7 @@ mg42_gunner_manual_think(mg42, trigger) {
 
     while(1) {
       for(i = 0; i < 1; i += dif) {
-        targ_org.origin = vector_multiply(current_org, 1.0 - i) +
-          vector_multiply(level.player getorigin() + stance_num(), i);
+        targ_org.origin = vector_multiply(current_org, 1.0 - i) + vector_multiply(level.player getorigin() + stance_num(), i);
 
         if(player_safe())
           i = 2;
@@ -612,8 +611,7 @@ mg42_gunner_manual_think(mg42, trigger) {
         while((player_safe()) && (isDefined(level.player_covertrigger.target)) && (gettime() < shoot_timer)) {
           target = getEntArray(level.player_covertrigger.target, "targetname");
           target = target[randomint(target.size)];
-          targ_org.origin = target.origin +
-            (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
+          targ_org.origin = target.origin +  (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
 
           wait(0.1);
         }
@@ -657,8 +655,7 @@ mg42_gunner_manual_think(mg42, trigger) {
         if(isDefined(level.player_covertrigger)) {
           target = getEntArray(level.player_covertrigger.target, "targetname");
           target = target[randomint(target.size)];
-          targ_org.origin = target.origin +
-            (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
+          targ_org.origin = target.origin +  (randomfloat(30) - 15, randomfloat(30) - 15, randomfloat(40) - 60);
           mg42 settargetentity(targ_org);
           tempmodel.targent = targ_org;
           wait(randomfloat(1));
@@ -1621,8 +1618,7 @@ find_connected_turrets(connection_type) {
     }
     keys = getArrayKeys(self.turret.shared_turrets[connection_type]);
     for(p = 0; p < keys.size; p++) {
-      // go through each key that the turret the guy is currently on has,
-      // and see if any turrets share keys.
+      // go through each key that the turret the guy is currently on has, // and see if any turrets share keys.
       // cast export as a string because arraykeys returns strings
       if(spots[
           export].export+"" != keys[p]) {
@@ -1776,7 +1772,5 @@ Key Pairs:
 	maxrange - maximum firing/sight range.
 	aiSpread - spread of the bullets out of the muzzle in degrees when used by the AI
 	playerSpread - spread of the bullets out of the muzzle in degrees when used by the player
-	defaultmdl="weapon_m2_50cal_center"
-	default:"weaponinfo" "50cal_turret_technical"
-	default:"targetname" "50cal_turret_technical"
+	defaultmdl="weapon_m2_50cal_center"default:"weaponinfo" "50cal_turret_technical"default:"targetname" "50cal_turret_technical"
 */

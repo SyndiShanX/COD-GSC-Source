@@ -77,11 +77,7 @@ onPlayerSpawned() {
     self SetStance("stand");
     self.dog_damage_func = maps\_zombietron_ai_dog::dog_player_damage;
     self maps\_zombietron_score::update_multiplier_bar(0);
-    self SetClientDvars("cg_objectiveIndicatorFarFadeDist", "120000",
-      "cg_objectiveIndicatornearFadeDist", "0",
-      "ik_enable", 0,
-      "cg_drawCrosshair", 0,
-      "bg_legYawTolerance", 0);
+    self SetClientDvars("cg_objectiveIndicatorFarFadeDist", "120000", "cg_objectiveIndicatornearFadeDist", "0", "ik_enable", 0, "cg_drawCrosshair", 0, "bg_legYawTolerance", 0);
     self setClientDvars("aim_lockon_pitch_strength", 0.0, "hud_drawHUD", "1", "cl_scoreDraw", "1");
     SetSavedDvar("phys_maxFloatTime", 10000);
     level.xenon = (GetDvar(#"xenonGame") == "true");

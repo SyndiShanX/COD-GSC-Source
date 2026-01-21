@@ -29,6 +29,6 @@ main() {
 
   jumpanim = jumpAnims[randomint(jumpAnims.size)];
 
-  self setFlaggedAnimKnoballRestart("jumpanim", jumpanim, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("jumpanim", jumpanim, %body, 1, .1, 1);
   self animscripts\shared::DoNoteTracks("jumpanim");
 }

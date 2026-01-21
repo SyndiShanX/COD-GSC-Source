@@ -683,7 +683,7 @@ helipad_ai_plant_shield(n_plant) {
 
 deploy_shield() {
   self useanimtree(#animtree);
-  self setanim( % o_mon_04_06_riot_shield_plant, 1.0, 0.0, 1.0);
+  self setanim(%o_mon_04_06_riot_shield_plant, 1.0, 0.0, 1.0);
   wait 0.8;
   playFXOnTag(getfx("shield_lights"), self, "tag_fx");
 }
@@ -1002,7 +1002,7 @@ heli_killed_death_watch() {
 
 heli_killed_fake() {
   self useanimtree(#animtree);
-  self setflaggedanim("notetrack", % fxanim_monsoon_heli_explode_anim, 1.0, 0.0, 1.0);
+  self setflaggedanim("notetrack", %fxanim_monsoon_heli_explode_anim, 1.0, 0.0, 1.0);
   wait 0.05;
   self setModel("veh_t6_air_future_attack_heli_drone_dead");
 
@@ -1042,15 +1042,15 @@ heli_killed_damage_watch() {
 }
 
 heli_landing_gear_down() {
-  self setanim( % veh_anim_future_heli_geardown, 1.0, 0.0, 1.0);
+  self setanim(%veh_anim_future_heli_geardown, 1.0, 0.0, 1.0);
 }
 
 heli_weapons_bay_close() {
-  self setanim( % veh_anim_future_heli_bay_closed, 1.0, 0.0, 1.0);
+  self setanim(%veh_anim_future_heli_bay_closed, 1.0, 0.0, 1.0);
 }
 
 heli_weapons_bay_open() {
-  self setanimknob( % veh_anim_future_heli_bay_open, 1.0, 0.0, 1.0);
+  self setanimknob(%veh_anim_future_heli_bay_open, 1.0, 0.0, 1.0);
 }
 
 outer_ruins_main() {

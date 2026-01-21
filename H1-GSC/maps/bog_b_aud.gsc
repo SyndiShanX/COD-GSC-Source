@@ -58,12 +58,7 @@ launch_line_emitters() {
 
 create_level_envelop_arrays() {
   level.aud.envs = [];
-  level.aud.envs["example_envelop"] = [[0.0, 0.0],
-    [0.082, 0.426],
-    [0.238, 0.736],
-    [0.408, 0.844],
-    [0.756, 0.953],
-    [1.0, 1.0]];
+  level.aud.envs["example_envelop"] = [[0.0, 0.0], [0.082, 0.426], [0.238, 0.736], [0.408, 0.844], [0.756, 0.953], [1.0, 1.0]];
 }
 
 precache_presets() {}

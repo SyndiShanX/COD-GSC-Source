@@ -160,26 +160,10 @@ create_player_influencers() {
   forward = (1, 0, 0);
   cylinder_forward = up;
   cylinder_up = forward;
-  self.influencer_enemy_sphere = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_PLAYER,
-    origin,
-    level.spawnsystem.enemy_influencer_radius,
-    level.spawnsystem.enemy_influencer_score,
-    other_team_mask,
-    "enemy,r,s",
-    get_score_curve_index(level.spawnsystem.enemy_influencer_score_curve),
-    0,
-    self);
+  self.influencer_enemy_sphere = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_PLAYER, origin, level.spawnsystem.enemy_influencer_radius, level.spawnsystem.enemy_influencer_score, other_team_mask, "enemy,r,s", get_score_curve_index(level.spawnsystem.enemy_influencer_score_curve), 0, self);
   if(level.teambased) {
     cylinder_up = -1.0 * forward;
-    self.influencer_friendly_sphere = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_PLAYER,
-      origin,
-      level.spawnsystem.friend_weak_influencer_radius,
-      level.spawnsystem.friend_weak_influencer_score,
-      team_mask,
-      "friend_weak,r,s",
-      get_score_curve_index(level.spawnsystem.friend_weak_influencer_score_curve),
-      0,
-      self);
+    self.influencer_friendly_sphere = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_PLAYER, origin, level.spawnsystem.friend_weak_influencer_radius, level.spawnsystem.friend_weak_influencer_score, team_mask, "friend_weak,r,s", get_score_curve_index(level.spawnsystem.friend_weak_influencer_score_curve), 0, self);
   }
   self.spawn_influencers_created = true;
   if(!isDefined(self.pers["team"]) || self.pers["team"] == "spectator") {
@@ -245,14 +229,7 @@ create_body_influencers() {
   } else {
     team_mask = level.spawnsystem.iSPAWN_TEAMMASK_FREE;
   }
-  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    self.origin,
-    level.spawnsystem.dead_friend_influencer_radius,
-    level.spawnsystem.dead_friend_influencer_score,
-    team_mask,
-    "dead_friend,r,s",
-    get_score_curve_index(level.spawnsystem.dead_friend_influencer_score_curve),
-    level.spawnsystem.dead_friend_influencer_timeout_seconds);
+  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, self.origin, level.spawnsystem.dead_friend_influencer_radius, level.spawnsystem.dead_friend_influencer_score, team_mask, "dead_friend,r,s", get_score_curve_index(level.spawnsystem.dead_friend_influencer_score_curve), level.spawnsystem.dead_friend_influencer_timeout_seconds);
 }
 create_grenade_influencers(parent_team, weaponName, grenade) {
   pixbeginevent("create_grenade_influencers");
@@ -274,37 +251,15 @@ create_grenade_influencers(parent_team, weaponName, grenade) {
   }
   if(isDefined(grenade.origin)) {
     if(weaponName == "claymore_mp") {
-      AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-        grenade.origin,
-        level.spawnsystem.claymore_influencer_radius,
-        level.spawnsystem.claymore_influencer_score,
-        weapon_team_mask,
-        "claymore,r,s",
-        get_score_curve_index(level.spawnsystem.claymore_influencer_score_curve),
-        timeout,
-        grenade);
+      AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, grenade.origin, level.spawnsystem.claymore_influencer_radius, level.spawnsystem.claymore_influencer_score, weapon_team_mask, "claymore,r,s", get_score_curve_index(level.spawnsystem.claymore_influencer_score_curve), timeout, grenade);
     } else {
-      AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-        grenade.origin,
-        level.spawnsystem.grenade_influencer_radius,
-        level.spawnsystem.grenade_influencer_score,
-        weapon_team_mask,
-        "grenade,r,s",
-        get_score_curve_index(level.spawnsystem.grenade_influencer_score_curve),
-        timeout,
-        grenade);
+      AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, grenade.origin, level.spawnsystem.grenade_influencer_radius, level.spawnsystem.grenade_influencer_score, weapon_team_mask, "grenade,r,s", get_score_curve_index(level.spawnsystem.grenade_influencer_score_curve), timeout, grenade);
     }
   }
   while(isDefined(grenade.origin)) {
     landpos = grenade predictgrenade();
     if(landpos != (0, 0, 0)) {
-      grenade_endpoint_influencer = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-        landpos,
-        level.spawnsystem.grenade_endpoint_influencer_radius,
-        level.spawnsystem.grenade_endpoint_influencer_score,
-        0,
-        "grenade_endpoint,r,s",
-        get_score_curve_index(level.spawnsystem.grenade_endpoint_influencer_score_curve));
+      grenade_endpoint_influencer = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, landpos, level.spawnsystem.grenade_endpoint_influencer_radius, level.spawnsystem.grenade_endpoint_influencer_score, 0, "grenade_endpoint,r,s", get_score_curve_index(level.spawnsystem.grenade_endpoint_influencer_score_curve));
       wait(0.5);
       if(!isDefined(grenade.origin) && timeout > 0)
         wait(timeout);
@@ -319,38 +274,10 @@ create_napalm_fire_influencers(point, direction, parent_team, duration) {
   timeout = duration;
   weapon_team_mask = 0;
   offset = vector_scale(anglesToForward(direction), 1100);
-  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    (point + (2.0 * offset)),
-    level.spawnsystem.napalm_influencer_radius,
-    level.spawnsystem.napalm_influencer_score,
-    weapon_team_mask,
-    "napalm,r,s",
-    get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve),
-    timeout);
-  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    (point + offset),
-    level.spawnsystem.napalm_influencer_radius,
-    level.spawnsystem.napalm_influencer_score,
-    weapon_team_mask,
-    "napalm,r,s",
-    get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve),
-    timeout);
-  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    point,
-    level.spawnsystem.napalm_influencer_radius,
-    level.spawnsystem.napalm_influencer_score,
-    weapon_team_mask,
-    "napalm,r,s",
-    get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve),
-    timeout);
-  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    (point - offset),
-    level.spawnsystem.napalm_influencer_radius,
-    level.spawnsystem.napalm_influencer_score,
-    weapon_team_mask,
-    "napalm,r,s",
-    get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve),
-    timeout);
+  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, (point + (2.0 * offset)), level.spawnsystem.napalm_influencer_radius, level.spawnsystem.napalm_influencer_score, weapon_team_mask, "napalm,r,s", get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve), timeout);
+  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, (point + offset), level.spawnsystem.napalm_influencer_radius, level.spawnsystem.napalm_influencer_score, weapon_team_mask, "napalm,r,s", get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve), timeout);
+  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, point, level.spawnsystem.napalm_influencer_radius, level.spawnsystem.napalm_influencer_score, weapon_team_mask, "napalm,r,s", get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve), timeout);
+  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, (point - offset), level.spawnsystem.napalm_influencer_radius, level.spawnsystem.napalm_influencer_score, weapon_team_mask, "napalm,r,s", get_score_curve_index(level.spawnsystem.napalm_influencer_score_curve), timeout);
 }
 create_auto_turret_influencer(point, parent_team, angles) {
   if(!level.teambased) {
@@ -359,13 +286,7 @@ create_auto_turret_influencer(point, parent_team, angles) {
     weapon_team_mask = get_team_mask(getotherteam(parent_team));
   }
   projected_point = point + vector_scale(anglesToForward(angles), level.spawnsystem.auto_turret_influencer_radius * 0.7);
-  influencerid = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    projected_point,
-    level.spawnsystem.auto_turret_influencer_radius,
-    level.spawnsystem.auto_turret_influencer_score,
-    weapon_team_mask,
-    "auto_turret,r,s",
-    get_score_curve_index(level.spawnsystem.auto_turret_influencer_score_curve));
+  influencerid = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, projected_point, level.spawnsystem.auto_turret_influencer_radius, level.spawnsystem.auto_turret_influencer_score, weapon_team_mask, "auto_turret,r,s", get_score_curve_index(level.spawnsystem.auto_turret_influencer_score_curve));
   return influencerid;
 }
 create_dog_influencers() {
@@ -374,15 +295,7 @@ create_dog_influencers() {
   } else {
     dog_enemy_team_mask = get_team_mask(getotherteam(self.aiteam));
   }
-  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_DOG,
-    self.origin,
-    level.spawnsystem.dog_influencer_radius,
-    level.spawnsystem.dog_influencer_score,
-    dog_enemy_team_mask,
-    "dog,r,s",
-    get_score_curve_index(level.spawnsystem.dog_influencer_score_curve),
-    0,
-    self);
+  AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_DOG, self.origin, level.spawnsystem.dog_influencer_radius, level.spawnsystem.dog_influencer_score, dog_enemy_team_mask, "dog,r,s", get_score_curve_index(level.spawnsystem.dog_influencer_score_curve), 0, self);
 }
 create_helicopter_influencers(parent_team) {
   if(!level.teambased) {
@@ -390,18 +303,7 @@ create_helicopter_influencers(parent_team) {
   } else {
     team_mask = get_team_mask(getotherteam(parent_team));
   }
-  self.influencer_helicopter_cylinder = AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    self.origin,
-    (0, 0, 0),
-    (0, 0, 0),
-    level.spawnsystem.helicopter_influencer_radius,
-    level.spawnsystem.helicopter_influencer_length,
-    level.spawnsystem.helicopter_influencer_score,
-    team_mask,
-    "helicopter,r,s",
-    get_score_curve_index(level.spawnsystem.helicopter_influencer_score_curve),
-    0,
-    self);
+  self.influencer_helicopter_cylinder = AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, self.origin, (0, 0, 0), (0, 0, 0), level.spawnsystem.helicopter_influencer_radius, level.spawnsystem.helicopter_influencer_length, level.spawnsystem.helicopter_influencer_score, team_mask, "helicopter,r,s", get_score_curve_index(level.spawnsystem.helicopter_influencer_score_curve), 0, self);
 }
 remove_helicopter_influencers() {
   if(isDefined(self.influencer_helicopter_cylinder))
@@ -414,18 +316,7 @@ create_tvmissile_influencers(parent_team) {
   } else {
     team_mask = get_team_mask(getotherteam(parent_team));
   }
-  self.influencer_tvmissile_cylinder = AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    self.origin,
-    (0, 0, 0),
-    (0, 0, 0),
-    level.spawnsystem.tvmissile_influencer_radius,
-    level.spawnsystem.tvmissile_influencer_length,
-    level.spawnsystem.tvmissile_influencer_score,
-    team_mask,
-    "tvmissile,r,s",
-    get_score_curve_index(level.spawnsystem.tvmissile_influencer_score_curve),
-    0,
-    self);
+  self.influencer_tvmissile_cylinder = AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, self.origin, (0, 0, 0), (0, 0, 0), level.spawnsystem.tvmissile_influencer_radius, level.spawnsystem.tvmissile_influencer_length, level.spawnsystem.tvmissile_influencer_score, team_mask, "tvmissile,r,s", get_score_curve_index(level.spawnsystem.tvmissile_influencer_score_curve), 0, self);
 }
 remove_tvmissile_influencers() {
   if(isDefined(self.influencer_tvmissile_cylinder))
@@ -438,16 +329,7 @@ create_artillery_influencers(point, radius) {
     thisradius = level.spawnsystem.artillery_influencer_radius;
   else
     thisradius = radius;
-  return AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    point + (0, 0, -2000),
-    (1, 0, 0),
-    (0, 0, 1),
-    thisradius,
-    5000,
-    level.spawnsystem.artillery_influencer_score,
-    weapon_team_mask,
-    "artillery,s,r",
-    get_score_curve_index(level.spawnsystem.artillery_influencer_score_curve));
+  return AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, point + (0, 0, -2000), (1, 0, 0), (0, 0, 1), thisradius, 5000, level.spawnsystem.artillery_influencer_score, weapon_team_mask, "artillery,s,r", get_score_curve_index(level.spawnsystem.artillery_influencer_score_curve));
 }
 create_vehicle_influencers() {
   weapon_team_mask = 0;
@@ -457,40 +339,20 @@ create_vehicle_influencers() {
   forward = (1, 0, 0);
   cylinder_forward = up;
   cylinder_up = forward;
-  return AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_VEHICLE,
-    self.origin,
-    cylinder_forward,
-    cylinder_up,
-    vehicleRadius,
-    cylinderLength,
-    level.spawnsystem.vehicle_influencer_score,
-    weapon_team_mask,
-    "vehicle,s",
-    get_score_curve_index(level.spawnsystem.vehicle_influencer_score_curve),
-    0,
-    self);
+  return AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_VEHICLE, self.origin, cylinder_forward, cylinder_up, vehicleRadius, cylinderLength, level.spawnsystem.vehicle_influencer_score, weapon_team_mask, "vehicle,s", get_score_curve_index(level.spawnsystem.vehicle_influencer_score_curve), 0, self);
 }
 create_rcbomb_influencers(team) {
   if(!level.teambased)
     other_team_mask = level.spawnsystem.iSPAWN_TEAMMASK_FREE;
   else
     other_team_mask = get_team_mask(getotherteam(team));
-  return AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
-    self.origin,
-    level.spawnsystem.rcbomb_influencer_radius,
-    level.spawnsystem.rcbomb_influencer_score,
-    other_team_mask,
-    "rcbomb,r,s",
-    get_score_curve_index(level.spawnsystem.rcbomb_influencer_score_curve),
-    0,
-    self);
+  return AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL, self.origin, level.spawnsystem.rcbomb_influencer_radius, level.spawnsystem.rcbomb_influencer_score, other_team_mask, "rcbomb,r,s", get_score_curve_index(level.spawnsystem.rcbomb_influencer_score_curve), 0, self);
 }
 create_map_placed_influencers() {
   staticInfluencerEnts = getEntArray("mp_uspawn_influencer", "classname");
   for(i = 0; i < staticInfluencerEnts.size; i++) {
     staticInfluencerEnt = staticInfluencerEnts[i];
-    if(isDefined(staticInfluencerEnt.script_gameobjectname) &&
-      staticInfluencerEnt.script_gameobjectname == "twar") {
+    if(isDefined(staticInfluencerEnt.script_gameobjectname) && staticInfluencerEnt.script_gameobjectname == "twar") {
       continue;
     }
     create_map_placed_influencer(staticInfluencerEnt);
@@ -498,9 +360,7 @@ create_map_placed_influencers() {
 }
 create_map_placed_influencer(influencer_entity, optional_score_override) {
   influencer_id = -1;
-  if(isDefined(influencer_entity.script_shape) &&
-    isDefined(influencer_entity.script_score) &&
-    isDefined(influencer_entity.script_score_curve)) {
+  if(isDefined(influencer_entity.script_shape) && isDefined(influencer_entity.script_score) && isDefined(influencer_entity.script_score_curve)) {
     switch (influencer_entity.script_shape) {
       case "sphere": {
         if(isDefined(influencer_entity.radius)) {
@@ -509,36 +369,20 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
           } else {
             score = influencer_entity.script_score;
           }
-          influencer_id = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-            influencer_entity.origin,
-            influencer_entity.radius,
-            score,
-            get_team_mask(influencer_entity.script_team),
-            "*map_defined",
-            get_score_curve_index(influencer_entity.script_score_curve));
+          influencer_id = AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, influencer_entity.origin, influencer_entity.radius, score, get_team_mask(influencer_entity.script_team), "*map_defined", get_score_curve_index(influencer_entity.script_score_curve));
         } else {
           assertmsg("Radiant-placed sphere spawn influencers require 'radius' parameter");
         }
         break;
       }
       case "cylinder": {
-        if(isDefined(influencer_entity.radius) &&
-          isDefined(influencer_entity.height)) {
+        if(isDefined(influencer_entity.radius) && isDefined(influencer_entity.height)) {
           if(isDefined(optional_score_override)) {
             score = optional_score_override;
           } else {
             score = influencer_entity.script_score;
           }
-          influencer_id = AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-            influencer_entity.origin,
-            anglesToForward(influencer_entity.angles),
-            AnglesToUp(influencer_entity.angles),
-            influencer_entity.radius,
-            influencer_entity.height,
-            score,
-            get_team_mask(influencer_entity.script_team),
-            "*map_defined",
-            get_score_curve_index(influencer_entity.script_score_curve));
+          influencer_id = AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, influencer_entity.origin, anglesToForward(influencer_entity.angles), AnglesToUp(influencer_entity.angles), influencer_entity.radius, influencer_entity.height, score, get_team_mask(influencer_entity.script_team), "*map_defined", get_score_curve_index(influencer_entity.script_score_curve));
         } else {
           assertmsg("Radiant-placed cylinder spawn influencers require 'radius' and 'height' parameters");
         }
@@ -559,14 +403,7 @@ create_enemy_spawned_influencers(origin, team) {
     other_team_mask = level.spawnsystem.iSPAWN_TEAMMASK_FREE;
   else
     other_team_mask = get_team_mask(getotherteam(team));
-  return AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_ENEMY_SPAWNED,
-    origin,
-    level.spawnsystem.enemy_spawned_influencer_radius,
-    level.spawnsystem.enemy_spawned_influencer_score,
-    other_team_mask,
-    "enemy_spawned,r,s",
-    get_score_curve_index(level.spawnsystem.enemy_spawned_influencer_score_curve),
-    7);
+  return AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_ENEMY_SPAWNED, origin, level.spawnsystem.enemy_spawned_influencer_radius, level.spawnsystem.enemy_spawned_influencer_score, other_team_mask, "enemy_spawned,r,s", get_score_curve_index(level.spawnsystem.enemy_spawned_influencer_score_curve), 7);
 }
 updateAllSpawnPoints() {
   gatherSpawnEntities("allies");
@@ -695,8 +532,7 @@ onSpawnPlayer_Unified() {
   prof_end("onSpawnPlayer_Unified");
   return;
 }
-getSpawnPoint(
-  player_entity) {
+getSpawnPoint(player_entity) {
   if(level.teambased) {
     point_team = player_entity.pers["team"];
     influencer_team = player_entity.pers["team"];
@@ -803,17 +639,12 @@ gatherSpawnEntities(player_team) {
   return spawn_entities_s;
 }
 is_hardcore() {
-  return isDefined(level.hardcoreMode) &&
-    level.hardcoreMode;
+  return isDefined(level.hardcoreMode) && level.hardcoreMode;
 }
-teams_have_enmity(
-  team1,
-  team2) {
+teams_have_enmity(team1, team2) {
   if(!isDefined(team1) || !isDefined(team2) || (level.gameType == "dm"))
     return true;
-  return team1 != "neutral" &&
-    team2 != "neutral" &&
-    team1 != team2;
+  return team1 != "neutral" && team2 != "neutral" && team1 != team2;
 }
 remove_unused_spawn_entities() {
   spawn_entity_types = [];

@@ -1383,7 +1383,7 @@ func_1510(var_0) {
 func_150B() {
   self.disabled = 1;
   self notify("aatis_turret_disabled");
-  self clearanim( % ph_aatis_gun_fire, 0.05);
+  self clearanim(%ph_aatis_gun_fire, 0.05);
   self cleartargetentity();
 }
 
@@ -1480,10 +1480,10 @@ func_150C(var_0) {
   self endon("death");
   self endon("aatis_turret_disabled");
   self.var_DD7B = undefined;
-  self clearanim( % ph_aatis_gun_fire, 0.05);
+  self clearanim(%ph_aatis_gun_fire, 0.05);
   wait 0.05;
   self shootturret();
-  self give_attacker_kill_rewards( % ph_aatis_gun_fire);
+  self give_attacker_kill_rewards(%ph_aatis_gun_fire);
   self playSound("weap_aatis_fire");
 
   if(distance2dsquared(level.player.origin, self.origin) <= squared(20000)) {

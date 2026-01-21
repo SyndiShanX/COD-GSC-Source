@@ -141,7 +141,7 @@ melee_mpla_pain_override() {
         painanim = % ai_digbat_melee_run_f_stumble_l;
     }
 
-    self setflaggedanimknoballrestart("meleepainanim", painanim, % body, 1, 0.1, 1.0);
+    self setflaggedanimknoballrestart("meleepainanim", painanim, %body, 1, 0.1, 1.0);
     animlength = getanimlength(painanim);
     self animscripts\shared::donotetracksfortime(animlength - 0.2, "meleepainanim");
   } else {
@@ -150,7 +150,7 @@ melee_mpla_pain_override() {
     else
       painanim = % ai_digbat_melee_idle_pain_02;
 
-    self setflaggedanimknoballrestart("meleepainanim", painanim, % body, 1, 0.1, 1.0);
+    self setflaggedanimknoballrestart("meleepainanim", painanim, %body, 1, 0.1, 1.0);
     animlength = getanimlength(painanim);
     self animscripts\shared::donotetracksfortime(animlength - 0.2, "meleepainanim");
   }

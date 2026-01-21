@@ -911,12 +911,12 @@ collapsed_derrick_wire_anims() {
   var_0 = getent("derrick_wires", "targetname");
   var_0.animname = "derrick_wires";
   var_0 maps\_anim::setanimtree();
-  var_0 setanim( % blackice_derrick_collapse_wires_1, 1, 0, 1);
-  var_0 setanim( % blackice_derrick_collapse_wires_2, 1, 0, 1);
-  var_0 setanim( % blackice_derrick_collapse_wires_3, 1, 0, 1);
-  var_0 setanim( % blackice_derrick_collapse_wires_4, 1, 0, 1);
-  var_0 setanim( % blackice_derrick_collapse_wires_5, 1, 0, 1);
-  var_0 setanim( % blackice_derrick_collapse_wires_6, 1, 0, 1);
+  var_0 setanim(%blackice_derrick_collapse_wires_1, 1, 0, 1);
+  var_0 setanim(%blackice_derrick_collapse_wires_2, 1, 0, 1);
+  var_0 setanim(%blackice_derrick_collapse_wires_3, 1, 0, 1);
+  var_0 setanim(%blackice_derrick_collapse_wires_4, 1, 0, 1);
+  var_0 setanim(%blackice_derrick_collapse_wires_5, 1, 0, 1);
+  var_0 setanim(%blackice_derrick_collapse_wires_6, 1, 0, 1);
 }
 
 #using_animtree("vehicles");

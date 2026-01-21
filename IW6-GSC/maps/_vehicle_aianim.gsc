@@ -2074,9 +2074,7 @@ animate_guys(var_0) {
     if(!isalive(var_3)) {
       continue;
     }
-    if(isDefined(level.vehicle_aianimcheck[var_0]) && ![
-        [level.vehicle_aianimcheck[var_0]]
-      ](var_3, var_3.vehicle_position)) {
+    if(isDefined(level.vehicle_aianimcheck[var_0]) && ![[level.vehicle_aianimcheck[var_0]]](var_3, var_3.vehicle_position)) {
       continue;
     }
     if(isDefined(level.vehicle_aianimthread[var_0])) {

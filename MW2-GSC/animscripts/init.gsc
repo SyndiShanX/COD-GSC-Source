@@ -9,13 +9,10 @@
 // Anim variables
 // --------------
 // Anim variables keep track of what the character is doing with respect to his
-// animations.They know if he's standing, crouching, kneeling, walking, running, etc,
-// so that he can play appropriate transitions to get to the animation he wants.
-// anim_movement - "stop", "walk", "run"
-// anim_pose - "stand", "crouch", "prone", some others for pain poses.
+// animations.They know if he's standing, crouching, kneeling, walking, running, etc, // so that he can play appropriate transitions to get to the animation he wants.
+// anim_movement - "stop", "walk", "run"// anim_pose - "stand", "crouch", "prone", some others for pain poses.
 // I'm putting functions to do the basic animations to change these variables in
-// SetPoseMovement.gsc,
-//
+// SetPoseMovement.gsc, //
 // Error Reporting
 // ---------------
 // To report a script error condition (similar to assert(0)), I assign a non-existent variable to
@@ -315,8 +312,7 @@ setNameAndRank_andAddToSquad() {
 
   self maps\_names::get_name();
 
-  // needs to run after the name has been set since bcs changes self.voice from "multilingual"
-  //to something more specific
+  // needs to run after the name has been set since bcs changes self.voice from "multilingual"//to something more specific
   self thread animscripts\squadManager::addToSquad(); // slooooow
 }
 
@@ -647,8 +643,7 @@ beginGrenadeTracking() {
 }
 
 setupRandomTable() {
-  // 60 is chosen because it is divisible by 1,2,3,4,5, and 6,
-  // and it's also high enough to get some good randomness over different seed values
+  // 60 is chosen because it is divisible by 1,2,3,4,5, and 6, // and it's also high enough to get some good randomness over different seed values
   anim.randomIntTableSize = 60;
 
   // anim.randomIntTable is a permutation of integers 0 through anim.randomIntTableSize - 1

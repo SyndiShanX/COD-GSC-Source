@@ -611,7 +611,7 @@ init_chaos_animset() {
   var_0 = [];
   var_0["sprint"] = % youngblood_hesh_sprint;
   var_0["straight"] = % youngblood_hesh_run_faster;
-  var_0["straight_twitch"] = [ % youngblood_hesh_run_twitch_a, % youngblood_hesh_run_twitch_b];
+  var_0["straight_twitch"] = [ % youngblood_hesh_run_twitch_a, %youngblood_hesh_run_twitch_b];
   var_0["walk"] = % youngblood_hesh_run_faster;
   var_0["move_f"] = % youngblood_hesh_run_faster;
   var_0["move_l"] = % walk_left;
@@ -737,7 +737,7 @@ yb_calm_startmovetransition() {
   self animmode("zonly_physics", 0);
   var_1 = randomfloatrange(0.9, 1.1);
   var_2 = % youngblood_hesh_calm_idle_2_walk;
-  self setflaggedanimknoballrestart("startmove", var_2, % body, 1, 0.1, var_1);
+  self setflaggedanimknoballrestart("startmove", var_2, %body, 1, 0.1, var_1);
   animscripts\shared::donotetracks("startmove");
   self orientmode("face default");
   self animmode("none", 0);
@@ -751,14 +751,14 @@ yb_calm_stopmovetransition() {
     return;
   }
   var_0 = % youngblood_hesh_walk_2_calm_idle;
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("coverArrival", var_0, 1, 0.2, self.movetransitionrate);
   animscripts\face::playfacialanim(var_0, "run");
   animscripts\shared::donotetracks("coverArrival", animscripts\cover_arrival::handlestartaim);
   self.a.pose = "stand";
   self.a.movement = "stop";
   self.a.arrivaltype = self.approachtype;
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   self.lastapproachaborttime = undefined;
 }
 
@@ -774,7 +774,7 @@ yb_alert_startmovetransition() {
   self animmode("zonly_physics", 0);
   var_1 = randomfloatrange(0.9, 1.1);
   var_2 = % youngblood_hesh_alert_idle_2_run;
-  self setflaggedanimknoballrestart("startmove", var_2, % body, 1, 0.1, var_1);
+  self setflaggedanimknoballrestart("startmove", var_2, %body, 1, 0.1, var_1);
   animscripts\shared::donotetracks("startmove");
   self orientmode("face default");
   self animmode("none", 0);
@@ -788,14 +788,14 @@ yb_alert_stopmovetransition() {
     return;
   }
   var_0 = % youngblood_hesh_run_2_alert_idle;
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("coverArrival", var_0, 1, 0.2, self.movetransitionrate);
   animscripts\face::playfacialanim(var_0, "run");
   animscripts\shared::donotetracks("coverArrival", animscripts\cover_arrival::handlestartaim);
   self.a.pose = "stand";
   self.a.movement = "stop";
   self.a.arrivaltype = self.approachtype;
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   self.lastapproachaborttime = undefined;
 }
 

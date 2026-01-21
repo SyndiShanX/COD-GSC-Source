@@ -837,7 +837,7 @@ force_traversal_check_hit() {
   for(;;) {
     self waittill("damage", var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
     maps\loki_util::jkuprint(self.animname + " hit while in traversal");
-    self setanimrestart( % loki_traversal_pain_1, 1, 0.2);
+    self setanimrestart(%loki_traversal_pain_1, 1, 0.2);
     wait 0.5;
   }
 }

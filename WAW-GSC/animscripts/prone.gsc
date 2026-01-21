@@ -54,15 +54,15 @@ ProneTurningThread(threadToSpawn, killmeString) {
             amount = 0.01;
           else if(amount > 0.99)
             amount = 0.99;
-          self SetAnimKnob( % prone_straight, 1.0 - amount, 0.1, 1);
-          self SetAnim( % prone_right45, amount, 0.1, 1);
-          self SetAnim( % prone_left45, 0.01, 0.1, 1);
+          self SetAnimKnob(%prone_straight, 1.0 - amount, 0.1, 1);
+          self SetAnim(%prone_right45, amount, 0.1, 1);
+          self SetAnim(%prone_left45, 0.01, 0.1, 1);
         }
         if(yawDelta > 45) {
           self notify("kill ProneTurningThread children");
-          self setFlaggedAnimKnobRestart("turn anim", % prone_turn_right, 1, 0.1, 1);
+          self setFlaggedAnimKnobRestart("turn anim", %prone_turn_right, 1, 0.1, 1);
           self animscripts\shared::DoNoteTracks("turn anim");
-          self UpdateProne( % prone_shootfeet_straight45up, % prone_shootfeet_straight45down, 1, 0.1, 1);
+          self UpdateProne(%prone_shootfeet_straight45up, %prone_shootfeet_straight45down, 1, 0.1, 1);
           if(isDefined(threadToSpawn))
             self thread[[threadToSpawn]]("kill ProneTurningThread children");
         }
@@ -73,15 +73,15 @@ ProneTurningThread(threadToSpawn, killmeString) {
             amount = 0.01;
           else if(amount > 0.99)
             amount = 0.99;
-          self SetAnimKnob( % prone_straight, 1.0 - amount, 0.1, 1);
-          self SetAnim( % prone_left45, amount, 0.1, 1);
-          self SetAnim( % prone_right45, 0.01, 0.1, 1);
+          self SetAnimKnob(%prone_straight, 1.0 - amount, 0.1, 1);
+          self SetAnim(%prone_left45, amount, 0.1, 1);
+          self SetAnim(%prone_right45, 0.01, 0.1, 1);
         }
         if(yawDelta < -45) {
           self notify("kill ProneTurningThread children");
-          self setFlaggedAnimKnobRestart("turn anim", % prone_turn_left, 1, 0.1, 1);
+          self setFlaggedAnimKnobRestart("turn anim", %prone_turn_left, 1, 0.1, 1);
           self animscripts\shared::DoNoteTracks("turn anim");
-          self UpdateProne( % prone_shootfeet_straight45up, % prone_shootfeet_straight45down, 1, 0.1, 1);
+          self UpdateProne(%prone_shootfeet_straight45up, %prone_shootfeet_straight45down, 1, 0.1, 1);
           if(isDefined(threadToSpawn))
             self thread[[threadToSpawn]]("kill ProneTurningThread children");
         }
@@ -173,7 +173,7 @@ ProneShootVolley() {
   self animscripts\face::SetIdleFace(anim.aimface);
   self.a.usingProneLeftAndRight = true;
   self notify("Update prone aim");
-  self setanimknob( % prone, 1, 0.15, 1);
+  self setanimknob(%prone, 1, 0.15, 1);
   rand = randomfloat(1);
   self Set3FlaggedAnimKnobs("shootanim", shootanims, 1, 0.15, 0);
   wait rand;

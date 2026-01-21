@@ -45,11 +45,11 @@ dog() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self orientmode("face angle", startnode.angles[1]);
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self setflaggedanimrestart("traverse", anim.dogtraverseanims["jump_up_40"], 1, 0.1, 1);
   self animscripts\shared::donotetracks("traverse");
   self thread play_sound_in_space("aml_dog_bark", self gettagorigin("tag_eye"));
-  self clearanim( % root, 0);
+  self clearanim(%root, 0);
   self setflaggedanimrestart("traverse", anim.dogtraverseanims["jump_down_40"], 1, 0, 1);
   self animscripts\shared::donotetracks("traverse");
   self traversemode("gravity");

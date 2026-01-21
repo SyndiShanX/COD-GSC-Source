@@ -14,8 +14,8 @@ main() {
   }
 
   self endon("killanimscript");
-  self clearanim( % body, 0.2);
-  self setanim( % dog_idle_knob);
+  self clearanim(%body, 0.2);
+  self setanim(%dog_idle_knob);
   thread waitforstatechange();
   self.dognextidletwitchtime = getdognexttwitchtime();
   self.moveanimtype = "walk";
@@ -232,7 +232,7 @@ turntoangle(var_0, var_1) {
   else
     self animmode("angle deltas");
 
-  self setanim( % dog_idle_knob, 1, var_7);
+  self setanim(%dog_idle_knob, 1, var_7);
   self setflaggedanimknobrestart("dog_turn", var_4, 1, var_7);
 
   if(animhasnotetrack(var_4, "turn_begin") && animhasnotetrack(var_4, "turn_end")) {
@@ -342,10 +342,10 @@ stoplookatidle() {
   self.bidlelooking = undefined;
   self.idletrackloop = undefined;
   self notify("endIdleLookAt");
-  self clearanim( % look_2, 1);
-  self clearanim( % look_4, 1);
-  self clearanim( % look_6, 1);
-  self clearanim( % look_8, 1);
+  self clearanim(%look_2, 1);
+  self clearanim(%look_4, 1);
+  self clearanim(%look_6, 1);
+  self clearanim(%look_8, 1);
 }
 
 lookatidleupdate() {
@@ -426,7 +426,7 @@ idletrackloop() {
   self endon("killanimscript");
   self endon("endIdleLookAt");
   self.idletrackloop = 1;
-  self clearanim( % dog_idle_knob, 0.2);
+  self clearanim(%dog_idle_knob, 0.2);
   self setanimknob(getdogstopanimbase(), 1, 0.5);
   self setanimknoblimited(getdogstopanimlook("2"), 1, 0);
   self setanimknoblimited(getdogstopanimlook("4"), 1, 0);
@@ -477,10 +477,10 @@ idletrackloop() {
     else
       var_14 = clamp(var_9 / var_3, 0, 1);
 
-    self setanimlimited( % look_2, var_14, 1);
-    self setanimlimited( % look_4, var_11, 0.1);
-    self setanimlimited( % look_6, var_12, 0.1);
-    self setanimlimited( % look_8, var_13, 1);
+    self setanimlimited(%look_2, var_14, 1);
+    self setanimlimited(%look_4, var_11, 0.1);
+    self setanimlimited(%look_6, var_12, 0.1);
+    self setanimlimited(%look_8, var_13, 1);
     wait 0.05;
   }
 }
@@ -601,10 +601,10 @@ should_growl() {
 lookattarget(var_0) {
   self endon("killanimscript");
   self endon("stop tracking");
-  self clearanim( % german_shepherd_look_2, 0);
-  self clearanim( % german_shepherd_look_4, 0);
-  self clearanim( % german_shepherd_look_6, 0);
-  self clearanim( % german_shepherd_look_8, 0);
+  self clearanim(%german_shepherd_look_2, 0);
+  self clearanim(%german_shepherd_look_4, 0);
+  self clearanim(%german_shepherd_look_6, 0);
+  self clearanim(%german_shepherd_look_8, 0);
   self setdefaultaimlimits();
   self.rightaimlimit = 90;
   self.leftaimlimit = -90;
@@ -613,7 +613,7 @@ lookattarget(var_0) {
   self setanimlimited(anim.doglookpose[var_0][6], 1, 0);
   self setanimlimited(anim.doglookpose[var_0][8], 1, 0);
   animscripts\track::setanimaimweight(1, 0.2);
-  animscripts\track::trackloop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
+  animscripts\track::trackloop(%german_shepherd_look_2, %german_shepherd_look_4, %german_shepherd_look_6, %german_shepherd_look_8);
 }
 
 playidlesound(var_0) {

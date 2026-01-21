@@ -51,7 +51,7 @@ set_vehicle_anims(positions) {
 
 landing_gear_up() {
   self UseAnimTree(#animtree);
-  self setanim( % mig_landing_gear_up);
+  self setanim(%mig_landing_gear_up);
 }
 
 #using_animtree("generic_human");
@@ -298,7 +298,5 @@ and these lines in your CSV:
 include,vehicle_f15
 sound,vehicle_f15,vehicle_standard,all_sp
 
-defaultmdl="vehicle_f15"
-default:"vehicletype" "f15"
-default:"script_team" "allies"
+defaultmdl="vehicle_f15"default:"vehicletype" "f15"default:"script_team" "allies"
 */

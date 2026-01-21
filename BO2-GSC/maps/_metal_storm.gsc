@@ -1034,7 +1034,7 @@ metalstorm_player_rocket_recoil(player) {
     dir = anglesToForward(angles);
     self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 70.0), 0);
     earthquake(0.4, 0.3, player.origin, 200);
-    self setanimrestart( % o_drone_tank_missile_fire_sp, 1, 0, 0.4);
+    self setanimrestart(%o_drone_tank_missile_fire_sp, 1, 0, 0.4);
   }
 }
 
@@ -1048,7 +1048,7 @@ metalstorm_rocket_recoil() {
     angles = self gettagangles("tag_barrel");
     dir = anglesToForward(angles);
     self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 70.0), 0);
-    self setanimrestart( % o_drone_tank_missile_fire_sp, 1, 0, 0.4);
+    self setanimrestart(%o_drone_tank_missile_fire_sp, 1, 0, 0.4);
   }
 }
 

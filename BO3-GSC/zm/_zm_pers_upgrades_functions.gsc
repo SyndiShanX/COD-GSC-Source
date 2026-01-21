@@ -662,9 +662,7 @@ function pers_treasure_chest_choosespecialweapon(player) {
   if(player.pers_magic_box_weapon_count < 2 && (player.pers_magic_box_weapon_count == 0 || rval < 0.6)) {
     player.pers_magic_box_weapon_count++;
     if(isDefined(level.pers_treasure_chest_get_weapons_array_func)) {
-      [
-        [level.pers_treasure_chest_get_weapons_array_func]
-      ]();
+      [[level.pers_treasure_chest_get_weapons_array_func]]();
     } else {
       pers_treasure_chest_get_weapons_array();
     }

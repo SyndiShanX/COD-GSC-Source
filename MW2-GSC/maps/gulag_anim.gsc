@@ -889,8 +889,7 @@ gulag_vo() {
   level.scr_sound["generic"]["gulag_rpa_int_5"] = "gulag_rpa_int_5";
 
   /*
-  // heavy breathing and "Soap?"
-  level.scr_sound[ "generic" ][ "gulag_pri_soap" ] = "gulag_pri_soap";
+  // heavy breathing and "Soap?"level.scr_sound[ "generic" ][ "gulag_pri_soap" ] = "gulag_pri_soap";
 
   //: just breathing
   level.scr_sound[ "generic" ][ "gulag_pri_breath" ] = "gulag_pri_breath";

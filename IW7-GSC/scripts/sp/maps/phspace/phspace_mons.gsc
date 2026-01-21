@@ -974,7 +974,7 @@ func_D1DE() {
   var_1 linkto(var_0);
   var_1 givegrabscore(1);
   playFXOnTag(scripts\engine\utility::getfx("vfx_ethan_cockpit_light"), var_1, "tag_origin");
-  thread func_0BDC::func_A2B0( % jackal_pilot_heist_mons_intro_lookback, % jackal_vehicle_heist_mons_intro_lookback, 0.2, 1);
+  thread func_0BDC::func_A2B0(%jackal_pilot_heist_mons_intro_lookback, %jackal_vehicle_heist_mons_intro_lookback, 0.2, 1);
   var_0 thread scripts\sp\anim::func_1F35(var_1, "eth3n_sitting");
   wait 3;
   thread func_D12E();

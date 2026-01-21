@@ -95,7 +95,7 @@ snowmobile_loop_driver() {
   anim_length["left2right"] = getanimlength(animarray("left2right"));
   anim_length["right2left"] = getanimlength(animarray("right2left"));
 
-  self setanimknoball( % sm_turn, % body, 1, 0);
+  self setanimknoball(%sm_turn, %body, 1, 0);
   self setanim(animarray("drive"), 1, 0);
   self setanimknob(animarray(current_anim), 1, 0);
   self setanimtime(animarray(current_anim), 0.5);
@@ -135,12 +135,12 @@ snowmobile_loop_passenger() {
   self endon("death");
   self endon("killanimscript");
 
-  self setanimknoball(animarray("hide"), % body, 1, 0);
+  self setanimknoball(animarray("hide"), %body, 1, 0);
   self setanimknob(animarray("drive"), 1, 0);
 
   for(;;) {
     steering = maps\_vehicle::update_steering(self.ridingvehicle);
-    self setanimlimited( % sm_lean, abs(steering), 0.05);
+    self setanimlimited(%sm_lean, abs(steering), 0.05);
     if(steering >= 0) {
       self setanimknoblimited(animarray("lean_right"), 1, 0.05);
     } else {
@@ -158,7 +158,7 @@ snowmobile_loop_driver_shooting() {
   leanblendtime = .05;
   reloadFinishedTime = 0;
 
-  self setanimknoball( % sm_aiming, % body, 1, 0);
+  self setanimknoball(%sm_aiming, %body, 1, 0);
   self setanimknob(animarray("idle"), 1, 0);
 
   for(;;) {
@@ -204,7 +204,7 @@ snowmobile_loop_passenger_shooting() {
 
   leanblendtime = .05;
 
-  self setanimknoball( % sm_aiming, % body, 1, 0);
+  self setanimknoball(%sm_aiming, %body, 1, 0);
   self setanimknob(animarray("idle"), 1, 0);
 
   for(;;) {
@@ -313,7 +313,7 @@ snowmobile_handle_events(rider) {
 snowmobile_start_shooting() {
   self notify("want_shoot_while_driving");
 
-  self setAnim( % sm_add_fire, 1, 0.2);
+  self setAnim(%sm_add_fire, 1, 0.2);
 
   if(isDefined(self.shoot_while_driving_thread))
     return;
@@ -331,7 +331,7 @@ snowmobile_stop_shooting() {
 
   self notify("end_shoot_while_driving");
   self.shoot_while_driving_thread = undefined;
-  self clearAnim( % sm_add_fire, 0.2);
+  self clearAnim(%sm_add_fire, 0.2);
 }
 
 snowmobile_decide_shoot() {
@@ -449,22 +449,22 @@ snowmobile_reload_internal() {
   self.stop_aiming_for_reload = true;
   self waittill("start_blending_reload");
 
-  self setanim( % sm_aiming, 0, 0.25);
+  self setanim(%sm_aiming, 0, 0.25);
   self setflaggedanimrestart("gun_down", animarray("gun_down"), 1, 0.25);
   DoNoteTracks("gun_down");
   self clearAnim(animarray("gun_down"), 0);
 
-  self setflaggedanimknoballrestart("reload_anim", animarray("reload"), % body, 1, 0.25);
+  self setflaggedanimknoballrestart("reload_anim", animarray("reload"), %body, 1, 0.25);
   DoNoteTracks("reload_anim");
-  self clearAnim( % sm_reload, 0.2);
+  self clearAnim(%sm_reload, 0.2);
 
   self setflaggedanimrestart("gun_up", animarray("gun_up"), 1, 0.25);
   self.gun_up_for_reload = true;
   DoNoteTracks("gun_up", ::snowmobile_waitfor_start_aim);
 
   self.stop_aiming_for_reload = undefined;
-  self clearAnim( % sm_reload, 0.1);
-  self setanim( % sm_aiming, 1, 0.1);
+  self clearAnim(%sm_reload, 0.1);
+  self setanim(%sm_aiming, 1, 0.1);
 
   if(isDefined(self.gun_up_for_reload)) {
     self.gun_up_for_reload = undefined;
@@ -548,8 +548,8 @@ snowmobile_trackshootentorpos_driver() {
     weight4 = min(max(0 - yawdelta, 0), 90) / 90 * self.a.aimweight;
     weight6 = min(max(yawdelta, 0), 90) / 90 * self.a.aimweight;
 
-    self setanimlimited( % sm_aim_4, weight4, aimblendtime);
-    self setanimlimited( % sm_aim_6, weight6, aimblendtime);
+    self setanimlimited(%sm_aim_4, weight4, aimblendtime);
+    self setanimlimited(%sm_aim_6, weight6, aimblendtime);
 
     wait(0.05);
   }
@@ -637,11 +637,11 @@ snowmobile_trackshootentorpos_passenger() {
     weight6 = min(max(yawdelta, 0), 90) / 90 * self.a.aimweight;
     weight3 = max(-90 + yawdelta, 0) / 90 * self.a.aimweight;
 
-    self setanimlimited( % sm_aim_1, weight1, aimblendtime);
-    self setanimlimited( % sm_aim_4_delta, weight4, aimblendtime);
-    self setanimlimited( % sm_aim_5_delta, weight5, aimblendtime);
-    self setanimlimited( % sm_aim_6_delta, weight6, aimblendtime);
-    self setanimlimited( % sm_aim_3, weight3, aimblendtime);
+    self setanimlimited(%sm_aim_1, weight1, aimblendtime);
+    self setanimlimited(%sm_aim_4_delta, weight4, aimblendtime);
+    self setanimlimited(%sm_aim_5_delta, weight5, aimblendtime);
+    self setanimlimited(%sm_aim_6_delta, weight6, aimblendtime);
+    self setanimlimited(%sm_aim_3, weight3, aimblendtime);
 
     wait(0.05);
   }

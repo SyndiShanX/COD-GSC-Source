@@ -230,7 +230,7 @@ melee_startmovement() {
 #using_animtree("generic_human");
 
 melee_stopmovement() {
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self.melee.playingmovementanim = undefined;
   self.a.movement = "stop";
   self orientmode("face default");
@@ -328,7 +328,7 @@ melee_standard_main() {
 
     assert(self.a.pose == "stand" || self.a.pose == "crouch");
     self orientmode("face point", self.melee.target.origin);
-    self setflaggedanimknoballrestart("meleeanim", animarray("melee_" + self.melee.meleeanimvarientindex, "combat"), % body, 1, 0.2, self.moveplaybackrate);
+    self setflaggedanimknoballrestart("meleeanim", animarray("melee_" + self.melee.meleeanimvarientindex, "combat"), %body, 1, 0.2, self.moveplaybackrate);
     self.melee.inprogress = 1;
 
     if(!melee_standard_playattackloop()) {
@@ -403,7 +403,7 @@ melee_standard_getinposition() {
 
   if(enemydistancesq <= 4096) {
     self.a.movement = "stop";
-    self setflaggedanimknoball("readyanim", animarray("stand_2_melee_" + self.melee.meleeanimvarientindex, "combat"), % body, 1, 0.3, self.moveplaybackrate);
+    self setflaggedanimknoball("readyanim", animarray("stand_2_melee_" + self.melee.meleeanimvarientindex, "combat"), %body, 1, 0.3, self.moveplaybackrate);
     self animscripts\shared::donotetracks("readyanim");
     return true;
   }
@@ -427,7 +427,7 @@ melee_standard_getinposition() {
   else
     self orientmode("face point", self.melee.target.origin);
 
-  self setflaggedanimknoball("chargeanim", runanim, % body, 1, 0.3, self.moveplaybackrate);
+  self setflaggedanimknoball("chargeanim", runanim, %body, 1, 0.3, self.moveplaybackrate);
   raisinggun = 0;
 
   while(true) {
@@ -437,7 +437,7 @@ melee_standard_getinposition() {
     if(!raisinggun) {
       if(willbewithinrangewhengunisraised) {
         melee_startmovement();
-        self setflaggedanimknoballrestart("chargeanim", animarray("run_2_melee_" + self.melee.meleeanimvarientindex, "combat"), % body, 1, 0.2, self.moveplaybackrate);
+        self setflaggedanimknoballrestart("chargeanim", animarray("run_2_melee_" + self.melee.meleeanimvarientindex, "combat"), %body, 1, 0.2, self.moveplaybackrate);
         raisegunstarttime = time;
         raisinggun = 1;
       }
@@ -446,7 +446,7 @@ melee_standard_getinposition() {
 
       if(time - raisegunstarttime >= raisegunfinishduration || !willbewithinrangewhengunisraised && !withinrangenow) {
         melee_startmovement();
-        self setflaggedanimknoball("chargeanim", runanim, % body, 1, 0.3, self.moveplaybackrate);
+        self setflaggedanimknoball("chargeanim", runanim, %body, 1, 0.3, self.moveplaybackrate);
         raisinggun = 0;
       }
     }
@@ -655,8 +655,8 @@ melee_aivsai_getinposition() {
     return 0;
 
   melee_startmovement();
-  self clearanim( % body, 0.2);
-  self setanimknoball(animscripts\run::getrunanim(), % body, 1, 0.2, self.moveplaybackrate);
+  self clearanim(%body, 0.2);
+  self setanimknoball(animscripts\run::getrunanim(), %body, 1, 0.2, self.moveplaybackrate);
   self animmode("zonly_physics");
   self.keepclaimednode = 1;
   giveuptime = gettime() + 1500;
@@ -705,17 +705,17 @@ melee_aivsai_execute() {
     self orientmode("face current");
 
   self.a.pose = "stand";
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
 
   if(isDefined(self.melee.death))
     self melee_disableinterruptions();
 
-  self setflaggedanimknoballrestart("meleeAnim", self.melee.animname, % body, 1, 0.2, self.moveplaybackrate);
+  self setflaggedanimknoballrestart("meleeAnim", self.melee.animname, %body, 1, 0.2, self.moveplaybackrate);
   endnote = self animscripts\shared::donotetracks("meleeAnim", ::melee_handlenotetracks);
 
   if(endnote == "melee_death" && isDefined(self.melee.survive)) {
     melee_droppedweaponrestore();
-    self setflaggedanimknoballrestart("meleeAnim", self.melee.surviveanimname, % body, 1, 0.2, self.moveplaybackrate);
+    self setflaggedanimknoballrestart("meleeAnim", self.melee.surviveanimname, %body, 1, 0.2, self.moveplaybackrate);
     endnote = self animscripts\shared::donotetracks("meleeAnim", ::melee_handlenotetracks);
   }
 
@@ -1041,9 +1041,7 @@ melee_aivsai_chooseaction() {
     return false;
 
   if(isDefined(self.specialmeleechooseaction)) {
-    if(![
-        [self.specialmeleechooseaction]
-      ]())
+    if(![[self.specialmeleechooseaction]]())
       return false;
 
     self.melee.precisepositioning = 1;
@@ -1186,9 +1184,7 @@ melee_aivsai_exposed_chooseanimationandposition() {
   exposedmelees = melee_aivsai_exposed_chooseanimationandposition_buildexposedlist();
 
   for(i = 0; i < exposedmelees.size; i++) {
-    if([
-        [exposedmelees[i]]
-      ](anglediff)) {
+    if([[exposedmelees[i]]](anglediff)) {
       assert(isDefined(self.melee.animname));
       assert(isDefined(target.melee.animname));
       self.melee.startangles = (0, angletoenemy[1], 0);

@@ -315,9 +315,7 @@ function_702ac990(e_player, e_trig) {
       }
 
       e_player thread function_ae982bb9(#"challenge_available");
-      [
-        [self.var_62368fa4[self.n_challenges_complete]]
-      ](e_player, e_trig, var_5f06d3f8);
+      [[self.var_62368fa4[self.n_challenges_complete]]](e_player, e_trig, var_5f06d3f8);
 
       if(self.n_challenges_complete == 2 && level flag::get("first_player_completed_3rd_challenge") && !level flag::get("challenge_trap_piece_spawned")) {
         level thread function_45f9a547();

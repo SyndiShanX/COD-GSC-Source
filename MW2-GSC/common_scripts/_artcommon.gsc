@@ -38,17 +38,7 @@ setfogsliders() {
   sunFogEndFadeAngle = GetDvar("g_sunFogEndFadeAngleReadOnly");
   sunFogScale = GetDvar("g_sunFogScaleReadOnly");
 
-  if(!isDefined(fogcolor) ||
-    !isDefined(maxOpacity) ||
-    !isDefined(halfplane) ||
-    !isDefined(nearplane) ||
-    !isDefined(sunFogEnabled) ||
-    !isDefined(sunFogColor) ||
-    !isDefined(sunFogDir) ||
-    !isDefined(sunFogBeginFadeAngle) ||
-    !isDefined(sunFogEndFadeAngle) ||
-    !isDefined(sunFogScale)
-  ) {
+  if(!isDefined(fogcolor) || !isDefined(maxOpacity) || !isDefined(halfplane) || !isDefined(nearplane) || !isDefined(sunFogEnabled) || !isDefined(sunFogColor) || !isDefined(sunFogDir) || !isDefined(sunFogBeginFadeAngle) || !isDefined(sunFogEndFadeAngle) || !isDefined(sunFogScale)) {
     fogcolor = (1, 1, 1);
     halfplane = 10000001;
     nearplane = 10000000;

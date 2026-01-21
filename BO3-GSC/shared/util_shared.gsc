@@ -2108,9 +2108,7 @@ function waslastround() {
     return true;
   }
   if(isDefined(level.shouldplayovertimeround)) {
-    if([
-        [level.shouldplayovertimeround]
-      ]()) {
+    if([[level.shouldplayovertimeround]]()) {
       level.nextroundisovertime = 1;
       return false;
     }

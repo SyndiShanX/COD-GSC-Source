@@ -275,9 +275,7 @@ onroundswitch() {
 onroundendgame(roundwinner) {
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [
-        [level._setteamscore]
-      ](team, game.stat[# "roundswon"][team]);
+      [[level._setteamscore]](team, game.stat[# "roundswon"][team]);
     }
   }
 

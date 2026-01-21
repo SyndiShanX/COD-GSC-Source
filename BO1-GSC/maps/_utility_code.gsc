@@ -146,9 +146,7 @@ HintPrintWait(length, breakfunc) {
   }
   timer = length * 20;
   for(i = 0; i < timer; i++) {
-    if([
-        [breakfunc]
-      ]()) {
+    if([[breakfunc]]()) {
       break;
     }
     wait(0.05);
@@ -459,8 +457,7 @@ exploder_delay() {
 
 exploder_earthquake() {
   earthquake_name = self.v["earthquake"];
-  assertex(isDefined(level.earthquake) && isDefined(level.earthquake[earthquake_name]),
-    "No earthquake '" + earthquake_name + "' defined for exploder - call add_earthquake() in your level script.");
+  assertex(isDefined(level.earthquake) && isDefined(level.earthquake[earthquake_name]), "No earthquake '" + earthquake_name + "' defined for exploder - call add_earthquake() in your level script.");
   self exploder_delay();
   eq = level.earthquake[earthquake_name];
   earthquake(eq["magnitude"], eq["duration"], self.v["origin"], eq["radius"]);

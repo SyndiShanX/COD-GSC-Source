@@ -11,9 +11,9 @@ main() {
     if(isDefined(level.scr_anim[self.animname]["zipline_traverse_lighthouse"])) {
       zipline_traverse_lighthouse(level.scr_anim[self.animname]["zipline_traverse_lighthouse"]);
     } else if(self.has_legs == true) {
-      zipline_traverse_lighthouse( % ai_zombie_zipline_traverse_lighthouse);
+      zipline_traverse_lighthouse(%ai_zombie_zipline_traverse_lighthouse);
     } else {
-      zipline_traverse_lighthouse( % ai_zombie_crawler_zipline_traverse_lighthouse);
+      zipline_traverse_lighthouse(%ai_zombie_crawler_zipline_traverse_lighthouse);
     }
   }
 }

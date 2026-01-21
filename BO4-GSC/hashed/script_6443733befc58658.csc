@@ -77,9 +77,7 @@ function_6b5dfd6c(localclientnum, playfx, var_484cae2, id, player) {
   if(playfx) {
     if(!isDefined(player.var_c1c8ef9c[id])) {
       player.var_c1c8ef9c[id] = {
-        #var_9d888717: 0,
-        #fx_id: 0,
-        #fxent: undefined
+        #var_9d888717: 0, #fx_id: 0, #fxent: undefined
       };
 
       if(var_484cae2) {

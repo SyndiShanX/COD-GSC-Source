@@ -141,9 +141,7 @@ special_weapon_logic(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
   if(self.health - var_2 < 1) {
     if(isDefined(level.lethaldamage_func)) {
-      [
-        [level.lethaldamage_func]
-      ](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+      [[level.lethaldamage_func]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
     }
 
     if(!var_12 && !var_15) {

@@ -25,14 +25,7 @@ mortarCustomCrateFunc() {
   if(!allowLevelKillstreaks() || game["player_holding_level_killstrek"]) {
     return;
   }
-  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault",
-    level.mortarConfig.id,
-    level.mortarConfig.crateWeight,
-    maps\mp\killstreaks\_airdrop::killstreakCrateThink,
-    maps\mp\killstreaks\_airdrop::get_friendly_crate_model(),
-    maps\mp\killstreaks\_airdrop::get_enemy_crate_model(),
-    level.mortarConfig.crateHint
-  );
+  maps\mp\killstreaks\_airdrop::addCrateType("airdrop_assault", level.mortarConfig.id, level.mortarConfig.crateWeight, maps\mp\killstreaks\_airdrop::killstreakCrateThink, maps\mp\killstreaks\_airdrop::get_friendly_crate_model(), maps\mp\killstreaks\_airdrop::get_enemy_crate_model(), level.mortarConfig.crateHint);
   level thread watch_for_mortars_crate();
 }
 
@@ -139,11 +132,7 @@ update_mortars() {
     self thread warning_audio();
     wait(self.launchDelay);
 
-    self mortar_fire(self.launchDelayMin, self.launchDelayMax,
-      self.launchAirTimeMin, self.launchAirTimeMax,
-      self.strikeDuration,
-      player
-    );
+    self mortar_fire(self.launchDelayMin, self.launchDelayMax, self.launchAirTimeMin, self.launchAirTimeMax, self.strikeDuration, player);
 
     level notify("mortar_killstreak_end");
   }

@@ -37,10 +37,10 @@ setup_default_wounded_anim_array() {
   }
 
   self.iswounded = 1;
-  self.anim_array[self.animtype]["stop"]["stand"]["rifle"]["idle"] = array(array( % ai_wounded_exposed_idle));
-  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["exposed_idle"] = array( % ai_wounded_exposed_idle);
+  self.anim_array[self.animtype]["stop"]["stand"]["rifle"]["idle"] = array(array(%ai_wounded_exposed_idle));
+  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["exposed_idle"] = array(%ai_wounded_exposed_idle);
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["fire"] = % ai_wounded_exposed_auto;
-  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["single"] = array( % ai_wounded_exposed_semi_1);
+  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["single"] = array(%ai_wounded_exposed_semi_1);
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["burst2"] = % ai_wounded_exposed_burst_3;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["burst3"] = % ai_wounded_exposed_burst_3;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["burst4"] = % ai_wounded_exposed_burst_4;
@@ -50,8 +50,8 @@ setup_default_wounded_anim_array() {
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["semi3"] = % ai_wounded_exposed_semi_3;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["semi4"] = % ai_wounded_exposed_semi_4;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["semi5"] = % ai_wounded_exposed_semi_5;
-  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload"] = array( % ai_wounded_exposed_reload_01, % ai_wounded_exposed_reload_03);
-  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload_crouchhide"] = array( % ai_wounded_exposed_reload_03);
+  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload"] = array(%ai_wounded_exposed_reload_01, %ai_wounded_exposed_reload_03);
+  self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["reload_crouchhide"] = array(%ai_wounded_exposed_reload_03);
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["turn_left_45"] = % ai_wounded_exposed_tracking_turn45l;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["turn_left_90"] = % ai_wounded_exposed_tracking_turn90l;
   self.anim_array[self.animtype]["combat"]["stand"]["rifle"]["turn_left_135"] = % ai_wounded_exposed_tracking_turn135l;
@@ -89,7 +89,7 @@ setup_default_wounded_anim_array() {
   self.anim_array[self.animtype]["turn"]["stand"]["rifle"]["turn_f_r_180"] = % ai_wounded_run_turn_180_r;
   self.anim_array[self.animtype]["move"]["stand"]["rifle"]["reload"] = % ai_wounded_run_f_reload;
   self.anim_array[self.animtype]["move"]["stand"]["rifle"]["combat_run_f"] = % ai_wounded_run_f_01;
-  self.anim_array[self.animtype]["move"]["stand"]["rifle"]["sprint"] = array( % ai_wounded_run_f_01);
+  self.anim_array[self.animtype]["move"]["stand"]["rifle"]["sprint"] = array(%ai_wounded_run_f_01);
   self.anim_array[self.animtype]["move"]["stand"]["rifle"]["combat_run_r"] = % ai_viet_run_lowready_r_wounded;
   self.anim_array[self.animtype]["move"]["stand"]["rifle"]["combat_run_l"] = % ai_viet_run_lowready_l_wounded;
   self.anim_array[self.animtype]["move"]["stand"]["rifle"]["combat_run_b"] = % ai_viet_run_b_wounded;

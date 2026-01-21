@@ -31,10 +31,7 @@ register_burn(str_type, n_dps, n_duration, var_f472bfc, var_5713c703) {
   }
 
   level.var_981dd9cf[# "burn"][str_type] = {
-    #n_dps: n_dps,
-    #n_duration: n_duration,
-    #var_f472bfc: var_f472bfc,
-    #var_5713c703: var_5713c703
+    #n_dps: n_dps, #n_duration: n_duration, #var_f472bfc: var_f472bfc, #var_5713c703: var_5713c703
   };
 }
 
@@ -64,10 +61,7 @@ burn(str_type, e_attacker, weapon, var_477abb8f) {
 
   if(!isDefined(self.var_88421cc2[str_type])) {
     self.var_88421cc2[str_type] = {
-      #n_time_remaining: s_burn.n_duration,
-      #e_owner: e_attacker,
-      #weapon: weapon,
-      #var_477abb8f: var_477abb8f
+      #n_time_remaining: s_burn.n_duration, #e_owner: e_attacker, #weapon: weapon, #var_477abb8f: var_477abb8f
     };
   } else {
     if(self.var_88421cc2[str_type].n_time_remaining < s_burn.n_duration) {
@@ -196,9 +190,7 @@ freeze() {
     self.var_b030dabb.n_count++;
   } else {
     self.var_b030dabb = {
-      #n_count: 1,
-      #b_ignore_cleanup: self.b_ignore_cleanup,
-      #var_dbcf9b4b: self.is_inert
+      #n_count: 1, #b_ignore_cleanup: self.b_ignore_cleanup, #var_dbcf9b4b: self.is_inert
     };
   }
 
@@ -297,8 +289,7 @@ register_slowdown(str_type, n_rate, n_duration = -1) {
   }
 
   level.var_981dd9cf[# "slow"][str_type] = {
-    #n_rate: n_rate,
-    #n_duration: n_duration
+    #n_rate: n_rate, #n_duration: n_duration
   };
 }
 

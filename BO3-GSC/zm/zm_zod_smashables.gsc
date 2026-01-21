@@ -157,9 +157,7 @@ class csmashable {
       level flag::set(m_e_trigger.script_flag_set);
     }
     if(isDefined(m_func_trig)) {
-      [
-        [m_func_trig]
-      ](m_arg);
+      [[m_func_trig]](m_arg);
     }
   }
 
@@ -312,9 +310,7 @@ function private add_scriptbundle_models(a_models) {
       o_smash = smashable_from_scriptbundle_targetname(e_model._o_scene._e_root.targetname);
     }
     if(isDefined(o_smash)) {
-      [
-        [o_smash]
-      ] - > add_model(e_model);
+      [[o_smash]] - > add_model(e_model);
     }
   }
 }
@@ -340,24 +336,16 @@ function private init_smashables() {
     o_smashable = new csmashable();
     level.zod_smashables[str_id] = o_smashable;
     if(issubstr(str_id, "portal")) {
-      [
-        [o_smashable]
-      ] - > set_trigger_func(&zm_zod_portals::function_54ec766b, str_id);
+      [[o_smashable]] - > set_trigger_func(&zm_zod_portals::function_54ec766b, str_id);
     }
     if(issubstr(str_id, "memento")) {
-      [
-        [o_smashable]
-      ] - > set_trigger_func(&zm_zod_quest::reveal_personal_item, str_id);
+      [[o_smashable]] - > set_trigger_func(&zm_zod_quest::reveal_personal_item, str_id);
     }
     if(issubstr(str_id, "beast_kiosk")) {
-      [
-        [o_smashable]
-      ] - > set_trigger_func(&unlock_beast_kiosk, str_id);
+      [[o_smashable]] - > set_trigger_func(&unlock_beast_kiosk, str_id);
     }
     if(str_id === "unlock_quest_key") {
-      [
-        [o_smashable]
-      ] - > set_trigger_func(&unlock_quest_key, str_id);
+      [[o_smashable]] - > set_trigger_func(&unlock_quest_key, str_id);
     }
     [[o_smashable]] - > init(trigger);
   }

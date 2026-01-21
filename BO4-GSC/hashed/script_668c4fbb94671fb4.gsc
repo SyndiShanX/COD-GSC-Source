@@ -866,8 +866,7 @@ function_c3923440() {
 
   if(!isDefined(level.var_558993a0) || s_result.ai_ghost !== level.var_558993a0) {
     self notify(#"hash_300e9fed7925cd69", {
-      #b_success: 0,
-      #var_d0af61fc: 1
+      #b_success: 0, #var_d0af61fc: 1
     });
   }
 
@@ -1471,8 +1470,7 @@ function_6c1f6b4e() {
 
   if(!isDefined(level.var_7b71cdb7) || s_result.ai_ghost !== level.var_7b71cdb7) {
     self notify(#"hash_300e9fed7925cd69", {
-      #b_success: 0,
-      #var_d0af61fc: 1
+      #b_success: 0, #var_d0af61fc: 1
     });
   }
 
@@ -1623,8 +1621,7 @@ function_d2bf4eeb() {
 
   if(!isDefined(level.var_acc853e7) || s_result.ai_ghost !== level.var_acc853e7) {
     self notify(#"hash_300e9fed7925cd69", {
-      #b_success: 0,
-      #var_d0af61fc: 1
+      #b_success: 0, #var_d0af61fc: 1
     });
   }
 
@@ -2802,8 +2799,7 @@ function_81650808(var_aa11c23c, var_56eace20) {
 
     if(self !== level.var_84fbe7bc[level.var_89231fe9]) {
       var_aa11c23c notify(#"hash_34486fb413da1672", {
-        #b_success: 0,
-        #e_player: s_result.activator
+        #b_success: 0, #e_player: s_result.activator
       });
     }
 
@@ -2811,8 +2807,7 @@ function_81650808(var_aa11c23c, var_56eace20) {
   }
 
   var_aa11c23c notify(#"hash_34486fb413da1672", {
-    #b_success: 1,
-    #e_player: s_result.activator
+    #b_success: 1, #e_player: s_result.activator
   });
 }
 
@@ -3178,8 +3173,7 @@ function_3e62ca0b(ai_ghost) {
   wait 90;
   level waittill(#"between_round_over");
   self notify(#"hash_300e9fed7925cd69", {
-    #b_success: 0,
-    #var_d0af61fc: 1
+    #b_success: 0, #var_d0af61fc: 1
   });
 }
 
@@ -3413,8 +3407,7 @@ function_2c4516ae(str_door_name) {
     }
 
     zombie_door notify(#"trigger", {
-      #activator: zombie_door,
-      #is_forced: 1
+      #activator: zombie_door, #is_forced: 1
     });
     zombie_door.script_flag_wait = undefined;
     zombie_door notify(#"power_on");

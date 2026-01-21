@@ -143,9 +143,7 @@ introscreen_lui_typewriter_delay(level_prefix, number_of_lines, totaltime, delay
     flag_wait("all_players_connected");
 
     if(isDefined(level.custom_introscreen)) {
-      [
-        [level.custom_introscreen]
-      ](istring(level_prefix), number_of_lines, totaltime, text_color);
+      [[level.custom_introscreen]](istring(level_prefix), number_of_lines, totaltime, text_color);
 
       if(!isDefined(level.texture_wait_was_called))
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
@@ -477,9 +475,7 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
     flag_wait("all_players_connected");
 
     if(isDefined(level.custom_introscreen)) {
-      [
-        [level.custom_introscreen]
-      ](string1, string2, string3, string4, string5);
+      [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
       if(!isDefined(level.texture_wait_was_called))
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
@@ -636,9 +632,7 @@ introscreen_typewriter_delay(string1, string2, string3, string4, string5, letter
     flag_wait("all_players_connected");
 
     if(isDefined(level.custom_introscreen)) {
-      [
-        [level.custom_introscreen]
-      ](string1, string2, string3, string4, string5);
+      [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
       if(!isDefined(level.texture_wait_was_called))
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");
@@ -789,9 +783,7 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
     flag_wait("all_players_connected");
 
     if(isDefined(level.custom_introscreen)) {
-      [
-        [level.custom_introscreen]
-      ](string1, string2, string3, string4, string5);
+      [[level.custom_introscreen]](string1, string2, string3, string4, string5);
 
       if(!isDefined(level.texture_wait_was_called))
         iprintlnbold("ERROR: need to call waittill_textures_loaded(); in your custom introscreen");

@@ -350,7 +350,7 @@ heli_crash_hind_logic() {
   self waittill("reached_end_node");
   self clearvehgoalpos();
   s_goal = getstruct("soct_slant_bldg_jump", "targetname");
-  v_anim_start_pos = getstartorigin(s_goal.origin, (0, 0, 0), % v_pakistan_7_4_helo_crash_hind);
+  v_anim_start_pos = getstartorigin(s_goal.origin, (0, 0, 0), %v_pakistan_7_4_helo_crash_hind);
   self.origin = v_anim_start_pos - vectorscale((0, 0, 1), 512.0);
   self setphysangles(vectorscale((0, 1, 0), 180.0));
   self setlookatent(level.vh_salazar_soct);

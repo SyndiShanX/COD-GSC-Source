@@ -2471,8 +2471,7 @@ function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
-        #angles: angles
+        #origin: tacpoint.origin, #angles: angles
       };
     }
   }
@@ -2485,8 +2484,7 @@ function_e74b21de(owner) {
     if(tacpoints.size) {
       tacpoint = array::random(tacpoints);
       return {
-        #origin: tacpoint.origin,
-        #angles: angles
+        #origin: tacpoint.origin, #angles: angles
       };
     }
   }

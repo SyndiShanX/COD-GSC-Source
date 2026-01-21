@@ -10,7 +10,7 @@ init_animset_default_move() {
   var_0 = [];
   var_0["fire"] = % exposed_shoot_auto_v3;
   var_0["single"] = [ % exposed_shoot_semi1];
-  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, % shotgun_stand_fire_1b];
+  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
   var_0["burst2"] = % exposed_shoot_burst3;
   var_0["burst3"] = % exposed_shoot_burst3;
   var_0["burst4"] = % exposed_shoot_burst4;
@@ -49,7 +49,7 @@ init_animset_smg_move() {
   var_0 = [];
   var_0["fire"] = % smg_exposed_shoot_auto_v3;
   var_0["single"] = [ % smg_exposed_shoot_semi1];
-  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, % shotgun_stand_fire_1b];
+  var_0["single_shotgun"] = [ % shotgun_stand_fire_1a, %shotgun_stand_fire_1b];
   var_0["burst2"] = % smg_exposed_shoot_burst3;
   var_0["burst3"] = % smg_exposed_shoot_burst3;
   var_0["burst4"] = % smg_exposed_shoot_burst4;
@@ -65,9 +65,7 @@ init_animset_smg_move() {
 main() {
   if(isDefined(self.custom_animscript)) {
     if(isDefined(self.custom_animscript["move"])) {
-      [
-        [self.custom_animscript["move"]]
-      ]();
+      [[self.custom_animscript["move"]]]();
       return;
     }
   }
@@ -148,7 +146,7 @@ end_script() {
   if(self.swimmer)
     animscripts\swim::swim_moveend();
 
-  self clearanim( % head, 0.2);
+  self clearanim(%head, 0.2);
   self.facialidx = undefined;
 }
 
@@ -249,14 +247,14 @@ updatemovemode(var_0) {
 movemainloopinternal(var_0) {
   self endon("killanimscript");
   self endon("move_interrupt");
-  var_1 = self getanimtime( % walk_and_run_loops);
+  var_1 = self getanimtime(%walk_and_run_loops);
   self.a.runloopcount = randomint(10000);
   self.prevmovemode = "none";
   self.prevmovearchetype = "none";
   self.moveloopcleanupfunc = undefined;
 
   for(;;) {
-    var_2 = self getanimtime( % walk_and_run_loops);
+    var_2 = self getanimtime(%walk_and_run_loops);
 
     if(var_2 < var_1)
       self.a.runloopcount++;
@@ -373,7 +371,7 @@ shootwhilemoving() {
     }
 
     animscripts\combat_utility::shootuntilshootbehaviorchange();
-    self clearanim( % exposed_aiming, 0.2);
+    self clearanim(%exposed_aiming, 0.2);
   }
 }
 
@@ -395,7 +393,7 @@ restartmoveloop(var_0) {
     animscripts\exit_node::startmovetransition();
 
   self.ignorepathchange = undefined;
-  self clearanim( % animscript_root, 0.1);
+  self clearanim(%animscript_root, 0.1);
   self orientmode("face default");
   self animmode("none", 0);
   self.requestarrivalnotify = 1;
@@ -652,12 +650,12 @@ pathchange_doturnanim() {
   if(isDefined(self.pathturnanimblendtime))
     var_1 = self.pathturnanimblendtime;
 
-  self clearanim( % body, var_1);
+  self clearanim(%body, var_1);
   self.moveloopcleanupfunc = ::pathchange_cleanupturnanim;
   self.ignorepathchange = 1;
   var_1 = 0.05;
 
-  if(self getanimweight( % cornercrl_trans_out_mf) > 0.5)
+  if(self getanimweight(%cornercrl_trans_out_mf) > 0.5)
     var_1 = 0.2;
 
   if(isDefined(self.pathturnanimblendtime))
@@ -765,7 +763,7 @@ pathchange_cleanupturnanim() {
   if(var_0 != "stand")
     var_1 = 0.4;
 
-  self clearanim( % animscript_root, var_1);
+  self clearanim(%animscript_root, var_1);
   self animmode("none", 0);
 
   if(self.swimmer)
@@ -775,7 +773,7 @@ pathchange_cleanupturnanim() {
 dodgemoveloopoverride() {
   self pushplayer(1);
   self animmode("zonly_physics", 0);
-  self clearanim( % body, 0.2);
+  self clearanim(%body, 0.2);
   self setflaggedanimrestart("dodgeAnim", self.currentdodgeanim, 1, 0.2, 1);
   animscripts\shared::donotetracks("dodgeAnim");
   self animmode("none", 0);
@@ -784,7 +782,7 @@ dodgemoveloopoverride() {
   if(animhasnotetrack(self.currentdodgeanim, "code_move"))
     animscripts\shared::donotetracks("dodgeAnim");
 
-  self clearanim( % civilian_dodge, 0.2);
+  self clearanim(%civilian_dodge, 0.2);
   self pushplayer(0);
   self.currentdodgeanim = undefined;
   self.moveloopoverridefunc = undefined;
@@ -1046,7 +1044,7 @@ movecovertocover() {
 
   setup_shuffle_anim_array(var_5, var_1, var_2);
   self animmode("zonly_physics", 0);
-  self clearanim( % body, var_6);
+  self clearanim(%body, var_6);
   var_7 = animscripts\utility::animarray("shuffle_start");
   var_8 = animscripts\utility::animarray("shuffle");
   var_9 = animscripts\utility::animarray("shuffle_end");
@@ -1122,13 +1120,13 @@ movecovertocover() {
 
 movecovertocoverfinish() {
   if(isDefined(self.shufflemoveinterrupted)) {
-    self clearanim( % cover_shuffle, 0.2);
+    self clearanim(%cover_shuffle, 0.2);
     self.shufflemoveinterrupted = undefined;
     self animmode("none", 0);
     self orientmode("face default");
   } else {
     wait 0.2;
-    self clearanim( % cover_shuffle, 0.2);
+    self clearanim(%cover_shuffle, 0.2);
   }
 }
 
@@ -1190,11 +1188,11 @@ slidefortime(var_0, var_1) {
 
 movestand_moveoverride(var_0, var_1) {
   self endon("movemode");
-  self clearanim( % combatrun, 0.6);
+  self clearanim(%combatrun, 0.6);
   var_2 = animscripts\stairs_utility::isonstairs();
 
   if(!var_2)
-    self setanimknoball( % combatrun, % body, 1, 0.5, self.moveplaybackrate);
+    self setanimknoball(%combatrun, %body, 1, 0.5, self.moveplaybackrate);
 
   var_3 = animscripts\utility::getreacttobulletchance();
 
@@ -1202,7 +1200,7 @@ movestand_moveoverride(var_0, var_1) {
     animscripts\run::customrunningreacttobullets();
   else {
     var_4 = undefined;
-    self clearanim( % h1_stairs, 0.1);
+    self clearanim(%h1_stairs, 0.1);
 
     if(var_2) {
       var_5 = animscripts\stairs_utility::getstairsanimnameatgroundpos();

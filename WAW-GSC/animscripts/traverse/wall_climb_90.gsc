@@ -9,7 +9,7 @@
 
 main() {
   self.traverseDeath = 1;
-  self advancedTraverse2( % traverse40, 90);
+  self advancedTraverse2(%traverse40, 90);
 }
 
 advancedTraverse2(traverseAnim, normalHeight) {
@@ -25,7 +25,7 @@ advancedTraverse2(traverseAnim, normalHeight) {
   self OrientMode("face angle", startnode.angles[1]);
   realHeight = startnode.traverse_height - startnode.origin[2];
   self thread teleportThread(realHeight - normalHeight);
-  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, % body, 1, 0.15, 1);
+  self setFlaggedAnimKnoballRestart("traverse", traverseAnim, %body, 1, 0.15, 1);
   timer = gettime();
   self thread animscripts\shared::DoNoteTracksForever("traverse", "no clear", ::handle_death);
   if(!animhasnotetrack(traverseAnim, "gravity on")) {
@@ -48,7 +48,7 @@ advancedTraverse2(traverseAnim, normalHeight) {
   self.a.movement = self.old_anim_movement;
   self.a.alertness = self.old_anim_alertness;
   runAnim = animscripts\run::GetRunAnim();
-  self setAnimKnobAllRestart(runAnim, % body, 1, 0.2, 1);
+  self setAnimKnobAllRestart(runAnim, %body, 1, 0.2, 1);
   wait(0.2);
   thread animscripts\run::MakeRunSounds("killSoundThread");
 }
@@ -62,9 +62,9 @@ handle_death(note) {
   if(self.health == 1) {
     self.a.nodeath = true;
     if(self.traverseDeath > 1)
-      self setFlaggedAnimKnobAll("deathanim", % traverse90_end_death, % body, 1, .2, 1);
+      self setFlaggedAnimKnobAll("deathanim", %traverse90_end_death, %body, 1, .2, 1);
     else
-      self setFlaggedAnimKnobAll("deathanim", % traverse90_start_death, % body, 1, .2, 1);
+      self setFlaggedAnimKnobAll("deathanim", %traverse90_start_death, %body, 1, .2, 1);
     self animscripts\face::SayGenericDialogue("death");
   }
   self.traverseDeath++;

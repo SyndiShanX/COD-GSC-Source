@@ -126,8 +126,7 @@ main() {
   // Press^3 [{+actionslot 1}] ^7to disable Night Vision Goggles.
   add_hint_string("disable_nvg", &"SCRIPT_NIGHTVISION_STOP_USE", maps\_nightvision::should_break_disable_nvg_print);
 
-  // "Press ^3[{+melee}]^7 to bash."
-  add_hint_string("riot_bash", &"GULAG_HINT_MELEE", ::stop_bash_hint);
+  // "Press ^3[{+melee}]^7 to bash."add_hint_string("riot_bash", &"GULAG_HINT_MELEE", ::stop_bash_hint);
 
   level.rioter_threat = 1000;
   level._pipe_fx_time = 2.5;
@@ -408,14 +407,10 @@ gulag_introscreen() {
 
   lines = [];
   //
-  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_4"; // "SEAL Team Six, U.S.N."
-  //
-  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_3"; // "P03 'Roach' Silvers"
-  //
-  lines["date"] = &"GULAG_INTROSCREEN_LINE_2"; // "Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs"
-  //
-  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_1"; // "The Gulag"
-  level thread maps\_introscreen::introscreen_feed_lines(lines);
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_4"; // "SEAL Team Six, U.S.N."//
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_3"; // "P03 'Roach' Silvers"//
+  lines["date"] = &"GULAG_INTROSCREEN_LINE_2"; // "Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs"//
+  lines[lines.size] = &"GULAG_INTROSCREEN_LINE_1"; // "The Gulag"level thread maps\_introscreen::introscreen_feed_lines(lines);
 
   wait(2);
 
@@ -596,8 +591,7 @@ gulag_approach() {
   SaveGame("approach", &"AUTOSAVE_AUTOSAVE", " ", true);
 
   lines = [];
-  // The Gulag""
-  lines[lines.size] = &"GULAG_INTROSCREEN_1";
+  // The Gulag""lines[lines.size] = &"GULAG_INTROSCREEN_1";
   // Day 5 - 07:42:[{FAKE_INTRO_SECONDS:17}]
   // Day 5 - 07:42:[{FAKE_INTRO_SECONDS:17}]
   lines[lines.size] = &"GULAG_INTROSCREEN_2";
@@ -847,7 +841,7 @@ start_unload()
 	remap_targets( heli_intro_player.target, player_start.targetname );
 	heli_intro_player.target = player_start.targetname;
 
-	friendly_starts = getstructarray( "start_unload_friendly", "script_noteworthy" );
+	friendly_starts = getstructarray("start_unload_friendly", "script_noteworthy" );
 	friendly_heli_spawners = getEntArray( "intro_heli_1", "targetname" );
 	foreach ( index, spawner in friendly_heli_spawners )
 	{
@@ -1573,8 +1567,7 @@ gulag_armory() {
   //<Ghost> Working on it, the main circuit's dead.. Almost there. Standby.	
   //	radio_dialogue( "gulag_gst_almostthere" );
 
-  //<Ghost> Almost there, routing through the auxilary circuit.. got it!"
-  thread radio_dialogue("gulag_gst_gotit");
+  //<Ghost> Almost there, routing through the auxilary circuit.. got it!"thread radio_dialogue("gulag_gst_gotit");
 
   wait(2.5);
   level notify("force_door_open");

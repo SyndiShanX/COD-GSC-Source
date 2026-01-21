@@ -15,7 +15,7 @@ main() {
   startnode = self getnegotiationstartnode();
   assert(isDefined(startnode));
   self OrientMode("face angle", startnode.angles[1]);
-  self setFlaggedAnimKnoballRestart("stepanim", % jump_across_72, % body, 1, .1, 1);
+  self setFlaggedAnimKnoballRestart("stepanim", %jump_across_72, %body, 1, .1, 1);
   wait .15;
   self traverseMode("gravity");
   self animscripts\shared::DoNoteTracks("stepanim");

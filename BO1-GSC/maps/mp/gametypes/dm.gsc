@@ -87,9 +87,7 @@ onScoreCloseMusic() {
     scoreLimit = level.scoreLimit;
     scoreThreshold = scoreLimit * .9;
     for(i = 0; i < level.players.size; i++) {
-      scoreCheck = [
-        [level._getPlayerScore]
-      ](level.players[i]);
+      scoreCheck = [[level._getPlayerScore]](level.players[i]);
       if(scoreCheck >= scoreThreshold) {
         thread maps\mp\gametypes\_globallogic_audio::set_music_on_team("TIME_OUT", "both");
         thread maps\mp\gametypes\_globallogic_audio::actionMusicSet();

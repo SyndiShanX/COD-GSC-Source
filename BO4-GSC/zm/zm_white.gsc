@@ -500,8 +500,7 @@ function_39463122() {
   }
 
   self.var_a450cb6a notify(#"trigger", {
-    #activator: player,
-    #is_forced: 1
+    #activator: player, #is_forced: 1
   });
 }
 

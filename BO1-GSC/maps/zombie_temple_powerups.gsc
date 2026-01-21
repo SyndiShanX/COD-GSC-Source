@@ -189,12 +189,12 @@ monkey_attack_zombie(zombie) {
   self.attacking_zombie = true;
   zombie_anim = % ai_zombie_taunts_9;
   zombie notify("stop_find_flesh");
-  zombie animscripted("zombie_react", zombie.origin, zombie.angles, zombie_anim, "normal", % body, 1, 0.2);
+  zombie animscripted("zombie_react", zombie.origin, zombie.angles, zombie_anim, "normal", %body, 1, 0.2);
   forward = anglesToForward(zombie.angles);
   perk_attack_anim = % ai_zombie_monkey_attack_perks_front;
   time = getAnimLength(perk_attack_anim);
   self maps\_zombiemode_audio::do_zombies_playvocals("attack", "monkey_zombie");
-  self animscripted("perk_attack_anim", zombie.origin + forward * 35.0, zombie.angles - (0, 180, 0), perk_attack_anim, "normal", % body, 1, 0.2);
+  self animscripted("perk_attack_anim", zombie.origin + forward * 35.0, zombie.angles - (0, 180, 0), perk_attack_anim, "normal", %body, 1, 0.2);
   wait(time);
   self.attacking_zombie = false;
   if(isDefined(zombie)) {

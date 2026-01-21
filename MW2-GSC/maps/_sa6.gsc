@@ -40,10 +40,7 @@ and these lines in your CSV:
 include,vehicle_sa6_no_missiles_desert_sa6
 sound,vehicle_t72,vehicle_standard,all_sp
 
-defaultmdl="vehicle_sa6_no_missiles_desert"
-default:"vehicletype" "sa6"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_sa6_no_missiles_desert"default:"vehicletype" "sa6"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_sa6_no_missiles_woodland (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -54,7 +51,5 @@ and these lines in your CSV:
 include,vehicle_sa6_no_missiles_woodland_sa6
 sound,vehicle_t72,vehicle_standard,all_sp
 
-defaultmdl="vehicle_sa6_no_missiles_woodland"
-default:"vehicletype" "sa6"
-default:"script_team" "allies"
+defaultmdl="vehicle_sa6_no_missiles_woodland"default:"vehicletype" "sa6"default:"script_team" "allies"
 */

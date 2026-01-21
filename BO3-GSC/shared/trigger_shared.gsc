@@ -438,9 +438,7 @@ function display_hint(hint) {
     return;
   }
   if(isDefined(level.trigger_hint_func[hint])) {
-    if([
-        [level.trigger_hint_func[hint]]
-      ]()) {
+    if([[level.trigger_hint_func[hint]]]()) {
       return;
     }
     _hint_print(level.trigger_hint_string[hint], level.trigger_hint_func[hint]);
@@ -503,9 +501,7 @@ function _hint_print_wait(length, breakfunc) {
   }
   timer = length * 20;
   for(i = 0; i < timer; i++) {
-    if([
-        [breakfunc]
-      ]()) {
+    if([[breakfunc]]()) {
       break;
     }
     wait(0.05);

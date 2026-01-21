@@ -16,9 +16,7 @@ init() {
 }
 
 zone_is_enabled(zone_name) {
-  if(!isDefined(level.zones) ||
-    !isDefined(level.zones[zone_name]) ||
-    !level.zones[zone_name].is_enabled) {
+  if(!isDefined(level.zones) || !isDefined(level.zones[zone_name]) || !level.zones[zone_name].is_enabled) {
     return false;
   }
   return true;
@@ -339,8 +337,7 @@ manage_zones(initial_zone) {
         a_zone_is_active = true;
         azkeys = GetArrayKeys(zone.adjacent_zones);
         for(az = 0; az < zone.adjacent_zones.size; az++) {
-          if(zone.adjacent_zones[azkeys[az]].is_connected &&
-            level.zones[azkeys[az]].is_enabled) {
+          if(zone.adjacent_zones[azkeys[az]].is_connected && level.zones[azkeys[az]].is_enabled) {
             level.zones[azkeys[az]].is_active = true;
           }
         }

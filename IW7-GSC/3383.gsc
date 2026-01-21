@@ -86,9 +86,7 @@ func_13643() {
     }
 
     if(isDefined(level.wheel_purchase_check)) {
-      var_1 = [
-        [level.wheel_purchase_check]
-      ](self, var_0);
+      var_1 = [[level.wheel_purchase_check]](self, var_0);
 
       if(var_1) {
         level thread[[level.wheel_hint_func]](self, var_0, 1);

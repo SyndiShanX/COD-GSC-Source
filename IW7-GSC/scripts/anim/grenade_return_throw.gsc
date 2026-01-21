@@ -35,7 +35,7 @@ main() {
   }
 
   var_0 = var_2[randomint(var_2.size)];
-  self func_82E4("throwanim", var_0, % body, 1, 0.3);
+  self func_82E4("throwanim", var_0, %body, 1, 0.3);
   var_4 = animhasnotetrack(var_0, "grenade_left") || animhasnotetrack(var_0, "grenade_right");
   if(var_4) {
     scripts\anim\shared::placeweaponon(self.weapon, "left");

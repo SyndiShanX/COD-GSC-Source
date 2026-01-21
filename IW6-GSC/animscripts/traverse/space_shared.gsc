@@ -20,7 +20,7 @@ dospacetraverse(var_0) {
   var_5 = 0;
   self.traverseanim = var_3;
   self.traverseanimroot = % root;
-  self setflaggedanimknoballrestart("traverseAnim", var_3, % root, 1, 0.2, 1);
+  self setflaggedanimknoballrestart("traverseAnim", var_3, %root, 1, 0.2, 1);
   self.traversedeathindex = 0;
   self.traversedeathanim = var_0["interruptDeathAnim"];
   animscripts\shared::donotetracks("traverseAnim", animscripts\traverse\shared::handletraversenotetracks);

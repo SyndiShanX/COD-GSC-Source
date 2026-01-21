@@ -14,8 +14,7 @@
 
 /*
 // custom command line
-+exec scripter +set start "tunnels" +difficultyhard +set cg_drawfps 1 +set debug_colorfriendlies "off"
-*/
++exec scripter +set start "tunnels" +difficultyhard +set cg_drawfps 1 +set debug_colorfriendlies "off"*/
 
 start_tunnels() {
   maps\dcemp::start_common_dcemp();
@@ -47,7 +46,7 @@ start_whitehouse()
 	vision_set_whitehouse();
 	level.sky delete();
 
-	emp_teleport_team( level.team, getstructarray( "whitehouse_start_points", "targetname" ) );
+	emp_teleport_team( level.team, getstructarray("whitehouse_start_points", "targetname" ) );
 	emp_teleport_player();
 
 	maps\_weather::rainMedium( 1 );
@@ -508,7 +507,7 @@ whitehouse_team()
 	self.ignoreme = true;
 	self.ignoreall = true;
 
-	node_arr = getnodearray( "marine_node", "targetname" );
+	node_arr = getnodearray("marine_node", "targetname" );
 	node = random( node_arr );
 	self setgoalnode( node );
 
@@ -813,7 +812,7 @@ start_flare()
 	vision_set_whitehouse();
 	level.sky delete();
 
-	emp_teleport_team( level.team, getstructarray( "flare_start_points", "targetname" ) );
+	emp_teleport_team( level.team, getstructarray("flare_start_points", "targetname" ) );
 	emp_teleport_player();
 
 	whitehouse_flags();

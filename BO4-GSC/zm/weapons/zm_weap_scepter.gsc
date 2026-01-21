@@ -485,10 +485,7 @@ function_be8ae52f(w_curr) {
 
     if(isDefined(level.var_2e32e0bb)) {
       level notify(#"hero_weapon_hit", {
-        #player: self,
-        #e_entity: a_trace[# "entity"],
-        #var_80e17549: self.currentweapon,
-        #v_position: a_trace[# "position"]
+        #player: self, #e_entity: a_trace[# "entity"], #var_80e17549: self.currentweapon, #v_position: a_trace[# "position"]
       });
     }
   }

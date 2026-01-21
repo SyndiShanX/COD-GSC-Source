@@ -75,9 +75,7 @@ testenemy(team) {
 
   if(level.teambased) {
     params = {
-      #menu: game.menu[# "menu_team"],
-      #response: level.teams[team],
-      #intpayload: 0
+      #menu: game.menu[# "menu_team"], #response: level.teams[team], #intpayload: 0
     };
     self notify(#"menuresponse", params);
     self callback::callback(#"menu_response", params);

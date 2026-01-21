@@ -980,9 +980,7 @@ func_D3A9() {
 
     if(isDefined(var_8)) {
       waittillframeend;
-      [
-        [var_8]
-      ](var_6);
+      [[var_8]](var_6);
     }
   }
 }
@@ -1242,9 +1240,7 @@ func_D369(var_0) {
       continue;
     }
     if(isDefined(level.var_7684)) {
-      [
-        [level.var_7684]
-      ]("breathing_hurt");
+      [[level.var_7684]]("breathing_hurt");
     } else {
       self playlocalsound("breathing_hurt");
     }
@@ -2209,9 +2205,7 @@ func_262C(var_0) {
       if(!func_CF80(var_1)) {
         return;
       }
-      [
-        [level.vehicle_canturrettargetpoint]
-      ](var_2, self.damagelocation, var_3);
+      [[level.vehicle_canturrettargetpoint]](var_2, self.damagelocation, var_3);
       func_14DB("aa_player_kills", 1);
     }
 
@@ -2240,9 +2234,7 @@ func_262C(var_0) {
         return 0;
       }
 
-      [
-        [level.func_83D4]
-      ](var_1, self.damagelocation, var_2);
+      [[level.func_83D4]](var_1, self.damagelocation, var_2);
       func_14DB("aa_ads_damage_dealt", var_0);
       return 1;
     }

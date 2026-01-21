@@ -273,9 +273,7 @@ minimumScoreProcessing(player) {
   if(0 != player getentitynumber() && false == IsSplitScreen()) {
     if(level.arcademode_minimumAllowedWarning < player.score) {
       player.arcademode_warningShown = false;
-    } else if(level.arcademode_minimumAllowedWarning >= player.score &&
-      level.arcademode_minimumAllowedPoints < player.score &&
-      player.arcademode_warningShown == false) {
+    } else if(level.arcademode_minimumAllowedWarning >= player.score && level.arcademode_minimumAllowedPoints < player.score && player.arcademode_warningShown == false) {
       player thread show_warning_message(7.0, &"SCRIPT_AM_LOW_SCORE_WARNING", 30);
       player.arcademode_warningShown = true;
     } else if(player.score <= level.arcademode_minimumAllowedPoints) {

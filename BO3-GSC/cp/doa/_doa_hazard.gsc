@@ -45,9 +45,7 @@ function init() {
     }
     def.model = defs[i].model;
     if(isDefined(level.doa.var_aeeb3a0e)) {
-      [
-        [level.doa.var_aeeb3a0e]
-      ](def);
+      [[level.doa.var_aeeb3a0e]](def);
     }
     level.doa.var_61adacb4[level.doa.var_61adacb4.size] = def;
     if(def.type == "type_electric_mine") {
@@ -146,9 +144,7 @@ function function_7a8a936b() {
       cluster_count = 20;
     }
     if(isDefined(level.doa.var_fdc1fa6b)) {
-      count = [
-        [level.doa.var_fdc1fa6b]
-      ]();
+      count = [[level.doa.var_fdc1fa6b]]();
       if(count != -1) {
         cluster_count = count;
       }

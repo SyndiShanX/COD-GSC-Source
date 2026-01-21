@@ -14,7 +14,7 @@ main() {
 
 wall_hop_human() {
   if(randomint(100) < 30)
-    animscripts\traverse\shared::advancedtraverse( % traverse_wallhop_3, 39.875);
+    animscripts\traverse\shared::advancedtraverse(%traverse_wallhop_3, 39.875);
   else
-    animscripts\traverse\shared::advancedtraverse( % traverse_wallhop, 39.875);
+    animscripts\traverse\shared::advancedtraverse(%traverse_wallhop, 39.875);
 }

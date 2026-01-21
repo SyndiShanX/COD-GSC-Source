@@ -2767,18 +2767,18 @@ pond_create_body_pile(var_0, var_1, var_2) {
   var_3.angles = (0, 0, 0);
   var_4 = pond_create_drone(var_3, var_0, (0, 0, 0));
   var_4 useanimtree(#animtree);
-  var_4 setanim( % covercrouch_death_1);
+  var_4 setanim(%covercrouch_death_1);
   var_4 = pond_create_drone(var_3, var_0 + (-25, 0, 0), (0, 0, 0));
   var_4 useanimtree(#animtree);
-  var_4 setanim( % covercrouch_death_2);
+  var_4 setanim(%covercrouch_death_2);
   var_4 = pond_create_drone(var_3, var_0 + (-20, 40, 0), (0, -135, 0));
   var_4 useanimtree(#animtree);
-  var_4 setanim( % covercrouch_death_3);
+  var_4 setanim(%covercrouch_death_3);
 
   if(!isDefined(var_2)) {
     var_4 = pond_create_drone(var_3, var_0 + (-45, 20, -5), (6, 90, 0));
     var_4 useanimtree(#animtree);
-    var_4 setanim( % corner_standr_death_grenade_slump);
+    var_4 setanim(%corner_standr_death_grenade_slump);
   }
 
   if(isDefined(var_1)) {

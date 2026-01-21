@@ -206,7 +206,7 @@ FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   while(!aimedAtShootEntOrPos()) {
     wait .05;
   }
-  self SetAnim( % add_fire, 1, .1, 1);
+  self SetAnim(%add_fire, 1, .1, 1);
   rate = RandomFloatRange(0.3, 2.0);
   if(self.shootStyle == "full" || self.shootStyle == "burst") {
     rate = animscripts\weaponList::autoShootAnimRate();
@@ -230,7 +230,7 @@ FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   self SetFlaggedAnimKnobRestart(animName, fireAnim, 1, .2, rate);
   self updatePlayerSightAccuracy();
   FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots);
-  self ClearAnim( % add_fire, .2);
+  self ClearAnim(%add_fire, .2);
 }
 
 FireUntilOutOfAmmoInternal(animName, fireAnim, stopOnAnimationEnd, maxshots) {
@@ -431,14 +431,14 @@ Reload(thresholdFraction, optionalAnimation) {
   self animscripts\battleChatter_ai::evaluateReloadEvent();
   self maps\_dds::dds_notify_reload(undefined, (self.team == "allies"));
   if(isDefined(optionalAnimation)) {
-    self ClearAnim( % body, .1);
-    self SetFlaggedAnimKnobAll("reloadanim", optionalAnimation, % body, 1, .1, 1);
+    self ClearAnim(%body, .1);
+    self SetFlaggedAnimKnobAll("reloadanim", optionalAnimation, %body, 1, .1, 1);
     animscripts\shared::DoNoteTracks("reloadanim");
     self animscripts\weaponList::RefillClip();
   } else {
     if(self.a.pose == "prone") {
-      self SetFlaggedAnimKnobAll("reloadanim", animArrayPickRandom("reload"), % body, 1, .1, 1);
-      self UpdateProne( % prone_legs_up, % prone_legs_down, 1, 0.1, 1);
+      self SetFlaggedAnimKnobAll("reloadanim", animArrayPickRandom("reload"), %body, 1, .1, 1);
+      self UpdateProne(%prone_legs_up, %prone_legs_down, 1, 0.1, 1);
     } else {
       println("Bad anim_pose in combat::Reload");
       wait 2;
@@ -446,7 +446,7 @@ Reload(thresholdFraction, optionalAnimation) {
     }
     animscripts\shared::DoNoteTracks("reloadanim");
     animscripts\weaponList::RefillClip();
-    self ClearAnim( % upperbody, .1);
+    self ClearAnim(%upperbody, .1);
   }
   return true;
 }
@@ -776,7 +776,7 @@ reduceGIPTPOnKillanimscript() {
 DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self animscripts\battleChatter_ai::evaluateAttackEvent("grenade");
   self notify("stop_aiming_at_enemy");
-  self SetFlaggedAnimKnobAllRestart("throwanim", throw_anim, % body, 1, 0.1, 1);
+  self SetFlaggedAnimKnobAllRestart("throwanim", throw_anim, %body, 1, 0.1, 1);
   self thread animscripts\shared::DoNoteTracksForever("throwanim", "killanimscript");
   model = getGrenadeModel();
   attachside = "none";
@@ -822,8 +822,8 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self.grenadeawareness = self.oldGrenAwareness;
   self.oldGrenAwareness = undefined;
   self waittillmatch("throwanim", "end");
-  self SetAnim( % exposed_modern, 1, .2);
-  self SetAnim( % exposed_aiming, 1);
+  self SetAnim(%exposed_modern, 1, .2);
+  self SetAnim(%exposed_aiming, 1);
   self ClearAnim(throw_anim, .2);
 }
 

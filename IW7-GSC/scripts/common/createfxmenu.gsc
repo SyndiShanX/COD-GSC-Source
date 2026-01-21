@@ -118,9 +118,7 @@ menu_create_select() {
 
   foreach(var_3, var_2 in level._createfx.menu_create_select) {
     if(scripts\common\createfx::button_is_clicked(var_3)) {
-      [
-        [var_2]
-      ]();
+      [[var_2]]();
       return;
     }
   }

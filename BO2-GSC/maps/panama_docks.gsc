@@ -652,7 +652,7 @@ betrayed_event() {
   level thread run_scene_and_delete("betrayed_2");
   level thread run_scene("betrayed_shotgun_2");
   level thread start_hearbeat();
-  anim_len = getanimlength( % p_pan_09_01_betrayed_2_player);
+  anim_len = getanimlength(%p_pan_09_01_betrayed_2_player);
   wait(anim_len - 0.1);
   rpc("clientscripts/panama_3_amb", "pre_end_snapshot");
   screen_fade_out(0.05);

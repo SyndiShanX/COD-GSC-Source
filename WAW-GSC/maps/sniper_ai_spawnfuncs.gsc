@@ -132,11 +132,7 @@ noscope_line() {
   level endon("said_noscope");
   self waittill("damage", damage_amount, attacker, direction_vec, point, type);
   weap = level.player getcurrentweapon();
-  if(type == "MOD_RIFLE_BULLET" &&
-    attacker == level.player &&
-    0 > self.health &&
-    (weap == "mosin_rifle_scoped" || weap == "ptrs41") &&
-    !flag("player_is_ads")) {
+  if(type == "MOD_RIFLE_BULLET" && attacker == level.player && 0 > self.health && (weap == "mosin_rifle_scoped" || weap == "ptrs41") && !flag("player_is_ads")) {
     if(level.player AdsButtonPressed()) {
       return;
     }

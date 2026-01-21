@@ -143,10 +143,10 @@ initdoganimations() {
   precacheshader("hud_dog_melee");
   precacheshader("hud_hyena_melee");
   anim.notfirsttimedogs = 1;
-  anim.dogstoppingdistsq = lengthsquared(getmovedelta( % iw6_dog_attackidle_runin_8, 0, 1) * 3);
-  anim.dogstartmovedist = length(getmovedelta( % iw6_dog_attackidle_runout_8, 0, 1));
+  anim.dogstoppingdistsq = lengthsquared(getmovedelta(%iw6_dog_attackidle_runin_8, 0, 1) * 3);
+  anim.dogstartmovedist = length(getmovedelta(%iw6_dog_attackidle_runout_8, 0, 1));
   anim.dogattackplayerdist = 102;
-  var_0 = getstartorigin((0, 0, 0), (0, 0, 0), % iw6_dog_kill_front_quick_1);
+  var_0 = getstartorigin((0, 0, 0), (0, 0, 0), %iw6_dog_kill_front_quick_1);
   anim.dogattackaidist = length(var_0);
   anim.dogtraverseanims = [];
   anim.dogtraverseanims["wallhop"] = % iw6_dog_traverse_over_24;

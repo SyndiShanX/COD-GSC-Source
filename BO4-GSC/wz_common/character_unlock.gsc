@@ -258,9 +258,7 @@ function_54fc60f5(player, character) {
 
     if(isDefined(player_xuid)) {
       data = {
-        #game_time: function_f8d53445(),
-        #player_xuid: int(player_xuid),
-        #character: character
+        #game_time: function_f8d53445(), #player_xuid: int(player_xuid), #character: character
       };
       function_92d1707f(#"hash_17e83c78e2a73ed1", data);
     }

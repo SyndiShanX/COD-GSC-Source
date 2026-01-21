@@ -387,15 +387,11 @@ initperkdvars() {
   level.juggernatudefmod = 0.08;
   level.regenhealthmod = 0.25;
 
-  level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this %
-  level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this %
-  level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
-  level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this %
-  level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
+  level.bulletDamageMod = getIntProperty("perk_bulletDamage", 40) / 100; // increased bullet damage by this % level.hollowPointDamageMod = getIntProperty("perk_hollowPointDamage", 65) / 100; // increased bullet damage by this % level.armorVestMod = getIntProperty("perk_armorVest", 75) / 100; // percentage of damage you take
+  level.explosiveDamageMod = getIntProperty("perk_explosiveDamage", 40) / 100; // increased explosive damage by this % level.blastShieldMod = getIntProperty("perk_blastShield", 45) / 100; // percentage of damage you take
   level.riotShieldMod = getIntProperty("perk_riotShield", 100) / 100;
   level.dangerCloseMod = getIntProperty("perk_dangerClose", 100) / 100;
-  level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %
-}
+  level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %}
 
 cac_selector() {}
 

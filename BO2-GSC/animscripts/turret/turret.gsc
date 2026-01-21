@@ -49,16 +49,16 @@ main() {
   self setanimknobrestart(self.primaryturretanim, 1, 0.2, 1);
   self setanimknoblimitedrestart(self.additiveturretidle);
   self setanimknoblimitedrestart(self.additiveturretfire);
-  self setanim( % additive_turret_idle, 1, 0.1);
-  self setanim( % additive_turret_fire, 0, 0.1);
+  self setanim(%additive_turret_idle, 1, 0.1);
+  self setanim(%additive_turret_fire, 0, 0.1);
 
   while(true) {
     e_turret waittill("shooting");
-    self setanim( % additive_turret_idle, 0, 0.1);
-    self setanim( % additive_turret_fire, 1, 0.1);
+    self setanim(%additive_turret_idle, 0, 0.1);
+    self setanim(%additive_turret_fire, 1, 0.1);
     e_turret waittill("idle");
-    self setanim( % additive_turret_idle, 1, 0.1);
-    self setanim( % additive_turret_fire, 0, 0.1);
+    self setanim(%additive_turret_idle, 1, 0.1);
+    self setanim(%additive_turret_fire, 0, 0.1);
   }
 }
 

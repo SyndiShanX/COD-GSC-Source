@@ -105,26 +105,7 @@ restore_client_fog(transition_time) {
   }
   ent = level.restore_fog_setting;
 
-  self PlayerSetExpFog(
-    ent.startDist,
-    ent.halfwayDist,
-    ent.red,
-    ent.green,
-    ent.blue,
-    ent.HDRColorIntensity,
-    ent.maxOpacity,
-    transition_time,
-    ent.sunRed,
-    ent.sunGreen,
-    ent.sunBlue,
-    ent.HDRSunColorIntensity,
-    ent.sunDir,
-    ent.sunBeginFadeAngle,
-    ent.sunEndFadeAngle,
-    ent.normalFogScale,
-    ent.skyFogIntensity,
-    ent.skyFogMinAngle,
-    ent.skyFogMaxAngle);
+  self PlayerSetExpFog(ent.startDist, ent.halfwayDist, ent.red, ent.green, ent.blue, ent.HDRColorIntensity, ent.maxOpacity, transition_time, ent.sunRed, ent.sunGreen, ent.sunBlue, ent.HDRSunColorIntensity, ent.sunDir, ent.sunBeginFadeAngle, ent.sunEndFadeAngle, ent.normalFogScale, ent.skyFogIntensity, ent.skyFogMinAngle, ent.skyFogMaxAngle);
 }
 
 ent_flag_wait(msg) {
@@ -408,11 +389,7 @@ store_weapons_status(weapons_excluded) {
 }
 
 restore_weapons_status(inclusion_list) {
-  if(!isDefined(self.copy_fullweaponlist) ||
-    !isDefined(self.copy_weapon_current) ||
-    !isDefined(self.copy_weapon_ammo_clip) ||
-    !isDefined(self.copy_weapon_ammo_stock)
-  )
+  if(!isDefined(self.copy_fullweaponlist) || !isDefined(self.copy_weapon_current) || !isDefined(self.copy_weapon_ammo_clip) || !isDefined(self.copy_weapon_ammo_stock))
     AssertMsg("Call store_weapons_status() before restore_weapons_status()");
 
   myWeapons = self GetWeaponsListAll();
@@ -2079,41 +2056,14 @@ ark_attachment_transfer_to_locker_weapon(fullweaponname, current_attachments, sh
 
   camo = RandomIntRange(1, 10);
 
-  if(IsSubStr(baseweapon, "alienfp6") ||
-    IsSubStr(baseweapon, "alienmts255") ||
-    IsSubStr(baseweapon, "aliendlc12") ||
-    IsSubStr(baseweapon, "aliendlc13") ||
-    IsSubStr(baseweapon, "aliendlc14") ||
-    IsSubStr(baseweapon, "aliendlc15") ||
-    IsSubStr(baseweapon, "aliendlc23") ||
-    IsSubStr(baseweapon, "altalienlsat") ||
-    IsSubStr(baseweapon, "altaliensvu") ||
-    IsSubStr(baseweapon, "altalienarx") ||
-    IsSubStr(baseweapon, "arkalienr5rgp") ||
-    IsSubStr(baseweapon, "arkaliendlc15") ||
-    IsSubStr(baseweapon, "arkaliendlc23") ||
-    IsSubStr(baseweapon, "arkalienk7") ||
-    IsSubStr(baseweapon, "arkalienuts15") ||
-    IsSubStr(baseweapon, "arkalienmaul") ||
-    IsSubStr(baseweapon, "arkalienmk14") ||
-    IsSubStr(baseweapon, "arkalienimbel") ||
-    IsSubStr(baseweapon, "arkalienkac") ||
-    IsSubStr(baseweapon, "arkalienameli"))
+  if(IsSubStr(baseweapon, "alienfp6") || IsSubStr(baseweapon, "alienmts255") || IsSubStr(baseweapon, "aliendlc12") || IsSubStr(baseweapon, "aliendlc13") || IsSubStr(baseweapon, "aliendlc14") || IsSubStr(baseweapon, "aliendlc15") || IsSubStr(baseweapon, "aliendlc23") || IsSubStr(baseweapon, "altalienlsat") || IsSubStr(baseweapon, "altaliensvu") || IsSubStr(baseweapon, "altalienarx") || IsSubStr(baseweapon, "arkalienr5rgp") || IsSubStr(baseweapon, "arkaliendlc15") || IsSubStr(baseweapon, "arkaliendlc23") || IsSubStr(baseweapon, "arkalienk7") || IsSubStr(baseweapon, "arkalienuts15") || IsSubStr(baseweapon, "arkalienmaul") || IsSubStr(baseweapon, "arkalienmk14") || IsSubStr(baseweapon, "arkalienimbel") || IsSubStr(baseweapon, "arkalienkac") || IsSubStr(baseweapon, "arkalienameli"))
     camo = 0;
 
   reticle = RandomIntRange(1, 7);
 
   weapon_string = undefined;
 
-  if(attachment1 != "thermal" &&
-    attachment1 != "thermalsmg" &&
-    attachment2 != "thermal" &&
-    attachment2 != "thermalsmg" &&
-    attachment3 != "thermal" &&
-    attachment3 != "thermalsmg" &&
-    attachment4 != "thermal" &&
-    attachment4 != "thermalsmg" &&
-    baseweapon != "iw6_aliendlc23_mp")
+  if(attachment1 != "thermal" && attachment1 != "thermalsmg" && attachment2 != "thermal" && attachment2 != "thermalsmg" && attachment3 != "thermal" && attachment3 != "thermalsmg" && attachment4 != "thermal" && attachment4 != "thermalsmg" && baseweapon != "iw6_aliendlc23_mp")
     fullweaponname = maps\mp\alien\_utility::buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo, reticle);
   else
     fullweaponname = maps\mp\alien\_utility::buildAlienWeaponName(weaponname, attachment1, attachment2, attachment3, attachment4, camo);
@@ -2280,13 +2230,7 @@ return_nerf_scaled_ammo(new_weapon_string) {
 }
 
 weapon_has_alien_attachment(weaponName, achievement_flag, eAttacker) {
-  if(!isDefined(weaponName) ||
-    weaponName == "none" ||
-    WeaponInventoryType(weaponName) != "primary" ||
-    weaponclass(weaponName) == "item" ||
-    weaponclass(weaponName) == "rocketlauncher" ||
-    weaponclass(weaponName) == "none"
-  ) {
+  if(!isDefined(weaponName) || weaponName == "none" || WeaponInventoryType(weaponName) != "primary" || weaponclass(weaponName) == "item" || weaponclass(weaponName) == "rocketlauncher" || weaponclass(weaponName) == "none") {
     return false;
   }
 

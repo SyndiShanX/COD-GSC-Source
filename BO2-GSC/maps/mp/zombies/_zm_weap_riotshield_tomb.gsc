@@ -359,9 +359,7 @@ riotshield_fling_zombie(player, fling_vec, index) {
   if(self.health < 1) {
     self.riotshield_death = 1;
 
-    if(isDefined(level.ragdoll_limit_check) && ![
-        [level.ragdoll_limit_check]
-      ]()) {
+    if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]()) {
       return;
     }
     self startragdoll();

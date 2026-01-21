@@ -643,7 +643,7 @@ harper_kill_gaz_driver() {
   end_scene("jump_down_attack_harper_idle");
   level.harper setgoalpos(level.harper.origin);
   level.harper waittill("goal");
-  wait(getanimlength( % p_pakistan_5_11_jump_down_attack_player_mantle) - 2);
+  wait(getanimlength(%p_pakistan_5_11_jump_down_attack_player_mantle) - 2);
   end_scene("harper_path4_hide_idle");
   end_scene("harper_path4_hide_exit");
   end_scene("jump_down_approach_harper");

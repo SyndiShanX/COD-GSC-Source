@@ -134,7 +134,7 @@ gas_station_init() {
     pump SetScriptablePartState(0, "destroyed");
   }
 
-  time = GetAnimLength( % mp_dart_gas_awning_fall);
+  time = GetAnimLength(%mp_dart_gas_awning_fall);
 
   self.gas_station_events = [];
 

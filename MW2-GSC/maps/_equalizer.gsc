@@ -915,13 +915,7 @@ loadPresets() {
 /*
  =============
 ///ScriptDocBegin
-"Name: define_filter( <name> )"
-"Summary: Creates a new filter"
-"Module: Ambience"
-"MandatoryArg: <name> : The name of the filter."
-"Example: define_filter( "interior_stone" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: define_filter( <name> )""Summary: Creates a new filter""Module: Ambience""MandatoryArg: <name> : The name of the filter.""Example: define_filter( "interior_stone" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 define_filter(name) {
@@ -932,15 +926,7 @@ define_filter(name) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_filter_type( <name> , <band> , <type> )"
-"Summary: Sets the type for a filter"
-"Module: Ambience"
-"MandatoryArg: <name> : The name of the filter."
-"MandatoryArg: <band> : The band( 0 to 2 ) "
-"MandatoryArg: <type> : The filter type "
-"Example: set_filter_type( "underpass", 0, "highshelf" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_filter_type( <name> , <band> , <type> )""Summary: Sets the type for a filter""Module: Ambience""MandatoryArg: <name> : The name of the filter.""MandatoryArg: <band> : The band( 0 to 2 ) ""MandatoryArg: <type> : The filter type ""Example: set_filter_type( "underpass", 0, "highshelf" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_filter_type(name, band, type) {
@@ -952,15 +938,7 @@ set_filter_type(name, band, type) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_filter_freq( <name> , <band> , <freq> )"
-"Summary: Sets the freq for a filter"
-"Module: Ambience"
-"MandatoryArg: <name> : The name of the filter."
-"MandatoryArg: <band> : The band( 0 to 2 ) "
-"MandatoryArg: <freq> : The filter freq "
-"Example: set_filter_freq( "underpass", 0, 3500 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_filter_freq( <name> , <band> , <freq> )""Summary: Sets the freq for a filter""Module: Ambience""MandatoryArg: <name> : The name of the filter.""MandatoryArg: <band> : The band( 0 to 2 ) ""MandatoryArg: <freq> : The filter freq ""Example: set_filter_freq( "underpass", 0, 3500 );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_filter_freq(name, band, freq) {
@@ -972,15 +950,7 @@ set_filter_freq(name, band, freq) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_filter_gain( <name> , <band> , <gain> )"
-"Summary: Sets the gain for a filter"
-"Module: Ambience"
-"MandatoryArg: <name> : The name of the filter."
-"MandatoryArg: <band> : The band( 0 to 2 ) "
-"MandatoryArg: <gain> : The filter gain "
-"Example: set_filter_gain( "underpass", 0, -2 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_filter_gain( <name> , <band> , <gain> )""Summary: Sets the gain for a filter""Module: Ambience""MandatoryArg: <name> : The name of the filter.""MandatoryArg: <band> : The band( 0 to 2 ) ""MandatoryArg: <gain> : The filter gain ""Example: set_filter_gain( "underpass", 0, -2 );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_filter_gain(name, band, gain) {
@@ -992,15 +962,7 @@ set_filter_gain(name, band, gain) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_filter_q( <name> , <band> , <q> )"
-"Summary: Sets the q for a filter"
-"Module: Ambience"
-"MandatoryArg: <name> : The name of the filter."
-"MandatoryArg: <band> : The band( 0 to 2 ) "
-"MandatoryArg: <q> : The filter q "
-"Example: set_filter_q( "underpass", 0, 1 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_filter_q( <name> , <band> , <q> )""Summary: Sets the q for a filter""Module: Ambience""MandatoryArg: <name> : The name of the filter.""MandatoryArg: <band> : The band( 0 to 2 ) ""MandatoryArg: <q> : The filter q ""Example: set_filter_q( "underpass", 0, 1 );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_filter_q(name, band, q) {
@@ -1012,13 +974,7 @@ set_filter_q(name, band, q) {
 /*
  =============
 ///ScriptDocBegin
-"Name: define_reverb( <name> )"
-"Summary: Creates a new reverb setting"
-"Module: Ambience"
-"MandatoryArg: <name> : The name of the reverb."
-"Example: define_reverb( "interior_stone" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: define_reverb( <name> )""Summary: Creates a new reverb setting""Module: Ambience""MandatoryArg: <name> : The name of the reverb.""Example: define_reverb( "interior_stone" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 define_reverb(name) {
@@ -1029,14 +985,7 @@ define_reverb(name) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_reverb_roomtype( <name> , <roomtype> )"
-"Summary: Sets the roomtype for a reverb setting."
-"Module: Ambience"
-"MandatoryArg: <name> : The reverb setting."
-"MandatoryArg: <name> : The roomtype."
-"Example: set_reverb_roomtype( "interior_stone", "stoneroom" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_reverb_roomtype( <name> , <roomtype> )""Summary: Sets the roomtype for a reverb setting.""Module: Ambience""MandatoryArg: <name> : The reverb setting.""MandatoryArg: <name> : The roomtype.""Example: set_reverb_roomtype( "interior_stone", "stoneroom" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_reverb_roomtype(name, roomtype) {
@@ -1047,14 +996,7 @@ set_reverb_roomtype(name, roomtype) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_reverb_drylevel( <name> , <drylevel> )"
-"Summary: Sets the drylevel for a reverb setting."
-"Module: Ambience"
-"MandatoryArg: <name> : The reverb setting."
-"MandatoryArg: <name> : The drylevel."
-"Example: set_reverb_drylevel( "interior_stone", 0.6 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_reverb_drylevel( <name> , <drylevel> )""Summary: Sets the drylevel for a reverb setting.""Module: Ambience""MandatoryArg: <name> : The reverb setting.""MandatoryArg: <name> : The drylevel.""Example: set_reverb_drylevel( "interior_stone", 0.6 );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_reverb_drylevel(name, drylevel) {
@@ -1065,14 +1007,7 @@ set_reverb_drylevel(name, drylevel) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_reverb_wetlevel( <name> , <wetlevel> )"
-"Summary: Sets the roomtype for a reverb setting."
-"Module: Ambience"
-"MandatoryArg: <name> : The reverb setting."
-"MandatoryArg: <name> : The wetlevel."
-"Example: set_reverb_wetlevel( "interior_stone", 0.3 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_reverb_wetlevel( <name> , <wetlevel> )""Summary: Sets the roomtype for a reverb setting.""Module: Ambience""MandatoryArg: <name> : The reverb setting.""MandatoryArg: <name> : The wetlevel.""Example: set_reverb_wetlevel( "interior_stone", 0.3 );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_reverb_wetlevel(name, wetlevel) {
@@ -1083,14 +1018,7 @@ set_reverb_wetlevel(name, wetlevel) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_reverb_fadetime( <name> , <fadetime> )"
-"Summary: Sets the fadetime for a reverb setting."
-"Module: Ambience"
-"MandatoryArg: <name> : The reverb setting."
-"MandatoryArg: <name> : The fadetime."
-"Example: set_reverb_fadetime( "interior_stone", 2 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_reverb_fadetime( <name> , <fadetime> )""Summary: Sets the fadetime for a reverb setting.""Module: Ambience""MandatoryArg: <name> : The reverb setting.""MandatoryArg: <name> : The fadetime.""Example: set_reverb_fadetime( "interior_stone", 2 );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_reverb_fadetime(name, fadetime) {
@@ -1101,14 +1029,7 @@ set_reverb_fadetime(name, fadetime) {
 /*
  =============
 ///ScriptDocBegin
-"Name: set_reverb_priority( <name> , <priority> )"
-"Summary: Sets the priority for a reverb setting."
-"Module: Ambience"
-"MandatoryArg: <name> : The reverb setting."
-"MandatoryArg: <name> : The priority."
-"Example: set_reverb_priority( "interior_stone", "snd_enveffectsprio_level" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_reverb_priority( <name> , <priority> )""Summary: Sets the priority for a reverb setting.""Module: Ambience""MandatoryArg: <name> : The reverb setting.""MandatoryArg: <name> : The priority.""Example: set_reverb_priority( "interior_stone", "snd_enveffectsprio_level" );""SPMP: singleplayer"///ScriptDocEnd
  =============
  */
 set_reverb_priority(name, priority) {
@@ -1129,14 +1050,7 @@ getFilter(name) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_channel_to_filter( <track> , <channel> )"
-"Summary: Makes a filter effect a sound channel."
-"Module: Ambience"
-"MandatoryArg: <track>: The filter. "
-"MandatoryArg: <channel>: The channel to add. "
-"Example: add_channel_to_filter( "interior_stone", "ambient" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_channel_to_filter( <track> , <channel> )""Summary: Makes a filter effect a sound channel.""Module: Ambience""MandatoryArg: <track>: The filter. ""MandatoryArg: <channel>: The channel to add. ""Example: add_channel_to_filter( "interior_stone", "ambient" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_channel_to_filter(track, channel) {
@@ -1149,13 +1063,7 @@ add_channel_to_filter(track, channel) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_all_channels_to_filter( <track> )"
-"Summary: Adds all known channels to a filter"
-"Module: Ambience"
-"MandatoryArg: <track>: The name of the filter"
-"Example: add_all_channels_to_filter( "gulag_cavein" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_all_channels_to_filter( <track> )""Summary: Adds all known channels to a filter""Module: Ambience""MandatoryArg: <track>: The name of the filter""Example: add_all_channels_to_filter( "gulag_cavein" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_all_channels_to_filter(track) {
@@ -1172,13 +1080,7 @@ add_all_channels_to_filter(track) {
 /*
 =============
 ///ScriptDocBegin
-"Name: add_all_channels_but_music_and_mission( <track> )"
-"Summary: Adds all known channels to a filter but music and mission"
-"Module: Ambience"
-"MandatoryArg: <track>: The name of the filter"
-"Example: add_all_channels_but_music_and_mission( "gulag_cavein" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: add_all_channels_but_music_and_mission( <track> )""Summary: Adds all known channels to a filter but music and mission""Module: Ambience""MandatoryArg: <track>: The name of the filter""Example: add_all_channels_but_music_and_mission( "gulag_cavein" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 add_all_channels_but_music_and_mission(track) {

@@ -18,17 +18,7 @@ init() {
 function_7d8be726(patrol_radius, var_edc20efd, var_d73e0c6e, marker_fx, marker_objective, var_861daf20, var_a85cb855, var_52e43a03, var_544ae93d, var_7d9560c1) {
   assert(isDefined(self.ai));
   self.ai.patrol = {
-    #state: 2,
-    #patrol_radius: patrol_radius,
-    #var_edc20efd: var_edc20efd,
-    #var_d73e0c6e: var_d73e0c6e,
-    #marker_fx: marker_fx,
-    #marker_objective: marker_objective,
-    #var_861daf20: var_861daf20,
-    #var_a85cb855: var_a85cb855,
-    #var_52e43a03: var_52e43a03,
-    #var_544ae93d: var_544ae93d,
-    #var_7d9560c1: var_7d9560c1
+    #state: 2, #patrol_radius: patrol_radius, #var_edc20efd: var_edc20efd, #var_d73e0c6e: var_d73e0c6e, #marker_fx: marker_fx, #marker_objective: marker_objective, #var_861daf20: var_861daf20, #var_a85cb855: var_a85cb855, #var_52e43a03: var_52e43a03, #var_544ae93d: var_544ae93d, #var_7d9560c1: var_7d9560c1
   };
 }
 

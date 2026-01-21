@@ -13,7 +13,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_deathmodel("vehicle_blackhawk_low");
   maps\_vehicle::build_deathmodel("vehicle_blackhawk_low_thermal");
   maps\_vehicle::build_deathmodel("vehicle_blackhawk_hero_sas_night");
-  maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%bh_rotors, undefined, 0);
   var_3 = [];
   var_3["vehicle_blackhawk"] = "fx\explosions\helicopter_explosion";
   var_3["vehicle_blackhawk_sas_night"] = "fx\explosions\helicopter_explosion";

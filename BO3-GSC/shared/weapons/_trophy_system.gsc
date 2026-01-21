@@ -63,7 +63,7 @@ function ontrophysystemspawn(watcher, player) {
   self.trophysystemstationary = 0;
   movestate = self util::waittillrollingornotmoving();
   if(movestate == "rolling") {
-    self setanim( % mp_trophy_system::o_trophy_deploy, 1);
+    self setanim(%mp_trophy_system::o_trophy_deploy, 1);
     self clientfield::set("trophy_system_state", 1);
     self util::waittillnotmoving();
   }
@@ -72,8 +72,8 @@ function ontrophysystemspawn(watcher, player) {
   self.ammo = player ammo_get(self.weapon);
   self thread trophyactive(player);
   self thread trophywatchhack();
-  self setanim( % mp_trophy_system::o_trophy_deploy, 0);
-  self setanim( % mp_trophy_system::o_trophy_spin, 1);
+  self setanim(%mp_trophy_system::o_trophy_deploy, 0);
+  self setanim(%mp_trophy_system::o_trophy_spin, 1);
   self clientfield::set("trophy_system_state", 2);
   self playSound("wpn_trophy_deploy_start");
   self playLoopSound("wpn_trophy_spin", 0.25);

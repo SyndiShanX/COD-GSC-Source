@@ -884,8 +884,7 @@ updateMomentum(team, amount) {
       else
         level thread axisBlitzkriegCountdown();
     }
-    if(!level.gameEnded &&
-      previousMultiplier != game["war_momentum"][team + "_multiplier"]) {
+    if(!level.gameEnded && previousMultiplier != game["war_momentum"][team + "_multiplier"]) {
       notifyData = spawnStruct();
       if(previousMultiplier < game["war_momentum"][team + "_multiplier"]) {
         enemyTeam = getOtherTeam(team);
@@ -1812,8 +1811,7 @@ printMapErrors(refWrapper) {
   }
 }
 
-twar_flag_index_to_script_flag(
-  flag_index) {
+twar_flag_index_to_script_flag(flag_index) {
   script_flag = undefined;
   switch (flag_index) {
     case 0:
@@ -1838,8 +1836,7 @@ twar_flag_index_to_script_flag(
   return script_flag;
 }
 
-twar_generate_non_enemy_flag_indices(
-  player_team) {
+twar_generate_non_enemy_flag_indices(player_team) {
   flag_indices = [];
   for(flag_index = 0; flag_index < level.flags.size; flag_index++) {
     if(!maps\mp\gametypes\_spawning::teams_have_enmity(player_team, (level.flags[flag_index] GetFlagTeam()))) {
@@ -1859,11 +1856,7 @@ twar_is_valid_influencer_for_flag(influencer_entity, flag_team, script_flag) {
   return true;
 }
 
-twar_create_designer_placed_spawn_influencers_for_flag(
-  placed_influencers,
-  flag_index,
-  flag_team,
-  score) {
+twar_create_designer_placed_spawn_influencers_for_flag(placed_influencers, flag_index, flag_team, score) {
   objective_proximity_bonus = level.spawnsystem.twar_linked_flag_near_objective_bonus;
   script_flag = twar_flag_index_to_script_flag(flag_index);
   contested_flag = locate_contested_twar_flag();
@@ -1943,20 +1936,12 @@ twar_create_spawn_influencers_for_team(team, placed_influencers) {
   if(team_flag_indices.size > 0) {
     if((level.flags[0] GetFlagTeam()) == team) {
       for(flag_index = team_flag_indices.size - 1; flag_index >= 0; flag_index--) {
-        twar_create_designer_placed_spawn_influencers_for_flag(
-          placed_influencers,
-          team_flag_indices[flag_index],
-          team,
-          linked_influencer_score);
+        twar_create_designer_placed_spawn_influencers_for_flag(placed_influencers, team_flag_indices[flag_index], team, linked_influencer_score);
         linked_influencer_score -= (score_falloff_percentage * linked_influencer_score);
       }
     } else {
       for(flag_index = 0; flag_index < team_flag_indices.size; flag_index++) {
-        twar_create_designer_placed_spawn_influencers_for_flag(
-          placed_influencers,
-          team_flag_indices[flag_index],
-          team,
-          linked_influencer_score);
+        twar_create_designer_placed_spawn_influencers_for_flag(placed_influencers, team_flag_indices[flag_index], team, linked_influencer_score);
         linked_influencer_score -= (score_falloff_percentage * linked_influencer_score);
       }
     }
@@ -1967,24 +1952,14 @@ twar_create_contested_objective_influencer(flag_entity) {
   spawn_twar_contested_flag_influencer_score = level.spawnsystem.twar_contested_flag_influencer_score;
   spawn_twar_contested_flag_influencer_score_curve = level.spawnsystem.twar_contested_flag_influencer_score_curve;
   spawn_twar_contested_flag_influencer_radius = level.spawnsystem.twar_contested_flag_influencer_radius;
-  return addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    flag_entity GetOrigin(),
-    spawn_twar_contested_flag_influencer_radius,
-    spawn_twar_contested_flag_influencer_score,
-    0,
-    maps\mp\gametypes\_spawning::get_score_curve_index(spawn_twar_contested_flag_influencer_score_curve));
+  return addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, flag_entity GetOrigin(), spawn_twar_contested_flag_influencer_radius, spawn_twar_contested_flag_influencer_score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(spawn_twar_contested_flag_influencer_score_curve));
 }
 
 twar_create_contested_objective_positive_influencer(flag_entity) {
   spawn_twar_contested_flag_influencer_score = level.spawnsystem.twar_contested_flag_positive_influencer_score;
   spawn_twar_contested_flag_influencer_score_curve = level.spawnsystem.twar_contested_flag_positive_influencer_score_curve;
   spawn_twar_contested_flag_influencer_radius = level.spawnsystem.twar_contested_flag_positive_influencer_radius;
-  return addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
-    flag_entity GetOrigin(),
-    spawn_twar_contested_flag_influencer_radius,
-    spawn_twar_contested_flag_influencer_score,
-    0,
-    maps\mp\gametypes\_spawning::get_score_curve_index(spawn_twar_contested_flag_influencer_score_curve));
+  return addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE, flag_entity GetOrigin(), spawn_twar_contested_flag_influencer_radius, spawn_twar_contested_flag_influencer_score, 0, maps\mp\gametypes\_spawning::get_score_curve_index(spawn_twar_contested_flag_influencer_score_curve));
 }
 
 twar_remove_spawn_influencers() {

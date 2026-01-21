@@ -4,8 +4,7 @@
 ********************************************************/
 
 /*QUAKED actor_enemy_merc_SHOTGUNAUTO (1.0 0.25 0.0) (-16 -16 0) (16 16 72) SPAWNER FORCESPAWN UNDELETABLE PERFECTENEMYINFO DONTSHAREENEMYINFO
-defaultmdl="body_airborne_shotgun"
-"count" -- max AI to ever spawn from this spawner
+defaultmdl="body_airborne_shotgun""count" -- max AI to ever spawn from this spawner
 SPAWNER -- makes this a spawner instead of a guy
 FORCESPAWN -- will try to delete an AI if spawning fails from too many AI
 UNDELETABLE -- this AI (or AI spawned from here) cannot be deleted to make room for FORCESPAWN guys

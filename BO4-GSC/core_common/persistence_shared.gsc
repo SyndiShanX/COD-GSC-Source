@@ -215,9 +215,7 @@ initialize_match_stats() {
 event_handler[player_challengecomplete] codecallback_challengecomplete(eventstruct) {
   if(sessionmodeiscampaigngame()) {
     if(isDefined(self.challenge_callback_cp)) {
-      [
-        [self.challenge_callback_cp]
-      ](eventstruct.reward, eventstruct.max, eventstruct.row, eventstruct.table_number, eventstruct.challenge_type, eventstruct.item_index, eventstruct.challenge_index);
+      [[self.challenge_callback_cp]](eventstruct.reward, eventstruct.max, eventstruct.row, eventstruct.table_number, eventstruct.challenge_type, eventstruct.item_index, eventstruct.challenge_index);
     }
 
     return;
@@ -332,11 +330,7 @@ event_handler[player_gunchallengecomplete] codecallback_gunchallengecomplete(eve
 
   if(sessionmodeiscampaigngame()) {
     self notify(#"gun_level_complete", {
-      #reward_xp: rewardxp,
-      #attachment_index: attachmentindex,
-      #item_index: itemindex,
-      #rank: rankid,
-      #is_last_rank: islastrank
+      #reward_xp: rewardxp, #attachment_index: attachmentindex, #item_index: itemindex, #rank: rankid, #is_last_rank: islastrank
     });
     return;
   }

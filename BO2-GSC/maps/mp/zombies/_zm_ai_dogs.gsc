@@ -124,9 +124,7 @@ dog_round_spawning() {
     favorite_enemy = get_favorite_enemy();
 
     if(isDefined(level.dog_spawn_func)) {
-      spawn_loc = [
-        [level.dog_spawn_func]
-      ](level.dog_spawners, favorite_enemy);
+      spawn_loc = [[level.dog_spawn_func]](level.dog_spawners, favorite_enemy);
       ai = spawn_zombie(level.dog_spawners[0]);
 
       if(isDefined(ai)) {
@@ -592,9 +590,7 @@ special_dog_spawn(spawners, num_to_spawn) {
         flag_set("dog_clips");
       }
     } else if(isDefined(level.dog_spawn_func)) {
-      spawn_loc = [
-        [level.dog_spawn_func]
-      ](level.dog_spawners, favorite_enemy);
+      spawn_loc = [[level.dog_spawn_func]](level.dog_spawners, favorite_enemy);
       ai = spawn_zombie(level.dog_spawners[0]);
 
       if(isDefined(ai)) {

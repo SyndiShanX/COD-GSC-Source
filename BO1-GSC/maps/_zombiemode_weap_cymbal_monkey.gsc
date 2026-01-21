@@ -66,7 +66,7 @@ player_handle_cymbal_monkey() {
         oldPos = grenade.origin;
       }
       if(isDefined(grenade)) {
-        model SetAnim( % o_monkey_bomb);
+        model SetAnim(%o_monkey_bomb);
         model thread monkey_cleanup(grenade);
         model unlink();
         model.origin = grenade.origin;
@@ -117,7 +117,7 @@ do_monkey_sound(model, info) {
   self thread play_delayed_explode_vox();
   self waittill("explode", position);
   if(isDefined(model)) {
-    model ClearAnim( % o_monkey_bomb, 0.2);
+    model ClearAnim(%o_monkey_bomb, 0.2);
   }
   for(i = 0; i < info.sound_attractors.size; i++) {
     if(isDefined(info.sound_attractors[i])) {

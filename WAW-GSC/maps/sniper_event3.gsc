@@ -326,8 +326,7 @@ alldudes_2_come() {
   waittill_aigroupcleared("e3_leftguys");
   guys = getaiarray("axis");
   for(i = 0; i < guys.size; i++) {
-    if(isDefined(guys[i].script_noteworthy) &&
-      (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys" || guys[i].script_noteworthy == "floor2_mgguy")) {
+    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys" || guys[i].script_noteworthy == "floor2_mgguy")) {
       guys[i] thread wait_and_kill(randomint(2), getstruct("magicfriendlybullet_spot", "targetname"));
     }
   }
@@ -378,8 +377,7 @@ sniper_cover_battle2() {
   flag_wait("e3_forward_comrades");
   guys = getaiarray("axis");
   for(i = 0; i < guys.size; i++) {
-    if(isDefined(guys[i].script_noteworthy) &&
-      (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys")) {
+    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys")) {
       guys[i] thread wait_and_kill(randomint(20));
     }
   }

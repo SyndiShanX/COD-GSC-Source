@@ -125,9 +125,9 @@ globals_init() {
 
 anim_init() {
   add_scene("plant_network_intruder", "player_tag_origin");
-  add_player_anim("player_body", % int_motion_sensor_pullout, 1, 0);
+  add_player_anim("player_body", %int_motion_sensor_pullout, 1, 0);
   add_scene("player_death", "player_tag_origin");
-  add_player_anim("player_body", % int_war_mode_player_death, 0);
+  add_player_anim("player_body", %int_war_mode_player_death, 0);
   level.scr_anim["dropoff_claw"]["claw_touchdown"] = % ai_claw_mk2_warmode_touchdown;
   precache_assets();
 }

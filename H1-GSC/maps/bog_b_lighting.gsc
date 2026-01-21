@@ -194,12 +194,10 @@ play_flickering_light() {
   var_2["on"] = "emt_light_flicker_on";
   var_2["off"] = "emt_light_flicker_off";
   var_2["loop"] = "emt_light_flicker_lp";
-  var_2["vol_env"] = [[var_0, 0.2],
-    [var_1, 1.0]];
+  var_2["vol_env"] = [[var_0, 0.2], [var_1, 1.0]];
   thread maps\_lighting::model_flicker_preset("model_flicker_01", 0, var_0, var_1, undefined, undefined, 0.005, 0.5, 0.005, 0.05, undefined, var_2, 1500);
   var_0 = 1800;
   var_1 = 25000;
-  var_2["vol_env"] = [[var_0, 0.2],
-    [var_1, 1.0]];
+  var_2["vol_env"] = [[var_0, 0.2], [var_1, 1.0]];
   thread maps\_lighting::model_flicker_preset("model_flicker_03", 0, var_0, var_1, undefined, undefined, 0.005, 0.5, 0.005, 0.05, undefined, var_2, 1500);
 }

@@ -15,10 +15,7 @@ It handles initializing a vehicle( giving it life, turrets, machine guns, treads
 It also handles spawning of vehicles in a very ugly way for now, we're getting code to make it pretty
 
 Most things you see in the vehicle menu in Radiant are handled here.There's all sorts of properties
-that you can set on a trigger to access some of this functionality.A trigger can spawn a vehicle,
-toggle different behaviors,
-
-HIGH LEVEL FUNCTIONS
+that you can set on a trigger to access some of this functionality.A trigger can spawn a vehicle, toggle different behaviors, HIGH LEVEL FUNCTIONS
 // vehicle_init( vehicle )
 	this give the vehicle life, treads, turrets, machine guns, all that good stuff
 
@@ -210,8 +207,7 @@ vehicle_linked_entities_think() {
   if(aLinkedEnts.size == 0) {
     return;
   }
-  //need cargo to have a unique targetname....we can't get script_linkTo arrays within a prefab,
-  //and we can't target a vehicle to the cargo since we need to target it to its nodes
+  //need cargo to have a unique targetname....we can't get script_linkTo arrays within a prefab, //and we can't target a vehicle to the cargo since we need to target it to its nodes
   targetname = aLinkedEnts[0].targetname;
   aLinkedEnts = getEntArray(targetname, "targetname");
 
@@ -360,17 +356,7 @@ crash_detour_check(detourpath) {
   Assert(isDefined(detourpath.script_crashtype));
 
   // long somewhat complex set of conditions on which a vehicle will detour through a crashpath.
-  return (
-    (
-      isDefined(self.deaddriver) ||
-      (self.health < self.healthbuffer) ||
-      detourpath.script_crashtype == "forced"
-    ) &&
-    (
-      !isDefined(detourpath.derailed) ||
-      detourpath.script_crashtype == "plane"
-    )
-  );
+  return ((isDefined(self.deaddriver) || (self.health < self.healthbuffer) || detourpath.script_crashtype == "forced") && (!isDefined(detourpath.derailed) || detourpath.script_crashtype == "plane"));
 }
 
 crash_derailed_check(detourpath) {
@@ -518,15 +504,7 @@ ai_should_be_added(ai) {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_vehicle_ai_spawners( <get_vehicle_ai_spawners> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: get_vehicle_ai_spawners( <get_vehicle_ai_spawners> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 get_vehicle_ai_spawners() {
@@ -556,13 +534,7 @@ get_vehicle_ai_spawners() {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_vehicle_ai_riders()"
-"Summary: returns ai's asigned to a vehicle through the radiant menu.Note that this doesn not return actual riders, for that just read vehicle.riders"
-"Module: Entity"
-"CallOn: An entity"
-"Example: riders = self get_vehicle_ai_riders()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: get_vehicle_ai_riders()""Summary: returns ai's asigned to a vehicle through the radiant menu.Note that this doesn not return actual riders, for that just read vehicle.riders""Module: Entity""CallOn: An entity""Example: riders = self get_vehicle_ai_riders()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 get_vehicle_ai_riders() {
@@ -748,9 +720,7 @@ path_array_setup(pathpoint) {
     arraycount++;
 
     if(isDefined(pathpoint.target))
-      pathpoint = [
-        [get_func]
-      ](pathpoint.target);
+      pathpoint = [[get_func]](pathpoint.target);
     else
       break;
   }
@@ -770,15 +740,7 @@ node_wait(nextpoint, lastpoint) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_paths( <node> , <bhelicopterwaitforstart> )"
-"Summary: Call this on a vehicle to send it on it's way down a chain of nodes,structs, or origins. "
-"Module: Vehicle"
-"CallOn: A vehicle"
-"OptionalArg: <node>: start node of chain of nodes,structs, or origins. if unspecified script will search for targeted node."
-"OptionalArg: <bhelicopterwaitforstart>: defaults to false. turning it on will make it wait for the gopath() command "
-"Example: vehicle maps\_vehicle::vehicle_paths( struct );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_paths( <node> , <bhelicopterwaitforstart> )""Summary: Call this on a vehicle to send it on it's way down a chain of nodes,structs, or origins. ""Module: Vehicle""CallOn: A vehicle""OptionalArg: <node>: start node of chain of nodes,structs, or origins. if unspecified script will search for targeted node.""OptionalArg: <bhelicopterwaitforstart>: defaults to false. turning it on will make it wait for the gopath() command ""Example: vehicle maps\_vehicle::vehicle_paths( struct );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -804,8 +766,7 @@ vehicle_paths(node, bhelicopterwaitforstart) {
   }
   self endon("newpath");
 
-  // this converts chains of whatever types of vehicle nodes and turns them into this array,
-  // from this point most of the script won't care what kind of path it is.
+  // this converts chains of whatever types of vehicle nodes and turns them into this array, // from this point most of the script won't care what kind of path it is.
   // 	pathpoints = path_array_setup( pathpoint );
 
   pathpoint = pathstart;
@@ -937,9 +898,7 @@ vehicle_paths(node, bhelicopterwaitforstart) {
     if(vehicle_should_unload(wait_func, nextpoint))
       self thread unload_node(nextpoint);
 
-    // physics vehicles have transmission "forward" or "reverse"
-
-    if(self Vehicle_IsPhysVeh()) {
+    // physics vehicles have transmission "forward" or "reverse"if(self Vehicle_IsPhysVeh()) {
       if(isDefined(nextpoint.script_transmission)) {
         self.veh_transmission = nextpoint.script_transmission;
         if(self.veh_transmission == "forward")
@@ -1104,14 +1063,7 @@ is_script_vehicle_selfremove() {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_heli_move( <heliMove> )"
-"Summary: Makes a heli turn with specific presets"
-"Module: Vehicle"
-"CallOn: A helicopter"
-"MandatoryArg: <heliMove>: The type of turning"
-"Example: heli set_heli_move( "fast" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_heli_move( <heliMove> )""Summary: Makes a heli turn with specific presets""Module: Vehicle""CallOn: A helicopter""MandatoryArg: <heliMove>: The type of turning""Example: heli set_heli_move( "fast" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 set_heli_move(heliMove) {
@@ -1348,15 +1300,7 @@ deathrolloff() {
 /*
 =============
 ///ScriptDocBegin
-"Name: getonpath( <getonpath> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: getonpath( <getonpath> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 getonpath(skip_attach) {
@@ -1431,14 +1375,7 @@ getonpath(skip_attach) {
 /*
 =============
 ///ScriptDocBegin
-"Name: create_vehicle_from_spawngroup_and_gopath( <spawnGroup> )"
-"Summary: spawns and returns and array of the vehicles in the specified spawngroup starting them on their paths"
-"Module: Vehicle"
-"CallOn: An entity"
-"MandatoryArg: <spawnGroup> : the script_vehiclespawngroup asigned to the vehicles in radiant"
-"Example: maps\_vehicle::create_vehicle_from_spawngroup_and_gopath( spawnGroup )"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: create_vehicle_from_spawngroup_and_gopath( <spawnGroup> )""Summary: spawns and returns and array of the vehicles in the specified spawngroup starting them on their paths""Module: Vehicle""CallOn: An entity""MandatoryArg: <spawnGroup> : the script_vehiclespawngroup asigned to the vehicles in radiant""Example: maps\_vehicle::create_vehicle_from_spawngroup_and_gopath( spawnGroup )""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -1452,15 +1389,7 @@ create_vehicle_from_spawngroup_and_gopath(spawnGroup) {
 /*
 =============
 ///ScriptDocBegin
-"Name: gopath( <vehicle> )"
-"Summary: Helis notify reached_dynamic_path_end on end"
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: gopath( <vehicle> )""Summary: Helis notify reached_dynamic_path_end on end""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 gopath(vehicle) {
@@ -1511,14 +1440,7 @@ path_gate_wait_till_open(pathspot) {
 /*
 =============
 ///ScriptDocBegin
-"Name: scripted_spawn( <group> )"
-"Summary: spawns and returns a vehiclegroup, you will need to tell it to maps\_vehicle::gopath() when you want it to go"
-"Module: Vehicle"
-"CallOn: An entity"
-"MandatoryArg: <group> : "
-"Example: bmps = maps\_vehicle::scripted_spawn( 32 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: scripted_spawn( <group> )""Summary: spawns and returns a vehiclegroup, you will need to tell it to maps\_vehicle::gopath() when you want it to go""Module: Vehicle""CallOn: An entity""MandatoryArg: <group> : ""Example: bmps = maps\_vehicle::scripted_spawn( 32 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -1534,14 +1456,8 @@ scripted_spawn(group) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_spawn( <spawner> )"
-"Summary: spawnes a vehicle from the given vehicle spawner."
-"Module: Vehicle"
-LevelOn: A Level"
-"MandatoryArg: <spawner>: "
-"Example: level.reinforcement_heli = vehicle_spawn( spawner );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_spawn( <spawner> )""Summary: spawnes a vehicle from the given vehicle spawner.""Module: Vehicle"LevelOn: A Level"
+"MandatoryArg: <spawner>: ""Example: level.reinforcement_heli = vehicle_spawn( spawner );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_spawn(vspawner) {
@@ -1669,9 +1585,7 @@ vehicle_init(vehicle) {
   vehicle vehicle_setteam();
 
   // init pointer is specified in the precache script( IE maps\_tiger::main() )
-  // only special case gag works should exist in this thread,
-
-  if(!isDefined(level.vehicleInitThread[vehicle.vehicletype][vehicle.model])) {
+  // only special case gag works should exist in this thread, if(!isDefined(level.vehicleInitThread[vehicle.vehicletype][vehicle.model])) {
     PrintLn("vehicle.vehicletype is: " + vehicle.vehicletype);
     PrintLn("vehicle.model is: " + vehicle.model);
   }
@@ -1972,12 +1886,7 @@ vehicle_kill() {
     if(!rocketdeath)
       vehOrigin = self.origin;
     if(isDefined(level.vehicle_death_earthquake[type]))
-      earthquake(
-        level.vehicle_death_earthquake[type].scale,
-        level.vehicle_death_earthquake[type].duration,
-        vehOrigin,
-        level.vehicle_death_earthquake[type].radius
-      );
+      earthquake(level.vehicle_death_earthquake[type].scale, level.vehicle_death_earthquake[type].duration, vehOrigin, level.vehicle_death_earthquake[type].radius);
 
     wait .5;
 
@@ -2115,7 +2024,7 @@ set_death_model(sModel, fDelay) {
     return;
   eModel = get_dummy();
   if(isDefined(self.clear_anims_on_death))
-    eModel ClearAnim( % root, 0);
+    eModel ClearAnim(%root, 0);
   if(isDefined(self))
     eModel setModel(sModel);
 }
@@ -2210,8 +2119,7 @@ helicopter_crash_move(attacker, cause) {
 
     while(msg != "death") {
       msg = self waittill_any("goal", "near_goal", "death");
-      // waittill_any ends on "death"
-      if(!isDefined(msg) && !isDefined(self)) {
+      // waittill_any ends on "death"if(!isDefined(msg) && !isDefined(self)) {
         crashLoc.claimed = undefined;
         self notify("crash_done");
         return;
@@ -2289,14 +2197,7 @@ kill_fx(model, rocketdeath) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_flag_arrived( <msg> )"
-"Summary: Script waits until the vehicle hits the node that has script_flag_wait with this msg"
-"Module: Vehicle"
-"CallOn: A vehicle"
-"MandatoryArg: <msg> :The flag"
-"Example: heli vehicle_flag_arrived( "surrender_to_me" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_flag_arrived( <msg> )""Summary: Script waits until the vehicle hits the node that has script_flag_wait with this msg""Module: Vehicle""CallOn: A vehicle""MandatoryArg: <msg> :The flag""Example: heli vehicle_flag_arrived( "surrender_to_me" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2375,20 +2276,7 @@ loop_fx_on_vehicle_tag(effect, loopTime, tag) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_radiusdamage( <offset> , <range> , <maxdamage> , <mindamage> , <bKillplayer> , <delay> )"
-"Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <health> :health"
-"MandatoryArg: <offset> : worldspace offset vector, usually goes up"
-"MandatoryArg: <range> : randomly chooses between the minhealth, maxhealth"
-"MandatoryArg: <maxdamage> : randomly chooses between the minhealth, maxhealth"
-"MandatoryArg: <mindamage> : randomly chooses between the minhealth, maxhealth"
-"MandatoryArg: <bKillplayer> : true / false: kills player"
-"OptionalArg: <delay> : delay after "death" to do the damage."
-"Example: build_radiusdamage( ( 0, 0, 53 ), 512, 300, 20, false );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_radiusdamage( <offset> , <range> , <maxdamage> , <mindamage> , <bKillplayer> , <delay> )""Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <health> :health""MandatoryArg: <offset> : worldspace offset vector, usually goes up""MandatoryArg: <range> : randomly chooses between the minhealth, maxhealth""MandatoryArg: <maxdamage> : randomly chooses between the minhealth, maxhealth""MandatoryArg: <mindamage> : randomly chooses between the minhealth, maxhealth""MandatoryArg: <bKillplayer> : true / false: kills player""OptionalArg: <delay> : delay after "death" to do the damage.""Example: build_radiusdamage( ( 0, 0, 53 ), 512, 300, 20, false );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2412,19 +2300,7 @@ build_radiusdamage(offset, range, maxdamage, mindamage, bKillplayer, delay) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_rumble( <rumble> , <scale> , <duration> , <radius> , <basetime> , <randomaditionaltime> )"
-"Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <rumble> :rumble asset"
-"MandatoryArg: <scale> : scale"
-"MandatoryArg: <duration> : duration"
-"MandatoryArg: <radius> : radius"
-"MandatoryArg: <basetime> : time to wait between rumbles"
-"MandatoryArg: <randomaditionaltime> : random amount of time to add to basetime"
-"Example: build_rumble( "tank_rumble", 0.15, 4.5, 600, 1, 1 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_rumble( <rumble> , <scale> , <duration> , <radius> , <basetime> , <randomaditionaltime> )""Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <rumble> :rumble asset""MandatoryArg: <scale> : scale""MandatoryArg: <duration> : duration""MandatoryArg: <radius> : radius""MandatoryArg: <basetime> : time to wait between rumbles""MandatoryArg: <randomaditionaltime> : random amount of time to add to basetime""Example: build_rumble( "tank_rumble", 0.15, 4.5, 600, 1, 1 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2441,15 +2317,7 @@ build_rumble(rumble, scale, duration, radius, basetime, randomaditionaltime) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_deathquake( <scale> , <duration> , <radius> )"
-"Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <scale> : scale"
-"MandatoryArg: <duration> : duration"
-"MandatoryArg: <radius> : radius"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_deathquake( <scale> , <duration> , <radius> )""Summary: called in individual vehicle file - define amount of radius damage to be set on each vehicle""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <scale> : scale""MandatoryArg: <duration> : duration""MandatoryArg: <radius> : radius""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2495,25 +2363,8 @@ build_fx(effect, tag, sound, bEffectLooping, delay, bSoundlooping, waitDelay, st
 /*
 =============
 ///ScriptDocBegin
-"Name: build_deathfx_override( <type> , <model>, <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay>)"
-"Summary: called in individual vehicle file - death effects on vehicles, usually multiple lines for multistaged / multitagged sequences"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <type> : vehicle type to override the effect of"
-"MandatoryArg: <type> : vehicle model to override the effect of"
-"MandatoryArg: <effect> :effect to play on death"
-"OptionalArg: <tag> : tag to play the effect on"
-"OptionalArg: <sound> : "sound to play with effect
-"OptionalArg: <bEffectLooping> : play it old fashioned loop style"
-"OptionalArg: <delay> : old fashioned loop time"
-"OptionalArg: <bSoundlooping> : true / false:sound loops "
-"OptionalArg: <waitDelay> : wait this long after death to start this effect sequence"
-"OptionalArg: <stayontag> : playfxontag"
-"OptionalArg: <notifyString> : notifies vehicle this when effect starts"
-"OptionalArg: <delete_vehicle_delay> : delete the vehicle after this amount of time"
-"Example: build_deathfx_override( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_deathfx_override( <type> , <model>, <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay>)""Summary: called in individual vehicle file - death effects on vehicles, usually multiple lines for multistaged / multitagged sequences""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <type> : vehicle type to override the effect of""MandatoryArg: <type> : vehicle model to override the effect of""MandatoryArg: <effect> :effect to play on death""OptionalArg: <tag> : tag to play the effect on""OptionalArg: <sound> : "sound to play with effect
+"OptionalArg: <bEffectLooping> : play it old fashioned loop style""OptionalArg: <delay> : old fashioned loop time""OptionalArg: <bSoundlooping> : true / false:sound loops ""OptionalArg: <waitDelay> : wait this long after death to start this effect sequence""OptionalArg: <stayontag> : playfxontag""OptionalArg: <notifyString> : notifies vehicle this when effect starts""OptionalArg: <delete_vehicle_delay> : delete the vehicle after this amount of time""Example: build_deathfx_override( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2544,23 +2395,7 @@ build_deathfx_override(type, model, effect, tag, sound, bEffectLooping, delay, b
 /*
 =============
 ///ScriptDocBegin
-"Name: build_deathfx( <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay> )"
-"Summary: called in individual vehicle file - death effects on vehicles, usually multiple lines for multistaged / multitagged sequences"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <effect> :effect to play on death"
-"OptionalArg: <tag> : tag to play the effect on"
-"OptionalArg: <sound> : sound to play with effect"
-"OptionalArg: <bEffectLooping> : play it old fashioned loop style. Set this to true or undefined"
-"OptionalArg: <delay> : old fashioned loop time in seconds"
-"OptionalArg: <bSoundlooping> : true / false:sound loops"
-"OptionalArg: <waitDelay> : wait this long after death to start this effect sequence"
-"OptionalArg: <stayontag> : playfxontag"
-"OptionalArg: <notifyString> : notifies vehicle this when effect starts"
-"OptionalArg: <delete_vehicle_delay> : delete the vehicle after this amount of time"
-"Example: build_deathfx( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_deathfx( <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay> )""Summary: called in individual vehicle file - death effects on vehicles, usually multiple lines for multistaged / multitagged sequences""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <effect> :effect to play on death""OptionalArg: <tag> : tag to play the effect on""OptionalArg: <sound> : sound to play with effect""OptionalArg: <bEffectLooping> : play it old fashioned loop style. Set this to true or undefined""OptionalArg: <delay> : old fashioned loop time in seconds""OptionalArg: <bSoundlooping> : true / false:sound loops""OptionalArg: <waitDelay> : wait this long after death to start this effect sequence""OptionalArg: <stayontag> : playfxontag""OptionalArg: <notifyString> : notifies vehicle this when effect starts""OptionalArg: <delete_vehicle_delay> : delete the vehicle after this amount of time""Example: build_deathfx( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2594,23 +2429,7 @@ is_overrode(typemodel) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_rocket_deathfx( <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay> )"
-"Summary: Specify the alternate set of effects for a death on a vehicle caused by rockets"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <effect> :effect to play on death"
-"OptionalArg: <tag> : tag to play the effect on"
-"OptionalArg: <sound> : sound to play with effect"
-"OptionalArg: <bEffectLooping> : play it old fashioned loop style. Set this to true or undefined"
-"OptionalArg: <delay> : old fashioned loop time in seconds"
-"OptionalArg: <bSoundlooping> : true / false:sound loops"
-"OptionalArg: <waitDelay> : wait this long after death to start this effect sequence"
-"OptionalArg: <stayontag> : playfxontag"
-"OptionalArg: <notifyString> : notifies vehicle this when effect starts"
-"OptionalArg: <delete_vehicle_delay> : delete the vehicle after this amount of time"
-"Example: build_rocket_deathfx( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_rocket_deathfx( <effect> , <tag> , <sound> , <bEffectLooping> , <delay> , <bSoundlooping> , <waitDelay> , <stayontag> , <notifyString> , <delete_vehicle_delay> )""Summary: Specify the alternate set of effects for a death on a vehicle caused by rockets""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <effect> :effect to play on death""OptionalArg: <tag> : tag to play the effect on""OptionalArg: <sound> : sound to play with effect""OptionalArg: <bEffectLooping> : play it old fashioned loop style. Set this to true or undefined""OptionalArg: <delay> : old fashioned loop time in seconds""OptionalArg: <bSoundlooping> : true / false:sound loops""OptionalArg: <waitDelay> : wait this long after death to start this effect sequence""OptionalArg: <stayontag> : playfxontag""OptionalArg: <notifyString> : notifies vehicle this when effect starts""OptionalArg: <delete_vehicle_delay> : delete the vehicle after this amount of time""Example: build_rocket_deathfx( "explosions/large_vehicle_explosion", undefined, "explo_metal_rand" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -2807,15 +2626,7 @@ force_kill() {
 /*
 =============
 ///ScriptDocBegin
-"Name: godon( <godon> )"
-"Summary: Vehicle gets god mode"
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: godon( <godon> )""Summary: Vehicle gets god mode""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 godon() {
@@ -2825,15 +2636,7 @@ godon() {
 /*
 =============
 ///ScriptDocBegin
-"Name: godoff( <godoff> )"
-"Summary: Vehicle loses god mode"
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: godoff( <godoff> )""Summary: Vehicle loses god mode""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 godoff() {
@@ -3089,12 +2892,7 @@ node_trigger_process() {
   }
 
   // various nodes that will be sent through trigger_process
-  if(
-    isDefined(self.script_VehicleSpawngroup) ||
-    isDefined(self.script_VehicleStartMove) ||
-    isDefined(self.script_gatetrigger) ||
-    isDefined(self.script_vehicleGroupDelete)
-  )
+  if(isDefined(self.script_VehicleSpawngroup) || isDefined(self.script_VehicleStartMove) || isDefined(self.script_gatetrigger) || isDefined(self.script_vehicleGroupDelete))
     processtrigger = true;
 
   if(processtrigger)
@@ -3293,15 +3091,7 @@ mgtoggle() {
 /*
 =============
 ///ScriptDocBegin
-"Name: mgoff( <mgoff> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: mgoff( <mgoff> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 mgoff() {
@@ -3326,15 +3116,7 @@ mgoff() {
 /*
 =============
 ///ScriptDocBegin
-"Name: mgon( <mgon> )"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: mgon( <mgon> )""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 mgon() {
@@ -3480,21 +3262,7 @@ playLoopedFxontag_originupdate(tag, effectorigin) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_turret( <info> , <tag> , <model> , <maxrange> , <defaultONmode> , <deletedelay>, <defaultdroppitch>, <defaultdropyaw> )"
-"Summary: Creates an mg turret on a vehicle"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: An entity"
-"MandatoryArg: <info>: weapon info"
-"MandatoryArg: <tag>: of vehicle tag to attach the turret to"
-"MandatoryArg: <model>: model of turret"
-"MandatoryArg: <maxrange>: maxrange "
-"MandatoryArg: <defaultONmode>: ai on mode for turret(auto-nonai and stuff)"
-"MandatoryArg: <deletedelay>: used for hacking death sequences"
-"MandatoryArg: <defaultdroppitch>: set the defaultdroppitch"
-"MandatoryArg: <defaultdropyaw>: set the defaultdropyaw"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_turret( <info> , <tag> , <model> , <maxrange> , <defaultONmode> , <deletedelay>, <defaultdroppitch>, <defaultdropyaw> )""Summary: Creates an mg turret on a vehicle""Module: vehicle_build( vehicle.gsc )""CallOn: An entity""MandatoryArg: <info>: weapon info""MandatoryArg: <tag>: of vehicle tag to attach the turret to""MandatoryArg: <model>: model of turret""MandatoryArg: <maxrange>: maxrange ""MandatoryArg: <defaultONmode>: ai on mode for turret(auto-nonai and stuff)""MandatoryArg: <deletedelay>: used for hacking death sequences""MandatoryArg: <defaultdroppitch>: set the defaultdroppitch""MandatoryArg: <defaultdropyaw>: set the defaultdropyaw""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -3724,17 +3492,7 @@ friendlyfire_shield() {
     if(isDefined(attacker))
       attacker maps\_player_stats::register_shot_hit();
 
-    if(
-      (!isDefined(attacker) && self.script_team != "neutral") ||
-      is_godmode() ||
-      attacker_isonmyteam(attacker) ||
-      attacker_troop_isonmyteam(attacker) ||
-      isDestructible() ||
-      is_invulnerable_from_ai(attacker) ||
-      bulletshielded(type) ||
-      grenadeshielded(type) ||
-      type == "MOD_MELEE"
-    )
+    if((!isDefined(attacker) && self.script_team != "neutral") || is_godmode() || attacker_isonmyteam(attacker) || attacker_troop_isonmyteam(attacker) || isDestructible() || is_invulnerable_from_ai(attacker) || bulletshielded(type) || grenadeshielded(type) || type == "MOD_MELEE")
       self.health = self.currenthealth; // give back health for these things
     else if(self has_frontarmor()) // regen health for tanks with armor in the front
     {
@@ -4452,14 +4210,7 @@ spawn_vehicles_from_targetname_newstyle(name) {
 /*
 =============
 ///ScriptDocBegin
-"Name: spawn_vehicles_from_targetname( <name> )"
-"Summary: returns an array of vehicles from a spawner with that targetname value"
-"Module: Vehicle"
-"CallOn: Level"
-"MandatoryArg: <name>: targetname of the spawners "
-"Example: level.helicopters = maps\_vehicle::spawn_vehicles_from_targetname( "blackhawk" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: spawn_vehicles_from_targetname( <name> )""Summary: returns an array of vehicles from a spawner with that targetname value""Module: Vehicle""CallOn: Level""MandatoryArg: <name>: targetname of the spawners ""Example: level.helicopters = maps\_vehicle::spawn_vehicles_from_targetname( "blackhawk" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -4473,14 +4224,7 @@ spawn_vehicles_from_targetname(name) {
 /*
 =============
 ///ScriptDocBegin
-"Name: spawn_vehicle_from_targetname( <name> )"
-"Summary: returns a vehicle from a spawner with that targetname value."
-"Module: Vehicle"
-"CallOn: Level"
-"MandatoryArg: <name>: targetname of the spawner "
-"Example: level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname( "blackhawk" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: spawn_vehicle_from_targetname( <name> )""Summary: returns a vehicle from a spawner with that targetname value.""Module: Vehicle""CallOn: Level""MandatoryArg: <name>: targetname of the spawner ""Example: level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname( "blackhawk" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -4494,14 +4238,7 @@ spawn_vehicle_from_targetname(name) {
 /*
 =============
 ///ScriptDocBegin
-"Name: spawn_vehicle_from_targetname_and_drive( <name> )"
-"Summary: returns a vehicle from a spawner with that targetname value and starts it on its targeted path"
-"Module: Vehicle"
-"CallOn: Level"
-"MandatoryArg: <name>: targetname of the spawner "
-"Example: level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname_and_drive( "blackhawk" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: spawn_vehicle_from_targetname_and_drive( <name> )""Summary: returns a vehicle from a spawner with that targetname value and starts it on its targeted path""Module: Vehicle""CallOn: Level""MandatoryArg: <name>: targetname of the spawner ""Example: level.helicopter = maps\_vehicle::spawn_vehicle_from_targetname_and_drive( "blackhawk" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -4516,14 +4253,7 @@ spawn_vehicle_from_targetname_and_drive(name) {
 /*
 =============
 ///ScriptDocBegin
-"Name: spawn_vehicles_from_targetname_and_drive( <name> )"
-"Summary: returns an array of vehicles from a spawner with that targetname value and starts them on their targeted path"
-"Module: Vehicle"
-"CallOn: Level"
-"MandatoryArg: <name>: targetname of the spawners"
-"Example: level.helicopters = maps\_vehicle::spawn_vehicles_from_targetname_and_drive( "blackhawk" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: spawn_vehicles_from_targetname_and_drive( <name> )""Summary: returns an array of vehicles from a spawner with that targetname value and starts them on their targeted path""Module: Vehicle""CallOn: Level""MandatoryArg: <name>: targetname of the spawners""Example: level.helicopters = maps\_vehicle::spawn_vehicles_from_targetname_and_drive( "blackhawk" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -4927,13 +4657,7 @@ turret_deleteme(turret) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_wheels_forward()"
-"Summary: change the direction of the wheel animation on a vehicle to forward."
-"Module: Vehicle"
-"CallOn: A Vehicle"
-"Example: vehicle vehicle_wheels_forward()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_wheels_forward()""Summary: change the direction of the wheel animation on a vehicle to forward.""Module: Vehicle""CallOn: A Vehicle""Example: vehicle vehicle_wheels_forward()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_wheels_forward() {
@@ -4943,13 +4667,7 @@ vehicle_wheels_forward() {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_wheels_backward()"
-"Summary: change the direction of the wheel animation on a vehicle to backward."
-"Module: Vehicle"
-"CallOn: A Vehicle"
-"Example: vehicle vehicle_wheels_backward()"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_wheels_backward()""Summary: change the direction of the wheel animation on a vehicle to backward.""Module: Vehicle""CallOn: A Vehicle""Example: vehicle vehicle_wheels_backward()""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_wheels_backward() {
@@ -4995,19 +4713,7 @@ playTankExhaust() {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_light( <model> , <name> , <tag> , <effect> , <group> , <delay> )"
-"Summary: contstruct a light fx to play on a vehicle tag, see lights_on lights_off"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: An entity"
-"MandatoryArg: <model> : Name of model that you are building the light for"
-"MandatoryArg: <name> : Unique name used for grouping"
-"MandatoryArg: <tag> : Tag to play the light effect on"
-"MandatoryArg: <effect> : the effect"
-"MandatoryArg: <group> : Group is used for lights_on lights_off"
-"MandatoryArg: <delay> : Used to offset the timing of this light so they don't all start at the same time"
-"Example: build_light( model, "taillight_R", 	"TAG_REAR_LIGHT_RIGHT", 	"misc/car_taillight_btr80", 		"running", 	0.1 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_light( <model> , <name> , <tag> , <effect> , <group> , <delay> )""Summary: contstruct a light fx to play on a vehicle tag, see lights_on lights_off""Module: vehicle_build( vehicle.gsc )""CallOn: An entity""MandatoryArg: <model> : Name of model that you are building the light for""MandatoryArg: <name> : Unique name used for grouping""MandatoryArg: <tag> : Tag to play the light effect on""MandatoryArg: <effect> : the effect""MandatoryArg: <group> : Group is used for lights_on lights_off""MandatoryArg: <delay> : Used to offset the timing of this light so they don't all start at the same time""Example: build_light( model, "taillight_R", 	"TAG_REAR_LIGHT_RIGHT", 	"misc/car_taillight_btr80", 		"running", 	0.1 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5035,20 +4741,7 @@ build_light(model, name, tag, effect, group, delay) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_light_override( <type>, <model> , <name> , <tag> , <effect> , <group> , <delay> )"
-"Summary: contstruct a light fx override to play on a vehicle tag, see lights_on lights_off."
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: An entity"
-"MandatoryArg: <type> : vehicletype of model that you are building the light for"
-"MandatoryArg: <model> : Name of model that you are building the light for"
-"MandatoryArg: <name> : Unique name used for grouping"
-"MandatoryArg: <tag> : Tag to play the light effect on"
-"MandatoryArg: <effect> : the effect"
-"MandatoryArg: <group> : Group is used for lights_on lights_off"
-"MandatoryArg: <delay> : Used to offset the timing of this light so they don't all start at the same time"
-"Example: build_light_override( "btr80", "vehicle_btr80", "spotlight", 		"TAG_FRONT_LIGHT_RIGHT", "misc/spotlight_btr80_daytime", 	"spotlight", 			0.2 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_light_override( <type>, <model> , <name> , <tag> , <effect> , <group> , <delay> )""Summary: contstruct a light fx override to play on a vehicle tag, see lights_on lights_off.""Module: vehicle_build( vehicle.gsc )""CallOn: An entity""MandatoryArg: <type> : vehicletype of model that you are building the light for""MandatoryArg: <model> : Name of model that you are building the light for""MandatoryArg: <name> : Unique name used for grouping""MandatoryArg: <tag> : Tag to play the light effect on""MandatoryArg: <effect> : the effect""MandatoryArg: <group> : Group is used for lights_on lights_off""MandatoryArg: <delay> : Used to offset the timing of this light so they don't all start at the same time""Example: build_light_override( "btr80", "vehicle_btr80", "spotlight", 		"TAG_FRONT_LIGHT_RIGHT", "misc/spotlight_btr80_daytime", 	"spotlight", 			0.2 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5101,9 +4794,7 @@ lights_on_internal(group) {
   if(!isDefined(group))
     group = "all";
 
-  if(!isDefined(level.vehicle_lights_group[self.model]) ||
-    !isDefined(level.vehicle_lights_group[self.model][group])
-  )
+  if(!isDefined(level.vehicle_lights_group[self.model]) || !isDefined(level.vehicle_lights_group[self.model][group]))
     return;
   thread lights_delayfxforframe();
   if(!isDefined(self.lights))
@@ -5202,16 +4893,7 @@ lights_off_internal(group, model) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_deathmodel( <model> , <deathmodel> )"
-"Summary: called in individual vehicle file - assigns death model to vehicles with this model. "
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <model> : name of model to associate death model"
-"OptionalArg: <deathmodel> : name of death model to be associated with model"
-"OptionalArg: <swapDelay> : number of seconds to wait before setting the death model after the vehicle dies. Defaults to 0"
-"Example: build_deathmodel( "bmp", "bmp_destroyed" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_deathmodel( <model> , <deathmodel> )""Summary: called in individual vehicle file - assigns death model to vehicles with this model. ""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <model> : name of model to associate death model""OptionalArg: <deathmodel> : name of death model to be associated with model""OptionalArg: <swapDelay> : number of seconds to wait before setting the death model after the vehicle dies. Defaults to 0""Example: build_deathmodel( "bmp", "bmp_destroyed" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5231,14 +4913,7 @@ build_deathmodel(model, deathmodel, swapDelay) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_shoot_shock( <shock> )"
-"Summary: called in individual vehicle file - assigns shock file to be played when main cannon on a tank fires "
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <shock> : the shock asset"
-"Example: build_shoot_shock( "tankblast" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_shoot_shock( <shock> )""Summary: called in individual vehicle file - assigns shock file to be played when main cannon on a tank fires ""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <shock> : the shock asset""Example: build_shoot_shock( "tankblast" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5252,14 +4927,7 @@ build_shoot_shock(shock) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_idle( animation )"
-"Summary: called in individual vehicle file - assigns animations to be used on vehicles"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <animation> : animation"
-"Example: build_idle( %abrams_idle );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_idle( animation )""Summary: called in individual vehicle file - assigns animations to be used on vehicles""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <animation> : animation""Example: build_idle( %abrams_idle );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5274,17 +4942,7 @@ build_idle(animation) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_drive( <forward> , <reverse> , <normalspeed> , <rate> )"
-"Summary: called in individual vehicle file - assigns animations to be used on vehicles"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <forward> : forward animation"
-"OptionalArg: <reverse> : reverse animation"
-"OptionalArg: <normalspeed> : speed at which animation will be played at 1x defaults to 10mph"
-"OptionalArg: <rate> : scales speed of animation( please only use this for testing )"
-"Example: build_drive( %abrams_movement, %abrams_movement_backwards, 10 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_drive( <forward> , <reverse> , <normalspeed> , <rate> )""Summary: called in individual vehicle file - assigns animations to be used on vehicles""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <forward> : forward animation""OptionalArg: <reverse> : reverse animation""OptionalArg: <normalspeed> : speed at which animation will be played at 1x defaults to 10mph""OptionalArg: <rate> : scales speed of animation( please only use this for testing )""Example: build_drive( %abrams_movement, %abrams_movement_backwards, 10 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5303,16 +4961,7 @@ build_drive(forward, reverse, normalspeed, rate) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_template( <type> , <model> , <typeoverride> )"
-"Summary: called in individual vehicle file - mandatory to call this in all vehicle files at the top!"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <type> : vehicle type to set"
-"MandatoryArg: <model> : model to set( this is usually generated by the level script )"
-"OptionalArg: <typeoverride> : this overrides the type, used for copying a vehicle script"
-"Example: build_template( "bmp", model, type );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_template( <type> , <model> , <typeoverride> )""Summary: called in individual vehicle file - mandatory to call this in all vehicle files at the top!""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <type> : vehicle type to set""MandatoryArg: <model> : model to set( this is usually generated by the level script )""OptionalArg: <typeoverride> : this overrides the type, used for copying a vehicle script""Example: build_template( "bmp", model, type );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5339,14 +4988,7 @@ build_template(type, model, typeoverride) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_exhaust( <exhaust_effect_str> )"
-"Summary: called in individual vehicle file - assign an exhaust effect to this vehicle!"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <exhaust_effect_str> : exhaust effect in string format"
-"Example: build_exhaust( "distortion/abrams_exhaust" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_exhaust( <exhaust_effect_str> )""Summary: called in individual vehicle file - assign an exhaust effect to this vehicle!""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <exhaust_effect_str> : exhaust effect in string format""Example: build_exhaust( "distortion/abrams_exhaust" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5357,13 +4999,7 @@ build_exhaust(effect) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_treadfx()"
-"Summary: called in individual vehicle file - enables treadfx"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"Example: build_treadfx();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_treadfx()""Summary: called in individual vehicle file - enables treadfx""Module: vehicle_build( vehicle.gsc )""CallOn: ""Example: build_treadfx();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5376,14 +5012,7 @@ build_treadfx(type) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_team( <team> )"
-"Summary: called in individual vehicle file - sets team"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <team> : team"
-"Example: build_team( "allies" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_team( <team> )""Summary: called in individual vehicle file - sets team""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <team> : team""Example: build_team( "allies" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5394,17 +5023,7 @@ build_team(team) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_mainturret( <firetime> , <tag1> , <tag2> , <tag3> , <tag4> )"
-"Summary: called in individual vehicle file - enables main( cannon ) turret"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"OptionalArg: <tag1> : additional tags to fire from"
-"OptionalArg: <tag2> : additional tags to fire from"
-"OptionalArg: <tag3> : additional tags to fire from"
-"OptionalArg: <tag4> : additional tags to fire from"
-"Example: build_mainturret();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_mainturret( <firetime> , <tag1> , <tag2> , <tag3> , <tag4> )""Summary: called in individual vehicle file - enables main( cannon ) turret""Module: vehicle_build( vehicle.gsc )""CallOn: ""OptionalArg: <tag1> : additional tags to fire from""OptionalArg: <tag2> : additional tags to fire from""OptionalArg: <tag3> : additional tags to fire from""OptionalArg: <tag4> : additional tags to fire from""Example: build_mainturret();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5423,14 +5042,7 @@ build_mainturret(tag1, tag2, tag3, tag4) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_bulletshield( <bShield> )"
-"Summary: Set script toggleable bullet shield on a vehicle. must enable bullet damage on the vehicletype asset first."
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <bShield>: set default enable or disable shield on vehicle "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_bulletshield( <bShield> )""Summary: Set script toggleable bullet shield on a vehicle. must enable bullet damage on the vehicletype asset first.""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <bShield>: set default enable or disable shield on vehicle ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 build_bulletshield(bShield) {
@@ -5441,14 +5053,7 @@ build_bulletshield(bShield) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_grenadeshield( <bShield> )"
-"Summary: Set script toggleable grenade shield on a vehicle. must enable grenade damage on the vehicletype asset first."
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <bShield>: set default enable or disable shield on vehicle "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_grenadeshield( <bShield> )""Summary: Set script toggleable grenade shield on a vehicle. must enable grenade damage on the vehicletype asset first.""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <bShield>: set default enable or disable shield on vehicle ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 build_grenadeshield(bShield) {
@@ -5459,15 +5064,7 @@ build_grenadeshield(bShield) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_aianims( <aithread> , <vehiclethread> )"
-"Summary: called in individual vehicle file - set threads for ai animation and vehicle animation assignments"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <aithread> : ai thread"
-"OptionalArg: <vehiclethread> : vehicle thread"
-"Example: build_aianims( ::setanims, ::set_vehicle_anims );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_aianims( <aithread> , <vehiclethread> )""Summary: called in individual vehicle file - set threads for ai animation and vehicle animation assignments""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <aithread> : ai thread""OptionalArg: <vehiclethread> : vehicle thread""Example: build_aianims( ::setanims, ::set_vehicle_anims );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5480,14 +5077,7 @@ build_aianims(aithread, vehiclethread) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_frontarmor( <armor> )"
-"Summary: called in individual vehicle file - sets percentage of health to regen on attacks from the front"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <armor> : ercentage of health to regen on attacks from the front"
-"Example: build_frontarmor( .33 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_frontarmor( <armor> )""Summary: called in individual vehicle file - sets percentage of health to regen on attacks from the front""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <armor> : ercentage of health to regen on attacks from the front""Example: build_frontarmor( .33 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5502,14 +5092,7 @@ build_hidden_riders_until_unload() {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_attach_models( <modelsthread> )"
-"Summary: called in individual vehicle file - thread for building attached models( ropes ) with animation"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <modelsthread> : thread"
-"Example: build_attach_models( ::set_attached_models );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_attach_models( <modelsthread> )""Summary: called in individual vehicle file - thread for building attached models( ropes ) with animation""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <modelsthread> : thread""Example: build_attach_models( ::set_attached_models );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 build_attach_models(modelsthread) {
@@ -5519,14 +5102,7 @@ build_attach_models(modelsthread) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_unload_groups( <unloadgroupsthread> )"
-"Summary: called in individual vehicle file - thread for building unload groups"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <modelsthread> : thread"
-"Example: build_unload_groups( ::Unload_Groups );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_unload_groups( <unloadgroupsthread> )""Summary: called in individual vehicle file - thread for building unload groups""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <modelsthread> : thread""Example: build_unload_groups( ::Unload_Groups );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5537,16 +5113,7 @@ build_unload_groups(unloadgroupsthread) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_life( <health> , <minhealth> , <maxhealth> , )"
-"Summary: called in individual vehicle file - sets health for vehicles"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <health> :health"
-"OptionalArg: <minhealth> : randomly chooses between the minhealth, maxhealth"
-"OptionalArg: <maxhealth> : randomly chooses between the minhealth, maxhealth"
-"Example: build_life( 999, 500, 1500 );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_life( <health> , <minhealth> , <maxhealth> , )""Summary: called in individual vehicle file - sets health for vehicles""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <health> :health""OptionalArg: <minhealth> : randomly chooses between the minhealth, maxhealth""OptionalArg: <maxhealth> : randomly chooses between the minhealth, maxhealth""Example: build_life( 999, 500, 1500 );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5559,15 +5126,7 @@ build_life(health, minhealth, maxhealth) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_compassicon( <type>, <enable> )"
-"Summary: called in individual vehicle file - enables vehicle on the compass with the icontype set to the type. defaults to enabled"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <compasstype> :valid types - automobile,tank,plane,helicopter "
-"OptionalArg: <enable> : defaults to true, set to false to disable vehicle on compass"
-"Example: build_compassicon( "automobile", false );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_compassicon( <type>, <enable> )""Summary: called in individual vehicle file - enables vehicle on the compass with the icontype set to the type. defaults to enabled""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <compasstype> :valid types - automobile,tank,plane,helicopter ""OptionalArg: <enable> : defaults to true, set to false to disable vehicle on compass""Example: build_compassicon( "automobile", false );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5584,14 +5143,7 @@ build_compassicon(compasstype, enabled) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_deckdust( <effect> )"
-"Summary: called in individual vehicle file - sets a deckdust effect on a vehicle?"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <effect> :effect to be assigned as deckdust"
-"Example: build_deckdust( "dust/abrams_desk_dust" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_deckdust( <effect> )""Summary: called in individual vehicle file - sets a deckdust effect on a vehicle?""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <effect> :effect to be assigned as deckdust""Example: build_deckdust( "dust/abrams_desk_dust" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5602,16 +5154,8 @@ build_deckdust(effect) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_destructible( <model> , <destructible> )"
-"Summary: called in individual vehicle file: asigns destructible type to model."
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: level "
-"MandatoryArg: <model> : vehicles placed in radiant with this model will be asigned the destructible( see _destructible_types.gsc )"
-"OptionalArg: <destructible> : the destructible type to asign"
-"Example: build_destructible( "vehicle_bm21_mobile_bed_destructible", "vehicle_bm21_mobile_bed" );
-"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_destructible( <model> , <destructible> )""Summary: called in individual vehicle file: asigns destructible type to model.""Module: vehicle_build( vehicle.gsc )""CallOn: level ""MandatoryArg: <model> : vehicles placed in radiant with this model will be asigned the destructible( see _destructible_types.gsc )""OptionalArg: <destructible> : the destructible type to asign""Example: build_destructible( "vehicle_bm21_mobile_bed_destructible", "vehicle_bm21_mobile_bed" );
+""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 build_destructible(model, destructible) {
@@ -5636,14 +5180,7 @@ build_destructible(model, destructible) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_localinit( <init_thread> )"
-"Summary: called in individual vehicle file - mandatory for all vehicle files, this sets the individual init thread for those special sequences, it is also used to determine that a vehicle is being precached or not"
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: "
-"MandatoryArg: <init_thread> :local thread to the vehicle to be called when it spawns"
-"Example: build_localinit( ::init_local );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_localinit( <init_thread> )""Summary: called in individual vehicle file - mandatory for all vehicle files, this sets the individual init thread for those special sequences, it is also used to determine that a vehicle is being precached or not""Module: vehicle_build( vehicle.gsc )""CallOn: ""MandatoryArg: <init_thread> :local thread to the vehicle to be called when it spawns""Example: build_localinit( ::init_local );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5691,9 +5228,7 @@ get_deletegroups(script_vehiclegroupdelete) {
   deletegroups = [];
   vehicles = getEntArray("script_vehicle", "code_classname");
   foreach(vehicle in vehicles) {
-    if(!isDefined(vehicle.script_vehicleGroupDelete) ||
-      vehicle.script_vehicleGroupDelete != script_vehiclegroupdelete
-    )
+    if(!isDefined(vehicle.script_vehicleGroupDelete) || vehicle.script_vehicleGroupDelete != script_vehiclegroupdelete)
       continue;
     deletegroups[deletegroups.size] = vehicle;
   }
@@ -5857,8 +5392,7 @@ ghetto_tag_create(target) {
 //
 //
 //	// starts a map with the necessary blank layer info and a blank worldspawn.
-//	// Throught he magic of junction this file ends up in "map_source\xenon_export\jeepride_veh_ref.map"
-//	// I keep the directory structure somewhat flat because permissions in winnt is painful when dealing with the xenonremote share stuff.
+//	// Throught he magic of junction this file ends up in "map_source\xenon_export\jeepride_veh_ref.map"//	// I keep the directory structure somewhat flat because permissions in winnt is painful when dealing with the xenonremote share stuff.
 //	// junction.bat keeps it in check
 //
 //	// this simple script exports all of the vehicles as script models that have a delete_on_load targetname
@@ -5938,16 +5472,7 @@ twobuttonspressed(button1, button2) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_load_ai( <ai_array> , <bGoddriver> , <group> )"
-"Summary: loads a vehicle with the specified array of guys. Sets entity flag "unloaded""
-"Module: Vehicle"
-"CallOn: A vehicle"
-"OptionalArg: <ai_array>: Defaults to searching for an Ai with same team and .script_vehicleride value"
-"OptionalArg: <bGoddriver>: gives driver a magic bullet shield if he doesn't already have one"
-"OptionalArg: <group>: some vehicles support special groups that can be unloaded or loaded"
-"Example: uaz vehicle_load_ai( friendlies, true );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_load_ai( <ai_array> , <bGoddriver> , <group> )""Summary: loads a vehicle with the specified array of guys. Sets entity flag "unloaded"""Module: Vehicle""CallOn: A vehicle""OptionalArg: <ai_array>: Defaults to searching for an Ai with same team and .script_vehicleride value""OptionalArg: <bGoddriver>: gives driver a magic bullet shield if he doesn't already have one""OptionalArg: <group>: some vehicles support special groups that can be unloaded or loaded""Example: uaz vehicle_load_ai( friendlies, true );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5958,16 +5483,7 @@ vehicle_load_ai(ai, goddriver, group) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_load_ai_single( <ai_array> , <bGoddriver> , <group> )"
-"Summary: loads a vehicle with the specified guys. Sets entity flag "unloaded""
-"Module: Vehicle"
-"CallOn: A vehicle"
-"OptionalArg: <ai_array>: Defaults to searching for an Ai with same team and .script_vehicleride value"
-"OptionalArg: <bGoddriver>: gives driver a magic bullet shield if he doesn't already have one"
-"OptionalArg: <group>: some vehicles support special groups that can be unloaded or loaded"
-"Example: uaz vehicle_load_ai( guy, true );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_load_ai_single( <ai_array> , <bGoddriver> , <group> )""Summary: loads a vehicle with the specified guys. Sets entity flag "unloaded"""Module: Vehicle""CallOn: A vehicle""OptionalArg: <ai_array>: Defaults to searching for an Ai with same team and .script_vehicleride value""OptionalArg: <bGoddriver>: gives driver a magic bullet shield if he doesn't already have one""OptionalArg: <group>: some vehicles support special groups that can be unloaded or loaded""Example: uaz vehicle_load_ai( guy, true );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -5991,19 +5507,7 @@ kill_badplace(type) {
 /*
 =============
 ///ScriptDocBegin
-"Name: build_death_badplace( <delay> , <duration> , <height> , <radius> , <team1> , <team2> )"
-"Summary: builds a badplace on death of a vehicle."
-"Module: vehicle_build( vehicle.gsc )"
-"CallOn: An entity"
-"MandatoryArg: <delay>: delay "
-"MandatoryArg: <duration>: duration"
-"MandatoryArg: <height>: height"
-"MandatoryArg: <radius>: radius"
-"MandatoryArg: <team1>: team1"
-"MandatoryArg: <team2>: team2"
-"Example: build_death_badplace( .5, 3, 512, 700, "axis", "allies" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: build_death_badplace( <delay> , <duration> , <height> , <radius> , <team1> , <team2> )""Summary: builds a badplace on death of a vehicle.""Module: vehicle_build( vehicle.gsc )""CallOn: An entity""MandatoryArg: <delay>: delay ""MandatoryArg: <duration>: duration""MandatoryArg: <height>: height""MandatoryArg: <radius>: radius""MandatoryArg: <team1>: team1""MandatoryArg: <team2>: team2""Example: build_death_badplace( .5, 3, 512, 700, "axis", "allies" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 build_death_badplace(delay, duration, height, radius, team1, team2) {
@@ -6146,13 +5650,7 @@ vehicle_spawn_group_limit_riders(group, ridermax) {
 /*
 =============
 ///ScriptDocBegin
-"Name: enable_vehicle_compass( )"
-"Summary: turns on the compass icon for that vehicle type. different from AddVehicleToCompass in that it finds the type for you. use RemoveVehicleFromCompass() script command to turn it off."
-"Module: Vehicle"
-"CallOn: A vehicle"
-"Example: m1a1 enable_vehicle_compass();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: enable_vehicle_compass( )""Summary: turns on the compass icon for that vehicle type. different from AddVehicleToCompass in that it finds the type for you. use RemoveVehicleFromCompass() script command to turn it off.""Module: Vehicle""CallOn: A vehicle""Example: m1a1 enable_vehicle_compass();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -6180,16 +5678,7 @@ update_steering(snowmobile) {
 /*
 =============
 ///ScriptDocBegin
-"Name: mount_snowmobile( <vehicle> )"
-"Summary: The guy runs to the vehicle and uses the best anim to enter"
-"Module: Vehicle"
-"CallOn: An AI that is getting in a vehicle"
-"MandatoryArg: <vehicle>: The vehicle to ride "
-"MandatoryArg: <sit_position>: 0 for driver, 1 for first passenger, etc."
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: mount_snowmobile( <vehicle> )""Summary: The guy runs to the vehicle and uses the best anim to enter""Module: Vehicle""CallOn: An AI that is getting in a vehicle""MandatoryArg: <vehicle>: The vehicle to ride ""MandatoryArg: <sit_position>: 0 for driver, 1 for first passenger, etc.""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 mount_snowmobile(vehicle, sit_position) {
@@ -6245,12 +5734,7 @@ mount_snowmobile(vehicle, sit_position) {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_my_spline_node( <org> )"
-"Summary: Returns the node of the veihcle spline path that this vehicle is on"
-"Module: Vehicle"
-"Example: node = get_my_spline_node( self.origin );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: get_my_spline_node( <org> )""Summary: Returns the node of the veihcle spline path that this vehicle is on""Module: Vehicle""Example: node = get_my_spline_node( self.origin );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 get_my_spline_node(org) {
@@ -6309,15 +5793,7 @@ kill_vehicle_spawner(trigger) {
 /*
 =============
 ///ScriptDocBegin
-"Name: spawn_vehicle_and_gopath()"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: spawn_vehicle_and_gopath()""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 spawn_vehicle_and_gopath() {
@@ -6333,15 +5809,7 @@ spawn_vehicle_and_gopath() {
 /*
 =============
 ///ScriptDocBegin
-"Name: attach_vehicle_triggers()"
-"Summary: "
-"Module: Entity"
-"CallOn: An entity"
-"MandatoryArg: <param1>: "
-"OptionalArg: <param2>: "
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: attach_vehicle_triggers()""Summary: ""Module: Entity""CallOn: An entity""MandatoryArg: <param1>: ""OptionalArg: <param2>: ""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 attach_vehicle_triggers() {
@@ -6598,14 +6066,7 @@ vehicle_landvehicle(neargoal, node) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_get_riders_by_group( <groupname> )"
-"Summary: Some vehicles like the littlebird have predefined unload groups you can use this to get the guys on those groups"
-"Module: Vehicle"
-"CallOn: A Vehicle"
-"MandatoryArg: <groupname>: "
-"Example: ai = vehicle vehicle_get_riders_by_group( "right" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_get_riders_by_group( <groupname> )""Summary: Some vehicles like the littlebird have predefined unload groups you can use this to get the guys on those groups""Module: Vehicle""CallOn: A Vehicle""MandatoryArg: <groupname>: ""Example: ai = vehicle vehicle_get_riders_by_group( "right" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 
@@ -6634,17 +6095,7 @@ vehicle_get_riders_by_group(groupname) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_ai_event( <event> )"
-"Summary: tell a vehicle to do one of the following actions, provided that it has those anims setup for it:( idle, duck, duck_once, duck_once, weave,"
-"Summary: weave, stand, turn_right, turn_right, turn_left, turn_left, turn_hardright, turn_hardleft, turret_fire, turret_turnleft, turret_turnright,"
-"Summary: unload, pre_unload, pre_unload, idle_alert, idle_alert_to_casual, reaction )"
-"Summary: returns the ai that did the event"
-"Module: Vehicle"
-"CallOn: A vehicle"
-"MandatoryArg: <param1>: "
-"Example: vehicle vehicle_ai_event( "idle_alert" ) "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_ai_event( <event> )""Summary: tell a vehicle to do one of the following actions, provided that it has those anims setup for it:( idle, duck, duck_once, duck_once, weave,""Summary: weave, stand, turn_right, turn_right, turn_left, turn_left, turn_hardright, turn_hardleft, turret_fire, turret_turnleft, turret_turnright,""Summary: unload, pre_unload, pre_unload, idle_alert, idle_alert_to_casual, reaction )""Summary: returns the ai that did the event""Module: Vehicle""CallOn: A vehicle""MandatoryArg: <param1>: ""Example: vehicle vehicle_ai_event( "idle_alert" ) ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_ai_event(event) {
@@ -6654,14 +6105,7 @@ vehicle_ai_event(event) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_unload( <group> )"
-"Summary: Tells ai to unload from a vehicle, returns the ai"
-"Module: Vehicle"
-"CallOn: A Vehicle"
-"OptionalArg: <group>: some vehicles have groups of ai that you can unload, I'll try to list them from here out on the entity info in radiant"
-"Example: ai = bmp vehicle_unload();"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_unload( <group> )""Summary: Tells ai to unload from a vehicle, returns the ai""Module: Vehicle""CallOn: A Vehicle""OptionalArg: <group>: some vehicles have groups of ai that you can unload, I'll try to list them from here out on the entity info in radiant""Example: ai = bmp vehicle_unload();""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_unload(who) {
@@ -6689,14 +6133,7 @@ vehicle_unload(who) {
 /*
 =============
 ///ScriptDocBegin
-"Name: get_stage_nodes( <pickup_node_before_stage>, <side> )"
-"Summary: Used for getting cover nodes in Littlebird staging prefab"
-"Module: Vehicle"
-"MandatoryArg: <pickup_node_before_stage>: A script_origin or struct on a helicopter path that is right before the linked stage prefab"
-"MandatoryArg: <side>: " Left" or "right" side bench of littlebird"
-"Example: "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: get_stage_nodes( <pickup_node_before_stage>, <side> )""Summary: Used for getting cover nodes in Littlebird staging prefab""Module: Vehicle""MandatoryArg: <pickup_node_before_stage>: A script_origin or struct on a helicopter path that is right before the linked stage prefab""MandatoryArg: <side>: " Left" or "right" side bench of littlebird""Example: ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 get_stage_nodes(pickup_node_before_stage, side) {
@@ -6714,15 +6151,7 @@ get_stage_nodes(pickup_node_before_stage, side) {
 /*
 =============
 ///ScriptDocBegin
-"Name: set_stage( <pickup_node_before_stage>, <guys>, <side> )"
-"Summary: Used for getting setting up AI around the landing area of a littlebird with benches"
-"Module: Vehicle"
-"MandatoryArg: <pickup_node_before_stage>: A script_origin or struct on a helicopter path that is right before the linked stage prefab"
-"MandatoryArg: <guys>: group of 3 AI that will load on either the right or left side"
-"MandatoryArg: <side>: " Left" or "right" side bench of littlebird"
-"Example: littlebird_wingman set_stage( pickup_node_before_stage, aRoof_riders_left, "left" );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: set_stage( <pickup_node_before_stage>, <guys>, <side> )""Summary: Used for getting setting up AI around the landing area of a littlebird with benches""Module: Vehicle""MandatoryArg: <pickup_node_before_stage>: A script_origin or struct on a helicopter path that is right before the linked stage prefab""MandatoryArg: <guys>: group of 3 AI that will load on either the right or left side""MandatoryArg: <side>: " Left" or "right" side bench of littlebird""Example: littlebird_wingman set_stage( pickup_node_before_stage, aRoof_riders_left, "left" );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 set_stage(pickup_node_before_stage, guys, side) {
@@ -6799,14 +6228,7 @@ set_stage(pickup_node_before_stage, guys, side) {
 /*
 =============
 ///ScriptDocBegin
-"Name: load_side( <side>, <riders> )"
-"Summary: Used for loading AI onto a littlebird with benches"
-"Module: Vehicle"
-"MandatoryArg: <riders>: group of 3 AI that will load on either the right or left side"
-"MandatoryArg: <side>: " Left" or "right" side bench of littlebird"
-"Example: littlebird_wingman_02 thread load_side( "left", aRoof_riders_left );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: load_side( <side>, <riders> )""Summary: Used for loading AI onto a littlebird with benches""Module: Vehicle""MandatoryArg: <riders>: group of 3 AI that will load on either the right or left side""MandatoryArg: <side>: " Left" or "right" side bench of littlebird""Example: littlebird_wingman_02 thread load_side( "left", aRoof_riders_left );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 load_side(side, riders) {
@@ -6917,13 +6339,7 @@ vehicle_becomes_crashable() {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_turret_scan_on()"
-"Summary: Call on a tank to make its main turret scan randomly back and forth"
-"Module: Vehicle"
-"CallOn: A spawned vehicle entity with a main turret cannon (tanks)"
-"Example: level.t72 thread vehicle_turret_scan_on(); "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_turret_scan_on()""Summary: Call on a tank to make its main turret scan randomly back and forth""Module: Vehicle""CallOn: A spawned vehicle entity with a main turret cannon (tanks)""Example: level.t72 thread vehicle_turret_scan_on(); ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_turret_scan_on() {
@@ -6954,13 +6370,7 @@ vehicle_turret_scan_on() {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_turret_scan_off()"
-"Summary: Call on a tank to make its main turret stop scanning randomly back and forth"
-"Module: Vehicle"
-"CallOn: A spawned vehicle entity with a main turret cannon (tanks)"
-"Example: level.t72 thread vehicle_turret_scan_off(); "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_turret_scan_off()""Summary: Call on a tank to make its main turret stop scanning randomly back and forth""Module: Vehicle""CallOn: A spawned vehicle entity with a main turret cannon (tanks)""Example: level.t72 thread vehicle_turret_scan_off(); ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_turret_scan_off() {
@@ -6978,13 +6388,7 @@ vehicle_aim_turret_at_angle(iAngle) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_get_path_array()"
-"Summary: Call on a vehicle to get an array of nodes/structs/script_origins it is linked to"
-"Module: Vehicle"
-"CallOn: A spawned vehicle entity"
-"Example: path_array = level.t72 vehicle_get_path_array(); "
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_get_path_array()""Summary: Call on a vehicle to get an array of nodes/structs/script_origins it is linked to""Module: Vehicle""CallOn: A spawned vehicle entity""Example: path_array = level.t72 vehicle_get_path_array(); ""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_get_path_array() {
@@ -7023,14 +6427,7 @@ kill_lights(model) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_lights_on( <group> )"
-"Summary: turn on this group of lights on a vehicle."
-"Module: Vehicle"
-"CallOn: A vehicle"
-"MandatoryArg: <group>: "
-"Example: vehicle_lights_on( "spotlight" )"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: vehicle_lights_on( <group> )""Summary: turn on this group of lights on a vehicle.""Module: Vehicle""CallOn: A vehicle""MandatoryArg: <group>: ""Example: vehicle_lights_on( "spotlight" )""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 vehicle_lights_on(group) {
@@ -7040,13 +6437,7 @@ vehicle_lights_on(group) {
 /*
 =============
 ///ScriptDocBegin
-"Name: vehicle_lights_off( <group> )"
-"Summary: turn off this group of lights on a vehicle."
-"Module: Vehicle"
-"CallOn: A vehicle"
-"MandatoryArg: <group>: "
-"Example: vehicle_lights_off( "spotlight" )"
-"SPMP: singleplayer"
+"Name: vehicle_lights_off( <group> )""Summary: turn off this group of lights on a vehicle.""Module: Vehicle""CallOn: A vehicle""MandatoryArg: <group>: ""Example: vehicle_lights_off( "spotlight" )""SPMP: singleplayer"
 ///ScriptDocEnd
 =============
 */

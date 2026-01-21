@@ -1829,7 +1829,7 @@ wait_for_player_to_melee_shepherd() {
 
   // what are you waiting for mactavish
   inc = 0;
-  //queue = array( "afchase_shp_waitingfor", "afchase_shp_digtwograves", "afchase_shp_goahead", "afchase_shp_couldntdoit", "afchase_shp_extrastep" );
+  //queue = array("afchase_shp_waitingfor", "afchase_shp_digtwograves", "afchase_shp_goahead", "afchase_shp_couldntdoit", "afchase_shp_extrastep" );
   queue = [];
 
   // You know what they say about revenge…you better be ready to dig two graves…	
@@ -2452,22 +2452,18 @@ scene_walk_off_dialog() {
   //	level.price dialogue_queue( "afchase_pri_holdfornow" );
   wait(15.1);
 
-  // "Price: I thought I told you this was a one-way trip!"
-  //	level.price thread dialogue_queue( "afchase_pri_toldyou" );
+  // "Price: I thought I told you this was a one-way trip!"//	level.price thread dialogue_queue( "afchase_pri_toldyou" );
 
   wait(3);
 
-  // "Nikolai: Looks like it still is...they'll be looking for us you know..."
-  //	level.nikolai thread dialogue_queue( "afchase_nkl_lookingforus" );
+  // "Nikolai: Looks like it still is...they'll be looking for us you know..."//	level.nikolai thread dialogue_queue( "afchase_nkl_lookingforus" );
 
   wait(4);
 
-  // Nikolai, we gotta get Soap outta here..."
-  //	level.price thread dialogue_queue( "afchase_pri_soapouttahere" );
+  // Nikolai, we gotta get Soap outta here..."//	level.price thread dialogue_queue( "afchase_pri_soapouttahere" );
 
   wait(2.8);
-  // "Nikolai: Da - I know a place."
-  //	level.nikolai thread dialogue_queue( "afchase_nkl_knowaplace" );
+  // "Nikolai: Da - I know a place."//	level.nikolai thread dialogue_queue( "afchase_nkl_knowaplace" );
 
   level notify("stop_blinding");
   //	wait( 3.75 );//2.6

@@ -102,7 +102,7 @@ watch_for_emp(model, actor) {
   wait 0.15;
   self.attract_to_origin = 0;
   self deactivate_zombie_point_of_interest();
-  model clearanim( % o_monkey_bomb, 0);
+  model clearanim(%o_monkey_bomb, 0);
   wait 1;
   self detonate();
   wait 1;
@@ -278,7 +278,7 @@ player_throw_cymbal_monkey(grenade, num_attractors, max_attract_dist, attract_di
 
     if(isDefined(grenade)) {
       if(isDefined(model)) {
-        model setanim( % o_monkey_bomb);
+        model setanim(%o_monkey_bomb);
 
         if(!(isDefined(grenade.backlinked) && grenade.backlinked)) {
           model unlink();
@@ -387,9 +387,7 @@ do_monkey_sound(model, info) {
   self.monk_scream_vox = 0;
 
   if(isDefined(level.grenade_safe_to_bounce)) {
-    if(![
-        [level.grenade_safe_to_bounce]
-      ](self.owner, "cymbal_monkey_zm")) {
+    if(![[level.grenade_safe_to_bounce]](self.owner, "cymbal_monkey_zm")) {
       self playSound("zmb_vox_monkey_scream");
       self.monk_scream_vox = 1;
     }
@@ -420,7 +418,7 @@ do_monkey_sound(model, info) {
     arrayremoveindex(level.cymbal_monkeys, monkey_index);
 
   if(isDefined(model))
-    model clearanim( % o_monkey_bomb, 0.2);
+    model clearanim(%o_monkey_bomb, 0.2);
 
   for(i = 0; i < info.sound_attractors.size; i++) {
     if(isDefined(info.sound_attractors[i]))

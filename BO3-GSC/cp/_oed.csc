@@ -134,9 +134,7 @@ function player_toggle_ev(lcn, newval) {
     self function_e8b1e8b2(lcn, newval);
     level flag::set("activate_thermal");
     if(isDefined(level.ev_override)) {
-      [
-        [level.ev_override]
-      ]();
+      [[level.ev_override]]();
     }
     playSound(lcn, "gdt_oed_on", (0, 0, 0));
     audio::playloopat("gdt_oed_loop", (1, 2, 3));

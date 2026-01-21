@@ -1476,8 +1476,8 @@ _sleeves_idle(var_0) {
   if(!isDefined(var_0))
     var_0 = 1.0;
 
-  self.sleeve_flap_l setanimknob( % player_sleeve_pose, 1.0, var_0, 1.0);
-  self.sleeve_flap_r setanimknob( % player_sleeve_pose, 1.0, var_0, 1.0);
+  self.sleeve_flap_l setanimknob(%player_sleeve_pose, 1.0, var_0, 1.0);
+  self.sleeve_flap_r setanimknob(%player_sleeve_pose, 1.0, var_0, 1.0);
 }
 
 _sleeves_flap_internal() {
@@ -1498,8 +1498,8 @@ _sleeves_flap_internal() {
       var_7 = 1;
     }
 
-    self.sleeve_flap_l setanimknob( % player_sleeve_flapping, 1.0, var_6, var_5);
-    self.sleeve_flap_r setanimknob( % player_sleeve_flapping, 1.0, var_6, var_5);
+    self.sleeve_flap_l setanimknob(%player_sleeve_flapping, 1.0, var_6, var_5);
+    self.sleeve_flap_r setanimknob(%player_sleeve_flapping, 1.0, var_6, var_5);
     var_9 = randomfloatrange(var_0, var_1);
 
     if(var_7)
@@ -1763,7 +1763,7 @@ ally_rappel_footsteps() {
 #using_animtree("generic_human");
 
 custom_balcony_death_animscript() {
-  self setflaggedanimknoballrestart("deathanim", level.scr_anim[self.animname][self.random_death_anim], % body, 1, 0.1);
+  self setflaggedanimknoballrestart("deathanim", level.scr_anim[self.animname][self.random_death_anim], %body, 1, 0.1);
   thread translate_off_edge();
 
   for(;;) {

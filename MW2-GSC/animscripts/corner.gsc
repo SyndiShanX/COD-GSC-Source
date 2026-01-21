@@ -374,7 +374,7 @@ StopAiming(transtime) {
   self.cornerAiming = false;
 
   // turn off shooting
-  self clearAnim( % add_fire, transtime);
+  self clearAnim(%add_fire, transtime);
   // and turn off aiming
   animscripts\shared::setAnimAimWeight(0, transtime);
 }
@@ -384,9 +384,9 @@ SetAimingParams(spot, fullbody, transTime) {
 
   self.spot = spot; // undefined is ok
 
-  self setanimlimited( % exposed_modern, 1, transTime);
-  self setanimlimited( % exposed_aiming, 1, transTime);
-  self setanimlimited( % add_idle, 1, transTime);
+  self setanimlimited(%exposed_modern, 1, transTime);
+  self setanimlimited(%exposed_aiming, 1, transTime);
+  self setanimlimited(%add_idle, 1, transTime);
   animscripts\shared::setAnimAimWeight(1, transTime);
 
   leanAnim = undefined;
@@ -498,7 +498,7 @@ stepOut() /* bool */ {
 
   self.pushable = false;
 
-  self setFlaggedAnimKnobAllRestart("stepout", switchanim, % root, 1, .2, animRate);
+  self setFlaggedAnimKnobAllRestart("stepout", switchanim, %root, 1, .2, animRate);
   self thread DoNoteTracksWithEndon("stepout");
 
   hasStartAim = animHasNotetrack(switchanim, "start_aim");
@@ -530,8 +530,8 @@ stepOut() /* bool */ {
   }
 
   self ChangeAiming(undefined, true, 0.2);
-  self clearAnim( % cover, 0.1);
-  self clearAnim( % corner, 0.1);
+  self clearAnim(%cover, 0.1);
+  self clearAnim(%corner, 0.1);
 
   self.changingCoverPos = false;
   self.coverPosEstablishedTime = gettime();
@@ -560,9 +560,9 @@ stepOutAndShootEnemy() {
     // too close for RPG or out of ammo
     if(usingRocketLauncher() && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.a.pose == "stand")
-        animscripts\shared::throwDownWeapon( % RPG_stand_throw);
+        animscripts\shared::throwDownWeapon(%RPG_stand_throw);
       else
-        animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
+        animscripts\shared::throwDownWeapon(%RPG_crouch_throw);
 
       self thread runCombat();
       return;
@@ -628,7 +628,7 @@ rambo() {
 
   self thread animscripts\shared::ramboAim(ramboAimOffset);
 
-  self setFlaggedAnimKnobAllRestart("rambo", ramboAnim, % body, 1, 0, 1);
+  self setFlaggedAnimKnobAllRestart("rambo", ramboAnim, %body, 1, 0, 1);
   self animscripts\shared::DoNoteTracks("rambo");
 
   self notify("rambo_aim_end");
@@ -679,8 +679,7 @@ shootAsTold() {
           continue;
         }
 
-        // if they're moving back and forth too fast for us to respond intelligently to them,
-        // give up on firing at them for the moment
+        // if they're moving back and forth too fast for us to respond intelligently to them, // give up on firing at them for the moment
         if(shootPosOutsideLegalYawRange()) {
           break;
         }
@@ -690,7 +689,7 @@ shootAsTold() {
 
       shootUntilShootBehaviorChange_corner(true);
 
-      self clearAnim( % add_fire, .2);
+      self clearAnim(%add_fire, .2);
     }
 
     if(self canReturnToCover(self.a.cornerMode != "lean")) {
@@ -805,7 +804,7 @@ returnToCover() {
 
   rate = stepOutAndHideSpeed();
 
-  self clearanim( % body, 0.1);
+  self clearanim(%body, 0.1);
   self setFlaggedAnimRestart("hide", switchanim, 1, .1, rate);
   self animscripts\shared::DoNoteTracks("hide");
 
@@ -830,7 +829,7 @@ blindfire() {
   self animMode("zonly_physics");
   self.keepClaimedNodeIfValid = true;
 
-  self setFlaggedAnimKnobAllRestart("blindfire", animArrayPickRandom("blind_fire"), % body, 1, 0, 1);
+  self setFlaggedAnimKnobAllRestart("blindfire", animArrayPickRandom("blind_fire"), %body, 1, 0, 1);
   self animscripts\shared::DoNoteTracks("blindfire");
 
   self.keepClaimedNodeIfValid = false;
@@ -908,7 +907,7 @@ lookForEnemy(lookTime) {
   else
     lookanim = animArray("look_to_alert");
 
-  self setflaggedanimknoballrestart("looking_end", lookanim, % body, 1, .1, 1.0);
+  self setflaggedanimknoballrestart("looking_end", lookanim, %body, 1, .1, 1.0);
   animscripts\shared::DoNoteTracks("looking_end");
 
   self animMode("zonly_physics"); // Unlatch the feet
@@ -959,7 +958,7 @@ peekOut() {
   //self thread _peekStop();
   //self endon ("stopPeeking");
 
-  self setflaggedanimknobAll("looking_start", peekanim, % body, 1, .2, 1);
+  self setflaggedanimknobAll("looking_start", peekanim, %body, 1, .2, 1);
   animscripts\shared::DoNoteTracks("looking_start");
   //self notify ("stopPeekCheckThread");
 
@@ -1060,9 +1059,9 @@ flinch() {
 
 playIdleAnimation(idleAnim, needsRestart) {
   if(needsRestart)
-    self setFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, .1, 1);
+    self setFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, .1, 1);
   else
-    self setFlaggedAnimKnobAll("idle", idleAnim, % body, 1, .1, 1);
+    self setFlaggedAnimKnobAll("idle", idleAnim, %body, 1, .1, 1);
 
   self animscripts\shared::DoNoteTracks("idle");
 }
@@ -1082,7 +1081,7 @@ transitionToStance(stance) {
   }
 
   //	self ExitProneWrapper(0.5);
-  self setFlaggedAnimKnobAllRestart("changeStance", animarray("stance_change"), % body);
+  self setFlaggedAnimKnobAllRestart("changeStance", animarray("stance_change"), %body);
 
   set_anim_array(stance); // ( sets anim_pose to stance )
 
@@ -1104,7 +1103,7 @@ GoToCover(coveranim, transTime, playTime) {
   assert(transTime <= playTime);
 
   self thread animscripts\shared::moveToOriginOverTime(cornerOrigin, transTime);
-  self setFlaggedAnimKnobAllRestart("coveranim", coveranim, % body, 1, transTime);
+  self setFlaggedAnimKnobAllRestart("coveranim", coveranim, %body, 1, transTime);
   self animscripts\shared::DoNoteTracksForTime(playTime, "coveranim");
 
   while(AbsAngleClamp180(self.angles[1] - desiredYaw) > 1) {
@@ -1166,9 +1165,9 @@ set_standing_animarray_aiming() {
     self.a.array["semi5"] = % exposed_shoot_semi5;
 
     if(weapon_pump_action_shotgun())
-      self.a.array["single"] = array( % shotgun_stand_fire_1A);
+      self.a.array["single"] = array(%shotgun_stand_fire_1A);
     else
-      self.a.array["single"] = array( % exposed_shoot_semi1);
+      self.a.array["single"] = array(%exposed_shoot_semi1);
 
     self.a.array["burst2"] = % exposed_shoot_burst3; // ( will be limited to 2 shots )
     self.a.array["burst3"] = % exposed_shoot_burst3;
@@ -1176,7 +1175,7 @@ set_standing_animarray_aiming() {
     self.a.array["burst5"] = % exposed_shoot_burst5;
     self.a.array["burst6"] = % exposed_shoot_burst6;
   }
-  self.a.array["exposed_idle"] = array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
+  self.a.array["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
 }
 
 set_crouching_animarray_aiming() {
@@ -1203,11 +1202,11 @@ set_crouching_animarray_aiming() {
     anim_array["burst6"] = % exposed_shoot_burst6;
 
     if(weapon_pump_action_shotgun())
-      anim_array["single"] = array( % shotgun_crouch_fire);
+      anim_array["single"] = array(%shotgun_crouch_fire);
     else
-      anim_array["single"] = array( % exposed_shoot_semi1);
+      anim_array["single"] = array(%exposed_shoot_semi1);
 
-    self.a.array["exposed_idle"] = array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
+    self.a.array["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
     return;
   }
 
@@ -1236,9 +1235,9 @@ set_crouching_animarray_aiming() {
     self.a.array["semi5"] = % exposed_crouch_shoot_semi5;
 
     if(weapon_pump_action_shotgun())
-      self.a.array["single"] = array( % shotgun_crouch_fire);
+      self.a.array["single"] = array(%shotgun_crouch_fire);
     else
-      self.a.array["single"] = array( % exposed_crouch_shoot_semi1);
+      self.a.array["single"] = array(%exposed_crouch_shoot_semi1);
 
     self.a.array["burst2"] = % exposed_crouch_shoot_burst3; // ( will be limited to 2 shots )
     self.a.array["burst3"] = % exposed_crouch_shoot_burst3;
@@ -1257,7 +1256,7 @@ set_crouching_animarray_aiming() {
   self.a.array["add_turn_aim_right"] = % exposed_crouch_turn_aim_6;
   self.a.array["straight_level"] = % exposed_crouch_aim_5;
 
-  self.a.array["exposed_idle"] = array( % exposed_crouch_idle_alert_v1, % exposed_crouch_idle_alert_v2, % exposed_crouch_idle_alert_v3);
+  self.a.array["exposed_idle"] = array(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
 }
 
 runCombat() {

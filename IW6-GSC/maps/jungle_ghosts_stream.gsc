@@ -544,7 +544,7 @@ chopper_crash() {
   foreach(var_6 in var_4)
   var_6 thread maps\jungle_ghosts_util::manually_alert_me();
 
-  var_8 = getanimlength( % jungle_ghost_helicrash_helicopter);
+  var_8 = getanimlength(%jungle_ghost_helicrash_helicopter);
   var_2.crate_clip thread crate_clip_of_doom();
   var_2.crate_clip thread maps\_utility::notify_delay("stop_checking_collision", var_8);
   maps\_utility::delaythread(var_8, common_scripts\utility::flag_set, "chopper_crash_complete");

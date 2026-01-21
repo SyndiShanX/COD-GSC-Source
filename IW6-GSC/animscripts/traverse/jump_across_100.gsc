@@ -23,6 +23,6 @@ main() {
   var_1[1] = % jump_across_100_lunge;
   var_1[2] = % jump_across_100_stumble;
   var_2 = var_1[randomint(var_1.size)];
-  self setflaggedanimknoballrestart("jumpanim", var_2, % body, 1, 0.1, 1);
+  self setflaggedanimknoballrestart("jumpanim", var_2, %body, 1, 0.1, 1);
   animscripts\shared::donotetracks("jumpanim");
 }

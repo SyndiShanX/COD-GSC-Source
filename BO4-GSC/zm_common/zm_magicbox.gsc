@@ -281,9 +281,7 @@ boxstub_update_prompt(player) {
     cursor_hint_weapon = self.stub.trigger_target.grab_weapon;
     self setcursorhint(cursor_hint, cursor_hint_weapon);
 
-    if(isDefined(level.magic_box_check_equipment) && [
-        [level.magic_box_check_equipment]
-      ](cursor_hint_weapon)) {
+    if(isDefined(level.magic_box_check_equipment) && [[level.magic_box_check_equipment]](cursor_hint_weapon)) {
       if(function_8b1a219a()) {
         self.hint_string = # "hash_51b8af0794e70749";
       } else {
@@ -1512,9 +1510,7 @@ treasure_chest_should_move(chest, player) {
     }
 
     if(isDefined(level.var_b0344a3c)) {
-      chance_of_joker = [
-        [level.var_b0344a3c]
-      ](chance_of_joker);
+      chance_of_joker = [[level.var_b0344a3c]](chance_of_joker);
     }
 
     if(isDefined(level.var_401aaa92) && level.var_401aaa92) {

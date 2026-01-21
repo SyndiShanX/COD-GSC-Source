@@ -17,7 +17,7 @@ main() {
   var_0 = self getspectatepoint();
   self orientmode("face angle", var_0.angles[1]);
   var_1 = func_7814();
-  self func_82E4("jumpanim", var_1, % body, 1, 0.1, 1);
+  self func_82E4("jumpanim", var_1, %body, 1, 0.1, 1);
   scripts\anim\shared::donotetracks("jumpanim");
 }
 

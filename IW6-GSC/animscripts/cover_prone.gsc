@@ -22,11 +22,11 @@ init_animset_cover_prone() {
   var_0["burst5"] = % prone_fire_burst;
   var_0["burst6"] = % prone_fire_burst;
   var_0["reload"] = % prone_reload;
-  var_0["look"] = [ % prone_twitch_look, % prone_twitch_lookfast, % prone_twitch_lookup];
-  var_0["grenade_safe"] = [ % prone_grenade_a, % prone_grenade_a];
-  var_0["grenade_exposed"] = [ % prone_grenade_a, % prone_grenade_a];
+  var_0["look"] = [ % prone_twitch_look, %prone_twitch_lookfast, %prone_twitch_lookup];
+  var_0["grenade_safe"] = [ % prone_grenade_a, %prone_grenade_a];
+  var_0["grenade_exposed"] = [ % prone_grenade_a, %prone_grenade_a];
   var_0["exposed_idle"] = [ % prone_idle];
-  var_0["twitch"] = [ % prone_twitch_ammocheck, % prone_twitch_look, % prone_twitch_scan, % prone_twitch_lookfast, % prone_twitch_lookup];
+  var_0["twitch"] = [ % prone_twitch_ammocheck, %prone_twitch_look, %prone_twitch_scan, %prone_twitch_lookfast, %prone_twitch_lookup];
   var_0["hide_to_look"] = % coverstand_look_moveup;
   var_0["look_idle"] = % coverstand_look_idle;
   var_0["look_to_hide"] = % coverstand_look_movedown;
@@ -65,7 +65,7 @@ main() {
   self.covernode = self.node;
   self orientmode("face angle", self.covernode.angles[1]);
   self.a.goingtoproneaim = 1;
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
 
   if(self.a.pose != "prone")
     prone_transitionto("prone");
@@ -74,7 +74,7 @@ main() {
 
   thread animscripts\combat_utility::aimidlethread();
   setupproneaim(0.2);
-  self setanim( % prone_aim_5, 1, 0.1);
+  self setanim(%prone_aim_5, 1, 0.1);
   self orientmode("face angle", self.covernode.angles[1]);
   self animmode("zonly_physics");
   pronecombatmainloop();
@@ -99,7 +99,7 @@ idlethread() {
 
 updatepronewrapper(var_0) {
   self updateprone(animscripts\utility::lookupanim("cover_prone", "legs_up"), animscripts\utility::lookupanim("cover_prone", "legs_down"), 1, var_0, 1);
-  self setanim( % exposed_aiming, 1, 0.2);
+  self setanim(%exposed_aiming, 1, 0.2);
 }
 
 pronecombatmainloop() {
@@ -144,7 +144,7 @@ pronecombatmainloop() {
     }
     if(animscripts\combat_utility::aimedatshootentorpos()) {
       animscripts\combat_utility::shootuntilshootbehaviorchange();
-      self clearanim( % add_fire, 0.2);
+      self clearanim(%add_fire, 0.2);
       continue;
     }
 
@@ -206,7 +206,7 @@ prone_transitionto(var_0) {
   if(var_0 == self.a.pose) {
     return;
   }
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   animscripts\combat_utility::endfireandanimidlethread();
 
   if(shouldfirewhilechangingpose())
@@ -216,9 +216,9 @@ prone_transitionto(var_0) {
 
   if(var_0 == "prone") {}
 
-  self setflaggedanimknoballrestart("trans", var_1, % body, 1, 0.2, 1.0);
+  self setflaggedanimknoballrestart("trans", var_1, %body, 1, 0.2, 1.0);
   animscripts\shared::donotetracks("trans");
-  self setanimknoballrestart(animscripts\utility::animarray("straight_level"), % body, 1, 0.25);
+  self setanimknoballrestart(animscripts\utility::animarray("straight_level"), %body, 1, 0.25);
   setupproneaim(0.25);
 }
 
@@ -228,15 +228,15 @@ finishnotetracks(var_0) {
 }
 
 setupproneaim(var_0) {
-  self setanimknoball( % prone_aim_5, % body, 1, var_0);
-  self setanimlimited( % prone_aim_2_add, 1, var_0);
-  self setanimlimited( % prone_aim_4_add, 1, var_0);
-  self setanimlimited( % prone_aim_6_add, 1, var_0);
-  self setanimlimited( % prone_aim_8_add, 1, var_0);
+  self setanimknoball(%prone_aim_5, %body, 1, var_0);
+  self setanimlimited(%prone_aim_2_add, 1, var_0);
+  self setanimlimited(%prone_aim_4_add, 1, var_0);
+  self setanimlimited(%prone_aim_6_add, 1, var_0);
+  self setanimlimited(%prone_aim_8_add, 1, var_0);
 }
 
 proneto(var_0, var_1) {
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   var_2 = undefined;
 
   if(shouldfirewhilechangingpose()) {
@@ -259,7 +259,7 @@ proneto(var_0, var_1) {
     var_1 = 1;
 
   animscripts\utility::exitpronewrapper(getanimlength(var_2) / 2);
-  self setflaggedanimknoballrestart("trans", var_2, % body, 1, 0.2, var_1);
+  self setflaggedanimknoballrestart("trans", var_2, %body, 1, 0.2, var_1);
   animscripts\shared::donotetracks("trans");
   self clearanim(var_2, 0.1);
 }

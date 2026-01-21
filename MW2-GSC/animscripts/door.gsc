@@ -69,7 +69,7 @@ doDoorGrenadeThrow(node) {
   self notify("move_interrupt");
   self.update_move_anim_type = undefined;
 
-  self clearanim( % combatrun, 0.2);
+  self clearanim(%combatrun, 0.2);
   self.a.movement = "stop";
   self waittill("done_grenade_throw");
   self OrientMode("face default");

@@ -55,9 +55,7 @@ Callback_PlayerConnect() {
   bbPrint("mpjoins: name %s client %s", self.name, lpselfnum);
   self setClientUIVisibilityFlag("hud_visible", 1);
   self setClientUIVisibilityFlag("g_compassShowEnemies", GetDvarInt(#"scr_game_forceradar"));
-  self setClientDvars("player_sprintTime", GetDvar(#"scr_player_sprinttime"),
-    "ui_radar_client", GetDvar(#"ui_radar_client"),
-    "scr_numLives", level.numLives);
+  self setClientDvars("player_sprintTime", GetDvar(#"scr_player_sprinttime"), "ui_radar_client", GetDvar(#"ui_radar_client"), "scr_numLives", level.numLives);
   makeDvarServerInfo("cg_drawTalk", 1);
   if(level.hardcoreMode) {
     self setClientDvars("cg_drawTalk", 3);
@@ -232,14 +230,10 @@ Callback_PlayerConnect() {
     self maps\mp\gametypes\_globallogic_ui::updateObjectiveText();
     [[level.spawnSpectator]]();
     if(level.rankedMatch) {
-      [
-        [level.autoassign]
-      ]();
+      [[level.autoassign]]();
       self thread maps\mp\gametypes\_globallogic_spawn::kickIfDontspawn();
     } else if(!level.teamBased) {
-      [
-        [level.autoassign]
-      ]();
+      [[level.autoassign]]();
     } else {
       if((isDefined(level.forceAutoAssign) && level.forceAutoAssign) || level.allow_teamchange != "1") {
         [[level.autoassign]]();
@@ -536,8 +530,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   if(iDFlags &level.iDFLAGS_PENETRATION && isplayer(eAttacker) && eAttacker hasPerk("specialty_bulletpenetration"))
     self thread maps\mp\gametypes\_battlechatter_mp::perkSpecificBattleChatter("deepimpact", true);
   if(!(iDFlags &level.iDFLAGS_NO_PROTECTION)) {
-    if((isSubStr(sMeansOfDeath, "MOD_GRENADE") || isSubStr(sMeansOfDeath, "MOD_EXPLOSIVE") || isSubStr(sMeansOfDeath, "MOD_PROJECTILE") || isSubStr(sMeansOfDeath, "MOD_GAS")) &&
-      isDefined(eInflictor)) {
+    if((isSubStr(sMeansOfDeath, "MOD_GRENADE") || isSubStr(sMeansOfDeath, "MOD_EXPLOSIVE") || isSubStr(sMeansOfDeath, "MOD_PROJECTILE") || isSubStr(sMeansOfDeath, "MOD_GAS")) && isDefined(eInflictor)) {
       if((eInflictor.classname == "grenade" || sweapon == "tabun_gas_mp") && (self.lastSpawnTime + 3500) > getTime() && distance(eInflictor.origin, self.lastSpawnPoint.origin) < 250) {
         return;
       }
@@ -658,9 +651,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
         hasBodyArmor = false;
         if(iDamage > 0) {
           if(IsPlayer(eAttacker) && eAttacker HasPerk("specialty_shades") && eAttacker HasPerk("specialty_stunprotection") && eAttacker HasPerk("specialty_gas_mask")) {
-            if(sMeansOfDeath == "MOD_GRENADE_SPLASH" &&
-              (sWeapon == "flash_grenade_mp" || sWeapon == "concussion_grenade_mp") &&
-              (!self HasPerk("specialty_shades") || !self HasPerk("specialty_stunprotection"))) {
+            if(sMeansOfDeath == "MOD_GRENADE_SPLASH" && (sWeapon == "flash_grenade_mp" || sWeapon == "concussion_grenade_mp") && (!self HasPerk("specialty_shades") || !self HasPerk("specialty_stunprotection"))) {
               eAttacker thread maps\mp\gametypes\_damagefeedback::updateSpecialDamageFeedback(self);
             }
           }
@@ -690,15 +681,13 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
       lpattackname = eAttacker.name;
       lpattackerteam = eAttacker.team;
       lpattackerorigin = eAttacker.origin;
-      bbPrint("mpattacks: gametime %d attackerspawnid %d attackerweapon %s attackerx %f attackery %f attackerz %f victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 0",
-        gettime(), getplayerspawnid(eAttacker), sWeapon, lpattackerorigin, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
+      bbPrint("mpattacks: gametime %d attackerspawnid %d attackerweapon %s attackerx %f attackery %f attackerz %f victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 0", gettime(), getplayerspawnid(eAttacker), sWeapon, lpattackerorigin, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
     } else {
       lpattacknum = -1;
       lpattackGuid = "";
       lpattackname = "";
       lpattackerteam = "world";
-      bbPrint("mpattacks: gametime %d attackerweapon %s victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 0",
-        gettime(), sWeapon, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
+      bbPrint("mpattacks: gametime %d attackerweapon %s victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 0", gettime(), sWeapon, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
     }
     logPrint("D;" + lpselfGuid + ";" + lpselfnum + ";" + lpselfteam + ";" + lpselfname + ";" + lpattackGuid + ";" + lpattacknum + ";" + lpattackerteam + ";" + lpattackname + ";" + sWeapon + ";" + iDamage + ";" + sMeansOfDeath + ";" + sHitLoc + "\n");
   }
@@ -1135,15 +1124,12 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
   if(isPlayer(attacker)) {
     if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(sWeapon)) {
       killstreak = maps\mp\gametypes\_hardpoints::getKillstreakForWeapon(sWeapon);
-      bbPrint("mpattacks: gametime %d attackerspawnid %d attackerweapon %s attackerx %f attackery %f attackerz %f victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 1 killstreak %s",
-        gettime(), getplayerspawnid(attacker), sWeapon, lpattackorigin, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc, killstreak);
+      bbPrint("mpattacks: gametime %d attackerspawnid %d attackerweapon %s attackerx %f attackery %f attackerz %f victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 1 killstreak %s", gettime(), getplayerspawnid(attacker), sWeapon, lpattackorigin, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc, killstreak);
     } else {
-      bbPrint("mpattacks: gametime %d attackerspawnid %d attackerweapon %s attackerx %f attackery %f attackerz %f victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 1",
-        gettime(), getplayerspawnid(attacker), sWeapon, lpattackorigin, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
+      bbPrint("mpattacks: gametime %d attackerspawnid %d attackerweapon %s attackerx %f attackery %f attackerz %f victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 1", gettime(), getplayerspawnid(attacker), sWeapon, lpattackorigin, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
     }
   } else {
-    bbPrint("mpattacks: gametime %d attackerweapon %s victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 1",
-      gettime(), sWeapon, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
+    bbPrint("mpattacks: gametime %d attackerweapon %s victimspawnid %d victimx %f victimy %f victimz %f damage %d damagetype %s damagelocation %s death 1", gettime(), sWeapon, getplayerspawnid(self), self.origin, iDamage, sMeansOfDeath, sHitLoc);
   }
   logPrint("K;" + lpselfguid + ";" + lpselfnum + ";" + lpselfteam + ";" + lpselfname + ";" + lpattackguid + ";" + lpattacknum + ";" + lpattackteam + ";" + lpattackname + ";" + sWeapon + ";" + iDamage + ";" + sMeansOfDeath + ";" + sHitLoc + "\n");
   attackerString = "none";
@@ -1195,16 +1181,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
   self.leaving_team = undefined;
   self thread[[level.onPlayerKilled]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   for(iCB = 0; iCB < level.onPlayerKilledExtraUnthreadedCBs.size; iCB++) {
-    self[[level.onPlayerKilledExtraUnthreadedCBs[iCB]]](
-      eInflictor,
-      attacker,
-      iDamage,
-      sMeansOfDeath,
-      sWeapon,
-      vDir,
-      sHitLoc,
-      psOffsetTime,
-      deathAnimDuration);
+    self[[level.onPlayerKilledExtraUnthreadedCBs[iCB]]](eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration);
   }
   self.wantSafeSpawn = false;
   perks = maps\mp\gametypes\_globallogic::getPerks(attacker);

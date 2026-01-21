@@ -16,7 +16,7 @@ main() {
   self func_83C4("noclip");
   var_0 = self getspectatepoint();
   self orientmode("face angle", var_0.angles[1]);
-  self func_82E4("combatrun", % combatrun_forward, % body, 1, 0.1, 1);
+  self func_82E4("combatrun", %combatrun_forward, %body, 1, 0.1, 1);
   wait(0.45);
   self func_83C4("gravity");
 }

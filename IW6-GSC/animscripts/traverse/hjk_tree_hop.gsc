@@ -14,7 +14,7 @@ main() {
 
 tree_hop_human() {
   if(isDefined(self.type) && self.type == "civilian")
-    animscripts\traverse\shared::advancedtraverse( % so_hijack_civ_log_jump, 39.875);
+    animscripts\traverse\shared::advancedtraverse(%so_hijack_civ_log_jump, 39.875);
   else
-    animscripts\traverse\shared::advancedtraverse( % traverse_wallhop_3, 39.875);
+    animscripts\traverse\shared::advancedtraverse(%traverse_wallhop_3, 39.875);
 }

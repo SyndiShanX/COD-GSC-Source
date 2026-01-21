@@ -115,9 +115,7 @@ _clearperks_stub() {
 }
 
 iskillstreakweapon_stub(var_0) {
-  if(isDefined(var_0) &&
-    var_0 != "none" &&
-    (maps\mp\gametypes\_hardpoints::h2_iskillstreakactivator(var_0) || isDefined(level.killstreakspecialcaseweapons[var_0]))) {
+  if(isDefined(var_0) && var_0 != "none" && (maps\mp\gametypes\_hardpoints::h2_iskillstreakactivator(var_0) || isDefined(level.killstreakspecialcaseweapons[var_0]))) {
     return 1;
   }
 

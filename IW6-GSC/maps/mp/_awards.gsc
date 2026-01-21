@@ -391,9 +391,7 @@ assignAwards() {
     else if(isDefined(var1))
       [[process]](ref, var1);
     else
-      [
-        [process]
-      ](ref);
+      [[process]](ref);
   }
 
   foreach(ref, award in level.awards) {

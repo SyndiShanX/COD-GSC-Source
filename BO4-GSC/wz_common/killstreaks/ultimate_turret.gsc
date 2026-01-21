@@ -108,8 +108,7 @@ function_6c288c45(spawnorigin, spawnangles) {
   turretvehicle thread setup_death_watch_for_new_targets();
   turretvehicle thread targetting_delay::function_7e1a12ce(bundle.var_2aeadfa0);
   callback::callback(#"hash_6d9bdacc6c29cfa5", {
-    #turret: turretvehicle,
-    #owner: self
+    #turret: turretvehicle, #owner: self
   });
 }
 
@@ -209,8 +208,7 @@ onturretdeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitl
 
   turretvehicle function_9101e29a();
   callback::callback(#"on_turret_destroyed", {
-    #turret: turretvehicle,
-    #owner: turretvehicle.owner
+    #turret: turretvehicle, #owner: turretvehicle.owner
   });
 }
 

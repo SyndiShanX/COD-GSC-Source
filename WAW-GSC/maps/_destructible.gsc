@@ -38,19 +38,12 @@ do_explosion() {
         }
         wait(0.2);
       }
-      animation = [
-        [level.destructible_pointers["explosion_anim_" + self.destructibledef]]
-      ]();
-      self ClearAnim( % root, 0);
+      animation = [[level.destructible_pointers["explosion_anim_" + self.destructibledef]]]();
+      self ClearAnim(%root, 0);
       self SetAnimKnob(animation, 1.0, 1.0, 1.0);
       level thread do_explosion_sound(self.origin);
       if(isDefined(level.vehicle_death_earthquake[self.destructibledef]))
-        earthquake(
-          level.vehicle_death_earthquake[self.destructibledef].scale,
-          level.vehicle_death_earthquake[self.destructibledef].duration,
-          self.origin,
-          level.vehicle_death_earthquake[self.destructibledef].radius
-        );
+        earthquake(level.vehicle_death_earthquake[self.destructibledef].scale, level.vehicle_death_earthquake[self.destructibledef].duration, self.origin, level.vehicle_death_earthquake[self.destructibledef].radius);
       PlayRumbleOnPosition("explosion_generic", self.origin);
       self kill_damage(self.destructibledef, attacker);
       self.exploded = true;
@@ -85,15 +78,7 @@ do_flat_tires() {
 
 setup_destructibles() {
   if(isDefined(self.destructibledef)) {
-    if(self.destructibledef == "dest_type95scoutcar" ||
-      self.destructibledef == "dest_beetle" ||
-      self.destructibledef == "dest_horch1a" ||
-      self.destructibledef == "dest_mercedesw136" ||
-      self.destructibledef == "dest_mercedesw136b" ||
-      self.destructibledef == "dest_opel_blitz" ||
-      self.destructibledef == "dest_bmwmotorcycle" ||
-      self.destructibledef == "dest_type94truck" ||
-      self.destructibledef == "dest_type94truckcamo") {
+    if(self.destructibledef == "dest_type95scoutcar" || self.destructibledef == "dest_beetle" || self.destructibledef == "dest_horch1a" || self.destructibledef == "dest_mercedesw136" || self.destructibledef == "dest_mercedesw136b" || self.destructibledef == "dest_opel_blitz" || self.destructibledef == "dest_bmwmotorcycle" || self.destructibledef == "dest_type94truck" || self.destructibledef == "dest_type94truckcamo") {
       if(!isDefined(level.destructible_pointers_inited) || !isDefined(level.destructible_pointers_inited[self.destructibledef])) {
         temp_def = "";
         for(i = 5; i < self.destructibledef.size; i++) {

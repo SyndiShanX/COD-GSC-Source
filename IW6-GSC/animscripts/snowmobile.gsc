@@ -80,7 +80,7 @@ snowmobile_loop_driver() {
   var_1 = [];
   var_1["left2right"] = getanimlength(animscripts\utility::animarray("left2right"));
   var_1["right2left"] = getanimlength(animscripts\utility::animarray("right2left"));
-  self setanimknoball( % sm_turn, % body, 1, 0);
+  self setanimknoball(%sm_turn, %body, 1, 0);
   self setanim(animscripts\utility::animarray("drive"), 1, 0);
   self setanimknob(animscripts\utility::animarray(var_0), 1, 0);
   self setanimtime(animscripts\utility::animarray(var_0), 0.5);
@@ -118,12 +118,12 @@ snowmobile_loop_driver() {
 snowmobile_loop_passenger() {
   self endon("death");
   self endon("killanimscript");
-  self setanimknoball(animscripts\utility::animarray("hide"), % body, 1, 0);
+  self setanimknoball(animscripts\utility::animarray("hide"), %body, 1, 0);
   self setanimknob(animscripts\utility::animarray("drive"), 1, 0);
 
   for(;;) {
     var_0 = maps\_vehicle_code::update_steering(self.ridingvehicle);
-    self setanimlimited( % sm_lean, abs(var_0), 0.05);
+    self setanimlimited(%sm_lean, abs(var_0), 0.05);
 
     if(var_0 >= 0)
       self setanimknoblimited(animscripts\utility::animarray("lean_right"), 1, 0.05);
@@ -139,7 +139,7 @@ snowmobile_loop_driver_shooting() {
   self endon("killanimscript");
   var_0 = 0.05;
   var_1 = 0;
-  self setanimknoball( % sm_aiming, % body, 1, 0);
+  self setanimknoball(%sm_aiming, %body, 1, 0);
   self setanimknob(animscripts\utility::animarray("idle"), 1, 0);
 
   for(;;) {
@@ -179,7 +179,7 @@ snowmobile_loop_passenger_shooting() {
   self endon("death");
   self endon("killanimscript");
   var_0 = 0.05;
-  self setanimknoball( % sm_aiming, % body, 1, 0);
+  self setanimknoball(%sm_aiming, %body, 1, 0);
   self setanimknob(animscripts\utility::animarray("idle"), 1, 0);
 
   for(;;) {
@@ -282,7 +282,7 @@ snowmobile_handle_events(var_0) {
 
 snowmobile_start_shooting() {
   self notify("want_shoot_while_driving");
-  self setanim( % sm_add_fire, 1, 0.2);
+  self setanim(%sm_add_fire, 1, 0.2);
 
   if(isDefined(self.shoot_while_driving_thread)) {
     return;
@@ -298,7 +298,7 @@ snowmobile_stop_shooting() {
   wait 0.05;
   self notify("end_shoot_while_driving");
   self.shoot_while_driving_thread = undefined;
-  self clearanim( % sm_add_fire, 0.2);
+  self clearanim(%sm_add_fire, 0.2);
 }
 
 snowmobile_decide_shoot() {
@@ -403,19 +403,19 @@ snowmobile_reload_internal() {
   self endon("snowmobile_event_occurred");
   self.stop_aiming_for_reload = 1;
   self waittill("start_blending_reload");
-  self setanim( % sm_aiming, 0, 0.25);
+  self setanim(%sm_aiming, 0, 0.25);
   self setflaggedanimrestart("gun_down", animscripts\utility::animarray("gun_down"), 1, 0.25);
   animscripts\shared::donotetracks("gun_down");
   self clearanim(animscripts\utility::animarray("gun_down"), 0);
-  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::animarray("reload"), % body, 1, 0.25);
+  self setflaggedanimknoballrestart("reload_anim", animscripts\utility::animarray("reload"), %body, 1, 0.25);
   animscripts\shared::donotetracks("reload_anim");
-  self clearanim( % sm_reload, 0.2);
+  self clearanim(%sm_reload, 0.2);
   self setflaggedanimrestart("gun_up", animscripts\utility::animarray("gun_up"), 1, 0.25);
   self.gun_up_for_reload = 1;
   animscripts\shared::donotetracks("gun_up", ::snowmobile_waitfor_start_aim);
   self.stop_aiming_for_reload = undefined;
-  self clearanim( % sm_reload, 0.1);
-  self setanim( % sm_aiming, 1, 0.1);
+  self clearanim(%sm_reload, 0.1);
+  self setanim(%sm_aiming, 1, 0.1);
 
   if(isDefined(self.gun_up_for_reload)) {
     self.gun_up_for_reload = undefined;
@@ -484,8 +484,8 @@ snowmobile_trackshootentorpos_driver() {
     var_2 = var_3;
     var_11 = min(max(0 - var_3, 0), 90) / 90 * self.a.aimweight;
     var_12 = min(max(var_3, 0), 90) / 90 * self.a.aimweight;
-    self setanimlimited( % sm_aim_4, var_11, var_0);
-    self setanimlimited( % sm_aim_6, var_12, var_0);
+    self setanimlimited(%sm_aim_4, var_11, var_0);
+    self setanimlimited(%sm_aim_6, var_12, var_0);
     wait 0.05;
   }
 }
@@ -556,11 +556,11 @@ snowmobile_trackshootentorpos_passenger() {
     var_18 = max(90 - abs(var_7), 0) / 90 * self.a.aimweight;
     var_19 = min(max(var_7, 0), 90) / 90 * self.a.aimweight;
     var_20 = max(-90 + var_7, 0) / 90 * self.a.aimweight;
-    self setanimlimited( % sm_aim_1, var_16, var_0);
-    self setanimlimited( % sm_aim_4_delta, var_17, var_0);
-    self setanimlimited( % sm_aim_5_delta, var_18, var_0);
-    self setanimlimited( % sm_aim_6_delta, var_19, var_0);
-    self setanimlimited( % sm_aim_3, var_20, var_0);
+    self setanimlimited(%sm_aim_1, var_16, var_0);
+    self setanimlimited(%sm_aim_4_delta, var_17, var_0);
+    self setanimlimited(%sm_aim_5_delta, var_18, var_0);
+    self setanimlimited(%sm_aim_6_delta, var_19, var_0);
+    self setanimlimited(%sm_aim_3, var_20, var_0);
     wait 0.05;
   }
 }

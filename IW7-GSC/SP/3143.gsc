@@ -592,9 +592,9 @@ func_D3F2(var_0, var_1) {
   func_E5FE(" --- PlayerRig_HitQuickMiss");
   var_2 = "rodeoQuickMiss";
   if(var_1 == "right") {
-    var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_miss_quick);
+    var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_miss_quick);
   } else {
-    var_0 func_82E7(var_2, % titan_c12_rodeo_gun_player_miss_quick);
+    var_0 func_82E7(var_2, %titan_c12_rodeo_gun_player_miss_quick);
   }
 
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_D403);
@@ -604,9 +604,9 @@ func_D3F3(var_0, var_1) {
   func_E5FE(" --- PlayerRig_Idle");
   var_2 = "rodeoIdle";
   if(var_1 == "right") {
-    var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), % titan_c12_rodeo_player_idle);
+    var_0 animscripted(var_2, self gettagorigin("j_spineupper"), self gettagangles("j_spineupper"), %titan_c12_rodeo_player_idle);
   } else {
-    var_0 func_82E7(var_2, % titan_c12_rodeo_gun_player_idle);
+    var_0 func_82E7(var_2, %titan_c12_rodeo_gun_player_idle);
   }
 
   var_0 scripts\anim\shared::donotetracks(var_2, ::func_D403);

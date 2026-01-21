@@ -12,15 +12,7 @@ magic_box_init() {
   level._BOX_INDICATOR_NO_LIGHTS = -1;
   level._BOX_INDICATOR_FLASH_LIGHTS_MOVING = 99;
   level._BOX_INDICATOR_FLASH_LIGHTS_FIRE_SALE = 98;
-  level._box_locations = array("start_chest",
-    "foyer_chest",
-    "crematorium_chest",
-    "alleyway_chest",
-    "control_chest",
-    "stage_chest",
-    "dressing_chest",
-    "dining_chest",
-    "theater_chest");
+  level._box_locations = array("start_chest", "foyer_chest", "crematorium_chest", "alleyway_chest", "control_chest", "stage_chest", "dressing_chest", "dining_chest", "theater_chest");
   level thread magic_box_update();
   level thread watch_fire_sale();
 }

@@ -1277,12 +1277,8 @@ function ball_touched_goal(goal) {
 function ball_give_score(team, score) {
   if(isDefined(game["overtime_round"])) {
     if(game["overtime_round"] == 1) {} else {
-      team_score = [
-        [level._getteamscore]
-      ](team);
-      other_team_score = [
-        [level._getteamscore]
-      ](util::getotherteam(team));
+      team_score = [[level._getteamscore]](team);
+      other_team_score = [[level._getteamscore]](util::getotherteam(team));
     }
   }
 }

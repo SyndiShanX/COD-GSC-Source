@@ -434,9 +434,7 @@ compareSizesFx(org, array, dist, compareFunc) {
   dist = distance(struct.v["origin"], org);
   for(i = 1; i < keys.size; i++) {
     newdist = distance(array[keys[i]].v["origin"], org);
-    if([
-        [compareFunc]
-      ](newDist, dist))
+    if([[compareFunc]](newDist, dist))
       continue;
     dist = newdist;
     struct = array[keys[i]];
@@ -464,9 +462,7 @@ compareSizes(org, array, dist, compareFunc) {
   dist = Distance(ent.origin, org);
   for(i = 1; i < keys.size; i++) {
     newdist = distance(array[keys[i]].origin, org);
-    if([
-        [compareFunc]
-      ](newDist, dist))
+    if([[compareFunc]](newDist, dist))
       continue;
     dist = newdist;
     ent = array[keys[i]];
@@ -3770,8 +3766,7 @@ set_goalradius(radius) {
 try_forever_spawn() {
   export = self.export;
   for(;;) {
-    assertEx(isDefined(self), "Spawner with export " +
-      export +" was deleted.");
+    assertEx(isDefined(self), "Spawner with export " + export +" was deleted.");
     guy = self dospawn();
     if(spawn_failed(guy)) {
       wait(1);
@@ -4076,9 +4071,7 @@ display_hint(hint) {
     return;
   }
   if(isDefined(level.trigger_hint_func[hint])) {
-    if([
-        [level.trigger_hint_func[hint]]
-      ]()) {
+    if([[level.trigger_hint_func[hint]]]()) {
       return;
     }
     HintPrint(level.trigger_hint_string[hint], level.trigger_hint_func[hint]);
@@ -5505,10 +5498,7 @@ coop_warp_player(struct) {
       return;
     }
     if(isDefined(trigger.script_start_dist)) {
-      self SetVolFog(trigger.script_start_dist, trigger.script_halfway_dist,
-        trigger.script_halfway_height, trigger.script_base_height,
-        trigger.script_color[0], trigger.script_color[1], trigger.script_color[2],
-        trigger.script_transition_time);
+      self SetVolFog(trigger.script_start_dist, trigger.script_halfway_dist, trigger.script_halfway_height, trigger.script_base_height, trigger.script_color[0], trigger.script_color[1], trigger.script_color[2], trigger.script_transition_time);
       if(isDefined(trigger.script_vision) && isDefined(trigger.script_vision_time)) {
         self VisionSetNaked(trigger.script_vision, trigger.script_vision_time);
       }

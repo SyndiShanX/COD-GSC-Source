@@ -20,7 +20,7 @@ main(model, type, turret_type) {
   build_deathfx("fire/firelp_med_pm", "TAG_CAB_FIRE", "fire_metal_medium", undefined, undefined, true, 0);
   build_deathfx("explosions/vehicle_explosion_hummer_minigun", "tag_deathfx", "car_explode", undefined, undefined, undefined, 0);
 
-  build_drive( % humvee_50cal_driving_idle_forward, % humvee_50cal_driving_idle_backward, 10);
+  build_drive(%humvee_50cal_driving_idle_forward, %humvee_50cal_driving_idle_backward, 10);
   build_treadfx();
   build_life(999, 500, 1500);
   build_team("allies");
@@ -168,10 +168,7 @@ sound,weapon_minigun,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer"
-default:"vehicletype" "hummer_minigun"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_minigun"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_minigun_physics (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -184,10 +181,7 @@ sound,weapon_minigun,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer"
-default:"vehicletype" "hummer_minigun_physics"
-default:"script_team" "allies"
-*/
+defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_minigun_physics"default:"script_team" "allies"*/
 
 /*QUAKED script_vehicle_hummer_minigun_physics_player (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 
@@ -200,7 +194,5 @@ sound,weapon_minigun,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
-defaultmdl="vehicle_hummer"
-default:"vehicletype" "hummer_minigun_physics_player"
-default:"script_team" "allies"
+defaultmdl="vehicle_hummer"default:"vehicletype" "hummer_minigun_physics_player"default:"script_team" "allies"
 */

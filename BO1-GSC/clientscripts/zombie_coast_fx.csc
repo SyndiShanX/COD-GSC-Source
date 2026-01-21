@@ -155,9 +155,7 @@ exterior_fog_change(ent_player) {
     sun_stop_ang = 0;
     time = 10;
     max_fog_opacity = 1;
-    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);
+    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
 
@@ -185,9 +183,7 @@ lighthouse_fog_change(ent_player) {
     sun_stop_ang = 0;
     time = 10;
     max_fog_opacity = 0.97;
-    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);
+    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
 
@@ -215,9 +211,7 @@ shipfront_fog_change(ent_player) {
     sun_stop_ang = 0;
     time = 10;
     max_fog_opacity = 0.97;
-    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);
+    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
 
@@ -245,9 +239,7 @@ shipback_fog_change(ent_player) {
     sun_stop_ang = 0;
     time = 10;
     max_fog_opacity = 0.97;
-    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);
+    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
 
@@ -275,9 +267,7 @@ shipIce_fog_change(ent_player) {
     sun_stop_ang = 0;
     time = 10;
     max_fog_opacity = 0.97;
-    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);
+    setVolFogForClient(ent_player GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }
 
@@ -329,8 +319,6 @@ coast_fog_blizzard(localClientNum, set, newEnt) {
     sun_stop_ang = 0;
     time = 10;
     max_fog_opacity = 1;
-    setVolFogForClient(self GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale,
-      sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang,
-      sun_stop_ang, time, max_fog_opacity);
+    setVolFogForClient(self GetLocalClientNumber(), start_dist, half_dist, half_height, base_height, fog_r, fog_g, fog_b, fog_scale, sun_col_r, sun_col_g, sun_col_b, sun_dir_x, sun_dir_y, sun_dir_z, sun_start_ang, sun_stop_ang, time, max_fog_opacity);
   }
 }

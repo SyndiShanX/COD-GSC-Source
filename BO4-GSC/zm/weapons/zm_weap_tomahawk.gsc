@@ -72,8 +72,7 @@ watch_for_tomahawk_throw() {
       e_grenade.low_level_instant_kill_charge = 1;
       e_grenade.owner = self;
       self notify(#"throwing_tomahawk", {
-        #e_grenade: e_grenade,
-        #w_weapon: w_weapon
+        #e_grenade: e_grenade, #w_weapon: w_weapon
       });
       self thread function_932e24b(w_weapon);
 

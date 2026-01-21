@@ -6025,9 +6025,7 @@ func_D2CE(var_0, var_1, var_2, var_3, var_4) {
 
     while(abs(var_6 - var_5) > abs(var_10 * 1.1)) {
       var_5 = var_5 + var_10;
-      [
-        [var_3]
-      ](var_5);
+      [[var_3]](var_5);
       wait(var_8);
     }
   }

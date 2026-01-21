@@ -42,14 +42,14 @@ main() {
   self.covernode = self.node;
   assert(isDefined(self.covernode));
   self orientmode("face angle", self.covernode.angles[1]);
-  self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
+  self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
 
   if(self.a.pose != "prone")
     self transitionto("prone");
   else
     self enterpronewrapper(0);
 
-  self setanimknoball(animarray("straight_level"), % body, 1, 0.1, 1);
+  self setanimknoball(animarray("straight_level"), %body, 1, 0.1, 1);
   self orientmode("face angle", self.covernode.angles[1]);
   self animmode("zonly_physics");
   self pronecombatmainloop();
@@ -69,14 +69,14 @@ idlethread() {
 }
 
 updatepronewrapper(time) {
-  self updateprone( % prone_aim_feet_45up, % prone_aim_feet_45down, 1, time, 1);
+  self updateprone(%prone_aim_feet_45up, %prone_aim_feet_45down, 1, time, 1);
 }
 
 pronecombatmainloop() {
   self endon("killanimscript");
   self endon("melee");
   self thread trackshootentorpos();
-  self setanim( % add_idle);
+  self setanim(%add_idle);
   self thread idlethread();
   self thread animscripts\shoot_behavior::decidewhatandhowtoshoot("normal");
   desynched = gettime() > 2500;
@@ -121,7 +121,7 @@ pronecombatmainloop() {
     if(aimedatshootentorpos() && gettime() >= 0) {
       shootuntilshootbehaviorchange();
       self flamethrower_stop_shoot();
-      self clearanim( % add_fire, 0.2);
+      self clearanim(%add_fire, 0.2);
       continue;
     }
 
@@ -136,8 +136,8 @@ pronereload() {
 
     self maps\_dds::dds_notify_reload(undefined, self.team == "allies");
     reloadanim = self animarraypickrandom("reload");
-    self setflaggedanimknoball("reloadanim", reloadanim, % body, 1, 0.1, 1);
-    self setanim( % exposed_aiming, 1, 0);
+    self setflaggedanimknoball("reloadanim", reloadanim, %body, 1, 0.1, 1);
+    self setanim(%exposed_aiming, 1, 0);
     animscripts\shared::donotetracks("reloadanim");
     self clearanim(reloadanim, 0.2);
     self animscripts\weaponlist::refillclip();
@@ -191,7 +191,7 @@ transitionto(newpose) {
   if(newpose == self.a.pose) {
     return;
   }
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   self notify("kill_idle_thread");
 
   if(shouldfirewhilechangingpose())
@@ -202,10 +202,10 @@ transitionto(newpose) {
   if(newpose == "prone")
     assert(animhasnotetrack(transanim, "anim_pose = \"prone\""));
 
-  self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.2, 1.0);
+  self setflaggedanimknoballrestart("trans", transanim, %body, 1, 0.2, 1.0);
   animscripts\shared::donotetracks("trans");
   assert(self.a.pose == newpose);
-  self setanimknoballrestart(animarray("straight_level"), % body, 1, 0.25);
+  self setanimknoballrestart(animarray("straight_level"), %body, 1, 0.25);
   setupaim(0.25);
 }
 
@@ -215,7 +215,7 @@ finishnotetracks(animname) {
 }
 
 setupaim(transtime) {
-  self setanimknoball(animarray("straight_level"), % body, 1, transtime);
+  self setanimknoball(animarray("straight_level"), %body, 1, transtime);
   self setanimlimited(animarray("add_aim_up"), 1, transtime);
   self setanimlimited(animarray("add_aim_down"), 1, transtime);
   self setanimlimited(animarray("add_aim_left"), 1, transtime);
@@ -224,7 +224,7 @@ setupaim(transtime) {
 
 proneto(newpose, rate) {
   assert(self.a.pose == "prone");
-  self clearanim( % root, 0.3);
+  self clearanim(%root, 0.3);
   transanim = undefined;
 
   if(shouldfirewhilechangingpose()) {
@@ -243,7 +243,7 @@ proneto(newpose, rate) {
     rate = 1;
 
   self exitpronewrapper(getanimlength(transanim) / 2);
-  self setflaggedanimknoballrestart("trans", transanim, % body, 1, 0.2, rate);
+  self setflaggedanimknoballrestart("trans", transanim, %body, 1, 0.2, rate);
   animscripts\shared::donotetracks("trans");
   self clearanim(transanim, 0.1);
   assert(self.a.pose == newpose);

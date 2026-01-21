@@ -529,9 +529,7 @@ record_revive_success(var_0, var_1) {
     var_0 scripts\cp\cp_persistence::eog_player_update_stat("revives", 1);
     var_1 thread scripts\cp\cp_hud_message::showsplash("revived", undefined, var_0);
     if(isDefined(level.revive_success_analytics_func)) {
-      [
-        [level.revive_success_analytics_func]
-      ](var_0);
+      [[level.revive_success_analytics_func]](var_0);
     }
   }
 }

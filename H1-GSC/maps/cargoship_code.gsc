@@ -2387,7 +2387,7 @@ seaknight_spawn(var_0) {
   var_1.model thread maps\_vehicle::aircraft_wash();
   var_1.model thread maps\mo_fastrope::fastrope_player_quake();
   var_1.model useanimtree(#animtree);
-  var_1.model setanim( % ch46_turret_idle);
+  var_1.model setanim(%ch46_turret_idle);
   return var_1;
 }
 
@@ -3319,7 +3319,7 @@ escape_heroes_turn_setup() {
 escape_turn(var_0) {
   level endon("killanimscript");
   self orientmode("face angle", self.turn_anim["angle"][1]);
-  self setflaggedanimknoball("custom_anim", self.turn_anim["anim"], % body, 1, 0.2, self.turn_anim["rate"]);
+  self setflaggedanimknoball("custom_anim", self.turn_anim["anim"], %body, 1, 0.2, self.turn_anim["rate"]);
   wait(self.turn_anim["wait"]);
 }
 

@@ -9,7 +9,7 @@ main(var_0, var_1, var_2) {
   maps\_vehicle::build_template("apache_player", var_0, var_1, var_2);
   maps\_vehicle::build_localinit(::init_local);
   maps\_vehicle::build_team("allies");
-  maps\_vehicle::build_drive( % apache_cockpit_rotor, undefined, 0);
+  maps\_vehicle::build_drive(%apache_cockpit_rotor, undefined, 0);
   maps\_vehicle::build_life(10000, 5000, 15000);
   maps\_vehicle::build_is_helicopter();
   maps\_vehicle::build_treadfx(var_2, "default", "fx/treadfx/heli_dust_default", 0);

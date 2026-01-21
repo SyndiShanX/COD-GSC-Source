@@ -787,10 +787,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     else
       return "weapon_instakill";
   }
-  if((mod == "MOD_MELEE" ||
-      mod == "MOD_BAYONET" ||
-      mod == "MOD_UNKNOWN") &&
-    dist < close_dist) {
+  if((mod == "MOD_MELEE" || mod == "MOD_BAYONET" || mod == "MOD_UNKNOWN") && dist < close_dist) {
     if(!instakill) {
       if(player hasWeapon("sickle_knife_zm"))
         return "sickle";
@@ -805,66 +802,40 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     else
       return "weapon_instakill";
   }
-  if((mod == "MOD_GRENADE" ||
-      mod == "MOD_GRENADE_SPLASH" ||
-      mod == "MOD_PROJECTILE_SPLASH" ||
-      mod == "MOD_EXPLOSIVE") &&
-    weapon != "ray_gun_zm") {
+  if((mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") && weapon != "ray_gun_zm") {
     if(!instakill)
       return "explosive";
     else
       return "weapon_instakill";
   }
-  if((IsSubStr(weapon, "flame") ||
-      IsSubStr(weapon, "molotov_") ||
-      IsSubStr(weapon, "napalmblob_")) &&
-    (mod == "MOD_BURNED" ||
-      mod == "MOD_GRENADE" ||
-      mod == "MOD_GRENADE_SPLASH")) {
+  if((IsSubStr(weapon, "flame") || IsSubStr(weapon, "molotov_") || IsSubStr(weapon, "napalmblob_")) && (mod == "MOD_BURNED" || mod == "MOD_GRENADE" || mod == "MOD_GRENADE_SPLASH")) {
     if(!instakill)
       return "flame";
     else
       return "weapon_instakill";
   }
-  if(weapon == "ray_gun_zm" &&
-    dist > far_dist) {
+  if(weapon == "ray_gun_zm" && dist > far_dist) {
     if(!instakill)
       return "raygun";
     else
       return "weapon_instakill";
   }
-  if((mod == "MOD_RIFLE_BULLET" ||
-      mod == "MOD_PISTOL_BULLET") &&
-    (impact == "head" &&
-      dist > far_dist &&
-      !instakill)) {
+  if((mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET") && (impact == "head" && dist > far_dist && !instakill)) {
     return "headshot";
   }
-  if(mod != "MOD_MELEE" &&
-    impact != "head" &&
-    zombie.animname == "quad_zombie" &&
-    !instakill) {
+  if(mod != "MOD_MELEE" && impact != "head" && zombie.animname == "quad_zombie" && !instakill) {
     return "quad";
   }
-  if(mod != "MOD_MELEE" &&
-    impact != "head" &&
-    zombie.animname == "astro_zombie" &&
-    !instakill) {
+  if(mod != "MOD_MELEE" && impact != "head" && zombie.animname == "astro_zombie" && !instakill) {
     return "astro";
   }
-  if(mod != "MOD_MELEE" &&
-    impact != "head" &&
-    !zombie.has_legs &&
-    !instakill) {
+  if(mod != "MOD_MELEE" && impact != "head" && !zombie.has_legs && !instakill) {
     return "crawler";
   }
-  if(mod != "MOD_BURNED" &&
-    dist < close_dist &&
-    !instakill) {
+  if(mod != "MOD_BURNED" && dist < close_dist && !instakill) {
     return "closekill";
   }
-  if(mod == "MOD_RIFLE_BULLET" ||
-    mod == "MOD_PISTOL_BULLET") {
+  if(mod == "MOD_RIFLE_BULLET" || mod == "MOD_PISTOL_BULLET") {
     if(!instakill)
       return "bullet";
     else

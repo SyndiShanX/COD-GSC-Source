@@ -27,7 +27,7 @@ engineer_prespawn() {
 play_idle() {
   transTime = 0.2;
   idleAnim = self.a.overrideIdleAnimArray[randomInt(self.a.overrideIdleAnimArray.size)];
-  self SetFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, transTime, self.animplaybackrate);
+  self SetFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, transTime, self.animplaybackrate);
   self animscripts\zombie_shared::DoNoteTracks("idle");
 }
 
@@ -40,7 +40,7 @@ boss_zombie_idle_setup() {
   self.a.array["turn_right_90"] = % exposed_tracking_turn90R;
   self.a.array["turn_right_135"] = % exposed_tracking_turn135R;
   self.a.array["turn_right_180"] = % exposed_tracking_turn180L;
-  self.a.array["exposed_idle"] = array( % ai_zombie_boss_idle_a, % ai_zombie_boss_idle_b);
+  self.a.array["exposed_idle"] = array(%ai_zombie_boss_idle_a, %ai_zombie_boss_idle_b);
   self.a.array["straight_level"] = % ai_zombie_boss_idle_a;
   self.a.array["stand_2_crouch"] = % ai_zombie_shot_leg_right_2_crawl;
 }

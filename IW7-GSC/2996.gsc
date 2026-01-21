@@ -208,8 +208,8 @@ func_10770() {
   self.cannon setrightarc(180);
   self.cannon settoparc(80);
   self.cannon give_crafted_gascan(0);
-  self give_attacker_kill_rewards( % veh_mil_air_ca_mons_main_cannon_open);
-  wait(getanimlength( % veh_mil_air_ca_mons_main_cannon_open) * var_0);
+  self give_attacker_kill_rewards(%veh_mil_air_ca_mons_main_cannon_open);
+  wait(getanimlength(%veh_mil_air_ca_mons_main_cannon_open) * var_0);
 }
 
 func_E058() {
@@ -226,9 +226,9 @@ func_E058() {
   var_4 = spawn("script_origin", var_3);
   var_4 linkto(self);
   self.cannon func_8535(0);
-  self clearanim( % veh_mil_air_ca_mons_main_cannon_open, 0);
-  self give_attacker_kill_rewards( % veh_mil_air_ca_mons_main_cannon_close);
-  wait(getanimlength( % veh_mil_air_ca_mons_main_cannon_close));
+  self clearanim(%veh_mil_air_ca_mons_main_cannon_open, 0);
+  self give_attacker_kill_rewards(%veh_mil_air_ca_mons_main_cannon_close);
+  wait(getanimlength(%veh_mil_air_ca_mons_main_cannon_close));
   self giveperk("tag_main_cannon_hood");
   self.cannon delete();
   var_4 delete();

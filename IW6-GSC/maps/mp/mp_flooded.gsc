@@ -148,13 +148,7 @@ sinkingPlatform_Start() {
   self MoveTo(self.endPos, t, minAccel, minAccel);
   self RotateTo(self.endRot, t, minAccel, minAccel);
 
-  self thread sinkingPlatformPlaySfxSequence("scn_car_sinking_down_start",
-    "scn_car_sinking_down_loop",
-    "scn_car_sinking_down_end",
-    1,
-    0.25,
-    t
-  );
+  self thread sinkingPlatformPlaySfxSequence("scn_car_sinking_down_start", "scn_car_sinking_down_loop", "scn_car_sinking_down_end", 1, 0.25, t);
 
   self thread sinkingPlatform_WaitForExit();
   self thread sinkingPlatform_WaitForReachedBottom();
@@ -169,10 +163,7 @@ sinkingPlatform_WaitForExit() {
     startSize = self.entsInTrigger.size;
 
     foreach(index, player in self.entsInTrigger) {
-      if(!isDefined(player) ||
-        !(player IsTouching(self.trigger)) ||
-        !isReallyAlive(player)
-      ) {
+      if(!isDefined(player) || !(player IsTouching(self.trigger)) || !isReallyAlive(player)) {
         self.entsInTrigger[index] = undefined;
       }
     }
@@ -215,21 +206,13 @@ sinkingPlatform_Return() {
   self MoveTo(self.startPos, t, minAccel, minAccel);
   self RotateTo(self.startRot, t, minAccel, minAccel);
 
-  self thread sinkingPlatformPlaySfxSequence("scn_car_floating_up_start",
-    "scn_car_floating_up_loop",
-    "scn_car_floating_up_end",
-    .5,
-    0.25,
-    t
-  );
+  self thread sinkingPlatformPlaySfxSequence("scn_car_floating_up_start", "scn_car_floating_up_loop", "scn_car_floating_up_end", .5, 0.25, t);
 
   self thread sinkingPlatform_WaitForReachedTop();
 }
 
 canEntTriggerPlatform(other) {
-  return ((IsPlayer(other) || (IsAgent(other) && isDefined(other.agent_type) && other.agent_type != "dog")) &&
-    !isDefined(self.entsInTrigger[other GetEntityNumber()])
-  );
+  return ((IsPlayer(other) || (IsAgent(other) && isDefined(other.agent_type) && other.agent_type != "dog")) && !isDefined(self.entsInTrigger[other GetEntityNumber()]));
 }
 
 updateSinkRate(numBodies) {

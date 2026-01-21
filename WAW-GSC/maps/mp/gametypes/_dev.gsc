@@ -194,18 +194,7 @@ xKillsY(attackerName, victimName) {
   if(!isAlive(attacker) || !isAlive(victim)) {
     return;
   }
-  victim thread[[level.callbackPlayerDamage]](
-    attacker,
-    attacker,
-    1000,
-    0,
-    "MOD_RIFLE_BULLET",
-    "none",
-    (0, 0, 0),
-    (0, 0, 0),
-    "none",
-    0
-  );
+  victim thread[[level.callbackPlayerDamage]](attacker, attacker, 1000, 0, "MOD_RIFLE_BULLET", "none", (0, 0, 0), (0, 0, 0), "none", 0);
 }
 
 updateMinimapSetting() {
@@ -403,10 +392,7 @@ TestClient(team) {
   }
 }
 
-showOneSpawnPoint(
-  spawn_point,
-  color,
-  notification) {
+showOneSpawnPoint(spawn_point, color, notification) {
   k_player_height = get_player_height();
   center = spawn_point.origin;
   forward = anglesToForward(spawn_point.angles);
@@ -746,8 +732,7 @@ debug_realtime_engage_dist() {
         engageDistMulligan = level.weaponEngageDistValues.engageDistMulligan;
         engageDistMax = level.weaponEngageDistValues.engageDistMax;
         if((traceDist >= engageDistMin) && (traceDist <= engageDistMax)) {
-          if((traceDist >= (engageDistOptimal - engageDistMulligan)) &&
-            (traceDist <= (engageDistOptimal + engageDistMulligan))) {
+          if((traceDist >= (engageDistOptimal - engageDistMulligan)) && (traceDist <= (engageDistOptimal + engageDistMulligan))) {
             hudObjArray engagedist_hud_changetext("optimal", tracedist);
             hudobj_changecolor(hudObjArray, level.green);
           } else {

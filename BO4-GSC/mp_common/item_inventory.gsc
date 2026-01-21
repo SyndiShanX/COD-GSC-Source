@@ -1685,16 +1685,7 @@ function_4cde30fa(inventoryitem, itementry) {
   }
 
   self.var_3f1410dd = {
-    #player_xuid: int(self getxuid(1)),
-    #start_time: function_f8d53445(),
-    #end_time: 0,
-    #var_4550558c: isDefined(inventoryitem.amount) ? inventoryitem.amount : 0,
-    #tier: isDefined(itementry.armortier) ? itementry.armortier : 1,
-    #damage_taken: 0,
-    #var_7352c057: 0,
-    #repair_amount: 0,
-    #broken: 0,
-    #died: 0
+    #player_xuid: int(self getxuid(1)), #start_time: function_f8d53445(), #end_time: 0, #var_4550558c: isDefined(inventoryitem.amount) ? inventoryitem.amount : 0, #tier: isDefined(itementry.armortier) ? itementry.armortier : 1, #damage_taken: 0, #var_7352c057: 0, #repair_amount: 0, #broken: 0, #died: 0
   };
 }
 
@@ -3198,9 +3189,7 @@ function_c4468806(player, item) {
   }
 
   data = {
-    #game_time: function_f8d53445(),
-    #player_xuid: int(player getxuid(1)),
-    #item: hash(item.itementry.name)
+    #game_time: function_f8d53445(), #player_xuid: int(player getxuid(1)), #item: hash(item.itementry.name)
   };
   println("<dev string:x1ac>" + item.itementry.name);
   function_92d1707f(#"hash_50be59ef12074ce", data);

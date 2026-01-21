@@ -291,7 +291,7 @@ func_112BA(var_0) {
   var_13 thread func_5BED();
   var_13 thread func_5C37();
   var_13 thread func_5BF0();
-  var_13 setanimknob( % equip_pocket_drone_hover_loop);
+  var_13 setanimknob(%equip_pocket_drone_hover_loop);
   return var_13;
 }
 
@@ -307,13 +307,13 @@ func_11719(var_0) {
     var_1 = level.player scripts\engine\utility::waittill_any_return("dpadup", "dpaddown", "dpadleft");
     if(var_1 == "dpadup") {
       iprintlnbold("hover");
-      var_0 setanimknob( % equip_pocket_drone_hover_loop);
+      var_0 setanimknob(%equip_pocket_drone_hover_loop);
     } else if(var_1 == "dpadleft") {
       iprintlnbold("damaged");
-      var_0 setanimknob( % equip_pocket_drone_damaged_loop);
+      var_0 setanimknob(%equip_pocket_drone_damaged_loop);
     } else if(var_1 == "dpaddown") {
       iprintlnbold("death");
-      var_0 setanimknob( % equip_pocket_drone_death_loop);
+      var_0 setanimknob(%equip_pocket_drone_death_loop);
     }
 
     wait(0.25);
@@ -435,7 +435,7 @@ func_5BF5(var_0) {
   scripts\sp\utility::func_9193("default_supdrone");
   self.var_5CDB scripts\sp\utility::func_9193("default_supdrone");
   self playSound("support_drone_engine_mvmt_death");
-  self setanimknob( % equip_pocket_drone_death_loop);
+  self setanimknob(%equip_pocket_drone_death_loop);
   thread func_5C0C("veh_mil_air_un_pocketdrone_timeout_crash_body_4fan");
 }
 
@@ -458,7 +458,7 @@ func_5BF6() {
   scripts\sp\utility::func_9193("default_supdrone");
   self.var_5CDB scripts\sp\utility::func_9193("default_supdrone");
   self playSound("support_drone_engine_mvmt_death");
-  self setanimknob( % equip_pocket_drone_death_loop);
+  self setanimknob(%equip_pocket_drone_death_loop);
   if(isDefined(self.lastdamagedir)) {
     var_0 = self.lastdamagedir;
   } else {
@@ -1000,7 +1000,7 @@ func_5BED() {
 }
 
 func_5C05() {
-  self setanimknob( % equip_pocket_drone_damaged_loop);
+  self setanimknob(%equip_pocket_drone_damaged_loop);
   scripts\sp\utility::func_75C4("drone_damaged_loop", "tag_origin");
   scripts\engine\utility::waittill_any("death", "death_anim");
   if(isDefined(self)) {

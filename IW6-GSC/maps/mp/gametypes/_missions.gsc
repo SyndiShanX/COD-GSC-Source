@@ -375,8 +375,7 @@ ch_killstreak_kills(data) {
   }
   player = data.attacker;
 
-  if(!isDefined(player.pers[data.sWeapon + "_streak"]) ||
-    (isDefined(player.pers[data.sWeapon + "_streakTime"]) && GetTime() - player.pers[data.sWeapon + "_streakTime"] > 7000)) {
+  if(!isDefined(player.pers[data.sWeapon + "_streak"]) || (isDefined(player.pers[data.sWeapon + "_streakTime"]) && GetTime() - player.pers[data.sWeapon + "_streakTime"] > 7000)) {
     player.pers[data.sWeapon + "_streak"] = 0;
     player.pers[data.sWeapon + "_streakTime"] = GetTime();
   }
@@ -580,9 +579,7 @@ ch_kills(data, time) {
   if(isDefined(player.tookWeaponFrom[data.sWeapon])) {
     if(player.tookWeaponFrom[data.sWeapon] == data.victim
 
-      &&
-      (data.sMeansOfDeath != "MOD_MELEE" || maps\mp\gametypes\_weapons::isRiotShield(data.sWeapon) || maps\mp\gametypes\_weapons::isKnifeOnly(data.sWeapon))
-    )
+      && (data.sMeansOfDeath != "MOD_MELEE" || maps\mp\gametypes\_weapons::isRiotShield(data.sWeapon) || maps\mp\gametypes\_weapons::isKnifeOnly(data.sWeapon)))
       player processChallenge("ch_cruelty");
   }
 
@@ -669,16 +666,11 @@ ch_kills(data, time) {
   }
 
   if(data.sMeansOfDeath != "MOD_MELEE") {
-    if(
-      (data.sWeapon == player.primaryWeapon && loadoutPrimaryCount < loadoutSecondaryCount) ||
-      (data.sWeapon == player.secondaryWeapon && loadoutSecondaryCount < loadoutPrimaryCount)
-    ) {
+    if((data.sWeapon == player.primaryWeapon && loadoutPrimaryCount < loadoutSecondaryCount) || (data.sWeapon == player.secondaryWeapon && loadoutSecondaryCount < loadoutPrimaryCount)) {
       player processChallenge("ch_always_deadly");
     }
 
-    if(player shouldProcessChallengeForPerk("specialty_twoprimaries") &&
-      player.secondaryWeapon == data.sWeapon
-    ) {
+    if(player shouldProcessChallengeForPerk("specialty_twoprimaries") && player.secondaryWeapon == data.sWeapon) {
       player processChallenge("ch_twoprimaries_pro");
     }
   }
@@ -713,8 +705,7 @@ ch_kills(data, time) {
       player.killsThisLifePerWeapon[data.sWeapon] = 1;
   }
 
-  if(isKillstreakWeapon(data.sWeapon) &&
-    !allowKillChallengeForKillstreak(player, data.sWeapon)) {
+  if(isKillstreakWeapon(data.sWeapon) && !allowKillChallengeForKillstreak(player, data.sWeapon)) {
     return;
   }
   if(isDefined(data.modifiers["jackintheboxkill"]))
@@ -735,9 +726,7 @@ ch_kills(data, time) {
     if(level.teamBased) {
       assert(isDefined(level.comExpFuncs["getRadarStrengthForTeam"]));
       getRadarStrengthForTeamFunc = level.comExpFuncs["getRadarStrengthForTeam"];
-      numSatComs = [
-        [getRadarStrengthForTeamFunc]
-      ](getOtherTeam(player.team));
+      numSatComs = [[getRadarStrengthForTeamFunc]](getOtherTeam(player.team));
     } else {
       foreach(uplink in level.uplinks) {
         if(isDefined(uplink) && uplink.owner.guid != player.guid) {
@@ -758,8 +747,7 @@ ch_kills(data, time) {
   if(player shouldProcessChallengeForPerk("specialty_lightweight"))
     player processChallenge("ch_lightweight");
 
-  if(player shouldProcessChallengeForPerk("specialty_extra_attachment") &&
-    data.sWeapon != "none") {
+  if(player shouldProcessChallengeForPerk("specialty_extra_attachment") && data.sWeapon != "none") {
     curAttachments = weaponGetNumAttachments(data.sWeapon);
     normalAttachments = 2;
     if(maps\mp\gametypes\_weapons::isSideArm(data.sWeapon))
@@ -774,24 +762,15 @@ ch_kills(data, time) {
     player processChallenge("ch_gambler");
   }
 
-  if(player shouldProcessChallengeForPerk("specialty_regenfaster") &&
-    player.health < player.maxHealth
-  ) {
+  if(player shouldProcessChallengeForPerk("specialty_regenfaster") && player.health < player.maxHealth) {
     player processChallenge("ch_regenfaster");
   }
 
-  if(player shouldProcessChallengeForPerk("specialty_sprintreload") &&
-    isDefined(player.sprintReloadTimeStamp) &&
-    GetTime() <= player.sprintReloadTimeStamp &&
-    player.lastReloadedWeapon == data.sWeapon &&
-    data.sMeansOfDeath != "MOD_MELEE"
-  ) {
+  if(player shouldProcessChallengeForPerk("specialty_sprintreload") && isDefined(player.sprintReloadTimeStamp) && GetTime() <= player.sprintReloadTimeStamp && player.lastReloadedWeapon == data.sWeapon && data.sMeansOfDeath != "MOD_MELEE") {
     player processChallenge("ch_onthego");
   }
 
-  if(player shouldProcessChallengeForPerk("specialty_pitcher") &&
-    maps\mp\gametypes\_weapons::isOffhandWeapon(data.sWeapon)
-  ) {
+  if(player shouldProcessChallengeForPerk("specialty_pitcher") && maps\mp\gametypes\_weapons::isOffhandWeapon(data.sWeapon)) {
     player processChallenge("ch_pitcher");
   }
 
@@ -799,32 +778,23 @@ ch_kills(data, time) {
     player processChallenge("ch_silentkill");
   }
 
-  if(player shouldProcessChallengeForPerk("specialty_comexp") &&
-    level.uplinks.size > 0
-  ) {
+  if(player shouldProcessChallengeForPerk("specialty_comexp") && level.uplinks.size > 0) {
     player processChallenge("ch_comexp");
   }
 
   if(player shouldProcessChallengeForPerk("specialty_boom")) {
     guid = player getUniqueId();
-    if(isDefined(victim.markedByBoomPerk) &&
-      isDefined(victim.markedByBoomPerk[guid]) &&
-      GetTime() <= victim.markedByBoomPerk[guid]) {
+    if(isDefined(victim.markedByBoomPerk) && isDefined(victim.markedByBoomPerk[guid]) && GetTime() <= victim.markedByBoomPerk[guid]) {
       player processChallenge("ch_boom");
       victim.markedByBoomPerk = undefined;
     }
   }
 
-  if(!maps\mp\gametypes\_weapons::isOffhandWeapon(data.sWeapon) &&
-    data.sWeapon != player.pers["primaryWeapon"] &&
-    data.sWeapon != player.pers["secondaryWeapon"]
-  ) {
+  if(!maps\mp\gametypes\_weapons::isOffhandWeapon(data.sWeapon) && data.sWeapon != player.pers["primaryWeapon"] && data.sWeapon != player.pers["secondaryWeapon"]) {
     player processChallenge("ch_wiseguy");
   }
 
-  if(!maps\mp\gametypes\_weapons::isOffhandWeapon(data.sWeapon) &&
-    data.sMeansOfDeath != "MOD_MELEE"
-  ) {
+  if(!maps\mp\gametypes\_weapons::isOffhandWeapon(data.sWeapon) && data.sMeansOfDeath != "MOD_MELEE") {
     if(!isDefined(player.killsThisMag)) {
       player.killsThisMag = [];
     }
@@ -852,9 +822,7 @@ ch_kills(data, time) {
   if(player shouldProcessChallengeForPerk("specialty_incog"))
     player processChallenge("ch_incog");
 
-  if(isDefined(level.lbSniper) && isDefined(level.lbSniper.owner) && level.lbSniper.owner == victim &&
-    shouldProcessChallengeForPerk("specialty_blindeye")
-  ) {
+  if(isDefined(level.lbSniper) && isDefined(level.lbSniper.owner) && level.lbSniper.owner == victim && shouldProcessChallengeForPerk("specialty_blindeye")) {
     self processChallenge("ch_blindeye_pro");
   }
 
@@ -907,9 +875,7 @@ ch_kills(data, time) {
               player processChallenge("ch_noidea");
           }
 
-          if(player checkWasLastWeaponRiotShield() &&
-            isDefined(player.lastPrimaryWeaponSwapTime) &&
-            (GetTime() - player.lastPrimaryWeaponSwapTime) < OP_RIOTSHIELD_PISTOLKILL_SWAPTIME) {
+          if(player checkWasLastWeaponRiotShield() && isDefined(player.lastPrimaryWeaponSwapTime) && (GetTime() - player.lastPrimaryWeaponSwapTime) < OP_RIOTSHIELD_PISTOLKILL_SWAPTIME) {
             player processChallenge("ch_iw6_riotshield_pistol");
           }
           break;
@@ -1100,9 +1066,7 @@ ch_kills(data, time) {
       }
     }
 
-    if(player.weaponList.size == 1 &&
-      (player.weaponList[0] == "iw6_knifeonly_mp" || player.weaponList[0] == "iw6_knifeonlyfast_mp")
-    ) {
+    if(player.weaponList.size == 1 && (player.weaponList[0] == "iw6_knifeonly_mp" || player.weaponList[0] == "iw6_knifeonlyfast_mp")) {
       player processChallenge("ch_ballsofsteel");
     }
 
@@ -1180,10 +1144,7 @@ ch_kills(data, time) {
     }
   }
 
-  if((data.sMeansOfDeath == "MOD_PISTOL_BULLET" || data.sMeansOfDeath == "MOD_RIFLE_BULLET" || data.sMeansOfDeath == "MOD_HEAD_SHOT") &&
-    !isKillstreakWeapon(data.sWeapon) &&
-    !isEnvironmentWeapon(data.sWeapon)
-  ) {
+  if((data.sMeansOfDeath == "MOD_PISTOL_BULLET" || data.sMeansOfDeath == "MOD_RIFLE_BULLET" || data.sMeansOfDeath == "MOD_HEAD_SHOT") && !isKillstreakWeapon(data.sWeapon) && !isEnvironmentWeapon(data.sWeapon)) {
     weaponAttachments = getWeaponAttachmentsBaseNames(data.sWeapon);
     foreach(weaponAttachment in weaponAttachments) {
       switch (weaponAttachment) {
@@ -1273,9 +1234,7 @@ ch_kills(data, time) {
         player processChallenge("ch_deadsilence_pro");
     }
 
-    if(player shouldProcessChallengeForPerk("specialty_fastreload") &&
-      player hasReloadedRecently()
-    ) {
+    if(player shouldProcessChallengeForPerk("specialty_fastreload") && player hasReloadedRecently()) {
       player processChallenge("ch_sleightofhand_pro");
     }
 
@@ -1678,13 +1637,9 @@ killstreakKilled(owner, killedEnt, eInflictor, attacker, iDamage, sMeansOfDeath,
 }
 
 killstreakKilled_regularMP(owner, vehicle, eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon) {
-  if(isDefined(attacker) &&
-    isPlayer(attacker) &&
-    (!isDefined(owner) || attacker != owner)
+  if(isDefined(attacker) && isPlayer(attacker) && (!isDefined(owner) || attacker != owner)
 
-    &&
-    attacker killShouldAddToKillstreak(sWeapon)
-  ) {
+    && attacker killShouldAddToKillstreak(sWeapon)) {
     attacker maps\mp\killstreaks\_killstreaks::giveAdrenaline("vehicleDestroyed");
 
   }
@@ -2305,9 +2260,7 @@ isWeaponChallenge(challengeName) {
   tableValue = getChallengeFilter(challengeName);
 
   if(isDefined(tableValue)) {
-    if(maps\mp\gametypes\_class::isValidPrimary(tableValue, false) ||
-      maps\mp\gametypes\_class::isValidSecondary(tableValue, false)
-    ) {
+    if(maps\mp\gametypes\_class::isValidPrimary(tableValue, false) || maps\mp\gametypes\_class::isValidSecondary(tableValue, false)) {
       return true;
     }
   }
@@ -2322,11 +2275,7 @@ getWeaponFromChallenge(challengeRef) {
 
 isReticleChallenge(challengeRef) {
   tableValue = getChallengeFilter(challengeRef);
-  return (tableValue == "acog" ||
-    tableValue == "eotech" ||
-    tableValue == "hybrid" ||
-    tableValue == "reflex"
-  );
+  return (tableValue == "acog" || tableValue == "eotech" || tableValue == "hybrid" || tableValue == "reflex");
 }
 
 getSightFromReticleChallenge(challengeRef) {
@@ -2381,24 +2330,7 @@ isOperationChallenge(challengeRef) {
 
   tableValue = getChallengeFilter(challengeRef);
   if(isDefined(tableValue)) {
-    if(tableValue == "perk_slot_0" ||
-      tableValue == "perk_slot_1" ||
-      tableValue == "perk_slot_2" ||
-      tableValue == "proficiency" ||
-      tableValue == "equipment" ||
-      tableValue == "special_equipment" ||
-      tableValue == "attachment" ||
-      tableValue == "prestige" ||
-      tableValue == "final_killcam" ||
-      tableValue == "basic" ||
-      tableValue == "humiliation" ||
-      tableValue == "precision" ||
-      tableValue == "revenge" ||
-      tableValue == "elite" ||
-      tableValue == "intimidation" ||
-      tableValue == "operations" ||
-      isStrStart(tableValue, "killstreaks_")
-    ) {
+    if(tableValue == "perk_slot_0" || tableValue == "perk_slot_1" || tableValue == "perk_slot_2" || tableValue == "proficiency" || tableValue == "equipment" || tableValue == "special_equipment" || tableValue == "attachment" || tableValue == "prestige" || tableValue == "final_killcam" || tableValue == "basic" || tableValue == "humiliation" || tableValue == "precision" || tableValue == "revenge" || tableValue == "elite" || tableValue == "intimidation" || tableValue == "operations" || isStrStart(tableValue, "killstreaks_")) {
       return true;
     }
   }
@@ -2666,9 +2598,7 @@ playerHasAmmo() {
 
   foreach(primary in primaryWeapons) {
     if(self GetWeaponAmmoClip(primary)) {
-      if(!maps\mp\gametypes\_weapons::isRiotShield(primary) &&
-        !maps\mp\gametypes\_weapons::isKnifeOnly(primary)
-      ) {
+      if(!maps\mp\gametypes\_weapons::isRiotShield(primary) && !maps\mp\gametypes\_weapons::isKnifeOnly(primary)) {
         return true;
       }
     }
@@ -2858,17 +2788,13 @@ monitorSprintSlide() {
 }
 
 playerIsSprintSliding() {
-  return (isDefined(self.isSliding) ||
-    (isDefined(self.isSlidingGracePeriod) && GetTime() <= self.isSlidingGracePeriod)
-  );
+  return (isDefined(self.isSliding) || (isDefined(self.isSlidingGracePeriod) && GetTime() <= self.isSlidingGracePeriod));
 }
 
 CONST_SPRINT_SLIDE_RECENT_GRACEPERIOD = 2000 - CONST_SPRINT_SLIDE_GRACEPERIOD;
 
 playerSprintSlidRecently() {
-  return (isDefined(self.isSliding) ||
-    (isDefined(self.isSlidingGracePeriod) && GetTime() <= self.isSlidingGracePeriod + CONST_SPRINT_SLIDE_RECENT_GRACEPERIOD)
-  );
+  return (isDefined(self.isSliding) || (isDefined(self.isSlidingGracePeriod) && GetTime() <= self.isSlidingGracePeriod + CONST_SPRINT_SLIDE_RECENT_GRACEPERIOD));
 }
 
 shouldProcessChallengeForPerk(perkName) {
@@ -2891,19 +2817,11 @@ processFinalKillChallenges(attacker, victim) {
   if(isDefined(attacker.modifiers["revenge"]))
     attacker processChallenge("ch_moneyshot");
 
-  if(isDefined(victim) &&
-    isDefined(victim.explosiveInfo) &&
-    isDefined(victim.explosiveInfo["stickKill"]) &&
-    victim.explosiveInfo["stickKill"]
-  ) {
+  if(isDefined(victim) && isDefined(victim.explosiveInfo) && isDefined(victim.explosiveInfo["stickKill"]) && victim.explosiveInfo["stickKill"]) {
     attacker processChallenge("ch_stickman");
   }
 
-  if(isDefined(victim.attackerData[attacker.guid]) &&
-    isDefined(victim.attackerData[attacker.guid].sMeansOfDeath) &&
-    isDefined(victim.attackerData[attacker.guid].weapon) &&
-    isSubStr(victim.attackerData[attacker.guid].sMeansOfDeath, "MOD_MELEE") &&
-    maps\mp\gametypes\_weapons::isRiotShield(victim.attackerData[attacker.guid].weapon)) {
+  if(isDefined(victim.attackerData[attacker.guid]) && isDefined(victim.attackerData[attacker.guid].sMeansOfDeath) && isDefined(victim.attackerData[attacker.guid].weapon) && isSubStr(victim.attackerData[attacker.guid].sMeansOfDeath, "MOD_MELEE") && maps\mp\gametypes\_weapons::isRiotShield(victim.attackerData[attacker.guid].weapon)) {
     attacker maps\mp\gametypes\_missions::processChallenge("ch_owned");
   }
 
@@ -3057,9 +2975,7 @@ processWeaponAttachmentChallenge_Reflex(baseWeapon, weaponAttachment, data) {
 
     self checkChallengeKillModifier(data, "headshot", weaponAttachment);
 
-    if(isStrStart(data.sWeapon, "alt_") &&
-      weaponHasAttachment(data.sWeapon, "shotgun")
-    ) {
+    if(isStrStart(data.sWeapon, "alt_") && weaponHasAttachment(data.sWeapon, "shotgun")) {
       self processChallenge("ch_" + weaponAttachment + "_altshotgun");
     }
   }
@@ -3154,8 +3070,7 @@ processWeaponClassChallenge_LMG(baseWeapon, data) {
     self processChallenge("ch_" + baseWeapon + "_sliding");
   }
 
-  if(data.sMeansOfDeath == "MOD_HEAD_SHOT" &&
-    checkCostumeChallenge(data.victim, "mp_body_elite_pmc_lmg_b")) {
+  if(data.sMeansOfDeath == "MOD_HEAD_SHOT" && checkCostumeChallenge(data.victim, "mp_body_elite_pmc_lmg_b")) {
     self processChallenge("ch_ghostbusted");
   }
 
@@ -3292,9 +3207,7 @@ checkPenetrationChallenge(victim, challengeName) {
 
 checkConsecutiveChallenge(weaponName, challengeName) {
   kills = self.killsThisLifePerWeapon[weaponName];
-  if(isDefined(kills) &&
-    isNumberMultipleOf(kills, CONSECUTIVE_KILL_INTERVAL)
-  ) {
+  if(isDefined(kills) && isNumberMultipleOf(kills, CONSECUTIVE_KILL_INTERVAL)) {
     self processChallenge("ch_" + challengeName + "_consecutive");
   }
 }
@@ -3312,10 +3225,7 @@ checkWasLastWeaponRiotShield() {
 
 checkAAChallenges(attacker, victim, weapon) {
   if(isDefined(weapon)) {
-    if(isDefined(level.odinSettings) &&
-      isDefined(level.odinSettings["odin_assault"]) &&
-      (weapon == level.odinSettings["odin_assault"].weapon["large_rod"].projectile || weapon == level.odinSettings["odin_assault"].weapon["small_rod"].projectile)
-    ) {
+    if(isDefined(level.odinSettings) && isDefined(level.odinSettings["odin_assault"]) && (weapon == level.odinSettings["odin_assault"].weapon["large_rod"].projectile || weapon == level.odinSettings["odin_assault"].weapon["small_rod"].projectile)) {
       attacker processChallenge("ch_shooting_star");
       return true;
     } else if(weaponMap(weapon) == "iw6_maaws_mp") {

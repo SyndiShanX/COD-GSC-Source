@@ -32,7 +32,7 @@ main(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3))
     maps\_vehicle::build_turret("ny_harbor_hind_sideturret", "tag_doorgun", "weapon_dshk", undefined, "auto_ai", 0.5, 20, -14);
 
-  maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
+  maps\_vehicle::build_drive(%bh_rotors, undefined, 0);
   var_6 = var_4[var_0];
   maps\_vehicle::build_deathfx("fx/explosions/grenadeexp_default", "tag_engine_left", "hind_helicopter_hit", undefined, undefined, undefined, 0.2, 1, undefined);
   maps\_vehicle::build_deathfx("fx/explosions/grenadeexp_default", "tail_rotor_jnt", "hind_helicopter_secondary_exp", undefined, undefined, undefined, 0.5, 1, undefined);

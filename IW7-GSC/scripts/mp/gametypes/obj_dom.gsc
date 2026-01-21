@@ -196,9 +196,7 @@ dompoint_onuse(var_0) {
 
     scripts\mp\utility::setmlgannouncement(19, var_1, var_0 getentitynumber(), var_4);
     if(isDefined(level.onobjectivecomplete)) {
-      [
-        [level.onobjectivecomplete]
-      ]("dompoint", self.label, var_0, var_1, var_2, self);
+      [[level.onobjectivecomplete]]("dompoint", self.label, var_0, var_1, var_2, self);
     }
 
     self.firstcapture = 0;

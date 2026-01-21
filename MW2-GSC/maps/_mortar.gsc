@@ -341,9 +341,7 @@ trigger_targeted_mortars(num) {
 }
 
 bunker_style_mortar() {
-  //	script_structs are placed in the level and grouped with script_mortargroup with targetname "mortar"
-  //	mortar group is turned on/off in script or with triggers with targetname "mortar_on" or "mortar_off"
-  //	mortar locations will all go simultaneously when an artillery round hits if within FOV of the player (dust falling from ceiling)
+  //	script_structs are placed in the level and grouped with script_mortargroup with targetname "mortar"//	mortar group is turned on/off in script or with triggers with targetname "mortar_on" or "mortar_off"//	mortar locations will all go simultaneously when an artillery round hits if within FOV of the player (dust falling from ceiling)
   //	each mortar location has script_fxid so it can play a set fx
   //	mortars will go forever until that group of mortars is notified to stop
 
@@ -481,8 +479,7 @@ bunker_style_mortar_explode(min, max) {
 }
 
 bog_style_mortar() {
-  //	script_structs are placed in the level and grouped with script_mortargroup with targetname "mortar"
-  //	mortar group is turned on/off in script
+  //	script_structs are placed in the level and grouped with script_mortargroup with targetname "mortar"//	mortar group is turned on/off in script
   //	mortar locations will start going off randomly and wont go off within x units of the player
   //	each mortar location has script_fxid so it can play a set fx ( this allows having mortars on land and water in the same group )
   //	mortars will go forever until that group of mortars is notified to stop
@@ -725,8 +722,7 @@ burnville_style_mortar() {
   wait(7 + randomfloat(20));
 
   while(1) {
-    if((distance(level.player getorigin(), self.origin) < 1200) &&
-      (distance(level.player getorigin(), self.origin) > 400)) {
+    if((distance(level.player getorigin(), self.origin) < 1200) && (distance(level.player getorigin(), self.origin) > 400)) {
       activate_mortar(undefined, undefined, undefined, undefined, undefined, undefined, false);
 
       wait(3 + randomfloat(14));

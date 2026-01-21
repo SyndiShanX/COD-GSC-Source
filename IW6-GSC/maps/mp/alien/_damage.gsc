@@ -110,11 +110,7 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
       } else {
         iDamage = 0;
       }
-    } else if(isDefined(eAttacker) &&
-      isDefined(eAttacker.classname) &&
-      eAttacker.classname == "scriptable" &&
-      isDefined(eAttacker.is_hive) &&
-      eAttacker.is_hive) {
+    } else if(isDefined(eAttacker) && isDefined(eAttacker.classname) && eAttacker.classname == "scriptable" && isDefined(eAttacker.is_hive) && eAttacker.is_hive) {
       iDamage = 1;
     }
     if(isDefined(eAttacker) && isAgent(eAttacker)) {
@@ -434,10 +430,7 @@ set_alien_damage_by_weapon_type(sMeansOfDeath, sWeapon, iDamage, eAttacker, iDFl
       else if(self.alien_type != "elite")
         iDamage = 500;
     }
-    if(sWeapon == "iw6_alienminigun_mp" ||
-      sWeapon == "iw6_alienminigun1_mp" ||
-      sWeapon == "iw6_alienminigun2_mp" ||
-      sWeapon == "iw6_alienminigun3_mp") {
+    if(sWeapon == "iw6_alienminigun_mp" || sWeapon == "iw6_alienminigun1_mp" || sWeapon == "iw6_alienminigun2_mp" || sWeapon == "iw6_alienminigun3_mp") {
       iDamage = 55;
     }
 
@@ -534,11 +527,7 @@ during_host_migration() {
 }
 
 means_of_explosive_damage(sMeansOfDeath) {
-  return (sMeansOfDeath == "MOD_EXPLOSIVE" ||
-    sMeansOfDeath == "MOD_GRENADE_SPLASH" ||
-    sMeansOfDeath == "MOD_GRENADE" ||
-    sMeansOfDeath == "MOD_PROJECTILE" ||
-    sMeansOfDeath == "MOD_PROJECTILE_SPLASH");
+  return (sMeansOfDeath == "MOD_EXPLOSIVE" || sMeansOfDeath == "MOD_GRENADE_SPLASH" || sMeansOfDeath == "MOD_GRENADE" || sMeansOfDeath == "MOD_PROJECTILE" || sMeansOfDeath == "MOD_PROJECTILE_SPLASH");
 }
 
 check_for_explosive_shotgun_damage(alien, iDamage, eAttacker, sWeapon, sMeansOfDeath) {

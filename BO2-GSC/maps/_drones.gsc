@@ -858,19 +858,19 @@ drone_mortardeath(direction) {
 
   switch (direction) {
     case "up":
-      self thread drone_dodeath( % death_explosion_up10);
+      self thread drone_dodeath(%death_explosion_up10);
       break;
     case "forward":
-      self thread drone_dodeath( % death_explosion_forward13);
+      self thread drone_dodeath(%death_explosion_forward13);
       break;
     case "back":
-      self thread drone_dodeath( % death_explosion_back13);
+      self thread drone_dodeath(%death_explosion_back13);
       break;
     case "left":
-      self thread drone_dodeath( % death_explosion_left11);
+      self thread drone_dodeath(%death_explosion_left11);
       break;
     case "right":
-      self thread drone_dodeath( % death_explosion_right13);
+      self thread drone_dodeath(%death_explosion_right13);
       break;
   }
 }
@@ -1273,19 +1273,19 @@ process_event(s_start) {
       case "cover_stand":
         self thread drone_cover(s_start.dr_event);
         self waittill("drone out of cover");
-        self setflaggedanimknob("cover_exit", % coverstand_trans_out_m, 1, 0.1, 1);
+        self setflaggedanimknob("cover_exit", %coverstand_trans_out_m, 1, 0.1, 1);
         self waittillmatch("cover_exit", "end");
         break;
       case "cover_crouch":
         self thread drone_cover(s_start.dr_event);
         self waittill("drone out of cover");
-        self setflaggedanimknob("cover_exit", % covercrouch_run_out_m, 1, 0.1, 1);
+        self setflaggedanimknob("cover_exit", %covercrouch_run_out_m, 1, 0.1, 1);
         self waittillmatch("cover_exit", "end");
         break;
       case "cover_crouch_fire":
         self thread drone_cover_fire(s_start.dr_event);
         self waittill("drone out of cover");
-        self setflaggedanimknob("cover_exit", % covercrouch_run_out_m, 1, 0.5, 1);
+        self setflaggedanimknob("cover_exit", %covercrouch_run_out_m, 1, 0.5, 1);
         self waittillmatch("cover_exit", "end");
         break;
       case "flamedeath":
@@ -1403,8 +1403,8 @@ drone_event_shoot(s_start, b_shoot_bullets, b_shoot_burst) {
   else
     self drone_shoot_blanks(e_target, b_shoot_burst);
 
-  self clearanim( % combat_directions, 0.2);
-  self clearanim( % exposed_reload, 0.2);
+  self clearanim(%combat_directions, 0.2);
+  self clearanim(%exposed_reload, 0.2);
 }
 
 drone_shoot_bullets(e_target) {
@@ -1419,7 +1419,7 @@ drone_shoot_bullets(e_target) {
 
   for(i = 0; i < self.n_shots_to_fire; i++) {
     if(self.bulletsinclip <= 0) {
-      self setflaggedanimknoballrestart("reloadanim", % exposed_reload, % root, 1, 0.4);
+      self setflaggedanimknoballrestart("reloadanim", %exposed_reload, %root, 1, 0.4);
       self.bulletsinclip = weaponclipsize(self.weapon);
       self waittillmatch("reloadanim", "end");
     }
@@ -1462,7 +1462,7 @@ drone_shoot_blanks(e_target, b_shoot_burst) {
       for(i = 0; i < numattached; i++)
         attachname[i] = self getattachmodelname(i);
 
-      self setflaggedanimknoballrestart("reloadanim", % exposed_reload, % root, 1, 0.4);
+      self setflaggedanimknoballrestart("reloadanim", %exposed_reload, %root, 1, 0.4);
       self.bulletsinclip = weaponclipsize(self.weapon);
       self waittillmatch("reloadanim", "end");
     }
@@ -1515,7 +1515,7 @@ drone_shoot_blanks(e_target, b_shoot_burst) {
 
 drone_event_run_and_shoot(b_shoot_burst) {
   old_cycle = self.drone_run_cycle;
-  self drone_set_run_cycle( % run_n_gun_f);
+  self drone_set_run_cycle(%run_n_gun_f);
   self.running = 0;
   self thread drone_loop_run_anim();
   self thread drone_run_and_shoot_blanks(b_shoot_burst);
@@ -1639,7 +1639,7 @@ set3flaggedanimknobs(animflag, animarray, pose, weight, blendtime, rate) {
   if(!isDefined(self)) {
     return;
   }
-  self setanimknob( % combat_directions, weight, blendtime, rate);
+  self setanimknob(%combat_directions, weight, blendtime, rate);
   self setflaggedanimknob(animflag, level.drones.animarray[animarray][pose]["up"], 1, blendtime, 1);
   self setanimknob(level.drones.animarray[animarray][pose]["straight"], 1, blendtime, 1);
   self setanimknob(level.drones.animarray[animarray][pose]["down"], 1, blendtime, 1);
@@ -1649,7 +1649,7 @@ set3flaggedanimknobsrestart(animflag, animarray, pose, weight, blendtime, rate) 
   if(!isDefined(self)) {
     return;
   }
-  self setanimknobrestart( % combat_directions, weight, blendtime, rate);
+  self setanimknobrestart(%combat_directions, weight, blendtime, rate);
   self setflaggedanimknobrestart(animflag, level.drones.animarray[animarray][pose]["up"], 1, blendtime, 1);
   self setanimknobrestart(level.drones.animarray[animarray][pose]["straight"], 1, blendtime, 1);
   self setanimknobrestart(level.drones.animarray[animarray][pose]["down"], 1, blendtime, 1);
@@ -1658,11 +1658,11 @@ set3flaggedanimknobsrestart(animflag, animarray, pose, weight, blendtime, rate) 
 apply_vertical_blend(offset) {
   if(offset < 0) {
     unstraightanim = % combat_down;
-    self setanim( % combat_up, 0.01, 0, 1);
+    self setanim(%combat_up, 0.01, 0, 1);
     offset = offset * -1;
   } else {
     unstraightanim = % combat_up;
-    self setanim( % combat_down, 0.01, 0, 1);
+    self setanim(%combat_down, 0.01, 0, 1);
   }
 
   if(offset > 1)
@@ -1678,7 +1678,7 @@ apply_vertical_blend(offset) {
 
   straight = 1 - unstraight;
   self setanim(unstraightanim, unstraight, 0, 1);
-  self setanim( % combat_straight, straight, 0, 1);
+  self setanim(%combat_straight, straight, 0, 1);
 }
 
 drone_aim_at_target(target, stopstring) {
@@ -1726,7 +1726,7 @@ drone_cover_fire(type) {
 
   while(true) {
     drone_cover(type);
-    self setanimknob( % stand_aim_straight, 1, 0.3, 1);
+    self setanimknob(%stand_aim_straight, 1, 0.3, 1);
     wait 0.3;
     forwardvec = anglesToForward(self.angles);
     rightvec = anglestoright(self.angles);
@@ -1758,21 +1758,21 @@ drone_cover(type) {
 
   if(type == "cover_stand") {
     self.a.array["hide_idle"] = % coverstand_hide_idle;
-    self.a.array["hide_idle_twitch"] = array( % coverstand_hide_idle_twitch01, % coverstand_hide_idle_twitch02, % coverstand_hide_idle_twitch03, % coverstand_hide_idle_twitch04, % coverstand_hide_idle_twitch05);
-    self.a.array["hide_idle_flinch"] = array( % coverstand_react01, % coverstand_react02, % coverstand_react03, % coverstand_react04);
-    self setflaggedanimknobrestart("cover_approach", % coverstand_trans_in_m, 1, 0.3, 1);
+    self.a.array["hide_idle_twitch"] = array(%coverstand_hide_idle_twitch01, %coverstand_hide_idle_twitch02, %coverstand_hide_idle_twitch03, %coverstand_hide_idle_twitch04, %coverstand_hide_idle_twitch05);
+    self.a.array["hide_idle_flinch"] = array(%coverstand_react01, %coverstand_react02, %coverstand_react03, %coverstand_react04);
+    self setflaggedanimknobrestart("cover_approach", %coverstand_trans_in_m, 1, 0.3, 1);
     self waittillmatch("cover_approach", "end");
     self thread drone_cover_think();
   } else if(type == "cover_crouch") {
     self.a.array["hide_idle"] = % covercrouch_hide_idle;
-    self.a.array["hide_idle_twitch"] = array( % covercrouch_twitch_1, % covercrouch_twitch_2, % covercrouch_twitch_3, % covercrouch_twitch_4);
-    self setflaggedanimknobrestart("cover_approach", % covercrouch_run_in_m, 1, 0.3, 1);
+    self.a.array["hide_idle_twitch"] = array(%covercrouch_twitch_1, %covercrouch_twitch_2, %covercrouch_twitch_3, %covercrouch_twitch_4);
+    self setflaggedanimknobrestart("cover_approach", %covercrouch_run_in_m, 1, 0.3, 1);
     self waittillmatch("cover_approach", "end");
     self thread drone_cover_think();
   } else if(type == "cover_crouch_fire") {
     self.a.array["hide_idle"] = % covercrouch_hide_idle;
-    self.a.array["hide_idle_twitch"] = array( % covercrouch_twitch_1, % covercrouch_twitch_2, % covercrouch_twitch_3, % covercrouch_twitch_4);
-    self setanimknob( % covercrouch_hide_idle, 1, 0.4, 1);
+    self.a.array["hide_idle_twitch"] = array(%covercrouch_twitch_1, %covercrouch_twitch_2, %covercrouch_twitch_3, %covercrouch_twitch_4);
+    self setanimknob(%covercrouch_hide_idle, 1, 0.4, 1);
     wait 0.4;
     self drone_cover_think(1 + randomint(3));
   }
@@ -1908,7 +1908,7 @@ drone_pick_run_anim() {
       return self.drone_run_cycle_override;
   }
 
-  dronerunanims = array( % run_n_gun_f, % run_lowready_f, % ai_militia_run_lowready_f_02, % ai_militia_run_lowready_f_03, % ai_sprint_f_05);
+  dronerunanims = array(%run_n_gun_f, %run_lowready_f, %ai_militia_run_lowready_f_02, %ai_militia_run_lowready_f_03, %ai_sprint_f_05);
   index = randomint(dronerunanims.size);
   return dronerunanims[index];
 }

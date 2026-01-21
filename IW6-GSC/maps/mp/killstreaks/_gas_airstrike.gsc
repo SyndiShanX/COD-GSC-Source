@@ -85,13 +85,7 @@ doOneFlyby(streakName, lifeId, targetPos, dir, flyHeight) {
 
   flightPath = maps\mp\killstreaks\_plane::getFlightPath(targetPos, dir, config.halfDistance, true, flyHeight, config.speed, 0, streakName);
 
-  level thread maps\mp\killstreaks\_plane::doFlyby(lifeId, self, lifeId,
-    flightPath["startPoint"] + (0, 0, randomInt(config.heightRange)),
-    flightPath["endPoint"] + (0, 0, randomInt(config.heightRange)),
-    flightPath["attackTime"],
-    flightPath["flyTime"],
-    dir,
-    streakName);
+  level thread maps\mp\killstreaks\_plane::doFlyby(lifeId, self, lifeId, flightPath["startPoint"] + (0, 0, randomInt(config.heightRange)), flightPath["endPoint"] + (0, 0, randomInt(config.heightRange)), flightPath["attackTime"], flightPath["flyTime"], dir, streakName);
 }
 
 cleanupFlyby(owner, plane, streakName) {

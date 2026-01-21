@@ -13,10 +13,10 @@ main() {
 
 init_animset_reactions() {
   var_0 = [];
-  var_0["cover_stand"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
-  var_0["cover_crouch"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
-  var_0["cover_left"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
-  var_0["cover_right"] = [ % stand_cover_reaction_a, % stand_cover_reaction_b];
+  var_0["cover_stand"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_crouch"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_left"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_right"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
   anim.archetypes["soldier"]["cover_reactions"] = var_0;
   var_0 = [];
   var_0[0] = % run_wizby_a;
@@ -42,7 +42,7 @@ bulletwhizbyreaction() {
   self orientmode("face current");
 
   if(var_0 || common_scripts\utility::cointoss()) {
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
     var_1 = [];
     var_1[0] = % exposed_idle_reacta;
     var_1[1] = % exposed_idle_reactb;
@@ -57,11 +57,11 @@ bulletwhizbyreaction() {
 
     self setflaggedanimknobrestart("reactanim", var_2, 1, 0.1, 1);
     animscripts\notetracks::donotetracksfortime(var_3, "reactanim");
-    self clearanim( % root, 0.1);
+    self clearanim(%root, 0.1);
 
     if(!var_0 && self.stairsstate == "none" && !isDefined(self.disable_dive_whizby_react)) {
       var_4 = 1 + randomfloat(0.2);
-      var_5 = animscripts\utility::randomanimoftwo( % exposed_dive_grenade_b, % exposed_dive_grenade_f);
+      var_5 = animscripts\utility::randomanimoftwo(%exposed_dive_grenade_b, %exposed_dive_grenade_f);
       self setflaggedanimknobrestart("dive", var_5, 1, 0.1, var_4);
       animscripts\shared::donotetracks("dive");
     }
@@ -70,8 +70,8 @@ bulletwhizbyreaction() {
     var_4 = 1.2 + randomfloat(0.3);
 
     if(self.a.pose == "stand") {
-      self clearanim( % root, 0.1);
-      self setflaggedanimknobrestart("crouch", % exposed_stand_2_crouch, 1, 0.1, var_4);
+      self clearanim(%root, 0.1);
+      self setflaggedanimknobrestart("crouch", %exposed_stand_2_crouch, 1, 0.1, var_4);
       animscripts\shared::donotetracks("crouch");
     }
 
@@ -83,19 +83,19 @@ bulletwhizbyreaction() {
       var_7 = var_6;
 
     if(vectordot(var_7, var_6) > 0) {
-      var_8 = animscripts\utility::randomanimoftwo( % exposed_crouch_idle_twitch_v2, % exposed_crouch_idle_twitch_v3);
-      self clearanim( % root, 0.1);
+      var_8 = animscripts\utility::randomanimoftwo(%exposed_crouch_idle_twitch_v2, %exposed_crouch_idle_twitch_v3);
+      self clearanim(%root, 0.1);
       self setflaggedanimknobrestart("twitch", var_8, 1, 0.1, 1);
       animscripts\shared::donotetracks("twitch");
     } else {
-      var_9 = animscripts\utility::randomanimoftwo( % exposed_crouch_turn_180_left, % exposed_crouch_turn_180_right);
-      self clearanim( % root, 0.1);
+      var_9 = animscripts\utility::randomanimoftwo(%exposed_crouch_turn_180_left, %exposed_crouch_turn_180_right);
+      self clearanim(%root, 0.1);
       self setflaggedanimknobrestart("turn", var_9, 1, 0.1, 1);
       animscripts\shared::donotetracks("turn");
     }
   }
 
-  self clearanim( % root, 0.1);
+  self clearanim(%root, 0.1);
   self.whizbyenemy = undefined;
   self animmode("normal");
   self orientmode("face default");
@@ -179,22 +179,22 @@ getnewenemyreactionanim() {
 }
 
 stealthnewenemyreactanim() {
-  self clearanim( % root, 0.2);
+  self clearanim(%root, 0.2);
 
   if(randomint(4) < 3) {
     self orientmode("face enemy");
-    self setflaggedanimknobrestart("reactanim", % exposed_idle_reactb, 1, 0.2, 1);
-    var_0 = getanimlength( % exposed_idle_reactb);
+    self setflaggedanimknobrestart("reactanim", %exposed_idle_reactb, 1, 0.2, 1);
+    var_0 = getanimlength(%exposed_idle_reactb);
     animscripts\notetracks::donotetracksfortime(var_0 * 0.8, "reactanim");
     self orientmode("face current");
   } else {
     self orientmode("face enemy");
-    self setflaggedanimknobrestart("reactanim", % exposed_backpedal, 1, 0.2, 1);
-    var_0 = getanimlength( % exposed_backpedal);
+    self setflaggedanimknobrestart("reactanim", %exposed_backpedal, 1, 0.2, 1);
+    var_0 = getanimlength(%exposed_backpedal);
     animscripts\notetracks::donotetracksfortime(var_0 * 0.8, "reactanim");
     self orientmode("face current");
-    self clearanim( % root, 0.2);
-    self setflaggedanimknobrestart("reactanim", % exposed_backpedal_v2, 1, 0.2, 1);
+    self clearanim(%root, 0.2);
+    self setflaggedanimknobrestart("reactanim", %exposed_backpedal_v2, 1, 0.2, 1);
     animscripts\shared::donotetracks("reactanim");
   }
 }
@@ -209,7 +209,7 @@ newenemyreactionanim() {
     stealthnewenemyreactanim();
   else {
     var_0 = getnewenemyreactionanim();
-    self clearanim( % root, 0.2);
+    self clearanim(%root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);
     animscripts\shared::donotetracks("reactanim");
   }

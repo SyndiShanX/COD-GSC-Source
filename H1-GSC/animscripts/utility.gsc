@@ -7,8 +7,8 @@
 #using_animtree("generic_human");
 
 initanimtree(var_0) {
-  self clearanim( % body, 0.3);
-  self setanim( % body, 1, 0);
+  self clearanim(%body, 0.3);
+  self setanim(%body, 1, 0);
 
   if(var_0 != "pain" && var_0 != "death")
     self.a.special = "none";
@@ -27,9 +27,9 @@ updateanimpose() {
       exitpronewrapper(0.5);
 
     if(self.desired_anim_pose == "prone") {
-      self setproneanimnodes(-45, 45, % prone_legs_down, % exposed_aiming, % prone_legs_up);
+      self setproneanimnodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
       enterpronewrapper(0.5);
-      self setanimknoball(lookupanim("default_prone", "straight_level"), % body, 1, 0.1, 1);
+      self setanimknoball(lookupanim("default_prone", "straight_level"), %body, 1, 0.1, 1);
     }
   }
 
@@ -478,7 +478,7 @@ isinset(var_0, var_1) {
 
 playanim(var_0) {
   if(isDefined(var_0)) {
-    self setflaggedanimknoballrestart("playAnim", var_0, % animscript_root, 1, 0.1, 1);
+    self setflaggedanimknoballrestart("playAnim", var_0, %animscript_root, 1, 0.1, 1);
     var_1 = getanimlength(var_0);
     var_1 = 3 * var_1 + 1;
     thread notifyaftertime("time is up", "time is up", var_1);
@@ -1728,7 +1728,7 @@ iscqbwalking() {
 }
 
 is_in_casual_standing_stance() {
-  var_0 = [ % casual_stand_idle, % casual_stand_idle_trans_in, % casual_stand_idle_trans_out, % casual_stand_idle_twitch, % casual_stand_idle_twitchb, % casual_stand_v2_idle, % casual_stand_v2_twitch_radio, % casual_stand_v2_twitch_shift, % casual_stand_v2_twitch_talk, % smg_casual_stand_idle_trans_in, % smg_casual_stand_idle_trans_out];
+  var_0 = [ % casual_stand_idle, %casual_stand_idle_trans_in, %casual_stand_idle_trans_out, %casual_stand_idle_twitch, %casual_stand_idle_twitchb, %casual_stand_v2_idle, %casual_stand_v2_twitch_radio, %casual_stand_v2_twitch_shift, %casual_stand_v2_twitch_talk, %smg_casual_stand_idle_trans_in, %smg_casual_stand_idle_trans_out];
 
   foreach(var_2 in var_0) {
     if(self getanimweight(var_2) != 0.0)

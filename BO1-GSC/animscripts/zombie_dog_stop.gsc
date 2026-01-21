@@ -11,7 +11,7 @@
 #using_animtree("zombie_dog");
 main() {
   self endon("killanimscript");
-  self ClearAnim( % root, 0.2);
+  self ClearAnim(%root, 0.2);
   self ClearAnim(anim.dogAnims[self.animSet].idle, 0.2);
   self ClearAnim(anim.dogAnims[self.animSet].attack["attackidle_knob"], 0.2);
   self thread lookAtTarget("attackIdle");

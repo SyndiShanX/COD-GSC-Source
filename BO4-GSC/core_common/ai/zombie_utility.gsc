@@ -1189,9 +1189,7 @@ spawn_zombie(spawner, target_name, spawn_point, round_number) {
 
   if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
     if(isactorspawner(spawner) && isDefined(level.overridezombiespawn)) {
-      guy = [
-        [level.overridezombiespawn]
-      ]();
+      guy = [[level.overridezombiespawn]]();
     } else {
       guy = spawner spawnfromspawner(0, 1);
     }
@@ -1483,8 +1481,7 @@ round_spawn_failsafe() {
             level.zombie_total++;
             level.zombie_total_subtract++;
             var_1a8c05ae = {
-              #n_health: self.health,
-              #var_e0d660f6: self.var_e0d660f6
+              #n_health: self.health, #var_e0d660f6: self.var_e0d660f6
             };
 
             if(!isDefined(level.var_fc73bad4[self.archetype])) {
@@ -1954,9 +1951,7 @@ zombie_gib(amount, attacker, direction_vec, point, type, tagname, modelname, par
     if(isDefined(self.missinglegs) && self.missinglegs && self.health > 0) {
       b_gibbed = 1;
       level notify(#"crawler_created", {
-        #zombie: self,
-        #player: attacker,
-        #weapon: weapon
+        #zombie: self, #player: attacker, #weapon: weapon
       });
       self allowedstances("crouch");
       self setphysparams(15, 0, 24);

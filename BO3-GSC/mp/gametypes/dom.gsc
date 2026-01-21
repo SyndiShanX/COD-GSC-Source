@@ -145,9 +145,7 @@ function onendgame(winningteam) {
 function onroundendgame(roundwinner) {
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [
-        [level._setteamscore]
-      ](team, game["roundswon"][team]);
+      [[level._setteamscore]](team, game["roundswon"][team]);
     }
   }
   return [[level.determinewinner]]();
@@ -667,12 +665,8 @@ function updatedomscores() {
     }
     if(warningscore && !playednearendvo) {
       winningteam = undefined;
-      alliesroundscore = [
-        [level._getteamscore]
-      ]("allies") - alliesroundstartscore;
-      axisroundscore = [
-        [level._getteamscore]
-      ]("axis") - axisroundstartscore;
+      alliesroundscore = [[level._getteamscore]]("allies") - alliesroundstartscore;
+      axisroundscore = [[level._getteamscore]]("axis") - axisroundstartscore;
       if(alliesroundscore >= warningscore) {
         winningteam = "allies";
       } else if(axisroundscore >= warningscore) {

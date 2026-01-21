@@ -486,16 +486,7 @@ bellsDetectHit() {
       continue;
     }
     current_weapon = attacker GetCurrentWeapon();
-    if(type == "MOD_IMPACT" ||
-      type == "MOD_PROJECTILE" ||
-      type == "MOD_PROJECTILE_SPLASH" ||
-      type == "MOD_GRENADE" ||
-      type == "MOD_GRENADE_SPLASH" ||
-      type == "MOD_MELEE"
-
-      ||
-      (isDefined(current_weapon) && (WeaponClass(current_weapon) == "sniper"))
-    ) {
+    if(type == "MOD_IMPACT" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_MELEE"|| (isDefined(current_weapon) && (WeaponClass(current_weapon) == "sniper"))) {
       self playSound(sound_alias);
 
       if(!self.is_swaying) {
@@ -679,20 +670,10 @@ grogStopFx() {
 
 setupConvos() {
   level.convoLocs = [
-    "convo_dock_3",
-    "convo_dock_3",
-    "convo_tavern_1",
-    "convo_voodoo_1",
-    "convo_brothel_1"
-  ];
+    "convo_dock_3", "convo_dock_3", "convo_tavern_1", "convo_voodoo_1", "convo_brothel_1"];
 
   level.convoVos = [
-    "mp_pirate_vo_docked",
-    "mp_pirate_vo_docked",
-    "mp_pirate_vo_tavern",
-    "mp_pirate_vo_voodoo",
-    "mp_pirate_vo_brothel"
-  ];
+    "mp_pirate_vo_docked", "mp_pirate_vo_docked", "mp_pirate_vo_tavern", "mp_pirate_vo_voodoo", "mp_pirate_vo_brothel"];
 
   level endon("game_ended");
 
@@ -725,12 +706,7 @@ jailVO() {
   level endon("game_ended");
 
   jailLines = [
-    "mp_pirate_prs_jail_1",
-    "mp_pirate_prs_jail_2",
-    "mp_pirate_prs_jail_3",
-    "mp_pirate_prs_jail_4",
-    "mp_pirate_prs_jail_5"
-  ];
+    "mp_pirate_prs_jail_1", "mp_pirate_prs_jail_2", "mp_pirate_prs_jail_3", "mp_pirate_prs_jail_4", "mp_pirate_prs_jail_5"];
 
   soundStruct = getstruct("convo_jail_1", "targetname");
   soundEnt = spawn("script_origin", soundStruct.origin);

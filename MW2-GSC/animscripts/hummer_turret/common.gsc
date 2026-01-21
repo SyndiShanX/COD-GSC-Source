@@ -591,16 +591,7 @@ DoAim_idle_think(turret) {
 /*
 =============
 ///ScriptDocBegin
-"Name: turret_gunner_custom_anim( <turret> , <animStr> , <centerTurretFirst> )"
-"Summary: Call on a turret gunner do one of his predefined custom animations.All the custom anims for a turret gunner get set up in the array self.turretSpecialAnims, in the main script for the turret type - for example, animscripts\hummer_turret\minigun_stand.gsc."
-"Module: Entity"
-"CallOn: An AI using a vehicle turret. (Note: this only works for 360 degree vehicle turrets, for example those on the hummer or the suburban.)"
-"MandatoryArg: <turret> The turret the AI is using."
-"MandatoryArg: <animStr> The name of the animation, as a string. used as the lookup index for self.turretSpecialAnims."
-"OptionalArg: <centerTurretFirst>: Whether the turret should re-center to its "home" location before the animation plays. Defaults to false."
-"Example: gunner animscripts\hummer_turret\common::turret_gunner_custom_anim( turret, anime, true );"
-"SPMP: singleplayer"
-///ScriptDocEnd
+"Name: turret_gunner_custom_anim( <turret> , <animStr> , <centerTurretFirst> )""Summary: Call on a turret gunner do one of his predefined custom animations.All the custom anims for a turret gunner get set up in the array self.turretSpecialAnims, in the main script for the turret type - for example, animscripts\hummer_turret\minigun_stand.gsc.""Module: Entity""CallOn: An AI using a vehicle turret. (Note: this only works for 360 degree vehicle turrets, for example those on the hummer or the suburban.)""MandatoryArg: <turret> The turret the AI is using.""MandatoryArg: <animStr> The name of the animation, as a string. used as the lookup index for self.turretSpecialAnims.""OptionalArg: <centerTurretFirst>: Whether the turret should re-center to its "home" location before the animation plays. Defaults to false.""Example: gunner animscripts\hummer_turret\common::turret_gunner_custom_anim( turret, anime, true );""SPMP: singleplayer"///ScriptDocEnd
 =============
 */
 turret_gunner_custom_anim(turret, animStr, centerTurretFirst) {

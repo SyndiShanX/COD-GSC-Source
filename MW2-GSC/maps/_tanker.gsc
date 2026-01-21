@@ -12,7 +12,7 @@ main(model, type) {
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
   build_treadfx();
   build_life(999, 500, 1500);
-  build_drive( % tanker_truck_driving_idle_forward, % tanker_truck_driving_idle_backward, 10);
+  build_drive(%tanker_truck_driving_idle_forward, %tanker_truck_driving_idle_backward, 10);
 
   build_team("allies");
   build_aianims(::setanims, ::set_vehicle_anims);
