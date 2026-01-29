@@ -577,9 +577,7 @@ ch_kills(data, time) {
     player processChallenge("ch_rival");
 
   if(isDefined(player.tookWeaponFrom[data.sWeapon])) {
-    if(player.tookWeaponFrom[data.sWeapon] == data.victim
-
-      && (data.sMeansOfDeath != "MOD_MELEE" || maps\mp\gametypes\_weapons::isRiotShield(data.sWeapon) || maps\mp\gametypes\_weapons::isKnifeOnly(data.sWeapon)))
+    if(player.tookWeaponFrom[data.sWeapon] == data.victim && (data.sMeansOfDeath != "MOD_MELEE" || maps\mp\gametypes\_weapons::isRiotShield(data.sWeapon) || maps\mp\gametypes\_weapons::isKnifeOnly(data.sWeapon)))
       player processChallenge("ch_cruelty");
   }
 
@@ -1637,11 +1635,8 @@ killstreakKilled(owner, killedEnt, eInflictor, attacker, iDamage, sMeansOfDeath,
 }
 
 killstreakKilled_regularMP(owner, vehicle, eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon) {
-  if(isDefined(attacker) && isPlayer(attacker) && (!isDefined(owner) || attacker != owner)
-
-    && attacker killShouldAddToKillstreak(sWeapon)) {
+  if(isDefined(attacker) && isPlayer(attacker) && (!isDefined(owner) || attacker != owner) && attacker killShouldAddToKillstreak(sWeapon)) {
     attacker maps\mp\killstreaks\_killstreaks::giveAdrenaline("vehicleDestroyed");
-
   }
 }
 

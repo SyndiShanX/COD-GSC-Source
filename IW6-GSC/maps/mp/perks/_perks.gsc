@@ -570,8 +570,7 @@ cac_modified_damage(victim, attacker, damage, sMeansOfDeath, sWeapon, impactPoin
     } else if(victim _hasPerk("_specialty_blastshield") && !weaponIgnoresBlastShield(sWeapon) && (!isDefined(inflictor) || !isDefined(inflictor.stuckEnemyEntity) || inflictor.stuckEnemyEntity != victim)) {
       passedThroughDamage = int(damage * level.blastShieldMod);
 
-      if(maps\mp\gametypes\_weapons::isGrenade(sWeapon) || isWeaponAffectedByBlastShield(sWeapon)
-) {
+      if(maps\mp\gametypes\_weapons::isGrenade(sWeapon) || isWeaponAffectedByBlastShield(sWeapon)) {
         passedThroughDamage = clamp(passedThroughDamage, 0, level.blastShieldClamp);
       }
 

@@ -72,7 +72,7 @@ main() {
   level.ignore_on_func = maps\jungle_ghosts_util::generic_ignore_on;
   level.ignore_off_func = maps\jungle_ghosts_util::generic_ignore_off;
   var_5 = [];
-  var_5["default_crouch"]["exposed_idle"] = [ % exposed_crouch_lookaround_1, %exposed_crouch_lookaround_2, %exposed_crouch_lookaround_3, %exposed_crouch_lookaround_4];
+  var_5["default_crouch"]["exposed_idle"] = [%exposed_crouch_lookaround_1, %exposed_crouch_lookaround_2, %exposed_crouch_lookaround_3, %exposed_crouch_lookaround_4];
   maps\_utility::register_archetype("jungle_soldier", var_5);
   level.player setviewmodel("viewhands_gs_jungle_b");
   thread maps\jungle_ghosts_jungle::jungle_moving_foliage_settings();

@@ -277,16 +277,16 @@ init_swim_anims() {
   var_0["cover_corner_r"] = [];
   var_0["cover_corner_r"]["straight_level"] = % swimming_fire;
   var_0["cover_corner_r"]["alert_idle"] = % swimming_cover_r1_loop;
-  var_0["cover_corner_r"]["alert_to_A"] = [ % swimming_cover_r1_full_expose];
-  var_0["cover_corner_r"]["alert_to_B"] = [ % swimming_cover_r1_full_expose];
-  var_0["cover_corner_r"]["A_to_alert"] = [ % swimming_cover_r1_full_hide];
-  var_0["cover_corner_r"]["A_to_B"] = [ % swimming_fire];
-  var_0["cover_corner_r"]["B_to_alert"] = [ % swimming_cover_r1_full_hide];
-  var_0["cover_corner_r"]["B_to_A"] = [ % swimming_fire];
-  var_0["cover_corner_r"]["lean_to_alert"] = [ % swimming_cover_r1_hide];
-  var_0["cover_corner_r"]["alert_to_lean"] = [ % swimming_cover_r1_expose];
+  var_0["cover_corner_r"]["alert_to_A"] = [%swimming_cover_r1_full_expose];
+  var_0["cover_corner_r"]["alert_to_B"] = [%swimming_cover_r1_full_expose];
+  var_0["cover_corner_r"]["A_to_alert"] = [%swimming_cover_r1_full_hide];
+  var_0["cover_corner_r"]["A_to_B"] = [%swimming_fire];
+  var_0["cover_corner_r"]["B_to_alert"] = [%swimming_cover_r1_full_hide];
+  var_0["cover_corner_r"]["B_to_A"] = [%swimming_fire];
+  var_0["cover_corner_r"]["lean_to_alert"] = [%swimming_cover_r1_hide];
+  var_0["cover_corner_r"]["alert_to_lean"] = [%swimming_cover_r1_expose];
   var_0["cover_corner_r"]["look"] = % swimming_cover_r1_expose;
-  var_0["cover_corner_r"]["reload"] = [ % swimming_cover_r1_reload];
+  var_0["cover_corner_r"]["reload"] = [%swimming_cover_r1_reload];
   var_0["cover_corner_r"]["alert_to_look"] = % swimming_cover_r1_expose;
   var_0["cover_corner_r"]["look_to_alert"] = % swimming_cover_r1_hide;
   var_0["cover_corner_r"]["look_to_alert_fast"] = % swimming_cover_r1_hide;
@@ -297,7 +297,7 @@ init_swim_anims() {
   var_0["cover_corner_r"]["lean_aim_right"] = % swimming_cover_r1_exposed_aim_r;
   var_0["cover_corner_r"]["lean_aim_up"] = % swimming_cover_r1_exposed_aim_u;
   var_0["cover_corner_r"]["lean_reload"] = % swimming_cover_r1_reload;
-  var_0["cover_corner_r"]["lean_idle"] = [ % swimming_cover_r1_exposed_idle];
+  var_0["cover_corner_r"]["lean_idle"] = [%swimming_cover_r1_exposed_idle];
   var_0["cover_corner_r"]["lean_single"] = % swimming_cover_r1_exposed_fire;
   var_0["cover_corner_r"]["lean_fire"] = % swimming_cover_r1_exposed_fire;
   var_0["cover_corner_r"]["add_aim_down"] = % swimming_fire_d;
@@ -309,16 +309,16 @@ init_swim_anims() {
   var_0["cover_corner_l"] = [];
   var_0["cover_corner_l"]["straight_level"] = % swimming_fire;
   var_0["cover_corner_l"]["alert_idle"] = % swimming_cover_l1_idle;
-  var_0["cover_corner_l"]["alert_to_A"] = [ % swimming_cover_l1_full_expose];
-  var_0["cover_corner_l"]["alert_to_B"] = [ % swimming_cover_l1_full_expose];
-  var_0["cover_corner_l"]["A_to_alert"] = [ % swimming_cover_l1_full_hide];
-  var_0["cover_corner_l"]["A_to_B"] = [ % swimming_fire];
-  var_0["cover_corner_l"]["B_to_alert"] = [ % swimming_cover_l1_full_hide];
-  var_0["cover_corner_l"]["B_to_A"] = [ % swimming_fire];
-  var_0["cover_corner_l"]["lean_to_alert"] = [ % swimming_cover_l1_hide];
-  var_0["cover_corner_l"]["alert_to_lean"] = [ % swimming_cover_l1_expose];
+  var_0["cover_corner_l"]["alert_to_A"] = [%swimming_cover_l1_full_expose];
+  var_0["cover_corner_l"]["alert_to_B"] = [%swimming_cover_l1_full_expose];
+  var_0["cover_corner_l"]["A_to_alert"] = [%swimming_cover_l1_full_hide];
+  var_0["cover_corner_l"]["A_to_B"] = [%swimming_fire];
+  var_0["cover_corner_l"]["B_to_alert"] = [%swimming_cover_l1_full_hide];
+  var_0["cover_corner_l"]["B_to_A"] = [%swimming_fire];
+  var_0["cover_corner_l"]["lean_to_alert"] = [%swimming_cover_l1_hide];
+  var_0["cover_corner_l"]["alert_to_lean"] = [%swimming_cover_l1_expose];
   var_0["cover_corner_l"]["look"] = % swimming_cover_l1_expose;
-  var_0["cover_corner_l"]["reload"] = [ % swimming_cover_l1_reload];
+  var_0["cover_corner_l"]["reload"] = [%swimming_cover_l1_reload];
   var_0["cover_corner_l"]["alert_to_look"] = % swimming_cover_l1_expose;
   var_0["cover_corner_l"]["look_to_alert"] = % swimming_cover_l1_hide;
   var_0["cover_corner_l"]["look_to_alert_fast"] = % swimming_cover_l1_hide;
@@ -329,7 +329,7 @@ init_swim_anims() {
   var_0["cover_corner_l"]["lean_aim_right"] = % swimming_cover_l1_exposed_aim_r;
   var_0["cover_corner_l"]["lean_aim_up"] = % swimming_cover_l1_exposed_aim_u;
   var_0["cover_corner_l"]["lean_reload"] = % swimming_cover_l1_reload;
-  var_0["cover_corner_l"]["lean_idle"] = [ % swimming_cover_l1_exposed_idle];
+  var_0["cover_corner_l"]["lean_idle"] = [%swimming_cover_l1_exposed_idle];
   var_0["cover_corner_l"]["lean_single"] = % swimming_cover_l1_exposed_fire;
   var_0["cover_corner_l"]["lean_fire"] = % swimming_cover_l1_exposed_fire;
   var_0["cover_corner_l"]["add_aim_down"] = % swimming_fire_d;
@@ -341,16 +341,16 @@ init_swim_anims() {
   var_0["cover_u"] = [];
   var_0["cover_u"]["straight_level"] = % swimming_fire;
   var_0["cover_u"]["alert_idle"] = % swimming_cover_u1_idle;
-  var_0["cover_u"]["alert_to_A"] = [ % swimming_cover_u1_full_expose];
-  var_0["cover_u"]["alert_to_B"] = [ % swimming_cover_u1_full_expose];
-  var_0["cover_u"]["A_to_alert"] = [ % swimming_cover_u1_full_hide];
-  var_0["cover_u"]["A_to_B"] = [ % swimming_fire];
-  var_0["cover_u"]["B_to_alert"] = [ % swimming_cover_u1_full_hide];
-  var_0["cover_u"]["B_to_A"] = [ % swimming_fire];
-  var_0["cover_u"]["lean_to_alert"] = [ % swimming_cover_u1_hide];
-  var_0["cover_u"]["alert_to_lean"] = [ % swimming_cover_u1_expose];
+  var_0["cover_u"]["alert_to_A"] = [%swimming_cover_u1_full_expose];
+  var_0["cover_u"]["alert_to_B"] = [%swimming_cover_u1_full_expose];
+  var_0["cover_u"]["A_to_alert"] = [%swimming_cover_u1_full_hide];
+  var_0["cover_u"]["A_to_B"] = [%swimming_fire];
+  var_0["cover_u"]["B_to_alert"] = [%swimming_cover_u1_full_hide];
+  var_0["cover_u"]["B_to_A"] = [%swimming_fire];
+  var_0["cover_u"]["lean_to_alert"] = [%swimming_cover_u1_hide];
+  var_0["cover_u"]["alert_to_lean"] = [%swimming_cover_u1_expose];
   var_0["cover_u"]["look"] = % swimming_cover_u1_expose;
-  var_0["cover_u"]["reload"] = [ % swimming_cover_u1_reload];
+  var_0["cover_u"]["reload"] = [%swimming_cover_u1_reload];
   var_0["cover_u"]["alert_to_look"] = % swimming_cover_u1_expose;
   var_0["cover_u"]["look_to_alert"] = % swimming_cover_u1_hide;
   var_0["cover_u"]["look_to_alert_fast"] = % swimming_cover_u1_hide;
@@ -361,7 +361,7 @@ init_swim_anims() {
   var_0["cover_u"]["lean_aim_right"] = % swimming_cover_u1_exposed_aim_r;
   var_0["cover_u"]["lean_aim_up"] = % swimming_cover_u1_exposed_aim_u;
   var_0["cover_u"]["lean_reload"] = % swimming_cover_u1_reload;
-  var_0["cover_u"]["lean_idle"] = [ % swimming_cover_u1_exposed_idle];
+  var_0["cover_u"]["lean_idle"] = [%swimming_cover_u1_exposed_idle];
   var_0["cover_u"]["lean_single"] = % swimming_cover_u1_exposed_fire;
   var_0["cover_u"]["lean_fire"] = % swimming_cover_u1_exposed_fire;
   var_0["cover_u"]["add_aim_down"] = % swimming_fire_d;
@@ -431,8 +431,8 @@ init_ai_swim_animsets() {
   var_0["add_aim_left"] = % swimming_idle_ready_aim_l;
   var_0["add_aim_right"] = % swimming_idle_ready_aim_r;
   var_0["exposed_idle"] = undefined;
-  var_0["reload"] = [ % swimming_reload];
-  var_0["reload_crouchhide"] = [ % swimming_reload];
+  var_0["reload"] = [%swimming_reload];
+  var_0["reload_crouchhide"] = [%swimming_reload];
   var_0["turn_left_45"] = % swimming_aiming_turn_l45;
   var_0["turn_left_90"] = % swimming_aiming_turn_l90;
   var_0["turn_left_135"] = % swimming_aiming_turn_l135;
@@ -451,7 +451,7 @@ ai_swim_pain() {
   if(self.a.movement == "run")
     var_0 = % swimming_pain_1;
   else
-    var_0 = common_scripts\utility::random([ % swimming_firing_pain_1, %swimming_firing_pain_2]);
+    var_0 = common_scripts\utility::random([%swimming_firing_pain_1, %swimming_firing_pain_2]);
 
   var_1 = 1;
   self setflaggedanimknoballrestart("painanim", var_0, %body, 1, 0.1, var_1);
@@ -492,7 +492,7 @@ ai_swim_death() {
     else if(animscripts\utility::damagelocationisany("head", "helmet"))
       self.deathanim = % swimming_firing_death_2;
     else
-      self.deathanim = common_scripts\utility::random([ % swimming_firing_death_1, %swimming_firing_death_2, %swimming_firing_death_3]);
+      self.deathanim = common_scripts\utility::random([%swimming_firing_death_1, %swimming_firing_death_2, %swimming_firing_death_3]);
   }
 
   if(!isDefined(self.nodeathsound))

@@ -142,7 +142,7 @@ clockwork_timer(var_0, var_1, var_2) {
 setup_dufflebag_anims() {
   var_0 = [];
   var_0["cqb"]["straight"] = % dufflebag_cqb_run;
-  var_0["cqb"]["straight_twitch"] = [ % dufflebag_cqb_run_alt];
+  var_0["cqb"]["straight_twitch"] = [%dufflebag_cqb_run_alt];
   var_0["cqb"]["move_f"] = % dufflebag_cqb_walk;
   var_0["run"]["straight"] = % dufflebag_lowready_run;
   var_0["run"]["straight_twitch"] = [];

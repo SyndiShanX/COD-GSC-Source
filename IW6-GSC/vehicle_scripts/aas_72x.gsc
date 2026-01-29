@@ -121,7 +121,7 @@ setanims() {
 }
 
 get_deathanims() {
-  var_0 = [ % aas_72x_seated_death_a_1, %aas_72x_seated_death_a_5, %aas_72x_seated_death_a_10, %aas_72x_seated_death_a_11, %aas_72x_seated_death_a_12];
+  var_0 = [%aas_72x_seated_death_a_1, %aas_72x_seated_death_a_5, %aas_72x_seated_death_a_10, %aas_72x_seated_death_a_11, %aas_72x_seated_death_a_12];
   return common_scripts\utility::array_randomize(var_0);
 }
 
@@ -292,8 +292,8 @@ init_shooter_anims() {
   self.a.array["semi4"] = % exposed_crouch_shoot_semi4;
   self.a.array["semi5"] = % exposed_crouch_shoot_semi5;
   self.a.array["fire"] = % exposed_crouch_shoot_auto_v2;
-  self.a.array["single"] = [ % exposed_crouch_shoot_semi1];
-  self.a.array["reload"] = [ % exposed_crouch_reload];
+  self.a.array["single"] = [%exposed_crouch_shoot_semi1];
+  self.a.array["reload"] = [%exposed_crouch_reload];
   self.deathanim = self.ridingvehicle.deathanims[self.vehicle_position - 2];
 }
 

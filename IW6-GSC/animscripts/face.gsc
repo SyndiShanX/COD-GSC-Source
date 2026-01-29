@@ -301,12 +301,12 @@ initlevelface() {
 
 initfacialanims() {
   anim.facial = [];
-  anim.facial["pain"] = [ % facial_pain_1, %facial_pain_2, %facial_pain_3, %facial_pain_4];
-  anim.facial["aim"] = [ % facial_aim_1, %facial_aim_2];
-  anim.facial["run"] = [ % facial_run_1, %facial_run_2];
-  anim.facial["corner_stand_L"] = [ % facial_corner_stand_l_1, %facial_corner_stand_l_2];
-  anim.facial["corner_stand_R"] = [ % facial_corner_stand_r_1, %facial_corner_stand_r_2];
-  anim.facial["death"] = [ % facial_death_1, %facial_death_2, %facial_death_3, %facial_death_4];
+  anim.facial["pain"] = [%facial_pain_1, %facial_pain_2, %facial_pain_3, %facial_pain_4];
+  anim.facial["aim"] = [%facial_aim_1, %facial_aim_2];
+  anim.facial["run"] = [%facial_run_1, %facial_run_2];
+  anim.facial["corner_stand_L"] = [%facial_corner_stand_l_1, %facial_corner_stand_l_2];
+  anim.facial["corner_stand_R"] = [%facial_corner_stand_r_1, %facial_corner_stand_r_2];
+  anim.facial["death"] = [%facial_death_1, %facial_death_2, %facial_death_3, %facial_death_4];
 }
 
 animhasfacialoverride(var_0) {

@@ -486,7 +486,7 @@ bellsDetectHit() {
       continue;
     }
     current_weapon = attacker GetCurrentWeapon();
-    if(type == "MOD_IMPACT" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_MELEE"|| (isDefined(current_weapon) && (WeaponClass(current_weapon) == "sniper"))) {
+    if(type == "MOD_IMPACT" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH" || type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_MELEE" || (isDefined(current_weapon) && (WeaponClass(current_weapon) == "sniper"))) {
       self playSound(sound_alias);
 
       if(!self.is_swaying) {

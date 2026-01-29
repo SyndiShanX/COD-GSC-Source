@@ -67,6 +67,6 @@ getdogdeathanim(var_0) {
 
 initdogarchetype_death() {
   var_0 = [];
-  var_0["front"] = [ % iw6_dog_death_4, %iw6_dog_death_6];
+  var_0["front"] = [%iw6_dog_death_4, %iw6_dog_death_6];
   anim.archetypes["dog"]["death"] = var_0;
 }

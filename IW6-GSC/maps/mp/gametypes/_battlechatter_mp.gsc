@@ -624,8 +624,7 @@ canSay(soundType) {
   }
   limit = level.bcInfo["timeout"][soundType];
   time = GetTime() - level.bcInfo["last_say_time"][self_pers_team][soundType];
-  if(limit < time
-) {
+  if(limit < time) {
     return true;
   }
   return false;

@@ -3246,9 +3246,7 @@ _objective_delete(objID) {
 touchingBadTrigger(optionalEnt) {
   killTriggers = getEntArray("trigger_hurt", "classname");
   foreach(trigger in killTriggers) {
-    if(self isTouching(trigger)
-
-      && (level.mapName != "mp_mine" || trigger.dmg > 0))
+    if(self isTouching(trigger) && (level.mapName != "mp_mine" || trigger.dmg > 0))
       return true;
   }
 

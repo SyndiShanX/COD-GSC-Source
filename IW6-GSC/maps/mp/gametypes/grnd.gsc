@@ -390,8 +390,7 @@ cycleZones() {
       }
     }
 
-    if(isDefined(hitEntity)
-) {
+    if(isDefined(hitEntity)) {
       level.grnd_zone LinkTo(hitEntity);
     } else if(level.grnd_zone IsLinked()) {
       level.grnd_zone Unlink();

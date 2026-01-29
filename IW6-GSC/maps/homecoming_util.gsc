@@ -2560,7 +2560,7 @@ artemis_think(var_0) {
     var_0 = maps\_utility::get_linked_structs();
 
   var_1 = ["tag_flash_left", "tag_flash_right"];
-  var_2 = [ % artemis_fire_l, %artemis_fire_r];
+  var_2 = [%artemis_fire_l, %artemis_fire_r];
   self.fireents = [];
 
   foreach(var_6, var_4 in var_1) {

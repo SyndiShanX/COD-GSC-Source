@@ -48,11 +48,11 @@ init_creepwalk_archetype() {
   var_0["run"]["move_f"] = % creepwalk_f;
   var_0["walk"]["straight"] = % creepwalk_f;
   var_0["walk"]["move_f"] = % creepwalk_f;
-  var_0["run"]["straight_twitch"] = [ % creepwalk_twitch_a_1, %creepwalk_twitch_a_2, %creepwalk_twitch_a_3];
-  var_0["flashed"]["flashed"] = [ % creepwalk_flashbang_a, %creepwalk_flashbang_b];
-  var_0["run_turn"][2] = [ % creepwalk_turn_90_l, %creepwalk_turn_90_l_aiming];
+  var_0["run"]["straight_twitch"] = [%creepwalk_twitch_a_1, %creepwalk_twitch_a_2, %creepwalk_twitch_a_3];
+  var_0["flashed"]["flashed"] = [%creepwalk_flashbang_a, %creepwalk_flashbang_b];
+  var_0["run_turn"][2] = [%creepwalk_turn_90_l, %creepwalk_turn_90_l_aiming];
   var_0["run_turn"][3] = % creepwalk_turn_45_l;
   var_0["run_turn"][5] = % creepwalk_turn_45_r;
-  var_0["run_turn"][6] = [ % creepwalk_turn_90_r, %creepwalk_turn_90_r_aiming];
+  var_0["run_turn"][6] = [%creepwalk_turn_90_r, %creepwalk_turn_90_r_aiming];
   maps\_utility::register_archetype("creepwalk", var_0);
 }

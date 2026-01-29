@@ -415,9 +415,7 @@ missileGetBestTarget() {
 }
 
 missileIsGoodTarget(target) {
-  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (IsPlayer(target) && !(target _hasPerk("specialty_blindeye")))
-
-    && self missileTargetAngle(target) > 0.25);
+  return (IsAlive(target) && target.team != self.owner.team && !(self isMissileTargeted(target)) && (IsPlayer(target) && !(target _hasPerk("specialty_blindeye"))) && self missileTargetAngle(target) > 0.25);
 }
 
 missileTargetAngle(target) {

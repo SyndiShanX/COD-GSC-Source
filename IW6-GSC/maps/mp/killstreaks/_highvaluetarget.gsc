@@ -49,9 +49,7 @@ useHighValueTarget(player, lifeId) {
     return false;
   }
 
-  if(reached_max_xp_multiplier()
-
-    || (isDefined(player.hvts_active) && player.hvts_active >= CONST_MAX_ACTIVE_HVT_PER_PLAYER)) {
+  if(reached_max_xp_multiplier() || (isDefined(player.hvts_active) && player.hvts_active >= CONST_MAX_ACTIVE_HVT_PER_PLAYER)) {
     self iPrintLnBold(&"KILLSTREAKS_HVT_MAX");
     return false;
   }

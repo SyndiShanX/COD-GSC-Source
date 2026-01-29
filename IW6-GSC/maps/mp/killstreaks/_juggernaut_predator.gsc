@@ -524,8 +524,7 @@ predatorCloakWaitForForceEnd() {
   while(true) {
     self waittill("predator_force_uncloak");
 
-    while(self IsMantling()
-) {
+    while(self IsMantling()) {
       wait 0.05;
     }
 

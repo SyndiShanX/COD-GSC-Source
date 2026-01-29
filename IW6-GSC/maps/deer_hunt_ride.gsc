@@ -66,7 +66,7 @@ init_elias_house_animset() {
   var_0["walk"]["stairs_up_in"] = % dh_elias_stairs_up_in;
   var_0["run"]["stairs_up"] = % dh_elias_stairs_up;
   var_0["walk"]["stairs_up"] = % dh_elias_stairs_up;
-  var_0["idle"]["stand"][0] = [ % unarmed_cowerstand_idle];
+  var_0["idle"]["stand"][0] = [%unarmed_cowerstand_idle];
   var_0["idle_weights"]["stand"][0] = [1];
   var_0["cover_trans"]["exposed"][1] = % unarmed_cowerstand_idle;
   var_0["cover_trans"]["exposed"][2] = % unarmed_cowerstand_idle;

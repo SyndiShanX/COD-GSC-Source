@@ -33,7 +33,7 @@ init_animset_cover_wall() {
   var_0["semi3"] = % exposed_shoot_semi3;
   var_0["semi4"] = % exposed_shoot_semi4;
   var_0["semi5"] = % exposed_shoot_semi5;
-  var_0["single"] = [ % exposed_shoot_semi1];
+  var_0["single"] = [%exposed_shoot_semi1];
   var_0["burst2"] = % exposed_shoot_burst3;
   var_0["burst3"] = % exposed_shoot_burst3;
   var_0["burst4"] = % exposed_shoot_burst4;

@@ -1835,8 +1835,8 @@ pick_drone_gundown_dummy() {
 field_activity() {
   level.runanimdebug = 0;
   var_0 = maps\_utility::array_spawn_targetname("field_activity_drones");
-  level.gundown_twitch = [ % patrol_bored_gundown_walk_twitch1, %patrol_bored_gundown_walk_twitch1, %patrol_bored_gundown_walk_twitch2, %patrol_bored_gundown_walk_twitch2, %patrol_bored_gundown_walk_twitch3, %patrol_bored_gundown_walk_twitch4, %patrol_bored_gundown_walk_twitch4];
-  level.gundown_patrol = [ % patrol_bored_gundown_walk1, %patrol_bored_gundown_walk1, %patrol_bored_gundown_walk2, %patrol_bored_gundown_walk2, %patrol_bored_gundown_walk3];
+  level.gundown_twitch = [%patrol_bored_gundown_walk_twitch1, %patrol_bored_gundown_walk_twitch1, %patrol_bored_gundown_walk_twitch2, %patrol_bored_gundown_walk_twitch2, %patrol_bored_gundown_walk_twitch3, %patrol_bored_gundown_walk_twitch4, %patrol_bored_gundown_walk_twitch4];
+  level.gundown_patrol = [%patrol_bored_gundown_walk1, %patrol_bored_gundown_walk1, %patrol_bored_gundown_walk2, %patrol_bored_gundown_walk2, %patrol_bored_gundown_walk3];
   thread setup_soccer_scene();
 
   foreach(var_2 in var_0) {

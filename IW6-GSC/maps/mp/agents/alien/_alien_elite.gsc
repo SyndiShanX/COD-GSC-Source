@@ -349,14 +349,12 @@ being_charged() {
 }
 
 get_charge_start_index() {
-  animWeights = [40, 30, 30
-  ];
+  animWeights = [40, 30, 30];
   return get_weighted_index("charge_attack_start", animWeights);
 }
 
 get_hit_geo_index() {
-  animWeights = [15, 25, 60
-  ];
+  animWeights = [15, 25, 60];
   return get_weighted_index("charge_hit_geo", animWeights);
 }
 

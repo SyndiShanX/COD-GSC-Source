@@ -1872,7 +1872,7 @@ ambush_spent_gas_grenade(var_0) {
 setup_smoke_archetype() {
   var_0 = [];
   var_0["cqb"]["straight"] = % factory_ambush_smoke_walkforward_01;
-  var_0["cqb"]["straight_twitch"] = [ % factory_ambush_smoke_walkforward_01];
+  var_0["cqb"]["straight_twitch"] = [%factory_ambush_smoke_walkforward_01];
   maps\_utility::register_archetype("factory_smoke", var_0, 1);
 }
 

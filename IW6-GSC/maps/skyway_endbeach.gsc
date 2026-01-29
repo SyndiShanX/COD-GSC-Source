@@ -570,7 +570,7 @@ rock_radio(var_0) {
 #using_animtree("player");
 
 init_anims_player(var_0) {
-  var_1 = [ % sw_beach_player_surface, %sw_beach_player_rock, %sw_beach_player_drag1_l, %sw_beach_player_drag1_r, %sw_beach_player_drag2_l, %sw_beach_player_drag2_r, %sw_beach_player_idle1_1, %sw_beach_player_idle1_2, %sw_beach_player_idle2_1, %sw_beach_player_idle2_2, %sw_beach_player_idle5_1];
+  var_1 = [%sw_beach_player_surface, %sw_beach_player_rock, %sw_beach_player_drag1_l, %sw_beach_player_drag1_r, %sw_beach_player_drag2_l, %sw_beach_player_drag2_r, %sw_beach_player_idle1_1, %sw_beach_player_idle1_2, %sw_beach_player_idle2_1, %sw_beach_player_idle2_2, %sw_beach_player_idle5_1];
 
   for(var_2 = 0; var_2 < var_0.size; var_2++) {
     if(issubstr(var_0[var_2], "idle")) {
@@ -586,8 +586,8 @@ init_anims_player(var_0) {
 #using_animtree("generic_human");
 
 init_anims_human(var_0) {
-  var_1 = [ % sw_beach_hesh_surface, %sw_beach_hesh_rock, %sw_beach_hesh_drag1_l, %sw_beach_hesh_drag1_r, %sw_beach_hesh_drag2_l, %sw_beach_hesh_drag2_r, %sw_beach_hesh_idle1_1, %sw_beach_hesh_idle1_2, %sw_beach_hesh_idle2_1, %sw_beach_hesh_idle2_2, %sw_beach_hesh_idle5_1];
-  var_2 = [ % sw_beach_playerbody_surface, %sw_beach_playerbody_rock, %sw_beach_playerbody_drag1_l, %sw_beach_playerbody_drag1_r, %sw_beach_playerbody_drag2_l, %sw_beach_playerbody_drag2_r, %sw_beach_playerbody_idle1_1, %sw_beach_playerbody_idle1_2, %sw_beach_playerbody_idle2_1, %sw_beach_playerbody_idle2_2, %sw_beach_playerbody_idle5_1];
+  var_1 = [%sw_beach_hesh_surface, %sw_beach_hesh_rock, %sw_beach_hesh_drag1_l, %sw_beach_hesh_drag1_r, %sw_beach_hesh_drag2_l, %sw_beach_hesh_drag2_r, %sw_beach_hesh_idle1_1, %sw_beach_hesh_idle1_2, %sw_beach_hesh_idle2_1, %sw_beach_hesh_idle2_2, %sw_beach_hesh_idle5_1];
+  var_2 = [%sw_beach_playerbody_surface, %sw_beach_playerbody_rock, %sw_beach_playerbody_drag1_l, %sw_beach_playerbody_drag1_r, %sw_beach_playerbody_drag2_l, %sw_beach_playerbody_drag2_r, %sw_beach_playerbody_idle1_1, %sw_beach_playerbody_idle1_2, %sw_beach_playerbody_idle2_1, %sw_beach_playerbody_idle2_2, %sw_beach_playerbody_idle5_1];
 
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(issubstr(var_0[var_3], "idle")) {

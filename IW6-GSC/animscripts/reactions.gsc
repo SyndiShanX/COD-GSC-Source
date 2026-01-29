@@ -13,10 +13,10 @@ main() {
 
 init_animset_reactions() {
   var_0 = [];
-  var_0["cover_stand"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
-  var_0["cover_crouch"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
-  var_0["cover_left"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
-  var_0["cover_right"] = [ % stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_stand"] = [%stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_crouch"] = [%stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_left"] = [%stand_cover_reaction_a, %stand_cover_reaction_b];
+  var_0["cover_right"] = [%stand_cover_reaction_a, %stand_cover_reaction_b];
   anim.archetypes["soldier"]["cover_reactions"] = var_0;
   var_0 = [];
   var_0[0] = % run_wizby_a;

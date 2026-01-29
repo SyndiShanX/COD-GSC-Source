@@ -520,7 +520,7 @@ init_elias_animset() {
   self.custommoveanimset["crouch"] = var_0;
   self.custommoveanimset["walk"] = var_0;
   self.customidleanimset = [];
-  self.customidleanimset["stand"] = [ % youngblood_hesh_calm_idle];
+  self.customidleanimset["stand"] = [%youngblood_hesh_calm_idle];
   self.customidleanimweights["stand"] = [1];
   self.a.pose = "stand";
   self allowedstances("stand");
@@ -555,7 +555,7 @@ init_hesh_animset() {
   self.custommoveanimset["crouch"] = var_0;
   self.custommoveanimset["walk"] = var_0;
   self.customidleanimset = [];
-  self.customidleanimset["stand"] = [ % youngblood_hesh_calm_idle];
+  self.customidleanimset["stand"] = [%youngblood_hesh_calm_idle];
   self.customidleanimweights["stand"] = [1];
   self.a.pose = "stand";
   self allowedstances("stand");
@@ -591,7 +591,7 @@ init_jog_animset() {
   self.custommoveanimset["crouch"] = var_0;
   self.custommoveanimset["walk"] = var_0;
   self.customidleanimset = [];
-  self.customidleanimset["stand"] = [ % youngblood_hesh_calm_idle];
+  self.customidleanimset["stand"] = [%youngblood_hesh_calm_idle];
   self.customidleanimweights["stand"] = [1];
   self.a.pose = "stand";
   self allowedstances("stand");
@@ -611,7 +611,7 @@ init_chaos_animset() {
   var_0 = [];
   var_0["sprint"] = % youngblood_hesh_sprint;
   var_0["straight"] = % youngblood_hesh_run_faster;
-  var_0["straight_twitch"] = [ % youngblood_hesh_run_twitch_a, %youngblood_hesh_run_twitch_b];
+  var_0["straight_twitch"] = [%youngblood_hesh_run_twitch_a, %youngblood_hesh_run_twitch_b];
   var_0["walk"] = % youngblood_hesh_run_faster;
   var_0["move_f"] = % youngblood_hesh_run_faster;
   var_0["move_l"] = % walk_left;
@@ -627,7 +627,7 @@ init_chaos_animset() {
   self.custommoveanimset["crouch"] = var_0;
   self.custommoveanimset["walk"] = var_0;
   self.customidleanimset = [];
-  self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_1];
+  self.customidleanimset["stand"] = [%youngblood_hesh_alert_idle_1];
   self.customidleanimweights["stand"] = [1];
   self.a.pose = "stand";
   self allowedstances("stand");
@@ -666,11 +666,11 @@ init_jog_animset_alert() {
   self.customidleanimset = [];
 
   if(self == level.hesh)
-    self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_r];
+    self.customidleanimset["stand"] = [%youngblood_hesh_alert_idle_r];
   else if(self == level.elias)
-    self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_l];
+    self.customidleanimset["stand"] = [%youngblood_hesh_alert_idle_l];
   else
-    self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_1];
+    self.customidleanimset["stand"] = [%youngblood_hesh_alert_idle_1];
 
   self.customidleanimweights["stand"] = [1];
   self.a.pose = "stand";
@@ -710,11 +710,11 @@ init_run_animset_alert() {
   self.customidleanimset = [];
 
   if(self == level.hesh)
-    self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_r];
+    self.customidleanimset["stand"] = [%youngblood_hesh_alert_idle_r];
   else if(self == level.elias)
-    self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_l];
+    self.customidleanimset["stand"] = [%youngblood_hesh_alert_idle_l];
   else
-    self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_1];
+    self.customidleanimset["stand"] = [%youngblood_hesh_alert_idle_1];
 
   self.customidleanimweights["stand"] = [1];
   self.a.pose = "stand";
@@ -822,7 +822,7 @@ init_hesh_hurt_animset() {
   self.custommoveanimset["crouch"] = var_0;
   self.custommoveanimset["walk"] = var_0;
   self.customidleanimset = [];
-  self.customidleanimset["stand"] = [ % youngblood_hesh_calm_idle];
+  self.customidleanimset["stand"] = [%youngblood_hesh_calm_idle];
   self.customidleanimweights["stand"] = [1];
   self.a.pose = "stand";
   self allowedstances("stand");

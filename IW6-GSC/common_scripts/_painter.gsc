@@ -851,36 +851,6 @@ spam_model_erase(trace) {
     deletemodels[i] delete();
 }
 
-dump_models() {
-  if(!level.spamed_models.size)
-    return;
-  fileprint_launcher_start_file();
-  fileprint_map_start();
-  for(i = 0; i < level.spamed_models.size; i++) {
-    origin = fileprint_radiant_vec(level.spamed_models[i].origin);
-    angles = fileprint_radiant_vec(level.spamed_models[i].angles);
-
-    fileprint_map_entity_start();
-    if(isDefined(level.spamed_models[i].modelusesprefab) && level.spamed_models[i].modelusesprefab) {
-      fileprint_map_keypairprint("classname", "misc_prefab");
-      fileprint_map_keypairprint("model", "prefabs/misc_models/" + level.spamed_models[i].model + ".map");
-    } else {
-      fileprint_map_keypairprint("classname", "misc_model");
-      fileprint_map_keypairprint("model", level.spamed_models[i].model);
-    }
-    fileprint_map_keypairprint("origin", origin);
-    fileprint_map_keypairprint("angles", angles);
-    fileprint_map_keypairprint("spammed_model", level.spam_model_current_group);
-    fileprint_map_entity_end();
-  }
-  map_path = level.script + "_modeldump.map";
-  if(!fileprint_launcher_end_file("/map_source/" + map_path, false))
-    return;
-  launcher_write_clipboard(map_path);
-  array_thread(level.spamed_models, ::deleteme);
-  level.spamed_models = [];
-}
-
 draw_axis(org, angles) {
   range = 32;
   forward = range * anglesToForward(angles);

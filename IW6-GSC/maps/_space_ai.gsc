@@ -474,17 +474,17 @@ init_space_anims() {
   var_0["cover_corner_r"] = [];
   var_0["cover_corner_r"]["straight_level"] = % space_fire;
   var_0["cover_corner_r"]["alert_idle"] = % space_cover_r1_loop;
-  var_0["cover_corner_r"]["alert_idle_twitch"] = [ % space_cover_r1_twitch_right, %space_cover_r1_twitch_up, %space_cover_r1_twitch_back, %space_cover_r1_twitch_down, %space_cover_r1_twitch_left];
-  var_0["cover_corner_r"]["alert_to_A"] = [ % space_cover_r1_full_expose];
-  var_0["cover_corner_r"]["alert_to_B"] = [ % space_cover_r1_full_expose];
-  var_0["cover_corner_r"]["A_to_alert"] = [ % space_cover_r1_full_hide];
-  var_0["cover_corner_r"]["A_to_B"] = [ % space_fire];
-  var_0["cover_corner_r"]["B_to_alert"] = [ % space_cover_r1_full_hide];
-  var_0["cover_corner_r"]["B_to_A"] = [ % space_fire];
-  var_0["cover_corner_r"]["lean_to_alert"] = [ % space_cover_r1_hide];
-  var_0["cover_corner_r"]["alert_to_lean"] = [ % space_cover_r1_expose];
+  var_0["cover_corner_r"]["alert_idle_twitch"] = [%space_cover_r1_twitch_right, %space_cover_r1_twitch_up, %space_cover_r1_twitch_back, %space_cover_r1_twitch_down, %space_cover_r1_twitch_left];
+  var_0["cover_corner_r"]["alert_to_A"] = [%space_cover_r1_full_expose];
+  var_0["cover_corner_r"]["alert_to_B"] = [%space_cover_r1_full_expose];
+  var_0["cover_corner_r"]["A_to_alert"] = [%space_cover_r1_full_hide];
+  var_0["cover_corner_r"]["A_to_B"] = [%space_fire];
+  var_0["cover_corner_r"]["B_to_alert"] = [%space_cover_r1_full_hide];
+  var_0["cover_corner_r"]["B_to_A"] = [%space_fire];
+  var_0["cover_corner_r"]["lean_to_alert"] = [%space_cover_r1_hide];
+  var_0["cover_corner_r"]["alert_to_lean"] = [%space_cover_r1_expose];
   var_0["cover_corner_r"]["look"] = % space_cover_r1_expose;
-  var_0["cover_corner_r"]["reload"] = [ % space_cover_r1_reload];
+  var_0["cover_corner_r"]["reload"] = [%space_cover_r1_reload];
   var_0["cover_corner_r"]["alert_to_look"] = % space_cover_r1_alert_to_look;
   var_0["cover_corner_r"]["look_to_alert"] = % space_cover_r1_look_to_alert;
   var_0["cover_corner_r"]["look_to_alert_fast"] = % space_cover_r1_look_to_alert;
@@ -495,7 +495,7 @@ init_space_anims() {
   var_0["cover_corner_r"]["lean_aim_right"] = % space_cover_r1_exposed_aim_r;
   var_0["cover_corner_r"]["lean_aim_up"] = % space_cover_r1_exposed_aim_u;
   var_0["cover_corner_r"]["lean_reload"] = % space_cover_r1_reload;
-  var_0["cover_corner_r"]["lean_idle"] = [ % space_cover_r1_exposed_idle];
+  var_0["cover_corner_r"]["lean_idle"] = [%space_cover_r1_exposed_idle];
   var_0["cover_corner_r"]["lean_single"] = % space_cover_r1_exposed_fire;
   var_0["cover_corner_r"]["lean_fire"] = % space_cover_r1_exposed_fire;
   var_0["cover_corner_r"]["add_aim_down"] = % space_fire_d;
@@ -507,17 +507,17 @@ init_space_anims() {
   var_0["cover_corner_l"] = [];
   var_0["cover_corner_l"]["straight_level"] = % space_fire;
   var_0["cover_corner_l"]["alert_idle"] = % space_cover_l1_idle;
-  var_0["cover_corner_l"]["alert_idle_twitch"] = [ % space_cover_l1_twitch_right, %space_cover_l1_twitch_left, %space_cover_l1_twitch_down, %space_cover_l1_twitch_up, %space_cover_l1_twitch_back];
-  var_0["cover_corner_l"]["alert_to_A"] = [ % space_cover_l1_full_expose];
-  var_0["cover_corner_l"]["alert_to_B"] = [ % space_cover_l1_full_expose];
-  var_0["cover_corner_l"]["A_to_alert"] = [ % space_cover_l1_full_hide];
-  var_0["cover_corner_l"]["A_to_B"] = [ % space_fire];
-  var_0["cover_corner_l"]["B_to_alert"] = [ % space_cover_l1_full_hide];
-  var_0["cover_corner_l"]["B_to_A"] = [ % space_fire];
-  var_0["cover_corner_l"]["lean_to_alert"] = [ % space_cover_l1_hide];
-  var_0["cover_corner_l"]["alert_to_lean"] = [ % space_cover_l1_expose];
+  var_0["cover_corner_l"]["alert_idle_twitch"] = [%space_cover_l1_twitch_right, %space_cover_l1_twitch_left, %space_cover_l1_twitch_down, %space_cover_l1_twitch_up, %space_cover_l1_twitch_back];
+  var_0["cover_corner_l"]["alert_to_A"] = [%space_cover_l1_full_expose];
+  var_0["cover_corner_l"]["alert_to_B"] = [%space_cover_l1_full_expose];
+  var_0["cover_corner_l"]["A_to_alert"] = [%space_cover_l1_full_hide];
+  var_0["cover_corner_l"]["A_to_B"] = [%space_fire];
+  var_0["cover_corner_l"]["B_to_alert"] = [%space_cover_l1_full_hide];
+  var_0["cover_corner_l"]["B_to_A"] = [%space_fire];
+  var_0["cover_corner_l"]["lean_to_alert"] = [%space_cover_l1_hide];
+  var_0["cover_corner_l"]["alert_to_lean"] = [%space_cover_l1_expose];
   var_0["cover_corner_l"]["look"] = % space_cover_l1_expose;
-  var_0["cover_corner_l"]["reload"] = [ % space_cover_l1_reload];
+  var_0["cover_corner_l"]["reload"] = [%space_cover_l1_reload];
   var_0["cover_corner_l"]["alert_to_look"] = % space_cover_l1_alert_to_look;
   var_0["cover_corner_l"]["look_to_alert"] = % space_cover_l1_look_to_alert;
   var_0["cover_corner_l"]["look_to_alert_fast"] = % space_cover_l1_look_to_alert;
@@ -528,7 +528,7 @@ init_space_anims() {
   var_0["cover_corner_l"]["lean_aim_right"] = % space_cover_l1_exposed_aim_r;
   var_0["cover_corner_l"]["lean_aim_up"] = % space_cover_l1_exposed_aim_u;
   var_0["cover_corner_l"]["lean_reload"] = % space_cover_l1_reload;
-  var_0["cover_corner_l"]["lean_idle"] = [ % space_cover_l1_exposed_idle];
+  var_0["cover_corner_l"]["lean_idle"] = [%space_cover_l1_exposed_idle];
   var_0["cover_corner_l"]["lean_single"] = % space_cover_l1_exposed_fire;
   var_0["cover_corner_l"]["lean_fire"] = % space_cover_l1_exposed_fire;
   var_0["cover_corner_l"]["add_aim_down"] = % space_fire_d;
@@ -540,17 +540,17 @@ init_space_anims() {
   var_0["cover_u"] = [];
   var_0["cover_u"]["straight_level"] = % space_fire;
   var_0["cover_u"]["alert_idle"] = % space_cover_u1_idle;
-  var_0["cover_u"]["alert_idle_twitch"] = [ % space_cover_u1_twitch_right, %space_cover_u1_twitch_up, %space_cover_u1_twitch_back, %space_cover_u1_twitch_down, %space_cover_u1_twitch_left];
-  var_0["cover_u"]["alert_to_A"] = [ % space_cover_u1_full_expose];
-  var_0["cover_u"]["alert_to_B"] = [ % space_cover_u1_full_expose];
-  var_0["cover_u"]["A_to_alert"] = [ % space_cover_u1_full_hide];
-  var_0["cover_u"]["A_to_B"] = [ % space_fire];
-  var_0["cover_u"]["B_to_alert"] = [ % space_cover_u1_full_hide];
-  var_0["cover_u"]["B_to_A"] = [ % space_fire];
-  var_0["cover_u"]["lean_to_alert"] = [ % space_cover_u1_hide];
-  var_0["cover_u"]["alert_to_lean"] = [ % space_cover_u1_expose];
+  var_0["cover_u"]["alert_idle_twitch"] = [%space_cover_u1_twitch_right, %space_cover_u1_twitch_up, %space_cover_u1_twitch_back, %space_cover_u1_twitch_down, %space_cover_u1_twitch_left];
+  var_0["cover_u"]["alert_to_A"] = [%space_cover_u1_full_expose];
+  var_0["cover_u"]["alert_to_B"] = [%space_cover_u1_full_expose];
+  var_0["cover_u"]["A_to_alert"] = [%space_cover_u1_full_hide];
+  var_0["cover_u"]["A_to_B"] = [%space_fire];
+  var_0["cover_u"]["B_to_alert"] = [%space_cover_u1_full_hide];
+  var_0["cover_u"]["B_to_A"] = [%space_fire];
+  var_0["cover_u"]["lean_to_alert"] = [%space_cover_u1_hide];
+  var_0["cover_u"]["alert_to_lean"] = [%space_cover_u1_expose];
   var_0["cover_u"]["look"] = % space_cover_u1_expose;
-  var_0["cover_u"]["reload"] = [ % space_cover_u1_reload];
+  var_0["cover_u"]["reload"] = [%space_cover_u1_reload];
   var_0["cover_u"]["alert_to_look"] = % space_cover_u1_alert_to_look;
   var_0["cover_u"]["look_to_alert"] = % space_cover_u1_look_to_alert;
   var_0["cover_u"]["look_to_alert_fast"] = % space_cover_u1_look_to_alert;
@@ -561,7 +561,7 @@ init_space_anims() {
   var_0["cover_u"]["lean_aim_right"] = % space_cover_u1_exposed_aim_r;
   var_0["cover_u"]["lean_aim_up"] = % space_cover_u1_exposed_aim_u;
   var_0["cover_u"]["lean_reload"] = % space_cover_u1_reload;
-  var_0["cover_u"]["lean_idle"] = [ % space_cover_u1_exposed_idle];
+  var_0["cover_u"]["lean_idle"] = [%space_cover_u1_exposed_idle];
   var_0["cover_u"]["lean_single"] = % space_cover_u1_exposed_fire;
   var_0["cover_u"]["lean_fire"] = % space_cover_u1_exposed_fire;
   var_0["cover_u"]["add_aim_down"] = % space_fire_d;
@@ -631,7 +631,7 @@ init_ai_space_animsets() {
   var_0["add_aim_left"] = % space_idle_ready_aim_l;
   var_0["add_aim_right"] = % space_idle_ready_aim_r;
   var_0["fire"] = % space_firing_burst2;
-  var_0["single"] = [ % space_firing_burst2];
+  var_0["single"] = [%space_firing_burst2];
   var_0["burst2"] = % space_firing_burst2;
   var_0["burst3"] = % space_firing_burst3;
   var_0["burst4"] = % space_firing_burst2;
@@ -641,9 +641,9 @@ init_ai_space_animsets() {
   var_0["semi3"] = % space_firing_burst2;
   var_0["semi4"] = % space_firing_burst2;
   var_0["semi5"] = % space_firing_burst2;
-  var_0["exposed_idle"] = [ % space_firing_idle];
-  var_0["reload"] = [ % space_reload];
-  var_0["reload_crouchhide"] = [ % space_reload];
+  var_0["exposed_idle"] = [%space_firing_idle];
+  var_0["reload"] = [%space_reload];
+  var_0["reload_crouchhide"] = [%space_reload];
   var_0["turn_left_45"] = % space_aiming_turn_l45;
   var_0["turn_left_90"] = % space_aiming_turn_l90;
   var_0["turn_left_135"] = % space_aiming_turn_l135;
@@ -666,11 +666,11 @@ ai_space_pain() {
     if(distance2dsquared(self.origin, self.goalpos) > var_0 && var_1 > 0.5)
       var_2 = % space_pain_1;
     else
-      var_2 = common_scripts\utility::random([ % space_firing_pain_1, %space_firing_pain_2]);
+      var_2 = common_scripts\utility::random([%space_firing_pain_1, %space_firing_pain_2]);
 
     self orientmode("face motion");
   } else
-    var_2 = common_scripts\utility::random([ % space_firing_pain_1, %space_firing_pain_2]);
+    var_2 = common_scripts\utility::random([%space_firing_pain_1, %space_firing_pain_2]);
 
   var_3 = 1;
   self setflaggedanimknoballrestart("painanim", var_2, %body, 1, 0.1, var_3);
@@ -729,7 +729,7 @@ ai_space_death() {
     else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot"))
       self.deathanim = % space_firing_death_3;
     else
-      self.deathanim = common_scripts\utility::random([ % space_firing_death_1, %space_firing_death_2, %space_firing_death_3]);
+      self.deathanim = common_scripts\utility::random([%space_firing_death_1, %space_firing_death_2, %space_firing_death_3]);
   }
 
   if(!isDefined(self.nodeathsound) && !isDefined(self.diequietly))

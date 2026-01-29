@@ -49,9 +49,9 @@ getdogpainanim(var_0) {
 
 initdogarchetype_reaction() {
   var_0 = [];
-  var_0["flash_long"] = [ % iw6_dog_run_pain_4, %iw6_dog_run_pain_6];
+  var_0["flash_long"] = [%iw6_dog_run_pain_4, %iw6_dog_run_pain_6];
   var_0["flash_short"] = % german_shepherd_run_flashbang_b;
-  var_0["run_pain"] = [ % iw6_dog_run_pain_4, %iw6_dog_run_pain_6];
-  var_0["idle_pain"] = [ % iw6_dog_alertidle_pain_4, %iw6_dog_alertidle_pain_6];
+  var_0["run_pain"] = [%iw6_dog_run_pain_4, %iw6_dog_run_pain_6];
+  var_0["idle_pain"] = [%iw6_dog_alertidle_pain_4, %iw6_dog_alertidle_pain_6];
   anim.archetypes["dog"]["reaction"] = var_0;
 }

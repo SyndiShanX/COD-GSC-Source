@@ -507,6 +507,5 @@ processShieldAssist_regularMP(killedPlayer) {
 }
 
 gameModeUsesDeathmatchScoring(mode) {
-  return (mode == "dm" || mode == "sotf_ffa"
-);
+  return (mode == "dm" || mode == "sotf_ffa");
 }

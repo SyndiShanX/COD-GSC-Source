@@ -1708,7 +1708,7 @@ ai_flooding_hip_anims() {
     var_0 = [];
     var_1 = [];
     var_1["straight"] = % flood_ally_water_walking_mid_70;
-    var_1["straight_twitch"] = [ % flood_ally_water_walking_mid_70];
+    var_1["straight_twitch"] = [%flood_ally_water_walking_mid_70];
     var_1["move_f"] = % flood_ally_water_walking_mid_70;
     var_0["run"] = var_1;
     var_0["walk"] = var_1;
@@ -1721,7 +1721,7 @@ ai_flooding_under_anims() {
     var_0 = [];
     var_1 = [];
     var_1["straight"] = % flood_ally_water_walking_high;
-    var_1["straight_twitch"] = [ % flood_ally_water_walking_high];
+    var_1["straight_twitch"] = [%flood_ally_water_walking_high];
     var_1["move_f"] = % flood_ally_water_walking_high;
     var_0["run"] = var_1;
     var_0["walk"] = var_1;

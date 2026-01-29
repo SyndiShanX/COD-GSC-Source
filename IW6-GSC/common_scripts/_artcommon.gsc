@@ -181,12 +181,12 @@ print_vision(vision_set) {
   clutMaterialName = GetDvar("r_clutMaterialTweakName");
   if(colorizationName != "")
     fileprint_launcher("colorizationSet \"" + colorizationName + "\"");
-  if(toneMappingName != "")
-    fileprint_launcher("toneMapping \"" + toneMappingName + "\"");
-  if(clutMaterialName != "")
-    fileprint_launcher("clutMaterial\"" + clutMaterialName + "\"");
+    if(toneMappingName != "")
+      fileprint_launcher("toneMapping \"" + toneMappingName + "\"");
+      if(clutMaterialName != "")
+        fileprint_launcher("clutMaterial\"" + clutMaterialName + "\"");
 
-  return fileprint_launcher_end_file("\\share\\raw\\vision\\" + vision_set + ".vision", true);
+        return fileprint_launcher_end_file("\\share\\raw\\vision\\" + vision_set + ".vision", true);
 }
 
 print_fog_ents(forMP) {
@@ -199,41 +199,41 @@ print_fog_ents(forMP) {
     else
       fileprint_launcher("\tent = maps\\_utility::create_vision_set_fog( \"" + ent.name + "\" );");
 
-    fileprint_launcher("\tent.startDist =" + ent.startDist + ";");
-    fileprint_launcher("\tent.halfwayDist =" + ent.halfwayDist + ";");
-    fileprint_launcher("\tent.red =" + ent.red + ";");
-    fileprint_launcher("\tent.green =" + ent.green + ";");
-    fileprint_launcher("\tent.blue = " + ent.blue + ";");
-    fileprint_launcher("\tent.HDRColorIntensity =" + ent.HDRColorIntensity + ";");
-    fileprint_launcher("\tent.maxOpacity = " + ent.maxOpacity + ";");
-    fileprint_launcher("\tent.transitionTime = " + ent.transitionTime + ";");
-    fileprint_launcher("\tent.sunFogEnabled =" + ent.sunFogEnabled + ";");
-    fileprint_launcher("\tent.sunRed = " + ent.sunRed + ";");
-    fileprint_launcher("\tent.sunGreen = " + ent.sunGreen + ";");
-    fileprint_launcher("\tent.sunBlue =" + ent.sunBlue + ";");
-    fileprint_launcher("\tent.HDRSunColorIntensity = " + ent.HDRSunColorIntensity + ";");
-    fileprint_launcher("\tent.sunDir = " + ent.sunDir + ";");
-    fileprint_launcher("\tent.sunBeginFadeAngle =" + ent.sunBeginFadeAngle + ";");
-    fileprint_launcher("\tent.sunEndFadeAngle =" + ent.sunEndFadeAngle + ";");
-    fileprint_launcher("\tent.normalFogScale = " + ent.normalFogScale + ";");
-    fileprint_launcher("\tent.skyFogIntensity =" + ent.skyFogIntensity + ";");
-    fileprint_launcher("\tent.skyFogMinAngle = " + ent.skyFogMinAngle + ";");
-    fileprint_launcher("\tent.skyFogMaxAngle = " + ent.skyFogMaxAngle + ";");
+      fileprint_launcher("\tent.startDist =" + ent.startDist + ";");
+      fileprint_launcher("\tent.halfwayDist =" + ent.halfwayDist + ";");
+      fileprint_launcher("\tent.red =" + ent.red + ";");
+      fileprint_launcher("\tent.green =" + ent.green + ";");
+      fileprint_launcher("\tent.blue = " + ent.blue + ";");
+      fileprint_launcher("\tent.HDRColorIntensity =" + ent.HDRColorIntensity + ";");
+      fileprint_launcher("\tent.maxOpacity = " + ent.maxOpacity + ";");
+      fileprint_launcher("\tent.transitionTime = " + ent.transitionTime + ";");
+      fileprint_launcher("\tent.sunFogEnabled =" + ent.sunFogEnabled + ";");
+      fileprint_launcher("\tent.sunRed = " + ent.sunRed + ";");
+      fileprint_launcher("\tent.sunGreen = " + ent.sunGreen + ";");
+      fileprint_launcher("\tent.sunBlue =" + ent.sunBlue + ";");
+      fileprint_launcher("\tent.HDRSunColorIntensity = " + ent.HDRSunColorIntensity + ";");
+      fileprint_launcher("\tent.sunDir = " + ent.sunDir + ";");
+      fileprint_launcher("\tent.sunBeginFadeAngle =" + ent.sunBeginFadeAngle + ";");
+      fileprint_launcher("\tent.sunEndFadeAngle =" + ent.sunEndFadeAngle + ";");
+      fileprint_launcher("\tent.normalFogScale = " + ent.normalFogScale + ";");
+      fileprint_launcher("\tent.skyFogIntensity =" + ent.skyFogIntensity + ";");
+      fileprint_launcher("\tent.skyFogMinAngle = " + ent.skyFogMinAngle + ";");
+      fileprint_launcher("\tent.skyFogMaxAngle = " + ent.skyFogMaxAngle + ";");
 
-    if(isDefined(ent.HDROverride))
-      fileprint_launcher("\tent.HDROverride =\"" + ent.HDROverride + "\";");
+      if(isDefined(ent.HDROverride))
+        fileprint_launcher("\tent.HDROverride =\"" + ent.HDROverride + "\";");
 
-    if(isDefined(ent.stagedVisionSets)) {
-      string = " ";
-      for(i = 0; i < ent.stagedVisionSets.size; i++) {
-        string = string + "\"" + ent.stagedVisionSets[i] + "\"";
-        if(i < ent.stagedVisionSets.size - 1)
-          string = string + ",";
-        string = string + " ";
-      }
+        if(isDefined(ent.stagedVisionSets)) {
+          string = " ";
+          for(i = 0; i < ent.stagedVisionSets.size; i++) {
+            string = string + "\"" + ent.stagedVisionSets[i] + "\"";
+            if(i < ent.stagedVisionSets.size - 1)
+              string = string + ",";
+            string = string + " ";
+          }
 
-      fileprint_launcher("\tent.stagedVisionSets = [" + string + "];");
-    }
+          fileprint_launcher("\tent.stagedVisionSets = [" + string + "];");
+        }
 
     fileprint_launcher(" ");
   }
@@ -253,7 +253,6 @@ print_fog_ents_csv() {
     }
 
     if(!targettedByHDROverride)
-      fileprint_launcher("rawfile,vision/" + ent.name + ".vision");
+    fileprint_launcher("rawfile,vision/" + ent.name + ".vision");
   }
 }
-# /

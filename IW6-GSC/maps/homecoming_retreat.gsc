@@ -930,7 +930,7 @@ elias_street_dead_runners() {
   self.runanim = level.drone_anims["allies"]["stand"]["run_n_gun"];
   self.weaponsound = "drone_r5rgp_fire_npc";
   thread maps\homecoming_drones::drone_fire_randomly_loop();
-  self.deathanim = common_scripts\utility::random([ % stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback]);
+  self.deathanim = common_scripts\utility::random([%stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback]);
   self waittill("goal");
   var_1 = ["j_head", "tag_weapon_chest", "j_SpineUpper", "J_SpineLower"];
   var_2 = common_scripts\utility::random(var_1);

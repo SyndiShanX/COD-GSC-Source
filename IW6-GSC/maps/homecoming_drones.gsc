@@ -575,7 +575,7 @@ beach_path_drones(var_0) {
       else
         var_8.drone_lookahead_value = 56;
 
-      var_9 = [ % stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback];
+      var_9 = [%stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback];
       var_8.deathanim = var_9[randomint(var_9.size)];
       var_8 thread drone_animate_on_path(var_2);
       wait(randomfloatrange(0.6, 0.9));
@@ -822,7 +822,7 @@ drone_enableaimassist() {
 }
 
 give_drone_deathanim() {
-  var_0 = [ % stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback];
+  var_0 = [%stand_death_tumbleback, %stand_death_headshot_slowfall, %stand_death_shoulderback];
   self.deathanim = var_0[randomint(var_0.size)];
 }
 

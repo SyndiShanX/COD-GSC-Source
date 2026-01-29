@@ -156,7 +156,7 @@ bot_draw_debug_heli_nodes(nodes) {
             link_color = (0, 1, 1);
             if(draw_debug_heli_nodes_with_vanguard_info) {
               if(current_nodes[i].valid_for_vanguard && neighbor_node.valid_for_vanguard) {
-                if(!bot_vectors_are_equal(current_nodes[i].origin, current_nodes[i].vanguard_origin) ||    !bot_vectors_are_equal(neighbor_node.origin, neighbor_node.vanguard_origin)) {
+                if(!bot_vectors_are_equal(current_nodes[i].origin, current_nodes[i].vanguard_origin) || !bot_vectors_are_equal(neighbor_node.origin, neighbor_node.vanguard_origin)) {
                   line(current_nodes[i].vanguard_origin, neighbor_node.vanguard_origin, link_color, 1.0, true);
                   link_color = (1, 0, 0);
                 }
