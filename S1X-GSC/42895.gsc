@@ -1,0 +1,273 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: 42895.gsc
+**************************************/
+
+init() {
+  level.healthoverlaycutoff = 0.55;
+  var_0 = 5;
+  var_0 = maps\mp\gametypes\_tweakables::gettweakablevalue("player", "healthregentime");
+  level.playerhealth_regularregendelay = var_0 * 1000;
+  level.healthregendisabled = level.playerhealth_regularregendelay <= 0;
+  level thread onplayerconnect();
+}
+
+onplayerconnect() {
+  for(;;) {
+    level waittill("connected", var_0);
+    var_0 thread onplayerspawned();
+  }
+}
+
+onplayerspawned() {
+  self endon("disconnect");
+
+  for(;;) {
+    self waittill("spawned_player");
+    thread playerhealthregen();
+  }
+}
+
+playerhealthregen() {
+  self endon("death");
+  self endon("disconnect");
+  self endon("joined_team");
+  self endon("joined_spectators");
+  self endon("goliath_equipped");
+  self endon("faux_spawn");
+  level endon("game_ended");
+
+  if(self.health <= 0) {
+    return;
+  }
+  var_0 = 0;
+  var_1 = 0;
+  thread playerpainbreathingsound();
+  self notify("playerHealthRegen");
+
+  for(;;) {
+    self waittill("damage", var_2, var_3, var_4, var_5, var_6);
+
+    if(self.health <= 0) {
+      return;
+    }
+    var_1 = gettime();
+    var_7 = self.health / self.maxhealth;
+
+    if(!isDefined(self.healthregenlevel)) {
+      self.regenspeed = 1;
+    } else if(self.healthregenlevel == 0.33) {
+      self.regenspeed = 0.75;
+    } else if(self.healthregenlevel == 0.66) {
+      self.regenspeed = 0.5;
+    } else if(self.healthregenlevel == 0.99) {
+      self.regenspeed = 0.3;
+    } else {
+      self.regenspeed = 1;
+    }
+
+    if(var_7 <= level.healthoverlaycutoff) {
+      self.atbrinkofdeath = 1;
+    }
+
+    thread healthregeneration(var_1, var_7);
+    thread breathingmanager(var_1, var_7, var_2, var_6);
+  }
+}
+
+breathingmanager(var_0, var_1, var_2, var_3) {
+  self notify("breathingManager");
+  self endon("breathingManager");
+  self endon("death");
+  self endon("disconnect");
+  self endon("joined_team");
+  self endon("joined_spectators");
+  level endon("game_ended");
+
+  if(maps\mp\_utility::isusingremote() || maps\mp\_utility::isinremotetransition()) {
+    return;
+  }
+  if(!isplayer(self)) {
+    return;
+  }
+  if(isDefined(var_3) && var_3 != "MOD_FALLING" || isDefined(var_2) && var_2 > 1) {
+    playdamagesound(var_0);
+  }
+
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
+    return;
+  }
+  self.breathingstoptime = var_0 + 3000 * self.regenspeed;
+  wait(7 * self.regenspeed);
+
+  if(!level.gameended && isDefined(self.atbrinkofdeath) && self.atbrinkofdeath == 1) {
+    if(!maps\mp\killstreaks\_juggernaut::get_is_in_mech()) {
+      if(self hasfemalecustomizationmodel()) {
+        self playlocalsound("deaths_door_exit_female");
+      } else {
+        self playlocalsound("deaths_door_exit");
+      }
+    }
+
+    self.atbrinkofdeath = 0;
+  }
+}
+
+playdamagesound(var_0) {
+  if(isDefined(level.customplaydamagesound)) {
+    self thread[[level.customplaydamagesound]](var_0);
+    return;
+  }
+
+  if(isDefined(self.damage_sound_time) && self.damage_sound_time + 5000 > var_0) {
+    return;
+  }
+  self.damage_sound_time = var_0;
+  var_1 = randomintrange(1, 8);
+
+  if(!maps\mp\killstreaks\_juggernaut::get_is_in_mech()) {
+    if(self.team == "axis") {
+      if(self hasfemalecustomizationmodel()) {
+        self playSound("generic_pain_enemy_fm_" + var_1);
+      } else {
+        self playSound("generic_pain_enemy_" + var_1);
+      }
+    } else if(self hasfemalecustomizationmodel()) {
+      self playSound("generic_pain_friendly_fm_" + var_1);
+    } else {
+      self playSound("generic_pain_friendly_" + var_1);
+    }
+  }
+}
+
+healthregeneration(var_0, var_1) {
+  self notify("healthRegeneration");
+  self endon("healthRegeneration");
+  self endon("death");
+  self endon("disconnect");
+  self endon("joined_team");
+  self endon("joined_spectators");
+  self endon("goliath_equipped");
+  level endon("game_ended");
+
+  if(level.healthregendisabled) {
+    return;
+  }
+  if(!isDefined(self.ignoreregendelay)) {
+    self.ignoreregendelay = 0;
+  }
+
+  if(self.ignoreregendelay == 0) {
+    wait(level.playerhealth_regularregendelay / 1000 * self.regenspeed);
+  } else {
+    self.ignoreregendelay = 0;
+  }
+
+  if(var_1 < 0.55) {
+    var_2 = 1;
+  } else {
+    var_2 = 0;
+  }
+
+  for(;;) {
+    if(self.regenspeed == 0.75) {
+      wait 0.2;
+
+      if(self.health < self.maxhealth) {
+        self.health = self.health + 5;
+      } else {
+        break;
+      }
+    } else if(self.regenspeed == 0.5) {
+      wait 0.05;
+
+      if(self.health < self.maxhealth) {
+        self.health = self.health + 2;
+      } else {
+        break;
+      }
+    } else if(self.regenspeed == 0.3) {
+      wait 0.15;
+
+      if(self.health < self.maxhealth) {
+        self.health = self.health + 40;
+      } else {
+        break;
+      }
+    } else if(!isDefined(self.regenspeed) || self.regenspeed == 1) {
+      wait 0.05;
+
+      if(self.health < self.maxhealth) {
+        self.health = self.health + 1;
+        var_1 = self.health / self.maxhealth;
+      } else {
+        break;
+      }
+    }
+
+    if(self.health > self.maxhealth) {
+      self.health = self.maxhealth;
+    }
+  }
+
+  maps\mp\gametypes\_damage::resetattackerlist();
+
+  if(var_2) {
+    maps\mp\gametypes\_missions::healthregenerated();
+  }
+}
+
+wait_for_not_using_remote() {
+  self notify("waiting_to_stop_remote");
+  self endon("waiting_to_stop_remote");
+  self endon("death");
+  level endon("game_ended");
+  self waittill("stopped_using_remote");
+  maps\mp\_utility::revertvisionsetforplayer(0);
+}
+
+playerpainbreathingsound() {
+  level endon("game_ended");
+  self endon("death");
+  self endon("disconnect");
+  self endon("joined_team");
+  self endon("joined_spectators");
+
+  if(getdvarint("virtuallobbyactive", 0)) {
+    return;
+  }
+  if(!isplayer(self)) {
+    return;
+  }
+  if(isDefined(level.iszombiegame) && level.iszombiegame) {
+    return;
+  }
+  wait 3;
+
+  for(;;) {
+    wait 0.2;
+
+    if(self.health <= 0) {
+      return;
+    }
+    if(self.health >= self.maxhealth * 0.55) {
+      continue;
+    }
+    if(level.healthregendisabled && gettime() > self.breathingstoptime) {
+      continue;
+    }
+    if(maps\mp\_utility::isusingremote() || maps\mp\_utility::isinremotetransition()) {
+      continue;
+    }
+    if(!maps\mp\killstreaks\_juggernaut::get_is_in_mech()) {
+      if(self hasfemalecustomizationmodel()) {
+        self playlocalsound("deaths_door_mp_female");
+      } else {
+        self playlocalsound("deaths_door_mp_male");
+      }
+    }
+
+    wait 1.284;
+    wait(0.1 + randomfloat(0.8));
+  }
+}
