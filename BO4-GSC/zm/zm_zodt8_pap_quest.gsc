@@ -205,7 +205,7 @@ function_5c299a0f(player) {
 
   if(level.s_pap_quest.var_be6e6f65 < level.s_pap_quest.var_ac28fc4d) {
     if(isalive(player)) {
-      player util::delay(0.5, "death", &zm_audio::create_and_play_dialog, # "altar", # "activate_generic");
+      player util::delay(0.5, "death", &zm_audio::create_and_play_dialog, #"altar", #"activate_generic");
     }
   } else {
     self.pap_machine function_214cd6b3();
@@ -213,7 +213,7 @@ function_5c299a0f(player) {
     level flag::set("pap_quest_complete");
 
     if(isalive(player)) {
-      player util::delay(2.25, "death", &zm_audio::create_and_play_dialog, # "pap", # "activate");
+      player util::delay(2.25, "death", &zm_audio::create_and_play_dialog, #"pap", #"activate");
     }
 
     return;

@@ -13,7 +13,7 @@
 #namespace character_unlock_reaper;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_reaper", &__init__, undefined, # "character_unlock_reaper_fixup");
+  system::register(#"character_unlock_reaper", &__init__, undefined, #"character_unlock_reaper_fixup");
 }
 
 __init__() {
@@ -34,13 +34,13 @@ function_1c4b5097(item) {
   if(itementry.name === # "cu35_item") {
     if(self character_unlock::function_f0406288(#"reaper_unlock")) {
       if(self stats::get_stat_global(#"kills_early") >= 115) {
-        self character_unlock::function_c8beca5e(#"reaper_unlock", # "hash_555c37b28c4a770c", 1);
+        self character_unlock::function_c8beca5e(#"reaper_unlock", #"hash_555c37b28c4a770c", 1);
       }
 
       var_c503939b = globallogic::function_e9e52d05();
 
       if(var_c503939b <= function_c816ea5b()) {
-        self character_unlock::function_c8beca5e(#"reaper_unlock", # "hash_555c3ab28c4a7c25", 1);
+        self character_unlock::function_c8beca5e(#"reaper_unlock", #"hash_555c3ab28c4a7c25", 1);
       }
     }
   }
@@ -49,7 +49,7 @@ function_1c4b5097(item) {
 function_381c1e1d() {
   if(self character_unlock::function_f0406288(#"reaper_unlock")) {
     if(self stats::get_stat_global(#"kills_early") >= 115) {
-      self character_unlock::function_c8beca5e(#"reaper_unlock", # "hash_555c37b28c4a770c", 1);
+      self character_unlock::function_c8beca5e(#"reaper_unlock", #"hash_555c37b28c4a770c", 1);
     }
   }
 }
@@ -68,7 +68,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"reaper_unlock")) {
-            player character_unlock::function_c8beca5e(#"reaper_unlock", # "hash_555c3ab28c4a7c25", 1);
+            player character_unlock::function_c8beca5e(#"reaper_unlock", #"hash_555c3ab28c4a7c25", 1);
           }
         }
       }

@@ -20,7 +20,7 @@
 #namespace zm_weap_cymbal_monkey;
 
 autoexec __init__system__() {
-  system::register(#"zm_weap_cymbal_monkey", &__init__, &__main__, # "zm_weapons");
+  system::register(#"zm_weap_cymbal_monkey", &__init__, &__main__, #"zm_weapons");
 }
 
 __init__() {
@@ -92,7 +92,7 @@ player_give_cymbal_monkey() {
 
 player_handle_cymbal_monkey() {
   self notify(#"starting_monkey_watch");
-  self endon(#"starting_monkey_watch", # "disconnect");
+  self endon(#"starting_monkey_watch", #"disconnect");
   attract_dist_diff = level.monkey_attract_dist_diff;
 
   if(!isDefined(attract_dist_diff)) {
@@ -219,8 +219,8 @@ show_briefly(showtime) {
 }
 
 show_owner_on_attack(owner) {
-  owner endon(#"hide_owner", # "show_owner");
-  self endon(#"explode", # "death", # "grenade_dud");
+  owner endon(#"hide_owner", #"show_owner");
+  self endon(#"explode", #"death", #"grenade_dud");
   owner.show_for_time = undefined;
 
   for(;;) {
@@ -243,7 +243,7 @@ hide_owner(owner) {
   }
 
   self thread show_owner_on_attack(owner);
-  evt = self waittill(#"explode", # "death", # "grenade_dud");
+  evt = self waittill(#"explode", #"death", #"grenade_dud");
   println("<dev string:x38>" + evt._notify);
   owner notify(#"show_owner");
   owner unsetperk("specialty_immunemms");
@@ -304,7 +304,7 @@ proximity_detonate(owner) {
 }
 
 player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_dist_diff) {
-  self endon(#"starting_monkey_watch", # "disconnect");
+  self endon(#"starting_monkey_watch", #"disconnect");
 
   if(isDefined(e_grenade)) {
     e_grenade endon(#"death");
@@ -552,7 +552,7 @@ play_delayed_explode_vox() {
 }
 
 get_thrown_monkey() {
-  self endon(#"starting_monkey_watch", # "disconnect");
+  self endon(#"starting_monkey_watch", #"disconnect");
 
   while(true) {
     waitresult = self waittill(#"grenade_fire");
@@ -605,7 +605,7 @@ monitor_zombie_groans(info) {
 }
 
 play_zombie_groans() {
-  self endon(#"monkey_blown_up", # "death");
+  self endon(#"monkey_blown_up", #"death");
 
   while(true) {
     if(isDefined(self)) {

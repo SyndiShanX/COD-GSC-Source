@@ -57,7 +57,7 @@ robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
       }
 
       if(!gibclientutils::isgibbed(localclientnum, entity, 8)) {
-        entity playSound(localclientnum, # "fly_bot_ctrl_lvl_01_start", entity.origin);
+        entity playSound(localclientnum, #"fly_bot_ctrl_lvl_01_start", entity.origin);
       }
 
       break;
@@ -71,7 +71,7 @@ robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
       }
 
       if(!gibclientutils::isgibbed(localclientnum, entity, 8)) {
-        entity playSound(localclientnum, # "fly_bot_ctrl_lvl_02_start", entity.origin);
+        entity playSound(localclientnum, #"fly_bot_ctrl_lvl_02_start", entity.origin);
       }
 
       break;
@@ -84,7 +84,7 @@ robotlighting(localclientnum, entity, flicker, mindcontrolstate) {
         fxclientutils::playfxbundle(localclientnum, entity, entity.altfxdef2);
       }
 
-      entity playSound(localclientnum, # "fly_bot_ctrl_lvl_03_start", entity.origin);
+      entity playSound(localclientnum, #"fly_bot_ctrl_lvl_03_start", entity.origin);
       break;
   }
 }

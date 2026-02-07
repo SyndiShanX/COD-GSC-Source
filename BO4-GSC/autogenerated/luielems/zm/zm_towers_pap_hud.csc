@@ -24,7 +24,7 @@ class czm_towers_pap_hud: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_towers_pap_hud");
+    cluielem::open(localclientnum, #"zm_towers_pap_hud");
   }
 
   function function_fa582112(localclientnum) {

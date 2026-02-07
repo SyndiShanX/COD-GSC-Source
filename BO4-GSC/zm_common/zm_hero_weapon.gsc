@@ -29,7 +29,7 @@
 #namespace zm_hero_weapon;
 
 autoexec __init__system__() {
-  system::register(#"zm_hero_weapons", &__init__, undefined, # "gadget_hero_weapon");
+  system::register(#"zm_hero_weapons", &__init__, undefined, #"gadget_hero_weapon");
 }
 
 __init__() {
@@ -407,7 +407,7 @@ hero_give_weapon(weapon, enabled, var_b94ec3d9 = 0) {
 }
 
 function_1297aefe(weapon) {
-  var_328c1d6e = array(#"hero_chakram_lv3", # "hero_hammer_lv3", # "hero_scepter_lv3", # "hero_sword_pistol_lv3", # "hero_flamethrower_t8_lv3", # "hero_gravityspikes_t8_lv3", # "hero_katana_t8_lv3", # "hero_minigun_t8_lv3");
+  var_328c1d6e = array(#"hero_chakram_lv3", #"hero_hammer_lv3", #"hero_scepter_lv3", #"hero_sword_pistol_lv3", #"hero_flamethrower_t8_lv3", #"hero_gravityspikes_t8_lv3", #"hero_katana_t8_lv3", #"hero_minigun_t8_lv3");
   i = 0;
   var_8e233987 = [];
 
@@ -455,7 +455,7 @@ function_1297aefe(weapon) {
 
 hero_weapon_on(n_slot, w_hero) {
   self notify(#"hero_weapon_power_on");
-  self addweaponstat(w_hero, # "used", 1);
+  self addweaponstat(w_hero, #"used", 1);
   level.var_ff96c5e4 = 1;
   self.var_479965f7 = 1;
   level notify(#"hero_weapon_activated", {
@@ -470,7 +470,7 @@ hero_weapon_on(n_slot, w_hero) {
 }
 
 hero_weapon_off(n_slot, w_hero) {
-  self endon(#"death", # "hero_weapon_power_on");
+  self endon(#"death", #"hero_weapon_power_on");
   self.var_479965f7 = undefined;
   wait 2;
   self notify(#"hero_weapon_power_off");
@@ -492,7 +492,7 @@ hero_weapon_ready(n_slot, w_hero) {
 
 function_9a100883(weapon_level, enabled) {
   self notify(#"hash_6b01968912321cc5");
-  self endon(#"hash_6b01968912321cc5", # "disconnect");
+  self endon(#"hash_6b01968912321cc5", #"disconnect");
   self.var_39b77a76 = 1;
   self.var_c9279111 = 0;
   self.var_821c9bf3 = 0;
@@ -502,7 +502,7 @@ function_9a100883(weapon_level, enabled) {
     wait 1;
   }
 
-  self waittilltimeout(2, # "weapon_change_complete");
+  self waittilltimeout(2, #"weapon_change_complete");
   self playSound("zmb_weapon_upgrade_to_lvl_" + weapon_level + 1);
   self function_45b7d6c1(weapon_level);
   self hero_give_weapon(level.hero_weapon[self.var_b708af7b][weapon_level], enabled, 1);
@@ -715,7 +715,7 @@ function_5ccf482(str_name, var_a986aaed, var_f2bbbd56, var_503e1e6) {
 
 function_60878f7f(w_weapon) {
   self notify(#"hash_5ef1cf6d910b343b");
-  self endon(#"hash_5ef1cf6d910b343b", # "hero_weapon_take", # "disconnect", # "weapon_change");
+  self endon(#"hash_5ef1cf6d910b343b", #"hero_weapon_take", #"disconnect", #"weapon_change");
   var_a01a1f92 = w_weapon.var_e4109b63;
   var_bcf2cdde = w_weapon.var_fb22040b;
 
@@ -737,7 +737,7 @@ function_60878f7f(w_weapon) {
 }
 
 function_ac9f4b22() {
-  self endon(#"hero_weapon_take", # "disconnect");
+  self endon(#"hero_weapon_take", #"disconnect");
 
   while(true) {
     s_notify = self waittill(#"weapon_change");
@@ -794,7 +794,7 @@ function_a1004d47() {
   self endon(#"death");
   self.var_1f23fe79 = 1;
   self function_29e4516d();
-  self waittilltimeout(2, # "weapon_change_complete");
+  self waittilltimeout(2, #"weapon_change_complete");
   self notify(#"hash_3eaa776332738598");
   self.var_1f23fe79 = undefined;
 }

@@ -118,7 +118,7 @@ function_b008f9e9(weapon) {
 
   if(self getcurrentweapon() != weapon) {
     self switchtoweapon(weapon);
-    self waittilltimeout(2, # "weapon_change");
+    self waittilltimeout(2, #"weapon_change");
   }
 
   foreach(info in level.activecamoinfo) {
@@ -405,7 +405,7 @@ function_c0fa0ecb(weapon) {
     case # "sniper_fastrechamber_t8":
     case # "tr_powersemi_t8":
     case # "smg_handling_t8":
-      self stats::function_eec52333(weapon, # "hash_4e43a25a3e77ab5f", 1, self.class_num);
+      self stats::function_eec52333(weapon, #"hash_4e43a25a3e77ab5f", 1, self.class_num);
       break;
     default:
       break;
@@ -483,7 +483,7 @@ function_1af985ba(weapon) {
   var_dfcb2df3 = isDefined(stats::function_af5584ca(var_19bbfaaf)) ? stats::function_af5584ca(var_19bbfaaf) : 0;
 
   if(var_dfcb2df3 > 0) {
-    self stats::function_e24eec31(weapon, # "hash_19fbe2645c7f53a7", 1);
+    self stats::function_e24eec31(weapon, #"hash_19fbe2645c7f53a7", 1);
     self function_938534a8(var_19bbfaaf);
   }
 }
@@ -502,7 +502,7 @@ function_cd9deb9e(weapon) {
   var_dfcb2df3 = isDefined(stats::function_af5584ca(var_19bbfaaf)) ? stats::function_af5584ca(var_19bbfaaf) : 0;
 
   if(var_dfcb2df3 > 0) {
-    self stats::function_e24eec31(weapon, # "hash_19fbe2645c7f53a7", 1);
+    self stats::function_e24eec31(weapon, #"hash_19fbe2645c7f53a7", 1);
     self function_938534a8(var_19bbfaaf);
   }
 }
@@ -878,7 +878,7 @@ set_stage_activecamo(activecamo, stagenum) {
 function_a80cb651(activecamo, stagenum) {
   self notify("4be8cd84d8f00caa");
   self endon("4be8cd84d8f00caa");
-  self endon(#"new_stage", # "death");
+  self endon(#"new_stage", #"death");
   stage = activecamo.stages[stagenum];
 
   if(stage.info.resettimer == 0 && !isDefined(stage.info.resetnotify)) {

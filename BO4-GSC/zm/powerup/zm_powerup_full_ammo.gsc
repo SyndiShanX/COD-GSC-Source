@@ -28,7 +28,7 @@ __init__() {
   zm_powerups::register_powerup("full_ammo", &grab_full_ammo);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("full_ammo", "p7_zm_power_up_max_ammo", # "zombie/powerup_max_ammo", &function_b695b971, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("full_ammo", "p7_zm_power_up_max_ammo", #"zombie/powerup_max_ammo", &function_b695b971, 0, 0, 0);
   }
 }
 

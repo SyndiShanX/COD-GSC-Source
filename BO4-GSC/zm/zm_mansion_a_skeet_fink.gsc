@@ -64,17 +64,17 @@ init() {
   clientfield::register("vehicle", "" + # "hash_7a260c02e8c345c2", 8000, 1, "int");
   clientfield::register("actor", "" + # "hash_7a260c02e8c345c2", 8000, 1, "int");
   clientfield::register("world", "" + # "hash_5f0c4b68b2a6a75d", 16000, 1, "int");
-  zm_sq_modules::function_d8383812("ee_asf_altar", 8000, # "a_skeet_fink_charge", &function_123eb361, &function_9bb74431, 1);
+  zm_sq_modules::function_d8383812("ee_asf_altar", 8000, #"a_skeet_fink_charge", &function_123eb361, &function_9bb74431, 1);
   register_steps();
   level.w_stake_knife = getweapon(#"stake_knife");
   level thread function_93bd3e32();
 }
 
 register_steps() {
-  zm_sq::register(#"zm_mansion_a_skeet_fink", # "step_1", # "a_skeet_fink_step_1", &function_ff75fde6, &function_ff3b1efd);
-  zm_sq::register(#"zm_mansion_a_skeet_fink", # "step_2", # "a_skeet_fink_step_2", &function_39e0636, &function_4fccc01f);
-  zm_sq::register(#"zm_mansion_a_skeet_fink", # "step_3", # "a_skeet_fink_step_3", &function_15c82a8a, &function_62856590);
-  zm_sq::register(#"zm_mansion_a_skeet_fink", # "step_4", # "a_skeet_fink_step_4", &function_2879cfed, &function_354f0b24);
+  zm_sq::register(#"zm_mansion_a_skeet_fink", #"step_1", #"a_skeet_fink_step_1", &function_ff75fde6, &function_ff3b1efd);
+  zm_sq::register(#"zm_mansion_a_skeet_fink", #"step_2", #"a_skeet_fink_step_2", &function_39e0636, &function_4fccc01f);
+  zm_sq::register(#"zm_mansion_a_skeet_fink", #"step_3", #"a_skeet_fink_step_3", &function_15c82a8a, &function_62856590);
+  zm_sq::register(#"zm_mansion_a_skeet_fink", #"step_4", #"a_skeet_fink_step_4", &function_2879cfed, &function_354f0b24);
 }
 
 function_93bd3e32() {
@@ -125,7 +125,7 @@ function_f2971bfd(b_respawn = 0) {
 }
 
 function_ff75fde6(var_a276c861) {
-  zm_melee_weapon::init(#"stake_knife", # "stake_knife_flourish", undefined, "", undefined, "bowie", undefined);
+  zm_melee_weapon::init(#"stake_knife", #"stake_knife_flourish", undefined, "", undefined, "bowie", undefined);
   zm_loadout::register_melee_weapon_for_level(#"stake_knife");
   clientfield::set("" + # "hash_300ef0a8a2afdab9", level.var_5e01899a[0]);
   clientfield::set("" + # "hash_300eefa8a2afd906", level.var_5e01899a[1]);
@@ -337,7 +337,7 @@ function_1dc8ad86() {
   b_fail = 0;
 
   while(true) {
-    s_waitresult = self waittill(#"hash_15ccd1fdda38284a", # "rune_bashed");
+    s_waitresult = self waittill(#"hash_15ccd1fdda38284a", #"rune_bashed");
 
     if(s_waitresult._notify == # "hash_15ccd1fdda38284a") {
       if(s_waitresult.var_c8407ea2 == var_1fc5672) {

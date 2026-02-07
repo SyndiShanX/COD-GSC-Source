@@ -89,7 +89,7 @@ delayed_jump_pad_start(who) {
 
 jump_pad_start(ent_player, endon_condition) {
   self endon(#"endon_condition");
-  ent_player endon(#"left_jump_pad", # "death", # "disconnect");
+  ent_player endon(#"left_jump_pad", #"death", #"disconnect");
   end_point = undefined;
   start_point = undefined;
   z_velocity = undefined;
@@ -305,7 +305,7 @@ jump_pad_cancel(ent_player) {
 }
 
 jump_pad_move(vec_direction, flt_time, struct_poi, trigger) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   start_time = gettime();
   jump_time = flt_time * 500;
   attract_dist = undefined;
@@ -418,7 +418,7 @@ failsafe_pad_poi_clean(ent_trig, ent_poi) {
 }
 
 jump_pad_enemy_follow_or_ignore(ent_poi) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   zombies = getaiteamarray(level.zombie_team);
   players = getplayers();
   valid_players = 0;
@@ -476,7 +476,7 @@ jump_pad_ignore_poi_cleanup(ent_poi) {
 }
 
 stop_chasing_the_sky(ent_poi) {
-  self endon(#"death", # "stop_chasing_the_sky");
+  self endon(#"death", #"stop_chasing_the_sky");
 
   while(isDefined(self._pad_follow) && self._pad_follow) {
     if(isDefined(self.favoriteenemy)) {

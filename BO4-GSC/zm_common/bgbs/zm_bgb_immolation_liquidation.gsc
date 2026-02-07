@@ -9,7 +9,7 @@
 #namespace zm_bgb_immolation_liquidation;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_immolation_liquidation", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_immolation_liquidation", &__init__, undefined, #"bgb");
 }
 
 __init__() {

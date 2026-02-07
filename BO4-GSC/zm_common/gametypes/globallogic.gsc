@@ -45,7 +45,7 @@
 #namespace globallogic;
 
 autoexec __init__system__() {
-  system::register(#"globallogic", &__init__, undefined, # "visionset_mgr");
+  system::register(#"globallogic", &__init__, undefined, #"visionset_mgr");
 }
 
 __init__() {
@@ -606,11 +606,11 @@ hostidledout() {
 }
 
 incrementmatchcompletionstat(gamemode, playedorhosted, stat) {
-  self stats::inc_stat(#"gamehistory", gamemode, # "modehistory", playedorhosted, stat, 1);
+  self stats::inc_stat(#"gamehistory", gamemode, #"modehistory", playedorhosted, stat, 1);
 }
 
 setmatchcompletionstat(gamemode, playedorhosted, stat) {
-  self stats::set_stat(#"gamehistory", gamemode, # "modehistory", playedorhosted, stat, 1);
+  self stats::set_stat(#"gamehistory", gamemode, #"modehistory", playedorhosted, stat, 1);
 }
 
 getendreasontext() {
@@ -757,15 +757,15 @@ endgame(winner, endreasontext) {
     player zm_weapons::updateweapontimingszm(newtime);
     player bbplayermatchend(gamelength, endreasontext, bbgameover);
     clientnum = player getentitynumber();
-    player stats::set_stat(#"afteractionreportstats", # "clientnum", clientnum);
+    player stats::set_stat(#"afteractionreportstats", #"clientnum", clientnum);
 
     if((level.rankedmatch || level.leaguematch) && !player issplitscreen()) {
       if(isDefined(player.setpromotion)) {
-        player stats::set_stat(#"afteractionreportstats", # "lobbypopup", # "promotion");
+        player stats::set_stat(#"afteractionreportstats", #"lobbypopup", #"promotion");
         continue;
       }
 
-      player stats::set_stat(#"afteractionreportstats", # "lobbypopup", # "summary");
+      player stats::set_stat(#"afteractionreportstats", #"lobbypopup", #"summary");
     }
   }
 

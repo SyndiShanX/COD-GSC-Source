@@ -10,7 +10,7 @@
 #namespace zm_ai_white_nova_crawler;
 
 autoexec __init__system__() {
-  system::register(#"zm_ai_white_nova_crawler", &__init__, undefined, # "zm_ai_nova_crawler");
+  system::register(#"zm_ai_white_nova_crawler", &__init__, undefined, #"zm_ai_nova_crawler");
 }
 
 __init__() {

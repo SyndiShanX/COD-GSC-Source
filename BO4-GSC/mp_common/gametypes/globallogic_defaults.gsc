@@ -34,7 +34,7 @@ getwinningteamfromloser(losing_team) {
 default_onforfeit(params) {
   level.gameforfeited = 1;
   level notify(#"forfeit in progress");
-  level endon(#"forfeit in progress", # "abort forfeit");
+  level endon(#"forfeit in progress", #"abort forfeit");
   forfeit_delay = 20;
   announcement(game.strings[# "opponent_forfeiting_in"], forfeit_delay, 0);
   wait 10;

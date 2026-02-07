@@ -64,7 +64,7 @@ function_567e5a33() {
       }
 
       self.var_b999a026 = 1;
-      self waittill(#"weapon_fired", # "enemy", # "missile_fire");
+      self waittill(#"weapon_fired", #"enemy", #"missile_fire");
     }
 
     if(!(isDefined(var_70a33a38) && var_70a33a38) && isDefined(self.var_b999a026) && self.var_b999a026) {

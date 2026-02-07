@@ -38,7 +38,7 @@ start_gametype() {
     visuals[0] = get_visual_for_trigger(trigger, pickup_models);
     assert(isDefined(visuals[0]));
     visuals[0] pickup_item_init();
-    pickup_item_object = gameobjects::create_use_object(#"neutral", trigger, visuals, (0, 0, 32), # "pickup_item");
+    pickup_item_object = gameobjects::create_use_object(#"neutral", trigger, visuals, (0, 0, 32), #"pickup_item");
     pickup_item_object gameobjects::allow_use(#"any");
     pickup_item_object gameobjects::set_use_time(0);
     pickup_item_object.onuse = &on_touch;

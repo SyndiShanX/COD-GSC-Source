@@ -231,10 +231,10 @@ pickup_placeable_mine_trigger_listener(trigger, player) {
 }
 
 pickup_placeable_mine_trigger_listener_enable(trigger, player) {
-  self endon(#"delete", # "death");
+  self endon(#"delete", #"death");
 
   while(true) {
-    player waittill("zmb_enable_" + self.weapon.name + "_prompt", # "spawned_player");
+    player waittill("zmb_enable_" + self.weapon.name + "_prompt", #"spawned_player");
 
     if(!isDefined(trigger)) {
       return;
@@ -246,7 +246,7 @@ pickup_placeable_mine_trigger_listener_enable(trigger, player) {
 }
 
 pickup_placeable_mine_trigger_listener_disable(trigger, player) {
-  self endon(#"delete", # "death");
+  self endon(#"delete", #"death");
 
   while(true) {
     player waittill("zmb_disable_" + self.weapon.name + "_prompt");

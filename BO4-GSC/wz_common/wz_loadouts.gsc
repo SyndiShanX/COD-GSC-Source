@@ -11,7 +11,7 @@
 #namespace wz_loadouts;
 
 autoexec __init__system__() {
-  system::register(#"wz_loadouts", &__init__, undefined, # "item_inventory");
+  system::register(#"wz_loadouts", &__init__, undefined, #"item_inventory");
 }
 
 __init__() {

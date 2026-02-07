@@ -90,7 +90,7 @@ function_25c39229() {
 
 function_6e60e5b8() {
   level endon(#"end_game");
-  self endon(#"death", # "hash_5a83ec4a73b3dc6");
+  self endon(#"death", #"hash_5a83ec4a73b3dc6");
   level waittill(#"start_of_round");
   var_980ea73 = level.round_number;
 
@@ -105,7 +105,7 @@ function_6e60e5b8() {
 
 function_934d3464() {
   level endon(#"end_game");
-  self endon(#"hash_10404a179a65cd64", # "disconnect");
+  self endon(#"hash_10404a179a65cd64", #"disconnect");
   var_6bf54ff2 = array(#"zone_cargo");
 
   while(true) {
@@ -126,7 +126,7 @@ function_934d3464() {
 }
 
 function_6b34cb92() {
-  level endon(#"end_game", # "hash_5c62047f5c8fdbdd", # "hash_6cd15a5470217958");
+  level endon(#"end_game", #"hash_5c62047f5c8fdbdd", #"hash_6cd15a5470217958");
 
   while(true) {
     level waittill(#"end_of_round");
@@ -205,7 +205,7 @@ function_1b454689() {
         }
 
         if(self.var_b5982a89.size > 7) {
-          self waittill(#"fasttravel_finished", # "death");
+          self waittill(#"fasttravel_finished", #"death");
           wait 1;
 
           if(isDefined(self)) {
@@ -223,7 +223,7 @@ function_1b454689() {
 
 function_46c56964() {
   level endon(#"end_game");
-  self endon(#"disconnect", # "hash_7ef6edd06b06d480");
+  self endon(#"disconnect", #"hash_7ef6edd06b06d480");
   self.var_574b5261 = 0;
 
   while(true) {
@@ -231,7 +231,7 @@ function_46c56964() {
       iprintln("<dev string:x119>" + self.var_574b5261);
     }
 
-    waitresult = self waittill(#"weapon_fired", # "weapon_switch_started", # "offhand_fire", # "grenade_pullback");
+    waitresult = self waittill(#"weapon_fired", #"weapon_switch_started", #"offhand_fire", #"grenade_pullback");
     self.var_574b5261 = 0;
   }
 }

@@ -28,7 +28,7 @@ spawned(local_client_num, bundle) {
   }
 
   killstreak_detect::function_8ac48939(bundle);
-  renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_ebb37dab2ee0ae3");
+  renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_ebb37dab2ee0ae3");
 }
 
 function_48e9536e() {

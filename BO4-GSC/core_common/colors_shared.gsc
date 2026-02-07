@@ -33,29 +33,29 @@ __init__() {
 
   for(i = 0; i < nodes.size; i++) {
     if(isDefined(nodes[i].script_color_allies)) {
-      nodes[i] add_node_to_global_arrays(nodes[i].script_color_allies, # "allies");
+      nodes[i] add_node_to_global_arrays(nodes[i].script_color_allies, #"allies");
     }
 
     if(isDefined(nodes[i].script_color_axis)) {
-      nodes[i] add_node_to_global_arrays(nodes[i].script_color_axis, # "axis");
+      nodes[i] add_node_to_global_arrays(nodes[i].script_color_axis, #"axis");
     }
 
     if(isDefined(nodes[i].script_color_team3)) {
-      nodes[i] add_node_to_global_arrays(nodes[i].script_color_team3, # "team3");
+      nodes[i] add_node_to_global_arrays(nodes[i].script_color_team3, #"team3");
     }
   }
 
   for(i = 0; i < volumes.size; i++) {
     if(isDefined(volumes[i].script_color_allies)) {
-      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_allies, # "allies");
+      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_allies, #"allies");
     }
 
     if(isDefined(volumes[i].script_color_axis)) {
-      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_axis, # "axis");
+      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_axis, #"axis");
     }
 
     if(isDefined(volumes[i].script_color_team3)) {
-      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_team3, # "team3");
+      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_team3, #"team3");
     }
   }
 
@@ -134,15 +134,15 @@ __init__() {
 __main__() {
   foreach(trig in trigger::get_all()) {
     if(isDefined(trig.script_color_allies)) {
-      trig thread trigger_issues_orders(trig.script_color_allies, # "allies");
+      trig thread trigger_issues_orders(trig.script_color_allies, #"allies");
     }
 
     if(isDefined(trig.script_color_axis)) {
-      trig thread trigger_issues_orders(trig.script_color_axis, # "axis");
+      trig thread trigger_issues_orders(trig.script_color_axis, #"axis");
     }
 
     if(isDefined(trig.script_color_team3)) {
-      trig thread trigger_issues_orders(trig.script_color_team3, # "team3");
+      trig thread trigger_issues_orders(trig.script_color_team3, #"team3");
     }
   }
 }
@@ -251,9 +251,9 @@ debug_colornodes() {
     ai try_to_draw_line_to_node();
   }
 
-  draw_colornodes(array, # "allies");
-  draw_colornodes(array, # "axis");
-  draw_colornodes(array, # "team3");
+  draw_colornodes(array, #"allies");
+  draw_colornodes(array, #"axis");
+  draw_colornodes(array, #"team3");
 }
 
 draw_colornodes(array, team) {
@@ -769,15 +769,15 @@ player_color_node() {
 
 color_node_finds_a_user() {
   if(isDefined(self.script_color_allies)) {
-    color_node_finds_user_from_colorcodes(self.script_color_allies, # "allies");
+    color_node_finds_user_from_colorcodes(self.script_color_allies, #"allies");
   }
 
   if(isDefined(self.script_color_axis)) {
-    color_node_finds_user_from_colorcodes(self.script_color_axis, # "axis");
+    color_node_finds_user_from_colorcodes(self.script_color_axis, #"axis");
   }
 
   if(isDefined(self.script_color_team3)) {
-    color_node_finds_user_from_colorcodes(self.script_color_team3, # "team3");
+    color_node_finds_user_from_colorcodes(self.script_color_team3, #"team3");
   }
 }
 
@@ -870,7 +870,7 @@ set_goal_and_volume(node) {
 color_force_goal(node) {
   self endon(#"death");
   self thread ai::force_goal(node, 1, "stop_color_forcegoal", 1);
-  self waittill(#"goal", # "stop_color_move");
+  self waittill(#"goal", #"stop_color_move");
   self notify(#"stop_color_forcegoal");
 }
 
@@ -884,7 +884,7 @@ my_current_node_delays() {
 
 process_color_order_to_ai(node, trigger, counter) {
   thread decrementcolorusers(node);
-  self endon(#"stop_color_move", # "death");
+  self endon(#"stop_color_move", #"death");
 
   if(isDefined(trigger)) {
     trigger util::script_delay();
@@ -958,7 +958,7 @@ get_best_available_new_colored_node() {
 }
 
 process_stop_short_of_node(node) {
-  self endon(#"stopscript", # "death");
+  self endon(#"stopscript", #"death");
 
   if(isDefined(self.node)) {
     return;
@@ -1459,7 +1459,7 @@ new_color_being_set(color) {
   self notify(#"new_color_being_set");
   self.new_force_color_being_set = 1;
   left_color_node();
-  self endon(#"new_color_being_set", # "death");
+  self endon(#"new_color_being_set", #"death");
   waittillframeend();
   waittillframeend();
 

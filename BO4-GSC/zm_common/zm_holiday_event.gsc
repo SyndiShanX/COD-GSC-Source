@@ -19,7 +19,7 @@
 #namespace zm_holiday_event;
 
 autoexec __init__system__() {
-  system::register(#"zm_holiday_event", &__init__, &__main__, # "zm_loadout");
+  system::register(#"zm_holiday_event", &__init__, &__main__, #"zm_loadout");
 }
 
 __init__() {
@@ -271,7 +271,7 @@ function_efe5c28() {
 function_55f8e11e(e_box) {
   self endon(#"death");
   e_box waittill(#"randomization_done");
-  a_str_lines = array(#"hash_2f00ed381261784b", # "hash_2f00ec3812617698", # "hash_2f00ef3812617bb1");
+  a_str_lines = array(#"hash_2f00ed381261784b", #"hash_2f00ec3812617698", #"hash_2f00ef3812617bb1");
   playsoundatposition(array::random(a_str_lines), e_box.origin);
   self.var_c21099c0 = 0;
   self.var_16fc6934 = undefined;

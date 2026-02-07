@@ -102,7 +102,7 @@ function_63e57124() {
     }
 
     if(wpn_cur == level.hero_weapon[# "scepter"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_7ebea2becf0c1aee");
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_7ebea2becf0c1aee");
       self thread function_4521ac7e(wpn_cur, 1);
       self thread function_4493c71b(wpn_cur, 1);
       playrumbleonposition("grenade_rumble", self.origin);
@@ -110,7 +110,7 @@ function_63e57124() {
     }
 
     if(wpn_cur == level.hero_weapon[# "scepter"][1]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_7ebea2becf0c1aee");
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_7ebea2becf0c1aee");
       self thread function_4521ac7e(wpn_cur, 2);
       self thread function_4493c71b(wpn_cur, 2);
       playrumbleonposition("grenade_rumble", self.origin);
@@ -120,9 +120,9 @@ function_63e57124() {
 
     if(wpn_cur == level.hero_weapon[# "scepter"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_5ba4f6bd62a74330");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_5ba4f6bd62a74330");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_57c3251d6df56d4");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_57c3251d6df56d4");
       }
 
       self.var_7e973e30 = wpn_prev;
@@ -146,7 +146,7 @@ function_304a3c9b(var_c34665fc) {
 }
 
 function_4521ac7e(w_curr, n_lvl) {
-  self endoncallback(&function_304a3c9b, # "hero_weapon_change", # "player_downed", # "disconnect", # "hero_weapon_power_off");
+  self endoncallback(&function_304a3c9b, #"hero_weapon_change", #"player_downed", #"disconnect", #"hero_weapon_power_off");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_power");
@@ -196,11 +196,11 @@ function_4521ac7e(w_curr, n_lvl) {
 }
 
 function_4493c71b(weapon, n_lvl = 1) {
-  self endon(#"hero_weapon_change", # "bled_out", # "disconnect");
+  self endon(#"hero_weapon_change", #"bled_out", #"disconnect");
 
   while(true) {
     if(n_lvl < 3) {
-      self waittill(#"weapon_melee_power_left", # "weapon_melee");
+      self waittill(#"weapon_melee_power_left", #"weapon_melee");
     } else {
       self waittill(#"weapon_melee_power_left");
     }
@@ -237,7 +237,7 @@ function_89fc5431() {
 }
 
 function_e874c3e1(weapon) {
-  self endon(#"hero_weapon_change", # "death");
+  self endon(#"hero_weapon_change", #"death");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
@@ -266,7 +266,7 @@ function_fe3f086c(e_target, weapon = level.weaponnone) {
 }
 
 chop_actor(e_target, weapon = level.weaponnone) {
-  self endon(#"hero_weapon_change", # "bled_out", # "disconnect");
+  self endon(#"hero_weapon_change", #"bled_out", #"disconnect");
 
   if(!isalive(e_target)) {
     return;
@@ -376,7 +376,7 @@ reflect_shot(d, n) {
 }
 
 function_be8ae52f(w_curr) {
-  self endon(#"death", # "stop_damage");
+  self endon(#"death", #"stop_damage");
 
   switch (w_curr.name) {
     case # "hero_scepter_lv2":
@@ -566,7 +566,7 @@ get_closest_tag(v_pos) {
 }
 
 function_254a7556() {
-  self endon(#"disconnect", # "laststand", # "stop_damage");
+  self endon(#"disconnect", #"laststand", #"stop_damage");
 
   while(true) {
     self thread scepter_rumble(5);
@@ -768,7 +768,7 @@ function_97429d68(n_time = 5) {
 }
 
 function_75e6e51c(n_time = 5, e_attacker) {
-  self endon(#"hash_6b85fa3a80afb815", # "death");
+  self endon(#"hash_6b85fa3a80afb815", #"death");
 
   if(isDefined(self.aat_turned) && self.aat_turned) {
     return;
@@ -800,7 +800,7 @@ function_75e6e51c(n_time = 5, e_attacker) {
 }
 
 function_717a1af2() {
-  self endon(#"bled_out", # "death", # "beacon_expired");
+  self endon(#"bled_out", #"death", #"beacon_expired");
   w_beacon = getweapon(#"hero_scepter_lv3");
   self function_1728db6f(0);
   self.var_d6fe2916 = 0;
@@ -892,7 +892,7 @@ function_22bebb6b() {
 }
 
 function_b603ab34(w_beacon) {
-  self endoncallback(&function_d14a3750, # "disconnect");
+  self endoncallback(&function_d14a3750, #"disconnect");
   level scene::function_27f5972e(#"p8_fxanim_zm_zod_staff_ra_bundle");
   waitframe(14);
   self thread scepter_rumble(4);
@@ -925,7 +925,7 @@ function_b603ab34(w_beacon) {
   if(var_1c136516 > 5) {
     self thread function_d3dc001e(w_beacon);
     zm_utility::function_3e549e65();
-    self waittill(#"beacon_off", # "beacon_retrieved", # "death", # "destroy_beacon");
+    self waittill(#"beacon_off", #"beacon_retrieved", #"death", #"destroy_beacon");
     zm_utility::function_b7e5029f();
   }
 
@@ -947,7 +947,7 @@ function_d14a3750(var_c34665fc) {
 }
 
 function_d3dc001e(w_beacon) {
-  self endoncallback(&function_e7e5d6f5, # "beacon_retrieved", # "death");
+  self endoncallback(&function_e7e5d6f5, #"beacon_retrieved", #"death");
   self.var_80612bea = 1;
 
   while(true) {
@@ -1035,7 +1035,7 @@ beacon_fx_off() {
 }
 
 beacon_rumble() {
-  self endon(#"disconnect", # "beacon_fx_off");
+  self endon(#"disconnect", #"beacon_fx_off");
 
   while(isDefined(self.mdl_beacon)) {
     self.mdl_beacon playrumbleonentity(#"zm_weap_scepter_planted_idle_rumble");
@@ -1072,7 +1072,7 @@ function_f168b337() {
 }
 
 beacon_loop(w_beacon, var_4eaa1f4c) {
-  self endon(#"beacon_retrieved", # "death", # "bled_out", # "disconnect");
+  self endon(#"beacon_retrieved", #"death", #"bled_out", #"disconnect");
 
   while(true) {
     slot = self gadgetgetslot(w_beacon);
@@ -1129,7 +1129,7 @@ function_15c2525e(var_a7e57ef9, n_loop_time) {
 }
 
 beacon_check(e_player, var_a7e57ef9, n_loop_time) {
-  e_player endon(#"beacon_retrieved", # "bled_out", # "death", # "disconnect");
+  e_player endon(#"beacon_retrieved", #"bled_out", #"death", #"disconnect");
 
   if(isalive(self) && isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
@@ -1178,7 +1178,7 @@ check_for_range_and_los(v_attack_source, n_allowed_z_diff, n_radius_sq) {
 }
 
 function_888d5bd9(e_player) {
-  e_player endon(#"beacon_retrieved", # "bled_out", # "death");
+  e_player endon(#"beacon_retrieved", #"bled_out", #"death");
   assert(isDefined(e_player));
   var_2a0066d5 = 57600;
   var_a7e57ef9 = e_player.mdl_beacon.origin;
@@ -1302,10 +1302,10 @@ scepter_rumble(var_b2e05bae) {
 }
 
 function_68ff89f7(w_scepter) {
-  self endon(#"hero_weapon_change", # "disconnect", # "bled_out");
+  self endon(#"hero_weapon_change", #"disconnect", #"bled_out");
   s_result = self waittill(#"weapon_melee");
 
   if(s_result.weapon == w_scepter) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "scepter");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"scepter");
   }
 }

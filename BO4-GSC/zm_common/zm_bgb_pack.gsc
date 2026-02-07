@@ -126,7 +126,7 @@ function_4de6c08a(name) {
 
 function_dc818f99() {
   self notify(#"hash_67100af32a422470");
-  self endon(#"hash_67100af32a422470", # "disconnect");
+  self endon(#"hash_67100af32a422470", #"disconnect");
   self.var_bd0d5874 = 0;
   self.var_8ef176f3 = 0;
   self.var_9302665 = 0;
@@ -348,7 +348,7 @@ function_91586d27() {
 
 function_c47c57e8() {
   self notify(#"hash_25f0b773a3164732");
-  self endon(#"hash_25f0b773a3164732", # "disconnect");
+  self endon(#"hash_25f0b773a3164732", #"disconnect");
 
   for(;;) {
     if(!self secondaryoffhandbuttonpressed()) {
@@ -372,7 +372,7 @@ function_c47c57e8() {
 
 function_619ee0f4() {
   self notify(#"hash_2ee12d1cd927db0c");
-  self endon(#"hash_2ee12d1cd927db0c", # "disconnect");
+  self endon(#"hash_2ee12d1cd927db0c", #"disconnect");
   self.zmb_weapons_mastery_lmg = 0;
 
   for(;;) {
@@ -397,7 +397,7 @@ function_619ee0f4() {
 
 function_261a46f4() {
   self notify(#"hash_5f9bde10649db4f9");
-  self endon(#"hash_5f9bde10649db4f9", # "disconnect");
+  self endon(#"hash_5f9bde10649db4f9", #"disconnect");
   self.var_6e1ea617 = 0;
 
   for(;;) {
@@ -422,7 +422,7 @@ function_261a46f4() {
 
 function_efe33e13() {
   self notify(#"hash_5d9f5eee2722843a");
-  self endon(#"hash_5d9f5eee2722843a", # "disconnect");
+  self endon(#"hash_5d9f5eee2722843a", #"disconnect");
   self.var_22fbe1cc = 0;
 
   for(;;) {
@@ -468,7 +468,7 @@ global_cooldown(n_index) {
     n_cooldown = function_b29fc421();
   }
 
-  result = self waittilltimeout(n_cooldown, # "hash_738988561a113fac");
+  result = self waittilltimeout(n_cooldown, #"hash_738988561a113fac");
 
   if(result._notify === "<dev string:xc3>") {
     var_10b7b97a = 1;
@@ -577,7 +577,7 @@ slot_cooldown(n_index) {
 
   self thread function_7dd2a9c9(n_index, n_cooldown);
   wait 0.05;
-  result = self waittilltimeout(n_cooldown, # "hash_738988561a113fac");
+  result = self waittilltimeout(n_cooldown, #"hash_738988561a113fac");
 
   if(result._notify === "<dev string:xc3>") {
     var_10b7b97a = 1;
@@ -600,7 +600,7 @@ slot_cooldown(n_index) {
 
 function_7dd2a9c9(n_index, n_cooldown) {
   self notify("end_slot_cooldown" + n_index);
-  self endon("end_slot_cooldown" + n_index, # "disconnect", # "hash_738988561a113fac");
+  self endon("end_slot_cooldown" + n_index, #"disconnect", #"hash_738988561a113fac");
 
   if(n_cooldown > 0) {
     n_percentage = 0.01 * n_cooldown / 20;
@@ -625,7 +625,7 @@ function_7dd2a9c9(n_index, n_cooldown) {
 }
 
 function_d84ec5ee(var_707fd977) {
-  self endon(#"disconnect", # "hash_738988561a113fac");
+  self endon(#"disconnect", #"hash_738988561a113fac");
   n_cooldown = 30;
 
   if(self hasperk(#"specialty_mod_cooldown")) {

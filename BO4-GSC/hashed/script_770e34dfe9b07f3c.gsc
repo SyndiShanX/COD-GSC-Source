@@ -94,7 +94,7 @@ on_end(round_reset) {
 }
 
 pap_machine_fx() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
 
   while(true) {
     var_4c755588 = function_34835ec7();
@@ -106,13 +106,13 @@ pap_machine_fx() {
     }
 
     var_4c755588 clientfield::set("" + # "hash_100f180bf5d2a517", 1);
-    var_4c755588 waittill(#"pap_taken", # "pap_timeout");
+    var_4c755588 waittill(#"pap_taken", #"pap_timeout");
     var_4c755588 clientfield::set("" + # "hash_100f180bf5d2a517", 0);
   }
 }
 
 function_34835ec7() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
 
   while(true) {
     var_4d8e32c8 = getEntArray("zm_pack_a_punch", "targetname");

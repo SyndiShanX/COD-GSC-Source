@@ -75,10 +75,10 @@ __init__() {
 __main__() {}
 
 init() {
-  level thread aat::register_immunity("zm_aat_brain_decay", # "werewolf", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "werewolf", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "werewolf", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "werewolf", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"werewolf", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"werewolf", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"werewolf", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"werewolf", 1, 1, 1);
 }
 
 function_c759ad64() {
@@ -311,7 +311,7 @@ function_eaceec8b() {
   self zm_score::function_82732ced();
   self.deathfunction = &zm_spawner::zombie_death_animscript;
   level thread zm_spawner::zombie_death_event(self);
-  namespace_81245006::initweakpoints(self, # "c_t8_zmb_werewolf_weakpoint_def");
+  namespace_81245006::initweakpoints(self, #"c_t8_zmb_werewolf_weakpoint_def");
 }
 
 function_ccbee20() {

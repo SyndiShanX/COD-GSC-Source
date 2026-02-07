@@ -12,7 +12,7 @@
 #namespace zm_bgb_perkaholic;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_perkaholic", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_perkaholic", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -40,7 +40,7 @@ validation() {
 }
 
 activation() {
-  self endon(#"fake_death", # "death", # "player_downed");
+  self endon(#"fake_death", #"death", #"player_downed");
 
   if(!self laststand::player_is_in_laststand() && self.sessionstate != "spectator") {
     self zm_perks::function_cc24f525();
@@ -62,7 +62,7 @@ activation() {
 function_cd55a662() {
   self notify(#"hash_764a30e1b90e56f6");
   self endon(#"hash_764a30e1b90e56f6");
-  self waittill(#"fake_death", # "player_downed", # "death");
+  self waittill(#"fake_death", #"player_downed", #"death");
 
   if(isDefined(self)) {
     self.var_1eba264f = undefined;

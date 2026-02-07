@@ -105,7 +105,7 @@ on_end_game() {
 
 function_2cdcf5c3() {
   if(getdvarint(#"hash_1ee1f013d124a26a", 1)) {
-    level util::delay(0.3, undefined, &scene::play, # "p8_fxanim_mp_urban_vehicle_testing_bundle", "Shot 1");
+    level util::delay(0.3, undefined, &scene::play, #"p8_fxanim_mp_urban_vehicle_testing_bundle", "Shot 1");
 
     if(util::isfirstround()) {
       level thread scene::play(#"p8_fxanim_mp_urban_building_open_bundle");

@@ -80,7 +80,7 @@ class cinteractobj {
 
   function function_768739b6() {
     level endon(#"game_ended");
-    e_object endon(#"death", # "gameobject_end_use");
+    e_object endon(#"death", #"gameobject_end_use");
     e_object.mdl_gameobject endon(#"death");
     level waittill(#"all_players_spawned");
 
@@ -781,8 +781,8 @@ function_71a1c90f() {
 
 function_d85d429b(var_7d01398c) {
   level endon(#"game_ended");
-  self.trigger endon(#"destroyed", # "death");
-  var_7d01398c.trigger endon(#"destroyed", # "death");
+  self.trigger endon(#"destroyed", #"death");
+  var_7d01398c.trigger endon(#"destroyed", #"death");
   self endon(#"death");
   var_7d01398c endon(#"death");
   self.trigger unlink();
@@ -810,7 +810,7 @@ function_d85d429b(var_7d01398c) {
         self.trigger unlink();
         self.trigger.origin = var_7d01398c.carrier.origin + (0, 0, 64);
         self.trigger linkto(var_7d01398c.carrier);
-        var_7d01398c waittill(#"dropped", # "reset", # "death");
+        var_7d01398c waittill(#"dropped", #"reset", #"death");
         self set_flags(0);
         self.interrupted = undefined;
         self.trigger unlink();
@@ -1114,7 +1114,7 @@ function_63f73e1d(soundalias) {
 
 pickup_object_delay(origin) {
   level endon(#"game_ended");
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.canpickupobject = 0;
 
   for(;;) {
@@ -1208,7 +1208,7 @@ ghost_visuals() {
 update_carry_object_objective_origin() {
   self endon(#"hash_431541b507a8c588");
   level endon(#"game_ended");
-  self.trigger endon(#"destroyed", # "death");
+  self.trigger endon(#"destroyed", #"death");
   objpingdelay = level.objectivepingdelay;
 
   for(;;) {
@@ -1257,7 +1257,7 @@ give_object(object) {
     self giveweapon(object.carryweapon);
 
     if(self isswitchingweapons()) {
-      self waittilltimeout(2, # "weapon_change");
+      self waittilltimeout(2, #"weapon_change");
     }
 
     self switchtoweaponimmediate(object.carryweapon);
@@ -1624,7 +1624,7 @@ should_be_reset(minz, maxz) {
 }
 
 pickup_timeout(minz, maxz) {
-  self endon(#"pickup_object", # "reset", # "death");
+  self endon(#"pickup_object", #"reset", #"death");
   waitframe(1);
 
   if(self should_be_reset(minz, maxz)) {
@@ -1794,7 +1794,7 @@ function_98c39cbc(b_enable) {
 
 track_carrier(object) {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death", # "drop_object");
+  self endon(#"disconnect", #"death", #"drop_object");
   waitframe(1);
 
   while(isDefined(object.carrier) && object.carrier == self && isalive(self)) {
@@ -1812,7 +1812,7 @@ track_carrier(object) {
 
 manual_drop_think() {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death", # "drop_object");
+  self endon(#"disconnect", #"death", #"drop_object");
 
   for(;;) {
     while(self attackbuttonpressed() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self meleebuttonpressed()) {
@@ -1831,7 +1831,7 @@ manual_drop_think() {
 
 droponusebutton() {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death", # "drop_object");
+  self endon(#"disconnect", #"death", #"drop_object");
 
   while(self usebuttonpressed()) {
     waitframe(1);
@@ -1848,7 +1848,7 @@ droponusebutton() {
 
 watchholdusedrop() {
   level endon(#"game_ended");
-  self endon(#"death", # "disconnect", # "drop_object");
+  self endon(#"death", #"disconnect", #"drop_object");
   assert(isDefined(self.carryobject));
   assert(isDefined(self.carryobject.droptrigger));
   trigger = self.carryobject.droptrigger;
@@ -1878,7 +1878,7 @@ watchholdusedrop() {
 
 droponholdusebutton() {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death", # "drop_object");
+  self endon(#"disconnect", #"death", #"drop_object");
 
   if(!isDefined(self.carryobject)) {
     return;
@@ -1907,7 +1907,7 @@ droponholdusebutton() {
 
 function_2544bab6() {
   level endon(#"game_ended");
-  self endon(#"death", # "disconnect", # "drop_object");
+  self endon(#"death", #"disconnect", #"drop_object");
   assert(isDefined(self.carryobject));
 
   while(true) {
@@ -1955,7 +1955,7 @@ function_2544bab6() {
 
 function_bee2a129() {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death", # "drop_object");
+  self endon(#"disconnect", #"death", #"drop_object");
 
   if(!isDefined(self.carryobject)) {
     return;
@@ -2258,7 +2258,7 @@ function_f4ccb04c(e_player, var_5098afd6 = 0) {
 
 use_object_use_think(disableinitialholddelay, disableweaponcyclingduringhold) {
   self.trigger.mdl_gameobject = self;
-  self.trigger endon(#"destroyed", # "death");
+  self.trigger endon(#"destroyed", #"death");
 
   if(self.usetime > 0 && disableinitialholddelay) {
     self.trigger usetriggerignoreuseholdtime();
@@ -2367,7 +2367,7 @@ use_object_use_think(disableinitialholddelay, disableweaponcyclingduringhold) {
 
 use_object_onuse(player) {
   level endon(#"game_ended");
-  self.trigger endon(#"destroyed", # "death");
+  self.trigger endon(#"destroyed", #"death");
 
   if(isDefined(self.classobj)) {
     self.classobj[[self.onuse]](self, player);
@@ -2458,7 +2458,7 @@ function_1b4d64d8(enabled) {
 
 use_object_prox_think() {
   level endon(#"game_ended");
-  self.trigger endon(#"destroyed", # "death");
+  self.trigger endon(#"destroyed", #"death");
   self thread prox_trigger_think();
 
   while(true) {
@@ -2818,7 +2818,7 @@ function_bbb55f41(sentient) {
 
 prox_trigger_think() {
   level endon(#"game_ended");
-  self.trigger endon(#"destroyed", # "death");
+  self.trigger endon(#"destroyed", #"death");
   entitynumber = self.entnum;
 
   while(true) {
@@ -2954,7 +2954,7 @@ allow_vehicle_proximity_pickup(b_enable) {
 }
 
 trigger_touch_think(object) {
-  object.trigger endon(#"destroyed", # "death");
+  object.trigger endon(#"destroyed", #"death");
   team = self.team;
   score = 1;
   player_use_rate = 1;
@@ -3277,7 +3277,7 @@ waitthenfreezeplayercontrolsifgameendedstill(wait_time = 1) {
 }
 
 take_use_weapon(useweapon) {
-  self endon(#"use_hold", # "death", # "disconnect");
+  self endon(#"use_hold", #"death", #"disconnect");
   level endon(#"game_ended");
 
   while(self getcurrentweapon() == useweapon && !self.throwinggrenade) {
@@ -3494,7 +3494,7 @@ update_objective() {
   }
 
   if(isDefined(self.e_object) && isDefined(self.e_object.var_c65066ad) && self.e_object.var_c65066ad) {
-    objective_setteam(self.objectiveid, # "none");
+    objective_setteam(self.objectiveid, #"none");
   } else {
     objective_setteam(self.objectiveid, self.ownerteam);
   }
@@ -4644,7 +4644,7 @@ play_interact_anim(e_player) {
     }
 
     if(isDefined(self.var_a7ef92ac) && self.var_a7ef92ac) {
-      s_waitresult = self waittill(#"gameobject_end_use_player", # "gameobject_abort", # "death");
+      s_waitresult = self waittill(#"gameobject_end_use_player", #"gameobject_abort", #"death");
 
       if(s_waitresult._notify === "gameobject_end_use_player") {
         e_align thread scene::play(str_player_scene, a_ents);
@@ -4696,7 +4696,7 @@ play_interact_anim(e_player) {
 }
 
 anchor_delete_watcher(mdl_anchor) {
-  self.e_object waittill(#"gameobject_end_use", # "gameobject_abort");
+  self.e_object waittill(#"gameobject_end_use", #"gameobject_abort");
   util::wait_network_frame();
 
   if(isDefined(mdl_anchor)) {

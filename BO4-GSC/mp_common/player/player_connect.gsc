@@ -477,7 +477,7 @@ init_character_index() {
         var_72964a59 = level.select_character;
       }
     } else if(sessionmodeiswarzonegame()) {
-      var_72964a59 = self stats::function_6d50f14b(#"cacloadouts", # "charactercontext", # "characterindex");
+      var_72964a59 = self stats::function_6d50f14b(#"cacloadouts", #"charactercontext", #"characterindex");
 
       if(var_72964a59 != 0 && isDefined(getgametypesetting(#"wzspectrerising")) && getgametypesetting(#"wzspectrerising")) {
         rf = getplayerrolefields(var_72964a59, currentsessionmode());

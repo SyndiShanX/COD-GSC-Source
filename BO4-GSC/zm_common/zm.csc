@@ -545,7 +545,7 @@ do_headshot_gib_fx() {
     playFX(i, level._effect[# "headshot_nochunks"], fxorigin, forwardvec, upvec);
   }
 
-  playSound(0, # "zmb_zombie_head_gib", fxorigin);
+  playSound(0, #"zmb_zombie_head_gib", fxorigin);
   wait 0.3;
 
   if(isDefined(self)) {
@@ -564,7 +564,7 @@ do_gib_fx(tag) {
     util::playFXOnTag(i, level._effect[# "animscript_gib_fx"], self, tag);
   }
 
-  playSound(0, # "zmb_death_gibs", self gettagorigin(tag));
+  playSound(0, #"zmb_death_gibs", self gettagorigin(tag));
 }
 
 do_gib(model, tag) {
@@ -598,7 +598,7 @@ do_gib(model, tag) {
     return;
   }
 
-  playSound(0, # "zmb_death_gibs", end_pos);
+  playSound(0, #"zmb_death_gibs", end_pos);
 }
 
 do_hat_gib(model, tag) {
@@ -875,7 +875,7 @@ handle_zombie_risers_foliage(localclientnum, oldval, newval, bnewent, binitialsn
 
   if(!oldval && newval) {
     localplayers = level.localplayers;
-    playSound(0, # "zmb_zombie_spawn", self.origin);
+    playSound(0, #"zmb_zombie_spawn", self.origin);
     burst_fx = level._effect[# "rise_burst_foliage"];
     billow_fx = level._effect[# "rise_billow_foliage"];
     type = "foliage";
@@ -892,7 +892,7 @@ handle_zombie_risers_water(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(!oldval && newval) {
     localplayers = level.localplayers;
-    playSound(0, # "zmb_zombie_spawn_water", self.origin);
+    playSound(0, #"zmb_zombie_spawn_water", self.origin);
     burst_fx = level._effect[# "rise_burst_water"];
     billow_fx = level._effect[# "rise_billow_water"];
     type = "water";
@@ -1026,7 +1026,7 @@ end_last_stand(clientnum) {
   println("<dev string:xe1>" + clientnum);
   wait 0.7;
   println("<dev string:x101>");
-  playSound(clientnum, # "revive_gasp");
+  playSound(clientnum, #"revive_gasp");
 }
 
 last_stand_thread(clientnum) {
@@ -1036,7 +1036,7 @@ last_stand_thread(clientnum) {
   pause = 0.5;
 
   for(vol = 0.5; true; vol = 1) {
-    id = playSound(clientnum, # "chr_heart_beat");
+    id = playSound(clientnum, #"chr_heart_beat");
     setsoundvolume(id, vol);
     wait pause;
 
@@ -1085,7 +1085,7 @@ last_stand_monitor(clientnum, state, oldstate) {
   if(level._laststand[clientnum]) {
     if(isDefined(level.lslooper)) {
       level.lslooper stopallloopsounds(0.7);
-      playSound(0, # "evt_laststand_in", (0, 0, 0));
+      playSound(0, #"evt_laststand_in", (0, 0, 0));
     }
 
     player notify(#"laststandend");
@@ -1098,8 +1098,8 @@ function_bbea98ae(localclientnum, b_igc_active) {
 }
 
 function_92f0c63(localclientnum) {
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "zm_friendly", # "hash_60913f86a5a5a3f1");
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "zm_friendly_ls", # "hash_60913f86a5a5a3f1");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly", #"hash_60913f86a5a5a3f1");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly_ls", #"hash_60913f86a5a5a3f1");
 }
 
 laststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

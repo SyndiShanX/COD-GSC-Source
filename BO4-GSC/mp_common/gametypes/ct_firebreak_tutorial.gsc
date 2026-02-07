@@ -297,7 +297,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 }
 
 function_9b9525e9() {
-  level endoncallback(&function_c84bc48, # "combattraining_logic_finished");
+  level endoncallback(&function_c84bc48, #"combattraining_logic_finished");
   level.var_1fa132d3 = 0;
   level.var_e6db911d = 1;
   level.var_6a0c3e3e = 1;
@@ -325,7 +325,7 @@ function_9b9525e9() {
   level notify(#"colbounds_tut_all_on");
   level notify(#"colbounds_tut_fin1_fights_start_on");
   level notify(#"colbounds_tut_puf_1_front_on");
-  level.var_e72728b8 = array(#"hero_flamethrower", # "gadget_radiation_field");
+  level.var_e72728b8 = array(#"hero_flamethrower", #"gadget_radiation_field");
   e_player function_d0815f2e();
   e_player function_de43fab3();
   e_player function_951ce866();
@@ -353,7 +353,7 @@ function_c84bc48(_hash) {
 }
 
 function_d0815f2e() {
-  level endon(#"combattraining_logic_finished", # "tut_stop");
+  level endon(#"combattraining_logic_finished", #"tut_stop");
 
   if(level flag::get("<dev string:x38>") && level.var_e3146bce !== "<dev string:x44>") {
     return;
@@ -361,7 +361,7 @@ function_d0815f2e() {
 
   level.var_8ca3c62 = 1;
   self ct_bots::function_26d45f32(1, 1);
-  level.var_e72728b8 = array(#"hero_flamethrower", # "gadget_radiation_field");
+  level.var_e72728b8 = array(#"hero_flamethrower", #"gadget_radiation_field");
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_fire_slide_2_nag", 30, 20);
   self thread ct_utils::function_61c3d59c(#"hash_15262616ac3924f0");
   self ct_utils::tutorial_goto("s_tut_purifier_1_goto");
@@ -425,7 +425,7 @@ function_29b75dd8() {
 }
 
 function_de43fab3() {
-  level endon(#"combattraining_logic_finished", # "tut_stop");
+  level endon(#"combattraining_logic_finished", #"tut_stop");
 
   if(level flag::get("<dev string:x38>") && level.var_e3146bce !== "<dev string:x55>") {
     return;
@@ -457,7 +457,7 @@ function_de43fab3() {
 
 function_78cc1a53() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_b4f8a043 = 0;
 
   while(isDefined(level.var_29324553) && level.var_29324553 || !(isDefined(level.var_86b67c3f) && level.var_86b67c3f)) {
@@ -516,7 +516,7 @@ function_cbb4f624() {
   self thread function_d50f326c();
 
   for(i = 0; i < level.var_e4db2e78.size; i++) {
-    ct_bots::activate_bots(1, # "axis", "bot_tut_puf2");
+    ct_bots::activate_bots(1, #"axis", "bot_tut_puf2");
     wait 0.25;
   }
 }
@@ -535,7 +535,7 @@ function_63777d5d(s_start) {
   level endon(#"combattraining_logic_finished");
   self endon(#"death");
   self thread ct_utils::function_5b59f3b7(s_start.origin, s_start.angles, 32, 0, 1, 0);
-  self waittill(#"damage", # "bot_chase_state");
+  self waittill(#"damage", #"bot_chase_state");
   self.prevstate = 3;
   self.var_ef59b90 = 3;
   level notify(#"hash_64e6e07be63b8d87");
@@ -544,7 +544,7 @@ function_63777d5d(s_start) {
 function_d50f326c() {
   level notify(#"hash_5170a3fc92d0b83");
   waitframe(1);
-  level endon(#"combattraining_logic_finished", # "hash_5170a3fc92d0b83");
+  level endon(#"combattraining_logic_finished", #"hash_5170a3fc92d0b83");
   self endon(#"death");
   level waittill(#"hash_64e6e07be63b8d87");
   wait 5;
@@ -562,7 +562,7 @@ function_d50f326c() {
 }
 
 function_951ce866() {
-  level endon(#"combattraining_logic_finished", # "tut_stop");
+  level endon(#"combattraining_logic_finished", #"tut_stop");
 
   if(level flag::get("<dev string:x38>") && level.var_e3146bce !== "<dev string:x66>") {
     return;
@@ -597,7 +597,7 @@ function_951ce866() {
 
 function_f5f15107() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death", # "hash_33333dd0736c30a1");
+  self endoncallback(&function_344aee09, #"death", #"hash_33333dd0736c30a1");
   level.var_acc68fdf = 0;
 
   while(isDefined(level.var_29324553) && level.var_29324553 || !(isDefined(level.var_86b67c3f) && level.var_86b67c3f)) {
@@ -641,16 +641,16 @@ function_f5f15107() {
   self ct_utils::function_61c3d59c("", undefined, "dynobj_KillWithPurifier");
   ct_utils::get_player() ct_utils::function_80bf685b(8);
   level.var_cea08ae7 = 0;
-  ct_bots::activate_bots(1, # "axis");
+  ct_bots::activate_bots(1, #"axis");
   ct_utils::function_654280be();
-  ct_bots::activate_bots(1, # "axis");
+  ct_bots::activate_bots(1, #"axis");
   wait 1;
   ct_utils::function_654280be();
   function_b3977527(2, 0);
   ct_utils::function_654280be();
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_jungle_halfway"));
   wait 1;
-  ct_bots::activate_bots(1, # "axis");
+  ct_bots::activate_bots(1, #"axis");
   ct_utils::function_654280be();
   function_b3977527(1, 0);
   wait 1;
@@ -667,7 +667,7 @@ function_f5f15107() {
 function_6bc15e29() {
   level endon(#"combattraining_logic_finished");
   self notify(#"hash_2189212647bbe100");
-  self endoncallback(&function_5ba71388, # "death", # "hash_2189212647bbe100");
+  self endoncallback(&function_5ba71388, #"death", #"hash_2189212647bbe100");
   var_43b8f3ab = getweapon(#"hero_flamethrower");
   var_76968823 = getweapon(#"gadget_health_regen");
   var_46ccfe18 = getweapon(#"bare_hands_ct");
@@ -744,13 +744,13 @@ function_b973c685(s_loc) {
 }
 
 function_feee3d4f() {
-  level endon(#"combattraining_logic_finished", # "tut_stop");
+  level endon(#"combattraining_logic_finished", #"tut_stop");
   level.var_8ca3c62 = 4;
   self setnormalhealth(1);
   level notify(#"hash_479ebf389694847e");
   level notify(#"hash_24ddc9c4596243ed");
   level notify(#"colbounds_tut_rad_1_end_on");
-  level.var_e72728b8 = array(#"hero_flamethrower", # "gadget_radiation_field");
+  level.var_e72728b8 = array(#"hero_flamethrower", #"gadget_radiation_field");
   self ct_utils::function_6ad0c151();
   self allowmelee(0);
   self function_1b16f4e();
@@ -789,7 +789,7 @@ function_1b16f4e() {
 
 function_1bdf6fc7() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_a19a97d6 = 0;
 
   if(isDefined(self.allowdeath) && self.allowdeath) {
@@ -819,7 +819,7 @@ function_1bdf6fc7() {
   var_af24b2c1 = 0;
 
   do {
-    s_notify = self waittill(#"hash_251bbd6b8ba2fdfe", # "hash_4aaf6d6479e7cf20");
+    s_notify = self waittill(#"hash_251bbd6b8ba2fdfe", #"hash_4aaf6d6479e7cf20");
 
     if(s_notify._notify == # "hash_4aaf6d6479e7cf20") {
       self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_core_button_rele"));
@@ -843,7 +843,7 @@ function_1bdf6fc7() {
 }
 
 function_eca698c0() {
-  level endon(#"combattraining_logic_finished", # "tut_stop");
+  level endon(#"combattraining_logic_finished", #"tut_stop");
   level.var_8ca3c62 = 5;
   level notify(#"hash_479ebf389694847e");
   level notify(#"hash_24ddc9c4596243ed");
@@ -876,7 +876,7 @@ function_819e7863() {
 }
 
 function_2e0dee4d() {
-  level endon(#"combattraining_logic_finished", # "hash_364cd924c426f239");
+  level endon(#"combattraining_logic_finished", #"hash_364cd924c426f239");
   var_6b55373b = getweapon(#"gadget_radiation_field");
 
   while(!(isDefined(level.var_b43c22e4) && level.var_b43c22e4)) {
@@ -912,7 +912,7 @@ function_cdb43167(s_loc) {
 }
 
 function_fcc23983() {
-  level endon(#"combattraining_logic_finished", # "tut_stop");
+  level endon(#"combattraining_logic_finished", #"tut_stop");
   level.var_8ca3c62 = 6;
   self setnormalhealth(1);
   level notify(#"colbounds_tut_rad_1_noback_on");
@@ -949,7 +949,7 @@ function_12c35e8c() {
 
 function_6672b593(s_loc) {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_c0bccc48, # "death");
+  self endoncallback(&function_c0bccc48, #"death");
   s_dest = s_loc;
   self val::set("tut_ignoreall", "ignoreall", 1);
   self ct_utils::function_5b59f3b7(self.origin, self.angles, 16, 1, 1);
@@ -969,7 +969,7 @@ function_c0bccc48(_hash) {
 }
 
 function_235b259b() {
-  level endoncallback(&function_e73b7704, # "combattraining_logic_finished", # "tut_stop");
+  level endoncallback(&function_e73b7704, #"combattraining_logic_finished", #"tut_stop");
   level.var_8ca3c62 = 7;
   level.var_b7fa636e = "tut_fin1_fight1";
   self setnormalhealth(1);
@@ -1003,7 +1003,7 @@ function_e73b7704(_hash) {}
 
 tut_fin1_fight1() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_b7fa636e = "tut_fin1_fight1";
   level.var_59767ce4 = 0;
 
@@ -1068,7 +1068,7 @@ function_6de61bc0(s_loc) {
 
 tut_fin1_fight2() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_b7fa636e = "tut_fin1_fight2";
   level.var_59767ce4 = 0;
 
@@ -1132,7 +1132,7 @@ function_ea12b1f9(s_loc) {
 
 tut_fin1_fight3() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_b7fa636e = "tut_fin1_fight3";
   level.var_59767ce4 = 0;
 
@@ -1195,7 +1195,7 @@ function_b4a84da3(s_loc) {
 
 tut_fin1_fight4() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_b7fa636e = "tut_fin1_fight4";
   level.var_59767ce4 = 0;
 
@@ -1254,7 +1254,7 @@ function_11c76a66(s_loc) {
 
 tut_fin1_fight5() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_b7fa636e = "tut_fin1_fight5";
   level.var_59767ce4 = 0;
 
@@ -1331,7 +1331,7 @@ function_c7bb6e59() {
   level endon(#"combattraining_logic_finished");
   level.var_8ca3c62 = 8;
   level notify(#"colbounds_tut_windows_block_on");
-  level.var_e72728b8 = array(#"hero_flamethrower", # "gadget_radiation_field");
+  level.var_e72728b8 = array(#"hero_flamethrower", #"gadget_radiation_field");
   self gadgetdeactivate(0, getweapon(#"gadget_radiation_field"));
   self gadgetpowerset(0, 0);
   ct_utils::function_9e33850b();
@@ -1356,7 +1356,7 @@ function_c7bb6e59() {
 
 function_774b8cc2() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_d3640607 = 0;
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_fire_final_hut_secure_0", "vox_tvoi_tutor_fire_final_hut_secure_1", "vox_tvoi_tutor_fire_final_hut_secure_2"));
   level.var_d3640607 = 1;
@@ -1364,7 +1364,7 @@ function_774b8cc2() {
 
 function_d0f4d458() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, # "death");
+  self endoncallback(&function_344aee09, #"death");
   level.var_fe3f4aa0 = 0;
 
   while(isDefined(level.var_29324553) && level.var_29324553 || !(isDefined(level.var_86b67c3f) && level.var_86b67c3f)) {
@@ -1425,7 +1425,7 @@ function_bc2aaee0() {
 }
 
 function_cc50d201() {
-  level endon(#"combattraining_logic_finished", # "hash_ca983e29a84fac8");
+  level endon(#"combattraining_logic_finished", #"hash_ca983e29a84fac8");
   self endon(#"death");
   level.var_14a220fc = 8;
   level.var_4572ae40 = 0;
@@ -1464,7 +1464,7 @@ function_cc50d201() {
 
 function_bfebe12d() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_e178ad70, # "death");
+  self endoncallback(&function_e178ad70, #"death");
   level.var_51ff7a58 = 0;
   level flag::clear("fin2_killstreak_used");
 
@@ -1499,7 +1499,7 @@ function_e178ad70(_hash) {
 
 function_c513c2a2() {
   level notify(#"hash_3b2c18b6fb8ce809");
-  level endon(#"combattraining_logic_finished", # "hash_3b2c18b6fb8ce809");
+  level endon(#"combattraining_logic_finished", #"hash_3b2c18b6fb8ce809");
   self endon(#"death");
 
   do {
@@ -1532,12 +1532,12 @@ function_78986232(params) {
   weapon = params.weapon;
 
   if(isplayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
-    cost = killstreaks::get_killstreak_momentum_cost(eattacker, # "straferun");
+    cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"straferun");
     var_23efb519 = 13;
     var_595e41ee = 100;
     event = # "ekia";
     eventindex = level.scoreinfo[event][# "row"];
-    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, # "hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
+    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
 
     if(!eattacker ct_utils::function_a7540094()) {
@@ -1571,7 +1571,7 @@ function_63b62665() {
 
 function_d6addc3b(s_loc) {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_60668bf7, # "death");
+  self endoncallback(&function_60668bf7, #"death");
 
   if(!level flag::get("fin2_killstreak_used")) {
     wait 1;
@@ -1609,7 +1609,7 @@ function_6dcf47f6() {
 
 function_1fe2e258() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_3b6be7bd, # "death");
+  self endoncallback(&function_3b6be7bd, #"death");
 
   if(!(isDefined(self.var_7ca576f0) && self.var_7ca576f0)) {
     level.var_e72728b8 = [];
@@ -1632,7 +1632,7 @@ function_b3977527(n_count, b_keyline = 1, var_3aad7172 = 0, var_2960f558 = 1, st
   }
 
   level.var_aae2a361 = b_keyline && var_3aad7172;
-  level thread ct_bots::activate_bots(n_count, # "axis", str_targetname, var_216e25ba);
+  level thread ct_bots::activate_bots(n_count, #"axis", str_targetname, var_216e25ba);
 
   while(level.a_ai_targets.size < n_count) {
     waitframe(1);
@@ -1648,8 +1648,8 @@ function_b3977527(n_count, b_keyline = 1, var_3aad7172 = 0, var_2960f558 = 1, st
 }
 
 function_1ba28169(str_objective, a_str_vo, var_f54b52b3, var_8eb9348c = 5) {
-  level endoncallback(&function_986f117c, # "hash_3fe1dc3fe28515f3", # "combattraining_logic_finished");
-  self endoncallback(&function_986f117c, # "death", # "hash_3fe1dc3fe28515f3");
+  level endoncallback(&function_986f117c, #"hash_3fe1dc3fe28515f3", #"combattraining_logic_finished");
+  self endoncallback(&function_986f117c, #"death", #"hash_3fe1dc3fe28515f3");
   self ct_utils::function_61c3d59c(str_objective, a_str_vo);
   wait var_8eb9348c;
   self childthread function_9f1d8637(var_f54b52b3);
@@ -1811,14 +1811,14 @@ function_6487b2c7() {
 function_2969ccb4(var_43d50d89 = 1, var_463b195d = 1) {
   level notify(#"hash_6822294416b67f95");
   waitframe(1);
-  level endon(#"combattraining_logic_finished", # "hash_6822294416b67f95");
+  level endon(#"combattraining_logic_finished", #"hash_6822294416b67f95");
   var_43b8f3ab = getweapon(#"hero_flamethrower");
   var_5b505b10 = self getweaponammoclipsize(var_43b8f3ab);
   n_slot = self gadgetgetslot(var_43b8f3ab);
 
   while(true) {
     if(isDefined(level.var_e72728b8)) {
-      if(!isinarray(level.var_e72728b8, # "hero_flamethrower")) {
+      if(!isinarray(level.var_e72728b8, #"hero_flamethrower")) {
         if(isDefined(var_43d50d89) && var_43d50d89) {
           self gadgetpowerset(n_slot, 100);
           self setweaponammofuel(var_43b8f3ab, 100);
@@ -1925,7 +1925,7 @@ function_53e140e6() {
   var_af24b2c1 = 0;
 
   do {
-    s_notify = self waittill(#"hash_251bbd6b8ba2fdfe", # "hash_4aaf6d6479e7cf20");
+    s_notify = self waittill(#"hash_251bbd6b8ba2fdfe", #"hash_4aaf6d6479e7cf20");
 
     if(s_notify._notify == # "hash_4aaf6d6479e7cf20") {
       self ct_vo::function_831e0584(array("<dev string:x4b7>"));

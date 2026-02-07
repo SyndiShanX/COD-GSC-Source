@@ -230,7 +230,7 @@ exec() {
 
 mychanges_watcher() {
   if(self.target != level) {
-    self.target endon(#"death", # "delete");
+    self.target endon(#"death", #"delete");
   }
 
   level waittill(#"flowgraph_mychanges");

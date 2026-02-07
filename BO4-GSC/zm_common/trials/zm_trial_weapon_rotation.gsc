@@ -92,7 +92,7 @@ on_begin(var_44c4c23d, var_bd332e71) {
 
 take_player_weapons(n_interval, e_player) {
   e_player notify(#"hash_c1ae406f049058a");
-  e_player endon(#"disconnect", # "hash_c1ae406f049058a");
+  e_player endon(#"disconnect", #"hash_c1ae406f049058a");
   level endon(#"hash_7646638df88a3656");
 
   if(!e_player zm_laststand::laststand_has_players_weapons_returned()) {
@@ -190,7 +190,7 @@ return_weapon(o_trial) {
 function_413cffae(n_interval, e_player) {
   e_player notify(#"hash_14795fd12c6dae32");
   level endon(#"hash_7646638df88a3656");
-  e_player endon(#"disconnect", # "hash_14795fd12c6dae32");
+  e_player endon(#"disconnect", #"hash_14795fd12c6dae32");
 
   while(true) {
     e_player function_27cd9d6(0.15);
@@ -228,7 +228,7 @@ function_413cffae(n_interval, e_player) {
 function_579553d8(n_interval) {
   self notify("<dev string:x38>");
   self endon("<dev string:x38>");
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
 
   while(true) {
     debug2dtext((8, 400, 0), "<dev string:x4b>" + n_interval, undefined, undefined, undefined, 1);
@@ -239,7 +239,7 @@ function_579553d8(n_interval) {
 }
 
 function function_27cd9d6(var_41f1a085 = 0) {
-  self endon(#"disconnect", # "hash_14795fd12c6dae32");
+  self endon(#"disconnect", #"hash_14795fd12c6dae32");
   level endon(#"hash_7646638df88a3656");
   n_time = 0;
 

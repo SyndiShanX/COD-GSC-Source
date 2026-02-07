@@ -56,7 +56,7 @@ enable_laser(b_enable, n_index) {
 }
 
 watch_for_flash() {
-  self endon(#"watch_for_flash_and_stun", # "death");
+  self endon(#"watch_for_flash_and_stun", #"death");
 
   while(true) {
     waitresult = self waittill(#"flashbang");
@@ -67,7 +67,7 @@ watch_for_flash() {
 
 watch_for_flash_and_stun(n_index) {
   self notify(#"watch_for_flash_and_stun_end");
-  self endon(#"watch_for_flash_and_stun", # "death");
+  self endon(#"watch_for_flash_and_stun", #"death");
   self thread watch_for_flash();
 
   while(true) {
@@ -88,7 +88,7 @@ watch_for_flash_and_stun(n_index) {
 
 emp_watcher(n_index) {
   self notify(#"emp_thread_stop");
-  self endon(#"emp_thread_stop", # "death");
+  self endon(#"emp_thread_stop", #"death");
 
   while(true) {
     waitresult = self waittill(#"damage");
@@ -349,7 +349,7 @@ stop(n_index, b_clear_target = 0) {
 
 fire_for_time(n_time, n_index = 0) {
   assert(isDefined(n_time), "<dev string:x6a>");
-  self endon(#"death", # "drone_death", "_stop_turret" + _index(n_index), "turret_disabled" + _index(n_index));
+  self endon(#"death", #"drone_death", "_stop_turret" + _index(n_index), "turret_disabled" + _index(n_index));
   self notify("_fire_turret_for_time" + _index(n_index));
   self endon("_fire_turret_for_time" + _index(n_index));
   b_fire_forever = 0;
@@ -373,7 +373,7 @@ fire_for_time(n_time, n_index = 0) {
 
 shoot_at_target(e_target, n_time, v_offset, n_index, b_just_once) {
   assert(isDefined(e_target), "<dev string:xf9>");
-  self endon(#"drone_death", # "death");
+  self endon(#"drone_death", #"death");
   s_turret = _get_turret_data(n_index);
   s_turret flag::set("turret manual");
   _shoot_turret_at_target(e_target, n_time, v_offset, n_index, b_just_once);
@@ -381,7 +381,7 @@ shoot_at_target(e_target, n_time, v_offset, n_index, b_just_once) {
 }
 
 _shoot_turret_at_target(e_target, n_time, v_offset, n_index, b_just_once) {
-  self endon(#"drone_death", # "death", "_stop_turret" + _index(n_index), "turret_disabled" + _index(n_index));
+  self endon(#"drone_death", #"death", "_stop_turret" + _index(n_index), "turret_disabled" + _index(n_index));
   self notify("_shoot_turret_at_target" + _index(n_index));
   self endon("_shoot_turret_at_target" + _index(n_index));
 
@@ -618,7 +618,7 @@ _has_nearby_player_enemy(index, turret) {
 _listen_for_damage_on_actor(ai_user, n_index) {
   self endon(#"death");
   ai_user endon(#"death");
-  self endon("turret_disabled" + _index(n_index), "_turret_think" + _index(n_index), # "exit_vehicle");
+  self endon("turret_disabled" + _index(n_index), "_turret_think" + _index(n_index), #"exit_vehicle");
 
   while(true) {
     waitresult = ai_user waittill(#"damage");

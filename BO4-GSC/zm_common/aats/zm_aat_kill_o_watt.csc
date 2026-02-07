@@ -20,7 +20,7 @@ __init__() {
     return;
   }
 
-  aat::register("zm_aat_kill_o_watt", # "hash_17fd44c733f7c66b", "t7_icon_zm_aat_dead_wire");
+  aat::register("zm_aat_kill_o_watt", #"hash_17fd44c733f7c66b", "t7_icon_zm_aat_dead_wire");
   clientfield::register("actor", "zm_aat_kill_o_watt" + "_explosion", 1, 1, "counter", &function_d2ca081b, 0, 0);
   clientfield::register("vehicle", "zm_aat_kill_o_watt" + "_explosion", 1, 1, "counter", &function_d2ca081b, 0, 0);
   clientfield::register("actor", "zm_aat_kill_o_watt" + "_zap", 1, 1, "int", &function_846837f, 0, 0);
@@ -67,6 +67,6 @@ function_d2ca081b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     playFX(localclientnum, "zm_weapons/fx8_aat_elec_exp", v_fx_origin);
-    self playSound(localclientnum, # "zmb_aat_kilowatt_explode");
+    self playSound(localclientnum, #"zmb_aat_kilowatt_explode");
   }
 }

@@ -56,19 +56,19 @@ power_debris_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 }
 
 doorbuy_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "doorbuy_bought_fx"], # "hash_21b4bf152e90fd76", localclientnum, newval);
+  self function_e6eed4fe(level._effect[# "doorbuy_bought_fx"], #"hash_21b4bf152e90fd76", localclientnum, newval);
 }
 
 debrisbuy_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "debrisbuy_bought_fx"], # "hash_4bddd546f43487cf", localclientnum, newval);
+  self function_e6eed4fe(level._effect[# "debrisbuy_bought_fx"], #"hash_4bddd546f43487cf", localclientnum, newval);
 }
 
 power_door_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "powerdoor_bought_fx"], # "hash_5dcb54d98c9787b1", localclientnum, newval);
+  self function_e6eed4fe(level._effect[# "powerdoor_bought_fx"], #"hash_5dcb54d98c9787b1", localclientnum, newval);
 }
 
 power_debris_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "power_debris_bought_fx"], # "hash_4bddd546f43487cf", localclientnum, newval);
+  self function_e6eed4fe(level._effect[# "power_debris_bought_fx"], #"hash_4bddd546f43487cf", localclientnum, newval);
 }
 
 function_aa07bb71(str_fx_name, var_bd367366, var_6142f944, n_new_val) {
@@ -92,7 +92,7 @@ function_aa07bb71(str_fx_name, var_bd367366, var_6142f944, n_new_val) {
 function_e6eed4fe(str_fx_name, var_d34b6d2b, var_6142f944, n_new_val) {
   if(n_new_val) {
     if(!isDefined(self.var_4da473fc)) {
-      var_4da473fc = util::spawn_model(var_6142f944, # "tag_origin", self.origin, self.angles);
+      var_4da473fc = util::spawn_model(var_6142f944, #"tag_origin", self.origin, self.angles);
     } else {
       var_4da473fc = self.var_4da473fc;
     }

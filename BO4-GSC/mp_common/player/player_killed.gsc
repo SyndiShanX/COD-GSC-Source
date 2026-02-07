@@ -1063,14 +1063,14 @@ function_caabcf70(victim, callbackparams, laststandparams, var_a1d415ee) {
     victimindex = victim match_record::get_player_index();
 
     if(isDefined(victimindex)) {
-      match_record::set_stat(#"lives", lifeindex, # "player_index", victimindex);
+      match_record::set_stat(#"lives", lifeindex, #"player_index", victimindex);
     }
 
     if(isDefined(var_f53d817d) && isDefined(var_f53d817d.attacker) && isplayer(var_f53d817d.attacker)) {
       attackerindex = var_f53d817d.attacker match_record::get_player_index();
 
       if(isDefined(attackerindex)) {
-        match_record::set_stat(#"lives", lifeindex, # "attacker_index", attackerindex);
+        match_record::set_stat(#"lives", lifeindex, #"attacker_index", attackerindex);
       }
     }
 
@@ -1078,7 +1078,7 @@ function_caabcf70(victim, callbackparams, laststandparams, var_a1d415ee) {
       killerindex = var_ee2f4691.attacker match_record::get_player_index();
 
       if(isDefined(killerindex)) {
-        match_record::set_stat(#"lives", lifeindex, # "killer_index", killerindex);
+        match_record::set_stat(#"lives", lifeindex, #"killer_index", killerindex);
       }
     }
   }
@@ -1228,7 +1228,7 @@ update_weapon_stats(attacker, weapon, smeansofdeath, inflictor) {
       attackerweaponpickedup = 1;
     }
 
-    self stats::function_eec52333(weapon, # "deaths", 1, self.class_num, attackerweaponpickedup);
+    self stats::function_eec52333(weapon, #"deaths", 1, self.class_num, attackerweaponpickedup);
     victim_weapon = self.lastdroppableweapon;
 
     if(isDefined(victim_weapon)) {
@@ -1238,7 +1238,7 @@ update_weapon_stats(attacker, weapon, smeansofdeath, inflictor) {
         victimweaponpickedup = 1;
       }
 
-      self stats::function_eec52333(victim_weapon, # "deathsduringuse", 1, self.class_num, victimweaponpickedup);
+      self stats::function_eec52333(victim_weapon, #"deathsduringuse", 1, self.class_num, victimweaponpickedup);
     }
 
     recordweaponstatkills = 1;
@@ -1255,24 +1255,24 @@ update_weapon_stats(attacker, weapon, smeansofdeath, inflictor) {
           inflictorownerweaponatlaunchpickedup = 1;
         }
 
-        attacker stats::function_eec52333(inflictor.ownerweaponatlaunch, # "kills", 1, attacker.class_num, inflictorownerweaponatlaunchpickedup, 1);
+        attacker stats::function_eec52333(inflictor.ownerweaponatlaunch, #"kills", 1, attacker.class_num, inflictorownerweaponatlaunchpickedup, 1);
       } else {
-        attacker stats::function_eec52333(weapon, # "kills", 1, attacker.class_num, attackerweaponpickedup);
+        attacker stats::function_eec52333(weapon, #"kills", 1, attacker.class_num, attackerweaponpickedup);
       }
     }
 
     if(smeansofdeath == "MOD_HEAD_SHOT") {
-      attacker stats::function_eec52333(weapon, # "headshots", 1, attacker.class_num, attackerweaponpickedup);
+      attacker stats::function_eec52333(weapon, #"headshots", 1, attacker.class_num, attackerweaponpickedup);
     }
 
     if(smeansofdeath == "MOD_PROJECTILE") {
-      attacker stats::function_e24eec31(weapon, # "direct_hit_kills", 1);
+      attacker stats::function_e24eec31(weapon, #"direct_hit_kills", 1);
     }
 
     victimisroulette = self.isroulette === 1;
 
     if(self ability_player::gadget_checkheroabilitykill(attacker) && !victimisroulette) {
-      attacker stats::function_e24eec31(attacker.heroability, # "kills_while_active", 1);
+      attacker stats::function_e24eec31(attacker.heroability, #"kills_while_active", 1);
     }
   }
 }
@@ -2225,7 +2225,7 @@ updatekillstreak(einflictor, attacker, weapon) {
 
         if(attacker.pers[# "cur_kill_streak"] >= 2) {
           if(attacker.pers[# "cur_kill_streak"] % 5 == 0) {
-            attacker activecamo::function_896ac347(weapon, # "killstreak_5", 1);
+            attacker activecamo::function_896ac347(weapon, #"killstreak_5", 1);
             attacker contracts::increment_contract(#"hash_4c15367eed618401");
             attacker contracts::increment_contract(#"contract_wl_kills_without_dying");
           }

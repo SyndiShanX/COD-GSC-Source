@@ -137,7 +137,7 @@ function_c6f81aa1(time) {
   }
 
   player = self;
-  player endon(#"disconnect", # "spawned");
+  player endon(#"disconnect", #"spawned");
   player.var_686890d5 = 1;
 
   if(time <= 0) {
@@ -162,7 +162,7 @@ function_c6f81aa1(time) {
 function_9b2bd02c() {
   player = self;
   player function_3f65d5d3();
-  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, # "elimination_transition");
+  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"elimination_transition");
 }
 
 function_b3964dc9() {
@@ -176,7 +176,7 @@ function_b3964dc9() {
 
   player = self;
   player function_3f65d5d3();
-  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, # "hash_ee32e40c182320b");
+  player function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_ee32e40c182320b");
 }
 
 function_f4c03c3b() {
@@ -185,7 +185,7 @@ function_f4c03c3b() {
   }
 
   self.var_58f00ca2 = 1;
-  self thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, # "hash_4a3306cfce6719bc");
+  self thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_4a3306cfce6719bc");
 }
 
 function_1caf5c87(team) {
@@ -195,13 +195,13 @@ function_1caf5c87(team) {
   foreach(player in players) {
     if(player != self) {
       player.var_58f00ca2 = 1;
-      player thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, # "hash_4a3306cfce6719bc");
+      player thread function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_4a3306cfce6719bc");
     }
   }
 
   if(self.team == team) {
     self.var_58f00ca2 = 1;
-    self function_61d01718(level.var_d1455682.eliminateddisplaytransition, # "hash_4a3306cfce6719bc");
+    self function_61d01718(level.var_d1455682.eliminateddisplaytransition, #"hash_4a3306cfce6719bc");
   }
 }
 
@@ -509,7 +509,7 @@ function_7e8f8c47(transitions, outcome, lui_event) {
 }
 
 function_15e28b1a(outcome) {
-  function_7e8f8c47(level.var_d1455682.finaldisplaytransition, outcome, # "match_transition");
+  function_7e8f8c47(level.var_d1455682.finaldisplaytransition, outcome, #"match_transition");
 }
 
 function_cf3d556b(outcome) {
@@ -525,7 +525,7 @@ function_cf3d556b(outcome) {
     return;
   }
 
-  function_7e8f8c47(transitions, outcome, # "round_transition");
+  function_7e8f8c47(transitions, outcome, #"round_transition");
 }
 
 round_end_wait(time) {
@@ -533,7 +533,7 @@ round_end_wait(time) {
     return;
   }
 
-  level waittilltimeout(time * level.var_49d9aa70, # "hash_197c640e2f684a74");
+  level waittilltimeout(time * level.var_49d9aa70, #"hash_197c640e2f684a74");
 }
 
 function_ad717b18(var_c139bfe2) {

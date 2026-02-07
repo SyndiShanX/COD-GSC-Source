@@ -370,7 +370,7 @@ function_f93fbae5() {
 
     if(player laststand::player_is_in_laststand()) {
       player thread zm_laststand::auto_revive(player);
-      player waittilltimeout(4, # "disconnect", # "hash_9b426cce825928d");
+      player waittilltimeout(4, #"disconnect", #"hash_9b426cce825928d");
     }
 
     if(isDefined(player)) {
@@ -462,7 +462,7 @@ function_bcd35efc() {
       player zm_loadout::init_player_offhand_weapons();
     }
 
-    if(isarray(player.var_67ba1237) && !isinarray(player.var_67ba1237, # "specialty_additionalprimaryweapon") && isDefined(player.var_42a4759e.var_8c5bddf5.var_1596d94c)) {
+    if(isarray(player.var_67ba1237) && !isinarray(player.var_67ba1237, #"specialty_additionalprimaryweapon") && isDefined(player.var_42a4759e.var_8c5bddf5.var_1596d94c)) {
       player zm_weapons::weapon_take(player.var_42a4759e.var_8c5bddf5.var_1596d94c);
       player.var_42a4759e.var_8c5bddf5.var_1596d94c = undefined;
     }

@@ -13,7 +13,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  zm_melee_weapon::init(#"golden_knife", # "golden_knife_flourish", 1000, "golden_knife", undefined, undefined, undefined);
+  zm_melee_weapon::init(#"golden_knife", #"golden_knife_flourish", 1000, "golden_knife", undefined, undefined, undefined);
 }
 
 __main__() {}

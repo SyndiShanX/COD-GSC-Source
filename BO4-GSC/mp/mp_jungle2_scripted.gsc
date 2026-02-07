@@ -51,7 +51,7 @@ function_2cdcf5c3() {
     return;
   }
 
-  level.var_38bda94 = array(#"p8_fxanim_mp_seaside_parrots_orange_flock_01_bundle", # "p8_fxanim_mp_seaside_parrots_orange_flock_02_bundle", # "p8_fxanim_mp_seaside_parrots_scarlet_flock_01_bundle", # "p8_fxanim_mp_seaside_parrots_scarlet_flock_02_bundle", # "p8_fxanim_mp_seaside_parrots_yellow_flock_01_bundle", # "p8_fxanim_mp_seaside_parrots_yellow_flock_02_bundle");
+  level.var_38bda94 = array(#"p8_fxanim_mp_seaside_parrots_orange_flock_01_bundle", #"p8_fxanim_mp_seaside_parrots_orange_flock_02_bundle", #"p8_fxanim_mp_seaside_parrots_scarlet_flock_01_bundle", #"p8_fxanim_mp_seaside_parrots_scarlet_flock_02_bundle", #"p8_fxanim_mp_seaside_parrots_yellow_flock_01_bundle", #"p8_fxanim_mp_seaside_parrots_yellow_flock_02_bundle");
 
   if(util::isfirstround()) {
     foreach(scene in level.var_38bda94) {
@@ -75,7 +75,7 @@ function_2cdcf5c3() {
 
 function_69a9563e(a_ents) {
   while(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] waittill(#"napalm_rumble", # "death");
+    a_ents[# "prop 1"] waittill(#"napalm_rumble", #"death");
 
     if(isDefined(a_ents[# "prop 1"])) {
       a_ents[# "prop 1"] clientfield::increment("spawn_flavor_napalm_rumble");

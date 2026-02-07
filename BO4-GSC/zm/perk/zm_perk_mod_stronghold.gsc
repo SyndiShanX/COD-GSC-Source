@@ -21,7 +21,7 @@ __init__() {
 __main__() {}
 
 function_8afdc221() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_camper", "mod_stronghold", # "perk_stronghold", # "specialty_camper", 3000);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_camper", "mod_stronghold", #"perk_stronghold", #"specialty_camper", 3000);
   zm_perks::register_perk_threads(#"specialty_mod_camper", &function_1076eef9, &function_20b5dc19);
 }
 

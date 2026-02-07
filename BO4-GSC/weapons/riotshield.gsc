@@ -35,7 +35,7 @@ register() {
 }
 
 watchpregameclasschange() {
-  self endon(#"death", # "disconnect", # "track_riot_shield");
+  self endon(#"death", #"disconnect", #"track_riot_shield");
   self waittill(#"changed_class");
 
   if(level.ingraceperiod && !self.hasdonecombat) {
@@ -46,7 +46,7 @@ watchpregameclasschange() {
 }
 
 watchriotshieldpickup() {
-  self endon(#"death", # "disconnect", # "track_riot_shield");
+  self endon(#"death", #"disconnect", #"track_riot_shield");
   self notify(#"watch_riotshield_pickup");
   self endon(#"watch_riotshield_pickup");
   self waittill(#"pickup_riotshield");
@@ -61,7 +61,7 @@ watchriotshieldpickup() {
 }
 
 trackriotshield() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self notify(#"track_riot_shield");
   self endon(#"track_riot_shield");
   self thread watchpregameclasschange();
@@ -202,7 +202,7 @@ spawnriotshieldcover(origin, angles) {
 }
 
 watchriotshielddeploy() {
-  self endon(#"death", # "disconnect", # "start_riotshield_deploy");
+  self endon(#"death", #"disconnect", #"start_riotshield_deploy");
   waitresult = self waittill(#"deploy_riotshield");
   deploy_attempt = waitresult.is_deploy_attempt;
   weapon = waitresult.weapon;
@@ -374,19 +374,19 @@ damagethendestroyriotshield(attacker, weapon) {
 }
 
 deleteshieldontriggerdeath(shield_trigger) {
-  shield_trigger waittill(#"trigger", # "death");
+  shield_trigger waittill(#"trigger", #"death");
   self notify(#"destroy_riotshield");
 }
 
 deleteshieldonplayerdeathordisconnect(shield_ent) {
-  shield_ent endon(#"death", # "damagethendestroyriotshield");
-  self waittill(#"death", # "disconnect", # "remove_planted_weapons");
+  shield_ent endon(#"death", #"damagethendestroyriotshield");
+  self waittill(#"death", #"disconnect", #"remove_planted_weapons");
   shield_ent thread damagethendestroyriotshield();
 }
 
 watchriotshieldstuckentitydeath(grenade, owner) {
   grenade endon(#"death");
-  self waittill(#"damagethendestroyriotshield", # "death", # "disconnect", # "weapon_change", # "deploy_riotshield");
+  self waittill(#"damagethendestroyriotshield", #"death", #"disconnect", #"weapon_change", #"deploy_riotshield");
   grenade detonate(owner);
 }
 
@@ -395,7 +395,7 @@ on_player_spawned() {
 }
 
 watch_riot_shield_use() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self thread trackriotshield();
 
   for(;;) {

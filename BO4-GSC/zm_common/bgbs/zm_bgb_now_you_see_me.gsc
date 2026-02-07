@@ -10,7 +10,7 @@
 #namespace zm_bgb_now_you_see_me;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_now_you_see_me", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_now_you_see_me", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -40,7 +40,7 @@ activation() {
   self thread bgb::run_timer(15);
   self playSound(#"zmb_bgb_nysm_start");
   self clientfield::set_to_player("" + # "hash_18be2b4b3936ee1f", 1);
-  ret = self waittilltimeout(14.5, # "bgb_about_to_take_on_bled_out", # "end_game", # "bgb_update", # "disconnect");
+  ret = self waittilltimeout(14.5, #"bgb_about_to_take_on_bled_out", #"end_game", #"bgb_update", #"disconnect");
   self playSound(#"zmb_bgb_nysm_end");
 
   if("timeout" != ret._notify) {

@@ -18,7 +18,7 @@ __init__() {
 __main__() {}
 
 function_7186a3aa() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_berserker", "mod_dying_wish", # "perk_dying_wish", # "specialty_berserker", 5000);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_berserker", "mod_dying_wish", #"perk_dying_wish", #"specialty_berserker", 5000);
   zm_perks::register_perk_threads(#"specialty_mod_berserker", &function_fb91d1a, &function_63f21c1e);
 }
 

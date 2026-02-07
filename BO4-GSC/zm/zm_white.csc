@@ -97,7 +97,7 @@ event_handler[level_init] main(eventstruct) {
   level thread zm_white_special_rounds::init();
   level thread setup_personality_character_exerts();
   level thread function_b8da6f44();
-  zm_utility::function_beed5764("rob_zm_eyes_blue_light", # "hash_7fcc925775fa9101");
+  zm_utility::function_beed5764("rob_zm_eyes_blue_light", #"hash_7fcc925775fa9101");
   util::waitforclient(0);
 }
 

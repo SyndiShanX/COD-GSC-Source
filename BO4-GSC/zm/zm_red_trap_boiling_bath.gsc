@@ -171,7 +171,7 @@ function_922c05f() {
 function_3a067395(str_exploder) {
   self notify("5a3476fe6548df85");
   self endon("5a3476fe6548df85");
-  level endon(#"end_game", # "hash_e2465be027280d7");
+  level endon(#"end_game", #"hash_e2465be027280d7");
   level waittill(#"hash_36bc97f51bb2bc8");
 
   if(str_exploder == "fxexp_trap_bath_bloody_lvl1") {

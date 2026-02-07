@@ -241,7 +241,7 @@ togglezoneeffects(enabled) {
 }
 
 kothcaptureloop() {
-  level endon(#"game_ended", # "zone_moved");
+  level endon(#"game_ended", #"zone_moved");
   level.kothstarttime = gettime();
 
   while(true) {
@@ -259,7 +259,7 @@ kothcaptureloop() {
     level.zone.gameobject.ontouchuse = &ontouchuse;
     level.zone.gameobject.onupdateuserate = &onupdateuserate;
     level.zone togglezoneeffects(1);
-    msg = level waittill(#"zone_captured", # "zone_destroyed");
+    msg = level waittill(#"zone_captured", #"zone_destroyed");
 
     if(msg._notify == "zone_destroyed") {
       continue;
@@ -641,7 +641,7 @@ onzonecontested() {
   self updateteamclientfield();
   self recordgameeventnonplayer("hardpoint_contested");
   resume_time();
-  util::function_5a68c330(8, # "free");
+  util::function_5a68c330(8, #"free");
 
   foreach(team, _ in level.teams) {
     if(team == zoneowningteam) {
@@ -662,7 +662,7 @@ onzoneuncontested(lastclaimteam) {
 }
 
 movezoneaftertime(time) {
-  level endon(#"game_ended", # "zone_reset");
+  level endon(#"game_ended", #"zone_reset");
   level.zonemovetime = gettime() + int(time * 1000);
   level.zonedestroyedbytimer = 0;
   wait time;
@@ -682,11 +682,11 @@ movezoneaftertime(time) {
   level.zone.gameobject recordgameeventnonplayer("hardpoint_moved");
   level notify(#"zone_moved");
   level.zone.gameobject.onuse = undefined;
-  util::function_5a68c330(6, # "free");
+  util::function_5a68c330(6, #"free");
 }
 
 awardcapturepoints(team, lastcaptureteam) {
-  level endon(#"game_ended", # "zone_destroyed", # "zone_reset", # "zone_moved");
+  level endon(#"game_ended", #"zone_destroyed", #"zone_reset", #"zone_moved");
   level notify(#"awardcapturepointsrunning");
   level endon(#"awardcapturepointsrunning");
 

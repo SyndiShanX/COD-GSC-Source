@@ -8,5 +8,5 @@
 #namespace zodcompanioninterface;
 
 registerzodcompanioninterfaceattributes() {
-  ai::registermatchedinterface(#"zod_companion", # "sprint", 0, array(1, 0));
+  ai::registermatchedinterface(#"zod_companion", #"sprint", 0, array(1, 0));
 }

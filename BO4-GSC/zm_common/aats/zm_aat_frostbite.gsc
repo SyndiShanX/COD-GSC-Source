@@ -16,7 +16,7 @@
 #namespace zm_aat_frostbite;
 
 autoexec __init__system__() {
-  system::register("zm_aat_frostbite", &__init__, undefined, # "aat");
+  system::register("zm_aat_frostbite", &__init__, undefined, #"aat");
 }
 
 __init__() {
@@ -99,7 +99,7 @@ function_158a3a18(attacker, mod, weapon, var_e1ec1eee = 0) {
 
 function_dab102b8(e_attacker, weapon) {
   self notify(#"hash_6f92e6943e40092b");
-  self endon(#"hash_6f92e6943e40092b", # "death");
+  self endon(#"hash_6f92e6943e40092b", #"death");
 
   for(i = 0; i < 8; i++) {
     wait 0.375;
@@ -119,7 +119,7 @@ function_dab102b8(e_attacker, weapon) {
 
 function_35d3ac3b(attacker, mod, weapon) {
   self notify(#"hash_b04750a529cb350");
-  self endon(#"hash_b04750a529cb350", # "hash_652c15c8a7e2949");
+  self endon(#"hash_b04750a529cb350", #"hash_652c15c8a7e2949");
   self waittill(#"death");
 
   if(isDefined(self)) {

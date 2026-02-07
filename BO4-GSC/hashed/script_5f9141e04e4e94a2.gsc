@@ -181,7 +181,7 @@ cleanup_step_1() {
 }
 
 start_step_2() {
-  level endon(#"end_game", # "hash_36fd0ff497e7cb39");
+  level endon(#"end_game", #"hash_36fd0ff497e7cb39");
   level.var_23674b8f.n_step = 2;
   a_s_portals = struct::get_array("white_portal");
   var_7ed14c5f = zm_white_portals::function_688df525();
@@ -233,7 +233,7 @@ function_eddc2ed3() {
 }
 
 function_fe82c566() {
-  self endon(#"death", # "hash_530fc6e3ae75d439");
+  self endon(#"death", #"hash_530fc6e3ae75d439");
   level.var_23674b8f.var_c8a6d360 = 0;
 
   while(true) {
@@ -271,7 +271,7 @@ function_fe82c566() {
 }
 
 function_92344a03() {
-  self endon(#"death", # "hash_376274afc09952fa");
+  self endon(#"death", #"hash_376274afc09952fa");
 
   while(true) {
     var_135425aa = 0;
@@ -333,7 +333,7 @@ cleanup_step_2() {
 }
 
 start_step_3() {
-  level endon(#"end_game", # "hash_36fd0ff497e7cb39");
+  level endon(#"end_game", #"hash_36fd0ff497e7cb39");
   level.var_23674b8f.n_step = 3;
   wait 0.25;
   e_wisp = level.var_23674b8f.e_wisp;

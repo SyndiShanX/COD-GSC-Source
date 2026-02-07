@@ -266,7 +266,7 @@ function_a4c8ce2a(data) {
     }
   }
 
-  var_67d27328 = player stats::get_stat(#"arenastats", 2, # "leagueplaystats", # "hash_36cd820c1ff6c16b");
+  var_67d27328 = player stats::get_stat(#"arenastats", 2, #"leagueplaystats", #"hash_36cd820c1ff6c16b");
 
   if(var_67d27328 > 0) {
     player increment_contract(#"hash_35e52e40ab6d1223", var_67d27328);

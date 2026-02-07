@@ -86,13 +86,13 @@ function_9a0f234b() {
     }
 
     if(wpn_cur == level.hero_weapon[# "katana"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_648a5b1eedae58b9");
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_648a5b1eedae58b9");
       self thread function_9fdcf13f();
       continue;
     }
 
     if(wpn_cur == level.hero_weapon[# "katana"][1]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_52cddac894472d22");
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_52cddac894472d22");
       self thread function_119af40d(wpn_cur);
       self thread function_478a4910(wpn_cur);
       self thread function_9fdcf13f();
@@ -101,9 +101,9 @@ function_9a0f234b() {
 
     if(wpn_cur == level.hero_weapon[# "katana"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_4bf673fe684c7bcd");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_4bf673fe684c7bcd");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_33116738f78d04b3");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_33116738f78d04b3");
       }
 
       self thread function_119af40d(wpn_cur);
@@ -118,7 +118,7 @@ function_9fdcf13f() {
   self endon(#"disconnect");
   wait 1;
   callback::on_ai_damage(&function_af221ee1);
-  self waittill(#"death", # "hero_katana_expired");
+  self waittill(#"death", #"hero_katana_expired");
   callback::remove_on_ai_damage(&function_af221ee1);
 }
 
@@ -220,18 +220,18 @@ function_af221ee1(s_params) {
 
 function_1475944a() {
   level.var_9ea358cc++;
-  self waittill(#"death", # "hero_katana_expired");
+  self waittill(#"death", #"hero_katana_expired");
   level.var_9ea358cc--;
 }
 
 function_8d02f57b(w_katana) {
-  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
+  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
 
   while(true) {
     if(w_katana.name == # "hero_katana_t8_lv3") {
       s_result = self waittill(#"weapon_melee_power");
     } else {
-      s_result = self waittill(#"weapon_melee_power", # "weapon_melee");
+      s_result = self waittill(#"weapon_melee_power", #"weapon_melee");
     }
 
     if(s_result.weapon == w_katana) {
@@ -241,7 +241,7 @@ function_8d02f57b(w_katana) {
 }
 
 function_119af40d(w_katana) {
-  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
+  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_juke");
@@ -265,7 +265,7 @@ function_119af40d(w_katana) {
 }
 
 function_7903608c(w_katana) {
-  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired", # "hash_50c324a04c7e0b09");
+  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired", #"hash_50c324a04c7e0b09");
   str_hitloc = "head";
 
   while(true) {
@@ -324,7 +324,7 @@ function_bbe55589(e_player, w_katana, str_hitloc) {
 }
 
 function_fcc26273(w_katana) {
-  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
+  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
@@ -348,7 +348,7 @@ function_bed1fd9f() {
   self.var_4e6b62c3 = 1;
   self clientfield::set("" + # "katana_rush_sfx", 1);
   self clientfield::set("" + # "katana_rush_postfx", 1);
-  waitresult = self waittill(#"hero_katana_expired", # "hero_katana_rush_toggle");
+  waitresult = self waittill(#"hero_katana_expired", #"hero_katana_rush_toggle");
 
   if(waitresult._notify == # "hero_katana_expired") {
     self playSound(#"hash_58397a948dd38b37");
@@ -361,7 +361,7 @@ function_bed1fd9f() {
 }
 
 function_269ad6a5(w_katana) {
-  self endon(#"disconnect", # "bled_out", # "death");
+  self endon(#"disconnect", #"bled_out", #"death");
 
   if(isDefined(self.var_5605c31e)) {
     return;
@@ -396,13 +396,13 @@ function_c43691a9(var_2e56d8e5) {
 }
 
 function_478a4910(w_katana) {
-  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
+  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_juke");
 
     if(s_result.weapon == w_katana) {
-      if(1 === zm_audio::create_and_play_dialog(#"hero_level_2", # "katana")) {
+      if(1 === zm_audio::create_and_play_dialog(#"hero_level_2", #"katana")) {
         break;
       }
     }
@@ -410,13 +410,13 @@ function_478a4910(w_katana) {
 }
 
 function_68ff89f7(w_katana) {
-  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
+  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
 
     if(s_result.weapon == w_katana) {
-      if(1 === zm_audio::create_and_play_dialog(#"hero_level_3", # "katana")) {
+      if(1 === zm_audio::create_and_play_dialog(#"hero_level_3", #"katana")) {
         break;
       }
     }

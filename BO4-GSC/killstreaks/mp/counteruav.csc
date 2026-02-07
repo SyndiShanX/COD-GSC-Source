@@ -8,7 +8,7 @@
 #namespace counteruav;
 
 autoexec __init__system__() {
-  system::register(#"counteruav", &__init__, undefined, # "killstreaks");
+  system::register(#"counteruav", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

@@ -10,7 +10,7 @@
 #namespace character_unlock_prophet;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_prophet", &__init__, undefined, # "character_unlock_prophet_fixup");
+  system::register(#"character_unlock_prophet", &__init__, undefined, #"character_unlock_prophet_fixup");
 }
 
 __init__() {

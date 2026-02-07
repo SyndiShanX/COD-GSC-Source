@@ -38,5 +38,5 @@ function_842e069e(localclientnum, sessionmode, ...) {
 }
 
 get_stat_global(localclientnum, statname) {
-  return get_stat(localclientnum, # "playerstatslist", statname, # "statvalue");
+  return get_stat(localclientnum, #"playerstatslist", statname, #"statvalue");
 }

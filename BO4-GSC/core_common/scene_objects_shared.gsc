@@ -439,7 +439,7 @@ class csceneobject {
   function function_98561e95() {
     self endon(#"hash_456b12fb28128d17");
     var_9f5994d7 = var_acbd43ee;
-    self waittill(#"death", # "scene_stop");
+    self waittill(#"death", #"scene_stop");
 
     if(isDefined(var_9f5994d7)) {
       var_9f5994d7 delete();
@@ -450,11 +450,11 @@ class csceneobject {
     s_start_spot = function_3e22944e();
 
     if(!isDefined(s_start_spot.target)) {
-      _e waittill(#"player_downed", # "death", # "scene_stop");
+      _e waittill(#"player_downed", #"death", #"scene_stop");
       return;
     }
 
-    _e endon(#"death", # "scene_stop");
+    _e endon(#"death", #"scene_stop");
     s_current_struct = struct::get(s_start_spot.target);
     n_move_time = isDefined(s_start_spot.script_float) ? s_start_spot.script_float : 1;
 
@@ -938,7 +938,7 @@ class csceneobject {
 
   function function_b485ee21(s_shot, var_37fa9b04) {
     _e notify(#"hash_b02076d93b34558");
-    _e endon(#"hash_b02076d93b34558", # "delete", # "scene_stop");
+    _e endon(#"hash_b02076d93b34558", #"delete", #"scene_stop");
     var_5b7900ec = _e.var_5b7900ec;
 
     foreach(var_74f5d118 in var_5b7900ec) {
@@ -1101,8 +1101,8 @@ class csceneobject {
   }
 
   function function_14f96d6b() {
-    _e endoncallback(&function_20f309bf, # "delete", # "scene_stop", # "stop_tracking_damage_scene_ent");
-    _o_scene endon(#"scene_done", # "scene_stop", # "hash_42da41892ac54794");
+    _e endoncallback(&function_20f309bf, #"delete", #"scene_stop", #"stop_tracking_damage_scene_ent");
+    _o_scene endon(#"scene_done", #"scene_stop", #"hash_42da41892ac54794");
     _e setCanDamage(1);
     function_23575fad();
     _o_scene.var_2bc31f02 = 1;
@@ -1124,7 +1124,7 @@ class csceneobject {
 
     while(true) {
       flagsys::set(#"waiting_for_damage");
-      var_37fa9b04 = _e waittill(#"damage", # "death");
+      var_37fa9b04 = _e waittill(#"damage", #"death");
 
       if(!isDefined(_e)) {
         return;
@@ -1200,17 +1200,17 @@ class csceneobject {
 
   function function_2035b6d6(_e) {
     _e notify(#"cleanupdelete");
-    _e endon(#"death", # "preparedelete", # "cleanupdelete");
-    s_waitresult = _o_scene waittilltimeout(0.15, # "hash_60adeaccbb565546", # "scene_stop", # "scene_done", # "scene_skip_completed");
+    _e endon(#"death", #"preparedelete", #"cleanupdelete");
+    s_waitresult = _o_scene waittilltimeout(0.15, #"hash_60adeaccbb565546", #"scene_stop", #"scene_done", #"scene_skip_completed");
     _e thread scene::synced_delete(_o_scene._str_name);
   }
 
   function function_9960f8f0(_e) {
     _e notify(#"cleanuphide");
-    _e endon(#"death", # "prepareshow", # "preparehide", # "cleanuphide");
+    _e endon(#"death", #"prepareshow", #"preparehide", #"cleanuphide");
 
     if(_o_scene._str_mode !== "init") {
-      _o_scene waittilltimeout(0.15, # "hash_60adeaccbb565546", # "scene_stop", # "scene_done", # "scene_skip_completed");
+      _o_scene waittilltimeout(0.15, #"hash_60adeaccbb565546", #"scene_stop", #"scene_done", #"scene_skip_completed");
     }
 
     _e val::set(#"scene", "hide", 2);
@@ -1223,10 +1223,10 @@ class csceneobject {
 
     if(isDefined(var_55b4f21e.var_39fd697b)) {
       a_ents = getEntArray(var_55b4f21e.var_39fd697b, "targetname", 1);
-      array::thread_all(a_ents, &val::set, # "script_hide", "hide", 1);
+      array::thread_all(a_ents, &val::set, #"script_hide", "hide", 1);
     } else if(isDefined(var_55b4f21e.var_4ceff7a6)) {
       a_ents = getEntArray(var_55b4f21e.var_4ceff7a6, "targetname", 1);
-      array::thread_all(a_ents, &val::reset, # "script_hide", "hide");
+      array::thread_all(a_ents, &val::reset, #"script_hide", "hide");
     }
 
     if(!isDefined(_e)) {
@@ -1750,10 +1750,10 @@ class csceneobject {
 
     if(isDefined(var_55b4f21e.var_3cd248f5)) {
       a_ents = getEntArray(var_55b4f21e.var_3cd248f5, "targetname", 1);
-      array::thread_all(a_ents, &val::set, # "script_hide", "hide", 1);
+      array::thread_all(a_ents, &val::set, #"script_hide", "hide", 1);
     } else if(isDefined(var_55b4f21e.var_b94164e)) {
       a_ents = getEntArray(var_55b4f21e.var_b94164e, "targetname", 1);
-      array::thread_all(a_ents, &val::reset, # "script_hide", "hide");
+      array::thread_all(a_ents, &val::reset, #"script_hide", "hide");
     }
 
     if(!isDefined(_e)) {
@@ -2732,7 +2732,7 @@ class cscene {
   }
 
   function function_ab0c6edb() {
-    self endon(#"death", # "scene_stop", # "scene_done", # "scene_skip_completed");
+    self endon(#"death", #"scene_stop", #"scene_done", #"scene_skip_completed");
     waitframe(1);
     self notify(#"hash_60adeaccbb565546");
   }
@@ -2749,7 +2749,7 @@ class cscene {
     }
 
     self notify(str_shot + "start");
-    self endon(str_shot + "start", # "hash_27297a73bc597607");
+    self endon(str_shot + "start", #"hash_27297a73bc597607");
 
     if(_s scene::is_igc()) {
       function_f4b4e39f(1);
@@ -3200,11 +3200,11 @@ class cscene {
     if(_assign_ents_by_name(a_objects, a_ents)) {
       if(_assign_ents_by_type(a_objects, a_ents, array("player", "sharedplayer"), &_is_ent_player, "teama")) {
         if(_assign_ents_by_type(a_objects, a_ents, array("player", "sharedplayer"), &_is_ent_player, "teamb")) {
-          if(_assign_ents_by_type(a_objects, a_ents, array("player", "sharedplayer"), &_is_ent_player, # "team3")) {
+          if(_assign_ents_by_type(a_objects, a_ents, array("player", "sharedplayer"), &_is_ent_player, #"team3")) {
             if(_assign_ents_by_type(a_objects, a_ents, array("player", "sharedplayer"), &_is_ent_player)) {
               if(_assign_ents_by_type(a_objects, a_ents, array("companion", "sharedcompanion"), &_is_ent_companion, "teama")) {
                 if(_assign_ents_by_type(a_objects, a_ents, array("companion", "sharedcompanion"), &_is_ent_companion, "teamb")) {
-                  if(_assign_ents_by_type(a_objects, a_ents, array("companion", "sharedcompanion"), &_is_ent_companion, # "team3")) {
+                  if(_assign_ents_by_type(a_objects, a_ents, array("companion", "sharedcompanion"), &_is_ent_companion, #"team3")) {
                     if(_assign_ents_by_type(a_objects, a_ents, array("companion", "sharedcompanion"), &_is_ent_companion)) {
                       if(_assign_ents_by_type(a_objects, a_ents, "actor", &_is_ent_actor)) {
                         if(_assign_ents_by_type(a_objects, a_ents, "fakeactor", &_is_ent_actor)) {
@@ -3620,7 +3620,7 @@ class cscene {
 
   function function_4412dc65(str_shot) {
     self notify(#"hash_763a7354c3aaff58");
-    self endon(#"scene_done", # "scene_stop", # "scene_skip_completed", # "hash_763a7354c3aaff58");
+    self endon(#"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_763a7354c3aaff58");
 
     if(_b_testing) {
       var_82bbc872 = 0;

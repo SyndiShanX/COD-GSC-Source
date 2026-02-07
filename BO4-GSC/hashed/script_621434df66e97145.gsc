@@ -154,7 +154,7 @@ function_6c029b7() {
       level.s_shower_trap.activated_by_player = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", # "activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", #"activate");
       }
     }
   }
@@ -269,7 +269,7 @@ function_17f9c268() {
 }
 
 function_b691c69(s_trap) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(self.var_e613b44) || !self.var_e613b44) {
     self.var_e613b44 = 1;
@@ -293,7 +293,7 @@ function_b691c69(s_trap) {
 }
 
 function_24c4375b() {
-  self endon(#"bled_out", # "disconnect");
+  self endon(#"bled_out", #"disconnect");
 
   if(self clientfield::get_to_player("player_shower_trap_post_fx") === 1) {
     return;
@@ -370,7 +370,7 @@ function_f24b1ecb() {
       level.s_fire_trap.activated_by_player = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", # "activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", #"activate");
       }
     }
   }
@@ -494,7 +494,7 @@ function_956ddb52() {
 }
 
 function_5c6fd230(s_trap) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(self zm_traps::function_3f401e8d(self)) {
     return;
@@ -590,7 +590,7 @@ function_6facfabc() {
       level.s_spinning_trap.activated_by_player = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", # "activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", #"activate");
       }
     }
   }
@@ -779,7 +779,7 @@ function_fcac4b4e() {
 }
 
 function_1259cbbb(s_trap) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(self.var_c87b7253) || !self.var_c87b7253) {
     e_volume = s_trap.e_volume;

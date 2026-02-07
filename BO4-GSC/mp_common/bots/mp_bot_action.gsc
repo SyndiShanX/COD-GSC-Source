@@ -62,10 +62,10 @@ register_weapons() {
 }
 
 function_25f1e3c1() {
-  bot_action::function_a2c83569(#"knife_held", # "melee_enemy");
-  bot_action::function_a2c83569(#"bare_hands", # "melee_enemy");
-  bot_action::function_7e847a84(#"gadget_health_regen", # "activate_health_gadget");
-  bot_action::function_7e847a84(#"gadget_medicalinjectiongun", # "activate_health_gadget");
+  bot_action::function_a2c83569(#"knife_held", #"melee_enemy");
+  bot_action::function_a2c83569(#"bare_hands", #"melee_enemy");
+  bot_action::function_7e847a84(#"gadget_health_regen", #"activate_health_gadget");
+  bot_action::function_7e847a84(#"gadget_medicalinjectiongun", #"activate_health_gadget");
   self function_aaede90c();
   self function_aa5475f();
   self function_865733c1();
@@ -163,72 +163,72 @@ function_c2e797aa() {
 }
 
 function_aaede90c() {
-  bot_action::function_7e847a84(#"eq_swat_grenade", # "throw_grenade");
-  bot_action::function_7e847a84(#"sig_buckler_dw", # "hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"sig_buckler_dw", # "hash_7aaeac32a4e1bf84");
-  bot_action::function_a2c83569(#"sig_buckler_dw", # "hash_3d7dd2878425bcce");
-  bot_action::function_7e847a84(#"eq_cluster_semtex_grenade", # "throw_grenade");
-  bot_action::function_7e847a84(#"hero_pineapplegun", # "hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"hero_pineapplegun", # "fire_grenade");
-  bot_action::function_7e847a84(#"gadget_supplypod", # "hash_6fbd1b1c42e3a0c5");
-  bot_action::function_7e847a84(#"eq_localheal", # "activate_localheal");
-  bot_action::function_7e847a84(#"gadget_radiation_field", # "activate_radiation_field");
-  bot_action::function_7e847a84(#"hero_flamethrower", # "hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"hero_flamethrower", # "hash_7aaeac32a4e1bf84");
-  bot_action::function_a2c83569(#"hero_flamethrower", # "hash_434716893aa869f3");
-  bot_action::function_7e847a84(#"eq_tripwire", # "use_tripwire");
-  bot_action::function_7e847a84(#"ability_dog", # "activate_dog");
-  bot_action::function_7e847a84(#"eq_hawk", # "throw_grenade");
-  bot_action::function_7e847a84(#"sig_bow_quickshot", # "hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"sig_bow_quickshot", # "hash_7aaeac32a4e1bf84");
-  bot_action::function_a2c83569(#"sig_bow_quickshot", # "hash_434716893aa869f3");
-  bot_action::function_7e847a84(#"eq_seeker_mine", # "throw_mine");
-  bot_action::function_7e847a84(#"shock_rifle", # "hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"shock_rifle", # "hash_7aaeac32a4e1bf84");
-  bot_action::function_a2c83569(#"shock_rifle", # "hash_434716893aa869f3");
-  bot_action::function_7e847a84(#"eq_sensor", # "hash_4600e058d958fc21");
-  bot_action::function_7e847a84(#"gadget_vision_pulse", # "activate_vision_pulse");
-  bot_action::function_7e847a84(#"eq_grapple", # "activate_noncombat_grapple");
-  bot_action::function_7e847a84(#"eq_gravityslam", # "activate_gravity_slam");
-  bot_action::function_7e847a84(#"gadget_spawnbeacon", # "deploy_spawnbeacon");
-  bot_action::function_7e847a84(#"hero_annihilator", # "hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"hero_annihilator", # "hash_7aaeac32a4e1bf84");
-  bot_action::function_a2c83569(#"hero_annihilator", # "hash_434716893aa869f3");
-  bot_action::function_7e847a84(#"eq_smoke", # "throw_grenade");
-  bot_action::function_7e847a84(#"sig_blade", # "hash_5397239dd3c8da8d");
-  bot_action::function_a2c83569(#"sig_blade", # "hash_7aaeac32a4e1bf84");
-  bot_action::function_a2c83569(#"sig_blade", # "hash_434716893aa869f3");
-  bot_action::function_7e847a84(#"eq_concertina_wire", # "hash_17f1a25f8c10e1cd");
-  bot_action::function_7e847a84(#"ability_smart_cover", # "hash_5d6b13cfb592ee04");
-  bot_action::function_7e847a84(#"eq_emp_grenade", # "throw_mine");
-  bot_action::function_7e847a84(#"gadget_icepick", # "use_icepick");
+  bot_action::function_7e847a84(#"eq_swat_grenade", #"throw_grenade");
+  bot_action::function_7e847a84(#"sig_buckler_dw", #"hash_5397239dd3c8da8d");
+  bot_action::function_a2c83569(#"sig_buckler_dw", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_a2c83569(#"sig_buckler_dw", #"hash_3d7dd2878425bcce");
+  bot_action::function_7e847a84(#"eq_cluster_semtex_grenade", #"throw_grenade");
+  bot_action::function_7e847a84(#"hero_pineapplegun", #"hash_5397239dd3c8da8d");
+  bot_action::function_a2c83569(#"hero_pineapplegun", #"fire_grenade");
+  bot_action::function_7e847a84(#"gadget_supplypod", #"hash_6fbd1b1c42e3a0c5");
+  bot_action::function_7e847a84(#"eq_localheal", #"activate_localheal");
+  bot_action::function_7e847a84(#"gadget_radiation_field", #"activate_radiation_field");
+  bot_action::function_7e847a84(#"hero_flamethrower", #"hash_5397239dd3c8da8d");
+  bot_action::function_a2c83569(#"hero_flamethrower", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_a2c83569(#"hero_flamethrower", #"hash_434716893aa869f3");
+  bot_action::function_7e847a84(#"eq_tripwire", #"use_tripwire");
+  bot_action::function_7e847a84(#"ability_dog", #"activate_dog");
+  bot_action::function_7e847a84(#"eq_hawk", #"throw_grenade");
+  bot_action::function_7e847a84(#"sig_bow_quickshot", #"hash_5397239dd3c8da8d");
+  bot_action::function_a2c83569(#"sig_bow_quickshot", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_a2c83569(#"sig_bow_quickshot", #"hash_434716893aa869f3");
+  bot_action::function_7e847a84(#"eq_seeker_mine", #"throw_mine");
+  bot_action::function_7e847a84(#"shock_rifle", #"hash_5397239dd3c8da8d");
+  bot_action::function_a2c83569(#"shock_rifle", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_a2c83569(#"shock_rifle", #"hash_434716893aa869f3");
+  bot_action::function_7e847a84(#"eq_sensor", #"hash_4600e058d958fc21");
+  bot_action::function_7e847a84(#"gadget_vision_pulse", #"activate_vision_pulse");
+  bot_action::function_7e847a84(#"eq_grapple", #"activate_noncombat_grapple");
+  bot_action::function_7e847a84(#"eq_gravityslam", #"activate_gravity_slam");
+  bot_action::function_7e847a84(#"gadget_spawnbeacon", #"deploy_spawnbeacon");
+  bot_action::function_7e847a84(#"hero_annihilator", #"hash_5397239dd3c8da8d");
+  bot_action::function_a2c83569(#"hero_annihilator", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_a2c83569(#"hero_annihilator", #"hash_434716893aa869f3");
+  bot_action::function_7e847a84(#"eq_smoke", #"throw_grenade");
+  bot_action::function_7e847a84(#"sig_blade", #"hash_5397239dd3c8da8d");
+  bot_action::function_a2c83569(#"sig_blade", #"hash_7aaeac32a4e1bf84");
+  bot_action::function_a2c83569(#"sig_blade", #"hash_434716893aa869f3");
+  bot_action::function_7e847a84(#"eq_concertina_wire", #"hash_17f1a25f8c10e1cd");
+  bot_action::function_7e847a84(#"ability_smart_cover", #"hash_5d6b13cfb592ee04");
+  bot_action::function_7e847a84(#"eq_emp_grenade", #"throw_mine");
+  bot_action::function_7e847a84(#"gadget_icepick", #"use_icepick");
 }
 
 function_aa5475f() {
-  bot_action::function_7e847a84(#"eq_molotov", # "throw_molotov");
-  bot_action::function_7e847a84(#"eq_sticky_grenade", # "throw_grenade");
-  bot_action::function_7e847a84(#"eq_slow_grenade", # "throw_grenade");
-  bot_action::function_7e847a84(#"frag_grenade", # "throw_grenade");
-  bot_action::function_7e847a84(#"hatchet", # "throw_grenade");
-  bot_action::function_7e847a84(#"trophy_system", # "throw_mine");
+  bot_action::function_7e847a84(#"eq_molotov", #"throw_molotov");
+  bot_action::function_7e847a84(#"eq_sticky_grenade", #"throw_grenade");
+  bot_action::function_7e847a84(#"eq_slow_grenade", #"throw_grenade");
+  bot_action::function_7e847a84(#"frag_grenade", #"throw_grenade");
+  bot_action::function_7e847a84(#"hatchet", #"throw_grenade");
+  bot_action::function_7e847a84(#"trophy_system", #"throw_mine");
 }
 
 function_865733c1() {
-  bot_action::function_7e847a84(#"ac130", # "ac130");
-  bot_action::function_7e847a84(#"ai_tank_marker", # "tank_robot");
-  bot_action::function_7e847a84(#"counteruav", # "counteruav");
-  bot_action::function_7e847a84(#"dart", # "dart");
-  bot_action::function_7e847a84(#"drone_squadron", # "drone_squadron");
-  bot_action::function_7e847a84(#"helicopter_comlink", # "helicopter_comlink");
-  bot_action::function_7e847a84(#"overwatch_helicopter", # "overwatch_helicopter");
-  bot_action::function_7e847a84(#"planemortar", # "planemortar");
-  bot_action::function_7e847a84(#"recon_car", # "recon_car");
-  bot_action::function_7e847a84(#"remote_missile", # "remote_missile");
-  bot_action::function_7e847a84(#"straferun", # "straferun");
-  bot_action::function_7e847a84(#"supplydrop_marker", # "supply_drop");
-  bot_action::function_7e847a84(#"swat_team", # "swat_team");
-  bot_action::function_7e847a84(#"uav", # "uav");
-  bot_action::function_7e847a84(#"ultimate_turret", # "ultimate_turret");
+  bot_action::function_7e847a84(#"ac130", #"ac130");
+  bot_action::function_7e847a84(#"ai_tank_marker", #"tank_robot");
+  bot_action::function_7e847a84(#"counteruav", #"counteruav");
+  bot_action::function_7e847a84(#"dart", #"dart");
+  bot_action::function_7e847a84(#"drone_squadron", #"drone_squadron");
+  bot_action::function_7e847a84(#"helicopter_comlink", #"helicopter_comlink");
+  bot_action::function_7e847a84(#"overwatch_helicopter", #"overwatch_helicopter");
+  bot_action::function_7e847a84(#"planemortar", #"planemortar");
+  bot_action::function_7e847a84(#"recon_car", #"recon_car");
+  bot_action::function_7e847a84(#"remote_missile", #"remote_missile");
+  bot_action::function_7e847a84(#"straferun", #"straferun");
+  bot_action::function_7e847a84(#"supplydrop_marker", #"supply_drop");
+  bot_action::function_7e847a84(#"swat_team", #"swat_team");
+  bot_action::function_7e847a84(#"uav", #"uav");
+  bot_action::function_7e847a84(#"ultimate_turret", #"ultimate_turret");
 }
 
 function_c98fad6b(actionparams) {

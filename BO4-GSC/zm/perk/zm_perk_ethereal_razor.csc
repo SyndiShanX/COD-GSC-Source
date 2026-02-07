@@ -19,7 +19,7 @@ __init__() {
   zm_perks::register_perk_clientfields(#"specialty_etherealrazor", &function_e4d3a447, &function_82460430);
   zm_perks::register_perk_effects(#"specialty_etherealrazor", "ethereal_razor_light");
   zm_perks::register_perk_init_thread(#"specialty_etherealrazor", &function_32981481);
-  zm_perks::function_b60f4a9f(#"specialty_etherealrazor", # "p8_zm_vapor_altar_icon_01_etherealrazor", "zombie/fx8_perk_altar_symbol_ambient_ethereal_razor", # "zmperksetherealrazor");
+  zm_perks::function_b60f4a9f(#"specialty_etherealrazor", #"p8_zm_vapor_altar_icon_01_etherealrazor", "zombie/fx8_perk_altar_symbol_ambient_ethereal_razor", #"zmperksetherealrazor");
   zm_perks::function_f3c80d73("zombie_perk_bottle_ethereal_razor", "zombie_perk_totem_ethereal_razor");
   clientfield::register("actor", "" + # "hash_29c26fb019da89f3", 13000, 1, "counter", &function_f041176c, 0, 0);
   clientfield::register("allplayers", "" + # "hash_450d9f824068dcc2", 13000, 1, "counter", &function_8f9318d5, 0, 0);
@@ -51,8 +51,8 @@ function_f041176c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_8f9318d5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endoncallback(&function_e6bf47a3, # "death");
-  level endoncallback(&function_e6bf47a3, # "demo_jump");
+  self endoncallback(&function_e6bf47a3, #"death");
+  level endoncallback(&function_e6bf47a3, #"demo_jump");
   self function_e6bf47a3();
 
   if(!self zm_utility::function_f8796df3(localclientnum)) {
@@ -63,8 +63,8 @@ function_8f9318d5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_680538e2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endoncallback(&function_e6bf47a3, # "death");
-  level endoncallback(&function_e6bf47a3, # "demo_jump");
+  self endoncallback(&function_e6bf47a3, #"death");
+  level endoncallback(&function_e6bf47a3, #"demo_jump");
   self function_e6bf47a3();
 
   if(!self zm_utility::function_f8796df3(localclientnum)) {
@@ -77,14 +77,14 @@ function_680538e2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_58c4bf12(localclientnum) {
   self notify("74273462170704a3");
   self endon("74273462170704a3");
-  self endoncallback(&function_c8066972, # "death");
+  self endoncallback(&function_c8066972, #"death");
   self function_c8066972();
 
   while(true) {
     waitresult = self waittill(#"notetrack");
     str_notetrack = waitresult.notetrack;
 
-    if(str_notetrack === "razor_fx_on" && self hasperk(localclientnum, # "specialty_etherealrazor")) {
+    if(str_notetrack === "razor_fx_on" && self hasperk(localclientnum, #"specialty_etherealrazor")) {
       w_current = getcurrentweaponincludingmelee(localclientnum);
 
       if(w_current === level.w_bowie_knife) {
@@ -95,7 +95,7 @@ function_58c4bf12(localclientnum) {
         self.var_9f0aad27 = playviewmodelfx(localclientnum, level._effect[# "hash_450693824062a9b0"], "tag_weapon_left");
       }
 
-      self playSound(localclientnum, # "hash_5e4e6d81b10399dc");
+      self playSound(localclientnum, #"hash_5e4e6d81b10399dc");
       self util::function_e532f5da(0.8, self, "notetrack", level, "demo_jump");
       self function_c8066972();
     }

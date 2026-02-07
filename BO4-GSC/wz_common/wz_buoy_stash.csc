@@ -23,10 +23,10 @@ function_a99ec0bc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 1:
-      self.fx_id = util::playFXOnTag(localclientnum, # "hash_212c7fc08851dc9", self, "tag_light_buoy03_jnt");
+      self.fx_id = util::playFXOnTag(localclientnum, #"hash_212c7fc08851dc9", self, "tag_light_buoy03_jnt");
       break;
     case 2:
-      self.fx_id = util::playFXOnTag(localclientnum, # "hash_77d0b79144a0734d", self, "tag_light_buoy03_jnt");
+      self.fx_id = util::playFXOnTag(localclientnum, #"hash_77d0b79144a0734d", self, "tag_light_buoy03_jnt");
       break;
   }
 }

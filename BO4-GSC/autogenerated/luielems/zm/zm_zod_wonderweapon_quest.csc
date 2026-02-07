@@ -24,7 +24,7 @@ class czm_zod_wonderweapon_quest: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_zod_wonderweapon_quest");
+    cluielem::open(localclientnum, #"zm_zod_wonderweapon_quest");
   }
 
   function function_fa582112(localclientnum) {

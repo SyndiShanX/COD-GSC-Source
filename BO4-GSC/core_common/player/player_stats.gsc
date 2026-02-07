@@ -166,20 +166,20 @@ inc_stat(...) {
 }
 
 function_e6106f3b(statname, value) {
-  self set_stat(#"playerstatsbygametype", function_8921af36(), statname, # "statvalue", value);
-  self set_stat(#"playerstatsbygametype", function_8921af36(), statname, # "challengevalue", value);
-  self set_stat(#"playerstatslist", statname, # "statvalue", value);
-  self set_stat(#"playerstatslist", statname, # "challengevalue", value);
+  self set_stat(#"playerstatsbygametype", function_8921af36(), statname, #"statvalue", value);
+  self set_stat(#"playerstatsbygametype", function_8921af36(), statname, #"challengevalue", value);
+  self set_stat(#"playerstatslist", statname, #"statvalue", value);
+  self set_stat(#"playerstatslist", statname, #"challengevalue", value);
 }
 
 function_1d354b96(statname, value) {
-  var_44becfa9 = self inc_stat(#"playerstatslist", statname, # "statvalue", value);
+  var_44becfa9 = self inc_stat(#"playerstatslist", statname, #"statvalue", value);
   self addgametypestat(statname, value);
   return var_44becfa9;
 }
 
 function_ed81f25e(statname) {
-  return self get_stat(#"playerstatsbygametype", util::get_gametype_name(), statname, # "statvalue");
+  return self get_stat(#"playerstatsbygametype", util::get_gametype_name(), statname, #"statvalue");
 }
 
 function_baa25a23(statname, value) {
@@ -225,7 +225,7 @@ function_62b271d8(statname, value) {
       continue;
     }
 
-    teammatecount = get_stat(#"afteractionreportstats", # "teammatecount");
+    teammatecount = get_stat(#"afteractionreportstats", #"teammatecount");
 
     if(!isDefined(teammatecount)) {
       return;
@@ -234,10 +234,10 @@ function_62b271d8(statname, value) {
     playerxuid = int(self getxuid(1));
 
     for(i = 0; i < teammatecount; i++) {
-      var_bd8d01a8 = player get_stat(#"afteractionreportstats", # "teammates", i, # "xuid");
+      var_bd8d01a8 = player get_stat(#"afteractionreportstats", #"teammates", i, #"xuid");
 
       if(var_bd8d01a8 === playerxuid) {
-        player set_stat(#"afteractionreportstats", # "teammates", i, statname, value);
+        player set_stat(#"afteractionreportstats", #"teammates", i, statname, value);
         break;
       }
     }
@@ -252,7 +252,7 @@ function_b7f80d87(statname, value) {
       continue;
     }
 
-    teammatecount = get_stat(#"afteractionreportstats", # "teammatecount");
+    teammatecount = get_stat(#"afteractionreportstats", #"teammatecount");
 
     if(!isDefined(teammatecount)) {
       return;
@@ -261,10 +261,10 @@ function_b7f80d87(statname, value) {
     playerxuid = int(self getxuid(1));
 
     for(i = 0; i < teammatecount; i++) {
-      var_bd8d01a8 = player get_stat(#"afteractionreportstats", # "teammates", i, # "xuid");
+      var_bd8d01a8 = player get_stat(#"afteractionreportstats", #"teammates", i, #"xuid");
 
       if(var_bd8d01a8 === playerxuid) {
-        player inc_stat(#"afteractionreportstats", # "teammates", i, statname, value);
+        player inc_stat(#"afteractionreportstats", #"teammates", i, statname, value);
         break;
       }
     }
@@ -279,7 +279,7 @@ function_81f5c0fe(statname, value) {
   gametype = level.var_12323003;
   map = util::get_map_name();
   mapstats = isarenamode() ? # "mapstatsarena" : # "mapstats";
-  return self inc_stat(mapstats, map, # "permode", gametype, statname, value);
+  return self inc_stat(mapstats, map, #"permode", gametype, statname, value);
 }
 
 set_stat_global(statname, value, var_b6d36336 = 0) {
@@ -292,18 +292,18 @@ set_stat_global(statname, value, var_b6d36336 = 0) {
   }
 
   if(isarenamode() && !var_b6d36336) {
-    return self set_stat(#"playerstatslist", statname, # "arenavalue", value);
+    return self set_stat(#"playerstatslist", statname, #"arenavalue", value);
   }
 
-  return self set_stat(#"playerstatslist", statname, # "statvalue", value);
+  return self set_stat(#"playerstatslist", statname, #"statvalue", value);
 }
 
 get_stat_global(statname, var_b6d36336 = 0) {
   if(isarenamode() && !var_b6d36336) {
-    return self get_stat(#"playerstatslist", statname, # "arenavalue");
+    return self get_stat(#"playerstatslist", statname, #"arenavalue");
   }
 
-  return self get_stat(#"playerstatslist", statname, # "statvalue");
+  return self get_stat(#"playerstatslist", statname, #"statvalue");
 }
 
 set_stat_challenge(statname, value) {
@@ -311,15 +311,15 @@ set_stat_challenge(statname, value) {
     return false;
   }
 
-  return self set_stat(#"playerstatslist", statname, # "challengevalue", value);
+  return self set_stat(#"playerstatslist", statname, #"challengevalue", value);
 }
 
 get_stat_challenge(statname) {
-  return self get_stat(#"playerstatslist", statname, # "challengevalue");
+  return self get_stat(#"playerstatslist", statname, #"challengevalue");
 }
 
 function_af5584ca(statname) {
-  return self get_stat(#"playerstatslist", statname, # "challengetier");
+  return self get_stat(#"playerstatslist", statname, #"challengetier");
 }
 
 function_8e071909(statname, value) {
@@ -327,11 +327,11 @@ function_8e071909(statname, value) {
     return false;
   }
 
-  return self set_stat(#"playerstatslist", statname, # "challengetier", value);
+  return self set_stat(#"playerstatslist", statname, #"challengetier", value);
 }
 
 function_878e75b7(statname) {
-  return self get_stat(#"playerstatsbygametype", util::get_gametype_name(), statname, # "challengevalue");
+  return self get_stat(#"playerstatsbygametype", util::get_gametype_name(), statname, #"challengevalue");
 }
 
 function_dad108fa(statname, value) {
@@ -344,10 +344,10 @@ function_dad108fa(statname, value) {
   }
 
   if(isarenamode()) {
-    return self inc_stat(#"playerstatslist", statname, # "arenavalue", value);
+    return self inc_stat(#"playerstatslist", statname, #"arenavalue", value);
   }
 
-  return self inc_stat(#"playerstatslist", statname, # "statvalue", value);
+  return self inc_stat(#"playerstatslist", statname, #"statvalue", value);
 }
 
 function_bb7eedf0(statname, value) {

@@ -134,7 +134,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     }
 
     homunculus thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", homunculus);
-    grenade waittill(#"stationary", # "death");
+    grenade waittill(#"stationary", #"death");
 
     if(isDefined(grenade)) {
       homunculus unlink();
@@ -187,7 +187,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
 }
 
 function_1dba4a2() {
-  self endon(#"death", # "hash_3e410dbcd9e66000");
+  self endon(#"death", #"hash_3e410dbcd9e66000");
   self.mover endon(#"death");
 
   while(true) {

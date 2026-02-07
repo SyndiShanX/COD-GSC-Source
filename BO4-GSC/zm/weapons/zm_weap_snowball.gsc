@@ -46,7 +46,7 @@ on_grenade_fired(s_params) {
     return;
   }
 
-  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", # "explode");
+  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode");
   a_e_players = getplayers();
   a_e_players = arraysortclosest(a_e_players, s_waitresult.position, 4, 0, 64);
 
@@ -68,7 +68,7 @@ on_grenade_fired(s_params) {
       }
 
       if(isplayer(var_c006f5e9) && var_c006f5e9 != self) {
-        self thread zm_audio::create_and_play_dialog(#"snowball", # "friendly");
+        self thread zm_audio::create_and_play_dialog(#"snowball", #"friendly");
       }
     }
   }

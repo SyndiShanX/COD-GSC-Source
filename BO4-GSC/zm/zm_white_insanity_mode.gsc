@@ -90,10 +90,10 @@ init_quest() {
     }
 
     function_69a6d31a(0);
-    zm_sq::register(#"insanity_mode", # "step_1", # "insanity_mode_step1", &insanity_mode_step1_setup, &insanity_mode_step1_cleanup);
-    zm_sq::register(#"insanity_mode", # "step_2", # "insanity_mode_step2", &insanity_mode_step2_setup, &insanity_mode_step2_cleanup);
-    zm_sq::register(#"insanity_mode", # "step_3", # "insanity_mode_step3", &insanity_mode_step3_setup, &insanity_mode_step3_cleanup);
-    zm_sq::register(#"insanity_mode", # "step_4", # "insanity_mode_step4", &insanity_mode_step4_setup, &insanity_mode_step4_cleanup);
+    zm_sq::register(#"insanity_mode", #"step_1", #"insanity_mode_step1", &insanity_mode_step1_setup, &insanity_mode_step1_cleanup);
+    zm_sq::register(#"insanity_mode", #"step_2", #"insanity_mode_step2", &insanity_mode_step2_setup, &insanity_mode_step2_cleanup);
+    zm_sq::register(#"insanity_mode", #"step_3", #"insanity_mode_step3", &insanity_mode_step3_setup, &insanity_mode_step3_cleanup);
+    zm_sq::register(#"insanity_mode", #"step_4", #"insanity_mode_step4", &insanity_mode_step4_setup, &insanity_mode_step4_cleanup);
     zm_sq::start(#"insanity_mode");
     return;
   }
@@ -134,7 +134,7 @@ insanity_mode_step1_setup(var_5ea5c94d) {
       level flag::wait_till(#"hash_35762ecd1ee8f3c1");
       reset_wisp();
       level thread function_d7fe6be2();
-      a_flags = array(#"hash_35762ecd1ee8f3c1", # "shed_waiting");
+      a_flags = array(#"hash_35762ecd1ee8f3c1", #"shed_waiting");
       level flag::wait_till_clear_any(a_flags);
 
       if(!level flag::get(#"hash_35762ecd1ee8f3c1")) {
@@ -145,7 +145,7 @@ insanity_mode_step1_setup(var_5ea5c94d) {
 
       function_461006d1();
       level flag::set(#"infinite_round_spawning");
-      var_f8b0325d = array(#"wisp_path_completed", # "hash_13cf89176254a394");
+      var_f8b0325d = array(#"wisp_path_completed", #"hash_13cf89176254a394");
       level flag::wait_till_any(var_f8b0325d);
       level flag::clear(#"infinite_round_spawning");
       level.var_d416f0ff.vh_wisp clientfield::set("fx8_insanity_wisp", 0);
@@ -168,7 +168,7 @@ insanity_mode_step1_cleanup(var_5ea5c94d, ended_early) {
 }
 
 function_d7fe6be2() {
-  self endon(#"end_game", # "hash_227a6fc118040203");
+  self endon(#"end_game", #"hash_227a6fc118040203");
   var_9d62fe6f = getent("insanity_mode_wisp_start_trigger", "targetname");
   level flag::set(#"shed_waiting");
 
@@ -211,7 +211,7 @@ function_461006d1() {
 }
 
 function_dba32984() {
-  level endon(#"wisp_path_completed", # "hash_13cf89176254a394");
+  level endon(#"wisp_path_completed", #"hash_13cf89176254a394");
 
   if(isDefined(self.var_ef55363f)) {
     is_player_touching = 1;
@@ -244,7 +244,7 @@ function_7cfef7a8() {
 }
 
 function_4bcfb4d9() {
-  self endon(#"wisp_path_completed", # "magic_door_power_up_grabbed");
+  self endon(#"wisp_path_completed", #"magic_door_power_up_grabbed");
 
   while(true) {
     level flag::wait_till(#"hash_35762ecd1ee8f3c1");
@@ -288,7 +288,7 @@ insanity_mode_step2_cleanup(var_5ea5c94d, ended_early) {
 insanity_mode_step3_setup(var_5ea5c94d) {
   if(!var_5ea5c94d) {
     s_insanity_mode_confirmation = struct::get("insanity_mode_confirmation");
-    str_hint = zm_utility::function_d6046228(#"hash_209b7a0a83ce0276", # "hash_683c616025752252");
+    str_hint = zm_utility::function_d6046228(#"hash_209b7a0a83ce0276", #"hash_683c616025752252");
 
     while(!flag::get(#"hash_7cd09ec15b9808a9")) {
       iprintlnbold("<dev string:xc4>" + level.var_f13364b4.var_3c358113);
@@ -306,7 +306,7 @@ insanity_mode_step3_setup(var_5ea5c94d) {
       s_insanity_mode_confirmation thread function_3d4b148b();
       level thread timer_countdown();
       zm_white_main_quest::function_63e4838b(1);
-      a_flags = array(#"hash_7cd09ec15b9808a9", # "hash_12b747be855cc622");
+      a_flags = array(#"hash_7cd09ec15b9808a9", #"hash_12b747be855cc622");
       level flag::wait_till_any(a_flags);
 
       if(level flag::get(#"hash_12b747be855cc622") && !level flag::get(#"hash_7cd09ec15b9808a9")) {

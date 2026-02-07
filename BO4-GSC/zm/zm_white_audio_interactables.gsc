@@ -58,7 +58,7 @@ function_c7d4845() {
     e_who playSound("evt_punch_card_pickup");
 
     if(math::cointoss()) {
-      e_who thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+      e_who thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
     }
 
     level.var_389d1b12 += 1;
@@ -351,7 +351,7 @@ function_1792ae3(e_item) {
     s_reel.in_inventory = 1;
 
     if(math::cointoss()) {
-      self thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+      self thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
     }
 
     if(isDefined(e_item)) {

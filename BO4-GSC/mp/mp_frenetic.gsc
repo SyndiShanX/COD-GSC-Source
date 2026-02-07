@@ -89,7 +89,7 @@ on_game_playing() {
 function_dd64960c(a_ents) {
   if(isDefined(a_ents[# "prop 1"])) {
     var_7425591a = a_ents[# "prop 1"] gettagorigin("tarp_06_jnt") + (0, 0, -8);
-    a_ents[# "prop 1"] waittill(#"physics_pulse", # "death");
+    a_ents[# "prop 1"] waittill(#"physics_pulse", #"death");
     physicsexplosionsphere(var_7425591a, 1024, 1, 1);
   }
 }
@@ -107,10 +107,10 @@ function_2cdcf5c3() {
     return;
   }
 
-  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_bundle", "scriptbundlename"), &scene::play, # "p8_fxanim_mp_frenetic_solar_panels_idle_bundle");
-  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_delay_01_bundle", "scriptbundlename"), &scene::play, # "p8_fxanim_mp_frenetic_solar_panels_delay_01_idle_bundle");
-  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_delay_02_bundle", "scriptbundlename"), &scene::play, # "p8_fxanim_mp_frenetic_solar_panels_delay_02_idle_bundle");
-  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_delay_03_bundle", "scriptbundlename"), &scene::play, # "p8_fxanim_mp_frenetic_solar_panels_delay_03_idle_bundle");
+  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_bundle", "scriptbundlename"), &scene::play, #"p8_fxanim_mp_frenetic_solar_panels_idle_bundle");
+  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_delay_01_bundle", "scriptbundlename"), &scene::play, #"p8_fxanim_mp_frenetic_solar_panels_delay_01_idle_bundle");
+  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_delay_02_bundle", "scriptbundlename"), &scene::play, #"p8_fxanim_mp_frenetic_solar_panels_delay_02_idle_bundle");
+  array::thread_all(struct::get_array("p8_fxanim_mp_frenetic_solar_panels_delay_03_bundle", "scriptbundlename"), &scene::play, #"p8_fxanim_mp_frenetic_solar_panels_delay_03_idle_bundle");
   level thread scene::skipto_end(#"p8_fxanim_mp_frenetic_vines_01_bundle", undefined, undefined, 1);
   level thread scene::skipto_end(#"p8_fxanim_mp_frenetic_vines_02_bundle", undefined, undefined, 1);
   level thread scene::skipto_end(#"p8_fxanim_mp_frenetic_vines_03_bundle", undefined, undefined, 1);

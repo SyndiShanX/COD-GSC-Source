@@ -31,7 +31,7 @@ preload() {
 
 init() {
   level flag::init(#"hash_2c3411c8b8b421d8");
-  zm_orange_pablo::register_drop_off(16, # "hash_18dcf44bdd7a747c", # "hash_459899940f28d8f0", &function_b5f900c3);
+  zm_orange_pablo::register_drop_off(16, #"hash_18dcf44bdd7a747c", #"hash_459899940f28d8f0", &function_b5f900c3);
 }
 
 function_5309464a(var_5ea5c94d) {
@@ -192,7 +192,7 @@ function_bf106bdf() {
   vh_wisp vehicle::get_on_and_go_path(nd_start);
   e_device = util::spawn_model("p8_zm_ora_elemental_vessel", vh_wisp.origin + (0, 0, -10));
   e_device thread zm_orange_mq_hell::rotate_forever((0, 45, 0));
-  e_device zm_item_pickup::create_item_pickup(&pickup_device, zm_utility::function_d6046228(#"hash_50d83a4f11ad9d8", # "hash_51d8e27e625c6bd4"), undefined, 128);
+  e_device zm_item_pickup::create_item_pickup(&pickup_device, zm_utility::function_d6046228(#"hash_50d83a4f11ad9d8", #"hash_51d8e27e625c6bd4"), undefined, 128);
 }
 
 pickup_device(e_item, e_player) {

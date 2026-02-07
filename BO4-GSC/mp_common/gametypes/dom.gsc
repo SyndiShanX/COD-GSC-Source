@@ -554,7 +554,7 @@ onenduse(team, player, success) {
 flagcapturedfromneutral(team) {
   self.singleowner = 1;
   otherteam = util::getotherteam(team);
-  thread util::printandsoundoneveryone(team, undefined, # "", undefined, "mp_war_objective_taken");
+  thread util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_war_objective_taken");
   thread sound::play_on_players("mus_dom_captured" + "_" + level.teampostfix[team]);
 
   if(getteamflagcount(team) == level.flags.size) {
@@ -573,7 +573,7 @@ flagcapturedfromneutral(team) {
 
 flagcapturedfromteam(team, oldteam) {
   self.singleowner = 0;
-  thread util::printandsoundoneveryone(team, oldteam, # "", # "", "mp_war_objective_taken", "mp_war_objective_lost", "");
+  thread util::printandsoundoneveryone(team, oldteam, #"", #"", "mp_war_objective_taken", "mp_war_objective_lost", "");
 
   if(getteamflagcount(team) == level.flags.size) {
     statusdialog("secured_all", team, "objective_all");
@@ -598,7 +598,7 @@ flagcapturedfromteam(team, oldteam) {
 
 flagneutralized(team, oldteam) {
   self.singleowner = 1;
-  thread util::printandsoundoneveryone(#"neutral", oldteam, # "", # "", "mp_war_objective_neutralized", "mp_war_objective_lost", "");
+  thread util::printandsoundoneveryone(#"neutral", oldteam, #"", #"", "mp_war_objective_neutralized", "mp_war_objective_lost", "");
 
   if(getteamflagcount(team) == level.flags.size) {
     statusdialog("lost_all", oldteam, "objective_all");
@@ -784,13 +784,13 @@ onuse(sentient) {
 }
 
 totaldomination(team) {
-  level endon(#"flag_captured", # "game_ended");
+  level endon(#"flag_captured", #"game_ended");
   wait 180;
   challenges::totaldomination(team);
 }
 
 watchforbflagcap() {
-  level endon(#"game_ended", # "endwatchforbflagcapaftertime");
+  level endon(#"game_ended", #"endwatchforbflagcapaftertime");
   level thread endwatchforbflagcapaftertime(60);
 
   for(;;) {
@@ -1359,7 +1359,7 @@ function_d3a438fb(entity) {
 
 killwhilecontesting(flag, weapon) {
   self notify(#"killwhilecontesting");
-  self endon(#"killwhilecontesting", # "disconnect");
+  self endon(#"killwhilecontesting", #"disconnect");
   killtime = gettime();
   playerteam = self.pers[# "team"];
 

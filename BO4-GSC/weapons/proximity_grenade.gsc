@@ -107,7 +107,7 @@ onspawnproximitygrenadeweaponobject(watcher, owner) {
   self thread setupkillcament();
 
   if(isplayer(owner)) {
-    owner stats::function_e24eec31(self.weapon, # "used", 1);
+    owner stats::function_e24eec31(self.weapon, #"used", 1);
   }
 
   if(isDefined(self.weapon) && self.weapon.proximitydetonation > 0) {
@@ -235,7 +235,7 @@ addplayertochain(player) {
 }
 
 proximitygrenadechain(eattacker, einflictor, killcament, weapon, meansofdeath, damage, proximitychain, delay) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   eattacker endon(#"disconnect");
 
   if(!isDefined(proximitychain)) {
@@ -401,7 +401,7 @@ performhudeffects(position, distancetogrenade) {
 
 damageplayerinradius(position, eattacker, killcament) {
   self notify(#"proximitygrenadedamagestart");
-  self endon(#"proximitygrenadedamagestart", # "disconnect", # "death");
+  self endon(#"proximitygrenadedamagestart", #"disconnect", #"death");
   eattacker endon(#"disconnect");
   playFXOnTag(level._effect[# "prox_grenade_player_shock"], self, "J_SpineUpper");
   g_time = gettime();

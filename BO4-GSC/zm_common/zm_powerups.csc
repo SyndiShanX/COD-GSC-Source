@@ -195,7 +195,7 @@ play_powerup_fx(localclientnum, str_fx, var_6df65756 = 0) {
   }
 
   if(var_6df65756 && !isDefined(self.var_71e06c56)) {
-    self playSound(localclientnum, # "hash_3a25dc0ad86a722c");
+    self playSound(localclientnum, #"hash_3a25dc0ad86a722c");
     self.var_71e06c56 = self playLoopSound(#"hash_3119fa236ffcf847");
   }
 

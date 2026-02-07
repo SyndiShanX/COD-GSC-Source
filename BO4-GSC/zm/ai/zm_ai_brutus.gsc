@@ -70,10 +70,10 @@ __init__() {
   level._effect[# "brutus"][# "lockdown_stub_type_pap"] = "maps/zm_escape/fx8_alcatraz_perk_lock";
   level._effect[# "brutus"][# "lockdown_stub_type_perks"] = "maps/zm_escape/fx8_alcatraz_perk_s_lock";
   level._effect[# "brutus"][# "lockdown_stub_type_crafting_tables"] = "maps/zm_escape/fx8_alcatraz_w_bench_lock";
-  level thread aat::register_immunity("zm_aat_brain_decay", # "brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"brutus", 1, 1, 1);
   clientfield::register("actor", "brutus_shock_attack", 1, 1, "counter");
   clientfield::register("actor", "brutus_spawn_clientfield", 1, 1, "int");
   clientfield::register("toplayer", "brutus_shock_attack_player", 1, 1, "counter");
@@ -730,7 +730,7 @@ smoke_vo(v_pos) {
     waitresult = t_smoke waittill(#"trigger");
 
     if(isplayer(waitresult.activator)) {
-      b_played = waitresult.activator zm_audio::create_and_play_dialog(#"brutus", # "smoke_react");
+      b_played = waitresult.activator zm_audio::create_and_play_dialog(#"brutus", #"smoke_react");
 
       if(isDefined(b_played) && b_played) {
         t_smoke notify(#"hash_617485dc39ba3f5e");
@@ -742,7 +742,7 @@ smoke_vo(v_pos) {
 }
 
 function_9a4a6d02() {
-  self waittilltimeout(20, # "hash_617485dc39ba3f5e");
+  self waittilltimeout(20, #"hash_617485dc39ba3f5e");
   self delete();
 }
 

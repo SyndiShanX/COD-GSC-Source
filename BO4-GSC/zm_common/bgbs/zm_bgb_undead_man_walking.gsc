@@ -11,7 +11,7 @@
 #namespace zm_bgb_undead_man_walking;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_undead_man_walking", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_undead_man_walking", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -23,7 +23,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   self thread function_da70ffac();
 
   if(bgb::increment_ref_count(#"zm_bgb_undead_man_walking")) {
@@ -35,7 +35,7 @@ enable() {
 }
 
 function_da70ffac() {
-  self waittill(#"disconnect", # "bled_out", # "bgb_update");
+  self waittill(#"disconnect", #"bled_out", #"bgb_update");
 
   if(bgb::decrement_ref_count(#"zm_bgb_undead_man_walking")) {
     return;

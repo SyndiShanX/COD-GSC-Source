@@ -186,7 +186,7 @@ function_24dbaaee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_7aeda665(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = self;
-  var_f0120993 = function_5778f82(localclientnum, # "hash_410c46b5ff702c96");
+  var_f0120993 = function_5778f82(localclientnum, #"hash_410c46b5ff702c96");
 
   if(var_f0120993 && !player function_83973173()) {
     if(newval == 0) {
@@ -200,7 +200,7 @@ function_7aeda665(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_12d5587e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = self;
-  var_f0120993 = function_5778f82(localclientnum, # "hash_410c46b5ff702c96");
+  var_f0120993 = function_5778f82(localclientnum, #"hash_410c46b5ff702c96");
 
   if(var_f0120993 && !player function_83973173()) {
     if(newval == 0) {
@@ -218,7 +218,7 @@ function_a189ab2e(localclientnum, enemy) {
   local_player = self;
   local_player notify("stop_watching_enemy_visibility" + enemy getentitynumber());
   local_player endon(#"death", "stop_watching_enemy_visibility" + enemy getentitynumber());
-  enemy endon(#"death", # "disconnect");
+  enemy endon(#"death", #"disconnect");
   can_see_enemy = 0;
 
   while(true) {

@@ -129,7 +129,7 @@ function_b6e5e889(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_2509f629(localclientnum, var_77e629d2 = 1) {
-  self endon(#"death", # "hash_2fb51b31de21bda9");
+  self endon(#"death", #"hash_2fb51b31de21bda9");
 
   if(var_77e629d2 && viewmodelhastag(localclientnum, "tag_flash2")) {
     self.var_59bda7f4 = playviewmodelfx(localclientnum, level._effect[# "hash_25f2b145ee5374d9"], "tag_flash2");

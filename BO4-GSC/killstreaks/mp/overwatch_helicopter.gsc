@@ -38,7 +38,7 @@
 #namespace overwatch_helicopter;
 
 autoexec __init__system__() {
-  system::register(#"overwatch_helicopter", &__init__, undefined, # "killstreaks");
+  system::register(#"overwatch_helicopter", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -174,12 +174,12 @@ function_ca6698c6() {
   player notify(#"hash_7b84cc3c326479a6", {
     #chopper: helicopter
   });
-  player addweaponstat(settings.ksweapon, # "used", 1);
+  player addweaponstat(settings.ksweapon, #"used", 1);
   player thread function_a9fc0ef6(helicopter);
   player thread watchplayerteamchangethread(helicopter);
   function_ab667e1c(player, helicopter);
   helicopter thread function_5c15f6d6();
-  util::function_5a68c330(21, player.team, player getentitynumber(), # "hash_76bc8a74d60388e4");
+  util::function_5a68c330(21, player.team, player getentitynumber(), #"hash_76bc8a74d60388e4");
   return true;
 }
 
@@ -260,11 +260,11 @@ function_a0068ca0(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
       }
 
       helicopter killstreaks::function_73566ec7(eattacker, weapon, helicopter.owner);
-      luinotifyevent(#"player_callout", 2, # "hash_3440c27a76738802", eattacker.entnum);
+      luinotifyevent(#"player_callout", 2, #"hash_3440c27a76738802", eattacker.entnum);
       eattacker battlechatter::function_dd6a6012("overwatch_helicopter", weapon);
       challenges::destroyedhelicopter(eattacker, weapon, smeansofdeath, 0);
       eattacker challenges::addflyswatterstat(weapon, self);
-      eattacker stats::function_e24eec31(weapon, # "hash_3f3d8a93c372c67d", 1);
+      eattacker stats::function_e24eec31(weapon, #"hash_3f3d8a93c372c67d", 1);
     }
 
     helicopter thread performleavehelicopterfromdamage();
@@ -296,13 +296,13 @@ performleavehelicopterfromdamage() {
 
   self.leave_by_damage_initiated = 1;
   failsafe_timeout = 5;
-  helicopter waittilltimeout(failsafe_timeout, # "static_fx_done");
+  helicopter waittilltimeout(failsafe_timeout, #"static_fx_done");
   function_f6442ecd(helicopter, helicopter.owner, 1);
 }
 
 function_49dca506(helicopter, attacker) {
   if(isDefined(attacker)) {
-    luinotifyevent(#"player_callout", 2, # "hash_20aa28bee9cfdd61", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"hash_20aa28bee9cfdd61", attacker.entnum);
   }
 
   if(target_istarget(helicopter)) {
@@ -342,11 +342,11 @@ function_a9fc0ef6(helicopter) {
 
 watchplayerteamchangethread(helicopter) {
   helicopter notify(#"hash_73c07c54a285eb73");
-  helicopter endon(#"hash_73c07c54a285eb73", # "overwatch_hacked");
+  helicopter endon(#"hash_73c07c54a285eb73", #"overwatch_hacked");
   assert(isplayer(self));
   player = self;
   player endon(#"overwatch_left");
-  player waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  player waittill(#"joined_team", #"disconnect", #"joined_spectators");
   ownerleft = !isDefined(player) || isDefined(helicopter) && helicopter.ownerentnum == player.entnum;
   player thread function_f6442ecd(helicopter, player, ownerleft);
 
@@ -356,7 +356,7 @@ watchplayerteamchangethread(helicopter) {
 }
 
 function_82fb79e3(startnode, protectdest, hardpointtype, heli_team) {
-  self endon(#"death", # "abandoned");
+  self endon(#"death", #"abandoned");
   self.protectdest = protectdest;
   self.var_6c63b409 = protectdest;
   radius = 10000;
@@ -386,7 +386,7 @@ function_82fb79e3(startnode, protectdest, hardpointtype, heli_team) {
 }
 
 function_5c15f6d6() {
-  self endon(#"death", # "crashing", # "leaving");
+  self endon(#"death", #"crashing", #"leaving");
 
   for(;;) {
     if(isDefined(self.protectdest) && isDefined(self.heligoalpos)) {
@@ -425,7 +425,7 @@ function_5c15f6d6() {
 }
 
 function_c4b00a04(startnode, protectdest, hardpointtype, heli_team) {
-  self endon(#"death", # "abandoned");
+  self endon(#"death", #"abandoned");
   helicopter::heli_reset();
   self.reached_dest = 0;
   self.goalradius = 30;
@@ -446,7 +446,7 @@ function_c4b00a04(startnode, protectdest, hardpointtype, heli_team) {
     }
 
     var_520e3459 = randomintrange(level.var_739f9c79, level.var_b6d2e275);
-    waitresult = self waittilltimeout(var_520e3459, # "locking on", # "locking on hacking", # "damage state");
+    waitresult = self waittilltimeout(var_520e3459, #"locking on", #"locking on hacking", #"damage state");
     newdest = heli_get_protect_spot(protectdest, undefined, heli_team);
     self.protectdest = protectdest;
 

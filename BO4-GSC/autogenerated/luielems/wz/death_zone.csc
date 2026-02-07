@@ -12,7 +12,7 @@ class cdeath_zone: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "death_zone");
+    cluielem::open(localclientnum, #"death_zone");
   }
 
   function function_fa582112(localclientnum) {

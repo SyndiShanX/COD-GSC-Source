@@ -524,7 +524,7 @@ spawn_point_class_name_being_used(name) {
 }
 
 initialspawnprotection(specialtyname, spawnmonitorspeed) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(level.spawnprotectiontime) || level.spawnprotectiontime == 0) {
     return;

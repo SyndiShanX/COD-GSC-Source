@@ -95,16 +95,16 @@ addflyswatterstat(weapon, aircraft) {
     self.pers[# "flyswattercount"] = 0;
   }
 
-  self stats::function_e24eec31(weapon, # "destroyed_aircraft", 1);
+  self stats::function_e24eec31(weapon, #"destroyed_aircraft", 1);
   self.pers[# "flyswattercount"]++;
 
   if(self.pers[# "flyswattercount"] == 5) {
-    self stats::function_e24eec31(weapon, # "destroyed_5_aircraft", 1);
+    self stats::function_e24eec31(weapon, #"destroyed_5_aircraft", 1);
   }
 
   if(isDefined(aircraft) && isDefined(aircraft.birthtime)) {
     if(gettime() - aircraft.birthtime < 20000) {
-      self stats::function_e24eec31(weapon, # "destroyed_aircraft_under20s", 1);
+      self stats::function_e24eec31(weapon, #"destroyed_aircraft_under20s", 1);
     }
   }
 
@@ -113,7 +113,7 @@ addflyswatterstat(weapon, aircraft) {
   }
 
   if(isDefined(self.destroyedaircrafttime[weapon]) && gettime() - self.destroyedaircrafttime[weapon] < 10000) {
-    self stats::function_e24eec31(weapon, # "destroyed_2aircraft_quickly", 1);
+    self stats::function_e24eec31(weapon, #"destroyed_2aircraft_quickly", 1);
     self.destroyedaircrafttime[weapon] = undefined;
     return;
   }
@@ -438,7 +438,7 @@ ishighestscoringplayer(player) {
 }
 
 spawnwatcher() {
-  self endon(#"disconnect", # "killspawnmonitor");
+  self endon(#"disconnect", #"killspawnmonitor");
   self.pers[# "stickexplosivekill"] = 0;
   self.pers[# "pistolheadshot"] = 0;
   self.pers[# "assaultrifleheadshot"] = 0;
@@ -459,7 +459,7 @@ spawnwatcher() {
 }
 
 watchfordtp() {
-  self endon(#"disconnect", # "death", # "killdtpmonitor");
+  self endon(#"disconnect", #"death", #"killdtpmonitor");
   self.dtptime = 0;
 
   while(true) {
@@ -469,7 +469,7 @@ watchfordtp() {
 }
 
 watchformantle() {
-  self endon(#"disconnect", # "death", # "killmantlemonitor");
+  self endon(#"disconnect", #"death", #"killmantlemonitor");
   self.mantletime = 0;
 
   while(true) {
@@ -1001,11 +1001,11 @@ destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehic
 
   if(self.pers[# "challenge_destroyed_killstreak"] >= 5) {
     self.pers[# "challenge_destroyed_killstreak"] = 0;
-    self stats::function_e24eec31(weapon, # "destroy_5_killstreak", 1);
-    self stats::function_e24eec31(weapon, # "destroy_5_killstreak_vehicle", 1);
+    self stats::function_e24eec31(weapon, #"destroy_5_killstreak", 1);
+    self stats::function_e24eec31(weapon, #"destroy_5_killstreak_vehicle", 1);
   }
 
-  self stats::function_e24eec31(weapon, # "destroy_killstreak", 1);
+  self stats::function_e24eec31(weapon, #"destroy_killstreak", 1);
 
   if(self hastalent(#"talent_engineer")) {
     self stats::function_dad108fa(#"destroy_scorestreaks_equipment_engineer", 1);
@@ -1050,7 +1050,7 @@ function_24db0c33(weapon, destroyedobject) {
     weaponpickedup = 1;
   }
 
-  self stats::function_eec52333(weapon, # "destroyed", 1, self.class_num, weaponpickedup);
+  self stats::function_eec52333(weapon, #"destroyed", 1, self.class_num, weaponpickedup);
 
   if(self hastalent(#"talent_engineer")) {
     self stats::function_dad108fa(#"destroy_scorestreaks_equipment_engineer", 1);
@@ -1099,7 +1099,7 @@ watchforrapiddestroy(weapon) {
   self waittilltimeoutordeath(4);
 
   if(self.challenge_previousdestroycount > 1) {
-    self stats::function_e24eec31(weapon, # "destroy_2_killstreaks_rapidly", 1);
+    self stats::function_e24eec31(weapon, #"destroy_2_killstreaks_rapidly", 1);
   }
 }
 
@@ -1113,7 +1113,7 @@ capturedobjective(capturetime, objective) {
           self stats::function_dad108fa(#"capture_objective_in_smoke", 1);
         }
 
-        self stats::function_e24eec31(getweapon(#"willy_pete"), # "combatrecordstat", 1);
+        self stats::function_e24eec31(getweapon(#"willy_pete"), #"combatrecordstat", 1);
         return;
       }
     }
@@ -1177,40 +1177,40 @@ assisted() {
 earnedmicrowaveassistscore(score) {
   self stats::function_dad108fa(#"assist_score_microwave_turret", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), # "assists", 1);
-  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), # "assist_score", score);
+  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), #"assists", 1);
+  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), #"assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earnedcuavassistscore(score) {
   self stats::function_dad108fa(#"assist_score_cuav", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"counteruav"), # "assists", 1);
-  self stats::function_e24eec31(getweapon(#"counteruav"), # "assist_score", score);
+  self stats::function_e24eec31(getweapon(#"counteruav"), #"assists", 1);
+  self stats::function_e24eec31(getweapon(#"counteruav"), #"assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earneduavassistscore(score) {
   self stats::function_dad108fa(#"assist_score_uav", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"uav"), # "assists", 1);
-  self stats::function_e24eec31(getweapon(#"uav"), # "assist_score", score);
+  self stats::function_e24eec31(getweapon(#"uav"), #"assists", 1);
+  self stats::function_e24eec31(getweapon(#"uav"), #"assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earnedsatelliteassistscore(score) {
   self stats::function_dad108fa(#"assist_score_satellite", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"satellite"), # "assists", 1);
-  self stats::function_e24eec31(getweapon(#"satellite"), # "assist_score", score);
+  self stats::function_e24eec31(getweapon(#"satellite"), #"assists", 1);
+  self stats::function_e24eec31(getweapon(#"satellite"), #"assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earnedempassistscore(score) {
   self stats::function_dad108fa(#"assist_score_emp", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"emp_turret"), # "assists", 1);
-  self stats::function_e24eec31(getweapon(#"emp_turret"), # "assist_score", score);
+  self stats::function_e24eec31(getweapon(#"emp_turret"), #"assists", 1);
+  self stats::function_e24eec31(getweapon(#"emp_turret"), #"assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
@@ -1292,7 +1292,7 @@ multikill(killcount, weapon) {
   doublekill = int(killcount / 2);
 
   if(doublekill > 0) {
-    self stats::function_e24eec31(weapon, # "doublekill", doublekill);
+    self stats::function_e24eec31(weapon, #"doublekill", doublekill);
 
     if(weapon.isheavyweapon) {
       self stats::function_dad108fa(#"multikill_2_with_heroweapon", doublekill);
@@ -1308,7 +1308,7 @@ multikill(killcount, weapon) {
       }
     }
 
-    self stats::function_e24eec31(weapon, # "triplekill", triplekill);
+    self stats::function_e24eec31(weapon, #"triplekill", triplekill);
 
     if(weapon.isheavyweapon) {
       self stats::function_dad108fa(#"multikill_3_with_heroweapon", triplekill);
@@ -1573,7 +1573,7 @@ killstreakten() {
 }
 
 scavengedgrenade() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self notify(#"scavengedgrenade");
   self endon(#"scavengedgrenade");
   self notify(#"scavenged_primary_grenade");
@@ -2091,7 +2091,7 @@ eventreceived(eventname) {
 }
 
 monitor_player_sprint() {
-  self endon(#"disconnect", # "killplayersprintmonitor", # "death");
+  self endon(#"disconnect", #"killplayersprintmonitor", #"death");
   self.lastsprinttime = undefined;
 
   while(true) {

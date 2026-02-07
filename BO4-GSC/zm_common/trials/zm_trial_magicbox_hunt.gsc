@@ -56,7 +56,7 @@ on_end(round_reset) {
 }
 
 function_cfb0f4d() {
-  level endon(#"hash_7646638df88a3656", # "hash_2b35a48172d1e0c2");
+  level endon(#"hash_7646638df88a3656", #"hash_2b35a48172d1e0c2");
 
   while(true) {
     level waittill(#"weapon_fly_away_start");

@@ -48,7 +48,7 @@ bouncingbetty_detonating(localclientnum) {
   up = anglestoup(self.angles);
   forward = anglesToForward(self.angles);
   playFX(localclientnum, level._effect[# "fx_betty_launch_dust"], self.origin, up, forward);
-  self playSound(localclientnum, # "wpn_betty_jump");
+  self playSound(localclientnum, #"wpn_betty_jump");
   self useanimtree("generic");
   self thread watchforexplosionnotetracks(localclientnum, up, forward);
 }
@@ -57,7 +57,7 @@ watchforexplosionnotetracks(localclientnum, up, forward) {
   self endon(#"death");
 
   while(true) {
-    notetrack = self waittill(#"explode_1st", # "explode_2nd", # "explode_main");
+    notetrack = self waittill(#"explode_1st", #"explode_2nd", #"explode_main");
 
     switch (notetrack._notify) {
       case # "explode_1st":

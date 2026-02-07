@@ -35,12 +35,12 @@ add_bookmark(bookmark, overrideentitycamera) {
 }
 
 kill_bookmark(var_81538b15, var_f28fb772, einflictor, var_50d1e41a, overrideentitycamera) {
-  bookmark = potm::function_5b1e9ed4(game.var_e9714926, # "kill", gettime(), var_81538b15, var_f28fb772, 0, einflictor, var_50d1e41a, overrideentitycamera);
+  bookmark = potm::function_5b1e9ed4(game.var_e9714926, #"kill", gettime(), var_81538b15, var_f28fb772, 0, einflictor, var_50d1e41a, overrideentitycamera);
   add_bookmark(bookmark, overrideentitycamera);
 }
 
 function_651a5f4(var_81538b15, einflictor) {
-  bookmark = potm::function_5b1e9ed4(game.var_e9714926, # "object_destroy", gettime(), var_81538b15, undefined, 0, einflictor);
+  bookmark = potm::function_5b1e9ed4(game.var_e9714926, #"object_destroy", gettime(), var_81538b15, undefined, 0, einflictor);
   add_bookmark(bookmark);
 }
 

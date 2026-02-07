@@ -22,7 +22,7 @@ __init__() {
 
 function_b245ef9e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_green", # "wz/fx8_zombie_eye_glow_green_wz");
+    self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_green", #"wz/fx8_zombie_eye_glow_green_wz");
     return;
   }
 
@@ -31,10 +31,10 @@ function_b245ef9e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_9a20c93e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_c9d177e8 = util::playFXOnTag(localclientnum, # "hash_286e0d228779181", self, "tag_origin");
+    self.var_c9d177e8 = util::playFXOnTag(localclientnum, #"hash_286e0d228779181", self, "tag_origin");
 
     if(!isDefined(self.var_2a145797)) {
-      self playSound(localclientnum, # "zmb_sq_souls_release");
+      self playSound(localclientnum, #"zmb_sq_souls_release");
       self.var_2a145797 = self playLoopSound(#"zmb_sq_souls_lp");
     }
 

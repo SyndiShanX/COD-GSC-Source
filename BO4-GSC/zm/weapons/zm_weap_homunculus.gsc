@@ -28,7 +28,7 @@
 #namespace zm_weap_homunculus;
 
 autoexec __init__system__() {
-  system::register(#"zm_weap_homunculus", &__init__, &__main__, # "zm_weapons");
+  system::register(#"zm_weap_homunculus", &__init__, &__main__, #"zm_weapons");
 }
 
 __init__() {
@@ -118,7 +118,7 @@ function_7b1ec82e(s_result) {
 }
 
 function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
-  e_grenade endoncallback(&function_5e056d93, # "death");
+  e_grenade endoncallback(&function_5e056d93, #"death");
   e_grenade flag::init(#"hash_5e780b1a8f2d1e3b");
 
   if(self laststand::player_is_in_laststand()) {
@@ -207,7 +207,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
 }
 
 function_1dba4a2() {
-  self endon(#"death", # "hash_3e410dbcd9e66000");
+  self endon(#"death", #"hash_3e410dbcd9e66000");
   self.mdl_anchor endon(#"death");
 
   while(true) {
@@ -300,7 +300,7 @@ function_32b5113(ai_zombie) {
 }
 
 function_cc9535d0(var_c4a5788c, var_bbab4f84, var_2f916462) {
-  self endon(#"death", # "explode");
+  self endon(#"death", #"explode");
   b_first_loop = 1;
 
   while(true) {
@@ -472,7 +472,7 @@ debug_draw_new_attractor_positions() {
 
 function_6a1f299b(e_parent) {
   self notify(#"fakelinkto");
-  self endon(#"fakelinkto", # "death");
+  self endon(#"fakelinkto", #"death");
 
   while(true) {
     self.origin = e_parent.origin;
@@ -582,7 +582,7 @@ grenade_stolen_by_sam(e_grenade) {
   e_grenade.mdl_anchor unlink();
   e_grenade.mdl_anchor movez(60, 1);
   e_grenade.mdl_anchor vibrate(direction, 1.5, 2.5, 1);
-  e_grenade.mdl_anchor waittilltimeout(5, # "movedone");
+  e_grenade.mdl_anchor waittilltimeout(5, #"movedone");
   e_grenade.mdl_anchor delete();
 
   if(isDefined(e_grenade)) {
@@ -595,8 +595,8 @@ grenade_stolen_by_sam(e_grenade) {
 }
 
 function_e383ca2f() {
-  self endoncallback(&function_5e056d93, # "death");
-  self waittilltimeout(15, # "hash_90cfd38343f41f2");
+  self endoncallback(&function_5e056d93, #"death");
+  self waittilltimeout(15, #"hash_90cfd38343f41f2");
   self function_4d71ac38(#"hash_6e471fde121d0263", 1);
   self notify(#"explode");
   self function_f33bde5c();
@@ -620,7 +620,7 @@ function_e383ca2f() {
 }
 
 function_f33bde5c(b_immediate = 0) {
-  self endon(#"death", # "explode");
+  self endon(#"death", #"explode");
   s_trace = groundtrace(self.mdl_anchor.origin + (0, 0, 16), self.mdl_anchor.origin + (0, 0, -1000), 0, self.mdl_anchor);
   var_a75fe4be = s_trace[# "position"];
 

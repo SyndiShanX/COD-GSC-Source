@@ -310,7 +310,7 @@ zombie_knockdown(player, gib) {
 
 playthundergunpainanim() {
   self notify(#"end_play_thundergun_pain_anim");
-  self endon(#"killanimscript", # "death", # "end_play_thundergun_pain_anim");
+  self endon(#"killanimscript", #"death", #"end_play_thundergun_pain_anim");
 
   if(isDefined(self.marked_for_death) && self.marked_for_death) {
     return;
@@ -385,7 +385,7 @@ thundergun_sound_thread() {
   self waittill(#"spawned_player");
 
   for(;;) {
-    result = self waittill(#"grenade_fire", # "death", # "player_downed", # "weapon_change", # "grenade_pullback", # "disconnect");
+    result = self waittill(#"grenade_fire", #"death", #"player_downed", #"weapon_change", #"grenade_pullback", #"disconnect");
 
     if((result._notify == "weapon_change" || result._notify == "grenade_fire") && self getcurrentweapon() == level.w_thundergun) {
       self playLoopSound(#"tesla_idle", 0.25);
@@ -408,7 +408,7 @@ setup_thundergun_vox(player, fling, gib, knockdown) {
 
   if(fling) {
     if(30 > randomintrange(1, 100)) {
-      player zm_audio::create_and_play_dialog(#"kill", # "thundergun");
+      player zm_audio::create_and_play_dialog(#"kill", #"thundergun");
     }
   }
 }

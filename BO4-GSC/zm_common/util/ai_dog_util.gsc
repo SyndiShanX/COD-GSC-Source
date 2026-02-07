@@ -31,7 +31,7 @@
 #namespace zombie_dog_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_dog_util", &__init__, undefined, # "aat");
+  system::register(#"zombie_dog_util", &__init__, undefined, #"aat");
 }
 
 __init__() {
@@ -44,10 +44,10 @@ __init__() {
   level.dog_spawners = [];
   level flag::init("dog_clips");
   zombie_utility::set_zombie_var(#"dog_fire_trail_percent", 50);
-  level thread aat::register_immunity("zm_aat_brain_decay", # "zombie_dog", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "zombie_dog", 0, 0, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "blight_father", 0, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "zombie_dog", 0, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"zombie_dog", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"zombie_dog", 0, 0, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"blight_father", 0, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"zombie_dog", 0, 1, 1);
   dog_spawner_init();
   level thread dog_clip_monitor();
   zm_round_spawning::register_archetype(#"zombie_dog", &function_b168b424, &dog_round_spawn, &function_62db7b1c, 25);
@@ -380,7 +380,7 @@ play_dog_round() {
   wait 4.5;
   players = getplayers();
   num = randomintrange(0, players.size);
-  players[num] zm_audio::create_and_play_dialog(#"general", # "dog_spawn");
+  players[num] zm_audio::create_and_play_dialog(#"general", #"dog_spawn");
 }
 
 dog_init() {
@@ -464,7 +464,7 @@ dog_death() {
     }
 
     if(randomintrange(0, 100) >= 80) {
-      self.attacker zm_audio::create_and_play_dialog(#"kill", # "hellhound");
+      self.attacker zm_audio::create_and_play_dialog(#"kill", #"hellhound");
     }
 
     self.attacker zm_stats::increment_client_stat("zdogs_killed");
@@ -550,7 +550,7 @@ stop_dog_sound_on_death() {
 dog_behind_audio() {
   self thread stop_dog_sound_on_death();
   self endon(#"death");
-  self waittill(#"dog_running", # "dog_combat");
+  self waittill(#"dog_running", #"dog_combat");
   bhtnactionstartevent(self, "close");
   self notify(#"bhtn_action_notify", {
     #action: "close"});
@@ -644,7 +644,7 @@ dog_run_think() {
 }
 
 dog_stalk_audio() {
-  self endon(#"death", # "dog_running", # "dog_combat");
+  self endon(#"death", #"dog_running", #"dog_combat");
 
   while(true) {
     bhtnactionstartevent(self, "ambient");

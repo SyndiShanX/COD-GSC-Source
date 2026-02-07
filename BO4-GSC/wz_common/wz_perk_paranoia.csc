@@ -18,7 +18,7 @@ __init__() {
 
 function_930e5d42(localclientnum) {
   if(self function_da43934d()) {
-    var_369be743 = self hasperk(localclientnum, # "specialty_paranoia");
+    var_369be743 = self hasperk(localclientnum, #"specialty_paranoia");
     var_7c49d38b = self.var_369be743 !== var_369be743;
 
     if(var_7c49d38b) {
@@ -56,11 +56,11 @@ function_c9d3a835() {
 
 function_3e9077b(localclientnum) {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "shutdown", # "death");
+  self endon(#"disconnect", #"shutdown", #"death");
   self notify("1cd9d4f64a9f9459");
   self endon("1cd9d4f64a9f9459");
 
-  if(!self hasperk(localclientnum, # "specialty_paranoia")) {
+  if(!self hasperk(localclientnum, #"specialty_paranoia")) {
     return;
   }
 

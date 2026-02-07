@@ -40,7 +40,7 @@ function_c5d20b5c(owner, context, position) {
 
 function_f625256f(killstreak_id, context) {
   player = self;
-  self endon(#"disconnect", # "spawned_player");
+  self endon(#"disconnect", #"spawned_player");
   var_9eb4725b = level.weaponnone;
   currentweapon = self getcurrentweapon();
   prevweapon = currentweapon;
@@ -60,7 +60,7 @@ function_f625256f(killstreak_id, context) {
 
   while(true) {
     player allowmelee(0);
-    notifystring = self waittill(#"weapon_change", trigger_event, # "disconnect", # "spawned_player");
+    notifystring = self waittill(#"weapon_change", trigger_event, #"disconnect", #"spawned_player");
     player allowmelee(1);
 
     if(trigger_event != "none") {
@@ -109,7 +109,7 @@ cleanup(context, player) {
 
 markercleanupthread(context) {
   player = self;
-  player waittill(#"death", # "disconnect", # "joined_team", # "joined_spectators", # "cleanup_marker", # "changed_specialist");
+  player waittill(#"death", #"disconnect", #"joined_team", #"joined_spectators", #"cleanup_marker", #"changed_specialist");
 
   if(player flagsys::get(#"marking_done")) {
     return;
@@ -120,7 +120,7 @@ markercleanupthread(context) {
 
 markerupdatethread(context) {
   player = self;
-  player endon(#"hash_27be2db04a0908d5", # "spawned_player", # "disconnect", # "weapon_change", # "death");
+  player endon(#"hash_27be2db04a0908d5", #"spawned_player", #"disconnect", #"weapon_change", #"death");
   markermodel = spawn("script_model", (0, 0, 0));
   context.marker = markermodel;
 
@@ -217,7 +217,7 @@ markerupdatethread(context) {
 function_ef6c4a46(killstreak_id, trigger_event, supplydropweapon, context) {
   player = self;
   self notify(#"hash_27be2db04a0908d5");
-  self endon(#"hash_27be2db04a0908d5", # "spawned_player", # "disconnect", # "weapon_change");
+  self endon(#"hash_27be2db04a0908d5", #"spawned_player", #"disconnect", #"weapon_change");
   team = self.team;
 
   if(isDefined(killstreak_id) && killstreak_id == -1) {
@@ -322,13 +322,13 @@ function_ef6c4a46(killstreak_id, trigger_event, supplydropweapon, context) {
 
 cleanupwatcherondeath(killstreak_id, var_b57ab85c) {
   player = self;
-  self endon(#"disconnect", # "supplydropwatcher", # "trigger_weapon_shutdown", # "spawned_player", # "weapon_change");
-  self waittill(#"death", # "joined_team", # "joined_spectators", # "changed_specialist");
+  self endon(#"disconnect", #"supplydropwatcher", #"trigger_weapon_shutdown", #"spawned_player", #"weapon_change");
+  self waittill(#"death", #"joined_team", #"joined_spectators", #"changed_specialist");
   self notify(#"cleanup_marker");
 }
 
 checkforemp() {
-  self endon(#"supplydropwatcher", # "spawned_player", # "disconnect", # "weapon_change", # "death", # "trigger_weapon_shutdown");
+  self endon(#"supplydropwatcher", #"spawned_player", #"disconnect", #"weapon_change", #"death", #"trigger_weapon_shutdown");
   self waittill(#"emp_jammed");
   self killstreaks::switch_to_last_non_killstreak_weapon();
 }
@@ -380,7 +380,7 @@ function_d5ca3f62(player) {
   }
 
   self function_2cbae477();
-  player waittilltimeout(90, # "strobe_marked", # "payload_delivered", # "payload_fail", # "disconnect");
+  player waittilltimeout(90, #"strobe_marked", #"payload_delivered", #"payload_fail", #"disconnect");
 
   if(!isDefined(self)) {
     return;
@@ -408,9 +408,9 @@ function_284b1d4c(origin, model, timeout = undefined, var_babebdbc = undefined, 
 
 function_f61c0c1(timeout) {
   if(isDefined(timeout)) {
-    self waittilltimeout(timeout, # "death", # "strobe_stop");
+    self waittilltimeout(timeout, #"death", #"strobe_stop");
   } else {
-    self waittill(#"death", # "strobe_stop");
+    self waittill(#"death", #"strobe_stop");
   }
 
   if(!isDefined(self)) {

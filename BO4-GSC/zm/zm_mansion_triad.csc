@@ -29,13 +29,13 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + # "triad_beam", 8000, getminbitcountfornum(3), "int", &triad_beam, 0, 0);
   clientfield::register("scriptmover", "" + # "wisp_fx", 8000, 2, "int", &function_41640257, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_2108935a0c33f89a", 8000, getminbitcountfornum(3), "int", &function_b24b4025, 0, 0);
-  zm_sq_modules::function_d8383812(#"soul_capture_kp1", 8000, # "kp_1", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"soul_capture_kp2", 8000, # "kp_2", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"soul_capture_kp3", 8000, # "kp_3", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"soul_capture_kp1_halfway", 8000, # "kp_1_halfway", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"soul_capture_kp2_halfway", 8000, # "kp_2_halfway", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"soul_capture_kp3_halfway", 8000, # "kp_3_halfway", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"soul_capture_forest", 8000, # "kp_forest", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"soul_capture_kp1", 8000, #"kp_1", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"soul_capture_kp2", 8000, #"kp_2", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"soul_capture_kp3", 8000, #"kp_3", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"soul_capture_kp1_halfway", 8000, #"kp_1_halfway", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"soul_capture_kp2_halfway", 8000, #"kp_2_halfway", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"soul_capture_kp3_halfway", 8000, #"kp_3_halfway", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"soul_capture_forest", 8000, #"kp_forest", 400, level._effect[# "kp_projectile"], level._effect[# "hash_27063b90fbaa52"], undefined, undefined, 1);
 }
 
 function_da63d789(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -102,7 +102,7 @@ function_da63d789(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(isDefined(self.var_eb8d44ea)) {
     self stoploopsound(self.var_eb8d44ea);
     self.var_eb8d44ea = undefined;
-    self playSound(localclientnum, # "hash_4c0f6dc77900b94a");
+    self playSound(localclientnum, #"hash_4c0f6dc77900b94a");
   }
 
   self notify(#"hash_4df59fed1b90332a");
@@ -111,7 +111,7 @@ function_da63d789(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_da5e1d54(localclientnum, fx_blue_fire) {
   self notify("100e93786f2c9d8d");
   self endon("100e93786f2c9d8d");
-  self waittill(#"hash_4df59fed1b90332a", # "death");
+  self waittill(#"hash_4df59fed1b90332a", #"death");
 
   if(isDefined(fx_blue_fire) && isDefined(function_5c10bd79(localclientnum))) {
     killfx(localclientnum, fx_blue_fire);
@@ -160,7 +160,7 @@ function_41640257(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.fx_wisp = util::playFXOnTag(localclientnum, level._effect[# "hash_2e3e645052f77846"], self, "tag_origin");
 
     if(!isDefined(self.var_5fdd4f20)) {
-      self playSound(localclientnum, # "hash_954c283694c074");
+      self playSound(localclientnum, #"hash_954c283694c074");
       self.var_5fdd4f20 = self playLoopSound(#"hash_3ce3b3c381327cd4");
     }
 
@@ -183,7 +183,7 @@ function_41640257(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(isDefined(self.var_5fdd4f20)) {
     self stoploopsound(self.var_5fdd4f20);
-    self playSound(localclientnum, # "hash_7579ac34b357732d");
+    self playSound(localclientnum, #"hash_7579ac34b357732d");
     self.var_5fdd4f20 = undefined;
   }
 }

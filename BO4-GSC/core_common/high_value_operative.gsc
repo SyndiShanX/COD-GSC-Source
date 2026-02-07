@@ -287,10 +287,10 @@ function_cd851b02(stat, var_9b4eeccc, ddl) {
   }
 
   if(isDefined(stat.var_233a23b6) && stat.var_233a23b6) {
-    score = self stats::get_stat(ddl, stat.var_82670522, # "statvalue") - self.pers[# "hvo"][# "base"][stat.var_82670522];
+    score = self stats::get_stat(ddl, stat.var_82670522, #"statvalue") - self.pers[# "hvo"][# "base"][stat.var_82670522];
   } else {
     score = isDefined(self.pers[# "hvo"][var_9b4eeccc][stat.var_82670522]) ? self.pers[# "hvo"][var_9b4eeccc][stat.var_82670522] : 0;
-    score += self stats::get_stat(ddl, stat.var_82670522, # "statvalue") - self.pers[# "hvo"][# "current"][stat.var_82670522];
+    score += self stats::get_stat(ddl, stat.var_82670522, #"statvalue") - self.pers[# "hvo"][# "current"][stat.var_82670522];
   }
 
   return score;
@@ -301,7 +301,7 @@ function_d0c02a50(stat, var_aa1fbd8c, ddl) {
     self.pers[# "hvo"][var_aa1fbd8c][stat.var_82670522] = 0;
   }
 
-  var_6fda3763 = self stats::get_stat(ddl, stat.var_82670522, # "statvalue");
+  var_6fda3763 = self stats::get_stat(ddl, stat.var_82670522, #"statvalue");
   self.pers[# "hvo"][var_aa1fbd8c][stat.var_82670522] += var_6fda3763 - self.pers[# "hvo"][# "current"][stat.var_82670522];
   return var_6fda3763;
 }

@@ -16,7 +16,7 @@ __init__() {
 }
 
 enable_additional_primary_weapon_perk_for_level() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_additionalprimaryweapon", "mod_additionalprimaryweapon", # "perk_additional_primary_weapon", # "specialty_additionalprimaryweapon", 5000);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_additionalprimaryweapon", "mod_additionalprimaryweapon", #"perk_additional_primary_weapon", #"specialty_additionalprimaryweapon", 5000);
   zm_perks::register_perk_threads(#"specialty_mod_additionalprimaryweapon", &function_ffa39915, &function_8f205daa);
   zm_perks::function_2ae97a14(#"specialty_mod_additionalprimaryweapon", array(#"specialty_fastweaponswitch"));
 }

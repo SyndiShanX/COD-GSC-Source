@@ -567,7 +567,7 @@ stoppoisoningandflareonspawn() {
 }
 
 spawnplayerprediction() {
-  self endon(#"disconnect", # "end_respawn", # "game_ended", # "joined_spectators", # "spawned");
+  self endon(#"disconnect", #"end_respawn", #"game_ended", #"joined_spectators", #"spawned");
   plrs = teams::count_players();
   nolivesleft = level.numlives && !self.pers[# "lives"] || level.numteamlives && game.lives[self.team] > 0;
 
@@ -655,7 +655,7 @@ resetattackersthisspawnlist() {
 
 spawnplayer() {
   pixbeginevent(#"spawnplayer_preuts");
-  self endon(#"disconnect", # "joined_spectators");
+  self endon(#"disconnect", #"joined_spectators");
   hadspawned = self.hasspawned;
   self player::spawn_player();
 
@@ -729,15 +729,15 @@ spawnplayer() {
     var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
     if(isDefined(var_f8e6b703)) {
-      self match_record::set_stat(#"lives", var_f8e6b703, # "character_gender", gender);
-      self match_record::set_stat(#"lives", var_f8e6b703, # "character_decal_lootid", decallootid);
-      self match_record::set_stat(#"lives", var_f8e6b703, # "character_outfit_lootid", var_be574bd8);
-      self match_record::set_stat(#"lives", var_f8e6b703, # "character_warpaint_lootid", var_8fa79650);
-      self match_record::set_stat(#"lives", var_f8e6b703, # "character_outfit", outfitindex);
-      self match_record::set_stat(#"lives", var_f8e6b703, # "character_warpaint_outfit", warpaintoutfitindex);
+      self match_record::set_stat(#"lives", var_f8e6b703, #"character_gender", gender);
+      self match_record::set_stat(#"lives", var_f8e6b703, #"character_decal_lootid", decallootid);
+      self match_record::set_stat(#"lives", var_f8e6b703, #"character_outfit_lootid", var_be574bd8);
+      self match_record::set_stat(#"lives", var_f8e6b703, #"character_warpaint_lootid", var_8fa79650);
+      self match_record::set_stat(#"lives", var_f8e6b703, #"character_outfit", outfitindex);
+      self match_record::set_stat(#"lives", var_f8e6b703, #"character_warpaint_outfit", warpaintoutfitindex);
 
       for(i = 0; i < var_b3d9cfaa.size; i++) {
-        self match_record::set_stat(#"lives", var_f8e6b703, # "hash_20d6751cb2f9ca09", i, var_b3d9cfaa[i]);
+        self match_record::set_stat(#"lives", var_f8e6b703, #"hash_20d6751cb2f9ca09", i, var_b3d9cfaa[i]);
       }
     }
   }
@@ -891,14 +891,14 @@ in_spawnspectator(origin, angles) {
 }
 
 spectatorthirdpersonness() {
-  self endon(#"disconnect", # "spawned");
+  self endon(#"disconnect", #"spawned");
   self notify(#"spectator_thirdperson_thread");
   self endon(#"spectator_thirdperson_thread");
   self.spectatingthirdperson = 0;
 }
 
 forcespawn(time) {
-  self endon(#"death", # "disconnect", # "spawned");
+  self endon(#"death", #"disconnect", #"spawned");
 
   if(!isDefined(time)) {
     time = 60;
@@ -939,7 +939,7 @@ kickifdontspawn() {
 }
 
 kickifidontspawninternal() {
-  self endon(#"death", # "disconnect", # "spawned");
+  self endon(#"death", #"disconnect", #"spawned");
 
   while(true) {
     if(!(isDefined(level.inprematchperiod) && level.inprematchperiod) && self isstreamerready()) {
@@ -1173,7 +1173,7 @@ spawnclient(timealreadypassed) {
 }
 
 waitandspawnclient(timealreadypassed) {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
   level endon(#"game_ended");
 
   if(!isDefined(timealreadypassed)) {
@@ -1297,7 +1297,7 @@ function_6c23d45b(time, notifyname) {
 }
 
 waitrespawnorsafespawnbutton() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
 
   while(true) {
     if(self usebuttonpressed()) {
@@ -1309,7 +1309,7 @@ waitrespawnorsafespawnbutton() {
 }
 
 waitinspawnqueue() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
 
   if(!level.ingraceperiod && !level.usestartspawns) {
     currentorigin = self.origin;

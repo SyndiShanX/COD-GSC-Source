@@ -50,7 +50,7 @@ event_handler[gametype_init] main(eventstruct) {
   globallogic_spawn::addsupportedspawnpointtype("ct");
   level flag::init("combat_training_started");
   level.var_7150ddcb = 0;
-  ct_utils::function_6046a5e3(#"ar_modular_t8", array(#"reflex", # "suppressed", # "stalker", # "grip", # "quickdraw"));
+  ct_utils::function_6046a5e3(#"ar_modular_t8", array(#"reflex", #"suppressed", #"stalker", #"grip", #"quickdraw"));
   ct_utils::function_c3e647e2(#"pistol_standard_t8");
   level flag::init("mission_success");
   level flag::init("mission_failed");
@@ -267,7 +267,7 @@ function_1ca79c02(var_edc95125) {
   trace = bulletTrace(level.var_511a3f1c.origin, level.var_511a3f1c.origin + (0, 0, -1000), 0, self);
   level.var_4d47c040 = trace[# "position"];
   level thread function_20bf9b40();
-  var_133aacc1 = ct_utils::create_waypoint(#"hash_2ee615aa67beef9b", level.var_4d47c040, (0, 0, 0), # "any", undefined, 0, undefined);
+  var_133aacc1 = ct_utils::create_waypoint(#"hash_2ee615aa67beef9b", level.var_4d47c040, (0, 0, 0), #"any", undefined, 0, undefined);
   waitframe(1);
 
   if(isDefined(level.var_571c3787) && level.var_571c3787) {
@@ -333,8 +333,8 @@ function_1ca79c02(var_edc95125) {
 }
 
 function_a29191a5() {
-  ct_bots::activate_bots(5, # "axis");
-  ct_bots::activate_bots(3, # "allies");
+  ct_bots::activate_bots(5, #"axis");
+  ct_bots::activate_bots(3, #"allies");
   level notify(#"hash_20855828f97ad4eb");
 }
 
@@ -461,7 +461,7 @@ function_861806d6() {
 }
 
 function_f704f55c() {
-  level endon(#"mission_failed", # "mission_success", # "times_up");
+  level endon(#"mission_failed", #"mission_success", #"times_up");
 
   if(level.var_115bb554 == 0) {
     var_e8d6f89 = 1;

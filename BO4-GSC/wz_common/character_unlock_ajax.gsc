@@ -11,7 +11,7 @@
 #namespace character_unlock_ajax;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_ajax", &__init__, undefined, # "character_unlock_ajax_fixup");
+  system::register(#"character_unlock_ajax", &__init__, undefined, #"character_unlock_ajax_fixup");
 }
 
 __init__() {
@@ -34,7 +34,7 @@ function_1c4b5097(item) {
     var_b6015a5d = self function_b854ffba();
 
     if(var_b6015a5d >= 3 && self character_unlock::function_f0406288(#"ajax_unlock")) {
-      self character_unlock::function_c8beca5e(#"ajax_unlock", # "hash_6e5a10ffa958d875", 1);
+      self character_unlock::function_c8beca5e(#"ajax_unlock", #"hash_6e5a10ffa958d875", 1);
     }
   }
 }
@@ -55,7 +55,7 @@ on_drop_item(params) {
     var_b6015a5d = self function_b854ffba();
 
     if(var_b6015a5d < 3 && self character_unlock::function_c70bcc7a(#"ajax_unlock")) {
-      self character_unlock::function_c8beca5e(#"ajax_unlock", # "hash_6e5a10ffa958d875", 0);
+      self character_unlock::function_c8beca5e(#"ajax_unlock", #"hash_6e5a10ffa958d875", 0);
     }
   }
 }
@@ -68,7 +68,7 @@ on_item_use(params) {
       var_b6015a5d = self function_b854ffba();
 
       if(var_b6015a5d < 3) {
-        self character_unlock::function_c8beca5e(#"ajax_unlock", # "hash_6e5a10ffa958d875", 0);
+        self character_unlock::function_c8beca5e(#"ajax_unlock", #"hash_6e5a10ffa958d875", 0);
       }
     }
   }

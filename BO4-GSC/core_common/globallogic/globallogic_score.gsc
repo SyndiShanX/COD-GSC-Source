@@ -62,7 +62,7 @@ function_f0d51d49(projectile, weapon) {
     return;
   }
 
-  var_2a7ea9a6 = projectile waittilltimeout(10, # "death");
+  var_2a7ea9a6 = projectile waittilltimeout(10, #"death");
 
   if(var_2a7ea9a6._notify != "timeout") {
     scoreevents::processscoreevent(scoreevents.var_aa14d757, self, undefined, weapon);
@@ -258,7 +258,7 @@ function_5829abe3(attacker, weapon, var_651b6171) {
   }
 
   if(var_651b6171.issignatureweapon) {
-    attacker activecamo::function_896ac347(weapon, # "showstopper", 1);
+    attacker activecamo::function_896ac347(weapon, #"showstopper", 1);
   }
 
   scoreevents = function_3cbc4c6c(weapon.var_2e4a8800);
@@ -297,7 +297,7 @@ function_a890cac2(attacker, owningteam, weapon, scoreevents, objectiveobj, var_1
 }
 
 function_7d830bc(einflictor, attacker, weapon, objectiveobj, var_1bbdd8b0, owningteam, objectivetrigger) {
-  attacker endon(#"disconnect", # "death");
+  attacker endon(#"disconnect", #"death");
   level endon(#"game_ended");
   self notify("38c4e69a4b1b634c");
   self endon("38c4e69a4b1b634c");
@@ -477,13 +477,13 @@ function_f7f7b14e(data) {
     var_3d2a11cf = function_3cbc4c6c(data.victimweapon.var_2e4a8800);
 
     if(data.victimweapon.issignatureweapon) {
-      attacker activecamo::function_896ac347(weapon, # "showstopper", 1);
+      attacker activecamo::function_896ac347(weapon, #"showstopper", 1);
     }
   }
 
   if(!isDefined(var_3d2a11cf) && isDefined(victim.heroability) && isDefined(victim.heroabilityactivatetime) && victim.heroabilityactivatetime + 700 > time) {
     var_3d2a11cf = function_3cbc4c6c(victim.heroability.var_2e4a8800);
-    attacker activecamo::function_896ac347(weapon, # "showstopper", 1);
+    attacker activecamo::function_896ac347(weapon, #"showstopper", 1);
   }
 
   if(isDefined(weapon) && isDefined(level.iskillstreakweapon)) {
@@ -507,7 +507,7 @@ function_d68ae402(inflictor, meansofdeath, victim, attacker, scoreevents, weapon
   level endon(#"game_ended");
   var_ac4c1 = var_f801f37e.name;
   attacker notify(var_ac4c1 + "MultiKillScore");
-  attacker endon(var_ac4c1 + "MultiKillScore", # "disconnect");
+  attacker endon(var_ac4c1 + "MultiKillScore", #"disconnect");
 
   if(inflictor.var_a6b00192 >= 3 && !(isDefined(inflictor.var_7fff4605) ? inflictor.var_7fff4605 : 0)) {
     if(isDefined(scoreevents) && isDefined(scoreevents.var_db750037)) {
@@ -529,7 +529,7 @@ function_d68ae402(inflictor, meansofdeath, victim, attacker, scoreevents, weapon
     return;
   }
 
-  waitresult = attacker waittilltimeout(4, # "death", # "team_changed");
+  waitresult = attacker waittilltimeout(4, #"death", #"team_changed");
 
   if(var_ac4c1 == # "frag_grenade" || var_ac4c1 == # "eq_molotov" || var_ac4c1 == # "hatchet") {
     if(attacker.multikills[var_ac4c1].kills >= 2) {

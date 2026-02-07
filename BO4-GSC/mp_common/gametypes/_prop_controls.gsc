@@ -212,9 +212,9 @@ propcontrolshud() {
   self.changepropkey = addupperrighthudelem(#"mp_ph_change", 0);
   self.currenthudy -= 20;
   self.var_8e3b5c8c = addupperrighthudelem(#"hash_fb73fdc2aff963f");
-  self.matchslopekey = addupperrighthudelem(#"hash_7f59350f5f223501", undefined, undefined, # "hash_4c7fbb5c1ccd5107");
+  self.matchslopekey = addupperrighthudelem(#"hash_7f59350f5f223501", undefined, undefined, #"hash_4c7fbb5c1ccd5107");
   self.lockpropkey = addupperrighthudelem(#"mp_ph_lock");
-  self.spinpropkey = addupperrighthudelem(#"mp_ph_spin", undefined, undefined, # "hash_39e61050ab8d325e");
+  self.spinpropkey = addupperrighthudelem(#"mp_ph_spin", undefined, undefined, #"hash_39e61050ab8d325e");
   self setnewabilityhud();
   self.zoomkey = addupperrighthudelem(#"mp_ph_zoom");
   self thread updatetextongamepadchange();
@@ -249,7 +249,7 @@ cleanuppropcontrolshud() {
 
 updatetextongamepadchange() {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
 
   if(level.console) {
     return;
@@ -288,7 +288,7 @@ updatetextongamepadchange() {
 }
 
 propinputwatch() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
 
   if(isai(self)) {
@@ -303,7 +303,7 @@ propinputwatch() {
   self.debugnextpropindex = 1;
 
   while(true) {
-    waitresult = self waittill(#"lock", # "spin", # "changeprop", # "settoslope", # "propability", # "cloneprop", # "hide");
+    waitresult = self waittill(#"lock", #"spin", #"changeprop", #"settoslope", #"propability", #"cloneprop", #"hide");
     msg = waitresult._notify;
 
     if(!isDefined(msg)) {
@@ -766,7 +766,7 @@ get_ground_normal(traceignore, debug) {
 }
 
 propmoveunlock() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
   var_554b8919 = 0;
   var_cd6d7e01 = 0;
@@ -858,7 +858,7 @@ lockprop() {
 }
 
 flashlockpropkey() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self notify(#"flashlockpropkey");
   self endon(#"flashlockpropkey");
@@ -1002,13 +1002,13 @@ function canlock() {
 }
 
 propcamerazoom() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
   var_fc464c9b = 10;
   self.thirdpersonrange = self.prop.info.proprange;
 
   while(true) {
-    waitresult = self waittill(#"zoomin", # "zoomout");
+    waitresult = self waittill(#"zoomin", #"zoomout");
     zoom = waitresult._notify;
 
     if(!isDefined(zoom)) {
@@ -1274,7 +1274,7 @@ function_d8b858d4(var_2953b091, fade_in_time, fade_out_time) {
 }
 
 watchspecialgrenadethrow() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self notify(#"watchspecialgrenadethrow");
   self endon(#"watchspecialgrenadethrow");

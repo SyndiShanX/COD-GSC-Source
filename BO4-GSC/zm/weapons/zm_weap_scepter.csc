@@ -69,7 +69,7 @@ function_cde26b0e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self function_69ccb98b(localclientnum);
 
   if(newval > 0) {
@@ -97,7 +97,7 @@ function_69ccb98b(localclientnum) {
   if(isDefined(self.var_4cd8e6cb)) {
     self stoploopsound(self.var_4cd8e6cb);
     self.var_4cd8e6cb = undefined;
-    self playSound(localclientnum, # "hash_3126b098b980b5a3");
+    self playSound(localclientnum, #"hash_3126b098b980b5a3");
   }
 }
 
@@ -106,10 +106,10 @@ function_da5829be(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self endon(#"death", # "hash_3cbfa1076dfa868b");
+  self endon(#"death", #"hash_3cbfa1076dfa868b");
 
   if(!isDefined(self.var_4cd8e6cb)) {
-    self playSound(localclientnum, # "hash_3765e25049981166");
+    self playSound(localclientnum, #"hash_3765e25049981166");
     self.var_4cd8e6cb = self playLoopSound(#"hash_170aa1970243fc4a");
   }
 
@@ -187,7 +187,7 @@ function_f11b8d1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       str_tag = self zm_utility::function_467efa7b();
       self.var_ff2eebc7 = util::playFXOnTag(localclientnum, level._effect[# "hash_47a7d03689c68789"], self, str_tag);
       sndorigin = self gettagorigin(str_tag);
-      playSound(0, # "zmb_vocals_zombie_skull_scream", sndorigin);
+      playSound(0, #"zmb_vocals_zombie_skull_scream", sndorigin);
     }
 
     return;
@@ -281,7 +281,7 @@ revive_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
     if(!isDefined(self.var_a776839a)) {
       self.var_a776839a = util::playFXOnTag(localclientnum, level._effect[# "scepter_revive"], self, "tag_eye");
       sndorigin = self gettagorigin("J_Eyeball_LE");
-      self playSound(localclientnum, # "hash_29c60da797dd7b3");
+      self playSound(localclientnum, #"hash_29c60da797dd7b3");
     }
 
     return;

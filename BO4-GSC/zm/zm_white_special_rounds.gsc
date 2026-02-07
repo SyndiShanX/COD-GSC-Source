@@ -127,7 +127,7 @@ function_2ae2045c() {
     do {
       waitresult = level waittill(#"buffed");
 
-      if(zm_audio::function_63f85f39(#"nova_effect", # "react")) {
+      if(zm_audio::function_63f85f39(#"nova_effect", #"react")) {
         b_played = waitresult.ai zm_audio::function_ef9ba49c(#"nova_effect");
       }
     }
@@ -672,7 +672,7 @@ function_d16d4153() {
 }
 
 function_78d01716() {
-  self endon(#"death", # "stop_status_effect");
+  self endon(#"death", #"stop_status_effect");
 
   while(true) {
     players = getplayers();
@@ -1778,7 +1778,7 @@ function_ec9a1827(var_4aad2831) {
 }
 
 function_130bfe4() {
-  self endon(#"death", # "stop_status_effect");
+  self endon(#"death", #"stop_status_effect");
 
   while(true) {
     players = getplayers();
@@ -2032,7 +2032,7 @@ function_a409c2a7(e_target) {
 }
 
 function_45bb11e4(spot) {
-  self endoncallback(&zm_spawner::function_fe3cb19a, # "death");
+  self endoncallback(&zm_spawner::function_fe3cb19a, #"death");
   self.var_5535a47d = 1;
   self zm_spawner::function_fe3cb19a();
   self.mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
@@ -2044,7 +2044,7 @@ function_45bb11e4(spot) {
 
   self.mdl_anchor moveto(spot.origin, 0.05);
   self.mdl_anchor rotateto(spot.angles, 0.05);
-  self.mdl_anchor waittill(#"movedone", # "death");
+  self.mdl_anchor waittill(#"movedone", #"death");
   waitframe(1);
   self.create_eyes = 1;
   self show();

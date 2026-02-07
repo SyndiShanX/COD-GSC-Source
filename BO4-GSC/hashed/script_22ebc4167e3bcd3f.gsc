@@ -68,7 +68,7 @@ main() {
 }
 
 init_steps() {
-  zm_sq::register(#"spoon_quest", # "1", # "spoon_quest_step_1", &step_1, &step_1_cleanup);
+  zm_sq::register(#"spoon_quest", #"1", #"spoon_quest_step_1", &step_1, &step_1_cleanup);
 }
 
 step_1(var_a276c861) {
@@ -213,8 +213,8 @@ crane_shock_box() {
 }
 
 function_1c670b79(var_217fca51) {
-  self endon(#"death", # "disconnect");
-  level endon(#"hash_2fd493c2a926e006", # "hash_66f358c0066d77d8");
+  self endon(#"death", #"disconnect");
+  level endon(#"hash_2fd493c2a926e006", #"hash_66f358c0066d77d8");
 
   while(true) {
     s_result = self waittill(#"throwing_tomahawk");
@@ -447,7 +447,7 @@ function_6098c5c(var_fdc7d6b5, v_origin, var_965869c9) {
 }
 
 function_d0bb3c35() {
-  self endon(#"death", # "hash_4ecfa36be208fd5f");
+  self endon(#"death", #"hash_4ecfa36be208fd5f");
   n_wait_time = 25;
 
   if(isDefined(level.var_977f68ea)) {
@@ -471,7 +471,7 @@ function_d0bb3c35() {
 
 function_5753ae89() {
   self endon(#"disconnect");
-  level.var_5c14fe03 endoncallback(&function_2084efc3, # "death", # "hash_4ecfa36be208fd5f");
+  level.var_5c14fe03 endoncallback(&function_2084efc3, #"death", #"hash_4ecfa36be208fd5f");
 
   while(true) {
     s_result = self waittill(#"throwing_tomahawk");

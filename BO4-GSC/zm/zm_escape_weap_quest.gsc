@@ -323,7 +323,7 @@ soul_catcher_state_manager() {
 
   while(!self.is_charged) {
     self thread function_ee929ece();
-    self waittill(#"fully_charged", # "finished_eating");
+    self waittill(#"fully_charged", #"finished_eating");
   }
 
   self notify(#"hash_1c2dd0a16f7ac134");
@@ -334,7 +334,7 @@ soul_catcher_state_manager() {
 
 function_ee929ece() {
   self notify(#"wolf_idling");
-  self endon(#"wolf_eating", # "hash_1c2dd0a16f7ac134", # "wolf_idling");
+  self endon(#"wolf_eating", #"hash_1c2dd0a16f7ac134", #"wolf_idling");
 
   while(true) {
     var_ba0da6c = array::random(level.var_22f00ccf);
@@ -395,7 +395,7 @@ function_e07f0c65(e_activator) {
 
   for(i = 0; i < a_closest.size; i++) {
     if(!(isDefined(a_closest[i].dontspeak) && a_closest[i].dontspeak)) {
-      a_closest[i] thread zm_audio::create_and_play_dialog(#"wolf_head", # "feed");
+      a_closest[i] thread zm_audio::create_and_play_dialog(#"wolf_head", #"feed");
       break;
     }
   }
@@ -412,7 +412,7 @@ function_41b1af8c() {
 
   for(i = 0; i < a_closest.size; i++) {
     if(!(isDefined(a_closest[i].dontspeak) && a_closest[i].dontspeak)) {
-      a_closest[i] thread zm_audio::create_and_play_dialog(#"wolf_head", # "comp", level.n_soul_catchers_charged - 1);
+      a_closest[i] thread zm_audio::create_and_play_dialog(#"wolf_head", #"comp", level.n_soul_catchers_charged - 1);
       break;
     }
   }
@@ -424,7 +424,7 @@ first_wolf_encounter_vo(e_activator) {
 
   for(i = 0; i < a_closest.size; i++) {
     if(!(isDefined(a_closest[i].dontspeak) && a_closest[i].dontspeak)) {
-      a_closest[i] thread zm_audio::create_and_play_dialog(#"wolf_head", # "feed_first", undefined, 1);
+      a_closest[i] thread zm_audio::create_and_play_dialog(#"wolf_head", #"feed_first", undefined, 1);
       level.wolf_encounter_vo_played = 1;
       break;
     }
@@ -522,7 +522,7 @@ tomahawk_pickup_trigger() {
 
 function_f0ef3897(e_player) {
   e_player notify(#"obtained_tomahawk");
-  e_player endon(#"obtained_tomahawk", # "disconnect");
+  e_player endon(#"obtained_tomahawk", #"disconnect");
   var_fd22f9df = struct::get("tom_pil");
   mdl_tomahawk = var_fd22f9df.scene_ents[# "prop 2"];
   mdl_tomahawk setinvisibletoplayer(e_player);
@@ -536,7 +536,7 @@ function_f0ef3897(e_player) {
     str_tutorial = # "hash_77bbe7cec9945ff5";
 
     if(!(isDefined(e_player.var_e9c9a450) && e_player.var_e9c9a450)) {
-      e_player thread zm_audio::create_and_play_dialog(#"ax_upgrade", # "pickup", undefined, 1);
+      e_player thread zm_audio::create_and_play_dialog(#"ax_upgrade", #"pickup", undefined, 1);
       e_player.var_e9c9a450 = 1;
     }
   } else {
@@ -544,7 +544,7 @@ function_f0ef3897(e_player) {
     str_tutorial = # "hash_a89ec051050c008";
 
     if(!(isDefined(e_player.var_d2351fa5) && e_player.var_d2351fa5)) {
-      e_player thread zm_audio::create_and_play_dialog(#"ax", # "pickup", undefined, 1);
+      e_player thread zm_audio::create_and_play_dialog(#"ax", #"pickup", undefined, 1);
       e_player.var_d2351fa5 = 1;
     }
   }

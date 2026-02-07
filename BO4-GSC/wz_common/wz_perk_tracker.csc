@@ -27,7 +27,7 @@ tracker(localclientnum) {
   while(true) {
     wait 0.2;
 
-    if(!function_5778f82(localclientnum, # "specialty_tracker")) {
+    if(!function_5778f82(localclientnum, #"specialty_tracker")) {
       continue;
     }
 

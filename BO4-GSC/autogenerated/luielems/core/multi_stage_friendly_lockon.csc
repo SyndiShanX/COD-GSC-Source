@@ -16,7 +16,7 @@ class cmulti_stage_friendly_lockon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "multi_stage_friendly_lockon");
+    cluielem::open(localclientnum, #"multi_stage_friendly_lockon");
   }
 
   function function_fa582112(localclientnum) {

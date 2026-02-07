@@ -77,7 +77,7 @@ dom_flag_cap_fx_override(flag, team) {
 }
 
 on_localclient_connect(localclientnum) {
-  waitresult = level waittill(#"positiondraft_open", # "hash_7b06b53a1ed7cfc4", # "disconnect");
+  waitresult = level waittill(#"positiondraft_open", #"hash_7b06b53a1ed7cfc4", #"disconnect");
 
   if(waitresult._notify === "PositionDraft_Open") {
     setpbgactivebank(localclientnum, 8);

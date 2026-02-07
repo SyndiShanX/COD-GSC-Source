@@ -200,7 +200,7 @@ onplayerconnect() {
 }
 
 function_c1d2f9aa() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self flagsys::wait_till(#"loadout_given");
   self ability_player::function_c9b950e3();
 }
@@ -396,7 +396,7 @@ sort_vehicles(&array, sort_func) {
 }
 
 starthack(player) {
-  player endoncallback(&function_4802ca63, # "death", # "hash_7b4714f415b8f49e");
+  player endoncallback(&function_4802ca63, #"death", #"hash_7b4714f415b8f49e");
   level.var_fdb0a658 = 1;
   player clientfield::set_player_uimodel("IcePickInfo.hackStarted", 1);
   icepickweapon = getweapon(#"gadget_icepick");
@@ -467,7 +467,7 @@ starthack(player) {
 }
 
 function_aaf0a382(entities, player, max) {
-  player endon(#"death", # "hash_7b4714f415b8f49e");
+  player endon(#"death", #"hash_7b4714f415b8f49e");
   var_e8e3cc00 = 0;
 
   foreach(entity in entities) {
@@ -493,7 +493,7 @@ function_aaf0a382(entities, player, max) {
 }
 
 function_2b2ed159(entity, attackingplayer) {
-  attackingplayer endon(#"death", # "hash_7b4714f415b8f49e");
+  attackingplayer endon(#"death", #"hash_7b4714f415b8f49e");
   var_87bdc7d3 = int(function_ab1f58d0(entity) * 1000);
   var_7570395 = 0;
   attackingplayer.var_e989badb = entity;
@@ -622,7 +622,7 @@ function_4a82368f(entity, owner) {
     owner clientfield::set_to_player("hackedvehpostfx", 1);
   }
 
-  entity waittill(#"death", # "remote_weapon_end", # "hash_2476803a0d5fa572");
+  entity waittill(#"death", #"remote_weapon_end", #"hash_2476803a0d5fa572");
 
   if(!isDefined(owner)) {
     return;
@@ -776,7 +776,7 @@ function_bf744a1e(attackingplayer, var_11a83c3a) {
 
 function_f255c737(var_11a83c3a) {
   assert(isDefined(var_11a83c3a));
-  var_11a83c3a endon(#"death", # "hack_end");
+  var_11a83c3a endon(#"death", #"hack_end");
   settingsbundle = function_13f4415c();
 
   while(gettime() <= var_11a83c3a.hackendtime && level.gameended !== 1) {
@@ -821,7 +821,7 @@ function_39026c34(attackingplayer, var_11a83c3a, var_4f6e2cbe) {
 }
 
 function_9a1266be() {
-  self endon(#"death", # "hash_2945c35e0b146804", # "hash_5e72464fef90323e");
+  self endon(#"death", #"hash_2945c35e0b146804", #"hash_5e72464fef90323e");
   wait 1;
   self function_de8a54a6(0.01);
 }
@@ -877,7 +877,7 @@ gadget_icepick_off(slot, weapon) {
 }
 
 function_d1f6e8d0(player) {
-  player endon(#"hash_2945c35e0b146804", # "death");
+  player endon(#"hash_2945c35e0b146804", #"death");
 
   if(!isDefined(player.var_46fccfba)) {
     player.var_46fccfba = 0;
@@ -916,11 +916,11 @@ function_d1f6e8d0(player) {
 }
 
 function_f1148c2c(player) {
-  player endon(#"death", # "hash_7b4714f415b8f49e");
+  player endon(#"death", #"hash_7b4714f415b8f49e");
   player notify(#"hash_5e72464fef90323e");
 
   if(player isswitchingweapons()) {
-    player waittilltimeout(1, # "weapon_change_complete");
+    player waittilltimeout(1, #"weapon_change_complete");
   }
 
   if(isDefined(player) && isplayer(player)) {
@@ -929,7 +929,7 @@ function_f1148c2c(player) {
 }
 
 function_6b9d6894(player) {
-  player endon(#"hash_2945c35e0b146804", # "death", # "disconnect");
+  player endon(#"hash_2945c35e0b146804", #"death", #"disconnect");
 
   if(!isDefined(player.var_3ca20bb9)) {
     player.var_3ca20bb9 = 0;
@@ -975,7 +975,7 @@ function_28f0bd8e(hacker) {
   hacker endon(#"hash_ea5ac4d11419268");
   objectiveid = hacker.var_1d6ad02e;
   settingsbundle = function_13f4415c();
-  hacker waittilltimeout(isDefined(settingsbundle.var_9baf2d44) ? settingsbundle.var_9baf2d44 : 0, # "death", # "disconnect");
+  hacker waittilltimeout(isDefined(settingsbundle.var_9baf2d44) ? settingsbundle.var_9baf2d44 : 0, #"death", #"disconnect");
 
   if(isDefined(objectiveid)) {
     gameobjects::release_obj_id(objectiveid);
@@ -988,7 +988,7 @@ function_28f0bd8e(hacker) {
 }
 
 function_b76c8353(hacker) {
-  hacker endon(#"death", # "hash_2945c35e0b146804");
+  hacker endon(#"death", #"hash_2945c35e0b146804");
   settingsbundle = function_13f4415c();
   var_a1a18ce2 = isDefined(settingsbundle.var_679962fc) ? settingsbundle.var_679962fc : 1000;
   var_49c01cfb = gettime() + var_a1a18ce2;
@@ -1004,7 +1004,7 @@ function_b76c8353(hacker) {
     hacker.var_1d6ad02e = gameobjects::get_next_obj_id();
   }
 
-  objective_add(hacker.var_1d6ad02e, "active", hacker, # "exposed_hacker");
+  objective_add(hacker.var_1d6ad02e, "active", hacker, #"exposed_hacker");
   objective_setteam(hacker.var_1d6ad02e, hacker.team);
   function_da7940a3(hacker.var_1d6ad02e, 1);
   function_3ae6fa3(hacker.var_1d6ad02e, hacker.team, 0);

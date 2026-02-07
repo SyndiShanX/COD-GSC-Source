@@ -173,7 +173,7 @@ function_c3d93fc(grenade, weapon) {
 
 function_d573e71(grenade, weapon) {
   grenade endon(#"death");
-  waitresult = grenade waittilltimeout(1.5, # "stationary");
+  waitresult = grenade waittilltimeout(1.5, #"stationary");
 
   if(waitresult._notify === "timeout") {
     results = groundtrace(grenade.origin + (0, 0, 400), grenade.origin + (0, 0, -400), 0, grenade);
@@ -348,7 +348,7 @@ function_f0eb3dbb() {
 
 shock_rumble_loop() {
   self notify(#"shock_rumble_loop");
-  self endon(#"shock_rumble_loop", # "death", # "disconnect");
+  self endon(#"shock_rumble_loop", #"death", #"disconnect");
   waitframe(1);
 
   if(!isplayer(self)) {
@@ -593,7 +593,7 @@ function_6c31fc8f(seekermine, var_26b2b1bb) {
 }
 
 function_44cae5c5(time) {
-  self waittilltimeout(time, # "death");
+  self waittilltimeout(time, #"death");
 
   if(!isDefined(self)) {
     return;
@@ -605,7 +605,7 @@ function_44cae5c5(time) {
 }
 
 function_dfbbefb8() {
-  self endon(#"death", # "seekermine_minigame_complete");
+  self endon(#"death", #"seekermine_minigame_complete");
   level notify(#"hash_f7be71cd0b3dc06");
 
   if(!(self status_effect::function_3c54ae98(5) > 0)) {
@@ -633,7 +633,7 @@ function_dfbbefb8() {
 }
 
 function_7d2591b() {
-  self endon(#"death", # "seekermine_minigame_complete");
+  self endon(#"death", #"seekermine_minigame_complete");
   waittime = level.var_9d47488.tunables.prompttime * 1000;
   starttime = gettime();
 
@@ -701,7 +701,7 @@ function_e56220fe() {
 
 function_f6f0c876(var_26b2b1bb, seekermine) {
   self endon(#"hash_11759ff8ab95f65c");
-  waitresult = self waittill(#"seekermine_minigame_complete", # "death");
+  waitresult = self waittill(#"seekermine_minigame_complete", #"death");
 
   if(waitresult._notify == "death") {
     return;
@@ -768,7 +768,7 @@ function_24d08109(seekermine, waitduration, var_26b2b1bb, state) {
   self notify("d5876c031211735");
   self endon("d5876c031211735");
   self endon(#"death");
-  self waittilltimeout(waitduration, # "hash_89051c7805b3d19");
+  self waittilltimeout(waitduration, #"hash_89051c7805b3d19");
 
   if(state == 1) {
     wait level.var_9d47488.tunables.var_e8e9a9cc;
@@ -821,7 +821,7 @@ function_e380fde7(var_84a7f98e, gesturetable, waitduration, islooping, animdelay
   }
 
   if(isDefined(self.var_dda9b735.islooping) && self.var_dda9b735.islooping) {
-    self waittilltimeout(waitduration, # "hash_89051c7805b3d19");
+    self waittilltimeout(waitduration, #"hash_89051c7805b3d19");
 
     if(isDefined(self) && isDefined(self.var_dda9b735.gesture)) {
       self stopgestureviewmodel(self.var_dda9b735.gesture, 0, 0);

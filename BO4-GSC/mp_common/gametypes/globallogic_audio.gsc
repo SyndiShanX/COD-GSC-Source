@@ -369,7 +369,7 @@ killstreak_dialog_on_player(dialogkey, killstreaktype, killstreakid, pilotindex,
 }
 
 wait_for_player_dialog() {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
 
   while(self.playingdialog) {
@@ -380,7 +380,7 @@ wait_for_player_dialog() {
 }
 
 play_next_killstreak_dialog() {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
 
   if(self.killstreakdialogqueue.size == 0) {
@@ -443,7 +443,7 @@ play_next_killstreak_dialog() {
 }
 
 wait_next_killstreak_dialog(waittime) {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
   wait waittime;
   self thread play_next_killstreak_dialog();
@@ -564,7 +564,7 @@ leader_dialog_on_player(dialogkey, objectivekey, killstreakid, dialogbufferkey, 
 }
 
 play_next_leader_dialog() {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
 
   if(!isDefined(self.leaderdialogqueue) || self.leaderdialogqueue.size == 0) {
@@ -615,7 +615,7 @@ play_next_leader_dialog() {
 }
 
 wait_next_leader_dialog(dialogbuffer) {
-  self endon(#"disconnect", # "flush_dialog");
+  self endon(#"disconnect", #"flush_dialog");
   level endon(#"game_ended");
   wait dialogbuffer;
   self thread play_next_leader_dialog();
@@ -902,7 +902,7 @@ sndmusicunlock() {
 }
 
 sndmusictimesout() {
-  level endon(#"game_ended", # "musicendingoverride");
+  level endon(#"game_ended", #"musicendingoverride");
   level waittill(#"match_ending_very_soon");
 
   if(isDefined(level.gametype) && level.gametype == "sd") {
@@ -914,13 +914,13 @@ sndmusictimesout() {
 }
 
 sndmusichalfway() {
-  level endon(#"game_ended", # "match_ending_soon", # "match_ending_very_soon");
+  level endon(#"game_ended", #"match_ending_soon", #"match_ending_very_soon");
   level waittill(#"sndmusichalfway");
   level thread set_music_on_team("underscore");
 }
 
 sndmusictimelimitwatcher() {
-  level endon(#"game_ended", # "match_ending_soon", # "match_ending_very_soon", # "sndmusichalfway");
+  level endon(#"game_ended", #"match_ending_soon", #"match_ending_very_soon", #"sndmusichalfway");
 
   if(!isDefined(level.timelimit) || level.timelimit == 0) {
     return;

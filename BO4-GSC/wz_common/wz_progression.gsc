@@ -80,7 +80,7 @@ function_cfc02934() {
 event_handler[player_medal] codecallback_medal(eventstruct) {
   if(isDefined(eventstruct) && isDefined(eventstruct.var_7fcb97e3) && isDefined(level.scoreinfo) && isDefined(level.scoreinfo[eventstruct.var_7fcb97e3])) {
     medalinfo = level.scoreinfo[eventstruct.var_7fcb97e3];
-    self give_xp("medal", # "medalxp", medalinfo[# "xp"]);
+    self give_xp("medal", #"medalxp", medalinfo[# "xp"]);
   }
 }
 
@@ -91,7 +91,7 @@ on_contract_complete(params) {
     contract = player.pers[# "contracts"][params.var_38280f2f];
 
     if(isDefined(contract) && isDefined(contract.xp) && contract.xp > 0) {
-      player give_xp("contract", # "contractxp", contract.xp);
+      player give_xp("contract", #"contractxp", contract.xp);
     }
   }
 }
@@ -243,47 +243,47 @@ function_51cae91b(placement) {
   player = self;
 
   if(placement <= 5 && level.merits.top5 > 0) {
-    player give_xp("top5", # "placementxp", level.merits.top5);
+    player give_xp("top5", #"placementxp", level.merits.top5);
     return;
   }
 
   if(placement <= 10 && level.merits.top10 > 0) {
-    player give_xp("top10", # "placementxp", level.merits.top10);
+    player give_xp("top10", #"placementxp", level.merits.top10);
     return;
   }
 
   if(placement <= 15 && level.merits.top15 > 0) {
-    player give_xp("top15", # "placementxp", level.merits.top15);
+    player give_xp("top15", #"placementxp", level.merits.top15);
     return;
   }
 
   if(placement <= 20 && level.merits.top20 > 0) {
-    player give_xp("top20", # "placementxp", level.merits.top20);
+    player give_xp("top20", #"placementxp", level.merits.top20);
     return;
   }
 
   if(placement <= 25 && level.merits.top25 > 0) {
-    player give_xp("top25", # "placementxp", level.merits.top25);
+    player give_xp("top25", #"placementxp", level.merits.top25);
     return;
   }
 
   if(placement <= 30 && level.merits.top30 > 0) {
-    player give_xp("top30", # "placementxp", level.merits.top30);
+    player give_xp("top30", #"placementxp", level.merits.top30);
     return;
   }
 
   if(placement <= 50 && level.merits.top50 > 0) {
-    player give_xp("top50", # "placementxp", level.merits.top50);
+    player give_xp("top50", #"placementxp", level.merits.top50);
     return;
   }
 
   if(placement <= 60 && level.merits.top60 > 0) {
-    player give_xp("top60", # "placementxp", level.merits.top60);
+    player give_xp("top60", #"placementxp", level.merits.top60);
     return;
   }
 
   if(placement <= 75 && level.merits.top75 > 0) {
-    player give_xp("top75", # "placementxp", level.merits.top75);
+    player give_xp("top75", #"placementxp", level.merits.top75);
   }
 }
 
@@ -393,7 +393,7 @@ function_5648f82(team) {
         }
       }
 
-      player give_xp("win", # "winxp", xp_amount);
+      player give_xp("win", #"winxp", xp_amount);
       player stats::function_dad108fa(#"wins_first", 1);
       player giveachievement("wz_first_win");
       var_4cf27874 = player stats::get_stat_global(#"wins");
@@ -468,7 +468,7 @@ on_vehicle_enter(vehicle, player, seatindex) {
 }
 
 function_d0c523bf() {
-  self endon(#"death", # "exit_vehicle", # "disconnect");
+  self endon(#"death", #"exit_vehicle", #"disconnect");
   wait 5;
 
   if(self isinvehicle()) {
@@ -481,8 +481,8 @@ function_f8072c71(player) {
     return;
   }
 
-  self endon(#"hash_2d45f3f009f1b3b3", # "death");
-  player endon(#"death", # "exit_vehicle", # "disconnect");
+  self endon(#"hash_2d45f3f009f1b3b3", #"death");
+  player endon(#"death", #"exit_vehicle", #"disconnect");
   prevposition = self.origin;
   distancetraveled = 0;
   var_b01d9212 = isairborne(self);
@@ -558,7 +558,7 @@ function_c9a18304(eventstruct) {
 }
 
 function_da21a17c() {
-  self endon(#"hash_74973f333d2fabfa", # "death", # "disconnect");
+  self endon(#"hash_74973f333d2fabfa", #"death", #"disconnect");
   prevposition = self.origin;
   distancetraveled = 0;
 
@@ -711,7 +711,7 @@ function_35ac33e1(attacker, victim, var_c5948a69 = {}) {
       }
     }
 
-    attacker give_xp("kill", # "killxp", xp_amount);
+    attacker give_xp("kill", #"killxp", xp_amount);
     attacker stats::function_b7f80d87(#"kills", 1);
 
     if(isDefined(attacker.pers[# "timesrevived"]) && attacker.pers[# "timesrevived"] > 0) {
@@ -1002,8 +1002,8 @@ function_16de96c7(player) {
   }
 
   level endon(#"game_ended");
-  self endon(#"stationary", # "death");
-  player endon(#"disconnect", # "death");
+  self endon(#"stationary", #"death");
+  player endon(#"disconnect", #"death");
   var_299b8419 = getEntArray("basketball_hoop", "targetname");
 
   if(!isDefined(var_299b8419)) {
@@ -1068,16 +1068,16 @@ on_game_playing(params) {
       }
 
       player function_cfc02934();
-      player stats::set_stat(#"afteractionreportstats", # "teammatecount", players.size);
+      player stats::set_stat(#"afteractionreportstats", #"teammatecount", players.size);
 
       for(i = 0; i < players.size; i++) {
         teammate = players[i];
-        player stats::set_stat(#"afteractionreportstats", # "teammates", i, # "name", teammate.name);
-        player stats::set_stat(#"afteractionreportstats", # "teammates", i, # "xuid", teammate getxuid(1));
+        player stats::set_stat(#"afteractionreportstats", #"teammates", i, #"name", teammate.name);
+        player stats::set_stat(#"afteractionreportstats", #"teammates", i, #"xuid", teammate getxuid(1));
 
         if(isDefined(teammate.pers) && isDefined(teammate.pers[# "rank"])) {
-          player stats::set_stat(#"afteractionreportstats", # "teammates", i, # "rank", teammate.pers[# "rank"]);
-          player stats::set_stat(#"afteractionreportstats", # "teammates", i, # "plevel", teammate.pers[# "plevel"]);
+          player stats::set_stat(#"afteractionreportstats", #"teammates", i, #"rank", teammate.pers[# "rank"]);
+          player stats::set_stat(#"afteractionreportstats", #"teammates", i, #"plevel", teammate.pers[# "plevel"]);
         }
       }
     }
@@ -1122,38 +1122,38 @@ on_character_unlock(params) {
   if(isplayer(self)) {
     waitframe(1);
     player = self;
-    var_bff5f1d6 = player stats::get_stat(#"characters", # "hash_44599132bf7320e8", # "unlocked");
-    var_b88d2887 = player stats::get_stat(#"characters", # "hash_72350169be9133ae", # "unlocked");
-    var_4a9b8b0b = player stats::get_stat(#"characters", # "hash_3f01badbd66b2962", # "unlocked");
-    var_7052e449 = player stats::get_stat(#"characters", # "hash_77118b5dbb73e0b6", # "unlocked");
+    var_bff5f1d6 = player stats::get_stat(#"characters", #"hash_44599132bf7320e8", #"unlocked");
+    var_b88d2887 = player stats::get_stat(#"characters", #"hash_72350169be9133ae", #"unlocked");
+    var_4a9b8b0b = player stats::get_stat(#"characters", #"hash_3f01badbd66b2962", #"unlocked");
+    var_7052e449 = player stats::get_stat(#"characters", #"hash_77118b5dbb73e0b6", #"unlocked");
 
     if(var_bff5f1d6 && var_b88d2887 && var_4a9b8b0b && var_7052e449) {
       player giveachievement("wz_blackout_historian");
     }
 
-    var_871f238c = player stats::get_stat(#"characters", # "hash_7f410b145dce17bd", # "unlocked");
-    var_aa7878e8 = player stats::get_stat(#"characters", # "hash_63b894fa4d634238", # "unlocked");
-    var_4e36df97 = player stats::get_stat(#"characters", # "hash_8596bc069593313", # "unlocked");
-    var_a71f1b0f = player stats::get_stat(#"characters", # "hash_17c02481305f0e24", # "unlocked");
-    var_199c1316 = player stats::get_stat(#"characters", # "hash_4b77f84c47802222", # "unlocked");
-    var_6851d31e = player stats::get_stat(#"characters", # "hash_62361c68e083d401", # "unlocked");
-    var_f67cceb4 = player stats::get_stat(#"characters", # "hash_69bbe1ec48f79df5", # "unlocked");
-    var_7fec1dca = player stats::get_stat(#"characters", # "hash_7a9842f6bec0e568", # "unlocked");
-    var_ccc5605d = player stats::get_stat(#"characters", # "hash_6999516e5e35a515", # "unlocked");
-    var_620230a2 = player stats::get_stat(#"characters", # "hash_78c357c8a5680d67", # "unlocked");
+    var_871f238c = player stats::get_stat(#"characters", #"hash_7f410b145dce17bd", #"unlocked");
+    var_aa7878e8 = player stats::get_stat(#"characters", #"hash_63b894fa4d634238", #"unlocked");
+    var_4e36df97 = player stats::get_stat(#"characters", #"hash_8596bc069593313", #"unlocked");
+    var_a71f1b0f = player stats::get_stat(#"characters", #"hash_17c02481305f0e24", #"unlocked");
+    var_199c1316 = player stats::get_stat(#"characters", #"hash_4b77f84c47802222", #"unlocked");
+    var_6851d31e = player stats::get_stat(#"characters", #"hash_62361c68e083d401", #"unlocked");
+    var_f67cceb4 = player stats::get_stat(#"characters", #"hash_69bbe1ec48f79df5", #"unlocked");
+    var_7fec1dca = player stats::get_stat(#"characters", #"hash_7a9842f6bec0e568", #"unlocked");
+    var_ccc5605d = player stats::get_stat(#"characters", #"hash_6999516e5e35a515", #"unlocked");
+    var_620230a2 = player stats::get_stat(#"characters", #"hash_78c357c8a5680d67", #"unlocked");
 
     if(var_871f238c && var_aa7878e8 && var_4e36df97 && var_a71f1b0f && var_199c1316 && var_6851d31e && var_f67cceb4 && var_7fec1dca && var_ccc5605d && var_620230a2) {
       player giveachievement("wz_specialist_super_fan");
     }
 
-    var_bae2998 = player stats::get_stat(#"characters", # "hash_4815f130a1c1d840", # "unlocked");
-    var_db2f35af = player stats::get_stat(#"characters", # "hash_6f105a897d64112", # "unlocked");
-    var_c7bf8a47 = player stats::get_stat(#"characters", # "hash_7fc15da2c5864d3c", # "unlocked");
-    var_c0c6b37a = player stats::get_stat(#"characters", # "hash_4f0c567012b33fd9", # "unlocked");
-    var_7434f372 = player stats::get_stat(#"characters", # "hash_23d5f8566508f9f5", # "unlocked");
-    var_98f0457e = player stats::get_stat(#"characters", # "hash_36157750ed7c6584", # "unlocked");
-    var_a5b8977e = player stats::get_stat(#"characters", # "hash_1d718be46a94371f", # "unlocked");
-    var_35efd1cf = player stats::get_stat(#"characters", # "hash_66b69b90a30bcc88", # "unlocked");
+    var_bae2998 = player stats::get_stat(#"characters", #"hash_4815f130a1c1d840", #"unlocked");
+    var_db2f35af = player stats::get_stat(#"characters", #"hash_6f105a897d64112", #"unlocked");
+    var_c7bf8a47 = player stats::get_stat(#"characters", #"hash_7fc15da2c5864d3c", #"unlocked");
+    var_c0c6b37a = player stats::get_stat(#"characters", #"hash_4f0c567012b33fd9", #"unlocked");
+    var_7434f372 = player stats::get_stat(#"characters", #"hash_23d5f8566508f9f5", #"unlocked");
+    var_98f0457e = player stats::get_stat(#"characters", #"hash_36157750ed7c6584", #"unlocked");
+    var_a5b8977e = player stats::get_stat(#"characters", #"hash_1d718be46a94371f", #"unlocked");
+    var_35efd1cf = player stats::get_stat(#"characters", #"hash_66b69b90a30bcc88", #"unlocked");
 
     if(var_bae2998 && var_db2f35af && var_c7bf8a47 && var_c0c6b37a && var_7434f372 && var_98f0457e && var_a5b8977e && var_35efd1cf) {
       player giveachievement("wz_zombie_fanatic");

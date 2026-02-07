@@ -128,11 +128,11 @@ event_handler[player_gunchallengecomplete] player_gunchallengecomplete(s_event) 
     foreach(weapon in a_w_guns) {
       str_weapon = weapon.name;
       n_item_index = getbaseweaponitemindex(weapon);
-      var_cc074f5b = stats::get_stat(#"ranked_item_stats", str_weapon, # "xp");
+      var_cc074f5b = stats::get_stat(#"ranked_item_stats", str_weapon, #"xp");
 
       if(isDefined(var_cc074f5b)) {
         var_6b792d1d = function_33cc663e(str_weapon);
-        var_56ccc9fe = stats::get_stat(#"ranked_item_stats", str_weapon, # "plevel");
+        var_56ccc9fe = stats::get_stat(#"ranked_item_stats", str_weapon, #"plevel");
 
         if(var_cc074f5b >= var_6b792d1d || var_56ccc9fe >= 1) {
           var_8e617ca1++;
@@ -196,7 +196,7 @@ function_33cc663e(str_weapon) {
 }
 
 watchforgrenadeduds() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     waitresult = self waittill(#"grenade_fire");
@@ -210,7 +210,7 @@ watchforgrenadeduds() {
 }
 
 watchforgrenadelauncherduds() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     waitresult = self waittill(#"grenade_launcher_fire");
@@ -261,7 +261,7 @@ checkgrenadefordud(weapon, isthrowngrenade, player) {
   }
 
   for(;;) {
-    self waittilltimeout(0.25, # "grenade_bounce", # "stationary", # "death", # "zombify");
+    self waittilltimeout(0.25, #"grenade_bounce", #"stationary", #"death", #"zombify");
 
     if(!self grenade_safe_to_bounce(player, weapon)) {
       self thread makegrenadedudanddestroy();
@@ -314,7 +314,7 @@ switch_from_alt_weapon(weapon) {
   if(alt != weapon) {
     if(!weaponhasattachment(weapon, "dualoptic")) {
       self switchtoweaponimmediate(alt);
-      self waittilltimeout(1, # "weapon_change_complete");
+      self waittilltimeout(1, #"weapon_change_complete");
     }
 
     return alt;
@@ -384,7 +384,7 @@ updatelastheldweapontimingszm(newtime) {
     totaltime = int((newtime - self.currenttime) / 1000);
 
     if(totaltime > 0) {
-      self stats::function_e24eec31(curweapon, # "timeused", totaltime);
+      self stats::function_e24eec31(curweapon, #"timeused", totaltime);
     }
   }
 }
@@ -1218,7 +1218,7 @@ play_weapon_vo(weapon) {
   }
 
   if(type == "upgrade") {
-    self zm_audio::create_and_play_dialog(#"weapon_pickup", # "upgrade");
+    self zm_audio::create_and_play_dialog(#"weapon_pickup", #"upgrade");
     return;
   }
 
@@ -1227,7 +1227,7 @@ play_weapon_vo(weapon) {
     return;
   }
 
-  self zm_audio::create_and_play_dialog(#"weapon_pickup", # "generic");
+  self zm_audio::create_and_play_dialog(#"weapon_pickup", #"generic");
 }
 
 weapon_type_check(weapon) {

@@ -144,7 +144,7 @@ function_7e141cb5(weapon) {
 }
 
 function_54922a21() {
-  self endon(#"death", # "weapon_change");
+  self endon(#"death", #"weapon_change");
 
   while(true) {
     while((self.chargeshotlevel != 2 || !self attackbuttonpressed()) && (self.currentweapon === level.w_hand_ouranos || self.currentweapon === level.w_hand_ouranos_upgraded)) {
@@ -152,7 +152,7 @@ function_54922a21() {
     }
 
     self thread player_charged_shot(self.currentweapon);
-    self waittill(#"weapon_fired", # "stop_beaming");
+    self waittill(#"weapon_fired", #"stop_beaming");
 
     while(self.chargeshotlevel >= 2) {
       waitframe(1);
@@ -586,7 +586,7 @@ function_180bae11() {
 }
 
 player_charged_shot(weapon) {
-  self endon(#"death", # "weapon_change");
+  self endon(#"death", #"weapon_change");
   self thread function_c7732ae7(weapon);
   self thread function_1e39fbc5(weapon);
   self thread function_a2065170();
@@ -617,13 +617,13 @@ player_charged_shot(weapon) {
 
 function_cf3b7cef() {
   self endon(#"death");
-  self waittill(#"weapon_change", # "stop_beaming", # "weapon_fired");
+  self waittill(#"weapon_change", #"stop_beaming", #"weapon_fired");
   wait 0.1;
   self.var_e34577ca = undefined;
 }
 
 function_a2065170() {
-  self endon(#"death", # "weapon_change", # "stop_beaming", # "weapon_fired");
+  self endon(#"death", #"weapon_change", #"stop_beaming", #"weapon_fired");
 
   while(true) {
     if(self meleebuttonpressed()) {
@@ -635,7 +635,7 @@ function_a2065170() {
 }
 
 function_1e39fbc5(weapon) {
-  self endon(#"death", # "stop_beaming", # "weapon_change");
+  self endon(#"death", #"stop_beaming", #"weapon_change");
   wait 0.3;
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
@@ -671,7 +671,7 @@ function_1e39fbc5(weapon) {
 
 function_6e71e724() {
   self notify(#"beaming");
-  self endon(#"death", # "beaming", # "stop_beaming", # "weapon_change");
+  self endon(#"death", #"beaming", #"stop_beaming", #"weapon_change");
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
     waitframe(1);
@@ -681,7 +681,7 @@ function_6e71e724() {
 }
 
 function_c7732ae7(w_curr) {
-  self endon(#"death", # "stop_beaming", # "weapon_change");
+  self endon(#"death", #"stop_beaming", #"weapon_change");
 
   if(self.currentweapon == level.w_hand_ouranos_upgraded) {
     n_range = 3000;
@@ -713,7 +713,7 @@ function_c7732ae7(w_curr) {
 
 function_3719a295(e_target) {
   self notify(#"beaming");
-  self endon(#"death", # "beaming");
+  self endon(#"death", #"beaming");
   e_target endon(#"death");
 
   if(isDefined(e_target.var_827f6f4a) && e_target.var_827f6f4a || isDefined(e_target.var_339655cf) && e_target.var_339655cf) {
@@ -786,7 +786,7 @@ function_7a1456c5(e_target) {
 }
 
 function_d54becbd() {
-  self endon(#"death", # "stop_slow");
+  self endon(#"death", #"stop_slow");
 
   while(true) {
     wait randomfloatrange(1, 2.5);

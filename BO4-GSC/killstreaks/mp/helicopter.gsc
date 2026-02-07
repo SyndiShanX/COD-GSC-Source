@@ -16,7 +16,7 @@
 #namespace helicopter;
 
 autoexec __init__system__() {
-  system::register(#"helicopter", &__init__, undefined, # "killstreaks");
+  system::register(#"helicopter", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -34,7 +34,7 @@ function_6af968ce(attacker, weapon, mod) {
       self killstreaks::function_73566ec7(attacker, weapon, self.owner);
       challenges::destroyedhelicopter(attacker, weapon, mod, 0);
       attacker challenges::addflyswatterstat(weapon, self);
-      attacker stats::function_e24eec31(weapon, # "hash_3f3d8a93c372c67d", 1);
+      attacker stats::function_e24eec31(weapon, #"hash_3f3d8a93c372c67d", 1);
     }
   }
 
@@ -66,7 +66,7 @@ function_4d5e1035(attacker, weapon, type, weapon_damage, event, playercontrolled
       }
 
       if(hardpointtype == "helicopter_player_gunner") {
-        attacker stats::function_e24eec31(weapon, # "destroyed_controlled_killstreak", 1);
+        attacker stats::function_e24eec31(weapon, #"destroyed_controlled_killstreak", 1);
       }
     }
   }

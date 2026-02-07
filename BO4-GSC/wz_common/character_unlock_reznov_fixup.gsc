@@ -8,11 +8,11 @@
 #namespace character_unlock_reznov_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_reznov_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_reznov_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"reznov_unlock", # "hash_44599132bf7320e8", # "cu21_item", &function_d95e620c, # "hash_1cd3eb5d2d22f647", # "hash_1cd3ec5d2d22f7fa");
+  character_unlock_fixup::register_character_unlock(#"reznov_unlock", #"hash_44599132bf7320e8", #"cu21_item", &function_d95e620c, #"hash_1cd3eb5d2d22f647", #"hash_1cd3ec5d2d22f7fa");
 }
 
 function_d95e620c() {

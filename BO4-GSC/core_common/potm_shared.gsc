@@ -291,7 +291,7 @@ post_round_potm() {
 }
 
 function_b0bc26b3(deathtime, starttime) {
-  self endon(#"disconnect", # "end_killcam");
+  self endon(#"disconnect", #"end_killcam");
   var_a7e16ed3 = deathtime - starttime;
   waitbeforedeath = 1;
   timetowait = max(0, float(var_a7e16ed3) / 1000 - waitbeforedeath);
@@ -307,7 +307,7 @@ function_b0bc26b3(deathtime, starttime) {
 }
 
 function_f909006c(currentevent) {
-  self endon(#"disconnect", # "end_killcam");
+  self endon(#"disconnect", #"end_killcam");
 
   if(!isDefined(currentevent.var_b86d6c40)) {
     return;
@@ -490,7 +490,7 @@ function_afe21831() {
 
 function_cd1447ce() {
   self endon(#"disconnect");
-  level endon(#"game_ended", # "potm_finished");
+  level endon(#"game_ended", #"potm_finished");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");
@@ -510,7 +510,7 @@ function_cd1447ce() {
 }
 
 function_a76f0a49() {
-  level endon(#"game_ended", # "potm_finished");
+  level endon(#"game_ended", #"potm_finished");
   numplayers = 0;
 
   foreach(player in level.players) {
@@ -586,7 +586,7 @@ function_caf394b8(duration) {
 }
 
 function_60211cf4(sequence) {
-  level endon(#"potm_finished", # "game_ended");
+  level endon(#"potm_finished", #"game_ended");
   assert(sequence.params.events.size > 0);
   starttimescale = 1;
 
@@ -706,7 +706,7 @@ function_404ffafb(var_353e7913, var_550d79fc, var_19e3f5ac) {
 }
 
 function_b1b3bfc5(event, var_50c26ba) {
-  level endon(#"potm_finished", # "game_ended");
+  level endon(#"potm_finished", #"game_ended");
 
   if(!game.var_50b05a28) {
     return;
@@ -849,7 +849,7 @@ function_b1b3bfc5(event, var_50c26ba) {
 }
 
 function_a85adb2c(delta) {
-  self endon(#"end_killcam", # "hash_17418db31d60118f");
+  self endon(#"end_killcam", #"hash_17418db31d60118f");
   time = gettime();
   delta -= 300;
 
@@ -1348,7 +1348,7 @@ function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, sc
 
   if(!isDefined(var_50d1e41a) || var_50d1e41a.size <= 0) {
     var_50d1e41a = [];
-    array::add(var_50d1e41a, # "");
+    array::add(var_50d1e41a, #"");
   }
 
   var_6f810a5 = "<dev string:x6af>";
@@ -1550,7 +1550,7 @@ kill_bookmark(var_81538b15, var_f28fb772, einflictor, var_50d1e41a, overrideenti
     return;
   }
 
-  bookmark = function_5b1e9ed4(game.var_8ea529d1, # "kill", gettime(), var_81538b15, var_f28fb772, 0, einflictor, var_50d1e41a, overrideentitycamera);
+  bookmark = function_5b1e9ed4(game.var_8ea529d1, #"kill", gettime(), var_81538b15, var_f28fb772, 0, einflictor, var_50d1e41a, overrideentitycamera);
   function_47a69b74(bookmark);
 }
 
@@ -1595,7 +1595,7 @@ function_651a5f4(var_81538b15, einflictor = var_81538b15) {
     return;
   }
 
-  bookmark = function_5b1e9ed4(game.var_8ea529d1, # "object_destroy", gettime(), var_81538b15, undefined, 0, einflictor);
+  bookmark = function_5b1e9ed4(game.var_8ea529d1, #"object_destroy", gettime(), var_81538b15, undefined, 0, einflictor);
   function_47a69b74(bookmark);
 }
 
@@ -2131,7 +2131,7 @@ updatedebugmenudata(forceupdate) {
   menu = level.potmdebugmenu;
   debugeventnum = getdvarint(#"scr_potm_debug_event_num", 0);
   oldestarchivetime = getearliestarchiveclientinfotime();
-  hostplayer setluimenudata(menu, # "oldestarchivetime", oldestarchivetime);
+  hostplayer setluimenudata(menu, #"oldestarchivetime", oldestarchivetime);
 
   if(isDefined(level.potmdebugeventnum) && level.potmdebugeventnum == debugeventnum && !forceupdate) {
     return;
@@ -2158,16 +2158,16 @@ updatedebugmenudata(forceupdate) {
     var_1be0f2c3 = function_c7e98e25(event);
   }
 
-  hostplayer setluimenudata(menu, # "count", game.potmevents.size);
-  hostplayer setluimenudata(menu, # "eventnum", int(debugeventnum));
-  hostplayer setluimenudata(menu, # "eventinfoindex", infoindex);
-  hostplayer setluimenudata(menu, # "eventstarttime", int(starttime));
-  hostplayer setluimenudata(menu, # "eventendtime", int(endtime));
-  hostplayer setluimenudata(menu, # "eventduration", int(duration));
-  hostplayer setluimenudata(menu, # "scoreeventpriority", int(priority));
-  hostplayer setluimenudata(menu, # "hash_752b983964003a68", int(var_e567d17));
-  hostplayer setluimenudata(menu, # "hash_5935b658727b020c", var_1be0f2c3);
-  hostplayer setluimenudata(menu, # "hash_33d80b75d9c6d88d", var_4775155a);
+  hostplayer setluimenudata(menu, #"count", game.potmevents.size);
+  hostplayer setluimenudata(menu, #"eventnum", int(debugeventnum));
+  hostplayer setluimenudata(menu, #"eventinfoindex", infoindex);
+  hostplayer setluimenudata(menu, #"eventstarttime", int(starttime));
+  hostplayer setluimenudata(menu, #"eventendtime", int(endtime));
+  hostplayer setluimenudata(menu, #"eventduration", int(duration));
+  hostplayer setluimenudata(menu, #"scoreeventpriority", int(priority));
+  hostplayer setluimenudata(menu, #"hash_752b983964003a68", int(var_e567d17));
+  hostplayer setluimenudata(menu, #"hash_5935b658727b020c", var_1be0f2c3);
+  hostplayer setluimenudata(menu, #"hash_33d80b75d9c6d88d", var_4775155a);
 }
 
 updatedebugmenustate() {

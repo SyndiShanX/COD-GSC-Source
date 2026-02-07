@@ -110,7 +110,7 @@ on_player_spawned() {
 }
 
 function_40c7a8fd() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   wait 3.5;
 
   foreach(player in getplayers()) {
@@ -132,7 +132,7 @@ function_69fa75f8() {
     self showcrosshair(0);
 
     while(true) {
-      s_waitresult = self waittilltimeout(1, # "weapon_fired", # "hash_3e0895cd0cc16d2d", # "lightning_ball_created", # "viper_bite_projectile");
+      s_waitresult = self waittilltimeout(1, #"weapon_fired", #"hash_3e0895cd0cc16d2d", #"lightning_ball_created", #"viper_bite_projectile");
 
       if(s_waitresult._notify != "timeout") {
         self clientfield::set_to_player("" + # "hash_1b9477ddcf30191f", 0);
@@ -147,7 +147,7 @@ function_69fa75f8() {
 
 function_6d8cf829() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
 
   while(true) {
     n_perks = self.var_67ba1237.size + self.var_466b927f.size;
@@ -160,7 +160,7 @@ function_ad641569() {
   self notify("3d0a827cbf03ae74");
   self endon("3d0a827cbf03ae74");
   self endon(#"disconnect");
-  level endoncallback(&function_1a109202, # "hash_7646638df88a3656", # "host_migration_begin");
+  level endoncallback(&function_1a109202, #"hash_7646638df88a3656", #"host_migration_begin");
 
   while(true) {
     wait randomintrangeinclusive(5, 15);
@@ -200,7 +200,7 @@ function_1a109202(str_notify) {
 }
 
 function_604ff1eb() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   wait 5;
 
   foreach(player in getplayers()) {

@@ -409,7 +409,7 @@ get_least_used_from_array(array) {
 }
 
 go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arrived_at_node_func, require_player_dist) {
-  self endon(#"stop_going_to_node", # "death");
+  self endon(#"stop_going_to_node", #"death");
 
   for(;;) {
     node = get_least_used_from_array(node);
@@ -828,7 +828,7 @@ aigroup_init(aigroup, spawner) {
 }
 
 aigroup_spawner_death(tracker) {
-  self waittill(#"death", # "hash_4f7ebd2a17a44113");
+  self waittill(#"death", #"hash_4f7ebd2a17a44113");
   tracker notify(#"update_aigroup");
 }
 

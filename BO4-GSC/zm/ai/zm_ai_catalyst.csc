@@ -73,7 +73,7 @@ function_213aaacc(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
 function_b3c2dc1c(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   util::playFXOnTag(localclientnum, level._effect[# "fx8_aat_opposite_exp"], self, "j_spine4");
-  playSound(0, # "hash_7d7c027e3b78c5b6", self.origin);
+  playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
 }
 
 function_8cc5be3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
@@ -108,7 +108,7 @@ function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
     self.var_5fe1f99b = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_water_purify"], self, "tag_eye");
 
     if(!isDefined(self.var_983b7af9)) {
-      self playSound(localclientnum, # "hash_56157e961854c964");
+      self playSound(localclientnum, #"hash_56157e961854c964");
       self.var_983b7af9 = self playLoopSound(#"hash_4d16df16d08f6404");
     }
 
@@ -121,7 +121,7 @@ function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
   }
 
   if(isDefined(self.var_983b7af9)) {
-    self playSound(localclientnum, # "hash_58e6fac48dd8515d");
+    self playSound(localclientnum, #"hash_58e6fac48dd8515d");
     self stoploopsound(self.var_983b7af9);
     self.var_983b7af9 = undefined;
   }
@@ -129,7 +129,7 @@ function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
 function_dce55f49(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue === 1) {
-    self playSound(localclientnum, # "hash_579a9e520b10d768");
+    self playSound(localclientnum, #"hash_579a9e520b10d768");
     self thread function_8c78e227(localclientnum);
     return;
   }
@@ -153,14 +153,14 @@ function_8c78e227(localclientnum) {
   v_origin = self gettagorigin(str_tag);
   self.var_c1e13a67 = util::spawn_model(localclientnum, "tag_origin", v_origin, self.angles);
   self.var_5e3f0a3c = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_elec_blast"], self.var_c1e13a67, "tag_origin");
-  self waittill(#"death", # "scream_attack_done");
+  self waittill(#"death", #"scream_attack_done");
   self.var_c1e13a67 delete();
 }
 
 function_1578a764(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_plasma_blast"], self, "j_spine4");
-  playSound(0, # "hash_7d7c027e3b78c5b6", self.origin);
-  function_2a9101fe(localclientnum, # "hash_528115ad9eebc84f", self.origin);
+  playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
+  function_2a9101fe(localclientnum, #"hash_528115ad9eebc84f", self.origin);
 }
 
 function_5c22755(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {

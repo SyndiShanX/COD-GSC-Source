@@ -50,7 +50,7 @@ flamethrower_tornado_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
 
   if(isDefined(self.var_180064c2)) {
-    self playSound(localclientnum, # "hash_51812161eb23c96f");
+    self playSound(localclientnum, #"hash_51812161eb23c96f");
     self stoploopsound(self.var_180064c2);
     self.var_180064c2 = undefined;
   }
@@ -59,14 +59,14 @@ flamethrower_tornado_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 }
 
 function_ea05550b(localclientnum) {
-  self endon(#"death", # "hash_4a10e61d27734104");
+  self endon(#"death", #"hash_4a10e61d27734104");
   wait 0.1;
-  self playSound(localclientnum, # "hash_2e4b3d95b5a51afa");
+  self playSound(localclientnum, #"hash_2e4b3d95b5a51afa");
   self.var_180064c2 = self playLoopSound(#"hash_468cabb7402e170e");
 }
 
 function_4e325cd6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self endon(#"death", # "hash_4a10e61d27734104");
+  self endon(#"death", #"hash_4a10e61d27734104");
 
   while(true) {
     a_e_players = getlocalplayers();

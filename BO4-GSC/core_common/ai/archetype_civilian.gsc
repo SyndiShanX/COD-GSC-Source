@@ -78,17 +78,17 @@ function_686ab596() {
     foreach(ai in ais) {
       switch (debug_civ_mode) {
         case # "riot":
-          ai::setaiattribute(ai, # "_civ_mode", "riot");
+          ai::setaiattribute(ai, #"_civ_mode", "riot");
           ai setteam(#"team3");
           break;
         case # "panic":
-          ai::setaiattribute(ai, # "_civ_mode", "panic");
+          ai::setaiattribute(ai, #"_civ_mode", "panic");
           break;
         case # "calm":
-          ai::setaiattribute(ai, # "_civ_mode", "calm");
+          ai::setaiattribute(ai, #"_civ_mode", "calm");
           break;
         case # "run":
-          ai::setaiattribute(ai, # "_civ_mode", "run");
+          ai::setaiattribute(ai, #"_civ_mode", "run");
           break;
         default:
           break;
@@ -381,7 +381,7 @@ civilianispanicked(entity) {
 }
 
 function_e27d2a1b() {
-  return ai::getaiattribute(self, # "_civ_mode");
+  return ai::getaiattribute(self, #"_civ_mode");
 }
 
 civilianarrivalallowed(entity) {

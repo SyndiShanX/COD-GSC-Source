@@ -63,7 +63,7 @@ magma_gat_blob_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_91180673 = util::playFXOnTag(localclientnum, level._effect[# "hash_246bcda21a086519"], self, "tag_origin");
 
     if(!isDefined(self.var_9c114e48)) {
-      self playSound(localclientnum, # "hash_3f496991d8b9c581");
+      self playSound(localclientnum, #"hash_3f496991d8b9c581");
       self.var_9c114e48 = self playLoopSound(#"hash_46b64953a23cf81");
     }
 
@@ -78,7 +78,7 @@ magma_gat_blob_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_91180673 = util::playFXOnTag(localclientnum, level._effect[# "hash_1ac90f7b38a61c4f"], self, "tag_origin");
 
     if(!isDefined(self.var_9c114e48)) {
-      self playSound(localclientnum, # "hash_3f496991d8b9c581");
+      self playSound(localclientnum, #"hash_3f496991d8b9c581");
       self.var_9c114e48 = self playLoopSound(#"hash_46b64953a23cf81");
     }
 
@@ -110,7 +110,7 @@ zombie_magma_fire_explosion(localclientnum, oldval, newval, bnewent, binitialsna
     }
 
     self.var_4a4174e9 = util::playFXOnTag(localclientnum, level._effect[# "magma_fire_explosion"], self, str_tag);
-    self playSound(localclientnum, # "hash_7ddaece972d0ba7f");
+    self playSound(localclientnum, #"hash_7ddaece972d0ba7f");
   }
 }
 
@@ -132,7 +132,7 @@ positional_zombie_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap,
 
   if(newval >= 1) {
     if(!isDefined(self.var_418df093)) {
-      self playSound(localclientnum, # "hash_4539c48ed56aa72b");
+      self playSound(localclientnum, #"hash_4539c48ed56aa72b");
       self.var_418df093 = self playLoopSound(#"hash_729fda7f41c1cb45");
     }
 
@@ -202,7 +202,7 @@ positional_zombie_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap,
 }
 
 function_6af9874(localclientnum, newval) {
-  self endon(#"death", # "hash_78e383e31572444d");
+  self endon(#"death", #"hash_78e383e31572444d");
   n_spread = 0;
   var_ea2ed6dc = [];
   var_aebebb0e = [];

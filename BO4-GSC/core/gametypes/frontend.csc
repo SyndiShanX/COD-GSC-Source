@@ -201,8 +201,8 @@ event_handler[gametype_init] main(eventstruct) {
 }
 
 function_e843475e(localclientnum, menuname) {
-  lui::createcameramenu(menuname, localclientnum, # "tag_align_frontend_background", # "ui_scene_cam_background");
-  lui::function_9d7ab167(menuname, localclientnum, 3, # "wz_inspection_struct", # "hash_191c3f4fc94449f1");
+  lui::createcameramenu(menuname, localclientnum, #"tag_align_frontend_background", #"ui_scene_cam_background");
+  lui::function_9d7ab167(menuname, localclientnum, 3, #"wz_inspection_struct", #"hash_191c3f4fc94449f1");
 }
 
 setupclientmenus(localclientnum) {
@@ -214,7 +214,7 @@ setupclientmenus(localclientnum) {
   lui::linktocustomcharacter("SinglePlayerInspection", localclientnum, "inspection_character", 0);
   lui::createcustomcameramenu("ChooseTaunts", localclientnum, &choose_taunts_camera_watch, 0);
   lui::linktocustomcharacter("ChooseTaunts", localclientnum, "character_customization");
-  lui::createcameramenu("ChooseFaction", localclientnum, # "spawn_char_custom", # "ui_cam_character_customization", "cam_helmet", undefined, undefined, undefined, 1000);
+  lui::createcameramenu("ChooseFaction", localclientnum, #"spawn_char_custom", #"ui_cam_character_customization", "cam_helmet", undefined, undefined, undefined, 1000);
   lui::createcustomcameramenu("Paintshop", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("PaintjobWeaponSelect", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("Gunsmith", localclientnum, undefined, 0, undefined, undefined);
@@ -226,22 +226,22 @@ setupclientmenus(localclientnum) {
   lui::createcustomcameramenu("MyShowcase_CategorySelector", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("GroupHeadquarters", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("MediaManager", localclientnum, undefined, 0, undefined, undefined);
-  lui::createcameramenu("WeaponBuildKits", localclientnum, # "zm_weapon_position", # "ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
-  lui::createcameramenu("CombatRecordWeaponsZM", localclientnum, # "zm_weapon_position", # "ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
-  lui::createcameramenu("BubblegumBuffs", localclientnum, # "loadout_camera", # "c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2", undefined, undefined, undefined);
-  lui::createcameramenu("BubblegumPacks", localclientnum, # "loadout_camera", # "c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2");
+  lui::createcameramenu("WeaponBuildKits", localclientnum, #"zm_weapon_position", #"ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
+  lui::createcameramenu("CombatRecordWeaponsZM", localclientnum, #"zm_weapon_position", #"ui_cam_cac_specialist", "cam_specialist", undefined, undefined, undefined);
+  lui::createcameramenu("BubblegumBuffs", localclientnum, #"loadout_camera", #"c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2", undefined, undefined, undefined);
+  lui::createcameramenu("BubblegumPacks", localclientnum, #"loadout_camera", #"c_fe_zm_megachew_vign_camera_2", "c_fe_zm_megachew_vign_camera_2");
   lui::createcustomcameramenu("BubblegumPackEdit", localclientnum, undefined, undefined, undefined, undefined);
   lui::createcustomcameramenu("BubblegumBuffSelect", localclientnum, undefined, undefined, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordBubblegumBuffs", localclientnum, undefined, undefined, undefined, undefined);
-  lui::createcameramenu("MegaChewFactory", localclientnum, # "zm_gum_position", # "c_fe_zm_megachew_vign_camera", "default", undefined, undefined, undefined);
+  lui::createcameramenu("MegaChewFactory", localclientnum, #"zm_gum_position", #"c_fe_zm_megachew_vign_camera", "default", undefined, undefined, undefined);
   lui::createcustomcameramenu("Pregame_Main", localclientnum, &lobby_main, 1);
   lui::createcustomcameramenu("CombatRecordWeapons", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordEquipment", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordCybercore", localclientnum, undefined, 0, undefined, undefined);
   lui::createcustomcameramenu("CombatRecordCollectibles", localclientnum, undefined, 0, undefined, undefined);
-  lui::createcameramenu("CombatRecordSpecialists", localclientnum, # "spawn_char_cac_choose", # "ui_cam_cac_specialist", "cam_specialist", undefined, &open_choose_class, &close_choose_class);
+  lui::createcameramenu("CombatRecordSpecialists", localclientnum, #"spawn_char_cac_choose", #"ui_cam_cac_specialist", "cam_specialist", undefined, &open_choose_class, &close_choose_class);
   lui::linktocustomcharacter("CombatRecordSpecialists", localclientnum, "character_customization");
-  lui::createcameramenu("MPCustomizeClassMenu", localclientnum, # "cac_specialist_angle", # "ui_cam_loadout_character", "");
+  lui::createcameramenu("MPCustomizeClassMenu", localclientnum, #"cac_specialist_angle", #"ui_cam_loadout_character", "");
   lui::createcustomcameramenu("AAR_T8_MP", localclientnum, &function_73b8462a, 1, undefined, &function_48fb04a7);
   lui::linktocustomcharacter("AAR_T8_MP", localclientnum, "aar_character");
   lui::createcustomcameramenu("AAR_T8_ZM", localclientnum, &function_73b8462a, 1, undefined, &function_48fb04a7);
@@ -1355,13 +1355,13 @@ function_deed1dbf(localclientnum) {
 }
 
 function_becded4f(localclientnum) {
-  level.var_44011752 = util::spawn_model(localclientnum, # "wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
+  level.var_44011752 = util::spawn_model(localclientnum, #"wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
   level.var_44011752.targetname = "customized_inspection_weapon";
   level.var_44011752 hide();
 }
 
 function_a588eb2e(localclientnum) {
-  var_e6977977 = util::spawn_model(localclientnum, # "wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
+  var_e6977977 = util::spawn_model(localclientnum, #"wpn_t8_ar_accurate_prop_animate", (0, 0, 0), (0, 0, 0));
   var_e6977977.targetname = "quartermaster_weapon";
   var_e6977977 hide();
   var_e6977977 sethighdetail(1, 1);
@@ -1572,17 +1572,17 @@ personalize_characters_watch(localclientnum, menu_name) {
     pose = waitresult.pose;
 
     if(pose === "exploring") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", animtime, "cam_preview", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", animtime, "cam_preview", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(pose === "inspecting_helmet") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", animtime, "cam_helmet", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", animtime, "cam_helmet", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(pose === "inspecting_body") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", animtime, "cam_select", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", animtime, "cam_select", "", s_cam.origin, s_cam.angles);
     }
   }
 }
@@ -1592,34 +1592,34 @@ function_d9a44ae1(localclientnum, menu_name) {
   level endon(menu_name + "_closed");
   s_cam = struct::get(#"spawn_char_custom", "targetname");
   assert(isDefined(s_cam));
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization", 0, "cam_helmet", "", s_cam.origin, s_cam.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization", 0, "cam_helmet", "", s_cam.origin, s_cam.angles);
 
   while(true) {
     waitresult = level waittill("choose_face_camera_change" + localclientnum);
     region = waitresult.param1;
 
     if(region === "face") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_helmet", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_helmet", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "eyes") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_eyes", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_eyes", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "ears") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_ears", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_ears", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "nose") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_nose", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_nose", "", s_cam.origin, s_cam.angles);
       continue;
     }
 
     if(region === "mouth") {
-      playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_mouth", "", s_cam.origin, s_cam.angles);
+      playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_mouth", "", s_cam.origin, s_cam.angles);
     }
   }
 }
@@ -1627,7 +1627,7 @@ function_d9a44ae1(localclientnum, menu_name) {
 choose_taunts_camera_watch(localclientnum, menu_name) {
   s_cam = struct::get(#"personalizehero_camera", "targetname");
   assert(isDefined(s_cam));
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_topscorers", "", s_cam.origin, s_cam.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_topscorers", "", s_cam.origin, s_cam.angles);
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > function_4240a39a(1, (0, 112, 0));
   level waittill(menu_name + "_closed");
@@ -1636,7 +1636,7 @@ choose_taunts_camera_watch(localclientnum, menu_name) {
   };
   [[var_d0b01271]] - > update(params);
   [[var_d0b01271]] - > function_4240a39a(0, undefined);
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization", 300, "cam_preview", "", s_cam.origin, s_cam.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization", 300, "cam_preview", "", s_cam.origin, s_cam.angles);
   wait 3;
 }
 
@@ -2345,8 +2345,8 @@ lobby_main(localclientnum, menu_name, state) {
     if(var_fce147fa) {
       var_51dd69a5 = isDefined(var_d53ddee1);
       level thread function_a71254a9(localclientnum, var_51dd69a5, var_d53ddee1, var_1c5551d6, undefined, 0, var_d43870a7);
-      toggle_postfx(localclientnum, var_51dd69a5, # "hash_50a4ae6595f15cb0");
-      toggle_postfx(localclientnum, !var_51dd69a5, # "hash_e1c80e52b24b46b");
+      toggle_postfx(localclientnum, var_51dd69a5, #"hash_50a4ae6595f15cb0");
+      toggle_postfx(localclientnum, !var_51dd69a5, #"hash_e1c80e52b24b46b");
     }
   }
 
@@ -2367,8 +2367,8 @@ lobby_main(localclientnum, menu_name, state) {
 function_58994f4a(localclientnum, menu_data) {
   level thread function_a71254a9(localclientnum, 0);
   function_e56abdb(localclientnum);
-  toggle_postfx(localclientnum, 0, # "hash_50a4ae6595f15cb0");
-  toggle_postfx(localclientnum, 0, # "hash_e1c80e52b24b46b");
+  toggle_postfx(localclientnum, 0, #"hash_50a4ae6595f15cb0");
+  toggle_postfx(localclientnum, 0, #"hash_e1c80e52b24b46b");
 }
 
 update_room2_devgui(localclientnum) {
@@ -2506,7 +2506,7 @@ function_9602c423(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_character_gesture", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_gesture", 0, "", "", camera_ent.origin, camera_ent.angles);
 
   if(isDefined(state)) {
     [[var_d0b01271]] - > set_character_index(state);
@@ -2520,7 +2520,7 @@ function_25b060af(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
 
   if(isDefined(state)) {
     [[var_d0b01271]] - > set_character_index(state);
@@ -2534,7 +2534,7 @@ function_f8cec907(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"wz_unlock_struct");
-  playmaincamxcam(localclientnum, # "ui_scene_cam_wz_unlock", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_scene_cam_wz_unlock", 0, "", "", camera_ent.origin, camera_ent.angles);
 
   if(isDefined(state)) {
     args = strtok(state, ";");
@@ -2560,11 +2560,11 @@ function_6657c529(localclientnum, menu_name, state) {
   level.var_8b9b6862 = state;
 
   if(state === "face") {
-    playmaincamxcam(localclientnum, # "ui_cam_character_customization_head", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
+    playmaincamxcam(localclientnum, #"ui_cam_character_customization_head", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
     return;
   }
 
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", lerp_time, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_d8402f0c(localclientnum, menu_name, state) {
@@ -2579,21 +2579,21 @@ function_d8402f0c(localclientnum, menu_name, state) {
 
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 wz_personalize_character(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_a8095769(localclientnum, menu_name) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"tag_align_quartermaster");
-  playmaincamxcam(localclientnum, # "ui_cam_store_camera", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_store_camera", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_7142469f(localclientnum, menu_data) {
@@ -2757,7 +2757,7 @@ function_36962bc4(localclientnum, menu_name, state) {
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_8ad37038(localclientnum, menu_name, state) {
@@ -2774,12 +2774,12 @@ function_8ad37038(localclientnum, menu_name, state) {
 
   [[var_d0b01271]] - > show_model();
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_loadout_character", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_bc98f036(localclientnum, menu_name, state) {
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
 }
 
 function_5e7dcbed(localclientnum, menu_data) {
@@ -2788,7 +2788,7 @@ function_5e7dcbed(localclientnum, menu_data) {
 
 function_ac9a8cf(localclientnum, menu_name, state) {
   camera_ent = struct::get(#"cac_specialist_angle");
-  playmaincamxcam(localclientnum, # "ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
+  playmaincamxcam(localclientnum, #"ui_cam_character_customization_3d", 0, "", "", camera_ent.origin, camera_ent.angles);
   var_d0b01271 = lui::getcharacterdataformenu(menu_name, localclientnum);
   level thread function_914198cd(localclientnum, var_d0b01271, menu_name);
 }

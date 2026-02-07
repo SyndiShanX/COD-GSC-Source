@@ -35,7 +35,7 @@ fx_think(localclientnum) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    self playSound(localclientnum, # "wpn_semtex_alert");
+    self playSound(localclientnum, #"wpn_semtex_alert");
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
   }
 }

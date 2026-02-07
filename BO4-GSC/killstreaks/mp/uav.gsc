@@ -24,7 +24,7 @@
 #namespace uav;
 
 autoexec __init__system__() {
-  system::register(#"uav", &__init__, undefined, # "killstreaks");
+  system::register(#"uav", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -231,7 +231,7 @@ activateuav() {
   anglevector *= zoffset;
   anglevector = (anglevector[0], anglevector[1], zoffset - rotator.origin[2]);
   uav linkto(rotator, "tag_origin", anglevector, (0, angle + attach_angle, 0));
-  self stats::function_e24eec31(getweapon("uav"), # "used", 1);
+  self stats::function_e24eec31(getweapon("uav"), #"used", 1);
   uav thread killstreaks::waitfortimeout("uav", 30000, &ontimeout, "delete", "death", "crashing");
   uav thread killstreaks::waitfortimecheck(30000 / 2, &ontimecheck, "delete", "death", "crashing");
   uav thread startuavfx();
@@ -260,7 +260,7 @@ destroyuav(attacker, weapon) {
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     attacker battlechatter::function_dd6a6012("uav", weapon);
     challenges::destroyedaircraft(attacker, weapon, 0, 0);
-    luinotifyevent(#"player_callout", 2, # "hash_7f902a0b5852fe90", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"hash_7f902a0b5852fe90", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
 

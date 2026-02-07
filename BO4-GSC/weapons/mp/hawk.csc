@@ -143,12 +143,12 @@ function_6701affc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_775073e(localclientnum) {
-  if(function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_63b0389eb9286669");
+  if(function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_63b0389eb9286669");
   }
 
-  if(!function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    function_a837926b(localclientnum, # "hash_594d5293046135ff");
+  if(!function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    function_a837926b(localclientnum, #"hash_594d5293046135ff");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -159,12 +159,12 @@ function_775073e(localclientnum) {
 }
 
 function_6367489e(localclientnum) {
-  if(function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_594d5293046135ff");
+  if(function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_594d5293046135ff");
   }
 
-  if(!function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    function_a837926b(localclientnum, # "hash_63b0389eb9286669");
+  if(!function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    function_a837926b(localclientnum, #"hash_63b0389eb9286669");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");
@@ -175,12 +175,12 @@ function_6367489e(localclientnum) {
 }
 
 function_3759fcf(localclientnum, var_c5e2f09a) {
-  if(function_148ccc79(localclientnum, # "hash_594d5293046135ff")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_594d5293046135ff");
+  if(function_148ccc79(localclientnum, #"hash_594d5293046135ff")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_594d5293046135ff");
   }
 
-  if(function_148ccc79(localclientnum, # "hash_63b0389eb9286669")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_63b0389eb9286669");
+  if(function_148ccc79(localclientnum, #"hash_63b0389eb9286669")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_63b0389eb9286669");
   }
 
   var_e39026ad = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.hawkWeakSignal");

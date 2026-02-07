@@ -22,7 +22,7 @@
 #namespace zm_weap_thunderstorm;
 
 autoexec __init__system__() {
-  system::register(#"zm_weap_thunderstorm", &__init__, &__main__, # "zm_weapons");
+  system::register(#"zm_weap_thunderstorm", &__init__, &__main__, #"zm_weapons");
 }
 
 __init__() {
@@ -35,7 +35,7 @@ __init__() {
   clientfield::register("scriptmover", "" + # "hash_43cf6c236d2e9ba", 16000, 1, "counter");
   clientfield::register("scriptmover", "" + # "hash_1187b848bf7868c5", 16000, 1, "int");
   weaponobjects::function_e6400478(#"thunderstorm", &function_72e5d54f, undefined);
-  deployable::register_deployable(getweapon(#"thunderstorm"), &function_3b0168a9, undefined, undefined, # "hash_3b6c37d4718707a2");
+  deployable::register_deployable(getweapon(#"thunderstorm"), &function_3b0168a9, undefined, undefined, #"hash_3b6c37d4718707a2");
   level.a_mdl_pegasus = [];
   level.var_b3b0d9d7 = &function_cd366cf2;
   callback::on_connect(&function_6c5cb6e);
@@ -82,10 +82,10 @@ function_6c5cb6e() {
 
 function_feb1573e() {
   self notify(#"hash_2938992396267cf3");
-  self endon(#"disconnect", # "hash_2938992396267cf3");
+  self endon(#"disconnect", #"hash_2938992396267cf3");
 
   while(true) {
-    s_result = self waittill(#"grenade_fire", # "grenade_throw_cancelled");
+    s_result = self waittill(#"grenade_fire", #"grenade_throw_cancelled");
 
     if(s_result.weapon == getweapon(#"thunderstorm")) {
       self val::reset(#"pegasus_strike", "freezecontrols");
@@ -167,7 +167,7 @@ function_5f724c2e(e_grenade) {
     return;
   }
 
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(self laststand::player_is_in_laststand()) {
     level thread function_5abeb589(e_grenade);
@@ -505,7 +505,7 @@ grenade_stolen_by_sam(weapon) {
 }
 
 function_72085d9() {
-  self waittilltimeout(30, # "hash_90cfd38343f41f2", # "death");
+  self waittilltimeout(30, #"hash_90cfd38343f41f2", #"death");
   self zm_utility::deactivate_zombie_point_of_interest();
   self notify(#"hash_7a19b162c9e303dc");
   arrayremovevalue(level.a_mdl_pegasus, self);

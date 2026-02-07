@@ -25,7 +25,7 @@ enable_stronghold_perk_for_level() {
   zm_perks::register_perk_clientfields(#"specialty_camper", &function_5a4557ee, &function_44bd921f);
   zm_perks::register_perk_effects(#"specialty_camper", "divetonuke_light");
   zm_perks::register_perk_init_thread(#"specialty_camper", &init_stronghold);
-  zm_perks::function_b60f4a9f(#"specialty_camper", # "p8_zm_vapor_altar_icon_01_stonecoldstronghold", "zombie/fx8_perk_altar_symbol_ambient_stronghold", # "zmperksstonecold");
+  zm_perks::function_b60f4a9f(#"specialty_camper", #"p8_zm_vapor_altar_icon_01_stonecoldstronghold", "zombie/fx8_perk_altar_symbol_ambient_stronghold", #"zmperksstonecold");
   zm_perks::function_f3c80d73("zombie_perk_bottle_stronghold", "zombie_perk_totem_stronghold");
 }
 
@@ -50,7 +50,7 @@ function_2400dd1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_f9c892e3[localclientnum] = util::playFXOnTag(localclientnum, level._effect[# "hash_24e322568c9492c5"], self, "j_spine");
 
     if(!isDefined(self.var_2ec16150)) {
-      self playSound(localclientnum, # "hash_5e1e162af8490f1d");
+      self playSound(localclientnum, #"hash_5e1e162af8490f1d");
       self.var_2ec16150 = self playLoopSound(#"hash_641286598a33d4e3");
     }
 
@@ -63,7 +63,7 @@ function_2400dd1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_2ec16150)) {
-    self playSound(localclientnum, # "hash_73b66a25abec1fe4");
+    self playSound(localclientnum, #"hash_73b66a25abec1fe4");
     self stoploopsound(self.var_2ec16150);
     self.var_2ec16150 = undefined;
   }

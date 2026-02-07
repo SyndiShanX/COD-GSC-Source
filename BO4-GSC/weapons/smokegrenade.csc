@@ -36,7 +36,7 @@ on_local_player_spawned(local_client_num) {
 
 track_grenades(local_client_num) {
   self notify(#"track_grenades");
-  self endon(#"track_grenades", # "death", # "disconnect");
+  self endon(#"track_grenades", #"death", #"disconnect");
   waitresult = self waittill(#"grenade_fire");
   grenade = waitresult.projectile;
   weapon = waitresult.weapon;
@@ -56,7 +56,7 @@ function_709fad19() {
 monitor_smoke(local_client_num) {
   var_d3f60df1 = self;
   self notify(#"monitor_smoke");
-  self endon(#"monitor_smoke", # "death", # "delete");
+  self endon(#"monitor_smoke", #"death", #"delete");
   localplayer = function_5c10bd79(local_client_num);
 
   if(isDefined(var_d3f60df1) && isDefined(var_d3f60df1.owner) && isDefined(localplayer) && var_d3f60df1.owner != localplayer) {
@@ -66,7 +66,7 @@ monitor_smoke(local_client_num) {
   radius = function_709fad19();
 
   while(isDefined(var_d3f60df1)) {
-    waitresult = var_d3f60df1 waittilltimeout(0.25, # "death");
+    waitresult = var_d3f60df1 waittilltimeout(0.25, #"death");
     players = getplayers(local_client_num);
 
     foreach(player in players) {
@@ -112,14 +112,14 @@ function_ffbaa2ce(local_client_num, oldval, newval, bnewent, binitialsnap, field
 
 function_e69d0e4d(local_client_num) {
   self notify(#"hash_2286178f49f4601d");
-  self endon(#"hash_2286178f49f4601d", # "death", # "disconnect");
+  self endon(#"hash_2286178f49f4601d", #"death", #"disconnect");
   var_e098466f = 0;
 
   while(true) {
     isinfrared = isinfrared(local_client_num);
 
     if(isDefined(var_e098466f) && var_e098466f && !isinfrared || !(isDefined(var_e098466f) && var_e098466f) && isinfrared) {
-      var_85098191 = function_5778f82(local_client_num, # "hash_410c46b5ff702c96");
+      var_85098191 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");
 
       if(var_85098191) {
         players = getplayers(local_client_num);
@@ -139,7 +139,7 @@ function_e69d0e4d(local_client_num) {
 }
 
 function_62ec0142(local_client_num, bundle) {
-  var_85098191 = function_5778f82(local_client_num, # "hash_410c46b5ff702c96");
+  var_85098191 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");
 
   if(!var_85098191) {
     return false;
@@ -187,7 +187,7 @@ function_62ec0142(local_client_num, bundle) {
 }
 
 function_28db726(local_client_num, bundle) {
-  var_85098191 = function_5778f82(local_client_num, # "hash_410c46b5ff702c96");
+  var_85098191 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");
 
   if(!var_85098191) {
     return false;
@@ -215,7 +215,7 @@ function_28db726(local_client_num, bundle) {
     var_ed9e87ac = getscriptbundle(weapon.customsettings);
     assert(isDefined(var_ed9e87ac));
 
-    if((isDefined(var_ed9e87ac.var_ae2b2941) ? var_ed9e87ac.var_ae2b2941 : 0) && self hastalent(local_client_num, # "talent_coldblooded")) {
+    if((isDefined(var_ed9e87ac.var_ae2b2941) ? var_ed9e87ac.var_ae2b2941 : 0) && self hastalent(local_client_num, #"talent_coldblooded")) {
       return false;
     }
   }
@@ -228,7 +228,7 @@ vehicle_transition(local_client_num, oldval, newval, bnewent, binitialsnap, fiel
 
   foreach(player in players) {
     if(isalive(player)) {
-      var_85098191 = function_5778f82(local_client_num, # "hash_410c46b5ff702c96");
+      var_85098191 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");
 
       if(var_85098191) {
         player function_4fc900e1(local_client_num);
@@ -238,14 +238,14 @@ vehicle_transition(local_client_num, oldval, newval, bnewent, binitialsnap, fiel
 }
 
 function_4fc900e1(local_client_num) {
-  self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly_smoke", # "hash_8120ecc0ceec5c6");
-  self renderoverridebundle::function_c8d97b8e(local_client_num, # "enemy_smoke", # "hash_224b6b4d7364dbb5");
+  self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly_smoke", #"hash_8120ecc0ceec5c6");
+  self renderoverridebundle::function_c8d97b8e(local_client_num, #"enemy_smoke", #"hash_224b6b4d7364dbb5");
 }
 
 insmoke(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = self;
   player.insmoke = newval;
-  var_85098191 = function_5778f82(local_client_num, # "hash_410c46b5ff702c96");
+  var_85098191 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");
 
   if(var_85098191) {
     function_4fc900e1(local_client_num);

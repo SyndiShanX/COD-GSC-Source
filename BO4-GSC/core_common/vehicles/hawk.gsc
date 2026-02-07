@@ -71,8 +71,8 @@ event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 function_a2270a7e(vehicle) {
   self notify("5137fb3aeff763b1");
   self endon("5137fb3aeff763b1");
-  self endon(#"death", # "disconnect");
-  vehicle endon(#"death", # "exit_vehicle");
+  self endon(#"death", #"disconnect");
+  vehicle endon(#"death", #"exit_vehicle");
 
   if(sessionmodeiswarzonegame()) {
     str_mode = "wz";
@@ -98,7 +98,7 @@ function_a2270a7e(vehicle) {
 }
 
 on_vehicle_killed(params) {
-  self endon(#"death", # "free_vehicle");
+  self endon(#"death", #"free_vehicle");
 
   if(!isDefined(self.scriptvehicletype) || self.scriptvehicletype != "hawk") {
     return;

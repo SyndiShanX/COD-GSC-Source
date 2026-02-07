@@ -59,7 +59,7 @@ update(tacbundle) {
 }
 
 handle_path_success() {
-  self endon(#"death", # "hash_399ca08ed5c94410");
+  self endon(#"death", #"hash_399ca08ed5c94410");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {
@@ -74,7 +74,7 @@ handle_path_success() {
 }
 
 handle_goal_reached() {
-  self endon(#"death", # "hash_399ca08ed5c94410");
+  self endon(#"death", #"hash_399ca08ed5c94410");
   level endon(#"game_ended");
 
   while(isDefined(self.bot)) {

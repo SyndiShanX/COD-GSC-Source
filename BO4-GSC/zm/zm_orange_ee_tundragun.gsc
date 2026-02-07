@@ -43,8 +43,8 @@ main() {
     level.var_97da986d.var_5fbb6b48.e_model = e_model;
   }
 
-  zm_sq::register(#"ee_tundragun", # "step_1", # "ee_tundragun_step1", &ee_tundragun_step1_setup, &ee_tundragun_step1_cleanup);
-  zm_sq::register(#"ee_tundragun", # "step_2", # "ee_tundragun_step2", &ee_tundragun_step2_setup, &ee_tundragun_step2_cleanup);
+  zm_sq::register(#"ee_tundragun", #"step_1", #"ee_tundragun_step1", &ee_tundragun_step1_setup, &ee_tundragun_step1_cleanup);
+  zm_sq::register(#"ee_tundragun", #"step_2", #"ee_tundragun_step2", &ee_tundragun_step2_setup, &ee_tundragun_step2_cleanup);
   zm_sq::start(#"ee_tundragun", !zm_utility::is_standard());
 }
 
@@ -78,7 +78,7 @@ ee_tundragun_step1_cleanup(var_5ea5c94d, ended_early) {
 
 function_f16c0259() {
   self endon(#"death");
-  level endon(#"end_game", # "hash_478e70a97b556206");
+  level endon(#"end_game", #"hash_478e70a97b556206");
 
   while(true) {
     s_notify = self waittill(#"damage");
@@ -121,7 +121,7 @@ function_f16c0259() {
 }
 
 function_213f1c48() {
-  level endon(#"end_game", # "hash_3dcff814c31d2298");
+  level endon(#"end_game", #"hash_3dcff814c31d2298");
 
   iprintlnbold("<dev string:x12c>" + 1.75 + "<dev string:xaf>");
 

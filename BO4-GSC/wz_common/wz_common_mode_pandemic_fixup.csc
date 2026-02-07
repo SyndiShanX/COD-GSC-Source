@@ -16,14 +16,14 @@ autoexec function_45a212c0() {
   var_f8a4c541 = &item_world_fixup::function_6991057;
 
   if(isDefined(getgametypesetting(#"infectionmode")) && getgametypesetting(#"infectionmode")) {
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "ammo_type_12ga_item", # "ammo_type_12ga_double_item");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "ammo_type_338_item", # "ammo_type_338_double_item");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "ammo_type_45_item", # "ammo_type_45_double_item");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "hash_49fecbcd6cbd1ed9", # "ammo_type_50cal_double_item");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "ammo_type_556_item", # "ammo_type_556_double_item");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "ammo_type_762_item", # "ammo_type_762_double_item");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "ammo_type_9mm_item", # "ammo_type_9mm_double_item");
-    wz_common_fixup::item_replacer(var_d2223309, var_74257310, # "ammo_type_rocket_item", # "ammo_type_rocket_double_item");
-    wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, # "supply_stash_parent_dlc1", # "supply_stash_parent_pandemic");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_12ga_item", #"ammo_type_12ga_double_item");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_338_item", #"ammo_type_338_double_item");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_45_item", #"ammo_type_45_double_item");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"hash_49fecbcd6cbd1ed9", #"ammo_type_50cal_double_item");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_556_item", #"ammo_type_556_double_item");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_762_item", #"ammo_type_762_double_item");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_9mm_item", #"ammo_type_9mm_double_item");
+    wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_rocket_item", #"ammo_type_rocket_double_item");
+    wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"supply_stash_parent_dlc1", #"supply_stash_parent_pandemic");
   }
 }

@@ -26,7 +26,7 @@
 #namespace straferun;
 
 autoexec __init__system__() {
-  system::register(#"straferun", &__init__, undefined, # "killstreaks");
+  system::register(#"straferun", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -112,7 +112,7 @@ usekillstreakstraferun(hardpointtype) {
   self.straferunkills = 0;
   self.straferunbda = 0;
   self killstreaks::play_killstreak_start_dialog("straferun", self.pers[# "team"], killstreak_id);
-  self stats::function_e24eec31(getweapon(#"straferun"), # "used", 1);
+  self stats::function_e24eec31(getweapon(#"straferun"), #"used", 1);
   plane thread function_d4896942();
   target_set(plane, (0, 0, 0));
   plane.gunsoundentity = spawn("script_model", plane gettagorigin("tag_flash"));
@@ -350,7 +350,7 @@ watchforkills() {
 
 watchforownerexit(owner) {
   self endon(#"death");
-  owner waittill(#"disconnect", # "joined_team", # "joined_spectators");
+  owner waittill(#"disconnect", #"joined_team", #"joined_spectators");
   self.leavenexttime = 1;
 }
 
@@ -419,7 +419,7 @@ dostraferuns() {
 }
 
 function_d4896942() {
-  self endon(#"death", # "strafe_stop");
+  self endon(#"death", #"strafe_stop");
 
   while(true) {
     self waittill(#"flare_deployed");
@@ -431,7 +431,7 @@ function_d4896942() {
 }
 
 startstrafe() {
-  self endon(#"death", # "strafe_stop");
+  self endon(#"death", #"strafe_stop");
 
   if(isDefined(self.strafing)) {
     iprintlnbold("TRYING TO STRAFE WHEN ALREADY STRAFING!\n");
@@ -475,7 +475,7 @@ firststrafe() {}
 
 firerockets() {
   self notify(#"firing_rockets");
-  self endon(#"death", # "strafe_stop", # "firing_rockets");
+  self endon(#"death", #"strafe_stop", #"firing_rockets");
   self.owner endon(#"disconnect");
   forward = anglesToForward(self.angles);
   self.firedrockettargets = [];
@@ -845,7 +845,7 @@ deletewhenparentdies(parent) {
 }
 
 unlinkwhenparentdies(parent) {
-  self endon(#"reset", # "unlink");
+  self endon(#"reset", #"unlink");
   parent waittill(#"death");
   self unlink();
 }

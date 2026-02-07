@@ -24,7 +24,7 @@ function_20705e4c(localclientnum) {
   self endon(#"death");
 
   while(true) {
-    waitresult = self waittill(#"set_invisible", # "set_visible", # "hash_6ab654a4c018818c");
+    waitresult = self waittill(#"set_invisible", #"set_visible", #"hash_6ab654a4c018818c");
 
     switch (waitresult._notify) {
       case # "set_invisible":

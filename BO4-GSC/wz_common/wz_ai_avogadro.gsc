@@ -23,7 +23,7 @@
 #namespace wz_ai_avogadro;
 
 autoexec __init__system__() {
-  system::register(#"wz_ai_avogadro", &__init__, &__main__, # "archetype_avogadro");
+  system::register(#"wz_ai_avogadro", &__init__, &__main__, #"archetype_avogadro");
 }
 
 __init__() {
@@ -106,7 +106,7 @@ function_905d3c1a(entity) {
   timeout = getanimlength("ai_t8_zm_avogadro_arrival");
   new_origin = (entity.origin[0], entity.origin[1], entity.origin[2] - delta[2]);
   entity animscripted("avogadro_arrival_finished", new_origin, (0, entity.angles[1], 0), "ai_t8_zm_avogadro_arrival", "normal", "root", 1, 0);
-  entity waittilltimeout(timeout, # "avogadro_arrival_finished");
+  entity waittilltimeout(timeout, #"avogadro_arrival_finished");
 }
 
 avogadrodespawn(entity) {
@@ -120,7 +120,7 @@ onallcracks(entity) {
   entity pathmode("dont move", 1);
   timeout = getanimlength("ai_t8_zm_avogadro_exit");
   entity animscripted("avogadro_exit_finished", self.origin, self.angles, "ai_t8_zm_avogadro_exit", "normal", "root", 1, 0);
-  waitresult = entity waittilltimeout(timeout, # "avogadro_exit_finished");
+  waitresult = entity waittilltimeout(timeout, #"avogadro_exit_finished");
   entity ghost();
   entity notsolid();
   entity val::set(#"avogadro_despawn", "ignoreall", 1);

@@ -35,9 +35,9 @@ init_clientfield() {
 }
 
 init_quests() {
-  zm_sq::register(#"jump_scare", # "step_1", # "hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
-  zm_sq::register(#"narrative_room", # "step_1", # "hash_64d6af5ddc324d26", &function_6f55d670, &function_13c87ace);
-  zm_sq::register(#"narrative_room", # "step_2", # "hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
+  zm_sq::register(#"jump_scare", #"step_1", #"hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
+  zm_sq::register(#"narrative_room", #"step_1", #"hash_64d6af5ddc324d26", &function_6f55d670, &function_13c87ace);
+  zm_sq::register(#"narrative_room", #"step_2", #"hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
 }
 
 init_objects() {
@@ -61,7 +61,7 @@ jump_scare(var_a276c861) {
 
 track_player_eyes() {
   self notify(#"track_player_eyes");
-  self endon(#"disconnect", # "track_player_eyes");
+  self endon(#"disconnect", #"track_player_eyes");
   b_saw_the_wth = 0;
   var_616e76c5 = struct::get("sq_gl_scare", "targetname");
 

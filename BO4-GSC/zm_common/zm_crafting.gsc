@@ -428,7 +428,7 @@ function_126fc77c(player) {
     return can_use;
   }
 
-  if(isDefined(level.var_a6f62e91) && isDefined(self.stub.cost) && self.stub[[level.var_a6f62e91]](player, # "crafting_table")) {
+  if(isDefined(level.var_a6f62e91) && isDefined(self.stub.cost) && self.stub[[level.var_a6f62e91]](player, #"crafting_table")) {
     self sethintstringforplayer(player, self.stub.hint_string, self.stub.cost);
   } else if(isDefined(self.stub.cost) && self.stub.cost != 0) {
     self sethintstring(self.stub.hint_string, self.stub.cost);
@@ -633,7 +633,7 @@ function_356e77bd() {
 
 function_514b8f17(player) {
   self notify(#"hash_295a022a1c72a359");
-  self endon(#"hash_295a022a1c72a359", # "unitrigger_deactivated");
+  self endon(#"hash_295a022a1c72a359", #"unitrigger_deactivated");
   player endon(#"death");
   player.crafting_melee = 0;
 
@@ -688,7 +688,7 @@ function_86531922(e_holder, w_item) {
   if(isDefined(w_item.gadgetreadysoundplayer)) {
     self thread zm_audio::create_and_play_dialog(#"shield_pickup", w_item.gadgetreadysoundplayer);
   } else {
-    self thread zm_audio::create_and_play_dialog(#"shield_piece", # "pickup");
+    self thread zm_audio::create_and_play_dialog(#"shield_piece", #"pickup");
   }
 
   self playSound(#"hash_230737b2535a3374");
@@ -719,7 +719,7 @@ function_d56724a6(e_holder, w_item) {
     return;
   }
 
-  self thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+  self thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
 }
 
 function_475a63eb() {
@@ -801,7 +801,7 @@ function_18f2be60(player) {
 
 crafting_think() {
   self notify(#"crafting_think");
-  self endon(#"crafting_think", # "kill_trigger", # "death");
+  self endon(#"crafting_think", #"kill_trigger", #"death");
 
   while(isDefined(self)) {
     waitresult = self waittill(#"trigger");
@@ -1112,7 +1112,7 @@ function_9693e041(player) {
       str = self.blueprint.var_1238231a;
       var_e7ed2264 = function_c9163c5d(str);
       hint_str = zm_utility::function_d6046228(str, var_e7ed2264);
-      backup_str = zm_utility::function_d6046228(#"zombie/repair_shield", # "hash_197687e8f04962c9");
+      backup_str = zm_utility::function_d6046228(#"zombie/repair_shield", #"hash_197687e8f04962c9");
       self.hint_string = isDefined(hint_str) ? hint_str : backup_str;
       _shad_turret_debug_server = 1;
     } else {
@@ -1282,7 +1282,7 @@ function_df8ce6e2(player) {
   }
 
   if(isDefined(level.var_a6f62e91)) {
-    if(self[[level.var_a6f62e91]](player, # "crafting_table")) {
+    if(self[[level.var_a6f62e91]](player, #"crafting_table")) {
       return;
     }
   }
@@ -1323,7 +1323,7 @@ function_df8ce6e2(player) {
       player zm_utility::play_sound_on_ent("purchase");
     } else {
       zm_utility::play_sound_on_ent("no_purchase");
-      player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       return;
     }
   }
@@ -1357,7 +1357,7 @@ function_df8ce6e2(player) {
     #weapon: self.stub.blueprint.var_54a97edd
   });
   player zm_stats::function_c0c6ab19(#"weapons_bought", 1, 1);
-  player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, # "zstandard");
+  player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, #"zstandard");
   self.stub.bought = 1;
   self.stub.hint_string = "";
   self.stub.cost = undefined;

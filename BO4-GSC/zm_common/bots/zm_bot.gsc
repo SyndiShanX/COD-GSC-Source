@@ -200,7 +200,7 @@ function order_bot(bot) {
 }
 
 function_69745ea0() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self notify(#"hash_6b46933396f9db04");
   self endon(#"hash_6b46933396f9db04");
 

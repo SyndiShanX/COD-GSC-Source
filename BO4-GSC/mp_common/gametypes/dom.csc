@@ -53,8 +53,8 @@ monitor_flag_fx(localclientnum, flag_objective, flag_name) {
     flag.angles = flag_entity.angles;
   }
 
-  fx_name = get_base_fx(flag, # "neutral");
-  play_base_fx(localclientnum, flag, fx_name, # "neutral");
+  fx_name = get_base_fx(flag, #"neutral");
+  play_base_fx(localclientnum, flag, fx_name, #"neutral");
   flag.last_progress = 0;
 
   while(true) {

@@ -12,7 +12,7 @@
 #namespace character_unlock_ix_stanton;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_ix_stanton", &__init__, undefined, # "character_unlock_ix_stanton_fixup");
+  system::register(#"character_unlock_ix_stanton", &__init__, undefined, #"character_unlock_ix_stanton_fixup");
 }
 
 __init__() {
@@ -33,7 +33,7 @@ function_1c4b5097(item) {
 
     if(var_c503939b <= function_c816ea5b()) {
       if(self character_unlock::function_f0406288(#"ix_stanton_unlock")) {
-        self character_unlock::function_c8beca5e(#"ix_stanton_unlock", # "hash_9eef458b72b750d", 1);
+        self character_unlock::function_c8beca5e(#"ix_stanton_unlock", #"hash_9eef458b72b750d", 1);
       }
     }
   }
@@ -55,7 +55,7 @@ on_use_perk(player) {
   player.var_e598921d++;
 
   if(player.var_e598921d == 5) {
-    player character_unlock::function_c8beca5e(#"ix_stanton_unlock", # "hash_9eef158b72b6ff4", 1);
+    player character_unlock::function_c8beca5e(#"ix_stanton_unlock", #"hash_9eef158b72b6ff4", 1);
   }
 }
 
@@ -73,7 +73,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"ix_stanton_unlock")) {
-            player character_unlock::function_c8beca5e(#"ix_stanton_unlock", # "hash_9eef458b72b750d", 1);
+            player character_unlock::function_c8beca5e(#"ix_stanton_unlock", #"hash_9eef458b72b750d", 1);
           }
         }
       }

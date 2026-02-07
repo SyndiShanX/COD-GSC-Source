@@ -51,7 +51,7 @@ trap_cooldown() {
 trap_audio() {}
 
 trap_player_damage(t_trap) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!(isDefined(self.is_in_acid) && self.is_in_acid) && isplayer(self) && zm_utility::is_player_valid(self, 0, 0, 0) && isDefined(t_trap.var_67dd3af6) && t_trap.var_67dd3af6) {
     self.is_in_acid = 1;

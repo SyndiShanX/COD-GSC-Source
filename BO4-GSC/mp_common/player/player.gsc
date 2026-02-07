@@ -80,7 +80,7 @@ reset_doublexp_timer() {
 
 doublexp_timer() {
   self notify(#"doublexp_timer");
-  self endon(#"doublexp_timer", # "reset_doublexp_timer", # "end_game");
+  self endon(#"doublexp_timer", #"reset_doublexp_timer", #"end_game");
   level flagsys::wait_till("game_start_doublexp");
 
   if(!level.onlinegame) {

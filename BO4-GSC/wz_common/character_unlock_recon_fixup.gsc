@@ -8,11 +8,11 @@
 #namespace character_unlock_recon_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_recon_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_recon_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"recon_unlock", # "hash_78c357c8a5680d67", # "cu04_item", &function_d95e620c, # "hash_91d5ea7b26a8aca", # "hash_91d5da7b26a8917");
+  character_unlock_fixup::register_character_unlock(#"recon_unlock", #"hash_78c357c8a5680d67", #"cu04_item", &function_d95e620c, #"hash_91d5ea7b26a8aca", #"hash_91d5da7b26a8917");
 }
 
 function_d95e620c() {

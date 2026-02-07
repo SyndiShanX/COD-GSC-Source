@@ -122,7 +122,7 @@ function_46a56fe2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   level beam::launch(var_10d4f67d, str_tag, self, "j_spine4", "beam8_zm_red_peg_lightning_strike", 1);
-  self playSound(localclientnum, # "hash_61c057ffadb7a5af");
+  self playSound(localclientnum, #"hash_61c057ffadb7a5af");
   wait 0.3;
   level beam::kill(var_10d4f67d, str_tag, self, "j_spine4", "beam8_zm_red_peg_lightning_strike");
 }

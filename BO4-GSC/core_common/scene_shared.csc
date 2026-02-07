@@ -361,7 +361,7 @@ class cscene: cscriptbundlebase {
   function play(str_shot = "play", b_testing = 0, str_mode = "", b_looping = undefined) {
     level endon(#"demo_jump");
     self notify(str_shot + "start");
-    self endoncallback(&play_endon, str_shot + "start", # "new_state");
+    self endoncallback(&play_endon, str_shot + "start", #"new_state");
 
     if(issubstr(str_mode, "play_from_time")) {
       args = strtok(str_mode, ":");
@@ -444,7 +444,7 @@ class cscene: cscriptbundlebase {
         self waittill(#"new_state");
       } else {
         n_cam_time = getcamanimtime(_s.cameraswitcher);
-        self waittilltimeout(float(n_cam_time) / 1000, # "new_state");
+        self waittilltimeout(float(n_cam_time) / 1000, #"new_state");
       }
 
       a_players = getlocalplayers();
@@ -612,7 +612,7 @@ class csceneplayer: cscriptbundleobjectbase, csceneobject {
       self waittill(#"new_state");
     } else {
       n_cam_time = getcamanimtime(animation) - var_57949b2d;
-      self waittilltimeout(float(n_cam_time) / 1000, # "new_state");
+      self waittilltimeout(float(n_cam_time) / 1000, #"new_state");
     }
 
     flagsys::clear(#"camera_playing");

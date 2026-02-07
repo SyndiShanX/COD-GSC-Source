@@ -47,7 +47,7 @@ setup_zombie_exerts() {
 }
 
 delay_turning_on_eyes() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   util::wait_network_frame();
   wait 0.1;
   self clientfield::set("player_has_eyes", 1);
@@ -262,7 +262,7 @@ turned_give_melee_weapon() {
 }
 
 turned_player_buttons() {
-  self endon(#"disconnect", # "humanify");
+  self endon(#"disconnect", #"humanify");
   level endon(#"end_game");
 
   while(isDefined(self.is_zombie) && self.is_zombie) {

@@ -575,11 +575,11 @@ ondrop(player) {
   }
 
   if(isDefined(player)) {
-    util::printandsoundoneveryone(team, undefined, # "", undefined, "mp_war_objective_lost");
+    util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_war_objective_lost");
     level thread popups::displayteammessagetoteam(#"hash_3118e621ec8d35b8", player, team, undefined, undefined);
     level thread popups::displayteammessagetoteam(#"hash_6730bd6c7d8d0567", player, otherteam, undefined, undefined);
   } else {
-    util::printandsoundoneveryone(team, undefined, # "", undefined, "mp_war_objective_lost");
+    util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_war_objective_lost");
   }
 
   globallogic_audio::leader_dialog("ctfFriendlyFlagDropped", team, undefined, "ctf_flag");
@@ -644,7 +644,7 @@ onpickup(player) {
 
   if(isDefined(player) && player.pers[# "team"] == team) {
     self notify(#"picked_up");
-    util::printandsoundoneveryone(team, undefined, # "", undefined, "mp_obj_returned");
+    util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_obj_returned");
 
     if(isDefined(player.pers[# "returns"])) {
       player.pers[# "returns"]++;
@@ -686,7 +686,7 @@ onpickup(player) {
   scoreevents::processscoreevent(#"flag_grab", player, undefined, undefined);
   demo::bookmark(#"event", gettime(), player);
   potm::bookmark(#"event", gettime(), player);
-  util::printandsoundoneveryone(otherteam, undefined, # "", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
+  util::printandsoundoneveryone(otherteam, undefined, #"", undefined, "mp_obj_taken", "mp_enemy_obj_taken");
   level thread popups::displayteammessagetoteam(#"hash_6b94e754d048dae9", player, team, undefined, undefined);
   level thread popups::displayteammessagetoteam(#"hash_25ed0737f009ca72", player, otherteam, undefined, undefined);
   globallogic_audio::leader_dialog("ctfFriendlyFlagTaken", team, undefined, "ctf_flag");
@@ -746,7 +746,7 @@ onpickup(player) {
 }
 
 onpickupmusicstate(player) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   wait 6;
 
   if(player.isflagcarrier) {}
@@ -822,7 +822,7 @@ oncapture(player) {
     player.carryobject.var_fa01a5fa delete();
   }
 
-  util::printandsoundoneveryone(team, undefined, # "", undefined, "mp_obj_captured", "mp_enemy_obj_captured");
+  util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_obj_captured", "mp_enemy_obj_captured");
   bb::function_95a5b5c2("ctf_flagcapture", undefined, enemyteam, player.origin);
   game.challenge[team][# "capturedflag"] = 1;
 

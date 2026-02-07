@@ -43,7 +43,7 @@ is_active() {
 }
 
 movement_watcher() {
-  self endon(#"disconnect", # "hash_17c41292130032eb");
+  self endon(#"disconnect", #"hash_17c41292130032eb");
   wait zm_round_logic::get_delay_between_rounds() - 2;
 
   while(true) {

@@ -105,7 +105,7 @@ aat_devgui_think() {
 
 aat_set_debug_text(name, success, success_reroll, fail) {
   self notify(#"aat_set_debug_text_thread");
-  self endon(#"aat_set_debug_text_thread", # "disconnect");
+  self endon(#"aat_set_debug_text_thread", #"disconnect");
 
   if(!isDefined(self.aat_debug_text)) {
     return;

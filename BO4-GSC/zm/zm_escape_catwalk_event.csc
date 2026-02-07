@@ -27,5 +27,5 @@ function_a3874ae0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_1fe913e0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, # "zm_escape_catwalk_door");
+  self playrumbleonentity(localclientnum, #"zm_escape_catwalk_door");
 }

@@ -16,7 +16,7 @@
 #namespace character_unlock_richtofen;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_richtofen", &__init__, undefined, # "character_unlock_richtofen_fixup");
+  system::register(#"character_unlock_richtofen", &__init__, undefined, #"character_unlock_richtofen_fixup");
 }
 
 __init__() {
@@ -55,7 +55,7 @@ function_2613aeec(enabled) {
 }
 
 function_80635b6f() {
-  foreach(item_name in array(#"cu15_item", # "cu16_item", # "cu18_item")) {
+  foreach(item_name in array(#"cu15_item", #"cu16_item", #"cu18_item")) {
     item = self item_inventory::function_7fe4ce88(item_name);
 
     if(isDefined(item)) {
@@ -89,7 +89,7 @@ function_1c4b5097(item) {
 
     if(var_c503939b <= function_c816ea5b()) {
       if(self character_unlock::function_f0406288(#"richtofen_unlock")) {
-        self character_unlock::function_c8beca5e(#"richtofen_unlock", # "hash_418312990213bc41", 1);
+        self character_unlock::function_c8beca5e(#"richtofen_unlock", #"hash_418312990213bc41", 1);
       }
     }
   }
@@ -109,7 +109,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"richtofen_unlock")) {
-            player character_unlock::function_c8beca5e(#"richtofen_unlock", # "hash_418312990213bc41", 1);
+            player character_unlock::function_c8beca5e(#"richtofen_unlock", #"hash_418312990213bc41", 1);
           }
         }
       }

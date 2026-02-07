@@ -10,7 +10,7 @@
 #namespace zm_bgb_newtonian_negation;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_newtonian_negation", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_newtonian_negation", &__init__, undefined, #"bgb");
 }
 
 __init__() {

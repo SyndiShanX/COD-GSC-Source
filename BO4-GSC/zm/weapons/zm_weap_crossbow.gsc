@@ -150,7 +150,7 @@ crossbow_weapon_change(params) {
 function_7157628d() {
   self notify("6e0a9e3b0455824");
   self endon("6e0a9e3b0455824");
-  self endoncallback(&function_a4d47b95, # "death", # "disconnect", # "hash_72be12bd6b55fdab");
+  self endoncallback(&function_a4d47b95, #"death", #"disconnect", #"hash_72be12bd6b55fdab");
   self.b_crossbow_charged = 0;
 
   while(true) {

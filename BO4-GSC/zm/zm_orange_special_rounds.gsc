@@ -79,7 +79,7 @@ function_27695a82() {
   ai = zombie_utility::spawn_zombie(spawner, spawner.targetname, spawn_point, level.round_number + level.var_1c921b2b);
 
   if(isDefined(ai)) {
-    ai thread zm_orange_util::function_865209df(#"electric_zombie", # "hash_73e5e9787832fc70");
+    ai thread zm_orange_util::function_865209df(#"electric_zombie", #"hash_73e5e9787832fc70");
   }
 
   return ai;

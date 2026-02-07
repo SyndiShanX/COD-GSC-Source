@@ -601,7 +601,7 @@ function_681c28c9() {
 function_30829a12() {
   level waittill(#"start_zombie_round_logic");
   exploder::exploder("fxexp_shipArtifact_powerOffFire");
-  s_notify = level waittill(#"power_on2", # "hash_6f7fd3d4d070db87");
+  s_notify = level waittill(#"power_on2", #"hash_6f7fd3d4d070db87");
   exploder::stop_exploder("fxexp_shipArtifact_powerOffFire");
 
   if(s_notify._notify === "power_on2") {
@@ -610,7 +610,7 @@ function_30829a12() {
     exploder::exploder("fxexp_shipArtifact_powerOffDaylight");
   }
 
-  s_notify = level waittill(#"power_on2", # "hash_6f7fd3d4d070db87");
+  s_notify = level waittill(#"power_on2", #"hash_6f7fd3d4d070db87");
   exploder::stop_exploder("fxexp_shipArtifact_powerOnFire");
   exploder::stop_exploder("fxexp_shipArtifact_powerOffDaylight");
   exploder::exploder("fxexp_shipArtifact_powerOnLights");
@@ -643,11 +643,11 @@ function_b5695720() {
 }
 
 function_bdf62232() {
-  self thread zm_orange_util::function_865209df(#"935_zombie", # "hash_6d9b683b3abbb981");
+  self thread zm_orange_util::function_865209df(#"935_zombie", #"hash_6d9b683b3abbb981");
 }
 
 function_6be9c49c() {
-  self thread zm_orange_util::function_865209df(#"german_zombie", # "hash_42f42c8c6a56a111");
+  self thread zm_orange_util::function_865209df(#"german_zombie", #"hash_42f42c8c6a56a111");
 }
 
 play_avalanche() {

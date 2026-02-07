@@ -62,7 +62,7 @@ function_a874e5d0(var_5ea5c94d, ended_early) {
 }
 
 function_1ad84248() {
-  level endon(#"end_game", # "hash_50b21267cdd893be");
+  level endon(#"end_game", #"hash_50b21267cdd893be");
 
   switch (level.var_96eedc2a) {
     case 3:
@@ -131,7 +131,7 @@ function_1ad84248() {
 }
 
 function_561d9cff() {
-  level endon(#"end_game", # "hash_18c97556779d2ace");
+  level endon(#"end_game", #"hash_18c97556779d2ace");
 
   if(level.var_96eedc2a > 1) {
     self.vessel setModel("p8_zm_ora_elemental_vessel");
@@ -207,7 +207,7 @@ function_561d9cff() {
 }
 
 function_af39e9d5() {
-  level endon(#"end_game", # "hash_18c97556779d2ace");
+  level endon(#"end_game", #"hash_18c97556779d2ace");
   var_a28e7c1f = self.origin + (0, 0, 2);
   var_ae661658 = self.origin - (0, 0, 2);
 

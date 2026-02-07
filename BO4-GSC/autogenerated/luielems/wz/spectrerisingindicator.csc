@@ -16,7 +16,7 @@ class cspectrerisingindicator: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "spectrerisingindicator");
+    cluielem::open(localclientnum, #"spectrerisingindicator");
   }
 
   function function_fa582112(localclientnum) {

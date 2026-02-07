@@ -36,7 +36,7 @@ class cfull_screen_black: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "full_screen_black");
+    cluielem::open(localclientnum, #"full_screen_black");
   }
 
   function function_fa582112(localclientnum) {

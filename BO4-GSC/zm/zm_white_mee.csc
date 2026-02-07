@@ -79,7 +79,7 @@ function_bb4b8cd2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     if(isDefined(self)) {
       self thread postfx::playpostfxbundle(#"hash_37d0c10f478e0376");
-      playSound(localclientnum, # "hash_50a56f17fc412b92", (0, 0, 0));
+      playSound(localclientnum, #"hash_50a56f17fc412b92", (0, 0, 0));
       waitframe(1);
     }
 
@@ -139,7 +139,7 @@ function_ce8e5280() {
 function_87d68f99(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread postfx::playpostfxbundle(#"hash_37d0c00f478e01c3");
-    playSound(localclientnum, # "hash_750bc40787e0e29f", (0, 0, 0));
+    playSound(localclientnum, #"hash_750bc40787e0e29f", (0, 0, 0));
     waitframe(1);
 
     if(isDefined(self.var_fcf96ca0)) {

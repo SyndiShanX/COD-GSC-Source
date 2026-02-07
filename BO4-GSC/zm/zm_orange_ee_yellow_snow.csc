@@ -50,7 +50,7 @@ spleen_carry_sound(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
     return;
   }
 
-  self playSound(localclientnum, # "hash_37f5db96bc2147cd");
+  self playSound(localclientnum, #"hash_37f5db96bc2147cd");
   self stoploopsound(self.var_b93060b3);
   self.var_b93060b3 = undefined;
 }

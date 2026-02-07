@@ -107,7 +107,7 @@ on_player_damaged(params) {
 }
 
 function_c04c8002() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   level endon(#"game_ended");
   self notify("2c5ea250cf8b9681");
   self endon("2c5ea250cf8b9681");
@@ -127,7 +127,7 @@ on_player_killed(params) {
   }
 
   if(isDefined(player.var_b6672e47) && player.var_b6672e47 && player === player.var_9db94fe3 && util::function_fbce7263(player.team, attacker.team)) {
-    attacker activecamo::function_896ac347(weapon, # "showstopper", 1);
+    attacker activecamo::function_896ac347(weapon, #"showstopper", 1);
     scoreevents::processscoreevent(#"tak5_shutdown", attacker, player.var_9db94fe3, weapon);
   }
 }
@@ -246,7 +246,7 @@ function_ee175021(array, entnum) {
 gadget_on(slot, weapon) {
   player = self;
   player notify(#"hash_1fc72d26f9bee4eb");
-  player endon(#"hash_1fc72d26f9bee4eb", # "disconnect");
+  player endon(#"hash_1fc72d26f9bee4eb", #"disconnect");
   player function_9fe3d492();
   player.localheal.var_e2e4899c = 0;
   player.localheal.targets = [];

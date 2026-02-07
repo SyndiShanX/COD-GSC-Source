@@ -523,7 +523,7 @@ function_bf48abde() {
 }
 
 mannequin_falling(var_e5031929) {
-  self endoncallback(&function_6bc3bcb8, # "death");
+  self endoncallback(&function_6bc3bcb8, #"death");
   var_e5031929 waittill(#"movedone");
   self notify(#"landed");
   self unlink();
@@ -538,7 +538,7 @@ function_6bc3bcb8(notifyhash) {
 }
 
 function_4eca5590() {
-  self endon(#"death", # "landed");
+  self endon(#"death", #"landed");
 
   while(true) {
     animation::play(#"hash_1f02283eb11fce2a", self.origin, self.angles, 1, 0.2, 0.2, 0, 0, 0, 0);

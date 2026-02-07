@@ -565,7 +565,7 @@ function_69dd6c5b() {
 }
 
 function_97ab5da4() {
-  a_flags = array(#"hash_3ee874ebee843004", # "hash_315d0bf1d50724f0");
+  a_flags = array(#"hash_3ee874ebee843004", #"hash_315d0bf1d50724f0");
 
   if(level flag::get_all(a_flags)) {
     level flag::set(#"hash_359cbec050523f4");
@@ -579,7 +579,7 @@ function_97ab5da4() {
 }
 
 function_9a405843() {
-  a_flags = array(#"hash_3ee874ebee843004", # "hash_315d0bf1d50724f0", # "hash_359cbec050523f4");
+  a_flags = array(#"hash_3ee874ebee843004", #"hash_315d0bf1d50724f0", #"hash_359cbec050523f4");
 
   if(level flag::get_all(a_flags)) {
     level flag::set(#"hash_130656ec8ad5480d");
@@ -1070,7 +1070,7 @@ function_6ef53601(var_7e123df8) {
 
 function_450060dd() {
   self notify(#"hash_23cb7679bd15f5aa");
-  self endon(#"end_game", # "hash_23cb7679bd15f5aa");
+  self endon(#"end_game", #"hash_23cb7679bd15f5aa");
   self thread function_a196c54b();
   n_start_time = gettime();
 
@@ -1101,7 +1101,7 @@ function_67621880() {
   function_52838f02("large", 0);
   self.var_1549a0a5 = 1;
   var_745db666 = array("blink", "dynamic", "style1", "style2");
-  self endon(#"end_game", # "hash_3f68e1ecf3892766");
+  self endon(#"end_game", #"hash_3f68e1ecf3892766");
 
   while(true) {
     var_745db666 = array::randomize(var_745db666);

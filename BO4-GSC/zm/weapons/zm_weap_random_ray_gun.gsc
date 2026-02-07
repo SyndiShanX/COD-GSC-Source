@@ -194,7 +194,7 @@ function_af59b4aa(var_9345432e, s_waitresult) {
   var_9345432e endon(#"death");
 
   if(isDefined(var_9345432e.vehcheckforpredictedcrash) && var_9345432e.vehcheckforpredictedcrash) {
-    var_9345432e waittilltimeout(4, # "veh_predictedcollision");
+    var_9345432e waittilltimeout(4, #"veh_predictedcollision");
 
     if(getdvarint(#"hash_e2e03328b366e75", 0)) {
       sphere(var_9345432e.origin, 4, (1, 1, 1), 1, 1, 8, 300);
@@ -903,7 +903,7 @@ function_f724358c(e_attacker) {
 }
 
 function_ad3de341(e_attacker) {
-  self endoncallback(&function_e313ef46, # "hash_2250ef170a9d4a6", # "death", # "scriptedanim", # "new_scripted_anim");
+  self endoncallback(&function_e313ef46, #"hash_2250ef170a9d4a6", #"death", #"scriptedanim", #"new_scripted_anim");
 
   if(self isplayinganimscripted()) {
     self notify(#"hash_2250ef170a9d4a6");
@@ -951,7 +951,7 @@ function_b47bcfb0(e_attacker, var_3ae458c8) {
   self endon(#"death");
   var_1ee06b23 = self.archetype === # "nosferatu" ? 4 : 12;
   n_timeout = isDefined(var_3ae458c8) ? var_3ae458c8 : var_1ee06b23;
-  util::wait_endon(n_timeout, # "hash_28e3235da53ba083");
+  util::wait_endon(n_timeout, #"hash_28e3235da53ba083");
 
   if(isalive(self)) {
     self.marked_for_death = 1;
@@ -1139,7 +1139,7 @@ function_c5eccfa2() {
 
 function_6476c708(e_attacker, e_tornado) {
   self endon(#"death");
-  s_waitresult = e_tornado waittill(#"end_spin_cycle", # "death");
+  s_waitresult = e_tornado waittill(#"end_spin_cycle", #"death");
 
   if(s_waitresult._notify === "end_spin_cycle") {
     wait 0.5;
@@ -1245,7 +1245,7 @@ function_b9078d40(v_origin, e_attacker, var_a257f75d) {
 }
 
 function_1250965b(e_attacker) {
-  self endon(#"hash_7e07bb5b7a331e0b", # "death");
+  self endon(#"hash_7e07bb5b7a331e0b", #"death");
   self thread function_f8679f8d(2, &function_886f2b8d, self, e_attacker);
 
   while(true) {
@@ -1256,7 +1256,7 @@ function_1250965b(e_attacker) {
 }
 
 function_1beb7376(e_attacker) {
-  self endon(#"hash_7e07bb5b7a331e0b", # "death");
+  self endon(#"hash_7e07bb5b7a331e0b", #"death");
   var_ceedbc10 = 204.8 * 204.8;
 
   while(true) {

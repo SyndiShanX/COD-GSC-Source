@@ -8,11 +8,11 @@
 #namespace character_unlock_reaper_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_reaper_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_reaper_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"reaper_unlock", # "hash_76cce42bfc9866cd", # "cu35_item", &function_d95e620c, # "hash_555c37b28c4a770c", # "hash_555c3ab28c4a7c25");
+  character_unlock_fixup::register_character_unlock(#"reaper_unlock", #"hash_76cce42bfc9866cd", #"cu35_item", &function_d95e620c, #"hash_555c37b28c4a770c", #"hash_555c3ab28c4a7c25");
 }
 
 function_d95e620c() {

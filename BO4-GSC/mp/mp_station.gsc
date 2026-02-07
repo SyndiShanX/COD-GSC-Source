@@ -40,8 +40,8 @@ on_game_playing() {
 
   if(util::isfirstround()) {
     level util::delay(getdvarfloat(#"hash_187afb4d5f703a4a", 0.2), undefined, &scene::play, "p8_fxanim_sta_helicopter_flyover_bundle", "Shot 2");
-    level util::delay(getdvarfloat(#"hash_395638c05b097129", 0.2), undefined, &scene::play, # "p8_fxanim_sta_runaway_vehicles_bundle");
-    level util::delay(getdvarfloat(#"hash_395638c05b097129", 0.2), undefined, &scene::play, # "p8_fxanim_sta_runaway_truck_wall_bundle");
+    level util::delay(getdvarfloat(#"hash_395638c05b097129", 0.2), undefined, &scene::play, #"p8_fxanim_sta_runaway_vehicles_bundle");
+    level util::delay(getdvarfloat(#"hash_395638c05b097129", 0.2), undefined, &scene::play, #"p8_fxanim_sta_runaway_truck_wall_bundle");
     return;
   }
 

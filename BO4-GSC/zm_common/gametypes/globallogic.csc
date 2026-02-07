@@ -13,7 +13,7 @@
 #namespace globallogic;
 
 autoexec __init__system__() {
-  system::register(#"globallogic", &__init__, undefined, # "visionset_mgr");
+  system::register(#"globallogic", &__init__, undefined, #"visionset_mgr");
 }
 
 __init__() {

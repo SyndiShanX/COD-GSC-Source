@@ -127,7 +127,7 @@ function_c9a18304(eventstruct) {
 function_3f6dfc34(localclientnum) {
   self notify("62720c265d658b90");
   self endon("62720c265d658b90");
-  self endon(#"death", # "disconnect", # "freefallend");
+  self endon(#"death", #"disconnect", #"freefallend");
 
   while(true) {
     waitframe(1);
@@ -137,11 +137,11 @@ function_3f6dfc34(localclientnum) {
     }
 
     blur = function_e81eebd5(localclientnum);
-    self function_116b95e5("pstfx_speedblur_wz", # "blur", blur.blur);
-    self function_116b95e5("pstfx_speedblur_wz", # "inner mask", blur.innermask);
-    self function_116b95e5("pstfx_speedblur_wz", # "outer mask", blur.outermask);
-    self function_116b95e5("pstfx_speedblur_wz", # "x offset", blur.xoffset);
-    self function_116b95e5("pstfx_speedblur_wz", # "y offset", blur.yoffset);
+    self function_116b95e5("pstfx_speedblur_wz", #"blur", blur.blur);
+    self function_116b95e5("pstfx_speedblur_wz", #"inner mask", blur.innermask);
+    self function_116b95e5("pstfx_speedblur_wz", #"outer mask", blur.outermask);
+    self function_116b95e5("pstfx_speedblur_wz", #"x offset", blur.xoffset);
+    self function_116b95e5("pstfx_speedblur_wz", #"y offset", blur.yoffset);
   }
 }
 
@@ -150,7 +150,7 @@ function_cc5ed6ff(pitch, min_pitch, max_pitch, var_2ff50798, var_9988e8ec) {
 }
 
 printspeed(viewpitch) {
-  self endon(#"death", # "disconnect", # "freefallend");
+  self endon(#"death", #"disconnect", #"freefallend");
 
   while(true) {
     vel = self getvelocity();
@@ -206,7 +206,7 @@ function_7c653916(timesec) {
 
 function_e8a9e948(localclientnum, var_695a7111) {
   if(self function_21c0fa55()) {
-    self endoncallback(&function_1c6573a4, # "death", # "freefallend");
+    self endoncallback(&function_1c6573a4, #"death", #"freefallend");
 
     while(true) {
       vel = self getvelocity();
@@ -278,7 +278,7 @@ function_a993866(localclientnum, var_9a17b15c) {
   }
 
   if(var_9a17b15c > 0) {
-    self endon(#"death", # "freefallend", # "disconnect");
+    self endon(#"death", #"freefallend", #"disconnect");
     wait var_9a17b15c;
   }
 
@@ -333,7 +333,7 @@ function_1c6573a4(notifyhash) {
 }
 
 function_ba7365ff(localclientnum, height, fxid) {
-  self endon(#"death", # "freefallend");
+  self endon(#"death", #"freefallend");
 
   while(true) {
     if(self.origin[2] < height) {
@@ -379,7 +379,7 @@ function_2bdd64a4(localclientnum) {
   self.var_b7756d91 = self playLoopSound("evt_skydive_wind_heavy", 1);
 
   if(self.origin[2] > 30000) {
-    self playSound(localclientnum, # "hash_214da797e3f63ec5");
+    self playSound(localclientnum, #"hash_214da797e3f63ec5");
   }
 }
 

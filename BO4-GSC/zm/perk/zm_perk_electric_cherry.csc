@@ -17,7 +17,7 @@ __init__() {
   zm_perks::register_perk_clientfields(#"specialty_electriccherry", &electric_cherry_client_field_func, &electric_cherry_code_callback_func);
   zm_perks::register_perk_effects(#"specialty_electriccherry", "electric_cherry_light");
   zm_perks::register_perk_init_thread(#"specialty_electriccherry", &init_electric_cherry);
-  zm_perks::function_b60f4a9f(#"specialty_electriccherry", # "p8_zm_vapor_altar_icon_01_electricburst", "zombie/fx8_perk_altar_symbol_ambient_electric_cherry", # "zmperkselectricburst");
+  zm_perks::function_b60f4a9f(#"specialty_electriccherry", #"p8_zm_vapor_altar_icon_01_electricburst", "zombie/fx8_perk_altar_symbol_ambient_electric_cherry", #"zmperkselectricburst");
   zm_perks::function_f3c80d73("zombie_perk_bottle_cherry", "zombie_perk_totem_electric_burst");
 }
 
@@ -80,7 +80,7 @@ tesla_death_fx_callback(localclientnum, oldval, newval, bnewent, binitialsnap, f
     }
 
     if(!isDefined(self.var_16e53a57)) {
-      self playSound(localclientnum, # "hash_3b277f4572603015");
+      self playSound(localclientnum, #"hash_3b277f4572603015");
       self.var_16e53a57 = self playLoopSound(#"hash_2f0f235f7f6fc84d");
     }
 
@@ -121,7 +121,7 @@ tesla_shock_eyes_fx_callback(localclientnum, oldval, newval, bnewent, binitialsn
     }
 
     if(!isDefined(self.var_16e53a57)) {
-      self playSound(localclientnum, # "hash_3b277f4572603015");
+      self playSound(localclientnum, #"hash_3b277f4572603015");
       self.var_16e53a57 = self playLoopSound(#"hash_2f0f235f7f6fc84d");
     }
 

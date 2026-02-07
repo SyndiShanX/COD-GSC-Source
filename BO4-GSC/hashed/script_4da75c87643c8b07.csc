@@ -37,6 +37,6 @@ function_feb37b9f(color) {
       s_light.var_cb9d8af = undefined;
     }
 
-    s_light.var_cb9d8af = playFX(0, # "hash_787d9cfa8f97976a" + color, light_pos);
+    s_light.var_cb9d8af = playFX(0, #"hash_787d9cfa8f97976a" + color, light_pos);
   }
 }

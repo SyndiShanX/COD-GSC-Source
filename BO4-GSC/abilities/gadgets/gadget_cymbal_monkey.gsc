@@ -104,7 +104,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
     e_grenade.mdl_monkey.var_38af96b9 = e_grenade;
     e_grenade.mdl_monkey.team = e_grenade.team;
     e_grenade.mdl_monkey clientfield::set("enemyequip", 1);
-    e_grenade waittill(#"stationary", # "death");
+    e_grenade waittill(#"stationary", #"death");
 
     if(!isDefined(e_grenade) && isDefined(mdl_monkey)) {
       mdl_monkey delete();

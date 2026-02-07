@@ -255,7 +255,7 @@ destructible_car_death_think() {
 }
 
 destructible_car_grenade_stuck_think() {
-  self endon(#"destructible_base_piece_death", # "car_dead", # "death");
+  self endon(#"destructible_base_piece_death", #"car_dead", #"death");
 
   for(;;) {
     waitresult = self waittill(#"grenade_stuck");
@@ -272,11 +272,11 @@ destructible_car_grenade_stuck_think() {
 }
 
 destructible_car_grenade_stuck_explode(missile) {
-  self endon(#"destructible_base_piece_death", # "car_dead", # "death");
+  self endon(#"destructible_base_piece_death", #"car_dead", #"death");
   owner = getmissileowner(missile);
 
   if(isDefined(owner) && missile.model == "wpn_t7_c4_world") {
-    owner endon(#"disconnect", # "weapon_object_destroyed");
+    owner endon(#"disconnect", #"weapon_object_destroyed");
     missile endon(#"picked_up");
     missile thread destructible_car_hacked_c4(self);
   }
@@ -292,7 +292,7 @@ destructible_car_grenade_stuck_explode(missile) {
 }
 
 destructible_car_hacked_c4(car) {
-  car endon(#"destructible_base_piece_death", # "car_dead", # "death");
+  car endon(#"destructible_base_piece_death", #"car_dead", #"death");
   self endon(#"death");
   self waittill(#"hacked");
   self notify(#"picked_up");

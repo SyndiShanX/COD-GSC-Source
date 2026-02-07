@@ -57,29 +57,29 @@ function_9ea8f9d6() {
 }
 
 function_a4f516ef() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(getdvarint(#"scr_disable_infiltration", 0)) {
     return;
   }
 
   if(!self flagsys::get(#"hash_287397edba8966f9")) {
-    var_f9664338 = [# "hash_287397edba8966f9", # "hash_224cb97b8f682317"];
+    var_f9664338 = [# "hash_287397edba8966f9", #"hash_224cb97b8f682317"];
     self flagsys::wait_till_any(var_f9664338);
   }
 
   if(function_58a44f22()) {
-    waitresult = self waittill(#"hash_3a41cbe85bdb81e1", # "hash_224cb97b8f682317");
+    waitresult = self waittill(#"hash_3a41cbe85bdb81e1", #"hash_224cb97b8f682317");
 
     if(waitresult._notify != # "hash_224cb97b8f682317") {
-      self flagsys::wait_till_timeout(function_8ed212d(), # "hash_224cb97b8f682317");
+      self flagsys::wait_till_timeout(function_8ed212d(), #"hash_224cb97b8f682317");
     }
 
     return;
   }
 
   assert(isDefined(self.var_33a2e995));
-  self flagsys::wait_till_timeout(self.var_33a2e995, # "hash_224cb97b8f682317");
+  self flagsys::wait_till_timeout(self.var_33a2e995, #"hash_224cb97b8f682317");
 }
 
 function_2ed2a1bb(max) {
@@ -212,7 +212,7 @@ function_c9a18304(params) {
   if(params.freefall === 1) {
     self notify("262092a28e60152c");
     self endon("262092a28e60152c");
-    self endon(#"death", # "disconnect");
+    self endon(#"death", #"disconnect");
     waitframe(1);
     self botsetmovemagnitude(1);
     target_point = function_8f2f3bcd();

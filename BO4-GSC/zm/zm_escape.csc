@@ -72,7 +72,7 @@ event_handler[level_init] main(eventstruct) {
   paschal::init();
   namespace_1063645::init_clientfields();
   namespace_b99141ed::init_clientfields();
-  zm_utility::function_beed5764("rob_zm_eyes_red", # "zm_ai/fx8_zombie_eye_glow_red");
+  zm_utility::function_beed5764("rob_zm_eyes_red", #"zm_ai/fx8_zombie_eye_glow_red");
   level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
   level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
@@ -205,7 +205,7 @@ function_e6537e9f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "switch_sparks"], self, "tag_origin");
-    playSound(localclientnum, # "hash_3281ee130e7c69e", self.origin);
+    playSound(localclientnum, #"hash_3281ee130e7c69e", self.origin);
     self.var_b3673abf = self playLoopSound(#"hash_27ae537b191e913d");
   }
 }

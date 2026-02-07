@@ -61,7 +61,7 @@ function_117f61b8(localclientnum) {
     return;
   }
 
-  handle = self playSound(localclientnum, # "wpn_semtex_countdown");
+  handle = self playSound(localclientnum, #"wpn_semtex_countdown");
   self thread stop_sound_on_ent_shutdown(handle);
 }
 
@@ -75,7 +75,7 @@ fx_think(localclientnum, var_1e60ee48) {
   self endon(#"light_disable");
   self endon(#"death");
   self util::waittill_dobj(localclientnum);
-  handle = self playSound(localclientnum, # "wpn_semtex_countdown");
+  handle = self playSound(localclientnum, #"wpn_semtex_countdown");
   self thread stop_sound_on_ent_shutdown(handle);
 
   for(interval = 0.3; isDefined(self); interval = math::clamp(interval / 1.2, 0.08, 0.3)) {

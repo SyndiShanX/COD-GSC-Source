@@ -25,7 +25,7 @@ on_player_spawned(local_client_num) {
 }
 
 monitorflight() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.flying = 0;
 
   while(isDefined(self)) {
@@ -43,7 +43,7 @@ monitorflight() {
 monitorgpsjammer() {
   self notify("3670b910d841657e");
   self endon("3670b910d841657e");
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   require_perk = 1;
 
   require_perk = 0;
@@ -146,7 +146,7 @@ monitorgpsjammer() {
 }
 
 monitorsengrenjammer() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   require_perk = 1;
 
   require_perk = 0;

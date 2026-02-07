@@ -76,8 +76,8 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 watchownerdisconnect(player) {
   self notify("5f1e127cceae91cd");
   self endon("5f1e127cceae91cd");
-  self endon(#"death", # "exit_vehicle");
-  player waittill(#"disconnect", # "death");
+  self endon(#"death", #"exit_vehicle");
+  player waittill(#"disconnect", #"death");
   self makevehicleunusable();
   self thread function_ec1a4a6b();
 }
@@ -105,8 +105,8 @@ event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 function_b96833b2(vehicle) {
   self notify("103a2be8751d4c46");
   self endon("103a2be8751d4c46");
-  self endon(#"death", # "disconnect");
-  vehicle endon(#"death", # "exit_vehicle");
+  self endon(#"death", #"disconnect");
+  vehicle endon(#"death", #"exit_vehicle");
 
   while(true) {
     if(vehicle function_2c2c30e0()) {

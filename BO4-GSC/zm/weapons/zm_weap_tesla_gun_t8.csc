@@ -37,7 +37,7 @@ function_4dfaa84c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 tesla_fx_rail(localclientnum) {
-  self endon(#"death", # "hash_319d2bba47dac2c4");
+  self endon(#"death", #"hash_319d2bba47dac2c4");
   w_current = getcurrentweapon(localclientnum);
   wait randomfloatrange(0, 12);
 
@@ -52,13 +52,13 @@ tesla_fx_rail(localclientnum) {
       }
 
       playviewmodelfx(localclientnum, str_fx, "tag_flash");
-      playSound(localclientnum, # "wpn_tesla_effects", (0, 0, 0));
+      playSound(localclientnum, #"wpn_tesla_effects", (0, 0, 0));
     }
   }
 }
 
 tesla_fx_tube(localclientnum) {
-  self endon(#"death", # "hash_319d2bba47dac2c4");
+  self endon(#"death", #"hash_319d2bba47dac2c4");
   w_current = getcurrentweapon(localclientnum);
 
   while(true) {

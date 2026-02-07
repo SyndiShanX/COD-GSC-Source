@@ -163,13 +163,13 @@ function_168f686b(e_holder, w_item) {
   wait 1;
 
   if(b_silent) {
-    zm_audio::function_6191af93(#"component_pickup", # "dynamite", # "component_pickup", # "silent", 100);
-    zm_audio::function_6191af93(#"component_pickup", # "bomb_part", # "component_pickup", # "silent", 100);
+    zm_audio::function_6191af93(#"component_pickup", #"dynamite", #"component_pickup", #"silent", 100);
+    zm_audio::function_6191af93(#"component_pickup", #"bomb_part", #"component_pickup", #"silent", 100);
   }
 }
 
 function_96b866fc(e_player) {
-  str_hint = zm_utility::function_d6046228(#"hash_388256f1e5a62d7c", # "hash_7693de01f82d93f0");
+  str_hint = zm_utility::function_d6046228(#"hash_388256f1e5a62d7c", #"hash_7693de01f82d93f0");
   self sethintstring(str_hint);
   return true;
 }
@@ -194,7 +194,7 @@ function_e3203a2() {
 
 function_8427e524() {
   self notify(#"dynamited");
-  self thread zm_orange_util::function_865209df(#"dynamite_zombie", # "hash_c38f82bacfe540c");
+  self thread zm_orange_util::function_865209df(#"dynamite_zombie", #"hash_c38f82bacfe540c");
   level.var_1daa43ee = 0;
   level flag::clear(#"debug_dynamite_zombie");
   self.var_f3908ae9 = 1;
@@ -297,7 +297,7 @@ function_7056aa62() {
   if(t_crafting.blueprint.name == # "zblueprint_orange_dynamite_bomb") {
     var_f2d24a17 = self.stub.var_4b9b60c7;
     var_f2d24a17 show();
-    var_f2d24a17 zm_unitrigger::create(zm_utility::function_d6046228(#"hash_6eced05b46f243a8", # "hash_5402978e2dbb34e4"));
+    var_f2d24a17 zm_unitrigger::create(zm_utility::function_d6046228(#"hash_6eced05b46f243a8", #"hash_5402978e2dbb34e4"));
     var_f2d24a17 thread function_4c525901();
     zm_ui_inventory::function_7df6bb60("orange_dynamite_bomb_part_1_owned", 0);
     zm_ui_inventory::function_7df6bb60("orange_dynamite_bomb_part_2_owned", 0);
@@ -310,7 +310,7 @@ function_4c525901() {
   self endon(#"death");
   s_waitresult = self waittill(#"trigger_activated");
   self playSound(#"hash_55c30dada4e624a2");
-  s_waitresult.e_who zm_audio::create_and_play_dialog(#"explosive", # "pickup");
+  s_waitresult.e_who zm_audio::create_and_play_dialog(#"explosive", #"pickup");
   level.var_518d6e34 = 1;
   zm_ui_inventory::function_7df6bb60("orange_dynamite_bomb_complete", 1);
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
@@ -324,7 +324,7 @@ dynamite_bomb_place_init() {
 
 function_2a27ccb9(e_player) {
   if(level.var_518d6e34) {
-    str_hint = zm_utility::function_d6046228(#"hash_619666ebfb26ad4", # "hash_cb4301a3d4b0ff8");
+    str_hint = zm_utility::function_d6046228(#"hash_619666ebfb26ad4", #"hash_cb4301a3d4b0ff8");
     self sethintstring(str_hint);
     return true;
   }
@@ -339,7 +339,7 @@ function_170afe2c(b_main_quest = 0) {
 
   if(!b_main_quest) {
     self thread place_dynamite_bomb();
-    s_result.e_who zm_audio::create_and_play_dialog(#"explosive", # "plant");
+    s_result.e_who zm_audio::create_and_play_dialog(#"explosive", #"plant");
   } else {
     self thread function_2e1427a3();
   }

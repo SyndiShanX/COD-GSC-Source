@@ -126,14 +126,14 @@ error_on_screen(str_msg) {
   if(str_msg != "") {
     if(!isDefined(level.scene_error_hud)) {
       level.scene_error_hud = createluimenu(0, "HudElementText");
-      setluimenudata(0, level.scene_error_hud, # "alignment", 1);
-      setluimenudata(0, level.scene_error_hud, # "x", 0);
-      setluimenudata(0, level.scene_error_hud, # "y", 10);
-      setluimenudata(0, level.scene_error_hud, # "width", 1920);
+      setluimenudata(0, level.scene_error_hud, #"alignment", 1);
+      setluimenudata(0, level.scene_error_hud, #"x", 0);
+      setluimenudata(0, level.scene_error_hud, #"y", 10);
+      setluimenudata(0, level.scene_error_hud, #"width", 1920);
       openluimenu(0, level.scene_error_hud);
     }
 
-    setluimenudata(0, level.scene_error_hud, # "text", str_msg);
+    setluimenudata(0, level.scene_error_hud, #"text", str_msg);
     self thread _destroy_error_on_screen();
   }
 }
@@ -141,7 +141,7 @@ error_on_screen(str_msg) {
 _destroy_error_on_screen() {
   level notify(#"_destroy_error_on_screen");
   level endon(#"_destroy_error_on_screen");
-  self waittilltimeout(5, # "stopped");
+  self waittilltimeout(5, #"stopped");
   closeluimenu(0, level.scene_error_hud);
   level.scene_error_hud = undefined;
 }

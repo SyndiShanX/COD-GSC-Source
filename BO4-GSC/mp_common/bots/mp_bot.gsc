@@ -290,7 +290,7 @@ on_bot_killed() {
 }
 
 respawn() {
-  self endon(#"spawned", # "disconnect");
+  self endon(#"spawned", #"disconnect");
   level endon(#"game_ended");
 
   while(true) {

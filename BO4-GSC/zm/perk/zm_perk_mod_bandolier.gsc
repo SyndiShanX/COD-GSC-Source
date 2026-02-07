@@ -17,7 +17,7 @@ __init__() {
 }
 
 function_27473e44() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_extraammo", "mod_bandolier", # "perk_bandolier", # "specialty_extraammo", 3500);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_extraammo", "mod_bandolier", #"perk_bandolier", #"specialty_extraammo", 3500);
   zm_perks::register_perk_threads(#"specialty_mod_extraammo", &give_mod_perk, &function_3781ff37);
 }
 
@@ -30,7 +30,7 @@ function_3781ff37(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_9335851() {
-  self endon(#"disconnect", # "hash_73b1e35c66a4e898");
+  self endon(#"disconnect", #"hash_73b1e35c66a4e898");
 
   while(true) {
     wait 1;

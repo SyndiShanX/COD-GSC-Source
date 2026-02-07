@@ -23,7 +23,7 @@ enable_tortoise_perk_for_level() {
   zm_perks::register_perk_clientfields(#"specialty_shield", &function_6dd9c0ca, &function_cdbbd4f1);
   zm_perks::register_perk_effects(#"specialty_shield", "divetonuke_light");
   zm_perks::register_perk_init_thread(#"specialty_shield", &function_3cc019d7);
-  zm_perks::function_b60f4a9f(#"specialty_shield", # "p8_zm_vapor_altar_icon_01_victorioustortoise", "zombie/fx8_perk_altar_symbol_ambient_victorious_tortoise", # "zmperksvictorious");
+  zm_perks::function_b60f4a9f(#"specialty_shield", #"p8_zm_vapor_altar_icon_01_victorioustortoise", "zombie/fx8_perk_altar_symbol_ambient_victorious_tortoise", #"zmperksvictorious");
 }
 
 function_3cc019d7() {}

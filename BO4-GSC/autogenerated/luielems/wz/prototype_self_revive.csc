@@ -8,7 +8,7 @@
 
 class cprototype_self_revive: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "prototype_self_revive");
+    cluielem::open(localclientnum, #"prototype_self_revive");
   }
 
   function function_fa582112(localclientnum) {

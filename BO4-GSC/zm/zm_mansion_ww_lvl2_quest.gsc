@@ -173,7 +173,7 @@ function_514a3f80() {
   zm_items::function_4d230236(zm_crafting::get_component(#"hash_5dba850c6ed3ebee"), &function_b9cbdac6);
   zm_items::function_4d230236(zm_crafting::get_component(#"zitem_chaos_lvl3_part_1"), &function_b9cbdac6);
   zm_items::function_4d230236(zm_crafting::get_component(#"zitem_chaos_lvl3_part_2"), &function_b9cbdac6);
-  level flagsys::wait_till_any(array(#"power_on1", # "hash_2daf5bdda85cc660"));
+  level flagsys::wait_till_any(array(#"power_on1", #"hash_2daf5bdda85cc660"));
   wait randomintrange(20, 30);
   s_machine = struct::get("s_pr_mach");
   s_machine scene::play("Open");
@@ -183,7 +183,7 @@ function_514a3f80() {
 
 function_32573d2a(player) {
   if(!level flag::get(#"hash_1462d174d4023e58") && (level flag::get("flag_player_grabbed_werewolf_material") && !level.var_9332cecc || level flag::get("flag_player_grabbed_catalyst_material") && !level.var_f6a6ddae || level flag::get("flag_player_grabbed_nosferatu_material") && !level.var_ea58030a)) {
-    self sethintstringforplayer(player, # "hash_7e343f7677cbafe5");
+    self sethintstringforplayer(player, #"hash_7e343f7677cbafe5");
   } else {
     self sethintstringforplayer(player, "");
   }

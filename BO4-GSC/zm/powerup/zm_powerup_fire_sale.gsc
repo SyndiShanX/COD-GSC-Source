@@ -27,7 +27,7 @@ __init__() {
   zm_powerups::register_powerup("fire_sale", &grab_fire_sale);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("fire_sale", "p7_zm_power_up_firesale", # "zombie/powerup_max_ammo", &func_should_drop_fire_sale, 0, 0, 0, undefined, "powerup_fire_sale", "zombie_powerup_fire_sale_time", "zombie_powerup_fire_sale_on");
+    zm_powerups::add_zombie_powerup("fire_sale", "p7_zm_power_up_firesale", #"zombie/powerup_max_ammo", &func_should_drop_fire_sale, 0, 0, 0, undefined, "powerup_fire_sale", "zombie_powerup_fire_sale_time", "zombie_powerup_fire_sale_on");
   }
 }
 
@@ -48,7 +48,7 @@ function_3ceac0e1(e_powerup, player) {
   player thread zm_powerups::function_5091b029("fire_sale");
   player zombie_utility::set_zombie_var_player(#"zombie_powerup_fire_sale_on", 1);
   player zombie_utility::set_zombie_var_player(#"zombie_powerup_fire_sale_time", 30);
-  level waittilltimeout(30, # "end_game");
+  level waittilltimeout(30, #"end_game");
   player zombie_utility::set_zombie_var_player(#"zombie_powerup_fire_sale_on", 0);
 }
 
@@ -163,7 +163,7 @@ apply_fire_sale_to_chest() {
   level endon(#"fire_sale_off");
 
   if(self.zbarrier.state == "leaving") {
-    self.zbarrier waittilltimeout(10, # "left");
+    self.zbarrier waittilltimeout(10, #"left");
   }
 
   wait 0.1;

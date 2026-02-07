@@ -47,7 +47,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_560ecf29 = &function_560ecf29;
   level.var_156f3cee = 1;
   level.var_403b73b4 = &function_403b73b4;
-  ct_utils::function_6046a5e3(#"ar_stealth_t8", array(#"damage", # "extbarrel", # "rf", # "uber"));
+  ct_utils::function_6046a5e3(#"ar_stealth_t8", array(#"damage", #"extbarrel", #"rf", #"uber"));
   ct_utils::function_c3e647e2(#"pistol_standard_t8");
   level flag::init("mission_success");
   level flag::init("mission_failed");
@@ -311,7 +311,7 @@ function_be529164(var_edc95125) {
   level flag::clear("data_downloaded");
   var_511a3f1c = getent(var_edc95125, "targetname");
   level.var_4d47c040 = var_511a3f1c.origin;
-  level.var_133aacc1 = ct_utils::create_waypoint(#"hash_15f6e3728e503f47", level.var_4d47c040, (0, 0, 0), # "any", undefined, 0, undefined);
+  level.var_133aacc1 = ct_utils::create_waypoint(#"hash_15f6e3728e503f47", level.var_4d47c040, (0, 0, 0), #"any", undefined, 0, undefined);
 }
 
 function_37adbd8f() {
@@ -360,7 +360,7 @@ function_86a5d2b9() {
 
 function_85eb0847() {
   self endon(#"death");
-  level endon(#"hardpoint_completed", # "combattraining_logic_finished");
+  level endon(#"hardpoint_completed", #"combattraining_logic_finished");
 
   while(true) {
     self waittill(#"tripwire_spawn");
@@ -472,18 +472,18 @@ function_62e9842e(var_4d4513ee) {
   a_ai = getaiarray();
 
   if(a_ai.size > 0) {
-    level thread ct_bots::activate_bots(2, # "axis");
+    level thread ct_bots::activate_bots(2, #"axis");
 
     while(a_ai.size > 0) {
       a_ai = getaiarray();
       waitframe(1);
     }
 
-    level thread ct_bots::activate_bots(var_7f5c713a - 2, # "axis");
+    level thread ct_bots::activate_bots(var_7f5c713a - 2, #"axis");
     return;
   }
 
-  level thread ct_bots::activate_bots(var_7f5c713a, # "axis");
+  level thread ct_bots::activate_bots(var_7f5c713a, #"axis");
 }
 
 function_403b73b4(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
@@ -721,7 +721,7 @@ function_a6b6f492() {
 function_dd64960c(a_ents) {
   if(isDefined(a_ents[# "prop 1"])) {
     var_7425591a = a_ents[# "prop 1"] gettagorigin("tarp_06_jnt") + (0, 0, -8);
-    a_ents[# "prop 1"] waittill(#"physics_pulse", # "death");
+    a_ents[# "prop 1"] waittill(#"physics_pulse", #"death");
     physicsexplosionsphere(var_7425591a, 1024, 1, 1);
   }
 }

@@ -59,11 +59,11 @@ setlowermessage(text, time) {
 
   if(isDefined(time) && time > 0) {
     level.lower_message lower_message::set_countdowntimeseconds(self, int(time));
-    level.lower_message lower_message::set_state(self, # "visible");
+    level.lower_message lower_message::set_state(self, #"visible");
     return;
   }
 
-  level.lower_message lower_message::set_state(self, # "hash_45bfcb1cd8c9b50a");
+  level.lower_message lower_message::set_state(self, #"hash_45bfcb1cd8c9b50a");
 }
 
 clearlowermessage() {
@@ -73,14 +73,14 @@ clearlowermessage() {
     return;
   }
 
-  level.lower_message lower_message::set_state(self, # "defaultstate");
+  level.lower_message lower_message::set_state(self, #"defaultstate");
   self thread function_fa47c5af();
 }
 
 function_fa47c5af() {
-  self endon(#"hash_6ceeeb477ece797b", # "disconnect");
+  self endon(#"hash_6ceeeb477ece797b", #"disconnect");
   wait 1;
-  level.lower_message lower_message::set_message(self, # "");
+  level.lower_message lower_message::set_message(self, #"");
   level.lower_message lower_message::set_countdowntimeseconds(self, 0);
 }
 

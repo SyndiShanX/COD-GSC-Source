@@ -26,13 +26,13 @@ class czm_tut_hint_text: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_tut_hint_text");
+    cluielem::open(localclientnum, #"zm_tut_hint_text");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, # "defaultstate");
-    set_data(localclientnum, "text", # "");
+    set_state(localclientnum, #"defaultstate");
+    set_data(localclientnum, "text", #"");
   }
 
   function register_clientside(uid) {

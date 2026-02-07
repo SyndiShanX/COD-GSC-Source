@@ -19,7 +19,7 @@
 #namespace devgui;
 
 autoexec __init__system__() {
-  system::register(#"devgui", &__init__, undefined, # "load");
+  system::register(#"devgui", &__init__, undefined, #"load");
 }
 
 __init__() {

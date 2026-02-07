@@ -48,7 +48,7 @@ class cluielemimage: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "luielemimage");
+    cluielem::open(localclientnum, #"luielemimage");
   }
 
   function function_fa582112(localclientnum) {
@@ -62,7 +62,7 @@ class cluielemimage: cluielem {
     set_data(localclientnum, "red", 0);
     set_data(localclientnum, "green", 0);
     set_data(localclientnum, "blue", 0);
-    set_data(localclientnum, "material", # "");
+    set_data(localclientnum, "material", #"");
   }
 
   function register_clientside(uid) {

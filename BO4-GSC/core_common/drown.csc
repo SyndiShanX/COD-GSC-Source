@@ -12,7 +12,7 @@
 #namespace drown;
 
 autoexec __init__system__() {
-  system::register(#"drown", &__init__, undefined, # "visionset_mgr");
+  system::register(#"drown", &__init__, undefined, #"visionset_mgr");
 }
 
 __init__() {

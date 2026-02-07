@@ -260,16 +260,16 @@ onendgame(var_c1e98979) {
 }
 
 function_bbf3128e() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
 }
 
 setupteam(team) {
-  util::setobjectivetext(team, # "objectives_sas");
+  util::setobjectivetext(team, #"objectives_sas");
 
   if(level.splitscreen) {
-    util::setobjectivescoretext(team, # "objectives_sas");
+    util::setobjectivescoretext(team, #"objectives_sas");
   } else {
-    util::setobjectivescoretext(team, # "objectives_sas_score");
+    util::setobjectivescoretext(team, #"objectives_sas_score");
   }
 
   spawning::add_spawn_points(team, "mp_dm_spawn");

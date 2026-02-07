@@ -15,7 +15,7 @@
 #namespace zm_aat_plasmatic_burst;
 
 autoexec __init__system__() {
-  system::register("zm_aat_plasmatic_burst", &__init__, undefined, # "aat");
+  system::register("zm_aat_plasmatic_burst", &__init__, undefined, #"aat");
 }
 
 __init__() {

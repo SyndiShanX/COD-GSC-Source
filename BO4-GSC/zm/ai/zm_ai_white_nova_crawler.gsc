@@ -25,7 +25,7 @@
 #namespace zm_ai_white_nova_crawler;
 
 autoexec __init__system__() {
-  system::register(#"zm_ai_white_nova_crawler", &__init__, &__main__, # "zm_ai_nova_crawler");
+  system::register(#"zm_ai_white_nova_crawler", &__init__, &__main__, #"zm_ai_nova_crawler");
 }
 
 __init__() {
@@ -463,7 +463,7 @@ function_46660930() {
   playFX(self._effect[# "hash_571a3bab8b805854"], origin);
   self hide();
   self collidewithactors(0);
-  self waittilltimeout(1, # "phase_end");
+  self waittilltimeout(1, #"phase_end");
   self show();
   self collidewithactors(1);
 
@@ -687,7 +687,7 @@ function_91582c6(entity, start_location, target_location) {
 }
 
 function_7d162bd0(projectile, entity) {
-  result = projectile waittill(#"projectile_impact_player", # "death");
+  result = projectile waittill(#"projectile_impact_player", #"death");
 
   if(isDefined(projectile.origin)) {
     level thread function_5c3c88fe(projectile.origin);

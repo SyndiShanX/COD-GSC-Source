@@ -1308,21 +1308,21 @@ function_73fab74d() {
   }
 
   level.var_1bbf77be = 1;
-  function_c16f65a3(#"allies", # "axis");
-  function_c16f65a3(#"team3", # "any");
-  set_team_mapping(#"allies", # "axis");
+  function_c16f65a3(#"allies", #"axis");
+  function_c16f65a3(#"team3", #"any");
+  set_team_mapping(#"allies", #"axis");
 }
 
 cf_team_mapping(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 0:
-      set_team_mapping(#"axis", # "allies");
+      set_team_mapping(#"axis", #"allies");
       break;
     case 1:
-      set_team_mapping(#"allies", # "axis");
+      set_team_mapping(#"allies", #"axis");
       break;
     default:
-      set_team_mapping(#"allies", # "axis");
+      set_team_mapping(#"allies", #"axis");
       break;
   }
 }

@@ -456,7 +456,7 @@ function_d797f41f(n_waittime = 1) {
 }
 
 _outro_slow(func) {
-  level endon(#"all_players_connected", # "game_ended");
+  level endon(#"all_players_connected", #"game_ended");
   array::thread_all(getplayers(), func);
 
   while(true) {
@@ -580,28 +580,28 @@ init_shellshocks() {
 }
 
 init_strings() {
-  zm_utility::add_zombie_hint("undefined", # "zombie/undefined");
+  zm_utility::add_zombie_hint("undefined", #"zombie/undefined");
 
   if(function_8b1a219a()) {
-    zm_utility::add_zombie_hint("default_treasure_chest", # "hash_52426a433be4aa00");
+    zm_utility::add_zombie_hint("default_treasure_chest", #"hash_52426a433be4aa00");
   } else {
-    zm_utility::add_zombie_hint("default_treasure_chest", # "hash_40a3bd4c33eac8cc");
+    zm_utility::add_zombie_hint("default_treasure_chest", #"hash_40a3bd4c33eac8cc");
   }
 
   if(function_8b1a219a()) {
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_10", # "hash_3dd048373e06ad1f");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_20", # "hash_47ff6a92609a306e");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_50", # "hash_693bb70d9737a5b");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_100", # "hash_42e37d69c3691009");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_10", #"hash_3dd048373e06ad1f");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_20", #"hash_47ff6a92609a306e");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_50", #"hash_693bb70d9737a5b");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_100", #"hash_42e37d69c3691009");
   } else {
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_10", # "hash_1c189b8ad7ec73a1");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_20", # "hash_1c1c218ad7ef8d2a");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_50", # "hash_1c26138ad7f7c9e5");
-    zm_utility::add_zombie_hint("default_buy_barrier_piece_100", # "hash_2a43ddece6c85f63");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_10", #"hash_1c189b8ad7ec73a1");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_20", #"hash_1c1c218ad7ef8d2a");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_50", #"hash_1c26138ad7f7c9e5");
+    zm_utility::add_zombie_hint("default_buy_barrier_piece_100", #"hash_2a43ddece6c85f63");
   }
 
-  zm_utility::add_zombie_hint("default_reward_barrier_piece", # "hash_6a8e67597b680da2");
-  zm_utility::add_zombie_hint("default_buy_area", # "hash_cc45440fbd070dc");
+  zm_utility::add_zombie_hint("default_reward_barrier_piece", #"hash_6a8e67597b680da2");
+  zm_utility::add_zombie_hint("default_buy_area", #"hash_cc45440fbd070dc");
 }
 
 init_sounds() {
@@ -1597,7 +1597,7 @@ end_game() {
   }
 
   foreach(player in players) {
-    player zm_stats::function_9daadcaa(#"lobbypopup", # "summary");
+    player zm_stats::function_9daadcaa(#"lobbypopup", #"summary");
     player zm_stats::function_9daadcaa(#"difficulty", level.gamedifficulty);
 
     if(level.var_ff482f76 zm_laststand_client::is_open(player)) {
@@ -1806,7 +1806,7 @@ function_dccccaf2() {
   self notify(#"player_intermission");
   self endon(#"player_intermission");
   level endon(#"stop_intermission");
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self notify(#"_zombie_game_over");
   self.score = self.score_total;
   wait 0.51;

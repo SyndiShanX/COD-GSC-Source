@@ -131,8 +131,8 @@ update_played_time() {
         }
 
         if(isDefined(level.hardcoremode) && level.hardcoremode) {
-          hc_time_played = self stats::get_stat(#"playerstatslist", # "hc_time_played", # "statvalue") + time;
-          self stats::set_stat(#"playerstatslist", # "hc_time_played", # "statvalue", hc_time_played);
+          hc_time_played = self stats::get_stat(#"playerstatslist", #"hc_time_played", #"statvalue") + time;
+          self stats::set_stat(#"playerstatslist", #"hc_time_played", #"statvalue", hc_time_played);
         }
       }
 
@@ -371,7 +371,7 @@ waituntilteamchange(player, callback, arg, end_condition1, end_condition2, end_c
     self endon(end_condition3);
   }
 
-  event = player waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  event = player waittill(#"joined_team", #"disconnect", #"joined_spectators");
 
   if(isDefined(callback)) {
     self[[callback]](arg, event);
@@ -394,7 +394,7 @@ waituntilteamchangesingleton(player, singletonstring, callback, arg, end_conditi
     self endon(end_condition3);
   }
 
-  event = player waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  event = player waittill(#"joined_team", #"disconnect", #"joined_spectators");
 
   if(isDefined(callback)) {
     self thread[[callback]](arg, event);

@@ -453,13 +453,13 @@ function_57955e51(watcher) {
 
 function_d82c03d4(player) {
   self endon(#"death");
-  player waittill(#"joined_team", # "disconnect");
+  player waittill(#"joined_team", #"disconnect");
   player function_42b34d5a();
 }
 
 function_dd007be2() {
   level endon(#"game_ended");
-  self.owner endon(#"disconnect", # "joined_team", # "changed_specialist");
+  self.owner endon(#"disconnect", #"joined_team", #"changed_specialist");
   self endon(#"hash_c72d58e3d4735b");
   waitresult = self waittill(#"death");
 

@@ -435,7 +435,7 @@ add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "", var_e6e6150
     #player: self, #points: points
   });
   level thread zm_hero_weapon::function_3fe4a02e(self, points, str_awarded_by);
-  self contracts::increment_zm_contract(#"contract_zm_points", n_points_to_add_to_currency, # "zstandard");
+  self contracts::increment_zm_contract(#"contract_zm_points", n_points_to_add_to_currency, #"zstandard");
 
   if(zm_utility::is_standard()) {
     self zm_stats::function_c0c6ab19(#"rush_points", n_points_to_add_to_currency);

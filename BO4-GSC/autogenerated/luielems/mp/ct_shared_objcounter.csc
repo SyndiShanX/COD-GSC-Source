@@ -59,14 +59,14 @@ class cct_shared_objcounter: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "ct_shared_objcounter");
+    cluielem::open(localclientnum, #"ct_shared_objcounter");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, # "defaultstate");
+    set_state(localclientnum, #"defaultstate");
     set_data(localclientnum, "objectiveCount", 0);
-    set_data(localclientnum, "objectiveLabel", # "");
+    set_data(localclientnum, "objectiveLabel", #"");
     set_data(localclientnum, "objectiveTotal", 0);
   }
 

@@ -14,7 +14,7 @@
 #namespace killstreaks;
 
 autoexec __init__system__() {
-  system::register(#"killstreaks", &__init__, undefined, # "weapons");
+  system::register(#"killstreaks", &__init__, undefined, #"weapons");
 }
 
 __init__() {

@@ -73,7 +73,7 @@ function_83904681(location, usedcallback, killstreakname) {
         self[[level.var_1492d026]](killstreakname, team, killstreak_id);
       }
 
-      self stats::function_e24eec31(params.ksweapon, # "used", 1);
+      self stats::function_e24eec31(params.ksweapon, #"used", 1);
     }
 
     return self[[usedcallback]](location, killstreak_id);
@@ -83,13 +83,13 @@ function_83904681(location, usedcallback, killstreakname) {
 }
 
 endselectionongameend() {
-  self endon(#"death", # "disconnect", # "cancel_location", # "used", # "host_migration_begin");
+  self endon(#"death", #"disconnect", #"cancel_location", #"used", #"host_migration_begin");
   level waittill(#"game_ended");
   self notify(#"game_ended");
 }
 
 endselectiononhostmigration() {
-  self endon(#"death", # "disconnect", # "cancel_location", # "used", # "game_ended");
+  self endon(#"death", #"disconnect", #"cancel_location", #"used", #"game_ended");
   level waittill(#"host_migration_begin");
   self notify(#"cancel_location");
 }
@@ -101,7 +101,7 @@ endselectionthink() {
   assert(self.selectinglocation == 1);
   self thread endselectionongameend();
   self thread endselectiononhostmigration();
-  event = self waittill(#"delete", # "death", # "disconnect", # "cancel_location", # "game_ended", # "used", # "weapon_change", # "emp_jammed");
+  event = self waittill(#"delete", #"death", #"disconnect", #"cancel_location", #"game_ended", #"used", #"weapon_change", #"emp_jammed");
 
   if(event._notify != "disconnect") {
     self.selectinglocation = undefined;
@@ -114,7 +114,7 @@ endselectionthink() {
 }
 
 clearuplocationselection() {
-  event = self waittill(#"delete", # "death", # "disconnect", # "game_ended", # "used", # "weapon_change", # "emp_jammed", # "weapon_change_complete");
+  event = self waittill(#"delete", #"death", #"disconnect", #"game_ended", #"used", #"weapon_change", #"emp_jammed", #"weapon_change_complete");
 
   if(event._notify != "disconnect" && isDefined(self)) {
     self endlocationselection();
@@ -414,7 +414,7 @@ gethelipath(start, goal) {
 }
 
 function_a43d04ef(goalorigin) {
-  self endon(#"death", # "hash_41aaa8d75d168e0a");
+  self endon(#"death", #"hash_41aaa8d75d168e0a");
   distthresholdsq = 40000;
   wait 20;
 
@@ -431,7 +431,7 @@ function_a43d04ef(goalorigin) {
 }
 
 function_fabf8bc5(goalorigin) {
-  self endon(#"death", # "hash_41aaa8d75d168e0a");
+  self endon(#"death", #"hash_41aaa8d75d168e0a");
   distthresholdsq = 10000;
 
   if(isDefined(self.var_f766e12d)) {
@@ -451,7 +451,7 @@ function_fabf8bc5(goalorigin) {
 }
 
 function_e0e908c3(var_dbd23dc, path, stopatgoal) {
-  self endon(#"death", # "hash_78e76e8d9370e349");
+  self endon(#"death", #"hash_78e76e8d9370e349");
 
   if(var_dbd23dc) {
     while(true) {
@@ -524,9 +524,9 @@ function_f1b7b432(path, donenotify, stopatgoal, var_135dc5d1, var_96e5d7f = 0) {
   thread debug_line(self.origin, path[0], (1, 1, 0));
 
   if(stopatgoal) {
-    self waittill(#"goal", # "fallback_goal");
+    self waittill(#"goal", #"fallback_goal");
   } else {
-    self waittill(#"near_goal", # "fallback_goal");
+    self waittill(#"near_goal", #"fallback_goal");
   }
 
   if(isDefined(donenotify)) {
@@ -1134,7 +1134,7 @@ cantargetplayerwithspecialty() {
 }
 
 monitorspeed(spawnprotectiontime) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(self hasperk(#"specialty_nottargetedbyairsupport") == 0) {
     return;
@@ -1187,7 +1187,7 @@ function_9e2054b0(var_65885f89) {
 }
 
 waitforlocationselection() {
-  self endon(#"emp_jammed", # "emp_grenaded");
+  self endon(#"emp_jammed", #"emp_grenaded");
   waitresult = self waittill(#"confirm_location");
   locationinfo = spawnStruct();
   locationinfo.origin = waitresult.position;
@@ -1196,7 +1196,7 @@ waitforlocationselection() {
 }
 
 function_deb91ef4() {
-  self endon(#"emp_jammed", # "emp_grenaded", # "disconnect", # "confirm_location", # "cancel_location", # "enter_vehicle");
+  self endon(#"emp_jammed", #"emp_grenaded", #"disconnect", #"confirm_location", #"cancel_location", #"enter_vehicle");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");

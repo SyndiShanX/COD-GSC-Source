@@ -167,8 +167,8 @@ on_challenge_end(local_client_num) {
 
 function_d59810a5() {
   assert(isDefined(level.var_a2859227));
-  setuimodelvalue(level.var_940b67bb, # "");
-  setuimodelvalue(level.var_63e5f17c, # "");
+  setuimodelvalue(level.var_940b67bb, #"");
+  setuimodelvalue(level.var_63e5f17c, #"");
 
   switch (level.var_a2859227) {
     default:
@@ -192,5 +192,5 @@ function_97444b02(localclientnum) {
   }
 
   level.var_e7295382 zm_trial_weapon_locked::function_1e74977(localclientnum);
-  self playSound(localclientnum, # "hash_17c7895c4b5180ce");
+  self playSound(localclientnum, #"hash_17c7895c4b5180ce");
 }

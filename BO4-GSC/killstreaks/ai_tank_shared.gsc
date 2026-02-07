@@ -70,9 +70,9 @@ init_shared(bundlename) {
     level.killstreaks[# "tank_robot"].threatonkill = 1;
 
     if(function_8b1a219a()) {
-      remote_weapons::registerremoteweapon("killstreak_ai_tank", # "hash_3abd55f34c1661ac", &starttankremotecontrol, &endtankremotecontrol, 1);
+      remote_weapons::registerremoteweapon("killstreak_ai_tank", #"hash_3abd55f34c1661ac", &starttankremotecontrol, &endtankremotecontrol, 1);
     } else {
-      remote_weapons::registerremoteweapon("killstreak_ai_tank", # "hash_747fc4429380f380", &starttankremotecontrol, &endtankremotecontrol, 1);
+      remote_weapons::registerremoteweapon("killstreak_ai_tank", #"hash_747fc4429380f380", &starttankremotecontrol, &endtankremotecontrol, 1);
     }
 
     level.var_66e94ad5 = bundle.ksweapon;
@@ -166,7 +166,7 @@ function_61610d6b() {
 
   foreach(point in level.var_51368c39) {
     point.objectiveid = gameobjects::get_next_obj_id();
-    objective_add(point.objectiveid, "invisible", point.origin, # "datapad_location");
+    objective_add(point.objectiveid, "invisible", point.origin, #"datapad_location");
     objective_setinvisibletoall(point.objectiveid);
   }
 
@@ -174,7 +174,7 @@ function_61610d6b() {
 
   foreach(point in var_9afbe37) {
     point.objectiveid = gameobjects::get_next_obj_id();
-    objective_add(point.objectiveid, "invisible", point.origin, # "hash_60fb0be7a198b305");
+    objective_add(point.objectiveid, "invisible", point.origin, #"hash_60fb0be7a198b305");
     objective_setinvisibletoall(point.objectiveid);
 
     if(!isDefined(level.var_51368c39)) {
@@ -203,7 +203,7 @@ function_203098f4(waittime) {
 }
 
 watchforentervehicle() {
-  self endon(#"emp_jammed", # "emp_grenaded", # "disconnect", # "confirm_location", # "cancel_location");
+  self endon(#"emp_jammed", #"emp_grenaded", #"disconnect", #"confirm_location", #"cancel_location");
   self waittill(#"enter_vehicle");
 
   if(self remote_weapons::allowremotestart(1) && isDefined(self.ai_tank_drone)) {
@@ -245,7 +245,7 @@ usekillstreakaitankdrop(killstreaktype) {
 
   if(isDefined(level.var_30264985)) {
     level notify(#"marker_ready");
-    waitresult = self waittill(#"mantis_deployed", # "death", # "weapon_change", # "weapon_fired");
+    waitresult = self waittill(#"mantis_deployed", #"death", #"weapon_change", #"weapon_fired");
   }
 
   context = spawnStruct();
@@ -375,13 +375,13 @@ islocationgood(location, context) {
 }
 
 function_5479b133(team, killstreak_id) {
-  self endon(#"payload_delivered", # "disconnect", # "joined_team", # "joined_spectators", # "changed_specialist");
+  self endon(#"payload_delivered", #"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist");
   self waittill(#"payload_fail");
   self killstreakrules::killstreakstop("tank_robot", team, killstreak_id);
 }
 
 function_b60b8174() {
-  self endon(#"death", # "changed_specialist", # "disconnect", # "joined_team", # "joined_spectators");
+  self endon(#"death", #"changed_specialist", #"disconnect", #"joined_team", #"joined_spectators");
   killstreakweapon = killstreaks::get_killstreak_weapon("tank_robot");
 
   while(true) {
@@ -442,7 +442,7 @@ function_e1553d5f(location, killstreak_id) {
   }
 
   self thread function_e00df756(team, killstreak_id);
-  self stats::function_e24eec31(bundle.ksweapon, # "used", 1);
+  self stats::function_e24eec31(bundle.ksweapon, #"used", 1);
   return true;
 }
 
@@ -451,7 +451,7 @@ function_e00df756(team, killstreak_id) {
   self endon("40dbfe8fe71109dc");
   player = self;
   player endon(#"tank_robot");
-  player waittill(#"changed_specialist", # "disconnect", # "joined_team", # "joined_spectators");
+  player waittill(#"changed_specialist", #"disconnect", #"joined_team", #"joined_spectators");
   killstreakrules::killstreakstop("tank_robot", team, killstreak_id);
 }
 
@@ -717,7 +717,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
 }
 
 function_47e16e28(weapon) {
-  weapon endon(#"remote_weapon_end", # "death");
+  weapon endon(#"remote_weapon_end", #"death");
 
   while(self.var_976238cf == # "tank_robot") {
     waitframe(1);
@@ -869,7 +869,7 @@ state_death_update(params) {
 }
 
 state_emped_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   angles = self gettagangles("tag_turret");
   self turretsettargetangles(0, (45, angles[1] - self.angles[1], 0));
   angles = self gettagangles("tag_gunner_turret1");
@@ -878,7 +878,7 @@ state_emped_update(params) {
 }
 
 state_driving_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   if(isDefined(self.var_b4c9d62) && self.var_b4c9d62) {
     return;
@@ -977,7 +977,7 @@ state_combat_enter(params) {
 }
 
 function_f358791() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   wait 1;
 
   for(;;) {
@@ -1239,7 +1239,7 @@ cantargetactor(actor) {
 }
 
 turretfireupdate() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
 
   if(!isDefined(self) || !isalive(self) || iscorpse(self)) {
     return;
@@ -1295,7 +1295,7 @@ turretfireupdate() {
 }
 
 function_dd91d091(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self setspeed(self.settings.defaultmovespeed);
   self setacceleration(isDefined(self.settings.default_move_acceleration) ? self.settings.default_move_acceleration : 10);
   heatseekingmissile::initlockfield(self);
@@ -1378,7 +1378,7 @@ function_dd91d091(params) {
 
     if(self haspath()) {
       self asmrequestsubstate(#"locomotion@movement");
-      result = self waittill(#"near_goal", # "stunned");
+      result = self waittill(#"near_goal", #"stunned");
     } else {
       self asmrequestsubstate(#"hash_236f963ae1728eb3");
     }
@@ -1455,7 +1455,7 @@ function_4ae23c85() {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   if(!isDefined(self) || !isalive(self) || iscorpse(self)) {
     return;
@@ -1561,7 +1561,7 @@ state_combat_update(params) {
         self function_a57c34b7(newpos, 0, 1);
         self setbrake(0);
         self asmrequestsubstate(#"locomotion@movement");
-        result = self waittilltimeout(randomintrange(4, 5), # "near_goal", # "stunned");
+        result = self waittilltimeout(randomintrange(4, 5), #"near_goal", #"stunned");
       } else {
         recordsphere(newpos, 3, (1, 0, 0), "<dev string:x38>");
 
@@ -1588,7 +1588,7 @@ state_combat_update(params) {
           self function_a57c34b7(newpos, 0, 1);
           self setbrake(0);
           self asmrequestsubstate(#"locomotion@movement");
-          result = self waittilltimeout(randomintrange(4, 5), # "near_goal", # "stunned");
+          result = self waittilltimeout(randomintrange(4, 5), #"near_goal", #"stunned");
         }
       }
     }
@@ -1703,8 +1703,8 @@ tank_timeout_callback() {
 
 tank_watch_owner_events() {
   self notify(#"tank_watch_owner_events_singleton");
-  self endon(#"tank_watch_owner_events_singleton", # "death");
-  res = self.owner waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  self endon(#"tank_watch_owner_events_singleton", #"death");
+  res = self.owner waittill(#"joined_team", #"disconnect", #"joined_spectators");
   self makevehicleusable();
 
   if(isDefined(self.owner) && isDefined(self.controlled) && self.controlled) {
@@ -1885,7 +1885,7 @@ tank_immobile() {
     owner clientfield::set_to_player("static_postfx", 1);
   }
 
-  self waittilltimeout(1, # "death");
+  self waittilltimeout(1, #"death");
   isalive = isalive(self);
 
   if(isalive) {
@@ -1990,7 +1990,7 @@ tank_stun(duration, isjammed) {
   self notify(#"stunned");
   self notify(#"fire_stop");
   function_4110f8dd(isjammed);
-  self waittilltimeout(duration, # "death");
+  self waittilltimeout(duration, #"death");
   function_fd91abfb();
 }
 
@@ -2133,7 +2133,7 @@ tank_death_think(hardpointname) {
   }
 
   if(not_abandoned) {
-    self waittilltimeout(2, # "remote_weapon_end", # "death");
+    self waittilltimeout(2, #"remote_weapon_end", #"death");
 
     if(!isDefined(self)) {
       if(isDefined(killstreak_id)) {

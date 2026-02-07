@@ -33,8 +33,8 @@ autoexec __init__system__() {
 __init__() {
   weaponobjects::function_e6400478(#"claymore", &createclaymorewatcher, 0);
   weaponobjects::function_e6400478(#"claymore_extra", &createclaymorewatcher, 0);
-  deployable::register_deployable(getweapon(#"claymore"), &function_4ed6fbd5, undefined, undefined, # "hash_1f65f161716fb57b");
-  deployable::register_deployable(getweapon(#"claymore_extra"), &function_4ed6fbd5, undefined, undefined, # "hash_1f65f161716fb57b");
+  deployable::register_deployable(getweapon(#"claymore"), &function_4ed6fbd5, undefined, undefined, #"hash_1f65f161716fb57b");
+  deployable::register_deployable(getweapon(#"claymore_extra"), &function_4ed6fbd5, undefined, undefined, #"hash_1f65f161716fb57b");
   zm::function_84d343d(#"claymore", &function_84072422);
   zm::function_84d343d(#"claymore_extra", &function_84072422);
   level.var_817314af = 0;
@@ -221,7 +221,7 @@ delete_mines_on_death(player, ent) {
 }
 
 function_cbb2f05b(watcher) {
-  self endon(#"death", # "hacked", # "detonating");
+  self endon(#"death", #"hacked", #"detonating");
   self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;

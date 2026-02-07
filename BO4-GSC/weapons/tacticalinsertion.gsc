@@ -57,7 +57,7 @@ overridespawn(ispredictedspawn) {
     self.tacticalinsertiontime = gettime();
     self spawn(origin, angles, "tactical insertion");
     self setspawnclientflag("SCDFL_DISABLE_LOGGING");
-    self stats::function_e24eec31(level.weapontacticalinsertion, # "used", 1);
+    self stats::function_e24eec31(level.weapontacticalinsertion, #"used", 1);
   }
 
   return true;
@@ -281,7 +281,7 @@ cancel_button_think() {
   text = cancel_text_create();
 
   self thread cancel_button_press();
-  event = self waittill(#"tactical_insertion_destroyed", # "disconnect", # "end_killcam", # "abort_killcam", # "tactical_insertion_canceled", # "spawned");
+  event = self waittill(#"tactical_insertion_destroyed", #"disconnect", #"end_killcam", #"abort_killcam", #"tactical_insertion_canceled", #"spawned");
 
   if(event._notify == "tactical_insertion_canceled") {
     self.tacticalinsertion destroy_tactical_insertion();
@@ -302,7 +302,7 @@ canceltackinsertionbutton() {
 }
 
 cancel_button_press() {
-  self endon(#"disconnect", # "end_killcam", # "abort_killcam");
+  self endon(#"disconnect", #"end_killcam", #"abort_killcam");
 
   while(true) {
     wait 0.05;
@@ -363,7 +363,7 @@ tacticalinsertiondestroyedbytrophysystem(attacker, trophysystem) {
   self thread fizzle();
 
   if(isDefined(owner)) {
-    owner endon(#"death", # "disconnect");
+    owner endon(#"death", #"disconnect");
     waitframe(1);
 
     if(isDefined(level.globallogic_audio_dialog_on_player_override)) {

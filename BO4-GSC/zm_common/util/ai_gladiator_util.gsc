@@ -21,7 +21,7 @@
 #namespace zombie_gladiator_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_gladiator_util", &__init__, &__main__, # "zm_ai_gladiator");
+  system::register(#"zombie_gladiator_util", &__init__, &__main__, #"zm_ai_gladiator");
 }
 
 __init__() {

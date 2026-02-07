@@ -31,7 +31,7 @@ on_begin(weapon_name, var_eaa7f0ba, var_957937ee, var_9c56c5a9, var_b896fe29) {
   }
 
   if(weapon_name == # "hero_lv3_weapon") {
-    hero_lv3_weapons = array(#"hero_chakram_lv3", # "hero_hammer_lv3", # "hero_scepter_lv3", # "hero_sword_pistol_lv3");
+    hero_lv3_weapons = array(#"hero_chakram_lv3", #"hero_hammer_lv3", #"hero_scepter_lv3", #"hero_sword_pistol_lv3");
     level.var_ab9d0ec6 = [];
 
     foreach(var_ae209633 in hero_lv3_weapons) {
@@ -270,7 +270,7 @@ monitor_objective(s_challenge, a_weapons) {
 }
 
 function_fa5e5e08() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   var_629c4c4a = 0;
   zm_trial_util::function_7d32b7d0(0);
 

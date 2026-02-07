@@ -105,7 +105,7 @@ function_fd04d5d5(localclientnum) {
 function_1c2930c7(localclientnum) {
   player = function_5c10bd79(localclientnum);
   player notify(#"hash_5c7dbac0591cb11f");
-  player endon(#"hash_5c7dbac0591cb11f", # "game_ended");
+  player endon(#"hash_5c7dbac0591cb11f", #"game_ended");
   level endon(#"game_ended");
   level.smartcoversettings.var_aef370a9[localclientnum] = 1;
   function_722fc669(localclientnum);
@@ -387,7 +387,7 @@ microwavefxhash(trace, origin, name) {
 }
 
 cleanupfx(localclientnum, microwavefxent) {
-  self waittill(#"death", # "beam_stop");
+  self waittill(#"death", #"beam_stop");
 
   foreach(handle in microwavefxent.fxhandles) {
     if(isDefined(handle)) {

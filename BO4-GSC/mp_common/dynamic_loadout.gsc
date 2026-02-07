@@ -20,7 +20,7 @@
 #namespace dynamic_loadout;
 
 autoexec __init__system__() {
-  system::register(#"dynamic_loadout", &__init__, undefined, # "weapons");
+  system::register(#"dynamic_loadout", &__init__, undefined, #"weapons");
 }
 
 __init__() {

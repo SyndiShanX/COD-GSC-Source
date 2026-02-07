@@ -163,49 +163,49 @@ command_parser() {
 }
 
 init_heli_sounds_gunner() {
-  setup_heli_sounds("lfe", "engine", "snd_cockpit", # "veh_huey_rotor_lfe");
-  setup_heli_sounds("turbine", "engine", "snd_rotor", # "veh_huey_turbine");
-  setup_heli_sounds("top_rotor", "engine", "snd_rotor", # "veh_huey_rotor");
-  setup_heli_sounds("tail_rotor", "engine", "snd_tail_rotor", # "veh_huey_tail");
-  setup_heli_sounds("wind_rt", "engine", "snd_wind_right", # "veh_huey_door_wind");
-  setup_heli_sounds("radio", "engine", "snd_cockpit", # "veh_huey_radio");
+  setup_heli_sounds("lfe", "engine", "snd_cockpit", #"veh_huey_rotor_lfe");
+  setup_heli_sounds("turbine", "engine", "snd_rotor", #"veh_huey_turbine");
+  setup_heli_sounds("top_rotor", "engine", "snd_rotor", #"veh_huey_rotor");
+  setup_heli_sounds("tail_rotor", "engine", "snd_tail_rotor", #"veh_huey_tail");
+  setup_heli_sounds("wind_rt", "engine", "snd_wind_right", #"veh_huey_door_wind");
+  setup_heli_sounds("radio", "engine", "snd_cockpit", #"veh_huey_radio");
   self.warning_tag = "snd_cockpit";
 }
 
 init_heli_sounds_player_controlled() {
-  setup_heli_sounds("lfe", "engine", "snd_cockpit", # "veh_cobra_rotor_lfe");
-  setup_heli_sounds("turbine", "engine", "snd_rotor", # "veh_cobra_turbine");
-  setup_heli_sounds("top_rotor", "engine", "snd_rotor", # "veh_cobra_rotor");
-  setup_heli_sounds("tail_rotor", "engine", "snd_tail_rotor", # "veh_cobra_tail");
+  setup_heli_sounds("lfe", "engine", "snd_cockpit", #"veh_cobra_rotor_lfe");
+  setup_heli_sounds("turbine", "engine", "snd_rotor", #"veh_cobra_turbine");
+  setup_heli_sounds("top_rotor", "engine", "snd_rotor", #"veh_cobra_rotor");
+  setup_heli_sounds("tail_rotor", "engine", "snd_tail_rotor", #"veh_cobra_tail");
   self.warning_tag = "snd_cockpit";
 }
 
 init_heli_sounds_supply() {
-  setup_heli_sounds("lfe", "engine", undefined, # "veh_supply_rotor_lfe");
-  setup_heli_sounds("turbine", "engine", undefined, # "veh_supply_turbine");
-  setup_heli_sounds("top_rotor", "engine", undefined, # "veh_supply_rotor");
+  setup_heli_sounds("lfe", "engine", undefined, #"veh_supply_rotor_lfe");
+  setup_heli_sounds("turbine", "engine", undefined, #"veh_supply_turbine");
+  setup_heli_sounds("top_rotor", "engine", undefined, #"veh_supply_rotor");
   self.warning_tag = undefined;
 }
 
 init_heli_sounds_ai_attack() {
-  setup_heli_sounds("lfe", "engine", undefined, # "veh_hind_rotor_lfe");
-  setup_heli_sounds("turbine", "engine", undefined, # "veh_hind_turbine");
-  setup_heli_sounds("top_rotor", "engine", undefined, # "veh_hind_rotor");
-  setup_heli_sounds("tail_rotor", "engine", undefined, # "veh_hind_tail");
+  setup_heli_sounds("lfe", "engine", undefined, #"veh_hind_rotor_lfe");
+  setup_heli_sounds("turbine", "engine", undefined, #"veh_hind_turbine");
+  setup_heli_sounds("top_rotor", "engine", undefined, #"veh_hind_rotor");
+  setup_heli_sounds("tail_rotor", "engine", undefined, #"veh_hind_tail");
   self.warning_tag = undefined;
 }
 
 init_heli_sounds_player_drone() {
-  setup_heli_sounds("turbine_idle", "engine", "tag_body", # "veh_qrdrone_turbine_idle");
-  setup_heli_sounds("turbine_moving", "engine", "tag_body", # "veh_qrdrone_turbine_moving");
-  setup_heli_sounds("turn", "engine", "tag_body", # "veh_qrdrone_idle_rotate");
+  setup_heli_sounds("turbine_idle", "engine", "tag_body", #"veh_qrdrone_turbine_idle");
+  setup_heli_sounds("turbine_moving", "engine", "tag_body", #"veh_qrdrone_turbine_moving");
+  setup_heli_sounds("turn", "engine", "tag_body", #"veh_qrdrone_idle_rotate");
   self.warning_tag = undefined;
 }
 
 init_heli_sounds_heli_guard() {
-  setup_heli_sounds("lfe", "engine", undefined, # "veh_overwatch_lfe");
-  setup_heli_sounds("turbine", "engine", undefined, # "veh_overwatch_turbine");
-  setup_heli_sounds("rotor", "engine", undefined, # "veh_overwatch_rotor");
+  setup_heli_sounds("lfe", "engine", undefined, #"veh_overwatch_lfe");
+  setup_heli_sounds("turbine", "engine", undefined, #"veh_overwatch_turbine");
+  setup_heli_sounds("rotor", "engine", undefined, #"veh_overwatch_rotor");
   self.warning_tag = undefined;
 }
 
@@ -669,15 +669,15 @@ play_targeting_sound(play, sound, handle) {
 }
 
 play_targeted_sound(play) {
-  self.lockingsound = play_targeting_sound(play, # "veh_hind_alarm_missile_locking_mp", self.lockingsound);
+  self.lockingsound = play_targeting_sound(play, #"veh_hind_alarm_missile_locking_mp", self.lockingsound);
 }
 
 play_locked_sound(play) {
-  self.lockedsound = play_targeting_sound(play, # "veh_hind_alarm_missile_locked_mp", self.lockedsound);
+  self.lockedsound = play_targeting_sound(play, #"veh_hind_alarm_missile_locked_mp", self.lockedsound);
 }
 
 play_fired_sound(play) {
-  self.firedsound = play_targeting_sound(play, # "veh_hind_alarm_missile_fired", self.firedsound);
+  self.firedsound = play_targeting_sound(play, #"veh_hind_alarm_missile_fired", self.firedsound);
 }
 
 play_leaving_battlefield_alarm(play) {
@@ -807,7 +807,7 @@ drone_button_watch() {
 
   while(true) {
     if(abs(self.qrdrone_z_difference) > 5 && return_to_zero) {
-      self playSound(0, # "veh_qrdrone_move_start");
+      self playSound(0, #"veh_qrdrone_move_start");
       return_to_zero = 0;
     } else if(abs(self.qrdrone_z_difference) < 5 && !return_to_zero) {
       return_to_zero = 1;

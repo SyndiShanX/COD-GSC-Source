@@ -35,7 +35,7 @@
 event_handler[gametype_init] main(eventstruct) {
   globallogic::init();
   infection::initialize();
-  infection::function_153000d0(#"hash_70fe115fad3f4fa", # "hash_3ca96ae1bd7d344f");
+  infection::function_153000d0(#"hash_70fe115fad3f4fa", #"hash_3ca96ae1bd7d344f");
   level.var_757f1b92 = getweapon("melee_bowie_bloody");
   level.var_4ae49bbd = getweapon("hatchet");
   util::registerroundswitch(0, 9);
@@ -381,7 +381,7 @@ function_8d346fd8(winningteam) {
     }
 
     if(!level.disablestattracking) {
-      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", # "statvalue", 0);
+      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", #"statvalue", 0);
     }
   }
 }

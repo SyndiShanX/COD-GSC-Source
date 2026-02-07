@@ -162,8 +162,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + # "hash_7fcdc47572bdbafa", 8000, 1, "int");
   clientfield::register("scriptmover", "" + # "force_stream_model", 8000, 1, "int");
   clientfield::register("world", "" + # "hash_458d10e70473adfd", 8000, 1, "int");
-  zm_sq::register(#"zm_mansion_pap_quest", # "hash_12a37f2c621d1245", # "capture_souls", &mansion_pap::init, &mansion_pap::cleanup);
-  zm_sq::register(#"zm_mansion_silver_bullet", # "collect_silver", # "silver_bullet", &mansion_silver_bullet::init, &mansion_silver_bullet::cleanup);
+  zm_sq::register(#"zm_mansion_pap_quest", #"hash_12a37f2c621d1245", #"capture_souls", &mansion_pap::init, &mansion_pap::cleanup);
+  zm_sq::register(#"zm_mansion_silver_bullet", #"collect_silver", #"silver_bullet", &mansion_silver_bullet::init, &mansion_silver_bullet::cleanup);
   level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
   level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
@@ -286,7 +286,7 @@ event_handler[level_init] main(eventstruct) {
 
 function_fc9d7a1f() {
   level flag::wait_till("all_players_connected");
-  level flag::wait_till_any(array(#"power_on1", # "hash_2daf5bdda85cc660"));
+  level flag::wait_till_any(array(#"power_on1", #"hash_2daf5bdda85cc660"));
   changeadvertisedstatus(0);
 }
 
@@ -300,17 +300,17 @@ on_player_spawned() {
   self.var_aed1893c = [];
 
   if(self zm_characters::is_character(array(#"hash_5ebf024e1559c04a"))) {
-    self zm_audio::function_87714659(&zm_mansion_sound::function_c8d42aba, # "revive", # "down");
-    self zm_audio::function_87714659(&zm_mansion_sound::function_e432aeb6, # "pap", # "wait");
-    self zm_audio::function_87714659(&zm_mansion_sound::function_658ce256, # "hero_activate", # "sword_pistol");
-    self zm_audio::function_87714659(&zm_mansion_sound::function_edae33b5, # "kill", # "sword");
-    self zm_audio::function_87714659(&zm_mansion_sound::function_fe8cce7a, # "hero_level_3", # "hammer");
-    self zm_audio::function_87714659(&zm_mansion_sound::function_bb1888fe, # "hero_ready", # "scepter");
-    self zm_audio::function_87714659(&zm_mansion_sound::function_f26d178f, # "hero_activate", # "scepter");
-    self zm_audio::function_87714659(&zm_mansion_sound::function_1f4ab5ec, # "perk", # "generic");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_c8d42aba, #"revive", #"down");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_e432aeb6, #"pap", #"wait");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_658ce256, #"hero_activate", #"sword_pistol");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_edae33b5, #"kill", #"sword");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_fe8cce7a, #"hero_level_3", #"hammer");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_bb1888fe, #"hero_ready", #"scepter");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_f26d178f, #"hero_activate", #"scepter");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_1f4ab5ec, #"perk", #"generic");
     self.var_ab7bf755 = &zm_mansion_sound::function_df8a01f3;
   } else {
-    self zm_audio::function_87714659(&zm_mansion_sound::function_4928382a, # "revive", # "down");
+    self zm_audio::function_87714659(&zm_mansion_sound::function_4928382a, #"revive", #"down");
   }
 
   self thread function_60a2e5e1();
@@ -322,7 +322,7 @@ function_d7bc28f1() {
 
 function_4db79562(a_ents) {
   if(isplayer(a_ents[# "player 1"])) {
-    a_ents[# "player 1"] waittill(#"fade_out", # "disconnect");
+    a_ents[# "player 1"] waittill(#"fade_out", #"disconnect");
 
     if(isplayer(a_ents[# "player 1"])) {
       a_ents[# "player 1"] thread lui::screen_fade_out(0.5, "black");
@@ -333,7 +333,7 @@ function_4db79562(a_ents) {
 function_78276077(a_ents) {
   if(isplayer(a_ents[# "player 1"])) {
     a_ents[# "player 1"] thread lui::screen_fade_in(0.1, "black");
-    a_ents[# "player 1"] waittill(#"hash_30795d8b5cd79089", # "hide_equipment_hint_text", # "disconnect");
+    a_ents[# "player 1"] waittill(#"hash_30795d8b5cd79089", #"hide_equipment_hint_text", #"disconnect");
 
     if(isplayer(a_ents[# "player 1"])) {
       a_ents[# "player 1"] thread lui::screen_fade_out(0, "black");
@@ -343,7 +343,7 @@ function_78276077(a_ents) {
 
 function_48276a5e(a_ents) {
   if(isplayer(a_ents[# "player 1"])) {
-    a_ents[# "player 1"] waittill(#"fade_in", # "disconnect");
+    a_ents[# "player 1"] waittill(#"fade_in", #"disconnect");
 
     if(isplayer(a_ents[# "player 1"])) {
       a_ents[# "player 1"] thread lui::screen_fade_in(0.3, "black");
@@ -402,10 +402,10 @@ function function_3cdddd34() {
 
 function_3bd89e18() {
   self notify(#"noshield");
-  self endon(#"disconnect", # "noshield", # "bled_out");
+  self endon(#"disconnect", #"noshield", #"bled_out");
 
   while(true) {
-    s_notify = self waittill(#"weapon_change", # "hash_459246e5bfcc3713", # "destroy_riotshield");
+    s_notify = self waittill(#"weapon_change", #"hash_459246e5bfcc3713", #"destroy_riotshield");
 
     if(mansion_util::is_shield(s_notify.weapon)) {
       self.var_c09a076a = 1;
@@ -1001,7 +1001,7 @@ function_2d164b86() {
   }
 
   if(isalive(var_d11a4648)) {
-    var_d11a4648 util::delay(6, "death", &zm_audio::create_and_play_dialog, # "sentinel", # "key");
+    var_d11a4648 util::delay(6, "death", &zm_audio::create_and_play_dialog, #"sentinel", #"key");
   }
 }
 
@@ -1047,7 +1047,7 @@ function_d9848d71(a_zombie_doors) {
     var_38a6b7d0 = [];
   }
 
-  level flag::wait_till_any(array(#"power_on", # "power_on1", # "hash_2daf5bdda85cc660"));
+  level flag::wait_till_any(array(#"power_on", #"power_on1", #"hash_2daf5bdda85cc660"));
 
   for(i = 0; i < a_zombie_doors.size; i++) {
     if(!(isDefined(a_zombie_doors[i].has_been_opened) && a_zombie_doors[i].has_been_opened)) {
@@ -1100,7 +1100,7 @@ function_94cf8d37(var_62406c, var_62c4256, n_acceleration, n_speed) {
 
 function_3e1f5f39(n_trail) {
   level endon(#"end_game");
-  self endoncallback(&function_3ffb36f6, # "death");
+  self endoncallback(&function_3ffb36f6, #"death");
 
   if(n_trail === 4) {
     level waittill(#"chandelier_fall");
@@ -1210,16 +1210,16 @@ function_c52e8ba(player, var_8d5d092c) {
     switch (self.stub.script_string) {
       case # "greenhouse":
       case # "cemetery":
-        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_34f259136740edfd", # "hash_58e6e210eddbebe3", # "hash_6de5ca8f5e14be4", # "hash_109ff9cf832cd388");
+        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_34f259136740edfd", #"hash_58e6e210eddbebe3", #"hash_6de5ca8f5e14be4", #"hash_109ff9cf832cd388");
         break;
       case # "forest":
-        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_3662e0cf1e9f6351", # "hash_54a78a5bd72eed4f", # "hash_18afd9a5deaedfe0", # "hash_538a37b473f5834c");
+        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_3662e0cf1e9f6351", #"hash_54a78a5bd72eed4f", #"hash_18afd9a5deaedfe0", #"hash_538a37b473f5834c");
         break;
       case # "entrance_hall":
-        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_65cbaa6146c8a85", # "hash_aed57a705546ebb", # "hash_471da16d5cb1956c", # "hash_276bed61279c11e0");
+        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_65cbaa6146c8a85", #"hash_aed57a705546ebb", #"hash_471da16d5cb1956c", #"hash_276bed61279c11e0");
         break;
       default:
-        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_2731cc5c1208e2e4", # "hash_47b20f457b370888");
+        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_2731cc5c1208e2e4", #"hash_47b20f457b370888");
         break;
     }
 
@@ -1269,7 +1269,7 @@ function_cda69f5e(player) {
 play_outro_igc() {
   setdvar(#"hash_44340be18f159be3", 0);
   level.var_ea32773 = &function_7f493481;
-  level thread scene::init_streamer(#"cin_zm_mansion_outro_butler", # "allies", 0, 0);
+  level thread scene::init_streamer(#"cin_zm_mansion_outro_butler", #"allies", 0, 0);
   scene::add_scene_func(#"cin_zm_mansion_outro_butler", &function_8b76623, "play");
   scene::add_scene_func(#"cin_zm_mansion_outro_butler", &function_9419b975, "sh195");
   scene::add_scene_func(#"cin_zm_mansion_outro_butler", &function_4e94caa8, "sh240");
@@ -1365,7 +1365,7 @@ function_8b76623(a_ents) {
     e_player freezecontrols(0);
   }
 
-  level thread scene::init_streamer(#"cin_zm_mansion_outro_exit_mansion", # "allies", 0, 0);
+  level thread scene::init_streamer(#"cin_zm_mansion_outro_exit_mansion", #"allies", 0, 0);
 }
 
 function_9419b975(a_ents) {
@@ -1378,11 +1378,11 @@ function_4e94caa8(a_ents) {
 }
 
 function_34273b53(a_ents) {
-  level thread scene::init_streamer(#"cin_zm_mansion_outro_car_chase", # "allies", 0, 0);
+  level thread scene::init_streamer(#"cin_zm_mansion_outro_car_chase", #"allies", 0, 0);
 }
 
 function_f996845d(a_ents) {
-  level thread scene::init_streamer(#"cin_zm_mansion_outro_aftermath", # "allies", 0, 0);
+  level thread scene::init_streamer(#"cin_zm_mansion_outro_aftermath", #"allies", 0, 0);
 }
 
 function_389e7c22(var_404e4288, var_8dd554ee) {
@@ -1401,7 +1401,7 @@ function_c8ce0a17(var_404e4288, var_8dd554ee) {
     var_6095c0b6 = zm_round_logic::function_4e8157cd(var_404e4288, var_8dd554ee);
 
     if(isalive(var_6095c0b6.ai_spawned)) {
-      zm_transform::function_d2374144(var_6095c0b6.ai_spawned, array::random(array(#"catalyst_corrosive", # "catalyst_electric", # "catalyst_plasma", # "catalyst_water")));
+      zm_transform::function_d2374144(var_6095c0b6.ai_spawned, array::random(array(#"catalyst_corrosive", #"catalyst_electric", #"catalyst_plasma", #"catalyst_water")));
     }
 
     return 1;
@@ -2104,7 +2104,7 @@ function_3f147b12(cmd) {
       level flag::set("<dev string:x3e00>");
       break;
     case # "igc_play_outro":
-      level scene::init_streamer(#"cin_zm_mansion_outro_butler", # "allies", 0, 0);
+      level scene::init_streamer(#"cin_zm_mansion_outro_butler", #"allies", 0, 0);
       level thread play_outro_igc();
       break;
     case # "hash_2b5e2a1e2bb301d1":
@@ -2179,7 +2179,7 @@ function_a72077f8() {
 }
 
 function_2527ee2d() {
-  level endon(#"end_game", # "hash_59a4398b145082a");
+  level endon(#"end_game", #"hash_59a4398b145082a");
   level flag::wait_till("<dev string:x3f5d>");
 
   if(isDefined(level.players[0].var_88c7d6c3) && level.players[0].var_88c7d6c3) {

@@ -305,7 +305,7 @@ hide_traps() {
 
 show_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", # "hash_6e8ef1b690e98e51");
+  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", #"hash_6e8ef1b690e98e51");
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text, t_trap.zombie_cost);

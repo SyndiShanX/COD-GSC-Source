@@ -54,7 +54,7 @@ function_417c12e1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 crystal_explosion_func(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self util::playFXOnTag(localclientnum, level._effect[# "crystal_explosion"], self, "tag_origin");
-  playSound(localclientnum, # "hash_66b733441d74cd21", self.origin);
+  playSound(localclientnum, #"hash_66b733441d74cd21", self.origin);
 }
 
 function_5783c958(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

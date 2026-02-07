@@ -30,7 +30,7 @@ function_6a51df96(notifyhash) {
 }
 
 function_920e8738() {
-  self endoncallback(&function_6a51df96, # "death", # "disconnect");
+  self endoncallback(&function_6a51df96, #"death", #"disconnect");
 
   while(true) {
     if(!isDefined(self.var_552afb80)) {

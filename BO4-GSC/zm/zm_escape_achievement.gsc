@@ -76,8 +76,8 @@ function_cf262a06() {
 }
 
 function_e5df009() {
-  self endon(#"disconnect", # "hash_b5d3534da3f4508");
-  level endon(#"end_game", # "activate_catwalk");
+  self endon(#"disconnect", #"hash_b5d3534da3f4508");
+  level endon(#"end_game", #"activate_catwalk");
 
   if(level flag::get("activate_catwalk")) {
     return;
@@ -109,7 +109,7 @@ function_e5df009() {
 }
 
 function_4c6d1750() {
-  self endon(#"disconnect", # "hash_1410cda9f15ef1c3");
+  self endon(#"disconnect", #"hash_1410cda9f15ef1c3");
 
   while(true) {
     s_result = self waittill(#"hash_3669499a148a6d6e");

@@ -16,7 +16,7 @@ class cseeker_mine_prompt: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "seeker_mine_prompt");
+    cluielem::open(localclientnum, #"seeker_mine_prompt");
   }
 
   function function_fa582112(localclientnum) {

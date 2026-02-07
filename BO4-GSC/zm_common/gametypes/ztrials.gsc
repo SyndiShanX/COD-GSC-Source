@@ -172,7 +172,7 @@ function_61fd0e87() {
 function_b8839207(e_door, n_cost) {
   level flag::wait_till("start_zombie_round_logic");
   e_door notify(#"hash_42c191c31ed08a4");
-  e_door endon(#"hash_42c191c31ed08a4", # "death");
+  e_door endon(#"hash_42c191c31ed08a4", #"death");
 
   while(true) {
     if(n_cost > 0 && zm_trial_disable_buys::is_active()) {

@@ -395,11 +395,11 @@ function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
       if(!sessionmodeiswarzonegame()) {
         if(isarenamode()) {
-          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "arenavalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "arenavalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
-          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "arenavalue", total_damage);
+          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"arenavalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"arenavalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
+          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"arenavalue", total_damage);
         } else {
-          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "statvalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "statvalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
-          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "total_damage", # "statvalue", total_damage);
+          total_damage = (isDefined(eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"statvalue")) ? eattacker stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"statvalue") : 0) + (isDefined(damagedone) ? damagedone : 0);
+          eattacker stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"total_damage", #"statvalue", total_damage);
         }
       }
 
@@ -744,7 +744,7 @@ function_56dc620b(einflictor, eattacker, idamage, weapon, customsettings) {
       score = rank::getscoreinfovalue("shield_blocked_damage");
 
       if(score > 0) {
-        self stats::function_e24eec31(level.weaponriotshield, # "score_from_blocked_damage", score);
+        self stats::function_e24eec31(level.weaponriotshield, #"score_from_blocked_damage", score);
       }
 
       scoreevents::processscoreevent(#"shield_blocked_damage", self, undefined, self.currentweapon);

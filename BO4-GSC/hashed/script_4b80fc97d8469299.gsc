@@ -62,7 +62,7 @@ main() {
 
 function_1faf4b9(var_5ea5c94d) {
   if(!var_5ea5c94d) {
-    zm_orange_pablo::register_drop_off(15, # "hash_59c4b1052b566fa1", # "hash_28356be4df0c611f", &function_9af4e8bd);
+    zm_orange_pablo::register_drop_off(15, #"hash_59c4b1052b566fa1", #"hash_28356be4df0c611f", &function_9af4e8bd);
     level.pablo_npc.var_cb3ed98f[15].b_all_players = 1;
     zm_orange_pablo::function_d83490c5(15);
     level flag::wait_till(#"hash_7b6c32b9937aee62");
@@ -249,7 +249,7 @@ defend_event() {
     }
   }
 
-  zm_orange_pablo::function_3f9e02b8(8, # "hash_3be823a04b5cca2d", # "hash_25cb84d1af883c53", &pap_charging);
+  zm_orange_pablo::function_3f9e02b8(8, #"hash_3be823a04b5cca2d", #"hash_25cb84d1af883c53", &pap_charging);
   zm_orange_pablo::function_d83490c5(8);
 
   if(getdvarint(#"zm_debug_ee", 0)) {
@@ -277,7 +277,7 @@ pap_charging() {
 
 function_3f15613f() {
   if(level flag::get(#"hash_11d64d1f93c196cc") && !(isDefined(self.stub.pap_machine.var_b6d21cc2) && self.stub.pap_machine.var_b6d21cc2)) {
-    str_prompt = zm_utility::function_d6046228(#"hash_546b9ae85f7a9448", # "hash_38d87fd576702a44");
+    str_prompt = zm_utility::function_d6046228(#"hash_546b9ae85f7a9448", #"hash_38d87fd576702a44");
     self sethintstring(str_prompt);
     return 1;
   }
@@ -365,7 +365,7 @@ function_dc380897() {
     self.vessel playSound(#"hash_1ae6116ea0aa080f");
     self.vessel stoploopsound();
     wait 0.5;
-    self.vessel zm_unitrigger::function_fac87205(zm_utility::function_d6046228(#"hash_3be823a04b5cca2d", # "hash_25cb84d1af883c53"), 64);
+    self.vessel zm_unitrigger::function_fac87205(zm_utility::function_d6046228(#"hash_3be823a04b5cca2d", #"hash_25cb84d1af883c53"), 64);
     self.vessel playSound(#"zmb_vessel_pickup");
 
     if(level.var_d7374603 == 1) {
@@ -442,7 +442,7 @@ function_a66f0de2() {
 }
 
 function_8c273b51() {
-  level endon(#"end_game", # "hash_5266a594b96823e2");
+  level endon(#"end_game", #"hash_5266a594b96823e2");
 
   while(true) {
     if(zm_hms_util::any_player_in_zone("lighthouse_level_4") && level.pablo_npc zm_audio::can_speak()) {

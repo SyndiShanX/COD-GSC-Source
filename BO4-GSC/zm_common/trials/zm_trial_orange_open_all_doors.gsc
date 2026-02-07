@@ -19,7 +19,7 @@ __init__() {
     return;
   }
 
-  level.var_c79f394d = array(#"hash_38c97197db36afb7", # "hash_48e7d63b38c5e2da", # "hash_52d967f4fc8b12fc", # "hash_6f7fd3d4d070db87");
+  level.var_c79f394d = array(#"hash_38c97197db36afb7", #"hash_48e7d63b38c5e2da", #"hash_52d967f4fc8b12fc", #"hash_6f7fd3d4d070db87");
   zombie_doors = getEntArray("zombie_door", "targetname");
   zombie_debris = getEntArray("zombie_debris", "targetname");
   level.var_a0f5e369 = function_d34c075e(zombie_doors);
@@ -125,10 +125,10 @@ monitor_timer(n_timer) {
   wait 12;
 
   foreach(player in getplayers()) {
-    player zm_trial_util::function_128378c9(n_timer, 1, # "hash_c2b77be4cf5b142");
+    player zm_trial_util::function_128378c9(n_timer, 1, #"hash_c2b77be4cf5b142");
   }
 
-  level waittilltimeout(n_timer + 1, # "hash_6ba2e2da302282");
+  level waittilltimeout(n_timer + 1, #"hash_6ba2e2da302282");
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_885fb2c8();

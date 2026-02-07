@@ -20,9 +20,9 @@ __main__() {}
 
 enable_death_perception_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_awareness", # "perk_death_perception", 2000, # "hash_237b1e920f98800b", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), # "zmperksdeathperception");
+    zm_perks::register_perk_basic_info(#"specialty_awareness", #"perk_death_perception", 2000, #"hash_237b1e920f98800b", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), #"zmperksdeathperception");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_awareness", # "perk_death_perception", 2000, # "hash_44056ea72a6d4fd5", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), # "zmperksdeathperception");
+    zm_perks::register_perk_basic_info(#"specialty_awareness", #"perk_death_perception", 2000, #"hash_44056ea72a6d4fd5", getweapon("zombie_perk_bottle_death_perception"), getweapon("zombie_perk_totem_death_perception"), #"zmperksdeathperception");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_awareness", &function_f9d745da);

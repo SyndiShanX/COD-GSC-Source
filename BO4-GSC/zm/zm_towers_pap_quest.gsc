@@ -127,13 +127,13 @@ pap_quest_init(var_5ea5c94d) {
   var_9840ab47 = getEntArray("pap_quest_encounter_triggers", "script_noteworthy");
 
   if(function_8b1a219a()) {
-    array::run_all(var_9840ab47, &sethintstring, # "hash_7c465ea7da6991fb");
+    array::run_all(var_9840ab47, &sethintstring, #"hash_7c465ea7da6991fb");
   } else {
-    array::run_all(var_9840ab47, &sethintstring, # "hash_2a4860e40142bac5");
+    array::run_all(var_9840ab47, &sethintstring, #"hash_2a4860e40142bac5");
   }
 
-  var_16561d51 = array(#"marauder", # "destroyer", # "both", # "tigers");
-  a_str_towers = array(#"danu", # "ra", # "odin", # "zeus");
+  var_16561d51 = array(#"marauder", #"destroyer", #"both", #"tigers");
+  a_str_towers = array(#"danu", #"ra", #"odin", #"zeus");
   var_16561d51 = array::randomize(var_16561d51);
   level.var_4118581a = 0;
 
@@ -159,7 +159,7 @@ pap_quest_init(var_5ea5c94d) {
   level zm_ui_inventory::function_7df6bb60(#"hash_5114ed99a6bad03b", 1);
 
   if(!var_5ea5c94d) {
-    level flag::wait_till_all(array(#"hash_3d833ecc64915d8d", # "hash_d38ff215be3a4fc", # "hash_4142472dec557d03", # "hash_45b6b1ee5d5038b4"));
+    level flag::wait_till_all(array(#"hash_3d833ecc64915d8d", #"hash_d38ff215be3a4fc", #"hash_4142472dec557d03", #"hash_45b6b1ee5d5038b4"));
   }
 
   level flag::set(#"hash_76692d6669cb0500");
@@ -185,7 +185,7 @@ function_18b39e14() {
 }
 
 function_3effad88(str_tower) {
-  str_prompt = zm_utility::function_d6046228(#"hash_2a4860e40142bac5", # "hash_7c465ea7da6991fb");
+  str_prompt = zm_utility::function_d6046228(#"hash_2a4860e40142bac5", #"hash_7c465ea7da6991fb");
 
   switch (str_tower) {
     case # "danu":
@@ -229,13 +229,13 @@ pap_quest_restart() {
   var_9840ab47 = getEntArray("pap_quest_encounter_triggers", "script_noteworthy");
 
   if(function_8b1a219a()) {
-    array::run_all(var_9840ab47, &sethintstring, # "hash_7c465ea7da6991fb");
+    array::run_all(var_9840ab47, &sethintstring, #"hash_7c465ea7da6991fb");
   } else {
-    array::run_all(var_9840ab47, &sethintstring, # "hash_2a4860e40142bac5");
+    array::run_all(var_9840ab47, &sethintstring, #"hash_2a4860e40142bac5");
   }
 
-  var_16561d51 = array(#"marauder", # "destroyer", # "both", # "tigers");
-  a_str_towers = array(#"danu", # "ra", # "odin", # "zeus");
+  var_16561d51 = array(#"marauder", #"destroyer", #"both", #"tigers");
+  a_str_towers = array(#"danu", #"ra", #"odin", #"zeus");
   var_16561d51 = array::randomize(var_16561d51);
   level.var_4118581a = 0;
 
@@ -299,7 +299,7 @@ function_97e78811(var_5ea5c94d, ended_early) {
 
 function_199b1814(str_tower, str_encounter) {
   level notify(str_tower + "_pap_quest_restart");
-  level endon(#"pap_quest_completed", # "pap_quest_restart", str_tower + "_pap_quest_restart");
+  level endon(#"pap_quest_completed", #"pap_quest_restart", str_tower + "_pap_quest_restart");
 
   switch (str_tower) {
     case # "danu":
@@ -429,11 +429,11 @@ function_199b1814(str_tower, str_encounter) {
 
       break;
     case # "both":
-      var_e482422a = array(#"marauder", # "destroyer");
+      var_e482422a = array(#"marauder", #"destroyer");
       break;
     case # "tigers":
       if(!level.var_4118581a) {
-        var_e482422a = array(#"tiger", # "tiger", # "tiger", # "tiger");
+        var_e482422a = array(#"tiger", #"tiger", #"tiger", #"tiger");
       } else {
         var_e482422a = [];
 
@@ -773,7 +773,7 @@ function_499b080d(str_tower, str_encounter) {
   level zm_ui_inventory::function_7df6bb60(str_clientfield, 2);
   level.var_c22016cf++;
   level thread function_7590a833();
-  n_scalar = zombie_utility::get_zombie_var_team(#"zombie_point_scalar", # "allies");
+  n_scalar = zombie_utility::get_zombie_var_team(#"zombie_point_scalar", #"allies");
 
   foreach(e_player in level.players) {
     e_player zm_score::add_to_player_score(500 * n_scalar);
@@ -1005,7 +1005,7 @@ function_f3c4aeac() {
   self show();
   self playSound(#"hash_3d7066af9c9bf849");
   self thread fx::play("fx_challenge_head_blood_burst", self getcentroid(), undefined, undefined, 1, undefined, 1, 0);
-  self thread fx::play("fx_challenge_head_blood_drips", self getcentroid(), undefined, # "hash_691806c47ba12fac", 1, str_fx_tag, 1, 0);
+  self thread fx::play("fx_challenge_head_blood_drips", self getcentroid(), undefined, #"hash_691806c47ba12fac", 1, str_fx_tag, 1, 0);
 }
 
 get_encounter(str_tower) {

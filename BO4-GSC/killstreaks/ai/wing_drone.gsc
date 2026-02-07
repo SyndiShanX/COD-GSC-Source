@@ -76,7 +76,7 @@ malfunction_update(params) {
   self setangularvelocity(ang_vel);
   self cancelaimove();
   self setphysacceleration((0, 0, 100 * -1));
-  waitresult = self waittilltimeout(randomintrange(4, 6), # "veh_collision");
+  waitresult = self waittilltimeout(randomintrange(4, 6), #"veh_collision");
   self vehicle_ai::set_state("death");
 }
 

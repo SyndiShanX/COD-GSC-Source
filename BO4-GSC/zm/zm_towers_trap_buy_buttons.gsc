@@ -73,7 +73,7 @@ function_eac89317() {
   level endon(#"game_ended");
 
   while(true) {
-    s_notify = level waittill(#"traps_activated", # "traps_available", # "traps_cooldown");
+    s_notify = level waittill(#"traps_activated", #"traps_available", #"traps_cooldown");
 
     if(isDefined(s_notify.var_be3f58a)) {
       switch (s_notify._notify) {

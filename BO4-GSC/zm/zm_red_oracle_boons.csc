@@ -36,7 +36,7 @@ function_c0d2e1a2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_cd5f9803(localclientnum) {
-  self waittill(#"hash_5a7453176272efff", # "death");
+  self waittill(#"hash_5a7453176272efff", #"death");
 
   if(isDefined(self)) {
     self stoprenderoverridebundle(#"hash_46a64e44ebfa3078");

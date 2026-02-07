@@ -502,7 +502,7 @@ function_1ba093e() {
 
     if(isDefined(pap_machine.pack_player) && pap_machine.pack_player == self) {
       self thread function_91a9c226(pap_machine);
-      self waittill(#"pap_timeout", # "pap_taken");
+      self waittill(#"pap_timeout", #"pap_taken");
     }
 
     waitframe(1);
@@ -510,13 +510,13 @@ function_1ba093e() {
 }
 
 function_91a9c226(pap_machine) {
-  self endon(#"death", # "pap_timeout", # "pap_taken");
+  self endon(#"death", #"pap_timeout", #"pap_taken");
   self waittill(#"entering_last_stand");
   self thread function_de053460(pap_machine);
 }
 
 function_de053460(pap_machine) {
-  self endon(#"death", # "pap_taken");
+  self endon(#"death", #"pap_taken");
   waitframe(2);
   var_2ff5c7ee = pap_machine.unitrigger_stub;
   var_b64e889a = pap_machine.var_b64e889a;
@@ -593,7 +593,7 @@ function_3fe13b7b() {
       continue;
     }
 
-    s_result = self waittill(#"player_revived", # "bled_out");
+    s_result = self waittill(#"player_revived", #"bled_out");
     wait 1;
     a_current_perks = arraycopy(self.var_466b927f);
     var_2c7d72cf = array::randomize(var_2c7d72cf);

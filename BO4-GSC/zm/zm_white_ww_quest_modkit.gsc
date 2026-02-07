@@ -118,9 +118,9 @@ modkit_hint(e_player) {
     if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === # "zhield_riot_dw") {
       self sethintstring("");
     } else if(isDefined(var_2c09b688)) {
-      self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", # "hash_71016e43b6fe0570"), str_weapon_name, var_2c09b688.displayname);
+      self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), str_weapon_name, var_2c09b688.displayname);
     } else {
-      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", # "hash_6831cfd35264e1"), str_weapon_name);
+      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), str_weapon_name);
     }
   }
 

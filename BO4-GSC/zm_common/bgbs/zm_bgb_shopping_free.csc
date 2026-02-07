@@ -12,7 +12,7 @@
 #namespace zm_bgb_shopping_free;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_shopping_free", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_shopping_free", &__init__, undefined, #"bgb");
 }
 
 __init__() {

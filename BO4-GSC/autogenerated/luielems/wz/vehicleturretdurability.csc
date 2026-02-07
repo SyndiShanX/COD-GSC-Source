@@ -12,7 +12,7 @@ class cvehicleturretdurability: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "vehicleturretdurability");
+    cluielem::open(localclientnum, #"vehicleturretdurability");
   }
 
   function function_fa582112(localclientnum) {

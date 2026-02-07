@@ -68,7 +68,7 @@ function_84845e32(params) {
 }
 
 watch_player_drowning() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   level endon(#"game_ended");
   self clientfield::set_to_player("drown_stage", 0);
   self.lastwaterdamagetime = self getlastoutwatertime();

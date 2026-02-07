@@ -35,7 +35,7 @@
 #namespace zm_vapor_random;
 
 autoexec __init__system__() {
-  system::register(#"zm_vapor_random", &__init__, undefined, # "load");
+  system::register(#"zm_vapor_random", &__init__, undefined, #"load");
 }
 
 __init__() {
@@ -218,7 +218,7 @@ function_6842bdd7(player) {
       return false;
     }
   } else if(!(isDefined(s_altar.b_in_use) && s_altar.b_in_use)) {
-    self sethintstringforplayer(player, # "hash_5d7144cc16556865", 4);
+    self sethintstringforplayer(player, #"hash_5d7144cc16556865", 4);
     player.var_e07e301b = undefined;
     return true;
   } else if(isDefined(s_altar.var_46fe01e2) && s_altar.var_46fe01e2 && s_altar.var_125b20f8 === player && isDefined(s_altar.var_62fef0f1)) {
@@ -332,7 +332,7 @@ function_20fe0559() {
 
     if(!player zm_score::can_player_purchase(n_cost)) {
       self playSound(#"evt_perk_deny");
-      player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       continue;
     }
 
@@ -439,7 +439,7 @@ function_2cc4144b(var_83225a27) {
 start_perk_bottle_cycling() {
   self endon(#"done_cycling");
   var_f0f641ad = level.var_b8be892e;
-  var_f0f641ad = array::exclude(var_f0f641ad, # "specialty_mystery");
+  var_f0f641ad = array::exclude(var_f0f641ad, #"specialty_mystery");
 
   if(!var_f0f641ad.size) {
     return;
@@ -491,7 +491,7 @@ perk_bottle_motion() {
 function_42171e41(player) {
   s_altar = self.stub.script_struct;
   s_altar.var_46fe01e2 = 1;
-  s_result = self waittilltimeout(10, # "trigger");
+  s_result = self waittilltimeout(10, #"trigger");
   s_altar.var_46fe01e2 = 0;
 
   if(s_result._notify == "trigger" && s_result.activator === player) {
@@ -502,7 +502,7 @@ function_42171e41(player) {
 }
 
 function_bb1ac745(s_altar) {
-  self waittill(#"perk_acquired", # "death", # "disconnect", # "player_downed");
+  self waittill(#"perk_acquired", #"death", #"disconnect", #"player_downed");
   s_altar.b_in_use = 0;
 }
 

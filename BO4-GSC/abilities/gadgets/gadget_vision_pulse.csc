@@ -107,7 +107,7 @@ toggle_spectator(localclientnum) {
 }
 
 function_5f4276b8() {
-  self endon(#"stop_googles", # "death");
+  self endon(#"stop_googles", #"death");
 
   if(!isplayer(self)) {
     return;
@@ -167,9 +167,9 @@ function_ab898b2d(notifystring) {
         self.var_f0b8faa1 = 1;
         self.var_1618a13f = # "hash_5a76eaaf7f7e3de5";
         self postfx::playpostfxbundle(self.var_1618a13f);
-        self function_116b95e5(self.var_1618a13f, # "hash_7c1a0903a45d4d45", 0);
-        self function_116b95e5(self.var_1618a13f, # "hash_51ebcff0b5d75894", 0);
-        self function_116b95e5(self.var_1618a13f, # "hash_2efccfad2b32081a", 1);
+        self function_116b95e5(self.var_1618a13f, #"hash_7c1a0903a45d4d45", 0);
+        self function_116b95e5(self.var_1618a13f, #"hash_51ebcff0b5d75894", 0);
+        self function_116b95e5(self.var_1618a13f, #"hash_2efccfad2b32081a", 1);
         self thread function_844dbcb7(localclientnum);
         self thread function_85e399a9(localclientnum);
         self callback::on_end_game(&on_game_ended);
@@ -234,7 +234,7 @@ function_85e399a9(localclientnum) {
   self notify(#"hash_54f15501beb799f9");
   self endon(#"hash_54f15501beb799f9");
   self endon(#"stop_googles");
-  self waittill(#"death", # "game_ended");
+  self waittill(#"death", #"game_ended");
   self shutdown_vision_pulse(localclientnum);
 }
 
@@ -271,13 +271,13 @@ do_vision_world_pulse_lerp_helper(currenttime, elapsedtime, localclientnum, dura
 
   if(pulseradius > 0 && self.var_168d7f5c == 0) {
     self.var_168d7f5c = 1;
-    playSound(localclientnum, # "hash_151b724086b2955b");
+    playSound(localclientnum, #"hash_151b724086b2955b");
   }
 
   if(pulseradius > pulsemaxradius) {
     if(self.var_168d7f5c * pulsemaxradius < pulseradius) {
       self.var_168d7f5c++;
-      playSound(localclientnum, # "hash_151b724086b2955b");
+      playSound(localclientnum, #"hash_151b724086b2955b");
     }
 
     pulseradius = int(pulseradius) % pulsemaxradius;
@@ -288,9 +288,9 @@ do_vision_world_pulse_lerp_helper(currenttime, elapsedtime, localclientnum, dura
   }
 
   if(self postfx::function_556665f2(self.var_1618a13f)) {
-    self function_116b95e5(self.var_1618a13f, # "hash_7c1a0903a45d4d45", pulseradius);
-    self function_116b95e5(self.var_1618a13f, # "hash_51ebcff0b5d75894", irisamount);
-    self function_116b95e5(self.var_1618a13f, # "hash_2efccfad2b32081a", pulsemaxradius);
+    self function_116b95e5(self.var_1618a13f, #"hash_7c1a0903a45d4d45", pulseradius);
+    self function_116b95e5(self.var_1618a13f, #"hash_51ebcff0b5d75894", irisamount);
+    self function_116b95e5(self.var_1618a13f, #"hash_2efccfad2b32081a", pulsemaxradius);
   }
 }
 
@@ -319,7 +319,7 @@ watch_vision_pulse_owner_death(localclientnum) {
   self player::function_f2ba057();
 
   if(self function_d2503806(#"hash_1978eff2ac047e65")) {
-    self function_78233d29(#"hash_1978eff2ac047e65", "", # "brightness", 0);
+    self function_78233d29(#"hash_1978eff2ac047e65", "", #"brightness", 0);
     self stoprenderoverridebundle(#"hash_1978eff2ac047e65");
   }
 
@@ -335,7 +335,7 @@ do_vision_local_pulse(localclientnum) {
   self thread watch_vision_pulse_owner_death(localclientnum);
   self playrenderoverridebundle(#"hash_1978eff2ac047e65");
   origin = getrevealpulseorigin(localclientnum);
-  self function_78233d29(#"hash_1978eff2ac047e65", "", # "brightness", 1);
+  self function_78233d29(#"hash_1978eff2ac047e65", "", #"brightness", 1);
   starttime = function_41f5de53(localclientnum);
   revealtime = level.weaponvisionpulse.var_b9951041;
   fadeout_duration = level.weaponvisionpulse.var_8e0b0827;
@@ -367,11 +367,11 @@ do_vision_local_pulse(localclientnum) {
       frac = 0;
     }
 
-    self function_78233d29(#"hash_1978eff2ac047e65", "", # "brightness", frac);
+    self function_78233d29(#"hash_1978eff2ac047e65", "", #"brightness", frac);
     waitframe(1);
   }
 
-  self function_78233d29(#"hash_1978eff2ac047e65", "", # "brightness", 0);
+  self function_78233d29(#"hash_1978eff2ac047e65", "", #"brightness", 0);
   self stoprenderoverridebundle(#"hash_75f4d8048e6adb94");
   self notify(#"finished_local_pulse");
   self function_9b51bc6(localclientnum, 0);
@@ -379,7 +379,7 @@ do_vision_local_pulse(localclientnum) {
 }
 
 function_85790e6c(localclientnum) {
-  self endon(#"death", # "disconnect", # "rob_cleanup");
+  self endon(#"death", #"disconnect", #"rob_cleanup");
   wait 1;
   self stop_postfx();
   self function_f4ebfe85(localclientnum);
@@ -393,9 +393,9 @@ vision_pulse_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   if(newval && bnewent && bwastimejump) {
     self.var_1618a13f = # "hash_5a76eaaf7f7e3de5";
     self postfx::playpostfxbundle(self.var_1618a13f);
-    self function_116b95e5(self.var_1618a13f, # "hash_7c1a0903a45d4d45", 0);
-    self function_116b95e5(self.var_1618a13f, # "hash_51ebcff0b5d75894", 0);
-    self function_116b95e5(self.var_1618a13f, # "hash_2efccfad2b32081a", 1);
+    self function_116b95e5(self.var_1618a13f, #"hash_7c1a0903a45d4d45", 0);
+    self function_116b95e5(self.var_1618a13f, #"hash_51ebcff0b5d75894", 0);
+    self function_116b95e5(self.var_1618a13f, #"hash_2efccfad2b32081a", 1);
     return;
   }
 
@@ -452,7 +452,7 @@ function_ea179305(localclientnum, enabled) {
 function_9e2a452e(localclientnum, robname) {
   self notify("55d14ddd4012cb9a");
   self endon("55d14ddd4012cb9a");
-  self endon(#"death", # "disconnect", # "rob_cleanup");
+  self endon(#"death", #"disconnect", #"rob_cleanup");
   speed = function_c505bc89(localclientnum);
   maxradius = getvisionpulsemaxradius(localclientnum);
   fadeout_duration = level.weaponvisionpulse.var_8e0b0827;
@@ -501,7 +501,7 @@ function_9e2a452e(localclientnum, robname) {
       }
 
       if(self postfx::function_556665f2(self.var_1618a13f)) {
-        self function_116b95e5(self.var_1618a13f, # "enemy tint", 1 - alpha);
+        self function_116b95e5(self.var_1618a13f, #"enemy tint", 1 - alpha);
       }
     }
   }

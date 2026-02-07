@@ -36,14 +36,14 @@ init_clientfields() {
     return;
   }
 
-  zm_sq_modules::function_d8383812(#"sc_mh1", 8000, # "mh_cpt1", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_mh2", 8000, # "mh_cpt2", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_mh3", 8000, # "mh_cpt3", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_lb1", 8000, # "lb_cpt1", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_lb2", 8000, # "lb_cpt2", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_lb3", 8000, # "lb_cpt3", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_cl1", 8000, # "cl_cpt1", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  zm_sq_modules::function_d8383812(#"sc_cl2", 8000, # "cl_cpt2", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_mh1", 8000, #"mh_cpt1", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_mh2", 8000, #"mh_cpt2", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_mh3", 8000, #"mh_cpt3", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_lb1", 8000, #"lb_cpt1", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_lb2", 8000, #"lb_cpt2", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_lb3", 8000, #"lb_cpt3", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_cl1", 8000, #"cl_cpt1", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
+  zm_sq_modules::function_d8383812(#"sc_cl2", 8000, #"cl_cpt2", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
 }
 
 init_fx() {
@@ -406,7 +406,7 @@ function_3e31854(e_player, v_color) {
   }
 
   self notify(#"hash_199d88acd54c89d4");
-  self endon(#"death", # "hash_199d88acd54c89d4");
+  self endon(#"death", #"hash_199d88acd54c89d4");
   v_upper = self.origin + (0, 0, 96);
   v_lower = self.origin - (0, 0, 96);
   v_edge = vectorscale(anglesToForward(self.angles), 450);
@@ -526,7 +526,7 @@ function_ec12026f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_6812bd74(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!isDefined(self.var_cc366f3c)) {
-      self playSound(localclientnum, # "hash_5294772867120e07");
+      self playSound(localclientnum, #"hash_5294772867120e07");
       self.var_cc366f3c = self playLoopSound(#"hash_7c88ba38729587c9");
     }
 
@@ -534,7 +534,7 @@ function_6812bd74(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_cc366f3c)) {
-    self playSound(localclientnum, # "hash_6f1b4bead6f32c82");
+    self playSound(localclientnum, #"hash_6f1b4bead6f32c82");
     self stoploopsound(self.var_cc366f3c);
     self.var_cc366f3c = undefined;
   }

@@ -254,7 +254,7 @@ function_c9a2941c(notifyhash) {
 function_e05b2c36() {
   self notify("1aeb0156174acfac");
   self endon("1aeb0156174acfac");
-  self endoncallback(&function_c9a2941c, # "death");
+  self endoncallback(&function_c9a2941c, #"death");
   self.b_nosferatu_damage_fx = 1;
   self val::set(#"nosferatu", "health_regen", 0);
   wait self.var_cd35302f;

@@ -243,7 +243,7 @@ is_staircase_up(attackingplayer = undefined, jammer = undefined) {
   }
 
   self notify(#"emped_vehicle");
-  self endon(#"emped_vehicle", # "death");
+  self endon(#"emped_vehicle", #"death");
   params = spawnStruct();
   emp_duration = 30;
 
@@ -416,7 +416,7 @@ function_53f7a11f(player) {
   self notify("7c6b83f347bc4585");
   self endon("7c6b83f347bc4585");
   self endon(#"death");
-  player endon(#"death", # "exit_vehicle", # "change_seat");
+  player endon(#"death", #"exit_vehicle", #"change_seat");
   var_41f2c809 = 0;
 
   while(true) {
@@ -757,7 +757,7 @@ function_ea4291d3() {
 
 function_b3caeebc(player) {
   self endon(#"death");
-  player endon(#"exit_vehicle", # "death");
+  player endon(#"exit_vehicle", #"death");
 
   while(true) {
     if(self function_ea4291d3()) {
@@ -792,7 +792,7 @@ function_c25f7d1(params) {
     occupant thread function_6aa73a2a(params.projectile, self);
   }
 
-  params.projectile waittill(#"projectile_impact_explode", # "death");
+  params.projectile waittill(#"projectile_impact_explode", #"death");
   occupants = self getvehoccupants();
 
   foreach(occupant in occupants) {
@@ -805,7 +805,7 @@ function_c25f7d1(params) {
 }
 
 function_6aa73a2a(missile, vehicle) {
-  self endon(#"death", # "exit_vehicle");
+  self endon(#"death", #"exit_vehicle");
   missile endon(#"death");
   vehicle endon(#"death");
   range = 8000 - 10;
@@ -1138,7 +1138,7 @@ function_ffdf490c() {
 }
 
 function_5bce3f3a(vehicle, seat_index, var_ddd294e3) {
-  self endon(#"death", # "disconnect", # "exit_vehicle", # "change_seat");
+  self endon(#"death", #"disconnect", #"exit_vehicle", #"change_seat");
   vehicle endon(#"death");
 
   while(true) {
@@ -1181,7 +1181,7 @@ function_41cb03eb(seat_index) {
 }
 
 update_turret_fire(vehicle, seat_index, var_c269692d) {
-  self endon(#"death", # "disconnect", # "exit_vehicle", # "change_seat");
+  self endon(#"death", #"disconnect", #"exit_vehicle", #"change_seat");
   vehicle endon(#"death");
 
   if(vehicle.var_96c0f900[seat_index] == 0) {
@@ -1508,7 +1508,7 @@ function_b8458486(player, eventstruct) {
 }
 
 function_2014e301(player) {
-  player endon(#"hash_27646c99772610b4", # "exit_vehicle", # "disconnect", # "death", # "game_ended");
+  player endon(#"hash_27646c99772610b4", #"exit_vehicle", #"disconnect", #"death", #"game_ended");
   self endon(#"death");
 
   while(true) {
@@ -1671,7 +1671,7 @@ function_17949e01() {
     self waittill(#"beached");
 
     while(true) {
-      waitresult = self waittill(#"touch", # "unbeached");
+      waitresult = self waittill(#"touch", #"unbeached");
 
       if(waitresult._notify == # "touch" && isDefined(waitresult.pm_flags)) {
         time = gettime();
@@ -1928,7 +1928,7 @@ function_b0dd571a() {
 }
 
 function_638d1ade() {
-  self endon(#"death", # "hash_41dbbf5434aab9e0");
+  self endon(#"death", #"hash_41dbbf5434aab9e0");
 
   while(true) {
     if(isDefined(level.deathcircle) && isDefined(level.deathcircleindex)) {
@@ -2030,7 +2030,7 @@ function_260f32b3(exit = 0) {
 }
 
 function_8bb6a990() {
-  self endon(#"death", # "cancel_malfunction", # "hash_3c7ae83e462fe4e2", # "pilot_exit", # "hash_41dbbf5434aab9e0");
+  self endon(#"death", #"cancel_malfunction", #"hash_3c7ae83e462fe4e2", #"pilot_exit", #"hash_41dbbf5434aab9e0");
   wait 5;
   self clientfield::set("flickerlights", 2);
 
@@ -2046,7 +2046,7 @@ function_8bb6a990() {
 function_f46dd7b0() {
   self notify("7568179a9adfe70f");
   self endon("7568179a9adfe70f");
-  self endon(#"death", # "cancel_malfunction", # "hash_41dbbf5434aab9e0");
+  self endon(#"death", #"cancel_malfunction", #"hash_41dbbf5434aab9e0");
 
   if(vehicle_ai::function_329f45a4()) {
     self thread function_8bb6a990();
@@ -2098,7 +2098,7 @@ function_56ee2902(state) {
 function_82224f4b(scale) {
   self notify("43958cae29e09bf1");
   self endon("43958cae29e09bf1");
-  self endon(#"death", # "cancel_malfunction", # "cancel_acceleration", # "hash_41dbbf5434aab9e0");
+  self endon(#"death", #"cancel_malfunction", #"cancel_acceleration", #"hash_41dbbf5434aab9e0");
 
   while(true) {
     accel = anglestoup(self.angles) * scale;
@@ -2248,7 +2248,7 @@ function_e2d16bde(player, eventstruct) {
 
 function_ab36338c(player) {
   self endon(#"death");
-  player endon(#"exit_vehicle", # "change_seat");
+  player endon(#"exit_vehicle", #"change_seat");
   player waittill(#"disconnect");
   self function_2205f6bf(player);
 }
@@ -2256,7 +2256,7 @@ function_ab36338c(player) {
 function_6c8cff7e(normal, origin = self.origin, offset = 0) {
   self notify("4d0917ba596af416");
   self endon("4d0917ba596af416");
-  self endon(#"death", # "hash_7f30c56005fe2b32");
+  self endon(#"death", #"hash_7f30c56005fe2b32");
 
   if(!isDefined(normal)) {
     return 0;
@@ -2459,7 +2459,7 @@ function_1f014f43(params) {
 }
 
 function_2e3fb54c(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   if(!isDefined(params.maxtilt)) {
     params.maxtilt = 25;
@@ -2521,7 +2521,7 @@ function_d344c3f(params) {
 }
 
 function_e291246d(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
 
   while(true) {
     pilot = self getseatoccupant(0);
@@ -2554,7 +2554,7 @@ function_200c3bd0(params) {
 }
 
 function_3a7426cf(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   damagetime = gettime() + 15000;
 
   while(true) {
@@ -2586,7 +2586,7 @@ function_d39845f(params) {
 }
 
 function_b705c816(params) {
-  self endon(#"death", # "state_changed");
+  self endon(#"death", #"state_changed");
 
   if(!isDefined(params)) {
     params = spawnStruct();
@@ -3068,7 +3068,7 @@ function_ee42a973(player) {
 
 function_33a25ecf(owner) {
   owner endon(#"disconnect");
-  self endon(#"death", # "hash_23b61069705a7782");
+  self endon(#"death", #"hash_23b61069705a7782");
 
   while(true) {
     if(!isDefined(self)) {

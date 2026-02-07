@@ -39,11 +39,11 @@ init_quest() {
   level.var_774c21fa = struct::get(#"hash_117cb1e7c329e0ad");
   level.mcnamara = spawn("script_model", level.var_774c21fa.origin);
   level.var_33d3e84a = 0;
-  zm_sq::register(#"hash_5a9580406af2d773", # "step_1", # "hash_5cbd9c892dca9e05", &function_4b16859a, &function_53935f3d);
-  zm_sq::register(#"hash_5a9580406af2d773", # "step_2", # "hash_5cbd99892dca98ec", &function_9235fc9a, &function_fe3de565);
-  zm_sq::register(#"hash_5a9580406af2d773", # "step_3", # "hash_5cbd9a892dca9a9f", &function_2e57632b, &function_3409e90e);
-  zm_sq::register(#"hash_5a9580406af2d773", # "step_4", # "hash_5cbd97892dca9586", &function_7991d694, &function_c2bd8b3d);
-  zm_sq::register(#"hash_5a9580406af2d773", # "step_5", # "hash_5cbd98892dca9739", &function_8ca22055, &function_d8b688e7);
+  zm_sq::register(#"hash_5a9580406af2d773", #"step_1", #"hash_5cbd9c892dca9e05", &function_4b16859a, &function_53935f3d);
+  zm_sq::register(#"hash_5a9580406af2d773", #"step_2", #"hash_5cbd99892dca98ec", &function_9235fc9a, &function_fe3de565);
+  zm_sq::register(#"hash_5a9580406af2d773", #"step_3", #"hash_5cbd9a892dca9a9f", &function_2e57632b, &function_3409e90e);
+  zm_sq::register(#"hash_5a9580406af2d773", #"step_4", #"hash_5cbd97892dca9586", &function_7991d694, &function_c2bd8b3d);
+  zm_sq::register(#"hash_5a9580406af2d773", #"step_5", #"hash_5cbd98892dca9739", &function_8ca22055, &function_d8b688e7);
   zm_sq::start(#"hash_5a9580406af2d773");
 }
 

@@ -123,10 +123,10 @@ monitor_timer(n_timer) {
   wait 12;
 
   foreach(player in getplayers()) {
-    player zm_trial_util::function_128378c9(n_timer, 1, # "hash_c2b77be4cf5b142");
+    player zm_trial_util::function_128378c9(n_timer, 1, #"hash_c2b77be4cf5b142");
   }
 
-  level waittilltimeout(n_timer + 1, # "hash_6ba2e2da302282");
+  level waittilltimeout(n_timer + 1, #"hash_6ba2e2da302282");
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_885fb2c8();

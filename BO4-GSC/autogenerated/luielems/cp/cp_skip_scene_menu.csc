@@ -24,7 +24,7 @@ class ccp_skip_scene_menu: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "cp_skip_scene_menu");
+    cluielem::open(localclientnum, #"cp_skip_scene_menu");
   }
 
   function function_fa582112(localclientnum) {

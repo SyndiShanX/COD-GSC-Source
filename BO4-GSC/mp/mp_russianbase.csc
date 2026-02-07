@@ -118,7 +118,7 @@ function_bfd25720(localclientnum) {
     wait randomintrange(120, 180);
 
     foreach(v_pa in a_v_pa) {
-      playSound(localclientnum, # "hash_5e4a6db5676d1cbd", v_pa);
+      playSound(localclientnum, #"hash_5e4a6db5676d1cbd", v_pa);
     }
   }
 }

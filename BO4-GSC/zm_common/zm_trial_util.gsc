@@ -63,7 +63,7 @@ function_73ff0096() {
 function_2ee2d021() {
   if(!level flag::get(#"trial_failed") && clientfield::get_world_uimodel("ZMHudGlobal.trials.gameState") != 2) {
     clientfield::set_world_uimodel("ZMHudGlobal.trials.failurePlayer", 0);
-    clientfield::set_world_uimodel("ZMHudGlobal.trials.failureReason", # "mp/host_ended_game");
+    clientfield::set_world_uimodel("ZMHudGlobal.trials.failureReason", #"mp/host_ended_game");
     set_game_state(3);
   }
 }
@@ -354,10 +354,10 @@ function_d37a769(var_806e2de0) {
 
 function_7f999aa0(var_806e2de0) {
   slot = self zm_perks::function_c1efcc57(#"specialty_additionalprimaryweapon");
-  var_4493e3e1 = isarray(var_806e2de0.var_724d826b) && isinarray(var_806e2de0.var_724d826b, # "specialty_additionalprimaryweapon");
+  var_4493e3e1 = isarray(var_806e2de0.var_724d826b) && isinarray(var_806e2de0.var_724d826b, #"specialty_additionalprimaryweapon");
 
   if((var_4493e3e1 || slot != -1) && (var_4493e3e1 || var_806e2de0.var_149ec45c[slot] || zm_perks::function_e56d8ef4(#"specialty_additionalprimaryweapon")) && isDefined(var_806e2de0.additional_primary_weapon)) {
-    if(var_4493e3e1 || isinarray(self.var_466b927f, # "specialty_additionalprimaryweapon")) {
+    if(var_4493e3e1 || isinarray(self.var_466b927f, #"specialty_additionalprimaryweapon")) {
       if(self hasweapon(var_806e2de0.additional_primary_weapon)) {
         self notify(#"hash_29c66728ccd27f03", {
           #weapon: var_806e2de0.additional_primary_weapon

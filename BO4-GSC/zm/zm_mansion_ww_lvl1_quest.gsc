@@ -38,7 +38,7 @@ __main__() {
 }
 
 function_716f2019() {
-  level flag::wait_till_any(array(#"power_on1", # "hash_2daf5bdda85cc660"));
+  level flag::wait_till_any(array(#"power_on1", #"hash_2daf5bdda85cc660"));
   level flag::init(#"hash_7305c7f343dd8850");
   level flag::init(#"hash_51efb8481233c40d");
   level flag::init(#"hash_727b0a70b6f41db2");
@@ -113,14 +113,14 @@ function_7706457d(e_player) {
   if(!level flag::get(#"hash_4c1f880bcc6be2d0")) {
     foreach(e_lock in level.var_79f3b34b) {
       if(zombie_utility::is_player_valid(e_player) && e_player function_8b4cc6ae(e_lock.origin, 10, 1, e_lock)) {
-        str_prompt = zm_utility::function_d6046228(#"hash_170f427c6f774cc6", # "hash_182213d7353c3062");
+        str_prompt = zm_utility::function_d6046228(#"hash_170f427c6f774cc6", #"hash_182213d7353c3062");
         self sethintstringforplayer(e_player, str_prompt);
         return true;
       }
     }
 
     if(zombie_utility::is_player_valid(e_player) && e_player function_8b4cc6ae(level.s_ww_lock.origin, 50, 0)) {
-      str_prompt = zm_utility::function_d6046228(#"hash_74088228890cabc3", # "hash_4428bea407adb029");
+      str_prompt = zm_utility::function_d6046228(#"hash_74088228890cabc3", #"hash_4428bea407adb029");
       self sethintstringforplayer(e_player, str_prompt);
       return true;
     }
@@ -153,7 +153,7 @@ function_7310e1e0() {
 }
 
 lock_rotate() {
-  self endon(#"death", # "destroyed");
+  self endon(#"death", #"destroyed");
   self.var_86dbb82b = 1;
   self rotateroll(-90, 0.5);
   self playSound(#"hash_1902d49433a38eba");
@@ -309,7 +309,7 @@ function_8476e19() {
     level waittill(#"hash_7ed0b257f8849c85");
     level flag::set(#"hash_4c1f880bcc6be2d0");
 
-    if(flag::get_all(array(#"hash_7305c7f343dd8850", # "hash_51efb8481233c40d", # "hash_727b0a70b6f41db2", # "hash_6c453062178e1617"))) {
+    if(flag::get_all(array(#"hash_7305c7f343dd8850", #"hash_51efb8481233c40d", #"hash_727b0a70b6f41db2", #"hash_6c453062178e1617"))) {
       level flag::set(#"hash_65224b2f37fb9446");
       continue;
     }

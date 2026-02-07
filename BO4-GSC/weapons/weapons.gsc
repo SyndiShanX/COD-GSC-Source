@@ -124,7 +124,7 @@ function_878d649f(player) {
   }
 
   player.var_18f581bc = gameobjects::get_next_obj_id();
-  objective_add(player.var_18f581bc, "invisible", player.origin, # "weapon_pickup");
+  objective_add(player.var_18f581bc, "invisible", player.origin, #"weapon_pickup");
   objective_setprogress(player.var_18f581bc, 0);
   objective_setinvisibletoall(player.var_18f581bc);
   objective_setvisibletoplayer(player.var_18f581bc, player);
@@ -301,7 +301,7 @@ update_last_held_weapon_timings(newtime) {
         weaponpickedup = 1;
       }
 
-      self stats::function_eec52333(self.currentweapon, # "timeused", totaltime, self.class_num, weaponpickedup);
+      self stats::function_eec52333(self.currentweapon, #"timeused", totaltime, self.class_num, weaponpickedup);
       self.currentweaponstarttime = newtime;
     }
   }
@@ -328,13 +328,13 @@ update_timings(newtime) {
 
   if(isDefined(self.weapon_array_grenade)) {
     for(i = 0; i < self.weapon_array_grenade.size; i++) {
-      self stats::function_eec52333(self.weapon_array_grenade[i], # "timeused", totaltime, self.class_num);
+      self stats::function_eec52333(self.weapon_array_grenade[i], #"timeused", totaltime, self.class_num);
     }
   }
 
   if(isDefined(self.weapon_array_inventory)) {
     for(i = 0; i < self.weapon_array_inventory.size; i++) {
-      self stats::function_eec52333(self.weapon_array_inventory[i], # "timeused", totaltime, self.class_num);
+      self stats::function_eec52333(self.weapon_array_inventory[i], #"timeused", totaltime, self.class_num);
     }
   }
 
@@ -344,7 +344,7 @@ update_timings(newtime) {
 
       if(isDefined(killstreaktype)) {
         killstreakweapon = killstreaks::get_killstreak_weapon(killstreaktype);
-        self stats::function_eec52333(killstreakweapon, # "timeused", totaltime, self.class_num);
+        self stats::function_eec52333(killstreakweapon, #"timeused", totaltime, self.class_num);
       }
     }
   }
@@ -372,7 +372,7 @@ update_timings(newtime) {
 
       foreach(k, v in perksindexarray) {
         if(v == 1 && k >= 0) {
-          self stats::inc_stat(#"itemstats", k, # "stats", # "timeused", # "statvalue", totaltime);
+          self stats::inc_stat(#"itemstats", k, #"stats", #"timeused", #"statvalue", totaltime);
         }
       }
     }
@@ -497,7 +497,7 @@ drop_for_death(attacker, sweapon, smeansofdeath, var_1940b58e = 1) {
 }
 
 function_54abbe5c() {
-  self waittill(#"disconnect", # "game_ended");
+  self waittill(#"disconnect", #"game_ended");
 
   if(isDefined(self) && isDefined(self.var_18f581bc)) {
     gameobjects::release_obj_id(self.var_18f581bc);
@@ -681,7 +681,7 @@ function_f2c53bb2(curweapon) {
       break;
     case # "rocketlauncher":
     case # "grenade":
-      self stats::function_eec52333(curweapon, # "shots", 1, self.class_num, 0);
+      self stats::function_eec52333(curweapon, #"shots", 1, self.class_num, 0);
       break;
     default:
       break;
@@ -723,8 +723,8 @@ track_fire(curweapon) {
   }
 
   if(isDefined(level.var_b10e134d)) {
-    [[level.var_b10e134d]](self, curweapon, # "shots", 1);
-    [[level.var_b10e134d]](self, curweapon, # "hits", self.hits);
+    [[level.var_b10e134d]](self, curweapon, #"shots", 1);
+    [[level.var_b10e134d]](self, curweapon, #"hits", self.hits);
   }
 
   if(isDefined(level.var_4e390265)) {
@@ -753,7 +753,7 @@ track_fire(curweapon) {
 }
 
 function_b1d41bd5(weapon, damagedone) {
-  self stats::function_eec52333(weapon, # "damagedone", damagedone, self.class_num);
+  self stats::function_eec52333(weapon, #"damagedone", damagedone, self.class_num);
 }
 
 on_end_game() {
@@ -774,7 +774,7 @@ event_handler[grenade_pullback] function_5755a808(eventstruct) {
   }
 
   weapon = eventstruct.weapon;
-  self stats::function_eec52333(weapon, # "shots", 1, self.class_num);
+  self stats::function_eec52333(weapon, #"shots", 1, self.class_num);
   self.hasdonecombat = 1;
   self.throwinggrenade = 1;
   self.gotpullbacknotify = 1;
@@ -839,7 +839,7 @@ drop_grenades_to_ground(origin, radius) {
 }
 
 watch_grenade_cancel() {
-  self endon(#"death", # "disconnect", # "grenade_fire");
+  self endon(#"death", #"disconnect", #"grenade_fire");
   waittillframeend();
 
   while(true) {
@@ -873,7 +873,7 @@ watch_offhand_end(weapon) {
     self setoffhandvisible(1);
 
     while(self function_2d96f300(weapon)) {
-      msg = self waittill(#"offhand_end", # "death", # "disconnect", # "grenade_fire", # "weapon_change");
+      msg = self waittill(#"offhand_end", #"death", #"disconnect", #"grenade_fire", #"weapon_change");
 
       if(msg._notify == # "grenade_fire") {
         if(isDefined(self) && isDefined(weapon.var_d69ee9ed) && weapon.var_d69ee9ed && self getweaponammoclip(weapon) > 0) {
@@ -923,7 +923,7 @@ function_6dafe6d6(grenade, weapon) {
 
 begin_grenade_tracking() {
   self notify(#"begin_grenade_tracking");
-  self endon(#"begin_grenade_tracking", # "death", # "disconnect", # "grenade_throw_cancelled");
+  self endon(#"begin_grenade_tracking", #"death", #"disconnect", #"grenade_throw_cancelled");
   starttime = gettime();
   self thread watch_grenade_cancel();
   waitresult = self waittill(#"grenade_fire");
@@ -981,7 +981,7 @@ begin_grenade_tracking() {
     case # "frag_grenade":
       level.globalfraggrenadesfired++;
     case # "sticky_grenade":
-      self stats::function_e24eec31(weapon, # "used", 1);
+      self stats::function_e24eec31(weapon, #"used", 1);
       grenade setteam(self.pers[# "team"]);
       grenade setowner(self);
     case # "explosive_bolt":
@@ -992,7 +992,7 @@ begin_grenade_tracking() {
       break;
     case # "flash_grenade":
     case # "concussion_grenade":
-      self stats::function_e24eec31(weapon, # "used", 1);
+      self stats::function_e24eec31(weapon, #"used", 1);
       break;
   }
 
@@ -1046,7 +1046,7 @@ event_handler[grenade_fire] function_e2b6d5a5(eventstruct) {
       grenade.lastweaponbeforetoss = self function_fe1f5cc();
       grenade thread check_hatchet_bounce();
       grenade thread check_stuck_to_player(0, 0, weapon);
-      self stats::function_e24eec31(weapon, # "used", 1);
+      self stats::function_e24eec31(weapon, #"used", 1);
       break;
     default:
       break;
@@ -1071,9 +1071,9 @@ function_43ec7f33(str_notify) {
 }
 
 function_5ed178fd(owner) {
-  owner endon(#"death", # "stuck_to_player");
+  owner endon(#"death", #"stuck_to_player");
   self endon(#"death");
-  owner endoncallback(&function_43ec7f33, # "death", # "stuck_to_player");
+  owner endoncallback(&function_43ec7f33, #"death", #"stuck_to_player");
 
   while(true) {
     waitframe(1);
@@ -1135,7 +1135,7 @@ check_stuck_to_player(deleteonteamchange, awardscoreevent, weapon) {
 }
 
 check_hatchet_bounce() {
-  self endon(#"stuck_to_player", # "death");
+  self endon(#"stuck_to_player", #"death");
   self waittill(#"grenade_bounce");
   self.bounced = 1;
 }
@@ -1207,9 +1207,9 @@ turn_grenade_into_a_dud(weapon, isthrowngrenade, player) {
       }
 
       if(isthrowngrenade) {
-        player iprintlnbold(#"hash_10012bedb9f60e99", " " + timeleft + " ", # "hash_79a58948c3b976f5");
+        player iprintlnbold(#"hash_10012bedb9f60e99", " " + timeleft + " ", #"hash_79a58948c3b976f5");
       } else {
-        player iprintlnbold(#"hash_255050263c8cd26d", " " + timeleft + " ", # "hash_79a58948c3b976f5");
+        player iprintlnbold(#"hash_255050263c8cd26d", " " + timeleft + " ", #"hash_79a58948c3b976f5");
       }
 
       self makegrenadedud();
@@ -1380,7 +1380,7 @@ damage_ent(einflictor, eattacker, idamage, smeansofdeath, weapon, damagepos, dam
 }
 
 on_damage(eattacker, einflictor, weapon, meansofdeath, damage) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(isDefined(level._custom_weapon_damage_func)) {
     is_weapon_registered = self[[level._custom_weapon_damage_func]](eattacker, einflictor, weapon, meansofdeath, damage);
@@ -1405,7 +1405,7 @@ on_damage(eattacker, einflictor, weapon, meansofdeath, damage) {
 }
 
 play_concussion_sound(duration) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   concussionsound = spawn("script_origin", (0, 0, 1));
   concussionsound.origin = self.origin;
   concussionsound linkto(self);
@@ -1783,7 +1783,7 @@ ninebang_doninebang(attacker, weapon, cooktime) {
 
 track_multi_detonation(ownerent, weapon, cooktime) {
   self endon(#"trophy_destroyed");
-  waitresult = self waittill(#"explode", # "death");
+  waitresult = self waittill(#"explode", #"death");
 
   if(waitresult._notify == "death") {
     return;

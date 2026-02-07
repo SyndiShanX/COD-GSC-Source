@@ -51,7 +51,7 @@ perks_behind_door() {
     return;
   }
 
-  level endon(#"magic_door_power_up_grabbed", # "population_count_step_complete");
+  level endon(#"magic_door_power_up_grabbed", #"population_count_step_complete");
   level thread powerup_grabbed_watcher();
   level flag::wait_till("initial_blackscreen_passed");
   level.var_2cc90a51 = [];

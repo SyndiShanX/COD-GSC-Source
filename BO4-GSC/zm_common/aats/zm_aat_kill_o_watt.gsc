@@ -13,7 +13,7 @@
 #namespace zm_aat_kill_o_watt;
 
 autoexec __init__system__() {
-  system::register("zm_aat_kill_o_watt", &__init__, undefined, # "aat");
+  system::register("zm_aat_kill_o_watt", &__init__, undefined, #"aat");
 }
 
 __init__() {

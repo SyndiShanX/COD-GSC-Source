@@ -225,7 +225,7 @@ function_f3e2696f(ent, weapon, weapon_options, timeout, var_1e89628f, var_1d78d3
   }
 
   while(true) {
-    result = self waittilltimeout(timeout, # "grenade_pullback", # "offhand_fire", # "offhand_end");
+    result = self waittilltimeout(timeout, #"grenade_pullback", #"offhand_fire", #"offhand_end");
 
     if(result._notify == # "timeout") {
       break;

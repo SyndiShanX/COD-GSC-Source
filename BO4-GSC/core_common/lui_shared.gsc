@@ -100,7 +100,7 @@ play_animation(menu, str_anim) {
     str_new_anim = "";
   }
 
-  self setluimenudata(menu, # "current_animation", str_new_anim);
+  self setluimenudata(menu, #"current_animation", str_new_anim);
 }
 
 set_color(menu, color) {
@@ -143,10 +143,10 @@ set_global(str_menu_id, str_variable_id, value) {
 
 timer(n_time, str_endon, x = 1080, y = 200, height = 60) {
   lui = self openluimenu("HudElementTimer");
-  self setluimenudata(lui, # "x", x);
-  self setluimenudata(lui, # "y", y);
-  self setluimenudata(lui, # "height", height);
-  self setluimenudata(lui, # "time", gettime() + int(n_time * 1000));
+  self setluimenudata(lui, #"x", x);
+  self setluimenudata(lui, #"y", y);
+  self setluimenudata(lui, #"height", height);
+  self setluimenudata(lui, #"time", gettime() + int(n_time * 1000));
 
   if(isDefined(str_endon)) {
     self waittilltimeout(n_time, str_endon);
@@ -302,7 +302,7 @@ _play_movie_for_player(str_movie, str_type, show_black_screen, b_looping, b_skip
       n_start_time = gettime();
 
       if(isDefined(n_timeout)) {
-        waitresult = self waittilltimeout(n_timeout, # "menuresponse");
+        waitresult = self waittilltimeout(n_timeout, #"menuresponse");
       } else {
         waitresult = self waittill(#"menuresponse");
       }
@@ -473,7 +473,7 @@ screen_close_menu() {
 
 _screen_close_menu() {
   self notify(#"_screen_fade");
-  self endon(#"_screen_fade", # "disconnect");
+  self endon(#"_screen_fade", #"disconnect");
 
   if(isDefined(self.screen_fade_menus)) {
     foreach(str_menu_id, lui_menu in self.screen_fade_menus) {
@@ -490,7 +490,7 @@ _screen_close_menu() {
 
 _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_force_close_menu, str_menu_id = "default", var_b675738a = 0) {
   self notify("_screen_fade_" + str_menu_id);
-  self endon("_screen_fade_" + str_menu_id, # "disconnect");
+  self endon("_screen_fade_" + str_menu_id, #"disconnect");
 
   if(!isDefined(self.screen_fade_menus)) {
     self.screen_fade_menus = [];
@@ -545,10 +545,10 @@ _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_force_close_menu,
   drawhud = var_b675738a ? 1 : 0;
 
   if(isint(lui_menu)) {
-    self setluimenudata(lui_menu, # "startalpha", n_start_alpha);
-    self setluimenudata(lui_menu, # "endalpha", n_target_alpha);
-    self setluimenudata(lui_menu, # "fadeovertime", n_time_ms);
-    self setluimenudata(lui_menu, # "drawhud", drawhud);
+    self setluimenudata(lui_menu, #"startalpha", n_start_alpha);
+    self setluimenudata(lui_menu, #"endalpha", n_target_alpha);
+    self setluimenudata(lui_menu, #"fadeovertime", n_time_ms);
+    self setluimenudata(lui_menu, #"drawhud", drawhud);
   } else {
     [[lui_menu]] - > set_startalpha(self, n_start_alpha);
     [[lui_menu]] - > set_endalpha(self, n_target_alpha);
@@ -573,7 +573,7 @@ _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_force_close_menu,
   }
 
   if(isint(lui_menu)) {
-    self setluimenudata(lui_menu, # "fadeovertime", 0);
+    self setluimenudata(lui_menu, #"fadeovertime", 0);
   } else {
     [[lui_menu]] - > set_fadeovertime(self, 0);
   }
@@ -604,10 +604,10 @@ _one_screen_fade_per_network_frame(s_menu) {
 }
 
 open_generic_script_dialog(title, description) {
-  self endoncallback(&function_5ce0a623, # "close_generic_script_dialog", # "disconnect");
+  self endoncallback(&function_5ce0a623, #"close_generic_script_dialog", #"disconnect");
   dialog = self openluimenu("ScriptMessageDialog_Compact");
-  self setluimenudata(dialog, # "title", title);
-  self setluimenudata(dialog, # "description", description);
+  self setluimenudata(dialog, #"title", title);
+  self setluimenudata(dialog, #"description", description);
   self.var_520fb18c = dialog;
 
   do {

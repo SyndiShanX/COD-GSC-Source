@@ -8,7 +8,7 @@
 #namespace blightfatherinterface;
 
 registerblightfatherinterfaceattributes() {
-  ai::registermatchedinterface(#"blight_father", # "tongue_grab_enabled", 1, array(1, 0));
-  ai::registermatchedinterface(#"blight_father", # "lockdown_enabled", 1, array(1, 0), &archetypeblightfather::function_b95978a7);
-  ai::registermatchedinterface(#"blight_father", # "gravity", "normal", array("low", "normal"), &archetypeblightfather::function_3e8300e9);
+  ai::registermatchedinterface(#"blight_father", #"tongue_grab_enabled", 1, array(1, 0));
+  ai::registermatchedinterface(#"blight_father", #"lockdown_enabled", 1, array(1, 0), &archetypeblightfather::function_b95978a7);
+  ai::registermatchedinterface(#"blight_father", #"gravity", "normal", array("low", "normal"), &archetypeblightfather::function_3e8300e9);
 }

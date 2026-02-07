@@ -1260,7 +1260,7 @@ function give_loadout(team, weaponclass) {
 
   if(function_87bcb1b()) {
     assert(isDefined(self.curclass));
-    self function_d7c205b9(self.curclass, # "give_loadout");
+    self function_d7c205b9(self.curclass, #"give_loadout");
     var_c8f2f688 = 1;
 
     if(level.var_8314ef9f === 1) {

@@ -455,7 +455,7 @@ function_8c5b87a7(localclientnum) {
     level beam::kill(self.var_ca2681ca, "tag_origin", level.var_90bda347, "tag_origin", "beam8_zm_be_a_t_a");
     level beam::kill(self.var_ca2681ca, "tag_origin", level.var_90bda347, "tag_origin", "beam8_zm_be_a_t_b");
     var_62b51ea6 = spawn(localclientnum, self.origin, "script_origin");
-    var_62b51ea6 playSound(localclientnum, # "hash_15ca81cba1081bc2");
+    var_62b51ea6 playSound(localclientnum, #"hash_15ca81cba1081bc2");
     var_62b51ea6 thread function_e8a1c9e1();
     self.var_ca2681ca delete();
     self.var_ca2681ca = undefined;
@@ -480,7 +480,7 @@ function_c6932c3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_e8071e64(localclientnum) {
   self notify(#"hash_2bb8be6b846aed93");
-  self endon(#"hash_2bb8be6b846aed93", # "death");
+  self endon(#"hash_2bb8be6b846aed93", #"death");
   assert(isDefined(level.var_90bda347));
 
   if(!isDefined(level.var_90bda347)) {
@@ -515,12 +515,12 @@ function_e8071e64(localclientnum) {
     level beam::function_cfb2f62a(localclientnum, self.var_ca2681ca, "tag_origin", level.var_90bda347, "tag_origin", "beam8_zm_be_a");
   }
 
-  self playSound(localclientnum, # "hash_65dbdd02d1dccf42");
+  self playSound(localclientnum, #"hash_65dbdd02d1dccf42");
   self thread function_ff52ba5a(localclientnum);
 }
 
 function_a96b063f() {
-  level endon(#"hash_47a81f08f1d6531a", # "intermission");
+  level endon(#"hash_47a81f08f1d6531a", #"intermission");
 
   while(isDefined(self) && isDefined(self.var_ca2681ca)) {
     self.var_ca2681ca.origin = self gettagorigin("tag_fx_beam");
@@ -610,7 +610,7 @@ skullquest_ritual_(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
     self function_116b95e5(#"hash_349a56ada2bc0bc8", "Reveal Threshold", 1);
 
     if(self zm_utility::function_f8796df3(localclientnum)) {
-      self playSound(localclientnum, # "hash_6448985393417e0c");
+      self playSound(localclientnum, #"hash_6448985393417e0c");
       self.var_8ff4b42c = self playLoopSound(#"hash_3c4934dafbb5efee");
     }
 
@@ -623,7 +623,7 @@ skullquest_ritual_(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
       self.var_8ff4b42c = undefined;
     }
 
-    self playSound(localclientnum, # "hash_286c32a151d527cf");
+    self playSound(localclientnum, #"hash_286c32a151d527cf");
   }
 
   self function_116b95e5(#"hash_349a56ada2bc0bc8", "Reveal Threshold", 0);
@@ -701,7 +701,7 @@ function_e3c6c272(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_ae2a3a29(localclientnum) {
-  self endon(#"hash_7541447588c20db8", # "death");
+  self endon(#"hash_7541447588c20db8", #"death");
 
   while(true) {
     if(!isalive(self)) {
@@ -750,7 +750,7 @@ boss_player_snow_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 }
 
 function_7f21fc5b(localclientnum, str_type) {
-  self endon(#"boss_end_snow_fx", # "death");
+  self endon(#"boss_end_snow_fx", #"death");
 
   while(true) {
     if(!isalive(self)) {

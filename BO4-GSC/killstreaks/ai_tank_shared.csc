@@ -135,7 +135,7 @@ tank_change_control(localclientnum, oldval, newval, bnewent, binitialsnap, field
     self function_d309e55a("tag_turret_base_pivot", 1);
     self function_d309e55a("tag_turret_constraint_base", 1);
     self function_d309e55a("tag_turret_constrained_barrel", 1);
-    playSound(localclientnum, # "hash_a919be8bee9e599", self.origin);
+    playSound(localclientnum, #"hash_a919be8bee9e599", self.origin);
     return;
   }
 
@@ -143,7 +143,7 @@ tank_change_control(localclientnum, oldval, newval, bnewent, binitialsnap, field
   self function_d309e55a("tag_turret_base_pivot", 0);
   self function_d309e55a("tag_turret_constraint_base", 0);
   self function_d309e55a("tag_turret_constrained_barrel", 0);
-  playSound(localclientnum, # "hash_a919be8bee9e599", self.origin);
+  playSound(localclientnum, #"hash_a919be8bee9e599", self.origin);
 }
 
 death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -159,7 +159,7 @@ death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastime
 
 function_407a7b51(localclientnum) {
   self.immobile_fx = util::playFXOnTag(localclientnum, level.var_400ded61._ai_tank_fx[# "immobile"], self, "tag_body");
-  playSound(localclientnum, # "veh_talon_shutdown", self.origin);
+  playSound(localclientnum, #"veh_talon_shutdown", self.origin);
 }
 
 function_7713b297(localclientnum) {

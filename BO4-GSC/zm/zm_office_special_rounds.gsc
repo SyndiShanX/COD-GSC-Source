@@ -234,7 +234,7 @@ function_6b3512d() {
   e_player = namespace_8f53e87b::function_d62aaf66();
 
   if(isDefined(e_player)) {
-    e_player thread zm_audio::create_and_play_dialog(#"generic", # "response_positive");
+    e_player thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");
   }
 }
 

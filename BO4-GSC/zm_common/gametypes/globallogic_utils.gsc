@@ -10,7 +10,7 @@
 #namespace globallogic_utils;
 
 testshock() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   for(;;) {
     wait 3;
@@ -25,7 +25,7 @@ testshock() {
 }
 
 testhps() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   hps = [];
   hps[hps.size] = "radar";
   hps[hps.size] = "artillery";
@@ -130,7 +130,7 @@ function isvalidclass(vclass) {
 }
 
 playtickingsound(gametype_tick_sound) {
-  self endon(#"death", # "stop_ticking");
+  self endon(#"death", #"stop_ticking");
   level endon(#"game_ended");
   time = level.bombtimer;
 

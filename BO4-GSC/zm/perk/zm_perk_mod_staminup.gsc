@@ -16,6 +16,6 @@ __init__() {
 }
 
 enable_mod_staminup_perk_for_level() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_staminup", "mod_marathon", # "perk_staminup", # "specialty_staminup", 2500);
-  zm_perks::function_2ae97a14(#"specialty_mod_staminup", array(#"specialty_unlimitedsprint", # "specialty_sprintfire"));
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_staminup", "mod_marathon", #"perk_staminup", #"specialty_staminup", 2500);
+  zm_perks::function_2ae97a14(#"specialty_mod_staminup", array(#"specialty_unlimitedsprint", #"specialty_sprintfire"));
 }

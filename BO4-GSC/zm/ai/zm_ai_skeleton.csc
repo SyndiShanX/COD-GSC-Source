@@ -52,7 +52,7 @@ function_d83c0144(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.fx = function_239993de(localclientnum, "zm_ai/fx8_spartoi_reassemble_displace_trail", self, "tag_origin");
 
     if(!isDefined(self.var_45dc5e53)) {
-      self playSound(0, # "hash_6804d485c5a3300a");
+      self playSound(0, #"hash_6804d485c5a3300a");
       self.var_45dc5e53 = self playLoopSound(#"hash_2ee9559ba02d2e9e");
     }
 
@@ -80,7 +80,7 @@ function_9e6319c8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     angles = self.angles;
     forward = anglesToForward(angles);
     up = anglestoup(angles);
-    playSound(localclientnum, # "hash_72db6f3f0e602a33", point);
+    playSound(localclientnum, #"hash_72db6f3f0e602a33", point);
     playFX(localclientnum, "impacts/fx8_bul_impact_metal_sm", point, forward, up);
   }
 }

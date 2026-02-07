@@ -116,7 +116,7 @@ death_suicide_crash(params) {
   self setmaxaccelerationscale(50 / self getdefaultacceleration());
   self setspeed(self.settings.defaultmovespeed);
   self function_a57c34b7(goalpos, 0);
-  self waittilltimeout(3.5, # "near_goal", # "veh_collision");
+  self waittilltimeout(3.5, #"near_goal", #"veh_collision");
   self setmaxspeedscale(0.1);
   self setspeed(0.1);
   self vehicle_ai::clearallmovement();
@@ -125,7 +125,7 @@ death_suicide_crash(params) {
 }
 
 state_driving_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   if(isDefined(self.var_b4c9d62) && self.var_b4c9d62) {
     return;
@@ -185,7 +185,7 @@ cobra_retract() {
 }
 
 state_emped_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   angles = self gettagangles("tag_turret");
   self turretsettargetangles(0, (45, angles[1] - self.angles[1], 0));
   angles = self gettagangles("tag_gunner_turret1");
@@ -200,7 +200,7 @@ state_stationary_enter(params) {
 }
 
 state_stationary_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   self notify(#"stop_rocket_firing_thread");
   vehicle_ai::clearalllookingandtargeting();
   vehicle_ai::clearallmovement();
@@ -310,7 +310,7 @@ turretfireupdate() {
     return;
   }
 
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   self turretsetontargettolerance(0, 7);
   self turretsetontargettolerance(1, 7);
 
@@ -362,7 +362,7 @@ turretfireupdate() {
 }
 
 state_combat_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   lasttimechangeposition = 0;
   self.shouldgotonewposition = 0;
   self.lasttimetargetinsight = 0;
@@ -510,7 +510,7 @@ function_64609aab(entity, enemy) {
 
 aim_and_fire_rocket_launcher(aim_time) {
   self notify(#"stop_rocket_firing_thread");
-  self endon(#"death", # "change_state", # "stop_rocket_firing_thread");
+  self endon(#"death", #"change_state", #"stop_rocket_firing_thread");
 
   if(!self.turretontarget) {
     wait aim_time;
@@ -545,7 +545,7 @@ waittill_weapon_lock_or_timeout(wait_time) {
       locking_on_notify = "locking on";
     }
 
-    self waittilltimeout(wait_time, # "damage", locking_on_notify, locked_on_notify);
+    self waittilltimeout(wait_time, #"damage", locking_on_notify, locked_on_notify);
     locked_on_to_me_just_changed = previous_locked_on_to_me != self.locked_on && self.locked_on;
     locking_on_to_me_just_changed = previous_locking_on_to_me != self.locking_on && self.locking_on;
     perform_evasion_reaction_wait = reacting_to_locks && locked_on_to_me_just_changed || reacting_to_locking && locking_on_to_me_just_changed;
@@ -562,11 +562,11 @@ wait_evasion_reaction_time() {
 
 firerocketlauncher(enemy) {
   self notify(#"stop_rocket_firing_thread");
-  self endon(#"death", # "change_state", # "stop_rocket_firing_thread");
+  self endon(#"death", #"change_state", #"stop_rocket_firing_thread");
 
   if(isDefined(enemy)) {
     self turretsettarget(0, enemy);
-    self waittilltimeout(1, # "turret_on_target");
+    self waittilltimeout(1, #"turret_on_target");
     self playSound(#"hash_713f03be0cf78d55");
     wait 1.2;
 
@@ -920,8 +920,8 @@ getnextmoveposition_tactical(enemy) {
 
 path_update_interrupt_by_attacker() {
   self notify(#"path_update_interrupt_by_attacker");
-  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node", # "amws_end_interrupt_watch", # "path_update_interrupt_by_attacker");
-  self waittill(#"locking on", # "missile_lock", # "damage");
+  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node", #"amws_end_interrupt_watch", #"path_update_interrupt_by_attacker");
+  self waittill(#"locking on", #"missile_lock", #"damage");
 
   if(self.locked_on || self.locking_on) {
     self.debug_ai_move_to_points_considered = [];
@@ -939,7 +939,7 @@ path_update_interrupt_by_attacker() {
 
 path_update_interrupt() {
   self notify(#"path_update_interrupt_by_attacker");
-  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node", # "amws_end_interrupt_watch", # "path_update_interrupt_by_attacker");
+  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node", #"amws_end_interrupt_watch", #"path_update_interrupt_by_attacker");
   wait 1;
 
   while(true) {

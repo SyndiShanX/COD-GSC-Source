@@ -10,7 +10,7 @@
 #namespace zm_bgb_conflagration_liquidation;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_conflagration_liquidation", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_conflagration_liquidation", &__init__, undefined, #"bgb");
 }
 
 __init__() {

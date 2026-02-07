@@ -600,7 +600,7 @@ zodcompanionsetdesiredstancetostand(behaviortreeentity) {
 }
 
 zod_companion_revive_player(player) {
-  self endon(#"death", # "revive_terminated", # "end_game");
+  self endon(#"death", #"revive_terminated", #"end_game");
 
   if(!(isDefined(self.reviving_a_player) && self.reviving_a_player)) {
     self.reviving_a_player = 1;
@@ -664,7 +664,7 @@ zod_companion_revive_player(player) {
 }
 
 zod_companion_monitor_revive_attempt(player) {
-  self endon(#"death", # "revive_terminated");
+  self endon(#"death", #"revive_terminated");
 
   while(true) {
     if(!isDefined(player)) {

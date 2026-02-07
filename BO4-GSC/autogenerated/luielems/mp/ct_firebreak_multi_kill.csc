@@ -8,7 +8,7 @@
 
 class cct_firebreak_multi_kill: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "ct_firebreak_multi_kill");
+    cluielem::open(localclientnum, #"ct_firebreak_multi_kill");
   }
 
   function function_fa582112(localclientnum) {

@@ -223,7 +223,7 @@ function_817220a9(a_ents) {
 }
 
 function_1abf5396(var_cba19e17) {
-  self endon(#"death", # "hash_4a3551167bd870c2");
+  self endon(#"death", #"hash_4a3551167bd870c2");
 
   while(true) {
     waitresult = self waittill(#"trigger");
@@ -412,7 +412,7 @@ function_dde2edd8() {
     });
 
     if(isDefined(self.var_8e350723) && self.var_8e350723) {
-      self waittilltimeout(10, # "turn_off");
+      self waittilltimeout(10, #"turn_off");
     } else {
       self waittill(#"turn_off");
     }
@@ -686,20 +686,20 @@ function_37aed203(var_f1404f73, b_use_spawn_fx = 1) {
 
 function_67710e66(b_enable = 0) {
   if(!b_enable) {
-    level zm_audio::function_6191af93(#"brutus", # "react", "", "");
-    level zm_audio::function_6191af93(#"brutus", # "helm_off", "", "");
-    level zm_audio::function_6191af93(#"brutus", # "smoke_react", "", "");
+    level zm_audio::function_6191af93(#"brutus", #"react", "", "");
+    level zm_audio::function_6191af93(#"brutus", #"helm_off", "", "");
+    level zm_audio::function_6191af93(#"brutus", #"smoke_react", "", "");
     return;
   }
 
-  level zm_audio::function_e1666976(#"brutus", # "react");
-  level zm_audio::function_e1666976(#"brutus", # "helm_off");
-  level zm_audio::function_e1666976(#"brutus", # "smoke_react");
+  level zm_audio::function_e1666976(#"brutus", #"react");
+  level zm_audio::function_e1666976(#"brutus", #"helm_off");
+  level zm_audio::function_e1666976(#"brutus", #"smoke_react");
 }
 
 function_5d3c7c04() {
   while(true) {
-    s_result = level waittill(#"brutus_locked", # "unlock_purchased");
+    s_result = level waittill(#"brutus_locked", #"unlock_purchased");
 
     if(s_result.s_stub.targetname !== "crafting_trigger") {
       continue;

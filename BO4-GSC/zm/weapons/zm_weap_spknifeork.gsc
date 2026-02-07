@@ -16,7 +16,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  zm_melee_weapon::init(#"spknifeork", # "spknifeork_flourish", 1000, "spknifeork", undefined, "spknifeork", undefined);
+  zm_melee_weapon::init(#"spknifeork", #"spknifeork_flourish", 1000, "spknifeork", undefined, "spknifeork", undefined);
   zm::function_84d343d(#"spknifeork", &function_958c4578);
 }
 

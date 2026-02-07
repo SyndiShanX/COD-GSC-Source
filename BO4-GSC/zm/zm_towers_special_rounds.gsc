@@ -226,7 +226,7 @@ function_93b3cc13(var_d25bbdd5) {
     println("<dev string:x38>" + var_f40360e8);
 
     if(level.var_f8ae1232 > 1) {
-      zm_round_spawning::function_b4a8f95a(array(#"gladiator_marauder", # "gladiator_destroyer", # "tiger"), var_f40360e8, &function_66d172e9, &function_93b3cc13, &function_f8ae1232, &zombie_gladiator_util::function_5d0001ad);
+      zm_round_spawning::function_b4a8f95a(array(#"gladiator_marauder", #"gladiator_destroyer", #"tiger"), var_f40360e8, &function_66d172e9, &function_93b3cc13, &function_f8ae1232, &zombie_gladiator_util::function_5d0001ad);
     } else {
       zm_round_spawning::function_b4a8f95a(#"gladiator_marauder", var_f40360e8, &function_66d172e9, &function_93b3cc13, &function_f8ae1232, &zombie_gladiator_util::function_5d0001ad);
     }
@@ -377,7 +377,7 @@ function_ec08dc3a(s_params) {
 }
 
 function_85324f75(var_8657f7ff = 0) {
-  level endoncallback(&function_3cba3938, # "kill_special_round_fog", # "end_game");
+  level endoncallback(&function_3cba3938, #"kill_special_round_fog", #"end_game");
   self endon(#"death");
 
   if(!var_8657f7ff) {

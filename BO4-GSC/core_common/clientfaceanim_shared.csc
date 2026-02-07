@@ -54,9 +54,9 @@ on_player_shutdown(localclientnum) {
 buildandvalidatefacialanimationlist(localclientnum) {
   if(!isDefined(level.__clientfacialanimationslist)) {
     level.__clientfacialanimationslist = [];
-    level.__clientfacialanimationslist[# "combat"] = array(#"ai_t8_face_hero_generic_idle_1", # "ai_t8_face_hero_generic_idle_2", # "ai_t8_face_hero_generic_idle_3");
-    level.__clientfacialanimationslist[# "combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", # "ai_t8_face_hero_aim_fire_2");
-    level.__clientfacialanimationslist[# "death"] = array(#"ai_t8_face_hero_dth_1", # "ai_t8_face_hero_dth_2", # "ai_t8_face_hero_dth_3");
+    level.__clientfacialanimationslist[# "combat"] = array(#"ai_t8_face_hero_generic_idle_1", #"ai_t8_face_hero_generic_idle_2", #"ai_t8_face_hero_generic_idle_3");
+    level.__clientfacialanimationslist[# "combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", #"ai_t8_face_hero_aim_fire_2");
+    level.__clientfacialanimationslist[# "death"] = array(#"ai_t8_face_hero_dth_1", #"ai_t8_face_hero_dth_2", #"ai_t8_face_hero_dth_3");
     level.__clientfacialanimationslist[# "melee"] = array(#"ai_t8_face_hero_melee_1");
     level.__clientfacialanimationslist[# "pain"] = array(#"ai_t8_face_hero_pain_1");
     level.__clientfacialanimationslist[# "swimming"] = array(#"mp_t8_face_hero_swim_idle_1");

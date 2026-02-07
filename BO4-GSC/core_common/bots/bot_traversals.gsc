@@ -53,8 +53,8 @@ cancel() {
 }
 
 fallback_traversal(endpos) {
-  self endon(#"death", # "hash_a729d7d4c6847f6", # "hash_37fc5d1ffce4acaf");
-  self endoncallback(&release_control, # "entering_last_stand", # "new_shot");
+  self endon(#"death", #"hash_a729d7d4c6847f6", #"hash_37fc5d1ffce4acaf");
+  self endoncallback(&release_control, #"entering_last_stand", #"new_shot");
   level endon(#"game_ended");
   self teleport(endpos, "Legacy fallback");
   self botreleasemanualcontrol();
@@ -76,8 +76,8 @@ function_c3452ef9(params) {
 }
 
 volume_traversal(params) {
-  self endon(#"death", # "hash_a729d7d4c6847f6", # "hash_37fc5d1ffce4acaf");
-  self endoncallback(&release_control, # "entering_last_stand", # "new_shot");
+  self endon(#"death", #"hash_a729d7d4c6847f6", #"hash_37fc5d1ffce4acaf");
+  self endoncallback(&release_control, #"entering_last_stand", #"new_shot");
   level endon(#"game_ended");
   self.bot.traversal = params;
   self bot_action::reset();
@@ -142,7 +142,7 @@ release_control(notifyhash) {
 }
 
 traversal_timeout(params) {
-  self endon(#"death", # "hash_a729d7d4c6847f6", # "hash_612231aa5def85e2");
+  self endon(#"death", #"hash_a729d7d4c6847f6", #"hash_612231aa5def85e2");
   level endon(#"game_ended");
   wait 3.5;
 

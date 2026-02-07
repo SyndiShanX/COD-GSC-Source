@@ -148,7 +148,7 @@ j_fore_le_01() {
     }
 
     if(!e_player isinmovemode("ufo", "noclip")) {
-      level thread ct_bots::activate_bots(level.var_105dad71, # "axis");
+      level thread ct_bots::activate_bots(level.var_105dad71, #"axis");
       level thread spawn_robot(e_player);
     }
 

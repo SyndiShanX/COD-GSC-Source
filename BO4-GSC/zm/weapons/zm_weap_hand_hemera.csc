@@ -56,7 +56,7 @@ hemera_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 
   playFX(localclientnum, level._effect[# "hemera_proj_impact"], v_org, v_ang);
-  playSound(localclientnum, # "hash_6e5604c8cf7c55c0", self.origin);
+  playSound(localclientnum, #"hash_6e5604c8cf7c55c0", self.origin);
 }
 
 function_ab086ad8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -71,7 +71,7 @@ function_ab086ad8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_1550c80f = util::playFXOnTag(localclientnum, level._effect[# "hemera_proj_death_head"], self, "j_eyeball_le");
     }
 
-    self playSound(localclientnum, # "hash_70717b71f19db790");
+    self playSound(localclientnum, #"hash_70717b71f19db790");
     return;
   }
 
@@ -86,7 +86,7 @@ function_ab086ad8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self)) {
-    self playSound(localclientnum, # "hash_3fbc22745dc90009");
+    self playSound(localclientnum, #"hash_3fbc22745dc90009");
 
     if(isDefined(self gettagorigin("j_spine4"))) {
       util::playFXOnTag(localclientnum, level._effect[# "hash_1c1dafe5ebd971f8"], self, "j_spine4");
@@ -167,7 +167,7 @@ function_68e9fdbb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_70e72eac(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self function_f1f34b1b(localclientnum);
 
   if(newval > 0) {
@@ -203,7 +203,7 @@ function_4662df7a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self endon(#"death", # "hash_3cbfa1076dfa868b");
+  self endon(#"death", #"hash_3cbfa1076dfa868b");
 
   if(!isDefined(self.var_4cd8e6cb)) {
     self.var_4cd8e6cb = self playLoopSound(#"hash_289b15dba7547241");

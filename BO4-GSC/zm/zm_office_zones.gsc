@@ -44,7 +44,7 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("labs_hallway2", "labs_zone2", "lab2_level3", 0);
   zm_zonemgr::add_adjacent_zone("labs_hallway1", "labs_zone3", "lab3_level3", 0);
   zm_zonemgr::add_adjacent_zone("labs_zone1", "labs_hallway1", "lab1_level3", 1);
-  zm_zonemgr::add_adjacent_zone("cage", "cage_upper", # "hash_537cc10c9deca9da", 0);
+  zm_zonemgr::add_adjacent_zone("cage", "cage_upper", #"hash_537cc10c9deca9da", 0);
   level.zones[# "conference_level1"].var_305d6168 = 4;
   level.zones[# "hallway_level1"].var_305d6168 = 4;
   level thread function_d03a6fa("conference_level1", "offices_level1", "conf1_offices1");

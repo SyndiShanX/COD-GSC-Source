@@ -130,7 +130,7 @@ stoppoisoningandflareonspawn() {
 }
 
 spawnplayerprediction() {
-  self endon(#"disconnect", # "end_respawn", # "game_ended", # "joined_spectators", # "spawned");
+  self endon(#"disconnect", #"end_respawn", #"game_ended", #"joined_spectators", #"spawned");
 
   while(true) {
     wait 0.5;
@@ -164,7 +164,7 @@ givestartloadout() {
 
 spawnplayer() {
   pixbeginevent(#"spawnplayer_preuts");
-  self endon(#"disconnect", # "joined_spectators");
+  self endon(#"disconnect", #"joined_spectators");
   hadspawned = self.hasspawned;
   self player::spawn_player();
 
@@ -251,7 +251,7 @@ spawnplayer() {
 }
 
 _spawnplayer() {
-  self endon(#"disconnect", # "joined_spectators");
+  self endon(#"disconnect", #"joined_spectators");
   waittillframeend();
   self notify(#"spawned_player");
   self callback::callback(#"on_player_spawned");
@@ -308,12 +308,12 @@ in_spawnspectator(origin, angles) {
 
 spectatorthirdpersonness() {
   self notify(#"spectator_thirdperson_thread");
-  self endon(#"disconnect", # "spawned", # "spectator_thirdperson_thread");
+  self endon(#"disconnect", #"spawned", #"spectator_thirdperson_thread");
   self.spectatingthirdperson = 0;
 }
 
 forcespawn(time) {
-  self endon(#"death", # "spawned");
+  self endon(#"death", #"spawned");
 
   if(!isDefined(time)) {
     time = 60;
@@ -350,7 +350,7 @@ kickifdontspawn() {
 }
 
 kickifidontspawninternal() {
-  self endon(#"death", # "spawned");
+  self endon(#"death", #"spawned");
   waittime = 90;
 
   if(getdvarstring(#"scr_kick_time") != "") {
@@ -578,7 +578,7 @@ spawnclient(timealreadypassed) {
 }
 
 waitandspawnclient(timealreadypassed) {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
   level endon(#"game_ended");
 
   if(!isDefined(timealreadypassed)) {
@@ -651,7 +651,7 @@ waitandspawnclient(timealreadypassed) {
 }
 
 waitrespawnorsafespawnbutton() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
 
   while(true) {
     if(self usebuttonpressed()) {
@@ -663,7 +663,7 @@ waitrespawnorsafespawnbutton() {
 }
 
 waitinspawnqueue() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
 
   if(!level.ingraceperiod && !level.usestartspawns) {
     currentorigin = self.origin;

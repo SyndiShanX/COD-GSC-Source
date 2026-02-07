@@ -8,11 +8,11 @@
 #namespace character_unlock_menendez_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_menendez_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_menendez_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"menendez_unlock", # "hash_77118b5dbb73e0b6", # "cu20_item", &function_d95e620c, # "hash_4bc3134998048aa7");
+  character_unlock_fixup::register_character_unlock(#"menendez_unlock", #"hash_77118b5dbb73e0b6", #"cu20_item", &function_d95e620c, #"hash_4bc3134998048aa7");
 }
 
 function_d95e620c() {

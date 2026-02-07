@@ -10,7 +10,7 @@
 #namespace namespace_3d2704b3;
 
 autoexec __init__system__() {
-  system::register(#"hash_280fe2667ed2d300", &__init__, undefined, # "item_supply_drop");
+  system::register(#"hash_280fe2667ed2d300", &__init__, undefined, #"item_supply_drop");
 }
 
 __init__() {

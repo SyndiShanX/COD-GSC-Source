@@ -47,17 +47,17 @@ __init__() {
   if(isDefined(level.var_c621179)) {
     thread[[level.var_c621179]]();
   } else if(function_8b1a219a()) {
-    zm_utility::add_zombie_hint("default_buy_debris", # "hash_4b77c0a6bc72bc31");
+    zm_utility::add_zombie_hint("default_buy_debris", #"hash_4b77c0a6bc72bc31");
   } else {
-    zm_utility::add_zombie_hint("default_buy_debris", # "hash_1595dd9d4d64f37b");
+    zm_utility::add_zombie_hint("default_buy_debris", #"hash_1595dd9d4d64f37b");
   }
 
   if(function_8b1a219a()) {
-    zm_utility::add_zombie_hint("default_buy_door", # "hash_5483a959bcbbba41");
-    zm_utility::add_zombie_hint("default_buy_door_close", # "hash_4cf42029f734b45b");
+    zm_utility::add_zombie_hint("default_buy_door", #"hash_5483a959bcbbba41");
+    zm_utility::add_zombie_hint("default_buy_door_close", #"hash_4cf42029f734b45b");
   } else {
-    zm_utility::add_zombie_hint("default_buy_door", # "hash_456cd0f0d10be48b");
-    zm_utility::add_zombie_hint("default_buy_door_close", # "hash_261288d018c0e7e5");
+    zm_utility::add_zombie_hint("default_buy_door", #"hash_456cd0f0d10be48b");
+    zm_utility::add_zombie_hint("default_buy_door_close", #"hash_261288d018c0e7e5");
   }
 
   init_blockers();
@@ -267,7 +267,7 @@ door_buy() {
       who zm_stats::increment_challenge_stat(#"survivalist_buy_door");
       who zm_stats::forced_attachment("boas_doors_purchased");
       who zm_stats::function_c0c6ab19(#"doorbuys", 1, 1);
-      who contracts::increment_zm_contract(#"contract_zm_doors", 1, # "zstandard");
+      who contracts::increment_zm_contract(#"contract_zm_doors", 1, #"zstandard");
       self.purchaser = who;
       who namespace_e38c57c1::function_c3f3716();
     } else {
@@ -278,7 +278,7 @@ door_buy() {
       } else if(isDefined(level.custom_generic_deny_vo_func)) {
         who thread[[level.custom_generic_deny_vo_func]](1);
       } else {
-        who zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+        who zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       }
 
       return false;
@@ -317,7 +317,7 @@ force_open_door(e_activator) {
 }
 
 blocker_update_prompt_visibility() {
-  self endon(#"kill_door_think", # "kill_debris_prompt_thread", # "death");
+  self endon(#"kill_door_think", #"kill_debris_prompt_thread", #"death");
   dist = 16384;
 
   while(true) {
@@ -888,7 +888,7 @@ door_opened(cost, quick_close) {
       zm_utility::play_sound_at_pos("purchase", self.origin);
 
       if(isplayer(self.purchaser)) {
-        self.purchaser util::delay(1.25, "death", &zm_audio::create_and_play_dialog, # "door", # "open");
+        self.purchaser util::delay(1.25, "death", &zm_audio::create_and_play_dialog, #"door", #"open");
       }
     }
   }
@@ -930,7 +930,7 @@ physics_launch_door(door_trig) {
 }
 
 door_solid_thread() {
-  self waittill(#"rotatedone", # "movedone", # "death");
+  self waittill(#"rotatedone", #"movedone", #"death");
 
   if(isDefined(self)) {
     self.door_moving = undefined;
@@ -958,7 +958,7 @@ door_solid_thread() {
 
 door_solid_thread_anim() {
   self waittillmatch({
-    #notetrack: "end"}, # "door_anim");
+    #notetrack: "end"}, #"door_anim");
   self.door_moving = undefined;
 
   while(true) {
@@ -1107,11 +1107,11 @@ debris_think() {
         who zm_stats::increment_challenge_stat(#"survivalist_buy_door", undefined, 1);
         who zm_stats::forced_attachment("boas_doors_purchased");
         who zm_stats::function_c0c6ab19(#"doorbuys", 1, 1);
-        who contracts::increment_zm_contract(#"contract_zm_doors", 1, # "zstandard");
+        who contracts::increment_zm_contract(#"contract_zm_doors", 1, #"zstandard");
         who namespace_e38c57c1::function_c3f3716();
       } else {
         zm_utility::play_sound_at_pos("no_purchase", self.origin);
-        who zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+        who zm_audio::create_and_play_dialog(#"general", #"outofmoney");
         continue;
       }
 
@@ -1848,7 +1848,7 @@ handle_post_board_repair_rewards(cost, zbarrier) {
   self zm_stats::increment_client_stat("boards");
   self zm_stats::increment_player_stat("boards");
   self zm_stats::forced_attachment("boas_boards");
-  self thread zm_audio::create_and_play_dialog(#"general", # "rebuild_boards");
+  self thread zm_audio::create_and_play_dialog(#"general", #"rebuild_boards");
 
   if(!isDefined(self.rebuild_barrier_reward)) {
     self.rebuild_barrier_reward = 0;

@@ -71,7 +71,7 @@ function_452ec7b3() {
       level.var_c8b84806[str_zone] = 1;
     }
 
-    self.var_df62490a = zm_utility::function_d7db256e(s_hill.targetname, # "hash_28d5f57c2309090", 0);
+    self.var_df62490a = zm_utility::function_d7db256e(s_hill.targetname, #"hash_28d5f57c2309090", 0);
     self.var_f7f308cd = s_hill.targetname;
     self thread function_492f4c79();
 
@@ -186,7 +186,7 @@ function_452ec7b3() {
 }
 
 function_492f4c79() {
-  level endon(#"hash_7646638df88a3656", # "hill_moving");
+  level endon(#"hash_7646638df88a3656", #"hill_moving");
   zm_utility::function_75fd65f9(self.var_f7f308cd, 1);
 }
 
@@ -215,7 +215,7 @@ function_2191cc5d() {
 
 zone_watcher(challenge, var_2d5ebf67, var_530e040f, timeout) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "hill_moving", # "host_migration_begin");
+  level endon(#"hash_7646638df88a3656", #"hill_moving", #"host_migration_begin");
   self.var_356935bb = {
     #start_time: level.time, #timeout: timeout, #challenge: challenge, #var_2d5ebf67: var_2d5ebf67, #var_530e040f: var_530e040f
   };
@@ -251,7 +251,7 @@ zone_watcher(challenge, var_2d5ebf67, var_530e040f, timeout) {
 
 damage_watcher() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "hill_moving", # "host_migration_begin");
+  level endon(#"hash_7646638df88a3656", #"hill_moving", #"host_migration_begin");
 
   while(true) {
     if(isgodmode(self) || self isinmovemode("<dev string:x38>", "<dev string:x41>")) {

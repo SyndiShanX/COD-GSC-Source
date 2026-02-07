@@ -220,9 +220,9 @@ spawn_attack_wave(n_count, var_2c6e8cfe = 0, a_parms, var_1b783b8b = 0) {
     }
 
     if(var_2c6e8cfe == 0) {
-      var_d3dc6155[var_d3dc6155.size] = s_enemy spawn_attack_helicopter("enemy_chopper", # "axis", 1, 1, a_parms);
+      var_d3dc6155[var_d3dc6155.size] = s_enemy spawn_attack_helicopter("enemy_chopper", #"axis", 1, 1, a_parms);
     } else if(var_2c6e8cfe == 1) {
-      var_d3dc6155[var_d3dc6155.size] = s_enemy function_4c8f915a("enemy_mini_quad_tank", # "axis");
+      var_d3dc6155[var_d3dc6155.size] = s_enemy function_4c8f915a("enemy_mini_quad_tank", #"axis");
     }
 
     arrayremovevalue(a_s_enemy, s_enemy);
@@ -235,9 +235,9 @@ spawn_attack_wave(n_count, var_2c6e8cfe = 0, a_parms, var_1b783b8b = 0) {
 registerstart_killstreak_collision_rounds(s_veh) {
   switch (s_veh.script_noteworthy) {
     case # "ct_mini_quadtank":
-      return s_veh function_4c8f915a("enemy_mini_quadtank", # "axis");
+      return s_veh function_4c8f915a("enemy_mini_quadtank", #"axis");
     case # "ct_attack_helicopter":
-      return s_veh spawn_attack_helicopter("enemy_attack_chopper", # "axis");
+      return s_veh spawn_attack_helicopter("enemy_attack_chopper", #"axis");
   }
 }
 
@@ -331,7 +331,7 @@ spawn_attack_helicopter(str_targetname, str_team, b_guns = 1, b_missiles = 1, a_
 }
 
 function_62449dad() {
-  self endon(#"death", # "crashing", # "leaving");
+  self endon(#"death", #"crashing", #"leaving");
   level endon(#"game_ended");
   var_df0dfc2d = self.var_6982e1d6 * self.var_6982e1d6;
   level.heli_turretreloadtime = 5;
@@ -431,7 +431,7 @@ function_17786807() {
 }
 
 function_303fcbd8() {
-  self endon(#"death", # "crashing", # "leaving");
+  self endon(#"death", #"crashing", #"leaving");
 
   for(;;) {
     if(isDefined(self.secondarytarget)) {
@@ -490,9 +490,9 @@ function_430510ec(str_path_start, key = "targetname") {
 }
 
 function_560c5174(currentnode, startwait, hardpointtype) {
-  self endon(#"death", # "leaving");
+  self endon(#"death", #"leaving");
   self notify(#"flying");
-  self endon(#"flying", # "abandoned");
+  self endon(#"flying", #"abandoned");
   self.reached_dest = 0;
   helicopter::heli_reset();
   pos = self.origin;
@@ -592,8 +592,8 @@ function_560c5174(currentnode, startwait, hardpointtype) {
 }
 
 function_ab637f96(waittime, var_f49cf7e0 = 0) {
-  self endon(#"death", # "crashing", # "evasive");
-  self endoncallback(&function_6b4ab31d, # "chase_target", # "damage", # "hash_1ef47c427ec739d7");
+  self endon(#"death", #"crashing", #"evasive");
+  self endoncallback(&function_6b4ab31d, #"chase_target", #"damage", #"hash_1ef47c427ec739d7");
   self thread helicopter::heli_hover();
 
   if(var_f49cf7e0 > 0) {
@@ -903,7 +903,7 @@ function_701302a8() {
   level.var_ae0bbaac = e_player spawn_attack_wave(10, 1, undefined, 1);
 
   foreach(var_c22808fd in level.var_ae0bbaac) {
-    var_c22808fd.waypoint = var_c22808fd ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", var_c22808fd.origin, var_c22808fd.angles, # "any", undefined, 0, undefined);
+    var_c22808fd.waypoint = var_c22808fd ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", var_c22808fd.origin, var_c22808fd.angles, #"any", undefined, 0, undefined);
 
     if(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe) {
       var_c22808fd clientfield::set("enemy_vehicle_keyline_render", 1);
@@ -942,7 +942,7 @@ function_52d196f2(n_difficulty = 2) {
   level.a_vh_choppers = e_player spawn_attack_wave(var_88e49d60[n_difficulty], 0, a_parms, 2);
 
   foreach(vh_chopper in level.a_vh_choppers) {
-    vh_chopper.waypoint = vh_chopper ct_utils::create_waypoint(#"hash_3489718f227fba3", vh_chopper.origin, vh_chopper.angles, # "any", undefined, 0, undefined);
+    vh_chopper.waypoint = vh_chopper ct_utils::create_waypoint(#"hash_3489718f227fba3", vh_chopper.origin, vh_chopper.angles, #"any", undefined, 0, undefined);
   }
 
   n_count = 10;

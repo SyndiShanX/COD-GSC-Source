@@ -25,7 +25,7 @@ function_f747c7cd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_97adc67(localclientnum) {
-  self endon(#"death", # "entityshutdown");
+  self endon(#"death", #"entityshutdown");
   util::waittill_dobj(localclientnum);
 
   if(!isDefined(self)) {
@@ -73,9 +73,9 @@ play_blur_post_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self postfx::playpostfxbundle("pstfx_speedblur");
     }
 
-    self postfx::function_c8b5f318("pstfx_speedblur", # "blur", 0.05);
-    self postfx::function_c8b5f318("pstfx_speedblur", # "inner mask", 0.3);
-    self postfx::function_c8b5f318("pstfx_speedblur", # "outer mask", 0.8);
+    self postfx::function_c8b5f318("pstfx_speedblur", #"blur", 0.05);
+    self postfx::function_c8b5f318("pstfx_speedblur", #"inner mask", 0.3);
+    self postfx::function_c8b5f318("pstfx_speedblur", #"outer mask", 0.8);
     return;
   }
 

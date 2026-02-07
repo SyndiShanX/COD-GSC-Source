@@ -87,7 +87,7 @@ updateentityheadclientobjective(entity, objective) {
 destroyheadiconsondeath() {
   self notify(#"destroyheadiconsondeath_singleton");
   self endon(#"destroyheadiconsondeath_singleton");
-  self waittill(#"death", # "hacked");
+  self waittill(#"death", #"hacked");
   destroyentityheadicons();
 }
 

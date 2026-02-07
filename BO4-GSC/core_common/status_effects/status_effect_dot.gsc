@@ -58,7 +58,7 @@ dot_apply(var_756fda07, weapon, applicant) {
 
 dot_rumble_loop() {
   self notify(#"dot_rumble_loop");
-  self endon(#"dot_rumble_loop", # "endstatuseffect");
+  self endon(#"dot_rumble_loop", #"endstatuseffect");
   waitframe(1);
 
   if(!isplayer(self.owner)) {

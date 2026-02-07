@@ -38,7 +38,7 @@ function_87dc06ae(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_2d6416dc(localclientnum) {
-  self endon(#"death", # "hash_319d2bba47dac2c4");
+  self endon(#"death", #"hash_319d2bba47dac2c4");
   w_current = getcurrentweapon(localclientnum);
   n_clip_size = w_current.clipsize;
 

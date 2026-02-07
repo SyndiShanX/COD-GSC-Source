@@ -136,7 +136,7 @@ function_5f42b3e2(s_anim) {
   if(isplayer(self)) {
     self notify(#"hash_18259ed594f164dc");
     s_anim thread scene::play(var_c2852abc, self);
-    self waittill(#"hash_770bb1239dc37ad0", # "disconnect");
+    self waittill(#"hash_770bb1239dc37ad0", #"disconnect");
   }
 
   if(isplayer(self)) {
@@ -172,7 +172,7 @@ function_ca2d69a(n_time) {
 }
 
 function_656e5fd1() {
-  self endon(#"disconnect", # "hide_equipment_hint_text");
+  self endon(#"disconnect", #"hide_equipment_hint_text");
   waitframe(1);
 
   if(!self gamepadusedlast()) {
@@ -242,7 +242,7 @@ function_a8176b98(v_pos, n_radius) {
 }
 
 waittill_player_nearby(e_player, var_5a365909 = 0) {
-  self endon(#"death", # "destroyed");
+  self endon(#"death", #"destroyed");
 
   if(getdvarint(#"hash_716ad286541e0f2d", 0)) {
     return;
@@ -287,7 +287,7 @@ waittill_player_nearby(e_player, var_5a365909 = 0) {
 }
 
 function_6a523c8c(v_wobble = (0, 0, 1)) {
-  self endoncallback(&function_43ac0bb7, # "death", # "stop_wobble", # "finish_wobble");
+  self endoncallback(&function_43ac0bb7, #"death", #"stop_wobble", #"finish_wobble");
 
   if(!isDefined(self.v_start_origin)) {
     self.v_start_origin = self.origin;
@@ -322,7 +322,7 @@ function_43ac0bb7(str_notify) {
 }
 
 function_da5cd631(v_spin = (0, 0, 180)) {
-  self endon(#"death", # "stop_spin");
+  self endon(#"death", #"stop_spin");
   self notify(#"finish_wobble");
 
   for(n_wait = 6; true; n_wait = max(n_wait - 0.25, 0.25)) {
@@ -373,7 +373,7 @@ function_9e4c5bfb() {
   if((!(isDefined(self.var_aed1893c[# "hash_2464612c580fec24"]) && self.var_aed1893c[# "hash_2464612c580fec24"]) || math::cointoss(20)) && !(isDefined(level.var_f1028094[# "hash_2464612c580fec24"]) && level.var_f1028094[# "hash_2464612c580fec24"]) && zm_utility::is_player_valid(self)) {
     self.var_aed1893c[# "hash_2464612c580fec24"] = 1;
     level.var_f1028094[# "hash_2464612c580fec24"] = 1;
-    self zm_audio::create_and_play_dialog(#"nosferatu", # "kill", undefined, 1);
+    self zm_audio::create_and_play_dialog(#"nosferatu", #"kill", undefined, 1);
     wait randomintrange(30, 3 * 30);
     level.var_f1028094[# "hash_2464612c580fec24"] = 0;
   }
@@ -382,16 +382,16 @@ function_9e4c5bfb() {
 function_6e9bca65(w_weapon) {
   if(self zm_utility::function_aa45670f(w_weapon, 0)) {
     if(!(isDefined(self.var_d8cb9364) && self.var_d8cb9364)) {
-      self.var_d8cb9364 = self zm_audio::create_and_play_dialog(#"silver_bullets", # "kill", undefined, 1);
+      self.var_d8cb9364 = self zm_audio::create_and_play_dialog(#"silver_bullets", #"kill", undefined, 1);
     } else if(math::cointoss(20)) {
-      self zm_audio::create_and_play_dialog(#"silver_bullets", # "kill");
+      self zm_audio::create_and_play_dialog(#"silver_bullets", #"kill");
     }
 
     return;
   }
 
   if(math::cointoss(20)) {
-    self zm_audio::create_and_play_dialog(#"werewolf", # "kill");
+    self zm_audio::create_and_play_dialog(#"werewolf", #"kill");
   }
 }
 
@@ -408,8 +408,8 @@ function_e7d4e4f0() {
     return;
   }
 
-  self endoncallback(&function_3cfa50, # "hash_50b4cc0a4e4185b7");
-  self util::delay_notify(120, # "hash_50b4cc0a4e4185b7");
+  self endoncallback(&function_3cfa50, #"hash_50b4cc0a4e4185b7");
+  self util::delay_notify(120, #"hash_50b4cc0a4e4185b7");
   self.mdl_pickup = util::spawn_model("c_t8_zmb_dlc1_werewolf_chaos_drop", self.origin, self.angles);
 
   if(!isDefined(level.var_98cb7c84)) {
@@ -450,7 +450,7 @@ function_3cfa50(s_notify) {
 
 function_f3d694d6(player) {
   if(!level flag::get("flag_player_grabbed_werewolf_material")) {
-    str_prompt = zm_utility::function_d6046228(#"hash_429528a8bde9599d", # "hash_5af9d3bd478d8243");
+    str_prompt = zm_utility::function_d6046228(#"hash_429528a8bde9599d", #"hash_5af9d3bd478d8243");
     self sethintstringforplayer(player, str_prompt);
   } else {
     self sethintstringforplayer(player, "");
@@ -811,7 +811,7 @@ draw_arrow(org, ang, opcolor, str) {
 }
 
 function function_2057ddc1(v_loc, str_cat, var_bff0cf99, var_440d7980, var_d8ad5f6e, var_1ef7b21 = 10, b_wait_if_busy = 1, var_39238c39 = 0, var_eb20a7c = 0) {
-  level endon(#"end_game", # "intermission");
+  level endon(#"end_game", #"intermission");
 
   if(!isDefined(level.var_f1028094)) {
     level.var_f1028094 = [];

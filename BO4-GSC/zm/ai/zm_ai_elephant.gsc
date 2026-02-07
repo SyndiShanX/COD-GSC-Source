@@ -43,10 +43,10 @@ registerbehaviorscriptfunctions() {
 
 function_4c731a08() {
   if(!(isDefined(level.var_c8d8fe54) && level.var_c8d8fe54)) {
-    level thread aat::register_immunity("zm_aat_brain_decay", # "elephant", 1, 0, 0);
-    level thread aat::register_immunity("zm_aat_frostbite", # "elephant", 1, 0, 0);
-    level thread aat::register_immunity("zm_aat_kill_o_watt", # "elephant", 1, 0, 0);
-    level thread aat::register_immunity("zm_aat_plasmatic_burst", # "elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_brain_decay", #"elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_frostbite", #"elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_kill_o_watt", #"elephant", 1, 0, 0);
+    level thread aat::register_immunity("zm_aat_plasmatic_burst", #"elephant", 1, 0, 0);
     level.var_c8d8fe54 = 1;
   }
 

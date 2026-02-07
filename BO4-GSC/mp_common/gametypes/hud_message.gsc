@@ -304,11 +304,11 @@ function_2b2308c6(var_c1e98979, var_76f0c6e5, var_767536e4) {
 }
 
 function_5d9d54a9(var_c1e98979, var_76f0c6e5) {
-  function_d756b48a(var_c1e98979, var_76f0c6e5, var_76f0c6e5, # "", # "");
+  function_d756b48a(var_c1e98979, var_76f0c6e5, var_76f0c6e5, #"", #"");
 }
 
 function_36419c2(var_c1e98979, winner_text, loser_text) {
-  function_d756b48a(var_c1e98979, winner_text, loser_text, # "", # "");
+  function_d756b48a(var_c1e98979, winner_text, loser_text, #"", #"");
 }
 
 function_5b0c08ec(player, outcome) {

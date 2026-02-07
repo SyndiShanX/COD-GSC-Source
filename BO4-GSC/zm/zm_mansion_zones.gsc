@@ -256,15 +256,15 @@ function_ab7f70b9(e_player) {
 }
 
 function_17ac86f7() {
-  self thread zm_audio::function_713192b1(#"hash_4cfb09573e278f6a", # "dining_room");
-  self thread zm_audio::function_713192b1(#"hash_14a22fcc9cae07e", # "garden");
-  self thread zm_audio::function_713192b1(#"hash_4e4c72cec577f4b6", # "billiards_room");
-  self thread zm_audio::function_713192b1(#"hash_1b96528add0fc9c0", # "forest");
-  self thread zm_audio::function_713192b1(#"hash_b91dba12f5681cb", # "cemetary");
-  self thread zm_audio::function_713192b1(#"hash_517224645b7ac008", # "druid_arena");
-  self thread zm_audio::function_713192b1(#"hash_ce97d364ff4b9c6", # "catacomb");
-  self thread zm_audio::function_713192b1(#"hash_4fa0217a1bf4ccdc", # "greenhouse");
-  self thread zm_audio::function_713192b1(#"hash_430969697efda742", # "library");
-  self thread zm_audio::function_713192b1(#"hash_41d4a90493982b62", # "main_hall");
-  self thread zm_audio::function_713192b1(#"hash_5b174f0e82a56362", # "master_bed");
+  self thread zm_audio::function_713192b1(#"hash_4cfb09573e278f6a", #"dining_room");
+  self thread zm_audio::function_713192b1(#"hash_14a22fcc9cae07e", #"garden");
+  self thread zm_audio::function_713192b1(#"hash_4e4c72cec577f4b6", #"billiards_room");
+  self thread zm_audio::function_713192b1(#"hash_1b96528add0fc9c0", #"forest");
+  self thread zm_audio::function_713192b1(#"hash_b91dba12f5681cb", #"cemetary");
+  self thread zm_audio::function_713192b1(#"hash_517224645b7ac008", #"druid_arena");
+  self thread zm_audio::function_713192b1(#"hash_ce97d364ff4b9c6", #"catacomb");
+  self thread zm_audio::function_713192b1(#"hash_4fa0217a1bf4ccdc", #"greenhouse");
+  self thread zm_audio::function_713192b1(#"hash_430969697efda742", #"library");
+  self thread zm_audio::function_713192b1(#"hash_41d4a90493982b62", #"main_hall");
+  self thread zm_audio::function_713192b1(#"hash_5b174f0e82a56362", #"master_bed");
 }

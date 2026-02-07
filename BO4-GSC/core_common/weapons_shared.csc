@@ -38,7 +38,7 @@ function_ca6a6ea8(local_client_num) {
 }
 
 function_1c61050d(local_client_num, objective_id) {
-  self waittill(#"death", # "disconnect", # "team_changed");
+  self waittill(#"death", #"disconnect", #"team_changed");
 
   if(isDefined(objective_id)) {
     objective_delete(local_client_num, objective_id);
@@ -91,7 +91,7 @@ function_903d2d4c(local_client_num) {
 
 function_ec73770b(local_client_num) {
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   wait randomfloatrange(0.1, 0.5);
   var_935615f7 = # "mountable_point";
   obj_id = undefined;

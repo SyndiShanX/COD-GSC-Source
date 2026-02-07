@@ -16,7 +16,7 @@ class cmulti_stage_target_lockon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "multi_stage_target_lockon");
+    cluielem::open(localclientnum, #"multi_stage_target_lockon");
   }
 
   function function_fa582112(localclientnum) {

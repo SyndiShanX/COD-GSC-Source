@@ -209,8 +209,8 @@ function_2ad18645(notifyhash) {
 }
 
 function_fb3fdf43(entity, latch_enemy) {
-  entity endoncallback(&function_2ad18645, # "death");
-  latch_enemy endoncallback(&function_2ad18645, # "disconnect", # "death");
+  entity endoncallback(&function_2ad18645, #"death");
+  latch_enemy endoncallback(&function_2ad18645, #"disconnect", #"death");
 
   if(isDefined(self) && isDefined(entity) && isDefined(latch_enemy)) {
     self scene::play(#"aib_vign_cust_mnsn_nfrtu_attack_latch_01", array(entity, latch_enemy));
@@ -227,9 +227,9 @@ function_fb3fdf43(entity, latch_enemy) {
 }
 
 function_20a76c21(entity) {
-  entity endoncallback(&function_2ad18645, # "death");
+  entity endoncallback(&function_2ad18645, #"death");
   latch_enemy = entity.enemy;
-  latch_enemy endoncallback(&function_2ad18645, # "disconnect", # "death");
+  latch_enemy endoncallback(&function_2ad18645, #"disconnect", #"death");
 
   if(isDefined(latch_enemy)) {
     latch_enemy thread function_db62d88a();
@@ -239,7 +239,7 @@ function_20a76c21(entity) {
   alignnode.origin = entity.enemy.origin;
   alignnode.angles = entity.enemy.angles;
   alignnode thread function_fb3fdf43(entity, latch_enemy);
-  alignnode waittilltimeout(7, # "hash_7a32b2af2eef5415");
+  alignnode waittilltimeout(7, #"hash_7a32b2af2eef5415");
 
   if(isDefined(alignnode)) {
     alignnode struct::delete();
@@ -261,7 +261,7 @@ function_20a76c21(entity) {
 }
 
 function_db62d88a() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self val::set(#"nosferatu_latch", "ignoreme", 1);
   w_current = self getcurrentweapon();
 

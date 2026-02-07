@@ -10,7 +10,7 @@
 #namespace character_unlock_bruno;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_bruno", &__init__, undefined, # "character_unlock_bruno_fixup");
+  system::register(#"character_unlock_bruno", &__init__, undefined, #"character_unlock_bruno_fixup");
 }
 
 __init__() {

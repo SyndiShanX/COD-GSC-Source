@@ -48,8 +48,8 @@ shard_watcher() {
 }
 
 function_e0aaa050() {
-  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
-  self endon(#"death", # "disconnect");
+  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  self endon(#"death", #"disconnect");
 
   for(i = 0; i < 20; i++) {
     level waittill(#"end_of_round");
@@ -65,7 +65,7 @@ function_e0aaa050() {
 }
 
 function_f37ba127() {
-  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
   self endon(#"disconnect");
 
   while(true) {
@@ -83,7 +83,7 @@ function_f37ba127() {
 }
 
 function_9785ebce() {
-  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
 
   for(i = 0; i < 4; i++) {
     level waittill(#"hash_13f3f231b45420ef");
@@ -158,7 +158,7 @@ function_2c104547(s_params) {
 }
 
 pap_watcher() {
-  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
   level waittill(#"pap_power_ready");
 
   if(level.round_number <= 5) {
@@ -223,7 +223,7 @@ function_5e1138a2() {
 }
 
 perk_watcher() {
-  self endon(#"hash_1305a28597a2e439", # "disconnect");
+  self endon(#"hash_1305a28597a2e439", #"disconnect");
 
   while(true) {
     waitresult = self waittill(#"perk_bought");
@@ -245,7 +245,7 @@ function_91cfddc4() {
 }
 
 function_df71a9b9() {
-  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
 
   while(true) {
     waitresults = level waittill(#"ray_gun_mk2v_stun_hit");

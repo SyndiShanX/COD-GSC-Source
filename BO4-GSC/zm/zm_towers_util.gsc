@@ -224,7 +224,7 @@ function_c05cc102(s_params) {
     return;
   }
 
-  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", # "explode", # "death");
+  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode", #"death");
 
   if(isDefined(s_params.projectile) && s_waitresult._notify == "death") {
     level notify(#"hash_3042a9bf2f57ea0a", {

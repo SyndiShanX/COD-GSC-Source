@@ -121,7 +121,7 @@ function_b4b9937(localclientnum, newval, str_state) {
         v_tag_angles += level.var_4016a739;
       }
 
-      var_5b1d3ef = util::spawn_model(localclientnum, # "tag_origin", v_tag_origin, v_tag_angles);
+      var_5b1d3ef = util::spawn_model(localclientnum, #"tag_origin", v_tag_origin, v_tag_angles);
       self.var_7e616d59[localclientnum] = var_5b1d3ef;
       waitframe(1);
     }
@@ -133,7 +133,7 @@ function_b4b9937(localclientnum, newval, str_state) {
         v_tag_angles += level.var_4016a739;
       }
 
-      fx_obj = util::spawn_model(localclientnum, # "tag_origin", self.origin, v_tag_angles);
+      fx_obj = util::spawn_model(localclientnum, #"tag_origin", self.origin, v_tag_angles);
       self.var_93e0dfa9[localclientnum] = fx_obj;
       waitframe(1);
     }

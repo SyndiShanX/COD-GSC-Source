@@ -90,7 +90,7 @@ drawcylinder(pos, rad, height) {
 }
 
 function_d4c9e1b5() {
-  self endon(#"player_revived", # "player_suicide", # "bled_out");
+  self endon(#"player_revived", #"player_suicide", #"bled_out");
   self waittill(#"disconnect");
 
   if(isDefined(self.revivetrigger)) {

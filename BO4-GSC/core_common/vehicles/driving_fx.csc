@@ -211,7 +211,7 @@ function_73e08cca(surface) {
 stop_postfx_on_exit(var_89ae88b4) {
   self notify("stop_postfx_on_exit_" + var_89ae88b4);
   self endon("stop_postfx_on_exit_" + var_89ae88b4);
-  self waittill(#"exit_vehicle", # "death");
+  self waittill(#"exit_vehicle", #"death");
 
   if(isDefined(self) && isDefined(self.var_8e45c356) && isDefined(self.var_8e45c356[var_89ae88b4]) && self postfx::function_556665f2(var_89ae88b4)) {
     self postfx::stoppostfxbundle(var_89ae88b4);
@@ -259,7 +259,7 @@ function_dc263531(var_fd4bffcb, forcestop) {
 function_d79b3148(localclientnum, driver) {
   self notify("50691db9556b2847");
   self endon("50691db9556b2847");
-  self endon(#"death", # "exit_vehicle");
+  self endon(#"death", #"exit_vehicle");
 
   if(!self isvehicle() || isDefined(self.var_da04aa74) && self.var_da04aa74) {
     return;

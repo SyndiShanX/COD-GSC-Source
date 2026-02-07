@@ -45,7 +45,7 @@ function_7b2555da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(isDefined(self.var_55e883de)) {
     killfx(localclientnum, self.var_55e883de);
     playFX(localclientnum, level._effect[# "candle_extinguish"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    playSound(localclientnum, # "hash_50692f39387dddd", self.origin);
+    playSound(localclientnum, #"hash_50692f39387dddd", self.origin);
     self.var_55e883de = undefined;
   }
 }
@@ -69,7 +69,7 @@ function_46354b9d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(!isDefined(self.var_c3a33b28)) {
       self.var_c3a33b28 = util::playFXOnTag(localclientnum, level._effect[# "soul_possess"], self, "j_spine4");
-      self playSound(localclientnum, # "hash_4826261b01f96036");
+      self playSound(localclientnum, #"hash_4826261b01f96036");
       zmb_soul = self playLoopSound(#"hash_298631572be3dd79");
     }
 
@@ -84,7 +84,7 @@ function_46354b9d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_7fb1dad8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[# "hash_4d45dc65a8307183"], self, "tag_origin");
-  self playSound(localclientnum, # "hash_72a28324d62874cc");
+  self playSound(localclientnum, #"hash_72a28324d62874cc");
   var_3e97d494 = self playLoopSound(#"hash_298631572be3dd79");
 }
 
@@ -93,7 +93,7 @@ function_5790d8f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self thread postfx::playpostfxbundle(#"hash_68521343993746c2");
 
     if(!isDefined(self.var_ab7bde88)) {
-      self playSound(localclientnum, # "hash_397f465deff1747b");
+      self playSound(localclientnum, #"hash_397f465deff1747b");
       self.var_ab7bde88 = self playLoopSound(#"hash_29b43b594c795551");
     }
 
@@ -104,7 +104,7 @@ function_5790d8f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
   if(isDefined(self.var_ab7bde88)) {
     self stoploopsound(self.var_ab7bde88);
-    self playSound(localclientnum, # "hash_45d8c3fdcaaf772a");
+    self playSound(localclientnum, #"hash_45d8c3fdcaaf772a");
     self.var_ab7bde88 = undefined;
   }
 }
@@ -113,7 +113,7 @@ function_4e782d34(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(!isDefined(self.var_dd761cc9)) {
       self.var_dd761cc9 = util::playFXOnTag(localclientnum, level._effect[# "jewelry_dropped"], self, "tag_origin");
-      playSound(localclientnum, # "hash_6dda9e544bcd6f0d", self.origin);
+      playSound(localclientnum, #"hash_6dda9e544bcd6f0d", self.origin);
 
       if(self.model == # "p8_zm_man_watch_pocket_gold") {
         var_a0cc5b31 = self playLoopSound(#"hash_5354467970ab7b00");

@@ -20,7 +20,7 @@
 #namespace dev;
 
 autoexec __init__system__() {
-  system::register(#"dev", &__init__, undefined, # "spawnlogic");
+  system::register(#"dev", &__init__, undefined, #"spawnlogic");
 }
 
 __init__() {
@@ -94,7 +94,7 @@ warpalltoplayer(team, player) {
 
   if(isDefined(target)) {
     origin = target.origin;
-    nodes = getnodesinradius(origin, 128, 32, 128, # "path");
+    nodes = getnodesinradius(origin, 128, 32, 128, #"path");
     angles = target getplayerangles();
     yaw = (0, angles[1], 0);
     forward = anglesToForward(yaw);
@@ -520,7 +520,7 @@ updatedevsettings() {
 
 devgui_spawn_think() {
   self notify(#"devgui_spawn_think");
-  self endon(#"devgui_spawn_think", # "disconnect");
+  self endon(#"devgui_spawn_think", #"disconnect");
   dpad_left = 0;
   dpad_right = 0;
 
@@ -548,7 +548,7 @@ devgui_spawn_think() {
 
 devgui_unlimited_ammo() {
   self notify(#"devgui_unlimited_ammo");
-  self endon(#"devgui_unlimited_ammo", # "disconnect");
+  self endon(#"devgui_unlimited_ammo", #"disconnect");
 
   for(;;) {
     wait 1;
@@ -611,13 +611,13 @@ devgui_increase_momentum(score) {
       continue;
     }
 
-    player globallogic_score::giveplayermomentumnotification(score, # "testplayerscorefortan", "<dev string:x309>", 0);
+    player globallogic_score::giveplayermomentumnotification(score, #"testplayerscorefortan", "<dev string:x309>", 0);
   }
 }
 
 devgui_health_debug() {
   self notify(#"devgui_health_debug");
-  self endon(#"devgui_health_debug", # "disconnect");
+  self endon(#"devgui_health_debug", #"disconnect");
   x = 80;
   y = 40;
   self.debug_health_bar = newdebughudelem(self);

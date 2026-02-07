@@ -110,7 +110,7 @@ function_b8da6f44() {
 }
 
 function_72f1cddb() {
-  zm_utility::function_beed5764("rob_zm_eyes_red", # "zm_ai/fx8_zombie_eye_glow_red");
+  zm_utility::function_beed5764("rob_zm_eyes_red", #"zm_ai/fx8_zombie_eye_glow_red");
 }
 
 setup_personality_character_exerts() {

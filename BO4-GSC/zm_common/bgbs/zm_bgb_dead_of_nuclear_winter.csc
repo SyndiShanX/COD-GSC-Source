@@ -8,7 +8,7 @@
 #namespace zm_bgb_dead_of_nuclear_winter;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_dead_of_nuclear_winter", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_dead_of_nuclear_winter", &__init__, undefined, #"bgb");
 }
 
 __init__() {

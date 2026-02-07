@@ -30,7 +30,7 @@ __init__() {
 }
 
 on_item_use(params) {
-  self endon(#"death", # "disconnect", # "begin_grenade_tracking", # "grenade_throw_cancelled");
+  self endon(#"death", #"disconnect", #"begin_grenade_tracking", #"grenade_throw_cancelled");
   var_d0931295 = function_b02e4a26(self);
 
   if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != "ultimate_turret") {
@@ -41,8 +41,8 @@ on_item_use(params) {
 }
 
 function_6c288c45(spawnorigin, spawnangles) {
-  self endon(#"death", # "disconnect");
-  self stats::function_e24eec31(level.ultimateturretweapon, # "used", 1);
+  self endon(#"death", #"disconnect");
+  self stats::function_e24eec31(level.ultimateturretweapon, #"used", 1);
   turretvehicle = spawnvehicle("veh_ultimate_turret_wz", spawnorigin, spawnangles);
 
   if(!isDefined(turretvehicle)) {
@@ -140,7 +140,7 @@ function_b02e4a26(player) {
 
 function_d4f9ecb(duration) {
   turretvehicle = self;
-  turretvehicle endon(#"death", # "delete");
+  turretvehicle endon(#"death", #"delete");
   wait duration;
   turretvehicle function_21f16a35();
 }
@@ -196,7 +196,7 @@ onturretdeath(einflictor, eattacker, idamage, smeansofdeath, weapon, vdir, shitl
 
     if(!isDefined(turretvehicle.owner) || turretvehicle.owner util::isenemyplayer(eattacker)) {
       eattacker stats::function_dad108fa(#"destroy_turret", 1);
-      eattacker stats::function_e24eec31(weapon, # "destroy_turret", 1);
+      eattacker stats::function_e24eec31(weapon, #"destroy_turret", 1);
     }
   }
 
@@ -262,7 +262,7 @@ is_valid_target(potential_target, friendly_team) {
 function_fefefcc4() {
   turretvehicle = self;
   turret_index = 0;
-  turretvehicle endon(#"death", # "death_started", # "end_turret_scanning");
+  turretvehicle endon(#"death", #"death_started", #"end_turret_scanning");
   wait 0.8;
   bundle = get_killstreak_bundle();
   var_beeadda8 = isDefined(bundle.var_5fa88c50) ? bundle.var_5fa88c50 : 300;
@@ -361,7 +361,7 @@ get_target_offset(target) {
 
 turretscanning() {
   turretvehicle = self;
-  turretvehicle endon(#"death", # "death_started", # "end_turret_scanning");
+  turretvehicle endon(#"death", #"death_started", #"end_turret_scanning");
   turretvehicle.turret_target = undefined;
   turretvehicle.do_not_clear_targets_during_think = 1;
   wait 0.8;
@@ -441,7 +441,7 @@ turretscanning() {
 
           if(min_pause_time > 0 && !var_afae28e0) {
             pause_time = min_pause_time > max_pause_time ? min_pause_time : randomfloatrange(min_pause_time, max_pause_time);
-            waitresult = turretvehicle.turret_target waittilltimeout(pause_time, # "death", # "disconnect");
+            waitresult = turretvehicle.turret_target waittilltimeout(pause_time, #"death", #"disconnect");
             var_afae28e0 = waitresult._notify === "death";
           }
         } else {
@@ -504,7 +504,7 @@ turretscanning() {
       turretvehicle.scanpos = "left";
     }
 
-    waitresult = turretvehicle waittilltimeout(3.5, # "enemy");
+    waitresult = turretvehicle waittilltimeout(3.5, #"enemy");
 
     if(waitresult._notify == # "enemy" && isDefined(turretvehicle.enemy)) {
       if(turretvehicle.var_aac73d6c && !isDefined(turretvehicle.enemylastseentime)) {

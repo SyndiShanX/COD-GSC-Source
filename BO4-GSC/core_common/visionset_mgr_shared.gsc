@@ -311,7 +311,7 @@ ramp_in_out_thread_per_player_internal(player, ramp_in, full_period, ramp_out) {
 
 ramp_in_out_thread_watch_player_shutdown(player) {
   player notify(#"ramp_in_out_thread_watch_player_shutdown");
-  player endon(#"ramp_in_out_thread_watch_player_shutdown", # "disconnect");
+  player endon(#"ramp_in_out_thread_watch_player_shutdown", #"disconnect");
   player waittill(#"death");
 
   if(player isremotecontrolling() == 0) {

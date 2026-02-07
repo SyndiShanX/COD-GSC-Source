@@ -93,20 +93,20 @@ function_9466dec0() {
   var_c5cacee = struct::get_array("sndPipeRattles", "targetname");
   var_61bc8796 = struct::get_array("sndWoodStress", "targetname");
   level waittill(#"play_destruction_sounds");
-  playSound(0, # "hash_36a95d08ed4998f6", (20, -5248, 1196));
+  playSound(0, #"hash_36a95d08ed4998f6", (20, -5248, 1196));
 
   foreach(rattle in var_7a522422) {
-    playSound(0, # "hash_565a94625021a254", rattle.origin);
+    playSound(0, #"hash_565a94625021a254", rattle.origin);
     waitframe(1);
   }
 
   foreach(rattle in var_c5cacee) {
-    playSound(0, # "hash_2dbe3a174b1c934c", rattle.origin);
+    playSound(0, #"hash_2dbe3a174b1c934c", rattle.origin);
     waitframe(1);
   }
 
   foreach(rattle in var_61bc8796) {
-    playSound(0, # "hash_3d14ed72726a475a", rattle.origin);
+    playSound(0, #"hash_3d14ed72726a475a", rattle.origin);
     waitframe(1);
   }
 }

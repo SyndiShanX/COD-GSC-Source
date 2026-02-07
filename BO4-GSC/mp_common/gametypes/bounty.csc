@@ -55,7 +55,7 @@ function_f7842f51(localclientnum) {
 }
 
 function_bd48b229(localclientnum, fxarray) {
-  self waittill(#"hash_eca936d9bc271de", # "death");
+  self waittill(#"hash_eca936d9bc271de", #"death");
 
   if(isDefined(fxarray)) {
     foreach(fx in fxarray) {

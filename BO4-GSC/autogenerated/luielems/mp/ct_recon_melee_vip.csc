@@ -8,7 +8,7 @@
 
 class cct_recon_melee_vip: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "ct_recon_melee_vip");
+    cluielem::open(localclientnum, #"ct_recon_melee_vip");
   }
 
   function function_fa582112(localclientnum) {

@@ -909,7 +909,7 @@ function_df1098a() {
 
 function_ad7ad6ce(trigger_struct) {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   usetrigger = self;
   activator = trigger_struct.activator;
 
@@ -976,7 +976,7 @@ function_ad7ad6ce(trigger_struct) {
 function_eb900758(stash) {
   self childthread function_d87c50ae(stash);
   self childthread function_6266f448(stash);
-  self waittill(#"disconnect", # "death", # "entering_last_stand", # "hash_2781407e327b42ee");
+  self waittill(#"disconnect", #"death", #"entering_last_stand", #"hash_2781407e327b42ee");
 
   if(isDefined(stash) && isDefined(stash.lootlocker) && stash.lootlocker) {
     function_35c26e09(stash);
@@ -991,7 +991,7 @@ function_eb900758(stash) {
 function_6266f448(stash) {
   self notify("6dcb0aa0e1be50d9");
   self endon("6dcb0aa0e1be50d9");
-  self endon(#"disconnect", # "death", # "entering_last_stand", # "hash_2781407e327b42ee");
+  self endon(#"disconnect", #"death", #"entering_last_stand", #"hash_2781407e327b42ee");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");
@@ -1007,7 +1007,7 @@ function_6266f448(stash) {
 function_d87c50ae(stash) {
   self notify("4bd96bb741326417");
   self endon("4bd96bb741326417");
-  self endon(#"disconnect", # "death", # "entering_last_stand", # "hash_2781407e327b42ee");
+  self endon(#"disconnect", #"death", #"entering_last_stand", #"hash_2781407e327b42ee");
 
   while(true) {
     waitframe(1);

@@ -8,7 +8,7 @@
 #namespace remotemissile;
 
 autoexec __init__system__() {
-  system::register(#"remotemissile", &__init__, undefined, # "killstreaks");
+  system::register(#"remotemissile", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

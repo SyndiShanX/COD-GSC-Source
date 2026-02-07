@@ -99,10 +99,10 @@ function_84f1c310() {
     t_catwalk_door sethintstring(#"");
     waitresult = var_40762d8a waittill(#"trigger");
     level flag::set(#"catwalk_door_open");
-    level thread scene::init_streamer(#"aib_vign_zm_mob_brutus_summon_hellhounds", # "allies", 0, 0);
+    level thread scene::init_streamer(#"aib_vign_zm_mob_brutus_summon_hellhounds", #"allies", 0, 0);
 
     if(isplayer(waitresult.activator)) {
-      waitresult.activator thread zm_audio::create_and_play_dialog(#"catwalk", # "open", undefined, 1);
+      waitresult.activator thread zm_audio::create_and_play_dialog(#"catwalk", #"open", undefined, 1);
     }
 
     var_40762d8a sethintstring(#"");
@@ -193,7 +193,7 @@ function_dc212e9f() {
 
 function_f184754() {
   while(true) {
-    s_info = self waittill(#"trigger", # "death");
+    s_info = self waittill(#"trigger", #"death");
 
     if(isplayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
       break;
@@ -208,7 +208,7 @@ function_fd3fa3a3() {
   self endon(#"death");
 
   while(true) {
-    s_info = self waittill(#"trigger", # "death");
+    s_info = self waittill(#"trigger", #"death");
 
     if(isplayer(s_info.activator) && !s_info.activator laststand::player_is_in_laststand() || s_info._notify === "death") {
       break;
@@ -331,7 +331,7 @@ function_7b6777c5(t_spawner) {
 function_17ccf041() {
   self notify("132dac1db2bd93e0");
   self endon("132dac1db2bd93e0");
-  level endon(#"catwalk_event_completed", # "end_game");
+  level endon(#"catwalk_event_completed", #"end_game");
   level.var_20cff6f0 = 0;
 
   while(true) {
@@ -339,7 +339,7 @@ function_17ccf041() {
     e_leader = function_9ac202b9();
 
     if(isplayer(e_leader)) {
-      s_notify = e_leader waittilltimeout(n_check_time, # "damage", # "death");
+      s_notify = e_leader waittilltimeout(n_check_time, #"damage", #"death");
 
       if(s_notify._notify === "death") {
         waitframe(1);
@@ -558,7 +558,7 @@ play_brutus_scene_done(a_ents) {
 function_d0392daf() {
   self setCanDamage(1);
   self.health = 10000000;
-  s_result = self waittill(#"damage", # "teleport");
+  s_result = self waittill(#"damage", #"teleport");
 
   if(s_result._notify == "damage") {
     level.var_43bca751 = 1;
@@ -579,7 +579,7 @@ function_e16c819a(a_ents) {
 function_993f4add() {
   self notify(#"hash_2c989e619ebfe50a");
   self endon(#"hash_2c989e619ebfe50a");
-  s_result = self waittill(#"death", # "b_h_stop_damage_watcher");
+  s_result = self waittill(#"death", #"b_h_stop_damage_watcher");
 
   if(s_result._notify == "death") {
     if(isDefined(self)) {
@@ -673,17 +673,17 @@ function_ddadfe7() {
     str_zone = self zm_zonemgr::get_player_zone();
 
     if(isDefined(str_zone) && isinarray(a_str_zones, str_zone) && !(isDefined(self.var_9235ac2d) && self.var_9235ac2d)) {
-      self zm_audio::function_6191af93(#"surrounded", # "self", # "catwalk", # "surrounded");
+      self zm_audio::function_6191af93(#"surrounded", #"self", #"catwalk", #"surrounded");
       self.var_9235ac2d = 1;
     } else if(isDefined(str_zone) && !isinarray(a_str_zones, str_zone) && isDefined(self.var_9235ac2d) && self.var_9235ac2d) {
-      self zm_audio::function_e1666976(#"surrounded", # "self");
+      self zm_audio::function_e1666976(#"surrounded", #"self");
       self.var_9235ac2d = undefined;
     }
 
     wait 1;
   }
 
-  self zm_audio::function_e1666976(#"surrounded", # "self");
+  self zm_audio::function_e1666976(#"surrounded", #"self");
 
   if(isDefined(self.var_9235ac2d) && self.var_9235ac2d) {
     self.var_9235ac2d = undefined;

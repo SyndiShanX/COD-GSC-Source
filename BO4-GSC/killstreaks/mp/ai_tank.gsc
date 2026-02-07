@@ -16,7 +16,7 @@
 #namespace ai_tank;
 
 autoexec __init__system__() {
-  system::register(#"ai_tank", &__init__, undefined, # "killstreaks");
+  system::register(#"ai_tank", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -92,7 +92,7 @@ function_1e11d939(attacker, weapon) {
     scoreevents::function_f40d64cc(attacker, self, weapon);
 
     if(isDefined(attacker)) {
-      attacker stats::function_e24eec31(weapon, # "hash_3f3d8a93c372c67d", 1);
+      attacker stats::function_e24eec31(weapon, #"hash_3f3d8a93c372c67d", 1);
     }
   }
 

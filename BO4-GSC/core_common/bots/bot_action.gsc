@@ -211,13 +211,13 @@ function_36052a7f(weaponname) {
 
 register_bulletweapon(weaponname) {
   register_weapon(weaponname, &function_22991a48);
-  function_a2c83569(weaponname, # "hash_7aaeac32a4e1bf84");
-  function_a2c83569(weaponname, # "hash_434716893aa869f3");
+  function_a2c83569(weaponname, #"hash_7aaeac32a4e1bf84");
+  function_a2c83569(weaponname, #"hash_434716893aa869f3");
 }
 
 register_sniperweapon(weaponname) {
   register_weapon(weaponname, &function_22991a48);
-  function_a2c83569(weaponname, # "hash_4c707ba80bf09cec");
+  function_a2c83569(weaponname, #"hash_4c707ba80bf09cec");
 }
 
 function_f4302f2a(weaponname, rankfunc, activatefunc) {
@@ -377,7 +377,7 @@ function_9480d296() {
 }
 
 execution_loop() {
-  self endon(#"hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start");
+  self endon(#"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
   level endon(#"game_ended");
 
   while(self bot::initialized()) {
@@ -399,7 +399,7 @@ execution_loop() {
 }
 
 function_e7b123e8(actionparams) {
-  self endoncallback(&function_7a456ee0, # "hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start");
+  self endoncallback(&function_7a456ee0, #"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
   level endon(#"game_ended");
   action = actionparams.action;
   self.bot.action = action;
@@ -431,7 +431,7 @@ function_7a456ee0(notifyhash) {
 }
 
 action_timeout(actionname) {
-  self endon(#"hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start", # "hash_1728f8b5de3bde13");
+  self endon(#"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
   level endon(#"game_ended");
   wait 10;
 

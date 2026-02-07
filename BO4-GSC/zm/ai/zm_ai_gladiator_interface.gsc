@@ -8,7 +8,7 @@
 #namespace zm_ai_gladiator_interface;
 
 registergladiatorinterfaceattributes() {
-  ai::registermatchedinterface(#"gladiator", # "run", 0, array(1, 0));
-  ai::registermatchedinterface(#"gladiator", # "axe_throw", 1, array(1, 0));
-  ai::registernumericinterface(#"gladiator", # "damage_multiplier", 1, 0, 100);
+  ai::registermatchedinterface(#"gladiator", #"run", 0, array(1, 0));
+  ai::registermatchedinterface(#"gladiator", #"axe_throw", 1, array(1, 0));
+  ai::registernumericinterface(#"gladiator", #"damage_multiplier", 1, 0, 100);
 }

@@ -22,7 +22,7 @@ __init__() {
 }
 
 function_27473e44() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_death_dash", "mod_death_dash", # "perk_death_dash", # "specialty_death_dash", 3000);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_death_dash", "mod_death_dash", #"perk_death_dash", #"specialty_death_dash", 3000);
   zm_perks::register_perk_clientfields(#"specialty_mod_death_dash", &register_clientfield, &set_clientfield);
   zm_perks::register_perk_threads(#"specialty_mod_death_dash", &give_perk, &take_perk);
 }
@@ -47,7 +47,7 @@ take_perk(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_6607df78() {
-  self endon(#"death", # "hash_3e32f308aae32783");
+  self endon(#"death", #"hash_3e32f308aae32783");
   level endon(#"end_game");
 
   while(true) {

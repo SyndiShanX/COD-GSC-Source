@@ -136,7 +136,7 @@ function_e14376a3() {
       level.s_apd_trap.v_touching.activated_by_player = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", # "activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_generic", #"activate");
       }
     }
   }
@@ -203,7 +203,7 @@ apd_trap_activate(e_player) {
 }
 
 function_25ede6c7(s_trap) {
-  self endoncallback(&function_171226f4, # "death");
+  self endoncallback(&function_171226f4, #"death");
   self.var_410faa5f = util::spawn_model("tag_origin", s_trap.origin);
   fx = playFXOnTag(level._effect[# "tesla_bolt"], self.var_410faa5f, "tag_origin");
   playsoundatposition(#"hash_286b88c1d2e99649", s_trap.origin);

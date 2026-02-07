@@ -435,7 +435,7 @@ function_1dc9b29a() {
       level.var_f45a0bfd.is_moving = 0;
 
       if(isDefined(s_info.b_all_players) && s_info.b_all_players) {
-        self.var_3e21d491 zm_hms_util::function_6099877a(64, # "hash_688d0bffbc9f5888", s_info.str_hint, s_info.var_306b9dd6);
+        self.var_3e21d491 zm_hms_util::function_6099877a(64, #"hash_688d0bffbc9f5888", s_info.str_hint, s_info.var_306b9dd6);
         self.var_3e21d491 function_30a02731();
       } else {
         self.var_3e21d491 zm_unitrigger::create(&function_6248ba90, 64);

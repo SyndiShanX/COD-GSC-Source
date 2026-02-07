@@ -20,7 +20,7 @@ class czm_laststand_client: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_laststand_client");
+    cluielem::open(localclientnum, #"zm_laststand_client");
   }
 
   function function_fa582112(localclientnum) {

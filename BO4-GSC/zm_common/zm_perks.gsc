@@ -578,7 +578,7 @@ vending_trigger_think() {
 
     if(!player zm_score::can_player_purchase(current_cost)) {
       zm_utility::play_sound_on_ent("no_purchase");
-      player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       continue;
     }
 
@@ -608,9 +608,9 @@ vending_trigger_think() {
 }
 
 vending_trigger_post_think(player, perk) {
-  player endon(#"disconnect", # "end_game", # "perk_abort_drinking");
+  player endon(#"disconnect", #"end_game", #"perk_abort_drinking");
   player perk_give_bottle_begin(perk);
-  evt = player waittilltimeout(3, # "fake_death", # "death", # "player_downed", # "offhand_end", # "perk_abort_drinking", # "disconnect");
+  evt = player waittilltimeout(3, #"fake_death", #"death", #"player_downed", #"offhand_end", #"perk_abort_drinking", #"disconnect");
 
   if(evt._notify == "offhand_end" || evt._notify == # "timeout") {
     player thread wait_give_perk(perk);
@@ -635,8 +635,8 @@ vending_trigger_post_think(player, perk) {
 }
 
 wait_give_perk(perk) {
-  self endon(#"player_downed", # "disconnect", # "end_game", # "perk_abort_drinking");
-  self waittilltimeout(0.5, # "burp", # "player_downed", # "disconnect", # "end_game", # "perk_abort_drinking");
+  self endon(#"player_downed", #"disconnect", #"end_game", #"perk_abort_drinking");
+  self waittilltimeout(0.5, #"burp", #"player_downed", #"disconnect", #"end_game", #"perk_abort_drinking");
   self function_a7ae070c(perk);
   self thread give_perk_presentation(perk);
   self notify(#"perk_bought", {
@@ -646,7 +646,7 @@ wait_give_perk(perk) {
 }
 
 give_perk_presentation(perk) {
-  self endon(#"player_downed", # "disconnect", # "end_game", # "perk_abort_drinking");
+  self endon(#"player_downed", #"disconnect", #"end_game", #"perk_abort_drinking");
   self zm_audio::playerexert("burp");
   self thread function_305131b1(perk);
 }
@@ -656,7 +656,7 @@ function_305131b1(perk) {
   b_played = self zm_audio::create_and_play_dialog(#"perk", perk);
 
   if(!(isDefined(b_played) && b_played)) {
-    self zm_audio::create_and_play_dialog(#"perk", # "generic");
+    self zm_audio::create_and_play_dialog(#"perk", #"generic");
   }
 }
 
@@ -734,7 +734,7 @@ vending_set_hintstring(perk) {
 perk_think(perk) {
   self endon(#"disconnect");
   perk_str = perk + "_stop";
-  result = self waittill(#"fake_death", # "death", # "player_downed", perk_str);
+  result = self waittill(#"fake_death", #"death", #"player_downed", perk_str);
   result = result._notify;
   self perks::perk_unsetperk(perk);
 
@@ -2065,17 +2065,17 @@ function_b7f2c635(player) {
   var_99442276 = 0;
 
   if(self.stub.var_3468124.var_2977c27 == "off") {
-    self sethintstringforplayer(player, # "zombie/need_power");
+    self sethintstringforplayer(player, #"zombie/need_power");
     return true;
   }
 
   if(zm_trial_disable_buys::is_active()) {
-    self sethintstringforplayer(player, # "hash_55d25caf8f7bbb2f");
+    self sethintstringforplayer(player, #"hash_55d25caf8f7bbb2f");
     return true;
   }
 
   if(zm_trial_disable_perks::is_active() || !zm_custom::function_901b751c(#"zmperksactive") || zm_trial_randomize_perks::is_active()) {
-    self sethintstringforplayer(player, # "hash_77db65489366a43");
+    self sethintstringforplayer(player, #"hash_77db65489366a43");
     return true;
   }
 
@@ -2211,11 +2211,11 @@ function_f5da744e() {
 
     if(!player zm_score::can_player_purchase(current_cost)) {
       zm_utility::play_sound_on_ent("no_purchase");
-      player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       continue;
     }
 
-    player thread zm_audio::create_and_play_dialog(#"altar", # "interact");
+    player thread zm_audio::create_and_play_dialog(#"altar", #"interact");
     playsoundatposition(#"hash_489cdfeed1ac55bd", self.origin);
 
     if(level.var_c3e5c4cd == 1 && !self.var_3cfb2018) {
@@ -2278,11 +2278,11 @@ function_9da4880b() {
 }
 
 taking_cover_tanks_(player, perk, n_slot, var_3468124) {
-  player endon(#"disconnect", # "end_game");
+  player endon(#"disconnect", #"end_game");
   player function_fb633f9d(n_slot, 5);
   var_3468124 thread function_e9df56d1();
   player perk_give_bottle_begin(perk);
-  evt = player waittilltimeout(3, # "fake_death", # "death", # "player_downed", # "offhand_fire", # "perk_abort_drinking", # "disconnect");
+  evt = player waittilltimeout(3, #"fake_death", #"death", #"player_downed", #"offhand_fire", #"perk_abort_drinking", #"disconnect");
   player.perk_purchased = undefined;
 
   if(isDefined(player.intermission) && player.intermission) {
@@ -2408,7 +2408,7 @@ function_b2ac6ee7() {
 }
 
 function_9bdf581f(perk, n_slot, b_bought = 0) {
-  self endon(#"player_downed", # "disconnect", # "perk_abort_drinking");
+  self endon(#"player_downed", #"disconnect", #"perk_abort_drinking");
   level endon(#"end_game");
   level notify(#"hash_4e566c83cdfabe44", {
     #e_player: self, #perk: perk
@@ -2448,9 +2448,9 @@ function_9bdf581f(perk, n_slot, b_bought = 0) {
       self function_fb633f9d(n_slot, 6);
     }
 
-    self stats::inc_stat(#"perk_stats", var_9a0250b7, # "given", # "statvalue", 1);
+    self stats::inc_stat(#"perk_stats", var_9a0250b7, #"given", #"statvalue", 1);
   } else {
-    self stats::inc_stat(#"perk_stats", level._custom_perks[perk].var_60e3692f, # "modifier_given", # "statvalue", 1);
+    self stats::inc_stat(#"perk_stats", level._custom_perks[perk].var_60e3692f, #"modifier_given", #"statvalue", 1);
   }
 
   if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].player_thread_give)) {
@@ -2725,7 +2725,7 @@ function_cc24f525() {
 }
 
 function_29387491(var_16c042b8, n_slot) {
-  self endon(#"fake_death", # "death", # "player_downed", # "perk_abort_drinking");
+  self endon(#"fake_death", #"death", #"player_downed", #"perk_abort_drinking");
 
   if(var_16c042b8 == # "specialty_mystery") {
     var_ddd879da = 1;
@@ -2737,7 +2737,7 @@ function_29387491(var_16c042b8, n_slot) {
   }
 
   self perk_give_bottle_begin(var_16c042b8);
-  s_result = self waittilltimeout(3, # "offhand_fire");
+  s_result = self waittilltimeout(3, #"offhand_fire");
 
   if(isDefined(n_slot)) {
     if(isDefined(var_ddd879da) && var_ddd879da) {
@@ -2784,7 +2784,7 @@ function_f9385a02(var_330ce459, n_slot) {
 function_5ea0c6cf(var_9bf8fb5c) {
   var_cc1db3c1 = array::exclude(level.var_b8be892e, self.var_67ba1237);
   var_cc1db3c1 = array::exclude(var_cc1db3c1, self.var_c27f1e90);
-  var_cc1db3c1 = array::exclude(var_cc1db3c1, # "specialty_mystery");
+  var_cc1db3c1 = array::exclude(var_cc1db3c1, #"specialty_mystery");
 
   if(isarray(var_9bf8fb5c)) {
     var_cc1db3c1 = array::exclude(var_cc1db3c1, var_9bf8fb5c);
@@ -3172,7 +3172,7 @@ function_ba56adf1(var_c188cf87, var_59ad3e22) {
 }
 
 function_c99f4d81(var_c188cf87, var_59ad3e22) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   b_first_loop = 1;
 
   while(function_66c0d837(self, var_c188cf87, var_59ad3e22)) {
@@ -3227,7 +3227,7 @@ function_c709e667(str_name) {
 }
 
 function_b4c0e0ee(n_bleedout_time) {
-  self endon(#"player_revived", # "disconnect", # "bled_out");
+  self endon(#"player_revived", #"disconnect", #"bled_out");
   level endon(#"round_reset");
   self thread function_d3b5e743();
 
@@ -3240,7 +3240,7 @@ function_b4c0e0ee(n_bleedout_time) {
 }
 
 function_d3b5e743() {
-  self endon(#"player_revived", # "disconnect");
+  self endon(#"player_revived", #"disconnect");
   level endon(#"round_reset");
   self waittill(#"bled_out");
   self function_28ac0614(undefined, 1);
@@ -3269,7 +3269,7 @@ function_28ac0614(var_bbb2c705, var_613b7621 = 0) {
       }
 
       if(b_wait && !(isDefined(self.var_39c78617) && self.var_39c78617)) {
-        self waittilltimeout(var_bbb2c705, # "instakill_player");
+        self waittilltimeout(var_bbb2c705, #"instakill_player");
       }
     }
 
@@ -3346,8 +3346,8 @@ function_dc10fc94(var_cd5d9345, var_bbb2c705) {
 }
 
 set_bleedout_progress(var_bbb2c705, var_b0696a17) {
-  self endon(#"player_revived", # "zombified", # "disconnect");
-  level endon(#"end_game", # "round_reset");
+  self endon(#"player_revived", #"zombified", #"disconnect");
+  level endon(#"end_game", #"round_reset");
 
   if(var_bbb2c705 == 0) {
     var_bbb2c705 = 0.001;
@@ -3444,7 +3444,7 @@ lost_perk_override(perk) {
 function_b2dfd295(perk, var_8c7df7fc) {
   str_endon = "return_perk_on_revive_" + perk;
   self notify(str_endon);
-  self endon(str_endon, # "disconnect", # "bled_out");
+  self endon(str_endon, #"disconnect", #"bled_out");
 
   if(!isDefined(self.var_1898de24)) {
     self.var_1898de24 = [];

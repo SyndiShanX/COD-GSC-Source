@@ -35,7 +35,7 @@
 #namespace drone_squadron;
 
 autoexec __init__system__() {
-  system::register(#"drone_squadron", &__init__, undefined, # "killstreaks");
+  system::register(#"drone_squadron", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -44,7 +44,7 @@ __init__() {
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"killstreak_remote"));
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_26ffb92552ae26be"));
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_5fbda3ef4b135b49"));
-  remote_weapons::registerremoteweapon("drone_squadron", # "hash_7c833954874f735d", &function_97bbef8, &function_d9733cc9, 0);
+  remote_weapons::registerremoteweapon("drone_squadron", #"hash_7c833954874f735d", &function_97bbef8, &function_d9733cc9, 0);
   level.killstreaks[# "drone_squadron"].threatonkill = 1;
   visionset_mgr::register_info("visionset", "drone_squadron_visionset", 1, 120, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
   callback::on_joined_team(&function_a9737855);
@@ -197,7 +197,7 @@ function_d52c51c6(killstreaktype) {
     return false;
   }
 
-  player stats::function_e24eec31(getweapon(#"drone_squadron"), # "used", 1);
+  player stats::function_e24eec31(getweapon(#"drone_squadron"), #"used", 1);
   drone_squadron = spawnvehicle("veh_drone_squadron_mp", spawnpos.origin, spawnpos.angles, "dynamic_spawn_ai");
   drone_squadron killstreaks::configure_team("drone_squadron", killstreak_id, player, "small_vehicle", undefined, &configureteampost);
   drone_squadron killstreak_hacking::enable_hacking("drone_squadron", &hackedcallbackpre, &hackedcallbackpost);
@@ -490,7 +490,7 @@ watchdeath() {
 
       if(modtype == "MOD_RIFLE_BULLET" || modtype == "MOD_PISTOL_BULLET") {}
 
-      luinotifyevent(#"player_callout", 2, # "hash_32fcc2097e294f0a", attacker.entnum);
+      luinotifyevent(#"player_callout", 2, #"hash_32fcc2097e294f0a", attacker.entnum);
     }
 
     if(isDefined(drone_squadron) && isDefined(drone_squadron.owner)) {
@@ -504,7 +504,7 @@ watchteamchange() {
   self endon(#"hash_7e3a7db8b681733");
   drone_squadron = self;
   drone_squadron endon(#"drone_squadron_shutdown");
-  drone_squadron.owner waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  drone_squadron.owner waittill(#"joined_team", #"disconnect", #"joined_spectators");
 
   if(isDefined(drone_squadron)) {
     drone_squadron notify(#"drone_squadron_shutdown");
@@ -580,7 +580,7 @@ function_f9ec0116(drone, leavenode) {
   drone.ignoreall = 1;
   drone setneargoalnotifydist(40);
   drone function_a57c34b7(leavenode.origin, 1, 1);
-  drone waittilltimeout(8, # "near_goal");
+  drone waittilltimeout(8, #"near_goal");
   drone kill();
 }
 
@@ -641,7 +641,7 @@ watchshutdown() {
 }
 
 function_da3b4d35() {
-  self endon(#"death", # "drone_squadron_shutdown");
+  self endon(#"death", #"drone_squadron_shutdown");
   self thread function_c7284de2();
 
   while(true) {
@@ -688,7 +688,7 @@ function_c7284de2() {
   player = self.owner;
   leaddrone = self;
   player endon(#"death");
-  leaddrone endon(#"death", # "drone_squadron_shutdown");
+  leaddrone endon(#"death", #"drone_squadron_shutdown");
   function_47a6b2ec(player);
   function_d0eb04e9(player);
   assert(isDefined(player.var_99033e70));
@@ -767,7 +767,7 @@ function_74ceb0a5(leaddrone) {
 
 function_47a6b2ec(player) {
   player.var_99033e70 = gameobjects::get_next_obj_id();
-  objective_add(player.var_99033e70, "active", undefined, # "hash_19883df3d28a354a");
+  objective_add(player.var_99033e70, "active", undefined, #"hash_19883df3d28a354a");
   objective_setprogress(player.var_99033e70, 1);
   function_da7940a3(player.var_99033e70, 1);
   objective_setinvisibletoall(player.var_99033e70);
@@ -790,7 +790,7 @@ function_bef71297(player, target) {
 
 function_d0eb04e9(player) {
   player.var_ce69b6d1 = gameobjects::get_next_obj_id();
-  objective_add(player.var_ce69b6d1, "active", undefined, # "hash_247ae058537c8726");
+  objective_add(player.var_ce69b6d1, "active", undefined, #"hash_247ae058537c8726");
   objective_setprogress(player.var_ce69b6d1, 1);
   function_da7940a3(player.var_ce69b6d1, 1);
   objective_setinvisibletoall(player.var_ce69b6d1);

@@ -142,7 +142,7 @@ reset_loadout(var_96288bc8 = 0) {
     self zm_weapons::weapon_give(level.weaponzmfists, 1);
 
     if(isDefined(level.var_7f7fd2ac)) {
-      level waittill(#"enable_equipment", # "hash_7646638df88a3656");
+      level waittill(#"enable_equipment", #"hash_7646638df88a3656");
     }
   }
 
@@ -163,7 +163,7 @@ on_end(round_reset) {
 }
 
 function_d1dabace(n_time = 30) {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   level.var_236b9f7a = &function_37fe3e07;
   level.func_override_wallbuy_prompt = &function_3d4fea64;
   level.func_magicbox_update_prompt_use_override = &function_bf591b5a;

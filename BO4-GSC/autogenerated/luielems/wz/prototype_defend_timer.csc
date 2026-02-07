@@ -8,7 +8,7 @@
 
 class cprototype_defend_timer: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "prototype_defend_timer");
+    cluielem::open(localclientnum, #"prototype_defend_timer");
   }
 
   function function_fa582112(localclientnum) {

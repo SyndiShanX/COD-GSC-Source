@@ -38,7 +38,7 @@ fishing_buoy_splash(localclientnum, oldval, newval, bnewent, binitialsnap, field
   }
 
   self.var_85dbab0 = playFX(localclientnum, "player/fx_plyr_water_splash_sm", self.origin);
-  playSound(localclientnum, # "hash_7ff007fca6ac13d7", self.origin);
+  playSound(localclientnum, #"hash_7ff007fca6ac13d7", self.origin);
 }
 
 fishing_splash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -51,5 +51,5 @@ fishing_splash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   }
 
   self.var_85dbab0 = playFX(localclientnum, "impacts/fx8_bul_impact_water_sm", self.origin);
-  playSound(localclientnum, # "hash_4b98472de9aeb14b", self.origin);
+  playSound(localclientnum, #"hash_4b98472de9aeb14b", self.origin);
 }

@@ -86,6 +86,6 @@ function_e4c3443c(s_challenge) {
       self.var_167bc422 = undefined;
     }
 
-    self waittill(#"earned_points", # "spent_points", # "reduced_points");
+    self waittill(#"earned_points", #"spent_points", #"reduced_points");
   }
 }

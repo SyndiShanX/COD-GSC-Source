@@ -30,9 +30,9 @@ __main__() {}
 
 enable_stronghold_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_camper", # "perk_stronghold", 2500, # "hash_cd87686e9c80e75", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), # "zmperksstonecold");
+    zm_perks::register_perk_basic_info(#"specialty_camper", #"perk_stronghold", 2500, #"hash_cd87686e9c80e75", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), #"zmperksstonecold");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_camper", # "perk_stronghold", 2500, # "zombie/perk_stronghold", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), # "zmperksstonecold");
+    zm_perks::register_perk_basic_info(#"specialty_camper", #"perk_stronghold", 2500, #"zombie/perk_stronghold", getweapon("zombie_perk_bottle_stronghold"), getweapon("zombie_perk_totem_stronghold"), #"zmperksstonecold");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_camper", &function_e03779ee);
@@ -86,7 +86,7 @@ function_9a3871b7(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_7424eebb() {
-  self endon(#"specialty_camper" + "_take", # "disconnect");
+  self endon(#"specialty_camper" + "_take", #"disconnect");
 
   while(true) {
     if(!self laststand::player_is_in_laststand() && !self util::is_spectating() && !level flag::get("round_reset")) {
@@ -141,7 +141,7 @@ function_a84fcb78(var_3a553e99) {
 }
 
 add_armor() {
-  self zm_armor::add(#"stronghold_armor", 5, 50, # "");
+  self zm_armor::add(#"stronghold_armor", 5, 50, #"");
 }
 
 function_c25b980c() {

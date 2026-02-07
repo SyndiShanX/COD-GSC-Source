@@ -82,7 +82,7 @@ function_6d265b7f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       continue;
     }
 
-    player renderoverridebundle::function_f4eab437(localclientnum, newval, # "hash_2c6fce4151016478", &function_429c452);
+    player renderoverridebundle::function_f4eab437(localclientnum, newval, #"hash_2c6fce4151016478", &function_429c452);
   }
 }
 
@@ -97,7 +97,7 @@ function_c66f053(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       continue;
     }
 
-    player renderoverridebundle::function_f4eab437(localclientnum, should_play, # "hash_53798044d9a468d7", &function_e56218ab);
+    player renderoverridebundle::function_f4eab437(localclientnum, should_play, #"hash_53798044d9a468d7", &function_e56218ab);
   }
 }
 
@@ -124,7 +124,7 @@ function_429c452(localclientnum, should_play) {
     return 0;
   }
 
-  if(self hasperk(localclientnum, # "specialty_nokillstreakreticle")) {
+  if(self hasperk(localclientnum, #"specialty_nokillstreakreticle")) {
     return 0;
   }
 
@@ -162,7 +162,7 @@ function_e56218ab(localclientnum, should_play) {
     return 0;
   }
 
-  if(self hasperk(localclientnum, # "specialty_nokillstreakreticle")) {
+  if(self hasperk(localclientnum, #"specialty_nokillstreakreticle")) {
     return 0;
   }
 
@@ -178,20 +178,20 @@ function_e56218ab(localclientnum, should_play) {
 }
 
 function_77515127(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self thread renderoverridebundle::function_ee77bff9(localclientnum, "thermal_glow", # "hash_2c6fce4151016478", &function_429c452);
-  self thread renderoverridebundle::function_ee77bff9(localclientnum, "thermal_glow_enemies_only", # "hash_53798044d9a468d7", &function_e56218ab);
+  self thread renderoverridebundle::function_ee77bff9(localclientnum, "thermal_glow", #"hash_2c6fce4151016478", &function_429c452);
+  self thread renderoverridebundle::function_ee77bff9(localclientnum, "thermal_glow_enemies_only", #"hash_53798044d9a468d7", &function_e56218ab);
 }
 
 on_player_spawned(localclientnum) {
-  self renderoverridebundle::function_f4eab437(localclientnum, 0, # "hash_2c6fce4151016478");
-  self renderoverridebundle::function_f4eab437(localclientnum, 0, # "hash_53798044d9a468d7");
+  self renderoverridebundle::function_f4eab437(localclientnum, 0, #"hash_2c6fce4151016478");
+  self renderoverridebundle::function_f4eab437(localclientnum, 0, #"hash_53798044d9a468d7");
 }
 
 function_17381fe(localclientnum) {
   if(shoutcaster::function_2e6e4ee0(localclientnum)) {
     foreach(player in getplayers(localclientnum)) {
       if(isDefined(player) && !function_3132f113(player)) {
-        player renderoverridebundle::function_f4eab437(localclientnum, 0, # "hash_2c6fce4151016478");
+        player renderoverridebundle::function_f4eab437(localclientnum, 0, #"hash_2c6fce4151016478");
       }
     }
   }

@@ -24,7 +24,7 @@ class cremote_missile_target_lockon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "remote_missile_target_lockon");
+    cluielem::open(localclientnum, #"remote_missile_target_lockon");
   }
 
   function function_fa582112(localclientnum) {

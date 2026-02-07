@@ -9,7 +9,7 @@
 #namespace namespace_6fe6fb00;
 
 autoexec __init__system__() {
-  system::register(#"hash_4b0893282c45ca4", &__init__, undefined, # "zombie_dog_util");
+  system::register(#"hash_4b0893282c45ca4", &__init__, undefined, #"zombie_dog_util");
 }
 
 __init__() {

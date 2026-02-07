@@ -37,7 +37,7 @@ is_anim_debugging(ent) {
 
 anim_info_render_thread(animation, v_origin_or_ent, v_angles_or_tag, var_f4b34dc1) {
   self notify(#"_anim_info_render_thread_");
-  self endon(#"_anim_info_render_thread_", # "death", # "scriptedanim");
+  self endon(#"_anim_info_render_thread_", #"death", #"scriptedanim");
   level endon(#"kill_anim_debug");
 
   if(!isDefined(v_origin_or_ent)) {

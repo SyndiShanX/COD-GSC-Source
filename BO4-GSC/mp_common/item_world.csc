@@ -33,14 +33,14 @@ __init__() {
   level.var_ce95aace = [];
   level.var_7e2f5883 = [];
   level.var_19cf0be9 = [];
-  level.var_418d51ad = array(#"ammo_type_556_item", # "ammo_type_762_item", # "ammo_type_12ga_item", # "ammo_type_9mm_item", # "ammo_type_45_item", # "ammo_type_338_item", # "ammo_type_50cal_item", # "ammo_type_rocket_item");
-  level.var_69ee9282 = array(#"armor_item_large", # "armor_item_medium", # "armor_item_small");
-  level.var_6cb314b1 = array(#"sniperscope_wz_item", # "acog_plus_wz_item", # "reddot_wz_item", # "acog_wz_item", # "dualoptic_wz_item", # "holo_wz_item", # "reflex_wz_item", # "tritium_wz_item", # "suppressor_wz_item", # "extbarrel_wz_item", # "advmag_wz_item", # "extmag_wz_item", # "fastmag_wz_item", # "foregrip_wz_item", # "laser_sight_wz_item", # "pistol_grip_wz_item", # "stock_wz_item");
-  level.var_3fd5d8f0 = array(#"frag_grenade_wz_item", # "cluster_semtex_wz_item", # "acid_bomb_wz_item", # "molotov_wz_item", # "wraithfire_wz_item", # "hatchet_wz_item", # "tomahawk_t8_wz_item", # "seeker_mine_wz_item", # "dart_wz_item", # "hawk_wz_item", # "ultimate_turret_wz_item", # "swat_grenade_wz_item", # "concussion_wz_item", # "smoke_grenade_wz_item", # "smoke_grenade_wz_item_spring_holiday", # "emp_grenade_wz_item", # "spectre_grenade_wz_item", # "grapple_wz_item", # "unlimited_grapple_wz_item", # "barricade_wz_item", # "spiked_barrier_wz_item", # "trophy_system_wz_item", # "concertina_wire_wz_item", # "sensor_dart_wz_item", # "supply_pod_wz_item", # "trip_wire_wz_item", # "cymbal_monkey_wz_item", # "homunculus_wz_item", # "vision_pulse_wz_item", # "flare_gun_wz_item", # "flare_gun_veh_wz_item", # "wz_snowball", # "wz_waterballoon");
-  level.var_9bc8c1bc = array(#"health_item_small", # "health_item_medium", # "health_item_large", # "health_item_squad");
-  level.var_683c7e30 = array(#"perk_item_stimulant", # "perk_item_awareness", # "perk_item_deadsilence", # "perk_item_lightweight", # "perk_item_drifter", # "perk_item_engineer", # "perk_item_medic", # "perk_item_reinforced", # "perk_item_looter", # "perk_item_outlander", # "perk_item_paranoia", # "perk_item_ironlungs", # "perk_item_squadlink", # "perk_item_consumer", # "perk_item_brawler");
-  level.var_e93e16b = array(#"annihilator_wz_item", # "warmachine_wz_item", # "flamethrower_wz_item", # "sniper_fastrechamber_t8_gold_item", # "sniper_powerbolt_t8_gold_item", # "sniper_powersemi_t8_gold_item", # "sniper_quickscope_t8_gold_item", # "tr_longburst_t8_gold_item", # "tr_midburst_t8_gold_item", # "tr_powersemi_t8_gold_item", # "ar_accurate_t8_gold_item", # "ar_damage_t8_gold_item", # "ar_fastfire_t8_gold_item", # "ar_modular_t8_gold_item", # "ar_stealth_t8_gold_item", # "lmg_heavy_t8_gold_item", # "lmg_spray_t8_gold_item", # "lmg_standard_t8_gold_item", # "smg_accurate_t8_gold_item", # "smg_capacity_t8_gold_item", # "smg_fastfire_t8_gold_item", # "smg_handling_t8_gold_item", # "smg_standard_t8_gold_item", # "shotgun_semiauto_t8_gold_item", # "shotgun_pump_t8_gold_item", # "pistol_burst_t8_gold_item", # "pistol_revolver_t8_gold_item", # "pistol_standard_t8_gold_item");
-  level.var_b9917a92 = array(#"annihilator_wz_item", # "warmachine_wz_item", # "flamethrower_wz_item", # "ray_gun_t8_item", # "launcher_standard_t8_item", # "sniper_fastrechamber_t8_item", # "sniper_powerbolt_t8_item", # "sniper_powersemi_t8_item", # "sniper_quickscope_t8_item", # "tr_leveraction_t8_item", # "tr_longburst_t8_item", # "tr_midburst_t8_item", # "tr_powersemi_t8_item", # "ar_accurate_t8_item", # "ar_damage_t8_item", # "ar_fastfire_t8_item", # "ar_galil_t8_item", # "ar_mg1909_t8_item", # "ar_modular_t8_item", # "ar_stealth_t8_item", # "lmg_double_t8_item", # "lmg_heavy_t8_item", # "lmg_spray_t8_item", # "lmg_standard_t8_item", # "smg_accurate_t8_item", # "smg_capacity_t8_item", # "smg_drum_pistol_t8_item", # "smg_fastfire_t8_item", # "smg_handling_t8_item", # "smg_mp40_t8_item", # "smg_standard_t8_item", # "smg_thompson_t8_item", # "pistol_burst_t8_item", # "pistol_revolver_t8_item", # "pistol_standard_t8_item", # "pistol_topbreak_t8_item", # "shotgun_pump_t8_item", # "shotgun_semiauto_t8_item", # "shotgun_trenchgun_t8_item", # "melee_bowie_t8_item");
+  level.var_418d51ad = array(#"ammo_type_556_item", #"ammo_type_762_item", #"ammo_type_12ga_item", #"ammo_type_9mm_item", #"ammo_type_45_item", #"ammo_type_338_item", #"ammo_type_50cal_item", #"ammo_type_rocket_item");
+  level.var_69ee9282 = array(#"armor_item_large", #"armor_item_medium", #"armor_item_small");
+  level.var_6cb314b1 = array(#"sniperscope_wz_item", #"acog_plus_wz_item", #"reddot_wz_item", #"acog_wz_item", #"dualoptic_wz_item", #"holo_wz_item", #"reflex_wz_item", #"tritium_wz_item", #"suppressor_wz_item", #"extbarrel_wz_item", #"advmag_wz_item", #"extmag_wz_item", #"fastmag_wz_item", #"foregrip_wz_item", #"laser_sight_wz_item", #"pistol_grip_wz_item", #"stock_wz_item");
+  level.var_3fd5d8f0 = array(#"frag_grenade_wz_item", #"cluster_semtex_wz_item", #"acid_bomb_wz_item", #"molotov_wz_item", #"wraithfire_wz_item", #"hatchet_wz_item", #"tomahawk_t8_wz_item", #"seeker_mine_wz_item", #"dart_wz_item", #"hawk_wz_item", #"ultimate_turret_wz_item", #"swat_grenade_wz_item", #"concussion_wz_item", #"smoke_grenade_wz_item", #"smoke_grenade_wz_item_spring_holiday", #"emp_grenade_wz_item", #"spectre_grenade_wz_item", #"grapple_wz_item", #"unlimited_grapple_wz_item", #"barricade_wz_item", #"spiked_barrier_wz_item", #"trophy_system_wz_item", #"concertina_wire_wz_item", #"sensor_dart_wz_item", #"supply_pod_wz_item", #"trip_wire_wz_item", #"cymbal_monkey_wz_item", #"homunculus_wz_item", #"vision_pulse_wz_item", #"flare_gun_wz_item", #"flare_gun_veh_wz_item", #"wz_snowball", #"wz_waterballoon");
+  level.var_9bc8c1bc = array(#"health_item_small", #"health_item_medium", #"health_item_large", #"health_item_squad");
+  level.var_683c7e30 = array(#"perk_item_stimulant", #"perk_item_awareness", #"perk_item_deadsilence", #"perk_item_lightweight", #"perk_item_drifter", #"perk_item_engineer", #"perk_item_medic", #"perk_item_reinforced", #"perk_item_looter", #"perk_item_outlander", #"perk_item_paranoia", #"perk_item_ironlungs", #"perk_item_squadlink", #"perk_item_consumer", #"perk_item_brawler");
+  level.var_e93e16b = array(#"annihilator_wz_item", #"warmachine_wz_item", #"flamethrower_wz_item", #"sniper_fastrechamber_t8_gold_item", #"sniper_powerbolt_t8_gold_item", #"sniper_powersemi_t8_gold_item", #"sniper_quickscope_t8_gold_item", #"tr_longburst_t8_gold_item", #"tr_midburst_t8_gold_item", #"tr_powersemi_t8_gold_item", #"ar_accurate_t8_gold_item", #"ar_damage_t8_gold_item", #"ar_fastfire_t8_gold_item", #"ar_modular_t8_gold_item", #"ar_stealth_t8_gold_item", #"lmg_heavy_t8_gold_item", #"lmg_spray_t8_gold_item", #"lmg_standard_t8_gold_item", #"smg_accurate_t8_gold_item", #"smg_capacity_t8_gold_item", #"smg_fastfire_t8_gold_item", #"smg_handling_t8_gold_item", #"smg_standard_t8_gold_item", #"shotgun_semiauto_t8_gold_item", #"shotgun_pump_t8_gold_item", #"pistol_burst_t8_gold_item", #"pistol_revolver_t8_gold_item", #"pistol_standard_t8_gold_item");
+  level.var_b9917a92 = array(#"annihilator_wz_item", #"warmachine_wz_item", #"flamethrower_wz_item", #"ray_gun_t8_item", #"launcher_standard_t8_item", #"sniper_fastrechamber_t8_item", #"sniper_powerbolt_t8_item", #"sniper_powersemi_t8_item", #"sniper_quickscope_t8_item", #"tr_leveraction_t8_item", #"tr_longburst_t8_item", #"tr_midburst_t8_item", #"tr_powersemi_t8_item", #"ar_accurate_t8_item", #"ar_damage_t8_item", #"ar_fastfire_t8_item", #"ar_galil_t8_item", #"ar_mg1909_t8_item", #"ar_modular_t8_item", #"ar_stealth_t8_item", #"lmg_double_t8_item", #"lmg_heavy_t8_item", #"lmg_spray_t8_item", #"lmg_standard_t8_item", #"smg_accurate_t8_item", #"smg_capacity_t8_item", #"smg_drum_pistol_t8_item", #"smg_fastfire_t8_item", #"smg_handling_t8_item", #"smg_mp40_t8_item", #"smg_standard_t8_item", #"smg_thompson_t8_item", #"pistol_burst_t8_item", #"pistol_revolver_t8_item", #"pistol_standard_t8_item", #"pistol_topbreak_t8_item", #"shotgun_pump_t8_item", #"shotgun_semiauto_t8_item", #"shotgun_trenchgun_t8_item", #"melee_bowie_t8_item");
   level.weaponbasemeleeheld = getweapon(#"bare_hands");
   level.var_c49f422c = 125;
   level.var_927fd418 = 75;
@@ -84,7 +84,7 @@ function_3d7c12a6(localclientnum, poolsize) {
 
   for(i = 1; i <= poolsize; i++) {
     model = spawn(localclientnum, (0, 0, -10000), "script_model");
-    model function_e082e650(localclientnum, undefined, # "tag_origin", 1);
+    model function_e082e650(localclientnum, undefined, #"tag_origin", 1);
     model hide();
     model notsolid();
     modellist[i * -1] = model;
@@ -128,9 +128,9 @@ function_952d97dc(localclientnum) {
   level.var_d342a3fd[localclientnum] = data;
   item_inventory::inventory_init(localclientnum);
   level.var_d9beffb9 = util::getnextobjid(localclientnum);
-  objective_add(localclientnum, level.var_d9beffb9, "invisible", # "weapon_pickup");
+  objective_add(localclientnum, level.var_d9beffb9, "invisible", #"weapon_pickup");
   level.var_383edf80 = util::getnextobjid(localclientnum);
-  objective_add(localclientnum, level.var_383edf80, "invisible", # "multi_item_pickup");
+  objective_add(localclientnum, level.var_383edf80, "invisible", #"multi_item_pickup");
   level.showpickuphintmodel[localclientnum] = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.showPickupHint");
   level.var_89f832ca[localclientnum] = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.pickupHintText");
   level.var_62c91473[localclientnum] = createuimodel(getuimodelforcontroller(localclientnum), "hudItems.pickupHintTextOverride");
@@ -291,7 +291,7 @@ function_237888bb(localclientnum) {
     return true;
   }
 
-  if(self hasperk(localclientnum, # "specialty_looter")) {
+  if(self hasperk(localclientnum, #"specialty_looter")) {
     return true;
   }
 
@@ -659,7 +659,7 @@ function_78a9fd5f(point) {
 
   if(!isstruct(point) && isDefined(point.type == # "scriptmover") && isDefined(point.itementry.dropmodel) && point getentitynumber() < 1024) {
     if(isDefined(point.itementry.weapon) && point.itementry.weapon.name == # "waterballoon") {
-      var_af7d7388 = array(#"hash_7306b72d120049f8", # "hash_27ae7cb403d5365b", # "hash_6add258ae958d31c", # "hash_6eb8f7ceb4627d9f", # "hash_228bf15c70137b61", # "hash_10c0ee53a36783e9");
+      var_af7d7388 = array(#"hash_7306b72d120049f8", #"hash_27ae7cb403d5365b", #"hash_6add258ae958d31c", #"hash_6eb8f7ceb4627d9f", #"hash_228bf15c70137b61", #"hash_10c0ee53a36783e9");
       return var_af7d7388[randomintrange(0, var_af7d7388.size)];
     }
 
@@ -961,7 +961,7 @@ function_e2e7ee77(localclientnum) {
 }
 
 function_198ac8a(localclientnum) {
-  setting = function_ab88dbd2(localclientnum, # "warzoneinstantpickups");
+  setting = function_ab88dbd2(localclientnum, #"warzoneinstantpickups");
 
   if(isDefined(setting)) {
     function_97fedb0d(localclientnum, 1, setting);
@@ -969,7 +969,7 @@ function_198ac8a(localclientnum) {
 }
 
 function_e1f6ddbf(localclientnum) {
-  setting = function_ab88dbd2(localclientnum, # "warzoneprioritypickups");
+  setting = function_ab88dbd2(localclientnum, #"warzoneprioritypickups");
 
   if(isDefined(setting)) {
     function_97fedb0d(localclientnum, 2, setting);
@@ -993,7 +993,7 @@ _on_localplayer_spawned(localclientnum) {
 
 function_192b39cd(localclientnum) {
   if(self function_da43934d()) {
-    var_db6db8ba = self hasperk(localclientnum, # "specialty_looter");
+    var_db6db8ba = self hasperk(localclientnum, #"specialty_looter");
     var_de744098 = self.var_db6db8ba !== var_db6db8ba;
 
     if(var_de744098) {
@@ -1474,7 +1474,7 @@ function_802915bc(localclientnum) {
     return;
   }
 
-  setuimodelvalue(level.var_62c91473[localclientnum], # "");
+  setuimodelvalue(level.var_62c91473[localclientnum], #"");
 }
 
 function_eb396946(localclientnum) {
@@ -1743,7 +1743,7 @@ function_48ca0bbb(localclientnum) {
         }
       }
     } else {
-      setuimodelvalue(level.var_19cf0be9[localclientnum], # "blacktransparent");
+      setuimodelvalue(level.var_19cf0be9[localclientnum], #"blacktransparent");
       function_c3f5f99b(localclientnum, level.var_d9beffb9);
       function_c3f5f99b(localclientnum, level.var_383edf80);
     }
@@ -1764,7 +1764,7 @@ function_94db1536(localclientnum, origin, angles, maxdist = undefined) {
   }
 
   var_f4b807cb = function_2e3efdda(origin, forward, 128, maxdist, 0);
-  var_4bd72bfe = function_ab88dbd2(localclientnum, # "warzoneprioritypickups");
+  var_4bd72bfe = function_ab88dbd2(localclientnum, #"warzoneprioritypickups");
   var_9b882d22 = item_world_util::function_6061a15(var_f4b807cb, maxdist, origin, angles, forward, var_4bd72bfe, 1);
   return var_9b882d22;
 }

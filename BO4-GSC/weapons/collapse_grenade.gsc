@@ -85,7 +85,7 @@ function_5df80e43(watcher, player) {
 }
 
 function_adc9aab9(var_5ff47c38) {
-  self waittill(#"explode", # "death");
+  self waittill(#"explode", #"death");
   a_players = getplayers();
 
   foreach(player in a_players) {

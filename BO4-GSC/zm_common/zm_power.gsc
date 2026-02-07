@@ -169,7 +169,7 @@ electric_switch() {
     }
 
     if(isplayer(user)) {
-      user util::delay(1, "death", &zm_audio::create_and_play_dialog, # "power_switch", # "activate", undefined, 2);
+      user util::delay(1, "death", &zm_audio::create_and_play_dialog, #"power_switch", #"activate", undefined, 2);
     }
 
     if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "allow_power_off") {
@@ -682,7 +682,7 @@ zombie_power_off(origin, radius) {
 
 stun_zombie() {
   self notify(#"stun_zombie");
-  self endon(#"death", # "stun_zombie");
+  self endon(#"death", #"stun_zombie");
 
   if(self.health <= 0) {
     iprintln("<dev string:x192>");

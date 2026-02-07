@@ -83,11 +83,11 @@ on_ai_spawned(params) {
 function_dc856fd8() {
   self notify("7b8b17371dc9188f");
   self endon("7b8b17371dc9188f");
-  self endon(#"disconnect", # "allow_ads");
+  self endon(#"disconnect", #"allow_ads");
   self allowads(0);
 
   while(true) {
-    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
+    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
 
     if(isalive(self)) {
       self allowads(0);
@@ -96,7 +96,7 @@ function_dc856fd8() {
 }
 
 function_16824dc3() {
-  self endon(#"disconnect", # "allow_ads");
+  self endon(#"disconnect", #"allow_ads");
 
   while(true) {
     w_curr = self getcurrentweapon();
@@ -124,7 +124,7 @@ function_33f0ddd3(s_event) {
 }
 
 function_2d961b95() {
-  self endon(#"disconnect", # "allow_ads");
+  self endon(#"disconnect", #"allow_ads");
 
   while(true) {
     s_waitresult = self waittill(#"weapon_change");

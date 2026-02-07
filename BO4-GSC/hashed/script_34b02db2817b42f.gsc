@@ -115,7 +115,7 @@ start_step_1() {
 }
 
 run_step_1() {
-  level endon(#"end_game", # "insanity_mode_triggered");
+  level endon(#"end_game", #"insanity_mode_triggered");
 
   if(isDefined(level.var_74170866.s_cabinet.a_e_doors[0])) {
     exploder::exploder("fxexp_mk2_Z_smoke_orange_emit_closet_" + level.var_74170866.s_cabinet.script_string);
@@ -145,7 +145,7 @@ run_step_1() {
 }
 
 function_4b4ede() {
-  self endon(#"death", # "burn_cabinet");
+  self endon(#"death", #"burn_cabinet");
 
   while(true) {
     s_notify = self waittill(#"damage");
@@ -164,7 +164,7 @@ function_4b4ede() {
 }
 
 function_e08b0124(e_player) {
-  self sethintstringforplayer(e_player, zm_utility::function_d6046228(#"hash_12346bdab086516e", # "hash_184ab2db21c5bc9a"));
+  self sethintstringforplayer(e_player, zm_utility::function_d6046228(#"hash_12346bdab086516e", #"hash_184ab2db21c5bc9a"));
   return true;
 }
 
@@ -209,7 +209,7 @@ start_step_2() {
 }
 
 run_step_2() {
-  level endon(#"end_game", # "hash_7456b125dbebe41c");
+  level endon(#"end_game", #"hash_7456b125dbebe41c");
   pixbeginevent(#"hash_2573979b6db7cb52");
 
   iprintlnbold("<dev string:xfe>" + level.var_74170866.s_fireplace.script_string);
@@ -272,7 +272,7 @@ start_step_3() {
 }
 
 function_473f437() {
-  self endon(#"death", # "stop_think");
+  self endon(#"death", #"stop_think");
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");

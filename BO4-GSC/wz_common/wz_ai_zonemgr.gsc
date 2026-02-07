@@ -350,20 +350,20 @@ function function_dc16557c() {
       }
 
       var_c2b80e0c = hash(ai_zone.zone_name);
-      match_record::function_7a93acec(#"ai_zones", i, # "origin", ai_zone.origin);
-      match_record::set_stat(#"ai_zones", i, # "name", var_c2b80e0c);
-      match_record::set_stat(#"ai_zones", i, # "death_circle", ai_zone.death_circle);
-      match_record::set_stat(#"ai_zones", i, # "zone_activated", ai_zone.zone_activated);
-      match_record::set_stat(#"ai_zones", i, # "zone_blightfather", ai_zone.zone_blightfather);
-      match_record::set_stat(#"ai_zones", i, # "zone_brutus", ai_zone.zone_brutus);
-      match_record::set_stat(#"ai_zones", i, # "zone_hellhounds", ai_zone.zone_hellhounds);
-      match_record::set_stat(#"ai_zones", i, # "hash_46c66659061c4df6", ai_zone.var_7bf9c18e);
-      match_record::set_stat(#"ai_zones", i, # "hash_2778c481a1f0f691", ai_zone.var_7c620997);
-      match_record::set_stat(#"ai_zones", i, # "hash_3bd0e72c0da688b8", ai_zone.var_58ba2ab7);
-      match_record::set_stat(#"ai_zones", i, # "hash_2f54ea56d60207e4", ai_zone.var_14403c0a);
-      match_record::set_stat(#"ai_zones", i, # "hash_7c33a0c7c454cdeb", ai_zone.var_af37e04a);
-      match_record::set_stat(#"ai_zones", i, # "hash_78530caab146b8b2", ai_zone.var_41e86d33);
-      match_record::set_stat(#"ai_zones", i, # "hash_468f7191e8118876", ai_zone.var_719d00b8);
+      match_record::function_7a93acec(#"ai_zones", i, #"origin", ai_zone.origin);
+      match_record::set_stat(#"ai_zones", i, #"name", var_c2b80e0c);
+      match_record::set_stat(#"ai_zones", i, #"death_circle", ai_zone.death_circle);
+      match_record::set_stat(#"ai_zones", i, #"zone_activated", ai_zone.zone_activated);
+      match_record::set_stat(#"ai_zones", i, #"zone_blightfather", ai_zone.zone_blightfather);
+      match_record::set_stat(#"ai_zones", i, #"zone_brutus", ai_zone.zone_brutus);
+      match_record::set_stat(#"ai_zones", i, #"zone_hellhounds", ai_zone.zone_hellhounds);
+      match_record::set_stat(#"ai_zones", i, #"hash_46c66659061c4df6", ai_zone.var_7bf9c18e);
+      match_record::set_stat(#"ai_zones", i, #"hash_2778c481a1f0f691", ai_zone.var_7c620997);
+      match_record::set_stat(#"ai_zones", i, #"hash_3bd0e72c0da688b8", ai_zone.var_58ba2ab7);
+      match_record::set_stat(#"ai_zones", i, #"hash_2f54ea56d60207e4", ai_zone.var_14403c0a);
+      match_record::set_stat(#"ai_zones", i, #"hash_7c33a0c7c454cdeb", ai_zone.var_af37e04a);
+      match_record::set_stat(#"ai_zones", i, #"hash_78530caab146b8b2", ai_zone.var_41e86d33);
+      match_record::set_stat(#"ai_zones", i, #"hash_468f7191e8118876", ai_zone.var_719d00b8);
 
       if(isDefined(level.var_c64b3b46) && level.var_c64b3b46) {
         if(isDefined(ai_zone.item_drops)) {
@@ -378,9 +378,9 @@ function function_dc16557c() {
 
             foreach(key, item in ai_zone.item_drops[archetype]) {
               assert(index < 20, "<dev string:x656>");
-              match_record::set_stat(var_7a69806, index, # "item_name", key);
-              match_record::set_stat(var_7a69806, index, # "item_count", item.count);
-              match_record::set_stat(var_7a69806, index, # "zone_name", var_c2b80e0c);
+              match_record::set_stat(var_7a69806, index, #"item_name", key);
+              match_record::set_stat(var_7a69806, index, #"item_count", item.count);
+              match_record::set_stat(var_7a69806, index, #"zone_name", var_c2b80e0c);
               index++;
             }
           }
@@ -613,7 +613,7 @@ function_9e142fa2(n_duration, n_dist) {
 
 function_bbad9099(ai_zone, var_c0d8ceca) {
   stash = function_630eb346(ai_zone);
-  stash waittilltimeout(var_c0d8ceca - 7.5, # "hash_4c78fc894646853d");
+  stash waittilltimeout(var_c0d8ceca - 7.5, #"hash_4c78fc894646853d");
   ai_zone.minimap clientfield::set("aizoneflag_tu14", 0);
   function_f48ade1d(ai_zone, stash, 0);
 
@@ -780,7 +780,7 @@ function_1944a471() {
 }
 
 function_b5a875df() {
-  level endon(#"game_ended", # "hash_12a8f2c59a67e4fc", # "hash_329c3f546e49cb9f");
+  level endon(#"game_ended", #"hash_12a8f2c59a67e4fc", #"hash_329c3f546e49cb9f");
 
   while(!isDefined(level.deathcircle)) {
     wait 1;
@@ -844,7 +844,7 @@ on_player_spawned() {
 }
 
 function_2345f7a7() {
-  level endon(#"game_ended", # "hash_329c3f546e49cb9f");
+  level endon(#"game_ended", #"hash_329c3f546e49cb9f");
   self endon(#"death");
 
   while(true) {
@@ -896,7 +896,7 @@ function_48b0976c() {
 }
 
 function_71d1b294() {
-  level endon(#"game_ended", # "hash_329c3f546e49cb9f");
+  level endon(#"game_ended", #"hash_329c3f546e49cb9f");
 
   while(true) {
     if(isDefined(level.var_e147d7b8) && level.var_e147d7b8 && isDefined(level.var_e066667d) && level.var_e066667d && isDefined(level.var_5b357434)) {
@@ -1266,7 +1266,7 @@ function_432787e(ai_zone, enable = 1) {
 }
 
 function_7b0c014e() {
-  level endon(#"game_ended", # "hash_329c3f546e49cb9f");
+  level endon(#"game_ended", #"hash_329c3f546e49cb9f");
   level.ai_zones = getEntArray("wz_ai_zone", "targetname");
 
   foreach(ai_zone in level.ai_zones) {
@@ -1543,7 +1543,7 @@ function_250e9641(ai_zone, category) {
 }
 
 function_678fdc65(category, last_zone) {
-  level endon(#"game_ended", # "hash_12a8f2c59a67e4fc", # "hash_329c3f546e49cb9f");
+  level endon(#"game_ended", #"hash_12a8f2c59a67e4fc", #"hash_329c3f546e49cb9f");
   possible_zones = [];
 
   foreach(ai_zone in level.var_5b357434) {
@@ -1781,7 +1781,7 @@ function_41101f23(zone, var_d42412dc) {
 }
 
 function_1c8ea11(category) {
-  level endon(#"game_ended", # "hash_12a8f2c59a67e4fc", # "hash_329c3f546e49cb9f", # "hash_4168bee802274065");
+  level endon(#"game_ended", #"hash_12a8f2c59a67e4fc", #"hash_329c3f546e49cb9f", #"hash_4168bee802274065");
   last_zone = undefined;
 
   while(isDefined(level.var_e147d7b8) && level.var_e147d7b8) {
@@ -1853,7 +1853,7 @@ function_f3e8cf82() {
   level thread function_51961049();
 
   if(isDefined(level.var_65d14681) && level.var_65d14681) {
-    level flagsys::wait_till_all(array(#"hash_60fcdd11812a0134", # "hash_2299e4b3b840b63f"));
+    level flagsys::wait_till_all(array(#"hash_60fcdd11812a0134", #"hash_2299e4b3b840b63f"));
   }
 
   level notify(#"hash_54391c26dfd50b8a");
@@ -1864,7 +1864,7 @@ function_f3e8cf82() {
 }
 
 function_49d2e080() {
-  level endon(#"game_ended", # "hash_329c3f546e49cb9f");
+  level endon(#"game_ended", #"hash_329c3f546e49cb9f");
 
   while(true) {
     if(getdvarint(#"scr_print_ai", 0) && isDefined(level.var_e066667d) && level.var_e066667d) {

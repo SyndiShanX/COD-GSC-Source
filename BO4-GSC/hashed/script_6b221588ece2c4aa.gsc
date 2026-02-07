@@ -171,11 +171,11 @@ function_f0e307a2(watcher, player) {
   self endon(#"death");
 
   if(isDefined(player)) {
-    player stats::function_e24eec31(self.weapon, # "used", 1);
+    player stats::function_e24eec31(self.weapon, #"used", 1);
   }
 
   self playLoopSound(#"uin_c4_air_alarm_loop");
-  self waittilltimeout(10, # "stationary");
+  self waittilltimeout(10, #"stationary");
   function_b70eb3a9(watcher, player);
 }
 

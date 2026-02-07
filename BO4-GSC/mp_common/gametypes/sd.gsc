@@ -401,7 +401,7 @@ warnlastplayer(team) {
 }
 
 givelastattackerwarning(team) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   fullhealthtime = 0;
   interval = 0.05;
   self.lastmansd = 1;
@@ -466,7 +466,7 @@ bombs() {
   }
 
   if(!level.multibomb) {
-    level.sdbomb = gameobjects::create_carry_object(game.attackers, trigger, visuals, (0, 0, 0), # "sd_bomb");
+    level.sdbomb = gameobjects::create_carry_object(game.attackers, trigger, visuals, (0, 0, 0), #"sd_bomb");
     level.sdbomb gameobjects::allow_carry(#"friendly");
     level.sdbomb gameobjects::set_visible_team(#"friendly");
     level.sdbomb gameobjects::set_model_visibility(1);
@@ -576,7 +576,7 @@ bombs() {
 }
 
 setbomboverheatingafterweaponchange(useobject, overheated, heat) {
-  self endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+  self endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   waitresult = self waittill(#"weapon_change");
 
   if(waitresult.weapon == useobject.useweapon) {
@@ -882,7 +882,7 @@ bombplanted(destroyedobj, player) {
   trigger.origin = level.sdbombmodel.origin;
   trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
   visuals = [];
-  defuseobject = gameobjects::create_use_object(game.attackers, trigger, visuals, (0, 0, 32), # "hash_7b74e27a1a2facf8", 1, 1);
+  defuseobject = gameobjects::create_use_object(game.attackers, trigger, visuals, (0, 0, 32), #"hash_7b74e27a1a2facf8", 1, 1);
   defuseobject gameobjects::allow_use(#"enemy");
   defuseobject gameobjects::set_use_time(level.defusetime);
   defuseobject gameobjects::set_use_text(#"mp/defusing_explosive");
@@ -901,7 +901,7 @@ bombplanted(destroyedobj, player) {
   var_3df9aa45.ownerteam = game.attackers;
   var_3df9aa45.team = game.attackers;
   var_3df9aa45.type = "Waypoint";
-  objective_add(var_3df9aa45.objectiveid, "invisible", var_3df9aa45, # "sd_defuse" + label);
+  objective_add(var_3df9aa45.objectiveid, "invisible", var_3df9aa45, #"sd_defuse" + label);
   var_3df9aa45 gameobjects::set_visible_team(#"any");
   var_3df9aa45 gameobjects::set_flags(1);
   defuseobject.waypoint = var_3df9aa45;
@@ -974,7 +974,7 @@ bombplanted(destroyedobj, player) {
 }
 
 bombtimerwait() {
-  level endon(#"game_ended", # "bomb_defused");
+  level endon(#"game_ended", #"bomb_defused");
   hostmigration::waitlongdurationwithgameendtimeupdate(level.bombtimer);
 }
 

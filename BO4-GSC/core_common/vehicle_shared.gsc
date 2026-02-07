@@ -447,7 +447,7 @@ paths(node) {
   self notify(#"endpath");
   self endon(#"endpath");
   self notify(#"newpath");
-  self endon(#"death", # "newpath");
+  self endon(#"death", #"newpath");
 
   if(isDefined(node)) {
     self.attachedpath = node;
@@ -819,7 +819,7 @@ get_on_and_go_path(path_start, distance = 0) {
 }
 
 go_path() {
-  self endon(#"death", # "stop path");
+  self endon(#"death", #"stop path");
 
   if(self.isphysicsvehicle) {
     self setbrake(0);
@@ -1215,7 +1215,7 @@ set_speed(speed, rate, msg) {
 
 debug_set_speed(speed, rate, msg) {
   self notify(#"new debug_vehiclesetspeed");
-  self endon(#"new debug_vehiclesetspeed", # "resuming speed", # "death");
+  self endon(#"new debug_vehiclesetspeed", #"resuming speed", #"death");
 
   while(true) {
     while(getdvarstring(#"debug_vehiclesetspeed") != "<dev string:x180>") {
@@ -1284,7 +1284,7 @@ debug_resume(msg) {
 
 print_resume_speed(timer) {
   self notify(#"newresumespeedmsag");
-  self endon(#"newresumespeedmsag", # "death");
+  self endon(#"newresumespeedmsag", #"death");
 
   while(gettime() < timer && isDefined(self.resumemsgs)) {
     if(self.resumemsgs.size > 6) {
@@ -1677,7 +1677,7 @@ friendly_fire_shield() {
 }
 
 _vehicle_bad_place() {
-  self endon(#"kill_badplace_forever", # "death", # "delete");
+  self endon(#"kill_badplace_forever", #"death", #"delete");
 
   if(isDefined(level.custombadplacethread)) {
     self thread[[level.custombadplacethread]]();
@@ -2275,7 +2275,7 @@ is_destructible() {
 }
 
 attack_group_think() {
-  self endon(#"death", # "switch group", # "killed all targets");
+  self endon(#"death", #"switch group", #"killed all targets");
 
   if(isDefined(self.script_vehicleattackgroupwait)) {
     wait self.script_vehicleattackgroupwait;
@@ -2376,7 +2376,7 @@ debug_vehicle() {
 }
 
 debug_vehicle_paths() {
-  self endon(#"death", # "newpath", # "endpath", # "reached_dynamic_path_end");
+  self endon(#"death", #"newpath", #"endpath", #"reached_dynamic_path_end");
 
   for(nextnode = self.currentnode; true; nextnode = self.nextnode) {
     if(getdvarint(#"debug_vehicle_paths", 0) > 0) {
@@ -2501,7 +2501,7 @@ event_handler[vehicle_collision] function_5b65d9ec(eventstruct) {
 }
 
 function_fa4236af(params) {
-  self endon(#"death", # "exit_vehicle");
+  self endon(#"death", #"exit_vehicle");
   driver = self getseatoccupant(0);
 
   if(!isplayer(driver)) {
@@ -2509,7 +2509,7 @@ function_fa4236af(params) {
     return;
   }
 
-  driver endon(#"death", # "disconnect");
+  driver endon(#"death", #"disconnect");
 
   if(isDefined(self.var_42cfec27) && self.var_42cfec27 != "") {
     var_b0c85051 = soundgetplaybacktime(self.var_42cfec27) * 0.001;
@@ -2688,7 +2688,7 @@ monitor_missiles_locked_on_to_me(player, wait_time = 0.1) {
   monitored_entity = self;
   monitored_entity endon(#"death");
   assert(isDefined(monitored_entity.target_group), "<dev string:x36b>");
-  player endon(#"stop_monitor_missile_locked_on_to_me", # "disconnect", # "joined_team");
+  player endon(#"stop_monitor_missile_locked_on_to_me", #"disconnect", #"joined_team");
 
   while(true) {
     closest_attacker = player get_closest_attacker_with_missile_locked_on_to_me(monitored_entity);
@@ -2713,7 +2713,7 @@ watch_freeze_on_flash(duration) {
   veh clientfield::set("stun", 0);
 
   while(true) {
-    waitresult = veh waittill(#"damage", # "death");
+    waitresult = veh waittill(#"damage", #"death");
 
     if(waitresult._notify == "death") {
       return;
@@ -2747,7 +2747,7 @@ watch_freeze_on_flash(duration) {
         }
 
         veh clientfield::set("stun", 1);
-        waitresult = veh waittilltimeout(duration, # "death");
+        waitresult = veh waittilltimeout(duration, #"death");
 
         if(controlled && isDefined(owner)) {
           owner clientfield::set_to_player("static_postfx", 0);
@@ -2840,7 +2840,7 @@ stop_monitor_damage_as_occupant() {
 
 monitor_damage_as_occupant(player) {
   player notify(#"stop_monitor_damage_as_occupant");
-  player endon(#"stop_monitor_damage_as_occupant", # "disconnect");
+  player endon(#"stop_monitor_damage_as_occupant", #"disconnect");
   self endon(#"death");
 
   if(!isDefined(self.maxhealth)) {
@@ -3046,7 +3046,7 @@ function_bbd487c2() {
     return;
   }
 
-  self endon(#"death", # "enter_vehicle");
+  self endon(#"death", #"enter_vehicle");
   e_player endon(#"disconnect");
   level endon(#"game_ended");
 
@@ -3722,7 +3722,7 @@ function_78cfd053() {
 
 function_f2fa0421(n_health) {
   self notify(#"hash_7d33424c72addcf1");
-  self endon(#"death", # "hash_7d33424c72addcf1");
+  self endon(#"death", #"hash_7d33424c72addcf1");
 
   if(isDefined(level.playerhealth_regularregendelay)) {
     wait float(level.playerhealth_regularregendelay) / 1000;

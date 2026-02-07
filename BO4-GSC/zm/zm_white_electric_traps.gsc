@@ -170,7 +170,7 @@ electric_trap_think() {
       self.stub.related_parent.trap_struct.e_activator = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_electric", # "activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_electric", #"activate");
       }
     }
   }

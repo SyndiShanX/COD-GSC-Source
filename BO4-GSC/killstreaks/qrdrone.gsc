@@ -135,7 +135,7 @@ createcarryqrdrone(streakname, owner) {
 }
 
 watchforattack() {
-  self endon(#"death", # "disconnect", # "place_carryqrdrone", # "cancel_carryqrdrone");
+  self endon(#"death", #"disconnect", #"place_carryqrdrone", #"cancel_carryqrdrone");
 
   for(;;) {
     waitframe(1);
@@ -147,7 +147,7 @@ watchforattack() {
 }
 
 setcarryingqrdrone(carryqrdrone) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   carryqrdrone thread carryqrdrone_setcarried(self);
 
   if(!carryqrdrone.canbeplaced) {
@@ -191,9 +191,9 @@ isinremotenodeploy() {
 }
 
 updatecarryqrdroneplacement(carryqrdrone) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
-  carryqrdrone endon(#"placed", # "death");
+  carryqrdrone endon(#"placed", #"death");
   carryqrdrone.canbeplaced = 1;
   lastcanplacecarryqrdrone = -1;
 
@@ -233,8 +233,8 @@ updatecarryqrdroneplacement(carryqrdrone) {
 carryqrdrone_handleexistence() {
   level endon(#"game_ended");
   self endon(#"death");
-  self.owner endon(#"place_carryqrdrone", # "cancel_carryqrdrone");
-  self.owner waittill(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+  self.owner endon(#"place_carryqrdrone", #"cancel_carryqrdrone");
+  self.owner waittill(#"death", #"disconnect", #"joined_team", #"joined_spectators");
 
   if(isDefined(self)) {
     self delete();
@@ -300,7 +300,7 @@ lockplayerforqrdronelaunch() {
 
 clearplayerlockfromqrdronelaunch(lockspot) {
   level endon(#"game_ended");
-  self waittill(#"disconnect", # "death", # "qrdrone_unlock");
+  self waittill(#"disconnect", #"death", #"qrdrone_unlock");
   lockspot delete();
 }
 
@@ -354,7 +354,7 @@ qrdrone_ride(lifeid, qrdrone, streakname) {
   qrdrone usevehicle(self, 0);
   self util::clientnotify("qrfutz");
   self killstreaks::play_killstreak_start_dialog("qrdrone", self.pers[# "team"]);
-  self stats::function_e24eec31(getweapon(#"killstreak_qrdrone"), # "used", 1);
+  self stats::function_e24eec31(getweapon(#"killstreak_qrdrone"), #"used", 1);
   self.qrdrone_ridelifeid = lifeid;
   self.qrdrone = qrdrone;
   self thread qrdrone_delaylaunchdialog(qrdrone);
@@ -369,7 +369,7 @@ qrdrone_ride(lifeid, qrdrone, streakname) {
 qrdrone_delaylaunchdialog(qrdrone) {
   level endon(#"game_ended");
   self endon(#"disconnect");
-  qrdrone endon(#"death", # "end_remote", # "end_launch_dialog");
+  qrdrone endon(#"death", #"end_remote", #"end_launch_dialog");
   wait 3;
   self qrdrone_dialog("launch");
 }
@@ -407,7 +407,7 @@ qrdrone_endride(qrdrone) {
 
 play_lockon_sounds(player) {
   player endon(#"disconnect");
-  self endon(#"death", # "blowup", # "crashing");
+  self endon(#"death", #"blowup", #"crashing");
   level endon(#"game_ended");
   self endon(#"end_remote");
   self.locksounds = spawn("script_model", self.origin);
@@ -453,7 +453,7 @@ enemy_locked() {
 }
 
 qrdrone_freezebuffer() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   level endon(#"game_ended");
   self val::set(#"qrdrone_freezebuffer", "freezecontrols");
   wait 0.5;
@@ -463,7 +463,7 @@ qrdrone_freezebuffer() {
 qrdrone_playerexit(qrdrone) {
   level endon(#"game_ended");
   self endon(#"disconnect");
-  qrdrone endon(#"death", # "end_remote");
+  qrdrone endon(#"death", #"end_remote");
   wait 2;
 
   while(true) {
@@ -664,9 +664,9 @@ qrdrone_death(attacker, weapon, dir, damagetype) {
 
     if(self.owner util::isenemyplayer(attacker)) {
       attacker challenges::destroyedqrdrone(damagetype, weapon);
-      attacker stats::function_e24eec31(weapon, # "destroyed_qrdrone", 1);
+      attacker stats::function_e24eec31(weapon, #"destroyed_qrdrone", 1);
       attacker challenges::addflyswatterstat(weapon, self);
-      attacker stats::function_e24eec31(weapon, # "destroyed_controlled_killstreak", 1);
+      attacker stats::function_e24eec31(weapon, #"destroyed_controlled_killstreak", 1);
     }
   }
 
@@ -693,7 +693,7 @@ death_fx() {
 }
 
 qrdrone_crash_movement(attacker, hitdir) {
-  self endon(#"crash_done", # "death");
+  self endon(#"crash_done", #"death");
   self notify(#"crashing");
   self takeplayercontrol();
   self setmaxpitchroll(90, 180);
@@ -729,14 +729,14 @@ qrdrone_dmg_snd() {
   dmg_ent = spawn("script_origin", self.origin);
   dmg_ent linkto(self);
   dmg_ent playLoopSound(#"veh_qrdrone_dmg_loop");
-  self waittill(#"crash_done", # "death");
+  self waittill(#"crash_done", #"death");
   dmg_ent stoploopsound(0.2);
   wait 2;
   dmg_ent delete();
 }
 
 qrdrone_fire_for_time(totalfiretime) {
-  self endon(#"crash_done", # "change_state", # "death");
+  self endon(#"crash_done", #"change_state", #"death");
   weapon = self seatgetweapon(0);
   firetime = weapon.firetime;
   time = 0;
@@ -751,7 +751,7 @@ qrdrone_fire_for_time(totalfiretime) {
 }
 
 qrdrone_crash_accel() {
-  self endon(#"crash_done", # "death");
+  self endon(#"crash_done", #"death");
   count = 0;
 
   while(true) {
@@ -782,7 +782,7 @@ qrdrone_crash_accel() {
 }
 
 qrdrone_collision() {
-  self endon(#"crash_done", # "death");
+  self endon(#"crash_done", #"death");
 
   while(true) {
     waitresult = self waittill(#"veh_collision");
@@ -891,7 +891,7 @@ qrdrone_staticfade(staticalpha) {
 }
 
 qrdrone_rangecountdown() {
-  self endon(#"death", # "in_range");
+  self endon(#"death", #"in_range");
 
   if(isDefined(self.heliinproximity)) {
     countdown = 6.1;
@@ -912,8 +912,8 @@ qrdrone_rangecountdown() {
 }
 
 qrdrone_explode_on_notify(killstreak_id) {
-  self endon(#"death", # "end_ride");
-  self.owner waittill(#"disconnect", # "joined_team", # "joined_spectators");
+  self endon(#"death", #"end_ride");
+  self.owner waittill(#"disconnect", #"joined_team", #"joined_spectators");
 
   if(isDefined(self.owner)) {
     self.owner killstreaks::clear_using_remote();
@@ -1072,7 +1072,7 @@ qrdrone_dialog(dialoggroup) {
 
 qrdrone_watchheliproximity() {
   level endon(#"game_ended");
-  self endon(#"death", # "end_remote");
+  self endon(#"death", #"end_remote");
 
   while(true) {
     inheliproximity = 0;
@@ -1109,7 +1109,7 @@ qrdrone_detonatewaiter() {
 
 qrdrone_fireguns(qrdrone) {
   self endon(#"disconnect");
-  qrdrone endon(#"death", # "blowup", # "crashing");
+  qrdrone endon(#"death", #"blowup", #"crashing");
   level endon(#"game_ended");
   qrdrone endon(#"end_remote");
   wait 1;
@@ -1158,7 +1158,7 @@ qrdrone_blowup(attacker, weapon) {
 
     if(attacker != self.owner) {
       level.globalkillstreaksdestroyed++;
-      attacker stats::function_e24eec31(self.weapon, # "destroyed", 1);
+      attacker stats::function_e24eec31(self.weapon, #"destroyed", 1);
     }
 
     self.owner remote_weapons::destroyremotehud();

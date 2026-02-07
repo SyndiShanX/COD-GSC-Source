@@ -57,10 +57,10 @@ __init__() {
   clientfield::register("toplayer", "gegenees_damage_cf", 16000, 1, "counter");
   clientfield::register("scriptmover", "gegenees_spear_miss_cf", 16000, 1, "counter");
   clientfield::register("actor", "gegenees_helmet_explosion_cf", 16000, 1, "int");
-  level thread aat::register_immunity("zm_aat_brain_decay", # "gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "gegenees", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"gegenees", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"gegenees", 1, 1, 1);
 
   if(isarchetypeloaded(#"gegenees")) {
     level thread function_c03e8d05();
@@ -317,7 +317,7 @@ function_7e633e59() {
 
 function_7d162bd0(projectile, entity) {
   projectile endon(#"spear_death");
-  result = projectile waittill(#"projectile_impact_player", # "death");
+  result = projectile waittill(#"projectile_impact_player", #"death");
 
   if(result._notify != "projectile_impact_player") {
     var_b12a43cc = function_a1fce938();
@@ -467,7 +467,7 @@ function_d82de95f(entity) {
 }
 
 function_60164697() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   time = gettime() + 2000;
 
   while(true) {

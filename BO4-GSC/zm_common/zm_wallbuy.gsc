@@ -27,7 +27,7 @@
 #namespace zm_wallbuy;
 
 autoexec __init__system__() {
-  system::register(#"zm_wallbuy", &__init__, &__main__, array(#"zm", # "zm_zonemgr", # "zm_unitrigger", # "zm_weapons"));
+  system::register(#"zm_wallbuy", &__init__, &__main__, array(#"zm", #"zm_zonemgr", #"zm_unitrigger", #"zm_weapons"));
 }
 
 __init__() {
@@ -740,8 +740,8 @@ weapon_spawn_think() {
         player zm_stats::increment_challenge_stat(#"hash_702d98df99af63d5", undefined, 1);
         player zm_stats::function_c0c6ab19(#"weapons_bought", 1, 1);
         player zm_stats::function_c0c6ab19(#"wallbuys", 1, 1);
-        player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, # "zstandard");
-        player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, # "zstandard");
+        player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, #"zstandard");
+        player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, #"zstandard");
 
         if(self.weapon.isriotshield) {
           player zm_equipment::give(self.weapon);
@@ -787,7 +787,7 @@ weapon_spawn_think() {
         }
       } else {
         zm_utility::play_sound_on_ent("no_purchase");
-        player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+        player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       }
     } else {
       weapon = self.weapon;
@@ -858,8 +858,8 @@ weapon_spawn_think() {
             player zm_stats::forced_attachment("boas_ammo_purchased");
           }
 
-          player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, # "zstandard");
-          player thread zm_audio::create_and_play_dialog(#"ammo", # "buy");
+          player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, #"zstandard");
+          player thread zm_audio::create_and_play_dialog(#"ammo", #"buy");
           player zm_score::minus_to_player_score(ammo_cost);
 
           if(isDefined(level.var_db463b5)) {
@@ -885,7 +885,7 @@ weapon_spawn_think() {
         if(isDefined(level.custom_generic_deny_vo_func)) {
           player[[level.custom_generic_deny_vo_func]]();
         } else {
-          player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+          player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
         }
       }
     }

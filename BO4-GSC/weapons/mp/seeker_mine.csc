@@ -66,7 +66,7 @@ seeker_mine_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 }
 
 function_fc90058e(localclientnum, fx) {
-  self waittill(#"death", # "hash_6b4bac2b8c2122ef");
+  self waittill(#"death", #"hash_6b4bac2b8c2122ef");
 
   if(isDefined(fx)) {
     stopfx(localclientnum, fx);
@@ -83,7 +83,7 @@ on_player_corpse(localclientnum, params) {
 }
 
 function_a6451cfe(localclientnum, camfx) {
-  self waittill(#"death", # "hash_43f06be9944cddc1");
+  self waittill(#"death", #"hash_43f06be9944cddc1");
 
   if(isDefined(camfx)) {
     stopfx(localclientnum, camfx);

@@ -136,7 +136,7 @@ function_2c7b2ff() {
 start_cooldown() {
   player = self;
   assert(isplayer(player));
-  player endon(#"disconnect", # "hash_7fa9c275efb510e2");
+  player endon(#"disconnect", #"hash_7fa9c275efb510e2");
   cooldowntime = getgametypesetting(#"hash_2b88c6ac064e9c59");
   cooldownendtime = cooldowntime * 1000 + gettime();
 
@@ -242,7 +242,7 @@ select_character(characterindex, forceselection, var_8a239568) {
 }
 
 function_ca33311e() {
-  level endon(#"game_ended", # "draft_complete");
+  level endon(#"game_ended", #"draft_complete");
 
   while(true) {
     foreach(player in level.players) {

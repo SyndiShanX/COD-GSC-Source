@@ -243,7 +243,7 @@ function_14c67eb3(planner, constants) {
 
   var_5f1842bf = [];
   distancesq = constants[# "distance"] * constants[# "distance"];
-  altars = planner::getblackboardattribute(planner, # "zm_altars");
+  altars = planner::getblackboardattribute(planner, #"zm_altars");
 
   if(!isDefined(altars)) {
     altars = [];
@@ -317,7 +317,7 @@ function_14c67eb3(planner, constants) {
   }
 
   if(isDefined(var_c4302000)) {
-    planner::setblackboardattribute(planner, # "hash_6f9d6de0fc2bd62e", array(var_c4302000));
+    planner::setblackboardattribute(planner, #"hash_6f9d6de0fc2bd62e", array(var_c4302000));
     params.altar = var_c4302000;
   }
 
@@ -353,7 +353,7 @@ function_2af9b775(planner, constants) {
 
   var_270c0711 = [];
   distancesq = constants[# "distance"] * constants[# "distance"];
-  blockers = planner::getblackboardattribute(planner, # "zm_blockers");
+  blockers = planner::getblackboardattribute(planner, #"zm_blockers");
 
   if(!isDefined(blockers)) {
     blockers = [];
@@ -414,7 +414,7 @@ function_2af9b775(planner, constants) {
   }
 
   if(isDefined(var_2fcdec8b)) {
-    planner::setblackboardattribute(planner, # "zm_pathable_blockers", array(var_2fcdec8b));
+    planner::setblackboardattribute(planner, #"zm_pathable_blockers", array(var_2fcdec8b));
 
     if(isDefined(var_2fcdec8b) && getdvarint(#"hash_76cdb24d903cc201", 0)) {
       recordsphere(var_2fcdec8b[# "origin"] + (0, 0, 30), 8, (1, 0.752941, 0.796078), "<dev string:x10a>");
@@ -469,7 +469,7 @@ function_e057582f(planner, constants) {
 
   var_6a7f5461 = [];
   distancesq = constants[# "distance"] * constants[# "distance"];
-  chests = planner::getblackboardattribute(planner, # "zm_chests");
+  chests = planner::getblackboardattribute(planner, #"zm_chests");
 
   if(!isDefined(chests)) {
     chests = [];
@@ -521,7 +521,7 @@ function_e057582f(planner, constants) {
   }
 
   if(isDefined(var_58fadc5d)) {
-    planner::setblackboardattribute(planner, # "zm_pathable_chests", array(var_58fadc5d));
+    planner::setblackboardattribute(planner, #"zm_pathable_chests", array(var_58fadc5d));
     params.chest = var_58fadc5d;
   }
 
@@ -536,7 +536,7 @@ function_ac1b59c(planner, constants) {
   }
 
   var_6a7f5461 = [];
-  chests = planner::getblackboardattribute(planner, # "zm_chests");
+  chests = planner::getblackboardattribute(planner, #"zm_chests");
 
   if(!isDefined(chests)) {
     chests = [];
@@ -577,7 +577,7 @@ function_ac1b59c(planner, constants) {
   }
 
   if(isDefined(var_58fadc5d)) {
-    planner::setblackboardattribute(planner, # "zm_pathable_chests", array(var_58fadc5d));
+    planner::setblackboardattribute(planner, #"zm_pathable_chests", array(var_58fadc5d));
     params.chest = var_58fadc5d;
   }
 
@@ -608,7 +608,7 @@ function_4f6a626d(planner, constants) {
 
   var_a9cd6db9 = [];
   distancesq = constants[# "distance"] * constants[# "distance"];
-  powerups = planner::getblackboardattribute(planner, # "zm_powerups");
+  powerups = planner::getblackboardattribute(planner, #"zm_powerups");
 
   if(!isDefined(powerups)) {
     powerups = [];
@@ -667,7 +667,7 @@ function_4f6a626d(planner, constants) {
   }
 
   if(isDefined(var_7cc71b7c)) {
-    planner::setblackboardattribute(planner, # "zm_pathable_powerups", array(var_7cc71b7c));
+    planner::setblackboardattribute(planner, #"zm_pathable_powerups", array(var_7cc71b7c));
     params.powerup = var_7cc71b7c;
   }
 
@@ -724,7 +724,7 @@ function_557051df(planner, constants) {
 
   var_8498b0f1 = [];
   distancesq = constants[# "distance"] * constants[# "distance"];
-  switches = planner::getblackboardattribute(planner, # "zm_switches");
+  switches = planner::getblackboardattribute(planner, #"zm_switches");
 
   if(!isDefined(switches)) {
     switches = [];
@@ -759,7 +759,7 @@ function_557051df(planner, constants) {
   }
 
   if(isDefined(var_a0301374)) {
-    planner::setblackboardattribute(planner, # "zm_pathable_switches", array(var_a0301374));
+    planner::setblackboardattribute(planner, #"zm_pathable_switches", array(var_a0301374));
     params.var_ed8f7cef = var_a0301374;
   }
 
@@ -840,7 +840,7 @@ function_393b9c76(planner, constants) {
 
   var_8c60fdb3 = [];
   distancesq = constants[# "distance"] * constants[# "distance"];
-  wallbuys = planner::getblackboardattribute(planner, # "zm_wallbuys");
+  wallbuys = planner::getblackboardattribute(planner, #"zm_wallbuys");
 
   if(!isDefined(wallbuys)) {
     wallbuys = [];
@@ -913,7 +913,7 @@ function_393b9c76(planner, constants) {
   }
 
   if(isDefined(var_c5e003e1)) {
-    planner::setblackboardattribute(planner, # "zm_pathable_wallbuys", array(var_c5e003e1));
+    planner::setblackboardattribute(planner, #"zm_pathable_wallbuys", array(var_c5e003e1));
     params.wallbuy = var_c5e003e1;
   }
 

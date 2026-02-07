@@ -8,11 +8,11 @@
 #namespace character_unlock_scarlett_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_scarlett_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_scarlett_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"scarlett_unlock", # "hash_6f105a897d64112", # "cu13_item", &function_d95e620c, # "hash_698918780b4406f1");
+  character_unlock_fixup::register_character_unlock(#"scarlett_unlock", #"hash_6f105a897d64112", #"cu13_item", &function_d95e620c, #"hash_698918780b4406f1");
 }
 
 function_d95e620c() {

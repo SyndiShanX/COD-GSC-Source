@@ -87,7 +87,7 @@ function_5f8c1946(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 perseus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self gettagorigin("j_spine4"))) {
     playFX(localclientnum, level._effect[# "perseus_teleport"], self gettagorigin("j_spine4"), anglestoup(self.angles));
-    playSound(localclientnum, # "hash_20e6275c6513eb95", self gettagorigin("j_spine4"));
+    playSound(localclientnum, #"hash_20e6275c6513eb95", self gettagorigin("j_spine4"));
   }
 }
 
@@ -113,7 +113,7 @@ pegasus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
 zombie_breakout_func(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[# "chaos_breakout"], self, "tag_origin");
-  playSound(localclientnum, # "hash_496f85c0590828ba", self.origin + (0, 0, 25));
+  playSound(localclientnum, #"hash_496f85c0590828ba", self.origin + (0, 0, 25));
 }
 
 pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -141,7 +141,7 @@ pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   level beam::launch(var_10d4f67d, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike", 1);
-  self playSound(localclientnum, # "hash_61c057ffadb7a5af");
+  self playSound(localclientnum, #"hash_61c057ffadb7a5af");
   level thread chaos_explosion(localclientnum);
   wait 0.3;
   level beam::kill(var_10d4f67d, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike");
@@ -200,7 +200,7 @@ function_8d9ce264(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_cca9b50e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self.var_bf45a811 = util::playFXOnTag(localclientnum, level._effect[# "hash_440ca00839d907a8"], self, "tag_origin");
-    mdl_fx = util::spawn_model(localclientnum, # "tag_origin", self.origin);
+    mdl_fx = util::spawn_model(localclientnum, #"tag_origin", self.origin);
     self.var_6ec79371 = mdl_fx;
     self.staff_fallen = util::playFXOnTag(localclientnum, level._effect[# "hash_2a586a321116326c"], mdl_fx, "tag_origin");
     mdl_fx thread function_7152ba7c(self);
@@ -284,7 +284,7 @@ function_192be936(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.var_fc40818b)) {
-      self playSound(localclientnum, # "hash_10f7dee939554f61");
+      self playSound(localclientnum, #"hash_10f7dee939554f61");
       self.var_fc40818b = self playLoopSound(#"hash_474d2ea03ea86530");
     }
 

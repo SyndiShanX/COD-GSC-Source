@@ -300,7 +300,7 @@ donotetracks(flagname, customfunction, var1) {
 
 donotetracksforeverproc(notetracksfunc, flagname, killstring, customfunction, var1) {
   if(isDefined(killstring)) {
-    self endon(killstring, # "killanimscript");
+    self endon(killstring, #"killanimscript");
   }
 
   for(;;) {

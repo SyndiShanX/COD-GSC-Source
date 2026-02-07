@@ -56,7 +56,7 @@ resumetimer() {
 }
 
 locktimer() {
-  level endon(#"host_migration_begin", # "host_migration_end");
+  level endon(#"host_migration_begin", #"host_migration_end");
 
   for(;;) {
     currtime = gettime();
@@ -127,7 +127,7 @@ hostmigrationwaitforplayers() {
 }
 
 hostmigrationtimerthink_internal() {
-  level endon(#"host_migration_begin", # "host_migration_end");
+  level endon(#"host_migration_begin", #"host_migration_end");
   self.hostmigrationcontrolsfrozen = 0;
 
   while(!isalive(self)) {

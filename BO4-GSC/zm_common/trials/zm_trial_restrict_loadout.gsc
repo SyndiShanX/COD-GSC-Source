@@ -204,7 +204,7 @@ on_begin(var_e097dc07, var_f5300808) {
 
   switch (var_e097dc07) {
     case # "equipment":
-      var_e7beaa5 = array(#"eq_acid_bomb", # "eq_acid_bomb_extra", # "homunculus", # "tomahawk_t8", # "tomahawk_t8_upgraded", # "claymore", # "claymore_extra", # "eq_molotov", # "eq_molotov_extra", # "eq_frag_grenade", # "eq_frag_grenade_extra", # "eq_wraith_fire", # "eq_wraith_fire_extra", # "mini_turret", # "proximity_grenade", # "sticky_grenade", # "sticky_grenade_extra");
+      var_e7beaa5 = array(#"eq_acid_bomb", #"eq_acid_bomb_extra", #"homunculus", #"tomahawk_t8", #"tomahawk_t8_upgraded", #"claymore", #"claymore_extra", #"eq_molotov", #"eq_molotov_extra", #"eq_frag_grenade", #"eq_frag_grenade_extra", #"eq_wraith_fire", #"eq_wraith_fire_extra", #"mini_turret", #"proximity_grenade", #"sticky_grenade", #"sticky_grenade_extra");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);
       break;
@@ -213,30 +213,30 @@ on_begin(var_e097dc07, var_f5300808) {
       level zm_trial::function_cdcce681(1);
       break;
     case # "bowie_knife":
-      var_e7beaa5 = array(#"bowie_knife", # "bowie_knife_story_1", # "bowie_knife_widows_wine");
+      var_e7beaa5 = array(#"bowie_knife", #"bowie_knife_story_1", #"bowie_knife_widows_wine");
       var_fda63ae3[0] = struct::get("bowie_knife", "zombie_weapon_upgrade").origin;
       level zm_trial::function_25ee130(1);
       break;
     case # "leveraction":
-      var_e7beaa5 = array(#"tr_leveraction_t8", # "tr_leveraction_t8_upgraded");
+      var_e7beaa5 = array(#"tr_leveraction_t8", #"tr_leveraction_t8_upgraded");
       objective_struct = struct::get("tr_leveraction_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       level zm_trial::function_25ee130(1);
       break;
     case # "longburst":
-      var_e7beaa5 = array(#"tr_longburst_t8", # "tr_longburst_t8_upgraded");
+      var_e7beaa5 = array(#"tr_longburst_t8", #"tr_longburst_t8_upgraded");
       objective_struct = struct::get("tr_longburst_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       level zm_trial::function_25ee130(1);
       break;
     case # "hash_33380540d3ae5004":
-      var_e7beaa5 = array(#"shotgun_pump_t8", # "shotgun_pump_t8_upgraded");
+      var_e7beaa5 = array(#"shotgun_pump_t8", #"shotgun_pump_t8_upgraded");
       level zm_trial::function_25ee130(1);
       objective_struct = struct::get("shotgun_pump_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       break;
     case # "burst_pistol":
-      var_e7beaa5 = array(#"pistol_burst_t8", # "pistol_burst_t8_upgraded");
+      var_e7beaa5 = array(#"pistol_burst_t8", #"pistol_burst_t8_upgraded");
       objective_struct = struct::get("pistol_burst_t8", "zombie_weapon_upgrade");
       var_fda63ae3 = objective_struct.origin;
       level zm_trial::function_25ee130(1);
@@ -248,7 +248,7 @@ on_begin(var_e097dc07, var_f5300808) {
       break;
     case # "hash_7416cabf26f52c5f":
       var_e7beaa5 = zm_weapons::function_ed29dde5("pistol", 0, 1);
-      var_e7beaa5 = arraycombine(var_e7beaa5, array(#"ww_random_ray_gun1", # "ww_random_ray_gun2", # "ww_random_ray_gun2_charged", # "ww_random_ray_gun3", # "ww_random_ray_gun3_charged", # "ray_gun"), 0, 0);
+      var_e7beaa5 = arraycombine(var_e7beaa5, array(#"ww_random_ray_gun1", #"ww_random_ray_gun2", #"ww_random_ray_gun2_charged", #"ww_random_ray_gun3", #"ww_random_ray_gun3_charged", #"ray_gun"), 0, 0);
       var_fda63ae3 = function_f1dd7bf8(array("pistol_standard_t8", "pistol_burst_t8", "pistol_revolver_t8"));
       level zm_trial::function_25ee130(1);
       break;
@@ -284,7 +284,7 @@ on_begin(var_e097dc07, var_f5300808) {
       level zm_trial::function_25ee130(1);
       break;
     case # "stake_knife":
-      var_e7beaa5 = array(#"stake_knife", # "zhield_dw", # "knife", # "bowie_knife");
+      var_e7beaa5 = array(#"stake_knife", #"zhield_dw", #"knife", #"bowie_knife");
       level zm_trial::function_25ee130(1);
       break;
     case # "galvaknuckles":
@@ -293,12 +293,12 @@ on_begin(var_e097dc07, var_f5300808) {
       level zm_trial::function_25ee130(1);
       break;
     case # "special":
-      var_e7beaa5 = array(#"hero_chakram_lv1", # "hero_chakram_lv2", # "hero_chakram_lv3", # "hero_chakram_lh_lv1", # "hero_chakram_lh_lv2", # "hero_chakram_lh_lv3", # "hero_hammer_lv1", # "hero_hammer_lv2", # "hero_hammer_lv3", # "hero_scepter_lv1", # "hero_scepter_lv2", # "hero_scepter_lv3", # "hero_sword_pistol_lv1", # "hero_sword_pistol_lv2", # "hero_sword_pistol_lv3", # "hero_sword_pistol_lh_lv1", # "hero_sword_pistol_lh_lv2", # "hero_sword_pistol_lh_lv3", # "hero_flamethrower_t8_lv1", # "hero_flamethrower_t8_lv2", # "hero_flamethrower_t8_lv3", # "hero_gravityspikes_t8_lv1", # "hero_gravityspikes_t8_lv2", # "hero_gravityspikes_t8_lv3", # "hero_katana_t8_lv1", # "hero_katana_t8_lv2", # "hero_katana_t8_lv3", # "hero_minigun_t8_lv1", # "hero_minigun_t8_lv2", # "hero_minigun_t8_lv3");
+      var_e7beaa5 = array(#"hero_chakram_lv1", #"hero_chakram_lv2", #"hero_chakram_lv3", #"hero_chakram_lh_lv1", #"hero_chakram_lh_lv2", #"hero_chakram_lh_lv3", #"hero_hammer_lv1", #"hero_hammer_lv2", #"hero_hammer_lv3", #"hero_scepter_lv1", #"hero_scepter_lv2", #"hero_scepter_lv3", #"hero_sword_pistol_lv1", #"hero_sword_pistol_lv2", #"hero_sword_pistol_lv3", #"hero_sword_pistol_lh_lv1", #"hero_sword_pistol_lh_lv2", #"hero_sword_pistol_lh_lv3", #"hero_flamethrower_t8_lv1", #"hero_flamethrower_t8_lv2", #"hero_flamethrower_t8_lv3", #"hero_gravityspikes_t8_lv1", #"hero_gravityspikes_t8_lv2", #"hero_gravityspikes_t8_lv3", #"hero_katana_t8_lv1", #"hero_katana_t8_lv2", #"hero_katana_t8_lv3", #"hero_minigun_t8_lv1", #"hero_minigun_t8_lv2", #"hero_minigun_t8_lv3");
       level.b_special_weapons = 1;
       level zm_trial::function_cdcce681(1);
       break;
     case # "shield":
-      var_e7beaa5 = array(#"zhield_zword_dw", # "zhield_zword_dw_upgraded", # "zhield_zword_lh", # "zhield_zword_lh_upgraded", # "zhield_zword_turret", # "zhield_zword_turret_upgraded");
+      var_e7beaa5 = array(#"zhield_zword_dw", #"zhield_zword_dw_upgraded", #"zhield_zword_lh", #"zhield_zword_lh_upgraded", #"zhield_zword_turret", #"zhield_zword_turret_upgraded");
       level zm_trial::function_25ee130(1);
       break;
     case # "sniper_powersemi":
@@ -312,18 +312,18 @@ on_begin(var_e097dc07, var_f5300808) {
       level zm_trial::function_25ee130(1);
       break;
     case # "spoon":
-      var_e7beaa5 = array(#"spoon_alcatraz", # "spork_alcatraz", # "zhield_spectral_dw", # "zhield_spectral_lh", # "zhield_spectral_lh_upgraded", # "zhield_spectral_dw_upgraded", # "zhield_spectral_turret", # "zhield_spectral_turret_upgraded", "tomahawk_t8", "tomahawk_t8_upgraded");
+      var_e7beaa5 = array(#"spoon_alcatraz", #"spork_alcatraz", #"zhield_spectral_dw", #"zhield_spectral_lh", #"zhield_spectral_lh_upgraded", #"zhield_spectral_dw_upgraded", #"zhield_spectral_turret", #"zhield_spectral_turret_upgraded", "tomahawk_t8", "tomahawk_t8_upgraded");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);
       break;
     case # "spear_only":
-      var_e7beaa5 = array(#"zhield_zpear_dw", # "zhield_zpear_turret", # "zhield_zpear_lh");
+      var_e7beaa5 = array(#"zhield_zpear_dw", #"zhield_zpear_turret", #"zhield_zpear_lh");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);
       level zm_trial::function_cd75b690(1);
       break;
     case # "mozu":
-      var_e7beaa5 = array(#"pistol_revolver_t8", # "pistol_revolver_t8_upgraded");
+      var_e7beaa5 = array(#"pistol_revolver_t8", #"pistol_revolver_t8_upgraded");
       objective_struct = struct::get("pistol_revolver_t8", "zombie_weapon_upgrade");
 
       if(isDefined(objective_struct)) {
@@ -333,7 +333,7 @@ on_begin(var_e097dc07, var_f5300808) {
       level zm_trial::function_25ee130(1);
       break;
     case # "tommy_gun":
-      var_e7beaa5 = array(#"smg_thompson_t8", # "smg_thompson_t8_upgraded");
+      var_e7beaa5 = array(#"smg_thompson_t8", #"smg_thompson_t8_upgraded");
       objective_struct = struct::get("smg_thompson_t8", "zombie_weapon_upgrade");
 
       if(isDefined(objective_struct)) {
@@ -347,7 +347,7 @@ on_begin(var_e097dc07, var_f5300808) {
       level.b_special_weapons = 1;
       break;
     case # "snowballs":
-      var_e7beaa5 = array(#"snowball", # "snowball_upgraded", # "snowball_yellow", # "snowball_yellow_upgraded");
+      var_e7beaa5 = array(#"snowball", #"snowball_upgraded", #"snowball_yellow", #"snowball_yellow_upgraded");
       level zm_trial::function_8e2a923(1);
       level zm_trial::function_44200d07(1);
       break;
@@ -405,7 +405,7 @@ on_begin(var_e097dc07, var_f5300808) {
       }
 
       self.a_n_objective_ids[self.a_n_objective_ids.size] = n_obj_id;
-      objective_add(n_obj_id, "active", var_6bb4a364, # "hash_423a75e2700a53ab");
+      objective_add(n_obj_id, "active", var_6bb4a364, #"hash_423a75e2700a53ab");
       function_da7940a3(n_obj_id, 1);
     }
 

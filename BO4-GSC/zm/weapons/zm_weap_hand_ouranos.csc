@@ -48,7 +48,7 @@ function_1322534b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   playFX(localclientnum, level._effect[# "ouranos_impact"], v_org, anglesToForward(self.angles));
-  playSound(localclientnum, # "hash_3360f981ac697bfe", self.origin);
+  playSound(localclientnum, #"hash_3360f981ac697bfe", self.origin);
 }
 
 function_a1d614f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -63,19 +63,19 @@ function_a1d614f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self playSound(localclientnum, # "hash_3360f981ac697bfe");
+    self playSound(localclientnum, #"hash_3360f981ac697bfe");
     util::playFXOnTag(localclientnum, level._effect[# "ouranos_proj_knock"], self, str_tag);
     return;
   }
 
   if(newval == 2) {
-    self playSound(localclientnum, # "hash_3360f981ac697bfe");
+    self playSound(localclientnum, #"hash_3360f981ac697bfe");
     util::playFXOnTag(localclientnum, level._effect[# "ouranos_wind_knock"], self, str_tag);
     return;
   }
 
   if(newval == 3) {
-    self playSound(localclientnum, # "hash_3360f981ac697bfe");
+    self playSound(localclientnum, #"hash_3360f981ac697bfe");
     util::playFXOnTag(localclientnum, level._effect[# "ouranos_proj_knock"], self, str_tag);
     self thread function_f89a4434(localclientnum);
   }
@@ -151,11 +151,11 @@ ouranos_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   playFX(localclientnum, level._effect[# "ouranos_impact"], v_org, v_ang);
-  playSound(localclientnum, # "hash_d09856cb05b1a39", self.origin);
+  playSound(localclientnum, #"hash_d09856cb05b1a39", self.origin);
 }
 
 skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(newval == 1) {
     if(isDefined(self.var_c400cdd5)) {
@@ -168,7 +168,7 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     }
 
     if(!isDefined(self.var_76c23e4c)) {
-      self playSound(localclientnum, # "hash_5e5e7d42f62fb92d");
+      self playSound(localclientnum, #"hash_5e5e7d42f62fb92d");
       self.var_76c23e4c = self playLoopSound(#"hash_14ac86ceee99d2f3");
     }
 
@@ -181,7 +181,7 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   }
 
   if(isDefined(self.var_76c23e4c)) {
-    self playSound(localclientnum, # "hash_6b91419f41fc8d34");
+    self playSound(localclientnum, #"hash_6b91419f41fc8d34");
     self stoploopsound(self.var_76c23e4c);
     self.var_76c23e4c = undefined;
   }
@@ -190,7 +190,7 @@ skull_turret_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 function_98b06f97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_76c23e4c)) {
-      self playSound(localclientnum, # "hash_5e5e7d42f62fb92d");
+      self playSound(localclientnum, #"hash_5e5e7d42f62fb92d");
       self.var_76c23e4c = self playLoopSound(#"hash_14ac86ceee99d2f3");
     }
 
@@ -198,7 +198,7 @@ function_98b06f97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_76c23e4c)) {
-    self playSound(localclientnum, # "hash_6b91419f41fc8d34");
+    self playSound(localclientnum, #"hash_6b91419f41fc8d34");
     self stoploopsound(self.var_76c23e4c);
     self.var_76c23e4c = undefined;
   }

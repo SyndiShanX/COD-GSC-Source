@@ -100,7 +100,7 @@ default_ononeleftevent(team) {
       print("<dev string:xbe>");
     }
 
-    thread globallogic::endgame(winner, # "mp_enemies_eliminated");
+    thread globallogic::endgame(winner, #"mp_enemies_eliminated");
     return;
   }
 

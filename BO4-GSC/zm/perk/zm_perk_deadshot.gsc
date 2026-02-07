@@ -25,9 +25,9 @@ __init__() {
 
 enable_deadshot_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_deadshot", # "perk_dead_shot", 2000, # "hash_29881d32839ebaa1", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), # "zmperksdeadshot");
+    zm_perks::register_perk_basic_info(#"specialty_deadshot", #"perk_dead_shot", 2000, #"hash_29881d32839ebaa1", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), #"zmperksdeadshot");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_deadshot", # "perk_dead_shot", 2000, # "zombie/perk_deadshot", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), # "zmperksdeadshot");
+    zm_perks::register_perk_basic_info(#"specialty_deadshot", #"perk_dead_shot", 2000, #"zombie/perk_deadshot", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), #"zmperksdeadshot");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_deadshot", &deadshot_precache);

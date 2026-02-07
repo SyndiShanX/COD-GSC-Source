@@ -45,7 +45,7 @@ function_4207e678(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_3a03717(localclientnum) {
   self notify(#"stop_summon");
-  self endon(#"death", # "stop_summon");
+  self endon(#"death", #"stop_summon");
 
   while(true) {
     e_player = function_5c10bd79(localclientnum);
@@ -92,19 +92,19 @@ nosferatudamagefx(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
 function_3468dc45(localclientnum) {
   self notify(#"nosferatu_damage_fx");
-  self endon(#"death", # "disconnect", # "nosferatu_damage_fx");
-  self endoncallback(&function_84346679, # "death", # "hash_70253e729ea3d013");
+  self endon(#"death", #"disconnect", #"nosferatu_damage_fx");
+  self endoncallback(&function_84346679, #"death", #"hash_70253e729ea3d013");
 
   if(!self postfx::function_556665f2("pstfx_zm_man_curse")) {
     self postfx::playpostfxbundle("pstfx_zm_man_curse");
   }
 
   if(!isDefined(self.var_222e996f)) {
-    self playSound(localclientnum, # "hash_373ab869c634b58b");
+    self playSound(localclientnum, #"hash_373ab869c634b58b");
     self.var_222e996f = self playLoopSound(#"hash_5b12d6dc3fd13c3d");
   }
 
-  level waittilltimeout(level.var_371d767c, # "hash_7646638df88a3656");
+  level waittilltimeout(level.var_371d767c, #"hash_7646638df88a3656");
   self notify(#"hash_70253e729ea3d013");
 }
 
@@ -115,15 +115,15 @@ function_84346679(var_c34665fc) {
 
   if(isDefined(self.var_222e996f)) {
     localclientnum = self getlocalclientnumber();
-    self playSound(localclientnum, # "hash_4f2c92409321076e");
+    self playSound(localclientnum, #"hash_4f2c92409321076e");
     self stoploopsound(self.var_222e996f);
     self.var_222e996f = undefined;
   }
 }
 
 nosferatu_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, # "hash_611d887cc85e2cb8", self, "j_spine2");
-  playSound(localclientnum, # "hash_15f98d1e471b4335", self.origin);
+  util::playFXOnTag(localclientnum, #"hash_611d887cc85e2cb8", self, "j_spine2");
+  playSound(localclientnum, #"hash_15f98d1e471b4335", self.origin);
 }
 
 on_entity_shutdown(localclientnum) {

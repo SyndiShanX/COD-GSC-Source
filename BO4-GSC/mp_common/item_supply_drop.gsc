@@ -17,7 +17,7 @@
 #namespace item_supply_drop;
 
 autoexec __init__system__() {
-  system::register(#"item_supply_drop", &__init__, undefined, # "item_world");
+  system::register(#"item_supply_drop", &__init__, undefined, #"item_world");
 }
 
 __init__() {
@@ -41,7 +41,7 @@ function_eaba72c9() {
           level thread function_418e26fe();
           break;
         case 2:
-          vehicletypes = array(#"veh_suv_player_police_wz", # "veh_quad_player_wz_police", # "veh_muscle_car_convertible_player_wz_blk");
+          vehicletypes = array(#"veh_suv_player_police_wz", #"veh_quad_player_wz_police", #"veh_muscle_car_convertible_player_wz_blk");
           level thread function_418e26fe(undefined, 1, 1, 0, 1, vehicletypes[randomint(vehicletypes.size)]);
           break;
       }
@@ -75,14 +75,14 @@ function_eaba72c9() {
             level thread drop_supply_drop(players[0].origin, 1);
             break;
           case 3:
-            vehicletypes = array(#"veh_suv_player_police_wz", # "veh_quad_player_wz_police", # "veh_muscle_car_convertible_player_wz_blk");
+            vehicletypes = array(#"veh_suv_player_police_wz", #"veh_quad_player_wz_police", #"veh_muscle_car_convertible_player_wz_blk");
             level thread drop_supply_drop(players[0].origin, 1, 1, vehicletypes[randomint(vehicletypes.size)]);
             break;
           case 4:
             spawn_supply_drop(players[0].origin);
             break;
           case 5:
-            vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", # "vehicle_t8_mil_tank_wz_green", # "vehicle_t8_mil_tank_wz_grey", # "vehicle_t8_mil_tank_wz_tan");
+            vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan");
             level thread drop_supply_drop(players[0].origin, 1, 1, vehicletypes[randomint(vehicletypes.size)]);
             break;
         }
@@ -288,7 +288,7 @@ function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
     }
 
     if(!(isDefined(supplydrop.pop_parachute) && supplydrop.pop_parachute)) {
-      supplydrop waittill(#"movedone", # "pop_parachute");
+      supplydrop waittill(#"movedone", #"pop_parachute");
     }
 
     if(isDefined(supplydropparachute)) {
@@ -315,7 +315,7 @@ function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
 }
 
 function_e21ceb1b() {
-  self endon(#"death", # "movedone");
+  self endon(#"death", #"movedone");
   extendbounds = (10, 10, 10);
   previousorigin = self.origin;
   var_8bc27a4a = 0;
@@ -640,7 +640,7 @@ function_9e8348e4() {
 }
 
 function_c2edbefb(path, droppoint, var_86928932 = 1, var_2118f785 = undefined) {
-  self endon(#"death", # "emergency_exit");
+  self endon(#"death", #"emergency_exit");
 
   for(pathindex = 1; pathindex < path.size; pathindex++) {
     var_f155e743 = 0;

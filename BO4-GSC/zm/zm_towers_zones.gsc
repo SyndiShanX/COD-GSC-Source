@@ -66,8 +66,8 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("zone_danu_top_floor", "zone_danu_ground_floor", "connect_danu_tower", 0);
   zm_zonemgr::add_adjacent_zone("zone_danu_basement", "zone_danu_ground_floor", "connect_danu_tower", 0);
   zm_zonemgr::add_adjacent_zone("zone_danu_basement", "zone_danu_ra_tunnel", "connect_danu_basement_to_danu_ra_tunnel", 0);
-  zm_zonemgr::add_adjacent_zone("zone_danu_basement_decayed", "zone_danu_ground_floor_decayed", # "hash_55461b9e82131f3", 0);
-  zm_zonemgr::add_adjacent_zone("zone_danu_top_floor_decayed", "zone_danu_ground_floor_decayed", # "hash_1596bce02bfee2fe", 0);
+  zm_zonemgr::add_adjacent_zone("zone_danu_basement_decayed", "zone_danu_ground_floor_decayed", #"hash_55461b9e82131f3", 0);
+  zm_zonemgr::add_adjacent_zone("zone_danu_top_floor_decayed", "zone_danu_ground_floor_decayed", #"hash_1596bce02bfee2fe", 0);
   zm_zonemgr::add_adjacent_zone("zone_starting_area_ra", "zone_ra_hallway", "connect_starting_area_to_ra_hallway", 0);
   zm_zonemgr::add_adjacent_zone("zone_ra_hallway", "zone_ra_ground_floor", "connect_starting_area_to_ra_hallway", 0);
   zm_zonemgr::add_adjacent_zone("zone_ra_ground_floor", "zone_starting_area_ra", "connect_starting_area_to_ra_hallway");
@@ -215,13 +215,13 @@ function_4e4594ab() {
 on_player_spawned() {
   self endon(#"death");
   self thread function_8e0b371();
-  self thread zm_audio::function_713192b1(#"hash_7a784e915fb4da82", # "body_pit");
-  self thread zm_audio::function_713192b1(#"hash_2a27c4b2d37ac547", # "odin_floor");
-  self thread zm_audio::function_713192b1(#"hash_f06f1d12b9e06bb", # "ra_base");
-  self thread zm_audio::function_713192b1(#"hash_54ab01103f8534bd", # "temple");
-  self thread zm_audio::function_713192b1(#"hash_3bf0a3cc4bf210d3", # "zeus_base");
-  self thread zm_audio::function_713192b1(#"hash_397ee221838b64ee", # "danu");
-  self thread zm_audio::function_713192b1(#"hash_5c1dcbfe0b5001dd", # "danu");
+  self thread zm_audio::function_713192b1(#"hash_7a784e915fb4da82", #"body_pit");
+  self thread zm_audio::function_713192b1(#"hash_2a27c4b2d37ac547", #"odin_floor");
+  self thread zm_audio::function_713192b1(#"hash_f06f1d12b9e06bb", #"ra_base");
+  self thread zm_audio::function_713192b1(#"hash_54ab01103f8534bd", #"temple");
+  self thread zm_audio::function_713192b1(#"hash_3bf0a3cc4bf210d3", #"zeus_base");
+  self thread zm_audio::function_713192b1(#"hash_397ee221838b64ee", #"danu");
+  self thread zm_audio::function_713192b1(#"hash_5c1dcbfe0b5001dd", #"danu");
 }
 
 function_8e0b371() {

@@ -979,19 +979,19 @@ function_928e94b9(a_str_archetypes) {
   foreach(str_archetype in a_str_archetypes) {
     str_archetype = hash(str_archetype);
 
-    if(isinarray(array(#"blight_father", # "brutus", # "gegenees"), str_archetype) && function_901b751c(#"zmminibossstate") == 0) {
+    if(isinarray(array(#"blight_father", #"brutus", #"gegenees"), str_archetype) && function_901b751c(#"zmminibossstate") == 0) {
       return true;
     }
 
-    if(isinarray(array(#"stoker", # "gladiator", # "gladiator_marauder", # "gladiator_destroyer", # "werewolf"), str_archetype) && function_901b751c(#"zmheavystate") == 0) {
+    if(isinarray(array(#"stoker", #"gladiator", #"gladiator_marauder", #"gladiator_destroyer", #"werewolf"), str_archetype) && function_901b751c(#"zmheavystate") == 0) {
       return true;
     }
 
-    if(isinarray(array(#"bat", # "dog", # "zombie_dog"), str_archetype) && function_901b751c(#"zmpopcornstate") == 0) {
+    if(isinarray(array(#"bat", #"dog", #"zombie_dog"), str_archetype) && function_901b751c(#"zmpopcornstate") == 0) {
       return true;
     }
 
-    if(isinarray(array(#"nosferatu", # "skeleton", # "nova_crawler", # "tiger", # "catalyst", # "catalyst_corrosive", # "catalyst_electric", # "catalyst_plasma", # "catalyst_water"), str_archetype) && function_901b751c(#"zmenhancedstate") == 0) {
+    if(isinarray(array(#"nosferatu", #"skeleton", #"nova_crawler", #"tiger", #"catalyst", #"catalyst_corrosive", #"catalyst_electric", #"catalyst_plasma", #"catalyst_water"), str_archetype) && function_901b751c(#"zmenhancedstate") == 0) {
       return true;
     }
   }
@@ -1022,7 +1022,7 @@ function_318d417b(e_player) {
 
   if(!e_player zm_score::can_player_purchase(n_cost)) {
     self playSound(#"evt_perk_deny");
-    e_player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+    e_player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
     waitframe(1);
     return;
   }
@@ -1419,7 +1419,7 @@ function_34c2aeb5() {
 
 drain_health(var_c454f44e) {
   self notify(#"hash_13fcb28a561bd5fe");
-  self endon(#"disconnect", # "hash_13fcb28a561bd5fe");
+  self endon(#"disconnect", #"hash_13fcb28a561bd5fe");
   level endon(#"game_ended");
   self val::set(#"custom_games", "health_regen", 0);
 
@@ -1553,7 +1553,7 @@ function_dc856fd8() {
   self endon(#"death");
 
   while(true) {
-    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
+    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
     self allowmelee(0);
   }
 }

@@ -71,9 +71,9 @@ function_96d38b95(result) {
     if(globallogic_score::canupdateweaponcontractstats()) {
       specialcontractid = 1;
       specialcontracttarget = getdvarint(#"weapon_contract_target_value", 100);
-      specialcontractcurent = player stats::get_stat(#"weaponcontractdata", # "currentvalue");
+      specialcontractcurent = player stats::get_stat(#"weaponcontractdata", #"currentvalue");
 
-      if((isDefined(player stats::get_stat(#"weaponcontractdata", # "completetimestamp")) ? player stats::get_stat(#"weaponcontractdata", # "completetimestamp") : 0) != 0) {
+      if((isDefined(player stats::get_stat(#"weaponcontractdata", #"completetimestamp")) ? player stats::get_stat(#"weaponcontractdata", #"completetimestamp") : 0) != 0) {
         specialcontractcompleted = 1;
       }
     }
@@ -274,7 +274,7 @@ function_96d38b95(result) {
   var_8607894c.specialist_legs = player function_cde23658();
   var_8607894c.specialist_torso = player function_92ea4100();
   var_8607894c.specialist_showcase = showcaseweapon.weapon.name;
-  function_92d1707f(#"hash_4c5946fa1191bc64", # "hash_71960e91f80c3365", var_906bdcf3, # "hash_4682ee0eb5071d2", var_811ed119, # "hash_209c80d657442a83", var_a14ea2be, # "hash_43cb38816354c3aa", var_b65d83f5, # "hash_11fcb8f188ed5050", var_6e81e3c3, # "hash_78a6c018d9f82184", var_8607894c);
+  function_92d1707f(#"hash_4c5946fa1191bc64", #"hash_71960e91f80c3365", var_906bdcf3, #"hash_4682ee0eb5071d2", var_811ed119, #"hash_209c80d657442a83", var_a14ea2be, #"hash_43cb38816354c3aa", var_b65d83f5, #"hash_11fcb8f188ed5050", var_6e81e3c3, #"hash_78a6c018d9f82184", var_8607894c);
 }
 
 record_special_move_data_for_life(killer) {
@@ -403,9 +403,9 @@ function_ea5da381() {
   }
 
   if(sessionmodeiswarzonegame()) {
-    self persistence::set_recent_stat(0, 0, # "placement_team", self.pers[# "placement_team"]);
-    self persistence::set_recent_stat(0, 0, # "placement_player", self.pers[# "placement_player"]);
-    self persistence::set_recent_stat(0, 0, # "timeplayed", self.timeplayed[# "total"]);
+    self persistence::set_recent_stat(0, 0, #"placement_team", self.pers[# "placement_team"]);
+    self persistence::set_recent_stat(0, 0, #"placement_player", self.pers[# "placement_player"]);
+    self persistence::set_recent_stat(0, 0, #"timeplayed", self.timeplayed[# "total"]);
   }
 }
 
@@ -414,18 +414,18 @@ function_7569c0fb() {
     self persistence::function_acac764e();
   }
 
-  self persistence::set_recent_stat(0, 0, # "valid", 1);
-  self persistence::set_recent_stat(0, 0, # "ekia", self.ekia);
-  self persistence::set_recent_stat(0, 0, # "deaths", self.deaths);
-  self persistence::set_recent_stat(0, 0, # "kills", self.kills);
-  self persistence::set_recent_stat(0, 0, # "outcome", self.pers[# "outcome"]);
-  self persistence::set_recent_stat(0, 0, # "timeplayed", self.pers[# "totaltimeplayed"]);
-  self persistence::set_recent_stat(0, 0, # "score", self.pers[# "score"]);
-  self persistence::set_recent_stat(0, 0, # "damage", self.pers[# "damagedone"]);
-  self persistence::set_recent_stat(0, 0, # "objectiveekia", self.pers[# "objectiveekia"]);
-  self persistence::set_recent_stat(0, 0, # "objectivescore", self.pers[# "objectivescore"]);
-  self persistence::set_recent_stat(0, 0, # "objectivedefends", self.pers[# "objectivedefends"]);
-  self persistence::set_recent_stat(0, 0, # "objectivetime", self.pers[# "objectivetime"]);
+  self persistence::set_recent_stat(0, 0, #"valid", 1);
+  self persistence::set_recent_stat(0, 0, #"ekia", self.ekia);
+  self persistence::set_recent_stat(0, 0, #"deaths", self.deaths);
+  self persistence::set_recent_stat(0, 0, #"kills", self.kills);
+  self persistence::set_recent_stat(0, 0, #"outcome", self.pers[# "outcome"]);
+  self persistence::set_recent_stat(0, 0, #"timeplayed", self.pers[# "totaltimeplayed"]);
+  self persistence::set_recent_stat(0, 0, #"score", self.pers[# "score"]);
+  self persistence::set_recent_stat(0, 0, #"damage", self.pers[# "damagedone"]);
+  self persistence::set_recent_stat(0, 0, #"objectiveekia", self.pers[# "objectiveekia"]);
+  self persistence::set_recent_stat(0, 0, #"objectivescore", self.pers[# "objectivescore"]);
+  self persistence::set_recent_stat(0, 0, #"objectivedefends", self.pers[# "objectivedefends"]);
+  self persistence::set_recent_stat(0, 0, #"objectivetime", self.pers[# "objectivetime"]);
   self function_ea5da381();
   self stats::function_81f5c0fe(self.pers[# "outcome"], 1);
   self stats::function_81f5c0fe(#"timeplayed", self.pers[# "totaltimeplayed"]);

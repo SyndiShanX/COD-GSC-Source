@@ -92,9 +92,9 @@ function_eca0c19d() {
       self thread swordpistol_rumble(1);
 
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_6514f206d5d2c57f");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_6514f206d5d2c57f");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_211bb263a0e77c99");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_211bb263a0e77c99");
       }
 
       self thread function_6fe1307b(wpn_cur);
@@ -106,9 +106,9 @@ function_eca0c19d() {
       self thread swordpistol_rumble(1);
 
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_6514f206d5d2c57f");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_6514f206d5d2c57f");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_211bb263a0e77c99");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_211bb263a0e77c99");
       }
 
       self thread function_6fe1307b(wpn_cur);
@@ -120,9 +120,9 @@ function_eca0c19d() {
       self thread swordpistol_rumble(1);
 
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_2303e09b25647ced");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_2303e09b25647ced");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_289f1ec940a22d13");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_289f1ec940a22d13");
       }
 
       self thread function_6fe1307b(wpn_cur);
@@ -134,13 +134,13 @@ function_eca0c19d() {
 }
 
 function_6fe1307b(weapon) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
 
   while(true) {
     if(weapon == level.hero_weapon[# "sword_pistol"][2]) {
       self waittill(#"weapon_melee_power");
     } else {
-      self waittill(#"weapon_melee_power", # "weapon_melee");
+      self waittill(#"weapon_melee_power", #"weapon_melee");
     }
 
     if(!zm_trial_restrict_loadout::function_5fbf572(weapon, 1)) {
@@ -172,7 +172,7 @@ function_fe3f086c(e_target, leftswing, weapon = level.weaponnone) {
 }
 
 chop_actor(ai, leftswing, weapon = level.weaponnone) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
   ai endon(#"death");
 
   if(!isDefined(ai.zm_ai_category)) {
@@ -619,7 +619,7 @@ function_5ff8ad0b(weapon, var_fb504c3b) {
 }
 
 function_be6cef79(weapon) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
   self.var_61950f95 = undefined;
 
   while(true) {
@@ -920,7 +920,7 @@ function_3295542a(player, weapon) {
     player.var_94a84ade.origin = var_344157ae;
   }
 
-  self waittill(#"hash_1404343e2a1a434c", # "death");
+  self waittill(#"hash_1404343e2a1a434c", #"death");
 
   if(isDefined(self)) {
     self clientfield::set("" + # "viper_bite_bitten_fx", 0);
@@ -997,10 +997,10 @@ swordpistol_rumble(var_b2e05bae) {
 }
 
 function_68ff89f7(w_swordpistol) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
   s_result = self waittill(#"weapon_melee");
 
   if(s_result.weapon === w_swordpistol) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "sword_pistol");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"sword_pistol");
   }
 }

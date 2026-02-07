@@ -23,7 +23,7 @@ play_animation(var_f6550bae) {
 }
 
 function_33f98f4(animation, mocomp, blendout) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   animinfo = spawnStruct();
   animinfo.name = mocomp;
   animinfo.entity = self;

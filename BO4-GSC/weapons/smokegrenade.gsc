@@ -56,10 +56,10 @@ watchsmokegrenadedetonation(owner, statweapon, smokeweapon, duration, totaltime)
   self endon(#"trophy_destroyed");
 
   if(isplayer(owner)) {
-    owner stats::function_e24eec31(statweapon, # "used", 1);
+    owner stats::function_e24eec31(statweapon, #"used", 1);
   }
 
-  waitresult = self waittill(#"explode", # "death");
+  waitresult = self waittill(#"explode", #"death");
 
   if(waitresult._notify != "explode") {
     return;
@@ -160,7 +160,7 @@ spawnsmokegrenadetrigger(smokeweapon, duration, owner) {
     thread function_8b6ddd71(self, smokeweapon);
   }
 
-  self waittilltimeout(duration, # "death");
+  self waittilltimeout(duration, #"death");
   arrayremovevalue(level.smoke_grenade_triggers, trigger);
 
   if(isDefined(anchor)) {
@@ -297,7 +297,7 @@ function_87d0a127(grenadeent, smokeweapon) {
   owner = grenadeent.smoketrigger.owner;
 
   while(true) {
-    waitresult = grenadeent waittilltimeout(0.25, # "death");
+    waitresult = grenadeent waittilltimeout(0.25, #"death");
 
     if(isDefined(owner)) {
       if(isDefined(grenadeent) && isDefined(grenadeent.smoketrigger) && owner istouching(grenadeent.smoketrigger) && waitresult._notify == # "timeout") {
@@ -321,7 +321,7 @@ function_8b6ddd71(grenadeent, smokeweapon) {
   grenadeteam = grenadeent.team;
 
   while(true) {
-    waitresult = grenadeent waittilltimeout(0.25, # "death");
+    waitresult = grenadeent waittilltimeout(0.25, #"death");
 
     foreach(player in level.players) {
       curval = player clientfield::get("insmoke");

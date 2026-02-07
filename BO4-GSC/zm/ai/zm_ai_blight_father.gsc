@@ -88,12 +88,12 @@ __init__() {
   clientfield::register("toplayer", "blight_father_vomit_postfx_clientfield", 1, 1, "int");
   clientfield::register("scriptmover", "blight_father_gib_explosion", 1, 1, "int");
   clientfield::register("actor", "blight_father_death_fx", 17000, 6, "int");
-  level thread aat::register_immunity("zm_aat_brain_decay", # "blight_father", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "blight_father", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "blight_father", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "blight_father", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"blight_father", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"blight_father", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"blight_father", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"blight_father", 1, 1, 1);
   blight_father_spawner = getent("zombie_spawner_blight_father", "targetname");
-  zm_transform::function_cfca77a7(blight_father_spawner, # "blight_father", &function_39212989, 10, &function_3a0cdf7f, &function_8e4c43d3, "aib_vign_zm_zod_bltfthr_spawn_pre_split", "aib_vign_zm_zod_bltfthr_spawn_post_split");
+  zm_transform::function_cfca77a7(blight_father_spawner, #"blight_father", &function_39212989, 10, &function_3a0cdf7f, &function_8e4c43d3, "aib_vign_zm_zod_bltfthr_spawn_pre_split", "aib_vign_zm_zod_bltfthr_spawn_post_split");
   zm_spawner::register_zombie_death_event_callback(&killed_callback);
   callback::on_ai_killed(&function_7bef9c3c);
   zm_round_spawning::register_archetype(#"blight_father", &function_633d7436, &round_spawn, undefined, 300);
@@ -119,7 +119,7 @@ __init__() {
     }
   }
 
-  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, # "tag_elbow_weakspot_le": &function_9bbe631c, # "tag_elbow_weakspot_ri": &function_5a1a4ad, # "tag_eggsack_weakspot_le": &function_40034805, # "tag_eggsack_weakspot_ri": &function_33b2c99e];
+  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
   zm_ai_utility::function_2ad308c4(#"blight_father", &function_744be31d);
   zm_trial_special_enemy::function_95c1dd81(#"blight_father", &function_2315440d);
   namespace_9ff9f642::register_slowdown(#"hash_2fd5f5f16583a427", 0.8);
@@ -232,7 +232,7 @@ function_7c52f40() {
 function_95a6fbef() {
   self.maxhealth = int(self zm_ai_utility::function_8d44707e(1, self._starting_round_number) * (isDefined(level.var_9503486c) ? level.var_9503486c : 1));
   self.health = self.maxhealth;
-  namespace_81245006::initweakpoints(self, # "c_t8_zmb_blightfather_weakpoint_def");
+  namespace_81245006::initweakpoints(self, #"c_t8_zmb_blightfather_weakpoint_def");
   zm_score::function_e5d6e6dd(#"blight_father", self ai::function_9139c839().blightfatherscore);
   self zm_score::function_82732ced();
 
@@ -447,7 +447,7 @@ function_b78adc65(entity) {
 
 function_529b7fb9() {
   self endon(#"death");
-  level waittilltimeout(300, # "clear_all_corpses");
+  level waittilltimeout(300, #"clear_all_corpses");
 
   if(isDefined(self)) {
     self delete();
@@ -602,7 +602,7 @@ blightfatherdeathstart(entity) {
       return;
     }
 
-    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, # "hash_3e937fff0e0a4362", "normal");
+    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"hash_3e937fff0e0a4362", "normal");
     gib_model thread function_529b7fb9();
     entity.gib_model = gib_model;
   }
@@ -921,7 +921,7 @@ function_cacd1506(var_84ed9a13, entity, inflictor, attacker, damage, flags, mean
 function_6f109d76(ai) {
   if(level.var_a51ca41a <= 2) {
     if(level.time - ai.birthtime > 3000) {
-      self thread zm_audio::create_and_play_dialog(#"blight_father", # "weak_points");
+      self thread zm_audio::create_and_play_dialog(#"blight_father", #"weak_points");
     }
   }
 }
@@ -1122,7 +1122,7 @@ function_96f5d05a(entity, var_4c0587b) {
     return;
   }
 
-  entity endoncallback(&function_e0b3baff, # "death", # "hash_2fb2eddfa6a0ef3f");
+  entity endoncallback(&function_e0b3baff, #"death", #"hash_2fb2eddfa6a0ef3f");
   grapple_start = zm_grappler::create_mover(entity gettagorigin("tag_jaw"), entity.angles);
   grapple_end = zm_grappler::create_mover(entity gettagorigin("tag_jaw"), entity.angles * -1);
   grapple_end.prone_2_run_roll = entity;
@@ -1161,7 +1161,7 @@ function_96f5d05a(entity, var_4c0587b) {
     var_1b40c6fd = entity.origin - var_148b92ae;
     angles = vectortoangles(var_1b40c6fd);
     grapple_end.angles = (grapple_end.angles[0], angles[1], grapple_end.angles[2]);
-    entity.e_grapplee util::delay(0.5, undefined, &zm_audio::create_and_play_dialog, # "blight_father", # "vomit", undefined, 2);
+    entity.e_grapplee util::delay(0.5, undefined, &zm_audio::create_and_play_dialog, #"blight_father", #"vomit", undefined, 2);
   }
 
   entity.var_54c1950f.status = 4;
@@ -1172,7 +1172,7 @@ function_96f5d05a(entity, var_4c0587b) {
 }
 
 function_55cba1f3(prone_2_run_roll) {
-  self endon(#"death", # "hash_46064b6c2cb5cf20");
+  self endon(#"death", #"hash_46064b6c2cb5cf20");
   wait 15;
 
   if(isDefined(prone_2_run_roll)) {
@@ -1221,8 +1221,8 @@ function_31963d63(notifyhash) {
 }
 
 function_9d1a26f1(entity, var_8a713db5, var_3e06882e) {
-  entity endon(#"death", # "hash_2fb2eddfa6a0ef3f");
-  entity.var_54c1950f.beamend endoncallback(&function_31963d63, # "death", # "movedone");
+  entity endon(#"death", #"hash_2fb2eddfa6a0ef3f");
+  entity.var_54c1950f.beamend endoncallback(&function_31963d63, #"death", #"movedone");
 
   if(getdvarint(#"hash_692fb9cc4cff6541", 0)) {
     var_1b97aa47 = sqrt(var_8a713db5);
@@ -1531,20 +1531,20 @@ function_b5b42347(entity) {
 }
 
 watch_disconnect(grappler) {
-  grappler endon(#"death", # "hash_2fb2eddfa6a0ef3f");
+  grappler endon(#"death", #"hash_2fb2eddfa6a0ef3f");
   self waittill(#"disconnect");
   thread function_25f9cc48(grappler);
 }
 
 function_5e853c85(grappler) {
   self endon(#"disconnect");
-  grappler waittill(#"death", # "hash_2fb2eddfa6a0ef3f");
+  grappler waittill(#"death", #"hash_2fb2eddfa6a0ef3f");
   self.var_f4e33249 = 0;
 }
 
 function_e989972e(grappler) {
   self endon(#"disconnect");
-  grappler endon(#"death", # "hash_2fb2eddfa6a0ef3f");
+  grappler endon(#"death", #"hash_2fb2eddfa6a0ef3f");
 
   while(true) {
     if(self isinmovemode("<dev string:x110>", "<dev string:x10a>")) {
@@ -1693,7 +1693,7 @@ function_7a634eaa(entity) {
 }
 
 function_d5ba6cc6(blight_father, player) {
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   player clientfield::set_to_player("blight_father_vomit_postfx_clientfield", 1);
 
   while(isDefined(blight_father) && isalive(blight_father) && zm_utility::is_player_valid(blight_father.e_grapplee, undefined, undefined, undefined, 0) && blight_father.e_grapplee === player) {
@@ -2315,7 +2315,7 @@ function_581a06c7(forward_dir, var_ced3ec54, var_27e1ee12, max_angle) {
 }
 
 function_5f3390fd(var_61622673, var_4fee43d4) {
-  self endon(#"death", # "detonated");
+  self endon(#"death", #"detonated");
   var_892397fd = self;
 
   while(isDefined(var_892397fd)) {
@@ -2343,7 +2343,7 @@ function_5f3390fd(var_61622673, var_4fee43d4) {
 }
 
 function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
-  self endon(#"detonated", # "death");
+  self endon(#"detonated", #"death");
 
   if(!isDefined(self.var_3b8e09f5)) {
     self.var_3b8e09f5 = cos(var_10ed5867 * var_eb325a79);

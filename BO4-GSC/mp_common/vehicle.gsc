@@ -147,7 +147,7 @@ vehicleteamthread() {
 
 watchplayerexitrequestthread(player) {
   level endon(#"game_ended");
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   vehicle = self;
   vehicle endon(#"death");
   wait 1.5;

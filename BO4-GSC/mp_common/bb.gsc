@@ -171,7 +171,7 @@ function_6661621a() {
 
   mploadout.var_9911e1f2 = var_c0f05cbb.name;
   mploadout.specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
-  function_92d1707f(#"hash_30b542620e21966d", # "mploadouts", mploadout);
+  function_92d1707f(#"hash_30b542620e21966d", #"mploadouts", mploadout);
 }
 
 commit_spawn_data() {

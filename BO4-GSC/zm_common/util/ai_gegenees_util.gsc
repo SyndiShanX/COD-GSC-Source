@@ -24,7 +24,7 @@
 #namespace zombie_gegenees_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_gegenees_util", &__init__, &__main__, # "zm_ai_gegenees");
+  system::register(#"zombie_gegenees_util", &__init__, &__main__, #"zm_ai_gegenees");
 }
 
 __init__() {
@@ -136,7 +136,7 @@ function_7640eac2() {
 }
 
 function_9a9b5f49(spot) {
-  self endoncallback(&zm_spawner::function_fe3cb19a, # "death");
+  self endoncallback(&zm_spawner::function_fe3cb19a, #"death");
   self zm_spawner::function_fe3cb19a();
   self.mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
   self ghost();
@@ -147,7 +147,7 @@ function_9a9b5f49(spot) {
 
   self.mdl_anchor moveto(spot.origin, 0.05);
   self.mdl_anchor rotateto(spot.angles, 0.05);
-  self.mdl_anchor waittill(#"movedone", # "death");
+  self.mdl_anchor waittill(#"movedone", #"death");
   wait 0.05;
   self show();
 

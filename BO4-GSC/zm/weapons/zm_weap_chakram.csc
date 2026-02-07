@@ -98,14 +98,14 @@ chakram_throw_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 chakram_throw_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     playFX(localclientnum, level._effect[# "hash_3364e81f269deca0"], self.origin, anglesToForward(self.angles));
-    playSound(localclientnum, # "hash_72a17706cb2656cd", self.origin);
+    playSound(localclientnum, #"hash_72a17706cb2656cd", self.origin);
   }
 }
 
 chakram_throw_special_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     util::playFXOnTag(localclientnum, level._effect[# "hash_3364e81f269deca0"], self, "j_spine4");
-    playSound(localclientnum, # "hash_72a17706cb2656cd", self.origin);
+    playSound(localclientnum, #"hash_72a17706cb2656cd", self.origin);
   }
 }
 
@@ -161,7 +161,7 @@ chakram_whirlwind_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
       self.var_779b5b35[localclientnum] = playfxoncamera(localclientnum, level._effect[# "hash_6759261c70e31d0a"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
       var_779b5b35 = self.var_779b5b35[localclientnum];
       self thread postfx::playpostfxbundle(#"pstfx_zm_chakram_whirlwind");
-      self playrumblelooponentity(localclientnum, # "zm_weap_chakram_whirlwind_rumble");
+      self playrumblelooponentity(localclientnum, #"zm_weap_chakram_whirlwind_rumble");
     } else {
       util::playFXOnTag(localclientnum, level._effect[# "hash_5c2ba805602ea484"], self, "tag_origin");
       wait 1;
@@ -178,12 +178,12 @@ chakram_whirlwind_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
       if(!e_player util::function_50ed1561(localclientnum)) {
         if(isDefined(e_player)) {
           if(isDefined(var_779b5b35)) {
-            e_player thread zm_utility::function_ae3780f1(localclientnum, var_779b5b35, # "hash_1b4803a2f50e48ce");
+            e_player thread zm_utility::function_ae3780f1(localclientnum, var_779b5b35, #"hash_1b4803a2f50e48ce");
           }
 
-          e_player thread zm_utility::function_ae3780f1(localclientnum, var_4316c62f, # "hash_1b4803a2f50e48ce");
-          e_player thread zm_utility::function_bb54a31f(localclientnum, # "pstfx_zm_chakram_whirlwind", # "hash_1b4803a2f50e48ce");
-          e_player thread function_cfefd76a(localclientnum, var_c2545ba4, # "hash_1b4803a2f50e48ce");
+          e_player thread zm_utility::function_ae3780f1(localclientnum, var_4316c62f, #"hash_1b4803a2f50e48ce");
+          e_player thread zm_utility::function_bb54a31f(localclientnum, #"pstfx_zm_chakram_whirlwind", #"hash_1b4803a2f50e48ce");
+          e_player thread function_cfefd76a(localclientnum, var_c2545ba4, #"hash_1b4803a2f50e48ce");
         }
       }
     }
@@ -191,14 +191,14 @@ chakram_whirlwind_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     return;
   }
 
-  self playSound(localclientnum, # "hash_4f78bd85d9a43e3c");
+  self playSound(localclientnum, #"hash_4f78bd85d9a43e3c");
 
   if(self postfx::function_556665f2(#"pstfx_zm_chakram_whirlwind")) {
     self postfx::stoppostfxbundle(#"pstfx_zm_chakram_whirlwind");
   }
 
   if(self zm_utility::function_f8796df3(localclientnum)) {
-    self stoprumble(localclientnum, # "zm_weap_chakram_whirlwind_rumble");
+    self stoprumble(localclientnum, #"zm_weap_chakram_whirlwind_rumble");
   }
 
   if(self zm_utility::function_f8796df3(localclientnum)) {

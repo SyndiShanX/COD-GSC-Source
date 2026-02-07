@@ -46,7 +46,7 @@ on_spawn(watcher) {
 }
 
 play_footsteps() {
-  self endon(#"death", # "hash_5a09ded231e405ad");
+  self endon(#"death", #"hash_5a09ded231e405ad");
   wait 0.25;
 
   while(true) {

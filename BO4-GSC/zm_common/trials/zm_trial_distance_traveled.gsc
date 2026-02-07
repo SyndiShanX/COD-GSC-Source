@@ -46,7 +46,7 @@ is_active() {
 
 function_ed4d5d4(var_38282db8) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "end_game", # "end_distance_traveled");
+  level endon(#"hash_7646638df88a3656", #"end_game", #"end_distance_traveled");
   n_distance_traveled = 0;
   self zm_trial_util::function_2190356a(int(n_distance_traveled), 1);
   self zm_trial_util::function_c2cd0cba(var_38282db8);

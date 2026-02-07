@@ -20,7 +20,7 @@ class czm_game_timer: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_game_timer");
+    cluielem::open(localclientnum, #"zm_game_timer");
   }
 
   function function_fa582112(localclientnum) {

@@ -90,13 +90,13 @@ function_d9d65ea6() {
   level endon(#"end_game");
   zm_hms_util::function_df67a12d(#"surrounded");
   waitframe(1);
-  zm_hms_util::function_df67a12d(#"oh", # "shit");
+  zm_hms_util::function_df67a12d(#"oh", #"shit");
   waitframe(1);
-  zm_hms_util::function_df67a12d(#"general", # "attacked");
+  zm_hms_util::function_df67a12d(#"general", #"attacked");
   waitframe(1);
-  zm_hms_util::function_df67a12d(#"zipline", # "activate");
+  zm_hms_util::function_df67a12d(#"zipline", #"activate");
   waitframe(1);
-  zm_hms_util::function_df67a12d(#"flinger", # "react");
+  zm_hms_util::function_df67a12d(#"flinger", #"react");
   waitframe(1);
   zm_hms_util::function_df67a12d(#"location_enter");
   waitframe(1);
@@ -363,7 +363,7 @@ function_25c6ed8d() {
 }
 
 function_93a18905() {
-  self endoncallback(&function_c1189522, # "death");
+  self endoncallback(&function_c1189522, #"death");
 
   while(true) {
     n_radius_sqr = self.n_radius * self.n_radius;
@@ -390,7 +390,7 @@ function_87b541aa() {
   self endon(#"death");
   self.var_8ec9550d = 1;
   self clientfield::set_to_player("" + # "hash_78b8d89d34b32241", 2);
-  self zm_audio::create_and_play_dialog(#"hell_on_earth", # "circle");
+  self zm_audio::create_and_play_dialog(#"hell_on_earth", #"circle");
 
   while(self.var_8ec9550d) {
     self dodamage(10, self.origin);
@@ -511,7 +511,7 @@ function_e2b8d7bb() {
 
   iprintlnbold("<dev string:x93>");
 
-  level waittilltimeout(10, # "zipline_used");
+  level waittilltimeout(10, #"zipline_used");
   self setspeed(25);
 }
 
@@ -612,7 +612,7 @@ function_8a1356b6() {
 }
 
 function_6f0a7fea() {
-  self endoncallback(&function_7a57c14, # "death");
+  self endoncallback(&function_7a57c14, #"death");
 
   while(self.var_e63ac5c !== 1) {
     wait 1;
@@ -638,7 +638,7 @@ function_737be926() {
 
   n_wait_time = float(soundgetplaybacktime(#"hash_5742cfb2660b4d62")) / 1000;
   wait n_wait_time;
-  level.var_5d5b7e8e.var_a41818b5 zm_item_pickup::create_item_pickup(&function_2855a4fc, zm_utility::function_d6046228(#"hash_50d83a4f11ad9d8", # "hash_51d8e27e625c6bd4"), undefined, 128);
+  level.var_5d5b7e8e.var_a41818b5 zm_item_pickup::create_item_pickup(&function_2855a4fc, zm_utility::function_d6046228(#"hash_50d83a4f11ad9d8", #"hash_51d8e27e625c6bd4"), undefined, 128);
 }
 
 function_c5bf1974() {

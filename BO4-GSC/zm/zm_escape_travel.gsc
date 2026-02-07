@@ -162,7 +162,7 @@ gondola_hostmigration() {
 
 link_player_to_gondola() {
   if(self function_9a8ab327() && isplayer(self)) {
-    self endon(#"disconnect", # "death");
+    self endon(#"disconnect", #"death");
     e_origin = util::spawn_model("tag_origin", self.origin, self.angles);
     level.var_ee9168a2[level.var_ee9168a2.size] = e_origin;
     e_origin linkto(level.e_gondola);
@@ -748,7 +748,7 @@ gondola_moving_vo() {
   if(!level function_dc269d0d(a_zombies, level.e_gondola)) {
     if(isDefined(level.var_105462b6)) {
       if(level.var_b9656485 < 3) {
-        level.var_105462b6 zm_audio::create_and_play_dialog(#"gondola", # "active", undefined);
+        level.var_105462b6 zm_audio::create_and_play_dialog(#"gondola", #"active", undefined);
         level.var_b9656485++;
       }
 
@@ -785,7 +785,7 @@ function_6a4544e() {
   var_1b66809c = array_players_on_gondola();
 
   if(var_1b66809c.size == 1) {
-    var_1b66809c[0] zm_audio::create_and_play_dialog(#"gondola", # "ride_solo", undefined, 1);
+    var_1b66809c[0] zm_audio::create_and_play_dialog(#"gondola", #"ride_solo", undefined, 1);
     return;
   }
 

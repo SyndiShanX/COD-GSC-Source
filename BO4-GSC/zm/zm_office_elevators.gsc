@@ -437,7 +437,7 @@ elevator_buy_think(elevator) {
       self elevator_move_to(elevator);
     } else {
       zm_utility::play_sound_at_pos("no_purchase", self.origin);
-      who zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      who zm_audio::create_and_play_dialog(#"general", #"outofmoney");
     }
 
     wait 0.05;

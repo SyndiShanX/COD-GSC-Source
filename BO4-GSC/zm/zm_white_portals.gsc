@@ -210,7 +210,7 @@ teleport_player(user) {
     return;
   }
 
-  user endoncallback(&function_96e88318, # "death");
+  user endoncallback(&function_96e88318, #"death");
   destination = undefined;
 
   if(isDefined(user.teleporting) && user.teleporting == 1) {
@@ -304,7 +304,7 @@ function_96e88318(str_notify) {
 }
 
 function_c234a5ce() {
-  self endoncallback(&function_4f5d4783, # "death");
+  self endoncallback(&function_4f5d4783, #"death");
   self val::set(#"teleport_exit", "ignoreme", 1);
   wait 1;
   self function_4f5d4783();
@@ -325,7 +325,7 @@ function_26ddb915() {
 }
 
 cooldown_portal_timer(e_user) {
-  self endon(#"death", # "hash_3c91bf90cecbe758");
+  self endon(#"death", #"hash_3c91bf90cecbe758");
   e_user endon(#"death");
 
   if(!isDefined(self.a_e_users)) {
@@ -475,7 +475,7 @@ function_e9848fa7() {
 }
 
 function_9d689cc4(portal, portal_exit) {
-  self endoncallback(&function_2ef25d40, # "damage", # "death", # "cancel_teleport");
+  self endoncallback(&function_2ef25d40, #"damage", #"death", #"cancel_teleport");
 
   if(!isDefined(portal)) {
     portal = self function_e9848fa7();
@@ -552,7 +552,7 @@ function_71be28e1(zombie, start_portal, end_portal) {
 }
 
 function_554c780b() {
-  self endon(#"death", # "reached_portal");
+  self endon(#"death", #"reached_portal");
   wait 2;
   self.b_ignore_cleanup = self.var_693b80bb;
 }

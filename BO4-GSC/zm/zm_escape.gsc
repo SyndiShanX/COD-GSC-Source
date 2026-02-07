@@ -467,15 +467,15 @@ function_f8274c62() {
   zm_zonemgr::add_adjacent_zone("zone_administration", "zone_warden_house_exterior", "activate_wa_h", 0);
   zm_zonemgr::add_adjacent_zone("zone_warden_office", "zone_warden_house_exterior", "activate_wa_h", 0);
   zm_zonemgr::add_adjacent_zone("zone_warden_house_exterior", "zone_warden_house", "activate_wa_h", 0);
-  zm_zonemgr::add_adjacent_zone("zone_warden_house_exterior", "zone_warden_house", # "hash_6804675ac314efd1", 0);
-  zm_zonemgr::add_adjacent_zone("zone_warden_home", "zone_warden_house", # "activate_warden_house_2_attic", 0);
+  zm_zonemgr::add_adjacent_zone("zone_warden_house_exterior", "zone_warden_house", #"hash_6804675ac314efd1", 0);
+  zm_zonemgr::add_adjacent_zone("zone_warden_home", "zone_warden_house", #"activate_warden_house_2_attic", 0);
   zm_zonemgr::add_adjacent_zone("zone_cellblock_east", "cellblock_shower", "activate_shower_room", 0);
   zm_zonemgr::add_adjacent_zone("cellblock_shower", "zone_citadel_shower", "activate_shower_citadel", 0);
   zm_zonemgr::add_adjacent_zone("zone_citadel_shower", "zone_citadel", "activate_shower_citadel", 0);
   zm_zonemgr::add_adjacent_zone("zone_citadel", "zone_citadel_warden", "activate_shower_citadel", 0);
   zm_zonemgr::add_adjacent_zone("zone_cafeteria", "zone_infirmary", "activate_infirmary", 0);
   zm_zonemgr::add_adjacent_zone("zone_cafeteria", "zone_cafeteria_end", "activate_infirmary", 0);
-  zm_zonemgr::add_adjacent_zone("zone_cafeteria", "zone_cafeteria_end", # "hash_6059fbd4a3d1823e", 0);
+  zm_zonemgr::add_adjacent_zone("zone_cafeteria", "zone_cafeteria_end", #"hash_6059fbd4a3d1823e", 0);
   zm_zonemgr::add_adjacent_zone("zone_infirmary_roof", "zone_infirmary", "activate_infirmary", 0);
   zm_zonemgr::add_adjacent_zone("zone_infirmary", "zone_infirmary_roof", "power_on1", 0);
   zm_zonemgr::add_adjacent_zone("zone_roof", "zone_roof_infirmary", "activate_roof", 0);
@@ -502,7 +502,7 @@ function_f8274c62() {
   zm_zonemgr::add_adjacent_zone("zone_cellblock_west_gondola", "zone_cellblock_west_gondola_dock", "activate_cellblock_infirmary", 0);
   zm_zonemgr::add_adjacent_zone("zone_cellblock_west_gondola", "zone_cellblock_west_gondola_dock", "activate_cellblock_gondola", 0);
   zm_zonemgr::add_adjacent_zone("zone_cellblock_west_gondola", "zone_cellblock_west_gondola_dock", "gondola_dock_to_roof", 0);
-  zm_zonemgr::add_adjacent_zone("zone_model_industries", "zone_model_industries_upper", # "always_on", 0);
+  zm_zonemgr::add_adjacent_zone("zone_model_industries", "zone_model_industries_upper", #"always_on", 0);
   zm_zonemgr::add_adjacent_zone("zone_model_industries_upper", "zone_west_side_exterior_upper", "activate_west_side_exterior", 0);
   zm_zonemgr::add_adjacent_zone("zone_model_industries_upper", "zone_west_side_exterior_upper_04", "activate_west_side_exterior", 0);
   zm_zonemgr::add_adjacent_zone("zone_model_industries_upper", "zone_west_side_exterior_upper_05", "activate_west_side_exterior", 0);
@@ -521,7 +521,7 @@ function_f8274c62() {
   zm_zonemgr::add_adjacent_zone("zone_west_side_exterior_upper_05", "zone_new_industries", "activate_new_industries", 0);
   zm_zonemgr::add_adjacent_zone("zone_west_side_exterior_upper_05", "zone_new_industries_transverse_tunnel", "activate_new_industries", 0);
   zm_zonemgr::add_adjacent_zone("zone_new_industries", "zone_new_industries_transverse_tunnel", "activate_new_industries", 0);
-  zm_zonemgr::add_adjacent_zone("zone_new_industries", "zone_new_industries_transverse_tunnel", # "hash_2873d6b98dfeaf6d", 0);
+  zm_zonemgr::add_adjacent_zone("zone_new_industries", "zone_new_industries_transverse_tunnel", #"hash_2873d6b98dfeaf6d", 0);
   zm_zonemgr::add_adjacent_zone("zone_west_side_exterior_upper_02", "zone_catwalk_01", "activate_catwalk");
   zm_zonemgr::add_adjacent_zone("zone_catwalk_01", "zone_catwalk_02", "activate_catwalk", 0);
   zm_zonemgr::add_adjacent_zone("zone_catwalk_02", "zone_catwalk_03", "activate_catwalk", 0);
@@ -710,12 +710,12 @@ function_ab7f70b9(str_location) {
 }
 
 function_17ac86f7() {
-  self thread zm_audio::function_713192b1(#"hash_676a058bfe70473", # "roof");
-  self thread zm_audio::function_713192b1(#"hash_3aafbefc77b80ce3", # "wardens_house");
-  self thread zm_audio::function_713192b1(#"hash_4c183909b38ae649", # "wardens_office");
-  self thread zm_audio::function_713192b1(#"hash_f76546edee4a6a1", # "cafeteria");
-  self thread zm_audio::function_713192b1(#"hash_8a1754e2c346504", # "showers");
-  self thread zm_audio::function_713192b1(#"hash_9b40009eaa83579", # "cell_block");
+  self thread zm_audio::function_713192b1(#"hash_676a058bfe70473", #"roof");
+  self thread zm_audio::function_713192b1(#"hash_3aafbefc77b80ce3", #"wardens_house");
+  self thread zm_audio::function_713192b1(#"hash_4c183909b38ae649", #"wardens_office");
+  self thread zm_audio::function_713192b1(#"hash_f76546edee4a6a1", #"cafeteria");
+  self thread zm_audio::function_713192b1(#"hash_8a1754e2c346504", #"showers");
+  self thread zm_audio::function_713192b1(#"hash_9b40009eaa83579", #"cell_block");
 }
 
 function_9f50079d() {
@@ -803,7 +803,7 @@ custom_add_vox() {
   zm_audio::loadplayervoicecategories(#"hash_41c3d60c9fdc1c1a");
   zm_audio::loadplayervoicecategories(#"hash_6d9aadb58948623b");
   zm_audio::loadplayervoicecategories(#"hash_5513a399a5c36320");
-  level.sndweaponpickupoverride = array(#"spoon", # "spork", # "spknifeork", # "tomahawk", # "blundergat", # "acidgat", # "magmagat", # "magmagat_unfinished");
+  level.sndweaponpickupoverride = array(#"spoon", #"spork", #"spknifeork", #"tomahawk", #"blundergat", #"acidgat", #"magmagat", #"magmagat_unfinished");
 }
 
 setupmusic() {

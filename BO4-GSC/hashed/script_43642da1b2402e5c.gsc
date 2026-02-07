@@ -124,7 +124,7 @@ function_29ee24dd() {
   self reset_ammo(1);
 
   while(true) {
-    s_waitresult = self waittill(#"zmb_max_ammo", # "hash_278526d0bbdb4ce7", # "melee_reload", # "wallbuy_done");
+    s_waitresult = self waittill(#"zmb_max_ammo", #"hash_278526d0bbdb4ce7", #"melee_reload", #"wallbuy_done");
     w_current = self getcurrentweapon();
 
     if(s_waitresult._notify == "melee_reload") {

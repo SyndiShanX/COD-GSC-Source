@@ -50,7 +50,7 @@ on_end(round_reset) {
 }
 
 start_boss_fight() {
-  level endon(#"end_game", # "hash_7646638df88a3656");
+  level endon(#"end_game", #"hash_7646638df88a3656");
 
   level flag::set("<dev string:x38>");
   level flag::set(#"pap_quest_completed");

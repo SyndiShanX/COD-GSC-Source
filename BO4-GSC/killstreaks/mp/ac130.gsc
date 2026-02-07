@@ -34,7 +34,7 @@
 #namespace ac130;
 
 autoexec __init__system__() {
-  system::register(#"ac130", &__init__, undefined, # "killstreaks");
+  system::register(#"ac130", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -242,7 +242,7 @@ spawnac130() {
   level.ac130.detonateviaemp = &helicoptedetonateviaemp;
   player thread killstreaks::play_killstreak_start_dialog("ac130", player.team, killstreak_id);
   level.ac130 killstreaks::play_pilot_dialog_on_owner("arrive", "ac130", killstreak_id);
-  player stats::function_e24eec31(bundle.ksweapon, # "used", 1);
+  player stats::function_e24eec31(bundle.ksweapon, #"used", 1);
   player thread waitforvtolshutdownthread(level.ac130);
   level.ac130 function_7c61ce31(bundle);
   profilestop();
@@ -309,7 +309,7 @@ waitforvtolshutdownthread(ac130) {
     attacker = waitresult.attacker;
 
     if(isDefined(attacker)) {
-      luinotifyevent(#"player_callout", 2, # "hash_20aa28bee9cfdd61", attacker.entnum);
+      luinotifyevent(#"player_callout", 2, #"hash_20aa28bee9cfdd61", attacker.entnum);
     }
 
     if(target_istarget(ac130)) {
@@ -385,7 +385,7 @@ function_c2bfa7e1(ent, weapon) {
 
 function_d4896942(bundle) {
   ac130 = self;
-  ac130 endon(#"death", # "ac130_shutdown");
+  ac130 endon(#"death", #"ac130_shutdown");
   ac130.var_7132bbb7 = undefined;
 
   while(true) {
@@ -400,7 +400,7 @@ function_d4896942(bundle) {
 
 function_31f9c728(bundle) {
   ac130 = self;
-  ac130 endon(#"death", # "ac130_shutdown");
+  ac130 endon(#"death", #"ac130_shutdown");
   ac130.var_7132bbb7 = undefined;
 
   while(true) {
@@ -488,7 +488,7 @@ watchplayerteamchangethread(ac130) {
   assert(isplayer(self));
   player = self;
   player endon(#"gunner_left");
-  player waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  player waittill(#"joined_team", #"disconnect", #"joined_spectators");
   ownerleft = ac130.ownerentnum == player.entnum;
   player thread function_8721028e(player, ownerleft);
 
@@ -503,7 +503,7 @@ watchplayerexitrequestthread(player) {
   assert(isplayer(player));
   ac130 = self;
   level endon(#"game_ended");
-  player endon(#"disconnect", # "gunner_left");
+  player endon(#"disconnect", #"gunner_left");
   ac130 endon(#"death");
   owner = ac130.ownerentnum == player.entnum;
 
@@ -580,7 +580,7 @@ function_4d980695(isowner) {
 }
 
 function_c137f6f8(ac130) {
-  ac130 endon(#"death", # "ac130_shutdown");
+  ac130 endon(#"death", #"ac130_shutdown");
   self endon(#"disconnect");
   map_center = airsupport::getmapcenter();
   wait 0.1;
@@ -591,8 +591,8 @@ function_c137f6f8(ac130) {
 
 function_5cdcce1e(player) {
   ac130 = self;
-  ac130 endon(#"delete", # "ac130_shutdown");
-  player endon(#"disconnect", # "joined_team", # "joined_spectator", # "changed_specialist");
+  ac130 endon(#"delete", #"ac130_shutdown");
+  player endon(#"disconnect", #"joined_team", #"joined_spectator", #"changed_specialist");
   var_2990ddbd = -1;
 
   while(true) {
@@ -622,7 +622,7 @@ function_5cdcce1e(player) {
 }
 
 hidecompassafterwait(waittime) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   wait waittime;
   self killstreaks::hide_compass();
 }
@@ -642,13 +642,13 @@ mainturretdestroyed(ac130, eattacker, weapon) {
   eattacker = self[[level.figure_out_attacker]](eattacker);
 
   if(isDefined(eattacker) && (!isDefined(ac130.owner) || ac130.owner util::isenemyplayer(eattacker))) {
-    luinotifyevent(#"player_callout", 2, # "hash_bbc64fd3a1e88d", eattacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"hash_bbc64fd3a1e88d", eattacker.entnum);
     challenges::destroyedaircraft(eattacker, weapon, 1, 1);
     eattacker challenges::addflyswatterstat(weapon, ac130);
     ac130 killstreaks::function_73566ec7(eattacker, weapon, ac130.owner);
     ac130 killstreaks::play_destroyed_dialog_on_owner("ac130", ac130.killstreak_id);
     eattacker battlechatter::function_dd6a6012("ac130", weapon);
-    eattacker stats::function_e24eec31(weapon, # "hash_3f3d8a93c372c67d", 1);
+    eattacker stats::function_e24eec31(weapon, #"hash_3f3d8a93c372c67d", 1);
   }
 
   ac130 thread function_46d0e4e5();
@@ -656,7 +656,7 @@ mainturretdestroyed(ac130, eattacker, weapon) {
 
 vtoldestructiblecallback(brokennotify, eattacker, weapon, pieceindex, dir, mod) {
   ac130 = self;
-  ac130 endon(#"delete", # "ac130_shutdown");
+  ac130 endon(#"delete", #"ac130_shutdown");
   mainturretdestroyed(ac130, eattacker, weapon);
 }
 
@@ -793,12 +793,12 @@ function_dea7ec6a(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
     if(!isDefined(ac130.destroyscoreeventgiven) && isDefined(eattacker) && (!isDefined(ac130.owner) || ac130.owner util::isenemyplayer(eattacker))) {
       eattacker = self[[level.figure_out_attacker]](eattacker);
-      luinotifyevent(#"player_callout", 2, # "hash_bbc64fd3a1e88d", eattacker.entnum);
+      luinotifyevent(#"player_callout", 2, #"hash_bbc64fd3a1e88d", eattacker.entnum);
       ac130 killstreaks::play_destroyed_dialog_on_owner("ac130", ac130.killstreak_id);
       eattacker battlechatter::function_dd6a6012("ac130", weapon);
       challenges::destroyedaircraft(eattacker, weapon, 1, 1);
       eattacker challenges::addflyswatterstat(weapon, ac130);
-      eattacker stats::function_e24eec31(weapon, # "hash_3f3d8a93c372c67d", 1);
+      eattacker stats::function_e24eec31(weapon, #"hash_3f3d8a93c372c67d", 1);
       ac130.destroyscoreeventgiven = 1;
     }
 
@@ -844,7 +844,7 @@ function_46d0e4e5() {
 
   ac130 thread remote_weapons::do_static_fx();
   failsafe_timeout = 5;
-  ac130 waittilltimeout(failsafe_timeout, # "static_fx_done");
+  ac130 waittilltimeout(failsafe_timeout, #"static_fx_done");
   var_dbcb1965 = 1;
   function_8721028e(ac130.owner, 1, var_dbcb1965);
 }
@@ -855,14 +855,14 @@ helicoptedetonateviaemp(attacker, weapon) {
 
 missilecleanupthread(missile) {
   targetent = self;
-  targetent endon(#"delete", # "death");
-  missile waittill(#"death", # "delete");
+  targetent endon(#"delete", #"death");
+  missile waittill(#"death", #"delete");
   targetent delete();
 }
 
 playlockonsoundsthread(player, heli) {
-  player endon(#"disconnect", # "gunner_left");
-  heli endon(#"death", # "crashing", # "leaving");
+  player endon(#"disconnect", #"gunner_left");
+  heli endon(#"death", #"crashing", #"leaving");
   heli.locksounds = spawn("script_model", heli.origin);
   wait 0.1;
   heli.locksounds linkto(heli, "tag_origin");
@@ -899,7 +899,7 @@ enemylockedon(heli) {
 
 function_cd679760(startnode, destnodes) {
   self notify(#"flying");
-  self endon(#"flying", # "crashing", # "leaving", # "death");
+  self endon(#"flying", #"crashing", #"leaving", #"death");
   bundle = getscriptbundle("killstreak_ac130");
   nextnode = getent(startnode.target, "targetname");
   assert(isDefined(nextnode), "<dev string:x38>");
@@ -963,10 +963,10 @@ updatedrivabletimeforalloccupants(duration_ms, end_time_ms) {
 
 watchlocationchangethread(destnodes) {
   player = self;
-  player endon(#"disconnect", # "gunner_left");
+  player endon(#"disconnect", #"gunner_left");
   ac130 = level.ac130;
   settings = getscriptbundle("killstreak_ac130");
-  ac130 endon(#"delete", # "ac130_shutdown");
+  ac130 endon(#"delete", #"ac130_shutdown");
   player thread setplayermovedrecentlythread();
   player.moves = 0;
 
@@ -1001,9 +1001,9 @@ watchlocationchangethread(destnodes) {
 
 setplayermovedrecentlythread() {
   player = self;
-  player endon(#"disconnect", # "gunner_left");
+  player endon(#"disconnect", #"gunner_left");
   ac130 = level.ac130;
-  ac130 endon(#"delete", # "ac130_shutdown");
+  ac130 endon(#"delete", #"ac130_shutdown");
   mymove = self.moves;
   level.ac130.playermovedrecently = 1;
   wait 100;
@@ -1150,7 +1150,7 @@ function_3939b657(vehicle) {
     if(isDefined(enemy)) {
       vectorfromenemy = vectornormalize(((vehicle.origin - enemy.origin)[0], (vehicle.origin - enemy.origin)[1], 0));
       vehicle turretsettarget(0, enemy);
-      vehicle waittilltimeout(1, # "turret_on_target");
+      vehicle waittilltimeout(1, #"turret_on_target");
       vehicle vehicle_ai::fire_for_time(2 + randomfloat(0.8), 0, enemy);
       vehicle vehicle_ai::fire_for_rounds(1, 1, enemy);
       vehicle turretcleartarget(0);

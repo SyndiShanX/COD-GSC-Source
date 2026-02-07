@@ -848,7 +848,7 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
 }
 
 wait_dialog_buffer(dialogbuffer) {
-  self endon(#"death", # "played_dialog", # "stop_dialog");
+  self endon(#"death", #"played_dialog", #"stop_dialog");
   level endon(#"game_ended");
   self.playingdialog = 1;
 

@@ -11,7 +11,7 @@
 #namespace infection;
 
 autoexec __init__system__() {
-  system::register(#"wz_infection", &__init__, undefined, # "infection");
+  system::register(#"wz_infection", &__init__, undefined, #"infection");
 }
 
 __init__() {
@@ -42,10 +42,10 @@ function_667d34b7(localclientnum) {
 
       if(infected === 1 && !var_d5823792) {
         var_d5823792 = 1;
-        function_a837926b(localclientnum, # "hash_29b452119475ca86");
+        function_a837926b(localclientnum, #"hash_29b452119475ca86");
       } else if(infected === 0 && var_d5823792) {
         var_d5823792 = 0;
-        function_24cd4cfb(localclientnum, # "hash_29b452119475ca86");
+        function_24cd4cfb(localclientnum, #"hash_29b452119475ca86");
       }
     }
 
@@ -56,7 +56,7 @@ function_667d34b7(localclientnum) {
 _infected(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self thread function_325e85a2(localclientnum);
-    playSound(0, # "zmb_zombie_spawn", self.origin);
+    playSound(0, #"zmb_zombie_spawn", self.origin);
     burst_fx = level._effect[# "rise_burst"];
     billow_fx = level._effect[# "rise_billow"];
     self thread rise_dust_fx(localclientnum, billow_fx, burst_fx);

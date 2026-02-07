@@ -84,7 +84,7 @@ function_832ba3ee(localclientnum, fx, key, tag) {
 }
 
 function_6180e679(localclientnum) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(isDefined(self.var_67dab332) && isDefined(self.var_67dab332[localclientnum])) {
     a_keys = getarraykeys(self.var_67dab332[localclientnum]);
@@ -140,7 +140,7 @@ function_1a2f062a(localclientnum) {
       self.var_f809ca21 = 1;
     }
 
-    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", # "reveal threshold", self.var_f809ca21);
+    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
 
     var_a193c879 = self.var_f809ca21 * 100;
     debug2dtext((5, 540, 0), "<dev string:x38>" + var_a193c879, (1, 1, 0), 1, (0, 0, 0), 0.5, 1, 30);
@@ -169,7 +169,7 @@ function_7c64a377(localclientnum) {
       self.var_f809ca21 = 1;
     }
 
-    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", # "reveal threshold", self.var_f809ca21);
+    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
 
     var_a193c879 = self.var_f809ca21 * 100;
     debug2dtext((5, 540, 0), "<dev string:x38>" + var_a193c879, (1, 1, 0), 1, (0, 0, 0), 0.5, 1, 30);
@@ -194,7 +194,7 @@ function_17e6f9f3(localclientnum) {
       self.var_f809ca21 = 0.5;
     }
 
-    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", # "reveal threshold", self.var_f809ca21);
+    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
 
     var_a193c879 = self.var_f809ca21 * 100;
     debug2dtext((5, 540, 0), "<dev string:x38>" + var_a193c879, (1, 1, 0), 1, (0, 0, 0), 0.5, 1, 30);
@@ -217,7 +217,7 @@ function_45df4c17(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_39cdeb29(localclientnum) {
   self.var_7c8ad424 = 0;
   self.var_f809ca21 = 0.5;
-  self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", # "reveal threshold", self.var_f809ca21);
+  self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
 
   if(self postfx::function_556665f2("pstfx_frost_loop_fullscreen_zmo")) {
     self postfx::stoppostfxbundle("pstfx_frost_loop_fullscreen_zmo");
@@ -230,7 +230,7 @@ function_6b5ed7f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval === 2) {
     self.var_7c8ad424 = 0;
     self.var_f809ca21 = 0.9;
-    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", # "reveal threshold", self.var_f809ca21);
+    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
     self thread util::playFXOnTag(localclientnum, level._effect[# "hash_28591d0dc8bbbf02"], self, "J_Spine4");
     return;
   }
@@ -238,14 +238,14 @@ function_6b5ed7f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval === 1) {
     self.var_7c8ad424 = 0;
     self.var_f809ca21 = 0.8;
-    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", # "reveal threshold", self.var_f809ca21);
+    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
     self thread util::playFXOnTag(localclientnum, level._effect[# "hash_28591d0dc8bbbf02"], self, "J_Spine4");
   }
 }
 
 function_88fdd1ff() {
-  self endoncallback(&function_2473f73e, # "death");
-  self endon(#"death", # "disconnect");
+  self endoncallback(&function_2473f73e, #"death");
+  self endon(#"death", #"disconnect");
   self.var_2591ed7c = spawn(0, self.origin + (0, 0, 1000), "script_origin");
   self.var_2591ed7c.var_2e95bcd3 = self.var_2591ed7c playLoopSound(#"hash_58b77ae9e2d258e1");
 
@@ -273,9 +273,9 @@ function_2473f73e(notifyhash) {
 }
 
 function_7da5e6a2() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.var_cdb19015 = 0;
-  self playSound(0, # "hash_71f59624b7f67f22");
+  self playSound(0, #"hash_71f59624b7f67f22");
   self.var_1ab2df8c = self playLoopSound(#"hash_34fa9c6b99cc772e");
   self waittill(#"hash_5ab24a026f132ea4");
   self stoploopsound(self.var_1ab2df8c);

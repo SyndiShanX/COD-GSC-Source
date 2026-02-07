@@ -405,7 +405,7 @@ show_chest() {
   }
 
   self.zbarrier set_magic_box_zbarrier_state("arriving");
-  self.zbarrier waittilltimeout(5, # "arrived");
+  self.zbarrier waittilltimeout(5, #"arrived");
   assert(isDefined(level.pandora_show_func), "<dev string:x38>");
 
   if(isDefined(level.pandora_show_func)) {
@@ -461,7 +461,7 @@ hide_chest(doboxleave) {
       }
 
       if(self.zbarrier.state == "leaving") {
-        s_result = self.zbarrier waittilltimeout(10, # "left", # "zbarrier_state_change");
+        s_result = self.zbarrier waittilltimeout(10, #"left", #"zbarrier_state_change");
 
         if(s_result._notify !== "left") {
           self.zbarrier notify(#"timeout_away");
@@ -618,7 +618,7 @@ treasure_chest_think() {
       break;
     } else if(!user zm_score::can_player_purchase(self.zombie_cost)) {
       zm_utility::play_sound_at_pos("no_purchase", self.origin);
-      user zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      user zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       continue;
     }
 
@@ -635,10 +635,10 @@ treasure_chest_think() {
   user zm_daily_challenges::increment_magic_box();
   user zm_stats::function_c0c6ab19(#"boxbuys", 1, 1);
   user zm_stats::function_c0c6ab19(#"weapons_bought", 1, 1);
-  user contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, # "zstandard");
+  user contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, #"zstandard");
 
   if(isplayer(self.chest_user)) {
-    self.chest_user util::delay(0, "death", &zm_audio::create_and_play_dialog, # "box", # "interact");
+    self.chest_user util::delay(0, "death", &zm_audio::create_and_play_dialog, #"box", #"interact");
     level notify(#"hash_39b0256c6c9885fc", {
       #e_player: self.chest_user
     });
@@ -699,7 +699,7 @@ treasure_chest_think() {
   }
 
   thread zm_unitrigger::unregister_unitrigger(self.unitrigger_stub);
-  self.zbarrier waittill(#"randomization_done", # "box_hacked_respin");
+  self.zbarrier waittill(#"randomization_done", #"box_hacked_respin");
 
   if(isDefined(user)) {
     if(level flag::get("moving_chest_now") && !self._box_opened_by_fire_sale && isDefined(user_cost)) {
@@ -864,7 +864,7 @@ treasure_chest_think() {
 }
 
 function_e4dcca48() {
-  self.chest_user endon(#"bled_out", # "death");
+  self.chest_user endon(#"bled_out", #"death");
   self.zbarrier endon(#"weapon_grabbed");
   self.var_481aa649 = 0;
   self.var_c2f3a87c = 0;
@@ -898,7 +898,7 @@ function_e4dcca48() {
         var_63f52acb clientfield::set("powerup_fx", 1);
       }
 
-      var_369ce419 thread zm_audio::create_and_play_dialog(#"magicbox", # "share");
+      var_369ce419 thread zm_audio::create_and_play_dialog(#"magicbox", #"share");
       break;
     }
 
@@ -1029,7 +1029,7 @@ treasure_chest_move(player_vox) {
   level thread function_f81251c9();
 
   if(isDefined(player_vox)) {
-    player_vox thread zm_audio::create_and_play_dialog(#"magicbox", # "move", undefined, 2);
+    player_vox thread zm_audio::create_and_play_dialog(#"magicbox", #"move", undefined, 2);
   }
 
   level waittill(#"weapon_fly_away_end");
@@ -1084,7 +1084,7 @@ treasure_chest_move(player_vox) {
 }
 
 function_f81251c9() {
-  level endon(#"game_over", # "hash_5002eab927d4056d");
+  level endon(#"game_over", #"hash_5002eab927d4056d");
   wait 5;
   level thread zm_audio::sndannouncerplayvox(#"boxmove");
 }
@@ -1171,7 +1171,7 @@ verify_chest_is_open() {
 
 treasure_chest_timeout(user) {
   self endon(#"user_grabbed_weapon");
-  self.zbarrier endon(#"box_hacked_respin", # "box_hacked_rerespin");
+  self.zbarrier endon(#"box_hacked_respin", #"box_hacked_rerespin");
   n_timeout = isDefined(level.var_ad2674fe) ? level.var_ad2674fe : 12;
   wait n_timeout;
   self notify(#"trigger", {
@@ -1915,7 +1915,7 @@ timer_til_despawn(v_float) {
 treasure_chest_glowfx() {
   self clientfield::set("magicbox_open_fx", 1);
   self clientfield::set("magicbox_closed_fx", 0);
-  ret_val = self waittill(#"weapon_grabbed", # "box_moving");
+  ret_val = self waittill(#"weapon_grabbed", #"box_moving");
   self clientfield::set("magicbox_open_fx", 0);
 
   if(self.script_string !== "t8_magicbox") {
@@ -1939,7 +1939,7 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
     playsoundatposition(#"mus_raygun_stinger", (0, 0, 0));
     str_vo_line = # "raygun";
 
-    if(weapon.name == # "ray_gun_mk2" && zm_audio::function_63f85f39(#"magicbox", # "raygun_mk2")) {
+    if(weapon.name == # "ray_gun_mk2" && zm_audio::function_63f85f39(#"magicbox", #"raygun_mk2")) {
       str_vo_line = # "raygun_mk2";
     }
   } else if(weapon.name == # "music_box") {
@@ -1953,11 +1953,11 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
   } else if(weapon === getweapon(#"homunculus") || weapon === getweapon(#"cymbal_monkey")) {
     str_vo_line = # "homunculus";
   } else if(weapon === getweapon(#"special_ballisticknife_t8_dw")) {
-    if(zm_audio::function_63f85f39(#"magicbox", # "ballistic")) {
+    if(zm_audio::function_63f85f39(#"magicbox", #"ballistic")) {
       str_vo_line = # "ballistic";
     }
   } else if(weapon === getweapon(#"special_crossbow_t8")) {
-    if(zm_audio::function_63f85f39(#"magicbox", # "hash_36b817536004725")) {
+    if(zm_audio::function_63f85f39(#"magicbox", #"hash_36b817536004725")) {
       str_vo_line = # "hash_36b817536004725";
     }
   } else {
@@ -2013,7 +2013,7 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
     w_give = self zm_weapons::weapon_give(weapon);
   }
 
-  self contracts::increment_zm_contract(#"contract_zm_magicbox", 1, # "zstandard");
+  self contracts::increment_zm_contract(#"contract_zm_magicbox", 1, #"zstandard");
   self callback::callback(#"hash_7d40e25056b9275c", weapon);
 }
 
@@ -2025,7 +2025,7 @@ function_e62595c2(e_chest) {
     wait 1;
   }
 
-  zm_audio::create_and_play_dialog(#"magicbox", # "homunculus");
+  zm_audio::create_and_play_dialog(#"magicbox", #"homunculus");
 }
 
 give_hero_weapon(weapon) {
@@ -2047,7 +2047,7 @@ give_offhand_weapon(weapon) {
   }
 
   self giveweapon(weapon);
-  self zm_audio::create_and_play_dialog(#"magicbox", # "offhand");
+  self zm_audio::create_and_play_dialog(#"magicbox", #"offhand");
   waitframe(1);
   slot = self gadgetgetslot(weapon);
   self gadgetpowerset(slot, 100);
@@ -2242,7 +2242,7 @@ function_f6a827d1() {
 
 magic_box_zbarrier_leave() {
   self set_magic_box_zbarrier_state("leaving");
-  self waittill(#"left", # "timeout_away");
+  self waittill(#"left", #"timeout_away");
   self set_magic_box_zbarrier_state("away");
 }
 

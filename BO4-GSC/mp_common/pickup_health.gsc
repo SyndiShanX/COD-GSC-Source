@@ -14,7 +14,7 @@
 #namespace pickup_health;
 
 autoexec __init__system__() {
-  system::register(#"pickup_health", &__init__, undefined, # "weapons");
+  system::register(#"pickup_health", &__init__, undefined, #"weapons");
 }
 
 __init__() {

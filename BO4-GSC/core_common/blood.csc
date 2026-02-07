@@ -32,8 +32,8 @@ function_e79ccfd8(localclientnum) {
     return;
   }
 
-  if(function_148ccc79(localclientnum, # "hash_73c750f53749d44d")) {
-    codestoppostfxbundlelocal(localclientnum, # "hash_73c750f53749d44d");
+  if(function_148ccc79(localclientnum, #"hash_73c750f53749d44d")) {
+    codestoppostfxbundlelocal(localclientnum, #"hash_73c750f53749d44d");
   }
 
   self.pstfx_blood = # "hash_44dcb6ac5e8787e0";
@@ -109,7 +109,7 @@ enter_critical_health(localclientnum) {
 }
 
 play_critical_health_rumble(localclientnum) {
-  self endon(#"death", # "disconnect", # "critical_health_end", # "spawned");
+  self endon(#"death", #"disconnect", #"critical_health_end", #"spawned");
   var_cf155b98 = "new_health_stage_critical";
 
   while(true) {
@@ -141,7 +141,7 @@ play_breath(localclientnum) {
 }
 
 watch_end_breath(localclientnum) {
-  self waittill(#"death", # "disconnect", # "critical_health_end", # "spawned");
+  self waittill(#"death", #"disconnect", #"critical_health_end", #"spawned");
   stop_breath(localclientnum);
 }
 
@@ -214,25 +214,25 @@ function_1126eb8c(currenttime, elapsedtime, localclientnum, duration, stagefrom,
 
 function_672c739(localclientnum, shockrifle) {
   if(isDefined(shockrifle) && shockrifle) {
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Enable Tint", 0.9);
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color R", 4);
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color G", 4);
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color B", 4);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Enable Tint", 0.9);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color R", 4);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color G", 4);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color B", 4);
     return;
   }
 
   if(util::function_2c435484()) {
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Enable Tint", 1);
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color R", 0.15);
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color G", 0.13);
-    function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color B", 0.24);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Enable Tint", 1);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color R", 0.15);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color G", 0.13);
+    function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color B", 0.24);
     return;
   }
 
-  function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Enable Tint", 1);
-  function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color R", 0.3);
-  function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color G", 0.025);
-  function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Tint Color B", 0);
+  function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Enable Tint", 1);
+  function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color R", 0.3);
+  function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color G", 0.025);
+  function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Tint Color B", 0);
 }
 
 function_27d3ba05(localclientnum) {
@@ -295,18 +295,18 @@ player_splatter(localclientnum) {
 
       if(blur > 0 || opacity > 0) {
         splatter.var_9e4cc220 = 1;
-        function_a837926b(localclientnum, # "hash_73c750f53749d44d");
-        function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Blur Amount", blur);
+        function_a837926b(localclientnum, #"hash_73c750f53749d44d");
+        function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Blur Amount", blur);
 
         if(isDefined(splatter.shockrifle) && splatter.shockrifle) {
           opacity *= 0.05;
         }
 
-        function_4238734d(localclientnum, # "hash_73c750f53749d44d", "Opacity", opacity);
+        function_4238734d(localclientnum, #"hash_73c750f53749d44d", "Opacity", opacity);
         function_672c739(localclientnum, splatter.shockrifle);
       } else if(isDefined(splatter.var_9e4cc220) && splatter.var_9e4cc220) {
         splatter.var_9e4cc220 = 0;
-        codestoppostfxbundlelocal(localclientnum, # "hash_73c750f53749d44d");
+        codestoppostfxbundlelocal(localclientnum, #"hash_73c750f53749d44d");
       } else {
         break;
       }
@@ -453,8 +453,8 @@ function_87544c4a(localclientnum) {
 
     if(util::is_mature() != var_4cdccc55) {
       forceupdate = 1;
-      self function_436ee4c2(localclientnum, # "hash_263a0659c7ff81ad");
-      self function_436ee4c2(localclientnum, # "hash_44dcb6ac5e8787e0");
+      self function_436ee4c2(localclientnum, #"hash_263a0659c7ff81ad");
+      self function_436ee4c2(localclientnum, #"hash_44dcb6ac5e8787e0");
       var_4cdccc55 = util::is_mature();
       self function_55d01d42();
     }
@@ -505,10 +505,10 @@ function_8d8880(localclientnum) {
     if(isDefined(self.blood_enabled) && self.blood_enabled) {
       for(pulse = 0; pulse < 2; pulse++) {
         self notify(#"pulse_blood");
-        self thread function_c0cdd1f2(localclientnum, 0, 1, level.blood.var_f2de135e.var_562c41de[pulse], # "damage pulse", self.pstfx_blood);
+        self thread function_c0cdd1f2(localclientnum, 0, 1, level.blood.var_f2de135e.var_562c41de[pulse], #"damage pulse", self.pstfx_blood);
         wait float(level.blood.var_f2de135e.var_562c41de[pulse]) / 1000;
         wait float(level.blood.var_f2de135e.var_18f673f1[pulse]) / 1000;
-        self thread function_c0cdd1f2(localclientnum, 1, 0, level.blood.var_f2de135e.var_92fc0d45[pulse], # "damage pulse", self.pstfx_blood);
+        self thread function_c0cdd1f2(localclientnum, 1, 0, level.blood.var_f2de135e.var_92fc0d45[pulse], #"damage pulse", self.pstfx_blood);
         wait float(level.blood.var_f2de135e.var_92fc0d45[pulse]) / 1000;
         wait float(level.blood.var_f2de135e.var_5b5500f7[pulse]) / 1000;
       }
@@ -537,7 +537,7 @@ function_e91b92e2(localclientnum, new_blood_stage, prior_blood_stage) {
     self enter_critical_health(localclientnum);
 
     if(isDefined(self.blood_enabled) && self.blood_enabled) {
-      self function_116b95e5(self.pstfx_blood, # "damage pulse", 1);
+      self function_116b95e5(self.pstfx_blood, #"damage pulse", 1);
     }
 
     if(isDefined(level.blood.scriptbundle.pulse_loop)) {
@@ -552,7 +552,7 @@ function_e91b92e2(localclientnum, new_blood_stage, prior_blood_stage) {
     self.var_9861062 = 0;
 
     if(isDefined(self.blood_enabled) && self.blood_enabled) {
-      self function_116b95e5(self.pstfx_blood, # "damage pulse", 0);
+      self function_116b95e5(self.pstfx_blood, #"damage pulse", 0);
     }
   }
 
@@ -571,7 +571,7 @@ function_56419db8(stage) {
 }
 
 play_new_stage_rumble(localclientnum) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   for(i = 0; i < 2; i++) {
     self playrumbleonentity(localclientnum, "new_health_stage");
@@ -611,18 +611,18 @@ function_9a8dc0ec(localclientnum, playerhealth, forceupdate) {
 
   if(new_blood_stage != prior_blood_stage || forceupdate) {
     ramptime = prior_blood_stage < new_blood_stage ? level.blood.var_587ce5b0 : level.blood.var_49774f1;
-    self thread function_c0cdd1f2(localclientnum, level.blood.fade[prior_blood_stage], level.blood.fade[new_blood_stage], ramptime, # "fade", self.pstfx_blood);
-    self thread function_c0cdd1f2(localclientnum, level.blood.opacity[prior_blood_stage], level.blood.opacity[new_blood_stage], ramptime, # "opacity", self.pstfx_blood);
-    self thread function_c0cdd1f2(localclientnum, level.blood.var_4c8629ad[prior_blood_stage], level.blood.var_4c8629ad[new_blood_stage], ramptime, # "vignette darkening amount", self.pstfx_blood);
-    self thread function_c0cdd1f2(localclientnum, level.blood.var_ea220db3[prior_blood_stage], level.blood.var_ea220db3[new_blood_stage], ramptime, # "vignette darkening factor", self.pstfx_blood);
-    self thread function_c0cdd1f2(localclientnum, level.blood.blur[prior_blood_stage], level.blood.blur[new_blood_stage], ramptime, # "blur", self.pstfx_blood);
+    self thread function_c0cdd1f2(localclientnum, level.blood.fade[prior_blood_stage], level.blood.fade[new_blood_stage], ramptime, #"fade", self.pstfx_blood);
+    self thread function_c0cdd1f2(localclientnum, level.blood.opacity[prior_blood_stage], level.blood.opacity[new_blood_stage], ramptime, #"opacity", self.pstfx_blood);
+    self thread function_c0cdd1f2(localclientnum, level.blood.var_4c8629ad[prior_blood_stage], level.blood.var_4c8629ad[new_blood_stage], ramptime, #"vignette darkening amount", self.pstfx_blood);
+    self thread function_c0cdd1f2(localclientnum, level.blood.var_ea220db3[prior_blood_stage], level.blood.var_ea220db3[new_blood_stage], ramptime, #"vignette darkening factor", self.pstfx_blood);
+    self thread function_c0cdd1f2(localclientnum, level.blood.blur[prior_blood_stage], level.blood.blur[new_blood_stage], ramptime, #"blur", self.pstfx_blood);
 
     if(level.blood.var_e9d8aaf5) {
-      self thread function_c0cdd1f2(localclientnum, level.blood.refraction[prior_blood_stage], level.blood.refraction[new_blood_stage], ramptime, # "refraction", self.pstfx_blood);
+      self thread function_c0cdd1f2(localclientnum, level.blood.refraction[prior_blood_stage], level.blood.refraction[new_blood_stage], ramptime, #"refraction", self.pstfx_blood);
     }
 
     if(isDefined(self.blood_enabled) && self.blood_enabled) {
-      self function_116b95e5(self.pstfx_blood, # "hash_3886e6a5c0c3df4c", level.blood.blood_boost[new_blood_stage]);
+      self function_116b95e5(self.pstfx_blood, #"hash_3886e6a5c0c3df4c", level.blood.blood_boost[new_blood_stage]);
     }
 
     self function_56419db8(new_blood_stage);
@@ -681,8 +681,8 @@ function_436ee4c2(localclientnum, pstfx_blood) {
       codestoppostfxbundlelocal(localclientnum, pstfx_blood);
     }
 
-    if(function_148ccc79(localclientnum, # "hash_73c750f53749d44d")) {
-      codestoppostfxbundlelocal(localclientnum, # "hash_73c750f53749d44d");
+    if(function_148ccc79(localclientnum, #"hash_73c750f53749d44d")) {
+      codestoppostfxbundlelocal(localclientnum, #"hash_73c750f53749d44d");
     }
   }
 

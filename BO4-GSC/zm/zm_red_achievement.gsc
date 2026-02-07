@@ -79,7 +79,7 @@ function_50e46434() {
   }
 
   while(true) {
-    s_result = level waittill(#"hash_751ac3ddacb1c548", # "between_round_over");
+    s_result = level waittill(#"hash_751ac3ddacb1c548", #"between_round_over");
 
     if(s_result._notify == "between_round_over" && level.round_number > 15) {
       return;
@@ -145,7 +145,7 @@ function_103e6827() {
 }
 
 function_3c39c720() {
-  self endoncallback(&function_a5f404e2, # "disconnect");
+  self endoncallback(&function_a5f404e2, #"disconnect");
 
   if(!zm_custom::function_901b751c(#"zmwonderweaponisenabled") || zm_utility::is_standard()) {
     return;
@@ -160,7 +160,7 @@ function_3c39c720() {
 
     self.var_ec3e3f82 = 0;
     level callback::on_ai_killed(&function_8a595f5);
-    self waittill(#"weapon_change", # "weapon_fired", # "stop_beaming");
+    self waittill(#"weapon_change", #"weapon_fired", #"stop_beaming");
     level callback::remove_on_ai_killed(&function_8a595f5);
 
     if(self.var_ec3e3f82 >= 20) {
@@ -187,7 +187,7 @@ function_a5f404e2(var_c34665fc) {
 }
 
 function_74846734() {
-  self endoncallback(&function_8828b419, # "disconnect");
+  self endoncallback(&function_8828b419, #"disconnect");
 
   if(!zm_custom::function_901b751c(#"zmwonderweaponisenabled") || zm_utility::is_standard()) {
     return;
@@ -202,7 +202,7 @@ function_74846734() {
 
     self.n_flung = 0;
     level callback::on_ai_killed(&function_c6125761);
-    self waittill(#"weapon_change", # "weapon_fired", # "stop_beaming");
+    self waittill(#"weapon_change", #"weapon_fired", #"stop_beaming");
     level callback::remove_on_ai_killed(&function_c6125761);
 
     if(self.n_flung >= 20) {
@@ -229,10 +229,10 @@ function_8828b419(var_c34665fc) {
 }
 
 function_84d102f2() {
-  self endon(#"disconnect", # "hash_5766f147327163d1");
+  self endon(#"disconnect", #"hash_5766f147327163d1");
 
   while(true) {
-    s_result = level waittill(#"hash_4fb1eb2c137a7955", # "hash_1e2d6c34f734996b");
+    s_result = level waittill(#"hash_4fb1eb2c137a7955", #"hash_1e2d6c34f734996b");
 
     if(s_result._notify == # "hash_4fb1eb2c137a7955") {
       if(s_result.e_player !== self) {
@@ -258,7 +258,7 @@ function_84d102f2() {
 }
 
 function_9fdcf13f() {
-  self endon(#"disconnect", # "hash_5766f147327163d1", # "hash_4fb1eb2c137a7955");
+  self endon(#"disconnect", #"hash_5766f147327163d1", #"hash_4fb1eb2c137a7955");
   self waittill(#"weapon_change");
   level notify(#"hash_1e2d6c34f734996b", {
     #e_player: self
@@ -273,7 +273,7 @@ function_f31369ae() {
   e_player = undefined;
 
   while(isalive(self)) {
-    s_result = self waittill(#"damage", # "death");
+    s_result = self waittill(#"damage", #"death");
 
     if((s_result.weapon === getweapon(#"zhield_zpear_dw") || s_result.weapon === getweapon(#"zhield_zpear_turret")) && isplayer(s_result.attacker)) {
       if(!isDefined(e_player)) {
@@ -299,7 +299,7 @@ function_f31369ae() {
 
 function_e502ed82() {
   level endon(#"end_game");
-  a_flags = array(#"hash_5827ff8b059b77f3", # "hash_786c9a9f60b254f5", # "hash_3b7c39d9b76689fb", # "hash_29ac8ec32d2a389b", # "hash_39100dea955077f2");
+  a_flags = array(#"hash_5827ff8b059b77f3", #"hash_786c9a9f60b254f5", #"hash_3b7c39d9b76689fb", #"hash_29ac8ec32d2a389b", #"hash_39100dea955077f2");
   level flagsys::wait_till_all(a_flags);
 
   iprintlnbold("<dev string:x15e>");

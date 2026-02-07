@@ -32,7 +32,7 @@ enable_death_perception_perk_for_level() {
   zm_perks::register_perk_clientfields(#"specialty_awareness", &function_6e0b6101, &function_95ed7b4a);
   zm_perks::register_perk_effects(#"specialty_awareness", "divetonuke_light");
   zm_perks::register_perk_init_thread(#"specialty_awareness", &function_9b484511);
-  zm_perks::function_b60f4a9f(#"specialty_awareness", # "p8_zm_vapor_altar_icon_01_deathperception", "zombie/fx8_perk_altar_symbol_ambient_death_perception", # "zmperksdeathperception");
+  zm_perks::function_b60f4a9f(#"specialty_awareness", #"p8_zm_vapor_altar_icon_01_deathperception", "zombie/fx8_perk_altar_symbol_ambient_death_perception", #"zmperksdeathperception");
 }
 
 function_9b484511() {}
@@ -77,7 +77,7 @@ function_731d83de(localclientnum) {
 }
 
 function_fff5377e(localclientnum) {
-  self endon(#"death", # "hash_45ed6efeef67b773");
+  self endon(#"death", #"hash_45ed6efeef67b773");
 
   while(true) {
     if(!(isDefined(level.var_dc60105c) && level.var_dc60105c) && !isigcactive(localclientnum)) {

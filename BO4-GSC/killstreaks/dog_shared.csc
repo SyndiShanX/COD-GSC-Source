@@ -45,7 +45,7 @@ function_654bd68b(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 function_14740469(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(isDefined(self) && self hasdobj(localclientnum)) {
-      self setflaggedanimknobrestart(#"hash_506d2ece42569653", # "ai_nomad_dog_additive_bark_01", 1, 0.1, 1);
+      self setflaggedanimknobrestart(#"hash_506d2ece42569653", #"ai_nomad_dog_additive_bark_01", 1, 0.1, 1);
     }
 
     return;

@@ -47,7 +47,7 @@ initflakdrone() {
 state_off_enter(params) {}
 
 state_off_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   while(!isDefined(self.parent)) {
     wait 0.1;
@@ -150,7 +150,7 @@ state_combat_enter(params) {}
 
 state_combat_update(params) {
   drone = self;
-  drone endon(#"change_state", # "death");
+  drone endon(#"change_state", #"death");
   drone thread spawnflakrocket(drone.incoming_missile, drone.origin, drone.parent);
   drone ghost();
 }
@@ -356,7 +356,7 @@ configureteam(parent, ishacked) {
 watchgameevents() {
   drone = self;
   drone endon(#"death");
-  drone.parent.owner waittill(#"game_ended", # "emp_jammed", # "disconnect", # "joined_team");
+  drone.parent.owner waittill(#"game_ended", #"emp_jammed", #"disconnect", #"joined_team");
   drone shutdown(1);
 }
 

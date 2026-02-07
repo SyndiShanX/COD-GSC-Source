@@ -294,7 +294,7 @@ function_58c93260(player) {
 function_af2bf286(player) {
   self notify("40dcec56538c25e1");
   self endon("40dcec56538c25e1");
-  self endon(#"death", # "disconnect", # "weapon_change");
+  self endon(#"death", #"disconnect", #"weapon_change");
   level endon(#"game_ended");
   var_8e76086 = mpdialog_value("warmachineThreatMinDistance", 100);
   var_8e76086 *= var_8e76086;
@@ -353,7 +353,7 @@ function_af2bf286(player) {
 }
 
 function_44b5e397() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self notify("3a7ae30337ee24bf");
   self endon("3a7ae30337ee24bf");
@@ -641,7 +641,7 @@ function_551980b7(dialogname) {
 }
 
 function_7139078d() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
   self notify("6b96a91e5ff2b8a7");
   self endon("6b96a91e5ff2b8a7");
@@ -1506,7 +1506,7 @@ grenade_tracking() {
         case # "eq_slow_grenade":
         case # "eq_molotov":
         case # "concussion_grenade":
-          waitresult = grenade waittilltimeout(0.3, # "death");
+          waitresult = grenade waittilltimeout(0.3, #"death");
 
           if(waitresult._notify == "death" || !isDefined(grenade)) {
             continue;
@@ -2136,7 +2136,7 @@ function_a48c33ff(dialogalias, dialogflags, dialogbuffer, enemy) {
 }
 
 wait_dialog_buffer(dialogbuffer) {
-  self endon(#"death", # "played_dialog", # "stop_dialog");
+  self endon(#"death", #"played_dialog", #"stop_dialog");
   level endon(#"game_ended");
   self.playingdialog = 1;
 
@@ -2445,7 +2445,7 @@ function_e3ebbf87(var_aa988d26, var_c1132df6) {
 
   self notify("2f5480a370bfcd30");
   self endon("2f5480a370bfcd30");
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!sessionmodeiswarzonegame()) {
     level endon(#"game_ended");

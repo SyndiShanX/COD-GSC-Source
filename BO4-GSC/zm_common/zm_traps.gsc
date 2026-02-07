@@ -238,7 +238,7 @@ function_783f63e9(var_1c9c3123 = 1) {
   }
 
   if(zm_utility::is_standard() || namespace_b28d86fd::is_active()) {
-    cheat_too_friendly_s_ = zm_utility::function_d6046228(#"hash_24a438482954901", # "hash_61d85c966dd9e83f");
+    cheat_too_friendly_s_ = zm_utility::function_d6046228(#"hash_24a438482954901", #"hash_61d85c966dd9e83f");
     self trap_set_string(cheat_too_friendly_s_);
 
     if(var_1c9c3123) {
@@ -248,7 +248,7 @@ function_783f63e9(var_1c9c3123 = 1) {
     return;
   }
 
-  cheat_too_friendly_s_ = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", # "hash_6e8ef1b690e98e51");
+  cheat_too_friendly_s_ = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", #"hash_6e8ef1b690e98e51");
   self trap_set_string(cheat_too_friendly_s_, self.zombie_cost);
 
   if(var_1c9c3123) {
@@ -292,7 +292,7 @@ trap_purchase(e_player, n_cost) {
   }
 
   self playSound(#"zmb_trap_deny");
-  e_player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+  e_player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
   return 0;
 }
 
@@ -504,7 +504,7 @@ trap_audio_fx(trap) {
   }
 
   sound_origin = undefined;
-  trap waittilltimeout(trap._trap_duration, # "trap_done");
+  trap waittilltimeout(trap._trap_duration, #"trap_done");
 
   if(isDefined(sound_origin)) {
     playsoundatposition(#"wpn_zmb_electrap_stop", sound_origin.origin);
@@ -599,7 +599,7 @@ trig_update(parent) {
 }
 
 player_elec_damage(trigger) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(level.elec_loop)) {
     level.elec_loop = 0;
@@ -631,7 +631,7 @@ player_elec_damage(trigger) {
 }
 
 player_fire_damage() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!(isDefined(self.is_burning) && self.is_burning) && !self laststand::player_is_in_laststand()) {
     self.is_burning = 1;
@@ -975,7 +975,7 @@ function_3f401e8d(e_player) {
 
 function_a1812da9() {
   self notify(#"hash_337fc06844d7d1bb");
-  self endon(#"disconnect", # "hash_337fc06844d7d1bb");
+  self endon(#"disconnect", #"hash_337fc06844d7d1bb");
   self.var_9beb4442 = 1;
   wait 0.25;
   self.var_9beb4442 = undefined;

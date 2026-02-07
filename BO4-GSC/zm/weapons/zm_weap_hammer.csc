@@ -82,7 +82,7 @@ hammer_storm(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     self.n_beacon_fx = undefined;
   }
 
-  self playSound(0, # "hash_15633b83c64a3ebb");
+  self playSound(0, #"hash_15633b83c64a3ebb");
 
   if(isDefined(self.var_49f8e089)) {
     self notify(#"hash_5384bc96a8e66d91");
@@ -109,7 +109,7 @@ function_54b0b1b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
   if(newval == 1) {
     self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[# "lightning_impact"], self, self zm_utility::function_467efa7b());
-    self playSound(localclientnum, # "hash_63d588d1f28ecdc1");
+    self playSound(localclientnum, #"hash_63d588d1f28ecdc1");
   }
 }
 
@@ -130,7 +130,7 @@ function_93d275f2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_7dac3bb6(localclientnum) {
-  self endon(#"death", # "hash_5531647ca0352039");
+  self endon(#"death", #"hash_5531647ca0352039");
 
   while(!isDefined(level.var_76234ae5[localclientnum])) {
     waitframe(1);
@@ -144,7 +144,7 @@ function_7dac3bb6(localclientnum) {
     return;
   }
 
-  self.e_fx = util::spawn_model(localclientnum, # "tag_origin", e_ball.origin);
+  self.e_fx = util::spawn_model(localclientnum, #"tag_origin", e_ball.origin);
   self.fx_arc = util::playFXOnTag(localclientnum, level._effect[# "lightning_arc"], self.e_fx, "tag_origin");
 
   while(true) {
@@ -178,7 +178,7 @@ function_311f3501(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_85050f7f(localclientnum) {
-  self waittill(#"death", # "hash_5531647ca0352039");
+  self waittill(#"death", #"hash_5531647ca0352039");
 
   if(isDefined(self.fx_arc)) {
     stopfx(localclientnum, self.fx_arc);
@@ -203,7 +203,7 @@ function_cd968d6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[# "lightning_impact"], self, self zm_utility::function_467efa7b());
     }
 
-    self playSound(localclientnum, # "hash_63d588d1f28ecdc1");
+    self playSound(localclientnum, #"hash_63d588d1f28ecdc1");
     return;
   }
 

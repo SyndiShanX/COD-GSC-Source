@@ -84,7 +84,7 @@ burn(str_type, e_attacker, weapon, var_477abb8f) {
 
 function_8aefaae3(s_burn) {
   level endon(#"end_game");
-  self endoncallback(&function_fc2a294, # "death");
+  self endoncallback(&function_fc2a294, #"death");
 
   if(isDefined(self.archetype)) {
     if(isDefined(s_burn.var_f472bfc)) {
@@ -304,7 +304,7 @@ slowdown(str_type, var_a47cf2b2) {
 
   self notify(#"starting_slowdown_ai");
   level endon(#"end_game");
-  self endoncallback(&function_fe7a7d5b, # "starting_slowdown_ai", # "death");
+  self endoncallback(&function_fe7a7d5b, #"starting_slowdown_ai", #"death");
 
   if(!isDefined(level.var_981dd9cf) || !isDefined(level.var_981dd9cf[# "slow"]) || !isDefined(level.var_981dd9cf[# "slow"][str_type])) {
     assertmsg("<dev string:x74>" + str_type + "<dev string:x81>");
@@ -352,7 +352,7 @@ slowdown(str_type, var_a47cf2b2) {
         self waittill(#"hash_62a477d53a6bbad");
       } else {
         n_duration = var_e489fea - n_time;
-        self waittilltimeout(float(n_duration) / 1000, # "hash_62a477d53a6bbad");
+        self waittilltimeout(float(n_duration) / 1000, #"hash_62a477d53a6bbad");
       }
 
       if(var_e489fea < gettime() && var_dc1625a7.n_duration != -1) {

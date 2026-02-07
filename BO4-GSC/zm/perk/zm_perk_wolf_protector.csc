@@ -25,7 +25,7 @@ __init__() {
 function_27473e44() {
   zm_perks::register_perk_clientfields(#"specialty_wolf_protector", &client_field_func, &code_callback_func);
   zm_perks::register_perk_init_thread(#"specialty_wolf_protector", &init);
-  zm_perks::function_b60f4a9f(#"specialty_wolf_protector", # "p8_zm_vapor_altar_icon_01_bloodwolf", "zombie/fx8_perk_altar_symbol_ambient_blood_wolf", # "zmperkswolfprotector");
+  zm_perks::function_b60f4a9f(#"specialty_wolf_protector", #"p8_zm_vapor_altar_icon_01_bloodwolf", "zombie/fx8_perk_altar_symbol_ambient_blood_wolf", #"zmperkswolfprotector");
   zm_perks::function_f3c80d73("zombie_perk_bottle_wolf_protector", "zombie_perk_totem_wolf_protector");
 }
 
@@ -49,7 +49,7 @@ wolf_protector_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self renderoverridebundle::function_c8d97b8e(localclientnum, # "zm_friendly", # "hash_5afb2d74423459bf");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly", #"hash_5afb2d74423459bf");
   forcestreamxmodel(self.model);
 
   if(newval === 1) {

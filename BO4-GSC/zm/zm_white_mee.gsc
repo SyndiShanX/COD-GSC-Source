@@ -65,7 +65,7 @@ init() {
 init_quests() {
   level flag::init("mee_round");
   level flag::init("mee_projectile_count_reached");
-  zm_sq::register(#"mee_projectile", # "step_1", # "mee_projectile_step1", &mee_projectile_step1_setup, &mee_projectile_step1_cleanup);
+  zm_sq::register(#"mee_projectile", #"step_1", #"mee_projectile_step1", &mee_projectile_step1_setup, &mee_projectile_step1_cleanup);
   level flag::init("mee_melee_count_reached");
   e_partner = getent("mee_2_female", "targetname");
   e_partner hide();
@@ -75,14 +75,14 @@ init_quests() {
     e_model hide();
   }
 
-  zm_sq::register(#"mee_melee", # "step_1", # "mee_melee_step1", &mee_melee_step1_setup, &mee_melee_step1_cleanup);
+  zm_sq::register(#"mee_melee", #"step_1", #"mee_melee_step1", &mee_melee_step1_setup, &mee_melee_step1_cleanup);
   level flag::init("mee_galvaknuckle_count_reached");
-  zm_sq::register(#"mee_galvaknuckle", # "step_1", # "mee_galvaknuckle_step1", &mee_galvaknuckle_step1_setup, &mee_galvaknuckle_step1_cleanup);
+  zm_sq::register(#"mee_galvaknuckle", #"step_1", #"mee_galvaknuckle_step1", &mee_galvaknuckle_step1_setup, &mee_galvaknuckle_step1_cleanup);
   level flag::init("mee_mixed_count_reached");
-  zm_sq::register(#"mee_mixed", # "step_1", # "mee_mixed_step1", &mee_mixed_step1_setup, &mee_mixed_step1_cleanup);
+  zm_sq::register(#"mee_mixed", #"step_1", #"mee_mixed_step1", &mee_mixed_step1_setup, &mee_mixed_step1_cleanup);
   level flag::init(#"hash_502f2e83a538c679");
   level flag::init(#"hash_7346ae8e42a74ce6");
-  zm_sq::register(#"jump_scare", # "step_1", # "hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
+  zm_sq::register(#"jump_scare", #"step_1", #"hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
   level flag::wait_till(#"all_players_spawned");
 
   if(zm_utility::is_ee_enabled()) {
@@ -242,7 +242,7 @@ function_663fd427() {
 }
 
 function_8d3f2364(waitresult) {
-  level endon(#"game_ended", # "insanity_mode_triggered");
+  level endon(#"game_ended", #"insanity_mode_triggered");
 
   if(isDefined(level.var_73d1e054) && level.var_73d1e054) {
     return;
@@ -683,7 +683,7 @@ function_7f971d26() {
 }
 
 function_800ff39e() {
-  level endon(#"boss_lockdown", # "game_ended");
+  level endon(#"boss_lockdown", #"game_ended");
 
   while(level.var_22569770 function_7f971d26()) {
     waitframe(1);
@@ -796,7 +796,7 @@ function_d10bf985() {
 }
 
 function_d857924d() {
-  self endoncallback(&function_33e0a5d1, # "death");
+  self endoncallback(&function_33e0a5d1, #"death");
 
   while(true) {
     foreach(player in getplayers()) {
@@ -1028,8 +1028,8 @@ jump_scare(var_a276c861) {
 
 track_player_eyes() {
   self notify(#"track_player_eyes");
-  self endon(#"disconnect", # "track_player_eyes");
-  level endon(#"hash_10a56459715cd20e", # "insanity_mode_triggered");
+  self endon(#"disconnect", #"track_player_eyes");
+  level endon(#"hash_10a56459715cd20e", #"insanity_mode_triggered");
   self thread function_cbeb9a33();
   b_saw_the_wth = 0;
   var_616e76c5 = struct::get("sq_gl_scare", "targetname");

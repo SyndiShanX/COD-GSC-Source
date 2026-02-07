@@ -427,7 +427,7 @@ kill_hitmarker_fade() {
   }
 
   self notify(#"kill_hitmarker_fade");
-  self endon(#"kill_hitmarker_fade", # "disconnect");
+  self endon(#"kill_hitmarker_fade", #"disconnect");
   self.hud_damagefeedback.alpha = 1;
   wait 0.25;
   self.hud_damagefeedback fadeovertime(0.3);

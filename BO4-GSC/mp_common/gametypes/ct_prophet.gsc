@@ -231,7 +231,7 @@ function_f1e4097d() {
 function_671e5ede() {
   level.var_394c5463 = 1;
   var_e8d6f89 = 3 + level.var_8db5b490;
-  level thread ct_bots::activate_bots(var_e8d6f89, # "axis");
+  level thread ct_bots::activate_bots(var_e8d6f89, #"axis");
   var_468ef41 = level.var_8db5b490;
 
   if(var_468ef41) {
@@ -270,7 +270,7 @@ function_671e5ede() {
   }
 
   level.var_394c5463 = 0;
-  waypoint = ct_utils::create_waypoint(#"hash_14f53e0433721169", level.var_a62b1ae0.origin, (0, 0, 0), # "any", undefined, 0, undefined);
+  waypoint = ct_utils::create_waypoint(#"hash_14f53e0433721169", level.var_a62b1ae0.origin, (0, 0, 0), #"any", undefined, 0, undefined);
   level thread ct_utils::function_bfa522d1(0);
   level thread function_3e3366eb();
   level.var_cbcb0078 = 0;

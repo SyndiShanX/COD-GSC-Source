@@ -16,7 +16,7 @@
 #namespace planemortar;
 
 autoexec __init__system__() {
-  system::register(#"planemortar", &__init__, undefined, # "killstreaks");
+  system::register(#"planemortar", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

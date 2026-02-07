@@ -36,7 +36,7 @@ ctf_reset_score(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
 on_localclient_connect(localclientnum) {
   level.var_8b7ba196[localclientnum] = util::getnextobjid(localclientnum);
-  objective_add(localclientnum, level.var_8b7ba196[localclientnum], "invisible", # "flag_taken", (0, 0, 0), util::get_other_team(function_9b3f0ed1(localclientnum)));
+  objective_add(localclientnum, level.var_8b7ba196[localclientnum], "invisible", #"flag_taken", (0, 0, 0), util::get_other_team(function_9b3f0ed1(localclientnum)));
   level thread function_27ecd662(localclientnum);
 }
 

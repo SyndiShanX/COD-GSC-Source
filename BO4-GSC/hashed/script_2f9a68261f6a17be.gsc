@@ -36,7 +36,7 @@ on_begin() {
   }
 
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = zm_utility::function_d6046228(#"hash_24a438482954901", # "hash_61d85c966dd9e83f");
+  str_text = zm_utility::function_d6046228(#"hash_24a438482954901", #"hash_61d85c966dd9e83f");
 
   foreach(t_trap in a_t_traps) {
     if(!(isDefined(t_trap._trap_in_use) && t_trap._trap_in_use) && isDefined(t_trap.var_b3166dc1) && t_trap.var_b3166dc1) {
@@ -72,7 +72,7 @@ on_end(round_reset) {
   }
 
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", # "hash_6e8ef1b690e98e51");
+  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", #"hash_6e8ef1b690e98e51");
 
   foreach(t_trap in a_t_traps) {
     if(!(isDefined(t_trap._trap_in_use) && t_trap._trap_in_use) && isDefined(t_trap.var_b3166dc1) && t_trap.var_b3166dc1) {
@@ -101,10 +101,10 @@ is_active() {
 }
 
 function_70594057() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   level waittill(#"zombie_total_set");
 
   for(n_kills = 0; true; n_kills++) {
-    level waittill(#"trap_kill", # "hash_528d7b7f7d6c51a1", # "hash_317f58ba0d580c27", # "hash_148b3ce521088846");
+    level waittill(#"trap_kill", #"hash_528d7b7f7d6c51a1", #"hash_317f58ba0d580c27", #"hash_148b3ce521088846");
   }
 }

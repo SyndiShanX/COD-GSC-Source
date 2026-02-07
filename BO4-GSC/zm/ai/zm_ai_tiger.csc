@@ -27,7 +27,7 @@ __init__() {
 }
 
 function_6d7e1f79(localclientnum) {
-  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_red", # "zm_ai/fx8_zombie_tiger_eye_glow_red");
+  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_red", #"zm_ai/fx8_zombie_tiger_eye_glow_red");
   self.var_4703d488 = &function_3be6531a;
   self callback::on_shutdown(&on_entity_shutdown);
 }
@@ -39,16 +39,16 @@ function_76110e92(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self postfx::playpostfxbundle("pstfx_tiger_slash_r_to_l");
   }
 
-  self playSound(localclientnum, # "hash_53d906ab01cb30a1");
+  self playSound(localclientnum, #"hash_53d906ab01cb30a1");
 }
 
 function_3be6531a(localclientnum, turned) {
   if(turned) {
-    self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_green", # "zm_ai/fx8_zombie_tiger_eye_glow_green");
+    self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_green", #"zm_ai/fx8_zombie_tiger_eye_glow_green");
     return;
   }
 
-  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_red", # "zm_ai/fx8_zombie_tiger_eye_glow_red");
+  self zm_utility::function_3a020b0f(localclientnum, "rob_zm_eyes_red", #"zm_ai/fx8_zombie_tiger_eye_glow_red");
 }
 
 on_entity_shutdown(localclientnum) {
@@ -66,6 +66,6 @@ on_entity_shutdown(localclientnum) {
     }
 
     playFX(localclientnum, "zm_ai/fx8_zombie_tiger_death_exp", origin, anglesToForward(angles));
-    playSound(0, # "hash_5f574d847a1ca1f0", self.origin);
+    playSound(0, #"hash_5f574d847a1ca1f0", self.origin);
   }
 }

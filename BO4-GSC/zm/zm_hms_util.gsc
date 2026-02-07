@@ -99,7 +99,7 @@ function_51b752a9(str_alias, n_variant = int(-1), b_wait_if_busy = 0, var_a97d4e
   }
 
   level endon(#"game_ended");
-  self endon(#"player_downed", # "death", # "disconnect");
+  self endon(#"player_downed", #"death", #"disconnect");
 
   if(!zm_utility::is_player_valid(self)) {
     return;
@@ -425,7 +425,7 @@ function_6d41bab8(v_pos, n_radius) {
 }
 
 function_45bb11e4(spot) {
-  self endoncallback(&zm_spawner::function_fe3cb19a, # "death");
+  self endoncallback(&zm_spawner::function_fe3cb19a, #"death");
   self.var_5535a47d = 1;
   self zm_spawner::function_fe3cb19a();
   self.mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
@@ -437,7 +437,7 @@ function_45bb11e4(spot) {
 
   self.mdl_anchor moveto(spot.origin, 0.05);
   self.mdl_anchor rotateto(spot.angles, 0.05);
-  self.mdl_anchor waittill(#"movedone", # "death");
+  self.mdl_anchor waittill(#"movedone", #"death");
   waitframe(1);
   self.create_eyes = 1;
   self show();
@@ -521,7 +521,7 @@ function_a496116d(e_player, n_cost) {
   }
 
   self zm_utility::play_sound_on_ent("no_purchase");
-  e_player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+  e_player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
   return 0;
 }
 

@@ -31,7 +31,7 @@ __init__() {
 }
 
 beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self function_efbf12ac(localclientnum);
 
   if(newval > 0) {
@@ -62,7 +62,7 @@ function_e7a7ac96(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self endon(#"death", # "hash_5423f6c5db580daa");
+  self endon(#"death", #"hash_5423f6c5db580daa");
   self.var_d1f92a1c = util::spawn_model(localclientnum, "tag_origin", self.origin + (0, 0, 4000));
   str_beam = "beam8_zm_raygun2v_elec";
 
@@ -146,7 +146,7 @@ function_97482bc3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     playFX(localclientnum, level._effect[# "hash_66d2b9447f1e888"], v_fx_origin);
-    self playSound(localclientnum, # "zmb_aat_kilowatt_explode");
+    self playSound(localclientnum, #"zmb_aat_kilowatt_explode");
   }
 }
 

@@ -70,7 +70,7 @@ init() {
     level.var_2fc3a917[level.var_2fc3a917.size] = s_temp;
   }
 
-  zm_sq::register(#"ww_quest_weapon", # "step_1", # "hash_2af54f403e86105d", &function_da84e99e, &function_6d5a79fe);
+  zm_sq::register(#"ww_quest_weapon", #"step_1", #"hash_2af54f403e86105d", &function_da84e99e, &function_6d5a79fe);
   level thread function_661dc825();
 
   if(!zm_utility::is_standard()) {
@@ -742,7 +742,7 @@ function_33f0ddd3(s_event) {
     w_ray_gun = s_event.weapon;
 
     if(level flag::get("round_reset") || level flag::get(#"trial_failed")) {
-      b_rescue = !isinarray(self.var_c27f1e90, # "specialty_additionalprimaryweapon") && self.var_2a62e678 === w_ray_gun;
+      b_rescue = !isinarray(self.var_c27f1e90, #"specialty_additionalprimaryweapon") && self.var_2a62e678 === w_ray_gun;
     } else {
       e_pap = getent("zm_pack_a_punch", "targetname");
       var_e75ac4c0 = e_pap.unitrigger_stub.current_weapon === w_ray_gun;

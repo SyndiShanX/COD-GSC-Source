@@ -565,7 +565,7 @@ function_6a0a572d(localclientnum) {
 
   while(true) {
     wait randomintrange(5, 20);
-    self playSound(localclientnum, # "hash_62f87027921fa5b4");
+    self playSound(localclientnum, #"hash_62f87027921fa5b4");
   }
 }
 
@@ -622,7 +622,7 @@ function_1625e105(e_player) {
     return;
   }
 
-  level endon(#"demo_jump", # "hash_4d8d403fdb281b69");
+  level endon(#"demo_jump", #"hash_4d8d403fdb281b69");
   e_player endon(#"death");
   self endon(#"death");
   wait 1;

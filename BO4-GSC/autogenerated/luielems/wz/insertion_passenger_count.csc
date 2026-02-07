@@ -12,7 +12,7 @@ class cinsertion_passenger_count: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "insertion_passenger_count");
+    cluielem::open(localclientnum, #"insertion_passenger_count");
   }
 
   function function_fa582112(localclientnum) {

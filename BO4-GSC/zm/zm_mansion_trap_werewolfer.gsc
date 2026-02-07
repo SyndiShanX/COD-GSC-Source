@@ -92,7 +92,7 @@ function_670dda89() {
   }
 
   self thread zm_traps::trap_damage();
-  self waittilltimeout(self._trap_duration, # "trap_deactivate");
+  self waittilltimeout(self._trap_duration, #"trap_deactivate");
   self notify(#"trap_done");
   level exploder::stop_exploder("fxexp_ele_trap_activate");
   level flag::clear(#"hash_6f483dda6f8ab19d");

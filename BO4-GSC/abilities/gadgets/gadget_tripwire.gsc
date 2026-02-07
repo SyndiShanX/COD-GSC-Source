@@ -427,7 +427,7 @@ function_d334c3fa(endpoint) {
 }
 
 function_15de8daf() {
-  self endoncallback(&function_84101bb5, # "death");
+  self endoncallback(&function_84101bb5, #"death");
   self.var_d33355ff = [];
 
   while(true) {

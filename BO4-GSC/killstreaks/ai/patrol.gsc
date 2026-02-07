@@ -346,7 +346,7 @@ function_7c779aaf() {
   self endon(#"hash_5824b020cde66d5");
   fx_marker = self.var_74e8fd19;
   hud_marker = self.var_e2aca908;
-  self waittill(#"death", # "state_changed");
+  self waittill(#"death", #"state_changed");
 
   if(isDefined(self)) {
     self function_3ec67269();

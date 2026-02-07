@@ -67,7 +67,7 @@ __init__() {
 
 function_b4f41a02() {
   level endon(#"game_ended");
-  aitypes = array(#"spawner_boct_zombie_wz", # "spawner_boct_zombie_mob_wz", # "spawner_wz_blight_father", # "spawner_boct_zombie_dog_wz", # "spawner_boct_brutus_special_wz", # "spawner_boct_brutus_wz", # "spawner_boct_avogadro");
+  aitypes = array(#"spawner_boct_zombie_wz", #"spawner_boct_zombie_mob_wz", #"spawner_wz_blight_father", #"spawner_boct_zombie_dog_wz", #"spawner_boct_brutus_special_wz", #"spawner_boct_brutus_wz", #"spawner_boct_avogadro");
   setdvar(#"hash_209287456d55fca1", "<dev string:x38>");
 
   foreach(type in aitypes) {
@@ -328,7 +328,7 @@ function_c9a1a3bd(spot_origin, spot_angles, anim_name, var_c2a69066) {
   self.is_digging = 1;
   self animscripted("dig_anim", self.origin, self.angles, anim_name, "normal");
   self waittillmatch({
-    #notetrack: "end"}, # "dig_anim");
+    #notetrack: "end"}, #"dig_anim");
   self ghost();
   self notsolid();
   self clientfield::set("zombie_riser_fx", 0);

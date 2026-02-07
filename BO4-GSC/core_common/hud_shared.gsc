@@ -111,7 +111,7 @@ flash_scavenger_icon() {
 function_6cf4a466() {
   level.var_6371e281 = [];
 
-  foreach(var_cc966c56 in array(#"axis", # "allies")) {
+  foreach(var_cc966c56 in array(#"axis", #"allies")) {
     level.var_6371e281[var_cc966c56] = {
       #var_ba87ac95: [], #var_f6fd19fc: [], #var_4e490ff2: [], #var_bde2b289: []
     };
@@ -547,7 +547,7 @@ function_e5ae6379(var_ea5acf75 = # "none", var_f30c60cd = 1) {
       wait 2.25;
     }
 
-    foreach(var_cc966c56 in array(#"axis", # "allies")) {
+    foreach(var_cc966c56 in array(#"axis", #"allies")) {
       var_776f69c5 = level.var_6371e281[var_cc966c56];
 
       if(isinarray(var_776f69c5.var_f6fd19fc, var_e563ad04)) {
@@ -953,7 +953,7 @@ set_pvp_objective(str_identifier, n_obj_id, n_widget, var_48d81699, var_94fe5aa5
   mission flag::set("pvp_objectives_updating");
   var_ae4241f = 1;
 
-  foreach(var_cc966c56 in array(#"axis", # "allies")) {
+  foreach(var_cc966c56 in array(#"axis", #"allies")) {
     if(var_23b4190 === var_cc966c56) {
       var_fc6b273a = var_94fe5aa5;
     } else {
@@ -978,7 +978,7 @@ function_426b1c79(str_identifier, str_winning_team = # "none", var_f30c60cd = 1)
   var_ae4241f = 1;
   var_f30c60cd = str_winning_team == # "none" && var_f30c60cd;
 
-  foreach(var_cc966c56 in array(#"axis", # "allies")) {
+  foreach(var_cc966c56 in array(#"axis", #"allies")) {
     if(var_f30c60cd || var_ea5acf75 == var_cc966c56) {
       b_success = 1;
     } else {
@@ -1101,7 +1101,7 @@ function_9d9a1a4c() {
   if(!isDefined(level.var_f8cfac6)) {
     level.var_f8cfac6 = [];
 
-    foreach(var_8061b838 in array(#"axis", # "allies")) {
+    foreach(var_8061b838 in array(#"axis", #"allies")) {
       level.var_f8cfac6[var_8061b838] = 0;
     }
   }
@@ -1143,7 +1143,7 @@ mission_result(str_winning_team, var_db3d629e = # "hash_6ef5bcff7fb1d1ab", var_9
 
     if(isDefined(var_776f69c5) && !(isDefined(var_776f69c5.var_d201303e) && var_776f69c5.var_d201303e)) {
       e_player.var_ac2de17e = e_player openluimenu("CPLoseTransition");
-      e_player setluimenudata(e_player.var_ac2de17e, # "fade_out", 0);
+      e_player setluimenudata(e_player.var_ac2de17e, #"fade_out", 0);
     }
   }
 
@@ -1230,7 +1230,7 @@ function_ba453727() {
     var_776f69c5 = level.var_6371e281[e_player.team];
 
     if(isDefined(e_player.var_ac2de17e)) {
-      e_player setluimenudata(e_player.var_ac2de17e, # "fade_out", 1);
+      e_player setluimenudata(e_player.var_ac2de17e, #"fade_out", 1);
 
       if(!isDefined(var_407fef8b)) {
         var_407fef8b = [];
@@ -1360,7 +1360,7 @@ function_ffebf739(str_team, n_progress, b_additive = 0, var_ed465381 = 0) {
   level function_ccc1b91c(var_cc966c56, n_progress, var_ed465381);
 }
 
-function_21ad06d5(b_active, var_7dfc932e = array(#"axis", # "allies")) {
+function_21ad06d5(b_active, var_7dfc932e = array(#"axis", #"allies")) {
   if(!isDefined(level.var_20e69608)) {
     level.var_20e69608 = [];
     level.var_20e69608[# "allies"] = 0;

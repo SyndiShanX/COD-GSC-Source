@@ -123,7 +123,7 @@ function_439b486f() {
     exploder::exploder("fxexp_disco_lgt");
     var_51bef3af = spawn("script_model", (1, 1145, -350));
     var_51bef3af playSound(#"hash_c8d3a1557c42ab7");
-    s_notify = level waittilltimeout(253, # "hash_7646638df88a3656");
+    s_notify = level waittilltimeout(253, #"hash_7646638df88a3656");
     var_51bef3af stopsound(#"hash_c8d3a1557c42ab7");
     waitframe(1);
     var_51bef3af delete();
@@ -164,7 +164,7 @@ function_1bc491ab() {
 }
 
 spawn_boss() {
-  level endon(#"end_game", # "hash_7646638df88a3656");
+  level endon(#"end_game", #"hash_7646638df88a3656");
   exploder::exploder("fxexp_pyramid_open");
   var_1c91a56e = struct::get("apd_door_scene", "targetname");
   level waittill(#"zombie_total_set");

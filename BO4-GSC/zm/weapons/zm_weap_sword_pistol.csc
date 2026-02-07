@@ -51,12 +51,12 @@ function_6831ee4b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 dragon_roar_impact(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[# "dragon_roar_impact"], self, self zm_utility::function_467efa7b());
-  self playSound(0, # "hash_7272d200a14dfe79");
+  self playSound(0, #"hash_7272d200a14dfe79");
 }
 
 dragon_roar_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   playFX(localclientnum, level._effect[# "dragon_roar_explosion"], self.origin);
-  self playSound(0, # "hash_5e5fc609282c18d2");
+  self playSound(0, #"hash_5e5fc609282c18d2");
 }
 
 viper_bite_projectile(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -77,7 +77,7 @@ viper_bite_projectile(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
 viper_bite_projectile_impact(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[# "viper_bite_projectile_impact"], self, self zm_utility::function_467efa7b());
-  self playSound(0, # "hash_3098cba1f74bb5d1");
+  self playSound(0, #"hash_3098cba1f74bb5d1");
 }
 
 viper_bite_bitten_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -85,7 +85,7 @@ viper_bite_bitten_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
     self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[# "hash_206a58239ffb5e0f"], self, "j_spine4");
 
     if(!isDefined(self.var_6450813b)) {
-      self playSound(localclientnum, # "hash_76feff9b8f93c3d9");
+      self playSound(localclientnum, #"hash_76feff9b8f93c3d9");
       self.var_6450813b = self playLoopSound(#"hash_117558f0dda6471f");
     }
 
@@ -97,7 +97,7 @@ viper_bite_bitten_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   }
 
   if(isDefined(self.var_6450813b)) {
-    self playSound(localclientnum, # "hash_ae4b548c1d4a748");
+    self playSound(localclientnum, #"hash_ae4b548c1d4a748");
     self stoploopsound(self.var_6450813b);
     self.var_6450813b = undefined;
   }

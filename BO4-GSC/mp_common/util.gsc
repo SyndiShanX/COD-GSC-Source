@@ -24,7 +24,7 @@ isbulletimpactmod(smeansofdeath) {
 }
 
 waitrespawnbutton() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
 
   while(self usebuttonpressed() != 1) {
     waitframe(1);
@@ -545,14 +545,14 @@ waittill_use_button_pressed() {
 }
 
 show_hint_text(str_text_to_show, b_should_blink = 0, str_turn_off_notify = "notify_turn_off_hint_text", n_display_time = 4) {
-  self endon(#"notify_turn_off_hint_text", # "hint_text_removed");
+  self endon(#"notify_turn_off_hint_text", #"hint_text_removed");
 
   if(isDefined(self.hint_menu_handle)) {
     hide_hint_text(0);
   }
 
   self.hint_menu_handle = self openluimenu("MPHintText");
-  self setluimenudata(self.hint_menu_handle, # "hint_text_line", str_text_to_show);
+  self setluimenudata(self.hint_menu_handle, #"hint_text_line", str_text_to_show);
 
   if(b_should_blink) {
     lui::play_animation(self.hint_menu_handle, "blinking");
@@ -572,7 +572,7 @@ hide_hint_text(b_fade_before_hiding = 1) {
   if(isDefined(self.hint_menu_handle)) {
     if(b_fade_before_hiding) {
       lui::play_animation(self.hint_menu_handle, "fadeout");
-      self waittilltimeout(0.75, # "kill_hint_text", # "death", # "hint_text_removed");
+      self waittilltimeout(0.75, #"kill_hint_text", #"death", #"hint_text_removed");
     }
 
     self closeluimenu(self.hint_menu_handle);
@@ -583,14 +583,14 @@ hide_hint_text(b_fade_before_hiding = 1) {
 }
 
 fade_hint_text_after_time(n_display_time, str_turn_off_notify) {
-  self endon(#"hint_text_removed", # "death", # "kill_hint_text");
-  self waittilltimeout(n_display_time - 0.75, str_turn_off_notify, # "hint_text_removed", # "kill_hint_text");
+  self endon(#"hint_text_removed", #"death", #"kill_hint_text");
+  self waittilltimeout(n_display_time - 0.75, str_turn_off_notify, #"hint_text_removed", #"kill_hint_text");
   hide_hint_text(1);
 }
 
 hide_hint_text_listener(n_time) {
-  self endon(#"hint_text_removed", # "disconnect");
-  self waittilltimeout(n_time, # "kill_hint_text", # "death", # "hint_text_removed", # "disconnect");
+  self endon(#"hint_text_removed", #"disconnect");
+  self waittilltimeout(n_time, #"kill_hint_text", #"death", #"hint_text_removed", #"disconnect");
   hide_hint_text(0);
 }
 

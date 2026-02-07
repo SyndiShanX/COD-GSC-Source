@@ -248,12 +248,12 @@ function_74872db6() {
 }
 
 function_126999be() {
-  level zm_utility::function_e64ac3b6(7, # "hash_75a75e4d68452af4");
+  level zm_utility::function_e64ac3b6(7, #"hash_75a75e4d68452af4");
   level thread zm_audio::sndannouncerplayvox(#"hellhound", undefined, undefined, undefined, 1);
 }
 
 function_7b3abf7b() {
-  level zm_utility::function_e64ac3b6(17, # "hash_2ab45b2d46ada063");
+  level zm_utility::function_e64ac3b6(17, #"hash_2ab45b2d46ada063");
   level thread zm_audio::sndannouncerplayvox(#"electric_zombie", undefined, undefined, 3, 1);
 }
 
@@ -276,7 +276,7 @@ intro_zombie_dog(n_round_number) {
 
 function_b4cae8b9() {
   level flag::wait_till("started_defend_area");
-  util::delay(15, "end_game", &zm_round_spawning::function_376e51ef, # "zombie_dog");
+  util::delay(15, "end_game", &zm_round_spawning::function_376e51ef, #"zombie_dog");
 }
 
 intro_electric_zombie(n_round_number) {
@@ -298,7 +298,7 @@ intro_electric_zombie(n_round_number) {
 
 function_6091b49b() {
   level flag::wait_till("started_defend_area");
-  util::delay(15, "end_game", &zm_round_spawning::function_376e51ef, # "zombie_electric");
+  util::delay(15, "end_game", &zm_round_spawning::function_376e51ef, #"zombie_electric");
 }
 
 function_a39e7a56() {
@@ -330,18 +330,18 @@ function_a39e7a56() {
 }
 
 function_84139b27() {
-  zm_utility::function_c492c4d6("docks", "s_destination_docks", array("docks_2"), array(#"sunken", # "lighthouse", # "decon", # "station"), # "hash_40f8b1314b80b85d", # "hash_6771074908d56993");
-  zm_utility::function_c492c4d6("lighthouse", "s_destination_lighthouse", array("lighthouse_level_1", "lighthouse_level_2"), array(#"beach", # "docks", # "forecastle", # "sunken"), # "hash_39a57c12eb43e417", # "hash_2cf824933e1a8ac1");
-  zm_utility::function_c492c4d6("station", "s_destination_station", array("lighthouse_station"), array(#"beach", # "sundeck", # "geo", # "infusion"), # "hash_473af639aa6a1dc5", # "hash_1b75a3705bfd446b");
-  zm_utility::function_c492c4d6("beach", "s_destination_beach", array("beach"), array(#"decon", # "geo", # "station", # "sundeck"), # "hash_1c2b8784bb8aa590", # "hash_9162184ef7f0220");
-  zm_utility::function_c492c4d6("sundeck", "s_destination_sundeck", array("sun_deck", "bridge", "navigation"), array(#"forecastle", # "station", # "geo", # "storage"), # "hash_471148d113f50e0c", # "hash_34e048217bee05fc");
-  zm_utility::function_c492c4d6("forecastle", "s_destination_forecastle", array("forecastle"), array(#"sunken", # "sundeck", # "lighthouse", # "crevasse"), # "hash_6b39e945c6763df5", # "hash_1dd68872a158d43b");
-  zm_utility::function_c492c4d6("sunken", "s_destination_sunken", array("sunken_path"), array(#"forecastle", # "crevasse", # "lighthouse", # "docks"), # "hash_5a8610793f761a8b", # "hash_117ffcace4813a85");
-  zm_utility::function_c492c4d6("crevasse", "s_destination_crevasse", array("frozen_crevasse"), array(#"forecastle", # "lighthouse", # "station", # "sunken"), # "hash_44fd8f5db56ca8cd", # "hash_6a7f34c402b66923");
-  zm_utility::function_c492c4d6("decon", "s_destination_decon", array("decontamination", "security_lobby"), array(#"infusion", # "storage", # "docks", # "sundeck"), # "hash_7e711c2bf9dc32ea", # "hash_2e2da9c51dd43f6");
-  zm_utility::function_c492c4d6("geo", "s_destination_geo", array("geological_processing", "security_lobby"), array(#"infusion", # "storage", # "crevasse", # "docks"), # "hash_42e3987404caee2e", # "hash_7714e6727380675a");
-  zm_utility::function_c492c4d6("infusion", "s_destination_infusion", array("human_infusion"), array(#"decon", # "beach", # "infusion", # "crevasse"), # "hash_eb74e8efde96bb6", # "hash_39c6252f8f92d0f2");
-  zm_utility::function_c492c4d6("storage", "s_destination_storage", array("specimen_storage"), array(#"decon", # "beach", # "infusion", # "crevasse"), # "hash_5571176820f1f5c2", # "hash_28ea515ade07dde");
+  zm_utility::function_c492c4d6("docks", "s_destination_docks", array("docks_2"), array(#"sunken", #"lighthouse", #"decon", #"station"), #"hash_40f8b1314b80b85d", #"hash_6771074908d56993");
+  zm_utility::function_c492c4d6("lighthouse", "s_destination_lighthouse", array("lighthouse_level_1", "lighthouse_level_2"), array(#"beach", #"docks", #"forecastle", #"sunken"), #"hash_39a57c12eb43e417", #"hash_2cf824933e1a8ac1");
+  zm_utility::function_c492c4d6("station", "s_destination_station", array("lighthouse_station"), array(#"beach", #"sundeck", #"geo", #"infusion"), #"hash_473af639aa6a1dc5", #"hash_1b75a3705bfd446b");
+  zm_utility::function_c492c4d6("beach", "s_destination_beach", array("beach"), array(#"decon", #"geo", #"station", #"sundeck"), #"hash_1c2b8784bb8aa590", #"hash_9162184ef7f0220");
+  zm_utility::function_c492c4d6("sundeck", "s_destination_sundeck", array("sun_deck", "bridge", "navigation"), array(#"forecastle", #"station", #"geo", #"storage"), #"hash_471148d113f50e0c", #"hash_34e048217bee05fc");
+  zm_utility::function_c492c4d6("forecastle", "s_destination_forecastle", array("forecastle"), array(#"sunken", #"sundeck", #"lighthouse", #"crevasse"), #"hash_6b39e945c6763df5", #"hash_1dd68872a158d43b");
+  zm_utility::function_c492c4d6("sunken", "s_destination_sunken", array("sunken_path"), array(#"forecastle", #"crevasse", #"lighthouse", #"docks"), #"hash_5a8610793f761a8b", #"hash_117ffcace4813a85");
+  zm_utility::function_c492c4d6("crevasse", "s_destination_crevasse", array("frozen_crevasse"), array(#"forecastle", #"lighthouse", #"station", #"sunken"), #"hash_44fd8f5db56ca8cd", #"hash_6a7f34c402b66923");
+  zm_utility::function_c492c4d6("decon", "s_destination_decon", array("decontamination", "security_lobby"), array(#"infusion", #"storage", #"docks", #"sundeck"), #"hash_7e711c2bf9dc32ea", #"hash_2e2da9c51dd43f6");
+  zm_utility::function_c492c4d6("geo", "s_destination_geo", array("geological_processing", "security_lobby"), array(#"infusion", #"storage", #"crevasse", #"docks"), #"hash_42e3987404caee2e", #"hash_7714e6727380675a");
+  zm_utility::function_c492c4d6("infusion", "s_destination_infusion", array("human_infusion"), array(#"decon", #"beach", #"infusion", #"crevasse"), #"hash_eb74e8efde96bb6", #"hash_39c6252f8f92d0f2");
+  zm_utility::function_c492c4d6("storage", "s_destination_storage", array("specimen_storage"), array(#"decon", #"beach", #"infusion", #"crevasse"), #"hash_5571176820f1f5c2", #"hash_28ea515ade07dde");
   a_str_keys = getarraykeys(level.a_s_defend_areas);
 
   foreach(s_defend_area in level.a_s_defend_areas) {
@@ -406,27 +406,27 @@ function_9217567c() {
 }
 
 function_ac904e5e() {
-  zm_utility::function_742f2c18(1, # "zombie", 8, 6);
-  zm_utility::function_742f2c18(2, # "zombie", 10, 6);
-  zm_utility::function_742f2c18(3, # "zombie", 10, 6);
-  zm_utility::function_742f2c18(4, # "zombie", 10, 6);
-  zm_utility::function_742f2c18(5, # "zombie", 12, 6);
-  zm_utility::function_742f2c18(6, # "zombie", 12, 6);
-  zm_utility::function_742f2c18(7, # "zombie", 12, 8);
-  zm_utility::function_742f2c18(8, # "zombie", 14, 8);
-  zm_utility::function_742f2c18(9, # "zombie", 14, 8);
-  zm_utility::function_742f2c18(10, # "zombie", 14, 10);
-  zm_utility::function_742f2c18(11, # "zombie", 16, 10);
-  zm_utility::function_742f2c18(12, # "zombie", 16, 10);
-  zm_utility::function_742f2c18(13, # "zombie", 16, 12);
-  zm_utility::function_742f2c18(14, # "zombie", 16, 12);
-  zm_utility::function_742f2c18(15, # "zombie", 16, 14);
-  zm_utility::function_742f2c18(16, # "zombie", 20, 14);
-  zm_utility::function_742f2c18(17, # "zombie", 24, 14);
+  zm_utility::function_742f2c18(1, #"zombie", 8, 6);
+  zm_utility::function_742f2c18(2, #"zombie", 10, 6);
+  zm_utility::function_742f2c18(3, #"zombie", 10, 6);
+  zm_utility::function_742f2c18(4, #"zombie", 10, 6);
+  zm_utility::function_742f2c18(5, #"zombie", 12, 6);
+  zm_utility::function_742f2c18(6, #"zombie", 12, 6);
+  zm_utility::function_742f2c18(7, #"zombie", 12, 8);
+  zm_utility::function_742f2c18(8, #"zombie", 14, 8);
+  zm_utility::function_742f2c18(9, #"zombie", 14, 8);
+  zm_utility::function_742f2c18(10, #"zombie", 14, 10);
+  zm_utility::function_742f2c18(11, #"zombie", 16, 10);
+  zm_utility::function_742f2c18(12, #"zombie", 16, 10);
+  zm_utility::function_742f2c18(13, #"zombie", 16, 12);
+  zm_utility::function_742f2c18(14, #"zombie", 16, 12);
+  zm_utility::function_742f2c18(15, #"zombie", 16, 14);
+  zm_utility::function_742f2c18(16, #"zombie", 20, 14);
+  zm_utility::function_742f2c18(17, #"zombie", 24, 14);
   n_zombie_min = 16;
 
   for(n_round = 18; n_round < 255; n_round++) {
-    zm_utility::function_742f2c18(n_round, # "zombie", undefined, n_zombie_min);
+    zm_utility::function_742f2c18(n_round, #"zombie", undefined, n_zombie_min);
     n_zombie_min++;
     n_zombie_min = math::clamp(n_zombie_min, 16, 24);
   }
@@ -483,7 +483,7 @@ function_4fe4866f() {
   level endon(#"end_game");
   var_2876a1a4 = getvehiclenode("vnd_zipline_lighthouse_to_facility_0", "targetname");
   n_obj_id = gameobjects::get_next_obj_id();
-  objective_add(n_obj_id, "active", var_2876a1a4.origin, # "hash_5cfdced70a5a5948");
+  objective_add(n_obj_id, "active", var_2876a1a4.origin, #"hash_5cfdced70a5a5948");
   function_da7940a3(n_obj_id, 1);
 
   foreach(player in level.players) {
@@ -496,7 +496,7 @@ function_f8dc2ddb(n_obj_id) {
   self endon(#"disconnect");
 
   while(true) {
-    s_results = self waittill(#"hash_702a9c7f10066b19", # "death");
+    s_results = self waittill(#"hash_702a9c7f10066b19", #"death");
 
     if(s_results.str_location === "lighthouse_to_facility" || s_results._notify === "death") {
       objective_setinvisibletoplayer(n_obj_id, self);

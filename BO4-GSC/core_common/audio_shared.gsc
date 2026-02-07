@@ -104,7 +104,7 @@ sndupdatevehiclecontext(added) {
 
 playtargetmissilesound(alias, looping) {
   self notify(#"stop_target_missile_sound");
-  self endon(#"stop_target_missile_sound", # "disconnect", # "death");
+  self endon(#"stop_target_missile_sound", #"disconnect", #"death");
 
   if(isDefined(alias)) {
     time = soundgetplaybacktime(alias) * 0.001;
@@ -124,17 +124,17 @@ on_missile_lock(params) {
 
   if(!flag::get("playing_stinger_fired_at_me")) {
     self thread playtargetmissilesound(params.weapon.lockontargetlockedsound, params.weapon.lockontargetlockedsoundloops);
-    self waittill(#"stinger_fired_at_me", # "missile_unlocked", # "death");
+    self waittill(#"stinger_fired_at_me", #"missile_unlocked", #"death");
     self notify(#"stop_target_missile_sound");
   }
 }
 
 function_c25f7d1(params) {
   assert(isplayer(self));
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self flag::set("playing_stinger_fired_at_me");
   self thread playtargetmissilesound(params.weapon.lockontargetfiredonsound, params.weapon.lockontargetfiredonsoundloops);
-  params.projectile waittill(#"projectile_impact_explode", # "death");
+  params.projectile waittill(#"projectile_impact_explode", #"death");
   self notify(#"stop_target_missile_sound");
   self flag::clear("playing_stinger_fired_at_me");
 }

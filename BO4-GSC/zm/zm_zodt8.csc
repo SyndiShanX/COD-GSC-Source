@@ -101,7 +101,7 @@ on_localplayer_spawned(localclientnum) {
 
 function_2dca9b5b(localclientnum, var_630fc8b) {
   level endon(#"game_ended");
-  self endoncallback(&function_853e8354, # "death");
+  self endoncallback(&function_853e8354, #"death");
   b_underwater = var_630fc8b;
 
   while(isalive(self)) {
@@ -123,7 +123,7 @@ function_efae9657(localclientnum, var_630fc8b) {
   self notify("505c3419935f4f3e");
   self endon("505c3419935f4f3e");
   level endon(#"game_ended");
-  self endoncallback(&function_853e8354, # "death");
+  self endoncallback(&function_853e8354, #"death");
   b_underwater = var_630fc8b;
 
   if(isalive(self)) {
@@ -187,14 +187,14 @@ function_24f8e5f9() {
   self.var_655d9e4b = 0;
   self.var_25e6f383 = 0;
   self.var_e95193b8 = [];
-  self.var_e95193b8[0] = array(#"hash_505479d5e2f48a6", # "hash_505489d5e2f4a59", # "hash_505459d5e2f4540", # "hash_505469d5e2f46f3", # "hash_5054b9d5e2f4f72", # "hash_5054c9d5e2f5125", # "hash_505499d5e2f4c0c", # "hash_5054a9d5e2f4dbf", # "hash_5054f9d5e2f563e", # "hash_505509d5e2f57f1", # "hash_3744cc670a5b706b");
-  self.var_e95193b8[1] = array(#"hash_3ecc851af829fe68", # "hash_3ecc861af82a001b", # "hash_3ecc871af82a01ce", # "hash_3ecc881af82a0381", # "hash_3ecc891af82a0534", # "hash_3ecc8a1af82a06e7", # "hash_3ecc8b1af82a089a", # "hash_3ecc8c1af82a0a4d", # "hash_3ecc7d1af829f0d0", # "hash_3ecc7e1af829f283", # "hash_5f880ad3af5e4911");
-  self.var_e95193b8[2] = array(#"hash_5edf278d3c3f5192", # "hash_5edf288d3c3f5345", # "hash_5edf258d3c3f4e2c", # "hash_5edf268d3c3f4fdf", # "hash_5edf238d3c3f4ac6", # "hash_5edf248d3c3f4c79", # "hash_5edf218d3c3f4760", # "hash_5edf228d3c3f4913", # "hash_5edf2f8d3c3f5f2a", # "hash_5edf308d3c3f60dd", # "hash_74855cfd5f9acfcf");
+  self.var_e95193b8[0] = array(#"hash_505479d5e2f48a6", #"hash_505489d5e2f4a59", #"hash_505459d5e2f4540", #"hash_505469d5e2f46f3", #"hash_5054b9d5e2f4f72", #"hash_5054c9d5e2f5125", #"hash_505499d5e2f4c0c", #"hash_5054a9d5e2f4dbf", #"hash_5054f9d5e2f563e", #"hash_505509d5e2f57f1", #"hash_3744cc670a5b706b");
+  self.var_e95193b8[1] = array(#"hash_3ecc851af829fe68", #"hash_3ecc861af82a001b", #"hash_3ecc871af82a01ce", #"hash_3ecc881af82a0381", #"hash_3ecc891af82a0534", #"hash_3ecc8a1af82a06e7", #"hash_3ecc8b1af82a089a", #"hash_3ecc8c1af82a0a4d", #"hash_3ecc7d1af829f0d0", #"hash_3ecc7e1af829f283", #"hash_5f880ad3af5e4911");
+  self.var_e95193b8[2] = array(#"hash_5edf278d3c3f5192", #"hash_5edf288d3c3f5345", #"hash_5edf258d3c3f4e2c", #"hash_5edf268d3c3f4fdf", #"hash_5edf238d3c3f4ac6", #"hash_5edf248d3c3f4c79", #"hash_5edf218d3c3f4760", #"hash_5edf228d3c3f4913", #"hash_5edf2f8d3c3f5f2a", #"hash_5edf308d3c3f60dd", #"hash_74855cfd5f9acfcf");
 }
 
 function_3353845b(localclientnum) {
   level endon(#"game_ended");
-  self endoncallback(&function_853e8354, # "death");
+  self endoncallback(&function_853e8354, #"death");
   self endon(#"hash_32c7af154e6c4ded");
   n_waittime = 5;
   var_d82f94cd = int(180 * 1000);
@@ -233,7 +233,7 @@ function_5b0384a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   switch (newval) {
     case 0:
       level scene::stop(#"p8_fxanim_zm_zod_cargo_hold_net_bundle", 1);
-      level scene::delete_scene_spawned_ents(localclientnum, # "p8_fxanim_zm_zod_cargo_hold_net_bundle");
+      level scene::delete_scene_spawned_ents(localclientnum, #"p8_fxanim_zm_zod_cargo_hold_net_bundle");
       break;
     case 1:
       level thread scene::init(#"p8_fxanim_zm_zod_cargo_hold_net_bundle");
@@ -495,7 +495,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
       self stoploopsound(self.sfx_id);
     }
 
-    self playSound(localclientnum, # "hash_75b9c9ad6ebe8af2");
+    self playSound(localclientnum, #"hash_75b9c9ad6ebe8af2");
     self stoprenderoverridebundle(#"hash_1589a47f2fdc6c67");
 
     if(isDefined(self.fx)) {
@@ -520,8 +520,8 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
     self.fx = undefined;
   }
 
-  self playSound(localclientnum, # "hash_5de064f33e9e49b8");
-  self playSound(localclientnum, # "hash_3d8fef5997663b17");
+  self playSound(localclientnum, #"hash_5de064f33e9e49b8");
+  self playSound(localclientnum, #"hash_3d8fef5997663b17");
 }
 
 sndactorunderwater(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

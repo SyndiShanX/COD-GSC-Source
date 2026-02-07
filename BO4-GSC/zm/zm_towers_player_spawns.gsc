@@ -111,7 +111,7 @@ function_b117d867() {
   scene::init("p8_fxanim_zm_towers_center_platform_rails_bundle");
   level flag::wait_till("begin_spawning");
   t_trigger = getent("t_raise_center_platform_rails", "targetname");
-  t_trigger waittilltimeout(6, # "trigger");
+  t_trigger waittilltimeout(6, #"trigger");
   scene::play("p8_fxanim_zm_towers_center_platform_rails_bundle");
   t_trigger delete();
 }
@@ -144,7 +144,7 @@ function_c49fe830() {
 
     if(zm_utility::is_player_valid(self, 0, 0) && isinarray(var_d4061661, str_zone) && !level.var_c9942395) {
       level thread function_a1379826();
-      self thread zm_audio::create_and_play_dialog(#"location_enter", # "arena");
+      self thread zm_audio::create_and_play_dialog(#"location_enter", #"arena");
       break;
     }
 

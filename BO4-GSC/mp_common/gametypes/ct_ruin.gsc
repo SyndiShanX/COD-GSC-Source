@@ -38,7 +38,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_e31c5d7a = &ct_bots::function_e31c5d7a;
   callback::on_game_playing(&ct_core::function_1e84c767);
   globallogic_spawn::addsupportedspawnpointtype("ct");
-  ct_utils::function_6046a5e3(#"ar_fastfire_t8", array(#"steadyaim", # "steadyaim2", # "stalker", # "uber"));
+  ct_utils::function_6046a5e3(#"ar_fastfire_t8", array(#"steadyaim", #"steadyaim2", #"stalker", #"uber"));
   ct_utils::function_c3e647e2(#"pistol_standard_t8");
   level.var_d6d98fbe = 0;
   level.var_9b517372 = 0;
@@ -298,8 +298,8 @@ j_fore_le_01() {
 }
 
 function_4b5c96a0() {
-  self endon(#"death", # "target_destroyed");
-  level endon(#"ct_ruin_end", # "hash_42057c28bd084d77");
+  self endon(#"death", #"target_destroyed");
+  level endon(#"ct_ruin_end", #"hash_42057c28bd084d77");
   self.waypoint gameobjects::set_visible_team(#"any");
   b_keyline = 0;
 
@@ -308,7 +308,7 @@ function_4b5c96a0() {
     n_bomb_timer = int(gettime() + 1000 + int(40 * 1000));
     setbombtimer("A", n_bomb_timer);
     setmatchflag("bomb_timer_a", 1);
-    level thread ct_bots::activate_bots(15, # "axis");
+    level thread ct_bots::activate_bots(15, #"axis");
     level.var_9b517372 = 1;
     level.var_ebad4ea8 = gettime();
     level thread function_a3e6f3d();

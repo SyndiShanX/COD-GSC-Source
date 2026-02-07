@@ -17,6 +17,6 @@ function_6624b679(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     up = anglestoup(self.angles + (0, -90, -90));
     forward = anglesToForward(self.angles + (0, -90, -90));
     playFX(localclientnum, level._effect[# "medallion_exp"], self.origin, forward, up);
-    playSound(localclientnum, # "hash_23ed06ab941bc579", self.origin);
+    playSound(localclientnum, #"hash_23ed06ab941bc579", self.origin);
   }
 }

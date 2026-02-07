@@ -429,7 +429,7 @@ getclosestnode(entity, nodes) {
 
 function_b510a832() {
   level endon(#"game_ended");
-  self endon(#"death", # "state_changed");
+  self endon(#"death", #"state_changed");
   start_node = getclosestnode(self, self.patrol_path.path);
   start_index = 0;
 
@@ -451,7 +451,7 @@ function_b510a832() {
 
       self.var_80780af2 = next_goal;
       self.var_9a79d89d = next_goal;
-      waitresult = self waittilltimeout(30, # "goal");
+      waitresult = self waittilltimeout(30, #"goal");
 
       if(isDefined(self.var_50826790) && self.var_50826790) {
         self.var_ef59b90 = 5;

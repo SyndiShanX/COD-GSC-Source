@@ -421,7 +421,7 @@ function_8fd2e04f(localclientnum) {
 
         if(playfx && vehicle.scriptvehicletype === "player_muscle" && var_5d188f8a) {
           if(!isDefined(vehicle.var_2dc49011)) {
-            vehicle.var_2dc49011 = vehicle util::playFXOnTag(localclientnum, # "hash_77086882cbd57674", vehicle, "tag_origin");
+            vehicle.var_2dc49011 = vehicle util::playFXOnTag(localclientnum, #"hash_77086882cbd57674", vehicle, "tag_origin");
           }
 
           continue;

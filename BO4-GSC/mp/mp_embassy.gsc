@@ -52,7 +52,7 @@ prematch_init() {
 
   if(util::isfirstround() && getgametypesetting(#"allowmapscripting")) {
     exploder::exploder("fxexp_embassy_explosion");
-    level util::delay(4, "game_ended", &scene::play, # "p8_fxanim_mp_emb_apc_arrive_bundle");
+    level util::delay(4, "game_ended", &scene::play, #"p8_fxanim_mp_emb_apc_arrive_bundle");
     level thread scene::play(#"p8_fxanim_mp_emb_balloons_fly_bundle");
     mdl_apc = getent("spawn_flavor_apc_explode", "targetname");
     mdl_apc setModel("veh_t8_mil_apc_macv_dead_no_turret_no_armor_mp_grey");

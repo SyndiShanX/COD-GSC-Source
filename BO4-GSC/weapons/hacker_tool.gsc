@@ -81,7 +81,7 @@ clearhackertarget(weapon, successfulhack, spawned) {
 }
 
 watchhackertoolfired() {
-  self endon(#"disconnect", # "death", # "killhackermonitor");
+  self endon(#"disconnect", #"death", #"killhackermonitor");
 
   while(true) {
     waitresult = self waittill(#"hacker_tool_fired");
@@ -154,7 +154,7 @@ watchhackertoolfired() {
         self stats::function_dad108fa(#"hack_enemy_target", 1);
       }
 
-      self stats::function_e24eec31(weapon, # "used", 1);
+      self stats::function_e24eec31(weapon, #"used", 1);
     }
 
     clearhackertarget(weapon, 1, 0);
@@ -192,7 +192,7 @@ event_handler[grenade_pullback] function_f4068d35(eventstruct) {
 }
 
 watchhackertoolinterrupt(weapon) {
-  self endon(#"disconnect", # "hacker_tool_fired", # "death", # "weapon_change", # "grenade_fire");
+  self endon(#"disconnect", #"hacker_tool_fired", #"death", #"weapon_change", #"grenade_fire");
 
   while(true) {
     waitresult = level waittill(#"use_interrupt");
@@ -206,15 +206,15 @@ watchhackertoolinterrupt(weapon) {
 }
 
 watchhackertoolend(weapon) {
-  self endon(#"disconnect", # "hacker_tool_fired");
-  self waittill(#"weapon_change", # "death", # "hacker_tool_fired", # "disconnect");
+  self endon(#"disconnect", #"hacker_tool_fired");
+  self waittill(#"weapon_change", #"death", #"hacker_tool_fired", #"disconnect");
   clearhackertarget(weapon, 0, 0);
   self clientfield::set_to_player("hacker_tool", 0);
   self stophackertoolsoundloop();
 }
 
 watchforgrenadefire(weapon) {
-  self endon(#"disconnect", # "hacker_tool_fired", # "weapon_change", # "death");
+  self endon(#"disconnect", #"hacker_tool_fired", #"weapon_change", #"death");
 
   while(true) {
     waitresult = self waittill(#"grenade_fire");
@@ -254,7 +254,7 @@ stophackertoolsoundloop() {
 }
 
 hackertooltargetloop(weapon) {
-  self endon(#"disconnect", # "death", # "weapon_change", # "grenade_fire");
+  self endon(#"disconnect", #"death", #"weapon_change", #"grenade_fire");
   self clientfield::set_to_player("hacker_tool", 1);
   self playhackertoolsoundloop();
 
@@ -421,9 +421,9 @@ hackertooltargetloop(weapon) {
 }
 
 watchtargetentityupdate(besttarget) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self notify(#"watchtargetentityupdate");
-  self endon(#"watchtargetentityupdate", # "clearhackertarget");
+  self endon(#"watchtargetentityupdate", #"clearhackertarget");
   besttarget endon(#"death");
   waitresult = besttarget waittill(#"hackertool_update_ent");
   heatseekingmissile::initlockfield(waitresult.entity);

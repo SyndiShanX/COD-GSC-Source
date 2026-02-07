@@ -78,7 +78,7 @@ gettargeteyeoffset(target) {
 }
 
 fire_for_time(totalfiretime, turretidx, target, intervalscale = 1) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
 
   if(!isDefined(turretidx)) {
     turretidx = 0;
@@ -99,7 +99,7 @@ fire_for_time(totalfiretime, turretidx, target, intervalscale = 1) {
 }
 
 fire_for_rounds(firecount, turretidx, target) {
-  self endon(#"death", # "fire_stop", # "change_state");
+  self endon(#"death", #"fire_stop", #"change_state");
 
   if(!isDefined(turretidx)) {
     turretidx = 0;
@@ -116,7 +116,7 @@ fire_for_rounds(firecount, turretidx, target) {
 }
 
 __fire_for_rounds_internal(firecount, fireinterval, turretidx, target) {
-  self endon(#"death", # "fire_stop", # "change_state");
+  self endon(#"death", #"fire_stop", #"change_state");
   assert(isDefined(turretidx));
 
   if(isDefined(target)) {
@@ -336,12 +336,12 @@ javelin_losetargetatrighttimeprojectile(proj, target) {
 
 waittill_pathing_done(maxtime = 15) {
   self endon(#"change_state");
-  result = self waittilltimeout(maxtime, # "near_goal", # "force_goal", # "reached_end_node", # "pathfind_failed");
+  result = self waittilltimeout(maxtime, #"near_goal", #"force_goal", #"reached_end_node", #"pathfind_failed");
 }
 
 waittill_pathresult(maxtime = 0.5) {
   self endon(#"change_state");
-  result = self waittilltimeout(maxtime, # "pathfind_failed", # "pathfind_succeeded", # "change_state");
+  result = self waittilltimeout(maxtime, #"pathfind_failed", #"pathfind_succeeded", #"change_state");
   succeeded = result === "pathfind_succeeded";
   return succeeded;
 }
@@ -394,7 +394,7 @@ throw_off_balance(damagetype, hitpoint, hitdirection, hitlocationinfo) {
 }
 
 predicted_collision() {
-  self endon(#"crash_done", # "death");
+  self endon(#"crash_done", #"death");
 
   while(true) {
     waitresult = self waittill(#"veh_predictedcollision");
@@ -413,7 +413,7 @@ collision_fx(normal) {
 }
 
 nudge_collision() {
-  self endon(#"crash_done", # "power_off_done", # "death");
+  self endon(#"crash_done", #"power_off_done", #"death");
   self notify(#"end_nudge_collision");
   self endon(#"end_nudge_collision");
 
@@ -470,7 +470,7 @@ nudge_collision() {
 }
 
 level_out_for_landing() {
-  self endon(#"death", # "change_state", # "landed");
+  self endon(#"death", #"change_state", #"landed");
 
   while(true) {
     velocity = self.velocity;
@@ -555,7 +555,7 @@ iff_override(owner, time = 60) {
   timeout = isDefined(self.settings) ? self.settings.ifftimetillrevert : time;
   assert(timeout > 10);
   self thread iff_notifymeinnsec(timeout - 10, "iff_override_revert_warn");
-  msg = self waittilltimeout(timeout, # "iff_override_reverted");
+  msg = self waittilltimeout(timeout, #"iff_override_reverted");
 
   if(msg == "timeout") {
     self notify(#"iff_override_reverted");
@@ -1198,7 +1198,7 @@ emp_startup_fx() {
 }
 
 defaultstate_emped_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   time = params.param0;
   assert(isDefined(time));
   util::cooldown("emped_timer", time);
@@ -1379,7 +1379,7 @@ defaultstate_pain_exit(params) {
 }
 
 function_97e9de18(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   wait 0.2;
   self evaluate_connections();
 }

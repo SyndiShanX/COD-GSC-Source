@@ -137,7 +137,7 @@ function_fa444840() {
   level waittill(#"game_playing");
 
   while(true) {
-    result = self waittill(#"weapon_change_complete", # "death");
+    result = self waittill(#"weapon_change_complete", #"death");
 
     if(result._notify == # "death") {
       self function_43e771ee(result._notify);
@@ -159,7 +159,7 @@ function_fa444840() {
 }
 
 breadcrumbs() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   level endon(#"game_ended");
   waittime = 10;
 
@@ -184,7 +184,7 @@ breadcrumbs() {
 }
 
 travel_dist() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   waittime = 1;
   minimummovedistance = 16;
   wait 4;
@@ -248,14 +248,14 @@ wall_run() {
   self.timespentwallrunninginlife = 0;
 
   while(true) {
-    notification = self waittill(#"wallrun_begin", # "death", # "disconnect", # "stop_player_monitor_wall_run");
+    notification = self waittill(#"wallrun_begin", #"death", #"disconnect", #"stop_player_monitor_wall_run");
 
     if(notification._notify == "death") {
       break;
     }
 
     self.lastwallrunstarttime = gettime();
-    notification = self waittill(#"wallrun_end", # "death", # "disconnect", # "stop_player_monitor_wall_run");
+    notification = self waittill(#"wallrun_end", #"death", #"disconnect", #"stop_player_monitor_wall_run");
     self.timespentwallrunninginlife += gettime() - self.lastwallrunstarttime;
 
     if(notification._notify == "death") {
@@ -272,14 +272,14 @@ swimming() {
   self.timespentswimminginlife = 0;
 
   while(true) {
-    notification = self waittill(#"swimming_begin", # "death", # "disconnect", # "stop_player_monitor_swimming");
+    notification = self waittill(#"swimming_begin", #"death", #"disconnect", #"stop_player_monitor_swimming");
 
     if(notification._notify == "death") {
       break;
     }
 
     self.lastswimmingstarttime = gettime();
-    notification = self waittill(#"swimming_end", # "death", # "disconnect", # "stop_player_monitor_swimming");
+    notification = self waittill(#"swimming_end", #"death", #"disconnect", #"stop_player_monitor_swimming");
     self.timespentswimminginlife += gettime() - self.lastswimmingstarttime;
 
     if(notification._notify == "death") {
@@ -296,7 +296,7 @@ slide() {
   self.numberofslidesinlife = 0;
 
   while(true) {
-    notification = self waittill(#"slide_begin", # "death", # "disconnect", # "stop_player_monitor_slide");
+    notification = self waittill(#"slide_begin", #"death", #"disconnect", #"stop_player_monitor_slide");
 
     if(notification._notify == "death") {
       break;
@@ -304,7 +304,7 @@ slide() {
 
     self.lastslidestarttime = gettime();
     self.numberofslidesinlife++;
-    notification = self waittill(#"slide_end", # "death", # "disconnect", # "stop_player_monitor_slide");
+    notification = self waittill(#"slide_end", #"death", #"disconnect", #"stop_player_monitor_slide");
 
     if(notification._notify == "death") {
       break;
@@ -320,7 +320,7 @@ doublejump() {
   self.numberofdoublejumpsinlife = 0;
 
   while(true) {
-    notification = self waittill(#"doublejump_begin", # "death", # "disconnect", # "stop_player_monitor_doublejump");
+    notification = self waittill(#"doublejump_begin", #"death", #"disconnect", #"stop_player_monitor_doublejump");
 
     if(notification._notify == "death") {
       break;
@@ -328,7 +328,7 @@ doublejump() {
 
     self.lastdoublejumpstarttime = gettime();
     self.numberofdoublejumpsinlife++;
-    notification = self waittill(#"doublejump_end", # "death", # "disconnect", # "stop_player_monitor_doublejump");
+    notification = self waittill(#"doublejump_end", #"death", #"disconnect", #"stop_player_monitor_doublejump");
 
     if(notification._notify == "death") {
       break;

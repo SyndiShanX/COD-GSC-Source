@@ -109,7 +109,7 @@ createtrophysystemwatcher(watcher) {
 }
 
 trophysystemstopped() {
-  self endon(#"death", # "trophysystemstopped");
+  self endon(#"death", #"trophysystemstopped");
   self util::waittillnotmoving();
   self.trophysystemstationary = 1;
   self notify(#"trophysystemstopped");
@@ -141,7 +141,7 @@ ontrophysystemspawn(watcher, player) {
   self.trophysystemstationary = 1;
 
   if(isalive(player)) {
-    player stats::function_e24eec31(self.weapon, # "used", 1);
+    player stats::function_e24eec31(self.weapon, #"used", 1);
   }
 
   self thread trophyactive(player);
@@ -194,7 +194,7 @@ ontrophysystemsmashed(attacker, callback_data) {
 
 trophyactive(owner) {
   owner endon(#"disconnect");
-  self endon(#"death", # "hacked");
+  self endon(#"death", #"hacked");
 
   while(true) {
     if(!isDefined(self)) {

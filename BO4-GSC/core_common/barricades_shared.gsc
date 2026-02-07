@@ -22,7 +22,7 @@ class cbarricade: cdoor {
   }
 
   function function_6c15ac46() {
-    m_e_door endon(#"delete", # "barricade_removed");
+    m_e_door endon(#"delete", #"barricade_removed");
 
     while(true) {
       m_e_door endon(#"delete");
@@ -41,7 +41,7 @@ class cbarricade: cdoor {
   }
 
   function function_da5abae9() {
-    m_e_door endon(#"delete", # "barricade_removed");
+    m_e_door endon(#"delete", #"barricade_removed");
 
     while(true) {
       m_e_door waittill(#"hash_7166c13e79b73f9");

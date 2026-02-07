@@ -115,7 +115,7 @@ init_crane() {
       waitframe(1);
     }
 
-    waitresult = crane waittilltimeout(5, # "draftend");
+    waitresult = crane waittilltimeout(5, #"draftend");
 
     if(waitresult._notify !== "draftend") {
       crane moveto(crane.endpoint, 4);

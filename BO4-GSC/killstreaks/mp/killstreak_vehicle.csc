@@ -49,7 +49,7 @@ demo_think(localclientnum) {
   }
 
   for(;;) {
-    level waittill(#"demo_jump", # "demo_player_switch");
+    level waittill(#"demo_jump", #"demo_player_switch");
     self vehicle::lights_off(localclientnum);
   }
 }
@@ -85,7 +85,7 @@ play_boost_fx(localclientnum) {
     speed = self getspeed();
 
     if(speed > 400) {
-      self playSound(localclientnum, # "mpl_veh_rc_boost");
+      self playSound(localclientnum, #"mpl_veh_rc_boost");
       return;
     }
 

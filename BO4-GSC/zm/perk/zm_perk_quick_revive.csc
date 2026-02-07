@@ -22,7 +22,7 @@ enable_quick_revive_perk_for_level() {
   zm_perks::register_perk_clientfields(#"specialty_quickrevive", &quick_revive_client_field_func, &quick_revive_callback_func);
   zm_perks::register_perk_effects(#"specialty_quickrevive", "revive_light");
   zm_perks::register_perk_init_thread(#"specialty_quickrevive", &init_quick_revive);
-  zm_perks::function_b60f4a9f(#"specialty_quickrevive", # "p8_zm_vapor_altar_icon_01_quickrevive", "zombie/fx8_perk_altar_symbol_ambient_quick_revive", # "zmperksquickrevive");
+  zm_perks::function_b60f4a9f(#"specialty_quickrevive", #"p8_zm_vapor_altar_icon_01_quickrevive", "zombie/fx8_perk_altar_symbol_ambient_quick_revive", #"zmperksquickrevive");
   zm_perks::function_f3c80d73("zombie_perk_bottle_revive", "zombie_perk_totem_quick_revive");
 }
 

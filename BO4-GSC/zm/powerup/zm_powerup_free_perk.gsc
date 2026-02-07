@@ -28,7 +28,7 @@ __init__() {
 
   if(zm_powerups::function_cc33adc8()) {
     str_model = zm_powerups::function_bcfcc27e();
-    zm_powerups::add_zombie_powerup("free_perk", str_model, # "zombie_powerup_free_perk", &zm_powerups::func_should_never_drop, 0, 0, 0);
+    zm_powerups::add_zombie_powerup("free_perk", str_model, #"zombie_powerup_free_perk", &zm_powerups::func_should_never_drop, 0, 0, 0);
   }
 }
 

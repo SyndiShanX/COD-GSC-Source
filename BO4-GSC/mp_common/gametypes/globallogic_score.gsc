@@ -307,7 +307,7 @@ resetscorechain() {
 
 scorechaintimer() {
   self notify(#"score_chain_timer");
-  self endon(#"reset_score_chain", # "score_chain_timer", # "death", # "disconnect");
+  self endon(#"reset_score_chain", #"score_chain_timer", #"death", #"disconnect");
   wait 20;
   self thread resetscorechain();
 }
@@ -459,7 +459,7 @@ giveplayermomentum(event, player, victim, descvalue, weapon, playersaffected) {
   }
 
   if(!isDefined(label)) {
-    player giveplayermomentumnotification(score, # "hash_480234a872bd64ac", descvalue, countstowardrampage, weapon, combatefficiencyscore, eventindex, event, playersaffected);
+    player giveplayermomentumnotification(score, #"hash_480234a872bd64ac", descvalue, countstowardrampage, weapon, combatefficiencyscore, eventindex, event, playersaffected);
     return;
   }
 
@@ -650,11 +650,11 @@ _setplayerscore(player, score, var_e21e8076, var_53c3aa0b) {
 
   if(isDefined(var_e21e8076) && var_e21e8076 != player.pers[# "objscore"]) {
     if(isarenamode()) {
-      amount = var_e21e8076 - player.pers[# "objscore"] + player stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "objective_score", # "arenavalue");
-      player stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "objective_score", # "arenavalue", amount);
+      amount = var_e21e8076 - player.pers[# "objscore"] + player stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"objective_score", #"arenavalue");
+      player stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"objective_score", #"arenavalue", amount);
     } else {
-      amount = var_e21e8076 - player.pers[# "objscore"] + player stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "objective_score", # "statvalue");
-      player stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "objective_score", # "statvalue", amount);
+      amount = var_e21e8076 - player.pers[# "objscore"] + player stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"objective_score", #"statvalue");
+      player stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"objective_score", #"statvalue", amount);
     }
 
     player.pers[# "objscore"] = var_e21e8076;
@@ -836,7 +836,7 @@ _giveplayerkillstreakinternal(player, momentum, oldmomentum, killstreaktypearray
               player scoreevents::specialiststatabilityusage(4, 1);
 
               if(player.heroability.name == "gadget_combat_efficiency") {
-                player stats::function_e24eec31(player.heroability, # "scorestreaks_earned", 1);
+                player stats::function_e24eec31(player.heroability, #"scorestreaks_earned", 1);
 
                 if(!isDefined(player.scorestreaksearnedperuse)) {
                   player.scorestreaksearnedperuse = 0;
@@ -1269,8 +1269,8 @@ updateweaponcontractstart(player) {
     return;
   }
 
-  if(player stats::get_stat(#"weaponcontractdata", # "starttimestamp") == 0) {
-    player stats::set_stat(#"weaponcontractdata", # "starttimestamp", getutc());
+  if(player stats::get_stat(#"weaponcontractdata", #"starttimestamp") == 0) {
+    player stats::set_stat(#"weaponcontractdata", #"starttimestamp", getutc());
   }
 }
 
@@ -1279,14 +1279,14 @@ updateweaponcontractwin(winner) {
     return;
   }
 
-  matcheswon = winner stats::get_stat(#"weaponcontractdata", # "currentvalue") + 1;
-  winner stats::set_stat(#"weaponcontractdata", # "currentvalue", matcheswon);
+  matcheswon = winner stats::get_stat(#"weaponcontractdata", #"currentvalue") + 1;
+  winner stats::set_stat(#"weaponcontractdata", #"currentvalue", matcheswon);
 
-  if((isDefined(winner stats::get_stat(#"weaponcontractdata", # "completetimestamp")) ? winner stats::get_stat(#"weaponcontractdata", # "completetimestamp") : 0) == 0) {
+  if((isDefined(winner stats::get_stat(#"weaponcontractdata", #"completetimestamp")) ? winner stats::get_stat(#"weaponcontractdata", #"completetimestamp") : 0) == 0) {
     targetvalue = getdvarint(#"weapon_contract_target_value", 100);
 
     if(matcheswon >= targetvalue) {
-      winner stats::set_stat(#"weaponcontractdata", # "completetimestamp", getutc());
+      winner stats::set_stat(#"weaponcontractdata", #"completetimestamp", getutc());
     }
   }
 }
@@ -1305,8 +1305,8 @@ updateweaponcontractplayed() {
       continue;
     }
 
-    matchesplayed = player stats::get_stat(#"weaponcontractdata", # "matchesplayed") + 1;
-    player stats::set_stat(#"weaponcontractdata", # "matchesplayed", matchesplayed);
+    matchesplayed = player stats::get_stat(#"weaponcontractdata", #"matchesplayed") + 1;
+    player stats::set_stat(#"weaponcontractdata", #"matchesplayed", matchesplayed);
   }
 }
 
@@ -1618,7 +1618,7 @@ givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
   pixbeginevent(#"givekillstats");
 
   if(self === var_e7a369ea) {
-    self activecamo::function_896ac347(weapon, # "kills", 1);
+    self activecamo::function_896ac347(weapon, #"kills", 1);
     self activecamo::function_1af985ba(weapon);
     self incpersstat(#"kills", 1, 1, 1);
     self.kills = self getpersstat(#"kills");
@@ -1637,7 +1637,7 @@ givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
 
   if(isDefined(evictim) && isplayer(evictim)) {
     self incpersstat(#"ekia", 1, 1, 1);
-    self stats::function_e24eec31(weapon, # "ekia", 1);
+    self stats::function_e24eec31(weapon, #"ekia", 1);
     self contracts::player_contract_event(#"ekia", weapon);
     self.ekia = self getpersstat(#"ekia");
   }
@@ -1645,7 +1645,7 @@ givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
   attacker = self;
 
   if(smeansofdeath === "MOD_HEAD_SHOT" && !killstreaks::is_killstreak_weapon(weapon)) {
-    self activecamo::function_896ac347(weapon, # "headshots", 1);
+    self activecamo::function_896ac347(weapon, #"headshots", 1);
     attacker thread incpersstat(#"headshots", 1, 1, 0);
     attacker.headshots = attacker.pers[# "headshots"];
 
@@ -1673,7 +1673,7 @@ setinflictorstat(einflictor, eattacker, weapon) {
   }
 
   if(!isDefined(einflictor)) {
-    eattacker stats::function_eec52333(weapon, # "hits", 1, eattacker.class_num, weaponpickedup);
+    eattacker stats::function_eec52333(weapon, #"hits", 1, eattacker.class_num, weaponpickedup);
     return;
   }
 
@@ -1694,10 +1694,10 @@ setinflictorstat(einflictor, eattacker, weapon) {
     einflictor.playeraffectedarray[einflictor.playeraffectedarray.size] = self;
 
     if(weapon.rootweapon.name == "tabun_gas") {
-      eattacker stats::function_e24eec31(weapon, # "used", 1);
+      eattacker stats::function_e24eec31(weapon, #"used", 1);
     }
 
-    eattacker stats::function_eec52333(weapon, # "hits", 1, eattacker.class_num, weaponpickedup);
+    eattacker stats::function_eec52333(weapon, #"hits", 1, eattacker.class_num, weaponpickedup);
   }
 }
 
@@ -1761,7 +1761,7 @@ function_b1a3b359(killedplayer, damagedone, weapon, assist_level = undefined) {
       weaponpickedup = 1;
     }
 
-    self stats::function_eec52333(weapon, # "assists", 1, self.class_num, weaponpickedup);
+    self stats::function_eec52333(weapon, #"assists", 1, self.class_num, weaponpickedup);
   }
 
   if(!level.var_724cf71) {

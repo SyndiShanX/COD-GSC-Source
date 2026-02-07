@@ -36,8 +36,8 @@ get_team_color_fx(localclientnum, team, script_bundle) {
 
 get_color_fx(localclientnum, script_bundle) {
   effects = [];
-  effects[# "allies"] = get_team_color_fx(localclientnum, # "allies", script_bundle);
-  effects[# "axis"] = get_team_color_fx(localclientnum, # "axis", script_bundle);
+  effects[# "allies"] = get_team_color_fx(localclientnum, #"allies", script_bundle);
+  effects[# "axis"] = get_team_color_fx(localclientnum, #"axis", script_bundle);
   return effects;
 }
 
@@ -184,7 +184,7 @@ function_a0b844f1(local_client_num, rob_key, rob) {
     return;
   }
 
-  self renderoverridebundle::function_c8d97b8e(local_client_num, # "shoutcaster_flag", rob_key);
+  self renderoverridebundle::function_c8d97b8e(local_client_num, #"shoutcaster_flag", rob_key);
   teamcolor = self.team == # "allies" ? (0.13, 0.87, 0.94) : (0.98, 0.18, 0.1);
 
   if(is_shoutcaster_using_team_identity(local_client_num)) {
@@ -192,10 +192,10 @@ function_a0b844f1(local_client_num, rob_key, rob) {
     teamcolor = function_4823f055(var_f90afe60);
   }
 
-  self function_78233d29(rob, "", # "tintr", teamcolor[0]);
-  self function_78233d29(rob, "", # "tintg", teamcolor[1]);
-  self function_78233d29(rob, "", # "tintb", teamcolor[2]);
-  self function_78233d29(rob, "", # "alpha", 1);
+  self function_78233d29(rob, "", #"tintr", teamcolor[0]);
+  self function_78233d29(rob, "", #"tintg", teamcolor[1]);
+  self function_78233d29(rob, "", #"tintb", teamcolor[2]);
+  self function_78233d29(rob, "", #"alpha", 1);
 }
 
 function_7ed4edd3(playername) {

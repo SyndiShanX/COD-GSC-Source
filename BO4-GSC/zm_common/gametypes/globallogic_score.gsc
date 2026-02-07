@@ -57,7 +57,7 @@ resetscorechain() {
 
 scorechaintimer() {
   self notify(#"score_chain_timer");
-  self endon(#"reset_score_chain", # "score_chain_timer", # "death", # "disconnect");
+  self endon(#"reset_score_chain", #"score_chain_timer", #"death", #"disconnect");
   wait 20;
   self thread resetscorechain();
 }
@@ -373,7 +373,7 @@ initpersstat(dataname, record_stats, init_to_stat_value) {
   }
 
   if(isDefined(init_to_stat_value) && init_to_stat_value == 1) {
-    self.pers[dataname] = self stats::get_stat(#"playerstatslist", dataname, # "statvalue");
+    self.pers[dataname] = self stats::get_stat(#"playerstatslist", dataname, #"statvalue");
   }
 }
 
@@ -533,7 +533,7 @@ setinflictorstat(einflictor, eattacker, weapon) {
   }
 
   if(!isDefined(einflictor)) {
-    eattacker stats::function_e24eec31(weapon, # "hits", 1);
+    eattacker stats::function_e24eec31(weapon, #"hits", 1);
     return;
   }
 
@@ -554,10 +554,10 @@ setinflictorstat(einflictor, eattacker, weapon) {
     einflictor.playeraffectedarray[einflictor.playeraffectedarray.size] = self;
 
     if(weapon == "concussion_grenade" || weapon == "tabun_gas") {
-      eattacker stats::function_e24eec31(weapon, # "used", 1);
+      eattacker stats::function_e24eec31(weapon, #"used", 1);
     }
 
-    eattacker stats::function_e24eec31(weapon, # "hits", 1);
+    eattacker stats::function_e24eec31(weapon, #"hits", 1);
   }
 }
 

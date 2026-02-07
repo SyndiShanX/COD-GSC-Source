@@ -8,11 +8,11 @@
 #namespace character_unlock_ix_bruno_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_ix_bruno_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_ix_bruno_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"ix_bruno_unlock", # "hash_677a722d85cbd06", # "cu28_item", &function_d95e620c, # "hash_1493c49bbdfb17ad");
+  character_unlock_fixup::register_character_unlock(#"ix_bruno_unlock", #"hash_677a722d85cbd06", #"cu28_item", &function_d95e620c, #"hash_1493c49bbdfb17ad");
 }
 
 function_d95e620c() {

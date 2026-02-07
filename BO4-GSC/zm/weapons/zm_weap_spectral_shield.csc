@@ -82,7 +82,7 @@ afterlife_vision_play(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
         foreach(e_player in a_e_players) {
           if(!e_player util::function_50ed1561(localclientnum)) {
-            e_player thread zm_utility::function_bb54a31f(localclientnum, # "hash_529f2ffb7f62ca50", # "hash_242ff4bae72c27b3");
+            e_player thread zm_utility::function_bb54a31f(localclientnum, #"hash_529f2ffb7f62ca50", #"hash_242ff4bae72c27b3");
           }
         }
       }
@@ -134,7 +134,7 @@ afterlife_vision_play(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 function_85e7adcf(localclientnum) {
-  self endon(#"death", # "hash_eefcf8215207987");
+  self endon(#"death", #"hash_eefcf8215207987");
   var_61467197 = level.var_22a393d4.size;
 
   while(true) {
@@ -192,13 +192,13 @@ afterlife_entity_visibility(localclientnum, oldval, newval, bnewent, binitialsna
 }
 
 function_f66111c5(localclientnum) {
-  self endon(#"death", # "set_grabbed");
+  self endon(#"death", #"set_grabbed");
   self playrenderoverridebundle("rob_spectral_vision");
   self show();
 }
 
 function_5681824(localclientnum) {
-  self endon(#"death", # "set_grabbed");
+  self endon(#"death", #"set_grabbed");
   self stoprenderoverridebundle("rob_spectral_vision");
 }
 
@@ -220,7 +220,7 @@ spectral_blast_death(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 }
 
 spectral_key_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", # "disconnect", # "hash_3ed4154ad2e33ec3");
+  self endon(#"death", #"disconnect", #"hash_3ed4154ad2e33ec3");
 
   if(!isDefined(self.var_2723e767)) {
     self.var_2723e767 = [];
@@ -242,11 +242,11 @@ spectral_key_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 }
 
 function_a950c92c(localclientnum) {
-  self endon(#"death", # "hash_3ed4154ad2e33ec3");
+  self endon(#"death", #"hash_3ed4154ad2e33ec3");
 
   while(true) {
     level.var_443d1164 = undefined;
-    s_result = level waittill(#"hash_73ff8d0d706c332d", # "hash_527d9fdde8903b80");
+    s_result = level waittill(#"hash_73ff8d0d706c332d", #"hash_527d9fdde8903b80");
     level.var_443d1164 = 1;
     self function_4700b6cd(localclientnum);
 
@@ -286,7 +286,7 @@ function_4700b6cd(localclientnum) {
   if(isDefined(self.var_4cd8e6cb)) {
     self stoploopsound(self.var_4cd8e6cb);
     self.var_4cd8e6cb = undefined;
-    self playSound(localclientnum, # "hash_3126b098b980b5a3");
+    self playSound(localclientnum, #"hash_3126b098b980b5a3");
   }
 }
 
@@ -295,10 +295,10 @@ function_848179f5(localclientnum) {
     return;
   }
 
-  self endon(#"death", # "hash_4ea2d9a0f785e09b");
+  self endon(#"death", #"hash_4ea2d9a0f785e09b");
 
   if(!isDefined(self.var_4cd8e6cb)) {
-    self playSound(localclientnum, # "hash_3765e25049981166");
+    self playSound(localclientnum, #"hash_3765e25049981166");
     self.var_4cd8e6cb = self playLoopSound(#"hash_170aa1970243fc4a");
   }
 
@@ -310,13 +310,13 @@ function_64148d8e(localclientnum) {
     return;
   }
 
-  self endon(#"death", # "hash_4ea2d9a0f785e09b");
+  self endon(#"death", #"hash_4ea2d9a0f785e09b");
   wait 0.5;
 
   if(isDefined(self) && isDefined(self.var_4cd8e6cb)) {
     self stoploopsound(self.var_4cd8e6cb);
     self.var_4cd8e6cb = undefined;
-    self playSound(localclientnum, # "hash_3126b098b980b5a3");
+    self playSound(localclientnum, #"hash_3126b098b980b5a3");
   }
 }
 
@@ -325,10 +325,10 @@ function_28291f40(localclientnum, e_target) {
     return;
   }
 
-  self endon(#"death", # "hash_4ea2d9a0f785e09b");
+  self endon(#"death", #"hash_4ea2d9a0f785e09b");
 
   if(!isDefined(self.var_4cd8e6cb)) {
-    self playSound(localclientnum, # "hash_3765e25049981166");
+    self playSound(localclientnum, #"hash_3765e25049981166");
     self.var_4cd8e6cb = self playLoopSound(#"hash_170aa1970243fc4a");
   }
 
@@ -383,7 +383,7 @@ function_f9a03171(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     foreach(e_player in a_e_players) {
       if(!e_player util::function_50ed1561(localclientnum)) {
-        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], # "hash_52e05d0e2370536d");
+        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], #"hash_52e05d0e2370536d");
       }
     }
 
@@ -404,7 +404,7 @@ function_f9a03171(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     foreach(e_player in a_e_players) {
       if(!e_player util::function_50ed1561(localclientnum)) {
-        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], # "hash_52e05d0e2370536d");
+        e_player thread zm_utility::function_ae3780f1(localclientnum, self.fx_muzzle_flash[localclientnum], #"hash_52e05d0e2370536d");
       }
     }
   }
@@ -446,7 +446,7 @@ function_5ab769d8(localclientnum) {
   }
 
   self notify(#"hash_360be32d770a6eb2");
-  self endon(#"death", # "hash_360be32d770a6eb2", # "hash_4ea2d9a0f785e09b");
+  self endon(#"death", #"hash_360be32d770a6eb2", #"hash_4ea2d9a0f785e09b");
   self playrumbleonentity(localclientnum, "zm_weap_scepter_ray_hit_rumble");
   wait 0.5;
 
@@ -546,7 +546,7 @@ function_3dec76cb(localclientnum, e_target, e_attacker, var_19f39a16 = 1) {
 
   if(isDefined(e_target) && !isalive(e_target) && e_target.archetype === # "zombie") {
     util::playFXOnTag(localclientnum, level._effect[# "hash_28b1c64bd72686eb"], e_target, "j_spinelower");
-    playSound(localclientnum, # "hash_5eb0bbabfbde1ce8", e_target.origin);
+    playSound(localclientnum, #"hash_5eb0bbabfbde1ce8", e_target.origin);
   }
 }
 
@@ -565,7 +565,7 @@ function_9c08e4b6(localclientnum, e_target, e_attacker) {
   });
 
   if(!isalive(e_target) && isDefined(var_545d6c28)) {
-    playSound(localclientnum, # "hash_5eb0bbabfbde1ce8", var_545d6c28);
+    playSound(localclientnum, #"hash_5eb0bbabfbde1ce8", var_545d6c28);
   }
 }
 
@@ -650,10 +650,10 @@ function_36c349d0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_7203304d(localclientnum) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
-    self waittill(#"weapon_change", # "hash_479f7dbb037c00bc");
+    self waittill(#"weapon_change", #"hash_479f7dbb037c00bc");
 
     if(!function_98890cd8(self.weapon)) {
       if(isDefined(self.var_2a2f2afa[localclientnum])) {

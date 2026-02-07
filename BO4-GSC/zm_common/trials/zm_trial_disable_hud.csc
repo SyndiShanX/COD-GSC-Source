@@ -26,7 +26,7 @@ on_begin(local_client_num, params) {
 }
 
 function_40349f7c(localclientnum) {
-  level endon(#"hash_38932f8deb28b470", # "end_game");
+  level endon(#"hash_38932f8deb28b470", #"end_game");
   wait 12;
   level.var_dc60105c = 1;
   maxclients = getmaxlocalclients();

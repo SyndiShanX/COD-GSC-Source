@@ -16,7 +16,7 @@
 #namespace zm_bgb_perk_up;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_perk_up", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_perk_up", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -44,7 +44,7 @@ validation() {
 }
 
 activation() {
-  self endon(#"fake_death", # "death", # "player_downed");
+  self endon(#"fake_death", #"death", #"player_downed");
 
   if(!self laststand::player_is_in_laststand() && self.sessionstate != "spectator") {
     self thread function_183a26f5();
@@ -65,7 +65,7 @@ activation() {
 function_183a26f5() {
   self notify(#"hash_46621c50b1ffc556");
   self endon(#"hash_46621c50b1ffc556");
-  self waittill(#"fake_death", # "player_downed", # "death");
+  self waittill(#"fake_death", #"player_downed", #"death");
 
   if(isDefined(self)) {
     self.var_b773066d = undefined;

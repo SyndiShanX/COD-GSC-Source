@@ -41,7 +41,7 @@ on_begin(var_7720abf7, var_2d5ebf67, var_530e040f, zone1, zone2, zone3, zone4, z
     level.var_c8b84806[zone] = 1;
   }
 
-  self.var_df62490a = zm_utility::function_d7db256e(var_7720abf7, # "hash_28d5f57c2309090", 0);
+  self.var_df62490a = zm_utility::function_d7db256e(var_7720abf7, #"hash_28d5f57c2309090", 0);
   self.var_f7f308cd = var_7720abf7;
   self thread function_492f4c79();
   var_144cd915 = 0;
@@ -80,7 +80,7 @@ function_5a68cb9f() {
   level flag::clear("spawn_zombies");
   level.disable_nuke_delay_spawning = 1;
   level notify(#"disable_nuke_delay_spawning");
-  level waittill(#"hash_7646638df88a3656", # "hash_715188521b564b16", # "end_game");
+  level waittill(#"hash_7646638df88a3656", #"hash_715188521b564b16", #"end_game");
   level flag::set("spawn_zombies");
   level.disable_nuke_delay_spawning = undefined;
 }
@@ -138,7 +138,7 @@ function_2191cc5d() {
 
 function_1802ad1e(challenge, var_2d5ebf67, var_530e040f, timeout) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "host_migration_begin");
+  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
   self.var_e5cde66 = {
     #start_time: level.time, #timeout: timeout, #challenge: challenge, #var_2d5ebf67: var_2d5ebf67, #var_530e040f: var_530e040f
   };
@@ -196,7 +196,7 @@ zone_watcher(challenge, var_2d5ebf67, var_530e040f) {
 
 damage_watcher(var_a4a28ac7) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "host_migration_begin");
+  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
 
   if(isDefined(var_a4a28ac7) && var_a4a28ac7) {
     wait 12;
@@ -292,7 +292,7 @@ function_dae80de6() {
 
     v_position = array::random(var_3dbf02b9);
     self bot_util::function_23cbc6c1(v_position, 1);
-    self waittilltimeout(10, # "goal");
+    self waittilltimeout(10, #"goal");
 
     if(!function_e1378d07()) {
       self bot_util::function_33834a13();

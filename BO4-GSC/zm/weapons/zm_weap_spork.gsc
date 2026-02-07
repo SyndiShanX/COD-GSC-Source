@@ -13,7 +13,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  zm_melee_weapon::init(#"spork_alcatraz", # "spork_alcatraz_flourish", 1000, "spork", undefined, "spork", undefined);
+  zm_melee_weapon::init(#"spork_alcatraz", #"spork_alcatraz_flourish", 1000, "spork", undefined, "spork", undefined);
 }
 
 __main__() {}

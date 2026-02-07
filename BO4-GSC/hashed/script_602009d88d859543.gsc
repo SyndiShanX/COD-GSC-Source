@@ -335,7 +335,7 @@ function_429e121c(var_5cc91e3c, var_8d5d092c, var_67cba496, var_374f0c4e, var_41
   var_374f0c4e thread scene::play("open");
   level flag::set(#"hash_5466d69fa17fc721");
   level flag::set(var_5cc91e3c);
-  level waittilltimeout(18, # "hash_3c3c6b906f6bbd6");
+  level waittilltimeout(18, #"hash_3c3c6b906f6bbd6");
   level flag::clear(var_5cc91e3c);
   level flag::clear(#"hash_5466d69fa17fc721");
   var_67cba496 thread scene::play("close");
@@ -377,11 +377,11 @@ function_eef4fa8c(var_8d5d092c, var_418e2265) {
       }
     }
 
-    level waittilltimeout(n_cooldown, # "hash_3c3c6b906f6bbd6");
+    level waittilltimeout(n_cooldown, #"hash_3c3c6b906f6bbd6");
     level.var_261ad4d[var_8d5d092c] = 0;
   }
 }
 
 function_9afaebe9() {
-  self zm_audio::create_and_play_dialog(#"hellhole", # "exit", undefined);
+  self zm_audio::create_and_play_dialog(#"hellhole", #"exit", undefined);
 }

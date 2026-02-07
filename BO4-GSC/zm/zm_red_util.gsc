@@ -71,16 +71,16 @@ function_b4759cf8() {
   self function_207cca50();
 
   if(zm_utility::is_trials()) {
-    level.var_d0d80ff8 zm_red_challenges_hud::set_state(self, # "trials");
+    level.var_d0d80ff8 zm_red_challenges_hud::set_state(self, #"trials");
     return;
   }
 
-  level.var_d0d80ff8 zm_red_challenges_hud::set_state(self, # "visible");
+  level.var_d0d80ff8 zm_red_challenges_hud::set_state(self, #"visible");
 }
 
 function_7e30f24c() {
   self function_207cca50();
-  level.var_d0d80ff8 zm_red_challenges_hud::set_state(self, # "defaultstate");
+  level.var_d0d80ff8 zm_red_challenges_hud::set_state(self, #"defaultstate");
 }
 
 function_7e617e33(var_9eb6bb80 = 1) {
@@ -130,9 +130,9 @@ show_text(text, n_display_time = 0, str_waittill = undefined, var_3de28ed8 = 1) 
   }
 
   if(n_display_time) {
-    self waittilltimeout(n_display_time, # "death", # "disconnect", str_waittill);
+    self waittilltimeout(n_display_time, #"death", #"disconnect", str_waittill);
   } else {
-    self waittill(#"death", # "disconnect", str_waittill);
+    self waittill(#"death", #"disconnect", str_waittill);
   }
 
   if(isDefined(self)) {

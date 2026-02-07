@@ -16,7 +16,7 @@ autoexec __init__system__() {
 }
 
 init() {
-  zm_sq::register(#"hash_32f778a60edd89af", # "step_1", # "hash_703e7ca00bf77f59", &function_5d6ee8e9, &function_65937bee);
+  zm_sq::register(#"hash_32f778a60edd89af", #"step_1", #"hash_703e7ca00bf77f59", &function_5d6ee8e9, &function_65937bee);
   zm_sq::start(#"hash_32f778a60edd89af");
 }
 
@@ -66,7 +66,7 @@ function_65937bee(var_5ea5c94d, ended_early) {
 }
 
 function_e0254b72() {
-  var_8c07f4aa = array(#"hash_3da8a375da1a29c2", # "hash_4350c9d0e319afc3", # "hash_8cf7bf5d41063ec", # "hash_5b57476ff83609ad");
+  var_8c07f4aa = array(#"hash_3da8a375da1a29c2", #"hash_4350c9d0e319afc3", #"hash_8cf7bf5d41063ec", #"hash_5b57476ff83609ad");
   var_25eaa205 = struct::get(#"morgue_audio");
   zm_hms_util::function_52c3fe8d(var_8c07f4aa, var_25eaa205.origin);
 }

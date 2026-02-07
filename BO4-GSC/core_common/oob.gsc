@@ -416,7 +416,7 @@ watchforleave(entity) {
 }
 
 watchfordeath(entity) {
-  self endon(#"disconnect", # "oob_exit");
+  self endon(#"disconnect", #"oob_exit");
   util::waittill_any_ents_two(self, "death", entity, "death");
   self resetoobtimer();
 }

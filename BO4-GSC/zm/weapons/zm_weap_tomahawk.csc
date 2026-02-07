@@ -90,7 +90,7 @@ play_tomahawk_pickup_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 }
 
 function_9a3953ea(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self playSound(localclientnum, # "wpn_tomahawk_impact", self.origin + (0, 0, 75));
+  self playSound(localclientnum, #"wpn_tomahawk_impact", self.origin + (0, 0, 75));
 }
 
 tomahawk_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

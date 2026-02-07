@@ -16,7 +16,7 @@
 #namespace character_unlock_takeo;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_takeo", &__init__, undefined, # "character_unlock_takeo_fixup");
+  system::register(#"character_unlock_takeo", &__init__, undefined, #"character_unlock_takeo_fixup");
 }
 
 __init__() {
@@ -91,12 +91,12 @@ function_1c4b5097(item) {
   if(itementry.name === # "cu18_item") {
     if(self character_unlock::function_f0406288(#"takeo_unlock")) {
       self function_895b40e4();
-      self character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5eb94fb75cbed", 1);
+      self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5eb94fb75cbed", 1);
       self.var_b5d833a4 = 1;
       var_c503939b = globallogic::function_e9e52d05();
 
       if(var_c503939b <= function_c816ea5b()) {
-        self character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5e894fb75c6d4", 1);
+        self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5e894fb75c6d4", 1);
       }
     }
   }
@@ -115,7 +115,7 @@ on_item_use(params) {
 
   if(isDefined(item.itementry) && item.itementry.itemtype === # "equipment") {
     if(self character_unlock::function_c70bcc7a(#"takeo_unlock")) {
-      self character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5eb94fb75cbed", 2);
+      self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5eb94fb75cbed", 2);
       self.var_979273e3 = 1;
     }
   }
@@ -135,7 +135,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"takeo_unlock")) {
-            player character_unlock::function_c8beca5e(#"takeo_unlock", # "hash_56b5e894fb75c6d4", 1);
+            player character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5e894fb75c6d4", 1);
           }
         }
       }

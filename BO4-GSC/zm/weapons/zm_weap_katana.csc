@@ -50,7 +50,7 @@ katana_rush_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
       foreach(e_player in a_e_players) {
         if(!e_player util::function_50ed1561(localclientnum)) {
-          e_player thread zm_utility::function_bb54a31f(localclientnum, # "hash_34ce6f9f022458f8", # "hash_49e404aa0d33e9ac");
+          e_player thread zm_utility::function_bb54a31f(localclientnum, #"hash_34ce6f9f022458f8", #"hash_49e404aa0d33e9ac");
         }
       }
     } else if(self hasdobj(localclientnum)) {
@@ -124,7 +124,7 @@ function_82ee4d9d(localclientnum) {
 katana_rush_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_7804a42c)) {
-      self playSound(localclientnum, # "hash_74fd1bb2db3d91ee");
+      self playSound(localclientnum, #"hash_74fd1bb2db3d91ee");
       self.var_7804a42c = self playLoopSound(#"hash_4f7953dcf02e2ba7");
     }
 
@@ -132,7 +132,7 @@ katana_rush_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(isDefined(self.var_7804a42c)) {
-    self playSound(localclientnum, # "hash_76e75d7b16257c11");
+    self playSound(localclientnum, #"hash_76e75d7b16257c11");
     self stoploopsound(self.var_7804a42c);
     self.var_7804a42c = undefined;
   }

@@ -135,7 +135,7 @@ cover_transition(localclientnum, onoff) {
   }
 
   self lui::screen_fade_out(0.05);
-  level waittilltimeout(0.15, # "demo_jump");
+  level waittilltimeout(0.15, #"demo_jump");
 
   if(isDefined(self)) {
     self lui::screen_fade_in(0.1);

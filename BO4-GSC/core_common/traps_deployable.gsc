@@ -75,7 +75,7 @@ class class_7b5e0861 {
 }
 
 autoexec __init__system__() {
-  system::register(#"traps_deployable", &__init__, undefined, # "load");
+  system::register(#"traps_deployable", &__init__, undefined, #"load");
 }
 
 __init__() {
@@ -384,7 +384,7 @@ function_6153484f(team) {
 
 function_69996073(var_3af54106) {
   var_5e63b00d = self;
-  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", # "death");
+  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", #"death");
   var_5e63b00d flag::function_5f02becb();
   teamowner = undefined;
   team = util::get_team_mapping(var_5e63b00d.var_a8539bf6.team);
@@ -400,7 +400,7 @@ function_69996073(var_3af54106) {
 
 function_8ecf6615(var_3af54106) {
   var_5e63b00d = self;
-  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", # "death");
+  var_5e63b00d.var_a8539bf6.mdl_gameobject endon(#"destroyed_complete", #"death");
   waitresult = level waittill(var_5e63b00d.script_waittill);
   teamowner = waitresult.owner;
   team = waitresult.team;
@@ -610,7 +610,7 @@ function_b501ff0b(damagecallback, destroyedcallback, var_1891d3cd, var_2053fdc6)
 }
 
 function_59a79a68(var_3af54106, damage_callback, destroyed_callback, emp_damage, emp_callback) {
-  self endon(#"death", # "delete");
+  self endon(#"death", #"delete");
   assert(!isvehicle(self) || !issentient(self), "<dev string:x282>");
 
   while(true) {
@@ -889,7 +889,7 @@ turret_activate(var_3af54106, owner, team, vehicle, origin, angles, parent) {
     }
 
     vehicle.turret_id = string(level.var_c70c6768);
-    badplace_cylinder("turret_bad_place_" + vehicle.turret_id, 0, vehicle.origin, vehicle.settings.var_9493f6dc, vehicle.settings.var_c9c01aa4, # "axis", # "allies", # "neutral");
+    badplace_cylinder("turret_bad_place_" + vehicle.turret_id, 0, vehicle.origin, vehicle.settings.var_9493f6dc, vehicle.settings.var_c9c01aa4, #"axis", #"allies", #"neutral");
     vehicle.has_bad_place = 1;
   }
 

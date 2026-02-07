@@ -9,7 +9,7 @@
 #namespace zm_bgb_aftertaste;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_aftertaste", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_aftertaste", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -32,8 +32,8 @@ lost_perk_override(perk, var_a83ac70f = undefined, var_6c1b825d = undefined) {
 }
 
 event() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   self thread bgb::run_timer(300);
-  self waittilltimeout(300, # "player_revived");
+  self waittilltimeout(300, #"player_revived");
   self bgb::do_one_shot_use(1);
 }

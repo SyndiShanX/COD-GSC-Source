@@ -42,7 +42,7 @@ function_c6f75619() {
 }
 
 state_scripted_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   driver = self getseatoccupant(0);
 
   if(isplayer(driver)) {
@@ -75,7 +75,7 @@ state_death_update(params) {
 }
 
 state_emped_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
 
   if(self.servershortout === 1) {
     forward = vectornormalize((self getvelocity()[0], self getvelocity()[1], 0));
@@ -83,7 +83,7 @@ state_emped_update(params) {
     self function_a57c34b7(self.origin + side * 500 + forward * randomfloat(400), 0, 0);
     wait 0.6;
     self function_d4c687c9();
-    self waittilltimeout(1.5, # "veh_collision");
+    self waittilltimeout(1.5, #"veh_collision");
     self kill(self.origin, self.abnormal_status.attacker, self.abnormal_status.inflictor, getweapon(#"emp"));
     return;
   }
@@ -92,7 +92,7 @@ state_emped_update(params) {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   pathfailcount = 0;
   foundpath = 1;
   self thread prevent_stuck();
@@ -336,7 +336,7 @@ hunt_enemy() {
 }
 
 prevent_stuck() {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self notify(#"end_prevent_stuck");
   self endon(#"end_prevent_stuck");
   wait 2;
@@ -422,7 +422,7 @@ detonate(attacker = self) {
 }
 
 detonation_monitor() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   lastenemy = undefined;
 
   while(true) {
@@ -638,7 +638,7 @@ function_dcecac3c() {
 }
 
 path_update_interrupt() {
-  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node");
+  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node");
   self notify(#"path_update_interrupt");
   self endon(#"path_update_interrupt");
   wait 0.1;

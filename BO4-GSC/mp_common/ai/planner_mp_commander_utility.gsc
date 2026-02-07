@@ -192,7 +192,7 @@ function_c5bf12a5(commander) {
     return;
   }
 
-  commanderteam = blackboard::getstructblackboardattribute(commander, # "team");
+  commanderteam = blackboard::getstructblackboardattribute(commander, #"team");
   controlzones = [];
   var_c4c8bf3f = arraycopy(level.zones);
 
@@ -236,7 +236,7 @@ function_88ab5a6e(commander) {
     return;
   }
 
-  commanderteam = blackboard::getstructblackboardattribute(commander, # "team");
+  commanderteam = blackboard::getstructblackboardattribute(commander, #"team");
   domflags = [];
   var_42c3a790 = arraycopy(level.domflags);
 
@@ -286,7 +286,7 @@ function_337c2c5d(commander) {
     return;
   }
 
-  commanderteam = blackboard::getstructblackboardattribute(commander, # "team");
+  commanderteam = blackboard::getstructblackboardattribute(commander, #"team");
   zone = [];
   cachedzone = [];
   cachedzone[# "origin"] = level.zone.origin;
@@ -312,7 +312,7 @@ function_4364713f(commander) {
     return;
   }
 
-  commanderteam = blackboard::getstructblackboardattribute(commander, # "team");
+  commanderteam = blackboard::getstructblackboardattribute(commander, #"team");
   bomb = [];
   var_b0fd50a8 = [];
   var_b0fd50a8[# "origin"] = level.sdbomb.origin;
@@ -338,7 +338,7 @@ function_c111c0aa(commander) {
     return;
   }
 
-  commanderteam = blackboard::getstructblackboardattribute(commander, # "team");
+  commanderteam = blackboard::getstructblackboardattribute(commander, #"team");
   bombzones = [];
   var_99cb62dc = arraycopy(level.bombzones);
 
@@ -387,7 +387,7 @@ function_7e03c94a(commander) {
     return;
   }
 
-  commanderteam = blackboard::getstructblackboardattribute(commander, # "team");
+  commanderteam = blackboard::getstructblackboardattribute(commander, #"team");
   defuseobj = [];
   var_30b29fd3 = [];
   var_30b29fd3[# "origin"] = level.defuseobject.origin;
@@ -513,8 +513,8 @@ function_eb0a4e86(commander, squad, constants) {
 }
 
 raw\italian\sound\vox\scripted\zmb_tomb\vox_plr_1_exert_death_high_d_0.SN40.xenon.snd(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
-  commanderteam = planner::getblackboardattribute(planner, # "team");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
+  commanderteam = planner::getblackboardattribute(planner, #"team");
   assert(squadindex >= 0, "<dev string:xa4>");
   controlzones = planner::getblackboardattribute(planner, "mp_pathable_controlZones", squadindex);
 
@@ -534,42 +534,42 @@ raw\italian\sound\vox\scripted\zmb_tomb\vox_plr_1_exert_death_high_d_0.SN40.xeno
 }
 
 function_34c0ebaf(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   controlzones = planner::getblackboardattribute(planner, "mp_pathable_controlZones", squadindex);
   return controlzones.size > 0;
 }
 
 function_68a32d83(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   domflags = planner::getblackboardattribute(planner, "mp_pathable_domFlags", squadindex);
   return domflags.size > 0;
 }
 
 function_380f4233(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   kothzone = planner::getblackboardattribute(planner, "mp_pathable_kothZone", squadindex);
   return kothzone.size > 0;
 }
 
 function_4792217e(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   bomb = planner::getblackboardattribute(planner, "mp_pathable_sdBomb", squadindex);
   return isDefined(bomb) && bomb.size > 0;
 }
 
 function_97e7d0d8(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   zones = planner::getblackboardattribute(planner, "mp_pathable_sdBombZones", squadindex);
   return isDefined(zones) && zones.size > 0;
 }
 
 function_493ead90(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
 
@@ -585,7 +585,7 @@ function_493ead90(planner, constants) {
 }
 
 function_cd5b7cc9(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   var_a13843cf = planner::getblackboardattribute(planner, "mp_pathable_sdDefuseObj", squadindex);
   return isDefined(var_a13843cf) && var_a13843cf.size > 0;
@@ -596,7 +596,7 @@ function_efa74ce4(planner, constants) {
 }
 
 function_b35625c2(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   controlzones = planner::getblackboardattribute(planner, "mp_controlZones");
@@ -606,8 +606,8 @@ function_b35625c2(planner, constants) {
 }
 
 function_a207b2e4(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
-  commanderteam = planner::getblackboardattribute(planner, # "team");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
+  commanderteam = planner::getblackboardattribute(planner, #"team");
   assert(squadindex >= 0, "<dev string:xf6>");
   var_72d5b8ac = planner::getblackboardattribute(planner, "mp_pathable_controlZones", squadindex);
 
@@ -660,7 +660,7 @@ function_a207b2e4(planner, constants) {
 }
 
 function_9d8a9994(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   var_72d5b8ac = planner::getblackboardattribute(planner, "mp_pathable_controlZones", squadindex);
 
@@ -727,7 +727,7 @@ function_9d8a9994(planner, constants) {
 }
 
 function_913bffb1(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   domflags = planner::getblackboardattribute(planner, "mp_domFlags");
@@ -737,7 +737,7 @@ function_913bffb1(planner, constants) {
 }
 
 function_edf25221(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   pathabledomflags = planner::getblackboardattribute(planner, "mp_pathable_domFlags", squadindex);
 
@@ -800,7 +800,7 @@ function_edf25221(planner, constants) {
 }
 
 function_90af2101(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xa4>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   kothzone = planner::getblackboardattribute(planner, "mp_kothZone");
@@ -810,7 +810,7 @@ function_90af2101(planner, constants) {
 }
 
 function_bca7d900(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   pathablekothzone = planner::getblackboardattribute(planner, "mp_pathable_kothZone", squadindex);
 
@@ -823,7 +823,7 @@ function_bca7d900(planner, constants) {
 }
 
 function_1cce4bb6(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   sdbomb = planner::getblackboardattribute(planner, "mp_sdBomb");
@@ -845,7 +845,7 @@ function_1cce4bb6(planner, constants) {
 }
 
 function_f192ef84(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   pathablesdbomb = planner::getblackboardattribute(planner, "mp_pathable_sdBomb", squadindex);
 
@@ -858,7 +858,7 @@ function_f192ef84(planner, constants) {
 }
 
 function_7a576970(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   bombzones = planner::getblackboardattribute(planner, "mp_sdBombZones");
@@ -872,7 +872,7 @@ function_7a576970(planner, constants) {
 }
 
 function_53600d78(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   var_154e2210 = planner::getblackboardattribute(planner, "mp_pathable_sdBombZones", squadindex);
@@ -904,7 +904,7 @@ function_53600d78(planner, constants) {
 }
 
 function_7a9a7a24(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   defuseobj = planner::getblackboardattribute(planner, "mp_sdDefuseObj");
@@ -919,7 +919,7 @@ function_7a9a7a24(planner, constants) {
 }
 
 function_b032f16b(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   bots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   var_a9e623b5 = planner::getblackboardattribute(planner, "mp_pathable_sdDefuseObj", squadindex);
@@ -933,7 +933,7 @@ function_b032f16b(planner, constants) {
 }
 
 function_9c7e3773(planner, constants) {
-  squadindex = planner::getblackboardattribute(planner, # "current_squad");
+  squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:xf6>");
   numlanes = region_utility::function_9fe18733();
   lanenum = squadindex % numlanes;
@@ -942,12 +942,12 @@ function_9c7e3773(planner, constants) {
 }
 
 function_39cd5957(planner, constants) {
-  commanderteam = planner::getblackboardattribute(planner, # "team");
+  commanderteam = planner::getblackboardattribute(planner, #"team");
   return commanderteam == game.attackers;
 }
 
 function_97659d05(planner, constants) {
-  commanderteam = planner::getblackboardattribute(planner, # "team");
+  commanderteam = planner::getblackboardattribute(planner, #"team");
   return commanderteam == game.defenders;
 }
 

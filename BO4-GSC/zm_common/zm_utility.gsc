@@ -2246,7 +2246,7 @@ draw_line_ent_to_pos(ent, pos, end_on) {
   }
 
   ent notify(#"stop_draw_line_ent_to_pos");
-  ent endon(#"stop_draw_line_ent_to_pos", # "death");
+  ent endon(#"stop_draw_line_ent_to_pos", #"death");
 
   if(isDefined(end_on)) {
     ent endon(end_on);
@@ -2520,7 +2520,7 @@ update_zone_name() {
 
 shock_onpain() {
   self notify(#"stop_shock_onpain");
-  self endon(#"stop_shock_onpain", # "death");
+  self endon(#"stop_shock_onpain", #"death");
 
   if(getdvarstring(#"blurpain") == "") {
     setdvar(#"blurpain", "on");
@@ -2946,7 +2946,7 @@ function_52046128() {
 }
 
 waittill_not_moving() {
-  self endon(#"death", # "detonated");
+  self endon(#"death", #"detonated");
   level endon(#"game_ended");
 
   if(self.classname == "grenade") {
@@ -4047,7 +4047,7 @@ function_f5a222a8(var_6cc77d4e, v_origin_or_ent, var_b96be97f = undefined) {
 }
 
 function_71071944(n_obj_id, var_b96be97f) {
-  level endon(#"game_ended", # "hash_1dabaf25a56177a1");
+  level endon(#"game_ended", #"hash_1dabaf25a56177a1");
   self endon(#"disconnect");
   self.var_fbb52104 = n_obj_id;
   self.var_d4778e21 = var_b96be97f;

@@ -26,7 +26,7 @@
 #namespace counteruav;
 
 autoexec __init__system__() {
-  system::register(#"counteruav", &__init__, undefined, # "killstreaks");
+  system::register(#"counteruav", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
@@ -314,7 +314,7 @@ activatecounteruav() {
   self killstreaks::play_killstreak_start_dialog("counteruav", self.team, killstreak_id);
   counteruav killstreaks::play_pilot_dialog_on_owner("arrive", "counteruav", killstreak_id);
   counteruav thread killstreaks::player_killstreak_threat_tracking("counteruav");
-  self stats::function_e24eec31(getweapon("counteruav"), # "used", 1);
+  self stats::function_e24eec31(getweapon("counteruav"), #"used", 1);
   return true;
 }
 
@@ -375,7 +375,7 @@ configureteampost(owner, ishacked) {
 }
 
 listenformove() {
-  self endon(#"death", # "leaving");
+  self endon(#"death", #"leaving");
 
   while(true) {
     self thread counteruavmove();
@@ -384,7 +384,7 @@ listenformove() {
 }
 
 counteruavmove() {
-  self endon(#"death", # "leaving");
+  self endon(#"death", #"leaving");
   level endon("counter_uav_move_" + self.team);
   destination = (0, 0, 0);
 
@@ -466,7 +466,7 @@ destroycounteruav(attacker, weapon) {
     attacker battlechatter::function_dd6a6012("counteruav", weapon);
     challenges::destroyedaircraft(attacker, weapon, 0, 0);
     self killstreaks::function_73566ec7(attacker, weapon, self.owner);
-    luinotifyevent(#"player_callout", 2, # "hash_3544b7c59fa5c59c", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"hash_3544b7c59fa5c59c", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
 

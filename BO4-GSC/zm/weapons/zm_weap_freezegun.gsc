@@ -92,7 +92,7 @@ function_b65fd5ae(params) {
 
 slow_watcher(var_bdbde2d2) {
   self notify(#"hash_7898db449656ed5a");
-  self endon(#"death", # "hash_7898db449656ed5a");
+  self endon(#"death", #"hash_7898db449656ed5a");
   self.var_4592c713 = 1;
   n_wait = 10;
 
@@ -240,7 +240,7 @@ freezegun_do_shatter(params, shatter_trigger, crumple_trigger) {
 }
 
 freezegun_wait_for_shatter(params, shatter_trigger, crumple_trigger) {
-  shatter_trigger endon(#"death", # "cleanup_freezegun_triggers");
+  shatter_trigger endon(#"death", #"cleanup_freezegun_triggers");
   self endon(#"death");
   wait 0.1;
   orig_attacker = params.eattacker;
@@ -265,7 +265,7 @@ freezegun_do_crumple(params, shatter_trigger, crumple_trigger) {
 }
 
 freezegun_wait_for_crumple(params, shatter_trigger, crumple_trigger) {
-  crumple_trigger endon(#"death", # "cleanup_freezegun_triggers");
+  crumple_trigger endon(#"death", #"cleanup_freezegun_triggers");
   self endon(#"death");
   wait 0.1;
   crumple_trigger waittill(#"trigger");

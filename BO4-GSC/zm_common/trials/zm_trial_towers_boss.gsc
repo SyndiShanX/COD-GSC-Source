@@ -144,7 +144,7 @@ boss_fight() {
   level thread function_95785950(187, level.var_8b66546e, "m_quest", "basket_nag");
   level thread function_95785950(211, level.var_49328379, "m_quest", "heart_nag");
   array::thread_all(level.players, &function_3d487e02);
-  e_elephant = spawner::simple_spawn_single(sp_spawner, &function_f9da4403, var_47312393, # "hash_266f53fb994e6120");
+  e_elephant = spawner::simple_spawn_single(sp_spawner, &function_f9da4403, var_47312393, #"hash_266f53fb994e6120");
 
   while(!isDefined(e_elephant.ai.riders) || e_elephant.ai.riders.size < 2) {
     wait 0.1;
@@ -189,7 +189,7 @@ function_33935d5f() {
   e_clip = getent(self.target, "targetname");
 
   while(!self.b_exploded) {
-    waitresult = self waittill(#"trigger", # "tower_boss_scripted_trigger_tower");
+    waitresult = self waittill(#"trigger", #"tower_boss_scripted_trigger_tower");
     shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === # "elephant";
 
     if(shouldexplode || waitresult._notify == "tower_boss_scripted_trigger_tower") {
@@ -213,7 +213,7 @@ function_33935d5f() {
 function_92e1954c() {
   self notify("602480c649d8e17f");
   self endon("602480c649d8e17f");
-  level endon(#"end_game", # "boss_battle_done");
+  level endon(#"end_game", #"boss_battle_done");
 
   while(true) {
     level waittill(#"hash_3aa3137f1bf70773");
@@ -226,7 +226,7 @@ function_92e1954c() {
 function_4d682898() {
   self notify("1d04cafdc26414eb");
   self endon("1d04cafdc26414eb");
-  level endon(#"end_game", # "boss_battle_done");
+  level endon(#"end_game", #"boss_battle_done");
 
   while(true) {
     level waittill(#"basket_hit");
@@ -239,7 +239,7 @@ function_4d682898() {
 function_3d487e02() {
   self notify("72b45c7bc8c76fc3");
   self endon("72b45c7bc8c76fc3");
-  level endon(#"end_game", # "boss_battle_done");
+  level endon(#"end_game", #"boss_battle_done");
   self endon(#"disconnect");
   b_success = 0;
   params = getstatuseffect(#"hash_12a64221f4d27f9b");
@@ -252,7 +252,7 @@ function_3d487e02() {
       self status_effect::status_effect_apply(params, weapon, undefined, 0, 3000, undefined, waitresult.origin);
 
       if(!(isDefined(b_success) && b_success)) {
-        b_success = self zm_audio::create_and_play_dialog(#"m_quest", # "spear_warn");
+        b_success = self zm_audio::create_and_play_dialog(#"m_quest", #"spear_warn");
       }
     }
   }
@@ -288,7 +288,7 @@ function_dd2db3df() {
 function_95785950(var_c625106d, var_86163b89, n_stage, var_39acfdda) {
   self notify("683195b7da79b6b9");
   self endon("683195b7da79b6b9");
-  level endon(#"end_game", # "boss_battle_done");
+  level endon(#"end_game", #"boss_battle_done");
 
   while(true) {
     wait var_c625106d;
@@ -313,7 +313,7 @@ function_ae1cbf2e() {
 function_1a05e10c(str_notify, var_f13787ad, var_ca8a3a53) {
   self notify("588886ce796505cd");
   self endon("588886ce796505cd");
-  level endon(#"end_game", # "boss_battle_done");
+  level endon(#"end_game", #"boss_battle_done");
 
   for(b_success = 0; !b_success; b_success = zm_audio::function_bca32e49(var_f13787ad, var_ca8a3a53)) {
     level waittill(str_notify);

@@ -8,7 +8,7 @@
 #namespace supplydrop;
 
 autoexec __init__system__() {
-  system::register(#"supplydrop", &__init__, undefined, # "killstreaks");
+  system::register(#"supplydrop", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

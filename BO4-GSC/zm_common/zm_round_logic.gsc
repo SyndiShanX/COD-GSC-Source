@@ -139,7 +139,7 @@ function_e6937bfa() {
     return;
   }
 
-  level endon(#"intermission", # "end_of_round", # "restart_round");
+  level endon(#"intermission", #"end_of_round", #"restart_round");
 
   level endon(#"kill_round");
 
@@ -213,7 +213,7 @@ round_spawning() {
 
   level.zombie_health = zombie_utility::ai_calculate_health(zombie_utility::get_zombie_var(#"zombie_health_start"), level.round_number);
   profilestart();
-  level endon(#"intermission", # "end_of_round", # "restart_round");
+  level endon(#"intermission", #"end_of_round", #"restart_round");
 
   level endon(#"kill_round");
 
@@ -608,7 +608,7 @@ round_one_up() {
   if(level.round_number == 5 || level.round_number == 10 || level.round_number == 20 || level.round_number == 35 || level.round_number == 50) {
     players = getplayers();
     rand = randomintrange(0, players.size);
-    players[rand] thread zm_audio::create_and_play_dialog(#"general", # "round_" + level.round_number);
+    players[rand] thread zm_audio::create_and_play_dialog(#"general", #"round_" + level.round_number);
   }
 
   if(intro) {
@@ -655,7 +655,7 @@ round_over() {
   }
 
   recordzombieroundend();
-  level flag::wait_till_any_timeout(time, array("round_reset", # "trial_failed"));
+  level flag::wait_till_any_timeout(time, array("round_reset", #"trial_failed"));
 }
 
 get_delay_between_rounds() {
@@ -711,17 +711,17 @@ recordroundendstats() {
 function_89888d49() {
   foreach(player in level.players) {
     if(!player gamepadusedlast()) {
-      player util::delay(5, "end_game", &zm_equipment::show_hint_text, # "hash_372a154dca05d6ba");
+      player util::delay(5, "end_game", &zm_equipment::show_hint_text, #"hash_372a154dca05d6ba");
       continue;
     }
 
-    player util::delay(5, "end_game", &zm_equipment::show_hint_text, # "hash_7ad0fd9b634f581a");
+    player util::delay(5, "end_game", &zm_equipment::show_hint_text, #"hash_7ad0fd9b634f581a");
   }
 }
 
 round_think(restart = 0) {
   println("<dev string:xec>");
-  level endon(#"end_round_think", # "end_game");
+  level endon(#"end_round_think", #"end_game");
 
   if(!(isDefined(restart) && restart)) {
     if(isDefined(level.var_12e11406)) {
@@ -903,7 +903,7 @@ round_think(restart = 0) {
 }
 
 round_timeout() {
-  level endon(#"end_of_round", # "end_game");
+  level endon(#"end_of_round", #"end_game");
   level waittill(#"zombie_total_set");
   level.var_2125984b = 0;
 
@@ -1034,7 +1034,7 @@ print_zombie_counts() {
 }
 
 function round_wait() {
-  level endon(#"restart_round", # "kill_round_wait");
+  level endon(#"restart_round", #"kill_round_wait");
 
   level endon(#"kill_round");
 
@@ -1087,5 +1087,5 @@ play_level_start_vox_delayed() {
   }
 
   num = randomintrange(0, players.size);
-  players[num] zm_audio::create_and_play_dialog(#"general", # "intro");
+  players[num] zm_audio::create_and_play_dialog(#"general", #"intro");
 }

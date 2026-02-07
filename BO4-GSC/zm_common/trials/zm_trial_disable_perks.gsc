@@ -135,9 +135,9 @@ function_85611c27() {
 
 function_2c0ae6d1() {
   assert(isDefined(self.var_4a17c2cb));
-  var_4493e3e1 = isarray(self.var_7864a0f6.var_724d826b) && isinarray(self.var_7864a0f6.var_724d826b, # "specialty_additionalprimaryweapon");
+  var_4493e3e1 = isarray(self.var_7864a0f6.var_724d826b) && isinarray(self.var_7864a0f6.var_724d826b, #"specialty_additionalprimaryweapon");
 
-  if((var_4493e3e1 || isinarray(self.var_466b927f, # "specialty_additionalprimaryweapon")) && isDefined(self.var_7864a0f6.additional_primary_weapon) && isDefined(self.var_7864a0f6.var_dd9bd473) && !self hasweapon(self.var_7864a0f6.additional_primary_weapon)) {
+  if((var_4493e3e1 || isinarray(self.var_466b927f, #"specialty_additionalprimaryweapon")) && isDefined(self.var_7864a0f6.additional_primary_weapon) && isDefined(self.var_7864a0f6.var_dd9bd473) && !self hasweapon(self.var_7864a0f6.additional_primary_weapon)) {
     self player::weapondata_give(self.var_7864a0f6.var_dd9bd473);
     self zm_trial_util::function_7f999aa0(self.var_7864a0f6);
   }

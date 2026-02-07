@@ -35,7 +35,7 @@ fx_think(localclientnum) {
   for(interval = 0.3;; interval = math::clamp(interval / 1.2, 0.08, 0.3)) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
-    self playSound(localclientnum, # "wpn_semtex_alert");
+    self playSound(localclientnum, #"wpn_semtex_alert");
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
     self util::waittill_dobj(localclientnum);
   }

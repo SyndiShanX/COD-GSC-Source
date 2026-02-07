@@ -52,7 +52,7 @@ function_a1aa3b85(abilityslot, weapon) {
   self thread function_c5c8d661(weapon);
 
   while(isDefined(self.var_f5455815) && self.var_f5455815) {
-    waitresult = self waittill(#"death", # "weapon_change");
+    waitresult = self waittill(#"death", #"weapon_change");
 
     if(!self.var_f5455815) {
       break;
@@ -95,7 +95,7 @@ function_c5c8d661(weapon) {
   }
 
   while(true) {
-    ret = self waittill(#"swimming_begin", # "swimming_end");
+    ret = self waittill(#"swimming_begin", #"swimming_end");
 
     switch (ret._notify) {
       case # "swimming_begin":

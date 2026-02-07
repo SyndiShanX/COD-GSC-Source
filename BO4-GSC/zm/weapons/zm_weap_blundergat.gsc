@@ -83,7 +83,7 @@ function_845f2546() {
 }
 
 function_9ef27f88(n_fuse_timer, attacker, weapon) {
-  self endon(#"death", # "titus_target_timeout");
+  self endon(#"death", #"titus_target_timeout");
   self thread titus_target_timeout(n_fuse_timer);
 
   if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
@@ -102,7 +102,7 @@ function_9ef27f88(n_fuse_timer, attacker, weapon) {
 }
 
 function_2b03f05f() {
-  self endon(#"death", # "titus_target_timeout");
+  self endon(#"death", #"titus_target_timeout");
 
   while(true) {
     s_result = self waittill(#"damage");
@@ -137,7 +137,7 @@ function_8882e03(attacker) {
 function_971df325(target) {
   self endon(#"death");
   target endon(#"titus_target_timeout");
-  target waittill(#"hash_1c822785c3e778b5", # "death");
+  target waittill(#"hash_1c822785c3e778b5", #"death");
 
   if(self clientfield::get("blundergat_dart_blink")) {
     self clientfield::set("blundergat_dart_blink", 0);
@@ -266,7 +266,7 @@ function_eaa9c593() {
 
 function_d72c4a61() {
   self notify(#"hash_20e403096a8af3b7");
-  self endon(#"disconnect", # "hash_20e403096a8af3b7");
+  self endon(#"disconnect", #"hash_20e403096a8af3b7");
 
   while(true) {
     s_result = self waittill(#"weapon_fired");
@@ -365,7 +365,7 @@ function_49cfb951(n_fuse_timer = randomfloatrange(1, 1.5), is_not_upgraded = 1, 
 }
 
 wait_for_grenade_explode(n_fuse_timer, ai_target, e_attacker) {
-  util::waittill_any_ents(self, "death", ai_target, # "titus_target_timeout", ai_target, "death");
+  util::waittill_any_ents(self, "death", ai_target, #"titus_target_timeout", ai_target, "death");
 
   if(isDefined(ai_target)) {
     if(isDefined(self.weapon)) {
@@ -419,7 +419,7 @@ function_482c54d5(watcher, owner) {
     ai_zombie thread function_aa1b44dc(self);
   }
 
-  s_result = self waittilltimeout(5, # "stationary", # "hash_14fd7b6a20ac8f44");
+  s_result = self waittilltimeout(5, #"stationary", #"hash_14fd7b6a20ac8f44");
   waitframe(1);
 
   if(isplayer(s_result.target)) {
@@ -484,7 +484,7 @@ function_bf2a4486(mdl_magma, owner, weapon) {
 
   mdl_magma thread function_c74dfed4(weapon);
   mdl_magma thread function_7b25328b(owner);
-  mdl_magma waittilltimeout(5, # "hash_39da21c99d3cf743");
+  mdl_magma waittilltimeout(5, #"hash_39da21c99d3cf743");
 
   if(isDefined(mdl_magma)) {
     mdl_magma function_19b9fb04();
@@ -538,7 +538,7 @@ function_7b25328b(e_player) {
 function_aa1b44dc(e_grenade) {
   self endon(#"death");
   e_grenade endon(#"death");
-  s_result = self waittilltimeout(5, # "grenade_stuck");
+  s_result = self waittilltimeout(5, #"grenade_stuck");
 
   if(s_result.projectile === e_grenade) {
     self.var_4bfa8f6c = e_grenade;
@@ -552,7 +552,7 @@ function_5f305489(mdl_magma) {
   if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced" || self.zm_ai_category == # "popcorn") {
     self waittill(#"death");
   } else if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
-    self waittilltimeout(5, # "death");
+    self waittilltimeout(5, #"death");
     self notify(#"hash_556bad125b55e1a9");
   }
 
@@ -792,7 +792,7 @@ function_dc3470c5(shitloc, vpoint, eattacker, weapon) {
 }
 
 function_78f754f7(eattacker, weapon) {
-  self endon(#"death", # "hash_556bad125b55e1a9");
+  self endon(#"death", #"hash_556bad125b55e1a9");
 
   while(true) {
     if(level.round_number < 15) {
@@ -902,7 +902,7 @@ function_6901bb20(v_hit_pos) {
 }
 
 function_faa2e2e5(eattacker, weapon) {
-  self endon(#"death", # "stop_flame_damage");
+  self endon(#"death", #"stop_flame_damage");
   waitframe(1);
 
   while(isDefined(self.var_cde645df) && self.var_cde645df) {
@@ -990,7 +990,7 @@ function_c95282e3() {
 crafting_table_watcher() {
   if(isDefined(self.stub.blueprint) && self.stub.blueprint.name == # "zblueprint_acid_gat_build_kit") {
     v_pos = self.stub.origin;
-    s_progress = self waittill(#"death", # "hash_6db03c91467a21f5");
+    s_progress = self waittill(#"death", #"hash_6db03c91467a21f5");
 
     if(isDefined(s_progress.b_completed) && s_progress.b_completed) {
       var_17022e1e = arraygetclosest(v_pos, level.var_acbfec33);
@@ -1168,7 +1168,7 @@ function_b1347a6() {
             e_player.var_452feb6c = undefined;
           }
 
-          e_player thread zm_audio::create_and_play_dialog(#"weapon_pickup", # "acidgat");
+          e_player thread zm_audio::create_and_play_dialog(#"weapon_pickup", #"acidgat");
         }
 
         e_player notify(#"player_obtained_acidgat");
@@ -1188,7 +1188,7 @@ function_b1347a6() {
 }
 
 wait_for_timeout(var_607f49de) {
-  self endon(#"disconnect", # "acid_taken", # "player_obtained_acidgat");
+  self endon(#"disconnect", #"acid_taken", #"player_obtained_acidgat");
   wait 15;
   level flag::clear(#"hash_634424410f574c1c");
 

@@ -31,7 +31,7 @@ __init__() {
 
 function_87d68f99(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   self thread postfx::playpostfxbundle(#"hash_114ea20734e794cf");
-  playSound(localclientnum, # "hash_307805bbe1d946b", (0, 0, 0));
+  playSound(localclientnum, #"hash_307805bbe1d946b", (0, 0, 0));
 }
 
 function_33f1dd99(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

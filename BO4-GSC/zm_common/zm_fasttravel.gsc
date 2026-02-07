@@ -180,7 +180,7 @@ function_5c18a7f4(player) {
 
   if(isDefined(self.hint_string[n_player_index]) && self.hint_string[n_player_index] !== " ") {
     if(zm_trial_disable_buys::is_active() && !isDefined(level.var_a29299fb)) {
-      self sethintstringforplayer(player, # "hash_55d25caf8f7bbb2f");
+      self sethintstringforplayer(player, #"hash_55d25caf8f7bbb2f");
     } else if(isDefined(n_cost)) {
       self sethintstringforplayer(player, self.hint_string[n_player_index], n_cost);
     } else {
@@ -305,7 +305,7 @@ function_6cde5436() {
     if(!player zm_score::can_player_purchase(n_cost)) {
       player iprintln("<dev string:x127>");
 
-      player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       continue;
     }
 
@@ -510,7 +510,7 @@ function_7a74dbfd(str_targetname) {
 
 function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, var_6c365dbf, var_12230d08, var_5817f611, var_8f1ba730 = 0, var_6e7468ee = 1) {
   level endon(#"end_game");
-  self endoncallback(&function_79766c56, # "bled_out", # "death");
+  self endoncallback(&function_79766c56, #"bled_out", #"death");
   self.var_16735873 = 1;
   self function_7a607f29(var_12230d08);
   self.var_f4e33249 = 1;
@@ -632,7 +632,7 @@ function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, var_6c365
     thread[[level.var_34eb792d]](self, var_12230d08);
   }
 
-  self util::delay(0.3, undefined, &zm_audio::create_and_play_dialog, # "fast_travel", # "end");
+  self util::delay(0.3, undefined, &zm_audio::create_and_play_dialog, #"fast_travel", #"end");
 }
 
 function_78e3c2ba(var_5817f611) {
@@ -815,7 +815,7 @@ function_c1f603e(var_12230d08, n_cooldown, var_8d5d092c) {
   }
 
   if(isDefined(var_12230d08)) {
-    var_12230d08 waittilltimeout(n_cooldown, # "cancel_fasttravel_cooldown");
+    var_12230d08 waittilltimeout(n_cooldown, #"cancel_fasttravel_cooldown");
   } else {
     wait n_cooldown;
   }
@@ -880,7 +880,7 @@ function_1ab837f6() {
 
 function_ab80021(var_384528) {
   level endon(#"end_game");
-  self endon(#"disconnect", # "switch_rail");
+  self endon(#"disconnect", #"switch_rail");
 
   if(isDefined(self.var_2790fd8b)) {
     self.var_2790fd8b vehicle::go_path();
@@ -912,7 +912,7 @@ function_ab80021(var_384528) {
 
 function_a78584c0(var_6c365dbf) {
   level endon(#"end_game");
-  self endoncallback(&function_9ff6bcf6, # "death");
+  self endoncallback(&function_9ff6bcf6, #"death");
   var_a16f5b07 = self.origin;
   self allowcrouch(0);
   self allowprone(0);
@@ -1059,7 +1059,7 @@ function_60d91d03(var_f0bbde5, a_e_players) {
 
 fasttravel_flinger(var_6c365dbf, var_12230d08) {
   level endon(#"end_game");
-  self endoncallback(&function_672d56c7, # "death");
+  self endoncallback(&function_672d56c7, #"death");
   self.var_46e13a5f = util::spawn_model("tag_origin", self.origin, self.angles);
   self playerlinkto(self.var_46e13a5f);
 

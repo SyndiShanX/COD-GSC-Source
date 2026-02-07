@@ -179,7 +179,7 @@ function_99ac548f(entity) {
 
 function_488c1ac2() {
   self endon(#"death");
-  self waittilltimeout(1, # "spawn_complete");
+  self waittilltimeout(1, #"spawn_complete");
   zm_net::network_safe_play_fx_on_tag("quad_trail", 2, self._effect[# "nova_crawler_aura_fx"], self, "j_spine4");
 }
 

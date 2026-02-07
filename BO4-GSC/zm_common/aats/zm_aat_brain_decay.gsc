@@ -16,7 +16,7 @@
 #namespace zm_aat_brain_decay;
 
 autoexec __init__system__() {
-  system::register("zm_aat_brain_decay", &__init__, undefined, # "aat");
+  system::register("zm_aat_brain_decay", &__init__, undefined, #"aat");
 }
 
 __init__() {
@@ -160,8 +160,8 @@ function_682e5375() {
 
 zombie_death_time_limit(e_attacker, weapon) {
   self endon(#"death");
-  level endoncallback(&function_a22e41ec, # "end_game", # "restart_round");
-  self waittilltimeout(8, # "hash_1bbb03bd582e937f");
+  level endoncallback(&function_a22e41ec, #"end_game", #"restart_round");
+  self waittilltimeout(8, #"hash_1bbb03bd582e937f");
   var_8651a024 = self getcentroid();
   self clientfield::set("zm_aat_brain_decay", 0);
   self clientfield::increment("zm_aat_brain_decay_exp", 1);
@@ -179,7 +179,7 @@ function_a22e41ec(_hash) {
 
   self notify("dad16f153c7d14b");
   self endon("dad16f153c7d14b");
-  ai_zombies = getaiteamarray(#"axis", # "allies");
+  ai_zombies = getaiteamarray(#"axis", #"allies");
 
   foreach(ai in ai_zombies) {
     if(isalive(ai) && isDefined(ai.aat_turned) && ai.aat_turned) {

@@ -55,7 +55,7 @@ on_end(round_reset) {
 }
 
 function_65e6d40c(a_str_zones, n_max_zombies = 0) {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   level waittill(#"zombie_total_set");
   a_s_locs = zm_utility::function_9f7fd525("zombie_location", a_str_zones, 0);
 

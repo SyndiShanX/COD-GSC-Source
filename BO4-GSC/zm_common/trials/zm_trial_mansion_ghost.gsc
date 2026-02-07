@@ -61,7 +61,7 @@ on_end(round_reset) {
 }
 
 function_889abd74() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   self endon(#"disconnect");
   level.e_ghost endon(#"death");
   var_da67715 = 20;
@@ -95,7 +95,7 @@ function_eb301e1b() {
   level.e_ghost = util::spawn_model("tag_origin", nd_start.origin, nd_start.angles);
   level.e_ghost endon(#"death");
   level.e_ghost.n_obj_id = gameobjects::get_next_obj_id();
-  objective_add(level.e_ghost.n_obj_id, "active", level.e_ghost, # "hash_228d7ebefd8c2600");
+  objective_add(level.e_ghost.n_obj_id, "active", level.e_ghost, #"hash_228d7ebefd8c2600");
   function_da7940a3(level.e_ghost.n_obj_id, 1);
   level.e_ghost thread mansion_pap::function_7ff450ae();
 
@@ -134,7 +134,7 @@ start_timers(n_timer) {
   foreach(player in getplayers()) {
     if(!level.var_f995ece6 zm_trial_timer::is_open(player)) {
       level.var_f995ece6 zm_trial_timer::open(player);
-      level.var_f995ece6 zm_trial_timer::set_timer_text(player, # "hash_2cf8dfaf82a4082a");
+      level.var_f995ece6 zm_trial_timer::set_timer_text(player, #"hash_2cf8dfaf82a4082a");
     }
 
     player zm_trial_util::start_timer(n_timer);

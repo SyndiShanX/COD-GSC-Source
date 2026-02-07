@@ -13,12 +13,12 @@
 #namespace namespace_b7ee637a;
 
 autoexec __init__system__() {
-  system::register(#"hash_7710b10c0110b17", &__init__, undefined, # "hash_5d70c94021e00856");
+  system::register(#"hash_7710b10c0110b17", &__init__, undefined, #"hash_5d70c94021e00856");
 }
 
 __init__() {
   if(isDefined(getgametypesetting(#"hash_6fb11b1e304d533c")) ? getgametypesetting(#"hash_6fb11b1e304d533c") : 0) {
-    item_world_fixup::function_e70fa91c(#"supply_stash_parent", # "world_hw_event_tags_supply_drop", 3);
+    item_world_fixup::function_e70fa91c(#"supply_stash_parent", #"world_hw_event_tags_supply_drop", 3);
     namespace_3d2704b3::function_f0297225(#"world_hw_event_tags_supply_drop", 1, 3);
   }
 }

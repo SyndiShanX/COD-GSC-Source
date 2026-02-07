@@ -43,7 +43,7 @@ function_e4a48a64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     self.var_8eb4e749 = util::playFXOnTag(localclientnum, level._effect[# "hell_portal"], self, "tag_origin");
-    self playSound(localclientnum, # "hash_6e048d37333004da");
+    self playSound(localclientnum, #"hash_6e048d37333004da");
 
     if(!isDefined(self.var_dd081ca4)) {
       self.var_dd081ca4 = self playLoopSound(#"hash_f80ff339436a985");
@@ -57,7 +57,7 @@ function_e4a48a64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_8eb4e749 = undefined;
   }
 
-  self playSound(localclientnum, # "hash_4435f84f2c7dd54f");
+  self playSound(localclientnum, #"hash_4435f84f2c7dd54f");
 
   if(isDefined(self.var_dd081ca4)) {
     self stoploopsound(self.var_dd081ca4);

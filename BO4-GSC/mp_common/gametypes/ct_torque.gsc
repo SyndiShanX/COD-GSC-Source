@@ -321,7 +321,7 @@ spawn_zombies(e_target, n_count, var_6448415b = 0, a_spawns, var_d0e99522 = 1, v
       zombie.nd_spawn = nd_spawn;
       zombie.highlyawareradius = 800;
       zombie thread ct_utils::function_6c45e814();
-      zombie.waypoint = zombie ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", zombie.origin, zombie.angles, # "axis", # "axis", 0, undefined);
+      zombie.waypoint = zombie ct_utils::create_waypoint(#"hash_4b08047cf5e74f2e", zombie.origin, zombie.angles, #"axis", #"axis", 0, undefined);
       zombie.waypoint gameobjects::set_visible_team(#"any");
       zombie thread function_f243b54e();
 
@@ -402,7 +402,7 @@ function_db21e968(var_36778522, var_6448415b = 0, var_29a34c68 = 800, var_719f52
   level endon(#"combattraining_logic_finished");
   self notify(#"hash_3bd66153d302d5e3");
   waitframe(1);
-  self endon(#"hash_3bd66153d302d5e3", # "death");
+  self endon(#"hash_3bd66153d302d5e3", #"death");
   e_player = ct_utils::get_player();
 
   while(true) {
@@ -436,7 +436,7 @@ function_27bf93d(var_93b6a23b = 2000, var_844ac87e = 1) {
 }
 
 j_fore_le_01() {
-  level endoncallback(&function_76a85acc, # "combattraining_logic_finished");
+  level endoncallback(&function_76a85acc, #"combattraining_logic_finished");
   level notify(#"hash_b368182103cc73");
   ct_utils::function_6d7f4ec6(45);
   e_player = ct_utils::get_player();
@@ -492,7 +492,7 @@ function_5a72abb2() {
   level.var_ac03813 = array::sort_by_script_int(level.var_ac03813, 1);
 
   foreach(var_94dda6f in level.var_ac03813) {
-    var_94dda6f.waypoint = ct_utils::create_waypoint(#"hash_3fc4cf91a22dada9", var_94dda6f.origin, (0, 0, 0), # "allies", # "allies", 0, undefined);
+    var_94dda6f.waypoint = ct_utils::create_waypoint(#"hash_3fc4cf91a22dada9", var_94dda6f.origin, (0, 0, 0), #"allies", #"allies", 0, undefined);
     var_94dda6f.waypoint gameobjects::set_visible_team("none");
   }
 }
@@ -619,8 +619,8 @@ function_2444772e(n_time, var_94629f1a = 50) {
 }
 
 function_67a32c1c() {
-  self endoncallback(&function_143ffb68, # "death", # "hash_5e6ba56e4f1f7c75");
-  level endoncallback(&function_143ffb68, # "combattraining_logic_finished");
+  self endoncallback(&function_143ffb68, #"death", #"hash_5e6ba56e4f1f7c75");
+  level endoncallback(&function_143ffb68, #"combattraining_logic_finished");
   level.xpos = 140;
   level.ypos = 560;
   level.width = 50;
@@ -693,9 +693,9 @@ function_3e213427() {
   level.ai_vip clientfield::set("set_vip", 2);
   level.ai_vip function_4852f39d();
   level.ai_vip.var_38b6161f = 1;
-  level.ai_vip.waypoint_defend = level.ai_vip ct_utils::create_waypoint(#"hash_1a511b2e1cdb8c7f", level.ai_vip.origin, level.ai_vip.angles, # "allies", undefined, 0, undefined);
+  level.ai_vip.waypoint_defend = level.ai_vip ct_utils::create_waypoint(#"hash_1a511b2e1cdb8c7f", level.ai_vip.origin, level.ai_vip.angles, #"allies", undefined, 0, undefined);
   level.ai_vip.waypoint_defend gameobjects::set_visible_team("none");
-  level.ai_vip.var_ebc76246 = level.ai_vip ct_utils::create_waypoint(#"hash_69b9c95819486ff3", level.ai_vip.origin, level.ai_vip.angles, # "allies", undefined, 0, undefined);
+  level.ai_vip.var_ebc76246 = level.ai_vip ct_utils::create_waypoint(#"hash_69b9c95819486ff3", level.ai_vip.origin, level.ai_vip.angles, #"allies", undefined, 0, undefined);
   level.ai_vip.var_ebc76246 gameobjects::set_visible_team("any");
   level.ai_vip clientfield::set("set_vip", 2);
   level.ai_vip.health = 250;
@@ -885,7 +885,7 @@ spawn_robot(str_team = # "allies", var_3b640040 = "walk") {
 }
 
 function_91c380a() {
-  self endoncallback(&function_b47c8ec8, # "death");
+  self endoncallback(&function_b47c8ec8, #"death");
   level waittill(#"hash_b368182103cc73");
 
   for(var_1d6b3936 = getnode("nd_vip_start_path", "targetname"); isDefined(var_1d6b3936.target); var_1d6b3936 = getnode(var_1d6b3936.target, "targetname")) {
@@ -966,7 +966,7 @@ on_smartcover_placed(newcover) {
   }
 
   if(level.ctdifficulty !== 0) {
-    self thread function_46250f2d(newcover.smartcover, # "smartcover");
+    self thread function_46250f2d(newcover.smartcover, #"smartcover");
   }
 }
 
@@ -981,7 +981,7 @@ on_concertinawire_placed(newcover) {
   }
 
   if(level.ctdifficulty !== 0) {
-    self thread function_46250f2d(newcover.concertinawire, # "concertinawire");
+    self thread function_46250f2d(newcover.concertinawire, #"concertinawire");
   }
 }
 
@@ -993,18 +993,18 @@ function_46250f2d(var_de22a8df, var_d14634d6) {
   var_59d22f74 = getclosestpointonnavmesh(var_bba9bc4a, 32);
 
   if(isDefined(var_59d22f74)) {
-    var_55c5726a[# "front"] = function_c5afff95(var_59d22f74, var_de22a8df.angles, var_d14634d6, # "front");
+    var_55c5726a[# "front"] = function_c5afff95(var_59d22f74, var_de22a8df.angles, var_d14634d6, #"front");
   } else {
-    var_55c5726a[# "front"] = function_c5afff95(var_bba9bc4a, var_de22a8df.angles, var_d14634d6, # "front");
+    var_55c5726a[# "front"] = function_c5afff95(var_bba9bc4a, var_de22a8df.angles, var_d14634d6, #"front");
   }
 
   var_bba9bc4a = var_de22a8df.origin - v_fwd;
   var_59d22f74 = getclosestpointonnavmesh(var_bba9bc4a, 32);
 
   if(isDefined(var_59d22f74)) {
-    var_55c5726a[# "back"] = function_c5afff95(var_59d22f74, var_de22a8df.angles, var_d14634d6, # "back");
+    var_55c5726a[# "back"] = function_c5afff95(var_59d22f74, var_de22a8df.angles, var_d14634d6, #"back");
   } else {
-    var_55c5726a[# "back"] = function_c5afff95(var_bba9bc4a, var_de22a8df.angles, var_d14634d6, # "back");
+    var_55c5726a[# "back"] = function_c5afff95(var_bba9bc4a, var_de22a8df.angles, var_d14634d6, #"back");
   }
 
   var_de22a8df.var_55c5726a = var_55c5726a;
@@ -1166,7 +1166,7 @@ function_a6b6f492() {
 function_dd64960c(a_ents) {
   if(isDefined(a_ents[# "prop 1"])) {
     var_7425591a = a_ents[# "prop 1"] gettagorigin("tarp_06_jnt") + (0, 0, -8);
-    a_ents[# "prop 1"] waittill(#"physics_pulse", # "death");
+    a_ents[# "prop 1"] waittill(#"physics_pulse", #"death");
     physicsexplosionsphere(var_7425591a, 1024, 1, 1);
   }
 }

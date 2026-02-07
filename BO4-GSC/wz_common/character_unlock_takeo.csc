@@ -10,7 +10,7 @@
 #namespace character_unlock_takeo;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_takeo", &__init__, undefined, # "character_unlock_takeo_fixup");
+  system::register(#"character_unlock_takeo", &__init__, undefined, #"character_unlock_takeo_fixup");
 }
 
 __init__() {

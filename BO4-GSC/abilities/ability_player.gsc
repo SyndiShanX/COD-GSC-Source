@@ -600,7 +600,7 @@ turn_gadget_on(slot, weapon) {
       var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
       if(isDefined(var_f8e6b703)) {
-        self match_record::inc_stat(#"lives", var_f8e6b703, # "hash_2380fc76594e930d", 1);
+        self match_record::inc_stat(#"lives", var_f8e6b703, #"hash_2380fc76594e930d", 1);
       }
     } else {
       self function_33644ff2(game.timepassed, weapon.name);
@@ -876,7 +876,7 @@ gadget_ready(slot, weapon) {
       var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
       if(isDefined(var_f8e6b703)) {
-        self match_record::inc_stat(#"lives", var_f8e6b703, # "hash_656f3981134db095", 1);
+        self match_record::inc_stat(#"lives", var_f8e6b703, #"hash_656f3981134db095", 1);
       }
     } else {
       self function_ac24127(game.timepassed, weapon.name);
@@ -944,7 +944,7 @@ tutorial_init(weapon) {
 
 tutorial_hints(slot, weapon, var_8430d11b, var_6c65cb8d, var_eadf8864, var_be7c29a3) {
   self notify("equip_tutorial_text_" + weapon.name);
-  self endon(#"disconnect", # "death", "equip_tutorial_text_" + weapon.name);
+  self endon(#"disconnect", #"death", "equip_tutorial_text_" + weapon.name);
   self tutorial_init(weapon);
 
   while(true) {

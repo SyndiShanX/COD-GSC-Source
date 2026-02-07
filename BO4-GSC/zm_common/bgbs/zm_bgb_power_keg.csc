@@ -8,7 +8,7 @@
 #namespace zm_bgb_power_keg;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_power_keg", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_power_keg", &__init__, undefined, #"bgb");
 }
 
 __init__() {

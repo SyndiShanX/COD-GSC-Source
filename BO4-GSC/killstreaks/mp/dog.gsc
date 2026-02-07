@@ -11,12 +11,12 @@
 #namespace dog;
 
 autoexec __init__system__() {
-  system::register(#"killstreak_dog", &__init__, undefined, # "killstreaks");
+  system::register(#"killstreak_dog", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {
   init_shared();
-  bundle = struct::get_script_bundle("killstreak", # "killstreak_dog");
+  bundle = struct::get_script_bundle("killstreak", #"killstreak_dog");
 
   if(isDefined(bundle)) {
     bundle.var_32f64ba3 = "actor_spawner_boct_mp_dog";

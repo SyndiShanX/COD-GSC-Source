@@ -106,7 +106,7 @@ function_45e26cb2(local_client_num, oldval, newval, bnewent, binitialsnap, field
 function_d3c5b110(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(level.var_1a8113a7[local_client_num])) {
-      level.var_1a8113a7[local_client_num] = function_604c9983(local_client_num, # "hash_7c507989ceae567f");
+      level.var_1a8113a7[local_client_num] = function_604c9983(local_client_num, #"hash_7c507989ceae567f");
     }
 
     return;
@@ -115,7 +115,7 @@ function_d3c5b110(local_client_num, oldval, newval, bnewent, binitialsnap, field
   if(isDefined(level.var_1a8113a7[local_client_num])) {
     function_d48752e(local_client_num, level.var_1a8113a7[local_client_num]);
     level.var_1a8113a7[local_client_num] = undefined;
-    playSound(local_client_num, # "hash_1d4f78480965b59d");
+    playSound(local_client_num, #"hash_1d4f78480965b59d");
   }
 }
 
@@ -180,7 +180,7 @@ function_ca096bad(model, index, namehash, entnum, category, categoryindex, weapo
   setuimodelvalue(createuimodel(itemuimodel, "indexWithinCategory"), categoryindex);
   setuimodelvalue(createuimodel(itemuimodel, "hackStatus"), 0);
   setuimodelvalue(createuimodel(itemuimodel, "hackableDoubleWidth"), doublewidth);
-  setuimodelvalue(createuimodel(itemuimodel, "hackableFlavorText"), # "");
+  setuimodelvalue(createuimodel(itemuimodel, "hackableFlavorText"), #"");
 }
 
 function_808efdee(hacker, entity, weapon) {
@@ -302,7 +302,7 @@ function_9e88e881(local_client_num) {
   numplayers = getdvarint(#"com_maxclients", 0);
 
   for(i = 0; i < numplayers; i++) {
-    function_ca096bad(var_e2d02d46, var_9411ea0, # "", i, 0, var_a9705012[0], undefined);
+    function_ca096bad(var_e2d02d46, var_9411ea0, #"", i, 0, var_a9705012[0], undefined);
     var_9411ea0++;
     var_a9705012[0]++;
   }
@@ -352,7 +352,7 @@ function_9e88e881(local_client_num) {
 function_868adc20(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1 && oldval != 1) {
     if(!isDefined(level.var_422c4695[local_client_num])) {
-      level.var_422c4695[local_client_num] = function_604c9983(local_client_num, # "hash_48af3a16cdf94e6f");
+      level.var_422c4695[local_client_num] = function_604c9983(local_client_num, #"hash_48af3a16cdf94e6f");
     }
 
     return;
@@ -363,7 +363,7 @@ function_868adc20(local_client_num, oldval, newval, bnewent, binitialsnap, field
     level.var_422c4695[local_client_num] = undefined;
 
     if(!bwastimejump) {
-      playSound(local_client_num, # "hash_b5e00bf57762b86");
+      playSound(local_client_num, #"hash_b5e00bf57762b86");
     }
   }
 }

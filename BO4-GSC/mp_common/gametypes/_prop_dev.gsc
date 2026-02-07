@@ -386,7 +386,7 @@ function_401f47cd() {
 }
 
 function_1e509052() {
-  self endon(#"game_ended", # "disconnect", # "hash_3ecc0277d544b441");
+  self endon(#"game_ended", #"disconnect", #"hash_3ecc0277d544b441");
   self waittill(#"death");
   setdvar(#"hash_34a3e2c00f7cd27f", 0);
 }
@@ -415,7 +415,7 @@ function_4a5dac11() {
   self function_ea8e45a8(0);
 
   while(true) {
-    waitresult = self waittill(#"up", # "down", # "left", # "right", # "shot");
+    waitresult = self waittill(#"up", #"down", #"left", #"right", #"shot");
     msg = waitresult._notify;
 
     if(!isDefined(msg)) {
@@ -1011,7 +1011,7 @@ function_77511c75() {
   magicbullet(weapon, start, end, enemybot);
   start = end + (0, 0, 100);
   magicbullet(weapon, start, end, enemybot);
-  player waittilltimeout(0.3, # "damage");
+  player waittilltimeout(0.3, #"damage");
   wait 0.05;
   player.health = player.maxhealth;
 }

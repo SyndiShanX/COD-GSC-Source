@@ -234,8 +234,8 @@ scoreeventplayerkill(data, time) {
       if(isDefined(victim.lastkilltime) && victim.lastkilltime > time - 3000) {
         if(isDefined(victim.lastkilledplayer) && victim.lastkilledplayer util::isenemyplayer(attacker) == 0 && attacker != victim.lastkilledplayer) {
           processscoreevent(#"kill_enemy_who_killed_teammate", attacker, victim, weapon);
-          attacker activecamo::function_896ac347(weapon, # "avenger", 1);
-          attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
+          attacker activecamo::function_896ac347(weapon, #"avenger", 1);
+          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
           victim recordkillmodifier("avenger");
         }
       }
@@ -436,8 +436,8 @@ scoreeventplayerkill(data, time) {
 
     if(challenges::ishighestscoringplayer(victim)) {
       processscoreevent(#"kill_enemy_who_has_high_score", attacker, victim, weapon);
-      attacker activecamo::function_896ac347(weapon, # "kingslayer", 1);
-      attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
+      attacker activecamo::function_896ac347(weapon, #"kingslayer", 1);
+      attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
       attacker contracts::increment_contract(#"hash_a75db3f2b544591");
     }
 
@@ -469,7 +469,7 @@ scoreeventplayerkill(data, time) {
           }
 
           processscoreevent(#"vision_pulse_shutdown", attacker, victim, weapon);
-          attacker activecamo::function_896ac347(weapon, # "showstopper", 1);
+          attacker activecamo::function_896ac347(weapon, #"showstopper", 1);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
         }
@@ -696,9 +696,9 @@ scoreeventplayerkill(data, time) {
         if(attacker.lastkilledby == victim) {
           level.globalpaybacks++;
           processscoreevent(#"revenge_kill", attacker, victim, weapon);
-          attacker stats::function_e24eec31(weapon, # "revenge_kill", 1);
-          attacker activecamo::function_896ac347(weapon, # "revenge", 1);
-          attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
+          attacker stats::function_e24eec31(weapon, #"revenge_kill", 1);
+          attacker activecamo::function_896ac347(weapon, #"revenge", 1);
+          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
           victim recordkillmodifier("revenge");
           attacker.lastkilledby = undefined;
         }
@@ -707,8 +707,8 @@ scoreeventplayerkill(data, time) {
       if(victim killstreaks::is_an_a_killstreak()) {
         level.globalbuzzkills++;
         processscoreevent(#"stop_enemy_killstreak", attacker, victim, weapon);
-        attacker activecamo::function_896ac347(weapon, # "buzzkill", 1);
-        attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
+        attacker activecamo::function_896ac347(weapon, #"buzzkill", 1);
+        attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
         victim recordkillmodifier("buzzkill");
       }
 
@@ -766,7 +766,7 @@ scoreeventplayerkill(data, time) {
       if(attacker.health < attacker.maxhealth * 0.35) {
         attacker.lastkillwheninjured = time;
         processscoreevent(#"kill_enemy_when_injured", attacker, victim, weapon);
-        attacker stats::function_e24eec31(weapon, # "kill_enemy_when_injured", 1);
+        attacker stats::function_e24eec31(weapon, #"kill_enemy_when_injured", 1);
 
         if(attacker util::has_toughness_perk_purchased_and_equipped()) {
           attacker stats::function_dad108fa(#"perk_bulletflinch_kills", 1);
@@ -825,7 +825,7 @@ scoreeventplayerkill(data, time) {
           weaponpickedup = 1;
         }
 
-        attacker stats::function_eec52333(weapon, # "backstabber_kill", 1, attacker.class_num, weaponpickedup);
+        attacker stats::function_eec52333(weapon, #"backstabber_kill", 1, attacker.class_num, weaponpickedup);
         attacker.pers[# "backstabs"]++;
         attacker.backstabs = attacker.pers[# "backstabs"];
       } else if(!(isDefined(weapon.var_cfc07f04) && weapon.var_cfc07f04) && (anglediff < -30 || anglediff > 70 || isDefined(victim.laststand) && victim.laststand)) {
@@ -838,7 +838,7 @@ scoreeventplayerkill(data, time) {
     } else if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time && (weapon.statindex == level.weapon_hero_annihilator.statindex || weapon.inventorytype != "ability")) {
       if(attackershotvictim) {
         attacker thread updateoneshotmultikills(victim, weapon, victim.firsttimedamaged, meansofdeath);
-        attacker stats::function_e24eec31(weapon, # "kill_enemy_one_bullet", 1);
+        attacker stats::function_e24eec31(weapon, #"kill_enemy_one_bullet", 1);
       }
     }
 
@@ -860,12 +860,12 @@ scoreeventplayerkill(data, time) {
 
       if(pickedupweapon.previousowner == victim) {
         processscoreevent(#"kill_enemy_with_their_weapon", attacker, victim, weapon);
-        attacker stats::function_e24eec31(weapon, # "kill_enemy_with_their_weapon", 1);
+        attacker stats::function_e24eec31(weapon, #"kill_enemy_with_their_weapon", 1);
 
         if(isDefined(pickedupweapon.sweapon) && isDefined(pickedupweapon.smeansofdeath) && weapon_utils::ismeleemod(pickedupweapon.smeansofdeath)) {
           foreach(meleeweapon in level.meleeweapons) {
             if(weapon != meleeweapon && pickedupweapon.sweapon.rootweapon == meleeweapon) {
-              attacker stats::function_e24eec31(meleeweapon, # "kill_enemy_with_their_weapon", 1);
+              attacker stats::function_e24eec31(meleeweapon, #"kill_enemy_with_their_weapon", 1);
               break;
             }
           }
@@ -1105,25 +1105,25 @@ function_8fe4629e(killcount, weapon) {
   doublekill = int(killcount / 2);
 
   if(doublekill > 0) {
-    self activecamo::function_896ac347(weapon, # "doublekill", doublekill);
+    self activecamo::function_896ac347(weapon, #"doublekill", doublekill);
   }
 
   triplekill = int(killcount / 3);
 
   if(triplekill > 0) {
-    self activecamo::function_896ac347(weapon, # "triplekill", triplekill);
+    self activecamo::function_896ac347(weapon, #"triplekill", triplekill);
   }
 
   furykill = int(killcount / 4);
 
   if(furykill > 0) {
-    self activecamo::function_896ac347(weapon, # "furykill", furykill);
+    self activecamo::function_896ac347(weapon, #"furykill", furykill);
   }
 
   pentakill = int(killcount / 5);
 
   if(pentakill > 0) {
-    self activecamo::function_896ac347(weapon, # "pentakill", pentakill);
+    self activecamo::function_896ac347(weapon, #"pentakill", pentakill);
   }
 }
 
@@ -1190,9 +1190,9 @@ multikill(killcount, weapon) {
 multiheroabilitykill(killcount, weapon) {
   if(killcount > 1) {
     self stats::function_dad108fa(#"multikill_2_with_heroability", int(killcount / 2));
-    self stats::function_e24eec31(weapon, # "heroability_doublekill", int(killcount / 2));
+    self stats::function_e24eec31(weapon, #"heroability_doublekill", int(killcount / 2));
     self stats::function_dad108fa(#"multikill_3_with_heroability", int(killcount / 3));
-    self stats::function_e24eec31(weapon, # "heroability_triplekill", int(killcount / 3));
+    self stats::function_e24eec31(weapon, #"heroability_triplekill", int(killcount / 3));
   }
 }
 
@@ -1373,9 +1373,9 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
   }
 
   if(self.recentkillcountsameweapon == 2) {
-    self stats::function_e24eec31(weapon, # "multikill_2", 1);
+    self stats::function_e24eec31(weapon, #"multikill_2", 1);
   } else if(self.recentkillcountsameweapon == 3) {
-    self stats::function_e24eec31(weapon, # "multikill_3", 1);
+    self stats::function_e24eec31(weapon, #"multikill_3", 1);
   }
 
   self function_179829ab(4);
@@ -1561,7 +1561,7 @@ function_179829ab(timeout) {
 }
 
 updateoneshotmultikills(victim, weapon, firsttimedamaged, meansofdeath) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self notify("updateoneshotmultikills" + firsttimedamaged);
   self endon("updateoneshotmultikills" + firsttimedamaged);
 

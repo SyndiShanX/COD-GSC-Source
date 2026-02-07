@@ -274,7 +274,7 @@ function_b25a6169() {
 }
 
 function_af46682(patroller) {
-  level endon(#"game_ended", # "hash_12a8f2c59a67e4fc");
+  level endon(#"game_ended", #"hash_12a8f2c59a67e4fc");
   patroller endon(#"death");
 
   while(!isDefined(level.deathcircle)) {

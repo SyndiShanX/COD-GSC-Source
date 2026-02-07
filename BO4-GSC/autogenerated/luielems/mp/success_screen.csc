@@ -8,7 +8,7 @@
 
 class csuccess_screen: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "success_screen");
+    cluielem::open(localclientnum, #"success_screen");
   }
 
   function function_fa582112(localclientnum) {

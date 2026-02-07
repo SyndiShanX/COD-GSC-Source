@@ -45,7 +45,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.var_e31c5d7a = &ct_bots::function_e31c5d7a;
   callback::on_game_playing(&ct_core::function_1e84c767);
   globallogic_spawn::addsupportedspawnpointtype("ct");
-  ct_utils::function_6046a5e3(#"ar_stealth_t8", array(#"acog", # "suppressed", # "stalker", # "stalker2"));
+  ct_utils::function_6046a5e3(#"ar_stealth_t8", array(#"acog", #"suppressed", #"stalker", #"stalker2"));
   ct_utils::function_c3e647e2(#"pistol_standard_t8");
   level flag::init("combat_training_started");
 
@@ -199,7 +199,7 @@ function_fb0c03bc(b_success) {
 
 j_fore_le_01() {
   level endon(#"combattraining_logic_finished");
-  level thread ct_bots::activate_bots(11, # "axis");
+  level thread ct_bots::activate_bots(11, #"axis");
   level thread function_98783e17();
   n_bomb_timer = int(gettime() + 1000 + int(360 * 1000));
   setmatchflag("bomb_timer_a", 1);
@@ -280,7 +280,7 @@ function_7e7652be() {
 }
 
 function_78a1b9ef() {
-  level endon(#"ct_fail_objective_killed", # "ct_player_success", # "ct_fail_timeover");
+  level endon(#"ct_fail_objective_killed", #"ct_player_success", #"ct_fail_timeover");
   self waittill(#"death");
 
   if(!level flag::get("ct_player_success")) {

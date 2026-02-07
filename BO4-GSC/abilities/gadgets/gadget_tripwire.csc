@@ -178,7 +178,7 @@ function_9233eb94(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     self endon(#"death");
     self util::waittill_dobj(localclientnum);
-    self.beam_fx = util::playFXOnTag(localclientnum, # "hash_253c31a9114d6029", self, "tag_origin");
+    self.beam_fx = util::playFXOnTag(localclientnum, #"hash_253c31a9114d6029", self, "tag_origin");
     return;
   }
 
@@ -301,7 +301,7 @@ update_previs(localclientnum) {
   if(level.tripwire.wires.size > 0) {
     level.tripwire.localclients[localclientnum].model function_adb3eb2c(localclientnum);
   } else if(!isDefined(level.tripwire.localclients[localclientnum].model.var_2045ae5c)) {
-    level.tripwire.localclients[localclientnum].model.var_2045ae5c = util::playFXOnTag(localclientnum, # "hash_79d94632506eafee", level.tripwire.localclients[localclientnum].model, "tag_fx");
+    level.tripwire.localclients[localclientnum].model.var_2045ae5c = util::playFXOnTag(localclientnum, #"hash_79d94632506eafee", level.tripwire.localclients[localclientnum].model, "tag_fx");
   }
 
   if(!isDefined(player.var_61df85ff)) {
@@ -313,7 +313,7 @@ update_previs(localclientnum) {
     obj_id = player.var_61df85ff;
 
     if(function_a8cb5322(localclientnum) && !shoutcaster::is_shoutcaster(localclientnum)) {
-      objective_add(localclientnum, obj_id, "active", # "tripwire_placement", trace1[# "position"]);
+      objective_add(localclientnum, obj_id, "active", #"tripwire_placement", trace1[# "position"]);
       objective_setgamemodeflags(localclientnum, obj_id, 0);
     } else if(objective_state(localclientnum, obj_id) != "invisible") {
       objective_setstate(localclientnum, obj_id, "invisible");
@@ -402,7 +402,7 @@ function_adb3eb2c(localclientnum) {
   }
 
   if(!isDefined(self.var_2045ae5c) && !self.var_c2f0f6da) {
-    self.var_2045ae5c = util::playFXOnTag(localclientnum, # "hash_79d94632506eafee", self, "tag_fx");
+    self.var_2045ae5c = util::playFXOnTag(localclientnum, #"hash_79d94632506eafee", self, "tag_fx");
   }
 }
 
@@ -449,7 +449,7 @@ function_8c308396(ent1, ent2) {
 }
 
 function_810faece(local_client_num, objective_id) {
-  self waittill(#"death", # "disconnect", # "team_changed");
+  self waittill(#"death", #"disconnect", #"team_changed");
 
   if(isDefined(objective_id)) {
     objective_delete(local_client_num, objective_id);

@@ -61,7 +61,7 @@ toggle_player_zombie_blood_fx(localclientnum, oldval, newval, bnewent, binitials
     }
 
     if(!isDefined(self.var_f83eefc6)) {
-      self playSound(localclientnum, # "hash_7a3f11d83a3345c7");
+      self playSound(localclientnum, #"hash_7a3f11d83a3345c7");
       self.var_f83eefc6 = self playLoopSound(#"hash_e994a747679fc33");
     }
 
@@ -69,7 +69,7 @@ toggle_player_zombie_blood_fx(localclientnum, oldval, newval, bnewent, binitials
   }
 
   if(isDefined(self.var_f83eefc6)) {
-    self playSound(localclientnum, # "hash_5460a8de45586842");
+    self playSound(localclientnum, #"hash_5460a8de45586842");
     self stoploopsound(self.var_f83eefc6);
   }
 }

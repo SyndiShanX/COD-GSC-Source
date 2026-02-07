@@ -27,7 +27,7 @@ spawned(localclientnum) {
 
 fx_think(localclientnum) {
   self notify(#"light_disable");
-  self endon(#"death", # "light_disable");
+  self endon(#"death", #"light_disable");
   self util::waittill_dobj(localclientnum);
   var_18407835 = self.origin;
 
@@ -35,7 +35,7 @@ fx_think(localclientnum) {
     self stop_light_fx(localclientnum);
     self start_light_fx(localclientnum);
     self fullscreen_fx(localclientnum);
-    playSound(localclientnum, # "hash_2bb4a8b02a0d697", var_18407835);
+    playSound(localclientnum, #"hash_2bb4a8b02a0d697", var_18407835);
     util::server_wait(localclientnum, interval, 0.01, "player_switch");
   }
 }

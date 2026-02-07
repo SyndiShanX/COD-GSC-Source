@@ -19,7 +19,7 @@
 #namespace zombie_skeleton_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_skeleton_util", &__init__, undefined, # "zm_ai_skeleton");
+  system::register(#"zombie_skeleton_util", &__init__, undefined, #"zm_ai_skeleton");
 }
 
 __init__() {

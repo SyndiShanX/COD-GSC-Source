@@ -40,7 +40,7 @@
 event_handler[gametype_init] main(eventstruct) {
   globallogic::init();
   infection::initialize();
-  infection::function_153000d0(#"hash_70fe115fad3f4fa", # "hash_3ca96ae1bd7d344f");
+  infection::function_153000d0(#"hash_70fe115fad3f4fa", #"hash_3ca96ae1bd7d344f");
   level.var_757f1b92 = getweapon("melee_bowie_bloody");
   level.var_4ae49bbd = getweapon("hatchet");
   level.var_30783ca9 = &function_1a87243c;
@@ -175,7 +175,7 @@ function_8d346fd8(winningteam) {
     }
 
     if(!level.disablestattracking) {
-      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", # "statvalue", 0);
+      players[i] stats::set_stat(#"playerstatslist", "cur_win_streak", #"statvalue", 0);
     }
   }
 }
@@ -349,7 +349,7 @@ function_98c89d66(victim, wassuicide) {
     }
   }
 
-  victim waittilltimeout(1.5, # "begin_killcam");
+  victim waittilltimeout(1.5, #"begin_killcam");
 
   if(isDefined(victim)) {
     level thread function_a5abd7ee();
@@ -396,7 +396,7 @@ function_98c89d66(victim, wassuicide) {
 function_cc49dfcf() {
   level endon(#"game_ended");
   self endon(#"disconnect");
-  waitresult = self waittill(#"player_input_revive", # "death");
+  waitresult = self waittill(#"player_input_revive", #"death");
   return waitresult._notify;
 }
 
@@ -445,7 +445,7 @@ function_4928e571() {
 
 finalsurvivoruav(finalsurvivor) {
   level endon(#"game_ended");
-  finalsurvivor endon(#"disconnect", # "death");
+  finalsurvivor endon(#"disconnect", #"death");
   level endon(#"hash_c99e3873a00e736");
   level thread enduavonlatejoiner(finalsurvivor);
   setteamspyplane(game.attackers, 1);
@@ -478,7 +478,7 @@ finalsurvivoruav(finalsurvivor) {
 
 enduavonlatejoiner(finalsurvivor) {
   level endon(#"game_ended");
-  finalsurvivor endon(#"disconnect", # "death");
+  finalsurvivor endon(#"disconnect", #"death");
 
   while(true) {
     var_63f8204e = function_4d9c9e8e(game.defenders);
@@ -627,7 +627,7 @@ settimer(time) {
 }
 
 choosefirstinfected() {
-  level endon(#"game_ended", # "infect_stopcountdown");
+  level endon(#"game_ended", #"infect_stopcountdown");
   level.infect_allowsuicide = 0;
   level.var_b93ecc24 = undefined;
 
@@ -679,7 +679,7 @@ choosefirstinfected() {
 
 function_a6489256() {
   while(true) {
-    waitresult = level waittill(#"game_ended", # "infect_stopcountdown");
+    waitresult = level waittill(#"game_ended", #"infect_stopcountdown");
 
     if(isDefined(level.var_43406ee9)) {
       level.var_43406ee9.alpha = 0;
@@ -695,7 +695,7 @@ function_a6489256() {
 
 function_a5abd7ee() {
   level notify(#"timeextended");
-  level endon(#"game_ended", # "hash_14fed44cd3ece79d", # "timeextended");
+  level endon(#"game_ended", #"hash_14fed44cd3ece79d", #"timeextended");
   timeout = 0;
 
   while(isDefined(level.var_43406ee9) && level.var_43406ee9.alpha > 0) {
@@ -714,7 +714,7 @@ function_a5abd7ee() {
 
 function_3ba09e5e() {
   while(true) {
-    waitresult = level waittill(#"game_ended", # "hash_14fed44cd3ece79d");
+    waitresult = level waittill(#"game_ended", #"hash_14fed44cd3ece79d");
 
     if(isDefined(level.var_6c6b8981)) {
       level.var_6c6b8981.alpha = 0;
@@ -809,7 +809,7 @@ forcespawnteam(team) {
 
 playerforcespawn() {
   level endon(#"game_ended");
-  self endon(#"death", # "disconnect", # "spawned");
+  self endon(#"death", #"disconnect", #"spawned");
 
   if(isDefined(self.hasspawned) && self.hasspawned) {
     return;
@@ -839,7 +839,7 @@ function_e030bdaf(player, wassuicide = 0) {
 
 function_57f1203() {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self waittill(#"weapon_change");
   self enableoffhandspecial();
 }

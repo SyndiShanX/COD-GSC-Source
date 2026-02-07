@@ -24,9 +24,9 @@ __main__() {}
 
 enable_tortoise_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_shield", # "perk_tortoise", 2500, # "hash_61f2a9db3bdc745a", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), # "zmperksvictorious");
+    zm_perks::register_perk_basic_info(#"specialty_shield", #"perk_tortoise", 2500, #"hash_61f2a9db3bdc745a", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), #"zmperksvictorious");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_shield", # "perk_tortoise", 2500, # "zombie/perk_tortoise", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), # "zmperksvictorious");
+    zm_perks::register_perk_basic_info(#"specialty_shield", #"perk_tortoise", 2500, #"zombie/perk_tortoise", getweapon("zombie_perk_bottle_tortoise"), getweapon("zombie_perk_totem_tortoise"), #"zmperksvictorious");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_shield", &function_1441654f);

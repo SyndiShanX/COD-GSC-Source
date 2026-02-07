@@ -22,7 +22,7 @@
 #namespace zm_white_util;
 
 init() {
-  level.var_d2ed4be7 = array(#"zombie", # "mannequin");
+  level.var_d2ed4be7 = array(#"zombie", #"mannequin");
   callback::on_spawned(&function_ea6a4006);
   level.var_5dd0d3ff = spawn("script_origin", (0, 0, 0));
   level.var_5dd0d3ff.name = "rush";
@@ -60,11 +60,11 @@ init() {
 }
 
 function_ea6a4006() {
-  self zm_audio::function_6191af93(#"surrounded", # "self", # "oh", # "shit", 100);
-  self zm_audio::function_6191af93(#"magicbox", # "homunculus", # "magicbox", # "monkey", 100);
-  self zm_audio::function_6191af93(#"kill", # "homunculus", # "kill", # "monkey", 100);
-  self zm_audio::function_6191af93(#"kill", # "ray_gun_mk2", # "kill", # "raygun_mk2", 100);
-  self zm_audio::function_87714659(&function_e08cd7b, # "roundstart", # "special");
+  self zm_audio::function_6191af93(#"surrounded", #"self", #"oh", #"shit", 100);
+  self zm_audio::function_6191af93(#"magicbox", #"homunculus", #"magicbox", #"monkey", 100);
+  self zm_audio::function_6191af93(#"kill", #"homunculus", #"kill", #"monkey", 100);
+  self zm_audio::function_6191af93(#"kill", #"ray_gun_mk2", #"kill", #"raygun_mk2", 100);
+  self zm_audio::function_87714659(&function_e08cd7b, #"roundstart", #"special");
 }
 
 function_e08cd7b(category, subcategory) {
@@ -142,7 +142,7 @@ function_733a6ab7(e_player, player_alias, e_computer, var_21fd1ca8) {
 
 function_c2cc8e(e_player, player_alias, var_21fd1ca8) {
   level endon(#"end_game");
-  self endon(#"death", # "player_down", # "disconnect");
+  self endon(#"death", #"player_down", #"disconnect");
   zm_hms_util::function_3c173d37();
   e_player zm_hms_util::function_51b752a9(player_alias);
   zm_hms_util::function_3c173d37();
@@ -155,7 +155,7 @@ function_491673da(var_21fd1ca8) {
   }
 
   level endon(#"end_game");
-  self endon(#"death", # "player_down", # "disconnect");
+  self endon(#"death", #"player_down", #"disconnect");
   self zm_audio::do_player_or_npc_playvox(var_21fd1ca8, 1);
 }
 
@@ -421,12 +421,12 @@ function_358da2a7(e_player) {
 
     if(isDefined(w_take)) {
       if(w_take == w_give) {
-        self sethintstring(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", # "hash_39d6b1ad0b94f111"));
+        self sethintstring(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", #"hash_39d6b1ad0b94f111"));
       } else {
-        self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", # "hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
+        self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
       }
     } else {
-      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", # "hash_6831cfd35264e1"), w_give.displayname);
+      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), w_give.displayname);
     }
 
     return 1;
@@ -500,7 +500,7 @@ function_c05cc102(s_params) {
     return;
   }
 
-  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", # "explode", # "death");
+  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode", #"death");
 
   if(isDefined(s_params.projectile) && s_waitresult._notify == "death") {
     level notify(#"hash_3042a9bf2f57ea0a", {

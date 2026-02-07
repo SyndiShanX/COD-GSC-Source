@@ -118,7 +118,7 @@ setup_lighthouse() {
 }
 
 function_dbad2f5a() {
-  self endon(#"death", # "hash_2b53ed06a97eb26c");
+  self endon(#"death", #"hash_2b53ed06a97eb26c");
   level.var_ab11c23d notify(#"hash_78fc5bbd712046b0");
 
   for(vh_target = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
@@ -144,7 +144,7 @@ function_dbad2f5a() {
 }
 
 function_b502c51(nd_start) {
-  self endon(#"death", # "hash_2b53ed06a97eb26c");
+  self endon(#"death", #"hash_2b53ed06a97eb26c");
 
   while(true) {
     self thread vehicle::get_on_and_go_path(nd_start);

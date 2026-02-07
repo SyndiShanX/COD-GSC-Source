@@ -132,7 +132,7 @@ dev_cac_camera(on) {
 
 dev_cac_dpad_think(part_name, cycle_function, tag) {
   self notify(#"dev_cac_dpad_think");
-  self endon(#"dev_cac_dpad_think", # "disconnect");
+  self endon(#"dev_cac_dpad_think", #"disconnect");
   iprintln("<dev string:x132>" + part_name + "<dev string:x13e>");
   iprintln("<dev string:x155>" + part_name + "<dev string:x15d>");
   dpad_left = 0;

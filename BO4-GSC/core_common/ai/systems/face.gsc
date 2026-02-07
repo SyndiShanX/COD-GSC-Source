@@ -186,7 +186,7 @@ playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot
     self thread _temp_dialog(str_script_alias, uniquenotify);
   }
 
-  self waittill(#"death", # "cancel speaking", uniquenotify);
+  self waittill(#"death", #"cancel speaking", uniquenotify);
 
   if(importance == 1) {
     level.numberofimportantpeopletalking -= 1;
@@ -241,19 +241,19 @@ _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
       player openluimenu("TempDialog");
     }
 
-    player setluimenudata(player getluimenu("TempDialog"), # "dialogtext", str_line);
+    player setluimenudata(player getluimenu("TempDialog"), #"dialogtext", str_line);
 
     if(b_missing_vo) {
-      player setluimenudata(player getluimenu("TempDialog"), # "title", "MISSING VO SOUND");
+      player setluimenudata(player getluimenu("TempDialog"), #"title", "MISSING VO SOUND");
       continue;
     }
 
-    player setluimenudata(player getluimenu("TempDialog"), # "title", "TEMP VO");
+    player setluimenudata(player getluimenu("TempDialog"), #"title", "TEMP VO");
   }
 
   n_wait_time = (strtok(str_line, " ").size - 1) / 2;
   n_wait_time = math::clamp(n_wait_time, 2, 5);
-  self waittilltimeout(n_wait_time, # "death", # "cancel speaking");
+  self waittilltimeout(n_wait_time, #"death", #"cancel speaking");
 
   foreach(player in level.players) {
     if(isDefined(player getluimenu("TempDialog"))) {

@@ -77,7 +77,7 @@ init() {
   level.var_b56b2097 = getent("zm_towers_trap_piece_3", "targetname");
   level.var_b56b2097 hide();
   level.var_38935e23 = getEntArray("t_challenge_brazier_trigger", "script_noteworthy");
-  array::run_all(level.var_38935e23, &sethintstring, # "hash_37fe206ef8f70207");
+  array::run_all(level.var_38935e23, &sethintstring, #"hash_37fe206ef8f70207");
   function_3e23c5c0();
   level.var_98c5753b = getEntArray("zm_towers_challenge_heads", "script_noteworthy");
 
@@ -85,9 +85,9 @@ init() {
     head hide();
   }
 
-  var_ae9f0595 = array(#"ar_mg1909_t8", # "lmg_standard_t8", # "tr_midburst_t8");
+  var_ae9f0595 = array(#"ar_mg1909_t8", #"lmg_standard_t8", #"tr_midburst_t8");
   var_ae9f0595 = array::randomize(var_ae9f0595);
-  level.var_5d1e28ac = array(#"self_revive", # "bonus_points_player", # "pistol_standard_t8_upgraded", # "full_ammo", # "hero_weapon_power", var_ae9f0595[0], # "free_perk", # "full_ammo", # "lmg_spray_t8_upgraded");
+  level.var_5d1e28ac = array(#"self_revive", #"bonus_points_player", #"pistol_standard_t8_upgraded", #"full_ammo", #"hero_weapon_power", var_ae9f0595[0], #"free_perk", #"full_ammo", #"lmg_spray_t8_upgraded");
   zm_spawner::register_zombie_death_event_callback(&function_edf51f63);
   zm_spawner::register_zombie_death_event_callback(&function_4f3835a0);
   zm_spawner::register_zombie_death_event_callback(&function_82437bf6);
@@ -190,7 +190,7 @@ function_99cdcc10() {
 
 function_fd8a137e(n_time = 0) {
   self notify(#"hash_b296fe3ccb7d273");
-  self endon(#"disconnect", # "hash_b296fe3ccb7d273");
+  self endon(#"disconnect", #"hash_b296fe3ccb7d273");
 
   if(n_time > 0) {
     wait n_time;
@@ -290,7 +290,7 @@ function_702ac990(e_player, e_trig) {
     }
 
     if(isDefined(self.var_25276720) && e_player != self.var_25276720 && self.var_25276720 flag::get(#"flag_player_initialized_reward") && !self.var_25276720 flag::get(#"hash_6534297bbe7e180d")) {
-      self.var_4931480f sethintstringforplayer(e_player, # "hash_5501784aa04e0df2");
+      self.var_4931480f sethintstringforplayer(e_player, #"hash_5501784aa04e0df2");
       var_a9bf0d0d = self.n_challenges_complete;
 
       while(isDefined(self.var_25276720) && self.var_25276720 flag::get(#"flag_player_initialized_reward") && !self.var_25276720 flag::get(#"hash_6534297bbe7e180d")) {
@@ -498,9 +498,9 @@ function_11e35de5(t_new) {
   t_new.banner.var_d412a3e6 setvisibletoplayer(self);
 
   if(function_8b1a219a()) {
-    t_new sethintstringforplayer(self, # "hash_b83e894faf4d112");
+    t_new sethintstringforplayer(self, #"hash_b83e894faf4d112");
   } else {
-    t_new sethintstringforplayer(self, # "hash_9b98137ec7cd136");
+    t_new sethintstringforplayer(self, #"hash_9b98137ec7cd136");
   }
 
   t_new thread function_5ef70b0b(self);
@@ -1145,7 +1145,7 @@ function_347214f4(e_player) {
 
     e_player thread function_29c490cf(self);
     e_player thread function_789f4d85(self);
-    var_29b8f3d0 = e_player waittill(#"death", # "hash_7df55853368e6305", # "left_temple");
+    var_29b8f3d0 = e_player waittill(#"death", #"hash_7df55853368e6305", #"left_temple");
 
     if(var_29b8f3d0._notify == # "hash_7df55853368e6305") {
       break;
@@ -1158,7 +1158,7 @@ function_347214f4(e_player) {
 }
 
 function_29c490cf(var_31e6bd22) {
-  self endon(#"death", # "hash_7df55853368e6305");
+  self endon(#"death", #"hash_7df55853368e6305");
   var_31e6bd22 endon(#"temple_challenge_completed");
   var_24f5d9f8 = array("zone_pap_room", "zone_pap_room_balcony_flooded_crypt");
 
@@ -1176,7 +1176,7 @@ function_29c490cf(var_31e6bd22) {
 }
 
 function_789f4d85(var_31e6bd22) {
-  self endon(#"death", # "left_temple");
+  self endon(#"death", #"left_temple");
   var_31e6bd22 endon(#"temple_challenge_completed");
   level waittill(#"end_of_round");
   self notify(#"hash_7df55853368e6305");
@@ -1445,7 +1445,7 @@ function_1e0efdcd(e_player, e_trig, var_5f06d3f8) {
 }
 
 function_295948b2() {
-  self endon(#"disconnect", # "hash_5d7c0e41aec8535e");
+  self endon(#"disconnect", #"hash_5d7c0e41aec8535e");
   e_player = self;
   n_progress = 0;
 
@@ -1459,7 +1459,7 @@ function_295948b2() {
     if(e_player.challenge_struct.var_8bafcbf3 < 1) {
       if(waitresult.blight_father.attacker === e_player) {
         if(isalive(waitresult.blight_father)) {
-          var_650f2d5e = waitresult.blight_father waittilltimeout(0.75, # "death");
+          var_650f2d5e = waitresult.blight_father waittilltimeout(0.75, #"death");
 
           if(var_650f2d5e._notify == # "timeout") {
             continue;
@@ -1664,14 +1664,14 @@ function_ea1042c6(var_986431d3, var_394c506d) {
   foreach(player in getplayers()) {
     if(player != e_player) {
       var_394c506d setvisibletoplayer(player);
-      var_394c506d sethintstringforplayer(player, # "hash_1705b54e6528bc52");
+      var_394c506d sethintstringforplayer(player, #"hash_1705b54e6528bc52");
       var_394c506d.var_da61c116 = 1;
       e_player.challenge_struct.var_4931480f setinvisibletoplayer(player);
       continue;
     }
 
     var_394c506d setvisibletoplayer(e_player);
-    var_394c506d sethintstringforplayer(e_player, # "hash_4af8c1464e537f6");
+    var_394c506d sethintstringforplayer(e_player, #"hash_4af8c1464e537f6");
     var_986431d3 setinvisibletoall();
     var_986431d3.var_da61c116 = 1;
   }
@@ -1680,7 +1680,7 @@ function_ea1042c6(var_986431d3, var_394c506d) {
 
   foreach(trig in var_284d45c2) {
     if(trig != var_394c506d) {
-      trig sethintstringforplayer(e_player, # "hash_3e2be45acfa798cd");
+      trig sethintstringforplayer(e_player, #"hash_3e2be45acfa798cd");
     }
   }
 
@@ -1716,8 +1716,8 @@ function_67ffec1d() {
 }
 
 function_d2103a80(e_player, n_required_goal) {
-  e_player endon(#"disconnect", # "hash_4ac0558a94ba3fd7");
-  self endon(#"hash_4ac0558a94ba3fd7", # "hash_6f7fd591a005844d");
+  e_player endon(#"disconnect", #"hash_4ac0558a94ba3fd7");
+  self endon(#"hash_4ac0558a94ba3fd7", #"hash_6f7fd591a005844d");
   e_player flag::clear(#"hash_6534297bbe7e180d");
   self.var_f2e7f46a = 0;
 
@@ -1729,7 +1729,7 @@ function_d2103a80(e_player, n_required_goal) {
 
   foreach(var_6bf81b9d in e_player.challenge_struct function_876f93aa()) {
     var_6bf81b9d flag::clear(#"hash_6534297bbe7e180d");
-    self sethintstringforplayer(var_6bf81b9d, # "hash_5501784aa04e0df2");
+    self sethintstringforplayer(var_6bf81b9d, #"hash_5501784aa04e0df2");
   }
 
   if(e_player == e_player.challenge_struct.var_25276720) {
@@ -1766,7 +1766,7 @@ function_d2103a80(e_player, n_required_goal) {
 }
 
 function_51aa96c6(var_8efcfa9f) {
-  self endon(#"hash_6e1565b413e5e0f4", # "disconnect");
+  self endon(#"hash_6e1565b413e5e0f4", #"disconnect");
 
   if(self flag::get(#"flag_player_completed_all_challenges")) {
     return;
@@ -1944,7 +1944,7 @@ _good_door_opened(e_player, e_trig) {
 }
 
 registerlove_mountain_(e_player) {
-  e_player endon(#"disconnect", # "hash_4ac0558a94ba3fd7", # "hash_5a74f9da0718c63d", # "hash_6534297bbe7e180d");
+  e_player endon(#"disconnect", #"hash_4ac0558a94ba3fd7", #"hash_5a74f9da0718c63d", #"hash_6534297bbe7e180d");
   level endon(#"end_game");
 
   while(true) {

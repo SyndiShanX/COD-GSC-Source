@@ -8,6 +8,6 @@
 #namespace zm_ai_gegenees_interface;
 
 registergegeneesinterfaceattributes() {
-  ai::registermatchedinterface(#"gegenees", # "run", 0, array(1, 0));
-  ai::registernumericinterface(#"gegenees", # "damage_multiplier", 1, 0, 100);
+  ai::registermatchedinterface(#"gegenees", #"run", 0, array(1, 0));
+  ai::registernumericinterface(#"gegenees", #"damage_multiplier", 1, 0, 100);
 }

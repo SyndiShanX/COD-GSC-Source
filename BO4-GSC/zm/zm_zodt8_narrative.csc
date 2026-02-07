@@ -198,7 +198,7 @@ function_3653f153(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_d11e8e8d(localclientnum) {
-  var_a4f5395a = util::playFXOnTag(localclientnum, # "hash_431dfa76576eb899", self, "tag_origin");
+  var_a4f5395a = util::playFXOnTag(localclientnum, #"hash_431dfa76576eb899", self, "tag_origin");
   wait 0.25;
 
   if(isDefined(var_a4f5395a)) {
@@ -209,7 +209,7 @@ function_d11e8e8d(localclientnum) {
 }
 
 function_5200214e(localclientnum) {
-  var_a4f5395a = util::playFXOnTag(localclientnum, # "hash_431dfa76576eb899", self, "tag_origin");
+  var_a4f5395a = util::playFXOnTag(localclientnum, #"hash_431dfa76576eb899", self, "tag_origin");
   wait 0.75;
 
   if(isDefined(var_a4f5395a)) {

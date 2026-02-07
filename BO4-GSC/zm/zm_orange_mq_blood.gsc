@@ -51,7 +51,7 @@ main() {
   level.var_9928b94b[0] = array("docks_1", "docks_2", "boathouse", "frozen_crevasse", "ice_grotto", "lagoon");
   level.var_9928b94b[1] = array("beach", "lighthouse_approach", "lighthouse_station", "lighthouse_cove", "hidden_path");
   level.var_9928b94b[2] = array("main_entrance", "outer_walkway", "loading_platform", "specimen_storage", "decontamination", "security_lobby", "geological_processing", "upper_catwalk", "human_infusion");
-  level.var_16972e5c = array(#"snowball", # "snowball_upgraded", # "snowball_yellow", # "snowball_yellow_upgraded", # "tundragun", # "tundragun_upgraded");
+  level.var_16972e5c = array(#"snowball", #"snowball_upgraded", #"snowball_yellow", #"snowball_yellow_upgraded", #"tundragun", #"tundragun_upgraded");
 }
 
 function_8d43b840(var_5ea5c94d) {
@@ -126,7 +126,7 @@ blood_think() {
   level endon(#"end_game");
 
   while(!level flag::get(#"blood_waiting")) {
-    s_notify = self waittill(#"trigger_activated", # "blood_waiting");
+    s_notify = self waittill(#"trigger_activated", #"blood_waiting");
     player = s_notify.e_who;
 
     if(s_notify._notify === "trigger_activated") {
@@ -163,7 +163,7 @@ blood_think() {
 }
 
 function_ee4a200b() {
-  level endon(#"end_game", # "hash_6cbede8616798eb");
+  level endon(#"end_game", #"hash_6cbede8616798eb");
 
   if(level.var_9e3c632e > 1) {
     self.vessel setModel("p8_zm_ora_elemental_vessel");
@@ -202,7 +202,7 @@ function_15f8d6f0() {
 }
 
 blood_event() {
-  level endon(#"hash_1f0238cda598f6e9", # "end_game");
+  level endon(#"hash_1f0238cda598f6e9", #"end_game");
   level waittill(#"hash_6fb77fda0e7419a6");
   level flag::set(#"infinite_round_spawning");
   level flag::set(#"blood_active");
@@ -294,7 +294,7 @@ blood_move() {
     s_point = array::random(stance_any_step);
     self moveto(s_point.origin, 0.5, 0.1, 0.2);
     self.var_d0fed9fb = s_point.script_int;
-    s_result = self waittilltimeout(randomintrangeinclusive(4 - level.var_9e3c632e, 6 - level.var_9e3c632e), # "threshold_hit");
+    s_result = self waittilltimeout(randomintrangeinclusive(4 - level.var_9e3c632e, 6 - level.var_9e3c632e), #"threshold_hit");
   }
 }
 
@@ -351,7 +351,7 @@ function_c2d403f(n_index) {
 
 function_a4fa2df0(n_index) {
   level endon(#"end_game");
-  self endon(#"death", # "primed");
+  self endon(#"death", #"primed");
 
   if(level.var_9e3c632e > 2) {
     self moveto(level.var_e70fa660[n_index].origin, 0.3, 0.1, 0.1);

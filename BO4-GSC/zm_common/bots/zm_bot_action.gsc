@@ -295,7 +295,7 @@ function_ae19f70f(actionparams) {
 
 function_99428ae2(actionparams) {
   self notify(#"hash_782d5f24975a7cd1");
-  self endon(#"hash_782d5f24975a7cd1", # "hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start", # "hash_1728f8b5de3bde13");
+  self endon(#"hash_782d5f24975a7cd1", #"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
   level endon(#"game_ended");
   self waittill(#"wallbuy_done");
   actionparams.var_d9c6fa12 = 1;

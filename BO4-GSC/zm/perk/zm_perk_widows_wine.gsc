@@ -33,9 +33,9 @@ __init__() {
 
 enable_widows_wine_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_widowswine", # "perk_widows_wine", 3000, # "hash_618fdb0398552569", getweapon("zombie_perk_bottle_widows_wine"), getweapon("zombie_perk_totem_winters_wail"), # "zmperkswidowswail");
+    zm_perks::register_perk_basic_info(#"specialty_widowswine", #"perk_widows_wine", 3000, #"hash_618fdb0398552569", getweapon("zombie_perk_bottle_widows_wine"), getweapon("zombie_perk_totem_winters_wail"), #"zmperkswidowswail");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_widowswine", # "perk_widows_wine", 3000, # "zombie/perk_widowswine", getweapon("zombie_perk_bottle_widows_wine"), getweapon("zombie_perk_totem_winters_wail"), # "zmperkswidowswail");
+    zm_perks::register_perk_basic_info(#"specialty_widowswine", #"perk_widows_wine", 3000, #"zombie/perk_widowswine", getweapon("zombie_perk_bottle_widows_wine"), getweapon("zombie_perk_totem_winters_wail"), #"zmperkswidowswail");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_widowswine", &widows_wine_precache);
@@ -149,8 +149,8 @@ widows_wine_contact_explosion() {
   }
 
   self.var_a33a5a37--;
-  self zm_perks::function_2ac7579(self.var_828492e6, 2, # "perk_widows_wine");
-  self zm_perks::function_f2ff97a6(self.var_828492e6, self.var_a33a5a37, # "perk_widows_wine");
+  self zm_perks::function_2ac7579(self.var_828492e6, 2, #"perk_widows_wine");
+  self zm_perks::function_f2ff97a6(self.var_828492e6, self.var_a33a5a37, #"perk_widows_wine");
 
   if(self hasperk(#"specialty_mod_widowswine")) {
     self thread function_c6366dbe();
@@ -159,8 +159,8 @@ widows_wine_contact_explosion() {
 
 function_c6366dbe() {
   self notify(#"start_slow_field");
-  self endoncallback(&function_10519783, # "disconnect", # "player_downed", # "start_slow_field");
-  level endoncallback(&function_10519783, # "end_game");
+  self endoncallback(&function_10519783, #"disconnect", #"player_downed", #"start_slow_field");
+  level endoncallback(&function_10519783, #"end_game");
   n_end_time = gettime() + int(5 * 1000);
   self clientfield::set("winters_wail_slow_field", 1);
 
@@ -247,7 +247,7 @@ function_5c114d09(e_player) {
     self clientfield::set("winters_wail_freeze", 1);
   }
 
-  self waittilltimeout(16, # "death");
+  self waittilltimeout(16, #"death");
 
   if(!isDefined(self)) {
     return;
@@ -278,7 +278,7 @@ widows_wine_slow_zombie(e_player, var_3e5502b5, var_ca6267ad) {
   }
 
   self thread namespace_9ff9f642::slowdown(var_3e5502b5);
-  self waittilltimeout(var_ca6267ad, # "death");
+  self waittilltimeout(var_ca6267ad, #"death");
 
   if(!isDefined(self)) {
     return;
@@ -317,8 +317,8 @@ widows_wine_perk_lost(b_pause, str_perk, str_result, n_slot) {
   assert(isDefined(self.var_828492e6), "<dev string:x38>");
 
   if(isDefined(self.var_828492e6)) {
-    self zm_perks::function_13880aa5(self.var_828492e6, 0, # "perk_widows_wine");
-    self zm_perks::function_f2ff97a6(self.var_828492e6, 0, # "perk_widows_wine");
+    self zm_perks::function_13880aa5(self.var_828492e6, 0, #"perk_widows_wine");
+    self zm_perks::function_f2ff97a6(self.var_828492e6, 0, #"perk_widows_wine");
     self.var_828492e6 = undefined;
   }
 }
@@ -345,7 +345,7 @@ function_276e3360() {
 }
 
 function_bcb4c0e3() {
-  self endon(#"stop_widows_wine", # "death");
+  self endon(#"stop_widows_wine", #"death");
 
   while(true) {
     wait 1;
@@ -368,17 +368,17 @@ function_bcb4c0e3() {
 
 function_2de8f9a5() {
   if(self hasperk(#"specialty_widowswine")) {
-    self zm_perks::function_f2ff97a6(self.var_828492e6, self.var_a33a5a37, # "perk_widows_wine");
+    self zm_perks::function_f2ff97a6(self.var_828492e6, self.var_a33a5a37, #"perk_widows_wine");
     n_progress = self.var_8376b1a;
 
     if(self.var_a33a5a37 == self function_fc256a55()) {
       n_progress = 1;
-      self zm_perks::function_2ac7579(self.var_828492e6, 1, # "perk_widows_wine");
+      self zm_perks::function_2ac7579(self.var_828492e6, 1, #"perk_widows_wine");
     } else {
-      self zm_perks::function_2ac7579(self.var_828492e6, 2, # "perk_widows_wine");
+      self zm_perks::function_2ac7579(self.var_828492e6, 2, #"perk_widows_wine");
     }
 
-    self zm_perks::function_13880aa5(self.var_828492e6, n_progress, # "perk_widows_wine");
+    self zm_perks::function_13880aa5(self.var_828492e6, n_progress, #"perk_widows_wine");
   }
 }
 
@@ -389,7 +389,7 @@ reset_charges() {
 }
 
 function_b2e5df58() {
-  self endon(#"stop_widows_wine", # "death");
+  self endon(#"stop_widows_wine", #"death");
 
   while(true) {
     level waittill(#"end_of_round");

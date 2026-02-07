@@ -55,7 +55,7 @@ function_6ca75924(func) {
 
 on_player_spawned() {
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   player.var_ba5b487b = 0;
 
   if(isDefined(player.var_92dddb36) && player.var_92dddb36) {
@@ -100,7 +100,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, mod, weapon, vpo
 
 sndonoverride_eye_() {
   player = self;
-  player endon(#"death", # "disconnect", # "radiation_shutdown");
+  player endon(#"death", #"disconnect", #"radiation_shutdown");
   rate = 0.15;
   cur_time = 0;
 
@@ -203,7 +203,7 @@ function_1503c832(weapon) {
   player.var_ab42e44e = player.origin;
   player.var_ab42e44e += fwd;
   player.var_e9791ff9 = gameobjects::get_next_obj_id();
-  objective_add(player.var_e9791ff9, "active", (player.var_ab42e44e[0], player.var_ab42e44e[1], player.var_ab42e44e[2]), # "hash_1bf4e9e4ba326a9");
+  objective_add(player.var_e9791ff9, "active", (player.var_ab42e44e[0], player.var_ab42e44e[1], player.var_ab42e44e[2]), #"hash_1bf4e9e4ba326a9");
   objective_setteam(player.var_e9791ff9, player.team);
   objective_setinvisibletoall(player.var_e9791ff9);
   objective_setvisibletoplayer(player.var_e9791ff9, player);
@@ -279,7 +279,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
     player thread state_watch(state_id, duration);
   }
 
-  player endon("state_done_" + state_id, # "radiation_shutdown", # "death", # "disconnect");
+  player endon("state_done_" + state_id, #"radiation_shutdown", #"death", #"disconnect");
   var_adf90433 = getstatuseffect(var_32900164);
   var_327bdee = undefined;
 
@@ -511,7 +511,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
 
 function_a1cc4c59(weapon, killcament) {
   player = self;
-  player endon(#"radiation_shutdown", # "disconnect");
+  player endon(#"radiation_shutdown", #"disconnect");
   player.var_5350f794 = undefined;
   damage_state(1, weapon, level.radiationfield_bundle.var_4d16c61f, level.radiationfield_bundle.var_9c3a936e, level.radiationfield_bundle.baseheightmin, level.radiationfield_bundle.baseheightmax, level.radiationfield_bundle.baseduration, level.radiationfield_bundle.var_1acd89e2, level.radiationfield_bundle.var_e5a95fca, undefined, killcament);
   damage_state(2, weapon, level.radiationfield_bundle.var_9c3a936e, level.radiationfield_bundle.var_2b4199b5, level.radiationfield_bundle.baseheightmax, level.radiationfield_bundle.midheight, level.radiationfield_bundle.var_500496c9, level.radiationfield_bundle.var_1acd89e2, level.radiationfield_bundle.var_e5a95fca, undefined, killcament);
@@ -538,7 +538,7 @@ function_3cbab338(var_fb096220) {
 
 function_579fff1b() {
   player = self;
-  player endon(#"death", # "disconnect", # "radiation_shutdown");
+  player endon(#"death", #"disconnect", #"radiation_shutdown");
   wait isDefined(player.gadget_weapon.var_1123a989 / 1000) ? player.gadget_weapon.var_1123a989 / 1000 : 0.5;
 
   if(player function_d79b93e(player.gadget_weapon.var_44c79c09)) {

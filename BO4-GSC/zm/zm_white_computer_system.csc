@@ -16,6 +16,6 @@ init_clientfields() {
 
 function_e67464c1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playrumbleonentity(localclientnum, # "hash_38a12b73c9342fd9");
+    self playrumbleonentity(localclientnum, #"hash_38a12b73c9342fd9");
   }
 }

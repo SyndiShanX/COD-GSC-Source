@@ -166,7 +166,7 @@ onstartgametype() {
 }
 
 inactivitykick() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
 
   if(sessionmodeisprivate()) {
     return;
@@ -280,7 +280,7 @@ addguntoprogression(weaponname, attachment1, attachment2, attachment3, attachmen
 }
 
 takeoldweapon(oldweapon) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   wait 1;
   self takeweapon(oldweapon);
 }
@@ -344,7 +344,7 @@ givecustomloadout(takeoldweapon = 0) {
 }
 
 promoteplayer(weaponused) {
-  self endon(#"disconnect", # "cancel_promotion");
+  self endon(#"disconnect", #"cancel_promotion");
   level endon(#"game_ended");
   waitframe(1);
 
@@ -401,7 +401,7 @@ demoteplayer(attacker) {
 }
 
 infiniteammo() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     wait 0.1;

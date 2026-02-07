@@ -103,7 +103,7 @@ sq_bg_macguffin_think() {
 
 wait_and_hide_sq_bg_macguffin() {
   self notify(#"restart_show_timer");
-  self endon(#"restart_show_timer", # "caught_by_tomahawk", # "sq_bg_macguffin_received_by_player", # "death");
+  self endon(#"restart_show_timer", #"caught_by_tomahawk", #"sq_bg_macguffin_received_by_player", #"death");
   wait 1.6;
 
   if(isDefined(self)) {
@@ -203,7 +203,7 @@ give_sq_bg_reward(var_dd7441ab) {
 
     if(zm_utility::can_use(e_player, 1) && e_player.currentweapon.name != "none") {
       if(e_player hasweapon(getweapon(#"ww_blundergat_t8")) || e_player hasweapon(getweapon(#"ww_blundergat_t8_upgraded")) || e_player hasweapon(getweapon(#"ww_blundergat_acid_t8")) || e_player hasweapon(getweapon(#"ww_blundergat_acid_t8_upgraded")) || e_player hasweapon(getweapon(#"ww_blundergat_fire_t8")) || e_player hasweapon(getweapon(#"ww_blundergat_fire_t8_upgraded")) || e_player hasweapon(getweapon(#"ww_blundergat_fire_t8_unfinished"))) {
-        self sethintstringforplayer(e_player, # "hash_e8fb80933bfb033");
+        self sethintstringforplayer(e_player, #"hash_e8fb80933bfb033");
 
         foreach(e_active_player in level.activeplayers) {
           if(e_active_player != e_player) {
@@ -217,11 +217,11 @@ give_sq_bg_reward(var_dd7441ab) {
           self setvisibletoplayer(e_active_player);
 
           if(function_8b1a219a()) {
-            self sethintstringforplayer(e_player, # "hash_13148440ddb20104");
+            self sethintstringforplayer(e_player, #"hash_13148440ddb20104");
             continue;
           }
 
-          self sethintstringforplayer(e_player, # "hash_3d510922bc950f08");
+          self sethintstringforplayer(e_player, #"hash_3d510922bc950f08");
         }
 
         continue;
@@ -266,5 +266,5 @@ take_old_weapon_and_give_reward() {
   self giveweapon(getweapon(#"ww_blundergat_t8"));
   self switchtoweapon(getweapon(#"ww_blundergat_t8"));
   level flag::set(#"warden_blundergat_obtained");
-  self thread zm_audio::create_and_play_dialog(#"magicbox", # "wonder");
+  self thread zm_audio::create_and_play_dialog(#"magicbox", #"wonder");
 }

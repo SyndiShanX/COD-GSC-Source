@@ -11,7 +11,7 @@
 #namespace zm_bgb_dividend_yield;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_dividend_yield", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_dividend_yield", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -26,7 +26,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   self thread bgb::function_f51e3503(720, &function_db295169, &function_cbaf1f69);
   self thread function_5cf91552();
 }
@@ -71,11 +71,11 @@ add_to_player_score_override(n_points, str_awarded_by, zm_scr_spawner_location_d
 
     foreach(e_player in self.var_9c42f3fe) {
       if(isDefined(e_player)) {
-        e_player thread zm_score::add_to_player_score(var_15fc340f, 1, # "zm_bgb_dividend_yield");
+        e_player thread zm_score::add_to_player_score(var_15fc340f, 1, #"zm_bgb_dividend_yield");
       }
     }
 
-    self thread zm_score::add_to_player_score(var_15fc340f, 1, # "zm_bgb_dividend_yield");
+    self thread zm_score::add_to_player_score(var_15fc340f, 1, #"zm_bgb_dividend_yield");
   }
 
   return n_points;

@@ -66,5 +66,5 @@ function_4017174b(localclientnum, w_weapon) {
 }
 
 function_ac62a2fd(localclientnum) {
-  playSound(localclientnum, # "wpn_thunder_breath", (0, 0, 0));
+  playSound(localclientnum, #"wpn_thunder_breath", (0, 0, 0));
 }

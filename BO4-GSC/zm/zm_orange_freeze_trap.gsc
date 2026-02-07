@@ -92,7 +92,7 @@ function_c2e32275() {
       level.s_freeze_trap.activated_by_player = e_who;
 
       if(!(isDefined(level.var_3c9cfd6f) && level.var_3c9cfd6f) && zm_audio::can_speak()) {
-        e_who thread zm_audio::create_and_play_dialog(#"trap_ice", # "activate");
+        e_who thread zm_audio::create_and_play_dialog(#"trap_ice", #"activate");
       }
     }
   }
@@ -235,7 +235,7 @@ function_c38e2c52() {
 }
 
 function_67a7a129(s_trap) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(self.var_88eddb97) || !self.var_88eddb97) {
     self.var_88eddb97 = 1;
@@ -259,7 +259,7 @@ function_67a7a129(s_trap) {
 }
 
 function_be814134() {
-  self endon(#"bled_out", # "disconnect");
+  self endon(#"bled_out", #"disconnect");
 
   if(self clientfield::get_to_player("player_freeze_trap_post_fx") === 1) {
     return;

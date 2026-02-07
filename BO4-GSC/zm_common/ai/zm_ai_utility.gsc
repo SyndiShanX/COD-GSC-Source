@@ -172,7 +172,7 @@ stop_patrol(entity) {
 
 update_patrol(entity, patrol_path, var_b90f0f49, var_73fcb9ff, var_572b1f58) {
   entity notify(#"stop_patrol");
-  entity endon(#"death", # "stop_patrol");
+  entity endon(#"death", #"stop_patrol");
 
   if(!entity ai::has_behavior_attribute("patrol")) {
     return;

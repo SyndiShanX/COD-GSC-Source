@@ -26,7 +26,7 @@ claymore_spawned(localclientnum) {
       continue;
     }
 
-    self.claymorelaserfxid = util::playFXOnTag(localclientnum, # "_t6/weapon/claymore/fx_claymore_laser", self, "tag_fx");
+    self.claymorelaserfxid = util::playFXOnTag(localclientnum, #"_t6/weapon/claymore/fx_claymore_laser", self, "tag_fx");
     self waittill(#"stunned");
     stopfx(localclientnum, self.claymorelaserfxid);
   }

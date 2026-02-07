@@ -64,7 +64,7 @@ grappler_beam(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 }
 
 function_34e3f163(player, tag, pivot, delay) {
-  player endon(#"grappler_done", # "death");
+  player endon(#"grappler_done", #"death");
   pivot endon(#"death");
   wait delay;
   thread grapple_beam(player, tag, pivot);
@@ -75,7 +75,7 @@ function_f4b9c325(notifyhash) {
 }
 
 grapple_beam(player, tag, pivot) {
-  self endoncallback(&function_f4b9c325, # "death");
+  self endoncallback(&function_f4b9c325, #"death");
   self.player = player;
   self.tag = tag;
   self.pivot = pivot;

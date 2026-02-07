@@ -151,7 +151,7 @@ play(scriptkey, var_17ee4803 = undefined, var_7f436309 = 0) {
 }
 
 start_pending() {
-  self endoncallback(&function_9db28e7, # "death", # "entering_last_stand", # "disconnect", # "voice_stop");
+  self endoncallback(&function_9db28e7, #"death", #"entering_last_stand", #"disconnect", #"voice_stop");
   level endon(#"game_ended");
   level.var_3e8bd5c[level.var_3e8bd5c.size] = self;
 
@@ -167,7 +167,7 @@ start_pending() {
 }
 
 play_next() {
-  self endoncallback(&end_play_next, # "death", # "entering_last_stand", # "disconnect", # "voice_stop");
+  self endoncallback(&end_play_next, #"death", #"entering_last_stand", #"disconnect", #"voice_stop");
   level endon(#"game_ended");
   voice = function_777704ce();
 
@@ -238,7 +238,7 @@ function_9b502d8d(str_line, n_wait_time) {
     self openluimenu("TempDialog");
   }
 
-  self waittilltimeout(n_wait_time, # "death");
+  self waittilltimeout(n_wait_time, #"death");
 
   if(isDefined(self getluimenu("TempDialog"))) {
     self closeluimenu(self getluimenu("TempDialog"));
@@ -298,7 +298,7 @@ clear_queue() {
 }
 
 function_7924f3ca() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(isDefined(self.var_556f910a)) {
     for(i = 0; i < self.var_556f910a.size; i++) {
@@ -370,7 +370,7 @@ show_portrait_to(player) {
 close_portrait(speaker) {
   self endon(#"disconnect");
   level endon(#"game_ended");
-  speaker waittill(#"death", # "entering_last_stand", # "disconnect", # "voice_stop", # "voice_done");
+  speaker waittill(#"death", #"entering_last_stand", #"disconnect", #"voice_stop", #"voice_done");
   self luinotifyevent(#"offsite_comms_complete");
 }
 

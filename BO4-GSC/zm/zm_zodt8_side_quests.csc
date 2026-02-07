@@ -63,10 +63,10 @@ init_fx() {
 
 function_f99ce12b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    addzombieboxweapon(getweapon(#"hero_sword_pistol_lv1"), # "wpn_t8_zm_melee_dw_hand_cannon_lvl1_prop_animate", 1);
-    addzombieboxweapon(getweapon(#"hero_chakram_lv1"), # "wpn_t8_zm_melee_dw_hand_cannon_lvl1_prop_animate", 1);
-    addzombieboxweapon(getweapon(#"hero_scepter_lv1"), # "wpn_t8_zm_melee_staff_ra_lvl1_prop_animate", 0);
-    addzombieboxweapon(getweapon(#"hero_hammer_lv1"), # "wpn_t8_zm_melee_hammer_lvl1_prop_animate", 0);
+    addzombieboxweapon(getweapon(#"hero_sword_pistol_lv1"), #"wpn_t8_zm_melee_dw_hand_cannon_lvl1_prop_animate", 1);
+    addzombieboxweapon(getweapon(#"hero_chakram_lv1"), #"wpn_t8_zm_melee_dw_hand_cannon_lvl1_prop_animate", 1);
+    addzombieboxweapon(getweapon(#"hero_scepter_lv1"), #"wpn_t8_zm_melee_staff_ra_lvl1_prop_animate", 0);
+    addzombieboxweapon(getweapon(#"hero_hammer_lv1"), #"wpn_t8_zm_melee_hammer_lvl1_prop_animate", 0);
     return;
   }
 
@@ -121,8 +121,8 @@ function_34f5c98(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self util::waittill_dobj(localclientnum);
     self.var_f756621f = util::playFXOnTag(localclientnum, level._effect[# "hash_2f154bbb31e4abaf"], self, "tag_origin");
     playFX(localclientnum, level._effect[# "hash_16c2570acb38a0ed"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    playrumbleonposition(localclientnum, # "hash_743b325bf45e1c8c", self.origin);
-    playSound(localclientnum, # "hash_188d7d9f6b62346f", (0, 0, 0));
+    playrumbleonposition(localclientnum, #"hash_743b325bf45e1c8c", self.origin);
+    playSound(localclientnum, #"hash_188d7d9f6b62346f", (0, 0, 0));
     wait 0.75;
 
     if(isDefined(self)) {
@@ -142,7 +142,7 @@ function_5218405b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     s_loc = struct::get(#"spark_loc");
     playFX(localclientnum, level._effect[# "hash_3524e302fa83d12e"], s_loc.origin, anglesToForward(s_loc.angles), anglestoup(s_loc.angles));
     wait 0.5;
-    playrumbleonposition(localclientnum, # "hash_743b325bf45e1c8c", s_loc.origin);
+    playrumbleonposition(localclientnum, #"hash_743b325bf45e1c8c", s_loc.origin);
   }
 }
 
@@ -293,7 +293,7 @@ fireworks_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     a_s_locs = struct::get_array(#"hash_5af7eeb066c5efbe", "script_noteworthy");
     s_loc = a_s_locs[randomint(a_s_locs.size)];
     playFX(localclientnum, level._effect[# "hash_76a20bbf3432c804"], s_loc.origin);
-    playSound(0, # "hash_40d3baad4b103e04", s_loc.origin);
+    playSound(0, #"hash_40d3baad4b103e04", s_loc.origin);
     return;
   }
 
@@ -301,7 +301,7 @@ fireworks_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     a_s_locs = struct::get_array(#"hash_5af7eeb066c5efbe", "script_noteworthy");
     s_loc = a_s_locs[randomint(a_s_locs.size)];
     playFX(localclientnum, level._effect[# "hash_4817a1dbc7bf4ca4"], s_loc.origin);
-    playSound(0, # "hash_40d3baad4b103e04", s_loc.origin);
+    playSound(0, #"hash_40d3baad4b103e04", s_loc.origin);
     return;
   }
 
@@ -309,6 +309,6 @@ fireworks_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     a_s_locs = struct::get_array(#"hash_5af7eeb066c5efbe", "script_noteworthy");
     s_loc = a_s_locs[randomint(a_s_locs.size)];
     playFX(localclientnum, level._effect[# "hash_3ddf14b70581a57"], s_loc.origin);
-    playSound(0, # "hash_40d3baad4b103e04", s_loc.origin);
+    playSound(0, #"hash_40d3baad4b103e04", s_loc.origin);
   }
 }

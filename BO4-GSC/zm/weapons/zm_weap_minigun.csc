@@ -48,7 +48,7 @@ minigun_nuke_rumble(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, f
   }
 
   self thread postfx::playpostfxbundle(#"pstfx_slowed");
-  self waittilltimeout(1, # "death");
+  self waittilltimeout(1, #"death");
 
   if(isDefined(self)) {
     self thread postfx::exitpostfxbundle(#"pstfx_slowed");

@@ -254,7 +254,7 @@ function_7c3d768e(var_1b2a0645, var_d695a79f, commander) {
   backgroundcolor = (0, 0, 0);
   backgroundalpha = 0.8;
   textsize = 1.25;
-  team = blackboard::getstructblackboardattribute(commander, # "team");
+  team = blackboard::getstructblackboardattribute(commander, #"team");
   paused = isDefined(commander.pause) && commander.pause;
   squadcount = commander.squads.size;
   debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xc4>" + function_9e72a96(team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
@@ -688,10 +688,10 @@ function_35fd8254() {
 
       for(index = 0; index < var_69548289; index++) {
         commander = level.var_b3d6ba87[index];
-        assaultobjects += blackboard::getstructblackboardattribute(commander, # "gameobjects_assault").size;
-        defendobjects += blackboard::getstructblackboardattribute(commander, # "gameobjects_defend").size;
-        botcount += blackboard::getstructblackboardattribute(commander, # "doppelbots").size;
-        objectivecount += blackboard::getstructblackboardattribute(commander, # "objectives").size;
+        assaultobjects += blackboard::getstructblackboardattribute(commander, #"gameobjects_assault").size;
+        defendobjects += blackboard::getstructblackboardattribute(commander, #"gameobjects_defend").size;
+        botcount += blackboard::getstructblackboardattribute(commander, #"doppelbots").size;
+        objectivecount += blackboard::getstructblackboardattribute(commander, #"objectives").size;
         targetcount += commander.var_6365d720;
       }
 

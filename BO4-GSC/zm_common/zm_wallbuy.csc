@@ -14,7 +14,7 @@
 #namespace zm_wallbuy;
 
 autoexec __init__system__() {
-  system::register(#"zm_wallbuy", &__init__, &__main__, # "zm");
+  system::register(#"zm_wallbuy", &__init__, &__main__, #"zm");
 }
 
 __init__() {
@@ -204,7 +204,7 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
         waitframe(1);
 
         if(localclientnum == 0) {
-          playSound(0, # "zmb_weap_wall", struct.origin);
+          playSound(0, #"zmb_weap_wall", struct.origin);
         }
 
         vec_offset = (0, 0, 0);

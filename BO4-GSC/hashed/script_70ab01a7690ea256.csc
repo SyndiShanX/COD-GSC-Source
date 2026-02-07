@@ -58,7 +58,7 @@ function_777d7ba2() {
   setdvar(#"slide_blur_enabled", 0);
 
   while(true) {
-    level waittill(#"end_game", # "hash_7646638df88a3656");
+    level waittill(#"end_game", #"hash_7646638df88a3656");
 
     if(level.var_a2859227 != 1) {
       setdvar(#"slide_blur_enabled", 1);
@@ -92,7 +92,7 @@ function_b5ea67f1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval) {
     if(self util::function_50ed1561(localclientnum)) {
       self thread function_9cf0edbf(localclientnum, 0);
-      self playSound(localclientnum, # "hash_2b366662bb232751");
+      self playSound(localclientnum, #"hash_2b366662bb232751");
     }
 
     return;
@@ -100,13 +100,13 @@ function_b5ea67f1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(self util::function_50ed1561(localclientnum)) {
     self thread function_9cf0edbf(localclientnum, 1);
-    self playSound(localclientnum, # "hash_499fa328163cfa80");
+    self playSound(localclientnum, #"hash_499fa328163cfa80");
   }
 }
 
 function_9cf0edbf(localclientnum, b_show) {
   self notify(#"hash_3dec19d02cb07e9b");
-  self endon(#"hash_3dec19d02cb07e9b", # "death");
+  self endon(#"hash_3dec19d02cb07e9b", #"death");
   level endon(#"hash_7646638df88a3656");
 
   while(true) {
@@ -139,7 +139,7 @@ function_cc4c5d4b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self setblur(var_f18c8464 * 2, 1);
 
     if(!isDefined(self.var_7c82d805)) {
-      self playSound(localclientnum, # "hash_1fa4be2474b0c451");
+      self playSound(localclientnum, #"hash_1fa4be2474b0c451");
       self.var_7c82d805 = self playLoopSound(#"hash_509328253e0c2b81");
     }
 
@@ -150,7 +150,7 @@ function_cc4c5d4b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self setblur(0, 0);
 
   if(isDefined(self.var_7c82d805)) {
-    self playSound(localclientnum, # "hash_4b8d428c3bccb4d4");
+    self playSound(localclientnum, #"hash_4b8d428c3bccb4d4");
     self stoploopsound(self.var_7c82d805);
     self.var_7c82d805 = undefined;
   }

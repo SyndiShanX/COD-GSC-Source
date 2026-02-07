@@ -24,7 +24,7 @@ enable_dying_wish_perk_for_level() {
   zm_perks::register_perk_clientfields(#"specialty_berserker", &function_6e5c87d, &function_36db14fb);
   zm_perks::register_perk_effects(#"specialty_berserker", "divetonuke_light");
   zm_perks::register_perk_init_thread(#"specialty_berserker", &function_536f842f);
-  zm_perks::function_b60f4a9f(#"specialty_berserker", # "p8_zm_vapor_altar_icon_01_dyingwish", "zombie/fx8_perk_altar_symbol_ambient_dying_wish", # "zmperksdyingwish");
+  zm_perks::function_b60f4a9f(#"specialty_berserker", #"p8_zm_vapor_altar_icon_01_dyingwish", "zombie/fx8_perk_altar_symbol_ambient_dying_wish", #"zmperksdyingwish");
   zm_perks::function_f3c80d73("zombie_perk_bottle_dying_wish", "zombie_perk_totem_dying_wish");
   level._effect[# "hash_481f130cd5e53b7f"] = # "hash_620000088d4c3f79";
   callback::on_spawned(&on_spawned);
@@ -55,7 +55,7 @@ function_bd2b1ccb(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
     if(!isDefined(self.var_cffdb842)) {
       self.var_e9dd2ca0 = 1;
-      self playSound(localclientnum, # "hash_268d2ee0a0daf799");
+      self playSound(localclientnum, #"hash_268d2ee0a0daf799");
       self.var_cffdb842 = self playLoopSound(#"hash_22a448c0d7682cdf");
     }
 
@@ -71,7 +71,7 @@ function_bd2b1ccb(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
   if(isDefined(self.var_cffdb842)) {
     self.var_e9dd2ca0 = 0;
-    self playSound(localclientnum, # "hash_2f273ae29320f08");
+    self playSound(localclientnum, #"hash_2f273ae29320f08");
     self stoploopsound(self.var_cffdb842);
     self.var_cffdb842 = undefined;
   }

@@ -71,11 +71,11 @@ function_e7a1c8a4(str_notify) {
 }
 
 function_88df772a(player, var_c895e25d, var_b1100790, var_f0996295 = 0) {
-  player endon(#"disconnect", # "hash_660dedc4af5b4336");
-  level endoncallback(&function_e7a1c8a4, # "end_game");
+  player endon(#"disconnect", #"hash_660dedc4af5b4336");
+  level endoncallback(&function_e7a1c8a4, #"end_game");
 
   if(!var_f0996295) {
-    player endoncallback(&function_57490fd5, # "hash_2a4a6c3c411261d8");
+    player endoncallback(&function_57490fd5, #"hash_2a4a6c3c411261d8");
   }
 
   self function_ecffd525(player);

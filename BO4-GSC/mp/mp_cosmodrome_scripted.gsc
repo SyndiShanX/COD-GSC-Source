@@ -216,7 +216,7 @@ function_e3ec98e4(a_ents) {
 
   array::run_all(rumbles, &playrumblelooponentity, "mp_cosdmodrome_gantry_prep_rumble");
   function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_3");
-  a_ents[# "prop 2"] waittill(#"stop_rumble", # "death");
+  a_ents[# "prop 2"] waittill(#"stop_rumble", #"death");
   array::run_all(rumbles, &stoprumble, "mp_cosdmodrome_rocket_ready_rumble");
 
   if(isDefined(a_ents[# "prop 2"])) {
@@ -273,7 +273,7 @@ function_971b8aa2(var_ae2faaca) {
 
 function_6edeb4c2(rocket) {
   level endon(#"game_ended");
-  rocket endon(#"stop_damage", # "death");
+  rocket endon(#"stop_damage", #"death");
 
   while(true) {
     self kill_equipment(self.rocket_kill_trig);

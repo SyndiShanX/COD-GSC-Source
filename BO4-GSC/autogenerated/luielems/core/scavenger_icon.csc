@@ -14,7 +14,7 @@ class cscavenger_icon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "scavenger_icon");
+    cluielem::open(localclientnum, #"scavenger_icon");
   }
 
   function function_fa582112(localclientnum) {

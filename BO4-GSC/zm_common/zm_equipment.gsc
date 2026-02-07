@@ -392,7 +392,7 @@ buy(equipment) {
 
 slot_watcher(equipment) {
   self notify(#"kill_equipment_slot_watcher");
-  self endon(#"kill_equipment_slot_watcher", # "disconnect");
+  self endon(#"kill_equipment_slot_watcher", #"disconnect");
   notify_strings = get_notify_strings(equipment);
 
   while(true) {
@@ -544,7 +544,7 @@ setup_client_hintelem(ypos, font_scale) {
 
 function show_hint(equipment) {
   self notify(#"kill_previous_show_equipment_hint_thread");
-  self endon(#"kill_previous_show_equipment_hint_thread", # "death");
+  self endon(#"kill_previous_show_equipment_hint_thread", #"death");
 
   if(isDefined(self.do_not_display_equipment_pickup_hint) && self.do_not_display_equipment_pickup_hint) {
     return;
@@ -563,19 +563,19 @@ show_hint_text(text, show_for_time = 3.2, font_scale = 1.25, ypos = 220) {
   self notify("1caf49f0db5051c");
   self endon("1caf49f0db5051c");
   self endon(#"disconnect");
-  level endoncallback(&function_57fbff5c, # "end_game");
+  level endoncallback(&function_57fbff5c, #"end_game");
 
   if(!level.zm_hint_text zm_hint_text::is_open(self)) {
     level.zm_hint_text zm_hint_text::open(self);
   }
 
   level.zm_hint_text zm_hint_text::set_text(self, text);
-  level.zm_hint_text zm_hint_text::set_state(self, # "visible");
-  time = self waittilltimeout(show_for_time, # "hide_equipment_hint_text", # "death", # "disconnect");
+  level.zm_hint_text zm_hint_text::set_state(self, #"visible");
+  time = self waittilltimeout(show_for_time, #"hide_equipment_hint_text", #"death", #"disconnect");
 
   if(isDefined(time) && isDefined(self) && level.zm_hint_text zm_hint_text::is_open(self)) {
-    level.zm_hint_text zm_hint_text::set_state(self, # "defaultstate");
-    self waittilltimeout(1, # "hide_equipment_hint_text");
+    level.zm_hint_text zm_hint_text::set_state(self, #"defaultstate");
+    self waittilltimeout(1, #"hide_equipment_hint_text");
   }
 
   if(isDefined(self) && level.zm_hint_text zm_hint_text::is_open(self)) {

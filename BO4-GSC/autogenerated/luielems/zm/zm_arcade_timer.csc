@@ -24,7 +24,7 @@ class czm_arcade_timer: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_arcade_timer");
+    cluielem::open(localclientnum, #"zm_arcade_timer");
   }
 
   function function_fa582112(localclientnum) {
@@ -32,7 +32,7 @@ class czm_arcade_timer: cluielem {
     set_data(localclientnum, "showzero", 0);
     set_data(localclientnum, "seconds", 0);
     set_data(localclientnum, "minutes", 0);
-    set_data(localclientnum, "title", # "");
+    set_data(localclientnum, "title", #"");
   }
 
   function register_clientside(uid) {

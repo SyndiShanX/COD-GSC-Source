@@ -223,7 +223,7 @@ map_is_early_in_the_game() {
 }
 
 player_throwgrenade_timer() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self.lastgrenadetime = 0;
 
   while(true) {
@@ -430,7 +430,7 @@ all_players_spawned() {
 }
 
 shock_onpain() {
-  self endon(#"death", # "disconnect", # "killonpainmonitor");
+  self endon(#"death", #"disconnect", #"killonpainmonitor");
 
   if(getdvarstring(#"blurpain") == "") {
     setdvar(#"blurpain", "on");

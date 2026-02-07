@@ -130,7 +130,7 @@ function_dc856fd8() {
   self allowsprint(0);
 
   while(true) {
-    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
+    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
 
     if(isalive(self)) {
       self allowjump(0);

@@ -176,7 +176,7 @@ function_7b29c2d2(weapon) {
   self.var_88ebd633.var_d9449a3++;
 
   if(self.var_88ebd633.var_d9449a3 >= 5) {
-    self thread activecamo::function_896ac347(weapon, # "rapid_kills", 1);
+    self thread activecamo::function_896ac347(weapon, #"rapid_kills", 1);
     self.var_88ebd633.var_d9449a3 = 0;
     self notify(#"hash_7e9b17b054c01cb3");
     return;
@@ -189,7 +189,7 @@ function_7b29c2d2(weapon) {
 
 function_160898c() {
   self notify(#"hash_7e9b17b054c01cb3");
-  self endon(#"death", # "hash_7e9b17b054c01cb3");
+  self endon(#"death", #"hash_7e9b17b054c01cb3");
   wait 5;
   self.var_88ebd633.var_d9449a3 = 0;
 }
@@ -209,7 +209,7 @@ function_432cf6d(weapon) {
   self.var_88ebd633.var_bcacb3a3++;
 
   if(self.var_88ebd633.var_bcacb3a3 >= 5) {
-    self thread activecamo::function_896ac347(weapon, # "rapid_headshots", 1);
+    self thread activecamo::function_896ac347(weapon, #"rapid_headshots", 1);
     self.var_88ebd633.var_bcacb3a3 = 0;
     self notify(#"hash_3dbf3a8521ba1621");
     return;
@@ -222,17 +222,17 @@ function_432cf6d(weapon) {
 
 function_d01affa9() {
   self notify(#"hash_3dbf3a8521ba1621");
-  self endon(#"death", # "hash_3dbf3a8521ba1621");
+  self endon(#"death", #"hash_3dbf3a8521ba1621");
   wait 7;
   self.var_88ebd633.var_bcacb3a3 = 0;
 }
 
 function_4092decc(weapon) {
   if(zm_weapons::is_weapon_upgraded(weapon)) {
-    self activecamo::function_896ac347(weapon, # "pap_weapon_packed", 1);
+    self activecamo::function_896ac347(weapon, #"pap_weapon_packed", 1);
 
     if(zm_pap_util::function_7352d8cc(weapon)) {
-      self activecamo::function_896ac347(weapon, # "pap_weapon_double_packed", 1);
+      self activecamo::function_896ac347(weapon, #"pap_weapon_double_packed", 1);
     }
 
     return;
@@ -242,31 +242,31 @@ function_4092decc(weapon) {
 }
 
 function_5ae5fabe() {
-  if(self stats::get_stat_global(#"weapons_mastery_assault") == 0 && self stats::get_stat(#"item_group_stats", # "weapon_assault", # "challenges", # "statvalue") >= 42) {
+  if(self stats::get_stat_global(#"weapons_mastery_assault") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_assault", #"challenges", #"statvalue") >= 42) {
     self stats::function_dad108fa(#"weapons_mastery_assault", 1);
   }
 
-  if(self stats::get_stat_global(#"hash_517bf5c8991ad97a") == 0 && self stats::get_stat(#"item_group_stats", # "weapon_cqb", # "challenges", # "statvalue") >= 21) {
+  if(self stats::get_stat_global(#"hash_517bf5c8991ad97a") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_cqb", #"challenges", #"statvalue") >= 21) {
     self stats::function_dad108fa(#"hash_517bf5c8991ad97a", 1);
   }
 
-  if(self stats::get_stat_global(#"weapons_mastery_lmg") == 0 && self stats::get_stat(#"item_group_stats", # "weapon_lmg", # "challenges", # "statvalue") >= 28) {
+  if(self stats::get_stat_global(#"weapons_mastery_lmg") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_lmg", #"challenges", #"statvalue") >= 28) {
     self stats::function_dad108fa(#"weapons_mastery_lmg", 1);
   }
 
-  if(self stats::get_stat_global(#"secondary_mastery_pistol") == 0 && self stats::get_stat(#"item_group_stats", # "weapon_pistol", # "challenges", # "statvalue") >= 28) {
+  if(self stats::get_stat_global(#"secondary_mastery_pistol") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_pistol", #"challenges", #"statvalue") >= 28) {
     self stats::function_dad108fa(#"secondary_mastery_pistol", 1);
   }
 
-  if(self stats::get_stat_global(#"weapons_mastery_smg") == 0 && self stats::get_stat(#"item_group_stats", # "weapon_smg", # "challenges", # "statvalue") >= 49) {
+  if(self stats::get_stat_global(#"weapons_mastery_smg") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_smg", #"challenges", #"statvalue") >= 49) {
     self stats::function_dad108fa(#"weapons_mastery_smg", 1);
   }
 
-  if(self stats::get_stat_global(#"weapons_mastery_sniper") == 0 && self stats::get_stat(#"item_group_stats", # "weapon_sniper", # "challenges", # "statvalue") >= 28) {
+  if(self stats::get_stat_global(#"weapons_mastery_sniper") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_sniper", #"challenges", #"statvalue") >= 28) {
     self stats::function_dad108fa(#"weapons_mastery_sniper", 1);
   }
 
-  if(self stats::get_stat_global(#"weapons_mastery_tactical") == 0 && self stats::get_stat(#"item_group_stats", # "weapon_tactical", # "challenges", # "statvalue") >= 28) {
+  if(self stats::get_stat_global(#"weapons_mastery_tactical") == 0 && self stats::get_stat(#"item_group_stats", #"weapon_tactical", #"challenges", #"statvalue") >= 28) {
     self stats::function_dad108fa(#"weapons_mastery_tactical", 1);
   }
 

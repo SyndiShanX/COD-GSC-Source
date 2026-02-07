@@ -185,7 +185,7 @@ function_ede90521() {
 }
 
 function_a5fa6428() {
-  level endon(#"end_game", # "vessel_found");
+  level endon(#"end_game", #"vessel_found");
   wait 2;
   zm_hms_util::function_3c173d37();
   level.var_60b08c24 zm_hms_util::function_6a0d675d(#"hash_33c988fee37ea6da", 0, 0, 1);
@@ -205,7 +205,7 @@ function_a5fa6428() {
 }
 
 cover_think() {
-  level endon(#"end_game", # "vessel_found");
+  level endon(#"end_game", #"vessel_found");
   self endon(#"death");
   trigger = getent(self.target, "targetname");
 
@@ -229,7 +229,7 @@ cover_think() {
 }
 
 function_9c223c27() {
-  level endon(#"end_game", # "vessel_found");
+  level endon(#"end_game", #"vessel_found");
   self endon(#"death");
   self.e_vessel show();
   self zm_orange_ee_dynamite::function_170afe2c(1);
@@ -240,7 +240,7 @@ function_9c223c27() {
     level.var_1c53964e zm_hms_util::function_6a0d675d(#"hash_497ec7e9ca9ca204", -1, 0, 1);
   }
 
-  player = self zm_unitrigger::function_fac87205(zm_utility::function_d6046228(#"hash_3be823a04b5cca2d", # "hash_25cb84d1af883c53"), 64);
+  player = self zm_unitrigger::function_fac87205(zm_utility::function_d6046228(#"hash_3be823a04b5cca2d", #"hash_25cb84d1af883c53"), 64);
   player thread zm_orange_util::function_51b752a9(#"vox_seal_pickup");
   self.e_vessel hide();
   self.e_vessel playSound("zmb_vessel_pickup");

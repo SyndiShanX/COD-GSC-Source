@@ -8,9 +8,9 @@
 #namespace humanrpginterface;
 
 registerhumanrpginterfaceattributes() {
-  ai::registermatchedinterface(#"human_rpg", # "can_be_meleed", 1, array(1, 0), &aiutility::meleeattributescallback);
-  ai::registermatchedinterface(#"human_rpg", # "can_melee", 1, array(1, 0), &aiutility::meleeattributescallback);
-  ai::registermatchedinterface(#"human_rpg", # "coveridleonly", 0, array(1, 0));
-  ai::registermatchedinterface(#"human_rpg", # "sprint", 0, array(1, 0));
-  ai::registermatchedinterface(#"human_rpg", # "patrol", 0, array(1, 0));
+  ai::registermatchedinterface(#"human_rpg", #"can_be_meleed", 1, array(1, 0), &aiutility::meleeattributescallback);
+  ai::registermatchedinterface(#"human_rpg", #"can_melee", 1, array(1, 0), &aiutility::meleeattributescallback);
+  ai::registermatchedinterface(#"human_rpg", #"coveridleonly", 0, array(1, 0));
+  ai::registermatchedinterface(#"human_rpg", #"sprint", 0, array(1, 0));
+  ai::registermatchedinterface(#"human_rpg", #"patrol", 0, array(1, 0));
 }

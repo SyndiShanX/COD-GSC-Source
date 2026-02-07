@@ -34,9 +34,9 @@ __init__() {
 
 enable_electric_cherry_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_electriccherry", # "perk_electric_cherry", 3000, # "hash_2355bebe5034477a", getweapon("zombie_perk_bottle_cherry"), getweapon("zombie_perk_totem_electric_burst"), # "zmperkselectricburst");
+    zm_perks::register_perk_basic_info(#"specialty_electriccherry", #"perk_electric_cherry", 3000, #"hash_2355bebe5034477a", getweapon("zombie_perk_bottle_cherry"), getweapon("zombie_perk_totem_electric_burst"), #"zmperkselectricburst");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_electriccherry", # "perk_electric_cherry", 3000, # "zombie/perk_electric_cherry", getweapon("zombie_perk_bottle_cherry"), getweapon("zombie_perk_totem_electric_burst"), # "zmperkselectricburst");
+    zm_perks::register_perk_basic_info(#"specialty_electriccherry", #"perk_electric_cherry", 3000, #"zombie/perk_electric_cherry", getweapon("zombie_perk_bottle_cherry"), getweapon("zombie_perk_totem_electric_burst"), #"zmperkselectricburst");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_electriccherry", &electric_cherry_precache);
@@ -185,7 +185,7 @@ electric_cherry_shock_fx() {
 
 electric_cherry_stun() {
   self notify(#"stun_zombie");
-  self endon(#"death", # "stun_zombie");
+  self endon(#"death", #"stun_zombie");
 
   if(self.health <= 0) {
     iprintln("<dev string:x38>");
@@ -205,7 +205,7 @@ electric_cherry_stun() {
 }
 
 electric_cherry_reload_attack() {
-  self endon(#"disconnect", # "specialty_electriccherry" + "_take");
+  self endon(#"disconnect", #"specialty_electriccherry" + "_take");
   self.wait_on_reload = [];
   self.consecutive_electric_cherry_attacks = 0;
 
@@ -313,7 +313,7 @@ electric_cherry_reload_attack() {
 
 electric_cherry_cooldown_timer(current_weapon) {
   self notify(#"electric_cherry_cooldown_started");
-  self endon(#"disconnect", # "electric_cherry_cooldown_started");
+  self endon(#"disconnect", #"electric_cherry_cooldown_started");
   n_reload_time = 0.25;
 
   if(self hasperk(#"specialty_fastreload")) {
@@ -330,7 +330,7 @@ check_for_reload_complete(weapon) {
   self thread weapon_replaced_monitor(weapon);
 
   while(true) {
-    self waittill(#"reload", # "hash_278526d0bbdb4ce7");
+    self waittill(#"reload", #"hash_278526d0bbdb4ce7");
     current_weapon = self getcurrentweapon();
 
     if(current_weapon == weapon) {

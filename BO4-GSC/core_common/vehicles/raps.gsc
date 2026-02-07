@@ -61,7 +61,7 @@ slow_raps_trigger() {
 
 slow_raps(trigger) {
   self notify(#"slow_raps");
-  self endon(#"slow_raps", # "death");
+  self endon(#"slow_raps", #"death");
   self.slow_trigger = 1;
 
   if(isDefined(trigger.script_int)) {

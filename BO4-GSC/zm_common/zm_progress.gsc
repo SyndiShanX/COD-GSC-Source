@@ -104,7 +104,7 @@ function_a82534d(params, unitrigger, var_c060d2c8) {
 }
 
 player_progress_bar_update(start_time, use_time) {
-  self endon(#"entering_last_stand", # "death", # "progress_end");
+  self endon(#"entering_last_stand", #"death", #"progress_end");
 
   while(isDefined(self) && gettime() - start_time < use_time) {
     progress = (gettime() - start_time) / use_time;
@@ -133,7 +133,7 @@ player_progress_bar(start_time, use_time) {
 }
 
 function_48098d30(player, params) {
-  self endon(#"kill_trigger", # "progress_succeed", # "progress_failed");
+  self endon(#"kill_trigger", #"progress_succeed", #"progress_failed");
 
   while(isDefined(params.fx_name)) {
     angles = player getplayerangles();
@@ -262,7 +262,7 @@ function_f8b39299(player, params, var_c060d2c8) {
 function_4335011a(player, params, var_c060d2c8) {
   self thread function_48098d30(player, params);
   self thread function_f8b39299(player, params, var_c060d2c8);
-  retval = self waittill(#"progress_succeed", # "progress_failed");
+  retval = self waittill(#"progress_succeed", #"progress_failed");
 
   if(retval._notify == "progress_succeed") {
     return true;

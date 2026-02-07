@@ -64,7 +64,7 @@ function_d3a9800e() {
 waittill_pathing_done(maxtime = 15) {
   self endon(#"death");
   self endon(#"change_state");
-  self waittilltimeout(maxtime, # "near_goal");
+  self waittilltimeout(maxtime, #"near_goal");
 }
 
 function_f2fd92d1() {
@@ -104,7 +104,7 @@ function_e452a40c(params) {
     self setspeed(self.settings.var_9eff22ee);
     self setbrake(0);
     self function_a57c34b7(self.ai.var_a38db64f, 1, 1);
-    self waittilltimeout(30, # "near_goal");
+    self waittilltimeout(30, #"near_goal");
 
     if(isDefined(self.fxent)) {
       self.fxent delete();

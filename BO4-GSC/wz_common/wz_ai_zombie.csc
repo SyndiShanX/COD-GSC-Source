@@ -30,7 +30,7 @@ handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval) {
     localplayers = level.localplayers;
-    playSound(0, # "zmb_zombie_spawn", self.origin);
+    playSound(0, #"zmb_zombie_spawn", self.origin);
     burst_fx = level._effect[# "rise_burst"];
     billow_fx = level._effect[# "rise_billow"];
 

@@ -32,12 +32,12 @@ class cplayer_insertion_choice: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "player_insertion_choice");
+    cluielem::open(localclientnum, #"player_insertion_choice");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, # "defaultstate");
+    set_state(localclientnum, #"defaultstate");
   }
 
   function register_clientside(uid) {

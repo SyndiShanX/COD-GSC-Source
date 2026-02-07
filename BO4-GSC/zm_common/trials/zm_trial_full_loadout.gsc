@@ -56,7 +56,7 @@ on_end(round_reset) {
 
 monitor_loadout() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   self.var_53531c80 = 0;
   self zm_trial_util::function_63060af4(0);
 

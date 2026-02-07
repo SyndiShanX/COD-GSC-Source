@@ -80,10 +80,10 @@ __init__() {
   clientfield::register("toplayer", "gladiator_melee_effect", 1, 1, "counter");
   clientfield::register("actor", "gladiator_arm_effect", 1, 2, "int");
   clientfield::register("scriptmover", "gladiator_axe_effect", 1, 1, "int");
-  level thread aat::register_immunity("zm_aat_brain_decay", # "gladiator", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "gladiator", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "gladiator", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "gladiator", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"gladiator", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"gladiator", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"gladiator", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"gladiator", 1, 1, 1);
 
   if(isarchetypeloaded(#"gladiator")) {
     level thread function_24a38427();
@@ -1148,7 +1148,7 @@ function_3b8907b9(s_params) {
 }
 
 function_fbc2806e(var_a4388d06, spin_dir) {
-  self endon(#"death", # "arm_destroyed");
+  self endon(#"death", #"arm_destroyed");
   var_23f0c5b3 = self gettagorigin(var_a4388d06);
   var_ecc54f32 = self gettagangles(var_a4388d06);
   invert = 1;

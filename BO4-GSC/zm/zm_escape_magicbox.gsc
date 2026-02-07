@@ -62,7 +62,7 @@ custom_joker_movement() {
 }
 
 watch_for_lock() {
-  self endon(#"user_grabbed_weapon", # "chest_accessed");
+  self endon(#"user_grabbed_weapon", #"chest_accessed");
   self waittill(#"box_locked");
   self notify(#"kill_chest_think");
   self.grab_weapon_hint = 0;

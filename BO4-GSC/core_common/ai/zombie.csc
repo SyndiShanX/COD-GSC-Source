@@ -39,13 +39,13 @@ zombiehandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldna
 _gibcallback(localclientnum, entity, gibflag) {
   switch (gibflag) {
     case 8:
-      playSound(0, # "zmb_zombie_head_gib", self.origin + (0, 0, 60));
+      playSound(0, #"zmb_zombie_head_gib", self.origin + (0, 0, 60));
       break;
     case 16:
     case 32:
     case 128:
     case 256:
-      playSound(0, # "zmb_death_gibs", self.origin + (0, 0, 30));
+      playSound(0, #"zmb_death_gibs", self.origin + (0, 0, 30));
       break;
   }
 }

@@ -16,7 +16,7 @@
 #namespace item_drop;
 
 autoexec __init__system__() {
-  system::register(#"item_drop", &__init__, undefined, # "item_world");
+  system::register(#"item_drop", &__init__, undefined, #"item_world");
 }
 
 __init__() {
@@ -434,7 +434,7 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
           if(parentent.classname == "script_vehicle") {
             var_fe7058af = 0;
 
-            foreach(vehicle in array(#"player_atv", # "helicopter_light", "recon_wz", "hawk")) {
+            foreach(vehicle in array(#"player_atv", #"helicopter_light", "recon_wz", "hawk")) {
               if(isDefined(parentent.scriptvehicletype) && vehicle == parentent.scriptvehicletype) {
                 var_fe7058af = 1;
                 break;
@@ -550,7 +550,7 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
       }
 
       if(!var_fe7058af && parentent.classname == "script_vehicle") {
-        foreach(vehicle in array(#"player_atv", # "helicopter_light", "recon_wz", "hawk")) {
+        foreach(vehicle in array(#"player_atv", #"helicopter_light", "recon_wz", "hawk")) {
           if(isDefined(parentent.scriptvehicletype) && vehicle == parentent.scriptvehicletype) {
             var_fe7058af = 1;
             break;

@@ -203,7 +203,7 @@ function_b10c4057(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   playFX(localclientnum, level._effect[# "charon_impact_zombie"], v_org, anglesToForward(self.angles));
-  playSound(localclientnum, # "hash_1178a0c11728dc62", self.origin);
+  playSound(localclientnum, #"hash_1178a0c11728dc62", self.origin);
 }
 
 function_12c042fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -231,7 +231,7 @@ function_12c042fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     playFX(localclientnum, level._effect[# "hash_3a8801fc057183dc"], v_org, v_ang);
   }
 
-  playSound(localclientnum, # "hash_5674d8ca7846c4a5", self.origin);
+  playSound(localclientnum, #"hash_5674d8ca7846c4a5", self.origin);
 }
 
 function_3b17ff6f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -277,7 +277,7 @@ function_a083252d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_8dddfdd2 = util::playFXOnTag(localclientnum, level._effect[# "charon_pool"], self, "tag_origin");
 
     if(!isDefined(self.var_97807834)) {
-      self playSound(localclientnum, # "hash_309ccaa2cf6590f1");
+      self playSound(localclientnum, #"hash_309ccaa2cf6590f1");
       self.var_97807834 = self playLoopSound(#"hash_23338cb2b8ef2117");
     }
 
@@ -290,7 +290,7 @@ function_a083252d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_97807834)) {
-    self playSound(localclientnum, # "hash_73cf0fb013e9af90");
+    self playSound(localclientnum, #"hash_73cf0fb013e9af90");
     self stoploopsound(self.var_97807834);
     self.var_97807834 = undefined;
   }

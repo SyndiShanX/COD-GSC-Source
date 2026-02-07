@@ -37,7 +37,7 @@ grenade_spawn(watcher, owner) {
 
   if(!(isDefined(self.previouslyhacked) && self.previouslyhacked)) {
     if(isDefined(owner)) {
-      owner stats::function_e24eec31(self.weapon, # "used", 1);
+      owner stats::function_e24eec31(self.weapon, #"used", 1);
       origin = owner.origin;
     }
 
@@ -98,7 +98,7 @@ apply_sprint_boost_to_players(owner, origin, radius, duration) {
 
 apply_sprint_boost(duration) {
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   player notify(#"apply_sprint_boost_singleton");
   player endon(#"apply_sprint_boost_singleton");
   player setsprintboost(1);

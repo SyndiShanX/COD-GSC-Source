@@ -72,7 +72,7 @@ riotshield_destroy_anim(localclientnum) {
   }
 
   waitframe(1);
-  self playSound(localclientnum, # "wpn_shield_destroy");
+  self playSound(localclientnum, #"wpn_shield_destroy");
   self useanimtree("generic");
   self setanim(#"o_riot_stand_destroyed", 1, 0, 1);
   wait 1;

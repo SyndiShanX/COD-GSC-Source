@@ -8,7 +8,7 @@
 
 class cbountyhunterbuy: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "bountyhunterbuy");
+    cluielem::open(localclientnum, #"bountyhunterbuy");
   }
 
   function function_fa582112(localclientnum) {

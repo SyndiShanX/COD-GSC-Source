@@ -21,7 +21,7 @@
 #namespace zombie_tiger_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_tiger_util", &__init__, &__main__, # "zm_ai_tiger");
+  system::register(#"zombie_tiger_util", &__init__, &__main__, #"zm_ai_tiger");
 }
 
 __init__() {

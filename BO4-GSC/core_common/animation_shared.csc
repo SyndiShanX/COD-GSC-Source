@@ -39,7 +39,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
   }
 
   self notify(#"new_scripted_anim");
-  self endon(#"new_scripted_anim", # "death");
+  self endon(#"new_scripted_anim", #"death");
 
   if(!isDefined(self.model) || self.model == # "") {
     assertmsg("<dev string:x38>" + self.origin);
@@ -106,7 +106,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2,
 waittill_end() {
   level endon(#"demo_jump");
   self waittillmatch({
-    #notetrack: "end"}, # "_anim_notify_");
+    #notetrack: "end"}, #"_anim_notify_");
 }
 
 _get_align_ent(e_align) {
@@ -248,7 +248,7 @@ setup_notetracks() {
 handle_notetracks() {
   self notify(#"handle_notetracks");
   level endon(#"demo_jump");
-  self endon(#"handle_notetracks", # "death");
+  self endon(#"handle_notetracks", #"death");
 
   while(true) {
     waitresult = self waittill(#"_anim_notify_");

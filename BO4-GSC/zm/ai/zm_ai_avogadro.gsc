@@ -32,7 +32,7 @@
 #namespace zm_ai_avogadro;
 
 autoexec __init__system__() {
-  system::register(#"zm_ai_avogadro", &__init__, &__main__, # "archetype_avogadro");
+  system::register(#"zm_ai_avogadro", &__init__, &__main__, #"archetype_avogadro");
 }
 
 __init__() {
@@ -106,10 +106,10 @@ __init__() {
 
   function_22006009();
 
-  level thread aat::register_immunity("zm_aat_brain_decay", # "avogadro", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "avogadro", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "avogadro", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "avogadro", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"avogadro", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"avogadro", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"avogadro", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"avogadro", 1, 1, 1);
 }
 
 __main__() {}
@@ -437,7 +437,7 @@ function_be9ade6d(entity) {
 }
 
 function_15b528d9(duration, var_2610777) {
-  self endoncallback(&function_866bf053, # "death", # "disconnect");
+  self endoncallback(&function_866bf053, #"death", #"disconnect");
   wait float(function_60d95f53()) / 1000 * var_2610777;
 
   if(zm_utility::is_player_valid(self)) {

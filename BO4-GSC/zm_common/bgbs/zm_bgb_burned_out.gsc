@@ -13,7 +13,7 @@
 #namespace zm_bgb_burned_out;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_burned_out", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_burned_out", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -29,12 +29,12 @@ __init__() {
 }
 
 event() {
-  self endon(#"disconnect", # "bgb_update");
+  self endon(#"disconnect", #"bgb_update");
   var_3c24cb96 = 0;
   self thread bgb::set_timer(3, 3);
 
   for(;;) {
-    waitresult = self waittill(#"damage", # "damage_armor");
+    waitresult = self waittill(#"damage", #"damage_armor");
     type = waitresult.mod;
     attacker = waitresult.attacker;
 

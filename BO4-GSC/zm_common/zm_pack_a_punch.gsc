@@ -279,7 +279,7 @@ function_c6d69354() {
   zm_pap_util::set_interaction_trigger_height(48);
   zm_pap_util::function_11fdb083(34);
   level.var_d6e98131 = &function_41cd6368;
-  level.var_48c45225 = array(#"ar_damage_t8", # "ar_fastfire_t8", # "ar_mg1909_t8", # "shotgun_semiauto_t8", # "tr_longburst_t8", # "tr_midburst_t8");
+  level.var_48c45225 = array(#"ar_damage_t8", #"ar_fastfire_t8", #"ar_mg1909_t8", #"shotgun_semiauto_t8", #"tr_longburst_t8", #"tr_midburst_t8");
 }
 
 get_start_state() {
@@ -490,7 +490,7 @@ function_c0bdaa76(b_on) {
 }
 
 function_72cf5db2() {
-  self endon(#"hash_672bc8ddbec0fa33", # "death");
+  self endon(#"hash_672bc8ddbec0fa33", #"death");
   pap_machine = self.stub.zbarrier;
   b_power_off = !pap_machine is_on();
 
@@ -537,7 +537,7 @@ function_72cf5db2() {
           if(isDefined(level.pack_a_punch.var_25a37ed7)) {
             player[[level.pack_a_punch.var_25a37ed7]]();
           } else {
-            player zm_audio::create_and_play_dialog(#"general", # "outofmoney", 0);
+            player zm_audio::create_and_play_dialog(#"general", #"outofmoney", 0);
           }
 
           continue;
@@ -640,7 +640,7 @@ function_222c0292(current_weapon, packa_rollers, pap_machine, var_376755db, var_
     self zm_score::minus_to_player_score(var_376755db);
   }
 
-  self.var_4062e9ef = self zm_audio::create_and_play_dialog(#"pap", # "wait");
+  self.var_4062e9ef = self zm_audio::create_and_play_dialog(#"pap", #"wait");
 
   if(!isDefined(self)) {
     pap_machine flag::set("pap_waiting_for_user");
@@ -657,7 +657,7 @@ function_222c0292(current_weapon, packa_rollers, pap_machine, var_376755db, var_
   pap_machine flag::clear("pap_taking_gun");
   pap_machine flag::set("pap_offering_gun");
   pap_machine thread wait_for_timeout(pap_machine.unitrigger_stub.current_weapon, pap_machine.packa_timer, self, pap_machine.var_a86430cb, var_9c076b6, var_aa0d72d4);
-  s_result = pap_machine waittill(#"pap_timeout", # "pap_taken");
+  s_result = pap_machine waittill(#"pap_timeout", #"pap_taken");
 
   if(s_result._notify == "pap_taken") {
     weaponidx = undefined;
@@ -678,7 +678,7 @@ function_222c0292(current_weapon, packa_rollers, pap_machine, var_376755db, var_
 
       self zm_stats::increment_challenge_stat(#"pap_weapon_packed");
       self zm_stats::increment_challenge_stat(#"hash_2126e77556d8e66b");
-      self stats::inc_stat(#"item_stats", current_weapon.name, # "packed", # "statvalue", 1);
+      self stats::inc_stat(#"item_stats", current_weapon.name, #"packed", #"statvalue", 1);
     }
 
     if(pap_machine.var_a86430cb || var_9c076b6 || var_aa0d72d4) {
@@ -692,7 +692,7 @@ function_222c0292(current_weapon, packa_rollers, pap_machine, var_376755db, var_
         self zm_challenges::debug_print("<dev string:x169>");
 
         self zm_stats::increment_challenge_stat(#"pap_weapon_double_packed", undefined, 1);
-        self stats::inc_stat(#"item_stats", current_weapon.name, # "doublepacked", # "statvalue", 1);
+        self stats::inc_stat(#"item_stats", current_weapon.name, #"doublepacked", #"statvalue", 1);
         self zm_challenges::function_e40c9d13();
       }
     }
@@ -786,7 +786,7 @@ wait_for_player_to_take(player, weapon, packa_timer, var_a86430cb, var_9c076b6 =
   upgrade_weapon = pap_machine.unitrigger_stub.upgrade_weapon;
   assert(isDefined(current_weapon), "<dev string:x197>");
   assert(isDefined(upgrade_weapon), "<dev string:x1c8>");
-  pap_machine endon(#"pap_timeout", # "hash_672bc8ddbec0fa33");
+  pap_machine endon(#"pap_timeout", #"hash_672bc8ddbec0fa33");
 
   while(isDefined(player)) {
     packa_timer playLoopSound(#"zmb_perks_packa_ticktock");
@@ -895,7 +895,7 @@ wait_for_player_to_take(player, weapon, packa_timer, var_a86430cb, var_9c076b6 =
         player switchtoweapon(upgrade_weapon);
 
         if(!(isDefined(player.var_4062e9ef) && player.var_4062e9ef) && !player zm_audio::function_e2bd90b5("pap", "wait")) {
-          player thread zm_audio::create_and_play_dialog(#"pap", # "pickup");
+          player thread zm_audio::create_and_play_dialog(#"pap", #"pickup");
           player zm_weapons::play_weapon_vo(upgrade_weapon);
         }
 
@@ -982,7 +982,7 @@ wait_for_timeout(weapon, packa_timer, player, var_a86430cb, var_9c076b6 = 0, var
 }
 
 wait_for_disconnect(player) {
-  self endon(#"pap_taken", # "pap_timeout");
+  self endon(#"pap_taken", #"pap_timeout");
 
   while(isDefined(player)) {
     wait 0.1;
@@ -994,7 +994,7 @@ wait_for_disconnect(player) {
 
 destroy_weapon_in_blackout() {
   pap_machine = self;
-  pap_machine endon(#"pap_timeout", # "pap_taken", # "pap_player_disconnected");
+  pap_machine endon(#"pap_timeout", #"pap_taken", #"pap_player_disconnected");
   pap_machine flag::wait_till("Pack_A_Punch_off");
   pap_machine set_pap_zbarrier_state("take_gun");
   pap_machine.pack_player playlocalsound(level.zmb_laugh_alias);

@@ -10,7 +10,7 @@
 #namespace zm_bgb_extra_credit;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_extra_credit", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_extra_credit", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -27,7 +27,7 @@ activation() {
 }
 
 function_22f934e6(origin, var_22a4c702) {
-  self endon(#"disconnect", # "bled_out");
+  self endon(#"disconnect", #"bled_out");
   e_powerup = zm_powerups::specific_powerup_drop("bonus_points_player", origin, undefined, 0.1, undefined, undefined, 1, 1, 1, 1);
 
   if(isDefined(level.var_5a2df97b)) {

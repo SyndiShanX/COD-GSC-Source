@@ -8,7 +8,7 @@
 #namespace spawn_beacon;
 
 autoexec __init__system__() {
-  system::register(#"spawnbeacon", &__init__, undefined, # "killstreaks");
+  system::register(#"spawnbeacon", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

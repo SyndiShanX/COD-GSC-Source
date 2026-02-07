@@ -35,7 +35,7 @@ function_e31bc59d(abilityslot, weapon) {
     }
   }
 
-  self waittill(#"death", # "weapon_change");
+  self waittill(#"death", #"weapon_change");
 
   if(isDefined(self)) {
     self clientfield::set_player_uimodel("hudItems.abilityHintIndex", 0);

@@ -331,7 +331,7 @@ class cdoor {
   }
 
   function function_2190a0ee(b_reusable, var_23456fbb) {
-    m_e_door endon(#"hash_190d72393c0a8869", # "delete", # "gameobject_deleted");
+    m_e_door endon(#"hash_190d72393c0a8869", #"delete", #"gameobject_deleted");
 
     while(true) {
       if(var_23456fbb) {
@@ -1428,7 +1428,7 @@ door_update_lock_scripted(c_door) {
 
 function_dc98f943(c_door) {
   e_door = c_door.m_e_door;
-  e_door endon(#"door_cleared", # "delete");
+  e_door endon(#"door_cleared", #"delete");
   assert(isDefined(e_door), "<dev string:xeb>");
   e_door setCanDamage(0);
   waitresult = c_door waittill(#"set_destructible");

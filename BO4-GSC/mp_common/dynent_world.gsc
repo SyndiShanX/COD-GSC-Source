@@ -267,7 +267,7 @@ function_e882de59(trigger) {
   self notify("1fefc20570ca81a2");
   self endon("1fefc20570ca81a2");
   level endon(#"game_ended");
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(self usebuttonpressed()) {
     waitframe(1);

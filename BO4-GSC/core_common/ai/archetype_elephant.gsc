@@ -236,7 +236,7 @@ function_106b6b29() {
 }
 
 function_8d7ad318(launchpos, trajectory, targetpos) {
-  self endon(#"hash_79e095919e415a70", # "death");
+  self endon(#"hash_79e095919e415a70", #"death");
 
   assert(trajectory.size);
   recordsphere(targetpos, 3, (0, 1, 1), "<dev string:x38>");
@@ -566,7 +566,7 @@ function_67fbc3a3(elephant, rider, var_c3f91959) {
 }
 
 function_978a4592(elephant, rider) {
-  rider endon(#"death", # "hash_45ddc9393cf1b3e2");
+  rider endon(#"death", #"hash_45ddc9393cf1b3e2");
   elephant endon(#"death");
 
   while(true) {
@@ -628,7 +628,7 @@ function_202012ad(elephant, rider) {
 }
 
 function_1cd7a6d7(elephant, rider) {
-  rider endon(#"death", # "hash_45ddc9393cf1b3e2");
+  rider endon(#"death", #"hash_45ddc9393cf1b3e2");
   elephant endon(#"death");
 
   while(true) {
@@ -647,7 +647,7 @@ function_1cd7a6d7(elephant, rider) {
 }
 
 function_557c9c90(elephant, rider) {
-  rider endon(#"death", # "hash_45ddc9393cf1b3e2");
+  rider endon(#"death", #"hash_45ddc9393cf1b3e2");
   elephant endon(#"death");
   aligntag = rider.ai.var_4f12fc77;
   rider.ai.var_62c039ab = rider animmappingsearch(#"hash_6a0be85d14df502a");
@@ -679,7 +679,7 @@ function_557c9c90(elephant, rider) {
 }
 
 function_2798bb2(elephant, rider) {
-  rider endon(#"death", # "hash_45ddc9393cf1b3e2");
+  rider endon(#"death", #"hash_45ddc9393cf1b3e2");
   elephant endon(#"death");
   alignstruct = struct::get("tag_align_boss_doors", "targetname");
 
@@ -781,7 +781,7 @@ function_d8c752e0() {
     waitframe(1);
   }
 
-  rider = function_e5f2ff53(self, "tag_char_align_a", # "hash_6101964904e7d17b");
+  rider = function_e5f2ff53(self, "tag_char_align_a", #"hash_6101964904e7d17b");
   rider.ai.var_758ed187 = # "hash_20cbd41b17321edc";
   rider.ai.var_4f12fc77 = "tag_char_align_a";
   rider.instakill_func = &function_707d0196;
@@ -794,7 +794,7 @@ function_d8c752e0() {
   }
 
   rider thread function_2798bb2(self, rider);
-  rider = function_e5f2ff53(self, "tag_char_align_b", # "hash_2672ad69ba7c107");
+  rider = function_e5f2ff53(self, "tag_char_align_b", #"hash_2672ad69ba7c107");
   rider.ai.var_758ed187 = # "hash_20cbd71b173223f5";
   rider.ai.var_4f12fc77 = "tag_char_align_b";
   rider.instakill_func = &function_707d0196;
@@ -808,13 +808,13 @@ function_d8c752e0() {
   rider thread function_2798bb2(self, rider);
 
   if(isDefined(level.var_a52a5487) && level.var_a52a5487) {
-    rider = function_e5f2ff53(self, "tag_char_align_c", # "hash_6101964904e7d17b");
+    rider = function_e5f2ff53(self, "tag_char_align_c", #"hash_6101964904e7d17b");
     rider.ai.var_758ed187 = # "hash_20cbd41b17321edc";
     rider.ai.var_4f12fc77 = "tag_char_align_c";
     rider.instakill_func = &function_707d0196;
     rider.ai.entryanim = # "hash_1447273275dbb9a9";
     rider thread function_2798bb2(self, rider);
-    rider = function_e5f2ff53(self, "tag_char_align_d", # "hash_2672ad69ba7c107");
+    rider = function_e5f2ff53(self, "tag_char_align_d", #"hash_2672ad69ba7c107");
     rider.ai.var_758ed187 = # "hash_20cbd71b173223f5";
     rider.ai.var_4f12fc77 = "tag_char_align_d";
     rider.instakill_func = &function_707d0196;
@@ -863,9 +863,9 @@ function_4c731a08() {
   self.ai.var_a5dabb8b = 1;
   self.allowdeath = 0;
   self bloodimpact("none");
-  namespace_81245006::initweakpoints(self, # "c_t8_zmb_dlc0_towers_boss_weakpoint_def");
+  namespace_81245006::initweakpoints(self, #"c_t8_zmb_dlc0_towers_boss_weakpoint_def");
   aiutility::addaioverridedamagecallback(self, &function_cfe82365);
-  function_2e4487f6(self, # "hash_8e173ae91589439");
+  function_2e4487f6(self, #"hash_8e173ae91589439");
   self thread function_f51431a9(self);
   self thread function_423390f2();
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
@@ -1304,7 +1304,7 @@ function_4d479d22(elephant) {
   namespace_81245006::function_6c64ebd3(var_dd54fdb1, 1);
   var_dd54fdb1 = namespace_81245006::function_37e3f011(elephant, "tag_head_ws");
   namespace_81245006::function_6c64ebd3(var_dd54fdb1, 1);
-  function_2e4487f6(elephant, # "hash_8e170ae91588f20");
+  function_2e4487f6(elephant, #"hash_8e170ae91588f20");
 }
 
 function_f51431a9(elephant) {

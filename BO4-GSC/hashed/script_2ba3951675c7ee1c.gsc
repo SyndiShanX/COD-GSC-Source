@@ -260,7 +260,7 @@ function_fcf0a319(e_player, var_a29167c5) {
   if(isalive(e_player)) {
     self thread function_11efbb03(e_player);
     self thread wait_for_timeout(e_player, var_a29167c5);
-    var_2b94e3bb = self waittill(#"magma_timeout", # "magma_taken");
+    var_2b94e3bb = self waittill(#"magma_timeout", #"magma_taken");
   }
 
   if(isalive(e_player)) {
@@ -368,7 +368,7 @@ function_11efbb03(e_player) {
           #e_player: e_player
         });
         level flag::set(#"hash_5e6097345e223e2d");
-        e_player zm_audio::create_and_play_dialog(#"weapon_pickup", # "magmagat_unfinished");
+        e_player zm_audio::create_and_play_dialog(#"weapon_pickup", #"magmagat_unfinished");
         e_player thread function_6222e98f();
         self function_599013ad(undefined, undefined);
         exploder::exploder("blue_fire");
@@ -395,10 +395,10 @@ wait_for_timeout(e_player, var_9bce3ebf) {
 }
 
 function_181eb502() {
-  self endoncallback(&function_6eca1fcc, # "disconnect");
+  self endoncallback(&function_6eca1fcc, #"disconnect");
   level.var_760f9184 thread clientfield::set("" + # "magma_door_barrier_fx", 1);
   callback::on_ai_killed(&function_ed30e654);
-  s_result = level flag::wait_till_any(array(#"hash_3ec656e276ceee53", # "hash_3fb7d58b07b04333"));
+  s_result = level flag::wait_till_any(array(#"hash_3ec656e276ceee53", #"hash_3fb7d58b07b04333"));
   callback::remove_on_ai_killed(&function_ed30e654);
   level.var_760f9184 thread clientfield::set("" + # "magma_door_barrier_fx", 0);
   wait 1;
@@ -524,7 +524,7 @@ function_ce0bd88a(var_146228fb) {
 function_4022d369(var_6282581e) {
   level endon(#"hash_3ec656e276ceee53");
   self endon(#"magma_taken");
-  self waittill(#"death", # "disconnect");
+  self waittill(#"death", #"disconnect");
 
   if(level flag::get(#"hash_3fb7d58b07b04333")) {
     var_6282581e function_599013ad(self, 1);
@@ -587,7 +587,7 @@ function_6222e98f() {
     if(isDefined(self.var_22b64976)) {
       self giveweapon(getweapon(self.var_22b64976));
       self switchtoweapon(getweapon(self.var_22b64976));
-      self zm_audio::create_and_play_dialog(#"magmagat", # "burnout", undefined, 1);
+      self zm_audio::create_and_play_dialog(#"magmagat", #"burnout", undefined, 1);
       self.var_22b64976 = undefined;
     }
 
@@ -602,10 +602,10 @@ function_6222e98f() {
 }
 
 function_95a4deeb() {
-  self endon(#"death", # "disconnect", # "hash_5dc448a84a24492", # "hash_2c23d48f0925d266");
+  self endon(#"death", #"disconnect", #"hash_5dc448a84a24492", #"hash_2c23d48f0925d266");
 
   while(true) {
-    s_result = self waittill(#"weapon_change", # "player_downed");
+    s_result = self waittill(#"weapon_change", #"player_downed");
 
     if(s_result._notify === "player_downed") {
       b_player_downed = 1;
@@ -642,7 +642,7 @@ function_95a4deeb() {
 }
 
 function_6b09dab1() {
-  self endon(#"death", # "disconnect", # "hash_5dc448a84a24492", # "hash_2c23d48f0925d266");
+  self endon(#"death", #"disconnect", #"hash_5dc448a84a24492", #"hash_2c23d48f0925d266");
   self waittill(#"fasttravel_over");
 
   if(self hasweapon(getweapon(#"ww_blundergat_fire_t8_unfinished"))) {
@@ -665,7 +665,7 @@ function_6b09dab1() {
 }
 
 function_7f19d274() {
-  self endon(#"death", # "disconnect", # "hash_5dc448a84a24492", # "hash_2c23d48f0925d266");
+  self endon(#"death", #"disconnect", #"hash_5dc448a84a24492", #"hash_2c23d48f0925d266");
 
   while(true) {
     s_result = self waittill(#"weapon_fired");
@@ -734,7 +734,7 @@ function_3e6b7a2d() {
         if(!(isDefined(e_player.var_a40e9d01) && e_player.var_a40e9d01)) {
           e_player.var_a40e9d01 = 1;
           e_player thread function_e02f6600();
-          e_player zm_audio::create_and_play_dialog(#"magmagat", # "reheat", undefined, 1);
+          e_player zm_audio::create_and_play_dialog(#"magmagat", #"reheat", undefined, 1);
         }
       }
 
@@ -866,7 +866,7 @@ function_d3db303d() {
           e_player.var_452feb6c = e_player getweaponammostock(var_da887cb9);
         }
 
-        e_player thread zm_audio::create_and_play_dialog(#"success_resp", # "generic");
+        e_player thread zm_audio::create_and_play_dialog(#"success_resp", #"generic");
         e_player takeweapon(getweapon(var_fc074136));
         e_player.var_6417e645 = 1;
         e_player.var_1ea09849 = undefined;
@@ -915,7 +915,7 @@ function_d3db303d() {
           e_player.var_452feb6c = undefined;
         }
 
-        e_player thread zm_audio::create_and_play_dialog(#"weapon_pickup", # "magmagat");
+        e_player thread zm_audio::create_and_play_dialog(#"weapon_pickup", #"magmagat");
         e_player notify(#"hash_6e0a27b37f225a25");
         self.stub.var_154419fd = undefined;
 
@@ -1014,8 +1014,8 @@ function_a6a91f7a(var_f2528cbc) {
 }
 
 function_ecc34f71(e_player) {
-  self endon(#"magma_taken", # "magma_timeout");
-  e_player waittill(#"death", # "disconnect");
+  self endon(#"magma_taken", #"magma_timeout");
+  e_player waittill(#"death", #"disconnect");
   self.e_player = undefined;
   self.var_cec3094a = undefined;
   self.var_515e20e6 = 0;

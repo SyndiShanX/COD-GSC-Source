@@ -59,7 +59,7 @@ function_77ed3bab(var_5ea5c94d) {
       }
     }
 
-    zm_orange_pablo::function_3f9e02b8(6, # "hash_2934f352bd60d6d6", # "hash_68fc56c1fbf3b972", &function_bd605daa);
+    zm_orange_pablo::function_3f9e02b8(6, #"hash_2934f352bd60d6d6", #"hash_68fc56c1fbf3b972", &function_bd605daa);
     zm_orange_pablo::function_d83490c5(6);
     level flag::wait_till(#"dials_aquired");
 
@@ -108,7 +108,7 @@ function_1e5c0d3b() {
   level endon(#"end_game");
 
   while(!level flag::get(#"dials_done")) {
-    s_results = self waittill(#"trigger_activated", # "dials_done");
+    s_results = self waittill(#"trigger_activated", #"dials_done");
 
     if(s_results._notify == # "dials_done") {
       return;

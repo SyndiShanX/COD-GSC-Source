@@ -90,7 +90,7 @@ watch_for_tomahawk_throw() {
 }
 
 function_932e24b(w_weapon) {
-  self endon(#"disconnect", # "hash_3d73720d4588203c");
+  self endon(#"disconnect", #"hash_3d73720d4588203c");
   self waittill(#"hash_1a7714f0d7e25f27");
   self ability_player::function_f2250880(w_weapon);
   var_eec22f7e = 100 / 8 / 0.25;
@@ -122,7 +122,7 @@ watch_for_tomahawk_charge() {
       self.n_tomahawk_cooking_time = gettime();
       self thread play_charge_fx(w_grenade);
       self thread function_9310fcc0(w_grenade);
-      self waittill(#"grenade_fire", # "grenade_throw_cancelled");
+      self waittill(#"grenade_fire", #"grenade_throw_cancelled");
       wait 0.1;
       self.n_tomahawk_cooking_time = undefined;
     }
@@ -130,7 +130,7 @@ watch_for_tomahawk_charge() {
 }
 
 play_charge_fx(w_grenade) {
-  self endon(#"death", # "disconnect", # "grenade_fire", # "grenade_throw_cancelled");
+  self endon(#"death", #"disconnect", #"grenade_fire", #"grenade_throw_cancelled");
   waittillframeend();
   var_673471b1 = 1000;
 
@@ -162,7 +162,7 @@ play_charge_fx(w_grenade) {
 }
 
 function_9310fcc0(w_grenade) {
-  self endon(#"death", # "disconnect", # "grenade_fire", # "grenade_throw_cancelled");
+  self endon(#"death", #"disconnect", #"grenade_fire", #"grenade_throw_cancelled");
   self thread tomahawk_rumble(3);
   wait 1;
 
@@ -216,7 +216,7 @@ tomahawk_thrown(e_grenade) {
   var_643ef1e3 = 0;
   e_grenade clientfield::set("tomahawk_trail_fx", 3);
   self clientfield::set_to_player("tomahawk_in_use", 2);
-  e_grenade waittill(#"death", # "time_out");
+  e_grenade waittill(#"death", #"time_out");
   n_grenade_charge_power = e_grenade get_grenade_charge_power(self);
 
   if(isDefined(level.a_tomahawk_pickup_funcs)) {
@@ -569,7 +569,7 @@ tomahawk_return_player(mdl_tomahawk, var_65f2e452, n_move_speed = 1600) {
   self thread tomahawk_rumble(1);
   self playSound("wpn_tomahawk_return");
   self notify(#"hash_1a7714f0d7e25f27");
-  self waittilltimeout(8, # "hash_3d73720d4588203c");
+  self waittilltimeout(8, #"hash_3d73720d4588203c");
   self playsoundtoplayer(#"wpn_tomahawk_cooldown_complete", self);
   self givemaxammo(getweapon(self.var_4f8fb07f));
   a_zombies = getaispeciesarray(level.zombie_team, "all");

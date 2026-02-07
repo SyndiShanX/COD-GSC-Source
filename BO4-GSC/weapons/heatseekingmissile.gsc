@@ -163,7 +163,7 @@ stingerwaitforads() {
 }
 
 on_weapon_change(params) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   weapon = self getappropriateplayerweapon(params.weapon);
 
   while(weapon.lockontype == "Legacy Single") {
@@ -200,7 +200,7 @@ on_weapon_change(params) {
 }
 
 stingerirtloop(weapon) {
-  self endon(#"disconnect", # "death", # "stinger_irt_off");
+  self endon(#"disconnect", #"death", #"stinger_irt_off");
   locklength = self getlockonspeed();
 
   if(!isDefined(self.stingerlockfinalized)) {
@@ -638,7 +638,7 @@ playerstingerads() {
 }
 
 looplocalseeksound(alias, interval) {
-  self endon(#"stop_lockon_sound", # "disconnect", # "death", # "enter_vehicle", # "exit_vehicle");
+  self endon(#"stop_lockon_sound", #"disconnect", #"death", #"enter_vehicle", #"exit_vehicle");
 
   for(;;) {
     self playsoundforlocalplayer(alias);
@@ -662,7 +662,7 @@ playsoundforlocalplayer(alias) {
 }
 
 looplocallocksound(alias, interval) {
-  self endon(#"stop_locked_sound", # "disconnect", # "death", # "enter_vehicle", # "exit_vehicle");
+  self endon(#"stop_locked_sound", #"disconnect", #"death", #"enter_vehicle", #"exit_vehicle");
 
   if(isDefined(self.stingerlocksound)) {
     return;
@@ -793,7 +793,7 @@ lockingon(target, lock) {
 watchclearlockingon(target, clientnum) {
   target endon(#"death");
   self endon(#"locking_on_cleared");
-  self waittill(#"death", # "disconnect");
+  self waittill(#"death", #"disconnect");
   target.locking_on &= ~(1 << clientnum);
 }
 
@@ -833,7 +833,7 @@ targetinghacking(target, lock) {
 watchclearhacking(target, clientnum) {
   target endon(#"death");
   self endon(#"locking_on_hacking_cleared");
-  self waittill(#"death", # "disconnect");
+  self waittill(#"death", #"disconnect");
   target.locking_on_hacking &= ~(1 << clientnum);
 }
 
@@ -983,7 +983,7 @@ setfriendlytargetlocked(weapon, target) {
 
 watchclearlockedon(target, clientnum) {
   self endon(#"locked_on_cleared");
-  self waittill(#"death", # "disconnect");
+  self waittill(#"death", #"disconnect");
 
   if(isDefined(target)) {
     target.locked_on &= ~(1 << clientnum);

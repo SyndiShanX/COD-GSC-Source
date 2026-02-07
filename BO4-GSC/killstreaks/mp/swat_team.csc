@@ -15,7 +15,7 @@
 #namespace swat_team;
 
 autoexec __init__system__() {
-  system::register(#"swat_team", &__init__, undefined, # "killstreaks");
+  system::register(#"swat_team", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

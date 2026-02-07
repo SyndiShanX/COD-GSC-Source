@@ -255,7 +255,7 @@ function_f82f0bb5() {
   visuals = [];
   trigger = spawn("trigger_radius", (0, 0, 0), 0, 32, 32);
   trigger.var_a865c2cd = 0;
-  taco = gameobjects::create_use_object(#"any", trigger, visuals, undefined, # "clean_taco");
+  taco = gameobjects::create_use_object(#"any", trigger, visuals, undefined, #"clean_taco");
   taco notsolid();
   taco ghost();
   taco gameobjects::set_use_time(0);
@@ -311,7 +311,7 @@ function_903c4eff(victim, attacker, pos, yawangle) {
 function_8cb72ba4() {
   level endon(#"game_ended");
   self endon(#"reset");
-  self.var_2581d0d endon(#"death", # "stationary");
+  self.var_2581d0d endon(#"death", #"stationary");
 
   while(true) {
     if(!isDefined(self.var_2581d0d)) {

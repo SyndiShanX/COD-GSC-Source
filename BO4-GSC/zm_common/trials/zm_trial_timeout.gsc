@@ -222,7 +222,7 @@ function_f22cd3f0(s_wait_location, ai_zombie) {
 }
 
 function_8b87e57c(timer_label, grace_period, timer_value, var_1215371f) {
-  level endon(#"end_of_round", # "host_migration_begin", # "hash_7646638df88a3656", # "end_game");
+  level endon(#"end_of_round", #"host_migration_begin", #"hash_7646638df88a3656", #"end_game");
 
   if(!isDefined(level.var_489d6aa2)) {
     level.var_489d6aa2 = timer_label;
@@ -274,7 +274,7 @@ function_31f197c2() {
 function_14a98a41(str_label, n_time_limit) {
   self notify("4efb28cb64a876c9");
   self endon("4efb28cb64a876c9");
-  level endon(#"end_of_round", # "host_migration_begin", # "end_game");
+  level endon(#"end_of_round", #"host_migration_begin", #"end_game");
   level.var_489d6aa2 = str_label;
   level.var_869f4c31 = n_time_limit;
 
@@ -285,7 +285,7 @@ function_14a98a41(str_label, n_time_limit) {
 }
 
 function_ff66b979() {
-  level endon(#"end_of_round", # "end_game");
+  level endon(#"end_of_round", #"end_game");
 
   foreach(player in getplayers()) {
     if(level.var_f995ece6 zm_trial_timer::is_open(player)) {

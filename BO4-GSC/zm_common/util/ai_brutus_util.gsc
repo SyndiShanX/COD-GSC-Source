@@ -34,7 +34,7 @@
 #namespace zombie_brutus_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_brutus_util", &__init__, &__main__, # "zm_ai_brutus");
+  system::register(#"zombie_brutus_util", &__init__, &__main__, #"zm_ai_brutus");
 }
 
 __init__() {
@@ -152,7 +152,7 @@ brutus_spawning_logic() {
 }
 
 function_f332f2b7(n_spawn, str_zone_name, var_dde9ff11, var_68ffecfb) {
-  level endon(#"end_of_round", # "end_game");
+  level endon(#"end_of_round", #"end_game");
   var_33882d9b = 0;
 
   while(var_33882d9b < n_spawn) {
@@ -649,8 +649,8 @@ brutus_cleanup() {
 }
 
 brutus_cleanup_at_end_of_grief_round() {
-  self endon(#"death", # "brutus_cleanup");
-  level waittill(#"keep_griefing", # "game_module_ended");
+  self endon(#"death", #"brutus_cleanup");
+  level waittill(#"keep_griefing", #"game_module_ended");
   self notify(#"brutus_cleanup");
   self delete();
 }
@@ -737,7 +737,7 @@ check_craftable_table_valid(player) {
 }
 
 brutus_check_zone() {
-  self endon(#"death", # "brutus_cleanup");
+  self endon(#"death", #"brutus_cleanup");
   self.var_8d6b1f59 = 0;
 
   while(true) {
@@ -763,7 +763,7 @@ brutus_check_zone() {
 }
 
 brutus_watch_enemy() {
-  self endon(#"death", # "brutus_cleanup");
+  self endon(#"death", #"brutus_cleanup");
   level endon(#"end_game");
 
   while(true) {
@@ -805,7 +805,7 @@ function_9a78baba(var_1cc3df76) {
 }
 
 brutus_lockdown_client_effects(delay) {
-  self endon(#"death", # "brutus_cleanup");
+  self endon(#"death", #"brutus_cleanup");
 
   if(isDefined(delay)) {
     wait delay;
@@ -836,7 +836,7 @@ function_61263ebc() {
 }
 
 function_b02aec83() {
-  self endon(#"death", # "brutus_cleanup", # "ignore_cleanup");
+  self endon(#"death", #"brutus_cleanup", #"ignore_cleanup");
 
   while(true) {
     if(isDefined(self.favoriteenemy)) {

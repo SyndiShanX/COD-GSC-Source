@@ -765,7 +765,7 @@ event_handler[vehicle_radiusdamage] codecallback_vehicleradiusdamage(eventstruct
 finishcustomtraversallistener() {
   self endon(#"death");
   self waittillmatch({
-    #notetrack: "end"}, # "custom_traversal_anim_finished");
+    #notetrack: "end"}, #"custom_traversal_anim_finished");
   self finishtraversal();
   self unlink();
   self.usegoalanimweight = 0;

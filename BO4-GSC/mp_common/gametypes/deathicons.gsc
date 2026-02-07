@@ -41,7 +41,7 @@ add(entity, dyingplayer, team) {
 
   timeout = getdvarfloat(#"scr_deathicon_time", 5);
   iconorg = entity.origin;
-  dyingplayer endon(#"spawned_player", # "disconnect");
+  dyingplayer endon(#"spawned_player", #"disconnect");
   waitframe(1);
   util::waittillslowprocessallowed();
   assert(isDefined(level.teams[team]));

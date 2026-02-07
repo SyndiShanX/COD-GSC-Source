@@ -341,8 +341,8 @@ function_a7641284() {
     return;
   }
 
-  level endon(#"egg_free", # "pap_quest_completed");
-  var_af2013df = array(#"hash_67695ee69c57c0b2", # "hash_61de3b8fe6f6a35");
+  level endon(#"egg_free", #"pap_quest_completed");
+  var_af2013df = array(#"hash_67695ee69c57c0b2", #"hash_61de3b8fe6f6a35");
   level flag::wait_till_all(var_af2013df);
 
   while(true) {
@@ -427,7 +427,7 @@ registermp_vehicles_agr_prespawn(s_chest) {
 }
 
 function_c000f08b() {
-  level endon(#"end_game", # "hash_49085a6baf9c2c27");
+  level endon(#"end_game", #"hash_49085a6baf9c2c27");
 
   if(zm_custom::function_901b751c(#"zmenhancedstate") == 2 || zm_custom::function_901b751c(#"zmminibossstate") == 2 || zm_custom::function_901b751c(#"startround") > 1) {
     level thread function_12b9b9a9();
@@ -549,7 +549,7 @@ function_c000f08b() {
     level thread function_d2085d57();
   }
 
-  level waittill(#"zombie_total_set", # "hash_39eae7c03390a3a7", # "round_reset");
+  level waittill(#"zombie_total_set", #"hash_39eae7c03390a3a7", #"round_reset");
 
   if(zm_utility::is_trials()) {
     level.max_zombie_func = undefined;
@@ -566,16 +566,16 @@ function_c000f08b() {
 }
 
 function_d2085d57() {
-  level endon(#"hash_1cf28f130f16e2eb", # "hash_49085a6baf9c2c27");
+  level endon(#"hash_1cf28f130f16e2eb", #"hash_49085a6baf9c2c27");
   level flag::wait_till("gameplay_started");
   exploder::stop_exploder("exp_lgt_temple_gameplay_group");
   level notify(#"hash_1cf28f130f16e2eb");
 }
 
 function_d7831b0f() {
-  level endon(#"end_game", # "hash_49085a6baf9c2c27");
+  level endon(#"end_game", #"hash_49085a6baf9c2c27");
   level thread function_a3e22935();
-  s_result = level waittill(#"end_of_round", # "hash_dc34ebe02d09532");
+  s_result = level waittill(#"end_of_round", #"hash_dc34ebe02d09532");
   level.no_powerups = undefined;
   level flag::set(#"round_one");
   level flag::set("spawn_zombies");
@@ -588,7 +588,7 @@ function_d7831b0f() {
 }
 
 function_a3e22935() {
-  level endon(#"end_game", # "end_of_round", # "hash_dc34ebe02d09532");
+  level endon(#"end_game", #"end_of_round", #"hash_dc34ebe02d09532");
   level waittill(#"host_migration_begin");
   level notify(#"hash_49085a6baf9c2c27");
   level waittill(#"host_migration_end");
@@ -665,7 +665,7 @@ function_9f8c0587() {
 
 function_690aab3e() {
   level endon(#"hash_1cf28f130f16e2eb");
-  self waittill(#"damage", # "death");
+  self waittill(#"damage", #"death");
   level notify(#"hash_1cf28f130f16e2eb");
 }
 
@@ -1159,7 +1159,7 @@ function_5b984671(a_ents) {
 }
 
 function_509bbc5b(a_ents) {
-  level thread scene::init_streamer(#"cin_zm_red_outro_temple_part4", # "allies", 0, 0);
+  level thread scene::init_streamer(#"cin_zm_red_outro_temple_part4", #"allies", 0, 0);
 }
 
 function_75ef7b1f(a_ents) {
@@ -1185,7 +1185,7 @@ function_ea8d45ef(a_ents) {
 }
 
 function_625a9bcf() {
-  level zm_audio::function_6191af93(#"shield_piece", # "pickup", "", "");
+  level zm_audio::function_6191af93(#"shield_piece", #"pickup", "", "");
   w_component = zm_crafting::get_component(#"zitem_zhield_zpear_part_1");
   zm_items::function_4d230236(w_component, &function_a3fd9b43);
   w_component = zm_crafting::get_component(#"zitem_zhield_zpear_part_2");
@@ -1195,15 +1195,15 @@ function_625a9bcf() {
 }
 
 function_a3fd9b43(e_holder, w_item) {
-  self thread zm_audio::create_and_play_dialog(#"shield_piece", # "pickup_1", undefined, 1);
+  self thread zm_audio::create_and_play_dialog(#"shield_piece", #"pickup_1", undefined, 1);
 }
 
 function_3fbc19fb(e_holder, w_item) {
-  self thread zm_audio::create_and_play_dialog(#"shield_piece", # "pickup_3");
+  self thread zm_audio::create_and_play_dialog(#"shield_piece", #"pickup_3");
 }
 
 function_9f645f7(e_holder, w_item) {
-  self thread zm_audio::create_and_play_dialog(#"shield_piece", # "pickup_2");
+  self thread zm_audio::create_and_play_dialog(#"shield_piece", #"pickup_2");
 }
 
 function_8f72e6b8() {
@@ -1397,7 +1397,7 @@ function_7722c6f0(var_404e4288, var_8dd554ee) {
     var_6095c0b6 = zm_round_logic::function_4e8157cd(var_404e4288, var_8dd554ee);
 
     if(isalive(var_6095c0b6.ai_spawned)) {
-      zm_transform::function_d2374144(var_6095c0b6.ai_spawned, # "blight_father");
+      zm_transform::function_d2374144(var_6095c0b6.ai_spawned, #"blight_father");
     }
   } else {
     ai = zombie_gegenees_util::spawn_single(1);
@@ -1416,7 +1416,7 @@ function_c8ce0a17(var_404e4288, var_8dd554ee) {
     var_6095c0b6 = zm_round_logic::function_4e8157cd(var_404e4288, var_8dd554ee);
 
     if(isalive(var_6095c0b6.ai_spawned)) {
-      zm_transform::function_d2374144(var_6095c0b6.ai_spawned, array::random(array(#"catalyst_corrosive", # "catalyst_electric", # "catalyst_plasma", # "catalyst_water")));
+      zm_transform::function_d2374144(var_6095c0b6.ai_spawned, array::random(array(#"catalyst_corrosive", #"catalyst_electric", #"catalyst_plasma", #"catalyst_water")));
     }
   } else {
     var_862206ea = zombie_skeleton_util::function_1ea880bd(1);
@@ -1438,14 +1438,14 @@ function_338bae81(e_player) {
   dt = n_time - e_player.var_4674988e;
 
   if(dt > 15) {
-    e_player thread zm_audio::create_and_play_dialog(#"peg_summon", # "use");
+    e_player thread zm_audio::create_and_play_dialog(#"peg_summon", #"use");
     e_player.var_4674988e = n_time;
   }
 }
 
 function_7c7c6a1(weapon) {
   if(weapon.name == # "thunderstorm") {
-    self thread zm_audio::create_and_play_dialog(#"magicbox", # "peg", undefined, 1);
+    self thread zm_audio::create_and_play_dialog(#"magicbox", #"peg", undefined, 1);
     return true;
   }
 
@@ -1467,7 +1467,7 @@ function_443f6873(str_weapon) {
 }
 
 function_fbf0e632() {
-  self endon(#"powerup_timedout", # "powerup_stolen", # "death");
+  self endon(#"powerup_timedout", #"powerup_stolen", #"death");
   self playSound(#"hash_e3e5f7c83015171");
   self playLoopSound(#"hash_2adfa98b79668366");
   waitresult = self waittill(#"powerup_grabbed");

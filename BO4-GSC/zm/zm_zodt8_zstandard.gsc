@@ -148,7 +148,7 @@ defend_areas() {
   }
 
   zm_utility::function_fdb0368(3);
-  str_next_defend = array::random(array(#"lounge", # "dining_hall"));
+  str_next_defend = array::random(array(#"lounge", #"dining_hall"));
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   str_first_defend = str_next_defend;
 
@@ -173,7 +173,7 @@ defend_areas() {
   var_cec10eb3 = 20;
   level thread zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7, undefined, undefined, var_cec10eb3);
   level flag::wait_till("started_defend_area");
-  level util::delay(var_cec10eb3 / 4, "end_game", &zm_round_spawning::function_376e51ef, # "stoker");
+  level util::delay(var_cec10eb3 / 4, "end_game", &zm_round_spawning::function_376e51ef, #"stoker");
   level waittill(#"hash_7a04a7fb98fa4e4d");
   zm_utility::function_fef4b36a(str_next_defend);
 
@@ -186,13 +186,13 @@ defend_areas() {
   function_52498131("started_defend_area");
   str_next_defend = # "poop_deck";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
-  util::delay(4, undefined, &zm_utility::function_11101458, # "poop_deck");
+  util::delay(4, undefined, &zm_utility::function_11101458, #"poop_deck");
   zm_zonemgr::zone_wait_till_enabled("zone_poop_deck");
   level waittill(#"end_of_round");
   zm_round_spawning::function_306ce518(#"blight_father", &intro_blight_father);
   level thread zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7, undefined, undefined, 45);
   level flag::wait_till("started_defend_area");
-  level util::delay(4, "end_game", &zm_round_spawning::function_376e51ef, # "blight_father");
+  level util::delay(4, "end_game", &zm_round_spawning::function_376e51ef, #"blight_father");
   level waittill(#"hash_7a04a7fb98fa4e4d");
   level.stopshellshock = 1;
   zm_utility::enable_power_switch(1, 1);
@@ -208,14 +208,14 @@ defend_areas() {
 }
 
 function_84139b27() {
-  zm_utility::function_c492c4d6(#"poop_deck", # "s_mandatory_destination_poop_deck", array(#"zone_poop_deck"), array(#"engine_room", # "lounge", # "dining_hall", # "boat_deck"), # "hash_419e018f0a0f07fe", # "hash_5f80d9ba2fc090a");
-  zm_utility::function_c492c4d6(#"lounge", # "s_mandatory_destination_lounge", array(#"zone_lounge"), array(#"engine_room", # "poop_deck", # "cargo_hold", # "bridge"), # "hash_40ba277929e49516", # "hash_2bed1c6d7afa4192");
-  zm_utility::function_c492c4d6(#"dining_hall", # "s_mandatory_destination_dining_hall", array(#"zone_dining_hall_fore", # "zone_dining_hall_aft"), array(#"poop_deck", # "engine_room", # "cargo_hold", # "forecastle"), # "hash_8a9d3480015e78b", # "hash_6bdaac7090cd4985");
-  zm_utility::function_c492c4d6(#"boat_deck", # "s_mandatory_destination_obj_fore_deck", array(#"zone_fore_deck"), array(#"bridge", # "engine_room", # "poop_deck", # "forecastle"), # "hash_7ed3d98c25f1502a", # "hash_4b2d803f03300036");
-  zm_utility::function_c492c4d6(#"forecastle", # "s_mandatory_destination_obj_forecastle", array(#"zone_forecastle_lower", # "zone_forecastle_upper"), array(#"cargo_hold", # "bridge", # "boat_deck", # "dining_hall"), # "hash_27ad030950415bce", # "hash_fc714290197baba");
-  zm_utility::function_c492c4d6(#"engine_room", # "s_mandatory_destination_engine_room", array(#"zone_upper_engine_room", # "zone_engine"), array(#"poop_deck", # "boat_deck", # "lounge", # "dining_hall"), # "hash_1f86bdff7abc4240", # "hash_7b8e9ff889f16cb0");
-  zm_utility::function_c492c4d6(#"cargo_hold", # "s_mandatory_destination_obj_cargo", array(#"zone_cargo"), array(#"forecastle", # "lounge", # "dining_hall", # "bridge"), # "hash_380fd44f5294766c", # "hash_49f3092df33c779c");
-  zm_utility::function_c492c4d6(#"bridge", # "s_mandatory_destination_obj_bridge", array(#"zone_bridge"), array(#"forecastle", # "cargo_hold", # "boat_deck", # "lounge"), # "hash_a3060fdfbbfdadb", # "hash_705b2c8817bf3775");
+  zm_utility::function_c492c4d6(#"poop_deck", #"s_mandatory_destination_poop_deck", array(#"zone_poop_deck"), array(#"engine_room", #"lounge", #"dining_hall", #"boat_deck"), #"hash_419e018f0a0f07fe", #"hash_5f80d9ba2fc090a");
+  zm_utility::function_c492c4d6(#"lounge", #"s_mandatory_destination_lounge", array(#"zone_lounge"), array(#"engine_room", #"poop_deck", #"cargo_hold", #"bridge"), #"hash_40ba277929e49516", #"hash_2bed1c6d7afa4192");
+  zm_utility::function_c492c4d6(#"dining_hall", #"s_mandatory_destination_dining_hall", array(#"zone_dining_hall_fore", #"zone_dining_hall_aft"), array(#"poop_deck", #"engine_room", #"cargo_hold", #"forecastle"), #"hash_8a9d3480015e78b", #"hash_6bdaac7090cd4985");
+  zm_utility::function_c492c4d6(#"boat_deck", #"s_mandatory_destination_obj_fore_deck", array(#"zone_fore_deck"), array(#"bridge", #"engine_room", #"poop_deck", #"forecastle"), #"hash_7ed3d98c25f1502a", #"hash_4b2d803f03300036");
+  zm_utility::function_c492c4d6(#"forecastle", #"s_mandatory_destination_obj_forecastle", array(#"zone_forecastle_lower", #"zone_forecastle_upper"), array(#"cargo_hold", #"bridge", #"boat_deck", #"dining_hall"), #"hash_27ad030950415bce", #"hash_fc714290197baba");
+  zm_utility::function_c492c4d6(#"engine_room", #"s_mandatory_destination_engine_room", array(#"zone_upper_engine_room", #"zone_engine"), array(#"poop_deck", #"boat_deck", #"lounge", #"dining_hall"), #"hash_1f86bdff7abc4240", #"hash_7b8e9ff889f16cb0");
+  zm_utility::function_c492c4d6(#"cargo_hold", #"s_mandatory_destination_obj_cargo", array(#"zone_cargo"), array(#"forecastle", #"lounge", #"dining_hall", #"bridge"), #"hash_380fd44f5294766c", #"hash_49f3092df33c779c");
+  zm_utility::function_c492c4d6(#"bridge", #"s_mandatory_destination_obj_bridge", array(#"zone_bridge"), array(#"forecastle", #"cargo_hold", #"boat_deck", #"lounge"), #"hash_a3060fdfbbfdadb", #"hash_705b2c8817bf3775");
   a_str_keys = getarraykeys(level.a_s_defend_areas);
 
   foreach(s_defend_area in level.a_s_defend_areas) {
@@ -338,27 +338,27 @@ function_edd5bb1a() {
 }
 
 function_ac904e5e() {
-  zm_utility::function_742f2c18(1, # "zombie", 8, 6);
-  zm_utility::function_742f2c18(2, # "zombie", 10, 6);
-  zm_utility::function_742f2c18(3, # "zombie", 10, 6);
-  zm_utility::function_742f2c18(4, # "zombie", 10, 6);
-  zm_utility::function_742f2c18(5, # "zombie", 12, 6);
-  zm_utility::function_742f2c18(6, # "zombie", 12, 6);
-  zm_utility::function_742f2c18(7, # "zombie", 12, 8);
-  zm_utility::function_742f2c18(8, # "zombie", 14, 8);
-  zm_utility::function_742f2c18(9, # "zombie", 14, 8);
-  zm_utility::function_742f2c18(10, # "zombie", 14, 10);
-  zm_utility::function_742f2c18(11, # "zombie", 16, 10);
-  zm_utility::function_742f2c18(12, # "zombie", 16, 10);
-  zm_utility::function_742f2c18(13, # "zombie", 16, 12);
-  zm_utility::function_742f2c18(14, # "zombie", 16, 12);
-  zm_utility::function_742f2c18(15, # "zombie", 16, 14);
-  zm_utility::function_742f2c18(16, # "zombie", 20, 14);
-  zm_utility::function_742f2c18(17, # "zombie", 24, 14);
+  zm_utility::function_742f2c18(1, #"zombie", 8, 6);
+  zm_utility::function_742f2c18(2, #"zombie", 10, 6);
+  zm_utility::function_742f2c18(3, #"zombie", 10, 6);
+  zm_utility::function_742f2c18(4, #"zombie", 10, 6);
+  zm_utility::function_742f2c18(5, #"zombie", 12, 6);
+  zm_utility::function_742f2c18(6, #"zombie", 12, 6);
+  zm_utility::function_742f2c18(7, #"zombie", 12, 8);
+  zm_utility::function_742f2c18(8, #"zombie", 14, 8);
+  zm_utility::function_742f2c18(9, #"zombie", 14, 8);
+  zm_utility::function_742f2c18(10, #"zombie", 14, 10);
+  zm_utility::function_742f2c18(11, #"zombie", 16, 10);
+  zm_utility::function_742f2c18(12, #"zombie", 16, 10);
+  zm_utility::function_742f2c18(13, #"zombie", 16, 12);
+  zm_utility::function_742f2c18(14, #"zombie", 16, 12);
+  zm_utility::function_742f2c18(15, #"zombie", 16, 14);
+  zm_utility::function_742f2c18(16, #"zombie", 20, 14);
+  zm_utility::function_742f2c18(17, #"zombie", 24, 14);
   n_zombie_min = 16;
 
   for(n_round = 18; n_round < 255; n_round++) {
-    zm_utility::function_742f2c18(n_round, # "zombie", undefined, n_zombie_min);
+    zm_utility::function_742f2c18(n_round, #"zombie", undefined, n_zombie_min);
     n_zombie_min++;
     n_zombie_min = math::clamp(n_zombie_min, 16, 24);
   }

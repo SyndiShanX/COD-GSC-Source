@@ -57,7 +57,7 @@ function_4467066e(params) {
 
 function_f82142f8(isspectre) {
   self notify(#"hash_2e4cc87f4b3a6396");
-  self endon(#"death", # "hash_2e4cc87f4b3a6396");
+  self endon(#"death", #"hash_2e4cc87f4b3a6396");
   level endon(#"game_playing");
   self function_1edd6e9e(isspectre);
 
@@ -148,7 +148,7 @@ give_max_ammo(weaponslot) {
 
   self setweaponammoclip(weapon, weapon.clipsize);
 
-  foreach(ammo in array(#"ammo_type_9mm_item", # "ammo_type_45_item", # "ammo_type_556_item", # "ammo_type_762_item", # "ammo_type_338_item", # "ammo_type_50cal_item", # "ammo_type_12ga_item", # "ammo_type_rocket_item")) {
+  foreach(ammo in array(#"ammo_type_9mm_item", #"ammo_type_45_item", #"ammo_type_556_item", #"ammo_type_762_item", #"ammo_type_338_item", #"ammo_type_50cal_item", #"ammo_type_12ga_item", #"ammo_type_rocket_item")) {
     ammoitem = getscriptbundle(ammo);
 
     if(!isDefined(ammoitem.weapon) || ammoitem.weapon.ammoindex !== weapon.ammoindex) {

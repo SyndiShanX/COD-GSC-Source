@@ -82,7 +82,7 @@ function_6aac1790(var_dbb94a) {
 
 function_b6e83203(delay) {
   if(isDefined(delay)) {
-    self endon(#"death", # "disconnect");
+    self endon(#"death", #"disconnect");
     wait delay;
   }
 

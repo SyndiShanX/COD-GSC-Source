@@ -165,11 +165,11 @@ function_232f3acf(local_client_num, bundle) {
   }
 
   if(sessionmodeiswarzonegame()) {
-    if(function_5778f82(local_client_num, # "specialty_showenemyequipment") && isDefined(self.var_f19b4afd) && self.var_f19b4afd) {
+    if(function_5778f82(local_client_num, #"specialty_showenemyequipment") && isDefined(self.var_f19b4afd) && self.var_f19b4afd) {
       return true;
     }
   } else {
-    if(function_5778f82(local_client_num, # "specialty_showenemyequipment")) {
+    if(function_5778f82(local_client_num, #"specialty_showenemyequipment")) {
       return true;
     }
 
@@ -181,11 +181,11 @@ function_232f3acf(local_client_num, bundle) {
 
 updateenemyequipment(local_client_num, newval) {
   if(isDefined(level.var_58253868)) {
-    self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_66ac79c57723c169");
+    self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_66ac79c57723c169");
   }
 
   if(isDefined(level.var_420d7d7e)) {
-    self renderoverridebundle::function_c8d97b8e(local_client_num, # "enemy", # "hash_691f7dc47ae8aa08");
+    self renderoverridebundle::function_c8d97b8e(local_client_num, #"enemy", #"hash_691f7dc47ae8aa08");
   }
 }
 
@@ -273,7 +273,7 @@ playflarefx(localclientnum) {
 }
 
 equipmentwatchteamfx(localclientnum, fxhandle) {
-  msg = self waittill(#"death", # "team_changed", # "player_switch");
+  msg = self waittill(#"death", #"team_changed", #"player_switch");
 
   if(isDefined(fxhandle)) {
     stopfx(localclientnum, fxhandle);
@@ -303,7 +303,7 @@ equipmentwatchplayerteamchanged(localclientnum, fxhandle) {
 }
 
 sndproxalert_entcleanup(localclientnum, ent) {
-  level waittill(#"snddede", # "demo_jump", # "player_switch", # "killcam_begin", # "killcam_end");
+  level waittill(#"snddede", #"demo_jump", #"player_switch", #"killcam_begin", #"killcam_end");
 
   if(isDefined(ent)) {
     ent stopallloopsounds(0.5);

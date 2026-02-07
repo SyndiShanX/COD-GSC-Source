@@ -77,7 +77,7 @@ onplayerconnect() {
 
 deployempturret(emp) {
   player = self;
-  player endon(#"disconnect", # "joined_team", # "joined_spectators");
+  player endon(#"disconnect", #"joined_team", #"joined_spectators");
   emp endon(#"death");
   emp.vehicle useanimtree("generic");
   emp.vehicle setanim(#"o_turret_emp_core_deploy", 1);

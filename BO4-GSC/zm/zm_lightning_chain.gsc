@@ -62,7 +62,7 @@ create_lightning_chain_params(max_arcs = 5, max_enemies_killed = 10, radius_star
 }
 
 on_player_connect() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self waittill(#"spawned_player");
   self.tesla_network_death_choke = 0;
   self.tesla_arc_count = 0;
@@ -320,7 +320,7 @@ lc_do_damage(source_enemy, arc_num, player, params) {
 
 function_915d4fec(params, v_origin, player) {
   if(isDefined(params.var_a9255d36)) {
-    s_waitresult = self waittill(params.var_a9255d36, # "death");
+    s_waitresult = self waittill(params.var_a9255d36, #"death");
   }
 
   weapon = isDefined(params.weapon) ? params.weapon : level.weaponnone;

@@ -288,7 +288,7 @@ player_damage_shield(idamage, bheld, fromcode = 0, smod = "MOD_UNKNOWN", var_4e0
     }
 
     self clientfield::increment_to_player("zm_shield_break_rumble");
-    self thread zm_audio::create_and_play_dialog(#"shield", # "destroy");
+    self thread zm_audio::create_and_play_dialog(#"shield", #"destroy");
     self thread player_take_riotshield();
   } else {
     if(var_4e0da269) {

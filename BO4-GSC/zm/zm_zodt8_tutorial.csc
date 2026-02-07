@@ -127,6 +127,6 @@ function_8057ebca(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(isDefined(self.blocker_fx)) {
     stopfx(localclientnum, self.blocker_fx);
     audio::stoploopat(#"hash_7c4e89429c24b4bd", self.origin);
-    playSound(0, # "hash_2f2d6d08b47e6395", self.origin);
+    playSound(0, #"hash_2f2d6d08b47e6395", self.origin);
   }
 }

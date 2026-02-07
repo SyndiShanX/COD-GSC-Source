@@ -238,7 +238,7 @@ zombie_faller_watch_all_players() {
 }
 
 zombie_faller_watch_player(player) {
-  self endon(#"falling", # "death");
+  self endon(#"falling", #"death");
   player endon(#"disconnect");
   range = 200;
   rangesqr = range * range;
@@ -295,7 +295,7 @@ zombie_faller_watch_player(player) {
 }
 
 zombie_fall_wait() {
-  self endon(#"falling", # "death");
+  self endon(#"falling", #"death");
 
   if(isDefined(self.zone_name)) {
     if(isDefined(level.zones) && isDefined(level.zones[self.zone_name])) {
@@ -430,7 +430,7 @@ zombie_fall_fx(spot) {
 }
 
 zombie_fall_burst_fx() {
-  self endon(#"stop_zombie_fall_fx", # "fall_anim_finished");
+  self endon(#"stop_zombie_fall_fx", #"fall_anim_finished");
   playFX(level._effect[# "rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
   wait 0.25;
   playFX(level._effect[# "rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));

@@ -128,7 +128,7 @@ function_13ac856e() {
 }
 
 function_f8930fa1(time) {
-  self endon(#"death", # "end_timer");
+  self endon(#"death", #"end_timer");
 
   if(time == 0) {
     return;
@@ -201,7 +201,7 @@ beacon_spawned(watcher, owner) {
   }
 
   if(isDefined(owner)) {
-    owner stats::function_e24eec31(self.weapon, # "used", 1);
+    owner stats::function_e24eec31(self.weapon, #"used", 1);
   }
 
   self deployable::function_dd266e08(owner);
@@ -681,7 +681,7 @@ function_425d8006() {
 
 watchfordeath() {
   level endon(#"game_ended");
-  self.owner endon(#"disconnect", # "joined_team", # "changed_specialist");
+  self.owner endon(#"disconnect", #"joined_team", #"changed_specialist");
   self endon(#"hash_523ddcbd662010e5");
   waitresult = self waittill(#"death");
 

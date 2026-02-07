@@ -36,9 +36,9 @@ function_853f8cff(watcher) {
 }
 
 function_f37c777a(watcher, player) {
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   level endon(#"game_ended");
-  player stats::function_e24eec31(self.weapon, # "used", 1);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
   self thread function_1cdbb1e5(player, self.weapon);
 }
 
@@ -49,7 +49,7 @@ function_bba54dca() {
 }
 
 function_1cdbb1e5(owner, weapon) {
-  self endon(#"hacked", # "molotov_deleted");
+  self endon(#"hacked", #"molotov_deleted");
   assert(isDefined(weapon.customsettings), "<dev string:x38>" + weapon.name);
   self thread function_bba54dca();
   team = self.team;
@@ -61,7 +61,7 @@ function_1cdbb1e5(owner, weapon) {
   killcament setweapon(self.weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
   self thread function_71c73ece();
-  waitresult = self waittill(#"projectile_impact_explode", # "explode");
+  waitresult = self waittill(#"projectile_impact_explode", #"explode");
 
   if(waitresult._notify == "projectile_impact_explode") {
     if(isDefined(killcament)) {
@@ -95,7 +95,7 @@ get_water_depth(position) {
 }
 
 function_71c73ece() {
-  self endon(#"projectile_impact_explode", # "death");
+  self endon(#"projectile_impact_explode", #"death");
 
   while(true) {
     self.var_59ba00f5 = self getvelocity();
@@ -810,7 +810,7 @@ trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a74bc, kill
 }
 
 damageinfirearea(origin, killcament, trace, position, weapon, customsettings, owner) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   timer = 0;
 
   if(candofiredamage(killcament, self, customsettings.var_90bd7d92)) {
@@ -844,7 +844,7 @@ damageinfirearea(origin, killcament, trace, position, weapon, customsettings, ow
 }
 
 function_37ddab3(origin, killcament, trace, position, weapon, customsettings, owner) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   timer = 0;
 
   if(candofiredamage(killcament, self, customsettings.var_8fbd03cb)) {
@@ -866,7 +866,7 @@ function_37ddab3(origin, killcament, trace, position, weapon, customsettings, ow
 
 sndfiredamage() {
   self notify(#"sndfire");
-  self endon(#"sndfire", # "death", # "disconnect");
+  self endon(#"sndfire", #"death", #"disconnect");
 
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
@@ -885,7 +885,7 @@ sndfiredamage() {
 }
 
 sndfiredamage_deleteent(ent) {
-  self waittill(#"death", # "disconnect");
+  self waittill(#"death", #"disconnect");
 
   if(isDefined(ent)) {
     ent delete();

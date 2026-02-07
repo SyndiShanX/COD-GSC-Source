@@ -335,7 +335,7 @@ function_f0adf9c() {
   self notify("3bd5bdfdc5aacef9");
   self endon("3bd5bdfdc5aacef9");
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   deployable_weapon = player function_aab01e08();
 
   if(!isDefined(deployable_weapon)) {
@@ -362,7 +362,7 @@ function_f0adf9c() {
 }
 
 function_765a2e96() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   wait 1.5;
   self sethintstring("");
 }

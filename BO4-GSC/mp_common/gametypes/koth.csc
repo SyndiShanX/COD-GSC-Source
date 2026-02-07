@@ -150,12 +150,12 @@ function_ca8ebccf(local_client_num, visual, fxid, state) {
 
   if(isDefined(fxhandle)) {
     if(state == 1) {
-      setfxteam(local_client_num, fxhandle, # "allies");
+      setfxteam(local_client_num, fxhandle, #"allies");
       return;
     }
 
     if(state == 2) {
-      setfxteam(local_client_num, fxhandle, # "axis");
+      setfxteam(local_client_num, fxhandle, #"axis");
       return;
     }
 

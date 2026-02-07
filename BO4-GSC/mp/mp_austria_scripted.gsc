@@ -55,7 +55,7 @@ prematch_init() {
     n_delay = randomintrange(20, 35);
     level scene::add_scene_func(#"p8_fxanim_mp_austria_rocket_bundle", &function_6eeb5130, "play");
     level scene::add_scene_func(#"p8_fxanim_mp_austria_rocket_bundle", &function_6e9fced0, "done");
-    level util::delay(n_delay, "game_ended", &scene::play, # "p8_fxanim_mp_austria_rocket_bundle");
+    level util::delay(n_delay, "game_ended", &scene::play, #"p8_fxanim_mp_austria_rocket_bundle");
   }
 
   if(util::isfirstround()) {
@@ -142,7 +142,7 @@ function_7ea86b26(a_ents) {
 }
 
 function_1220cf5(finger) {
-  finger endon(#"stop_damage", # "death");
+  finger endon(#"stop_damage", #"death");
 
   while(true) {
     destroy_equipment(finger);
@@ -213,7 +213,7 @@ function_1eff721a(info) {
 }
 
 function_304304b4() {
-  vign_list = array(#"hash_793682c8025c8a72", # "hash_248819bd6d0bebad", # "hash_248816bd6d0be694", # "aib_vign_tplt_prebtl_zmb_bang_against_door_03", # "hash_248814bd6d0be32e", # "hash_4025d13190c3e1da", # "hash_7e69aaf57b23bac7", # "hash_248815bd6d0be4e1", # "aib_vign_tplt_prebtl_zmb_bang_against_door_05_left", # "aib_vign_tplt_prebtl_zmb_bang_against_door_05_right", # "hash_248812bd6d0bdfc8", # "hash_faf914864952c40", # "hash_3e4b60276426aa55", # "hash_4f6cfe6c270e930b", # "hash_7ec086db9c96cd4d", # "hash_38e510b2ec569146", # "hash_4f6cff6c270e94be", # "hash_22dc2b75f56a628a", # "hash_202837d7ef0f7577", # "hash_632e390849174ebc", # "hash_632e3c08491753d5", # "hash_632e3b0849175222", # "hash_632e3608491749a3", # "hash_632e3508491747f0", # "aib_vign_tplt_prebtl_zmb_pinned_on_grnd_06", # "aib_vign_tplt_prebtl_zmb_pinned_on_grnd_07", # "hash_632e420849175e07", # "hash_632e410849175c54", # "aib_vign_tplt_prebtl_zmb_pinned_on_grnd_10", # "hash_632ab50849143899", # "hash_632ab20849143380", # "hash_3ba197ae1ed4fcc6", # "aib_vign_tplt_prebtl_zmb_reach_thru_wndw_01_left_austria", # "hash_71892698b9803fcf", # "hash_3ba196ae1ed4fb13", # "aib_vign_tplt_prebtl_zmb_reach_thru_wndw_02_left", # "hash_1829df3c0efc547e", # "hash_c3eb0cc21539b5", # "aib_vign_tplt_prebtl_zmb_stuck_in_car_02", # "aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_01_austria", # "aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_02_austria", # "aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_03_austria", # "aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_04_austria", # "aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_04_left", # "hash_3573abae9f3ec484", # "hash_763721b8359db772", # "hash_31690edc5bfac5e", # "hash_687d46fb134c93d3");
+  vign_list = array(#"hash_793682c8025c8a72", #"hash_248819bd6d0bebad", #"hash_248816bd6d0be694", #"aib_vign_tplt_prebtl_zmb_bang_against_door_03", #"hash_248814bd6d0be32e", #"hash_4025d13190c3e1da", #"hash_7e69aaf57b23bac7", #"hash_248815bd6d0be4e1", #"aib_vign_tplt_prebtl_zmb_bang_against_door_05_left", #"aib_vign_tplt_prebtl_zmb_bang_against_door_05_right", #"hash_248812bd6d0bdfc8", #"hash_faf914864952c40", #"hash_3e4b60276426aa55", #"hash_4f6cfe6c270e930b", #"hash_7ec086db9c96cd4d", #"hash_38e510b2ec569146", #"hash_4f6cff6c270e94be", #"hash_22dc2b75f56a628a", #"hash_202837d7ef0f7577", #"hash_632e390849174ebc", #"hash_632e3c08491753d5", #"hash_632e3b0849175222", #"hash_632e3608491749a3", #"hash_632e3508491747f0", #"aib_vign_tplt_prebtl_zmb_pinned_on_grnd_06", #"aib_vign_tplt_prebtl_zmb_pinned_on_grnd_07", #"hash_632e420849175e07", #"hash_632e410849175c54", #"aib_vign_tplt_prebtl_zmb_pinned_on_grnd_10", #"hash_632ab50849143899", #"hash_632ab20849143380", #"hash_3ba197ae1ed4fcc6", #"aib_vign_tplt_prebtl_zmb_reach_thru_wndw_01_left_austria", #"hash_71892698b9803fcf", #"hash_3ba196ae1ed4fb13", #"aib_vign_tplt_prebtl_zmb_reach_thru_wndw_02_left", #"hash_1829df3c0efc547e", #"hash_c3eb0cc21539b5", #"aib_vign_tplt_prebtl_zmb_stuck_in_car_02", #"aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_01_austria", #"aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_02_austria", #"aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_03_austria", #"aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_04_austria", #"aib_vign_tplt_prebtl_zmb_trapped_behind_wndw_04_left", #"hash_3573abae9f3ec484", #"hash_763721b8359db772", #"hash_31690edc5bfac5e", #"hash_687d46fb134c93d3");
 
   foreach(vign_name in vign_list) {
     waitframe(1);
@@ -288,7 +288,7 @@ function_3f6f8daa() {
       }
 
       speaker playsoundwithnotify(radio_line, "radio_done");
-      speaker waittill(#"radio_done", # "death");
+      speaker waittill(#"radio_done", #"death");
       wait 0.2;
     }
 
@@ -354,7 +354,7 @@ function_77156d1e() {
         }
 
         speaker playsoundwithnotify(line, "skit_done");
-        speaker waittill(#"skit_done", # "death");
+        speaker waittill(#"skit_done", #"death");
         wait 0.2;
       }
 

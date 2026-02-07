@@ -114,9 +114,9 @@ function_1d807685() {
       self thread chakram_rumble(1);
 
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_327e81e6ede21cd5");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_327e81e6ede21cd5");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_52e079a39f348e1b");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_52e079a39f348e1b");
       }
 
       continue;
@@ -126,9 +126,9 @@ function_1d807685() {
       self thread chakram_rumble(1);
 
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_327e81e6ede21cd5");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_327e81e6ede21cd5");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_52e079a39f348e1b");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_52e079a39f348e1b");
       }
 
       self thread function_d5e67082(wpn_cur);
@@ -139,9 +139,9 @@ function_1d807685() {
       self thread chakram_rumble(1);
 
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_3c4637f13f09707");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_3c4637f13f09707");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_34a417201bd40701");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_34a417201bd40701");
       }
 
       self thread function_d5e67082(wpn_cur);
@@ -154,7 +154,7 @@ function_1d807685() {
 
 function_7bef3ea0(w_hero) {
   self endon(#"death");
-  s_result = self waittilltimeout(5, # "seeker_done", # "hero_chakram_activated");
+  s_result = self waittilltimeout(5, #"seeker_done", #"hero_chakram_activated");
 
   if(s_result._notify !== # "seeker_done") {
     self notify(#"seeker_done");
@@ -167,13 +167,13 @@ function_7bef3ea0(w_hero) {
 }
 
 function_c965a5a9(weapon) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
 
   while(true) {
     if(weapon == level.hero_weapon[# "chakram"][2]) {
       self waittill(#"weapon_melee_power");
     } else {
-      self waittill(#"weapon_melee_power", # "weapon_melee");
+      self waittill(#"weapon_melee_power", #"weapon_melee");
     }
 
     if(!zm_trial_restrict_loadout::function_5fbf572(weapon, 1)) {
@@ -205,7 +205,7 @@ function_fe3f086c(e_target, leftswing, weapon = level.weaponnone) {
 }
 
 chop_actor(e_target, leftswing, weapon = level.weaponnone) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
   e_target endon(#"death");
 
   if(!isDefined(e_target.zm_ai_category)) {
@@ -242,14 +242,14 @@ chop_actor(e_target, leftswing, weapon = level.weaponnone) {
 
 function_5e2c9b64(e_target, weapon) {
   e_target endon(#"death");
-  self endon(#"weapon_change", # "disconnect");
+  self endon(#"weapon_change", #"disconnect");
   [[level.var_893eb73f]] - > waitinqueue(e_target);
   self thread function_a5ed760f();
   e_target dodamage(2500, self.origin, self, self, "none", "MOD_MELEE", 0, weapon);
 }
 
 function_a5ed760f() {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
   wait 0.1;
   self clientfield::increment("" + # "chakram_melee_hit", 1);
 }
@@ -322,7 +322,7 @@ queue_setrotors(weapon) {
 }
 
 function_dc7f8e67(player) {
-  player endon(#"death", # "seeker_done");
+  player endon(#"death", #"seeker_done");
   player.var_30cbff55 = 1;
   var_e9ada947 = level.hero_weapon_stats[# "chakram"][# "delay_start"][player.var_72d6f15d];
   var_9884ff29 = level.hero_weapon_stats[# "chakram"][# "delay_end"][player.var_72d6f15d];
@@ -390,7 +390,7 @@ function_dc7f8e67(player) {
 }
 
 function_e3ad524a() {
-  self endon(#"death", # "seeker_done");
+  self endon(#"death", #"seeker_done");
   self.e_seeker endon(#"death");
   var_e68de849 = level.hero_weapon_stats[# "chakram"][# "max_range"][self.var_72d6f15d];
   var_931acaa7 = level.hero_weapon_stats[# "chakram"][# "seek_range"][self.var_72d6f15d] / 1.5;
@@ -564,7 +564,7 @@ function_46f125d(v_start, var_4d1ea1ad, v_forward) {
 }
 
 function_3adb0798(e_target, n_kills) {
-  self endon(#"death", # "seeker_done");
+  self endon(#"death", #"seeker_done");
   self.e_seeker endon(#"death");
   var_ece935b3 = level.hero_weapon_stats[# "chakram"][# "travel_time"][self.var_72d6f15d];
   var_e68de849 = level.hero_weapon_stats[# "chakram"][# "max_range"][self.var_72d6f15d];
@@ -629,7 +629,7 @@ function_3adb0798(e_target, n_kills) {
 }
 
 function_545dcea4(e_target) {
-  self endon(#"death", # "seeker_done");
+  self endon(#"death", #"seeker_done");
   self.e_seeker endon(#"death");
   e_target endon(#"death");
 
@@ -732,8 +732,8 @@ function_d5e67082(weapon) {
 }
 
 function_b475223e(weapon) {
-  self endon(#"disconnect", # "weapon_change", # "bled_out", # "entering_last_stand");
-  level endoncallback(&function_7d1739b8, # "round_reset");
+  self endon(#"disconnect", #"weapon_change", #"bled_out", #"entering_last_stand");
+  level endoncallback(&function_7d1739b8, #"round_reset");
 
   while(self getcurrentweapon() == weapon) {
     self waittill(#"weapon_melee");
@@ -761,7 +761,7 @@ function_f9b883ea() {
   self endon(#"disconnect");
   self notify("beb94ee3d73772a");
   self endon("beb94ee3d73772a");
-  self waittill(#"death", # "weapon_change", # "hash_1c35eb15aa210d6", # "hash_62fb3ab92a1f20cd");
+  self waittill(#"death", #"weapon_change", #"hash_1c35eb15aa210d6", #"hash_62fb3ab92a1f20cd");
 
   if(isDefined(self)) {
     self thread function_892bdee2();
@@ -777,7 +777,7 @@ function_892bdee2() {
 }
 
 function_481a494b(var_5f94a2e7) {
-  self endon(#"weapon_melee", # "weapon_change", # "disconnect", # "bled_out", # "entering_last_stand");
+  self endon(#"weapon_melee", #"weapon_change", #"disconnect", #"bled_out", #"entering_last_stand");
   self.var_a70d2cfe = 1;
   self clientfield::set("" + # "chakram_whirlwind_fx", 1);
   self playSound(#"hash_6043c078f3675169");
@@ -856,12 +856,12 @@ chakram_rumble(var_b2e05bae) {
 }
 
 function_68ff89f7(w_chakram) {
-  self endon(#"disconnect", # "weapon_change", # "bled_out", # "entering_last_stand");
-  level endoncallback(&function_7d1739b8, # "round_reset");
+  self endon(#"disconnect", #"weapon_change", #"bled_out", #"entering_last_stand");
+  level endoncallback(&function_7d1739b8, #"round_reset");
   s_result = self waittill(#"weapon_melee");
 
   if(s_result.weapon === w_chakram) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "chakram");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"chakram");
   }
 }
 

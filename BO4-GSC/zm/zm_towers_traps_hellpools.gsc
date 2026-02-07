@@ -257,7 +257,7 @@ function_1d86d117() {
     }
   }
 
-  self waittilltimeout(self._trap_duration, # "trap_deactivate");
+  self waittilltimeout(self._trap_duration, #"trap_deactivate");
 
   foreach(e_trap in level.var_482bcfef) {
     if(e_trap.script_string === self.script_string) {
@@ -301,7 +301,7 @@ activate_trap(e_player) {
 
     self flag::set("activated");
     self thread function_692db12();
-    self waittilltimeout(15, # "hash_5aa6001392300725");
+    self waittilltimeout(15, #"hash_5aa6001392300725");
     self deactivate_trap();
   }
 }
@@ -371,7 +371,7 @@ function_db9410fa(e_trap) {
 }
 
 function_506285c3(t_damage) {
-  self endoncallback(&function_6f5e73b5, # "death", # "disconnect");
+  self endoncallback(&function_6f5e73b5, #"death", #"disconnect");
 
   if(isalive(self) && !(isDefined(self.var_62b59590) && self.var_62b59590)) {
     self.var_62b59590 = 1;

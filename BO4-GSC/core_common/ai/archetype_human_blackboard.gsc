@@ -32,7 +32,7 @@ bb_getlocomotionmovementtype() {
     now = gettime();
 
     if(now >= self.nearbyfriendlycheck) {
-      self.nearbyfriendlycount = getactorteamcountradius(self.origin, 120, self.team, # "neutral");
+      self.nearbyfriendlycount = getactorteamcountradius(self.origin, 120, self.team, #"neutral");
       self.nearbyfriendlycheck = now + 500;
     }
 

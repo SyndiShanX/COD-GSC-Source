@@ -179,7 +179,7 @@ function_e5e4c0f9() {
 
 function_9992bb68() {
   self endon(#"death");
-  level endon(#"end_game", # "hash_29abc4b1d80a664c");
+  level endon(#"end_game", #"hash_29abc4b1d80a664c");
 
   while(level.var_7629d4e2) {
     self disableweaponcycling();
@@ -189,7 +189,7 @@ function_9992bb68() {
 
 function_ad15a8b3() {
   self endon(#"death");
-  level endon(#"end_game", # "hash_29abc4b1d80a664c");
+  level endon(#"end_game", #"hash_29abc4b1d80a664c");
 
   while(level.var_7629d4e2) {
     while(!isDefined(self.var_11b895b8)) {

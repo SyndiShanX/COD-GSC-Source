@@ -50,7 +50,7 @@ on_end(round_reset) {
 
 function_ad32d69(var_b2c60867, timeout, var_ca735ce8, var_a4a28ac7) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "host_migration_begin");
+  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
 
   if(isDefined(var_a4a28ac7) && var_a4a28ac7) {
     wait 12;
@@ -88,7 +88,7 @@ function_ad32d69(var_b2c60867, timeout, var_ca735ce8, var_a4a28ac7) {
 
 damage_monitor(var_a4a28ac7) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", # "host_migration_begin");
+  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
 
   if(isDefined(var_a4a28ac7) && var_a4a28ac7) {
     wait 12;

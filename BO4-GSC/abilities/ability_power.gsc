@@ -236,7 +236,7 @@ ismovingpowerloss() {
 }
 
 power_consume_timer_think(slot, weapon) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
 
   if(!isDefined(self._gadgets_player)) {
     return;

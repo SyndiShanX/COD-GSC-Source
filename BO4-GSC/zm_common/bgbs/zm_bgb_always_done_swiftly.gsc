@@ -9,7 +9,7 @@
 #namespace zm_bgb_always_done_swiftly;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_always_done_swiftly", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_always_done_swiftly", &__init__, undefined, #"bgb");
 }
 
 __init__() {

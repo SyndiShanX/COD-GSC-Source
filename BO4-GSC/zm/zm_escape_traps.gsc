@@ -310,7 +310,7 @@ fan_trap_rumble_think() {
 }
 
 fan_trap_rumble(e_player) {
-  e_player endon(#"death", # "disconnect");
+  e_player endon(#"death", #"disconnect");
   self endon(#"trap_finished");
 
   while(true) {
@@ -488,7 +488,7 @@ activate_zm_acid_trap() {
 
   self.in_use = 1;
   self thread zm_traps::trap_damage();
-  self waittilltimeout(25, # "trap_finished");
+  self waittilltimeout(25, #"trap_finished");
   self.in_use = undefined;
   self notify(#"trap_done");
   self waittill(#"available");
@@ -501,7 +501,7 @@ function_6219e5ab(trap) {
 }
 
 function_efd61793(t_damage) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!(isDefined(self.is_in_acid) && self.is_in_acid) && !self laststand::player_is_in_laststand()) {
     self.is_in_acid = 1;
@@ -601,7 +601,7 @@ function_9699194a(t_damage) {
 acid_trap_fx(e_trap) {
   mdl_fx = util::spawn_model("tag_origin", self.origin, self.angles);
   mdl_fx clientfield::set("acid_trap_fx", 1);
-  e_trap waittilltimeout(25, # "trap_finished");
+  e_trap waittilltimeout(25, #"trap_finished");
   mdl_fx clientfield::set("acid_trap_fx", 0);
   waitframe(1);
   mdl_fx delete();
@@ -616,7 +616,7 @@ stop_acid_death_fx() {
 }
 
 function_1a5df584(t_damage) {
-  self endon(#"bled_out", # "disconnect");
+  self endon(#"bled_out", #"disconnect");
 
   if(self clientfield::get_to_player("player_acid_trap_post_fx") === 1) {
     return;
@@ -742,7 +742,7 @@ function_ffe09b75() {
 }
 
 function_7e74aa5(t_damage) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(zm_utility::is_standard()) {
     self dodamage(5, self.origin, undefined, t_damage);
@@ -796,7 +796,7 @@ function_1f7e661f(t_damage) {
     a_e_players = util::get_array_of_closest(self.origin, getplayers());
 
     if(isDefined(a_e_players[0]) && distance2dsquared(a_e_players[0].origin, self.origin) < 400 * 400) {
-      a_e_players[0] zm_audio::create_and_play_dialog(#"spin_trap", # "hook", undefined, 1);
+      a_e_players[0] zm_audio::create_and_play_dialog(#"spin_trap", #"hook", undefined, 1);
     }
 
     return;
@@ -918,7 +918,7 @@ function_c3ac9950() {
 }
 
 spinning_trap_rumble(e_player) {
-  e_player endon(#"death", # "disconnect");
+  e_player endon(#"death", #"disconnect");
   self endon(#"trap_finished");
 
   while(true) {

@@ -83,8 +83,8 @@ player_isjammed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   if(newval == 1) {
     self notify(#"stop_sounds");
     self postfx::playpostfxbundle(#"hash_3a2aaa69f5eeab6f");
-    playSound(localclientnum, # "hash_4a43757dd4b02977");
-    level.var_6d8e6535[localclientnum] = function_604c9983(localclientnum, # "hash_2be3b9789976a6b");
+    playSound(localclientnum, #"hash_4a43757dd4b02977");
+    level.var_6d8e6535[localclientnum] = function_604c9983(localclientnum, #"hash_2be3b9789976a6b");
     self thread function_e9e14905(localclientnum);
     return;
   }
@@ -93,7 +93,7 @@ player_isjammed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     self postfx::stoppostfxbundle(#"hash_3a2aaa69f5eeab6f");
 
     if(isDefined(level.var_6d8e6535[localclientnum]) && !bwastimejump) {
-      playSound(localclientnum, # "hash_112352517abf5b11");
+      playSound(localclientnum, #"hash_112352517abf5b11");
     }
 
     self notify(#"stop_sounds");
@@ -101,7 +101,7 @@ player_isjammed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 }
 
 function_e9e14905(localclientnum) {
-  self waittill(#"death", # "stop_sounds");
+  self waittill(#"death", #"stop_sounds");
 
   if(isDefined(level.var_6d8e6535[localclientnum])) {
     function_d48752e(localclientnum, level.var_6d8e6535[localclientnum]);

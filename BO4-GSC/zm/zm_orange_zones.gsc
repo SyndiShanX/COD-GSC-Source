@@ -91,31 +91,31 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("artifact_storage", "forecastle", "artifact_storage_to_forecastle", 0);
   zm_zonemgr::add_adjacent_zone("hidden_path", "cargo_hold", "hidden_path_open", 0);
   zm_zonemgr::add_adjacent_zone("hidden_path", "beach", "hidden_path_open", 1);
-  zm_zonemgr::add_adjacent_zone("main_entrance", "security_lobby", # "facility_available", 0);
+  zm_zonemgr::add_adjacent_zone("main_entrance", "security_lobby", #"facility_available", 0);
   zm_zonemgr::add_adjacent_zone("security_lobby", "geological_processing", "geological_processing_doors", 0);
   zm_zonemgr::add_adjacent_zone("security_lobby", "decontamination", "decontamination_doors", 0);
   zm_zonemgr::add_adjacent_zone("decontamination", "upper_catwalk", "decontamination_doors", 0);
   zm_zonemgr::add_adjacent_zone("geological_processing", "upper_catwalk", "geological_processing_doors", 0);
   zm_zonemgr::add_adjacent_zone("upper_catwalk", "human_infusion", "upper_catwalk_to_human_infusion", 0);
   zm_zonemgr::add_adjacent_zone("upper_catwalk", "specimen_storage", "specimen_storage_doors", 0);
-  zm_zonemgr::add_adjacent_zone("specimen_storage", "loading_platform", # "facility_available", 0);
-  zm_zonemgr::add_adjacent_zone("sunken_path", "artifact_storage", # "hash_6f7fd3d4d070db87", 0);
+  zm_zonemgr::add_adjacent_zone("specimen_storage", "loading_platform", #"facility_available", 0);
+  zm_zonemgr::add_adjacent_zone("sunken_path", "artifact_storage", #"hash_6f7fd3d4d070db87", 0);
 
   if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 2) {
     zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", "frozen_crevasse_open", 0);
-    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", # "hash_6f7fd3d4d070db87", 0);
+    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", #"hash_6f7fd3d4d070db87", 0);
     zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", "docks_to_boathouse", 0);
-    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", # "facility_available", 0);
-    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", # "facility_available", 0);
+    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", #"facility_available", 0);
+    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", #"facility_available", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "frozen_crevasse_open", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "beach_to_lighthouse_approach", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "beach_to_gangway", 0);
     zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", "docks_to_boathouse", 0);
   } else {
-    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", # "hash_48e7d63b38c5e2da", 0);
-    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", # "hash_52d967f4fc8b12fc", 0);
-    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", # "hash_52d967f4fc8b12fc", 0);
-    zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", # "hash_38c97197db36afb7", 0);
+    zm_zonemgr::add_adjacent_zone("lagoon", "sunken_path", #"hash_48e7d63b38c5e2da", 0);
+    zm_zonemgr::add_adjacent_zone("main_entrance", "outer_walkway", #"hash_52d967f4fc8b12fc", 0);
+    zm_zonemgr::add_adjacent_zone("outer_walkway", "loading_platform", #"hash_52d967f4fc8b12fc", 0);
+    zm_zonemgr::add_adjacent_zone("beach", "lighthouse_cove", #"hash_38c97197db36afb7", 0);
   }
 
   level.custom_dog_target_validity_check = &function_502f97fa;
@@ -467,21 +467,21 @@ function_ab7f70b9(e_player, str_zone) {
 }
 
 function_17ac86f7() {
-  self thread zm_audio::function_713192b1(#"hash_6b2f9edfc77ea9b2", # "boathouse");
-  self thread zm_audio::function_713192b1(#"hash_2fb0927a65d8a9e", # "lighthouse_cove");
-  self thread zm_audio::function_713192b1(#"hash_75f05448c75c06f", # "beach");
-  self thread zm_audio::function_713192b1(#"hash_4c328e01a462f48a", # "ship_stern");
-  self thread zm_audio::function_713192b1(#"hash_5dbcb178cb1573c1", # "ship_bridge");
-  self thread zm_audio::function_713192b1(#"hash_38990c0828e68602", # "ship_bridge");
-  self thread zm_audio::function_713192b1(#"hash_75d26f96a738d2a3", # "ship_main");
-  self thread zm_audio::function_713192b1(#"hash_335d7ee067ac0e68", # "ship_cargo");
-  self thread zm_audio::function_713192b1(#"hash_520e403cdf1ae8", # "facility_main");
-  self thread zm_audio::function_713192b1(#"hash_12750e3f1d3659e4", # "facility_specimen");
-  self thread zm_audio::function_713192b1(#"hash_6571eafdcddb13ab", # "hash_2781f0de96fa6e4e");
-  self thread zm_audio::function_713192b1(#"hash_46ef5a594e42c371", # "facility_infusion");
-  self thread zm_audio::function_713192b1(#"hash_65457ae6fbfe6c32", # "facility_infusion");
-  self thread zm_audio::function_713192b1(#"hash_21450c4a4a6646d6", # "facility_geological");
-  self thread function_f7a190a8(undefined, 15, # "hash_99011c41f3d5380", # "docks");
+  self thread zm_audio::function_713192b1(#"hash_6b2f9edfc77ea9b2", #"boathouse");
+  self thread zm_audio::function_713192b1(#"hash_2fb0927a65d8a9e", #"lighthouse_cove");
+  self thread zm_audio::function_713192b1(#"hash_75f05448c75c06f", #"beach");
+  self thread zm_audio::function_713192b1(#"hash_4c328e01a462f48a", #"ship_stern");
+  self thread zm_audio::function_713192b1(#"hash_5dbcb178cb1573c1", #"ship_bridge");
+  self thread zm_audio::function_713192b1(#"hash_38990c0828e68602", #"ship_bridge");
+  self thread zm_audio::function_713192b1(#"hash_75d26f96a738d2a3", #"ship_main");
+  self thread zm_audio::function_713192b1(#"hash_335d7ee067ac0e68", #"ship_cargo");
+  self thread zm_audio::function_713192b1(#"hash_520e403cdf1ae8", #"facility_main");
+  self thread zm_audio::function_713192b1(#"hash_12750e3f1d3659e4", #"facility_specimen");
+  self thread zm_audio::function_713192b1(#"hash_6571eafdcddb13ab", #"hash_2781f0de96fa6e4e");
+  self thread zm_audio::function_713192b1(#"hash_46ef5a594e42c371", #"facility_infusion");
+  self thread zm_audio::function_713192b1(#"hash_65457ae6fbfe6c32", #"facility_infusion");
+  self thread zm_audio::function_713192b1(#"hash_21450c4a4a6646d6", #"facility_geological");
+  self thread function_f7a190a8(undefined, 15, #"hash_99011c41f3d5380", #"docks");
 }
 
 function_f7a190a8(str_wait_flag, var_ab660f9a, str_location, var_39acfdda) {
@@ -556,7 +556,7 @@ function_58db1b78() {
     foreach(vol_ext in var_4d44c98e) {
       foreach(player in getplayers()) {
         if(player istouching(vol_ext)) {
-          b_played = player zm_audio::create_and_play_dialog(#"location_enter", # "lighthouse_ext");
+          b_played = player zm_audio::create_and_play_dialog(#"location_enter", #"lighthouse_ext");
 
           if(b_played) {
             return;

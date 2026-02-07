@@ -93,7 +93,7 @@ _play_fx_delete(ent, time_to_delete_or_notify = -1) {
   if(isstring(time_to_delete_or_notify) || ishash(time_to_delete_or_notify)) {
     ent util::waittill_either("death", time_to_delete_or_notify);
   } else if(time_to_delete_or_notify > 0) {
-    ent waittilltimeout(time_to_delete_or_notify, # "death");
+    ent waittilltimeout(time_to_delete_or_notify, #"death");
   } else {
     ent waittill(#"death");
   }

@@ -43,6 +43,6 @@ function_341e5a97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_8a817bd6(model) {
-  self waittilltimeout(60, # "death", # "unlock_model");
+  self waittilltimeout(60, #"death", #"unlock_model");
   util::unlock_model(model);
 }

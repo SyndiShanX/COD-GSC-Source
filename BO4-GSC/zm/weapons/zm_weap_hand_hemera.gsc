@@ -148,7 +148,7 @@ function_d8a9b5a6(weapon) {
 }
 
 function_54922a21() {
-  self endon(#"death", # "weapon_change");
+  self endon(#"death", #"weapon_change");
 
   while(true) {
     while((self.chargeshotlevel != 2 || !self attackbuttonpressed()) && (self.currentweapon === level.w_hand_hemera || self.currentweapon === level.w_hand_hemera_upgraded)) {
@@ -156,7 +156,7 @@ function_54922a21() {
     }
 
     self thread player_charged_shot(self.currentweapon);
-    self waittill(#"weapon_fired", # "stop_beaming");
+    self waittill(#"weapon_fired", #"stop_beaming");
 
     while(self.chargeshotlevel >= 2) {
       waitframe(1);
@@ -584,7 +584,7 @@ function_3f079da() {
 }
 
 player_charged_shot(weapon) {
-  self endoncallback(&function_8a56ed15, # "death", # "disconnect", # "weapon_change", # "weapon_fired", # "stop_beaming");
+  self endoncallback(&function_8a56ed15, #"death", #"disconnect", #"weapon_change", #"weapon_fired", #"stop_beaming");
   v_trace = self function_3f079da();
   v_ground = groundtrace(v_trace + (0, 0, 200), v_trace + (0, 0, -1000), 0, self)[# "position"];
 
@@ -647,7 +647,7 @@ function_8a56ed15(s_notify) {
 }
 
 function_a2065170() {
-  self endon(#"death", # "weapon_change", # "stop_beaming", # "weapon_fired");
+  self endon(#"death", #"weapon_change", #"stop_beaming", #"weapon_fired");
 
   while(true) {
     if(self meleebuttonpressed()) {
@@ -659,7 +659,7 @@ function_a2065170() {
 }
 
 function_8bf301a6() {
-  self endon(#"death", # "weapon_change", # "stop_beaming");
+  self endon(#"death", #"weapon_change", #"stop_beaming");
   self.mdl_beam endon(#"death");
 
   if(self.currentweapon === level.w_hand_hemera_upgraded) {
@@ -686,7 +686,7 @@ function_8bf301a6() {
 }
 
 function_1e39fbc5(weapon) {
-  self endon(#"death", # "stop_beaming", # "weapon_change");
+  self endon(#"death", #"stop_beaming", #"weapon_change");
   wait 0.3;
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
@@ -722,7 +722,7 @@ function_1e39fbc5(weapon) {
 
 function_6e71e724() {
   self notify(#"beaming");
-  self endon(#"death", # "beaming", # "stop_beaming", # "weapon_change");
+  self endon(#"death", #"beaming", #"stop_beaming", #"weapon_change");
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
     waitframe(1);

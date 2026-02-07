@@ -39,8 +39,8 @@ init() {
   zm_round_spawning::function_2876740e(#"gegenees", &function_57fd9735);
   zm_round_spawning::function_306ce518(#"blight_father", &function_fa00e485);
   zm_round_spawning::function_306ce518(#"gegenees", &function_c1a0ea97);
-  level thread function_6957c745(#"skeleton", 8, # "flag_skeleton_set_intro");
-  level thread function_6957c745(#"gegenees", 12, # "flag_gegenees_set_intro");
+  level thread function_6957c745(#"skeleton", 8, #"flag_skeleton_set_intro");
+  level thread function_6957c745(#"gegenees", 12, #"flag_gegenees_set_intro");
   level thread function_990c303a();
 }
 
@@ -187,7 +187,7 @@ function_a0488ba8() {
   var_a128313 = 0;
 
   foreach(e_zombie in a_e_zombies) {
-    if(isalive(e_zombie) && isDefined(e_zombie.archetype) && isinarray(array(#"blight_father", # "brutus", # "gegenees"), e_zombie.archetype)) {
+    if(isalive(e_zombie) && isDefined(e_zombie.archetype) && isinarray(array(#"blight_father", #"brutus", #"gegenees"), e_zombie.archetype)) {
       var_a128313++;
     }
   }

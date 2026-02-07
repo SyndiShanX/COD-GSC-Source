@@ -79,7 +79,7 @@ function_cec06121(var_264ee2f5) {
   }
 
   level zm_trial::function_25ee130(1);
-  level.var_388587c6 = array(#"ar_standard_t8_upgraded", # "pistol_fullauto_t8_upgraded", # "smg_fastburst_t8_upgraded", # "smg_mp40_t8_upgraded", # "smg_folding_t8_upgraded", # "shotgun_fullauto_t8_upgraded", # "lmg_stealth_t8_upgraded", # "sniper_mini14_t8_upgraded", # "ar_peacekeeper_t8_upgraded", # "tr_flechette_t8_upgraded", # "sniper_locus_t8_upgraded");
+  level.var_388587c6 = array(#"ar_standard_t8_upgraded", #"pistol_fullauto_t8_upgraded", #"smg_fastburst_t8_upgraded", #"smg_mp40_t8_upgraded", #"smg_folding_t8_upgraded", #"shotgun_fullauto_t8_upgraded", #"lmg_stealth_t8_upgraded", #"sniper_mini14_t8_upgraded", #"ar_peacekeeper_t8_upgraded", #"tr_flechette_t8_upgraded", #"sniper_locus_t8_upgraded");
 
   foreach(player in getplayers()) {
     var_4cd7f83c = player getweaponslistprimaries();
@@ -139,7 +139,7 @@ function_33e89162(mdl_weapon, var_6d4294b0) {
   mdl_weapon thread clientfield::set("powerup_fx", 2);
   mdl_weapon thread zm_red_challenges_rewards::function_51fd2597(1);
   mdl_weapon thread zm_red_challenges_rewards::pickup_timeout(undefined, undefined, max(var_6d4294b0 - 5, 5));
-  s_waitresult = self waittilltimeout(var_6d4294b0, # "boon_weapon_picked_up");
+  s_waitresult = self waittilltimeout(var_6d4294b0, #"boon_weapon_picked_up");
 
   if(s_waitresult._notify == "boon_weapon_picked_up" && isplayer(s_waitresult.player)) {
     weapon_reward = s_waitresult.player zm_red_challenges_rewards::function_e2a25377(mdl_weapon.weapon.name);
@@ -162,7 +162,7 @@ function_33e89162(mdl_weapon, var_6d4294b0) {
 }
 
 function_c99662e7(player) {
-  str_prompt = zm_utility::function_d6046228(#"hash_10c127acbe34c506", # "hash_4597718560da3ea2");
+  str_prompt = zm_utility::function_d6046228(#"hash_10c127acbe34c506", #"hash_4597718560da3ea2");
   self sethintstringforplayer(player, str_prompt);
   return true;
 }

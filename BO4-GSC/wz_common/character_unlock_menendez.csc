@@ -10,7 +10,7 @@
 #namespace character_unlock_menendez;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_menendez", &__init__, undefined, # "character_unlock_menendez_fixup");
+  system::register(#"character_unlock_menendez", &__init__, undefined, #"character_unlock_menendez_fixup");
 }
 
 __init__() {

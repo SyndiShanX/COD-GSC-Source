@@ -314,13 +314,13 @@ closespawnselectionmenuforallplayers() {
 }
 
 function_b55c5868() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
   self openspawnselect();
   self thread watchforselectiontimeout();
 }
 
 waitforspawnselection() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");
@@ -360,7 +360,7 @@ waitforspawnselection() {
 }
 
 watchforselectiontimeout() {
-  self endon(#"disconnect", # "end_respawn");
+  self endon(#"disconnect", #"end_respawn");
   self.spawnselect_start_time = gettime();
 
   while(true) {

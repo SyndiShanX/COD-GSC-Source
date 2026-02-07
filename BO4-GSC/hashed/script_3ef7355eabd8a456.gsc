@@ -64,8 +64,8 @@ init_quest() {
   var_b3edfb92 hide();
   var_240bceab = array(#"hash_1a4bbbe1a3b57e4f");
   var_e4158c30 = array(#"hash_7544aa4a3281de20");
-  var_19bb8831 = array(#"hash_cfe3836bc9ca39", # "hash_4b18b104deb5d028");
-  var_17b5a12 = array(#"hash_ebea45d703b1ed2", # "hash_2c58be4a6b26629b", # "hash_3db46912689769f0", # "hash_1152f3ac3dddade1");
+  var_19bb8831 = array(#"hash_cfe3836bc9ca39", #"hash_4b18b104deb5d028");
+  var_17b5a12 = array(#"hash_ebea45d703b1ed2", #"hash_2c58be4a6b26629b", #"hash_3db46912689769f0", #"hash_1152f3ac3dddade1");
   var_b37ebf6 = array(#"hash_4768d4b244860f63");
   var_4e4ef50e = array(#"hash_217e6ae56b61ad3b");
   var_2c28b1bb = array(#"hash_2747b199d121f40b");
@@ -101,8 +101,8 @@ init_quest() {
   var_453ce50f = getent("punch_card_anim", "targetname");
   assert(isDefined(var_453ce50f), "<dev string:x38>");
   var_453ce50f hide();
-  zm_sq::register(#"pernell_archive", # "step_1", # "pernell_archive_step1", &pernell_archive_step1_setup, &pernell_archive_step1_cleanup);
-  zm_sq::register(#"pernell_archive", # "step_2", # "pernell_archive_step2", &pernell_archive_step2_setup, &pernell_archive_step2_cleanup);
+  zm_sq::register(#"pernell_archive", #"step_1", #"pernell_archive_step1", &pernell_archive_step1_setup, &pernell_archive_step1_cleanup);
+  zm_sq::register(#"pernell_archive", #"step_2", #"pernell_archive_step2", &pernell_archive_step2_setup, &pernell_archive_step2_cleanup);
   zm_sq::start(#"pernell_archive");
   level thread function_afb5905e();
 }
@@ -194,7 +194,7 @@ function_a546fd97() {
         iprintlnbold("<dev string:x7d>");
 
         self playSound(#"hash_4f1f1f9762add0a3");
-        s_notify.attacker thread zm_audio::create_and_play_dialog(#"generic", # "response_positive");
+        s_notify.attacker thread zm_audio::create_and_play_dialog(#"generic", #"response_positive");
       }
     }
   }

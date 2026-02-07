@@ -16,7 +16,7 @@
 #namespace zm_unitrigger;
 
 autoexec __init__system__() {
-  system::register(#"zm_unitrigger", &__init__, &__main__, # "zm_zonemgr");
+  system::register(#"zm_unitrigger", &__init__, &__main__, #"zm_zonemgr");
 }
 
 create(var_9d80e6ef = "", var_e0bc0661 = 64, func_unitrigger_logic = &function_69168e61, var_4478092b, var_98f0ce74 = 0) {
@@ -722,7 +722,7 @@ function_71b67b2a(trigger) {
 
 function_358a2fc7() {
   self notify(#"hash_4a86a63120e0d3d9");
-  self endon(#"hash_4a86a63120e0d3d9", # "disconnect");
+  self endon(#"hash_4a86a63120e0d3d9", #"disconnect");
 
   if(isDefined(level._unitriggers) && isarray(level._unitriggers.dynamic_stubs)) {
     arrayremovevalue(level._unitriggers.dynamic_stubs, undefined);

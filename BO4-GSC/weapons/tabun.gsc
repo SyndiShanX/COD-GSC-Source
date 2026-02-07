@@ -140,7 +140,7 @@ damageeffectarea(owner, position, radius, height, killcament) {
 }
 
 damageinpoisonarea(gaseffectarea, killcament, trace, position) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self thread watch_death();
   self.inpoisonarea = 1;
   tabunshocksound = spawn("script_origin", (0, 0, 1));

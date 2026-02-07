@@ -69,7 +69,7 @@ gravity_slam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     }
 
     util::playFXOnTag(localclientnum, level._effect[# "gravityspikes_slam"], self, "tag_origin");
-    self playSound(0, # "hash_79ac4ef26925a30f");
+    self playSound(0, #"hash_79ac4ef26925a30f");
   }
 }
 
@@ -97,7 +97,7 @@ gravity_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     }
 
     if(!isDefined(self.var_cacf63a9)) {
-      self playSound(0, # "hash_39e42a22827220d1");
+      self playSound(0, #"hash_39e42a22827220d1");
       self.var_cacf63a9 = self playLoopSound(#"hash_9c25e71ff13ac77");
     }
 
@@ -120,7 +120,7 @@ gravity_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(isDefined(self.var_cacf63a9)) {
-    self playSound(0, # "hash_5d0917b44402f070");
+    self playSound(0, #"hash_5d0917b44402f070");
     self stoploopsound(self.var_cacf63a9);
   }
 
@@ -152,7 +152,7 @@ gravity_trap_location(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 }
 
 gravity_trap_rumble(localclientnum) {
-  self endon(#"vortex_stop", # "death");
+  self endon(#"vortex_stop", #"death");
 
   while(isDefined(self)) {
     self playrumbleonentity(localclientnum, "zm_weap_gravityspikes_vortex");
@@ -238,7 +238,7 @@ play_sparky_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 sparky_zombie_fx_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.sparky_loop_snd)) {
-      self playSound(localclientnum, # "wpn_dg4_electrocution_impact");
+      self playSound(localclientnum, #"wpn_dg4_electrocution_impact");
       self.sparky_loop_snd = self playLoopSound("wpn_dg4_electrocution_loop");
     }
 
@@ -322,7 +322,7 @@ gravity_shock_wave_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   }
 
   if(isDefined(self.var_aff8c2c0)) {
-    self playSound(localclientnum, # "hash_4dee0eab8f9ef57");
+    self playSound(localclientnum, #"hash_4dee0eab8f9ef57");
     self stoploopsound(self.var_aff8c2c0);
     self.var_aff8c2c0 = undefined;
   }
@@ -351,7 +351,7 @@ gravity_shock_wave_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
     foreach(e_player in a_e_players) {
       if(!e_player util::function_50ed1561(localclientnum)) {
-        e_player thread zm_utility::function_ae3780f1(localclientnum, self.var_c145bf0d[localclientnum], # "hash_5ebde0f1ebad91b3");
+        e_player thread zm_utility::function_ae3780f1(localclientnum, self.var_c145bf0d[localclientnum], #"hash_5ebde0f1ebad91b3");
       }
     }
   }
@@ -372,11 +372,11 @@ gravity_aoe_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   self.var_a1e2affa = util::playFXOnTag(localclientnum, level._effect[# "hash_d73bbc3bff0a6f3"], self, str_tag);
 
   if(!isDefined(self.var_747bc8da)) {
-    self playSound(localclientnum, # "wpn_dg4_electrocution_impact");
+    self playSound(localclientnum, #"wpn_dg4_electrocution_impact");
     self.var_747bc8da = self playLoopSound(#"wpn_dg4_electrocution_loop");
   }
 
-  self waittilltimeout(0.5, # "death");
+  self waittilltimeout(0.5, #"death");
 
   if(!isDefined(self)) {
     return;

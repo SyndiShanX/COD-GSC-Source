@@ -95,7 +95,7 @@ function_6c4ae982(localclientnum) {
 
       if(wormhole_fx === 1 && !var_d5823792) {
         var_d5823792 = 1;
-        playSound(localclientnum, # "hash_37244e4f8de40dd5");
+        playSound(localclientnum, #"hash_37244e4f8de40dd5");
         local_player codeplaypostfxbundle("pstfx_wz_esc_tele_reveal");
         local_player codeplaypostfxbundle("pstfx_wz_esc_tele_sprites");
       } else if(wormhole_fx === 0 && var_d5823792) {
@@ -121,7 +121,7 @@ function_ed1567cc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self function_d309e55a("tag_ramp_control_animate", 1);
     }
 
-    self playSound(0, # "hash_329be5a324e42ee1");
+    self playSound(0, #"hash_329be5a324e42ee1");
     level notify(#"hash_5975d5f569535c41");
     return;
   }
@@ -149,14 +149,14 @@ function_ba7d9848(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_ded53cc6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1 && oldval != newval) {
-    self playSound(0, # "hash_7ba1b4b83540b238");
+    self playSound(0, #"hash_7ba1b4b83540b238");
   }
 }
 
 function_ea3cc318(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self function_da43934d()) {
     if(newval == 1 && oldval != newval) {
-      self playSound(0, # "hash_783bdfd900c11eed");
+      self playSound(0, #"hash_783bdfd900c11eed");
     }
   }
 }
@@ -459,7 +459,7 @@ function_c9851cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 function_9767bbd8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playFX(localclientnum, # "hash_3697b0b0d7cd6874", self.origin);
+  playFX(localclientnum, #"hash_3697b0b0d7cd6874", self.origin);
 }
 
 function_c0c7c219(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -471,7 +471,7 @@ function_c0c7c219(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       stopfx(localclientnum, self.var_227361c6);
     }
 
-    self.var_227361c6 = playFX(localclientnum, # "hash_28b5c6ccaabb4afe", self.origin);
+    self.var_227361c6 = playFX(localclientnum, #"hash_28b5c6ccaabb4afe", self.origin);
     return;
   }
 
@@ -479,5 +479,5 @@ function_c0c7c219(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     stopfx(localclientnum, self.var_227361c6);
   }
 
-  self.var_227361c6 = playFX(localclientnum, # "hash_45086f1ffcabbf47", self.origin);
+  self.var_227361c6 = playFX(localclientnum, #"hash_45086f1ffcabbf47", self.origin);
 }

@@ -54,7 +54,7 @@ __main__() {
   level thread function_d987ffa1();
 
   level flag::wait_till("start_zombie_round_logic");
-  level.var_ac9cb27a = array(#"hash_67a31e96e8f4d0e9", # "hash_67a31b96e8f4cbd0", # "hash_67a31c96e8f4cd83", # "hash_67a32196e8f4d602");
+  level.var_ac9cb27a = array(#"hash_67a31e96e8f4d0e9", #"hash_67a31b96e8f4cbd0", #"hash_67a31c96e8f4cd83", #"hash_67a32196e8f4d602");
   level flag::wait_till(#"spoon_quest_completed");
   zm_spawner::register_zombie_death_event_callback(&function_85cfc2a3);
 
@@ -133,7 +133,7 @@ function_cd53088e(params) {
 }
 
 function_5ec2f851() {
-  self endon(#"disconnect", # "hash_17b0a36fa17ca61a");
+  self endon(#"disconnect", #"hash_17b0a36fa17ca61a");
   var_5c4729d5 = getent("t_r_br_sp2_7", "targetname");
 
   while(true) {
@@ -178,7 +178,7 @@ function_85cfc2a3(e_player) {
 }
 
 function_7927b4f1() {
-  self endon(#"disconnect", # "roof_kills_completed");
+  self endon(#"disconnect", #"roof_kills_completed");
 
   while(true) {
     var_bdf9e3c2 = self zm_zonemgr::get_player_zone();
@@ -287,7 +287,7 @@ function_48d7e846() {
   e_closest = arraygetclosest(level.var_4b9d0136.origin, zm_vo::function_347f7d34());
 
   if(isalive(e_closest)) {
-    e_closest thread zm_audio::create_and_play_dialog(#"catwalk", # "hash_30b3d33fbe5f5328");
+    e_closest thread zm_audio::create_and_play_dialog(#"catwalk", #"hash_30b3d33fbe5f5328");
   }
 
   wait 2;

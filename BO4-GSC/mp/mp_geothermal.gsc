@@ -202,7 +202,7 @@ geyser_think() {
 }
 
 function_dda9d732() {
-  self.scene_ents[# "prop 1"] waittill(#"stop", # "death");
+  self.scene_ents[# "prop 1"] waittill(#"stop", #"death");
 
   level thread function_a5242577(self, (1, 1, 0));
 

@@ -129,13 +129,13 @@ on_player_last_stand() {
 }
 
 function_edf1b266() {
-  self endon(#"death", # "disconnect", # "player_revived");
+  self endon(#"death", #"disconnect", #"player_revived");
   self waittill(#"teleporting");
   self thread function_1ac7a037();
 }
 
 function_1ac7a037() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   self waittill(#"player_revived");
 
   iprintlnbold("<dev string:x38>" + "<dev string:x103>");

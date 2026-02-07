@@ -160,7 +160,7 @@ state_death_update(params) {
 }
 
 state_emped_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   waitframe(1);
   gravity = 400;
   self notify(#"end_nudge_collision");
@@ -219,7 +219,7 @@ state_emped_update(params) {
 
     if(isDefined(goalpoint) && sighttracepassed(self.origin + originoffset, goalpoint, 0, self)) {
       self function_a57c34b7(goalpoint, 0, 0);
-      self waittilltimeout(0.3, # "near_goal", # "goal");
+      self waittilltimeout(0.3, #"near_goal", #"goal");
 
       if(isDefined(self.enemy) && isalive(self)) {
         self vehlookat(self.enemy);
@@ -235,7 +235,7 @@ state_emped_update(params) {
       }
 
       if(foundgoal) {
-        self waittilltimeout(1, # "near_goal", # "goal");
+        self waittilltimeout(1, #"near_goal", #"goal");
       } else {
         self function_a57c34b7(self.origin, 1, 0);
       }
@@ -259,7 +259,7 @@ function_d34735d1() {
 }
 
 fall_and_bounce(killonimpact_speed, killonimpact_time, killonimpact = 0) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   maxbouncetime = 3;
   bouncescale = 0.3;
   velocityloss = 0.3;
@@ -505,7 +505,7 @@ test_get_back_queryresult(queryresult) {
 }
 
 state_guard_update(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   self sethoverparams(20, 40, 30);
   timenotatgoal = gettime();
   pointindex = 0;
@@ -668,7 +668,7 @@ state_combat_enter(params) {
 }
 
 turretfireupdate() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   isrockettype = self.variant === "rocket";
 
   while(true) {
@@ -739,7 +739,7 @@ turretfireupdate() {
 }
 
 path_update_interrupt() {
-  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node");
+  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node");
   self notify(#"path_update_interrupt");
   self endon(#"path_update_interrupt");
   old_enemy = self.enemy;
@@ -775,7 +775,7 @@ path_update_interrupt() {
 }
 
 wait_till_something_happens(timeout) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   wait 0.1;
   time = timeout;
   cant_see_count = 0;
@@ -912,7 +912,7 @@ should_fly_forward(distancetogoalsq) {
 }
 
 function_739ac4a0(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self setspeed(self.settings.defaultmovespeed);
 
   for(;;) {
@@ -934,7 +934,7 @@ function_739ac4a0(params) {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   wait 0.1;
   stuckcount = 0;
 
@@ -1342,7 +1342,7 @@ wasp_driving(params) {
 }
 
 wasp_manage_camera_swaps() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   driver = self getseatoccupant(0);
   driver endon(#"disconnect");
   cam_low_type = self.vehicletype;

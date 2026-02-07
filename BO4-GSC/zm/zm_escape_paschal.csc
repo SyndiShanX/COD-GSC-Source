@@ -244,7 +244,7 @@ function_a596ea8d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_86931af3[localclientnum] = level beam::launch(self.var_95496a89[localclientnum], "tag_origin", self.var_d1f92a1c[localclientnum], "tag_origin", "beam8_zm_shield_key_ray_targeted");
 
     if(!isDefined(self.var_147a3cdc[localclientnum])) {
-      self playSound(localclientnum, # "hash_71ec8b40875fdf5f");
+      self playSound(localclientnum, #"hash_71ec8b40875fdf5f");
       self.var_147a3cdc[localclientnum] = self playLoopSound(#"hash_7bdc545588111e41");
     }
 
@@ -267,7 +267,7 @@ function_a596ea8d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_147a3cdc[localclientnum])) {
-    self playSound(localclientnum, # "hash_3c3813560a59a64a");
+    self playSound(localclientnum, #"hash_3c3813560a59a64a");
     self stoploopsound(self.var_147a3cdc[localclientnum]);
     self.var_147a3cdc[localclientnum] = undefined;
   }
@@ -360,7 +360,7 @@ function_6357e884(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     self.var_2185511c[localclientnum][self.var_2185511c[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_2928b6d60aaacda6"], self, str_tag);
     var_18407835 = self gettagorigin(str_tag);
-    playSound(localclientnum, # "hash_6d26aa0fd4a98020", var_18407835);
+    playSound(localclientnum, #"hash_6d26aa0fd4a98020", var_18407835);
     return;
   }
 
@@ -409,7 +409,7 @@ function_e33e10b9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_91f82333 = util::playFXOnTag(localclientnum, level._effect[# "brutus_stun"], self, "tag_origin");
 
     if(!isDefined(self.var_6ca7b3dd)) {
-      self playSound(localclientnum, # "hash_713bf699d03aa7c1");
+      self playSound(localclientnum, #"hash_713bf699d03aa7c1");
       self.var_6ca7b3dd = self playLoopSound(#"hash_5248e6e3ffed7696");
     }
 
@@ -466,7 +466,7 @@ group_bot_mp(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 duffel_prison(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     var_e0630bbb = struct::get("p_s_4_bag");
-    self.var_c5996c09 = util::spawn_model(localclientnum, # "p8_zm_esc_laundry_bag", var_e0630bbb.origin, var_e0630bbb.angles);
+    self.var_c5996c09 = util::spawn_model(localclientnum, #"p8_zm_esc_laundry_bag", var_e0630bbb.origin, var_e0630bbb.angles);
     return;
   }
 
@@ -504,9 +504,9 @@ function_8fe4f2a7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_d663c13e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, # "hash_738338790dfa1ece");
+  self playrumbleonentity(localclientnum, #"hash_738338790dfa1ece");
 }
 
 function_42693309(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, # "zm_escape_map_interact");
+  self playrumbleonentity(localclientnum, #"zm_escape_map_interact");
 }

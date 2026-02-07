@@ -121,7 +121,7 @@ function_5ac8947e() {
 
       foreach(player in players) {
         if(isplayer(player)) {
-          player luinotifyevent(#"score_event", 2, # "hash_60899927812586a1", score);
+          player luinotifyevent(#"score_event", 2, #"hash_60899927812586a1", score);
           break;
         }
       }
@@ -1012,7 +1012,7 @@ function_2d4d7fd9(weapon) {
 
 function_bb54e671(weapon) {
   self notify(#"hash_7c6363440c125d8b");
-  self endon(#"disconnect", # "hash_7c6363440c125d8b");
+  self endon(#"disconnect", #"hash_7c6363440c125d8b");
 
   if(!isDefined(self.var_8d5839f4)) {
     self.var_8d5839f4 = [];
@@ -2765,13 +2765,13 @@ zombie_devgui_give_health() {
   assert(isplayer(self));
   assert(isalive(self));
   self notify(#"devgui_health");
-  self endon(#"devgui_health", # "disconnect", # "death");
+  self endon(#"devgui_health", #"disconnect", #"death");
   level.devcheater = 1;
 
   while(true) {
     self.maxhealth = 100000;
     self.health = 100000;
-    self waittill(#"player_revived", # "perk_used", # "spawned_player");
+    self waittill(#"player_revived", #"perk_used", #"spawned_player");
     wait 2;
   }
 }
@@ -2781,13 +2781,13 @@ zombie_devgui_low_health() {
   assert(isplayer(self));
   assert(isalive(self));
   self notify(#"devgui_health");
-  self endon(#"devgui_health", # "disconnect", # "death");
+  self endon(#"devgui_health", #"disconnect", #"death");
   level.devcheater = 1;
 
   while(true) {
     self.maxhealth = 10;
     self.health = 10;
-    self waittill(#"player_revived", # "perk_used", # "spawned_player");
+    self waittill(#"player_revived", #"perk_used", #"spawned_player");
     wait 2;
   }
 }
@@ -3103,7 +3103,7 @@ function_55c6dedd(str_weapon, xp) {
     xp = 0;
   }
 
-  self stats::set_stat(#"ranked_item_stats", str_weapon, # "xp", xp);
+  self stats::set_stat(#"ranked_item_stats", str_weapon, #"xp", xp);
 }
 
 function_335cdac(weapon) {
@@ -3267,12 +3267,12 @@ function_cbdab30d(xp) {
   if(self.pers[# "rankxp"] > xp) {
     self.pers[# "rank"] = 0;
     self setrank(0);
-    self stats::set_stat(#"playerstatslist", # "rank", # "statvalue", 0);
+    self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", 0);
   }
 
   self.pers[# "rankxp"] = xp;
   self rank::updaterank();
-  self stats::set_stat(#"playerstatslist", # "rank", # "statvalue", self.pers[# "rank"]);
+  self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", self.pers[# "rank"]);
 }
 
 function_5c26ad27(var_56c1b8d) {
@@ -3744,7 +3744,7 @@ function_2fcf8a4a(notifyhash) {
 
 function_fb482cad() {
   self notify(#"hash_d592b5d81b7b3a7");
-  self endoncallback(&function_2fcf8a4a, # "hash_d592b5d81b7b3a7", # "disconnect");
+  self endoncallback(&function_2fcf8a4a, #"hash_d592b5d81b7b3a7", #"disconnect");
 
   while(true) {
     if(!isDefined(self.var_d35d1d3d)) {
@@ -4065,7 +4065,7 @@ function_8d799ebd() {
   if(!self laststand::player_is_in_laststand()) {
     self zm_hero_weapon::function_1bb7f7b1(3);
     self zm_perks::function_869a50c0(4);
-    var_5d62d3c8 = array::randomize(array(#"ar_accurate_t8", # "ar_fastfire_t8", # "ar_stealth_t8", # "ar_modular_t8", # "smg_capacity_t8", # "tr_powersemi_t8"));
+    var_5d62d3c8 = array::randomize(array(#"ar_accurate_t8", #"ar_fastfire_t8", #"ar_stealth_t8", #"ar_modular_t8", #"smg_capacity_t8", #"tr_powersemi_t8"));
 
     foreach(w_primary in self getweaponslistprimaries()) {
       self takeweapon(w_primary);

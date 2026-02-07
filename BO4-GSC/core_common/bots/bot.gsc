@@ -421,7 +421,7 @@ update_loop() {
     return;
   }
 
-  self endon(#"death", # "bled_out");
+  self endon(#"death", #"bled_out");
   level endon(#"game_ended");
 
   if(isDefined(level.var_fa5cacde) && level.var_fa5cacde) {
@@ -636,7 +636,7 @@ init_bot() {
   self.bot.var_18fa994c = 0;
   self.bot.var_857c5ea8 = 0;
   blackboard::createblackboardforentity(self);
-  self function_eaf7ef38(#"hash_1b029888c4965031", # "hash_41b1340b7efb3261");
+  self function_eaf7ef38(#"hash_1b029888c4965031", #"hash_41b1340b7efb3261");
 }
 
 initialized() {
@@ -1054,7 +1054,7 @@ devgui_bot_loop() {
         level devgui_add_bots(host, args[1], int(args[2]));
         break;
       case # "spawn_enemy":
-        level devgui_add_bots(host, # "enemy", 1);
+        level devgui_add_bots(host, #"enemy", 1);
         break;
       case # "remove":
         level devgui_remove_bots(host, args[1]);
@@ -1764,7 +1764,7 @@ function_301f229d(team) {
 }
 
 populate_bots() {
-  level endon(#"game_ended", # "hash_d3e36871aa6829f");
+  level endon(#"game_ended", #"hash_d3e36871aa6829f");
   botfill = getdvarint(#"botfill", 0);
 
   if(botfill > 0) {
@@ -1793,7 +1793,7 @@ populate_bots() {
 }
 
 monitor_bot_team_population(maxallies, maxaxis) {
-  level endon(#"game_ended", # "hash_d3e36871aa6829f");
+  level endon(#"game_ended", #"hash_d3e36871aa6829f");
 
   if(!maxallies && !maxaxis) {
     return;
@@ -1831,7 +1831,7 @@ fill_balanced_teams(maxallies, maxaxis) {
 }
 
 monitor_bot_population(maxfree) {
-  level endon(#"game_ended", # "hash_d3e36871aa6829f");
+  level endon(#"game_ended", #"hash_d3e36871aa6829f");
 
   if(!maxfree) {
     return;

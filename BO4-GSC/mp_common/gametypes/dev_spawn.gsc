@@ -187,7 +187,7 @@ function_5650f4ee(var_7a594c78, var_55a94d2c, actualteam, isstartspawn) {
 }
 
 function_88770699(spawnlist) {
-  level endon(#"hide_spawnpoints", # "hash_12bbc39c8f50f769");
+  level endon(#"hide_spawnpoints", #"hash_12bbc39c8f50f769");
   maxdistancesq = 1000000;
   hostplayer = util::gethostplayer();
 

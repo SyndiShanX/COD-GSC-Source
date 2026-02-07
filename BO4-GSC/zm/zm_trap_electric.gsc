@@ -53,7 +53,7 @@ trap_activate_electric() {
   }
 
   self thread zm_traps::trap_damage();
-  self waittilltimeout(self._trap_duration, # "trap_deactivate");
+  self waittilltimeout(self._trap_duration, #"trap_deactivate");
   self notify(#"trap_done");
   level clientfield::set(self.target, 0);
 }
@@ -63,7 +63,7 @@ trap_audio(trap) {
   sound_origin playSound(#"hash_1fb395621513432f");
   sound_origin playLoopSound(#"hash_177d7a6df8ed0d7b");
   self thread play_electrical_sound(trap);
-  trap waittilltimeout(trap._trap_duration, # "trap_done");
+  trap waittilltimeout(trap._trap_duration, #"trap_done");
 
   if(isDefined(sound_origin)) {
     playsoundatposition(#"hash_3819c6cd06a27f15", sound_origin.origin);

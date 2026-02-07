@@ -196,7 +196,7 @@ function_14f79b33(center, radius, height, var_e294ac7d) {
     thread player_insertion::debug_line(level.reinsertion.vehicle.origin, goal, (0, 1, 0), level.reinsertion.debug_duration);
 
     self function_a57c34b7(goal, 0, 0);
-    self waittill(#"goal", # "near_goal");
+    self waittill(#"goal", #"near_goal");
   }
 }
 
@@ -216,7 +216,7 @@ function_4f356be(start, end, offset, var_3a5f8906) {
     self pathvariableoffset((offset, offset, offset), var_3a5f8906);
   }
 
-  self waittill(#"goal", # "near_goal");
+  self waittill(#"goal", #"near_goal");
 }
 
 function_b24f3a72(origin, radius, height) {
@@ -493,7 +493,7 @@ function_fec68e5c() {
   }
 
   level.insertion flagsys::set(#"insertion_teleport_completed");
-  level.insertion flagsys::wait_till_timeout(1 + 2.5 + 0.5, # "insertion_presentation_completed");
+  level.insertion flagsys::wait_till_timeout(1 + 2.5 + 0.5, #"insertion_presentation_completed");
   level.reinsertion.vehicle player_insertion::function_bc16f3b4(level.insertion);
   assert(10 > 0);
   wait 10;

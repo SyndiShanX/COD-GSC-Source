@@ -72,7 +72,7 @@ adjust_recent_stats() {
 }
 
 function_acac764e() {
-  index = self stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "prevscoreindex");
+  index = self stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"prevscoreindex");
 
   if(!isDefined(index)) {
     return;
@@ -84,7 +84,7 @@ function_acac764e() {
 
   newindex = (index + 1) % 10;
   self.pers[# "hash_76fbbcf94dab5536"] = newindex;
-  self stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "prevscoreindex", newindex);
+  self stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"prevscoreindex", newindex);
 }
 
 get_recent_stat(isglobal, index, statname) {
@@ -94,15 +94,15 @@ get_recent_stat(isglobal, index, statname) {
 
   if(isglobal) {
     modename = level.var_12323003;
-    return self stats::get_stat(#"gamehistory", modename, # "matchhistory", index, statname);
+    return self stats::get_stat(#"gamehistory", modename, #"matchhistory", index, statname);
   }
 
-  return self stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "prevscores", index, statname);
+  return self stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"prevscores", index, statname);
 }
 
 set_recent_stat(isglobal, index, statname, value) {
   if(!isglobal) {
-    index = self stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "prevscoreindex");
+    index = self stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"prevscoreindex");
 
     if(!isDefined(index)) {
       return;
@@ -123,11 +123,11 @@ set_recent_stat(isglobal, index, statname, value) {
 
   if(isglobal) {
     modename = level.var_12323003;
-    self stats::set_stat(#"gamehistory", modename, # "matchhistory", "" + index, statname, value);
+    self stats::set_stat(#"gamehistory", modename, #"matchhistory", "" + index, statname, value);
     return;
   }
 
-  self stats::set_stat(#"playerstatsbygametype", level.var_12323003, # "prevscores", index, statname, value);
+  self stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"prevscores", index, statname, value);
 }
 
 add_recent_stat(isglobal, index, statname, value) {
@@ -136,7 +136,7 @@ add_recent_stat(isglobal, index, statname, value) {
   }
 
   if(!isglobal) {
-    index = self stats::get_stat(#"playerstatsbygametype", level.var_12323003, # "prevscoreindex");
+    index = self stats::get_stat(#"playerstatsbygametype", level.var_12323003, #"prevscoreindex");
 
     if(!isDefined(index)) {
       return;
@@ -160,13 +160,13 @@ add_recent_stat(isglobal, index, statname, value) {
 
 set_match_history_stat(statname, value) {
   modename = level.var_12323003;
-  historyindex = self stats::get_stat(#"gamehistory", modename, # "currentmatchhistoryindex");
+  historyindex = self stats::get_stat(#"gamehistory", modename, #"currentmatchhistoryindex");
   set_recent_stat(1, historyindex, statname, value);
 }
 
 add_match_history_stat(statname, value) {
   modename = level.var_12323003;
-  historyindex = self stats::get_stat(#"gamehistory", modename, # "currentmatchhistoryindex");
+  historyindex = self stats::get_stat(#"gamehistory", modename, #"currentmatchhistoryindex");
   add_recent_stat(1, historyindex, statname, value);
 }
 
@@ -198,8 +198,8 @@ initialize_match_stats() {
     self stats::function_bb7eedf0(#"total_games_played", 1);
 
     if(isDefined(level.hardcoremode) && level.hardcoremode) {
-      hc_games_played = self stats::get_stat(#"playerstatslist", # "hc_games_played", # "statvalue") + 1;
-      self stats::set_stat(#"playerstatslist", # "hc_games_played", # "statvalue", hc_games_played);
+      hc_games_played = self stats::get_stat(#"playerstatslist", #"hc_games_played", #"statvalue") + 1;
+      self stats::set_stat(#"playerstatslist", #"hc_games_played", #"statvalue", hc_games_played);
     }
   }
 
@@ -341,7 +341,7 @@ event_handler[player_gunchallengecomplete] codecallback_gunchallengecomplete(eve
 
 upload_stats_soon() {
   self notify(#"upload_stats_soon");
-  self endon(#"upload_stats_soon", # "disconnect");
+  self endon(#"upload_stats_soon", #"disconnect");
   wait 1;
   uploadstats(self);
 }

@@ -34,11 +34,11 @@ on_player_spawned() {
 
 function_3c893ac6(owner, statweapon, grenadeweaponname, duration, totaltime) {
   if(isplayer(owner)) {
-    owner stats::function_e24eec31(statweapon, # "used", 1);
+    owner stats::function_e24eec31(statweapon, #"used", 1);
   }
 
   owner_origin = owner.origin;
-  waitresult = self waittill(#"explode", # "death");
+  waitresult = self waittill(#"explode", #"death");
 
   if(!isDefined(self)) {
     return;
@@ -108,7 +108,7 @@ function function_2ece9391(owner, duration) {
   }
 
   level.var_438f1f83[level.var_438f1f83.size] = trigger;
-  self waittilltimeout(duration, # "death");
+  self waittilltimeout(duration, #"death");
   arrayremovevalue(level.var_438f1f83, trigger);
   trigger delete();
 }
@@ -171,7 +171,7 @@ function_7033488b(notifyhash) {
 
 function_c2e7fcb4() {
   player = self;
-  player endoncallback(&function_7033488b, # "death", # "disconnect");
+  player endoncallback(&function_7033488b, #"death", #"disconnect");
   player.in_enemy_mute_smoke = player clientfield::get("in_enemy_mute_smoke") == 1;
   player.var_2118ca55 = player clientfield::get("inFriendlyMuteSmoke") == 1;
   wait randomfloatrange(0.1, 0.6);
@@ -221,7 +221,7 @@ function_40abb79a(in_enemy_mute_smoke, applicant) {
 }
 
 function_41470017(var_56d6af0e, applicant) {
-  self endon(#"hash_2d871144da153bc1", # "death", # "disconnect");
+  self endon(#"hash_2d871144da153bc1", #"death", #"disconnect");
   self thread status_effect::status_effect_apply(var_56d6af0e, undefined, applicant, 0, 1200);
 
   while(true) {

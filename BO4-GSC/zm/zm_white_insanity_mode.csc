@@ -20,7 +20,7 @@ function_4b104fc5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.fx = util::playFXOnTag(localclientnum, level._effect[# "fx8_insanity_wisp"], self, "tag_origin");
 
     if(!isDefined(self.sfx)) {
-      self playSound(0, # "hash_7867b5508ce25848");
+      self playSound(0, #"hash_7867b5508ce25848");
       self.sfx = self playLoopSound(#"hash_2c5ad3d4cdc507c");
     }
 
@@ -30,7 +30,7 @@ function_4b104fc5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   stopfx(localclientnum, self.fx);
 
   if(isDefined(self.sfx)) {
-    self playSound(0, # "hash_6e263590089ef88e");
+    self playSound(0, #"hash_6e263590089ef88e");
     self stoploopsound(self.sfx);
     self.sfx = undefined;
   }

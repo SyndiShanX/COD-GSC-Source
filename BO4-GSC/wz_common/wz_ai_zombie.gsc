@@ -582,7 +582,7 @@ function_3d9b8ab3(params) {
 
 function_9c573bc6() {
   self notify("3181030c4896e54e");
-  self endon("16e9d2db81fbdb7b", # "death");
+  self endon("16e9d2db81fbdb7b", #"death");
 
   if(isDefined(self.enemy_override)) {
     return;
@@ -1169,7 +1169,7 @@ setup_awareness(entity) {
 
   entity.has_awareness = 1;
   entity.ignorelaststandplayers = 1;
-  set_state(entity, # "wander");
+  set_state(entity, #"wander");
 }
 
 function_cb2c8fea() {
@@ -1332,7 +1332,7 @@ wander_enter(entity) {
 }
 
 function_76f8bf36(entity) {
-  entity endon(#"death", # "state_changed");
+  entity endon(#"death", #"state_changed");
   origin = entity.origin;
 
   while(true) {
@@ -1367,11 +1367,11 @@ wander_update(entity) {
   }
 
   if(isDefined(entity.favoriteenemy) || isDefined(entity.enemy_override) || isDefined(entity.attackable)) {
-    set_state(entity, # "chase");
+    set_state(entity, #"chase");
   }
 
   if(isDefined(entity.var_b4b8ad5f)) {
-    set_state(entity, # "investigate");
+    set_state(entity, #"investigate");
   }
 }
 
@@ -1401,7 +1401,7 @@ function_1cfdbe7(notifyhash) {
 
 function_102ca651(entity) {
   self notify(#"hash_1ea32021fdf52a8b");
-  self endoncallback(&function_1cfdbe7, # "death", # "state_changed", # "hash_1ea32021fdf52a8b");
+  self endoncallback(&function_1cfdbe7, #"death", #"state_changed", #"hash_1ea32021fdf52a8b");
   investigate_point = undefined;
 
   if(isDefined(entity.var_b4b8ad5f)) {
@@ -1441,11 +1441,11 @@ investigate_update(entity) {
   }
 
   if(isDefined(entity.favoriteenemy) || isDefined(entity.enemy_override) || isDefined(entity.attackable)) {
-    set_state(entity, # "chase");
+    set_state(entity, #"chase");
   }
 
   if(!isDefined(entity.var_b4b8ad5f)) {
-    set_state(entity, # "wander");
+    set_state(entity, #"wander");
   }
 }
 
@@ -1562,7 +1562,7 @@ chase_enter(entity) {
 
 chase_update(entity) {
   if(!isDefined(entity.enemy_override) && !isDefined(entity.attackable) && !function_219b823c(entity, entity.enemy)) {
-    set_state(entity, # "wander");
+    set_state(entity, #"wander");
     return;
   }
 
@@ -2048,7 +2048,7 @@ function_b184324d(origin, radius, var_5e8ea34a = 0, dist_from_boundary = 15) {
 
 function_d4f2933d() {
   level endon(#"game_ended");
-  self endon(#"death", # "state_changed");
+  self endon(#"death", #"state_changed");
   self.var_9a79d89d = self.origin;
 
   while(true) {
@@ -2065,7 +2065,7 @@ function_d4f2933d() {
     }
 
     wait_time = randomfloatrange(3, 5);
-    waitresult = self waittilltimeout(wait_time, # "goal");
+    waitresult = self waittilltimeout(wait_time, #"goal");
 
     if(isDefined(self.var_50826790) && self.var_50826790) {
       self.var_ef59b90 = 5;
@@ -2135,7 +2135,7 @@ function_34eacecd() {
 
 function_af47322e() {
   level endon(#"game_ended");
-  self endon(#"death", # "state_changed");
+  self endon(#"death", #"state_changed");
 
   while(true) {
     self.var_9a79d89d = self.ai_zone.spawn_points[self.ai_zone.var_96d81013].origin;
@@ -2152,7 +2152,7 @@ function_af47322e() {
     }
 
     wait_time = randomfloatrange(3, 5);
-    waitresult = self waittilltimeout(wait_time, # "goal");
+    waitresult = self waittilltimeout(wait_time, #"goal");
 
     if(isDefined(self.var_50826790) && self.var_50826790) {
       self.var_ef59b90 = 5;
@@ -2243,7 +2243,7 @@ function_101763c9() {
 
 function_936718a8() {
   level endon(#"game_ended");
-  self endon(#"death", # "state_changed");
+  self endon(#"death", #"state_changed");
   self orientmode("face enemy");
   self.var_80780af2 = self.origin;
 
@@ -2338,7 +2338,7 @@ turretdebug() {
 
 function turretthink() {
   turret = self;
-  turret endon(#"microwave_turret_shutdown", # "death");
+  turret endon(#"microwave_turret_shutdown", #"death");
   damageinterval = 0.3;
   damage = 2;
 
@@ -2969,7 +2969,7 @@ zombie_head_gib(attacker, means_of_death) {
 }
 
 damage_over_time(dmg, delay, attacker) {
-  self endon(#"death", # "exploding");
+  self endon(#"death", #"exploding");
 
   if(!isalive(self)) {
     return;
@@ -3007,7 +3007,7 @@ function_2d87c1f1(str_zone, v_loc) {
 }
 
 function_4346d61d(str_zone) {
-  self endon(#"powerup_grabbed", # "powerup_timedout", # "death");
+  self endon(#"powerup_grabbed", #"powerup_timedout", #"death");
 
   while(true) {
     e_player = wz_ai_utils::get_closest_player(str_zone, self.origin);
@@ -3033,7 +3033,7 @@ function_4346d61d(str_zone) {
 }
 
 powerup_wobble() {
-  self endon(#"powerup_grabbed", # "powerup_timedout", # "death");
+  self endon(#"powerup_grabbed", #"powerup_timedout", #"death");
   playFXOnTag(#"zombie/fx_powerup_on_green_zmb", self, "tag_origin");
 
   while(true) {
@@ -3054,7 +3054,7 @@ powerup_wobble() {
 }
 
 powerup_timeout() {
-  self endon(#"powerup_grabbed", # "death", # "powerup_reset");
+  self endon(#"powerup_grabbed", #"death", #"powerup_reset");
   self show();
   wait 15;
   self hide_and_show();
@@ -3199,7 +3199,7 @@ zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0) {
 
 zmbaivox_ambientdelay() {
   self notify(#"sndambientdelay");
-  self endon(#"sndambientdelay", # "death", # "disconnect");
+  self endon(#"sndambientdelay", #"death", #"disconnect");
   wait 1;
   self.delayambientvox = 0;
 }
@@ -3316,7 +3316,7 @@ zmbaivox_playdeath() {
 }
 
 function_b8c2c5cc() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     self waittill(#"reset_pathing");
@@ -3328,7 +3328,7 @@ function_b8c2c5cc() {
 }
 
 function_c2be61f2() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     self waittill(#"state_changed");
@@ -3342,7 +3342,7 @@ function_c2be61f2() {
 
 function_d1675b11() {
   level endon(#"unloaded");
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(level._zbv_vox_last_update_time)) {
     level._zbv_vox_last_update_time = 0;
@@ -3431,7 +3431,7 @@ function_bb3c1175(params) {
     }
 
     self.var_8a96267d = 1;
-    self waittilltimeout(10, # "is_underground");
+    self waittilltimeout(10, #"is_underground");
     self kill(undefined, undefined, undefined, undefined, 0, 1);
   }
 }

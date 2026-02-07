@@ -260,7 +260,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_38c97197db36afb7")) {
+  if(!isinarray(level.var_55b76576, #"hash_38c97197db36afb7")) {
     level.var_55b76576[level.var_55b76576.size] = # "hash_38c97197db36afb7";
   }
 
@@ -360,7 +360,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_48e7d63b38c5e2da")) {
+  if(!isinarray(level.var_55b76576, #"hash_48e7d63b38c5e2da")) {
     level.var_55b76576[level.var_55b76576.size] = # "hash_48e7d63b38c5e2da";
   }
 
@@ -440,7 +440,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_52d967f4fc8b12fc")) {
+  if(!isinarray(level.var_55b76576, #"hash_52d967f4fc8b12fc")) {
     level.var_55b76576[level.var_55b76576.size] = # "hash_52d967f4fc8b12fc";
   }
 
@@ -450,7 +450,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
     level.var_55b76576 = array(level.var_55b76576);
   }
 
-  if(!isinarray(level.var_55b76576, # "hash_6f7fd3d4d070db87")) {
+  if(!isinarray(level.var_55b76576, #"hash_6f7fd3d4d070db87")) {
     level.var_55b76576[level.var_55b76576.size] = # "hash_6f7fd3d4d070db87";
   }
 

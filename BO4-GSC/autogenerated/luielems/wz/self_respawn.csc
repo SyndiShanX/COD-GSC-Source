@@ -12,7 +12,7 @@ class cself_respawn: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "self_respawn");
+    cluielem::open(localclientnum, #"self_respawn");
   }
 
   function function_fa582112(localclientnum) {

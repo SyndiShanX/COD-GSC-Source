@@ -251,7 +251,7 @@ function_d017dfc() {
 }
 
 function_391d5d90(params) {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
 
   for(;;) {
     if(function_112a6b52()) {
@@ -281,8 +281,8 @@ function_391d5d90(params) {
 }
 
 waittill_pathing_done(maxtime = 15) {
-  self endon(#"death", # "change_state");
-  result = self waittilltimeout(maxtime, # "near_goal", # "hash_f6b2d6a37e22523", # "switch_enemy");
+  self endon(#"death", #"change_state");
+  result = self waittilltimeout(maxtime, #"near_goal", #"hash_f6b2d6a37e22523", #"switch_enemy");
 }
 
 function_33d3892a() {
@@ -339,7 +339,7 @@ function_3acf1c61() {
 }
 
 function_d03a7fe8() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
 
   for(;;) {
     if(isDefined(self.favoriteenemy) && isalive(self.favoriteenemy)) {
@@ -387,7 +387,7 @@ function_32e99568(params) {
 }
 
 function_13ade03e() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
 
   while(true) {
     self animation::play("p8_fxanim_mp_drone_seeker_shock_anim", self.origin, self.angles, 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -792,7 +792,7 @@ function_45eb6b84(target) {
 }
 
 function_55be8453() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   waitframe(2);
   firsttime = 1;
 

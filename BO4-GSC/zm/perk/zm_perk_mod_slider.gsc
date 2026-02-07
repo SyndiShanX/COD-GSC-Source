@@ -18,7 +18,7 @@ __init__() {
 __main__() {}
 
 function_bf3cfde4() {
-  zm_perks::register_perk_mod_basic_info(#"specialty_mod_phdflopper", "mod_slider", # "perk_slider", # "specialty_phdflopper", 4500);
+  zm_perks::register_perk_mod_basic_info(#"specialty_mod_phdflopper", "mod_slider", #"perk_slider", #"specialty_phdflopper", 4500);
   zm_perks::register_perk_threads(#"specialty_mod_phdflopper", &function_6a308c34, &function_ea0dd5e6);
 }
 
@@ -32,7 +32,7 @@ function_ea0dd5e6(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_815172d1() {
-  self endon(#"disconnect", # "hash_19d583212e9b3200");
+  self endon(#"disconnect", #"hash_19d583212e9b3200");
   var_be3643e6 = 0;
 
   while(true) {

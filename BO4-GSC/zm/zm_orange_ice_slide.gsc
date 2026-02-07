@@ -30,7 +30,7 @@ function_a8fc3bf1(s_info) {
     if(self.var_80360a02 === 0 && e_player zm_audio::can_speak()) {
       self.var_80360a02 = 1;
       self.var_4ed9c192 = e_player;
-      e_player thread zm_audio::create_and_play_dialog(#"ice", # "slide_start");
+      e_player thread zm_audio::create_and_play_dialog(#"ice", #"slide_start");
     }
 
     e_player allowstand(0);
@@ -76,5 +76,5 @@ function_9565c969() {
     waitframe(1);
   }
 
-  self zm_audio::create_and_play_dialog(#"ice", # "slide_end");
+  self zm_audio::create_and_play_dialog(#"ice", #"slide_end");
 }

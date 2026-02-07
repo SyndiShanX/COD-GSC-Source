@@ -78,7 +78,7 @@ function_3f8da82c() {
     s_notify = self waittill(#"weapon_change");
 
     if(s_notify.weapon === level.w_hand_charon_uncharged) {
-      self zm_hero_weapon::show_hint(level.w_hand_charon, # "hash_3ce2314ad3d39939");
+      self zm_hero_weapon::show_hint(level.w_hand_charon, #"hash_3ce2314ad3d39939");
     }
   }
 }
@@ -529,7 +529,7 @@ function_247597a(b_charged) {
 }
 
 function_dd7bc108(weapon) {
-  self endon(#"disconnect", # "weapon_change");
+  self endon(#"disconnect", #"weapon_change");
 
   if(self.currentweapon === level.w_hand_charon_upgraded) {
     n_damage = 8500;

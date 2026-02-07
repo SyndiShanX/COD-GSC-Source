@@ -89,7 +89,7 @@ function_b07539aa() {
     }
 
     self.turret_id = string(level.var_c70c6768);
-    badplace_cylinder("turret_bad_place_" + self.turret_id, 0, self.origin, self.settings.var_9493f6dc, self.settings.var_c9c01aa4, # "axis", # "allies", # "neutral");
+    badplace_cylinder("turret_bad_place_" + self.turret_id, 0, self.origin, self.settings.var_9493f6dc, self.settings.var_c9c01aa4, #"axis", #"allies", #"neutral");
     self.has_bad_place = 1;
   }
 

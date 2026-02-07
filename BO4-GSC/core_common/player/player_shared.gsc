@@ -28,7 +28,7 @@ __init__() {
 }
 
 spawn_player() {
-  self endon(#"disconnect", # "joined_spectators");
+  self endon(#"disconnect", #"joined_spectators");
   self notify(#"spawned");
   level notify(#"player_spawned");
   self notify(#"end_respawn");
@@ -110,7 +110,7 @@ on_player_spawned() {
 
 last_valid_position(update_rate) {
   self notify(#"stop_last_valid_position");
-  self endon(#"stop_last_valid_position", # "disconnect");
+  self endon(#"stop_last_valid_position", #"disconnect");
 
   while(!isDefined(self.last_valid_position)) {
     self.last_valid_position = getclosestpointonnavmesh(self.origin, 2048, 0);

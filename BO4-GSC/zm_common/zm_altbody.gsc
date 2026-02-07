@@ -268,7 +268,7 @@ player_apply_loadout(name) {
     }
 
     self.altbody_loadout_ever_had[name] = 1;
-    self waittilltimeout(1, # "weapon_change_complete");
+    self waittilltimeout(1, #"weapon_change_complete");
     self resetanimations();
   }
 }
@@ -307,7 +307,7 @@ player_restore_loadout(name, trigger) {
     if(isDefined(self.altbody_loadout[name])) {
       self zm_weapons::switch_back_primary_weapon(self.altbody_loadout[name].current, 1);
       self.altbody_loadout[name] = undefined;
-      self waittilltimeout(1, # "weapon_change_complete");
+      self waittilltimeout(1, #"weapon_change_complete");
     }
 
     self zm_weapons::player_take_loadout(loadout);

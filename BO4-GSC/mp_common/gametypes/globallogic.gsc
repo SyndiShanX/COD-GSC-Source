@@ -94,7 +94,7 @@
 #namespace globallogic;
 
 autoexec __init__system__() {
-  system::register(#"globallogic", &__init__, undefined, # "visionset_mgr");
+  system::register(#"globallogic", &__init__, undefined, #"visionset_mgr");
 }
 
 __init__() {
@@ -1165,7 +1165,7 @@ incrementmatchcompletionstat(gamemode, playedorhosted, stat) {
     return;
   }
 
-  self stats::inc_stat(#"gamehistory", gamemode, # "modehistory", playedorhosted, stat, 1);
+  self stats::inc_stat(#"gamehistory", gamemode, #"modehistory", playedorhosted, stat, 1);
 }
 
 setmatchcompletionstat(gamemode, playedorhosted, stat) {
@@ -1173,7 +1173,7 @@ setmatchcompletionstat(gamemode, playedorhosted, stat) {
     return;
   }
 
-  self stats::set_stat(#"gamehistory", gamemode, # "modehistory", playedorhosted, stat, 1);
+  self stats::set_stat(#"gamehistory", gamemode, #"modehistory", playedorhosted, stat, 1);
 }
 
 getteamscoreratio() {
@@ -1884,14 +1884,14 @@ function_3526a519() {
     var_e61d6eb0[var_e61d6eb0.size] = data;
 
     if(var_e61d6eb0.size >= 100) {
-      function_92d1707f(#"hash_55f923de6ff3632b", # "entries", var_e61d6eb0);
+      function_92d1707f(#"hash_55f923de6ff3632b", #"entries", var_e61d6eb0);
       var_e61d6eb0 = [];
       wait 0.1;
     }
   }
 
   if(var_e61d6eb0.size > 0) {
-    function_92d1707f(#"hash_55f923de6ff3632b", # "entries", var_e61d6eb0);
+    function_92d1707f(#"hash_55f923de6ff3632b", #"entries", var_e61d6eb0);
   }
 }
 
@@ -1913,14 +1913,14 @@ function_e4335431() {
     var_726f6c6[var_726f6c6.size] = data;
 
     if(var_726f6c6.size >= 100) {
-      function_92d1707f(#"hash_7cd6488eb92cb736", # "entries", var_726f6c6);
+      function_92d1707f(#"hash_7cd6488eb92cb736", #"entries", var_726f6c6);
       var_726f6c6 = [];
       wait 0.1;
     }
   }
 
   if(var_726f6c6.size > 0) {
-    function_92d1707f(#"hash_7cd6488eb92cb736", # "entries", var_726f6c6);
+    function_92d1707f(#"hash_7cd6488eb92cb736", #"entries", var_726f6c6);
   }
 }
 
@@ -2000,7 +2000,7 @@ function_159d7b6f() {
               var_cae7fe15 = {
                 #seed: level.item_spawn_seed, #event_count: item_data.size
               };
-              function_92d1707f(#"hash_67dcbe8b30edd15a", # "summary", var_cae7fe15, # "entries", item_data);
+              function_92d1707f(#"hash_67dcbe8b30edd15a", #"summary", var_cae7fe15, #"entries", item_data);
               item_data = [];
               wait 0.1;
             }
@@ -2014,7 +2014,7 @@ function_159d7b6f() {
     var_cae7fe15 = {
       #seed: level.item_spawn_seed, #event_count: item_data.size
     };
-    function_92d1707f(#"hash_67dcbe8b30edd15a", # "summary", var_cae7fe15, # "entries", item_data);
+    function_92d1707f(#"hash_67dcbe8b30edd15a", #"summary", var_cae7fe15, #"entries", item_data);
   }
 }
 
@@ -2296,7 +2296,7 @@ beacon_cp_biodomes_server_room_top_floor_door_rumble() {
 
   if(isDefined(level.end_game_video)) {
     function_9a022fbc("open");
-    level thread lui::play_movie(level.end_game_video, "fullscreen", 1, 0, 0, # "", level.var_48ea0e8c);
+    level thread lui::play_movie(level.end_game_video, "fullscreen", 1, 0, 0, #"", level.var_48ea0e8c);
     level waittill(#"movie_done");
   }
 
@@ -2812,7 +2812,7 @@ resetteamvariables(team) {
 
 updateteamstatus() {
   level notify(#"updating_team_status");
-  level endon(#"updating_team_status", # "game_ended");
+  level endon(#"updating_team_status", #"game_ended");
   waittillframeend();
   wait 0;
 
@@ -4156,7 +4156,7 @@ function_fdb8b430(player) {
 function_a4156fb2() {
   self notify("52ea5c232e4bcf");
   self endon("52ea5c232e4bcf");
-  self endon(#"strobe_off", # "death");
+  self endon(#"strobe_off", #"death");
   level.stroberange = getdvarint(#"strobe_range", 500);
   level.strobefov = cos(getdvarint(#"strobe_fov", 45));
 

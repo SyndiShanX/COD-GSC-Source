@@ -8,7 +8,7 @@
 #namespace concertina_wire;
 
 autoexec __init__system__() {
-  system::register(#"concertina_wire", &__init__, undefined, # "weapons");
+  system::register(#"concertina_wire", &__init__, undefined, #"weapons");
 }
 
 __init__() {

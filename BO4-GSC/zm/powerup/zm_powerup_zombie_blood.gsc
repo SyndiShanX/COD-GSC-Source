@@ -24,7 +24,7 @@ __init__() {
   zm_powerups::register_powerup("zombie_blood", &grab_zombie_blood);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("zombie_blood", "p8_zm_esc_blood_power_up", # "zombie_powerup_max_ammo", &zm_powerups::func_should_never_drop, 1, 0, 0, undefined, "powerup_zombie_blood", "zombie_powerup_zombie_blood_time", "zombie_powerup_zombie_blood_on", 1, 0);
+    zm_powerups::add_zombie_powerup("zombie_blood", "p8_zm_esc_blood_power_up", #"zombie_powerup_max_ammo", &zm_powerups::func_should_never_drop, 1, 0, 0, undefined, "powerup_zombie_blood", "zombie_powerup_zombie_blood_time", "zombie_powerup_zombie_blood_on", 1, 0);
     zm_powerups::powerup_set_can_pick_up_in_last_stand("zombie_blood", 0);
     zm_powerups::powerup_set_statless_powerup("zombie_blood");
   }
@@ -52,7 +52,7 @@ grab_zombie_blood(e_player) {
 
 zombie_blood_powerup(mdl_powerup, e_player) {
   e_player notify(#"zombie_blood");
-  e_player endon(#"disconnect", # "zombie_blood");
+  e_player endon(#"disconnect", #"zombie_blood");
   e_player thread zm_powerups::powerup_vo("zombie_blood");
   e_player._show_solo_hud = 1;
 
@@ -113,7 +113,7 @@ zombie_blood_powerup(mdl_powerup, e_player) {
 
 watch_zombie_blood_early_exit() {
   self notify(#"early_exit_watch");
-  self endon(#"disconnect", # "early_exit_watch", # "zombie_blood_over");
+  self endon(#"disconnect", #"early_exit_watch", #"zombie_blood_over");
   util::waittill_any_ents_two(self, "player_downed", level, "end_game");
   self.zombie_vars[# "zombie_powerup_zombie_blood_time"] = -0.05;
   self.early_exit = 1;

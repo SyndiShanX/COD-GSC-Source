@@ -529,7 +529,7 @@ drawstringtime(msg, org, color, timer) {
 
 showlastenemysightpos(string) {
   self notify(#"got known enemy2");
-  self endon(#"got known enemy2", # "death");
+  self endon(#"got known enemy2", #"death");
 
   if(!isvalidenemy(self.enemy)) {
     return;
@@ -1306,7 +1306,7 @@ finish_rise_notetracks(note, spot) {
 
 zombie_rise_death(zombie, spot) {
   zombie.zombie_rise_death_out = 0;
-  zombie endon(#"rise_anim_finished", # "death");
+  zombie endon(#"rise_anim_finished", #"death");
 
   while(isDefined(zombie) && isDefined(zombie.health) && zombie.health > 1) {
     zombie waittill(#"damage");
@@ -1349,7 +1349,7 @@ zombie_gut_explosion() {
 }
 
 delayed_zombie_eye_glow() {
-  self endon(#"zombie_delete", # "death");
+  self endon(#"zombie_delete", #"death");
   self endon(#"death");
 
   if(isDefined(self.in_the_ground) && self.in_the_ground || isDefined(self.in_the_ceiling) && self.in_the_ceiling) {
@@ -2226,7 +2226,7 @@ zombie_hat_gib(attacker, means_of_death) {
 }
 
 damage_over_time(dmg, delay, attacker, means_of_death) {
-  self endon(#"death", # "exploding");
+  self endon(#"death", #"exploding");
   self endon(#"exploding");
 
   if(!isalive(self)) {
@@ -2543,7 +2543,7 @@ run_ignore_player_handler() {
 
 updateanimationrate() {
   self notify(#"updateanimationrate");
-  self endon(#"death", # "updateanimationrate");
+  self endon(#"death", #"updateanimationrate");
   settings_bundle = self ai::function_9139c839();
 
   if(!isDefined(settings_bundle)) {

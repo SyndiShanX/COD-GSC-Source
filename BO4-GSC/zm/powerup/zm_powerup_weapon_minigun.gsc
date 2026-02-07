@@ -31,7 +31,7 @@ __init__() {
   zm_powerups::set_weapon_ignore_max_ammo("minigun");
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("minigun", "zombie_pickup_minigun", # "zombie/powerup_minigun", &func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
+    zm_powerups::add_zombie_powerup("minigun", "zombie_pickup_minigun", #"zombie/powerup_minigun", &func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
     level.zombie_powerup_weapon[# "minigun"] = getweapon(#"minigun");
   }
 
@@ -62,7 +62,7 @@ func_should_drop_minigun() {
 }
 
 minigun_weapon_powerup(ent_player, time) {
-  ent_player endon(#"disconnect", # "death", # "player_downed");
+  ent_player endon(#"disconnect", #"death", #"player_downed");
 
   if(!isDefined(time)) {
     time = 30;

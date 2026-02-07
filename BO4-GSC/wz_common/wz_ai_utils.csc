@@ -34,7 +34,7 @@ function_46c950(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   if(newval === 1 && isDefined(self)) {
     spawn_pos = (self.origin[0], self.origin[1], self.origin[2] + 64);
     var_e2c1d066 = (randomint(1), randomint(1), 1);
-    dynent = createdynentandlaunch(localclientnum, # "p8_zm_red_floatie_duck", spawn_pos, self.angles, self.origin, var_e2c1d066);
+    dynent = createdynentandlaunch(localclientnum, #"p8_zm_red_floatie_duck", spawn_pos, self.angles, self.origin, var_e2c1d066);
 
     if(isDefined(dynent)) {
       dynent thread function_645efd58();
@@ -67,7 +67,7 @@ function_5c69ac3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_26a0bda1 = playFX(localclientnum, level._effect[# "hash_7fe086085cbbacac"], self.origin);
     }
 
-    self playSound(localclientnum, # "hash_7d0432d3e280bce1", self.origin);
+    self playSound(localclientnum, #"hash_7d0432d3e280bce1", self.origin);
     return;
   }
 
@@ -111,7 +111,7 @@ function_88a28ed1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_39557fca = util::playFXOnTag(localclientnum, level._effect[# "hash_538c528b09706dc8"], self, "tag_origin");
 
     if(!isDefined(self.var_2a145797)) {
-      self playSound(localclientnum, # "zmb_sq_souls_release");
+      self playSound(localclientnum, #"zmb_sq_souls_release");
       self.var_2a145797 = self playLoopSound(#"zmb_sq_souls_lp");
     }
 
@@ -124,7 +124,7 @@ function_88a28ed1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_2a145797)) {
-    self playSound(localclientnum, # "zmb_sq_souls_impact");
+    self playSound(localclientnum, #"zmb_sq_souls_impact");
     self stoploopsound(self.var_2a145797);
     self.var_2a145797 = undefined;
   }

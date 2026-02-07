@@ -19,7 +19,7 @@ __init__() {
     return;
   }
 
-  aat::register("zm_aat_plasmatic_burst", # "hash_164d02d599d1fa8f", "t7_icon_zm_aat_blast_furnace");
+  aat::register("zm_aat_plasmatic_burst", #"hash_164d02d599d1fa8f", "t7_icon_zm_aat_blast_furnace");
   clientfield::register("actor", "zm_aat_plasmatic_burst" + "_explosion", 1, 1, "counter", &zm_aat_plasmatic_burst_explosion, 0, 0);
   clientfield::register("vehicle", "zm_aat_plasmatic_burst" + "_explosion", 1, 1, "counter", &zm_aat_plasmatic_burst_explosion, 0, 0);
   clientfield::register("actor", "zm_aat_plasmatic_burst" + "_burn", 1, 1, "int", &function_7abfa551, 0, 0);
@@ -35,7 +35,7 @@ zm_aat_plasmatic_burst_explosion(localclientnum, oldval, newval, bnewent, biniti
       str_fx_tag = "tag_origin";
     }
 
-    self playSound(localclientnum, # "hash_6990e5a39e894c04");
+    self playSound(localclientnum, #"hash_6990e5a39e894c04");
     util::playFXOnTag(localclientnum, level._effect[# "zm_aat_plasmatic_burst"], self, str_fx_tag);
   }
 }

@@ -212,7 +212,7 @@ function_cf3224fe(b_success) {
 j_fore_le_01() {
   level endon(#"combattraining_logic_finished");
   level thread intro_msg();
-  level thread ct_bots::activate_bots(8, # "axis");
+  level thread ct_bots::activate_bots(8, #"axis");
   level thread function_836b3d02();
   level thread function_e60bbaf4();
   level thread function_807d5645();
@@ -454,7 +454,7 @@ function_e268297c(e_captive) {
 
     if(n_dist < 256 && !isDefined(level.var_f78f9034) && !(isDefined(level.var_3574b65f) && level.var_3574b65f)) {
       level thread function_1b25b7dc();
-      level.var_f78f9034 = ct_utils::create_waypoint(#"hash_10b60fe281bbfeca", e_captive.origin, e_captive.angles, # "any", undefined, 0, undefined);
+      level.var_f78f9034 = ct_utils::create_waypoint(#"hash_10b60fe281bbfeca", e_captive.origin, e_captive.angles, #"any", undefined, 0, undefined);
       self.var_7630c482 = 1;
       n_start_time = gettime() / 1000;
       e_player = getplayers()[0];

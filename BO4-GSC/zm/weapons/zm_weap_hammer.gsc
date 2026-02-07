@@ -96,12 +96,12 @@ function_c3f6fd96() {
     }
 
     if(wpn_cur == level.hero_weapon[# "hammer"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_10c853c67454fff6");
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_10c853c67454fff6");
       continue;
     }
 
     if(wpn_cur == level.hero_weapon[# "hammer"][1]) {
-      zm_hero_weapon::show_hint(wpn_cur, # "hash_2745ea06a4f8e7fd");
+      zm_hero_weapon::show_hint(wpn_cur, #"hash_2745ea06a4f8e7fd");
       self thread function_82466b73(wpn_cur);
       self thread function_478a4910(wpn_cur);
       continue;
@@ -109,9 +109,9 @@ function_c3f6fd96() {
 
     if(wpn_cur == level.hero_weapon[# "hammer"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_78fab15695ef9758");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_78fab15695ef9758");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, # "hash_7b9c8543bd5b051c");
+        self zm_hero_weapon::show_hint(wpn_cur, #"hash_7b9c8543bd5b051c");
       }
 
       self thread function_82466b73(wpn_cur);
@@ -137,7 +137,7 @@ function_1286cbf(s_params) {
 }
 
 function_82466b73(weapon) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
 
   while(true) {
     self waittill(#"weapon_melee_power_left");
@@ -152,7 +152,7 @@ function_82466b73(weapon) {
 }
 
 function_70dbf9d1(player) {
-  player endon(#"weapon_change", # "disconnect", # "bled_out");
+  player endon(#"weapon_change", #"disconnect", #"bled_out");
   wait 0.5;
   player playSound(#"hash_334d4a903f12856f");
   v_start = player getEye();
@@ -198,7 +198,7 @@ storm_think() {
 }
 
 function_4493c71b(weapon) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
 
   while(true) {
     self waittill(#"weapon_melee_power");
@@ -212,14 +212,14 @@ function_4493c71b(weapon) {
 }
 
 function_1b60eebf(player) {
-  player endon(#"weapon_change", # "disconnect");
+  player endon(#"weapon_change", #"disconnect");
   waitframe(15);
   player thread hammer_rumble(2);
   player thread function_1b29b59e(1, self);
 }
 
 function_439c9b04(player) {
-  player endon(#"weapon_change", # "disconnect");
+  player endon(#"weapon_change", #"disconnect");
   waitframe(5);
   player thread function_1b29b59e(2, self);
   waitframe(11);
@@ -238,7 +238,7 @@ set_armor(n_armor) {
 }
 
 function_7399cd86(weapon) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
 
   while(true) {
     self waittill(#"weapon_melee");
@@ -449,7 +449,7 @@ function_f911e261() {
 }
 
 function_fd8e3604() {
-  self endon(#"disconnect", # "bled_out", # "death", # "storm_think");
+  self endon(#"disconnect", #"bled_out", #"death", #"storm_think");
   self.e_storm endon(#"death");
 
   while(true) {
@@ -460,7 +460,7 @@ function_fd8e3604() {
 }
 
 storm_check(player) {
-  player endon(#"disconnect", # "bled_out", # "death", # "storm_think");
+  player endon(#"disconnect", #"bled_out", #"death", #"storm_think");
   player.e_storm endon(#"death");
   assert(isDefined(player));
   var_359c1a94 = 10000;
@@ -548,7 +548,7 @@ multiple_watcher(var_b9812c05) {
 }
 
 staff_lightning_ball_kill_zombies(e_attacker) {
-  self endon(#"death", # "stop_killing");
+  self endon(#"death", #"stop_killing");
 
   while(true) {
     a_zombies = staff_lightning_get_valid_targets(e_attacker, self.origin);
@@ -812,19 +812,19 @@ hammer_rumble(n_index) {
 }
 
 function_478a4910(w_hammer) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
   s_result = self waittill(#"weapon_melee_power_left");
 
   if(s_result.weapon == w_hammer) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_2", # "hammer");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_2", #"hammer");
   }
 }
 
 function_68ff89f7(w_hammer) {
-  self endon(#"weapon_change", # "disconnect", # "bled_out");
+  self endon(#"weapon_change", #"disconnect", #"bled_out");
   s_result = self waittill(#"weapon_melee");
 
   if(s_result.weapon === w_hammer) {
-    self thread zm_audio::create_and_play_dialog(#"hero_level_3", # "hammer");
+    self thread zm_audio::create_and_play_dialog(#"hero_level_3", #"hammer");
   }
 }

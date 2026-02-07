@@ -287,7 +287,7 @@ function_a261938f(entity) {
 }
 
 function_525526be(id) {
-  waitresult = self waittill(#"death", # "transformation_started", # "hash_610e5a8c0ec1a4b6");
+  waitresult = self waittill(#"death", #"transformation_started", #"hash_610e5a8c0ec1a4b6");
 
   if(waitresult._notify != "death") {
     self.var_d41ca76d = undefined;
@@ -535,7 +535,7 @@ function_c3a1379e() {
 }
 
 function_fad54d94(id, var_167b5341) {
-  level endon(#"hash_670ec83e1acfadff", # "game_ended");
+  level endon(#"hash_670ec83e1acfadff", #"game_ended");
 
   if(var_167b5341.var_2939a01a.size > 0) {
     foreach(zombie in var_167b5341.var_2939a01a) {
@@ -580,7 +580,7 @@ function_fad54d94(id, var_167b5341) {
 }
 
 update() {
-  level endoncallback(&function_4c0d0d28, # "end_game");
+  level endoncallback(&function_4c0d0d28, #"end_game");
   var_52f926ed = 0;
   level.var_138b37c4 = 0;
   var_f38e5f93 = isDefined(level.var_f38e5f93) ? level.var_f38e5f93 : 1;
@@ -597,7 +597,7 @@ update() {
     if(function_c3a1379e()) {
       level notify(#"hash_239ebc19aab5a60b");
       function_e95ec8df();
-      level waittill(#"start_of_round", # "force_transformations");
+      level waittill(#"start_of_round", #"force_transformations");
     }
 
     var_52f926ed = 0;
@@ -870,8 +870,8 @@ function_9aa982db(notifyhash) {
 }
 
 function_4a065e66(id, color) {
-  self endoncallback(&function_9aa982db, # "death", # "hash_6e3d9f8c484e3d01");
-  level endoncallback(&function_9aa982db, # "hash_6e3d9f8c484e3d01");
+  self endoncallback(&function_9aa982db, #"death", #"hash_6e3d9f8c484e3d01");
+  level endoncallback(&function_9aa982db, #"hash_6e3d9f8c484e3d01");
   self.var_30acf8aa = 1;
 
   while(true) {
@@ -882,7 +882,7 @@ function_4a065e66(id, color) {
 
 show_status() {
   level notify(#"hash_53f34619e212c4cd");
-  level endoncallback(&function_4bad29d9, # "hash_53f34619e212c4cd");
+  level endoncallback(&function_4bad29d9, #"hash_53f34619e212c4cd");
   setup_status();
 
   while(true) {

@@ -144,7 +144,7 @@ killstreak_switch_team_end() {
 killstreak_switch_team(owner) {
   killstreakentity = self;
   killstreakentity notify(#"killstreak_switch_team_singleton");
-  killstreakentity endon(#"killstreak_switch_team_singleton", # "death");
+  killstreakentity endon(#"killstreak_switch_team_singleton", #"death");
   setdvar(#"scr_killstreak_switch_team", "<dev string:xc4>");
 
   while(true) {

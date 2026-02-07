@@ -98,7 +98,7 @@ function_1a7aaaa8(localclientnum, text) {
 }
 
 function_e9e14905(localclientnum, sound, islocal) {
-  self waittill(#"death", # "stop_sounds");
+  self waittill(#"death", #"stop_sounds");
 
   if(isDefined(islocal) && islocal) {
     function_d48752e(localclientnum, sound);
@@ -233,7 +233,7 @@ function_be4b3e9a(localclientnum) {
 
 function_790443a8(localclientnum) {
   self postfx::playpostfxbundle("pstfx_radiation_dot");
-  self.var_98491eb6 = util::playFXOnTag(localclientnum, # "hash_66860bac9e69a693", self, "j_spinelower");
+  self.var_98491eb6 = util::playFXOnTag(localclientnum, #"hash_66860bac9e69a693", self, "j_spinelower");
   self thread function_ed4a5949();
 }
 
@@ -337,7 +337,7 @@ function_a225797d(localclientnum, var_7e4d34a7, phase2) {
 }
 
 cleanup_fx(localclientnum, fx) {
-  self waittill(#"delete", # "death");
+  self waittill(#"delete", #"death");
 
   if(isDefined(fx)) {
     stopfx(localclientnum, fx);

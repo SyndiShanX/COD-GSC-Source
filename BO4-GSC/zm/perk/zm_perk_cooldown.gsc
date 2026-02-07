@@ -28,9 +28,9 @@ __main__() {}
 
 enable_cooldown_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_cooldown", # "perk_cooldown", 1500, # "hash_1bf5482d3d2bee30", getweapon("zombie_perk_bottle_cooldown"), getweapon("zombie_perk_totem_timeslip"), # "zmperkscooldown");
+    zm_perks::register_perk_basic_info(#"specialty_cooldown", #"perk_cooldown", 1500, #"hash_1bf5482d3d2bee30", getweapon("zombie_perk_bottle_cooldown"), getweapon("zombie_perk_totem_timeslip"), #"zmperkscooldown");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_cooldown", # "perk_cooldown", 1500, # "zombie/perk_cooldown", getweapon("zombie_perk_bottle_cooldown"), getweapon("zombie_perk_totem_timeslip"), # "zmperkscooldown");
+    zm_perks::register_perk_basic_info(#"specialty_cooldown", #"perk_cooldown", 1500, #"zombie/perk_cooldown", getweapon("zombie_perk_bottle_cooldown"), getweapon("zombie_perk_totem_timeslip"), #"zmperkscooldown");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_cooldown", &function_14afd300);

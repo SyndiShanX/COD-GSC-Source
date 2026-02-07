@@ -155,7 +155,7 @@ bgb_player_init() {
   }
 
   if(zm_custom::function_901b751c(#"zmelixirsdurables")) {
-    var_66dd5e25 = array(#"zm_bgb_nowhere_but_there", # "zm_bgb_now_you_see_me");
+    var_66dd5e25 = array(#"zm_bgb_nowhere_but_there", #"zm_bgb_now_you_see_me");
     n_rank = self rank::getrank() + 1;
 
     foreach(bgb in level.bgb) {
@@ -227,7 +227,7 @@ bgb_player_monitor() {
   self endon(#"disconnect");
 
   while(true) {
-    waitresult = level waittill(#"between_round_over", # "restart_round");
+    waitresult = level waittill(#"between_round_over", #"restart_round");
     str_return = waitresult._notify;
 
     if(isDefined(level.var_b77403b9)) {
@@ -325,7 +325,7 @@ bgb_set_debug_text(name, activations_remaining) {
   if(isDefined(activations_remaining)) {}
 
   self notify(#"bgb_set_debug_text_thread");
-  self endon(#"bgb_set_debug_text_thread", # "disconnect");
+  self endon(#"bgb_set_debug_text_thread", #"disconnect");
   self.bgb_debug_text fadeovertime(0.05);
   self.bgb_debug_text.alpha = 1;
   prefix = "<dev string:x12a>";
@@ -408,7 +408,7 @@ function_b331a28c(bgb) {
   }
 
   self val::set(#"bgb_activation", "takedamage", 0);
-  s_result = self waittilltimeout(2, # "bgb_bubble_blow_complete");
+  s_result = self waittilltimeout(2, #"bgb_bubble_blow_complete");
 
   if(isDefined(self)) {
     self val::reset(#"bgb_activation", "takedamage");
@@ -421,7 +421,7 @@ function_1f3eb76f(bgb) {
   }
 
   self.var_e75517b1 = 1;
-  self waittilltimeout(2, # "bgb_bubble_blow_complete");
+  self waittilltimeout(2, #"bgb_bubble_blow_complete");
 
   if(isDefined(self)) {
     self.var_e75517b1 = 0;
@@ -465,7 +465,7 @@ bgb_gumball_anim(bgb) {
     waitframe(1);
   }
 
-  evt = self waittilltimeout(3, # "hash_593f920e9efd2ecd", # "bgb_gumball_anim_give");
+  evt = self waittilltimeout(3, #"hash_593f920e9efd2ecd", #"bgb_gumball_anim_give");
 
   if(isDefined(evt) && evt.bgb === bgb) {
     if(evt._notify == # "bgb_gumball_anim_give") {
@@ -481,7 +481,7 @@ function_a6c704c(bgb) {
   level endon(#"end_game");
   self thread function_b331a28c(bgb);
   self thread function_1f3eb76f(bgb);
-  util::delay(#"offhand_fire", "death", &zm_audio::create_and_play_dialog, # "elixir", # "drink");
+  util::delay(#"offhand_fire", "death", &zm_audio::create_and_play_dialog, #"elixir", #"drink");
 
   if(isDefined(level.bgb[bgb].var_4a9b0cdc) && level.bgb[bgb].var_4a9b0cdc || self function_e98aa964(1)) {
     self notify(#"hash_27b238d082f65849", bgb);
@@ -543,7 +543,7 @@ function_3b2a02d8(bgb) {
     #bgb: bgb
   });
   self thread give(bgb);
-  zm_audio::create_and_play_dialog(#"elixir", # "drink");
+  zm_audio::create_and_play_dialog(#"elixir", #"drink");
   self zm_stats::increment_client_stat("bgbs_chewed");
   self zm_stats::increment_player_stat("bgbs_chewed");
   self zm_stats::increment_challenge_stat(#"gum_gobbler_consume");
@@ -554,7 +554,7 @@ function_3b2a02d8(bgb) {
     self zm_stats::increment_challenge_stat(#"hash_41d41d501c70fb30");
   }
 
-  self stats::inc_stat(#"bgb_stats", bgb, # "used", # "statvalue", 1);
+  self stats::inc_stat(#"bgb_stats", bgb, #"used", #"statvalue", 1);
   health = 0;
 
   if(isDefined(self.health)) {
@@ -590,7 +590,7 @@ bgb_clear_monitors_and_clientfields() {
 
 bgb_limit_monitor() {
   self notify(#"bgb_limit_monitor");
-  self endon(#"bgb_limit_monitor", # "death", # "bgb_update");
+  self endon(#"bgb_limit_monitor", #"death", #"bgb_update");
   self clientfield::set_player_uimodel("zmhud.bgb_display", 1);
   self playsoundtoplayer(#"hash_56cc165edb993de8", self);
 
@@ -677,7 +677,7 @@ bgb_limit_monitor() {
 }
 
 bgb_bled_out_monitor() {
-  self endon(#"disconnect", # "bgb_update");
+  self endon(#"disconnect", #"bgb_update");
   self notify(#"bgb_bled_out_monitor");
   self endon(#"bgb_bled_out_monitor");
   self waittill(#"bled_out");
@@ -722,7 +722,7 @@ function_e98aa964(var_3e37f503 = 0, str_check = self.bgb) {
 }
 
 function_1fdcef80(bgb) {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
 
   if(isDefined(level.bgb[bgb].var_5a047886) && level.bgb[bgb].var_5a047886) {
     function_9c8e12d1(6);
@@ -821,7 +821,7 @@ calc_remaining_duration_lerp(start_time, end_time) {
 }
 
 function_af43111c(var_f205d85d, percent, var_5f12e334 = 0) {
-  self endon(#"disconnect", # "hash_6ae783a3051b411b");
+  self endon(#"disconnect", #"hash_6ae783a3051b411b");
 
   if(var_5f12e334) {
     self.var_4b0fb2fb = 1;
@@ -1259,7 +1259,7 @@ function_3fa57f3f() {
 }
 
 function_f51e3503(n_max_distance, var_5250f4f6, var_8bc18989) {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   self.var_9c42f3fe = [];
 
   while(true) {
@@ -1339,7 +1339,7 @@ function_bd839f2c(e_reviver, var_84280a99) {
 }
 
 bgb_revive_watcher() {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   self.var_bdeb0f02 = 1;
   waitresult = self waittill(#"player_revived");
   e_reviver = waitresult.reviver;

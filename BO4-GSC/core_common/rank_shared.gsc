@@ -403,7 +403,7 @@ getrankxpstat() {
 
 getarenapointsstat() {
   arenaslot = arenagetslot();
-  arenapoints = self stats::get_stat(#"arenastats", arenaslot, # "rankedplaystats", # "points");
+  arenapoints = self stats::get_stat(#"arenastats", arenaslot, #"rankedplaystats", #"points");
   return arenapoints + 1;
 }
 

@@ -19,7 +19,7 @@ __init__() {
     zm_perks::register_perk_clientfields(#"specialty_zombshell", &function_9e1d9985, &function_d0ba0d3);
     zm_perks::register_perk_effects(#"specialty_zombshell", "zombshell_light");
     zm_perks::register_perk_init_thread(#"specialty_zombshell", &function_efe56acb);
-    zm_perks::function_b60f4a9f(#"specialty_zombshell", # "p8_zm_vapor_altar_icon_01_zombshell", "zombie/fx8_perk_altar_symbol_ambient_zombshell", # "zmperkszombshell");
+    zm_perks::function_b60f4a9f(#"specialty_zombshell", #"p8_zm_vapor_altar_icon_01_zombshell", "zombie/fx8_perk_altar_symbol_ambient_zombshell", #"zmperkszombshell");
     zm_perks::function_f3c80d73("zombie_perk_bottle_zombshell", "zombie_perk_totem_zombshell");
     clientfield::register("scriptmover", "" + # "zombshell_aoe", 15000, 1, "int", &zombshell_aoe, 0, 0);
     clientfield::register("toplayer", "" + # "hash_5f545b88ba3e2938", 15000, 1, "int", &function_1e112e5f, 0, 1);
@@ -46,7 +46,7 @@ zombshell_aoe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
     self.var_a6da95e6 = util::playFXOnTag(localclientnum, level._effect[# "zombshell_aoe"], self, "tag_origin");
 
     if(!isDefined(self.var_e3d27e69)) {
-      self playSound(localclientnum, # "hash_6aa32cc737673479");
+      self playSound(localclientnum, #"hash_6aa32cc737673479");
       self.var_e3d27e69 = self playLoopSound(#"hash_d377c202c27be3f");
     }
 
@@ -59,7 +59,7 @@ zombshell_aoe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
   }
 
   if(isDefined(self.var_e3d27e69)) {
-    self playSound(localclientnum, # "hash_5aa45eab2ab681e8");
+    self playSound(localclientnum, #"hash_5aa45eab2ab681e8");
     self stoploopsound(self.var_e3d27e69);
     self.var_e3d27e69 = undefined;
   }

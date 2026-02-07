@@ -220,10 +220,10 @@ function_26c4a8d5() {
   self endon("273a0aad6f4ce331");
   level waittill(#"start_pstfx_slowed");
   a_players = getlocalplayers();
-  array::thread_all(a_players, &postfx::playpostfxbundle, # "pstfx_slowed");
+  array::thread_all(a_players, &postfx::playpostfxbundle, #"pstfx_slowed");
   level waittill(#"stop_pstfx_slowed");
   a_players = getlocalplayers();
-  array::thread_all(a_players, &postfx::exitpostfxbundle, # "pstfx_slowed");
+  array::thread_all(a_players, &postfx::exitpostfxbundle, #"pstfx_slowed");
 }
 
 function_ce727843(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -248,7 +248,7 @@ pickup_dung(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 
 function_8565be53(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   playFX(localclientnum, level._effect[# "hash_6ff3eb2dd0078a51"], self.origin);
-  playSound(localclientnum, # "hash_2e08e4ff8f949d48", self.origin);
+  playSound(localclientnum, #"hash_2e08e4ff8f949d48", self.origin);
 }
 
 function_35bf68a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -373,13 +373,13 @@ function_70e21be0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   level flag::clear(#"hash_3f632a7ca8c645e9");
   callback::remove_on_spawned(&function_345ea423);
-  array::notify_all(getplayers(localclientnum), # "hash_5f06618b8c668b18");
+  array::notify_all(getplayers(localclientnum), #"hash_5f06618b8c668b18");
 }
 
 function_345ea423(localclientnum) {
   self notify("4e849ddafe66746f");
   self endon("4e849ddafe66746f");
-  self endon(#"death", # "hash_5f06618b8c668b18");
+  self endon(#"death", #"hash_5f06618b8c668b18");
   n_random_wait = randomfloatrange(1, 3);
   wait n_random_wait;
 
@@ -401,7 +401,7 @@ ra_eyes_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     var_d9ad5cc8 = struct::get("s_puzzle_beam_end", "targetname");
     self.var_96ce3194 = util::spawn_model(localclientnum, "tag_origin", var_d9ad5cc8.origin, var_d9ad5cc8.angles);
     level beam::launch(self, "tag_origin", self.var_96ce3194, "tag_origin", "beam8_zm_scepter_ray_lvl3");
-    self playSound(localclientnum, # "hash_473e265e57e397c8");
+    self playSound(localclientnum, #"hash_473e265e57e397c8");
     soundlineemitter(#"hash_4bc05f42a04dcfd8", self.origin, self.var_96ce3194.origin);
     self.var_96ce3194.sfx_id = self.var_96ce3194 playLoopSound(#"hash_c0bb4bb6f79f737");
     return;
@@ -410,7 +410,7 @@ ra_eyes_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(isDefined(self) && isDefined(self.var_96ce3194)) {
     soundstoplineemitter(#"hash_4bc05f42a04dcfd8", self.origin, self.var_96ce3194.origin);
     self.var_96ce3194 stoploopsound(self.var_96ce3194.sfx_id);
-    self playSound(localclientnum, # "hash_488e51364172acd9");
+    self playSound(localclientnum, #"hash_488e51364172acd9");
     level beam::kill(self, "tag_origin", self.var_96ce3194, "tag_origin", "beam8_zm_scepter_ray_lvl3");
     self.var_96ce3194 delete();
     self.var_96ce3194 = undefined;
@@ -422,7 +422,7 @@ ra_rooftop_eyes_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap,
     var_d9ad5cc8 = struct::get("s_puzzle_complete_beam_end", "targetname");
     self.var_96ce3194 = util::spawn_model(localclientnum, "tag_origin", var_d9ad5cc8.origin, var_d9ad5cc8.angles);
     level beam::launch(self, "tag_origin", self.var_96ce3194, "tag_origin", "beam8_zm_scepter_ray_lvl3");
-    self playSound(localclientnum, # "hash_4ad6201a8477162e");
+    self playSound(localclientnum, #"hash_4ad6201a8477162e");
     soundlineemitter(#"hash_1befd714ba572b72", self.origin, self.var_96ce3194.origin);
     self.var_96ce3194.sfx_id = self.var_96ce3194 playLoopSound(#"hash_625ff5d45245151d");
     return;
@@ -431,7 +431,7 @@ ra_rooftop_eyes_beam_fire(localclientnum, oldval, newval, bnewent, binitialsnap,
   if(isDefined(self) && isDefined(self.var_96ce3194)) {
     soundstoplineemitter(#"hash_1befd714ba572b72", self.origin, self.var_96ce3194.origin);
     self.var_96ce3194 stoploopsound(self.var_96ce3194.sfx_id);
-    self playSound(localclientnum, # "hash_1eeb0d38cf56cc1b");
+    self playSound(localclientnum, #"hash_1eeb0d38cf56cc1b");
     level beam::kill(self, "tag_origin", self.var_96ce3194, "tag_origin", "beam8_zm_scepter_ray_lvl3");
     self.var_96ce3194 delete();
     self.var_96ce3194 = undefined;
@@ -461,7 +461,7 @@ function_b675c8b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[# "powerup_on_solo"], self, "tag_eye");
 
     if(!isDefined(self.var_a863bc25)) {
-      self playSound(localclientnum, # "zmb_spawn_powerup");
+      self playSound(localclientnum, #"zmb_spawn_powerup");
       self.var_a863bc25 = self playLoopSound(#"zmb_spawn_powerup_loop");
     }
 
@@ -578,9 +578,9 @@ function_5eaabec(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
 crowd_react_boss(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    smodelanimcmd("siege_crowds_battle", "unpause", "set_anim", array::random(array(#"grp27_ch_zdlc0_crowd_cheer_grp01_double_row", # "grp27_ch_zdlc0_crowd_cheer_grp02_double_row", # "grp27_ch_zdlc0_crowd_cheer_grp03_double_row", # "grp27_ch_zdlc0_crowd_cheer_grp04_double_row", # "grp27_ch_zdlc0_crowd_cheer_grp05_double_row", # "grp27_ch_zdlc0_crowd_cheer_grp06_double_row")));
+    smodelanimcmd("siege_crowds_battle", "unpause", "set_anim", array::random(array(#"grp27_ch_zdlc0_crowd_cheer_grp01_double_row", #"grp27_ch_zdlc0_crowd_cheer_grp02_double_row", #"grp27_ch_zdlc0_crowd_cheer_grp03_double_row", #"grp27_ch_zdlc0_crowd_cheer_grp04_double_row", #"grp27_ch_zdlc0_crowd_cheer_grp05_double_row", #"grp27_ch_zdlc0_crowd_cheer_grp06_double_row")));
   } else {
-    smodelanimcmd("siege_crowds_battle", "unpause", "set_anim", array::random(array(#"grp27_ch_zdlc0_crowd_calm_grp01_double_row", # "grp27_ch_zdlc0_crowd_calm_grp02_double_row", # "grp27_ch_zdlc0_crowd_calm_grp03_double_row", # "grp27_ch_zdlc0_crowd_calm_grp04_double_row", # "grp27_ch_zdlc0_crowd_calm_grp05_double_row", # "grp27_ch_zdlc0_crowd_calm_grp06_double_row")));
+    smodelanimcmd("siege_crowds_battle", "unpause", "set_anim", array::random(array(#"grp27_ch_zdlc0_crowd_calm_grp01_double_row", #"grp27_ch_zdlc0_crowd_calm_grp02_double_row", #"grp27_ch_zdlc0_crowd_calm_grp03_double_row", #"grp27_ch_zdlc0_crowd_calm_grp04_double_row", #"grp27_ch_zdlc0_crowd_calm_grp05_double_row", #"grp27_ch_zdlc0_crowd_calm_grp06_double_row")));
   }
 
   smodelanimcmd("siege_crowds_battle", "goto_random", "set_playback_speed", randomfloatrange(0.75, 1));
@@ -694,70 +694,70 @@ function_628c5b1f(str_group, var_eafa8a1a, var_55a37c48) {
     case # "seated_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_angry_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 1.733 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
     case # "seated_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_neutral_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 1.733 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
     case # "seated_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_to_stand_cheer_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 2.033 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
     case # "angry_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_to_seatd_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 3.8333 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
     case # "angry_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_to_stand_neutral_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
     case # "angry_to_cheer":
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
     case # "neutral_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_seatd_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 3.9 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
     case # "neutral_to_angry":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_stand_angry_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
     case # "neutral_to_cheer":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_to_stand_cheer_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 3.333 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
     case # "cheer_to_seated":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_to_seatd_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 2.7 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
     case # "cheer_to_angry":
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
     case # "cheer_to_neutral":
       smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_to_stand_neutral_01_civ_1")), "set_playback_speed", var_55a37c48);
       wait 5 / var_55a37c48;
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
     case # "seated":
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", # "ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_5", #"ch_vign_tplt_prebtl_zm_crowd_seatd_01_civ_6")), "set_playback_speed", var_55a37c48);
       break;
     case # "angry":
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_angry_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
     case # "neutral":
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_neutral_01_civ_4")), "set_playback_speed", var_55a37c48);
       break;
     case # "cheer":
-      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", # "ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
+      smodelanimcmd(str_group, "unpause", "set_anim", array::random(array(#"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_1", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_2", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_3", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_4", #"ch_vign_tplt_prebtl_zm_crowd_stand_cheer_01_civ_5")), "set_playback_speed", var_55a37c48);
       break;
   }
 
@@ -893,11 +893,11 @@ snd_crowd_react(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
       level thread function_cbe2ea1(localclientnum, 0);
     }
 
-    playSound(0, # "hash_4e3cdd42739b4a0b", (0, 0, 0));
+    playSound(0, #"hash_4e3cdd42739b4a0b", (0, 0, 0));
     a_structs = struct::get_array("mus_crowd_bossbattle", "targetname");
 
     foreach(struct in a_structs) {
-      playSound(localclientnum, # "hash_61052d99f398097", struct.origin);
+      playSound(localclientnum, #"hash_61052d99f398097", struct.origin);
       waitframe(1);
     }
 
@@ -985,12 +985,12 @@ function_cdc077de(localclientnum) {
   a_structs = struct::get_array("sndCrowdOneshot", "targetname");
   a_structs = array::randomize(a_structs);
   s_oneshot = struct::get("sndCrowdLevelstart", "targetname");
-  playSound(localclientnum, # "hash_481bb2830d09d01f", s_oneshot.origin);
+  playSound(localclientnum, #"hash_481bb2830d09d01f", s_oneshot.origin);
   n_int = 1;
 
   foreach(s_struct in a_structs) {
     if(isDefined(s_struct.script_int) && s_struct.script_int) {
-      playSound(localclientnum, # "hash_7ef570749fdb2ff2" + n_int, s_struct.origin);
+      playSound(localclientnum, #"hash_7ef570749fdb2ff2" + n_int, s_struct.origin);
       wait randomfloatrange(0.15, 0.5);
       n_int++;
     }
@@ -1210,7 +1210,7 @@ function_94675baf(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_bdc63758(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, # "hash_539eb529963d7db4");
+    self playSound(localclientnum, #"hash_539eb529963d7db4");
     self.fx = util::playFXOnTag(localclientnum, level._effect[# "head_fire_blue"], self, "j_neck");
     self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
     return;
@@ -1229,7 +1229,7 @@ function_bdc63758(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_c41817fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, # "hash_539eb529963d7db4");
+    self playSound(localclientnum, #"hash_539eb529963d7db4");
     self.fx = util::playFXOnTag(localclientnum, level._effect[# "head_fire_green"], self, "j_neck");
     self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
     return;
@@ -1248,7 +1248,7 @@ function_c41817fc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_27a7a3be(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, # "hash_539eb529963d7db4");
+    self playSound(localclientnum, #"hash_539eb529963d7db4");
     self.fx = util::playFXOnTag(localclientnum, level._effect[# "head_fire_purple"], self, "j_neck");
     self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
     return;
@@ -1267,7 +1267,7 @@ function_27a7a3be(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_d056a230(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self playSound(localclientnum, # "hash_539eb529963d7db4");
+    self playSound(localclientnum, #"hash_539eb529963d7db4");
     self.fx = util::playFXOnTag(localclientnum, level._effect[# "head_fire_red"], self, "j_neck");
     self.sfx = self playLoopSound(#"hash_38c39a7f0966480e");
     return;
@@ -1299,7 +1299,7 @@ function_57f3914e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[# "brazier_fire_blue"], s_fx.origin);
-      playSound(localclientnum, # "hash_6e1881a291ad6bda", s_fx.origin);
+      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
       audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
       audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
       break;
@@ -1310,7 +1310,7 @@ function_57f3914e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[# "hash_169c8ab62603115c"], s_fx.origin);
-      playSound(localclientnum, # "hash_5390d89dc611da6c", s_fx.origin);
+      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
       break;
@@ -1332,7 +1332,7 @@ function_6e6d4bfc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[# "brazier_fire_green"], s_fx.origin);
-      playSound(localclientnum, # "hash_6e1881a291ad6bda", s_fx.origin);
+      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
       audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
       audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
       break;
@@ -1343,7 +1343,7 @@ function_6e6d4bfc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[# "hash_169c8ab62603115c"], s_fx.origin);
-      playSound(localclientnum, # "hash_5390d89dc611da6c", s_fx.origin);
+      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
       break;
@@ -1365,7 +1365,7 @@ function_66050c9e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[# "brazier_fire_purple"], s_fx.origin);
-      playSound(localclientnum, # "hash_6e1881a291ad6bda", s_fx.origin);
+      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
       audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
       audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
       break;
@@ -1376,7 +1376,7 @@ function_66050c9e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[# "hash_169c8ab62603115c"], s_fx.origin);
-      playSound(localclientnum, # "hash_5390d89dc611da6c", s_fx.origin);
+      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
       break;
@@ -1398,7 +1398,7 @@ function_1c231f3f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       break;
     case 1:
       s_fx.n_fire = playFX(localclientnum, level._effect[# "brazier_fire_red"], s_fx.origin);
-      playSound(localclientnum, # "hash_6e1881a291ad6bda", s_fx.origin);
+      playSound(localclientnum, #"hash_6e1881a291ad6bda", s_fx.origin);
       audio::playloopat(#"hash_929cb50cf634fb4", s_fx.origin);
       audio::stoploopat(#"hash_3897a36236b75e0c", s_fx.origin);
       break;
@@ -1409,7 +1409,7 @@ function_1c231f3f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       }
 
       s_fx.n_fire = playFX(localclientnum, level._effect[# "hash_169c8ab62603115c"], s_fx.origin);
-      playSound(localclientnum, # "hash_5390d89dc611da6c", s_fx.origin);
+      playSound(localclientnum, #"hash_5390d89dc611da6c", s_fx.origin);
       audio::playloopat(#"hash_3897a36236b75e0c", s_fx.origin);
       audio::stoploopat(#"hash_929cb50cf634fb4", s_fx.origin);
       break;
@@ -1459,7 +1459,7 @@ function_ee4f01d8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   a_s_crowd = struct::get_array("sndCrowdOneshot");
 
   foreach(s_crowd in a_s_crowd) {
-    playSound(localclientnum, # "amb_crowd_oneshot_positive", s_crowd.origin);
+    playSound(localclientnum, #"amb_crowd_oneshot_positive", s_crowd.origin);
     n_random_wait = randomfloatrange(0.15, 0.5);
     wait n_random_wait;
   }
@@ -1718,8 +1718,8 @@ function_1941a5ca(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 ww_quest_earthquake(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  function_36e4ebd4(localclientnum, # "zm_towers_earthquake_heavy");
-  function_36e4ebd4(localclientnum, # "zm_towers_earthquake_light");
+  function_36e4ebd4(localclientnum, #"zm_towers_earthquake_heavy");
+  function_36e4ebd4(localclientnum, #"zm_towers_earthquake_light");
 }
 
 function_98d53b6b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -1743,14 +1743,14 @@ maelstrom_initiate_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
   foreach(s_fx in a_s_fx) {
     playFX(localclientnum, level._effect[# "maelstrom_initiate"], s_fx.origin, anglesToForward(s_fx.angles));
-    playSound(localclientnum, # "hash_44163603295b2408", s_fx.origin);
+    playSound(localclientnum, #"hash_44163603295b2408", s_fx.origin);
   }
 }
 
 maelstrom_conduct(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self.var_7ef98b90 = util::playFXOnTag(localclientnum, level._effect[# "maelstrom_conduct"], self, "tag_origin");
-    self playSound(localclientnum, # "hash_68123d3c746fe40c");
+    self playSound(localclientnum, #"hash_68123d3c746fe40c");
     return;
   }
 
@@ -1765,7 +1765,7 @@ function_e21e7dbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_8e8be900 = util::playFXOnTag(localclientnum, level._effect[# "hash_1814d4cc1867739c"], self, "tag_origin");
 
     if(!isDefined(self.var_45052c1f)) {
-      self playSound(localclientnum, # "hash_5653bacd3880f5e6");
+      self playSound(localclientnum, #"hash_5653bacd3880f5e6");
       self.var_45052c1f = self playLoopSound(#"hash_1158ca937d0645df");
     }
 
@@ -1778,7 +1778,7 @@ function_e21e7dbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.var_45052c1f)) {
-    self playSound(localclientnum, # "hash_3dc40c9d94d68a08");
+    self playSound(localclientnum, #"hash_3dc40c9d94d68a08");
     self stoploopsound(self.var_45052c1f);
     self.var_45052c1f = undefined;
   }
@@ -1787,7 +1787,7 @@ function_e21e7dbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_4a9243dc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self.var_32d23a6 = util::playFXOnTag(localclientnum, level._effect[# "hash_314d3a2e542805c0"], self, "tag_origin");
-    self playSound(localclientnum, # "hash_7be24f149608de05");
+    self playSound(localclientnum, #"hash_7be24f149608de05");
     return;
   }
 
@@ -1796,7 +1796,7 @@ function_4a9243dc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_32d23a6 = undefined;
   }
 
-  self playSound(localclientnum, # "hash_484f870ae922590");
+  self playSound(localclientnum, #"hash_484f870ae922590");
 }
 
 maelstrom_discharge(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -1806,13 +1806,13 @@ maelstrom_discharge(localclientnum, oldval, newval, bnewent, binitialsnap, field
 maelstrom_death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   playFX(localclientnum, level._effect[# "maelstrom_death"], self.origin, anglesToForward((0, 0, 0)), anglestoup((0, 0, 0)));
   function_36e4ebd4(localclientnum, "lightninggun_fire");
-  self playSound(localclientnum, # "hash_784c6d9757964494");
+  self playSound(localclientnum, #"hash_784c6d9757964494");
 }
 
 maelstrom_storm(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     if(!isDefined(self.var_cc93270e)) {
-      self playSound(localclientnum, # "hash_5949809a2b6867a3");
+      self playSound(localclientnum, #"hash_5949809a2b6867a3");
       self.var_cc93270e = self playLoopSound(#"hash_15a98fa81782b075");
     }
 
@@ -1820,14 +1820,14 @@ maelstrom_storm(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(isDefined(self.var_cc93270e)) {
-    self playSound(localclientnum, # "hash_2a8bc9fc5e6a2b6");
+    self playSound(localclientnum, #"hash_2a8bc9fc5e6a2b6");
     self stoploopsound(self.var_cc93270e);
     self.var_cc93270e = undefined;
   }
 }
 
 function_2d6ec02(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  self playSound(localclientnum, # "hash_57b0d65c6bc36311");
+  self playSound(localclientnum, #"hash_57b0d65c6bc36311");
 }
 
 maelstrom_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

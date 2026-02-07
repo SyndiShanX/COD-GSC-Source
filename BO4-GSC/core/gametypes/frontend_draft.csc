@@ -364,7 +364,7 @@ setup_team(localclientnum) {
     targetname = "ZMdraftCharacter";
   }
 
-  var_9b6e828a = array::randomize(array(#"pb_launcher_alt_endgame_1stplace_idle", # "pb_sniper_endgame_1stplace_idle", # "pb_lmg_endgame_1stplace_idle"));
+  var_9b6e828a = array::randomize(array(#"pb_launcher_alt_endgame_1stplace_idle", #"pb_sniper_endgame_1stplace_idle", #"pb_lmg_endgame_1stplace_idle"));
 
   for(i = 0; true; i++) {
     var_3ec3c6aa = function_75442e78(i);
@@ -392,13 +392,13 @@ setup_team(localclientnum) {
 function_a5644aa3(localclientnum) {
   self notify("7d76e12da1faca50");
   self endon("7d76e12da1faca50");
-  level endon(#"disconnect", # "draft_closed");
+  level endon(#"disconnect", #"draft_closed");
 
   while(true) {
     level waittill(#"hash_4bb9479c29665c84");
     function_532dfc0b(localclientnum, 1000);
     level.var_e6802f10 = 1;
-    waitresult = level waittill(#"hash_4ef5fa5de0b8868b", # "hash_3f81f5a6c0c89878");
+    waitresult = level waittill(#"hash_4ef5fa5de0b8868b", #"hash_3f81f5a6c0c89878");
 
     if(waitresult._notify == # "hash_4ef5fa5de0b8868b") {
       function_e79c182b(localclientnum, 1000);
@@ -413,10 +413,10 @@ function_a5644aa3(localclientnum) {
 function_9c896b69(localclientnum) {
   self notify("5b07248da504b6c9");
   self endon("5b07248da504b6c9");
-  level endon(#"disconnect", # "draft_closed");
+  level endon(#"disconnect", #"draft_closed");
 
   while(true) {
-    waitresult = level waittill(#"positiondraft_update", # "positiondraft_reject", # "hash_6f2435126950e914");
+    waitresult = level waittill(#"positiondraft_update", #"positiondraft_reject", #"hash_6f2435126950e914");
     localclientnum = waitresult.localclientnum;
 
     if(waitresult._notify == # "hash_6f2435126950e914") {
@@ -560,7 +560,7 @@ function_393e6d42() {
 function_37313c1b(localclientnum) {
   self notify("58006327a1d63bff");
   self endon("58006327a1d63bff");
-  level endon(#"disconnect", # "draft_closed");
+  level endon(#"disconnect", #"draft_closed");
 
   while(true) {
     waitresult = level waittill(#"hash_8946580b1303e30");

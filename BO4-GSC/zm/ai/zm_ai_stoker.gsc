@@ -118,10 +118,10 @@ __main__() {}
 
 init() {
   level.a_sp_stoker = [];
-  level thread aat::register_immunity("zm_aat_brain_decay", # "stoker", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "stoker", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "stoker", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "stoker", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"stoker", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"stoker", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"stoker", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"stoker", 1, 1, 1);
   function_2170ee7a();
 }
 
@@ -247,7 +247,7 @@ function_580b77a2() {
 function_2df052bb() {
   self.maxhealth = int(self zm_ai_utility::function_8d44707e(1, self._starting_round_number) * (isDefined(level.var_1b0cc4f5) ? level.var_1b0cc4f5 : 1));
   self.health = self.maxhealth;
-  namespace_81245006::initweakpoints(self, # "c_t8_zmb_stoker_weakpoint_def");
+  namespace_81245006::initweakpoints(self, #"c_t8_zmb_stoker_weakpoint_def");
 }
 
 function_3049b317() {
@@ -848,7 +848,7 @@ killed_callback(e_attacker) {
     return;
   }
 
-  e_attacker util::delay(1.5, "death", &zm_audio::create_and_play_dialog, # "kill", # "stoker");
+  e_attacker util::delay(1.5, "death", &zm_audio::create_and_play_dialog, #"kill", #"stoker");
 }
 
 spawn_single(b_force_spawn = 0, var_eb3a8721, var_bc66d64b) {

@@ -130,7 +130,7 @@ trackusedonhack() {
 
 trackbouncingbettyasused() {
   if(isplayer(self)) {
-    self stats::function_e24eec31(getweapon(#"bouncingbetty"), # "used", 1);
+    self stats::function_e24eec31(getweapon(#"bouncingbetty"), #"used", 1);
   }
 }
 
@@ -178,7 +178,7 @@ spawnminemover() {
 
 killminemoveronpickup() {
   self.minemover endon(#"death");
-  self waittill(#"picked_up", # "hacked");
+  self waittill(#"picked_up", #"hacked");
   self killminemover();
 }
 

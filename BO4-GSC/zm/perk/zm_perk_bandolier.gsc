@@ -18,7 +18,7 @@ __init__() {
 }
 
 function_27473e44() {
-  zm_perks::register_perk_basic_info(#"specialty_extraammo", # "perk_bandolier", 3000, # "zombie/perk_bandolier", getweapon("zombie_perk_bottle_bandolier"), getweapon("zombie_perk_totem_bandolier"), # "zmperksbandolier");
+  zm_perks::register_perk_basic_info(#"specialty_extraammo", #"perk_bandolier", 3000, #"zombie/perk_bandolier", getweapon("zombie_perk_bottle_bandolier"), getweapon("zombie_perk_totem_bandolier"), #"zmperksbandolier");
   zm_perks::register_perk_precache_func(#"specialty_extraammo", &perk_precache);
   zm_perks::register_perk_clientfields(#"specialty_extraammo", &perk_register_clientfield, &perk_set_clientfield);
   zm_perks::register_perk_machine(#"specialty_extraammo", &perk_machine_setup);

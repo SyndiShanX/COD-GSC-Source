@@ -331,7 +331,7 @@ draw_arrow(start, end, color) {
 
 debugorigin() {
   self notify(#"debug origin");
-  self endon(#"debug origin", # "death");
+  self endon(#"debug origin", #"death");
 
   for(;;) {
     forward = anglesToForward(self.angles);
@@ -1545,7 +1545,7 @@ debug_magic_bullet_shield_death(guy) {
     targetname = guy.targetname;
   }
 
-  guy endon(#"stop_magic_bullet_shield", # "_stop_magic_bullet_shield_debug");
+  guy endon(#"stop_magic_bullet_shield", #"_stop_magic_bullet_shield_debug");
   guy waittill(#"death");
   assert(!isDefined(guy), "<dev string:x839>" + targetname);
 }
@@ -2031,7 +2031,7 @@ waittillrollingornotmoving() {
     return "stationary";
   }
 
-  movestate = self waittill(#"stationary", # "rolling");
+  movestate = self waittill(#"stationary", #"rolling");
   return movestate._notify;
 }
 
@@ -2372,7 +2372,7 @@ auto_delete(n_mode = 1, n_min_time_alive = 0, n_dist_horizontal = 0, n_dist_vert
     return;
   }
 
-  self endon(#"death", # "hash_375a9d48dd6a9427");
+  self endon(#"death", #"hash_375a9d48dd6a9427");
   self notify(#"__auto_delete__");
   self endon(#"__auto_delete__");
   level flag::wait_till("all_players_spawned");
@@ -3013,7 +3013,7 @@ has_flak_jacket_perk_purchased_and_equipped() {
 }
 
 has_blind_eye_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyairsupport", # "specialty_nottargetedbyairsupport|specialty_nokillstreakreticle");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyairsupport", #"specialty_nottargetedbyairsupport|specialty_nokillstreakreticle");
 }
 
 has_ghost_perk_purchased_and_equipped() {
@@ -3021,27 +3021,27 @@ has_ghost_perk_purchased_and_equipped() {
 }
 
 has_tactical_mask_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_stunprotection", # "specialty_stunprotection|specialty_flashprotection|specialty_proximityprotection");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_stunprotection", #"specialty_stunprotection|specialty_flashprotection|specialty_proximityprotection");
 }
 
 has_hacker_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_showenemyequipment", # "specialty_showenemyequipment|specialty_showscorestreakicons|specialty_showenemyvehicles");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_showenemyequipment", #"specialty_showenemyequipment|specialty_showscorestreakicons|specialty_showenemyvehicles");
 }
 
 has_cold_blooded_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyaitank", # "specialty_nottargetedbyaitank|specialty_nottargetedbyraps|specialty_nottargetedbysentry|specialty_nottargetedbyrobot|specialty_immunenvthermal");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_nottargetedbyaitank", #"specialty_nottargetedbyaitank|specialty_nottargetedbyraps|specialty_nottargetedbysentry|specialty_nottargetedbyrobot|specialty_immunenvthermal");
 }
 
 has_hard_wired_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_immunecounteruav", # "specialty_immunecounteruav|specialty_immuneemp|specialty_immunetriggerc4|specialty_immunetriggershock|specialty_immunetriggerbetty|specialty_sixthsensejammer|specialty_trackerjammer|specialty_immunesmoke");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_immunecounteruav", #"specialty_immunecounteruav|specialty_immuneemp|specialty_immunetriggerc4|specialty_immunetriggershock|specialty_immunetriggerbetty|specialty_sixthsensejammer|specialty_trackerjammer|specialty_immunesmoke");
 }
 
 has_gung_ho_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_sprintfire", # "specialty_sprintfire|specialty_sprintgrenadelethal|specialty_sprintgrenadetactical|specialty_sprintequipment");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_sprintfire", #"specialty_sprintfire|specialty_sprintgrenadelethal|specialty_sprintgrenadetactical|specialty_sprintequipment");
 }
 
 has_fast_hands_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_fastweaponswitch", # "specialty_fastweaponswitch|specialty_sprintrecovery|specialty_sprintfirerecovery");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_fastweaponswitch", #"specialty_fastweaponswitch|specialty_sprintrecovery|specialty_sprintfirerecovery");
 }
 
 has_scavenger_perk_purchased_and_equipped() {
@@ -3049,7 +3049,7 @@ has_scavenger_perk_purchased_and_equipped() {
 }
 
 has_jetquiet_perk_purchased_and_equipped() {
-  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_jetquiet", # "specialty_jetnoradar|specialty_jetquiet");
+  return self has_purchased_perk_equipped_with_specific_stat(#"specialty_jetquiet", #"specialty_jetnoradar|specialty_jetquiet");
 }
 
 has_awareness_perk_purchased_and_equipped() {
@@ -3397,8 +3397,8 @@ function_73fab74d() {
   }
 
   level.var_1bbf77be = 1;
-  function_9db3109f(#"allies", # "allies");
-  function_9db3109f(#"axis", # "axis");
+  function_9db3109f(#"allies", #"allies");
+  function_9db3109f(#"axis", #"axis");
   function_9db3109f(#"allies", "wun");
   function_9db3109f(#"axis", "fpa");
   function_9db3109f(#"team3", "side3");
@@ -3407,9 +3407,9 @@ function_73fab74d() {
   function_d3e0802c("attacker", "defender");
   function_d3e0802c("attackers", "defenders");
   function_d3e0802c("wun", "fpa");
-  function_c16f65a3(#"allies", # "axis");
-  function_c16f65a3(#"team3", # "any");
-  set_team_mapping(#"allies", # "axis");
+  function_c16f65a3(#"allies", #"axis");
+  function_c16f65a3(#"team3", #"any");
+  set_team_mapping(#"allies", #"axis");
 }
 
 function_f9ce1d49() {
@@ -3602,7 +3602,7 @@ ghost_wait_show_to_player(player, wait_time = 0.1, self_endon_string1) {
   self.abort_ghost_wait_show_to_player = undefined;
 
   if(isDefined(player)) {
-    player endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+    player endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   }
 
   if(isDefined(self_endon_string1)) {
@@ -3628,7 +3628,7 @@ ghost_wait_show_to_others(player, wait_time = 0.1, self_endon_string1) {
   self.abort_ghost_wait_show_to_others = undefined;
 
   if(isDefined(player)) {
-    player endon(#"death", # "disconnect", # "joined_team", # "joined_spectators");
+    player endon(#"death", #"disconnect", #"joined_team", #"joined_spectators");
   }
 
   if(isDefined(self_endon_string1)) {
@@ -3999,7 +3999,7 @@ register_custom_callback(str_name, str_kvp, func) {
 
 function_d608a743() {
   self notify(#"hash_29bf696e43d4a08b");
-  self endon(#"hash_29bf696e43d4a08b", # "death");
+  self endon(#"hash_29bf696e43d4a08b", #"death");
   a_str_notifies = getarraykeys(self.var_c18fbf49);
 
   while(true) {

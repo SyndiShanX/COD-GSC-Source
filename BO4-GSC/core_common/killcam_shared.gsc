@@ -310,13 +310,13 @@ are_any_players_watching() {
 
 watch_for_skip_killcam() {
   self endon(#"begin_killcam");
-  self waittill(#"disconnect", # "spawned");
+  self waittill(#"disconnect", #"spawned");
   waitframe(1);
   level.numplayerswaitingtoenterkillcam--;
 }
 
 killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdeath, deathtime, deathtimeoffset, offsettime, respawn, maxtime, perks, killstreaks, attacker, keep_deathcam) {
-  self endon(#"disconnect", # "spawned", # "game_ended");
+  self endon(#"disconnect", #"spawned", #"game_ended");
 
   if(attackernum < 0) {
     return;
@@ -437,7 +437,7 @@ killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdeath, death
 }
 
 set_entity(killcamentityindex, delayms) {
-  self endon(#"disconnect", # "end_killcam", # "spawned");
+  self endon(#"disconnect", #"end_killcam", #"spawned");
 
   if(delayms > 0) {
     wait float(delayms) / 1000;
@@ -458,13 +458,13 @@ set_killcam_entities(entity_info, killcamstarttime) {
 }
 
 wait_killcam_time() {
-  self endon(#"disconnect", # "end_killcam", # "begin_killcam");
+  self endon(#"disconnect", #"end_killcam", #"begin_killcam");
   wait self.killcamlength - 0.05;
   self end_killcam();
 }
 
 wait_final_killcam_slowdown(deathtime, starttime) {
-  self endon(#"disconnect", # "end_killcam");
+  self endon(#"disconnect", #"end_killcam");
   secondsuntildeath = float(deathtime - starttime) / 1000;
   deathtime = gettime() + int(secondsuntildeath * 1000);
   waitbeforedeath = 2;
@@ -488,7 +488,7 @@ function_875fc588() {
 }
 
 wait_skip_killcam_button() {
-  self endon(#"disconnect", # "end_killcam");
+  self endon(#"disconnect", #"end_killcam");
 
   while(self usebuttonpressed()) {
     waitframe(1);
@@ -504,7 +504,7 @@ wait_skip_killcam_button() {
 }
 
 function_fa405b23() {
-  self endon(#"disconnect", # "end_killcam");
+  self endon(#"disconnect", #"end_killcam");
 
   while(self jumpbuttonpressed()) {
     waitframe(1);
@@ -520,14 +520,14 @@ function_fa405b23() {
 }
 
 wait_team_change_end_killcam() {
-  self endon(#"disconnect", # "end_killcam");
-  self waittill(#"changed_class", # "joined_team");
+  self endon(#"disconnect", #"end_killcam");
+  self waittill(#"changed_class", #"joined_team");
   end(0);
   self end_killcam();
 }
 
 wait_skip_killcam_safe_spawn_button() {
-  self endon(#"disconnect", # "end_killcam");
+  self endon(#"disconnect", #"end_killcam");
 
   while(self fragbuttonpressed()) {
     waitframe(1);
@@ -549,7 +549,7 @@ end(final) {
 }
 
 check_for_abrupt_end() {
-  self endon(#"disconnect", # "end_killcam");
+  self endon(#"disconnect", #"end_killcam");
 
   while(true) {
     if(self.archivetime <= 0) {
@@ -563,13 +563,13 @@ check_for_abrupt_end() {
 }
 
 spawned_killcam_cleanup() {
-  self endon(#"end_killcam", # "disconnect");
+  self endon(#"end_killcam", #"disconnect");
   self waittill(#"spawned");
   self end(0);
 }
 
 spectator_killcam_cleanup(attacker) {
-  self endon(#"end_killcam", # "disconnect");
+  self endon(#"end_killcam", #"disconnect");
   attacker endon(#"disconnect");
   waitresult = attacker waittill(#"begin_killcam");
   waittime = max(0, waitresult.start_time - self.deathtime - 50);
@@ -612,7 +612,7 @@ cancel_on_use() {
 }
 
 cancel_on_use_specific_button(pressingbuttonfunc, finishedfunc) {
-  self endon(#"death_delay_finished", # "disconnect", # "game_ended");
+  self endon(#"death_delay_finished", #"disconnect", #"game_ended");
 
   for(;;) {
     if(!self[[pressingbuttonfunc]]()) {

@@ -401,7 +401,7 @@ function_23600e7d() {
       function_75189494(gettime() - starttime, level.activeplayers.size, level.var_e9d6c52f);
       println("<dev string:x4b6>" + gettime());
       level.var_7dc1df3a = undefined;
-      exitlevel(0, # "hash_35b5848d9f1b58e0");
+      exitlevel(0, #"hash_35b5848d9f1b58e0");
       return;
     }
 
@@ -555,7 +555,7 @@ start_warzone() {
 
   if(infection::function_74650d7()) {
     infection::function_fb163563(#"platoon_1");
-    infection::function_153000d0(#"hash_26cbd829e32a90c5", # "hash_197817ab19e99648");
+    infection::function_153000d0(#"hash_26cbd829e32a90c5", #"hash_197817ab19e99648");
   }
 
   println("<dev string:x64c>");
@@ -1712,7 +1712,7 @@ function_8076d591(event, params) {
 }
 
 function_8e7ae35(event, params) {
-  var_e8d63736 = array(#"hash_780a85992e00c556", # "hash_1669c4b328d5e163", # "hash_67baa029914d2410", # "hash_3f71a3968fd86875");
+  var_e8d63736 = array(#"hash_780a85992e00c556", #"hash_1669c4b328d5e163", #"hash_67baa029914d2410", #"hash_3f71a3968fd86875");
   var_1f1b9efb = var_e8d63736[randomint(var_e8d63736.size)];
 
   if(isDefined(params) && isDefined(params.insertion)) {
@@ -1789,7 +1789,7 @@ function_293cd859(ent) {
 
 function_3c8be2d2(trigger_struct) {
   level endon(#"game_ended");
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   usetrigger = self;
   activator = trigger_struct.activator;
 
@@ -1870,7 +1870,7 @@ function_c1471c7c(point) {
 }
 
 _teleport_player(origin, angles, var_9914886a = 0) {
-  self endon(#"disconnect", # "insertion_starting");
+  self endon(#"disconnect", #"insertion_starting");
   self.oobdisabled = 1;
   fadetime = 0.5;
   self thread hud::fade_to_black_for_x_sec(0, 1, fadetime, fadetime);

@@ -89,11 +89,11 @@ update_arena_challenge_seasons() {
       return;
   }
 
-  perseasonwins = self stats::get_stat(#"arenaperseasonstats", eventstate, # "matchesstats", # "wins");
+  perseasonwins = self stats::get_stat(#"arenaperseasonstats", eventstate, #"matchesstats", #"wins");
 
   if(perseasonwins >= getdvarint(#"arena_seasonvetchallengewins", 0)) {
     arenaslot = arenagetslot();
-    currentseason = self stats::get_stat(#"arenastats", arenaslot, # "season");
+    currentseason = self stats::get_stat(#"arenastats", arenaslot, #"season");
     seasonvetchallengearraycount = self getdstatarraycount("arenaChallengeSeasons");
 
     for(i = 0; i < seasonvetchallengearraycount; i++) {

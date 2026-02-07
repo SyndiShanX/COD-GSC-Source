@@ -16,7 +16,7 @@
 #namespace zm_bgb_near_death_experience;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_near_death_experience", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_near_death_experience", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -31,7 +31,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
 
   if(!isDefined(level.var_67998b2d)) {
     level.var_67998b2d = 0;
@@ -47,7 +47,7 @@ disable() {}
 function_68acd38e() {
   self endon(#"disconnect");
   self clientfield::set("zm_bgb_near_death_experience_3p_fx", 1);
-  self waittill(#"bled_out", # "bgb_update");
+  self waittill(#"bled_out", #"bgb_update");
   self clientfield::set("zm_bgb_near_death_experience_3p_fx", 0);
   self notify(#"zm_bgb_near_death_experience_complete");
 }
@@ -64,7 +64,7 @@ revive_override() {
   }
 
   level.var_67998b2d++;
-  self waittill(#"disconnect", # "bled_out", # "bgb_update");
+  self waittill(#"disconnect", #"bled_out", #"bgb_update");
   level.var_67998b2d--;
 
   if(level.var_67998b2d == 0) {
@@ -152,8 +152,8 @@ lost_perk_override(perk, var_a83ac70f = undefined, var_6c1b825d = undefined) {
 
 function_db295169(e_player) {
   var_4cd31497 = "zm_bgb_near_death_experience_proximity_end_" + self getentitynumber();
-  e_player endon(var_4cd31497, # "disconnect");
-  self endon(#"disconnect", # "zm_bgb_near_death_experience_complete");
+  e_player endon(var_4cd31497, #"disconnect");
+  self endon(#"disconnect", #"zm_bgb_near_death_experience_complete");
 
   while(true) {
     if(!e_player laststand::player_is_in_laststand() && !self laststand::player_is_in_laststand()) {
@@ -192,8 +192,8 @@ function_b7269898(e_player, str_notify) {
 }
 
 function_991be229(e_player, str_notify) {
-  e_player endon(str_notify, # "disconnect");
-  self endon(#"disconnect", # "zm_bgb_near_death_experience_complete");
+  e_player endon(str_notify, #"disconnect");
+  self endon(#"disconnect", #"zm_bgb_near_death_experience_complete");
 
   while(!self function_d5c9a81(e_player) && !e_player function_d5c9a81(self)) {
     wait 0.1;
@@ -203,8 +203,8 @@ function_991be229(e_player, str_notify) {
 }
 
 function_3895d86(e_player, str_notify) {
-  e_player endon(str_notify, # "disconnect");
-  self endon(#"disconnect", # "zm_bgb_near_death_experience_complete");
+  e_player endon(str_notify, #"disconnect");
+  self endon(#"disconnect", #"zm_bgb_near_death_experience_complete");
 
   while(self function_d5c9a81(e_player) || e_player function_d5c9a81(self)) {
     wait 0.1;

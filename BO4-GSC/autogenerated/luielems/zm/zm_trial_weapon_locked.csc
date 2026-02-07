@@ -14,7 +14,7 @@ class czm_trial_weapon_locked: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_trial_weapon_locked");
+    cluielem::open(localclientnum, #"zm_trial_weapon_locked");
   }
 
   function function_fa582112(localclientnum) {

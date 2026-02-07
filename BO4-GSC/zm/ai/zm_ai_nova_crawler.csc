@@ -56,7 +56,7 @@ function_4b3c6d28() {
   self notify("4d967cb582990a00");
   self endon("4d967cb582990a00");
   level endon(#"game_ended");
-  self endoncallback(&function_fa939efb, # "death");
+  self endoncallback(&function_fa939efb, #"death");
   self thread postfx::playpostfxbundle(#"hash_78fa24e9920e1e07");
 
   while(isalive(self)) {

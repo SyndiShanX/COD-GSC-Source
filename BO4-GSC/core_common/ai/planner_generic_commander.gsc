@@ -23,7 +23,7 @@ createcommander(team) {
   commander = plannercommanderutility::createcommander(team, _createcommanderplanner(team), _createsquadplanner(team));
   commanderdaemons(commander);
   commanderutilityevaluators(commander);
-  blackboard::setstructblackboardattribute(commander, # "gameobjects_exclude", array("ammo_cache", "mobile_armory", "trap"));
+  blackboard::setstructblackboardattribute(commander, #"gameobjects_exclude", array("ammo_cache", "mobile_armory", "trap"));
   return commander;
 }
 

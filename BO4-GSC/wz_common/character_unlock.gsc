@@ -12,7 +12,7 @@
 #namespace character_unlock;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
@@ -68,7 +68,7 @@ function_d7e6fa92(unlock_name) {
     return false;
   }
 
-  if(isDefined(stats::get_stat(#"characters", var_2b469a7d, # "unlocked")) && stats::get_stat(#"characters", var_2b469a7d, # "unlocked")) {
+  if(isDefined(stats::get_stat(#"characters", var_2b469a7d, #"unlocked")) && stats::get_stat(#"characters", var_2b469a7d, #"unlocked")) {
     return true;
   }
 
@@ -288,7 +288,7 @@ function_fb689837() {
       continue;
     }
 
-    self function_c8beca5e(unlock_name, # "hash_3f07579f66b464e8", 1);
+    self function_c8beca5e(unlock_name, #"hash_3f07579f66b464e8", 1);
     var_9ba1646c = level.var_7d8da246[unlock_name];
 
     if(isDefined(var_9ba1646c)) {
@@ -299,7 +299,7 @@ function_fb689837() {
       if(function_d89ef6af(unlock_name)) {
         self stats::set_stat(#"unlockedtags", var_2b469a7d, 1);
       } else {
-        self stats::set_stat(#"characters", var_2b469a7d, # "unlocked", 1);
+        self stats::set_stat(#"characters", var_2b469a7d, #"unlocked", 1);
         self stats::function_d40764f3(#"character_quests_completed", 1);
       }
 

@@ -368,7 +368,7 @@ demo_jump_monitor() {
   oldlerps = [];
 
   while(true) {
-    level waittill(#"demo_jump", # "demo_player_switch", # "visionset_mgr_reset");
+    level waittill(#"demo_jump", #"demo_player_switch", #"visionset_mgr_reset");
 
     foreach(v in level.vsmgr) {
       if(!v.in_use) {

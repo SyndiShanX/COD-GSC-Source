@@ -11,7 +11,7 @@
 #namespace zm_bgb_in_plain_sight;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_in_plain_sight", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_in_plain_sight", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -47,7 +47,7 @@ activation() {
   self playSound(#"zmb_bgb_plainsight_start");
   self thread bgb::run_timer(10);
   self clientfield::set_to_player("" + # "hash_321b58d22755af74", 1);
-  ret = self waittilltimeout(9.5, # "bgb_about_to_take_on_bled_out", # "end_game", # "bgb_update", # "disconnect", # "scene_igc_shot_started");
+  ret = self waittilltimeout(9.5, #"bgb_about_to_take_on_bled_out", #"end_game", #"bgb_update", #"disconnect", #"scene_igc_shot_started");
   self playSound(#"zmb_bgb_plainsight_end");
   self clientfield::set_to_player("" + # "hash_321b58d22755af74", 0);
   self val::reset(#"bgb_in_plain_sight", "ignoreme");

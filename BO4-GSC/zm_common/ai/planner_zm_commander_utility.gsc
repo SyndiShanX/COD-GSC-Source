@@ -51,7 +51,7 @@ function_ea95685(commander) {
     }
   }
 
-  blackboard::setstructblackboardattribute(commander, # "zm_altars", altars);
+  blackboard::setstructblackboardattribute(commander, #"zm_altars", altars);
 }
 
 function_80c4721f(commander) {
@@ -101,7 +101,7 @@ function_80c4721f(commander) {
     }
   }
 
-  blackboard::setstructblackboardattribute(commander, # "zm_blockers", blockers);
+  blackboard::setstructblackboardattribute(commander, #"zm_blockers", blockers);
 }
 
 function_73588006(commander) {
@@ -131,7 +131,7 @@ function_73588006(commander) {
     }
   }
 
-  blackboard::setstructblackboardattribute(commander, # "zm_chests", chests);
+  blackboard::setstructblackboardattribute(commander, #"zm_chests", chests);
 }
 
 function_ccdf2c6f(commander) {
@@ -159,7 +159,7 @@ function_ccdf2c6f(commander) {
     }
   }
 
-  blackboard::setstructblackboardattribute(commander, # "zm_powerups", powerups);
+  blackboard::setstructblackboardattribute(commander, #"zm_powerups", powerups);
 }
 
 function_48fcded4(commander) {
@@ -185,7 +185,7 @@ function_48fcded4(commander) {
     }
   }
 
-  blackboard::setstructblackboardattribute(commander, # "zm_switches", switches);
+  blackboard::setstructblackboardattribute(commander, #"zm_switches", switches);
 }
 
 function_873b1369(commander) {
@@ -222,7 +222,7 @@ function_873b1369(commander) {
     }
   }
 
-  blackboard::setstructblackboardattribute(commander, # "zm_wallbuys", wallbuys);
+  blackboard::setstructblackboardattribute(commander, #"zm_wallbuys", wallbuys);
 }
 
 function_cb29a211(commander, squad, constants) {

@@ -35,7 +35,7 @@
 #namespace zm_mansion_special_rounds;
 
 init() {
-  zm_round_spawning::function_2669b95a(#"bat", # "nosferatu");
+  zm_round_spawning::function_2669b95a(#"bat", #"nosferatu");
   level.var_4c350e72 = 0;
   level.var_ce53172d = 30;
   level.dog_spawn_func = &function_e1c262fb;
@@ -222,7 +222,7 @@ function_d075d6e9() {
 }
 
 function_2438d55e(s_spawn_loc) {
-  self endoncallback(&bat_death, # "death");
+  self endoncallback(&bat_death, #"death");
 
   if(isDefined(s_spawn_loc)) {
     if(isDefined(s_spawn_loc.target)) {
@@ -339,7 +339,7 @@ function_38c0c907() {
 p9_wood_lumber_01_1x4_64_01() {
   players = getplayers();
   num = randomintrange(0, players.size);
-  players[num] zm_audio::create_and_play_dialog(#"general", # "dog_spawn");
+  players[num] zm_audio::create_and_play_dialog(#"general", #"dog_spawn");
 }
 
 function_988438a7(sp_spawner = level.var_38f5f109[0], s_spawn, n_round_number) {

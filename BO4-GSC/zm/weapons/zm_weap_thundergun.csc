@@ -34,7 +34,7 @@ on_weapon_change(s_params) {
 }
 
 thundergun_fx_fire(localclientnum) {
-  playSound(localclientnum, # "wpn_thunder_breath", (0, 0, 0));
+  playSound(localclientnum, #"wpn_thunder_breath", (0, 0, 0));
 }
 
 function_5059c81b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

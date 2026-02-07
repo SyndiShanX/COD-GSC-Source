@@ -8,5 +8,5 @@
 #namespace catalystinterface;
 
 registercatalystinterfaceattributes() {
-  ai::registermatchedinterface(#"catalyst", # "gravity", "normal", array("low", "normal"), &zombiebehavior::zombiegravity);
+  ai::registermatchedinterface(#"catalyst", #"gravity", "normal", array("low", "normal"), &zombiebehavior::zombiegravity);
 }

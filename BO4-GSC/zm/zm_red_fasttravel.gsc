@@ -265,41 +265,41 @@ function_c52e8ba(e_player, var_8d5d092c) {
     switch (self.stub.script_string) {
       case # "spartan_monument":
         if(zm_utility::is_standard()) {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_42da633feb35d41e", # "hash_2033d0fbd99966ca");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_42da633feb35d41e", #"hash_2033d0fbd99966ca");
         } else {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_19ac89c0660faf6f", # "hash_36b6ed710419054d");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_19ac89c0660faf6f", #"hash_36b6ed710419054d");
         }
 
         break;
       case # "amphitheater":
         if(zm_utility::is_standard()) {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_b24be5d98c741f5", # "hash_10c94d259f6ba46b");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_b24be5d98c741f5", #"hash_10c94d259f6ba46b");
         } else {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_2fa0e740320682d2", # "hash_4559e7775ede2f66");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_2fa0e740320682d2", #"hash_4559e7775ede2f66");
         }
 
         break;
       case # "center_of_the_world":
         if(zm_utility::is_standard()) {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_6e9395b99bf2f2a1", # "hash_7569a626e8c1a1f");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_6e9395b99bf2f2a1", #"hash_7569a626e8c1a1f");
         } else {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_1516f25ae34907a6", # "hash_5a2c2b30f6dc5c82");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_1516f25ae34907a6", #"hash_5a2c2b30f6dc5c82");
         }
 
         break;
       case # "stoa_of_the_athenians":
         if(zm_utility::is_standard()) {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_114c77bb7d6a22e4", # "hash_56698a0a66eec888");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_114c77bb7d6a22e4", #"hash_56698a0a66eec888");
         } else {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_714bd85760d8eafd", # "hash_143e92a6b341b2e3");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_714bd85760d8eafd", #"hash_143e92a6b341b2e3");
         }
 
         break;
       case # "river_of_sorrow":
         if(zm_utility::is_standard()) {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_3d19d8c1006c9a52", # "hash_5818d2dcee06ede6");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_3d19d8c1006c9a52", #"hash_5818d2dcee06ede6");
         } else {
-          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_659a9e3b2599c48b", # "hash_45b295f718835a41");
+          self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_659a9e3b2599c48b", #"hash_45b295f718835a41");
         }
 
         break;
@@ -313,10 +313,10 @@ function_c52e8ba(e_player, var_8d5d092c) {
           return 0;
         }
 
-        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_746e33772cb75300", # "hash_67f9ed805de4782c");
+        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_746e33772cb75300", #"hash_67f9ed805de4782c");
         break;
       default:
-        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_2731cc5c1208e2e4", # "hash_47b20f457b370888");
+        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_2731cc5c1208e2e4", #"hash_47b20f457b370888");
         break;
     }
 

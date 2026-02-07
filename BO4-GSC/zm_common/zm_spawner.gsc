@@ -410,7 +410,7 @@ zombie_entered_playable() {
 }
 
 zombie_assure_node() {
-  self endon(#"death", # "goal");
+  self endon(#"death", #"goal");
   level endon(#"intermission");
   start_pos = self.origin;
 
@@ -465,7 +465,7 @@ zombie_assure_node() {
 }
 
 zombie_bad_path() {
-  var_29b8f3d0 = self waittilltimeout(2, # "bad_path");
+  var_29b8f3d0 = self waittilltimeout(2, #"bad_path");
 
   if(var_29b8f3d0._notify === "bad_path") {
     return true;
@@ -1078,7 +1078,7 @@ flame_corpse_fx() {
   }
 
   self clientfield::set(str_clientfield, 1);
-  s_result = self waittilltimeout(10, # "actor_corpse", # "deleted");
+  s_result = self waittilltimeout(10, #"actor_corpse", #"deleted");
 
   if(isDefined(self)) {
     self clientfield::set(str_clientfield, 0);
@@ -1089,7 +1089,7 @@ flame_corpse_fx() {
       e_corpse = s_result.corpse;
       e_corpse thread function_2cc66();
       e_corpse clientfield::set(str_clientfield, 1);
-      e_corpse waittilltimeout(randomfloatrange(1.5, 6), # "death");
+      e_corpse waittilltimeout(randomfloatrange(1.5, 6), #"death");
 
       if(isDefined(e_corpse)) {
         e_corpse clientfield::set(str_clientfield, 0);
@@ -1101,12 +1101,12 @@ flame_corpse_fx() {
 
 function_2cc66() {
   level.var_d39e8272++;
-  s_result = self waittill(#"death", # "hash_244b83097f062847");
+  s_result = self waittill(#"death", #"hash_244b83097f062847");
   level.var_d39e8272--;
 }
 
 damage_on_fire(player, weapon) {
-  self endon(#"death", # "stop_flame_damage");
+  self endon(#"death", #"stop_flame_damage");
   wait 2;
 
   while(isDefined(self.is_on_fire) && self.is_on_fire) {
@@ -1235,7 +1235,7 @@ zombie_death_event(zombie) {
       if(zombie zm_utility::is_headshot(zombie.damageweapon, zombie.damagelocation, zombie.damagemod)) {
         attacker.headshots++;
         attacker zm_stats::increment_client_stat("headshots");
-        attacker stats::function_e24eec31(zombie.damageweapon, # "headshots", 1);
+        attacker stats::function_e24eec31(zombie.damageweapon, #"headshots", 1);
         attacker zm_stats::increment_player_stat("headshots");
         attacker zm_stats::function_7bc347f6("headshots");
         attacker zm_stats::function_f1a1191d("headshots");
@@ -1244,7 +1244,7 @@ zombie_death_event(zombie) {
         attacker zm_stats::increment_challenge_stat(#"zombie_hunter_kill_headshot");
         attacker zm_stats::forced_attachment("boas_headshots");
         attacker zm_stats::registerchand_grow_("headshots");
-        attacker thread activecamo::function_896ac347(zombie.damageweapon, # "headshots", 1);
+        attacker thread activecamo::function_896ac347(zombie.damageweapon, #"headshots", 1);
         attacker zm_camos::function_432cf6d(zombie.damageweapon);
       } else {
         attacker notify(#"zombie_death_no_headshot");
@@ -1271,8 +1271,8 @@ zombie_death_event(zombie) {
     attacker zm_stats::registerchand_grow_("kills");
 
     if(isDefined(zombie) && isDefined(zombie.damageweapon)) {
-      attacker stats::function_e24eec31(zombie.damageweapon, # "kills", 1);
-      attacker thread activecamo::function_896ac347(zombie.damageweapon, # "kills", 1);
+      attacker stats::function_e24eec31(zombie.damageweapon, #"kills", 1);
+      attacker thread activecamo::function_896ac347(zombie.damageweapon, #"kills", 1);
       attacker zm_camos::function_7b29c2d2(zombie.damageweapon);
     }
 
@@ -1364,7 +1364,7 @@ zombie_death_event(zombie) {
     level.zombie_player_killed_count++;
 
     if(isDefined(zombie.sound_damage_player) && zombie.sound_damage_player == zombie.attacker) {
-      zombie.attacker thread zm_audio::create_and_play_dialog(#"kill", # "damage");
+      zombie.attacker thread zm_audio::create_and_play_dialog(#"kill", #"damage");
     }
 
     zombie.attacker notify(#"zom_kill", {
@@ -1403,7 +1403,7 @@ deregister_zombie_death_event_callback(func) {
 }
 
 attractors_generated_listener() {
-  self endon(#"death", # "stop_find_flesh", # "path_timer_done");
+  self endon(#"death", #"stop_find_flesh", #"path_timer_done");
   level endon(#"intermission");
   level waittill(#"attractor_positions_generated");
   self.zombie_path_timer = 0;
@@ -1808,7 +1808,7 @@ zombie_rise_fx(zombie) {
 }
 
 zombie_rise_burst_fx(zombie) {
-  self endon(#"stop_zombie_rise_fx", # "rise_anim_finished");
+  self endon(#"stop_zombie_rise_fx", #"rise_anim_finished");
 
   if(isDefined(self.script_parameters) && self.script_parameters == "in_water" && !(isDefined(level._no_water_risers) && level._no_water_risers)) {
     zombie clientfield::set("zombie_riser_fx_water", 1);
@@ -1929,7 +1929,7 @@ function_1446cbd3() {
 }
 
 function_45bb11e4(spot) {
-  self endoncallback(&function_fe3cb19a, # "death");
+  self endoncallback(&function_fe3cb19a, #"death");
   self.var_5535a47d = 1;
   self function_fe3cb19a();
   self.mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
@@ -1941,7 +1941,7 @@ function_45bb11e4(spot) {
 
   self.mdl_anchor moveto(spot.origin, 0.05);
   self.mdl_anchor rotateto(spot.angles, 0.05);
-  self.mdl_anchor waittill(#"movedone", # "death");
+  self.mdl_anchor waittill(#"movedone", #"death");
   wait 0.05;
   self.create_eyes = 1;
   self show();
@@ -1977,7 +1977,7 @@ function_45bb11e4(spot) {
 }
 
 function_2d97cae1() {
-  waitresult = self waittilltimeout(1, # "death");
+  waitresult = self waittilltimeout(1, #"death");
   self function_fe3cb19a();
 }
 

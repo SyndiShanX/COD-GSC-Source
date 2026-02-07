@@ -185,7 +185,7 @@ function_8a2b203b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       if(!isDefined(self.var_dc255e3b)) {
         if(oldval != 0) {
-          self playSound(localclientnum, # "hash_54365a8985bf4da9");
+          self playSound(localclientnum, #"hash_54365a8985bf4da9");
         }
 
         self.var_dc255e3b = self playLoopSound(#"hash_5452ecceeecdc217");
@@ -228,7 +228,7 @@ function_b975154f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     s_start = struct::get(#"hash_8f1fa9142d272b6");
-    self thread function_103be84b(localclientnum, # "lower", s_start);
+    self thread function_103be84b(localclientnum, #"lower", s_start);
   }
 }
 
@@ -249,7 +249,7 @@ function_200650fb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     s_start = struct::get(#"hash_6ef4fc9a0ac3e3bc");
-    self thread function_103be84b(localclientnum, # "katar", s_start);
+    self thread function_103be84b(localclientnum, #"katar", s_start);
   }
 }
 
@@ -270,7 +270,7 @@ function_bee087e9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     s_start = struct::get(#"hash_3c2d004790b50543");
-    self thread function_103be84b(localclientnum, # "upper", s_start);
+    self thread function_103be84b(localclientnum, #"upper", s_start);
   }
 }
 
@@ -347,7 +347,7 @@ function_103be84b(localclientnum, str_piece, s_start) {
   }
 
   if(isDefined(self)) {
-    self playSound(localclientnum, # "hash_230737b2535a3374");
+    self playSound(localclientnum, #"hash_230737b2535a3374");
   }
 
   mdl_piece delete();

@@ -61,10 +61,10 @@ vision_pulse(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
   if(newval) {
     self postfx::playpostfxbundle(#"hash_3b4e3282e8a33852");
-    self function_116b95e5(#"hash_3b4e3282e8a33852", # "hash_222b3bb254b3295c", 0.4);
-    self function_116b95e5(#"hash_3b4e3282e8a33852", # "hash_2efccfad2b32081a", 2500);
-    self function_116b95e5(#"hash_3b4e3282e8a33852", # "hash_33856c0e283a93e2", 8);
-    self function_116b95e5(#"hash_3b4e3282e8a33852", # "pulse width", 200);
+    self function_116b95e5(#"hash_3b4e3282e8a33852", #"hash_222b3bb254b3295c", 0.4);
+    self function_116b95e5(#"hash_3b4e3282e8a33852", #"hash_2efccfad2b32081a", 2500);
+    self function_116b95e5(#"hash_3b4e3282e8a33852", #"hash_33856c0e283a93e2", 8);
+    self function_116b95e5(#"hash_3b4e3282e8a33852", #"pulse width", 200);
     return;
   }
 
@@ -216,11 +216,11 @@ highlight_sphere(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     }
 
     e_player thread postfx::playpostfxbundle(#"postfx_hitzone");
-    e_player function_116b95e5(#"postfx_hitzone", # "hash_5c3f421a5caa272e", self.origin[0], self.origin[1], self.origin[2]);
-    e_player function_116b95e5(#"postfx_hitzone", # "hash_62391b4192aefdd1", n_radius);
-    e_player function_116b95e5(#"postfx_hitzone", # "speed", n_speed);
-    e_player function_116b95e5(#"postfx_hitzone", # "repeat", var_ada6226c);
-    e_player function_116b95e5(#"postfx_hitzone", # "normal", level.var_e8dfdfe5[0], level.var_e8dfdfe5[1], level.var_e8dfdfe5[2]);
+    e_player function_116b95e5(#"postfx_hitzone", #"hash_5c3f421a5caa272e", self.origin[0], self.origin[1], self.origin[2]);
+    e_player function_116b95e5(#"postfx_hitzone", #"hash_62391b4192aefdd1", n_radius);
+    e_player function_116b95e5(#"postfx_hitzone", #"speed", n_speed);
+    e_player function_116b95e5(#"postfx_hitzone", #"repeat", var_ada6226c);
+    e_player function_116b95e5(#"postfx_hitzone", #"normal", level.var_e8dfdfe5[0], level.var_e8dfdfe5[1], level.var_e8dfdfe5[2]);
     level.var_e8dfdfe5 = undefined;
     return;
   }
@@ -247,8 +247,8 @@ highlight_ring(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   }
 
   if(newval) {
-    self.var_3caa4293 = playFX(localclientnum, # "ui/fx8_ui_ct_marker_team_b90", self.origin, self.angles);
-    setfxteam(localclientnum, self.var_3caa4293, # "allies");
+    self.var_3caa4293 = playFX(localclientnum, #"ui/fx8_ui_ct_marker_team_b90", self.origin, self.angles);
+    setfxteam(localclientnum, self.var_3caa4293, #"allies");
     level.var_e304c4aa = undefined;
   }
 }
@@ -258,8 +258,8 @@ postfx_hitzone(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
   if(newval > 0) {
     e_player thread postfx::playpostfxbundle(#"postfx_hitzone");
-    e_player function_116b95e5(#"postfx_hitzone", # "hash_5c3f421a5caa272e", self.origin[0], self.origin[1], self.origin[2]);
-    e_player function_116b95e5(#"postfx_hitzone", # "hash_62391b4192aefdd1", 64);
+    e_player function_116b95e5(#"postfx_hitzone", #"hash_5c3f421a5caa272e", self.origin[0], self.origin[1], self.origin[2]);
+    e_player function_116b95e5(#"postfx_hitzone", #"hash_62391b4192aefdd1", 64);
     return;
   }
 

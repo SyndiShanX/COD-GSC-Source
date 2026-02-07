@@ -277,7 +277,7 @@ run_step(ee, step, var_5ea5c94d) {
 
 function_3f795dc3(ee, step, var_5ea5c94d) {
   level endon(#"game_ended");
-  step endoncallback(&function_df365859, # "end_early");
+  step endoncallback(&function_df365859, #"end_early");
   level notify(step.var_e788cdd7 + "_started");
   [[step.setup_func]](var_5ea5c94d);
   step.completed = 1;

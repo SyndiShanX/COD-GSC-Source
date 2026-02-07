@@ -37,7 +37,7 @@ usekillstreakplanemortar(hardpointtype) {
 }
 
 waittill_confirm_location() {
-  self endon(#"emp_jammed", # "emp_grenaded");
+  self endon(#"emp_jammed", #"emp_grenaded");
   waitresult = self waittill(#"confirm_location");
   return waitresult.position;
 }
@@ -48,7 +48,7 @@ function_a3cb6b44() {
 
 selectplanemortarlocation(hardpointtype) {
   if(isDefined(level.var_30264985)) {
-    waitresult = self waittill(#"weapon_change", # "weapon_change_complete");
+    waitresult = self waittill(#"weapon_change", #"weapon_change_complete");
   }
 
   self airsupport::function_9e2054b0(&function_a3cb6b44);
@@ -89,7 +89,7 @@ selectplanemortarlocation(hardpointtype) {
 }
 
 waitplaybacktime(soundalias) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   playbacktime = soundgetplaybacktime(soundalias);
 
   if(playbacktime >= 0) {
@@ -103,7 +103,7 @@ waitplaybacktime(soundalias) {
 }
 
 singleradarsweep() {
-  self endon(#"disconnect", # "cancel_selection");
+  self endon(#"disconnect", #"cancel_selection");
   wait 0.5;
   self playlocalsound(#"mpl_killstreak_satellite");
 
@@ -128,7 +128,7 @@ useplanemortar(positions, killstreak_id) {
 }
 
 doplanemortar(positions, team, killstreak_id) {
-  self endon(#"emp_jammed", # "disconnect");
+  self endon(#"emp_jammed", #"disconnect");
   yaw = randomintrange(0, 360);
   odd = 0;
   wait 1;
@@ -156,7 +156,7 @@ doplanemortar(positions, team, killstreak_id) {
 }
 
 planemortar_watchforendnotify(team, killstreak_id) {
-  self waittill(#"disconnect", # "joined_team", # "joined_spectators", # "planemortarcomplete", # "emp_jammed");
+  self waittill(#"disconnect", #"joined_team", #"joined_spectators", #"planemortarcomplete", #"emp_jammed");
   planemortar_killstreakstop(team, killstreak_id);
 }
 
@@ -186,7 +186,7 @@ dobombrun(position, yaw, team) {
   plane.targetname = "plane_mortar";
   plane setowner(self);
   plane.owner = self;
-  plane endon(#"delete", # "death");
+  plane endon(#"delete", #"death");
   plane thread planewatchforemp(self);
   plane.angles = angles;
   plane setModel("veh_t8_mil_air_jet_fighter_mp_light");
@@ -230,7 +230,7 @@ lookatexplosion(bomb) {
 }
 
 planewatchforemp(owner) {
-  self endon(#"delete", # "death");
+  self endon(#"delete", #"death");
   waitresult = self waittill(#"emp_deployed");
 
   if(isDefined(level.planeawardscoreevent)) {

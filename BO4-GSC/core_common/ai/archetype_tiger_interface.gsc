@@ -8,7 +8,7 @@
 #namespace tigerinterface;
 
 registertigerinterfaceattributes() {
-  ai::registermatchedinterface(#"tiger", # "gravity", "normal", array("low", "normal"), &tigerbehavior::function_c0b7f4ce);
-  ai::registermatchedinterface(#"tiger", # "min_run_dist", 500);
-  ai::registermatchedinterface(#"tiger", # "sprint", 0, array(1, 0));
+  ai::registermatchedinterface(#"tiger", #"gravity", "normal", array("low", "normal"), &tigerbehavior::function_c0b7f4ce);
+  ai::registermatchedinterface(#"tiger", #"min_run_dist", 500);
+  ai::registermatchedinterface(#"tiger", #"sprint", 0, array(1, 0));
 }

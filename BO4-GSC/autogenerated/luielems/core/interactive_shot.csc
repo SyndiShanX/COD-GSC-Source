@@ -12,12 +12,12 @@ class cinteractive_shot: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "interactive_shot");
+    cluielem::open(localclientnum, #"interactive_shot");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_data(localclientnum, "text", # "");
+    set_data(localclientnum, "text", #"");
   }
 
   function register_clientside(uid) {

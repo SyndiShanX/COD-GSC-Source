@@ -196,7 +196,7 @@ function_3d9b8ab3(params) {
 
 function_9c573bc6() {
   self notify("403817714a013a66");
-  self endon("6c94e145f7d12787", # "death");
+  self endon("6c94e145f7d12787", #"death");
 
   if(isDefined(self.allowoffnavmesh) && self.allowoffnavmesh && isDefined(level.var_5e8121a) && level.var_5e8121a) {
     self.var_ef59b90 = 5;
@@ -1146,7 +1146,7 @@ zombie_head_gib(attacker, means_of_death) {
 }
 
 damage_over_time(dmg, delay, attacker, means_of_death) {
-  self endon(#"death", # "exploding");
+  self endon(#"death", #"exploding");
 
   if(!isalive(self)) {
     return;
@@ -1289,7 +1289,7 @@ zmbaivox_playvox(zombie, type, override, priority, delayambientvox = 0) {
 
 zmbaivox_ambientdelay() {
   self notify(#"sndambientdelay");
-  self endon(#"sndambientdelay", # "death", # "disconnect");
+  self endon(#"sndambientdelay", #"death", #"disconnect");
   wait 2;
   self.delayambientvox = 0;
 }
@@ -1366,7 +1366,7 @@ zmbaivox_playdeath() {
 }
 
 function_b8c2c5cc() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   while(true) {
     self waittill(#"reset_pathing");

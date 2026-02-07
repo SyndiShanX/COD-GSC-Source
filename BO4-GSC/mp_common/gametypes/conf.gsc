@@ -85,7 +85,7 @@ onuse(player) {
     tacinsertboost = self.tacinsert;
 
     if(isDefined(self.attacker) && self.attacker.team == self.attackerteam) {
-      self.attacker luinotifyevent(#"player_callout", 2, # "mp/kill_denied", player.entnum);
+      self.attacker luinotifyevent(#"player_callout", 2, #"mp/kill_denied", player.entnum);
     }
 
     if(!tacinsertboost) {

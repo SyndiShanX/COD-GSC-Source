@@ -501,15 +501,15 @@ set_bot_goal(nodename) {
 }
 
 function_43b2606b() {
-  self zm_perks::function_4acf7b43(0, # "specialty_staminup");
-  self zm_perks::function_4acf7b43(1, # "specialty_extraammo");
-  self zm_perks::function_4acf7b43(2, # "specialty_cooldown");
-  self zm_perks::function_4acf7b43(3, # "specialty_deadshot");
+  self zm_perks::function_4acf7b43(0, #"specialty_staminup");
+  self zm_perks::function_4acf7b43(1, #"specialty_extraammo");
+  self zm_perks::function_4acf7b43(2, #"specialty_cooldown");
+  self zm_perks::function_4acf7b43(3, #"specialty_deadshot");
 }
 
 function_f761f5e4() {
   self.dontspeak = 1;
-  zm_characters::set_character(array(#"hash_7180c6cf382f6010", # "hash_14e91ceb9a7b3eb6"));
+  zm_characters::set_character(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6"));
   self.var_c27f1e90[0] = # "specialty_staminup";
   self.var_c27f1e90[1] = # "specialty_extraammo";
   self.var_c27f1e90[2] = # "specialty_cooldown";
@@ -565,7 +565,7 @@ tutorial() {
   self thread lui::screen_fade_out(3);
   clientfield::set_world_uimodel("hudItems.ztut.showLocation", 0);
   wait 1;
-  function_cc60408f(array(#"hash_48af8239068e44f2", # "hash_53d43a46bc0ebcd8"), "end_game");
+  function_cc60408f(array(#"hash_48af8239068e44f2", #"hash_53d43a46bc0ebcd8"), "end_game");
   music::setmusicstate("zodt8_death");
   level.tutorial_complete = 1;
   level notify(#"end_game");
@@ -602,7 +602,7 @@ function_513e90cf() {
     }
   }
 
-  zm_characters::set_character(array(#"hash_f531a8c2df891cc", # "hash_26072a3b34719d22"));
+  zm_characters::set_character(array(#"hash_f531a8c2df891cc", #"hash_26072a3b34719d22"));
   music::setmusicstate("tutorial_beginner_start");
   self function_204dd117("tutorial_beginner_start");
   self takeallweapons();
@@ -770,7 +770,7 @@ doorbuy() {
   function_68da8e33(#"hash_42672ecc69a0efb1", 0.3);
   self thread function_261ed63c(#"hash_d7858da53c9180e", 8, "door_completed");
   function_b12c3aec(0);
-  level waittill(#"door_opened", # "junk purchased");
+  level waittill(#"door_opened", #"junk purchased");
   self notify(#"door_completed");
   s_objective function_384bed55(0);
   function_1cc39f51("state_rooms_to_lower_stairs_door", "p8_kit_zod_din_05_door_42_left_stained_wood_02", 0);
@@ -851,7 +851,7 @@ magicbox() {
   level.chests[level.chest_index].zbarrier clientfield::set("tutorial_keyline_fx", 1);
   s_objective = struct::get("objective_pos_box", "targetname");
   s_objective function_384bed55();
-  function_cc60408f(array(#"hash_7a9ffadcf14fbabe", # "hash_7a9ffbdcf14fbc71"), "chest_opened");
+  function_cc60408f(array(#"hash_7a9ffadcf14fbabe", #"hash_7a9ffbdcf14fbc71"), "chest_opened");
   self.is_drinking = 0;
   level.customrandomweaponweights = &function_a97ed0b5;
   level.chests[level.chest_index].zbarrier waittill(#"opened");
@@ -896,7 +896,7 @@ function_88b4ae49() {
 }
 
 function_bfd3a7b1() {
-  zm_characters::set_character(array(#"hash_68255d9ce2a09382", # "hash_1a427f842f175b3c"));
+  zm_characters::set_character(array(#"hash_68255d9ce2a09382", #"hash_1a427f842f175b3c"));
   self function_204dd117("tutorial_intermediate_start");
   music::setmusicstate("tutorial_intermediate_start");
   var_1c8259f7 = getweapon("zitem_rocketshield_part_2");
@@ -940,7 +940,7 @@ function_bfd3a7b1() {
   music::setmusicstate("tutorial_intermediate_end");
   self lui::screen_fade_out(5);
   level thread bot::remove_bot(level.tutorialbot);
-  zm_characters::set_character(array(#"hash_3e63362aea484e09", # "hash_5a906d7137467771"));
+  zm_characters::set_character(array(#"hash_3e63362aea484e09", #"hash_5a906d7137467771"));
   self function_204dd117("tutorial_advanced_start");
   self.is_drinking = 0;
   a_pap = struct::get_array("pap_quest_interact", "targetname");
@@ -974,7 +974,7 @@ perks() {
   function_b12c3aec();
   self.is_drinking = 1;
   function_f1376337(1);
-  function_cc60408f(array(#"hash_10ca256bd3dd4228", # "hash_10ca266bd3dd43db"), "vo_done");
+  function_cc60408f(array(#"hash_10ca256bd3dd4228", #"hash_10ca266bd3dd43db"), "vo_done");
   self thread function_261ed63c(#"hash_6479c2bd319012b3", 5, "perk_purchased");
   self.is_drinking = 0;
   var_fe79c035 = function_9152aa67("p8_fxanim_zm_vapor_altar_zeus_mod");
@@ -985,7 +985,7 @@ perks() {
   var_fe79c035 clientfield::set("tutorial_keyline_fx", 2);
   s_objective function_384bed55(0);
   wait 3;
-  function_cc60408f(array(#"hash_10ca276bd3dd458e", # "hash_2c2903a363c22b07"), "vo_done");
+  function_cc60408f(array(#"hash_10ca276bd3dd458e", #"hash_2c2903a363c22b07"), "vo_done");
   function_b12c3aec(0);
 }
 
@@ -1001,14 +1001,14 @@ function_7cc916a4() {
 }
 
 function_1beccb75() {
-  level endon(#"hash_7985df6134faf927", # "end_game");
+  level endon(#"hash_7985df6134faf927", #"end_game");
   self endon(#"death");
   level waittill(#"bad_kill");
   tutorial_reset();
 }
 
 function_8406d665() {
-  level endon(#"hash_7985df6134faf927", # "bad_kill");
+  level endon(#"hash_7985df6134faf927", #"bad_kill");
   self.health = 50;
   self.var_72411ccf = &function_40bfbff0;
   eventstruct = self waittill(#"death");
@@ -1031,7 +1031,7 @@ equipment() {
   s_objective = struct::get("objective_pos_door_buy_2", "targetname");
   s_objective function_384bed55();
   level thread function_261ed63c(#"hash_2c2902a363c22954", 5, "door_opened");
-  level waittill(#"door_opened", # "junk purchased");
+  level waittill(#"door_opened", #"junk purchased");
   function_1cc39f51("suites_promenade_door", "p8_kit_zod_lou_05_door_left_painted_wood_01", 0);
   s_objective function_384bed55(0);
   function_269d9f82("barrier_acid_bomb");
@@ -1061,9 +1061,9 @@ equipment() {
 }
 
 function_2d2a2ec6() {
-  level endon(#"end_game", # "tutorial_reset");
+  level endon(#"end_game", #"tutorial_reset");
   wait 0.6;
-  level.var_634ee380 = zm_powerups::specific_powerup_drop("nuke", self.origin, # "allies", 0.1, undefined, 1);
+  level.var_634ee380 = zm_powerups::specific_powerup_drop("nuke", self.origin, #"allies", 0.1, undefined, 1);
   self kill();
 }
 
@@ -1085,10 +1085,10 @@ function_a52087a1() {
 }
 
 function_b375d3c3() {
-  level endon(#"end_game", # "hash_5cefed971a2f1a52");
+  level endon(#"end_game", #"hash_5cefed971a2f1a52");
   self endon(#"death");
   self waittill(#"player_downed");
-  self endon(#"player_revived", # "zombified", # "disconnect");
+  self endon(#"player_revived", #"zombified", #"disconnect");
   max_time = self.bleedout_time;
 
   while(true) {
@@ -1108,7 +1108,7 @@ bot() {
     waitframe(1);
   }
 
-  bot.var_29b433bd = int(zm_characters::get_character_index(array(#"hash_7180c6cf382f6010", # "hash_14e91ceb9a7b3eb6")));
+  bot.var_29b433bd = int(zm_characters::get_character_index(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6")));
   bot bot::allow_all(0);
   bot thread bot::fixed_spawn_override(var_7d37d68d.origin, var_7d37d68d.angles[1], bot bot::get_nearest_node(var_7d37d68d.origin));
   waitframe(1);
@@ -1137,7 +1137,7 @@ function_e054ad69() {
 }
 
 function_c0a37283() {
-  self endon(#"nuke_triggered", # "death");
+  self endon(#"nuke_triggered", #"death");
 
   while(true) {
     if(self zm_laststand::is_reviving_any()) {
@@ -1405,7 +1405,7 @@ special_weapons() {
 }
 
 function_b024c4f4() {
-  self endon(#"hammer_equipped", # "death");
+  self endon(#"hammer_equipped", #"death");
   wait 5;
   level thread function_68da8e33("vox_advance_hammer_nag_narr_0");
   wait 3;
@@ -1572,12 +1572,12 @@ show_hint_text(text, show_for_time = 3.2, font_scale = 1.25, ypos = 220) {
   }
 
   level.zm_tut_hint_text zm_tut_hint_text::set_text(self, text);
-  level.zm_tut_hint_text zm_tut_hint_text::set_state(self, # "visible");
-  time = self waittilltimeout(show_for_time, # "hide_equipment_hint_text", # "death", # "disconnect");
+  level.zm_tut_hint_text zm_tut_hint_text::set_state(self, #"visible");
+  time = self waittilltimeout(show_for_time, #"hide_equipment_hint_text", #"death", #"disconnect");
 
   if(isDefined(time) && isDefined(self) && level.zm_tut_hint_text zm_tut_hint_text::is_open(self)) {
-    level.zm_tut_hint_text zm_tut_hint_text::set_state(self, # "defaultstate");
-    self waittilltimeout(1, # "hide_equipment_hint_text");
+    level.zm_tut_hint_text zm_tut_hint_text::set_state(self, #"defaultstate");
+    self waittilltimeout(1, #"hide_equipment_hint_text");
   }
 
   if(isDefined(self) && level.zm_tut_hint_text zm_tut_hint_text::is_open(self)) {
@@ -1598,14 +1598,14 @@ function_3e1e39f8(str_text, str_notify, func_timeout, n_timeout = 8) {
 }
 
 function_3d825fe() {
-  self endon(#"death", # "shoot_zombie_completed");
+  self endon(#"death", #"shoot_zombie_completed");
   self waittill(#"weapon_fired");
   waitframe(1);
   self notify(#"shoot_zombie_completed");
 }
 
 function_78dbf7e8() {
-  self endon(#"death", # "crouch_completed");
+  self endon(#"death", #"crouch_completed");
 
   while(true) {
     if(self getstance() == "crouch") {
@@ -1619,7 +1619,7 @@ function_78dbf7e8() {
 }
 
 function_40050d3e() {
-  self endon(#"death", # "sprint_completed");
+  self endon(#"death", #"sprint_completed");
 
   while(true) {
     if(self issprinting()) {
@@ -1632,7 +1632,7 @@ function_40050d3e() {
 }
 
 function_7b8a4b02() {
-  self endon(#"death", # "ads_completed");
+  self endon(#"death", #"ads_completed");
 
   while(true) {
     if(self adsbuttonpressed()) {
@@ -1646,7 +1646,7 @@ function_7b8a4b02() {
 }
 
 function_568b7e4b() {
-  self endon(#"death", # "ads_completed");
+  self endon(#"death", #"ads_completed");
 
   while(true) {
     if(self ismeleeing()) {
@@ -1660,7 +1660,7 @@ function_568b7e4b() {
 }
 
 function_44514728() {
-  self endon(#"death", # "reload_completed");
+  self endon(#"death", #"reload_completed");
   w_pistol = self getcurrentweapon();
 
   while(true) {
@@ -1675,7 +1675,7 @@ function_44514728() {
 }
 
 function_3a885b9d() {
-  self endon(#"death", # "switch_completed");
+  self endon(#"death", #"switch_completed");
 
   while(true) {
     if(!self gamepadusedlast() && self.currentweapon != getweapon(#"pistol_topbreak_t8")) {
@@ -1699,7 +1699,7 @@ function_3a885b9d() {
 }
 
 function_fdea7676() {
-  self endon(#"death", # "equipment_completed");
+  self endon(#"death", #"equipment_completed");
 
   while(true) {
     if(self isthrowinggrenade()) {
@@ -1713,7 +1713,7 @@ function_fdea7676() {
 }
 
 function_a8935bf4() {
-  self endon(#"death", # "hammer_equipped");
+  self endon(#"death", #"hammer_equipped");
   hammer = getweapon("hero_hammer_lv1");
 
   while(!(self getcurrentweapon() == hammer)) {
@@ -1783,7 +1783,7 @@ function_261ed63c(str_alias, n_time, str_endon) {
 function_384bed55(b_on = 1) {
   if(isDefined(b_on) && b_on) {
     self.objective_id = gameobjects::get_next_obj_id();
-    objective_add(self.objective_id, "active", self.origin, # "hash_410c56f34d7ed87");
+    objective_add(self.objective_id, "active", self.origin, #"hash_410c56f34d7ed87");
     function_da7940a3(self.objective_id, 1);
     return;
   }

@@ -71,7 +71,7 @@ supplydrop_ai_tank_state(localclientnum, oldval, newval, bnewent, binitialsnap, 
 }
 
 updatemarkerthread(localclientnum) {
-  self endoncallback(&function_724944f0, # "death");
+  self endoncallback(&function_724944f0, #"death");
   player = self;
   killstreakcorebundle = struct::get_script_bundle("killstreak", "killstreak_core");
 

@@ -102,7 +102,7 @@ function_954b9083(str_talisman) {
   self endon(#"disconnect");
   level waittill(#"start_zombie_round_logic");
   wait getdvarint(#"hash_4e0eefe07702cb87", 60);
-  self stats::inc_stat(#"talisman_stats", str_talisman, # "used", # "statvalue", 1);
+  self stats::inc_stat(#"talisman_stats", str_talisman, #"used", #"statvalue", 1);
   self zm_stats::increment_challenge_stat(#"talisman_used");
   self reportlootconsume(str_talisman, 1);
 }

@@ -488,7 +488,7 @@ class class_727456f3 {
         var_10b20309 gameobjects::function_2efe0342();
         thread function_da0405b7(e_player);
         e_player clientfield::set_to_player("elevator_floor_selection", 1);
-        waitresult = e_player waittill(#"menuresponse", # "disconnect", # "death");
+        waitresult = e_player waittill(#"menuresponse", #"disconnect", #"death");
         flag::clear("inner_button_menu_active");
 
         if(waitresult._notify == "menuresponse") {

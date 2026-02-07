@@ -8,11 +8,11 @@
 #namespace character_unlock_outrider_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_outrider_fixup", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock_outrider_fixup", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"outrider_unlock", # "hash_1dc888eecacf65d4", # "cu33_item", &function_d95e620c, # "hash_28966e441535b733");
+  character_unlock_fixup::register_character_unlock(#"outrider_unlock", #"hash_1dc888eecacf65d4", #"cu33_item", &function_d95e620c, #"hash_28966e441535b733");
 }
 
 function_d95e620c() {

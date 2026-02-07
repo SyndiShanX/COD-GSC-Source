@@ -543,7 +543,7 @@ function_39e8ed04() {
 }
 
 function_dd7bc108(weapon) {
-  self endon(#"disconnect", # "weapon_change");
+  self endon(#"disconnect", #"weapon_change");
 
   if(!level.var_a8472176) {
     return;
@@ -697,7 +697,7 @@ function_1d315fcd(e_target) {
 }
 
 function_1e39fbc5() {
-  self endon(#"death", # "stop_beaming", # "weapon_change");
+  self endon(#"death", #"stop_beaming", #"weapon_change");
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed() && !self fragbuttonpressed()) {
     n_ammo = self getweaponammoclip(level.w_hand_gaia);

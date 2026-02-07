@@ -237,7 +237,7 @@ onspawned() {
 }
 
 function_9b85340e() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   waitframe(1);
   self buy_menu_open();
 }
@@ -269,7 +269,7 @@ onstartgametype() {
   }
 
   laststand_mp::function_414115a0(level.laststandtimer, level.laststandhealth);
-  level.var_4cfc17cc = struct::get_script_bundle("killstreak", # "killstreak_bounty_deposit_site_heli");
+  level.var_4cfc17cc = struct::get_script_bundle("killstreak", #"killstreak_bounty_deposit_site_heli");
   function_fb6f71d5();
   function_9f5ae64d();
   level thread function_7cb5420e(level.var_b9aad767);
@@ -282,7 +282,7 @@ onspawnplayer(predictedspawn) {
 }
 
 function_5439aa67() {
-  self endon(#"death", # "revived");
+  self endon(#"death", #"revived");
 
   while(isDefined(self)) {
     if(self function_cf8de58d()) {
@@ -725,7 +725,7 @@ function_4f2c425d() {
 }
 
 givelastattackerwarning(team) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   fullhealthtime = 0;
   interval = 0.05;
   self.lastmansd = 1;
@@ -800,7 +800,7 @@ function_b3faa437() {
   var_8b6f8e45 = [];
   var_8b6f8e45[0] = spawn("script_model", var_85b31568);
   var_8b6f8e45[0] setModel("p8_heist_duffel_bag_set_open");
-  var_7e7897b8 = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), # "bag_o_money");
+  var_7e7897b8 = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), #"bag_o_money");
   var_7e7897b8 gameobjects::set_use_hint_text(#"hash_ee4d709a0f80280");
   var_7e7897b8 gameobjects::allow_carry(#"any");
   var_7e7897b8 gameobjects::set_visible_team(#"any");
@@ -813,7 +813,7 @@ function_b3faa437() {
   var_7e7897b8.ondrop = &function_62d627a0;
   var_7e7897b8.var_22389d70 = 0;
   var_7e7897b8.var_78149e41 = gameobjects::get_next_obj_id();
-  objective_add(var_7e7897b8.var_78149e41, "invisible", var_7e7897b8, # "hash_34a0ac740c9d0bc2");
+  objective_add(var_7e7897b8.var_78149e41, "invisible", var_7e7897b8, #"hash_34a0ac740c9d0bc2");
   objective_onentity(var_7e7897b8.var_78149e41, var_7e7897b8);
   var_7e7897b8 gameobjects::set_visible_team(#"none");
   level.var_7e7897b8 = var_7e7897b8;
@@ -888,7 +888,7 @@ function_62d627a0(player) {
   if(isDefined(self.var_78149e41)) {
     objective_setstate(self.var_78149e41, "invisible");
     objective_onentity(self.var_78149e41, self);
-    objective_setteam(self.var_78149e41, # "none");
+    objective_setteam(self.var_78149e41, #"none");
     objective_setvisibletoplayer(self.var_78149e41, player);
     function_3ae6fa3(self.var_78149e41, player.team, 0);
   }
@@ -981,9 +981,9 @@ function_7cb5420e(delay) {
   }
 
   var_fa5724d5 = function_7f8c4043();
-  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, # "wpn_t8_eqp_grenade_smoke_world");
+  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, #"wpn_t8_eqp_grenade_smoke_world");
   level.var_b167ae9a = gameobjects::get_next_obj_id();
-  objective_add(level.var_b167ae9a, "active", level.var_8fcae189, # "hash_7e7657e9c8f441eb");
+  objective_add(level.var_b167ae9a, "active", level.var_8fcae189, #"hash_7e7657e9c8f441eb");
   function_da7940a3(level.var_b167ae9a, 1);
 }
 
@@ -1000,13 +1000,13 @@ function_2ad9733b() {
 
 function_f878f4bf(var_fa5724d5, context) {
   assert(isDefined(var_fa5724d5));
-  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, # "wpn_t8_eqp_grenade_smoke_world");
+  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, #"wpn_t8_eqp_grenade_smoke_world");
   var_8ff770b8 = randomfloatrange(level.var_aad1f6f2, level.var_8ce231e3);
   wait var_8ff770b8;
-  destination = getstartorigin(var_fa5724d5, (0, 0, 0), # "ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2");
+  destination = getstartorigin(var_fa5724d5, (0, 0, 0), #"ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2");
   var_6aa266d6 = helicopter::getvalidrandomstartnode(destination).origin;
   helicopter = function_d23cf101(var_6aa266d6, vectortoangles(destination - var_6aa266d6), context);
-  helicopter endon(#"death", # "hash_69d2c68fdf86b6d7");
+  helicopter endon(#"death", #"hash_69d2c68fdf86b6d7");
   helicopter.hardpointtype = undefined;
   waitframe(1);
   function_554b5692(helicopter);
@@ -1031,7 +1031,7 @@ function_f878f4bf(var_fa5724d5, context) {
   waitresult = level.var_ad7774db waittill(#"hash_5677d0c5246418e5");
 
   for(prevprogress = 0; waitresult._notify == "timeout" && level.var_ad7774db.curprogress > prevprogress; prevprogress = level.var_ad7774db.curprogress) {
-    waitresult = level.var_ad7774db waittilltimeout(0.25, # "hash_5677d0c5246418e5");
+    waitresult = level.var_ad7774db waittilltimeout(0.25, #"hash_5677d0c5246418e5");
   }
 
   if(!isDefined(level.var_ad7774db)) {
@@ -1049,7 +1049,7 @@ function_f878f4bf(var_fa5724d5, context) {
 }
 
 function_4af1c786(helicopter, var_5ad5316d) {
-  helicopter endon(#"death", # "hash_589604da14bd8976");
+  helicopter endon(#"death", #"hash_589604da14bd8976");
   var_45d0806d = var_5ad5316d;
   lerp_duration = max((helicopter.origin[2] - var_5ad5316d[2] - 600) / 625, 0.8);
   helicopter animation::play(#"ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2", var_45d0806d, (0, helicopter.angles[1], 0), 1, 0.1, 0.2, lerp_duration);
@@ -1071,7 +1071,7 @@ function_554b5692(helicopter) {
 
 function_f9a7a3d8(helicopter) {
   assert(isDefined(helicopter.rope));
-  helicopter endon(#"death", # "hash_69d2c68fdf86b6d7", # "hash_3478587618f28c8");
+  helicopter endon(#"death", #"hash_69d2c68fdf86b6d7", #"hash_3478587618f28c8");
   helicopter.rope endon(#"death");
   helicopter.rope show();
   helicopter.rope animation::play(#"hash_751de00c6e9e0862", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -1091,7 +1091,7 @@ function_b48e2739(helicopter) {
     return;
   }
 
-  helicopter endon(#"hash_69d2c68fdf86b6d7", # "death");
+  helicopter endon(#"hash_69d2c68fdf86b6d7", #"death");
   helicopter.rope endon(#"death");
   helicopter notify(#"hash_3478587618f28c8");
   helicopter.rope thread animation::play(#"hash_3d52f6faf02fd23", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -1161,7 +1161,7 @@ function_36f403(helicopter) {
   }
 
   helicopter function_9ffc1856(var_b4c35bb7, 1);
-  helicopter waittilltimeout(20, # "near_goal", # "death");
+  helicopter waittilltimeout(20, #"near_goal", #"death");
 
   if(isDefined(helicopter)) {
     helicopter stoploopsound(1);
@@ -1233,7 +1233,7 @@ function_1aca4a4e(helicopter, destination) {
         helicopter.var_7f4a508d = var_7f4a508d;
 
         if(!ispointinnavvolume(var_7f4a508d, "navvolume_big")) {
-          self waittilltimeout(10, # "hash_340ab3c2b94ff86a");
+          self waittilltimeout(10, #"hash_340ab3c2b94ff86a");
         }
       }
     }
@@ -1371,7 +1371,7 @@ function_8debcb6(origin) {
   objective_delete(level.var_b167ae9a);
   trigger = spawn("trigger_radius_new", origin, 0, 90, 100);
   trigger triggerignoreteam();
-  useobj = gameobjects::create_use_object(#"none", trigger, [], (0, 0, 0), # "hash_7e7657e9c8f441eb");
+  useobj = gameobjects::create_use_object(#"none", trigger, [], (0, 0, 0), #"hash_7e7657e9c8f441eb");
   useobj gameobjects::set_visible_team(#"any");
   useobj gameobjects::allow_use(#"any");
   useobj gameobjects::set_owner_team(#"neutral");

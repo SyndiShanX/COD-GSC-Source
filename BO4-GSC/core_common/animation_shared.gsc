@@ -47,7 +47,7 @@ last_frame(animation, v_origin_or_ent, v_angles_or_tag) {
 
 play_siege(str_anim, n_rate = 1) {
   self notify(#"stop_siege_anim");
-  self endon(#"death", # "scene_stop", # "stop_siege_anim");
+  self endon(#"death", #"scene_stop", #"stop_siege_anim");
   b_loop = function_35c3fa74(str_anim);
   self function_cf6be307(str_anim, "default", n_rate, b_loop);
 
@@ -65,7 +65,7 @@ play(animation, v_origin_or_ent, v_angles_or_tag, n_rate = 1, n_blend_in = 0.2, 
     return;
   }
 
-  self endon(#"death", # "entering_last_stand");
+  self endon(#"death", #"entering_last_stand");
   self thread _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp, n_start_time, b_show_player_firstperson_weapon, b_unlink_after_completed, var_f4b34dc1, paused);
 
   if(n_rate > 0) {
@@ -107,7 +107,7 @@ debug_print(str_animation, str_msg) {
 
 _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_out, n_lerp, n_start_time, b_show_player_firstperson_weapon, b_unlink_after_completed, var_f4b34dc1, paused) {
   self notify(#"new_scripted_anim");
-  self endoncallback(&function_2adc2518, # "death", # "entering_last_stand", # "new_scripted_anim");
+  self endoncallback(&function_2adc2518, #"death", #"entering_last_stand", #"new_scripted_anim");
 
   debug_print(animation, "<dev string:x4a>");
 
@@ -234,7 +234,7 @@ function_2adc2518(str_notify) {
 }
 
 _blend_out(animation, n_blend, n_rate, n_start_time) {
-  self endon(#"death", # "end", # "scriptedanim", # "new_scripted_anim");
+  self endon(#"death", #"end", #"scriptedanim", #"new_scripted_anim");
   n_server_length = floor(getanimlength(animation) / float(function_60d95f53()) / 1000) * float(function_60d95f53()) / 1000;
 
   while(true) {
@@ -348,7 +348,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
 
     self thread debug_anim_reach();
 
-    self waittill(#"goal", # "new_anim_reach", # "new_scripted_anim", # "stop_scripted_anim");
+    self waittill(#"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim");
 
     if(ai::has_behavior_attribute("disablearrivals")) {
       ai::set_behavior_attribute("disablearrivals", 0);
@@ -368,7 +368,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
 }
 
 debug_anim_reach() {
-  self endon(#"death", # "goal", # "new_anim_reach", # "new_scripted_anim", # "stop_scripted_anim");
+  self endon(#"death", #"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim");
 
   while(true) {
     level flagsys::wait_till("<dev string:xb0>");
@@ -473,7 +473,7 @@ setup_notetracks() {
 }
 
 handle_notetracks(animation) {
-  self endon(#"death", # "new_scripted_anim");
+  self endon(#"death", #"new_scripted_anim");
 
   while(true) {
     waitresult = self waittill(animation);

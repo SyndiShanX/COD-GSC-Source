@@ -43,10 +43,10 @@ __init__() {
   adddebugcommand("<dev string:x48>");
   adddebugcommand("<dev string:x78>");
 
-  level thread aat::register_immunity("zm_aat_brain_decay", # "weeping_angel", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", # "weeping_angel", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "weeping_angel", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", #"weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"weeping_angel", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"weeping_angel", 1, 1, 1);
 }
 
 __main__() {}

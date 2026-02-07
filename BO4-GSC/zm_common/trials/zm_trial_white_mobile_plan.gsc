@@ -41,7 +41,7 @@ on_end(round_reset) {
 }
 
 function_53627246() {
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   zm_trial_util::function_2976fa44(self.var_ff22cb62);
   zm_trial_util::function_dace284(self.var_6a7521e3);
 

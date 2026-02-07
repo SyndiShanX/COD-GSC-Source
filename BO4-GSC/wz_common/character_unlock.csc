@@ -10,7 +10,7 @@
 #namespace character_unlock;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock", &__init__, undefined, # "character_unlock_fixup");
+  system::register(#"character_unlock", &__init__, undefined, #"character_unlock_fixup");
 }
 
 __init__() {}

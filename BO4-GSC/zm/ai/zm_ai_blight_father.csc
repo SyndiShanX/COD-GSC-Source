@@ -251,7 +251,7 @@ function_f02b0934(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
   if(isDefined(position) && isDefined(angles)) {
     playFX(localclientnum, level._effect[# "fx8_blightfather_maggot_death_exp"], position, anglesToForward(angles), anglestoup(angles));
-    function_2a9101fe(localclientnum, # "hash_7867f8f9aaaa0c40", position);
+    function_2a9101fe(localclientnum, #"hash_7867f8f9aaaa0c40", position);
   }
 
   earthquake(localclientnum, 0.4, 0.8, self.origin, 300);
@@ -327,7 +327,7 @@ function_2d7f68ab(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_1a4f64a() {
   self notify("6dcd79d7489a1b1");
   self endon("6dcd79d7489a1b1");
-  self endoncallback(&function_43ec7ca3, # "death");
+  self endoncallback(&function_43ec7ca3, #"death");
   self.var_7fd3b200 = 0;
   self thread function_cf88b888();
   self waittill(#"hash_3af6fe8d4a8fac02");
@@ -338,7 +338,7 @@ function_1a4f64a() {
 function_cf88b888() {
   self notify("77cd1973e51a1a17");
   self endon("77cd1973e51a1a17");
-  self endoncallback(&function_43ec7ca3, # "death", # "hash_3af6fe8d4a8fac02");
+  self endoncallback(&function_43ec7ca3, #"death", #"hash_3af6fe8d4a8fac02");
   var_893a571 = 0;
   self playrenderoverridebundle("rob_zm_viewarm_vomit");
 
@@ -360,7 +360,7 @@ function_cf88b888() {
 function_1ca2497b() {
   self notify("6b4310a91dda8e0b");
   self endon("6b4310a91dda8e0b");
-  self endoncallback(&function_43ec7ca3, # "death", # "hash_6bc06e9af30f987");
+  self endoncallback(&function_43ec7ca3, #"death", #"hash_6bc06e9af30f987");
   var_e935ecce = 0;
 
   while(!var_e935ecce) {

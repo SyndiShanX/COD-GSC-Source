@@ -78,7 +78,7 @@ function_74872db6() {
   if(level.round_number == 20) {
     foreach(e_player in getplayers()) {
       if(!(isDefined(e_player.var_bd1368a8) && e_player.var_bd1368a8)) {
-        e_player increment_zm_contract(#"contract_zm_no_pap", 1, # "zstandard");
+        e_player increment_zm_contract(#"contract_zm_no_pap", 1, #"zstandard");
       }
     }
 
@@ -87,7 +87,7 @@ function_74872db6() {
 
   if(level.round_number == 30) {
     foreach(e_player in getplayers()) {
-      e_player increment_zm_contract(#"contract_zm_rounds", 1, # "zstandard");
+      e_player increment_zm_contract(#"contract_zm_rounds", 1, #"zstandard");
     }
 
     callback::function_50fdac80(&function_74872db6);
@@ -138,7 +138,7 @@ on_round_end() {
 
   foreach(e_player in getplayers()) {
     if(isDefined(var_c5440c34)) {
-      e_player increment_zm_contract(var_c5440c34, 1, # "zstandard");
+      e_player increment_zm_contract(var_c5440c34, 1, #"zstandard");
     }
 
     if(isDefined(var_fc80b645)) {
@@ -298,7 +298,7 @@ function_677a89c8() {
 }
 
 function_30dc9a23() {
-  self endoncallback(&function_1729afac, # "disconnect", # "perk_vapor_lost");
+  self endoncallback(&function_1729afac, #"disconnect", #"perk_vapor_lost");
   var_c16ab86f = 0;
 
   while(true) {
@@ -334,7 +334,7 @@ function_1729afac(var_c34665fc) {
 }
 
 function_9d5cd9ee() {
-  self endoncallback(&function_1395d508, # "disconnect", # "destroy_riotshield");
+  self endoncallback(&function_1395d508, #"disconnect", #"destroy_riotshield");
   var_c16ab86f = 0;
 
   while(true) {
@@ -397,7 +397,7 @@ function_51db541e() {
 }
 
 function_1d4fae71() {
-  self endon(#"disconnect", # "hash_4bf9f2755fe74a0d");
+  self endon(#"disconnect", #"hash_4bf9f2755fe74a0d");
 
   while(true) {
     if(!isalive(self) || self.var_42a6fc40 != self.var_5417136) {

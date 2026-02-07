@@ -384,7 +384,7 @@ grab_check(player, random_perk) {
     #perk: random_perk
   });
   player zm_perks::perk_give_bottle_begin(random_perk);
-  evt = player waittill(#"fake_death", # "death", # "player_downed", # "weapon_change_complete");
+  evt = player waittill(#"fake_death", #"death", #"player_downed", #"weapon_change_complete");
 
   if(evt._notify == "weapon_change_complete") {
     player thread zm_perks::wait_give_perk(random_perk);
@@ -396,7 +396,7 @@ grab_check(player, random_perk) {
 }
 
 monitor_when_player_acquires_perk() {
-  self waittill(#"perk_acquired", # "death", # "disconnect", # "player_downed");
+  self waittill(#"perk_acquired", #"death", #"disconnect", #"player_downed");
   level flag::set("machine_can_reset");
 }
 
@@ -668,7 +668,7 @@ machine_sounds() {
     level waittill(#"pmstrt");
     rndprk_ent = spawn("script_origin", self.origin);
     rndprk_ent stopsounds();
-    state_switch = level waittill(#"pmstop", # "pmmove", # "machine_think");
+    state_switch = level waittill(#"pmstop", #"pmmove", #"machine_think");
     rndprk_ent stoploopsound(1);
 
     if(state_switch._notify == "pmstop") {}

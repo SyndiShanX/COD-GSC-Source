@@ -124,10 +124,10 @@ function_5f259315() {
 }
 
 register_steps() {
-  zm_sq::register(#"zm_mansion_ley_line", # "step_1", # "ley_line_step_1", &init_step_1, &cleanup_step_1);
-  zm_sq::register(#"zm_mansion_ley_line", # "step_2", # "ley_line_step_2", &init_step_2, &cleanup_step_2);
-  zm_sq::register(#"zm_mansion_ley_line", # "step_3", # "ley_line_step_3", &init_step_3, &cleanup_step_3);
-  zm_sq::register(#"zm_mansion_ley_line", # "step_4", # "ley_line_step_4", &init_step_4, &cleanup_step_4);
+  zm_sq::register(#"zm_mansion_ley_line", #"step_1", #"ley_line_step_1", &init_step_1, &cleanup_step_1);
+  zm_sq::register(#"zm_mansion_ley_line", #"step_2", #"ley_line_step_2", &init_step_2, &cleanup_step_2);
+  zm_sq::register(#"zm_mansion_ley_line", #"step_3", #"ley_line_step_3", &init_step_3, &cleanup_step_3);
+  zm_sq::register(#"zm_mansion_ley_line", #"step_4", #"ley_line_step_4", &init_step_4, &cleanup_step_4);
 }
 
 init_flags() {
@@ -169,7 +169,7 @@ cleanup_step_1(var_5ea5c94d, ended_early) {
   level flag::set(#"gazed_library");
   level flag::set(#"ley_start");
 
-  foreach(str_flag in array(#"hash_546b8f78e6510d81", # "hash_546b8c78e6510868", # "hash_546b8d78e6510a1b", # "hash_546b9278e651129a")) {
+  foreach(str_flag in array(#"hash_546b8f78e6510d81", #"hash_546b8c78e6510868", #"hash_546b8d78e6510a1b", #"hash_546b9278e651129a")) {
     level flag::set(str_flag);
   }
 
@@ -244,7 +244,7 @@ init_step_4(var_a276c861) {
     level flag::clear(#"zombie_drop_powerups");
     mansion_util::function_45ac4bb8();
     level thread function_f3668a9();
-    level thread mansion_util::function_bb613572(function_a7bed514(), # "hash_b240a9137ecc6f9");
+    level thread mansion_util::function_bb613572(function_a7bed514(), #"hash_b240a9137ecc6f9");
     wave_1();
     wave_3();
     a_players = util::get_active_players();
@@ -331,10 +331,10 @@ function_70d8a7cb() {
 
 function_fde77b55(mdl_coil) {
   level notify(#"ley_reset");
-  level endon(#"ley_start", # "ley_reset");
+  level endon(#"ley_start", #"ley_reset");
 
   while(true) {
-    level flag::wait_till_any(array(#"hash_546b8f78e6510d81", # "hash_546b8c78e6510868", # "hash_546b8d78e6510a1b", # "hash_546b9278e651129a"));
+    level flag::wait_till_any(array(#"hash_546b8f78e6510d81", #"hash_546b8c78e6510868", #"hash_546b8d78e6510a1b", #"hash_546b9278e651129a"));
     a_str_flags = [];
 
     for(i = 1; i < getplayers().size + 1; i++) {
@@ -471,7 +471,7 @@ ring_reset() {
   level.mdl_ring_inner playSound(#"hash_13acff42f13d9448");
   level.mdl_ring_middle playSound(#"hash_7813e29d18ad3dcf");
   level.mdl_ring_outer playSound(#"hash_3b464e57c6aa7e35");
-  level.mdl_ring_outer.e_linkto waittilltimeout(2, # "rotatedone");
+  level.mdl_ring_outer.e_linkto waittilltimeout(2, #"rotatedone");
 }
 
 ring_rotate(str_pos, s_ring, var_50cc0d4f = 1) {
@@ -504,19 +504,19 @@ ring_rotate(str_pos, s_ring, var_50cc0d4f = 1) {
       level.mdl_ring_middle.e_linkto rotateroll(n_rot, n_move_time);
       level.mdl_ring_outer.e_linkto rotatepitch(n_rot, n_move_time);
       level.mdl_ring_inner playSound(#"hash_1928aff0a0342673");
-      level.mdl_ring_outer.e_linkto waittilltimeout(n_move_time, # "rotatedone");
+      level.mdl_ring_outer.e_linkto waittilltimeout(n_move_time, #"rotatedone");
       break;
     case # "middle":
       level.mdl_ring_outer.e_linkto rotatepitch(var_6c4c2561, n_move_time);
       level.mdl_ring_middle.e_linkto rotateroll(n_rot, n_move_time);
       level.mdl_ring_inner playSound(#"hash_1928aef0a03424c0");
-      level.mdl_ring_middle.e_linkto waittilltimeout(n_move_time, # "rotatedone");
+      level.mdl_ring_middle.e_linkto waittilltimeout(n_move_time, #"rotatedone");
       break;
     case # "inner":
       level.mdl_ring_middle.e_linkto rotateroll(var_6c4c2561, n_move_time);
       level.mdl_ring_inner.e_linkto rotatepitch(n_rot, n_move_time);
       level.mdl_ring_inner playSound(#"hash_1928aef0a03424c0");
-      level.mdl_ring_inner.e_linkto waittilltimeout(n_move_time, # "rotatedone");
+      level.mdl_ring_inner.e_linkto waittilltimeout(n_move_time, #"rotatedone");
       break;
   }
 
@@ -561,7 +561,7 @@ ring_watcher(player) {
     wait 0.5;
 
     if(isalive(player)) {
-      player zm_audio::create_and_play_dialog(#"light_beam", # "aligned");
+      player zm_audio::create_and_play_dialog(#"light_beam", #"aligned");
     }
   }
 }
@@ -601,7 +601,7 @@ function_71d1b235() {
   }
 
   if(a_players.size) {
-    array::random(a_players) zm_audio::create_and_play_dialog(#"atlas_stat", # "collapse");
+    array::random(a_players) zm_audio::create_and_play_dialog(#"atlas_stat", #"collapse");
   }
 
   wait 2;
@@ -641,7 +641,7 @@ function_604f9d73(a_ents) {
 }
 
 function_b1b02a54() {
-  a_s_scene = struct::get_script_bundle_instances("scene", # "p8_fxanim_zm_man_dome_crank_wheel_bundle");
+  a_s_scene = struct::get_script_bundle_instances("scene", #"p8_fxanim_zm_man_dome_crank_wheel_bundle");
   a_scene_ents = a_s_scene[getfirstarraykey(a_s_scene)].scene_ents;
   mdl_wheel = a_scene_ents[getfirstarraykey(a_scene_ents)];
   mdl_wheel stopanimscripted();
@@ -661,7 +661,7 @@ door_opener() {
 }
 
 function_250cf19b() {
-  level endon(#"greenhouse_open", # "wheel_locked");
+  level endon(#"greenhouse_open", #"wheel_locked");
   level scene::stop(#"p8_fxanim_zm_man_dome_crank_bundle");
   level thread scene::play(#"p8_fxanim_zm_man_dome_crank_bundle", "reset");
   level flag::wait_till(#"hash_702dbaf6695a5607");
@@ -753,7 +753,7 @@ function_250cf19b() {
 }
 
 function_5164d716() {
-  level endon(#"wheel_locked", # "greenhouse_open");
+  level endon(#"wheel_locked", #"greenhouse_open");
   level flag::wait_till(#"hash_702dbaf6695a5607");
   var_e0cc1e20 = getent("trigger_obs_wheel_lock", "targetname");
   var_e0cc1e20.health = 99999;
@@ -1061,7 +1061,7 @@ combo_watcher() {
 
     if(level.var_5c086e54[0] === level.var_d181080c[0].script_int && level.var_5c086e54[1] === level.var_d181080c[1].script_int && level.var_5c086e54[2] === level.var_d181080c[2].script_int) {
       if(isalive(level.var_ee0a344c)) {
-        level.var_ee0a344c zm_audio::create_and_play_dialog(#"telescope", # "code_confirm");
+        level.var_ee0a344c zm_audio::create_and_play_dialog(#"telescope", #"code_confirm");
         level.var_ee0a344c = undefined;
       }
 
@@ -1211,7 +1211,7 @@ function_b87ae607(n_stage) {
 
 function_371e56be(e_trap) {
   self notify(#"hash_1e76041e9fa5f479");
-  self endon(#"disconnect", # "hash_1e76041e9fa5f479", # "death");
+  self endon(#"disconnect", #"hash_1e76041e9fa5f479", #"death");
   self clientfield::set("" + # "hash_5370f4bc9fc25d13", 1);
 
   while(level flag::get(#"hash_6f483dda6f8ab19d") && self istouching(e_trap) && mansion_util::is_shield(self getcurrentweapon())) {
@@ -1227,7 +1227,7 @@ function_371e56be(e_trap) {
   }
 
   while(isDefined(self.var_4ceff143) && self.var_4ceff143) {
-    s_result = self waittill(#"shield_timeout", # "weapon_change");
+    s_result = self waittill(#"shield_timeout", #"weapon_change");
 
     if(s_result._notify !== "weapon_change" || !mansion_util::is_shield(s_result.weapon)) {
       self notify(#"hash_459246e5bfcc3713");
@@ -1237,7 +1237,7 @@ function_371e56be(e_trap) {
 
 function_53577dc7() {
   self endon(#"disconnect");
-  self waittilltimeout(9.2, # "shield_timeout", # "hash_459246e5bfcc3713", # "destroy_riotshield");
+  self waittilltimeout(9.2, #"shield_timeout", #"hash_459246e5bfcc3713", #"destroy_riotshield");
   self.var_4ceff143 = 0;
   self clientfield::set("" + # "hash_5370f4bc9fc25d13", 0);
   self notify(#"shield_timeout");
@@ -1259,7 +1259,7 @@ tube_shoot() {
   player = level.mdl_telescope mansion_util::get_closest_valid_player();
 
   if(isDefined(player)) {
-    player zm_audio::create_and_play_dialog(#"full_moon", # "react_first");
+    player zm_audio::create_and_play_dialog(#"full_moon", #"react_first");
   }
 
   getent("beam_man", "targetname") clientfield::set("" + # "ley_lines", 0);
@@ -1655,7 +1655,7 @@ wave_3() {
 }
 
 function_d89f5961() {
-  level endon(#"end_game", # "intermission", # "hash_3bc655798befa0c6");
+  level endon(#"end_game", #"intermission", #"hash_3bc655798befa0c6");
   self endon(#"death");
   a_e_players = util::get_active_players();
   a_e_players = array::randomize(a_e_players);

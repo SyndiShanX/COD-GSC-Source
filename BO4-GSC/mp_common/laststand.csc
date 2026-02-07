@@ -38,9 +38,9 @@ laststand_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     if(!self postfx::function_556665f2("pstfx_drowning")) {
       self postfx::playpostfxbundle("pstfx_drowning");
       value = 0.99;
-      self postfx::function_c8b5f318("pstfx_drowning", # "outer radius", value);
-      self postfx::function_c8b5f318("pstfx_drowning", # "inner radius", value - 0.3);
-      self postfx::function_c8b5f318("pstfx_drowning", # "opacity", 1);
+      self postfx::function_c8b5f318("pstfx_drowning", #"outer radius", value);
+      self postfx::function_c8b5f318("pstfx_drowning", #"inner radius", value - 0.3);
+      self postfx::function_c8b5f318("pstfx_drowning", #"opacity", 1);
     }
 
     if(newval > 0.5) {
@@ -61,7 +61,7 @@ laststand_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 laststand_bleed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endon(#"death", # "hash_7698972484f247e8");
+  self endon(#"death", #"hash_7698972484f247e8");
 
   if(newval != oldval && newval) {
     self util::waittill_dobj(localclientnum);
@@ -83,8 +83,8 @@ function_8960f852(oldval, newval) {
   while(duration > 0) {
     value = oldval - (oldval - newval) * (1 - duration);
     duration -= 0.1;
-    self postfx::function_c8b5f318("pstfx_drowning", # "outer radius", value);
-    self postfx::function_c8b5f318("pstfx_drowning", # "inner radius", value - 0.8);
+    self postfx::function_c8b5f318("pstfx_drowning", #"outer radius", value);
+    self postfx::function_c8b5f318("pstfx_drowning", #"inner radius", value - 0.8);
     wait 0.1;
   }
 }

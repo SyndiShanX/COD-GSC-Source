@@ -16,7 +16,7 @@ class cself_revive_visuals: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "self_revive_visuals");
+    cluielem::open(localclientnum, #"self_revive_visuals");
   }
 
   function function_fa582112(localclientnum) {

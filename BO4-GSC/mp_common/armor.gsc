@@ -78,7 +78,7 @@ setlightarmor(optionalarmorvalue, var_2274e560, var_cdeeec29) {
 }
 
 removelightarmorondeath() {
-  self endon(#"disconnect", # "give_light_armor", # "remove_light_armor");
+  self endon(#"disconnect", #"give_light_armor", #"remove_light_armor");
   self waittill(#"death");
   unsetlightarmor();
 }
@@ -89,7 +89,7 @@ unsetlightarmor() {
 }
 
 removelightarmoronmatchend() {
-  self endon(#"disconnect", # "remove_light_armor");
+  self endon(#"disconnect", #"remove_light_armor");
   level waittill(#"game_ended");
   self thread unsetlightarmor();
 }

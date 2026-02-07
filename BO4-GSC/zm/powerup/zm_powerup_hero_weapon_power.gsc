@@ -28,7 +28,7 @@ __init__() {
   zm_powerups::register_powerup("hero_weapon_power", &hero_weapon_power);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("hero_weapon_power", "p8_zm_powerup_full_power", # "zombie_powerup_free_perk", &function_7e51ac0f, 1, 0, 0);
+    zm_powerups::add_zombie_powerup("hero_weapon_power", "p8_zm_powerup_full_power", #"zombie_powerup_free_perk", &function_7e51ac0f, 1, 0, 0);
   }
 }
 

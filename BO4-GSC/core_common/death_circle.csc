@@ -331,7 +331,7 @@ function_32f7227c(deathcircle, currentradius, localclientnum) {
 }
 
 function_a453467f(localclientnum) {
-  self endon(#"death", # "hash_49f273cd81c6c0f");
+  self endon(#"death", #"hash_49f273cd81c6c0f");
   self thread function_71f8d788();
 
   while(isDefined(self.scale)) {

@@ -24,7 +24,7 @@ function_3224694(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       self.fx_handle = playFX(localclientnum, "maps/zm_orange/fx8_samantha_ground_portal", self.origin);
 
       if(!isDefined(self.var_30b8668)) {
-        self playSound(localclientnum, # "hash_1780eaf4c052b271");
+        self playSound(localclientnum, #"hash_1780eaf4c052b271");
         self.var_30b8668 = self playLoopSound(#"hash_13b5daba3191a299");
       }
 
@@ -38,7 +38,7 @@ function_3224694(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       }
 
       if(isDefined(self.var_30b8668)) {
-        self playSound(localclientnum, # "hash_63bbef4e60ff503b");
+        self playSound(localclientnum, #"hash_63bbef4e60ff503b");
         self stoploopsound(self.var_30b8668);
         self.var_30b8668 = undefined;
       }
@@ -76,7 +76,7 @@ music_box_teleport(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
     if(isDefined(self)) {
       playFX(localclientnum, "maps/zm_white/fx8_monkey_bomb_reveal", self.origin, v_forward, v_up);
-      self playSound(localclientnum, # "hash_21206f1b7fb27f81");
+      self playSound(localclientnum, #"hash_21206f1b7fb27f81");
     }
   }
 }

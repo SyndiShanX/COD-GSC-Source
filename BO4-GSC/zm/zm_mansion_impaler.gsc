@@ -59,11 +59,11 @@ init() {
 }
 
 register_steps() {
-  zm_sq::register(#"zm_mansion_impaler", # "step_1", # "impaler_step_1", &init_step_1, &cleanup_step_1);
-  zm_sq::register(#"zm_mansion_impaler", # "step_2", # "impaler_step_2", &init_step_2, &cleanup_step_2);
-  zm_sq::register(#"zm_mansion_impaler", # "step_3", # "impaler_step_3", &init_step_3, &cleanup_step_3);
-  zm_sq::register(#"zm_mansion_impaler", # "step_4", # "impaler_step_4", &init_step_4, &cleanup_step_4);
-  zm_sq::register(#"zm_mansion_impaler", # "step_5", # "impaler_step_5", &init_step_5, &cleanup_step_5);
+  zm_sq::register(#"zm_mansion_impaler", #"step_1", #"impaler_step_1", &init_step_1, &cleanup_step_1);
+  zm_sq::register(#"zm_mansion_impaler", #"step_2", #"impaler_step_2", &init_step_2, &cleanup_step_2);
+  zm_sq::register(#"zm_mansion_impaler", #"step_3", #"impaler_step_3", &init_step_3, &cleanup_step_3);
+  zm_sq::register(#"zm_mansion_impaler", #"step_4", #"impaler_step_4", &init_step_4, &cleanup_step_4);
+  zm_sq::register(#"zm_mansion_impaler", #"step_5", #"impaler_step_5", &init_step_5, &cleanup_step_5);
 }
 
 init_flags() {
@@ -208,7 +208,7 @@ init_step_3(var_a276c861) {
     }
 
     s_cemetery thread function_9ee098d5();
-    level flag::wait_till_all(array(#"hash_67e415588696c592", # "hash_67e416588696c745", # "hash_67e413588696c22c", # "hash_67e414588696c3df"));
+    level flag::wait_till_all(array(#"hash_67e415588696c592", #"hash_67e416588696c745", #"hash_67e413588696c22c", #"hash_67e414588696c3df"));
   }
 }
 
@@ -227,7 +227,7 @@ init_step_4(var_a276c861) {
   if(!var_a276c861) {
     var_1c3e934b = struct::get("s_imp_enter");
     array::thread_all(struct::get_array("s_imp_symbol"), &function_e7423237);
-    level flag::wait_till_all(array(#"hash_1687323c95faf914", # "hash_1687333c95fafac7", # "hash_1687343c95fafc7a", # "hash_1687353c95fafe2d"));
+    level flag::wait_till_all(array(#"hash_1687323c95faf914", #"hash_1687333c95fafac7", #"hash_1687343c95fafc7a", #"hash_1687353c95fafe2d"));
     level thread function_9768c04b();
     var_1c3e934b zm_unitrigger::create(undefined, 64, &function_d7d6b759, 1, 1);
     level flag::wait_till(#"hash_54326b9f13bd4f1");
@@ -326,7 +326,7 @@ function_c929af49() {
   self thread function_9950740f();
   self playSound(#"zmb_bgb_nysm_start");
   self playLoopSound(#"zmb_bgb_nysm_loop", 1);
-  self util::delay(0.75, "death", &zm_audio::create_and_play_dialog, # "stone_drink", # "water_react");
+  self util::delay(0.75, "death", &zm_audio::create_and_play_dialog, #"stone_drink", #"water_react");
   self clientfield::set_to_player("" + # "hash_3d7d4c5e6ed616e9", 1);
 
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
@@ -336,7 +336,7 @@ function_c929af49() {
   }
 
   self.var_ea6941e2 = gettime() + int(n_duration * 1000);
-  self waittilltimeout(0.5 + n_duration, # "hash_115d2cc01ac8b1e9", # "end_game", # "bgb_update");
+  self waittilltimeout(0.5 + n_duration, #"hash_115d2cc01ac8b1e9", #"end_game", #"bgb_update");
   self stoploopsound(1);
   self playSound(#"zmb_bgb_nysm_end");
   self clientfield::set_to_player("" + # "hash_3d7d4c5e6ed616e9", 0);
@@ -372,8 +372,8 @@ function_92e77dc6() {
 
 function_9950740f() {
   self notify(#"hash_398b46ae1d545804");
-  self endon(#"disconnect", # "hash_398b46ae1d545804");
-  self waittill(#"bled_out", # "fake_death");
+  self endon(#"disconnect", #"hash_398b46ae1d545804");
+  self waittill(#"bled_out", #"fake_death");
   self notify(#"hash_115d2cc01ac8b1e9");
 }
 
@@ -800,7 +800,7 @@ function_3c1f242b() {
         playsoundatposition(#"hash_6b3b011b2d22c586", mdl_drop.origin);
       }
 
-      e_player thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+      e_player thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
       level flag::set(str_flag);
 
       if(isDefined(mdl_drop)) {
@@ -1262,7 +1262,7 @@ cleanweaponobjectarray(watcher) {
 }
 
 waitandfizzleout(object, delay) {
-  object endon(#"death", # "hacked");
+  object endon(#"death", #"hacked");
 
   if(isDefined(object.detonated) && object.detonated) {
     return;

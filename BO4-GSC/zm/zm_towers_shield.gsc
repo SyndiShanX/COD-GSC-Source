@@ -138,13 +138,13 @@ function_28f576a9(player) {
   w_shield_upgraded = getweapon(#"zhield_zword_dw_upgraded");
 
   if(!player hasweapon(w_shield_upgraded) && isDefined(player.var_5ba94c1e) && player.var_5ba94c1e) {
-    self.hint_string = zm_utility::function_d6046228(#"hash_33e05a25f080d845", # "hash_c69465e0b5ec27b");
+    self.hint_string = zm_utility::function_d6046228(#"hash_33e05a25f080d845", #"hash_c69465e0b5ec27b");
     self.cost = self zm_crafting::function_ceac3bf9(player);
     return;
   }
 
   if(!player hasweapon(w_shield_upgraded) && player flag::get(#"hash_4246a36eeaccdedb") && player flag::get(#"hash_1e11ea0627c40424") && player flag::get(#"hash_15ea02b45ed633fa")) {
-    self.hint_string = zm_utility::function_d6046228(#"hash_4c3385a49cb47a2c", # "hash_7f0c14b967f871a0");
+    self.hint_string = zm_utility::function_d6046228(#"hash_4c3385a49cb47a2c", #"hash_7f0c14b967f871a0");
     self.cost = undefined;
     return;
   }
@@ -152,7 +152,7 @@ function_28f576a9(player) {
   if(player hasweapon(w_shield_upgraded)) {
     if(isDefined(self.blueprint.var_54a97edd.isriotshield) && self.blueprint.var_54a97edd.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
       self.cost = self zm_crafting::function_ceac3bf9(player, 1);
-      self.hint_string = zm_utility::function_d6046228(#"hash_4b00caebf5058f14", # "hash_5db3ede8aef13738");
+      self.hint_string = zm_utility::function_d6046228(#"hash_4b00caebf5058f14", #"hash_5db3ede8aef13738");
       _shad_turret_debug_server = 1;
       return;
     }
@@ -256,7 +256,7 @@ function_4591fd41() {
   self endon(#"disconnect");
 
   while(true) {
-    s_waitresult = self waittill(#"destroy_riotshield", # "flame_off", # "weapon_change", # "fake_death");
+    s_waitresult = self waittill(#"destroy_riotshield", #"flame_off", #"weapon_change", #"fake_death");
 
     if(s_waitresult._notify == "weapon_change") {
       if(function_ed81d8f5(s_waitresult.last_weapon)) {
@@ -550,9 +550,9 @@ function_fb466de8(e_player) {
 
   if(b_enable) {
     if(function_8b1a219a()) {
-      self sethintstringforplayer(e_player, # "hash_12f48f7fb7e1a8fb");
+      self sethintstringforplayer(e_player, #"hash_12f48f7fb7e1a8fb");
     } else {
-      self sethintstringforplayer(e_player, # "hash_6f823e80320927c5");
+      self sethintstringforplayer(e_player, #"hash_6f823e80320927c5");
     }
   } else {
     self sethintstringforplayer(e_player, "");
@@ -601,7 +601,7 @@ function_cf5cc33b(b_skipped = 0) {
   while(true) {
     waitframe(1);
 
-    if(self flag::get_any(array(#"hash_320a1da5bf925c8b", # "hash_3551c4ab09311644"))) {
+    if(self flag::get_any(array(#"hash_320a1da5bf925c8b", #"hash_3551c4ab09311644"))) {
       return;
     }
   }
@@ -660,7 +660,7 @@ function_9bf405ce(b_skipped = 0) {
   while(true) {
     waitframe(1);
 
-    if(self flag::get_any(array(#"hash_1d380d2c916018c9", # "hash_392f20a71becaec7"))) {
+    if(self flag::get_any(array(#"hash_1d380d2c916018c9", #"hash_392f20a71becaec7"))) {
       return;
     }
   }
@@ -704,7 +704,7 @@ function_4e59dd4b() {
 }
 
 function_4284585f(b_skipped = 0) {
-  level endon(#"end_game", # "hash_4a06aa98c6c7b671");
+  level endon(#"end_game", #"hash_4a06aa98c6c7b671");
   self endon(#"disconnect");
 
   if(b_skipped) {
@@ -717,7 +717,7 @@ function_4284585f(b_skipped = 0) {
   while(true) {
     waitframe(1);
 
-    if(self flag::get_any(array(#"hash_1e015d048e504d45", # "hash_17425b597c04b9c3"))) {
+    if(self flag::get_any(array(#"hash_1e015d048e504d45", #"hash_17425b597c04b9c3"))) {
       return;
     }
   }

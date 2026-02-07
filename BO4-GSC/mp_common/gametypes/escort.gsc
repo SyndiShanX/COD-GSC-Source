@@ -358,7 +358,7 @@ drop_heli_leave() {
   goal = helicopter::getvalidrandomleavenode(chopper.origin, 1).origin;
   chopper setgoal(goal);
   chopper setneargoalnotifydist(400);
-  result = chopper waittill(#"near_goal", # "goal_reached", # "goal");
+  result = chopper waittill(#"near_goal", #"goal_reached", #"goal");
   chopper delete();
 }
 
@@ -514,7 +514,7 @@ auto_reboot_robot(time) {
     return;
   }
 
-  self endon(#"robot_reboot", # "game_ended");
+  self endon(#"robot_reboot", #"game_ended");
   shutdowntime = 0;
 
   while(shutdowntime < time) {
@@ -994,7 +994,7 @@ check_if_goal_is_blocked(previousgoal, goal) {
 
 watch_goal_becoming_blocked(goal) {
   self notify(#"end_watch_goal_becoming_blocked_singleton");
-  self endon(#"end_watch_goal_becoming_blocked_singleton", # "robot_stopped", # "goal");
+  self endon(#"end_watch_goal_becoming_blocked_singleton", #"robot_stopped", #"goal");
   level endon(#"game_ended");
   disttogoalsqr = 1e+09;
 
@@ -1028,7 +1028,7 @@ watch_goal_becoming_blocked(goal) {
 
 watch_becoming_blocked_at_goal() {
   self notify(#"end_watch_becoming_blocked_at_goal");
-  self endon(#"end_watch_becoming_blocked_at_goal", # "robot_stop");
+  self endon(#"end_watch_becoming_blocked_at_goal", #"robot_stop");
   level endon(#"game_ended");
 
   while(isDefined(self.traversestartnode)) {
@@ -1084,7 +1084,7 @@ stop_robot() {
 
 check_robot_on_travesal_end() {
   self notify(#"check_robot_on_travesal_end_singleton");
-  self endon(#"check_robot_on_travesal_end_singleton", # "death");
+  self endon(#"check_robot_on_travesal_end_singleton", #"death");
   self waittill(#"traverse_end");
   numowners = isDefined(level.moveobject.numtouching[level.moveobject.ownerteam]) ? level.moveobject.numtouching[level.moveobject.ownerteam] : 0;
 
@@ -1110,11 +1110,11 @@ update_stop_position() {
 }
 
 robot_wait_next_point() {
-  self endon(#"robot_stopped", # "death");
+  self endon(#"robot_stopped", #"death");
   level endon(#"game_ended");
 
   while(true) {
-    self waittill(#"goal", # "goal_blocked");
+    self waittill(#"goal", #"goal_blocked");
 
     if(!isDefined(self.watch_becoming_blocked_at_goal_established) || self.watch_becoming_blocked_at_goal_established == 0) {
       self thread watch_becoming_blocked_at_goal();
@@ -1305,7 +1305,7 @@ robot_move_chatter() {
 
 setup_move_object(robot, triggername) {
   trigger = getent(triggername, "targetname");
-  useobj = gameobjects::create_use_object(game.attackers, trigger, [], (0, 0, 0), # "escort_robot");
+  useobj = gameobjects::create_use_object(game.attackers, trigger, [], (0, 0, 0), #"escort_robot");
   useobj gameobjects::set_objective_entity(robot);
   useobj gameobjects::allow_use(#"none");
   useobj gameobjects::set_visible_team(#"any");
@@ -1427,7 +1427,7 @@ player_stop_escort() {
 
 wait_escort_death(player) {
   level endon(#"game_ended");
-  player endon(#"escorting_stopped", # "disconnect");
+  player endon(#"escorting_stopped", #"disconnect");
   player waittill(#"death");
 
   if(isDefined(player)) {
@@ -1461,7 +1461,7 @@ setup_goal_object(robot, triggername) {
     trigger.radius = 120;
   }
 
-  useobj = gameobjects::create_use_object(game.defenders, trigger, [], (0, 0, 0), # "escort_goal");
+  useobj = gameobjects::create_use_object(game.defenders, trigger, [], (0, 0, 0), #"escort_goal");
   useobj gameobjects::set_visible_team(#"any");
   useobj gameobjects::allow_use(#"none");
   useobj gameobjects::set_use_time(0);
@@ -1497,8 +1497,8 @@ watch_robot_enter(robot) {
           [
             [level.var_37d62931]
           ](player, 1);
-          var_6913cac0 = player stats::get_stat(#"playerstatslist", # "stats_escort_robot_delivered", # "statvalue") + 1;
-          player stats::set_stat(#"playerstatslist", # "stats_escort_robot_delivered", # "statvalue", var_6913cac0);
+          var_6913cac0 = player stats::get_stat(#"playerstatslist", #"stats_escort_robot_delivered", #"statvalue") + 1;
+          player stats::set_stat(#"playerstatslist", #"stats_escort_robot_delivered", #"statvalue", var_6913cac0);
         }
       }
 

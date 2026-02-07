@@ -22,9 +22,9 @@ __init__() {
 
 enable_ethereal_razor_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", # "perk_ethereal_razor", 4000, # "hash_1e8ce5bc6963fb34", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), # "zmperksetherealrazor");
+    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", #"perk_ethereal_razor", 4000, #"hash_1e8ce5bc6963fb34", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), #"zmperksetherealrazor");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", # "perk_ethereal_razor", 4000, # "zombie/perk_ethereal_razor", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), # "zmperksetherealrazor");
+    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", #"perk_ethereal_razor", 4000, #"zombie/perk_ethereal_razor", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), #"zmperksetherealrazor");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_etherealrazor", &function_ee114cab);
@@ -65,7 +65,7 @@ function_f20b4260() {
 function_f3043027(state) {}
 
 function_c38b0ce4() {
-  self endon(#"disconnect", # "specialty_etherealrazor" + "_take");
+  self endon(#"disconnect", #"specialty_etherealrazor" + "_take");
   self thread function_f86e4c3d();
   self function_5b0f2cc5();
   callback::on_ai_damage(&on_ai_damage);
@@ -80,10 +80,10 @@ function_6cedb75c(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_f86e4c3d() {
-  self endon(#"disconnect", # "specialty_etherealrazor" + "_take");
+  self endon(#"disconnect", #"specialty_etherealrazor" + "_take");
 
   while(true) {
-    waitresult = self waittill(#"weapon_melee", # "weapon_melee_charge");
+    waitresult = self waittill(#"weapon_melee", #"weapon_melee_charge");
     w_melee = waitresult.weapon;
     var_c34665fc = waitresult._notify;
 

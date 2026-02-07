@@ -11,7 +11,7 @@
 #namespace zm_bgb_burned_out;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_burned_out", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_burned_out", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -51,7 +51,7 @@ function_908b00b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_fire_torso"], self, var_54e59513);
 
   if(!isDefined(self.var_de2c8500)) {
-    self playSound(localclientnum, # "hash_4539c48ed56aa72b");
+    self playSound(localclientnum, #"hash_4539c48ed56aa72b");
     self.var_de2c8500 = self playLoopSound(#"hash_729fda7f41c1cb45");
   }
 }
@@ -66,7 +66,7 @@ function_35616d2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_fire_torso"], self, var_54e59513);
 
   if(!isDefined(self.var_de2c8500)) {
-    self playSound(localclientnum, # "hash_4539c48ed56aa72b");
+    self playSound(localclientnum, #"hash_4539c48ed56aa72b");
     self.var_de2c8500 = self playLoopSound(#"hash_729fda7f41c1cb45");
   }
 }

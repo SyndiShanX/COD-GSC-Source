@@ -93,7 +93,7 @@ function_8fe2d903() {
     }
   }
 
-  self waittilltimeout(self._trap_duration, # "trap_deactivate");
+  self waittilltimeout(self._trap_duration, #"trap_deactivate");
 
   foreach(t_trap in level.var_5f47f17d) {
     if(t_trap.script_string === self.script_string) {

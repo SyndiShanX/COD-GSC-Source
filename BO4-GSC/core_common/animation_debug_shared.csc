@@ -37,7 +37,7 @@ autoexec function_c3c9d0e5() {
 
 anim_info_render_thread(animation, v_origin_or_ent, v_angles_or_tag) {
   self notify(#"_anim_info_render_thread_");
-  self endon(#"_anim_info_render_thread_", # "death", # "scriptedanim");
+  self endon(#"_anim_info_render_thread_", #"death", #"scriptedanim");
   level endon(#"kill_anim_debug");
 
   while(true) {

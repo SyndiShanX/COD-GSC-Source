@@ -150,10 +150,10 @@ function_a6beb598(notifystr) {
 }
 
 function_5fff8c45(watcher, hitent) {
-  self endon(#"death", # "hacked", # "kill_target_detection");
+  self endon(#"death", #"hacked", #"kill_target_detection");
 
   if(isDefined(hitent)) {
-    hitent endoncallback(&function_a6beb598, # "hash_16c7de1837351e82");
+    hitent endoncallback(&function_a6beb598, #"hash_16c7de1837351e82");
     hitent.submunition = self;
   }
 
@@ -240,7 +240,7 @@ function_13c7b967(owner) {
   }
 
   obj_id = gameobjects::get_next_obj_id();
-  objective_add(obj_id, "invisible", self.origin, # "shockrifle_shocked");
+  objective_add(obj_id, "invisible", self.origin, #"shockrifle_shocked");
   objective_onentity(obj_id, self);
   objective_setvisibletoall(obj_id);
   objective_setteam(obj_id, owner getteam());
@@ -261,7 +261,7 @@ function_3474c820() {
 }
 
 function_5439aa67(shockcharge) {
-  self endon(#"death", # "shock_end");
+  self endon(#"death", #"shock_end");
 
   while(isDefined(self)) {
     if(self isplayerswimming()) {

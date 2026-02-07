@@ -15,7 +15,7 @@
 #namespace zm_bgb_ctrl_z;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_ctrl_z", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_ctrl_z", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -27,7 +27,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", # "bled_out", # "bgb_update");
+  self endon(#"disconnect", #"bled_out", #"bgb_update");
   a_ai_targets = function_880a86b2();
   self.var_89221e7d = 0;
 

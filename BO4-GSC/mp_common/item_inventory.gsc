@@ -25,7 +25,7 @@
 #namespace item_inventory;
 
 autoexec __init__system__() {
-  system::register(#"item_inventory", &__init__, undefined, # "item_world");
+  system::register(#"item_inventory", &__init__, undefined, #"item_world");
 }
 
 __init__() {
@@ -219,7 +219,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
   if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && self function_76646dad(eventstruct.weapon)) {
     self.var_8181d952 = eventstruct.weapon;
     var_994e5c9a = 0;
-    equipments = array(#"ability_smart_cover", # "eq_concertina_wire", # "eq_grapple", # "dart", # "eq_hawk", # "ultimate_turret");
+    equipments = array(#"ability_smart_cover", #"eq_concertina_wire", #"eq_grapple", #"dart", #"eq_hawk", #"ultimate_turret");
 
     foreach(equipmentname in equipments) {
       if(eventstruct.weapon.name == equipmentname) {
@@ -303,7 +303,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
       if(isDefined(eventstruct.projectile)) {
         camoindex = getcamoindex(self getweaponoptions(eventstruct.weapon));
         var_f94ce554 = array(111, 112, 113, 114, 115, 116);
-        var_af7d7388 = array(#"hash_7306b72d120049f8", # "hash_27ae7cb403d5365b", # "hash_6add258ae958d31c", # "hash_6eb8f7ceb4627d9f", # "hash_228bf15c70137b61", # "hash_10c0ee53a36783e9");
+        var_af7d7388 = array(#"hash_7306b72d120049f8", #"hash_27ae7cb403d5365b", #"hash_6add258ae958d31c", #"hash_6eb8f7ceb4627d9f", #"hash_228bf15c70137b61", #"hash_10c0ee53a36783e9");
         assert(var_f94ce554.size == var_af7d7388.size);
 
         for(index = 0; index < var_f94ce554.size && index < var_af7d7388.size; index++) {
@@ -351,7 +351,7 @@ event_handler[weapon_change] function_a8c42ee4(eventstruct) {
 
     if(isDefined(self.var_d0015cb3)) {
       weapon = self.var_d0015cb3;
-      equipments = array(#"ability_smart_cover", # "eq_concertina_wire", # "ultimate_turret");
+      equipments = array(#"ability_smart_cover", #"eq_concertina_wire", #"ultimate_turret");
 
       foreach(equipmentname in equipments) {
         if(weapon.name == equipmentname) {
@@ -376,7 +376,7 @@ event_handler[gadget_on] gadget_on_callback(eventstruct) {
   player = eventstruct.entity;
 
   if(sessionmodeiswarzonegame() && isplayer(player) && isalive(player) && player function_76646dad(eventstruct.weapon)) {
-    equipments = array(#"eq_grapple", # "dart", # "eq_hawk");
+    equipments = array(#"eq_grapple", #"dart", #"eq_hawk");
 
     foreach(equipmentname in equipments) {
       if(eventstruct.weapon.name == equipmentname) {
@@ -586,7 +586,7 @@ function_283a29c8(var_ab9610ad = undefined) {
     return;
   }
 
-  item = function_434d0c2b(#"equipment", array(#"frag_grenade_wz_item", # "cluster_semtex_wz_item", # "acid_bomb_wz_item", # "molotov_wz_item", # "wraithfire_wz_item", # "hatchet_wz_item", # "tomahawk_t8_wz_item", # "seeker_mine_wz_item", # "dart_wz_item", # "hawk_wz_item", # "ultimate_turret_wz_item", # "swat_grenade_wz_item", # "concussion_wz_item", # "smoke_grenade_wz_item", # "smoke_grenade_wz_item_spring_holiday", # "emp_grenade_wz_item", # "spectre_grenade_wz_item", # "grapple_wz_item", # "unlimited_grapple_wz_item", # "barricade_wz_item", # "spiked_barrier_wz_item", # "trophy_system_wz_item", # "concertina_wire_wz_item", # "sensor_dart_wz_item", # "supply_pod_wz_item", # "trip_wire_wz_item", # "cymbal_monkey_wz_item", # "homunculus_wz_item", # "vision_pulse_wz_item", # "flare_gun_wz_item", # "flare_gun_veh_wz_item", # "wz_snowball", # "wz_waterballoon"), var_ab9610ad);
+  item = function_434d0c2b(#"equipment", array(#"frag_grenade_wz_item", #"cluster_semtex_wz_item", #"acid_bomb_wz_item", #"molotov_wz_item", #"wraithfire_wz_item", #"hatchet_wz_item", #"tomahawk_t8_wz_item", #"seeker_mine_wz_item", #"dart_wz_item", #"hawk_wz_item", #"ultimate_turret_wz_item", #"swat_grenade_wz_item", #"concussion_wz_item", #"smoke_grenade_wz_item", #"smoke_grenade_wz_item_spring_holiday", #"emp_grenade_wz_item", #"spectre_grenade_wz_item", #"grapple_wz_item", #"unlimited_grapple_wz_item", #"barricade_wz_item", #"spiked_barrier_wz_item", #"trophy_system_wz_item", #"concertina_wire_wz_item", #"sensor_dart_wz_item", #"supply_pod_wz_item", #"trip_wire_wz_item", #"cymbal_monkey_wz_item", #"homunculus_wz_item", #"vision_pulse_wz_item", #"flare_gun_wz_item", #"flare_gun_veh_wz_item", #"wz_snowball", #"wz_waterballoon"), var_ab9610ad);
 
   if(isDefined(item)) {
     equip_equipment(item);
@@ -614,7 +614,7 @@ function_a7d62e18(var_ab9610ad = undefined) {
     return;
   }
 
-  item = function_434d0c2b(#"health", array(#"health_item_small", # "health_item_medium", # "health_item_large", # "health_item_squad"), var_ab9610ad);
+  item = function_434d0c2b(#"health", array(#"health_item_small", #"health_item_medium", #"health_item_large", #"health_item_squad"), var_ab9610ad);
 
   if(isDefined(item)) {
     equip_health(item);
@@ -1166,7 +1166,7 @@ cycle_equipment_item() {
   }
 
   if(getdvarint(#"hash_4cd4e3d15cf4ee7e", 1)) {
-    item = _cycle_item(#"equipment", array(#"frag_grenade_wz_item", # "cluster_semtex_wz_item", # "acid_bomb_wz_item", # "molotov_wz_item", # "wraithfire_wz_item", # "hatchet_wz_item", # "tomahawk_t8_wz_item", # "seeker_mine_wz_item", # "dart_wz_item", # "hawk_wz_item", # "ultimate_turret_wz_item", # "swat_grenade_wz_item", # "concussion_wz_item", # "smoke_grenade_wz_item", # "smoke_grenade_wz_item_spring_holiday", # "emp_grenade_wz_item", # "spectre_grenade_wz_item", # "grapple_wz_item", # "unlimited_grapple_wz_item", # "barricade_wz_item", # "spiked_barrier_wz_item", # "trophy_system_wz_item", # "concertina_wire_wz_item", # "sensor_dart_wz_item", # "supply_pod_wz_item", # "trip_wire_wz_item", # "cymbal_monkey_wz_item", # "homunculus_wz_item", # "vision_pulse_wz_item", # "flare_gun_wz_item", # "flare_gun_veh_wz_item", # "wz_snowball", # "wz_waterballoon"), var_bcc2655a);
+    item = _cycle_item(#"equipment", array(#"frag_grenade_wz_item", #"cluster_semtex_wz_item", #"acid_bomb_wz_item", #"molotov_wz_item", #"wraithfire_wz_item", #"hatchet_wz_item", #"tomahawk_t8_wz_item", #"seeker_mine_wz_item", #"dart_wz_item", #"hawk_wz_item", #"ultimate_turret_wz_item", #"swat_grenade_wz_item", #"concussion_wz_item", #"smoke_grenade_wz_item", #"smoke_grenade_wz_item_spring_holiday", #"emp_grenade_wz_item", #"spectre_grenade_wz_item", #"grapple_wz_item", #"unlimited_grapple_wz_item", #"barricade_wz_item", #"spiked_barrier_wz_item", #"trophy_system_wz_item", #"concertina_wire_wz_item", #"sensor_dart_wz_item", #"supply_pod_wz_item", #"trip_wire_wz_item", #"cymbal_monkey_wz_item", #"homunculus_wz_item", #"vision_pulse_wz_item", #"flare_gun_wz_item", #"flare_gun_veh_wz_item", #"wz_snowball", #"wz_waterballoon"), var_bcc2655a);
   } else {
     item = function_9da31874(#"equipment");
   }
@@ -1189,7 +1189,7 @@ cycle_health_item() {
   }
 
   if(getdvarint(#"hash_4cd4e3d15cf4ee7e", 1)) {
-    item = _cycle_item(#"health", array(#"health_item_small", # "health_item_medium", # "health_item_large", # "health_item_squad"), var_bcc2655a);
+    item = _cycle_item(#"health", array(#"health_item_small", #"health_item_medium", #"health_item_large", #"health_item_squad"), var_bcc2655a);
   } else {
     item = function_9da31874(#"health");
   }
@@ -1734,7 +1734,7 @@ function_e258cef5(networkid, itemtype) {
 equip_attachment(item, var_610add8d, var_d6f68de7, var_a3a17c55 = 1, switchweapon = 1) {
   assert(isplayer(self));
   assert(isstruct(item));
-  var_4e2a1ed8 = function_e258cef5(var_610add8d, # "weapon");
+  var_4e2a1ed8 = function_e258cef5(var_610add8d, #"weapon");
 
   if(!isDefined(var_4e2a1ed8)) {
     return;
@@ -1760,10 +1760,10 @@ equip_attachment(item, var_610add8d, var_d6f68de7, var_a3a17c55 = 1, switchweapo
     var_97cc940d = 0;
 
     if(isDefined(var_d6f68de7)) {
-      var_3f6f5f3c = function_e258cef5(var_d6f68de7, # "weapon");
+      var_3f6f5f3c = function_e258cef5(var_d6f68de7, #"weapon");
       var_2134bf0d = self.inventory.items[var_dd6937a8];
 
-      if(isDefined(var_3f6f5f3c) && isDefined(var_2134bf0d) && isDefined(function_e258cef5(var_2134bf0d.networkid, # "attachment")) && function_f3195b3d(var_2134bf0d.networkid)) {
+      if(isDefined(var_3f6f5f3c) && isDefined(var_2134bf0d) && isDefined(function_e258cef5(var_2134bf0d.networkid, #"attachment")) && function_f3195b3d(var_2134bf0d.networkid)) {
         var_97cc940d = 1;
       }
     }
@@ -3197,7 +3197,7 @@ function_c4468806(player, item) {
 
 function_394d85cd() {
   assert(isplayer(self));
-  var_13339abf = array(#"ammo_type_9mm_item", # "ammo_type_45_item", # "ammo_type_556_item", # "ammo_type_762_item", # "ammo_type_338_item", # "ammo_type_50cal_item", # "ammo_type_12ga_item", # "ammo_type_rocket_item");
+  var_13339abf = array(#"ammo_type_9mm_item", #"ammo_type_45_item", #"ammo_type_556_item", #"ammo_type_762_item", #"ammo_type_338_item", #"ammo_type_50cal_item", #"ammo_type_12ga_item", #"ammo_type_rocket_item");
   var_c2043143 = array(2, 4, 8, 16, 32, 64, 128, 256);
 
   for(index = 0; index < var_13339abf.size; index++) {
@@ -3226,7 +3226,7 @@ function_394d85cd() {
 
 function_a2c7ce35() {
   assert(isplayer(self));
-  var_3e9ef0a1 = array(array(#"frag_grenade_wz_item", # "cluster_semtex_wz_item", # "acid_bomb_wz_item", # "molotov_wz_item", # "wraithfire_wz_item", # "hatchet_wz_item", # "tomahawk_t8_wz_item", # "seeker_mine_wz_item", # "dart_wz_item", # "hawk_wz_item", # "ultimate_turret_wz_item"), array(#"swat_grenade_wz_item", # "concussion_wz_item", # "smoke_grenade_wz_item", # "smoke_grenade_wz_item_spring_holiday", # "emp_grenade_wz_item", # "spectre_grenade_wz_item"), array(#"grapple_wz_item", # "unlimited_grapple_wz_item", # "barricade_wz_item", # "spiked_barrier_wz_item", # "trophy_system_wz_item", # "concertina_wire_wz_item", # "sensor_dart_wz_item", # "supply_pod_wz_item", # "trip_wire_wz_item", # "cymbal_monkey_wz_item", # "homunculus_wz_item", # "vision_pulse_wz_item", # "flare_gun_wz_item", # "flare_gun_veh_wz_item", # "wz_snowball", # "wz_waterballoon"));
+  var_3e9ef0a1 = array(array(#"frag_grenade_wz_item", #"cluster_semtex_wz_item", #"acid_bomb_wz_item", #"molotov_wz_item", #"wraithfire_wz_item", #"hatchet_wz_item", #"tomahawk_t8_wz_item", #"seeker_mine_wz_item", #"dart_wz_item", #"hawk_wz_item", #"ultimate_turret_wz_item"), array(#"swat_grenade_wz_item", #"concussion_wz_item", #"smoke_grenade_wz_item", #"smoke_grenade_wz_item_spring_holiday", #"emp_grenade_wz_item", #"spectre_grenade_wz_item"), array(#"grapple_wz_item", #"unlimited_grapple_wz_item", #"barricade_wz_item", #"spiked_barrier_wz_item", #"trophy_system_wz_item", #"concertina_wire_wz_item", #"sensor_dart_wz_item", #"supply_pod_wz_item", #"trip_wire_wz_item", #"cymbal_monkey_wz_item", #"homunculus_wz_item", #"vision_pulse_wz_item", #"flare_gun_wz_item", #"flare_gun_veh_wz_item", #"wz_snowball", #"wz_waterballoon"));
   var_c77511ea = array(8192, 16384, 32768);
   var_710be50e = array(12);
 
@@ -3283,7 +3283,7 @@ function_a2c7ce35() {
 
 function_2bb3a825() {
   assert(isplayer(self));
-  var_9b624be0 = array(#"health_item_small", # "health_item_medium", # "health_item_large", # "health_item_squad");
+  var_9b624be0 = array(#"health_item_small", #"health_item_medium", #"health_item_large", #"health_item_squad");
   var_448bc079 = array(512, 1024, 2048, 4096);
   var_5675add1 = array(10);
 
@@ -3363,7 +3363,7 @@ function_ec238da8() {
 }
 
 reset_inventory() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   assert(isplayer(self));
   self.var_7bba6210 = 1;
   self disableoffhandspecial();
@@ -3670,7 +3670,7 @@ function_956a8ecd() {
     return;
   }
 
-  self waittill(#"hash_363004a4e0ccc1f", # "hawk_settled", # "death", # "stationary");
+  self waittill(#"hash_363004a4e0ccc1f", #"hawk_settled", #"death", #"stationary");
   var_d783088e = [];
 
   foreach(sensordart in level.sensor_darts) {
@@ -3720,7 +3720,7 @@ function_d8ceeeec(notifyhash) {
 use_killstreak(networkid, item) {
   assert(isplayer(self));
   assert(isDefined(item));
-  self endoncallback(&function_d8ceeeec, # "death");
+  self endoncallback(&function_d8ceeeec, #"death");
 
   if(self isinvehicle()) {
     return;
@@ -3772,13 +3772,13 @@ use_killstreak(networkid, item) {
     }
 
     if(self isswitchingweapons()) {
-      self waittilltimeout(2, # "weapon_change");
+      self waittilltimeout(2, #"weapon_change");
     }
 
     self val::set(#"item_killstreak", "freezecontrols_allowlook", 1);
     self giveweapon(remoteweapon);
     self switchtoweapon(remoteweapon, 1);
-    self waittilltimeout(2, # "weapon_change");
+    self waittilltimeout(2, #"weapon_change");
 
     if(self getcurrentweapon() != remoteweapon) {
       self takeweapon(remoteweapon);

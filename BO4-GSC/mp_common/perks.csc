@@ -216,7 +216,7 @@ monitor_tracker_perk_killcam(local_client_num) {
   }
 
   if(function_1cbf351b(local_client_num)) {
-    if(function_5778f82(local_client_num, # "specialty_tracker")) {
+    if(function_5778f82(local_client_num, #"specialty_tracker")) {
       servertime = getservertime(local_client_num);
 
       for(count = 0; count < level.trackerspecialtyself[local_client_num].size; count++) {
@@ -268,7 +268,7 @@ monitor_tracker_perk(local_client_num) {
       return;
     }
 
-    if(function_5778f82(local_client_num, # "specialty_tracker")) {
+    if(function_5778f82(local_client_num, #"specialty_tracker")) {
       friend = self function_83973173();
       isalive = isalive(self);
 
@@ -352,7 +352,7 @@ gettrackerfxposition(local_client_num) {
     player = self.owner;
   }
 
-  playfastfx = player hasperk(local_client_num, # "specialty_trackerjammer");
+  playfastfx = player hasperk(local_client_num, #"specialty_trackerjammer");
 
   if(isDefined(self.flying) && self.flying) {
     offset = (0, 0, getdvarfloat(#"perk_tracker_fx_fly_height", 0));
@@ -487,7 +487,7 @@ monitor_detectnearbyenemies(local_client_num) {
 
     range = var_99edc583 * 0.5;
 
-    if(!isDefined(localplayer) || !isplayer(localplayer) || function_5778f82(local_client_num, # "specialty_detectnearbyenemies") == 0 || function_1cbf351b(local_client_num) == 1 || isalive(localplayer) == 0) {
+    if(!isDefined(localplayer) || !isplayer(localplayer) || function_5778f82(local_client_num, #"specialty_detectnearbyenemies") == 0 || function_1cbf351b(local_client_num) == 1 || isalive(localplayer) == 0) {
       setuimodelvalue(var_e4ed29e4, 0);
       previousenemydetectedbitfield = 0;
 
@@ -496,7 +496,7 @@ monitor_detectnearbyenemies(local_client_num) {
         continue;
       }
 
-      self waittill(#"death", # "spawned", # "perks_changed");
+      self waittill(#"death", #"spawned", #"perks_changed");
       continue;
     }
 
@@ -552,7 +552,7 @@ monitor_detectnearbyenemies(local_client_num) {
         player = sixthsenseent.owner;
       }
 
-      if(isplayer(player) && player hasperk(local_client_num, # "specialty_sixthsensejammer")) {
+      if(isplayer(player) && player hasperk(local_client_num, #"specialty_sixthsensejammer")) {
         bundle = var_c394e130;
       }
 
@@ -686,7 +686,7 @@ monitor_detectnearbyenemies(local_client_num) {
           shouldplaysound = 0;
 
           if(shouldplaysound) {
-            self playSound(local_client_num, # "uin_sixth_sense_ping_on");
+            self playSound(local_client_num, #"uin_sixth_sense_ping_on");
           }
         }
 

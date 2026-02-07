@@ -46,7 +46,7 @@ function_13db986c(var_53c7b205) {
   self notify("48c46c9de397db92");
   self endon("48c46c9de397db92");
   self endon(#"death");
-  level endon(#"hash_7646638df88a3656", # "end_game");
+  level endon(#"hash_7646638df88a3656", #"end_game");
   self waittill(#"hash_7a32b2af2eef5415");
 
   while(true) {

@@ -54,7 +54,7 @@ function_6a10478(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       }
 
       self.fx_id = util::playFXOnTag(localclientnum, level._effect[# "lighthouse_beam"], self, "tag_origin");
-      self playSound(localclientnum, # "hash_c28cead5117620");
+      self playSound(localclientnum, #"hash_c28cead5117620");
       self.centerstruct = spawn(0, self.origin, "script_origin");
       self.centerstruct playLoopSound(#"hash_6181b0e69ec35a3b");
       break;
@@ -65,7 +65,7 @@ function_6a10478(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       }
 
       self.fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_4eeea3cde4956976"], self, "tag_origin");
-      self playSound(localclientnum, # "hash_261c471e4722bb37");
+      self playSound(localclientnum, #"hash_261c471e4722bb37");
       self.centerstruct = spawn(0, self.origin, "script_origin");
       self.centerstruct playLoopSound(#"hash_b838aafaa7056a0");
       break;
@@ -76,7 +76,7 @@ function_6a10478(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       }
 
       self.fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_33dbdabd23d73303"], self, "tag_origin");
-      self playSound(localclientnum, # "hash_153e70c4ae966276");
+      self playSound(localclientnum, #"hash_153e70c4ae966276");
       self.centerstruct = spawn(0, self.origin, "script_origin");
       self.centerstruct playLoopSound(#"hash_764437252a54048d");
       break;
@@ -87,7 +87,7 @@ function_6a10478(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
       }
 
       self.fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_21a180bd19425da5"], self, "tag_origin");
-      self playSound(localclientnum, # "hash_3734fecc702f7cd0");
+      self playSound(localclientnum, #"hash_3734fecc702f7cd0");
       self.centerstruct = spawn(0, self.origin, "script_origin");
       self.centerstruct playLoopSound(#"hash_518712532057a8b");
       break;
@@ -96,7 +96,7 @@ function_6a10478(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
 function_a177b2da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, level._effect[# "hash_4d1abbf031ca2c63"], self, "j_spine4");
-  self playSound(localclientnum, # "hash_24925b24b30b3991");
+  self playSound(localclientnum, #"hash_24925b24b30b3991");
 }
 
 function_c7fb0e97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

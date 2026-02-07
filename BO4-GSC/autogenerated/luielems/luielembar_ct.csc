@@ -48,7 +48,7 @@ class cluielembar_ct: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "luielembar_ct");
+    cluielem::open(localclientnum, #"luielembar_ct");
   }
 
   function function_fa582112(localclientnum) {

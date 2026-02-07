@@ -70,7 +70,7 @@ __init__() {
     }
   }
 
-  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, # "tag_elbow_weakspot_le": &function_9bbe631c, # "tag_elbow_weakspot_ri": &function_5a1a4ad, # "tag_eggsack_weakspot_le": &function_40034805, # "tag_eggsack_weakspot_ri": &function_33b2c99e];
+  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
 }
 
 on_player_spawned() {
@@ -140,7 +140,7 @@ function_7c52f40() {
 function_95a6fbef() {
   self.maxhealth = 900;
   self.health = self.maxhealth;
-  namespace_81245006::initweakpoints(self, # "c_t8_wz_blightfather_weakpoint_def");
+  namespace_81245006::initweakpoints(self, #"c_t8_wz_blightfather_weakpoint_def");
   self show();
   self showallparts();
 }
@@ -300,7 +300,7 @@ function_b78adc65(entity) {
 
 function_529b7fb9() {
   self endon(#"death");
-  level waittilltimeout(300, # "clear_all_corpses");
+  level waittilltimeout(300, #"clear_all_corpses");
 
   if(isDefined(self)) {
     self delete();
@@ -396,7 +396,7 @@ blightfatherdeathstart(entity) {
       return;
     }
 
-    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, # "hash_3e937fff0e0a4362", "normal");
+    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"hash_3e937fff0e0a4362", "normal");
     gib_model thread function_529b7fb9();
     entity.gib_model = gib_model;
   }
@@ -896,7 +896,7 @@ function_581a06c7(forward_dir, var_ced3ec54, var_27e1ee12, max_angle) {
 }
 
 function_5f3390fd(var_61622673, var_4fee43d4) {
-  self endon(#"death", # "detonated");
+  self endon(#"death", #"detonated");
   var_892397fd = self;
 
   while(isDefined(var_892397fd)) {
@@ -924,7 +924,7 @@ function_5f3390fd(var_61622673, var_4fee43d4) {
 }
 
 function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
-  self endon(#"detonated", # "death");
+  self endon(#"detonated", #"death");
 
   if(!isDefined(self.var_3b8e09f5)) {
     self.var_3b8e09f5 = cos(var_10ed5867 * var_eb325a79);

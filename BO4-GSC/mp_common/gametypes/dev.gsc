@@ -31,7 +31,7 @@
 #namespace dev;
 
 autoexec __init__system__() {
-  system::register(#"dev", &__init__, undefined, # "spawning_shared");
+  system::register(#"dev", &__init__, undefined, #"spawning_shared");
 }
 
 function __init__() {
@@ -207,7 +207,7 @@ function_e8b29265(player) {
 function_30d59c86(team, target, players) {
   if(isDefined(target)) {
     origin = target.origin;
-    nodes = getnodesinradius(origin, 128, 32, 128, # "path");
+    nodes = getnodesinradius(origin, 128, 32, 128, #"path");
     angles = target getplayerangles();
     yaw = (0, angles[1], 0);
     forward = anglesToForward(yaw);
@@ -1122,7 +1122,7 @@ devgui_increase_momentum(score) {
       continue;
     }
 
-    player globallogic_score::giveplayermomentumnotification(score, # "kill", "<dev string:x51c>");
+    player globallogic_score::giveplayermomentumnotification(score, #"kill", "<dev string:x51c>");
   }
 }
 

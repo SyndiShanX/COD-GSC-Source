@@ -85,7 +85,7 @@ stop_vortex_fx_after_time(vortex_fx_handle, vortex_position, vortex_explosion_fx
 }
 
 start_timed_vortex(effect_version, v_vortex_origin, n_vortex_radius, n_vortex_explosion_radius, eattacker = undefined, weapon = undefined, should_shellshock_player = undefined, should_shield = undefined) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   n_starttime = gettime();
   n_currtime = gettime() - n_starttime;
   a_e_players = getplayers();

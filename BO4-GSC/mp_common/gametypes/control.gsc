@@ -702,9 +702,9 @@ main_loop() {
   waittillframeend();
 
   if(isDefined(level.neutralzone) && level.neutralzone) {
-    update_objective_hint_message(#"mp/capture_strong", # "mp/capture_strong");
+    update_objective_hint_message(#"mp/capture_strong", #"mp/capture_strong");
   } else {
-    update_objective_hint_message(#"mp/capture_strong", # "mp/defend_strong");
+    update_objective_hint_message(#"mp/capture_strong", #"mp/defend_strong");
   }
 
   sound::play_on_players("mpl_hq_cap_us");
@@ -802,7 +802,7 @@ capture_loop(zone) {
   zone.gameobject.ondecaycomplete = &on_decay_complete;
   zone thread function_31c391cf();
   spawn_beacon::addprotectedzone(zone.trigger);
-  level waittill("zone_captured" + zone.zone_index, # "mission_timed_out");
+  level waittill("zone_captured" + zone.zone_index, #"mission_timed_out");
   ownerteam = zone.gameobject gameobjects::get_owner_team();
   profilestart();
   zone.gameobject.lastcaptureteam = undefined;
@@ -1395,7 +1395,7 @@ player_use_loop(gameobject) {
   self notify("player_use_loop_singleton" + gameobject.owningzone.zone_index);
   self endon("player_use_loop_singleton" + gameobject.owningzone.zone_index);
   player = self;
-  player endon("use_stopped" + gameobject.owningzone.zone_index, "event_ended" + gameobject.owningzone.zone_index, # "death");
+  player endon("use_stopped" + gameobject.owningzone.zone_index, "event_ended" + gameobject.owningzone.zone_index, #"death");
 
   if(!isDefined(player.playerrole)) {
     return;

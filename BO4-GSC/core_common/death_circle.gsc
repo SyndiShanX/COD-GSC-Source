@@ -95,7 +95,7 @@ add_circle(var_3b9f4abf, mapwidth = 0, mapheight = 0, radius = 0, damage = 0, da
 
 shuffle_circles() {
   level notify(#"shuffle_circles");
-  level endon(#"game_ended", # "shuffle_circles");
+  level endon(#"game_ended", #"shuffle_circles");
   waitframe(1);
   var_b0b91d4 = level.deathcircles[0];
 
@@ -324,7 +324,7 @@ function_a1dbce4a() {
 }
 
 start() {
-  level endoncallback(&cleanup_circle, # "game_ended", # "hash_12a8f2c59a67e4fc");
+  level endoncallback(&cleanup_circle, #"game_ended", #"hash_12a8f2c59a67e4fc");
 
   if(!level.var_d8958e58 || level.deathcircles.size <= 0) {
     return;
@@ -531,7 +531,7 @@ countdown(waitsec, circleindex, nextcircle) {
 }
 
 function_9229c3b3(scalesec, newradius, neworigin) {
-  level endon(#"game_ended", # "hash_12a8f2c59a67e4fc", # "hash_6adadb0779eac3c6");
+  level endon(#"game_ended", #"hash_12a8f2c59a67e4fc", #"hash_6adadb0779eac3c6");
 
   if(scalesec <= 0) {
     self.radius = newradius;
@@ -611,7 +611,7 @@ function_a086017a(point) {
 }
 
 function_dc15ad60() {
-  level endoncallback(&cleanup_feedback, # "game_ended", # "hash_12a8f2c59a67e4fc");
+  level endoncallback(&cleanup_feedback, #"game_ended", #"hash_12a8f2c59a67e4fc");
 
   while(!isDefined(level.deathcircle)) {
     waitframe(1);
@@ -808,23 +808,23 @@ function_27d5d349() {
   for(i = 0; i < level.deathcircles.size; i++) {
     assert(i < 14, "<dev string:x129>");
     circle = level.deathcircles[i];
-    match_record::function_7a93acec(#"death_circle", i, # "origin", circle.origin);
-    match_record::set_stat(#"death_circle", i, # "radius", int(circle.radius));
-    match_record::set_stat(#"death_circle", i, # "damage", int(circle.damage));
-    match_record::set_stat(#"death_circle", i, # "damage_interval", circle.damageinterval);
-    match_record::set_stat(#"death_circle", i, # "wait_sec", isDefined(circle.var_23216f37) ? circle.var_23216f37 : circle.waitsec);
-    match_record::set_stat(#"death_circle", i, # "scale_sec", isDefined(circle.var_a301393a) ? circle.var_a301393a : circle.scalesec);
-    match_record::set_stat(#"death_circle", i, # "final", 0);
+    match_record::function_7a93acec(#"death_circle", i, #"origin", circle.origin);
+    match_record::set_stat(#"death_circle", i, #"radius", int(circle.radius));
+    match_record::set_stat(#"death_circle", i, #"damage", int(circle.damage));
+    match_record::set_stat(#"death_circle", i, #"damage_interval", circle.damageinterval);
+    match_record::set_stat(#"death_circle", i, #"wait_sec", isDefined(circle.var_23216f37) ? circle.var_23216f37 : circle.waitsec);
+    match_record::set_stat(#"death_circle", i, #"scale_sec", isDefined(circle.var_a301393a) ? circle.var_a301393a : circle.scalesec);
+    match_record::set_stat(#"death_circle", i, #"final", 0);
 
     if(i == level.deathcircleindex) {
       i++;
-      match_record::function_7a93acec(#"death_circle", i, # "origin", level.deathcircle.origin);
-      match_record::set_stat(#"death_circle", i, # "radius", level.deathcircle.radius);
-      match_record::set_stat(#"death_circle", i, # "damage", level.deathcircle.damage);
-      match_record::set_stat(#"death_circle", i, # "damage_interval", level.deathcircle.damageinterval);
-      match_record::set_stat(#"death_circle", i, # "wait_sec", isDefined(circle.var_23216f37) ? circle.var_23216f37 : circle.waitsec);
-      match_record::set_stat(#"death_circle", i, # "scale_sec", isDefined(circle.var_a301393a) ? circle.var_a301393a : circle.scalesec);
-      match_record::set_stat(#"death_circle", i, # "final", 1);
+      match_record::function_7a93acec(#"death_circle", i, #"origin", level.deathcircle.origin);
+      match_record::set_stat(#"death_circle", i, #"radius", level.deathcircle.radius);
+      match_record::set_stat(#"death_circle", i, #"damage", level.deathcircle.damage);
+      match_record::set_stat(#"death_circle", i, #"damage_interval", level.deathcircle.damageinterval);
+      match_record::set_stat(#"death_circle", i, #"wait_sec", isDefined(circle.var_23216f37) ? circle.var_23216f37 : circle.waitsec);
+      match_record::set_stat(#"death_circle", i, #"scale_sec", isDefined(circle.var_a301393a) ? circle.var_a301393a : circle.scalesec);
+      match_record::set_stat(#"death_circle", i, #"final", 1);
       break;
     }
   }
@@ -1104,7 +1104,7 @@ simulate(var_1baf9723) {
       var_de130ab9 = {
         #var_91393a2d: var_1baf9723
       };
-      function_92d1707f(#"hash_3a9b483e717d26be", # "info", var_de130ab9, # "circles", var_f3ca456b);
+      function_92d1707f(#"hash_3a9b483e717d26be", #"info", var_de130ab9, #"circles", var_f3ca456b);
       wait 1;
       var_f3ca456b = [];
     }
@@ -1114,7 +1114,7 @@ simulate(var_1baf9723) {
     var_de130ab9 = {
       #var_91393a2d: var_1baf9723
     };
-    function_92d1707f(#"hash_3a9b483e717d26be", # "info", var_de130ab9, # "circles", var_f3ca456b);
+    function_92d1707f(#"hash_3a9b483e717d26be", #"info", var_de130ab9, #"circles", var_f3ca456b);
     wait 1;
   }
 }

@@ -231,7 +231,7 @@ function_4cfd3896(activator, laststate, state) {
 }
 
 function_ee4ce537(dynent) {
-  self endon(#"death", # "hash_21d06dbd3684fc31");
+  self endon(#"death", #"hash_21d06dbd3684fc31");
 
   while(true) {
     if(isDefined(dynent.isfishing) && dynent.isfishing) {
@@ -249,7 +249,7 @@ function_ee4ce537(dynent) {
 function_6c71782a(dynent) {
   self notify("48d65f5f22c36da2");
   self endon("48d65f5f22c36da2");
-  self endon(#"death", # "hash_61bb9580151c93d5", # "hash_667fd08050e0942b");
+  self endon(#"death", #"hash_61bb9580151c93d5", #"hash_667fd08050e0942b");
 
   if(!isplayer(self)) {
     return;
@@ -299,7 +299,7 @@ function_6c71782a(dynent) {
 function_8e8c4fef(time, pos) {
   self notify("230f045151c08d1e");
   self endon("230f045151c08d1e");
-  self endon(#"death", # "fishing_done");
+  self endon(#"death", #"fishing_done");
   wait time;
   self.origin = pos;
 }
@@ -321,7 +321,7 @@ function_b828bd39(player, dynent) {
   }
 
   self endon(#"fishing_done");
-  player endon(#"death", # "hash_61bb9580151c93d5");
+  player endon(#"death", #"hash_61bb9580151c93d5");
   dynent.var_3fa8a746 = 0;
   self.origin = dynent.var_be4b82e0;
 
@@ -345,7 +345,7 @@ function_b828bd39(player, dynent) {
 function_16e4e507(dynent) {
   self notify("651631a8d4cdd907");
   self endon("651631a8d4cdd907");
-  self endoncallback(&function_73532e4f, # "death", # "hash_61bb9580151c93d5");
+  self endoncallback(&function_73532e4f, #"death", #"hash_61bb9580151c93d5");
 
   if(!isplayer(self)) {
     return;
@@ -407,7 +407,7 @@ function_176e516(dynent) {
     return;
   }
 
-  self endoncallback(&function_73532e4f, # "death", # "hash_61bb9580151c93d5");
+  self endoncallback(&function_73532e4f, #"death", #"hash_61bb9580151c93d5");
 
   while(dynent.var_fb09ad1c != 3) {
     if(dynent.var_fb09ad1c != 3 && (self jumpbuttonpressed() || self stancebuttonpressed())) {

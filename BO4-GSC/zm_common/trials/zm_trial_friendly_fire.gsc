@@ -175,21 +175,21 @@ function_6aa8dd73() {
   self endon(#"disconnect");
 
   if(self laststand::player_is_in_laststand() || !isalive(self) || self util::is_spectating()) {
-    self waittill(#"player_revived", # "spawned");
+    self waittill(#"player_revived", #"spawned");
   }
 
   if(level.round_number >= 20) {
     self zm_hero_weapon::function_1bb7f7b1(3);
-    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", # "ar_fastfire_t8_upgraded", # "ar_stealth_t8_upgraded", # "ar_modular_t8_upgraded", # "smg_capacity_t8_upgraded", # "tr_powersemi_t8_upgraded"));
+    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", #"ar_fastfire_t8_upgraded", #"ar_stealth_t8_upgraded", #"ar_modular_t8_upgraded", #"smg_capacity_t8_upgraded", #"tr_powersemi_t8_upgraded"));
     n_repacks = 4;
     self zm_perks::function_cc24f525();
   } else if(level.round_number >= 10) {
     self zm_hero_weapon::function_1bb7f7b1(2);
-    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", # "ar_fastfire_t8_upgraded", # "ar_stealth_t8_upgraded", # "ar_modular_t8_upgraded", # "smg_capacity_t8_upgraded", # "tr_powersemi_t8_upgraded"));
+    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8_upgraded", #"ar_fastfire_t8_upgraded", #"ar_stealth_t8_upgraded", #"ar_modular_t8_upgraded", #"smg_capacity_t8_upgraded", #"tr_powersemi_t8_upgraded"));
     n_repacks = 2;
   } else {
     self zm_hero_weapon::function_1bb7f7b1(1);
-    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8", # "ar_fastfire_t8", # "ar_stealth_t8", # "ar_modular_t8", # "smg_capacity_t8", # "tr_powersemi_t8"));
+    var_98cb6e9 = array::randomize(array(#"ar_accurate_t8", #"ar_fastfire_t8", #"ar_stealth_t8", #"ar_modular_t8", #"smg_capacity_t8", #"tr_powersemi_t8"));
   }
 
   foreach(w_primary in self getweaponslistprimaries()) {

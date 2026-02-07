@@ -288,7 +288,7 @@ function_9305812e(ai, target) {
 }
 
 function_95d14d08() {
-  zm_orange_pablo::function_3f9e02b8(3, # "hash_3b3927bba2231a49", # "hash_52bf94e8309adfd7", &function_7ee05d66);
+  zm_orange_pablo::function_3f9e02b8(3, #"hash_3b3927bba2231a49", #"hash_52bf94e8309adfd7", &function_7ee05d66);
   zm_orange_pablo::function_d83490c5(3);
 }
 
@@ -429,9 +429,9 @@ function_5dbd6a40(s_zipline_use) {
   self endon(#"death");
   self.var_bf8dfaf4 = 1;
   self util::magic_bullet_shield();
-  self zm_audio::create_and_play_dialog(#"zipline", # "activate");
+  self zm_audio::create_and_play_dialog(#"zipline", #"activate");
   current_weapon = self getcurrentweapon();
-  var_478a6888 = array(#"zhield_riot_turret", # "zhield_riot_dw", # "launcher_standard_t8", # "launcher_standard_t8_upgraded");
+  var_478a6888 = array(#"zhield_riot_turret", #"zhield_riot_dw", #"launcher_standard_t8", #"launcher_standard_t8_upgraded");
 
   if(isinarray(var_478a6888, current_weapon.name) || current_weapon.isheroweapon) {
     self.var_479965f7 = undefined;

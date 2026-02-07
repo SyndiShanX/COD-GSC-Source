@@ -21,7 +21,7 @@ turret_microwave_sound_start(localclientnum) {
     return;
   }
 
-  self playSound(0, # "wpn_micro_turret_start");
+  self playSound(0, #"wpn_micro_turret_start");
   wait 0.7;
   origin = self gettagorigin("tag_flash");
   angles = self gettagangles("tag_flash");
@@ -42,10 +42,10 @@ turret_microwave_sound_start(localclientnum) {
 }
 
 turret_microwave_sound_off_waiter(localclientnum) {
-  msg = self waittill(#"sound_stop", # "death");
+  msg = self waittill(#"sound_stop", #"death");
 
   if(msg === "sound_stop") {
-    playSound(0, # "wpn_micro_turret_stop", self.microwave_audio_start);
+    playSound(0, #"wpn_micro_turret_stop", self.microwave_audio_start);
   }
 
   soundstoplineemitter(#"wpn_micro_turret_loop", self.microwave_audio_start, self.microwave_audio_end);
@@ -227,7 +227,7 @@ microwavefxhash(trace, origin, name) {
 }
 
 cleanupfx(localclientnum, microwavefxent) {
-  self waittill(#"death", # "beam_stop");
+  self waittill(#"death", #"beam_stop");
 
   foreach(handle in microwavefxent.fxhandles) {
     if(isDefined(handle)) {

@@ -43,7 +43,7 @@ function_5ea93036(watcher) {
 function_dfe5cf4c(watcher, player) {
   player endon(#"death");
   level endon(#"game_ended");
-  player stats::function_e24eec31(self.weapon, # "used", 1);
+  player stats::function_e24eec31(self.weapon, #"used", 1);
   self thread function_13f6636b(player, self.weapon);
 }
 
@@ -54,7 +54,7 @@ function_4dbceded() {
 }
 
 function_13f6636b(owner, weapon) {
-  self endon(#"hacked", # "hash_51d0dcaebb5940a5");
+  self endon(#"hacked", #"hash_51d0dcaebb5940a5");
   assert(isDefined(weapon.customsettings), "<dev string:x38>" + weapon.name);
   self thread function_4dbceded();
   team = self.team;
@@ -66,7 +66,7 @@ function_13f6636b(owner, weapon) {
   killcament setweapon(self.weapon);
   killcament killcam::store_killcam_entity_on_entity(self);
   self thread function_b66b2f4d();
-  waitresult = self waittill(#"projectile_impact_explode", # "explode");
+  waitresult = self waittill(#"projectile_impact_explode", #"explode");
 
   if(waitresult._notify == "projectile_impact_explode") {
     if(isDefined(killcament)) {
@@ -100,7 +100,7 @@ get_water_depth(position) {
 }
 
 function_b66b2f4d() {
-  self endon(#"projectile_impact_explode", # "death");
+  self endon(#"projectile_impact_explode", #"death");
 
   while(true) {
     self.var_59ba00f5 = self getvelocity();
@@ -941,7 +941,7 @@ function_37ddab3(origin, killcament, trace, position, weapon, customsettings, ow
 
 sndfiredamage() {
   self notify(#"sndfire");
-  self endon(#"sndfire", # "death", # "disconnect");
+  self endon(#"sndfire", #"death", #"disconnect");
 
   if(!isDefined(self.sndfireent)) {
     self.sndfireent = spawn("script_origin", self.origin);
@@ -960,7 +960,7 @@ sndfiredamage() {
 }
 
 sndfiredamage_deleteent(ent) {
-  self waittill(#"death", # "disconnect");
+  self waittill(#"death", #"disconnect");
 
   if(isDefined(ent)) {
     ent delete();

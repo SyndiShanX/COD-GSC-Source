@@ -238,9 +238,9 @@ function_ea62f5af() {
   var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
   if(isDefined(var_f8e6b703)) {
-    self match_record::set_stat(#"lives", var_f8e6b703, # "hash_4f557c87c0538129", var_a56604c5);
-    self match_record::set_stat(#"lives", var_f8e6b703, # "hash_4b4bd85ab964d386", var_c9b1d229);
-    self match_record::set_stat(#"lives", var_f8e6b703, # "hash_63862160f8335af2", var_42b02106);
+    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_4f557c87c0538129", var_a56604c5);
+    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_4b4bd85ab964d386", var_c9b1d229);
+    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_63862160f8335af2", var_42b02106);
   }
 }
 

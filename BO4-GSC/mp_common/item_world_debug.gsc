@@ -14,7 +14,7 @@
 #namespace item_world_debug;
 
 autoexec __init__system__() {
-  system::register(#"item_world_debug", &__init__, undefined, # "item_world");
+  system::register(#"item_world_debug", &__init__, undefined, #"item_world");
 }
 
 __init__() {

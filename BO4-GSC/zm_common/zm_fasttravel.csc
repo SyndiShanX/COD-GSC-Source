@@ -127,7 +127,7 @@ fasttravel_teleport_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
   if(newval) {
     if(!isDefined(self.fasttravel_teleport_sfx)) {
-      self playSound(localclientnum, # "hash_695df080bafaf6b7");
+      self playSound(localclientnum, #"hash_695df080bafaf6b7");
       self.fasttravel_teleport_sfx = self playLoopSound(#"hash_337255a64f96457b");
     }
 
@@ -135,7 +135,7 @@ fasttravel_teleport_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
 
   if(isDefined(self.fasttravel_teleport_sfx)) {
-    self playSound(localclientnum, # "hash_32def2a5219ba9ee");
+    self playSound(localclientnum, #"hash_32def2a5219ba9ee");
     self stoploopsound(self.fasttravel_teleport_sfx);
     self.fasttravel_teleport_sfx = undefined;
   }
@@ -143,7 +143,7 @@ fasttravel_teleport_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
 fasttravel_start_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level endon(#"end_game");
-  self endon(#"bled_out", # "disconnect");
+  self endon(#"bled_out", #"disconnect");
 
   if(self != function_5c10bd79(localclientnum)) {
     if(newval == 1) {
@@ -172,7 +172,7 @@ fasttravel_end_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 play_fasttravel_end_fx(localclientnum, var_b8763ebc = "fasttravel_end") {
   level endon(#"end_game");
-  self endon(#"bled_out", # "disconnect");
+  self endon(#"bled_out", #"disconnect");
 
   if(self != function_5c10bd79(localclientnum)) {
     v_angles = combineangles(self.angles, (-90, 0, 0));
@@ -187,7 +187,7 @@ play_fasttravel_end_fx(localclientnum, var_b8763ebc = "fasttravel_end") {
 fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.sfx_fasttravel)) {
-      self playSound(localclientnum, # "hash_7204b092c976136b");
+      self playSound(localclientnum, #"hash_7204b092c976136b");
       self.sfx_fasttravel = self playLoopSound(#"hash_33b6a998603c309d");
     }
 
@@ -210,7 +210,7 @@ fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval == 2) {
     if(!isDefined(self.sfx_fasttravel)) {
-      self playSound(localclientnum, # "hash_7f171ce50ab41fb8");
+      self playSound(localclientnum, #"hash_7f171ce50ab41fb8");
       self.sfx_fasttravel = self playLoopSound(#"hash_59921813746566c8");
     }
 
@@ -235,7 +235,7 @@ fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval == 0) {
     if(isDefined(self.sfx_fasttravel)) {
-      self playSound(localclientnum, # "hash_588047eba8deb34e");
+      self playSound(localclientnum, #"hash_588047eba8deb34e");
       self stoploopsound(self.sfx_fasttravel);
       self.sfx_fasttravel = undefined;
     }

@@ -16,7 +16,7 @@ class cmp_laststand_client: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "mp_laststand_client");
+    cluielem::open(localclientnum, #"mp_laststand_client");
   }
 
   function function_fa582112(localclientnum) {

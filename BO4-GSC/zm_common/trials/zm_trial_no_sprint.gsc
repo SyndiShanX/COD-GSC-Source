@@ -45,11 +45,11 @@ on_end(round_reset) {
 function_dc856fd8() {
   self notify("374b3a40e7866d07");
   self endon("374b3a40e7866d07");
-  self endon(#"disconnect", # "allow_sprint");
+  self endon(#"disconnect", #"allow_sprint");
   self allowsprint(0);
 
   while(true) {
-    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
+    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
 
     if(isalive(self)) {
       self allowsprint(0);
@@ -58,7 +58,7 @@ function_dc856fd8() {
 }
 
 function_31f500f() {
-  self endon(#"disconnect", # "allow_sprint");
+  self endon(#"disconnect", #"allow_sprint");
 
   while(true) {
     if(isalive(self) && self sprintbuttonpressed()) {

@@ -87,7 +87,7 @@ state_death_update(params) {
 }
 
 function_f358791() {
-  self endon(#"death", # "change_state");
+  self endon(#"death", #"change_state");
   wait 1;
 
   for(;;) {
@@ -359,7 +359,7 @@ reload() {
 }
 
 attackthread() {
-  self endon(#"death", # "change_state", # "end_attack_thread");
+  self endon(#"death", #"change_state", #"end_attack_thread");
 
   while(true) {
     enemy = undefined;
@@ -490,7 +490,7 @@ function_5ebe7443() {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self thread function_5ebe7443();
   self thread attackthread();
 

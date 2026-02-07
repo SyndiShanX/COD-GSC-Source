@@ -64,12 +64,12 @@ function_a346a156(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 1) {
     self playrenderoverridebundle(#"hash_c5c4890c94eb1c7");
-    playSound(localclientnum, # "hash_8fc267f3e184882", self.origin);
+    playSound(localclientnum, #"hash_8fc267f3e184882", self.origin);
     return;
   }
 
   self stoprenderoverridebundle(#"hash_c5c4890c94eb1c7");
-  playSound(localclientnum, # "hash_f5264369f84b89b", self.origin);
+  playSound(localclientnum, #"hash_f5264369f84b89b", self.origin);
 }
 
 function_72efa790(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -129,13 +129,13 @@ function_1d15a456(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_aa8c0343 = playFX(localclientnum, level._effect[# "hash_2699e8762805fbdc"], self.origin, anglesToForward(self.angles));
       audio::playloopat(#"hash_868fc0612e15eaf", self.origin + (0, 0, 50));
       audio::stoploopat(#"hash_3fdf4ea8be67182e", self.origin + (0, 0, 50));
-      playSound(localclientnum, # "hash_c22b771ecbf8bb6", self.origin + (0, 0, 50));
+      playSound(localclientnum, #"hash_c22b771ecbf8bb6", self.origin + (0, 0, 50));
       break;
     case 2:
       self.var_aa8c0343 = playFX(localclientnum, level._effect[# "hash_3665813f5609df50"], self.origin, anglesToForward(self.angles));
       audio::stoploopat(#"hash_868fc0612e15eaf", self.origin + (0, 0, 50));
       audio::playloopat(#"hash_3fdf4ea8be67182e", self.origin + (0, 0, 50));
-      playSound(localclientnum, # "hash_24d107d1b3a13829", self.origin + (0, 0, 50));
+      playSound(localclientnum, #"hash_24d107d1b3a13829", self.origin + (0, 0, 50));
       break;
     case 3:
       self.var_aa8c0343 = playFX(localclientnum, level._effect[# "hash_4cd18caca0e2880b"], self.origin, anglesToForward(self.angles));

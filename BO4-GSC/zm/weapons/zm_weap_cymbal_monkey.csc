@@ -36,7 +36,7 @@ monkey_spawns(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
     if(isDefined(self)) {
       playFX(localclientnum, "maps/zm_white/fx8_monkey_bomb_reveal", self.origin, v_forward, v_up);
-      self playSound(localclientnum, # "hash_21206f1b7fb27f81");
+      self playSound(localclientnum, #"hash_21206f1b7fb27f81");
     }
   }
 }

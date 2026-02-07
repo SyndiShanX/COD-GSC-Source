@@ -8,6 +8,6 @@
 #namespace zm_ai_werewolf_interface;
 
 registerwerewolfinterfaceattributes() {
-  ai::registermatchedinterface(#"werewolf", # "patrol", 0, array(1, 0), &zm_ai_werewolf::function_2341cdf0);
-  ai::registermatchedinterface(#"werewolf", # "summon_wolves", 0, array(1, 0), &zm_ai_werewolf::function_2c67c3e1);
+  ai::registermatchedinterface(#"werewolf", #"patrol", 0, array(1, 0), &zm_ai_werewolf::function_2341cdf0);
+  ai::registermatchedinterface(#"werewolf", #"summon_wolves", 0, array(1, 0), &zm_ai_werewolf::function_2c67c3e1);
 }

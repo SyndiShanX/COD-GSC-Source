@@ -41,7 +41,7 @@ kill_vehicle(attackingplayer, weapon = level.weaponnone) {
 }
 
 on_item_use(params) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
 
   if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != # "dart") {
     return;
@@ -94,7 +94,7 @@ function_1e845317() {
 }
 
 function_bd506c77() {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   remoteweapon = getweapon(#"warzone_remote");
 
   if(self hasweapon(remoteweapon)) {
@@ -102,12 +102,12 @@ function_bd506c77() {
   }
 
   if(self isswitchingweapons()) {
-    self waittilltimeout(2, # "weapon_change");
+    self waittilltimeout(2, #"weapon_change");
   }
 
   self giveweapon(remoteweapon);
   self switchtoweapon(remoteweapon, 1);
-  self waittilltimeout(2, # "weapon_change");
+  self waittilltimeout(2, #"weapon_change");
 }
 
 take_remote() {
@@ -116,7 +116,7 @@ take_remote() {
 }
 
 throw_dart(spawnorigin, spawnangles, itemid) {
-  self endon(#"death", # "disconnect");
+  self endon(#"death", #"disconnect");
   playereyepos = self getplayercamerapos();
   vehicle = spawnvehicle(#"veh_dart_wz", spawnorigin, spawnangles);
 
@@ -228,7 +228,7 @@ watchremotecontroldeactivate() {
   self endon("45eaa61d466e347f");
   dart = self;
   player = self.owner;
-  dart endon(#"death", # "remote_weapon_end");
+  dart endon(#"death", #"remote_weapon_end");
   player endon(#"disconnect");
 
   while(player attackbuttonpressed()) {
@@ -263,7 +263,7 @@ watchownerdisconnect(player) {
   self notify("3e0604a78c24647e");
   self endon("3e0604a78c24647e");
   self endon(#"death");
-  player waittill(#"disconnect", # "death");
+  player waittill(#"disconnect", #"death");
   self makevehicleunusable();
   self kill_vehicle(self);
 }
@@ -271,8 +271,8 @@ watchownerdisconnect(player) {
 function_d13b1540(vehicle) {
   self notify("6f85cb6661241b51");
   self endon("6f85cb6661241b51");
-  self endon(#"death", # "disconnect");
-  vehicle endon(#"death", # "exit_vehicle");
+  self endon(#"death", #"disconnect");
+  vehicle endon(#"death", #"exit_vehicle");
   var_51fede25 = gettime() + 30000;
   self vehicle::set_vehicle_drivable_time_starting_now(30000);
   var_5fa298a1 = var_51fede25 - 10000;

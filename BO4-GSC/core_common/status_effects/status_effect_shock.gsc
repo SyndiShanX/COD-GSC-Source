@@ -53,8 +53,8 @@ shock_end() {
 
 shock_rumble_loop(duration) {
   self notify(#"shock_rumble_loop");
-  self endon(#"shock_rumble_loop", # "endstatuseffect");
-  self.owner endon(#"disconnect", # "death");
+  self endon(#"shock_rumble_loop", #"endstatuseffect");
+  self.owner endon(#"disconnect", #"death");
   goaltime = gettime() + int(duration * 1000);
 
   while(gettime() < goaltime && isDefined(self.owner)) {

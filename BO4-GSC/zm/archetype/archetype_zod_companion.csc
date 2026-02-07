@@ -46,7 +46,7 @@ zodcompanionheadgibfx(localclientnum, entity, gibflag) {
   }
 
   entity.headgibfx = util::playFXOnTag(localclientnum, level._effect[# "fx_dest_robot_head_sparks"], entity, "j_neck");
-  playSound(0, # "prj_bullet_impact_robot_headshot", entity.origin);
+  playSound(0, #"prj_bullet_impact_robot_headshot", entity.origin);
 }
 
 zodcompaniondamagedfx(localclientnum, entity) {
@@ -88,7 +88,7 @@ play_revival_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(newval === 1) {
-    self playSound(0, # "evt_civil_protector_revive_plr");
+    self playSound(0, #"evt_civil_protector_revive_plr");
     self.robot_revival_fx = util::playFXOnTag(localclientnum, level._effect[# "companion_revive_effect"], self, "j_spineupper");
   }
 }

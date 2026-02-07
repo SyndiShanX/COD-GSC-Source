@@ -1657,12 +1657,12 @@ field_toggle_lights_handler(localclientnum, oldval, newval, bnewent, binitialsna
   }
 
   if(newval == 2) {
-    self lights_on(localclientnum, # "allies");
+    self lights_on(localclientnum, #"allies");
     return;
   }
 
   if(newval == 3) {
-    self lights_on(localclientnum, # "axis");
+    self lights_on(localclientnum, #"axis");
     return;
   }
 
@@ -1989,7 +1989,7 @@ function_9facca21(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 play_flare_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_26fb93b4 = util::playFXOnTag(localclientnum, # "hash_3905863dd0908e4a", self, "tag_origin");
+    self.var_26fb93b4 = util::playFXOnTag(localclientnum, #"hash_3905863dd0908e4a", self, "tag_origin");
   }
 
   if(newval == 0) {
@@ -2002,7 +2002,7 @@ play_flare_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
 play_flare_hit_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_b4178826 = util::playFXOnTag(localclientnum, # "hash_1e747bdc27127b91", self, "tag_origin");
+    self.var_b4178826 = util::playFXOnTag(localclientnum, #"hash_1e747bdc27127b91", self, "tag_origin");
   }
 
   if(newval == 0) {

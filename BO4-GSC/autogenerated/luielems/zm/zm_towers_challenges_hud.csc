@@ -34,14 +34,14 @@ class czm_towers_challenges_hud: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "zm_towers_challenges_hud");
+    cluielem::open(localclientnum, #"zm_towers_challenges_hud");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, # "defaultstate");
+    set_state(localclientnum, #"defaultstate");
     set_data(localclientnum, "progress", 0);
-    set_data(localclientnum, "challenge_text", # "");
+    set_data(localclientnum, "challenge_text", #"");
     set_data(localclientnum, "required_goal", 0);
   }
 

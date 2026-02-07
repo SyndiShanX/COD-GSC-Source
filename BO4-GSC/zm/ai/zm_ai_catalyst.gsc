@@ -81,8 +81,8 @@ __init__() {
   clientfield::register("actor", "water_catalyst_purified", 1, 1, "int");
   clientfield::register("actor", "electricity_catalyst_blast", 1, 1, "int");
   clientfield::register("actor", "plasma_catalyst_blast", 1, 1, "int");
-  level thread aat::register_immunity("zm_aat_brain_decay", # "catalyst", 1, 1, 0);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", # "catalyst", 1, 1, 0);
+  level thread aat::register_immunity("zm_aat_brain_decay", #"catalyst", 1, 1, 0);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", #"catalyst", 1, 1, 0);
   zm_spawner::register_zombie_death_event_callback(&killed_callback);
   zm_round_spawning::register_archetype(#"catalyst", &function_55f82550, &round_spawn, undefined, 25);
   zm_round_spawning::function_306ce518(#"catalyst", &function_587a3171);
@@ -137,10 +137,10 @@ function_52ce9654() {
 }
 
 registertransformations() {
-  zm_transform::function_cfca77a7(function_bbb2bab5(1), # "catalyst_corrosive", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_corrosive_spawn_pre_split", "aib_vign_zm_zod_catalyst_corrosive_spawn_post_split");
-  zm_transform::function_cfca77a7(function_bbb2bab5(3), # "catalyst_electric", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_electric_spawn_pre_split", "aib_vign_zm_zod_catalyst_electric_spawn_post_split");
-  zm_transform::function_cfca77a7(function_bbb2bab5(2), # "catalyst_plasma", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split");
-  zm_transform::function_cfca77a7(function_bbb2bab5(4), # "catalyst_water", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_water_spawn_pre_split", "aib_vign_zm_zod_catalyst_water_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(1), #"catalyst_corrosive", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_corrosive_spawn_pre_split", "aib_vign_zm_zod_catalyst_corrosive_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(3), #"catalyst_electric", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_electric_spawn_pre_split", "aib_vign_zm_zod_catalyst_electric_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(2), #"catalyst_plasma", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(4), #"catalyst_water", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_water_spawn_pre_split", "aib_vign_zm_zod_catalyst_water_spawn_post_split");
 }
 
 registerbehaviorscriptfunctions() {
@@ -442,7 +442,7 @@ function_e13aa91c() {
   self notify("734b0571937e2a76");
   self endon("734b0571937e2a76");
   self endon(#"death");
-  self endoncallback(&function_d4953883, # "hash_11d4cfae418fcfe1");
+  self endoncallback(&function_d4953883, #"hash_11d4cfae418fcfe1");
   self clientfield::set("corrosive_miasma_clientfield", 1);
   var_7a79774b = getstatuseffect("dot_corrosive_catalyst");
 
@@ -452,7 +452,7 @@ function_e13aa91c() {
     foreach(player in level.players) {
       if(isalive(player) && !(isDefined(player.var_a0a1475c) && player.var_a0a1475c) && !player scene::is_igc_active() && distancesquared(player.origin, self.origin) <= self ai::function_9139c839().var_f3af70e6 * self ai::function_9139c839().var_f3af70e6 && (abs(player.origin[2] - trigger_midpoint[2]) <= self ai::function_9139c839().var_2a523c14 / 2 || abs(player getEye()[2] - trigger_midpoint[2]) <= self ai::function_9139c839().var_2a523c14 / 2)) {
         player status_effect::status_effect_apply(var_7a79774b, undefined, self, 0);
-        player thread zm_audio::create_and_play_dialog(#"catalyst_decay_gas", # "react");
+        player thread zm_audio::create_and_play_dialog(#"catalyst_decay_gas", #"react");
       }
     }
 
@@ -546,7 +546,7 @@ function_21cbb589(behaviortreeentity, asmstatename) {
 }
 
 function_d697a1e3() {
-  self endon(#"hash_321b8431208f19bd", # "death");
+  self endon(#"hash_321b8431208f19bd", #"death");
   self clientfield::set("electricity_catalyst_blast", 1);
   wait self ai::function_9139c839().var_ce7e1def;
 
@@ -593,7 +593,7 @@ function_6c92ebda(behaviortreeentity, asmstatename) {
 }
 
 function_e137506e(electriccatalyst) {
-  self endon(#"death", # "disconnect", # "hash_7283e5f17e4fa10a");
+  self endon(#"death", #"disconnect", #"hash_7283e5f17e4fa10a");
   electriccatalyst waittill(#"death");
   self notify(#"killed_electric_catalyst");
 }
@@ -618,11 +618,11 @@ function_e7a0424c(behaviortreeentity) {
   self.var_6b8f84c7 = behaviortreeentity;
   var_116cfaae = behaviortreeentity ai::function_9139c839().var_10a535a6;
   var_a7594ae8 = behaviortreeentity ai::function_9139c839().var_ea39f524;
-  self endoncallback(&function_73961a38, # "death", # "disconnect", # "killed_electric_catalyst", # "hash_11d4cfae418fcfe1");
+  self endoncallback(&function_73961a38, #"death", #"disconnect", #"killed_electric_catalyst", #"hash_11d4cfae418fcfe1");
   self thread function_e137506e(self.var_6b8f84c7);
   blind_status_effect = getstatuseffect("blind_zm_catalyst");
   self status_effect::status_effect_apply(blind_status_effect, undefined, self.var_6b8f84c7, 0, var_116cfaae);
-  self util::delay(1.3, undefined, &zm_audio::create_and_play_dialog, # "catalyst_radiant_scream", # "react");
+  self util::delay(1.3, undefined, &zm_audio::create_and_play_dialog, #"catalyst_radiant_scream", #"react");
   wait float(var_116cfaae) / 1000;
 
   if(self status_effect::function_4617032e(blind_status_effect.setype)) {
@@ -766,7 +766,7 @@ function_3b07d86e() {
       player dodamage(var_2ffdfebc, v_blast_origin, self, self, "none", "MOD_EXPLOSIVE");
       var_6826a387 = getstatuseffect(#"hash_528115ad9eebc84f");
       player status_effect::status_effect_apply(var_6826a387, undefined, self, 0, undefined, undefined, v_blast_origin);
-      player thread zm_audio::create_and_play_dialog(#"catalyst_plasma_detonation", # "react");
+      player thread zm_audio::create_and_play_dialog(#"catalyst_plasma_detonation", #"react");
     }
 
     level thread function_49248f23(v_blast_origin, var_84dd3dd);

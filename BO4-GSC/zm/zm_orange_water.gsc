@@ -202,8 +202,8 @@ function_99ca73e1() {
 function_ea0c7ed8() {
   self notify("4c2bcc084cb1ca9b");
   self endon("4c2bcc084cb1ca9b");
-  level endon(#"end_game", # "freeze_mode");
-  self endon(#"death", # "player_frozen");
+  level endon(#"end_game", #"freeze_mode");
+  self endon(#"death", #"player_frozen");
 
   while(true) {
     foreach(e_water in level.a_e_water) {
@@ -219,7 +219,7 @@ function_ea0c7ed8() {
 
 function_b52931e7() {
   level endon(#"end_game");
-  self endon(#"death", # "player_frozen");
+  self endon(#"death", #"player_frozen");
   self.b_in_water = 1;
   self notify(#"hash_42fcb8fa7aec0734");
 
@@ -251,14 +251,14 @@ function_b52931e7() {
 }
 
 function_26a271e6() {
-  self endon(#"death", # "hash_668824b34b3076bc");
+  self endon(#"death", #"hash_668824b34b3076bc");
   wait 5;
-  self thread zm_audio::create_and_play_dialog(#"freeze", # "exert");
+  self thread zm_audio::create_and_play_dialog(#"freeze", #"exert");
 }
 
 function_4ab00cab() {
   level endon(#"end_game");
-  self endon(#"death", # "player_frozen");
+  self endon(#"death", #"player_frozen");
 
   while(true) {
     wait 0.1;
@@ -274,7 +274,7 @@ function_4ab00cab() {
 
 function_6cf1cc01() {
   level endon(#"end_game");
-  self endon(#"death", # "player_frozen");
+  self endon(#"death", #"player_frozen");
   self.b_in_water = 0;
   self notify(#"hash_668824b34b3076bc");
 
@@ -290,7 +290,7 @@ function_6cf1cc01() {
 
 function_6577cacc() {
   level endon(#"end_game");
-  self endon(#"death", # "hash_668824b34b3076bc");
+  self endon(#"death", #"hash_668824b34b3076bc");
 
   if(!isDefined(self.var_36a93d1)) {
     self.var_36a93d1 = 0;
@@ -307,7 +307,7 @@ function_6577cacc() {
     }
 
     if(self.var_36a93d1 >= int(var_24e0e73d * 0.5)) {
-      self thread zm_audio::create_and_play_dialog(#"freeze", # "start");
+      self thread zm_audio::create_and_play_dialog(#"freeze", #"start");
     }
 
     if(self.var_36a93d1 >= var_24e0e73d) {
@@ -317,7 +317,7 @@ function_6577cacc() {
         self thread function_34e1762b();
       } else {
         self thread water_player_freeze();
-        self thread zm_audio::create_and_play_dialog(#"freeze", # "frozen");
+        self thread zm_audio::create_and_play_dialog(#"freeze", #"frozen");
       }
 
       self.var_36a93d1 = 0;
@@ -328,7 +328,7 @@ function_6577cacc() {
 
 function_121f8a53() {
   level endon(#"end_game");
-  self endon(#"death", # "hash_668824b34b3076bc");
+  self endon(#"death", #"hash_668824b34b3076bc");
 
   while(true) {
     self dodamage(20, self.origin);
@@ -338,7 +338,7 @@ function_121f8a53() {
 
 function_d2dd1f2b() {
   level endon(#"end_game");
-  self endon(#"death", # "hash_42fcb8fa7aec0734");
+  self endon(#"death", #"hash_42fcb8fa7aec0734");
 
   if(!isDefined(self.var_36a93d1) || self.var_36a93d1 == 0) {
     return;
@@ -356,7 +356,7 @@ function_d2dd1f2b() {
 }
 
 water_player_freeze() {
-  self endoncallback(&function_c64292f, # "death");
+  self endoncallback(&function_c64292f, #"death");
   self.var_7dc2d507 = 1;
   self notify(#"player_frozen");
   self zm_orange_ee_freeze_mode::function_3931c78();
@@ -412,7 +412,7 @@ function_c64292f(str_notify) {
 }
 
 function_bad6907c() {
-  self endoncallback(&function_26234f4c, # "disconnect");
+  self endoncallback(&function_26234f4c, #"disconnect");
 
   if(self isusingoffhand()) {
     self forceoffhandend();
@@ -483,7 +483,7 @@ function_67981637() {
 }
 
 function_46c3bbf7() {
-  self endoncallback(&function_26234f4c, # "disconnect");
+  self endoncallback(&function_26234f4c, #"disconnect");
 
   if(zm_utility::is_trials()) {
     self zm_orange_trials::function_b4bd25ef();
@@ -523,7 +523,7 @@ function_26234f4c(str_notify) {
 }
 
 function_872ec0b2(t_ice) {
-  self endon(#"death", # "hash_53bfad7081c69dee");
+  self endon(#"death", #"hash_53bfad7081c69dee");
 
   while(true) {
     s_notify = t_ice waittill(#"damage");
@@ -537,32 +537,32 @@ function_872ec0b2(t_ice) {
 }
 
 function_6cadbaff() {
-  self endon(#"death", # "hash_53bfad7081c69dee");
+  self endon(#"death", #"hash_53bfad7081c69dee");
 
   if(level flag::get(#"break_freeze_faster")) {
-    self waittill(#"weapon_melee", # "weapon_melee_power");
+    self waittill(#"weapon_melee", #"weapon_melee_power");
     self playrumbleonentity("damage_heavy");
     self clientfield::set_to_player("" + # "hash_67340426cd141891", 0);
     self notify(#"hash_53bfad7081c69dee");
     return;
   }
 
-  self waittill(#"weapon_melee", # "weapon_melee_power");
+  self waittill(#"weapon_melee", #"weapon_melee_power");
   self playrumbleonentity("damage_light");
   self clientfield::set_to_player("" + # "hash_67340426cd141891", 2);
   self playSound(#"hash_1a3cd046cb0b437f");
-  self waittill(#"weapon_melee", # "weapon_melee_power");
+  self waittill(#"weapon_melee", #"weapon_melee_power");
   self playrumbleonentity("damage_light");
   self clientfield::set_to_player("" + # "hash_67340426cd141891", 1);
   self playSound(#"hash_1a3cd146cb0b4532");
-  self waittill(#"weapon_melee", # "weapon_melee_power");
+  self waittill(#"weapon_melee", #"weapon_melee_power");
   self playrumbleonentity("damage_heavy");
   self clientfield::set_to_player("" + # "hash_67340426cd141891", 0);
   self notify(#"hash_53bfad7081c69dee");
 }
 
 function_8eb7b0f7() {
-  self endon(#"death", # "hash_53bfad7081c69dee");
+  self endon(#"death", #"hash_53bfad7081c69dee");
 
   if(level flag::get(#"break_freeze_faster")) {
     wait 3;
@@ -598,7 +598,7 @@ function_e8485ac0() {
 }
 
 function_34e1762b() {
-  self endoncallback(&function_f0339fd, # "death");
+  self endoncallback(&function_f0339fd, #"death");
   self.var_7dc2d507 = 1;
   self notify(#"player_frozen");
   self function_e22d95bc();
@@ -644,7 +644,7 @@ function_f0339fd(str_notify) {
 }
 
 function_e22d95bc() {
-  self endoncallback(&function_26234f4c, # "disconnect");
+  self endoncallback(&function_26234f4c, #"disconnect");
   self val::set(#"fasttravel", "freezecontrols", 1);
   self val::set(#"fasttravel", "ignoreme", 1);
 
@@ -668,7 +668,7 @@ function_e22d95bc() {
 }
 
 function_d793c8ff() {
-  self endoncallback(&function_d92c3acf, # "disconnect");
+  self endoncallback(&function_d92c3acf, #"disconnect");
   self val::set(#"fasttravel", "freezecontrols", 0);
   self val::set(#"fasttravel", "takedamage", 1);
   self val::set(#"fasttravel", "ignoreme", 0);

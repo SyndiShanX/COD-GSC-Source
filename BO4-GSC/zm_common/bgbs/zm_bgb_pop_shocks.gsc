@@ -15,7 +15,7 @@
 #namespace zm_bgb_pop_shocks;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_pop_shocks", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_pop_shocks", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -30,7 +30,7 @@ __init__() {
 }
 
 event() {
-  self endon(#"disconnect", # "death", # "bgb_update");
+  self endon(#"disconnect", #"death", #"bgb_update");
   self.var_727695ba = 5;
 
   while(self.var_727695ba > 0) {
@@ -137,8 +137,8 @@ tesla_death(player) {
 
   foreach(weapon in player getweaponslist()) {
     if(weapon.statname == # "bowie_knife") {
-      player stats::function_e24eec31(weapon, # "hash_657e22dcdd18da77", 1);
-      player stats::inc_stat(#"item_stats", weapon.name, # "hash_657e22dcdd18da77", # "statvalue", 1);
+      player stats::function_e24eec31(weapon, #"hash_657e22dcdd18da77", 1);
+      player stats::inc_stat(#"item_stats", weapon.name, #"hash_657e22dcdd18da77", #"statvalue", 1);
     }
   }
 

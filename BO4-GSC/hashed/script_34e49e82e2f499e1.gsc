@@ -156,8 +156,8 @@ function_34f4460b(player) {
   }
 
   level endon(#"game_ended");
-  self endon(#"stationary", # "death");
-  player endon(#"disconnect", # "death");
+  self endon(#"stationary", #"death");
+  player endon(#"disconnect", #"death");
   var_3df14205 = getEntArray("trigger_buried_dartboard_bullseye", "targetname");
 
   if(!isDefined(var_3df14205)) {

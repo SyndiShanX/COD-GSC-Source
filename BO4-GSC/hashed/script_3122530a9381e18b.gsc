@@ -250,7 +250,7 @@ start_step_3() {
 }
 
 function_195e54c() {
-  self endon(#"death", # "stop_think");
+  self endon(#"death", #"stop_think");
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");

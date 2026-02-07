@@ -86,7 +86,7 @@ function_d7cf7d18(location, killstreak_id) {
 }
 
 watchforkillstreakend(team, influencer, killstreak_id) {
-  self waittill(#"disconnect", # "joined_team", # "joined_spectators", # "hash_6a70219902316c7e", # "emp_jammed");
+  self waittill(#"disconnect", #"joined_team", #"joined_spectators", #"hash_6a70219902316c7e", #"emp_jammed");
   killstreakrules::killstreakstop("artillery_barrage", team, killstreak_id);
 }
 
@@ -96,7 +96,7 @@ getplaneflyheight(bundle) {
 
 function_496d0824(sweep_start, var_e8456387, team, killstreak_id) {
   owner = self;
-  owner endon(#"emp_jammed", # "joined_team", # "joined_spectators", # "disconnect");
+  owner endon(#"emp_jammed", #"joined_team", #"joined_spectators", #"disconnect");
   bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
   var_6c36c4dd = bundle.var_e077ecb;
   var_9bed4193 = bundle.var_32e69cad;
@@ -383,7 +383,7 @@ function_8c164ce0(path) {
 
 function function_598dc586(plane, position, yaw, team, killstreak_id, fly_height) {
   owner = self;
-  owner endon(#"emp_jammed", # "joined_team", # "joined_spectators", # "disconnect");
+  owner endon(#"emp_jammed", #"joined_team", #"joined_spectators", #"disconnect");
   bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
   var_37bb8781 = (0, yaw, 0);
   var_c6aa53c = anglesToForward(var_37bb8781);
@@ -487,7 +487,7 @@ function_5a0d2864(startpoint, endpoint, targetpoint, angles, team, killstreak_id
   shell killstreaks::configure_team("artillery_barrage", killstreak_id, self);
   shell killstreak_hacking::enable_hacking("artillery_barrage");
   target_set(shell);
-  shell endon(#"delete", # "death");
+  shell endon(#"delete", #"death");
   shell.angles = angles;
   shell setModel(bundle.dronemodel);
   shell setenemymodel(bundle.var_152e037f);
@@ -571,7 +571,7 @@ function_8ebde515(attacker, weapon) {
 watchownerevents(bomb) {
   player = self;
   bomb endon(#"death");
-  player waittill(#"disconnect", # "joined_team", # "joined_spectators");
+  player waittill(#"disconnect", #"joined_team", #"joined_spectators");
 
   if(isDefined(isalive(bomb))) {
     bomb delete();
@@ -579,7 +579,7 @@ watchownerevents(bomb) {
 }
 
 watchforemp(owner) {
-  self endon(#"delete", # "death");
+  self endon(#"delete", #"death");
   waitresult = self waittill(#"emp_deployed");
   function_9b3c6309(waitresult.attacker);
 }
@@ -623,7 +623,7 @@ function_cc147a03(attacker, weapon) {
   if(isDefined(attacker) && (!isDefined(plane.owner) || plane.owner util::isenemyplayer(attacker))) {
     challenges::destroyedaircraft(attacker, weapon, 0);
     attacker challenges::addflyswatterstat(weapon, self);
-    luinotifyevent(#"player_callout", 2, # "hash_5d32f6a46883ef3c", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, #"hash_5d32f6a46883ef3c", attacker.entnum);
     plane notify(#"hash_1fe75f940ce5fd52", {
       #is_killed: 1
     });
@@ -721,7 +721,7 @@ watchownerdisconnect(owner) {
   self endon("25895df09879ecfc");
   plane = self;
   plane endon(#"hash_1fe75f940ce5fd52");
-  owner waittill(#"joined_team", # "disconnect", # "joined_spectators");
+  owner waittill(#"joined_team", #"disconnect", #"joined_spectators");
   plane notify(#"hash_1fe75f940ce5fd52", {
     #is_killed: 0
   });
@@ -729,7 +729,7 @@ watchownerdisconnect(owner) {
 
 watchgameended() {
   plane = self;
-  plane endon(#"hash_1fe75f940ce5fd52", # "death");
+  plane endon(#"hash_1fe75f940ce5fd52", #"death");
   level waittill(#"game_ended");
   plane notify(#"hash_1fe75f940ce5fd52", {
     #is_killed: 0

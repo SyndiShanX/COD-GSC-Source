@@ -462,7 +462,7 @@ playscriptedmeleeanimations() {
   self thread processinterrupteddeath();
   opponent thread processinterrupteddeath();
   self waittillmatch({
-    #notetrack: "end"}, # "aivsaimeleewinner");
+    #notetrack: "end"}, #"aivsaimeleewinner");
   self.fixedlinkyawonly = 0;
   aiutility::cleanupchargemeleeattack(self);
 
@@ -571,7 +571,7 @@ debug_chosenmeleeanimations(behaviortreeentity) {
 }
 
 handledeath(animationname, attacker) {
-  self endon(#"death", # "interrupteddeath");
+  self endon(#"death", #"interrupteddeath");
   self.skipdeath = 1;
   self.diedinscriptedanim = 1;
   totaltime = getanimlength(animationname);

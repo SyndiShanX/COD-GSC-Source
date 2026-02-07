@@ -41,7 +41,7 @@ function_9e8baed0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_f72f97af(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self endoncallback(&function_f8f90b83, # "disconnect");
+  self endoncallback(&function_f8f90b83, #"disconnect");
 
   if(!isDefined(level.var_a8f38afe)) {
     level.var_a8f38afe = [];

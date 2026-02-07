@@ -263,17 +263,17 @@ player_stats_init() {
   }
 
   if(getdvarint(#"hash_27ff853067d7c38c", 0)) {
-    var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b");
+    var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b");
     var_8962d9b1 = isDefined(level.var_d479261a) ? level.var_d479261a : 0;
-    self stats::set_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b", var_8962d9b1);
-    previousutc = self stats::get_stat(#"hash_18e3320ccf4091e5", # "calling_timestamp");
+    self stats::set_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b", var_8962d9b1);
+    previousutc = self stats::get_stat(#"hash_18e3320ccf4091e5", #"calling_timestamp");
     currentutc = getutc();
     var_222b02a1 = currentutc - previousutc;
     var_ee21b34b = 86400;
 
     if(var_87b499fb !== var_8962d9b1 || previousutc == 0 || var_222b02a1 > var_ee21b34b) {
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "progress", 0);
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "calling_timestamp", currentutc);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", 0);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"calling_timestamp", currentutc);
     }
   }
 
@@ -466,7 +466,7 @@ survival_classic_custom_stat_update() {}
 grief_custom_stat_update() {}
 
 get_global_stat(stat_name) {
-  return self stats::get_stat(#"playerstatslist", stat_name, # "statvalue");
+  return self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
 }
 
 set_global_stat(stat_name, value) {
@@ -474,9 +474,9 @@ set_global_stat(stat_name, value) {
     return;
   }
 
-  self stats::set_stat(#"playerstatslist", stat_name, # "statvalue", value);
+  self stats::set_stat(#"playerstatslist", stat_name, #"statvalue", value);
 
-  var_ba1fb8c1 = self stats::get_stat(#"playerstatslist", stat_name, # "statvalue");
+  var_ba1fb8c1 = self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
   println("<dev string:x38>" + self.entity_num + "<dev string:x42>" + stat_name + "<dev string:x46>" + var_ba1fb8c1);
 }
 
@@ -485,7 +485,7 @@ add_global_stat(stat_name, value) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatslist", stat_name, # "statvalue", value);
+  self stats::inc_stat(#"playerstatslist", stat_name, #"statvalue", value);
 }
 
 increment_global_stat(stat_name) {
@@ -493,7 +493,7 @@ increment_global_stat(stat_name) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatslist", stat_name, # "statvalue", 1);
+  self stats::inc_stat(#"playerstatslist", stat_name, #"statvalue", 1);
 }
 
 highwater_global_stat(stat_name, value) {
@@ -503,7 +503,7 @@ highwater_global_stat(stat_name, value) {
 }
 
 get_client_stat(stat_name) {
-  return self stats::get_stat(#"playerstatslist", stat_name, # "statvalue");
+  return self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
 }
 
 add_client_stat(stat_name, stat_value, include_gametype) {
@@ -564,7 +564,7 @@ zero_client_stat(stat_name, include_gametype) {
 }
 
 get_map_stat(stat_name) {
-  return self stats::get_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue");
+  return self stats::get_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue");
 }
 
 set_map_stat(stat_name, value) {
@@ -572,7 +572,7 @@ set_map_stat(stat_name, value) {
     return;
   }
 
-  self stats::set_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue", value);
+  self stats::set_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue", value);
 }
 
 add_map_stat(stat_name, value) {
@@ -580,7 +580,7 @@ add_map_stat(stat_name, value) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue", value);
+  self stats::inc_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue", value);
 }
 
 increment_map_stat(stat_name) {
@@ -588,7 +588,7 @@ increment_map_stat(stat_name) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatsbymap", level.script, # "stats", stat_name, # "statvalue", 1);
+  self stats::inc_stat(#"playerstatsbymap", level.script, #"stats", stat_name, #"statvalue", 1);
 }
 
 highwater_map_stat(stat_name, value) {
@@ -602,7 +602,7 @@ increment_map_cheat_stat(stat_name) {
     return;
   }
 
-  self stats::inc_stat(#"playerstatsbymap", level.script, # "cheats", stat_name, 1);
+  self stats::inc_stat(#"playerstatsbymap", level.script, #"cheats", stat_name, 1);
 }
 
 function_56ec2437(stat_name) {
@@ -610,7 +610,7 @@ function_56ec2437(stat_name) {
     return 0;
   }
 
-  return stats::get_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue");
+  return stats::get_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue");
 }
 
 function_4d4e2a78(stat_name, value) {
@@ -618,7 +618,7 @@ function_4d4e2a78(stat_name, value) {
     return;
   }
 
-  stats::set_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue", value);
+  stats::set_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue", value);
 }
 
 function_ab006044(stat_name, value) {
@@ -626,7 +626,7 @@ function_ab006044(stat_name, value) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue", value);
+  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue", value);
 }
 
 function_7bc347f6(stat_name) {
@@ -634,7 +634,7 @@ function_7bc347f6(stat_name) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, # "statvalue", 1);
+  stats::inc_stat(#"playerstatsbygametype", level.gametype, stat_name, #"statvalue", 1);
 }
 
 function_d4e0d242(stat_name, value) {
@@ -648,7 +648,7 @@ function_b1520544(stat_name) {
     return 0;
   }
 
-  return stats::get_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue");
+  return stats::get_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue");
 }
 
 function_49469f35(stat_name, value) {
@@ -656,7 +656,7 @@ function_49469f35(stat_name, value) {
     return;
   }
 
-  stats::set_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue", value);
+  stats::set_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue", value);
 }
 
 function_a6efb963(stat_name, value) {
@@ -664,7 +664,7 @@ function_a6efb963(stat_name, value) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue", value);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue", value);
 }
 
 function_f1a1191d(stat_name) {
@@ -672,7 +672,7 @@ function_f1a1191d(stat_name) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "stats", stat_name, # "statvalue", 1);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"stats", stat_name, #"statvalue", 1);
 }
 
 function_1b763e4(stat_name, value) {
@@ -700,7 +700,7 @@ function_523fee8d(stat_name) {
     return 0;
   }
 
-  return stats::get_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue");
+  return stats::get_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue");
 }
 
 function_7866854a(stat_name, value) {
@@ -708,7 +708,7 @@ function_7866854a(stat_name, value) {
     return;
   }
 
-  stats::set_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue", value);
+  stats::set_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue", value);
 }
 
 function_9288c79b(stat_name, value) {
@@ -716,7 +716,7 @@ function_9288c79b(stat_name, value) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue", value);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue", value);
 }
 
 function_2726a7c2(stat_name) {
@@ -724,7 +724,7 @@ function_2726a7c2(stat_name) {
     return;
   }
 
-  stats::inc_stat(#"playerstatsbymap", level.script, # "statsbygametype", level.gametype, # "hash_413b4abc26595b34", level.gamedifficulty, # "stats", stat_name, # "statvalue", 1);
+  stats::inc_stat(#"playerstatsbymap", level.script, #"statsbygametype", level.gametype, #"hash_413b4abc26595b34", level.gamedifficulty, #"stats", stat_name, #"statvalue", 1);
 }
 
 function_e8bfebb(stat_name, value) {
@@ -1099,7 +1099,7 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
     }
 
     if(isDefined(einflictor) && isDefined(einflictor.turret) && isDefined(einflictor.turret.item)) {
-      eattacker stats::function_e24eec31(einflictor.turret.item, # "kills", 1);
+      eattacker stats::function_e24eec31(einflictor.turret.item, #"kills", 1);
     }
   }
 }
@@ -1403,7 +1403,7 @@ update_global_counters_on_match_end() {
 }
 
 get_specific_stat(stat_category, stat_name) {
-  return self stats::get_stat(stat_category, stat_name, # "statvalue");
+  return self stats::get_stat(stat_category, stat_name, #"statvalue");
 }
 
 initializematchstats() {
@@ -1411,7 +1411,7 @@ initializematchstats() {
     return;
   }
 
-  self.pers[# "lasthighestscore"] = self stats::get_stat(#"higheststats", # "highest_score");
+  self.pers[# "lasthighestscore"] = self stats::get_stat(#"higheststats", #"highest_score");
   currgametype = level.gametype;
   self gamehistorystartmatch(getgametypeenumfromname(currgametype, 0));
 }
@@ -1455,11 +1455,11 @@ function_b14863c1() {
 
 function_cb8a5c29() {
   while(true) {
-    s_result = level waittilltimeout(60, # "hash_3fdaafe712252cf5", # "trap_kill");
+    s_result = level waittilltimeout(60, #"hash_3fdaafe712252cf5", #"trap_kill");
 
     if(s_result._notify == "timeout") {
       level.var_b8cbd9e6 = 1;
-      level waittill(#"hash_3fdaafe712252cf5", # "trap_kill");
+      level waittill(#"hash_3fdaafe712252cf5", #"trap_kill");
       level.var_b8cbd9e6 = undefined;
     }
   }
@@ -1467,7 +1467,7 @@ function_cb8a5c29() {
 
 function_c5f9ea85() {
   level notify(#"hash_e3b3a7b31bbf19e");
-  level endon(#"hash_e3b3a7b31bbf19e", # "end_game");
+  level endon(#"hash_e3b3a7b31bbf19e", #"end_game");
 
   foreach(player in level.players) {
     player.var_78c18942 = 0;
@@ -1591,12 +1591,12 @@ function_c0c6ab19(var_ad971622, n_value = 1, var_b68b08b1 = 0) {
         function_e8c496dd(var_a4aebab9);
       }
 
-      var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b");
+      var_87b499fb = self stats::get_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b");
       var_8962d9b1 = isDefined(level.var_d479261a) ? level.var_d479261a : 0;
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "hash_487f0fce798b3a4b", var_8962d9b1);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"hash_487f0fce798b3a4b", var_8962d9b1);
 
       if(var_87b499fb !== var_8962d9b1) {
-        self stats::set_stat(#"hash_18e3320ccf4091e5", # "progress", 0);
+        self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", 0);
       }
     }
 
@@ -1621,13 +1621,13 @@ function_3e561f63() {
 }
 
 function_7f377150(s_event_calling_task, n_value = 1) {
-  var_e4edaaf0 = self stats::get_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "progress");
+  var_e4edaaf0 = self stats::get_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress");
 
   if(var_e4edaaf0 < s_event_calling_task.var_e226ec4f) {
     if(var_e4edaaf0 + n_value >= s_event_calling_task.var_e226ec4f) {
       self luinotifyevent(#"zombie_callings_notification", 4, 0, level.var_1aa5a6d6, self function_3e561f63(), self getentitynumber());
-      self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "progress", 0);
-      self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "tiercompleted", 1);
+      self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress", 0);
+      self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"tiercompleted", 1);
       self addrankxpvalue("event_calling_task", s_event_calling_task.n_xp);
       self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, s_event_calling_task.var_1f2bdb95, 1);
       uploadstats(self);
@@ -1639,7 +1639,7 @@ function_7f377150(s_event_calling_task, n_value = 1) {
     target = s_event_calling_task.var_e226ec4f;
     iprintln(self.name + "<dev string:x1a7>" + function_9e72a96(s_event_calling_task.var_ad971622) + "<dev string:x1c0>" + progress + "<dev string:x1d2>" + target);
 
-    self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, # "progress", n_value);
+    self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress", n_value);
   }
 }
 
@@ -1671,11 +1671,11 @@ function_e8c496dd(var_d479261a) {
 }
 
 function_55109709(s_daily_calling_task, n_value = 1) {
-  var_e4edaaf0 = self stats::get_stat(#"hash_18e3320ccf4091e5", # "progress");
+  var_e4edaaf0 = self stats::get_stat(#"hash_18e3320ccf4091e5", #"progress");
 
   if(isDefined(var_e4edaaf0) && isDefined(s_daily_calling_task) && isDefined(s_daily_calling_task.var_e226ec4f) && var_e4edaaf0 < s_daily_calling_task.var_e226ec4f) {
     if(var_e4edaaf0 + n_value >= s_daily_calling_task.var_e226ec4f) {
-      self stats::set_stat(#"hash_18e3320ccf4091e5", # "progress", s_daily_calling_task.var_e226ec4f);
+      self stats::set_stat(#"hash_18e3320ccf4091e5", #"progress", s_daily_calling_task.var_e226ec4f);
       self luinotifyevent(#"zombie_callings_notification", 3, 1, s_daily_calling_task.var_de86e878, self getentitynumber());
       self addrankxpvalue("daily_calling_task", s_daily_calling_task.n_xp);
       var_ae857992 = getdvarint(#"hash_60d812bef0f782fb", 2);
@@ -1693,6 +1693,6 @@ function_55109709(s_daily_calling_task, n_value = 1) {
     target = s_daily_calling_task.var_e226ec4f;
     iprintln(self.name + "<dev string:x1f2>" + function_9e72a96(s_daily_calling_task.var_ad971622) + "<dev string:x1c0>" + progress + "<dev string:x1d2>" + target);
 
-    self stats::inc_stat(#"hash_18e3320ccf4091e5", # "progress", n_value);
+    self stats::inc_stat(#"hash_18e3320ccf4091e5", #"progress", n_value);
   }
 }

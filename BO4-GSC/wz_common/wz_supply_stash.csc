@@ -97,7 +97,7 @@ function_fd3f6235(localclientnum) {
 update_fx(localclientnum, playfx, state) {
   if(playfx && state == 0) {
     if(!isDefined(self.var_d3d42148)) {
-      self.var_d3d42148 = playFX(localclientnum, # "hash_6bcc939010112ea", self.origin);
+      self.var_d3d42148 = playFX(localclientnum, #"hash_6bcc939010112ea", self.origin);
     }
 
     return;

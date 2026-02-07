@@ -11,7 +11,7 @@
 #namespace zm_bgb_in_plain_sight;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_in_plain_sight", &__init__, undefined, # "bgb");
+  system::register(#"zm_bgb_in_plain_sight", &__init__, undefined, #"bgb");
 }
 
 __init__() {
@@ -29,7 +29,7 @@ function_8b05d1ce(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread postfx::playpostfxbundle(#"hash_1e8cc5b28385a579");
 
     if(!isDefined(self.var_6fc0e881)) {
-      self playSound(localclientnum, # "hash_766f7e280a750ba8");
+      self playSound(localclientnum, #"hash_766f7e280a750ba8");
       self.var_6fc0e881 = self playLoopSound(#"hash_38ea108cd6442868");
     }
 
@@ -39,7 +39,7 @@ function_8b05d1ce(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self postfx::stoppostfxbundle(#"hash_1e8cc5b28385a579");
 
   if(isDefined(self.var_6fc0e881)) {
-    self playSound(localclientnum, # "hash_5d65ef28d3f9dc1d");
+    self playSound(localclientnum, #"hash_5d65ef28d3f9dc1d");
     self stoploopsound(self.var_6fc0e881);
   }
 }

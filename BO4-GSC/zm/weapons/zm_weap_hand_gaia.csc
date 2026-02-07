@@ -48,7 +48,7 @@ gaia_impact_zombie_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   }
 
   playFX(localclientnum, level._effect[# "gaia_projectile_impact"], v_org, anglesToForward(self.angles));
-  self playSound(localclientnum, # "hash_3efca867dc76b512");
+  self playSound(localclientnum, #"hash_3efca867dc76b512");
 }
 
 mostmost_mo(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -79,7 +79,7 @@ gaia_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   }
 
   playFX(localclientnum, level._effect[# "gaia_projectile_impact"], v_org, v_ang);
-  playSound(localclientnum, # "hash_3bf3dbe329c0568b", self.origin);
+  playSound(localclientnum, #"hash_3bf3dbe329c0568b", self.origin);
 }
 
 function_10485953(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

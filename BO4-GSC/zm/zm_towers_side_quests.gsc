@@ -73,7 +73,7 @@ function_aee836e9() {
 }
 
 function_125dfe69() {
-  level endon(#"end_game", # "hash_26c0c05d0a3e382f");
+  level endon(#"end_game", #"hash_26c0c05d0a3e382f");
 
   while(true) {
     level waittill(#"bloodbath_kill");
@@ -201,7 +201,7 @@ function_ad85b216() {
   playsoundatposition("zmb_ee_brewing_done", (0, 0, 0));
   s_loc = struct::get("s_perk_drop");
 
-  for(perk = zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, # "allies", undefined, undefined, 1, 1); !isDefined(perk); perk = zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, # "allies", undefined, undefined, 1, 1)) {
+  for(perk = zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, #"allies", undefined, undefined, 1, 1); !isDefined(perk); perk = zm_powerups::specific_powerup_drop("free_perk", s_loc.origin, #"allies", undefined, undefined, 1, 1)) {
     waitframe(1);
   }
 }
@@ -226,7 +226,7 @@ function_e1a7f79c() {
   self.var_ea819a71 = [];
   self thread function_a0cf9801();
   self thread function_acbff22d();
-  self flag::wait_till_all(array(#"hash_481ca29c700e04dd", # "hash_6db6c5251c9721d6", # "hash_69c9295a1129268f"));
+  self flag::wait_till_all(array(#"hash_481ca29c700e04dd", #"hash_6db6c5251c9721d6", #"hash_69c9295a1129268f"));
   self flag::wait_till(#"hash_23e1b3b7f7f46cb8");
   self flag::set(#"hash_6757075afacfc1b4");
   self playsoundtoplayer(#"hash_3f4d4c01f45d3fa6", self);
@@ -265,7 +265,7 @@ function_4b01369a() {
 }
 
 function_294c9ea7(str_triggers) {
-  level endon(#"end_game", # "cauldron_rotate_complete");
+  level endon(#"end_game", #"cauldron_rotate_complete");
   self endon(#"disconnect");
 
   if(self flag::get(#"hash_481ca29c700e04dd")) {
@@ -382,7 +382,7 @@ function_4670ef4d() {
 
   e_attacker = self.attacker;
 
-  if(!isinarray(e_attacker.aat, # "zm_aat_kill_o_watt")) {
+  if(!isinarray(e_attacker.aat, #"zm_aat_kill_o_watt")) {
     return;
   }
 
@@ -406,7 +406,7 @@ function_c846dfc3() {
 }
 
 function_3ce07a2b() {
-  level endon(#"game_end", # "21_guns");
+  level endon(#"game_end", #"21_guns");
 
   while(true) {
     s_waitresult = self waittill(#"damage");
@@ -458,7 +458,7 @@ function_5d0d1807() {
 }
 
 function_1eddbf9e() {
-  level endon(#"end_game", # "hash_205c15aeab8e14c4");
+  level endon(#"end_game", #"hash_205c15aeab8e14c4");
   var_c265cd7f = 0;
 
   while(true) {
@@ -480,7 +480,7 @@ function_1eddbf9e() {
 }
 
 function_c74f4cf4() {
-  level endon(#"end_game", # "hash_5bc627cff03bad5");
+  level endon(#"end_game", #"hash_5bc627cff03bad5");
   var_22fbe1cc = 0;
 
   while(true) {

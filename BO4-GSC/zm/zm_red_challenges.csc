@@ -95,7 +95,7 @@ function_de1bffd6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     var_ff01f974 = 4;
   }
 
-  self playSound(localclientnum, # "hash_4b301fe401c4f18");
+  self playSound(localclientnum, #"hash_4b301fe401c4f18");
   self.var_b7c1fb99 = self playLoopSound(#"hash_6143f452bc746a62" + var_ff01f974);
 }
 
@@ -130,7 +130,7 @@ function_9ed71eeb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 0) {
     if(isDefined(self.var_b10399e)) {
-      self playSound(localclientnum, # "hash_284f0a411f78c07c");
+      self playSound(localclientnum, #"hash_284f0a411f78c07c");
       self stoploopsound(self.var_b10399e);
       self.var_b10399e = undefined;
     }
@@ -139,7 +139,7 @@ function_9ed71eeb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(!isDefined(self.var_b10399e)) {
-    self playSound(localclientnum, # "hash_6845d8009f05e81c");
+    self playSound(localclientnum, #"hash_6845d8009f05e81c");
     self.var_b10399e = self playLoopSound(#"hash_205cc527b5726b4d");
   }
 }
@@ -269,7 +269,7 @@ rob_coals(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
 }
 
 function_4eff20ff() {
-  self endon(#"death", # "hash_6bc81dae92c4902e");
+  self endon(#"death", #"hash_6bc81dae92c4902e");
   self playrenderoverridebundle("rob_zm_red_cin_coals");
   level.var_75ca8fda = 0;
   level.var_6437d5e7 = 0.002;

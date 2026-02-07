@@ -119,7 +119,7 @@ function_e870d33d() {
   self notify("562ab31eaeed790b");
   self endon("562ab31eaeed790b");
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   gameobject_link = undefined;
   vehicle = undefined;
   var_13ab34e1 = undefined;
@@ -149,7 +149,7 @@ function_e870d33d() {
     }
 
     if(player playerads() == 0) {
-      waitresult = player waittill(#"weapon_switch_started", # "weapon_ads_started");
+      waitresult = player waittill(#"weapon_switch_started", #"weapon_ads_started");
 
       if(waitresult._notify != "weapon_ads_started") {
         continue;
@@ -350,7 +350,7 @@ function_18a9a4e4(settings) {
   }
 
   player = self;
-  player endon(#"death", # "disconnect");
+  player endon(#"death", #"disconnect");
   rumble_delay = float(isDefined(settings.var_efe13502) ? settings.var_efe13502 : 0.5);
 
   if(rumble_delay > 0) {

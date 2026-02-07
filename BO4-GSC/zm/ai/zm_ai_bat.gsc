@@ -55,7 +55,7 @@ autoexec __init__system__() {
 __init__() {
   vehicle::add_main_callback("bat", &function_6c223039);
   spawner::function_89a2cd87(#"bat", &function_141c342b);
-  zm_transform::function_cfca77a7(#"spawner_zm_nosferatu", # "hash_791d597ac0457860", undefined, 0, undefined, undefined);
+  zm_transform::function_cfca77a7(#"spawner_zm_nosferatu", #"hash_791d597ac0457860", undefined, 0, undefined, undefined);
   level thread function_1b029905();
   zm_round_spawning::register_archetype(#"bat", &function_84cd2223, &function_9471b7f9, &function_2e37549f, 25);
   zm_score::function_e5d6e6dd(#"bat", 60);
@@ -105,7 +105,7 @@ function_141c342b() {
 }
 
 function_ab7568e0() {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   while(true) {
     if(self function_c48c2d66() && self vehicle_ai::get_current_state() != "transform") {
@@ -156,7 +156,7 @@ gettarget() {
 }
 
 function_1076a2e0() {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
 
   while(true) {
     if(isDefined(self.ignoreall) && self.ignoreall) {
@@ -185,8 +185,8 @@ function_1076a2e0() {
 }
 
 function_776e45e5() {
-  self endon(#"change_state", # "death");
-  self waittilltimeout(10, # "reached_end_node");
+  self endon(#"change_state", #"death");
+  self waittilltimeout(10, #"reached_end_node");
 
   while(true) {
     players = getplayers();
@@ -372,7 +372,7 @@ function_88d81715() {
 }
 
 function_47c795bc(params) {
-  self endoncallback(&function_630752f6, # "death", # "state_change");
+  self endoncallback(&function_630752f6, #"death", #"state_change");
   assert(isDefined(self.ai.var_15916e52));
   self.ai.var_15916e52.healthmultiplier = self.var_b008e588;
   movepos = self.ai.var_15916e52.pos;
@@ -396,7 +396,7 @@ function_47c795bc(params) {
   mover waittill(#"movedone");
   self clientfield::set("bat_transform_fx", 1);
   self.overridevehicledamage = undefined;
-  zm_transform::function_9acf76e6(self, # "hash_791d597ac0457860", &function_607df9c6, 0);
+  zm_transform::function_9acf76e6(self, #"hash_791d597ac0457860", &function_607df9c6, 0);
   radiusdamage(self.origin, 200, 15, 5, self);
   self.ai.var_15916e52 = undefined;
 
@@ -419,7 +419,7 @@ state_death_update(params) {
   }
 
   self vehicle_death::death_fx();
-  self val::set(#"zm_ai_bat", # "hide", 2);
+  self val::set(#"zm_ai_bat", #"hide", 2);
   wait 1;
   self delete();
 }
@@ -433,7 +433,7 @@ state_combat_enter(params) {
 }
 
 function_2b369c9f() {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self.ai.var_e7d26c0f = 0;
 
   while(true) {
@@ -531,7 +531,7 @@ function_66d3e7c2() {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", # "death");
+  self endon(#"change_state", #"death");
   self asmrequestsubstate(#"locomotion@movement");
 
   for(;;) {

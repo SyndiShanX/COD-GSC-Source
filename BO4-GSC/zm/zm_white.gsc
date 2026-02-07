@@ -1001,7 +1001,7 @@ white_devgui() {
         break;
       case # "hash_708994ac8f2d6d5":
         if(zm_utility::is_ee_enabled()) {
-          zm_sq::function_87306f8a(#"insanity_mode", # "step_6");
+          zm_sq::function_87306f8a(#"insanity_mode", #"step_6");
         } else {
           level thread zm_white_insanity_mode::function_1541f1c9();
         }

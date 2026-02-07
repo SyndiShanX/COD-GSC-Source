@@ -52,10 +52,10 @@ preload() {
 main() {
   level function_47274b1e();
   level function_19f2a68d();
-  zm_sq::register(#"yellow_snowballs", # "step_1", # "hash_2ed342ae0266e20", &function_8ba3d474, &function_f5a84740);
-  zm_sq::register(#"yellow_snowballs", # "step_2", # "hash_2ed342ae0266e20", &function_37507fb7, &function_6ad60943);
-  zm_sq::register(#"yellow_snowballs", # "step_3", # "hash_2ed342ae0266e20", &function_80794c22, &function_2b9f7a47);
-  zm_sq::register(#"yellow_snowballs", # "step_4", # "hash_2ed342ae0266e20", &function_985dbc38, &function_256ebdea);
+  zm_sq::register(#"yellow_snowballs", #"step_1", #"hash_2ed342ae0266e20", &function_8ba3d474, &function_f5a84740);
+  zm_sq::register(#"yellow_snowballs", #"step_2", #"hash_2ed342ae0266e20", &function_37507fb7, &function_6ad60943);
+  zm_sq::register(#"yellow_snowballs", #"step_3", #"hash_2ed342ae0266e20", &function_80794c22, &function_2b9f7a47);
+  zm_sq::register(#"yellow_snowballs", #"step_4", #"hash_2ed342ae0266e20", &function_985dbc38, &function_256ebdea);
   level waittill(#"all_players_spawned");
   level function_698e6ba();
 
@@ -341,8 +341,8 @@ function_2b9f7a47(var_a276c861, var_19e802fa) {
 
 function_985dbc38(var_a276c861) {
   if(!var_a276c861) {
-    zm_orange_pablo::register_drop_off(10, # "hash_1edb26dc1cc6e119", # "hash_3ca7be08f434c427", &function_901d1798, &function_6d2ddf57);
-    zm_orange_pablo::function_3f9e02b8(2, # "hash_423ddf1f1bc39137", # "hash_423ddf1f1bc39137", &function_ae42be1);
+    zm_orange_pablo::register_drop_off(10, #"hash_1edb26dc1cc6e119", #"hash_3ca7be08f434c427", &function_901d1798, &function_6d2ddf57);
+    zm_orange_pablo::function_3f9e02b8(2, #"hash_423ddf1f1bc39137", #"hash_423ddf1f1bc39137", &function_ae42be1);
     level.var_3af3c634 zm_unitrigger::create("", 96);
     level.var_3af3c634 thread function_c0ee8171();
     level flag::wait_till(#"hash_3ff453a959b4445b");

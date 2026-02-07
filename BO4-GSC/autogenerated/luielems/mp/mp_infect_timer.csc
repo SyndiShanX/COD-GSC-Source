@@ -12,7 +12,7 @@ class cmp_infect_timer: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, # "mp_infect_timer");
+    cluielem::open(localclientnum, #"mp_infect_timer");
   }
 
   function function_fa582112(localclientnum) {

@@ -22,7 +22,7 @@
 #namespace zm_hud;
 
 autoexec __init__system__() {
-  system::register(#"zm_hud", &__init__, &__main__, # "zm_crafting");
+  system::register(#"zm_hud", &__init__, &__main__, #"zm_crafting");
 }
 
 __init__() {

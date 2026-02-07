@@ -9,7 +9,7 @@
 #namespace supplypod;
 
 autoexec __init__system__() {
-  system::register(#"supplypod", &__init__, undefined, # "killstreaks");
+  system::register(#"supplypod", &__init__, undefined, #"killstreaks");
 }
 
 __init__() {

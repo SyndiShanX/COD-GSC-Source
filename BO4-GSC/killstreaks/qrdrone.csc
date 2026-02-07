@@ -66,7 +66,7 @@ restartfx(localclientnum, blinkstage) {
 
 watchrestartfx(localclientnum) {
   self endon(#"death");
-  level waittill(#"demo_jump", # "player_switch", # "killcam_begin", # "killcam_end");
+  level waittill(#"demo_jump", #"player_switch", #"killcam_begin", #"killcam_end");
   self restartfx(localclientnum, clientfield::get("qrdrone_state"));
 }
 
@@ -108,7 +108,7 @@ blink_fx_and_sound(localclientnum, soundalias) {
 }
 
 cleanupfx(localclientnum, handle) {
-  self waittill(#"death", # "blink", # "stopfx", # "restart_fx");
+  self waittill(#"death", #"blink", #"stopfx", #"restart_fx");
   stopfx(localclientnum, handle);
 }
 
@@ -162,7 +162,7 @@ loop_local_sound(localclientnum, alias, interval, fx) {
 
 check_for_player_switch_or_time_jump(localclientnum) {
   self endon(#"death");
-  level waittill(#"demo_jump", # "player_switch", # "killcam_begin");
+  level waittill(#"demo_jump", #"player_switch", #"killcam_begin");
   self notify(#"stopfx");
   waittillframeend();
   self thread blink_light(localclientnum);

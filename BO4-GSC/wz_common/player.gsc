@@ -50,7 +50,7 @@ function_4861487f(weapon, player) {
 
 function_cd8ee3c5() {
   self endon(#"grenade_dud");
-  waitresult = self waittill(#"explode", # "death");
+  waitresult = self waittill(#"explode", #"death");
 
   if(waitresult._notify == # "explode") {
     trace = groundtrace(waitresult.position, waitresult.position + (0, 0, -20000), 0, self, 0);
@@ -64,7 +64,7 @@ function_cd8ee3c5() {
 
 function_f3edce9a() {
   self endon(#"grenade_dud");
-  waitresult = self waittill(#"explode", # "death");
+  waitresult = self waittill(#"explode", #"death");
 
   if(waitresult._notify == # "explode") {
     position = isDefined(waitresult.position) ? waitresult.position : waitresult.attacker.origin;
@@ -72,7 +72,7 @@ function_f3edce9a() {
 
     if(isDefined(trace[# "position"]) && trace[# "surfacetype"] != # "none") {
       org = trace[# "position"];
-      vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", # "vehicle_t8_mil_tank_wz_green", # "vehicle_t8_mil_tank_wz_grey", # "vehicle_t8_mil_tank_wz_tan");
+      vehicletypes = array(#"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan");
       item_supply_drop::drop_supply_drop(org, 1, 1, vehicletypes[randomint(vehicletypes.size)]);
     }
   }

@@ -231,7 +231,7 @@ function_e27c41b4(jammer, entity, attackingplayer) {
 
 function_b8c5ab9c(jammer, player, attackingplayer) {
   player notify(#"hash_4f2e183cc0ec68bd");
-  player endon(#"death", # "hash_4f2e183cc0ec68bd");
+  player endon(#"death", #"hash_4f2e183cc0ec68bd");
   player clientfield::set_to_player("isJammed", 1);
   player.isjammed = 1;
   player.var_fe1ebada = attackingplayer;
@@ -286,7 +286,7 @@ function_4a82368f(entity, owner) {
     owner clientfield::set_to_player("jammedvehpostfx", 1);
   }
 
-  entity waittill(#"death", # "remote_weapon_end", # "hash_2476803a0d5fa572");
+  entity waittill(#"death", #"remote_weapon_end", #"hash_2476803a0d5fa572");
 
   if(!isDefined(owner)) {
     return;
@@ -380,7 +380,7 @@ function_7b151daa(player) {
 
 function_5f86757d() {
   level endon(#"game_ended");
-  waitresult = self waittill(#"explode", # "death");
+  waitresult = self waittill(#"explode", #"death");
 
   if(!isDefined(self)) {
     return waitresult;
@@ -392,7 +392,7 @@ function_5f86757d() {
 
 function_3a3a2ea9(jammer) {
   jammer endon(#"death");
-  waitresult = jammer waittilltimeout(2, # "hash_754a0aedf9f00e8d");
+  waitresult = jammer waittilltimeout(2, #"hash_754a0aedf9f00e8d");
 
   if(!isDefined(jammer)) {
     return;

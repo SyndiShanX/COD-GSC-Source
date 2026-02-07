@@ -82,7 +82,7 @@ function_a27b945a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   str_tag = "tag_origin";
   level beam::launch(level.s_boss_battle.var_4475b443, str_tag, self, "j_spine4", "beam8_zm_red_peg_lightning_strike", 1);
-  self playSound(localclientnum, # "hash_61c057ffadb7a5af");
+  self playSound(localclientnum, #"hash_61c057ffadb7a5af");
   wait 1.5;
   level beam::kill(level.s_boss_battle.var_4475b443, str_tag, self, "j_spine4", "beam8_zm_red_peg_lightning_strike");
 }
@@ -101,7 +101,7 @@ function_ed1d0231(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 1) {
     self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[# "lightning_impact"], self, str_fx_tag);
-    self playSound(localclientnum, # "hash_63d588d1f28ecdc1");
+    self playSound(localclientnum, #"hash_63d588d1f28ecdc1");
   }
 }
 
@@ -116,7 +116,7 @@ function_37d1ee2e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_e9aa9e80(localclientnum) {
-  self endon(#"death", # "hash_5531647ca0352039");
+  self endon(#"death", #"hash_5531647ca0352039");
 
   while(!isDefined(level.var_76234ae5[localclientnum])) {
     waitframe(1);
@@ -130,7 +130,7 @@ function_e9aa9e80(localclientnum) {
     return;
   }
 
-  self.e_fx = util::spawn_model(localclientnum, # "tag_origin", e_ball.origin);
+  self.e_fx = util::spawn_model(localclientnum, #"tag_origin", e_ball.origin);
   self.fx_arc = util::playFXOnTag(localclientnum, level._effect[# "lightning_arc"], self.e_fx, "tag_origin");
 
   while(true) {
@@ -155,7 +155,7 @@ function_e9aa9e80(localclientnum) {
 }
 
 function_954b9602(localclientnum) {
-  self waittill(#"death", # "hash_5531647ca0352039");
+  self waittill(#"death", #"hash_5531647ca0352039");
 
   if(isDefined(self.fx_arc)) {
     stopfx(localclientnum, self.fx_arc);
@@ -175,7 +175,7 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[# "hash_206a58239ffb5e0f"], self, str_fx_tag);
 
     if(!isDefined(self.var_6450813b)) {
-      self playSound(localclientnum, # "hash_76feff9b8f93c3d9");
+      self playSound(localclientnum, #"hash_76feff9b8f93c3d9");
       self.var_6450813b = self playLoopSound(#"hash_117558f0dda6471f");
     }
 
@@ -187,7 +187,7 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 
   if(isDefined(self.var_6450813b)) {
-    self playSound(localclientnum, # "hash_ae4b548c1d4a748");
+    self playSound(localclientnum, #"hash_ae4b548c1d4a748");
     self stoploopsound(self.var_6450813b);
     self.var_6450813b = undefined;
   }
@@ -198,5 +198,5 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 function_e2680ff3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   str_fx_tag = isDefined(self gettagorigin("j_mainroot")) ? "j_mainroot" : "tag_driver";
   util::playFXOnTag(localclientnum, level._effect[# "viper_bite_projectile_impact"], self, str_fx_tag);
-  self playSound(0, # "hash_3098cba1f74bb5d1");
+  self playSound(0, #"hash_3098cba1f74bb5d1");
 }

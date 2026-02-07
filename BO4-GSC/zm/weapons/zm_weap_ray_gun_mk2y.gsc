@@ -37,7 +37,7 @@ on_weapon_change(s_params) {
 }
 
 function_54922a21() {
-  self endoncallback(&function_a059fe7f, # "death", # "hash_414b2baf34e01af8");
+  self endoncallback(&function_a059fe7f, #"death", #"hash_414b2baf34e01af8");
   w_current = self getcurrentweapon();
 
   while(true) {

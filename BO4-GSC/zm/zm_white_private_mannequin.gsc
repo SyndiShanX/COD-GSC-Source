@@ -85,8 +85,8 @@ init_quest() {
 
   level.mannequin_ally_spawner = getent("mannequin_ally_spawner", "targetname");
   level.var_777acf92 = level.mannequin_ally_spawner;
-  zm_sq::register(#"private_mannequin_program", # "step_1", # "private_mannequin_step1", &private_mannequin_step1_setup, &private_mannequin_step1_cleanup);
-  zm_sq::register(#"private_mannequin_program", # "step_2", # "private_mannequin_step2", &private_mannequin_step2_setup, &private_mannequin_step2_cleanup);
+  zm_sq::register(#"private_mannequin_program", #"step_1", #"private_mannequin_step1", &private_mannequin_step1_setup, &private_mannequin_step1_cleanup);
+  zm_sq::register(#"private_mannequin_program", #"step_2", #"private_mannequin_step2", &private_mannequin_step2_setup, &private_mannequin_step2_cleanup);
   zm_sq::start(#"private_mannequin_program");
 }
 
@@ -139,7 +139,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
       level play_start_vo();
       level thread timer_countdown();
       level clientfield::set("" + # "hash_681de2aa531ffcd0", 1);
-      a_flags = array(#"hash_315d0bf1d50724f0", # "hash_7524c96c167377ef");
+      a_flags = array(#"hash_315d0bf1d50724f0", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
       if(flag::get(#"hash_315d0bf1d50724f0")) {
@@ -154,7 +154,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
         continue;
       }
 
-      a_flags = array(#"hash_359cbec050523f4", # "hash_7524c96c167377ef");
+      a_flags = array(#"hash_359cbec050523f4", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
       if(flag::get(#"hash_359cbec050523f4")) {
@@ -169,7 +169,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
         continue;
       }
 
-      a_flags = array(#"hash_130656ec8ad5480d", # "hash_7524c96c167377ef");
+      a_flags = array(#"hash_130656ec8ad5480d", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
       if(flag::get(#"hash_130656ec8ad5480d")) {
@@ -225,7 +225,7 @@ function_eb06b83() {
   s_waitresult = self waittill(#"trigger_activated");
   e_who = s_waitresult.e_who;
   e_who playSound("zmb_ee_key_pickup");
-  e_who thread zm_audio::create_and_play_dialog(#"component_pickup", # "generic");
+  e_who thread zm_audio::create_and_play_dialog(#"component_pickup", #"generic");
   level flag::set("pernell_key_acquired");
   zm_ui_inventory::function_7df6bb60("zm_white_private_mannequin_key_part", 1);
   var_f0aefc5c = getent("pernell_key", "targetname");
@@ -339,7 +339,7 @@ function_1e88595a() {
 
     if(!e_who zm_score::can_player_purchase(self.s_unitrigger.cost)) {
       zm_utility::play_sound_on_ent("no_purchase");
-      e_who zm_audio::create_and_play_dialog(#"general", # "outofmoney");
+      e_who zm_audio::create_and_play_dialog(#"general", #"outofmoney");
       continue;
     }
 
@@ -379,7 +379,7 @@ function_eaa63f5b(n_minutes = 1) {
 }
 
 function_88265619() {
-  level endon(#"game_ended", # "hash_48039f3a4c1a3248");
+  level endon(#"game_ended", #"hash_48039f3a4c1a3248");
   level.var_f5746584 = 0;
   var_e3d10631 = getEntArray("private_mannequin_parts", "targetname");
   var_a2c75164 = getent("mannequin_ally_door", "targetname");
@@ -490,7 +490,7 @@ function_e29e2b0b() {
 }
 
 timer_actual(kills, time) {
-  self endon(#"disconnect", # "death");
+  self endon(#"disconnect", #"death");
   timer = gettime() + time * 1000;
 
   while(gettime() < timer) {
@@ -508,7 +508,7 @@ timer_actual(kills, time) {
           }
 
           if(sighttracepassed(self.origin + (0, 0, 30), e_player.origin + (0, 0, 30), 0, undefined)) {
-            e_player zm_audio::create_and_play_dialog(#"kill", # "streak_adam");
+            e_player zm_audio::create_and_play_dialog(#"kill", #"streak_adam");
           }
         }
       }
@@ -545,7 +545,7 @@ function_e453faa6(e_reviver) {
 
     if(isDefined(level.mannequin_ally) && results.reviver === level.mannequin_ally) {
       level.mannequin_ally zm_hms_util::function_6a0d675d("vox_adam_revive", function_9368a51d(), 0, 1);
-      self thread zm_audio::create_and_play_dialog(#"revive", # "adam", undefined, 1);
+      self thread zm_audio::create_and_play_dialog(#"revive", #"adam", undefined, 1);
     }
   }
 }

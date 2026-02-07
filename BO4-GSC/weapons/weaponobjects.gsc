@@ -256,7 +256,7 @@ deleteent(attacker, emp, target) {
 
 clearfxondeath(fx) {
   fx endon(#"death");
-  self waittill(#"death", # "hacked");
+  self waittill(#"death", #"hacked");
   fx delete();
 }
 
@@ -316,7 +316,7 @@ weapondetonate(attacker, weapon) {
 
 detonatewhenstationary(object, delay, attacker, weapon) {
   level endon(#"game_ended");
-  object endon(#"death", # "hacked", # "detonating");
+  object endon(#"death", #"hacked", #"detonating");
 
   if(object isonground() == 0) {
     object waittill(#"stationary");
@@ -326,7 +326,7 @@ detonatewhenstationary(object, delay, attacker, weapon) {
 }
 
 waitanddetonate(object, delay, attacker, weapon) {
-  object endon(#"death", # "hacked");
+  object endon(#"death", #"hacked");
 
   if(!isDefined(attacker) && !isDefined(weapon) && object.weapon.proximityalarmactivationdelay > 0) {
     if(isDefined(object.armed_detonation_wait) && object.armed_detonation_wait) {
@@ -393,7 +393,7 @@ waitanddetonate(object, delay, attacker, weapon) {
 }
 
 waitandfizzleout(object, delay) {
-  object endon(#"death", # "hacked");
+  object endon(#"death", #"hacked");
 
   if(isDefined(object.detonated) && object.detonated == 1) {
     return;
@@ -533,8 +533,8 @@ addweaponobject(watcher, weapon_instance, weapon, endonnotify) {
 }
 
 function_6d8aa6a0(player, watcher) {
-  self endon(#"death", # "hacked");
-  player waittill(#"joined_team", # "joined_spectators", # "disconnect", # "changed_specialist", # "changed_specialist_death");
+  self endon(#"death", #"hacked");
+  player waittill(#"joined_team", #"joined_spectators", #"disconnect", #"changed_specialist", #"changed_specialist_death");
   self[[watcher.var_994b472b]](player);
 }
 
@@ -561,7 +561,7 @@ cleanupwatcherondeath(watcher) {
 
 weapon_object_timeout(watcher, timeoutoverride) {
   weapon_instance = self;
-  weapon_instance endon(#"death", # "cancel_timeout");
+  weapon_instance endon(#"death", #"cancel_timeout");
   timeoutval = isDefined(timeoutoverride) ? timeoutoverride : watcher.timeout;
   wait timeoutval;
 
@@ -611,7 +611,7 @@ weapon_object_do_damagefeedback(weapon, attacker) {
 }
 
 weaponobjectdamage(watcher) {
-  self endon(#"death", # "hacked", # "detonating");
+  self endon(#"death", #"hacked", #"detonating");
   self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
@@ -698,7 +698,7 @@ playdialogondeath(owner) {
 
 watchobjectdamage(owner) {
   owner endon(#"death");
-  self endon(#"hacked", # "death");
+  self endon(#"hacked", #"death");
 
   while(true) {
     waitresult = self waittill(#"damage");
@@ -749,7 +749,7 @@ stunstop() {
 }
 
 weaponstun() {
-  self endon(#"death", # "not_stunned");
+  self endon(#"death", #"not_stunned");
   origin = self gettagorigin("tag_fx");
 
   if(!isDefined(origin)) {
@@ -765,7 +765,7 @@ weaponstun() {
 
 stunfxthink(fx) {
   fx endon(#"death");
-  self waittill(#"death", # "not_stunned");
+  self waittill(#"death", #"not_stunned");
   fx delete();
 }
 
@@ -984,7 +984,7 @@ setstate(newstate) {
 
 proximityalarmloop(watcher, owner) {
   level endon(#"game_ended");
-  self endon(#"death", # "hacked", # "detonating");
+  self endon(#"death", #"hacked", #"detonating");
 
   if(self.weapon.proximityalarminnerradius <= 0) {
     return;
@@ -1182,13 +1182,13 @@ watchweaponobjectspawn(notify_type, endonnotify = undefined) {
 
   self endon(#"death");
   self notify(#"watchweaponobjectspawn");
-  self endon(#"watchweaponobjectspawn", # "disconnect");
+  self endon(#"watchweaponobjectspawn", #"disconnect");
 
   while(true) {
     if(isDefined(notify_type)) {
       waitresult = self waittill(notify_type);
     } else {
-      waitresult = self waittill(#"grenade_fire", # "grenade_launcher_fire", # "missile_fire", # "placeables_plant");
+      waitresult = self waittill(#"grenade_fire", #"grenade_launcher_fire", #"missile_fire", #"placeables_plant");
     }
 
     weapon_instance = waitresult.projectile;
@@ -1199,7 +1199,7 @@ watchweaponobjectspawn(notify_type, endonnotify = undefined) {
     }
 
     if(isplayer(self) && weapon.setusedstat && !self util::ishacked()) {
-      self stats::function_e24eec31(weapon, # "used", 1);
+      self stats::function_e24eec31(weapon, #"used", 1);
     }
 
     watcher = getweaponobjectwatcherbyweapon(weapon);
@@ -1315,7 +1315,7 @@ showcone(angle, range, color) {
 }
 
 function weaponobjectdetectionmovable(ownerteam) {
-  self endon(#"end_detection", # "death", # "hacked");
+  self endon(#"end_detection", #"death", #"hacked");
   level endon(#"game_ended");
 
   if(!level.teambased) {
@@ -1332,7 +1332,7 @@ seticonpos(item, icon, heightincrease) {
 }
 
 weaponobjectdetectiontrigger_wait(ownerteam) {
-  self endon(#"death", # "hacked", # "detonating");
+  self endon(#"death", #"hacked", #"detonating");
   util::waittillnotmoving();
   self thread weaponobjectdetectiontrigger(ownerteam);
 }
@@ -1341,7 +1341,7 @@ weaponobjectdetectiontrigger(ownerteam) {
   trigger = spawn("trigger_radius", self.origin - (0, 0, 128), 0, 512, 256);
   trigger.detectid = "trigger" + gettime() + randomint(1000000);
   trigger sethintlowpriority(1);
-  self waittill(#"death", # "hacked", # "detonating");
+  self waittill(#"death", #"hacked", #"detonating");
   trigger notify(#"end_detection");
 
   if(isDefined(trigger.bombsquadicon)) {
@@ -1369,7 +1369,7 @@ hackertriggersetvisibility(owner) {
       self setinvisibletoplayer(owner);
     }
 
-    level waittill(#"player_spawned", # "joined_team");
+    level waittill(#"player_spawned", #"joined_team");
   }
 }
 
@@ -1390,7 +1390,7 @@ set_hint_string(hint_string, default_string) {
 
 hackerinit(watcher) {
   self thread hackernotmoving();
-  event = self waittill(#"death", # "landed");
+  event = self waittill(#"death", #"landed");
 
   if(event._notify == "death") {
     return;
@@ -1407,7 +1407,7 @@ hackerinit(watcher) {
   }
 
   self.hackertrigger = function_c7cdf243(triggerorigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
-  self.hackertrigger set_hint_string(self.weapon.var_2f3ca476, # "mp/generic_hacking");
+  self.hackertrigger set_hint_string(self.weapon.var_2f3ca476, #"mp/generic_hacking");
   self.hackertrigger setignoreentfortrigger(self);
   self.hackertrigger setperkfortrigger(#"specialty_disarmexplosive");
   self.hackertrigger thread hackertriggersetvisibility(self.owner);
@@ -1455,7 +1455,7 @@ itemhacked(watcher, player) {
 
   if(self.weapon.dohackedstats) {
     scoreevents::processscoreevent(#"hacked", player, undefined, undefined);
-    player stats::function_e24eec31(getweapon(#"pda_hack"), # "combatrecordstat", 1);
+    player stats::function_e24eec31(getweapon(#"pda_hack"), #"combatrecordstat", 1);
     player challenges::hackedordestroyedequipment();
   }
 
@@ -1735,7 +1735,7 @@ proximityweaponobject_validtriggerentity(watcher, ent) {
 
 proximityweaponobject_removespawnprotectondeath(ent) {
   self endon(#"death");
-  ent waittill(#"death", # "disconnect");
+  ent waittill(#"death", #"disconnect");
   arrayremovevalue(self.protected_entities, ent);
 }
 
@@ -1782,7 +1782,7 @@ proximityweaponobject_isspawnprotected(watcher, ent) {
 }
 
 proximityweaponobject_dodetonation(watcher, ent, traceorigin) {
-  self endon(#"death", # "hacked");
+  self endon(#"death", #"hacked");
   self notify(#"kill_target_detection");
 
   if(isDefined(watcher.activatesound)) {
@@ -1837,7 +1837,7 @@ proximityweaponobject_waittillframeendanddodetonation(watcher, ent, traceorigin)
 }
 
 proximityweaponobjectdetonation(s_watcher) {
-  self endon(#"death", # "hacked", # "kill_target_detection");
+  self endon(#"death", #"hacked", #"kill_target_detection");
   proximityweaponobject_activationdelay(s_watcher);
   var_6e4025f7 = proximityweaponobject_createdamagearea(s_watcher);
 
@@ -1890,7 +1890,7 @@ shouldaffectweaponobject(object, watcher) {
 }
 
 deleteondeath(ent) {
-  self waittill(#"death", # "hacked");
+  self waittill(#"death", #"hacked");
   waitframe(1);
 
   if(isDefined(ent)) {
@@ -1928,7 +1928,7 @@ testkillbrushonstationary(a_killbrushes, player) {
 
 deleteonkillbrush(player) {
   player endon(#"disconnect");
-  self endon(#"death", # "stationary");
+  self endon(#"death", #"stationary");
   a_killbrushes = getEntArray("trigger_hurt_new", "classname");
   self thread testkillbrushonstationary(a_killbrushes, player);
 
@@ -2072,7 +2072,7 @@ function_e0093db1(player, weapon) {
 }
 
 function_d831baf0(trigger, callback, playersoundonuse, npcsoundonuse) {
-  self endon(#"death", # "explode", # "hacked");
+  self endon(#"death", #"explode", #"hacked");
   trigger endon(#"death");
 
   while(true) {
@@ -2281,7 +2281,7 @@ function_ac27aef5(watcher, player, origin) {
   self.pickuptrigger setinvisibletoall();
   self.pickuptrigger setvisibletoplayer(player);
   self.pickuptrigger setteamfortrigger(player.pers[# "team"]);
-  self.pickuptrigger set_hint_string(self.weapon.var_8a03df2b, # "mp/generic_pickup");
+  self.pickuptrigger set_hint_string(self.weapon.var_8a03df2b, #"mp/generic_pickup");
   self thread watchusetrigger(self.pickuptrigger, watcher.pickup, watcher.pickupsoundplayer, watcher.pickupsound, watcher.weapon);
 
   if(isDefined(watcher.pickup_trigger_listener)) {
@@ -2324,7 +2324,7 @@ function_9dbd349e(watcher, player, origin) {
     self.enemytrigger.triggerteamignore = self.team;
   }
 
-  self.enemytrigger set_hint_string(self.weapon.var_5c29f743, # "mp_generic_destroy");
+  self.enemytrigger set_hint_string(self.weapon.var_5c29f743, #"mp_generic_destroy");
   self thread watchusetrigger(self.enemytrigger, watcher.ondestroyed);
 }
 
@@ -2423,7 +2423,7 @@ ondestroyed(attacker, data) {
 }
 
 watchshutdown(player) {
-  self waittill(#"death", # "hacked", # "detonating");
+  self waittill(#"death", #"hacked", #"detonating");
   pickuptrigger = self.pickuptrigger;
   hackertrigger = self.hackertrigger;
   enemytrigger = self.enemytrigger;
@@ -2447,7 +2447,7 @@ watchshutdown(player) {
 }
 
 watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse, callback_data) {
-  self endon(#"death", # "delete");
+  self endon(#"death", #"delete");
   trigger endon(#"death");
 
   while(true) {
@@ -2619,7 +2619,7 @@ function_d9c08e94(var_2f190eaf, var_46f3f2d3) {
 
 switch_team(entity, watcher, owner) {
   self notify(#"stop_disarmthink");
-  self endon(#"stop_disarmthink", # "death");
+  self endon(#"stop_disarmthink", #"death");
   setdvar(#"scr_switch_team", "<dev string:x6f>");
 
   while(true) {

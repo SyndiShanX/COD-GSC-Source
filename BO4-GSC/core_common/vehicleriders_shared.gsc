@@ -784,7 +784,7 @@ exit_variable(ai) {
 }
 
 exit_high_loop_anim(e_parent) {
-  self endon(#"death", # "landing");
+  self endon(#"death", #"landing");
 
   while(true) {
     animation::play(self.var_ec30f5da.exithighloopanim, e_parent, "tag_origin");
@@ -893,7 +893,7 @@ get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
 }
 
 handle_rider_death(ai, vehicle) {
-  ai endon(#"death", # "exiting_vehicle");
+  ai endon(#"death", #"exiting_vehicle");
   vehicle endon(#"death");
   assert(isDefined(ai.var_ec30f5da));
 

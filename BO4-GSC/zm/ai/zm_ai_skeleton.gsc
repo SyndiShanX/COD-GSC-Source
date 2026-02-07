@@ -119,9 +119,9 @@ function_e75e796() {
   self.var_490042cd = gettime();
 
   if(self.subarchetype === # "hash_fd7b9665529dd42" || self.subarchetype === # "hash_1520c8987a671df0") {
-    namespace_81245006::initweakpoints(self, # "c_t8_zmb_skeleton_helmet_weakpoint_def");
+    namespace_81245006::initweakpoints(self, #"c_t8_zmb_skeleton_helmet_weakpoint_def");
   } else {
-    namespace_81245006::initweakpoints(self, # "c_t8_zmb_skeleton_weakpoint_def");
+    namespace_81245006::initweakpoints(self, #"c_t8_zmb_skeleton_weakpoint_def");
   }
 
   self zm_score::function_82732ced();
@@ -225,7 +225,7 @@ function_c9f197d2(var_4c3c217a = 1) {
 
   if(!(isDefined(self.isdying) && self.isdying)) {
     self thread function_42a1dabd();
-    waitresult = self waittilltimeout(60, # "hash_782dbc5eec90f62f");
+    waitresult = self waittilltimeout(60, #"hash_782dbc5eec90f62f");
 
     if(waitresult._notify == # "timeout") {
       self val::reset(#"hash_65edbe063d05f17b", "takedamage");
@@ -350,7 +350,7 @@ function_1f4626ba(notifyhash) {
 }
 
 function_f78e62a8() {
-  self endoncallback(&function_1f4626ba, # "death");
+  self endoncallback(&function_1f4626ba, #"death");
   level endon(#"end_game");
   var_fab8d6ce = function_3400b39f();
 

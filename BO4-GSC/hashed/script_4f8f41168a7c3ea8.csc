@@ -186,13 +186,13 @@ magma_gat_glow_recharge(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
 
   self thread function_d193f583(localclientnum);
-  self playrumbleonentity(localclientnum, # "hash_41507a7755099d85");
-  self stoprumble(localclientnum, # "hash_3c64ae4793e47b3a");
+  self playrumbleonentity(localclientnum, #"hash_41507a7755099d85");
+  self stoprumble(localclientnum, #"hash_3c64ae4793e47b3a");
 }
 
 function_d193f583(localclientnum) {
   self notify(#"hash_67dbde4a0231b582");
-  self endon(#"death", # "hash_4086299956cef09d", # "hash_67dbde4a0231b582");
+  self endon(#"death", #"hash_4086299956cef09d", #"hash_67dbde4a0231b582");
 
   if(isDefined(self.var_c183198c)) {
     self stoploopsound(self.var_c183198c);
@@ -214,7 +214,7 @@ function_d193f583(localclientnum) {
 }
 
 function_f9a794dc(localclientnum) {
-  self endon(#"death", # "hash_4086299956cef09d");
+  self endon(#"death", #"hash_4086299956cef09d");
   level endon(#"end_game");
   self.var_23c215c = 25;
   self.var_c183198c = self playLoopSound(#"hash_1bc434008189933f");
@@ -228,8 +228,8 @@ function_f9a794dc(localclientnum) {
 
     if(self.var_fa938ed8) {
       self function_78233d29(#"hash_4fb0136f51fcf7", "tag_weapon", "Brightness", 0.016);
-      self playrumbleonentity(localclientnum, # "hash_3c64ae4793e47b3a");
-      self stoprumble(localclientnum, # "hash_41507a7755099d85");
+      self playrumbleonentity(localclientnum, #"hash_3c64ae4793e47b3a");
+      self stoprumble(localclientnum, #"hash_41507a7755099d85");
     } else {
       var_7616c359 = math::linear_map(self.var_23c215c, 0, 25, 0.15, 0.7);
       self function_78233d29(#"hash_4fb0136f51fcf7", "tag_weapon", "Brightness", var_7616c359);
@@ -265,7 +265,7 @@ function_f9a794dc(localclientnum) {
 }
 
 function_eba88fd(localclientnum) {
-  self endon(#"death", # "disconnect", # "hash_4086299956cef09d");
+  self endon(#"death", #"disconnect", #"hash_4086299956cef09d");
 
   if(!self util::function_50ed1561(localclientnum)) {
     return;
@@ -371,12 +371,12 @@ function_4707df22(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     stopfx(localclientnum, self.var_85dab00b);
     self.var_85dab00b = undefined;
     playFX(localclientnum, level._effect[# "bg_quest_despawn"], self.origin);
-    playSound(localclientnum, # "hash_c9e5d07bd26090d", self.origin);
+    playSound(localclientnum, #"hash_c9e5d07bd26090d", self.origin);
   }
 
   if(newval == 1) {
     self.var_85dab00b = util::playFXOnTag(localclientnum, level._effect[# "bg_quest_spawn"], self, "tag_origin");
-    playSound(localclientnum, # "hash_4cd38326868832c7", self.origin);
+    playSound(localclientnum, #"hash_4cd38326868832c7", self.origin);
   }
 }
 
@@ -410,7 +410,7 @@ function_bbfe3432(localclientnum) {
 
 magma_urn_triggered_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   util::playFXOnTag(localclientnum, level._effect[# "hash_3932ab509a43ca38"], self, "tag_origin");
-  playSound(localclientnum, # "hash_4cd38326868832c7", self.origin);
+  playSound(localclientnum, #"hash_4cd38326868832c7", self.origin);
 }
 
 acid_gat_lock_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

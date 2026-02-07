@@ -198,7 +198,7 @@ _burnbody(localclientnum, prefix) {
 }
 
 sndstopburnloop(timer) {
-  self waittilltimeout(timer, # "death", # "stopburningsounds");
+  self waittilltimeout(timer, #"death", #"stopburningsounds");
 
   if(isDefined(self)) {
     if(isDefined(self.burn_loop_sound_handle)) {
