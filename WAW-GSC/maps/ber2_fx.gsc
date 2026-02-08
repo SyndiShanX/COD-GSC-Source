@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\ber2_fx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -14,55 +14,76 @@ main() {
   if(isDefined(disable_fx) && disable_fx > 0) {
     disableFX = true;
   }
+
   if(!disableFX) {
     if(isDefined(level._in_geo) && level._in_geo) {
       disableFX = true;
     }
   }
+
   if(!disableFX) {
     precache_util_fx();
     thread water_drops_init();
   }
+
   maps\createart\ber2_art::main();
   maps\createfx\ber2_fx::main();
   precache_weapon_fx();
   wind_settings();
+
   footsteps();
   precache_createfx_fx();
+
   level._effect["rooftopsign_breakaway_dust"] = LoadFX("maps/ber2/fx_dust_sign_support_break");
   level._effect["fallingboards_fire"] = LoadFX("maps/ber2/fx_debris_wood_boards_fire");
   level._effect["rifleflash"] = LoadFX("weapon/muzzleflashes/standardflashworld");
   level._effect["rifle_shelleject"] = LoadFX("weapon/shellejects/rifle");
   level._effect["headshot"] = LoadFX("maps/ber2/fx_deathfx_headshot_ber2");
   level._effect["bloodspurt"] = LoadFX("maps/ber2/fx_deathfx_head_bloodspurt_ber2");
+
   level._effect["katyusha_rocket_launch"] = LoadFX("weapon/muzzleflashes/fx_rocket_katyusha_launch");
   level._effect["katyusha_rocket_trail"] = LoadFX("weapon/rocket/fx_rocket_katyusha_geotrail");
+
   level._effect["fallingsign_exp"] = LoadFX("maps/ber2/fx_exp_roof_sign_shock");
+
   level._effect["bank_window_money_exp"] = LoadFX("maps/ber2/fx_exp_bank_win_money");
   level._effect["window_explosion"] = LoadFX("maps/ber2/fx_exp_window_fireball_out");
+
   level._effect["arty_bldg_impact"] = LoadFX("maps/ber2/fx_exp_wall_impact_01");
+
   level._effect["smokescreen"] = LoadFX("maps/ber2/fx_smk_fill_small");
+
   level._effect["building_t34_impact"] = LoadFX("maps/ber2/fx_exp_building_t34_hit");
   level._effect["building_collapse"] = LoadFX("maps/ber2/fx_building_2a_collapse");
   level._effect["building_collapse_fallout"] = LoadFX("maps/ber2/fx_building_2a_collapse_fallout");
   level._effect["battle_smoke_heavy"] = LoadFX("env/smoke/fx_smoke_low_thick_oneshot");
   level._effect["tower_dust_trail"] = LoadFX("maps/ber2/fx_tower_collapse_emit");
   level._effect["building_collapse_oneshot"] = LoadFX("maps/ber2/fx_building_2a_collapse_hit");
+
   level._effect["metro_arty_dust"] = LoadFX("maps/ber2/fx_debris_sbwy_ceiling_impact_sand");
   level._effect["metro_arty_dust_chunks"] = LoadFX("maps/ber2/fx_debris_sbwy_ceiling_impact_conc");
+
   level._effect["metro_light_filler_high"] = LoadFX("env/light/fx_lgiht_ceiling_flikr_sys_01");
   level._effect["metro_light_filler_med"] = LoadFX("env/light/fx_lgiht_ceiling_flikr_sys_02");
   level._effect["metro_light_filler_low"] = LoadFX("env/light/fx_lgiht_ceiling_flikr_sys_03");
+
   level._effect["metrowave_base"] = LoadFX("maps/ber2/fx_wave_base");
+
   level._effect["rat_splash"] = LoadFX("env/water/fx_water_single_splash");
+
   level._effect["light_explode"] = LoadFX("maps/ber2/fx_exp_electric_pole");
+
   level._effect["limb_bubbles"] = LoadFX("maps/sniper/fx_underwater_foam_bubbles_limb");
   level._effect["torso_bubbles"] = LoadFX("maps/sniper/fx_underwater_foam_bubbles_torso");
+
   level._effect["distant_muzzleflash"] = LoadFX("weapon/muzzleflashes/heavy");
+
   level._effect["aaa_tracer"] = LoadFX("weapon/tracer/fx_tracer_jap_tripple25_projectile");
   level._effect["cloudburst"] = LoadFX("weapon/flak/fx_flak_cloudflash_night");
+
   level._effect["zippo_flame"] = LoadFX("weapon/molotov/fx_molotov_lighter");
   level._effect["molotov_flame"] = LoadFX("weapon/molotov/fx_molotov_wick");
+
   level._effect["character_fire_death_sm"] = LoadFX("env/fire/fx_fire_player_sm");
   level._effect["character_fire_death_sm"] = LoadFX("env/fire/fx_fire_player_sm");
   level._effect["character_fire_death_sm"] = LoadFX("env/fire/fx_fire_player_sm");
@@ -75,7 +96,9 @@ main() {
   level._effect["character_fire_death_sm"] = LoadFX("env/fire/fx_fire_player_sm");
   level._effect["character_fire_death_sm"] = LoadFX("env/fire/fx_fire_player_sm");
   level._effect["character_fire_death_torso"] = LoadFX("env/fire/fx_fire_player_torso");
+
   level._effect["lightning_strike"] = LoadFX("maps/ber2/fx_ber2_lightning_flash");
+
   level._effect["rain_10"] = LoadFX("env/weather/fx_rain_sys_heavy");
   level._effect["rain_9"] = LoadFX("env/weather/fx_rain_sys_heavy");
   level._effect["rain_8"] = LoadFX("env/weather/fx_rain_sys_heavy");
@@ -87,7 +110,9 @@ main() {
   level._effect["rain_2"] = LoadFX("env/weather/fx_rain_sys_lght");
   level._effect["rain_1"] = LoadFX("env/weather/fx_rain_sys_lght");
   level._effect["rain_0"] = LoadFX("env/weather/fx_rain_sys_lght");
+
   thread weather_control(disableFX);
+
   thread lights_arty_init();
 }
 
@@ -95,12 +120,10 @@ precache_weapon_fx() {
   PrecacheItem("napalmblob");
   precacheItem("napalmbloblight");
 }
-
 precache_util_fx() {
   level._effect["flesh_hit"] = LoadFX("impacts/flesh_hit_body_fatal_exit");
   level._effect["katyusha_rocket_explosion"] = LoadFX("weapon/rocket/fx_rocket_katyusha_explosion");
 }
-
 footsteps() {
   animscripts\utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -119,7 +142,6 @@ footsteps() {
   animscripts\utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   animscripts\utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 wind_settings() {
   SetSavedDvar("wind_global_vector", "-33 111 18");
   SetSavedDvar("wind_global_low_altitude", 25);
@@ -184,9 +206,11 @@ weather_control(disableFX) {
   } else {
     disableFX = false;
   }
+
   rainInit("hard");
   level thread rainEffectChange(9, 0.1);
   thread playerWeather();
+
   if(!disableFX) {
     addLightningExploder(10000);
     addLightningExploder(10001);
@@ -195,11 +219,14 @@ weather_control(disableFX) {
     addLightningExploder(10004);
     addLightningExploder(10005);
   }
+
   if(!disableFX) {
     level.thunderSoundEmitter = getent_safe("thunder_struct", "targetname");
   }
+
   level.nextLightning = GetTime() + 1;
   thread lightning(::lightning_normal, ::lightning_flash);
+
   if(!disableFX) {
     flag_wait("subway_gate_closed");
     thread rainEffectChange(0, 6);
@@ -213,7 +240,9 @@ lightning_normal() {}
 water_drops_init(startCount) {
   trigs = getEntArray("trigger_water_drops", "targetname");
   ASSERTEX(isDefined(trigs) && trigs.size > 0, "Can't find any water drop fx triggers.");
+
   array_thread(trigs, ::water_drops_trigger_think);
+
   if(isDefined(startCount) && startCount > 0) {
     flagMsg = "all_players_connected";
     if(!isDefined(level.flag[flagMsg])) {
@@ -221,8 +250,10 @@ water_drops_init(startCount) {
     } else {
       flag_wait(flagMsg);
     }
+
     array_thread(get_players(), ::scr_set_water_drops, startCount);
   }
+
   level thread water_drops_triggers_delete(trigs);
 }
 
@@ -233,6 +264,7 @@ water_drops_triggers_delete(trigs) {
   } else {
     flag_wait(flagMsg);
   }
+
   flag_wait("subway_gate_closed");
   array_thread(get_players(), ::scr_set_water_drops, 0);
   delete_group(trigs);
@@ -243,10 +275,13 @@ water_drops_trigger_think() {
     ASSERTMSG("Water drop fx trigger at origin " + self.origin + " does not have script_int set.You need to set this to specify the amount of water drops that will be generated.");
     return;
   }
+
   while(1) {
     self waittill("trigger", player);
-    if(IsPlayer(player)) {
+
+    if(isPlayer(player)) {
       player scr_set_water_drops(self.script_int);
+
       while(player IsTouching(self)) {
         wait(0.05);
       }
@@ -260,57 +295,69 @@ scr_set_water_drops(count) {
   if(!isDefined(self.waterDropsActive)) {
     self.waterDropsActive = false;
   }
+
   if(count > 0 && self.waterDropsActive) {
     return;
   }
+
   if(count > 0) {
     self.waterDropsActive = true;
   } else {
     self.waterDropsActive = false;
   }
+
   if(isDefined(self)) {
     self SetWaterDrops(count);
   }
 }
-
 ambient_fakefire(endonString, delayStart) {
   if(delayStart) {
     wait(RandomFloatRange(0.25, 5));
   }
+
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   team = undefined;
   fireSound = undefined;
   weapType = "rifle";
+
   if(!isDefined(self.script_noteworthy)) {
     team = "axis_rifle";
   } else {
     team = self.script_noteworthy;
   }
+
   switch (team) {
     case "axis_rifle":
       fireSound = "weap_kar98k_fire";
       weapType = "rifle";
       break;
+
     case "allied_rifle":
       fireSound = "weap_mosinnagant_fire";
       weapType = "rifle";
       break;
+
     case "axis_smg":
       fireSound = "weap_mp40_fire";
       weapType = "smg";
       break;
+
     case "allied_smg":
       fireSound = "weap_ppsh_fire";
       weapType = "smg";
       break;
+
     default:
       ASSERTMSG("ambient_fakefire: team name '" + team + "' is not recognized.");
   }
+
   if(weapType == "rifle") {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 60;
+
     burstMin = 1;
     burstMax = 4;
     betweenShotsMin = 0.8;
@@ -320,6 +367,7 @@ ambient_fakefire(endonString, delayStart) {
   } else {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 45;
+
     burstMin = 6;
     burstMax = 17;
     betweenShotsMin = 0.048;
@@ -327,54 +375,71 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 5;
     reloadTimeMax = 12;
   }
+
   while(1) {
     burst = RandomIntRange(burstMin, burstMax);
+
     for(i = 0; i < burst; i++) {
       traceDist = 10000;
       target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+
       playFX(muzzleFlash, self.origin, anglesToForward(self.angles));
       BulletTracer(self.origin, target, false);
+
       if(RandomInt(100) <= soundChance) {
         thread play_sound_in_space(fireSound, self.origin);
       }
+
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
+
     wait(RandomFloatRange(reloadTimeMin, reloadTimeMax));
   }
 }
-
 ambient_cloudburst_fx(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   wait(RandomInt(5));
+
   offsetX = 200;
   offsetY = 200;
   offsetZ = 200;
+
   burstsMin = 2;
   burstsMax = 5;
+
   burstWaitMin = 0.25;
   burstWaitMax = 0.65;
+
   pauseMin = 4;
   pauseMax = 10;
+
   while(1) {
     numBursts = RandomIntRange(burstsMin, burstsMax);
+
     for(i = 0; i < numBursts; i++) {
       offsetVec = self.origin + (RandomIntRange((offsetX * -1), offsetX), RandomIntRange((offsetY * -1), offsetY), RandomIntRange((offsetZ * -1), offsetZ));
+
       playFX(level._effect["cloudburst"], self.origin + offsetVec);
+
       wait(RandomFloatRange(burstWaitMin, burstWaitMax));
     }
+
     wait(RandomFloatRange(pauseMin, pauseMax));
   }
 }
-
 ambient_aaa_fx(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   self thread ambient_aaa_fx_rotate(endonString);
+
   while(1) {
     firetime = RandomIntRange(3, 8);
+
     for(i = 0; i < firetime * 5; i++) {
       playFX(level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
       wait(RandomFloatRange(0.14, 0.19));
@@ -382,11 +447,11 @@ ambient_aaa_fx(endonString) {
     wait RandomFloatRange(1.5, 3);
   }
 }
-
 ambient_aaa_fx_rotate(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   while(1) {
     self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
@@ -398,31 +463,39 @@ ambient_aaa_fx_rotate(endonString) {
 lights_arty_init() {
   hatLamps = getEntArray("metro_flicker_hatlamp", "targetname");
   ASSERTEX(array_validate(hatLamps), "Can't find any metro flickering hat lamp light sets.");
+
   for(i = 0; i < hatLamps.size; i++) {
     hatLamp = hatLamps[i];
     hatLamp.offModel = getent_safe(hatLamp.target, "targetname");
     hatLamp.light = getent_safe(hatLamp.offModel.target, "targetname");
+
     hatLamp.offModel Hide();
+
     hatLamp.light.onIntensity = 3.5;
     hatLamp.light SetLightIntensity(hatLamp.light.onIntensity);
     hatLamp thread particle_light("on");
   }
+
   level.metro_flicker_lights = hatLamps;
 }
-
 light_arty_flicker(darkTimeMin, darkTimeMax) {
   hatLamp = self;
+
   on = hatLamp.light.onIntensity;
   off = 0;
+
   darkTime = RandomFloatRange(darkTimeMin, darkTimeMax);
   flickerTime = RandomFloatRange(level.flickerTimeMin, level.flickerTimeMax);
   comboTime = darkTime + flickerTime;
   endTime = GetTime() + (comboTime * 1000);
+
   firstFlicker = true;
   self.lightRegistered = false;
+
   onFrac = on * RandomFloatRange(0.1, 0.15);
   intensityCap = on * 0.9;
   stepMultiplier = 0.04;
+
   while(GetTime() < endTime) {
     if(firstFlicker) {
       wait(RandomFloat(0.5));
@@ -431,41 +504,54 @@ light_arty_flicker(darkTimeMin, darkTimeMax) {
       } else {
         hatLamp.light SetLightIntensity(off);
       }
+
       hatLamp thread particle_light("off");
       lamp_swap("off");
       wait(darkTime);
+
       firstFlicker = false;
     }
+
     if(RandomInt(100) > 15) {
       flicker = RandomFloatRange(0.05, 0.15);
+
       SetClientSysState("levelNotify", "f");
     } else {
       flicker = RandomFloatRange(0.4, 0.8);
+
       SetClientSysState("levelNotify", "flicker");
     }
+
     lamp_swap("on");
+
     hatLamp.light SetLightIntensity(RandomFloatRange(off, onFrac));
     hatLamp thread set_particle_light(onFrac);
     wait(flicker);
+
     hatLamp.light SetLightIntensity(onFrac);
     hatLamp thread set_particle_light(onFrac);
     wait(flicker);
+
     onFrac += (on * stepMultiplier);
     if(onFrac > intensityCap) {
       onFrac = intensityCap;
     }
+
     if(onFrac > (on * 0.5) && !self.lightRegistered) {
       level.arty_flickerlights_on++;
       self.lightRegistered = true;
     }
   }
+
   lastFrac = RandomFloatRange(off, onFrac);
   hatLamp.light SetLightIntensity(lastFrac);
   hatLamp thread set_particle_light(lastFrac);
+
   wait(RandomFloatRange(0.05, 1));
   hatLamp.light maps\ber2_util::light_setintensity(on, RandomFloatRange(0.25, 0.35));
   hatLamp thread particle_light("on");
   lamp_swap("on");
+
   SetClientSysState("levelNotify", "fs");
 }
 
@@ -481,22 +567,28 @@ lamp_swap(state) {
 
 set_particle_light(onFrac, on) {
   on = self.light.onIntensity;
+
   fxIntensity = "med";
+
   if(onFrac <= (on * 0.35)) {
     fxIntensity = "low";
   } else if(onFrac >= (on * 0.65)) {
     fxIntensity = "high";
   }
+
   self thread particle_light("on", fxIntensity);
 }
 
 particle_light(state, intensity) {
   self notify("creating_particle_light");
   self endon("creating_particle_light");
+
   lightFX_high = level._effect["metro_light_filler_high"];
   lightFX_med = level._effect["metro_light_filler_med"];
   lightFX_low = level._effect["metro_light_filler_low"];
+
   lightFX = lightFX_high;
+
   if(isDefined(intensity)) {
     if(intensity == "high") {
       lightFX = lightFX_high;
@@ -508,19 +600,23 @@ particle_light(state, intensity) {
       ASSERTMSG("particle_light(): intensity of '" + intensity + "' not identified.");
     }
   }
+
   if(state == "on") {
     if(isDefined(self.lastParticleLight)) {
       if(self.lastParticleLight == lightFX) {
         return;
       }
     }
+
     if(isDefined(self.particleLight)) {
       self.particleLight Delete();
     }
+
     self.particleLight = spawn("script_model", self.origin + (0, 0, -4));
     self.particleLight.angles = (90, 0, 0);
     self.particleLight setModel("tag_origin");
     playFXOnTag(lightFX, self.particleLight, "tag_origin");
+
     self.lastParticleLight = lightFX;
   } else {
     if(isDefined(self.particleLight)) {

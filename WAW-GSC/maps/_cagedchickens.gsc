@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_cagedchickens.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -9,6 +9,7 @@
 
 initChickens() {
   waittillframeend;
+
   cages = getEntArray("caged_chicken", "targetname");
   array_thread(cages, ::spawnChicken);
 }
@@ -16,9 +17,11 @@ initChickens() {
 spawnChicken() {
   chicken = spawn_anim_model("chicken");
   self thread anim_single_solo(chicken, "cage_freakout");
+
   anime = chicken getanim("cage_freakout");
   starttime = RandomFloatRange(0, 1.0);
   chicken SetAnimTime(anime, starttime);
+
   for(;;) {
     chicken playSound("animal_chicken_idle", "sounddone");
     chicken waittill("sounddone");

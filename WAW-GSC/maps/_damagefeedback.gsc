@@ -1,12 +1,14 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_damagefeedback.gsc
-*****************************************************/
+**************************************/
 
 init() {
   precacheShader("damage_feedback");
+
   if(getDvar("scr_damagefeedback") == "")
     setDvar("scr_damagefeedback", "0");
+
   if(!getDvarInt("scr_damagefeedback")) {
     return;
   }
@@ -26,16 +28,18 @@ monitorDamage() {
   }
   for(;;) {
     self waittill("damage", amount, attacker);
-    if(IsPlayer(attacker))
+
+    if(isPlayer(attacker))
       attacker updateDamageFeedback();
   }
 }
 
 updateDamageFeedback() {
-  if(!IsPlayer(self)) {
+  if(!isPlayer(self)) {
     return;
   }
   self playlocalsound("SP_hit_alert");
+
   self.hud_damagefeedback.alpha = 1;
   self.hud_damagefeedback fadeOverTime(1);
   self.hud_damagefeedback.alpha = 0;

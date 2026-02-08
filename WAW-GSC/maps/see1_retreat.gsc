@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\see1_retreat.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -16,8 +16,11 @@ create_retreat_group(group_name, retreat_nodes_noteworthy, group_to_merge_into, 
   new_group.spawner_noteworthies = [];
   new_group.merge_to = group_to_merge_into;
   new_group.num_killed = 0;
+
   level.retreat_groups[group_name] = new_group;
+
   level thread retreat_group_notify_detection(group_name);
+
   if(isDefined(num_to_kill)) {
     level thread retreat_group_kills_detection(group_name, num_to_kill);
   }
@@ -32,6 +35,7 @@ spawn_func_assign_retreat_group() {
   keys = getarraykeys(level.retreat_groups);
   for(i = 0; i < keys.size; i++) {
     noteworthies = level.retreat_groups[keys[i]].spawner_noteworthies;
+
     for(j = 0; j < noteworthies.size; j++) {
       if(noteworthies[j] == self.script_noteworthy) {
         self.retreat_group = keys[i];
@@ -45,6 +49,7 @@ spawn_func_assign_retreat_group() {
 run_retreat_trigger(trigger_name, retreat_group_name) {
   end_msg = retreat_group_name + "_retreated";
   level endon(end_msg);
+
   trigger = getent(trigger_name, "targetname");
   if(isDefined(trigger)) {
     trigger waittill("trigger");
@@ -55,14 +60,17 @@ run_retreat_trigger(trigger_name, retreat_group_name) {
 retreat_group_notify_detection(group_name) {
   end_msg = group_name + "_retreated";
   level endon(end_msg);
+
   notify_msg = group_name + "_retreat";
   level waittill(notify_msg);
+
   retreat_group(group_name);
 }
 
 retreat_group_kills_detection(group_name, num_to_kill) {
   end_msg = group_name + "_retreated";
   level endon(end_msg);
+
   while(level.retreat_groups[group_name].num_killed < num_to_kill) {
     wait(0.05);
   }
@@ -85,6 +93,7 @@ retreat_group(group_name) {
     if(isDefined(level.retreat_groups[group_name].retreat_nodes_noteworthy)) {
       enemies = getaiarray("axis");
       destination_nodes = getnodearray(level.retreat_groups[group_name].retreat_nodes_noteworthy, "script_noteworthy");
+
       for(i = 0; i < enemies.size; i++) {
         if(isDefined(enemies[i].retreat_group) && enemies[i].retreat_group == group_name) {
           node_index = i;
@@ -98,6 +107,7 @@ retreat_group(group_name) {
       }
     }
   }
+
   complete_msg = group_name + "_retreated";
   level notify(complete_msg);
 }
@@ -106,11 +116,14 @@ set_goal_node_forced(node) {
   old_goalradius = self.goalradius;
   old_ignoreall = self.ignoreall;
   old_pacifist = self.pacifist;
+
   self.goalradius = 64;
   self.ignoreall = 1;
   self.pacifist = 1;
+
   self setgoalnode(node);
   self waittill("goal");
+
   self.goalradius = old_goalradius;
   self.ignoreall = old_ignoreall;
   self.pacifist = old_pacifist;

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_breach.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -18,9 +18,11 @@ main() {
 
 breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultFx, bShoot) {
   self endon("breach_abort");
+
   if(isDefined(bShoot) && (bShoot == false)) {
     anim.fire_notetrack_functions["scripted"] = ::breach_fire_straight;
   }
+
   self.flashthrown = false;
   self.closestAI = undefined;
   self.animEnt = undefined;
@@ -106,9 +108,11 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     self.grenadeDest = getent(self.grenadeOrigin.target, "targetname");
     assertEx((isDefined(self.grenadeDest)), "script_origin 'flashthrow_" + sRoomName + "' needs to target another script_origin where you want the flashbang to be thrown to");
   }
+
   self thread breach_abort(aBreachers);
   self thread breach_cleanup(aBreachers);
   self thread breach_play_fx(sBreachType, bPlayDefaultFx);
+
   iFirstBreachers = 0;
   for(i = 0; i < aBreachers.size; i++) {
     if(isDefined(aBreachers[i].firstBreacher)) {
@@ -120,12 +124,15 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
     assertEx(iFirstBreachers == 1, ".firstBreacher property has been set on " + iFirstBreachers + " AI. Max is one AI ");
   else
     self.closestAI = getClosest(self.animEnt.origin, aBreachers);
+
   if(aBreachers.size == 1)
     self.singleBreacher = true;
   for(i = 0; i < aBreachers.size; i++)
     aBreachers[i] thread breacher_think(self, sBreachType, bShoot);
+
   while(self.breachers < aBreachers.size)
     wait(0.05);
+
   self notify("ready_to_breach");
   self.readyToBreach = true;
   if(isDefined(self.breachtrigger)) {
@@ -134,17 +141,22 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   } else {
     self notify("execute_the_breach");
   }
+
   flag_set("begin_the_breach");
   self.aboutToBeBreached = true;
+
   if(isDefined(bSpawnHostiles) && (bSpawnHostiles == true)) {
     spawners = getEntArray("hostiles_" + sRoomName, "targetname");
     assertEx((isDefined(spawners)), "Could not find spawners with targetname of hostiles_" + sRoomName + " for room volume " + self.targetname);
+
     self waittill("spawn_hostiles");
     spawnBreachHostiles(spawners);
     self.hostilesSpawned = true;
   }
+
   if(isDefined(self.badplace))
     badplace_cylinder(self.sBadplaceName, -1, self.badplace.origin, self.badplace.radius, 200, "axis");
+
   ai = getaiarray("axis");
   aHostiles = [];
   for(i = 0; i < ai.size; i++) {
@@ -153,9 +165,12 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   }
   if(aHostiles.size > 0)
     array_thread(aHostiles, ::breach_enemies_stunned, self);
+
   while(!self.AIareInTheRoom)
     wait(0.05);
+
   self notify("breach_complete");
+
   if(!aHostiles.size) {
     return;
   }
@@ -184,19 +199,24 @@ breacher_think(eVolume, sBreachType, bShoot) {
     bShoot = true;
   self pushplayer(true);
   self thread give_infinite_ammo();
+
   eVolume endon("breach_abort");
+
   self.ender = "stop_idle_" + self getentitynumber();
   AInumber = undefined;
   sAnimStart = undefined;
   sAnimIdle = undefined;
   sAnimBreach = undefined;
   sAnimFlash = undefined;
+
   if(self == eVolume.closestAI)
     AInumber = "01";
   else
     AInumber = "02";
+
   if((eVolume.singleBreacher == true) && (sBreachType == "explosive_breach_left"))
     AInumber = "02";
+
   switch (sBreachType) {
     case "explosive_breach_left":
       if((isDefined(self.usebreachapproach)) && (self.usebreachapproach == false))
@@ -228,17 +248,21 @@ breacher_think(eVolume, sBreachType, bShoot) {
       assertmsg(sBreachType + " is not a valid breachType");
       break;
   }
+
   self breach_set_goaladius(64);
   eVolume.animEnt anim_generic_reach(self, sAnimStart);
   eVolume.animEnt anim_generic(self, sAnimStart);
   eVolume.animEnt thread anim_generic_loop(self, sAnimIdle, undefined, self.ender);
   self.setGoalPos = self.origin;
   eVolume.breachers++;
+
   eVolume waittill("execute_the_breach");
+
   if((!eVolume.flashthrown) && (isDefined(sAnimFlash))) {
     eVolume.animEnt notify(self.ender);
     eVolume.animEnt thread anim_generic(self, sAnimFlash);
     wait(1);
+
     if((AInumber == "02") || (eVolume.singleBreacher == true)) {
       sHandTag = "J_Mid_LE_1";
       self attach("projectile_m84_flashbang_grenade", sHandTag);
@@ -254,14 +278,18 @@ breacher_think(eVolume, sBreachType, bShoot) {
       self.grenadeWeapon = oldGrenadeWeapon;
       self.grenadeAmmo = 0;
     }
+
     self waittillmatch("single anim", "end");
     eVolume.animEnt thread anim_generic_loop(self, sAnimIdle, undefined, self.ender);
     wait(.1);
   }
+
   eVolume.animEnt notify(self.ender);
+
   if(bShoot == false)
     self.breachDoNotFire = true;
   eVolume.animEnt thread anim_generic(self, sAnimBreach);
+
   if(sBreachType == "explosive_breach_left") {
     if(AInumber == "02") {
       self thread detcord_logic(eVolume);
@@ -283,17 +311,22 @@ breacher_think(eVolume, sBreachType, bShoot) {
       eVolume notify("play_breach_fx");
     }
   } else if(sBreachType == "flash_breach_no_door_right") {}
+
   self waittillmatch("single anim", "end");
   self notify("breach_complete");
   if(bShoot == false)
     self.breachDoNotFire = undefined;
+
   if(isDefined(level.friendly_breach_thread))
     self thread[[level.friendly_breach_thread]](eVolume);
+
   eVolume.AIareInTheRoom = true;
   self pushplayer(false);
   self breach_reset_animname();
+
   while(!eVolume.cleared)
     wait(0.05);
+
   self.breaching = false;
 }
 
@@ -307,6 +340,7 @@ detcord_logic(eVolume) {
   self thread sound_effect_play(eVolume);
   self waittillmatch("single anim", "attach prop right");
   sHandTag = "TAG_INHAND";
+
   self attach("weapon_detcord", sHandTag);
   self waittillmatch("single anim", "detach prop right");
   org_hand = self gettagorigin(sHandTag);
@@ -315,6 +349,7 @@ detcord_logic(eVolume) {
   model_detcord = spawn("script_model", org_hand);
   model_detcord setModel("weapon_detcord");
   model_detcord.angles = angles_hand;
+
   eVolume waittill("detpack_detonated");
   radiusdamage(model_detcord.origin, 64, 50, 25);
   model_detcord delete();
@@ -327,16 +362,20 @@ sound_effect_play(eVolume) {
 
 breach_enemies_stunned(eRoomVolume) {
   assert(0);
+
   self endon("death");
   eRoomVolume endon("breach_aborted");
+
   eRoomVolume waittill("detpack_detonated");
   if(distance(self.origin, eRoomVolume.animEnt.origin) <= level.detpackStunRadius) {
     level.stunnedAnimNumber++;
     if(level.stunnedAnimNumber > 2)
       level.stunnedAnimNumber = 1;
     sStunnedAnim = "exposed_flashbang_v" + level.stunnedAnimNumber;
+
     self.allowdeath = true;
     self anim_generic_custom_animmode(self, "gravity", sStunnedAnim);
+
     self breach_reset_animname();
   }
 }
@@ -344,6 +383,7 @@ breach_enemies_stunned(eRoomVolume) {
 breach_trigger_think(eRoomVolume) {
   eRoomVolume endon("execute_the_breach");
   eRoomVolume endon("breach_aborted");
+
   self thread breach_trigger_cleanup(eRoomVolume);
   if((self.classname == "trigger_use") || (self.classname == "trigger_use_touch")) {
     self setHintString(eRoomVolume.triggerHintString);
@@ -363,10 +403,10 @@ breach_trigger_cleanup(eRoomVolume) {
   if(isDefined(eRoomVolume.eBreachmodel))
     eRoomVolume.eBreachmodel delete();
 }
-
 breach_abort(aBreachers) {
   self endon("breach_complete");
   self waittill("breach_abort");
+
   self.cleared = true;
   self thread breach_cleanup(aBreachers);
 }
@@ -376,23 +416,28 @@ breach_cleanup(aBreachers) {
     wait(0.05);
   if(isDefined(self.badplace))
     badplace_delete(self.sBadplaceName);
+
   while(!self.cleared)
     wait(0.05);
+
   array_thread(aBreachers, ::breach_AI_reset, self);
 }
 
 breach_AI_reset(eVolume) {
   self endon("death");
+
   self breach_reset_animname();
   self breach_reset_goaladius();
   eVolume.animEnt notify(self.ender);
   self notify("stop_infinite_ammo");
+
   self pushplayer(false);
 }
 
 breach_play_fx(sBreachType, bPlayDefaultFx) {
   self endon("breach_aborted");
   self endon("breach_complete");
+
   switch (sBreachType) {
     case "explosive_breach_left":
       self waittill("play_breach_fx");
@@ -408,6 +453,7 @@ breach_play_fx(sBreachType, bPlayDefaultFx) {
         playFX(level._effect["_breach_doorbreach_kick"], self.eExploderOrigin.origin, anglesToForward(self.eExploderOrigin.angles));
       break;
     case "flash_breach_no_door_right":
+
       break;
     default:
       assertmsg(sBreachType + " is not a valid breachType");
@@ -430,6 +476,7 @@ spawnBreachHostiles(arrayToSpawn) {
     spawnedGuys[spawnedGuys.size] = guy;
   }
   assertEx((arrayToSpawn.size == spawnedGuys.size), "Not all guys were spawned successfully from spawnBreachHostiles");
+
   return spawnedGuys;
 }
 
@@ -445,8 +492,10 @@ give_infinite_ammo() {
 door_open(sType, eVolume, bPlaySound) {
   if(!isDefined(bPlaySound))
     bPlaySound = true;
+
   if(bPlaysound == true)
     self playSound(level.scr_sound["breach_wood_door_kick"]);
+
   switch (sType) {
     case "explosive":
       self thread door_fall_over(eVolume.animEnt);
@@ -485,11 +534,15 @@ door_fall_over(animEnt) {
   else
     assertmsg("door needs to be either a script_model or a script_brushmodel");
   dist = (vector[0] * 20, vector[1] * 20, vector[2] * 20);
+
   self moveto(self.origin + dist, .5, 0, .5);
+
   rotationDummy = spawn("script_origin", (0, 0, 0));
   rotationDummy.angles = animEnt.angles;
   rotationDummy.origin = (self.origin[0], self.origin[1], animEnt.origin[2]);
+
   self linkTo(rotationDummy);
+
   rotationDummy rotatepitch(90, 0.45, 0.40);
   wait 0.45;
   rotationDummy rotatepitch(-4, 0.2, 0, 0.2);

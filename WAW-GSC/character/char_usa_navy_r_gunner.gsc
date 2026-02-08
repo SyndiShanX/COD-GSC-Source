@@ -1,7 +1,7 @@
-/*****************************************************
+/************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_usa_navy_r_gunner.gsc
-*****************************************************/
+************************************************/
 
 main() {
   self setModel("char_usa_navy_wetsailor_body");

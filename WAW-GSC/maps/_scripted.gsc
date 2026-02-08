@@ -1,10 +1,10 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_scripted.gsc
-*****************************************************/
+**************************************/
 
 main(notifyname, character, node, scr_thread, bitflags) {
-  if(getdvar("debug") == "1") {
+  if(getDvar("debug") == "1") {
     println("------------------------------------------------");
     println("Notifyname ^c", notifyname);
     println("character ", character);
@@ -13,6 +13,7 @@ main(notifyname, character, node, scr_thread, bitflags) {
     println("bitflags ", bitflags);
     println("------------------------------------------------");
   }
+
   if(!isDefined(level.scr_anim[notifyname][character]["animation"])) {
     self.scripted_notifyname = notifyname;
     self.scriptedFacialAnim = level.scr_anim[notifyname][character]["facial"];
@@ -22,31 +23,41 @@ main(notifyname, character, node, scr_thread, bitflags) {
     self notify("ScriptedFacial");
     return;
   }
+
   self thread abrupt_end(notifyname);
+
   if(isDefined(self.notifyname))
     maps\_utility::error(character + " tried to do scripted sequence " + notifyname + " but was in the middle of doing sequence " + self.notifyname);
+
   self.notifyname = notifyname;
   self notify("new_sequence");
+
   if((!isDefined(level.scripted_animation_slot)) || (!isDefined(level.scripted_animation_slot[notifyname])))
     level.scripted_animation_slot[notifyname] = 1;
   else
     level.scripted_animation_slot[notifyname]++;
+
   if(isDefined(node)) {
     node = getnode(node, "targetname");
     self.seeknode = node;
+
     if(level.scripted_animation_slot[notifyname] == 1) {
       level.scripted_animation_counter[notifyname] = 0;
       self thread wait_notify(notifyname);
     }
   }
+
   self.character = character;
   level.scripted_animation[notifyname][level.scripted_animation_slot[notifyname] - 1] = self;
+
   if(isDefined(scr_thread))
     self.scripted_thread = scr_thread;
+
   if(isDefined(level.scr_anim[notifyname][self.character]["animation"])) {
     org = getStartOrigin(node.origin, node.angles, level.scr_anim[notifyname][self.character]["animation"]);
     self.oldhealth = self.health;
     self.health = 5000;
+
     self setgoalpos(org);
     self.goalradius = (25);
     teleport = false;
@@ -60,56 +71,67 @@ main(notifyname, character, node, scr_thread, bitflags) {
     if(!teleport) {
       self waittill("goal");
     }
+
     level.scripted_animation_counter[notifyname]--;
   } else {
     doscriptedanim(notifyname);
     return;
   }
+
   if(isDefined(level.scr_anim[notifyname][self.character]["idle"]))
     self thread idle_anim(node, notifyname, self.character);
+
   if((isDefined(node)) && (!level.scripted_animation_counter[notifyname]))
     level.scripted_animation[notifyname][0] notify("anim_notify" + notifyname);
   else
-  if(getdvar("debug") == "1")
+  if(getDvar("debug") == "1")
     println("Counter for sequence ", notifyname, " was ", level.scripted_animation_counter[notifyname]);
 }
 
 checkanim(notifyname, total) {
   doanim = true;
+
   for(i = 0; i < total; i++) {
     if(!isalive(level.scripted_animation[notifyname][i]))
       donanim = false;
   }
+
   return doanim;
 }
 
 wait_notify(notifyname) {
-  if(getdvar("debug") == "1")
+  if(getDvar("debug") == "1")
     println("Preparing wait-notify for sequence ", notifyname);
   self waittill("anim_notify" + notifyname);
-  if(getdvar("debug") == "1")
+  if(getDvar("debug") == "1")
     println("Wait-notify reached for sequence ", notifyname);
+
   total = 0;
   allai = getaiarray("axis", "allies");
   for(i = 0; i < allai.size; i++) {
     if((isDefined(allai[i].notifyname)) && (allai[i].notifyname == notifyname))
       total++;
   }
+
   if(!checkanim(notifyname, total)) {
     println("Cancelling scripted animation because one of the members of the scripted sequence has died.");
     return;
   }
+
   for(i = 0; i < total; i++)
     level.scripted_animation[notifyname][i] thread doscriptedanim(notifyname);
+
   level.scripted_animation_slot[notifyname] = undefined;
 }
 
 idle_anim(node, notifyname, character, bitflags) {
   self endon("g_scripted_idle_anim");
+
   if(isDefined(node.classname))
     org = node.origin;
   else
     org = getStartOrigin(node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][0]);
+
   if((isDefined(bitflags)) && (bitflags &level.teleport))
     self teleport(org);
   else {
@@ -119,6 +141,7 @@ idle_anim(node, notifyname, character, bitflags) {
     self waittill("goal");
     self.goalradius = oldradius;
   }
+
   while(isalive(self)) {
     self animscripted("scriptedanimdone", node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][randomint(level.scr_anim[notifyname][character]["idle"].size)]);
     self waittillmatch("scriptedanimdone", "end");
@@ -127,7 +150,7 @@ idle_anim(node, notifyname, character, bitflags) {
 
 abort_sequence(notifyname) {
   self waittill("new_sequence");
-  if(getdvar("debug") == "1")
+  if(getDvar("debug") == "1")
     println("^d Finished scripted sequence:", notifyname);
   self notify(notifyname);
 }
@@ -136,9 +159,11 @@ doscriptedanim(notifyname) {
   self notify("g_scripted_idle_anim");
   if(isDefined(self.scripted_thread))
     thread[[self.scripted_thread]]();
+
   if(isDefined(level.scr_anim[notifyname][self.character]["facial"]))
     self.facial_animation = level.scr_anim[notifyname][self.character]["facial"];
   self animscripted("scriptedanimdone", self.seeknode.origin, self.seeknode.angles, level.scr_anim[notifyname][self.character]["animation"]);
+
   thread abort_sequence(notifyname);
   soundnum = undefined;
   while(1) {
@@ -146,6 +171,7 @@ doscriptedanim(notifyname) {
     if((notetrack == "sound") || (notetrack == "dialogue") || (notetrack == "dialog")) {
       if(!isDefined(soundnum))
         soundnum = 0;
+
       if((isDefined(level.scr_anim[notifyname][self.character]["sound"])) && (isDefined(level.scr_anim[notifyname][self.character]["sound"][soundnum]))) {
         println("^bPlayed friendly chat sound " + level.scr_anim[notifyname][self.character]["sound"][soundnum]);
         self playSound(level.scr_anim[notifyname][self.character]["sound"][soundnum]);
@@ -158,7 +184,7 @@ doscriptedanim(notifyname) {
     } else
       println("Notetrack was ", notetrack);
   }
-  if(getdvar("debug") == "1")
+  if(getDvar("debug") == "1")
     println("Sequence ", notifyname, " complete");
   self notify(notifyname);
   self.notifyname = undefined;

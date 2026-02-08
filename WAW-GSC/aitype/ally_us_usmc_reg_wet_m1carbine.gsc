@@ -14,8 +14,10 @@ main() {
   self.sidearm = "colt_wet";
   self.grenadeWeapon = "fraggrenade";
   self.grenadeAmmo = 3;
+
   self setEngagementMinDist(256.000000, 0.000000);
   self setEngagementMaxDist(768.000000, 1024.000000);
+
   switch (codescripts\character::get_random_character(3)) {
     case 0:
       character\char_usa_marinewet_r_rifle::main();
@@ -37,6 +39,7 @@ precache() {
   character\char_usa_marinewet_r_rifle::precache();
   character\char_usa_marinewet2_r_rifle::precache();
   character\char_usa_marinewet_r_rifle::precache();
+
   precacheItem("m1carbine_wet");
   precacheItem("colt_wet");
   precacheItem("fraggrenade");

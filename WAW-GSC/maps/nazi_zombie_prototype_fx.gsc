@@ -1,7 +1,7 @@
-/*****************************************************
+/*********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\nazi_zombie_prototype_fx.gsc
-*****************************************************/
+*********************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -9,6 +9,7 @@
 main() {
   maps\createfx\nazi_zombie_prototype_fx::main();
   maps\createart\nazi_zombie_prototype_art::main();
+
   scriptedFX();
   precache_createfx_fx();
   footsteps();

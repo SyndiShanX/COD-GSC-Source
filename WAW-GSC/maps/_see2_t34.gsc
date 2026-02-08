@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_see2_t34.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_vehicle_aianim;
 #include maps\_vehicle;
@@ -22,35 +22,34 @@ main(model, type) {
   build_compassicon();
   build_vehiclewalk(6);
   build_aianims(::setanims, ::set_vehicle_anims);
+
   level.vehicletypefancy["see2_t34"] = &"VEHICLENAME_T34_TANK";
 }
-
 init_local() {
   self thread report_damage_if_player();
 }
 
 report_damage_if_player() {
   self endon("death");
+
   while(1) {
     self waittill("damage", amount, attacker);
+
     if(isPlayer(attacker)) {
       level notify("friendly attacked by player", attacker);
     }
   }
 }
-
 #using_animtree("tank");
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
-
 setanims() {
   positions = [];
   for(i = 0; i < 9; i++)
     positions[i] = spawnStruct();
+
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger4";
   positions[2].sittag = "tag_passenger5";
@@ -60,6 +59,7 @@ setanims() {
   positions[6].sittag = "tag_passenger9";
   positions[7].sittag = "tag_passenger10";
   positions[8].sittag = "tag_passenger11";
+
   positions[0].idle = % crew_tank1_commander_idle;
   positions[1].idle = % crew_tank1_passenger4_idle;
   positions[2].idle = % crew_tank1_passenger5_idle;
@@ -69,6 +69,7 @@ setanims() {
   positions[6].idle = % crew_tank1_passenger9_idle;
   positions[7].idle = % crew_tank1_passenger10_idle;
   positions[8].idle = % crew_tank1_passenger11_idle;
+
   positions[0].getout = % crew_tank1_commander_dismount;
   positions[1].getout = % crew_tank1_passenger4_dismount;
   positions[2].getout = % crew_tank1_passenger5_dismount;
@@ -78,5 +79,6 @@ setanims() {
   positions[6].getout = % crew_tank1_passenger9_dismount;
   positions[7].getout = % crew_tank1_passenger10_dismount;
   positions[8].getout = % crew_tank1_passenger11_dismount;
+
   return positions;
 }

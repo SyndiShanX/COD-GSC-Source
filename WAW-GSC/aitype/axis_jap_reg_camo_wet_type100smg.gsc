@@ -14,8 +14,10 @@ main() {
   self.sidearm = "nambu_wet";
   self.grenadeWeapon = "type97_frag";
   self.grenadeAmmo = 3;
+
   self setEngagementMinDist(256.000000, 0.000000);
   self setEngagementMaxDist(768.000000, 1024.000000);
+
   character\char_jap_makpelwet_rifle_camo::main();
 }
 
@@ -25,6 +27,7 @@ spawner() {
 
 precache() {
   character\char_jap_makpelwet_rifle_camo::precache();
+
   precacheItem("type100_smg_wet");
   precacheItem("nambu_wet");
   precacheItem("type97_frag");

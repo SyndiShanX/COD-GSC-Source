@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\see2_threat.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_anim;
 #include maps\_utility;
@@ -26,10 +26,10 @@ create_see2_threat_group(group) {
     }
   }
 }
-
 set_see2_threat_bias(againstGroup, group, threatval) {
   group1index = -1;
   group2index = -1;
+
   for(i = 0; i < level.see2_threat_groups; i++) {
     if(level.see2_threat_groups[i] == againstGroup) {
       group1index = i;
@@ -48,14 +48,12 @@ set_see2_threat_bias(againstGroup, group, threatval) {
   }
   level.see2_threat[group1index][group2index] = threatval;
 }
-
 set_ent_see2_bias_group(group) {
   if(!array_check_for_dupes(level.see2_threat_groups, group)) {
     create_see2_threat_group(group);
   }
   self.my_group = group;
 }
-
 get_threat(againstEnt, ent) {
   ASSERTEX(isDefined(ent.my_group), "Cannot get threat, entity " + ent.classname + " has no threat group");
   ASSERTEX(isDefined(againstEnt.my_group), "Cannot get threat, entity " + againstEnt.classname + " has no threat group");
@@ -63,10 +61,10 @@ get_threat(againstEnt, ent) {
   threat += get_distance_threat(distanceSquared(ent.origin, againstEnt.origin));
   threat += get_curr_target_threat(ent, againstEnt);
 }
-
 get_group_threat(againstGroup, group) {
   group1index = -1;
   group2index = -1;
+
   for(i = 0; i < level.see2_threat_groups.size; i++) {
     if(level.see2_threat_groups[i] == againstGroup) {
       group1index = i;
@@ -81,7 +79,6 @@ get_group_threat(againstGroup, group) {
     return level.see2_threat[group1index][group2index];
   }
 }
-
 get_distance_threat(distanceSq) {
   if(!isDefined(level.see2_max_dist)) {
     level.see2_max_dist = 2500;
@@ -89,13 +86,15 @@ get_distance_threat(distanceSq) {
   if(!isDefined(level.see2_max_dist_threat)) {
     level.see2_max_dist_threat = 5000;
   }
+
   max_dist = (level.see2_max_dist * level.see2_max_dist);
+
   if(distanceSq > max_dist) {
     return 0;
   }
+
   return (distanceSq / max_dist);
 }
-
 get_curr_target_threat(ent, againstEnt) {
   if(isDefined(ent.curr_target) && ent.curr_target == againstEnt) {
     return 300;

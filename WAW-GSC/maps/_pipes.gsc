@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_pipes.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -15,13 +15,17 @@ main() {
   level.limit_pipe_fx = 32;
   pipes thread precacheFX();
   pipes thread methodsInit();
+
   waittillframeend;
+
   array_thread(pipes, ::pipesetup);
+
   pipearray = pipes;
   pipebreak = getEntArray("pipe_break", "targetname");
   if(pipebreak.size) {
     pipebreak pipebreakInit(pipearray);
     pipemasterInit(pipebreak);
+
     array_thread(pipebreak, ::pipebreakthink);
   }
 }
@@ -67,10 +71,12 @@ pipe_calc_assert(P, type) {
 
 pipemasterInit(breaks) {
   level.pipe_breaks = breaks;
+
   while(level.pipe_breaks.size) {
     sample = level.pipe_breaks[level.pipe_breaks.size - 1];
     master = spawnStruct();
     master.name = "pipe master at (" + sample.origin + ") position";
+
     sample.master = master;
     level.pipe_breaks = array_remove(level.pipe_breaks, sample);
     master pipemasterIterate(sample);
@@ -79,6 +85,7 @@ pipemasterInit(breaks) {
 
 pipemasterIterate(sample) {
   family = get_pipes_in_range(sample, level.pipe_breaks);
+
   if(!isDefined(family) || family.size == 0) {
     return;
   }
@@ -86,6 +93,7 @@ pipemasterIterate(sample) {
     family[i].master = self;
     level.pipe_breaks = array_remove(level.pipe_breaks, family[i]);
   }
+
   for(i = 0; i < family.size; i++)
     self pipemasterIterate(family[i]);
 }
@@ -97,6 +105,7 @@ get_pipes_in_range(sample, pipes) {
   }
   ents = [];
   foundit = false;
+
   for(i = 0; i < pipes.size; i++) {
     foundit = false;
     for(e = 0; e < pipes[i].ends.size; e++) {
@@ -109,11 +118,13 @@ get_pipes_in_range(sample, pipes) {
         ents[ents.size] = pipes[i];
         break;
       }
+
       if(foundit) {
         break;
       }
     }
   }
+
   return ents;
 }
 
@@ -121,10 +132,12 @@ pipebreakInit(pipes) {
   for(j = 0; j < self.size; j++) {
     self[j].whole = getClosest(self[j] getorigin(), pipes);
     pipes = array_remove(pipes, self[j].whole);
+
     self[j].fxnode = spawnStruct();
     self[j].fxnode.origin = self[j].origin;
     self[j].fxnode.forward = vector_multiply(anglestoright(self[j].angles), -1);
     self[j].fxnode.up = anglesToForward(self[j].angles);
+
     if(self[j].script_noteworthy == "fueltanker") {
       node = getstruct(self[j].whole.target, "targetname");
       self[j].fxnode.origin = node.origin;
@@ -132,6 +145,7 @@ pipebreakInit(pipes) {
       self[j].fxnode.up = anglesToForward(node.angles);
       self[j].fxnode.right = anglestoright(node.angles);
     }
+
     self[j].hurtnode = [];
     switch (self[j].script_noteworthy) {
       case "fire64": {
@@ -160,12 +174,14 @@ pipebreakInit(pipes) {
         newnode.forward = self[j].fxnode.forward;
         newnode.up = self[j].fxnode.up;
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode;
+
         newnode = spawnStruct();
         vec1 = vector_multiply(self[j].fxnode.up, -64);
         newnode.origin = self[j].fxnode.origin + vec1;
         newnode.forward = self[j].fxnode.forward;
         newnode.up = self[j].fxnode.up;
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode;
+
         vec1 = vector_multiply(self[j].fxnode.up, 64);
         self[j].hurtnode[self[j].hurtnode.size] = self[j].fxnode.origin + vec1;
         vec1 = vector_multiply(self[j].fxnode.up, -64);
@@ -175,48 +191,57 @@ pipebreakInit(pipes) {
       case "fueltanker": {
         self[j].fx_multinode = [];
         self[j].fx_multinode[self[j].fx_multinode.size] = self[j].fxnode;
+
         newnode2 = spawnStruct();
         newnode2.origin = self[j].fxnode.origin;
         newnode2.up = self[j].fxnode.up;
         newnode2.forward = self[j].fxnode.forward + vector_multiply(self[j].fxnode.right, 1);
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode2;
+
         newnode2 = spawnStruct();
         newnode2.origin = self[j].fxnode.origin;
         newnode2.up = self[j].fxnode.up;
         newnode2.forward = self[j].fxnode.forward + vector_multiply(self[j].fxnode.right, -1);
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode2;
+
         newnode = spawnStruct();
         vec1 = vector_multiply(self[j].fxnode.up, 112);
         newnode.origin = self[j].fxnode.origin + vec1;
         newnode.forward = self[j].fxnode.forward;
         newnode.up = self[j].fxnode.up;
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode;
+
         newnode2 = spawnStruct();
         newnode2.origin = newnode.origin;
         newnode2.up = newnode.up;
         newnode2.forward = newnode.forward + vector_multiply(self[j].fxnode.right, 1);
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode2;
+
         newnode2 = spawnStruct();
         newnode2.origin = newnode.origin;
         newnode2.up = newnode.up;
         newnode2.forward = newnode.forward + vector_multiply(self[j].fxnode.right, -1);
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode2;
+
         newnode = spawnStruct();
         vec1 = vector_multiply(self[j].fxnode.up, -112);
         newnode.origin = self[j].fxnode.origin + vec1;
         newnode.forward = self[j].fxnode.forward;
         newnode.up = self[j].fxnode.up;
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode;
+
         newnode2 = spawnStruct();
         newnode2.origin = newnode.origin;
         newnode2.up = newnode.up;
         newnode2.forward = newnode.forward + vector_multiply(self[j].fxnode.right, 1);
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode2;
+
         newnode2 = spawnStruct();
         newnode2.origin = newnode.origin;
         newnode2.up = newnode.up;
         newnode2.forward = newnode.forward + vector_multiply(self[j].fxnode.right, -1);
         self[j].fx_multinode[self[j].fx_multinode.size] = newnode2;
+
         self[j].hurtnode[self[j].hurtnode.size] = self[j].fxnode.origin;
         vec1 = vector_multiply(self[j].fxnode.up, 184);
         self[j].hurtnode[self[j].hurtnode.size] = self[j].fxnode.origin + vec1;
@@ -225,6 +250,7 @@ pipebreakInit(pipes) {
       }
       break;
     }
+
     self[j].ends = [];
     displacement = 0;
     switch (self[j].script_noteworthy) {
@@ -261,8 +287,10 @@ pipebreak_damage() {
   minDamage = 1;
   maxDamage = 250;
   blastRadius = 200;
+
   if(self.script_noteworthy == "fueltanker")
     blastRadius = 350;
+
   for(i = 0; i < self.hurtnode.size; i++)
     radiusDamage(self.hurtnode[i], blastRadius, maxDamage, minDamage);
 }
@@ -273,10 +301,12 @@ pipebreakthink() {
   self thread pipebreakthink2();
   self thread pipebreakthink3();
   self thread pipebreakthink4();
+
   self.whole endon("pipe_breaking");
   while(1) {
     self.whole waittill("pipe_ruptured");
     badplace_cylinder("", 2, self.whole.origin, 250, 250);
+
     self.master notify("pipe_ruptured");
     self thread pipebreakthink2();
   }
@@ -299,6 +329,7 @@ pipebreakthink3() {
 
 pipebreakthink4() {
   self.whole waittill("pipe_breaking");
+
   self.master notify("hurtme");
   switch (self.script_noteworthy) {
     case "fueltanker": {
@@ -315,10 +346,13 @@ pipebreakthink4() {
     }
     break;
   }
+
   self thread pipebreak_damage();
+
   self.A = self.whole.A;
   self.B = self.whole.B;
   self setCanDamage(true);
+
   self.whole notify("deleting");
   self.whole delete();
   self show();
@@ -328,14 +362,17 @@ pipebreakthink4() {
       playFX(level._effect["pipe_interactive"][self.script_noteworthy], self.fx_multinode[i].origin, self.fx_multinode[i].forward, self.fx_multinode[i].up);
   } else
     playFX(level._effect["pipe_interactive"][self.script_noteworthy], self.fxnode.origin, self.fxnode.forward, self.fxnode.up);
+
   if(self.script_noteworthy == "fueltanker")
     earthquake(0.4, 1.5, self.fxnode.origin, 600);
+
   self thread pipeimpact();
 }
 
 pipesetup() {
   self setCanDamage(true);
   node = undefined;
+
   if(isDefined(self.target)) {
     node = getstruct(self.target, "targetname");
     self.A = node.origin;
@@ -349,18 +386,23 @@ pipesetup() {
     vec1 = vector_multiply(vec, -64);
     self.B = self.origin + vec1;
   }
+
   if(self.script_noteworthy == "fire")
     self.limit = 4;
+
   self thread pipethink();
 }
 
 pipethink() {
   P = (0, 0, 0);
   self.numfx = 0;
+
   self endon("deleting");
+
   if(isDefined(self.limit)) {
     while(1) {
       self waittill("damage", other, damage, direction_vec, P, type);
+
       if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED") {
         continue;
       }
@@ -370,6 +412,7 @@ pipethink() {
   } else {
     while(1) {
       self waittill("damage", other, damage, direction_vec, P, type);
+
       if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED") {
         continue;
       }
@@ -383,11 +426,13 @@ pipethink() {
 pipethink_logic(num, limit, direction_vec, P, type) {
   if(num < limit) {
     P = self[[level._pipe_methods[type]]](P, type);
+
     if(!isDefined(P)) {
       return;
     }
     vec = vectorFromLineToPoint(self.A, self.B, P);
     self thread pipefx(P, vec);
+
     self notify("pipe_ruptured");
   } else
     self notify("pipe_breaking");
@@ -405,31 +450,40 @@ pipefx(P, vec) {
     return;
   }
   self endon("pipe_breaking");
+
   time = .1;
   if(!isDefined(self.burnsec)) {
     self.burnsec = int(2 / time);
     self.burninterval = int(self.burnsec * .15);
   } else
     self.burnsec -= self.burninterval;
+
   thread play_sound_in_space("mtl_gas_pipe_hit", P);
   self thread pipesndloopfx("mtl_gas_pipe_flame_loop", P, "pipe_breaking");
+
   if(vec == (0, 0, 0))
     vec = (0, 360, 0);
+
   for(i = 0; i < self.burnsec; i++) {
     playFX(level._effect["pipe_interactive"][self.script_noteworthy], P, vec);
     wait time;
   }
+
   self notify("pipe_breaking");
 }
 
 pipeimpact() {
   P = (0, 0, 0);
+
   self endon("deleting");
+
   while(1) {
     self waittill("damage", other, damage, direction_vec, P, type);
+
     if(type == "MOD_MELEE" || type == "MOD_IMPACT" || type == "MOD_BURNED")
       continue;
     P = self[[level._pipe_methods[type]]](P, type);
+
     direction_vec = vector_multiply(direction_vec, -1);
     playFX(level._effect["pipe_interactive"]["impact"], P, direction_vec);
   }
@@ -437,6 +491,7 @@ pipeimpact() {
 
 pipesndloopfx(snd, P, msg, time) {
   self endon(msg);
+
   if(isDefined(time))
     wait time;
   while(1) {
@@ -452,6 +507,7 @@ precacheFX() {
     level._effect["pipe_interactive"][self[i].script_noteworthy] = loadfx("impacts/fx_pipe_steam");
     level._sound["pipe_interactive"][self[i].script_noteworthy] = "mtl_steam_pipe_hit";
     level.pipe_fx_time[self[i].script_noteworthy] = 5;
+
     break;
   }
   for(i = 0; i < self.size; i++) {
@@ -473,7 +529,9 @@ precacheFX() {
     level._effect["pipe_interactive"]["fire128"] = loadfx("env/fire/fx_pipe_explosion128");
     level._effect["pipe_interactive"]["fire256"] = loadfx("env/fire/fx_pipe_explosion128");
     level._effect["pipe_interactive"]["fueltanker"] = loadfx("env/fire/fx_pipe_explosion128");
+
     break;
   }
+
   level._effect["pipe_interactive"]["impact"] = loadfx("impacts/small_metalhit_1");
 }

@@ -1,7 +1,7 @@
-/*****************************************************
+/******************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\nazi_zombie_prototype.gsc
-*****************************************************/
+******************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -9,14 +9,20 @@
 main() {
   maps\_destructible_opel_blitz::init();
   level.startInvulnerableTime = GetDvarInt("player_deathInvulnerableTime");
+
   include_weapons();
   include_powerups();
+
   if(!isDefined(level.startInvulnerableTime))
     level.startInvulnerableTime = GetDvarInt("player_deathInvulnerableTime");
+
   maps\nazi_zombie_prototype_fx::main();
   maps\_zombiemode_prototype::main();
+
   init_sounds();
+
   thread bad_area_fixes();
+
   thread above_couches_death();
   thread above_roof_death();
   thread below_ground_death();
@@ -25,21 +31,23 @@ main() {
 bad_area_fixes() {
   thread disable_stances_in_zones();
 }
-
 disable_stances_in_zones() {
   players = get_players();
+
   for(i = 0; i < players.size; i++) {
     players[i] thread fix_hax();
     players[i] thread fix_couch_stuckspot();
+
     players[i] thread out_of_bounds_watcher();
   }
 }
-
 fix_hax() {
   self endon("disconnect");
   self endon("death");
+
   check = 15;
   check1 = 10;
+
   while(1) {
     wait(.5);
     if(distance2d(self.origin, (101, -100, 40)) < check) {
@@ -62,44 +70,58 @@ fix_hax() {
       self setorigin((-173, 677, self.origin[2]));
     }
   }
+
 }
 
 fix_couch_stuckspot() {
   self endon("disconnect");
   self endon("death");
   level endon("upstairs_blocker_purchased");
+
   while(1) {
     wait(.5);
+
     if(distance2d(self.origin, (181, 161, 206)) < 10) {
       self setorigin((175, 175, self.origin[2]));
     }
   }
+
 }
 
 in_bad_zone_watcher() {
   self endon("disconnect");
   level endon("fake_death");
+
   no_prone_and_crouch_zones = [];
+
   no_prone_and_crouch_zones[0]["min"] = (-205, -128, 144);
   no_prone_and_crouch_zones[0]["max"] = (-89, -90, 269);
+
   no_prone_zones = [];
+
   no_prone_zones[0]["min"] = (-205, -128, 144);
   no_prone_zones[0]["max"] = (-55, 30, 269);
+
   no_prone_zones[1]["min"] = (88, 305, 144);
   no_prone_zones[1]["max"] = (245, 405, 269);
+
   while(1) {
     array_check = 0;
+
     if(no_prone_and_crouch_zones.size > no_prone_zones.size) {
       array_check = no_prone_and_crouch_zones.size;
     } else {
       array_check = no_prone_zones.size;
     }
+
     for(i = 0; i < array_check; i++) {
-      if(isDefined(no_prone_and_crouch_zones[i]) && self is_within_volume(no_prone_and_crouch_zones[i]["min"][0], no_prone_and_crouch_zones[i]["max"][0], no_prone_and_crouch_zones[i]["min"][1], no_prone_and_crouch_zones[i]["max"][1], no_prone_and_crouch_zones[i]["min"][2], no_prone_and_crouch_zones[i]["max"][2])) {
+      if(isDefined(no_prone_and_crouch_zones[i]) &&
+        self is_within_volume(no_prone_and_crouch_zones[i]["min"][0], no_prone_and_crouch_zones[i]["max"][0], no_prone_and_crouch_zones[i]["min"][1], no_prone_and_crouch_zones[i]["max"][1], no_prone_and_crouch_zones[i]["min"][2], no_prone_and_crouch_zones[i]["max"][2])) {
         self allowprone(false);
         self allowcrouch(false);
         break;
-      } else if(isDefined(no_prone_zones[i]) && self is_within_volume(no_prone_zones[i]["min"][0], no_prone_zones[i]["max"][0], no_prone_zones[i]["min"][1], no_prone_zones[i]["max"][1], no_prone_zones[i]["min"][2], no_prone_zones[i]["max"][2])) {
+      } else if(isDefined(no_prone_zones[i]) &&
+        self is_within_volume(no_prone_zones[i]["min"][0], no_prone_zones[i]["max"][0], no_prone_zones[i]["min"][1], no_prone_zones[i]["max"][1], no_prone_zones[i]["min"][2], no_prone_zones[i]["max"][2])) {
         self allowprone(false);
         break;
       } else {
@@ -119,38 +141,50 @@ is_within_volume(min_x, max_x, min_y, max_y, min_z, max_z) {
   } else if(self.origin[2] > max_z || self.origin[2] < min_z) {
     return false;
   }
+
   return true;
 }
 
 init_sounds() {
   maps\_zombiemode_utility::add_sound("break_stone", "break_stone");
 }
-
 include_weapons() {
   include_weapon("sw_357");
+
   include_weapon("m1carbine");
   include_weapon("m1garand");
   include_weapon("gewehr43");
+
   include_weapon("stg44");
   include_weapon("thompson");
   include_weapon("mp40");
+
   include_weapon("kar98k");
   include_weapon("springfield");
+
   include_weapon("ptrs41_zombie");
   include_weapon("kar98k_scoped_zombie");
+
   include_weapon("molotov");
   include_weapon("stielhandgranate");
+
   include_weapon("m1garand_gl");
   include_weapon("m7_launcher");
+
   include_weapon("m2_flamethrower_zombie");
+
   include_weapon("doublebarrel");
   include_weapon("doublebarrel_sawed_grip");
   include_weapon("shotgun");
+
   include_weapon("fg42_bipod");
   include_weapon("mg42_bipod");
   include_weapon("30cal_bipod");
+
   include_weapon("bar");
+
   include_weapon("panzerschrek");
+
   include_weapon("ray_gun");
 }
 
@@ -171,9 +205,12 @@ include_powerup(powerup_name) {
 
 above_couches_death() {
   level endon("junk purchased");
+
   while(1) {
     wait 0.2;
+
     players = get_players();
+
     for(i = 0; i < players.size; i++) {
       if(players[i].origin[2] > 145) {
         setsaveddvar("player_deathInvulnerableTime", 0);
@@ -187,7 +224,9 @@ above_couches_death() {
 above_roof_death() {
   while(1) {
     wait 0.2;
+
     players = get_players();
+
     for(i = 0; i < players.size; i++) {
       if(players[i].origin[2] > 235) {
         setsaveddvar("player_deathInvulnerableTime", 0);
@@ -201,7 +240,9 @@ above_roof_death() {
 below_ground_death() {
   while(1) {
     wait 0.2;
+
     players = get_players();
+
     for(i = 0; i < players.size; i++) {
       if(players[i].origin[2] < -11) {
         setsaveddvar("player_deathInvulnerableTime", 0);
@@ -214,28 +255,37 @@ below_ground_death() {
 
 out_of_bounds_watcher() {
   self endon("disconnect");
+
   outside_of_map = [];
+
   outside_of_map[0]["min"] = (361, 591, -11);
   outside_of_map[0]["max"] = (1068, 1031, 235);
+
   outside_of_map[1]["min"] = (-288, 591, -11);
   outside_of_map[1]["max"] = (361, 1160, 235);
+
   outside_of_map[2]["min"] = (-272, 120, -11);
   outside_of_map[2]["max"] = (370, 591, 235);
+
   outside_of_map[3]["min"] = (-272, -912, -11);
   outside_of_map[3]["max"] = (273, 120, 235);
+
   while(1) {
     array_check = outside_of_map.size;
+
     kill_player = true;
     for(i = 0; i < array_check; i++) {
       if(self is_within_volume(outside_of_map[i]["min"][0], outside_of_map[i]["max"][0], outside_of_map[i]["min"][1], outside_of_map[i]["max"][1], outside_of_map[i]["min"][2], outside_of_map[i]["max"][2])) {
         kill_player = false;
       }
     }
+
     if(kill_player) {
       setsaveddvar("player_deathInvulnerableTime", 0);
       self DoDamage(self.health + 1000, self.origin, undefined, undefined, "riflebullet");
       setsaveddvar("player_deathInvulnerableTime", level.startInvulnerableTime);
     }
+
     wait 0.2;
   }
 }

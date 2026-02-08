@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_createpath.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
@@ -15,19 +15,21 @@ main() {
     flag_init("path_refresh");
     flag_init("path_Notviewing");
   }
+
   level.path_selectrad = 128;
   precacheshader("psourcecreate");
   precacheshader("psourcemodify");
-  setdvar("path_delete", "");
-  setdvar("path_editmode", "");
-  setdvar("path_select_next", "");
-  setdvar("path_select_prev", "");
-  setdvar("path_setview", "");
-  setdvar("path_help", "");
-  setdvar("path_dump", "");
-  setdvar("path_select_new", "");
-  setdvar("path_enable", "0");
-  setdvar("path_setid", "0");
+
+  setDvar("path_delete", "");
+  setDvar("path_editmode", "");
+  setDvar("path_select_next", "");
+  setDvar("path_select_prev", "");
+  setDvar("path_setview", "");
+  setDvar("path_help", "");
+  setDvar("path_dump", "");
+  setDvar("path_select_new", "");
+  setDvar("path_enable", "0");
+  setDvar("path_setid", "0");
   level.pathmodsize = 35;
   level.pathmod = newhudelem();
   level.pathmod.alignX = "center";
@@ -38,17 +40,21 @@ main() {
   level.pathmod.y = 0;
   level.pathmod.alpha = .5;
   level.pathmod setshader("psourcemodify", level.pathmodsize * 2, level.pathmodsize);
+
   level.path_editmode = false;
   if(!isDefined(level.path_views))
     level.path_views = [];
   if(!isDefined(level.path_views[level.path_selectid]))
     level.path_views[level.path_selectid] = [];
+
   if(!isDefined(level.path_selectid))
     level.path_selectid = path_createid("default");
+
   if(!isDefined(level.path_selectindex))
     level.path_selectindex = level.path_views.size;
   level.path_viewindex = undefined;
   thread path_viewmode();
+
   while(1) {
     path_enable();
     path_editmode_update();
@@ -65,7 +71,7 @@ main() {
 }
 
 path_enable() {
-  if(getdvar("path_enable") != "1") {
+  if(getDvar("path_enable") != "1") {
     flag_set("path_refresh");
     level.pathmod.alpha = 0;
   }
@@ -74,12 +80,13 @@ path_enable() {
 }
 
 path_waittill_enable() {
-  while(getdvar("path_enable") != "1")
+  while(getDvar("path_enable") != "1")
     wait .1;
 }
 
 path_viewmode() {
   wait .1;
+
   while(1) {
     path_waittill_enable();
     flag_set("path_Notviewing");
@@ -110,6 +117,7 @@ path_activatebutton() {
   level endon("path_refresh");
   while(1) {
     players = get_players();
+
     while(!players[0] usebuttonpressed())
       wait .05;
     pick = path_getvisible();
@@ -128,6 +136,7 @@ path_handleselectindex() {
   while(1) {
     if(!isDefined(level.path_views[level.path_selectid][lastselect]))
       level.pathmod setshader("psourcecreate", level.pathmodsize * 2, level.pathmodsize);
+
     if(lastselect == level.path_selectindex) {
       wait .05;
       continue;
@@ -140,6 +149,7 @@ path_handleselectindex() {
 
 path_hudshow() {
   players = get_players();
+
   flag_clear("path_Notviewing");
   level.pathmod setshader("psourcemodify", level.pathmodsize * 2, level.pathmodsize);
   players[0] freezecontrols(true);
@@ -160,6 +170,7 @@ path_getvisible() {
     ident = level.paths_selectid_list[j];
     for(i = 0; i < level.path_views[ident].size; i++) {
       players = get_players();
+
       if(players[0] islookingorg(level.path_views[ident][i])) {
         newdist = distance(players[0] getEye(), level.path_views[ident][i].origin);
         if(newdist < dist) {
@@ -170,6 +181,7 @@ path_getvisible() {
       }
     }
   }
+
   outvar = spawnStruct();
   outvar.index = index;
   outvar.ident = outident;
@@ -185,11 +197,13 @@ path_viewwait(index) {
   frametime = .05;
   while(1) {
     players = get_players();
+
     if(distance(flat_origin(self.origin), flat_origin(players[0].origin)) < 32) {
       wait .05;
       continue;
     }
     thread draw_arrow_time(self.origin, self.origin + vector_multiply(anglesToForward(self.angles), arrowlength), (0, 1, 1), frametime);
+
     if(level.path_selectindex == index)
       thread plot_circle_star_fortime(level.path_selectrad, frametime, (1, 1, 0));
     else
@@ -224,8 +238,10 @@ plot_circle_star_fortime(radius, time, color) {
   plotpoints = [];
   rad = 0.000;
   timer = gettime() + (time * 1000);
+
   while(gettime() < timer) {
     players = get_players();
+
     angletoplayer = vectortoangles(self.origin - players[0] getEye());
     for(i = 0; i < circleres; i++) {
       plotpoints[plotpoints.size] = self.origin + vector_multiply(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
@@ -248,11 +264,13 @@ plot_circle_fortime(radius, time, color) {
   circleres++;
   plotpoints = [];
   rad = 0;
+
   plotpoints = [];
   rad = 0.000;
   timer = gettime() + (time * 1000);
   while(gettime() < timer) {
     players = get_players();
+
     angletoplayer = vectortoangles(self.origin - players[0] getEye());
     for(i = 0; i < circleres; i++) {
       plotpoints[plotpoints.size] = self.origin + vector_multiply(anglesToForward((angletoplayer + (rad, 90, 0))), radius);
@@ -265,58 +283,62 @@ plot_circle_fortime(radius, time, color) {
 }
 
 path_select_next() {
-  if(getdvar("path_select_next") == "")
+  if(getDvar("path_select_next") == "")
     return;
   if(!(level.path_selectindex == level.path_views[level.path_selectid].size))
     level.path_selectindex++;
-  setdvar("path_select_next", "");
+
+  setDvar("path_select_next", "");
 }
 
 path_select_prev() {
-  if(getdvar("path_select_prev") == "")
+  if(getDvar("path_select_prev") == "")
     return;
   if(!(level.path_selectindex == 0))
     level.path_selectindex--;
-  setdvar("path_select_prev", "");
+  setDvar("path_select_prev", "");
 }
 
 path_select_new() {
-  if(getdvar("path_select_new") == "")
+  if(getDvar("path_select_new") == "")
     return;
   level.path_selectindex = level.path_views[level.path_selectid].size;
-  setdvar("path_select_new", "");
+  setDvar("path_select_new", "");
 }
 
 path_setid() {
-  if(getdvar("path_setid") == "")
+  if(getDvar("path_setid") == "")
     return;
-  level.path_selectid = path_createid(getdvar("path_setid"));
+  level.path_selectid = path_createid(getDvar("path_setid"));
   level.path_selectindex = 0;
 }
 
 path_setview() {
-  if(getdvar("path_setview") == "")
+  if(getDvar("path_setview") == "")
     return;
   view = path_getcurrentview();
+
   path_setvieworgang(view);
-  setdvar("path_setview", "");
+  setDvar("path_setview", "");
   flag_set("path_refresh");
 }
 
 path_setvieworgang(view) {
   players = get_players();
+
   view.origin = players[0] getEye();
   view.angles = players[0] getplayerangles();
 }
 
 path_trigger_setvieworgang(view) {
   players = get_players();
+
   view.origin = players[0] getEye();
   view.radius = 200;
 }
 
 path_dump() {
-  if(getdvar("path_dump") == "")
+  if(getDvar("path_dump") == "")
     return;
   println(" ");
   println(" ");
@@ -341,11 +363,11 @@ path_dump() {
   println(" ");
   println(" ");
   println(" ");
-  setdvar("path_dump", "");
+  setDvar("path_dump", "");
 }
 
 path_help() {
-  if(getdvar("path_help") == "")
+  if(getDvar("path_help") == "")
     return;
   println(" ");
   println(" ");
@@ -374,11 +396,11 @@ path_help() {
   println("path_image <materialname>");
   println(" ");
   println("Once you have all your views press the dump button, open your console.log and paste the script to your level script");
-  setdvar("path_help", "");
+  setDvar("path_help", "");
 }
 
 path_delete() {
-  if(getdvar("path_delete") == "")
+  if(getDvar("path_delete") == "")
     return;
   newarray = [];
   for(i = 0; i < level.path_views[level.path_selectid].size; i++)
@@ -386,30 +408,30 @@ path_delete() {
       newarray[newarray.size] = level.path_views[level.path_selectid][i];
   level.path_views = newarray;
   flag_set("path_refresh");
-  setdvar("path_delete", "");
+  setDvar("path_delete", "");
 }
 
 path_select_template() {
-  if(getdvar("path_select_template") == "")
+  if(getDvar("path_select_template") == "")
     return;
-  setdvar("path_select_template", "");
+  setDvar("path_select_template", "");
 }
 
 path_editmode_update() {
-  if(getdvar("path_editmode") == "")
+  if(getDvar("path_editmode") == "")
     return;
   if(!level.path_editmode)
     level.path_editmode = true;
   else
     level.path_editmode = false;
-  setdvar("path_editmode", "");
+  setDvar("path_editmode", "");
 }
 
 path_image_update() {
-  if(getdvar("path_image") == "")
+  if(getDvar("path_image") == "")
     return;
   view = path_getcurrentview();
-  setdvar("path_image", "");
+  setDvar("path_image", "");
 }
 
 path_getcurrentview() {
@@ -456,7 +478,6 @@ path_createid(ident) {
   level.paths_selectid_list[level.paths_selectid_list.size] = ident;
   return ident;
 }
-
 path_create(position, angle, ident) {
   if(!isDefined(ident))
     ident = "default";
@@ -501,6 +522,7 @@ islookingorg(view) {
   normalvec = vectorNormalize(view.origin - self getEye());
   veccomp = vectorNormalize((view.origin - (0, 0, level.path_selectrad * 2)) - self getEye());
   insidedot = vectordot(normalvec, veccomp);
+
   anglevec = anglesToForward(self getplayerangles());
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot)

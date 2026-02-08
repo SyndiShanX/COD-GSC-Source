@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\sniper_event1.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -29,9 +29,12 @@ event1_start() {
 event1_shooting_start() {
   level endon("player_broke_stealth");
   flag_set("crawl_done");
+
   get_players()[0] takeallweapons();
   level.hero animscripts\shared::placeweaponOn(level.hero.sidearm, "right");
+
   level thread meet_hero2();
+
   VisionSetNaked("Sniper_default", 1);
   getent("tank_walkers", "target") delete();
   getent("meet_sniper_trig", "targetname") notify("trigger");
@@ -43,7 +46,6 @@ event1_shooting_start() {
 }
 
 #using_animtree("sniper_crows");
-
 event1_moveup_start() {
   wait 10;
   level notify("event2_started");
@@ -59,12 +61,15 @@ event1_moveup_start() {
     if(i == 5 || i == 6 || i == 7 || i == 8 || i == 5 || i == 1 || i == 2 || i == 4 || i == 23 || i == 24 || i == 25) {
       corpse thread maps\sniper_event1::delete_at_gun_pickup();
     }
+
     spot thread anim_single_solo(corpse, "body" + i + "_death");
     iprintln(i);
     wait 1;
   }
+
   setmusicstate("DOG_KILLED");
   flag_set("found_infountain");
+
   VisionSetNaked("Sniper_default", 1);
   thread e1_waitfor_player_break_stealth();
   get_players()[0] thread is_player_firing_during_boom();
@@ -116,19 +121,29 @@ groggy_wakeup() {
   overlay.vertAlign = "fullscreen";
   overlay.alpha = 0;
   overlay.sort = 1;
+
   overlay fadeOverlay(0.0001, 1, 2);
+
   thread crow_animate();
+
   clientnotify("INTRO_BUS");
+
   battlechatter_off();
   setmusicstate("INTRO");
+
   earthquake(0.1, 30, get_players()[0].origin, 500);
   VisionSetNaked("Sniper_wake", 1);
   self shellshock("sniper_intro", 55);
+
   angles = adjust_angles_to_player((-25, 00, 30));
   level.ground_ref_ent rotateto(angles, .2, 0.1, 0.1);
+
   overlay fadeOverlay(0.01, 1, 2);
+
   angles = adjust_angles_to_player((-22, 00, 23));
+
   wait 0.2;
+
   level.ground_ref_ent rotateto(angles, 5);
   level.player playrumbleonentity("damage_light");
   wait 0.4;
@@ -136,11 +151,14 @@ groggy_wakeup() {
   wait 0.4;
   overlay thread fadeOverlay(2, 0.35, 3);
   wait 2;
+
   angles = adjust_angles_to_player((-15, 00, 5));
   level.ground_ref_ent rotateto(angles, 3);
+
   wait 0.5;
   getent("ftn_walker_early", "targetname") stalingradspawn();
   wait 1.5;
+
   overlay fadeOverlay(2.5, 1, 6);
   get_players()[0] setwatersheeting(0);
   level.player playrumbleonentity("damage_light");
@@ -151,16 +169,20 @@ groggy_wakeup() {
   level notify("waking_up");
   overlay fadeOverlay(2.5, 0.2, 1.5);
   VisionSetNaked("Sniper_default", 35);
+
   wait 1;
   wait 1;
+
   overlay fadeOverlay(1, 1, 6);
   overlay fadeOverlay(5, 0.2, 1);
   overlay restoreVision(6, 0);
+
   wait 2;
   level notify("player_wokeup");
   level.ground_ref_ent rotateto((12, 0, 0), 7, 2, 5);
   level waittill("gunner_fired");
   self freezecontrols(true);
+
   wait 8;
   self freezecontrols(false);
   wait 5;
@@ -192,6 +214,7 @@ wakeup_in_fountain() {
   level.ground_ref_ent = spawn("script_model", (0, 0, 0));
   level.player playerSetGroundReferenceEnt(level.ground_ref_ent);
   self thread groggy_wakeup();
+
   self disableweapons();
   self takeweapon("mosin_rifle_scoped");
   self allowstand(false);
@@ -204,14 +227,18 @@ wakeup_in_fountain() {
   self Setclientdvar("bg_prone_yawcap", "25");
   self.nopronerotation = true;
   self thread player_speed_set(1, 1);
+
   self setweaponammostock("stick_grenade", 0);
   self setweaponammoclip("stick_grenade", 0);
+
   get_players()[0] FreezeControls(false);
   wait 20;
+
   self setweaponammoclip("mosin_rifle_scoped", 0);
   self setweaponammostock("mosin_rifle_scoped", 0);
   self setweaponammostock("stick_grenade", 0);
   self setweaponammoclip("stick_grenade", 0);
+
   spots = getstructarray("bombers_distance_start", "targetname");
   planes = [];
   for(i = 0; i < spots.size; i++) {
@@ -225,8 +252,10 @@ wakeup_in_fountain() {
     planes[i] thread rotate_plane_roll(1, 7, 1, 5);
   }
   thread spawn_fast_planes();
+
   wait 33;
   self thread player_speed_set(50, 5);
+
   trig = getent("let_player_turn", "targetname");
   trig thread wait_and_notify(30, "trigger");
   trig waittill("trigger");
@@ -318,10 +347,12 @@ hero_wakeup() {
   level.hero animscripts\shared::placeweaponOn(level.hero.sidearm, "right");
   spot thread anim_loop_solo(level.hero, "resnov_intro_loop", undefined, "stop_loop");
   level waittill("resnov_wake");
+
   spots = getEntArray("fountain_walkers_spots", "script_noteworthy");
   for(i = 0; i < spots.size; i++) {
     spots[i] delete();
   }
+
   spot notify("stop_loop");
   anime = "resnov_crawl";
   animlength = getanimlength(level.scr_anim[level.hero.animname][anime]);
@@ -331,10 +362,12 @@ hero_wakeup() {
   level.hero.name = "Sgt. Reznov";
   wait 10;
   thread objective_controller(1);
+
   wait animlength - 27;
   wait 5;
   flag_set("resnov_by_opening");
   wait 6;
+
   meet_hero2();
 }
 
@@ -344,6 +377,7 @@ meet_hero2() {
   flag_set("crawl_done");
   spot thread anim_loop_solo(level.hero, "resnov_wait_loop", undefined, "stop_loop");
   level.hero animscripts\shared::placeweaponOn(level.hero.sidearm, "right");
+
   flag_wait("player_by_opening");
   spot notify("stop_loop");
   spot anim_single_solo(level.hero, "resnov_gun");
@@ -354,7 +388,9 @@ meet_hero2() {
   level thread wait_and_setflag(10, "planes_wave2_come");
   animtime = getanimlength(level.scr_anim["hero"]["resnov_talk"]);
   spot anim_single_solo(level.hero, "resnov_talk");
+
   spot thread anim_loop_solo(level.hero, "resnov_gun_loop", undefined, "stop_loop");
+
   flag_wait("wave2_plane1_approaches");
   spot notify("stop_loop");
   spot anim_single_solo(level.hero, "ftn_ready");
@@ -362,8 +398,10 @@ meet_hero2() {
   spot anim_single_solo(level.hero, "ftn_shootnow");
   level notify("shootnow");
   level thread hud_show();
+
   spot notify("stop_loop");
   spot thread anim_loop_solo(level.hero, "ftn_again_loop", undefined, "stop_loop");
+
   level waittill("resnov_jumpout_time");
   spot notify("stop_loop");
 }
@@ -394,7 +432,9 @@ ftn_chatter(myanim) {
 meet_hero() {
   trig = getent("meet_sniper_trig", "targetname");
   trig waittill("trigger");
+
   level notify("go_go_ambient_planes");
+
   trig = getent("by_wall_opening_trig", "targetname");
   trig waittill("trigger");
   flag_wait("resnov_by_opening");
@@ -416,21 +456,28 @@ e1_crouch_by_opening() {
     players[i] allowcrouch(true);
     players[i] allowjump(true);
   }
+
   thread distance_convoy();
   trig waittill("trigger");
+
   wait 1;
+
   horch = getent("officer_horch", "targetname");
   playFXOnTag(level._effect["horch_headlights"], horch, "tag_headlight_right");
   playFXOnTag(level._effect["horch_headlights"], horch, "tag_headlight_left");
   flag_set("player_by_opening");
   flag_wait("crawl_done");
   players = get_players();
+
   wait 2;
+
   trigs = getEntArray("e1_fountain_trigs", "script_noteworthy");
   for(i = 0; i < trigs.size; i++) {
     trigs[i] delete();
   }
+
   level thread switch_rifles();
+
   flag_wait("planes_wave2_come");
   thread plane_controller("wave2");
   flag_wait("takebullets");
@@ -447,6 +494,7 @@ e1_crouch_by_opening() {
   level thread e1_waitfor_player_break_stealth();
   wait 1;
   maps\_spawner::kill_spawnerNum(1);
+
   getent("e1_distance_drones", "target") notify("stop_drone_loop");
   flag_wait("wave2_plane1_approaches");
   if(!flag("player_is_effed")) {
@@ -456,6 +504,7 @@ e1_crouch_by_opening() {
   level thread achievement_checker();
   wait 1;
   level thread encourage_player();
+
   level thread sniping_timer();
   objective_controller(2);
 }
@@ -480,25 +529,33 @@ out_of_fountain_conditions() {
   level thread fail_bomberpass();
   waittill_aigroupcleared("front_doorsmen");
   level notify("front_doorsmen_cleared");
+
   wait 1;
+
   clips = getEntArray("dog_clips", "targetname");
   for(i = 0; i < clips.size; i++) {
     clips[i] trigger_on();
     clips[i] disconnectpaths();
   }
+
   getent("dog_handler", "script_noteworthy") stalingradspawn();
   wait 5;
   getent("mydog", "script_noteworthy") stalingradspawn();
   wait 1;
   maps\_spawner::kill_spawnernum(5);
   waittill_aigroupcleared("E1_patrollers");
+
   setmusicstate("DOG_KILLED");
+
   level.hero.health = 99999999;
   level.hero.ignoreme = true;
   level.hero solo_set_pacifist(true);
   level.hero.ignoreall = true;
+
   flag_set("E1_shooting_done");
+
   cleanup_e1_origins();
+
   level notify("E1_shooting_done");
   out_of_fountain();
 }
@@ -515,13 +572,17 @@ out_of_fountain() {
     players[i] allowsprint(true);
     players[i] allowjump(true);
   }
-  level notify("fountain_out");;
+  level notify("fountain_out");
+
+  ;
   objective_controller(3);
   trig = getent("E1_player_near_building_trig", "targetname");
   trig waittill("trigger");
   flag_set("outof_fountain");
+
   thread e1_backtrack_blocking();
   wait 5;
+
   wait 2;
   trigs = getEntArray("player_jumping_by_car_trig", "targetname");
   for(i = 0; i < trigs.size; i++) {
@@ -535,24 +596,31 @@ out_of_fountain() {
 hero_animate_at_horch() {
   level endon("player_broke_stealth");
   clientnotify("POST_INTRO_BUS");
+
   level.hero.disablearrivals = true;
   level.hero.disableexits = true;
+
   level.hero endon("death");
   spot = getstruct("fountain_reznov_align_spot", "targetname");
   level.hero.animname = "hero";
   level notify("stop_talking");
+
   wait 0.05;
   level notify("resnov_jumpout_time");
   level.hero.ignoreme = true;
   level thread maps\_utility::autosave_by_name("fountain_out_save");
+
   if(!flag("found_infountain")) {
     level.hero animscripts\shared::placeweaponOn(level.hero.weapon, "none");
     spot anim_single_solo(level.hero, "ftn_" + level.e1_timing_feedback);
     animtime = getanimlength(level.scr_anim["hero"]["resnov_jump"]);
+
     spot thread anim_single_solo_earlyout(level.hero, "resnov_jump");
+
     level.hero set_run_anim("e1_street_run");
     wait animtime - 2;
     getent("fountain_clipper", "targetname") delete();
+
     wait 1.8;
   } else if(flag("found_infountain")) {
     level.hero set_run_anim("e1_street_run");
@@ -564,28 +632,38 @@ hero_animate_at_horch() {
     wait 5;
     getent("fountain_clipper", "targetname") delete();
   }
+
   spot = getstruct("hero_stop_at_horch_spot", "targetname");
+
   animtime = getanimlength(level.scr_anim["hero"]["e1_street_horchhide"]);
+
   level.hero.disablearrivals = true;
   level.hero.disableexits = true;
+
   level.hero set_run_anim("e1_street_run");
   spot anim_reach_solo(level.hero, "e1_street_horchhide");
+
   spot threadanim_single_solo(level.hero, "e1_street_horchhide");
   level thread wait_and_notify(animtime - 0.05, "horchhide_done");
   level waittill("horchhide_done");
+
   trig = getent("wave_player_fromhorch", "targetname");
   if(level.player istouching(trig)) {
     newspot = spawn("script_origin", level.hero.origin);
     newspot.angles = level.hero.angles;
+
     animtime = getanimlength(level.scr_anim["hero"]["e1_street_followme"]);
     spot thread anim_single_solo(level.hero, "e1_street_followme");
     level.hero.disablearrivals = true;
     level.hero.disableexits = true;
+
     wait animtime - 0.14;
     level.hero stopanimscripted();
     newspot delete();
   }
+
   spot = getstructent("sarge_walk_along_spot", "targetname");
+
   spot anim_reach_solo(level.hero, "e1_street_windowhop");
   getent("fight_in_shop_chain", "targetname") notify("trigger");
   spot anim_single_solo(level.hero, "e1_street_windowhop");
@@ -635,8 +713,10 @@ e1_waitfor_player_break_stealth() {
   level waittill("player_broke_stealth", player);
   flag_set("player_is_effed");
   setmusicstate("BROKE_STEALTH");
+
   level notify("stop_talking");
   wait 0.01;
+
   if(!flag("failed_by_bombers_passed")) {
     thread say_dialogue("u_gave_away");
   } else {
@@ -647,12 +727,15 @@ e1_waitfor_player_break_stealth() {
     lines[2] = "u_let_chance_slip";
     level thread say_dialogue(lines[randomint(2)]);
   }
+
   flag_set("not_speaking");
   thread hunters_after_hero();
+
   savetrigs = getEntArray("trigger_autosave", "targetname");
   for(i = 0; i < savetrigs.size; i++) {
     savetrigs[i] trigger_off();
   }
+
   spawners = getEntArray("fountain_player_cleanup", "targetname");
   maps\_spawner::flood_spawner_scripted(spawners);
   wait 0.5;
@@ -681,6 +764,7 @@ e1_waitfor_player_break_stealth() {
     for(i = 0; i < players.size; i++) {
       wait randomintrange(3, 6);
       counter++;
+
       magicbullet("mosin_rifle_scoped_noflash", spots[randomint(spots.size)].origin, players[i].origin + (0, 0, 15));
       players[i] thread dodamage_onhit(10 * counter);
     }
@@ -737,6 +821,7 @@ plane_controller(wave) {
 bomber_track(plane, wave2, lastwave, new_configuration) {
   level notify("new_bomber_track");
   level endon("new_bomber_track");
+
   stillpassing = true;
   notified = false;
   ycoord = 34000;
@@ -750,9 +835,11 @@ bomber_track(plane, wave2, lastwave, new_configuration) {
       level notify("anotherwave");
       notified = true;
     }
+
     if(isDefined(plane) && plane.origin[1] > -4000) {
       stillpassing = true;
     }
+
     if(stillpassing == false) {
       notified = false;
       flag_clear("bombers_passing");
@@ -776,6 +863,7 @@ fail_bomberpass() {
   flag_wait("all_bombers_passed");
   flag_set("failed_by_bombers_passed");
   guys = getaiarray("axis");
+
   if(guys.size > 0 && !flag("player_in_shop")) {
     level notify("player_broke_stealth", get_players()[0]);
   }
@@ -784,8 +872,10 @@ fail_bomberpass() {
 bomber_wave_come(planenames, lastwave, new_configuration, shadowdistdraw) {
   leadplane = undefined;
   leadplane1 = undefined;
+
   playsoundatposition("bombers_dist_inc", (1384, 8016, -1944));
   playsoundatposition("bombers_dist_exit", (1384, 8016, -1944));
+
   if(isDefined(new_configuration) && new_configuration == 1) {
     spots = getstructarray("wave2_planes", "targetname");
   } else if(isDefined(new_configuration) && new_configuration == 2) {
@@ -837,6 +927,7 @@ bomber_wave_come(planenames, lastwave, new_configuration, shadowdistdraw) {
         } else
           break;
       }
+
       if(spawnpos[2] > 2000) {
         planeshadow = spawn("script_model", spawnpos);
         planeshadow.angles = spots[i].angles;
@@ -847,6 +938,7 @@ bomber_wave_come(planenames, lastwave, new_configuration, shadowdistdraw) {
         planeshadow thread delete_plane_at_end();
       }
     }
+
     dest1 = (spots[i].origin[0], 30000, spots[i].origin[2]);
     dest2 = (spots[i].origin[0], -64000, spots[i].origin[2]);
     planes[i] flyto(dest2, mph);
@@ -854,18 +946,21 @@ bomber_wave_come(planenames, lastwave, new_configuration, shadowdistdraw) {
     if(isDefined(leadplane) && planes[i] != leadplane || !isDefined(leadplane)) {
       planes[i] thread rotate_plane_roll(0, 7, 1, 5);
     }
+
     if(spots[i].origin[2] < 3000) {
       if(planenames == "wave1_planes") {
         planes[i] thread wait_n_shake(.18, 10);
       } else {
         planes[i] thread wait_n_shake(.08, 10);
       }
+
       planes[i] threadmaps\sniper_amb::plane_shockwave();
       planes[i] thread maps\sniper_amb::play_low_plane_sounds(mph);
       playFXOnTag(level._effect["wing_contrails"], planes[i], "tag_wingtip_left");
       playFXOnTag(level._effect["wing_contrails"], planes[i], "tag_wingtip_right");
       playFXOnTag(level._effect["plane_propellor"], planes[i], "tag_engine_fx");
     }
+
     if(spots[i].origin[2] >= 3000) {
       planes[i] playLoopSound("bombers");
     }
@@ -922,7 +1017,6 @@ rotate_plane_roll(rangelow, rangehigh, timelow, timehigh) {
 units_to_miles(num) {
   return num / 63360;
 }
-
 wait_n_shake(mag, time) {
   level endon("bombers_passed");
   self endon("death");
@@ -967,32 +1061,39 @@ event1_trigs_off() {
   getent("e3_plank_blocker", "targetname") trigger_off();
   getent("e1_bar_ai_ramp", "targetname") trigger_off();
   getent("E2_sniper_nearmiss_trig", "targetname") trigger_off();
+
   clip = getent("stay_out_of_building_clip", "targetname");
   clip connectpaths();
   clip trigger_off();
+
   trigs = getEntArray("player_jumping_by_car_trig", "targetname");
   for(i = 0; i < trigs.size; i++) {
     trigs[i] trigger_off();
   }
+
   blocker = getEntArray("bb_doorblocker", "targetname");
   for(i = 0; i < blocker.size; i++) {
     blocker[i] connectpaths();
     blocker[i] moveto(blocker[i].origin + (0, 0, -10000), 0.1);
   }
+
   trigs = getEntArray("fire_hurts_trigs", "targetname");
   for(i = 0; i < trigs.size; i++) {
     trigs[i] thread fire_hurts_trigs();
   }
+
   clips = getEntArray("e5_door_block", "targetname");
   for(i = 0; i < clips.size; i++) {
     clips[i] connectpaths();
     clips[i] trigger_off();
   }
+
   clips = getEntArray("dog_clips", "targetname");
   for(i = 0; i < clips.size; i++) {
     clips[i] connectpaths();
     clips[i] trigger_off();
   }
+
   getent("b2_d", "targetname") hide();
   getent("b1_d", "targetname") hide();
 }
@@ -1009,6 +1110,7 @@ e1_player_breaks_stealth_during_pacing() {
   level endon("event2_started");
   level waittill("player_broke_stealth");
   setmusicstate("BROKE_STEALTH");
+
   spawners = getEntArray("e1_building_cleaners", "targetname");
   maps\_spawner::flood_spawner_scripted(spawners);
   thread hunters_after_hero();
@@ -1069,6 +1171,7 @@ crouch_hint() {
     level.hintelem setText(&"SNIPER_HINT_CROUCH");
   else
     level.hintelem setText(&"SCRIPT_PLATFORM_SNIPER_HINT_CROUCH");
+
   while(get_players()[0] getstance() != "crouch") {
     wait 0.2;
   }
@@ -1088,29 +1191,33 @@ init_results_hudelem(x, y, alignX, alignY, fontscale, alpha) {
 }
 
 #using_animtree("sniper_crows");
-
 crow_animate() {
   level thread crow2_animate();
   level thread crow3_animate();
   level thread crow4_animate();
   level thread crow5_animate();
+
   spot = getent("fountain_anim_spot", "targetname");
   crow = spawn("script_model", spot.origin);
   crow setModel("anim_berlin_crow");
   wait 0.1;
+
   level.crow1 = crow;
   crow UseAnimTree(#animtree);
   crow.animname = "crow1_tree";
   spot thread anim_single_solo(crow, "intro");
   animtime = getanimlength(level.scr_anim["crow1_tree"]["intro"]);
   wait animtime;
+
   spot thread anim_single_solo(crow, "loop");
   animtime = getanimlength(level.scr_anim["crow1_tree"]["loop"]);
   wait animtime;
+
   spot thread anim_single_solo(crow, "loop");
   animtime = getanimlength(level.scr_anim["crow1_tree"]["loop"]);
   flag_wait("crow_flyaway");
   level notify("crow_flyaway");
+
   rand = randomintrange(1, 3);
   if(rand == 1) {
     crow playSound("raven_fly_away_a");
@@ -1121,6 +1228,7 @@ crow_animate() {
   if(rand == 3) {
     crow playSound("raven_fly_away_c");
   }
+
   spot thread anim_single_solo(crow, "outtro");
   animtime = getanimlength(level.scr_anim["crow1_tree"]["outtro"]);
   wait animtime;
@@ -1128,23 +1236,27 @@ crow_animate() {
 }
 
 #using_animtree("sniper_crows");
-
 crow2_animate() {
   spot = getent("fountain_anim_spot", "targetname");
   crow = spawn("script_model", spot.origin);
   crow setModel("anim_berlin_crow");
   wait 0.1;
+
   crow UseAnimTree(#animtree);
   crow.animname = "crow2_tree";
+
   spot thread anim_single_solo(crow, "intro");
   animtime = getanimlength(level.scr_anim["crow2_tree"]["intro"]);
   wait animtime;
+
   spot thread anim_single_solo(crow, "loop");
   animtime = getanimlength(level.scr_anim["crow2_tree"]["loop"]);
   wait animtime;
+
   spot thread anim_single_solo(crow, "loop");
   animtime = getanimlength(level.scr_anim["crow2_tree"]["loop"]);
   flag_wait("crow_flyaway");
+
   rand = randomintrange(1, 3);
   if(rand == 1) {
     crow playSound("raven_fly_away_a");
@@ -1155,6 +1267,7 @@ crow2_animate() {
   if(rand == 3) {
     crow playSound("raven_fly_away_c");
   }
+
   spot thread anim_single_solo(crow, "outtro");
   animtime = getanimlength(level.scr_anim["crow2_tree"]["outtro"]);
   wait animtime;
@@ -1162,17 +1275,19 @@ crow2_animate() {
 }
 
 #using_animtree("sniper_crows");
-
 crow3_animate() {
   spot = getent("fountain_anim_spot", "targetname");
   crow = spawn("script_model", spot.origin);
   crow setModel("anim_berlin_crow");
   level threadmaps\sniper_amb::play_random_crow_sounds(crow);
   wait 0.1;
+
   crow UseAnimTree(#animtree);
   crow.animname = "crow3_tree";
+
   spot fake_anim_loop_solo(crow, "loop");
   level.crow1 = crow;
+
   rand = randomintrange(1, 3);
   if(rand == 1) {
     crow playSound("raven_fly_away_a");
@@ -1183,6 +1298,7 @@ crow3_animate() {
   if(rand == 3) {
     crow playSound("raven_fly_away_c");
   }
+
   spot thread anim_single_solo(crow, "outtro");
   animtime = getanimlength(level.scr_anim["crow3_tree"]["outtro"]);
   wait animtime;
@@ -1199,17 +1315,19 @@ fake_anim_loop_solo(guy, anime) {
 }
 
 #using_animtree("sniper_crows");
-
 crow4_animate() {
   spot = getent("fountain_anim_spot", "targetname");
   crow = spawn("script_model", spot.origin);
   crow setModel("anim_berlin_crow");
   wait 0.1;
+
   crow UseAnimTree(#animtree);
   crow.animname = "crow4_tree";
+
   spot thread anim_single_solo(crow, "intro");
   animtime = getanimlength(level.scr_anim["crow4_tree"]["intro"]);
   wait animtime;
+
   spot thread anim_single_solo(crow, "loop");
   animtime = getanimlength(level.scr_anim["crow4_tree"]["loop"]);
   flag_wait("guy_fired");
@@ -1223,6 +1341,7 @@ crow4_animate() {
   if(rand == 3) {
     crow playSound("raven_fly_away_c");
   }
+
   spot thread anim_single_solo(crow, "outtro");
   animtime = getanimlength(level.scr_anim["crow4_tree"]["outtro"]);
   wait animtime;
@@ -1230,18 +1349,20 @@ crow4_animate() {
 }
 
 #using_animtree("sniper_crows");
-
 crow5_animate() {
   spot = getent("fountain_anim_spot", "targetname");
   crow = spawn("script_model", spot.origin);
   crow setModel("anim_berlin_crow");
   wait 0.1;
+
   crow UseAnimTree(#animtree);
   crow.animname = "facecrow";
+
   level.facecrow = crow;
   spot thread anim_single_solo(crow, "loop");
   animtime = getanimlength(level.scr_anim["facecrow"]["loop"]);
   wait animtime;
+
   spot thread anim_single_solo(crow, "outtro");
   animtime = getanimlength(level.scr_anim["facecrow"]["outtro"]);
   thread play_crow_flyaway_delay(crow);
@@ -1311,12 +1432,15 @@ encourage_player_toshoot(lastwave) {
     flag_set("sargesaidhurry");
     return;
   }
+
   for(i = 0; i < guys.size; i++) {
-    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "by_tank_dude1" || guys[i].script_noteworthy == "by_tank_dude2")) {
+    if(isDefined(guys[i].script_noteworthy) &&
+      (guys[i].script_noteworthy == "by_tank_dude1" || guys[i].script_noteworthy == "by_tank_dude2")) {
       level thread ftn_chatter("straight");
       break;
     }
-    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "by_tank_dude3" || guys[i].script_noteworthy == "by_tank_dude4")) {
+    if(isDefined(guys[i].script_noteworthy) &&
+      (guys[i].script_noteworthy == "by_tank_dude3" || guys[i].script_noteworthy == "by_tank_dude4")) {
       if(cointoss()) {
         level thread ftn_chatter("moreleft");
       } else {
@@ -1324,7 +1448,9 @@ encourage_player_toshoot(lastwave) {
       }
       break;
     }
-    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "horchguy1" || guys[i].script_noteworthy == "horchguy2")) {
+
+    if(isDefined(guys[i].script_noteworthy) &&
+      (guys[i].script_noteworthy == "horchguy1" || guys[i].script_noteworthy == "horchguy2")) {
       if(cointoss()) {
         ftn_chatter("bystairs");
         ftn_chatter("aimright");
@@ -1355,8 +1481,8 @@ restore_lookspeed() {
   lookspeed = 15;
   while(lookspeed != 45) {
     lookspeed++;
-    setdvar("bg_shock_lookControl_maxpitchspeed", lookspeed);
-    setdvar("bg_shock_lookControl_maxyawspeed", lookspeed);
+    setDvar("bg_shock_lookControl_maxpitchspeed", lookspeed);
+    setDvar("bg_shock_lookControl_maxyawspeed", lookspeed);
     wait 0.2;
   }
 }
@@ -1420,6 +1546,7 @@ sniping_timer() {
 }
 
 cleanup_e1_origins() {}
+
 achievement_checker() {
   achieve_check_loop();
   wait 0.05;
@@ -1441,6 +1568,7 @@ achieve_check_loop() {
       player_has_shot = 1;
       continue;
     }
+
     clipcount = level.player getcurrentweaponclipammo();
     if(isDefined(lastclipcount) && clipcount > lastclipcount) {
       wait 0.2;

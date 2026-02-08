@@ -1,7 +1,7 @@
-/*****************************************************
+/************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_jap_makonly_rifle.gsc
-*****************************************************/
+************************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_jap_impinf_mk_bdy5alias::main());

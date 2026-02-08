@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_destructible_type94truckcamo.gsc
-*****************************************************/
+**************************************************/
 
 #include maps\_destructible;
 #using_animtree("vehicles");
@@ -9,8 +9,10 @@
 init() {
   set_function_pointer("explosion_anim", "dest_type94truckcamo", ::get_explosion_animation);
   set_function_pointer("flattire_anim", "dest_type94truckcamo", ::get_flattire_animation);
+
   build_destructible_radiusdamage("dest_type94truckcamo", undefined, 260, 240, 40, true);
   build_destructible_deathquake("dest_type94truckcamo", 0.6, 1.0, 600);
+
   set_pre_explosion("dest_type94truckcamo", "vehicle/vfire/fx_vfire_t94_truck_engine");
 }
 

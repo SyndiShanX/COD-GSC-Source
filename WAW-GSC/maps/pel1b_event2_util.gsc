@@ -1,13 +1,12 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pel1b_event2_util.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
 #include maps\_anim;
 #using_animtree("generic_human");
-
 kill_enemies(value, key) {
   enemies = getEntArray(value, key);
   for(i = 0; i < enemies.size; i++) {
@@ -15,19 +14,21 @@ kill_enemies(value, key) {
     wait(0.3);
   }
 }
-
 force_to_goal_exact() {
   self endon("death");
+
   self.goalradius = 32;
   self.pacifist = 1;
   self.ignoreall = 1;
+
   self waittill("goal");
+
   self.pacifist = 0;
   self.ignoreall = 0;
 }
-
 force_to_goal_ignore_player() {
   self endon("death");
+
   self setthreatbiasgroup("oblivious_enemies");
   self thread force_to_goal_exact();
 }
@@ -37,45 +38,48 @@ force_spawn_guy(spawner) {
   spawn_failed(guy);
   return (guy);
 }
-
 spawn_flame_runner(value, key) {
   spawner = getent(value, key);
   runner = force_spawn_guy(spawner);
+
   runner.goalradius = 16;
   runner.ignoreall = 1;
   runner.pacifist = 1;
   runner.health = 1;
   runner.animname = "runner";
   runner endon("death");
+
   index = randomint(100);
   if(index < 50) {
     runner set_run_anim("panick_run_1");
   } else {
     runner set_run_anim("panick_run_2");
   }
+
   runner thread animscripts\death::flame_death_fx();
+
   while(distance(runner.origin, runner.goalpos) > 200) {
     wait(0.1);
     if(!isalive(runner)) {
       break;
     }
   }
+
   if(isalive(runner)) {
     runner thread maps\pel1b::bloody_death();
   }
 }
-
 fire_shrecks_with_damage(tank, damage) {
   radiusdamage(tank.origin + (0, 0, 200), 300, damage, 35);
+
   earthquake(0.3, 1.5, tank.origin, 512);
+
   playFX(level._effect["tank_blowup"], tank.origin);
 }
-
 waittill_vehiclenode(node) {
   self setwaitnode(node);
   self waittill("reached_wait_node");
 }
-
 waittill_vehiclenode_noteworthy(node_noteworthy) {
   node = getvehiclenode(node_noteworthy, "script_noteworthy");
   self setwaitnode(node);
@@ -87,7 +91,6 @@ create_new_origin_ent(origin) {
   level.temp_spawned_origins[level.temp_spawned_origins.size] = spawn("script_origin", origin);
   level.temp_spawned_origins[level.temp_spawned_origins.size - 1].health = 1000000;
 }
-
 set_turret_target_by_name(point_name) {
   point = getstruct(point_name, "targetname");
   self SetTurretTargetVecSafe(point.origin);
@@ -96,13 +99,14 @@ set_turret_target_by_name(point_name) {
 SetTurretTargetVecSafe(target_vector) {
   self SetTurretTargetVec(target_vector);
 }
-
 trace_turret_target_by_name(point_name, end_msg) {
   level endon(end_msg);
+
   point_line = [];
   point_line[0] = getstruct(point_name, "targetname");
   next_point_name = point_line[0].target;
   done = false;
+
   while(1) {
     point_line[point_line.size] = getstruct(next_point_name, "targetname");
     if(isDefined(point_line[point_line.size - 1].target)) {
@@ -111,9 +115,11 @@ trace_turret_target_by_name(point_name, end_msg) {
       break;
     }
   }
+
   for(i = 0; i < point_line.size; i++) {
     self SetTurretTargetVecSafe(point_line[i].origin);
     self waittill("turret_on_target");
+
     if(isDefined(point_line[i].script_noteworthy)) {
       level notify(point_line[i].script_noteworthy);
     }
@@ -123,6 +129,7 @@ trace_turret_target_by_name(point_name, end_msg) {
 
 load_bombs(bomb_num) {
   self.bomb_count = bomb_num;
+
   self.bomb = [];
   for(i = 0; i < self.bomb_count; i++) {
     self.bomb[i] = spawn("script_model", (self.origin));
@@ -136,26 +143,30 @@ load_bombs(bomb_num) {
     }
   }
 }
-
 drop_bombs(node_name, fire_fx, num) {
   self endon("death");
+
   if(!isDefined(num)) {
     num = 2;
   }
+
   node = getvehiclenode(node_name, "script_noteworthy");
   node waittill("trigger");
+
   self thread maps\_planeweapons::drop_bombs(num, 0, 2, 500);
+
   wait(1);
   level notify(node_name);
+
   if(fire_fx) {
     fire_fx_origin = getstruct(node_name, "targetname");
     playFX(level._effect["fire_foliage_large"], fire_fx_origin.origin);
     playFX(level._effect["smoke_column"], fire_fx_origin.origin);
   }
+
   self waittill("reached_end_node");
   self delete();
 }
-
 drop_bombs_rumble() {
   players = get_players();
   for(p = 0; p < players.size; p++) {
@@ -165,7 +176,6 @@ drop_bombs_rumble() {
     wait_network_frame();
   }
 }
-
 additional_bomb(struct_name, start_msg) {
   struct_target = getstruct(struct_name, "targetname");
   level waittill(start_msg);
@@ -180,6 +190,7 @@ napalm_chain(start_struct_name) {
   point_line[0] = getstruct(start_struct_name, "targetname");
   next_point_name = point_line[0].target;
   done = false;
+
   while(1) {
     point_line[point_line.size] = getstruct(next_point_name, "targetname");
     if(isDefined(point_line[point_line.size - 1].target)) {
@@ -188,6 +199,7 @@ napalm_chain(start_struct_name) {
       break;
     }
   }
+
   for(i = 0; i < point_line.size; i++) {
     playFX(level._effect["napalm_explosion"], point_line[i].origin);
     playsoundatposition("mortar_dirt", point_line[i].origin);
@@ -208,17 +220,19 @@ trigger_wait_with_notify(value, key, msg) {
 
 play_explosion_death_anim(struct_value, struct_key) {
   struct_org = getstruct(struct_value, struct_key);
+
   guy = spawn_fake_guy(struct_org.origin, struct_org.angles, "axis", "generic");
+
   level thread anim_single_solo(guy, "death_explosion_forward", undefined, guy);
+
   wait(1);
   guy startragdoll();
 }
-
 #using_animtree("generic_human");
-
 spawn_fake_guy(startpoint, startangles, side, animname) {
   guy = spawn("script_model", startpoint);
   guy.angles = startangles;
+
   if(side == "allies") {
     guy character\char_usa_marine_r_rifle::main();
     guy maps\_drones::drone_allies_assignWeapon_american();
@@ -228,9 +242,11 @@ spawn_fake_guy(startpoint, startangles, side, animname) {
     guy maps\_drones::drone_axis_assignWeapon_japanese();
     guy.team = "axis";
   }
+
   guy UseAnimTree(#animtree);
   guy.animname = animname;
   guy makeFakeAI();
+
   return guy;
 }
 
@@ -243,6 +259,7 @@ jog_waittill_stop() {
         return;
       }
     }
+
     if(level.sarge istouching(stop_trigger) || level.walker istouching(stop_trigger)) {
       return;
     }
@@ -256,7 +273,9 @@ jog_look_alternate() {
 
 jog_start() {
   flag_set("jog_enabled");
+
   level thread jog_look_alternate();
+
   level.sarge thread jog_internal();
   wait(0.2);
   level.walker thread jog_internal();
@@ -264,18 +283,23 @@ jog_start() {
 
 jog_internal() {
   self endon("death");
+
   self.animname = "generic";
+
   jogs_left = [];
   jogs_left[jogs_left.size] = "jog1";
   jogs_left[jogs_left.size] = "jog2";
   jogs_left[jogs_left.size] = "jog4";
+
   jogs_right = [];
   jogs_right[jogs_right.size] = "jog1";
   jogs_right[jogs_right.size] = "jog2";
   jogs_right[jogs_right.size] = "jog3";
+
   jogs_forward = [];
   jogs_forward[jogs_forward.size] = "jog1";
   jogs_forward[jogs_forward.size] = "jog2";
+
   while(flag("jog_enabled")) {
     if(flag("jog_look_around")) {
       if(self.script_forceColor == "y") {
@@ -286,11 +310,13 @@ jog_internal() {
     } else {
       jog = jogs_forward[RandomInt(jogs_forward.size)];
     }
+
     self.moveplaybackrate = 0.8;
     self set_generic_run_anim(jog);
     delay = GetAnimLength(level.scr_anim["generic"][jog]);
     wait(delay - 0.2);
   }
+
   self.moveplaybackrate = 1.0;
   self clear_run_anim();
 }
@@ -299,11 +325,12 @@ tree_fall() {
   tree = getent("ev2_tree_fall", "targetname");
   tree RotatePitch(80, 2, 1.5, 0.1);
 }
-
 play_dust_fx_near_players() {
   struct_pos = getstructarray("ev2_cave_dust", "targetname");
+
   org_closest = [];
   players = get_players();
+
   for(i = 0; i < struct_pos.size; i++) {
     for(p = 0; p < players.size; p++) {
       if(Distance2D(struct_pos[i].origin, players[p].origin) < 500) {
@@ -311,11 +338,14 @@ play_dust_fx_near_players() {
       }
     }
   }
+
   for(p = 0; p < players.size; p++) {
     earthquake(1, 0.5, players[p].origin, 60);
     PlayRumbleOnPosition("explosion_generic", players[p].origin);
   }
+
   org_closest = array_randomize(org_closest);
+
   for(i = 0; i < org_closest.size; i++) {
     if(i < 3) {
       playFX(level._effect["dirt_fall_huge"], org_closest[i]);

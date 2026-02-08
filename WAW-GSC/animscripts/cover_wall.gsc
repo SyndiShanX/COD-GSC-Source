@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\cover_wall.gsc
-*****************************************************/
+**************************************/
 
 #include animscripts\Combat_utility;
 #include animscripts\Utility;
@@ -10,19 +10,25 @@
 
 cover_wall_think(coverType) {
   self endon("killanimscript");
+
   self.coverNode = self.node;
   self.coverType = coverType;
+
   if(coverType == "crouch") {
     self setup_cover_crouch("unknown");
     self.coverNode initCoverCrouchNode();
   } else {
     self setup_cover_stand();
   }
+
   self.a.standIdleThread = undefined;
+
   self OrientMode("face angle", self.coverNode.angles[1]);
-  if((self.weapon == "saw" || self.weapon == "rpd" || self.weapon == "dp28" || self.weapon == "dp28_bipod" || self.weapon == "30cal" || self.weapon == "30cal_bipod" || self.weapon == "bar" || self.weapon == "bar_bipod" || self.weapon == "bren" || self.weapon == "bren_bipod" || self.weapon == "fg42" || self.weapon == "fg42_bipod" || self.weapon == "mg42" || self.weapon == "mg42_bipod" || self.weapon == "type99_lmg" || self.weapon == "type99_lmg_bipod") && isDefined(self.node.turretInfo) && canspawnturret()) {
+  if((self.weapon == "saw" || self.weapon == "rpd" || self.weapon == "dp28" || self.weapon == "dp28_bipod" || self.weapon == "30cal" || self.weapon == "30cal_bipod" || self.weapon == "bar" || self.weapon == "bar_bipod" || self.weapon == "bren" || self.weapon == "bren_bipod" || self.weapon == "fg42" || self.weapon == "fg42_bipod" || self.weapon == "mg42" || self.weapon == "mg42_bipod" || self.weapon == "type99_lmg" || self.weapon == "type99_lmg_bipod") &&
+    isDefined(self.node.turretInfo) && canspawnturret()) {
     assert(isDefined(self.node.turretInfo));
     assert(self.weapon == "saw" || self.weapon == "rpd" || self.weapon == "dp28" || self.weapon == "dp28_bipod" || self.weapon == "30cal" || self.weapon == "30cal_bipod" || self.weapon == "bar" || self.weapon == "bar_bipod" || self.weapon == "bren" || self.weapon == "bren_bipod" || self.weapon == "fg42" || self.weapon == "fg42_bipod" || self.weapon == "mg42" || self.weapon == "mg42_bipod" || self.weapon == "type99_lmg" || self.weapon == "type99_lmg_bipod");
+
     if(issubstr(self.weapon, "_bipod")) {
       if(coverType == "crouch")
         weaponInfo = self.weapon + "_crouch";
@@ -34,63 +40,83 @@ cover_wall_think(coverType) {
       else
         weaponInfo = self.weapon + "_bipod_stand";
     }
+
     switch (self.weapon) {
       case "saw":
         weaponModel = "weapon_saw_MG_Setup";
         break;
+
       case "rpd":
         weaponModel = "weapon_rpd_MG_Setup";
         break;
+
       case "dp28":
         weaponModel = "mounted_rus_dp28_bipod_lmg";
         break;
+
       case "dp28_bipod":
         weaponModel = "mounted_rus_dp28_bipod_lmg";
         break;
+
       case "30cal":
         weaponModel = "mounted_usa_30cal_bipod_lmg";
         break;
+
       case "30cal_bipod":
         weaponModel = "mounted_usa_30cal_bipod_lmg";
         break;
+
       case "bren":
         weaponModel = "mounted_brt_bren_bipod_lmg";
         break;
+
       case "bren_bipod":
         weaponModel = "mounted_brt_bren_bipod_lmg";
         break;
+
       case "bar":
         weaponModel = "mounted_usa_bar_bipod_lmg";
         break;
+
       case "bar_bipod":
         weaponModel = "mounted_usa_bar_bipod_lmg";
         break;
+
       case "mg42":
         weaponModel = "weapon_ger_mg_mg42";
         break;
+
       case "mg42_bipod":
         weaponModel = "weapon_ger_mg_mg42";
         break;
+
       case "type99_lmg":
         weaponModel = "mounted_jap_type99_bipod_lmg";
         break;
+
       case "type99_lmg_bipod":
         weaponModel = "mounted_jap_type99_bipod_lmg";
         break;
+
       case "fg42":
         weaponModel = "mounted_ger_fg42_bipod_lmg";
         break;
+
       case "fg42_bipod":
         weaponModel = "mounted_ger_fg42_bipod_lmg";
         break;
+
       default:
         weaponModel = "weapon_saw_MG_Setup";
     }
+
     self useSelfPlacedTurret(weaponInfo, weaponModel);
   } else if(isDefined(self.node.turret)) {
     self useStationaryTurret();
   }
+
   self animmode("normal");
+
   if(coverType == "crouch" && self.a.pose == "stand") {
     transAnim = animArray("stand_2_hide");
     time = getAnimLength(transAnim);
@@ -106,16 +132,20 @@ cover_wall_think(coverType) {
       self.a.pose = "crouch";
     wait(.2);
   }
+
   self animmode("zonly_physics");
+
   if(coverType == "crouch") {
     if(self.a.pose == "prone")
       self ExitProneWrapper(1);
     self.a.pose = "crouch";
   }
+
   if(self.coverType == "stand")
     self.a.special = "cover_stand";
   else
     self.a.special = "cover_crouch";
+
   behaviorCallbacks = spawnStruct();
   behaviorCallbacks.reload = ::coverReload;
   behaviorCallbacks.leaveCoverAndShoot = ::leaveCoverAndShoot;
@@ -126,6 +156,7 @@ cover_wall_think(coverType) {
   behaviorCallbacks.grenade = ::tryThrowingGrenade;
   behaviorCallbacks.grenadehidden = ::tryThrowingGrenadeStayHidden;
   behaviorCallbacks.blindfire = ::blindfire;
+
   animscripts\cover_behavior::main(behaviorCallbacks);
 }
 
@@ -161,12 +192,17 @@ coverReload() {
 
 leaveCoverAndShoot(theWeaponType, mode, suppressSpot) {
   self.keepClaimedNodeInGoal = true;
+
   if(!pop_up())
     return false;
+
   shootAsTold();
+
   self notify("kill_idle_thread");
+
   if(isDefined(self.shootPos)) {
     distSqToShootPos = lengthsquared(self.origin - self.shootPos);
+
     if(weaponAnims() == "rocketlauncher" && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.coverType == "stand")
         animscripts\shared::throwDownWeapon(%RPG_stand_throw);
@@ -174,39 +210,52 @@ leaveCoverAndShoot(theWeaponType, mode, suppressSpot) {
         animscripts\shared::throwDownWeapon(%RPG_crouch_throw);
     }
   }
+
   go_to_hide();
+
   self.keepClaimedNodeInGoal = false;
+
   return true;
 }
 
 shootAsTold() {
   self endon("return_to_cover");
+
   self maps\_gameskill::didSomethingOtherThanShooting();
+
   while(1) {
     if(self.shouldReturnToCover) {
       break;
     }
+
     if(!isDefined(self.shootPos)) {
       assert(!isDefined(self.shootEnt));
+
       wait .05;
       waittillframeend;
       if(isDefined(self.shootPos))
         continue;
       break;
     }
+
     if(!self.bulletsInClip) {
       break;
     }
+
     if(self.coverType == "crouch" && needToChangeCoverMode()) {
       break;
     }
+
     shootUntilShootBehaviorChange_coverWall();
+
     if(NeedToRechamber()) {
       if(CoverRechamber()) {
         self notify("weapon_rechamber_done");
       }
     }
+
     self flamethrower_stop_shoot();
+
     self clearAnim(%add_fire, .2);
   }
 }
@@ -215,17 +264,20 @@ shootUntilShootBehaviorChange_coverWall() {
   if(self.coverType == "crouch")
     self thread angleRangeThread();
   self thread standIdleThread();
+
   shootUntilShootBehaviorChange();
 }
 
 idle() {
   self endon("end_idle");
+
   while(1) {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("hide_idle_twitch"));
     if(useTwitch)
       idleanim = animArrayPickRandom("hide_idle_twitch");
     else
       idleanim = animarray("hide_idle");
+
     playIdleAnimation(idleAnim, useTwitch);
   }
 }
@@ -233,15 +285,21 @@ idle() {
 flinch() {
   if(!animArrayAnyExist("hide_idle_flinch"))
     return false;
+
   forward = anglesToForward(self.angles);
   stepto = self.origin + vectorScale(forward, -16);
+
   if(!self mayMoveToPoint(stepto))
     return false;
+
   self animmode("zonly_physics");
   self.keepClaimedNodeInGoal = true;
+
   flinchanim = animArrayPickRandom("hide_idle_flinch");
   playIdleAnimation(flinchanim, true);
+
   self.keepClaimedNodeInGoal = false;
+
   return true;
 }
 
@@ -250,43 +308,54 @@ playIdleAnimation(idleAnim, needsRestart) {
     self setFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, .1, 1);
   else
     self setFlaggedAnimKnobAll("idle", idleAnim, %body, 1, .1, 1);
+
   self.a.coverMode = "hide";
+
   self animscripts\shared::DoNoteTracks("idle");
 }
 
 look(lookTime) {
   if(!isDefined(self.a.array["hide_to_look"]))
     return false;
+
   if(!peekOut())
     return false;
+
   animscripts\shared::playLookAnimation(animArray("look_idle"), lookTime);
+
   lookanim = undefined;
   if(self isSuppressedWrapper())
     lookanim = animArray("look_to_hide_fast");
   else
     lookanim = animArray("look_to_hide");
+
   self setflaggedanimknoballrestart("looking_end", lookanim, %body, 1, .1);
   animscripts\shared::DoNoteTracks("looking_end");
+
   return true;
 }
 
 peekOut() {
   self setFlaggedAnimKnobAll("looking_start", animArray("hide_to_look"), %body, 1, .2);
   animscripts\shared::DoNoteTracks("looking_start");
+
   return true;
 }
 
 fastLook() {
   self setFlaggedAnimKnobAllRestart("look", animArrayPickRandom("look"), %body, 1, .1);
   self animscripts\shared::DoNoteTracks("look");
+
   return true;
 }
 
 standIdleThread() {
   self endon("killanimscript");
+
   if(isDefined(self.a.standIdleThread))
     return;
   self.a.standIdleThread = true;
+
   self setAnim(%add_idle, 1, .2);
   standIdleThreadInternal();
   self clearAnim(%add_idle, .2);
@@ -296,35 +365,45 @@ endStandIdleThread() {
   self.a.standIdleThread = undefined;
   self notify("end_stand_idle_thread");
 }
-
 standIdleThreadInternal() {
   self endon("killanimscript");
   self endon("end_stand_idle_thread");
+
   for(i = 0;; i++) {
     flagname = "idle" + i;
     idleanim = animArrayPickRandom("exposed_idle");
+
     self setFlaggedAnimKnobLimitedRestart(flagname, idleanim, 1, 0.2);
+
     self waittillmatch(flagname, "end");
   }
 }
 
 pop_up() {
   assert(self.a.coverMode == "hide");
+
   newCoverMode = getBestCoverMode();
+
   popupAnim = animArray("hide_2_" + newCoverMode);
+
   if(!self mayMoveToPoint(getAnimEndPos(popupAnim)))
     return false;
+
   if(self.coverType == "crouch")
     self setup_cover_crouch(newCoverMode);
   else
     self setup_cover_stand();
+
   self.a.special = "none";
   self.a.coverMode = newCoverMode;
   self.changingCoverPos = true;
   self notify("done_changing_cover_pos");
+
   self animmode("zonly_physics");
+
   self setFlaggedAnimKnobAllRestart("pop_up", popUpAnim, %body, 1, .1, 1.0);
   self thread DoNoteTracksForPopup("pop_up");
+
   if(animHasNoteTrack(popupAnim, "start_aim")) {
     self waittillmatch("pop_up", "start_aim");
     timeleft = getAnimLength(popupAnim) * (1 - self getAnimTime(popupAnim));
@@ -332,13 +411,18 @@ pop_up() {
     self waittillmatch("pop_up", "end");
     timeleft = .1;
   }
+
   self setup_additive_aim(timeleft);
   self thread animscripts\shared::trackShootEntOrPos();
   self clearAnim(popUpAnim, timeleft + 0.05);
+
   wait(timeleft);
+
   self.changingCoverPos = false;
   self.coverPosEstablishedTime = gettime();
+
   self notify("stop_popup_donotetracks");
+
   return true;
 }
 
@@ -384,18 +468,26 @@ setup_additive_aim(transTime) {
 
 go_to_hide() {
   self notify("return_to_cover");
+
   self.changingCoverPos = true;
   self notify("done_changing_cover_pos");
+
   self endStandIdleThread();
+
   self setFlaggedAnimKnobAll("go_to_hide", animArray(self.a.coverMode + "_2_hide"), %body, 1, 0.2);
   self clearAnim(%exposed_modern, 0.2);
+
   self animscripts\shared::DoNoteTracks("go_to_hide");
+
   self notify("stop tracking");
+
   self.a.coverMode = "hide";
+
   if(self.coverType == "stand")
     self.a.special = "cover_stand";
   else
     self.a.special = "cover_crouch";
+
   self.changingCoverPos = false;
 }
 
@@ -409,10 +501,13 @@ tryThrowingGrenade(throwAt, safe) {
     theanim = animArrayPickRandom("grenade_safe");
   else
     theanim = animArrayPickRandom("grenade_exposed");
+
   self animMode("zonly_physics");
   self.keepClaimedNodeInGoal = true;
+
   armOffset = (32, 20, 64);
   threwGrenade = TryGrenade(throwAt, theanim);
+
   self.keepClaimedNodeInGoal = false;
   return threwGrenade;
 }
@@ -420,11 +515,15 @@ tryThrowingGrenade(throwAt, safe) {
 blindfire() {
   if(!animArrayAnyExist("blind_fire"))
     return false;
+
   self animMode("zonly_physics");
   self.keepClaimedNodeInGoal = true;
+
   self setflaggedanimknobAll("blindfire", animArrayPickRandom("blind_fire"), %body, 1, 0, 1);
   result = self animscripts\shared::DoNoteTracks("blindfire");
+
   self.keepClaimedNodeInGoal = false;
+
   return true;
 }
 
@@ -435,6 +534,7 @@ createTurret(posEnt, weaponInfo, weaponModel) {
   turret setModel(weaponModel);
   turret makeTurretUsable();
   turret setDefaultDropPitch(0);
+
   if(isDefined(posEnt.leftArc))
     turret.leftArc = posEnt.leftArc;
   if(isDefined(posEnt.rightArc))
@@ -443,13 +543,16 @@ createTurret(posEnt, weaponInfo, weaponModel) {
     turret.topArc = posEnt.topArc;
   if(isDefined(posEnt.bottomArc))
     turret.bottomArc = posEnt.bottomArc;
+
   return turret;
 }
 
 deleteIfNotUsed(owner) {
   self endon("death");
   self endon("being_used");
+
   wait .1;
+
   if(isDefined(owner)) {
     assert(!isDefined(owner.a.usingTurret) || owner.a.usingTurret != self);
     owner notify("turret_use_failed");
@@ -459,6 +562,7 @@ deleteIfNotUsed(owner) {
 
 useSelfPlacedTurret(weaponInfo, weaponModel) {
   turret = self createTurret(self.node.turretInfo, weaponInfo, weaponModel);
+
   if(self useTurret(turret)) {
     turret thread deleteIfNotUsed(self);
     if(isDefined(self.turret_function))
@@ -472,27 +576,37 @@ useSelfPlacedTurret(weaponInfo, weaponModel) {
 useStationaryTurret() {
   assert(isDefined(self.node));
   assert(isDefined(self.node.turret));
+
   turret = self.node.turret;
-  if(!turret.isSetup) {
+  if(!turret.isSetup)
     return;
-  }
   thread maps\_mg_penetration::gunner_think(turret);
   self waittill("continue_cover_script");
 }
 
 setup_crouching_anim_array(exposedAnimSet) {
   anim_array = [];
+
   anim_array["hide_idle"] = % covercrouch_hide_idle;
-  anim_array["hide_idle_twitch"] = array(%covercrouch_twitch_1, %covercrouch_twitch_2, %covercrouch_twitch_3, %covercrouch_twitch_4);
-  anim_array["hide_idle_flinch"] = array();
+  anim_array["hide_idle_twitch"] = array(%covercrouch_twitch_1, %covercrouch_twitch_2, %covercrouch_twitch_3, %covercrouch_twitch_4
+
+  );
+
+  anim_array["hide_idle_flinch"] = array(
+
+  );
+
   anim_array["hide_2_crouch"] = % covercrouch_hide_2_aim;
   anim_array["hide_2_stand"] = % covercrouch_hide_2_stand;
   anim_array["hide_2_lean"] = % covercrouch_hide_2_lean;
+
   anim_array["crouch_2_hide"] = % covercrouch_aim_2_hide;
   anim_array["stand_2_hide"] = % covercrouch_stand_2_hide;
   anim_array["lean_2_hide"] = % covercrouch_lean_2_hide;
+
   anim_array["crouch_aim"] = % covercrouch_aim5;
   anim_array["lean_aim"] = % covercrouch_lean_aim5;
+
   if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
     anim_array["stand_aim"] = % exposed_aim_5;
     anim_array["fire"] = % exposed_shoot_auto_v2;
@@ -520,35 +634,47 @@ setup_crouching_anim_array(exposedAnimSet) {
     anim_array["burst6"] = % exposed2_shoot_burst6;
     anim_array["single"] = array(%exposed2_shoot_semi1);
   }
+
   if(self usingShotgun()) {
     if(exposedAnimSet == "lean" || exposedAnimSet == "stand")
       anim_array["single"] = array(%shotgun_stand_fire_1A);
     else
       anim_array["single"] = array(%shotgun_crouch_fire);
   }
+
   anim_array["blind_fire"] = array(%covercrouch_blindfire_1, %covercrouch_blindfire_2, %covercrouch_blindfire_3, %covercrouch_blindfire_4);
+
   if(self usingTopLoadingWeapon()) {
     anim_array["reload"] = % covercrouch_topload_hide;
   } else {
     anim_array["reload"] = % covercrouch_reload_hide;
   }
+
   if(self usingBoltActionWeapon()) {
     anim_array["rechamber"] = % covercrouch_rechamber_aim;
   }
+
   anim_array["grenade_safe"] = array(%covercrouch_grenadeA, %covercrouch_grenadeB);
   anim_array["grenade_exposed"] = array(%covercrouch_grenadeA, %covercrouch_grenadeB);
+
   anim_array["exposed_idle"] = array(%exposed_crouch_idle_alert_v1, %exposed_crouch_idle_alert_v2, %exposed_crouch_idle_alert_v3);
+
   anim_array["look"] = array(%covercrouch_hide_look);
+
   self.a.array = anim_array;
 }
 
 setup_standing_anim_array() {
   anim_array = [];
+
   anim_array["hide_idle"] = % coverstand_hide_idle;
   anim_array["hide_idle_twitch"] = array(%coverstand_hide_idle_twitch01, %coverstand_hide_idle_twitch02, %coverstand_hide_idle_twitch03, %coverstand_hide_idle_twitch04, %coverstand_hide_idle_twitch05);
+
   anim_array["hide_idle_flinch"] = array(%coverstand_react01, %coverstand_react02, %coverstand_react03, %coverstand_react04);
+
   anim_array["hide_2_stand"] = % coverstand_hide_2_aim;
   anim_array["stand_2_hide"] = % coverstand_aim_2_hide;
+
   if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
     anim_array["stand_aim"] = % exposed_aim_5;
     anim_array["fire"] = % exposed_shoot_auto_v2;
@@ -576,14 +702,18 @@ setup_standing_anim_array() {
     anim_array["burst6"] = % exposed2_shoot_burst6;
     anim_array["single"] = array(%exposed2_shoot_semi1);
   }
+
   if(self usingShotgun())
     anim_array["single"] = array(%shotgun_stand_fire_1A);
+
   anim_array["blind_fire"] = array(%coverstand_blindfire_1, %coverstand_blindfire_2);
+
   if(self usingTopLoadingWeapon()) {
     anim_array["reload"] = % coverstand_topload;
   } else {
     anim_array["reload"] = % coverstand_reloadA;
   }
+
   if(self usingBoltActionWeapon()) {
     if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
       anim_array["rechamber"] = % exposed_rechamber_v1;
@@ -591,23 +721,29 @@ setup_standing_anim_array() {
       anim_array["rechamber"] = % exposed2_rechamber_v1;
     }
   }
+
   anim_array["look"] = array(%coverstand_look_quick, %coverstand_look_quick_v2);
+
   anim_array["grenade_safe"] = array(%coverstand_grenadeA, %coverstand_grenadeB);
   anim_array["grenade_exposed"] = array(%coverstand_grenadeA, %coverstand_grenadeB);
+
   if(!isDefined(self.exposedSet) || self.exposedSet == 0)
     anim_array["exposed_idle"] = array(%exposed_idle_alert_v1, %exposed_idle_alert_v2, %exposed_idle_alert_v3);
   else
     anim_array["exposed_idle"] = array(%exposed2_idle_alert_v1, %exposed2_idle_alert_v2, %exposed2_idle_alert_v3);
+
   anim_array["hide_to_look"] = % coverstand_look_moveup;
   anim_array["look_idle"] = % coverstand_look_idle;
   anim_array["look_to_hide"] = % coverstand_look_movedown;
   anim_array["look_to_hide_fast"] = % coverstand_look_movedown_fast;
+
   self.a.array = anim_array;
 }
 
 loopHide(transTime) {
   if(!isDefined(transTime))
     transTime = .1;
+
   self setanimknoballrestart(animArray("hide_idle"), %body, 1, transTime);
   self.a.coverMode = "hide";
 }
@@ -617,19 +753,23 @@ angleRangeThread() {
   self notify("newAngleRangeCheck");
   self endon("newAngleRangeCheck");
   self endon("return_to_cover");
+
   while(1) {
     if(needToChangeCoverMode()) {
       break;
     }
     wait(0.1);
   }
+
   self notify("stopShooting");
 }
 
 needToChangeCoverMode() {
   if(self.coverType != "crouch")
     return false;
+
   pitch = getShootPosPitch(self getEye());
+
   if(self.a.coverMode == "lean") {
     return pitch < 10;
   } else {
@@ -640,10 +780,13 @@ needToChangeCoverMode() {
 getBestCoverMode() {
   if(self.coverType != "crouch")
     return "stand";
-  dvarval = getdvar("scr_crouchforcestance");
+
+  dvarval = getDvar("scr_crouchforcestance");
   if(dvarval == "crouch" || dvarval == "stand" || dvarval == "lean")
     return dvarval;
+
   pitch = getShootPosPitch(self.coverNode.origin + getNodeOffset(self.coverNode));
+
   if(self.a.atConcealmentNode) {
     if(pitch > 30)
       return "lean";
@@ -661,14 +804,18 @@ getBestCoverMode() {
 
 getShootPosPitch(fromPos) {
   shootPos = getEnemyEyePos();
+
   return AngleClamp180(vectorToAngles(shootPos - fromPos)[0]);
 }
 
 CoverRechamber() {
   Rechamber(animArray("rechamber"));
+
   self clearanim(%rechamber, 0);
+
   if(isDefined(self.primaryweapon)) {
     animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
   }
+
   return true;
 }

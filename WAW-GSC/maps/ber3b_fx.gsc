@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\ber3b_fx.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -13,14 +13,17 @@ main() {
   precache_util_fx();
   precache_createfx_fx();
   footsteps();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX)) {
     disableFX = 0;
   }
+
   if(disableFX <= 0) {
     precache_scripted_fx();
     thread play_scripted_fx();
   }
+
   thread vol_fog_think(disableFX);
   thread vision_sets_init();
   thread sunlight_samplesize_change_init();
@@ -28,31 +31,40 @@ main() {
 
 precache_scripted_fx() {
   level._effect["distant_muzzleflash"] = LoadFX("weapon/muzzleflashes/heavy");
+
   level._effect["aaa_tracer"] = LoadFX("weapon/tracer/fx_tracer_jap_tripple25_projectile");
   level._effect["plane_tracers"] = level._effect["aaa_tracer"];
+
   level._effect["sandbag_explosion_small"] = LoadFX("maps/ber3b/fx_sandbag_exp_sm");
+
   level._effect["spotlight_beam"] = LoadFX("env/light/fx_ray_spotlight_md");
   level._effect["spotlight_burst"] = LoadFX("env/electrical/fx_elec_searchlight_burst");
+
   level._effect["flag_highlight"] = LoadFX("misc/fx_NV_dlight");
+
   level._effect["eagle_support_break"] = LoadFX("maps/ber3b/fx_dust_eagle_support_break");
   level._effect["eagle_fall_impact"] = LoadFX("maps/ber3b/fx_eagle_fall_impact");
+
   level._effect["flameguy_explode"] = LoadFX("explosions/fx_flamethrower_char_explosion");
+
   level._effect["katyusha_rocket_trail"] = LoadFX("weapon/rocket/fx_rocket_katyusha_geotrail");
   level._effect["katyusha_rocket_trail_exaggerated"] = LoadFX("maps/ber3b/fx_thick_rocket_geotrail");
   level._effect["katyusha_rocket_explosion"] = LoadFX("weapon/rocket/fx_rocket_katyusha_explosion");
+
   level._effect["statue_fall"] = LoadFX("maps/ber3b/fx_statue_fall_cloud");
   level._effect["statue_fallout_cloud"] = LoadFX("maps/ber3b/fx_statue_fall_impact");
+
   level._effect["rifleflash"] = LoadFX("weapon/muzzleflashes/rifleflash");
   level._effect["rifle_shelleject"] = LoadFX("weapon/shellejects/rifle");
   level._effect["pistolflash"] = LoadFX("weapon/muzzleflashes/pistolflash");
   level._effect["pistol_shelleject"] = LoadFX("weapon/shellejects/pistol");
+
   level._effect["knife_glint"] = LoadFX("maps/ber3b/fx_knife_glint");
   level._effect["knife_slash_blood"] = LoadFX("maps/ber3b/fx_knife_slash_blood");
   level._effect["knife_stab_blood"] = LoadFX("maps/ber3b/fx_knife_thrust");
   level._effect["knife_blood_drip"] = LoadFX("maps/ber3b/fx_knife_blood_drops");
   level._effect["knife_sparks"] = LoadFX("maps/ber3b/fx_spark_flag_pole");
 }
-
 footsteps() {
   animscripts\utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   animscripts\utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -74,16 +86,16 @@ footsteps() {
 
 play_scripted_fx() {
   level waittill("load main complete");
+
   thread spotlight_fx();
 }
-
 precache_util_fx() {
   level._effect["flesh_hit"] = LoadFX("impacts/flesh_hit");
   level._effect["flesh_hit_large"] = LoadFX("impacts/flesh_hit_body_fatal_exit");
 }
-
 precache_createfx_fx() {
   level._effect["fx_reichstage_dome_fallout"] = loadfx("maps/ber3b/fx_reichstage_dome_fallout");
+
   level._effect["fire_static_detail"] = loadfx("env/fire/fx_static_fire_detail_ndlight");
   level._effect["fire_static_small"] = loadfx("env/fire/fx_static_fire_sm_ndlight");
   level._effect["fire_static_blk_smk"] = loadfx("env/fire/fx_static_fire_md_ndlight");
@@ -100,6 +112,7 @@ precache_createfx_fx() {
   level._effect["fire_column"] = loadfx("env/fire/fx_fire_column_tall_distant");
   level._effect["fire_column_creep_lg"] = loadfx("env/fire/fx_fire_column_creep_lg");
   level._effect["fire_column_creep_md"] = loadfx("env/fire/fx_fire_column_creep_md");
+
   level._effect["smoke_detail"] = loadfx("env/smoke/fx_smoke_smolder_sm_blk");
   level._effect["smoke_battle_mist"] = loadfx("maps/ber3b/fx_smoke_dome_floor");
   level._effect["smoke_plume_lg_slow_blk"] = loadfx("env/smoke/fx_smoke_plume_lg_slow_blk");
@@ -107,23 +120,31 @@ precache_createfx_fx() {
   level._effect["smoke_hallway_faint_dark"] = loadfx("env/smoke/fx_smoke_hallway_faint_dark");
   level._effect["smoke_window_out"] = loadfx("env/smoke/fx_smoke_door_top_exit_drk");
   level._effect["smoke_blk_w"] = loadfx("maps/ber3b/fx_smk_plume_xlg_slow_blk_3b");
+
   level._effect["debris_burning_paper_dome"] = loadfx("maps/ber3b/fx_debris_burning_papers_dome");
   level._effect["debris_paper_falling"] = loadfx("maps/ber3b/fx_debris_papers_falling");
   level._effect["debris_wood_burn_fall"] = loadfx("maps/ber3b/fx_debris_burning_wood_fall");
+
   level._effect["wire_sparks"] = loadfx("env/electrical/fx_elec_wire_spark_burst");
   level._effect["wire_sparks_blue"] = loadfx("env/electrical/fx_elec_wire_spark_burst_blue");
+
   level._effect["water_single_leak"] = loadfx("env/water/fx_water_single_leak");
   level._effect["water_leak_runner"] = loadfx("env/water/fx_water_leak_runner_100");
+
   level._effect["flak_field"] = loadfx("weapon/flak/fx_flak_field_8k");
+
   level._effect["insect_swarm"] = loadfx("bio/insects/fx_insects_ambient");
+
   level._effect["god_rays_large"] = loadfx("maps/ber3b/fx_light_god_rays_lg_streak");
   level._effect["god_rays_medium"] = loadfx("env/light/fx_light_god_rays_medium");
   level._effect["god_rays_small"] = loadfx("env/light/fx_light_god_rays_small");
   level._effect["god_rays_small_short"] = loadfx("env/light/fx_light_god_rays_small_short");
   level._effect["ray_huge_light"] = loadfx("env/light/fx_ray_sun_xxlrg_linear");
   level._effect["god_rays_dust_motes"] = loadfx("env/light/fx_light_god_rays_dust_motes");
+
   level._effect["lantern_light"] = loadfx("env/light/fx_lights_lantern_on");
   level._effect["candle_flame"] = loadfx("env/light/fx_lights_candle_flame");
+
   level._effect["pipe_steam"] = loadfx("env/smoke/fx_pipe_steam_sm_onesht");
   level._effect["fire_column_creep_xsm"] = loadfx("env/fire/fx_fire_column_creep_xsm");
   level._effect["fire_column_creep_sm"] = loadfx("env/fire/fx_fire_column_creep_sm");
@@ -139,10 +160,10 @@ precache_createfx_fx() {
 spotlight_fx() {
   spots = GetStructArray("struct_spotlight_fx", "targetname");
   spots_nonprimary = GetStructArray("struct_spotlight_fx_non_prime", "targetname");
+
   array_thread(spots, ::spotlight_fx_spawn);
   array_thread(spots_nonprimary, ::spotlight_fx_spawn);
 }
-
 spotlight_fx_spawn() {
   org = spawn("script_model", self.origin);
   org.angles = self.angles;
@@ -152,16 +173,19 @@ spotlight_fx_spawn() {
   self.fxOrg = org;
   self thread spotlight_damage_think();
 }
-
 spotlight_damage_think() {
   if(!isDefined(self.target)) {
     return;
   }
+
   trig = undefined;
   model_undamaged = undefined;
+
   ents = getEntArray(self.target, "targetname");
+
   for(i = 0; i < ents.size; i++) {
     ent = ents[i];
+
     if(ent.classname == "trigger_damage") {
       trig = ent;
     } else if(ent.classname == "script_model") {
@@ -170,34 +194,47 @@ spotlight_damage_think() {
       ASSERTMSG("spotlight_damage_think(): couldn't identify fxspot target of classname " + ent.classname);
     }
   }
+
   ASSERTEX(isDefined(trig) && isDefined(model_undamaged), "spotlight_damage_think(): couldn't find either the damage trigger or the undamaged model for fxspot at origin " + self.origin);
+
   model_damaged = GetEnt(model_undamaged.target, "targetname");
   middleman = GetStruct(trig.target, "targetname");
   light = GetEnt(middleman.target, "targetname");
+
   ASSERTEX(isDefined(trig.classname) && trig.classname == "trigger_damage", "Trigger fx spot at origin " + self.origin + " does not target a damage trigger.");
+
   if(self.targetname != "struct_spotlight_fx_non_prime") {
     if(!isDefined(light)) {
       return;
     }
+
     ASSERTEX(isDefined(light), "Trigger fx spot at origin " + self.origin + " does not connect to a light source.Is the light set as server-side?");
     light.ogIntensity = light GetLightIntensity();
   }
+
   model_damaged Hide();
+
   trig waittill("trigger");
+
   trig Delete();
+
   model_undamaged Hide();
   model_damaged Show();
+
   if(isDefined(self.fxOrg)) {
     playFX(level._effect["spotlight_burst"], self.fxOrg.origin, self.fxOrg.angles);
+
     if(self.targetname != "struct_spotlight_fx_non_prime") {
       light SetLightIntensity(light GetLightIntensity() - (light.ogIntensity / 2));
     }
+
     self.fxOrg Delete();
   }
 }
 
 vol_fog_think(disableFX) {
   set_vol_fog("map_start");
+
   if(disableFX <= 0) {
     trigger_wait("trig_roof_outside_entrance", "targetname");
     set_vol_fog("roof");
@@ -209,38 +246,45 @@ set_vol_fog(section) {
     case "map_start":
       setVolFog(90, 2500, 850, 850, 0.2901, 0.2941, 0.3019, 0);
       break;
+
     case "roof":
       setVolFog(90, 8000, 450, 1400, 0.3137, 0.3176, 0.3254, 5);
       break;
+
     default:
       ASSERTMSG("vol_fog setting for map section " + section + " not found.");
   }
 }
-
 vision_sets_init() {
   VisionSetNaked("Ber3b", 0.1);
+
   visionset_changetrigs = getEntArray("set_vision", "targetname");
+
   if(!isDefined(visionset_changetrigs) || visionset_changetrigs.size <= 0) {
     return;
   }
+
   array_thread(visionset_changetrigs, ::vision_set_trigger_think);
 }
-
 vision_set_trigger_think() {
   if(!isDefined(self.script_noteworthy)) {
     ASSERTMSG("vision_set_trigger_think(): vision set trigger at origin " + self.origin + " does not have script_noteworthy set.Make sure that you set this to your vision set name.");
     return;
   }
+
   visionSetName = self.script_noteworthy;
   visionSetTransTime = undefined;
+
   if(isDefined(self.script_float) && self.script_float > 0) {
     visionSetTransTime = self.script_float;
   } else {
     visionSetTransTime = 1;
   }
+
   while(1) {
     self waittill("trigger", player);
-    if(IsPlayer(player)) {
+
+    if(isPlayer(player)) {
       if(isDefined(player.activeVisionSet)) {
         if(player.activeVisionSet == visionSetName) {
           continue;
@@ -248,8 +292,11 @@ vision_set_trigger_think() {
       } else {
         player.activeVisionSet = visionSetName;
       }
+
       VisionSetNaked(visionSetName, visionSetTransTime);
+
       player.activeVisionSet = visionSetName;
+
       doprint = GetDvarInt("debug_visionset_changes");
       if(isDefined(doprint) && doprint > 0) {
         iprintlnbold("Vision changed to: " + visionSetName);
@@ -262,8 +309,10 @@ sunlight_samplesize_change_init() {
   sampleScale_dvar = "sm_sunSampleSizeNear";
   sampleScale_default = 0.25;
   sampleScale_parliament = 1;
+
   trigger_wait("trig_parliament_rightbalcony_entrance", "targetname");
   level thread merge_sunsingledvar(sampleScale_dvar, 0, 5, sampleScale_default, sampleScale_parliament);
+
   trigger_wait("trig_dome_pacing_start", "targetname");
   level thread merge_sunsingledvar(sampleScale_dvar, 0, 5, sampleScale_parliament, sampleScale_default);
 }
@@ -273,77 +322,96 @@ merge_sunsingledvar(dvar, delay, timer, l1, l2) {
   wait(delay);
   timer = timer * 20;
   suncolor = [];
+
   for(i = 0; i < timer; i++) {
     dif = i / timer;
     level.thedif = dif;
     ld = l2 * dif + l1 * (1 - dif);
+
     setsaveddvar(dvar, ld);
     wait(0.05);
   }
+
   setsaveddvar(dvar, l2);
 }
 
 fire_flicker_init() {
   lights = getEntArray("firecaster", "targetname");
+
   if(!isDefined(lights) || lights.size <= 0) {
     return;
   }
+
   array_thread(lights, ::ber3b_firelight);
 }
-
 ber3b_firelight() {
   full = self GetLightIntensity();
+
   old_intensity = full;
+
   while(1) {
     intensity = RandomFloatRange(full * 0.63, full * 1.2);
+
     timer = RandomFloatRange(2, 5);
+
     for(i = 0; i < timer; i++) {
       new_intensity = intensity * (i / timer) + old_intensity * ((timer - i) / timer);
+
       self SetLightIntensity(new_intensity);
       wait(0.05);
     }
+
     old_intensity = intensity;
   }
 }
-
 ambient_fakefire(endonString, delayStart) {
   if(delayStart) {
     wait(RandomFloatRange(0.25, 5));
   }
+
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   team = undefined;
   fireSound = undefined;
   weapType = "rifle";
+
   if(!isDefined(self.script_noteworthy)) {
     team = "allied_rifle";
   } else {
     team = self.script_noteworthy;
   }
+
   switch (team) {
     case "axis_rifle":
       fireSound = "weap_g43_fire";
       weapType = "rifle";
       break;
+
     case "allied_rifle":
       fireSound = "weap_svt40_fire";
       weapType = "rifle";
       break;
+
     case "axis_smg":
       fireSound = "weap_mp44_fire";
       weapType = "smg";
       break;
+
     case "allied_smg":
       fireSound = "weap_ppsh_fire";
       weapType = "smg";
       break;
+
     default:
       ASSERTMSG("ambient_fakefire: team name '" + team + "' is not recognized.");
   }
+
   if(weapType == "rifle") {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 60;
+
     burstMin = 1;
     burstMax = 4;
     betweenShotsMin = 0.8;
@@ -353,6 +421,7 @@ ambient_fakefire(endonString, delayStart) {
   } else {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 45;
+
     burstMin = 6;
     burstMax = 17;
     betweenShotsMin = 0.08;
@@ -360,29 +429,38 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 5;
     reloadTimeMax = 12;
   }
+
   while(1) {
     burst = RandomIntRange(burstMin, burstMax);
+
     for(i = 0; i < burst; i++) {
       traceDist = 10000;
       target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+
       BulletTracer(self.origin, target, false);
+
       playFX(muzzleFlash, self.origin, anglesToForward(self.angles));
+
       if(RandomInt(100) <= soundChance) {
         thread play_sound_in_space(fireSound, self.origin);
       }
+
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
+
     wait(RandomFloatRange(reloadTimeMin, reloadTimeMax));
   }
 }
-
 ambient_aaa_fx(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   self thread ambient_aaa_fx_rotate(endonString);
+
   while(1) {
     firetime = RandomIntRange(3, 8);
+
     for(i = 0; i < firetime * 5; i++) {
       playFX(level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
       wait(RandomFloatRange(0.14, 0.19));
@@ -390,11 +468,11 @@ ambient_aaa_fx(endonString) {
     wait RandomFloatRange(1.5, 3);
   }
 }
-
 ambient_aaa_fx_rotate(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   while(1) {
     self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");

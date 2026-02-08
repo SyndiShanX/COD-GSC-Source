@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_hud.gsc
-*****************************************************/
+**************************************/
 
 init() {
   level.uiParent = spawnStruct();
@@ -14,6 +14,7 @@ init() {
   level.uiParent.width = 0;
   level.uiParent.height = 0;
   level.uiParent.children = [];
+
   if(level.console)
     level.fontHeight = 12;
   else

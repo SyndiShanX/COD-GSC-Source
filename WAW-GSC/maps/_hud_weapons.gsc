@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_hud_weapons.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_hud_util;
 
@@ -9,12 +9,14 @@ registerWeaponInfo(name, string, type, clip) {
   level.weaponInfo[name]["type"] = type;
   level.weaponInfo[name]["clip"] = clip;
   level.weaponInfo[name]["string"] = string;
+
   precacheString(string);
 }
 
 isWeaponRegistered(name) {
   if(!isDefined(level.weaponInfo[name]))
     return false;
+
   return true;
 }
 
@@ -37,6 +39,7 @@ init() {
   precacheShader("hud_bullets_spread");
   precacheShader("hud_bullets_support_front");
   precacheShader("hud_bullets_support_back");
+
   level.bulletAlphas = [];
   level.bulletAlphas[level.bulletAlphas.size] = 1.000;
   level.bulletAlphas[level.bulletAlphas.size] = 0.996;
@@ -61,6 +64,7 @@ init() {
   level.bulletAlphas[level.bulletAlphas.size] = 0.521;
   level.bulletAlphas[level.bulletAlphas.size] = 0.509;
   level.bulletAlphas[level.bulletAlphas.size] = 0.498;
+
   level.weaponInfo = [];
   registerWeaponInfo("ak47", &"WEAPON_AK47_FULLAUTO", "rifle", 30);
   registerWeaponInfo("ak47_semi", &"WEAPON_AK47_SEMIAUTO", "rifle", 30);
@@ -94,33 +98,39 @@ init() {
 initWeaponHUD() {
   if(!isDefined(self.hud_bullets))
     self.hud_bullets = [];
+
   if(!isDefined(self.hud_bullets[0])) {
     self.hud_bullets[0] = createIcon(undefined, 24, 96);
     self.hud_bullets[0] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
     self.hud_bullets[0].sort = 10;
   }
+
   if(!isDefined(self.hud_bullets[1])) {
     self.hud_bullets[1] = createIcon(undefined, 24, 96);
     self.hud_bullets[1] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
     self.hud_bullets[1].color = (0.7, 0.7, 0.7);
     self.hud_bullets[1].sort = 9;
   }
+
   if(!isDefined(self.hud_bullets[2])) {
     self.hud_bullets[2] = createIcon(undefined, 24, 96);
     self.hud_bullets[2] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
     self.hud_bullets[2].sort = 10;
   }
+
   if(!isDefined(self.hud_bullets[3])) {
     self.hud_bullets[3] = createIcon(undefined, 24, 96);
     self.hud_bullets[3] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
     self.hud_bullets[3].color = (0.7, 0.7, 0.7);
     self.hud_bullets[3].sort = 9;
   }
+
   if(!isDefined(self.hud_bullets[4])) {
     self.hud_bullets[4] = createIcon(undefined, 24, 96);
     self.hud_bullets[4] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
     self.hud_bullets[4].sort = 10;
   }
+
   self thread updateBulletHudThink();
 }
 
@@ -129,33 +139,39 @@ updateBulletHudThink() {
   lastAmmoCount = -1;
   lastWeapon = "";
   lastWeaponType = "";
+
   while(true) {
     weapon = self getCurrentWeapon();
     if(isWeaponRegistered(weapon)) {
       weaponType = self getWeaponInfoType(weapon);
       ammoCount = self GetWeaponAmmoClip(self GetCurrentWeapon());
+
       if((weapon != lastWeapon) && (weaponType != lastWeaponType)) {
         self setHudWeaponType(weaponType);
         lastWeapon = weapon;
         lastWeaponType = weaponType;
         lastAmmoCount = -1;
       }
+
       if(ammoCount != lastAmmoCount) {
         self updateHudWeaponAmmo(weapon, ammoCount);
         lastAmmoCount = ammoCount;
       }
     }
+
     wait(0.05);
   }
 }
 
 setHudWeaponType(type) {
   self.pers["weaponType"] = type;
+
   if(!isDefined(self.hud_bullets)) {
     return;
   }
   for(index = 0; index < self.hud_bullets.size; index++)
     self.hud_bullets[index].alpha = 0;
+
   switch (type) {
     case "pistol":
       self.hud_bullets[0] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6, -47);
@@ -193,10 +209,12 @@ setHudWeaponType(type) {
       for(index = 0; index < 5; index++) {
         self.hud_bullets[index] setPoint("BOTTOMRIGHT", "BOTTOMRIGHT", -6 + xOffset, -70);
         self.hud_bullets[index].alpha = 1;
+
         if(index % 2)
           self.hud_bullets[index] setIconShader("hud_bullets_support_back");
         else
           self.hud_bullets[index] setIconShader("hud_bullets_support_front");
+
         xOffset -= 14;
       }
       break;
@@ -215,38 +233,46 @@ updateHudWeaponAmmo(weapon, ammoCount) {
     case "pistol":
       baseDiff = 15 - getWeaponInfoClip(weapon);
       diff = getWeaponInfoClip(weapon) - ammoCount;
+
       self.hud_bullets[0].alpha = level.bulletAlphas[baseDiff + diff];
       break;
     case "rifle":
       diff = getWeaponInfoClip(weapon) - ammoCount;
+
       col1Diff = int(diff / 2);
       col1Diff += (diff % 2);
       col2Diff = int(diff / 2);
+
       self.hud_bullets[0].alpha = level.bulletAlphas[col1Diff];
       self.hud_bullets[1].alpha = level.bulletAlphas[col2Diff];
       break;
     case "smg":
       diff = getWeaponInfoClip(weapon) - ammoCount;
+
       col1Diff = int(diff / 2);
       col1Diff += (diff % 2);
       col2Diff = int(diff / 2);
+
       self.hud_bullets[0].alpha = level.bulletAlphas[col1Diff];
       self.hud_bullets[1].alpha = level.bulletAlphas[col2Diff];
       break;
     case "sniper":
       baseDiff = 15 - getWeaponInfoClip(weapon);
       diff = getWeaponInfoClip(weapon) - ammoCount;
+
       self.hud_bullets[0].alpha = level.bulletAlphas[baseDiff + diff];
       break;
     case "spread":
       baseDiff = 15 - getWeaponInfoClip(weapon);
       diff = getWeaponInfoClip(weapon) - ammoCount;
+
       self.hud_bullets[0].alpha = level.bulletAlphas[baseDiff + diff];
       break;
     case "support":
       baseDiff = 100 - getWeaponInfoClip(weapon);
       diff = getWeaponInfoClip(weapon) - ammoCount;
       diff = baseDiff + diff;
+
       bulletOffset = 20;
       for(index = 4; index >= 0; index--) {
         if(diff > bulletOffset)
@@ -255,6 +281,7 @@ updateHudWeaponAmmo(weapon, ammoCount) {
           self.hud_bullets[index].alpha = level.bulletAlphas[diff - (bulletOffset - 20)];
         else
           self.hud_bullets[index].alpha = 1;
+
         bulletOffset += 20;
       }
       break;

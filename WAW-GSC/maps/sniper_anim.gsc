@@ -1,13 +1,12 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\sniper_anim.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include maps\_anim;
 #include common_scripts\utility;
 #using_animtree("generic_human");
-
 main() {
   level thread addNotetrack_customFunction("hero", "bash", ::hero_opendoor_3, "door_open3");
   level thread addNotetrack_customFunction("gunner", "fire", ::gun_flash, "gun_dudes");
@@ -22,6 +21,7 @@ main() {
   level thread addNotetrack_customFunction("sniperR_shoot", "sniper_fire", ::notify_sniperfire, "shoot_pass");
   level thread addNotetrack_customFunction("allies", "grenade_throw", ::molotov_throw, "molotov_toss");
   level thread addNotetrack_customFunction("horchguy2", "chair", ::horchguy2_chairanim, "intro");
+
   level thread addNotetrack_customFunction("facecrow", "peck_player", ::crow_rumble_pecks, "loop");
   level thread addNotetrack_customFunction("crow1_tree", "feathers", ::play_feather_fx, "outtro");
   level thread addNotetrack_customFunction("crow2_tree", "feathers", ::play_feather_fx, "outtro");
@@ -36,6 +36,7 @@ main() {
   level thread addNotetrack_customFunction("hero", "detach_bar_door", ::bardoor_stop, "bar_lift");
   level thread addNotetrack_customFunction("hero", "attach_bar_door", ::bardoor_open, "bar_lift_only");
   level thread addNotetrack_customFunction("hero", "detach_bar_door", ::bardoor_stop, "bar_lift_only");
+
   level thread addNotetrack_customFunction("horchguy2", "attach", ::chair_delete, "intro");
   level thread addNotetrack_customFunction("horchguy2", "detach", ::chair_replace, "intro");
   level thread addNotetrack_customFunction("sniperL_shoot", "sniper_fire", ::play_glint_fx, "shoot_left_hi");
@@ -54,11 +55,13 @@ main() {
   level thread addNotetrack_customFunction("bookshelf", "bookshelf_hits", ::bookcase_fx, "fall");
   level thread addNotetrack_customFunction("burner", "fire", ::end_burst, "g_ally_vig");
   level thread addNotetrack_customFunction("burner", "flame", ::alley_flamer_fire_control, "g_ally_vig");
+
   level thread addNotetrack_customFunction("kicker", "leader", ::spawn_alley_leader, "g_ally_vig");
   level thread addNotetrack_customFunction("kicker", "flamer", ::spawn_alley_flamer, "g_ally_vig");
   level thread addNotetrack_customFunction("kicker", "shot", ::killme, "g_ally_vig");
   level thread addNotetrack_customFunction("kickers_friend", "shot", ::killme, "g_ally_vig");
   level thread addNotetrack_customFunction("burner", "shot", ::killme, "g_ally_vig");
+
   level thread addNotetrack_customFunction("hero", "detach", ::switch_weapon_out, "kicked_vignette");
   level thread addNotetrack_customFunction("redshirt", "attach", ::redshirt_pickup_gun, "postbb_redshirt2");
   level thread addNotetrack_customFunction("redshirt", "detach", ::redshirt_putdownup_gun, "postbb_redshirt2");
@@ -66,7 +69,9 @@ main() {
   level thread addNotetrack_customFunction("hero", "Sni1_IGD_000A_REZN", ::shoo_crow, "resnov_crawl");
   level thread addNotetrack_customFunction("hero", "dialog", ::horchhide_cutoff, "e1_street_horchhide");
   level thread addNotetrack_customFunction("hero", "dialog", ::mark_my_words, "bar_lift_only");
+
   level thread addNotetrack_customFunction("fountain_woundedguy1", "tick", ::wounded_counter, "wounded");
+
   level thread addNotetrack_attach("horchguy2", "attach", "anim_berlin_wood_chair_2", "tag_weapon_left", "intro");
   level thread addNotetrack_detach("horchguy2", "detach", "anim_berlin_wood_chair_2", "tag_weapon_left", "intro");
   level thread addnotetrack_dialogue("hero", "Sni1_IGD_000A_REZN", "resnov_crawl", "Sni1_IGD_000A_REZN");
@@ -156,8 +161,10 @@ main() {
   level thread addnotetrack_dialogue("hero", "dialog", "reznov_cheer", "Sni1_IGD_400A_REZN");
   level thread addnotetrack_dialogue("kickers_friend", "dialog", "g_ally_vig", "Sni1_IGD_701A_GER1");
   level thread addnotetrack_dialogue("kickers_friend", "dialog", "g_ally_vig", "Sni1_IGD_702A_GER1");
+
   addnotetrack_fxontag("streetdude1", "idle", "cig_light", "cigarette_glow_puff", "tag_fx");
   addnotetrack_fxontag("streetdude1", "idle", "cig_puff", "cigarette_exhale", "TAG_EYE");
+
   level.scr_anim["generic"]["patrol_walk"] = % patrol_bored_patrolwalk;
   level.scr_anim["generic"]["patrol_walk_twitch"] = % patrol_bored_patrolwalk_twitch;
   level.scr_anim["generic"]["patrol_stop"] = % patrol_bored_walk_2_bored;
@@ -174,6 +181,7 @@ main() {
   level.scr_anim["generic"]["patrol_idle_stretch"] = % patrol_bored_twitch_stretch;
   level.scr_anim["generic"]["patrol_idle_phone"] = % patrol_bored_idle;
   level.scr_anim["generic"]["patrol_idle_1_loop"][0] = % patrol_bored_idle;
+
   level.scr_anim["generic"]["patrol_turn180"] = % patrol_bored_2_walk_180turn;
   level.scr_anim["generic"]["_stealth_patrol_jog"] = % combat_jog;
   level.scr_anim["generic"]["_stealth_patrol_walk"] = % patrol_bored_patrolwalk;
@@ -187,11 +195,14 @@ main() {
   level.scr_anim["generic"]["_stealth_look_around1"] = % patrol_bored_react_look_v1;
   level.scr_anim["generic"]["_stealth_look_around2"] = % patrol_bored_react_look_v2;
   level.scr_anim["generic"]["_stealth_behavior_saw_corpse"] = % exposed_idle_twitch_v4;
+
   level.scr_anim["generic"]["_stealth_behavior_generic1"] = % patrol_bored_react_look_advance;
   level.scr_anim["generic"]["_stealth_behavior_generic2"] = % patrol_bored_react_look_retreat;
   level.scr_anim["generic"]["_stealth_behavior_generic3"] = % patrol_bored_react_walkstop;
   level.scr_anim["generic"]["_stealth_behavior_generic4"] = % patrol_bored_react_walkstop_short;
+
   level.scr_anim["generic"]["_stealth_find_jog"] = % patrol_boredjog_find;
+
   level.scr_anim["generic"]["lookaround1"] = % patrol_bored_react_look_v1;
   level.scr_anim["generic"]["lookaround2"] = % patrol_bored_react_look_v2;
   level.scr_anim["generic"]["lookaround1_loop"][0] = % patrol_bored_react_look_v1;
@@ -199,6 +210,7 @@ main() {
   level.scr_anim["generic"]["street_patrol1"] = % patrol_bored_patrolwalk;
   level.scr_anim["generic"]["street_patrol2"] = % patrol_bored_patrolwalk;
   level.scr_anim["generic"]["street_patrol3"] = % patrol_bored_patrolwalk;
+
   level.scr_anim["fountain_woundedguy1"]["wounded"] = % ch_sniper_fountain_rus1;
   level.scr_anim["fountain_woundedguy1"]["wounded_loop"] = % ch_sniper_fountain_rus1_loop;
   level.scr_anim["fountain_woundedguy1"]["wounded_loop_timed"] = % ch_sniper_fountain_rus1_loop;
@@ -224,6 +236,7 @@ main() {
   level.scr_anim["ftn_walker_last"]["patrolwalk"] = % patrol_bored_patrolwalk;
   level.scr_anim["ftn_walker"]["dude4"] = % ch_sniper_poking_dead_guy4;
   level.scr_anim["ftn_walker"]["patrolwalk"] = % patrol_bored_patrolwalk;
+
   level.scr_anim["officer"]["officer_ride"] = % ch_sniper_intro_passenger;
   level.scr_anim["assistant"]["assistant_ride"] = % ch_sniper_intro_driver;
   level.scr_anim["streetdude1"]["idle"][0] = % ch_sniper_ambient2_guy1_idle;
@@ -254,6 +267,7 @@ main() {
   level.scr_anim["horchguy2"]["react"] = % ch_sniper_horch_guy2_react;
   level.scr_anim["horchguy2"]["shot"] = % ch_sniper_horch_guy2_shot;
   level.scr_anim["hunters"]["door_kick"] = % door_bash_and_block;
+
   level.scr_anim["sniperL"]["idle_L"][0] = % ch_sniper_window_idle_L;
   level.scr_anim["sniperR"]["idle_R"][0] = % ch_sniper_window_idle_R;
   level.scr_anim["sniperL_shoot"]["shoot_left_hi"] = % ch_sniper_shootL_hi;
@@ -272,6 +286,7 @@ main() {
   level.scr_anim["sniperR_scan"]["scanR_lo"] = % ch_sniper_scanR_lo;
   level.scr_anim["sniper1"]["sneaky_walk1"] = % ai_sneaking_a_walk;
   level.scr_anim["sniper1"]["sniper_death"] = % corner_standR_deathA;
+
   level.scr_anim["street_runners"]["_stealth_combat_jog"] = % combat_jog;
   level.scr_anim["street_runners"]["run1"] = % ch_sniper_german_motioning1;
   level.scr_anim["street_runners"]["run2"] = % ch_sniper_german_motioning2;
@@ -280,20 +295,26 @@ main() {
   level.scr_anim["dog_handler2"]["walk_tospot"] = % patrol_bored_patrolwalk;
   level.scr_anim["e2_flamer"]["stand_aim_reach"] = % ai_flamethrower_aim_5;
   level.scr_anim["e2_flamer"]["stand_aim"][0] = % ai_flamethrower_aim_5;
+
   level.scr_anim["kicker"]["g_ally_vig"] = % ch_sniper_Resnov_kicked_kicker;
   level.scr_anim["kickers_friend"]["g_ally_vig"] = % ch_sniper_Resnov_kicked_leader;
   level.scr_anim["burner"]["g_ally_vig"] = % ch_sniper_Resnov_kicked_flamer;
+
   level.scr_anim["officer_guard1"]["talking_loop"][0] = % ch_makinraid_e2_arguing1_loop;
   level.scr_anim["officer_guard2"]["talking_loop"][0] = % ch_makinraid_e2_arguing2_loop;
+
   level.scr_anim["allies"]["molotov_toss"] = % coverstand_grenadeA;
   level.scr_anim["flamer"]["idle"][0] = % patrol_bored_idle;
   level.scr_anim["e3_smoker1"]["smoke_it"][0] = % ch_holland2_smoking_guy1;
   level.scr_anim["e3_smoker2"]["smoke_it"][0] = % ch_holland2_smoking_guy2;
+
   level.scr_anim["driver"]["driver_under_fire"][0] = % crew_jeep1_driver_drive_under_fire;
   level.scr_anim["driver"]["driver_death"] = % crew_jeep1_driver_death_shot;
   level.scr_anim["driver"]["driver_death_loop"][0] = % crew_jeep1_driver_death_shot_loop;
+
   level.scr_anim["officer"]["oficer_ride_back"][0] = % ch_sniper_amsel_horch_loop;
   level.scr_anim["officer"]["low_walk"] = % ai_sneaking_a_walk;
+
   level.scr_anim["officer"]["crouchhide"][0] = % ch_sniper_amsel_cover_idle;
   level.scr_anim["officer"]["cover_run"] = % ch_sniper_amsel_cover_run;
   level.scr_anim["officer"]["run_cover"] = % ch_sniper_amsel_run_cover;
@@ -302,6 +323,7 @@ main() {
   level.scr_anim["officer"]["last_run"] = % ch_sniper_amsel_run_hurry;
   level.scr_anim["officer"]["run_away"] = % ch_sniper_amsel_run_away;
   level.scr_anim["officer"]["run_quickly"] = % ch_sniper_amsel_run_quickly;
+
   level.scr_anim["officer"]["bodyguard_exit"] = % ch_sniper_amsel_exit;
   level.scr_anim["officers_sniper"]["bodyguard_exit"] = % ch_sniper_bodyguard_exit;
   level.scr_anim["officers_sniper"]["loop_l"][0] = % ch_sniper_crouch_loop_l;
@@ -321,6 +343,7 @@ main() {
   level.scr_anim["officer"]["horch_lookback"] = % ch_sniper_amsel_horch_lookback;
   level.scr_anim["officer"]["horch_wave1"] = % ch_sniper_amsel_horch_wave1;
   level.scr_anim["officer"]["horch_wave2"] = % ch_sniper_amsel_horch_wave2;
+
   level.scr_anim["hero"]["resnov_gun"] = % ch_sniper_fountain_resnov_gun;
   level.scr_anim["hero"]["resnov_crawl"] = % ch_sniper_fountain_resnov_crawl;
   level.scr_anim["hero"]["resnov_info"] = % ch_sniper_fountain_resnov_info;
@@ -330,6 +353,7 @@ main() {
   level.scr_anim["hero"]["resnov_jump"] = % ch_sniper_fountain_resnov_jump;
   level.scr_anim["hero"]["resnov_wait_loop"][0] = % ch_sniper_fountain_resnov_wait_loop;
   level.scr_anim["hero"]["resnov_gun_loop"][0] = % ch_sniper_fountain_resnov_gun_loop;
+
   level.scr_anim["hero"]["ftn_ready"] = % ch_sniper_Resnov_fountain_ready;
   level.scr_anim["hero"]["ftn_shootnow"] = % ch_sniper_Resnov_fountain_shootnow;
   level.scr_anim["hero"]["ftn_again"] = % ch_sniper_Resnov_fountain_again;
@@ -344,13 +368,16 @@ main() {
   level.scr_anim["hero"]["ftn_excellent_aim"] = % ch_sniper_Resnov_fountain_aimexcellent;
   level.scr_anim["hero"]["ftn_aim_good"] = % ch_sniper_Resnov_fountain_aimgood;
   level.scr_anim["hero"]["ftn_could_b_quicker"] = % ch_sniper_Resnov_fountain_aimpoor;
+
   level.scr_anim["hero"]["ftn_burning_car"] = % ch_sniper_Resnov_fountain_byburningcar;
   level.scr_anim["hero"]["ftn_bystairs"] = % ch_sniper_Resnov_fountain_bystairs;
+
   level.scr_anim["hero"]["e1_street_horchhide"] = % ch_sniper_Resnov_horch_hide;
   level.scr_anim["hero"]["e1_street_run"] = % ch_reznov_run_d;
   level.scr_anim["hero"]["e1_street_followme"] = % ch_sniper_Resnov_followme;
   level.scr_anim["hero"]["e1_street_windowhop"] = % ch_sniper_Resnov_window;
   level.scr_anim["hero"]["sneaky_walk1"] = % ai_sneaking_a_walk;
+
   level.scr_anim["hero"]["building_spin"] = % ch_sniper_Resnov_clearing;
   level.scr_anim["hero"]["building_spin_door"] = % ch_sniper_Resnov_clearing_door;
   level.scr_anim["hero"]["bar_lift_only"] = % ch_sniper_Resnov_bar_b;
@@ -359,6 +386,7 @@ main() {
   level.scr_anim["hero"]["bar_wait"][0] = % ch_sniper_Resnov_bar_wait;
   level.scr_anim["hero"]["bar_wave"] = % ch_sniper_Resnov_bar_wave;
   level.scr_anim["hero"]["door_wait"][0] = % ch_sniper_Resnov_door_wait;
+
   level.scr_anim["hero"]["pacing_car_in"] = % ch_sniper_Resnov_car_in;
   level.scr_anim["hero"]["pacing_car_idle1"][0] = % ch_sniper_Resnov_car_idle1;
   level.scr_anim["hero"]["pacing_car_idle1_reach"] = % ch_sniper_Resnov_car_idle1;
@@ -370,6 +398,7 @@ main() {
   level.scr_anim["hero"]["pacing_window_loop_reach"] = % ch_sniper_Resnov_window_loop;
   level.scr_anim["hero"]["pacing_window_roll"] = % ch_sniper_Resnov_window_roll;
   level.scr_anim["hero"]["pacing_window_roll_stand"] = % prone_2_stand;
+
   level.scr_anim["hero"]["stair_run"] = % ai_staircase_run_up_v1;
   level.scr_anim["hero"]["stairs_down"] = % ai_staircase_run_down_v1;
   level.scr_anim["hero"]["stair_wait_loop"][0] = % ch_sniper_store_stair_wait_loop;
@@ -382,8 +411,10 @@ main() {
   level.scr_anim["hero"]["mannequin_in"] = % ch_sniper_mannequin_in;
   level.scr_anim["hero"]["mannequin_out"] = % ch_sniper_mannequin_out;
   level.scr_anim["hero"]["mannequin_slide_in"] = % ch_sniper_resnov_mannequin_in;
+
   level.scr_anim["hero"]["mannequin_loop1"][0] = % ch_sniper_Resnov_mannequin_loop1;
   level.scr_anim["hero"]["mannequin_loop1_reach"] = % ch_sniper_Resnov_mannequin_loop1;
+
   level.scr_anim["hero"]["mannequin_loop1_dialog1"] = % ch_sniper_Resnov_mannequin_loop1_dialog1;
   level.scr_anim["hero"]["mannequin_loop1_dialog2"] = % ch_sniper_Resnov_mannequin_loop1_dialog2;
   level.scr_anim["hero"]["mannequin_loop1_dialog3"] = % ch_sniper_Resnov_mannequin_loop1_dialog3;
@@ -391,14 +422,17 @@ main() {
   level.scr_anim["hero"]["mannequin_loop3_dialog1"] = % ch_sniper_Resnov_mannequin_loop3_dialog1;
   level.scr_anim["hero"]["mannequin_loop3_dialog2"] = % ch_sniper_Resnov_mannequin_loop3_dialog2;
   level.scr_anim["hero"]["mannequin_loop3_dialog3"] = % ch_sniper_Resnov_mannequin_loop3_dialog3;
+
   level.scr_anim["hero"]["mannequin_loop3"][0] = % ch_sniper_Resnov_mannequin_loop3;
   level.scr_anim["hero"]["mannequin_push"] = % ch_sniper_Resnov_mannequin_push;
   level.scr_anim["hero"]["mannequin_endpush_loop"][0] = % ch_sniper_Resnov_mannequin_wait;
   level.scr_anim["hero"]["mannequin_back"] = % ch_sniper_Resnov_mannequin_back;
+
   level.scr_anim["hero"]["bb_intro_dive"] = % ch_sniper_Resnov_clock_dive;
   level.scr_anim["hero"]["bb_intro_staylow"] = % ch_sniper_Resnov_clock_keeplow;
   level.scr_anim["hero"]["bb_intro_loop"][0] = % ch_sniper_Resnov_clock_loop;
   level.scr_anim["hero"]["bb_intro_loop_reach"] = % ch_sniper_Resnov_clock_loop;
+
   level.scr_anim["hero"]["bb_intro_hop_down"] = % ch_sniper_resnov_hop;
   level.scr_anim["hero"]["bb_intro_hop"] = % ch_sniper_Resnov_table;
   level.scr_anim["hero"]["bb_intro_hop_loop"][0] = % ch_sniper_Resnov_table_loop;
@@ -407,30 +441,39 @@ main() {
   level.scr_anim["hero"]["bb_jumproll"] = % ch_sniper_Resnov_landing;
   level.scr_anim["hero"]["bb_proneloop"][0] = % ch_sniper_Resnov_land_loop;
   level.scr_anim["hero"]["bb_getup"] = % ch_sniper_Resnov_land_getup;
+
   level.scr_anim["hero"]["bb_stairs_in"] = % ch_sniper_Resnov_stairs_in;
   level.scr_anim["hero"]["bb_stairs_loop"][0] = % ch_sniper_Resnov_stairs_loop;
   level.scr_anim["hero"]["bb_stairs_loop_reach"] = % ch_sniper_Resnov_stairs_loop;
   level.scr_anim["hero"]["bb_stairs_out"] = % ch_sniper_Resnov_stairs_out;
+
   level.scr_anim["hero"]["runcough1"] = % ch_resnov_runandcough1;
   level.scr_anim["hero"]["bb_stumble4"] = % ch_sniper_resnov_stumble4;
   level.scr_anim["hero"]["bb_stumble3"] = % ch_sniper_resnov_stumble2;
   level.scr_anim["hero"]["bb_stumble1"] = % ch_sniper_resnov_stumble1;
   level.scr_anim["hero"]["resnov_beam_up"] = % ch_sniper_Resnov_beam;
+
   level.scr_anim["hero"]["resnov_hole_wait"][0] = % ch_sniper_Resnov_wait_loop1;
   level.scr_anim["hero"]["resnov_hole_wait_reach"] = % ch_sniper_Resnov_wait_loop1;
   level.scr_anim["hero"]["resnov_hole_talk"] = % ch_sniper_Resnov_wait;
+
   level.scr_anim["hero"]["patrol_walk"] = % patrol_bored_patrolwalk;
+
   level.scr_anim["redshirt"]["postbb_redshirt1"] = % ch_sniper_ladder_redshirt1;
   level.scr_anim["redshirt"]["postbb_redshirt2"] = % ch_sniper_ladder_redshirt2;
   level.scr_anim["redshirt"]["postbb_redshirt3"] = % ch_sniper_ladder_redshirt3;
+
   level.scr_anim["hero"]["postbb_hero"] = % ch_sniper_ladder_resnov;
   level.scr_anim["hero"]["kicked_vignette"] = % ch_sniper_Resnov_kicked;
   level.scr_anim["hero"]["kicked_loop"][0] = % ch_sniper_Resnov_kicked_loop;
+
   level.scr_anim["hero"]["resnov_splain"] = % ch_sniper_resnov_explain;
   level.scr_anim["hero"]["resnov_splain_loop"][0] = % ch_sniper_resnov_explain_loop;
+
   level.scr_anim["hero"]["tankblast_dive"] = % ch_sniper_Resnov_clock_dive;
   level.scr_anim["hero"]["door_open3"] = % ch_holland3_door_bash;
   level.scr_anim["hero"]["swimming"][0] = % ch_pby_float1;
+
   level.scr_anim["hero"]["reznov_cheer_dive"] = % ch_sniper_resnov_cheer_dive;
   level.scr_anim["hero"]["reznov_cheer"] = % ch_sniper_resnov_cheer;
   level.scr_anim["hero"]["reznov_fall_towater"] = % ch_sniper_resnov_last_fall;
@@ -438,6 +481,7 @@ main() {
   level.scr_anim["hero"]["rambov"] = % ch_sniper_resnov_runandshoot;
   level.scr_anim["hero"]["reznov_jump_towater_loop"][0] = % ch_sniper_resnov_last_jump_loop;
   level.scr_anim["hero"]["reznov_jump_towater_loop_reach"] = % ch_sniper_resnov_last_jump_loop;
+
   level.scr_sound["hero"]["shh"] = "Sni1_IGD_000A_REZN";
   level.scr_sound["hero"]["need_help"] = "Sni1_IGD_001A_REZN";
   level.scr_sound["hero"]["stay_low"] = "Sni1_IGD_002A_REZN";
@@ -528,6 +572,7 @@ main() {
   level.scr_sound["hero"]["stay_down"] = "Sni1_IGD_107A_REZN";
   level.scr_sound["hero"]["u_gave_away_ur"] = "Sni1_IGD_108A_REZN";
   level.scr_sound["hero"]["shots_tell_him"] = "Sni1_IGD_109A_REZN";
+
   level.scr_sound["hero"]["burning_car"] = "Sni1_IGD_200A_REZN";
   level.scr_sound["hero"]["bystairs"] = "Sni1_IGD_201A_REZN";
   level.scr_sound["hero"]["its_too_late"] = "Sni1_IGD_203A_REZN";
@@ -541,14 +586,17 @@ main() {
   level.scr_sound["hero"]["need_find_way_out"] = "Sni1_IGD_214A_REZN";
   level.scr_sound["hero"]["take_my_hand"] = "Sni1_IGD_215A_REZN";
   level.scr_sound["hero"]["need_u_alive"] = "Sni1_IGD_216A_REZN";
+
   level.scr_sound["hero"]["Dimitri"] = "Sni1_IGD_300A_DALE";
   level.scr_sound["hero"]["thought_u_dead"] = "Sni1_IGD_301A_DALE";
   level.scr_sound["hero"]["among_but_not1"] = "Sni1_IGD_302A_REZN";
   level.scr_sound["hero"]["assault_com_post"] = "Sni1_IGD_303A_DALE";
   level.scr_sound["hero"]["prevent_calling"] = "Sni1_IGD_304A_REZN";
+
   level.scr_sound["hero"]["wait_for_screams"] = "Sni1_IGD_305A_REZN";
   level.scr_sound["hero"]["dimitri_this_way"] = "Sni1_IGD_306A_REZN";
   level.scr_sound["hero"]["do_u_see_flame"] = "Sni1_IGD_307A_REZN";
+
   level.scr_sound["hero"]["choose_moment"] = "Sni1_IGD_308A_REZN";
   level.scr_sound["hero"]["incinerate_anyone"] = "Sni1_IGD_309A_REZN";
   level.scr_sound["hero"]["no_time_to_waste"] = "Sni1_IGD_310A_REZN";
@@ -565,6 +613,7 @@ main() {
   level.scr_sound["hero"]["friends_moving_up"] = "Sni1_IGD_326A_REZN";
   level.scr_sound["hero"]["up_stairs_quickly"] = "Sni1_IGD_327A_REZN";
   level.scr_sound["hero"]["over_here_lipsmack"] = "Sni1_IGD_328A_REZN";
+
   level.scr_sound["hero"]["heart_beat_faster"] = "Sni1_IGD_329A_REZN";
   level.scr_sound["hero"]["amsel_soon_insights"] = "Sni1_IGD_330A_REZN";
   level.scr_sound["hero"]["rrrip_vermin"] = "Sni1_IGD_332A_REZN";
@@ -591,6 +640,7 @@ main() {
   level.scr_sound["hero"]["cut_head_from_snake"] = "Sni1_IGD_354A_REZN";
   level.scr_sound["hero"]["run!"] = "Sni1_IGD_357A_REZN";
   level.scr_sound["hero"]["this_way!"] = "Sni1_IGD_358A_REZN";
+
   level.scr_sound["hero"]["true_marksman"] = "Sni1_IGD_400A_REZN";
   level.scr_sound["hero"]["excel_aim_D"] = "Sni1_IGD_401A_REZN";
   level.scr_sound["hero"]["theyre_retreating"] = "Sni1_IGD_402A_DALE";
@@ -613,6 +663,7 @@ main() {
   level.scr_sound["hero"]["before_tank_fires_again"] = "Sni1_IGD_420A_REZN";
   level.scr_sound["hero"]["into_river"] = "Sni1_IGD_421A_REZN";
   level.scr_sound["hero"]["go"] = "Sni1_IGD_422A_REZN";
+
   level.scr_sound["hero"]["over_here"] = "Sni1_IGD_500A_REZN";
   level.scr_sound["hero"]["they_will_see_you"] = "Sni1_IGD_501A_REZN";
   level.scr_sound["hero"]["stay_close"] = "Sni1_IGD_502A_REZN";
@@ -625,7 +676,9 @@ main() {
   level.scr_sound["hero"]["dont_draw_attention"] = "Sni1_IGD_509A_REZN";
   level.scr_sound["hero"]["kill_amsel"] = "Sni1_IGD_510A_REZN";
   level.scr_sound["hero"]["move_quietly"] = "Sni1_IGD_511A_REZN";
+
   level.scr_sound["hero"]["build_with_banners"] = "Sni1_IGD_700A_REZN";
+
   level.scr_sound["german_redshirt"]["bring_flamer"] = "Sni1_IGD_701A_GER1";
   level.scr_sound["german_redshirt"]["burn_them"] = "Sni1_IGD_702A_GER1";
   level.scr_sound["hero"]["comrades_clearing"] = "Sni1_IGD_703A_REZN";
@@ -651,6 +704,7 @@ main() {
   level.scr_sound["hero"]["armored_car"] = "Sni1_IGD_725A_REZN";
   level.scr_sound["hero"]["keep_moving"] = "Sni1_IGD_726A_REZN";
   level.scr_sound["hero"]["rambov_yell"] = "Sni1_IGD_512A_REZN";
+
   level.scr_sound["hero"]["just_decoy"] = "Sni1_IGD_800A_REZN";
   level.scr_sound["hero"]["stay_focused"] = "Sni1_IGD_801A_REZN";
   level.scr_sound["hero"]["winged_him"] = "Sni1_IGD_802A_REZN";
@@ -661,6 +715,7 @@ main() {
   level.scr_sound["hero"]["still_die"] = "Sni1_IGD_807A_REZN";
   level.scr_sound["hero"]["noscope"] = "Sni1_IGD_808A_REZN";
   level.scr_sound["hero"]["only_marksman"] = "Sni1_IGD_809A_REZN";
+
   /
 }
 
@@ -668,9 +723,11 @@ officers_sniper_shoot_atyou() {
   if(!flag("player_fired_in_e4")) {
     return;
   }
+
   if((flag("officer_last_run") || flag("officer_isincar")) && level.difficulty < 3) {
     return;
   }
+
   shotspot = get_players()[0] getEye();
   firespot = level.officers_sniper gettagorigin("tag_flash");
   chance = 25 * level.difficulty;
@@ -709,7 +766,6 @@ lookaway_player(guy) {
 }
 
 #using_animtree("sniper_crows");
-
 hat_anim() {
   level.scr_animtree["hat"] = #animtree;
   level.scr_model["hat"] = "tag_origin_animate";
@@ -717,7 +773,6 @@ hat_anim() {
 }
 
 #using_animtree("sniper_crows");
-
 bar_exit() {
   level.scr_animtree["bardoor"] = #animtree;
   level.scr_model["bardoor"] = "tag_origin_animate";
@@ -763,7 +818,6 @@ mark_my_words(guy) {
 }
 
 #using_animtree("sniper_crows");
-
 do_collectible_corpse() {
   wait_for_first_player();
   spot = getstruct("collectible_body_align", "targetname");

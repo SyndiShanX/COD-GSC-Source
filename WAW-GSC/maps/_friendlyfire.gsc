@@ -1,40 +1,46 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_friendlyfire.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
 main() {
   if(getdebugdvar("replay_debug") == "1")
     println("File: _friendlyfire.gsc. Function: main()\n");
+
   level.friendlyfire["min_participation"] = -1600;
   level.friendlyfire["max_participation"] = 1000;
   level.friendlyfire["enemy_kill_points"] = 250;
   level.friendlyfire["friend_kill_points"] = -600;
   level.friendlyfire["point_loss_interval"] = .75;
-  SetDvar("friendlyfire_enabled", "1");
+
+  setDvar("friendlyfire_enabled", "1");
+
   if(coopGame()) {
-    SetDvar("friendlyfire_enabled", "0");
+    setDvar("friendlyfire_enabled", "0");
   }
+
   level.friendlyFireDisabled = 0;
+
   if(getdebugdvar("replay_debug") == "1")
     println("File: _friendlyfire.gsc. Function: main() - COMPLETE\n");
 }
-
 player_init() {
   self.participation = 0;
   self thread debug_friendlyfire();
   self thread participation_point_flattenovertime();
 }
-
 debug_friendlyfire() {
   if(getdebugdvar("replay_debug") == "1")
     println("File: _friendlyfire.gsc. Function: debug_friendlyfire()\n");
+
   self endon("disconnect");
-  if(GetDvar("debug_friendlyfire") == "") {
-    SetDvar("debug_friendlyfire", "0");
+
+  if(getDvar("debug_friendlyfire") == "") {
+    setDvar("debug_friendlyfire", "0");
   }
+
   friendly_fire = NewHudElem();
   friendly_fire.alignX = "right";
   friendly_fire.alignY = "middle";
@@ -42,25 +48,31 @@ debug_friendlyfire() {
   friendly_fire.y = 100;
   friendly_fire.fontScale = 2;
   friendly_fire.alpha = 0;
+
   for(;;) {
     if(getdebugdvar("replay_debug") == "1")
       println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - INNER LOOP START\n");
-    if(GetDvar("debug_friendlyfire") == "1") {
+
+    if(getDvar("debug_friendlyfire") == "1") {
       friendly_fire.alpha = 1;
     } else {
       friendly_fire.alpha = 0;
     }
+
     friendly_fire Setvalue(self.participation);
+
     if(getdebugdvar("replay_debug") == "1")
       println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - INNER LOOP WAIT\n");
+
     wait(0.25);
+
     if(getdebugdvar("replay_debug") == "1")
       println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - INNER LOOP STOP\n");
   }
+
   if(getdebugdvar("replay_debug") == "1")
     println("File: _friendlyfire.gsc. Function: debug_friendlyfire() - COMPLLETE\n");
 }
-
 friendly_fire_think(entity) {
   if(!isDefined(entity)) {
     return;
@@ -68,10 +80,13 @@ friendly_fire_think(entity) {
   if(!isDefined(entity.team)) {
     entity.team = "allies";
   }
+
   level endon("mission failed");
+
   level thread notifyDamage(entity);
   level thread notifyDamageNotDone(entity);
   level thread notifyDeath(entity);
+
   for(;;) {
     if(!isDefined(entity)) {
       return;
@@ -79,10 +94,13 @@ friendly_fire_think(entity) {
     if(entity.health <= 0) {
       return;
     }
+
     entity waittill("friendlyfire_notify", damage, attacker, direction, point, method);
+
     if(damage < 1) {
       continue;
     }
+
     if(!isDefined(entity)) {
       return;
     }
@@ -92,40 +110,54 @@ friendly_fire_think(entity) {
     if(!isDefined(attacker)) {
       continue;
     }
+
     bPlayersDamage = false;
-    if(IsPlayer(attacker)) {
+
+    if(isPlayer(attacker)) {
       bPlayersDamage = true;
     } else if((isDefined(attacker.classname)) && (attacker.classname == "script_vehicle")) {
       owner = attacker GetVehicleowner();
-      if(isDefined(owner) && IsPlayer(owner)) {
+
+      if(isDefined(owner) && isPlayer(owner)) {
         bPlayersDamage = true;
+
         attacker = owner;
       }
     }
+
     if(!bPlayersDamage) {
       continue;
     }
+
     same_team = entity.team == attacker.team;
     killed = damage == -1;
+
     if(!same_team) {
       if(killed) {
         attacker.participation += level.friendlyfire["enemy_kill_points"];
         attacker participation_point_cap();
       } else {}
+
       return;
     } else {
       arcademode_assignpoints("arcademode_friendies_damage", attacker);
-      if(killed) {} else {}
+
+      if(killed) {
+    } else {}
     }
+
     if(isDefined(entity.no_friendly_fire_penalty)) {
       continue;
     }
+
     if(killed) {
       attacker.participation += level.friendlyfire["friend_kill_points"];
     } else {
       attacker.participation -= damage;
     }
+
     attacker participation_point_cap();
+
     if(check_grenade(entity, method) && savecommit_afterGrenade()) {
       if(killed) {
         return;
@@ -133,20 +165,20 @@ friendly_fire_think(entity) {
         continue;
       }
     }
+
     attacker friendly_fire_checkpoints();
   }
 }
-
 friendly_fire_checkpoints() {
   if(self.participation <= level.friendlyfire["min_participation"]) {
     self thread missionfail();
   }
 }
-
 check_grenade(entity, method) {
   if(!isDefined(entity)) {
     return false;
   }
+
   wasGrenade = false;
   if((isDefined(entity.damageweapon)) && (entity.damageweapon == "none")) {
     wasGrenade = true;
@@ -154,9 +186,9 @@ check_grenade(entity, method) {
   if((isDefined(method)) && (method == "MOD_GRENADE_SPLASH")) {
     wasGrenade = true;
   }
+
   return wasGrenade;
 }
-
 savecommit_afterGrenade() {
   currentTime = GetTime();
   if(currentTime < 4500) {
@@ -168,20 +200,20 @@ savecommit_afterGrenade() {
   }
   return false;
 }
-
 participation_point_cap() {
   if(!isDefined(self.participation)) {
     assertmsg("self.participation is not defined!");
     return;
   }
+
   if(self.participation > level.friendlyfire["max_participation"]) {
     self.participation = level.friendlyfire["max_participation"];
   }
+
   if(self.participation < level.friendlyfire["min_participation"]) {
     self.participation = level.friendlyfire["min_participation"];
   }
 }
-
 participation_point_flattenOverTime() {
   level endon("mission failed");
   self endon("disconnect");
@@ -191,6 +223,7 @@ participation_point_flattenOverTime() {
     } else if(self.participation < 0) {
       self.participation++;
     }
+
     wait(level.friendlyfire["point_loss_interval"]);
   }
 }
@@ -204,27 +237,31 @@ TurnOff() {
 }
 
 missionfail() {
-  if(GetDvar("friendlyfire_enabled") != "1") {
+  if(getDvar("friendlyfire_enabled") != "1") {
     if(!maps\_collectibles::has_collectible("collectible_hardcore")) {
       return;
     }
   }
+
   self endon("death");
   level endon("mine death");
   level notify("mission failed");
+
   if(level.campaign == "british") {
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
   } else if(level.campaign == "russian") {
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
   } else {
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
+    setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   }
+
   if(isDefined(level.custom_friendly_fire_shader))
     thread maps\_load::special_death_indicator_hudelement(level.custom_friendly_fire_shader, 64, 64, 0);
+
   logString("failed mission: Friendly fire");
+
   maps\_utility::missionFailedWrapper();
 }
-
 notifyDamage(entity) {
   level endon("mission failed");
   entity endon("death");
@@ -239,7 +276,6 @@ notifyDamageNotDone(entity) {
   entity waittill("damage_notdone", damage, attacker, direction, point, method);
   entity notify("friendlyfire_notify", -1, attacker, undefined, undefined, method);
 }
-
 notifyDeath(entity) {
   level endon("mission failed");
   entity waittill("death", attacker, method);

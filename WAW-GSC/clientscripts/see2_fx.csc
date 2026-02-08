@@ -1,11 +1,12 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\see2_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 
 precache_util_fx() {}
+
 precache_scripted_fx() {}
 precache_createfx_fx() {
   level._effect["fire_foliage_large"] = loadfx("maps/see2/fx_fire_foliage_large");
@@ -27,22 +28,28 @@ precache_createfx_fx() {
 main() {
   clientscripts\createfx\see2_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   level._effect["house_blow_up"] = LoadFx("maps/see1/fx_explosion_tank_shell_med_house");
   level._effect["wood_house"] = LoadFx("weapon/tank/fx_tank_generic_house_wood");
   level._effect["brick_house"] = LoadFx("weapon/tank/fx_tank_generic_house_brick");
   level._effect["water_tower_explode"] = LoadFx("maps/see2/fx_water_tower_exp");
   level._effect["crate_explode"] = LoadFx("explosions/fx_exp_ger_supply_crate");
+
   level._effect["panzer_turret_fly"] = LoadFx("vehicle/vexplosion/fx_turretexp_panzer4");
   level._effect["panther_turret_fly"] = LoadFx("vehicle/vexplosion/fx_turretexp_panther");
   level._effect["tiger_turret_fly"] = LoadFx("vehicle/vexplosion/fx_turretexp_kingtiger");
+
   level._effect["panzer_int_dmg"] = LoadFx("vehicle/vfire/fx_vsmoke_ger_panzer");
   level._effect["panther_int_dmg"] = LoadFx("vehicle/vfire/fx_vsmoke_ger_panther");
   level._effect["tiger_int_dmg"] = LoadFx("vehicle/vfire/fx_vsmoke_ger_tiger");
+
   level._effect["character_fire_pain_sm"] = LoadFx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = LoadFx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = LoadFx("env/fire/fx_fire_player_torso");
+
   level._effect["tower_secondary_explosion"] = LoadFx("maps/see2/fx_dust_collapse_plume");
   level._effect["tower_explode"] = LoadFx("maps/see2/fx_radio_tower_exp");
+
   level._effect["tank_destruct"] = LoadFx("vehicle/vexplosion/fx_vexplode_rus_t34");
   level._effect["tank_smoulder"] = LoadFx("vehicle/vfire/fx_vfire_rus_t34");
   level._effect["rocket_trail"] = LoadFx("weapon/rocket/fx_trail_bazooka_geotrail");
@@ -63,13 +70,17 @@ main() {
   level._effect["plane_final_explode"] = loadfx("maps/fly/fx_exp_zero_final");
   level._effect["client_rocket_trail"] = loadfx("system_elements/fx_smk_wht_short_em");
   level.mortar = LoadFx("explosions/fx_mortarExp_dirt");
+
   level._effect["aaa_tracer"] = loadfx("Weapon/Tracer/fx_tracer_jap_tripple25_projectile");
+
   level._effect["drone_burst"] = LoadFx("impacts/fx_flesh_blood_geyser");
   level._effect["character_fire_pain_sm"] = LoadFx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = LoadFx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = LoadFx("env/fire/fx_fire_player_torso");
+
   precache_util_fx();
   precache_createfx_fx();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();

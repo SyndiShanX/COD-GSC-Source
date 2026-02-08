@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\ber3_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_music;
@@ -17,8 +17,10 @@ precache_createfx_fx() {
   level._effect["fire_static_small"] = loadfx("env/fire/fx_static_fire_sm_ndlight");
   level._effect["fire_static_blk_smk"] = loadfx("env/fire/fx_static_fire_md_ndlight");
   level._effect["dlight_fire_glow"] = loadfx("env/light/fx_dlight_fire_glow");
+
   level._effect["fire_distant_150_150"] = loadfx("env/fire/fx_fire_150x150_tall_distant");
   level._effect["fire_distant_150_600"] = loadfx("env/fire/fx_fire_150x600_tall_distant");
+
   level._effect["fire_wall_100_150"] = loadfx("env/fire/fx_fire_wall_smk_0x100y155z");
   level._effect["fire_ceiling_100_100"] = loadfx("env/fire/fx_fire_ceiling_100x100");
   level._effect["fire_ceiling_300_300"] = loadfx("env/fire/fx_fire_ceiling_300x300");
@@ -32,6 +34,7 @@ precache_createfx_fx() {
   level._effect["a_fire_rubble_sm"] = loadfx("env/fire/fx_fire_rubble_sm");
   level._effect["a_fire_rubble_sm_column"] = loadfx("env/fire/fx_fire_rubble_sm_column");
   level._effect["a_fire_rubble_sm_column_smldr"] = loadfx("env/fire/fx_fire_rubble_sm_column_smldr");
+
   level._effect["smoke_detail"] = loadfx("env/smoke/fx_smoke_smolder_sm_blk");
   level._effect["smoke_battle_mist"] = loadfx("env/smoke/fx_battlefield_smokebank_ling_lg_w");
   level._effect["smoke_plume_sm_fast_blk_w"] = loadfx("env/smoke/fx_smoke_plume_sm_fast_blk_w");
@@ -46,8 +49,10 @@ precache_createfx_fx() {
   level._effect["a_smokebank_thick_dist2"] = loadfx("maps/ber3/fx_smokebank_thick_dist2");
   level._effect["a_smokebank_thick_dist3"] = loadfx("maps/ber3/fx_smokebank_thick_dist3");
   level._effect["a_smokebank_thin_dist1"] = loadfx("maps/ber3/fx_smokebank_thin_dist1");
+
   level._effect["water_single_leak"] = loadfx("env/water/fx_water_single_leak");
   level._effect["water_leak_runner"] = loadfx("env/water/fx_water_leak_runner_100");
+
   level._effect["debris_paper_falling"] = loadfx("maps/ber3/fx_debris_papers_falling");
   level._effect["debris_wood_burn_fall"] = loadfx("maps/ber3/fx_debris_burning_wood_fall");
   level._effect["a_dust_falling_sm"] = loadfx("env/dirt/fx_dust_falling_sm");
@@ -56,8 +61,10 @@ precache_createfx_fx() {
   level._effect["a_column_collapse_ground_end"] = loadfx("maps/ber3/fx_column_collapse_ground_end");
   level._effect["a_column_collapse_thick"] = loadfx("maps/ber3/fx_column_collapse_ground_thick");
   level._effect["a_debris_papers_windy"] = loadfx("maps/ber3/fx_debris_papers_windy");
+
   level._effect["wire_sparks"] = loadfx("env/electrical/fx_elec_wire_spark_burst");
   level._effect["wire_sparks_blue"] = loadfx("env/electrical/fx_elec_wire_spark_burst_blue");
+
   level._effect["ash_and_embers"] = loadfx("env/fire/fx_ash_embers_light");
   level._effect["flak_field"] = loadfx("weapon/flak/fx_flak_field_8k_dist");
   level._effect["a_flak_field_cloudflash"] = loadfx("weapon/flak/fx_flak_cloudflash_8k");
@@ -69,15 +76,19 @@ precache_createfx_fx() {
 
 loop_tracers(startPoint, endPoint) {
   level endon("siff");
+
   while(true) {
     realwait(randomFloatRange(0.1, 0.5));
+
     bulletTracer(startPoint, endPoint, false);
   }
 }
 
 intro_fakefire() {
   level waittill("iff");
+
   struct_tracers = getstructarray("e1_tracer_struct", "targetname");
+
   for(i = 0; i < struct_tracers.size; i++) {
     thread loop_tracers(struct_tracers[i].origin, struct_tracers[i].targeted[0].origin);
   }
@@ -87,69 +98,94 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
   if(delayStart) {
     realwait(RandomFloatRange(0.25, 3.5));
   }
+
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   if(isDefined(endonTrig)) {
     endonTrig endon("trigger");
   }
+
   team = undefined;
   fireSound = undefined;
   weapType = "rifle";
+
   if(!isDefined(self.script_noteworthy)) {
     team = "axis_mg";
   } else {
     team = self.script_noteworthy;
   }
+
   switch (team) {
     case "axis_mg":
       fireSound = "weap_type92_fire";
       weapType = "mg";
       break;
+
     default:
       ASSERTMSG("ambient_fakefire: team name '" + team + "' is not recognized.");
   }
+
   muzzleFlash = level._effect["distant_muzzleflash"];
   fake_tracer = level._effect["reich_tracer"];
   soundChance = 45;
+
   burstMin = 10;
   burstMax = 20;
   betweenShotsMin = 0.048;
   betweenShotsMax = 0.049;
   reloadTimeMin = 0.3;
   reloadTimeMax = 3.0;
+
   burst_area = (1250, 8250, 1000);
+
   traceDist = 10000;
   orig_target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+
   target_org = spawn(0, orig_target, "script_origin");
+
   println("org" + target_org.origin);
   println("BA" + burst_area);
+
   while(1) {
     burst = RandomIntRange(burstMin, burstMax);
+
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]), (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]), (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
+
     target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
+
     for(i = 0; i < burst; i++) {
       target = target_org.origin;
+
       fx_angles = VectorNormalize(target - self.origin);
+
       players = getlocalplayers();
+
       for(j = 0; j < players.size; j++) {
         playFX(j, muzzleFlash, self.origin, fx_angles);
       }
+
       if(i % 4 == 0) {
         players = getlocalplayers();
+
         for(j = 0; j < players.size; j++) {
           playFX(j, fake_tracer, self.origin, fx_angles);
         }
       }
+
       realwait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
+
     realwait(RandomFloatRange(reloadTimeMin, reloadTimeMax));
   }
 }
 
 reich_fakefire() {
   level waittill("rff");
+
   fake_reich_mg_trigs = getstructarray("e3_reich_mg_trig", "targetname");
+
   for(i = 0; i < fake_reich_mg_trigs.size; i++) {
     fake_reich_mg_trigs[i] thread ambient_fakefire("srff", true, fake_reich_mg_trigs[i]);
   }
@@ -158,12 +194,15 @@ reich_fakefire() {
 main() {
   clientscripts\createfx\ber3_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   precache_util_fx();
   precache_createfx_fx();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();
   }
+
   level thread intro_fakefire();
   level thread reich_fakefire();
 }

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\ber3_fx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
@@ -13,47 +13,59 @@ main() {
   thread wind_settings();
   spawnFX();
 }
-
 precache_util_fx() {
   level._effect["flesh_hit"] = Loadfx("impacts/flesh_hit");
+
   level._effect["shreck_trail"] = loadfx("weapon/rocket/fx_trail_bazooka_geotrail");
   level._effect["shreck_explode"] = loadfx("Weapon/Rocket/fx_LCI_rocket_explosion_beach");
+
   level._effect["distant_muzzleflash"] = loadfx("weapon/muzzleflashes/fx_50cal");
   level._effect["reich_tracer"] = loadfx("weapon/tracer/fx_tracer_single_md");
+
   level._effect["katyusha_rocket_launch"] = LoadFX("weapon/muzzleflashes/fx_rocket_katyusha_launch");
   level._effect["katyusha_rocket_trail"] = LoadFX("weapon/rocket/fx_rocket_katyusha_geotrail");
   level._effect["katyusha_rocket_explosion"] = LoadFX("weapon/rocket/fx_LCI_rocket_explosion_beach");
   level._effect["rocket_launch"] = loadfx("weapon/muzzleflashes/fx_rocket_katyusha_launch");
   level._effect["rocket_trail"] = loadfx("weapon/rocket/fx_rocket_katyusha_geotrail");
   level._effect["rocket_explode"] = loadfx("weapon/rocket/fx_LCI_rocket_explosion_beach");
+
   level._effect["pak43_trail"] = LoadFX("weapon/artillery/fx_artillery_pak43_geotrail");
   level._effect["pak43_muzzleflash"] = LoadFX("weapon/artillery/fx_artillery_pak43_muz");
   level._effect["pak43_impact"] = LoadFX("explosions/default_explosion");
+
   level._effect["brick_explode"] = LoadFX("maps/ber3/fx_exp_wall_bricks");
+
   level._effect["molotov_trail_fire"] = LoadFx("weapon/molotov/fx_molotov_wick");
   level._effect["molotov_explosion"] = LoadFx("weapon/molotov/fx_molotov_exp");
+
   level._effect["pillar_cover_smoke"] = loadfx("maps/ber3/fx_column_collapse_cover");
   level._effect["flame_death1"] = loadfx("env/fire/fx_fire_player_sm");
   level._effect["flame_death2"] = loadfx("env/fire/fx_fire_player_torso_mp");
+
   level.scr_sound["mortar_flash"] = "wpn_mortar_fire";
   level._effect["mortar_flash"] = loadfx("weapon/mortar/fx_mortar_launch_w_trail");
+
   level._effectType["dirt_mortar"] = "mortar";
   level._effect["dirt_mortar"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["dirt_mortar"] = "stop_ambush_mortars";
+
   level._effect["character_fire_pain_sm"] = LoadFx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = LoadFx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = LoadFx("env/fire/fx_fire_player_torso");
+
   level._effect["flameguy_explode"] = LoadFX("explosions/fx_flamethrower_char_explosion");
+
   level._effect["e2_statue_explode"] = LoadFX("maps/ber3/fx_exp_statue");
 }
-
 precache_createfx_fx() {
   level._effect["fire_static_detail"] = loadfx("env/fire/fx_static_fire_detail_ndlight");
   level._effect["fire_static_small"] = loadfx("env/fire/fx_static_fire_sm_ndlight");
   level._effect["fire_static_blk_smk"] = loadfx("env/fire/fx_static_fire_md_ndlight");
   level._effect["dlight_fire_glow"] = loadfx("env/light/fx_dlight_fire_glow");
+
   level._effect["fire_distant_150_150"] = loadfx("env/fire/fx_fire_150x150_tall_distant");
   level._effect["fire_distant_150_600"] = loadfx("env/fire/fx_fire_150x600_tall_distant");
+
   level._effect["fire_wall_100_150"] = loadfx("env/fire/fx_fire_wall_smk_0x100y155z");
   level._effect["fire_ceiling_100_100"] = loadfx("env/fire/fx_fire_ceiling_100x100");
   level._effect["fire_ceiling_300_300"] = loadfx("env/fire/fx_fire_ceiling_300x300");
@@ -67,6 +79,7 @@ precache_createfx_fx() {
   level._effect["a_fire_rubble_sm"] = loadfx("env/fire/fx_fire_rubble_sm");
   level._effect["a_fire_rubble_sm_column"] = loadfx("env/fire/fx_fire_rubble_sm_column");
   level._effect["a_fire_rubble_sm_column_smldr"] = loadfx("env/fire/fx_fire_rubble_sm_column_smldr");
+
   level._effect["smoke_detail"] = loadfx("env/smoke/fx_smoke_smolder_sm_blk");
   level._effect["smoke_battle_mist"] = loadfx("env/smoke/fx_battlefield_smokebank_ling_lg_w");
   level._effect["smoke_plume_sm_fast_blk_w"] = loadfx("env/smoke/fx_smoke_plume_sm_fast_blk_w");
@@ -81,8 +94,10 @@ precache_createfx_fx() {
   level._effect["a_smokebank_thick_dist2"] = loadfx("maps/ber3/fx_smokebank_thick_dist2");
   level._effect["a_smokebank_thick_dist3"] = loadfx("maps/ber3/fx_smokebank_thick_dist3");
   level._effect["a_smokebank_thin_dist1"] = loadfx("maps/ber3/fx_smokebank_thin_dist1");
+
   level._effect["water_single_leak"] = loadfx("env/water/fx_water_single_leak");
   level._effect["water_leak_runner"] = loadfx("env/water/fx_water_leak_runner_100");
+
   level._effect["debris_paper_falling"] = loadfx("maps/ber3/fx_debris_papers_falling");
   level._effect["debris_wood_burn_fall"] = loadfx("maps/ber3/fx_debris_burning_wood_fall");
   level._effect["a_dust_falling_sm"] = loadfx("env/dirt/fx_dust_falling_sm");
@@ -91,8 +106,10 @@ precache_createfx_fx() {
   level._effect["a_column_collapse_ground_end"] = loadfx("maps/ber3/fx_column_collapse_ground_end");
   level._effect["a_column_collapse_thick"] = loadfx("maps/ber3/fx_column_collapse_ground_thick");
   level._effect["a_debris_papers_windy"] = loadfx("maps/ber3/fx_debris_papers_windy");
+
   level._effect["wire_sparks"] = loadfx("env/electrical/fx_elec_wire_spark_burst");
   level._effect["wire_sparks_blue"] = loadfx("env/electrical/fx_elec_wire_spark_burst_blue");
+
   level._effect["ash_and_embers"] = loadfx("env/fire/fx_ash_embers_light");
   level._effect["flak_field"] = loadfx("weapon/flak/fx_flak_field_8k_dist");
   level._effect["a_flak_field_cloudflash"] = loadfx("weapon/flak/fx_flak_cloudflash_8k");
@@ -101,7 +118,6 @@ precache_createfx_fx() {
   level._effect["bio_flies"] = loadfx("bio/insects/fx_insects_carcass_flies");
   level._effect["bio_crows_overhead"] = loadfx("bio/animals/fx_crows_circling");
 }
-
 wind_settings() {
   SetSavedDvar("wind_global_vector", "-176 70 0");
   SetSavedDvar("wind_global_low_altitude", 26);

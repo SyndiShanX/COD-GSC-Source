@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_type97.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_vehicle_aianim;
 #include maps\_vehicle;
@@ -15,6 +15,7 @@ main(model, type, no_mantle, max_turrets) {
   build_shoot_rumble("tank_fire");
   build_exhaust("vehicle/exhaust/fx_exhaust_t97");
   build_deathfx("vehicle/vexplosion/fx_vexplode_jap_t97", "tag_origin", "explo_metal_rand");
+
   build_deathquake(0.7, 1.0, 600);
   build_turret("type97_tank_mg", "tag_turretgun", "weapon_machinegun_tiger", false, undefined, undefined, undefined, undefined, max_turrets);
   build_turret("type97_tank_mg", "tag_machinegun", "weapon_machinegun_tiger", false, undefined, undefined, undefined, undefined, max_turrets);
@@ -27,21 +28,17 @@ main(model, type, no_mantle, max_turrets) {
   build_aianims(::setanims, ::set_vehicle_anims);
   build_frontarmor(.33);
 }
-
 init_local() {}
-
 #using_animtree("tank");
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
-
 setanims() {
   positions = [];
   for(i = 0; i < 10; i++)
     positions[i] = spawnStruct();
+
   positions[0].sittag = "tag_guy1";
   positions[1].sittag = "tag_guy2";
   positions[2].sittag = "tag_guy3";

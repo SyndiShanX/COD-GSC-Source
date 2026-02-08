@@ -1,7 +1,7 @@
-/*****************************************************
+/*********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_ger_wrmcht_k98.gsc
-*****************************************************/
+*********************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_ger_wrmcht_bodyalias::main());

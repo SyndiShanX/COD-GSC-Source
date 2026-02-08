@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_zombiemode_timer.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -11,6 +11,7 @@ init() {
   precacheShader("zombie_stopwatchneedle");
   precacheShader("zombie_stopwatch");
   precacheShader("zombie_stopwatch_glass");
+
   if(!isDefined(level.stopwatch_length_width)) {
     level.stopwatch_length_width = 96;
   }
@@ -19,6 +20,7 @@ init() {
 start_timer(time, stop_notify) {
   self notify("stop_prev_timer");
   self endon("stop_prev_timer");
+
   if(!isDefined(self.stopwatch_elem)) {
     self.stopwatch_elem = newClientHudElem(self);
     self.stopwatch_elem.horzAlign = "left";
@@ -29,6 +31,7 @@ start_timer(time, stop_notify) {
     self.stopwatch_elem.y = 20;
     self.stopwatch_elem.alpha = 0;
     self.stopwatch_elem.sort = 2;
+
     self.stopwatch_elem_glass = newClientHudElem(self);
     self.stopwatch_elem_glass.horzAlign = "left";
     self.stopwatch_elem_glass.vertAlign = "top";
@@ -40,6 +43,7 @@ start_timer(time, stop_notify) {
     self.stopwatch_elem_glass.sort = 3;
     self.stopwatch_elem_glass setShader("zombie_stopwatch_glass", level.stopwatch_length_width, level.stopwatch_length_width);
   }
+
   if(isDefined(stop_notify)) {
     self thread wait_for_stop_notify(stop_notify);
   }
@@ -59,7 +63,9 @@ start_timer(time, stop_notify) {
 wait_for_stop_notify(stop_notify) {
   self endon("stop_prev_timer");
   self endon("countdown_finished");
+
   self waittill(stop_notify);
+
   self.stopwatch_elem.alpha = 0;
   self.stopwatch_elem_glass.alpha = 0;
 }

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_sherman.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_vehicle_aianim;
 #include maps\_vehicle;
@@ -27,22 +27,20 @@ main(model, type) {
   build_compassicon();
   build_aianims(::setanims, ::set_vehicle_anims);
   build_frontarmor(.33);
+
   level.vehicletypefancy["sherman"] = &"VEHICLENAME_SHERMAN_TANK";
 }
-
 init_local() {}
 #using_animtree("tank");
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
-
 setanims() {
   positions = [];
   for(i = 0; i < 10; i++)
     positions[i] = spawnStruct();
+
   positions[0].sittag = "tag_driver";
   positions[1].sittag = "tag_passenger";
   positions[2].sittag = "tag_passenger2";
@@ -53,6 +51,7 @@ setanims() {
   positions[7].sittag = "tag_passenger7";
   positions[8].sittag = "tag_passenger8";
   positions[9].sittag = "tag_passenger9";
+
   positions[0].idle = % crew_tank1_commander_idle;
   positions[1].idle = % crew_tank1_passenger1_idle;
   positions[2].idle = % crew_tank1_passenger2_idle;
@@ -63,12 +62,14 @@ setanims() {
   positions[7].idle = % crew_tank1_passenger7_idle;
   positions[8].idle = % crew_tank1_passenger8_idle;
   positions[9].idle = % crew_tank1_passenger9_idle;
+
   positions[4].idle_combat = % crew_sherman_passenger4_combatidle;
   positions[5].idle_combat = % crew_sherman_passenger5_combatidle;
   positions[6].idle_combat = % crew_sherman_passenger6_combatidle;
   positions[7].idle_combat = % crew_tank1_passenger7_combatidle;
   positions[8].idle_combat = % crew_tank1_passenger8_combatidle;
   positions[9].idle_combat = % crew_tank1_passenger9_combatidle;
+
   positions[0].getout = % crew_tank1_commander_dismount;
   positions[1].getout = % crew_tank1_passenger1_dismount;
   positions[2].getout = % crew_tank1_passenger2_dismount;
@@ -79,11 +80,13 @@ setanims() {
   positions[7].getout = % crew_tank1_passenger7_dismount;
   positions[8].getout = % crew_tank1_passenger8_dismount;
   positions[9].getout = % crew_tank1_passenger9_dismount;
+
   positions[4].getout_combat = % crew_sherman_passenger4_combatdismount_a;
   positions[5].getout_combat = % crew_sherman_passenger5_combatdismount_a;
   positions[6].getout_combat = % crew_sherman_passenger6_combatdismount_a;
   positions[7].getout_combat = % crew_tank1_passenger7_combatdismount;
   positions[8].getout_combat = % crew_tank1_passenger8_combatdismount;
   positions[9].getout_combat = % crew_tank1_passenger9_combatdismount;
+
   return positions;
 }

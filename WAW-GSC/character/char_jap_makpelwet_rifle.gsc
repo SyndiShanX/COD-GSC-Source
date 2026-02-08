@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_jap_makpelwet_rifle.gsc
-*****************************************************/
+**************************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_jap_impinfwet_body5alias::main());

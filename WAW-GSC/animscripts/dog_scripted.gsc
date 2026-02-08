@@ -1,21 +1,26 @@
-/*****************************************************
+/****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\dog_scripted.gsc
-*****************************************************/
+****************************************/
 
 #using_animtree("dog");
 
 main() {
   self endon("death");
   self notify("killanimscript");
+
   self.codeScripted["root"] = % root;
+
   self trackScriptState("Scripted Main", "code");
   self endon("end_sequence");
   self startscriptedanim(self.codeScripted["notifyName"], self.codeScripted["origin"], self.codeScripted["angles"], self.codeScripted["anim"], self.codeScripted["animMode"], self.codeScripted["root"]);
+
   self.a.script = "scripted";
   self.codeScripted = undefined;
+
   if(isDefined(self.deathstring_passed))
     self.deathstring = self.deathstring_passed;
+
   self waittill("killanimscript");
 }
 

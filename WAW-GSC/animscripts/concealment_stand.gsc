@@ -1,7 +1,7 @@
-/*****************************************************
+/*********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\concealment_stand.gsc
-*****************************************************/
+*********************************************/
 
 #include animscripts\combat_Utility;
 #include animscripts\SetPoseMovement;

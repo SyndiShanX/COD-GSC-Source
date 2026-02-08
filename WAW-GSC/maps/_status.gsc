@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_status.gsc
-*****************************************************/
+**************************************/
 
 scripter_task(name, days, percent, note) {
   task("scripter", name, undefined, undefined, days, percent, note);
@@ -13,6 +13,7 @@ scripter_subtask(name, days, percent, note) {
     assertmsg("You must call scripter_task() before you can call script_subtask()");
     return;
   }
+
   task("scripter", name, level.current_task, undefined, days, percent, note);
   level.current_subtask = name;
 }
@@ -22,10 +23,12 @@ scripter_microtask(name, days, percent, note) {
     assertmsg("You must call script_task() before you can call scripter_microtask()");
     return;
   }
+
   if(!isDefined(level.current_subtask)) {
     assertmsg("You must call scripter_subtask() before you can call scripter_microtask()");
     return;
   }
+
   task("scripter", name, level.current_task, level.current_subtask, days, percent, note);
 }
 
@@ -39,6 +42,7 @@ builder_subtask(name, days, percent, note) {
     assertmsg("You must call builder_task() before you can call builder_subtask()");
     return;
   }
+
   task("builder", name, level.current_task, undefined, days, percent, note);
   level.current_subtask = name;
 }
@@ -48,10 +52,12 @@ builder_microtask(name, days, percent, note) {
     assertmsg("You must call builder_task() before you can call builder_microtask()");
     return;
   }
+
   if(!isDefined(level.current_subtask)) {
     assertmsg("You must call builder_subtask() before you can call builder_microtask()");
     return;
   }
+
   task("builder", name, level.current_task, level.current_subtask, days, percent, note);
 }
 
@@ -60,104 +66,130 @@ task(type, name, main_task, sub_task, days, percent, note) {
     level._status_export_thread_started = true;
     level thread export_status_thread();
   }
+
   if(!isDefined(level._task_start_date)) {
-    script = Tolower(GetDvar("mapname"));
+    script = Tolower(getDvar("mapname"));
+
     switch (level.script) {
       case "trn":
         level._task_start_date = "Jun 25 2007";
         level._task_milestone_date = "Jul 20 2007";
         break;
+
       case "mak":
         level._task_start_date = "May 28 2007";
         level._task_milestone_date = "Jun 22 2007";
         break;
+
       case "pel1":
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
+
       case "pel2":
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
+
       case "fly":
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
+
       case "hol1":
         level._task_start_date = "May 28 2007";
         level._task_milestone_date = "Jun 22 2007";
         break;
+
       case "hol2":
         level._task_start_date = "May 28 2007";
         level._task_milestone_date = "Jun 22 2007";
         break;
+
       case "hol3":
         level._task_start_date = "Jun 25 2007";
         level._task_milestone_date = "Jul 20 2007";
         break;
+
       case "see1":
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
+
       case "see2":
         level._task_start_date = "May 28 2007";
         level._task_milestone_date = "Jun 22 2007";
         break;
+
       case "see3":
         level._task_start_date = "Jun 25 2007";
         level._task_milestone_date = "Jul 20 2007";
         break;
+
       case "rhi1":
         level._task_start_date = "May 28 2007";
         level._task_milestone_date = "Jun 22 2007";
         break;
+
       case "rhi2":
         level._task_start_date = "Jun 25 2007";
         level._task_milestone_date = "Jul 20 2007";
         break;
+
       case "rhi3":
         level._task_start_date = "Jun 25 2007";
         level._task_milestone_date = "Jul 20 2007";
         break;
+
       case "oki1":
         level._task_start_date = "Jun 25 2007";
         level._task_milestone_date = "Jul 20 2007";
         break;
+
       case "oki2":
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
+
       case "oki3":
         level._task_start_date = "Jun 25 2007";
         level._task_milestone_date = "Jul 20 2007";
         break;
+
       case "ber1":
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
+
       case "ber2":
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
+
       case "ber3":
         level._task_start_date = "May 28 2007";
         level._task_milestone_date = "Jun 22 2007";
         break;
+
       default:
         level._task_start_date = "Apr 30 2007";
         level._task_milestone_date = "May 25 2007";
         break;
     }
   }
+
   if(!isDefined(level._tasks)) {
     level._tasks = [];
   }
+
   if(!isDefined(level._tasks[type])) {
     level._tasks[type] = [];
   }
+
   if(!isDefined(note)) {
     note = "";
   }
+
   array = [];
   array["name"] = name;
   array["days"] = days;
@@ -165,43 +197,56 @@ task(type, name, main_task, sub_task, days, percent, note) {
   array["notes"] = note;
   array["sub_tasks"] = [];
   array["display"] = name + " (" + percent + " percent)";
+
   array["start_day"] = date_to_day(level._task_start_date);
+
   array["start_date"] = day_to_date(array["start_day"]);
+
   array["due_day"] = get_due_day(array["start_day"], days);
   array["due_date"] = day_to_date(array["due_day"]);
+
   if(isDefined(main_task)) {
     if(isDefined(sub_task)) {
       size = level._tasks[type][main_task]["sub_tasks"].size;
       for(i = 0; i < size; i++) {
         if(level._tasks[type][main_task]["sub_tasks"][i]["name"] == sub_task) {
           size2 = level._tasks[type][main_task]["sub_tasks"][i]["sub_tasks"].size;
+
           array["days"] = -1;
+
           level._tasks[type][main_task]["sub_tasks"][i]["sub_tasks"][size2] = array;
           break;
         }
       }
+
       update_percent(type, main_task, sub_task);
     } else {
       size = level._tasks[type][main_task]["sub_tasks"].size;
       level._tasks[type][main_task]["sub_tasks"][size] = array;
+
       update_percent(type, main_task);
       update_days(type, main_task);
     }
   } else {
     level._tasks[type][name] = array;
+
     if(!isDefined(level._tasks[type]["all_tasks"])) {
       level._tasks[type]["all_tasks"] = [];
     }
+
     size = level._tasks[type]["all_tasks"].size;
     level._tasks[type]["all_tasks"][size] = name;
+
     if(!isDefined(level._task_types)) {
       level._task_types = [];
     }
+
     if(check_for_dupes(level._task_types, type)) {
       size = level._task_types.size;
       level._task_types[size] = type;
     }
   }
+
 }
 
 update_percent(type, main_task, sub_task) {
@@ -214,20 +259,24 @@ update_percent(type, main_task, sub_task) {
         break;
       }
     }
+
     size = level._tasks[type][main_task]["sub_tasks"][index]["sub_tasks"].size;
     accum = 0;
     for(i = 0; i < size; i++) {
       accum += level._tasks[type][main_task]["sub_tasks"][index]["sub_tasks"][i]["percent"];
     }
+
     percent = accum / size;
     level._tasks[type][main_task]["sub_tasks"][index]["percent"] = percent;
     level._tasks[type][main_task]["sub_tasks"][index]["display"] = level._tasks[type][main_task]["sub_tasks"][index]["name"] + " (" + percent + " percent)";
   }
+
   size = level._tasks[type][main_task]["sub_tasks"].size;
   accum = 0;
   for(i = 0; i < size; i++) {
     accum += level._tasks[type][main_task]["sub_tasks"][i]["percent"];
   }
+
   percent = accum / size;
   level._tasks[type][main_task]["percent"] = percent;
   level._tasks[type][main_task]["display"] = level._tasks[type][main_task]["name"] + " (" + percent + " percent)";
@@ -239,9 +288,13 @@ update_days(type, main_task) {
   for(i = 0; i < size; i++) {
     accum += level._tasks[type][main_task]["sub_tasks"][i]["days"];
   }
+
   level._tasks[type][main_task]["days"] = accum;
+
   set_start_day(type, main_task);
+
   level._tasks[type][main_task]["start_date"] = day_to_date(level._tasks[type][main_task]["start_day"]);
+
   level._tasks[type][main_task]["due_day"] = get_due_day(level._tasks[type][main_task]["start_day"], level._tasks[type][main_task]["days"]);
   level._tasks[type][main_task]["due_date"] = day_to_date(level._tasks[type][main_task]["due_day"]);
 }
@@ -257,9 +310,12 @@ set_start_day(type, main_task) {
       }
     }
   }
+
   if(index > 0) {
     previous_name = level._tasks[type]["all_tasks"][index - 1];
+
     level._tasks[type][main_task]["start_day"] = date_to_day(level._tasks[type][previous_name]["due_date"]) + 1;
+
     while(is_day_off(level._tasks[type][main_task]["start_day"])) {
       level._tasks[type][main_task]["start_day"]++;
     }
@@ -275,61 +331,78 @@ show_task(name) {
 show_task_thread(name) {
   level notify("stop_show_task");
   level endon("stop_show_task");
-  if(GetDvar("status_show") == "") {
-    SetDvar("status_show", "off");
+
+  if(getDvar("status_show") == "") {
+    setDvar("status_show", "off");
   }
+
   if(isDefined(level._status_current_hud)) {
     remove_hud(level._status_current_hud);
   }
+
   if(!isDefined(level._status_export_thread_started)) {
     level._status_export_thread_started = true;
     level thread export_status_thread();
   }
+
   old_type = "none";
   old_dvar = "none";
   while(1) {
-    if(old_type != GetDvar("status_show")) {
-      type = GetDvar("status_show");
+    if(old_type != getDvar("status_show")) {
+      type = getDvar("status_show");
+
       if(type != "off") {
         if(!isDefined(level._tasks[type])) {
           println("^1_status PRINT: '" + type + "' is not specified as a task type.");
-          SetDvar("status_show", "scripter");
+          setDvar("status_show", "scripter");
           wait(0.25);
           continue;
         }
+
         if(!isDefined(level._tasks[type][name])) {
           assertmsg("_status ASSERT: '" + name + "' name is not specified for the given task type, '" + type + "'");
-          SetDvar("status_show", "scripter");
+          setDvar("status_show", "scripter");
           wait(0.25);
           continue;
         }
       }
+
       if(isDefined(level._status_current_hud)) {
         remove_hud(level._status_current_hud);
       }
+
       old_type = type;
+
       if(type == "off") {
         continue;
       }
+
       x = 10;
       level._status_y = 80;
       level._status_current_hud = name;
+
       start_date = "Start Date: " + level._tasks[type][name]["start_date"];
       new_hud(name, start_date, x, level._status_y - 60);
+
       start_date = "Due Date: " + level._tasks[type][name]["due_date"];
       new_hud(name, start_date, x, level._status_y - 48);
+
       status = "Status: ";
       new_hud(name, status, x, level._status_y - 36);
+
       show_status(type, name, x);
       new_hud(name, level._tasks[type][name]["display"], x, level._status_y, undefined, hud_color(level._tasks[type][name]["percent"]));
+
       show_subtasks(name, level._tasks[type][name]["sub_tasks"], x);
     }
+
     wait(1);
   }
 }
 
 show_status(type, name, x) {
   quote = get_status_quote(type, name);
+
   color = (1, 1, 1);
   if(quote == "On Schedule") {
     color = (0, 1, 0);
@@ -342,23 +415,30 @@ show_status(type, name, x) {
   } else if(quote == "COMPLETED") {
     color = (0, 1, 0);
   }
+
   new_hud(name, quote, x + 35, level._status_y - 36, undefined, color);
+
   days = level._tasks[type][name]["days"];
   days_remaining = days_remaining(level._tasks[type][name]["start_day"], days);
   expected_percent = 100 - ((100 / days) * days_remaining);
+
   expected = "Expected Percent: " + expected_percent;
   new_hud(name, expected, x, level._status_y - 24);
+
   days_remaining_string = "Days Remaining: " + days_remaining;
   new_hud(name, days_remaining_string, x, level._status_y - 12);
 }
 
 get_status_quote(type, name) {
   quote = "SHOULD NOT SEE THIS!";
+
   percent = level._tasks[type][name]["percent"];
+
   if(percent < 100) {
     days = level._tasks[type][name]["days"];
     days_remaining = days_remaining(level._tasks[type][name]["start_day"], days);
     expected_percent = 100 - ((100 / days) * days_remaining);
+
     diff = percent - expected_percent;
     if(expected_percent < 0 || abs(diff) < 10) {
       quote = "On schedule";
@@ -374,13 +454,16 @@ get_status_quote(type, name) {
   } else {
     quote = "COMPLETED";
   }
+
   return quote;
 }
 
 days_remaining(start_day, days) {
   date = GetDate();
+
   curr_day_num = date_to_day(date);
   days_remaining = (start_day + days) - curr_day_num;
+
   return days_remaining;
 }
 
@@ -391,22 +474,28 @@ date_to_day(date) {
   for(i = 0; i < date.size; i++) {
     if(date[i] == " ") {
       count++;
+
       if(count == 2) {
         break;
       }
       continue;
     }
+
     if(count == 1) {
       new_str = new_str + date[i];
     }
   }
+
   day_num = int(new_str);
   month_num = get_month_number(date);
+
   year_day = 0;
   for(i = 1; i < month_num; i++) {
     year_day += month_days(i);
   }
+
   year_day += day_num;
+
   return year_day;
 }
 
@@ -430,11 +519,13 @@ get_estimated_due_date(type) {
 is_day_off(day) {
   day_off = false;
   the_mod = day % 7;
+
   if(the_mod == 6) {
     day_off = true;
   } else if(the_mod == 0) {
     day_off = true;
   }
+
   return day_off;
 }
 
@@ -442,7 +533,9 @@ day_to_date(day, just_day_number) {
   if(!isDefined(just_day_number)) {
     just_day_number = false;
   }
+
   year = get_year();
+
   while(1) {
     if(day > days_in_year(year)) {
       day = day - days_in_year(year);
@@ -451,6 +544,7 @@ day_to_date(day, just_day_number) {
       break;
     }
   }
+
   date = 1;
   date_string = "";
   for(i = 1; i < 13; i++) {
@@ -461,6 +555,7 @@ day_to_date(day, just_day_number) {
         day -= month_days(i);
       } else {
         date_string = date_string + get_month_string(i) + " " + day + " " + year;
+
         if(just_day_number) {
           return day;
         } else {
@@ -469,6 +564,7 @@ day_to_date(day, just_day_number) {
       }
     }
   }
+
   return "BUG!";
 }
 
@@ -477,7 +573,9 @@ get_month_number(date) {
   for(i = 0; i < 3; i++) {
     new_str = new_str + date[i];
   }
+
   num = -1;
+
   if(new_str == "Jan") {
     return 1;
   } else if(new_str == "Feb") {
@@ -537,6 +635,7 @@ days_in_year(year) {
   if(is_leapyear(year)) {
     return 366;
   }
+
   return 365;
 }
 
@@ -568,6 +667,7 @@ month_days(month_num) {
       return 30;
     }
   }
+
 }
 
 is_leapyear(year) {
@@ -575,14 +675,17 @@ is_leapyear(year) {
     date = GetDate();
     year = get_year();
   }
+
   if(year & 4 == 1) {
     return true;
   }
+
   return false;
 }
 
 get_year() {
   date = GetDate();
+
   new_str = "";
   count = 2;
   for(i = 0; i < date.size; i++) {
@@ -590,10 +693,12 @@ get_year() {
       count--;
       continue;
     }
+
     if(count == 0) {
       new_str = new_str + date[i];
     }
   }
+
   return int(new_str);
 }
 
@@ -606,15 +711,18 @@ show_subtasks(hud_name, sub_tasks, x) {
       show_subtasks(hud_name, sub_tasks[i]["sub_tasks"], x);
     }
   }
+
 }
 
 new_hud(hud_name, msg, x, y, scale, color) {
   if(!isDefined(level.hud_array)) {
     level.hud_array = [];
   }
+
   if(!isDefined(level.hud_array[hud_name])) {
     level.hud_array[hud_name] = [];
   }
+
   hud = set_hudelem(msg, x, y, scale, undefined, color);
   level.hud_array[hud_name][level.hud_array[hud_name].size] = hud;
   return hud;
@@ -628,6 +736,7 @@ hud_color(percent) {
   } else {
     color = (1, 1, 0);
   }
+
   return color;
 }
 
@@ -635,10 +744,12 @@ remove_hud(hud_name) {
   if(!isDefined(level.hud_array[hud_name])) {
     return;
   }
+
   huds = level.hud_array[hud_name];
   for(i = 0; i < huds.size; i++) {
     destroy_hud(huds[i]);
   }
+
   level.hud_array[hud_name] = undefined;
 }
 
@@ -647,17 +758,19 @@ destroy_hud(hud) {
     hud Destroy();
   }
 }
-
 set_hudelem(text, x, y, scale, alpha, color) {
   if(!isDefined(alpha)) {
     alpha = 1;
   }
+
   if(!isDefined(scale)) {
     scale = 1;
   }
+
   if(!isDefined(color)) {
     color = (1, 1, 1);
   }
+
   hud = NewHudElem();
   hud.location = 0;
   hud.alignX = "left";
@@ -670,26 +783,30 @@ set_hudelem(text, x, y, scale, alpha, color) {
   hud.y = y;
   hud.og_scale = scale;
   hud.color = color;
+
   if(isDefined(text)) {
     hud SetText(text);
   }
+
   return hud;
 }
 
 export_status_thread() {
-  SetDvar("status_export", "none");
+  setDvar("status_export", "none");
   while(1) {
-    dvar = GetDvar("status_export");
+    dvar = getDvar("status_export");
     if(dvar == "none") {
       wait(1);
       continue;
     }
+
     if(dvar == "detailed") {
       export_to_html("detailed");
     } else {
       export_to_html("task");
     }
-    SetDvar("status_export", "none");
+
+    setDvar("status_export", "none");
   }
 }
 
@@ -697,29 +814,36 @@ export_to_html(type) {
   if(!isDefined(level._tasks)) {
     assertmsg("_status ASSERT: No tasks specified!");
   }
+
   fullpath_file = "status/" + level.script + "_status.html";
+
   file = OpenFile(fullpath_file, "write");
   assertex(file != -1, "File not writeable (maybe you should check it out): " + fullpath_file);
   if(file < 0) {
     return;
   }
+
   tab = "";
   write_header(file);
   fprintln(file, "<body>");
   write_project_header(file, type);
+
   if(type == "detailed") {
     write_gantt_chart(file);
     write_tasks(file);
   } else {
     write_tasks(file);
   }
+
   tab = "";
   fprintln(file, tab + "<div class=\"footer\">");
   fprintln(file, tab + tab + "<div>This file was generated by _status.gsc</div>");
   fprintln(file, tab + "</div>");
   fprintln(file, "</body>");
+
   saved = CloseFile(file);
   assertex(saved == 1, "File not saved (see above message?): " + fullpath_file);
+
   if(!saved) {}
 }
 
@@ -752,71 +876,99 @@ write_project_header(file, type) {
 
 write_gantt_chart(file) {
   tab = "";
+
   size = level._task_types.size;
   use_odd = true;
   for(i = 0; i < size; i++) {
     type = level._task_types[i];
+
     write_gantt_chart_header(file, type);
+
     tasks = level._tasks[type]["all_tasks"].size;
+
     task_num = 0;
     for(q = 0; q < tasks; q++) {
       main_task = level._tasks[type]["all_tasks"][q];
+
       if(use_odd) {
         use_odd = false;
       } else {
         use_odd = true;
       }
+
       sub_tasks = level._tasks[type][main_task]["sub_tasks"].size;
+
       task_num++;
+
       level._tasks[type][main_task]["quote"] = get_status_quote(type, main_task);
+
       write_gantt_row(file, level._tasks[type][main_task], task_num, use_odd, 0, sub_tasks > 0);
     }
+
     fprintln(file, tab + tab + tab + tab + tab + "</table>");
     fprintln(file, tab + tab + tab + tab + "</div>");
+
     estimated_due_date = get_estimated_due_date(type);
+
     if(date_to_day(estimated_due_date) > date_to_day(level._task_milestone_date)) {
       days = figure_days_amount(level._task_start_date, estimated_due_date);
     } else {
       days = figure_days_amount(level._task_start_date, level._task_milestone_date);
     }
+
     if(days % 7 > 0) {
       days = (7 - (days % 7)) + days;
     }
+
     overall_width = days * 19 + (days - 1);
+
     fprintln(file, tab + tab + tab + "<td>");
     fprintln(file, tab + tab + tab + tab + "<div class=\"gantt-scroll-div\" style=\"border-color: #aaa #aaa #aaa #fff;\">");
     fprintln(file, tab + tab + tab + tab + tab + "<table style= \"width: " + overall_width + "px; cellspacing=\"0\" cellpadding=\"0\" border=\"1\">");
     fprintln(file, tab + tab + tab + tab + tab + tab + "<tr class=\"header\" align=\"left\">");
+
     weeks = int(days / 7);
+
     for(i = 0; i < weeks; i++) {
       fprintln(file, tab + tab + tab + tab + tab + tab + tab + "<th align=\"center\" colspan=\"5\">" + "Week #" + (i + 1) + "</th>");
       fprintln(file, tab + tab + tab + tab + tab + tab + tab + "<th colspan=\"2\"></th>");
     }
+
     fprintln(file, tab + tab + tab + tab + tab + tab + "</tr>");
+
     fprintln(file, tab + tab + tab + tab + tab + tab + "<tr class=\"header\" align=\"left\">");
+
     start = date_to_day(level._task_start_date);
     for(i = 0; i < days; i++) {
       fprintln(file, tab + tab + tab + tab + tab + tab + tab + "<th class=\"gantt-day-header\" align=\"center\">" + day_to_date(start + i, true) + "</th>");
     }
+
     fprintln(file, tab + tab + tab + tab + tab + tab + "</tr>");
+
     use_odd = true;
     columns = days;
     for(q = 0; q < tasks; q++) {
       main_task = level._tasks[type]["all_tasks"][q];
+
       if(use_odd) {
         use_odd = false;
       } else {
         use_odd = true;
       }
+
       sub_tasks = level._tasks[type][main_task]["sub_tasks"].size;
+
       task_num++;
+
       level._tasks[type][main_task]["quote"] = get_status_quote(type, main_task);
+
       if(i == 0) {
         write_gantt_graph_row(file, level._tasks[type][main_task]["start_date"], level._tasks[type][main_task]["due_date"], use_odd, columns, overall_width);
       } else {
         write_gantt_graph_row(file, level._tasks[type][main_task]["start_date"], level._tasks[type][main_task]["due_date"], use_odd, columns, overall_width);
       }
     }
+
     fprintln(file, tab + tab + tab + tab + tab + "</table>");
     fprintln(file, tab + tab + tab + tab + "</div>");
     fprintln(file, tab + tab + tab + "</td>");
@@ -828,21 +980,27 @@ write_gantt_chart(file) {
 figure_days_amount(begin_date, end_date) {
   start_day = date_to_day(begin_date);
   end_day = date_to_day(end_date);
+
   return (end_day - start_day);
 }
 
 write_gantt_graph_row(file, start_date, due_date, use_odd, columns, overall_width) {
   tab = "";
+
   if(use_odd) {
     fprintln(file, tab + tab + tab + tab + tab + tab + "<tr class=\"odd\">");
   } else {
     fprintln(file, tab + tab + tab + tab + tab + tab + "<tr class=\"even\">");
   }
+
   start_day = date_to_day(start_date);
   day_diff = start_day - date_to_day(level._task_start_date);
+
   begin_width = (day_diff * 19) + day_diff - 1;
+
   days = figure_days_amount(start_date, due_date) + 1;
   progress_width = (days * 19) + days - 2;
+
   fprintln(file, tab + tab + tab + tab + tab + tab + tab + "<td colspan=\"" + columns + "\">");
   fprintln(file, tab + tab + tab + tab + tab + tab + tab + tab + "<div style=\"width: " + overall_width + "px; white-space: nowrap;\">");
   fprintln(file, tab + tab + tab + tab + tab + tab + tab + tab + tab + "<div class=\"gantt-empty-begin\" style=\"width: " + begin_width + "px;\"></div>");
@@ -856,40 +1014,49 @@ write_gantt_graph_row(file, start_date, due_date, use_odd, columns, overall_widt
 
 write_gantt_row(file, array, task_num, use_odd, pixels, use_bold) {
   tab = "";
+
   if(use_odd) {
     fprintln(file, tab + tab + "<tr class=\"odd\">");
   } else {
     fprintln(file, tab + tab + "<tr class=\"even\">");
   }
+
   fprintln(file, tab + tab + tab + "<td>");
+
   if(use_bold) {
     fprintln(file, tab + tab + tab + tab + "<a name=\"task" + task_num + "\" style=\"font-weight: bold; margin-left: " + pixels + "px\" id=\"task" + task_num + "\">");
   } else {
     fprintln(file, tab + tab + tab + tab + "<a name=\"task" + task_num + "\" style=\"margin-left: " + pixels + "px\" id=\"task" + task_num + "\">");
   }
+
   if(isDefined(array["quote"])) {
     fprintln(file, tab + tab + tab + tab + "<span>" + array["name"] + " - " + array["quote"] + "</span>");
   } else {
     fprintln(file, tab + tab + tab + tab + "<span>" + array["name"] + "</span>");
   }
+
   fprintln(file, tab + tab + tab + "</td>");
+
   fprintln(file, tab + tab + tab + "<td>");
   if(array["days"] < 0) {
     fprintln(file, tab + tab + tab + tab + "<span>-</span>");
   } else {
     fprintln(file, tab + tab + tab + tab + "<span>" + array["days"] + "</span>");
   }
+
   fprintln(file, tab + tab + tab + "</td>");
   fprintln(file, tab + tab + "</tr>");
 }
 
 write_gantt_chart_header(file, type) {
   tab = "";
+
   if(type == "scripter") {
     type = "Scripter";
   } else if(type == "builder") {
     type = "Builder";
   }
+
   fprintln(file, tab + "<div class=\"separator\"></div>");
   fprintln(file, tab + "<h2>");
   fprintln(file, tab + tab + "<a name=\"gantt\" id=\"gantt\">" + type + " " + "Estimated Schedule</a>");
@@ -915,44 +1082,58 @@ write_gantt_chart_header(file, type) {
 
 write_tasks(file) {
   tab = "";
+
   size = level._task_types.size;
   use_odd = true;
   for(i = 0; i < size; i++) {
     type = level._task_types[i];
+
     write_task_header(file, type);
+
     tasks = level._tasks[type]["all_tasks"].size;
+
     task_num = 0;
     for(q = 0; q < tasks; q++) {
       main_task = level._tasks[type]["all_tasks"][q];
+
       if(use_odd) {
         use_odd = false;
       } else {
         use_odd = true;
       }
+
       sub_tasks = level._tasks[type][main_task]["sub_tasks"].size;
+
       task_num++;
+
       level._tasks[type][main_task]["quote"] = get_status_quote(type, main_task);
+
       write_task_row(file, level._tasks[type][main_task], task_num, use_odd, 0, sub_tasks > 0);
+
       for(m = 0; m < sub_tasks; m++) {
         if(use_odd) {
           use_odd = false;
         } else {
           use_odd = true;
         }
+
         micro_tasks = level._tasks[type][main_task]["sub_tasks"][m]["sub_tasks"].size;
         task_num++;
         write_task_row(file, level._tasks[type][main_task]["sub_tasks"][m], task_num, use_odd, 18, micro_tasks > 0);
+
         for(t = 0; t < micro_tasks; t++) {
           if(use_odd) {
             use_odd = false;
           } else {
             use_odd = true;
           }
+
           task_num++;
           write_task_row(file, level._tasks[type][main_task]["sub_tasks"][m]["sub_tasks"][t], task_num, use_odd, 36, false);
         }
       }
     }
+
     fprintln(file, tab + "</table>");
     fprintln(file, tab + "</div>");
   }
@@ -960,29 +1141,36 @@ write_tasks(file) {
 
 write_task_row(file, array, task_num, use_odd, pixels, use_bold) {
   tab = "";
+
   if(use_odd) {
     fprintln(file, tab + tab + "<tr class=\"odd\">");
   } else {
     fprintln(file, tab + tab + "<tr class=\"even\">");
   }
+
   fprintln(file, tab + tab + tab + "<td>");
+
   if(use_bold) {
     fprintln(file, tab + tab + tab + tab + "<a name=\"task" + task_num + "\" style=\"font-weight: bold; margin-left: " + pixels + "px\" id=\"task" + task_num + "\">");
   } else {
     fprintln(file, tab + tab + tab + tab + "<a name=\"task" + task_num + "\" style=\"margin-left: " + pixels + "px\" id=\"task" + task_num + "\">");
   }
+
   if(isDefined(array["quote"])) {
     fprintln(file, tab + tab + tab + tab + "<span>" + array["name"] + " - " + array["quote"] + "</span>");
   } else {
     fprintln(file, tab + tab + tab + tab + "<span>" + array["name"] + "</span>");
   }
+
   fprintln(file, tab + tab + tab + "</td>");
+
   fprintln(file, tab + tab + tab + "<td>");
   if(array["days"] < 0) {
     fprintln(file, tab + tab + tab + tab + "<span>-</span>");
   } else {
     fprintln(file, tab + tab + tab + tab + "<span>" + array["days"] + "</span>");
   }
+
   fprintln(file, tab + tab + tab + "</td>");
   fprintln(file, tab + tab + tab + "<td>");
   fprintln(file, tab + tab + tab + tab + "<span>" + array["percent"] + "\%</span>");
@@ -995,16 +1183,19 @@ write_task_row(file, array, task_num, use_odd, pixels, use_bold) {
 
 write_task_header(file, type) {
   tab = "";
+
   if(type == "scripter") {
     type = "Scripter";
   } else if(type == "builder") {
     type = "Builder";
   }
+
   fprintln(file, tab + "<div class=\"separator\"></div>");
   fprintln(file, tab + "<h2>");
   fprintln(file, tab + tab + "<a name=\"tasks\" id=\"tasks\">" + type + " " + "Tasks</a>");
   fprintln(file, tab + "</h2>");
   fprintln(file, tab + "<div class=\"scroll-div\">");
+
   fprintln(file, tab + "<table cellspacing=\"0\" cellpadding=\"0\" border=\"1\">");
   fprintln(file, tab + tab + "<tr class=\"header\" align=\"left\">");
   fprintln(file, tab + tab + tab + "<th width=20\%>");
@@ -1024,6 +1215,7 @@ write_task_header(file, type) {
 
 write_header(file) {
   tab = "";
+
   fprintln(file, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>");
   fprintln(file, "<head>");
   fprintln(file, tab + "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\" />");
@@ -1249,28 +1441,34 @@ write_header(file) {
 
 save_complete(msg) {
   println("Save Successful, " + msg);
+
   hud = set_hudelem("Save Successful", 320, 100, 1.5);
   hud.alignX = "center";
   hud.color = (0, 1, 0);
+
   hud_msg = set_hudelem(msg, 320, 120, 1.3);
   hud_msg.alignX = "center";
   hud_msg.color = (1, 1, 1);
+
   wait(2);
+
   hud FadeOverTime(3);
   hud.alpha = 0;
+
   hud_msg FadeOverTime(3);
   hud_msg.alpha = 0;
+
   wait(3);
   hud Destroy();
   hud_msg Destroy();
 }
-
 check_for_dupes(array, single) {
   for(i = 0; i < array.size; i++) {
     if(array[i] == single) {
       return false;
     }
   }
+
   return true;
 }
 
@@ -1278,5 +1476,6 @@ abs(x) {
   if(x > 0) {
     return x;
   }
+
   return 0 - x;
 }

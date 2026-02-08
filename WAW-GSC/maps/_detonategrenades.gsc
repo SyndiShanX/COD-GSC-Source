@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_detonategrenades.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -14,19 +14,23 @@ watchGrenadeUsage() {
   self.satchelarray = [];
   self.bouncing_betty_array = [];
   self.throwingGrenade = false;
+
   thread watchSatchel();
   thread watchSatchelDetonation();
   thread watchBouncingBetty();
   thread watchClaymores();
+
   for(;;) {
     self waittill("grenade_pullback", weaponName);
     self.throwingGrenade = true;
+
     if(weaponName == "satchel_charge")
       self beginSatchelTracking();
     if(weaponName == "satchel_charge_new")
       self beginSatchelTracking();
     else if(weaponName == "smoke_grenade_american")
       self beginsmokegrenadetracking();
+
     else if(weaponName == "mortar_round")
       self beginMortarTracking();
     else
@@ -38,7 +42,7 @@ beginsmokegrenadetracking() {
   self waittill("grenade_fire", grenade, weaponName);
   if(!isDefined(level.smokegrenades))
     level.smokegrenades = 0;
-  if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0")
+  if(level.smokegrenades > 2 && getDvar("player_sustainAmmo") != "0")
     grenade delete();
   else
     grenade thread smoke_grenade_death();
@@ -67,12 +71,15 @@ smoke_grenade_death() {
 
 beginGrenadeTracking() {
   self endon("death");
+
   self waittill("grenade_fire", grenade, weaponName);
+
   self.throwingGrenade = false;
 }
 
 beginSatchelTracking() {
   self endon("death");
+
   self waittill_any("grenade_fire", "weapon_change");
   self.throwingGrenade = false;
 }
@@ -87,7 +94,6 @@ watchSatchel() {
     }
   }
 }
-
 watchBouncingBetty() {
   while(1) {
     self waittill("grenade_fire", bouncing_betty, weapname);
@@ -97,6 +103,7 @@ watchBouncingBetty() {
       bouncing_betty thread betty_setup_trigger();
     }
   }
+
 }
 
 c4death(c4) {
@@ -107,6 +114,7 @@ c4death(c4) {
 watchClaymores() {
   self endon("spawned_player");
   self endon("disconnect");
+
   while(1) {
     self waittill("grenade_fire", claymore, weapname);
     if(weapname == "claymore" || weapname == "claymore_mp") {
@@ -131,17 +139,25 @@ waitTillNotMoving() {
 
 claymoreDetonation() {
   self endon("death");
+
   self waitTillNotMoving();
+
   detonateRadius = 192;
+
   damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - detonateRadius), 9, detonateRadius, detonateRadius * 2);
+
   self thread deleteOnDeath(damagearea);
+
   if(!isDefined(level.claymores))
     level.claymores = [];
   level.claymores = array_add(level.claymores, self);
-  if(level.claymores.size > 15 && getdvar("player_sustainAmmo") != "0")
+
+  if(level.claymores.size > 15 && getDvar("player_sustainAmmo") != "0")
     level.claymores[0] delete();
+
   while(1) {
     damagearea waittill("trigger", ent);
+
     if(isDefined(self.owner) && ent == self.owner) {
       continue;
     }
@@ -155,6 +171,7 @@ claymoreDetonation() {
         self detonate(self.owner);
       else
         self detonate(undefined);
+
       return;
     }
   }
@@ -186,6 +203,7 @@ watchSatchelDetonation() {
 waitAndDetonate(delay) {
   self endon("death");
   wait delay;
+
   earthquake(.35, 3, self.origin, 1500);
   self detonate();
 }
@@ -195,47 +213,57 @@ satchelDamage() {
   self setCanDamage(true);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
+
   attacker = undefined;
+
   while(1) {
     self waittill("damage", amount, attacker);
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
     break;
   }
+
   if(level.satchelexplodethisframe)
     wait .1 + randomfloat(.4);
   else
     wait .05;
+
   if(!isDefined(self)) {
     return;
   }
   level.satchelexplodethisframe = true;
+
   thread resetSatchelExplodeThisFrame();
+
   self detonate(attacker);
 }
-
 bouncingBettyDamage() {
   self.health = 100;
   self setCanDamage(true);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
+
   attacker = undefined;
+
   while(1) {
     self waittill("damage", amount, attacker);
-    if(!isplayer(attacker)) {
+    if(!isPlayer(attacker)) {
       continue;
     }
+
     break;
   }
+
   if(!isDefined(self)) {
     return;
   }
+
   self detonate(attacker);
 }
-
 betty_setup_trigger() {
   betty_trig = spawn("trigger_radius", self.origin, 9, 80, 300);
+
   self thread maps\_bouncing_betties::betty_think_no_wires(betty_trig);
 }
 
@@ -253,11 +281,13 @@ saydamaged(orig, amount) {
 
 playC4Effects() {
   self endon("death");
+
   self waitTillNotMoving();
 }
 
 playClaymoreEffects() {
   self endon("death");
+
   self waitTillNotMoving();
 }
 
@@ -265,13 +295,15 @@ clearFXOnDeath(fx) {
   self waittill("death");
   fx delete();
 }
-
 getDamageableEnts(pos, radius, doLOS, startRadius) {
   ents = [];
+
   if(!isDefined(doLOS))
     doLOS = false;
+
   if(!isDefined(startRadius))
     startRadius = 0;
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(!isalive(players[i]) || players[i].sessionstate != "playing") {
@@ -288,6 +320,7 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
+
   grenades = getEntArray("grenade", "classname");
   for(i = 0; i < grenades.size; i++) {
     entpos = grenades[i].origin;
@@ -301,6 +334,7 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
+
   destructables = getEntArray("destructable", "targetname");
   for(i = 0; i < destructables.size; i++) {
     entpos = destructables[i].origin;
@@ -314,17 +348,21 @@ getDamageableEnts(pos, radius, doLOS, startRadius) {
       ents[ents.size] = newent;
     }
   }
+
   return ents;
 }
 
 weaponDamageTracePassed(from, to, startRadius, ignore) {
   midpos = undefined;
+
   diff = to - from;
   if(lengthsquared(diff) < startRadius * startRadius)
     midpos = to;
   dir = vectornormalize(diff);
   midpos = from + (dir[0] * startRadius, dir[1] * startRadius, dir[2] * startRadius);
+
   trace = bulletTrace(midpos, to, false, ignore);
+
   if(getdvarint("scr_damage_debug") != 0) {
     if(trace["fraction"] == 1) {
       thread debugline(midpos, to, (1, 1, 1));
@@ -333,13 +371,15 @@ weaponDamageTracePassed(from, to, startRadius, ignore) {
       thread debugline(trace["position"], to, (1, .4, .3));
     }
   }
+
   return (trace["fraction"] == 1);
 }
-
 damageEnt(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWeapon, damagepos, damagedir) {
   if(self.isPlayer) {
     self.damageOrigin = damagepos;
-    self.entity thread[[level.callbackPlayerDamage]](eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0);
+    self.entity thread[[level.callbackPlayerDamage]](
+      eInflictor, eAttacker, iDamage, 0, sMeansOfDeath, sWeapon, damagepos, damagedir, "none", 0
+    );
   } else {
     if(self.isADestructable && (sWeapon == "artillery_mp" || sWeapon == "claymore_mp")) {
       return;
@@ -357,15 +397,20 @@ debugline(a, b, color) {
 
 onWeaponDamage(eInflictor, sWeapon, meansOfDeath, damage) {
   self endon("death");
+
   switch (sWeapon) {
     case "concussion_grenade_mp":
+
       radius = 512;
       scale = 1 - (distance(self.origin, eInflictor.origin) / radius);
+
       time = 1 + (4 * scale);
+
       wait(0.05);
       self shellShock("concussion_grenade_mp", time);
       break;
     default:
+
       break;
   }
 }

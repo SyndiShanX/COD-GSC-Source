@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_usa_raider_player_cqb.gsc
-*****************************************************/
+****************************************************/
 
 main() {
   self setModel("char_usa_raider_player_body_cqb");

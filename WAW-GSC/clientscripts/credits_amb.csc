@@ -1,7 +1,7 @@
-/*****************************************************
+/*****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\credits_amb.csc
-*****************************************************/
+*****************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_ambientpackage;

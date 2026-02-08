@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\flashed.gsc
-*****************************************************/
+**************************************/
 
 #include animscripts\Utility;
 #include animscripts\SetPoseMovement;
@@ -12,7 +12,9 @@
 
 initFlashed() {
   assert(0);
+
   randomizeFlashAnimArray();
+
   anim.flashAnimIndex = 0;
 }
 
@@ -42,20 +44,28 @@ flashBangAnim() {
 
 main() {
   assert(0);
+
   self endon("killanimscript");
+
   animscripts\utility::initialize("flashed");
+
   if(self.a.pose == "prone")
     self ExitProneWrapper(1);
   self.a.pose = "stand";
+
   self startFlashBanged();
+
   self animscripts\face::SayGenericDialogue("flashbang");
   self.allowdeath = true;
+
   if(isDefined(self.flashedanim))
     self setanimknoball(self.flashedanim, %body);
   else
     self thread flashBangAnim();
+
   for(;;) {
     time = gettime();
+
     if(time > self.flashendtime) {
       self notify("stop_flashbang_effect");
       self setFlashBanged(false);

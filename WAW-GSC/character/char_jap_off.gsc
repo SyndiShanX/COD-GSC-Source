@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_jap_off.gsc
-*****************************************************/
+**************************************/
 
 main() {
   self setModel("char_jap_impinf_officer_body");

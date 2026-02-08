@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: codescripts\character_mp.gsc
-*****************************************************/
+****************************************/
 
 setModelFromArray(a) {
   self setModel(a[randomint(a.size)]);

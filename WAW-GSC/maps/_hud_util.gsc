@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_hud_util.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include animscripts\utility;
@@ -13,8 +13,10 @@ setParent(element) {
   }
   if(isDefined(self.parent))
     self.parent removeChild(self);
+
   self.parent = element;
   self.parent addChild(self);
+
   if(isDefined(self.point))
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
   else
@@ -32,29 +34,38 @@ addChild(element) {
 
 removeChild(element) {
   element.parent = undefined;
+
   if(self.children[self.children.size - 1] != element) {
     self.children[element.index] = self.children[self.children.size - 1];
     self.children[element.index].index = element.index;
   }
   self.children[self.children.size - 1] = undefined;
+
   element.index = undefined;
 }
 
 setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
   if(!isDefined(moveTime))
     moveTime = 0;
+
   element = self getParent();
+
   if(moveTime)
     self moveOverTime(moveTime);
+
   if(!isDefined(xOffset))
     xOffset = 0;
   self.xOffset = xOffset;
+
   if(!isDefined(yOffset))
     yOffset = 0;
   self.yOffset = yOffset;
+
   self.point = point;
+
   self.alignX = "center";
   self.alignY = "middle";
+
   if(isSubStr(point, "TOP"))
     self.alignY = "top";
   if(isSubStr(point, "BOTTOM"))
@@ -63,11 +74,15 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     self.alignX = "left";
   if(isSubStr(point, "RIGHT"))
     self.alignX = "right";
+
   if(!isDefined(relativePoint))
     relativePoint = point;
+
   self.relativePoint = relativePoint;
+
   relativeX = "center";
   relativeY = "middle";
+
   if(isSubStr(relativePoint, "TOP"))
     relativeY = "top";
   if(isSubStr(relativePoint, "BOTTOM"))
@@ -76,6 +91,7 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     relativeX = "left";
   if(isSubStr(relativePoint, "RIGHT"))
     relativeX = "right";
+
   if(element == level.uiParent) {
     self.horzAlign = relativeX;
     self.vertAlign = relativeY;
@@ -83,6 +99,7 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     self.horzAlign = element.horzAlign;
     self.vertAlign = element.vertAlign;
   }
+
   if(relativeX == element.alignX) {
     offsetX = 0;
     xFactor = 0;
@@ -100,6 +117,7 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
       xFactor = 1;
   }
   self.x = element.x + (offsetX * xFactor);
+
   if(relativeY == element.alignY) {
     offsetY = 0;
     yFactor = 0;
@@ -117,32 +135,38 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
       yFactor = 1;
   }
   self.y = element.y + (offsetY * yFactor);
+
   self.x += self.xOffset;
   self.y += self.yOffset;
+
   switch (self.elemType) {
     case "bar":
       setPointBar(point, relativePoint, xOffset, yOffset);
       break;
   }
+
   self updateChildren();
 }
-
 setPointBar(point, relativePoint, xOffset, yOffset) {
   self.bar.horzAlign = self.horzAlign;
   self.bar.vertAlign = self.vertAlign;
+
   self.bar.alignX = "left";
   self.bar.alignY = self.alignY;
   self.bar.y = self.y;
+
   if(self.alignX == "left")
     self.bar.x = self.x;
   else if(self.alignX == "right")
     self.bar.x = self.x - self.width;
   else
     self.bar.x = self.x - int(self.width / 2);
+
   if(self.alignY == "top")
     self.bar.y = self.y;
   else if(self.alignY == "bottom")
     self.bar.y = self.y;
+
   self updateBar(self.bar.frac);
 }
 
@@ -153,11 +177,15 @@ updateBar(barFrac, rateOfChange) {
 
 updateBarScale(barFrac, rateOfChange) {
   barWidth = int(self.width * barFrac + 0.5);
+
   if(!barWidth)
     barWidth = 1;
+
   self.bar.frac = barFrac;
   self.bar setShader(self.bar.shader, barWidth, self.height);
+
   assertEx(barWidth <= self.width, "barWidth <= self.width: " + barWidth + " <= " + self.width + " - barFrac was " + barFrac);
+
   if(isDefined(rateOfChange) && barWidth < self.width) {
     if(rateOfChange > 0) {
       assertex(((1 - barFrac) / rateOfChange) > 0, "barFrac: " + barFrac + "rateOfChange: " + rateOfChange);
@@ -189,6 +217,7 @@ createFontString(font, fontScale, player) {
   fontElem.yOffset = 0;
   fontElem.children = [];
   fontElem setParent(level.uiParent);
+
   return fontElem;
 }
 
@@ -205,6 +234,7 @@ createServerFontString(font, fontScale) {
   fontElem.yOffset = 0;
   fontElem.children = [];
   fontElem setParent(level.uiParent);
+
   return fontElem;
 }
 
@@ -221,9 +251,9 @@ createServerTimer(font, fontScale) {
   timerElem.yOffset = 0;
   timerElem.children = [];
   timerElem setParent(level.uiParent);
+
   return timerElem;
 }
-
 createIcon(shader, width, height, player) {
   if(isDefined(player)) {
     iconElem = newClientHudElem(player);
@@ -239,8 +269,10 @@ createIcon(shader, width, height, player) {
   iconElem.yOffset = 0;
   iconElem.children = [];
   iconElem setParent(level.uiParent);
+
   if(isDefined(shader))
     iconElem setShader(shader, width, height);
+
   return iconElem;
 }
 
@@ -257,6 +289,7 @@ createBar(color, width, height, flashFrac) {
   if(isDefined(flashFrac)) {
     barElem.flashFrac = flashFrac;
   }
+
   barElemFrame = newClientHudElem(self);
   barElemFrame.elemType = "icon";
   barElemFrame.x = 0;
@@ -272,6 +305,7 @@ createBar(color, width, height, flashFrac) {
   barElemFrame.color = (1, 1, 1);
   barElemFrame setParent(level.uiParent);
   barElemFrame.hidden = false;
+
   barElemBG = newClientHudElem(self);
   barElemBG.elemType = "bar";
   if(!level.splitScreen) {
@@ -294,6 +328,7 @@ createBar(color, width, height, flashFrac) {
   else
     barElemBG setShader("black", width + 0, height + 0);
   barElemBG.hidden = false;
+
   return barElemBG;
 }
 
@@ -303,6 +338,7 @@ createPrimaryProgressBar() {
     bar setPoint("TOP", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
   else
     bar setPoint("CENTER", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
+
   return bar;
 }
 
@@ -311,12 +347,15 @@ hideElem() {
     return;
   }
   self.hidden = true;
+
   if(self.alpha != 0)
     self.alpha = 0;
+
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
     self.bar.hidden = true;
     if(self.bar.alpha != 0)
       self.bar.alpha = 0;
+
     self.barFrame.hidden = true;
     if(self.barFrame.alpha != 0)
       self.barFrame.alpha = 0;
@@ -328,12 +367,15 @@ showElem() {
     return;
   }
   self.hidden = false;
+
   if(self.elemType == "bar" || self.elemType == "bar_shader") {
     if(self.alpha != .5)
       self.alpha = .5;
+
     self.bar.hidden = false;
     if(self.bar.alpha != 1)
       self.bar.alpha = 1;
+
     self.barFrame.hidden = false;
     if(self.barFrame.alpha != 1)
       self.barFrame.alpha = 1;
@@ -349,6 +391,7 @@ setFlashFrac(flashFrac) {
 
 flashThread() {
   self endon("death");
+
   self.alpha = 1;
   while(1) {
     if(self.frac >= self.flashFrac) {
@@ -367,14 +410,18 @@ flashThread() {
 
 destroyElem() {
   tempChildren = [];
+
   for(index = 0; index < self.children.size; index++)
     tempChildren[index] = self.children[index];
+
   for(index = 0; index < tempChildren.size; index++)
     tempChildren[index] setParent(self getParent());
+
   if(self.elemType == "bar") {
     self.bar destroy();
     self.barFrame destroy();
   }
+
   self destroy();
 }
 
@@ -406,11 +453,14 @@ create_mantle() {
   text = createFontString("default", 1.8);
   text setPoint("CENTER", undefined, -23, 115);
   text settext(level.strings["mantle"]);
+
   icon = createIcon("hint_mantle", 40, 40);
   icon setPoint("CENTER", undefined, 73, 0);
   icon setparent(text);
+
   icon.alpha = 0;
   text.alpha = 0;
+
   level.hud_mantle = [];
   level.hud_mantle["text"] = text;
   level.hud_mantle["icon"] = icon;
@@ -436,6 +486,7 @@ get_countdown_hud(x) {
     hudelem.vertAlign = "top";
     hudelem.y = 0;
   }
+
   hudelem.fontScale = 1.6;
   hudelem.color = (0.8, 1.0, 0.8);
   hudelem.font = "objective";

@@ -1,7 +1,7 @@
-/*****************************************************
+/********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\battlechatter_ai.gsc
-*****************************************************/
+********************************************/
 
 #include animscripts\utility;
 #include maps\_utility;
@@ -13,6 +13,7 @@ isHero() {
 
 addToSystem(squadName) {
   self endon("death");
+
   if(!bcsEnabled()) {
     return;
   }
@@ -20,21 +21,27 @@ addToSystem(squadName) {
     return;
   }
   assert(isDefined(self.squad));
+
   if(!isDefined(self.squad.chatInitialized) || !self.squad.chatInitialized)
     self.squad init_squadBattleChatter();
+
   self.enemyClass = "infantry";
   self.calledOut = [];
+
   if(isPlayer(self)) {
     self.battleChatter = false;
     self.type = "human";
     return;
   }
+
   if(self.type == "dog") {
     self.enemyClass = undefined;
     self.battlechatter = false;
     return;
   }
+
   self.countryID = anim.countryIDs[self.voice];
+
   if(isDefined(self.script_friendname)) {
     friendname = tolower(self.script_friendname);
     if(issubstr(friendname, "sullivan"))
@@ -49,43 +56,53 @@ addToSystem(squadName) {
       self.npcID = "che";
     else if(issubstr(friendname, "commissar"))
       self.npcID = "com";
+
     else
       self setNPCID();
   } else {
     self setNPCID();
   }
+
   self thread aiNameAndRankWaiter();
+
   self init_aiBattleChatter();
   self thread aiThreadThreader();
 }
-
 aiThreadThreader() {
   self endon("death");
   self endon("removed from battleChatter");
+
   assert(isDefined(self.isSpeaking));
+
   waitTime = 0.5;
   wait(waitTime);
   self thread aiGrenadeDangerWaiter();
   self thread aiFollowOrderWaiter();
+
   if(self.team == "allies") {
     wait(waitTime);
     self thread aiFlankerWaiter();
     self thread aiDisplaceWaiter();
   }
+
   wait(waitTime);
   self thread aiBattleChatterLoop();
 }
 
 setNPCID() {
   assert(!isDefined(self.npcID));
+
   usedIDs = anim.usedIDs[self.voice];
   numIDs = usedIDs.size;
+
   startIndex = randomIntRange(0, numIDs);
+
   lowestID = startIndex;
   for(index = 0; index <= numIDs; index++) {
     if(usedIDs[(startIndex + index) % numIDs].count < usedIDs[lowestID].count)
       lowestID = (startIndex + index) % numIDs;
   }
+
   self thread npcIDTracker(lowestID);
   self.npcID = usedIDs[lowestID].npcID;
 }
@@ -100,9 +117,11 @@ npcIDTracker(lowestID) {
 }
 
 aiBattleChatterLoop() {}
+
 aiNameAndRankWaiter() {
   self endon("death");
   self endon("removed from battleChatter");
+
   while(1) {
     self.bcName = self animscripts\battlechatter::getName();
     self.bcRank = self animscripts\battlechatter::getRank();
@@ -115,14 +134,18 @@ removeFromSystem(squadName) {
     self aiDeathFriendly();
     self aiDeathEnemy();
   }
+
   if(isDefined(self)) {
     self.battleChatter = false;
     self.chatInitialized = false;
   }
+
   self notify("removed from battleChatter");
+
   if(isDefined(self)) {
-    if(getdvar("debug_bclotsoprint") == "on")
+    if(getDvar("debug_bclotsoprint") == "on")
       println("BC DEBUG removing " + self.bcname);
+
     self.chatQueue = undefined;
     self.nextSayTime = undefined;
     self.nextSayTimes = undefined;
@@ -154,6 +177,7 @@ init_aiBattleChatter() {
   self.chatQueue["custom"] = spawnStruct();
   self.chatQueue["custom"].expireTime = 0;
   self.chatQueue["custom"].priority = 0.0;
+
   self.nextSayTime = getTime() + 50;
   self.nextSayTimes["threat"] = 0;
   self.nextSayTimes["reaction"] = 0;
@@ -161,12 +185,15 @@ init_aiBattleChatter() {
   self.nextSayTimes["inform"] = 0;
   self.nextSayTimes["order"] = 0;
   self.nextSayTimes["custom"] = 0;
+
   self.isSpeaking = false;
   self.bcs_minPriority = 0.0;
+
   if(isDefined(self.script_battlechatter) && !self.script_battlechatter)
     self.battleChatter = false;
   else
     self.battleChatter = level.battlechatter[self.team];
+
   self.chatInitialized = true;
 }
 
@@ -187,11 +214,14 @@ evaluateSuppressionEvent() {}
 addThreatEvent(a, b, c) {}
 endCustomEvent(x) {}
 addGenericAliasEx(a, b, c) {}
+
 aiDeathFriendly() {
   attacker = self.attacker;
   if(isDefined(self)) {
     for(i = 0; i < self.squad.members.size; i++) {
-      if(isalive(self.squad.members[i]) && self.squad.members[i] cansee(self) && distance(self.origin, self.squad.members[i].origin) < 500) {
+      if(isalive(self.squad.members[i]) &&
+        self.squad.members[i] cansee(self) &&
+        distance(self.origin, self.squad.members[i].origin) < 500) {
         self.squad.members[i].bcFriendDeathTime = gettime();
       }
     }
@@ -200,12 +230,16 @@ aiDeathFriendly() {
 
 aiDeathEnemy() {
   attacker = self.attacker;
+
   if(!isalive(attacker) || !issentient(attacker) || !isDefined(attacker.squad)) {
     return;
   }
-  if(isDefined(self.calledOut[attacker.squad.squadName]) && isalive(self.calledOut[attacker.squad.squadName].spotter) && self.calledOut[attacker.squad.squadName].spotter != attacker && gettime() < self.calledOut[attacker.squad.squadName].expireTime) {
+  if(isDefined(self.calledOut[attacker.squad.squadName]) &&
+    isalive(self.calledOut[attacker.squad.squadName].spotter) &&
+    self.calledOut[attacker.squad.squadName].spotter != attacker &&
+    gettime() < self.calledOut[attacker.squad.squadName].expireTime) {
     attacker.bcKillTime = gettime();
-  } else if(!isplayer(attacker)) {
+  } else if(!isPlayer(attacker)) {
     attacker.bcKillTime = gettime();
   }
 }
@@ -219,6 +253,7 @@ addOrder(type, modifier) {
 evaluateMoveEvent(leavingCover) {
   self endon("death");
   self endon("removed from battleChatter");
+
   if(!bcsEnabled()) {
     return;
   }
@@ -226,6 +261,7 @@ evaluateMoveEvent(leavingCover) {
     return;
   }
   dist = distance(self.origin, self.node.origin);
+
   if(dist < 150) {
     return;
   }
@@ -255,6 +291,7 @@ evaluateMoveEvent(leavingCover) {
 evaluateReloadEvent() {
   self endon("death");
   self endon("removed from battleChatter");
+
   if(!bcsEnabled()) {
     return;
   }
@@ -272,6 +309,7 @@ evaluateFiringEvent() {
 evaluateAttackEvent(type) {
   self endon("death");
   self endon("removed from battleChatter");
+
   if(!bcsEnabled()) {
     return;
   }
@@ -285,6 +323,7 @@ evaluateAttackEvent(type) {
 addSituationalOrder() {
   self endon("death");
   self endon("removed from battleChatter");
+
   if(!isDefined(self.squad.chatInitialized)) {
     return;
   }
@@ -297,8 +336,10 @@ addSituationalOrder() {
 addSituationalIdleOrder() {
   self endon("death");
   self endon("removed from battleChatter");
+
   squad = self.squad;
   squad animscripts\squadmanager::updateStates();
+
   if(squad.squadStates["move"].isActive)
     self addOrder("move", "generic");
 }
@@ -306,8 +347,10 @@ addSituationalIdleOrder() {
 addSituationalCombatOrder() {
   self endon("death");
   self endon("removed from battleChatter");
+
   squad = self.squad;
   squad animscripts\squadmanager::updateStates();
+
   if(squad.squadStates["suppressed"].isActive) {
     if(squad.squadStates["move"].isActive) {
       self addOrder("cover", "generic");
@@ -321,18 +364,22 @@ addSituationalCombatOrder() {
       soldiers = getAIArray("axis");
     else
       soldiers = getAIArray("allies");
+
     closestSoldier = undefined;
     closestSoldierDistance = 1000000000;
     closestSoldierInCover = undefined;
     closestSoldierInCoverDistance = 1000000000;
     closestSoldierInCoverLocation = undefined;
+
     for(index = 0; index < soldiers.size; index++) {
       soldier = soldiers[index];
       distance = DistanceSquared(self.origin, soldier.origin);
+
       if(closestSoldierDistance > distance) {
         closestSoldierDistance = distance;
         closestSoldier = soldier;
       }
+
       if(soldier isClaimedNodeCover()) {
         if(closestSoldierInCoverDistance > distance) {
           closestSoldierInCover = soldier;
@@ -340,12 +387,14 @@ addSituationalCombatOrder() {
         }
       }
     }
+
     if(isDefined(closestSoldierInCover)) {
       node = closestSoldierInCover bcGetClaimedNode();
       if(isDefined(node) && isDefined(node.script_location)) {
         closestSoldierInCoverLocation = node.script_location;
       }
     }
+
     if(self canshootenemy()) {
       if(squad.squadStates["attacking"].isActive) {
         if(randomfloatrange(0, 1) < .3) {
@@ -359,6 +408,7 @@ addSituationalCombatOrder() {
       }
     } else {}
   }
+
 }
 
 beginCustomEvent() {

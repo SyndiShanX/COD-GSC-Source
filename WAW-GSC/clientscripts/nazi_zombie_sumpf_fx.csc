@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\nazi_zombie_sumpf_fx.csc
-*****************************************************/
+**************************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_fx;
@@ -10,13 +10,16 @@
 main() {
   clientscripts\createfx\nazi_zombie_sumpf_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   footsteps();
   precache_scripted_fx();
   precache_createfx_fx();
+
   level thread trap_fx_monitor("north_west_tgt", "north_west_elec_light");
   level thread trap_fx_monitor("south_west_tgt", "south_west_elec_light");
   level thread trap_fx_monitor("north_east_tgt", "north_east_elec_light");
   level thread trap_fx_monitor("south_east_tgt", "south_east_elec_light");
+
   level thread dog_start_monitor();
   level thread dog_stop_monitor();
 }
@@ -42,6 +45,7 @@ footsteps() {
 }
 
 precache_scripted_fx() {}
+
 precache_createfx_fx() {
   level._effect["mp_fire_small_detail"] = loadfx("maps/mp_maps/fx_mp_fire_small_detail");
   level._effect["mp_fire_small"] = loadfx("maps/mp_maps/fx_mp_fire_small");
@@ -74,6 +78,7 @@ precache_createfx_fx() {
   level._effect["fx_meteor_flash"] = loadfx("maps/zombie/fx_meteor_flash");
   level._effect["fx_meteor_flash_spawn"] = loadfx("maps/zombie/fx_meteor_flash_spawn");
   level._effect["fx_meteor_hotspot"] = loadfx("maps/zombie/fx_meteor_hotspot");
+
   level._effect["zapper"] = loadfx("misc/fx_zombie_electric_trap");
   level._effect["switch_sparks"] = loadfx("env/electrical/fx_elec_wire_spark_burst");
   level._effect["betty_explode"] = loadfx("weapon/bouncing_betty/fx_explosion_betty_generic");
@@ -83,45 +88,59 @@ precache_createfx_fx() {
 trap_fx_monitor(name, side) {
   while(1) {
     level waittill(name);
+
     fire_points = getstructarray(name, "targetname");
+
     for(i = 0; i < fire_points.size; i++) {
       fire_points[i] thread electric_trap_fx(name, side);
     }
   }
+
 }
 
 electric_trap_fx(name, side) {
   ang = self.angles;
   forward = anglesToForward(ang);
   up = anglestoup(ang);
+
   if(isDefined(self.loopFX)) {
     for(i = 0; i < self.loopFX.size; i++) {
       self.loopFX[i] delete();
     }
+
     self.loopFX = [];
   }
+
   if(!isDefined(self.loopFX)) {
     self.loopFX = [];
   }
+
   players = getlocalplayers();
+
   for(i = 0; i < players.size; i++) {
     self.loopFX[i] = SpawnFx(i, level._effect["zapper"], self.origin, 0, forward, up);
     triggerfx(self.loopFX[i]);
   }
+
   level waittill(side + "off");
+
   for(i = 0; i < self.loopFX.size; i++) {
     self.loopFX[i] delete();
   }
+
   self.loopFX = [];
 }
 
 zapper_switch_fx(ent) {
   switchfx = getstruct("zapper_switch_fx_" + ent, "targetname");
   zapperfx = getstruct("zapper_fx_" + ent, "targetname");
+
   switch_forward = anglesToForward(switchfx.angles);
   switch_up = anglestoup(switchfx.angles);
+
   zapper_forward = anglesToForward(zapperfx.angles);
   zapper_up = anglestoup(zapperfx.angles);
+
   while(1) {
     level waittill(ent);
     if(isDefined(switchfx.loopFX)) {
@@ -132,22 +151,29 @@ zapper_switch_fx(ent) {
       switchfx.loopFX = [];
       zapperfx.loopFX = [];
     }
+
     if(!isDefined(switchfx.loopFX)) {
       switchfx.loopFX = [];
       zapperfx.loopFX = [];
     }
+
     players = getlocalplayers();
+
     for(i = 0; i < players.size; i++) {
       switchfx.loopFX[i] = SpawnFx(i, level._effect["zapper_wall"], switchfx.origin, 0, switch_forward, switch_up);
       triggerfx(switchfx.loopFX[i]);
+
       zapperfx.loopFX[i] = SpawnFx(i, level._effect["zapper_fx"], zapperfx.origin, 0, zapper_forward, zapper_up);
       triggerfx(zapperfx.loopFX[i]);
     }
+
     realwait(30);
+
     for(i = 0; i < switchfx.loopFX.size; i++) {
       switchfx.loopFX[i] delete();
       zapperfx.loopFX[i] delete();
     }
+
     switchfx.loopFX = [];
     zapperfx.loopFX = [];
   }

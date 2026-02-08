@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\predict.gsc
-*****************************************************/
+**************************************/
 
 start() {
   self.codePredictCmd = [];
@@ -67,19 +67,24 @@ stumbleWall(maxTime) {
   maxFrames = maxTime / 0.05;
   for(i = 0; i < maxFrames; i++) {
     self PredictAnim(false);
+
     self PredictOriginAndAngles();
+
     entry["handler"] = ::moveH;
     entry["origin"] = self.origin;
     entry["angles"] = self.angles;
     addEntryPlaybackOnly(entry);
+
     switch (self getHitEntType()) {
       case "world":
         self OrientMode("face angle", self getHitYaw());
         return true;
+
       case "obstacle":
         return false;
     }
   }
+
   return false;
 }
 
@@ -94,18 +99,22 @@ tumbleWall(notifyName) {
         if(notetrack == "end")
           return true;
       }
+
       if(!bPredictMore) {
         break;
       }
     }
+
     self PredictOriginAndAngles();
     if(self isDeflected())
       return false;
+
     entry["handler"] = ::moveH;
     entry["origin"] = self.origin;
     entry["angles"] = self.angles;
     addEntryPlaybackOnly(entry);
   }
+
   return false;
 }
 

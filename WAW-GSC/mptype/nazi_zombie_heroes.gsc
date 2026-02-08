@@ -1,7 +1,7 @@
-/*****************************************************
+/*****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: mptype\nazi_zombie_heroes.gsc
-*****************************************************/
+*****************************************/
 
 main() {
   switch (codescripts\character::get_random_character(4)) {

@@ -1,7 +1,7 @@
-/*****************************************************
+/*****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\nazi_zombie_sumpf_fx.gsc
-*****************************************************/
+*****************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -14,6 +14,7 @@ main() {
   maps\createart\nazi_zombie_sumpf_art::main();
   maps\createfx\nazi_zombie_sumpf_fx::main();
   level thread electric_light();
+
   level thread hanging_dead_guy();
 }
 
@@ -39,13 +40,17 @@ footsteps() {
 
 scriptedFX() {
   level._effect["hanging_light_fx"] = loadfx("env/light/fx_glow_hanginglamp");
+
   level._effect["large_ceiling_dust"] = LoadFx("env/dirt/fx_dust_ceiling_impact_lg_mdbrown");
   level._effect["poltergeist"] = LoadFx("maps/zombie/fx_zombie_debris_removal");
+
   level._effect["rise_burst"] = LoadFx("maps/mp_maps/fx_mp_zombie_hand_dirt_burst");
   level._effect["rise_billow"] = LoadFx("maps/mp_maps/fx_mp_zombie_body_dirt_billowing");
   level._effect["rise_dust"] = LoadFx("maps/mp_maps/fx_mp_zombie_body_dust_falling");
+
   level._effect["lght_marker"] = Loadfx("maps/zombie/fx_zombie_lght_marker");
   level._effect["lght_marker_flare"] = Loadfx("maps/zombie/fx_zombie_lght_marker_flare");
+
   level._effect["betty_explode"] = loadfx("weapon/bouncing_betty/fx_explosion_betty_generic");
   level._effect["betty_trail"] = loadfx("weapon/bouncing_betty/fx_betty_trail");
   level._effect["trap_log"] = Loadfx("maps/zombie/fx_zombie_log_trp");
@@ -58,7 +63,6 @@ scriptedFX() {
   level._effect["zombie_perk_end"] = Loadfx("misc/fx_zombie_perk_lottery_end");
   level._effect["zombie_perk_4th"] = Loadfx("misc/fx_zombie_perk_lottery_4");
 }
-
 wind_settings() {
   SetSavedDvar("wind_global_vector", "171 -140 0");
   SetSavedDvar("wind_global_low_altitude", 40);
@@ -98,10 +102,13 @@ precacheFX() {
   level._effect["fx_meteor_flash"] = loadfx("maps/zombie/fx_meteor_flash");
   level._effect["fx_meteor_flash_spawn"] = loadfx("maps/zombie/fx_meteor_flash_spawn");
   level._effect["fx_meteor_hotspot"] = loadfx("maps/zombie/fx_meteor_hotspot");
+
   level._effect["zapper"] = loadfx("misc/fx_zombie_electric_trap");
+
   level._effect["zapper_light_ready"] = loadfx("misc/fx_zombie_zapper_light_green");
   level._effect["zapper_light_notready"] = loadfx("misc/fx_zombie_zapper_light_red");
   level._effect["switch_sparks"] = loadfx("env/electrical/fx_elec_wire_spark_burst");
+
   level._effect["elec_md"] = loadfx("env/electrical/fx_elec_player_md");
   level._effect["elec_sm"] = loadfx("env/electrical/fx_elec_player_sm");
   level._effect["elec_torso"] = loadfx("env/electrical/fx_elec_player_torso");
@@ -110,16 +117,19 @@ precacheFX() {
 electric_light() {
   lantern = getent("swamp_lamp", "script_noteworthy");
   lght = getent("phys_lamp_light", "targetname");
+
   if(!isDefined(lght)) {
     return;
   }
   lght linkto(lantern);
   lght setlightintensity(2.5);
+
   mdl = spawn("script_model", lantern.origin);
   mdl.angles = (90, 0, 0);
   mdl setModel("tag_origin");
   mdl linkto(lantern);
   playFXOnTag(level._effect["hanging_light_fx"], mdl, "tag_origin");
+
   while(1) {
     wait(randomfloatrange(10, 15));
     lantern physicslaunch(lantern.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
@@ -128,12 +138,14 @@ electric_light() {
 
 post_lights() {
   lanterns = getEntArray("post_lamp", "targetname");
+
   array_thread(lanterns, ::swing_lanterns);
 }
 
 swing_lanterns() {
   org_angles = self.angles;
   org_pos = self.origin;
+
   while(1) {
     self rotateto(self.angles + (randomintrange(-5, 5), randomintrange(-5, 5), 0), randomfloatrange(.5, 1));
     self waittill("rotatedone");
@@ -141,9 +153,9 @@ swing_lanterns() {
     self waittill("rotatedone");
   }
 }
-
 hanging_dead_guy() {
   dead_guy = getent("hanging_dead_guy", "targetname");
+
   if(!isDefined(dead_guy))
     return;
   dead_guy physicslaunch(dead_guy.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));

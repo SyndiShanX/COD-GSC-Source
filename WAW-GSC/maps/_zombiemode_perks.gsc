@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_zombiemode_perks.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -9,17 +9,21 @@
 
 init() {
   vending_triggers = getEntArray("zombie_vending", "targetname");
+
   if(vending_triggers.size < 1) {
     return;
   }
+
   PrecacheItem("zombie_perk_bottle_doubletap");
   PrecacheItem("zombie_perk_bottle_jugg");
   PrecacheItem("zombie_perk_bottle_revive");
   PrecacheItem("zombie_perk_bottle_sleight");
+
   PrecacheShader("specialty_juggernaut_zombies");
   PrecacheShader("specialty_fastreload_zombies");
   PrecacheShader("specialty_doubletap_zombies");
   PrecacheShader("specialty_quickrevive_zombies");
+
   if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
     PrecacheModel("zombie_vending_jugg_on_price");
     PrecacheModel("zombie_vending_doubletap_price");
@@ -31,17 +35,22 @@ init() {
     PrecacheModel("zombie_vending_revive_on");
     PrecacheModel("zombie_vending_sleight_on");
   }
+
   level._effect["sleight_light"] = loadfx("misc/fx_zombie_cola_on");
   level._effect["doubletap_light"] = loadfx("misc/fx_zombie_cola_dtap_on");
   level._effect["jugger_light"] = loadfx("misc/fx_zombie_cola_jugg_on");
   level._effect["revive_light"] = loadfx("misc/fx_zombie_cola_revive_on");
+
   PrecacheString(&"ZOMBIE_PERK_JUGGERNAUT");
   PrecacheString(&"ZOMBIE_PERK_QUICKREVIVE");
   PrecacheString(&"ZOMBIE_PERK_FASTRELOAD");
   PrecacheString(&"ZOMBIE_PERK_DOUBLETAP");
+
   set_zombie_var("zombie_perk_cost", 2000);
+
   array_thread(vending_triggers, ::vending_trigger_think);
   array_thread(vending_triggers, ::electric_perks_dialog);
+
   if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
     level thread turn_jugger_sumpf_on();
     level thread turn_doubletap_sumpf_on();
@@ -53,17 +62,18 @@ init() {
     level thread turn_sleight_on();
     level thread turn_revive_on();
   }
+
   level thread machine_watcher();
   level.speed_jingle = 0;
   level.revive_jingle = 0;
   level.doubletap_jingle = 0;
   level.jugger_jingle = 0;
+
   level thread machine_watcher_sumpf_doubleTap();
   level thread machine_watcher_sumpf_revive();
   level thread machine_watcher_sumpf_speed();
   level thread machine_watcher_sumpf_jugg();
 }
-
 turn_sleight_on() {
   machine = getent("vending_sleight", "targetname");
   level waittill("sleight_on");
@@ -72,7 +82,9 @@ turn_sleight_on() {
   machine playSound("perks_power_on");
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_fastreload_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("sleight_light", duration);
     timer += duration;
@@ -82,6 +94,7 @@ turn_sleight_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["sleight_light"], machine, "tag_origin");
 }
 
@@ -93,7 +106,9 @@ turn_revive_on() {
   machine vibrate((0, -100, 0), 0.3, 0.4, 3);
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_quickrevive_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("revive_light", duration);
     timer += duration;
@@ -103,6 +118,7 @@ turn_revive_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["revive_light"], machine, "tag_origin");
 }
 
@@ -114,7 +130,9 @@ turn_jugger_on() {
   machine playSound("perks_power_on");
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_armorvest_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("jugger_light", duration);
     timer += duration;
@@ -124,9 +142,9 @@ turn_jugger_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["jugger_light"], machine, "tag_origin");
 }
-
 turn_doubletap_on() {
   machine = getent("vending_doubletap", "targetname");
   level waittill("doubletap_on");
@@ -135,7 +153,9 @@ turn_doubletap_on() {
   machine playSound("perks_power_on");
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_rof_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("doubletap_light", duration);
     timer += duration;
@@ -145,9 +165,9 @@ turn_doubletap_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["doubletap_light"], machine, "tag_origin");
 }
-
 turn_doubletap_sumpf_on() {
   machine = getent("vending_doubletap", "targetname");
   level waittill("doubletap_sumpf_on");
@@ -156,7 +176,9 @@ turn_doubletap_sumpf_on() {
   machine playSound("perks_power_on");
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_rof_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("doubletap_light", duration);
     timer += duration;
@@ -166,6 +188,7 @@ turn_doubletap_sumpf_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["doubletap_light"], machine, "tag_origin");
 }
 
@@ -177,7 +200,9 @@ turn_jugger_sumpf_on() {
   machine playSound("perks_power_on");
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_armorvest_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("jugger_light", duration);
     timer += duration;
@@ -187,6 +212,7 @@ turn_jugger_sumpf_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["jugger_light"], machine, "tag_origin");
 }
 
@@ -198,7 +224,9 @@ turn_revive_sumpf_on() {
   machine playSound("perks_power_on");
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_quickrevive_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("revive_light", duration);
     timer += duration;
@@ -208,6 +236,7 @@ turn_revive_sumpf_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["revive_light"], machine, "tag_origin");
 }
 
@@ -219,7 +248,9 @@ turn_sleight_sumpf_on() {
   machine playSound("perks_power_on");
   timer = 0;
   duration = 0.05;
+
   level notify("specialty_fastreload_power_on");
+
   while(true) {
     machine thread vending_machine_flicker_light("sleight_light", duration);
     timer += duration;
@@ -229,6 +260,7 @@ turn_sleight_sumpf_on() {
     }
     wait(duration);
   }
+
   playFXOnTag(level._effect["sleight_light"], machine, "tag_origin");
 }
 
@@ -243,7 +275,6 @@ vending_machine_flicker_light(fx_light, duration) {
   fxobj stoploopsound();
   fxobj delete();
 }
-
 electric_perks_dialog() {
   self endon("warning_dialog");
   level endon("switch_flipped");
@@ -270,108 +301,138 @@ electric_perks_dialog() {
     }
   }
 }
-
 vending_trigger_think() {
   perk = self.script_noteworthy;
+
   if(isDefined(level.script) && level.script != "nazi_zombie_sumpf") {
     self SetHintString(&"ZOMBIE_FLAMES_UNAVAILABLE");
   }
+
   self SetCursorHint("HINT_NOICON");
   self UseTriggerRequireLookAt();
+
   notify_name = perk + "_power_on";
   level waittill(notify_name);
+
   self thread check_player_has_perk(perk);
+
   if(isDefined(level.script) && level.script == "nazi_zombie_sumpf") {
     self SetHintString(&"ZOMBIE_PERK_GENERIC");
   } else {
     self vending_set_hintstring(perk);
   }
+
   for(;;) {
     self waittill("trigger", player);
     index = maps\_zombiemode_weapons::get_player_index(player);
+
     cost = level.zombie_vars["zombie_perk_cost"];
     switch (perk) {
       case "specialty_armorvest":
         cost = 2500;
         break;
+
       case "specialty_quickrevive":
         cost = 1500;
         break;
+
       case "specialty_fastreload":
         cost = 3000;
         break;
+
       case "specialty_rof":
         cost = 2000;
         break;
     }
+
     if(player maps\_laststand::player_is_in_laststand()) {
       continue;
     }
+
     if(player in_revive_trigger()) {
       continue;
     }
+
     if(player HasPerk(perk)) {
       cheat = false;
+
       if(GetDVarInt("zombie_cheat") >= 5) {
         cheat = true;
       }
+
       if(cheat != true) {
         self playSound("deny");
         player thread play_no_money_perk_dialog();
+
         continue;
       }
     }
+
     if(player.score < cost) {
       self playSound("deny");
       player thread play_no_money_perk_dialog();
       continue;
     }
+
     sound = "bottle_dispense3d";
     playsoundatposition(sound, self.origin);
+
     switch (perk) {
       case "specialty_armorvest":
         sound = "mx_jugger_sting";
         break;
+
       case "specialty_quickrevive":
         sound = "mx_revive_sting";
         break;
+
       case "specialty_fastreload":
         sound = "mx_speed_sting";
         break;
+
       case "specialty_rof":
         sound = "mx_doubletap_sting";
         break;
+
       default:
         sound = "mx_jugger_sting";
         break;
     }
+
     self thread play_vendor_stings(sound);
+
     gun = player perk_give_bottle_begin(perk);
     player.is_drinking = 1;
     player waittill_any("fake_death", "death", "player_downed", "weapon_change_complete");
+
     player perk_give_bottle_end(gun, perk);
     player.is_drinking = undefined;
+
     if(player maps\_laststand::player_is_in_laststand()) {
       continue;
     }
+
     player SetPerk(perk);
     player thread perk_vo(perk);
     player setblur(4, 0.1);
     wait(0.1);
     player setblur(0, 0.1);
+
     if(perk == "specialty_armorvest") {
       player.maxhealth = 160;
       player.health = 160;
     } else {}
     player maps\_zombiemode_score::minus_to_player_score(cost);
     player perk_hud_create(perk);
+
     player.stats["perks"]++;
+
     player thread perk_think(perk);
   }
 }
-
 play_no_money_perk_dialog() {
   index = maps\_zombiemode_weapons::get_player_index(self);
+
   player_index = "plr_" + index + "_";
   if(!isDefined(self.vox_nomoney_perk)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_nomoney_perk");
@@ -382,17 +443,20 @@ play_no_money_perk_dialog() {
     self.vox_nomoney_perk_available = self.vox_nomoney_perk;
   }
   sound_to_play = random(self.vox_nomoney_perk_available);
+
   self.vox_nomoney_perk_available = array_remove(self.vox_nomoney_perk_available, sound_to_play);
+
   if(self.vox_nomoney_perk_available.size < 1) {
     self.vox_nomoney_perk_available = self.vox_nomoney_perk;
   }
+
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, 0.25);
 }
-
 check_player_has_perk(perk) {
   if(GetDVarInt("zombie_cheat") >= 5) {
     return;
   }
+
   dist = 128 * 128;
   while(true) {
     players = get_players();
@@ -404,7 +468,9 @@ check_player_has_perk(perk) {
           self SetInvisibleToPlayer(players[i]);
         }
       }
+
     }
+
     wait(0.1);
   }
 }
@@ -414,15 +480,19 @@ vending_set_hintstring(perk) {
     case "specialty_armorvest":
       self SetHintString(&"ZOMBIE_PERK_JUGGERNAUT");
       break;
+
     case "specialty_quickrevive":
       self SetHintString(&"ZOMBIE_PERK_QUICKREVIVE");
       break;
+
     case "specialty_fastreload":
       self SetHintString(&"ZOMBIE_PERK_FASTRELOAD");
       break;
+
     case "specialty_rof":
       self SetHintString(&"ZOMBIE_PERK_DOUBLETAP");
       break;
+
     default:
       self SetHintString(perk + " Cost: " + level.zombie_vars["zombie_perk_cost"]);
       break;
@@ -435,7 +505,9 @@ perk_think(perk) {
       return;
     }
   }
+
   self waittill_any("fake_death", "death", "player_downed");
+
   self UnsetPerk(perk);
   self.maxhealth = 100;
   self perk_hud_destroy(perk);
@@ -445,29 +517,37 @@ perk_hud_create(perk) {
   if(!isDefined(self.perk_hud)) {
     self.perk_hud = [];
   }
+
   if(GetDVarInt("zombie_cheat") >= 5) {
     if(isDefined(self.perk_hud[perk])) {
       return;
     }
   }
+
   shader = "";
+
   switch (perk) {
     case "specialty_armorvest":
       shader = "specialty_juggernaut_zombies";
       break;
+
     case "specialty_quickrevive":
       shader = "specialty_quickrevive_zombies";
       break;
+
     case "specialty_fastreload":
       shader = "specialty_fastreload_zombies";
       break;
+
     case "specialty_rof":
       shader = "specialty_doubletap_zombies";
       break;
+
     default:
       shader = "";
       break;
   }
+
   hud = create_simple_hud(self);
   hud.foreground = true;
   hud.sort = 1;
@@ -480,6 +560,7 @@ perk_hud_create(perk) {
   hud.y = hud.y - 70;
   hud.alpha = 1;
   hud SetShader(shader, 24, 24);
+
   self.perk_hud[perk] = hud;
 }
 
@@ -491,32 +572,41 @@ perk_hud_destroy(perk) {
 perk_give_bottle_begin(perk) {
   self DisableOffhandWeapons();
   self DisableWeaponCycling();
+
   self AllowLean(false);
   self AllowAds(false);
   self AllowSprint(false);
   self AllowProne(false);
   self AllowMelee(false);
+
   if(self GetStance() == "prone") {
     self SetStance("crouch");
   }
+
   gun = self GetCurrentWeapon();
   weapon = "";
+
   switch (perk) {
     case "specialty_armorvest":
       weapon = "zombie_perk_bottle_jugg";
       break;
+
     case "specialty_quickrevive":
       weapon = "zombie_perk_bottle_revive";
       break;
+
     case "specialty_fastreload":
       weapon = "zombie_perk_bottle_sleight";
       break;
+
     case "specialty_rof":
       weapon = "zombie_perk_bottle_doubletap";
       break;
   }
+
   self GiveWeapon(weapon);
   self SwitchToWeapon(weapon);
+
   return gun;
 }
 
@@ -526,8 +616,10 @@ perk_give_bottle_end(gun, perk) {
   assert(gun != "zombie_perk_bottle_jugg");
   assert(gun != "zombie_perk_bottle_sleight");
   assert(gun != "syrette");
+
   self EnableOffhandWeapons();
   self EnableWeaponCycling();
+
   self AllowLean(true);
   self AllowAds(true);
   self AllowSprint(true);
@@ -538,20 +630,25 @@ perk_give_bottle_end(gun, perk) {
     case "specialty_armorvest":
       weapon = "zombie_perk_bottle_jugg";
       break;
+
     case "specialty_quickrevive":
       weapon = "zombie_perk_bottle_revive";
       break;
+
     case "specialty_fastreload":
       weapon = "zombie_perk_bottle_sleight";
       break;
+
     case "specialty_rof":
       weapon = "zombie_perk_bottle_doubletap";
       break;
   }
+
   if(self maps\_laststand::player_is_in_laststand()) {
     self TakeWeapon(weapon);
     return;
   }
+
   if(gun != "none" && gun != "mine_bouncing_betty") {
     self SwitchToWeapon(gun);
   } else {
@@ -560,14 +657,17 @@ perk_give_bottle_end(gun, perk) {
       self SwitchToWeapon(primaryWeapons[0]);
     }
   }
+
   self TakeWeapon(weapon);
 }
 
 perk_vo(type) {
   self endon("death");
   self endon("disconnect");
+
   index = maps\_zombiemode_weapons::get_player_index(self);
   sound = undefined;
+
   if(!isDefined(level.player_is_speaking)) {
     level.player_is_speaking = 0;
   }
@@ -589,10 +689,10 @@ perk_vo(type) {
       sound_to_play = "vox_perk_jugga_0";
       break;
   }
+
   wait(1.0);
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, 0.25);
 }
-
 machine_watcher() {
   if(isDefined(level.script) && level.script == "nazi_zombie_factory") {
     level thread machine_watcher_factory("juggernog_on");
@@ -603,7 +703,6 @@ machine_watcher() {
     level waittill("master_switch_activated");
   }
 }
-
 machine_watcher_sumpf_jugg() {
   level waittill("juggernog_sumpf_on");
   machine = getEntArray("zombie_vending", "targetname");
@@ -613,9 +712,9 @@ machine_watcher_sumpf_jugg() {
         machine[i] thread perks_a_cola_jingle();
       }
     }
+
   }
 }
-
 machine_watcher_sumpf_speed() {
   level waittill("sleight_sumpf_on");
   machine = getEntArray("zombie_vending", "targetname");
@@ -625,9 +724,9 @@ machine_watcher_sumpf_speed() {
         machine[i] thread perks_a_cola_jingle();
       }
     }
+
   }
 }
-
 machine_watcher_sumpf_revive() {
   level waittill("revive_sumpf_on");
   machine = getEntArray("zombie_vending", "targetname");
@@ -637,9 +736,9 @@ machine_watcher_sumpf_revive() {
         machine[i] thread perks_a_cola_jingle();
       }
     }
+
   }
 }
-
 machine_watcher_sumpf_doubleTap() {
   level waittill("doubletap_sumpf_on");
   machine = getEntArray("zombie_vending", "targetname");
@@ -649,28 +748,33 @@ machine_watcher_sumpf_doubleTap() {
         machine[i] thread perks_a_cola_jingle();
       }
     }
+
   }
 }
-
 machine_watcher_factory(vending_name) {
   level waittill(vending_name);
   switch (vending_name) {
     case "juggernog_on":
       temp_script_sound = "mx_jugger_jingle";
       break;
+
     case "sleight_on":
       temp_script_sound = "mx_speed_jingle";
       break;
+
     case "doubletap_on":
       temp_script_sound = "mx_doubletap_jingle";
       break;
+
     case "revive_on":
       temp_script_sound = "mx_revive_jingle";
       break;
+
     default:
       temp_script_sound = "mx_jugger_jingle";
       break;
   }
+
   temp_machines = getstructarray("perksacola", "targetname");
   for(x = 0; x < temp_machines.size; x++) {
     if(temp_machines[x].script_sound == temp_script_sound)
@@ -726,7 +830,6 @@ play_vendor_stings(sound) {
     }
   }
 }
-
 perks_a_cola_jingle_sumpf(jingle) {
   perk_hum = spawn("script_origin", self.origin);
   perk_hum playLoopSound("perks_machine_loop");
@@ -742,6 +845,7 @@ perks_a_cola_jingle_sumpf(jingle) {
     if(randomint(100) < 15 && level.eggs == 0) {
       level notify("jingle_playing");
       playsoundatposition("electrical_surge", self.origin);
+
       if(self.script_sound == "mx_speed_jingle" && level.speed_jingle == 0) {
         level.speed_jingle = 1;
         temp_org_speed = spawn("script_origin", self.origin);
@@ -774,11 +878,12 @@ perks_a_cola_jingle_sumpf(jingle) {
         level.jugger_jingle = 0;
         temp_org_jugger delete();
       }
+
       self thread play_random_broken_sounds();
     }
   }
-}
 
+}
 perks_a_cola_jingle() {
   perk_hum = spawn("script_origin", self.origin);
   perk_hum playLoopSound("perks_machine_loop");
@@ -793,7 +898,9 @@ perks_a_cola_jingle() {
     wait(randomfloatrange(31, 45));
     if(randomint(100) < 15 && level.eggs == 0) {
       level notify("jingle_playing");
+
       playsoundatposition("electrical_surge", self.origin);
+
       if(self.script_sound == "mx_speed_jingle" && level.speed_jingle == 0) {
         level.speed_jingle = 1;
         temp_org_speed = spawn("script_origin", self.origin);
@@ -830,11 +937,11 @@ perks_a_cola_jingle() {
         level.jugger_jingle = 0;
         temp_org_jugger delete();
       }
+
       self thread play_random_broken_sounds();
     }
   }
 }
-
 play_random_broken_sounds() {
   level endon("jingle_playing");
   if(!isDefined(self.script_sound)) {
@@ -844,11 +951,13 @@ play_random_broken_sounds() {
     while(1) {
       wait(randomfloatrange(7, 18));
       playsoundatposition("broken_random_jingle", self.origin);
+
       playsoundatposition("electrical_surge", self.origin);
     }
   } else {
     while(1) {
       wait(randomfloatrange(7, 18));
+
       playsoundatposition("electrical_surge", self.origin);
     }
   }

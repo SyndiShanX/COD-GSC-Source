@@ -1,11 +1,12 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\pel1b_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 
 precache_util_fx() {}
+
 precache_scripted_fx() {}
 precache_createfx_fx() {
   level._effect["fire_foliage_small"] = loadfx("maps/pel1b/fx_fire_foliage_small");
@@ -51,9 +52,12 @@ footsteps() {
 main() {
   clientscripts\createfx\pel1b_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   precache_util_fx();
   precache_createfx_fx();
+
   footsteps();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();

@@ -1,39 +1,47 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_animatedmodels.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
 #using_animtree("animated_props");
-
 main() {
   if(getdebugdvar("replay_debug") == "1") {
     println("File: _animatedmodels.gsc. Function: main()\n");
     println("File: _animatedmodels.gsc. Function: main() - START WAIT waittillframeend\n");
   }
+
   waittillframeend;
+
   if(getdebugdvar("replay_debug") == "1")
     println("File: _animatedmodels.gsc. Function: main() - STOP WAIT waittillframeend\n");
-  if(getdvar("animated_trees_enabled") == "")
-    setdvar("animated_trees_enabled", "1");
+
+  if(getDvar("animated_trees_enabled") == "")
+    setDvar("animated_trees_enabled", "1");
+
   level.wind = spawnStruct();
   level.wind.rate = 0.4;
   level.wind.weight = 1;
   level.wind.variance = 0.2;
   level.init_animatedmodels_dump = false;
+
   level.anim_prop_models_animtree = #animtree;
+
   if(!isDefined(level.anim_prop_models)) {
     level.anim_prop_models = [];
   }
+
   level.init_animatedmodels = [];
+
   animated_models = getEntArray("animated_model", "targetname");
-  if(getdvar("animated_trees_enabled") == "1") {
+  if(getDvar("animated_trees_enabled") == "1") {
     array_thread(animated_models, ::model_init);
   } else {
     array_thread(animated_models, ::model_disable);
     return;
   }
+
   if(level.init_animatedmodels_dump) {
     keys = getarraykeys(level.init_animatedmodels);
     println("");
@@ -46,9 +54,9 @@ main() {
     println("Paste this include and function at the bottom of the _anim for your level:");
     println("");
     println("#using_animtree( \"animated_props\" );");
-
     println("animated_model_setup()");
     println("{");
+
     for(i = 0; i < keys.size; i++) {
       print_modellist_bykey(keys[i]);
     }
@@ -56,6 +64,7 @@ main() {
     println("");
     println("make sure these are in your <level>.csv");
     println("");
+
     for(i = 0; i < keys.size; i++) {
       print_modelcsv_bykey(keys[i]);
     }
@@ -64,17 +73,22 @@ main() {
     assertmsg("anims not cached for animated prop model, see console");
     return;
   }
+
   array_thread(animated_models, ::animated_model);
+
   level.init_animatedmodels = undefined;
+
   if(getdebugdvar("replay_debug") == "1")
     println("File: _animatedmodels.gsc. Function: main() - COMPLETE\n");
 }
 
 print_modellist_bykey(key) {
   anima = level.init_animatedmodels[key];
+
   if(isDefined(anima["still"])) {
     println("\tlevel.anim_prop_models[ \"" + key + "\" ][ " + "\"still\"" + " ] = %" + anima["still"] + ";");
   }
+
   if(isDefined(anima["strong"])) {
     println("\tlevel.anim_prop_models[ \"" + key + "\" ][ " + "\"strong\"" + " ] = %" + anima["strong"] + ";");
   }
@@ -82,8 +96,10 @@ print_modellist_bykey(key) {
 
 print_modelcsv_bykey(key) {
   anima = level.init_animatedmodels[key];
+
   if(isDefined(anima["still"]))
     println("xanim," + anima["still"]);
+
   if(isDefined(anima["strong"]))
     println("xanim," + anima["strong"]);
 }
@@ -142,7 +158,9 @@ model_init() {
       assertmsg("animated propmodel not setup, see console");
       break;
   }
+
   level.init_animatedmodels[self.model] = anima;
+
   if(!isDefined(level.anim_prop_models[self.model]))
     level.init_animatedmodels_dump = true;
 }

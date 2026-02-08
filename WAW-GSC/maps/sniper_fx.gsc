@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\sniper_fx.gsc
-*****************************************************/
+**************************************/
 
 main() {
   maps\createart\sniper_art::main();
@@ -95,12 +95,14 @@ precache_effects() {
   level._effect["crow_feathers"] = loadfx("maps/sniper/fx_feathers_crow_elements");
   level._effect["character_fire_death_sm"] = loadfx("env/fire/fx_fire_player_sm");
   level._effect["character_fire_death_torso"] = loadfx("env/fire/fx_fire_player_torso");
+
   level._effect["flamethrower_fire"] = loadfx("maps/sniper/fx_flamethrower_burst");
   level._effect["bookcase_bounce"] = loadfx("maps/sniper/fx_fire_collapse_bookcase");
   level._effect["pipe_trail"] = loadfx("maps/sniper/fx_sys_element_flame_trail_small_emitter");
   level._effect["pipe_flame"] = loadfx("maps/sniper/fx_oven_pipe_flame");
   level._effect["bookcase_fire"] = loadfx("maps/sniper/fx_fire_bookshelf");
   level._effect["deathstar_escape"] = loadfx("maps/sniper/fx_fire_player_tunnel");
+
   level._effect["inside_tankhit"] = loadfx("maps/sniper/fx_tank_shell_impact_building");
   level._effect["river_splash"] = loadfx("maps/sniper/fx_water_splash");
   level._effect["limb_bubbles"] = loadfx("maps/sniper/fx_underwater_foam_bubbles_limb");

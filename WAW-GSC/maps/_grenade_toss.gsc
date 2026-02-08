@@ -1,38 +1,48 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_grenade_toss.gsc
-*****************************************************/
+**************************************/
 
 #using_animtree("generic_human");
-
 force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
   self endon("death");
+
   og_grenadeweapon = undefined;
+
   if(isDefined(grenade_weapon)) {
     og_grenadeweapon = self.grenadeWeapon;
     self.grenadeWeapon = grenade_weapon;
   }
   self.grenadeammo++;
+
   if(!isDefined(explode_time)) {
     explode_time = 4;
   }
+
   if(!isDefined(throw_tag)) {
     throw_tag = "tag_inhand";
   }
+
   angles = VectorToAngles(pos - self.origin);
   self OrientMode("face angle", angles[1]);
+
   if(DistanceSquared(self.origin, pos) < 200 * 200) {
     println("^3Grenade position is too close!");
+
     return false;
   }
+
   self.force_grenade_throw_tag = throw_tag;
   self.force_grenade_pos = pos;
   self.force_grenade_explod_time = explode_time;
+
   if(!isDefined(anime)) {
     anime = "force_grenade_throw";
+
     if(!isDefined(self.animname)) {
       self.animname = "force_grenader";
     }
+
     if(!isDefined(level.scr_anim[self.animname]) || !isDefined(level.scr_anim[self.animname][anime])) {
       switch (self.a.special) {
         case "cover_crouch":
@@ -42,6 +52,7 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
           } else {
             throw_anim = % crouch_grenade_throw;
           }
+
           gun_hand = "left";
           break;
         default:
@@ -49,6 +60,7 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
           gun_hand = "left";
           break;
       }
+
       level.scr_anim[self.animname][anime] = throw_anim;
       maps\_anim::addNotetrack_attach(self.animname, "grenade_right", GetWeaponModel(self.grenadeweapon), self.force_grenade_throw_tag, anime);
       maps\_anim::addNotetrack_detach(self.animname, "fire", GetWeaponModel(self.grenadeweapon), self.force_grenade_throw_tag, anime);
@@ -59,23 +71,31 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
   if(!maps\_anim::notetrack_customfunction_exists(self.animname, "fire", function, anime)) {
     maps\_anim::addNotetrack_customFunction(self.animname, "fire", function, anime);
   }
+
   if(!isDefined(level.scr_sound[self.animname]) || !isDefined(level.scr_sound[self.animname][anime])) {
     self animscripts\battleChatter_ai::evaluateAttackEvent("grenade");
   }
+
   self maps\_anim::anim_single_solo(self, anime);
+
   if(self.animname == "force_grenader") {
     self.animname = undefined;
   }
+
   if(isDefined(og_grenadeweapon)) {
     self.grenadeWeapon = og_grenadeweapon;
   }
+
   self notify("forced_grenade_thrown");
+
   return true;
 }
 
 force_grenade_toss_internal(guy) {
   guy MagicGrenade(guy GetTagOrigin(guy.force_grenade_throw_tag), guy.force_grenade_pos, guy.force_grenade_explod_time);
+
   guy.grenadeammo--;
+
   guy.force_grenade_pos = undefined;
   guy.force_grenade_explod_time = undefined;
   guy.force_grenade_throw_tag = undefined;

@@ -1,23 +1,30 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_cinematic.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
 
 main(movie, next_level) {
   setsaveddvar("hud_drawhud", 0);
-  level.script = tolower(getdvar("mapname"));
+
+  level.script = tolower(getDvar("mapname"));
+
   SetSavedDvar("g_speed", 0);
+
   PrecacheShader("black");
+
   set_background();
+
   wait(0.05);
   wait_for_first_player();
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] FreezeControls(true);
   }
+
   play_movie(movie, next_level);
 }
 
@@ -31,16 +38,21 @@ set_background() {
   level.blackscreen.horzAlign = "fullscreen";
   level.blackscreen.vertAlign = "fullscreen";
   level.blackscreen.foreground = true;
+
   level.blackscreen.alpha = 1;
   level.blackscreen SetShader("black", 640, 480);
 }
 
 skip_movie_think() {
   level endon("movie_done");
+
   players = get_players();
   player = players[0];
+
   wait(0.05);
+
   set_console_status();
+
   for(;;) {
     if(level.console) {
       if(player buttonPressed("BUTTON_A")) {
@@ -50,10 +62,12 @@ skip_movie_think() {
       wait(0.05);
       continue;
     }
+
     if(player attackButtonPressed()) {
       level notify("movie_skip");
       return;
     }
+
     wait(0.05);
   }
 }
@@ -61,6 +75,7 @@ skip_movie_think() {
 skip_movie(next_level) {
   level endon("movie_done");
   level thread skip_movie_think();
+
   level waittill("movie_skip");
   ChangeLevel(next_level);
 }
@@ -69,7 +84,9 @@ play_movie(movie, next_level) {
   level thread skip_movie(next_level);
   println("Playing Cinematic: " + movie);
   Cinematic(movie);
+
   wait(30);
+
   level notify("movie_done");
   ChangeLevel(next_level);
 }

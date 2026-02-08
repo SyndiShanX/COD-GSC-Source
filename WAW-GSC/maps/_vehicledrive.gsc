@@ -1,17 +1,18 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_vehicledrive.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
 main() {
-  if(getdvar("debug_vehiclegod") == "")
-    setdvar("debug_vehiclegod", "off");
-  if(getdvar("debug_vehicleplayerhealth") == "")
-    setdvar("debug_vehicleplayerhealth", "off");
-  if(getdvar("player_vehicle_dismountable") == "")
-    setdvar("player_vehicle_dismountable", "off");
+  if(getDvar("debug_vehiclegod") == "")
+    setDvar("debug_vehiclegod", "off");
+  if(getDvar("debug_vehicleplayerhealth") == "")
+    setDvar("debug_vehicleplayerhealth", "off");
+  if(getDvar("player_vehicle_dismountable") == "")
+    setDvar("player_vehicle_dismountable", "off");
+
   precacheShader("tank_shell");
 }
 
@@ -19,7 +20,7 @@ vehicle_wait(startinvehicle) {
   if(!isDefined(startinvehicle))
     startinvehicle = false;
   else if(startinvehicle) {
-    if(getdvar("player_vehicle_dismountable") == "off")
+    if(getDvar("player_vehicle_dismountable") == "off")
       self makevehicleunusable();
   }
   self endon("death");
@@ -29,11 +30,13 @@ vehicle_wait(startinvehicle) {
       self waittill("trigger");
     else {
       startinvehicle = false;
+
       players = get_players();
       self useby(players[0]);
     }
     owner = self getvehicleowner();
-    if(isDefined(owner) && isplayer(owner)) {
+
+    if(isDefined(owner) && isPlayer(owner)) {
       self thread vehicle_enter();
     } else {
       self thread vehicle_exit();
@@ -48,6 +51,7 @@ vehicle_wait(startinvehicle) {
 vehicle_exit() {
   level.playervehicle = level.playervehiclenone;
   level notify("player exited vehicle");
+
   players = get_players();
   if(isDefined(players[0].oldthreatbias)) {
     players[0].threatbias = players[0].oldthreatbias;
@@ -76,6 +80,7 @@ setup_vehicle_other() {
 
 vehicle_giveHealth() {
   skill = getdifficulty();
+
   if(skill == ("easy"))
     self.health = 3000;
   else if(skill == ("medium"))
@@ -86,6 +91,7 @@ vehicle_giveHealth() {
     self.health = 1300;
   else
     self.health = 2000;
+
   if(isDefined(self.healthbuffer)) {
     self.health += self.healthbuffer;
     self.currenthealth = self.health;
@@ -95,24 +101,27 @@ vehicle_giveHealth() {
 
 Protect_Player() {
   players = get_players();
+
   level endon("player exited vehicle");
   self endon("death");
   playerCurrentHealth = players[0].health;
+
   while(isalive(players[0])) {
     players[0] waittill("damage", ammount);
+
     if(self.health <= 0) {
       players[0] DoDamage(players[0].health + 50, (0, 0, 0));
     }
     players[0].health += int(ammount * .2);
   }
 }
-
 vehicle_ridehandle() {
   level endon("player exited vehicle");
   self endon("no_regen_health");
   self endon("death");
   self thread vehicle_kill_player_ondeath();
   self.maximumhealth = self.health;
+
   switch (getdifficulty()) {
     case "gimp":
       health_regeninc = 100;
@@ -142,8 +151,9 @@ vehicle_ridehandle() {
   if(self.vehicletype == "crusader_player") {
     self setModel("vehicle_crusader2_viewmodel");
   }
+
   regentimer = gettime();
-  if(getdvar("debug_vehiclegod") != "off") {
+  if(getDvar("debug_vehiclegod") != "off") {
     while(1) {
       self waittill("damage");
       self.health = self.maxhealth;
@@ -153,11 +163,12 @@ vehicle_ridehandle() {
   regeninctimer = gettime();
   while(1) {
     if(self.damaged) {
-      if(getdvar("debug_vehicleplayerhealth") != "off")
+      if(getDvar("debug_vehicleplayerhealth") != "off")
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
       self.damaged = false;
       regentimer = gettime() + health_regentimer;
     }
+
     time = gettime();
     if(self.health < self.maximumhealth && time > regentimer && time > regeninctimer) {
       if(self.health + health_regeninc > self.maximumhealth)
@@ -165,9 +176,10 @@ vehicle_ridehandle() {
       else
         self.health += health_regeninc;
       regeninctimer = gettime() + 250;
-      if(getdvar("debug_vehicleplayerhealth") != "off")
+      if(getDvar("debug_vehicleplayerhealth") != "off")
         iprintlnbold("playervehicles health: ", self.health - self.healthbuffer);
     }
+
     wait .05;
   }
 }
@@ -175,8 +187,10 @@ vehicle_ridehandle() {
 vehicle_kill_player_ondeath() {
   level endon("player exited vehicle");
   self waittill("death");
+
   driver = self getvehicleowner();
-  if(isDefined(driver) && isplayer(driver)) {
+
+  if(isDefined(driver) && isPlayer(driver)) {
     driver enablehealthshield(false);
     while(driver.health > 0) {
       driver DoDamage(driver.health + 500, driver.origin);
@@ -206,14 +220,17 @@ vehicle_reloadsound() {
 }
 
 vehicle_hud_tank_fireicon() {
-  if(getdvar("player_vehicle_dismountable") != "off")
+  if(getDvar("player_vehicle_dismountable") != "off")
     return;
   level endon("player exited vehicle");
+
   players = get_players();
+
   players[0] endon("death");
   self endon("death");
   if(isDefined(level.VehicleFireIcon))
     level.VehicleFireIcon destroy();
+
   level.VehicleFireIcon = newHudElem();
   level.VehicleFireIcon.x = -32;
   level.VehicleFireIcon.y = -64;
@@ -222,6 +239,7 @@ vehicle_hud_tank_fireicon() {
   level.VehicleFireIcon.horzAlign = "right";
   level.VehicleFireIcon.vertAlign = "bottom";
   level.VehicleFireIcon setShader("tank_shell", 64, 64);
+
   icon = true;
   level.VehicleFireIcon.alpha = icon;
   while(1) {
@@ -239,7 +257,6 @@ vehicle_hud_tank_fireicon() {
     wait .05;
   }
 }
-
 healthOverlay() {
   self endon("death");
   overlay = newHudElem();
@@ -261,7 +278,9 @@ healthOverlay() {
       if(!hurt) {
         hurt = true;
       }
+
       fullAlpha = (1.0 - healthRatio) + bonus;
+
       overlay fadeOverTime(0.05);
       overlay.alpha = fullAlpha;
       wait(0.1);
@@ -271,6 +290,7 @@ healthOverlay() {
       overlay fadeOverTime(pulseTime * 0.3);
       overlay.alpha = fullAlpha * 0.3;
       wait(pulseTime * 0.3);
+
       healthRatio = (self.health - self.healthbuffer) / maxHealth;
       pulseTime = 0.3 + (0.7 * healthRatio);
       if(healthRatio > 0.9) {

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\sniper.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -12,11 +12,14 @@
 
 main() {
     setVolFog(759.379, 4196, 276, 358.969, 0.49, 0.56, 0.6, 0.0);
+
     maps\_panzeriv::main("vehicle_ger_tracked_panzer4v1", "panzeriv", false);
     maps\_jeep::main("vehicle_ger_wheeled_horch1a_backseat");
     maps\_halftrack::main("vehicle_ger_tracked_halftrack", undefined, false);
     maps\_truck::main("vehicle_ger_wheeled_opel_blitz", "opel");
+
     maps\sniper_fx::main();
+
     precacheshellshock("sniper_intro");
     precacheshellshock("sniper_water");
     precacheshellshock("level_end");
@@ -52,38 +55,55 @@ main() {
     precachemodel("anim_berlin_curtain_beige_d");
     precachemodel("viewmodel_rus_guardsinged_arms");
     precachemodel("viewmodel_rus_guardsinged_player");
+
     precacherumble("tank_rumble");
     precacherumble("explosion_generic");
     precacherumble("damage_light");
+
     stringrefs();
+
     default_start(maps\sniper_event1::event1_start);
+
     add_start("event1b", maps\sniper_event1::event1_shooting_start, &"STARTS_SNIPER_EVENT1B");
     add_start("event1c", maps\sniper_event1::event1_moveup_start, &"STARTS_SNIPER_EVENT1C");
     add_start("event1d", maps\sniper_event1::event1d_start, &"STARTS_SNIPER_EVENT1D");
+
     add_start("event2", maps\sniper_event2::event2_start, &"STARTS_SNIPER_EVENT2");
     add_start("event2b", maps\sniper_event2::event2b_start, &"STARTS_SNIPER_EVENT2B");
     add_start("event2c", maps\sniper_event2::event2c_start, &"STARTS_SNIPER_EVENT2C");
     add_start("event2d", maps\sniper_event2::event2d_start, &"STARTS_SNIPER_EVENT2D");
     add_start("event2e", maps\sniper_event2::event2e_start, &"STARTS_SNIPER_EVENT2E");
+
     add_start("event3", maps\sniper_event3::event3_start, &"STARTS_SNIPER_EVENT3");
     add_start("event3b", maps\sniper_event3::event3b_start, &"STARTS_SNIPER_EVENT3B");
     add_start("event3c", maps\sniper_event3::event3c_start, &"STARTS_SNIPER_EVENT3C");
     add_start("event4", maps\sniper_event4::event4_start, &"STARTS_SNIPER_EVENT4");
     add_start("event5", maps\sniper_event4::event5_skipto, &"STARTS_SNIPER_EVENT5");
+
     animscripts\dog_init::initDogAnimations();
+
     maps\sniper_anim::drone_custom_run_cycles();
     maps\_drones::init();
+
     level.drone_spawnFunction["axis"] = character\char_ger_wrmcht_k98::main;
+
     level.campaign = "russian";
     maps\_load::main();
+
     level.e1_timing_feedback = "excellent_aim";
     level.e1_timing_feedback_time = 4;
+
     maps\sniper_anim::main();
+
     maps\_mganim::main();
+
     sniper_stealth_main();
+
     maps\sniper_amb::main();
+
     level thread init_flags();
     level thread trig_and_flag_setup();
+
     switch (getdifficulty()) {
       case "easy":
         level.difficulty = 1;
@@ -98,9 +118,12 @@ main() {
         level.difficulty = 4;
         break;
     }
+
     maps\sniper_ai_spawnfuncs::setup_spawn_functions();
+
     wait_for_first_player();
     get_players()[0] FreezeControls(true);
+
     level.hero = getent("sniper_hero", "script_noteworthy");
     level.hero thread hero_setup();
     level.default_goalradius = 32;
@@ -109,6 +132,7 @@ main() {
     level.linequeue2 = [];
     level.animfudgetime = 0.05;
     level.hero_run_anim = "e1_street_run";
+
     createthreatbiasgroup("russian_squad");
     createthreatbiasgroup("badguys");
     createthreatbiasgroup("ignoreplayer");
@@ -117,7 +141,9 @@ main() {
     createthreatbiasgroup("flankers");
     createthreatbiasgroup("newbhater");
     createthreatbiasgroup("newbs");
+
     /
+
     tp_to_start(eventname) {
       level.hero = getent("sniper_hero", "script_noteworthy");
       level.hero allowedstances("stand", "crouch", "prone");
@@ -143,6 +169,7 @@ main() {
         guys[i] delete();
       }
     }
+
     guys_to_nodes(guys, nodes) {
       nodecounter = 0;
       for(i = 0; i < guys.size; i++) {
@@ -152,11 +179,13 @@ main() {
         }
       }
     }
+
     getsquad() {
       squad = getaiarray("allies");
       squad = array_remove(squad, level.hero);
       return squad;
     }
+
     wait_and_unignore(time) {
       self endon("death");
       wait(time);
@@ -164,14 +193,17 @@ main() {
       self.ignoreme = false;
       self.health = 100;
     }
+
     wait_and_spawn(time) {
       wait time;
       self stalingradspawn();
     }
+
     wait_and_openflag(time, myflag) {
       wait time;
       flag_clear(myflag);
     }
+
     wait_and_killspawner(time, num) {
       wait time;
       maps\_spawner::kill_spawnernum(num);
@@ -182,6 +214,7 @@ main() {
       wait time;
       self notify("goal");
     }
+
     reset_hero_run_anim_trigs() {
       trigs = getEntArray("hero_runanim_trigs", "script_noteworthy");
       array_thread(trigs, ::trig_reset_hero_anim);
@@ -190,6 +223,7 @@ main() {
       trigs = getEntArray("hero_upstairs_trigs", "script_noteworthy");
       array_thread(trigs, ::upstairs_runanim);
     }
+
     trig_reset_hero_anim() {
       while(1) {
         self waittill("trigger", triggerer);
@@ -202,6 +236,7 @@ main() {
       wait 2;
       self delete();
     }
+
     downstairs_runanim() {
       while(1) {
         self waittill("trigger", triggerer);
@@ -214,6 +249,7 @@ main() {
       wait 2;
       self delete();
     }
+
     upstairs_runanim() {
       while(1) {
         self waittill("trigger", triggerer);
@@ -226,6 +262,7 @@ main() {
       wait 2;
       self delete();
     }
+
     count_teh_time() {
       level.tehtimecounter = 0;
       while(1) {
@@ -233,11 +270,13 @@ main() {
         wait 0.05;
       }
     }
+
     fake_ppsh() {
       level.fake_ppsh = spawn("script_model", (112.834, 669.472, 2.01857));
       level.fake_ppsh.angles = (358.474, 359.958, -88.7951);
       level.fake_ppsh setModel("weapon_rus_ppsh_smg");
     }
+
     stealth_checker() {
       level endon("stealthbreak");
       flag_clear("player_attacking");
@@ -256,6 +295,7 @@ main() {
         wait 0.05;
       }
     }
+
     grenadetoss_is_attacking() {
       while(1) {
         if(self isthrowinggrenade()) {
@@ -264,6 +304,7 @@ main() {
         wait 0.05;
       }
     }
+
     action_attack_checker() {
       level endon("stealthbreak");
       lastclipcount = level.player getcurrentweaponclipammo();
@@ -282,15 +323,18 @@ main() {
         wait 0.05;
       }
     }
+
     streetdudes_findyou() {
       self endon("death");
       level waittill("found_infountain");
       guys_areclose = 0;
       level.e1_timing_feedback = "could_b_quicker";
       flag_set("found_infountain_reznov_hide");
+
       spot = getstruct("fountain_reznov_align_spot", "targetname");
       spot notify("stop_loop");
       spot thread anim_loop_solo(level.hero, "resnov_gun_loop", undefined, "stop_loop");
+
       if(isDefined(level.scr_anim[self.animname]["react"]) && isDefined(self.animspot) && isDefined(self.deathanim)) {
         self.animspot anim_single_solo(self, "react");
       }
@@ -302,6 +346,7 @@ main() {
         self setgoalentity(get_players()[0]);
       }
       self thread wait_and_chargeplayer(randomintrange(7, 40));
+
       while(guys_areclose == 0) {
         axis = getaiarray("axis");
         for(i = 0; i < axis.size; i++) {
@@ -312,6 +357,7 @@ main() {
         }
         wait 0.05;
       }
+
       flag_set("found_infountain");
       spot notify("stop_loop");
       level.hero stopanimscripted();
@@ -323,22 +369,27 @@ main() {
         level thread maps\sniper_event1::hunters_after_hero_infountain();
       }
     }
+
     adjust_angles_to_player(stumble_angles) {
       pa = stumble_angles[0];
       ra = stumble_angles[2];
+
       rv = anglestoright(level.player.angles);
       fv = anglesToForward(level.player.angles);
+
       rva = (rv[0], 0, rv[1] * -1);
       fva = (fv[0], 0, fv[1] * -1);
       angles = vector_multiply(rva, pa);
       angles = angles + vector_multiply(fva, ra);
       return angles + (0, stumble_angles[1], 0);
     }
+
     do_custom_introscreen() {
       custom_introscreen(&"SNIPER_INTROSCREEN_TITLE", &"SNIPER_INTROSCREEN_DATE", &"SNIPER_INTROSCREEN_PLACE", &"SNIPER_INTROSCREEN_INFO", &"SNIPER_INTROSCREEN_INFO2");
     }
+
     custom_introscreen(string1, string2, string3, string4, string5) {
-      if(GetDvar("introscreen") == "0") {
+      if(getDvar("introscreen") == "0") {
         waittillframeend;
         level notify("finished final intro screen fadein");
         waittillframeend;
@@ -350,9 +401,11 @@ main() {
         flag_set("pullup_weapon");
         return;
       }
+
       if(level.start_point != "default") {
         return;
       }
+
       level.introstring = [];
       wait 2;
       setmusicstate("BOMBERS");
@@ -360,25 +413,32 @@ main() {
       if(isDefined(string1)) {
         maps\_introscreen::introscreen_create_line(string1, "lower_left");
       }
+
       wait(2);
+
       if(isDefined(string2)) {
         maps\_introscreen::introscreen_create_line(string2, "lower_left");
         wait 2;
       }
+
       if(isDefined(string3)) {
         maps\_introscreen::introscreen_create_line(string3, "lower_left");
         wait 1.5;
       }
+
       if(isDefined(string4)) {
         maps\_introscreen::introscreen_create_line(string4, "lower_left");
         wait 1.5;
       }
+
       if(isDefined(string5)) {
         maps\_introscreen::introscreen_create_line(string5, "lower_left");
       }
+
       wait 3;
       level thread maps\_introscreen::introscreen_fadeOutText();
     }
+
     random_walk() {
       num = randomint(100);
       if(num < 33) {
@@ -390,6 +450,7 @@ main() {
         return "street_patrol3";
       }
     }
+
     swap_struct_with_origin() {
       spot = spawn("script_origin", self.origin);
       if(isDefined(self.angles)) {
@@ -397,6 +458,7 @@ main() {
       }
       return spot;
     }
+
     getstructent(key, value) {
       spot1 = getstruct(key, value);
       spot2 = spawn("script_origin", spot1.origin);
@@ -405,6 +467,7 @@ main() {
       }
       return spot2;
     }
+
     origin_counter() {
       while(1) {
         spots = getEntArray("script_origin", "classname");
@@ -420,13 +483,14 @@ main() {
         wait 2;
       }
     }
+
     delete_origins_afterfight() {
       level waittill("e3_fightison");
       wait 2;
       self delete();
     }
-    #using_animtree("sniper_crows");
 
+    #using_animtree("sniper_crows");
     its_curtains_for_ya() {
       self notify("newcurtain_anim");
       self endon("death");
@@ -434,6 +498,7 @@ main() {
       if(!isDefined(self.animated)) {
         self.animated = 1;
       }
+
       self UseAnimTree(#animtree);
       self.animname = "curtain";
       spot = getstruct("dog_bark_node", "targetname");
@@ -455,17 +520,20 @@ main() {
       myanim = get_curtain_anim("flaming_loop");
       self anim_single_solo(self, myanim);
       animtime = getanimlength(level.scr_anim["curtain"][myanim]);
+
       myanim = get_curtain_anim("flaming_outtro");
       self anim_single_solo(self, myanim);
       self.animating = 0;
       myanim = get_curtain_anim("calm_loop");
       self anim_loop_solo(self, myanim, undefined, "newcurtain_anim");
     }
+
     get_curtain_anim(myanim) {
       int = randomintrange(1, 4);
       mystring = myanim + int;
       return mystring;
     }
+
     curtain_fx() {
       bone = [];
       bone[0] = "curt_r2_04";
@@ -489,6 +557,7 @@ main() {
         }
       }
     }
+
     e2_flamer_struct_movers() {
       self endon("death");
       while(1) {
@@ -511,6 +580,7 @@ main() {
         wait time;
       }
     }
+
     fire_hurts_trigs() {
       self endon("death");
       while(1) {
@@ -521,6 +591,7 @@ main() {
         wait 1;
       }
     }
+
     is_player_scoped() {
       flag_set("did_noscope");
       flag_wait("friendlies_vignette_go");
@@ -536,10 +607,12 @@ main() {
         wait 0.3;
       }
     }
+
     random_offset(xoffset, yoffset, zoffset) {
       x = randomint(xoffset);
       y = randomint(yoffset);
       z = randomint(zoffset);
+
       if(cointoss()) {
         x = x * 1;
       }
@@ -549,8 +622,10 @@ main() {
       if(cointoss()) {
         z = z * 1;
       }
+
       return (x, y, z);
     }
+
     kill_on_hit(ender, shotspot, attacker) {
       level endon(ender);
       self waittill("damage");
@@ -560,14 +635,17 @@ main() {
         self dodamage(self.health * 10, (shotspot));
       }
     }
+
     playsound_generic_facial(sound, lookTarget) {
       self endon("death");
       self endon("disconnect");
+
       notifyString = "sound_done";
       self thread maps\_anim::anim_facialFiller(notifyString, lookTarget);
       self animscripts\face::SaySpecificDialogue(undefined, sound, 1.0, notifyString);
       self waittill(notifyString);
     }
+
     play_random_dialogue(line1, line2, line3, line4, line5, line6) {
       lines = [];
       if(isDefined(line1)) {
@@ -597,6 +675,7 @@ main() {
       }
       level thread say_dialogue(myline);
     }
+
     friendly_fire_check() {
       level.friendlyfirecount = 0;
       while(1) {
@@ -606,17 +685,19 @@ main() {
           level.friendlyfirecount++;
         }
         if(level.friendlyfirecount > 1) {
-          SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
+          setDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
           missionfailed();
         }
       }
     }
+
     friendly_fire_reset() {
       level notify("new_ff_reset_counter");
       level endon("new_ff_reset_counter");
       wait 30;
       level.friendlyfirecount = 0;
     }
+
     reznov_killed_streetguys() {
       self waittill("damage", damage, attacker);
       if(attacker == level.hero) {

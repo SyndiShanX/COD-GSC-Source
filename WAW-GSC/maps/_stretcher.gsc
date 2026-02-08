@@ -1,62 +1,79 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_stretcher.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
 #using_animtree("generic_human");
-
 main() {
   precachemodel("character_us_cod3_preview");
   precachemodel("character_usmc_grenadier_a");
   precachemodel("stretcher_animated");
   precachemodel("vehicle_stretcher");
+
   level.front_max_turn = 20;
   level.rear_max_turn = 45;
+
   level.step_dist = 24;
   level.max_angle = 15;
   level.rear_offset = -89;
   level.stretcher_front_offset = -6;
   level.stretcher_rear_offset = -11;
   level.stretcher_length = -80;
+
   level.rear_distance = 100;
   level.distover1sec = 140;
+
   level.scr_anim["front_ai"]["pickup"] = % stretcher_F_pickup;
   level.scr_anim["rear_ai"]["pickup"] = % stretcher_R_pickup;
   level.scr_anim["front_ai"]["pickup_idle"][0] = % stretcher_F_wait_idle;
   level.scr_anim["rear_ai"]["pickup_idle"][0] = % stretcher_R_wait_idle;
   level.scr_anim["front_ai"]["drop"] = % stretcher_F_drop;
   level.scr_anim["rear_ai"]["drop"] = % stretcher_R_drop;
+
   setup_stretcher_anim();
 }
 
 move_stretcher(front_point, front_angles, rear_point, rear_angles) {
   flat_vector = vectornormalize(front_point - rear_point);
   rough_vector = vectornormalize(flat_origin(front_point) - flat_origin(rear_point));
+
   front_point = ground_origin(front_point);
+
   dist = distance(self.last_point, front_point);
   step_time = dist / level.distover1sec;
+
   self.last_point = front_point;
+
   guy_angles = flat_angle(vectortoangles(flat_vector));
+
   front_guy_origin = front_point;
   stretcher_front_origin = front_point + vector_multiply(flat_vector, level.stretcher_front_offset);
+
   tmp_origin = ground_origin(stretcher_front_origin + vector_multiply(rough_vector, level.rear_offset));
   stretcher_vector = vectornormalize(stretcher_front_origin - tmp_origin);
   stretcher_rear_origin = stretcher_front_origin + vector_multiply(stretcher_vector, level.stretcher_length);
   rear_guy_origin = stretcher_rear_origin + vector_multiply(flat_vector, level.stretcher_rear_offset);
+
   stretcher_angles = vectortoangles(stretcher_vector);
+
   self moveto(stretcher_front_origin, step_time);
   self rotateto(stretcher_angles, step_time);
+
   self.drone[0] moveto(front_guy_origin, step_time);
   self.drone[0] rotateto(guy_angles, step_time);
+
   self.drone[1] moveto(rear_guy_origin, step_time);
   self.drone[1] rotateto(guy_angles, step_time);
+
   front_angle_dif = adjust_angle(front_angles[1] - guy_angles[1]);
   rear_angle_dif = adjust_angle(rear_angles[1] - guy_angles[1]);
+
   direction = 0;
   if(front_angle_dif > 0)
     direction = 1;
+
   wait step_time;
 }
 
@@ -64,10 +81,13 @@ drone_anim_weight(angle, max_angle, direction, step_time) {
   right_weight = 0;
   left_weight = 0;
   straight_weight = 1;
+
   angle = adjust_angle(angle);
+
   turn = abs(int((angle / max_angle) * 100) / 100);
   if(turn > 1)
     turn = 1;
+
   if(!direction) {
     right_weight = turn;
     straight_weight = 1 - right_weight;
@@ -75,6 +95,7 @@ drone_anim_weight(angle, max_angle, direction, step_time) {
     left_weight = turn;
     straight_weight = 1 - left_weight;
   }
+
   self setAnim(level.stretcher_anim[self.animname]["walk"], straight_weight, step_time, 1.75);
   self setAnim(level.stretcher_anim[self.animname]["right"], right_weight, step_time, 1.75);
   self setAnim(level.stretcher_anim[self.animname]["left"], left_weight, step_time, 1.75);
@@ -92,25 +113,35 @@ follow_path(start_struct) {
     current_angles = start_struct.angles;
   else
     current_angles = self.angles;
+
   current_point = start_struct.origin;
+
   if(!isDefined(self.last_point))
     self.last_point = current_point;
+
   next_struct = getstruct(start_struct.target, "targetname");
   start_struct notify("trigger");
+
   original_origin = start_struct.origin;
+
   rear_data = [];
+
   while(true) {
     data_struct = path_math(current_angles, current_point, next_struct.origin);
+
     rear_struct = spawnStruct();
     rear_struct = data_struct;
     rear_data = array_add(rear_data, rear_struct);
     rear_point = undefined;
+
     current_point = data_struct.next_point;
     current_angles = data_struct.next_angles;
+
     dist = 0;
     index = rear_data.size;
     while(true) {
       index--;
+
       if((dist + rear_data[index].dist) > level.rear_distance || index == 0) {
         vector = rear_data[index].vector;
         remainder = 0 - (level.rear_distance - dist);
@@ -122,9 +153,12 @@ follow_path(start_struct) {
     }
     if(index)
       rear_data = array_remove_first(rear_data);
+
     self move_stretcher(current_point, current_angles, rear_point, rear_angles);
+
     if(!data_struct.goal) {
       next_struct notify("trigger");
+
       if(!isDefined(next_struct.target)) {
         break;
       }
@@ -140,21 +174,30 @@ draw_path(start_struct, line_color, knot_color) {
     current_angles = start_struct.angles;
   else
     current_angles = self.angles;
+
   current_point = start_struct.origin;
+
   next_struct = getstruct(start_struct.target, "targetname");
   start_struct notify("trigger");
+
   original_origin = start_struct.origin;
+
   rear_data = [];
+
   while(true) {
     data_struct = path_math(current_angles, current_point, next_struct.origin);
+
     rear_struct = spawnStruct();
     rear_struct = data_struct;
     rear_data = array_add(rear_data, rear_struct);
     rear_point = undefined;
+
     dist = 0;
     index = rear_data.size;
+
     while(true) {
       index--;
+
       if((dist + rear_data[index].dist) > level.rear_distance || index == 0) {
         vector = rear_data[index].vector;
         remainder = 0 - (level.rear_distance - dist);
@@ -165,11 +208,15 @@ draw_path(start_struct, line_color, knot_color) {
     }
     if(index)
       rear_data = array_remove_first(rear_data);
+
     level thread drawline(current_point, data_struct.next_point, line_color);
     level thread drawline(data_struct.next_point + (0, 0, 32), rear_point + (0, 0, 32), (1, 1, 1));
+
     wait .1;
+
     current_point = data_struct.next_point;
     current_angles = data_struct.next_angles;
+
     if(!data_struct.goal) {
       if(!isDefined(next_struct.target)) {
         break;
@@ -185,42 +232,58 @@ path_math(current_angles, current_point, next_point, main_dist) {
   data_struct = spawnStruct();
   data_struct.goal = false;
   data_struct.previous_angles = current_angles;
+
   curve_speed = .65;
+
   dist = distance(flat_origin(current_point), flat_origin(next_point));
+
   height_dif = next_point[2] - current_point[2];
   next_point = (next_point[0], next_point[1], current_point[2]);
+
   vector = vectornormalize(next_point - current_point);
   next_angles = vectortoangles(vector);
   angle_dif = adjust_angle((vectortoangles(vector) - current_angles)[1]);
+
   angle = level.max_angle;
+
   fraction = 1;
   if(abs(angle_dif))
     fraction = angle / abs(angle_dif);
+
   if(fraction < 1) {
     data_struct.goal = true;
+
     angle_add = angle_dif * fraction;
     next_angles = current_angles + (0, angle_add, 0);
     vector = anglesToForward(next_angles);
     dist = distance(current_point, next_point) * fraction;
     dist = dist * curve_speed;
+
     if(dist > level.step_dist)
       dist = level.step_dist;
+
     next_point = current_point + vector_multiply(vector, dist);
     height_dif = height_dif * (1 - fraction);
   } else {
     if(dist > level.step_dist) {
       fraction = level.step_dist / dist;
+
       dist = level.step_dist;
+
       next_point = current_point + vector_multiply(vector, dist);
       height_dif = height_dif * fraction;
+
       data_struct.goal = true;
     }
   }
+
   next_point = next_point + (0, 0, height_dif);
+
   data_struct.dist = dist;
   data_struct.vector = vector;
   data_struct.next_point = next_point;
   data_struct.next_angles = next_angles;
+
   return data_struct;
 }
 
@@ -267,23 +330,26 @@ array_remove_first(array) {
   for(i = 1; i < array.size; i++) {
     new_array[new_array.size] = array[i];
   }
+
   return new_array;
 }
 
 #using_animtree("stretcher");
-
 spawn_stretcher(point, start_angles) {
   ground = ground_origin(point);
   ent = spawn("script_origin", ground);
   anim_ent = spawn("script_origin", ground - (44, 0, 0));
   anim_ent.angles = (0, 0, 0);
+
   model = spawn("script_model", ground - (44, 0, 0));
   model setModel("vehicle_stretcher");
   model UseAnimTree(#animtree);
   model.animname = "stretcher";
+
   stretcher_clip = getent("stretcher_clip", "targetname");
   stretcher_clip.origin = model.origin;
   stretcher_clip linkto(model);
+
   ent.stretcher = model;
   ent.stretcher linkto(ent);
   anim_ent linkto(ent);
@@ -298,16 +364,20 @@ create_drone(ai, animname) {
   model = ai.model;
   name = ai.name;
   weapon = ai.weapon;
+
   drone = spawn("script_model", ai.origin);
   drone setModel(model);
   drone hide();
   drone.angles = flat_angle(ai.angles);
   drone.animname = animname;
+
   drone linkto(ai);
+
   if(isDefined(weapon)) {
     weapon_model = getweaponmodel(weapon);
     drone attach(weapon_model, "TAG_WEAPON_RIGHT");
   }
+
   drone UseAnimTree(#animtree);
   return drone;
 }
@@ -317,9 +387,11 @@ setup_stretcher_anim() {
   level.stretcher_anim["stretcher"]["walk"] = % stretcher_walk_Forward;
   level.stretcher_anim["stretcher"]["pickup"] = % stretcher_pickup;
   level.stretcher_anim["stretcher"]["drop"] = % stretcher_drop;
+
   level.stretcher_anim["front"]["walk"] = % stretcher_F_walk_Forward;
   level.stretcher_anim["front"]["right"] = % stretcher_F_walk_Right;
   level.stretcher_anim["front"]["left"] = % stretcher_F_walk_Left;
+
   level.stretcher_anim["rear"]["walk"] = % stretcher_R_walk_Forward;
   level.stretcher_anim["rear"]["right"] = % stretcher_R_walk_Right;
   level.stretcher_anim["rear"]["left"] = % stretcher_R_walk_Left;
@@ -350,48 +422,63 @@ stop_anim_loop(animation) {
 }
 
 #using_animtree("generic_human");
-
 drop_stretcher() {
   self.drone[0] delete();
   self.drone[1] delete();
+
   self thaw(self.stretcher_ai[0]);
   self thaw(self.stretcher_ai[1]);
+
   self.a.ent thread maps\_anim::anim_single(self.stretcher_ai, "drop");
   self.stretcher stretcher_anim_single("drop");
+
   self.stretcher_ai[0] stop_magic_bullet_shield();
   self.stretcher_ai[1] stop_magic_bullet_shield();
+
   if(self.stretcher_ai[0].script_noteworthy == "stretcher")
     self.stretcher_ai[0].script_noteworthy = undefined;
   if(self.stretcher_ai[1].script_noteworthy == "stretcher")
     self.stretcher_ai[1].script_noteworthy = undefined;
+
   self notify("stop_badplace");
+
   self notify("dropped");
 }
 
 pickup_stretcher(ai, reach) {
   self.stretcher_ai = ai;
+
   self.stretcher_ai[0] thread magic_bullet_shield();
   self.stretcher_ai[1] thread magic_bullet_shield();
+
   if(!isDefined(self.stretcher_ai[0].script_noteworthy))
     self.stretcher_ai[0].script_noteworthy = "stretcher";
   if(!isDefined(self.stretcher_ai[1].script_noteworthy))
     self.stretcher_ai[1].script_noteworthy = "stretcher";
+
   self.stretcher_ai[0].animname = "front_ai";
   self.stretcher_ai[1].animname = "rear_ai";
+
   if(!isDefined(reach) || reach) {
     self.a.ent maps\_anim::anim_reach_idle(self.stretcher_ai, "pickup", "pickup_idle");
   }
+
   self.drone[0] = create_drone(self.stretcher_ai[0], "front");
   self.drone[1] = create_drone(self.stretcher_ai[1], "rear");
+
   self.a.ent thread maps\_anim::anim_single(self.stretcher_ai, "pickup");
   self.stretcher stretcher_anim_single("pickup");
+
   self.drone[0] show();
   self.drone[1] show();
   self.drone[0] unlink();
   self.drone[1] unlink();
+
   self thread freeze(self.stretcher_ai[0]);
   self thread freeze(self.stretcher_ai[1]);
+
   self thread moving_badpath();
+
   self notify("pickedup");
 }
 
@@ -415,6 +502,7 @@ thaw(ai) {
 draw_structs(struct) {
   while(true) {
     level thread drawline(struct.origin, struct.origin + (0, 0, -32), (1, 0, 0));
+
     if(!isDefined(struct.target)) {
       break;
     }
@@ -425,6 +513,7 @@ draw_structs(struct) {
 drawline(p1, p2, color, show_time) {
   if(!isDefined(show_time))
     show_time = 100;
+
   show_time = gettime() + (show_time * 1000);
   while(gettime() < show_time) {
     line(p1, p2, color);
@@ -435,10 +524,13 @@ drawline(p1, p2, color, show_time) {
 print3Dmessage(info_origin, message, show_time, color, offset, scale) {
   if(!isDefined(color))
     color = (0.5, 1, 0.5);
+
   if(!isDefined(offset))
     offset = (0, 0, 56);
+
   if(!isDefined(scale))
     scale = 6;
+
   show_time = gettime() + (show_time * 1000);
   while(gettime() < show_time) {
     print3d(info_origin + offset, message, color, 1, scale);

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\pel2_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_music;
@@ -25,28 +25,36 @@ footsteps() {
   clientscripts\_utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   clientscripts\_utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 precache_util_fx() {}
+
 precache_scripted_fx() {
   level._effect["character_fire_pain_sm_1sec"] = loadfx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = loadfx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = loadfx("env/fire/fx_fire_player_torso");
+
   level._effectType["orig_mortar_airfield_sw"] = "mortar";
   level._effect["orig_mortar_airfield_sw"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
+
   level._effectType["orig_mortar_airfield_nw"] = "mortar";
   level._effect["orig_mortar_airfield_nw"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
+
   level._effectType["orig_mortar_airfield_ne"] = "mortar";
   level._effect["orig_mortar_airfield_ne"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
+
   level._effectType["orig_mortar_airfield_se"] = "mortar";
   level._effect["orig_mortar_airfield_se"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
+
   level._effectType["orig_mortar_airfield_canned"] = "mortar";
   level._effect["orig_mortar_airfield_canned"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
   level._explosion_stopNotify["orig_mortar_airfield_canned"] = "stop_mortar_airfield_canned";
+
   level._effectType["orig_mortar_airfield_ambient_canned"] = "mortar";
   level._effect["orig_mortar_airfield_ambient_canned"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
   level._explosion_stopNotify["orig_mortar_airfield_ambient_canned"] = "stop_mortar_airfield_ambient_canned";
+
   level._effectType["dirt_mortar"] = "mortar";
   level._effect["dirt_mortar"] = loadfx("explosions/artilleryExp_dirt_brown_test");
+
   level._effect["truck_hit_by_shell"] = loadfx("maps/pel2/fx_exp_tank_to_truck");
   level._effect["truck_slide_dust"] = loadfx("maps/pel2/fx_truck_slide_dust");
   level._effect["arty_dirt"] = loadfx("explosions/fx_mortarExp_dirt_airfield");
@@ -56,25 +64,32 @@ precache_scripted_fx() {
   level._effect["telepole_plane_crash"] = loadfx("maps/fly/fx_exp_kamikaze");
   level._effect["telepole_spark"] = loadfx("maps/pel2/fx_exp_telepole_spark");
   level._effect["target_smoke"] = loadfx("env/smoke/fx_smoke_ground_marker_green_w");
+
   level._effect["birds_fly"] = loadfx("maps/pel2/fx_birds_tree_panic");
   level._effect["flamer_explosion"] = loadfx("explosions/fx_flamethrower_char_explosion");
   level._effect["large_vehicle_explosion"] = loadfx("explosions/large_vehicle_explosion");
   level._effect["bomber_crash_treetop"] = loadfx("maps/pel2/fx_bomber_tree_clip");
+
   level._effect["sniper_leaf_loop"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf01");
   level._effect["sniper_leaf_canned"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf02");
+
   level._effect["admin_wall_explode"] = loadfx("system_elements/fx_null");
   level.scr_sound["admin_wall_explode"] = "imp_stone_chunk";
+
   level._effect["admin_sandbag_explode_large"] = loadfx("maps/pel2/fx_sandbag_explosion_01_lg");
   level._effect["admin_sandbag_explode_small"] = loadfx("maps/pel2/fx_sandbag_explosion_02_sm");
+
   level._effect["flamer_gunned_down"] = loadfx("maps/pel2/fx_flamer_gunned_down");
   level._effect["bunker_chain_reaction"] = loadfx("destructibles/fx_dest_tank_panzer_tread_lf_grind");
+
   level._effect["sherman_camo_smoke"] = loadfx("vehicle/vfire/fx_tank_sherman_smldr");
   level._effect["type97_smoke"] = loadfx("vehicle/vfire/fx_tank_type97_smldr");
+
   level._effect["bomber_wing_hit"] = loadfx("maps/pel2/fx_bomber_dmg_trail");
   level._effect["fighter_wing_hit"] = loadfx("maps/pel2/fx_fighter_dmg_trail");
+
   level._effect["flesh_hit"] = loadFX("impacts/flesh_hit");
 }
-
 precache_createfx_fx() {
   level._effect["insect_swarm"] = loadfx("bio/insects/fx_insects_ambient");
   level._effect["seagulls_circling"] = loadfx("bio/animals/fx_seagulls_circling");
@@ -87,12 +102,14 @@ precache_createfx_fx() {
   level._effect["sand_lg_w"] = loadfx("env/dirt/fx_sand_blowing_lg_w");
   level._effect["sand_sm"] = loadfx("env/dirt/fx_sand_blowing_sm");
   level._effect["a_smokebank_dark_lg"] = loadfx("maps/pel2/fx_smokebank_dark_lg_pel2");
+
   level._effect["a_fire_brush_smldr_md"] = loadfx("maps/pel2/fx_fire_brush_smldr_md_pel2");
   level._effect["a_fire_debris_lg_dir"] = loadfx("maps/pel2/fx_fire_debris_lg_dir_pel2");
   level._effect["a_fire_oil_lg"] = loadfx("env/fire/fx_fire_oil_lg");
   level._effect["a_fire_oil_md"] = loadfx("env/fire/fx_fire_oil_md");
   level._effect["a_fire_thick_lg"] = loadfx("maps/pel2/fx_fire_thick_smoke_pel2");
   level._effect["truck_fire"] = loadfx("maps/pel2/fx_truck_fire_med");
+
   level._effect["a_dust_kickup_lg"] = loadfx("env/dirt/fx_dust_kickup_lg");
   level._effect["a_dust_kickup_sm"] = loadfx("env/dirt/fx_dust_kickup_sm");
   level._effect["a_smoke_crater"] = loadfx("env/smoke/fx_smoke_crater_w");
@@ -119,6 +136,7 @@ precache_createfx_fx() {
   level._effect["a_smk_smldr_corsair"] = loadfx("maps/pel2/fx_smk_smldr_corsair");
   level._effect["a_wtr_splash_debris_sm"] = loadfx("env/water/fx_wtr_splash_debris_sm");
   level._effect["a_wtr_splash_debris_md"] = loadfx("env/water/fx_wtr_splash_debris_md");
+
   level._effect["a_bunker_window_flame"] = loadfx("maps/pel2/fx_bunker_window_flame");
   level._effect["a_exp_bunker_door"] = loadfx("maps/pel2/fx_exp_bunker_door");
   level._effect["a_exp_corsair_tower_crash"] = loadfx("maps/pel2/fx_exp_corsair_tower_crash");
@@ -126,41 +144,53 @@ precache_createfx_fx() {
 
 ridge_flashes() {
   origs = getstructarray("orig_ridge_flash", "targetname");
+
   last_rand = 0;
   rand = 0;
+
   while(1) {
     while(rand == last_rand) {
       rand = randomint(origs.size);
       realwait(0.05);
     }
+
     last_rand = rand;
+
     players = getlocalplayers();
+
     for(i = 0; i < players.size; i++) {
       playFX(i, level._effect["fx_artilleryExp_ridge"], origs[rand].origin);
     }
+
     realwait(randomfloatrange(0.45, 1.75));
   }
 }
 
 airfield_mortars() {
   level waittill("air_mortars");
+
   level thread ridge_flashes();
+
   clientscripts\_mortar::set_mortar_delays("orig_mortar_airfield_sw", 1, 4, 0.5, 1.25);
   clientscripts\_mortar::set_mortar_range("orig_mortar_airfield_sw", 200, 15000);
   clientscripts\_mortar::set_mortar_quake("orig_mortar_airfield_sw", 0.32, 3, 1800);
   clientscripts\_mortar::set_mortar_dust("orig_mortar_airfield_sw", "bunker_dust", 512);
+
   clientscripts\_mortar::set_mortar_delays("orig_mortar_airfield_nw", 1, 4, 0.5, 1.25);
   clientscripts\_mortar::set_mortar_range("orig_mortar_airfield_nw", 200, 15000);
   clientscripts\_mortar::set_mortar_quake("orig_mortar_airfield_nw", 0.32, 3, 1800);
   clientscripts\_mortar::set_mortar_dust("orig_mortar_airfield_nw", "bunker_dust", 512);
+
   clientscripts\_mortar::set_mortar_delays("orig_mortar_airfield_ne", 1, 4, 0.5, 1.25);
   clientscripts\_mortar::set_mortar_range("orig_mortar_airfield_ne", 200, 15000);
   clientscripts\_mortar::set_mortar_quake("orig_mortar_airfield_ne", 0.32, 3, 1800);
   clientscripts\_mortar::set_mortar_dust("orig_mortar_airfield_ne", "bunker_dust", 512);
+
   clientscripts\_mortar::set_mortar_delays("orig_mortar_airfield_se", 1, 4, 0.5, 1.25);
   clientscripts\_mortar::set_mortar_range("orig_mortar_airfield_se", 200, 15000);
   clientscripts\_mortar::set_mortar_quake("orig_mortar_airfield_se", 0.32, 3, 1800);
   clientscripts\_mortar::set_mortar_dust("orig_mortar_airfield_se", "bunker_dust", 512);
+
   level thread clientscripts\_mortar::mortar_loop("orig_mortar_airfield_sw");
   level thread clientscripts\_mortar::mortar_loop("orig_mortar_airfield_nw");
   level thread clientscripts\_mortar::mortar_loop("orig_mortar_airfield_ne");
@@ -170,7 +200,9 @@ airfield_mortars() {
 ambient_25_monitor_thread() {
   level endon("save_restore");
   self endon("entityshutdown");
+
   notifystring = "25s" + self getentitynumber();
+
   level waittill(notifystring);
   level._25stopped[self getentitynumber()] = 1;
 }
@@ -185,18 +217,23 @@ ambient_25_thread(clientNum) {
     return;
   }
   println("*** Clientside AA thread " + num + " going ahead.");
+
   level endon("save_restore");
   self endon("entityshutdown");
+
   while(!level._ambient_aa_started) {
     realwait(0.2);
   }
+
   println("*** Clientside AA thread " + num + " starts firing.");
+
   self thread ambient_25_monitor_thread();
   self thread clientscripts\_triple25::triple25_Shoot();
 }
 
 ambient_25s() {
   level._25stopped = [];
+
   level._ambient_aa_started = false;
   level waittill("start25s");
   println("Client starts AAs");
@@ -206,15 +243,21 @@ ambient_25s() {
 main() {
   clientscripts\createfx\pel2_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   precache_util_fx();
+
   footsteps();
+
   precache_createfx_fx();
+
   level._customVehicleCB = [];
   level._customVehicleCB["triple25"] = ::ambient_25_thread;
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();
   }
+
   level thread airfield_mortars();
   level thread ambient_25s();
 }

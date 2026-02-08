@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pby_fly_ms_guys.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #using_animtree("generic_human");
@@ -10,6 +10,7 @@ ms_guys_init() {
   level.drone_anims["stand"]["idle"] = % drone_stand_idle;
   level.drone_anims["stand"]["run"] = % drone_stand_run;
   level.drone_anims["stand"]["reload"] = % exposed_crouch_reload;
+
   level.drone_anims["stand"]["death"] = [];
   level.drone_anims["stand"]["death"][0] = % drone_stand_death;
   level.drone_anims["stand"]["death"][1] = % death_explosion_up10;
@@ -17,6 +18,7 @@ ms_guys_init() {
   level.drone_anims["stand"]["death"][3] = % death_explosion_forward13;
   level.drone_anims["stand"]["death"][4] = % death_explosion_left11;
   level.drone_anims["stand"]["death"][5] = % death_explosion_right13;
+
   level.drone_anims["stand"]["death"][6] = % ch_pby_explosion_back;
   level.drone_anims["stand"]["death"][7] = % ch_pby_explosion_front;
   level.drone_anims["stand"]["death"][8] = % ch_pby_explosion_right;
@@ -27,36 +29,45 @@ ms_soldier_deaththread() {
   if(!isDefined(level.drone_death_queue)) {
     ASSERT(false, "The drone death manager has not been inited");
   }
+
   drone = self;
   damage_type = self;
   damage_ori = self;
   death_index = 0;
+
   while(isDefined(drone)) {
     drone waittill("damage", amount, attacker, damage_dir, damage_ori, damage_type);
     if(drone.health <= 0) {
       break;
     }
   }
+
   println(damage_type);
+
   if(damage_type == "MOD_PROJECTILE" || damage_type == "MOD_PROJECTILE_SPLASH") {
     drone.special_death_fx = "drone_burst";
   }
+
   if(damage_type == "MOD_EXPLOSIVE") {
     ref_point = [];
     ref_point[0] = drone.origin + (anglesToForward(drone.angles) * 5);
     ref_point[1] = drone.origin + (anglesToForward(drone.angles) * -5);
     ref_point[2] = drone.origin + (AnglesToRight(drone.angles) * -5);
     ref_point[3] = drone.origin + (AnglesToRight(drone.angles) * 5);
+
     closest_point = ref_point[0];
     index = 0;
+
     for(i = 1; i < ref_point.size; i++) {
       if(Distance(ref_point[i], damage_ori) < Distance(closest_point, damage_ori)) {
         closest_point = ref_point[i];
         index = i;
       }
     }
+
     new_point = 0;
     trace = 0;
+
     switch (index) {
       case 0:
         new_point = drone.origin + (anglesToForward(drone.angles) * 264);
@@ -76,6 +87,7 @@ ms_soldier_deaththread() {
         break;
     }
     trace = bulletTrace(new_point, new_point - (0, 0, 2000), true, undefined);
+
     if(trace["position"][2] < (new_point[2] - 32)) {
       switch (index) {
         case 0:
@@ -92,6 +104,7 @@ ms_soldier_deaththread() {
           break;
       }
     }
+
     switch (index) {
       case 0:
         death_index = 2;
@@ -118,20 +131,25 @@ ms_soldier_deaththread() {
         death_index = 9;
         break;
     }
+
     if(isDefined(drone.combust)) {
       drone thread torch_ai(0.1);
     }
   } else {
     death_index = 0;
   }
+
   drone notify("death");
   drone stopAnimScripted();
+
   if(isDefined(drone.special_death_fx)) {
     drone.special_death_fx = "drone_burst";
     playFXOnTag(level._effect[drone.special_death_fx], drone, "J_SpineLower");
   }
+
   drone.need_notetrack = true;
   drone maps\_drone::drone_play_anim(level.drone_anims["stand"]["death"][death_index]);
+
   drone add_me_to_the_death_queue();
 }
 
@@ -143,38 +161,47 @@ add_me_to_the_death_queue() {
 init_drone_manager() {
   MAX_DEAD_DRONES = 10;
   level.drone_death_queue = [];
+
   while(1) {
     level waittill("drone_manager_process");
+
     if(level.drone_death_queue.size > MAX_DEAD_DRONES) {
       while(level.drone_death_queue.size > MAX_DEAD_DRONES) {
         removed_guy = level.drone_death_queue[0];
         new_drone_queue = [];
+
         for(i = 1; i < (level.drone_death_queue.size); i++) {
           new_drone_queue[i - 1] = level.drone_death_queue[i];
         }
+
         if(isDefined(removed_guy)) {
           removed_guy Delete();
         }
         level.drone_death_queue = new_drone_queue;
       }
     }
+
   }
 }
-
 ms_soldier_run_and_rail(spawner_name, path_name, cover_name, amount_of_cover) {
   spawner = GetStruct(spawner_name, "targetname");
   path = GetStruct(path_name, "targetname");
   cover_array = [];
+
   for(i = 0; i < amount_of_cover; i++) {
     cover_array[i] = GetStruct(cover_name + "_" + i, "targetname");
   }
+
   drones_spawned = [];
+
   for(i = 0; i < cover_array.size; i++) {
     drones_spawned[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", spawner);
     drones_spawned[i] maps\_drone::drone_move_to_ent(path);
     drones_spawned[i] thread ms_soldier_cover_shoot(cover_array[i], "goal");
+
     wait(1);
   }
+
   return drones_spawned;
 }
 
@@ -182,8 +209,10 @@ ms_soldier_cover_shoot(cover_ent, notify_str) {
   if(isDefined(notify_str)) {
     self waittill(notify_str);
   }
+
   self maps\_drone::drone_move_to_ent(cover_ent);
   self waittill("goal");
+
   self thread maps\_drone::drone_fire_at_target(level.plane_a);
 }
 
@@ -198,6 +227,7 @@ ms_soldier_triple_25_add_gunners() {
   offset_up = 10;
   offset_right = 34;
   offset_forward = 0;
+
   temp = self GetTagOrigin("tag_gunner_turret1");
   temp_angles = self GetTagAngles("tag_gunner_turret1");
   temp = temp + (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right) + (AnglesToUp(temp_angles) * offset_up);
@@ -210,6 +240,7 @@ ms_soldier_triple_25_add_gunners() {
   gunner_tower_right LinkTo(self, "tag_gunner_turret1");
   gunner_tower_right thread maps\_anim::anim_loop_solo(gunner_tower_right, "fire_loop");
   gunner_tower_right thread reset_position(temp);
+
   temp = self GetTagOrigin("tag_gunner_turret1");
   temp_angles = self GetTagAngles("tag_gunner_turret1");
   temp_offset = (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right * -1) + (AnglesToUp(temp_angles) * offset_up);
@@ -223,6 +254,7 @@ ms_soldier_triple_25_add_gunners() {
   gunner_tower_left LinkTo(self, "tag_gunner_turret1");
   gunner_tower_left thread maps\_anim::anim_loop_solo(gunner_tower_left, "fire_loop");
   gunner_tower_left thread reset_position(temp);
+
   temp = self GetTagOrigin("tag_gunner_turret2");
   temp_angles = self GetTagAngles("tag_gunner_turret2");
   temp = temp + (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right) + (AnglesToUp(temp_angles) * offset_up);
@@ -235,6 +267,7 @@ ms_soldier_triple_25_add_gunners() {
   gunner_deck_right LinkTo(self, "tag_gunner_turret2");
   gunner_deck_right thread maps\_anim::anim_loop_solo(gunner_deck_right, "fire_loop");
   gunner_deck_right thread reset_position(temp);
+
   temp = self GetTagOrigin("tag_gunner_turret2");
   temp_angles = self GetTagAngles("tag_gunner_turret2");
   temp = temp + (anglesToForward(temp_angles) * offset_forward) + (AnglesToRight(temp_angles) * offset_right * -1) + (AnglesToUp(temp_angles) * offset_up);
@@ -251,6 +284,7 @@ ms_soldier_triple_25_add_gunners() {
 
 reset_position(position) {
   self endon("death");
+
   while(1) {
     self.origin = position;
     wait(0.05);
@@ -263,6 +297,7 @@ kill_all_ms_guys() {
   for(i = 0; i < drones.size; i++) {
     if(!isDefined(drones[i].driver)) {
       drones[i] DoDamage(1000, drones[i].origin);
+
       if(isDefined(drones[i].boat)) {
         if(!isDefined(drones[i].script_string)) {
           drones[i] LinkTo(level.boats[drones[i].boat], "aft_break_jnt");
@@ -285,7 +320,6 @@ delete_all_ms_guys() {
     }
   }
 }
-
 torch_ai(delay) {
   tagArray = [];
   tagArray[tagArray.size] = "J_Wrist_RI";
@@ -296,12 +330,15 @@ torch_ai(delay) {
   tagArray[tagArray.size] = "J_Knee_LE";
   tagArray[tagArray.size] = "J_Ankle_RI";
   tagArray[tagArray.size] = "J_Ankle_LE";
+
   tagArray = maps\_utility::array_randomize(tagArray);
   for(i = 0; i < 3; i++) {
     playFXOnTag(level._effect["character_fire_death_sm"], self, tagArray[i]);
+
     if(isDefined(delay)) {
       wait(delay);
     }
   }
+
   playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
 }

@@ -1,14 +1,14 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_fx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include maps\_createfx;
 #include common_scripts\Utility;
 
 print_org(fxcommand, fxId, fxPos, waittime) {
-  if(getdvar("debug") == "1") {
+  if(getDvar("debug") == "1") {
     println("{");
     println("\"origin\" \"" + fxPos[0] + " " + fxPos[1] + " " + fxPos[2] + "\"");
     println("\"classname\" \"script_model\"");
@@ -24,8 +24,10 @@ OneShotfx(fxId, fxPos, waittime, fxPos2) {}
 
 OneShotfxthread() {
   maps\_spawner::waitframe();
+
   if(self.v["delay"] > 0)
     wait self.v["delay"];
+
   create_triggerfx();
 }
 
@@ -44,6 +46,7 @@ exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound,
       ent.v["angles"] = vectortoangles(fxPos2 - fxPos);
     ent.v["delay"] = waittime;
     ent.v["exploder"] = num;
+
     return;
   }
   fx = spawn("script_origin", (0, 0, 0));
@@ -52,9 +55,11 @@ exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound,
   fx.script_exploder = num;
   fx.script_fxid = fxId;
   fx.script_delay = waittime;
+
   fx.script_firefx = fireFx;
   fx.script_firefxdelay = (fireFxDelay);
   fx.script_firefxsound = fireFxSound;
+
   fx.script_sound = fxSound;
   fx.script_earthquake = fxQuake;
   fx.script_damage = (fxDamage);
@@ -65,12 +70,15 @@ exploderfx(num, fxId, fxPos, waittime, fxPos2, fireFx, fireFxDelay, fireFxSound,
   fx.script_delay_min = (delay_min);
   fx.script_delay_max = (delay_max);
   fx.script_exploder_group = exploder_group;
+
   forward = anglesToForward(fx.angles);
   forward = vectorScale(forward, 150);
   fx.targetPos = fxPos + forward;
+
   if(!isDefined(level._script_exploders))
     level._script_exploders = [];
   level._script_exploders[level._script_exploders.size] = fx;
+
   maps\_createfx::createfx_showOrigin(fxid, fxPos, waittime, fxpos2, "exploderfx", fx, undefined, fireFx, fireFxDelay, fireFxSound, fxSound, fxQuake, fxDamage, soundalias, repeat, delay_min, delay_max, damage_radius, fireFxTimeout);
 }
 
@@ -119,18 +127,24 @@ stop_loopsound() {
 
 loopfxthread() {
   maps\_spawner::waitframe();
+
   if(isDefined(self.fxStart))
     level waittill("start fx" + self.fxStart);
+
   while(1) {
     create_looper();
+
     if(isDefined(self.timeout))
       thread loopfxStop(self.timeout);
+
     if(isDefined(self.fxStop))
       level waittill("stop fx" + self.fxStop);
     else
       return;
+
     if(isDefined(self.looper))
       self.looper delete();
+
     if(isDefined(self.fxStart))
       level waittill("start fx" + self.fxStart);
     else
@@ -174,6 +188,7 @@ loopSound(sound, Pos, waittime) {
 
 loopSoundthread(sound, pos, waittime) {
   org = spawn("script_origin", (pos));
+
   org.origin = pos;
   org playLoopSound(sound);
 }
@@ -185,32 +200,40 @@ gunfireloopfx(fxId, fxPos, shotsMin, shotsMax, shotdelayMin, shotdelayMax, betwe
 gunfireloopfxthread(fxId, fxPos, shotsMin, shotsMax, shotdelayMin, shotdelayMax, betweenSetsMin, betweenSetsMax) {
   level endon("stop all gunfireloopfx");
   maps\_spawner::waitframe();
+
   if(betweenSetsMax < betweenSetsMin) {
     temp = betweenSetsMax;
     betweenSetsMax = betweenSetsMin;
     betweenSetsMin = temp;
   }
+
   betweenSetsBase = betweenSetsMin;
   betweenSetsRange = betweenSetsMax - betweenSetsMin;
+
   if(shotdelayMax < shotdelayMin) {
     temp = shotdelayMax;
     shotdelayMax = shotdelayMin;
     shotdelayMin = temp;
   }
+
   shotdelayBase = shotdelayMin;
   shotdelayRange = shotdelayMax - shotdelayMin;
+
   if(shotsMax < shotsMin) {
     temp = shotsMax;
     shotsMax = shotsMin;
     shotsMin = temp;
   }
+
   shotsBase = shotsMin;
   shotsRange = shotsMax - shotsMin;
+
   fxEnt = spawnFx_wrapper(fxId, fxPos);
   for(;;) {
     shotnum = shotsBase + randomint(shotsRange);
     for(i = 0; i < shotnum; i++) {
       triggerFx(fxEnt);
+
       wait(shotdelayBase + randomfloat(shotdelayRange));
     }
     wait(betweenSetsBase + randomfloat(betweenSetsRange));
@@ -224,29 +247,38 @@ gunfireloopfxVec(fxId, fxPos, fxPos2, shotsMin, shotsMax, shotdelayMin, shotdela
 gunfireloopfxVecthread(fxId, fxPos, fxPos2, shotsMin, shotsMax, shotdelayMin, shotdelayMax, betweenSetsMin, betweenSetsMax) {
   level endon("stop all gunfireloopfx");
   maps\_spawner::waitframe();
+
   if(betweenSetsMax < betweenSetsMin) {
     temp = betweenSetsMax;
     betweenSetsMax = betweenSetsMin;
     betweenSetsMin = temp;
   }
+
   betweenSetsBase = betweenSetsMin;
   betweenSetsRange = betweenSetsMax - betweenSetsMin;
+
   if(shotdelayMax < shotdelayMin) {
     temp = shotdelayMax;
     shotdelayMax = shotdelayMin;
     shotdelayMin = temp;
   }
+
   shotdelayBase = shotdelayMin;
   shotdelayRange = shotdelayMax - shotdelayMin;
+
   if(shotsMax < shotsMin) {
     temp = shotsMax;
     shotsMax = shotsMin;
     shotsMin = temp;
   }
+
   shotsBase = shotsMin;
   shotsRange = shotsMax - shotsMin;
+
   fxPos2 = vectornormalize(fxPos2 - fxPos);
+
   fxEnt = spawnFx_wrapper(fxId, fxPos, fxPos2);
+
   for(;;) {
     shotnum = shotsBase + randomint(shotsRange);
     for(i = 0; i < int(shotnum / level.fxfireloopmod); i++) {
@@ -274,24 +306,29 @@ setup_fx() {
       self thread burnville_paratrooper_hack();
       return;
     }
+
   org = undefined;
   if(isDefined(self.target)) {
     ent = getent(self.target, "targetname");
     if(isDefined(ent))
       org = ent.origin;
   }
+
   fxStart = undefined;
   if(isDefined(self.script_fxstart))
     fxStart = self.script_fxstart;
+
   fxStop = undefined;
   if(isDefined(self.script_fxstop))
     fxStop = self.script_fxstop;
+
   if(self.script_fxcommand == "OneShotfx")
     OneShotfx(self.script_fxId, self.origin, self.script_delay, org);
   if(self.script_fxcommand == "loopfx")
     loopfx(self.script_fxId, self.origin, self.script_delay, org, fxStart, fxStop);
   if(self.script_fxcommand == "loopsound")
     loopsound(self.script_fxId, self.origin, self.script_delay);
+
   self delete();
 }
 
@@ -299,6 +336,7 @@ burnville_paratrooper_hack() {
   normal = (0, 0, self.angles[1]);
   id = level._effect[self.script_fxId];
   origin = self.origin;
+
   wait 1;
   level thread burnville_paratrooper_hack_loop(normal, origin, id);
   self delete();
@@ -317,14 +355,17 @@ script_print_fx() {
     self delete();
     return;
   }
+
   if(isDefined(self.target))
     org = getent(self.target).origin;
   else
     org = "undefined";
   if(self.script_fxcommand == "OneShotfx")
     println("maps\_fx::OneShotfx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+
   if(self.script_fxcommand == "loopfx")
     println("maps\_fx::LoopFx(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
+
   if(self.script_fxcommand == "loopsound")
     println("maps\_fx::LoopSound(\"" + self.script_fxid + "\", " + self.origin + ", " + self.script_delay + ", " + org + ");");
 }
@@ -375,9 +416,11 @@ rainLoop(hardRain, lightRain) {
   blend = spawn("sound_blend", (0.0, 0.0, 0.0));
   blend.origin = self.origin;
   self thread blendDelete(blend);
+
   blend2 = spawn("sound_blend", (0.0, 0.0, 0.0));
   blend2.origin = self.origin;
   self thread blendDelete(blend2);
+
   blend setSoundBlend(lightRain + "_null", lightRain, 0);
   blend2 setSoundBlend(hardRain + "_null", hardRain, 1);
   rain = "hard";
@@ -387,6 +430,7 @@ rainLoop(hardRain, lightRain) {
     blendTime *= 20;
     assert(change == "hard" || change == "light" || change == "none");
     assert(blendtime > 0);
+
     if(change == "hard") {
       if(rain == "none") {
         blendTime *= 0.5;
@@ -436,6 +480,7 @@ rainLoop(hardRain, lightRain) {
         }
       }
     }
+
     rain = change;
   }
 }
@@ -444,9 +489,9 @@ blendDelete(blend) {
   self waittill("death");
   blend delete();
 }
-
 spawnFX_wrapper(fx_id, origin, forward, up) {
   assertEx(isDefined(level._effect[fx_id]), "Missing level._effect[\"" + fx_id + "\"]. You did not setup the fx before calling it in createFx.");
+
   fx_object = SpawnFx(level._effect[fx_id], origin, forward, up);
   return fx_object;
 }

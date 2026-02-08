@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\see2_sound.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_anim;
 #include maps\_utility;
@@ -16,7 +16,6 @@ see2_playSound(anime, animname) {
     println("see2_playSound " + level.scr_sound[anime][animname]);
   }
 }
-
 see2_playAudio(soundAlias) {
   new_string = "";
   name = "";
@@ -24,6 +23,7 @@ see2_playAudio(soundAlias) {
     for(i = 6; i < soundAlias.size; i++) {
       new_string = new_string + soundAlias[i];
     }
+
     iprintln(name + new_string);
     println("^3TEMP DIALOGUE - " + new_string);
     wait(2);
@@ -35,15 +35,16 @@ see2_playAudio(soundAlias) {
     println("see2_PlayAudio : " + soundAlias + " done.");
   }
 }
-
 see2_handleLineQueue() {
   level endon("kill the audio queue");
+
   new_array = [];
   while(1) {
     if(level.line_queue.size == 0) {
       wait(0.05);
       continue;
     }
+
     see2_playAudio(level.line_queue[0]);
     println("see2_handleLineQueue : Play audio " + level.line_queue[0]);
     new_array = [];
@@ -53,7 +54,6 @@ see2_handleLineQueue() {
     level.line_queue = new_array;
   }
 }
-
 see2_makeRadioBreaks(flag) {
   if(!flag(flag)) {
     see2_playRadioStop();
@@ -61,35 +61,38 @@ see2_makeRadioBreaks(flag) {
     see2_playRadioStart();
   }
 }
-
 see2_playRadioStart() {}
-
 see2_playRadioStop() {}
-
 level_intro_announcements(endon_signal, complete_signal, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   see2_playRadioStart();
   see2_playSound("commissar", "intro1");
+
   see2_playSound("commissar", "intro2");
+
   see2_playSound("commissar", "intro3");
+
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 first_88_obj(endon_signal, complete_signal, destroyed_first_88, arg2, arg3, arg4, arg5, arg6, arg7) {
   setmusicstate("FIRST_FIGHT");
+
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   if(flag(destroyed_first_88)) {
     return;
   }
   see2_playRadioStart();
   see2_playSound("reznov", "first_88");
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 second_88_obj(endon_signal, complete_signal, second_88_in_sights, destroyed_second_88, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
@@ -98,39 +101,53 @@ second_88_obj(endon_signal, complete_signal, second_88_in_sights, destroyed_seco
   }
   see2_playRadioStart();
   see2_playSound("reznov", "second_88");
+
   see2_makeRadioBreaks(second_88_in_sights);
+
   if(!flag(destroyed_second_88)) {
     see2_playSound("reznov", "second_88_fire");
     see2_playRadioStop();
   }
+
   level notify(complete_signal);
 }
-
 flamethrower_tutorial(endon_signal, complete_signal, flame_on_success, ads_success, flamethrower_prox, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] thread do_hud_for_ft_tut_by_client(endon_signal, complete_signal);
   }
+
   level thread cleanup_ft_tut_hud(endon_signal, complete_signal);
+
   see2_playRadioStart();
   see2_playSound("reznov", "flame_tip");
+
   see2_makeRadioBreaks(flame_on_success);
+
   see2_playSound("reznov", "flame_success");
+
   see2_makeRadioBreaks(ads_success);
+
   see2_playSound("reznov", "ads_success");
+
   see2_makeRadioBreaks(flamethrower_prox);
+
   see2_playSound("reznov", "flame_prompt");
+
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 cleanup_ft_tut_hud(endon_signal, complete_signal) {
   level waittill_either(endon_signal, complete_signal);
+
   if(!isDefined(level.hint_huds)) {
     return;
   }
+
   for(i = 0; i < get_players().size; i++) {
     level.hint_huds[i].alpha = 0;
     level.hint_huds[i] setText("");
@@ -140,7 +157,9 @@ cleanup_ft_tut_hud(endon_signal, complete_signal) {
 do_hud_for_ft_tut(endon_signal, complete_signal) {
   level endon(endon_signal);
   level endon(complete_signal);
+
   players = get_players();
+
   level.hint_huds = [];
   for(i = 0; i < players.size; i++) {
     level.hint_huds[i] = newClientHudElem(players[i]);
@@ -149,11 +168,15 @@ do_hud_for_ft_tut(endon_signal, complete_signal) {
     level.hint_huds[i].fontScale = 1.5;
     level.hint_huds[i] setText(&"SEE2_FLAMETHROWER_HINT");
   }
+
   flag_wait("flamethrower_fired_once");
+
   for(i = 0; i < players.size; i++) {
     level.hint_huds[i] setText(&"SEE2_ADS_HINT");
   }
+
   flag_wait("ads_once");
+
   for(i = 0; i < players.size; i++) {
     level.hint_huds[i].alpha = 0;
     level.hint_huds[i] setText("");
@@ -163,10 +186,12 @@ do_hud_for_ft_tut(endon_signal, complete_signal) {
 do_hud_for_ft_tut_by_client(endon_signal, complete_signal) {
   level endon(endon_signal);
   level endon(complete_signal);
+
   has_flamethrower = false;
   if(self == get_players()[0]) {
     has_flamethrower = true;
   }
+
   i = 0;
   players = get_players();
   for(j = 0; j < players.size; j++) {
@@ -175,18 +200,22 @@ do_hud_for_ft_tut_by_client(endon_signal, complete_signal) {
       break;
     }
   }
+
   if(!isDefined(level.hint_huds)) {
     level.hint_huds = [];
   }
+
   level.hint_huds[i] = newClientHudElem(self);
   level.hint_huds[i].x = 220;
   level.hint_huds[i].y = 200;
   level.hint_huds[i].fontScale = 1.5;
+
   if(has_flamethrower) {
     level.hint_huds[i] setText(&"SEE2_FLAMETHROWER_HINT");
   } else {
     level.hint_huds[i] setText(&"SEE2_MG_COOP_HINT");
   }
+
   if(self != get_players()[0]) {
     flame_allowed_time = 0;
     while(!(self FragButtonPressed()) && flame_allowed_time > 120) {
@@ -196,10 +225,14 @@ do_hud_for_ft_tut_by_client(endon_signal, complete_signal) {
   } else {
     self waittill("go_past_ft_tut");
   }
+
   wait(0.5);
+
   level.hint_huds[i] setText("");
   wait(0.2);
+
   level.hint_huds[i] setText(&"SEE2_ADS_HINT");
+
   if(self != get_players()[0]) {
     ads_time_allowed = 0;
     while(!(self AdsButtonPressed()) && ads_time_allowed > 120) {
@@ -217,47 +250,55 @@ do_hud_for_ft_tut_by_client(endon_signal, complete_signal) {
       }
     }
   }
+
   wait(0.5);
   level.hint_huds[i].alpha = 0;
   level.hint_huds[i] setText("");
 }
-
 tank_reload_movement_tutorial(endon_signal, complete_signal, first_fired_on_event, first_shot, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
   flag_wait(first_fired_on_event);
   see2_playRadioStart();
   see2_playSound("reznov", "motion_is_life");
+
   see2_playRadioStart();
+
   flag_wait(first_shot);
   see2_playRadioStart();
   see2_playSound("reznov", "reloading");
+
   see2_playRadioStart();
+
   level notify(complete_signal);
 }
-
 first_panther_prompt(endon_signal, complete_signal, panther_activated, panther_in_sights, panther_first_shot, panther_second_shot, panther_third_shot, panther_dead, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
   flag_wait(panther_activated);
   see2_playRadioStart();
   see2_playSound("reznov", "first_panther1");
+
   see2_playRadioStop();
   flag_wait(panther_in_sights);
   if(!flag(panther_dead)) {
     see2_playRadioStart();
     see2_playSound("reznov", "first_panther2");
+
     see2_playRadioStop();
     flag_wait(panther_first_shot);
+
     if(!flag(panther_dead)) {
       see2_playRadioStart();
       see2_playSound("reznov", "first_panther3");
+
       see2_playRadioStop();
       flag_wait(panther_second_shot);
     }
     if(!flag(panther_dead)) {
       see2_playRadioStart();
       see2_playSound("reznov", "first_panther4");
+
       see2_playRadioStop();
       flag_wait(panther_third_shot);
     }
@@ -265,52 +306,62 @@ first_panther_prompt(endon_signal, complete_signal, panther_activated, panther_i
   flag_wait(panther_dead);
   see2_playRadioStart();
   see2_playSound("reznov", "first_panther_dead");
+
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 choose_path(endon_signal, complete_signal, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   if(!flag("coop")) {
     return;
   }
+
   see2_playRadioStart();
   see2_playSound("reznov", "route");
   see2_playRadioStop();
+
   see2_playRadioStart();
   see2_playSound("reznov", "route2");
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 choose_right_path(endon_signal, complete_signal, destroyed_both_88s, destroyed_second_last_88, destroyed_last_88, arg4, arg5, arg6, arg7) {
   flag_waitopen("playback happening");
+
   if(!flag("coop") || flag(destroyed_both_88s) || flag(destroyed_second_last_88) || flag(destroyed_last_88)) {
     return;
   }
+
   see2_playRadioStart();
   see2_playSound("reznov", "field_88s");
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 choose_left_path(endon_signal, complete_signal, destroyed_both_88s, destroyed_second_last_88, destroyed_last_88, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   if(flag(destroyed_both_88s) || flag(destroyed_second_last_88) || flag(destroyed_last_88)) {
     return;
   }
+
   see2_playRadioStart();
   see2_playSound("reznov", "road_88s");
   see2_playRadioStop();
+
   flag_set("left_path");
+
   level notify(complete_signal);
 }
-
 dead_88(endon_signal, complete_signal, destroyed_first_88, destroyed_second_88, destroyed_both_88s, destroyed_second_last_88, destroyed_last_88, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   flag_wait(destroyed_first_88);
   see2_playRadioStart();
   see2_playSound("reznov", "first_88_destroy");
@@ -324,93 +375,115 @@ dead_88(endon_signal, complete_signal, destroyed_first_88, destroyed_second_88, 
       see2_playSound("reznov", "field_88s_destroy");
     }
   }
+
   see2_makeRadioBreaks(destroyed_second_last_88);
   see2_playSound("reznov", "second_last_88");
   see2_makeRadioBreaks(destroyed_last_88);
   see2_playSound("reznov", "last_88_destroy");
 }
-
 player_exposed(endon_signal, complete_signal, first_warning_given, second_warning_given, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   if(!flag(first_warning_given)) {
     see2_playRadioStart();
     see2_playSound("reznov", "center_map1");
+
     see2_playRadioStop();
     flag_set(first_warning_given);
   }
+
   if(!flag(second_warning_given)) {
     see2_playRadioStart();
     see2_playSound("reznov", "center_map2");
+
     see2_playRadioStop();
     flag_set(second_warning_given);
   }
+
   see2_playRadioStart();
   see2_playSound("reznov", "center_map3");
+
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 radio_tower_dialog(endon_signal, complete_signal, radio_tower_visible, radio_tower_close, radio_tower_destroyed, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   see2_playRadioStart();
   see2_playSound("commissar", "radio_tower_obj");
+
   see2_playRadioStop();
+
   see2_playRadioStart();
   see2_playSound("reznov", "onward");
+
   if(!flag(radio_tower_visible)) {
     see2_playSound("reznov", "next_area");
+
     see2_makeRadioBreaks(radio_tower_visible);
   }
   see2_playSound("reznov", "radio_tower_prompt");
+
   see2_playRadioStop();
+
   flag_wait(radio_tower_close);
+
   see2_playRadioStart();
   if(!flag(radio_tower_destroyed)) {
     see2_playSound("reznov", "radio_tower2");
+
     see2_makeRadioBreaks(radio_tower_destroyed);
   }
   see2_playSound("reznov", "radio_tower_destroy");
+
   see2_playSound("reznov", "train3");
+
   see2_playRadioStop();
+
   level notify(complete_signal);
 }
-
 fuel_depot_dialog(endon_signal, complete_signal, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   see2_playSound("reznov", "train2");
+
   level notify(complete_signal);
 }
-
 final_battle_dialog(endon_signal, complete_signal, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   see2_playSound("commissar", "almost_there1");
   see2_playSound("commissar", "almost_there2");
+
   level notify(complete_signal);
 }
-
 victory_dialog(endon_signal, complete_signal, arg1, arg2, arg3, arg4, arg5, arg6, arg7) {
   level endon(endon_signal);
   flag_waitopen("playback happening");
+
   see2_playSound("commissar", "victory1");
   see2_playSound("commissar", "victory2");
   see2_playSound("commissar", "victory3");
+
   level notify(complete_signal);
 }
-
 do_battlechatter(endon_signal, complete_signal, do_firing, heavy_damage, damage, infantry_close, retreaters, destruction, idle) {
   level endon("kill the audio queue");
   level endon(endon_signal);
   flag_waitopen("playback happening");
   current_idle_line = 1;
+
   while(1) {
     if(!flag("battlechatter allowed")) {
       wait(0.05);
       continue;
     }
+
     if(level.dialogue_timer > level.time_between_dialogue) {
       if(flag(idle)) {
         if(current_idle_line <= level.num_idle_lines) {
@@ -462,9 +535,9 @@ do_battlechatter(endon_signal, complete_signal, do_firing, heavy_damage, damage,
     }
     wait(1);
   }
+
   level notify(complete_signal);
 }
-
 clear_battlechatter_flags(almost_dead, half_damage, damage, infantry_close, retreaters, destruction, idle) {
   flag_clear(infantry_close);
   flag_clear(retreaters);
@@ -474,7 +547,6 @@ clear_battlechatter_flags(almost_dead, half_damage, damage, infantry_close, retr
   flag_clear(destruction);
   flag_clear(idle);
 }
-
 get_most_threatening_object() {
   best_dist = 10000000000;
   best_ent = undefined;
@@ -496,7 +568,9 @@ get_most_threatening_object() {
       }
     }
   }
+
   wait(0.05);
+
   for(z = 0; z < level.enemy_armor.size; z++) {
     if(isDefined(level.enemy_armor[z]) && level.enemy_armor[z].health > 0 && level.enemy_armor[z].classname != "script_vehicle_corpse" && array_check_for_dupes(level.identified_entities, level.enemy_armor[z]) && level.enemy_armor[z].model != "artillery_ger_flak88") {
       dist = distanceSquared(level.enemy_armor[z].origin, self.origin);
@@ -508,6 +582,7 @@ get_most_threatening_object() {
         player_vec = VectorNormalize(player_vec);
         target_vec = VectorNormalize(object_origin - player_origin);
         dot = VectorDot(target_vec, player_vec);
+
         if(acos(dot) > 10) {
           trace = bulletTrace(player_origin + (0, 0, 120), object_origin + (0, 0, 120), false, get_players()[0].myTank);
           if(trace["fraction"] > 0.95) {
@@ -518,7 +593,9 @@ get_most_threatening_object() {
       }
     }
   }
+
   wait(0.05);
+
   guard_tower_array = getEntArray("guard tower damage trigger", "script_noteworthy");
   for(j = 0; j < guard_tower_array.size; j++) {
     if(isDefined(guard_tower_array[j]) && !isDefined(guard_tower_array[j].destroyed) && array_check_for_dupes(level.identified_entities, guard_tower_array[j])) {
@@ -541,7 +618,9 @@ get_most_threatening_object() {
       }
     }
   }
+
   wait(0.05);
+
   retreat_truck_array = getEntArray("retreat truck", "targetname");
   for(m = 0; m < retreat_truck_array.size; m++) {
     if(isDefined(retreat_truck_array[m]) && retreat_truck_array[m].health > 0 && retreat_truck_array[m].classname != "script_vehicle_corpse") {
@@ -564,9 +643,9 @@ get_most_threatening_object() {
       }
     }
   }
+
   return best_ent;
 }
-
 get_designation(object) {
   designation = undefined;
   if(object.classname == "script_vehicle" && object.model != "artillery_ger_flak88") {
@@ -593,14 +672,16 @@ get_designation(object) {
   }
   return designation;
 }
-
 get_heading_of_object(object) {
   if(isDefined(object)) {
     theirPos = (object.origin[0], object.origin[1], 0);
     myPos = (self.origin[0], self.origin[1], 0);
+
     diff = object.origin - self.origin;
     angles = vectorToAngles(diff);
+
     diff = abs(self.angles[1] - angles[1]);
+
     if(diff > 315 || diff <= 45) {
       return "ahead" + randomintrange(1, 3);
     }

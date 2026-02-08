@@ -1,7 +1,7 @@
-/*****************************************************
+/*********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_rus_wet_r_ppsh.gsc
-*****************************************************/
+*********************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_rus_guardwet_bodyalias::main());

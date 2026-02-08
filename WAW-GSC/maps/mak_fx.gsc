@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\mak_fx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
@@ -10,10 +10,12 @@ main() {
   spawnFX();
   maps\createart\mak_art::main();
   footsteps();
+
   event1();
   event2();
   event4();
   event6();
+
   wind_settings();
   level thread water_settings();
   view_settings();
@@ -46,7 +48,6 @@ view_settings() {
   SetSavedDvar("r_motionblur_positionFactor", 0.17);
   SetSavedDvar("r_motionblur_directionFactor", 0.17);
 }
-
 wind_settings() {
   SetSavedDvar("wind_global_vector", "162 59 7.5");
   SetSavedDvar("wind_global_low_altitude", 19);
@@ -55,16 +56,16 @@ wind_settings() {
 }
 
 water_settings() {
-  SetDvar("r_watersim_curlAmount", 1);
-  SetDvar("r_watersim_curlMax", 1);
-  SetDvar("r_watersim_curlReduce", 0.95);
-  SetDvar("r_watersim_minShoreHeight", -3.2);
-  SetDvar("r_watersim_waveSeedDelay", 250.0);
-  SetDvar("r_watersim_foamAppear", 20);
-  SetDvar("r_watersim_foamDisappear", 0.775);
-  SetDvar("r_watersim_windAmount", 0.4);
-  SetDvar("r_watersim_windMax", 0.21);
-  SetDvar("r_watersim_windDir", 340.0);
+  setDvar("r_watersim_curlAmount", 1);
+  setDvar("r_watersim_curlMax", 1);
+  setDvar("r_watersim_curlReduce", 0.95);
+  setDvar("r_watersim_minShoreHeight", -3.2);
+  setDvar("r_watersim_waveSeedDelay", 250.0);
+  setDvar("r_watersim_foamAppear", 20);
+  setDvar("r_watersim_foamDisappear", 0.775);
+  setDvar("r_watersim_windAmount", 0.4);
+  setDvar("r_watersim_windMax", 0.21);
+  setDvar("r_watersim_windDir", 340.0);
   waittillframeend;
   WaterSimEnable(true);
 }
@@ -82,27 +83,37 @@ event1() {
   level._effect["flash_light"] = LoadFx("misc/fx_flashlight_beam");
   level._effect["spit"] = LoadFx("maps/mak/fx_spit_mist");
   level._effect["beatstick_hit"] = LoadFx("maps/mak/fx_blood_spray_small");
+
   level._effect["hut1_explosion"] = LoadFx("maps/mak/fx_explosion_charge_large");
   level._effect["hut2_explosion"] = LoadFx("maps/mak/fx_explosion_charge_med");
   level._effect["hut3_explosion"] = LoadFx("maps/mak/fx_explosion_charge_xlarge");
   level._effect["hut4_explosion"] = LoadFx("maps/mak/fx_explosion_charge_xlarge_main");
   level._effect["hut4_smoke_trail"] = LoadFX("maps/mak/fx_sys_element_smoke_tail_med_emitter");
+
   level._effect["corner_hut_explosion"] = LoadFX("maps/mak/fx_explosion_charge_med_corner");
   level.scr_sound["corner_hut_explosion"] = "exp_hut_corner";
+
   level._effect["shed_barrel_explosion"] = LoadFX("maps/mak/fx_explosion_barrel_small");
   level._effect["barrel_explosion"] = LoadFX("destructibles/fx_barrelExp");
   level._effect["barrel_trail"] = LoadFx("destructibles/fx_dest_fire_trail_med");
+
   add_earthquake("truck_barrels", 0.4, 2, 300);
+
   level._effect["hut1_collapse"] = LoadFx("maps/mak/fx_fire_ewok_collapse_group");
   level._effect["hut1_splash"] = LoadFx("maps/mak/fx_fire_ewok_splash_plume");
   level._effect["hut1_smoke"] = LoadFx("maps/mak/fx_fire_ewok_smoke");
   level._effect["hut1_fire_large"] = LoadFx("maps/mak/fx_fire_ewok_large");
   level._effect["hut1_fire_medium"] = LoadFx("maps/mak/fx_fire_ewok_medium");
   level._effect["hut1_fire_pole"] = LoadFx("maps/mak/fx_fire_ewok_medium_pole");
+
   level._effect["under_hut"] = LoadFX("maps/mak/fx_fire_hut_collapse_small");
+
   level._effect["guy2shed"] = LoadFX("maps/mak/fx_collapse_dust_plume_4");
+
   level._effect["showdown_splash"] = LoadFx("maps/mak/fx_water_splash_falling_guy");
+
   level._effect["beatdown_arm_smoke"] = LoadFx("maps/mak/fx_smoke_small");
+
   level._effect["head_shot"] = LoadFx("impacts/flesh_hit_head_fatal_exit");
   level._effect["head_shot_splat"] = LoadFx("impacts/flesh_hit_splat");
 }
@@ -129,13 +140,15 @@ event6() {
   level._effect["head_shot_big"] = LoadFx("impacts/flesh_head_impact03");
   level._effect["rocket_explode"] = LoadFx("weapon/mortar/fx_mortar_exp_dirt_medium");
 }
-
 precacheFX() {
   level._effect["flesh_hit"] = LoadFX("impacts/flesh_hit_body_fatal_exit");
+
   level._effect["character_fire_pain_sm"] = LoadFx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = LoadFx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = LoadFx("env/fire/fx_fire_player_torso");
+
   level._effect["radio_explode"] = LoadFx("env/electrical/fx_elec_short_oneshot");
+
   level._effect["insects_lantern1"] = LoadFX("bio/insects/fx_insects_lantern_1");
   level._effect["insects_lantern2"] = LoadFX("bio/insects/fx_insects_lantern_2");
   level._effect["campfire_smolder"] = LoadFX("env/fire/fx_fire_campfire_smolder");
@@ -186,6 +199,7 @@ precacheFX() {
   level._effect["water_wake_mist"] = LoadFX("maps/mak/fx_water_wake_mist");
   level._effect["water_wake_ripples"] = LoadFX("maps/mak/fx_water_ripples_small");
   level._effect["glow_candle"] = LoadFX("env/light/fx_dlight_candle_glow");
+
   level._effect["lantern_on_global"] = LoadFX("env/light/fx_lights_lantern_on");
 }
 

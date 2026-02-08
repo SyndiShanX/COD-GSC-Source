@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_stuka.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_vehicle_aianim;
 #include maps\_vehicle;
@@ -16,15 +16,16 @@ main(model, type) {
   build_team("axis");
   maps\_planeweapons::build_bomb_explosions(level.vttype, 0.5, 2.0, 1024, 768, 400, 25);
   maps\_planeweapons::build_bombs(level.vttype, "aircraft_bomb", "explosions/fx_mortarExp_dirt", "artillery_explosion");
+
   turretType = "stuka_mg";
   turretModel = "weapon_machinegun_tiger";
   build_turret(turretType, "tag_gunLeft", turretModel, true);
   build_turret(turretType, "tag_gunRight", turretModel, true);
 }
-
 init_local() {
   wait(0.05);
   self thread maps\_mgturret::link_turrets(self.mgturret);
+
   if(isDefined(self.script_numbombs) && self.script_numbombs > 0) {
     self thread maps\_planeweapons::bomb_init(self.script_numbombs);
   }

@@ -1,12 +1,14 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\mak_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 
 precache_util_fx() {}
+
 precache_scripted_fx() {}
+
 footsteps() {
   clientscripts\_utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   clientscripts\_utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -28,7 +30,6 @@ footsteps() {
   clientscripts\_utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   clientscripts\_utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 precache_createfx_fx() {
   level._effect["insects_lantern1"] = LoadFX("bio/insects/fx_insects_lantern_1");
   level._effect["insects_lantern2"] = LoadFX("bio/insects/fx_insects_lantern_2");
@@ -89,18 +90,23 @@ event1() {
   level._effect["hut3_explosion"] = LoadFx("maps/mak/fx_explosion_charge_xlarge");
   level._effect["hut4_explosion"] = LoadFx("maps/mak/fx_explosion_charge_xlarge_main");
   level._effect["hut4_smoke_trail"] = LoadFX("maps/mak/fx_sys_element_smoke_tail_med_emitter");
+
   level._effect["corner_hut_explosion"] = LoadFX("maps/mak/fx_explosion_charge_med_corner");
   level.scr_sound["corner_hut_explosion"] = "exp_hut_corner";
+
   level._effect["shed_barrel_explosion"] = LoadFX("maps/mak/fx_explosion_barrel_small");
   level._effect["barrel_explosion"] = LoadFX("destructibles/fx_barrelExp");
   level._effect["barrel_trail"] = LoadFx("destructibles/fx_dest_fire_trail_med");
+
   level._effect["hut1_collapse"] = LoadFx("maps/mak/fx_fire_ewok_collapse_group");
   level._effect["hut1_splash"] = LoadFx("maps/mak/fx_fire_ewok_splash_plume");
   level._effect["hut1_smoke"] = LoadFx("maps/mak/fx_fire_ewok_smoke");
   level._effect["hut1_fire_large"] = LoadFx("maps/mak/fx_fire_ewok_large");
   level._effect["hut1_fire_medium"] = LoadFx("maps/mak/fx_fire_ewok_medium");
   level._effect["hut1_fire_pole"] = LoadFx("maps/mak/fx_fire_ewok_medium_pole");
+
   level._effect["under_hut"] = LoadFX("maps/mak/fx_fire_hut_collapse_small");
+
   level._effect["guy2shed"] = LoadFX("maps/mak/fx_collapse_dust_plume_4");
 }
 
@@ -125,13 +131,18 @@ event6() {
 main() {
   clientscripts\createfx\mak_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   precache_util_fx();
+
   footsteps();
+
   precache_createfx_fx();
+
   event1();
   event2();
   event4();
   event6();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();

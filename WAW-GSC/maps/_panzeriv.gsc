@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_panzeriv.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_vehicle_aianim;
 #include maps\_vehicle;
@@ -25,20 +25,17 @@ main(model, type, do_build_death) {
   build_compassicon();
   build_aianims(::setanims, ::set_vehicle_anims);
 }
-
 init_local() {}
 #using_animtree("tank");
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
-
 setanims() {
   positions = [];
   for(i = 0; i < 10; i++)
     positions[i] = spawnStruct();
+
   positions[0].sittag = "tag_guy1";
   positions[1].sittag = "tag_guy2";
   positions[2].sittag = "tag_guy3";

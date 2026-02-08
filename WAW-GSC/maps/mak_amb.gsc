@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\mak_amb.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -10,18 +10,18 @@
 #include maps\_busing;
 
 main() {
-  /
+  /	
+
   level thread flare_fire_1();
   level thread flare_fire_2();
+
   level thread start_environmental_sounds();
   level thread start_tower_creak();
 }
-
 music_switch_delay(time, state) {
   wait(time);
   setmusicstate(state);
 }
-
 ambush_stuff() {
   setbusstate("ambush");
   wait(0.5);
@@ -48,14 +48,16 @@ start_explosion_test() {
   origin_right = getent("exp_origin_right", "targetname");
   target_left = getent("exp_target_left", "targetname");
   target_right = getent("exp_target_right", "targetname");
+
   ent1 = spawn("script_origin", origin_left.origin);
   ent2 = spawn("script_origin", origin_right.origin);
+
   ent1 playSound("exp_hut_4_sweet_L");
   ent2 playSound("exp_hut_4_sweet_R");
+
   ent1 moveto(target_left.origin, 1.5);
   ent2 moveto(target_right.origin, 1.5);
 }
-
 line_to_me(guy) {
   self endon("movedone");
   while(1) {
@@ -63,19 +65,19 @@ line_to_me(guy) {
     wait 0.05;
   }
 }
-
 hut_4_exp() {
   piece = GetEnt("hut4_sound_piece", "script_noteworthy");
   dest_pos = piece.origin + (0, -2500, 0);
   piece MoveTo(dest_pos, 3);
+
   wait(0.5);
   piece playSound("exp_whoosh");
   wait(1);
   level thread start_explosion_test();
+
   piece waittill("movedone");
   piece Delete();
 }
-
 flare_fire_1() {
   level waittill("flare_fire_1");
   wait(0.1);
@@ -90,12 +92,10 @@ flare_fire_2() {
   flare_fire_2 = getent("flare_starter2", "targetname");
   flare_fire_2 playSound("flare2");
 }
-
 play_environmental_sound(sound_to_play, pos) {
   sound = spawn("script_origin", pos);
   sound playLoopSound(sound_to_play);
 }
-
 start_environmental_sounds() {
   play_environmental_sound("hut_large_fire", (-9728, -16328, 0));
   play_environmental_sound("hut_small_fire", (-10264, -17640, 144));
@@ -110,16 +110,13 @@ start_environmental_sounds() {
   play_environmental_sound("hut_large_fire", (-10673.9, -15731.6, 134));
   play_environmental_sound("hut_large_fire", (-10928.3, -15588.5, 128));
 }
-
 change_music_wait(state, waittime) {
   wait(waittime);
   change_music_state(state);
 }
-
 change_music_state(state) {
   setMusicState(state);
 }
-
 start_tower_creak() {
   creaksound = spawn("script_origin", (-12088, -14936, 328));
   wait(0.1);
@@ -127,17 +124,17 @@ start_tower_creak() {
   flag_wait("event1_hut1_collapse");
   creaksound stoploopsound();
 }
-
 play_dragging_sound() {
   level endon("IN_BOAT");
+
   while(1) {
     wait(randomintrange(1, 3));
     {
       playsoundatposition("drag", (0, 0, 0));
     }
   }
-}
 
+}
 play_shock_loop_manual() {
   playsoundatposition("player_shock_loop", (0, 0, 0));
   level waittill("IN_BOAT");

@@ -1,22 +1,28 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_compass.gsc
-*****************************************************/
+**************************************/
 
 setupMiniMap(material) {
   if(getdebugdvar("replay_debug") == "1")
     println("File: _compass.gsc. Function: setupMiniMap()\n");
+
   requiredMapAspectRatio = getdvarfloat("scr_requiredMapAspectRatio");
+
   corners = getEntArray("minimap_corner", "targetname");
   if(corners.size != 2) {
     println("^1Error: There are not exactly two \"minimap_corner\" entities in the map. Could not set up minimap.");
     return;
   }
+
   corner0 = (corners[0].origin[0], corners[0].origin[1], 0);
   corner1 = (corners[1].origin[0], corners[1].origin[1], 0);
+
   cornerdiff = corner1 - corner0;
+
   north = (cos(getnorthyaw()), sin(getnorthyaw()), 0);
   west = (0 - north[1], north[0], 0);
+
   if(vectordot(cornerdiff, west) > 0) {
     if(vectordot(cornerdiff, north) > 0) {
       northwest = corner1;
@@ -36,6 +42,7 @@ setupMiniMap(material) {
       southeast = corner1;
     }
   }
+
   if(requiredMapAspectRatio > 0) {
     northportion = vectordot(northwest - southeast, north);
     westportion = vectordot(northwest - southeast, west);
@@ -50,7 +57,9 @@ setupMiniMap(material) {
     northwest += addvec;
     southeast -= addvec;
   }
+
   setMiniMap(material, northwest[0], northwest[1], southeast[0], southeast[1]);
+
   if(getdebugdvar("replay_debug") == "1")
     println("File: _compass.gsc. Function: setupMiniMap() - COMPLETE\n");
 }

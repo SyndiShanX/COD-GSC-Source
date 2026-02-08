@@ -1,18 +1,22 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\pel1a_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 
 precache_util_fx() {
   clientscripts\_mortar::set_mortar_delays("dirt_mortar", 2, 5);
   clientscripts\_mortar::set_mortar_range("dirt_mortar", 500, 5000);
+
   level._effectType["dirt_mortar"] = "mortar";
   level._effect["dirt_mortar"] = LoadFx("weapon/mortar/fx_mortar_exp_dirt_medium");
+
   clientscripts\_mortar::set_mortar_dust("dirt_mortar", "ceiling_dust");
   level._effect["ceiling_dust"] = LoadFx("env/dirt/fx_dust_ceiling_impact_md_rocks");
+
   level._effect["model3_muzzle"] = LoadFx("weapon/artillery/fx_artillery_jap_200mm");
+
   level._effect["mortar_flash"] = LoadFx("weapon/mortar/fx_mortar_launch");
   level.scr_sound["mortar_flash"] = "wpn_mortar_fire";
 }
@@ -32,6 +36,7 @@ precache_createfx_fx() {
   level._effect["bunker_dust_ceiling_ambient"] = loadfx("maps/pel1/fx_bunker_dust_ceiling_impact_ambient");
   level._effect["godray_lg"] = loadfx("env/light/fx_ray_sun_lrg");
   level._effect["godray_med"] = loadfx("env/light/fx_ray_sun_med");
+
   level._effect["smoke_impact_smolder"] = loadfx("maps/pel1a/fx_smoke_crater_w");
   level._effect["smoke_rolling_thick"] = loadfx("maps/pel1a/fx_smoke_rolling_thick");
   level._effect["smoke_rolling_thick2"] = loadfx("maps/pel1a/fx_smoke_rolling_thick2");
@@ -55,14 +60,18 @@ increase_mortar_delay() {
 
 event1_mortars() {
   level waittill("sm");
+
   dust_points = getstructarray("ceiling_dust", "targetname");
   for(i = 0; i < dust_points.size; i++) {
     dust_points[i].is_struct = true;
   }
+
   struct = getstruct("event1_mortar1", "targetname");
   struct.is_struct = true;
   struct thread clientscripts\_mortar::explosion_activate("dirt_mortar", undefined, undefined, undefined, undefined, undefined, undefined, dust_points);
+
   level thread clientscripts\_mortar::mortar_loop("dirt_mortar", 1);
+
   struct = getstruct("event1_mortar2", "targetname");
   struct.is_struct = true;
   struct thread clientscripts\_mortar::explosion_activate("dirt_mortar", undefined, undefined, undefined, undefined, undefined, undefined, dust_points);
@@ -71,14 +80,19 @@ event1_mortars() {
 main() {
   clientscripts\createfx\pel1a_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   precache_util_fx();
   precache_createfx_fx();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();
   }
+
   level.mortar = level._effect["dirt_mortar"];
   level thread clientscripts\_mortar::set_mortar_quake("dirt_mortar", 0.4, 1, 1500);
+
   level thread increase_mortar_delay();
+
   level thread event1_mortars();
 }

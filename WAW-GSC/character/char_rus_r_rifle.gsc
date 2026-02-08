@@ -1,7 +1,7 @@
-/*****************************************************
+/******************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_rus_r_rifle.gsc
-*****************************************************/
+******************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_rus_guard_bodyalias::main());

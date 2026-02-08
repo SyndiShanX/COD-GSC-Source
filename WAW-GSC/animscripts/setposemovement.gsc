@@ -1,7 +1,7 @@
-/*****************************************************
+/*******************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\setposemovement.gsc
-*****************************************************/
+*******************************************/
 
 #include animscripts\Utility;
 #include maps\_Utility;
@@ -18,6 +18,7 @@ SetPoseMovement(desiredPose, desiredMovement) {
   if(!isDefined(desiredMovement) || desiredMovement == "") {
     desiredMovement = self.a.movement;
   }
+
   [[anim.SetPoseMovementFnArray[desiredPose][desiredMovement]]]();
 }
 
@@ -25,9 +26,11 @@ InitPoseMovementFunctions() {
   anim.SetPoseMovementFnArray["stand"]["stop"] = ::BeginStandStop;
   anim.SetPoseMovementFnArray["stand"]["walk"] = ::BeginStandWalk;
   anim.SetPoseMovementFnArray["stand"]["run"] = ::BeginStandRun;
+
   anim.SetPoseMovementFnArray["crouch"]["stop"] = ::BeginCrouchStop;
   anim.SetPoseMovementFnArray["crouch"]["walk"] = ::BeginCrouchWalk;
   anim.SetPoseMovementFnArray["crouch"]["run"] = ::BeginCrouchRun;
+
   anim.SetPoseMovementFnArray["prone"]["stop"] = ::BeginProneStop;
   anim.SetPoseMovementFnArray["prone"]["walk"] = ::BeginProneWalk;
   anim.SetPoseMovementFnArray["prone"]["run"] = ::BeginProneRun;
@@ -39,35 +42,42 @@ BeginStandStop() {
       switch (self.a.movement) {
         case "stop":
           return false;
+
         case "walk":
           StandWalkToStand();
           break;
+
         default:
           assert(self.a.movement == "run");
           StandRunToStand();
           break;
       }
       break;
+
     case "crouch":
       switch (self.a.movement) {
         case "stop":
           CrouchToStand();
           break;
+
         case "walk":
           CrouchWalkToStand();
           break;
+
         default:
           assert(self.a.movement == "run");
           CrouchRunToStand();
           break;
       }
       break;
+
     default:
       assert(self.a.pose == "prone");
       switch (self.a.movement) {
         case "stop":
           ProneToStand();
           break;
+
         default:
           assert(self.a.movement == "walk" || self.a.movement == "run");
           ProneToStand();
@@ -75,6 +85,7 @@ BeginStandStop() {
       }
       break;
   }
+
   return true;
 }
 
@@ -85,33 +96,40 @@ BeginStandWalk() {
         case "stop":
           BlendIntoStandWalk();
           break;
+
         case "walk":
           return false;
+
         default:
           assert(self.a.movement == "run");
           BlendIntoStandWalk();
           break;
       }
       break;
+
     case "crouch":
       switch (self.a.movement) {
         case "stop":
           CrouchToStandWalk();
           break;
+
         case "walk":
           BlendIntoStandWalk();
           break;
+
         default:
           assert(self.a.movement == "run");
           BlendIntoStandWalk();
           break;
       }
       break;
+
     default:
       assert(self.a.pose == "prone");
       ProneToStandWalk();
       break;
   }
+
   return true;
 }
 
@@ -122,33 +140,38 @@ BeginStandRun() {
         case "stop":
           BlendIntoStandRun();
           break;
+
         case "walk":
           BlendIntoStandRun();
           break;
+
         default:
           assert(self.a.movement == "run");
           return false;
       }
       break;
+
     case "crouch":
       switch (self.a.movement) {
         case "stop":
           CrouchToStandRun();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           BlendIntoStandRun();
           break;
       }
       break;
+
     default:
       assert(self.a.pose == "prone");
       ProneToStandRun();
       break;
   }
+
   return true;
 }
-
 BeginCrouchStop() {
   switch (self.a.pose) {
     case "stand":
@@ -169,6 +192,7 @@ BeginCrouchStop() {
     case "crouch":
       switch (self.a.movement) {
         case "stop":
+
           break;
         case "walk":
           CrouchWalkToCrouch();
@@ -196,33 +220,41 @@ BeginCrouchWalk() {
           BlendIntoStandWalk();
           BlendIntoCrouchWalk();
           break;
+
         case "walk":
           BlendIntoCrouchWalk();
           break;
+
         default:
           assert(self.a.movement == "run");
           BlendIntoCrouchWalk();
           break;
       }
       break;
+
     case "crouch":
       switch (self.a.movement) {
         case "stop":
           CrouchToCrouchWalk();
           break;
+
         case "walk":
           return false;
+
         default:
           assert(self.a.movement == "run");
           BlendIntoCrouchWalk();
           break;
       }
       break;
+
     default:
       assert(self.a.pose == "prone");
+
       ProneToCrouchWalk();
       break;
   }
+
   return true;
 }
 
@@ -234,30 +266,36 @@ BeginCrouchRun() {
           BlendIntoStandRun();
           BlendIntoCrouchRun();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           BlendIntoCrouchRun();
           break;
       }
       break;
+
     case "crouch":
       switch (self.a.movement) {
         case "stop":
           CrouchToCrouchRun();
           break;
+
         case "walk":
           BlendIntoCrouchRun();
           break;
+
         default:
           assert(self.a.movement == "run");
           return false;
       }
       break;
+
     default:
       assert(self.a.pose == "prone");
       ProneToCrouchRun();
       break;
   }
+
   return true;
 }
 
@@ -296,6 +334,7 @@ BeginProneStop() {
     case "prone":
       switch (self.a.movement) {
         case "stop":
+
           break;
         case "walk":
         case "run":
@@ -317,29 +356,34 @@ BeginProneWalk() {
         case "stop":
           StandToProneWalk();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           CrouchRunToProneWalk();
           break;
       }
       break;
+
     case "crouch":
       switch (self.a.movement) {
         case "stop":
           CrouchToProneWalk();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           CrouchRunToProneWalk();
           break;
       }
       break;
+
     default:
       assert(self.a.pose == "prone");
       switch (self.a.movement) {
         case "stop":
           ProneToProneRun();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           self.a.movement = "walk";
@@ -347,6 +391,7 @@ BeginProneWalk() {
       }
       break;
   }
+
   return true;
 }
 
@@ -357,23 +402,27 @@ BeginProneRun() {
         case "stop":
           StandToProneRun();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           CrouchRunToProneRun();
           break;
       }
       break;
+
     case "crouch":
       switch (self.a.movement) {
         case "stop":
           CrouchToProneRun();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           CrouchRunToProneRun();
           break;
       }
       break;
+
     default:
       assert(self.a.pose == "prone");
       switch (self.a.movement) {
@@ -381,6 +430,7 @@ BeginProneRun() {
           assert(self.a.movement == "stop");
           ProneToProneRun();
           break;
+
         default:
           assert(self.a.movement == "run" || self.a.movement == "walk");
           self.a.movement = "run";
@@ -388,22 +438,29 @@ BeginProneRun() {
       }
       break;
   }
+
   return true;
 }
 
 PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement, endAiming) {
   endTime = gettime() + crossblendTime * 1000;
+
   self setflaggedanimknoball("blendTransition", transAnim, %body, 1, crossblendTime, 1);
+
   wait crossblendTime / 2;
+
   self.a.pose = endPose;
   self.a.movement = endMovement;
+
   if(endAiming)
     self.a.alertness = "aiming";
   else
     self.a.alertness = "casual";
+
   waittime = (endTime - gettime()) / 1000;
   if(waittime < 0.05)
     waittime = 0.05;
+
   wait waittime;
 }
 
@@ -414,6 +471,7 @@ PlayTransitionStandWalk(transAnim, finalAnim) {
 StandWalkToStand() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandWalkToStand " + self.a.pose);
   assertEX(self.a.movement == "walk", "SetPoseMovement::StandWalkToStand " + self.a.movement);
+
   self.a.movement = "stop";
 }
 
@@ -425,6 +483,7 @@ StandWalkToCrouch() {
 StandRunToStand() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandRunToStand " + self.a.pose);
   assertEX(self.a.movement == "run", "SetPoseMovement::StandRunToStand " + self.a.movement);
+
   self.a.movement = "stop";
 }
 
@@ -439,6 +498,7 @@ PlayBlendTransitionStandRun(animname) {
     self endon("movemode");
     transtime = 1.0;
   }
+
   PlayBlendTransition(animname, transtime, "stand", "run", 0);
 }
 
@@ -451,6 +511,7 @@ BlendIntoStandRun() {
       if(self.a.movement != "stop")
         runAnimTransTime = 0.5;
       self setAnimKnobLimited(animscripts\run::GetRunAnim(), 1, runAnimTransTime, 1);
+
       self thread animscripts\run::UpdateRunWeights("BlendIntoStandRun", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
       PlayBlendTransitionStandRun(%combatrun);
     }
@@ -462,6 +523,7 @@ BlendIntoStandRun() {
       if(self.a.movement != "stop")
         runAnimTransTime = 0.5;
       self setAnimKnobLimited(animscripts\run::GetRunAnim(), 1, runAnimTransTime, 1);
+
       self thread animscripts\run::UpdateRunWeights("BlendIntoStandRun", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
       PlayBlendTransitionStandRun(%combatrun);
     }
@@ -472,6 +534,7 @@ BlendIntoStandRun() {
 PlayBlendTransitionStandWalk(animname) {
   if(self.a.movement != "stop")
     self endon("movemode");
+
   PlayBlendTransition(animname, 0.6, "stand", "walk", 1);
 }
 
@@ -483,15 +546,18 @@ BlendIntoStandWalk() {
 CrouchToStand() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToStand " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToStand " + self.a.movement);
+
   standSpeed = 0.5;
   if(isDefined(self.fastStand)) {
     standSpeed = 1.8;
     self.fastStand = undefined;
   }
+
   if((self animscripts\utility::weaponAnims() == "pistol") || (self animscripts\utility::weaponAnims() == "none")) {
     PlayTransitionAnimation(%pistol_crouchaimstraight2stand, "stand", "stop", standSpeed);
   } else {
     self randomizeIdleSet();
+
     PlayTransitionAnimation(%crouch2stand, "stand", "stop", standSpeed);
   }
   self clearanim(%shoot, 0);
@@ -500,6 +566,7 @@ CrouchToStand() {
 CrouchToCrouchWalk() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToCrouchWalk " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToCrouchWalk " + self.a.movement);
+
   BlendIntoCrouchWalk();
 }
 
@@ -511,6 +578,7 @@ CrouchToStandWalk() {
 CrouchWalkToCrouch() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchWalkToCrouch " + self.a.pose);
   assertEX(self.a.movement == "walk", "SetPoseMovement::CrouchWalkToCrouch " + self.a.movement);
+
   self.a.movement = "stop";
 }
 
@@ -522,6 +590,7 @@ CrouchWalkToStand() {
 CrouchRunToCrouch() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchRunToCrouch " + self.a.pose);
   assertEX(self.a.movement == "run", "SetPoseMovement::CrouchRunToCrouch " + self.a.movement);
+
   self.a.movement = "stop";
 }
 
@@ -533,6 +602,7 @@ CrouchRunToStand() {
 CrouchToCrouchRun() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToCrouchRun " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToCrouchRun " + self.a.movement);
+
   BlendIntoCrouchRun();
 }
 
@@ -555,6 +625,7 @@ BlendIntoCrouchRun() {
 
 ProneToCrouchRun() {
   assertEX(self.a.pose == "prone", "SetPoseMovement::ProneToCrouchRun " + self.a.pose);
+
   self OrientMode("face current");
   self ExitProneWrapper(1.0);
   ProneLegsStraightTree(0.2);
@@ -585,27 +656,34 @@ BlendIntoCrouchWalk() {
 StandToCrouch() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandToCrouch " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::StandToCrouch " + self.a.movement);
+
   self randomizeIdleSet();
+
   crouchSpeed = 0.5;
   if(isDefined(self.fastCrouch)) {
     crouchSpeed = 1.8;
     self.fastCrouch = undefined;
   }
+
   if(self is_zombie()) {
     self clearanim(%shoot, 0);
     return;
   }
+
   if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
     PlayTransitionAnimation(%exposed_stand_2_crouch, "crouch", "stop", 1, undefined, crouchspeed);
   } else {
     PlayTransitionAnimation(%exposed2_stand_2_crouch, "crouch", "stop", 1, undefined, crouchspeed);
   }
+
   self clearanim(%shoot, 0);
 }
 
 ProneToCrouch() {
   assertEX(self.a.pose == "prone", "SetPoseMovement::StandToCrouch " + self.a.pose);
+
   self randomizeIdleSet();
+
   self OrientMode("face current");
   self ExitProneWrapper(1.0);
   ProneLegsStraightTree(0.1);
@@ -615,6 +693,7 @@ ProneToCrouch() {
 
 ProneToStand() {
   assertEx(self.a.pose == "prone", self.a.pose);
+
   self OrientMode("face current");
   self ExitProneWrapper(1.0);
   ProneLegsStraightTree(0.1);
@@ -632,8 +711,10 @@ ProneToProneMove(movement) {
   assertEX(self.a.pose == "prone", "SetPoseMovement::ProneToProneMove " + self.a.pose);
   assertEX(self.a.movement == "stop", "SetPoseMovement::ProneToProneMove " + self.a.movement);
   assertEX((movement == "walk" || movement == "run"), "SetPoseMovement::ProneToProneMove got bad parameter " + movement);
+
   ProneLegsStraightTree(0.1);
   PlayTransitionAnimation(%prone_aim2crawl, "prone", movement, 0, %prone_crawl);
+
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
 }
 
@@ -644,6 +725,7 @@ ProneToProneRun() {
 ProneCrawlToProne() {
   assertEX(self.a.pose == "prone", "SetPoseMovement::ProneCrawlToProne " + self.a.pose);
   assertEX((self.a.movement == "walk" || self.a.movement == "run"), "SetPoseMovement::ProneCrawlToProne " + self.a.movement);
+
   ProneLegsStraightTree(0.1);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
   PlayTransitionAnimation(%prone_crawl2aim, "prone", "stop", 1);
@@ -651,8 +733,10 @@ ProneCrawlToProne() {
 
 CrouchToProne() {
   assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToProne " + self.a.pose);
+
   self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(1.0);
+
   ProneLegsStraightTree(0.3);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
   PlayTransitionAnimation(%crouch_2_prone, "prone", "stop", 1);
@@ -671,13 +755,16 @@ CrouchToProneRun() {
 StandToProne() {
   assertEX(self.a.pose == "stand", "SetPoseMovement::StandToProne " + self.a.pose);
   self endon("entered_pose" + "prone");
+
   proneTime = 0.5;
   thread PlayTransitionAnimationThread_WithoutWaitSetStates(%stand2prone_onehand, "prone", "stop", proneTime);
+
   self waittillmatch("transAnimDone2", "anim_pose = \"crouch\"");
   waittillframeend;
   self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(proneTime);
   self.a.movement = "stop";
+
   ProneLegsStraightTree(0.2);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
   self waittillmatch("transAnimDone2", "end");
@@ -696,13 +783,18 @@ StandToProneRun() {
 CrouchRunToProne() {
   assertEX((self.a.pose == "crouch") || (self.a.pose == "stand"), "SetPoseMovement::CrouchRunToProne " + self.a.pose);
   assertEX((self.a.movement == "run" || self.a.movement == "walk"), "SetPoseMovement::CrouchRunToProne " + self.a.movement);
+
   pronetime = 0.5;
   self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_aiming, %prone_legs_up);
   self EnterProneWrapper(proneTime);
+
   ProneLegsStraightTree(0.2);
   self animscripts\cover_prone::UpdateProneWrapper(0.1);
+
   runDirection = animscripts\utility::getQuadrant(self getMotionAngle());
+
   diveanim = % crouch_2_prone;
+
   localDeltaVector = GetMoveDelta(diveanim, 0, 1);
   endPoint = self LocalToWorldCoords(localDeltaVector);
   if(self maymovetopoint(endPoint)) {
@@ -721,7 +813,6 @@ CrouchRunToProneRun() {
   CrouchRunToProne();
   ProneToProneRun();
 }
-
 PlayTransitionAnimation2(transAnim, endPose, endMovement, endAiming, finalAnim) {
   self setflaggedanimknoball("transAnimDone1", transAnim, %body, 1, .05, 1);
   if(!isDefined(self.a.pose))
@@ -730,12 +821,14 @@ PlayTransitionAnimation2(transAnim, endPose, endMovement, endAiming, finalAnim) 
     self.movement = "undefined";
   debugIdentifier = self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone1", undefined, debugIdentifier);
+
   self.a.pose = endPose;
   self.a.movement = endMovement;
   if(endAiming)
     self.a.alertness = "aiming";
   else
     self.a.alertness = "casual";
+
   if(isDefined(finalAnim)) {
     self setanimknoball(finalAnim, %body, 1, 0, 1);
   }
@@ -754,6 +847,7 @@ PlayTransitionAnimation(transAnim, endPose, endMovement, endAiming, finalAnim, r
 PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAnim, rate, waitSetStatesEnabled) {
   if(!isDefined(rate))
     rate = 1;
+
   if(getdebugdvar("debug_grenadehand") == "on") {
     if(endPose != self.a.pose) {
       if(!animhasnotetrack(transAnim, "anim_pose = \"" + endPose + "\"")) {
@@ -768,8 +862,10 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAni
       }
     }
   }
+
   if(waitSetStatesEnabled)
     self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
+
   self setflaggedanimknoballrestart("transAnimDone2", transAnim, %body, 1, .2, rate);
   if(!isDefined(self.a.pose))
     self.pose = "undefined";
@@ -778,14 +874,17 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAni
   debugIdentifier = "";
   debugIdentifier = self.a.script + ", " + self.a.pose + " to " + endPose + ", " + self.a.movement + " to " + endMovement;
   self animscripts\shared::DoNoteTracks("transAnimDone2", undefined, debugIdentifier);
+
   self notify("killtimerscript");
   self.a.pose = endPose;
   self notify("entered_pose" + endPose);
+
   self.a.movement = endMovement;
   if(endAiming)
     self.a.alertness = "aiming";
   else
     self.a.alertness = "casual";
+
   if(isDefined(finalAnim)) {
     self setanimknoball(finalAnim, %body, 1, 0.3, rate);
   }
@@ -797,6 +896,7 @@ waitSetStates(timetowait, killmestring, endPose) {
   self endon(killmestring);
   oldpose = self.a.pose;
   wait timetowait;
+
   if(oldpose != "prone" && endPose == "prone") {
     self animscripts\cover_prone::UpdateProneWrapper(0.1);
     self EnterProneWrapper(1.0);

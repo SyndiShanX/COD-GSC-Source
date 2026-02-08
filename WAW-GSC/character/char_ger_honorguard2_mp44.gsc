@@ -1,7 +1,7 @@
-/*****************************************************
+/***************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_ger_honorguard2_mp44.gsc
-*****************************************************/
+***************************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_ger_honorgd2_bodyalias::main());

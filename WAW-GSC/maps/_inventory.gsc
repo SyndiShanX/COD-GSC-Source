@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_inventory.gsc
-*****************************************************/
+**************************************/
 
 main() {
   level.inventory = [];
@@ -10,20 +10,30 @@ main() {
 inventory_create(shader, show_icon) {
   if(true)
     return spawnStruct();
+
   assert(isDefined(shader));
+
   if(!isDefined(show_icon))
     show_icon = false;
+
   ent = newHudElem();
+
   ent.alignX = "right";
   ent.alignY = "top";
   ent.horzAlign = "right";
   ent.vertAlign = "top";
+
   ent.alpha = 0;
+
   ent.index = level.inventory.size;
   ent.show_icon = show_icon;
+
   ent setshader(shader, 40, 40);
+
   level.inventory[ent.index] = ent;
+
   inventroy_update();
+
   return ent;
 }
 
@@ -49,11 +59,14 @@ inventroy_update() {
   }
   x = -18;
   y = 8;
+
   gap = 42;
   position = 0;
+
   for(i = 0; i < level.inventory.size; i++) {
     if(level.inventory[i].show_icon) {
       new_y = y + (gap * position);
+
       if(new_y != level.inventory[i].y) {
         level.inventory[i].x = x;
         if(level.inventory[i].alpha != 0)
@@ -77,6 +90,7 @@ inventory_destroy() {
     return;
   }
   self destroy();
+
   index = 0;
   old_inventory = level.inventory;
   level.inventory = [];

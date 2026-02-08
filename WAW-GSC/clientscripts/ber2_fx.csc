@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\ber2_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_music;
@@ -9,24 +9,30 @@
 main() {
   clientscripts\createfx\ber2_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   footsteps();
   precache_createfx_fx();
   precache_exploders();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();
     thread event1_aaa_tracers();
     thread event1_cloudbursts();
   }
+
   addLightningExploder(10000);
   addLightningExploder(10001);
   addLightningExploder(10002);
   addLightningExploder(10003);
   addLightningExploder(10004);
   addLightningExploder(10005);
+
   level.lightningNormalFunc = ::lightning_normal_func;
   level.lightningFlashFunc = ::lightning_flash_func;
+
   thread ambient_fakefire_init();
+
   thread building_collapse_hit1_fx();
   thread event1_building_collapse_fx();
   thread tower_fx();
@@ -48,26 +54,37 @@ lightning_flash_func() {
   if(players.size == 1) {
     setVolFog(250, 550, 400, -128, 0.45, 0.45, 0.5, 0);
   }
+
   realWait(0.014);
+
   SetSunLight(1.5, 1.5, 2);
+
   players = getlocalplayers();
   if(players.size == 1) {
     setVolFog(250, 550, 400, -128, 0.7, 0.7, 0.75, 0);
   }
+
   realWait(0.0010);
+
   SetSunLight(5, 5, 5.5);
+
   players = getlocalplayers();
   if(players.size == 1) {
     setVolFog(250, 550, 400, -128, 0.5, 0.5, 0.55, 0);
   }
   realWait(0.0011);
+
   SetSunLight(1, 1, 1.5);
+
   players = getlocalplayers();
   if(players.size == 1) {
     setVolFog(250, 550, 400, -128, 0.55, 0.55, 0.6, 0);
   }
+
   realWait(0.0015);
+
   SetSunLight(2.5, 2.5, 3);
+
   players = getlocalplayers();
   if(players.size == 1) {
     setVolFog(250, 550, 400, -128, 0.65, 0.65, 0.7, 0);
@@ -76,24 +93,33 @@ lightning_flash_func() {
 
 lingering_smoke_thread(smokeFX) {
   level endon("lsmokedone");
+
   realWait(RandomFloatRange(0.25, 1.0));
+
   while(1) {
     players = getlocalplayers();
     for(j = 0; j < players.size; j++) {
       playFX(j, smokeFX, self.origin);
     }
+
     realwait(0.8);
   }
 }
 
 event1_lingering_smoke() {
   level waittill("lsmoke");
+
   println("*** Client : Lingering smoke");
+
   fxSpots = GetStructArray("struct_building_collapse_lingering_smoke", "targetname");
   ASSERTEX(isDefined(fxSpots) && fxSpots.size > 0, "Couldn't find the lingering smoke spots!");
+
   lingeringSmokeFX = level._effect["battle_smoke_heavy"];
+
   array_thread(fxSpots, ::lingering_smoke_thread, lingeringSmokeFX);
+
   level waittill("lsmokedone");
+
   println("*** Client : Lingering smoke done.");
 }
 
@@ -102,7 +128,9 @@ building_collapse_setup_anim_pieces() {
   numPieces = 32;
   bonePrefix = "tower";
   sbModelPrefix = "sb_model_tower_";
+
   pieces = [];
+
   for(i = startNum; i <= numPieces; i++) {
     if(i < 10) {
       tagName = bonePrefix + "0" + i;
@@ -111,9 +139,11 @@ building_collapse_setup_anim_pieces() {
       tagName = bonePrefix + i;
       sbModelTNString = sbModelPrefix + i;
     }
+
     piece = getent(0, sbModelTNString, "targetname");
     pieces[pieces.size] = piece;
   }
+
   return pieces;
 }
 
@@ -124,6 +154,7 @@ building_collapse_oneshot_fx_randomchance(chancePercent) {
   if(chancePercent > 100) {
     chancePercent = 100;
   }
+
   if(RandomInt(100) < chancePercent) {
     self building_collapse_oneshot_fx();
   }
@@ -132,44 +163,56 @@ building_collapse_oneshot_fx_randomchance(chancePercent) {
 building_collapse_oneshot_fx() {
   oneShotFX = level._effect["building_collapse_oneshot"];
   wait(RandomFloat(0.5));
+
   for(i = 0; i < getlocalplayers().size; i++) {
     angles = VectorToAngles(self.origin - getlocalplayers()[i].origin);
+
     playFX(i, oneShotFX, self.origin, angles);
   }
 }
 
 building_collapse_hit1_fx() {
   level waittill("bch");
+
   pieces = building_collapse_setup_anim_pieces();
+
   println("*** Client : building hit 1 fx - " + pieces.size + " pieces.");
+
   array_thread(pieces, ::building_collapse_oneshot_fx_randomchance, 15);
 }
 
 event1_building_collapse_fx() {
   level waittill("bcf");
+
   playSound(0, "tower1", (28, 225, -112));
+
   pieces = building_collapse_setup_anim_pieces();
+
   println("*** Client : building collapse fx " + pieces.size + " pieces.");
+
   array_thread(pieces, ::building_collapse_oneshot_fx_randomchance, 50);
 }
 
 tower_fx() {
   level waittill("bct");
+
   pieces = building_collapse_setup_anim_pieces();
+
   fxPieces = [];
   fxPieces[0] = pieces[1];
   fxPieces[1] = pieces[2];
   fxPieces[2] = pieces[3];
   fxPieces[3] = pieces[4];
   fxPieces[4] = pieces[5];
+
   println("*** Client : tower fall fx - " + pieces.size + " pieces.");
+
   array_thread(fxPieces, ::building_collapse_oneshot_fx);
 }
 
 precache_scripted_fx() {
   level._effect["distant_muzzleflash"] = LoadFX("weapon/muzzleflashes/heavy");
 }
-
 ambient_fakefire_init() {
   level thread event1_fakefire_starter();
   level thread street_fakefire_starter();
@@ -177,16 +220,20 @@ ambient_fakefire_init() {
 
 event1_fakefire_starter() {
   level waittill("e1fs");
+
   firePoints = GetStructArray("struct_e1_fakefire", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
+
   array_thread(firePoints, ::ambient_fakefire, "subway_gate_closed", false);
 }
 
 street_fakefire_starter() {
   level waittill("sfs");
+
   firePoints = GetStructArray("struct_street_fakefire", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
   array_thread(firePoints, ::ambient_fakefire, "bcf", true);
+
   firePoints = [];
   firePoints = GetStructArray("struct_street_building_fakefire", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
@@ -197,40 +244,50 @@ ambient_fakefire(endonString, delayStart) {
   if(delayStart) {
     wait(RandomFloatRange(0.25, 5));
   }
+
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   team = undefined;
   fireSound = undefined;
   weapType = "rifle";
+
   if(!isDefined(self.script_noteworthy)) {
     team = "allied_rifle";
   } else {
     team = self.script_noteworthy;
   }
+
   switch (team) {
     case "axis_rifle":
       fireSound = "weap_kar98k_fire";
       weapType = "rifle";
       break;
+
     case "allied_rifle":
       fireSound = "weap_mosinnagant_fire";
       weapType = "rifle";
       break;
+
     case "axis_smg":
       fireSound = "weap_mp40_fire";
       weapType = "smg";
       break;
+
     case "allied_smg":
       fireSound = "weap_ppsh_fire";
       weapType = "smg";
       break;
+
     default:
       ASSERTMSG("ambient_fakefire: team name '" + team + "' is not recognized.");
   }
+
   if(weapType == "rifle") {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 60;
+
     burstMin = 1;
     burstMax = 4;
     betweenShotsMin = 0.8;
@@ -240,6 +297,7 @@ ambient_fakefire(endonString, delayStart) {
   } else {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 45;
+
     burstMin = 6;
     burstMax = 17;
     betweenShotsMin = 0.048;
@@ -247,22 +305,28 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 5;
     reloadTimeMax = 12;
   }
+
   while(1) {
     burst = RandomIntRange(burstMin, burstMax);
+
     for(i = 0; i < burst; i++) {
       traceDist = 10000;
       target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+
       BulletTracer(self.origin, target, false);
+
       playFX(0, muzzleFlash, self.origin, anglesToForward(self.angles));
+
       if(RandomInt(100) <= soundChance) {
         playSound(0, fireSound, self.origin);
       }
+
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
+
     wait(RandomFloatRange(reloadTimeMin, reloadTimeMax));
   }
 }
-
 footsteps() {
   clientscripts\_utility::setFootstepEffect("asphalt", LoadFx("bio/player/fx_footstep_dust"));
   clientscripts\_utility::setFootstepEffect("brick", LoadFx("bio/player/fx_footstep_dust"));
@@ -285,7 +349,6 @@ footsteps() {
 precache_exploders() {
   level._effect["lightning_strike"] = LoadFX("maps/ber2/fx_ber2_lightning_flash");
 }
-
 precache_createfx_fx() {
   level._effect["smoke_window_out"] = loadfx("env/smoke/fx_smoke_window_lg_gry");
   level._effect["smoke_plume_xlg_slow_blk"] = loadfx("maps/ber2/fx_smk_plume_xlg_slow_blk_w");
@@ -335,19 +398,23 @@ precache_createfx_fx() {
   level._effect["fire_ceiling_50_100"] = loadfx("env/fire/fx_fire_ceiling_50x100");
   level._effect["fire_ceiling_100_100"] = loadfx("env/fire/fx_fire_ceiling_100x100");
   level._effect["ash_and_embers_small"] = loadfx("maps/ber2/fx_debris_fire_motes");
+
   level._effect["aaa_tracer"] = LoadFX("weapon/tracer/fx_tracer_jap_tripple25_projectile");
   level._effect["cloudburst"] = LoadFX("weapon/flak/fx_flak_cloudflash_night");
+
   level._effect["building_collapse_oneshot"] = LoadFX("maps/ber2/fx_building_2a_collapse_hit");
   level._effect["battle_smoke_heavy"] = LoadFX("env/smoke/fx_smoke_low_thick_oneshot");
 }
-
 ambient_aaa_fx(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   self thread ambient_aaa_fx_rotate(endonString);
+
   while(1) {
     firetime = RandomIntRange(3, 8);
+
     for(i = 0; i < firetime * 5; i++) {
       players = getlocalplayers();
       for(j = 0; j < players.size; j++) {
@@ -358,11 +425,11 @@ ambient_aaa_fx(endonString) {
     wait RandomFloatRange(1.5, 3);
   }
 }
-
 ambient_aaa_fx_rotate(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   while(1) {
     self RotateTo((312.6, 180, -90), RandomFloatRange(3.5, 6));
     self waittill("rotatedone");
@@ -375,35 +442,46 @@ event1_aaa_tracers() {
   wait(1.0);
   fxSpots = getEntArray(0, "origin_e1_ambient_flak", "targetname");
   ASSERTEX(isDefined(fxSpots) && fxSpots.size > 0, "Can't find ambient AAA tracer fxSpots.");
+
   for(i = 0; i < fxSpots.size; i++) {
     fxSpots[i] thread ambient_aaa_fx("subway_gate_closed");
   }
 }
-
 ambient_cloudburst_fx(endonString) {
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   realwait(RandomInt(5));
+
   offsetX = 200;
   offsetY = 200;
   offsetZ = 200;
+
   burstsMin = 2;
   burstsMax = 5;
+
   burstWaitMin = 0.25;
   burstWaitMax = 0.65;
+
   pauseMin = 4;
   pauseMax = 10;
+
   while(1) {
     numBursts = RandomIntRange(burstsMin, burstsMax);
+
     for(i = 0; i < numBursts; i++) {
       offsetVec = self.origin + (RandomIntRange((offsetX * -1), offsetX), RandomIntRange((offsetY * -1), offsetY), RandomIntRange((offsetZ * -1), offsetZ));
+
       players = GetLocalPlayers();
+
       for(j = 0; j < players.size; j++) {
         playFX(j, level._effect["cloudburst"], self.origin + offsetVec);
       }
+
       realwait(RandomFloatRange(burstWaitMin, burstWaitMax));
     }
+
     wait(RandomFloatRange(pauseMin, pauseMax));
   }
 }
@@ -411,6 +489,7 @@ ambient_cloudburst_fx(endonString) {
 event1_cloudbursts() {
   fxSpots = GetStructArray("origin_e1_ambient_cloudburst", "targetname");
   ASSERTEX(isDefined(fxSpots) && fxSpots.size > 0, "Can't find ambient cloudburst fxSpots.");
+
   for(i = 0; i < fxSpots.size; i++) {
     fxSpots[i] thread ambient_cloudburst_fx("subway_gate_closed");
   }

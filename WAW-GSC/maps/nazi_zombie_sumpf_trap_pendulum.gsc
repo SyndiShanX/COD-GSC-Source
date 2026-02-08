@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\nazi_zombie_sumpf_trap_pendulum.gsc
-*****************************************************/
+****************************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -9,14 +9,17 @@
 
 initPendulumTrap() {
   penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
+
   for(i = 0; i < penBuyTrigger.size; i++) {
     penBuyTrigger[i].lever = getent(penBuyTrigger[i].target, "targetname");
     penBuyTrigger[i].penDamageTrig = getent((penBuyTrigger[i].lever).target, "targetname");
     penBuyTrigger[i].pen = getent((penBuyTrigger[i].penDamageTrig).target, "targetname");
     penBuyTrigger[i].pulley = getent((penBuyTrigger[i].pen).target, "targetname");
   }
+
   penBuyTrigger[0].penDamageTrig EnableLinkTo();
   penBuyTrigger[0].penDamageTrig LinkTo(penBuyTrigger[0].pen);
+
   level thread maps\nazi_zombie_sumpf::turnLightGreen("pendulum_light");
 }
 
@@ -27,25 +30,32 @@ moveLeverDown() {
   soundent_left playSound("switch");
   soundent_right playSound("switch");
   self.lever waittill("rotatedone");
+
   self notify("leverDown");
 }
 
 moveLeverUp() {
   soundent_left = getent("switch_left", "targetname");
   soundent_right = getent("switch_right", "targetname");
+
   self.lever rotatepitch(-180, .5);
+
   soundent_left playSound("switch");
   soundent_right playSound("switch");
+
   self.lever waittill("rotatedone");
+
   self notify("leverUp");
 }
-
 play_trap_dialog() {
   waittime = 0.12;
+
   index = maps\_zombiemode_weapons::get_player_index(self);
   player_index = "plr_" + index + "_";
+
   if(!isDefined(self.vox_trap_log)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_trap_log");
+
     self.vox_trap_log = [];
     for(i = 0; i < num_variants; i++) {
       self.vox_trap_log[self.vox_trap_log.size] = "vox_trap_log_" + i;
@@ -53,26 +63,30 @@ play_trap_dialog() {
     self.vox_trap_log_available = self.vox_trap_log;
   }
   sound_to_play = random(self.vox_trap_log_available);
+
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, waittime);
   self.vox_trap_log_available = array_remove(self.vox_trap_log_available, sound_to_play);
+
   if(self.vox_trap_log_available.size < 1) {
     self.vox_trap_log_available = self.vox_trap_log;
   }
 }
-
 penThink() {
   self sethintstring("");
   pa_system = getent("speaker_by_log", "targetname");
   wait(0.5);
+
   self sethintstring(&"ZOMBIE_ACTIVATE_TRAP");
   self.zombie_cost = 750;
   self.in_use = 0;
+
   while(1) {
     self waittill("trigger", who);
     self.used_by = who;
     if(who in_revive_trigger()) {
       continue;
     }
+
     if(is_player_valid(who)) {
       if(who.score >= self.zombie_cost) {
         if(!self.in_use) {
@@ -80,22 +94,32 @@ penThink() {
           penBuyTrigger = getEntArray("pendulum_buy_trigger", "targetname");
           level thread maps\nazi_zombie_sumpf::turnLightRed("pendulum_light");
           array_thread(penBuyTrigger, ::trigger_off);
+
           play_sound_at_pos("purchase", who.origin);
           who thread play_trap_dialog();
+
           who maps\_zombiemode_score::minus_to_player_score(self.zombie_cost);
+
           self thread moveLeverDown();
           self waittill("leverDown");
           motor_left = getent("engine_loop_left", "targetname");
           motor_right = getent("engine_loop_right", "targetname");
+
           playsoundatposition("motor_start_left", motor_left.origin);
           playsoundatposition("motor_start_right", motor_right.origin);
+
           wait(0.5);
+
           self thread activatePen(motor_left, motor_right, who);
+
           self waittill("penDown");
+
           self thread moveLeverUp();
           self waittill("leverUp");
+
           wait(45.0);
           pa_system playSound("warning");
+
           array_thread(penBuyTrigger, ::trigger_on);
           level thread maps\nazi_zombie_sumpf::turnLightGreen("pendulum_light");
           self.in_use = 0;
@@ -108,16 +132,25 @@ penThink() {
 activatePen(motor_left, motor_right, who) {
   wheel_left = spawn("script_origin", motor_left.origin);
   wheel_right = spawn("script_origin", motor_right.origin);
+
   wait_network_frame();
+
   motor_left playLoopSound("motor_loop_left");
   motor_right playLoopSound("motor_loop_right");
+
   wait_network_frame();
+
   wheel_left playLoopSound("wheel_loop");
   wheel_right playLoopSound("belt_loop");
+
   self.pen notify("stopmonitorsolid");
+
   self.pen notsolid();
+
   self.penDamageTrig trigger_on();
+
   self.penDamageTrig thread penDamage(self, who);
+
   self.penactive = true;
   if(self.script_noteworthy == "1") {
     self.pulley rotatepitch(-14040, 30, 6, 6);
@@ -129,21 +162,26 @@ activatePen(motor_left, motor_right, who) {
   level thread trap_sounds(motor_left, motor_right, wheel_left, wheel_right);
   self.pen thread blade_sounds();
   self.pen waittill("rotatedone");
+
   self.penDamageTrig trigger_off();
   self.penactive = false;
+
   self.pen thread maps\nazi_zombie_sumpf_zipline::objectSolid();
+
   self notify("penDown");
   level notify("stop_blade_sounds");
   wait(3);
   wheel_left delete();
   wheel_right delete();
 }
-
 blade_sounds() {
   self endon("rotatedone");
+
   blade_left = getent("blade_left", "targetname");
   blade_right = getent("blade_right", "targetname");
+
   lastAngle = self.angles[0];
+
   for(;;) {
     wooshAngle = 90;
     wait(.01);
@@ -151,22 +189,25 @@ blade_sounds() {
     speed = int(abs(angle - lastAngle)) % 360;
     relPos = int(abs(angle)) % 360;
     lastRelPos = int(abs(lastAngle)) % 360;
+
     if(relPos == lastRelPos || speed < 7) {
       lastAngle = angle;
       continue;
     }
+
     if(relPos > wooshAngle && lastRelPos <= wooshAngle) {
       blade_left playSound("blade_right");
       blade_right playSound("blade_right");
     }
+
     if((relPos + 180) % 360 > wooshAngle && ((lastRelPos + 180) % 360) <= wooshAngle) {
       blade_left playSound("blade_right");
       blade_right playSound("blade_right");
     }
+
     lastAngle = angle;
   }
 }
-
 trap_sounds(motor_left, motor_right, wheel_left, wheel_right) {
   wait(11);
   motor_left stoploopsound(2);
@@ -177,16 +218,17 @@ trap_sounds(motor_left, motor_right, wheel_left, wheel_right) {
   wheel_left stoploopsound(4);
   wheel_right stoploopsound(4);
 }
-
 penDamage(parent, who) {
   thread customTimer();
   while(1) {
     self waittill("trigger", ent);
+
     if(parent.penactive == true) {
-      if(isplayer(ent)) {
+      if(isPlayer(ent)) {
         ent thread playerPenDamage();
       } else {
         ent thread zombiePenDamage(parent);
+
         who.trapped_used["log_trap"] = level.round_number;
       }
     }
@@ -204,6 +246,7 @@ customTimer() {
 playerPenDamage() {
   self endon("death");
   self endon("disconnect");
+
   players = get_players();
   if(players.size == 1) {
     self thread maps\_zombiemode::player_damage_override(undefined, undefined, 100, undefined, "MOD_MELEE", undefined, self.origin, self.origin, undefined, undefined, undefined);
@@ -216,12 +259,14 @@ playerPenDamage() {
 
 zombiePenDamage(parent, time) {
   self endon("death");
+
   if(flag("dog_round")) {
     self.a.nodeath = true;
   } else {
     if(!isDefined(level.numLaunched)) {
       level thread launch_monitor();
     }
+
     if(!isDefined(self.flung)) {
       if(parent.script_noteworthy == "1") {
         x = randomintrange(200, 250);
@@ -232,15 +277,18 @@ zombiePenDamage(parent, time) {
         y = randomintrange(-35, 35);
         z = randomintrange(95, 120);
       }
+
       if(level.my_time < 6)
         adjustment = level.my_time / 6;
       else if(level.my_time > 24)
         adjustment = (30 - level.my_time) / 6;
       else
         adjustment = 1;
+
       x = x * adjustment;
       y = y * adjustment;
       z = z * adjustment;
+
       self thread do_launch(x, y, z);
     }
   }
@@ -257,12 +305,17 @@ launch_monitor() {
 
 do_launch(x, y, z) {
   self.flung = 1;
+
   while(level.numLaunched > 4) {
     wait_network_frame();
   }
+
   self thread play_imp_sound();
+
   self StartRagdoll();
+
   self launchragdoll((x, y, z));
+
   level.numLaunched++;
 }
 
@@ -278,6 +331,7 @@ play_imp_sound() {
   if(!isDefined(level.numFloggerVox)) {
     level thread flogger_vocal_monitor();
   }
+
   if((level.numFloggerVox < 5) && oktospawn()) {
     self playSound("flogger_vocals");
     playFXOnTag(level._effect["trap_log"], self, "tag_origin");

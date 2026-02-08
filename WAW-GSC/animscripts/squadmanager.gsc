@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\squadmanager.gsc
-*****************************************************/
+****************************************/
 
 init_squadManager() {
   if(isDefined(anim.squadInitialized) && anim.squadInitialized) {
@@ -9,27 +9,33 @@ init_squadManager() {
   }
   anim.squadCreateFuncs = [];
   anim.squadCreateStrings = [];
+
   anim.squads = [];
   anim.squadIndex = [];
   anim.squadRand = 0;
+
   anim.squadInitialized = true;
 }
 
 createSquad(squadName) {
   assertex(!isDefined(anim.squads[squadName]), "createSquad attempted to create a squad with the same name as an existing squad");
+
   anim.squads[squadName] = spawnStruct();
   squad = anim.squads[squadName];
   squad.squadName = squadName;
+
   squad.sightTime = 0;
   squad.origin = undefined;
   squad.forward = undefined;
   squad.enemy = undefined;
   squad.isInCombat = false;
+
   squad.memberCount = 0;
   squad.members = [];
   squad.officers = [];
   squad.officerCount = 0;
   squad.squadList = [];
+
   squad.memberAddFuncs = [];
   squad.memberAddStrings = [];
   squad.memberRemoveFuncs = [];
@@ -37,6 +43,7 @@ createSquad(squadName) {
   squad.squadUpdateFuncs = [];
   squad.squadUpdateStrings = [];
   squad.squadID = anim.squadIndex.size;
+
   squad initState("combat", 0.75);
   squad initState("cover", 0.75);
   squad initState("move", 0.75);
@@ -44,38 +51,51 @@ createSquad(squadName) {
   squad initState("death", 0.75);
   squad initState("suppressed", 0.75);
   squad initState("attacking", 0.5);
+
   anim.squadIndex[anim.squadIndex.size] = squad;
+
   squad updateSquadList();
+
   level notify("squad created " + squadName);
   anim notify("squad created " + squadName);
+
   for(i = 0; i < anim.squadCreateFuncs.size; i++) {
     squadCreateFunc = anim.squadCreateFuncs[i];
     squad thread[[squadCreateFunc]]();
   }
+
   for(i = 0; i < anim.squadIndex.size; i++)
     anim.squadIndex[i] updateSquadList();
+
   squad thread updateWaiter();
   squad thread squadTracker();
   squad thread officerWaiter();
   squad thread updateMemberStates();
+
   return (squad);
 }
 
 deleteSquad(squadName) {
   assertex(isDefined(anim.squads[squadName]), "deleteSquad attempted to delete a squad that does not exist");
+
   if(squadName == "axis" || squadName == "allies") {
     return;
   }
   squadID = anim.squads[squadName].squadID;
   squad = anim.squads[squadName];
+
   while(squad.members.size)
     squad.members[0] addToSquad(squad.members[0].team);
+
   anim.squadIndex[squadID] = anim.squadIndex[anim.squadIndex.size - 1];
   anim.squadIndex[squadID].squadID = squadID;
   anim.squadIndex[anim.squadIndex.size - 1] = undefined;
+
   anim.squads[squadName] = undefined;
+
   level notify("squad deleted " + squadName);
   anim notify("squad deleted " + squadName);
+
   for(i = 0; i < anim.squadIndex.size; i++)
     anim.squadIndex[i] updateSquadList();
 }
@@ -83,6 +103,7 @@ deleteSquad(squadName) {
 generateSquadName() {
   squadName = "auto" + anim.squadRand;
   anim.squadRand++;
+
   return (squadName);
 }
 
@@ -93,63 +114,79 @@ addPlayerToSquad(squadName) {
     else
       squadName = self.team;
   }
+
   if(!isDefined(anim.squads[squadName]))
     anim createSquad(squadName);
+
   squad = anim.squads[squadName];
+
   self.squad = squad;
 }
-
 squadChange() {
   self endon("death");
   wait(10.0);
+
   if(!isDefined(self.script_squadname))
     squadName = (self.team + self.script_flanker);
   else
     squadName = (self.script_squadname + self.script_flanker);
+
   self addToSquad(squadName);
 }
 
 addToSquad(squadName) {
   assertex(issentient(self), "addToSquad attempted to add a non-sentient member to a squad");
+
   if(!isDefined(squadName)) {
     if(isDefined(self.script_flanker))
       self thread squadChange();
+
     if(isDefined(self.script_squadname))
       squadName = self.script_squadname;
+
     else
       squadName = self.team;
   }
   if(!isDefined(anim.squads[squadName]))
     anim createSquad(squadName);
+
   squad = anim.squads[squadName];
+
   if(isDefined(self.squad)) {
     if(self.squad == squad)
       return;
     else
       self removeFromSquad();
   }
+
   self.lastEnemySightTime = 0;
   self.combatTime = 0;
+
   self.squad = squad;
   self.memberID = squad.members.size;
   squad.members[self.memberID] = self;
   squad.memberCount = squad.members.size;
+
   if(isDefined(level.loadoutComplete)) {
     if(self.team == "allies" && self isOfficer())
       self addOfficerToSquad();
   }
+
   for(i = 0; i < self.squad.memberAddFuncs.size; i++) {
     memberAddFunc = self.squad.memberAddFuncs[i];
     self thread[[memberAddFunc]](self.squad.squadName);
   }
+
   self thread memberCombatWaiter();
   self thread memberDeathWaiter();
 }
 
 removeFromSquad() {
   assertex(isDefined(self.squad), "removeFromSquad attempted to remove a member who was not part of a squad (self.squad == undefined)");
+
   squad = self.squad;
   memberID = -1;
+
   if(isDefined(self)) {
     memberID = self.memberID;
   } else {
@@ -158,37 +195,48 @@ removeFromSquad() {
         memberID = i;
     }
   }
+
   assertex(memberID > -1, "removeFromSquad could not find memberID");
+
   if(memberID != squad.members.size - 1) {
     other = squad.members[squad.members.size - 1];
     squad.members[memberID] = other;
     if(isDefined(other))
       other.memberID = memberID;
   }
+
   squad.members[squad.members.size - 1] = undefined;
   squad.memberCount = squad.members.size;
+
   if(isDefined(self.officerID))
     self removeOfficerFromSquad();
+
   for(i = 0; i < self.squad.memberRemoveFuncs.size; i++) {
     memberRemoveFunc = self.squad.memberRemoveFuncs[i];
     self thread[[memberRemoveFunc]](squad.squadName);
   }
+
   assert(squad.members.size == squad.memberCount);
+
   if(squad.memberCount == 0)
     deleteSquad(squad.squadName);
+
   if(isDefined(self)) {
     self.squad = undefined;
     self.memberID = undefined;
   }
+
   self notify("removed from squad");
 }
 
 addOfficerToSquad() {
   squad = self.squad;
+
   if(isDefined(self.officerID)) {
     return;
   }
   assertex(!isDefined(self.officerID), "addOfficerToSquad attempted to add a member that is already in an officers");
+
   self.officerID = squad.officers.size;
   squad.officers[self.officerID] = self;
   squad.officerCount = squad.officers.size;
@@ -197,6 +245,7 @@ addOfficerToSquad() {
 removeOfficerFromSquad() {
   squad = self.squad;
   officerID = -1;
+
   if(isDefined(self)) {
     officerID = self.officerID;
   } else {
@@ -205,16 +254,21 @@ removeOfficerFromSquad() {
         officerID = i;
     }
   }
+
   assertex(officerID > -1, "removeOfficerFromSquad could not find officerID");
+
   if(officerID != squad.officers.size - 1) {
     other = squad.officers[squad.officers.size - 1];
     squad.officers[officerID] = other;
     if(isDefined(other))
       other.officerID = officerID;
   }
+
   squad.officers[squad.officers.size - 1] = undefined;
   squad.officerCount = squad.officers.size;
+
   assert(squad.officers.size == squad.officerCount);
+
   if(isDefined(self))
     self.officerID = undefined;
 }
@@ -222,6 +276,7 @@ removeOfficerFromSquad() {
 officerWaiter() {
   if(!isDefined(level.loadoutComplete))
     anim waittill("loadout complete");
+
   for(i = 0; i < self.members.size; i++) {
     if(self.members[i] isOfficer())
       self.members[i] addOfficerToSquad();
@@ -231,6 +286,7 @@ officerWaiter() {
 updateWaiter() {
   while(1) {
     anim waittill("squadupdate", action);
+
     switch (action) {
       case "squadlist":
         self updateSquadList();
@@ -252,24 +308,30 @@ squadTracker() {
   anim endon("squad deleted " + self.squadName);
   while(1) {
     self updateAll();
+
     wait(0.1);
   }
 }
 
 memberDeathWaiter() {
   self endon("removed from squad");
+
   self waittill("death", attacker);
+
   self removeFromSquad();
 }
 
 memberCombatWaiter() {
   self endon("removed from squad");
+
   while(1) {
     self waittill("enemy");
+
     if(!isDefined(self.enemy))
       self.squad notify("squadupdate", "combat");
     else
       self.squad.isInCombat = true;
+
     wait(0.05);
   }
 }
@@ -279,8 +341,10 @@ updateHeading() {
     self.forward = vectornormalize(self.enemy.origin - self.origin);
     return;
   }
+
   newHeading = (0, 0, 0);
   numInfluences = 0;
+
   for(i = 0; i < self.members.size; i++) {
     if(!isalive(self.members[i])) {
       continue;
@@ -288,6 +352,7 @@ updateHeading() {
     newHeading += anglesToForward(self.members[i].angles);
     numInfluences++;
   }
+
   if(numInfluences)
     self.forward = (newHeading[0] / numInfluences, newHeading[1] / numInfluences, newHeading[2] / numInfluences);
   else
@@ -297,6 +362,7 @@ updateHeading() {
 updateOrigin() {
   newOrigin = (0, 0, 0);
   numInfluences = 0;
+
   for(i = 0; i < self.members.size; i++) {
     if(!isalive(self.members[i])) {
       continue;
@@ -304,6 +370,7 @@ updateOrigin() {
     newOrigin += self.members[i].origin;
     numInfluences++;
   }
+
   if(numInfluences)
     self.origin = (newOrigin[0] / numInfluences, newOrigin[1] / numInfluences, newOrigin[2] / numInfluences);
   else
@@ -312,8 +379,10 @@ updateOrigin() {
 
 updateCombat() {
   self.isInCombat = false;
+
   for(i = 0; i < anim.squadIndex.size; i++)
     self.squadList[anim.squadIndex[i].squadName].isInContact = false;
+
   for(i = 0; i < self.members.size; i++) {
     if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad) && self.members[i].combatTime > 0)
       self.squadList[self.members[i].enemy.squad.squadName].isInContact = true;
@@ -330,6 +399,7 @@ updateEnemy() {
         curEnemy = self.members[i].enemy.squad;
     }
   }
+
   self.enemy = curEnemy;
 }
 
@@ -338,13 +408,16 @@ updateAll() {
   numInfluences = 0;
   curEnemy = undefined;
   isInCombat = false;
+
   self updateCombat();
+
   for(i = 0; i < self.members.size; i++) {
     if(!isalive(self.members[i])) {
       continue;
     }
     newOrigin += self.members[i].origin;
     numInfluences++;
+
     if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad)) {
       if(!isDefined(curEnemy))
         curEnemy = self.members[i].enemy.squad;
@@ -352,12 +425,15 @@ updateAll() {
         curEnemy = self.members[i].enemy.squad;
     }
   }
+
   if(numInfluences)
     self.origin = (newOrigin[0] / numInfluences, newOrigin[1] / numInfluences, newOrigin[2] / numInfluences);
   else
     self.origin = newOrigin;
+
   self.isInCombat = isInCombat;
   self.enemy = curEnemy;
+
   self updateHeading();
 }
 
@@ -367,19 +443,23 @@ updateSquadList() {
       self.squadList[anim.squadIndex[i].squadName] = spawnStruct();
       self.squadList[anim.squadIndex[i].squadName].isInContact = false;
     }
+
     for(j = 0; j < self.squadUpdateFuncs.size; j++) {
       squadUpdateFunc = self.squadUpdateFuncs[j];
       self thread[[squadUpdateFunc]](anim.squadIndex[i].squadName);
     }
   }
+
 }
 
 printAboveHead(string, duration, offset, color) {
   self endon("death");
+
   if(!isDefined(offset))
     offset = (0, 0, 0);
   if(!isDefined(color))
     color = (1, 0, 0);
+
   for(i = 0; i < (duration * 2); i++) {
     if(!isalive(self)) {
       return;
@@ -392,6 +472,7 @@ printAboveHead(string, duration, offset, color) {
 
 isOfficer() {
   fullRank = self animscripts\battlechatter::getRank();
+
   return (fullRank == "sergeant" || fullRank == "lieutenant" || fullRank == "captain" || fullRank == "sergeant");
 }
 
@@ -403,9 +484,11 @@ aiUpdateAnimState(animscript) {
     case "death":
       self.a.state = animscript;
       break;
+
     case "pain":
     case "grenadecower":
       break;
+
     case "cover_crouch":
     case "cover_left":
     case "cover_prone":
@@ -419,6 +502,7 @@ aiUpdateAnimState(animscript) {
     case "stalingrad_cover_crouch":
       self.a.state = "cover";
       break;
+
     case "aim":
     case "l33t truckride combat":
       self.a.state = "combat";
@@ -434,6 +518,7 @@ updateStates() {
   self resetState("death");
   self resetState("suppressed");
   self resetState("attacking");
+
   for(i = 0; i < self.members.size; i++) {
     if(!isalive(self.members[i])) {
       continue;
@@ -448,6 +533,7 @@ updateStates() {
 
 updateMemberStates() {
   anim endon("squad deleted " + self.squadName);
+
   timeSlice = 0.05;
   while(1) {
     for(i = 0; i < self.members.size; i++) {
@@ -457,6 +543,7 @@ updateMemberStates() {
       self.members[i] aiUpdateCombat(timeSlice);
       self.members[i] aiUpdateSuppressed(timeSlice);
     }
+
     wait(timeSlice);
   }
 }
@@ -467,12 +554,14 @@ aiUpdateCombat(timeSlice) {
       self.combatTime = timeSlice;
     else
       self.combatTime += timeSlice;
+
     self.lastEnemySightTime = gettime();
     return;
   } else if(self issuppressed()) {
     self.combatTime += timeSlice;
     return;
   }
+
   if(self.combatTime > 0)
     self.combatTime = (0 - timeSlice);
   else
@@ -485,8 +574,10 @@ aiUpdateSuppressed(timeSlice) {
       self.suppressedTime = timeSlice;
     else
       self.suppressedTime += timeSlice;
+
     return;
   }
+
   if(self.suppressedTime > 0)
     self.suppressedTime = (0 - timeSlice);
   else

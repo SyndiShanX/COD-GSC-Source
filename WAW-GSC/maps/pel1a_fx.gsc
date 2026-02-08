@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pel1a_fx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
@@ -9,11 +9,12 @@ main() {
   precache_ambient_fx();
   precache_global_fx();
   precache_event1_fx();
+
   maps\createfx\pel1a_fx::main();
   maps\createart\pel1a_art::main();
+
   thread wind_settings();
 }
-
 wind_settings() {
   SetSavedDvar("wind_global_vector", "-178 140 0");
   SetSavedDvar("wind_global_low_altitude", -500);
@@ -35,6 +36,7 @@ precache_ambient_fx() {
   level._effect["bunker_dust_ceiling_ambient"] = loadfx("maps/pel1/fx_bunker_dust_ceiling_impact_ambient");
   level._effect["godray_lg"] = loadfx("env/light/fx_ray_sun_lrg");
   level._effect["godray_med"] = loadfx("env/light/fx_ray_sun_med");
+
   level._effect["smoke_impact_smolder"] = loadfx("maps/pel1a/fx_smoke_crater_w");
   level._effect["smoke_rolling_thick"] = loadfx("maps/pel1a/fx_smoke_rolling_thick");
   level._effect["smoke_rolling_thick2"] = loadfx("maps/pel1a/fx_smoke_rolling_thick2");
@@ -45,26 +47,34 @@ precache_ambient_fx() {
   level._effect["heat_haze_medium"] = loadfx("maps/pel1a/fx_heathaze_md");
   level._effect["dust_kick_up_emitter"] = loadfx("maps/pel1a/fx_dust_kick_up_emitter");
   level._effect["dust_ambiance_tunnel"] = loadfx("maps/pel1a/fx_dust_ambiance_tunnel");
+
   level._effect["bomb_explosion"] = loadfx("weapon/napalm/fx_napalmExp_lg_blk_smk_01");
+
   level._effect["fall_out_fx"] = loadfx("maps/mak/fx_dust_and_leaves_kickup_small");
   level._effect["sniper_leaf_loop"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf01");
   level._effect["sniper_leaf_canned"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf02");
 }
-
 precache_global_fx() {
   level._effect["flesh_hit"] = LoadFX("impacts/flesh_hit");
+
   level._effect["character_fire_pain_sm"] = LoadFx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = LoadFx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = LoadFx("env/fire/fx_fire_player_torso");
+
   maps\_mortar::set_mortar_delays("dirt_mortar", 2, 5);
   maps\_mortar::set_mortar_range("dirt_mortar", 500, 5000);
+
   level._effectType["dirt_mortar"] = "mortar";
   level._effect["dirt_mortar"] = LoadFx("weapon/mortar/fx_mortar_exp_dirt_medium");
+
   maps\_mortar::set_mortar_dust("dirt_mortar", "ceiling_dust");
   level._effect["ceiling_dust"] = LoadFx("env/dirt/fx_dust_ceiling_impact_md_rocks");
+
   level._effect["model3_muzzle"] = LoadFx("weapon/artillery/fx_artillery_jap_200mm");
+
   level._effect["mortar_flash"] = LoadFx("weapon/mortar/fx_mortar_launch");
   level.scr_sound["mortar_flash"] = "wpn_mortar_fire";
+
   level._effect["mg_tincan_explosion"] = LoadFx("maps/pel1/fx_metal_bunker_upward_explosion");
   level._effect["mg_tunnel_explosion"] = LoadFx("env/fire/fx_fire_outward_burst");
 }

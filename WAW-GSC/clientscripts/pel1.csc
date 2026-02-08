@@ -1,33 +1,44 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\pel1.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_music;
 
 main() {
   clientscripts\_load::main();
+
   clientscripts\pel1_fx::main();
+
   clientscripts\_amtank::main("vehicle_usa_tracked_lvta4_amtank");
   clientscripts\_buffalo::main("vehicle_usa_tracked_lvt4");
+
   thread clientscripts\_audio::audio_init(0);
+
   thread clientscripts\pel1_amb::main();
+
   clientscripts\_vehicle::build_treadfx("corsair");
+
   thread waitforclient(0);
+
   thread event1_aaa_client();
   thread beach_fakefire_starter();
+
   thread evet1_side_smoke_begin();
   thread kill_ambient_trees_right();
+
   println("*** Client : pel1 running...");
 }
 
 evet1_side_smoke_begin() {
   println("*** Client : SMOKE!");
   level waittill("pol");
+
   println("*** Client : SMOKE!");
   struct1 = getstruct("side_smoke1", "targetname");
   struct2 = getstruct("side_smoke2", "targetname");
+
   playFX(0, level._effect["side_smoke"], struct1.origin, anglesToForward(struct1.angles));
   playFX(0, level._effect["side_smoke"], struct2.origin, anglesToForward(struct2.angles));
 }
@@ -38,7 +49,9 @@ setup_fake_dest_lvts() {
 
 event1_fake_dist_lvts() {
   lvts_structs = getstructarray("fake_dist_lvts", "targetname");
+
   lvts = [];
+
   players = getlocalplayers();
   for(i = 0; i < lvts_structs.size; i++) {
     for(n = 0; n < 1; n++) {
@@ -48,12 +61,15 @@ event1_fake_dist_lvts() {
       lvts[i].angles = lvts_structs[i].angles;
     }
   }
+
   println("set everything");
   for(i = 0; i < lvts_structs.size; i++) {
     point = getstruct(lvts_structs[i].target, "targetname");
     println("starting movetos");
   }
+
   level waittill("rf");
+
   for(i = 0; i < lvts.size; i++) {
     lvts[i] delete();
   }
@@ -61,27 +77,33 @@ event1_fake_dist_lvts() {
 
 event1_aaa_client() {
   level waittill("ab");
+
   point1 = getent(0, "event1_aaa_fx_point1", "targetname");
   point2 = getent(0, "event1_aaa_fx_point2", "targetname");
   point3 = getent(0, "event1_aaa_fx_point3", "targetname");
   point4 = getent(0, "event1_aaa_fx_point4", "targetname");
   point5 = getent(0, "event1_aaa_fx_point5", "targetname");
   point6 = getent(0, "event1_aaa_fx_point6", "targetname");
+
   point1 thread event1_ambient_aaa_fx_think("mof");
   point1 thread event1_ambient_aaa_fx_rotate();
   wait 1.5;
+
   point2 thread event1_ambient_aaa_fx_think();
   point2 thread event1_ambient_aaa_fx_rotate();
   wait 1.5;
   point3 thread event1_ambient_aaa_fx_think();
   point3 thread event1_ambient_aaa_fx_rotate();
+
   thread aaa_flak();
+
   wait 1.5;
   point4 thread event1_ambient_aaa_fx_think();
   point4 thread event1_ambient_aaa_fx_rotate();
   wait 1.5;
   point5 thread event1_ambient_aaa_fx_think();
   point5 thread event1_ambient_aaa_fx_rotate();
+
   wait 1.5;
   point6 thread event1_ambient_aaa_fx_think();
   point6 thread event1_ambient_aaa_fx_rotate();
@@ -91,10 +113,13 @@ event1_ambient_aaa_fx_think(endon_string) {
   if(isDefined(endon_string)) {
     level endon(endon_string);
   }
+
   while(1) {
     firetime = randomintrange(3, 8);
+
     for(i = 0; i < firetime * 5; i++) {
       playFX(0, level._effect["aaa_tracer"], self.origin, anglesToForward(self.angles));
+
       playSound(0, "pacific_fake_fire", self.origin);
       wait 0.2;
     }
@@ -104,6 +129,7 @@ event1_ambient_aaa_fx_think(endon_string) {
 
 event1_ambient_aaa_fx_rotate() {
   going_forward = true;
+
   while(1) {
     self rotateto((312.6, 180, -90), randomfloatrange(3.5, 6));
     self waittill("rotatedone");
@@ -114,31 +140,39 @@ event1_ambient_aaa_fx_rotate() {
 
 ambient_fakefire(endonString, delayStart) {
   level endon("do aftermath");
+
   if(delayStart) {
     wait(RandomFloatRange(0.25, 3.5));
   }
+
   if(isDefined(endonString)) {
     level endon(endonString);
   }
+
   team = undefined;
   fireSound = undefined;
   weapType = "rifle";
+
   if(!isDefined(self.script_noteworthy)) {
     team = "axis_mg";
   } else {
     team = self.script_noteworthy;
   }
+
   switch (team) {
     case "axis_mg":
       fireSound = "weap_type92_fire";
       weapType = "mg";
       break;
+
     default:
       ASSERTMSG("ambient_fakefire: team name '" + team + "' is not recognized.");
   }
+
   if(weapType == "rifle") {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 60;
+
     burstMin = 1;
     burstMax = 4;
     betweenShotsMin = 0.8;
@@ -148,6 +182,7 @@ ambient_fakefire(endonString, delayStart) {
   } else {
     muzzleFlash = level._effect["distant_muzzleflash"];
     soundChance = 45;
+
     burstMin = 3;
     burstMax = 12;
     betweenShotsMin = 0.112;
@@ -155,27 +190,40 @@ ambient_fakefire(endonString, delayStart) {
     reloadTimeMin = 0.3;
     reloadTimeMax = 3.0;
   }
+
   burst_area = (1250, 8250, 1000);
+
   traceDist = 10000;
   orig_target = self.origin + vector_multiply(anglesToForward(self.angles), traceDist);
+
   target_org = spawn(0, orig_target, "script_origin");
+
   while(1) {
     burst = RandomIntRange(burstMin, burstMax);
+
     targ_point = ((orig_target[0]) - (burst_area[0] / 2) + randomfloat(burst_area[0]), (orig_target[1]) - (burst_area[1] / 2) + randomfloat(burst_area[1]), (orig_target[2]) - (burst_area[2] / 2) + randomfloat(burst_area[2]));
+
     target_org moveto(targ_point, randomfloatrange(0.5, 6.0));
+
     for(i = 0; i < burst; i++) {
       target = target_org.origin;
+
       fx_angles = VectorNormalize(target - self.origin);
       playFX(0, muzzleFlash, self.origin, fx_angles);
+
       if(self.origin[0] > 1850 && self.origin[0] < 2300) {
         thread whiz_by_sound(self.origin, target);
       }
+
       playSound(0, "pacific_fake_fire", self.origin);
+
       if(RandomInt(100) <= soundChance) {
         playSound(0, fireSound, self.origin);
       }
+
       wait(RandomFloatRange(betweenShotsMin, betweenShotsMax));
     }
+
     wait(RandomFloatRange(reloadTimeMin, reloadTimeMax));
   }
 }
@@ -193,16 +241,21 @@ beach_fakefire_starter() {
   println("*** Client : Starting beach fakefire");
   firePoints = GetStructArray("beachwall_mgs", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
+
   array_thread(firePoints, ::ambient_fakefire, "bfe", true);
 }
 
 whiz_by_sound(start, end) {
   org = spawn(0, start, "script_origin");
+
   org moveto(end, 4);
+
   fake_ent = spawnfakeent(0);
   setfakeentorg(0, fake_ent, start);
   playLoopSound(0, fake_ent, "pel1_beach_whizby");
+
   org thread whiz_by_sound_mover(fake_ent);
+
   org waittill("movedone");
   deletefakeent(0, fake_ent);
   org delete();
@@ -210,6 +263,7 @@ whiz_by_sound(start, end) {
 
 whiz_by_sound_mover(fake_ent) {
   self endon("movedone");
+
   while(1) {
     realwait(0.05);
     setfakeentorg(0, fake_ent, self.origin);
@@ -230,8 +284,11 @@ aaa_flak() {
 
 kill_ambient_trees_right() {
   thread kill_ambient_trees_left();
+
   level waittill("sfr");
+
   trees = getEntArray(0, "right_side_trees", "targetname");
+
   println("TREEAMOUNT: " + trees.size);
   for(i = 0; i < trees.size; i++) {
     level thread move_tree_and_delete(trees[i]);
@@ -240,6 +297,7 @@ kill_ambient_trees_right() {
 
 kill_ambient_trees_left() {
   level waittill("sfl");
+
   trees = getEntArray(0, "left_side_trees", "targetname");
   println("TREEAMOUNT: " + trees.size);
   for(i = 0; i < trees.size; i++) {
@@ -249,8 +307,10 @@ kill_ambient_trees_left() {
 
 move_tree_and_delete(tree) {
   wait randomfloatrange(3, 4);
+
   tree rotateto((180, 270, 0), 1.5, 0.6, 0.1);
   tree moveto(tree.origin - (0, 0, 1000), 1);
   wait randomfloatrange(1.3, 2.3);
+
   tree delete();
 }

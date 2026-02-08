@@ -1,7 +1,7 @@
-/*****************************************************
+/*****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\sniper_stealth_logic.gsc
-*****************************************************/
+*****************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -57,6 +57,7 @@ corpse_adder(guy) {
     wait 0.1;
     time = time + .1;
   }
+
   wait 2;
   corpse.fresh = 2;
 }
@@ -71,7 +72,8 @@ corpsefind_wait() {
       corpse = level.corpsecount[i];
       dist = distance(corpse.origin, self.origin);
       corpse_in_front = self entity_is_in_front_of_me(corpse);
-      if(((dist < 400 && dist > 150) || corpse.fresh == 1) && !isDefined(level.corpsecount[i].marked) && (self cansee(corpse.seeme) || corpse_in_front == true)) {
+      if(((dist < 400 && dist > 150) || corpse.fresh == 1) &&
+        !isDefined(level.corpsecount[i].marked) && (self cansee(corpse.seeme) || corpse_in_front == true)) {
         self stopanimscripted();
         self notify("i_found_corpse");
         level.corpsecount[i].marked = true;
@@ -84,6 +86,7 @@ corpsefind_wait() {
         animspot = spawn("script_origin", self.origin - (nvec * factor));
         backwardsvec = corpse.origin - self.origin;
         animspot.origin = animspot.origin + (0, 0, 5);
+
         corpsespot = spawn("script_origin", animspot.origin);
         corpsespot.angles = vectortoangles(backwardsvec);
         self endon("reach_failed");
@@ -159,6 +162,7 @@ found_corpse_behavior() {
     } else {
       self anim_single_solo(self, anime);
     }
+
     for(i = 0; i < nodes.size; i++) {
       if(!isDefined(nodes[i].isacquired)) {
         self thread maps\_spawner::go_to_node(nodes[i]);
@@ -185,6 +189,7 @@ found_corpse_behavior() {
   if(flag("outof_event1")) {
     self.animname = "generic";
     self set_run_anim("_stealth_patrol_walk");
+
     for(i = 0; i < level.e1_return_nodes.size; i++) {
       if(!isDefined(level.e1_return_nodes[i].seatstaken)) {
         self thread maps\_spawner::go_to_node(level.e1_return_nodes[i]);
@@ -192,6 +197,7 @@ found_corpse_behavior() {
         level.e1_return_nodes[i].seatstaken = true;
         wait 0.5;
         self thread goal_failsafe(20);
+
         self waittill("goal");
         wait 60;
         self dodamage(self.health * 10, (0, 0, 0));
@@ -225,9 +231,12 @@ entity_is_in_front_of_me(target_entity) {
   point1 = self.origin;
   right_vector = anglestoright(self.angles);
   point2 = point1 + right_vector;
+
   vector_to_target = VectorFromLineToPoint(point1, point2, target_entity.origin);
+
   forward_vector = anglesToForward(self.angles);
   dot_product = vectordot(forward_vector, vector_to_target);
+
   if(dot_product >= 0) {
     return true;
   }

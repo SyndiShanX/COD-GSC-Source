@@ -1,12 +1,11 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_deadbody.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
 #using_animtree("generic_human");
-
 main() {
   level.scr_anim["dead_guy"]["death1"] = % exposed_death_nerve;
   level.scr_anim["dead_guy"]["death2"] = % exposed_death_falltoknees;
@@ -18,11 +17,15 @@ main() {
   level.scr_anim["dead_guy"]["death8"] = % death_pose_on_desk;
   level.scr_anim["dead_guy"]["death9"] = % death_pose_on_window;
   level.scr_animtree["dead_guy"] = #animtree;
+
   level.dead_body_count = 1;
   level.max_number_of_dead_bodies = 10;
+
   struct = spawnStruct();
   struct.bodies = [];
+
   run_thread_on_targetname("trigger_body", ::trigger_body, struct);
+
   run_thread_on_targetname("dead_body", ::spawn_dead_body, struct);
 }
 
@@ -45,20 +48,27 @@ spawn_dead_body(struct) {
       level.dead_body_count = 1;
     index = level.dead_body_count;
   }
+
   model = spawn("script_model", (0, 0, 0));
   model.origin = self.origin;
   model.angles = self.angles;
   model.animname = "dead_guy";
   model assign_animtree();
+
   struct que_body(model);
+
   model[[level.scr_deadbody[index]]]();
+
   assertex(isDefined(self.script_noteworthy), "Dead guy needs script_noteworthy death1 through 5");
+
   if(!isDefined(self.script_trace)) {
     trace = bulletTrace(model.origin + (0, 0, 5), model.origin + (0, 0, -64), false, undefined);
     model.origin = trace["position"];
   }
+
   model setflaggedanim("flag", model getanim(self.script_noteworthy), 1, 0, 1);
   model waittillmatch("flag", "end");
+
   if(!isDefined(self.script_start))
     model startragdoll();
 }

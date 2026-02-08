@@ -1,7 +1,7 @@
-/*****************************************************
+/*********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_destructible_opel_blitz.gsc
-*****************************************************/
+*********************************************/
 
 #include maps\_destructible;
 #using_animtree("vehicles");
@@ -9,8 +9,10 @@
 init() {
   set_function_pointer("explosion_anim", "dest_opel_blitz", ::get_explosion_animation);
   set_function_pointer("flattire_anim", "dest_opel_blitz", ::get_flattire_animation);
+
   build_destructible_radiusdamage("dest_opel_blitz", undefined, 260, 240, 40, true);
   build_destructible_deathquake("dest_opel_blitz", 0.6, 1.0, 600);
+
   set_pre_explosion("dest_opel_blitz", "destructibles/fx_dest_fire_car_fade_40");
 }
 

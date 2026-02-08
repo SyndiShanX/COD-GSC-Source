@@ -1,7 +1,7 @@
-/*****************************************************
+/*****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_japwet_off.gsc
-*****************************************************/
+*****************************************/
 
 main() {
   self setModel("char_jap_impinfwet_officer_body");

@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\see2_fortifications.gsc
-*****************************************************/
+****************************************/
 
 #include maps\_anim;
 #include maps\_utility;
@@ -15,6 +15,7 @@ do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
   if(isDefined(groupid)) {
     spawners = getEntArray(groupid, "targetname");
     array_thread(spawners, ::add_spawn_function, maps\see2::setup_bunker_infantry);
+
     trigger = getEnt(groupid, "target");
     if(isDefined(trigger)) {
       trigger waittill("trigger");
@@ -26,39 +27,48 @@ do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
   damageTrigger = getEnt(bunker_name + " damage trigger", "script_noteworthy");
   smokeNodes = getEntArray(bunker_name + " smoke", "script_noteworthy");
   tankTrigger = getEnt(bunker_name + " tank trigger", "script_noteworthy");
+
   truck = getEnt(bunker_name + " truck", "script_noteworthy");
+
   for(i = 0; i < group.size; i++) {
     if(isDefined(group[i]) && group[i].classname == "actor_axis_ger_ber_wehr_reg_panzerschrek") {
       group[i].maxsightdistsqrd = 3000 * 3000;
     }
     group[i].animname = "trench guy";
   }
+
   if(isDefined(damageTrigger)) {
     damageTrigger thread maps\see2::inform_on_damage_trigger("retreat " + bunker_name);
   }
   if(isDefined(tankTrigger)) {
     tankTrigger thread maps\see2::inform_on_touch_trigger("retreat " + bunker_name);
   }
+
   level waittill("retreat " + bunker_name);
+
   for(i = 0; i < smokeNodes.size; i++) {
     if(isDefined(group[i])) {
       playFX(level._effect["retreat_smoke"], smokeNodes[i].origin);
       wait(randomfloat(0.5, 0.75));
     }
   }
+
   if(isDefined(truck)) {
     movetrigger = getEnt(truck.script_noteworthy + " move trigger", "script_noteworthy");
     movetrigger notify("trigger");
   }
+
   group = get_living_ai_array(bunker_name + " guard", "script_noteworthy");
+
   possible_tanks = getEntArray("script_vehicle", "classname");
   player_tanks = [];
   for(i = 0; i < possible_tanks.size; i++) {
     tank_owner = possible_tanks[i] GetVehicleOwner();
-    if(IsPlayer(tank_owner)) {
+    if(isPlayer(tank_owner)) {
       player_tanks[player_tanks.size] = possible_tanks[i];
     }
   }
+
   notified = false;
   for(i = 0; i < group.size && i < goalNodes.size; i++) {
     if(isDefined(group[i])) {
@@ -66,6 +76,7 @@ do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
         level notify("retreaters", group[i]);
         notified = true;
       }
+
       if(group[i].classname == "actor_axis_ger_ber_wehr_reg_kar98k") {
         group[i].ignoreme = true;
         group[i].ignoreall = true;
@@ -78,6 +89,7 @@ do_bunker_group(bunker_name, new_bunker_name, event, groupid) {
       wait(randomfloat(0.7, 0.95));
     }
   }
+
   thread maps\see2::log_finished_event(event, 10);
 }
 
@@ -86,15 +98,20 @@ watch_for_grenade_throw_done(player_tanks, goal_node) {
     return;
   }
   self.scripted_grenade_throw = true;
+
   random_wait = RandomFloatRange(0.2, 1.5);
   wait(random_wait);
+
   my_target = player_tanks[0];
+
   for(j = 0; j < player_tanks.size; j++) {
     if(DistanceSquared(self.origin, my_target.origin) < DistanceSquared(self.origin, player_tanks[j].origin)) {
       my_target = player_tanks[j];
     }
   }
+
   self maps\_grenade_toss::force_grenade_toss(my_target.origin, undefined, 3, undefined, undefined);
+
   self setGoalNode(goal_node);
   self.scripted_grenade_throw = undefined;
 }
@@ -105,14 +122,15 @@ debug_line_on_damage() {
     if(mod == "MOD_PROJECTILE") {
       Print3d(point, "***", (1, 0, 0), 1, 3, 3000);
     }
+
     if(mod == "MOD_EXPLOSIVE") {
       Print3d(point, "***", (0, 0, 1), 1, 3, 3000);
     }
   }
 }
-
 do_panzerschreck_retreat() {
   self endon("death");
+
   while(1) {
     self.ignoreall = true;
     wait(randomintrange(6, 8));
@@ -120,18 +138,19 @@ do_panzerschreck_retreat() {
     wait(randomintrange(6, 8));
   }
 }
-
 wait_for_guard_tower_sploders() {
   damage_triggers = getEntArray("guard tower damage trigger", "script_noteworthy");
+
   for(i = 0; i < damage_triggers.size; i++) {
     drone_struct = getStruct(damage_triggers[i].target, "targetname");
+
     drone = maps\_drone::drone_scripted_spawn("actor_axis_ger_ber_wehr_reg_kar98k", drone_struct);
     damage_triggers[i].myDrone = drone;
+
     damage_triggers[i] thread wait_for_single_sploder();
     level.enemy_armor = array_add(level.enemy_armor, damage_triggers[i]);
   }
 }
-
 wait_for_single_sploder() {
   self waittill("trigger", ent);
   if(ent == get_players()[0]) {
@@ -142,27 +161,31 @@ wait_for_single_sploder() {
     level.enemy_armor = array_remove(level.enemy_armor, self);
   }
   radiusdamage(self.origin, 150, 500, 500);
+
   if(isDefined(self.myDrone)) {
     self.myDrone notify("no_drone_death_thread");
     self.myDrone Delete();
   }
-  if(IsPlayer(ent)) {
+
+  if(isPlayer(ent)) {
     arcademode_assignpoints("arcademode_score_banzai", ent);
   }
+
   level notify("achievement_destroy_notify", "schreck_tower");
 }
-
 do_fake_schrecks() {
   tower_triggers = getEntArray("guard tower damage trigger", "script_noteworthy");
+
   for(i = 0; i < tower_triggers.size; i++) {
     tower_triggers[i] thread do_fake_schreck();
   }
 }
-
 do_fake_schreck() {
   self endon("stop firing");
   self thread wait_for_my_sploder();
+
   schrecks = getStructArray(self.target, "targetname");
+
   while(1) {
     if(!isDefined(level.player_tanks)) {
       wait(0.05);
@@ -176,6 +199,7 @@ do_fake_schreck() {
       if(distancesquared(best_target.origin, schrecks[i].origin) > (3500 * 3500)) {
         continue;
       }
+
       current_target = self maps\see2::request_target(best_target);
       trace = bulletTrace(schrecks[i].origin, current_target.origin, false, undefined);
       if(trace["fraction"] < 0.95) {
@@ -189,54 +213,64 @@ do_fake_schreck() {
     wait(0.05);
   }
 }
-
 check_in_arc(targeter, target, arc) {
   if(!isDefined(targeter) || !isDefined(target) || !isDefined(arc)) {
     iprintln("COULD NOT FIRE SCHRECK, BAD DATA");
+
     return false;
   }
+
   toVec = target.origin - targeter.origin;
   toVec = (toVec[0], toVec[1], 0);
   toAng = vectorToAngles(toVec);
   if(abs(targeter.angles[1] - toAng[1]) < arc) {
     return true;
   }
+
   return false;
 }
-
 fire_schreck_at_pos(spawn_struct, target_pos, time) {
   while(!OkTospawn()) {
     wait(0.1);
   }
+
   shreck = spawn("script_model", spawn_struct.origin);
   shreck.angles = vectortoangles(target_pos - spawn_struct.origin);
   shreck setModel("weapon_ger_panzershreck_rocket");
+
   shreck_damage_ent = spawn("script_model", spawn_struct.origin);
+
   dest = target_pos;
+
   shreck moveTo(dest, time);
   playFXOnTag(level._effect["rocket_trail"], shreck, "tag_fx");
   shreck playLoopSound("rpg_rocket");
   wait time;
+
   shreck hide();
+
   playFX(level._effect["shreck_explode"], shreck.origin);
+
   shreck stoploopsound();
   playSoundAtPosition("rpg_impact_boom", shreck.origin);
   radiusdamage(shreck.origin, 256, 250, 250, shreck_damage_ent);
+
   wait(4);
   shreck Delete();
   shreck_damage_ent Delete();
 }
-
 wait_for_my_sploder() {
   self waittill("trigger");
   self notify("stop firing");
 }
-
 do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_drones_at_spawn) {
   trigger = GetEnt(bunker_name + " damage trigger", "script_noteworthy");
   trigger.swap_trigger = GetEnt(bunker_name + " anim trigger", "script_noteworthy");
+
   tank_trigger = GetEnt(bunker_name + " tank trigger", "script_noteworthy");
+
   tank_Trigger thread debug_line_on_damage();
+
   anim_nodes = GetStructArray(bunker_name + " anim node", "script_noteworthy");
   anim_node = anim_nodes[0];
   front_guard = undefined;
@@ -255,10 +289,12 @@ do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_dr
     trigger.front_guard thread maps\_drone::drone_idle();
     tank_trigger.front_guard = trigger.front_guard;
     trigger.front_guard setCanDamage(true);
+
     if(isDefined(kill_drones_at_spawn) && kill_drones_at_spawn) {
       trigger.front_guard DoDamage(trigger.front_guard.health * 2, trigger.front_guard.origin, get_players()[0]);
     }
   }
+
   if(isDefined(side_death) && side_death) {
     index = 1;
     curr_anim = level.scr_anim["flame_bunker"]["side_death"][index];
@@ -272,10 +308,12 @@ do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_dr
     trigger.side_guard thread maps\_drone::drone_idle();
     tank_trigger.side_guard = trigger.side_guard;
     trigger.side_guard setCanDamage(true);
+
     if(isDefined(kill_drones_at_spawn) && kill_drones_at_spawn) {
       trigger.side_guard DoDamage(trigger.side_guard.health * 2, trigger.side_guard.origin, get_players()[0]);
     }
   }
+
   if(isDefined(rear_death) && rear_death) {
     index = 1;
     curr_anim = level.scr_anim["flame_bunker"]["rear_death"][index];
@@ -289,26 +327,35 @@ do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_dr
     trigger.rear_guard thread maps\_drone::drone_idle();
     tank_trigger.rear_guard = trigger.rear_guard;
     trigger.rear_guard setCanDamage(true);
+
     if(isDefined(kill_drones_at_spawn) && kill_drones_at_spawn) {
       trigger.rear_guard DoDamage(trigger.rear_guard.health * 2, trigger.rear_guard.origin, get_players()[0]);
     }
   }
+
   trigger thread do_fake_fb_schrecks(bunker_name);
   trigger thread do_fb_effects();
+
   tank_trigger thread do_flame_bunker_tank_damage(bunker_name);
   trigger thread do_flame_bunker_flame_damage(bunker_name);
+
   level notify("event");
 }
 
 do_flame_bunker_tank_damage(bunker_name) {
   level endon(bunker_name + "destroyed");
+
   trigger = self;
+
   bunker_hit_max = 3;
   bunker_hit_counter = 0;
+
   while(1) {
     trigger waittill("damage", damage, other, direction, origin, damage_type);
+
     if(damage_type == "MOD_PROJECTILE") {
       bunker_hit_counter++;
+
       if(bunker_hit_counter == bunker_hit_max) {
         level notify(bunker_name + "end_schrecks");
         trigger thread do_secondary_fb_effects(bunker_name, true, other);
@@ -319,20 +366,26 @@ do_flame_bunker_tank_damage(bunker_name) {
 
 do_flame_bunker_flame_damage(bunker_name) {
   level endon(bunker_name + "destroyed");
+
   trigger = self;
+
   while(1) {
     trigger waittill("damage", damage, other, direction, origin, damage_type);
     if(damage_type == "MOD_BURNED") {
       break;
     }
   }
+
   if(other == get_players()[0]) {
     level notify("destruction");
   }
+
   animNotify = "generic";
+
   if(damage_type == "MOD_BURNED") {
     flame_time = 0;
     flame_time_threshold = 10;
+
     if(isDefined(trigger.front_guard)) {
       trigger.front_guard notify("bunker flamed");
       trigger.front_guard DoDamage(trigger.front_guard.health * 2, trigger.front_guard.origin, get_players()[0]);
@@ -345,16 +398,18 @@ do_flame_bunker_flame_damage(bunker_name) {
       trigger.rear_guard notify("bunker flamed");
       trigger.rear_gaurd DoDamage(trigger.rear_guard.health * 2, trigger.rear_guard.origin, get_players()[0]);
     }
+
     while(flame_time < flame_time_threshold) {
       trigger waittill("damage");
       flame_time++;
       wait(0.05);
     }
+
     trigger thread do_secondary_fb_effects(bunker_name, undefined, other);
   }
+
   wait(0.05);
 }
-
 cleanup_drones() {
   while(1) {
     visible = false;
@@ -364,7 +419,9 @@ cleanup_drones() {
       theirOrg = get_players()[i].origin;
       theirOrg = (theirOrg[0], theirOrg[1], 0);
       theirAng = get_players()[i].angles;
+
       diff = VectorToAngles(myOrg - theirOrg) - theirAng;
+
       if(abs(diff[1]) < 35) {
         visible = true;
       }
@@ -376,11 +433,11 @@ cleanup_drones() {
   }
   self notify("delete");
 }
-
 do_fake_fb_schrecks(bunker_name) {
   self endon("trigger");
   level endon(bunker_name + "end_schrecks");
   schreck_nodes = getStructArray(self.target, "targetname");
+
   while(1) {
     current_target = undefined;
     target_array = get_players();
@@ -412,13 +469,14 @@ do_fake_fb_schrecks(bunker_name) {
     }
   }
 }
-
 do_fb_effects() {
   self.no_damage_timer = 0;
   self.shutoff_time = 5;
   exit_points = getStructArray(self.target, "targetname");
+
   while(1) {
     self waittill("damage", damage, other, direction, origin, damage_type);
+
     if(damage_type != "MOD_BURNED") {
       continue;
     }
@@ -436,7 +494,6 @@ do_fb_effects() {
     self notify("kill_fx");
   }
 }
-
 do_secondary_fb_effects(bunker_name, tank_kill, attacker) {
   if(isDefined(tank_kill)) {
     if(isDefined(self.front_guard)) {
@@ -449,35 +506,43 @@ do_secondary_fb_effects(bunker_name, tank_kill, attacker) {
       self.rear_guard Delete();
     }
   }
+
   playFX(level._effect["bunker_secondary_flash"], self.origin, anglesToForward(self.angles));
   wait(1);
+
   exploder_trigger = getEnt(bunker_name + " damage trigger exploder", "script_noteworthy");
   exploder_trigger notify("trigger");
+
   damage_trigger = GetEnt(bunker_name + " damage trigger", "script_noteworthy");
   exit_points = getStructArray(damage_trigger.target, "targetname");
+
   for(i = 0; i < exit_points.size; i++) {
     playFX(level._effect["bunker_secondary_window"], exit_points[i].origin, anglesToForward(exit_points[i].angles));
   }
+
   wait(0.1);
   if(isDefined(damage_trigger.swap_trigger)) {
     damage_trigger.swap_trigger notify("trigger");
   }
+
   player_hit_me = undefined;
-  if(IsPlayer(attacker)) {
+  if(isPlayer(attacker)) {
     player_hit_me = attacker;
   } else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
     veh_owner = attacker GetVehicleOwner();
-    if(isDefined(veh_owner) && IsPlayer(veh_owner)) {
+
+    if(isDefined(veh_owner) && isPlayer(veh_owner)) {
       player_hit_me = attacker;
     }
   }
+
   if(isDefined(player_hit_me)) {
     arcademode_assignpoints("arcademode_score_generic500", player_hit_me);
   }
+
   level notify("achievement_destroy_notify", "bunker");
   level notify(bunker_name + "destroyed");
 }
-
 increment_damage_timer() {
   while(1) {
     self.no_damage_timer += 0.05;
@@ -487,7 +552,6 @@ increment_damage_timer() {
     wait(0.05);
   }
 }
-
 do_timer_resets() {
   self endon("kill fx");
   while(1) {
@@ -497,7 +561,6 @@ do_timer_resets() {
     }
   }
 }
-
 setup_flame_bunker_guard() {
   if(self.classname == "actor_axis_ger_ber_wehr_reg_panzerschrek") {
     self.a.rockets = 200;
@@ -506,19 +569,23 @@ setup_flame_bunker_guard() {
     self.ignoreall = true;
   }
 }
-
 do_fortification_spawn(groupNum) {
   damage_triggers = getEntArray("guardtower group " + groupNum, "targetname");
+
   if(damage_triggers.size == 0) {
     return;
   }
+
   for(i = 0; i < damage_triggers.size; i++) {
     drone_struct = getStruct(damage_triggers[i].target, "targetname");
+
     while(!OkTospawn()) {
       wait(0.05);
     }
+
     drone = maps\_drone::drone_scripted_spawn("actor_axis_ger_ber_wehr_reg_kar98k", drone_struct);
     damage_triggers[i].myDrone = drone;
+
     damage_triggers[i] thread wait_for_single_sploder();
     level.enemy_armor = array_add(level.enemy_armor, damage_triggers[i]);
   }

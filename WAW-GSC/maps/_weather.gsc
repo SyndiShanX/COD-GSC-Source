@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_weather.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -14,7 +14,6 @@ rainHard(transition) {
   level.ambient_modifier["rain"] = "";
   wait(transition * 0.5);
 }
-
 rainMedium(transition) {
   println("Rain becomes Medium over " + transition + " seconds");
   level notify("rain_change", "medium", transition);
@@ -73,6 +72,7 @@ lightning(normal, flash) {
   if(!isDefined(level.disableLightning)) {
     level.disableLightning = false;
   }
+
   [[normal]]();
   waittillframeend;
   for(;;)
@@ -109,29 +109,36 @@ addLightningExploder(num) {
     level.lightningExploder = [];
     level.lightningExploderIndex = 0;
   }
+
   level.lightningExploder[level.lightningExploder.size] = num;
 }
 
 playerWeather() {
   wait_for_first_player();
+
   players = get_players();
+
   for(i = 0; i < players.size; i++) {
     players[i] thread player_weather_loop();
   }
+
   level.playerWeatherStarted = true;
 }
-
 player_weather_loop() {
   self endon("death");
   self endon("disconnect");
+
   if(isDefined(self.playerWeatherLoopRunning) && self.playerWeatherLoopRunning) {
     return;
   }
+
   self.playerWeatherLoopRunning = true;
+
   for(;;) {
     if(level.rainLevel != 0) {
       playFX(level._effect["rain_drops"], self.origin + (0, 0, 650));
     }
+
     wait(0.3);
   }
 }
@@ -208,34 +215,41 @@ rainlevelwait() {
 
 lightningThink(normal, flash) {
   level endon("rain_change");
+
   nextStrike = gettime() + ((rainlevelwait() + rainlevelRandomwait()) * 1000);
   if(nextStrike < level.nextLightning) {
     level.nextLightning = nextStrike;
   }
+
   for(;;) {
     timer = (level.nextLightning - gettime()) * 0.001;
     if(timer > 0) {
       wait(timer);
     }
+
     if(level.rainLevel != 0 && !level.disableLightning) {
       lightningStrike(normal, flash);
     }
+
     level.nextLightning = gettime() + ((rainlevelwait() + rainlevelRandomwait()) * 1000);
   }
 }
-
 lightningStrike(normalfunc, flashfunc) {
   if(!isDefined(level.pauseLightning)) {
     level.pauseLightning = false;
   }
+
   if(level.pauseLightning) {
     return;
   }
+
   flash[0] = "quick";
   flash[1] = "double";
   flash[2] = "triple";
   flashType = RandomInt(flash.size);
+
   thread thunder(flash[flashType]);
+
   lit_num = 0;
   if(isDefined(level.lightningExploderIndex)) {
     if(level.lightningExploder.size > 1) {
@@ -243,8 +257,10 @@ lightningStrike(normalfunc, flashfunc) {
         lit_num = RandomInt(level.lightningExploder.size);
       }
     }
+
     level.lightningExploderIndex = lit_num;
   }
+
   switch (flash[flashType]) {
     case "quick": {
       lightningflash(normalfunc, flashfunc);
@@ -266,11 +282,12 @@ lightningStrike(normalfunc, flashfunc) {
     }
   }
 }
-
 lightningflash(normalfunc, flashfunc) {
   if(isDefined(level.lightningExploderIndex))
     exploder(level.lightningExploder[level.lightningExploderIndex]);
+
   [[flashfunc]]();
+
   wait RandomFloatRange(0.05, 0.1);
   [[normalfunc]]();
 }
@@ -308,14 +325,18 @@ thunder(flashType) {
   else
   if(level.rainLevel == 10)
     wait(0.75);
+
   thunderDistant = "thunder_farL";
   thunderClose = "thunder_closeL";
+
   if(isDefined(level.thunder_distant_sound)) {
     thunderDistant = level.thunder_distant_sound;
   }
+
   if(isDefined(level.thunder_strike_sound)) {
     thunderClose = level.thunder_close_sound;
   }
+
   if(isDefined(level.thunderSoundEmitter)) {
     emitter_thunder(thunderDistant, thunderClose, flashType);
   } else {
@@ -325,22 +346,23 @@ thunder(flashType) {
 
 emitter_thunder(thunderDistant, thunderClose, flashType) {
   ent = spawn("script_origin", level.thunderSoundEmitter.origin);
+
   ent thread thunder_playSound(thunderDistant, thunderClose, flashType);
 }
-
 player_thunder(thunderDistant, thunderClose, flashType) {
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = self.origin + (0, 0, 60);
   ent LinkTo(self);
+
   ent thread thunder_playSound(thunderDistant, thunderClose, flashType);
 }
-
 thunder_playSound(thunderDistant, thunderClose, flashType) {
   if(level.rainlevel <= 7) {
     self playSound(thunderDistant, "sounddone");
   } else {
     sound = thunderClose;
     doRumble = true;
+
     if(isDefined(flashType) && flashType == "quick") {
       sound = thunderDistant;
       doRumble = false;
@@ -353,11 +375,14 @@ thunder_playSound(thunderDistant, thunderClose, flashType) {
         doRumble = false;
       }
     }
+
     self playSound(sound, "sounddone");
+
     if(doRumble) {
       array_thread(get_players(), ::thunder_rumble);
     }
   }
+
   self waittill("sounddone");
   self Delete();
 }
@@ -365,11 +390,15 @@ thunder_playSound(thunderDistant, thunderClose, flashType) {
 thunder_rumble() {
   self endon("death");
   self endon("disconnect");
+
   wait(0.1);
+
   self notify("thunder_rumble");
   self endon("thunder_rumble");
+
   duration = 0.5;
   stopTime = GetTime() + (duration * 1000);
+
   while(GetTime() <= stopTime) {
     self PlayRumbleOnEntity("damage_heavy");
     wait(0.05);

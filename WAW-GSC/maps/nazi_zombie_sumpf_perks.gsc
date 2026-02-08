@@ -1,7 +1,7 @@
-/*****************************************************
+/********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\nazi_zombie_sumpf_perks.gsc
-*****************************************************/
+********************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -10,25 +10,32 @@
 randomize_vending_machines() {
   vending_machines = [];
   vending_machines = getEntArray("zombie_vending", "targetname");
+
   start_locations = [];
   start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
   start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
   start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
   start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+
   level.start_locations = [];
   level.start_locations[level.start_locations.size] = start_locations[0].origin;
   level.start_locations[level.start_locations.size] = start_locations[1].origin;
   level.start_locations[level.start_locations.size] = start_locations[2].origin;
   level.start_locations[level.start_locations.size] = start_locations[3].origin;
+
   start_locations = array_randomize(start_locations);
+
   for(i = 0; i < vending_machines.size; i++) {
     origin = start_locations[i].origin;
     angles = start_locations[i].angles;
+
     machine = vending_machines[i] get_vending_machine(start_locations[i]);
+
     start_locations[i].origin = origin;
     start_locations[i].angles = angles;
     machine.origin = origin;
     machine.angles = angles;
+
     machine hide();
     vending_machines[i] trigger_on();
   }
@@ -36,33 +43,42 @@ randomize_vending_machines() {
 
 get_vending_machine(start_location) {
   machine = GetEnt(self.target, "targetname");
+
   start_location.origin = machine.origin;
   start_location.angles = machine.angles;
+
   self enablelinkto();
+
   self linkto(start_location);
+
   return machine;
 }
 
 activate_vending_machine(machine, origin) {
   level notify("master_switch_activated");
+
   switch (machine) {
     case "zombie_vending_jugg_on_price":
       level notify("juggernog_sumpf_on");
       clientnotify("jugg_on");
       break;
+
     case "zombie_vending_doubletap_price":
       level notify("doubletap_sumpf_on");
       clientnotify("doubletap_on");
       break;
+
     case "zombie_vending_revive_on_price":
       level notify("revive_sumpf_on");
       clientnotify("revive_on");
       break;
+
     case "zombie_vending_sleight_on_price":
       level notify("sleight_sumpf_on");
       clientnotify("fast_reload_on");
       break;
   }
+
   play_vending_vo(machine, origin);
 }
 
@@ -70,32 +86,42 @@ play_vending_vo(machine, origin) {
   players = get_players();
   players = get_array_of_closest(origin, players, undefined, undefined, 512);
   player = undefined;
+
   for(i = 0; i < players.size; i++) {
     if(SightTracePassed(players[i] getEye(), origin, false, undefined)) {
       player = players[i];
     }
   }
+
   if(!isDefined(player)) {
     return;
   }
+
   switch (machine) {
     case "zombie_vending_jugg_on_price":
       player thread play_jugga_shout();
+
       break;
+
     case "zombie_vending_doubletap_price":
       player thread play_dbltap_shout();
+
       break;
+
     case "zombie_vending_revive_on_price":
       player thread play_revive_shout();
+
       break;
+
     case "zombie_vending_sleight_on_price":
       player thread play_speed_shout();
+
       break;
   }
 }
-
 play_jugga_shout() {
   index = maps\_zombiemode_weapons::get_player_index(self);
+
   player_index = "plr_" + index + "_";
   if(!isDefined(self.vox_gen_perk_jugga)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_jugga");
@@ -106,16 +132,18 @@ play_jugga_shout() {
     self.vox_gen_perk_jugga_available = self.vox_gen_perk_jugga;
   }
   sound_to_play = random(self.vox_gen_perk_jugga_available);
+
   self.vox_gen_perk_jugga_available = array_remove(self.vox_gen_perk_jugga_available, sound_to_play);
+
   if(self.vox_gen_perk_jugga_available.size < 1) {
     self.vox_gen_perk_jugga_available = self.vox_gen_perk_jugga;
   }
   wait(2);
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, 0.25);
 }
-
 play_dbltap_shout() {
   index = maps\_zombiemode_weapons::get_player_index(self);
+
   player_index = "plr_" + index + "_";
   if(!isDefined(self.vox_gen_perk_dbltap)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_dbltap");
@@ -126,16 +154,18 @@ play_dbltap_shout() {
     self.vox_gen_perk_dbltap_available = self.vox_gen_perk_dbltap;
   }
   sound_to_play = random(self.vox_gen_perk_dbltap_available);
+
   self.vox_gen_perk_dbltap_available = array_remove(self.vox_gen_perk_dbltap_available, sound_to_play);
+
   if(self.vox_gen_perk_dbltap_available.size < 1) {
     self.vox_gen_perk_dbltap_available = self.vox_gen_perk_dbltap;
   }
   wait(2);
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, 0.25);
 }
-
 play_revive_shout() {
   index = maps\_zombiemode_weapons::get_player_index(self);
+
   player_index = "plr_" + index + "_";
   if(!isDefined(self.vox_gen_perk_revive)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_revive");
@@ -146,16 +176,18 @@ play_revive_shout() {
     self.vox_gen_perk_revive_available = self.vox_gen_perk_revive;
   }
   sound_to_play = random(self.vox_gen_perk_revive_available);
+
   self.vox_gen_perk_revive_available = array_remove(self.vox_gen_perk_revive_available, sound_to_play);
+
   if(self.vox_gen_perk_revive_available.size < 1) {
     self.vox_gen_perk_revive_available = self.vox_gen_perk_revive;
   }
   wait(2);
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, 0.25);
 }
-
 play_speed_shout() {
   index = maps\_zombiemode_weapons::get_player_index(self);
+
   player_index = "plr_" + index + "_";
   if(!isDefined(self.vox_gen_perk_speed)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_gen_perk_speed");
@@ -166,16 +198,18 @@ play_speed_shout() {
     self.vox_gen_perk_speed_available = self.vox_gen_perk_speed;
   }
   sound_to_play = random(self.vox_gen_perk_speed_available);
+
   self.vox_gen_perk_speed_available = array_remove(self.vox_gen_perk_speed_available, sound_to_play);
+
   if(self.vox_gen_perk_speed_available.size < 1) {
     self.vox_gen_perk_speed_available = self.vox_gen_perk_speed;
   }
   wait(2);
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, 0.25);
 }
-
 play_rando_perk_dialog() {
   index = maps\_zombiemode_weapons::get_player_index(self);
+
   player_index = "plr_" + index + "_";
   if(!isDefined(self.vox_perk_lottery)) {
     num_variants = maps\_zombiemode_spawner::get_number_variants(player_index + "vox_perk_lottery");
@@ -186,24 +220,29 @@ play_rando_perk_dialog() {
     self.vox_perk_lottery_available = self.vox_perk_lottery;
   }
   sound_to_play = random(self.vox_perk_lottery_available);
+
   self.vox_perk_lottery_available = array_remove(self.vox_perk_lottery_available, sound_to_play);
+
   if(self.vox_perk_lottery_available.size < 1) {
     self.vox_perk_lottery_available = self.vox_perk_lottery;
   }
+
   self maps\_zombiemode_spawner::do_player_playdialog(player_index, sound_to_play, 0.25);
 }
-
 vending_randomization_effect(index) {
   vending_triggers = getEntArray("zombie_vending", "targetname");
   machines = [];
+
   for(j = 0; j < vending_triggers.size; j++) {
     machines[j] = getent(vending_triggers[j].target, "targetname");
   }
+
   for(j = 0; j < machines.size; j++) {
     if(machines[j].origin == level.start_locations[index]) {
       break;
     }
   }
+
   if(isDefined(level.first_time_opening_perk_hut)) {
     if(level.first_time_opening_perk_hut) {
       if(machines[j].model != "zombie_vending_jugg_on_price" || machines[j].model != "zombie_vending_sleight_on_price") {
@@ -212,21 +251,26 @@ vending_randomization_effect(index) {
             break;
           }
         }
+
         start_locations = [];
         start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
         start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
         start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
         start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+
         target_index = undefined;
         switch_index = undefined;
+
         for(x = 0; x < start_locations.size; x++) {
           if(start_locations[x].origin == level.start_locations[index]) {
             target_index = x;
           }
+
           if(start_locations[x].origin == machines[i].origin) {
             switch_index = x;
           }
         }
+
         temp_origin = machines[j].origin;
         temp_angles = machines[j].angles;
         machines[j].origin = machines[i].origin;
@@ -239,11 +283,15 @@ vending_randomization_effect(index) {
         start_locations[switch_index].angles = temp_angles;
         j = i;
       }
+
       level.first_time_opening_perk_hut = false;
     }
   }
+
   playsoundatposition("rando_start", machines[j].origin);
+
   origin = machines[j].origin;
+
   if(level.vending_model_info.size > 1) {
     playFXOnTag(level._effect["zombie_perk_start"], machines[j], "tag_origin");
     playsoundatposition("rando_perk", machines[j].origin);
@@ -251,37 +299,50 @@ vending_randomization_effect(index) {
     playFXOnTag(level._effect["zombie_perk_4th"], machines[j], "tag_origin");
     playsoundatposition("rando_perk", machines[j].origin);
   }
+
   true_model = machines[j].model;
+
   machines[j] setModel(true_model);
   machines[j] show();
+
   floatHeight = 40;
+
   level thread play_sound_2D("perk_lottery");
+
   machines[j] moveto(origin + (0, 0, floatHeight), 5, 3, 0.5);
+
   tag_fx = spawn("script_model", machines[j].origin + (0, 0, 40));
   tag_fx setModel("tag_origin");
   tag_fx LinkTo(machines[j]);
+
   modelindex = 0;
   machines[j] Vibrate(machines[j].angles, 2, 1, 4);
   for(i = 0; i < 30; i++) {
     wait(0.15);
+
     if(level.vending_model_info.size > 1) {
       while(!isDefined(level.vending_model_info[modelindex])) {
         modelindex++;
+
         if(modelindex == 4) {
           modelindex = 0;
         }
       }
+
       modelname = level.vending_model_info[modelindex];
       machines[j] setModel(modelname);
       playFXOnTag(level._effect["zombie_perk_flash"], tag_fx, "tag_origin");
       modelindex++;
+
       if(modelindex == 4) {
         modelindex = 0;
       }
     }
   }
+
   modelname = true_model;
   machines[j] setModel(modelname);
+
   machines[j] moveto(origin, 0.3, 0.3, 0);
   playFXOnTag(level._effect["zombie_perk_end"], machines[j], "tag_origin");
   playsoundatposition("perks_rattle", machines[j].origin);
@@ -298,38 +359,48 @@ vending_randomization_effect(index) {
 
 randomize_weapons(list) {
   vending_machines_with_weights = strTok(list, ";");
+
   vending_machine_list = getEntArray("zombie_vending", "targetname");
+
   start_locations = [];
   start_locations[0] = getent("random_vending_start_location_0", "script_noteworthy");
   start_locations[1] = getent("random_vending_start_location_1", "script_noteworthy");
   start_locations[2] = getent("random_vending_start_location_2", "script_noteworthy");
   start_locations[3] = getent("random_vending_start_location_3", "script_noteworthy");
+
   for(i = 0; i < vending_machines_with_weights.size; i++) {
     vending_machine = strTok(vending_machines_with_weights[i], ":");
+
     index = 0;
     for(; index < vending_machine_list.size; index++) {
       if(vending_machine_list[index].target == vending_machine[0]) {
         break;
       }
     }
+
     weaponList = strTok(vending_machine[1], ",");
     vending_location = getent(vending_machine_list[index].target, "targetname");
+
     location = 0;
     for(; location < start_locations.size; location++) {
       if(start_locations[location].origin == vending_location.origin) {
         break;
       }
     }
+
     switch (location) {
       case 0:
         randomize_weapons_for_building("rws_nw", weaponList);
         break;
+
       case 1:
         randomize_weapons_for_building("rws_ne", weaponList);
         break;
+
       case 2:
         randomize_weapons_for_building("rws_se", weaponList);
         break;
+
       case 3:
         randomize_weapons_for_building("rws_sw", weaponList);
         break;
@@ -341,14 +412,18 @@ randomize_weapons_for_building(spawnpoint_name, weaponList) {
   start_locations = [];
   start_locations = getEntArray(spawnpoint_name, "script_noteworthy");
   weaponList = array_randomize(weaponList);
+
   for(j = 0; j < start_locations.size; j++) {
     origin = start_locations[j].origin;
     angles = start_locations[j].angles;
     trigger = start_locations[j];
+
     trigger.targetname = "weapon_upgrade";
     trigger.zombie_weapon_upgrade = weaponList[j];
+
     rand = randomIntRange(j * weaponList.size, (j + 1) * weaponList.size);
     trigger.target = weaponList[j] + rand;
+
     model_name = GetWeaponModel(weaponList[j]);
     weapon = spawn("script_model", origin);
     weapon setModel(model_name);

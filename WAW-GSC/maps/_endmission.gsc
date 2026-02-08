@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_endmission.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -9,7 +9,9 @@
 
 main() {
   missionSettings = [];
+
   missionIndex = 0;
+
   missionSettings = create_mission(undefined);
   missionSettings add_level("mak", false, "", true, "MAK_VETERAN_ACHIEVEMENT", "MAKIN_ACHIEVEMENT", true);
   missionSettings add_level("pel1", false, "", true, "PEL1_VETERAN_ACHIEVEMENT", "PELELIU_ACHIEVEMENT", true);
@@ -29,20 +31,24 @@ main() {
   if(!is_german_build())
     missionSettings add_level("outro", false);
   missionSettings add_level("credits", false);
+
   level.missionSettings = missionSettings;
 }
-
 _nextmission() {
   level.nextmission = true;
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(players[i] player_is_in_laststand()) {
       players[i] notify("player_revived");
       setClientSysState("lsm", "0", players[i]);
     }
+
     players[i] EnableInvulnerability();
   }
+
   level_index = level.missionSettings get_level_index(level.script);
+
   if(arcadeMode()) {
     level.arcadeMode_success = true;
     level thread maps\_arcadeMode::arcadeMode_ends(level_index);
@@ -51,41 +57,54 @@ _nextmission() {
     maps\_challenges_coop::doMissionCallback("levelEnd", level_index);
     maps\_hud_message::waitTillNotifiesDone();
   }
+
   SetSavedDvar("ui_nextMission", "1");
-  SetDvar("ui_showPopup", "0");
-  SetDvar("ui_popupString", "");
+  setDvar("ui_showPopup", "0");
+  setDvar("ui_popupString", "");
+
   if(!isDefined(level_index)) {
     return;
   }
+
   maps\_utility::level_end_save();
+
   if(!coopGame()) {
     level.missionSettings set_level_completed(level_index);
+
     if(GetDvarInt("mis_01") < level_index + 1) {
       set_mission_dvar("mis_01", level_index + 1);
     }
-    if(GetDvarInt("mis_01") == GetDvarInt("mis_01_unlock") && (GetDvar("language") != "german" || GetDvar("allow_zombies_german") == "1")) {
-      SetDvar("ui_sp_unlock", "1");
+
+    if(GetDvarInt("mis_01") == GetDvarInt("mis_01_unlock") && (getDvar("language") != "german" || getDvar("allow_zombies_german") == "1")) {
+      setDvar("ui_sp_unlock", "1");
       set_mission_dvar("mis_01", (GetDvarInt("mis_01_unlock") + 1));
     }
+
     UpdateGamerProfile();
+
     if(level.missionSettings has_achievement(level_index)) {
       players[0] giveachievement_wrapper(level.missionSettings get_achievement(level_index));
     }
+
     if(level.missionSettings has_level_veteran_award(level_index) && get_level_completed(level_index) == 4 && level.missionSettings check_other_hasLevelVeteranAchievement(level_index)) {
       players[0] giveachievement_wrapper(level.missionSettings get_level_veteran_award(level_index));
     }
+
     if(level.missionSettings has_mission_hardened_award() && level.missionSettings get_lowest_skill() > 2) {
       players[0] giveachievement_wrapper(level.missionSettings get_hardened_award());
     }
+
     if(level.missionSettings has_campaign(level_index) && level.missionSettings is_campaign_complete(level_index)) {
       players[0] giveachievement_wrapper(level.missionSettings get_campaign(level_index));
     }
   }
-  if(getdvar("onlinegame") == "1" && !arcadeMode()) {
+
+  if(getDvar("onlinegame") == "1" && !arcadeMode()) {
     giveachievement_wrapper("COOP_ACHIEVEMENT_CAMPAIGN", true);
   }
-  if(getdvar("onlinegame") == "1" && arcadeMode()) {
+  if(getDvar("onlinegame") == "1" && arcadeMode()) {
     giveachievement_wrapper("COOP_ACHIEVEMENT_COMPETITIVE", true);
+
     if(players.size == 4) {
       highest_score = -99999;
       highest = 0;
@@ -95,9 +114,11 @@ _nextmission() {
           highest_score = players[i].score;
         }
       }
+
       players[highest] giveachievement_wrapper("COOP_ACHIEVEMENT_HIGHSCORE", false);
     }
   }
+
   for(i = 0; i < players.size; i++) {
     weaps = [];
     weaps[0] = "m2_flamethrower";
@@ -105,7 +126,9 @@ _nextmission() {
     if(players[i] hasusedweapon(weaps, true)) {
       players[i] giveachievement_wrapper("ANY_ACHIEVEMENT_FTONLY", false);
     }
-    if(get_level_completed(level_index) > 1) {
+
+    if(get_level_completed(level_index) > 1) //normal or greater
+    {
       if(!coopGame() && !IsSplitscreen()) {
         weaps = [];
         weaps[0] = "none";
@@ -120,42 +143,53 @@ _nextmission() {
       players[0] giveachievement_wrapper("ANY_ACHIEVEMENT_NODEATH", false);
     }
   }
+
   nextlevel_index = level.missionSettings.levels.size;
+
   nextlevel_index = level_index + 1;
+
   if(coopGame()) {
     found = false;
+
     for(; nextlevel_index < level.missionSettings.levels.size; nextlevel_index++) {
       if(level.missionSettings get_coop(nextlevel_index)) {
         found = true;
         break;
       }
     }
+
     if(!found) {
       nextlevel_index = level.missionSettings get_first_coop_index();
       assert(nextlevel_index >= 0);
       assert(nextlevel_index < level.missionSettings.levels.size);
+
       if(IsSplitScreen()) {
         if(!arcadeMode())
           maps\_cooplogic::endGame();
         else
           exitLevel(false);
+
         SetUINextLevel(level.missionSettings get_level_name(nextlevel_index));
         wait 1;
         return;
       }
     }
   }
+
   if(coopGame() && !IsSplitScreen()) {
     if(!arcadeMode()) {
       maps\_cooplogic::endGame();
     } else {
       exitLevel(false);
     }
+
     assert(nextlevel_index >= 0);
     assert(nextlevel_index < level.missionSettings.levels.size);
+
     SetUINextLevel(level.missionSettings get_level_name(nextlevel_index));
     return;
   }
+
   if(!coopGame() || IsSplitScreen()) {
     if(level.missionSettings skip_success(level_index)) {
       ChangeLevel(level.missionSettings get_level_name(nextlevel_index), level.missionSettings get_keep_weapons(level_index));
@@ -186,6 +220,7 @@ _nextmission() {
         hardcore_award = false;
         break;
       }
+
       if(difficulty < 3) {
         hardcore_award = false;
       }
@@ -200,17 +235,21 @@ _nextmission() {
 }
 
 get_level_completed(level_index) {
-  return Int(GetDvar("mis_difficulty")[level_index]);
+  return Int(getDvar("mis_difficulty")[level_index]);
 }
 
 set_level_completed(level_index) {
   levelOffset = level_index;
-  missionString = GetDvar("mis_difficulty");
+
+  missionString = getDvar("mis_difficulty");
+
   if(Int(missionString[levelOffset]) > level.gameskill) {
     return;
   }
+
   newString = "";
   gameskill = level.gameskill;
+
   for(index = 0; index < missionString.size; index++) {
     if(index != levelOffset) {
       newString += missionString[index];
@@ -220,12 +259,12 @@ set_level_completed(level_index) {
   }
   set_mission_dvar("mis_difficulty", newString);
 }
-
 set_mission_dvar(dvar, string) {
   if(maps\_cheat::is_cheating() || flag("has_cheated")) {
     return;
   }
-  if(GetDvar("mis_cheat") == "1") {
+
+  if(getDvar("mis_cheat") == "1") {
     return;
   }
   SetMissionDvar(dvar, string);
@@ -233,7 +272,8 @@ set_mission_dvar(dvar, string) {
 
 get_level_skill(level_index) {
   levelOffset = level_index;
-  missionString = GetDvar("mis_difficulty");
+
+  missionString = getDvar("mis_difficulty");
   return (Int(missionString[levelOffset]));
 }
 
@@ -246,8 +286,9 @@ get_mission_dvar(missionIndex) {
 }
 
 get_lowest_skill() {
-  missionString = GetDvar("mis_difficulty");
+  missionString = getDvar("mis_difficulty");
   lowestSkill = 4;
+
   for(index = 0; index < self.levels.size; index++) {
     if(Int(missionString[index]) < lowestSkill) {
       lowestSkill = Int(missionString[index]);
@@ -255,14 +296,12 @@ get_lowest_skill() {
   }
   return (lowestSkill);
 }
-
 create_mission(HardenedAward) {
   mission = spawnStruct();
   mission.levels = [];
   mission.HardenedAward = HardenedAward;
   return (mission);
 }
-
 add_level(levelName, keepWeapons, achievement, skip_success, veteran_achievement, campaign, coop) {
   assert(isDefined(keepweapons));
   level_index = self.levels.size;
@@ -281,6 +320,7 @@ get_level_index(levelName) {
     if(self.levels[i].name != levelName) {
       continue;
     }
+
     return (i);
   }
   return (undefined);
@@ -326,6 +366,7 @@ is_campaign_complete(level_index) {
     if(i == level_index) {
       continue;
     }
+
     if(isDefined(self.levels[i].campaign) && isDefined(campaign) && self.levels[i].campaign == campaign) {
       count++;
       if(self get_level_completed(i) > 0) {
@@ -333,6 +374,7 @@ is_campaign_complete(level_index) {
       }
     }
   }
+
   if(count == complete_count) {
     return true;
   } else {
@@ -343,20 +385,21 @@ is_campaign_complete(level_index) {
 get_campaign(level_index) {
   return (self.levels[level_index].campaign);
 }
-
 get_coop(level_index) {
   if(self get_level_name(level_index) == "credits")
     return false;
+
   if(self get_level_name(level_index) == "outro")
     return false;
+
   return self.levels[level_index].coop;
 }
-
 get_first_coop_index() {
   for(i = 0; i < level.missionSettings.levels.size; i++) {
     if(self get_coop(i))
       return i;
   }
+
   return -1;
 }
 
@@ -373,9 +416,11 @@ check_other_hasLevelVeteranAchievement(level_index) {
     if(i == level_index) {
       continue;
     }
+
     if(!has_level_veteran_award(i)) {
       continue;
     }
+
     if(self.levels[i].veteran_achievement == self.levels[level_index].veteran_achievement) {
       if(get_level_completed(i) < 4) {
         return false;
@@ -406,7 +451,7 @@ has_mission_hardened_award() {
 
 force_all_complete() {
   println("tada!");
-  missionString = GetDvar("mis_difficulty");
+  missionString = getDvar("mis_difficulty");
   newString = "";
   for(index = 0; index < missionString.size; index++) {
     if(index < 20) {
@@ -425,8 +470,8 @@ clearall() {
 }
 
 credits_end() {
-  if(GetDvar("credits_frommenu") == "1" || coopGame() || isSplitScreen() || (GetDvar("language") == "german" && GetDvar("allow_zombies_german") == "0")) {
-    if(GetDvar("credits_frommenu") == "1" || (!coopGame() && !isSplitScreen())) {
+  if(getDvar("credits_frommenu") == "1" || coopGame() || isSplitScreen() || (getDvar("language") == "german" && getDvar("allow_zombies_german") == "0")) {
+    if(getDvar("credits_frommenu") == "1" || (!coopGame() && !isSplitScreen())) {
       setDvar("ui_skipMainLockout", 1);
       setDvar("credits_frommenu", 0);
     }

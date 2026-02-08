@@ -1,16 +1,19 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\_treadfx.csc
-*****************************************************/
+**************************************/
 
 main(vehicletype) {
   println("treadfx:main() for " + vehicletype);
+
   if(!isDefined(vehicletype)) {
     return;
   }
   if(!isDefined(level.vehicle_treads))
     level.vehicle_treads = [];
+
   level.vehicle_treads[vehicletype] = true;
+
   switch (vehicletype) {
     case "willys":
       level.vehicle_treads[vehicletype] = false;
@@ -38,6 +41,7 @@ main(vehicletype) {
       setallvehiclefx(vehicletype, "vehicle/treadfx/fx_treadfx_dust");
       break;
     case "jap_ptboat":
+
       setallvehiclefx(vehicletype, "maps/fly/fx_wake_ptboat");
       break;
     case "rubber_raft":

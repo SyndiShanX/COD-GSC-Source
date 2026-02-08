@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\walk.gsc
-*****************************************************/
+**************************************/
 
 #include animscripts\SetPoseMovement;
 #include animscripts\Utility;
@@ -9,6 +9,7 @@
 
 MoveWalk() {
   desiredPose = self animscripts\utility::choosePose();
+
   switch (desiredPose) {
     case "stand":
       if(BeginStandWalk()) {
@@ -17,12 +18,14 @@ MoveWalk() {
       walkAnim = getStandWalkAnim();
       DoWalkAnim(walkAnim);
       break;
+
     case "crouch":
       if(BeginCrouchWalk()) {
         return;
       }
       DoWalkAnim(%crouch_fastwalk_F);
       break;
+
     default:
       assert(desiredPose == "prone");
       if(BeginProneWalk()) {
@@ -36,10 +39,12 @@ MoveWalk() {
 
 DoWalkAnim(walkAnim) {
   self endon("movemode");
+
   self setFlaggedAnimKnobAll("walkanim", walkAnim, %body, 1, 1.2, 1);
   if(self.a.pose != "prone") {
     self animscripts\run::UpdateRunWeightsOnce(%combatrun_forward, %walk_lowready_B, %walk_lowready_L, %walk_lowready_R);
   }
+
   self animscripts\shared::DoNoteTracksForTime(0.2, "walkanim");
 }
 

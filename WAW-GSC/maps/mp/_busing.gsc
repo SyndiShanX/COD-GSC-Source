@@ -1,18 +1,19 @@
-/*****************************************************
- * Decompiled and Edited by SyndiShanX
- * Script: maps\mp\_busing.gsc
-*****************************************************/
 
 #include maps\mp\_utility;
 
-busInit() {
-  assert(level.clientscripts);
-  level.busState = "";
-  registerClientSys("busCmd");
+busInit()
+{
+	assert(level.clientscripts);
+
+	level.busState = "";
+	registerClientSys("busCmd");
+
+	//setBusState("map_load");
 }
 
-setBusState(state) {
-  if(level.busState != state)
-    setClientSysState("busCmd", state);
-  level.busState = state;
+setBusState(state)
+{
+	if(level.busState != state)
+		setClientSysState("busCmd", state );
+	level.busState = state;
 }

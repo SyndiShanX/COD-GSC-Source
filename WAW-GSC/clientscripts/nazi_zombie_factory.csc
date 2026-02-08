@@ -1,7 +1,7 @@
-/*****************************************************
+/*************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\nazi_zombie_factory.csc
-*****************************************************/
+*************************************************/
 
 #include clientscripts\_utility;
 #include clientscripts\_music;
@@ -9,6 +9,7 @@
 zombie_monitor(clientNum) {
   self endon("disconnect");
   self endon("zombie_off");
+
   while(1) {
     if(isDefined(self.zombifyFX)) {
       playFX(clientNum, level._effect["zombie_grain"], self.origin);
@@ -19,6 +20,7 @@ zombie_monitor(clientNum) {
 
 zombifyHandler(clientNum, newState, oldState) {
   player = getlocalplayers()[clientNum];
+
   if(newState == "1") {
     if(!isDefined(player.zombifyFX)) {
       player.zombifyFX = 1;
@@ -36,14 +38,22 @@ zombifyHandler(clientNum, newState, oldState) {
 
 main() {
   clientscripts\_load::main();
+
   println("Registering zombify");
   clientscripts\_utility::registerSystem("zombify", ::zombifyHandler);
+
   clientscripts\nazi_zombie_factory_teleporter::main();
+
   clientscripts\nazi_zombie_factory_fx::main();
+
   clientscripts\_zombiemode_tesla::init();
   thread clientscripts\_audio::audio_init(0);
+
   thread clientscripts\nazi_zombie_factory_amb::main();
+
   level._zombieCBFunc = clientscripts\_zombie_mode::zombie_eyes;
+
   thread waitforclient(0);
+
   println("*** Client : zombie running...or is it chasing? Muhahahaha");
 }

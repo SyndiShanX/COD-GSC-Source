@@ -1,7 +1,7 @@
-/*****************************************************
+/***************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_ger_hnrgd_player_smg.gsc
-*****************************************************/
+***************************************************/
 
 main() {
   self setModel("char_ger_hnrgd_player_body_smg");

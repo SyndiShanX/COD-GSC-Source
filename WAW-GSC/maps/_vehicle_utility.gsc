@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_vehicle_utility.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_anim;
 #include maps\_utility;
@@ -12,14 +12,19 @@ advance_then_retreat_one_path(startPath, retreatPathName, speed, accel, damage_p
   self endon("death");
   if(!isDefined(damage_percent))
     damage_percent = 0.0;
+
   self advance_then_stop(startPath, speed, accel);
+
   self thread check_for_damage_notify(damage_percent);
+
   if(isDefined(retreatNotify)) {
     self waittill_either(retreatNotify, "damage reached");
   } else {
     self waittill("damage reached");
   }
+
   retreatPath = GetVehicleNode(retreatPathName, "targetname");
+
   self setSpeed(speed, accel);
   self attachPath(retreatPath);
   self.attachedpath = retreatPath;
@@ -36,6 +41,7 @@ advance_then_stop(path1start, speed, accel) {
   self endon("death");
   goalNode = GetVehicleNode(path1start, "targetname");
   self setSpeed(speed, accel);
+
   self attachPath(goalNode);
   self.attachedpath = goalNode;
   self thread goPath(self);
@@ -48,8 +54,10 @@ patrol_loop(path1start, path1end, path2start, path2end, speed, accel) {
   goalnodes[1] = GetVehicleNode(path1end, "targetname");
   goalnodes[2] = GetVehicleNode(path2start, "targetname");
   goalnodes[3] = GetVehicleNode(path2end, "targetname");
+
   currNode = 1;
   nextNode = 2;
+
   self setSpeed(speed, accel);
   self attachPath(goalnodes[0]);
   self.attachedpath = goalnodes[0];
@@ -70,21 +78,26 @@ patrol_loop_then_retreat(path1start, path1end, path2start, path2end, startretrea
   self endon("death");
   if(!isDefined(damage_percent))
     damage_percent = 0.0;
+
   reachNode = GetVehicleNode(startretreatnode, "targetname");
   switchNode = GetVehicleNode(retreatpathnode, "targetname");
+
   self thread patrol_loop(path1start, path1end, path2start, path2end, speed, accel);
   self thread check_for_damage_notify(damage_percent);
+
   if(isDefined(retreatNotify)) {
     self waittill_either("damage reached", retreatNotify);
   } else {
     self waittill("damage reached");
   }
+
   self thread switch_path_when_node_reached(reachNode, switchNode, speed, accel);
 }
 
 switch_path_when_node_reached(reachNode, switchNode, speed, accel) {
   self endon("death");
   distanceSq = 25.0 * 25.0;
+
   goal_pos = reachNode.origin;
   while(1) {
     if(distanceSquared(self.origin, goal_pos) < distanceSq) {

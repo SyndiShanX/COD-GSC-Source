@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\see2_anim.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -11,6 +11,7 @@
 
 main() {
   maps\_anim::init();
+
   setup_field_anims();
   setup_radiotower_anims();
   setup_fueldepot_anims();
@@ -23,6 +24,7 @@ main() {
 setup_field_anims() {
   level.scr_anim["trench guy"]["grenade1"] = % exposed_grenadeThrowB;
   level.scr_anim["trench guy"]["grenade2"] = % exposed_grenadeThrowC;
+
   level.scr_sound["commissar"]["intro1"] = "See2_IGD_000A_COMM";
   level.scr_sound["commissar"]["intro2"] = "See2_IGD_001A_COMM";
   level.scr_sound["commissar"]["intro3"] = "See2_IGD_101A_COMM";
@@ -30,6 +32,7 @@ setup_field_anims() {
   level.scr_sound["commissar"]["fire"] = "See2_IGD_037A_COMM";
   level.scr_sound["commissar"]["intro4"] = "See2_IGD_101A_COMM";
   level.scr_sound["commissar"]["keep_pushing"] = "See2_IGD_103A_COMM";
+
   level.scr_sound["reznov"]["flame_tip"] = "See2_IGD_002A_REZN";
   level.scr_sound["reznov"]["flame_success"] = "See2_IGD_003A_REZN";
   level.scr_sound["reznov"]["ads_success"] = "See2_IGD_004A_REZN";
@@ -51,11 +54,13 @@ setup_field_anims() {
   level.scr_sound["reznov"]["last_88_destroy"] = "See2_IGD_040A_REZN";
   level.scr_sound["reznov"]["other_army"] = "See2_IGD_102A_REZN";
   level.scr_sound["reznov"]["to_berlin"] = "See2_IGD_104A_REZN";
+
   geo_arty_tarp();
 }
 
 setup_radiotower_anims() {
   level.scr_sound["commissar"]["radio_tower_obj"] = "See2_IGD_042A_COMM";
+
   level.scr_sound["reznov"]["onward"] = "See2_IGD_041A_REZN";
   level.scr_sound["reznov"]["next_area"] = "See2_IGD_043A_REZN";
   level.scr_sound["reznov"]["radio_tower_prompt"] = "See2_IGD_044A_REZN";
@@ -80,19 +85,23 @@ setup_train_station_anims() {
   level.scr_sound["commissar"]["victory1"] = "See2_IGD_705A_COMM";
   level.scr_sound["commissar"]["victory2"] = "See2_IGD_706A_COMM";
   level.scr_sound["commissar"]["victory3"] = "See2_IGD_707A_COMM";
+
   level.scr_anim["guyl1"]["outro"] = % ch_seelow1_outro_left_russian_guy1;
   level.scr_anim["guyl2"]["outro"] = % ch_seelow1_outro_left_russian_guy2;
   level.scr_anim["guyl3"]["outro"] = % ch_seelow1_outro_left_russian_guy3;
   level.scr_anim["guyl4"]["outro"] = % ch_seelow1_outro_left_russian_guy4;
   level.scr_anim["guyl5"]["outro"] = % ch_seelow1_outro_left_russian_guy5;
   level.scr_anim["guyl6"]["outro"] = % ch_seelow1_outro_left_russian_guy6;
+
   addnotetrack_dialogue("guyc1", "dialog", "outro", "See2_OUT_010A_CHER");
+
   level.scr_anim["guyc1"]["outro"] = % ch_seelow1_outro_middle_russian_guy1;
   level.scr_anim["guyc2"]["outro"] = % ch_seelow1_outro_middle_russian_guy2;
   level.scr_anim["guyc3"]["outro"] = % ch_seelow1_outro_middle_russian_guy3;
   level.scr_anim["guyc4"]["outro"] = % ch_seelow1_outro_middle_russian_guy4;
   level.scr_anim["guyc5"]["outro"] = % ch_seelow1_outro_middle_russian_guy5;
   level.scr_anim["guyc6"]["outro"] = % ch_seelow1_outro_middle_russian_guy6;
+
   addnotetrack_attach("guyc3", "attach_knife", "weapon_rus_reznov_knife", "tag_weapon_left", "outro");
   addnotetrack_dialogue("guyc3", "dialog", "outro", "See2_OUT_002A_REZN");
   addnotetrack_dialogue("guyc3", "dialog", "outro", "See2_OUT_001A_REZN");
@@ -100,11 +109,14 @@ setup_train_station_anims() {
   addnotetrack_dialogue("guyc3", "dialog", "outro", "See2_OUT_013A_REZN");
   addnotetrack_dialogue("guyc3", "dialog", "outro", "See2_OUT_014A_REZN");
   addnotetrack_dialogue("guyc3", "dialog", "outro", "See2_OUT_015A_REZN");
+
   addnotetrack_dialogue("guyc5", "dialog", "outro", "See2_OUT_004A_RUR1");
   addnotetrack_dialogue("guyc5", "dialog", "outro", "See2_OUT_008A_RUR1");
   addnotetrack_dialogue("guyc5", "dialog", "outro", "See2_OUT_009A_RUR1");
+
   addnotetrack_dialogue("guyc6", "dialog", "outro", "See2_OUT_005A_RUR2");
   addnotetrack_dialogue("guyc6", "dialog", "outro", "See2_OUT_011A_RUR2");
+
   level.scr_anim["guyr1"]["outro"] = % ch_seelow1_outro_right_russian_guy1;
   level.scr_anim["guyr2"]["outro"] = % ch_seelow1_outro_right_russian_guy2;
 }
@@ -118,6 +130,7 @@ setup_generic_anims() {
   level.scr_anim["truck drone"]["sit7"][0] = % crew_truck_guy6_sit_idle;
   level.scr_anim["truck drone"]["sit8"][0] = % crew_truck_guy7_sit_idle;
   level.scr_anim["truck drone"]["sit9"][0] = % crew_truck_guy8_sit_idle;
+
   level.scr_anim["truck drone"]["die2"] = % death_explosion_forward13;
   level.scr_anim["truck drone"]["die3"] = % death_explosion_left11;
   level.scr_anim["truck drone"]["die4"] = % death_explosion_left11;
@@ -126,18 +139,21 @@ setup_generic_anims() {
   level.scr_anim["truck drone"]["die7"] = % death_explosion_right13;
   level.scr_anim["truck drone"]["die8"] = % death_explosion_right13;
   level.scr_anim["truck drone"]["die9"] = % death_explosion_back13;
+
   level.scr_anim["flame_bunker"]["front_death"][0] = % ch_seelow2_flamedeath_b_front;
   level.scr_anim["flame_bunker"]["front_death"][1] = % ch_seelow2_flamedeath_b_front;
   level.scr_anim["flame_bunker"]["rear_death"][0] = % ch_seelow2_flamedeath_b_rear;
   level.scr_anim["flame_bunker"]["rear_death"][1] = % ch_seelow2_flamedeath_b_rear;
   level.scr_anim["flame_bunker"]["side_death"][0] = % ch_seelow2_flamedeath_b_side;
   level.scr_anim["flame_bunker"]["side_death"][1] = % ch_seelow2_flamedeath_b_side;
+
   level.drone_anims["stand"]["idle"] = % drone_stand_idle;
   level.drone_anims["stand"]["run"] = % drone_stand_run;
   level.drone_anims["stand"]["aim_straight"] = % stand_aim_straight;
   level.drone_anims["stand"]["aim_up"] = % stand_aim_up;
   level.drone_anims["stand"]["aim_down"] = % stand_aim_down;
   level.drone_anims["stand"]["reload"] = % exposed_crouch_reload;
+
   level.scr_sound["reznov"]["infantry1"] = "See2_IGD_500A_REZN";
   level.scr_sound["reznov"]["infantry2"] = "See2_IGD_105A_REZN";
   level.scr_sound["reznov"]["infantry3"] = "See2_IGD_107A_REZN";
@@ -148,11 +164,13 @@ setup_generic_anims() {
   level.scr_sound["reznov"]["infantry_close5"] = "See2_IGD_606A_REZN";
   level.scr_sound["reznov"]["infantry_close6"] = "See2_IGD_607A_REZN";
   level.scr_sound["reznov"]["REFERENCE"] = "See2_IGD_106A_REZN";
+
   level.scr_sound["reznov"]["generic_tank1"] = "See2_IGD_503A_REZN";
   level.scr_sound["reznov"]["generic_tank2"] = "See2_IGD_504A_REZN";
   level.scr_sound["reznov"]["generic_tank3"] = "See2_IGD_505A_REZN";
   level.scr_sound["reznov"]["tiger"] = "See2_IGD_506A_REZN";
   level.scr_sound["reznov"]["panzer"] = "See2_IGD_508A_REZN";
+
   level.scr_sound["reznov"]["tower1"] = "See2_IGD_034A_REZN";
   level.scr_sound["reznov"]["tower2"] = "See2_IGD_035A_REZN";
   level.scr_sound["reznov"]["tower3"] = "See2_IGD_036A_REZN";
@@ -161,12 +179,16 @@ setup_generic_anims() {
   level.scr_sound["reznov"]["tower6"] = "See2_IGD_610A_REZN";
   level.scr_sound["reznov"]["tower7"] = "See2_IGD_611A_REZN";
   level.scr_sound["reznov"]["tower8"] = "See2_IGD_612A_REZN";
+
   level.scr_sound["reznov"]["bunker1"] = "See2_IGD_608A_REZN";
   level.scr_sound["reznov"]["bunker2"] = "See2_IGD_609A_REZN";
+
   level.scr_sound["reznov"]["truck"] = "See2_IGD_509A_REZN";
+
   level.scr_sound["reznov"]["retreaters1"] = "See2_IGD_510A_REZN";
   level.scr_sound["reznov"]["retreaters2"] = "See2_IGD_511A_REZN";
   level.scr_sound["reznov"]["retreaters3"] = "See2_IGD_027A_REZN";
+
   level.scr_sound["reznov"]["generic_destroy1"] = "See2_IGD_028A_REZN";
   level.scr_sound["reznov"]["generic_destroy2"] = "See2_IGD_029A_REZN";
   level.scr_sound["reznov"]["generic_destroy3"] = "See2_IGD_625A_REZN";
@@ -178,6 +200,7 @@ setup_generic_anims() {
   level.scr_sound["reznov"]["generic_destroy9"] = "See2_IGD_016A_REZN";
   level.scr_sound["commissar"]["generic_destroy10"] = "See2_IGD_623A_COMM";
   level.scr_sound["commissar"]["generic_destroy11"] = "See2_IGD_624A_COMM";
+
   level.scr_sound["reznov"]["shoot1"] = "See2_IGD_600A_REZN";
   level.scr_sound["reznov"]["shoot2"] = "See2_IGD_601A_REZN";
   level.scr_sound["reznov"]["shoot3"] = "See2_IGD_602A_REZN";
@@ -185,12 +208,14 @@ setup_generic_anims() {
   level.scr_sound["reznov"]["shoot5"] = "See2_IGD_014A_REZN";
   level.scr_sound["reznov"]["shoot6"] = "See2_IGD_018A_REZN";
   level.scr_sound["reznov"]["shoot7"] = "See2_IGD_008A_REZN";
+
   level.scr_sound["reznov"]["idle1"] = "See2_IGD_108A_REZN";
   level.scr_sound["reznov"]["idle2"] = "See2_IGD_109A_REZN";
   level.scr_sound["reznov"]["idle3"] = "See2_IGD_110A_REZN";
   level.scr_sound["reznov"]["idle4"] = "See2_IGD_111A_REZN";
   level.scr_sound["reznov"]["idle5"] = "See2_IGD_112A_REZN";
   level.scr_sound["reznov"]["idle6"] = "See2_IGD_113A_REZN";
+
   level.scr_sound["reznov"]["ahead1"] = "See2_IGD_520A_REZN";
   level.scr_sound["reznov"]["ahead2"] = "See2_IGD_621A_REZN";
   level.scr_sound["reznov"]["right1"] = "See2_IGD_613A_REZN";
@@ -203,6 +228,7 @@ setup_generic_anims() {
   level.scr_sound["reznov"]["left4"] = "See2_IGD_620A_REZN";
   level.scr_sound["reznov"]["behind1"] = "See2_IGD_521A_REZN";
   level.scr_sound["reznov"]["behind2"] = "See2_IGD_622A_REZN";
+
   level.scr_sound["reznov"]["hit1"] = "See2_IGD_525A_REZN";
   level.scr_sound["reznov"]["hit2"] = "See2_IGD_526A_REZN";
   level.scr_sound["reznov"]["hit3"] = "See2_IGD_527A_REZN";
@@ -211,29 +237,38 @@ setup_generic_anims() {
   level.scr_sound["reznov"]["hit6"] = "See2_IGD_010A_REZN";
   level.scr_sound["reznov"]["half_dead"] = "See2_IGD_529A_REZN";
   level.scr_sound["reznov"]["near_death"] = "See2_IGD_530A_REZN";
+
   level.designation["vehicle_ger_tracked_panzer4v1"][0] = "generic_tank1";
   level.designation["vehicle_ger_tracked_panzer4v1"][1] = "generic_tank2";
   level.designation["vehicle_ger_tracked_panzer4v1"][2] = "generic_tank3";
   level.designation["vehicle_ger_tracked_panzer4v1"][3] = "panzer";
+
   level.designation["vehicle_ger_tracked_king_tiger"][0] = "generic_tank1";
   level.designation["vehicle_ger_tracked_king_tiger"][1] = "generic_tank2";
   level.designation["vehicle_ger_tracked_king_tiger"][2] = "generic_tank3";
   level.designation["vehicle_ger_tracked_king_tiger"][3] = "tiger";
+
   level.designation["vehicle_ger_tracked_panther"][0] = "generic_tank1";
   level.designation["vehicle_ger_tracked_panther"][1] = "generic_tank2";
   level.designation["vehicle_ger_tracked_panther"][2] = "generic_tank3";
+
   level.designation["vehicle_ger_wheeled_covered_opel_blitz"][0] = "truck";
+
   level.designation["actor_axis_ger_ber_wehr_reg_gewehr43"][0] = "infantry1";
   level.designation["actor_axis_ger_ber_wehr_reg_gewehr43"][1] = "infantry2";
   level.designation["actor_axis_ger_ber_wehr_reg_gewehr43"][2] = "infantry3";
+
   level.designation["actor_axis_ger_ber_wehr_reg_kar98k"][0] = "infantry1";
   level.designation["actor_axis_ger_ber_wehr_reg_kar98k"][1] = "infantry2";
   level.designation["actor_axis_ger_ber_wehr_reg_kar98k"][2] = "infantry3";
+
   level.designation["actor_axis_ger_ber_wehr_reg_panzerschrek"][0] = "infantry1";
   level.designation["actor_axis_ger_ber_wehr_reg_panzerschrek"][1] = "infantry2";
   level.designation["actor_axis_ger_ber_wehr_reg_panzerschrek"][2] = "infantry3";
+
   level.designation["bunker"][0] = "bunker1";
   level.designation["bunker"][1] = "bunker2";
+
   level.designation["guard_tower"][0] = "tower1";
   level.designation["guard_tower"][1] = "tower2";
   level.designation["guard_tower"][2] = "tower3";
@@ -250,22 +285,28 @@ play_player_anim_outro(i, player, anim_node) {
   if(i != 0) {
     hands Hide();
   }
+
   hands.origin = anim_node.origin;
   hands.angles = anim_node.angles;
+
   player PlayerLinkTo(hands, "tag_player", 1.75, 0, 0, 0, 0);
   flag_set("player_ready_for_outro");
+
   setmusicstate("LEVEL_END");
+
   while(!flag("player_ready_for_outro") || !flag("outro_group_1_ready") || !flag("outro_group_2_ready")) {
     wait(0.05);
   }
+
   anim_node anim_single_solo(hands, "outro");
+
   hands Delete();
 }
 
 #using_animtree("see2_models");
-
 geo_arty_tarp() {
   PrecacheModel("anim_seelow_flak_tarp");
+
   level.scr_animtree["arty tarp"] = #animtree;
   level.scr_model["arty tarp"] = "anim_seelow_flak_tarp";
   level.scr_anim["arty tarp"]["fire_flap"] = % o_seelow2_flak_tarp;
@@ -276,6 +317,7 @@ geo_arty_tarp() {
 
 geo_tower_fall() {
   PrecacheModel("anim_seelow_radiotower_d");
+
   level.scr_animtree["radiotower"] = #animtree;
   level.scr_model["radiotower"] = "anim_seelow_radiotower_d";
   level.scr_anim["radiotower"]["fall"] = % o_seelow2_radiotower_dest;
@@ -285,9 +327,11 @@ deprecated_lines() {
   level.scr_sound["reznov"]["first_panther1"] = "See2_IGD_012A_REZN";
   level.scr_sound["reznov"]["first_panther2"] = "See2_IGD_013A_REZN";
   level.scr_sound["reznov"]["first_panther4"] = "See2_IGD_015A_REZN";
+
   level.scr_sound["commissar"]["depot_obj1"] = "print: Today - we break this line!";
   level.scr_sound["commissar"]["depot_obj1"] = "print: Move in to destroy the fuel depot - Cripple their military machine!";
   level.scr_sound["reznov"]["tank_fire_tiger"] = "See2_IGD_507A_REZN";
+
   level.scr_sound["reznov"]["north"] = "See2_IGD_512A_REZN";
   level.scr_sound["reznov"]["northeast"] = "See2_IGD_513A_REZN";
   level.scr_sound["reznov"]["east"] = "See2_IGD_514A_REZN";
@@ -296,9 +340,11 @@ deprecated_lines() {
   level.scr_sound["reznov"]["southwest"] = "See2_IGD_517A_REZN";
   level.scr_sound["reznov"]["west"] = "See2_IGD_518A_REZN";
   level.scr_sound["reznov"]["northwest"] = "See2_IGD_519A_REZN";
+
   level.scr_sound["reznov"]["in_field"] = "See2_IGD_522A_REZN";
   level.scr_sound["reznov"]["on_hill"] = "See2_IGD_523A_REZN";
   level.scr_sound["reznov"]["in_marsh"] = "See2_IGD_524A_REZN";
+
   level.scr_sound["reznov"]["center_map1"] = "See2_IGD_031A_REZN";
   level.scr_sound["reznov"]["center_map2"] = "See2_IGD_032A_REZN";
   level.scr_sound["reznov"]["center_map3"] = "See2_IGD_033A_REZN";

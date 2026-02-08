@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_jap_impinf_player_cqb.gsc
-*****************************************************/
+****************************************************/
 
 main() {
   self setModel("char_jap_impinf_player_body_cqb");

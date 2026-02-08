@@ -1,10 +1,11 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_quotes.gsc
-*****************************************************/
+**************************************/
 
 main() {
   self thread setVictoryQuote();
+
   level thread setDeadQuote();
 }
 
@@ -48,16 +49,20 @@ setVictoryQuote() {
   victoryquotes[36] = "@VICTORYQUOTE_IN_WAR_THERE_IS_NO_SUBSTITUTE";
   victoryquotes[37] = "@VICTORYQUOTE_WAR_IS_A_SERIES_OF_CATASTROPHES";
   victoryquotes[38] = "@VICTORYQUOTE_THOSE_WHO_HAVE_LONG_ENJOYED";
+
   i = randomInt(victoryquotes.size);
 }
 
 setDeadQuote() {
   if(getdebugdvar("replay_debug") == "1")
     println("File: _quotes.gsc. Function: setDeadQuote()\n");
+
   level endon("mine death");
+
   level notify("new_quote_string");
   level endon("new_quote_string");
-  if(getdvar("ui_deadquote") == "") {
+
+  if(getDvar("ui_deadquote") == "") {
     deadquotes[0] = "@DEADQUOTE_NEVER_IN_THE_FIELD_OF";
     deadquotes[1] = "@DEADQUOTE_SUCCESS_IS_NOT_FINAL";
     deadquotes[2] = "@DEADQUOTE_IN_WAR_THERE_IS_NO_PRIZE";
@@ -115,17 +120,21 @@ setDeadQuote() {
     deadquotes[54] = "@DEADQUOTE_NO_ONE_CAN_GUARANTEE";
     deadquotes[55] = "@DEADQUOTE_THE_MILITARY_DONT_START";
     deadquotes[56] = "@DEADQUOTE_IF_YOU_KNOW_THE_ENEMY";
+
     i = randomInt(deadquotes.size);
-    setdvar("ui_deadquote", "");
+    setDvar("ui_deadquote", "");
   }
+
   if(getdebugdvar("replay_debug") == "1")
     println("File: _quotes.gsc. Function: setDeadQuote() - COMPLETE\n");
 }
 
 displayMissionFailed() {
   level endon("mine death");
+
   level notify("new_quote_string");
   level endon("new_quote_string");
+
   mission_failed = newclientHudElem(self);
   mission_failed.alignX = "center";
   mission_failed.alignY = "middle";
@@ -141,11 +150,13 @@ displayMissionFailed() {
 
 displayPlayerDead() {
   level endon("mine death");
+
   if(isDefined(self.teammate_dead) || isDefined(self.player_dead)) {
     return;
   }
   level notify("new_quote_string");
   level endon("new_quote_string");
+
   self.player_dead = newclientHudElem(self);
   self.player_dead.alignX = "center";
   self.player_dead.alignY = "middle";
@@ -160,11 +171,13 @@ displayPlayerDead() {
 
 displayTeammateDead(dead_teammate) {
   level endon("mine death");
+
   if(isDefined(self.teammate_dead) || isDefined(self.player_dead)) {
     return;
   }
   level notify("new_quote_string");
   level endon("new_quote_string");
+
   self.teammate_dead = newclientHudElem(self);
   self.teammate_dead.alignX = "center";
   self.teammate_dead.alignY = "middle";

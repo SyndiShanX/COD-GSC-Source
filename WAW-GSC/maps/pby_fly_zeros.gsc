@@ -1,12 +1,14 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pby_fly_zeros.gsc
-*****************************************************/
+**************************************/
 
 strafing_runs() {
   my_trig = GetEnt("start_zero_test", "targetname");
   my_trig waittill("trigger");
+
   target = GetEnt("strafing_target_one", "targetname");
+
   while(1) {
     level thread strafe_a_zero("back_strafe_right", target);
     wait(2);
@@ -17,25 +19,32 @@ strafing_runs() {
 
 strafe_a_zero(type_of_attack, target) {
   level.total_zeros_spawned++;
+
   starting_points = [];
   starting_points = get_pathpoints_start(target);
+
   if(starting_points["org"][0] > 60000 || starting_points["org"][0] < -60000 || starting_points["org"][1] > 60000 || starting_points["org"][1] < -60000 || starting_points["org"][2] > 20000 || starting_points["org"][2] < -1000) {
     ASSERTEX(false, "the spawn point for the new plane was all messed up");
   }
+
   plane = SpawnVehicle("vehicle_jap_airplane_zero_d_fuselage", "new_plane", "zero", starting_points["org"], starting_points["ang"]);
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
+
   if(type_of_attack == "back_strafe_right") {
     plane get_pathpoints_straight_strafe_bank_away(target, "right");
   } else if(type_of_attack == "back_strafe_left") {
     plane get_pathpoints_straight_strafe_bank_away(target, "left");
   }
+
   plane thread ai_turret_think(target);
   plane endon("death");
+
   plane setplanegoalpos(plane.origin + (anglesToForward(plane.angles) * 100), 160);
   plane waittill("curve_end");
   for(i = 0; i < plane.pathpoints["fly_org"].size - 5; i++) {
     plane setplanegoalpos(plane.pathpoints["fly_org"][i], plane.pathpoints["fly_org"][i + 1], plane.pathpoints["fly_org"][i + 2], plane.pathpoints["fly_org"][i + 3], plane.pathpoints["fly_org"][i + 4], plane.pathpoints["fly_org"][i + 5], 160);
+
     if(plane.pathpoints["fly_cond"][i] == "range") {
       while(Distance2D(plane.origin, plane.pathpoints["fly_org"][i]) > 2000) {
         wait(0.05);
@@ -45,6 +54,7 @@ strafe_a_zero(type_of_attack, target) {
     } else {
       plane waittill("curve_end");
     }
+
     if(Distance2D(plane.origin, target.origin) > plane.pathpoints["kill_on_range"][i]) {
       plane RadiusDamage(plane.origin, 100, 50000, 50000);
       level.total_zeros_spawned--;
@@ -54,28 +64,35 @@ strafe_a_zero(type_of_attack, target) {
 
 get_pathpoints_start(target) {
   start_points["org"] = target.origin - ((anglesToForward(target.angles)[0] * 10000, (anglesToForward(target.angles)[1] * 10000), 0));
+
   z_value = Tan(RandomIntRange(8, 15)) * Distance2D(target.origin, start_points["org"]);
   start_points["org"] += (0, 0, 1500);
   start_points["ang"] = target.angles;
+
   return start_points;
 }
 
 get_pathpoints_straight_strafe_bank_away(target, direction) {
   self.shoot_gun_range = 5000;
+
   self.pathpoints["fly_org"] = [];
   self.pathpoints["fly_ang"] = [];
   self.pathpoints["fly_cond"] = [];
   self.pathpoints["kill_on_range"] = [];
+
   self.pathpoints["fly_org"][0] = (target.origin[0], target.origin[1], RandomIntRange(75, 600));
   self.pathpoints["fly_ang"][0] = target.angles;
   self.pathpoints["fly_cond"][0] = "end_curve";
   self.pathpoints["kill_on_range"][0] = 999999;
+
   new_path_point_org = target.origin + (VectorNormalize(anglesToForward(target.angles)) * 50000) + (0, 0, 1200);
   new_path_point_ang = target.angles;
+
   self.pathpoints["fly_org"][1] = new_path_point_org;
   self.pathpoints["fly_ang"][1] = new_path_point_ang;
   self.pathpoints["fly_cond"][1] = "delay";
   self.pathpoints["kill_on_range"][1] = 999999;
+
   if(direction == "right") {
     for(i = 2; i < 100; i++) {
       new_path_point_org = offset_point_generator(((AnglesToRight(target.angles)[0] * 10000), (AnglesToRight(target.angles)[1] * 10000), 5000), new_path_point_org);
@@ -99,12 +116,14 @@ get_pathpoints_straight_strafe_bank_away(target, direction) {
 
 offset_point_generator(org_offset, original_point) {
   new_point = original_point + org_offset;
+
   return new_point;
 }
 
 draw_debug_lines(id) {
   self endon("curve_end");
   self endon("end_line");
+
   while(1) {
     Line(self.origin, self.pathpoints["fly_org"][id], (0, 0, 1));
     Line(self.origin, (self.origin + VectorNormalize(self.pathpoints["fly_ang"][id]) * 5000), (1, 0, 0));
@@ -115,34 +134,44 @@ draw_debug_lines(id) {
 ai_turret_think(target) {
   max_fire_time = 2;
   time_firing = 0;
+
   self endon("stop_my_firing");
   self endon("death");
+
   i = 0;
+
   turret_origin = undefined;
   turret_target = undefined;
+
   if(!isDefined(self.firing)) {
     self.firing = false;
   }
+
   self_forward = (0, 0, 0);
   random_num = 0;
   firing_at_player = false;
+
   while(1) {
     firing_at_player = false;
     self_forward = anglesToForward(self.angles);
     target_vector = self.origin + (self_forward * 5000) - (0, 0, .2679491 * 5000);
+
     player_dir = VectorNormalize(level.player.origin - self.origin);
     angle = VectorDot(self_forward, player_dir);
     if(angle > .965) {
       target_vector = level.player.origin + (0, 0, 45);
       firing_at_player = true;
     }
+
     player_for = anglesToForward(level.plane_a.angles);
     other_angle = VectorDot(self_forward, player_for);
     if(other_angle > 0) {
       firing_at_player = false;
     }
+
     self SetGunnerTargetVec(target_vector, 0);
     self SetGunnerTargetVec(target_vector, 1);
+
     if(Distance2D(self.origin, target.origin) < self.shoot_gun_range) {
       self firegunnerweapon(0);
       wait(0.14);
@@ -150,7 +179,9 @@ ai_turret_think(target) {
       self firegunnerweapon(1);
       wait(0.14);
       time_firing += 0.14;
+
       self.firing = true;
+
       if(firing_at_player) {
         if(isDefined(level.zero_accuracy_override)) {
           level.plane_a notify("pby_nose_damage", self);
@@ -165,6 +196,7 @@ ai_turret_think(target) {
       wait(0.1);
       self.firing = false;
     }
+
     if(time_firing > max_fire_time) {
       random_wait = RandomFloatRange(0.5, 1.0);
       wait(random_wait);
@@ -175,41 +207,53 @@ ai_turret_think(target) {
 
 strafe_a_moving_target(target) {
   level.total_zeros_spawned++;
+
   starting_points = [];
   ref_ent = GetEnt("ev5_ref_origin", "targetname");
+
   starting_points["org"] = target.origin - ((anglesToForward(ref_ent.angles)[0] * 20000, (anglesToForward(ref_ent.angles)[1] * 20000), 0));
   z_value = Tan(RandomIntRange(8, 15)) * Distance2D(target.origin, starting_points["org"]);
   starting_points["org"] += (0, 0, z_value);
   starting_points["ang"] = ref_ent.angles;
+
   plane = SpawnVehicle("vehicle_jap_airplane_zero_d_fuselage", "new_plane", "zero", starting_points["org"], starting_points["ang"]);
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
+
   plane.shoot_gun_range = 5000;
+
   plane thread ai_turret_think(target);
   plane endon("death");
+
   plane.pathpoints["fly_org"] = [];
   plane.pathpoints["fly_ang"] = [];
   plane.pathpoints["fly_cond"] = [];
   plane.pathpoints["kill_on_range"] = [];
+
   while(Distance2D(target.origin, plane.origin) > 5000) {
     plane.pathpoints["fly_org"][0] = target.origin + (0, 0, 600);
     plane.pathpoints["fly_ang"][0] = ref_ent.angles;
     plane.pathpoints["fly_cond"][0] = "end_curve";
     plane.pathpoints["kill_on_range"][0] = 999999;
+
     plane setplanegoalpos(plane.pathpoints["fly_org"][0], 200);
     plane thread waittillclose(target);
     plane waittill("curve_end");
   }
+
   plane.pathpoints["fly_org"][1] = plane.origin + anglesToForward(VectorToAngles((target.origin + (0, 0, 600)) - plane.origin)) * 8000;
   plane.pathpoints["fly_ang"][1] = ref_ent.angles;
   plane.pathpoints["fly_cond"][1] = "end_curve";
   plane.pathpoints["kill_on_range"][1] = 999999;
+
   plane setplanegoalpos(plane.pathpoints["fly_org"][1], plane.pathpoints["fly_ang"][1], 200);
+
   RadiusDamage(plane.origin, 100, 2500, 2500);
 }
 
 waittillclose(target) {
   self endon("curve_end");
+
   for(i = 0; i < 10; i++) {
     if(Distance2D(target.origin, self.origin) < 5000)
       self notify("curve_end");

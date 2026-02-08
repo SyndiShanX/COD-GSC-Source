@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_betty.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_vehicle;
 #include common_scripts\utility;
@@ -14,5 +14,4 @@ main(model, type) {
   build_life(99999, 5000, 15000);
   build_team("allies");
 }
-
 init_local() {}

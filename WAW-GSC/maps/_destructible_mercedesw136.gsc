@@ -1,7 +1,7 @@
-/*****************************************************
+/***********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_destructible_mercedesw136.gsc
-*****************************************************/
+***********************************************/
 
 #include maps\_destructible;
 #using_animtree("vehicles");
@@ -9,8 +9,10 @@
 init() {
   set_function_pointer("explosion_anim", "dest_mercedesw136", ::get_explosion_animation);
   set_function_pointer("flattire_anim", "dest_mercedesw136", ::get_flattire_animation);
+
   build_destructible_radiusdamage("dest_mercedesw136", undefined, 240, 210, 60, true);
   build_destructible_deathquake("dest_mercedesw136", 0.4, 1.0, 500);
+
   set_pre_explosion("dest_mercedesw136", "destructibles/fx_dest_fire_car_fade_40");
 }
 

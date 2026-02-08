@@ -1,7 +1,7 @@
-/*****************************************************
+/*****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: aitype\ally_us_raid_hero1.gsc
-*****************************************************/
+*****************************************/
 
 main() {
   self.animTree = "";
@@ -14,8 +14,10 @@ main() {
   self.sidearm = "colt";
   self.grenadeWeapon = "fraggrenade";
   self.grenadeAmmo = 3;
+
   self setEngagementMinDist(256.000000, 0.000000);
   self setEngagementMaxDist(768.000000, 1024.000000);
+
   character\char_usa_raider_h_sullivan::main();
 }
 
@@ -25,6 +27,7 @@ spawner() {
 
 precache() {
   character\char_usa_raider_h_sullivan::precache();
+
   precacheItem("shotgun");
   precacheItem("colt");
   precacheItem("fraggrenade");

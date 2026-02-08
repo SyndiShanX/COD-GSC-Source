@@ -1,18 +1,22 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\see1_fx.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility;
 
 precache_util_fx() {}
+
 precache_scripted_fx() {}
 precache_createfx_fx() {
   level._effect["smoke_impact_smolder"] = loadfx("env/smoke/fx_smoke_crater_w");
+
   level._effect["battlefield_smokebank_lg_white"] = loadfx("env/smoke/fx_battlefield_smokebank_ling_lg");
+
   level._effect["detail_fire"] = loadfx("env/fire/fx_fire_smoke_tree_brush_detail");
   level._effect["trunk_fire"] = loadfx("maps/see1/fx_fire_smoke_tree_trunk_small");
   level._effect["tree_trunk_fire"] = loadfx("maps/see1/fx_fire_smoke_tree_trunk_small");
+
   level._effect["headshot"] = LoadFX("impacts/flesh_hit_head_fatal_exit");
   level._effect["embers"] = LoadFX("env/fire/fx_tree_fire_ash_embers");
   level._effect["falling_ash_embers"] = LoadFX("env/fire/fx_ash_embers_light");
@@ -48,21 +52,30 @@ precache_createfx_fx() {
   level._effect["smoke_ambiance_indoor"] = loadfx("maps/see1/fx_smoke_ambiance_indoor");
   level._effect["dust_specs_interior"] = loadfx("maps/see1/fx_dust_specs_interior");
   level._effect["d_light_small"] = loadfx("maps/see1/fx_d_light_small");
+
   level._effect["fx_explosion_door_blast"] = LoadFx("maps/see1/fx_explosion_door_blast");
+
   level._effect["character_fire_pain_sm"] = LoadFx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = LoadFx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = LoadFx("env/fire/fx_fire_player_torso");
+
   level._effect["house_blow_up"] = LoadFx("maps/see1/fx_explosion_tank_shell_med_house");
   level._effect["house_blow_up_2"] = LoadFx("maps/see1/fx_explosion_tank_shell_med_house2");
+
   level._effect["wheat_blow_up"] = LoadFx("maps/see1/fx_explosion_tank_shell_med_wheat");
+
   level._effect["battle_smoke_light"] = loadfx("env/smoke/fx_battlefield_smokebank_low_thin");
   level._effect["battle_smoke_heavy"] = loadfx("env/smoke/fx_battlefield_smokebank_low_thick");
   level._effect["tree_trunk_fire"] = loadfx("maps/see1/fx_fire_smoke_tree_trunk_small");
   level._effect["tree_brush_fire"] = loadfx("maps/see1/fx_fire_foliage_medium");
   level._effect["tree_brush_fire_large"] = loadfx("maps/see1/fx_fire_foliage_large");
+
   level._effect["dirt_blow_up"] = LoadFx("maps/see1/fx_explosion_tank_shell_med");
+
   level._effect["tank_blow_up"] = LoadFx("maps/see1/fx_explosion_tank_shell_default");
+
   level._effect["tank_smoke_column"] = LoadFX("maps/see1/fx_smoke_column_tank_1");
+
   level._effect["admin_sandbag_explode_large"] = loadfx("maps/pel2/fx_sandbag_explosion_01_lg");
   level._effect["engine_smoke_heavy"] = loadfx("env/smoke/fx_smoke_plume_md_fast_blk");
   level._effect["engine_smoke_light"] = loadfx("env/smoke/fx_smoke_plume_sm_fast_blk");
@@ -71,8 +84,10 @@ precache_createfx_fx() {
 main() {
   clientscripts\createfx\see1_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   precache_util_fx();
   precache_createfx_fx();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_leak.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -13,6 +13,7 @@ main() {
   }
   leaks thread precacheFX();
   leaks thread methodsInit();
+
   array_thread(leaks, ::leak_setup);
 }
 
@@ -42,29 +43,36 @@ leak_barrel_setup() {
   self.A = self.origin;
   self.up = anglestoup(self.angles);
   worldup = anglestoup((0, 90, 0));
+
   self.org = self.A + vector_multiply(self.up, 22);
   self.A = self.A + vector_multiply(self.up, 1.5);
   self.B = self.A + vector_multiply(self.up, 41.4);
   self.volume = (3.1416 * (14 * 14) * 42);
   self.curvol = self.volume;
+
   dot = vectordot(self.up, worldup);
   top = self.B;
   if(dot < 0)
     top = self.A;
+
   dot = abs(1 - abs(dot));
+
   self.lowZ = (physicstrace((self.org), (self.org + (0, 0, -80))))[2];
   self.highZ = top[2] + (dot * 14);
 }
 
 leak_think() {
   self setCanDamage(true);
+
   self endon("drained");
+
   while(1) {
     self waittill("damage", damage, other, direction_vec, P, type);
     if(type == "MOD_MELEE" || type == "MOD_IMPACT") {
       continue;
     }
     P = self[[level._leak_methods[type]]](P, type);
+
     if(!isDefined(P)) {
       continue;
     }
@@ -75,16 +83,20 @@ leak_think() {
 leak_drain(P) {
   Q = pointOnSegmentNearestToPoint(self.A, self.B, P);
   vec = undefined;
+
   if(Q == self.A)
     vec = vector_multiply(self.up, -1);
   else if(Q == self.B)
     vec = self.up;
   else
     vec = vectorFromLineToPoint(self.A, self.B, P);
+
   depth = P[2] - self.lowZ;
   if(depth < .02)
     depth = 0;
+
   ratio = (depth / (self.highZ - self.lowZ)) * self.volume;
+
   if(self.curvol > ratio) {
     while(self.curvol > ratio) {
       playFX(level._effect["leak_interactive_leak"][self.script_noteworthy], P, vec);
@@ -142,6 +154,7 @@ precacheFX() {
     }
     level._effect["leak_interactive_leak"][self[i].script_noteworthy] = loadfx("impacts/barrel_leak");
     level._effect["leak_interactive_drain"][self[i].script_noteworthy] = loadfx("impacts/barrel_drain");
+
     break;
   }
   for(i = 0; i < self.size; i++) {

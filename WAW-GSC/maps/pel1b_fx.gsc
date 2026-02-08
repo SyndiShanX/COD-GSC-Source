@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pel1b_fx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -12,42 +12,57 @@ main() {
   footsteps();
   spawnFX();
 }
-
 precacheFX() {
   level._effect["rocket_explode"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_medium");
   level._effect["rocket_trail"] = loadfx("weapon/artillery/fx_artillery_pak43_geotrail");
   level._effect["smoke_destroyed_tank"] = loadfx("maps/pel1b/fx_smoke_destroyed_tank_sherman");
   level._effect["tank_blowup"] = loadfx("maps/pel1b/fx_large_tank_explosion");
+
   level._effect["fall_out_fx"] = loadfx("maps/mak/fx_dust_and_leaves_kickup_small");
   level._effect["sniper_leaf_loop"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf01");
   level._effect["sniper_leaf_canned"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf02");
+
   level.fleshhit = loadfx("impacts/flesh_hit");
+
   level._effect["blood_drop"] = loadfx("maps/pel1b/fx_flesh_blood_drop");
+
   level._effect["bomber_wing_hit"] = loadfx("maps/pel2/fx_bomber_dmg_trail");
+
   level._effect["hut_explosion"] = loadfx("maps/pel1b/fx_explosion_tank_impact_hut");
+
   level._effect["birds_fly"] = LoadFx("maps/pel2/fx_birds_tree_panic");
+
   level._effect["grass_guy_water"] = LoadFx("maps/pel1b/fx_water_character_rise");
+
   level._effect["blood_drop"] = LoadFx("maps/pel1b/fx_flesh_blood_drop");
+
   level._effect["character_bayonet_blood_in"] = LoadFx("impacts/fx_flesh_bayonet_impact");
   level._effect["character_bayonet_blood_front"] = LoadFx("impacts/fx_flesh_bayonet_fatal_fr");
   level._effect["character_bayonet_blood_back"] = LoadFx("impacts/fx_flesh_bayonet_fatal_bk");
   level._effect["character_bayonet_blood_right"] = LoadFx("impacts/fx_flesh_bayonet_fatal_rt");
   level._effect["character_bayonet_blood_left"] = LoadFx("impacts/fx_flesh_bayonet_fatal_lf");
+
   level._effect["target_smoke"] = loadfx("env/smoke/fx_smoke_ground_marker_green_w");
+
   level._effect["napalm_explosion"] = loadfx("weapon/napalm/fx_napalmExp_lg_blk_smk_01");
   level._effect["fire_foliage_large"] = loadfx("maps/pel1b/fx_fire_foliage_large");
   level._effect["smoke_column"] = loadfx("env/smoke/fx_smoke_plume_md_fast_blk");
+
   level._effect["character_fire_pain_sm"] = LoadFx("env/fire/fx_fire_player_sm_1sec");
   level._effect["character_fire_death_sm"] = LoadFx("env/fire/fx_fire_player_md");
   level._effect["character_fire_death_torso"] = LoadFx("env/fire/fx_fire_player_torso");
+
   level._effect["fireball_explosion"] = LoadFx("explosions/fx_flamethrower_char_explosion");
+
   level._effect["dirt_fall_sm"] = LoadFx("env/dirt/fx_dirt_falling_sm");
   level._effect["dirt_fall_md"] = LoadFx("env/dirt/fx_dirt_falling_quick_md");
   level._effect["dirt_fall_huge"] = LoadFx("env/dirt/fx_dust_ceiling_impact_lg_mdbrown");
+
   SetSavedDvar("wind_global_vector", "196 0 0");
   SetSavedDvar("wind_global_low_altitude", -2000);
   SetSavedDvar("wind_global_hi_altitude", 2000);
   SetSavedDvar("wind_global_low_strength_percent", 0.05);
+
   level._effect["fire_foliage_small"] = loadfx("maps/pel1b/fx_fire_foliage_small");
   level._effect["fire_foliage_xsmall"] = loadfx("maps/pel1b/fx_fire_foliage_xsmall");
   level._effect["insects_swarm"] = loadfx("maps/pel1b/fx_insects_swarm");

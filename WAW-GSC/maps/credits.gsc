@@ -1,31 +1,40 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\credits.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
 #include maps\_music;
 
 main() {
-  if(GetDvar("credits_frommenu") == "1") {
+  if(getDvar("credits_frommenu") == "1") {
     level.credits_frommenu = true;
   } else {
-    SetDvar("credits_frommenu", "0");
+    setDvar("credits_frommenu", "0");
   }
-  if(GetDvar("test_scenes") == "") {
-    SetDvar("test_scenes", "0");
+
+  if(getDvar("test_scenes") == "") {
+    setDvar("test_scenes", "0");
   }
+
   level.credits_active = true;
   init_flags();
+
   maps\credits_fx::main();
+
   maps\_load::main();
+
   maps\credits_list::init_credits();
   precache_models();
+
   flag_wait("all_players_connected");
-  SetDvar("credits_active", "1");
+
+  setDvar("credits_active", "1");
+
   script_model_link_ent = spawn("script_model", get_players()[0].origin);
   script_model_link_ent setModel("tag_origin");
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -37,27 +46,35 @@ main() {
     player SetClientDvar("ammoCounterHide", "1");
     player SetClientDvar("miniscoreboardhide", "1");
   }
-  SetDvar("credits_load", "0");
+
+  setDvar("credits_load", "0");
+
   share_screen(get_host(), true, true);
+
   level thread maps\credits_list::play_credits();
   setmusicstate("CREDITS");
+
   flag_wait("credits_ended");
   level thread nextmission_wait();
 }
 
 nextmission_wait() {
   flag_wait("credits_ended");
+
   fadetoblack = NewHudElem();
   fadetoblack.x = 0;
   fadetoblack.y = 0;
   fadetoblack.alpha = 0;
+
   fadetoblack.horzAlign = "fullscreen";
   fadetoblack.vertAlign = "fullscreen";
   fadetoblack.foreground = false;
   fadetoblack.sort = 50;
   fadetoblack SetShader("black", 640, 480);
+
   fadetoblack FadeOverTime(0.05);
   fadetoblack.alpha = 1;
+
   wait(0.05);
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -67,7 +84,8 @@ nextmission_wait() {
     player SetClientDvar("ammoCounterHide", "0");
     player SetClientDvar("miniscoreboardhide", "0");
   }
-  SetDvar("credits_active", "0");
+
+  setDvar("credits_active", "0");
   maps\_endmission::credits_end();
 }
 
@@ -76,7 +94,8 @@ init_flags() {
 }
 
 init_dvars() {
-  SetDvar("credits_active", "1");
+  setDvar("credits_active", "1");
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -100,6 +119,7 @@ play_scene_controller() {
   if(GetDvarInt("test_scenes") > 0) {
     return;
   }
+
   time = 0;
   for(i = 0; i < level.credit_list.size; i++) {
     if(isDefined(level.credit_list[i].delay)) {
@@ -111,8 +131,10 @@ play_scene_controller() {
     }
     time += delay;
   }
+
   scenes = getstructarray("scene", "targetname");
   div_time = time / (scenes.size + 1);
+
   for(i = 0; i < scenes.size; i++) {
     wait(div_time);
     flag_set("play_scene");
@@ -121,50 +143,66 @@ play_scene_controller() {
 
 play_scenes() {
   level thread play_scene_controller();
+
   player = get_host();
   player DisableWeapons();
   player EnableInvulnerability();
   player.ignoreme = true;
+
   ent = spawn("script_model", player.origin);
   ent setModel("tag_origin");
   ent Hide();
+
   player PlayerLinkTo(ent, "tag_origin", 1, 10, 10, 10, 10, false);
   player.linked_object = ent;
+
   fadein_fog();
+
   scenes = getstructarray("scene", "targetname");
   scenes = array_randomize(scenes);
+
   for(i = 0; i < scenes.size; i++) {
     if(GetDvarInt("test_scenes") == 0) {
       flag_wait("play_scene");
       flag_clear("play_scene");
     }
+
     play_the_scene(player, scenes[i]);
+
     if(GetDvarInt("test_scenes") > 0) {
       wait(5);
     }
   }
+
 }
 
 play_the_scene(player, struct) {
   player.linked_object.origin = struct.origin - (0, 0, 66);
   player.linked_object.angles = struct.angles;
   wait(0.1);
+
   fadeout_fog(struct);
+
   level thread player_movement(player, struct);
+
   switch (struct.script_noteworthy) {
     case "spawn_guys":
       scene_spawn_guys(struct);
       break;
+
     default:
       assertMsg("unsupported scene");
   }
+
   fadein_fog();
 }
 
 player_movement(player, struct) {
   structs = get_targeted_structs(struct);
+
   if(structs.size > 0) {
     get_duration_of_structs(struct, structs);
+
     for(i = 0; i < structs.size; i++) {
       time = structs[i].dist / structs[i].speed;
       player.linked_object MoveTo(structs[i].origin - (0, 0, 66), time);
@@ -176,14 +214,18 @@ player_movement(player, struct) {
 
 get_targeted_structs(struct) {
   structs = [];
+
   while(isDefined(struct.target)) {
     next_struct = getstruct(struct.target, "targetname");
+
     if(!isDefined(next_struct)) {
       break;
     }
+
     structs[structs.size] = next_struct;
     struct = next_struct;
   }
+
   return structs;
 }
 
@@ -192,21 +234,26 @@ get_duration_of_structs(struct, structs) {
   for(i = 0; i < structs.size; i++) {
     structs[i].dist = Distance(curr_pos, structs[i].origin);
     structs[i].speed = structs[i].dist / (struct.script_wait / (structs.size));
+
     curr_pos = structs[i].origin;
   }
 }
 
 scene_spawn_guys(struct) {
   struct script_delay();
+
   spawners = getEntArray(struct.target, "targetname");
   guys = spawn_guys(spawners);
+
   wait(0.1);
   struct script_wait();
+
   for(i = 0; i < guys.size; i++) {
     if(isDefined(guys[i]) && IsAlive(guys[i]) && !isDefined(guys[i].script_death)) {
       guys[i] thread bloody_death(1);
     }
   }
+
   wait(3);
 }
 
@@ -216,6 +263,7 @@ fadeout_fog(struct) {
   } else {
     start_dist = 50;
   }
+
   if(isDefined(struct.radius)) {
     halfway_dist = struct.radius * 0.5;
   } else if(isDefined(struct.script_halfway_dist)) {
@@ -223,26 +271,31 @@ fadeout_fog(struct) {
   } else {
     halfway_dist = 256;
   }
+
   if(isDefined(struct.script_halfway_height)) {
     halfway_height = struct.script_halfway_height;
   } else {
     halfway_height = 512;
   }
+
   if(isDefined(struct.script_base_height)) {
     base_height = struct.script_base_height;
   } else {
     base_height = struct.origin[2] - 100;
   }
+
   if(isDefined(struct.script_color)) {
     color = struct.script_color;
   } else {
     color = (0, 0, 0);
   }
+
   if(isDefined(struct.script_transition_time)) {
     trans_time = struct.script_transition_time;
   } else {
     trans_time = 3;
   }
+
   SetVolFog(start_dist, halfway_dist, halfway_height, base_height, color[0], color[1], color[2], trans_time);
   level.bg_hud FadeOverTime(trans_time * 0.3);
   level.bg_hud.alpha = 0;
@@ -253,9 +306,9 @@ fadein_fog() {
   level.bg_hud FadeOverTime(5);
   level.bg_hud.alpha = 1;
 }
-
 spawn_guys(spawners, target_name) {
   guys = [];
+
   for(i = 0; i < spawners.size; i++) {
     guy = spawn_guy(spawners[i], target_name);
     if(isDefined(guy)) {
@@ -264,19 +317,22 @@ spawn_guys(spawners, target_name) {
   }
   return guys;
 }
-
 spawn_guy(spawner, target_name) {
   spawner.count = 1;
+
   spawner script_delay();
+
   if(isDefined(spawner.script_forcespawn) && spawner.script_forcespawn) {
     guy = spawner Stalingradspawn();
   } else {
     guy = spawner Dospawn();
   }
+
   if(!spawn_failed(guy)) {
     if(isDefined(target_name)) {
       guy.targetname = target_name;
     }
+
     if(isDefined(guy.script_noteworthy)) {
       switch (guy.script_noteworthy) {
         case "nodamage":
@@ -284,26 +340,33 @@ spawn_guy(spawner, target_name) {
           break;
       }
     }
+
     if(isDefined(guy.script_death)) {
       guy thread bloody_death(guy.script_death);
     }
+
     return guy;
   }
+
   return undefined;
 }
-
 bloody_death(delay) {
   self endon("death");
+
   if(!IsAi(self) || !IsAlive(self)) {
     return;
   }
+
   if(isDefined(self.bloody_death) && self.bloody_death) {
     return;
   }
+
   self.bloody_death = true;
+
   if(isDefined(delay)) {
     wait(delay);
   }
+
   tags = [];
   tags[0] = "j_hip_le";
   tags[1] = "j_hip_ri";
@@ -313,46 +376,55 @@ bloody_death(delay) {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
+
   for(i = 0; i < 2; i++) {
     random = RandomIntRange(0, tags.size);
+
     self thread bloody_death_fx(tags[random], undefined);
     wait(RandomFloat(0.1));
   }
+
   self setCanDamage(true);
+
   if(self.health == 1000000) {
     self DoDamage(200, self.origin);
   } else {
     self DoDamage(self.health + 10, self.origin);
   }
 }
-
 bloody_death_fx(tag, fxName) {
   if(!isDefined(fxName)) {
     fxName = level._effect["flesh_hit"];
   }
+
   playFXOnTag(fxName, self, tag);
 }
-
 create_spawner_function(value, key, func) {
   spawners = getEntArray(value, key);
+
   for(i = 0; i < spawners.size; i++) {
     spawners[i] add_spawn_function(func);
   }
 }
-
 tree_sniper_spawner() {
   self endon("death");
+
   if(self.script_noteworthy == "tree_sniper_climber") {
     self.script_noteworthy = "climb";
   }
+
   anim_node = GetNode(self.target, "targetname");
   anim_point = getent(anim_node.target, "targetname");
+
   self.animname = "tree_guy";
+
   if(self.script_noteworthy == "climb") {
     self maps\_tree_snipers::do_climb(anim_point);
   }
+
   if(isDefined(self)) {
     self AllowedStances("crouch");
   }
+
   self thread maps\_tree_snipers::tree_death(self, anim_point);
 }

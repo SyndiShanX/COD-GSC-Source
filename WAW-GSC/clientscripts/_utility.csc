@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\_utility.csc
-*****************************************************/
+**************************************/
 
 #include clientscripts\_utility_code;
 #include clientscripts\_fx;
@@ -14,11 +14,13 @@ error(message) {
 getstruct(name, type) {
   if(!isDefined(level.struct_class_names))
     return undefined;
+
   array = level.struct_class_names[type][name];
   if(!isDefined(array)) {
     println("**** Getstruct returns undefined on " + name + " : " + " type.");
     return undefined;
   }
+
   if(array.size > 1) {
     assertMsg("getstruct used for more than one struct of type " + type + " called " + name + ".");
     return undefined;
@@ -28,6 +30,7 @@ getstruct(name, type) {
 
 getstructarray(name, type) {
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
+
   array = level.struct_class_names[type][name];
   if(!isDefined(array)) {
     return [];
@@ -52,21 +55,28 @@ vector_multiply(vec, dif) {
 
 array_thread(entities, process, var1, var2, var3) {
   keys = getArrayKeys(entities);
+
   if(isDefined(var3)) {
     for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2, var3);
+
     return;
   }
+
   if(isDefined(var2)) {
     for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1, var2);
+
     return;
   }
+
   if(isDefined(var1)) {
     for(i = 0; i < keys.size; i++)
       entities[keys[i]] thread[[process]](var1);
+
     return;
   }
+
   for(i = 0; i < keys.size; i++)
     entities[keys[i]] thread[[process]]();
 }
@@ -75,10 +85,12 @@ registerSystem(sSysName, cbFunc) {
   if(!isDefined(level._systemStates)) {
     level._systemStates = [];
   }
+
   if(level._systemStates.size >= 32) {
     error("Max num client systems exceeded.");
     return;
   }
+
   if(isDefined(level._systemStates[sSysName])) {
     error("Attempt to re-register client system : " + sSysName);
     return;
@@ -95,10 +107,12 @@ loop_sound_Delete(ender, entId) {
 
 loop_fx_sound(clientNum, alias, origin, ender) {
   entId = spawnfakeent(clientNum);
+
   if(isDefined(ender)) {
     thread loop_sound_Delete(ender, entId);
     self endon(ender);
   }
+
   setfakeentorg(clientNum, entId, origin);
   playLoopSound(clientNum, entId, alias);
 }
@@ -114,16 +128,19 @@ within_fov(start_origin, start_angles, end_origin, fov) {
   normal = VectorNormalize(end_origin - start_origin);
   forward = anglesToForward(start_angles);
   dot = VectorDot(forward, normal);
+
   return dot >= fov;
 }
 
 add_to_array(array, ent) {
   if(!isDefined(ent))
     return array;
+
   if(!isDefined(array))
     array[0] = ent;
   else
     array[array.size] = ent;
+
   return array;
 }
 
@@ -141,10 +158,12 @@ getExploderId(ent) {
     level._exploder_ids = [];
     level._exploder_id = 1;
   }
+
   if(!isDefined(level._exploder_ids[ent.v["exploder"]])) {
     level._exploder_ids[ent.v["exploder"]] = level._exploder_id;
     level._exploder_id++;
   }
+
   return level._exploder_ids[ent.v["exploder"]];
 }
 
@@ -153,7 +172,9 @@ reportExploderIds() {
     return;
   }
   keys = GetArrayKeys(level._exploder_ids);
+
   println("Client Exploder dictionary : ");
+
   for(i = 0; i < keys.size; i++) {
     println(keys[i] + " : " + level._exploder_ids[keys[i]]);
   }
@@ -162,54 +183,70 @@ reportExploderIds() {
 init_exploders() {
   println("*** Init exploders...");
   script_exploders = [];
+
   ents = GetStructArray("script_brushmodel", "classname");
   println("Client : s_bm " + ents.size);
+
   smodels = GetStructArray("script_model", "classname");
   println("Client : sm " + smodels.size);
+
   for(i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
   }
+
   for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_prefab_exploder)) {
       ents[i].script_exploder = ents[i].script_prefab_exploder;
     }
   }
+
   potentialExploders = GetStructArray("script_brushmodel", "classname");
   println("Client : Potential exploders from script_brushmodel " + potentialExploders.size);
+
   for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     }
+
     if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
     }
   }
+
   potentialExploders = GetStructArray("script_model", "classname");
   println("Client : Potential exploders from script_model " + potentialExploders.size);
+
   for(i = 0; i < potentialExploders.size; i++) {
     if(isDefined(potentialExploders[i].script_prefab_exploder)) {
       potentialExploders[i].script_exploder = potentialExploders[i].script_prefab_exploder;
     }
+
     if(isDefined(potentialExploders[i].script_exploder)) {
       script_exploders[script_exploders.size] = potentialExploders[i];
     }
   }
+
   for(i = 0; i < level.struct.size; i++) {
     if(isDefined(level.struct[i].script_prefab_exploder)) {
       level.struct[i].script_exploder = level.struct[i].script_prefab_exploder;
     }
+
     if(isDefined(level.struct[i].script_exploder)) {
       script_exploders[script_exploders.size] = level.struct[i];
     }
   }
+
   if(!isDefined(level.createFXent)) {
     level.createFXent = [];
   }
+
   acceptableTargetnames = [];
   acceptableTargetnames["exploderchunk visible"] = true;
   acceptableTargetnames["exploderchunk"] = true;
   acceptableTargetnames["exploder"] = true;
+
   exploder_id = 1;
+
   for(i = 0; i < script_exploders.size; i++) {
     exploder = script_exploders[i];
     ent = createExploder(exploder.script_fxid);
@@ -240,15 +277,18 @@ init_exploders() {
     ent.v["ender"] = exploder.script_ender;
     ent.v["physics"] = exploder.script_physics;
     ent.v["type"] = "exploder";
+
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
     } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
     ent.v["exploder"] = exploder.script_exploder;
+
     if(!isDefined(ent.v["delay"])) {
       ent.v["delay"] = 0;
     }
+
     if(isDefined(exploder.script_sound)) {
       ent.v["soundalias"] = exploder.script_sound;
     } else if(ent.v["fxid"] != "No FX") {
@@ -256,55 +296,68 @@ init_exploders() {
         ent.v["soundalias"] = level.scr_sound[ent.v["fxid"]];
       }
     }
+
     fixup_set = false;
+
     if(isDefined(ent.v["target"])) {
       ent.needs_fixup = exploder_id;
       exploder_id++;
       fixup_set = true;
+
       {
         temp_ent = GetStruct(ent.v["target"], "targetname");
         org = temp_ent.origin;
       }
+
       if(isDefined(org)) {
         ent.v["angles"] = VectorToAngles(org - ent.v["origin"]);
       } else {
         println("*** Client : Exploder " + exploder.script_fxid + " Failed to find target ");
       }
+
       if(isDefined(ent.v["angles"])) {
         ent set_forward_and_up_vectors();
       } else {
         println("*** Client " + exploder.script_fxid + " has no angles.");
       }
     }
+
     if(exploder.classname == "script_brushmodel" || isDefined(exploder.model)) {
       if(isDefined(exploder.model)) {
         println("*** exploder " + exploder_id + " model " + exploder.model);
       }
       ent.model = exploder;
+
       if(fixup_set == false) {
         ent.needs_fixup = exploder_id;
         exploder_id++;
       }
     }
+
     if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
     } else {
       ent.v["exploder_type"] = "normal";
     }
   }
+
   for(i = 0; i < level.createFXent.size; i++) {
     ent = level.createFXent[i];
+
     if(ent.v["type"] != "exploder") {
       continue;
     }
     ent.v["exploder_id"] = getExploderId(ent);
   }
+
   reportExploderIds();
+
   println("*** Client : " + script_exploders.size + " exploders.");
 }
 
 playfx_for_all_local_clients(fx_id, pos, forward_vec, up_vec) {
   localPlayers = getlocalplayers();
+
   if(isDefined(up_vec)) {
     for(i = 0; i < localPlayers.size; i++) {
       playFX(i, fx_id, pos, forward_vec, up_vec);
@@ -322,14 +375,17 @@ playfx_for_all_local_clients(fx_id, pos, forward_vec, up_vec) {
 
 play_sound_on_client(sound_alias) {
   players = GetLocalPlayers();
+
   playSound(0, sound_alias, players[0].origin);
 }
 
 loop_sound_on_client(sound_alias, min_delay, max_delay, end_on) {
   players = GetLocalPlayers();
+
   if(isDefined(end_on)) {
     level endon(end_on);
   }
+
   for(;;) {
     play_sound_on_client(sound_alias);
     wait(min_delay + RandomFloat(max_delay));
@@ -343,6 +399,7 @@ add_listen_thread(wait_till, func, param1, param2, param3, param4, param5) {
 add_listen_thread_internal(wait_till, func, param1, param2, param3, param4, param5) {
   for(;;) {
     level waittill(wait_till);
+
     if(isDefined(param5)) {
       level thread[[func]](param1, param2, param3, param4, param5);
     } else if(isDefined(param4)) {
@@ -364,6 +421,7 @@ addLightningExploder(num) {
     level.lightningExploder = [];
     level.lightningExploderIndex = 0;
   }
+
   level.lightningExploder[level.lightningExploder.size] = num;
 }
 
@@ -371,6 +429,7 @@ splitscreen_populate_dvars(clientNum) {
   if(getlocalplayers().size <= 1) {
     return;
   }
+
   UpdateDvarsFromProfile(clientNum);
 }
 
@@ -378,5 +437,6 @@ splitscreen_restore_dvars() {
   if(getlocalplayers().size <= 1) {
     return;
   }
+
   splitscreen_populate_dvars(0);
 }

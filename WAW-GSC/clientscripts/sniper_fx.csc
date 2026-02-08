@@ -1,7 +1,7 @@
-/*****************************************************
+/***************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\sniper_fx.csc
-*****************************************************/
+***************************************/
 
 #include clientscripts\_utility;
 
@@ -26,8 +26,8 @@ footsteps() {
   clientscripts\_utility::setFootstepEffect("water", LoadFx("bio/player/fx_footstep_water"));
   clientscripts\_utility::setFootstepEffect("wood", LoadFx("bio/player/fx_footstep_dust"));
 }
-
 precache_util_fx() {}
+
 precache_scripted_fx() {}
 precache_createfx_fx() {
   level._effect["mortar_exp"] = loadfx("explosions/fx_mortarExp_dirt");
@@ -101,9 +101,11 @@ precache_createfx_fx() {
 main() {
   clientscripts\createfx\sniper_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   precache_util_fx();
   footsteps();
   precache_createfx_fx();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();

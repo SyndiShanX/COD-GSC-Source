@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_flak88.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -12,30 +12,37 @@
 main(model, type) {
   level.tanks = [];
   build_template("flak88", model, type);
+
   build_localinit(::init_local);
+
   build_deathmodel("german_artillery_flak88_nm", "german_artillery_flak88_nm_destroy");
   build_deathmodel("artillery_ger_flak88_winter", "artillery_ger_flak88_winter_d");
   build_deathmodel("artillery_ger_flak88", "artillery_ger_flak88_d");
+
   build_shoot_shock("tankblast");
+
   build_deathfx("explosions/large_vehicle_explosion", undefined, "explo_metal_rand");
+
   build_life(999, 500, 1500);
+
   build_team("axis");
+
   build_mainturret();
+
   level.flak88_shell_model = "grenade_bag";
   level.flak88_bomb_model = "grenade_bag";
   level.flak88_bomb_model_obj = "grenade_bag";
+
   level.timersused = 0;
   level.safetyRange = 350;
   load_crew_anims();
   array_levelthread(getEntArray("flakbarrel", "targetname"), ::flakbarrel);
 }
-
 init_local() {
   self flak88_init();
 }
 
 #using_animtree("generic_human");
-
 load_crew_anims() {
   level.scr_anim["leader"]["fire"] = % ai_88antitank_leader_loadandfire;
   level.scr_anim["leader"]["idle0"] = % ai_88antitank_leader_twitch;
@@ -47,6 +54,7 @@ load_crew_anims() {
   level.scr_anim["leader"]["turnright"] = % ai_88antitank_leader_turnright;
   level.scr_anim["leader"]["commandleft"] = % ai_88antitank_leader_commandright;
   level.scr_anim["leader"]["commandright"] = % ai_88antitank_leader_commandleft;
+
   level.scr_anim["passer"]["fire"] = % ai_88antitank_passer_loadandfire;
   level.scr_anim["passer"]["idle0"] = % ai_88antitank_passer_twitch;
   level.scr_anim["passer"]["idle1"] = % ai_88antitank_passer_idle;
@@ -55,6 +63,7 @@ load_crew_anims() {
   level.scr_anim["passer"]["idle4"] = % ai_88antitank_passer_idle;
   level.scr_anim["passer"]["turnleft"] = % ai_88antitank_passer_turnright;
   level.scr_anim["passer"]["turnright"] = % ai_88antitank_passer_turnleft;
+
   level.scr_anim["loader"]["fire"] = % ai_88antitank_loader_loadandfire;
   level.scr_anim["loader"]["idle0"] = % ai_88antitank_loader_twitch;
   level.scr_anim["loader"]["idle1"] = % ai_88antitank_loader_idle;
@@ -63,6 +72,7 @@ load_crew_anims() {
   level.scr_anim["loader"]["idle4"] = % ai_88antitank_loader_idle;
   level.scr_anim["loader"]["turnleft"] = % ai_88antitank_loader_turnleft;
   level.scr_anim["loader"]["turnright"] = % ai_88antitank_loader_turnright;
+
   level.scr_anim["ejecter"]["fire"] = % ai_88antitank_ejecter_loadandfire;
   level.scr_anim["ejecter"]["idle0"] = % ai_88antitank_ejecter_twitch;
   level.scr_anim["ejecter"]["idle1"] = % ai_88antitank_ejecter_idle;
@@ -71,6 +81,7 @@ load_crew_anims() {
   level.scr_anim["ejecter"]["idle4"] = % ai_88antitank_ejecter_idle;
   level.scr_anim["ejecter"]["turnleft"] = % ai_88antitank_ejecter_turnright;
   level.scr_anim["ejecter"]["turnright"] = % ai_88antitank_ejecter_turnleft;
+
   level.scr_anim["aimer"]["fire"] = % ai_88antitank_aimer_loadandfire;
   level.scr_anim["aimer"]["idle0"] = % ai_88antitank_aimer_twitch;
   level.scr_anim["aimer"]["idle1"] = % ai_88antitank_aimer_idle;
@@ -91,6 +102,7 @@ flakcrew_animation_think(flak) {
       self thread flakcrew_playAnim(flak, flak.turning);
     else
       self thread flakcrew_playAnim(flak, "idle" + randomint(5));
+
     self waittill("flakcrew animation done");
   }
 }
@@ -101,6 +113,7 @@ flakcrew_playAnim(flak, animName) {
   self endon("death");
   flak endon("death");
   flak endon("crew dismounted");
+
   tagOrigin = flak getTagOrigin("tag_turret");
   tagAngles = flak getTagAngles("tag_turret");
   if(isalive(self)) {
@@ -134,6 +147,7 @@ donotetracks_flak88(anime, flak) {
         break;
     }
   }
+
 }
 
 detach_shell() {
@@ -156,9 +170,11 @@ flakcrew_gunbackinhand(flak) {
   flak waittill_any("crew dismounted", "crew dead", "death");
   self detach_shell();
   flak notify("crew dismounted");
+
   if(!flak isCheap()) {
     self animscripts\shared::placeWeaponOn(self.primaryweapon, "right");
   }
+
   self.health = self.oldhealth;
   self.oldhealth = undefined;
   wait randomfloatrange(0, 1);
@@ -170,9 +186,12 @@ badplace_when_near() {
     return;
   self endon("death");
   self endon("bomb planted");
+
   trig = spawn("trigger_radius", self.origin, 0, 200, 200);
+
   for(;;) {
     trig waittill("trigger");
+
     badplacename = ("flak_badplace_player_near" + randomint(1000));
     badplace_cylinder(badplacename, 2, self.origin, 250, 300);
     wait 1.8;
@@ -187,6 +206,7 @@ flak_use_dismount() {
 flak88_init() {
   if(!isDefined(self.script_team))
     self.script_team = "axis";
+
   self thread kill_flak88();
   self thread shoot();
   self.enemyque = [];
@@ -211,12 +231,14 @@ flak88_init() {
           }
         }
       }
+
       if((self.bombTriggers.size > 0) && (self.bombs.size > 0)) {
         self thread flak88_explosives();
         self thread badplace_when_near();
       }
     }
   }
+
   self.turning = "none";
   self thread flak_monitorTurretAngles();
   self thread flak_use_dismount();
@@ -227,17 +249,20 @@ flak88_init() {
 flak_monitorTurretAngles() {
   self endon("death");
   self endon("crew dismounted");
+
   prevAngles = (0, 0, 0);
   newAngles = (0, 0, 0);
   for(;;) {
     prevAngles = newAngles;
     newAngles = self getTagAngles("tag_turret");
+
     if(newAngles[1] < prevAngles[1])
       self.turning = "turnright";
     else if(newAngles[1] > prevAngles[1])
       self.turning = "turnleft";
     else
       self.turning = "none";
+
     wait 0.1;
   }
 }
@@ -253,22 +278,30 @@ flak88_explosives() {
     self.bombTriggers[i] linkto(self, "tag_barrel");
     self thread flak88_explosives_wait(self.bombTriggers[i]);
   }
+
   self waittill("explosives planted");
+
   badplace_cylinder("", level.explosiveplanttime, self.origin, 250, 300);
+
   iprintlnbold(&"SCRIPT_EXPLOSIVESPLANTED");
+
   for(i = 0; i < self.bombTriggers.size; i++)
     self.bombTriggers[i] delete();
+
   bomb = getClosest(get_players()[0] getOrigin(), self.bombs);
   bomb setModel(level.flak88_bomb_model);
   bomb playSound("explo_plant_rand");
   bomb thread loopsound_for_time_or_death("bomb_tick", level.explosiveplanttime);
+
   for(i = 0; i < self.bombs.size; i++) {
     if(self.bombs[i] == bomb)
       continue;
     self.bombs[i] delete();
   }
+
   if(isDefined(self.bombstopwatch))
     self.bombstopwatch destroy();
+
   level.timersused++;
   wait level.explosiveplanttime;
   bomb stoploopsound("bomb_tick");
@@ -292,8 +325,10 @@ loopsound_end_ondeath(sound) {}
 flak88_explosives_wait(trigger) {
   self endon("death");
   self endon("explosives planted");
+
   trigger setHintString(&"SCRIPT_PLATFORM_HINTSTR_PLANTEXPLOSIVES");
   trigger waittill("trigger");
+
   if(isDefined(trigger.script_noteworthy))
     level notify(trigger.script_noteworthy);
   self notify("explosives planted", trigger);
@@ -337,6 +372,7 @@ spawn_trigger_wait(trigger) {
       count--;
   } else
     count = undefined;
+
   self notify("spawntriggered", count);
 }
 
@@ -373,27 +409,34 @@ spawner_trigger() {
     if(ents[i].script_flak88 == self.script_flak88)
       spawners[spawners.size] = ents[i];
   }
+
   if(spawners.size == 0) {
     return;
   }
   crewspawned = false;
+
   count = 0;
   while(1) {
     numberofguys = undefined;
     if(spawn_trigger)
       self waittill("spawntriggered", numberofguys);
+
     self.crewsize = 0;
     self.crewMembers = [];
+
     if(!isDefined(numberofguys))
       numberofguys = spawners.size;
+
     println("attempting to set up new flakcrew: ", count);
     count++;
     self notify("newcrew");
+
     leader = undefined;
     loader = undefined;
     passer = undefined;
     ejecter = undefined;
     aimer = undefined;
+
     for(i = 0; i < numberofguys; i++) {
       if(!isDefined(spawners[i]))
         continue;
@@ -413,12 +456,14 @@ spawner_trigger() {
       if(!spawn_failed(spawned) || self isCheap()) {
         self.crewposition = undefined;
         self.crewsize++;
+
         self.crewMembers[self.crewMembers.size] = spawned;
         if(!self isCheap()) {
           spawned.goalradius = 768;
           spawned setgoalpos(self.origin);
         }
         spawned.has_shell = false;
+
         if(!isDefined(loader)) {
           spawned.crewposition = "loader";
           loader = 1;
@@ -447,6 +492,7 @@ spawner_trigger() {
             }
           }
         }
+
         if(isDefined(spawned.crewposition)) {
           spawned.oldhealth = spawned.health;
           if(spawned.oldhealth <= 0) {
@@ -454,10 +500,13 @@ spawner_trigger() {
           }
           spawned.health = 1;
           spawned linkto(self, "tag_turret");
+
           spawned.anim_disablelongdeath = true;
+
           if(!self isCheap()) {
             spawned animscripts\shared::placeWeaponOn(spawned.primaryweapon, "none");
           }
+
           spawned thread flakcrew_animation_think(self);
           spawned thread flakcrew_gunbackinhand(self);
           thread delete_on_newcrew(spawned);
@@ -465,7 +514,9 @@ spawner_trigger() {
         level thread flak88_crew_waittill_death(self, spawned);
       }
     }
+
     self.crewmembers = array_removeDead(self.crewmembers);
+
     self thread flak88_waittill_crewdead(self.crewmembers);
     self thread think();
     trigs = getEntArray("stop flak88", "targetname");
@@ -475,6 +526,7 @@ spawner_trigger() {
         break;
       }
     }
+
     if(!spawn_trigger) {
       break;
     }
@@ -483,33 +535,40 @@ spawner_trigger() {
 
 mount_world_flakcrew(entArray) {
   self endon("death");
+
   crew_array = [];
   if(!isDefined(self.crewmembers)) {
     self.crewmembers = [];
     self.crewsize = 5;
   }
+
   for(i = 0; i < self.crewsize; i++) {
     if(isDefined(self.crewmembers[i]) && isalive(self.crewmembers[i])) {
       ASSERTMSG("Trying to set a new crew on a flak 88 with a designated crew!");
       return;
     }
   }
+
   self notify("newcrew");
+
   leader = undefined;
   loader = undefined;
   passer = undefined;
   ejecter = undefined;
   aimer = undefined;
+
   for(i = 0; i < entArray.size; i++) {
     if(!isDefined(entArray[i]) && !isalive(entArray[i])) {
       continue;
     }
     self.crewposition = undefined;
     self.crewsize++;
+
     self.crewMembers[self.crewMembers.size] = entArray[i];
     entArray[i].goalradius = 768;
     entArray[i] setgoalpos(self.origin);
     entArray[i].has_shell = false;
+
     if(!isDefined(loader)) {
       entArray[i].crewposition = "loader";
       entArray[i].animname = "loader";
@@ -546,22 +605,30 @@ mount_world_flakcrew(entArray) {
           entArray[i] setgoalNode(node);
       }
     }
+
     level thread flak88_crew_waittill_death(self, entArray[i]);
   }
+
   crew_array = array_removeDead(crew_array);
+
   level anim_reach(crew_array, "idle1", "tag_turret", self);
   for(i = 0; i < crew_array.size; i++) {
     if(isDefined(crew_array[i]) && isalive(crew_array[i])) {
       crew_array[i].oldhealth = crew_array[i].health;
       crew_array[i].health = 1;
       crew_array[i] linkto(self, "tag_turret");
+
       crew_array[i].anim_disablelongdeath = true;
+
       crew_array[i] animscripts\shared::placeWeaponOn(entArray[i].primaryweapon, "none");
+
       crew_array[i] thread flakcrew_animation_think(self);
       crew_array[i] thread flakcrew_gunbackinhand(self);
     }
   }
+
   self.crewmembers = array_removeDead(self.crewmembers);
+
   self thread flak88_waittill_crewdead(self.crewmembers);
   self thread think();
   trigs = getEntArray("stop flak88", "targetname");
@@ -606,6 +673,7 @@ flak88_crew_waittill_death(flak, crew_member) {
   flak endon("death");
   flak endon("crew dismounted");
   crew_member endon("crew dismounted");
+
   isLeader = false;
   if((isDefined(crew_member.crewposition)) && (crew_member.crewposition == "leader"))
     isLeader = true;
@@ -620,15 +688,18 @@ flak88_crew_waittill_death(flak, crew_member) {
     flak notify("crew dead");
   } else if(!isLeader) {
     flak clearTurretTarget();
+
     flak88_dismount_crew(flak);
   }
 }
 
 kill_flak88() {
   notifyString = undefined;
+
   self waittill("death");
   if(isDefined(level.hitbyplayervehiclethread))
     thread[[level.hitbyplayervehiclethread]]();
+
   ai = getaiarray();
   for(i = 0; i < ai.size; i++) {
     if(!isDefined(ai[i]))
@@ -645,27 +716,34 @@ kill_flak88() {
         ai[i] doDamage(ai[i].health, ai[i].origin);
     }
   }
+
   if(isDefined(notifyString))
     level notify(notifyString);
+
   if(!isDefined(self)) {
     return;
   }
   if(isDefined(self.bombstopwatch))
     self.bombstopwatch destroy();
+
   if(level.playervehicle != self)
     self clearTurretTarget();
+
   if(isDefined(self.deathsound))
     self playSound(self.deathsound);
   if(isDefined(self.deathfx))
     level thread maps\_fx::OneShotfx(self.deathfx, self.origin, 0);
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] enableHealthShield(false);
     radiusDamage(self.origin + (0, 0, 300), 400, 700, 100);
     players[i] enableHealthShield(true);
   }
+
   level thread maps\_fx::loopfx("damaged_vehicle_smoke", self.origin, .8);
   earthquake(0.25, 3, self.origin, 1050);
+
   if(isDefined(self.deathmodel))
     self setModel(self.deathmodel);
   if(isDefined(self.bombs)) {
@@ -674,6 +752,7 @@ kill_flak88() {
         self.bombs[i] delete();
     }
   }
+
   if(isDefined(self.bombTriggers)) {
     for(i = 0; i < self.bombTriggers.size; i++) {
       if(isDefined(self.bombTriggers[i]))
@@ -689,18 +768,22 @@ shoot_flak(org) {
     return false;
   if(self.health <= 0)
     return false;
+
   wait 0.2;
+
   if(isDefined(self.crewMembers)) {
     for(i = 0; i < self.crewMembers.size; i++) {
       if((isDefined(self.crewMembers[i])) && (isDefined(self.crewMembers[i].crewposition)))
         self.crewMembers[i] thread flakcrew_playAnim(self, "fire");
     }
   }
+
   self notify("turret_fire");
+
   wait 0.2;
+
   return true;
 }
-
 think() {
   self endon("death");
   self endon("newcrew");
@@ -708,27 +791,34 @@ think() {
     self.script_accuracy = .4;
   else if(self.script_accuracy >= 1.000)
     self.script_accuracy = .99;
+
   if((!isDefined(self.script_delay_min)) || (!isDefined(self.script_delay_max))) {
     self.script_delay_min = 4;
     self.script_delay_max = 8;
   }
+
   if((isDefined(self.script_leftarc)) && (isDefined(self.script_rightarc)) && ((self.script_leftarc + self.script_rightarc) >= 360)) {
     self.script_leftarc = undefined;
     self.script_rightarc = undefined;
   }
   delay_difference = (self.script_delay_max - self.script_delay_min);
+
   if((!isDefined(self.script_shoottanks)) && (!isDefined(self.script_shootAI))) {
     self.script_shoottanks = 0;
     self.script_shootai = 0;
   }
+
   if(!isDefined(self.script_shoottanks))
     self.script_shoottanks = 1;
   if(!isDefined(self.script_shootAI))
     self.script_shootAI = 0;
+
   if((self.script_shoottanks == 0) && (self.script_shootai == 0))
     self.autoTarget = false;
+
   if(!isDefined(self.autoTarget))
     self.autoTarget = true;
+
   /
   return true;
 }
@@ -736,6 +826,7 @@ think() {
 Target_Kill_Using_Accuracy(flak, target, delay_difference) {
   flak endon("crew dead");
   flak endon("crew dismounted");
+
   if(!isDefined(target))
     return;
   if((target.classname != "script_origin") && (target.health <= 0)) {
@@ -745,6 +836,7 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
     if((isDefined(self.autoTarget)) && (self.autoTarget == false))
       return;
   }
+
   if(isSentient(target)) {
     aim_org = target getEye();
     aim_org = aim_org - (0, 0, 20);
@@ -752,26 +844,33 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
     aim_org = target.origin;
   else
     aim_org = (target.origin + (0, 0, 40));
+
   offset_x = randomfloat(100 - flak.script_accuracy * 100);
   offset_y = randomfloat(100 - flak.script_accuracy * 100);
   offset_z = randomfloat(100 - flak.script_accuracy * 100);
+
   if(isSentient(target)) {
     offset_x = (offset_x * .3);
     offset_y = (offset_y * .3);
     offset_z = (offset_z * .3);
   } else
     offset_z = (offset_z * .5);
+
   if(randomint(2) == 0)
     offset_x = (offset_x * -1);
   if(randomint(2) == 0)
     offset_y = (offset_y * -1);
   if(randomint(2) == 0)
     offset_z = (offset_z * -1);
+
   aim_org = (aim_org + (offset_x, offset_y, offset_z));
+
   flak thread debug_flak88_drawLines(aim_org);
+
   flak setTurretTargetVec(aim_org);
   flak waittill("turret_on_target");
   flak clearTurretTarget();
+
   if(issentient(target) && (target.health <= 0 || !sighttracepassed(flak gettagorigin("tag_flash"), aim_org, 0, flak))) {
     return;
   }
@@ -779,25 +878,30 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
     flak waittill(flak.script_startnotify);
     flak.script_startnotify = undefined;
   }
+
   wait 2;
+
   flak shoot_flak(aim_org);
+
   if(isDefined(delay_difference)) {
     if(delay_difference <= 0)
       wait flak.script_delay_min;
     else
       wait(flak.script_delay_min + randomfloat(delay_difference));
   }
+
   return;
 }
-
 cone_check(flak88, target_org) {
   if((!isDefined(flak88.script_leftarc)) || (!isDefined(flak88.script_leftarc)))
     return true;
+
   forwardvec = anglesToForward(flak88.angles);
   orgA = flak88.origin;
   orgB = target_org;
   normalvec = vectorNormalize(orgB - orgA);
   vecdot = vectordot(forwardvec, normalvec);
+
   if(flak88.script_leftarc == flak88.script_rightarc) {
     if(vecdot > cos(flak88.script_leftarc))
       return true;
@@ -816,7 +920,9 @@ debug_flak88_drawLines(targetOrg) {
   self notify("stop drawing debug lines");
   self endon("death");
   self endon("stop drawing debug lines");
+
   return;
+
   for(;;) {
     line(self.origin + (0, 0, 68), targetOrg, (0.2, 0.5, 0.8), 0.5);
     wait 0.05;
@@ -831,9 +937,8 @@ shoot() {
 }
 
 fire_flak88() {
-  if(self.health <= 0) {
+  if(self.health <= 0)
     return;
-  }
 }
 
 flakbarrel(flakbarrel) {

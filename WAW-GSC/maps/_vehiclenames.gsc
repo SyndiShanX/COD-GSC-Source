@@ -1,22 +1,26 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_vehiclenames.gsc
-*****************************************************/
+**************************************/
 
 main() {}
+
 get_name() {
   american_names = 10;
   british_names = 18;
   russian_names = 10;
+
   if(!(isDefined(game["americanvehiclenames"])))
     game["americanvehiclenames"] = randomint(american_names);
   if(!(isDefined(game["britishvehiclenames"])))
     game["britishvehiclenames"] = randomint(british_names);
   if(!(isDefined(game["russianvehiclenames"])))
     game["russianvehiclenames"] = randomint(russian_names);
+
   if(!isDefined(level.campaign)) {
     return;
   }
+
   if(level.campaign == "british") {
     game["britishvehiclenames"]++;
     get_british_name();
@@ -113,7 +117,6 @@ get_british_name() {
   vehiclename = add_group_name(vehiclename);
   self setvehiclelookattext(vehiclename, level.vehicletypefancy[self.vehicletype]);
 }
-
 get_russian_name() {
   vehiclename = undefined;
   switch (game["russianvehiclenames"]) {

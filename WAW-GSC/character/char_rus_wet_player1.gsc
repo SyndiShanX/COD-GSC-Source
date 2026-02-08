@@ -1,7 +1,7 @@
-/*****************************************************
+/**********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_rus_wet_player1.gsc
-*****************************************************/
+**********************************************/
 
 main() {
   self setModel("char_rus_guardwet_player_body1_1");

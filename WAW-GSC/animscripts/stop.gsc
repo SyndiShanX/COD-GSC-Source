@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\stop.gsc
-*****************************************************/
+**************************************/
 
 #include animscripts\combat_utility;
 #include animscripts\Utility;
@@ -11,16 +11,22 @@
 main() {
   self notify("stopScript");
   self endon("killanimscript");
+
   if(getdebugdvar("anim_preview") != "") {
     return;
   }
   [[self.exception["stop_immediate"]]]();
   thread delayedException();
+
   self trackScriptState("Stop Main", "code");
   animscripts\utility::initialize("stop");
+
   self flamethrower_stop_shoot();
+
   self randomizeIdleSet();
+
   self thread setLastStoppedTime();
+
   transitionedToIdle = gettime() < 3000;
   if(!transitionedToIdle) {
     if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none")
@@ -30,18 +36,22 @@ main() {
     else if(AngleClamp180(self getTagAngles("tag_weapon")[0]) > 20)
       transitionedToIdle = true;
   }
+
   for(;;) {
     desiredPose = getDesiredIdlePose();
+
     if(desiredPose == "prone") {
       transitionedToIdle = true;
       self ProneStill();
     } else {
       assertex(desiredPose == "crouch" || desiredPose == "stand", desiredPose);
+
       if(self.a.pose != desiredPose) {
         self clearAnim(%root, 0.3);
         transitionedToIdle = false;
       }
       self SetPoseMovement(desiredPose, "stop");
+
       if(!transitionedToIdle) {
         self transitionToIdle(desiredPose, self.a.idleSet);
         transitionedToIdle = true;
@@ -67,8 +77,11 @@ getDesiredIdlePose() {
     myNodeAngle = self.desiredAngle;
     myNodeType = "node was undefined";
   }
+
   self animscripts\face::SetIdleFace(anim.alertface);
+
   desiredPose = animscripts\utility::choosePose();
+
   if(myNodeType == "Cover Stand" || myNodeType == "Conceal Stand") {
     desiredPose = animscripts\utility::choosePose("stand");
   } else if(myNodeType == "Cover Crouch" || myNodeType == "Conceal Crouch") {
@@ -76,6 +89,7 @@ getDesiredIdlePose() {
   } else if(myNodeType == "Cover Prone" || myNodeType == "Conceal Prone") {
     desiredPose = animscripts\utility::choosePose("prone");
   }
+
   return desiredPose;
 }
 
@@ -89,8 +103,10 @@ transitionToIdle(pose, idleSet) {
   } else if(self is_heavy_machine_gun() && self.a.pose == "crouch") {
     pose = "crouch_hmg";
   }
+
   if(isDefined(anim.idleAnimTransition[pose])) {
     assert(isDefined(anim.idleAnimTransition[pose]["in"]));
+
     if(!self usingGasWeapon()) {
       idleAnim = anim.idleAnimTransition[pose]["in"];
       self setFlaggedAnimKnobAllRestart("idle_transition", idleAnim, %body, 1, .3, self.animplaybackrate);
@@ -113,12 +129,16 @@ playIdle(pose, idleSet) {
   } else if(self weaponAnims() == "gas" && self.a.pose == "crouch") {
     pose = "crouch_flame";
   }
+
   idleSet = idleSet % anim.idleAnimArray[pose].size;
+
   idleAnim = anim_array(anim.idleAnimArray[pose][idleSet], anim.idleAnimWeights[pose][idleSet]);
+
   transTime = 0.2;
   if(gettime() == self.a.scriptStartTime) {
     transTime = 0.5;
   }
+
   self setFlaggedAnimKnobAllRestart("idle", idleAnim, %body, 1, transTime, self.animplaybackrate);
   self animscripts\shared::DoNoteTracks("idle");
 }
@@ -127,17 +147,24 @@ ProneStill() {
   if(self.a.pose != "prone") {
     anim_array["stand_2_prone"] = % stand_2_prone;
     anim_array["crouch_2_prone"] = % crouch_2_prone;
+
     transAnim = anim_array[self.a.pose + "_2_prone"];
     assertex(isDefined(transAnim), self.a.pose);
     assert(animHasNotetrack(transAnim, "anim_pose = \"prone\""));
+
     self setFlaggedAnimKnobAllRestart("trans", transAnim, %body, 1, .2, 1.0);
     animscripts\shared::DoNoteTracks("trans");
+
     assert(self.a.pose == "prone");
     self.a.movement = "stop";
+
     self setProneAnimNodes(-45, 45, %prone_legs_down, %exposed_modern, %prone_legs_up);
+
     return;
   }
+
   self thread UpdateProneThread();
+
   if(randomint(10) < 3) {
     twitches = [];
     twitches[0] = % prone_twitch_ammocheck;
@@ -147,19 +174,23 @@ ProneStill() {
     twitches[4] = % prone_twitch_lookup;
     twitches[5] = % prone_twitch_scan;
     twitches[6] = % prone_twitch_scan2;
+
     twitchAnim = twitches[randomint(twitches.size)];
     self setFlaggedAnimKnobAll("prone_idle", twitchAnim, %exposed_modern, 1, 0.2);
   } else {
     self setAnimKnobAll(%prone_aim_5, %exposed_modern, 1, 0.2);
     self setFlaggedAnimKnob("prone_idle", %prone_idle, 1, 0.2);
   }
+
   self waittillmatch("prone_idle", "end");
+
   self notify("kill UpdateProneThread");
 }
 
 UpdateProneThread() {
   self endon("killanimscript");
   self endon("kill UpdateProneThread");
+
   for(;;) {
     self animscripts\cover_prone::UpdateProneWrapper(0.1);
     wait 0.1;

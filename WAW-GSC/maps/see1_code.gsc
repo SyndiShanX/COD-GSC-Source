@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\see1_code.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -14,14 +14,18 @@ teleport_actor(node_targetname) {
   if(!isDefined(node)) {
     return;
   }
+
   players = get_players();
   teleport_points = getstructarray("temp_player_pos", "targetname");
+
   if(teleport_points.size < 4) {
     return;
   }
+
   for(i = 0; i < players.size; i++) {
     players[i] setorigin(teleport_points[i].origin);
   }
+
   self teleport(node.origin, node.angles);
   self setgoalpos(node.origin);
 }
@@ -29,21 +33,26 @@ teleport_actor(node_targetname) {
 teleport_actor_to_node(node) {
   players = get_players();
   teleport_points = getstructarray("temp_player_pos", "targetname");
+
   if(teleport_points.size < 4) {
     return;
   }
+
   for(i = 0; i < players.size; i++) {
     players[i] setorigin(teleport_points[i].origin);
   }
+
   self teleport(node.origin, node.angles);
   self setgoalpos(node.origin);
 }
 
 teleport_players(start_nodes_targetname) {
   nodes = getnodearray(start_nodes_targetname, "targetname");
+
   if(nodes.size < 4) {
     return;
   }
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] setorigin(nodes[i].origin + (0, 0, 4));
@@ -54,6 +63,7 @@ teleport_players(start_nodes_targetname) {
 teleport_friendlies(hero1_node_name, hero2_node_name, friends_node_name) {
   level.hero1 teleport_actor(hero1_node_name);
   level.hero2 teleport_actor(hero2_node_name);
+
   nodes = getnodearray(friends_node_name, "targetname");
   if(nodes.size < level.friends.size) {
     return;
@@ -64,20 +74,23 @@ teleport_friendlies(hero1_node_name, hero2_node_name, friends_node_name) {
     }
   }
 }
-
 clean_previous_ai(_flag, name, type) {
   flag_wait(_flag);
+
   ai = undefined;
+
   if(!isDefined(name))
     ai = getaispeciesarray("axis", "all");
   else
     ai = get_living_aispecies_array(name, type);
+
   for(i = 0; i < ai.size; i++)
     ai[i] delete();
 }
 
 initialize_spawn_function(name, key, spawn_func) {
   spawners = getEntArray(name, key);
+
   if(isDefined(spawn_func)) {
     for(i = 0; i < spawners.size; i++) {
       if(!isalive(spawners[i])) {
@@ -92,34 +105,47 @@ initialize_spawn_function(name, key, spawn_func) {
 
 force_to_goal(damage_detection) {
   self endon("death");
+
   old_goal_radius = self.goalradius;
+
   self hold_fire();
   self.goalradius = 256;
+
   if(isDefined(damage_detection)) {
     self thread damage_detection();
   }
+
   self waittill_either("goal", "damaged");
+
   self resume_fire();
   self.goalradius = old_goal_radius;
 }
 
 force_to_goal_exact(damage_detection) {
   self endon("death");
+
   old_goal_radius = self.goalradius;
+
   self hold_fire();
   self.goalradius = 4;
+
   if(isDefined(damage_detection)) {
     self thread damage_detection();
   }
+
   self waittill_either("goal", "damaged");
+
   self resume_fire();
   self.goalradius = old_goal_radius;
 }
 
 reinforce_goal(node, time) {
   self endon("death");
+
   init_pos = self.origin;
+
   wait(time);
+
   distance_moved = distance(self.origin, init_pos);
   if(distance_moved < 32) {
     self setgoalnode(node);
@@ -141,6 +167,7 @@ simple_spawn_force_to_goal_no_stop() {
 damage_detection() {
   self endon("goal");
   self endon("death");
+
   starting_health = self.health;
   while(1) {
     if(starting_health > self.health) {
@@ -156,13 +183,18 @@ spawn_friendlies() {
   level.hero2 = force_spawn_ai("hero2");
   wait(0.5);
   level.friends = force_spawn_ai_array("friend");
+
   level.hero1 thread magic_bullet_shield();
   level.hero2 thread magic_bullet_shield();
+
   for(i = 0; i < level.friends.size; i++) {}
+
   level.hero1.name = "Sgt. Reznov";
   level.hero2.name = "Pvt. Chernov";
+
   level.hero1.script_friendname = "Sgt. Reznov";
   level.hero2.script_friendname = "Pvt. Chernov";
+
   level.hero1.animname = "reznov";
   level.hero2.animname = "chernov";
 }
@@ -173,7 +205,9 @@ force_spawn_ai(spawner_name) {
   if(spawn_failed(spawned)) {
     return;
   }
+
   spawned setthreatbiasgroup("squad");
+
   return spawned;
 }
 
@@ -243,6 +277,7 @@ reset_run_anim() {
 
 play_random_return_fire_anim() {
   wait(randomfloat(2) + 2);
+
   index = randomint(100);
   if(index < 10) {
     self anim_single_solo(self, "return_fire_1");
@@ -255,6 +290,7 @@ say_dialogue(animname, theLine, lookTarget) {
   self.istalkingnow = true;
   self.og_animname = self.animname;
   self.animname = animname;
+
   self anim_single_solo(self, theLine);
   self.animname = self.og_animname;
   self.istalkingnow = false;
@@ -264,12 +300,15 @@ say_dialogue_wait(animname, theLine, lookTarget) {
   if(!isDefined(self.istalkingnow)) {
     self.istalkingnow = false;
   }
+
   while(self.istalkingnow) {
     wait(0.1);
   }
+
   self.istalkingnow = true;
   self.og_animname = self.animname;
   self.animname = animname;
+
   self anim_single_solo(self, theLine);
   self.animname = self.og_animname;
   self.istalkingnow = false;
@@ -280,6 +319,7 @@ run_chain_nodes(start_node) {
   goal_radius = self.goalradius + 50;
   self setgoalnode(start_node);
   self waittll_close_enough(start_node.origin, goal_radius);
+
   while(isDefined(start_node.target)) {
     next_node = getnode(start_node.target, "targetname");
     self setgoalpos(next_node.origin);
@@ -291,6 +331,7 @@ run_chain_nodes(start_node) {
 
 waittll_close_enough(pos, radius) {
   self endon("death");
+
   init_pos = self.origin;
   frame_counter = 0;
   while(distance(self.origin, pos) > radius) {
@@ -300,6 +341,7 @@ waittll_close_enough(pos, radius) {
 
 find_cover(msg) {
   self endon("death");
+
   self waittill(msg);
   self FindCoverNode();
 }
@@ -309,25 +351,34 @@ t34_move_and_blow_up(spawn_trigger_name, start_node_name, open_fire, death_node_
   if(!isDefined(spawn_trigger)) {
     return;
   }
+
   start_node = getvehiclenode(start_node_name, "targetname");
   if(!isDefined(start_node)) {
     return;
   }
+
   spawn_trigger waittill("trigger");
+
   tank = spawnvehicle("vehicle_rus_tracked_t34", "tank", "t34", start_node.origin, start_node.angles);
+
   tank attachPath(start_node);
+
   if(isDefined(open_fire)) {
     tank thread fire_loop_generic();
   }
+
   if(isDefined(initial_wait_delay)) {
     wait(initial_wait_delay);
   }
+
   tank startpath();
+
   if(isDefined(death_node_name)) {
     death_node = getvehiclenode(death_node_name, "targetname");
     if(isDefined(death_node)) {
       tank setwaitnode(death_node);
       tank waittill("reached_wait_node");
+
       if(isDefined(artillery_origin_struct_name)) {} else {
         playFX(level.fx_vehicle_explosion, tank.origin);
         tank setspeed(0, 10, 10);
@@ -341,6 +392,7 @@ t34_move_and_blow_up(spawn_trigger_name, start_node_name, open_fire, death_node_
 fire_loop_generic() {
   self endon("death");
   self endon("stop_fire");
+
   while(1) {
     wait(randomint(2) + 3);
     self FireWeapon();
@@ -349,10 +401,13 @@ fire_loop_generic() {
 
 spawn_tigers() {
   scripted_spawn_go(200);
+
   wait(2);
+
   level.ev2_tank1 = getent("ev2_tank1", "targetname");
   level.ev2_tank2 = getent("ev2_tank2", "targetname");
   level.ev2_tank3 = getent("ev2_tank3", "targetname");
+
   level.ev2_tank1.health = 10000;
   level.ev2_tank2.health = 10000;
   level.ev2_tank3.health = 10000;
@@ -360,31 +415,39 @@ spawn_tigers() {
 
 check_for_panzershreck_hit(num_hits_to_kill) {
   hits_taken = 0;
+
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
+
     valid_type = false;
+
     if(type == "MOD_PROJECTILE_SPLASH" || type == "MOD_PROJECTILE") {
       valid_type = true;
     }
+
     if(maps\_collectibles::has_collectible("collectible_sticksstones")) {
-      if(isplayer(attacker) && type == "MOD_IMPACT") {
+      if(isPlayer(attacker) && type == "MOD_IMPACT") {
         valid_type = true;
       } else {
         valid_type = false;
       }
     }
+
     if(valid_type == true) {
-      if(isplayer(attacker) || attacker.team == "axis") {
+      if(isPlayer(attacker) || attacker.team == "axis") {
         hits_taken++;
         if(hits_taken >= num_hits_to_kill) {
           playFX(level._effect["tank_blow_up"], self.origin);
           playFX(level._effect["tank_smoke_column"], self.origin);
           self.script_team = "axis";
           self dodamage(self.health + 100, (0, 0, 0), attacker, attacker);
+
           self notify("death", attacker);
           return;
         }
+
         self notify("hit_damage");
+
         chance = randomint(100);
         if(chance < 40) {
           level.hero1 say_dialogue("reznov", "fire_shreck");
@@ -398,7 +461,6 @@ check_for_panzershreck_hit(num_hits_to_kill) {
     }
   }
 }
-
 script_trigger(trigger_name) {
   trigger = getent(trigger_name, "targetname");
   trigger notify("trigger");
@@ -429,6 +491,7 @@ auto_mutex_triggers(trigger1, trigger2) {
 
 turn_off_mutex_trigger(trigger1, trigger2) {
   trigger2 endon("trigger");
+
   trigger1 waittill("trigger");
   trigger2 trigger_off();
 }
@@ -447,57 +510,57 @@ wait_time(time, msg) {
   wait(time);
   level notify(msg);
 }
-
 objective_add_new(num, obj_string, struct_name) {
   obj_position = getstruct(struct_name, "targetname");
   if(isDefined(obj_position)) {
     objective_add(num, "current", obj_string, obj_position.origin);
   } else {}
 }
-
 objective_add_done(num, obj_string) {
   objective_add(num, "current", obj_string);
   objective_state(num, "done");
 }
-
 objective_triggered_complete(num, trigger_name) {
   trigger_wait(trigger_name, "targetname");
   objective_state(num, "done");
 }
-
 objective_triggered_update_position(num, trigger_name, next_struct_name) {
   trigger_wait(trigger_name, "targetname");
+
   obj_position = getstruct(next_struct_name, "targetname");
   if(isDefined(obj_position)) {
     objective_position(num, obj_position.origin);
   } else {}
 }
-
 #using_animtree("generic_human");
-
 spawn_fake_guy_to_anim(struct_name, side, animname, name, assign_default_weapon) {
   org = getstruct(struct_name, "targetname");
   if(!isDefined(org)) {
     org = getnode(struct_name, "targetname");
   }
+
   guy = spawn_fake_guy(org.origin, org.angles, side, animname, name, assign_default_weapon);
+
   guy makeFakeAI();
   guy setCanDamage(true);
   guy.health = 5;
+
   return guy;
 }
 
 spawn_fake_guy_to_anim_2(spawn_origin, spawn_angle, side, animname, name, assign_default_weapon) {
   guy = spawn_fake_guy(spawn_origin, spawn_angle, side, animname, name, assign_default_weapon);
+
   guy makeFakeAI();
   guy setCanDamage(true);
   guy.health = 5;
+
   return guy;
 }
-
 spawn_fake_guy(startpoint, startangles, side, animname, name, assign_default_weapon) {
   guy = spawn("script_model", startpoint);
   guy.angles = startangles;
+
   if(side == "allies") {
     guy character\char_rus_r_rifle::main();
     guy.team = "allies";
@@ -505,9 +568,11 @@ spawn_fake_guy(startpoint, startangles, side, animname, name, assign_default_wea
     guy character\char_ger_wrmcht_k98::main();
     guy.team = "axis";
   }
+
   guy UseAnimTree(#animtree);
   guy.animname = animname;
   guy.targetname = name;
+
   if(isDefined(assign_default_weapon) && assign_default_weapon == 1) {
     if(side == "allies") {
       guy maps\_drones::drone_allies_assignWeapon_russian();
@@ -515,9 +580,9 @@ spawn_fake_guy(startpoint, startangles, side, animname, name, assign_default_wea
       self see1_drone_axis_assignWeapon_german();
     }
   }
+
   return guy;
 }
-
 custom_drone_spawn_allies() {
   self character\char_rus_r_rifle::main();
   self assign_random_run_anim();
@@ -531,7 +596,9 @@ custom_drone_spawn_axis() {
 see1_drone_axis_assignWeapon_german() {
   array = [];
   array[0] = "gewehr43";
+
   self.weapon = array[0];
+
   weaponModel = GetWeaponModel(self.weapon);
   self Attach(weaponModel, "tag_weapon_right");
   self.bulletsInClip = WeaponClipSize(self.weapon);
@@ -542,6 +609,7 @@ assign_random_run_anim() {
     self.drone_run_cycle = % run_n_gun_B;
     return;
   }
+
   index = randomint(100);
   if(index < 30) {
     self.drone_run_cycle = % unarmed_run_russian;
@@ -560,11 +628,13 @@ assign_random_run_anim() {
 
 debug_ai_counter() {
   setup_hud();
+
   while(1) {
     axis_ai = GetAiArray("axis");
     allies_ai = GetAiArray("allies");
     total = allies_ai.size + axis_ai.size;
     set_hud_text(level.ai_info, "total ais: " + total);
+
     wait 1.5;
   }
 }
@@ -579,30 +649,36 @@ setup_hud() {
 set_hud_text(hud_elem, text) {
   hud_elem setText(text);
 }
-
 get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) {
   if(Distance2D(self_pos, explosion_pos) < up_distance) {
     return "up";
   }
+
   p1 = self_pos - vectornormalize(anglesToForward(self_angle)) * 10000;
   p2 = self_pos + vectornormalize(anglesToForward(self_angle)) * 10000;
   p_intersect = PointOnSegmentNearestToPoint(p1, p2, explosion_pos);
+
   side_away_dist = Distance2D(p_intersect, explosion_pos);
   side_close_dist = Distance2D(p_intersect, self_pos);
+
   if(side_close_dist != 0) {
     angle = ATan(side_away_dist / side_close_dist);
+
     dot_product = vectordot(anglesToForward(self_angle), vectornormalize(explosion_pos - self_pos));
     if(dot_product < 0) {
       angle = 180 - angle;
     }
+
     if(angle < 45) {
       return "forward";
     } else if(angle > 135) {
       return "back";
     }
   }
+
   self_right_angle = vectornormalize(AnglesToRight(self_angle));
   right_point = self_pos + self_right_angle * (up_distance * 0.5);
+
   if(Distance2D(right_point, explosion_pos) < Distance2D(self_pos, explosion_pos)) {
     return "right";
   } else {
@@ -613,7 +689,9 @@ get_explosion_death_dir(self_pos, self_angle, explosion_pos, up_distance) {
 get_explosion_death_dir_test() {
   self_pos = (0, 0, 0);
   self_angle = (0, -90, 0);
+
   start_pos = (-100, 100, 0);
+
   for(i = -100; i < 100; i += 20) {
     wait(0.5);
   }
@@ -630,9 +708,12 @@ get_explosion_death_dir_test() {
 
 play_burst_fake_fire(bullets, start_pos, end_pos) {
   angles_to_target = vectortoangles(end_pos - start_pos);
+
   for(i = 0; i < bullets; i++) {
     playFX(level._effect["distant_muzzleflash"], start_pos, angles_to_target);
+
     bullettracer(start_pos, end_pos + (randomintrange(1, 300), randomintrange(1, 300), randomintrange(1, 40)));
+
     wait(randomfloatrange(0.2, 0.4));
   }
 }
@@ -645,7 +726,9 @@ spawn_guy(spawner) {
 
 ai_auto_death(time) {
   self endon("death");
+
   wait(randomfloat(time));
+
   self dodamage(self.health + 100, (0, 0, 0));
 }
 
@@ -654,17 +737,23 @@ fire_shreck(spawn_struct, target_struct, time) {
   shreck.angles = spawn_struct.angles;
   shreck setModel("weapon_ger_panzershreck_rocket");
   shreck playSound("weap_pnzr_fire");
+
   dest = target_struct.origin;
+
   shreck moveTo(dest, time);
   playFXOnTag(level._effect["rocket_trail"], shreck, "tag_fx");
   shreck playLoopSound("weap_pnzr_fire_rocket");
   wait time;
+
   shreck hide();
+
   playFX(level._effect["shreck_explode"], shreck.origin);
+
   shreck stoploopsound();
   playSoundAtPosition("rpg_impact_boom", shreck.origin);
   radiusdamage(shreck.origin, 180, 300, 35);
   earthquake(0.5, 1.5, shreck.origin, 512);
+
   wait(4);
   shreck delete();
 }
@@ -673,18 +762,24 @@ fire_shreck_at_pos(spawn_struct, target_pos, time) {
   shreck = spawn("script_model", spawn_struct.origin);
   shreck.angles = spawn_struct.angles;
   shreck setModel("weapon_ger_panzershreck_rocket");
+
   dest = target_pos;
+
   shreck moveTo(dest, time);
   shreck playSound("weap_pnzr_fire");
   playFXOnTag(level._effect["rocket_trail"], shreck, "tag_fx");
   shreck playLoopSound("rpg_rocket");
   wait time;
+
   shreck hide();
+
   playFX(level._effect["shreck_explode"], shreck.origin);
+
   shreck stoploopsound();
   playSoundAtPosition("rpg_impact_boom", shreck.origin);
   radiusdamage(shreck.origin, 180, 300, 35);
   earthquake(0.5, 1.5, shreck.origin, 512);
+
   wait(4);
   shreck delete();
 }
@@ -706,13 +801,16 @@ triggered_explosions(target_name) {
 
 triggered_explosions_single(trigger) {
   trigger waittill("trigger");
+
   target_name = trigger.target;
   target_struct = getstruct(target_name, "targetname");
+
   playFX(level._effect["dirt_blow_up"], target_struct.origin);
 }
 
 print3d_on_ent(msg) {
   self endon("death");
+
   while(1) {
     print3d(self.origin + (0, 0, 72), msg);
     wait(0.05);
@@ -761,11 +859,14 @@ dist_to_closest_player(origin_vec) {
 lower_friendlies_accuracy(value, restore_msg) {
   allies_ai = GetAiArray("allies");
   old_accuracy = [];
+
   for(i = 0; i < allies_ai.size; i++) {
     old_accuracy[i] = allies_ai[i].accuracy;
     allies_ai[i].accuracy = value;
   }
+
   level waittill(restore_msg);
+
   for(i = 0; i < allies_ai.size; i++) {
     if(isalive(allies_ai[i])) {
       allies_ai[i].accuracy = old_accuracy[i];
@@ -776,15 +877,19 @@ lower_friendlies_accuracy(value, restore_msg) {
 setup_dead_bodies(struct_name, delete_msg) {
   bodies = [];
   structs = getstructarray(struct_name, "targetname");
+
   for(i = 0; i < structs.size; i++) {
     bodies[i] = spawn("script_model", structs[i].origin);
     bodies[i].angles = structs[i].angles;
     bodies[i] character\char_ger_wrmcht_k98::main();
     bodies[i] makeFakeAI();
     bodies[i] startragdoll();
+
     wait(0.1);
   }
+
   level waittill(delete_msg);
+
   for(i = 0; i < bodies.size; i++) {
     if(isDefined(bodies[i])) {
       bodies[i] delete();
@@ -794,15 +899,19 @@ setup_dead_bodies(struct_name, delete_msg) {
 
 scripted_molotov_throw(node_noteworthy, end_msg) {
   self endon("death");
+
   if(isDefined(end_msg)) {
     level endon(end_msg);
   }
   self disable_ai_color();
   self thread delete_molotov_immediately(end_msg);
+
   node = getnode(node_noteworthy, "script_noteworthy");
   molotov_target = getstruct(node_noteworthy, "targetname");
+
   node anim_reach_solo(self, "molotov_generic_toss");
   node thread anim_single_solo(self, "molotov_generic_toss");
+
   self waittill("attach_molotov");
   molotov = spawn("script_model", self gettagorigin("tag_weapon_left"));
   level thread delete_molotov_later(molotov);
@@ -811,13 +920,16 @@ scripted_molotov_throw(node_noteworthy, end_msg) {
   self.fake_molotov = molotov;
   self.fake_molotov_tossed = false;
   playFXOnTag(level._effect["molotov_trail_fire"], molotov, "tag_flash");
+
   self waittill("detach_molotov");
   self thread let_go_molotov(molotov, molotov_target);
+
   self enable_ai_color();
 }
 
 delete_molotov_immediately(end_msg) {
   level waittill(end_msg);
+
   if(isDefined(self.fake_molotov)) {
     if(isDefined(self.fake_molotov_tossed) && self.fake_molotov_tossed == false) {
       self.fake_molotov delete();
@@ -827,6 +939,7 @@ delete_molotov_immediately(end_msg) {
 
 delete_molotov_later(molotov) {
   wait(7);
+
   if(isDefined(molotov)) {
     molotov delete();
   }
@@ -845,24 +958,31 @@ let_go_molotov(molotov, molotov_target) {
   forward = VectorNormalize((molotov_target.origin + (0, 0, 300)) - molotov.origin);
   velocities = forward * 12000;
   molotov physicslaunch((molotov.origin), velocities);
+
   self.fake_molotov_tossed = true;
+
   wait(1.2);
   playFX(level._effect["molotov_explosion"], molotov_target.origin);
+
   radiusdamage(molotov_target.origin, 400, 100, 10);
+
   if(isDefined(molotov)) {
     playsoundatposition("weap_molotov_impact", molotov.origin);
     molotov delete();
   }
+
   wait(0.5);
   playFX(level._effect["molotov_burn_trail_large"], molotov_target.origin + (0, 0, -15));
   playFX(level._effect["molotov_burn_trail_small"], molotov_target.origin + (35, 0, -15));
   playFX(level._effect["molotov_burn_trail_small"], molotov_target.origin + (-40, 0, -15));
   playFX(level._effect["molotov_burn_trail_small"], molotov_target.origin + (0, 25, -15));
   playFX(level._effect["molotov_burn_trail_small"], molotov_target.origin + (0, -43, -15));
+
   anima[0] = % ai_flame_death_a;
   anima[1] = % ai_flame_death_b;
   anima[2] = % ai_flame_death_c;
   anima[3] = % ai_flame_death_d;
+
   enemies = getaiarray("axis");
   for(i = 0; i < enemies.size; i++) {
     if(distance(enemies[i].origin, molotov_target.origin) < 120) {
@@ -888,6 +1008,7 @@ scripted_molotov_throw_triggered(trigger_value, trigger_key, node_noteworthy, st
 print_text_on_screen(text) {
   display_time = 5000;
   fade_time = 700;
+
   text_print = createFontString("objective", 1.5);
   text_print.glowColor = (0.7, 0.7, 0.3);
   text_print.glowAlpha = 1;
@@ -899,10 +1020,14 @@ print_text_on_screen(text) {
   text_print.horzAlign = "center";
   text_print.vertAlign = "middle";
   text_print.foreground = true;
+
   text_print.y = -60;
   text_print SetPulseFX(60, display_time, fade_time);
+
   text_print.label = text;
+
   wait display_time + fade_time / 1000;
+
   text_print Destroy();
 }
 
@@ -911,12 +1036,15 @@ players_speed_set(speed, time) {
   for(i = 0; i < players.size; i++) {
     players[i] SetMoveSpeedScale(speed);
   }
+
   level.current_player_speed = speed;
 }
 
 players_speed_set_gradual(speed, time) {
   intervals = time * 5;
+
   interval_change = (speed - level.current_player_speed) / intervals;
+
   players = get_players();
   for(j = 0; j < intervals; j++) {
     for(i = 0; i < players.size; i++) {
@@ -927,6 +1055,7 @@ players_speed_set_gradual(speed, time) {
     level.current_player_speed += interval_change;
     wait(0.2);
   }
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] SetMoveSpeedScale(speed);
@@ -936,7 +1065,6 @@ players_speed_set_gradual(speed, time) {
 playsound_generic_facial(sound, lookTarget) {
   self endon("death");
 }
-
 set_random_gib() {
   refs = [];
   refs[refs.size] = "right_arm";
@@ -945,6 +1073,7 @@ set_random_gib() {
   refs[refs.size] = "left_leg";
   refs[refs.size] = "no_legs";
   refs[refs.size] = "guts";
+
   self.a.gib_ref = get_random(refs);
 }
 

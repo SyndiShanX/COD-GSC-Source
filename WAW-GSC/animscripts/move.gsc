@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\move.gsc
-*****************************************************/
+**************************************/
 
 #include animscripts\SetPoseMovement;
 #include animscripts\combat_utility;
@@ -12,13 +12,19 @@
 
 main() {
   self endon("killanimscript");
-  if(getdvar("showlookaheaddir") == "on")
+
+  if(getDvar("showlookaheaddir") == "on")
     self thread drawLookaheadDir();
+
   [[self.exception["move"]]]();
+
   self trackScriptState("Move Main", "code");
+
   self flamethrower_stop_shoot();
+
   if(self.a.pose == "prone") {
     newPose = self animscripts\utility::choosePose("stand");
+
     if(newPose != "prone") {
       self animMode("zonly_physics", false);
       rate = 1;
@@ -29,14 +35,17 @@ main() {
       self orientMode("face default");
     }
   }
+
   previousScript = self.a.script;
   animscripts\utility::initialize("move");
   if(self.moveMode == "run") {
     switch (previousScript) {
       case "combat":
       case "stop":
+
         self animscripts\battleChatter_ai::evaluateMoveEvent(false);
         break;
+
       case "cover_crouch":
       case "cover_left":
       case "cover_prone":
@@ -50,32 +59,42 @@ main() {
       case "stalingrad_cover_crouch":
       case "hide":
       case "turret":
+
         self animscripts\battleChatter_ai::evaluateMoveEvent(true);
         break;
+
       default:
+
         self animscripts\battleChatter_ai::evaluateMoveEvent(false);
         break;
     }
   }
+
   self animscripts\cover_arrival::startMoveTransition();
   self thread animscripts\cover_arrival::setupApproachNode(true);
+
   self.cqb_track_thread = undefined;
   self.shoot_while_moving_thread = undefined;
+
   MoveMainLoop();
 }
 
 MoveMainLoop() {
   prevLoopTime = self getAnimTime(%walk_and_run_loops);
   self.a.runLoopCount = randomint(10000);
+
   moveMode = self.moveMode;
   if(isDefined(self.pathGoalPos) && distanceSquared(self.origin, self.pathGoalPos) < 4096)
     moveMode = "walk";
+
   for(;;) {
     loopTime = self getAnimTime(%walk_and_run_loops);
     if(loopTime < prevLoopTime)
       self.a.runLoopCount++;
     prevLoopTime = loopTime;
+
     self animscripts\face::SetIdleFaceDelayed(anim.alertface);
+
     if(self is_banzai()) {
       self animscripts\banzai::move_banzai();
     } else if(self animscripts\cqb::shouldCQB()) {
@@ -84,12 +103,14 @@ MoveMainLoop() {
       if(self is_zombie() || movemode != "run") {
         moveMode = "run";
       }
+
       if(self.moveMode != "run" && !self is_zombie()) {
         moveMode = self.moveMode;
       } else if(moveMode == "walk") {
         if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) > 4096)
           moveMode = self.moveMode;
       }
+
       if(moveMode == "run") {
         self animscripts\run::MoveRun();
       } else {
@@ -97,6 +118,7 @@ MoveMainLoop() {
         self animscripts\walk::MoveWalk();
       }
     }
+
     self.exitingCover = false;
   }
 }
@@ -104,22 +126,28 @@ MoveMainLoop() {
 MayShootWhileMoving() {
   if(self.weapon == "none")
     return false;
+
   weapclass = weaponClass(self.weapon);
   if(weapclass != "rifle" && weapclass != "smg" && weapclass != "spread" && weapclass != "mg")
     return false;
+
   if(self isSniper())
     return false;
+
   if(isDefined(self.dontShootWhileMoving)) {
     assert(self.dontShootWhileMoving);
     return false;
   }
+
   return true;
 }
 
 shootWhileMoving() {
   self endon("killanimscript");
+
   self notify("doing_shootWhileMoving");
   self endon("doing_shootWhileMoving");
+
   if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
     self.a.array["fire"] = % exposed_shoot_auto_v3;
     self.a.array["burst2"] = % exposed_shoot_burst3;
@@ -145,22 +173,28 @@ shootWhileMoving() {
     self.a.array["semi5"] = % exposed2_shoot_semi5;
     self.a.array["single"] = array(%exposed2_shoot_semi1);
   }
+
   if(isDefined(self.weapon) && weaponClass(self.weapon) == "spread")
     self.a.array["single"] = array(%shotgun_stand_fire_1A, %shotgun_stand_fire_1B);
+
   while(1) {
     if(!self.bulletsInClip) {
       if(self isCQBWalking()) {
         cheatAmmoIfNecessary();
       }
+
       if(self is_banzai()) {
         cheatAmmoIfNecessary();
       }
+
       if(!self.bulletsInClip) {
         wait 0.5;
         continue;
       }
     }
+
     self shootUntilShootBehaviorChange();
+
     self clearAnim(%exposed_aiming, 0.2);
   }
 }

@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_amtank.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_vehicle_aianim;
 #include maps\_vehicle;
@@ -20,21 +20,19 @@ main(model, type) {
   build_compassicon();
   build_aianims(::setanims, ::set_vehicle_anims);
 }
-
 init_local() {}
 #using_animtree("tank");
-
 set_vehicle_anims(positions) {
   return positions;
 }
-
 #using_animtree("generic_human");
-
 setanims() {
   max_positions = 8;
+
   positions = [];
   for(i = 0; i < max_positions; i++)
     positions[i] = spawnStruct();
+
   positions[0].sittag = "tag_passenger2";
   positions[1].sittag = "tag_passenger3";
   positions[2].sittag = "tag_passenger4";
@@ -43,6 +41,7 @@ setanims() {
   positions[5].sittag = "tag_passenger7";
   positions[6].sittag = "tag_passenger8";
   positions[7].sittag = "tag_passenger9";
+
   positions[0].idle = % crew_lvt4_passenger2_idle;
   positions[1].idle = % crew_lvt4_passenger3_idle;
   positions[2].idle = % crew_lvt4_passenger4_idle;
@@ -51,6 +50,7 @@ setanims() {
   positions[5].idle = % crew_lvt4_passenger7_idle;
   positions[6].idle = % crew_lvt4_passenger8_idle;
   positions[7].idle = % crew_lvt4_passenger9_idle;
+
   positions[0].getout = % crew_lvt4_passenger2_exit_normal;
   positions[1].getout = % crew_lvt4_passenger3_exit_normal;
   positions[2].getout = % crew_lvt4_passenger4_exit_normal;
@@ -59,6 +59,7 @@ setanims() {
   positions[5].getout = % crew_lvt4_passenger7_exit_normal;
   positions[6].getout = % crew_lvt4_passenger8_exit_normal;
   positions[7].getout = % crew_lvt4_passenger9_exit_normal;
+
   return positions;
 }
 
@@ -66,6 +67,7 @@ unload_groups() {
   unload_groups = [];
   unload_groups["passengers"] = [];
   unload_groups["all"] = [];
+
   group = "passengers";
   unload_groups[group][unload_groups[group].size] = 0;
   unload_groups[group][unload_groups[group].size] = 1;
@@ -75,6 +77,7 @@ unload_groups() {
   unload_groups[group][unload_groups[group].size] = 5;
   unload_groups[group][unload_groups[group].size] = 6;
   unload_groups[group][unload_groups[group].size] = 7;
+
   group = "all";
   unload_groups[group][unload_groups[group].size] = 0;
   unload_groups[group][unload_groups[group].size] = 1;
@@ -84,7 +87,9 @@ unload_groups() {
   unload_groups[group][unload_groups[group].size] = 5;
   unload_groups[group][unload_groups[group].size] = 6;
   unload_groups[group][unload_groups[group].size] = 7;
+
   unload_groups["default"] = unload_groups["passengers"];
+
   return unload_groups;
 }
 
@@ -92,6 +97,7 @@ fire_loop_toggle(on_off) {
   self endon("death");
   self notify("fire change");
   self endon("fire change");
+
   if(on_off) {
     while(1) {
       wait(randomfloatrange(5, 8));

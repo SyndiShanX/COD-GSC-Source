@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_bayonet.gsc
-*****************************************************/
+**************************************/
 
 init() {
   level._effect["character_bayonet_blood_in"] = LoadFx("impacts/fx_flesh_bayonet_impact");
@@ -15,5 +15,6 @@ has_bayonet() {
   currentWeapon = self.weapon;
   if(!isDefined(currentWeapon))
     return false;
+
   return IsSubStr(currentWeapon, "_bayonet");
 }

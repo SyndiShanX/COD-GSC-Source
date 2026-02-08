@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\credits_list.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -9,16 +9,21 @@
 init_credits() {
   level.hudelem_count = 0;
   level.clienthudelem_count = 0;
+
   flag_init("credits_ended");
+
   level.linesize = 1.35;
   level.credit_list = [];
   level.scroll_speed = 35;
   level.scroll_dist = 380;
   level.default_line_delay = 0.6;
   level.spacesmall_delay = 0.25;
+
   PrecacheShader("black");
   credits_background();
+
   set_console_status();
+
   if(!level.console) {
     maps\credits_list_pc::init_treyarch_credits_pc();
     maps\credits_list_pc::init_activision_credits_pc();
@@ -45,13 +50,16 @@ hudelem_count() {
     if(level.hudelem_count > max) {
       max = level.hudelem_count;
     }
+
     if(level.clienthudelem_count > clientmax) {
       clientmax = level.clienthudelem_count;
     }
+
     curr_total = level.clienthudelem_count + level.hudelem_count;
     if(curr_total > totalmax) {
       totalmax = curr_total;
     }
+
     println("HudElems: " + level.hudelem_count + "[Max: " + max + "]" + " | ClientHudElems: " + level.clienthudelem_count + "[Max: " + clientmax + "] | Total: " + curr_total + "[Max: " + totalmax + "]");
     wait(0.05);
   }
@@ -59,6 +67,7 @@ hudelem_count() {
 
 credits_background() {
   level.hudelem_count++;
+
   level.bg_hud = NewHudElem();
   level.bg_hud.x = 0;
   level.bg_hud.y = 0;
@@ -82,6 +91,7 @@ init_treyarch_credits() {
   add_space();
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PRODUCTION", 2.0);
   add_space();
   add_heading(&"CREDITS_EXECUTIVE_PRODUCER");
@@ -116,8 +126,10 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_JAMES_MCCAWLEY");
   add_heading(&"CREDITS_GEOFFREY_NG");
   add_heading(&"CREDITS_NORMAN_OVANDO");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ENGINEERING", 2.0);
   add_space();
   add_heading(&"CREDITS_PROJECT_TECHNICAL_DIRECTOR");
@@ -193,8 +205,10 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_DIMITER_MALKIA_STANEV");
   add_heading(&"CREDITS_KRASSIMIR_TOUEVSKY");
   add_heading(&"CREDITS_MIKE_UHLIK");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_AUDIO", 2.0);
   add_space();
   add_heading(&"CREDITS_AUDIO_DIRECTOR");
@@ -219,7 +233,9 @@ init_treyarch_credits() {
   add_space();
   add_heading(&"CREDITS_ADDITIONAL_AUDIO_SUPPORT");
   add_heading(&"CREDITS_JULIA_BIANCO");
+
   add_space();
+
   add_space();
   add_heading(&"CREDITS_DESIGN", 2.0);
   add_space();
@@ -293,8 +309,10 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_DOUG_GUANLAO");
   add_heading(&"CREDITS_JASON_MCCORD");
   add_heading(&"CREDITS_JOEY_TERREBONNE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ART", 2.0);
   add_space();
   add_heading(&"CREDITS_ART_DIRECTOR");
@@ -366,8 +384,10 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_CRAIG_SCHILLER");
   add_heading(&"CREDITS_BRAD_SHORTT");
   add_heading(&"CREDITS_TOM_SZAKOLCZAY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ANIMATION", 2.0);
   add_space();
   add_heading(&"CREDITS_ANIMATION_DIRECTOR");
@@ -383,6 +403,7 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_ERIC_SMITH");
   add_heading(&"CREDITS_JON_STOLL");
   add_space();
+
   add_heading(&"CREDITS_ADDITIONAL_ANIMATION");
   add_heading(&"CREDITS_LUIS_YOSH_BOLIVAR");
   add_heading(&"CREDITS_KYLE_GAULIN");
@@ -390,8 +411,10 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_ALEX_MOON");
   add_heading(&"CREDITS_LONG_NGUYEN");
   add_heading(&"CREDITS_JOHN_VELAZQUEZ");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_TREYARCH_STAFF", 2.0);
   add_space();
   add_heading(&"CREDITS_STUDIO_HEAD");
@@ -446,8 +469,10 @@ init_treyarch_credits() {
   add_space();
   add_heading(&"CREDITS_ASSOCIATE_PRODUCER_TOOLS_LIBRARIES");
   add_heading(&"CREDITS_ADAM_SASLOW");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PRODUCTION_TESTING", 2.0);
   add_space();
   add_heading(&"CREDITS_PRODUCTION_TEST_MANAGER");
@@ -469,6 +494,7 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_TRISTEN_SAKURADA");
   add_heading(&"CREDITS_MOISES_ZET");
   add_space();
+
   add_heading(&"CREDITS_PRODUCTION_TESTERS");
   add_heading(&"CREDITS_DANIEL_ALFARO_PLUS");
   add_heading(&"CREDITS_JAMES_BACA_PLUS");
@@ -493,8 +519,10 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_MICHAEL_WICKSON_PLUS");
   add_heading(&"CREDITS_BRANDON_WILLIS_PLUS");
   add_heading(&"CREDITS_JOSEPH_YBARRA");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_CINEMATICS", 2.0);
   add_space();
   add_heading(&"CREDITS_SGT_REZNOV");
@@ -600,8 +628,10 @@ init_treyarch_credits() {
   add_space();
   add_heading(&"CREDITS_GERMAN_TRANSLATOR");
   add_heading(&"CREDITS_MATT_MALOTKI");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ACTIVISION_CAPTURE_STUDIO", 2.0);
   add_space();
   add_heading(&"CREDITS_MOTION_CAPTURE_DIRECTOR");
@@ -622,6 +652,7 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_DATA_CAPTURE_SUPERVISOR");
   add_heading(&"CREDITS_NOEL_VEGA");
   add_space();
+
   add_heading(&"CREDITS_DATA_CAPTURE_PERSONNEL");
   add_heading(&"CREDITS_CHRIS_TORRES");
   add_heading(&"CREDITS_COLIN_FOLLENWEIDER");
@@ -650,8 +681,10 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_SANDRA_FALZON");
   add_heading(&"CREDITS_CITY_KITCHEN");
   add_heading(&"CREDITS_THE_SLICE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ADDITIONAL_DEVELOPMENT", 2.0);
   add_space();
   add_heading(&"CREDITS_CERTAIN_AFFINITY");
@@ -690,6 +723,7 @@ init_treyarch_credits() {
   add_heading(&"CREDITS_KENN_HOEKSTRA");
   add_heading(&"CREDITS_JOHN_FAULKENBURY");
   add_heading(&"CREDITS_ROBERT_ERWIN");
+
   add_space();
   add_space();
   add_space();
@@ -699,6 +733,7 @@ init_treyarch_credits() {
 
 init_activision_credits() {
   add_heading(&"CREDITS_ACTIVISION", 2.0);
+
   add_space();
   add_heading(&"CREDITS_SENIOR_PRODUCER");
   add_heading(&"CREDITS_NOAH_HELLER");
@@ -729,8 +764,10 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_SVP_PRODUCTION_DEVELOPMENT_WW_STUDIOS");
   add_heading(&"CREDITS_DAVE_STOHL");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_GLOBAL_BRAND_MANAGEMENT", 2.0);
   add_space();
   add_heading(&"CREDITS_GLOBAL_BRAND_MANAGER");
@@ -750,8 +787,10 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_VP_OWNED_PROPERTIES");
   add_heading(&"CREDITS_DAVID_POKRESS");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PUBLIC_RELATIONS", 2.0);
   add_space();
   add_heading(&"CREDITS_PR_MANAGER");
@@ -767,8 +806,10 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_PR_DIRECTOR_OWNED_PROPERTIES");
   add_heading(&"CREDITS_MIKE_MANTARRO");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PRODUCTION_SERVICES_EUROPE");
   add_space();
   add_heading(&"CREDITS_SENIOR_LOCALIZATION_PROJECT_MANAGER");
@@ -787,6 +828,7 @@ init_activision_credits() {
   add_heading(&"CREDITS_LOCALIZATION_QA_FLOOR_LEADS");
   add_heading(&"CREDITS_DANIELE_CELEGHIN");
   add_space();
+
   add_heading(&"CREDITS_LOCALIZATION_QA_TESTERS");
   add_heading(&"CREDITS_KIERAN_COSGRAVE");
   add_heading(&"CREDITS_JAN_VESTER");
@@ -805,13 +847,16 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_DIRECTOR_OF_PROD_SERVICES_EUROPE");
   add_heading(&"CREDITS_BARRY_KEHOE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_CENTRAL_TECHNOLOGY", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_DIRECTOR_OF_TECHNOLOGY");
   add_heading(&"CREDITS_MATT_WILKINSON");
   add_space();
+
   add_heading(&"CREDITS_DEMONWARE");
   add_heading(&"CREDITS_NADIA_ALRAMLI");
   add_heading(&"CREDITS_LUKE_BURDEN");
@@ -820,8 +865,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_JOHN_KIRK");
   add_heading(&"CREDITS_BYRON_PILE");
   add_heading(&"CREDITS_AMY_SMITH");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_CENTRAL_DESIGN", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_DIRECTOR_OF_GAME_DESIGN");
@@ -836,8 +883,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_CENTRAL_DESIGN");
   add_heading(&"CREDITS_TOM_WELLS");
   add_heading(&"CREDITS_JEFFREY_CHEN");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_TALENT_AUDIO_MANAGEMENT_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_DIRECTOR_OF_CENTRAL_AUDIO");
@@ -848,8 +897,10 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_TALENT_MANAGER");
   add_heading(&"CREDITS_MARCHELE_HARDIN");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_MARKETING_COMMUNICATIONS", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_DIRECTOR_MARKETING_COMMUNICATIONS");
@@ -857,15 +908,19 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_MARKETING_COMMUNICATIONS_MANAGER");
   add_heading(&"CREDITS_KAREN_STARR");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_BUSINESS_DEVELOPMENT", 2.0);
   add_space();
   add_heading(&"CREDITS_DAVE_ANDERSON");
   add_heading(&"CREDITS_RALPH_PERILLON");
   add_heading(&"CREDITS_LETAM_BIRA");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ART_SERVICES", 2.0);
   add_space();
   add_heading(&"CREDITS_ART_SERVICES_MANAGER");
@@ -875,8 +930,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_MICHAEL_HUNAU");
   add_heading(&"CREDITS_RYAN_VOLKER");
   add_heading(&"CREDITS_CHRIS_REINHART");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_SPECIAL_THANKS", 2.0);
   add_space();
   add_heading(&"CREDITS_MIKE_GRIFFITH");
@@ -927,8 +984,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_DUSTY_WELCH");
   add_heading(&"CREDITS_WEST_POINT_MUSEUM_LES_JENSEN");
   add_heading(&"CREDITS_MARINE_LIBRARY_ALISA_WHITLEY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QUALITY_ASSURANCE", 2.0);
   add_space();
   add_heading(&"CREDITS_VP_QUALITY_ASSURANCE_CUSTOMER_SERVICE");
@@ -936,8 +995,10 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_DIRECTOR_QUALITY_ASSURANCE");
   add_heading(&"CREDITS_MARILENA_RIXFORD");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QUALITY_ASSURANCE_FUNCTIONALITY", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_PROJECT_LEAD_DAY_SHIFT");
@@ -960,6 +1021,7 @@ init_activision_credits() {
   add_heading(&"CREDITS_QA_DATABASE_MANAGER");
   add_heading(&"CREDITS_MIKE_GENADRY");
   add_space();
+
   add_heading(&"CREDITS_QA_TESTERS_DAY_SHIFT");
   add_heading(&"CREDITS_JAMES_FRYKMAN");
   add_heading(&"CREDITS_CREED_WEATHERMAN");
@@ -1012,8 +1074,10 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_QA_MANAGER_NIGHT_SHIFT");
   add_heading(&"CREDITS_ADAM_HARTSFIELD");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_TECHNICAL_REQUIREMENTS_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_TRG_SENIOR_MANAGER");
@@ -1045,8 +1109,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_STEFAN_BEEMAN");
   add_heading(&"CREDITS_TIMOTHY_GAGLIARDO");
   add_heading(&"CREDITS_CHRISTOPHER_ABEEL");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_CODE_RELEASE_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_CRG_PROJECT_LEAD");
@@ -1056,8 +1122,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_JONATHAN_MACK");
   add_heading(&"CREDITS_MATT_JENSEN");
   add_heading(&"CREDITS_SEAN_MILLER");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_NETWORK_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_MANAGER_QA_OPERATIONS");
@@ -1069,8 +1137,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_QA_NETWORK_LAB_TESTERS");
   add_heading(&"CREDITS_JESSIE_JONES");
   add_heading(&"CREDITS_LEONARD_RODRIGUEZ");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_MULTIPLAYER_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_MPL_PROJECT_LEAD");
@@ -1097,8 +1167,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_RYAN_RIGG");
   add_heading(&"CREDITS_JONATHAN_YANIV_SADKA");
   add_heading(&"CREDITS_KURTIS_SHERMAN");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_COMPATIBILITY_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_CL_SENIOR_PROJECT_LEAD");
@@ -1114,8 +1186,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_JON_AN");
   add_heading(&"CREDITS_DOV_CARSON");
   add_heading(&"CREDITS_WILLIAM_WHALEY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_AUDIO_VISUAL_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_AVL_PROJECT_LEAD");
@@ -1123,8 +1197,10 @@ init_activision_credits() {
   add_space();
   add_heading(&"CREDITS_QA_AVL_TESTER");
   add_heading(&"CREDITS_CLIFF_HOOPER");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_BURNROOM", 2.0);
   add_space();
   add_heading(&"CREDITS_BURN_ROOM_SUPERVISOR");
@@ -1135,8 +1211,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_KAI_HSU");
   add_heading(&"CREDITS_SEAN_KIM");
   add_heading(&"CREDITS_RODRIGO_MAGANA");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_MIS", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_MANAGER_QA_TECHNOLOGIES");
@@ -1157,8 +1235,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_QA_MIS_EQUIPMENT_COORDINATORS");
   add_heading(&"CREDITS_LONG_LE");
   add_heading(&"CREDITS_COLEMAN_THAXTON");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_DBA_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_LEAD_DATABASE_ADMINISTRATOR");
@@ -1180,8 +1260,10 @@ init_activision_credits() {
   add_heading(&"CREDITS_CUSTOMER_SUPPORT_MANAGERS");
   add_heading(&"CREDITS_GARY_BOLDUC");
   add_heading(&"CREDITS_MICHAEL_HILL");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_SPECIAL_THANKS", 2.0);
   add_space();
   add_heading(&"CREDITS_MIKE_CLARKE");
@@ -1193,38 +1275,52 @@ init_activision_credits() {
   add_heading(&"CREDITS_DYLAN_RIXFORD");
   add_heading(&"CREDITS_MARC_WILLIAMS");
   add_heading(&"CREDITS_RICHARD_PEARSON");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_MANUAL_DESIGN", 2.0);
   add_space();
   add_heading(&"CREDITS_IGNITED_MINDS_LLC");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PACKAGING_DESIGN_BY", 2.0);
   add_space();
   add_heading(&"CREDITS_PETROL");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_USES_BINK_VIDEO_COPYRIGHT");
   add_space();
   add_heading(&"CREDITS_USES_MILES_SOUND_SYSTEM");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_FONTS_LICENSED_FROM", 2.0);
   add_space();
   add_heading(&"CREDITS_T26_INC");
   add_heading(&"CREDITS_MONOTYPE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_THE_CHARACTERS_AND_EVENTS");
   add_heading(&"CREDITS_ANY_SIMILARITY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_MIXED_AND_MASTERED", 2.0);
   add_space();
   add_heading(&"CREDITS_TREYARCH_AUDIO_COD_TEAM");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_SPECIAL_THANKS_TO_LEN_HAYES");
   add_heading(&"CREDITS_AND_THE_FOLLOWING");
   add_space();
@@ -1238,9 +1334,12 @@ init_activision_credits() {
   add_heading(&"CREDITS_BILL_JENKINS");
   add_space();
   add_heading(&"CREDITS_WE_ARE_INSPIRED");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_SEMPER_FI", 2.0);
+
   add_space();
   add_space();
   add_space();
@@ -1265,10 +1364,12 @@ add_title(title, textscale) {
   if(!isDefined(textscale)) {
     textscale = level.linesize;
   }
+
   temp = spawnStruct();
   temp.type = "title";
   temp.textscale = textscale;
   temp.list = init_strings(array(title));
+
   add_to_credit_list(temp);
 }
 
@@ -1276,10 +1377,12 @@ add_heading(heading, textscale) {
   if(!isDefined(textscale)) {
     textscale = level.linesize;
   }
+
   temp = spawnStruct();
   temp.type = "heading";
   temp.list = init_strings(array(heading));
   temp.textscale = textscale;
+
   add_to_credit_list(temp);
 }
 
@@ -1287,10 +1390,12 @@ add_credit(credit1, credit2, credit3, textscale) {
   if(!isDefined(textscale)) {
     textscale = level.linesize;
   }
+
   temp = spawnStruct();
   temp.type = "credit";
   temp.textscale = textscale;
   temp.list = init_strings(array(credit1, credit2, credit3));
+
   add_to_credit_list(temp);
 }
 
@@ -1298,6 +1403,7 @@ init_strings(strings) {
   for(i = 0; i < strings.size; i++) {
     PrecacheString(strings[i]);
   }
+
   return strings;
 }
 
@@ -1336,25 +1442,30 @@ array(a, b, c, d, e, f, g, h, i, j, k, l, m, n) {
 add_space(small) {
   temp = spawnStruct();
   temp.type = "space";
+
   add_to_credit_list(temp);
 }
 
 add_space_small() {
   temp = spawnStruct();
   temp.type = "spacesmall";
+
   add_to_credit_list(temp);
 }
 
 add_image(image, width, height, delay) {
   PrecacheShader(image);
+
   temp = spawnStruct();
   temp.type = "image";
   temp.image = image;
   temp.width = width;
   temp.height = height;
+
   if(isDefined(delay)) {
     temp.delay = delay;
   }
+
   add_to_credit_list(temp);
 }
 
@@ -1364,7 +1475,9 @@ add_to_credit_list(credit) {
 
 create_hudelems(amount, x_offset, x_align) {
   huds = [];
+
   y_start = 430;
+
   for(i = 0; i < amount; i++) {
     if(level.hudelem_count < 30) {
       level.hudelem_count++;
@@ -1376,6 +1489,7 @@ create_hudelems(amount, x_offset, x_align) {
       hud.is_clienthud = true;
     }
     hud.alpha = 0;
+
     if(amount == 3) {
       if(i == 0) {
         hud.alignX = "center";
@@ -1411,9 +1525,12 @@ create_hudelems(amount, x_offset, x_align) {
       hud.x = x_offset;
       hud.y = y_start;
     }
+
     hud.sort = 2;
+
     huds[huds.size] = hud;
   }
+
   return huds;
 }
 
@@ -1422,65 +1539,81 @@ play_credits() {
   for(i = 0; i < level.credit_list.size; i++) {
     delay = level.default_line_delay;
     type = level.credit_list[i].type;
+
     count = 0;
     x_offset = 0;
     x_align = "center";
     is_image = false;
+
     switch (type) {
       case "image":
         count = 1;
         is_image = true;
         break;
+
       case "title":
       case "heading":
         count = level.credit_list[i].list.size;
         break;
+
       case "credit":
         count = level.credit_list[i].list.size;
         x_align = "left";
         x_offset = 8;
         break;
+
       case "spacesmall":
         delay = level.spacesmall_delay;
         break;
     }
+
     huds = [];
+
     if(count > 0) {
       huds = create_hudelems(count, x_offset, x_align);
     }
+
     for(q = 0; q < huds.size; q++) {
       switch (type) {
         case "image":
           image = level.credit_list[i].image;
           width = level.credit_list[i].width;
           height = level.credit_list[i].height;
+
           huds[q].alpha = 1;
           huds[q] SetShader(image, width, height);
+
           if(isDefined(level.credit_list[i].delay)) {
             delay = level.credit_list[i].delay;
           } else {
             delay = ((0.037 * height));
           }
           break;
+
         case "title":
         case "heading":
         case "credit":
           if(isDefined(level.credit_list[i].textscale)) {
             huds[q].fontScale = level.credit_list[i].textscale;
           }
+
           huds[q].glowColor = (0.3, 0.6, 0.3);
           huds[q].glowAlpha = 1;
           huds[q] SetText(level.credit_list[i].list[q]);
           break;
+
         default:
           assert(type == "space");
       }
+
       huds[q] thread delayed_hud_destroy(level.scroll_dist / level.scroll_speed, is_image);
       huds[q] MoveOverTime(level.scroll_dist / level.scroll_speed);
       huds[q].y = huds[q].y - level.scroll_dist;
     }
+
     wait(delay);
   }
+
   flag_set("credits_ended");
 }
 
@@ -1489,14 +1622,18 @@ delayed_hud_destroy(duration, is_image) {
     self FadeOverTime(duration * 0.1);
     self.alpha = 1;
   }
+
   wait(duration * 0.9);
   self FadeOverTime(duration * 0.1);
   self.alpha = 0;
+
   wait(duration * 0.1);
+
   if(isDefined(self.is_clienthud) && self.is_clienthud) {
     level.clienthudelem_count--;
   } else {
     level.hudelem_count--;
   }
+
   self Destroy();
 }

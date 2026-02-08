@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_usa_marinewet_player4.gsc
-*****************************************************/
+****************************************************/
 
 main() {
   self setModel("char_usa_marine_player_wet_body2_1");

@@ -1,7 +1,7 @@
-/*****************************************************
+/********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_zomb_player_2.gsc
-*****************************************************/
+********************************************/
 
 main() {
   self setModel("char_jap_impinf_officer_body_zomb");

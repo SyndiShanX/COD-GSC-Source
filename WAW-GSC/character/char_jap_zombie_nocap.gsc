@@ -1,7 +1,7 @@
-/*****************************************************
+/***********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_jap_zombie_nocap.gsc
-*****************************************************/
+***********************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_jap_impinf_zombiebody5alias::main());

@@ -1,29 +1,35 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_documents.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
 main(objective_number, objective_text, array_targetname, activate_notify) {
   documents = getEntArray(array_targetname, "targetname");
   println(array_targetname, " documents.size: ", documents.size);
+
   for(i = 0; i < documents.size; i++) {
     documents[i].document = getent(documents[i].target, "targetname");
     documents[i].used = 0;
     documents[i] thread document_think(activate_notify, array_targetname);
   }
+
   if(documents.size != 0) {
     remaining_documents = documents.size;
+
     closest = get_closest_document(documents);
     if(isDefined(closest)) {
       objective_add(objective_number, "active", objective_text, (closest.document.origin));
       objective_string(objective_number, objective_text, remaining_documents);
     }
+
     while(1) {
       level waittill(array_targetname + " gotten");
+
       remaining_documents--;
       objective_string(objective_number, objective_text, remaining_documents);
+
       closest = get_closest_document(documents);
       if(isDefined(closest)) {
         objective_position(objective_number, (closest.document.origin));
@@ -42,6 +48,7 @@ get_closest_document(array) {
   range = 500000000;
   newrange = undefined;
   ent = undefined;
+
   for(i = 0; i < array.size; i++) {
     if(!array[i].used) {
       players = get_players();
@@ -62,16 +69,20 @@ get_closest_document(array) {
 
 document_think(activate_notify, array_targetname) {
   self setHintString(&"SCRIPT_PLATFORM_HINTSTR_DOCUMENTS");
+
   if(isDefined(activate_notify)) {
     self maps\_utility::trigger_off();
     self.document hide();
+
     level waittill(activate_notify);
+
     self.document show();
     self maps\_utility::trigger_off();
   }
   self waittill("trigger");
   println("triggered");
   level thread maps\_utility::play_sound_in_space("paper_pickup", self.document.origin);
+
   self.used = 1;
   self.document hide();
   level notify(array_targetname + " gotten");

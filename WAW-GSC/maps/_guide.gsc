@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_guide.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
@@ -79,6 +79,7 @@ lastshottime() {
     } else {
       level.hasfiredrecently = true;
     }
+
     wait .05;
   }
 }

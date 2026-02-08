@@ -1,13 +1,14 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pel1b_amb.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include maps\_ambientpackage;
 
 main() {
   declareAmbientPackage("pel1b_outdoors");
+
   addAmbientElement("pel1b_outdoors", "amb_bugs_other", 8, 15, 25, 110);
   addAmbientElement("pel1b_outdoors", "amb_bugs_cicada", 35, 45, 50, 120);
   addAmbientElement("pel1b_outdoors", "amb_seagull", 15, 30, 500, 1500);
@@ -16,17 +17,21 @@ main() {
   addAmbientElement("pel1b_outdoors", "amb_bugs_other", 8, 15, 25, 510);
   addAmbientElement("pel1b_outdoors", "amb_bugs_cicada", 15, 35, 50, 1220);
   addAmbientElement("pel1b_outdoors", "amb_odd_bug", 5, 20, 100, 300);
+
   package = "pel1b_cave";
   declareAmbientPackage(package);
+
   addAmbientElement("pel1b_cave", "amb_sand_fall", 2, 15, 100, 500);
   addAmbientElement("pel1b_cave", "amb_wood_dust", 2, 10, 10, 150);
   addAmbientElement("pel1b_cave", "amb_drip", 2, 15, 25, 110);
   addAmbientElement("pel1b_cave", "amb_Japanese_cave_1", 10, 20, 500, 1000);
   addAmbientElement("pel1b_cave", "amb_bats", 2, 15, 25, 110);
+
   declareAmbientRoom("pel1b_outdoors");
   setAmbientRoomTone("pel1b_outdoors", "bgt_wind");
   declareAmbientRoom("pel1b_cave");
   setAmbientRoomTone("pel1b_cave", "bgt_wind_interior");
+
   activateAmbientPackage("pel1b_outdoors", 0);
   activateAmbientRoom("pel1b_outdoors", 0);
 }

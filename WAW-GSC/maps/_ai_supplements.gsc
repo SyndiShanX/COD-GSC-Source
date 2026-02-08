@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_ai_supplements.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -30,14 +30,18 @@ is_valid_spawner(spawner, type) {
 
 ai_supplements_think() {
   level waittill("first_player_ready");
+
   for(;;) {
     wait 1;
+
     type = need_more_enemies();
     if(!isDefined(type)) {
       continue;
     }
+
     wait 0.05;
     aiarray = GetAIArray("axis");
+
     if(level.ais_possesion_mode == 1 && type != "standard") {
       for(i = 0; i < aiarray.size; i++) {
         if(ok_to_possess(aiarray[i])) {
@@ -48,33 +52,41 @@ ai_supplements_think() {
       }
       continue;
     }
+
     if(aiarray.size < 3) {
       continue;
     }
+
     enemy_origins = [];
     for(i = 0; i < aiarray.size; i++) {
       if(!isDefined(aiarray[i].ai_supplement_type)) {
         enemy_origins[enemy_origins.size] = aiarray[i].origin;
       }
     }
+
     if(enemy_origins.size < 3) {
       continue;
     }
+
     spawners = getspawnerarray();
     best_spawner_score = 0;
     best_spawner = undefined;
+
     for(i = 0; i < spawners.size; i++) {
       spawner = spawners[i];
       if(is_valid_spawner(spawner, type)) {
         score = score_spawner(spawner, type, enemy_origins);
+
         if(score > best_spawner_score) {
           best_spawner_score = score;
           best_spawner = spawner;
         }
       }
     }
+
     if(isDefined(best_spawner)) {
       best_spawner spawn_ai_supplement(type);
+
       wait 1;
     }
   }
@@ -82,11 +94,12 @@ ai_supplements_think() {
 
 display_ai_supplements_menu() {
   if(getdebugdvar("debug_ai_supplement") == "")
-    setdvar("debug_ai_supplement", "0");
+    setDvar("debug_ai_supplement", "0");
+
   for(;;) {
     if(getdvarInt("debug_ai_supplement")) {
       wait .5;
-      setdvar("debug_ai_supplement", 0);
+      setDvar("debug_ai_supplement", 0);
       setsaveddvar("hud_drawhud", 1);
       display_ai_supplements();
     }
@@ -143,6 +156,7 @@ create_ais_hudelem(message, index) {
   hudelem.label = message;
   hudelem.alpha = 0;
   hudelem.color = (0.7, 0.7, 0.7);
+
   hudelem.fontScale = 1.7;
   hudelem fadeOverTime(0.5);
   hudelem.alpha = 1;
@@ -151,6 +165,7 @@ create_ais_hudelem(message, index) {
 
 display_ai_supplements() {
     title = create_ais_hudelem("AI Supplementals", 0);
+
     elems = [];
     elems[0] = create_ais_hudelem("", 1);
     elems[1] = create_ais_hudelem("", 2);
@@ -160,17 +175,21 @@ display_ai_supplements() {
     elems[5] = create_ais_hudelem("", 6);
     elems[6] = create_ais_hudelem("", 7);
     elems[7] = create_ais_hudelem("Exit Menu", 8);
+
     selected = 0;
+
     up_pressed = false;
     down_pressed = false;
     right_pressed = false;
     left_pressed = false;
+
     for(;;) {
       players = get_players();
       if(isDefined(players))
         settings_index = players.size - 1;
       else
         settings_index = 0;
+
       for(i = 0; i < 8; i++) {
         elems[i].color = (0.7, 0.7, 0.7);
       }
@@ -181,7 +200,9 @@ display_ai_supplements() {
       elems[4].label = "Queue BanzaiCh: " + level.extra_banzai_queue;
       elems[5].label = "Queue GrenSuic: " + level.extra_grenadesuicide_queue;
       elems[6].label = "Possesion: " + level.ais_possesion_mode;
+
       elems[selected].color = (1, 1, 0);
+
       if(!up_pressed) {
         if(players[0] buttonPressed("UPARROW") || players[0] buttonPressed("DPAD_UP")) {
           up_pressed = true;
@@ -218,6 +239,7 @@ display_ai_supplements() {
         if(!players[0] buttonPressed("RIGHTARROW") && !players[0] buttonPressed("DPAD_RIGHT"))
           right_pressed = false;
       }
+
       if(players[0] buttonPressed("kp_enter") || players[0] buttonPressed("BUTTON_A") || players[0] buttonPressed("enter")) {
         if(selected == 7) {
           title destroy();
@@ -227,6 +249,7 @@ display_ai_supplements() {
           break;
         }
       }
+
       if(selected < 0) {
         selected = 7;
       } else if(selected > 7) {

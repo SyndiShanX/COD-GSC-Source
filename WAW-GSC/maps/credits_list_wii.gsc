@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\credits_list_wii.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -56,8 +56,10 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_JAMES_MCCAWLEY");
   add_heading(&"CREDITS_GEOFFREY_NG");
   add_heading(&"CREDITS_NORMAN_OVANDO");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ENGINEERING", 2.0);
   add_space();
   add_heading(&"CREDITS_PROJECT_TECHNICAL_DIRECTOR");
@@ -136,8 +138,10 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_JOE_SCHEINBERG");
   add_heading(&"CREDITS_DIMITER_MALKIA_STANEV");
   add_heading(&"CREDITS_KRASSIMIR_TOUEVSKY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_AUDIO", 2.0);
   add_space();
   add_heading(&"CREDITS_AUDIO_DIRECTOR");
@@ -163,7 +167,9 @@ init_treyarch_credits_wii() {
   add_space();
   add_heading(&"CREDITS_ADDITIONAL_AUDIO_SUPPORT");
   add_heading(&"CREDITS_JULIA_BIANCO");
+
   add_space();
+
   add_space();
   add_heading(&"CREDITS_DESIGN", 2.0);
   add_space();
@@ -237,8 +243,10 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_BRIAN_DOUGLAS");
   add_heading(&"CREDITS_JASON_MCCORD");
   add_heading(&"CREDITS_JOEY_TERREBONNE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ART", 2.0);
   add_space();
   add_heading(&"CREDITS_ART_DIRECTOR");
@@ -311,8 +319,10 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_CRAIG_SCHILLER");
   add_heading(&"CREDITS_BRAD_SHORTT");
   add_heading(&"CREDITS_TOM_SZAKOLCZAY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ANIMATION", 2.0);
   add_space();
   add_heading(&"CREDITS_ANIMATION_DIRECTOR");
@@ -328,6 +338,7 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_ERIC_SMITH");
   add_heading(&"CREDITS_JON_STOLL");
   add_space();
+
   add_heading(&"CREDITS_ADDITIONAL_ANIMATION");
   add_heading(&"CREDITS_LUIS_YOSH_BOLIVAR");
   add_heading(&"CREDITS_KYLE_GAULIN");
@@ -335,8 +346,10 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_ALEX_MOON");
   add_heading(&"CREDITS_LONG_NGUYEN");
   add_heading(&"CREDITS_JOHN_VELAZQUEZ");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_TREYARCH_STAFF", 2.0);
   add_space();
   add_heading(&"CREDITS_STUDIO_HEAD");
@@ -391,8 +404,10 @@ init_treyarch_credits_wii() {
   add_space();
   add_heading(&"CREDITS_ASSOCIATE_PRODUCER_TOOLS_LIBRARIES");
   add_heading(&"CREDITS_ADAM_SASLOW");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PRODUCTION_TESTING", 2.0);
   add_space();
   add_heading(&"CREDITS_PRODUCTION_TEST_MANAGER");
@@ -414,6 +429,7 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_TRISTEN_SAKURADA");
   add_heading(&"CREDITS_MOISES_ZET");
   add_space();
+
   add_heading(&"CREDITS_PRODUCTION_TESTERS");
   add_heading(&"CREDITS_DANIEL_ALFARO_PLUS");
   add_heading(&"CREDITS_JAMES_BACA_PLUS");
@@ -438,8 +454,10 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_MICHAEL_WICKSON_PLUS");
   add_heading(&"CREDITS_BRANDON_WILLIS_PLUS");
   add_heading(&"CREDITS_JOSEPH_YBARRA");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_CINEMATICS", 2.0);
   add_space();
   add_heading(&"CREDITS_SGT_REZNOV");
@@ -545,8 +563,10 @@ init_treyarch_credits_wii() {
   add_space();
   add_heading(&"CREDITS_GERMAN_TRANSLATOR");
   add_heading(&"CREDITS_MATT_MALOTKI");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ACTIVISION_CAPTURE_STUDIO", 2.0);
   add_space();
   add_heading(&"CREDITS_MOTION_CAPTURE_DIRECTOR");
@@ -595,8 +615,10 @@ init_treyarch_credits_wii() {
   add_heading(&"CREDITS_SANDRA_FALZON");
   add_heading(&"CREDITS_CITY_KITCHEN");
   add_heading(&"CREDITS_THE_SLICE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ADDITIONAL_DEVELOPMENT", 2.0);
   add_space();
   add_heading(&"CREDITS_CERTAIN_AFFINITY");
@@ -656,6 +678,7 @@ init_treyarch_credits_wii() {
 
 init_activision_credits_wii() {
   add_heading(&"CREDITS_ACTIVISION", 2.0);
+
   add_space();
   add_heading(&"CREDITS_SENIOR_PRODUCER");
   add_heading(&"CREDITS_NOAH_HELLER");
@@ -686,8 +709,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_SVP_PRODUCTION_DEVELOPMENT_WW_STUDIOS");
   add_heading(&"CREDITS_DAVE_STOHL");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_GLOBAL_BRAND_MANAGEMENT", 2.0);
   add_space();
   add_heading(&"CREDITS_GLOBAL_BRAND_MANAGER");
@@ -707,8 +732,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_VP_OWNED_PROPERTIES");
   add_heading(&"CREDITS_DAVID_POKRESS");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PUBLIC_RELATIONS", 2.0);
   add_space();
   add_heading(&"CREDITS_PR_MANAGER");
@@ -724,8 +751,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_PR_DIRECTOR_OWNED_PROPERTIES");
   add_heading(&"CREDITS_MIKE_MANTARRO");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PRODUCTION_SERVICES_EUROPE");
   add_space();
   add_heading(&"CREDITS_SENIOR_LOCALIZATION_PROJECT_MANAGER");
@@ -762,8 +791,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_DIRECTOR_OF_PROD_SERVICES_EUROPE");
   add_heading(&"CREDITS_BARRY_KEHOE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_CENTRAL_TECHNOLOGY", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_DIRECTOR_OF_TECHNOLOGY");
@@ -777,8 +808,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_JOHN_KIRK");
   add_heading(&"CREDITS_BYRON_PILE");
   add_heading(&"CREDITS_AMY_SMITH");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_CENTRAL_DESIGN", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_DIRECTOR_OF_GAME_DESIGN");
@@ -793,8 +826,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_CENTRAL_DESIGN");
   add_heading(&"CREDITS_TOM_WELLS");
   add_heading(&"CREDITS_JEFFREY_CHEN");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_TALENT_AUDIO_MANAGEMENT_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_DIRECTOR_OF_CENTRAL_AUDIO");
@@ -805,8 +840,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_TALENT_MANAGER");
   add_heading(&"CREDITS_MARCHELE_HARDIN");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_MARKETING_COMMUNICATIONS", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_DIRECTOR_MARKETING_COMMUNICATIONS");
@@ -814,15 +851,19 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_MARKETING_COMMUNICATIONS_MANAGER");
   add_heading(&"CREDITS_KAREN_STARR");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_BUSINESS_DEVELOPMENT", 2.0);
   add_space();
   add_heading(&"CREDITS_DAVE_ANDERSON");
   add_heading(&"CREDITS_RALPH_PERILLON");
   add_heading(&"CREDITS_LETAM_BIRA");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_ART_SERVICES", 2.0);
   add_space();
   add_heading(&"CREDITS_ART_SERVICES_MANAGER");
@@ -832,8 +873,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_MICHAEL_HUNAU");
   add_heading(&"CREDITS_RYAN_VOLKER");
   add_heading(&"CREDITS_CHRIS_REINHART");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_SPECIAL_THANKS", 2.0);
   add_space();
   add_heading(&"CREDITS_MIKE_GRIFFITH");
@@ -884,8 +927,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_DUSTY_WELCH");
   add_heading(&"CREDITS_WEST_POINT_MUSEUM_LES_JENSEN");
   add_heading(&"CREDITS_MARINE_LIBRARY_ALISA_WHITLEY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QUALITY_ASSURANCE", 2.0);
   add_space();
   add_heading(&"CREDITS_VP_QUALITY_ASSURANCE_CUSTOMER_SERVICE");
@@ -893,8 +938,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_DIRECTOR_QUALITY_ASSURANCE");
   add_heading(&"CREDITS_MARILENA_RIXFORD");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QUALITY_ASSURANCE_FUNCTIONALITY", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_PROJECT_LEAD_DAY_SHIFT");
@@ -917,6 +964,7 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_QA_DATABASE_MANAGER");
   add_heading(&"CREDITS_MIKE_GENADRY");
   add_space();
+
   add_heading(&"CREDITS_QA_TESTERS_DAY_SHIFT");
   add_heading(&"CREDITS_JAMES_FRYKMAN");
   add_heading(&"CREDITS_CREED_WEATHERMAN");
@@ -969,8 +1017,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_QA_MANAGER_NIGHT_SHIFT");
   add_heading(&"CREDITS_ADAM_HARTSFIELD");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_TECHNICAL_REQUIREMENTS_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_TRG_SENIOR_MANAGER");
@@ -980,6 +1030,7 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_DANIEL_L_NICHOLS");
   add_heading(&"CREDITS_CHRISTOPHER_NORMAN");
   add_space();
+
   add_heading(&"CREDITS_TRG_SENIOR_PLATFORM_LEADS");
   add_heading(&"CREDITS_SASAN_HELMI");
   add_heading(&"CREDITS_TODD_SUTTON");
@@ -1003,8 +1054,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_SHON_GRAY");
   add_heading(&"CREDITS_SANTIAGO_SALVADOR");
   add_heading(&"CREDITS_STEVE_MCILROY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_CODE_RELEASE_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_CRG_PROJECT_LEAD");
@@ -1014,8 +1067,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_JONATHAN_MACK");
   add_heading(&"CREDITS_MATT_JENSEN");
   add_heading(&"CREDITS_SEAN_MILLER");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_NETWORK_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_MANAGER_QA_OPERATIONS");
@@ -1027,8 +1082,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_QA_NETWORK_LAB_TESTERS");
   add_heading(&"CREDITS_JESSIE_JONES");
   add_heading(&"CREDITS_LEONARD_RODRIGUEZ");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_MULTIPLAYER_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_MPL_PROJECT_LEAD");
@@ -1055,8 +1112,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_RYAN_RIGG");
   add_heading(&"CREDITS_JONATHAN_YANIV_SADKA");
   add_heading(&"CREDITS_KURTIS_SHERMAN");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_COMPATIBILITY_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_CL_SENIOR_PROJECT_LEAD");
@@ -1072,8 +1131,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_JON_AN");
   add_heading(&"CREDITS_DOV_CARSON");
   add_heading(&"CREDITS_WILLIAM_WHALEY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_AUDIO_VISUAL_LAB", 2.0);
   add_space();
   add_heading(&"CREDITS_QA_AVL_PROJECT_LEAD");
@@ -1081,8 +1142,10 @@ init_activision_credits_wii() {
   add_space();
   add_heading(&"CREDITS_QA_AVL_TESTER");
   add_heading(&"CREDITS_CLIFF_HOOPER");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_BURNROOM", 2.0);
   add_space();
   add_heading(&"CREDITS_BURN_ROOM_SUPERVISOR");
@@ -1093,8 +1156,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_KAI_HSU");
   add_heading(&"CREDITS_SEAN_KIM");
   add_heading(&"CREDITS_RODRIGO_MAGANA");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_MIS", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_MANAGER_QA_TECHNOLOGIES");
@@ -1115,8 +1180,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_QA_MIS_EQUIPMENT_COORDINATORS");
   add_heading(&"CREDITS_LONG_LE");
   add_heading(&"CREDITS_COLEMAN_THAXTON");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_DBA_GROUP", 2.0);
   add_space();
   add_heading(&"CREDITS_SENIOR_LEAD_DATABASE_ADMINISTRATOR");
@@ -1138,8 +1205,10 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_CUSTOMER_SUPPORT_MANAGERS");
   add_heading(&"CREDITS_GARY_BOLDUC");
   add_heading(&"CREDITS_MICHAEL_HILL");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_QA_SPECIAL_THANKS", 2.0);
   add_space();
   add_heading(&"CREDITS_MIKE_CLARKE");
@@ -1151,36 +1220,50 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_DYLAN_RIXFORD");
   add_heading(&"CREDITS_MARC_WILLIAMS");
   add_heading(&"CREDITS_RICHARD_PEARSON");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_MANUAL_DESIGN", 2.0);
   add_space();
   add_heading(&"CREDITS_IGNITED_MINDS_LLC");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_PACKAGING_DESIGN_BY", 2.0);
   add_space();
   add_heading(&"CREDITS_PETROL");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_USES_BINK_VIDEO_COPYRIGHT");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_FONTS_LICENSED_FROM", 2.0);
   add_space();
   add_heading(&"CREDITS_T26_INC");
   add_heading(&"CREDITS_MONOTYPE");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_THE_CHARACTERS_AND_EVENTS");
   add_heading(&"CREDITS_ANY_SIMILARITY");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_MIXED_AND_MASTERED", 2.0);
   add_space();
   add_heading(&"CREDITS_TREYARCH_AUDIO_COD_TEAM");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_SPECIAL_THANKS_TO_LEN_HAYES");
   add_heading(&"CREDITS_AND_THE_FOLLOWING");
   add_space();
@@ -1194,9 +1277,12 @@ init_activision_credits_wii() {
   add_heading(&"CREDITS_BILL_JENKINS");
   add_space();
   add_heading(&"CREDITS_WE_ARE_INSPIRED");
+
   add_space();
   add_space();
+
   add_heading(&"CREDITS_SEMPER_FI", 2.0);
+
   add_space();
   add_space();
   add_space();

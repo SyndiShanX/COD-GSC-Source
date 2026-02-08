@@ -1,7 +1,7 @@
-/*****************************************************
+/********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: mptype\player_usa_marine_wet.gsc
-*****************************************************/
+********************************************/
 
 main() {
   switch (codescripts\character::get_random_character(4)) {

@@ -14,8 +14,10 @@ main() {
   self.sidearm = "walther";
   self.grenadeWeapon = "Stielhandgranate";
   self.grenadeAmmo = 3;
+
   self setEngagementMinDist(256.000000, 0.000000);
   self setEngagementMaxDist(768.000000, 1024.000000);
+
   switch (codescripts\character::get_random_character(2)) {
     case 0:
       character\char_ger_honorguard_mp44::main();
@@ -33,6 +35,7 @@ spawner() {
 precache() {
   character\char_ger_honorguard_mp44::precache();
   character\char_ger_honorguard2_mp44::precache();
+
   precacheItem("panzerschrek");
   precacheItem("stg44");
   precacheItem("walther");

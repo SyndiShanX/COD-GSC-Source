@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_treadfx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
@@ -36,6 +36,7 @@ main(vehicletype) {
       setallvehiclefx(vehicletype, "vehicle/treadfx/fx_treadfx_dust");
       break;
     case "jap_ptboat":
+
       setallvehiclefx(vehicletype, "maps/fly/fx_wake_ptboat");
       break;
     case "rubber_raft":

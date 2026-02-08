@@ -1,29 +1,37 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: clientscripts\_busing.csc
-*****************************************************/
+**************************************/
 
 busInit() {
   level.activeBusState = "";
   level.nextBusState = "";
   level.busStates = [];
+
   registerDefaults();
+
   thread updateBus(true);
+
   thread busSaveWait();
+
   clientscripts\_utility::registerSystem("busCmd", ::busCmdHandler);
 }
 
 busSaveWait() {
   for(;;) {
     level waittill("save_restore");
+
     if(level.nextBusState == "")
       level.nextBusState = level.activeBusState;
     level.activeBusState = "";
+
     if(level.nextBusState == "") {
       busStateDeactivate();
       busStateActivate("slow_on");
     }
+
     println("resetting bus state to " + level.nextBusState);
+
     thread updateBus(false);
   }
 }
@@ -32,56 +40,78 @@ busCmdHandler(clientNum, state, oldState) {
   if(clientNum != 0) {
     return;
   }
+
   level.nextBusState = state;
+
   println("bussing debug: got state '" + state + "'");
+
   level notify("new_bus");
 }
 
 setBusState(state) {
   level.nextBusState = state;
+
   println("bussing debug: set state '" + state + "'");
+
   level notify("new_bus");
 }
 
 updateBus(forcefade) {
   level endon("save_restore");
+
   if(forcefade) {
     busStateDeactivate();
     busStateActivate("immediate_off");
+
     wait(0.5);
+
     busStateDeactivate();
     busStateActivate("slow_on");
   }
+
   while(1) {
     if(level.activeBusState == level.nextBusState) {
       level waittill("new_bus");
     }
+
     println("got bus change current'" + level.activeBusState + "' next '" + level.nextBusState + "'");
+
     if(level.activeBusState == level.nextBusState) {
       continue;
     }
     assert(isDefined(level.nextBusState));
     assert(isDefined(level.activeBusState));
+
     busStateDeactivate();
+
     next = level.nextBusState;
+
     if(next != "") {
       busStateActivate(next);
     }
+
     level.activeBusState = next;
   }
 }
 
 busStateActivate(name) {
   println("activating bus '" + name + "'");
+
   state = level.busStates[name];
+
   if(!isDefined(state)) {
     println("invalid bus state '" + name + "'");
     return;
   }
+
   assert(isDefined(state.time));
+
   setBusFadeTime(state.time);
+
   keys = getArrayKeys(state.levels);
+
   assert(isDefined(keys));
+
   for(i = 0; i < keys.size; i++) {
     setBusVolume(keys[i], state.levels[keys[i]]);
   }
@@ -89,7 +119,9 @@ busStateActivate(name) {
 
 busStateDeactivate() {
   println("deactivating bus ");
+
   setBusFadeTime(.5);
+
   for(i = 0; i < GetBusCount(); i++) {
     setBusVolume(GetBusName(i), 1.0);
   }
@@ -99,10 +131,13 @@ declareBusState(name) {
   if(!isDefined(level.busStates)) {
     return;
   }
+
   level.busDeclareName = name;
+
   if(isDefined(level.busStates[name])) {
     return;
   }
+
   level.busStates[name] = spawnStruct();
   level.busStates[name].time = 0.5;
   level.busStates[name].levels = [];
@@ -139,6 +174,7 @@ busVolumeAll(value) {
 
 argsAsDict(a, b, c, d, e, f, g, h, i) {
   names = [];
+
   if(isDefined(a))
     names[0] = a;
   if(isDefined(b))
@@ -162,45 +198,58 @@ argsAsDict(a, b, c, d, e, f, g, h, i) {
 
 busVolumesExcept(a, b, c, d, e, f, g, h, i) {
   args = argsAsDict(a, b, c, d, e, f, g, h, i);
+
   value = args[args.size - 1];
   names = [];
+
   for(i = 0; i < args.size - 1; i++)
     names[i] = args[i];
+
   for(i = 0; i < GetBusCount(); i++) {
     name = GetBusName(i);
     if(!busIsIn(GetBusName(i), names)) {
       busVolume(name, value);
     }
   }
+
 }
 
 registerDefaults() {
   declareBusState("map_load");
   busFadeTime(.25);
   busVolumesExcept("music", "ui", 0);
+
   declareBusState("map_start");
   busFadeTime(1);
   busVolumeAll(1);
+
   declareBusState("default");
   busFadeTime(.25);
   busVolumeAll(1);
+
   declareBusState("all_off");
   busVolumeAll(0);
+
   declareBusState("map_end");
   busFadeTime(2);
   busVolumesExcept("music", "ui", 0);
+
   declareBusState("last_stand_start");
   busFadeTime(0.1);
   busVolumesExcept("full_vol", "ui", 0.6);
+
   declareBusState("last_stand_duration");
   busFadeTime(29.9);
   busVolumesExcept("full_vol", "ui", 0.05);
+
   declareBusState("immediate_off");
   busFadeTime(.01);
   busVolumesExcept("ui", 0.0);
+
   declareBusState("slow_on");
   busVolumesExcept("ui", 1.0);
   busFadeTime(.5);
+
   declareBusState("zombie_death");
   busvolumesexcept("music", 0.0);
   busfadetime(10);

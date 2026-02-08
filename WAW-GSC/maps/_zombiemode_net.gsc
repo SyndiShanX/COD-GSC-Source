@@ -1,13 +1,14 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_zombiemode_net.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 
 init() {
   level.zombie_network_num_spawns = 0;
   level.zombie_network_max_spawns = 2;
+
   level thread network_spawn_monitor();
 }
 
@@ -15,7 +16,9 @@ network_safe_spawn(classname, origin) {
   while(!network_ok_to_spawn()) {
     wait(0.05);
   }
+
   level.zombie_network_num_spawns++;
+
   return spawn(classname, origin);
 }
 

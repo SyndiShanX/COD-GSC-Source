@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pby_fly.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include maps\_anim;
@@ -16,23 +16,31 @@ main() {
   level.mapCenter = (-5000, 0, 0);
   SetMapCenter(level.mapCenter);
   SetSavedDvar("compassMaxRange", 10000);
+
   maps\pby_fly_fx::main();
+
   level.scr_model["player_hands"] = "viewmodel_usa_pbycrew_player";
+
   maps\_aircraft::main("vehicle_usa_aircraft_f4ucorsair", "corsair", 2, undefined, "jap_zero_turret");
   maps\_aircraft::main("vehicle_jap_airplane_zero_fly", "zero", 0);
+
   build_player_planes("pby_blackcat");
   build_player_planes("fletcher_destroyer");
   build_enemy_vehicles("zero");
   build_enemy_vehicles("jap_ptboat");
   build_enemy_vehicles("jap_shinyo");
   build_enemy_vehicles("jap_merchant_ship");
+
   init_flags();
+
   level.droneExtraAnims = ::ms_guys_init;
   level.droneCustomDeath = ::ms_soldier_deaththread;
   maps\_drone::init();
+
   level.max_drones["allies"] = 999;
   level.max_drones["axis"] = 999;
   level.max_drones["neutral"] = 999;
+
   precachemodel("makin_raft_rubber");
   precachemodel("static_peleliu_lifeboat");
   precacheitem("type99_lmg");
@@ -44,25 +52,33 @@ main() {
   precachemodel("vehicle_jap_airplane_zero_minus_lwing");
   precachemodel("vehicle_jap_airplane_zero_minus_rwing");
   precachemodel("vehicle_jap_airplane_zero_minus_tail");
+
   precachemodel("greatwhite_shark2");
   precachemodel("greatwhite_shark2_dmg1");
   precachemodel("greatwhite_shark2_dmg2");
+
   precachemodel("vehicle_usa_pby_bulletholes01");
   precachemodel("vehicle_usa_pby_bulletholes02");
   precachemodel("vehicle_usa_pby_bulletholes03");
+
   precachemodel("vehicle_usa_pby_bulletholes04");
   precachemodel("vehicle_usa_pby_bulletholes05");
   precachemodel("vehicle_usa_pby_bulletholes06");
   precachemodel("vehicle_usa_pby_bulletholes07");
+
   precachemodel("vehicle_usa_pby_tailsect_fx01");
+
   precachemodel("vehicle_usa_pby_blisterleft_glass01");
   precachemodel("vehicle_usa_pby_blisterright_glass01");
+
   precachemodel("vehicle_usa_pby_radiosect_damage01");
   precachemodel("vehicle_usa_pby_radiosect_damage02");
   precachemodel("vehicle_usa_pby_wingleft_damage01");
   precachemodel("vehicle_usa_pby_wingright_damage01");
+
   precachemodel("vehicle_jap_ship_ptboat_setb");
   precachemodel("vehicle_jap_ship_ptboat_setc");
+
   precachemodel("vehicle_usa_ship_fletcher_chunk1");
   precachemodel("vehicle_usa_ship_fletcher_chunk2");
   precachemodel("vehicle_usa_ship_fletcher_chunk3");
@@ -72,6 +88,7 @@ main() {
   precachemodel("vehicle_usa_ship_fletcher_turretgun_barrel");
   precachemodel("vehicle_usa_ship_fletcher_oerlikon");
   precachemodel("vehicle_usa_ship_fletcher_oerlikon_barrel");
+
   precachemodel("vehicle_usa_ship_fletcher_decal0");
   precachemodel("vehicle_usa_ship_fletcher_decal1");
   precachemodel("vehicle_usa_ship_fletcher_decal2");
@@ -82,6 +99,7 @@ main() {
   precachemodel("vehicle_usa_ship_fletcher_decal7");
   precachemodel("vehicle_usa_ship_fletcher_decal8");
   precachemodel("vehicle_usa_ship_fletcher_decal9");
+
   precachemodel("tag_origin");
   precacheshellshock("pby_flak");
   precachestring(&"PBY_FLY_SWITCH_FRONT");
@@ -93,13 +111,16 @@ main() {
   precachestring(&"PBY_FLY_PBY_NAME_B");
   precachestring(&"PBY_FLY_PBY_SQUAD");
   precachestring(&"SCRIPT_PLATFORM_PBY_FLY_ADS_HINT");
+
   precacheShader("hud_pby_score_ptboat");
   precacheShader("hud_pby_score_rescue");
   precacheShader("hud_pby_score_ship");
   precacheShader("hud_pby_score_zero");
+
   precacheRumble("explosion_generic");
   precacheRumble("damage_light");
   precacheRumble("damage_heavy");
+
   add_start("boat_strafe", ::jumpto_event2_strafe_boats, &"STARTS_PBY_BOATS");
   add_start("media", ::jumpto_event2_media, &"STARTS_PBY_BOATS");
   add_start("pacing", ::jumpto_event3, &"STARTS_PBY_SUNRISE");
@@ -107,19 +128,27 @@ main() {
   add_start("getaway", ::jumpto_event6, &"STARTS_PBY_LANDING");
   add_start("zeroes", ::jumpto_initial_zeroes, &"STARTS_PBY_LANDING");
   add_start("rescue_3", ::jumpto_event4_part3);
+
   default_start(::event1_new);
+
   level.callbackSaveRestored = ::pby_callback_saveRestored;
+
   maps\_load::main();
+
   maps\pby_fly_anim::main();
+
   maps\pby_fly_amb::main();
+
   filter_out_names();
 }
 
 pby_callback_saveRestored() {
   maps\_callbackglobal::Callback_SaveRestored();
+
   SetSavedDvar("compass", "0");
   SetSavedDvar("hud_showStance", "0");
   SetSavedDvar("ammoCounterHide", "1");
+
   level notify("no_manual_switch");
   players = get_players();
   for(i = 0; i < players.size; i++) {
@@ -132,25 +161,36 @@ pby_callback_saveRestored() {
 
 my_level_init() {
   wait_for_first_player();
+
   level.player = get_players()[0];
+
   my_level_init_difficulty();
+
   level.player thread player_death_off_turret();
+
   level.player player_flag_set("loadout_given");
+
   level.player EnableInvulnerability();
   level.player.save_anim = false;
+
   level.level_specific_dof = true;
   level.player SetDepthOfField(100, 100, 500, 500, 5, 1.5);
-  level.default_pitch_down = GetDVar("player_view_pitch_down");
+
+  level.default_pitch_down = getDvar("player_view_pitch_down");
   level.ventral_turret_pitch = 86;
   level.player AllowCrouch(false);
   level.player AllowProne(false);
   level.max_spawns = 0;
+
   level.no_save_prompt = false;
+
   level thread delete_extra_pbys();
   level thread stat_counter();
   level thread pby_wait_for_free_spawn();
+
   level.undef = spawn("script_origin", (0, 0, 0));
   assert(isDefined(level.undef), "undefined entity is undefined...");
+
   level.max_speed = 60;
   level.zero_max_speed = 120;
   level.zero_min_speed = 70;
@@ -160,16 +200,21 @@ my_level_init() {
   level.plane_on_curve = 0;
   level.max_pts_shooting = 6;
   level.current_pts_shooting = 0;
+
   level.GUN_FRONT = 0;
   level.GUN_LEFT = 1;
   level.GUN_RIGHT = 2;
   level.GUN_REAR = 3;
   level.TURRET_RANGE = 5000;
+
   SetSavedDVar("sm_sunAlwaysCastsShadow", 1);
+
   setup_player_planes();
+
   my_level_init_ocean_debris();
   my_level_init_ocean_ships();
   level thread init_drone_manager();
+
   level.player.plane = level.plane_a;
   level.player setup_seat_control();
   level.player.in_transition = false;
@@ -177,34 +222,43 @@ my_level_init() {
   level.player DisableTurretDismount();
   wait(0.15);
   level.player force_players_into_seat("starting");
+
   init_callbacks();
+
   run_special_debug_functions();
+
   level thread disable_manual_switching();
   level thread end_scripting_for_burn();
   level thread setup_pby_compass_menu();
   level thread good_kill_dialogue();
   level thread close_hit_dialogue();
+
   level.bomber_wind_shake = 1;
   level thread random_turbulence();
   level thread static_turbulence();
+
   level thread track_spotlight_achievement();
 }
 
 my_level_init_difficulty() {
   difficulty = GetDifficulty();
+
   switch (difficulty) {
     case "easy":
       level.bullet_hits_before_swap = 5;
       level.damage_transfered_to_player = 20;
       break;
+
     case "medium":
       level.bullet_hits_before_swap = 3;
       level.damage_transfered_to_player = 20;
       break;
+
     case "hard":
       level.bullet_hits_before_swap = 3;
       level.damage_transfered_to_player = 20;
       break;
+
     case "fu":
       level.bullet_hits_before_swap = 3;
       level.damage_transfered_to_player = 20;
@@ -214,11 +268,14 @@ my_level_init_difficulty() {
 
 player_death_off_turret() {
   self waittill("death");
+
   for(i = 0; i < 4; i++) {
     level.plane_a DisableGunnerFiring(i, true);
   }
+
   death_anim = undefined;
   death_ref = " ";
+
   switch (self.current_seat) {
     case "pby_frontgun":
       death_anim = level.scr_anim["player_hands"]["pby_front_to_death"];
@@ -237,20 +294,28 @@ player_death_off_turret() {
       death_ref = "pby_back_to_death";
       break;
   }
+
   self DisableWeapons();
+
   plane = level.plane_a;
   plane UseBy(self);
+
   startorg = getstartOrigin(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), death_anim);
   startang = getstartAngles(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), death_anim);
+
   player_hands = spawn_anim_model("player_hands");
   player_hands.plane = plane;
   player_hands.direction = "right";
+
   player_hands.origin = startorg;
   player_hands.angles = startang;
   player_hands LinkTo(plane, "origin_animate_jnt");
+
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
+
   self playerlinktoabsolute(player_hands, "tag_player");
+
   plane maps\_anim::anim_single_solo(player_hands, death_ref);
 }
 
@@ -258,6 +323,7 @@ track_spotlight_achievement() {
   for(i = 0; i < 6; i++) {
     level waittill("a_spotlight_broke");
   }
+
   level.player maps\_utility::giveachievement_wrapper("PBY_ACHIEVEMENT_LIGHTSOUT");
 }
 
@@ -268,6 +334,7 @@ track_vehicle_achievement() {
     }
     wait 1;
   }
+
   level.player maps\_utility::giveachievement_wrapper("PBY_ACHIEVEMENT_ZEROS");
 }
 
@@ -275,13 +342,16 @@ setup_pby_compass_menu() {
   compass_value = 0;
   level.yellow_damage = 1;
   level.red_damage = 2;
-  SetDvar("ui_pby_damage_gunlt", compass_value);
-  SetDvar("ui_pby_damage_winglt", compass_value);
-  SetDvar("ui_pby_damage_gunrt", compass_value);
-  SetDvar("ui_pby_damage_wingrt", compass_value);
-  SetDvar("ui_pby_damage_nose", compass_value);
-  SetDvar("ui_pby_damage_tail", compass_value);
+
+  setDvar("ui_pby_damage_gunlt", compass_value);
+  setDvar("ui_pby_damage_winglt", compass_value);
+  setDvar("ui_pby_damage_gunrt", compass_value);
+  setDvar("ui_pby_damage_wingrt", compass_value);
+  setDvar("ui_pby_damage_nose", compass_value);
+  setDvar("ui_pby_damage_tail", compass_value);
+
   level.plane_a thread pby_compass_red_background();
+
   level.plane_a thread pby_gun_left_damage();
   level.plane_a thread pby_gun_right_damage();
   level.plane_a thread pby_wing_left_damage();
@@ -294,13 +364,15 @@ pby_gun_left_damage() {
   shot_count = 0;
   yellow_damage = 50;
   red_damage = 100;
+
   for(;;) {
     self waittill("pby_ltgun_damage");
     shot_count++;
+
     if(shot_count > yellow_damage) {
-      SetDvar("ui_pby_damage_gunlt", level.yellow_damage);
+      setDvar("ui_pby_damage_gunlt", level.yellow_damage);
     } else if(shot_count > red_damage) {
-      SetDvar("ui_pby_damage_gunlt", level.red_damage);
+      setDvar("ui_pby_damage_gunlt", level.red_damage);
     }
   }
 }
@@ -309,13 +381,15 @@ pby_gun_right_damage() {
   shot_count = 0;
   yellow_damage = 50;
   red_damage = 100;
+
   for(;;) {
     self waittill("pby_rtgun_damage");
     shot_count++;
+
     if(shot_count > yellow_damage) {
-      SetDvar("ui_pby_damage_gunrt", level.yellow_damage);
+      setDvar("ui_pby_damage_gunrt", level.yellow_damage);
     } else if(shot_count > red_damage) {
-      SetDvar("ui_pby_damage_gunrt", level.red_damage);
+      setDvar("ui_pby_damage_gunrt", level.red_damage);
     }
   }
 }
@@ -325,9 +399,11 @@ pby_wing_left_damage() {
   yellow_damage = 50;
   red_damage = 100;
   dead_damage = 150;
+
   for(;;) {
     self waittill("pby_ltwing_damage");
     shot_count++;
+
     if(shot_count > yellow_damage && !flag("pby_left_wing_dmg1")) {
       flag_set("pby_left_wing_dmg1");
     } else if(shot_count > red_damage && !flag("pby_left_wing_dmg2")) {
@@ -343,9 +419,11 @@ pby_wing_right_damage() {
   yellow_damage = 50;
   red_damage = 100;
   dead_damage = 150;
+
   for(;;) {
     self waittill("pby_rtwing_damage");
     shot_count++;
+
     if(shot_count > yellow_damage && !flag("pby_right_wing_dmg1")) {
       flag_set("pby_right_wing_dmg1");
     } else if(shot_count > red_damage && !flag("pby_right_wing_dmg2")) {
@@ -360,13 +438,15 @@ pby_nose_damage() {
   shot_count = 0;
   yellow_damage = 50;
   red_damage = 100;
+
   for(;;) {
     self waittill("pby_nose_damage");
     shot_count++;
+
     if(shot_count > yellow_damage) {
-      SetDvar("ui_pby_damage_nose", level.yellow_damage);
+      setDvar("ui_pby_damage_nose", level.yellow_damage);
     } else if(shot_count > red_damage) {
-      SetDvar("ui_pby_damage_nose", level.red_damage);
+      setDvar("ui_pby_damage_nose", level.red_damage);
     }
   }
 }
@@ -375,32 +455,37 @@ pby_tail_damage() {
   shot_count = 0;
   yellow_damage = 50;
   red_damage = 100;
+
   for(;;) {
     self waittill("pby_tail_damage");
     shot_count++;
+
     if(shot_count > yellow_damage) {
-      SetDvar("ui_pby_damage_tail", level.yellow_damage);
+      setDvar("ui_pby_damage_tail", level.yellow_damage);
     } else if(shot_count > red_damage) {
-      SetDvar("ui_pby_damage_tail", level.red_damage);
+      setDvar("ui_pby_damage_tail", level.red_damage);
     }
   }
 }
 
 pby_compass_red_background() {
   self endon("death");
+
   while(true) {
     self waittill("damage");
-    SetDVar("ui_pby_damage_red", true);
+    setDvar("ui_pby_damage_red", true);
     wait(0.1);
-    SetDVar("ui_pby_damage_red", false);
+    setDvar("ui_pby_damage_red", false);
     wait(0.1);
   }
 }
 
 my_level_init_ocean_debris() {
   debris_array = getEntArray("floating_debris", "targetname");
+
   level.debris_turn_1 = [];
   level.debris_turn_3 = [];
+
   y = 0;
   z = 0;
   for(i = 0; i < debris_array.size; i++) {
@@ -411,8 +496,10 @@ my_level_init_ocean_debris() {
       level.debris_turn_3[z] = debris_array[i];
       z++;
     }
+
     debris_array[i] Hide();
   }
+
   level thread event2_debris_cleanup();
 }
 
@@ -420,27 +507,34 @@ my_level_init_ocean_ships() {
   level.boats = [];
   for(i = 0; i < 3; i++) {
     level.boats[i] = GetEnt("ev2_ship_" + i, "targetname");
+
     level.boats[i].bow = GetEnt(level.boats[i].targetname + "_bow", "targetname");
+
     level.boats[i].aft = GetEnt(level.boats[i].targetname + "_aft", "targetname");
+
     level.boats[i].glass1 = GetEnt(level.boats[i].targetname + "_glass1", "targetname");
     level.boats[i].glass1 LinkTo(level.boats[i], "aft_break_jnt");
     level.boats[i].glass2 = GetEnt(level.boats[i].targetname + "_glass2", "targetname");
     level.boats[i].glass2 LinkTo(level.boats[i], "aft_break_jnt");
     level.boats[i].glass3 = GetEnt(level.boats[i].targetname + "_glass3", "targetname");
     level.boats[i].glass3 LinkTo(level.boats[i], "aft_break_jnt");
+
     level.boats[i] Hide();
     level.boats[i].bow Hide();
     level.boats[i].aft Hide();
     level.boats[i].glass1 Hide();
     level.boats[i].glass2 Hide();
     level.boats[i].glass3 Hide();
+
     level.boats[i].sink_anim = "sink" + i;
+
     level.boats[i].bow_destructibles = [];
     dest_target_name = "boat_" + i + "_dest_bow";
     level.boats[i].bow_destructibles = getEntArray(dest_target_name, "targetname");
     for(j = 0; j < level.boats[i].bow_destructibles.size; j++) {
       level.boats[i].bow_destructibles[j] Hide();
     }
+
     level.boats[i].aft_destructibles = [];
     dest_target_name = "boat_" + i + "_dest_aft";
     level.boats[i].aft_destructibles = getEntArray(dest_target_name, "targetname");
@@ -448,6 +542,7 @@ my_level_init_ocean_ships() {
       level.boats[i].aft_destructibles[j] Hide();
     }
   }
+
   flag = GetEnt("boat_0_flag", "targetname");
   flag LinkTo(level.boats[0], "aft_break_jnt");
   flag = GetEnt("boat_1_flag", "targetname");
@@ -456,12 +551,14 @@ my_level_init_ocean_ships() {
   flag LinkTo(level.boats[2], "bow_break_jnt");
   flag = GetEnt("boat_2_flag_aft", "targetname");
   flag LinkTo(level.boats[2], "aft_break_jnt");
+
   level thread show_boats();
 }
 
 show_boats() {
   level waittill("move to front for intro");
   wait(3);
+
   for(i = 0; i < level.boats.size; i++) {
     level.boats[i] Show();
     level.boats[i].bow Show();
@@ -469,6 +566,7 @@ show_boats() {
     level.boats[i].glass1 Show();
     level.boats[i].glass2 Show();
     level.boats[i].glass3 Show();
+
     for(j = 0; j < level.boats[i].bow_destructibles.size; j++) {
       level.boats[i].bow_destructibles[j] Show();
     }
@@ -484,27 +582,37 @@ init_flags() {
   flag_init("saver_ready");
   flag_init("zero_rescue_1_dead");
   flag_init("ptboat_rescue_1_dead");
+
   flag_init("pby_right_wing_dmg1");
   flag_init("pby_right_wing_dmg2");
   flag_init("pby_right_wing_dmg3");
   flag_init("pby_left_wing_dmg1");
   flag_init("pby_left_wing_dmg2");
   flag_init("pby_left_wing_dmg3");
+
   flag_init("disable_random_dialogue");
+
   flag_init("pby_out_of_ammo");
   flag_init("pby_actually_out_of_ammo");
+
   flag_init("ok_to_shoot_at_player");
+
   flag_init("player_crashed");
+
   flag_init("rescue_2_2nd_ptboats_spawned");
   flag_init("rescue_2_2nd_ptboats_killed");
   flag_init("rescue_2_3rd_ptboats_spawned");
   flag_init("rescue_2_3rd_ptboats_killed");
+
   flag_init("merchant_ship_event_done");
   flag_init("respond_objective_done");
   flag_init("the level is done");
+
   flag_init("jumpto_used");
+
   flag_init("player_shot_during_event2");
   flag_init("player_shot_during_event3");
+
   flag_init("20mm_shot");
 }
 
@@ -512,6 +620,7 @@ end_scripting_for_burn() {
   if(true) {
     return;
   }
+
   level.plane_a waittill("end_of_scripting_burn");
   iprintlnbold("STAY TUNED - MORE COMING SOON");
   wait(5);
@@ -523,71 +632,89 @@ debug_hud_elems() {
   level.seat_hud.alignX = "left";
   level.seat_hud.x = 20;
   level.seat_hud.y = 290;
+
   while(1) {
     level.seat_hud SetText(level.player.current_seat);
     wait(0.1);
   }
 }
-
 init_callbacks() {
   level thread onPlayerConnect();
 }
 
 pby_damage_counter() {
   total_damage = 0;
+
   while(1) {
     self waittill("damage", amount);
+
     total_damage += amount;
     iprintln("The PBYs current damage is: " + total_damage);
   }
 }
-
 player_controlled_20mm_cannon() {
   level thread player_controlled_20mm_cannon_msg();
+
   wait(10);
+
   shots_fired = 0;
+
   right_barrel = spawn("script_model", self.origin);
   right_barrel setModel("tag_origin");
   right_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 20) + (anglesToForward(self GetTagAngles("tag_flash_gunner1")) * 24 + (AnglesToRight(self GetTagAngles("tag_flash_gunner1")) * 24));
   right_barrel.angles = self GetTagAngles("tag_flash_gunner1");
   right_barrel LinkTo(self, "tag_flash_gunner1");
+
   left_barrel = spawn("script_model", self.origin);
   left_barrel setModel("tag_origin");
   left_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 20) + (anglesToForward(self GetTagAngles("tag_flash_gunner1")) * 24) - (AnglesToRight(self GetTagAngles("tag_flash_gunner1")) * 24);
   left_barrel.angles = self GetTagAngles("tag_flash_gunner1");
   left_barrel LinkTo(self, "tag_flash_gunner1a");
+
   while(true && !flag("pby_out_of_ammo")) {
     while(level.player.current_seat != "pby_frontgun" || level.player.in_transition) {
       wait(0.05);
     }
+
     while(level.player.current_seat == "pby_frontgun" && !flag("pby_out_of_ammo")) {
       while(!level.player FragButtonPressed()) {
         wait(0.05);
       }
+
       pby_forward = anglesToForward(level.plane_a.angles);
       gunner_barrel_origin = self GetTagOrigin("tag_gunner_barrel1");
       gunner_barrel_angles = self GetTagAngles("tag_gunner_barrel1");
       gunner_forward = anglesToForward(gunner_barrel_angles);
+
       if(!level.player.in_transition && level.player.current_seat == "pby_frontgun") {
         if(!flag("20mm_shot")) {
           flag_set("20mm_shot");
         }
+
         pitch_to_use = AngleNormalize180(gunner_barrel_angles[0] - level.plane_a.angles[0]);
         pitch_to_use = Clamp(pitch_to_use, 0, 15);
         pitch_to_use = AngleNormalize360(pitch_to_use + level.plane_a.angles[0]);
+
         yaw_to_use = AngleNormalize180(gunner_barrel_angles[1] - level.plane_a.angles[1]);
         yaw_to_use = Clamp(yaw_to_use, -15, 15);
         yaw_to_use = AngleNormalize360(yaw_to_use + level.plane_a.angles[1]);
+
         bullet_target = gunner_barrel_origin;
         bullet_target += anglesToForward((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 5000;
+
         right_barrel Unlink();
         left_barrel Unlink();
+
         right_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 30) + (anglesToForward((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 60) + (AnglesToRight((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 24);
+
         right_barrel.angles = (pitch_to_use, yaw_to_use, gunner_barrel_angles[2]);
         right_barrel LinkTo(self, "origin_animate_jnt");
+
         left_barrel.origin = self GetTagOrigin("tag_flash_gunner1") - (0, 0, 30) + (anglesToForward((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 60) - (AnglesToRight((pitch_to_use, yaw_to_use, gunner_barrel_angles[2])) * 24);
+
         left_barrel.angles = (pitch_to_use, yaw_to_use, gunner_barrel_angles[2]);
         left_barrel LinkTo(self, "origin_animate_jnt");
+
         if(!flag("pby_out_of_ammo")) {
           if(shots_fired == 0) {
             playFXOnTag(level._effect["pby_20mm_flash"], right_barrel, "tag_origin");
@@ -598,27 +725,36 @@ player_controlled_20mm_cannon() {
             MagicBullet("pby_20mm", left_barrel.origin + (anglesToForward(left_barrel.origin) * 5), bullet_target, level.player);
             shots_fired--;
           }
+
           Earthquake(.5, 0.3, level.player.origin, 100);
           level.player PlayRumbleOnEntity("damage_heavy");
           playsoundatposition("amb_metal", (0, 0, 0));
+
           wait(0.2);
         }
       }
+
       wait(0.05);
     }
   }
+
   while(level.player.current_seat == "pby_frontgun") {
     while(!level.player FragButtonPressed()) {
       wait(0.05);
     }
+
     position = self GetTagOrigin("tag_gunner_barrel1");
+
     bullet_sound = spawn("script_origin", position);
     bullet_sound LinkTo(self, "tag_gunner_barrel1");
+
     bullet_sound playSound("dryfire_rifle_plr", "click_done");
     bullet_sound waittill("click_done");
+
     while(level.player FragButtonPressed()) {
       wait(0.05);
     }
+
     wait(1);
   }
 }
@@ -627,9 +763,11 @@ Clamp(your_number, lower_number, higher_number) {
   if(your_number < lower_number) {
     return (lower_number);
   }
+
   if(your_number > higher_number) {
     return (higher_number);
   }
+
   return (your_number);
 }
 
@@ -637,6 +775,7 @@ AngleNormalize180(angle) {
   if(angle > 180) {
     angle -= 360;
   }
+
   return angle;
 }
 
@@ -644,6 +783,7 @@ AngleNormalize360(angle) {
   if(angle < 0) {
     angle += 360;
   }
+
   return angle;
 }
 
@@ -651,19 +791,24 @@ player_controlled_20mm_cannon_msg() {
   if(flag("jumpto_used")) {
     return;
   }
+
   while(!isDefined(level.player.current_seat)) {
     wait(0.1);
   }
+
   while(level.player.current_seat != "pby_frontgun") {
     wait(0.1);
   }
+
   wait(1.0);
+
   str_ref = &"PBY_FLY_CANNON";
   level.ads_remind_text SetText(str_ref);
+
   wait(5);
+
   level.ads_remind_text SetText("");
 }
-
 setup_player_planes() {
   level.plane_a = player_pby_init("player_plane_a", "_a");
   level.plane_a.animname = "pby";
@@ -676,8 +821,11 @@ setup_player_planes() {
   level.plane_a thread pby_damage_blister_glass_right();
   level.plane_a thread pby_damage_blister_glass_left();
   level.plane_a thread throttling_engine_sounds();
+
   level.plane_a thread disable_gunner_weapons_until_after_titlescreen();
+
   wait(0.05);
+
   level.plane_b = player_pby_init("player_plane_b", "_b");
   level.plane_b.animname = "pby";
   level.plane_b maps\pby_fly_amb::setup_plane_sounds(false);
@@ -692,51 +840,64 @@ throttling_engine_sounds() {
   self.engine_sound setModel("tag_origin");
   self.engine_sound LinkTo(self, "tag_origin");
   self.engine_sound playLoopSound("pby_engine_high", 3);
+
   self thread sound_watch_for_engine_high();
   self thread sound_watch_for_engine_low();
   self thread sound_watch_for_engine_taxi();
   self thread sound_watch_for_engine_add_power();
   self thread sound_watch_for_engine_take_off();
   self thread sound_watch_for_engine_evasive();
+
   the_script_thing = "";
   while(1) {
     self waittill("noteworthy", the_script_thing);
+
     switch (the_script_thing) {
       case "descending_engine":
         self notify("switch_to_engine_low");
         break;
+
       case "turn_engine":
         self notify("add_engine_power");
         self notify("switch_to_engine_high");
         break;
+
       case "non_turn_engine":
         self notify("switch_to_engine_low");
         break;
+
       case "got_flaked":
         self notify("switch_to_engine_high");
         self notify("evasive_maneuver");
         break;
+
       case "music_end_second_pass":
         self notify("add_engine_power");
         self notify("switch_to_engine_high");
         break;
+
       case "ev2_debris_turn3":
         self notify("switch_to_engine_low");
         break;
+
       case "delete_ship_shields":
         self notify("switch_to_engine_low");
         break;
+
       case "debris_stop":
         self notify("add_engine_power");
         self notify("switch_to_engine_high");
         break;
+
       case "kamikaze_dialogue":
         self notify("switch_to_engine_taxi");
         break;
+
       case "pby_takeoff":
         self notify("add_engine_power_take_off");
         self notify("switch_to_engine_high");
         break;
+
       default:
         break;
     }
@@ -747,14 +908,17 @@ sound_watch_for_engine_high() {
   while(1) {
     self waittill("switch_to_engine_high");
     self.engine_sound stoploopsound(2);
+
     self.new_sound = spawn("script_model", self.origin);
     self.new_sound setModel("tag_origin");
     self.new_sound LinkTo(self, "tag_origin");
     self.new_sound playLoopSound("pby_engine_high", 2);
+
     wait(2);
     if(isDefined(self.engine_sound)) {
       self.engine_sound Delete();
     }
+
     self.engine_sound = self.new_sound;
   }
 }
@@ -763,14 +927,17 @@ sound_watch_for_engine_low() {
   while(1) {
     self waittill("switch_to_engine_low");
     self.engine_sound stoploopsound(2);
+
     self.new_sound = spawn("script_model", self.origin);
     self.new_sound setModel("tag_origin");
     self.new_sound LinkTo(self, "tag_origin");
     self.new_sound playLoopSound("pby_engine_low", 2);
+
     wait(2);
     if(isDefined(self.engine_sound)) {
       self.engine_sound Delete();
     }
+
     self.engine_sound = self.new_sound;
   }
 }
@@ -779,14 +946,17 @@ sound_watch_for_engine_taxi() {
   while(1) {
     self waittill("switch_to_engine_taxi");
     self.engine_sound stoploopsound(2);
+
     self.new_sound = spawn("script_model", self.origin);
     self.new_sound setModel("tag_origin");
     self.new_sound LinkTo(self, "tag_origin");
     self.new_sound playLoopSound("pby_engine_taxi", 2);
+
     wait(2);
     if(isDefined(self.engine_sound)) {
       self.engine_sound Delete();
     }
+
     self.engine_sound = self.new_sound;
   }
 }
@@ -814,6 +984,7 @@ sound_watch_for_engine_evasive() {
 
 fake_blister_gunners() {
   self thread fake_blister_gunners_cleanup();
+
   gunner_spawner = GetEnt(self.plane_name + "_gunner_right", "targetname");
   self.gunner_right = gunner_spawner Stalingradspawn();
   self.gunner_right.animname = "engineer";
@@ -822,6 +993,7 @@ fake_blister_gunners() {
   self.gunner_right.drawoncompass = 0;
   self.gunner_right.name = undefined;
   gunner_spawner Delete();
+
   gunner_spawner = GetEnt(self.plane_name + "_gunner_left", "targetname");
   self.gunner_left = gunner_spawner Stalingradspawn();
   self.gunner_left.animname = "engineer";
@@ -830,6 +1002,7 @@ fake_blister_gunners() {
   self.gunner_left.drawoncompass = 0;
   self.gunner_left.name = undefined;
   gunner_spawner Delete();
+
   self.gunner_left LinkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
   self.gunner_right LinkTo(self, "tag_engineer", (0, 0, 0), (0, 0, 0));
   self thread anim_loop_solo(self.gunner_left, "firelloop", "tag_engineer", "stop_gunner_idle");
@@ -838,11 +1011,14 @@ fake_blister_gunners() {
 
 fake_blister_gunners_cleanup() {
   self waittill("cleanup blister gunners");
+
   self.gunner_left notify("stop_gunner_idle");
   self.gunner_right notify("stop_gunner_idle");
+
   if(isDefined(self.gunner_left)) {
     self.gunner_left Delete();
   }
+
   if(isDefined(self.gunner_right)) {
     self.gunner_right Delete();
   }
@@ -852,7 +1028,9 @@ disable_gunner_weapons_until_after_titlescreen() {
   for(i = 0; i < 4; i++) {
     self DisableGunnerFiring(i, true);
   }
+
   flag_wait("starting final intro screen fadeout");
+
   for(i = 0; i < 4; i++) {
     self DisableGunnerFiring(i, false);
   }
@@ -874,13 +1052,17 @@ load_fletcher_ship_names() {
 
 friendly_fire() {
   friendly_damage_max = 10;
+
   self.current_friendly_damage = 0;
   self thread friendly_fire_reduce();
+
   while(1) {
     self waittill("damage", amount, attacker);
+
     if(attacker == level.player) {
       self.current_friendly_damage += amount;
     }
+
     if(self.current_friendly_damage > friendly_damage_max) {
       thread maps\_friendlyfire::missionfail();
     }
@@ -889,16 +1071,17 @@ friendly_fire() {
 
 friendly_fire_reduce() {
   self endon("death");
+
   while(1) {
     if(self.current_friendly_damage > 0) {
       self.current_friendly_damage = self.current_friendly_damage - 250;
     } else if(self.current_friendly_damage < 0) {
       self.current_friendly_damage = 0;
     }
+
     wait(1);
   }
 }
-
 setup_seat_control(specific_seat) {
   if(!isDefined(specific_seat)) {
     self.current_seat = "undefined";
@@ -908,78 +1091,101 @@ setup_seat_control(specific_seat) {
     self.wanted_seat = "undefined";
   }
 }
-
 set_pilots_suggested_seat(suggested_seat, alternate_seat) {
   if(isDefined(self)) {
     self.pilots_suggested_seat = suggested_seat;
     self.pilots_alternate_seat = alternate_seat;
   }
 }
-
 move_to_required_seat() {
   if(!isDefined(self.in_saving_position)) {
     self.in_saving_position = false;
   }
+
   while(true) {
     while(!self useButtonPressed()) {
       wait(0.05);
     }
+
     if(isDefined(self.need_to_switch)) {
       if(self.need_to_switch) {
         if(self.in_saving_position) {
           self.in_saving_position = false;
         }
+
         while(level.player.save_anim) {
           wait(0.05);
         }
+
         self.need_to_switch = false;
         switch_successful = self switch_turret(self.required_seat);
+
         ASSERTEX(switch_successful, "The player was unable to switch to the required seat");
       }
     }
+
     if(isDefined(self.in_saving_position)) {
       if(self.in_saving_position) {
         self notify("perform_save");
         wait(2);
       }
     }
+
     wait(0.05);
   }
 }
 
 event1_new() {
   my_level_init();
+
   move_ev4(false);
+
   set_objective("scout_ocean");
+
   plane = level.plane_a;
+
   wait(2);
+
   level notify("start_fade_in");
   level thread music_state_changes();
+
   level.plane_a notify("start_mist");
   level.plane_b notify("start_mist");
+
   new_starting_node = GetVehicleNode("pby_a_level_start", "targetname");
   level.plane_a AttachPath(new_starting_node);
   level.plane_a thread maps\_vehicle::vehicle_paths(new_starting_node);
   level.plane_a StartPath();
+
   new_starting_node = GetVehicleNode("pby_b_level_start", "targetname");
   level.plane_b AttachPath(new_starting_node);
   level.plane_b thread maps\_vehicle::vehicle_paths(new_starting_node);
   level.plane_b StartPath();
+
   level thread event1_dialogue_2();
+
   level thread event2_pby_engine_control();
   level thread event2_boat_fx();
+
   wait(0.5);
+
   level.plane_a ResumeSpeed(1000);
   level.plane_b ResumeSpeed(1000);
+
   wait(5);
+
   level thread turret_ads_reminder();
+
   level waittill("move to front for intro");
   level thread event2_pby_b_1st_pass();
   level thread event2_strafe_boats();
   level.player scripted_turret_switch("pby_frontgun", true);
+
   wait(3);
   level notify("we should see the boats now");
+
   level waittill("event1 dialogue2 done");
+
   level.plane_a kill_pby_running_lights();
 }
 
@@ -998,10 +1204,13 @@ event1_pby_pontoons_up_hatch_open() {
 
 play_sound_over_radio(sound_ref) {
   radio_pos = level.plane_a GetTagOrigin("tag_engineer");
+
   radio = spawn("script_origin", radio_pos);
   radio setModel("tag_origin");
   radio LinkTo(level.plane_a, "tag_engineer", (0, 0, 0), (0, 0, 0));
+
   radio playSound(sound_ref, "radio_done");
+
   radio waittill("radio_done");
   radio Delete();
 }
@@ -1010,9 +1219,12 @@ play_survivor_yell(sound_ref, offset) {
   if(!isDefined(offset)) {
     offset = 60;
   }
+
   survivor = spawn("script_origin", self.origin + (0, 0, offset));
   survivor setModel("tag_origin");
+
   survivor playSound(sound_ref, "radio_done");
+
   survivor waittill("radio_done");
   survivor Delete();
 }
@@ -1020,6 +1232,7 @@ play_survivor_yell(sound_ref, offset) {
 event1_dialogue_2() {
   setmusicstate("INTRO");
   wait(2);
+
   play_sound_over_radio("PBY1_INT_000A_HARR");
   wait(0.25);
   anim_single_solo(level.plane_a.pilot, "booth_yeah_i_see_em");
@@ -1036,18 +1249,24 @@ event1_dialogue_2() {
   wait(0.15);
   anim_single_solo(level.plane_a.pilot, "booth_roger_that");
   anim_single_solo(level.plane_a.pilot, "booth_laughlin_locke_get_to");
+
   level notify("move to front for intro");
+
   level.player waittill("done_switching_turrets");
   wait(0.5);
   level.plane_b kill_pby_running_lights();
   level thread thumb_in_ass_dialogue();
   anim_single_solo(level.plane_a.pilot, "booth_open_fire");
+
   level thread event1_to_battle_stations();
   level waittill("told to go ventral");
   level anim_single_solo(level.plane_a.pilot, "booth_coming_over_them_get_rear");
+
   level.plane_a waittill("hatch_opening");
   wait(3);
+
   level notify("event1 dialogue2 done");
+
   level.plane_a waittill("infantry_dialogue");
   play_sound_over_radio("PBY1_IGD_010A_HARR");
   play_sound_over_radio("PBY1_IGD_011A_LAUG");
@@ -1055,10 +1274,12 @@ event1_dialogue_2() {
 
 thumb_in_ass_dialogue() {
   i = 0;
+
   while(!(level.player AttackButtonPressed()) && i < 6 && !flag("20mm_shot")) {
     i += 0.05;
     wait(0.05);
   }
+
   if(i >= 6) {
     anim_single_solo(level.plane_a.pilot, "booth_locke_get_your_thumb");
   }
@@ -1076,13 +1297,13 @@ event1_to_battle_stations() {
 jumpto_speed(new_speed) {
   self SetSpeedImmediate(new_speed, 0.1, 0.1);
 }
-
 turn_on_the_clouds() {
   cloud_fx = playloopedfx(level._effect["ambient_clouds"], 3, level.plane_a.origin, 0);
 }
 
 debug_watch_dead_zeros() {
   i = 0;
+
   while(1) {
     level waittill("zero_killed");
     i++;
@@ -1105,19 +1326,27 @@ damage_my_parts() {
 
 event3(jumpto) {
   level thread event3_dialogue();
+
   level.plane_b damage_my_parts();
+
   level waittill("player_needs_to_switch_turrets");
   level.player.pacing_moment = true;
   level.player scripted_turret_switch("pby_frontgun");
+
   level.plane_b thread ai_pby_gunners_think();
   level.player waittill("switching_turret");
+
   wait(4);
   level notify("light_night");
+
   level thread event4_pby_crashing();
+
   move_ev2(false);
   level.plane_a waittill("shoot_plane_b");
   level.plane_b notify("stop_shooting");
+
   move_ev4(true);
+
   level thread event4();
 }
 
@@ -1132,11 +1361,14 @@ event3_triggered_lightning(_wait) {
 event3_kamikaze_zero() {
   level.player waittill("switching_turret");
   level thread run_pby_tracker();
+
   plane = [];
   crash_paths = [];
+
   for(i = 0; i < 30; i++) {
     crash_paths[i] = GetVehicleNode("initial_zero_mass_" + i, "targetname");
   }
+
   for(i = 0; i < crash_paths.size; i++) {
     if(i > 0) {
       if(i % 9 == 0) {
@@ -1145,14 +1377,17 @@ event3_kamikaze_zero() {
     }
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
   }
+
   level.plane_a waittill("intercept_zeroes_00");
   level thread watch_for_player_shooting("player_shot_during_event3", "flag");
+
   crash_paths = [];
   crash_paths = GetVehicleNodeArray("pacing_intercept_00", "targetname");
   for(i = 0; i < crash_paths.size; i++) {
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
     wait(0.05);
   }
+
   level.plane_a waittill("intercept_zeroes_00a");
   crash_paths = [];
   crash_paths = GetVehicleNodeArray("pacing_intercept_00a", "targetname");
@@ -1160,6 +1395,7 @@ event3_kamikaze_zero() {
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
     wait(0.05);
   }
+
   level.plane_a waittill("intercept_zeroes_01");
   crash_paths = [];
   crash_paths = GetVehicleNodeArray("pacing_intercept_01", "targetname");
@@ -1167,6 +1403,7 @@ event3_kamikaze_zero() {
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
     wait(0.05);
   }
+
   level.plane_a waittill("more_planes");
   crash_paths = [];
   crash_paths = GetVehicleNodeArray("pacing_intercept_02", "targetname");
@@ -1174,6 +1411,7 @@ event3_kamikaze_zero() {
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
     wait(0.05);
   }
+
   level.plane_a waittill("intercept_zeroes_03");
   level thread make_sure_player_shot_during_event_3();
   crash_paths = [];
@@ -1182,6 +1420,7 @@ event3_kamikaze_zero() {
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
     wait(0.05);
   }
+
   level.plane_a waittill("shoot_plane_b");
   crash_paths = [];
   crash_paths = GetVehicleNodeArray("event3_ambient_kam_shoot_b", "targetname");
@@ -1189,14 +1428,17 @@ event3_kamikaze_zero() {
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
     wait(0.05);
   }
+
   level thread sharks_big_group();
   level.plane_a waittill("ptboat_l_to_r");
+
   crash_paths = [];
   crash_paths = GetVehicleNodeArray("event3_fly_just_above", "targetname");
   for(i = 0; i < crash_paths.size; i++) {
     plane[i] = spawn_and_path_a_zero(crash_paths[i], undefined, true);
     wait(0.05);
   }
+
   crash_paths = [];
   crash_paths = GetVehicleNodeArray("event4_initial_flyover", "targetname");
   for(i = 0; i < crash_paths.size; i++) {
@@ -1207,20 +1449,26 @@ event3_kamikaze_zero() {
 
 make_sure_player_shot_during_event_3() {
   wait(4);
+
   level.zero_accuracy_override = undefined;
   while(!flag("player_shot_during_event3")) {
     level.zero_accuracy_override = true;
     wait(0.05);
   }
+
   level.zero_accuracy_override = undefined;
 }
 
 event3_plane_crash_set_switchnode(node_array1, node_array2) {
   self endon("death");
+
   ASSERTEX(node_array1.size == node_array2.size, "The Node Arrays Are Different Sizes");
+
   self thread event3_plane_crash_clear_switchnode();
+
   for(i = 0; i < node_array1.size; i++) {
     self waittill("set_my_switchnode");
+
     self.script_crashtypeoverride = "smash_into_other_plane";
     self.node1 = node_array1[i];
     self.node2 = node_array2[i];
@@ -1229,6 +1477,7 @@ event3_plane_crash_set_switchnode(node_array1, node_array2) {
 
 event3_plane_crash_clear_switchnode() {
   self endon("death");
+
   while(1) {
     self waittill("clear_my_switchnode");
     self.script_crashtypeoverride = "none";
@@ -1239,6 +1488,7 @@ event3_plane_crash_clear_switchnode() {
 
 event3_plane_crash_into_plane(other_plane) {
   self waittill("death");
+
   if(isDefined(other_plane)) {
     if(!IsAlive(other_plane)) {
       self.script_crashtypeoverride = "none";
@@ -1246,9 +1496,13 @@ event3_plane_crash_into_plane(other_plane) {
       self.node2 = undefined;
     }
   }
+
   self.crash_course = true;
+
   wait(0.1);
+
   self notify("crash setup done");
+
   if(isDefined(self.node1) && isDefined(self.node2)) {
     node = GetVehicleNode(self.node1, "targetname");
     snode = GetVehicleNode(self.node2, "targetname");
@@ -1257,7 +1511,6 @@ event3_plane_crash_into_plane(other_plane) {
 }
 
 #using_animtree("generic_human");
-
 event3_dialogue() {
   flag_set("disable_random_dialogue");
   play_sound_over_radio("PBY1_IGD_061A_HARR");
@@ -1265,7 +1518,9 @@ event3_dialogue() {
   anim_single_solo(level.plane_a.radioop, "landry_confirmed_harrington");
   wait(0.15);
   play_sound_over_radio("PBY1_IGD_063A_HARR");
+
   level thread maps\pby_fly_amb::play_zeros_track();
+
   level thread event3_kamikaze_zero();
   level notify("player_needs_to_switch_turrets");
   anim_single_solo(level.plane_a.radioop, "landry_oh_hell");
@@ -1277,11 +1532,14 @@ event3_dialogue() {
   anim_single_solo(level.plane_a.pilot, "booth_okay_locke_seal");
   anim_single_solo(level.plane_a.pilot, "booth_lets_go_get_our_men");
   flag_clear("disable_random_dialogue");
+
   set_objective("respond_to_distress_call");
+
   if(level.player.current_seat != "pby_frontgun") {
     level.player waittill("done_switching_turrets");
   }
   wait(1);
+
   setmusicstate("ZEROS_ONE");
   flag_set("disable_random_dialogue");
   play_sound_over_radio("PBY1_IGD_070A_HARR");
@@ -1291,38 +1549,46 @@ event3_dialogue() {
   wait(1);
   anim_single_solo(level.plane_a.pilot, "booth_radio_the_fleet");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("intercept_zeroes_00");
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_weve_got_zeros_coming_in_fast");
   anim_single_solo(level.plane_a.pilot, "booth_11_oclock");
   thread anim_single_solo(level.plane_a.pilot, "booth_low");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("intercept_zeroes_00a");
   wait(0.5);
   flag_set("disable_random_dialogue");
   play_sound_over_radio(level.scr_sound["laughlin"]["9_oclock"]);
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("intercept_zeroes_01");
   wait(0.5);
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_3_oclock");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("more_planes");
   wait(0.5);
   flag_set("disable_random_dialogue");
   play_sound_over_radio(level.scr_sound["laughlin"]["10_oclock"]);
   thread play_sound_over_radio(level.scr_sound["laughlin"]["high"]);
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("intercept_zeroes_03");
   wait(0.5);
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_12_oclock");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("shoot_plane_b");
   flag_set("disable_random_dialogue");
   play_sound_over_radio(level.scr_sound["laughlin"]["6_oclock"]);
   flag_clear("disable_random_dialogue");
+
   level waittill("plane_b_is_crashed");
+
   wait(2);
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_okay_people_the_fleet_needs");
@@ -1331,6 +1597,7 @@ event3_dialogue() {
   anim_single_solo(level.plane_a.pilot, "booth_didnt_think_so");
   wait(0.5);
   anim_single_solo(level.plane_a.pilot, "booth_were_going_into_a_hotzone");
+
   anim_single_solo(level.plane_a.pilot, "booth_bastards_wiped_out_most");
   play_sound_over_radio("PBY1_IGD_086A_LAUG");
   wait(0.15);
@@ -1340,6 +1607,7 @@ event3_dialogue() {
   anim_single_solo(level.plane_a.radioop, "landry_we_better_not_be_the_only");
   anim_single_solo(level.plane_a.pilot, "booth_well_do_what_we_can");
   flag_clear("disable_random_dialogue");
+
   level thread event4_dialogue();
 }
 
@@ -1350,16 +1618,19 @@ event4_dialogue() {
   play_sound_over_radio(level.scr_sound["laughlin"]["2_oclock"]);
   play_sound_over_radio(level.scr_sound["laughlin"]["high"]);
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("switch_for_pby_pt");
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_incoming_right_side");
   wait(5);
   anim_single_solo(level.plane_a.radioop, "landry_sink_thos_damn_ptboats");
   flag_clear("disable_random_dialogue");
+
   level waittill("player_switched_to_left");
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_incoming_left_side");
   flag_clear("disable_random_dialogue");
+
   level waittill("the_other_gunner_died");
   wait(2);
   Earthquake(0.7, 1.0, level.plane_a.radioop.origin, 1000);
@@ -1368,6 +1639,7 @@ event4_dialogue() {
   flag_set("disable_random_dialogue");
   level.plane_a DoDamage(50000, level.plane_a.origin, level.player, 9);
   playsoundatposition("impact_boom", (0, 0, 0));
+
   anim_single_solo(level.plane_a.pilot, "booth_damn_were_hit");
   anim_single_solo(level.plane_a.pilot, "booth_laughlin_make_sure_were");
   wait(0.5);
@@ -1395,13 +1667,16 @@ event4_dialogue() {
 event4(jumpto) {
   level.plane_a ResumeSpeed(1000);
   level thread event2_cleanup();
+
   level thread maps\pby_fly_amb::destroyer1_alarm();
   level thread maps\pby_fly_amb::destroyer2_alarm();
   level thread maps\pby_fly_amb::destroyer3_alarm();
+
   watersimenable(true);
   level.drift_speed = 2.5;
   level.close_boat_sounds = true;
   level notify("debris_ready_delete");
+
   level thread event4_kamikaze_ship();
   level thread sharks_rescue_one();
   level thread event4_drowning_drones();
@@ -1411,15 +1686,20 @@ event4(jumpto) {
   level thread event4_ptboat_control();
   level thread event4_part2point5();
   level thread event4_part3();
+
   level.plane_a thread play_land_pby();
   level thread maps\pby_fly_fx::fog_for_rescue();
+
   level.plane_a waittill("switch_for_pby_pt");
   level thread event4_random_zeros();
   level thread event4_seat_control();
+
   level thread rescue_scene_init_1();
+
   level.plane_a waittill("guy_start_swimming");
   level notify("spawn_first_ship_drones");
   level thread run_debug_timer();
+
   set_objective("save_sailors");
   level thread event4_cleanup_swimmers(level.survivors_group_1, "rescue_1_done");
   for(i = 0; i < level.survivors_group_1.size; i++) {
@@ -1427,11 +1707,15 @@ event4(jumpto) {
     level.survivors_group_1[i] thread rescue_scenario();
     wait(0.1);
   }
+
   level.plane_a notify("completely_stopped");
   level.plane_a thread pby_veh_idle("float");
+
   level thread event4_watch_early_switch();
+
   level.plane_a waittill("slowing_down");
   level thread rescue_scene_init_2();
+
   level.plane_a waittill("survivor_2_go");
   level thread event4_cleanup_swimmers(level.survivors_group_2, "rescue_2_done");
   for(i = 0; i < level.survivors_group_2.size; i++) {
@@ -1439,6 +1723,7 @@ event4(jumpto) {
     level.survivors_group_2[i] thread rescue_scenario();
     wait(0.1);
   }
+
   level.plane_a waittill("shinyou_blow_up");
   level notify("end random zeros");
   level notify("stop_zeroes_defending_ship");
@@ -1448,7 +1733,9 @@ event4_watch_early_switch() {
   while(!flag("zero_rescue_1_dead")) {
     wait(0.1);
   }
+
   level.plane_a notify("speeding_up");
+
   level.plane_a SetSpeed(10, 20, 20);
   level.plane_a waittill("speeding_up");
   level.plane_a ResumeSpeed(20);
@@ -1456,6 +1743,7 @@ event4_watch_early_switch() {
 
 event4_rescue_zeros() {
   level endon("rescue_1_done");
+
   plane = undefined;
   plane_paths = [];
   plane_paths[0] = GetVehicleNode("zero_attack_rescue_0", "targetname");
@@ -1464,28 +1752,38 @@ event4_rescue_zeros() {
   plane_paths[3] = GetVehicleNode("zero_attack_rescue_3", "targetname");
   plane_paths[4] = GetVehicleNode("zero_attack_rescue_4", "targetname");
   plane_paths[5] = GetVehicleNode("zero_attack_rescue_5", "targetname");
+
   last_spline = 0;
+
   for(;;) {
     random_int = RandomInt(plane_paths.size);
     if(random_int == last_spline) {
       continue;
     }
+
     last_spline = random_int;
     random_path = plane_paths[random_int];
+
     plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
     plane.vehicletype = "zero";
     maps\_vehicle::vehicle_init(plane);
+
     plane AttachPath(random_path);
     plane thread maps\_vehicle::vehicle_paths(random_path);
     plane StartPath();
+
     random_speed = RandomIntRange(110, 160);
     plane SetSpeed(random_speed, 1000, 1000);
+
     plane thread event4_kamikaze_path_explode();
+
     plane.audio_node_propzero = spawn("script_model", plane.origin);
     plane.audio_node_propzero setModel("tag_origin");
     plane.audio_node_propzero LinkTo(plane, "tag_origin", (0, 0, 0), (0, 0, 0));
+
     plane playLoopSound("zero_steady");
     plane thread maps\pby_fly_amb::play_plane_passby(plane);
+
     random_wait = RandomFloatRange(5, 10);
     wait(random_wait);
   }
@@ -1493,28 +1791,37 @@ event4_rescue_zeros() {
 
 event4_random_zeros() {
   level endon("end random zeros");
+
   plane = [];
   plane_paths = [];
   plane_paths = GetVehicleNodeArray("event4_ambient_zero_spline", "targetname");
+
   while(1) {
     my_random_int = RandomIntRange(2, 5);
+
     for(i = 0; i < my_random_int; i++) {
       rand_spline = RandomIntRange(0, plane_paths.size - 1);
       plane[i] = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
       plane[i].vehicletype = "zero";
       maps\_vehicle::vehicle_init(plane[i]);
+
       plane[i] AttachPath(plane_paths[rand_spline]);
       plane[i] thread maps\_vehicle::vehicle_paths(plane_paths[rand_spline]);
       plane[i] StartPath();
+
       plane[i] thread event4_kamikaze_path_explode();
+
       plane[i].audio_node_propzero = spawn("script_model", plane[i].origin);
       plane[i].audio_node_propzero setModel("tag_origin");
       plane[i].audio_node_propzero LinkTo(plane[i], "tag_origin", (0, 0, 0), (0, 0, 0));
+
       plane[i] playLoopSound("zero_steady");
       plane[i] thread maps\pby_fly_amb::play_plane_passby(plane[i]);
+
       random_wait = RandomFloatRange(2, 3);
       wait(random_wait);
     }
+
     wait(5);
   }
 }
@@ -1526,18 +1833,22 @@ event4_seat_control() {
   wait(1.0);
   level notify("sun_rise");
   level notify("stop lightning");
+
   level.plane_a waittill("speeding_up");
   level.player thread scripted_turret_switch("pby_leftgun");
   level.player waittill("done_switching_turrets");
   level notify("player_switched_to_left");
   level notify("rescue_1_done");
   level thread event4_kamikaze_filler();
+
   level.plane_a waittill_flag_or_notify("rescue_2_3rd_ptboats_killed", "speeding_up_3");
   level notify("the_other_gunner_died");
+
   level waittill("pilot_said_front");
   level.plane_a thread set_speed_then_reset(10, "event4_twopointfive");
   level.player thread scripted_turret_switch("pby_frontgun");
   level.player waittill("switching_turret");
+
   level.player waittill("done_switching_turrets");
   level notify("rescue_2_done");
 }
@@ -1573,7 +1884,9 @@ event4_part1_transition_boats() {
   ptboat_paths = [];
   ptboat_paths[0] = GetVehicleNode("event4_transboat_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("event4_transboat_1", "targetname");
+
   the_ptboat = undefined;
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboat = spawn_and_path_a_ptboat(ptboat_paths[i]);
   }
@@ -1582,6 +1895,7 @@ event4_part1_transition_boats() {
 event4_drowning_drones() {
   treading_drones_spawn = [];
   treading_drones_spawn = GetStructArray("rescue1_treadwater_drone", "targetname");
+
   treading_drones = [];
   for(i = 0; i < treading_drones_spawn.size; i++) {
     treading_drones[i] = maps\_drone::drone_scripted_spawn("actor_ally_us_navy_wet_sailor", treading_drones_spawn[i]);
@@ -1592,54 +1906,75 @@ event4_drowning_drones() {
 
 event4_raft_drones() {
   level.plane_a waittill("overhead_flyby");
+
   raft_drones_spawn = [];
   raft_drones_spawn = GetStructArray("rescue_1_raft_drones", "targetname");
+
   raft_drones = [];
   for(i = 0; i < raft_drones_spawn.size; i++) {
     raft_drones[i] = maps\_drone::drone_scripted_spawn("actor_ally_us_navy_wet_sailor", raft_drones_spawn[i]);
     wait(0.05);
   }
+
   raft = GetEnt("rescue_1_raft", "targetname");
   level thread maps\_drone::drone_idle_row_boat(raft_drones, raft);
+
   goal_struct = GetStruct(raft.target, "targetname");
+
   raft MoveTo(goal_struct.origin, 60, 10, 10);
+
   raft_drones_spawn = [];
   raft_drones_spawn = GetStructArray("rescue_1_raft_drones_b", "targetname");
+
   raft_drones = [];
   for(i = 0; i < raft_drones_spawn.size; i++) {
     raft_drones[i] = maps\_drone::drone_scripted_spawn("actor_ally_us_navy_wet_sailor", raft_drones_spawn[i]);
     wait(0.05);
   }
+
   raft = GetEnt("rescue_1_raft_b", "targetname");
   level thread maps\_drone::drone_idle_row_boat(raft_drones, raft);
+
   goal_struct = GetStruct(raft.target, "targetname");
+
   raft MoveTo(goal_struct.origin, 60, 10, 10);
+
   raft_drones_spawn = [];
   raft_drones_spawn = GetStructArray("rescue_1_raft_drones_c", "targetname");
+
   raft_drones = [];
   for(i = 0; i < raft_drones_spawn.size; i++) {
     raft_drones[i] = maps\_drone::drone_scripted_spawn("actor_ally_us_navy_wet_sailor", raft_drones_spawn[i]);
     wait(0.05);
   }
+
   raft = GetEnt("rescue_1_raft_c", "targetname");
   level thread maps\_drone::drone_idle_row_boat(raft_drones, raft);
+
   goal_struct = GetStruct(raft.target, "targetname");
+
   raft MoveTo(goal_struct.origin, 60, 10, 10);
 }
 
 event4_first_ship_drones() {
   level waittill("spawn_first_ship_drones");
+
   standing_drones_spawn = [];
   standing_drones_spawn = GetStructArray("destroyer_1_stand_drone", "targetname");
+
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
     standing_drones[i] = maps\_drone::drone_scripted_spawn("actor_ally_us_navy_wet_sailor", standing_drones_spawn[i]);
+
     standing_drones[i] thread maps\_drone::drone_fire_at_vehicle_type("jap_ptboat", 3000);
     wait(0.05);
   }
+
   level waittill("spawn_first_ship_drones");
+
   standing_drones_spawn = [];
   standing_drones_spawn = GetStructArray("destroyer_1_stand_drone_2", "targetname");
+
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
     standing_drones[i] = maps\_drone::drone_scripted_spawn("actor_ally_us_navy_wet_sailor", standing_drones_spawn[i]);
@@ -1652,36 +1987,45 @@ kamikaze_sound() {
   self waittill("kamikaze_sound");
   self playSound("kamikazi_incoming");
 }
-
 event4_kamikaze_ship() {
   level.plane_a waittill("kamikaze_1");
+
   for(i = 1; i < 4; i++) {
     plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
     plane.vehicletype = "zero";
     maps\_vehicle::vehicle_init(plane);
+
     crash_path = GetVehicleNode("kamikaze_" + i, "targetname");
     plane AttachPath(crash_path);
+
     plane thread maps\_vehicle::vehicle_paths(crash_path);
     plane StartPath();
     plane thread kamikaze_sound();
+
     if(i == 2) {
       plane thread event4_kamikaze_path_explode(true);
       plane thread fletcher_animation("kamikazed_ship", 2);
     } else {
       plane thread event4_kamikaze_path_explode();
     }
+
     if(i == 1) {
       plane thread fletcher_animation("kamikazed_ship", 0);
     } else if(i == 3) {
       plane thread fletcher_animation("kamikazed_ship", 1);
     }
+
     wait(0.7 + (RandomFloatRange(0.1, 0.5) * i));
   }
+
   level thread event4_kamikaze_ship_response();
+
   level.plane_a waittill("kamikaze_2");
+
   plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
+
   crash_path = GetVehicleNode("kamikaze_drones", "targetname");
   plane AttachPath(crash_path);
   plane thread maps\_vehicle::vehicle_paths(crash_path);
@@ -1695,20 +2039,25 @@ event4_kamikaze_filler() {
   plane.vehicletype = "zero";
   plane.dont_target = true;
   maps\_vehicle::vehicle_init(plane);
+
   crash_path = GetVehicleNode("filler_kamikaze", "targetname");
   plane AttachPath(crash_path);
   plane thread maps\_vehicle::vehicle_paths(crash_path);
   plane StartPath();
   plane playSound("kamakazi_incoming");
   plane thread fletcher_animation("kamikazed_ship", 3);
+
   plane thread event4_kamikaze_path_explode(true);
+
   crash_paths = [];
   crash_paths[0] = GetVehicleNode("zero_attack_filler_0", "targetname");
   crash_paths[1] = GetVehicleNode("zero_attack_filler_1", "targetname");
+
   for(i = 0; i < crash_paths.size; i++) {
     plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
     plane.vehicletype = "zero";
     maps\_vehicle::vehicle_init(plane);
+
     plane AttachPath(crash_paths[i]);
     plane thread maps\_vehicle::vehicle_paths(crash_paths[i]);
     plane StartPath();
@@ -1718,6 +2067,7 @@ event4_kamikaze_filler() {
 
 event4_kamikaze_ship_response() {
   level endon("stop_shooting_at_kamikazes");
+
   ship_gun_1 = [];
   ship_gun_1[0] = GetStruct("kamikaze_bullet_1_start", "targetname");
   ship_gun_1[1] = GetStruct("kamikaze_bullet_1_end", "targetname");
@@ -1732,8 +2082,10 @@ event4_kamikaze_ship_response() {
 event4_fire_response_gun(start, end) {
   level endon("stop_shooting_at_kamikazes");
   rand_value = 0;
+
   forward = anglesToForward(VectorToAngles(end - start));
   up = AnglesToUp(VectorToAngles(end - start));
+
   for(;;) {
     playFX(level._effect["aaa_tracer"], start, forward, up);
     rand_value = RandomFloatRange(0.24, 0.48);
@@ -1745,18 +2097,24 @@ event4_fleet_shoot() {
   ships = [];
   ships[0] = GetEnt("kamikazed_ship", "targetname");
   ships[1] = GetEnt("ship_number_2", "targetname");
+
   ships[0] thread fletcher_ai_biggun_think(ships[0].turret_1, ships[0].turret_1_barrel);
   ships[0] thread fletcher_ai_biggun_think(ships[0].turret_2, ships[0].turret_2_barrel);
   ships[0] thread fletcher_ai_biggun_think(ships[0].turret_4, ships[0].turret_4_barrel);
   ships[0] thread fletcher_ai_biggun_think(ships[0].turret_5, ships[0].turret_5_barrel);
+
   ships[1] thread fletcher_ai_biggun_think(ships[1].turret_3, ships[1].turret_3_barrel);
   ships[1] thread fletcher_ai_biggun_think(ships[1].turret_4, ships[1].turret_4_barrel);
   ships[1] thread fletcher_ai_biggun_think(ships[1].turret_5, ships[1].turret_5_barrel);
+
   level waittill("rescue_2_done");
+
   ships[0] notify("stop_big_guns");
   ships[1] notify("stop_big_guns");
+
   ships[2] = GetEnt("rescue_3_fletcher", "targetname");
   ships[3] = GetEnt("rescue_3_fletcher_b", "targetname");
+
   ships[2] thread fletcher_ai_biggun_think(ships[2].turret_1, ships[2].turret_1_barrel);
   ships[2] thread fletcher_ai_biggun_think(ships[2].turret_2, ships[2].turret_2_barrel);
   ships[2] thread fletcher_ai_biggun_think(ships[2].turret_3, ships[2].turret_3_barrel);
@@ -1771,15 +2129,20 @@ event4_fleet_shoot() {
 
 event4_kamikaze_path_explode(water) {
   self endon("death");
+
   self waittill("reached_end_node");
+
   self.nodeathfx = true;
   self.kamikaze = true;
+
   if(isDefined(water)) {
     self.impactwater = true;
   }
+
   if(!isDefined(self.impactwater)) {
     self thread event4_kamikaze_ship_animation();
   }
+
   level notify("stop_shooting_at_kamikazes");
   self notify("death");
 }
@@ -1792,17 +2155,21 @@ event4_kamikaze_end_fx() {
 event4_sinking_ship() {
   the_ship = GetEnt("sinking_ship", "targetname");
   the_pivot = GetEnt("sinking_ship_pivot", "targetname");
+
   the_ship LinkTo(the_pivot);
+
   level notify("the_ship_is_sinking");
   the_pivot RotateTo(the_pivot.angles + (-60, 0, 0), 90, 1, 1);
 }
 
 event4_part2point5_fake_deaths() {
   level.plane_a waittill("event4_twopointfive");
+
   path = [];
   path[0] = GetVehicleNode("ev4_fake_death_1", "targetname");
   path[1] = GetVehicleNode("ev4_fake_death_2", "targetname");
   path[2] = GetVehicleNode("ev4_fake_death_3", "targetname");
+
   crashed_zero = [];
   for(i = 0; i < path.size; i++) {
     crashed_zero[i] = thread spawn_and_path_a_zero(path[i], undefined, true, "break_me_now", true);
@@ -1812,28 +2179,39 @@ event4_part2point5_fake_deaths() {
 
 event4_part2point5() {
   level thread event4_part2point5_fake_deaths();
+
   level waittill("rescue_2_done");
+
   level thread event4_ptboat_rescue_2_cleanup();
+
   path = [];
+
   path[0] = GetVehicleNode("ev4_zero_rescue_25_0", "targetname");
   path[1] = GetVehicleNode("ev4_zero_rescue_25_1", "targetname");
   path[2] = GetVehicleNode("ev4_zero_rescue_25_2", "targetname");
+
   path[3] = GetVehicleNode("ev4_zero_rescue_25_3", "targetname");
   path[4] = GetVehicleNode("ev4_zero_rescue_25_4", "targetname");
   path[5] = GetVehicleNode("ev4_zero_rescue_25_5", "targetname");
+
   path[6] = GetVehicleNode("ev4_zero_rescue_25_6", "targetname");
   path[7] = GetVehicleNode("ev4_zero_rescue_25_7", "targetname");
   path[8] = GetVehicleNode("ev4_zero_rescue_25_8", "targetname");
+
   plane = [];
   for(i = 0; i < 3; i++) {
     plane[i] = spawn_and_path_a_zero(path[i], true, true);
   }
+
   wait(2);
+
   plane = [];
   for(i = 3; i < 6; i++) {
     plane[i] = spawn_and_path_a_zero(path[i], true, true);
   }
+
   wait(1);
+
   plane = [];
   for(i = 6; i < 9; i++) {
     plane[i] = spawn_and_path_a_zero(path[i], true, true);
@@ -1843,19 +2221,24 @@ event4_part2point5() {
 event4_part3() {
   level thread zero_strafe_sinking_pby();
   level thread corsairs_arrive();
+
   level.plane_a waittill("stall_node");
+
   fletcher = GetEnt("ship_number_2", "targetname");
   fletcher notify("stop firing");
   fletcher = GetEnt("kamikazed_ship", "targetname");
   fletcher notify("stop firing");
+
   new_fletcher = swap_model_for_fletcher("rescue_3_fletcher_c");
   new_fletcher thread fletcher_ai_biggun_think(fletcher.turret_1, fletcher.turret_1_barrel);
   new_fletcher thread fletcher_ai_biggun_think(fletcher.turret_2, fletcher.turret_2_barrel);
   new_fletcher thread fletcher_ai_biggun_think(fletcher.turret_3, fletcher.turret_3_barrel);
   new_fletcher thread fletcher_ai_biggun_think(fletcher.turret_4, fletcher.turret_4_barrel);
   new_fletcher thread fletcher_ai_biggun_think(fletcher.turret_5, fletcher.turret_5_barrel);
+
   level.plane_a notify("audio_plane_stop");
   level.plane_a SetSpeed(0, 100, 100);
+
   event6();
 }
 
@@ -1865,13 +2248,17 @@ event4_sound_notifies() {
   wait(1);
   level.plane_a thread maps\pby_fly_amb::stop_plane_prop_sounds();
   level.plane_b thread maps\pby_fly_amb::stop_plane_prop_sounds();
+
   level.plane_a waittill("pby_landed");
   level.plane_a thread maps\pby_fly_amb::stop_plane_wind_sounds();
+
   level.plane_a waittill("audio_plane_starting");
   level.plane_a thread maps\pby_fly_amb::setup_plane_sounds(true);
+
   level.plane_a waittill("audio_plane_stop");
   level.plane_a thread maps\pby_fly_amb::stop_plane_wind_sounds();
   level.plane_a thread maps\pby_fly_amb::stop_plane_prop_sounds();
+
   level.plane_a waittill("audio_plane_starting");
   level.plane_a thread maps\pby_fly_amb::setup_plane_sounds(true);
 }
@@ -1880,46 +2267,62 @@ event4_sound_notifies() {
 
 event4_pby_crashing() {
   level.plane_b waittill("being_shot_down");
+
   flag_set("disable_random_dialogue");
   level.plane_b.engine_fire = level.plane_b thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "prop_right_jnt");
   play_sound_over_radio("PBY1_IGD_075A_HARR");
+
   level.plane_b.engine_fire Delete();
   level.plane_b.engine_fire = level.plane_b thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg2"], "prop_right_jnt");
   level anim_single_solo(level.plane_a.pilot, "booth_your_number_two_engine_is");
   play_sound_over_radio("PBY1_IGD_077A_HARR");
   level thread anim_single_solo(level.plane_a.pilot, "booth_hold_it_together");
+
   thread play_sound_over_radio("PBY1_IGD_079A_HARR");
   wait(1);
+
   level.plane_b notify("cleanup blister gunners");
   plane_b_fake = spawn("script_model", level.plane_b.origin);
   plane_b_fake setModel("vehicle_usa_pby_exterior_blackcat");
   plane_b_fake.angles = level.plane_b.angles;
   plane_b_fake.animname = "pby";
   plane_b_fake UseAnimTree(#animtree);
+
   level.plane_b.engine_fire Unlink();
   level.plane_b.engine_fire LinkTo(plane_b_fake, "prop_right_jnt");
   plane_b_fake.engine_fire = level.plane_b.engine_fire;
+
   level.plane_b Hide();
   if(isDefined(level.plane_b.running_lights)) {
     level.plane_b.running_lights Delete();
   }
+
   if(isDefined(level.plane_b.engine_fx_left)) {
     level.plane_b.engine_fx_left Delete();
   }
+
   if(isDefined(level.plane_b.engine_fx_right)) {
     level.plane_b.engine_fx_right Delete();
   }
+
   level.plane_b.props_running = false;
   level.plane_b Delete();
+
   plane_b_fake.wing_sound_ent = spawn("script_model", plane_b_fake GetTagOrigin("pontoon_right_jnt"));
   plane_b_fake.wing_sound_ent setModel("tag_origin");
   plane_b_fake.wing_sound_ent LinkTo(plane_b_fake, "pontoon_right_jnt");
+
   plane_b_fake thread anim_single_solo(plane_b_fake, "crash2");
+
   plane_b_fake waittill("i exploded");
+
   level thread pby_b_hit_water(plane_b_fake);
   level anim_single_solo(level.plane_a.pilot, "booth_HARRINGTON");
+
   setmusicstate("LANDING");
+
   level waittill("we_lost_chesire");
+
   level anim_single_solo(level.plane_a.pilot, "booth_damnit_we_lost_cheshire");
   level anim_single_solo(level.plane_a.pilot, "were_on_our_own");
   level notify("plane_b_is_crashed");
@@ -1931,7 +2334,9 @@ pby_b_explosion(guy) {
   self.engine_explosion = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_explosion_ai"], "prop_right_jnt", undefined, (0, 180, 0));
   self playSound("pby_3p_die");
   self.wing_sound_ent playSound("pby_3p_wing_by");
+
   self notify("i exploded");
+
   wait(1);
   self.engine_trail = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg3"], "prop_right_jnt");
   wait(3);
@@ -1943,6 +2348,7 @@ pby_b_hit_water(plane_b_fake) {
     wait(0.05);
   }
   playFX(level._effect["zero_water"], plane_b_fake.origin);
+
   plane_b_fake Delete();
 }
 
@@ -1963,10 +2369,13 @@ spawn_and_path_a_ptboat(path, end_on_end, fire_on_drones, destructible_def, new_
       the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     }
   }
+
   the_ptboat.vehicletype = "jap_ptboat";
+
   if(isDefined(fire_on_drones)) {
     the_ptboat.shoot_at_drones = fire_on_drones;
   }
+
   maps\_vehicle::vehicle_init(the_ptboat);
   if(isDefined(destructible_def)) {
     the_ptboat.destructible_def = destructible_def;
@@ -1974,11 +2383,14 @@ spawn_and_path_a_ptboat(path, end_on_end, fire_on_drones, destructible_def, new_
   }
   the_ptboat AttachPath(path);
   the_ptboat thread maps\_vehicle::vehicle_paths(path);
+
   if(isDefined(end_on_end)) {
     the_ptboat thread ptboat_delete_at_end_of_path();
   }
+
   the_ptboat.has_engine_sound = true;
   the_ptboat playLoopSound("pt_engines");
+
   return the_ptboat;
 }
 
@@ -1986,22 +2398,28 @@ spawn_and_path_a_shark(path) {
   the_shark = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_shark.vehicletype = "jap_ptboat";
   the_shark.im_a_shark = true;
+
   maps\_vehicle::vehicle_init(the_shark);
+
   the_shark setCanDamage(false);
   the_shark AttachPath(path);
   the_shark thread maps\_vehicle::vehicle_paths(path);
   the_shark thread ptboat_delete_at_end_of_path();
   the_shark Hide();
+
   return the_shark;
 }
 
 ptboat_torpedo_watch() {
   self endon("death");
+
   forward = -168;
   up = 88;
   right = 96;
+
   for(;;) {
     self waittill("broken", recieved_notify);
+
     if(recieved_notify == "left_torpedo_destroyed" || recieved_notify == "right_torpedo_destroyed") {
       dmg_origin = self.origin + (anglesToForward(self.angles) * forward);
       if(recieved_notify == "right_torpedo_destroyed") {
@@ -2010,10 +2428,12 @@ ptboat_torpedo_watch() {
         dmg_origin = dmg_origin + (AnglesToRight(self.angles) * (right * -1));
       }
       dmg_origin = dmg_origin + (AnglesToUp(self.angles) * up);
+
       wait_float = RandomFloatRange(0.1, 0.2);
       wait(wait_float);
       RadiusDamage(dmg_origin, 500, 5000, 5000);
     }
+
     wait(0.05);
   }
 }
@@ -2022,10 +2442,12 @@ spawn_and_path_a_zero(path, kamikaze_explode, have_sound, damage_at_pathend, no_
   plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", (0, 0, 0), (0, 0, 0));
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
+
   ASSERTEX(isDefined(path), "No path defined for zero that just got spawned");
   plane AttachPath(path);
   plane thread maps\_vehicle::vehicle_paths(path);
   plane StartPath();
+
   if(isDefined(kamikaze_explode)) {
     if(isDefined(water)) {
       plane thread event4_kamikaze_path_explode(water);
@@ -2033,19 +2455,25 @@ spawn_and_path_a_zero(path, kamikaze_explode, have_sound, damage_at_pathend, no_
       plane thread event4_kamikaze_path_explode();
     }
   }
+
   if(isDefined(no_explode)) {
     plane.no_explode = true;
   }
+
   if(isDefined(have_sound)) {
     plane.audio_node_propzero = spawn("script_model", plane.origin);
     plane.audio_node_propzero setModel("tag_origin");
     plane.audio_node_propzero LinkTo(plane, "tag_origin", (0, 0, 0), (0, 0, 0));
+
     plane playLoopSound("zero_steady");
   }
+
   if(isDefined(damage_at_pathend)) {
     plane thread damage_at_end_of_path(10000, damage_at_pathend);
   }
+
   plane thread draw_debug_line_to_target_distance(level.plane_a);
+
   return plane;
 }
 
@@ -2053,12 +2481,14 @@ spawn_and_attach_shark() {
   shark = spawn("script_model", self.origin);
   shark setModel("greatwhite_shark");
   shark.angles = self.angles + (90, 0, 0);
+
   shark LinkTo(self);
   self Hide();
 }
 
 damage_at_end_of_path(dmg_amnt, dmg_notify) {
   self waittill(dmg_notify);
+
   self setCanDamage(true);
   RadiusDamage(self.origin, 200, dmg_amnt, dmg_amnt);
 }
@@ -2067,21 +2497,28 @@ spawn_and_path_a_corsair(path, shoot_my_turret_delay) {
   plane = SpawnVehicle("vehicle_usa_aircraft_f4ucorsair", "new_plane", "corsair", (0, 0, 0), (0, 0, 0));
   plane.vehicletype = "corsair";
   maps\_vehicle::vehicle_init(plane);
+
   ASSERTEX(isDefined(path), "No path defined for zero that just got spawned");
   plane AttachPath(path);
   plane thread maps\_vehicle::vehicle_paths(path);
   plane StartPath();
+
   plane thread corsair_spin_prop();
+
   plane.animname = "zero";
   plane thread anim_loop_solo(plane, "idle", undefined, "death");
+
   plane.audio_node_propzero = spawn("script_model", plane.origin);
   plane.audio_node_propzero setModel("tag_origin");
   plane.audio_node_propzero LinkTo(plane, "tag_prop", (0, 0, 0), (0, 0, 0));
+
   plane playLoopSound("zero_steady");
   plane thread maps\pby_fly_amb::play_zero_sounds(level.plane_a, level.plane_b);
+
   if(isDefined(shoot_my_turret_delay)) {
     plane thread corsair_fire(shoot_my_turret_delay);
   }
+
   return plane;
 }
 
@@ -2089,9 +2526,11 @@ corsair_fire(delay) {
   self endon("death");
   self endon("stop firing");
   self endon("shot_down_by_corsair");
+
   if(isDefined(delay)) {
     wait(delay);
   }
+
   while(1) {
     for(z = 0; z < 20; z++) {
       for(i = 0; i < 2; i++) {
@@ -2105,41 +2544,53 @@ corsair_fire(delay) {
 
 event4_ptboat_save_second_guy() {
   level.plane_a waittill("survivor_2_go");
+
   ptboat_paths = [];
   ptboat_paths[0] = GetVehicleNode("ev4_sg2_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("ev4_sg2_1", "targetname");
+
   the_ptboats = [];
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true);
     the_ptboats[i] StartPath();
   }
+
   level thread event4_ptboat_save_second_guy_track(the_ptboats);
 }
 
 event4_ptboat_save_second_guy_track(boat_array) {
   all_boats_dead = false;
+
   while(!all_boats_dead) {
     all_boats_dead = true;
+
     for(i = 0; i < boat_array.size; i++) {
       if(IsAlive(boat_array[i])) {
         all_boats_dead = false;
       }
     }
+
     wait(0.1);
   }
+
   level notify("all_story_boats_dead");
 }
 
 event4_ptboat_save_third_guy() {
   level.plane_a waittill("survivor_3_go");
+
   ptboat_paths = [];
   ptboat_paths[0] = GetVehicleNode("ev4_sg3_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("ev4_sg3_1", "targetname");
+
   the_ptboats = [];
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true);
     the_ptboats[i] StartPath();
   }
+
   level thread event4_ptboat_save_second_guy_track(the_ptboats);
 }
 
@@ -2150,6 +2601,7 @@ event4_ptboat_control() {
 
 event4_ptboat_rescue_2_dialog() {
   level waittill("rescue_2_dialog_1");
+
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_9_oclock");
   anim_single_solo(level.plane_a.pilot, "booth_keep_firing_on_those");
@@ -2162,14 +2614,19 @@ event4_ptboat_rescue_2_dialog() {
   wait(0.05);
   anim_single_solo(level.plane_a.pilot, "booth_not_yet_laughlin");
   flag_clear("disable_random_dialogue");
+
   flag_wait("rescue_2_2nd_ptboats_spawned");
+
   if(!flag("rescue_2_2nd_ptboats_killed")) {
     flag_set("disable_random_dialogue");
+
     play_sound_over_radio(level.scr_sound["laughlin"]["sons_of_bitches"]);
     play_sound_over_radio(level.scr_sound["laughlin"]["9_oclock"]);
     flag_clear("disable_random_dialogue");
   }
+
   flag_wait("rescue_2_3rd_ptboats_spawned");
+
   if(!flag("rescue_2_3rd_ptboats_killed")) {
     wait(4);
     flag_set("disable_random_dialogue");
@@ -2177,6 +2634,7 @@ event4_ptboat_rescue_2_dialog() {
     wait(0.15);
     play_sound_over_radio(level.scr_sound["laughlin"]["10_oclock"]);
     flag_clear("disable_random_dialogue");
+
     wait(5);
     if(!flag("rescue_2_3rd_ptboats_killed")) {
       anim_single_solo(level.plane_a.pilot, "booth_incoming_left_side");
@@ -2187,8 +2645,10 @@ event4_ptboat_rescue_2_dialog() {
 
 event4_ptboat_rescue_2_cleanup() {
   level notify("rescue_2_cleanup");
+
   trash_boats = [];
   trash_boats = getEntArray("rescue_2_ptboat", "targetname");
+
   for(i = 0; i < trash_boats.size; i++) {
     trash_boats[i] Delete();
   }
@@ -2197,59 +2657,78 @@ event4_ptboat_rescue_2_cleanup() {
 event4_ptboat_rescue_2() {
   level thread event4_ptboat_rescue_2_dialog();
   level.plane_a waittill("survivor_2_go");
+
   ptboats = [];
   ptboat_paths = [];
+
   ptboat_paths[0] = GetVehicleNode("rescue2_ptboat_surv_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("rescue2_ptboat_surv_1", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], undefined, undefined, true, "rescue_2_ptboat");
     ptboats[i] StartPath();
     ptboats[i].notify_level = true;
   }
+
   for(i = 0; i < ptboats.size; i++) {
     ptboats[i] thread manage_ptboat_target(level.survivors_group_2);
   }
+
   level notify("rescue_2_dialog_1");
+
   level waittill("ptboat_died");
   level waittill("ptboat_died");
   flag_set("rescue_2_2nd_ptboats_spawned");
+
   ptboats = [];
   ptboat_paths = [];
   ptboat_paths[0] = GetVehicleNode("rescue2_ptboat_surv_3", "targetname");
   ptboat_paths[1] = GetVehicleNode("rescue2_ptboat_surv_4", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, true, "rescue_2_ptboat");
+
     ptboats[i] StartPath();
     ptboats[i].my_path = ptboat_paths[i];
     ptboats[i].notify_level = true;
   }
+
   for(i = 0; i < ptboats.size; i++) {
     ptboats[i] thread manage_ptboat_target(level.survivors_group_2);
   }
+
   level thread event4_ptboat_rescue_2_zeros_spawn_b();
+
   wait(12);
   flag_set("rescue_2_2nd_ptboats_killed");
+
   level thread event4_ptboat_rescue_2_zeros_spawn_c();
   level thread zero_strafe_defending_boat();
+
   ptboats = [];
   ptboat_paths = [];
   ptboat_paths[0] = GetVehicleNode("rescue2_ptboat_surv_20", "targetname");
   ptboat_paths[1] = GetVehicleNode("rescue2_ptboat_surv_21", "targetname");
   ptboat_paths[2] = GetVehicleNode("rescue2_ptboat_surv_23", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, true, "rescue_2_ptboat");
     ptboats[i] StartPath();
     ptboats[i].my_path = ptboat_paths[i];
     ptboats[i].notify_level = true;
   }
+
   flag_set("rescue_2_3rd_ptboats_spawned");
+
   for(i = 0; i < ptboats.size; i++) {
     ptboats[i] thread manage_ptboat_target(level.survivors_group_2);
   }
+
   while(ptboats.size > 0) {
     ptboats = getEntArray("rescue_2_ptboat", "targetname");
     wait(0.1);
   }
+
   flag_set("rescue_2_3rd_ptboats_killed");
 }
 
@@ -2259,19 +2738,25 @@ event4_ptboat_rescue_2_zeros_spawn_b() {
   plane_paths[0] = GetVehicleNode("zero_attack_rescue2_1", "targetname");
   plane_paths[1] = GetVehicleNode("zero_attack_rescue2_0", "targetname");
   plane_paths[2] = GetVehicleNode("zero_attack_rescue2_2", "targetname");
+
   for(i = 0; i < plane_paths.size; i++) {
     plane[i] = spawn_and_path_a_zero(plane_paths[i], true, true);
+
     if(i == 0) {
       wait(1.5);
     }
   }
+
   wait(3);
+
   plane_paths[0] = GetVehicleNode("zero_attack_rescue2_2", "targetname");
   plane_paths[1] = GetVehicleNode("zero_attack_rescue2_3", "targetname");
   plane_paths[2] = GetVehicleNode("zero_attack_rescue2_1", "targetname");
   plane_paths[3] = GetVehicleNode("zero_attack_rescue2_0", "targetname");
+
   for(i = 0; i < plane_paths.size; i++) {
     plane[i] = spawn_and_path_a_zero(plane_paths[i], true, true);
+
     if(i == 0) {
       wait(1);
     } else if(i == 2) {
@@ -2283,6 +2768,7 @@ event4_ptboat_rescue_2_zeros_spawn_b() {
 event4_ptboat_rescue_2_zeros_spawn_c() {
   plane = undefined;
   plane_paths = [];
+
   plane_paths[0] = GetVehicleNode("zero_attack_rescue2_20", "targetname");
   plane_paths[1] = GetVehicleNode("zero_attack_rescue2_21", "targetname");
   plane_paths[2] = GetVehicleNode("zero_attack_rescue2_22", "targetname");
@@ -2292,8 +2778,10 @@ event4_ptboat_rescue_2_zeros_spawn_c() {
   plane_paths[6] = GetVehicleNode("zero_attack_rescue2_20", "targetname");
   plane_paths[7] = GetVehicleNode("zero_attack_rescue2_21", "targetname");
   plane_paths[8] = GetVehicleNode("zero_attack_rescue2_22", "targetname");
+
   for(i = 0; i < plane_paths.size; i++) {
     plane[i] = spawn_and_path_a_zero(plane_paths[i], true, true);
+
     if(i == 4) {
       wait(4);
     } else {
@@ -2306,37 +2794,50 @@ event4_ptboat_rescue_2_zeros_spawn_c() {
 event4_ptboat_ambush() {
   level thread event4_ptboat_ambush_dialogue();
   level.plane_a waittill("switch_for_pby_pt");
+
   wait(3);
+
   ptboats = [];
   ptboat_paths = [];
+
   ptboat_paths[0] = GetVehicleNode("ptboat_hunt_rescue_1", "targetname");
   ptboat_paths[1] = GetVehicleNode("ptboat_hunt_rescue_2", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, true);
     ptboats[i] StartPath();
     ptboats[i].notify_level = true;
   }
+
   for(i = 0; i < ptboats.size; i++) {
     ptboats[i] thread manage_ptboat_target(level.survivors_group_1);
   }
+
   level waittill("ptboat_died");
   level waittill("ptboat_died");
+
   ptboat_paths[0] = GetVehicleNode("ptboat_hunt_rescue_3", "targetname");
   ptboat_paths[1] = GetVehicleNode("ptboat_hunt_rescue_4", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, true);
     ptboats[i] StartPath();
     ptboats[i].notify_level = true;
   }
+
   for(i = 0; i < ptboats.size; i++) {
     ptboats[i] thread manage_ptboat_target(level.survivors_group_1);
   }
+
   ptboats[0] thread watch_ptboat_for_dialogue("rescue1_ptboat_incoming");
+
   plane = undefined;
   plane_paths = [];
   plane_paths[0] = GetVehicleNode("zero_attack_rescue_3", "targetname");
   plane_paths[1] = GetVehicleNode("zero_attack_rescue_5", "targetname");
+
   level notify("ambush_plane_dialogue");
+
   for(j = 0; j < 2; j++) {
     for(i = 0; i < plane_paths.size; i++) {
       plane[i] = spawn_and_path_a_zero(plane_paths[i], true, true);
@@ -2344,22 +2845,29 @@ event4_ptboat_ambush() {
     }
     wait(1.5);
   }
+
   while(IsAlive(plane[0]) || IsAlive(plane[1]) || IsAlive(ptboats[0]) || IsAlive(ptboats[1])) {
     wait(0.1);
   }
+
   flag_set("zero_rescue_1_dead");
 }
 
 event4_ptboat_ambush_dialogue() {
   level waittill("ambush_plane_dialogue");
   flag_set("disable_random_dialogue");
+
   anim_single_solo(level.plane_a.pilot, "booth_zeroes_exclamation");
   play_sound_over_radio(level.scr_sound["laughlin"]["3_oclock"]);
   play_sound_over_radio(level.scr_sound["laughlin"]["high"]);
+
   wait(1);
+
   anim_single_solo(level.plane_a.pilot, "booth_shit_more_ptboats");
   anim_single_solo(level.plane_a.pilot, "booth_5_oclock");
+
   wait(2);
+
   anim_single_solo(level.plane_a.radioop, "landry_this_is_blackcat");
   anim_single_solo(level.plane_a.radioop, "landry_the_fleet_is_down");
   anim_single_solo(level.plane_a.radioop, "landry_we_have_multiple");
@@ -2368,6 +2876,7 @@ event4_ptboat_ambush_dialogue() {
   anim_single_solo(level.plane_a.pilot, "booth_landry_any_word_on_that");
   anim_single_solo(level.plane_a.radioop, "landry_im_getting_nothing_on");
   anim_single_solo(level.plane_a.pilot, "booth_keep_trying_we_better_pray");
+
   flag_clear("disable_random_dialogue");
 }
 
@@ -2378,23 +2887,29 @@ watch_ptboat_for_dialogue(my_notify) {
 
 manage_ptboat_target(_targets) {
   self endon("death");
+
   for(i = 0; i < _targets.size; i++) {
     if(IsAlive(_targets[i]) && !isDefined(self.rescued)) {
       self.specific_target = _targets[i];
+
       while(IsAlive(self.specific_target)) {
         wait(0.2);
       }
     }
   }
+
   self.specific_target = level.plane_a;
 }
 
 event4_ptboat_first_wave() {
   level.plane_a waittill("pby_a_stop_1");
+
   ptboat_paths = [];
   ptboat_paths[0] = GetVehicleNode("ev4_sg2_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("ev4_sg2_1", "targetname");
+
   the_ptboats = [];
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, true);
     the_ptboats[i] StartPath();
@@ -2403,10 +2918,12 @@ event4_ptboat_first_wave() {
 
 event4_ptboat_second_wave() {
   level.plane_a waittill("speeding_up");
+
   ptboat_paths = [];
   for(i = 0; i < 4; i++) {
     ptboat_paths[i] = GetVehicleNode("event4_transboat_" + i, "targetname");
   }
+
   the_ptboats = [];
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, true);
@@ -2416,10 +2933,12 @@ event4_ptboat_second_wave() {
 
 event4_ptboat_third_wave() {
   level.plane_a waittill("slowing_down");
+
   ptboat_paths = [];
   for(i = 0; i < 3; i++) {
     ptboat_paths[i] = GetVehicleNode("event4_ptboat_surv2_" + i, "targetname");
   }
+
   the_ptboats = [];
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, true);
@@ -2429,16 +2948,19 @@ event4_ptboat_third_wave() {
 
 event4_ptboat_fourth_wave() {
   level.plane_a waittill("speeding_up_2");
+
   ptboat_paths = [];
   for(i = 0; i < 4; i++) {
     ptboat_paths[i] = GetVehicleNode("ev4_ptboat_fourth_wave_" + i, "targetname");
   }
+
   for(j = 0; j < 2; j++) {
     the_ptboats = [];
     for(i = 0; i < ptboat_paths.size; i++) {
       the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, true);
       the_ptboats[i] StartPath();
     }
+
     wait(13);
   }
 }
@@ -2446,73 +2968,98 @@ event4_ptboat_fourth_wave() {
 rescue_scenario() {
   self endon("got tired");
   self waittill("ready_to_be_saved");
+
   possible_player = level.undef;
   while(possible_player == level.undef) {
     wait(0.1);
     possible_player = is_there_a_player_in_seat(self.plane, self.side);
   }
+
   flag_set("saver_ready");
   possible_player.in_saving_position = true;
+
   possible_player waittill("perform_save");
+
   if(possible_player.in_transition || is_there_a_player_in_seat(self.plane, self.side) == level.undef) {
     return;
   }
+
   self notify("being saved");
   level notify("survivor_saved");
   level.plane_a notify("spotlight_off");
+
   self setCanDamage(false);
+
   possible_player thread play_rescue_animation(level.plane_a, self.side);
+
   idle_holder = self.plane.current_idle;
   self.plane pby_veh_idle("float_static");
+
   rand_val = 0;
   if(self.side == "left") {
     self.plane anim_single_solo(self, "rescue_over_left", "tag_blister_left_rescue");
   } else {
     self.plane anim_single_solo(self, "rescue_over_right", "tag_blister_right_rescue");
   }
+
   bunk_tag = get_empty_bunk(self.plane);
+
   self Hide();
   if(bunk_tag == "tag_bunk_left_bottom") {
     self Unlink();
     wait(0.5);
+
     self Show();
     self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+
     self.animname = "rescue_a_4";
     self.plane thread anim_loop_solo(self, "my_idle", "tag_engineer");
   } else if(bunk_tag == "tag_bunk_left_top") {
     self Unlink();
     wait(0.5);
+
     self Show();
     self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+
     self.animname = "rescue_a_3";
     self.plane thread anim_loop_solo(self, "my_idle", "tag_engineer");
   } else if(bunk_tag == "tag_bunk_right_bottom") {
     self Unlink();
     wait(0.5);
+
     self Show();
     self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+
     level.crash_guy = self;
     self.animname = "rescue_a_1";
     self.plane thread anim_loop_solo(self, "my_idle", "tag_engineer");
   } else {
     self Unlink();
     wait(0.5);
+
     self Show();
     self LinkTo(self.plane, "tag_engineer", (0, 0, 0), (0, 0, 0));
+
     self.animname = "rescue_a_2";
     self.plane thread anim_loop_solo(self, "my_idle", "tag_engineer");
   }
+
   level.survivor_save_count++;
+
   self notify("rescued");
   self.rescued = true;
+
   flag_clear("rescue_ready");
   flag_clear("saver_ready");
+
   self.plane pby_veh_idle(idle_holder);
 }
 
 play_rescue_animation(plane, side) {
   self.save_anim = true;
+
   plane UseBy(self);
+
   if(side == "left") {
     anim_str = "pby_left_rescue";
   } else {
@@ -2520,20 +3067,27 @@ play_rescue_animation(plane, side) {
   }
   startorg = getstartOrigin(plane.origin, plane.angles, level.scr_anim["player_hands"][anim_str]);
   startang = getstartAngles(plane.origin, plane.angles, level.scr_anim["player_hands"][anim_str]);
+
   player_hands = spawn_anim_model("player_hands");
+
   player_hands.origin = startorg;
   player_hands.angles = startang;
   player_hands LinkTo(plane, "origin_animate_jnt");
+
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
   self playerlinktoabsolute(player_hands, "tag_player");
+
   plane maps\_anim::anim_single_solo(player_hands, anim_str);
+
   player_hands thread delete_later();
+
   if(self.current_seat == "pby_leftgun") {
     plane usevehicle(self, 2);
   } else {
     plane usevehicle(self, 3);
   }
+
   self.save_anim = false;
 }
 
@@ -2544,6 +3098,7 @@ get_empty_bunk(plane) {
       return plane.bunks[i]["tag"];
     }
   }
+
   return ("tag_origin");
 }
 
@@ -2553,15 +3108,17 @@ is_there_a_player_in_seat(plane, seat) {
   } else {
     seat_wanted = "pby_rightgun";
   }
+
   if(level.player.current_seat == seat_wanted) {
     return level.player;
   }
+
   return level.undef;
 }
-
 rescue_scene_init_1() {
   surv_spawners = [];
   level.survivors_group_1 = [];
+
   surv_spawners[0] = GetEnt("survivor_rescue_1_0_a", "targetname");
   surv_spawners[1] = GetEnt("survivor_rescue_1_0_b", "targetname");
   surv_spawners[2] = GetEnt("survivor_rescue_1_0_c", "targetname");
@@ -2575,28 +3132,35 @@ rescue_scene_init_1() {
   surv_spawners[10] = GetEnt("survivor_rescue_1_0_k", "targetname");
   surv_spawners[11] = GetEnt("survivor_rescue_1_0_l", "targetname");
   surv_spawners[12] = GetEnt("survivor_rescue_1_0_m", "targetname");
+
   for(i = 0; i < surv_spawners.size; i++) {
     level.survivors_group_1[i] = surv_spawners[i] Stalingradspawn();
     level.survivors_group_1[i] thread survivor_init(level.plane_a, "_group_1", 0);
+
     attachSize = level.survivors_group_1[i] getAttachSize();
     level.survivors_group_1[i].gearstuff = [];
     for(j = 0; j < attachSize; j++) {
       level.survivors_group_1[i].gearstuff[j] = level.survivors_group_1[i] getAttachModelName(j);
     }
+
     surv_spawners[i] Delete();
   }
+
   amb_surv_spawners = getEntArray("ambient_rescue_1_0", "targetname");
+
   for(i = 0; i < amb_surv_spawners.size; i++) {
     level.amb_surv_group_1[i] = amb_surv_spawners[i] Stalingradspawn();
     level.amb_surv_group_1[i] thread survivor_init_ambient();
     amb_surv_spawners[i] Delete();
   }
+
   level thread event4_rescue_1_ambient_flee_pt();
 }
 
 event4_rescue_1_ambient_flee_pt() {
   goal_structs = [];
   goal_structs = GetStructArray("rescue_1_swimmers_goal", "targetname");
+
   for(i = 0; i < level.amb_surv_group_1.size; i++) {
     level.amb_surv_group_1[i] notify("stop treading");
     level.amb_surv_group_1[i] StopAnimScripted();
@@ -2608,14 +3172,17 @@ event4_rescue_1_ambient_flee_pt() {
 rescue_scene_init_2() {
   surv_spawners = [];
   level.survivors_group_2 = [];
+
   surv_spawners[0] = GetEnt("survivor_rescue_2_a", "targetname");
   surv_spawners[1] = GetEnt("survivor_rescue_2_b", "targetname");
   surv_spawners[2] = GetEnt("survivor_rescue_2_c", "targetname");
   surv_spawners[3] = GetEnt("survivor_rescue_2_d", "targetname");
   surv_spawners[4] = GetEnt("survivor_rescue_2_e", "targetname");
+
   for(i = 0; i < surv_spawners.size; i++) {
     level.survivors_group_2[i] = surv_spawners[i] Stalingradspawn();
     level.survivors_group_2[i] thread survivor_init(level.plane_a, "_group_1", 0);
+
     surv_spawners[i] Delete();
   }
 }
@@ -2623,9 +3190,12 @@ rescue_scene_init_2() {
 rescue_scene_init_3() {
   surv_spawners = [];
   surv_spawners = getEntArray("survivor_rescue_3", "targetname");
+
   level.survivors_group_3 = [];
+
   for(i = 0; i < surv_spawners.size; i++) {
     level.survivors_group_3[i] = surv_spawners[i] Stalingradspawn();
+
     level.survivors_group_3[i] thread survivor_init(level.plane_a, "_group_3", i);
     level.survivors_group_3[i] thread magic_bullet_shield();
     surv_spawners[i] Delete();
@@ -2637,7 +3207,9 @@ rescue_scene_init_3() {
 shark_init() {
   self.shark = spawn("script_model", self.origin + (0, 0, 200));
   self.shark setModel("greatwhite_shark2");
+
   self.shark LinkTo(self, "tag_origin", (0, 0, 500), (0, 0, 0));
+
   self.shark UseAnimTree(#animtree);
   self.shark.animname = "shark";
 }
@@ -2646,13 +3218,16 @@ survivor_init_ambient() {
   self.animname = "survivor";
   rand = RandomInt(level.scr_anim["survivor"]["swim_far"].size);
   self.run_noncombatanim = level.scr_anim["survivor"]["swim_far"][rand];
+
   self thread maps\pby_fly_fx::swim_splash_right();
   self thread maps\pby_fly_fx::swim_splash_left();
+
   self thread survivor_wave();
 }
 
 survivor_sounds() {
   self playLoopSound("pby_swim_loop");
+
   self thread survivor_sounds_hangon();
   self thread survivor_sounds_death();
 }
@@ -2660,9 +3235,11 @@ survivor_sounds() {
 survivor_sounds_hangon() {
   self endon("death");
   self waittill("ready_to_be_saved");
+
   self StopLoopSound();
   wait(0.05);
   self playLoopSound("pby_float_loop");
+
   self waittill("being saved");
   self StopLoopSound();
 }
@@ -2672,31 +3249,39 @@ survivor_sounds_death() {
   self waittill("death");
   self StopLoopSound();
 }
-
 survivor_init(plane, group, id, alternate_goal_pos, needs_to_run) {
   self endon("death");
+
   self thread survivor_burst();
   self thread survivor_sounds();
+
   self.plane = plane;
   self.side = self.script_noteworthy;
   self.animname = "survivor";
   self.idle = level.scr_anim["survivor"]["float_0"];
+
   self thread maps\pby_fly_fx::swim_splash_right();
   self thread maps\pby_fly_fx::swim_splash_left();
+
   if(isDefined(needs_to_run)) {
     self thread survivor_run_swim();
   } else {
     rand = RandomInt(level.scr_anim["survivor"]["swim_far"].size);
     self.run_noncombatanim = level.scr_anim["survivor"]["swim_far"][rand];
   }
+
   self.activity = "treading";
   self thread survivor_wave();
   self thread survivor_shout();
+
   self notify("inited");
   self waittill("swimming_notify");
+
   self StopAnimScripted();
+
   self.goalradius = 24;
   goal_pos = (0, 0, 0);
+
   if(isDefined(alternate_goal_pos)) {
     self.goal_pos = alternate_goal_pos;
     self SetGoalPos(alternate_goal_pos);
@@ -2704,11 +3289,14 @@ survivor_init(plane, group, id, alternate_goal_pos, needs_to_run) {
     self thread survivor_update_pos();
     self thread survivor_watch_for_goal();
   }
+
   self endon("goal");
+
   if(!isDefined(alternate_goal_pos)) {
     while(Distance2d(goal_pos, self.origin) > 32) {
       wait(1);
     }
+
     rand = RandomInt(level.scr_anim["survivor"]["swim_med"].size);
     self.run_noncombatanim = level.scr_anim["survivor"]["swim_med"][rand];
   }
@@ -2724,8 +3312,11 @@ survivor_shout() {
   self endon("death");
   self endon("being saved");
   self endon("got tired");
+
   self thread survivor_dialogue_inside();
+
   random_wait = 0;
+
   redshirt_yell = [];
   redshirt_yell[0] = "PBY1_IGD_110A_USR1";
   redshirt_yell[1] = "PBY1_IGD_111A_USR2";
@@ -2734,6 +3325,7 @@ survivor_shout() {
   redshirt_yell[4] = "PBY1_IGD_571A_USR1";
   redshirt_yell[5] = "PBY1_IGD_572A_USR2";
   redshirt_yell[6] = "PBY1_IGD_582A_USR3";
+
   hanging_yell = [];
   hanging_yell[0] = "PBY1_IGD_113A_USR1";
   hanging_yell[1] = "PBY1_IGD_114A_USR1";
@@ -2741,6 +3333,7 @@ survivor_shout() {
   hanging_yell[2] = "PBY1_IGD_577A_USR1";
   hanging_yell[2] = "PBY1_IGD_580A_USR1";
   hanging_yell[2] = "PBY1_IGD_581A_USR3";
+
   while(1) {
     while(!isDefined(self.switch_screams)) {
       random_wait = RandomInt(redshirt_yell.size);
@@ -2748,6 +3341,7 @@ survivor_shout() {
       random_wait = RandomFloatRange(2, 3);
       wait(random_wait);
     }
+
     while(1) {
       random_wait = RandomInt(hanging_yell.size);
       self play_survivor_yell(hanging_yell[random_wait]);
@@ -2760,13 +3354,16 @@ survivor_shout() {
 survivor_dialogue_inside() {
   self endon("death");
   self endon("got tired");
+
   self waittill("being saved");
+
   made_it_inside = [];
   made_it_inside[0] = "PBY1_IGD_573A_USR3";
   made_it_inside[0] = "PBY1_IGD_574A_USR1";
   made_it_inside[0] = "PBY1_IGD_575A_USR2";
   made_it_inside[0] = "PBY1_IGD_576A_USR3";
   made_it_inside[0] = "PBY1_IGD_578A_USR2";
+
   random_wait = RandomInt(made_it_inside.size);
   self play_survivor_yell(made_it_inside[random_wait], 0);
 }
@@ -2775,6 +3372,7 @@ survivor_update_pos() {
   self.activity = "swimming";
   self endon("goal");
   self endon("death");
+
   while(1) {
     if(self.side == "left") {
       self.goal_pos = getstartOrigin(self.plane GetTagOrigin("tag_blister_left_rescue"), self.plane GetTagAngles("tag_blister_left_rescue"), level.scr_anim["survivor"]["rescue_in_left"]);
@@ -2783,8 +3381,10 @@ survivor_update_pos() {
       self.goal_pos = getstartOrigin(self.plane GetTagOrigin("tag_blister_right_rescue"), self.plane GetTagAngles("tag_blister_right_rescue"), level.scr_anim["survivor"]["rescue_in_right"]);
       self.goal_pos = (self.goal_pos[0], self.goal_pos[1], 0);
     }
+
     self.goalradius = 32;
     self SetGoalPos(self.goal_pos);
+
     wait(1.0);
   }
 }
@@ -2792,34 +3392,42 @@ survivor_update_pos() {
 survivor_watch_for_goal() {
   self endon("death");
   self waittill("goal");
+
   while(flag("rescue_ready")) {
     random_int = RandomIntRange(0, 3);
     random_cycles = RandomIntRange(3, 5);
     for(i = 0; i < random_cycles && flag("rescue_ready"); i++) {
       self anim_single_solo(self, "float_" + random_int);
     }
+
     if(self.side == "left") {
       self.goal_pos = getstartOrigin(self.plane GetTagOrigin("tag_blister_left_rescue"), self.plane GetTagAngles("tag_blister_left_rescue"), level.scr_anim["survivor"]["rescue_in_left"]);
     } else {
       self.goal_pos = getstartOrigin(self.plane GetTagOrigin("tag_blister_right_rescue"), self.plane GetTagAngles("tag_blister_right_rescue"), level.scr_anim["survivor"]["rescue_in_right"]);
     }
+
     self.goalradius = 24;
     self SetGoalPos(self.goal_pos);
+
     self waittill("goal");
   }
+
   flag_set("rescue_ready");
   self thread survivor_hang_on();
+
   turret_rescue_hud_elem();
 }
 
 survivor_hang_on() {
   self endon("being saved");
   self endon("got tired");
+
   self.in_anim = "";
   self.loop_anim = "";
   self.over_anim = "";
   self.fall_anim = "";
   self.rescue_tag = "";
+
   if(self.side == "left") {
     self.in_anim = "rescue_in_left";
     self.loop_anim = "rescue_loop_left";
@@ -2833,40 +3441,53 @@ survivor_hang_on() {
     self.fall_anim = "rescue_fall_right";
     self.rescue_tag = "tag_blister_right_rescue";
   }
+
   self.switch_screams = true;
+
   self StopAnimScripted();
   self LinkTo(self.plane, self.rescue_tag);
   self.plane anim_single_solo(self, self.in_anim, self.rescue_tag);
+
   self thread survivor_fall_timer(10);
   self.hanging_on = true;
   level notify("swim_goal_reached");
   self notify("ready_to_be_saved");
+
   while(self.hanging_on) {
     self.plane anim_single_solo(self, self.loop_anim, self.rescue_tag);
   }
+
   if(isDefined(self.i_got_tired)) {}
 }
 
 event4_cleanup_swimmers(_guy_array, _waittill) {
   level waittill(_waittill);
+
   for(i = 0; i < _guy_array.size; i++) {
     if(isDefined(_guy_array[i])) {
       _guy_array[i] DoDamage(_guy_array[i].health + 1000, _guy_array[i].origin);
     }
   }
+
 }
 
 survivor_fall_timer(fall_time) {
   self endon("being saved");
+
   wait(fall_time);
   self notify("got tired");
   level notify("survivor_fell");
+
   flag_clear("rescue_ready");
   flag_clear("saver_ready");
+
   self Unlink();
   self.plane anim_single_solo(self, self.fall_anim, self.rescue_tag);
+
   self DoDamage(self.health + 1000, self.origin);
+
   wait(1);
+
   level.plane_a notify("spotlight_off");
 }
 
@@ -2874,18 +3495,21 @@ survivor_run_swim() {
   while(self.origin[2] > 0) {
     wait(0.05);
   }
+
   rand = RandomInt(level.scr_anim["survivor"]["swim_far"].size);
   self.run_noncombatanim = level.scr_anim["survivor"]["swim_far"][rand];
 }
-
 survivor_wave() {
   self endon("being saved");
   self endon("stop treading");
+
   if(!isDefined(self.activity)) {
     self.activity = "treading";
   }
+
   while(self.activity == "treading") {
     rand = RandomInt(8);
+
     if(rand < 4) {
       self anim_single_solo(self, "float_" + rand);
     } else {
@@ -2893,6 +3517,7 @@ survivor_wave() {
       self anim_single_solo(self, "wave_" + rand);
     }
   }
+
 }
 
 pby_out_of_ammo() {
@@ -2904,16 +3529,23 @@ pby_out_of_ammo() {
 
 event6() {
   level waittill("pby_player_take_off");
+
   flag_set("the level is done");
+
   maps\_debug::set_event_printname("Event 5 - Getaway", false);
   level.plane_a ResumeSpeed(1000);
+
   level.plane_a playSound("take_off");
+
   thread event6_dialog();
+
   thread event6_fletcher_swap();
   thread event6_escorting_corsairs();
+
   level.plane_a notify("pby_takeoff");
   level.plane_a notify("noteworthy", "pby_takeoff");
   level thread event6_pontoons_up();
+
   level waittill("finish the mission");
   wait(5);
   nextmission();
@@ -2921,6 +3553,7 @@ event6() {
 
 event6_pontoons_up() {
   level waittill("finish the mission");
+
   wait(3);
   level.plane_a SetFlaggedAnimKnobAllRestart("pby_pontoon_up", %v_pby_pontoon_up, %pby_pontoons, 1, 0.1, 1);
   animation_time = getAnimLength(%v_pby_pontoon_up);
@@ -2930,7 +3563,9 @@ event6_pontoons_up() {
 
 event6_escorting_corsairs() {
   level.plane_a waittill("spawn_corsair_escort");
+
   corsair_paths = GetVehicleNodeArray("corsair_escort", "targetname");
+
   corsairs = [];
   for(i = 0; i < corsair_paths.size; i++) {
     corsair[i] = spawn_and_path_a_corsair(corsair_paths[i]);
@@ -2939,20 +3574,26 @@ event6_escorting_corsairs() {
 
 event6_dialog() {
   flag_set("disable_random_dialogue");
+
   play_sound_over_radio(level.scr_sound["corsair"]["vpb_54_havok_26_coming_in_on_your_9"]);
   wait(0.1);
   play_sound_over_radio(level.scr_sound["corsair"]["well_take_it_from_here"]);
   wait(0.1);
   play_sound_over_radio(level.scr_sound["corsair"]["get_yourselves_back_to_base"]);
+
   wait(1);
+
   anim_single_solo(level.plane_a.pilot, "booth_landry_prep_for_takeoff");
   wait(0.1);
   anim_single_solo(level.plane_a.pilot, "booth_laughlin_patch_us_up_as_best");
   wait(0.1);
+
   anim_single_solo(level.plane_a.pilot, "booth_okay_taking_her_up");
   wait(0.1);
   anim_single_solo(level.plane_a.pilot, "booth_how_did_we_do");
+
   wait(0.2);
+
   if(level.survivor_save_count == 6) {
     anim_single_solo(level.plane_a.radioop, "landry_bunks_are_full");
   } else if(level.survivor_save_count == 5) {
@@ -2968,10 +3609,14 @@ event6_dialog() {
   } else if(level.survivor_save_count == 0) {
     anim_single_solo(level.plane_a.radioop, "landry_we_struck_out");
   }
+
   wait(2);
   anim_single_solo(level.plane_a.pilot, "booth_comin_around");
+
   wait(1);
+
   play_sound_over_radio("PBY1_IGD_316B_LAUG");
+
   level notify("finish the mission");
 }
 
@@ -2985,7 +3630,9 @@ event6_ptboat_control() {
   ptboats = [];
   ptboat_paths = [];
   ptboat_paths = GetVehicleNodeArray("ev6_pt_boats", "targetname");
+
   level.plane_a waittill("spawn_ev6_ptboats");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, true);
     ptboats[i] StartPath();
@@ -2997,7 +3644,9 @@ event6_spawn_getaway_zeros_1() {
   level.plane_a waittill("spawn_left1_zero");
   plane = undefined;
   plane_path = [];
+
   plane_path[0] = GetVehicleNode("ev6_left1_zero1", "targetname");
+
   plane = thread spawn_and_path_a_zero(plane_path[0], true, true);
 }
 
@@ -3005,20 +3654,24 @@ event6_spawn_getaway_zeros_2() {
   level.plane_a waittill("spawn_right1_zero");
   plane = undefined;
   plane_paths = [];
+
   plane_paths[0] = GetVehicleNode("ev6_right1_zero1", "targetname");
   plane_paths[1] = GetVehicleNode("ev6_right1_zero2", "targetname");
   plane_paths[2] = GetVehicleNode("ev6_right1_zero3", "targetname");
+
   plane = [];
   for(i = 0; i < plane_paths.size; i++) {
     plane[i] = thread spawn_and_path_a_zero(plane_paths[i], true, true);
     wait(1);
   }
+
   level.plane_a waittill("spawn_right1_zerob");
   plane = [];
   plane_paths = [];
   plane_paths[0] = GetVehicleNode("ev6_right1_zero4", "targetname");
   plane_paths[1] = GetVehicleNode("ev6_right1_zero5", "targetname");
   plane_paths[2] = GetVehicleNode("ev6_right1_zero6", "targetname");
+
   for(i = 0; i < plane_paths.size; i++) {
     plane[i] = thread spawn_and_path_a_zero(plane_paths[i], true, true);
     wait(0.05);
@@ -3029,9 +3682,11 @@ event6_spawn_getaway_zeros_3() {
   level.plane_a waittill("spawn_left2_zero");
   plane = undefined;
   plane_paths = [];
+
   plane_paths[0] = GetVehicleNode("ev6_left2_zero1", "targetname");
   plane_paths[1] = GetVehicleNode("ev6_left2_zero2", "targetname");
   plane_paths[2] = GetVehicleNode("ev6_left2_zero3", "targetname");
+
   plane = [];
   for(i = 0; i < plane_paths.size; i++) {
     plane[i] = thread spawn_and_path_a_zero(plane_paths[i], true, true);
@@ -3041,24 +3696,32 @@ event6_spawn_getaway_zeros_3() {
 
 event6_spawn_getaway_zeros_3point5() {
   level waittill("spawn_ev6_fly_under");
+
   plane = undefined;
   plane_paths = [];
+
   plane_paths[0] = GetVehicleNode("ev6_right2_zero4", "targetname");
   plane_paths[1] = GetVehicleNode("ev6_right2_zero5", "targetname");
   plane_paths[2] = GetVehicleNode("ev6_right2_zero6", "targetname");
+
   plane_paths[3] = GetVehicleNode("ev6_right2_zero1", "targetname");
   plane_paths[4] = GetVehicleNode("ev6_right2_zero2", "targetname");
   plane_paths[5] = GetVehicleNode("ev6_right2_zero3", "targetname");
+
   plane_paths[6] = GetVehicleNode("ev6_right2_zero7", "targetname");
   plane_paths[7] = GetVehicleNode("ev6_right2_zero8", "targetname");
+
   plane_paths[8] = GetVehicleNode("ev6_right2_zero9", "targetname");
   plane_paths[9] = GetVehicleNode("ev6_right2_zero10", "targetname");
+
   plane = [];
   for(i = 0; i < 3; i++) {
     plane[i] = thread spawn_and_path_a_zero(plane_paths[i], true, true);
     wait(0.05);
   }
+
   level.plane_a waittill("spawn_last_zeros");
+
   for(i = 3; i < plane_paths.size; i++) {
     plane[i] = thread spawn_and_path_a_zero(plane_paths[i], true, true);
     wait(0.05);
@@ -3069,9 +3732,11 @@ event6_spawn_getaway_zeros_4() {
   level.plane_a waittill("spawn_last_zeros");
   plane = undefined;
   plane_paths = [];
+
   for(i = 0; i < 12; i++) {
     plane_paths[i] = GetVehicleNode("ev6_final_zero" + i, "targetname");
   }
+
   plane = [];
   for(i = 0; i < plane_paths.size; i++) {
     if(i == 4 || i == 9 || i == 11) {
@@ -3082,54 +3747,65 @@ event6_spawn_getaway_zeros_4() {
       plane[i] setCanDamage(false);
     }
   }
+
   wait(4);
+
   plane_paths = [];
   plane_paths = GetVehicleNodeArray("ev6_final_corsair", "targetname");
   corsair = [];
   for(i = 0; i < plane_paths.size; i++) {
     corsair[i] = spawn_and_path_a_corsair(plane_paths[i]);
   }
+
   wait(18);
+
   level notify("finish the mission");
 }
 
 event6_seat_control() {
   level.plane_a waittill("switch_to_left");
   level.player scripted_turret_switch("pby_leftgun", true);
+
   level.plane_a waittill("switch_to_right");
   level.player scripted_turret_switch("pby_rightgun", true);
+
   level.plane_a waittill("switch_to_left");
   level.player scripted_turret_switch("pby_leftgun", true);
+
   level.plane_a waittill("switch_to_right");
   level notify("spawn_ev6_fly_under");
   level.player scripted_turret_switch("pby_rightgun", true);
 }
-
 player_pby_init(plane_name, crew_id) {
   plane = GetEnt(plane_name, "targetname");
   plane.plane_name = plane_name;
   plane.crew_id = crew_id;
+
   plane.front = "empty";
   plane.left = "empty";
   plane.right = "empty";
   plane.back = "empty";
+
   plane.bunks = [];
   plane.bunks[0]["status"] = "empty";
   plane.bunks[1]["status"] = "empty";
   plane.bunks[2]["status"] = "empty";
   plane.bunks[3]["status"] = "empty";
+
   plane.bunks[0]["tag"] = "tag_bunk_left_bottom";
   plane.bunks[1]["tag"] = "tag_bunk_left_top";
   plane.bunks[2]["tag"] = "tag_bunk_right_bottom";
   plane.bunks[3]["tag"] = "tag_bunk_right_top";
+
   plane pby_crew_init(plane_name);
+
   if(plane_name == "player_plane_a") {
     plane thread pby_crew_idles();
   }
   plane thread pby_prop_fx();
+
   return (plane);
 }
-
 pby_prop_fx() {
   self.props_running = true;
   self thread pby_spin_prop();
@@ -3137,9 +3813,11 @@ pby_prop_fx() {
 
 pby_spin_prop() {
   self endon("death");
+
   while(self.props_running) {
     playFXOnTag(level._effect["prop_full"], self, "prop_left_jnt");
     playFXOnTag(level._effect["prop_full"], self, "prop_right_jnt");
+
     wait(0.1);
   }
 }
@@ -3147,8 +3825,10 @@ pby_spin_prop() {
 corsair_spin_prop() {
   self endon("hide_prop");
   self endon("death");
+
   while(1) {
     playFXOnTag(level._effect["corsair_prop_full"], self, "tag_prop");
+
     wait(0.1);
   }
 }
@@ -3156,35 +3836,41 @@ corsair_spin_prop() {
 zero_spin_prop() {
   self endon("hide_prop");
   self endon("death");
+
   while(1) {
     playFXOnTag(level._effect["zero_prop_full"], self, "tag_prop_fx");
+
     wait(0.1);
   }
 }
-
 pby_crew_init(plane_name) {
   if(plane_name == "player_plane_a") {
     pby_ok_to_spawn("ai");
     pilot_spawner = GetEnt(self.plane_name + "_pilot", "targetname");
     self.pilot = pilot_spawner Stalingradspawn();
+
     self.pilot.animname = "pilot";
     self.pilot thread magic_bullet_shield();
     self.pilot animscripts\shared::placeWeaponOn(self.pilot.weapon, "none");
     self.pilot.drawoncompass = 0;
     self.pilot.name = undefined;
     pilot_spawner Delete();
+
     pby_ok_to_spawn("ai");
     copilot_spawner = GetEnt(self.plane_name + "_copilot", "targetname");
     self.copilot = copilot_spawner Stalingradspawn();
+
     self.copilot.animname = "copilot";
     self.copilot thread magic_bullet_shield();
     self.copilot animscripts\shared::placeWeaponOn(self.copilot.weapon, "none");
     self.copilot.drawoncompass = 0;
     self.copilot.name = undefined;
     copilot_spawner Delete();
+
     pby_ok_to_spawn("ai");
     radioop_spawner = GetEnt(self.plane_name + "_radioop", "targetname");
     self.radioop = radioop_spawner Stalingradspawn();
+
     self.radioop.animname = "radio_op";
     self.radioop thread magic_bullet_shield();
     self.radioop animscripts\shared::placeWeaponOn(self.radioop.weapon, "none");
@@ -3192,6 +3878,7 @@ pby_crew_init(plane_name) {
     self.radioop.name = undefined;
     radioop_spawner Delete();
   }
+
   if(plane_name == "player_plane_a") {
     engineer_spawner = GetEnt(self.plane_name + "_engineer", "targetname");
     self.engineer = engineer_spawner Stalingradspawn();
@@ -3208,54 +3895,66 @@ pby_crew_init(plane_name) {
 pby_crew_idles() {
   self thread anim_loop_solo(self.pilot, "my_idle", "tag_engineer", "stop_pilot_idling");
   self.pilot LinkTo(self, "tag_engineer");
+
   self thread anim_loop_solo(self.copilot, "my_idle", "tag_engineer", "stop_copilot_idling");
   self.copilot LinkTo(self, "tag_engineer");
+
   self thread anim_loop_solo(self.radioop, "my_idle_rad", "tag_engineer", "stop_radioop_idling");
   self.radioop LinkTo(self, "tag_engineer");
   self.radioop.status = "idle_at_rad";
 }
-
 turret_switch_watch() {
   level endon("no_manual_switch");
+
   for(;;) {
     self waittill("weapon_change_on_turret", weapon_name);
+
     self switch_turret(weapon_name);
   }
 }
-
 switch_turret(weapon_name) {
   self notify("switching_turret");
+
   level notify("survivor_fell");
+
   if(isDefined(self.seat_locked)) {
     if(self.seat_locked) {
       return false;
     }
   }
+
   plane = level.plane_a;
+
   self.wanted_seat = weapon_name;
   self.in_transition = true;
+
   self setclientdvar("player_view_pitch_down", level.default_pitch_down);
+
   if(self.wanted_seat == "pby_frontgun") {
     if(plane.front == "empty") {
       plane.front = "has_player";
+
       self play_transition_to_front(plane);
       plane usevehicle(self, 1);
     }
   } else if(self.wanted_seat == "pby_leftgun") {
     if(plane.left == "empty") {
       plane.left = "has_player";
+
       self play_transition_to_left(plane);
       plane usevehicle(self, 2);
     }
   } else if(self.wanted_seat == "pby_rightgun") {
     if(plane.right == "empty") {
       plane.right = "has_player";
+
       self play_transition_to_right(plane);
       plane usevehicle(self, 3);
     }
   } else if(self.wanted_seat == "pby_backgun") {
     if(plane.back == "empty") {
       plane.back = "has_player";
+
       self play_transition_to_rear(plane);
       plane usevehicle(self, 4);
       self setclientdvar("player_view_pitch_down", level.ventral_turret_pitch);
@@ -3264,24 +3963,31 @@ switch_turret(weapon_name) {
     self.in_transition = false;
     return false;
   }
+
   switch (self.current_seat) {
     case "pby_frontgun":
       plane.front = "empty";
       break;
+
     case "pby_leftgun":
       plane.left = "empty";
       break;
+
     case "pby_rightgun":
       plane.right = "empty";
       break;
+
     case "pby_backgun":
       plane.back = "empty";
       break;
+
     default:
       break;
   }
+
   self.current_seat = self.wanted_seat;
   self.wanted_seat = -1;
+
   self notify("done_switching_turrets");
   self.in_transition = false;
   return true;
@@ -3297,9 +4003,11 @@ play_transition_to_rear(plane) {
         self play_transition_animation(plane, "pby_front_to_rear", "rear");
       }
       break;
+
     case "pby_leftgun":
       self play_transition_animation(plane, "pby_left_to_rear", "rear");
       break;
+
     case "pby_rightgun":
       if(isDefined(self.open_hatch)) {
         self play_transition_animation(plane, "open_hatch", "rear");
@@ -3308,6 +4016,7 @@ play_transition_to_rear(plane) {
         self play_transition_animation(plane, "pby_right_to_rear", "rear");
       }
       break;
+
     default:
       break;
   }
@@ -3318,6 +4027,7 @@ play_transition_to_front(plane) {
     case "pby_backgun":
       self play_transition_animation(plane, "pby_rear_to_front", "front");
       break;
+
     case "pby_leftgun": {
       if(isDefined(self.pacing_moment)) {
         self play_transition_animation(plane, "close_hatch", "front");
@@ -3327,7 +4037,9 @@ play_transition_to_front(plane) {
       }
     }
     break;
+
     case "pby_rightgun":
+
       if(isDefined(self.flak_moment)) {
         self play_transition_animation(plane, "pby_right_to_flak", "front");
         self.flak_moment = undefined;
@@ -3335,6 +4047,7 @@ play_transition_to_front(plane) {
         self play_transition_animation(plane, "pby_right_to_front", "front");
       }
       break;
+
     default:
       break;
   }
@@ -3351,12 +4064,15 @@ play_transition_to_right(plane) {
       }
     }
     break;
+
     case "pby_leftgun":
       self play_transition_animation(plane, "pby_left_to_right", "right");
       break;
+
     case "pby_backgun":
       self play_transition_animation(plane, "pby_rear_to_right", "right");
       break;
+
     default:
       break;
   }
@@ -3367,16 +4083,20 @@ play_transition_to_left(plane) {
     case "pby_frontgun":
       self play_transition_animation(plane, "pby_front_to_left", "left");
       break;
+
     case "pby_backgun":
       self play_transition_animation(plane, "pby_rear_to_left");
       break;
+
     case "pby_rightgun":
+
       if(isDefined(self.pistol_event)) {
         self play_transition_animation(plane, "pby_right_to_left_pistol");
       } else {
         self play_transition_animation(plane, "pby_right_to_left");
       }
       break;
+
     default:
       break;
   }
@@ -3386,27 +4106,36 @@ play_transition_animation(plane, anim_str, direction) {
   if(isDefined(self.fell) || isDefined(self.intro)) {} else {
     plane UseBy(self);
   }
+
   if(isDefined(self.open_hatch)) {
     level.plane_a thread pby_veh_idle("fly", 0.05, "up");
   }
+
   if(isDefined(self.pacing_moment)) {
     level.plane_a thread pby_veh_idle("fly_up_open", 0.05, "up", "open");
   }
+
   startorg = getstartOrigin(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"][anim_str]);
   startang = getstartAngles(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"][anim_str]);
+
   player_hands = spawn_anim_model("player_hands");
   player_hands.plane = plane;
   player_hands.direction = direction;
+
   player_hands.origin = startorg;
   player_hands.angles = startang;
   player_hands LinkTo(plane, "origin_animate_jnt");
+
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
+
   self playerlinktoabsolute(player_hands, "tag_player");
+
   if(!isDefined(self.fell)) {
     animation_time = getAnimLength(level.scr_anim["player_hands"][anim_str]);
     plane thread maps\_anim::anim_single_solo(player_hands, anim_str);
     wait(animation_time - 0.25);
+
     movement = level.player GetNormalizedMovement();
     if(movement[0] > 0 || movement[1] > 0) {
       level.player StartCameraTween(0.25);
@@ -3418,16 +4147,21 @@ play_transition_animation(plane, anim_str, direction) {
     animation_time = getAnimLength(level.scr_anim["player_hands"]["bank_to_right"]);
     plane thread maps\_anim::anim_single_solo(player_hands, "bank_to_right");
     wait(animation_time - 0.25);
+
     movement = level.player GetNormalizedMovement();
     if(movement[0] > 0 || movement[1] > 0) {
       level.player StartCameraTween(0.25);
     }
+
     wait(0.25);
+
     self.fell = undefined;
   }
+
   if(isDefined(self.pacing_moment)) {
     level.plane_a thread pby_veh_idle("float", 0.05);
   }
+
   player_hands thread delete_later();
 }
 
@@ -3474,7 +4208,9 @@ play_trans_AI_Distress2(guy) {
 play_trans_AI_crew_member(guy, scripted_anim, idle_anim, anim_joint, idle_stop_notify, no_loop) {
   the_plane = level.plane_a;
   the_plane notify(idle_stop_notify);
+
   the_plane anim_single_solo(guy, scripted_anim, anim_joint);
+
   if(!isDefined(no_loop)) {
     the_plane thread anim_loop_solo(guy, idle_anim, anim_joint, idle_stop_notify);
   }
@@ -3484,11 +4220,14 @@ play_trans_gunner(guy, special_case) {
   if(!isDefined(level.gunner_anim_count)) {
     level.gunner_anim_count = 0;
   }
+
   if(isDefined(special_case)) {
     level.gunner_anim_count = special_case;
   }
+
   scripted_anim = "none";
   looped_anim = "none";
+
   switch (level.gunner_anim_count) {
     case 0:
       scripted_anim = "ftol";
@@ -3534,10 +4273,13 @@ play_trans_gunner(guy, special_case) {
     default:
       break;
   }
+
   level.gunner_anim_count++;
+
   if(scripted_anim == "none") {
     return;
   }
+
   if(looped_anim == "none") {
     level thread play_trans_AI_crew_member(level.plane_a.engineer, scripted_anim, "my_idle", "tag_engineer", "stop_engineer_idling", true);
   } else {
@@ -3550,12 +4292,13 @@ delete_later() {
   wait 0.1;
   self delete();
 }
-
 force_players_into_seat(position_string) {
   plane = level.plane_a;
+
   switch (position_string) {
     case "starting":
       plane.right = "has_player";
+
       plane usevehicle(self, 3);
       self setup_seat_control("pby_rightgun");
       break;
@@ -3566,7 +4309,6 @@ force_players_into_seat(position_string) {
       break;
   }
 }
-
 build_player_planes(type) {
   model = undefined;
   death_model = undefined;
@@ -3580,6 +4322,7 @@ build_player_planes(type) {
   min_health = 100000;
   max_health = 100000;
   team = "axis";
+
   if(type == "pby_blackcat") {
     model = "vehicle_usa_pby_exterior_blackcat";
     death_fx = "explosions/large_vehicle_explosion";
@@ -3588,7 +4331,9 @@ build_player_planes(type) {
     min_health = 99999;
     max_health = 100001;
     team = "allies";
+
     func = ::pby_plane_init;
+
     maps\_vehicle::build_template("pby", model, type);
     maps\_vehicle::build_localinit(func);
     maps\_vehicle::build_deathmodel(model, death_model);
@@ -3597,6 +4342,7 @@ build_player_planes(type) {
     maps\_vehicle::build_treadfx(type);
     maps\_vehicle::build_team(team);
   }
+
   if(type == "fletcher_destroyer") {
     model = "vehicle_usa_ship_fletcher_hull";
     death_fx = "explosions/large_vehicle_explosion";
@@ -3605,7 +4351,9 @@ build_player_planes(type) {
     min_health = 99999;
     max_health = 100001;
     team = "allies";
+
     func = ::fletcher_init;
+
     maps\_vehicle::build_template("fletcher", model, type);
     maps\_vehicle::build_localinit(func);
     maps\_vehicle::build_deathmodel(model, death_model);
@@ -3613,8 +4361,10 @@ build_player_planes(type) {
     maps\_vehicle::build_life(health, min_health, max_health);
     maps\_vehicle::build_treadfx(type);
     maps\_vehicle::build_team(team);
+
     load_fletcher_ship_names();
   }
+
   maps\_vehicle::build_compassicon();
 }
 
@@ -3624,11 +4374,14 @@ pby_plane_init() {
   self.in_water = false;
   self.script_cheap = true;
   self.script_crashtypeoverride = "none";
+
   self thread play_wake_fx();
   self thread pby_regenerating_health();
   self thread pby_running_lights();
+
   level thread pby_window_fx(self);
   level thread pby_window_cloud(self);
+
   self thread pby_damage_thread();
   self thread pby_damage_fx_manager();
 }
@@ -3640,82 +4393,108 @@ pby_damage_fx_manager() {
 
 pby_damage_fx_right_wing() {
   self endon("death");
+
   self.wingright_dmg = self spawn_bullet_hole_entity("vehicle_usa_pby_wingright_damage01");
+
   while(1) {
     if(flag("pby_right_wing_dmg3")) {
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingright_dmg, "bullet2");
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingright_dmg, "bullet4");
+
       self thread damage_to_pby_dialogue("right_wing");
       self DoDamage(50000, self.origin, level.player, 18);
       while(true) {
         self.engine_fx_right Delete();
         self.engine_fx_right = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng3"], "prop_right_jnt");
+
         wait(30);
+
         self thread damage_to_pby_dialogue("engine_fire");
+
         self.engine_fx_right Delete();
         self.engine_fx_right = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng2"], "prop_right_jnt");
+
         i = 0;
+
         while(i < 30) {
           self waittill("pby_rtwing_damage");
           i++;
         }
+
         flag_set("player_crashed");
       }
     } else if(flag("pby_right_wing_dmg2")) {
       self.engine_fx_right Delete();
       self.engine_fx_right = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng2"], "prop_right_jnt");
+
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingright_dmg, "bullet1");
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingright_dmg, "bullet3");
+
       flag_wait("pby_right_wing_dmg3");
     } else if(flag("pby_right_wing_dmg1")) {
       self.engine_fx_right = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng1"], "prop_right_jnt");
       self thread damage_to_pby_dialogue("number_one_engine");
+
       flag_wait("pby_right_wing_dmg2");
     }
+
     wait(0.05);
   }
 }
 
 pby_damage_fx_left_wing() {
   self endon("death");
+
   self.wingleft_dmg = self spawn_bullet_hole_entity("vehicle_usa_pby_wingleft_damage01");
+
   while(1) {
     if(flag("pby_left_wing_dmg3")) {
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingleft_dmg, "bullet2");
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingleft_dmg, "bullet4");
+
       self DoDamage(50000, self.origin, level.player, 17);
       self thread damage_to_pby_dialogue("left_wing");
+
       while(true) {
         self.engine_fx_left Delete();
         self.engine_fx_left = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng3"], "prop_left_jnt");
+
         wait(30);
+
         self.engine_fx_left Delete();
         self.engine_fx_left = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng2"], "prop_left_jnt");
         self thread damage_to_pby_dialogue("engine_fire");
+
         i = 0;
         while(i < 30) {
           self waittill("pby_ltwing_damage");
           i++;
         }
+
         flag_set("player_crashed");
       }
     } else if(flag("pby_left_wing_dmg2")) {
       self.engine_fx_left Delete();
       self.engine_fx_left = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng2"], "prop_left_jnt");
+
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingleft_dmg, "bullet1");
       playFXOnTag(level._effect["pby_wng_sprk"], self.wingleft_dmg, "bullet3");
+
       flag_wait("pby_left_wing_dmg3");
     } else if(flag("pby_left_wing_dmg1")) {
       self.engine_fx_left = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_dmg_eng1"], "prop_left_jnt");
       self thread damage_to_pby_dialogue("number_two_engine");
+
       flag_wait("pby_left_wing_dmg2");
     }
+
     wait(0.05);
   }
 }
 
 pby_damage_thread() {
   self endon("death");
+
   damage_ref_points = [];
   damage_ref_offset["nose"] = (190, 0, 0);
   damage_ref_offset["rtwing"] = (0, 58, 54);
@@ -3723,53 +4502,69 @@ pby_damage_thread() {
   damage_ref_offset["ltwing"] = (0, -58, 54);
   damage_ref_offset["ltgun"] = (-134, -62, 54);
   damage_ref_offset["tail"] = (-286, 0, 78);
+
   self.rtgun = 0;
   self.ltgun = 0;
   self.tail = 0;
+
   self thread pby_bullet_hole_manager();
+
   keys = getArrayKeys(damage_ref_offset);
+
   while(true) {
     self waittill("damage", amount, attacker, direction, point, type);
+
     current_forward = anglesToForward(self.angles);
     current_right = AnglesToRight(self.angles);
     current_up = AnglesToUp(self.angles);
+
     dmg_points = [];
     for(i = 0; i < keys.size; i++) {
       dmg_points[keys[i]] = self.origin + (current_forward * damage_ref_offset[keys[i]][0]) + (current_right * damage_ref_offset[keys[i]][1]) + (current_up * damage_ref_offset[keys[i]][2]);
     }
+
     index = 0;
     closest_point = dmg_points[keys[0]];
+
     for(i = 1; i < keys.size; i++) {
       if(Distance(dmg_points[keys[i]], point) < Distance(closest_point, point)) {
         closest_point = dmg_points[keys[i]];
         index = i;
       }
     }
+
     switch (keys[index]) {
       case "nose":
         self notify("pby_nose_damage", attacker);
         break;
+
       case "rtwing":
         self notify("pby_rtwing_damage", attacker);
         break;
+
       case "ltwing":
         self notify("pby_ltwing_damage", attacker);
         break;
+
       case "rtgun":
         self notify("pby_rtgun_damage", attacker);
         self.rtgun++;
         break;
+
       case "ltgun":
         self notify("pby_ltgun_damage", attacker);
         self.ltgun++;
         break;
+
       case "tail":
         self notify("pby_tail_damage", attacker);
         self.tail++;
         break;
+
       default:
         break;
     }
+
     self notify("check_for_bullet_hole");
   }
 }
@@ -3777,22 +4572,30 @@ pby_damage_thread() {
 pby_damage_nose_glass() {
   bullet_hits = 0;
   piece_cycle = 0;
+
   piece_numbers = [];
   piece_numbers[0]["piece"] = 23;
+
   piece_numbers[1]["piece"] = 24;
+
   total_pieces_hit = 0;
+
   attacker = undefined;
+
   while(1) {
     while(bullet_hits < level.bullet_hits_before_swap) {
       level.plane_a waittill("pby_nose_damage", attacker);
+
       if(attacker.classname != "worldspawn" && attacker.vehicletype == "zero") {
         self_forward = anglesToForward(level.plane_a.angles);
         player_dir = VectorNormalize(attacker.origin - level.player.origin);
         angle = VectorDot(self_forward, player_dir);
+
         if(angle < 0.4) {
           continue;
         }
       }
+
       if(level.player.current_seat == "pby_frontgun") {
         if(total_pieces_hit < (level.bullet_hits_before_swap * piece_numbers.size)) {
           random_fx = RandomInt(piece_numbers.size);
@@ -3800,29 +4603,35 @@ pby_damage_nose_glass() {
         bullet_hits++;
       }
     }
+
     if(level.player.current_seat == "pby_frontgun") {
       if(total_pieces_hit < (level.bullet_hits_before_swap * piece_numbers.size)) {
         level.plane_a DoDamage(4000, level.plane_a.origin, level.player, piece_numbers[piece_cycle]["piece"]);
         if(isDefined(piece_numbers[piece_cycle]["piece2"])) {
           level.plane_a DoDamage(4000, level.plane_a.origin, level.player, piece_numbers[piece_cycle]["piece2"]);
         }
+
         piece_cycle++;
+
         if(isDefined(attacker)) {
           if(!level.player.in_transition) {
             level.player DisableInvulnerability();
             level.player DoDamage(level.damage_transfered_to_player, attacker.origin, level.player);
           }
         }
+
         bullet_hits = 0;
         total_pieces_hit++;
         if(piece_cycle > 1) {
           piece_cycle = 0;
         }
+
         wait(0.05);
         level.player EnableInvulnerability();
       } else {
         flag_set("ok_to_shoot_at_player");
         level.player DisableInvulnerability();
+
         while(level.player.current_seat == "pby_frontgun") {
           level.plane_a waittill("pby_nose_damage", attacker);
           if(isDefined(attacker)) {
@@ -3834,6 +4643,7 @@ pby_damage_nose_glass() {
           }
           wait(0.05);
         }
+
         bullet_hits = 0;
         level.player EnableInvulnerability();
         flag_clear("ok_to_shoot_at_player");
@@ -3848,16 +4658,22 @@ pby_damage_blister_glass_right() {
   level.plane_a.glass_bullets_right = level.plane_a spawn_bullet_hole_entity("vehicle_usa_pby_blisterright_glass01");
   bullet_hits = 0;
   piece_cycle = 0;
+
   piece_numbers = [];
   piece_numbers[0]["piece"] = 15;
   piece_numbers[0]["bullet"] = "bullet4";
+
   piece_numbers[1]["piece"] = 21;
   piece_numbers[1]["piece2"] = 13;
   piece_numbers[1]["bullet"] = "bullet3";
+
   piece_numbers[2]["piece"] = 22;
   piece_numbers[2]["bullet"] = "bullet2";
+
   total_pieces_hit = 0;
+
   attacker = undefined;
+
   while(1) {
     while(bullet_hits < level.bullet_hits_before_swap) {
       level.plane_a waittill("pby_rtgun_damage", attacker);
@@ -3867,6 +4683,7 @@ pby_damage_blister_glass_right() {
       }
       bullet_hits++;
     }
+
     if(level.player.current_seat == "pby_rightgun") {
       if(total_pieces_hit < 16) {
         level.plane_a DoDamage(4000, level.plane_a.origin, level.player, piece_numbers[piece_cycle]["piece"]);
@@ -3875,22 +4692,26 @@ pby_damage_blister_glass_right() {
         }
         playFXOnTag(level._effect["large_glass"], level.plane_a.glass_bullets_right, piece_numbers[piece_cycle]["bullet"]);
         piece_cycle++;
+
         if(isDefined(attacker)) {
           if(!level.player.in_transition) {
             level.player DisableInvulnerability();
             level.player DoDamage(level.damage_transfered_to_player, attacker.origin, level.player);
           }
         }
+
         bullet_hits = 0;
         total_pieces_hit++;
         if(piece_cycle > 2) {
           piece_cycle = 0;
         }
+
         wait(0.05);
         level.player EnableInvulnerability();
       } else {
         flag_set("ok_to_shoot_at_player");
         level.player DisableInvulnerability();
+
         while(level.player.current_seat == "pby_rightgun") {
           level.plane_a waittill("pby_rtgun_damage", attacker);
           if(isDefined(attacker)) {
@@ -3902,6 +4723,7 @@ pby_damage_blister_glass_right() {
           }
           wait(0.05);
         }
+
         bullet_hits = 0;
         level.player EnableInvulnerability();
         flag_clear("ok_to_shoot_at_player");
@@ -3916,16 +4738,22 @@ pby_damage_blister_glass_left() {
   level.plane_a.glass_bullets_left = level.plane_a spawn_bullet_hole_entity("vehicle_usa_pby_blisterleft_glass01");
   bullet_hits = 0;
   piece_cycle = 0;
+
   piece_numbers = [];
   piece_numbers[0]["piece"] = 14;
   piece_numbers[0]["bullet"] = "bullet4";
+
   piece_numbers[1]["piece"] = 19;
   piece_numbers[1]["piece2"] = 12;
   piece_numbers[1]["bullet"] = "bullet3";
+
   piece_numbers[2]["piece"] = 20;
   piece_numbers[2]["bullet"] = "bullet2";
+
   total_pieces_hit = 0;
+
   attacker = undefined;
+
   while(1) {
     while(bullet_hits < level.bullet_hits_before_swap) {
       level.plane_a waittill("pby_ltgun_damage", attacker);
@@ -3935,6 +4763,7 @@ pby_damage_blister_glass_left() {
       }
       bullet_hits++;
     }
+
     if(level.player.current_seat == "pby_leftgun") {
       if(total_pieces_hit < 16) {
         level.plane_a DoDamage(4000, level.plane_a.origin, level.player, piece_numbers[piece_cycle]["piece"]);
@@ -3943,22 +4772,27 @@ pby_damage_blister_glass_left() {
         }
         playFXOnTag(level._effect["pby_blister_glass"], level.plane_a.glass_bullets_left, piece_numbers[piece_cycle]["bullet"]);
         piece_cycle++;
+
         if(isDefined(attacker)) {
           if(!level.player.in_transition) {
             level.player DisableInvulnerability();
+
             level.player DoDamage(level.damage_transfered_to_player, attacker.origin, level.player);
           }
         }
+
         bullet_hits = 0;
         total_pieces_hit++;
         if(piece_cycle > 2) {
           piece_cycle = 0;
         }
+
         wait(0.05);
         level.player EnableInvulnerability();
       } else {
         level.player DisableInvulnerability();
         flag_set("ok_to_shoot_at_player");
+
         while(level.player.current_seat == "pby_leftgun") {
           level.plane_a waittill("pby_ltgun_damage", attacker);
           if(isDefined(attacker)) {
@@ -3970,6 +4804,7 @@ pby_damage_blister_glass_left() {
           }
           wait(0.05);
         }
+
         bullet_hits = 0;
         level.player EnableInvulnerability();
         flag_clear("ok_to_shoot_at_player");
@@ -3984,14 +4819,18 @@ pby_bullet_hole_manager() {
   self thread pby_bullet_hole_right_gun();
   self thread pby_bullet_hole_left_gun();
   self thread pby_bullet_hole_tail();
+
   local_rtgun = self.rtgun;
   local_ltgun = self.ltgun;
   local_tail = self.tail;
+
   bullet_count_right = 1;
   bullet_count_left = 1;
   bullet_count_tail = 1;
+
   for(;;) {
     self waittill("check_for_bullet_hole");
+
     if(local_rtgun != self.rtgun && self.right == "has_player") {
       bullet_count_right++;
       if(bullet_count_right % 20 == 0) {
@@ -3999,6 +4838,7 @@ pby_bullet_hole_manager() {
         local_rtgun = self.rtgun;
       }
     }
+
     if(local_ltgun != self.ltgun && self.left == "has_player") {
       bullet_count_left++;
       if(bullet_count_left % 20 == 0) {
@@ -4006,6 +4846,7 @@ pby_bullet_hole_manager() {
         local_ltgun = self.ltgun;
       }
     }
+
     if(local_tail != self.tail && self.front != "has_player") {
       bullet_count_tail++;
       if(bullet_count_tail % 20 == 0) {
@@ -4018,8 +4859,10 @@ pby_bullet_hole_manager() {
 
 pby_bullet_hole_right_gun() {
   bullet_holes = self spawn_bullet_hole_entity("vehicle_usa_pby_bulletholes05");
+
   for(holes = 1; holes < 5; holes++) {
     self waittill("add right gun bullethole");
+
     playFX(level._effect["spark"], bullet_holes GetTagOrigin("bullet" + holes), anglesToForward(bullet_holes GetTagAngles("bullet" + holes)));
     playFXOnTag(level._effect["godray_night"], bullet_holes, "bullet" + holes);
   }
@@ -4027,8 +4870,10 @@ pby_bullet_hole_right_gun() {
 
 pby_bullet_hole_left_gun() {
   bullet_holes = self spawn_bullet_hole_entity("vehicle_usa_pby_bulletholes06");
+
   for(holes = 1; holes < 5; holes++) {
     self waittill("add left gun bullethole");
+
     playFX(level._effect["spark"], bullet_holes GetTagOrigin("bullet" + holes), anglesToForward(bullet_holes GetTagAngles("bullet" + holes)));
     playFXOnTag(level._effect["godray_night"], bullet_holes, "bullet" + holes);
   }
@@ -4038,9 +4883,11 @@ pby_bullet_hole_tail() {
   bullet_holes = [];
   bullet_holes[0] = self spawn_bullet_hole_entity("vehicle_usa_pby_bulletholes04");
   bullet_holes[1] = self spawn_bullet_hole_entity("vehicle_usa_pby_bulletholes07");
+
   for(i = 0; i < bullet_holes.size; i++) {
     for(holes = 1; holes < 5; holes++) {
       self waittill("add tail bullethole");
+
       playFX(level._effect["spark"], bullet_holes[i] GetTagOrigin("bullet" + holes), anglesToForward(bullet_holes[i] GetTagAngles("bullet" + holes)));
       playFXOnTag(level._effect["godray_night"], bullet_holes[i], "bullet" + holes);
     }
@@ -4053,6 +4900,7 @@ spawn_bullet_hole_entity(model) {
   bullet_hole_model.origin = self GetTagOrigin("origin_animate_jnt");
   bullet_hole_model.angles = self GetTagAngles("origin_animate_jnt");
   bullet_hole_model LinkTo(self, "origin_animate_jnt");
+
   return bullet_hole_model;
 }
 
@@ -4060,7 +4908,9 @@ pby_running_lights() {
   self.running_lights = spawn("script_model", self GetTagOrigin("tag_origin"));
   self.running_lights setModel("tag_origin");
   self.running_lights.angles = self GetTagAngles("tag_origin");
+
   self.running_lights LinkTo(self, "origin_animate_jnt");
+
   playFXOnTag(level._effect["pby_running_lights"], self.running_lights, "tag_origin");
 }
 
@@ -4084,9 +4934,11 @@ pby_window_cloud(plane) {
 pby_regenerating_health() {
   self.healthbuffer = 20000;
   self.currenthealth = self.health;
+
   max_health = self.currenthealth;
   amount = undefined;
   self.damage_state = 0;
+
   while(true) {
     self waittill("damage", amount);
     self.health = max_health;
@@ -4096,20 +4948,26 @@ pby_regenerating_health() {
 play_wake_fx() {
   self thread toggle_pby_in_water();
   self thread toggle_pby_in_flight();
+
   self endon("death");
+
   right_fx = undefined;
   left_fx = undefined;
   center_fx = undefined;
+
   playing_wake = false;
   my_speed = 0;
+
   while(true) {
     if(self.in_water) {
       self thread play_wing_center_wake();
       self thread play_wing_center_splash();
+
       while(self.in_water) {
         wait(0.1);
       }
     }
+
     wait(0.1);
   }
 }
@@ -4125,26 +4983,32 @@ play_wing_center_wake() {
   wing_forward = (0, 0, 0);
   wing_up = (0, 0, 0);
   wait_time = 0;
+
   while(self.in_water) {
     my_speed = self GetSpeed();
+
     if(my_speed < 53) {
       wait(0.1);
       continue;
     }
+
     left_wing_origin = self GetTagOrigin("tag_wake_wing_L_fx");
     right_wing_origin = self GetTagOrigin("tag_wake_wing_R_fx");
+
     if(right_wing_origin[2] <= level.WATER_LEVEL) {
       wing_forward = anglesToForward(self GetTagAngles("tag_wake_wing_R_fx"));
       wing_up = AnglesToUp(self GetTagAngles("tag_wake_wing_R_fx"));
       height_delta = level.WATER_LEVEL - right_wing_origin[2] + 2;
       playFX(level._effect["pby_wake_wing"], right_wing_origin + (0, 0, height_delta), wing_forward, wing_up);
     }
+
     if(left_wing_origin[2] <= level.WATER_LEVEL) {
       wing_forward = anglesToForward(self GetTagAngles("tag_wake_wing_L_fx"));
       wing_up = AnglesToUp(self GetTagAngles("tag_wake_wing_L_fx"));
       height_delta = level.WATER_LEVEL - left_wing_origin[2] + 2;
       playFX(level._effect["pby_wake_wing"], left_wing_origin + (0, 0, height_delta), wing_forward, wing_up);
     }
+
     if(my_speed > max_speed) {
       wait(min_delay);
     } else {
@@ -4165,45 +5029,56 @@ play_wing_center_splash() {
   wing_forward = (0, 0, 0);
   wing_up = (0, 0, 0);
   wait_time = 0;
+
   while(self.in_water) {
     my_speed = self GetSpeed();
+
     if(my_speed < 53) {
       wait(0.1);
       continue;
     }
+
     left_wing_origin = self GetTagOrigin("tag_wake_wing_L_fx");
     right_wing_origin = self GetTagOrigin("tag_wake_wing_R_fx");
+
     new_ent = spawn("script_model", self.origin);
     new_ent setModel("tag_origin");
     new_ent.origin = self GetTagOrigin("tag_origin");
     new_ent.angles = anglesToForward(self GetTagAngles("tag_origin"));
+
     playFXOnTag(level._effect["pby_spray_center"], new_ent, "tag_origin");
+
     if(right_wing_origin[2] <= level.WATER_LEVEL) {
       wing_forward = anglesToForward(self GetTagAngles("tag_wake_wing_R_fx"));
       wing_up = AnglesToUp(self GetTagAngles("tag_wake_wing_R_fx"));
       height_delta = level.WATER_LEVEL - right_wing_origin[2] + 2;
       playFX(level._effect["pby_spray_wing"], right_wing_origin + (0, 0, height_delta), wing_forward, wing_up);
     }
+
     if(left_wing_origin[2] <= level.WATER_LEVEL) {
       wing_forward = anglesToForward(self GetTagAngles("tag_wake_wing_L_fx"));
       wing_up = AnglesToUp(self GetTagAngles("tag_wake_wing_L_fx"));
       height_delta = level.WATER_LEVEL - left_wing_origin[2] + 2;
       playFX(level._effect["pby_spray_wing"], left_wing_origin + (0, 0, height_delta), wing_forward, wing_up);
     }
+
     if(my_speed > max_speed) {
       wait(min_delay);
     } else {
       wait_time = ((my_speed / max_speed) * (max_delay - min_delay)) + min_delay;
       wait(wait_time);
     }
+
     new_ent Delete();
   }
 }
 
 toggle_pby_in_water() {
   self waittill("pby_landed");
+
   setmusicstate("RESCUE_A");
   self.in_water = true;
+
   self.spray_fx = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pby_wake_center"], "origin_animate_jnt");
 }
 
@@ -4212,7 +5087,6 @@ toggle_pby_in_flight() {
   self.in_water = false;
   self.spray_fx Delete();
 }
-
 build_enemy_vehicles(type) {
   model = undefined;
   death_model = undefined;
@@ -4226,6 +5100,7 @@ build_enemy_vehicles(type) {
   min_health = 1000;
   max_health = 1500;
   team = "axis";
+
   if(type == "zero") {
     model = "vehicle_jap_airplane_zero_fly";
     death_fx = "explosions/large_vehicle_explosion";
@@ -4235,12 +5110,15 @@ build_enemy_vehicles(type) {
     max_health = 10000;
     team = "axis";
     turretType = "jap_zero_turret";
+
     func = ::zero_plane_init;
+
     level.vehicle_death_thread[type] = ::zero_death_thread;
     maps\_vehicle::build_template("zero", model, type);
     maps\_vehicle::build_deathmodel(model, death_model);
     maps\_vehicle::build_localinit(func);
   }
+
   if(type == "zero_old") {
     model = "vehicle_jap_airplane_zero_fly";
     death_fx = "explosions/large_vehicle_explosion";
@@ -4249,27 +5127,34 @@ build_enemy_vehicles(type) {
     min_health = 600;
     max_health = 800;
     team = "axis";
+
     func = ::zero_plane_init;
+
     level.vehicle_death_thread[type] = ::zero_death_thread;
     maps\_vehicle::build_template("zero", model, type);
     maps\_vehicle::build_deathmodel(model, death_model);
     maps\_vehicle::build_localinit(func);
   }
+
   if(type == "jap_ptboat") {
     model = "vehicle_jap_ship_ptboat";
     death_fx = "explosions/large_vehicle_explosion";
     death_model = "vehicle_jap_ship_ptboat_dmg";
+
     health = 1800;
     min_health = 1799;
     max_health = 1800;
     team = "axis";
     turretType = "jap_ptboat_turret";
+
     func = ::pt_boat_init;
+
     level.vehicle_death_thread[type] = ::pt_boat_death_thread;
     maps\_vehicle::build_template("pt_boat", model, type);
     maps\_vehicle::build_deathmodel(model, death_model);
     maps\_vehicle::build_localinit(func);
   }
+
   if(type == "jap_shinyo") {
     model = "vehicle_jap_ship_shinyou";
     death_fx = "maps/fly/fx_exp_shinyou";
@@ -4278,12 +5163,15 @@ build_enemy_vehicles(type) {
     min_health = 10;
     max_health = 20;
     team = "axis";
+
     func = ::shinyo_boat_init;
+
     level.vehicle_death_thread[type] = ::shinyo_boat_death_thread;
     maps\_vehicle::build_template("shinyo", model, type);
     maps\_vehicle::build_deathmodel(model, death_model);
     maps\_vehicle::build_localinit(func);
   }
+
   if(type == "jap_merchant_ship") {
     model = "dest_merchantship2_dmg0";
     death_fx = "maps/fly/fx_exp_shinyou";
@@ -4292,22 +5180,26 @@ build_enemy_vehicles(type) {
     min_health = 999998;
     max_health = 999999;
     team = "axis";
+
     func = ::merchant_ship_init;
     level.vehicle_death_thread[type] = ::merchant_ship_death_thread;
     maps\_vehicle::build_template("merchant_ship", model, type);
     maps\_vehicle::build_deathmodel(model, death_model);
     maps\_vehicle::build_localinit(func);
+
     model = "dest_merchantship_dmg0";
     death_model = "dest_merchantship_dmg0";
     maps\_vehicle::build_template("merchant_ship", model, type);
     maps\_vehicle::build_deathmodel(model, death_model);
     maps\_vehicle::build_localinit(func);
+
     model = "dest_merchantship4_dmg0";
     death_model = "dest_merchantship4_dmg0";
     maps\_vehicle::build_template("merchant_ship", model, type);
     maps\_vehicle::build_deathmodel(model, death_model);
     maps\_vehicle::build_localinit(func);
   }
+
   if(type != "jap_ptboat" && type != "jap_shinyo") {
     maps\_vehicle::build_deathfx(death_fx, "tag_engine", death_sound, undefined, undefined, undefined, undefined);
   } else if(type == "jap_ptboat") {
@@ -4315,6 +5207,7 @@ build_enemy_vehicles(type) {
   } else if(type == "jap_shinyo") {
     maps\_vehicle::build_deathfx(death_fx, "tag_engine_left", death_sound, undefined, undefined, undefined, undefined, undefined, "extra_death_fx");
   }
+
   maps\_vehicle::build_life(health, min_health, max_health);
   maps\_vehicle::build_treadfx(type);
   maps\_vehicle::build_team(team);
@@ -4326,15 +5219,20 @@ zero_plane_init() {
   self.nodeathfx = true;
   self.script_crashtypeoverride = "none";
   self.crashing = true;
+
   self.shoot_gun_range = 10000;
+
   wait(0.1);
+
   self notify("stop_friendlyfire_shield");
   self thread zero_damage_thread();
   self thread zero_boundary_watch();
   self thread zero_spline_fire_start();
   self thread zero_end_spline_delete();
   self thread zero_spin_prop();
+
   self thread maps\pby_fly_amb::play_zero_sounds(level.plane_a, level.plane_b);
+
   self.animname = "zero";
   self thread anim_loop_solo(self, "idle", undefined, "death");
 }
@@ -4342,7 +5240,9 @@ zero_plane_init() {
 zero_end_spline_delete() {
   self endon("death");
   self waittill("reached_end_node");
+
   wait(0.05);
+
   if(!isDefined(self.kamikaze)) {
     self.notrealdeath = true;
     self notify("death");
@@ -4358,6 +5258,7 @@ zero_spline_fire_start() {
 
 zero_boundary_watch() {
   self endon("death");
+
   while(1) {
     if(self.origin[0] > 60000 || self.origin[0] < -60000 || self.origin[1] > 60000 || self.origin[1] < -60000 || self.origin[2] > 20000 || self.origin[2] < -1000) {
       self freevehicle();
@@ -4365,6 +5266,7 @@ zero_boundary_watch() {
       self notify("death_finished");
       self delete();
     }
+
     self.origin_prev = self.origin;
     wait(0.1);
   }
@@ -4372,36 +5274,47 @@ zero_boundary_watch() {
 
 zero_damage_thread() {
   self endon("death");
+
   attacker = undefined;
   amount = undefined;
   part_of_plane = undefined;
   original_health = self.health;
+
   temp_health = 0;
   while(self.health > 0) {
     self waittill("damage", amount, attacker, damage_dir, damage_ori, damage_type);
+
     temp_health = self.health - amount;
     self.dmg_point = damage_ori;
     self.attacker = attacker;
+
     random_dmg = RandomIntRange(0, 100);
     if(!isDefined(self.already_damaged) && random_dmg <= 70) {
       self.already_damaged = true;
       damaged_part = self zero_get_damage_point();
+
       switch (damaged_part) {
         case "fuselage":
           self.intermediate_damage = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "tag_prop_fx");
           break;
+
         case "rightwing":
+
           self.intermediate_damage = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "tag_wing_right_fx");
           break;
+
         case "leftwing":
+
           self.intermediate_damage = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "tag_wing_left_fx");
           break;
       }
+
       self.health = original_health;
       wait(1.0);
       break;
     }
   }
+
   self notify("death");
 }
 
@@ -4413,17 +5326,21 @@ zero_get_damage_point() {
   ref_point[3] = self.origin + (AnglesToRight(self.angles) * 5);
   ref_point[4] = self.origin + (AnglesToRight(self.angles) * -200);
   ref_point[5] = self.origin + (AnglesToRight(self.angles) * 200);
+
   closest_point = ref_point[0];
   index = 0;
+
   if(!isDefined(self.dmg_point)) {
     self.dmg_point = self.origin;
   }
+
   for(i = 1; i < ref_point.size; i++) {
     if(Distance(ref_point[i], self.dmg_point) < Distance(closest_point, self.dmg_point)) {
       closest_point = ref_point[i];
       index = i;
     }
   }
+
   random_crash = "fuselage";
   if(index == 0) {
     random_crash = "fuselage";
@@ -4438,6 +5355,7 @@ zero_get_damage_point() {
   } else if(index == 5) {
     random_crash = "rightwing";
   }
+
   return random_crash;
 }
 
@@ -4445,22 +5363,27 @@ zero_get_damage_point() {
 
 zero_death_thread() {
   wait(0.05);
+
   if(self.script_crashtypeoverride == "smash_into_other_plane") {
     self waittill("reached_end_node");
   }
+
   if(isDefined(self.audio_node_propzerob)) {
     self.audio_node_propzerob Delete();
   }
   if(isDefined(self.audio_node_propzero)) {
     self.audio_node_propzero Delete();
   }
+
   if(isDefined(self.tail_light)) {
     self.tail_light Delete();
   }
+
   if(isDefined(self.kamikaze)) {
     fx_marker = spawn("script_model", self.origin);
     fx_marker setModel("tag_origin");
     fx_marker.angles = self.angles;
+
     if(isDefined(self.impactwater)) {
       crashing_plane = spawn("script_model", self.origin);
       crashing_plane setModel("vehicle_jap_airplane_zero_fly");
@@ -4468,10 +5391,12 @@ zero_death_thread() {
       self Hide();
       crashing_plane UseAnimTree(#animtree);
       crashing_plane.animname = "zero";
+
       if(distancesquared(crashing_plane.origin, level.player.origin) < 1500 * 1500) {
         level.player SetWaterSheeting(1, 2);
         level notify("suggest close hit");
       }
+
       crashing_plane anim_single_solo(crashing_plane, "water_skip");
     } else if(isDefined(self.front_slam)) {
       exploder(850);
@@ -4487,21 +5412,26 @@ zero_death_thread() {
     } else {
       RadiusDamage(self.origin, 1500, 10000, 9999);
     }
+
     if(self.script_crashtypeoverride == "smash_into_other_plane") {
       playFXOnTag(level._effect["zero_kamikaze"], fx_marker, "tag_origin");
       RadiusDamage(self.origin, 1000, 10000, 10000);
     }
+
     wait(0.1);
     self notify("crash_done");
+
     wait(5);
     fx_marker Delete();
     return;
   }
+
   if(isDefined(self.notrealdeath)) {
     wait(0.05);
     self notify("crash_done");
     return;
   }
+
   ref_point = [];
   ref_point[0] = self.origin + (anglesToForward(self.angles) * 5);
   ref_point[1] = self.origin + (anglesToForward(self.angles) * -5);
@@ -4509,17 +5439,21 @@ zero_death_thread() {
   ref_point[3] = self.origin + (AnglesToRight(self.angles) * 5);
   ref_point[4] = self.origin + (AnglesToRight(self.angles) * -200);
   ref_point[5] = self.origin + (AnglesToRight(self.angles) * 200);
+
   closest_point = ref_point[0];
   index = 0;
+
   if(!isDefined(self.dmg_point)) {
     self.dmg_point = self.origin;
   }
+
   for(i = 1; i < ref_point.size; i++) {
     if(Distance(ref_point[i], self.dmg_point) < Distance(closest_point, self.dmg_point)) {
       closest_point = ref_point[i];
       index = i;
     }
   }
+
   random_crash = "fuselage";
   if(index == 0) {
     random_crash = "fuselage";
@@ -4534,175 +5468,236 @@ zero_death_thread() {
   } else if(index == 5) {
     random_crash = "rightwing";
   }
+
   if(isDefined(self.delayed_death)) {
     random_crash = "delayed";
   }
+
   if(!isDefined(self.no_explode)) {
     disint_chance = RandomIntRange(0, 100);
     if(disint_chance <= 50) {
       random_crash = "disintegrate";
     }
   }
+
   level notify("zero_killed");
   self RemoveVehicleFromCompass();
   self Hide();
+
   crashing_plane = spawn("script_model", self.origin);
   self thread zero_death_thread_water_hit(crashing_plane);
+
   fx = undefined;
+
   switch (random_crash) {
     case "fuselage":
+
       crashing_plane setModel("vehicle_jap_airplane_zero_fly");
       crashing_plane.angles = self.angles;
       crashing_plane MoveGravity(anglesToForward(self.angles) * self getspeed(), 5);
+
       self notify("hide_prop");
       crashing_plane thread zero_spin_prop();
+
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
         self.intermediate_damage LinkTo(crashing_plane);
       }
+
       roll_direction = RandomInt(2);
+
       if(roll_direction) {
         crashing_plane RotateRoll(5400, 10, 3, 1);
       } else {
         crashing_plane RotateRoll(-5400, 10, 3, 1);
       }
+
       fx = crashing_plane maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "tag_prop_fx");
       randomwait = RandomFloatRange(0.05, 1.5);
       wait(randomwait);
       fx Delete();
       playFXOnTag(level._effect["zero_explode"], crashing_plane, "tag_prop_fx");
       break;
+
     case "rightwing":
+
       crashing_plane setModel("vehicle_jap_airplane_zero_minus_rwing");
       crashing_plane.angles = self.angles;
+
       self notify("hide_prop");
       crashing_plane thread zero_spin_prop();
+
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
         self.intermediate_damage LinkTo(crashing_plane);
       }
+
       right_wing_position = self GetTagOrigin("tag_attach_wing_RI");
       right_wing = spawn("script_model", right_wing_position);
       right_wing setModel("vehicle_jap_airplane_zero_d_wingr");
       right_wing.angles = self.angles + (0, -15, 0);
+
       crashing_plane MoveGravity(anglesToForward(self.angles) * self getspeed(), 5);
       crashing_plane RotateRoll(5400, 10, 3, 1);
       fx = crashing_plane thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "tag_wing_right_fx");
+
       right_wing MoveGravity(anglesToForward(right_wing.angles) * (self getspeed() * .5), 5);
       right_wing RotateRoll(5400, 10, 3, 1);
       right_wing RotatePitch(5400, 10, 0.1, 1);
+
       wait(2);
       fx Delete();
+
       playFXOnTag(level._effect["zero_explode"], crashing_plane, "tag_wing_right_fx");
       break;
+
     case "leftwing":
+
       crashing_plane setModel("vehicle_jap_airplane_zero_minus_lwing");
       crashing_plane.angles = self.angles;
+
       self notify("hide_prop");
       crashing_plane thread zero_spin_prop();
+
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
         self.intermediate_damage LinkTo(crashing_plane);
       }
+
       left_wing_position = self GetTagOrigin("tag_attach_wing_LE");
       left_wing = spawn("script_model", left_wing_position);
       left_wing setModel("vehicle_jap_airplane_zero_d_wingl");
       left_wing.angles = self.angles + (0, 15, 0);
+
       crashing_plane MoveGravity(anglesToForward(self.angles) * self getspeed(), 5);
       crashing_plane RotateRoll(-5400, 10, 3, 1);
       fx = crashing_plane thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "tag_wing_left_fx");
+
       left_wing MoveGravity(anglesToForward(left_wing.angles) * (self getspeed() * .5), 5);
       left_wing RotateRoll(-5400, 10, 3, 1);
       left_wing RotatePitch(-5400, 10, 0.1, 1);
+
       wait(2);
       fx Delete();
       playFXOnTag(level._effect["zero_explode"], crashing_plane, "tag_wing_left_fx");
+
       break;
+
     case "tail":
+
       crashing_plane setModel("vehicle_jap_airplane_zero_minus_tail");
       crashing_plane.angles = self.angles;
+
       self notify("hide_prop");
       crashing_plane thread zero_spin_prop();
+
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
         self.intermediate_damage LinkTo(crashing_plane);
       }
+
       crashing_plane MoveGravity(anglesToForward(self.angles) * self getspeed(), 5);
       crashing_plane RotateRoll(5400, 10, 3, 1);
       fx = crashing_plane thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["zero_wing_dmg1"], "tag_tail_fx");
       wait(2);
       fx Delete();
+
       playFXOnTag(level._effect["zero_explod"], crashing_plane, "tag_tail_fx");
       break;
+
     case "delayed":
+
       crashing_plane setModel("vehicle_jap_airplane_zero_fly");
       crashing_plane.angles = self.angles;
       crashing_plane MoveGravity(anglesToForward(self.angles) * self getspeed(), 5);
+
       self notify("hide_prop");
       crashing_plane thread zero_spin_prop();
+
       if(isDefined(self.intermediate_damage)) {
         self.intermediate_damage Unlink();
         self.intermediate_damage LinkTo(crashing_plane);
       }
+
       random_delay = RandomFloatRange(1, 2);
       wait(random_delay);
+
       roll_direction = RandomInt(2);
+
       if(roll_direction) {
         crashing_plane RotateRoll(5400, 10, 3, 1);
       } else {
         crashing_plane RotateRoll(-5400, 10, 3, 1);
       }
+
       playFXOnTag(level._effect["zero_explode"], crashing_plane, "tag_prop_fx");
       break;
+
     case "disintegrate":
+
       crashing_plane setModel("vehicle_jap_airplane_zero_fly");
       crashing_plane.angles = self.angles;
       playFX(level._effect["zero_final_explode"], crashing_plane.origin);
+
       Earthquake(1, .3, crashing_plane.origin, 1000);
       playsoundatposition("amb_metal", (0, 0, 0));
       if(distancesquared(crashing_plane.origin, level.player.origin) < 500 * 500) {
         level notify("suggest close hit");
       }
+
       crashing_plane Hide();
       crashing_plane.origin = (crashing_plane.origin[0], crashing_plane.origin[1], -100);
+
       break;
+
     default:
       ASSERTEX(false, "Crashing Zeroes");
       break;
   }
+
   if(level.plane_on_curve > 0) {
     level.plane_on_curve--;
   }
+
   level.total_zeros_spawned--;
+
   while(crashing_plane.origin[2] > -100) {
     wait(0.05);
   }
+
   if(isDefined(self.attacker)) {
     if(self.attacker == level.player) {
       level.zero_death_count++;
       level notify("suggest good kill", "zero");
     }
   }
+
   crashing_plane Delete();
   if(isDefined(self.intermediate_damage)) {
     self.intermediate_damage Delete();
   }
+
   if(isDefined(fx)) {
     fx Delete();
   }
+
   self notify("crash_done");
 }
 
 zero_death_thread_water_hit(crashing_plane) {
   self endon("crash_done");
+
   while(crashing_plane.origin[2] > 63) {
     wait(0.05);
   }
+
   playFX(level._effect["zero_water"], crashing_plane.origin);
+
   if(distancesquared(crashing_plane.origin, level.player.origin) < 500 * 500) {
     level.player SetWaterSheeting(1, 2);
     level notify("suggest close hit");
   }
+
   crashing_plane MoveTo(crashing_plane.origin, 0.05);
   crashing_plane RotateTo(crashing_plane.angles, 0.05);
   random_wait = RandomFloatRange(1, 3);
@@ -4720,7 +5715,6 @@ merchant_ship_death_thread() {
 }
 
 #using_animtree("generic_human");
-
 ptboat_setup_driver() {
   pby_ok_to_spawn("drone");
   if(isDefined(self)) {
@@ -4728,11 +5722,15 @@ ptboat_setup_driver() {
     self.driver UseAnimTree(#animtree);
     self.driver.animname = "ptboatdriver";
     self.driver.driver = true;
+
     driver_pos = getstartOrigin(self GetTagOrigin("tag_gunner_turret1"), self GetTagAngles("tag_gunner_turret1"), level.scr_anim["ptboatdriver"]["idle"]);
     driver_ang = getstartAngles(self GetTagOrigin("tag_gunner_turret1"), self GetTagAngles("tag_gunner_turret1"), level.scr_anim["ptboatdriver"]["idle"]);
+
     self.driver.origin = driver_pos - (0, 0, 48);
     self.driver.angles = driver_ang;
+
     self.driver LinkTo(self);
+
     self.driver maps\_drone::drone_play_anim(level.scr_anim["ptboatdriver"]["idle"]);
   }
 }
@@ -4744,10 +5742,13 @@ ptboat_kill_driver() {}
 merchant_boat_sink_me() {
   level endon("too late to sink merchant ships");
   self waittill("i should sink");
+
   needed_dmg = self.damage_threshold + 3000;
   current_dmg = 0;
+
   while(1) {
     self waittill("damage", amount, attacker);
+
     if(attacker == level.player) {
       current_dmg = current_dmg + amount;
       if(current_dmg > needed_dmg) {
@@ -4755,28 +5756,38 @@ merchant_boat_sink_me() {
       }
     }
   }
+
   self dodamage(50000, self.origin, level.player, 0);
+
   self notify("stop_firing");
   self notify("stop_aft_track");
   self notify("stop_bow_track");
+
   self.bow UseAnimTree(#animtree);
   self.aft UseAnimTree(#animtree);
   self thread anim_single_solo(self, self.sink_anim);
   self thread anim_single_solo(self.bow, self.sink_anim);
   self thread anim_single_solo(self.aft, self.sink_anim);
+
   self.kill_sound = spawn("script_model", self.origin);
   self.kill_sound setModel("tag_origin");
   self.kill_sound.origin = self.origin + (0, 0, 400);
   self.kill_sound LinkTo(self);
   self.kill_sound playSound("merch_death_blow");
+
   self thread boat_groaning_sounds();
+
   self.bow DoDamage(25000, self.origin, level.player, 0);
   self.aft Dodamage(25000, self.origin, level.player, 0);
+
   wake_tag = self GetTagOrigin("tag_wake_fx");
+
   playFX(level._effect["merchant_sink"], (self.origin[0], self.origin[1], level.WATER_LEVEL + 2), AnglesToUp(self.angles), anglesToForward(self.angles));
   playFXOnTag(level._effect["merchant_final"], self, "contower02");
   PhysicsExplosionSphere((self.origin + (0, 0, 400)), 2700, 2600, 40);
+
   level.merchant_ship_death_count++;
+
   wait(1.0);
   if(self.scriptname == "boat_0") {
     level notify("merchant one sound off");
@@ -4789,6 +5800,7 @@ merchant_boat_sink_me() {
 boat_groaning_sounds() {
   self endon("death");
   self endon(self.sink_anim);
+
   random_wait = 0;
   while(isDefined(self)) {
     PlaySoundAtPosition("merch_death_groans", self.origin + (0, 0, 750));
@@ -4804,6 +5816,7 @@ spawn_secondary_fire_fx() {
 
 event4_kamikaze_ship_animation() {
   self waittill("reached_end_node");
+
   ship_ent = GetEnt("kamikazed_ship", "targetname");
   ship_ent.animname = "fletcher";
   ship_ent UseAnimTree(#animtree);
@@ -4815,35 +5828,43 @@ pt_boat_init() {
     self shark_init();
     return;
   }
+
   self.script_crashtypeoverride = "none";
   self.script_cheap = true;
   self.nodeathfx = true;
   self endon("death");
+
   if(isDefined(self.shoot_at_drones)) {
     self thread ai_ptboat_turret_think(self.shoot_at_drones);
   } else {
     self thread ai_ptboat_turret_think();
   }
+
   self.fake_motion = false;
   self thread ptboat_engine_fx_control();
+
   self UseAnimTree(#animtree);
   self.animname = "pt_boat";
   self thread pt_boat_skim_control();
+
   self notify("stop_friendlyfire_shield");
   self thread ptboat_damage_thread();
   self thread ai_ptboat_spotlight_think();
+
   if(isDefined(level.close_boat_sounds)) {
     pby_ok_to_spawn("ptboat");
     self.wake_audio = spawn("script_model", self.origin);
     self.wake_audio setModel("tag_origin");
     self.wake_audio LinkTo(self, "tag_wake_fx", (0, 0, 0), (0, 0, 0));
     self.wake_audio playLoopSound("pt_wake");
+
     pby_ok_to_spawn("ptboat");
     self.engine_audio = spawn("script_model", self.origin);
     self.engine_audio setModel("tag_origin");
     self.engine_audio LinkTo(self, "tag_engine_left", (0, 0, 0), (0, 0, 0));
     self.engine_audio playLoopSound("pt_engine");
   }
+
   pby_ok_to_spawn("ptboat");
   if(isDefined(self)) {
     self.running_lights = spawn("script_model", (0, 0, 0));
@@ -4857,7 +5878,9 @@ pt_boat_init() {
 
 pt_boat_skim_control() {
   self endon("death");
+
   current_skim = "blah";
+
   while(1) {
     if(self GetSpeedMPH() < 2) {
       if(current_skim != "none") {
@@ -4884,6 +5907,7 @@ pt_boat_skim_control() {
         current_skim = "fast";
       }
     }
+
     wait(0.1);
   }
 }
@@ -4891,6 +5915,7 @@ pt_boat_skim_control() {
 ptboat_delete_at_end_of_path() {
   self endon("death");
   self waittill("reached_end_node");
+
   self.delete_on_death = true;
   self notify("death");
 }
@@ -4898,52 +5923,67 @@ ptboat_delete_at_end_of_path() {
 ptboat_damage_thread() {
   self endon("death");
   self endon("destructible_damage_thread_running");
+
   self.healthbuffer = 20000;
   self.currenthealth = self.health;
+
   max_health = self.currenthealth;
   amount = undefined;
   self.damage_state = 0;
+
   while(self.currenthealth > 0) {
     self waittill("damage", amount, attacker);
+
     if(attacker != level.player) {
       self.currenthealth = self.currenthealth - 50;
     } else {
       self.currenthealth = self.currenthealth - amount;
     }
+
     if(self.damage_state < 1 && self.currenthealth < (max_health * .7)) {
       self.damage_state = 1;
       self thread ptboat_stage1_damage();
       wait(0.1);
     }
+
     if(self.damage_state < 2 && self.currenthealth < (max_health * .4)) {
       self.damage_state = 2;
       self thread ptboat_stage2_damage();
       wait(0.1);
     }
+
     self.attacker = attacker;
   }
+
   self notify("death");
 }
 
 ptboat_destructible_damage_thread() {
   self endon("death");
   self notify("destructible_damage_thread_running");
+
   self thread invulnerable_ptboat();
+
   minor_breaks = 0;
+
   while(true) {
     self waittill("broken", recieved_notify);
+
     if(recieved_notify == "minor_break") {
       if(minor_breaks == 0) {
         if(isDefined(self.starboard_light)) {
           self.starboard_light Delete();
         }
+
         if(isDefined(self.port_light)) {
           self.port_light Delete();
         }
+
         if(isDefined(self.damagefx)) {
           self.damagefx Delete();
         }
       } else if(minor_breaks == 1) {}
+
       minor_breaks++;
     } else if(recieved_notify == "major_break") {
       if(isDefined(self.damagefx)) {
@@ -4953,6 +5993,7 @@ ptboat_destructible_damage_thread() {
       if(isDefined(self.damagefx)) {
         self.damagefx Delete();
       }
+
       self.attacker = level.player;
       self notify("death");
     }
@@ -4961,7 +6002,9 @@ ptboat_destructible_damage_thread() {
 
 invulnerable_ptboat() {
   self endon("death");
+
   max_health = self.health;
+
   while(true) {
     self waittill("damage");
     self.health = max_health;
@@ -4972,6 +6015,7 @@ ptboat_stage1_damage() {
   if(isDefined(self.damagefx)) {
     self.damagefx Delete();
   }
+
   self.damagefx = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pt_damage2"], "origin_animate_jnt");
 }
 
@@ -4982,32 +6026,43 @@ ptboat_stage2_damage() {
 
 ptboat_engine_fx_control() {
   self endon("death");
+
   tag_churn_pos = self GetTagOrigin("tag_wake_fx");
   temp_offset = (self.origin - tag_churn_pos) * -1;
   tag_churn_ang = self GetTagAngles("tag_wake_fx");
   temp_angles = tag_churn_ang - self.angles;
+
   temp_offset = (temp_offset[0], temp_offset[1], 0);
+
   self.wake_fx = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pt_wake"], "tag_origin", temp_offset, temp_angles);
+
   self.churn_fx = undefined;
+
   while(true) {
     while(self GetSpeed() < 12 && !self.fake_motion) {
       wait(0.1);
     }
+
     if(isDefined(self.churn_fx))
       self.churn_fx Delete();
+
     self.churn_fx = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pt_churn"], "tag_churn_fx");
+
     while(self GetSpeed() >= 12 || self.fake_motion) {
       wait(0.1);
     }
+
     self.churn_fx Delete();
   }
 }
 
 ai_ptboat_spotlight_think() {
   self endon("death");
+
   pby_ok_to_spawn();
   self.spot_light = self maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pt_light"], "tag_gunner_barrel2");
   self.spot_pos = "gun_1";
+
   while(1) {
     if(!isDefined(self.specific_target)) {
       if(isDefined(level.plane_b)) {
@@ -5022,7 +6077,9 @@ ai_ptboat_spotlight_think() {
     } else {
       spot_light_target = self.specific_target;
     }
+
     self setgunnertargetent(spot_light_target, (0, 0, 0), 1);
+
     if(!isDefined(self.specific_target)) {
       wait(2);
     } else {
@@ -5033,41 +6090,49 @@ ai_ptboat_spotlight_think() {
 
 ai_ptboat_turret_think(drone_type) {
   self endon("death");
+
   target = undefined;
   target_aquired = false;
   time = 0;
   max_time = 2;
   wait_time = .12;
   cycle_time = 3;
+
   while(1) {
     self.targetting_drone = false;
+
     if(!isDefined(self.specific_target) && !isDefined(drone_type)) {
       while(!target_aquired || (level.current_pts_shooting >= level.max_pts_shooting)) {
         if(Distance2D(level.plane_a.origin, self.origin) <= 15000) {
           target_aquired = true;
           target = level.plane_a;
         }
+
         if(isDefined(level.plane_b)) {
           if(!target_aquired && Distance2D(level.plane_b.origin, self.origin) <= 10000) {
             target_aquired = true;
             target = level.plane_b;
           }
         }
+
         wait(0.1);
       }
     } else if(isDefined(self.specific_target)) {
       target = self.specific_target;
     } else if(isDefined(drone_type)) {
       fight_drones = RandomIntRange(0, 100);
+
       if(fight_drones > 100) {
         my_target = -1;
         target_list = getEntArray("drone", "targetname");
+
         for(i = 0; i < target_list.size; i++) {
           if(target_list[i].team == "allies") {
             my_target = i;
             break;
           }
         }
+
         if(my_target != -1) {
           target = target_list[my_target];
           self.targetting_drone = true;
@@ -5078,8 +6143,10 @@ ai_ptboat_turret_think(drone_type) {
         target = level.plane_a;
       }
     }
+
     level.current_pts_shooting++;
     self.shooting = true;
+
     new_target_vec = (0, 0, 0);
     while(Distance2D(self.origin, target.origin) <= 15000) {
       if(target == level.plane_a) {
@@ -5099,51 +6166,67 @@ ai_ptboat_turret_think(drone_type) {
           new_target_vec = target.origin;
         }
       }
+
       if(!flag("ok_to_shoot_at_player")) {
         random_int_offset = .01 * Distance2d(self.origin, target.origin);
+
         if(!isDefined(self.specific_target)) {
           if(random_int_offset < 24) {
             random_int_offset = 24;
           }
         }
+
         if(random_int_offset > 120) {
           random_int_offset = 120;
         }
+
         new_target_vec = new_target_vec + (RandomFloatRange(random_int_offset * -1, random_int_offset), RandomFloatRange(random_int_offset * -1, random_int_offset), RandomFloatRange(random_int_offset * -1, random_int_offset));
       }
+
       if(!self.targetting_drone) {
         new_target_vec = self ai_ptboat_lead_target(target, new_target_vec);
       }
+
       self.target_vector = new_target_vec;
       self setgunnertargetvec(self.target_vector, 0);
+
       gun_forward = self GetTagAngles("tag_gunner_barrel1");
       gun_forward = anglesToForward(gun_forward);
       gun_origin = self GetTagOrigin("tag_gunner_barrel1");
       gun_actual_target = gun_origin + (gun_forward * 20);
+
       if(target == level.plane_a) {
         player_dir = VectorNormalize(level.player.origin - gun_origin);
       } else {
         player_dir = VectorNormalize(target.origin - gun_origin);
       }
+
       gun_aim_dir = VectorNormalize(gun_actual_target - gun_origin);
+
       if(VectorDot(player_dir, gun_aim_dir) > .6) {
         self firegunnerweapon(0);
+
         wait(wait_time);
         time += wait_time;
+
         if(time > max_time) {
           break;
         }
       } else {
         wait(0.05);
       }
+
       self cleargunnertarget(0);
       target_aquired = false;
+
       if(!isDefined(target)) {
         break;
       }
     }
+
     level.current_pts_shooting--;
     self.shooting = false;
+
     if(isDefined(self.cycle_time)) {
       wait(self.cycle_time);
     } else {
@@ -5157,13 +6240,18 @@ ai_ptboat_lead_target(target, targetted_vec) {
   if(target.classname != "script_vehicle") {
     return targetted_vec;
   }
+
   bullet_max_speed = 10000;
   target_speed = target GetSpeed();
   target_forward = anglesToForward(target.angles);
+
   distance_to_target = Distance(self GetTagOrigin("tag_gunner_barrel1"), targetted_vec);
   bullet_travel_time = distance_to_target / bullet_max_speed;
+
   bullet_offset_forward = target_forward * bullet_travel_time * target_speed;
+
   end_vec = targetted_vec + bullet_offset_forward;
+
   return end_vec;
 }
 
@@ -5179,89 +6267,116 @@ pt_boat_death_thread() {
   if(isDefined(self.shark)) {
     self.shark Delete();
   }
+
   self notify("stop_pt_idling");
   self.crashing = true;
   self setCanDamage(false);
+
   if(isDefined(self.has_engine_sound)) {
     self StopLoopSound();
   }
+
   if(isDefined(self.attacker)) {
     if(self.attacker == level.player) {
       level.ptboat_death_count++;
       level notify("suggest good kill", "ptboat");
     }
   }
+
   if(isDefined(self.notify_level)) {
     level notify("ptboat_died");
   }
+
   if(isDefined(self.shooting)) {
     if(self.shooting == true) {
       level.current_pts_shooting--;
     }
   }
+
   if(isDefined(self.wake_fx)) {
     self.wake_fx Delete();
   }
+
   if(isDefined(self.churn_fx)) {
     self.churn_fx Delete();
   }
+
   if(isDefined(self.spot_light)) {
     self.spot_light Delete();
   }
+
   if(isDefined(self.running_lights)) {
     self.running_lights Delete();
   }
+
   if(!isDefined(self.delete_on_death)) {
     if(!isDefined(self.destructible_def)) {
       playFXOnTag(level._effect["pt_damage4"], self, "tag_origin");
+
       random_death = RandomIntRange(1, 8);
+
       if(isDefined(self.driver)) {
         self.driver UnLink();
       }
+
       radiusdamage(self.origin, 150, 1000, 1001);
       death_anim = "sink" + random_death;
       self SetSpeed(0, 10, 10);
+
       if(isDefined(self.engine_audio)) {
         self.engine_audio StopLoopSound();
         self.engine_audio Delete();
       }
+
       if(isDefined(self.wake_audio)) {
         thread delete_wake_audio(self.wake_audio);
       }
+
       self.sinking_boat = spawn("script_model", self.origin);
       self.sinking_boat setModel("vehicle_jap_ship_ptboat_dmg");
       self.sinking_boat.origin = self.origin;
       self.sinking_boat.angles = self GetTagAngles("origin_animate_jnt");
       self.sinking_boat.animname = "pt_boat";
       self.sinking_boat UseAnimTree(#animtree);
+
       self.sinking_boat.linked_ent = spawn("script_model", self.origin);
       self.sinking_boat.linked_ent setModel("tag_origin");
       self.sinking_boat.linked_ent.angles = self.sinking_boat.angles;
+
       self.sinking_boat LinkTo(self.sinking_boat.linked_ent);
+
       self Hide();
+
       self.sinking_boat thread anim_single_solo(self.sinking_boat, death_anim);
       self.sinking_boat.sinking_fx = self.sinking_boat thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pt_sink"], "tag_origin", undefined, (-90, 0, 0));
       self.sinking_boat.linked_ent thread debris_float_away();
+
       self.sinking_boat waittill(death_anim);
+
       self.sinking_boat.linked_ent Delete();
     } else {
       random_death = RandomIntRange(1, 8);
+
       if(isDefined(self.driver)) {
         self.driver UnLink();
       }
       radiusdamage(self.origin, 150, 1000, 1001);
       death_anim = "sink" + random_death;
       self SetSpeed(0, 10, 10);
+
       my_anim_time = GetAnimLength(level.scr_anim["pt_boat"][death_anim]);
       self thread anim_single_solo(self, death_anim);
       self.sinking_fx = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["pt_sink"], "tag_origin", undefined, (-90, 0, 0));
+
       if(isDefined(self.engine_audio)) {
         self.engine_audio StopLoopSound();
         self.engine_audio Delete();
       }
+
       if(isDefined(self.wake_audio)) {
         thread delete_wake_audio(self.wake_audio);
       }
+
       wait(my_anim_time);
     }
   } else {
@@ -5269,21 +6384,26 @@ pt_boat_death_thread() {
       self.engine_audio StopLoopSound();
       self.engine_audio Delete();
     }
+
     if(isDefined(self.wake_audio)) {
       self.wake_audio StopLoopSound();
       self.wake_audio Delete();
     }
   }
+
   if(isDefined(self.engine_audio)) {
     self.engine_audio StopLoopSound();
     self.engine_audio Delete();
   }
+
   if(isDefined(self.wake_audio)) {
     thread delete_wake_audio(self.wake_audio);
   }
+
   if(isDefined(self.damagefx)) {
     self.damagefx Delete();
   }
+
   if(isDefined(self.sinking_boat)) {
     if(isDefined(self.sinking_boat.sinking_fx)) {
       self.sinking_boat.sinking_fx Delete();
@@ -5291,19 +6411,24 @@ pt_boat_death_thread() {
   } else if(isDefined(self.sinking_fx)) {
     self.sinking_fx Delete();
   }
+
   if(isDefined(self.driver)) {
     self.driver Delete();
   }
+
   level notify("ptboat destroyed");
   self notify("crash_done");
 }
 
 shinyo_boat_init() {
   self.script_crashtypeoverride = "none";
+
   self UseAnimTree(#animtree);
   self.animname = "shinyou";
+
   self thread self_destruct_shinyou();
   self thread shinyo_engine_fx_control();
+
   self.spot_light = spawn("script_model", (0, 0, 0));
   self.spot_light setModel("tag_origin");
   self.spot_light.origin = self.origin + (anglesToForward(self.angles) * 100) + (AnglesToUp(self.angles) * 20);
@@ -5314,81 +6439,101 @@ shinyo_boat_init() {
 
 self_destruct_shinyou() {
   self endon("death");
+
   self waittill("reached_end_node");
   self notify("death");
 }
 
 shinyo_engine_fx_control() {
   self endon("death");
+
   self.wake_fx = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["shinyou_wake"], "tag_wake_fx");
   self.churn_fx = undefined;
 }
 
 shinyo_boat_death_thread() {
   self.crashing = true;
+
   self setCanDamage(false);
   self SetSpeed(0, 5, 5);
   playFX(level._effect["zero_kamikaze"], self.origin);
+
   if(isDefined(self.wake_fx)) {
     self.wake_fx Delete();
   }
+
   if(isDefined(self.churn_fx)) {
     self.churn_fx Delete();
   }
+
   if(!isDefined(self.delete_on_death)) {
     self SetSpeed(0, 10, 10);
     self thread anim_single_solo(self, "sink");
     self waittill("sink");
   }
+
   self.spot_light Delete();
+
   self notify("crash_done");
 }
 
 onPlayerConnect() {
   for(;;) {
     level waittill("connecting", player);
+
     player thread onPlayerDisconnect();
     player thread onPlayerSpawned();
     player thread onPlayerKilled();
+
     println("Player connected to game.");
+
     player.my_plane = level.plane_a;
+
     player DisableTurretDismount();
   }
 }
 
 onPlayerDisconnect() {
   self waittill("disconnect");
+
   println("Player disconnected from the game.");
 }
 
 onPlayerSpawned() {
   self endon("disconnect");
+
   for(;;) {
     self waittill("spawned_player");
+
     println("Player spawned in to game at " + self.origin);
   }
 }
 
 onPlayerKilled() {
   self endon("disconnect");
+
   for(;;) {
     self waittill("killed_player");
+
     println("Player killed at " + self.origin);
   }
 }
 
 jumpto_event2_media() {
   move_ev4(false);
+
   new_starting_node = GetVehicleNode("auto740", "targetname");
   level.plane_a AttachPath(new_starting_node);
   level.plane_a thread maps\_vehicle::vehicle_paths(new_starting_node);
   level.plane_a StartPath();
   level.plane_a thread pby_veh_idle("fly_up_open", 0.1);
+
   new_starting_node = GetVehicleNode("auto1005", "targetname");
   level.plane_b AttachPath(new_starting_node);
   level.plane_b thread maps\_vehicle::vehicle_paths(new_starting_node);
   level.plane_b StartPath();
   level.plane_b thread pby_veh_idle("fly_up_open", 0.1);
+
   level.player scripted_turret_switch("pby_rightgun", false, 1);
   level thread event2_strafe_boats_m();
   level thread event2_boat_fx();
@@ -5406,17 +6551,21 @@ jumpto_event2_media() {
 jumpto_event2_strafe_boats() {
   flag_set("jumpto_used");
   move_ev4(false);
+
   new_starting_node = GetVehicleNode("boat_strafing_node", "targetname");
   level.plane_a AttachPath(new_starting_node);
   level.plane_a thread maps\_vehicle::vehicle_paths(new_starting_node);
   level.plane_a StartPath();
+
   new_starting_node = GetVehicleNode("boat_strafing_node_b", "targetname");
   level.plane_b AttachPath(new_starting_node);
   level.plane_b thread maps\_vehicle::vehicle_paths(new_starting_node);
   level.plane_b StartPath();
+
   level.player scripted_turret_switch("pby_rightgun");
   level.player.open_hatch = true;
   level.player scripted_turret_switch("pby_backgun");
+
   level thread event2_strafe_boats();
 }
 
@@ -5424,19 +6573,24 @@ jumpto_event3() {
   flag_set("jumpto_used");
   my_level_init();
   wait(1);
+
   setmusicstate("MERCH_DONE");
+
   new_start_node = GetVehicleNode("auto767", "targetname");
   level.plane_a AttachPath(new_start_node);
   level.plane_a thread maps\_vehicle::vehicle_paths(new_start_node);
   level.plane_a StartPath();
+
   new_start_node = GetVehicleNode("auto1031", "targetname");
   level.plane_b AttachPath(new_start_node);
   level.plane_b thread maps\_vehicle::vehicle_paths(new_start_node);
   level.plane_b StartPath();
+
   wait(1);
   move_ev4(false);
   level notify("start_fade_in");
   level.player thread scripted_turret_switch("pby_leftgun");
+
   level.plane_a notify("start_mist");
   level.plane_b notify("start_mist");
   level event3(true);
@@ -5446,17 +6600,23 @@ jumpto_event4() {
   flag_set("jumpto_used");
   my_level_init();
   move_ev2(false);
+
   new_start_node = GetVehicleNode("event4_start_path", "targetname");
+
   wait(0.5);
+
   level.plane_a AttachPath(new_start_node);
   level.plane_a thread maps\_vehicle::vehicle_paths(new_start_node);
   level.plane_a StartPath();
   level.plane_a pby_veh_idle("float", 0);
+
   level.gunner_anim_count = 7;
+
   wait(1);
   level notify("start_fade_in");
   exploder(200);
   level.player scripted_turret_switch("pby_frontgun", false);
+
   level thread event4(true);
   level thread event4_dialogue();
   level.plane_a notify("start_mist");
@@ -5470,14 +6630,17 @@ jumpto_event4_part3() {
 
 jumpto_initial_zeroes() {
   move_ev2(false);
+
   new_start_node = GetVehicleNode("auto1338", "targetname");
   level.plane_a AttachPath(new_start_node);
   level.plane_a thread maps\_vehicle::vehicle_paths(new_start_node);
   level.plane_a StartPath();
+
   new_start_node = GetVehicleNode("auto1369", "targetname");
   level.plane_b AttachPath(new_start_node);
   level.plane_b thread maps\_vehicle::vehicle_paths(new_start_node);
   level.plane_b StartPath();
+
   wait(1);
   level notify("start_fade_in");
   exploder(200);
@@ -5488,16 +6651,21 @@ jumpto_initial_zeroes() {
 jumpto_event6() {
   my_level_init();
   move_ev2(false);
+
   new_start_node = GetVehicleNode("auto602", "targetname");
+
   wait(0.5);
+
   level.plane_a AttachPath(new_start_node);
   level.plane_a thread maps\_vehicle::vehicle_paths(new_start_node);
   level.plane_a StartPath();
   level.plane_a pby_veh_idle("float", 0);
+
   wait(1);
   level notify("start_fade_in");
   exploder(200);
   level.player scripted_turret_switch("pby_frontgun", false);
+
   level thread event6();
   level.plane_a notify("start_mist");
   level notify("sun_rise");
@@ -5505,13 +6673,17 @@ jumpto_event6() {
 }
 
 run_special_debug_functions() {}
+
 dbg_training_planes() {
   my_trig = GetEnt("debug_training_target", "targetname");
   my_trig waittill("trigger");
+
   wait(1);
+
   plane0 = GetEnt("training_plane_0", "targetname");
   plane1 = GetEnt("training_plane_1", "targetname");
   plane2 = GetEnt("training_plane_2", "targetname");
+
   plane0 thread dbg_plane_taking_damage();
   plane1 thread dbg_plane_taking_damage();
   plane2 thread dbg_plane_taking_damage();
@@ -5519,12 +6691,15 @@ dbg_training_planes() {
 
 dbg_plane_taking_damage() {
   i = 0;
+
   while(1) {
     self waittill("damage", amount);
+
     level.dbg_text_plane_dmg = newHudElem();
     level.dbg_text_plane_dmg.alignX = "center";
     level.dbg_text_plane_dmg.x = 200;
     level.dbg_text_plane_dmg.y = 300;
+
     iprintlnbold(self.targetname + " has " + self.health + " remaining ");
   }
 }
@@ -5534,6 +6709,7 @@ event2_boat_fx() {
   for(i = 0; i < 3; i++) {
     level.boats[i] = GetEnt("ev2_ship_" + i, "targetname");
   }
+
   for(i = 0; i < level.boats.size; i++) {
     tag_height = level.boats[i] GetTagOrigin("tag_wake_fx")[2];
     wake_offset = level.WATER_LEVEL - tag_height + 2;
@@ -5544,12 +6720,16 @@ event2_boat_fx() {
 
 event2_debris() {
   level.plane_a waittill("ev2_debris_turn1");
+
   for(i = 0; i < level.debris_turn_1.size; i++) {
     level.debris_turn_1[i] thread debris_float_away();
   }
+
   level.plane_a waittill("ev2_debris_turn3");
+
   level thread delete_all_ms_guys();
   level thread remove_metal_clip();
+
   for(i = 0; i < level.debris_turn_3.size; i++) {
     level.debris_turn_3[i] thread debris_float_away();
     if(isDefined(level.debris_turn_3[i].script_string)) {
@@ -5561,6 +6741,7 @@ event2_debris() {
 remove_metal_clip() {
   metal_clip = [];
   metal_clip = getEntArray("boat_metal_coll", "targetname");
+
   for(i = 0; i < metal_clip.size; i++) {
     metal_clip[i] Delete();
     wait(0.05);
@@ -5569,12 +6750,15 @@ remove_metal_clip() {
 
 event2_debris_cleanup() {
   level waittill("debris_ready_delete");
+
   wait(6);
+
   for(i = 0; i < level.debris_turn_1.size; i++) {
     if(isDefined(level.debris_turn_1[i])) {
       level.debris_turn_1[i] Delete();
     }
   }
+
   for(i = 0; i < level.debris_turn_3.size; i++) {
     if(isDefined(level.debris_turn_3[i])) {
       level.debris_turn_3[i] Delete();
@@ -5586,24 +6770,29 @@ debris_float_away() {
   level.plane_a endon("debris_stop");
   level endon("debris_ready_delete");
   self endon("death");
+
   time_to_move = 5;
   current_speed = 600;
   distance_to_move = time_to_move * current_speed;
   total_movement = 0;
   max_movement = 50000;
   y = 0;
+
   self Show();
   while(1) {
     current_speed = (level.CURRENT_OCEAN_SPEED / level.MAX_OCEAN_SPEED) * 600;
     distance_to_move = time_to_move * current_speed;
+
     y = RandomIntRange(-30, 30);
     self MoveTo(self.origin - (distance_to_move, y, 0), time_to_move, 0.05, 0.5);
     wait(time_to_move);
+
     total_movement = total_movement + distance_to_move;
     if(total_movement > max_movement) {
       break;
     }
   }
+
   self Delete();
 }
 
@@ -5611,23 +6800,28 @@ drones_float_away() {
   level.plane_a endon("debris_stop");
   level endon("debris_ready_delete");
   self endon("death");
+
   time_to_move = 5;
   current_speed = 600;
   distance_to_move = time_to_move * current_speed;
   total_movement = 0;
   max_movement = 50000;
   y = 0;
+
   while(1) {
     current_speed = (level.CURRENT_OCEAN_SPEED / level.MAX_OCEAN_SPEED) * 600;
     distance_to_move = time_to_move * current_speed;
+
     y = RandomIntRange(-30, 30);
     self MoveTo(self.origin - (distance_to_move, y, 0), time_to_move, 0.05, 0.5);
     wait(time_to_move);
+
     total_movement = total_movement + distance_to_move;
     if(total_movement > max_movement) {
       break;
     }
   }
+
   self Delete();
 }
 
@@ -5635,32 +6829,52 @@ music_state_changes() {
   level.plane_a thread music_notify_continue("play_general_chatter", "continue_music_state_changes");
   level.plane_a thread music_notify_continue_trigger_pressed("first_pass_starting", "continue_music_state_changes");
   level waittill("continue_music_state_changes");
+
   level waittill("told to go ventral");
   level.player waittill("switching_turret");
+
   level.player waittill("done_switching_turrets");
+
   level.plane_a waittill("music_end_first_pass");
+
   setmusicstate("TURNING_1");
+
   level.plane_a thread music_notify_continue("flak_rumble_start", "continue_music_state_changes");
   level.plane_a thread music_notify_continue_trigger_pressed("second_pass_starting", "continue_music_state_changes");
   level waittill("continue_music_state_changes");
+
   setmusicstate("MERCH_FIRST_PASS");
+
   level.plane_a waittill("got_flaked");
+
   level waittill("music_to_turret_right");
   level.player waittill("switching_turret");
+
   level.player waittill("done_switching_turrets");
+
   setmusicstate("MERCH_SECOND_PASS");
+
   level.plane_a waittill("3rd_pass_pt_boats");
+
   level waittill("music_to_turret_left");
   level.player waittill("switching_turret");
+
   level.player waittill("done_switching_turrets");
+
   level waittill("music_to_turret_right");
   level.player waittill("switching_turret");
+
   level.player waittill("done_switching_turrets");
+
   level.plane_a waittill("music_end_second_pass");
+
   setmusicstate("TURNING_1");
+
   level waittill("music_to_turret_front");
   level.player waittill("switching_turret");
+
   level.player waittill("done_switching_turrets");
+
   level.plane_a waittill("music_end_third_pass");
 }
 
@@ -5673,6 +6887,7 @@ music_notify_continue(_wait_string, _end_string) {
 music_notify_continue_trigger_pressed(_wait_string, _end_string) {
   level endon(_end_string);
   self waittill(_wait_string);
+
   while(!level.player AttackButtonPressed()) {
     wait(0.05);
   }
@@ -5683,14 +6898,17 @@ event2_manage_the_ocean_water() {
   level.MAX_OCEAN_SPEED = 0.54;
   level.MID_OCEAN_SPEED = 0.38;
   level.CURRENT_OCEAN_SPEED = 0;
+
   while(level.MAX_OCEAN_SPEED > level.CURRENT_OCEAN_SPEED) {
     level.CURRENT_OCEAN_SPEED += 0.01;
-    SetDvar("r_watersim_scroll", level.CURRENT_OCEAN_SPEED, "0");
+    setDvar("r_watersim_scroll", level.CURRENT_OCEAN_SPEED, "0");
     wait(0.05);
   }
+
   level.plane_a waittill("music_end_second_pass");
+
   level.CURRENT_OCEAN_SPEED = 0;
-  SetDvar("r_watersim_scroll", level.CURRENT_OCEAN_SPEED, "0");
+  setDvar("r_watersim_scroll", level.CURRENT_OCEAN_SPEED, "0");
 }
 
 watch_for_player_shooting(important_string, type) {
@@ -5699,16 +6917,19 @@ watch_for_player_shooting(important_string, type) {
       while(!level.player AttackButtonPressed() && !level.player FragButtonPressed()) {
         wait(0.05);
       }
+
       if(level.player AttackButtonPressed()) {
         if(!level.player.in_transition) {
           flag_set(important_string);
         }
       }
+
       if(level.player FragButtonPressed()) {
         if(level.player.current_seat == "pby_frontgun" && !level.player.in_transition) {
           flag_set(important_string);
         }
       }
+
       wait(0.05);
     }
   }
@@ -5719,37 +6940,56 @@ event2_strafe_boats() {
   level thread event2_flak_front_of_plane();
   level thread event2_ptboat_1st_pass();
   level thread watch_for_player_shooting("player_shot_during_event2", "flag");
+
   level.plane_a thread scripted_flak_and_shake_above_pby();
+
   set_objective("merchant_boats");
   maps\_debug::set_event_printname("Event 2 - Merchantships", false);
+
   level.boats[0].sink_anim = "sink_big";
   level.boats[0].special_sink_fx = "merchant_sink_fire";
+
   wait(0.05);
+
   oil_tanks = [];
   oil_tanks = getEntArray("explodable_oiltank", "script_noteworthy");
   for(i = 0; i < oil_tanks.size; i++) {
     oil_tanks[i].parent = level.boats[0];
   }
+
   wait(0.05);
+
   level thread event2_dialogue_splined();
+
   level.plane_b thread ai_pby_gunners_think();
+
   wait(0.1);
+
   level thread event2_setup_first_ship_drones();
   level thread event2_setup_second_ship_drones();
   level thread event2_setup_third_ship_drones();
+
   wait(0.1);
+
   level thread event2_delete_ship_shields();
+
   wait(0.1);
+
   level thread merchant_boat_siren();
   level thread merchant_boat_1_sounds();
   level thread merchant_boat_3_sounds();
   level thread merchant_boat_pa();
+
   wait(0.1);
   wait(0.1);
+
   level thread event2_debris();
+
   wait(0.25);
+
   for(i = 0; i < level.boats.size; i++) {
     level.boats[i] thread ms_soldier_triple_25_add_gunners();
+
     level.boats[i].scriptname = "boat_" + i;
     level.boats[i] thread attach_boat_destructibles();
     level.boats[i].animname = "merchant_ship";
@@ -5757,40 +6997,53 @@ event2_strafe_boats() {
     level.boats[i].aft.animname = "merchant_ship";
     level.boats[i].alarmed = false;
     level.boats[i] thread merchant_boat_alarm();
+
     level.boats[i] thread setup_merchant_ship_chain_destruction();
     level.boats[i] thread track_spotlight_achievement_helper("aft_light_pitch");
     level.boats[i] thread track_spotlight_achievement_helper("bow_light_pitch");
+
     level.boats[i] thread merchant_boat_spots();
+
     level.boats[i] thread merchant_boat_trip25();
+
     level.boats[i] thread merchant_boat_sink_me();
     level.boats[i] thread merchant_boat_track_damage();
+
     wait(0.1);
+
     if(i == level.boats.size - 1) {
       level.boats[i] thread event2_strafe_boats_force_player_play();
     }
   }
+
   level thread event2_dialogue();
   level thread event2_destruction_dialogue();
   level thread event2_seat_control();
   level.player thread event2_falling_animation();
   level thread event2_flak_shake();
   level thread event2_sink_all_boats();
+
   level thread event2_ptboat_2nd_pass();
   level thread event2_ptboat_3rd_pass();
   level thread event2_ptboats_4th_pass();
+
   level.plane_a waittill("start_event_3");
   set_objective("back_to_base");
+
   level thread event3();
 }
 
 event2_strafe_boats_force_player_play() {
   level.plane_a waittill("check_player_playing");
+
   wait(2);
+
   for(i = 0; i < 2; i++) {
     if(!flag("player_shot_during_event2")) {
       self notify("stop_firing");
       self thread merchant_boat_trip25_track(0, "tag_gunner_barrel1", level.plane_a, "tower_gun_destroyed", true);
       self thread merchant_boat_trip25_track(1, "tag_gunner_barrel2", level.plane_a, "deck_gun_destroyed", true);
+
       if(i == 0) {
         wait(2.0);
       }
@@ -5798,6 +7051,7 @@ event2_strafe_boats_force_player_play() {
       return;
     }
   }
+
   wait(1);
   playFX(level._effect["flak_one_shot"], level.player.origin + (anglesToForward(level.plane_a.angles) * 50));
   get_players()[0] PlayRumbleOnEntity("damage_heavy");
@@ -5809,12 +7063,15 @@ event2_strafe_boats_force_player_play() {
 
 merchant_boat_track_damage() {
   self endon("i should sink");
+
   if(!isDefined(self.damage_threshold)) {
     self.damage_threshold = 30000;
   }
+
   while(isDefined(self) && self.damage_threshold > 0) {
     self waittill("damage", amount, attacker);
-    if(IsPlayer(attacker)) {
+
+    if(isPlayer(attacker)) {
       self.damage_threshold -= amount;
     }
   }
@@ -5822,9 +7079,11 @@ merchant_boat_track_damage() {
 
 check_and_print_damage(ship_number) {
   my_total_damage = 0;
+
   while(isDefined(self)) {
     self waittill("damage", amount, attacker);
-    if(IsPlayer(attacker)) {
+
+    if(isPlayer(attacker)) {
       my_total_damage += amount;
       println("Boat " + ship_number + ": has taken: " + my_total_damage + " damage");
     }
@@ -5834,6 +7093,7 @@ check_and_print_damage(ship_number) {
 event2_spawn_drowners(_targetname) {
   drowning_drones_spawn = [];
   drowning_drones_spawn = GetStructArray(_targetname, "targetname");
+
   drowning_drones = [];
   for(i = 0; i < drowning_drones_spawn.size; i++) {
     pby_ok_to_spawn();
@@ -5846,19 +7106,25 @@ event2_spawn_drowners(_targetname) {
 
 event2_spawn_rowboat_with_drones(_targetname, waittill_spawn) {
   level.plane_a waittill(waittill_spawn);
+
   raft_struct = GetStructArray(_targetname, "targetname");
+
   for(i = 0; i < raft_struct.size; i++) {
     pby_ok_to_spawn();
     raft = spawn("script_model", raft_struct[i].origin);
     raft setModel("static_peleliu_lifeboat");
     raft.angles = raft_struct[i].angles;
+
     rescueboat_drones_spawn = [];
     rescueboat_drones_spawn = GetStructArray(raft_struct[i].target, "targetname");
+
     rescue_drones = [];
+
     for(i = 0; i < rescueboat_drones_spawn.size; i++) {
       rescue_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", rescueboat_drones_spawn[i]);
       rescue_drones[i].targetname = "rescue_raft_drone";
     }
+
     level thread maps\_drone::drone_idle_row_boat(rescue_drones, raft);
     raft thread drones_float_away();
   }
@@ -5871,21 +7137,27 @@ event2_cleanup() {
     level.boats[i].glass1 Delete();
     level.boats[i].glass2 Delete();
     level.boats[i].glass3 Delete();
+
     for(j = 0; j < level.boats[i].aft_destructibles.size; j++) {
       level.boats[i].aft_destructibles[j] Delete();
     }
+
     for(j = 0; j < level.boats[i].bow_destructibles.size; j++) {
       level.boats[i].bow_destructibles[j] Delete();
     }
+
     level.boats[i] Delete();
+
     wait(0.05);
   }
 }
 
 event2_delete_ship_shields() {
   level.plane_a waittill("delete_ship_shields");
+
   shields = [];
   shields = getEntArray("con_tower_shield", "targetname");
+
   for(i = 0; i < shields.size; i++) {
     shields[i] Delete();
   }
@@ -5894,9 +7166,11 @@ event2_delete_ship_shields() {
 attach_boat_destructibles() {
   dest_array_aft = getEntArray(self.scriptname + "_dest_aft", "targetname");
   dest_array_bow = getEntArray(self.scriptname + "_dest_bow", "targetname");
+
   for(i = 0; i < dest_array_aft.size; i++) {
     dest_array_aft[i] LinkTo(self, "aft_break_jnt");
   }
+
   for(i = 0; i < dest_array_bow.size; i++) {
     dest_array_bow[i] LinkTo(self, "bow_break_jnt");
   }
@@ -5904,6 +7178,7 @@ attach_boat_destructibles() {
 
 event2_sink_all_boats() {
   level.plane_a waittill("boats_start_sinking");
+
   for(i = 0; i < level.boats.size; i++) {
     level.boats[i] notify("i should sink");
   }
@@ -5911,14 +7186,18 @@ event2_sink_all_boats() {
 
 close_hit_dialogue() {
   level endon("no more close hit dialogue");
+
   ch_dialogue = [];
   ch_dialogue[0] = "booth_that_was_close";
   ch_dialogue[1] = "booth_close_one";
   ch_dialogue[2] = "PBY1_IGD_568A_LAUG";
   ch_dialogue[3] = "PBY1_IGD_569A_LAUG";
+
   i = 0;
+
   for(;;) {
     level waittill("suggest close hit");
+
     if(!flag("disable_random_dialogue")) {
       flag_set("disable_random_dialogue");
       if(IsSubStr(ch_dialogue[i], "booth")) {
@@ -5927,7 +7206,9 @@ close_hit_dialogue() {
         play_sound_over_radio(ch_dialogue[i]);
       }
       flag_clear("disable_random_dialogue");
+
       wait(5);
+
       i++;
       if(i >= ch_dialogue.size) {
         i = 0;
@@ -5936,13 +7217,16 @@ close_hit_dialogue() {
       wait(1);
     }
   }
+
 }
 
 damage_to_pby_dialogue(damaged_part) {
   if(self != level.plane_a) {
     return;
   }
+
   damage_dialogue = [];
+
   damage_dialogue["right_wing"][0] = "PBY1_IGD_540A_LAUG";
   damage_dialogue["right_wing"][1] = "landry_right_wing_damage";
   damage_dialogue["left_wing"][0] = "PBY1_IGD_541A_LAUG";
@@ -5953,11 +7237,14 @@ damage_to_pby_dialogue(damaged_part) {
   damage_dialogue["number_two_engine"][1] = "landry_number_two_engine";
   damage_dialogue["engine_fire"][0] = "PBY1_IGD_544A_LAUG";
   damage_dialogue["engine_fire"][1] = "PBY1_IGD_544A_LAUG";
+
   random_line = RandomInt(2);
   damage_line = damage_dialogue[damaged_part][random_line];
+
   while(flag("disable_random_dialogue")) {
     wait(0.5);
   }
+
   if(IsSubStr(damage_line, "landry")) {
     anim_single_solo(level.plane_a.radioop, damage_line);
   } else {
@@ -5967,6 +7254,7 @@ damage_to_pby_dialogue(damaged_part) {
 
 good_kill_dialogue() {
   level endon("no more good kill dialogue");
+
   gk_dialogue = [];
   gk_dialogue[0] = "booth_keep_it_up";
   gk_dialogue[1] = "landry_good_job_locke";
@@ -5977,6 +7265,7 @@ good_kill_dialogue() {
   gk_dialogue[6] = "PBY1_IGD_301A_LAUG";
   gk_dialogue[7] = "landry_dont_stop_now";
   gk_dialogue[8] = "booth_thats_the_way";
+
   pk_dialogue = [];
   pk_dialogue[0] = "booth_zero_goin_down";
   pk_dialogue[1] = "PBY1_IGD_611A_LAUG";
@@ -5985,6 +7274,7 @@ good_kill_dialogue() {
   pk_dialogue[4] = "booth_zero_dash_down";
   pk_dialogue[5] = "PBY1_IGD_610A_LAUG";
   pk_dialogue[6] = "PBY1_IGD_612A_LAUG";
+
   bk_dialogue = [];
   bk_dialogue[0] = "booth_ptboat_sunk";
   bk_dialogue[1] = "PBY1_IGD_603A_LAUG";
@@ -5992,11 +7282,14 @@ good_kill_dialogue() {
   bk_dialogue[3] = "PBY1_IGD_604A_LAUG";
   bk_dialogue[4] = "booth_ptboat_lots_of_holes";
   bk_dialogue[5] = "PBY1_IGD_605A_LAUG";
+
   i = 0;
   j = 0;
   k = 0;
+
   for(;;) {
     level waittill("suggest good kill", enemy_type);
+
     if(!isDefined(enemy_type)) {
       enemy_type = "generic";
     } else {
@@ -6005,6 +7298,7 @@ good_kill_dialogue() {
         enemy_type = "generic";
       }
     }
+
     if(enemy_type == "zero") {
       line_to_play = pk_dialogue[j];
       j++;
@@ -6015,6 +7309,7 @@ good_kill_dialogue() {
       line_to_play = gk_dialogue[i];
       i++;
     }
+
     if(!flag("disable_random_dialogue")) {
       if(IsSubStr(line_to_play, "booth")) {
         anim_single_solo(level.plane_a.pilot, line_to_play);
@@ -6023,16 +7318,20 @@ good_kill_dialogue() {
       } else {
         play_sound_over_radio(line_to_play);
       }
+
       wait(10);
     } else {
       wait(1);
     }
+
     if(i >= gk_dialogue.size) {
       i = 0;
     }
+
     if(j >= pk_dialogue.size) {
       j = 0;
     }
+
     if(k >= bk_dialogue.size) {
       k = 0;
     }
@@ -6046,6 +7345,7 @@ event2_destruction_dialogue() {
   destruction_yay[3] = "PBY1_IGD_005A_LAUG";
   destruction_yay[4] = "PBY1_IGD_019A_LAUG";
   destruction_yay[2] = "PBY1_IGD_021A_LAUG";
+
   for(i = 0; i < destruction_yay.size; i++) {
     level waittill("large explosion comment");
     if(!flag("disable_random_dialogue")) {
@@ -6056,6 +7356,7 @@ event2_destruction_dialogue() {
       } else {
         play_sound_over_radio(destruction_yay[i]);
       }
+
       wait(30);
     } else {
       i--;
@@ -6071,11 +7372,13 @@ event2_dialogue() {
   wait(0.15);
   play_sound_over_radio("PBY1_IGD_024A_HARR");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("flak_rumble_start");
   flag_set("disable_random_dialogue");
   play_sound_over_radio("PBY1_IGD_043A_LAUG");
   level anim_single_solo(level.plane_a.pilot, "booth_taking_evasive_action_hold");
   flag_clear("disable_random_dialogue");
+
   wait(3);
   flag_set("disable_random_dialogue");
   anim_single_solo(level.plane_a.pilot, "booth_damn_that_was_close");
@@ -6086,6 +7389,7 @@ event2_dialogue() {
   play_sound_over_radio("PBY1_IGD_045A_LAUG");
   play_sound_over_radio("PBY1_IGD_047A_LAUG");
   anim_single_solo(level.plane_a.pilot, "booth_i_hear_you");
+
   wait(0.5);
   anim_single_solo(level.plane_a.pilot, "booth_mg_fire_all_around");
   wait(0.15);
@@ -6098,6 +7402,7 @@ event2_dialogue() {
   wait(0.3);
   anim_single_solo(level.plane_a.pilot, "booth_negative_we_can_do_this");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("dialogue_notify");
   flag_set("disable_random_dialogue");
   level anim_single_solo(level.plane_a.pilot, "booth_taking_her_down_low");
@@ -6106,29 +7411,36 @@ event2_dialogue() {
   wait(0.15);
   level anim_single_solo(level.plane_a.pilot, "booth_shoot_out_those_damn_spot");
   flag_clear("disable_random_dialogue");
+
   level waittill("dialogue_turret_left");
   flag_set("disable_random_dialogue");
   level anim_single_solo(level.plane_a.pilot, "booth_japanese_pt_boats");
   level anim_single_solo(level.plane_a.pilot, "booth_9_oclock");
   level anim_single_solo(level.plane_a.pilot, "booth_get_on_left_turret");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("lil_shit");
   flag_set("disable_random_dialogue");
   play_sound_over_radio("PBY1_IGD_039A_LAUG");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("pick_your_targets");
   flag_set("disable_random_dialogue");
   level anim_single_solo(level.plane_a.pilot, "booth_pick_your_targets_locke");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("still_afloat");
   flag_set("disable_random_dialogue");
   play_sound_over_radio("PBY1_IGD_056A_LAUG");
   flag_clear("disable_random_dialogue");
+
   level.plane_a waittill("front_turret");
   flag_set("disable_random_dialogue");
   level anim_single_solo(level.plane_a.pilot, "booth_ill_take_us_as_close");
   flag_clear("disable_random_dialogue");
+
   setmusicstate("MERCH_LAST_PASS");
+
   level.plane_a waittill("dialogue_notify");
   if(level.merchant_ship_death_count == 3) {
     flag_set("disable_random_dialogue");
@@ -6143,7 +7455,9 @@ event2_dialogue() {
   anim_single_solo(level.plane_a.pilot, "booth_get_some_altitude");
   play_sound_over_radio("PBY1_IGD_060A_HARR");
   flag_clear("disable_random_dialogue");
+
   level thread delete_all_ms_guys();
+
   level.plane_a notify("start_event_3");
 }
 
@@ -6170,19 +7484,26 @@ event2_dialogue_splined_general() {
 
 event2_flak_shake() {
   level.plane_a endon("got_flaked");
+
   level.plane_a waittill("flak_rumble_start");
+
   rand = 0;
+
   while(true) {
     Earthquake(.3, 1.0, level.plane_a.origin, 1000);
     playsoundatposition("amb_metal", (0, 0, 0));
+
     rand = RandomFloatRange(1.0, 2.5);
+
     how_many = RandomIntRange(2, 4);
     for(i = 0; i < how_many; i++) {
       fx_org = level.plane_a.origin - (anglesToForward(level.plane_a.angles) * (366 + RandomIntRange(150, 300))) - (AnglesToUp(level.plane_a.angles) * (50 + RandomIntRange(250, 400)) - (AnglesToRight(level.plane_a.angles) * RandomIntRange(-200, 200)));
       playFX(level._effect["flak_one_shot"], fx_org);
+
       level notify("tail_bullet_hole");
       wait(0.12);
     }
+
     level notify("bullet_hole_wait", rand);
     wait(rand);
   }
@@ -6199,19 +7520,24 @@ event2_flak_front_of_plane(guy) {
 
 event2_pby_b_1st_pass() {
   level.plane_a waittill("1st_pass_pt_boats");
+
   level.plane_a waittill("1st_pass_pt_boats");
   pby_path = GetVehiclenode("pby_b_pass_1", "targetname");
   level.plane_b AttachPath(pby_path);
   level.plane_b thread maps\_vehicle::vehicle_paths(pby_path);
   level.plane_b StartPath();
   level.plane_b ResumeSpeed(1000);
+
   level.plane_b.zoom_by = spawn("script_model", level.plane_b.origin);
   level.plane_b.zoom_by setModel("tag_origin");
   level.plane_b.zoom_by LinkTo(level.plane_b, "tag_origin", (0, 0, 0), (0, 0, 0));
   flyby_sound = "pby_3p_by_1";
   level.plane_b.zoom_by playSound(flyby_sound);
+
   wait(4);
+
   play_sound_over_radio("PBY1_IGD_022A_HARR");
+
   level.plane_a waittill("pby_b_pass_2");
   pby_path = GetVehiclenode("pby_b_pass_2", "targetname");
   level.plane_b AttachPath(pby_path);
@@ -6219,29 +7545,35 @@ event2_pby_b_1st_pass() {
   level.plane_b StartPath();
   level.plane_b ResumeSpeed(1000);
   level.plane_b.zoom_by playSound(flyby_sound);
+
   level.plane_a waittill("pby_b_pass_2_b");
   pby_path = GetVehiclenode("pby_b_pass_2_b", "targetname");
   level.plane_b AttachPath(pby_path);
   level.plane_b thread maps\_vehicle::vehicle_paths(pby_path);
   level.plane_b StartPath();
   level.plane_b ResumeSpeed(1000);
+
   level.plane_b waittill("flybysound");
   flyby_sound = "pby_3p_by_1";
   level.plane_b.zoom_by playSound(flyby_sound);
+
   level.plane_a waittill("front_turret");
   pby_path = GetVehiclenode("pby_b_pass_4", "targetname");
   level.plane_b AttachPath(pby_path);
   level.plane_b thread maps\_vehicle::vehicle_paths(pby_path);
   level.plane_b StartPath();
   level.plane_b ResumeSpeed(1000);
+
   level.plane_b.zoom_by Delete();
 }
 
 event2_ptboat_1st_pass() {
   the_ptboat = undefined;
+
   ptboat_paths[0] = GetVehicleNode("first_pass_pt_boat_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("first_pass_pt_boat_2", "targetname");
   the_ptboats = [];
+
   pby_ok_to_spawn("ptboat");
   the_ptboats[0] = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboats[0].vehicletype = "jap_ptboat";
@@ -6250,6 +7582,7 @@ event2_ptboat_1st_pass() {
   the_ptboats[0] thread maps\_vehicle::vehicle_paths(ptboat_paths[0]);
   the_ptboats[0] thread ptboat_delete_at_end_of_path();
   the_ptboats[0].fake_motion = true;
+
   pby_ok_to_spawn("ptboat");
   the_ptboats[1] = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboats[1].vehicletype = "jap_ptboat";
@@ -6258,13 +7591,16 @@ event2_ptboat_1st_pass() {
   the_ptboats[1] thread maps\_vehicle::vehicle_paths(ptboat_paths[1]);
   the_ptboats[1] thread ptboat_delete_at_end_of_path();
   the_ptboats[1].fake_motion = true;
+
   ptboat_paths[2] = GetVehicleNode("first_pass_pt_boat_extra_0", "targetname");
   ptboat_paths[3] = GetVehicleNode("first_pass_pt_boat_extra_1", "targetname");
   ptboat_paths[4] = GetVehicleNode("first_pass_pt_boat_extra_2", "targetname");
+
   for(i = 2; i < ptboat_paths.size; i++) {
     the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true, undefined, undefined, undefined);
     the_ptboats[i] StartPath();
   }
+
   level.plane_a waittill("boat_1_running_drones_aft");
   for(i = 0; i < the_ptboats.size; i++) {
     if(isDefined(the_ptboats[i])) {
@@ -6273,8 +7609,11 @@ event2_ptboat_1st_pass() {
       the_ptboats[i].fake_motion = false;
     }
   }
+
   level.plane_a waittill("1st_pass_pt_boats");
+
   ptboat_paths[0] = GetVehicleNode("first_pass_pt_boat_1", "targetname");
+
   pby_ok_to_spawn("ptboat");
   the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboat.vehicletype = "jap_ptboat";
@@ -6283,9 +7622,12 @@ event2_ptboat_1st_pass() {
   the_ptboat thread maps\_vehicle::vehicle_paths(ptboat_paths[0]);
   the_ptboat thread ptboat_delete_at_end_of_path();
   the_ptboat StartPath();
+
   level.plane_a waittill("extra_pt_boats_turn");
+
   ptboat_paths = [];
   ptboat_paths = GetVehicleNodeArray("extra_pt_boats_turn", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboats[i] = spawn_and_path_a_ptboat(ptboat_paths[i], true);
     the_ptboats[i] StartPath();
@@ -6295,7 +7637,9 @@ event2_ptboat_1st_pass() {
 event2_ptboat_2nd_pass() {
   level.plane_a waittill("second_pass_starting");
   ptboat_paths[0] = GetVehicleNode("second_pass_pt_boat_3", "targetname");
+
   the_ptboat = undefined;
+
   the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
   the_ptboat.vehicletype = "jap_ptboat";
   maps\_vehicle::vehicle_init(the_ptboat);
@@ -6304,7 +7648,9 @@ event2_ptboat_2nd_pass() {
   the_ptboat thread ptboat_delete_at_end_of_path();
   the_ptboat StartPath();
   the_ptboat playLoopSound("merchant_engines");
+
   level.plane_a waittill("2nd_pass_pt_boats");
+
   ptboat_paths[0] = GetVehicleNode("second_pass_pt_boat_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("second_pass_pt_boat_1", "targetname");
   ptboat_paths[2] = GetVehicleNode("second_pass_pt_boat_2", "targetname");
@@ -6313,6 +7659,7 @@ event2_ptboat_2nd_pass() {
   ptboat_paths[5] = GetVehicleNode("second_pass_pt_boat_5", "targetname");
   ptboat_paths[6] = GetVehicleNode("second_pass_pt_boat_6", "targetname");
   ptboat_paths[7] = GetVehicleNode("second_pass_pt_boat_7", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
@@ -6322,15 +7669,19 @@ event2_ptboat_2nd_pass() {
     the_ptboat thread ptboat_delete_at_end_of_path();
     the_ptboat StartPath();
     the_ptboat playLoopSound("merchant_engines");
+
     wait(0.05);
   }
 }
 
 event2_ptboat_3rd_pass() {
   level.plane_a waittill("3rd_pass_pt_boats");
+
   ptboat_paths[0] = GetVehicleNode("third_pass_pt_boat_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("third_pass_pt_boat_1", "targetname");
+
   the_ptboat = undefined;
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
@@ -6340,6 +7691,7 @@ event2_ptboat_3rd_pass() {
     the_ptboat thread ptboat_delete_at_end_of_path();
     the_ptboat StartPath();
     the_ptboat playLoopSound("merchant_engines");
+
     wait(0.05);
   }
 }
@@ -6348,10 +7700,14 @@ event2_ptboats_4th_pass() {
   if(true) {
     return;
   }
+
   level.plane_a waittill("4th_pass_pt_boats");
+
   ptboat_paths[0] = GetVehicleNode("fourth_pass_pt_boat_0", "targetname");
   ptboat_paths[1] = GetVehicleNode("fourth_pass_pt_boat_1", "targetname");
+
   the_ptboat = undefined;
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
@@ -6369,83 +7725,113 @@ event2_seat_control() {
   level.player.fell = true;
   level notify("music_to_turret_right");
   level.player scripted_turret_switch("pby_rightgun", true);
+
   level.plane_a waittill("left_turret");
   level notify("music_to_turret_left");
   level notify("dialogue_turret_left");
   level.player scripted_turret_switch("pby_leftgun", true);
+
   level.plane_a waittill("right_turret");
   level notify("music_to_turret_right");
   level.player scripted_turret_switch("pby_rightgun", true);
+
   level.plane_a waittill("front_turret");
   level notify("music_to_turret_front");
   level.player.flak_moment = true;
   level.player thread scripted_turret_switch("pby_frontgun", true);
+
   level.plane_a waittill("left_turret");
   level.plane_b notify("stop_shooting");
   level.player thread scripted_turret_switch("pby_leftgun", true);
   level notify("play_2nd_fx");
+
   setmusicstate("MERCH_DONE");
 }
 
 event2_falling_animation() {
   level.plane_a waittill("flak_rumble_start");
+
   level thread flak_damage_godrays();
+
   level.plane_a waittill("got_flaked");
+
   setmusicstate("FLAK_BURST");
+
   playFXOnTag(level._effect["pby_flak"], level.plane_a, "tag_origin");
+
   plane = level.plane_a;
   plane UseBy(self);
+
   startorg = getstartOrigin(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"]["bank_fall"]);
   startang = getstartAngles(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"]["bank_fall"]);
+
   player_hands = spawn_anim_model("player_hands");
   player_hands.plane = plane;
   player_hands.direction = "right";
+
   player_hands.origin = startorg;
   player_hands.angles = startang;
   player_hands LinkTo(plane, "origin_animate_jnt");
+
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
+
   self playerlinktoabsolute(player_hands, "tag_player");
+
   fx_org = plane.origin - (anglesToForward(plane.angles) * 366) - (AnglesToUp(plane.angles) * 50);
   playFX(level._effect["flak_one_shot"], fx_org);
+
   self playSound("flak_int_boom");
   self shellshock("pby_flak", 5);
   level.player PlayRumbleOnEntity("explosion_generic");
   plane maps\_anim::anim_single_solo(player_hands, "bank_fall");
+
   plane thread maps\_anim::anim_loop_solo(player_hands, "bank_loop", "origin_animate_jnt", "stop_hand_loop");
   wait(3);
   plane notify("done falling");
+
   self waittill("switching_turret");
   plane notify("stop_hand_loop");
   player_hands notify("stop_hand_loop");
   player_hands thread delete_later();
+
   wait(5);
+
   level thread turret_ads_reminder();
 }
 
 play_sitdown_animation() {
   level.player DisableWeapons();
+
   plane = level.plane_a;
+
   startorg = getstartOrigin(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"]["pby_right_to_end"]);
   startang = getstartAngles(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"]["pby_right_to_end"]);
+
   player_hands = spawn_anim_model("player_hands");
   player_hands.plane = plane;
   player_hands.direction = "right";
+
   player_hands.origin = startorg;
   player_hands.angles = startang;
   player_hands LinkTo(plane, "origin_animate_jnt");
+
   self.origin = player_hands.origin;
   self.angles = player_hands.angles;
+
   self playerlinktoabsolute(player_hands, "tag_player");
+
   plane maps\_anim::anim_single_solo(player_hands, "pby_right_to_end");
 }
 
 flak_damage_godrays() {
   level thread flak_large_hole();
+
   bullet_holes = [];
   for(i = 1; i < 4; i++) {
     bullet_holes[i] = level.plane_a thread spawn_bullet_hole_entity("vehicle_usa_pby_bulletholes0" + i);
   }
+
   level waittill("tail_bullet_hole");
   rand = 0;
   for(i = 1; i < 4; i++) {
@@ -6454,6 +7840,7 @@ flak_damage_godrays() {
       playFXOnTag(level._effect["godray_night"], bullet_holes[i], "bullet" + j);
       wait(0.12);
     }
+
     level waittill("bullet_hole_wait", rand);
     wait(rand);
   }
@@ -6461,8 +7848,11 @@ flak_damage_godrays() {
 
 flak_large_hole() {
   level.plane_a waittill("got_flaked");
+
   level.plane_a DoDamage(50000, level.plane_a.origin, level.player, 10);
+
   special_bullet_hole = level.plane_a thread spawn_bullet_hole_entity("vehicle_usa_pby_tailsect_fx01");
+
   playFXOnTag(level._effect["bighole_night"], special_bullet_hole, "bullet1");
   playFXOnTag(level._effect["bighole_night"], special_bullet_hole, "bullet2");
   playFXOnTag(level._effect["godray_night"], special_bullet_hole, "bullet3");
@@ -6472,10 +7862,13 @@ flak_large_hole() {
 event2_pby_engine_control() {
   level.plane_a waittill("go_silent");
   level.plane_a thread maps\pby_fly_amb::stop_plane_prop_sounds();
+
   level.plane_a waittill("first_pass_completed");
   level.plane_a thread maps\pby_fly_amb::start_plane_prop_sounds();
+
   level.plane_a waittill("second_pass_starting");
   level.plane_a thread maps\pby_fly_amb::stop_plane_prop_sounds();
+
   level.plane_a waittill("got_flaked");
   level.plane_a thread maps\pby_fly_amb::start_plane_prop_sounds();
 }
@@ -6492,7 +7885,9 @@ event2_setup_first_ship_drones_flee() {
   for(i = 0; i < 4; i++) {
     fleeing_drones_spawn[i] = GetStruct("boat_1_firstshot_flee_drone_" + i, "targetname");
   }
+
   fleeing_drones = [];
+
   for(i = 0; i < fleeing_drones_spawn.size; i++) {
     pby_ok_to_spawn("drone");
     fleeing_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", fleeing_drones_spawn[i]);
@@ -6500,13 +7895,17 @@ event2_setup_first_ship_drones_flee() {
       wait(0.05);
     }
   }
+
   level notify("first ship drones done");
+
   level.plane_b waittill("taking_first_shots");
+
   path = [];
   path[0] = GetStruct("boat_1_path_flee_first_shot_0", "targetname");
   path[1] = GetStruct("boat_1_path_flee_first_shot_0", "targetname");
   path[2] = GetStruct("boat_1_path_flee_first_shot_1", "targetname");
   path[3] = GetStruct("boat_1_path_flee_first_shot_1", "targetname");
+
   fleeing_drones[0] thread maps\_drone::drone_move_to_ent_and_delete(path[0]);
   fleeing_drones[2] thread maps\_drone::drone_move_to_ent_and_delete(path[2]);
   wait(0.5);
@@ -6516,22 +7915,27 @@ event2_setup_first_ship_drones_flee() {
 
 event2_setup_first_ship_drones_respond_aft() {
   level.plane_a waittill("boat_1_running_drones_aft");
+
   responding_drones_spawn = [];
   for(i = 0; i < 4; i++) {
     responding_drones_spawn[i] = GetStruct("boat_1_aft_drone_run_" + i, "targetname");
   }
+
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     pby_ok_to_spawn("drone");
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
+
   path = [];
   path[0] = GetStruct("boat_1_path_light_0", "targetname");
   path[1] = GetStruct("boat_1_path_flak_0", "targetname");
   path[2] = GetStruct("boat_1_path_light_1", "targetname");
   path[3] = GetStruct("boat_1_path_flak_1", "targetname");
+
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_delete(path[i]);
+
     random_wait = RandomFloatRange(0.05, 0.3);
     wait(random_wait);
   }
@@ -6539,6 +7943,7 @@ event2_setup_first_ship_drones_respond_aft() {
 
 event2_setup_first_ship_drones_respond_tower() {
   level.plane_a waittill("boat_1_running_drones_aft");
+
   standing_drones_spawn = [];
   standing_drones_spawn = GetStructArray("boat_1_con_drone_stand", "targetname");
   standing_drones = [];
@@ -6548,37 +7953,46 @@ event2_setup_first_ship_drones_respond_tower() {
     standing_drones[i] thread maps\_drone::drone_fire_at_target(level.plane_a);
     standing_drones[i].boat = 0;
   }
+
   responding_drones_spawn = [];
   for(i = 0; i < 2; i++) {
     responding_drones_spawn[i] = GetStruct("boat_1_con_drone_run_" + i, "targetname");
   }
+
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     pby_ok_to_spawn("drone");
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
+
   path = [];
   path[0] = GetStruct("boat_1_path_con_top", "targetname");
   path[1] = GetStruct("boat_1_path_con_bottom", "targetname");
+
   for(i = 0; i < 2; i++) {
     responding_drones[0] thread maps\_drone::drone_move_to_ent_and_delete(path[0]);
     random_wait = RandomFloatRange(0.05, 0.3);
     wait(random_wait);
+
     responding_drones[1] thread maps\_drone::drone_move_to_ent_and_delete(path[1]);
     random_wait = RandomFloatRange(0.2, 0.4);
     wait(random_wait);
   }
+
   responding_drones_spawn = [];
   responding_drones_spawn[0] = GetStruct("boat_1_con_drone_across_0", "targetname");
   responding_drones_spawn[1] = GetStruct("boat_1_con_drone_across_1", "targetname");
   responding_drones_spawn[2] = GetStruct("boat_1_con_drone_across_2", "targetname");
+
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
+
   path[0] = GetStruct("boat_1_path_con_across_0", "targetname");
   path[1] = GetStruct("boat_1_path_con_across_1", "targetname");
   path[2] = GetStruct("boat_1_path_con_across_2", "targetname");
+
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_b);
     responding_drones[i].boat = 0;
@@ -6589,7 +8003,9 @@ event2_setup_first_ship_drones_respond_tower() {
 event2_setup_first_ship_drones_respond_bow() {
   standing_drones_spawn = [];
   standing_drones_spawn = GetStructArray("boat_1_bow_drone_stand", "targetname");
+
   wait(0.05);
+
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
     standing_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", standing_drones_spawn[i]);
@@ -6604,8 +8020,11 @@ event2_setup_second_ship_drones() {
   level thread event2_setup_second_ship_drones_aft();
   level thread event2_setup_second_ship_drones_con();
   level thread event2_setup_second_ship_drones_bow();
+
   standing_drones_spawn = GetStructArray("boat_2_stand_drone", "targetname");
+
   level waittill("first ship drones done");
+
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
     pby_ok_to_spawn("drone");
@@ -6615,8 +8034,11 @@ event2_setup_second_ship_drones() {
       wait(0.05);
     }
   }
+
   level notify("second ship drones done");
+
   level.boats[1] waittill("damage");
+
   for(i = 0; i < standing_drones.size; i++) {
     if(!isDefined(standing_drones[i].script_noteworthy)) {
       standing_drones[i] thread maps\_drone::drone_fire_at_target(level.plane_a);
@@ -6630,28 +8052,36 @@ event2_setup_second_ship_drone_turnon_lights() {
   light_drone_spawn = GetStruct("boat_2_light_drone_run", "targetname");
   light_drone = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", light_drone_spawn);
   light_drone setCanDamage(false);
+
   level.plane_a waittill("merchant_drone_light");
   wait(2.0);
+
   path = GetStruct("boat_2_path_light_aft", "targetname");
+
   light_drone thread maps\_drone::drone_move_to_ent_and_delete(path);
   light_drone waittill("goal");
+
   level notify("light up and alarm");
 }
 
 event2_setup_second_ship_drones_aft() {
   level.plane_a waittill("merchant_drone_light");
   wait(3.0);
+
   responding_drones_spawn = [];
   responding_drones_spawn[0] = GetStruct("boat_2_drone_aft_across_0", "targetname");
   responding_drones_spawn[1] = GetStruct("boat_2_drone_aft_across_1", "targetname");
   responding_drones_spawn[2] = GetStruct("boat_2_drone_aft_across_2", "targetname");
+
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
+
   path[0] = GetStruct("boat_2_path_aft_across_0", "targetname");
   path[1] = GetStruct("boat_2_path_aft_across_1", "targetname");
   path[2] = GetStruct("boat_2_path_aft_across_2", "targetname");
+
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_a);
     responding_drones[i].boat = 1;
@@ -6664,19 +8094,23 @@ event2_setup_second_ship_drones_aft() {
 event2_setup_second_ship_drones_con() {
   level.plane_a waittill("merchant_drone_light");
   wait(6.0);
+
   responding_drones_spawn = [];
   responding_drones_spawn[0] = GetStruct("boat_2_con_drone_across_0", "targetname");
   responding_drones_spawn[1] = GetStruct("boat_2_con_drone_across_1", "targetname");
   responding_drones_spawn[2] = GetStruct("boat_2_con_drone_across_2", "targetname");
   responding_drones_spawn[3] = GetStruct("boat_2_con_drone_across_3", "targetname");
+
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
   }
+
   path[0] = GetStruct("boat_2_path_con_across_0", "targetname");
   path[1] = GetStruct("boat_2_path_con_across_1", "targetname");
   path[2] = GetStruct("boat_2_path_con_across_2", "targetname");
   path[3] = GetStruct("boat_2_path_con_across_3", "targetname");
+
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_a);
     responding_drones[i].boat = 1;
@@ -6687,11 +8121,13 @@ event2_setup_second_ship_drones_con() {
 event2_setup_second_ship_drones_bow() {
   level.plane_a waittill("merchant_drone_light");
   wait(11.0);
+
   responding_drones_spawn = [];
   responding_drones_spawn[0] = GetStruct("boat_2_drone_bow_across_0", "targetname");
   responding_drones_spawn[1] = GetStruct("boat_2_drone_bow_across_1", "targetname");
   responding_drones_spawn[2] = GetStruct("boat_2_drone_bow_across_2", "targetname");
   responding_drones_spawn[3] = GetStruct("boat_2_drone_bow_across_3", "targetname");
+
   responding_drones = [];
   for(i = 0; i < responding_drones_spawn.size; i++) {
     responding_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", responding_drones_spawn[i]);
@@ -6700,10 +8136,12 @@ event2_setup_second_ship_drones_bow() {
       wait(0.05);
     }
   }
+
   path[0] = GetStruct("boat_2_path_bow_across_0", "targetname");
   path[1] = GetStruct("boat_2_path_bow_across_1", "targetname");
   path[2] = GetStruct("boat_2_path_bow_across_2", "targetname");
   path[3] = GetStruct("boat_2_path_bow_across_3", "targetname");
+
   for(i = 0; i < responding_drones.size; i++) {
     responding_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path[i], level.plane_a);
     wait(0.05);
@@ -6712,8 +8150,11 @@ event2_setup_second_ship_drones_bow() {
 
 event2_setup_third_ship_drones() {
   level thread event2_setup_third_ship_drones_con();
+
   standing_drones_spawn = GetStructArray("boat_3_stand_drone", "targetname");
+
   level waittill("second ship drones done");
+
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
     pby_ok_to_spawn("drone");
@@ -6723,6 +8164,7 @@ event2_setup_third_ship_drones() {
       wait(0.05);
     }
   }
+
   for(i = 0; i < standing_drones.size; i++) {
     standing_drones[i] thread maps\_drone::drone_fire_at_target(level.plane_a);
   }
@@ -6730,23 +8172,30 @@ event2_setup_third_ship_drones() {
 
 event2_setup_third_ship_drones_con() {
   level waittill("second ship drones done");
+
   standing_drones_spawn = [];
   for(i = 0; i < 5; i++) {
     standing_drones_spawn[i] = GetStruct("boat_3_drone_standrun_" + i, "targetname");
   }
+
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
     standing_drones[i] = maps\_drone::drone_scripted_spawn("actor_axis_jap_reg_type99rifle", standing_drones_spawn[i]);
   }
+
   wait(0.05);
   for(i = 0; i < standing_drones.size; i++) {
     standing_drones[i].boat = 2;
     standing_drones[i] thread maps\_drone::drone_fire_at_target(level.plane_a);
   }
+
   level.plane_a waittill("event2_boat_3_drone_con");
+
   wait(3.5);
+
   for(i = 0; i < standing_drones.size; i++) {
     path = GetStruct("boat_3_path_standrun_" + i, "targetname");
+
     if(i <= 1) {
       standing_drones[i] thread maps\_drone::drone_move_to_ent_and_fire(path, level.plane_b);
     } else {
@@ -6769,7 +8218,9 @@ merchant_boat_siren() {
 
 merchant_boat_1_sounds() {
   level waittill("light up and alarm");
+
   level thread maps\pby_fly_amb::start_merchant_ship_klaxon();
+
   thread merchant_boat_1_sounds_off();
 }
 
@@ -6781,6 +8232,7 @@ merchant_boat_1_sounds_off() {
 merchant_boat_3_sounds() {
   level waittill("light up and alarm");
   level thread maps\pby_fly_amb::start_merchant_ship_coll();
+
   thread merchant_boat_3_sounds_off();
 }
 
@@ -6803,7 +8255,9 @@ merchant_start_tower_gun() {
   self endon("death");
   self endon("stop_firing");
   self endon("tower_gun_destroyed");
+
   level.plane_a waittill("flak_rumble_start");
+
   if(!isDefined(self.tower_gun_destroyed)) {
     self thread merchant_boat_trip25_track(0, "tag_gunner_barrel1", level.plane_a, "tower_gun_destroyed");
   }
@@ -6813,7 +8267,9 @@ merchant_start_deck_gun() {
   self endon("death");
   self endon("stop_firing");
   self endon("deck_gun_destroyed");
+
   level.plane_a waittill("flak_rumble_start");
+
   if(!isDefined(self.deck_gun_destroyed)) {
     self thread merchant_boat_trip25_track(1, "tag_gunner_barrel2", undefined, "deck_gun_destroyed");
   }
@@ -6822,13 +8278,17 @@ merchant_start_deck_gun() {
 merchant_boat_trip25_track(which_gun, gun_tag, forced_target, alternate_end, fake_fire_player) {
   self endon("death");
   self endon("stop_firing");
+
   if(isDefined(alternate_end)) {
     self endon(alternate_end);
   }
+
   if(isDefined(fake_fire_player)) {
     self.target_vector = level.player.origin;
     self setgunnertargetvec(self.target_vector, which_gun);
+
     random_num_shots = RandomIntRange(5, 8);
+
     for(i = 0; i < random_num_shots; i++) {
       self firegunnerweapon(which_gun);
       wait(0.1);
@@ -6836,7 +8296,9 @@ merchant_boat_trip25_track(which_gun, gun_tag, forced_target, alternate_end, fak
   } else {
     target = undefined;
     wait_time = 4;
+
     gun_origin = self GetTagOrigin(gun_tag);
+
     while(1) {
       if(!isDefined(forced_target)) {
         if(DistanceSquared(gun_origin, level.plane_a.origin) < DistanceSquared(gun_origin, level.plane_b.origin)) {
@@ -6847,20 +8309,26 @@ merchant_boat_trip25_track(which_gun, gun_tag, forced_target, alternate_end, fak
       } else {
         target = forced_target;
       }
+
       new_target_vec = target.origin + (anglesToForward(target.angles) * -1 * 148) + (AnglesToUp(target.angles) * 86);
       new_target_vec = self merchant_boat_trip25_lead_target(target, new_target_vec);
+
       lower_boundary = 1200;
       if(new_target_vec[2] < lower_boundary) {
         random_height_offset = RandomIntRange(200, 600);
         new_target_vec = (new_target_vec[0], new_target_vec[1], (lower_boundary + random_height_offset));
       }
+
       self.target_vector = new_target_vec;
       self setgunnertargetvec(self.target_vector, which_gun);
+
       random_num_shots = RandomIntRange(5, 8);
+
       for(i = 0; i < random_num_shots; i++) {
         self firegunnerweapon(which_gun);
         wait(0.1);
       }
+
       random_wait_offset = RandomFloatRange(2, 4);
       wait(wait_time + random_wait_offset);
     }
@@ -6871,18 +8339,24 @@ merchant_boat_trip25_lead_target(target, targetted_vec) {
   if(target.classname != "script_vehicle") {
     return targetted_vec;
   }
+
   bullet_max_speed = 10000;
   target_speed = target GetSpeed();
   target_forward = anglesToForward(target.angles);
+
   distance_to_target = Distance(self GetTagOrigin("tag_gunner_barrel1"), targetted_vec);
   bullet_travel_time = distance_to_target / bullet_max_speed;
+
   bullet_offset_forward = target_forward * bullet_travel_time * target_speed;
+
   end_vec = targetted_vec + bullet_offset_forward;
+
   return end_vec;
 }
 
 merchant_boat_spots() {
   level waittill("light up and alarm");
+
   if(!isDefined(self.aft_light_broken)) {
     self.aft_light = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["merchant_light"], "tag_gunner_barrel3");
     aft_gun_origin = self GetTagOrigin("tag_gunner_barrel3");
@@ -6890,6 +8364,7 @@ merchant_boat_spots() {
     self setgunnertargetent(aft_light_target, (0, 0, 0), 2);
     self thread merchant_boat_spots_track(aft_gun_origin, 2, "stop_aft_track", "aft_light_pitch", 1);
   }
+
   if(!isDefined(self.bow_light_broken)) {
     self.bow_light = self thread maps\pby_fly_fx::play_looping_fx_on_tag(level._effect["merchant_light"], "tag_gunner_barrel4");
     bow_gun_origin = self GetTagOrigin("tag_gunner_barrel4");
@@ -6903,15 +8378,18 @@ merchant_boat_spots_track(spot_origin, gun_index, end_notify, break_notify, aft)
   self endon(end_notify);
   self endon("death");
   self thread merchant_boats_spots_break(end_notify, break_notify, aft, gun_index);
+
   while(isDefined(self)) {
     if(DistanceSquared(spot_origin, level.plane_a.origin) < DistanceSquared(spot_origin, level.plane_b.origin)) {
       light_target = level.plane_a;
     } else {
       light_target = level.plane_b;
     }
+
     if(isDefined(self)) {
       self setgunnertargetent(light_target, (0, 0, 0), gun_index);
     }
+
     wait(2);
   }
 }
@@ -6919,13 +8397,16 @@ merchant_boat_spots_track(spot_origin, gun_index, end_notify, break_notify, aft)
 track_spotlight_achievement_helper(my_notify) {
   for(;;) {
     self waittill("broken", recieved_notify);
+
     if(recieved_notify == my_notify) {
       level notify("a_spotlight_broke");
+
       if("aft_light_pitch" == my_notify) {
         self.aft_light_broken = true;
       } else if("bow_light_pitch" == my_notify) {
         self.bow_light_broken = true;
       }
+
       return;
     }
   }
@@ -6934,8 +8415,10 @@ track_spotlight_achievement_helper(my_notify) {
 merchant_boats_spots_break(end_notify, break_notify, aft, gun_index) {
   for(;;) {
     self waittill("broken", recieved_notify);
+
     if(recieved_notify == break_notify) {
       self notify(end_notify);
+
       if(aft) {
         self.aft_light Delete();
         self ClearGunnerTarget(gun_index);
@@ -6944,10 +8427,10 @@ merchant_boats_spots_break(end_notify, break_notify, aft, gun_index) {
         self ClearGunnerTarget(gun_index);
       }
     }
+
     wait(0.05);
   }
 }
-
 set_objective(my_obj, ent) {
   if(my_obj == "scout_ocean") {
     return;
@@ -6956,11 +8439,13 @@ set_objective(my_obj, ent) {
     objective_string(2, &"PBY_FLY_OBJ_EV2", 3);
     objective_add(3, "active");
     objective_string(3, &"PBY_FLY_OBJ_EV2_PTBOATS", 0);
+
     level thread update_objective_stats_merchantship_ships(2, &"PBY_FLY_OBJ_EV2");
     level thread update_objective_stats_ptboats(3, &"PBY_FLY_OBJ_EV2_PTBOATS");
   } else if(my_obj == "back_to_base") {
     flag_set("merchant_ship_event_done");
     level notify("too late to sink merchant ships");
+
     obj_marker = GetEnt("base_obj", "targetname");
     objective_add(4, "active", &"PBY_FLY_OBJ_EV3");
     objective_current(4);
@@ -6969,6 +8454,7 @@ set_objective(my_obj, ent) {
     objective_string(4, &"PBY_FLY_OBJ_EV3B");
     objective_add(5, "active");
     objective_string(5, &"PBY_FLY_OBJ_EV3B_ZEROES", 0);
+
     level thread update_objective_states_zeroes(5, &"PBY_FLY_OBJ_EV3B_ZEROES");
   } else if(my_obj == "save_sailors") {
     flag_set("respond_objective_done");
@@ -6977,11 +8463,13 @@ set_objective(my_obj, ent) {
     objective_add(6, "active");
     objective_string(6, &"PBY_FLY_OBJ_EV4", 0);
     objective_current(6);
+
     level thread update_objective_states_rescue(6, &"PBY_FLY_OBJ_EV4");
   } else if(my_obj == "escape") {
     obj_marker = GetEnt("fleet_obj", "targetname");
     objective_add(7, "active", &"PBY_FLY_OBJ_EV5");
     objective_current(7);
+
     flag_wait("the level is done");
     objective_state(7, "done");
   }
@@ -6989,10 +8477,12 @@ set_objective(my_obj, ent) {
 
 update_objective_stats_merchantship_ships(obj_num, obj_string) {
   number_of_ships_sunk = 0;
+
   while(!flag("merchant_ship_event_done")) {
     while(number_of_ships_sunk == level.merchant_ship_death_count && !flag("merchant_ship_event_done")) {
       wait(0.1);
     }
+
     if(number_of_ships_sunk != level.merchant_ship_death_count) {
       if(level.merchant_ship_death_count % 3 > 0) {
         Objective_String_NoMessage(obj_num, obj_string, (3 - level.merchant_ship_death_count));
@@ -7000,9 +8490,11 @@ update_objective_stats_merchantship_ships(obj_num, obj_string) {
       } else {
         Objective_String(obj_num, obj_string, (3 - level.merchant_ship_death_count));
       }
+
       number_of_ships_sunk = level.merchant_ship_death_count;
     }
   }
+
   if(level.merchant_ship_death_count == 3) {
     objective_state(obj_num, "done");
   } else {
@@ -7012,58 +8504,71 @@ update_objective_stats_merchantship_ships(obj_num, obj_string) {
 
 update_objective_stats_ptboats(obj_num, obj_string) {
   number_of_ptboats_sunk = 0;
+
   while(!flag("the level is done")) {
     while(number_of_ptboats_sunk == level.ptboat_death_count && !flag("the level is done")) {
       wait(0.1);
     }
+
     if(number_of_ptboats_sunk != level.ptboat_death_count) {
       if(level.ptboat_death_count % 5 > 0) {
         Objective_String_NoMessage(obj_num, obj_string, level.ptboat_death_count);
       } else {
         Objective_String(obj_num, obj_string, level.ptboat_death_count);
       }
+
       number_of_ptboats_sunk = level.ptboat_death_count;
     }
   }
+
   objective_state(obj_num, "done");
 }
 
 update_objective_states_zeroes(obj_num, obj_string) {
   number_of_zeroes_destroyed = 0;
+
   while(!flag("the level is done")) {
     while(number_of_zeroes_destroyed == level.zero_death_count && !flag("the level is done")) {
       wait(0.1);
     }
+
     if(number_of_zeroes_destroyed != level.zero_death_count) {
       if(level.zero_death_count % 5 > 0) {
         Objective_String_NoMessage(obj_num, obj_string, level.zero_death_count);
       } else {
         Objective_String(obj_num, obj_string, level.zero_death_count);
       }
+
       if(level.zero_death_count == 45) {
         level.player maps\_utility::giveachievement_wrapper("PBY_ACHIEVEMENT_ZEROS");
       }
+
       number_of_zeroes_destroyed = level.zero_death_count;
     }
   }
+
   objective_state(obj_num, "done");
 }
 
 update_objective_states_rescue(obj_num, obj_string) {
   number_of_men_rescued = 0;
+
   while(!flag("the level is done")) {
     while(number_of_men_rescued == level.survivor_save_count && !flag("the level is done")) {
       wait(0.1);
     }
+
     if(number_of_men_rescued != level.survivor_save_count) {
       if(level.survivor_save_count % 3 > 0) {
         Objective_String_NoMessage(obj_num, obj_string, level.survivor_save_count);
       } else {
         Objective_String(obj_num, obj_string, level.survivor_save_count);
       }
+
       number_of_men_rescued = level.survivor_save_count;
     }
   }
+
   if(level.survivor_save_count >= 3) {
     objective_state(obj_num, "done");
   } else {
@@ -7073,29 +8578,37 @@ update_objective_states_rescue(obj_num, obj_string) {
 
 zero_strafe_defending_boat() {
   ship = GetEnt("ship_number_2", "targetname");
+
   level endon("stop_zeroes_defending_ship");
+
   plane_splines = [];
   plane_splines[0][0] = GetEnt("event2_fake_spline_right00", "targetname");
   plane_splines[1][0] = GetEnt("event2_fake_spline_right01", "targetname");
   plane_splines[2][0] = GetEnt("event2_fake_spline_right02", "targetname");
+
   for(j = 0; j < plane_splines.size; j++) {
     for(i = 1; isDefined(plane_splines[j][i - 1].target); i++) {
       plane_splines[j][i] = GetEnt(plane_splines[j][i - 1].target, "targetname");
     }
   }
+
   zero_squad = 0;
   random_spline = 0;
+
   while(true) {
     zero_squad = RandomInt(6);
     random_spline = RandomInt(plane_splines.size);
+
     if(zero_squad == 5) {
       level thread zero_squad_fly_fake_spline(plane_splines[random_spline], ship);
     } else {
       level thread zero_fly_fake_spline(plane_splines[random_spline], ship);
     }
+
     while(level.plane_on_curve > 10) {
       wait(0.5);
     }
+
     rand = RandomFloatRange(1.0, 5.0);
     wait(rand);
   }
@@ -7103,6 +8616,7 @@ zero_strafe_defending_boat() {
 
 zero_announce_position(my_notify, sound_src_ref, second_snd_ref) {
   self waittill(my_notify);
+
   if(!flag("disable_random_dialogue")) {
     flag_set("disable_random_dialogue");
     if(IsSubStr(sound_src_ref, "booth")) {
@@ -7110,36 +8624,48 @@ zero_announce_position(my_notify, sound_src_ref, second_snd_ref) {
     } else {
       play_sound_over_radio(level.scr_sound["laughlin"][sound_src_ref]);
     }
+
     flag_clear("disable_random_dialogue");
   }
 }
 
 zero_strafe_sinking_pby() {
   level thread zero_kamikaze_rescue_3();
+
   plane_splines = [];
+
   plane_splines[0] = GetVehicleNode("ev4_zero_rescue_3_0", "targetname");
   plane_splines[1] = GetVehicleNode("ev4_zero_rescue_3_1", "targetname");
   plane_splines[2] = GetVehicleNode("ev4_zero_rescue_3_2", "targetname");
+
   plane_splines[3] = GetVehicleNode("ev4_zero_rescue_3_3", "targetname");
   plane_splines[4] = GetVehicleNode("ev4_zero_rescue_3_4", "targetname");
   plane_splines[5] = GetVehicleNode("ev4_zero_rescue_3_5", "targetname");
+
   plane_splines[6] = GetVehicleNode("ev4_zero_rescue_3_6", "targetname");
   plane_splines[7] = GetVehicleNode("ev4_zero_rescue_3_7", "targetname");
   plane_splines[8] = GetVehicleNode("ev4_zero_rescue_3_8", "targetname");
   plane_splines[9] = GetVehicleNode("ev4_zero_rescue_3_9", "targetname");
+
   level.plane_a waittill("make_zeroes_earlier");
+
   for(x = 0; x < 2; x++) {
     for(i = 0; i <= 2; i++) {
       plane[i] = spawn_and_path_a_zero(plane_splines[i], true, true);
+
       if(i == 0) {
         plane[i] thread zero_announce_position("fire_my_turret", "booth_1_oclock");
       }
+
       wait(0.05);
     }
+
     level notify("kamikaze_plane_go");
     wait(12);
+
     for(i = 3; i <= 5; i++) {
       plane[i] = spawn_and_path_a_zero(plane_splines[i], true, true);
+
       if(x == 0) {
         if(i == 4) {
           thread ev4_out_of_ammo_part_1();
@@ -7149,10 +8675,13 @@ zero_strafe_sinking_pby() {
           thread ev4_out_of_ammo_part_2();
         }
       }
+
       wait(0.05);
     }
+
     level notify("kamikaze_plane_go");
     wait(5);
+
     for(i = 6; i <= 9; i++) {
       plane[i] = spawn_and_path_a_zero(plane_splines[i], true, true);
       if(i == 8) {
@@ -7162,11 +8691,14 @@ zero_strafe_sinking_pby() {
       }
       wait(0.05);
     }
+
     level notify("kamikaze_plane_go");
     wait(10);
   }
+
   level thread ev4_out_of_ammo_part_3();
   wait(7);
+
   level notify("corsairs_arrive");
 }
 
@@ -7195,6 +8727,7 @@ ev4_out_of_ammo_part_3() {
   anim_single_solo(level.plane_a.pilot, "booth_lets_hope_theres_enough");
   anim_single_solo(level.plane_a.pilot, "booth_locke_make_those_shots_count");
   flag_clear("disable_random_dialogue");
+
   booth_corsair_dialog();
 }
 
@@ -7209,18 +8742,24 @@ booth_corsair_dialog() {
 
 corsairs_arrive() {
   level waittill("corsairs_arrive");
+
   thread corsairs_chasing_zeros();
+
   plane_paths = [];
   plane_paths[0] = GetVehicleNode("zero_corsair_sacrifice_0", "targetname");
   plane_paths[1] = GetVehicleNode("zero_corsair_sacrifice_1", "targetname");
   plane_paths[2] = GetVehicleNode("zero_corsair_sacrifice_2", "targetname");
+
   zeros = [];
   corsairs = [];
+
   for(i = 0; i < plane_paths.size; i++) {
     zeros[i] = spawn_and_path_a_zero(plane_paths[i], undefined, true, "shot_down_by_corsair");
     zeros[i] setCanDamage(false);
   }
+
   wait(3);
+
   plane_paths = [];
   plane_paths[0] = GetVehicleNode("corsairs_arrive_0", "targetname");
   plane_paths[1] = GetVehicleNode("corsairs_arrive_1", "targetname");
@@ -7231,6 +8770,7 @@ corsairs_arrive() {
   plane_paths[6] = GetVehicleNode("corsairs_arrive_6", "targetname");
   plane_paths[7] = GetVehicleNode("corsairs_arrive_7", "targetname");
   plane_paths[8] = GetVehicleNode("corsairs_arrive_8", "targetname");
+
   for(i = 0; i < plane_paths.size; i++) {
     if(i <= 2) {
       corsairs[i] = spawn_and_path_a_corsair(plane_paths[i], 2);
@@ -7238,28 +8778,37 @@ corsairs_arrive() {
       corsairs[i] = spawn_and_path_a_corsair(plane_paths[i]);
     }
     corsairs[i] setCanDamage(false);
+
     if(i == 2 || i == 5) {
       wait(1);
     }
   }
+
   corsairs[0] waittill("corsair_highlight");
+
   wait(0.2);
   SetTimeScale(0.2);
+
   playsoundatposition("dew", (0, 0, 0));
   setmusicstate("LEVEL_END");
+
   wait(1.2);
   SetTimeScale(1);
+
   level notify("pby_player_take_off");
 }
 
 corsairs_chasing_zeros() {
   level waittill("pby_player_take_off");
+
   corsairs_chasing_zeros_spawn("corsair_vs_zero_0", "corsair_vs_zero_0");
   wait(0.5);
   corsairs_chasing_zeros_spawn("corsair_vs_zero_1", "corsair_vs_zero_1");
   wait(0.5);
   corsairs_chasing_zeros_spawn("corsair_vs_zero_2", "corsair_vs_zero_2");
+
   level.plane_a waittill("spawn_corsair_escort");
+
   corsairs_chasing_zeros_spawn("corsair_vs_zero_3", "corsair_vs_zero_3");
   wait(0.3);
   corsairs_chasing_zeros_spawn("corsair_vs_zero_4", "corsair_vs_zero_4");
@@ -7269,6 +8818,7 @@ corsairs_chasing_zeros_spawn(corsair_path, zero_path) {
   plane_paths = [];
   plane_paths[0] = GetVehicleNode(zero_path, "targetname");
   plane_paths[1] = GetVehicleNode(corsair_path, "targetname");
+
   zero = spawn_and_path_a_zero(plane_paths[0], undefined, true, "shot_down_by_corsair");
   wait(1.5);
   corsair = spawn_and_path_a_corsair(plane_paths[1], 1);
@@ -7277,17 +8827,22 @@ corsairs_chasing_zeros_spawn(corsair_path, zero_path) {
 zero_kamikaze_rescue_3() {
   kamikaze_plane_splines = [];
   kamikaze_planes = [];
+
   for(x = 0; x < 2; x++) {
     level waittill("kamikaze_plane_go");
+
     kamikaze_plane_splines[0] = GetVehicleNode("rescue3_kamikaze_1", "targetname");
     kamikaze_plane_splines[1] = GetVehicleNode("rescue3_kamikaze_2", "targetname");
+
     exploder_case = 10;
     for(i = 0; i < kamikaze_plane_splines.size; i++) {
       kamikaze_planes[i] = spawn_and_path_a_zero(kamikaze_plane_splines[i], true, true, undefined, undefined, true);
       kamikaze_planes[i] thread fletcher_animation("kamikazed_ship", exploder_case);
       exploder_case++;
     }
+
     level waittill("kamikaze_plane_go");
+
     kamikaze_plane_splines = [];
     kamikaze_plane_splines[0] = GetVehicleNode("rescue3_kamikaze_3", "targetname");
     for(i = 0; i < kamikaze_plane_splines.size; i++) {
@@ -7295,11 +8850,14 @@ zero_kamikaze_rescue_3() {
       kamikaze_planes[i] thread fletcher_animation("kamikazed_ship", exploder_case);
       exploder_case++;
     }
+
     level waittill("kamikaze_plane_go");
+
     kamikaze_plane_splines = [];
     kamikaze_plane_splines[0] = GetVehicleNode("rescue3_kamikaze_4", "targetname");
     kamikaze_plane_splines[1] = GetVehicleNode("rescue3_kamikaze_5", "targetname");
     kamikaze_plane_splines[2] = GetVehicleNode("rescue3_kamikaze_6", "targetname");
+
     for(i = 0; i < kamikaze_plane_splines.size; i++) {
       if(i == 0) {
         kamikaze_planes[i] = spawn_and_path_a_zero(kamikaze_plane_splines[i], true, true, undefined, undefined, true);
@@ -7314,22 +8872,30 @@ zero_kamikaze_rescue_3() {
 
 zero_strafe_getaway_part_1() {
   level endon("stop_getaway_zeros_1");
+
   target = level.plane_a;
+
   plane_slines = [];
+
   plane_splines[0][0] = GetEnt("event4_escape_fs_1", "targetname");
   plane_splines[1][0] = GetEnt("event4_escape_fs_2", "targetname");
+
   for(j = 0; j < plane_splines.size; j++) {
     for(i = 1; isDefined(plane_splines[j][i - 1].target); i++) {
       plane_splines[j][i] = GetEnt(plane_splines[j][i - 1].target, "targetname");
     }
   }
+
   random_spline = 0;
+
   while(true) {
     random_spline = RandomInt(plane_splines.size);
     level thread zero_fly_fake_spline(plane_splines[random_spline], target);
+
     while(level.plane_on_curve > 15) {
       wait(0.5);
     }
+
     rand = RandomFloatRange(3.0, 7.0);
     wait(rand);
   }
@@ -7338,6 +8904,7 @@ zero_strafe_getaway_part_1() {
 zero_squad_fly_fake_spline(plane_spline, target) {
   reference_angles = AnglesToRight(plane_spline[0].angles);
   offset_right = 560;
+
   level thread zero_fly_fake_spline(plane_spline, target);
   wait(1);
   level thread zero_fly_fake_spline(plane_spline, target, reference_angles * offset_right);
@@ -7349,13 +8916,18 @@ zero_fly_fake_spline(plane_spline, target, offset_vector) {
   if(!isDefined(offset_vector)) {
     offset_vector = (0, 0, 0);
   }
+
   plane = SpawnVehicle("vehicle_jap_airplane_zero_fly", "new_plane", "zero", plane_spline[0].origin, plane_spline[0].angles);
   plane.vehicletype = "zero";
   maps\_vehicle::vehicle_init(plane);
+
   plane thread ai_turret_think(target);
+
   level.plane_on_curve++;
   plane setplanegoalpos(plane_spline[1].origin + offset_vector, plane_spline[2].origin + offset_vector, plane_spline[3].origin + offset_vector, plane_spline[4].origin + offset_vector, plane_spline[5].origin + offset_vector, plane_spline[6].origin + offset_vector, 200);
+
   plane waittill("curve_end");
+
   plane.notrealdeath = true;
   plane notify("death");
   level.plane_on_curve--;
@@ -7363,21 +8935,25 @@ zero_fly_fake_spline(plane_spline, target, offset_vector) {
 
 ptboat_test_run() {
   test_boat_node = GetVehicleNodeArray("boat_test_node", "targetname");
+
   for(i = 0; i < 5; i++) {
     path_id = RandomInt(test_boat_node.size);
     test_boat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     test_boat.vehicletype = "jap_ptboat";
     maps\_vehicle::vehicle_init(test_boat);
+
     test_boat AttachPath(test_boat_node[path_id]);
     test_boat thread maps\_vehicle::vehicle_paths(test_boat_node[path_id]);
     test_boat StartPath();
     test_boat SetSpeed(30, 10, 10);
+
     wait(10);
   }
 }
 
 move_ev4(visible) {
   large_array = getEntArray("ev4_obj", "script_noteworthy");
+
   for(i = 0; i < large_array.size; i++) {
     if(visible) {
       if(large_array[i].classname == "script_vehicle") {
@@ -7392,11 +8968,13 @@ move_ev4(visible) {
         large_array[i].origin -= (0, 0, 10000);
       }
     }
+
   }
 }
 
 move_ev2(visible) {
   large_array = getEntArray("ev2_ship", "targetname");
+
   for(i = 0; i < large_array.size; i++) {
     if(visible) {
       large_array[i].origin += (0, 0, 10000);
@@ -7408,20 +8986,25 @@ move_ev2(visible) {
 
 play_acknowledge_anim(guy) {
   the_plane = guy.plane;
+
   if(the_plane.radioop.status == "idle_at_nav") {
     the_plane notify("stop_radioop_idling");
+
     if(guy.direction == "rear") {
       the_plane anim_single_solo(the_plane.radioop, "player_f_nav", "navigator_seat_jnt");
     } else {
       the_plane anim_single_solo(the_plane.radioop, "player_r_nav", "navigator_seat_jnt");
     }
+
     the_plane thread anim_loop_solo(the_plane.radioop, "my_idle_nav", "navigator_seat_jnt", "stop_radioop_idling");
     the_plane.radioop.status = "idle_at_nav";
   } else if(the_plane.radioop.status == "idle_at_rad") {
     the_plane notify("stop_radioop_idling");
+
     if(guy.direction == "rear") {
       the_plane anim_single_solo(guy.plane.radioop, "player_f_rad", "navigator_seat_jnt");
     }
+
     the_plane thread anim_loop_solo(guy.plane.radioop, "my_idle_rad", "navigator_seat_jnt", "stop_radioop_idling");
     the_plane.radioop.status = "idle_at_rad";
   }
@@ -7429,14 +9012,17 @@ play_acknowledge_anim(guy) {
 
 play_radio_nav_switch(guy) {
   the_plane = guy.plane;
+
   if(the_plane.radioop.status == "idle_at_rad") {
     the_plane notify("stop_radioop_idling");
+
     the_plane.radioop.status = "in_transition";
     the_plane anim_single_solo(the_plane.radioop, "rad_to_nav", "navigator_seat_jnt");
     the_plane thread anim_loop_solo(the_plane.radioop, "my_idle_nav", "navigator_seat_jnt", "stop_radioop_idling");
     the_plane.radioop.status = "idle_at_nav";
   } else if(the_plane.radioop.status == "idle_at_nav") {
     the_plane notify("stop_radioop_idling");
+
     the_plane.radioop.status = "in_transition";
     the_plane anim_single_solo(the_plane.radioop, "nav_to_rad", "navigator_seat_jnt");
     the_plane thread anim_loop_solo(the_plane.radioop, "my_idle_rad", "navigator_seat_jnt", "stop_radioop_idling");
@@ -7446,37 +9032,47 @@ play_radio_nav_switch(guy) {
 
 play_engineer_anim(guy) {
   the_plane = guy.plane;
+
   if(the_plane.engineer.status == "cooking") {
     the_plane notify("stop_engineer_cooking");
+
     if(guy.direction == "rear") {
       the_plane anim_single_solo(the_plane.engineer, "player_r", "tag_engineer");
     } else {
       the_plane anim_single_solo(the_plane.engineer, "player_f", "tag_engineer");
     }
+
     the_plane thread anim_loop_solo(the_plane.engineer, "my_idle", "tag_engineer", "stop_engineer_idling");
     the_plane.engineer.status = "normal_idle";
   }
 }
-
 play_legs_anim(guy) {
   the_plane = guy.plane;
+
   if(the_plane.engineer.status == "normal_idle") {
     the_plane notify("stop_engineer_idling");
+
     anim_to_play = RandomInt(3);
+
     switch (anim_to_play) {
       case 1:
         the_plane anim_single_solo(the_plane.engineer, "legs1", "tag_engineer");
         break;
+
       case 2:
         the_plane anim_single_solo(the_plane.engineer, "legs2", "tag_engineer");
         break;
+
       case 3:
         the_plane anim_single_solo(the_plane.engineer, "legs3", "tag_engineer");
         break;
+
       default:
         break;
     }
+
     wait(1);
+
     if(RandomInt(10) > 2) {
       the_plane thread anim_loop_solo(the_plane.engineer, "my_idle", "tag_engineer", "stop_engineer_idling");
       the_plane.engineer.status = "normal_idle";
@@ -7490,6 +9086,7 @@ play_legs_anim(guy) {
 play_radio_anim(guy) {
   the_plane = level.plane_a;
   the_plane notify("stop_radioop_idling");
+
   the_plane anim_single_solo(the_plane.radioop, "scripted", "tag_engineer");
   the_plane thread anim_loop_solo(the_plane.radioop, "my_idle_rad", "tag_engineer", "stop_radioop_idling");
   the_plane.radioop.status = "idle_at_rad";
@@ -7497,7 +9094,9 @@ play_radio_anim(guy) {
 
 play_land_pby() {
   self waittill("audio_plane_kill_prop");
+
   level notify("stop turbulence");
+
   if(self == level.plane_a) {
     self anim_single_solo(self, "pby_landing");
     self thread pby_veh_idle("float", 1.0);
@@ -7512,6 +9111,7 @@ play_landing_shake(plane) {
   playFXOnTag(level._effect["splash_land_center"], self, "tag_origin");
   Earthquake(.1, 2.0, plane.origin, 1000);
   playsoundatposition("amb_metal", (0, 0, 0));
+
   level.player PlayRumbleOnEntity("explosion_generic");
 }
 
@@ -7523,6 +9123,7 @@ play_landing_shake_only(plane) {
 
 play_hatch_anim(guy) {
   the_plane = level.plane_a;
+
   idle_holder = the_plane.current_idle;
   the_plane anim_single_solo(the_plane, "hatch");
   the_plane pby_veh_idle("float", 0);
@@ -7530,6 +9131,7 @@ play_hatch_anim(guy) {
 
 play_chair_distress_anim(guy) {
   the_plane = level.plane_a;
+
   idle_holder = the_plane.current_idle;
   the_plane anim_single_solo(the_plane, "radio_distress_call");
   the_plane pby_veh_idle("float", 0);
@@ -7537,17 +9139,22 @@ play_chair_distress_anim(guy) {
 
 play_hatch_anim_open(guy) {
   the_plane = level.plane_a;
+
   the_plane notify("pby_b_first_shots");
   the_plane notify("hatch_opening");
+
   idle_holder = the_plane.current_idle;
   the_plane anim_single_solo(the_plane, "hatch_open");
   the_plane pby_veh_idle("fly_up_open", 0, true, true);
 }
 
 second_pilot_reply_intro(guy) {}
+
 second_gunner_reply_intro(guy) {}
+
 delete_extra_pbys() {
   del_objects = getEntArray("pby_delete_me", "targetname");
+
   for(i = del_objects.size; i > 0; i--) {
     del_objects[i - 1] Delete();
   }
@@ -7566,6 +9173,7 @@ pby_pontoons_up(up, snap) {
   if(!isDefined(self.pontoon_status)) {
     self.pontoon_status = "up";
   }
+
   if(isDefined(snap)) {
     if(up && self.pontoon_status == "down") {
       self anim_single_solo(self, "pontoons_snap_up");
@@ -7575,6 +9183,7 @@ pby_pontoons_up(up, snap) {
       self.pontoon_status = "down";
     }
   }
+
   if(up && self.pontoon_status == "down") {
     self anim_single_solo(self, "pontoons_up");
     self.pontoon_status = "up";
@@ -7588,6 +9197,7 @@ pby_ventral_open(open, snap) {
   if(!isDefined(self.ventral_status)) {
     self.ventral_status = "open";
   }
+
   if(isDefined(snap)) {
     if(open && self.ventral_status == "closed") {
       self anim_single_solo(self, "ventral_snap_open");
@@ -7597,6 +9207,7 @@ pby_ventral_open(open, snap) {
       self.ventral_status = "closed";
     }
   }
+
   if(open && self.ventral_status == "closed") {
     self anim_single_solo(self, "ventral_open");
     self.ventral_status = "open";
@@ -7618,39 +9229,49 @@ play_ventral_animations() {
 ai_pby_gunners_think() {
   self endon("death");
   self endon("stop_shooting");
+
   front_gun_active = false;
   left_gun_active = false;
   right_gun_active = false;
   rear_gun_active = false;
+
   while(1) {
     self ai_pby_gunners_acquire_targets();
+
     if(isDefined(self.target_list_front[0])) {
       self setgunnertargetent(self.target_list_front[0], (0, 0, 0), 0);
       front_gun_active = true;
     }
+
     if(isDefined(self.target_list_left[0])) {
       self setgunnertargetent(self.target_list_left[0], (0, 0, 0), 1);
       left_gun_active = true;
     }
+
     if(isDefined(self.target_list_right[0])) {
       self setgunnertargetent(self.target_list_right[0], (0, 0, 0), 2);
       right_gun_active = true;
     }
+
     if(isDefined(self.target_list_rear[0])) {
       self setgunnertargetent(self.target_list_rear[0], (0, 0, 0), 3);
       rear_gun_active = true;
     }
+
     for(i = 0; i < 10; i++) {
       if(front_gun_active) self firegunnerweapon(0);
       if(left_gun_active) self firegunnerweapon(1);
       if(right_gun_active) self firegunnerweapon(2);
       if(rear_gun_active) self firegunnerweapon(3);
+
       wait(0.2);
     }
+
     front_gun_active = false;
     left_gun_active = false;
     right_gun_active = false;
     rear_gun_active = false;
+
     rand = RandomIntRange(1, 3);
     wait(rand);
   }
@@ -7670,26 +9291,31 @@ debug_the_zero_bug() {
     if(!isDefined(self.target_list_rear[0]) && self.target_list_rear.size > 0) {
       ASSERT(false, "this is stupid");
     }
+
     wait(0.05);
   }
 }
-
 ai_pby_gunners_acquire_targets() {
   self.target_list_front = [];
   self.target_list_left = [];
   self.target_list_right = [];
   self.target_list_rear = [];
+
   while(self.target_list_front.size < 1) {
     self.target_list_front = getEntArray("script_vehicle", "classname");
+
     self.target_list_left = self.target_list_front;
     self.target_list_right = self.target_list_front;
     self.target_list_rear = self.target_list_front;
+
     self.target_list_front = ai_pby_gunner_target_strip_pbys(self.target_list_front);
     self.target_list_left = ai_pby_gunner_target_strip_pbys(self.target_list_left);
     self.target_list_right = ai_pby_gunner_target_strip_pbys(self.target_list_right);
     self.target_list_rear = ai_pby_gunner_target_strip_pbys(self.target_list_rear);
+
     wait(0.1);
   }
+
   self ai_pby_sort_targets(level.GUN_FRONT);
   self ai_pby_sort_targets(level.GUN_LEFT);
   self ai_pby_sort_targets(level.GUN_RIGHT);
@@ -7705,29 +9331,33 @@ ai_pby_gunner_target_strip_pbys(my_array) {
       }
     }
   }
+
   return my_array;
 }
-
 ai_pby_sort_targets(gun_position) {
   self ai_pby_gunner_sort_targets_by_angle(gun_position);
   self ai_pby_gunner_sort_targets_by_dist(gun_position);
 }
-
 ai_pby_gunner_sort_targets_by_angle(gun_position) {
   if(gun_position == level.GUN_FRONT) {
     for(i = 0; i < self.target_list_front.size; i++) {
       origin_1 = self GetTagOrigin("tag_gunner1");
       origin_2 = self.target_list_front[i].origin;
+
       if(!isDefined(origin_2)) {
         continue;
       }
       dot_value = VectorDot(anglesToForward(self.angles), VectorNormalize(origin_2 - origin_1));
+
       if(abs(dot_value) > 0.5) {} else {
         self.target_list_front = array_remove(self.target_list_front, self.target_list_front[i]);
         i--;
+
         continue;
       }
+
       dot_value = VectorDot(AnglesToUp(self.angles), VectorNormalize(origin_2 - origin_1));
+
       if(dot_value > 0.2 || dot_value < -0.2) {
         self.target_list_front = array_remove(self.target_list_front, self.target_list_front[i]);
         i--;
@@ -7737,10 +9367,12 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
     for(i = 0; i < self.target_list_left.size; i++) {
       origin_1 = self GetTagOrigin("tag_gunner2");
       origin_2 = self.target_list_left[i].origin;
+
       if(!isDefined(origin_2)) {
         continue;
       }
       dot_value = VectorDot(AnglesToRight(self.angles) * -1, VectorNormalize(origin_2 - origin_1));
+
       if(dot_value > 0) {} else {
         self.target_list_left = array_remove(self.target_list_left, self.target_list_left[i]);
         i--;
@@ -7751,10 +9383,12 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
     for(i = 0; i < self.target_list_right.size; i++) {
       origin_1 = self GetTagOrigin("tag_gunner3");
       origin_2 = self.target_list_right[i].origin;
+
       if(!isDefined(origin_2)) {
         continue;
       }
       dot_value = VectorDot(AnglesToRight(self.angles), VectorNormalize(origin_2 - origin_1));
+
       if(dot_value > 0) {} else {
         self.target_list_right = array_remove(self.target_list_right, self.target_list_right[i]);
         i--;
@@ -7765,10 +9399,12 @@ ai_pby_gunner_sort_targets_by_angle(gun_position) {
     for(i = 0; i < self.target_list_rear.size; i++) {
       origin_1 = self GetTagOrigin("tag_gunner4");
       origin_2 = self.target_list_rear[i].origin;
+
       if(!isDefined(origin_2)) {
         continue;
       }
       dot_value = VectorDot(anglesToForward(self.angles) * -1, VectorNormalize(origin_2 - origin_1));
+
       if(dot_value > 0) {} else {
         self.target_list_rear = array_remove(self.target_list_rear, self.target_list_rear[i]);
         i--;
@@ -7786,13 +9422,17 @@ ai_pby_gunner_sort_targets_by_dist(gun_position) {
         i--;
       }
     }
+
     for(i = 1; i < self.target_list_front.size; i++) {
       potential_target = self.target_list_front[i];
+
       if(!isDefined(potential_target)) {
         continue;
       }
+
       dist_1 = Distance2d(self.target_list_front[i].origin, self GetTagOrigin("tag_gunner1"));
       dist_2 = Distance2d(self.target_list_front[0].origin, self GetTagOrigin("tag_gunner1"));
+
       if(dist_1 < dist_2) {
         holder = self.target_list_front[0];
         self.target_list_front[0] = self.target_list_front[i];
@@ -7806,13 +9446,17 @@ ai_pby_gunner_sort_targets_by_dist(gun_position) {
         i--;
       }
     }
+
     for(i = 1; i < self.target_list_left.size; i++) {
       potential_target = self.target_list_left[i];
+
       if(!isDefined(potential_target)) {
         continue;
       }
+
       dist_1 = Distance2d(self.target_list_left[i].origin, self GetTagOrigin("tag_gunner2"));
       dist_2 = Distance2d(self.target_list_left[0].origin, self GetTagOrigin("tag_gunner2"));
+
       if(dist_1 < dist_2) {
         holder = self.target_list_front[0];
         self.target_list_left[0] = self.target_list_left[i];
@@ -7826,13 +9470,17 @@ ai_pby_gunner_sort_targets_by_dist(gun_position) {
         i--;
       }
     }
+
     for(i = 1; i < self.target_list_right.size; i++) {
       potential_target = self.target_list_right[i];
+
       if(!isDefined(potential_target)) {
         continue;
       }
+
       dist_1 = Distance2d(self.target_list_right[i].origin, self GetTagOrigin("tag_gunner3"));
       dist_2 = Distance2d(self.target_list_right[0].origin, self GetTagOrigin("tag_gunner3"));
+
       if(dist_1 < dist_2) {
         holder = self.target_list_right[0];
         self.target_list_right[0] = self.target_list_right[i];
@@ -7846,16 +9494,21 @@ ai_pby_gunner_sort_targets_by_dist(gun_position) {
         i--;
       }
     }
+
     for(i = 1; i < self.target_list_rear.size; i++) {
       potential_target = self.target_list_rear[i];
+
       if(!isDefined(potential_target)) {
         continue;
       }
+
       while(!isDefined(self.target_list_rear[0]) && self.target_list_rear.size > 0) {
         self.target_list_rear = array_shift_left(self.target_list_rear);
       }
+
       dist_1 = Distance2d(self.target_list_rear[i].origin, self GetTagOrigin("tag_gunner4"));
       dist_2 = Distance2d(self.target_list_rear[0].origin, self GetTagOrigin("tag_gunner4"));
+
       if(dist_1 < dist_2) {
         holder = self.target_list_rear[0];
         self.target_list_rear[0] = self.target_list_front[i];
@@ -7867,14 +9520,18 @@ ai_pby_gunner_sort_targets_by_dist(gun_position) {
 
 array_shift_left(_array) {
   ASSERTEX(!isDefined(_array[0]), "Array Shift Left called with an array that doesn't need shifting");
+
   old_size = _array.size;
+
   new_array = [];
+
   i = 0;
   for(; i < _array.size; i++) {
     if(isDefined(_array[i + 1])) {
       new_array[i] = _array[i + 1];
     }
   }
+
   if(old_size == new_array.size) {
     return new_array;
   } else {
@@ -7884,15 +9541,17 @@ array_shift_left(_array) {
 }
 
 #using_animtree("vehicles");
-
 pby_veh_idle(idle, delay_time, pontoons_up, hatch_open) {
   if(isDefined(delay_time)) {
     wait(delay_time);
   }
+
   self notify("stop_pby_idling");
   self.current_idle = "none";
+
   if(isDefined(self.current_idle_anim))
     self ClearAnim(self.current_idle_anim, 0);
+
   if(idle == "fly" || idle == "fly_up_open" || idle == "fly_up") {
     if(isDefined(pontoons_up) || idle == "fly_up_open" || idle == "fly_up") {
       if(isDefined(hatch_open) || idle == "fly_up_open") {
@@ -7911,24 +9570,29 @@ pby_veh_idle(idle, delay_time, pontoons_up, hatch_open) {
     }
     return;
   }
+
   if(idle == "float") {
     self SetFlaggedAnimKnob("idle_anim", %v_pby_float_blisters, 1, 0, 1);
     self.current_idle = "float";
+
     self.current_idle_anim = % v_pby_float_blisters;
     return;
   }
+
   if(idle == "float_ai") {
     self SetFlaggedAnimKnob("idle_anim", %v_pby_taxi_ai, 1, 0, 1);
     self.current_idle = "float_ai";
     self.current_idle_anim = % v_pby_taxi_ai;
     return;
   }
+
   if(idle == "float_static") {
     self SetFlaggedAnimKnob("idle_anim", %v_pby_staticpose, 1, 0, 1);
     self.current_idle = "float_static";
     self.current_idle_anim = % v_pby_staticpose;
     return;
   }
+
   if(idle == "none") {
     self.current_idle_anim = undefined;
   }
@@ -7938,15 +9602,20 @@ out_of_ammo_sound(bone, end_notify) {
   if(isDefined(end_notify)) {
     level endon(end_notify);
   }
+
   position = self GetTagOrigin(bone);
+
   bullet_sound = spawn("script_origin", position);
   bullet_sound LinkTo(self, bone);
+
   bullet_sound playSound("dryfire_rifle_plr", "click_done");
   bullet_sound waittill("click_done");
+
   while(1) {
     if(level.player AttackButtonPressed()) {
       bullet_sound playSound("dryfire_rifle_plr", "click_done");
       bullet_sound waittill("click_done");
+
       while(level.player AttackButtonPressed()) {
         wait(0.05);
       }
@@ -7960,7 +9629,9 @@ pby_veh_fire_guns() {
   while(!isDefined(level.player.current_seat)) {
     wait(0.05);
   }
+
   ammo_count = 0;
+
   while(1) {
     if(level.player AttackButtonPressed()) {
       if(level.player.current_seat == "pby_rightgun" && level.player.in_transition == false && self IsGunnerFiring(2)) {
@@ -7969,8 +9640,10 @@ pby_veh_fire_guns() {
             self SetFlaggedAnimKnobRestart("ammo_fire_right", level.scr_anim["pby"]["ammo_right_" + ammo_count], 1, 0.1, 1);
             animation_time = getAnimLength(level.scr_anim["pby"]["ammo_right_" + ammo_count]);
             wait(animation_time);
+
             ammo_count++;
           }
+
           if(ammo_count == 8) {
             flag_set("pby_actually_out_of_ammo");
             self DisableGunnerFiring(2, true);
@@ -7992,6 +9665,7 @@ pby_veh_fire_guns() {
           if(ammo_count < 20) {
             ammo_count++;
           }
+
           if(ammo_count == 20) {
             flag_set("pby_actually_out_of_ammo");
             self DisableGunnerFiring(0, true);
@@ -8012,24 +9686,34 @@ pby_veh_fire_guns() {
 
 player_uses_pistol() {
   level.plane_a waittill("flattened_out");
+
   while(!flag("pby_actually_out_of_ammo")) {
     wait(0.05);
   }
+
   plane = level.plane_a;
   plane UseBy(level.player);
+
   startorg = getstartOrigin(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"]["pby_right_to_pistol"]);
   startang = getstartAngles(plane GetTagOrigin("origin_animate_jnt"), plane GetTagAngles("origin_animate_jnt"), level.scr_anim["player_hands"]["pby_right_to_pistol"]);
+
   player_hands = spawn_anim_model("player_hands");
   player_hands.plane = plane;
   player_hands.direction = "right";
+
   player_hands.origin = startorg;
   player_hands.angles = startang;
   player_hands LinkTo(plane, "origin_animate_jnt");
+
   level.player.origin = player_hands.origin;
   level.player.angles = player_hands.angles;
+
   level.player PlayerLinkTo(player_hands, "tag_player", 1, 60, 30, 30, 30, true);
+
   plane maps\_anim::anim_single_solo(player_hands, "pby_right_to_pistol");
+
   SetTimeScale(0.3);
+
   level.player GiveWeapon("colt");
   level.player SwitchToWeapon("colt");
   level.player SetWeaponAmmoStock("colt", 0);
@@ -8039,12 +9723,15 @@ player_uses_pistol() {
 draw_debug_line_stupid_animation(start_org) {
   while(1) {
     startorg = getstartOrigin(self.plane GetTagOrigin("tag_engineer"), self.plane GetTagAngles("tag_engineer"), level.scr_anim["rescue_a_4"]["my_idle"][0]);
+
     pos1 = startorg;
     pos2 = self.origin;
     Line(pos1, pos2, (1, 0, 0));
+
     pos1 = level.plane_a GetTagOrigin("tag_engineer");
     pos2 = level.player.origin;
     Line(pos1, pos2, (0, 0, 1));
+
     wait(0.05);
   }
 }
@@ -8057,11 +9744,14 @@ draw_debug_lines_to_target(gun_bone, id) {
 
 draw_debug_line_to_target_distance(pby) {
   self endon("death");
+
   while(1) {
     pos1 = pby.origin;
     pos2 = self.origin;
+
     dist = Distance(pos1, pos2);
     color = (0, 0, 0);
+
     if(dist <= 4500) {
       color = (1, 0, 0);
     } else if(dist > 4500 && dist < 7500) {
@@ -8069,8 +9759,10 @@ draw_debug_line_to_target_distance(pby) {
     } else {
       color = (0, 0, 1);
     }
+
     pos3 = pos2 + (0, 0, 100);
     Line(pos3, pos2, color);
+
     wait(0.05);
   }
 }
@@ -8080,69 +9772,87 @@ stat_counter() {
   level thread stat_counter_zeroes();
   level thread stat_counter_merchant_ships();
   level thread stat_counter_survivors();
+
   merchant_old_count = level.merchant_ship_death_count;
   zero_old_count = level.zero_death_count;
   ptboat_old_count = level.ptboat_death_count;
   survivor_old_count = level.survivor_save_count;
+
   if(true) {
     return;
   }
+
   while(1) {
     while(merchant_old_count == level.merchant_ship_death_count && zero_old_count == level.zero_death_count && ptboat_old_count == level.ptboat_death_count && survivor_old_count == level.survivor_save_count) {
       wait(0.05);
     }
+
     merchant_old_count = level.merchant_ship_death_count;
     zero_old_count = level.zero_death_count;
     ptboat_old_count = level.ptboat_death_count;
     survivor_old_count = level.survivor_save_count;
+
     level.merchant_ship_number SetValue(level.merchant_ship_death_count);
     level.merchant_ship_count thread hud_elem_fade_in(1);
     level.merchant_ship_x thread hud_elem_fade_in(1);
     level.merchant_ship_number thread hud_elem_fade_in(1);
+
     level.zero_number SetValue(level.zero_death_count);
     level.zero_count thread hud_elem_fade_in(1);
     level.zero_x thread hud_elem_fade_in(1);
     level.zero_number thread hud_elem_fade_in(1);
+
     level.ptboat_number SetValue(level.ptboat_death_count);
     level.ptboat_count thread hud_elem_fade_in(1);
     level.ptboat_x thread hud_elem_fade_in(1);
     level.ptboat_number thread hud_elem_fade_in(1);
+
     level.survivor_number SetValue(level.survivor_save_count);
     level.survivor_count thread hud_elem_fade_in(1);
     level.survivor_x thread hud_elem_fade_in(1);
     level.survivor_number thread hud_elem_fade_in(1);
+
     for(i = 0; i < 20; i++) {
       if(merchant_old_count != level.merchant_ship_death_count || zero_old_count != level.zero_death_count || ptboat_old_count != level.ptboat_death_count || survivor_old_count != level.survivor_save_count) {
         merchant_old_count = level.merchant_ship_death_count;
         zero_old_count = level.zero_death_count;
         ptboat_old_count = level.ptboat_death_count;
         survivor_old_count = level.survivor_save_count;
+
         level.merchant_ship_number SetValue(level.merchant_ship_death_count);
         level.zero_number SetValue(level.zero_death_count);
         level.ptboat_number Setvalue(level.ptboat_death_count);
         level.survivor_number SetValue(level.survivor_save_count);
+
         i = 0;
       }
+
       wait(0.05);
     }
+
     level.merchant_ship_count thread hud_elem_fade_out(1);
     level.merchant_ship_x thread hud_elem_fade_out(1);
     level.merchant_ship_number thread hud_elem_fade_out(1);
+
     level.zero_count thread hud_elem_fade_out(1);
     level.zero_x thread hud_elem_fade_out(1);
     level.zero_number thread hud_elem_fade_out(1);
+
     level.ptboat_count thread hud_elem_fade_out(1);
     level.ptboat_x thread hud_elem_fade_out(1);
     level.ptboat_number thread hud_elem_fade_out(1);
+
     level.survivor_count thread hud_elem_fade_out(1);
     level.survivor_x thread hud_elem_fade_out(1);
     level.survivor_number thread hud_elem_fade_out(1);
+
     wait(1);
   }
 }
 
 stat_counter_merchant_ships() {
   level.merchant_ship_death_count = 0;
+
   level.merchant_ship_count = NewHudElem();
   level.merchant_ship_count.x = 130;
   level.merchant_ship_count.y = 340;
@@ -8152,7 +9862,9 @@ stat_counter_merchant_ships() {
   level.merchant_ship_count.alpha = 0;
   level.merchant_ship_count.sort = 20;
   level.merchant_ship_count.font = "default";
+
   level.merchant_ship_count SetShader("hud_pby_score_ship", 64, 32);
+
   level.merchant_ship_x = NewHudElem();
   level.merchant_ship_x.x = 140;
   level.merchant_ship_x.y = 357;
@@ -8163,6 +9875,7 @@ stat_counter_merchant_ships() {
   level.merchant_ship_x.sort = 20;
   level.merchant_ship_x.font = "default";
   level.merchant_ship_x SetText(&"PBY_FLY_X");
+
   level.merchant_ship_number = NewHudElem();
   level.merchant_ship_number.x = 143;
   level.merchant_ship_number.y = 357;
@@ -8172,11 +9885,13 @@ stat_counter_merchant_ships() {
   level.merchant_ship_number.alpha = 0;
   level.merchant_ship_number.sort = 20;
   level.merchant_ship_number.font = "default";
+
   level.merchant_ship_number SetValue(level.merchant_ship_death_count);
 }
 
 stat_counter_survivors() {
   level.survivor_save_count = 0;
+
   level.survivor_count = NewHudElem();
   level.survivor_count.x = 130;
   level.survivor_count.y = 420;
@@ -8186,8 +9901,10 @@ stat_counter_survivors() {
   level.survivor_count.alpha = 0;
   level.survivor_count.sort = 20;
   level.survivor_count.font = "default";
+
   level.survivor_count SetText(&"PBY_FLY_SURVIVOR");
   level.survivor_count SetShader("hud_pby_score_rescue", 16, 32);
+
   level.survivor_x = NewHudElem();
   level.survivor_x.x = 140;
   level.survivor_x.y = 425;
@@ -8198,6 +9915,7 @@ stat_counter_survivors() {
   level.survivor_x.sort = 20;
   level.survivor_x.font = "default";
   level.survivor_x SetText(&"PBY_FLY_X");
+
   level.survivor_number = NewHudElem();
   level.survivor_number.x = 143;
   level.survivor_number.y = 425;
@@ -8207,11 +9925,13 @@ stat_counter_survivors() {
   level.survivor_number.alpha = 0;
   level.survivor_number.sort = 20;
   level.survivor_number.font = "default";
+
   level.survivor_number SetValue(level.survivor_save_count);
 }
 
 stat_counter_zeroes() {
   level.zero_death_count = 0;
+
   level.zero_count = NewHudElem();
   level.zero_count.x = 130;
   level.zero_count.y = 388;
@@ -8221,7 +9941,9 @@ stat_counter_zeroes() {
   level.zero_count.alpha = 0;
   level.zero_count.sort = 20;
   level.zero_count.font = "default";
+
   level.zero_count SetShader("hud_pby_score_zero", 32, 32);
+
   level.zero_x = NewHudElem();
   level.zero_x.x = 140;
   level.zero_x.y = 400;
@@ -8232,6 +9954,7 @@ stat_counter_zeroes() {
   level.zero_x.sort = 20;
   level.zero_x.font = "default";
   level.zero_x SetText(&"PBY_FLY_X");
+
   level.zero_number = NewHudElem();
   level.zero_number.x = 143;
   level.zero_number.y = 400;
@@ -8241,11 +9964,13 @@ stat_counter_zeroes() {
   level.zero_number.alpha = 0;
   level.zero_number.sort = 20;
   level.zero_number.font = "default";
+
   level.zero_number SetValue(level.zero_death_count);
 }
 
 stat_counter_ptboat() {
   level.ptboat_death_count = 0;
+
   level.ptboat_count = NewHudElem();
   level.ptboat_count.x = 130;
   level.ptboat_count.y = 372;
@@ -8255,7 +9980,9 @@ stat_counter_ptboat() {
   level.ptboat_count.alpha = 0;
   level.ptboat_count.sort = 20;
   level.ptboat_count.font = "default";
+
   level.ptboat_count SetShader("hud_pby_score_ptboat", 32, 16);
+
   level.ptboat_x = NewHudElem();
   level.ptboat_x.x = 140;
   level.ptboat_x.y = 375;
@@ -8266,6 +9993,7 @@ stat_counter_ptboat() {
   level.ptboat_x.sort = 20;
   level.ptboat_x.font = "default";
   level.ptboat_x SetText(&"PBY_FLY_X");
+
   level.ptboat_number = NewHudElem();
   level.ptboat_number.x = 143;
   level.ptboat_number.y = 375;
@@ -8275,18 +10003,21 @@ stat_counter_ptboat() {
   level.ptboat_number.alpha = 0;
   level.ptboat_number.sort = 20;
   level.ptboat_number.font = "default";
+
   level.ptboat_number SetValue(level.ptboat_death_count);
 }
 
 hud_elem_fade_in(time) {
   self FadeOverTime(time);
   self.alpha = 1;
+
   wait(time);
 }
 
 hud_elem_fade_out(time) {
   self FadeOvertime(time);
   self.alpha = 0;
+
   wait(time);
 }
 
@@ -8294,6 +10025,7 @@ turret_ads_reminder() {
   if(!isDefined(level.ads_remind_text)) {
     level.ads_remind_text = NewHudElem();
   }
+
   level.ads_remind_text.x = 320;
   level.ads_remind_text.y = 300;
   level.ads_remind_text.alignX = "center";
@@ -8302,11 +10034,14 @@ turret_ads_reminder() {
   level.ads_remind_text.alpha = 1.0;
   level.ads_remind_text.sort = 20;
   level.ads_remind_text.font = "default";
+
   if(level.console)
     str_ref = &"PBY_FLY_ADS_HINT";
   else
     str_ref = &"SCRIPT_PLATFORM_PBY_FLY_ADS_HINT";
+
   level.ads_remind_text SetText(str_ref);
+
   level thread turret_ads_reminder_off();
   level thread turret_ads_reminder_press();
   level thread turret_ads_reminder_timed();
@@ -8314,9 +10049,11 @@ turret_ads_reminder() {
 
 turret_ads_reminder_press() {
   level endon("turn off ads hint");
+
   while(!(level.player AdsButtonPressed())) {
     wait(0.05);
   }
+
   level notify("player_pressed_ads");
   level notify("turn off ads hint");
 }
@@ -8324,20 +10061,24 @@ turret_ads_reminder_press() {
 turret_ads_reminder_timed() {
   level endon("turn off ads hint");
   wait(10);
+
   level notify("turn off ads hint");
   level notify("ads timed out");
 }
 
 turret_ads_reminder_off() {
   level waittill("turn off ads hint");
+
   level.ads_remind_text SetText("");
 }
 
 turret_rescue_hud_elem() {
   level endon("save_text_off");
+
   if(!isDefined(level.save_text)) {
     level.save_text = NewHudElem();
   }
+
   level.save_text.x = 450;
   level.save_text.y = 300;
   level.save_text.alignX = "right";
@@ -8346,14 +10087,19 @@ turret_rescue_hud_elem() {
   level.save_text.alpha = 1.0;
   level.save_text.sort = 20;
   level.save_text.font = "default";
+
   str_ref = &"PBY_FLY_RESCUE";
+
   while(flag("turret_hud")) {
     wait(0.1);
   }
+
   while(!flag("saver_ready")) {
     wait(0.1);
   }
+
   level.save_text SetText(str_ref);
+
   level thread turret_rescue_hud_elem_off();
   level thread turret_rescue_hud_elem_hide(str_ref);
 }
@@ -8366,18 +10112,22 @@ turret_rescue_hud_elem_off() {
 
 turret_rescue_hud_elem_hide(str_ref) {
   level endon("save_text_off");
+
   while(flag("rescue_ready") && !flag("turret_hud") && flag("saver_ready")) {
     wait(0.05);
   }
+
   level.save_text SetText("");
   level thread turret_rescue_hud_elem_show(str_ref);
 }
 
 turret_rescue_hud_elem_show(str_ref) {
   level endon("save_text_off");
+
   while(flag("turret_hud") || !flag("saver_ready") || !flag("rescue_ready")) {
     wait(0.05);
   }
+
   level.save_text SetText(str_ref);
   level thread turret_rescue_hud_elem_hide(str_ref);
 }
@@ -8389,6 +10139,7 @@ turret_switch_hud_elem(str_ref, time_until_forced_switch) {
   if(!isDefined(level.switch_text)) {
     level.switch_text = NewHudElem();
   }
+
   level.switch_text.x = 450;
   level.switch_text.y = 220;
   level.switch_text.alignX = "right";
@@ -8397,9 +10148,11 @@ turret_switch_hud_elem(str_ref, time_until_forced_switch) {
   level.switch_text.alpha = 1.0;
   level.switch_text.sort = 20;
   level.switch_text.font = "default";
+
   level notify("turret_text_on");
   flag_set("turret_hud");
   level.switch_text SetText(str_ref);
+
   if(!isDefined(level.switch_time_text)) {
     level.switch_time_text = NewHudElem();
   }
@@ -8411,18 +10164,23 @@ turret_switch_hud_elem(str_ref, time_until_forced_switch) {
   level.switch_time_text.alpha = 1.0;
   level.switch_time_text.sort = 20;
   level.switch_time_text.font = "default";
+
   self thread turret_switch_hud_elem_off();
+
   level.player_switched = false;
   while(time_until_forced_switch > 0 && !level.player_switched) {
     level.switch_time_text SetText(" (" + time_until_forced_switch + ") ");
     time_until_forced_switch--;
     wait(1);
   }
+
   if(!level.player_switched) {
     while(level.player.save_anim) {
       wait(0.2);
     }
+
     wait(0.15);
+
     if(self.need_to_switch) {
       self.need_to_switch = false;
       self switch_turret(self.required_seat);
@@ -8441,38 +10199,48 @@ turret_switch_hud_elem_off() {
 
 scripted_turret_switch(turret_needed, should_wait, time_until_forced_switch) {
   self.required_seat = turret_needed;
+
   if(self.required_seat == self.current_seat) {
     return;
   }
+
   if(self.required_seat == "pby_frontgun") {
     self thread turret_switch_hud_elem(&"PBY_FLY_SWITCH_FRONT", time_until_forced_switch);
   }
+
   if(self.required_seat == "pby_rightgun") {
     self thread turret_switch_hud_elem(&"PBY_FLY_SWITCH_RIGHT", time_until_forced_switch);
   }
+
   if(self.required_seat == "pby_leftgun") {
     self thread turret_switch_hud_elem(&"PBY_FLY_SWITCH_LEFT", time_until_forced_switch);
   }
+
   if(self.required_seat == "pby_backgun") {
     self thread turret_switch_hud_elem(&"PBY_FLY_SWITCH_REAR", time_until_forced_switch);
   }
+
   self.need_to_switch = true;
+
   if(!isDefined(should_wait)) {
     return;
   }
+
   if(should_wait == false) {
     return;
   }
+
   while(self.required_seat != self.current_seat) {
     wait(0.1);
   }
 }
-
 disable_manual_switching() {
   level notify("no_manual_switch");
+
   SetSavedDvar("compass", "0");
   SetSavedDvar("hud_showStance", "0");
   SetSavedDvar("ammoCounterHide", "1");
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     player = players[i];
@@ -8486,8 +10254,10 @@ scriptmodel_dump() {
   while(true) {
     my_array = getEntArray("script_model", "classname");
     total_size = my_array.size;
+
     total_tag_origins = 0;
     total_planes = 0;
+
     println("**********************************");
     println("**********************************");
     println("**********************************");
@@ -8495,58 +10265,82 @@ scriptmodel_dump() {
     println("**********************************");
     println("**********************************");
     println("**********************************");
+
     for(i = 0; i < total_size; i++) {
       if(my_array[i].model == "tag_origin") {
         total_tag_origins++;
       }
+
       if(my_array[i].model == "vehicle_jap_airplane_zero_fly") {
         total_planes++;
       }
     }
+
     println("*** origin count: " + total_tag_origins);
     println("*** plane count: " + total_planes);
     println("**********************************");
     println("**********************************");
     println("**********************************");
+
     wait(3);
   }
 }
 
 event2_strafe_boats_m() {
   level.to_be_continued = true;
+
   level thread event2_ptboat_2nd_pass_m();
+
   set_objective("merchant_boats");
+
   level.boats[0].sink_anim = "sink_big";
   level.boats[0].special_sink_fx = "merchant_sink_fire";
+
   wait(0.05);
+
   oil_tanks = [];
   oil_tanks = getEntArray("explodable_oiltank", "script_noteworthy");
   for(i = 0; i < oil_tanks.size; i++) {
     oil_tanks[i].parent = level.boats[0];
   }
+
   wait(0.05);
+
   level thread event2_dialogue_splined();
+
   level.plane_b thread ai_pby_gunners_think();
+
   wait(0.1);
+
   level thread event2_setup_first_ship_drones();
   level thread event2_setup_second_ship_drones();
   level thread event2_setup_third_ship_drones();
+
   wait(0.1);
+
   shields = [];
   shields = getEntArray("con_tower_shield", "targetname");
+
   for(i = 0; i < shields.size; i++) {
     shields[i] Delete();
   }
+
   wait(0.1);
+
   level thread merchant_boat_siren();
   level thread merchant_boat_1_sounds();
   level thread merchant_boat_3_sounds();
   level thread merchant_boat_pa();
+
   wait(0.1);
+
   level thread event2_debris_m();
+
   wait(0.25);
+
   for(i = 0; i < level.boats.size; i++) {
     level.boats[i] thread ms_soldier_triple_25_add_gunners();
+
     level.boats[i].scriptname = "boat_" + i;
     level.boats[i] thread attach_boat_destructibles();
     level.boats[i].animname = "merchant_ship";
@@ -8554,30 +10348,42 @@ event2_strafe_boats_m() {
     level.boats[i].aft.animname = "merchant_ship";
     level.boats[i].alarmed = false;
     level.boats[i] thread merchant_boat_alarm();
+
     level.boats[i] thread setup_merchant_ship_chain_destruction();
+
     level.boats[i] thread merchant_boat_spots();
+
     level.boats[i] thread merchant_boat_trip25();
+
     level.boats[i] thread merchant_boat_sink_me();
     wait(0.1);
   }
+
   level thread event2_dialogue_m();
   level thread event2_seat_control_m();
   level thread event2_sink_all_boats();
+
   level thread event2_ptboat_3rd_pass();
   level thread event2_ptboats_4th_pass();
+
   level thread maps\pby_fly_amb::start_music_intro_m();
+
   level.plane_a waittill("start_event_3");
   set_objective("back_to_base");
+
   level thread event3();
 }
 
 event2_seat_control_m() {
   level.plane_a waittill("left_turret");
   level.player scripted_turret_switch("pby_leftgun", true);
+
   level.plane_a waittill("right_turret");
   level.player scripted_turret_switch("pby_rightgun", true);
+
   level.plane_a waittill("front_turret");
   level.player scripted_turret_switch("pby_frontgun", true);
+
   level.plane_a waittill("left_turret");
   level.plane_b notify("stop_shooting");
   level.player thread scripted_turret_switch("pby_leftgun", true);
@@ -8587,6 +10393,7 @@ event2_seat_control_m() {
 event2_dialogue_m() {
   level.plane_a waittill("dialogue_notify");
   level anim_single_solo(level.plane_a.pilot, "event2_a_takeusclose");
+
   level.plane_a waittill("front_turret");
   if(true) {
     level anim_single_solo(level.plane_a.pilot, "event2_a_lastpass_a");
@@ -8594,6 +10401,7 @@ event2_dialogue_m() {
   } else {
     level anim_single_solo(level.plane_a.pilot, "event2_a_lastpass_b");
   }
+
   level.plane_a waittill("dialogue_notify");
   if(true) {
     level anim_single_solo(level.plane_a.pilot, "event2_a_nicejob");
@@ -8601,7 +10409,9 @@ event2_dialogue_m() {
   } else {
     level anim_single_solo(level.plane_a.pilot, "event2_a_didwhatcould");
   }
+
   level thread delete_all_ms_guys();
+
   level.plane_a notify("start_event_3");
 }
 
@@ -8609,25 +10419,32 @@ event2_debris_m() {
   for(i = 0; i < level.debris_turn_1.size; i++) {
     level.debris_turn_1[i] thread debris_float_away();
   }
+
   level.plane_a waittill("ev2_debris_turn3");
+
   level thread kill_all_ms_guys();
   level thread remove_metal_clip();
+
   for(i = 0; i < level.debris_turn_3.size; i++) {
     level.debris_turn_3[i] thread debris_float_away();
     if(isDefined(level.debris_turn_3[i].script_string)) {
       playFX(level._effect["debris_fire"], level.debris_turn_3[i].origin);
     }
   }
+
   event2_debris_cleanup();
 }
 
 event2_ptboat_2nd_pass_m() {
   wait(2);
+
   the_ptboat = undefined;
   ptboat_paths = [];
+
   ptboat_paths[0] = GetVehicleNode("auto783", "targetname");
   ptboat_paths[1] = GetVehicleNode("auto777", "targetname");
   ptboat_paths[2] = GetVehicleNode("auto1309", "targetname");
+
   for(i = 0; i < ptboat_paths.size; i++) {
     the_ptboat = SpawnVehicle("vehicle_jap_ship_ptboat", "new_boat", "jap_ptboat", (0, 0, 0), (0, 0, 0));
     the_ptboat.vehicletype = "jap_ptboat";
@@ -8638,52 +10455,68 @@ event2_ptboat_2nd_pass_m() {
     the_ptboat StartPath();
     the_ptboat playLoopSound("merchant_engines");
     the_ptboat.health = 600;
+
     wait(0.05);
   }
 }
 
 fletcher_ai_turret_think(target_vehicle_type, gunner_tag, gun_number) {
   self endon("stop firing");
+
   random_wait = RandomFloatRange(1.0, 8.0);
   wait(random_wait);
+
   my_array = [];
   target_array = [];
+
   while(1) {
     my_array = [];
     target_array = [];
+
     my_array = getEntArray("script_vehicle", "classname");
+
     for(i = 0; i < my_array.size; i++) {
       if(my_array[i].vehicletype == target_vehicle_type && !isDefined(my_array[i].dont_target)) {
         target_array[target_array.size] = my_array[i];
       }
     }
+
     for(i = 1; i < target_array.size; i++) {
       potential_target = target_array[i];
+
       if(!isDefined(potential_target)) {
         continue;
       }
+
       dist_1 = Distance2d(target_array[i].origin, self GetTagOrigin(gunner_tag));
       dist_2 = Distance2d(target_array[0].origin, self GetTagOrigin(gunner_tag));
+
       if(dist_1 < dist_2) {
         holder = target_array[0];
         target_array[0] = target_array[i];
         target_array[i] = holder;
       }
     }
+
     target = target_array[0];
+
     if(!isDefined(target)) {
       wait(1);
       continue;
     }
+
     self setgunnertargetent(target, (0, 0, 0), gun_number);
+
     while(isDefined(target)) {
       if(Distance2d(target.origin, self.origin) > 3000) {
         target = undefined;
       } else {
         self firegunnerweapon(gun_number);
       }
+
       wait(0.28);
     }
+
     random_wait = RandomFloatRange(1.0, 3.0);
     wait(random_wait);
   }
@@ -8693,10 +10526,13 @@ swap_model_for_fletcher(_targetname) {
   _model = GetEnt(_targetname, "targetname");
   hold_origin = _model.origin;
   hold_angles = _model.angles;
+
   _model Delete();
+
   fletcher = SpawnVehicle("vehicle_usa_ship_fletcher_hull", "new_fletcher", "fletcher_destroyer", hold_origin, hold_angles);
   fletcher.vehicletype = "fletcher_destroyer";
   maps\_vehicle::vehicle_init(fletcher);
+
   return fletcher;
 }
 
@@ -8704,36 +10540,45 @@ fletcher_init() {
   if(!isDefined(level.used_fletcher_names)) {
     level.used_fletcher_names = 0;
   }
+
   self.vehicletype = "fletcher_destroyer";
+
   x = self;
+
   x_forward = anglesToForward(x.angles);
   x_right = AnglesToRight(x.angles);
   x_up = AnglesToUp(x.angles);
+
   x.chunk_1 = spawn("script_model", (0, 0, 0));
   x.chunk_1 setModel("vehicle_usa_ship_fletcher_chunk1");
   x.chunk_1.origin = x.origin + (804 * x_forward) + (412.24 * x_up);
   x.chunk_1.angles = x.angles;
   x.chunk_1.script_noteworthy = "ev4_obj";
+
   x.chunk_2 = spawn("script_model", (0, 0, 0));
   x.chunk_2 setModel("vehicle_usa_ship_fletcher_chunk2");
   x.chunk_2.origin = x.origin + (622 * x_forward) + (1.62 * x_right) + (273.16 * x_up);
   x.chunk_2.angles = x.angles;
   x.chunk_2.script_noteworthy = "ev4_obj";
+
   x.chunk_3 = spawn("script_model", (0, 0, 0));
   x.chunk_3 setModel("vehicle_usa_ship_fletcher_chunk3");
   x.chunk_3.origin = x.origin + (534.5 * x_forward) + (1.62 * x_right) + (233.45 * x_up);
   x.chunk_3.angles = x.angles;
   x.chunk_3.script_noteworthy = "ev4_obj";
+
   x.chunk_4 = spawn("script_model", (0, 0, 0));
   x.chunk_4 setModel("vehicle_usa_ship_fletcher_chunk4");
   x.chunk_4.origin = x.origin + (222 * x_forward) + (1.62 * x_right) + (258.65 * x_up);
   x.chunk_4.angles = x.angles;
   x.chunk_4.script_noteworthy = "ev4_obj";
+
   x.chunk_5 = spawn("script_model", (0, 0, 0));
   x.chunk_5 setModel("vehicle_usa_ship_fletcher_chunk5");
   x.chunk_5.origin = x.origin + (-321 * x_forward) + (1.62 * x_right) + (243.86 * x_up);
   x.chunk_5.angles = x.angles;
   x.chunk_5.script_noteworthy = "ev4_obj";
+
   x.turret_1 = spawn("script_model", (0, 0, 0));
   x.turret_1 setModel("vehicle_usa_ship_fletcher_turretgun");
   x.turret_1.origin = x.origin + (1515.12 * x_forward) + (0.28 * x_right) + (255.9 * x_up);
@@ -8744,6 +10589,7 @@ fletcher_init() {
   x.turret_1_barrel.origin = x.origin + (1537 * x_forward) + (0.28 * x_right) + (315.7 * x_up);
   x.turret_1_barrel.angles = x.angles;
   x.turret_1_barrel.script_noteworthy = "ev4_obj";
+
   x.turret_2 = spawn("script_model", (0, 0, 0));
   x.turret_2 setModel("vehicle_usa_ship_fletcher_turretgun");
   x.turret_2.origin = x.origin + (1209.3 * x_forward) + (0.28 * x_right) + (339.23 * x_up);
@@ -8754,6 +10600,7 @@ fletcher_init() {
   x.turret_2_barrel.origin = x.origin + (1231.23 * x_forward) + (0.28 * x_right) + (399 * x_up);
   x.turret_2_barrel.angles = x.angles;
   x.turret_2_barrel.script_noteworthy = "ev4_obj";
+
   x.turret_3 = spawn("script_model", (0, 0, 0));
   x.turret_3 setModel("vehicle_usa_ship_fletcher_turretgun");
   x.turret_3.origin = x.origin + (-738.18 * x_forward) + (0.28 * x_right) + (267.31 * x_up);
@@ -8764,6 +10611,7 @@ fletcher_init() {
   x.turret_3_barrel.origin = x.origin + (-760.1 * x_forward) + (0.28 * x_right) + (327.14 * x_up);
   x.turret_3_barrel.angles = x.angles;
   x.turret_3_barrel.script_noteworthy = "ev4_obj";
+
   x.turret_4 = spawn("script_model", (0, 0, 0));
   x.turret_4 setModel("vehicle_usa_ship_fletcher_turretgun");
   x.turret_4.origin = x.origin + (-1244.29 * x_forward) + (0.28 * x_right) + (267.31 * x_up);
@@ -8774,6 +10622,7 @@ fletcher_init() {
   x.turret_4_barrel.origin = x.origin + (-1266.21 * x_forward) + (0.28 * x_right) + (327.14 * x_up);
   x.turret_4_barrel.angles = x.angles;
   x.turret_4_barrel.script_noteworthy = "ev4_obj";
+
   x.turret_5 = spawn("script_model", (0, 0, 0));
   x.turret_5 setModel("vehicle_usa_ship_fletcher_turretgun");
   x.turret_5.origin = x.origin + (-1549.17 * x_forward) + (0.28 * x_right) + (163.05 * x_up);
@@ -8784,6 +10633,7 @@ fletcher_init() {
   x.turret_5_barrel.origin = x.origin + (-1571.09 * x_forward) + (0.28 * x_right) + (222.88 * x_up);
   x.turret_5_barrel.angles = x.angles;
   x.turret_5_barrel.script_noteworthy = "ev4_obj";
+
   x.oerlikon_5 = spawn("script_model", (0, 0, 0));
   x.oerlikon_5 setModel("vehicle_usa_ship_fletcher_oerlikon");
   x.oerlikon_5.origin = x.origin + (-915.28 * x_forward) + (-190.13 * x_right) + (144.93 * x_up);
@@ -8794,13 +10644,17 @@ fletcher_init() {
   x.oerlikon_5_barrel.origin = x.origin + (-916.13 * x_forward) + (-171.68 * x_right) + (193.15 * x_up);
   x.oerlikon_5_barrel.angles = x.angles;
   x.oerlikon_5_barrel.script_noteworthy = "ev4_obj";
+
   self thread fletcher_ai_turret_think("zero", "tag_gunner_turret1", 0);
   self thread fletcher_ai_turret_think("zero", "tag_gunner_turret2", 1);
   self thread fletcher_ai_turret_think("zero", "tag_gunner_turret3", 2);
   self thread fletcher_ai_turret_think("zero", "tag_gunner_turret4", 3);
+
   random_name = level.used_fletcher_names;
   level.used_fletcher_names++;
+
   self SetVehicleLookAtText(level.ship_names[random_name], &"VEHICLENAME_FLETCHER");
+
   self.decal = spawn("script_model", self.origin);
   self.decal setModel("vehicle_usa_ship_fletcher_decal" + random_name);
   self.decal.angles = self.angles;
@@ -8809,21 +10663,28 @@ fletcher_init() {
 fletcher_ai_biggun_think(gun, barrel) {
   self endon("death");
   self endon("stop_big_guns");
+
   max_pitch = 330;
   min_pitch = 270;
+
   barrel.angles = (300, barrel.angles[1], barrel.angles[2]);
+
   barrel LinkTo(gun);
+
   while(1) {
     random_yaw = RandomIntRange(15, 110);
     pos_or_neg = RandomInt(2);
+
     for(i = 0; i < random_yaw; i++) {
       if(pos_or_neg) {
         gun RotateYaw(1, 0.05);
       } else {
         gun RotateYaw(-1, 0.05);
       }
+
       wait(0.1);
     }
+
     random_pitch = RandomIntRange(min_pitch, max_pitch);
     up = false;
     if(random_pitch > barrel.angles[0]) {
@@ -8833,7 +10694,9 @@ fletcher_ai_biggun_think(gun, barrel) {
       random_pitch = barrel.angles[0] - random_pitch;
       up = false;
     }
+
     barrel Unlink();
+
     ASSERTEX(random_pitch >= 0, "the Random pitch was negative");
     for(i = 0; i < random_pitch; i++) {
       if(up) {
@@ -8841,16 +10704,21 @@ fletcher_ai_biggun_think(gun, barrel) {
       } else {
         barrel RotatePitch(-1, 0.05);
       }
+
       wait(0.05);
     }
+
     barrel LinkTo(gun);
+
     barrel fletcher_ai_biggun_fire();
   }
 }
 
 fletcher_ai_biggun_fire(barrel) {
   fire_times = RandomIntRange(2, 5);
+
   wait(1);
+
   for(i = 0; i < fire_times; i++) {
     playFXOnTag(level._effect["fletcher_5in"], self, "turretgun_flash_1");
     wait(1);
@@ -8863,6 +10731,7 @@ front_hit_fletcher_kamikaze_gun_1(guy) {
   ship.turret_1.animname = "fletcher";
   ship.turret_1_barrel UseAnimTree(#animtree);
   ship.turret_1_barrel.animname = "fletcher";
+
   ship.turret_1 thread anim_single_solo(ship.turret_1, "fletcherhit_front_gun1base");
   ship.turret_1_barrel thread anim_single_solo(ship.turret_1_barrel, "fletcherhit_front_gun1barrel");
 }
@@ -8873,6 +10742,7 @@ front_hit_fletcher_kamikaze_gun_2(guy) {
   ship.turret_2.animname = "fletcher";
   ship.turret_2_barrel UseAnimTree(#animtree);
   ship.turret_2_barrel.animname = "fletcher";
+
   ship.turret_2 thread anim_single_solo(ship.turret_2, "fletcherhit_front_gun2base");
   ship.turret_2_barrel thread anim_single_solo(ship.turret_2_barrel, "fletcherhit_front_gun2barrel");
 }
@@ -8881,15 +10751,19 @@ front_hit_fletcher_kamikaze_chunk_1(guy) {
   ship = GetEnt("ship_number_2", "targetname");
   ship.chunk_1 UseAnimTree(#animtree);
   ship.chunk_1.animname = "fletcher";
+
   ship.chunk_1 thread anim_single_solo(ship.chunk_1, "fletcherhit_front_chunk1");
 }
 
 fletcher_animation(_targetname, _case) {
   fletcher = GetEnt(_targetname, "targetname");
+
   self waittill("reached_end_node");
+
   switch (_case) {
     case 0:
       exploder(100);
+
       fletcher.chunk_5 UseAnimTree(#animtree);
       fletcher.chunk_5.animname = "fletcher";
       fletcher.turret_3 UseAnimTree(#animtree);
@@ -8900,14 +10774,18 @@ fletcher_animation(_targetname, _case) {
       fletcher.oerlikon_5.animname = "fletcher";
       fletcher.oerlikon_5_barrel UseAnimtree(#animtree);
       fletcher.oerlikon_5_barrel.animname = "fletcher";
+
       fletcher.chunk_5 thread anim_single_solo(fletcher.chunk_5, "fletcherhit_right_chunk5plate");
       fletcher.turret_3 thread anim_single_solo(fletcher.turret_3, "fletcherhit_right_turret");
       fletcher.turret_3_barrel thread anim_single_solo(fletcher.turret_3_barrel, "fletcherhit_right_turretbarrel");
       fletcher.oerlikon_5 thread anim_single_solo(fletcher.oerlikon_5, "fletcherhit_right_oerlikon");
       fletcher.oerlikon_5_barrel thread anim_single_solo(fletcher.oerlikon_5_barrel, "fletcherhit_right_oerlikonshield");
+
       break;
     case 1:
+
       exploder(101);
+
       fletcher.chunk_2 UseAnimTree(#animtree);
       fletcher.chunk_2.animname = "fletcher";
       fletcher.chunk_3 UseAnimTree(#animtree);
@@ -8916,6 +10794,7 @@ fletcher_animation(_targetname, _case) {
       fletcher.chunk_4.animname = "fletcher";
       fletcher.chunk_5 UseAnimTree(#animtree);
       fletcher.chunk_5.animname = "fletcher";
+
       fletcher.chunk_2 thread anim_single_solo(fletcher.chunk_2, "fletcherhit_right_chunk2");
       fletcher.chunk_3 thread anim_single_solo(fletcher.chunk_3, "fletcherhit_right_chunk3");
       fletcher.chunk_4 thread anim_single_solo(fletcher.chunk_4, "fletcherhit_right_chunk4tower");
@@ -8927,6 +10806,7 @@ fletcher_animation(_targetname, _case) {
     case 3:
       exploder(403);
       break;
+
     case 10:
       exploder(1200);
       break;
@@ -8966,6 +10846,7 @@ run_pby_tracker() {
   if(true) {
     return 1;
   }
+
   while(true) {
     iprintln("pby_location A: " + level.plane_a.origin[0] + ", " + level.plane_a.origin[1] + ", " + level.plane_a.origin[2]);
     wait(0.1);
@@ -8976,29 +10857,35 @@ pby_ok_to_spawn(item) {
   if(true) {
     return;
   }
+
   add_to_spawn_array_and_wait();
 }
 
 pby_wait_for_free_spawn() {
   level.entities_waiting_to_spawn = 0;
   level.trying_to_spawn = [];
+
   j = 0;
+
   while(true) {
     if(level.trying_to_spawn.size == 0) {
       wait(0.05);
     } else {
       for(i = 0; i < 4; i++) {
         j = 0;
+
         if(isDefined(level.trying_to_spawn[0]) && OkTospawn()) {
           level notify(level.trying_to_spawn[0]);
           level.trying_to_spawn = array_remove(level.trying_to_spawn, level.trying_to_spawn[0]);
           j++;
         }
       }
+
       while(!OkTospawn() || j == 4) {
         j = 0;
         wait_network_frame();
       }
+
       wait_network_frame();
     }
   }
@@ -9012,11 +10899,14 @@ add_to_spawn_array_and_wait() {
 
 random_turbulence() {
   level endon("stop turbulence");
+
   while(1) {
     rand_wait = randomfloat(12);
     wait(rand_wait);
+
     eqtype = randomint(5) + 1;
     source = level.player.origin;
+
     switch (eqtype) {
       case 1:
         scale = 0.05;
@@ -9026,6 +10916,7 @@ random_turbulence() {
         playsoundatposition("amb_metal", (0, 0, 0));
         level.player PlayRumbleOnEntity("damage_light");
         break;
+
       case 2:
         scale = 0.10;
         duration = 1.5;
@@ -9034,42 +10925,52 @@ random_turbulence() {
         playsoundatposition("amb_metal", (0, 0, 0));
         level.player PlayRumbleOnEntity("damage_light");
         break;
+
       case 3:
         scale = 0.15;
         duration = 1.25;
         radius = 400;
+
         earthquake(scale, duration, source, radius);
         level.player PlayRumbleOnEntity("damage_light");
         break;
+
       case 4:
         scale = 0.20;
         duration = 0.5;
         radius = 500;
+
         earthquake(scale, duration, source, radius);
         level.player PlayRumbleOnEntity("damage_light");
         break;
+
       case 5:
         scale = 0.30;
         duration = 0.8;
         radius = 600;
+
         earthquake(scale, duration, source, radius);
         level.player PlayRumbleOnEntity("damage_light");
         break;
+
       default:
         break;
     }
   }
 }
-
 static_turbulence() {
   level endon("stop turbulence");
   source = level.player.origin;
+
   while(1) {
     source = level.player.origin;
+
     if(level.bomber_wind_shake == 0) {
       scale = 0.05;
       dur = 0.25;
+
       duration = ((randomfloat(1) * dur) + 0.05);
+
       radius = 1000;
       earthquake(scale, duration, source, radius);
       wait duration;
@@ -9077,7 +10978,9 @@ static_turbulence() {
     if(level.bomber_wind_shake == 1) {
       scale = 0.075;
       dur = 0.25;
+
       duration = ((randomfloat(1) * dur) + 0.05);
+
       radius = 1000;
       earthquake(scale, duration, source, radius);
       wait duration;
@@ -9085,7 +10988,9 @@ static_turbulence() {
     if(level.bomber_wind_shake == 2) {
       scale = 0.1;
       dur = 0.25;
+
       duration = ((randomfloat(1) * dur) + 0.05);
+
       radius = 1000;
       earthquake(scale, duration, source, radius);
       playsoundatposition("amb_metal", (0, 0, 0));
@@ -9094,7 +10999,9 @@ static_turbulence() {
     if(level.bomber_wind_shake == 3) {
       scale = 0.15;
       dur = 0.5;
+
       duration = ((randomfloat(1) * dur) + 0.05);
+
       radius = 1000;
       earthquake(scale, duration, source, radius);
       playsoundatposition("amb_metal_medium", (0, 0, 0));
@@ -9103,6 +11010,7 @@ static_turbulence() {
     if(level.bomber_wind_shake == 2) {
       scale = 0.2;
       dur = 0.75;
+
       duration = ((randomfloat(1) * dur) + 0.05);
       playsoundatposition("amb_metal_heavy", (0, 0, 0));
       radius = 1500;
@@ -9116,10 +11024,13 @@ scripted_flak_and_shake_above_pby() {
   self endon("stop ambient flak");
   self endon("death");
   self endon("music_end_second_pass");
+
   self waittill("pa_go");
+
   for(;;) {
     offset_vec = (0, 0, 0);
     left_right = 0;
+
     if(level.player.current_seat == "pby_rightgun") {
       offset_vec = (-210, 90, 226);
       left_right = 1;
@@ -9127,11 +11038,13 @@ scripted_flak_and_shake_above_pby() {
       offset_vec = (-210, -90, 226);
       left_right = -1;
     }
+
     how_many = RandomIntRange(2, 4);
     for(i = 0; i < how_many; i++) {
       fx_org = level.plane_a.origin + (anglesToForward(level.plane_a.angles) * (offset_vec[0] + (left_right * RandomIntRange(150, 300)))) + (AnglesToUp(level.plane_a.angles) * (offset_vec[1] + RandomIntRange(250, 400))) + (AnglesToRight(level.plane_a.angles) * (offset_vec[2] + RandomIntRange(1, 200)));
       playFX(level._effect["flak_one_shot"], fx_org);
       playsoundatposition("flak_burst_close", (0, 0, 0));
+
       if(i == 0) {
         Earthquake(0.7, (0.15 * how_many), fx_org, 1000);
         playsoundatposition("amb_metal", (0, 0, 0));
@@ -9139,6 +11052,7 @@ scripted_flak_and_shake_above_pby() {
       }
       wait(0.12);
     }
+
     wait_time = RandomFloatRange(2, 6);
     wait(wait_time);
   }
@@ -9146,8 +11060,10 @@ scripted_flak_and_shake_above_pby() {
 
 sharks_big_group() {
   level.plane_a waittill("ptboat_l_to_r");
+
   shark_paths = [];
   shark_paths = GetVehicleNodeArray("shark_big_group", "targetname");
+
   new_sharks = [];
   for(i = 0; i < shark_paths.size; i++) {
     new_sharks[i] = spawn_and_path_a_shark(shark_paths[i]);
@@ -9159,19 +11075,21 @@ sharks_big_group() {
 sharks_rescue_one() {
   level.plane_a waittill("rescue1_shark");
   shark_path = GetVehicleNode("shark_rescue_one", "targetname");
+
   new_shark = spawn_and_path_a_shark(shark_path);
   new_shark StartPath();
 }
 
 pby_player_crash() {
   flag_wait("player_crashed");
+
   level.plane_a notify("stop_pby_idling");
+
   level.plane_a SetSpeed(0, 10000, 10000);
   level.plane_a thread anim_single_solo(level.plane_a, "player_crash");
   wait(3);
   maps\_utility::missionFailedWrapper();
 }
-
 filter_out_names() {
   names = [];
   names[names.size] = "BM1 Rojas";
@@ -9197,6 +11115,7 @@ filter_out_names() {
   names[names.size] = "YN2 Quincy";
   names[names.size] = "YN3 Lattus";
   names[names.size] = "Rdm Shields";
+
   names[names.size] = "GM1 Adams";
   names[names.size] = "GM1 Allen";
   names[names.size] = "GM1 Baker";
@@ -9218,7 +11137,9 @@ filter_out_names() {
   names[names.size] = "GR1 Nash";
   names[names.size] = "GR1 Mitchell";
   names[names.size] = "GR1 Osborne";
+
   new_names = [];
+
   for(i = 0; i < level.names["american"].size; i++) {
     add_name = true;
     for(q = 0; q < names.size; q++) {
@@ -9227,13 +11148,14 @@ filter_out_names() {
         break;
       }
     }
+
     if(add_name) {
       new_names[new_names.size] = level.names["american"][i];
     }
   }
+
   level.names["american"] = new_names;
 }
-
 fire_extinguisher(guy) {
   level.plane_a.radio_sect_fx = level.plane_a spawn_bullet_hole_entity("vehicle_usa_pby_radiosect_damage02");
   playFX(level._effect["spark"], level.plane_a.radio_sect_fx GetTagOrigin("bullet4"), anglesToForward(level.plane_a.radio_sect_fx GetTagAngles("bullet4")));

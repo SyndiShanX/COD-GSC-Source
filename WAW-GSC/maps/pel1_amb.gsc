@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\pel1_amb.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include maps\_ambientpackage;
@@ -12,32 +12,42 @@ main() {
   activateAmbientRoom("pel1_outdoors", 0);
   level.directiontracker = 0;
   level.action_music_playing = 0;
+
   wait_for_first_player();
+
   level thread play_distant_battle_sound();
   level thread bunker_footsteps();
   thread start_intro_sounds();
   level thread player_upstairs();
+
   level thread start_intro_planes_0();
   level thread start_intro_planes_8();
   level thread start_intro_planes_9();
   level thread start_intro_planes_21();
+
   turn_on_bc();
 }
 
 start_intro_sounds() {
   door_hydro = getent("lst_door_open_sound", "targetname");
   ramp_location = getent("lst_door_splash_sound", "targetname");
+
   level waittill("lst door opening");
   door_hydro playSound("door_hydro");
+
   level waittill("lst door splash");
   ramp_location playSound("ramp_splash");
+
   level waittill("lvt_splash");
   ramp_location playSound("lvt_splash");
+
   activateAmbientPackage("pel1_outdoors", 0);
   activateAmbientRoom("pel1_outdoors", 0);
+
   trigger_wait("ambient_lci_pre_trigger", "targetname");
   pa_fire = getent("pa_fire_right", "targetname");
   playsoundatposition("pa_fire", pa_fire.origin);
+
   wait(0.4);
   pa_fire_b = getent("pa_fire_left", "targetname");
   pa_fire_b playSound("pa_fire");
@@ -57,13 +67,16 @@ get_next_vo(prefix, last_vo, maximum) {
 bunker_voices() {
   lastvoiceover = "null";
   level endon("grenades_dropped");
+
   while(1) {
     lastvoiceover = get_next_vo("amb_dist_voices_", lastvoiceover, 6);
+
     if(randomintrange(1, 2) == 1) {
       playsoundatposition(lastvoiceover, (1614, -3948, -98));
     } else {
       playsoundatposition(lastvoiceover, (2079, -3951, -107));
     }
+
     wait(randomintrange(4, 8));
   }
 }
@@ -76,6 +89,7 @@ bunker_footsteps() {
     } else {
       playsoundatposition("s_wood_steps_upstairs", (2079, -3951, -107));
     }
+
     wait(randomintrange(5, 8));
   }
 }
@@ -138,20 +152,27 @@ play_end_music() {
 }
 
 player_fired_rockets() {}
+
 start_igc_audio() {
   door_hydro = getent("door", "targetname");
   ramp_location = getent("splash", "targetname");
+
   level waittill("lst door opening");
   door_hydro playSound("door_hydro");
+
   level waittill("lst doors opened");
   ramp_location playSound("ramp_splash");
+
   level waittill("lvt_splash");
   ramp_location playSound("lvt_splash");
+
   activateAmbientPackage("pel1_outdoors", 0);
   activateAmbientRoom("pel1_outdoors", 0);
+
   wait(8.5);
   pa_fire = getent("audio_distant_battle_right", "targetname");
   playsoundatposition("pa_fire", pa_fire.origin);
+
   wait(0.4);
   pa_fire_b = getent("audio_distant_battle_left", "targetname");
   pa_fire_b playSound("pa_fire");
@@ -167,10 +188,12 @@ play_rocket_sound(rocket) {
 start_intro_planes_0() {
   level waittill("spawnvehiclegroup0");
   wait(10);
+
   planes = getEntArray("intro_plane1", "targetname");
   for(i = 0; i < planes.size; i++) {
     planes[i] thread play_plane_sound();
   }
+
   planes = getEntArray("intro_plane2", "targetname");
   for(i = 0; i < planes.size; i++) {
     planes[i] thread play_plane_sound_special();
@@ -181,6 +204,7 @@ start_intro_planes_8() {
   level waittill("spawnvehiclegroup8");
   wait(10);
   planes = getEntArray("intro_plane1", "targetname");
+
   for(i = 0; i < planes.size; i++) {
     planes[i] thread play_plane_sound();
   }
@@ -190,6 +214,7 @@ start_intro_planes_21() {
   level waittill("spawnvehiclegroup21");
   wait 1;
   planes = getEntArray("buzz_by1", "targetname");
+
   for(i = 0; i < planes.size; i++) {
     planes[i] thread play_plane_sound_short();
   }
@@ -203,7 +228,6 @@ start_intro_planes_9() {
   crashing_plane playSound("plane_crashing");
   level thread play_plane_boom();
 }
-
 play_plane_boom() {
   wait(7);
   plane_crash_origin = getent("plane_impact", "targetname");
@@ -240,21 +264,28 @@ play_plane_sound_special() {
 
 play_distant_battle_sound() {
   level waittill("beached");
+
   sound_origin = getent("audio_distant_battle", "targetname");
   sound_origin playLoopSound("pel1_dst_btl");
+
   level waittill("rockets red glare");
   sound_origin stoploopsound();
+
   level waittill("flame guy is flaming bunker");
+
   firelocation = getent("audio_bunkerlocation_banzai", "targetname");
   firelocation playLoopSound("bunker_fire");
   level thread stop_fire_sound_hack(firelocation);
   wait(5);
   sound_origin2 = getent("audio_distant_walla", "targetname");
+
   wait(3);
   sound_origin2 playSound("distant_walla");
+
   wait(1);
   thread play_action_music();
   level thread turn_on_bc();
+
   level notify("battle_on");
   sound_origin stoploopsound();
   level thread bunker_voices();
@@ -278,13 +309,16 @@ turn_on_bc() {
   if(isDefined(level.polo)) {
     level.polo set_battlechatter(false);
   }
+
   if(isDefined(level.sarge)) {
     level.sarge set_battlechatter(false);
   }
+
   if(isDefined(level.radioguy)) {
     level.radioguy set_battlechatter(false);
   }
+
   wait(0.1);
-  setdvar("bcs_enable", "on");
+  setDvar("bcs_enable", "on");
   battlechatter_on("allies");
 }

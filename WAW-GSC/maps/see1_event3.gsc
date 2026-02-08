@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\see1_event3.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -13,52 +13,74 @@
 
 event3_main() {
   initialize_spawn_function("ev3_camp", "script_noteworthy", ::ev3_camp_spawn_goal);
+
   initialize_spawn_function("ev3_mg42", "script_noteworthy", ::ev3_mg42_spawn_goal);
+
   initialize_spawn_function("respawners", "script_noteworthy", ::friendly_respawners_init);
+
   initialize_spawn_function("ev3_defender", "script_noteworthy", ::ev3_camp_spawn_goal);
   initialize_spawn_function("ev3_runner", "script_noteworthy", ::ev3_runner_spawn_goal);
+
   initialize_spawn_function("ev3_runners_death", "script_noteworthy", ::ending_dying_near_goal_node);
   initialize_spawn_function("ending_more_russians", "script_noteworthy", ::ending_rejoice);
+
   createthreatbiasgroup("ev3_mg42");
   createthreatbiasgroup("ev3_camp");
   createthreatbiasgroup("halftrack_gunner");
+
   setthreatbias("ev3_camp", "squad", 1000);
   setthreatbias("ev3_mg42", "squad", -1000);
   setthreatbias("halftrack_gunner", "squad", -1000);
+
   setthreatbias("players", "ev3_mg42", 1000);
   setthreatbias("squad", "ev3_mg42", 100);
+
   level.hero2 thread scripted_molotov_throw_triggered("ev3_opel_spawn", "targetname", "molotov_toss_point_7", "end_truck1_spawns");
   level.hero2 thread scripted_molotov_throw_triggered("ev3_halftracks_move", "targetname", "molotov_toss_point_10", "end_truck1_spawns");
   level.hero1 thread scripted_molotov_throw_triggered("ev3_molotov_camp_1", "script_noteworthy", "molotov_toss_point_9", "end_truck1_spawns");
+
   level thread ev3_objectives();
+
   level thread dialog_reach_compound();
+
   drone_triggers = getEntArray("drone_axis", "targetname");
   for(i = 0; i < drone_triggers.size; i++) {
     drone_triggers[i] delete();
   }
+
   level thread ev3_tower_event("tower01", true);
   level thread ev3_tower_event("tower02", true);
+
   level thread ev3_tower_event("tower1");
   level thread ev3_tower_event("tower2");
   level thread ev3_tower_event("tower3");
   level thread ev3_tower_event("tower4");
   level thread ev3_tower_event("tower5");
+
   initialize_spawn_function("ev3_tower_guys1", "script_noteworthy", ::die_when_tower_blows1);
   initialize_spawn_function("ev3_tower_guys2", "script_noteworthy", ::die_when_tower_blows2);
   initialize_spawn_function("ev3_tower_guys3", "script_noteworthy", ::die_when_tower_blows3);
+
   initialize_spawn_function("ev3_tower_guys1", "script_noteworthy", ::ev3_mg42_spawn_goal);
   initialize_spawn_function("ev3_tower_guys2", "script_noteworthy", ::ev3_mg42_spawn_goal);
   initialize_spawn_function("ev3_tower_guys3", "script_noteworthy", ::ev3_mg42_spawn_goal);
+
   initialize_spawn_function("ev3_tower_guys2", "script_noteworthy", ::ev3_mg42_only_player_kill2);
   initialize_spawn_function("ev3_tower_guys3", "script_noteworthy", ::ev3_mg42_only_player_kill3);
+
   level thread dialog_tower_2_cleared();
   level thread dialog_tower_4_cleared();
   level thread dialog_last_charge();
+
   level thread ev3_initial_planes();
   level thread ev3_opel_move();
+
   level thread ev3_opel2_event();
+
   level thread ev3_halftracks_move();
+
   level thread ending_tank_1_think();
+
   level thread camp_center();
   level thread retreat_trucks();
   level thread retreat_planes();
@@ -93,6 +115,7 @@ ev3_throw_guy_out_tower(ai_guy, dir) {
   } else {
     ai_guy thread anim_single_solo(ai_guy, "death_explosion_right");
   }
+
   wait(0.6);
   if(dir == "left") {
     ai_guy.deathanim = % death_explosion_left11;
@@ -120,7 +143,8 @@ ev3_mg42_only_player_kill2() {
   self.health = 99999;
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(isplayer(attacker)) {
+
+    if(isPlayer(attacker)) {
       self.health = 1;
     }
   }
@@ -131,7 +155,8 @@ ev3_mg42_only_player_kill3() {
   self.health = 99999;
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
-    if(isplayer(attacker)) {
+
+    if(isPlayer(attacker)) {
       self.health = 1;
     }
   }
@@ -146,23 +171,33 @@ event3_outro_test() {
 ev3_objectives() {
   objective_state(4, "done");
   objective_delete(4);
+
   objective_add(4, "current", level.obj8_string, (-276, 13679, 0));
+
   setmusicstate("AT_CAMP");
+
   camp_entered_trigger = getent("ev3_opel_move", "targetname");
   camp_entered_trigger waittill("trigger");
   objective_state(4, "done");
   objective_delete(4);
+
   objective_add(4, "current", level.obj9_string, (-3942, 14799, -66.9));
+
   halftracks_move_trigger = getent("ev3_halftracks_move", "targetname");
   halftracks_move_trigger waittill("trigger");
   objective_position(4, (-4192, 14650, -73.7286));
+
   level notify("halftracks_moving");
+
   level waittill("retreat_done_done");
   objective_state(4, "done");
+
   objective_add(5, "current", level.obj11_string, (-5254, 15555, 58));
+
   regroup_trigger = getent("final_regroup", "targetname");
   regroup_trigger waittill("trigger");
   objective_state(5, "done");
+
   flag_wait("reznov_on_tank");
   level thread dialog_last_charge2();
   wait(12);
@@ -176,13 +211,16 @@ ev3_camp_spawn_goal() {
 
 ev3_runner_spawn_goal() {
   self endon("death");
+
   goals = getnodearray("ending_escape_node", "targetname");
   goal = goals[randomint(goals.size)];
   self setgoalpos(goal.origin);
   self hold_fire();
   self.goalradius = 16;
+
   self thread goal_attack_to_close_player();
   self thread tracers_and_blood_damage(goal);
+
   while(distance(self.origin, goal.origin) > 100) {
     wait(0.1);
   }
@@ -198,6 +236,7 @@ tracers_and_blood_damage(goal) {
   while(distance(self.origin, goal.origin) > 500) {
     wait(0.1);
   }
+
   tags = [];
   tags[0] = "j_hip_le";
   tags[1] = "j_hip_ri";
@@ -207,8 +246,10 @@ tracers_and_blood_damage(goal) {
   tags[5] = "j_elbow_ri";
   tags[6] = "j_clavicle_le";
   tags[7] = "j_clavicle_ri";
+
   for(i = 0; i < 5; i++) {
     random = randomintrange(0, tags.size);
+
     tracer_start = (-3391, 12983, -47.8) + (randomint(300) - 150, randomint(300) - 150, 60);
     BulletTracer(tracer_start, self gettagorigin(tags[random]));
     if(random == 2) {
@@ -223,6 +264,7 @@ tracers_and_blood_damage(goal) {
 
 constant_tracers_to_self() {
   self endon("death");
+
   while(1) {
     tracer_start = (-3391, 12983, -47.8) + (randomint(300) - 150, randomint(300) - 150, 60);
     BulletTracer(tracer_start, self.origin + (randomint(20) - 10, randomint(20) - 10, 40));
@@ -233,6 +275,7 @@ constant_tracers_to_self() {
 goal_attack_to_close_player() {
   self endon("death");
   self endon("goal");
+
   while(1) {
     players = get_players();
     for(i = 0; i < players.size; i++) {
@@ -241,14 +284,17 @@ goal_attack_to_close_player() {
         return;
       }
     }
+
     wait(0.1);
   }
 }
 
 ev3_mg42_spawn_goal() {
   self endon("death");
+
   self setthreatbiasgroup("ev3_mg42");
   self thread force_to_goal(true);
+
   self waittill("end_truck1_spawns");
   self.health = 1;
   self dodamage(self.health + 100, (0, 0, 0));
@@ -262,14 +308,20 @@ friendly_respawners_init() {
 ending_tank_1_think() {
   trigger = getent("ending_spawn_tank1", "targetname");
   trigger waittill("trigger");
+
   trigger = getent("ev3_side_spawn_trigger", "targetname");
   trigger notify("trigger");
+
   wait(1);
   tank = getent("ending_tank_side_1", "targetname");
   tank maps\_vehicle::mgoff();
+
   wait(1);
+
   wait(1);
+
   tank maps\_vehicle::mgon();
+
   tank waittill("reached_end_node");
   tank SetTurretTargetVec((-4636.5, 15604.5, 141));
   tank thread ev3_tank_shoot_and_run();
@@ -277,56 +329,75 @@ ending_tank_1_think() {
 
 ending_dying_near_goal_node() {
   self endon("death");
+
   self hold_fire();
+
   self set_random_gib();
+
   wait(2);
   while(distance(self.origin, self.goalpos) > 200) {
     wait(0.1);
   }
+
   self dodamage(self.health + 100, (0, 0, 0));
 }
 
 ev3_opel_move() {
   spawner = getent("ev3_opel_spawn", "targetname");
   spawner waittill("trigger");
+
   wait(1);
+
   opel1 = getent("ev3_opel1", "targetname");
   opel1.unload_group = "all";
   opel1 thread ev3_destructible_truck_death_run("ev3_trucks_stop", "ev3_truck11_safe_point");
+
   opel2 = getent("ev3_opel2", "targetname");
   opel2.unload_group = "all";
   opel2 thread ev3_destructible_truck_death_run("ev3_trucks_stop", "ev3_truck12_safe_point");
+
   level thread force_kill_opel2(opel2);
+
   wait(4);
   level.hero1 thread scripted_molotov_throw("molotov_toss_point_8", "end_truck1_spawns");
   wait(15);
+
   mover = getent("ev3_opel_move", "targetname");
   mover notify("trigger");
 }
 
 force_kill_opel2(opel) {
   opel endon("death");
+
   opel waittill("reached_end_node");
+
   wait(2);
+
   if(isDefined(opel)) {
     opel.virtual_health_state = 1;
   }
+
   wait(2);
+
   if(isDefined(opel)) {
     opel.virtual_health_state = 0;
   }
 }
-
 wait_for_opel_death(opel) {
   opel.health = 99999;
+
   while(1) {
     opel waittill("damage", amount, attacker, direction_vec, point, type);
+
     if(type == "MOD_PROJECTILE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_EXPLOSIVE" || type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH") {
       opel dodamage(opel.health + 25, (0, 180, 48));
+
       opel notify("death");
       playFX(level._effect["tank_smoke_column"], opel.origin);
+
       return;
     }
+
     opel.health = 99999;
   }
 }
@@ -334,9 +405,13 @@ wait_for_opel_death(opel) {
 ev3_halftracks_move() {
   spawn_trigger = getent("ev3_halftrack_spawn_trigger", "targetname");
   spawn_trigger waittill("trigger");
+
   wait(1.5);
+
   level.ev3_halftrack2 = getent("ev3_halftrack2", "targetname");
+
   level.ev3_halftrack2 thread ev3_halftrack_mg_ai("ev3_halftrack2_gunner");
+
   level.ev3_halftrack2 thread ev3_halftrack_detect_damage();
 }
 
@@ -344,6 +419,7 @@ ev3_halftrack_detect_damage() {
   self.health = 99999;
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
+
     if(type == "MOD_PROJECTILE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH") {
       self dodamage(self.health + 100, (0, 0, 0));
       self notify("death");
@@ -355,8 +431,10 @@ ev3_halftrack_detect_damage() {
 
 ev3_halftrack_mg_ai(gunner_noteworthy) {
   self endon("death");
+
   gunner = undefined;
   attached_guys = self.attachedguys;
+
   for(i = 0; i < attached_guys.size; i++) {
     if(isalive(attached_guys[i])) {
       if(isDefined(attached_guys[i].script_on_vehicle_turret) && attached_guys[i].script_on_vehicle_turret == 1) {
@@ -365,21 +443,25 @@ ev3_halftrack_mg_ai(gunner_noteworthy) {
       }
     }
   }
+
   if(!isDefined(gunner)) {
     return;
   }
+
   gunner setthreatbiasgroup("halftrack_gunner");
   gunner.ignoreall = 1;
   gunner.pacifist = 1;
   gunner.health = 99999;
   gunner.lastStand = false;
   self thread death_at_end();
+
   maps\_vehicle::mgon();
+
   gunner_health = 150;
   attacker_player = undefined;
   while(gunner_health > 0) {
     gunner waittill("damage", amount, attacker);
-    if(isplayer(attacker)) {
+    if(isPlayer(attacker)) {
       attacker_player = attacker;
       gunner_health -= amount;
       break;
@@ -389,7 +471,9 @@ ev3_halftrack_mg_ai(gunner_noteworthy) {
   }
   arcademode_assignpoints("arcademode_score_generic250", attacker_player);
   gunner dodamage(gunner.health + 100, (0, 0, 0));
+
   maps\_vehicle::mgoff();
+
   flag_set("ev3_halftrack2_mg_killed");
 }
 
@@ -403,19 +487,25 @@ death_at_end() {
 ev3_opel2_event() {
   move_trigger = getent("ev3_spawn_opels_2", "targetname");
   move_trigger waittill("trigger");
+
   level thread dialog_truck_road_shoot();
+
   wait(1);
+
   russians = getEntArray("ev3_truck_blowup_russians", "script_noteworthy");
   truck1 = getent("ev3_truck_blowup_truck1", "targetname");
   truck1.health = 99999;
   truck1.unload_group = "all";
+
   for(i = 0; i < russians.size; i++) {
     if(isalive(russians[i])) {
       russians[i] thread keep_shooting_at_truck(truck1);
     }
   }
+
   truck1 thread ev3_destructible_truck_death_run("ev3_trucks_stop", "ev3_truck1_safe_point");
   level thread ev3_track_opel_truck_death(truck1);
+
   level waittill("ev3_trucks_stop");
   level notify("ev3_truck_special_stop");
   autosave_by_name("Truck Destroyed");
@@ -428,6 +518,7 @@ ev3_track_opel_truck_death(truck) {
 
 keep_shooting_at_truck(truck) {
   self endon("death");
+
   time = 8;
   ticks = time * 10;
   for(i = 0; i < ticks; i++) {
@@ -441,20 +532,25 @@ periodic_damage_from_russians() {
   self endon("death");
   wait(3);
   self.virtual_health_state--;
+
   if(self.virtual_health_state == 2) {
     playFXOnTag(level._effect["engine_smoke_light"], self, "tag_driver");
   } else if(self.virtual_health_state == 1) {
     playFXOnTag(level._effect["engine_smoke_heavy"], self, "tag_driver");
   }
+
   wait(2);
   self.virtual_health_state--;
+
   if(self.virtual_health_state == 2) {
     playFXOnTag(level._effect["engine_smoke_light"], self, "tag_driver");
   } else if(self.virtual_health_state == 1) {
     playFXOnTag(level._effect["engine_smoke_heavy"], self, "tag_driver");
   }
+
   wait(1);
   self.virtual_health_state--;
+
   if(self.virtual_health_state == 2) {
     playFXOnTag(level._effect["engine_smoke_light"], self, "tag_driver");
   } else if(self.virtual_health_state == 1) {
@@ -470,7 +566,9 @@ outro(do_it_now) {
   if(do_it_now == false) {
     level waittill("retreat_done_done");
   }
+
   wait(1);
+
   level.outroblack = NewHudElem();
   level.outroblack.x = 0;
   level.outroblack.y = 0;
@@ -479,79 +577,106 @@ outro(do_it_now) {
   level.outroblack.foreground = false;
   level.outroblack.sort = 50;
   level.outroblack SetShader("black", 640, 480);
+
   level.outroblack.alpha = 0;
   level.outroblack fadeOverTime(2);
   level.outroblack.alpha = 1;
+
   wait(2);
   share_screen(get_host(), true, true);
+
   link = getent("player_temp_ending_pos", "script_noteworthy");
   players = get_players();
   anim_node = getent("temp_center", "targetname");
+
   for(i = 0; i < players.size; i++) {
     players[i] hide();
     players[i] setorigin(link.origin + (0, 0, 4));
     players[i] setplayerangles(link.angles);
+
     {
       players[i] disableWeapons();
     }
   }
+
   level notify("walla");
+
   wait(2);
   level thread print_text_on_screen(&"SEE1_LATER");
   wait(5);
+
   level.outroblack fadeOverTime(3);
   level.outroblack.alpha = 0;
+
   for(i = 0; i < players.size; i++) {
     level thread play_player_anim_outro(i, players[i], anim_node);
   }
   level thread play_center_car_anims_side();
   level thread play_center_car_anims_middle();
+
   wait(2);
   wait(33);
+
   nextmission();
 }
 
 play_center_car_anims_side() {
   anim_node = getent("temp_center", "targetname");
+
   guys = [];
+
   left_spawn_points = getstructarray("center_car_guy_left", "targetname");
+
   guys[0] = spawn_fake_guy_outro(left_spawn_points[0].origin, left_spawn_points[0].angles, "guyl1");
   guys[1] = spawn_fake_guy_outro(left_spawn_points[1].origin, left_spawn_points[1].angles, "guyl2");
   guys[2] = spawn_fake_guy_outro(left_spawn_points[2].origin, left_spawn_points[2].angles, "guyl3");
   guys[3] = spawn_fake_guy_outro(left_spawn_points[3].origin, left_spawn_points[3].angles, "guyl4");
   guys[4] = level.hero2;
   level.hero2.animname = "guyl5";
+
   guys[5] = spawn_fake_guy_outro(left_spawn_points[5].origin, left_spawn_points[5].angles, "guyl6");
+
   right_spawn_points = getstructarray("center_car_guy_left", "targetname");
+
   guys[6] = spawn_fake_guy_outro(right_spawn_points[0].origin, right_spawn_points[0].angles, "guyr1");
   guys[7] = spawn_fake_guy_outro(right_spawn_points[1].origin, right_spawn_points[1].angles, "guyr2");
+
   anim_node anim_single(guys, "outro");
 }
 
 play_center_car_anims_middle() {
   anim_node = getent("temp_center", "targetname");
+
   guys = [];
+
   center_spawn_points = getstructarray("center_car_guy_center", "targetname");
+
   guys[0] = spawn_fake_guy_outro(center_spawn_points[0].origin, center_spawn_points[0].angles, "guyc1");
   guys[1] = spawn_fake_guy_outro(center_spawn_points[1].origin, center_spawn_points[1].angles, "guyc2");
   guys[2] = level.hero1;
   level.hero1.animname = "guyc3";
+
   guys[3] = spawn_fake_guy_outro(center_spawn_points[3].origin, center_spawn_points[3].angles, "guyc4");
+
   guys[4] = spawn_fake_guy_outro(center_spawn_points[4].origin, center_spawn_points[4].angles, "guyc5");
   guys[5] = spawn_fake_guy_outro(center_spawn_points[5].origin, center_spawn_points[5].angles, "guyc6");
+
   anim_node anim_single(guys, "outro");
 }
-
 spawn_fake_guy_outro(startpoint, startangles, anim_name) {
   guy = spawn("script_model", startpoint);
   guy.angles = startangles;
+
   guy character\char_rus_r_rifle::main();
   guy maps\_drones::drone_allies_assignWeapon_russian();
+
   guy.team = "allies";
+
   guy UseAnimTree(#animtree);
   guy.animname = anim_name;
   guy makeFakeAI();
   guy.health = 100;
+
   return guy;
 }
 
@@ -560,40 +685,50 @@ camp_center() {
   trigger waittill("trigger");
   level notify("both_halftracks_eliminated");
   level thread ev3_ambient_tank_hits();
+
   level thread dialog_germans_retreating();
 }
 
 retreat_trucks() {
   trigger = getent("retreat_starts", "targetname");
   trigger waittill("trigger");
+
   truck_spawn_1 = getent("ending_move_truck1", "targetname");
   truck_spawn_2 = getent("ending_move_truck2", "targetname");
   truck_spawn_3 = getent("ending_move_truck3", "targetname");
+
   truck_spawn_1 notify("trigger");
   wait(0.5);
   truck1 = getent("ending_truck1", "targetname");
   truck1.health = 99999;
   level notify("end_truck1_spawns");
+
   wait(1.5);
   truck_spawn_2 notify("trigger");
   wait(0.5);
   truck2 = getent("ending_truck2", "targetname");
   truck2.health = 99999;
   level notify("end_truck2_spawns");
+
   truck2 thread stop_at_reverse_nodes();
+
   level thread ev3_chasing_tank_think(truck_spawn_3);
+
   truck1_blow_up_node = getvehiclenode("ending_kill_truck1", "script_noteworthy");
   truck1 setwaitnode(truck1_blow_up_node);
   truck1 waittill("reached_wait_node");
   truck1 dodamage(truck1.health + 100, (0, 0, 0));
   radiusdamage(truck1.origin, 400, 1000, 1000);
   truck1 notify("death");
+
   germans = GetAiArray("axis");
   for(i = 0; i < germans.size; i++) {
     germans[i] thread ev3_escaping_german();
   }
   level thread ending_allies_run();
+
   level thread ending_run_explosion();
+
   wait(6);
   truck2 dodamage(truck2.health + 100, (0, 0, 0));
   radiusdamage(truck2.origin, 400, 1000, 1000);
@@ -602,9 +737,13 @@ retreat_trucks() {
 
 ending_run_explosion() {
   wait(4);
+
   explosion_origin = (-4799, 15378.5, 52.6);
+
   playFX(level._effect["dirt_blow_up"], explosion_origin);
+
   axis_ai = GetAiArray("axis");
+
   for(i = 0; i < axis_ai.size; i++) {
     if(distance(axis_ai[i].origin, explosion_origin) < 300) {
       axis_ai[i] set_random_gib();
@@ -615,8 +754,10 @@ ending_run_explosion() {
 
 ending_allies_run() {
   wait(3);
+
   trigger = getent("final_friends_spawn", "targetname");
   trigger notify("trigger");
+
   allies_ai = GetAiArray("allies");
   node_reznov = getnode("reznov_final_node", "targetname");
   node_chernov = getnode("chernov_final_node", "targetname");
@@ -625,6 +766,7 @@ ending_allies_run() {
   for(i = 0; i < allies_ai.size; i++) {
     allies_ai[i] hold_fire();
     allies_ai[i] disable_ai_color();
+
     if(allies_ai[i] == level.hero1) {
       allies_ai[i] setgoalnode(node_reznov);
       allies_ai[i] thread rejoice_at_end();
@@ -668,13 +810,19 @@ rejoice_at_end() {
     self setgoalnode(node_reznov);
     self thread reinforce_goal_hero(node_reznov);
     self waittill("goal");
+
     flag_wait("ending_tank_ready");
+
     regroup_trigger = getent("final_regroup", "targetname");
     regroup_trigger waittill("trigger");
+
     tank = getent("ev3_ending_tanks_ride", "targetname");
     tank anim_reach_solo(self, "cheer_tank", "tag_origin");
+
     level thread play_and_loop_cheer_anim(tank, self);
+
     wait(2.7);
+
     flag_set("reznov_on_tank");
   }
 }
@@ -710,6 +858,7 @@ stop_at_reverse_nodes() {
   self setspeed(0, 10000, 10000);
   wait(0.5);
   self resumespeed(30);
+
   forward_node = getvehiclenode("ending_backup_node2", "script_noteworthy");
   self setwaitnode(forward_node);
   self waittill("reached_wait_node");
@@ -720,27 +869,38 @@ stop_at_reverse_nodes() {
 
 retreat_tanks() {
   level waittill("end_truck1_spawns");
+
   wait(3.5);
+
   tanks_spawn = getent("ev3_escape_tanks_1", "script_noteworthy");
   tanks_spawn notify("trigger");
+
   wait(0.5);
+
   tank1 = getent("ending_tank_1", "targetname");
   tank1.health = 99999;
   tank1.turretrotscale = 1;
+
   tank_mounting = getent("ev3_ending_tanks_ride", "targetname");
   tank_mounting thread ending_ready_to_mount();
+
   other_tanks = getEntArray("ev3_ending_tanks", "targetname");
   for(i = 0; i < other_tanks.size; i++) {
     other_tanks[i] thread ev3_tank_shoot_and_run();
   }
+
   riding_tank = getent("ev3_ending_tanks_ride", "targetname");
+
   wait(3);
+
   enemy_1 = getent("ev4_tank1", "targetname");
   if(isDefined(enemy_1)) {
     enemy_1 dodamage(enemy_1.health + 100, (0, 0, 0));
     enemy_1 notify("death");
   }
+
   wait(2);
+
   enemy_2 = getent("ev4_tank2", "targetname");
   if(isDefined(enemy_2)) {
     enemy_2 dodamage(enemy_2.health + 100, (0, 0, 0));
@@ -757,7 +917,9 @@ ending_ready_to_mount() {
 retreat_runners() {
   trigger = getent("retreat_starts", "targetname");
   trigger waittill("trigger");
+
   spawners = getEntArray("ev3_runner", "script_noteworthy");
+
   while(!flag("ev3_flood_spawners_end")) {
     for(i = 0; i < spawners.size; i++) {
       if(!flag("ev3_flood_spawners_end")) {
@@ -772,9 +934,11 @@ retreat_runners() {
 
 retreat_final() {
   flag_wait("ev3_flood_spawners_end");
+
   stop_flood = getent("ev3_flood_defender_stop", "script_noteworthy");
   stop_flood notify("trigger");
   wait(0.1);
+
   axis_ai = GetAiArray("axis");
   for(i = 0; i < axis_ai.size; i++) {
     if(isalive(axis_ai[i])) {
@@ -797,8 +961,10 @@ delayed_death(time) {
 
 retreat_planes() {
   level waittill("end_truck1_spawns");
+
   wait(5.5);
   level thread ev3_retreat_plane("ev3_retreat_plane_3", "ev3_retreat_plane_3_mg", "firing_starts_3");
+
   wait(7.5);
   level thread ev3_retreat_plane("ev3_retreat_plane_4", "ev3_retreat_plane_4_mg", "firing_starts_4");
 }
@@ -806,6 +972,7 @@ retreat_planes() {
 load_bombs(bomb_num) {
   self.bomb_count = bomb_num;
   self.vehicletype = "stuka";
+
   self.bomb = [];
   for(i = 0; i < self.bomb_count; i++) {
     self.bomb[i] = spawn("script_model", (self.origin));
@@ -819,11 +986,12 @@ load_bombs(bomb_num) {
     }
   }
 }
-
 drop_bombs(node_name) {
   self endon("death");
+
   node = getvehiclenode(node_name, "script_noteworthy");
   self waittill_vehiclenode(node);
+
   self thread maps\_planeweapons::drop_bombs(2, 0, 2, 500);
   wait(0.5);
   self thread maps\_planeweapons::drop_bombs(2, 0, 2, 500);
@@ -839,7 +1007,9 @@ waittill_vehiclenode(node) {
 ev3_retreat_final(spawner_trigger) {
   spawner_trigger waittill("trigger");
   level notify("final_retreat");
+
   wait(3);
+
   level thread ev3_retreat_final_plane1();
   wait(2);
   level thread ev3_retreat_final_plane2();
@@ -850,8 +1020,10 @@ ev3_retreat_final(spawner_trigger) {
 ev3_retreat_final_plane1() {
   level waittill("firing_starts_3");
   wait(1);
+
   explosion_1 = getstruct("ev3_retreat_explode_31", "targetname");
   explosion_2 = getstruct("ev3_retreat_explode_32", "targetname");
+
   playFX(level._effect["dirt_blow_up"], explosion_1.origin);
   wait(1);
   playFX(level._effect["dirt_blow_up"], explosion_2.origin);
@@ -860,9 +1032,11 @@ ev3_retreat_final_plane1() {
 ev3_retreat_final_plane2() {
   level waittill("firing_starts_4");
   wait(1);
+
   explosion_1 = getstruct("ev3_retreat_explode_41", "targetname");
   explosion_2 = getstruct("ev3_retreat_explode_42", "targetname");
   explosion_3 = getstruct("ev3_retreat_explode_43", "targetname");
+
   playFX(level._effect["dirt_blow_up"], explosion_1.origin);
   wait(1);
   playFX(level._effect["dirt_blow_up"], explosion_2.origin);
@@ -873,12 +1047,16 @@ ev3_retreat_final_plane2() {
 ev3_retreat_final_tanks1() {
   spawn_trigger = getent("ev3_escape_tanks_1", "script_noteworthy");
   spawn_trigger notify("trigger");
+
   wait(1.5);
+
   tanks = getEntArray("ev3_ending_tanks", "targetname");
   tanks_special = getent("ev3_ending_tank1", "targetname");
+
   for(i = 0; i < tanks.size; i++) {
     tanks[i] thread ev3_tank_shoot_and_run();
   }
+
   tanks_special thread ev3_end_tank_1();
 }
 
@@ -900,54 +1078,70 @@ ev3_end_tank_1() {
   node_fire = getvehiclenode("ev3_tank_end_turret", "script_noteworthy");
   self setwaitnode(node_fire);
   self waittill("reached_wait_node");
+
   stop_flood = getent("ev3_escape_trigger_stop_spawn_3", "targetname");
   stop_flood notify("trigger");
+
   explosion_1 = getent("ev3_retreat_explode_51", "targetname");
   explosion_2 = getent("ev3_retreat_explode_52", "targetname");
+
   self SetTurretTargetEnt(explosion_1);
   self waittill("turret_on_target");
   self FireWeapon();
   playFX(level._effect["tank_blow_up"], explosion_1.origin);
+
   wait(2);
   self SetTurretTargetEnt(explosion_2);
   self waittill("turret_on_target");
   self FireWeapon();
   playFX(level._effect["house_blow_up"], explosion_2.origin);
+
   explosion_3 = getstruct("ev3_retreat_explode_53", "targetname");
   explosion_4 = getstruct("ev3_retreat_explode_54", "targetname");
   explosion_5 = getstruct("ev3_retreat_explode_55", "targetname");
+
   playFX(level._effect["tree_brush_fire"], explosion_3.origin);
   playFX(level._effect["tree_brush_fire"], explosion_4.origin);
   playFX(level._effect["tree_brush_fire"], explosion_5.origin);
+
   existing_enemies = GetAiArray("axis");
   for(i = 0; i < existing_enemies.size; i++) {
     if(isalive(existing_enemies[i])) {
       existing_enemies[i] dodamage(existing_enemies[i].health + 100, (0, 0, 0));
     }
   }
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(distance(players[i].origin, explosion_5.origin) < 700) {
       players[i] shellshock("tankblast", 3);
     }
   }
+
   wait(3);
   level notify("retreat_done");
+
   trigger = getent("to_train_station", "targetname");
   trigger waittill("trigger");
+
   level notify("retreat_done_done");
 }
 
 ev3_retreat_plane(node_name, bomb_drop_start, msg) {
   start_node = getvehiclenode(node_name, "targetname");
+
   plane = spawnvehicle("vehicle_rus_airplane_il2", "plane", "stuka", start_node.origin, start_node.angles);
+
   plane attachPath(start_node);
   plane startpath();
   plane.script_numbombs = 6;
+
   plane playSound("fly_by3");
+
   plane thread load_bombs(6);
   wait(0.7);
   plane thread drop_bombs(bomb_drop_start);
+
   plane waittill("reached_end_node");
   plane delete();
 }
@@ -960,15 +1154,19 @@ ev3_escaping_german() {
   self.pacifist = 1;
   self.ignoreall = 1;
   self.animname = "generic";
+
   escape_nodes = getnodearray("ev3_escape_nodes", "targetname");
   node = escape_nodes[randomint(escape_nodes.size)];
+
   self thread goal_attack_to_close_player();
   self thread tracers_and_blood_damage(node);
+
   if(distance(node.origin, self.origin) > 1500) {
     wait(randomfloat(1.0));
     self doDamage(self.health + 25, (0, 180, 48));
     return;
   }
+
   self setgoalpos(node.origin);
   self thread ev3_retreat_random_death(node.origin);
   self waittill("goal");
@@ -978,6 +1176,7 @@ ev3_escaping_german() {
 
 ev3_escaping_german_delay() {
   self endon("death");
+
   wait(5);
   self thread ev3_escaping_german();
 }
@@ -992,11 +1191,15 @@ ev3_retreat_random_death(goal_origin) {
     self dodamage(self.health + 100, (0, 0, 0));
     return;
   }
+
   half_dist = distance(old_pos, goal_origin) * 0.5;
+
   while(distance(self.origin, goal_origin) > half_dist) {
     wait(0.1);
   }
+
   wait(randomfloat(6));
+
   self set_random_gib();
   self dodamage(self.health + 100, (0, 0, 0));
 }
@@ -1004,31 +1207,44 @@ ev3_retreat_random_death(goal_origin) {
 ev3_initial_planes() {
   trigger1 = getent("ev3_opel_spawn", "targetname");
   trigger1 waittill("trigger");
+
   level thread dialog_enter_compound();
+
   trigger2 = getent("ev3_opel_move", "targetname");
   trigger2 waittill("trigger");
 }
 
 ev3_destructible_truck_death_run(stop_msg, safe_point_snw) {
   self endon("death");
+
   self.virtual_health_state = 3;
+
   self.health = 99999;
+
   self thread dont_fire_when_unloading();
   self thread open_door_when_exit();
+
   self thread check_pass_end_point(stop_msg);
   self thread check_pass_safe_point(safe_point_snw);
   self thread check_for_helath_state();
   self thread force_reaction_anim_truck(stop_msg);
+
   self waittill("passed_safe_point");
+
   while(self.virtual_health_state > 0) {
     wait(0.1);
   }
+
   playFXOnTag(level._effect["tree_brush_fire"], self, "tag_driver");
+
   level notify(stop_msg);
+
   self setspeed(0, 10, 10);
   self notify("time_to_fire_death");
+
   wait(1);
   self.health = 1;
+
   if(isDefined(self.attacker_player)) {
     attached_guys = self.attachedguys;
     alive_guys = 0;
@@ -1037,6 +1253,7 @@ ev3_destructible_truck_death_run(stop_msg, safe_point_snw) {
         alive_guys++;
       }
     }
+
     if(alive_guys == 1) {
       arcademode_assignpoints("arcademode_score_generic50", self.attacker_player);
     } else if(alive_guys == 2) {
@@ -1046,6 +1263,7 @@ ev3_destructible_truck_death_run(stop_msg, safe_point_snw) {
     } else if(alive_guys > 4) {
       arcademode_assignpoints("arcademode_score_generic500", self.attacker_player);
     }
+
     self dodamage(self.health + 100, (0, 0, 0));
     self notify("death", self.attacker_player);
   } else {
@@ -1055,23 +1273,22 @@ ev3_destructible_truck_death_run(stop_msg, safe_point_snw) {
 }
 
 #using_animtree("vehicles");
-
 open_door_when_exit() {
   self endon("death");
+
   self waittill("open_door_climbout");
+
   self useanimtree(#animtree);
   self.animname = "opel";
   self anim_single_solo(self, "truck_door_open");
 }
 
 #using_animtree("generic_human");
-
 dont_fire_when_unloading() {
   self endon("death");
   self endon("unload");
   self waittill("time_to_fire_death");
 }
-
 check_pass_end_point(end_msg) {
   self endon("death");
   self waittill("reached_end_node");
@@ -1083,21 +1300,26 @@ check_pass_safe_point(safe_point_snw) {
   node_safe = getvehiclenode(safe_point_snw, "script_noteworthy");
   self setwaitnode(node_safe);
   self waittill("reached_wait_node");
+
   self notify("passed_safe_point");
 }
 
 check_for_helath_state() {
   self endon("death");
+
   self.virtual_health_state = 3;
+
   while(1) {
     self waittill("damage", amount, attacker, direction_vec, point, type);
+
     if(type == "MOD_PROJECTILE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH") {
       playFXOnTag(level._effect["engine_smoke_heavy"], self, "tag_driver");
       self.virtual_health_state = 0;
       return;
     } else {
-      if(isplayer(attacker)) {
+      if(isPlayer(attacker)) {
         self.virtual_health_state--;
+
         if(self.virtual_health_state == 2) {
           playFXOnTag(level._effect["engine_smoke_light"], self, "tag_driver");
         } else if(self.virtual_health_state == 1) {
@@ -1116,31 +1338,41 @@ check_for_helath_state() {
 force_reaction_anim_truck(end_msg) {
   level endon(end_msg);
   self endon("death");
+
   animlength = getanimlength(%crew_truck_guy1_drive_reaction);
   time = animlength * 1000;
+
   while(1) {
     self notify("groupedanimevent", "drive_reaction");
+
     wait(2);
   }
 }
 
 ev3_tower_event(tower_name, shreck) {
   exploder_trigger = getent(tower_name, "script_noteworthy");
+
   blow_up_msg = tower_name + "_blows_up";
+
   if(isDefined(shreck) && shreck == true) {
     level thread ev3_tower_event_panzershreck_loop(tower_name, blow_up_msg);
   }
+
   level thread ev3_tower_event_force_blow_up(tower_name, exploder_trigger);
+
   level thread ev3_tower_event_ai_spawn(tower_name, blow_up_msg);
+
   exploder_trigger waittill("trigger");
   level notify(blow_up_msg);
 }
 
 ev3_tower_event_ai_spawn(tower_name, blow_up_msg) {
   level waittill("blow_up_msg");
+
   if(tower_name == "tower4") {
     trigger = getent("tower_2_guy_spawn_trig", "targetname");
     trigger trigger_off();
+
     spawner = getent("ev3_tower_guys2", "script_noteworthy");
     if(isDefined(spawner)) {
       spawner.count = 0;
@@ -1148,11 +1380,13 @@ ev3_tower_event_ai_spawn(tower_name, blow_up_msg) {
   } else if(tower_name == "tower5") {
     trigger = getent("tower_3_guy_spawn_trig", "targetname");
     trigger trigger_off();
+
     spawner = getent("ev3_tower_guys3", "script_noteworthy");
     if(isDefined(spawner)) {
       spawner.count = 0;
     }
   }
+
 }
 
 track_spawned_tower_guy_death(guy, tower_name) {
@@ -1162,14 +1396,18 @@ track_spawned_tower_guy_death(guy, tower_name) {
 ev3_tower_event_tracers_loop(tower_name, blow_up_msg) {
   fire_start_name = tower_name + "_start";
   fire_end_name = tower_name + "_end";
+
   fire_start = getstruct(fire_start_name, "script_noteworthy");
   fire_ends = getstructarray(fire_end_name, "script_noteworthy");
+
   level endon(blow_up_msg);
   level endon("both_halftracks_eliminated");
+
   while(1) {
     end_origin = fire_ends[randomint(fire_ends.size)].origin;
     end_origin = end_origin + (150 - randomint(300), 150 - randomint(300), 25 - randomint(50));
     play_burst_fake_fire(20, fire_start.origin, end_origin);
+
     wait(randomfloat(6) + 2);
   }
 }
@@ -1177,15 +1415,19 @@ ev3_tower_event_tracers_loop(tower_name, blow_up_msg) {
 ev3_tower_event_panzershreck_loop(tower_name, blow_up_msg) {
   fire_start_name = tower_name + "_start";
   fire_end_name = tower_name + "_end";
+
   fire_start = getstruct(fire_start_name, "script_noteworthy");
   fire_ends = getstructarray(fire_end_name, "script_noteworthy");
+
   level endon(blow_up_msg);
   level endon("both_halftracks_eliminated");
+
   while(1) {
     wait(randomfloat(3));
     fire_origin = fire_ends[randomint(fire_ends.size)].origin;
     fire_origin = fire_origin + (400 - randomint(800), 400 - randomint(800), 0);
     level thread fire_shreck_at_pos(fire_start, fire_origin, 1);
+
     wait(randomfloat(3) + 2);
   }
 }
@@ -1194,26 +1436,33 @@ ev3_tower_event_spawn_t34(tower_name, spawn_trigger, tank_stops_msg) {
   level thread ev3_tower_event_spawn_t34_trigger_wait(tower_name, spawn_trigger);
   tank_spawn_msg = tower_name + "_tank_spawned";
   level waittill(tank_spawn_msg);
+
   wait(1);
+
   tank_name = tower_name + "_tank";
   tank = getent(tank_name, "targetname");
   tank endon("death");
+
   tank thread ev3_tower_event_t34_fire_loop(tower_name);
+
   tank waittill("reached_end_node");
   level notify(tank_stops_msg);
 }
 
 ev3_tower_event_spawn_t34_trigger_wait(tower_name, spawn_trigger) {
   spawn_trigger waittill("trigger");
+
   tank_spawn_msg = tower_name + "_tank_spawned";
   level notify(tank_spawn_msg);
 }
 
 ev3_tower_event_t34_fire_loop(tower_name) {
   self endon("death");
+
   fire_at_target_name = tower_name + "_fire_at";
   fire_at_target = getent(fire_at_target_name, "targetname");
   self SetTurretTargetEnt(fire_at_target);
+
   while(1) {
     wait(0.3);
     self FireWeapon();
@@ -1225,8 +1474,11 @@ ev3_tower_event_t34_fire_loop(tower_name) {
 ev3_tower_event_blow_up_t34(tower_name, blow_up_msg, tank_stops_msg) {
   fire_start_name = tower_name + "_start";
   fire_start = getstruct(fire_start_name, "script_noteworthy");
+
   level endon(blow_up_msg);
+
   level waittill(tank_stops_msg);
+
   tank_name = tower_name + "_tank";
   tank = getent(tank_name, "targetname");
   if(isDefined(tank) && isalive(tank)) {
@@ -1240,6 +1492,7 @@ ev3_tower_event_blow_up_t34(tower_name, blow_up_msg, tank_stops_msg) {
 ev3_tower_event_force_blow_up(tower_name, exploder_trigger) {
   force_blowup_msg = tower_name + "_force_blow_up";
   level waittill(force_blowup_msg);
+
   if(isDefined(exploder_trigger)) {
     exploder_trigger notify("trigger");
   }
@@ -1251,6 +1504,7 @@ ev3_ambient_tank_hits() {
   while(1) {
     index = randomint(friendly_targets.size);
     playFX(level._effect["dirt_blow_up"], friendly_targets[index].origin);
+
     wait(randomfloat(2));
   }
 }
@@ -1260,14 +1514,18 @@ dialog_reach_compound() {
   level.hero1 say_dialogue("reznov", "find_around");
   level.hero1 say_dialogue("reznov", "this_is_it");
   level.hero1 say_dialogue("reznov", "charge");
+
   wait(5);
+
   level.hero1 say_dialogue("reznov", "revel_victory");
 }
 
 dialog_enter_compound() {
   level.hero1 say_dialogue_wait("reznov", "down_towers");
   level.hero1 say_dialogue_wait("reznov", "use_panzer");
+
   wait(4);
+
   level.hero1 say_dialogue_wait("reznov", "find_rockets");
   level.hero1 say_dialogue_wait("reznov", "bring_down_towers");
 }
@@ -1275,6 +1533,7 @@ dialog_enter_compound() {
 dialog_halftracks() {
   spawn_trigger = getent("ev3_halftracks_move", "targetname");
   spawn_trigger waittill("trigger");
+
   level.hero1 say_dialogue("reznov", "halftrack");
   wait(2);
 }
@@ -1309,6 +1568,7 @@ dialog_germans_retreating() {
 }
 
 dialog_germans_running() {}
+
 dialog_last_charge() {
   trigger = getent("retreat_starts", "targetname");
   trigger waittill("trigger");
@@ -1318,5 +1578,6 @@ dialog_last_charge() {
 
 dialog_last_charge2() {
   setmusicstate("END_LEVEL");
+
   level.hero1 say_dialogue("reznov", "from_this_moment_on");
 }

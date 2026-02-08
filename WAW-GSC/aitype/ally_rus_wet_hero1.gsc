@@ -1,7 +1,7 @@
-/*****************************************************
+/*****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: aitype\ally_rus_wet_hero1.gsc
-*****************************************************/
+*****************************************/
 
 main() {
   self.animTree = "";
@@ -14,8 +14,10 @@ main() {
   self.sidearm = "tokarev";
   self.grenadeWeapon = "fraggrenade";
   self.grenadeAmmo = 3;
+
   self setEngagementMinDist(256.000000, 0.000000);
   self setEngagementMaxDist(768.000000, 1024.000000);
+
   character\char_rus_wet_p_chernova::main();
 }
 
@@ -25,6 +27,7 @@ spawner() {
 
 precache() {
   character\char_rus_wet_p_chernova::precache();
+
   precacheItem("mosin_rifle");
   precacheItem("tokarev");
   precacheItem("fraggrenade");

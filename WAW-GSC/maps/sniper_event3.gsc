@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\sniper_event3.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
@@ -24,6 +24,7 @@ event3_start() {
   wait 1;
   e3_transition_dialogue();
   wait 2;
+
   level thread e3_sniping_cover_battle();
   wait 0.2;
   level notify("e3_go");
@@ -39,12 +40,15 @@ event3b_start() {
   animtime = getanimlength(level.scr_anim["hero"]["door_open3"]);
   spot thread anim_single_solo(level.hero, "door_open3");
   wait animtime - 1.5;
+
   level.hero stopanimscripted();
   level.hero enable_ai_color();
   getent("post_door_charge_chain", "script_noteworthy") notify("trigger", level.player);
   wait 120;
+
   level.alleyguys_dead = 0;
   level.guys_onground_killed = 0;
+
   getent("dudeguys", "target") notify("trigger");
   wait 1;
   getent("e3_allies_cleared_firsthalf", "targetname") notify("trigger");
@@ -53,11 +57,13 @@ event3b_start() {
   level waittill("ura");
   level thread say_dialogue("friends_moving_up", undefined, 0.5);
   level thread say_dialogue("up_stairs_quickly");
+
   maps\_spawner::kill_spawnernum(13);
   spawners = getEntArray("alley_dudes2_reinforce", "targetname");
   if(isDefined(spawners) && spawners.size > 0) {
     maps\_spawner::flood_spawner_scripted(spawners);
   }
+
   thread sniper_cover_battle2();
   e3_threat_stuff();
 }
@@ -70,15 +76,20 @@ event3c_start() {
     level thread say_dialogue(keys[i]);
   }
   wait 120;
+
   maps\sniper_event2::player_bb_jumpout();
+
   getent("dudeguys", "target") notify("trigger");
   wait 1;
   getent("e3_allies_cleared_firsthalf", "targetname") notify("trigger");
+
   iprintln("Forward Comrades!");
   flag_set("e3_forward_comrades");
   wait 2;
   iprintln("Our men are advancing!Come quickly, we must move around to cover them!");
+
   maps\_spawner::kill_spawnernum(13);
+
   thread sniper_cover_battle2();
   e3_threat_stuff();
 }
@@ -88,11 +99,13 @@ e3_threat_stuff() {
   for(i = 0; i < guys.size; i++) {
     guys[i] setthreatbiasgroup("russian_squad");
   }
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] setthreatbiasgroup("player");
   }
   level.hero setthreatbiasgroup("hero");
+
   setignoremegroup("russian_squad", "newbhater");
   setignoremegroup("player", "newbhater");
   setignoremegroup("hero", "newbhater");
@@ -132,6 +145,7 @@ e3_transition_dialogue() {
   node = getstructent("alleyguys_node", "targetname");
   guy1 = grab_ai_by_script_noteworthy("e3_allied_squad_leader", "allies");
   guy1 thread reach_wait_single("redshirt", "postbb_redshirt1", "postbb_redshirt1_inplace", node);
+
   num = 2;
   allies = getaiarray("allies");
   for(i = 0; i < allies.size; i++) {
@@ -140,26 +154,33 @@ e3_transition_dialogue() {
       num++;
     }
   }
+
   flag_wait("postbb_redshirt1_inplace");
   flag_wait("postbb_redshirt2_inplace");
   flag_wait("postbb_redshirt3_inplace");
   wait 0.4;
   flag_set("friendlies_vignette_go");
   getent("e3_allies_saveu_colorchain", "targetname") notify("trigger");
+
   level.hero.animname = "hero";
   animtime = getanimlength(level.scr_anim["hero"]["postbb_hero"]);
   level.hero.disablearrivals = false;
   level.hero.disableexits = false;
+
   getent("e3_allies_tofence_chain", "targetname") thread wait_and_notify(animtime - 1, "trigger");
+
   node thread anim_single_solo(level.hero, "postbb_hero");
   wait animtime - 0.1;
   level.hero set_run_anim("patrol_walk");
   wait 0.1;
   level.hero set_run_anim("patrol_walk");
   level.hero stopanimscripted();
+
   level thread say_dialogue("wait_for_screams");
   level thread say_dialogue("dimitri_this_way");
+
   level notify("e3_go");
+
   wait 9;
   level.hero reset_run_anim();
   level.hero.ignoreme = true;
@@ -178,33 +199,45 @@ allies_overfence_dialogue() {
 e3_sniping_cover_battle() {
   level thread battlechatter_off("axis");
   level thread ai_through_door();
+
   level.guys_onground_killed = 0;
   level thread e3_trigsoff();
+
   level notify("hero_getup");
+
   wait 0.1;
   level thread e3_threat_stuff();
+
   getent("alley_dudes3", "target") thread waittill_trigg_and_say("left_balcony", 2);
   getent("alley_dudes3", "target") thread waittill_trig_and_notify(level, "stealthbreak");
+
   level waittill("e3_go");
+
   setmusicstate("PRE_SNIPE_FLAMEGUY");
+
   level thread alldudes_2_come();
   level thread resnov_splain_stuff();
+
   getent("e3_squad_getready_chain", "script_noteworthy") notify("trigger");
   getent("e3_ladder_blocker", "targetname") delete();
   getent("player_inplace", "script_noteworthy") waittill("trigger");
   getent("e3_ladderbacktrack_clip", "targetname") trigger_on();
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] thread player_speed_set(190, 3);
     players[i] allowsprint(true);
   }
+
   level thread impatient_allies();
   level.player thread stealth_checker();
   level waittill("stealthbreak");
   level notify("stop_talking");
   wait 0.1;
   level.hero enable_ai_color();
+
   flag_set("e3_fight_go");
+
   spawners = getEntArray("alley_dudes1_2", "targetname");
   if(isDefined(spawners) && spawners.size > 0) {
     maps\_spawner::flood_spawner_scripted(spawners);
@@ -220,6 +253,7 @@ e3_sniping_cover_battle() {
   array_thread(guys, ::solo_set_pacifist, false);
   array_thread(guys2, ::solo_set_pacifist, false);
   getent("guys_charge", "targetname") notify("trigger");
+
   level thread color_chain3();
   wait 0.5;
   guy = grab_ai_by_script_noteworthy("e3_patrolguy2", "axis");
@@ -243,7 +277,6 @@ impatient_allies() {
   wait 2;
   level notify("stealthbreak");
 }
-
 keep_firing() {
   level endon("e3_forward_comrades");
   level.keepfiring_length = 20;
@@ -279,6 +312,7 @@ alleyguysdead() {
     }
   }
   flag_set("e3_fightison");
+
   getent("guys_charge2", "targetname") notify("trigger");
   level.alleyguys_dead = 0;
 }
@@ -287,37 +321,49 @@ alldudes_2_come() {
   guys = getaiarray("allies");
   array_thread(guys, ::solo_set_pacifist, true);
   level waittill("fight!");
+
   setmusicstate("LAST_BATTLE_PHASE_1");
   guys = array_remove(guys, level.hero);
   for(i = 0; i < guys.size; i++) {
     wait(randomfloatrange(0.1, 0.3));
     guys[i] playSound("russian_battle_crymn");
   }
+
   thread alleyguysdead();
   flag_wait("e3_fightison");
+
   wait 2;
+
   spawners = getEntArray("alley_dudes2_high", "targetname");
   for(i = 0; i < spawners.size; i++) {
     spawners[i] stalingradspawn();
   }
+
   wait 4;
   level thread say_dialogue("mg_2nd_floor");
+
   while(level.alleyguys_dead < 7) {
     wait 0.5;
   }
+
   getent("dudeguys_redshirt", "target") notify("trigger");
+
   spawners = getEntArray("alley_dudes2", "targetname");
   if(isDefined(spawners) && spawners.size > 0) {
     maps\_spawner::flood_spawner_scripted(spawners);
   }
+
   spawners = getEntArray("alley_dudes2_high2", "targetname");
   for(i = 0; i < spawners.size; i++) {
     spawners[i] stalingradspawn();
   }
+
   wait 1;
   maps\_spawner::kill_spawnernum(10);
   waittill_aigroupcleared("e3_flamer_the_2nd");
+
   getent("guys_charge3", "targetname") notify("trigger");
+
   thread Sniper_Cover_Battle2();
   wait 4;
   getent("alley_dudes3", "target") notify("trigger");
@@ -326,11 +372,13 @@ alldudes_2_come() {
   waittill_aigroupcleared("e3_leftguys");
   guys = getaiarray("axis");
   for(i = 0; i < guys.size; i++) {
-    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys" || guys[i].script_noteworthy == "floor2_mgguy")) {
+    if(isDefined(guys[i].script_noteworthy) &&
+      (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys" || guys[i].script_noteworthy == "floor2_mgguy")) {
       guys[i] thread wait_and_kill(randomint(2), getstruct("magicfriendlybullet_spot", "targetname"));
     }
   }
   waittill_aigroupcleared("e3_3rd_floor_guys");
+
   maps\_spawner::kill_spawnernum(12);
   nodes = getnodearray("e3_alley_fallback_nodes", "script_noteworthy");
   guys = getaiarray("axis");
@@ -346,10 +394,12 @@ alldudes_2_come() {
   wait 2;
   getent("e3_allies_cleared_firsthalf", "targetname") notify("trigger");
   flag_set("e3_forward_comrades");
+
   level waittill("ura");
   level thread maps\_utility::autosave_by_name("ura_charge");
   level notify("e3_forward_comrades");
   level thread say_dialogue("friends_moving_up", undefined, 0.5);
+
   checktrig = getent("e3_sargego_midstair_check", "targetname");
   if(level.player istouching(checktrig)) {
     level thread say_dialogue("up_stairs_quickly");
@@ -357,12 +407,14 @@ alldudes_2_come() {
     trig = getent("e3_3rd_floor_chain", "script_noteworthy");
     trig trigger_on();
   }
+
   getent("e3_post_3rdfloor_chain", "script_noteworthy") trigger_on();
   wait 8;
   spawners = getEntArray("alley_dudes2_reinforce", "targetname");
   if(isDefined(spawners[0])) {
     maps\_spawner::flood_spawner_scripted(spawners);
   }
+
   guys = getaiarray("axis");
   for(i = 0; i < guys.size; i++) {
     guys[i] solo_set_pacifist(false);
@@ -373,14 +425,17 @@ sniper_cover_battle2() {
   waittill_aigroupcleared("castlewall_guys_charge");
   getent("castlewall_chargers_dead_chain", "script_noteworthy") notify("trigger");
   waittill_aigroupcleared("castlewall_guys");
+
   level thread maps\_utility::autosave_by_name("castlewall_battle");
   flag_wait("e3_forward_comrades");
   guys = getaiarray("axis");
   for(i = 0; i < guys.size; i++) {
-    if(isDefined(guys[i].script_noteworthy) && (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys")) {
+    if(isDefined(guys[i].script_noteworthy) &&
+      (guys[i].script_noteworthy == "e3_left_balcony_guys" || guys[i].script_noteworthy == "e3_left_roof_guys" || guys[i].script_noteworthy == "e3_p1_second_floor_guys")) {
       guys[i] thread wait_and_kill(randomint(20));
     }
   }
+
   getent("e3_allies_cleared_castlewall", "targetname") thread wait_and_notify(5, "trigger");
   wait 1;
   level thread say_dialogue("friends_need_cover");
@@ -403,43 +458,53 @@ sniper_cover_battle2() {
     }
     wait 0.5;
   }
+
   trig = getent("newbs_charge", "target");
   trig notify("trigger");
   wait 1;
   level notify("newbs_runnin");
   maps\_spawner::kill_spawnernum(32);
   wait 5;
+
   allies = getEntArray("dudeguys_charge", "targetname");
   for(i = 0; i < allies.size; i++) {
     allies[i] stalingradspawn();
   }
+
   spawners = getEntArray("e3_snipercover_3floordudes", "targetname");
   if(isDefined(spawners) && spawners.size > 0) {
     maps\_spawner::flood_spawner_scripted(spawners);
   }
+
   getent("e3_castlewall_chain", "script_noteworthy") notify("trigger");
   wait 6;
   getent("e3_b2_reinforcements", "script_noteworthy") notify("trigger");
   wait 1;
   guy = grab_ai_by_script_noteworthy("e3_halftrack_mgguy", "axis");
   guy waittill("death");
+
   spawners = getEntArray("e3_snipercover_3floormgguy", "targetname");
   if(isDefined(spawners) && spawners.size > 0) {
     maps\_spawner::flood_spawner_scripted(spawners);
   }
+
   wait 7;
   maps\_spawner::kill_spawnernum(16);
+
   spawners = getEntArray("e3_snipercover_3floordudes_left", "targetname");
   if(isDefined(spawners) && spawners.size > 0) {
     maps\_spawner::flood_spawner_scripted(spawners);
   }
+
   retreatguys = grab_ais_by_script_noteworthy("e3_guys_retreat_into_building", "axis");
   retreatnodes = getnodearray("e3_guys_retreat_into_building_nodes", "script_noteworthy");
   thread guys_to_nodes(retreatguys, retreatnodes);
   getent("toughguys_advance", "script_noteworthy") notify("trigger");
+
   trig = getent("e3_battle2_chain", "script_noteworthy");
   trig thread waittill_trigg_and_say("comrades_clearing", 6);
   waittill_aigroupcleared("e3_infrontof_final_building_guys");
+
   trig notify("trigger");
   waittill_aigroupcleared("e3_retreat_in_building_guys");
   wait 2;
@@ -453,7 +518,9 @@ sniper_cover_battle2() {
   }
   level.hero reset_run_anim();
   wait 1;
+
   getent("russians_last_chain", "script_noteworthy") notify("trigger");
+
   thread maps\sniper_event4::event4_setup();
 }
 
@@ -521,13 +588,16 @@ ai_through_door() {
   trig = getent("alley_dudes4", "target");
   trig thread waittill_trigg_and_say("more_infantry", 1);
   trig waittill("trigger");
+
   getent("e3_plank_blocker", "targetname") trigger_on();
+
   flag_set("rooftop_battle");
   maps\_spawner::kill_spawnernum(20);
   maps\_spawner::kill_spawnernum(21);
   maps\_spawner::kill_spawnernum(12);
   maps\_spawner::kill_spawnernum(10);
   maps\_spawner::kill_spawnernum(11);
+
   trig = getent("alley_dudes4b", "target");
   trig thread wait_and_notify(randomintrange(10, 30), "trigger");
   trig waittill("trigger");
@@ -604,6 +674,7 @@ allies_moveup_chatter() {
       break;
     }
   }
+
 }
 
 resnov_splain_stuff() {
@@ -616,6 +687,7 @@ resnov_splain_stuff() {
   spot anim_reach_solo(level.hero, "resnov_splain");
   spot anim_single_solo(level.hero, "resnov_splain");
   level thread notify_on_notify("stealthbreak", spot, "stoploop");
+
   level.hero enable_ai_color();
   wait 20;
   while(1) {

@@ -1,0 +1,9 @@
+/**************************************
+ * Decompiled and Edited by SyndiShanX
+ * Script: maps\credits_anim.gsc
+**************************************/
+
+#include common_scripts\utility;
+#include maps\_utility;
+
+main() {}

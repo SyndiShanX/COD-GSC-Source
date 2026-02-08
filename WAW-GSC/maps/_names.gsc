@@ -1,25 +1,31 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\_names.gsc
-*****************************************************/
+**************************************/
 
 main() {}
+
 setup_names() {
   assert(!isDefined(level.names));
+
   nationalities = [];
   nationalities[0] = "american";
   nationalities[1] = "british";
   nationalities[2] = "russian";
   nationalities[3] = "german";
   nationalities[4] = "japanese";
+
   for(i = 0; i < nationalities.size; i++) {
     level.names[nationalities[i]] = [];
   }
+
   american_names();
   british_names();
   russian_names();
+
   japanese_names();
   german_names();
+
   for(i = 0; i < nationalities.size; i++) {
     randomize_name_list(nationalities[i]);
     level.nameIndex[nationalities[i]] = 0;
@@ -56,6 +62,7 @@ american_names() {
   add_name("american", "Sloan");
   add_name("american", "Scott");
   add_name("american", "Thompson");
+
   add_name("american", "Anderson");
   add_name("american", "Anthony");
   add_name("american", "Bickell");
@@ -130,6 +137,7 @@ american_names() {
   add_name("american", "Zaring");
   add_name("american", "Zide");
   add_name("american", "Zielinski");
+
   add_name("american", "Arrasmith");
   add_name("american", "Chassereau");
   add_name("american", "Dalbotten");
@@ -146,6 +154,7 @@ american_names() {
   add_name("american", "Taubel");
   add_name("american", "Thompson");
   add_name("american", "Welch");
+
   add_name("american", "Alderson");
   add_name("american", "Beunafe");
   add_name("american", "Christensen");
@@ -170,6 +179,7 @@ american_names() {
   add_name("american", "Wallace");
   add_name("american", "Westman");
   add_name("american", "Wilson");
+
   add_name("american", "Aholt");
   add_name("american", "Halmich");
   add_name("american", "Hamann");
@@ -223,9 +233,11 @@ british_names() {
   add_name("british", "Wallcroft");
   add_name("british", "Wells");
   add_name("british", "Welsh");
+
   add_name("british", "Adams");
   add_name("british", "Gascoine");
   add_name("british", "Houston");
+
   add_name("british", "Alexander");
   add_name("british", "Baker");
   add_name("british", "Browne");
@@ -291,6 +303,7 @@ german_names() {
   add_name("german", "Steinhauer");
   add_name("german", "Wagner");
   add_name("german", "Weber");
+
   add_name("german", "Leister");
   add_name("german", "Meyer");
   add_name("german", "Roser");
@@ -378,6 +391,7 @@ russian_names() {
   add_name("russian", "Yakubov");
   add_name("russian", "Yoslov");
   add_name("russian", "Zubarev");
+
   add_name("russian", "Bockovich");
   add_name("russian", "Chihoski");
   add_name("russian", "Grzegorzek");
@@ -404,6 +418,7 @@ get_name(override) {
     self.airank = "private";
     return;
   }
+
   if(isDefined(self.script_friendname)) {
     if(self.script_friendname == "none") {
       return;
@@ -413,7 +428,9 @@ get_name(override) {
     self notify("set name and rank");
     return;
   }
+
   assert(isDefined(level.names));
+
   if(self.team == "axis") {
     if(self.voice == "japanese") {
       get_name_for_nationality("japanese");
@@ -427,13 +444,16 @@ get_name(override) {
   } else {
     get_name_for_nationality("american");
   }
+
   self notify("set name and rank");
 }
 
 get_name_for_nationality(nationality) {
   assertex(isDefined(level.nameIndex[nationality]), nationality);
+
   level.nameIndex[nationality] = (level.nameIndex[nationality] + 1) % level.names[nationality].size;
   lastname = level.names[nationality][level.nameIndex[nationality]];
+
   rank = RandomInt(100);
   if(rank > 20) {
     fullname = "Pvt. " + lastname;
@@ -445,6 +465,7 @@ get_name_for_nationality(nationality) {
     fullname = "Sgt. " + lastname;
     self.airank = "sergeant";
   }
+
   if(self.team == "axis") {
     self.ainame = fullname;
   } else {
@@ -456,9 +477,11 @@ getRankFromName(name) {
   if(!isDefined(name)) {
     self.airank = ("private");
   }
+
   tokens = Strtok(name, " ");
   assert(tokens.size);
   shortRank = tokens[0];
+
   switch (shortRank) {
     case "Pvt.":
       self.airank = "private";

@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************
  * Decompiled and Edited by SyndiShanX
  * Script: mptype\player_usa_raider.gsc
-*****************************************************/
+****************************************/
 
 main() {
   switch (codescripts\character::get_random_character(4)) {

@@ -1,7 +1,7 @@
-/*****************************************************
+/***************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_rus_guard_player_cqb.gsc
-*****************************************************/
+***************************************************/
 
 main() {
   self setModel("char_rus_guard_player_body_cqb");

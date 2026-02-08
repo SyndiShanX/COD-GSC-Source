@@ -1,7 +1,7 @@
-/*****************************************************
+/*********************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_jap_pel2_rifle.gsc
-*****************************************************/
+*********************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_jap_impinf_body4alias::main());

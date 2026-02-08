@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\oki3_courtyard.gsc
-*****************************************************/
+**************************************/
 
 #include common_scripts\utility;
 #include maps\_utility;
@@ -52,14 +52,20 @@ courtyard_objectives() {
   objective_add(6, "current", &"OKI3_OBJ1");
   objective_position(6, (8203, -2236, 157));
   getent("planter_door_end", "targetname") notify("trigger");
+
   trigger_Wait("stairs_down_objective", "targetname");
+
   objective_position(6, (8424, -6856, 122));
+
   trigger_wait("secure_courtyard_drop_objective", "targetname");
   objective_add(6, "current", &"OKI3_OBJ7", (7321, -5726, 139));
+
   level thread monitor_volume_for_enemies("drop_volume", "drop_secured", "enter_courtyard");
   level waittill("drop_secured");
+
   objective_state(6, "done");
   objective_add(7, "current", &"OKI3_OBJ8_A");
+
   house_guys_playerseek();
 }
 
@@ -74,12 +80,15 @@ house_guys_playerseek() {
 give_air_strike() {
   self endon("death");
   self endon("disconnect");
+
   wait(45);
+
   self giveweapon("air_support");
   level.rocket_barrage_allowed = true;
   self SetActionSlot(4, "weapon", "air_support");
   self setweaponammostock("air_support", 0);
   self SetWeaponAmmoClip("air_support", 1);
+
   self thread monitor_radio_usage();
   self thread air_strike_user_notify();
   level notify("_airsupport");
@@ -88,6 +97,7 @@ give_air_strike() {
 monitor_radio_usage() {
   self endon("death");
   self endon("disconnect");
+
   while(1) {
     self waittill("weapon_change");
     if(self getcurrentweapon() == "air_support") {
@@ -106,7 +116,9 @@ monitor_radio_usage() {
 hud_radio_in_use() {
   self endon("death");
   self endon("disconnect");
+
   text = &"OKI3_RADIO_INUSE";
+
   self setup_client_hintelem();
   self.hintelem setText(text);
   wait(3.5);
@@ -115,11 +127,14 @@ hud_radio_in_use() {
 
 air_support_objective() {
   level waittill("_airsupport");
+
   level.last_hero do_dialogue("available" + randomint(4));
+
   wait(.5);
   level.last_hero do_dialogue("call_in_planes");
   wait(.5);
   level.last_hero do_dialogue("kingdom_come");
+
   objective_add(9, "current", &"OKI3_OBJ8", (7858, -2737.5, 558.5));
   objective_icon(9, "hud_icon_airstrike");
   wait(1);
@@ -129,12 +144,14 @@ air_support_objective() {
 air_support_nag() {
   guy = undefined;
   dialog = [];
+
   if(isalive(level.polonsky)) {
     guy = level.polonsky;
   }
   if(isAlive(level.sarge)) {
     guy = level.sarge;
   }
+
   if(guy == level.polonsky) {
     dialog[0] = "airstrike_now";
     dialog[1] = "do_it_planes";
@@ -144,6 +161,7 @@ air_support_nag() {
     dialog[1] = "call_planes_miller";
     dialog[2] = "need_airstrike";
   }
+
   tick = 0;
   while(!isDefined(level.north_buildings_targeted)) {
     wait(.5);
@@ -160,18 +178,21 @@ air_support_nag() {
       tick = 0;
     }
   }
+
   while(1) {
     if(isDefined(level.nag_castle)) {
       break;
     }
     wait(1);
   }
+
   tick = 0;
   while(!isDefined(level.castle_targeted)) {
     wait(.5);
     tick++;
     if(tick > 30 && !isDefined(level.no_nag_dialogue)) {
       guy thread do_dialogue(dialog[randomint(dialog.size)]);
+
       if(randomint(100) > 50) {
         if(randomint(100) > 50) {
           guy do_dialogue("to_east");
@@ -179,13 +200,16 @@ air_support_nag() {
           guy do_dialogue("east_ofhere");
         }
       }
+
       tick = 0;
     }
   }
   level notify("stop_grenades");
   wait(5);
   level thread magic_grenades_from_hell();
+
   wait(15);
+
   tick = 0;
   while(!isDefined(level.castle_targeted_2)) {
     wait(.5);
@@ -196,14 +220,19 @@ air_support_nag() {
     }
   }
   level notify("stop_grenades");
+
   while(!isDefined(level.castle_destroyed)) {
     wait_network_frame();
   }
+
   objective_state(7, "done");
   objective_state(10, "done");
+
   final_banzai_charge();
+
   getent("use_mortars_courtyard", "targetname") trigger_off();
   getent("use_mortars_courtyard", "targetname") notify("stop_thinking");
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(players[i] getcurrentweapon() == "mortar_round") {
@@ -220,19 +249,23 @@ air_support_nag() {
     players[i] takeweapon("type97_frag");
     players[i] takeweapon("m8_white_smoke");
   }
+
   wait(2);
   guy do_dialogue("dam");
   wait(1);
+
   if(guy == level.polonsky) {
     setmusicstate("END_LEVEL_POLONSKY");
   }
   if(guy == level.sarge) {
     setmusicstate("END_LEVEL_ROEBUCK");
   }
+
   guy do_dialogue("we_did_it");
   wait(1);
   guy do_dialogue("its_over");
   wait(1);
+
   players = get_players();
   for(i = 0; i < players.size; i++) {
     players[i] thread hud_fade_to_black(2);
@@ -254,6 +287,7 @@ air_support_nag() {
     players[i] DisableOffhandWeapons();
     players[i] thread hud_fade_in(1.5);
   }
+
   thread maps\oki3_anim::oki3_outro_2();
   wait(.15);
   level notify("do_outro");
@@ -266,6 +300,7 @@ clean_middle_ai() {
       ai[i] thread random_death(3, 10);
     }
   }
+
 }
 
 final_banzai_charge() {
@@ -273,6 +308,7 @@ final_banzai_charge() {
   level notify("stop_upper");
   level notify("stop_back");
   level notify("b1_spawners");
+
   wait(3);
   ai = getaiarray("axis");
   for(i = 0; i < ai.size; i++) {
@@ -284,12 +320,14 @@ final_banzai_charge() {
 init_courtyard_envfx() {
   exploder(1100);
   exploder(500);
+
   ent1 = spawn("script_model", (7137, -3138, 91));
   ent2 = spawn("script_model", (8767, -5283, 45));
   ent1 setModel("tag_origin");
   ent2 setModel("tag_origin");
   ent1.angles = (277.5, 90, -6.81);
   ent2.angles = (277.5, 90, -6.81023);
+
   forward = anglesToForward(ent1.angles);
   forward2 = anglesToForward(ent2.angles);
   playFXOnTag(level._effect["after_mortars"], ent1, "tag_origin");
@@ -306,6 +344,7 @@ dvar_watcher() {
         hide_damaged(1);
         show_intact(1);
       }
+
       if(getdvarint("show_2") == 1) {
         show_damaged(2, 1);
         hide_intact(2);
@@ -320,6 +359,7 @@ dvar_watcher() {
         hide_damaged(3);
         show_intact(3);
       }
+
       if(getdvarint("show_4") == 1) {
         show_damaged(4, 1);
         hide_intact(4);
@@ -339,6 +379,7 @@ dvar_watcher() {
         hide_damaged(4, 2);
         hide_damaged(4, 3);
       }
+
       if(getdvarint("show_5") == 1) {
         show_damaged(5, 1);
         hide_intact(5);
@@ -346,6 +387,7 @@ dvar_watcher() {
         hide_damaged(5);
         show_intact(5);
       }
+
       if(getdvarint("show_6") == 1) {
         show_damaged(6, 1);
         hide_intact(6);
@@ -353,6 +395,7 @@ dvar_watcher() {
         hide_damaged(6);
         show_intact(6);
       }
+
       if(getdvarint("show_7") == 1) {
         show_damaged(7, 1);
         hide_intact(7);
@@ -360,6 +403,7 @@ dvar_watcher() {
         hide_damaged(7);
         show_intact(7);
       }
+
       if(getdvarint("show_11") == 1) {
         show_damaged(11, 1);
         hide_intact(11);
@@ -367,6 +411,7 @@ dvar_watcher() {
         hide_damaged(11);
         show_intact(11);
       }
+
       if(getdvarint("show_12") == 1) {
         show_damaged(12, 1);
         hide_intact(12);
@@ -374,9 +419,11 @@ dvar_watcher() {
         hide_damaged(12);
         show_intact(12);
       }
+
       if(getdvarint("show_front_anim") == 1) {
         level thread show_fall();
       }
+
       if(getdvarint("mortar_1") == 0) {
         level thread show_bunker_damage(0);
       } else if(getdvarint("mortar_1") == 1) {
@@ -397,8 +444,10 @@ dvar_watcher() {
 hide_mghut_dmg() {
   mg_intact = getent("mortarpit_mghut_intact", "targetname");
   mg_damage1 = getent("mortarpit_mghut_wrecked", "targetname");
+
   mg_damage1 hide();
   mg_damage1 notsolid();
+
   chunks = [];
   chunks[0] = getent("mortarpit_mghut_wrecked_chunk_1", "script_noteworthy");
   chunks[1] = getent("mortarpit_mghut_wrecked_chunk_2", "script_noteworthy");
@@ -406,9 +455,11 @@ hide_mghut_dmg() {
   chunks[3] = getent("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
   chunks[4] = getent("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
   chunks[5] = getent("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
+
   for(i = 0; i < chunks.size; i++) {
     chunks[i] hide();
   }
+
   curtains = getent("event1_mg_curtains", "targetname");
   mg = getent("auto4051", "targetname");
   mg_intact show();
@@ -417,8 +468,10 @@ hide_mghut_dmg() {
 show_mghut_dmg() {
   mg_intact = getent("mortarpit_mghut_intact", "targetname");
   mg_damage1 = getent("mortarpit_mghut_wrecked", "targetname");
+
   mg_intact hide();
   mg_damage1 show();
+
   chunks = [];
   chunks[0] = getent("mortarpit_mghut_wrecked_chunk_1", "script_noteworthy");
   chunks[1] = getent("mortarpit_mghut_wrecked_chunk_2", "script_noteworthy");
@@ -426,9 +479,11 @@ show_mghut_dmg() {
   chunks[3] = getent("mortarpit_mghut_wrecked_chunk_4", "script_noteworthy");
   chunks[4] = getent("mortarpit_mghut_wrecked_chunk_5", "script_noteworthy");
   chunks[5] = getent("mortarpit_mghut_wrecked_chunk_6", "script_noteworthy");
+
   for(i = 0; i < chunks.size; i++) {
     chunks[i] hide();
   }
+
   curtains = getent("event1_mg_curtains", "targetname");
   mg = getent("auto4051", "targetname");
   curtains show();
@@ -437,9 +492,12 @@ show_mghut_dmg() {
 
 show_bunker_damage(num) {
   intact = getent("mortar_house_intact", "targetname");
+
   damage2 = getent("mortar_house_damage_2", "targetname");
   damage3 = getent("mortar_house_damage_3", "targetname");
+
   bits = getent("mortar_house_damage_delete", "targetname");
+
   dmg2 = false;
   dmg3 = false;
   switch (num) {
@@ -448,6 +506,7 @@ show_bunker_damage(num) {
       damage3 hide();
       intact show();
       break;
+
     case 1:
       damage2 show();
       damage3 hide();
@@ -464,13 +523,17 @@ show_bunker_damage(num) {
 show_bunker_explode() {
   if(!isDefined(level.is_exploding)) {
     level.is_exploding = true;
+
     if(!isDefined(level.anim_setup_complete)) {
       maps\oki3::setup_mortarhut_anim();
       level.anim_setup_complete = true;
     }
+
     level.mortarhut_pieces SetFlaggedAnimKnobRestart("pit_explodes", level.scr_anim["mortarpit_bunker"]["explode"], 1.0, 0.05, 1.0);
+
     bigbits = getEntArray("bigbits", "script_noteworthy");
     loose_boards = getEntArray("loose_boards", "script_noteworthy");
+
     wait(10);
     level.is_exploding = undefined;
   }
@@ -487,23 +550,27 @@ show_fall() {
 
 init_courtyard_destruction() {
   level thread courtyard_dragon_falls();
+
   hide_damaged(1, 1);
   hide_damaged(2, 1);
   hide_damaged(3, 1);
   hide_damaged(4, 1);
   hide_damaged(4, 2);
   hide_damaged(4, 3);
+
   hide_damaged(5, 1);
   hide_damaged(6, 1);
   hide_damaged(7, 1);
   hide_damaged(11, 1);
   hide_damaged(12, 1);
+
   show_intact(1);
   show_intact(2);
   show_intact(3);
   show_intact(4, 1);
   show_intact(5, 1);
   show_intact(6);
+
   show_intact(7);
   show_intact(11);
   show_intact(12);
@@ -511,31 +578,42 @@ init_courtyard_destruction() {
 
 courtyard_north_spawners() {
   getent("start_final_defend", "script_noteworthy") waittill("trigger");
+
   level thread courtyard_prespawn_smoke(850, 900, "nw_smoke");
   wait(7);
+
   setmusicstate("COURTYARD_A");
+
   level thread squad_manager_think("nf_spawn", "north_front_spawners", "b1_spawners", "building1_front_spawners_threshold", "building1_front_spawners", true, true, true);
   level thread squad_manager_think("nb_spawn", "north_back_spawners", "b1_spawners", "building1_back_spawners_threshold", "building1_back_spawners", true, true);
+
   level thread maps\oki3_squad_manager::manage_spawners("building1_back_spawners", 2, 4, "b1_spawners", .5, ::spawnfunc_rear_support, 5, undefined, "nb_spawn");
   level thread maps\oki3_squad_manager::manage_spawners("building1_front_spawners", 3, 7, "b1_spawners", .5, ::spawnfunc_front_line, 7, undefined, "nf_spawn");
+
   wait(5);
   playsoundatposition("japanese_yell_left", (6742, -3871, 130));
   playsoundatposition("japanese_yell_right", (8671, -3960, 54.7));
   wait(1);
   thread spawn_banzai_wave((7216, -4500, 50));
   level notify("do_dialog", "generic_fight0", level.last_hero);
+
   level thread front_line_spawner_think();
+
   level thread airstrike_radio_dialogue();
+
   players = get_players();
   array_thread(players, ::give_air_strike);
+
   wait(15);
   simple_spawn("north_MG_gunner", ::north_mg_gunner);
+
   level notify("stop_grenades");
   wait(5);
   level thread maps\oki3_squad_manager::manage_spawners("building2_back_spawners", 2, 4, "b1_spawners", .5, ::spawnfunc_rear_support, 5);
   level thread maps\oki3_squad_manager::manage_spawners("building2_front_spawners", 3, 6, "b1_spawners", .5, ::spawnfunc_front_line, 7);
   level thread maps\oki3_squad_manager::manage_spawners("building2_back_sniper", 1, 1, "b1_spawners", 1, undefined, 5);
   level thread magic_grenades_from_hell();
+
   level waittill("building1_destroyed");
   level notify("b1_spawners");
   objective_state(8, "done");
@@ -547,24 +625,31 @@ courtyard_north_spawners() {
 
 courtyard_dialog_think() {
   level endon("stop_dialog");
+
   while(1) {
     level waittill("do_dialog", dialog, guy);
+
     guy do_dialogue(dialog);
     wait(.25);
   }
 }
 
-banzai_wave_spawner_think(location, ender) {
+banzai_wave_spawner_think(location, ender) //location,ender,wave_min,wave_max,time_min,time_max)
+{
   level endon(ender);
+
   org1 = [];
   org2 = [];
   wave_loc = undefined;
   switch (location) {
     case "north":
+
       org1[org1.size] = (7536, -4984, 104);
       org2[org2.size] = (7128, -5040, 104);
+
       wave_loc = (7216, -4500, 50);
       break;
+
     case "south":
       org1[org1.size] = (7866, -5227, 57);
       org2[org2.size] = (8209, -5859, 47.3);
@@ -573,11 +658,13 @@ banzai_wave_spawner_think(location, ender) {
       wave_loc = (8504, -5332, 55.8);
       break;
   }
+
   while(1) {
     wait(40);
     rnd = randomint(org1.size);
     ent1 = spawn("script_origin", org1[rnd]);
     ent2 = spawn("script_origin", org2[rnd]);
+
     ent1 MagicGrenadeType("m8_white_smoke_light", ent1.origin, (0, 0, -1), .05);
     ent2 MagicGrenadeType("m8_white_smoke_light", ent2.origin, (0, 0, -1), .2);
     wait(8);
@@ -591,9 +678,11 @@ banzai_wave_spawner_think(location, ender) {
 
 north_mg_gunner() {
   self endon("death");
+
   self setCanDamage(false);
   turret = getent("north_MG", "targetname");
   turret setturretignoregoals(true);
+
   level waittill("building1_destroyed");
   self setCanDamage(true);
   self random_death(.2, .5);
@@ -606,19 +695,25 @@ courtyard_castle_spawners() {
   wait(3);
   getent("defend_south", "targetname") notify("trigger");
   wait(10);
+
   thread spawn_banzai_wave((8481, -5723, 104));
   playsoundatposition("japanese_yell_left", (9055, -3704, 85));
   playsoundatposition("japanese_yell_right", (8760, -5864, 104));
+
   level thread front_line_spawner_think();
+
   level thread open_door("se_door1", "r", true, "se_door1_trig");
   level thread open_door("se_door2", "r", false, "se_door2_trig");
   level thread open_door("ne_door2", "r", true, "ne_door2_trig");
+
   level thread squad_manager_think("sf_spawn", "southeast_front_spawners", "stop_castle_spawners", "southeast_front_threshold", "southeast_front", true, true, true);
   level thread squad_manager_think("sb_spawn", "southeast_back_spawners", "stop_castle_spawners", "southeast_back_threshold", "southeast_back", true, true, true);
+
   level thread maps\oki3_squad_manager::manage_spawners("southeast_front", 8, 10, "stop_castle_spawners", .5, ::spawnfunc_front_line, 3, undefined, "sf_spawn");
   level thread maps\oki3_squad_manager::manage_spawners("southeast_back", 5, 9, "stop_back", .5, ::spawnfunc_rear_support, 3, undefined, "sb_spawn");
   level thread maps\oki3_squad_manager::manage_spawners("castle_back_sniper", 1, 2, "stop_castle_spawners", .5, undefined, 5);
   level thread magic_grenades_from_hell();
+
   wait(10);
   level notify("nag_castle");
   level.nag_castle = true;
@@ -626,7 +721,9 @@ courtyard_castle_spawners() {
 
 spawnfunc_rear_support() {
   self endon("death");
+
   self.grenadeammo = 0;
+
   self.ignoreall = true;
   self.ignoreme = true;
   self.goalradius = 128;
@@ -637,6 +734,7 @@ spawnfunc_rear_support() {
 
 spawnfunc_front_line() {
   self endon("death");
+
   self.script_noteworthy = "front_line_guy";
   self.ignoreall = true;
   self.ignoreme = true;
@@ -661,6 +759,7 @@ front_line_spawner_think() {
           count++;
         }
       }
+
       if(count > 3) {
         array_thread(chargers, ::front_line_charge);
         dialog[0] = "keep_firing";
@@ -670,11 +769,13 @@ front_line_spawner_think() {
         level notify("do_dialog", dialog[randomint(dialog.size)], level.last_hero);
       }
     }
+
   }
 }
 
 front_line_charge() {
   self endon("death");
+
   self.ready_to_charge = undefined;
   self thread maps\_banzai::banzai_force();
 }
@@ -698,6 +799,7 @@ hide_damaged(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
+
   ent = getEntArray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
   if(ent.size) {
     for(i = 0; i < ent.size; i++) {
@@ -725,6 +827,7 @@ show_damaged(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
+
   ent = getEntArray("roof_building_" + building + "_dmg_" + dmgstate, "targetname");
   if(ent.size) {
     for(i = 0; i < ent.size; i++) {
@@ -750,6 +853,7 @@ hide_intact(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
+
   ent = getEntArray("roof_building_" + building + "_intact", "targetname");
   if(ent.size) {
     for(i = 0; i < ent.size; i++) {
@@ -775,12 +879,14 @@ hide_intact(building, dmgstate) {
       }
     }
   }
+
 }
 
 show_intact(building, dmgstate) {
   if(!isDefined(dmgstate)) {
     dmgstate = "";
   }
+
   ent = getEntArray("roof_building_" + building + "_intact", "targetname");
   if(ent.size) {
     for(i = 0; i < ent.size; i++) {
@@ -806,14 +912,18 @@ courtyard_prespawn_smoke(min_force, max_force, orgs) {
   if(!isDefined(min_force)) {
     min_force = 700;
   }
+
   if(!isDefined(max_force)) {
     max_force = 800;
   }
+
   ents = getstructarray(orgs, "targetname");
+
   for(i = 0; i < ents.size; i++) {
     if(!isDefined(ents[i].original_angles)) {
       ents[i].original_angles = ents[i].angles;
     }
+
     ents[i] thread throw_smoke_from_pos(randomintrange(min_force, max_force));
     wait(randomfloatrange(.5, 1.5));
   }
@@ -824,6 +934,7 @@ destroy_building1() {
   level notify("stop_grenades");
   level thread destroy_building11();
   level thread courtyard_spawn_bomber_test("building1_spline1", (0, 0, 150), true);
+
   wait(13);
   if(!isDefined(level.building1_destroyed)) {
     earthquake(0.3, randomfloatrange(1.5, 3), (7205, -2655, 409), 4048);
@@ -836,20 +947,25 @@ destroy_building1() {
     show_damaged(2, 1);
     hide_intact(2);
     playsoundatposition("courtyard_building_explo", (7898, -2743, 559.5));
+
     level notify("building1_destroyed");
     level notify("b1_spawners");
     level.building1_destroyed = true;
   }
+
   trig = getent("courtyard_ne", "script_noteworthy");
   trig2 = getent("courtyard_nw", "script_noteworthy");
+
   dudes = getaiarray("axis");
   for(i = 0; i < dudes.size; i++) {
     if(dudes[i] istouching(trig) || dudes[i] istouching(trig2)) {
       dudes[i] thread flamedeath();
     }
   }
+
   trig = getent("courtyard_se", "script_noteworthy");
   dudes = getaiarray("axis");
+
   for(i = 0; i < dudes.size; i++) {
     if(dudes[i] istouching(trig)) {
       dudes[i] thread maps\_banzai::banzai_force();
@@ -863,16 +979,20 @@ destroy_building11() {
     level thread destroy_building_3();
     level thread courtyard_spawn_bomber_test("building11_spline1", (0, 0, 150), true);
     wait(13);
+
     earthquake(randomfloatrange(0.14, 0.4), randomfloatrange(1.5, 3), (6611, -3689, 327), 4048);
+
     stop_exploder(1100);
     exploder(1101);
     playsoundatposition("courtyard_building_explo", (6611, -3689, 327));
     wait(0.3);
     show_damaged(11, 1);
     hide_intact(11);
+
     wait(0.38);
     show_damaged(12, 1);
     hide_intact(12);
+
     wait(2);
     level notify("dragon falls");
     wait(3);
@@ -884,7 +1004,9 @@ destroy_building_3() {
     wait(1);
     level thread courtyard_spawn_bomber_test("building3_spline1", (0, 0, 350), true);
     wait(13);
+
     earthquake(randomfloatrange(0.14, 0.4), randomfloatrange(1.5, 3), (9604, -3162.5, 137), 4048);
+
     playsoundatposition("courtyard_building_explo", (9672, -2936, 298));
     exploder(601);
     wait(.4);
@@ -896,22 +1018,29 @@ destroy_building_3() {
 destroy_building4() {
   level.castle_targeted = true;
   level thread courtyard_spawn_bomber_test("building4_spline1", (0, 0, 150), true);
+
   if(!isDefined(level.building4_1_destroyed)) {
     level thread destroy_building5();
     level thread destroy_building6();
     level thread destroy_castle_damagestate_2();
+
     wait(13);
+
     earthquake(0.45, randomfloatrange(1.5, 3), (9800, -4376, 968), 4048);
+
     stop_exploder(500);
+
     exploder(501);
     wait(.45);
     show_damaged(4, 1);
     hide_intact(4, 1);
     playsoundatposition("courtyard_building_explo", (9800, -4376, 968));
+
     dragons = getEntArray("roof_building_4_dragons", "targetname");
     for(i = 0; i < dragons.size; i++) {
       dragons[i] hide();
     }
+
     level.building4_1_destroyed = true;
   } else if(!isDefined(level.building4_3_destroyed)) {
     level notify("stop_castle_spawners");
@@ -923,14 +1052,18 @@ destroy_building4() {
     exploder(503);
     earthquake(randomfloatrange(0.4, 0.7), randomfloatrange(1.5, 3), (9800, -4376, 968), 4048);
     playsoundatposition("courtyard_building_explo", (9576, -4180, 574));
+
     wait(.3);
     show_damaged(4, 3);
     hide_damaged(4, 2);
+
     level.building4_3_destroyed = true;
+
     getent("castle_paperwindows", "targetname") delete();
     getent("ne_door1", "targetname") delete();
     getent("ne_door2", "targetname") delete();
     wait(2);
+
     castle_front_fall();
   }
 }
@@ -938,27 +1071,36 @@ destroy_building4() {
 destroy_castle_damagestate_2() {
   wait(randomintrange(8, 10));
   level thread courtyard_spawn_bomber_test("building4_spline1", (0, 0, 150), true);
+
   level.castle_targeted_1 = true;
   wait(13);
+
   stop_exploder(501);
   exploder(502);
   playsoundatposition("courtyard_building_explo", (9576, -4180, 674));
   earthquake(randomfloatrange(0.4, 0.7), randomfloatrange(1.5, 3), (9800, -4376, 968), 4048);
+
   wait(.25);
   hide_damaged(4, 1);
   show_damaged(4, 2);
+
   level.building4_2_destroyed = true;
 }
 
 destroy_building6() {
   wait(randomfloatrange(3, 5));
   level thread courtyard_spawn_bomber_test("building6_spline1", (0, 0, 150), true);
+
   if(!isDefined(level.building6_destroyed)) {
     wait(13);
+
     earthquake(0.5, randomfloatrange(1.5, 3), (8335, -6222, 506), 4048);
+
     show_damaged(6, 1);
     hide_intact(6);
+
     exploder(301);
+
     level notify("stop_back");
     level notify("stop_upper");
     level.building6_destroyed = true;
@@ -969,13 +1111,16 @@ destroy_building5() {
   wait(randomfloatrange(3, 5));
   if(!isDefined(level.building5_destroyed)) {
     level thread courtyard_spawn_bomber_test("building5_spline1", (0, 0, 150), true);
+
     wait(13);
+
     earthquake(0.46, randomfloatrange(1.5, 3), (8335, -6222, 506), 4048);
     show_damaged(5, 1);
     hide_intact(5);
     exploder(201);
     wait(.2);
     exploder(202);
+
     level notify("stop_upper");
     level.building5_destroyed = true;
   }
@@ -983,8 +1128,10 @@ destroy_building5() {
 
 destroy_building7() {
   level thread courtyard_spawn_bomber_test("building7_spline1", (0, 0, 150), true);
+
   if(!isDefined(level.building7_destroyed)) {
     wait(13);
+
     earthquake(0.43, randomfloatrange(1, 2.5), (7712, -6384, 432), 4048);
     playFX(level._effect["courtyard_ambient_roof"], (7712, -6384, 432));
     exploder(701);
@@ -999,6 +1146,7 @@ courtyard_bomb_run(area) {
 
 courtyard_too() {
   trigger_wait("courtyard_too", "targetname");
+
   simple_spawn("too_defenders", ::spawnfunc_too_enemy);
   wait(4);
   simple_spawn("too_friends", ::spawnfunc_too_friends);
@@ -1011,13 +1159,16 @@ too_think() {
   level waittill("too_cleared");
   simple_spawn("too_friends_b", ::spawnfunc_too_friends);
   wait(.5);
+
   ai = getEntArray("too_friend", "script_noteworthy");
   array_thread(ai, ::too_advance);
 }
 
 monitor_too_mg() {
   level endon("stop_too_mg");
+
   mg = getent("auto3946", "targetname");
+
   firing = false;
   while(!firing) {
     wait(1);
@@ -1028,6 +1179,7 @@ monitor_too_mg() {
       }
     }
   }
+
   simple_spawn("too_defenders_extra", ::spawnfunc_too_enemy);
 }
 
@@ -1048,6 +1200,7 @@ spawnfunc_too_friends() {
 
 spawnfunc_too_enemy() {
   self endon("death");
+
   self.goalradius = 128;
   self.maxsightdistsqrd = 1500 * 1500;
   wait(90);
@@ -1059,8 +1212,10 @@ spawnfunc_too_enemy() {
 
 courtyard_spawn_bomber_test(iplane_spline, offset_vector, noFX) {
   spline_array = getstructarray(iplane_spline, "targetname");
+
   plane_spline = [];
   plane_spline[0] = spline_array[randomint(spline_array.size)];
+
   x = 0;
   while(1) {
     if(isDefined(plane_spline[x].target)) {
@@ -1072,23 +1227,32 @@ courtyard_spawn_bomber_test(iplane_spline, offset_vector, noFX) {
       break;
     }
   }
+
   if(!isDefined(offset_vector)) {
     offset_vector = (0, 0, 0);
   }
+
   plane1 = SpawnVehicle("vehicle_p51_mustang", "new_plane", "p51", plane_spline[0].origin, plane_spline[0].angles);
   plane2 = SpawnVehicle("vehicle_p51_mustang", "new_plane", "p51", plane_spline[0].origin, plane_spline[0].angles);
+
   level.plane_bomb_model["p51"] = "aircraft_bomb";
+
   if(!isDefined(noFX)) {
     level.plane_bomb_fx["p51"] = level._effect["arty_tile_roof"];
   } else {
     level.plane_bomb_fx["p51"] = level._effect["null"];
   }
+
   level.plane_bomb_sound["p51"] = "courtyard_building_explo";
+
   maps\_planeweapons::build_bomb_explosions("p51", randomfloatrange(.3, .5), 3, 5000, 700, 250, 1000);
+
   plane1 thread setup_bomber();
   plane2 thread setup_bomber();
+
   plane1 thread drop_bombs(plane_spline, offset_vector);
   wait(.5);
+
   offset_vector = (randomintrange(-400, 400), randomintrange(-200, 200), randomintrange(150, 300));
   plane2.origin = plane2.origin + offset_vector;
   plane2 thread drop_bombs(plane_spline, offset_vector);
@@ -1149,6 +1313,7 @@ spawn_shadow_guys() {
 spawnfunc_shadow_runners() {
   self thread arcademode_shadowguys();
   self endon("death");
+
   self.ignoreme = true;
   self.ignoreall = true;
   self.goalradius = 16;
@@ -1160,6 +1325,7 @@ spawnfunc_shadow_runners() {
 
 arcademode_shadowguys() {
   self waittill("death");
+
   if(isDefined(self.attacker) && isPlayer(self.attacker)) {
     arcademode_assignpoints("arcademode_score_generic250", self.attacker);
   }
@@ -1215,13 +1381,12 @@ exit_dialogue() {
   trigger_wait("underground_exit_friends", "targetname");
   level.sarge do_dialogue("upstairs");
 }
-
 #using_animtree("oki3_models");
-
 castle_front_fall() {
   level notify("stop_air_support");
   front = undefined;
   pieces = getEntArray("roof_building_4_front_dragon", "targetname");
+
   for(i = 0; i < pieces.size; i++) {
     if(pieces[i].model == "anim_okinawa_castlefront") {
       front = pieces[i];
@@ -1229,6 +1394,7 @@ castle_front_fall() {
       pieces[i] delete();
     }
   }
+
   front playSound("courtyard_building_collapse");
   playFX(level._effect["a_shuri_collapse_gate"], front.origin);
   front useanimtree(#animtree);
@@ -1241,6 +1407,7 @@ castle_front_fall() {
 
 monitor_mg_usage() {
   mg = getent("courtyard_mg", "targetname");
+
   while(1) {
     owner = undefined;
     while(!isDefined(owner)) {
@@ -1252,6 +1419,7 @@ monitor_mg_usage() {
       owner = mg getturretowner();
       wait(.1);
     }
+
     flag_clear("mg_mounted");
     wait(.1);
   }
@@ -1259,6 +1427,7 @@ monitor_mg_usage() {
 
 grenade_watcher() {
   level endon("stop_grenade_watch");
+
   while(1) {
     if(flag("mg_mounted")) {
       enemy = getaiarray("axis");
@@ -1273,6 +1442,7 @@ grenade_watcher() {
 
 remove_grenades() {
   self endon("death");
+
   if(isDefined(self.grenadeammo) && self.grenadeammo > 0) {
     self.old_grenade_ammo = self.grenadeammo;
     self.grenadeammo = 0;
@@ -1299,7 +1469,9 @@ courtyard_dragon_falls() {
   broken_dragon hide();
   broken_dragon notsolid();
   level waittill("dragon falls");
+
   dragon = getEntArray("courtyard_dragon", "targetname");
+
   for(i = 0; i < dragon.size; i++) {
     if(dragon[i].model == "static_okinawa_dragonpost") {
       dragon[i] moveto((7278, -4068, 54), 1);
@@ -1332,6 +1504,7 @@ get_closest_2_mg(mg) {
       break;
     }
   }
+
 }
 
 fake_surrender_guys() {
@@ -1339,12 +1512,15 @@ fake_surrender_guys() {
   getent("start_final_defend", "script_noteworthy") trigger_off();
   trigger_wait("spawn_feigning_guys", "targetname");
   getent("enter_courtyard", "targetname") trigger_off();
+
   level.sarge thread sarge_waittill_death();
   level.polonsky thread sarge_waittill_death();
+
   axis = getaiarray("axis");
   for(i = 0; i < axis.size; i++) {
     axis[i] bloody_death();
   }
+
   spawners = getspawnerarray();
   count = 0;
   for(i = 0; i < spawners.size; i++) {
@@ -1385,21 +1561,26 @@ fake_surrender_guys() {
   rads = getEntArray("trigger_radius", "classname");
   trigs = getEntArray("trigger_multiple", "classname");
   mods = getEntArray("script_model", "classname");
+
   com1 = array_combine(volumes, rads);
   com2 = array_combine(trigs, mods);
   ents = array_combine(com1, com2);
+
   for(i = 0; i < ents.size; i++) {
     if(isDefined(ents[i].script_string) && ents[i].script_string == "delete_me") {
       ents[i] delete();
       count++;
     }
   }
+
   wait(4);
   guys = getaiarray("axis");
   for(i = 0; i < guys.size; i++) {
     guys[i] bloody_death();
   }
+
   fakers = simple_spawn("fake_surrender_guy");
+
   for(i = 0; i < fakers.size; i++) {
     fakers[i].animname = fakers[i].script_noteworthy;
     if(fakers[i].animname == "surrender_2") {
@@ -1408,69 +1589,95 @@ fake_surrender_guys() {
     anim_node = getnode("courtyard_anim", "targetname");
     fakers[i] thread fake_surrender(anim_node);
   }
+
   split_heros();
+
   getent("secure_courtyard_drop_objective", "targetname") notify("trigger");
+
   level waittill_either("sarge_saved", "polonsky_saved");
+
   if(isAlive(level.polonsky)) {
     level.last_hero = level.polonsky;
     level.last_hero.goalradius = 4;
     level.last_hero setgoalpos(level.last_hero.origin);
+
     wait(2.5);
+
     if(!isDefined(level.polonsky.magic_bullet_shield) && IsAlive(level.polonsky)) {
       level.polonsky thread magic_bullet_shield();
     }
+
     setmusicstate("ROEBUCK_DIED");
   }
+
   if(isAlive(level.sarge)) {
     if(isAlive(level.sarge)) {
       if(!isDefined(level.sarge.magic_bullet_shield)) {
         level.sarge thread magic_bullet_shield();
       }
       level.last_hero = level.sarge;
+
       setmusicstate("POLONSKY_DIED");
+
       players = get_players();
       for(i = 0; i < players.size; i++) {
         players[i] GiveAchievement("OKI3_ACHIEVEMENT_ANGEL");
       }
     }
   }
+
   if(!isDefined(level.polonsky_attacker_shot) && level.last_hero == level.polonsky) {
     level thread start_courtyard_ambush(6);
     level.polonsky waittillmatch("single anim", "end");
     level.last_hero thread do_death_dialogue(true);
   } else if(isDefined(level.polonsky_attacker_shot) && level.last_hero == level.polonsky) {
     level thread start_courtyard_ambush(0);
+
     goal_node = getnode("courtyard_anim", "targetname");
     startorg = getstartOrigin(goal_node.origin, goal_node.angles, level.scr_anim[level.last_hero.animname]["fake_surrender_trans"]);
     startang = getstartAngles(goal_node.origin, goal_node.angles, level.scr_anim[level.last_hero.animname]["fake_surrender_trans"]);
+
     level.last_hero.goalradius = 32;
     level.last_hero SetGoalPos(startorg, startang);
+
     level.last_hero waittill("goal");
+
     level.last_hero thread Do_Death_Dialogue();
+
     maps\_anim::anim_single_solo(level.last_hero, "fake_surrender_trans", undefined, goal_node);
   }
+
   if(level.last_hero == level.sarge) {
     level thread start_courtyard_ambush(0);
     goal_node = getnode("courtyard_anim", "targetname");
     startorg = getstartOrigin(goal_node.origin, goal_node.angles, level.scr_anim[level.last_hero.animname]["fake_surrender_trans"]);
     startang = getstartAngles(goal_node.origin, goal_node.angles, level.scr_anim[level.last_hero.animname]["fake_surrender_trans"]);
+
     level.last_hero.goalradius = 32;
     level.last_hero SetGoalPos(startorg, startang);
+
     level.last_hero waittill("goal");
+
     level.last_hero thread Do_Death_Dialogue();
+
     maps\_anim::anim_single_solo(level.last_hero, "fake_surrender_trans", undefined, goal_node);
     level.last_hero.a.pose = "stand";
   }
+
   level.last_hero set_force_color("o");
   getent("enter_courtyard", "targetname") notify("trigger");
+
   level.last_hero.grenadeawareness = 1;
   level.last_hero.ignoreall = false;
   level.last_hero setCanDamage(true);
   level.last_hero.goalradius = 512;
+
   warp_players_to_courtyard();
+
   autosave_by_name("courtyard_death");
   battlechatter_on("allies");
   battlechatter_on("axis");
+
   getent("use_mortars_courtyard", "targetname") trigger_on();
   level thread mortar_round_think("courtyard");
 }
@@ -1479,8 +1686,10 @@ warp_players_to_courtyard() {
   vol1 = getent("courtyard_player_check", "targetname");
   vol2 = getent("drop_volume", "targetname");
   spots = getstructarray("courtyard_players", "targetname");
+
   players = get_players();
   players_2_warp = [];
+
   for(i = 0; i < players.size; i++) {
     if(players[i] istouching(vol1) || players[i] istouching(vol2)) {
       continue;
@@ -1488,6 +1697,7 @@ warp_players_to_courtyard() {
       players_2_warp[players_2_warp.size] = players[i];
     }
   }
+
   for(i = 0; i < players_2_warp.size; i++) {
     players_2_warp[i] thread warp_player(spots[i]);
   }
@@ -1549,6 +1759,7 @@ do_death_dialogue(initial_dialogue) {
 
 surrender_guy_dialog_loop() {
   self endon("death");
+
   while(!isDefined(level.stop_surrender_dialog)) {
     wait(randomfloatrange(.5, 2.5));
     self animscripts\face::SaySpecificDialogue(undefined, level.scr_sound["surrender_2"]["dont_shoot" + randomint(10)], 1.0, "dialogue_done");
@@ -1558,12 +1769,14 @@ surrender_guy_dialog_loop() {
 
 feign_death() {
   guys = simple_spawn("feign_death_guys");
+
   for(i = 0; i < guys.size; i++) {
     anim_org = getnode("feign_death_org_" + i, "targetname");
     if(!isDefined(anim_org)) {
       guys[i] delete();
       continue;
     }
+
     if(i == 0 || i == 2) {
       guys[i] delete();
     } else {
@@ -1572,15 +1785,18 @@ feign_death() {
       guys[i].ignoreme = true;
       guys[i].ignoreall = true;
       guys[i].allowdeath = true;
+
       guys[i] thread feigner_getup();
       guys[i] thread maps\_anim::anim_loop_solo(guys[i], "feign", undefined, "stop_feign", anim_org);
     }
   }
+
   level thread feigners_ambush(guys);
 }
 
 feigners_ambush(guys) {
   level waittill("stop_feign");
+
   for(i = 0; i < guys.size; i++) {
     if(isAlive(guys[i])) {
       if(i == 5 || i == 3) {
@@ -1588,12 +1804,14 @@ feigners_ambush(guys) {
       }
     }
   }
+
   wait(7);
   for(i = 0; i < guys.size; i++) {
     if(isAlive(guys[i])) {
       guys[i] notify("stop_feigning");
     }
   }
+
 }
 
 feigner_getup() {
@@ -1605,6 +1823,7 @@ feigner_getup() {
   self.ignoreall = true;
   self.ignoreme = true;
   self disableaimassist();
+
   self waittill("stop_feigning");
   wait(randomfloatrange(0.05, 1));
   self notify("stop_feign");
@@ -1625,6 +1844,7 @@ feigner_getup() {
 handle_feigner_death() {
   self endon("getup");
   self endon("damage");
+
   self.allowdeath = true;
   self stopanimscripted();
 }
@@ -1634,6 +1854,7 @@ fake_surrender(anim_node) {
   self.ignoreall = true;
   self.script_noteworthy = "surrender_guy";
   self animscripts\shared::placeWeaponOn(self.primaryweapon, "none");
+
   self thread maps\_anim::anim_loop_solo(self, "surrender_loop", undefined, "stop_surrender", anim_node);
 }
 
@@ -1655,8 +1876,10 @@ kick_courtyard_door() {
   anim_node = getnode("upstairs_door_kick", "targetname");
   anim_node maps\_anim::anim_reach_solo(level.sarge, "door_kick2");
   anim_node maps\_anim::anim_single_solo(level.sarge, "door_kick2");
+
   thread courtyard_death_scene();
   level.fakers_dialog_guy thread surrender_guy_dialog_loop();
+
   guys = [];
   guys[0] = level.polonsky;
   guys[1] = level.sarge;
@@ -1668,19 +1891,24 @@ kick_courtyard_door() {
   guys[1].ignoreall = true;
   guys[1] setCanDamage(false);
   guys[0] setCanDamage(false);
+
   level thread heros_getto_position();
   level waittill_multiple("sarge_ready", "polonsky_ready");
   surrender_node = getnode("courtyard_anim", "targetname");
+
   surrender_guys = getEntArray("surrender_guy", "script_noteworthy");
   for(i = 0; i < surrender_guys.size; i++) {
     surrender_guys[i] notify("stop_surrender");
     guys[guys.size] = surrender_guys[i];
   }
+
   surrender_node thread maps\_anim::anim_single(guys, "fake_surrender");
+
   startorg0 = getstartOrigin(surrender_node.origin, surrender_node.angles, level.scr_anim[guys[0].animname]["fake_surrender_trans"]);
   startang0 = getstartAngles(surrender_node.origin, surrender_node.angles, level.scr_anim[guys[0].animname]["fake_surrender_trans"]);
   startorg1 = getstartOrigin(surrender_node.origin, surrender_node.angles, level.scr_anim[guys[1].animname]["fake_surrender_trans"]);
   startang1 = getstartAngles(surrender_node.origin, surrender_node.angles, level.scr_anim[guys[1].animname]["fake_surrender_trans"]);
+
   guys[0] SetGoalPos(startorg0, startang0);
   guys[1] SetGoalPos(startorg1, startang1);
 }
@@ -1693,9 +1921,12 @@ heros_getto_position() {
 hero_in_pos() {
   surrender_node = getnode("courtyard_anim", "targetname");
   self.goalradius = 32;
+
   startorg = getstartOrigin(surrender_node.origin, surrender_node.angles, level.scr_anim[self.animname]["fake_surrender"]);
   startang = getstartAngles(surrender_node.origin, surrender_node.angles, level.scr_anim[self.animname]["fake_surrender"]);
+
   self SetGoalPos(startorg, startang);
+
   self waittill("goal");
   self waittill_notify_or_timeout("orientdone", .25);
   if(self == level.sarge) {
@@ -1711,6 +1942,7 @@ courtyard_death_scene() {
   wait(1);
   level.sarge do_dialogue("hold_fire");
   disable_player_weapons();
+
   setmusicstate("DEATH_SCENE");
 }
 
@@ -1723,10 +1955,10 @@ open_courtyard_door(guy) {
 }
 
 #using_animtree("generic_human");
-
 surrender_death(guy) {
   level notify("too_late");
   level notify("polonsky_saved");
+
   surrender_node = getnode("courtyard_anim", "targetname");
   guys = [];
   if(!isDefined(level.sarge_dead)) {
@@ -1748,22 +1980,25 @@ surrender_death(guy) {
         guys[guys.size] = surrender_guys[i];
       }
     }
+
     org = level.sarge.origin + (0, 0, 40);
+
     surrender_node thread maps\_anim::anim_single(guys, "fake_surrender_death");
     level.sarge thread play_sarge_death(surrender_node);
     level.sarge magicgrenadetype("fraggrenade", org, (0, 0, -1), .05);
     for(i = 0; i < guys.size; i++) {
       guys[i].allowdeath = true;
     }
+
     level.sarge_dead = true;
     PlaySoundAtPosition(level.scr_sound["sarge"]["sarge_death"], level.death_org);
   }
 }
-
 play_sarge_death(animnode) {
   if(isDefined(level.sarge_saved) && level.sarge_saved == true) {
     return;
   }
+
   self anim_stopanimscripted();
   wait(0.05);
   maps\_anim::anim_single_solo(self, "fake_surrender_death", undefined, animnode);
@@ -1802,7 +2037,9 @@ handle_fake_surrender(guy) {
 roebuck_attackers_think() {
   level endon("too_late");
   level endon("attacker_shot");
+
   level waittill_multiple("attacker1", "attacker2");
+
   if(!isDefined(level.attacker_shot)) {
     level.sarge stopanimscripted();
   }
@@ -1813,6 +2050,7 @@ roebuck_attackers_think() {
 roebuck_attacker1_think() {
   level endon("too_late");
   level endon("attacker_shot");
+
   self.health = 5;
   self.allowdeath = true;
   self waittill("death");
@@ -1821,6 +2059,7 @@ roebuck_attacker1_think() {
 
 roebuck_attacker2_think() {
   level endon("too_late");
+
   self.health = 5;
   self.allowdeath = true;
   self waittill("death");
@@ -1828,13 +2067,14 @@ roebuck_attacker2_think() {
 }
 
 #using_animtree("generic_human");
-
 polonsky_attacker_think() {
   level endon("too_late");
   surrender_node = getnode("courtyard_anim", "targetname");
+
   self.allowdeath = true;
   self endon("death");
   level waittill("sarge_saved");
+
   if(isDefined(level.sarge_saved)) {
     level.polonsky stop_magic_bullet_shield();
     level.polonsky.health = 1;
@@ -1858,6 +2098,7 @@ polonsky_attacker_watch() {
   level endon("sarge_saved");
   self endon("death");
   surrender_node = getnode("courtyard_anim", "targetname");
+
   level waittill("too_late");
   self.allowdeath = false;
   self.deathanim = % ch_oki3_outro_japanese1_dead;
@@ -1866,11 +2107,13 @@ polonsky_attacker_watch() {
 
 kill_sarge_if_me_is_killed() {
   level endon("too_late");
+
   self waittill("death");
   surrender_node = getnode("courtyard_anim", "targetname");
   guys = [];
   if(!isDefined(level.sarge_dead)) {
     level.attacker_shot = true;
+
     level.sarge notify("_disable_reinforcement");
     surrender_guys = getEntArray("surrender_guy", "script_noteworthy");
     for(i = 0; i < surrender_guys.size; i++) {
@@ -1889,13 +2132,16 @@ kill_sarge_if_me_is_killed() {
         guys[guys.size] = surrender_guys[i];
       }
     }
+
     org = level.sarge.origin + (0, 0, 40);
     level.sarge thread play_sarge_death(surrender_node);
+
     surrender_node thread maps\_anim::anim_single(guys, "fake_surrender_death");
     level.sarge magicgrenadetype("fraggrenade", org, (0, 0, -1), .05);
     for(i = 0; i < guys.size; i++) {
       guys[i].allowdeath = true;
     }
+
     level notify("polonsky_saved");
     level.polonsky_saved = true;
     level.sarge_dead = true;
@@ -1909,18 +2155,22 @@ kill_sarge_if_me_is_killed() {
 spawn_banzai_wave(location, vertical) {
   spawners = GetSpawnerArray();
   spawner = [];
+
   for(i = 0; i < spawners.size; i++) {
     if(isDefined(spawners[i].targetname) && spawners[i].targetname == "feign_death_guys") {
       spawner[spawner.size] = spawners[i];
     }
   }
+
   wave_size = randomintrange(4, 7);
   size = get_frontline_guys();
+
   if(size < wave_size) {
     wave_size = wave_size - size;;
   } else if(size >= wave_size) {
     wave_size = 0;
   }
+
   for(i = 0; i < wave_size; i++) {
     spawner[i] add_spawn_function(::banzai_wave_spawnfunc);
     spawner[i].origin = location + (randomintrange(-50, 50), randomintrange(-50, 50), 0);
@@ -1934,6 +2184,7 @@ spawn_banzai_wave(location, vertical) {
 
 banzai_wave_spawnfunc() {
   self endon("death");
+
   self.banzai_no_wait = 1;
   self maps\_banzai::banzai_force();
 }
@@ -1953,13 +2204,15 @@ airstrike_radio_dialogue() {
           level notify("audio_one_down");
         }
         break;
+
       case "building_4":
         wait(15);
         level.last_hero thread do_dialogue("hit");
         break;
-      case "courtyard_ne":
-      case "courtyard_se":
-      case "courtyard_nw":
+
+      case "courtyard_ne": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_ne_spline");break;
+      case "courtyard_se": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_se_spline");break;
+      case "courtyard_nw": //thread maps\oki3_courtyard::courtyard_bomb_run("courtyard_nw_spline");break;
       case "courtyard_sw":
         wait(15);
         level.last_hero thread do_dialogue("miss");
@@ -1978,6 +2231,7 @@ magic_grenades_from_hell(time) {
     wait(1);
     k++;
   }
+
   x = 0;
   time = 10;
   while(1) {

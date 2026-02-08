@@ -1,7 +1,7 @@
-/*****************************************************
+/****************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_usa_marine_r_corpsman.gsc
-*****************************************************/
+****************************************************/
 
 main() {
   self setModel("char_usa_marine_corpsman_body");

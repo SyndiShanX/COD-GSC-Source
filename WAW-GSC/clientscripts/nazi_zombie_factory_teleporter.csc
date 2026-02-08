@@ -14,6 +14,7 @@ main() {
 
 setup_teleport_aftereffects() {
   waitforclient(0);
+
   level.teleport_ae_funcs = [];
   if(getlocalplayers().size == 1) {
     level.teleport_ae_funcs[level.teleport_ae_funcs.size] = clientscripts\nazi_zombie_factory_teleporter::teleport_aftereffect_fov;
@@ -43,10 +44,10 @@ wait_for_black_box() {
 wait_for_teleport_aftereffect() {
   while(true) {
     level waittill("tae", localClientNum);
-    if(GetDvar("factoryAftereffectOverride") == "-1") {
+    if(getDvar("factoryAftereffectOverride") == "-1") {
       self thread[[level.teleport_ae_funcs[RandomInt(level.teleport_ae_funcs.size)]]](localClientNum);
     } else {
-      self thread[[level.teleport_ae_funcs[int(GetDvar("factoryAftereffectOverride"))]]](localClientNum);
+      self thread[[level.teleport_ae_funcs[int(getDvar("factoryAftereffectOverride"))]]](localClientNum);
     }
   }
 }
@@ -61,9 +62,11 @@ teleport_aftereffect_shellshock_electric(localClientNum) {
 
 teleport_aftereffect_fov(localClientNum) {
   println("***FOV Aftereffect***\n");
+
   start_fov = 30;
   end_fov = 65;
   duration = 0.5;
+
   for(i = 0; i < duration; i += 0.017) {
     fov = start_fov + (end_fov - start_fov) * (i / duration);
     SetClientDvar("cg_fov", fov);

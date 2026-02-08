@@ -1,7 +1,7 @@
-/*****************************************************
+/*************************************************
  * Decompiled and Edited by SyndiShanX
  * Script: character\char_usa_raider_r_radio.gsc
-*****************************************************/
+*************************************************/
 
 main() {
   codescripts\character::setModelFromArray(xmodelalias\char_usa_raider_bodyalias::main());

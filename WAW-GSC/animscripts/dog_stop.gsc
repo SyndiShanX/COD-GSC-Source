@@ -1,16 +1,19 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\dog_stop.gsc
-*****************************************************/
+**************************************/
 
 #using_animtree("dog");
 
 main() {
   self endon("killanimscript");
+
   self clearanim(%root, 0.2);
   self clearanim(%german_shepherd_idle, 0.2);
   self clearanim(%german_shepherd_attackidle_knob, 0.2);
+
   self thread lookAtTarget("attackIdle");
+
   while(1) {
     if(shouldAttackIdle()) {
       self clearanim(%german_shepherd_idle, 0.2);
@@ -20,17 +23,22 @@ main() {
       self clearanim(%german_shepherd_attackidle_knob, 0.2);
       self setflaggedanimrestart("dog_idle", %german_shepherd_idle, 1, 0.2, self.animplaybackrate);
     }
+
     animscripts\shared::DoNoteTracks("dog_idle");
   }
 }
 
 isFacingEnemy(toleranceCosAngle) {
   assert(isDefined(self.enemy));
+
   vecToEnemy = self.enemy.origin - self.origin;
   distToEnemy = length(vecToEnemy);
+
   if(distToEnemy < 1)
     return true;
+
   forward = anglesToForward(self.angles);
+
   return ((forward[0] * vecToEnemy[0]) + (forward[1] * vecToEnemy[1])) / distToEnemy > toleranceCosAngle;
 }
 
@@ -39,13 +47,17 @@ randomAttackIdle() {
     self orientmode("face current");
   else
     self orientmode("face enemy");
+
   self clearanim(%german_shepherd_attackidle_knob, 0.1);
+
   if(should_growl()) {
     self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle_growl, 1, 0.2, 1);
     return;
   }
+
   idleChance = 33;
   barkChance = 66;
+
   if(isDefined(self.mode)) {
     if(self.mode == "growl") {
       idleChance = 15;
@@ -55,6 +67,7 @@ randomAttackIdle() {
       barkChance = 85;
     }
   }
+
   rand = randomInt(100);
   if(rand < idleChance)
     self setflaggedanimrestart("dog_idle", %german_shepherd_attackidle, 1, 0.2, self.animplaybackrate);
@@ -79,18 +92,22 @@ should_growl() {
 lookAtTarget(lookPoseSet) {
   self endon("killanimscript");
   self endon("stop tracking");
+
   self clearanim(%german_shepherd_look_2, 0);
   self clearanim(%german_shepherd_look_4, 0);
   self clearanim(%german_shepherd_look_6, 0);
   self clearanim(%german_shepherd_look_8, 0);
+
   self.rightAimLimit = 90;
   self.leftAimLimit = -90;
   self.upAimLimit = 45;
   self.downAimLimit = -45;
+
   self setanimlimited(anim.dogLookPose[lookPoseSet][2], 1, 0);
   self setanimlimited(anim.dogLookPose[lookPoseSet][4], 1, 0);
   self setanimlimited(anim.dogLookPose[lookPoseSet][6], 1, 0);
   self setanimlimited(anim.dogLookPose[lookPoseSet][8], 1, 0);
+
   self animscripts\shared::setAnimAimWeight(1, 0.2);
   self animscripts\shared::trackLoop(%german_shepherd_look_2, %german_shepherd_look_4, %german_shepherd_look_6, %german_shepherd_look_8);
 }

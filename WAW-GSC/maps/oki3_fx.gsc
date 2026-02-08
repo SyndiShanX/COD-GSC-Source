@@ -1,20 +1,20 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: maps\oki3_fx.gsc
-*****************************************************/
+**************************************/
 
 #include maps\_utility;
 #include common_scripts\utility;
 
 main() {
   level thread maps\oki3_courtyard::dvar_watcher();
+
   precacheFX();
   thread wind_settings();
   maps\createart\oki3_art::main();
   maps\createfx\oki3_fx::main();
   level thread tunnel_light();
 }
-
 wind_settings() {
   SetSavedDvar("wind_global_vector", "-168 -111 0");
   SetSavedDvar("wind_global_low_altitude", -700);
@@ -26,12 +26,16 @@ precacheFX() {
   level._effect["flame_death1"] = loadfx("env/fire/fx_fire_player_sm");
   level._effect["flame_death2"] = loadfx("env/fire/fx_fire_player_torso");
   level._effect["flame_death3"] = loadfx("env/fire/fx_fire_player_sm");
+
   level._effect["outro_smoke"] = loadfx("maps/oki3/fx_smokebank_black_lg_oki3");
+
   level._effect["courtyard_rooftop_sm"] = loadFX("maps/oki3/fx_exp_shuri_bldg_roof01");
   level._effect["courtyard_shock_sm"] = loadfx("maps/oki3/fx_exp_shuri_bldg_grnd01");
   level._effect["courtyard_rooftop_lg"] = loadFX("maps/oki3/fx_exp_shuri_bldg_roof02");
   level._effect["courtyard_shock_lg"] = loadfx("maps/oki3/fx_exp_shuri_bldg_grnd02");
+
   level._effect["headshot"] = LoadFX("maps/oki3/fx_head_pop");
+
   level._effect["smoke_grn_trail"] = loadFX("weapon/grenade/fx_geotrail_smk_grn");
   level._effect["after_mortars"] = loadfx("maps/oki3/fx_smokebank_postmortar");
   level._effect["cratersmoke"] = loadfx("env/smoke/fx_smoke_crater_w");
@@ -39,49 +43,70 @@ precacheFX() {
   level._effect["flesh_hit"] = LoadFX("impacts/flesh_hit");
   level._effect["tree_burst"] = loadfx("maps/oki3/fx_exp_palm_dir1");
   level._effect["bunker_satchel"] = loadfx("maps/oki3/fx_exp_bunker_satchel");
+
   level._effectType["dirt_mortar"] = "mortar";
   level._effect["dirt_mortar"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["dirt_mortar"] = "stop_ambush_mortars";
+
   level._effectType["trench_mortars"] = "mortar";
   level._effect["trench_mortars"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["trench_mortars"] = "stop_trench_mortars";
+
   level._effectType["ambush_mortars"] = "mortar";
   level._effect["ambush_mortars"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["ambush_mortars"] = "stop_ambush_mortars";
+
   level._effectType["first_mortar"] = "mortar";
   level._effect["first_mortar"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
+
   level._effectType["hill_mortars"] = "mortar";
   level._effect["hill_mortars"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["hill_mortars"] = "stop_hill_mortars";
+
   level._effectType["castle_mortar"] = "mortar";
   level._effect["castle_mortar"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["castle_mortar"] = "stop castle mortars";
+
   level._effectType["roof_ambient_mortars"] = "mortar";
   level._effect["roof_ambient_mortars"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["roof_ambient_mortars"] = "stop_ambient_roof_mortars";
+
   level._effect["bunker_dust"] = loadfx("maps/oki3/fx_bunker_dust_shock");
   level._effect["tunnel_dust"] = loadfx("maps/oki3/fx_bunker_ceiling_impact");
+
   level._effect["bunker_explode"] = loadfx("maps/oki3/fx_exp_mortar_bunker");
+
   level._effect["smoke1"] = loadfx("weapon/grenade/fx_smoke_grenade_generic");
+
   level._effect["mortar_pit_debris"] = loadfx("maps/oki3/fx_exp_mortar_punji");
+
   level._effectType["dirt_mortar"] = "mortar";
   level._effect["dirt_mortar"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["dirt_mortar"] = "stop_ambush_mortars";
+
   level._effectType["arty_tile_roof"] = "artillery";
   level._effect["arty_tile_roof"] = loadfx("maps/oki3/fx_exp_art_ctyd_roof");
+
   level._effectType["courtyard_ambient_ground"] = "artillery";
   level._effect["courtyard_ambient_ground"] = loadfx("weapon/mortar/fx_mortar_exp_dirt_brown");
   level.explosion_stopNotify["courtyard_ambient_ground"] = "stop_courtyard_ambients";
+
   level._effectType["courtyard_ambient_roof"] = "artillery";
   level._effect["courtyard_ambient_roof"] = loadfx("maps/oki3/fx_exp_art_ctyd_roof");
   level.explosion_stopNotify["courtyard_ambient_roof"] = "stop_courtyard_ambients";
+
   level._effect["sniper_leaf_loop"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf01");
   level._effect["sniper_leaf_canned"] = loadfx("destructibles/fx_dest_tree_palm_snipe_leaf02");
+
   level._effect["null"] = loadfx("system_elements/fx_null");
+
   level.scr_sound["mortar_flash"] = "wpn_mortar_fire";
   level._effect["mortar_flash"] = loadfx("weapon/mortar/fx_mortar_launch_w_trail");
+
   level._effect["zort"] = loadfx("env/electrical/fx_elec_short_oneshot");
+
   level._effect["tunnel_light_fx"] = loadfx("env/light/fx_glow_hanginglamp");
+
   level._effect["a_circling_birds"] = loadfx("bio/animals/fx_birds_circling");
   level._effect["a_insects"] = loadfx("bio/insects/fx_insects_ambient");
   level._effect["a_ash_and_embers"] = loadfx("maps/oki3/fx_oki3_ash_embers");
@@ -92,6 +117,7 @@ precacheFX() {
   level._effect["a_godray_window_lg"] = loadfx("maps/oki3/fx_ray_window_lg");
   level._effect["a_godray_window_high_dim"] = loadfx("maps/oki3/fx_ray_window_high_dim");
   level._effect["a_godray_window_lg_dim"] = loadfx("maps/oki3/fx_ray_window_lg_dim");
+
   level._effect["a_smoke_field_lg"] = loadfx("maps/oki3/fx_smokebank_black_lg_oki3");
   level._effect["a_smoke_field_sm"] = loadfx("env/smoke/fx_battlefield_smokebank_ling_sm_w");
   level._effect["a_smoke_impact"] = loadfx("env/smoke/fx_smoke_impact_smolder");
@@ -108,6 +134,7 @@ precacheFX() {
   level._effect["a_smk_column_md_blk_dir"] = loadfx("env/smoke/fx_smk_column_md_blk_dir");
   level._effect["a_smk_plume_xlg"] = loadfx("env/smoke/fx_smoke_plume_xlg_slow_blk_tall_w");
   level._effect["a_embers_falling_sm"] = loadfx("env/fire/fx_embers_falling_sm");
+
   level._effect["a_fire_smoke_med"] = loadfx("env/fire/fx_fire_house_md_jp");
   level._effect["a_fire_smoke_med_dist"] = loadfx("env/fire/fx_fire_smoke_md_dist_jp");
   level._effect["a_fire_smoke_sm_dist"] = loadfx("env/fire/fx_fire_smoke_sm_dist_jp");
@@ -121,6 +148,7 @@ precacheFX() {
   level._effect["a_fire_tree_sm"] = loadfx("env/fire/fx_fire_tree_sm_jp");
   level._effect["a_fire_brush_detail"] = loadfx("env/fire/fx_fire_rubble_detail_jp");
   level._effect["a_fire_150x600_distant"] = loadfx("env/fire/fx_fire_150x600_tall_distant_jp");
+
   level._effect["a_exp_shuri_window"] = loadfx("maps/oki3/fx_exp_shuri_window");
   level._effect["a_paper_ash_burning"] = loadfx("maps/oki3/fx_paper_ash_burning");
   level._effect["a_dirt_falling"] = loadfx("env/dirt/fx_dirt_falling_quick_md");
@@ -133,28 +161,33 @@ precacheFX() {
   level._effect["a_roof_collapse_bomb"] = loadfx("maps/oki3/fx_roof_collapse_bomb");
   level._effect["a_exp_mortarpit_bldg01"] = loadfx("maps/oki3/fx_exp_mortarpit_bldg01");
   level._effect["a_exp_mortarpit_bldg02"] = loadfx("maps/oki3/fx_exp_mortarpit_bldg02");
+
   level._effect["lantern_on_global"] = LoadFX("env/light/fx_lights_lantern_on");
 }
 
 tunnel_light() {
   lantern = getent("lantern", "script_noteworthy");
   lght = getent("lamp_light", "targetname");
+
   if(!isDefined(lght)) {
     return;
   }
   lght linkto(lantern);
   lght setlightintensity(2.1);
+
   mdl = spawn("script_model", lantern.origin);
   mdl.angles = (90, 0, 0);
   mdl setModel("tag_origin");
   mdl linkto(lantern);
   playFXOnTag(level._effect["tunnel_light_fx"], mdl, "tag_origin");
+
   lantern thread monitor_lantern_dmg(mdl, lght);
   while(!isDefined(level.mortars_falling)) {
     wait 1;
   }
   while(level.mortars_falling) {
     level waittill("explosion");
+
     if(randomint(100) < 15) {
       lantern physicslaunch(lantern.origin, (randomintrange(-20, 20), randomintrange(-20, 20), randomintrange(-20, 20)));
       wait(3);
@@ -167,12 +200,14 @@ monitor_lantern_dmg(mdl, lght) {
   candamage = true;
   dmg = 0;
   damaged = false;
+
   while(candamage) {
     self waittill("damage", amount, attacker);
     if(isPlayer(attacker)) {
       if(!isDefined(level.tunnel_guys_alerted)) {
         level thread maps\oki3::alert_tunnel_guys();
       }
+
       if(damaged && dmg > 100) {
         ropeid = getrope("tunnel_rope");
         breakrope(ropeid, 0);
@@ -210,6 +245,7 @@ mortarpits_fake_launch() {
   while(!flag("stop_fake_mortar")) {
     for(i = 0; i < ents.size; i++) {
       thread fake_launch(ents[i]);
+
       wait(randomfloat(2));
     }
     wait(randomintrange(4, 7));

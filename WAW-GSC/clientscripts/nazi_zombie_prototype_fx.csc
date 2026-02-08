@@ -8,8 +8,10 @@
 main() {
   clientscripts\createfx\nazi_zombie_prototype_fx::main();
   clientscripts\_fx::reportNumEffects();
+
   footsteps();
   precache_createfx_fx();
+
   disableFX = GetDvarInt("disable_fx");
   if(!isDefined(disableFX) || disableFX <= 0) {
     precache_scripted_fx();

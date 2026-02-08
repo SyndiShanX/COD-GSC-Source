@@ -1,7 +1,7 @@
-/*****************************************************
+/**************************************
  * Decompiled and Edited by SyndiShanX
  * Script: animscripts\run.gsc
-*****************************************************/
+**************************************/
 
 #include animscripts\Utility;
 #include animscripts\Combat_Utility;
@@ -11,6 +11,7 @@
 
 MoveRun() {
   desiredPose = self animscripts\utility::choosePose("stand");
+
   switch (desiredPose) {
     case "stand":
       if(BeginStandRun()) {
@@ -34,6 +35,7 @@ MoveRun() {
           MoveStandNoncombatNormal();
       }
       break;
+
     case "crouch":
       if(BeginCrouchRun()) {
         return;
@@ -43,6 +45,7 @@ MoveRun() {
       else
         MoveCrouchRunNormal();
       break;
+
     default:
       assert(desiredPose == "prone");
       if(BeginProneRun()) {
@@ -56,12 +59,14 @@ MoveRun() {
 GetRunAnim() {
   if(isDefined(self.a.combatRunAnim))
     return self.a.combatRunAnim;
+
   return % run_lowready_F;
 }
 
 GetCrouchRunAnim() {
   if(isDefined(self.a.crouchRunAnim))
     return self.a.crouchRunAnim;
+
   return % crouch_fastwalk_F;
 }
 
@@ -84,13 +89,17 @@ MoveStandCombatOverride() {
 
 MoveStandCombatNormal() {
   self clearanim(%walk_and_run_loops, 0.2);
+
   self setanimknob(%combatrun, 1.0, 0.5, self.moveplaybackrate);
+
   decidedAnimation = false;
+
   if(isDefined(self.sprint) && self.sprint) {
     self setFlaggedAnimKnob("runanim", %sprint1_loop, 1, 0.5);
     decidedAnimation = true;
   } else if(animscripts\move::MayShootWhileMoving() && self.bulletsInClip > 0 && isValidEnemy(self.enemy)) {
     runShootWhileMovingThreads();
+
     if(self.shootStyle != "none") {
       if(CanShootWhileRunningForward()) {
         enemyyaw = self GetPredictedYawToEnemy(0.2);
@@ -110,19 +119,28 @@ MoveStandCombatNormal() {
           self setAnimLimited(sideanim, weight, 0.2);
           self setAnimLimited(othersideanim, 0, 0.2);
         }
+
         self setFlaggedAnimKnob("runanim", %run_n_gun, 1, 0.3, 0.8);
+
         self.a.allowedPartialReloadOnTheRunTime = gettime() + 500;
-        if(isplayer(self.enemy))
+
+        if(isPlayer(self.enemy))
           self updatePlayerSightAccuracy();
+
         decidedAnimation = true;
       } else if(CanShootWhileRunningBackward()) {
         self setFlaggedAnimKnob("runanim", %run_n_gun_B, 1, 0.3);
-        if(isplayer(self.enemy))
+
+        if(isPlayer(self.enemy))
           self updatePlayerSightAccuracy();
+
         DoNoteTracksNoShootStandCombat("runanim");
+
         self thread stopShootWhileMovingThreads();
+
         self notify("stopRunning");
         self clearAnim(%run_n_gun_B, 0.2);
+
         return;
       }
     }
@@ -131,25 +149,31 @@ MoveStandCombatNormal() {
     runAnim = GetRunAnim();
     self setFlaggedAnimKnob("runanim", runAnim, 1, 0.5);
   }
+
   self UpdateRunWeightsOnce(%combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
   DoNoteTracksNoShootStandCombat("runanim");
+
   self thread stopShootWhileMovingThreads();
+
   self notify("stopRunning");
 }
 
 runShootWhileMovingThreads() {
   self notify("want_shoot_while_moving");
+
   if(isDefined(self.shoot_while_moving_thread))
     return;
   self.shoot_while_moving_thread = true;
+
   self thread RunDecideWhatAndHowToShoot();
   self thread RunShootWhileMoving();
 }
-
 stopShootWhileMovingThreads() {
   self endon("killanimscript");
   self endon("want_shoot_while_moving");
+
   wait .05;
+
   self notify("end_shoot_while_moving");
   self.shoot_while_moving_thread = undefined;
 }
@@ -159,7 +183,6 @@ RunDecideWhatAndHowToShoot() {
   self endon("end_shoot_while_moving");
   self animscripts\shoot_behavior::decideWhatAndHowToShoot("normal");
 }
-
 RunShootWhileMoving() {
   self endon("killanimscript");
   self endon("end_shoot_while_moving");
@@ -169,26 +192,32 @@ RunShootWhileMoving() {
 aimedSomewhatAtEnemy() {
   weaponAngles = self gettagangles("tag_weapon");
   anglesToShootPos = vectorToAngles(self.enemy getShootAtPos() - self gettagorigin("tag_weapon"));
+
   if(AbsAngleClamp180(weaponAngles[1] - anglesToShootPos[1]) > 15)
     return false;
+
   return AbsAngleClamp180(weaponAngles[0] - anglesToShootPos[0]) <= 20;
 }
 
 CanShootWhileRunningForward() {
   if(abs(self getMotionAngle()) > 60)
     return false;
+
   enemyyaw = self GetPredictedYawToEnemy(0.2);
   if(abs(enemyyaw) > 75)
     return false;
+
   return true;
 }
 
 CanShootWhileRunningBackward() {
   if(180 - abs(self getMotionAngle()) >= 45)
     return false;
+
   enemyyaw = self GetPredictedYawToEnemy(0.2);
   if(abs(enemyyaw) > 30)
     return false;
+
   return true;
 }
 
@@ -198,9 +227,11 @@ CanShootWhileRunning() {
 
 GetPredictedYawToEnemy(lookAheadTime) {
   assert(isValidEnemy(self.enemy));
+
   selfPredictedPos = self.origin;
   moveAngle = self.angles[1] + self getMotionAngle();
   selfPredictedPos += (cos(moveAngle), sin(moveAngle), 0) * 200.0 * lookAheadTime;
+
   yaw = self.angles[1] - VectorToAngles(self.enemy.origin - selfPredictedPos)[1];
   yaw = AngleClamp180(yaw);
   return yaw;
@@ -208,6 +239,7 @@ GetPredictedYawToEnemy(lookAheadTime) {
 
 MoveStandNoncombatOverride() {
   self endon("movemode");
+
   self clearanim(%combatrun, 0.6);
   self setflaggedanimknoball("runanim", self.run_noncombatanim, %body, 1, 0.3, self.moveplaybackrate);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
@@ -215,34 +247,46 @@ MoveStandNoncombatOverride() {
 
 MoveStandNoncombatNormal() {
   self endon("movemode");
+
   self clearanim(%combatrun, 0.6);
+
   self setanimknoball(%combatrun, %body, 1, 0.2, self.moveplaybackrate);
+
   prerunAnim = GetRunAnim();
+
   self setflaggedanimknob("runanim", prerunAnim, 1, 0.3);
+
   animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
   self setanim(%combatrun_forward, animWeights["front"], 0.2, 1);
   self setanim(%run_lowready_B, animWeights["back"], 0.2, 1);
   self setanim(%run_lowready_L, animWeights["left"], 0.2, 1);
   self setanim(%run_lowready_R, animWeights["right"], 0.2, 1);
+
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
 MoveCrouchRunOverride() {
   self endon("movemode");
+
   self setflaggedanimknoball("runanim", self.crouchrun_combatanim, %body, 1, 0.4, self.moveplaybackrate);
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
 MoveCrouchRunNormal() {
   self endon("movemode");
+
   forward_anim = GetCrouchRunAnim();
+
   self setanimknob(forward_anim, 1, 0.4);
+
   animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
   self setanim(forward_anim, animWeights["front"], 0.2, 1);
   self setanim(%crouch_fastwalk_B, animWeights["back"], 0.2, 1);
   self setanim(%crouch_fastwalk_L, animWeights["left"], 0.2, 1);
   self setanim(%crouch_fastwalk_R, animWeights["right"], 0.2, 1);
+
   self setflaggedanimknoball("runanim", %crouchrun, %body, 1, 0.2, self.moveplaybackrate);
+
   animscripts\shared::DoNoteTracksForTime(0.2, "runanim");
 }
 
@@ -256,28 +300,42 @@ ReloadStandRun() {
     if(!self NeedToReload(.5))
       return false;
   }
+
   if(self CanShootWhileRunning() && !self NeedToReload(0))
     return false;
+
   if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256)
     return false;
+
   motionAngle = AngleClamp180(self getMotionAngle());
+
   if(abs(motionAngle) > 25)
     return false;
+
   if(self WeaponAnims() != "rifle")
     return false;
+
   if(!runLoopIsNearBeginning())
     return false;
+
   ReloadStandRunInternal();
+
   self notify("stopRunning");
   self notify("abort_reload");
+
   return true;
 }
 
 ReloadStandRunInternal() {
   self endon("movemode");
+
   flagName = "reload_" + getUniqueFlagNameIndex();
+
   self setFlaggedAnimKnobAllRestart(flagName, %run_lowready_reload, %body, 1, 0.25);
-  self thread UpdateRunWeightsBiasForward("stopRunning", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
+
+  self thread UpdateRunWeightsBiasForward(
+    "stopRunning", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R
+  );
   animscripts\shared::DoNoteTracks(flagName);
 }
 
@@ -289,20 +347,24 @@ runLoopIsNearBeginning() {
     animfraction -= 2.0;
   else if(animfraction > 2)
     animfraction -= 1.0;
+
   if(animfraction < .15 / loopLength)
     return true;
   if(animfraction > 1 - .3 / loopLength)
     return true;
+
   return false;
 }
 
 UpdateRunWeights(notifyString, frontAnim, backAnim, leftAnim, rightAnim) {
   self endon("killanimscript");
   self endon(notifyString);
+
   if(gettime() == self.a.scriptStartTime) {
     UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim);
     wait .05;
   }
+
   for(;;) {
     UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim);
     wait .2;
@@ -316,14 +378,16 @@ UpdateRunWeightsOnce(frontAnim, backAnim, leftAnim, rightAnim) {
   self setanim(leftAnim, animWeights["left"], 0.2, 1);
   self setanim(rightAnim, animWeights["right"], 0.2, 1);
 }
-
 UpdateRunWeightsBiasForward(notifyString, frontAnim, backAnim, leftAnim, rightAnim) {
   self endon("killanimscript");
   self endon(notifyString);
+
   for(;;) {
     animWeights = animscripts\utility::QuadrantAnimWeights(self getMotionAngle());
+
     if(animWeights["front"] < .2)
       animWeights["front"] = .2;
+
     self setanim(frontAnim, animWeights["front"], 0.2, 1);
     self setanim(backAnim, 0.0, 0.2, 1);
     self setanim(leftAnim, animWeights["left"], 0.2, 1);
@@ -331,7 +395,6 @@ UpdateRunWeightsBiasForward(notifyString, frontAnim, backAnim, leftAnim, rightAn
     wait 0.2;
   }
 }
-
 MakeRunSounds(notifyString) {
   self endon("killanimscript");
   self endon(notifyString);
@@ -342,17 +405,19 @@ MakeRunSounds(notifyString) {
     self playSound("misc_step2");
   }
 }
-
 changeWeaponStandRun() {
   wantShotgun = (isDefined(self.wantShotgun) && self.wantShotgun);
   usingShotgun = (weaponclass(self.weapon) == "spread");
   if(wantShotgun == usingShotgun)
     return false;
+
   if(!isDefined(self.pathGoalPos) || distanceSquared(self.origin, self.pathGoalPos) < 256 * 256)
     return false;
+
   if(usingSidearm())
     return false;
   assert(self.weapon == self.primaryweapon || self.weapon == self.secondaryweapon);
+
   if(self.weapon == self.primaryweapon) {
     if(!wantShotgun)
       return false;
@@ -360,29 +425,41 @@ changeWeaponStandRun() {
       return false;
   } else {
     assert(self.weapon == self.secondaryweapon);
+
     if(wantShotgun)
       return false;
     if(weaponclass(self.primaryweapon) == "spread")
       return false;
   }
+
   motionAngle = AngleClamp180(self getMotionAngle());
   if(abs(motionAngle) > 25)
     return false;
+
   if(!runLoopIsNearBeginning())
     return false;
+
   if(wantShotgun)
     shotgunSwitchStandRunInternal("shotgunPullout", %shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
   else
     shotgunSwitchStandRunInternal("shotgunPutaway", %shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
+
   self notify("switchEnded");
+
   return true;
 }
 
 shotgunSwitchStandRunInternal(flagName, switchAnim, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack) {
   self endon("movemode");
+
   self setFlaggedAnimKnobAllRestart(flagName, switchAnim, %body, 1, 0.25);
-  self thread animscripts\run::UpdateRunWeightsBiasForward("switchEnded", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R);
+
+  self thread animscripts\run::UpdateRunWeightsBiasForward(
+    "switchEnded", %combatrun_forward, %run_lowready_B, %run_lowready_L, %run_lowready_R
+  );
+
   self thread watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pickupNewGunNotetrack);
+
   animscripts\shared::DoNoteTracksForTimeIntercept(getAnimLength(switchAnim) - 0.25, flagName, ::interceptNotetracksForWeaponSwitch);
 }
 
@@ -395,18 +472,25 @@ watchShotgunSwitchNotetracks(flagName, dropGunNotetrack, putGunOnTag, newGun, pi
   self endon("killanimscript");
   self endon("movemode");
   self endon("switchEnded");
+
   self waittillmatch(flagName, dropGunNotetrack);
+
   animscripts\shared::placeWeaponOn(self.weapon, putGunOnTag);
   self thread shotgunSwitchFinish(newGun);
+
   self waittillmatch(flagName, pickupNewGunNotetrack);
   self notify("complete_weapon_switch");
 }
 
 shotgunSwitchFinish(newGun) {
   self endon("death");
+
   self waittill_any("killanimscript", "movemode", "switchEnded", "complete_weapon_switch");
+
   self.lastweapon = self.weapon;
+
   animscripts\shared::placeWeaponOn(newGun, "right");
   assert(self.weapon == newGun);
+
   self.bulletsInClip = weaponClipSize(self.weapon);
 }
